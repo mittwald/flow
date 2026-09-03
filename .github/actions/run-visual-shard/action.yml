@@ -1,0 +1,73 @@
+name: Run one visual shard
+description:
+  Installs the browsers the visual suite renders in, builds what it renders, and
+  runs one shard of it.
+
+inputs:
+  shard:
+    description: This shard's 1-based index.
+    required: true
+  shards:
+    description: How many shards the suite is split into.
+    required: true
+  attempts:
+    description:
+      How often to run the shard before calling it failed. Firefox
+      intermittently hangs on a single file in headless CI — a hang vitest's
+      per-test `retry` cannot recover, only a fresh browser process can. A real
+      diff fails every attempt. No caller passes it any more, because the
+      failure it was aimed at is not one a re-run recovers — the attempts share
+      the runner, so all three fail identically (#3106). Kept for a hang that
+      shows up on its own.
+    default: "1"
+
+runs:
+  using: composite
+  steps:
+    # Both browsers, because the suite renders one theme in each (WebKit light,
+    # Firefox dark) and a full run needs both. Keyed apart from test.yml's
+    # WebKit-only cache, which would otherwise decide what this one finds.
+    - name: Cache the Playwright browsers
+      uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          playwright-${{ runner.os }}-
+
+    - name: Install the Playwright browsers
+      shell: bash
+      run: pnpm test:browser:prepare --only-shell
+
+    # `test:visual` only declares `^build`; building the package itself is a
+    # superset of that. Outside the retry loop below: a hung browser leaves the
+    # build valid, and nx would serve it from cache anyway.
+    - name: Build the packages the visual suite renders
+      shell: bash
+      run: pnpm nx run remote-react-components:build
+
+    # Deliberately not `nx run …:test:visual`: the target is cached and every
+    # shard would be handed the same task hash, so a shared cache would serve
+    # most of them a pass they never ran.
+    #
+    # vitest shards by hashing the file paths, so the split is stable and each
+    # shard still runs its files one at a time, in both browsers, against the
+    # committed baselines. Same suite, spread over runners.
+    - name: Run visual tests (shard ${{ inputs.shard }}/${{ inputs.shards }})
+      shell: bash
+      run: |
+        shard="${{ inputs.shard }}/${{ inputs.shards }}"
+        attempts="${{ inputs.attempts }}"
+        for attempt in $(seq 1 "$attempts"); do
+          echo "::group::Visual tests, shard $shard (attempt $attempt/$attempts)"
+          if pnpm --filter @mittwald/flow-remote-react-components test:visual --shard="$shard"; then
+            echo "::endgroup::"
+            exit 0
+          fi
+          echo "::endgroup::"
+          if [ "$attempt" -lt "$attempts" ]; then
+            echo "::warning::Shard $shard failed on attempt $attempt/$attempts (likely a flaky firefox hang), retrying..."
+          fi
+        done
+        echo "::error::Shard $shard failed."
+        exit 1

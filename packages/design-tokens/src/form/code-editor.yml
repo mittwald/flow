@@ -1,0 +1,11 @@
+code-editor:
+  font-size:
+    value: "{font-size-text.s}"
+  font-family:
+    value: "FiraCode, monospace"
+  gutter-element-min-width:
+    value: "{size-rem.l}"
+  gutter-separator-color:
+    value: "{separator.color}"
+  indentation-marker-color:
+    value: "{neutral.color.400}"

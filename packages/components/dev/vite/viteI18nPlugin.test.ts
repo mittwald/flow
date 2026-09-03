@@ -64,7 +64,7 @@ describe("vite i18n plugin", () => {
             return {
               meta: {
                 resolvedTranslationPath: path.join(
-                  __dirname,
+                  import.meta.dirname,
                   "test",
                   "locales",
                   "*.locale.json",
@@ -80,11 +80,15 @@ describe("vite i18n plugin", () => {
       expect(load).toBeDefined();
       expect(load.code).toBeDefined();
       expect(load.code).toMatch(
-        'export default {"bar": {  "bar": (args) => `test with variable ${args.var}`,\n' +
-          '  "bar.simple": `test simple variable`,\n' +
-          '},"foo": {  "foo": (args) => `bar ${args.var}`,\n' +
-          '  "foo.simple": `test simple variable`,\n' +
-          "}};",
+        'export default {"bar":{\n' +
+          '  "bar": "test with variable {var}",\n' +
+          '  "bar.simple": "test simple variable"\n' +
+          "}\n" +
+          ',"foo":{\n' +
+          '  "foo": "bar {var}",\n' +
+          '  "foo.simple": "test simple variable"\n' +
+          "}\n" +
+          "};",
       );
     }
   });
@@ -100,7 +104,7 @@ describe("vite i18n plugin", () => {
             return {
               meta: {
                 resolvedTranslationPath: path.join(
-                  __dirname,
+                  import.meta.dirname,
                   "test",
                   "locales",
                   "bar.locale.json",
@@ -116,9 +120,11 @@ describe("vite i18n plugin", () => {
       expect(load).toBeDefined();
       expect(load.code).toBeDefined();
       expect(load.code).toMatch(
-        'export default {"bar": {  "bar": (args) => `test with variable ${args.var}`,\n' +
-          '  "bar.simple": `test simple variable`,\n' +
-          "}};",
+        'export default {"bar":{\n' +
+          '  "bar": "test with variable {var}",\n' +
+          '  "bar.simple": "test simple variable"\n' +
+          "}\n" +
+          "};",
       );
     }
   });
@@ -144,7 +150,7 @@ describe("vite i18n plugin", () => {
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply({} as PluginContext, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(0);
       expect(hmrContext.server.reloadModule).toBeCalledTimes(0);
     }
@@ -167,12 +173,17 @@ describe("vite i18n plugin", () => {
           },
         } as unknown as ViteDevServer,
         timestamp: Date.now(),
-        file: path.join(__dirname, "test", "locales", "foo.locale.json"),
+        file: path.join(
+          import.meta.dirname,
+          "test",
+          "locales",
+          "foo.locale.json",
+        ),
         read: vi.fn(),
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply({} as PluginContext, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(3);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
         generateVirtualFileId("./dev/vite/test/locales/*.locale.json"),

@@ -22,6 +22,7 @@ export class RemoteSeparatorElement extends FlowRemoteElement<RemoteSeparatorEle
       id: {},
       inert: {},
       lang: {},
+      orientation: {},
       slot: {},
       translate: {},
     };

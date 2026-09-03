@@ -1,5 +1,6 @@
 .cartesianChart {
   font-family: Inter, sans-serif;
+  isolation: isolate;
 
   *:focus:not(:focus-visible) {
     outline: none !important;
@@ -29,5 +30,9 @@
 
   svg {
     overflow: visible;
+  }
+
+  :global(.recharts-tooltip-wrapper) {
+    z-index: 1;
   }
 }

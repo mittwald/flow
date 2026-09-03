@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren, useId } from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -14,9 +14,13 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
 
   const rootClassName = clsx(styles.labeledValue, className);
 
+  const labelId = useId();
+
   const propsContext: PropsContext = {
     Label: {
       className: styles.label,
+      elementType: "span",
+      id: labelId,
     },
     CopyButton: {
       className: styles.button,
@@ -33,7 +37,7 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
   };
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} role="group" aria-labelledby={labelId}>
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

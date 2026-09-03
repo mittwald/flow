@@ -13,17 +13,17 @@ const testSerializer = new Serializer<string, string>({
 });
 
 test("Serializer will not tamper values that are not applicable", async () => {
-  expect(testSerializer.serialize("hello")).toStrictEqual({
+  expect(await testSerializer.serialize("hello")).toStrictEqual({
     applied: false,
   });
 
-  expect(testSerializer.deserialize("hello")).toStrictEqual({
+  expect(await testSerializer.deserialize("hello")).toStrictEqual({
     applied: false,
   });
 });
 
 test("Serializer will tamper values when applicable", async () => {
-  expect(testSerializer.serialize("foo")).toStrictEqual({
+  expect(await testSerializer.serialize("foo")).toStrictEqual({
     applied: true,
     result: {
       "mittwald.flow-remote-core.serializer.name": "Test",
@@ -32,7 +32,7 @@ test("Serializer will tamper values when applicable", async () => {
   });
 
   expect(
-    testSerializer.deserialize({
+    await testSerializer.deserialize({
       "mittwald.flow-remote-core.serializer.name": "Test",
       value: "foo-bar",
     }),

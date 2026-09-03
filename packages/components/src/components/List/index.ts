@@ -14,7 +14,7 @@ export * from "./components/Items/views/GridList";
 export * from "./components/Items/views/GridListItem";
 export * from "./components/ListItemView";
 export * from "./components/ListSummary";
-
+export * from "./views/EmptyViewContainer";
 export * from "./views/EmptyView";
 
 export * from "./hooks/useList";

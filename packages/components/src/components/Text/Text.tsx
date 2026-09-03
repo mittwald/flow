@@ -1,9 +1,13 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
+import type React from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithElementType } from "@/lib/types/props";
+import {
+  type AlphaColor,
+  isAlphaColor,
+  type PropsWithElementType,
+} from "@/lib/types/props";
 import invariant from "invariant";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -18,18 +22,26 @@ export interface TextProps
     Omit<Aria.TextProps, "children" | "elementType">,
     PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {
-  /* Whether the elements width should match the width it would have with mold text. */
+  /**
+   * Whether the elements width should match the width it would have with bold
+   * text.
+   */
   emulateBoldWidth?: boolean;
-  /* The color of the text. */
-  color?: "light" | "dark";
-  /* The alignment of the text. @default "start" */
+  /** The color of the text. @default "default" */
+  color?: "default" | AlphaColor;
+  /** The alignment of the text. @default "start" */
   align?: "start" | "end" | "center";
-  /* The text-wrap property of the text. @default undefined */
+  /** The text-wrap property of the text. */
   wrap?: "wrap" | "balance" | "pretty";
-  /* The white-space property of the text. @default undefined */
+  /** The white-space property of the text. */
   whiteSpace?: React.CSSProperties["whiteSpace"];
-  /* The word-break property of the text. @default undefined */
+  /** The word-break property of the text. */
   wordBreak?: React.CSSProperties["wordBreak"];
+  /**
+   * Disables standard and contextual ligatures for predictable, literal text
+   * rendering.
+   */
+  noLigatures?: boolean;
 }
 
 /** @flr-generate all */
@@ -40,20 +52,22 @@ export const Text = flowComponent("Text", (props) => {
     elementType = "span",
     emulateBoldWidth,
     ref,
-    color,
+    color = "default",
     align = "start",
     wrap,
     style: styleFromProps,
     whiteSpace,
     wordBreak,
+    noLigatures,
     ...rest
   } = props;
 
   const rootClassName = clsx(
     styles.text,
-    color && styles[color],
+    isAlphaColor(color) && styles[color],
     align && styles[`align-${align}`],
     wrap && styles[`wrap-${wrap}`],
+    noLigatures && styles[`no-ligatures`],
     className,
   );
 
@@ -62,11 +76,17 @@ export const Text = flowComponent("Text", (props) => {
   const propsContext: PropsContext = {
     Link: {
       inline: true,
+      color: isAlphaColor(color) ? color : undefined,
     },
     Icon: { className: styles.icon },
+    Kbd: { variant: "soft" },
   };
 
-  const style = { whiteSpace, wordBreak, ...styleFromProps };
+  const style = {
+    whiteSpace,
+    wordBreak,
+    ...styleFromProps,
+  };
 
   const childrenElement = (
     <PropsContextProvider props={propsContext}>

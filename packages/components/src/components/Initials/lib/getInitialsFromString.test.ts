@@ -11,6 +11,11 @@ describe('"getInitialsFromString()', () => {
     ["Max & Mustermann", "MM"],
     ["Max (Mustermann)", "MM"],
     ["Max", "M"],
+    ["😄", "😄"],
+    ["😄 Mustermann", "😄M"],
+    ["Max 😄", "M😄"],
+    ["Max😄", "M"],
+    ["1", "1"],
   ])("builds correct initials for %o", (item, expectedResult) => {
     expect(getInitialsFromString(item).join("")).toBe(expectedResult);
   });

@@ -1,0 +1,167 @@
+---
+title: Anlegen und Bearbeiten
+---
+
+Anlegen und Bearbeiten sind zentrale Interaktionen im mStudio. Sie dienen dazu,
+neue Elemente zur Benutzeroberfläche hinzuzufügen oder bestehende Inhalte
+anzupassen. Damit jeder Prozess von überall aufgerufen werden kann, werden sie
+in einem Modal platziert.
+
+---
+
+# Best Practices
+
+- Anlegen und Bearbeiten finden immer in einem
+  [Modal](/components/overlays/modal) oder OffCanvas statt – so können User
+  Prozesse überall starten, ohne den Workflow zu unterbrechen.
+- Halte den Anlegeprozess schlank und versuche, auf Defaults zu setzen. Details
+  können vom User später auf der Detailseite angepasst werden.
+- Gliedere komplizierte Prozesse in [Sections](/components/structure/section),
+  um die Übersicht zu erhalten. Jede Section kann über ihre
+  [Actions](/components/structure/section#actions) Teilprozesse ansteuern.
+- Nutze die [IllustratedMessage](/components/content/illustrated-message), wenn
+  noch keine Inhalte existieren.
+
+---
+
+# Grundlagen
+
+## Modal vs. OffCanvas
+
+Anlege- und Bearbeitungsprozesse werden im mStudio grundsätzlich in einem
+[Modal](/components/overlays/modal) ausgeführt. So kann der User jederzeit den
+passenden Prozess starten, ohne seinen Workflow zu unterbrechen. Das Modal gibt
+es in der klassischen Modal Darstellung und als
+[Off-Canvas](/components/overlays/modal#offcanvas)-Variant:
+
+- Modal: Für kurze, fokussierte Prozesse – etwa einfache Formulare oder schnelle
+  Einstellungen, die der User direkt erledigt.
+- OffCanvas: Für komplexere Abläufe mit mehreren Schritten oder umfangreichen
+  Eingaben. Eine flexible Breite sowie die Möglichkeit, zu scrollen, sorgen für
+  Übersichtlichkeit und bessere Orientierung.
+
+## Abhängige Information
+
+Viele Anlege- bzw. Bearbeitungsprozesse benötigen Informationen aus anderen
+Prozessen. Diese Informationen können entweder fehlen oder bereits vorhanden
+sein:
+
+**Fehlende Informationen**: Manche Prozesse lassen sich erst abschließen, wenn
+bestimmte Voraussetzungen erfüllt sind. So können z. B. Buchungsprozesse nur
+abgeschlossen werden, wenn bereits ein Vertragspartner existiert. Zum Beispiel:
+
+- Eine Extension kann nur installiert werden, wenn in der gewählten Organisation
+  bereits ein Vertragspartner existiert. Fehlt dieser, erscheint ein
+  [Alert](/components/status/alert) mit einer Erklärung und der Möglichkeit,
+  direkt in den „Vertragspartner anlegen“-Prozess zu starten – ohne den
+  aktuellen Kontext zu verlassen.
+
+<LiveCodeEditor example="install-extension" editorCollapsed />
+
+**Vorhandene Informationen**: In anderen Prozessen können bestehende Inhalte
+direkt genutzt werden – mit der Option, bei Bedarf neue anzulegen.
+
+**Beispiel**: Bei der Installation einer App wählt der User eine vorhandene
+Domain aus. Falls nötig, kann er an dieser Stelle auch eine neue Subdomain
+anlegen.
+
+<LiveCodeEditor example="install-app" editorCollapsed />
+
+## Komplexe Prozesse
+
+Umfangreiche Anlege- oder Bearbeitungsprozesse werden in einzelne
+[Sections](/components/structure/section) gegliedert. In jeder Section können
+die [Actions](/components/structure/section#actions) genutzt werden. Damit kann
+der User Teilprozesse direkt innerhalb des Gesamtprozesses erledigen.
+
+**Beispiel**: Das Anlegen eines Containers ist ein umfangreicher Prozess.
+Sections im OffCanvas sorgen dafür, dass der Ablauf trotzdem strukturiert und
+übersichtlich bleibt.
+
+<LiveCodeEditor example="create-container" editorCollapsed />
+
+---
+
+# Anlegen
+
+Anlegeprozesse sollen den Einstieg so einfach und schnell wie möglich machen.
+Darum sollte der User nicht jedes Detail sofort konfigurieren müssen.
+Stattdessen empfiehlt es sich, wo sinnvoll, Default-Werte zu setzen. Diese
+lassen sich nach dem Anlegen jederzeit auf der Detailseite anpassen.
+
+## Leerer Zustand vs. vorhandener Inhalt
+
+Ein leerer Zustand bedeutet: Es wurden noch keine Elemente angelegt. In diesem
+Fall ersetzt die [IllustratedMessage](/components/content/illustrated-message)
+die [List](/components/list/list) und bietet einen großen CTA zum Anlegen des
+ersten Elements.
+
+**Beispiel**: Sind noch keine Projekte angelegt, wird in der Projektübersicht
+eine [IllustratedMessage](/components/content/illustrated-message) angezeigt.
+
+<LiveCodeEditor
+  example="project-illustrated-message"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+Sobald Inhalte vorhanden sind, rückt die Navigation über die
+[List](/components/list/list) in den Vordergrund. Die
+[ActionGroup](/components/actions/action-group) im Header der List übernimmt
+dann die Funktion, den Anlegeprozess für neue Elemente zu starten.
+
+**Beispiel**: Sind Projekte angelegt, werden diese in einer List dargestellt.
+
+<LiveCodeEditor example="project-list" editorCollapsed bgColor="mstudio" />
+
+## Gleiche und unterschiedliche Elemente
+
+Wenn die List ausschließlich aus Elementen des gleichen Typs besteht, z. B.
+Cronjobs oder Mitgliedern, ist der Ablauf besonders einfach: Ein Klick auf den
+Anlege-[Button](/components/actions/button) öffnet sofort das
+[Modal](/components/overlays/modal) zum Anlegen. Wenn verschiedene Elementtypen
+in einer Liste stehen (z. B. Domain, Subdomain, vHost), öffnet der
+Anlege-[Button](/components/actions/button) zunächst ein
+[ContextMenu](/components/actions/context-menu), in dem der User den gewünschten
+Typ auswählt. Danach startet der passende Prozess.
+
+**Beispiel**: Beim Anlegen einer Domain wird über ein ContextMenu zunächst
+abgefragt, um welche Art von Domain es sich handelt.
+
+<LiveCodeEditor example="domain-list" editorCollapsed bgColor="mstudio" />
+
+## Mehr als 5 oder erklärungsbedürftige Elemente
+
+Viele oder erklärungsbedürftige Optionen gibt es z. B. beim Installieren eines
+CMS. Um den User in einer solchen Situation gut zu leiten, öffnet der
+Anlege-[Button](/components/actions/button) zunächst ein
+Auswahl-[Modal](/components/overlays/modal) im OffCanvas. Dort kann der User
+filtern, suchen und sich über jedes Element kurz informieren. Danach genügt ein
+Klick auf das gewünschte Element, um den Prozess zu starten.
+
+**Beispiel**: Beim Anlegen einer App öffnet sich zunächst ein OffCanvas, um alle
+zur Verfügung stehenden Optionen übersichtlich darzustellen.
+
+<LiveCodeEditor
+  example="app-illustrated-message"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+---
+
+# Bearbeiten
+
+Angelegte Elemente verfügen meist über eine Detailseite. Diese kann aus mehreren
+[Sections](/components/structure/section) (vgl.
+[Content strukturieren](/patterns/patterns/detail-page)) bestehen. Innerhalb
+einer Section kann im [Actions](/components/structure/section#actions)-Bereich
+ein „Bearbeiten“-[Button](/components/actions/button) platziert werden, mit dem
+der User Inhalte direkt dort ändern kann, wo sie angezeigt werden.
+
+**Beispiel**: Die Detailseite einer App ist in mehrere Sections aufgeteilt. Jede
+Section stellt Informationen oder Konfigurationen zu einem bestimmten Inhalt
+dar. Über die Actions lassen sich die angezeigten Inhalte bearbeiten oder neue
+Prozesse starten.
+
+<LiveCodeEditor example="app-details" editorCollapsed bgColor="mstudio" />

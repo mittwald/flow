@@ -1,45 +1,57 @@
-name: Cleanup preview repository
+name: Cleanup Preview Apps
 
 on:
   pull_request:
     types:
       - closed
+  # Manual escape hatch to clean up an orphaned preview — e.g. one left behind by
+  # a PR that was merged before its deploy finished (see the concurrency note).
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number whose orphaned preview should be cleaned up"
+        required: true
+        type: string
 
-env:
-  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.number }}/merge"
-  TARGET_STORYBOOK_PATH:
-    "/storybook/${{ github.event.pull_request.number }}/merge"
+permissions:
+  contents: read
+
+# Shared with build-previews.yml: queuing this cleanup cancels a still-running
+# build+deploy for the same PR, closing the race where a deploy finishes after
+# the cleanup and orphans the preview resources.
+concurrency:
+  group:
+    preview-${{ github.event.pull_request.number ||
+    github.event.inputs.pr_number }}
+  cancel-in-progress: true
 
 jobs:
-  cleanup_previews:
+  cleanup:
     runs-on: ubuntu-latest
-
-    env:
-      PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
+    timeout-minutes: 10
 
     steps:
-      - name: Cleanup docs directory 🧹
-        uses: maaaathis/delete-remote-directory@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
-        with:
-          target-github-username: mittwald
-          target-repository-name: flow-previews
-          target-branch: main
-          target-directory: "${{ env.TARGET_DOCS_PATH }}"
-          commit-message: "Cleanup merged docs previews"
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
-      - name: Cleanup storybook directory 🧹
-        uses: maaaathis/delete-remote-directory@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
-        with:
-          target-github-username: mittwald
-          target-repository-name: flow-previews
-          target-branch: main
-          target-directory: "${{ env.TARGET_STORYBOOK_PATH }}"
-          commit-message: "Cleanup merged Storybook previews"
+      - name: Install pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
 
-      - name: Summary
+      - name: Setup Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cleanup preview environment
+        env:
+          PR_NUMBER:
+            ${{ github.event.pull_request.number || github.event.inputs.pr_number
+            }}
+          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
         run: |
-          echo Deleted Documentation and Storybook for branch: ${{ github.event.pull_request.head.ref }}
+          pnpm tsx dev/cleanup-review.ts

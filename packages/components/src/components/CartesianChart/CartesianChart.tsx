@@ -1,6 +1,7 @@
 import { ComposedChart, ResponsiveContainer } from "recharts";
-import React, {
+import {
   type ComponentProps,
+  type ComponentType,
   type FC,
   isValidElement,
   type PropsWithChildren,
@@ -12,19 +13,35 @@ import styles from "./CartesianChart.module.scss";
 import { useChartClipRect } from "@/components/CartesianChart/hooks/useChartClipRect";
 import DivView from "@/views/DivView";
 import Wrap from "@/components/Wrap";
+import type {
+  ChartDataValue,
+  DataKeyProp,
+} from "@/components/CartesianChart/types";
+import { TypedArea } from "@/components/CartesianChart/components/Area";
+import { TypedXAxis } from "@/components/CartesianChart/components/XAxis";
+import { TypedYAxis } from "@/components/CartesianChart/components/YAxis";
+import { TypedChartGrid } from "@/components/CartesianChart/components/ChartGrid";
+import { TypedChartLegend } from "@/components/CartesianChart/components/ChartLegend";
+import { TypedChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";
+import { TypedLine } from "@/components/CartesianChart/components/Line";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 /** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
   data?: ComponentProps<typeof ComposedChart>["data"];
 }
 
-export interface CartesianChartProps
+export interface CartesianChartProps<TData = ChartDataValue>
   extends
     Pick<
       ComponentProps<typeof ComposedChart>,
-      "data" | "className" | "syncId" | "syncMethod"
+      "className" | "syncId" | "syncMethod"
     >,
     PropsWithChildren {
+  /** The data points rendered by the chart. */
+  data?: TData[];
+
+  /** The height of the chart. */
   height?: string;
 
   /** View that is provided when data is empty/undefined */
@@ -41,15 +58,23 @@ export interface CartesianChartProps
 export const CartesianChart: FC<CartesianChartProps> = (props) => {
   const { children, data, className, height, flexGrow, emptyView, ...rest } =
     props;
+  const warnDeprecation = useWarnDeprecation();
 
   const { viewDimensions, ref: containerRef } = useChartClipRect();
 
   const showEmptyView = !!((!data || data.length === 0) && emptyView);
   const rootClassName = clsx(
     styles.cartesianChart,
-    className,
     showEmptyView && styles.emptyView,
+    className,
   );
+  const usesDeprecatedEmptyView = !!emptyView && !isValidElement(emptyView);
+
+  if (usesDeprecatedEmptyView) {
+    warnDeprecation(
+      "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
+    );
+  }
 
   const emptyElement = useMemo(() => {
     if (isValidElement(emptyView)) {
@@ -60,9 +85,6 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
       return;
     }
 
-    console.warn(
-      "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
-    );
     return null;
   }, [emptyView]);
 
@@ -94,5 +116,20 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     </Wrap>
   );
 };
+
+export const typedCartesianChart = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TData extends ChartDataValue<any> = ChartDataValue<any>,
+  XAxisDataKey extends DataKeyProp<TData> = DataKeyProp<TData>,
+>() => ({
+  Chart: CartesianChart as ComponentType<CartesianChartProps<TData>>,
+  Area: TypedArea<TData>(),
+  XAxis: TypedXAxis<TData, XAxisDataKey>(),
+  YAxis: TypedYAxis<TData>(),
+  Grid: TypedChartGrid(),
+  Legend: TypedChartLegend(),
+  Tooltip: TypedChartTooltip<TData, XAxisDataKey>(),
+  Line: TypedLine<TData>(),
+});
 
 export default CartesianChart;

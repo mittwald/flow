@@ -1,4 +1,8 @@
 {
-  "maxLength": "Please enter at most {number} characters",
-  "minLength": "Please enter at least {number} characters"
+  "validation.max": "Maximum number of {number} reached",
+  "validation.maxLength": "Please enter at most {number} characters",
+  "validation.min": "Minimum number of {number} has not yet been reached",
+  "validation.minLength": "Please enter at least {number} characters",
+  "validation.pattern": "Does not match the expected format: {pattern}",
+  "validation.required": "This field is required"
 }

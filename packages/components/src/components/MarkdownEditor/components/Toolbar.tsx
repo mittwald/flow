@@ -1,15 +1,15 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import styles from "@/components/MarkdownEditor/MarkdownEditor.module.scss";
-import { Icon } from "@/components/Icon";
 import {
-  IconBlockquote,
   IconBold,
+  IconCode,
   IconItalic,
-  IconList,
-  IconListNumbers,
-  IconStrikethrough,
-} from "@tabler/icons-react";
-import { IconCode, IconLink } from "@/components/Icon/components/icons";
+  IconLink,
+  IconOrderedList,
+  IconQuote,
+  IconStrikeThrough,
+  IconUnorderedList,
+} from "@/components/Icon/components/icons";
 import {
   ToolbarButton,
   type ToolBarButtonProps,
@@ -18,7 +18,8 @@ import {
   ModeButton,
   type ModeButtonProps,
 } from "@/components/MarkdownEditor/components/ModeButton";
-import type { ButtonProps } from "@/components/Button";
+import { type ButtonProps } from "@/components/Button";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 interface ToolbarProps extends Pick<ButtonProps, "isDisabled"> {
   currentMode: ModeButtonProps["currentMode"];
@@ -33,30 +34,22 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
   };
 
   return (
-    <header className={styles.toolbar} role="toolbar">
+    <div className={styles.toolbar} role="toolbar">
       <div className={styles.toolbarButtons}>
         <ToolbarButton {...sharedToolButtonProps} type="bold">
-          <Icon>
-            <IconBold />
-          </Icon>
+          <IconBold />
         </ToolbarButton>
 
         <ToolbarButton {...sharedToolButtonProps} type="italic">
-          <Icon>
-            <IconItalic />
-          </Icon>
+          <IconItalic />
         </ToolbarButton>
 
         <ToolbarButton {...sharedToolButtonProps} type="strikeThrough">
-          <Icon>
-            <IconStrikethrough />
-          </Icon>
+          <IconStrikeThrough />
         </ToolbarButton>
 
         <ToolbarButton {...sharedToolButtonProps} type="quote">
-          <Icon>
-            <IconBlockquote />
-          </Icon>
+          <IconQuote />
         </ToolbarButton>
 
         <ToolbarButton {...sharedToolButtonProps} type="code">
@@ -68,23 +61,21 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
         </ToolbarButton>
 
         <ToolbarButton {...sharedToolButtonProps} type="unorderedList">
-          <Icon>
-            <IconList />
-          </Icon>
+          <IconUnorderedList />
         </ToolbarButton>
 
         <ToolbarButton {...sharedToolButtonProps} type="orderedList">
-          <Icon>
-            <IconListNumbers />
-          </Icon>
+          <IconOrderedList />
         </ToolbarButton>
+
+        <UiComponentTunnelExit id="toolbarActions" component="MarkdownEditor" />
       </div>
 
       <ModeButton
         onChange={props.onModeChange}
         currentMode={props.currentMode}
-        isDisabled={props.isDisabled}
+        isDisabled={props.isDisabled ?? false}
       />
-    </header>
+    </div>
   );
 };

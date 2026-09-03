@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { DateInput } from "./components/DateInput";
-import styles from "../FormField/FormField.module.scss";
 import { Popover } from "@/components/Popover/Popover";
 import { useOverlayController } from "@/lib/controller";
 import {
@@ -12,6 +11,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import { Calendar } from "@/components/Calendar";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import styles from "./DatePicker.module.scss";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
@@ -22,22 +22,21 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, onChange, ref, ...rest } = props;
 
+  const popoverController = useOverlayController("Popover");
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "DatePicker");
 
-  const rootClassName = clsx(styles.formField, className);
-
-  const popoverController = useOverlayController("Popover");
+  const rootClassName = clsx(fieldProps.className, className);
 
   return (
     <Aria.DatePicker
       {...rest}
       {...fieldProps}
-      className={clsx(fieldProps.className, rootClassName)}
+      className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
       onChange={(value) => {
@@ -57,7 +56,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
           isDialogContent
           controller={popoverController}
         >
-          <Calendar />
+          <Calendar className={styles.calendar} />
         </Popover>
       </FieldErrorCaptureContext>
       <FieldErrorView />

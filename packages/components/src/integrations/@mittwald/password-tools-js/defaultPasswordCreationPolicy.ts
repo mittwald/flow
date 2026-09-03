@@ -9,9 +9,6 @@ export const defaultPasswordCreationPolicy: PolicyDeclaration = {
       min: 12,
     },
     {
-      ruleType: RuleType.hibp,
-    },
-    {
       identifier: "special",
       ruleType: RuleType.charPool,
       charPools: ["special"],

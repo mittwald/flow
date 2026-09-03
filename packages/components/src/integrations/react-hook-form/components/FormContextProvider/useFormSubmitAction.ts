@@ -1,47 +1,47 @@
+import { AbortActionError, type ActionProps } from "@/components/Action";
 import { ActionModel } from "@/components/Action/models/ActionModel";
-import { useStatic } from "@/lib/hooks/useStatic";
 import { useEffect, useRef } from "react";
-import type { UseFormReturn } from "react-hook-form";
+import type { FieldValues, FormState } from "react-hook-form";
 
-interface Options {
-  form: UseFormReturn;
-  setReadOnly: (isReadOnly: boolean) => void;
-}
+export const useFormSubmitAction = (
+  formState: FormState<FieldValues>,
+  actionProps?: ActionProps,
+) => {
+  const { isSubmitting, isSubmitSuccessful } = formState;
 
-export const useFormSubmitAction = (options: Options) => {
-  const { form, setReadOnly } = options;
-
-  const submitPromise = useStatic(() => Promise.withResolvers<void>());
+  const submitPromise = useRef<PromiseWithResolvers<void>>(undefined);
 
   const formSubmitAction = ActionModel.useNew({
-    onAction: () => submitPromise.promise,
+    ...actionProps,
+    onAction: () => {
+      submitPromise.current = Promise.withResolvers<void>();
+      actionProps?.onAction?.();
+      return submitPromise.current.promise;
+    },
   });
 
-  const { isSubmitting, isSubmitted, isSubmitSuccessful } = form.formState;
-  const wasSubmitting = useRef(isSubmitting);
-
   useEffect(() => {
-    const submittingDone = wasSubmitting.current && !isSubmitting;
-    wasSubmitting.current = isSubmitting;
-
     if (isSubmitting) {
-      setReadOnly(true);
-    } else if (submittingDone) {
-      if (isSubmitSuccessful) {
-        submitPromise.resolve();
-      } else {
-        submitPromise.reject(new Error("Form submission failed"));
+      if (!formSubmitAction.state.isBusy) {
+        /**
+         * Manually start execution. This happens if the form submission was
+         * triggered by other means than the submit button, e.g. by pressing
+         * Enter in a text field.
+         */
+        formSubmitAction.execute();
       }
-      setReadOnly(false);
+      return;
     }
-  }, [
-    wasSubmitting,
-    isSubmitting,
-    isSubmitted,
-    isSubmitSuccessful,
-    setReadOnly,
-    submitPromise,
-  ]);
+
+    if (isSubmitSuccessful) {
+      submitPromise.current?.resolve();
+      return;
+    }
+
+    submitPromise.current?.reject(
+      new AbortActionError("Form submission failed"),
+    );
+  }, [isSubmitting, isSubmitSuccessful, submitPromise]);
 
   return formSubmitAction;
 };

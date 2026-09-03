@@ -1,0 +1,84 @@
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import locales from "./locales/*.locale.json";
+import type { PropsWithClassName } from "@/lib/types/props";
+import clsx from "clsx";
+import styles from "./Kbd.module.scss";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { Fragment, type PropsWithChildren } from "react";
+import { isAppleDevice } from "@react-aria/utils";
+import { useIsSSR } from "react-aria";
+
+export interface KbdProps
+  extends PropsWithClassName, FlowComponentProps, PropsWithChildren {
+  /** Array of keys to be joined */
+  keys?: (string | "mod" | "alt" | "shift")[];
+  /** Whether the component is displayed as disabled */
+  isDisabled?: boolean;
+  /** The visual variant @default "plain" */
+  variant?: "plain" | "soft";
+}
+
+/**
+ * @flr-generate all
+ * @flowStatus new
+ */
+export const Kbd = flowComponent("Kbd", (props) => {
+  const {
+    keys,
+    className,
+    isDisabled,
+    children,
+    variant = "plain",
+    ...rest
+  } = props;
+
+  const isSsr = useIsSSR();
+
+  const rootClassName = clsx(
+    styles.kbd,
+    isDisabled && styles.disabled,
+    styles[variant],
+    className,
+  );
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "Kbd");
+  const isApple = !isSsr && isAppleDevice();
+
+  const joinedKeys = keys?.map((key, index) => {
+    let formattedKey = key;
+
+    if (key === "mod") {
+      formattedKey = isApple ? "⌘" : stringFormatter.format("mod");
+    }
+
+    if (key === "alt") {
+      formattedKey = isApple ? "⌥" : stringFormatter.format("alt");
+    }
+
+    if (key === "shift") {
+      formattedKey = "⇧";
+    }
+
+    if (keys?.length === 1) {
+      return <Fragment key={index}>{formattedKey}</Fragment>;
+    }
+
+    return (
+      <Fragment key={index}>
+        <kbd className={styles.kbd}>{formattedKey}</kbd>
+        {index < keys.length - 1 && " + "}
+      </Fragment>
+    );
+  });
+
+  return (
+    <kbd className={rootClassName} {...rest}>
+      {joinedKeys ?? children}
+    </kbd>
+  );
+});
+
+export default Kbd;

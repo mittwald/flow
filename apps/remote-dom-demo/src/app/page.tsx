@@ -1,5 +1,5 @@
 import { Text } from "@mittwald/flow-react-components";
 
 export default function Page() {
-  return <Text>Please select a demo</Text>;
+  return <Text>Select a demo to explore a galaxy far, far away</Text>;
 }

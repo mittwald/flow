@@ -1,18 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Header from "../Header";
-import React from "react";
 import Section from "@/components/Section";
 
 const meta: Meta<typeof Header> = {
   title: "Content/Header",
   component: Header,
-  argTypes: {
-    elementType: {
-      control: "inline-radio",
-      options: ["header", "div"],
-    },
+  parameters: {
+    controls: { disable: true },
   },
-  args: { elementType: "header" },
   render: (props) => (
     <Section>
       <Header {...props}>

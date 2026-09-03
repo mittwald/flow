@@ -7,6 +7,12 @@
   @include formInteractionStates;
 }
 
+@mixin formHiddenInputScrollBehaviorFix {
+  // required for correct scroll behavior
+  // see https://react-aria.adobe.com/VisuallyHidden
+  position: relative;
+}
+
 @mixin formBorder {
   border-width: var(--form-control--border-width);
   border-style: var(--form-control--border-style);
@@ -36,7 +42,9 @@
 }
 
 @mixin formInteractionStates {
-  &::placeholder {
+  &::placeholder,
+  &[data-placeholder="true"],
+  & [data-placeholder="true"] {
     color: var(--form-control--placeholder-color--default);
   }
 
@@ -53,6 +61,7 @@
   }
 
   /* Read Only */
+  &.readonly,
   &[readonly],
   &[data-readonly],
   [data-readonly] & {
@@ -87,7 +96,9 @@
     border-color: var(--form-control--border-color--disabled);
     background-color: var(--form-control--background-color--disabled);
 
-    &::placeholder {
+    &::placeholder,
+    &[data-placeholder="true"],
+    & [data-placeholder="true"] {
       color: var(--form-control--placeholder-color--disabled);
     }
   }

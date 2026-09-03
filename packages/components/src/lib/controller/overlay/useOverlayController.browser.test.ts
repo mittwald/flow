@@ -12,11 +12,13 @@ vitest.mock("@/lib/controller/overlay/context", () => ({
 describe("useOverlayController", async () => {
   let mockOnOpen: Mock;
   let mockOnClose: Mock;
+  let mockOnOpenChange: Mock;
   let contextController: OverlayController;
 
   beforeEach(() => {
     mockOnOpen = vitest.fn();
     mockOnClose = vitest.fn();
+    mockOnOpenChange = vitest.fn();
     contextController = new OverlayController();
 
     (useOverlayContext as Mock).mockReturnValue({
@@ -74,6 +76,21 @@ describe("useOverlayController", async () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
+  test("should add onOpenChange handler when controller is open", async () => {
+    contextController.open();
+
+    const { result } = await renderHook(() =>
+      useOverlayController("Modal", {
+        onOpenChange: mockOnOpenChange,
+        reuseControllerFromContext: false,
+        isDefaultOpen: false,
+      }),
+    );
+
+    result.current.open();
+
+    expect(mockOnOpenChange).toHaveBeenCalledWith(true);
+  });
   test("should cleanup handlers on unmount", async () => {
     const { unmount } = await renderHook(() =>
       useOverlayController("Modal", {
@@ -133,5 +150,44 @@ describe("useOverlayController", async () => {
       result.current.open();
       result.current.close();
     }).not.toThrow();
+  });
+
+  test("should be able to abort open with handlers", async () => {
+    const { result } = await renderHook(() =>
+      useOverlayController("Modal", {
+        reuseControllerFromContext: false,
+        onOpen: () => false,
+        isDefaultOpen: false,
+      }),
+    );
+
+    result.current.open();
+    expect(result.current.isOpen).toBe(false);
+  });
+
+  test("should be able to abort close with handlers", async () => {
+    const { result } = await renderHook(() =>
+      useOverlayController("Modal", {
+        reuseControllerFromContext: false,
+        isDefaultOpen: true,
+        onClose: () => false,
+      }),
+    );
+
+    result.current.close();
+    expect(result.current.isOpen).toBe(true);
+  });
+
+  test("should be able to abort close with handlers #2", async () => {
+    const { result } = await renderHook(() =>
+      useOverlayController("Modal", {
+        reuseControllerFromContext: false,
+        isDefaultOpen: true,
+        onOpenChange: () => false,
+      }),
+    );
+
+    result.current.close();
+    expect(result.current.isOpen).toBe(true);
   });
 });

@@ -7,6 +7,6 @@ import {
 export const LoadingMessage = () => (
   <IllustratedMessage>
     <LoadingSpinner />
-    <Heading>Lade Demo</Heading>
+    <Heading>Loading demo</Heading>
   </IllustratedMessage>
 );

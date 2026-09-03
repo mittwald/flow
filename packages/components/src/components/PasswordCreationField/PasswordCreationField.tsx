@@ -2,8 +2,8 @@ import {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
-  useDeferredValue,
   useMemo,
+  useRef,
 } from "react";
 import {
   dynamic,
@@ -17,7 +17,6 @@ import {
 import styles from "./PasswordCreationField.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
@@ -28,7 +27,6 @@ import { generatePassword } from "@/components/PasswordCreationField/worker/gene
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
-import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
 import type {
   PolicyValidationResult,
   PolicyGenericDeclaration,
@@ -42,6 +40,8 @@ import { usePolicyValidationResult } from "@/components/PasswordCreationField/li
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface PasswordCreationFieldProps
   extends
@@ -50,10 +50,19 @@ export interface PasswordCreationFieldProps
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
     FlowComponentProps<HTMLInputElement> {
+  /** The password of a controlled field. */
   value?: string;
+  /** Called with the password and its validity whenever the password changes. */
   onValidationResult?: (result: { password: string; isValid: boolean }) => void;
+  /** The initial password of an uncontrolled field. */
   defaultValue?: string;
+  /** The placeholder shown while the field is empty. */
   placeholder?: string;
+  /**
+   * The policy the password is validated against.
+   *
+   * @default defaultPasswordCreationPolicy
+   */
   validationPolicy?: PolicyGenericDeclaration;
 }
 
@@ -89,21 +98,21 @@ export const PasswordCreationField = flowComponent(
       FieldErrorCaptureContext,
       fieldProps,
       fieldPropsContext,
-    } = useFieldComponent(props);
+    } = useFieldComponent(props, "PasswordCreationField");
 
-    const [isLoading, setIsLoading] = useState(false);
-    const translate = useLocalizedContextStringFormatter(locales);
+    const translate = useLocalizedStringFormatter(
+      locales,
+      "PasswordCreationField",
+    );
 
     const validationPolicy = useMemo(
       () => Policy.fromDeclaration(validationPolicyFromProps),
       [validationPolicyFromProps],
     );
 
-    const deferredValue = useDeferredValue(value ?? "");
-
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
-      isValid: true,
+      isValid: "indeterminate",
       complexity: {
         min: validationPolicy.minComplexity,
         actual: 4,
@@ -115,17 +124,28 @@ export const PasswordCreationField = flowComponent(
     const [policyValidationResult, setPolicyValidationResult] = useState(
       initialPolicyValidationState,
     );
+
+    const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
     usePolicyValidationResult(
       validationPolicy,
-      deferredValue,
+      value ?? "",
       () => {
         if (isEmptyValue) {
           return;
         }
 
-        setIsLoading(() => true);
+        loadingRef.current = setTimeout(() => {
+          setPolicyValidationResult((r) => ({
+            ...r,
+            isValid: "indeterminate",
+          }));
+        }, 150);
       },
       ({ password, isValid, results }) => {
+        if (loadingRef.current) {
+          clearTimeout(loadingRef.current);
+        }
+
         if (isEmptyValue) {
           setPolicyValidationResult(() => ({
             ...results,
@@ -134,7 +154,6 @@ export const PasswordCreationField = flowComponent(
           return;
         }
 
-        setIsLoading(() => false);
         setPolicyValidationResult(() => results);
         onValidationResult?.({ password, isValid });
       },
@@ -158,31 +177,38 @@ export const PasswordCreationField = flowComponent(
 
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
+
     const isInvalidFromValidationResult =
-      !isEmptyValue && !stateFromValidationResult?.isValid;
+      !isEmptyValue && stateFromValidationResult?.isValid === false;
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
     const setOptimisticPolicyValidationResult = (
       state: Partial<ResolvedPolicyValidationResult> = {},
     ) => {
-      setIsLoading(() => false);
-      setPolicyValidationResult(() => ({
-        ...initialPolicyValidationState,
-        ...state,
+      setPolicyValidationResult((currentState) => ({
+        ...currentState,
         isValid: true,
+        ...state,
       }));
     };
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
-      setOptimisticPolicyValidationResult();
+      setOptimisticPolicyValidationResult({
+        ...initialPolicyValidationState,
+        isValid: true,
+        ruleResults: policyValidationResult.ruleResults.map((r) => ({
+          ...r,
+          isValid: true,
+        })),
+      });
       setIsPasswordRevealed(true);
       onChange(generatedPassword);
     };
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
-      const pastedValue = event.clipboardData.getData("text");
-      if (pastedValue !== value) {
+      const pastedValue = event.clipboardData?.getData("text");
+      if (typeof pastedValue === "string" && pastedValue !== value) {
         setOptimisticPolicyValidationResult({
           isValid: "indeterminate",
         });
@@ -196,7 +222,10 @@ export const PasswordCreationField = flowComponent(
     const propsContext: PropsContext = {
       ...fieldPropsContext,
       Button: {
-        tunnelId: "button",
+        tunnel: {
+          id: "button",
+          component: "PasswordCreationField",
+        },
         size: "m",
         variant: "plain",
         color: "secondary",
@@ -204,7 +233,10 @@ export const PasswordCreationField = flowComponent(
         className: styles.button,
       },
       CopyButton: {
-        tunnelId: "button",
+        tunnel: {
+          id: "button",
+          component: "PasswordCreationField",
+        },
         size: "m",
         variant: "plain",
         color: "secondary",
@@ -245,48 +277,52 @@ export const PasswordCreationField = flowComponent(
         isInvalid={isInvalid}
         isRequired={isRequired}
       >
-        <TunnelProvider>
-          <FieldErrorCaptureContext>
+        <FieldErrorCaptureContext>
+          {latestValidationErrorText && (
             <FieldError>{latestValidationErrorText}</FieldError>
-            <PropsContextProvider
-              props={propsContext}
-              dependencies={[
-                isDisabled,
-                isRequired,
-                value,
-                policyValidationResult,
-                isEmptyValue,
-              ]}
+          )}
+          <PropsContextProvider
+            props={propsContext}
+            dependencies={[
+              isDisabled,
+              isRequired,
+              value,
+              policyValidationResult,
+              isEmptyValue,
+            ]}
+          >
+            {children}
+            <Aria.Group
+              isDisabled={isDisabled}
+              className={clsx(styles.inputGroup)}
             >
-              {children}
-              <Aria.Group
-                isDisabled={isDisabled}
-                className={clsx(styles.inputGroup)}
-              >
-                <Aria.Input ref={ref} className={styles.input} />
-                <Aria.Group className={styles.buttonContainer}>
-                  <TogglePasswordVisibilityButton
-                    className={styles.button}
-                    isVisible={isPasswordRevealed}
-                    isDisabled={isDisabled}
-                    onPress={togglePasswordVisibilityHandler}
-                  />
-                  <TunnelExit id="button" />
-                </Aria.Group>
-                <ComplexityIndicator
-                  isEmptyValue={isEmptyValue}
-                  isLoading={isLoading}
-                  policyValidationResult={policyValidationResult}
-                  validationResultState={stateFromValidationResult}
+              <Aria.Input ref={ref} className={styles.input} />
+              <Aria.Group className={styles.buttonContainer}>
+                <TogglePasswordVisibilityButton
+                  className={styles.button}
+                  isVisible={isPasswordRevealed}
+                  isDisabled={isDisabled}
+                  onPress={togglePasswordVisibilityHandler}
+                />
+                <UiComponentTunnelExit
+                  id="button"
+                  component="PasswordCreationField"
                 />
               </Aria.Group>
-              {isValidFromValidationResult && (
-                <FieldDescription>{latestValidationErrorText}</FieldDescription>
-              )}
-            </PropsContextProvider>
-          </FieldErrorCaptureContext>
-          <FieldErrorView />
-        </TunnelProvider>
+              <ComplexityIndicator
+                key={value}
+                isEmptyValue={isEmptyValue}
+                isLoading={policyValidationResult.isValid === "indeterminate"}
+                policyValidationResult={policyValidationResult}
+                validationResultState={stateFromValidationResult}
+              />
+            </Aria.Group>
+            {isValidFromValidationResult && (
+              <FieldDescription>{latestValidationErrorText}</FieldDescription>
+            )}
+          </PropsContextProvider>
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
       </Aria.TextField>
     );
   },

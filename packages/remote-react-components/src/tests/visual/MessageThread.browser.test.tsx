@@ -19,14 +19,14 @@ test.each(testEnvironments)(
       <MessageThread>
         <Message>
           <Header>
-            <Text>Max Mustermann</Text>
+            <Text>Luke Skywalker</Text>
           </Header>
           <Content>
             <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
+              A long time ago in a galaxy far, far away, the Rebel Alliance
+              struck a decisive blow against the Galactic Empire. Rebel spies
+              managed to steal secret plans to the Empire's ultimate weapon, the
+              Death Star.
             </Text>
           </Content>
         </Message>
@@ -34,21 +34,21 @@ test.each(testEnvironments)(
 
         <Message type="sender">
           <Header>
-            <Text>John Doe</Text>
+            <Text>Leia Organa</Text>
           </Header>
           <Content>
             <Text>
-              Lorem ipsum dolor sit amet consectetur, laborum ea tempore, dolore
-              voluptas.
+              The Rebel Alliance struck a decisive blow against the Galactic
+              Empire.
             </Text>
           </Content>
         </Message>
         <Message>
           <Header>
-            <Text>Max Mustermann</Text>
+            <Text>Luke Skywalker</Text>
           </Header>
           <Content>
-            <Text>Lorem ipsum dolor sit amet consectetur.</Text>
+            <Text>The Death Star plans were stolen by rebels.</Text>
           </Content>
         </Message>
       </MessageThread>,

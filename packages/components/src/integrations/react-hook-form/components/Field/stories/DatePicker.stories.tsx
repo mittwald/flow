@@ -50,13 +50,13 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="date">
             <DatePicker>
-              <Label>Date</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
 
           <Field name="dateDefaultValue">
             <DatePicker>
-              <Label>Date</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
 
@@ -65,18 +65,18 @@ const meta: Meta<typeof Field> = {
             rules={{ required: "Please select a date" }}
           >
             <DatePicker>
-              <Label>Date</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
 
           <Field name="dateMinValue">
             <DatePicker minValue={today(getLocalTimeZone())}>
-              <Label>Future date</Label>
+              <Label>Future mission date</Label>
             </DatePicker>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -106,15 +106,17 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name="field">
-          <DatePicker>
-            <Label>Text</Label>
+        <Section>
+          <Field name="field">
+            <DatePicker>
+              <Label>Mission date</Label>
+            </DatePicker>
+          </Field>
+          <DatePicker isInvalid>
+            <Label>Mission date</Label>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </DatePicker>
-        </Field>
-        <DatePicker isInvalid>
-          <Label>Text</Label>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </DatePicker>
+        </Section>
       </Form>
     );
   },
@@ -129,28 +131,38 @@ export const WithFocus: Story = {
     });
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <DatePicker>
-            <Label>Text</Label>
+            <Label>Mission date</Label>
           </DatePicker>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

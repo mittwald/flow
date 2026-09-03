@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { FileCard } from "@/components/FileCard";
 import { dummyText } from "@/lib/dev/dummyText";
 import { action } from "storybook/actions";
@@ -17,7 +16,10 @@ import {
 const meta: Meta<typeof FileCard> = {
   title: "Upload/FileCard",
   component: FileCard,
-  args: { name: "image.jpg" },
+  args: { name: "millennium-falcon.jpg" },
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => <FileCard {...props} />,
 };
 export default meta;
@@ -30,21 +32,7 @@ export const WithType: Story = { args: { type: "image/png" } };
 
 export const WithSize: Story = { args: { sizeInBytes: 47500 } };
 
-export const WithOnDelete: Story = {
-  args: {
-    onDelete: () => {
-      action("onDelete");
-    },
-  },
-};
-
-export const WithLink: Story = {
-  args: {
-    href: "#",
-  },
-};
-
-export const WithLinkAndOnDelete: Story = {
+export const WithActions: Story = {
   args: {
     href: "#",
     onDelete: () => {
@@ -57,7 +45,7 @@ export const WithContextMenu: Story = {
   render: (props) => (
     <FileCard {...props}>
       <ContextMenu>
-        <MenuItem>Löschen</MenuItem>
+        <MenuItem>Delete</MenuItem>
       </ContextMenu>
     </FileCard>
   ),
@@ -76,6 +64,9 @@ export const WithProgressBar: Story = {
     href: "#",
     name: undefined,
   },
+  parameters: {
+    controls: { exclude: ["href", "onDelete", "name"] },
+  },
   render: (props) => (
     <FileCard {...props}>
       <ProgressBar
@@ -85,16 +76,15 @@ export const WithProgressBar: Story = {
         showMaxValue
         formatOptions={{ style: "unit", unit: "megabyte" }}
       >
-        <Label>Image.png</Label>
+        <Label>millennium-falcon.png</Label>
       </ProgressBar>
     </FileCard>
   ),
 };
 
 export const Failed: Story = {
-  args: { isFailed: true },
   render: (props) => (
-    <FileCard {...props}>
+    <FileCard isFailed {...props}>
       <Text>Upload failed</Text>
     </FileCard>
   ),
@@ -107,10 +97,10 @@ export const WithButtons: Story = {
   },
   render: (props) => (
     <FileCard {...props}>
-      <Button>
+      <Button aria-label="Move up">
         <IconChevronUp />
       </Button>
-      <Button>
+      <Button aria-label="Move down">
         <IconChevronDown />
       </Button>
     </FileCard>

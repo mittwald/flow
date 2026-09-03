@@ -1,0 +1,112 @@
+@use "@/styles/mixins/formControl";
+@use "@/styles/mixins/scrollbar";
+
+.codeEditor {
+  outline: none;
+  isolation: isolate;
+
+  .codeMirror {
+    @include formControl.formControl();
+
+    position: relative;
+    order: 2;
+
+    /*
+     * The inline padding is applied by the lines and the gutter instead, so
+     * that the highlight of the active line spans the full editor width.
+     */
+    padding-inline: unset;
+
+    /* the vertical padding applied by the form control mixin */
+    --editor-padding: calc(
+      var(--form-control--padding-y) - var(--form-control--border-width)
+    );
+
+    min-height: calc(var(--form-control--padding-y) * 2 + var(--line-height-m));
+
+    &:hover {
+      background-color: var(--form-control--background-color--default);
+    }
+
+    &.readonly {
+      border-color: var(--form-control--border-color--default);
+    }
+
+    .copyButton {
+      position: absolute;
+      inset-block-start: var(--editor-padding);
+      inset-inline-end: var(--form-control--padding-x);
+      z-index: 1;
+    }
+  }
+}
+
+/*
+ * CodeMirror ships its theme as unlayered `<style>` elements that it injects
+ * into the document at runtime, outside of Flow's build. Unlayered CSS beats
+ * layered CSS regardless of specificity, so these overrides only apply in the
+ * layered stylesheet variant if they leave the cascade layer as well.
+ */
+@layer flow.unlayered {
+  .codeEditor .codeMirror {
+    /*
+     * The gutter needs an opaque background – the content scrolls underneath
+     * it – but it must follow the background of the editor, which changes with
+     * its state (invalid, disabled, …). Inheriting it down from the editor
+     * beats the background the CodeMirror theme applies, which only serves as
+     * a fallback.
+     */
+    & :global(.cm-editor),
+    & :global(.cm-scroller),
+    & :global(.cm-gutters) {
+      background-color: inherit;
+    }
+
+    & :global(.cm-editor) {
+      outline: none;
+
+      & :global(.cm-scroller) {
+        @include scrollbar.scrollbar;
+      }
+
+      & :global(.cm-lineNumbers .cm-gutterElement) {
+        min-width: var(--code-editor--gutter-element-min-width);
+      }
+
+      & :global(.cm-foldGutter) {
+        min-width: var(--code-editor--gutter-element-min-width);
+        text-align: center;
+      }
+
+      & :global(.cm-panels) {
+        display: none;
+      }
+
+      /* the block padding is applied by the editor itself */
+      & :global(.cm-content) {
+        padding-block: unset;
+      }
+
+      & :global(.cm-line) {
+        padding-inline: var(--form-control--padding-x);
+      }
+
+      /*
+       * The elements of the first gutter carry the inline start padding, so
+       * that the highlight of the active line reaches the editor border.
+       */
+      & :global(.cm-gutters > .cm-gutter:first-child .cm-gutterElement) {
+        padding-inline-start: var(--form-control--padding-x);
+      }
+
+      & :global(.cm-activeLineGutter),
+      & :global(.cm-activeLine) {
+        background-color: color-mix(
+          in srgb,
+          var(--form-control--background-color--hover) 65%,
+          transparent
+        );
+      }
+    }
+  }
+}

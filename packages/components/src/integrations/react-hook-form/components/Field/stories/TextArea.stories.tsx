@@ -52,13 +52,13 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="message">
             <TextArea>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
           <Field name="messageDefaultValue">
             <TextArea>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
@@ -67,18 +67,18 @@ const meta: Meta<typeof Field> = {
             rules={{ required: "Please enter your message" }}
           >
             <TextArea>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
           <Field name="messageMaxLength">
             <TextArea maxLength={100} showCharacterCount>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -104,15 +104,17 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <TextArea {...props}>
+        <Section>
+          <Field name="field">
+            <TextArea {...props}>
+              <Label>Field</Label>
+            </TextArea>
+          </Field>
+          <TextArea isInvalid>
             <Label>Field</Label>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </TextArea>
-        </Field>
-        <TextArea isInvalid>
-          <Label>Field</Label>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </TextArea>
+        </Section>
       </Form>
     );
   },
@@ -123,28 +125,38 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <TextArea {...props}>
             <Label>Field</Label>
           </TextArea>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "analytics": false,
   "defaultBase": "main",
   "namedInputs": {},
   "targetDefaults": {
@@ -12,7 +13,7 @@
       "cache": false
     },
     "dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "build:icons"],
       "cache": false
     },
     "start": {
@@ -28,8 +29,24 @@
       "cache": true
     },
     "test:compile": {
-      "dependsOn": ["^build", "build:icons"],
+      "dependsOn": ["^build", "build:icons", "build:scss-types"],
       "cache": true
+    },
+    "test:cross-version:prepare": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "test:cross-version": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
+    "test:cross-version-inprocess": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
+    "test:cross-version:dev": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
     },
     "test:dev": {
       "dependsOn": ["^build"],
@@ -43,7 +60,6 @@
       "dependsOn": ["^build", "test:e2e:prepare"],
       "cache": true
     },
-
     "test:unit": {
       "dependsOn": ["^build"],
       "cache": true

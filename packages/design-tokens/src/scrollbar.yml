@@ -1,0 +1,9 @@
+scrollbar:
+  thumb-color:
+    value: "{dark.color.200}"
+  track-color:
+    value: "transparent"
+  size:
+    value: "{size-px.s}"
+  corner-radius:
+    value: "{corner-radius.round}"

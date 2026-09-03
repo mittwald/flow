@@ -1,0 +1,104 @@
+---
+component: Tabs
+description:
+  Tabs strukturieren verwandte Inhalte in schnell erreichbaren Ansichten.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Gruppiere in einem Tab thematisch verwandten Content.
+- Ordne die Tabs nach Wichtigkeit oder Häufigkeit der Nutzung.
+- Mach jeden Tab eigenständig verständlich und beschrifte ihn kurz und deutlich.
+- Setze Tabs nicht zur Navigation ein. Sie schalten Inhalte innerhalb derselben
+  Seite um, ohne zu einer anderen Seite oder URL zu navigieren.
+
+## Tabs vs. TabNavigation
+
+Flow bietet mit Tabs und der
+[TabNavigation](/components/navigation/tab-navigation) zwei ähnlich aussehende
+Components, die sich in der Verwendung klar unterscheiden.
+
+<DoAndDont>
+  <Plain heading="Verwende Tabs, um ...">
+    Inhalte innerhalb derselben Seite umzuschalten, ohne zu navigieren.
+  </Plain>
+
+  <Plain heading="Verwende eine TabNavigation, um ...">
+    zwischen gleichrangigen Unterseiten zu navigieren.
+  </Plain>
+</DoAndDont>
+
+---
+
+# Eingeklappte Ansicht
+
+Wenn die verfügbare Breite nicht ausreicht, wechseln die Tabs automatisch in
+eine eingeklappte Ansicht.
+
+<LiveCodeEditor example="collapsed" editorCollapsed />
+
+---
+
+# Mit Status-Icon
+
+Enthält der Inhalt eines Tabs eine wichtige Information oder Warnung (z. B. in
+Form eines [Alerts](/components/status/alert)), muss der entsprechende Tab ein
+Status-Icon erhalten, um die Aufmerksamkeit darauf zu lenken.
+
+<LiveCodeEditor example="status" editorCollapsed />
+
+---
+
+# Mit vorausgewähltem Tab
+
+Standardmäßig ist der erste Tab vorausgewählt. Soll ein anderer Tab initial
+aktiv sein, legst du das über `defaultSelectedKey` fest.
+
+<LiveCodeEditor example="default-selected" editorCollapsed />
+
+---
+
+# Beschriftung
+
+Tabs haben keinen `Label`-Slot – die Tab-Leiste beschriftet sich über ihre
+Tab-Titel. Benennt die Überschrift der umgebenden `Section` die Gruppe bereits,
+reicht das. Wenn nicht, gib der Tab-Leiste über `aria-label` einen eigenen Namen
+– oder verweise mit `aria-labelledby` auf eine vorhandene Überschrift, damit der
+Name nur an einer Stelle gepflegt wird.
+
+<LiveCodeEditor example="aria-label" editorCollapsed />
+
+---
+
+# Reihenfolge der Tabs
+
+Werden innerhalb eines Tabs Inhalte nachgeladen, kann sich durch das Rerendering
+die Reihenfolge der Tabs ändern. Um das zu verhindern, lagere den Tab-Inhalt in
+eine eigene Component aus und umschließe sie mit einem `Suspense`.
+
+```tsx
+<Tabs>
+  <Tab>
+    <TabTitle>Tab 1</TabTitle>
+    <Suspense>
+      <Tab1Content />
+    </Suspense>
+  </Tab>
+  <Tab>
+    <TabTitle>Tab 2</TabTitle>
+    <Suspense>
+      <Tab2Content />
+    </Suspense>
+  </Tab>
+</Tabs>
+```
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -54,9 +54,9 @@ export const modifyValueByType = (
   const selectedText = markdown.substring(start, end);
   const lines = selectedText.split("\n");
 
-  let newText = markdown;
-  let selectionStart = start;
-  let selectionEnd = end;
+  let newText: string;
+  let selectionStart: number;
+  let selectionEnd: number;
 
   if (type === "code" && selectedText.includes("\n")) {
     newText =
@@ -161,10 +161,10 @@ export const modifyValueByType = (
       }
     }
   } else if (type === "link") {
-    let linkText = "";
-    let linkUrl = "";
-    let inserted = "";
-    let cursorOffsetStart = 0;
+    let linkText: string;
+    let linkUrl: string;
+    let inserted: string;
+    let cursorOffsetStart: number;
 
     const isValidUrl = (str: string): boolean => {
       try {

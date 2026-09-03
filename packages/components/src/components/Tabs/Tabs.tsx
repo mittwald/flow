@@ -1,18 +1,34 @@
 import { TabList } from "@/components/Tabs/components/TabList";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
+import { FallbackTab } from "@/components/Tabs/components/FallbackTab";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useIsSSR } from "react-aria";
 
 export interface TabsProps
   extends
     Omit<Aria.TabsProps, "children">,
     PropsWithChildren,
-    FlowComponentProps {}
+    FlowComponentProps {
+  /**
+   * An accessible name for the tab list. `Tabs` has no `Label` slot, so this is
+   * how the group is named when the surrounding heading does not already do
+   * it.
+   */
+  "aria-label"?: string;
+  /** The id of an element that names the tab list. */
+  "aria-labelledby"?: string;
+  /**
+   * The view rendered when the selected tab does not exist. Defaults to a
+   * built-in IllustratedMessage.
+   */
+  tabNotFoundView?: ReactNode;
+}
 
 /** @flr-generate all */
 export const Tabs = flowComponent("Tabs", (props) => {
@@ -20,28 +36,35 @@ export const Tabs = flowComponent("Tabs", (props) => {
     children,
     className,
     defaultSelectedKey,
-    selectedKey,
+    selectedKey: selectedKeyProps,
     disabledKeys,
     ref,
     onSelectionChange,
+    tabNotFoundView,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledby,
     ...rest
   } = props;
 
   const rootClassName = clsx(styles.tabs, className);
-  const [selection, setSelection] = useState<Aria.Key | undefined>(
-    selectedKey ?? defaultSelectedKey,
-  );
+  const [selectedKeyState, setSelectedKeyState] = useState<
+    Aria.Key | undefined
+  >(defaultSelectedKey);
+
+  const selectedKey = selectedKeyProps ?? selectedKeyState;
+
+  const isSsr = useIsSSR();
 
   return (
-    <TunnelProvider>
+    <>
       {children}
       <Aria.Tabs
         slot={null}
         className={rootClassName}
         {...rest}
-        selectedKey={selection}
+        selectedKey={selectedKey}
         onSelectionChange={(key) => {
-          setSelection(key);
+          setSelectedKeyState(key);
           if (onSelectionChange) {
             onSelectionChange(key);
           }
@@ -50,18 +73,21 @@ export const Tabs = flowComponent("Tabs", (props) => {
         ref={ref}
       >
         <TabList
-          selection={selection}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledby}
+          selection={selectedKey}
           onContextMenuSelectionChange={(key) => {
-            setSelection(key);
+            setSelectedKeyState(key);
             if (onSelectionChange) {
               onSelectionChange(key);
             }
           }}
           disabledKeys={disabledKeys}
         />
-        <TunnelExit id="Panels" />
+        <UiComponentTunnelExit id="Panels" component="Tabs" />
+        {!isSsr && <FallbackTab tabNotFoundView={tabNotFoundView} />}
       </Aria.Tabs>
-    </TunnelProvider>
+    </>
   );
 });
 

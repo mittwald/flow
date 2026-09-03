@@ -1,7 +1,16 @@
 import { playwright } from "@vitest/browser-playwright";
 import type { ProjectConfig } from "vitest/node";
+import type { BrowserCommand } from "vitest/node";
 
 const viewport = { width: 1280, height: 720 };
+
+const setReducedMotion: BrowserCommand<
+  [value: "reduce" | "no-preference"]
+> = async ({ page }, value) => {
+  await page.emulateMedia({
+    reducedMotion: value,
+  });
+};
 
 export const vitestBrowserTestConfig: ProjectConfig = {
   css: {
@@ -9,8 +18,18 @@ export const vitestBrowserTestConfig: ProjectConfig = {
   },
   browser: {
     enabled: true,
+    commands: {
+      setReducedMotion,
+    },
     provider: playwright({
-      actionTimeout: 5000,
+      /*
+       * Bounds a stuck action, not a slow one. One browser context per test
+       * file runs in parallel, and on a loaded machine a legitimate click goes
+       * past 5s — seen as `locator.click: Timeout 5000ms exceeded` on a
+       * scenario that passes on its own. Stays below the 15s browser default
+       * of `testTimeout`, so the action's own message still reaches the report.
+       */
+      actionTimeout: 10_000,
       contextOptions: {
         reducedMotion: "reduce",
         locale: "en-US",

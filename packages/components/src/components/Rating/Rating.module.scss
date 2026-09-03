@@ -1,5 +1,19 @@
 @use "@/styles/mixins/focus";
 
+/**
+ * Segments render filled by default. The fill rules below empty out every
+ * segment that must not appear filled.
+ */
+@mixin empty-segment {
+  .empty {
+    opacity: 1;
+  }
+
+  .filled {
+    opacity: 0;
+  }
+}
+
 .rating {
   .ratingSegments {
     display: flex;
@@ -10,7 +24,7 @@
   .ratingSegment {
     display: grid;
     grid-template-areas: "star";
-    border-radius: var(--corner-radius--default);
+    border-radius: var(--corner-radius--m);
 
     @include focus.focus;
 
@@ -21,79 +35,73 @@
     &[data-focus-visible] {
       transform: scale(1.2);
     }
-
-    .star,
-    .starFilled {
-      grid-area: star;
-      transition-property: opacity, transform;
-      transition-duration: var(--transition--duration--fast);
-    }
-
-    .star {
-      opacity: 0;
-      color: var(--rating--star-color);
-    }
-
-    .starFilled {
-      opacity: 1;
-      color: var(--rating--star-filled-color);
-    }
   }
 
-  &:not(:has(.ratingSegments:hover)),
-  &[data-readonly] {
-    .ratingSegment {
-      &.current {
-        ~ .ratingSegment {
-          .star {
-            opacity: 1;
-          }
+  .empty,
+  .filled {
+    grid-area: star;
+    transition-property: opacity, transform;
+    transition-duration: var(--transition--duration--fast);
+  }
 
-          .starFilled {
-            opacity: 0;
-          }
-        }
+  :where(.empty) {
+    opacity: 0;
+    color: var(--rating--star-color);
+  }
+
+  :where(.filled) {
+    opacity: 1;
+    color: var(--rating--star-filled-color);
+  }
+
+  &.fill-cumulative {
+    &:not(:has(.ratingSegments:hover)),
+    &[data-readonly] {
+      .ratingSegment.current ~ .ratingSegment {
+        @include empty-segment;
+      }
+
+      &:not(:has(.current)) .ratingSegment {
+        @include empty-segment;
       }
     }
 
-    &:not(:has(.current)) {
-      .ratingSegment {
-        .star {
-          opacity: 1;
-        }
+    &:not([data-readonly]) {
+      .ratingSegment:hover ~ .ratingSegment {
+        @include empty-segment;
+      }
+    }
+  }
 
-        .starFilled {
-          opacity: 0;
-        }
+  &.fill-single {
+    &:not(:has(.ratingSegments:hover)),
+    &[data-readonly] {
+      .ratingSegment:not(.current) {
+        @include empty-segment;
+      }
+    }
+
+    &:not([data-readonly]):has(.ratingSegments:hover) {
+      .ratingSegment:not(:hover) {
+        @include empty-segment;
       }
     }
   }
 
   &:not([data-readonly]) {
-    &.ratingSegments:hover {
-      .ratingSegment {
-        .star {
-          opacity: 0;
-        }
-
-        .starFilled {
-          opacity: 1;
-        }
-      }
-    }
-
     .ratingSegment:hover {
       transform: scale(1.2);
       transform-origin: center;
+    }
+  }
 
-      ~ .ratingSegment {
-        .star {
-          opacity: 1;
-        }
-
-        .starFilled {
-          opacity: 0;
-        }
+  &:disabled,
+  &[data-disabled],
+  [aria-disabled] & {
+    .ratingSegment {
+      .empty,
+      .filled {
+        color: var(--form-control--border-color--disabled);
       }
     }
   }

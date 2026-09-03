@@ -2,13 +2,13 @@ import type { FC, PropsWithChildren, ReactNode } from "react";
 import { useId } from "react";
 import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
-import styles from "./Tab.module.scss";
+import styles from "../../Tabs.module.scss";
 import clsx from "clsx";
 import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
-import { TunnelEntry } from "@mittwald/react-tunnel";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { Activity } from "@/components/Activity";
+import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
 
 export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">, PropsWithChildren {}
@@ -27,10 +27,10 @@ export const Tab: FC<TabProps> = (props) => {
 
     const propsContext: PropsContext = {
       Content: {
-        wrapWith: <Activity isActive={isSelected} />,
+        wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
       },
       Section: {
-        wrapWith: <Activity isActive={isSelected} />,
+        wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
       },
     };
 
@@ -45,7 +45,7 @@ export const Tab: FC<TabProps> = (props) => {
   };
 
   return (
-    <TunnelEntry id="Panels">
+    <UiComponentTunnelEntry id="Panels" component="Tabs">
       <TabContextProvider value={{ id }}>
         <Aria.TabPanel
           className={rootClassName}
@@ -56,7 +56,7 @@ export const Tab: FC<TabProps> = (props) => {
           {TabPanelRenderer}
         </Aria.TabPanel>
       </TabContextProvider>
-    </TunnelEntry>
+    </UiComponentTunnelEntry>
   );
 };
 

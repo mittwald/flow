@@ -1,0 +1,193 @@
+name: Run Cross-Version Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  run-cross-version-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    if: >
+      github.event_name == 'workflow_dispatch' || (github.event.label.name ==
+      'run-cross-version-tests' &&
+       github.head_ref != github.event.repository.default_branch)
+
+    # one at a time per branch; re-labeling supersedes an in-flight run
+    concurrency:
+      group: cross-version-run@${{ github.head_ref }}
+      cancel-in-progress: true
+
+    permissions:
+      contents: read # checkout only; this run never pushes
+      pull-requests: write # needs to remove the triggering label + comment
+
+    steps:
+      - name: Remove label if exists
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const label = "run-cross-version-tests";
+            try {
+                await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: context.issue.number,
+                    name: label,
+                });
+                console.log(`Label '${label}' removed.`);
+            } catch (e) {
+                if (e.status === 404) {
+                   console.log(`Label '${label}' not present, skipping.`);
+                } else {
+                    throw e;
+                }
+            }
+
+      - name: Checkout selected branch
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - run: pnpm test:browser:prepare --only-shell
+
+      - name: Build host packages and install old published versions
+        # `test:cross-version:prepare` declares `^build` as an nx dependency, so
+        # this single `pnpm nx run` builds the host packages the harnesses consume
+        # from dist and then runs prepare, which resolves + npm-installs the target
+        # old versions (network) and writes cross-version.manifest.json. The two
+        # suites below stay separate direct-script steps on purpose: each exposes
+        # its own `failures` output, and the in-process suite runs even if the
+        # iframe one fails. Running a suite via `nx run` would re-trigger this
+        # non-cached network prepare on every step.
+        run: pnpm nx run remote-react-components:test:cross-version:prepare
+
+      - name: Run cross-version smoke tests (iframe harness)
+        id: crossversion
+        # Renders each installed old remote version through the current host over
+        # the real iframe connection and compares its host HTML to an ephemeral
+        # reference rendered from the current version. WebKit-only. The
+        # @quilted/threads handshake intermittently wedges a whole version's run
+        # under CI load ("Could not establish remote connection: Timeout reached")
+        # — a transient infra flake, not a diff, and only a fresh server pair
+        # recovers it. The runner retries EACH version in-process with fresh
+        # servers (`attemptsPerVersion`), so a single flaky version no longer reds
+        # the run; a real HTML divergence still fails on every attempt. Runs the
+        # package script directly (not `nx run`) so it doesn't re-trigger the
+        # non-cached network prepare above; the `failures` output feeds the PR
+        # comment.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version
+
+      - name: Run in-process cross-version tests
+        id: crossversion_inprocess
+        if:
+          always() && (steps.crossversion.outcome == 'success' ||
+          steps.crossversion.outcome == 'failure')
+        # Reuses the broad visual-test corpus in-process. WebKit-only. Unlike the
+        # iframe suite it has no real connection to time out; its config already
+        # sets vitest `retry: 2` to absorb the occasional per-test webkit flake,
+        # so no step-level retry is needed here.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version-inprocess
+
+      - name: Summary
+        if: always()
+        env:
+          IFRAME_OUTCOME: ${{ steps.crossversion.outcome }}
+          IFRAME_FAILURES: ${{ steps.crossversion.outputs.failures }}
+          INPROCESS_OUTCOME: ${{ steps.crossversion_inprocess.outcome }}
+          INPROCESS_FAILURES:
+            ${{ steps.crossversion_inprocess.outputs.failures }}
+        run: |
+          fmt() {
+            local outcome="$1" failures="$2"
+            if [[ "$outcome" == "success" ]]; then
+              echo "✅ passed"
+            elif [[ "$outcome" == "skipped" || -z "$outcome" ]]; then
+              echo "⏭️ did not run"
+            else
+              echo "❌ failed"
+              if [[ -n "$failures" ]]; then
+                echo ""
+                echo '```'
+                echo "$failures"
+                echo '```'
+              else
+                echo ""
+                echo "_No per-version failures reported (the run may have errored before comparison, e.g. during install or prepare)._"
+              fi
+            fi
+          }
+          {
+            if [[ "$IFRAME_OUTCOME" == "success" && "$INPROCESS_OUTCOME" == "success" ]]; then
+              echo "### ✅ Cross-Version Tests Passed"
+              echo ""
+              echo "The current host still renders old published remote versions correctly (iframe) and in the same DOM shape (in-process)."
+            else
+              echo "### ❌ Cross-Version Tests Failed"
+              echo ""
+              echo "A divergence means the current host renders an old published remote version differently than expected. If a component was **removed or its structure legitimately changed**, gate the affected test per-version instead of weakening the normalizers — see [CONTRIBUTE.md](packages/remote-react-components/CONTRIBUTE.md#missing-components-and-legitimate-divergences)."
+            fi
+            echo ""
+            echo "**Iframe harness (attribute-accurate):** $(fmt "$IFRAME_OUTCOME" "$IFRAME_FAILURES")"
+            echo ""
+            echo "**In-process harness (structure-only):** $(fmt "$INPROCESS_OUTCOME" "$INPROCESS_FAILURES")"
+          } > "$RUNNER_TEMP/cross-version-summary.md"
+          cat "$RUNNER_TEMP/cross-version-summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment summary on PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = require("fs");
+            const marker = "<!-- cross-version-summary -->";
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const summary = fs.readFileSync(`${process.env.RUNNER_TEMP}/cross-version-summary.md`, "utf8");
+            const body = `${marker}\n${summary}\n\n_[Run details](${runUrl})_`;
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+
+            // keep a single, updated comment instead of stacking a new one per run
+            const comments = await github.paginate(github.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+                await github.rest.issues.updateComment({
+                    owner,
+                    repo,
+                    comment_id: existing.id,
+                    body,
+                });
+            } else {
+                await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number,
+                    body,
+                });
+            }

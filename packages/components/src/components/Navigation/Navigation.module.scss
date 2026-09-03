@@ -17,6 +17,16 @@
   .item {
     @include menuItem.menuItem();
 
+    flex-wrap: wrap;
+
+    > .icon {
+      order: 0;
+    }
+
+    > :not(.icon) {
+      order: 1;
+    }
+
     .badge {
       margin-inline-start: auto;
     }

@@ -10,6 +10,7 @@ import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
 import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
+import type { TabNavigationProps } from "@/components/TabNavigation";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
@@ -37,7 +38,7 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
-import type { ModalProps } from "@/components/Modal";
+import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
@@ -48,7 +49,7 @@ import type {
 } from "@/components/ContextualHelp";
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
-import type { ListProps } from "@/components/List";
+import type { ListItemViewContentProps, ListProps } from "@/components/List";
 import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
@@ -63,7 +64,8 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
-import type { CountryOptionsProps } from "src/components/CountryOptions";
+import type { CombineProps } from "@/components/Combine";
+import type { CountryOptionsProps } from "@/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";
@@ -82,6 +84,16 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
+import type { RatingSegmentProps } from "@/components/Rating/components/RatingSegment";
+import type { CodeEditorProps } from "@/components/CodeEditor";
+import type { KbdProps } from "@/components/Kbd/Kbd";
+import type { AccordionProps } from "@/components/Accordion";
+import type { ChatProps } from "@/components/Chat";
+import type { SectionHeaderProps } from "@/components/Section/components/SectionHeader/SectionHeader";
+import type {
+  LightBoxGalleryItemProps,
+  LightBoxGalleryProps,
+} from "@/components/LightBox";
 
 export * from "./types";
 
@@ -89,15 +101,19 @@ export interface FlowComponentPropsTypes {
   AccentBox: AccentBoxProps;
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
+  Accordion: AccordionProps;
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
   AlertText: AlertTextProps;
   Align: AlignProps;
+  Combine: CombineProps;
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   Button: ButtonProps;
+  CodeEditor: CodeEditorProps;
+  Chat: ChatProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
@@ -122,6 +138,7 @@ export interface FlowComponentPropsTypes {
   FileDropZone: FileDropZoneProps;
   Header: HeaderProps;
   Heading: HeadingProps;
+  TabNavigation: TabNavigationProps;
   Icon: IconProps;
   IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
@@ -129,8 +146,11 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
+  LightBoxGallery: LightBoxGalleryProps;
+  LightBoxGalleryItem: LightBoxGalleryItemProps;
   Link: LinkProps;
   List: ListProps<never>;
+  ListItemView: ListItemViewContentProps;
   ListSummary: ListSummaryProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
@@ -138,6 +158,7 @@ export interface FlowComponentPropsTypes {
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
+  ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
@@ -151,11 +172,14 @@ export interface FlowComponentPropsTypes {
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
   Rating: RatingProps;
+  RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
   Segment: SegmentProps;
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
+  Kbd: KbdProps;
+  SectionHeader: SectionHeaderProps;
   Slider: SliderProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -173,6 +197,7 @@ const propsContextSupportingComponentsMap: Record<
   AccentBox: true,
   Action: true,
   ActionGroup: true,
+  Accordion: true,
   Avatar: true,
   Autocomplete: true,
   Alert: true,
@@ -180,8 +205,11 @@ const propsContextSupportingComponentsMap: Record<
   AlertIcon: true,
   AlertText: true,
   Align: true,
+  Combine: true,
   Badge: true,
   Button: true,
+  CodeEditor: true,
+  Chat: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
@@ -206,15 +234,20 @@ const propsContextSupportingComponentsMap: Record<
   FileDropZone: true,
   Header: true,
   Heading: true,
+  TabNavigation: true,
   Icon: true,
   IllustratedMessage: true,
   Image: true,
   Initials: true,
+  Kbd: true,
   Label: true,
   LayoutCard: true,
   LightBox: true,
+  LightBoxGallery: true,
+  LightBoxGalleryItem: true,
   Link: true,
   List: true,
+  ListItemView: true,
   ListSummary: true,
   MarkdownEditor: true,
   MenuItem: true,
@@ -222,6 +255,7 @@ const propsContextSupportingComponentsMap: Record<
   Message: true,
   MessageThread: true,
   Modal: true,
+  ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
   NumberField: true,
@@ -235,8 +269,10 @@ const propsContextSupportingComponentsMap: Record<
   RadioButton: true,
   RadioGroup: true,
   Rating: true,
+  RatingSegment: true,
   SearchField: true,
   Section: true,
+  SectionHeader: true,
   Segment: true,
   SegmentedControl: true,
   Select: true,

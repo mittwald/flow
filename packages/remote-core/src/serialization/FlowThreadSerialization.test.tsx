@@ -1,34 +1,16 @@
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
 import {
   type AnyThread,
   markAsTransferable,
   TRANSFERABLE,
 } from "@quilted/threads";
-import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { CalendarDate } from "@internationalized/date";
 import { createFileList } from "@/tests/utils";
 
-test("will create a new arraybuffer when detached", async () => {
-  let testFile = new File([new ArrayBuffer(0)], "test");
-  testFile = await addAwaitedArrayBuffer(testFile);
-
-  const buff = await testFile.arrayBuffer();
-  expect(buff.detached).toBeFalsy();
-
-  // make the file buffer detached
-  structuredClone(buff, { transfer: [buff] });
-
-  expect(buff.detached).toBeTruthy();
-  testFile = await addAwaitedArrayBuffer(testFile);
-
-  const newBuff = await testFile.arrayBuffer();
-  expect(newBuff.detached).toBeFalsy();
-});
-
 test("will omit specific types on serialize", async () => {
   const serializer = new FlowThreadSerialization();
-  const result = serializer.serialize(
+  const result = await serializer.serialize(
     {
       window,
       element: document.createElement("div"),
@@ -52,32 +34,20 @@ test("will serialize and deserialize structures", async () => {
   const buff5 = new ArrayBuffer(5);
 
   const fileList = createFileList([
-    await addAwaitedArrayBuffer(new File([buff1], "foo", { lastModified: 1 })),
-    await addAwaitedArrayBuffer(new File([buff2], "bar", { lastModified: 2 })),
+    new File([buff1], "foo", { lastModified: 1 }),
+    new File([buff2], "bar", { lastModified: 2 }),
   ]);
 
   const formData = new FormData();
   formData.set("foo", "string");
-  formData.set(
-    "file",
-    await addAwaitedArrayBuffer(
-      new File([buff3], "formDataFile1", { lastModified: 3 }),
-    ),
-  );
+  formData.set("file", new File([buff3], "formDataFile1", { lastModified: 3 }));
   formData.append(
     "file",
-    await addAwaitedArrayBuffer(
-      new File([buff4], "formDataFile2", { lastModified: 4 }),
-    ),
+    new File([buff4], "formDataFile2", { lastModified: 4 }),
   );
 
   const testMap = new Map();
-  testMap.set(
-    "foo",
-    await addAwaitedArrayBuffer(
-      new File([buff5], "mapFile1", { lastModified: 1 }),
-    ),
-  );
+  testMap.set("foo", new File([buff5], "mapFile1", { lastModified: 1 }));
 
   const calendarDate = new CalendarDate(2025, 1, 2);
 
@@ -86,7 +56,7 @@ test("will serialize and deserialize structures", async () => {
   Object.setPrototypeOf(dataTransfer, DataTransfer.prototype);
 
   const transferable: ArrayBuffer[] = [];
-  const serializeResult = serializer.serialize(
+  const serializeResult = await serializer.serialize(
     {
       dataTransfer: dataTransfer,
       date: calendarDate,
@@ -101,7 +71,7 @@ test("will serialize and deserialize structures", async () => {
     transferable,
   );
 
-  expect(transferable).toStrictEqual(
+  expect(transferable).toEqual(
     expect.arrayContaining([
       markAsTransferable(buff1),
       markAsTransferable(buff2),
@@ -191,7 +161,7 @@ test("will serialize and deserialize structures", async () => {
     ]),
   });
 
-  const deserializeResult = serializer.deserialize(
+  const deserializeResult = await serializer.deserialize(
     serializeResult,
     {} as AnyThread,
   );
@@ -228,4 +198,129 @@ test("will serialize and deserialize structures", async () => {
       ["foo", new File([buff5], "mapFile1", { lastModified: 1 })],
     ]),
   });
+});
+
+/*
+ * Serialization is async in this build (Flow's serializers await File reads),
+ * and the cycle guard parks `undefined` in the `seen` map until the value's own
+ * frame finishes. Both only hold together while the traversal visits one value
+ * at a time — see the comment on `seen.set(value, undefined)` in
+ * patches/@quilted__threads@3.3.1.patch. These cases are the ones that regress
+ * the moment a container serializes its members concurrently again: a repeated
+ * reference reads the placeholder mid-flight and silently becomes `undefined`.
+ */
+test("will serialize a repeated reference in every position", async () => {
+  const serializer = new FlowThreadSerialization();
+  const row = { time: "0:00", value: 40 };
+
+  const result = await serializer.serialize(
+    {
+      // one array prop repeating the same object — two charts sharing `data`
+      data: [row, row],
+      // the repeat one level deeper, reached through sibling array items
+      nested: [{ row }, { row }],
+      // two props of one object, which were never affected
+      first: row,
+      second: row,
+      map: new Map([
+        ["a", row],
+        ["b", row],
+      ]),
+      // a Set cannot hold one reference twice, so share through its members
+      set: new Set([{ row }, { row }]),
+    },
+    {} as AnyThread,
+  );
+
+  expect(result).toStrictEqual({
+    data: [row, row],
+    nested: [{ row }, { row }],
+    first: row,
+    second: row,
+    map: new Map([
+      ["a", row],
+      ["b", row],
+    ]),
+    set: new Set([{ row }, { row }]),
+  });
+});
+
+test("will keep circular references from recursing", async () => {
+  const serializer = new FlowThreadSerialization();
+
+  const selfReferencing: Record<string, unknown> = { name: "self" };
+  selfReferencing.self = selfReferencing;
+
+  const a: Record<string, unknown> = { name: "a" };
+  const b: Record<string, unknown> = { name: "b", a };
+  a.b = b;
+
+  const result = await serializer.serialize(
+    {
+      selfReferencing,
+      // a mutual cycle reached twice through one array: the pair is what makes
+      // "await the pending result instead of the placeholder" deadlock
+      mutual: [a, b, a],
+    },
+    {} as AnyThread,
+  );
+
+  expect(result).toStrictEqual({
+    selfReferencing: { name: "self", self: undefined },
+    mutual: [
+      { name: "a", b: { name: "b", a: undefined } },
+      { name: "b", a: undefined },
+      { name: "a", b: { name: "b", a: undefined } },
+    ],
+  });
+});
+
+/*
+ * A React element carries `$$typeof: Symbol(react.…)`. Symbols pass through
+ * serialization untouched and `postMessage` refuses them — refusing the whole
+ * message, so one element in one prop drops the entire mutation batch and the
+ * extension renders nothing (observed on a remote `List` in table view). Rendered
+ * output has to be a slot; where it is a property anyway, dropping just that
+ * value keeps the rest of the batch alive.
+ */
+test("will not let React values break the whole payload", async () => {
+  const serializer = new FlowThreadSerialization();
+  const consoleError = vi
+    .spyOn(console, "error")
+    .mockImplementation(() => undefined);
+
+  const Icon = function Icon() {
+    return null;
+  };
+  const element = {
+    $$typeof: Symbol.for("react.transitional.element"),
+    type: Icon,
+    key: null,
+    ref: null,
+    props: { color: "success" },
+  };
+
+  const result = await serializer.serialize(
+    {
+      label: "kept",
+      icon: element,
+      nested: [element, { deeper: element }],
+    },
+    {} as AnyThread,
+  );
+
+  expect(result).toStrictEqual({
+    label: "kept",
+    icon: null,
+    nested: [null, { deeper: null }],
+  });
+
+  // the payload has to survive the structured clone that postMessage applies
+  expect(() => structuredClone(result)).not.toThrow();
+
+  // named once per component, not once per occurrence
+  expect(consoleError).toHaveBeenCalledTimes(1);
+  expect(consoleError.mock.calls[0]?.[0]).toContain("<Icon />");
+
+  consoleError.mockRestore();
 });

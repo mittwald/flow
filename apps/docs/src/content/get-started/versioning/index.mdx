@@ -1,0 +1,148 @@
+---
+title: Versionierung & Stabilität
+navTitle: Versionierung
+description:
+  Flow folgt Semantic Versioning. Diese Seite beschreibt, worauf du dich als
+  Entwickler verlassen kannst, worauf nicht und wie du dich gegen ungewollte
+  Änderungen absicherst.
+---
+
+---
+
+# Semantic Versioning
+
+Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
+Zusage gilt damit einheitlich für jedes Package. Es gibt keine
+Package-spezifischen Sonderregeln.
+
+Seit Version `1.0.0` ist aus einer guten Absicht eine verlässliche Zusage
+geworden: Wir halten uns an [Semantic Versioning](https://semver.org) und gehen
+Änderungen planbar und nachvollziehbar an.
+
+- **Major** – enthält Breaking Changes. Ein Update kann Anpassungen in deinem
+  Code erfordern. Major-Versionen bleiben bewusst selten.
+- **Minor** – fügt neue Funktionen hinzu und ist abwärtskompatibel.
+- **Patch** – enthält Bugfixes und ist abwärtskompatibel.
+
+Entscheidend ist die Grenze: Welche Änderung erzwingt eine neue Major-Version,
+und welche darf in einem Minor oder Patch erscheinen? Die folgenden Abschnitte
+beschreiben diese Grenze aus Sicht der Entwickler. Wie du ein Update oder eine
+Migration konkret durchführst, beschreibt [Upgrades](/get-started/upgrades).
+
+---
+
+# Worauf du dich verlassen kannst
+
+Diese Bereiche sind durch die Versionierung geschützt. Eine inkompatible
+Änderung daran erscheint nur in einer neuen Major-Version:
+
+- **Runtime Public API von `public.ts`** – welche Components und Exports
+  existieren und welche Props sie zur Laufzeit akzeptieren, sowie das
+  dokumentierte Verhalten dokumentierter Funktionen. Die Type-Ebene ist hiervon
+  ausdrücklich ausgenommen (siehe unten).
+- **Components aus `@mittwald/flow-remote-react-components`** – die in
+  mStudio-Extensions verwendete API. Ihre Props sind der Vertrag mit
+  Extension-Entwicklern und unterliegen derselben Zusage.
+- **Veröffentlichte Icons** – ein Icon zu entfernen oder umzubenennen ist ein
+  Breaking Change. Icons werden ohnehin nie entfernt, sondern nur deprecated.
+- **Das Remote-Protokoll** – die versionierte Verbindungsschicht zwischen
+  Extension und Host bleibt kompatibel, solange dies möglich ist.
+
+Wenn ein Teil der öffentlichen API entfernt werden soll, wird er zunächst als
+deprecated gekennzeichnet und nicht sofort entfernt. Der alte Pfad bleibt
+erhalten und wird zur Laufzeit über eine Deprecation-Warnung angekündigt, bevor
+er in einer Major-Version entfernt wird. Das betrifft die gesamte öffentliche
+API, nicht nur die in Extensions verwendeten Components.
+
+---
+
+# Node- und React-Unterstützung
+
+Node und React sind echte Runtime-Voraussetzungen. Auch hier gibt es klare
+Regeln, welche Änderung eine neue Major-Version erzwingt.
+
+**Node**
+
+- Der garantierte Node-Floor ist die aktiv unterstützte Node-LTS, aktuell
+  `node >=24`, einheitlich über alle Packages. Er wird nur bei konkretem Bedarf
+  angehoben, nicht um neuen Releases hinterherzulaufen.
+- Eine Node-Version fallen zu lassen, die noch in ihrem LTS-/Maintenance-Fenster
+  liegt, ist ein Breaking Change (→ Major). Eine bereits End-of-Life-Version
+  fallen zu lassen, darf in einem Minor erscheinen.
+- Strenger sind die Node-Runtime-Packages `@mittwald/ext-bridge` und
+  `@mittwald/flow-remote-core`: Für sie ist jedes Anheben des Node-Floors ein
+  Breaking Change (→ Major), unabhängig von EOL, und ihr Floor kann
+  konservativer sein als der der übrigen Packages.
+
+**React**
+
+- Das **Erweitern** der akzeptierten Range (z. B. `^19` → `^19 || ^20`) ist
+  abwärtskompatibel (Minor).
+- Das **Anheben der Mindestversion** oder das Fallenlassen einer React-Major ist
+  ein Breaking Change (→ Major).
+
+---
+
+# Was nicht garantiert ist
+
+Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
+bewusst nicht durch die Versionierung abgedeckt. Sie können sich in jedem
+Release ändern, auch in einem Minor oder Patch:
+
+- **Alle Änderungen auf Type-Ebene (TypeScript).** Die Typen sind best-effort
+  und nicht durch Semantic Versioning geschützt. Auch das Entfernen oder
+  Umbenennen eines exportierten Typs oder das Verengen eines Prop-Typs ist für
+  sich genommen kein Breaking Change. Nennenswerte Type-Änderungen werden
+  dennoch im Changelog erwähnt.
+- **Das visuelle Erscheinungsbild.**
+- **Die interne DOM-Struktur.**
+- **CSS-Klassennamen.**
+- **Namen und Werte von Design Tokens.**
+
+---
+
+# So schützt du dich
+
+Weil die oben genannten Bereiche bewusst nicht garantiert sind, gibt es zwei
+Regeln, an die du dich als Entwickler halten solltest.
+
+<Alert>
+  <Heading>Zwei Regeln für den stabilen Betrieb</Heading>
+  <Content>
+    Style nicht gegen interne CSS-Klassen, und behandle Flows TypeScript-Typen
+    als best-effort. Beide Bereiche können sich in jedem Release ändern.
+  </Content>
+</Alert>
+
+## Style nicht gegen interne CSS-Klassen
+
+Die CSS-Klassennamen der Components sind ein internes Implementierungsdetail und
+können sich in jedem Release ändern. Verlasse dich für eigenes Styling nicht
+darauf, dass eine bestimmte interne Klasse existiert oder gleich heißt.
+Andernfalls kann bereits ein Patch dein Styling brechen.
+
+## Behandle TypeScript-Typen als best-effort
+
+Flows TypeScript-Typen folgen nicht Semantic Versioning. Ein `tsc`-Fehler kann
+daher theoretisch schon in einem Patch auftreten. Wenn ein solcher Bruch für
+dein Projekt teuer wäre, pinne exakte Versionen (statt `^`-Ranges), sodass ein
+Update bewusst und kontrolliert erfolgt. Zu einem bewusst herbeigeführten
+Type-Breaking-Change gehört eine Migrationsnotiz in den Release Notes – so
+bekommst du einen konkreten Upgrade-Pfad, auch wenn die Änderung in einem Minor
+oder Patch erscheint.
+
+---
+
+# Component Lifecycle
+
+Der Vertrag gilt nicht für jede Component gleich. Jede Component hat einen
+Lifecycle-Status, der die obigen Regeln überschreibt:
+
+- **Beta** – von der Breaking-Change-Zusage ausgenommen. Die API kann sich auch
+  außerhalb einer Major-Version ändern.
+- **Stable** (Standard) – vollständig durch die obigen Regeln gebunden.
+- **Deprecated** – bis zur Entfernung in einer Major-Version weiter abgesichert
+  und mit einem Migrationspfad versehen.
+
+Das vollständige Lifecycle-Modell beschreibt
+[ADR 0003](https://github.com/mittwald/flow/blob/main/docs/adr/0003-component-lifecycle-status.md).

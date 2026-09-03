@@ -3,7 +3,7 @@ import type { ButtonProps } from "@/components/Button";
 import { Button } from "@/components/Button";
 import { IconCopy } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -28,9 +28,9 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
     ...buttonProps
   } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "CopyButton");
 
-  const tooltip = stringFormatter.format("copyButton.copy");
+  const tooltip = stringFormatter.format("copy");
 
   const copyValue = () => {
     copy(onlyText(text));

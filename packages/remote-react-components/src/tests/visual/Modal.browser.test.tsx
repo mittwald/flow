@@ -34,10 +34,13 @@ test.each(testEnvironments)(
                 <Label>Label</Label>
               </TextField>
             </Section>
+            <Section>
+              <Heading>Heading</Heading>
+            </Section>
           </Content>
           <ActionGroup>
             <Button>Ok</Button>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="secondary" variant="soft" data-testid="abort">
                 Abort
               </Button>
@@ -106,6 +109,38 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
+  "Modal confirmOnClose (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Button, ModalTrigger, Modal, Content, Heading, Text, Action },
+  }) => {
+    await render(
+      <ModalTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <Modal confirmOnClose>
+          <Heading>Heading</Heading>
+          <Content>
+            <Text>Text</Text>
+            <Action closeModal>
+              <Button data-testid="close">Close</Button>
+            </Action>
+          </Content>
+        </Modal>
+      </ModalTrigger>,
+    );
+
+    const trigger = page.getByTestId("trigger");
+    await trigger.click();
+
+    const close = page.getByTestId("close");
+    await close.click();
+
+    await testScreenshot("Modal confirmOnClose - confirmation opened");
+  },
+);
+
+test.each(testEnvironments)(
   "Modal in ContextMenu (%s)",
   async ({
     testScreenshot,
@@ -115,14 +150,14 @@ test.each(testEnvironments)(
       Button,
       ContextMenu,
       ContextMenuTrigger,
-      useOverlayController,
+      useModalController,
       Modal,
       Heading,
       Content,
     },
   }) => {
     function Wrapper() {
-      const controller = useOverlayController("Modal");
+      const controller = useModalController();
 
       return (
         <>
@@ -194,5 +229,44 @@ test.each(testEnvironments)(
     await trigger.click();
 
     await testScreenshot("Modal in Section Header - ContextMenu opened");
+  },
+);
+
+test.each(testEnvironments)(
+  "Modal heading with icon (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Button,
+      ModalTrigger,
+      Modal,
+      Content,
+      Heading,
+      Text,
+      IconInfo,
+      Badge,
+    },
+  }) => {
+    await render(
+      <ModalTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <Modal>
+          <Heading>
+            <IconInfo />
+            Heading
+            <Badge>Badge</Badge>
+          </Heading>
+          <Content>
+            <Text>Text</Text>
+          </Content>
+        </Modal>
+      </ModalTrigger>,
+    );
+
+    const trigger = page.getByTestId("trigger");
+    await trigger.click();
+
+    await testScreenshot("Modal heading with icon - opened");
   },
 );

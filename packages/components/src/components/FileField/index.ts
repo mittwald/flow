@@ -1,4 +1,4 @@
 export * from "./view";
 
-export { FileField, type FileFieldProps } from "./FileField";
+export { type FileFieldProps, FileField } from "./FileField";
 export { default } from "./FileField";

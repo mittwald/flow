@@ -15,4 +15,5 @@ export interface SortingShape<T> {
   direction?: SortDirection;
   defaultEnabled?: SortingDefaultMode;
   customSortingFn?: SortingFn<T>;
+  autosave?: boolean;
 }

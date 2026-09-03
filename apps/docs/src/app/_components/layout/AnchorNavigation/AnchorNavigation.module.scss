@@ -1,0 +1,19 @@
+.navigation ul {
+  gap: var(--size-rem--s);
+}
+
+.anchorLink {
+  font-size: var(--font-size-text--s);
+  text-decoration: underline;
+  padding: 0 !important;
+
+  &[aria-current] {
+    text-decoration: none;
+    background: none !important;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: none !important;
+  }
+}

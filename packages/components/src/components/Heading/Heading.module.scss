@@ -2,8 +2,9 @@
   color: var(--heading--color);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
+  text-wrap-style: pretty;
 
-  --heading-line-height: calc(var(--font-size) * var(--line-height--default));
+  --heading-line-height: calc(var(--font-size) * var(--line-height));
 
   @mixin color($color) {
     &.#{$color} {
@@ -11,10 +12,12 @@
     }
   }
 
-  @include color("dark");
-  @include color("light");
   @include color("danger");
   @include color("unavailable");
+  @include color("dark");
+  @include color("light");
+  @include color("dark-static");
+  @include color("light-static");
 
   .headingText {
     .icon {
@@ -24,15 +27,12 @@
       display: inline-block;
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
-
-    &:not(:last-child):has(+ .headingContent:not(:empty)) {
-      margin-inline-end: var(--heading--icon-to-text-spacing);
-    }
   }
 
   .headingContent {
     vertical-align: bottom;
     display: inline-flex;
+    margin-inline-start: var(--heading--icon-to-text-spacing);
     min-height: var(--heading-line-height);
     align-items: center;
     gap: var(--heading--icon-to-text-spacing);
@@ -43,26 +43,32 @@
     }
   }
 
-  &:where(h1) {
+  &:where(h1),
+  &:where(.h1) {
     --font-size: var(--font-size-heading--xl);
   }
 
-  &:where(h2) {
+  &:where(h2),
+  &:where(.h2) {
     --font-size: var(--font-size-heading--m);
   }
 
-  &:where(h3) {
+  &:where(h3),
+  &:where(.h3) {
     --font-size: var(--font-size-heading--s);
   }
 
   &:where(h4),
+  &:where(.h4),
   &:where(h5),
-  &:where(h6) {
+  &:where(.h5),
+  &:where(h6),
+  &:where(.h6) {
     --font-size: var(--font-size-heading--xs);
   }
 
   @mixin size($size) {
-    &.#{$size} {
+    &.size-#{$size} {
       --font-size: var(--font-size-heading--#{$size});
     }
   }
@@ -83,8 +89,25 @@
   }
 }
 
-@media (max-width: 550px) {
-  .heading:where(h1) {
-    --font-size: var(--font-size-heading--l);
+@media (max-width: 768px) {
+  .heading {
+    &:where(h1),
+    &.size-xl {
+      --font-size: var(--font-size-heading--l);
+    }
+
+    &.size-l {
+      --font-size: var(--font-size-heading--m);
+    }
+
+    &:where(h2),
+    &.size-m {
+      --font-size: var(--font-size-heading--s);
+    }
+
+    &:where(h3),
+    &.size-s {
+      --font-size: var(--font-size-heading--xs);
+    }
   }
 }

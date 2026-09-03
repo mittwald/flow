@@ -1,44 +1,73 @@
 import type { FC } from "react";
-import React from "react";
-import styles from "@/app/layout.module.scss";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
-import { IconMenu } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-react-components";
-import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
-import { Section } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { Modal, ModalTrigger } from "@mittwald/flow-react-components";
+import {
+  ActionGroup,
+  Button,
+  Content,
+  HeaderNavigation,
+  Heading,
+  IconMenu,
+  Modal,
+  ModalTrigger,
+  Navigation,
+  type OverlayController,
+  Section,
+} from "@mittwald/flow-react-components";
+import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import MobileHeaderNavigation from "@/app/_components/layout/MobileHeaderNavigation";
+import { groupBy } from "remeda";
+import { usePathname } from "next/navigation";
+import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
+import Groups from "@/app/_components/layout/Groups";
+import { SearchButton } from "@/app/_components/layout/DocsSearch";
+import { GitHubButton } from "@/app/_components/layout/Header/components/GitHubButton";
 
 interface Props {
   docs: SerializedMdxFile[];
   className?: string;
+  searchController: OverlayController;
 }
 
 export const MobileNavigation: FC<Props> = (props) => {
-  const { className, docs } = props;
+  const { className, searchController } = props;
+
+  const docs = props.docs.map(MdxFile.deserialize);
+
+  const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
+
+  const currentPathname = usePathname();
+
+  const currentGroup = Object.entries(navGroups).find(([group]) => {
+    return currentPathname.includes(group);
+  })?.[0];
 
   return (
-    <HeaderNavigationComponent className={className}>
-      <Content>
-        <ModalTrigger>
-          <Button color="secondary" variant="plain">
-            <IconMenu />
-          </Button>
-          <Modal offCanvas className={styles.mobileNavigationOffCanvas}>
-            <Heading>Menü</Heading>
-            <Content>
-              <Section>
-                <HeaderNavigation docs={docs} />
-                <MainNavigation docs={docs} mobileNavigation />
-              </Section>
-            </Content>
-          </Modal>
-        </ModalTrigger>
-      </Content>
-    </HeaderNavigationComponent>
+    <HeaderNavigation className={className}>
+      <MobileHeaderNavigation docs={props.docs} />
+      <SearchButton controller={searchController} iconOnly />
+      <ModalTrigger>
+        <Button variant="plain">
+          <IconMenu />
+        </Button>
+        <Modal offCanvas showCloseButton>
+          <Heading>Menü</Heading>
+          <Content>
+            <Section>
+              {!currentGroup && (
+                <Navigation>
+                  <Groups docs={props.docs} />
+                </Navigation>
+              )}
+              <MainNavigation docs={props.docs} mobileNavigation />
+            </Section>
+          </Content>
+          <ActionGroup>
+            <GitHubButton />
+            <ThemeSwitcherButton />
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    </HeaderNavigation>
   );
 };
 

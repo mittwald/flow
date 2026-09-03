@@ -12,6 +12,9 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import type { AlphaColor } from "@/lib/types/props";
+import { filterDOMProps } from "@react-aria/utils";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface ButtonProps
   extends
@@ -19,8 +22,14 @@ export interface ButtonProps
     FlowComponentProps<HTMLButtonElement> {
   /** Slot for button placement in action groups. */
   slot?: string;
-  /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
+  /**
+   * The color of the button.
+   *
+   * @default "primary"
+   * @deprecatedValues accent
+   */
+  color?:
+    "primary" | "success" | "secondary" | "danger" | AlphaColor | "accent";
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */
@@ -39,6 +48,8 @@ export interface ButtonProps
   unstyled?: boolean;
   /** @internal */
   ariaSlot?: string | null;
+  /** @internal */
+  elementType?: "button" | "span";
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -50,13 +61,37 @@ const disablePendingProps = (props: ButtonProps) => {
     props.isReadOnly
   ) {
     props = { ...props };
-    props.onPress = undefined;
-    props.onPressStart = undefined;
-    props.onPressEnd = undefined;
-    props.onPressChange = undefined;
-    props.onPressUp = undefined;
-    props.onKeyDown = undefined;
-    props.onKeyUp = undefined;
+
+    const mutedActionHandler = (e: unknown) => {
+      if (e && typeof e === "object") {
+        // stopPropagation is the default behavior in React Aria
+        const isReactAriaEvent =
+          "continuePropagation" in e &&
+          typeof e.continuePropagation === "function";
+
+        if (
+          !isReactAriaEvent &&
+          "stopPropagation" in e &&
+          typeof e.stopPropagation === "function"
+        ) {
+          e.stopPropagation();
+        }
+        if ("preventDefault" in e && typeof e.preventDefault === "function") {
+          e.preventDefault();
+        }
+      }
+
+      return false;
+    };
+
+    props.onClick = mutedActionHandler;
+    props.onPress = mutedActionHandler;
+    props.onPressStart = mutedActionHandler;
+    props.onPressEnd = mutedActionHandler;
+    props.onPressChange = mutedActionHandler;
+    props.onPressUp = mutedActionHandler;
+    props.onKeyDown = mutedActionHandler;
+    props.onKeyUp = mutedActionHandler;
   }
 
   return props;
@@ -66,8 +101,10 @@ const disablePendingProps = (props: ButtonProps) => {
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
+  const warnDeprecation = useWarnDeprecation();
+
   const {
-    color = "primary",
+    color: colorFromProps = "primary",
     variant = "solid",
     children,
     className,
@@ -81,8 +118,17 @@ export const Button = flowComponent("Button", (props) => {
     ariaSlot: slot,
     unstyled,
     isReadOnly,
+    elementType,
     ...restProps
   } = props;
+
+  if (colorFromProps === "accent") {
+    warnDeprecation(
+      "The color 'accent' is deprecated and will be removed in a future release. Use 'success' instead.",
+    );
+  }
+
+  const color = colorFromProps === "accent" ? "success" : colorFromProps;
 
   const rootClassName = unstyled
     ? className
@@ -91,15 +137,15 @@ export const Button = flowComponent("Button", (props) => {
         isPending && styles.isPending,
         isSucceeded && styles.isSucceeded,
         isFailed && styles.isFailed,
-        styles[`size-${size}`],
+        size === "s" && styles["size-s"],
         styles[color],
         styles[variant],
-        className,
         /**
          * Workaround warning: The Aria.Button does not support "aria-disabled"
          * by now, so this Button will be visually disabled via CSS.
          */
         ariaDisabled && styles.ariaDisabled,
+        className,
       );
 
   useAriaAnnounceActionState(
@@ -132,32 +178,18 @@ export const Button = flowComponent("Button", (props) => {
     },
   };
 
-  const StateIconComponent = isSucceeded
-    ? IconSucceeded
-    : isFailed
-      ? IconFailed
-      : isPending
-        ? LoadingSpinner
-        : undefined;
-
-  const stateIcon = StateIconComponent && (
-    <StateIconComponent
-      size={size}
-      className={styles.stateIcon}
-      status={isFailed ? "danger" : isSucceeded ? "success" : undefined}
-    />
-  );
+  const stateIcon = isSucceeded ? (
+    <IconSucceeded size={size} className={styles.stateIcon} color="success" />
+  ) : isFailed ? (
+    <IconFailed size={size} className={styles.stateIcon} color="danger" />
+  ) : isPending ? (
+    <LoadingSpinner size={size} className={styles.stateIcon} />
+  ) : undefined;
 
   const isStringContent = extractTextFromFirstChild(children) !== undefined;
 
-  return (
-    <Aria.Button
-      className={rootClassName}
-      ref={ref}
-      slot={slot}
-      {...(isReadOnly === true ? { "data-readonly": true } : {})}
-      {...restProps}
-    >
+  const content = (
+    <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
           <span className={styles.content}>
@@ -168,6 +200,34 @@ export const Button = flowComponent("Button", (props) => {
         </Wrap>
       </PropsContextProvider>
       {stateIcon}
+    </>
+  );
+
+  if (elementType === "span") {
+    const spanProps = filterDOMProps(restProps, { global: true });
+
+    return (
+      <span
+        {...spanProps}
+        data-disabled={restProps.isDisabled || undefined}
+        className={
+          typeof rootClassName === "string" ? rootClassName : undefined
+        }
+      >
+        {content}
+      </span>
+    );
+  }
+
+  return (
+    <Aria.Button
+      className={rootClassName}
+      ref={ref}
+      slot={slot}
+      {...(isReadOnly === true ? { "data-readonly": true } : {})}
+      {...restProps}
+    >
+      {content}
     </Aria.Button>
   );
 });

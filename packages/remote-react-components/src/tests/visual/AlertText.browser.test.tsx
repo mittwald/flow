@@ -1,15 +1,14 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
-
-const states = ["info", "success", "warning", "danger", "unavailable"] as const;
+import { statusTypes } from "@mittwald/flow-react-components/internal";
 
 test.each(testEnvironments)(
   "AlertText states (%s)",
   async ({ testScreenshot, render, components: { AlertText, Flex } }) => {
     await render(
       <Flex direction="column" gap="m">
-        {states.map((status) => (
+        {statusTypes.map((status) => (
           <AlertText key={status} status={status}>
             {firstLetterToUppercase(status)}
           </AlertText>
@@ -31,24 +30,24 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column">
         <AlertText>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star, an
+          armored space station.
         </AlertText>
         <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
-          quam quas vel voluptas
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          blow against the Empire
           <AlertText>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
-            quam quas vel voluptas
+            A long time ago in a galaxy far, far away the Rebel Alliance struck
+            a blow against the Empire
           </AlertText>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
-          quam quas vel voluptas
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          blow against the Empire
         </Text>
         <Heading>
           <AlertText>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
+            A long time ago in a galaxy far, far away the Empire finally fell
           </AlertText>
         </Heading>
       </Flex>,

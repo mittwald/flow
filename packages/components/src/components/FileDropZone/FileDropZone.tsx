@@ -12,7 +12,6 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { DropEvent, FocusableElement } from "@react-types/shared";
-import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileDropZoneProps
@@ -22,6 +21,7 @@ export interface FileDropZoneProps
     PropsWithChildren,
     Pick<Aria.InputProps, "accept" | "multiple" | "name">,
     Pick<Aria.DropZoneProps, "isDisabled"> {
+  /** Called with the dropped or selected files whenever the selection changes. */
   onChange?: FileInputOnChangeHandler;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
@@ -47,7 +47,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       FieldErrorCaptureContext,
       fieldProps,
       fieldPropsContext,
-    } = useFieldComponent(props);
+    } = useFieldComponent(props, "FileDropZone");
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
     const rootClassName = clsx(
@@ -89,10 +89,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       const files = await Promise.all(
         fileDropItems
           .filter((f) => !accept || accept?.includes(f.type))
-          .map(async (f) => {
-            const file = await f.getFile();
-            return await addAwaitedArrayBuffer(file);
-          }),
+          .map(async (f) => await f.getFile()),
       );
 
       if (files.length > 0) {

@@ -1,0 +1,330 @@
+# mittwald Flow — Agent Guide
+
+Canonical guidance for AI coding agents (and a good primer for humans) working
+in this repository. Package-specific deep dives live next to the code — see
+[Where to look next](#where-to-look-next).
+
+## What this project is
+
+mittwald **Flow** is the design system of [mittwald](https://www.mittwald.de): a
+React component library plus a remote-DOM rendering system that lets
+[mStudio](https://developer.mittwald.de) extensions render sandboxed UI inside
+the mittwald backoffice using real Flow components.
+
+- User documentation: <https://flow.mittwald.de>
+- Storybook: <https://storybook.flow-components.de>
+- Remote rendering is based on a fork of
+  [Shopify remote-dom](https://github.com/Shopify/remote-dom)
+
+## The three systems
+
+### 1. Design system core
+
+React components in `packages/components` (most wrap
+[react-aria-components](https://react-spectrum.adobe.com/react-aria/components.html)
+for accessibility), styled with SCSS modules and design-token CSS variables.
+Icon sets, a standalone stylesheet package, and the docs site build on top of
+it. Patterns are documented in
+[packages/components/AGENTS.md](packages/components/AGENTS.md).
+
+### 2. Remote DOM ("flr" = **Fl**ow **R**emote)
+
+mStudio extensions run in a hidden iframe and render UI that the host
+materializes with real Flow components. For the full picture — end-to-end flow,
+the mental model, and what remote-capability means when you implement a
+component — see [docs/remote-ui.md](docs/remote-ui.md).
+
+```
+extension (iframe)                          host (mStudio)
+RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteReceiver
+   │  @quilted/threads connection              │
+   └─ hidden remote DOM (flr-* elements) ───►  maps flr-* to Flow components
+```
+
+- `remote-core` owns connection + serialization (`@quilted/threads`). The
+  protocol is **versioned** — the host negotiates with different remote versions
+  at connection time. Keep this layer backwards compatible.
+- Components tagged `/** @flr-generate all */` get generated artifacts: a
+  `view.ts` next to the component, view components in
+  `packages/components/src/views/`, and files under `src/auto-generated/` in
+  `remote-elements`, `remote-react-components` and `remote-react-renderer`.
+- **Props of `@flr-generate` components are a contract with extension
+  developers.** Avoid breaking changes. When an API must change, keep the old
+  path working and log usage with `useWarnDeprecation` (from
+  `DeprecationWarningProvider`) so extension developers can be informed about
+  deprecation paths they still use. `useWarnDeprecation` is the standard way to
+  flag any deprecated runtime path — see
+  [Deprecating an API](packages/components/AGENTS.md#deprecating-an-api).
+- Inside components that are part of the `flr-universal` export surface, compose
+  other Flow components through their **views** (`@/views/*`) — views
+  automatically switch to the remote counterpart in a remote context.
+
+### 3. Token pipeline
+
+`design-tokens` YAML files are defined together with UX — **design authority**.
+Base tokens (colors, font, sizes, …) are taboo — never invent or modify them.
+Adding **component tokens** for a new component is fine: model them on existing
+components and ask when unsure. [style-dictionary](https://styledictionary.com/)
+compiles YAML → `dist/css` (CSS variables), `dist/json` (full, with build
+metadata) and `dist/json-runtime` (values only — what browser bundles import).
+
+## Repository map
+
+nx + pnpm workspace monorepo. Node `>=24`, pnpm pinned via `packageManager` (use
+corepack). Several packages ship their own `AGENTS.md` — **always read the
+nearest `AGENTS.md` before working in a package.**
+
+| Path                                    | Package                                  | Role                                                                                       |
+| --------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `packages/components`                   | `@mittwald/flow-react-components`        | The heart: all React components.                                                           |
+| `packages/design-tokens`                | `@mittwald/flow-design-tokens`           | Token source (YAML, design authority) → CSS vars + JSON via style-dictionary.              |
+| `packages/icons-base`                   | private                                  | Icon source of truth (`src/icons.yaml`) + shared generator tooling.                        |
+| `packages/icons`, `packages/icons-pro`  | `@mittwald/flow-icons(-pro)`             | Published icon sets, **fully generated** from `icons-base` (Tabler / FontAwesome).         |
+| `packages/stylesheet`                   | `@mittwald/flow-stylesheet`              | Publishes the components' `all.css` as a standalone CSS package.                           |
+| `packages/core`                         | private                                  | Shared utilities: the shared Vitest browser config.                                        |
+| `packages/remote-core`                  | `@mittwald/flow-remote-core`             | Connection + serialization layer (versioned protocol).                                     |
+| `packages/remote-elements`              | `@mittwald/flow-remote-elements`         | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
+| `packages/remote-react-components`      | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
+| `packages/remote-react-renderer`        | `@mittwald/flow-remote-react-renderer`   | Host-side renderer mapping `flr-*` elements to Flow components; map auto-generated.        |
+| `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
+| `packages/react-tunnel`                 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility (MobX-based).                                      |
+| `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components` | Helpers for extension developers (mStudio page header customization).                      |
+| `packages/codemods`                     | `@mittwald/flow-codemods`                | The `upgrade` CLI and the migration catalogue that generates `MIGRATION.md`.               |
+| `packages/typescript-config`            | private                                  | Shared tsconfig presets (`base`, `library`, `web-library`, `react-library`, `nextjs`).     |
+| `apps/docs`                             | private                                  | User documentation site (Next.js); content in `src/content`, deployed to flow.mittwald.de. |
+| `apps/remote-dom-demo`                  | private                                  | Demo app for remote rendering. Remote-capable components should have a demo here.          |
+
+## Technology stack
+
+- [nx](https://nx.dev/) — task orchestration (`affected`, caching, target deps)
+- [pnpm](https://pnpm.io/) — workspace package manager
+- [lerna-lite](https://github.com/lerna-lite/lerna-lite) — only used for
+  publishing (versioning + changelogs from conventional commits)
+- [Vite](https://vite.dev/) — component build; [vitest](https://vitest.dev/)
+  incl. [browser mode](https://vitest.dev/guide/browser/) (Playwright-backed)
+- [Storybook](https://storybook.js.org/) — component dev environment
+- [react-aria-components](https://react-spectrum.adobe.com/react-aria/components.html)
+  — accessibility foundation
+- [style-dictionary](https://styledictionary.com/) — design token compilation
+- [SCSS modules](https://github.com/css-modules/css-modules) — component styling
+- [jscodeshift](https://github.com/facebook/jscodeshift) — consumer codemods
+
+## Commands
+
+```shell
+corepack enable && pnpm install            # setup
+pnpm nx dev components                     # component dev env (Storybook, :6006)
+pnpm build                                 # build everything (runs all generators)
+
+pnpm test                                  # all unit + compile + link tests
+pnpm affected:test                         # only affected vs. main (what CI runs)
+pnpm nx test:unit components               # unit tests for one package
+pnpm nx test:compile components            # tsc --noEmit for one package
+
+pnpm test:browser:prepare                  # install Playwright browsers (once)
+pnpm nx test:browser components --browser.name=webkit
+pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
+pnpm nx test:visual:update remote-react-components              # update visual snapshots
+
+pnpm lint                                  # eslint + stylelint + format:check (pre-push hook runs this)
+pnpm format                                # prettier --write
+pnpm format:check                          # prettier --check (part of pnpm lint)
+```
+
+## Generated code — must be committed
+
+CI enforces `git diff --exit-code` after building: **generated files are
+committed, and hand-editing them is futile** (headers say "auto-generated").
+
+| Generated artifact                                                                   | Generator                                    |
+| ------------------------------------------------------------------------------------ | -------------------------------------------- |
+| `packages/components/src/components/**/view.ts` + `src/views/*`                      | `pnpm nx build:remote-components components` |
+| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**`   | same as above                                |
+| `packages/components/src/**/*.module.d.scss.ts` (CSS-module class-name types)        | `pnpm nx build:scss-types components`        |
+| `packages/components/src/components/Icon/components/icons/*`                         | `pnpm nx build:icons components`             |
+| `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`             | `pnpm nx build:icons icons` / `icons-pro`    |
+| `packages/components/dist/assets/doc-properties.json` (from prop JSDoc)              | `pnpm nx build:docs-properties components`   |
+| `packages/components/dist/assets/component-index.json` (consumer-facing index)       | `pnpm nx build:component-index components`   |
+| `packages/components/MIGRATION.md` + `packages/codemods/src/migrations.generated.ts` | `pnpm nx build codemods`                     |
+| `packages/codemods/src/flowPackages.generated.ts`                                    | same as above                                |
+
+Changed props on an `@flr-generate` component, added an icon, edited prop JSDoc,
+or changed a `.module.scss`'s class names? Regenerate (or simply `pnpm build`)
+and commit the results.
+
+## Development workflow
+
+- **Conventional Commits** with component/package scope — `fix(Button): …`,
+  `feat(components): …`. Releases and changelogs are generated from them.
+- Merged PRs trigger the publish workflow (lerna-lite, fixed versioning across
+  packages) — **unless the merge is docs-, CI- or tooling-only**, which
+  publishes nothing at all (no npm release, no version bump commit, no tag, no
+  GitHub Release). The rule lives in
+  `.github/scripts/release-relevance-lib.mjs`; see
+  [docs/release-workflow.md](docs/release-workflow.md).
+- **Maintain the nx wiring for scripts.** Every package script that nx
+  orchestrates needs correct target metadata: `dependsOn` (ordering),
+  `inputs`/`outputs` (caching, affected detection) in the package's
+  `project.json` or in `nx.json` targetDefaults. When adding a script or a new
+  generated artifact, wire these up — otherwise caching serves stale results and
+  `nx affected` misses work. **A gitignored file cannot be an `inputs` glob** —
+  nx hashes only files in its workspace file map (git-tracked / non-ignored), so
+  a path like `{projectRoot}/dist/…` silently contributes nothing to the hash
+  and the task serves stale cache on upstream changes. To make a task's hash
+  track a **dependency task's output**, use
+  `{ "dependentTasksOutputFiles": "**/*", "transitive": false }` (nx hashes its
+  own task outputs) — `dependsOn` alone only orders execution, it does not fold
+  the dependency's hash into the dependent. And **every** file a task produces
+  belongs in `outputs`, including a gitignored sidecar like a `*.tsbuildinfo`:
+  nx restores a cached task's outputs wholesale, so a buildinfo left out of the
+  list can survive from one run while `dist` is restored from another — after
+  which `tsc` finds it current, emits nothing, and the build reports success
+  over an incomplete `dist`.
+- **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
+  `pnpm install` — expect installs after switching branches. `pre-push` runs
+  `pnpm lint` — which includes `format:check`, so a stray unformatted
+  `.md`/`.json`/`.yml` blocks the push, not the commit; `pnpm format` fixes it.
+  The hooks are written by simple-git-hooks' `postinstall` (allowlisted in
+  `allowBuilds`), so a **runner** gets them too — CI workflows that write git
+  set `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to opt out (#2932).
+- **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
+  `@mittwald/*`) — brand-new versions won't resolve.
+- **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
+  week and merges them itself once CI and the visual suite are green — see
+  [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
+  deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
+  closed PR only makes it come back next week.
+- **Breaking changes for consumers** ship with a **catalogue entry** in
+  `packages/codemods/src/migrations` — which generates the `MIGRATION.md` entry
+  — and a codemod when the change is mechanically decidable. The entry's `apply`
+  field is the instruction an agent executes; fill it even when there is no
+  codemod, because for those entries it is the whole migration.
+- `patches/` contains intentional pnpm dependency patches — leave them alone.
+- **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
+  WebKit only is a pragmatic choice, not a support statement.
+
+## Definition of Done — component work
+
+A new or substantially changed component comes with:
+
+1. Implementation following the patterns in
+   [packages/components/AGENTS.md](packages/components/AGENTS.md)
+2. Stories: `stories/Default.stories.tsx` with realistic args and meaningful
+   variants
+3. A docs page in `apps/docs/src/content/components/<category>/…`
+4. Tests along the testing bar: unit tests for lib functions, browser tests for
+   behavior (see the components AGENTS.md testing section). **New or changed
+   rendered behavior (a new prop, variant, or layout that affects the visual
+   output) gets an added or extended visual test in
+   `packages/remote-react-components/src/tests/visual` — it runs in both the
+   `Local` and `Remote` environments and guards the whole path.** The browser
+   also picks the theme (webkit = light, firefox = dark), so a full run covers
+   both themes.
+5. UI text in `locales/de-DE.locale.json` **and** `locales/en-US.locale.json`
+   (import pattern: i18n section of
+   [packages/components/AGENTS.md](packages/components/AGENTS.md))
+6. Public components exported from `src/components/public.ts`
+   (`flr-universal.ts` additionally, only when remote-capable)
+7. Remote-capable (`@flr-generate`): generated code regenerated + committed, and
+   a demo page in `apps/remote-dom-demo`
+8. Visual changes: run the suite on demand with the `run-visual-tests` PR label
+   (verify only); for intentional changes, update snapshots
+   (`test:visual:update` or the `update-screenshots` PR label)
+
+## Hard rules
+
+- **Never hand-edit generated files** — regenerate and commit instead.
+- **Base design tokens are taboo; visual design comes from UX** — compose
+  existing tokens and patterns. Adding component tokens for a new component is
+  fine (model them on existing components); when extending tokens, ask instead
+  of inventing.
+- **No breaking changes to `@flr-generate` component props** — deprecate with
+  `useWarnDeprecation` instead.
+- **Use views (`@/views/*`) for internal composition** in `flr-universal`
+  components.
+- **Only remote-capable components in a `PropsContext`** (see the PropsContext
+  section of [packages/components/AGENTS.md](packages/components/AGENTS.md)).
+
+## Writing style (issues, ADRs, PR/commit bodies, code comments)
+
+Applies to prose we author — issues, ADRs, PR and commit bodies, code comments.
+Not to user-facing UI text (that lives in `locales/*` and follows product
+voice).
+
+Write **dense and simple**. Cut words, never content. Every fact stays —
+constraints, edge cases, reasons, trade-offs, links. Brevity filters words, not
+substance. Litmus test: if a sentence can be deleted without losing information,
+delete it.
+
+**Be dense:**
+
+- **Lead with the point.** First sentence = the decision, problem, or ask. Don't
+  restate the title or open with "In this issue we will…".
+- **No filler.** Drop "it's worth noting", "basically", "in order to", hedging
+  stacks ("might possibly perhaps").
+- **No summary that just repeats the body.** Either the TL;DR replaces the
+  detail or the detail replaces it — not both.
+- **Cut marketing adjectives.** "robust", "seamless", "comprehensive",
+  "powerful" carry no information. Delete them, or replace with the concrete
+  fact.
+- **Structure only when it earns its keep.** Three lines don't need three
+  headings.
+
+**Be simple:**
+
+- **Short sentences, one idea each.** Break a clause chain into two or three
+  sentences.
+- **Simplify the glue, keep domain terms exact.** "in order to" → "to", but a
+  symbol name, a token, or a version number stays precise.
+- **Active voice, concrete subject.** "Flip the default and you change X" over
+  "flipping the default results in a change to X".
+- **Unpack lists.** Three options crammed into one sentence → three bullets.
+
+When brevity and clarity conflict, **clarity wins** — a few more words to split
+a dense sentence is a good trade.
+
+## Common failures
+
+Symptom → cause → fix for the footguns that cost the most time here. None of
+these are repo bugs — they are the workflow biting back, and the fix is rarely
+where the error points.
+
+> **Agents:** hit a footgun that cost real time and isn't covered yet? Add a row
+> — here, or in the nearest package's `AGENTS.md`. Keep the bar high: only a
+> **verified, recurring workflow trap** with its real error signature, and
+> **reproducible + non-obvious**. A genuine repo bug is not a row — fix it.
+
+| Symptom                                                                                                                                                                                                                                                                      | Cause                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Fix                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI step **"Check all generated code is committed"** fails (`git diff --exit-code`)                                                                                                                                                                                           | You changed an `@flr-generate` component's props, an icon, prop JSDoc, or a `.module.scss`'s class names and didn't regenerate — or regenerated but didn't commit                                                                                                                                                                                                                                                                                                                       | `pnpm build` (or the specific generator from the [Generated code](#generated-code--must-be-committed) table), then commit the changed `view.ts`, `src/views/*`, `src/auto-generated/**`, `*.module.d.scss.ts`, icon, or `doc-properties.json`                                                                                                                                                                    |
+| `test:compile` fails on a new component — the `flowComponent("X", …)` name/props type isn't assignable                                                                                                                                                                       | `flowComponent` names are typed as `keyof` a hand-maintained props registry                                                                                                                                                                                                                                                                                                                                                                                                             | Register the props type in `packages/components/src/components/propTypes/index.ts` (see [The flowComponent factory](packages/components/AGENTS.md#the-flowcomponent-factory))                                                                                                                                                                                                                                    |
+| A package script errors (e.g. **"X is not exported from `@mittwald/flow-…`"**, missing module) or silently uses **stale** output from another package                                                                                                                        | You ran the package script directly (`pnpm --filter <pkg> <script>`, `next dev`, bare `vite`), which builds only that package and skips the `^build` chain that (re)builds and regenerates its workspace dependencies (incl. `view.ts` / `src/auto-generated/**`)                                                                                                                                                                                                                       | **Default to the nx target** — `pnpm nx <target> <pkg>` (e.g. `pnpm nx dev <app>`, `pnpm nx build <pkg>`); its `dependsOn: ["^build", …]` builds and regenerates every dependency first. Reach for a direct single-package script only when the dependencies are already current                                                                                                                                 |
+| An `nx` graph target dies with **"configured to use 10.28.2 of pnpm … your current pnpm is v…"**                                                                                                                                                                             | You prefixed a dependency-graph target with `corepack`; nested per-task pnpm spawns resolve to a pnpm other than the pinned `10.28.2`                                                                                                                                                                                                                                                                                                                                                   | Use **bare `pnpm nx …`** for graph targets (`build`, `dev`, anything with `dependsOn`/`^build`). `corepack pnpm --filter <pkg> <script>` stays fine for single-package scripts                                                                                                                                                                                                                                   |
+| Browser tests fail instantly with a missing-executable / "no browser" error                                                                                                                                                                                                  | Playwright browsers not installed in this environment                                                                                                                                                                                                                                                                                                                                                                                                                                   | `pnpm test:browser:prepare` once                                                                                                                                                                                                                                                                                                                                                                                 |
+| A visual test stays red in CI after you regenerated screenshots locally on macOS                                                                                                                                                                                             | `test:visual:update` on macOS only writes `-darwin` snapshots; CI gates on the `-webkit-linux` baseline                                                                                                                                                                                                                                                                                                                                                                                 | Push and add the **`update-screenshots`** PR label — CI regenerates the Linux baseline and commits it back. Local `-darwin` regen only helps local macOS runs                                                                                                                                                                                                                                                    |
+| A visual test fails with a **small** diff (`N pixels (ratio 0.01) differ`) and you're tempted to just add `update-screenshots`                                                                                                                                               | A small diff is not automatically noise — a real regression can hide in ~1% (e.g. a logical-property autofix flipping under a `direction: rtl` layout hack, so a toggle handle lands on the wrong side). `update-screenshots` bakes whatever renders _now_ into the baseline, entrenching the bug                                                                                                                                                                                       | **Open the diff image** first (CI job artifacts, or local `.vitest-attachments/**/*-diff-*.png`). Only use `update-screenshots` for a change you confirmed is intentional; otherwise fix the code. Add the verify-only **`run-visual-tests`** label proactively on any styling/layout PR                                                                                                                         |
+| A new dependency **won't resolve** on `pnpm install`                                                                                                                                                                                                                         | `minimumReleaseAge` blocks versions younger than one week (`@mittwald/*` exempt)                                                                                                                                                                                                                                                                                                                                                                                                        | Use an older published version, or wait out the window                                                                                                                                                                                                                                                                                                                                                           |
+| Dev server 500s with **"Can't resolve '&lt;pkg&gt;'"** after merging `main` into a worktree                                                                                                                                                                                  | `pnpm install` ran before the merge pulled in a new dependency                                                                                                                                                                                                                                                                                                                                                                                                                          | Re-run `pnpm install`; a running dev server picks the dep up on the next request                                                                                                                                                                                                                                                                                                                                 |
+| **Scheduled cross-version tests go red _after_ your PR merged** — you removed a component or changed its rendered structure                                                                                                                                                  | Only the **iframe** harness runs on PRs (the `cross-version` job in `test.yml`, gated on `nx affected`). The in-process harness and the per-version matrix run only in the scheduled workflow, because they network-install every old published version. Removing a component or adding/removing/reordering host-output elements produces an old-vs-current structural divergence, and the version gates weren't adjusted before merge                                                  | Add the **`run-cross-version-tests`** PR label (`test-cross-version-label.yml`) to run both harnesses on the branch. Fix real divergences by gating per-version — `test.skipIf(crossVersion({ below }))` or a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. See [remote-react-components/CONTRIBUTE.md](packages/remote-react-components/CONTRIBUTE.md#running-them-on-a-pull-request) |
+| A PostCSS plugin you added to a package's `vite.config.ts` behaves differently in the **release build** than in dev, or a plugin you added to `vite.build.config.ts` seems to have no effect                                                                                 | `mergeConfig` **concatenates** `css.postcss.plugins`, so the build config runs the dev config's plugins _first_ and then its own. Two plugins that transform the same construct silently compose in that order, and nothing in the emitted CSS reveals it                                                                                                                                                                                                                               | Design the pair to compose (have the earlier plugin step aside when it detects the later one via `result.processor.plugins`), or replace `css.postcss` after the merge instead of extending it. Assert the built artifact, not just the plugin in isolation — a unit test and a test project with their own config both stay green while the release build is wrong                                              |
+| A second **browser** vitest project makes the run die at startup with **"Cannot define a nested project for a &lt;browser&gt; browser. The project name '&lt;name&gt; (&lt;browser&gt;)' was already defined"**                                                              | Vitest names the per-browser child projects by writing onto the `browser.instances` objects. Spreading the shared `vitestBrowserTestConfig` into two projects shares those objects by reference, so the second project's name overwrites the first                                                                                                                                                                                                                                      | Give each browser project its own copies: `instances: vitestBrowserTestConfig.browser.instances.map((instance) => ({ ...instance }))`. Also check the package's `test:browser` script actually selects the new project — a bare `--project=browser` silently skips it, a glob like `--project=browser*` (as `test:unit` already does with `unit*`) picks both up                                                 |
+| A CI workflow that runs `pnpm install` and then pushes, merges or checks out spends minutes in `eslint`/`stylelint`/`prettier`, or reinstalls in the middle of a merge                                                                                                       | simple-git-hooks is allowlisted in `allowBuilds`, so its `postinstall` writes `.git/hooks` on **every** `pnpm install` — runners included. `pre-push` is `pnpm lint`, `post-merge`/`post-checkout` are `pnpm install`                                                                                                                                                                                                                                                                   | Add `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to the workflow's `env` (see `publish.yml`). Where a failed push would strand something already published, also pass `git push --no-verify` — that guard sits at the push and does not depend on the env var staying put (#2932)                                                                                                                                        |
+| A visual test that hovers before `testScreenshot` captures the **non-hovered** state — the diff looks as if the CSS never applied                                                                                                                                            | `testScreenshot` calls `setNeutralPointerPosition()` before every screenshot, so a CSS `:hover` state is gone by capture time. An overlay opened by hover survives (`Tooltip`) — its visibility is state, not a CSS `:hover` rule; a pure `:hover` style never does                                                                                                                                                                                                                     | Assert the computed style in a `*.browser.test.tsx` instead of screenshotting it. And hover the **label**, not the `input` inside it — stacked icons cover the input and Playwright refuses with `<svg …> intercepts pointer events`                                                                                                                                                                             |
+| `test:compile` fails in unrelated shared code with **`Property 'children' does not exist on type 'Partial<XProps>'`** right after you registered a new component                                                                                                             | `dynamic()` and other shared helpers are typed over the **union of every** registered props type, so code reading `p.children` breaks as soon as one registered component has no `children` (`Field.tsx`, `flowComponent.browser.test.tsx`)                                                                                                                                                                                                                                             | Declare `children?: never` on the new props type. It keeps the union accessible and documents that the component takes no children — do **not** add a real `children` slot you then ignore                                                                                                                                                                                                                       |
+| A `ReactElement`-valued prop renders fine in the visual suite's **Remote** environment but kills a real remote connection with **`DataCloneError: Symbol(react.transitional.element) could not be cloned`** (the host then shows `Remote rendering failed: Timeout reached`) | The prop was generated as a **remote property**, and properties travel through `postMessage`/structured clone, which cannot carry a React element. `remote-dom-react` turns an element-valued prop into a slotted child _only_ when the element declares it as a slot (`Element.remoteSlotDefinitions.has(prop)`), and the generator declares a slot only for props typed exactly `ReactNode` or listed in `@flr-slot-props` (`dev/remote-components-generator/lib/propClassifiers.ts`) | Add `@flr-slot-props <propA>, <propB>` to the component's JSDoc and regenerate — the prop then arrives as a slotted child and any React subtree works, including a raw `<svg>` or a Tabler icon. Verify in `apps/remote-dom-demo` over the iframe connection: the visual suite's Remote environment is **in-process** and never serializes, so it cannot see this class of bug                                   |
+| `vitest run --update <file>` rewrites **every** baseline instead of the one file's, and `git status` shows snapshots you never touched                                                                                                                                       | `--update` takes an optional value, so it swallows the positional test filter that follows it. The run then matches all files, updates all of them, and reports the full test count (354, not 2) — the only signal that anything went wrong                                                                                                                                                                                                                                             | Put the filter **before** the flag (`vitest run <file> --update`) or pin the flag's value (`--update=true <file>`). Check `git status` after any `--update` and revert baselines outside your change; a stray one is indistinguishable from an intentional update once committed                                                                                                                                 |
+| A baseline for a component you never touched changes in your PR, or a scenario starts failing right after an unrelated PR merged with `update-screenshots`                                                                                                                   | The `update-screenshots` label runs `pnpm test:visual --update` over the **whole** suite and then `git add -A` — it is not scoped to the PR's diff. Any scenario that is failing or flaky at that moment gets whatever renders then committed as its new truth                                                                                                                                                                                                                          | Only apply the label when the suite is otherwise green, and read the resulting commit's file list before merging. #2945 (a CodeBlock change) took a tooltip-less frame of a racy `Tooltip` scenario this way and committed it as the `firefox-linux` baseline, contradicting the three beside it and keeping the scheduled run red in both environments (#2985)                                                  |
+| Hand-edited `MIGRATION.md` reverts on the next build, or CI fails "Check all generated code is committed"                                                                                                                                                                    | `MIGRATION.md` is generated from `packages/codemods/src/migrations/<id>/entry.md`                                                                                                                                                                                                                                                                                                                                                                                                       | Edit the catalogue entry, run `pnpm nx build codemods`, commit both                                                                                                                                                                                                                                                                                                                                              |
+
+## Where to look next
+
+| Topic                                       | Read                                                                                    |
+| ------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Component patterns, styling, testing, i18n  | [packages/components/AGENTS.md](packages/components/AGENTS.md)                          |
+| Remote connection & serialization           | [packages/remote-core/AGENTS.md](packages/remote-core/AGENTS.md)                        |
+| Remote elements / React API / host renderer | `packages/remote-{elements,react-components,react-renderer}/AGENTS.md`                  |
+| Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                  |
+| Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                          |
+| Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |
+| Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md) |
+| Remote demo app                             | [apps/remote-dom-demo/AGENTS.md](apps/remote-dom-demo/AGENTS.md)                        |

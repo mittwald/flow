@@ -21,14 +21,16 @@ import { FieldError } from "@/components/FieldError";
 const submitAction = action("submit");
 
 const generateFromString = (value: string | undefined = "") => {
-  return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
-    const email = `${value.split("@")[0]}@${d}`;
-    return (
-      <Option key={email} value={email} textValue={email}>
-        {email}
-      </Option>
-    );
-  });
+  return ["rebellion.org", "empire.gov", "jedi.order", "mandalore.net"].map(
+    (d) => {
+      const email = `${value.split("@")[0]}@${d}`;
+      return (
+        <Option key={email} value={email} textValue={email}>
+          {email}
+        </Option>
+      );
+    },
+  );
 };
 
 const meta: Meta<typeof Autocomplete> = {
@@ -46,7 +48,7 @@ const meta: Meta<typeof Autocomplete> = {
 
     const form = useForm<Values>({
       defaultValues: {
-        email: "asd@example.com",
+        email: "luke@rebellion.org",
       },
     });
 
@@ -59,13 +61,13 @@ const meta: Meta<typeof Autocomplete> = {
           <Field name="email" rules={{ required: "Is required" }}>
             <Autocomplete>
               <TextField>
-                <Label>Test</Label>
+                <Label>Email</Label>
               </TextField>
               {generateFromString(email)}
             </Autocomplete>
           </Field>
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -93,21 +95,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Section>
+          <Field name="field">
+            <Autocomplete {...props}>
+              <TextField>
+                <Label>Email</Label>
+              </TextField>
+              {generateFromString(fieldValue)}
+            </Autocomplete>
+          </Field>
           <Autocomplete {...props}>
-            <TextField>
-              <Label>Test</Label>
+            <TextField isInvalid>
+              <Label>Email</Label>
             </TextField>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
             {generateFromString(fieldValue)}
           </Autocomplete>
-        </Field>
-        <Autocomplete {...props}>
-          <TextField isInvalid>
-            <Label>Test</Label>
-          </TextField>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-          {generateFromString(fieldValue)}
-        </Autocomplete>
+        </Section>
       </Form>
     );
   },
@@ -120,31 +124,41 @@ export const WithFocus: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <Autocomplete {...props}>
             <TextField>
-              <Label>Test</Label>
+              <Label>Email</Label>
             </TextField>
             {generateFromString(fieldValue)}
           </Autocomplete>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

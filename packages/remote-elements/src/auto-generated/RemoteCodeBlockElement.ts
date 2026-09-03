@@ -11,25 +11,12 @@ export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockEle
 
   static override get remoteProperties() {
     return {
-      CodeTag: {},
-      PreTag: {},
       className: {},
       code: {},
-      codeTagProps: {},
-      color: {},
       copyable: {},
-      customStyle: {},
       language: {},
-      lineNumberContainerStyle: {},
-      lineNumberStyle: {},
-      lineProps: {},
-      renderer: {},
-      showInlineLineNumbers: {},
       showLineNumbers: {},
-      startingLineNumber: {},
-      useInlineStyles: {},
-      wrapLines: {},
-      wrapLongLines: {},
+      truncateLines: {},
     };
   }
 

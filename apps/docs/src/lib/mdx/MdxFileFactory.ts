@@ -3,14 +3,16 @@ import * as path from "path";
 import { serialize } from "next-mdx-remote/serialize";
 import jetpack from "fs-jetpack";
 import type {
+  Anchor,
   MdxFileExamples,
   MdxFileMeta,
   StaticParams,
 } from "@/lib/mdx/MdxFile";
-import { MdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile, topAnchorId } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
-import slugify from "slugify";
+import { absoluteUrl, pagePath, rawMarkdownPath } from "@/lib/llms/siteUrls";
+import { extractAnchors } from "@/lib/mdx/anchors";
 
 export class MdxFileFactory {
   public static async fromDir(
@@ -46,7 +48,7 @@ export class MdxFileFactory {
     const mdxFiles = await MdxFileFactory.fromDir(contentFolder);
 
     return mdxFiles.map((mdx) =>
-      contentFolder.includes("04-components")
+      path.basename(contentFolder) === "components"
         ? {
             group: mdx.slugs[0],
             component: mdx.slugs[1],
@@ -60,10 +62,30 @@ export class MdxFileFactory {
   public static async generateMetadata(
     contentFolder: string,
     params: StaticParams,
+    options: { tab?: string } = {},
   ): Promise<Metadata> {
     const mdxFile = await MdxFileFactory.fromParams(contentFolder, params);
+
+    const section = path.basename(contentFolder);
+    const segments =
+      "slug" in params
+        ? [section, ...params.slug]
+        : [
+            section,
+            params.group,
+            params.component,
+            ...(options.tab ? [options.tab] : []),
+          ];
+
     return {
       title: mdxFile?.getTitle(),
+      description: mdxFile?.mdxSource.frontmatter.description,
+      alternates: {
+        canonical: absoluteUrl(pagePath(segments)),
+        types: {
+          "text/markdown": absoluteUrl(rawMarkdownPath(segments)),
+        },
+      },
     };
   }
 
@@ -76,7 +98,16 @@ export class MdxFileFactory {
 
     const mdxSource = await MdxFileFactory.getMdxSource(filename);
 
-    const anchors = MdxFileFactory.getAnchors(filename);
+    // The page heading comes from the frontmatter, not the MDX, so
+    // `getAnchors` cannot see it.
+    const anchors: Anchor[] = [
+      {
+        slug: topAnchorId,
+        text: MdxFile.titleFrom(mdxSource.frontmatter, slugs),
+        level: 2,
+      },
+      ...MdxFileFactory.getAnchors(filename),
+    ];
 
     const examples = MdxFileFactory.getExamples(filename);
 
@@ -89,34 +120,7 @@ export class MdxFileFactory {
       throw new Error(`Could not read file: ${filename}`);
     }
 
-    let currentH1: string;
-
-    return fileContent
-      .split("\n")
-      .filter((line) => line.startsWith("# ") || line.startsWith("## "))
-      .map((line) => {
-        if (line.startsWith("# ")) {
-          const text = line.substring(2).trim().replaceAll(".", "");
-          currentH1 = text;
-
-          return {
-            slug: slugify(text, { lower: true, strict: true }),
-            text,
-            level: 2,
-          };
-        }
-
-        const h2Text = line.substring(3).trim();
-
-        return {
-          slug: slugify(currentH1 ? `${currentH1}-${h2Text}` : h2Text, {
-            lower: true,
-            strict: true,
-          }),
-          text: h2Text,
-          level: 3,
-        };
-      });
+    return extractAnchors(fileContent);
   }
 
   private static async getMdxSource(

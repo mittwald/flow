@@ -12,6 +12,8 @@ import { ThreadNestedIframe } from "@quilted/threads";
 interface Options {
   root: HTMLDivElement;
   onPathnameChanged?: (pathname: string) => void;
+  onHostError?: (error: string) => void;
+  packageVersion?: string;
 }
 
 const incompatibleParentFrameError = () =>
@@ -31,7 +33,7 @@ export const connectRemoteReceiver = (
 export const connectHostRenderRoot = async (
   options: Options,
 ): Promise<RemoteToHostConnection> => {
-  const { root, onPathnameChanged } = options;
+  const { root, onPathnameChanged, onHostError, packageVersion } = options;
 
   const connection = new ThreadNestedIframe<HostExports, RemoteExports>({
     serialization: new FlowThreadSerialization(),
@@ -41,6 +43,9 @@ export const connectHostRenderRoot = async (
       setPathname: async (pathname) => {
         onPathnameChanged?.(pathname);
       },
+      setHostError: async (error) => {
+        onHostError?.(error);
+      },
     },
   });
 
@@ -49,7 +54,10 @@ export const connectHostRenderRoot = async (
   }
 
   try {
-    await connection.imports.setIsReady(Version.v3);
+    await connection.imports.setIsReady({
+      version: Version.v5,
+      packageVersion,
+    });
 
     if (typeof mwExtBridge !== "undefined") {
       mwExtBridge.connection = connection.imports;

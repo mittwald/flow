@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { DonutChart } from "../index";
-import React from "react";
 
 const meta: Meta<typeof DonutChart> = {
   title: "Data Visualisation/DonutChart",
@@ -23,14 +22,18 @@ const meta: Meta<typeof DonutChart> = {
   parameters: {
     controls: { exclude: ["segments"] },
   },
-  render: (props) => <DonutChart value={30} {...props} />,
+  render: (props) => <DonutChart aria-label="Storage" value={30} {...props} />,
 };
 
 export default meta;
 
 type Story = StoryObj<typeof DonutChart>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    controls: { exclude: ["segments", "showLegend", "legendPosition"] },
+  },
+};
 
 export const WithUnit: Story = {
   args: {
@@ -38,46 +41,49 @@ export const WithUnit: Story = {
     maxValue: 600,
     value: 300,
   },
+  parameters: {
+    controls: {
+      exclude: [
+        "segments",
+        "showLegend",
+        "legendPosition",
+        "formatOptions",
+        "maxValue",
+        "value",
+      ],
+    },
+  },
 };
 
 export const WithSegments: Story = {
   args: {
     segments: [
-      { title: "Item 1", value: 50 },
-      { title: "Item 2", value: 25 },
-      { title: "Item 3", value: 12 },
+      { title: "Death Star plans", value: 28 },
+      { title: "Star charts", value: 24 },
+      { title: "Holograms", value: 8 },
+      { title: "Comm logs", value: 10 },
+      { title: "Droid backups", value: 12, color: "yellow" },
+      { title: "Archives", value: 6, color: "#555" },
     ],
-    size: "l",
-  },
-  render: (props) => <DonutChart aria-label="storage" {...props} />,
-};
-
-export const WithLegend: Story = {
-  args: {
-    segments: [
-      { title: "Item 1", value: 28 },
-      { title: "Item 2", value: 24 },
-      { title: "Item 3", value: 20 },
-      { title: "Item 4", value: 10 },
-      { title: "Item 5", value: 12, color: "yellow" },
-      { title: "Item 6", value: 6, color: "#555" },
-    ],
-    size: "l",
+    legendPosition: "right",
     showLegend: true,
-    legendPosition: "top",
   },
-  render: (props) => <DonutChart aria-label="storage" {...props} />,
+  parameters: {
+    controls: {
+      exclude: ["segments", "status"],
+    },
+  },
 };
 
 export const WithTextValue: Story = {
-  args: {
-    maxValue: 600,
+  parameters: {
+    controls: { exclude: ["segments", "showLegend", "legendPosition"] },
   },
   render: (props) => {
     const value = 300;
 
     return (
-      <DonutChart {...props} value={value}>
+      <DonutChart aria-label="Storage" {...props} value={value} maxValue={600}>
         <strong>{value}</strong>
         <small>GB</small>
       </DonutChart>

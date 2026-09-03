@@ -8,9 +8,10 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import { type PropsWithChildren, useEffect, useState } from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import { FieldDescription } from "@/components/FieldDescription";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface TextAreaProps
   extends
@@ -34,6 +35,7 @@ export interface TextAreaProps
 
 /** @flr-generate all */
 export const TextArea = flowComponent("TextArea", (props) => {
+  const warnDeprecation = useWarnDeprecation();
   const {
     children,
     placeholder,
@@ -45,6 +47,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     showCharacterCount,
     className,
     onChange,
+    isReadOnly,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -52,12 +55,23 @@ export const TextArea = flowComponent("TextArea", (props) => {
     props.defaultValue?.length ?? props.value?.length ?? 0,
   );
 
+  if (allowHorizontalResize !== undefined) {
+    warnDeprecation(
+      "The 'allowHorizontalResize' prop is deprecated and will be removed in a future release. Use 'allowResize' instead.",
+    );
+  }
+  if (allowVerticalResize !== undefined) {
+    warnDeprecation(
+      "The 'allowVerticalResize' prop is deprecated and will be removed in a future release. Use 'allowResize' instead.",
+    );
+  }
+
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "TextArea");
 
   let { allowResize } = props;
   if (allowVerticalResize) {
@@ -79,6 +93,10 @@ export const TextArea = flowComponent("TextArea", (props) => {
   );
 
   const handleChange = (v: string) => {
+    if (isReadOnly) {
+      return;
+    }
+
     if (showCharacterCount) {
       setCharactersCount(v.length);
     }
@@ -87,9 +105,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
     }
   };
 
-  const translation = useLocalizedStringFormatter(locales);
+  const translation = useLocalizedStringFormatter(locales, "TextArea");
 
-  const charactersCountDescription = translation.format("textArea.characters", {
+  const charactersCountDescription = translation.format("characters", {
     count: charactersCount,
     maxCount: props.maxLength ?? 0,
   });
@@ -97,7 +115,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const localRef = useObjectRef(ref);
 
   const getHeight = (rows: number) => {
-    return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
+    return `calc(var(--line-height-m) * ${rows} + (var(--form-control--padding-y) * 2))`;
   };
 
   const [resized, setResized] = useState(false);
@@ -165,12 +183,15 @@ export const TextArea = flowComponent("TextArea", (props) => {
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
         <Aria.TextArea
           rows={rows}
+          {...(isReadOnly ? { "data-readonly": true } : {})}
+          aria-readonly={isReadOnly}
           aria-hidden={props["aria-hidden"]}
           placeholder={placeholder}
           className={inputClassName}
           ref={localRef}
           onChange={updateHeight}
           style={{
+            caretColor: isReadOnly ? "transparent" : undefined,
             minHeight: getHeight(rows),
             maxHeight: verticallyResizable
               ? undefined

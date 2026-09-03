@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import SkeletonText from "../SkeletonText";
-import React from "react";
 import { Section } from "@/components/Section";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
@@ -11,7 +10,7 @@ const meta: Meta<typeof SkeletonText> = {
   component: SkeletonText,
   render: (props) => <SkeletonText {...props} />,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
 };
 
@@ -27,7 +26,7 @@ export const OnDarkBackground: Story = {
   },
 };
 
-export const WithWidth: Story = {
+export const CustomWidth: Story = {
   render: (props) => <SkeletonText {...props} width="200px" />,
 };
 

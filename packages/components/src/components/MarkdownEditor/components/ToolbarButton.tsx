@@ -1,7 +1,7 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { type InsertType } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { Button, type ButtonProps } from "@/components/Button";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 
 export interface ToolBarButtonProps extends Pick<
@@ -15,11 +15,15 @@ export interface ToolBarButtonProps extends Pick<
 export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
   const { children, type, onPress, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "MarkdownEditor",
+  );
 
   return (
     <Button
       {...rest}
+      tunnel={null}
       data-button-type={type}
       aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"

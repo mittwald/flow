@@ -16,6 +16,7 @@ export class IncrementalLoaderState<T> {
   public batchLoadingStates: BatchesLoadingState = ["void"];
   public metadata?: unknown = undefined;
   public readonly list: List<T>;
+  public isInitiallyLoading = true;
 
   private constructor(list: List<T>) {
     this.list = list;
@@ -23,11 +24,15 @@ export class IncrementalLoaderState<T> {
       prevDataBatches: false,
       useMergedData: false,
       useIsLoading: false,
+      useIsLoadingMore: false,
       dataBatches: observable.shallow,
       batchLoadingStates: observable.shallow,
       metadata: observable,
       mergedData: computed,
       isLoading: computed,
+      isLoadingMore: computed,
+      isInitiallyLoading: observable,
+      setIsInitiallyLoading: action.bound,
       reset: action.bound,
       setDataBatch: action.bound,
       setBatchLoadingState: action.bound,
@@ -59,6 +64,9 @@ export class IncrementalLoaderState<T> {
     index: number,
     state: AsyncResourceLoadingState,
   ): void {
+    if (state === "error" || state === "loaded") {
+      this.setIsInitiallyLoading(false);
+    }
     if (this.batchLoadingStates[index] !== state) {
       this.batchLoadingStates[index] = state;
     }
@@ -66,6 +74,10 @@ export class IncrementalLoaderState<T> {
 
   public setMetadata(metadata?: unknown): void {
     this.metadata = metadata;
+  }
+
+  public setIsInitiallyLoading(isInitiallyLoading: boolean): void {
+    this.isInitiallyLoading = isInitiallyLoading;
   }
 
   public get mergedData(): T[] {
@@ -90,6 +102,18 @@ export class IncrementalLoaderState<T> {
 
   public useIsLoading(): boolean {
     return useSelector(() => this.isLoading);
+  }
+
+  public get isLoadingMore(): boolean {
+    return this.isLoading && this.dataBatches.length > 0;
+  }
+
+  public useIsLoadingMore(): boolean {
+    return useSelector(() => this.isLoadingMore);
+  }
+
+  public useIsInitiallyLoading(): boolean {
+    return useSelector(() => this.isInitiallyLoading);
   }
 
   public isBatchLoaded(batchIndex: number) {

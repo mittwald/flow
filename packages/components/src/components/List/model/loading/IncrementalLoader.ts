@@ -14,6 +14,7 @@ import { IncrementalLoaderState } from "@/components/List/model/loading/Incremen
 import { hash } from "object-code";
 import type { PropertyName } from "@/components/List/model/types";
 import { useMemo } from "react";
+import { useComponentDefaults } from "@/components/ComponentDefaultsProvider";
 
 const emptyData: never[] = [];
 
@@ -23,6 +24,7 @@ export class IncrementalLoader<T> {
   public readonly manualSorting: boolean;
   public readonly manualFiltering: boolean;
   public readonly manualPagination: boolean;
+  public readonly disableInitialSuspenseBoundary: boolean;
   public readonly loaderState: IncrementalLoaderState<T>;
   public readonly staticDataProperties: PropertyName<T>[] = [];
 
@@ -30,6 +32,16 @@ export class IncrementalLoader<T> {
     const { source } = shape;
 
     this.dataSource = source ?? { staticData: emptyData };
+
+    const {
+      disableInitialSuspenseBoundary: disableInitialSuspenseBoundaryDefault,
+    } = useComponentDefaults("List");
+
+    this.disableInitialSuspenseBoundary =
+      "disableInitialSuspenseBoundary" in this.dataSource
+        ? (this.dataSource.disableInitialSuspenseBoundary ??
+          disableInitialSuspenseBoundaryDefault)
+        : disableInitialSuspenseBoundaryDefault;
 
     const manualPagination =
       "manualPagination" in this.dataSource
@@ -95,7 +107,11 @@ export class IncrementalLoader<T> {
   }
 
   public useIsInitiallyLoading(): boolean {
-    return this.useIsLoading() && this.list.batches.getBatchIndex() === 0;
+    return this.loaderState.useIsInitiallyLoading();
+  }
+
+  public useIsLoadingMore(): boolean {
+    return this.loaderState.useIsLoadingMore();
   }
 
   public useData(): T[] {

@@ -1,0 +1,20 @@
+"use client";
+import type { FC } from "react";
+import {
+  WFrame,
+  WIcon,
+} from "@/app/components/_components/wireframe/primitives";
+import { IconPalette } from "@tabler/icons-react";
+import { Icon } from "@mittwald/flow-react-components";
+
+export const ColorWireframe: FC = () => (
+  <WFrame justifyContent="center">
+    <WIcon size={64}>
+      <Icon>
+        <IconPalette />
+      </Icon>
+    </WIcon>
+  </WFrame>
+);
+
+export default ColorWireframe;

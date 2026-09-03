@@ -59,7 +59,7 @@ html body *:where([class*="flow--"] [class*="flow--"]) {
 html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
-  line-height: var(--line-height--default);
+  line-height: var(--line-height);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
   color: var(--text--color--default);
@@ -104,7 +104,7 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   h4,
   h5,
   h6 {
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
   /*
@@ -118,5 +118,35 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   a {
     text-decoration: none;
     color: inherit;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  :root[data-theme="system"] {
+    [class*="flow--"] {
+      color-scheme: dark;
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]),
+  :root[data-theme="system"] {
+    [class*="flow--"] {
+      color-scheme: light;
+    }
+  }
+}
+
+:root[data-theme="dark"] {
+  [class*="flow--"] {
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="light"] {
+  [class*="flow--"] {
+    color-scheme: light;
   }
 }

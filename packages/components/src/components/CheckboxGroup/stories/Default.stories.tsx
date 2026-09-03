@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { CheckboxGroup } from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { FieldError } from "@/components/FieldError";
@@ -12,6 +11,8 @@ const meta: Meta<typeof CheckboxGroup> = {
   component: CheckboxGroup,
   args: {
     onChange: action("onChange"),
+    isDisabled: false,
+    isReadOnly: false,
   },
   parameters: {
     controls: { exclude: ["onChange"] },
@@ -30,14 +31,6 @@ export default meta;
 type Story = StoryObj<typeof CheckboxGroup>;
 
 export const Default: Story = {};
-
-export const CheckboxGroupDisabled: Story = {
-  args: { isDisabled: true },
-};
-
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
 
 export const CheckboxDisabled: Story = {
   render: (props) => (
@@ -75,13 +68,13 @@ export const WithFieldError: Story = {
 export const ColumnLayout: Story = {
   render: (props) => (
     <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
-      <Label>Options</Label>
-      <Checkbox value="1">Option 1</Checkbox>
-      <Checkbox value="2">Option 2</Checkbox>
-      <Checkbox value="3">Option 3</Checkbox>
-      <Checkbox value="4">Option 4</Checkbox>
-      <Checkbox value="5">Option 5</Checkbox>
-      <Checkbox value="6">Option 6</Checkbox>
+      <Label>Fleet</Label>
+      <Checkbox value="1">X-Wing</Checkbox>
+      <Checkbox value="2">TIE Fighter</Checkbox>
+      <Checkbox value="3">Millennium Falcon</Checkbox>
+      <Checkbox value="4">Star Destroyer</Checkbox>
+      <Checkbox value="5">Y-Wing</Checkbox>
+      <Checkbox value="6">A-Wing</Checkbox>
     </CheckboxGroup>
   ),
 };

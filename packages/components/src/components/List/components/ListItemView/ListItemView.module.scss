@@ -29,17 +29,18 @@
 
   .bottomContent {
     width: 100%;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     display: flex;
     flex-direction: column;
   }
 
   .heading {
     color: var(--text--color--default);
+    overflow-wrap: anywhere;
   }
 
   .header {
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     display: flex;
     gap: var(--list-item--avatar-to-title-spacing);
     max-width: 100%;
@@ -92,10 +93,10 @@
     }
 
     .action {
-      margin-left: auto;
+      margin-inline-start: auto;
 
       button {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
     }
 
@@ -184,18 +185,33 @@
     }
 
     .checkboxContainer {
-      height: 100%;
-      max-height: var(--avatar--size--m);
+      position: absolute;
+      top: var(--list-item--padding);
+      inset-inline-start: var(--list-item--padding);
+      background-color: var(--list-item--checkbox-background-color);
+      border-radius: var(--list-item--checkbox-corner-radius);
+
+      :global(.flow--checkbox .flow--checkbox--icon) {
+        color: var(--list-item--checkbox-color);
+        padding: var(--size-px--xxxs);
+      }
     }
 
     .title {
       width: 100%;
+      min-width: 0;
 
       :global(.flow--heading--heading-content) {
         position: absolute;
         top: var(--list-item--padding);
-        left: var(--list-item--padding);
-        right: var(--list-item--padding);
+        inset-inline: var(--list-item--padding);
+        justify-content: end;
+      }
+    }
+
+    &:has(.checkboxContainer:not(:empty)) {
+      :global(.flow--heading--heading-content) {
+        inset-inline-start: calc(var(--list-item--padding) * 2 + var(--icon--size--m));
       }
     }
 

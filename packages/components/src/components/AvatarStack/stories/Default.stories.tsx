@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import { AvatarStack } from "@/components/AvatarStack";
@@ -10,17 +9,26 @@ import { action } from "storybook/actions";
 const meta: Meta<typeof AvatarStack> = {
   title: "Content/AvatarStack",
   component: AvatarStack,
-  args: { totalCount: 20 },
+  args: { totalCount: 20, size: "m" },
+  argTypes: {
+    size: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l"],
+    },
+  },
+  parameters: {
+    controls: { exclude: ["totalCount", "onCountPress"] },
+  },
   render: (props) => (
     <AvatarStack {...props}>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
     </AvatarStack>
   ),
@@ -36,17 +44,17 @@ export const ClickableAvatars: Story = {
     <AvatarStack {...props} onCountPress={action("count clicked")}>
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Rebel pilot" src={dummyText.imageSrc} />
         </Avatar>
       </Button>{" "}
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Rebel pilot" src={dummyText.imageSrc} />
         </Avatar>
       </Button>{" "}
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Rebel pilot" src={dummyText.imageSrc} />
         </Avatar>
       </Button>
     </AvatarStack>
@@ -58,13 +66,13 @@ export const WithoutTotalCount: Story = {
   render: (props) => (
     <AvatarStack {...props}>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
     </AvatarStack>
   ),

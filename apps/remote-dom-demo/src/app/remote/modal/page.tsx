@@ -16,140 +16,182 @@ import {
   Section,
   Text,
   TextField,
+  useModalController,
 } from "@mittwald/flow-remote-react-components";
 
+const squadronExplainer =
+  "Think of a squadron as your crew. This is where you rally your pilots, " +
+  "assign ships, and plan your next mission.";
+
 export default function Page() {
+  const controller = useModalController();
+
   return (
-    <Flex columnGap="s">
-      <ModalTrigger>
-        <Button>Modal trigger</Button>
-        <Modal>
-          <Heading>Modal title</Heading>
-          <Content>
-            <Section>
-              <Heading>Bla</Heading>
-              <Text>
-                Eine Organisation kannst du dir wie ein Unternehmen vorstellen.
-                An diesem Ort verwaltest du deine Mitarbeiter,
-                Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-              </Text>
-              <TextField isRequired>
-                <Label>Organisationsname</Label>
-              </TextField>
-            </Section>
-          </Content>
-          <ActionGroup>
-            <Action closeOverlay="Modal">
-              <Button color="accent">Organisation anlegen</Button>
-              <Button variant="soft" color="secondary">
-                Abbrechen
+    <Section>
+      <Flex columnGap="s">
+        <ModalTrigger>
+          <Button>New squadron</Button>
+          <Modal>
+            <Heading>New squadron</Heading>
+            <Content>
+              <Section>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+            </Content>
+            <ActionGroup>
+              <Action closeModal>
+                <Button color="success">Create squadron</Button>
+                <Button variant="soft" color="secondary">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+
+        <ModalTrigger>
+          <Button>Offcanvas</Button>
+          <Modal offCanvas>
+            <Heading>New squadron</Heading>
+            <Content>
+              <Section>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+              <Section>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+            </Content>
+            <ActionGroup>
+              <Action closeModal>
+                <Button color="success">Create squadron</Button>
+                <Button variant="soft" color="secondary">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+
+        <ModalTrigger>
+          <Button>With columns</Button>
+          <Modal offCanvas size="l">
+            <Heading>New squadron</Heading>
+            <ColumnLayout>
+              <Section>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+              <Section>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+            </ColumnLayout>
+            <ActionGroup>
+              <Action closeModal>
+                <Button color="success">Create squadron</Button>
+                <Button variant="soft" color="secondary">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+
+        <ModalTrigger>
+          <Button>Confirm on close</Button>
+          <Modal confirmOnClose>
+            <Heading>New squadron</Heading>
+            <Content>
+              <Section>
+                <Text>
+                  Closing this modal with Escape or with a click outside has to
+                  be confirmed. Cancel closes it right away.
+                </Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+            </Content>
+            <ActionGroup>
+              <Action closeModal>
+                <Button color="success">Create squadron</Button>
+                <Button variant="soft" color="secondary">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+
+        <LightBoxTrigger>
+          <Button>Lightbox</Button>
+          <LightBox>
+            <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
+          </LightBox>
+        </LightBoxTrigger>
+
+        <Action onAction={() => console.log("Destroy the Death Star clicked")}>
+          <Modal slot="actionConfirm">
+            <Heading>Destroy the Death Star</Heading>
+            <Content>
+              Once the Death Star is destroyed, it cannot be rebuilt.
+            </Content>
+            <ActionGroup>
+              <Button color="danger">Fire superlaser</Button>
+              <Button color="secondary" variant="soft">
+                Cancel
               </Button>
-            </Action>
-          </ActionGroup>
-        </Modal>
-      </ModalTrigger>
+            </ActionGroup>
+          </Modal>
+          <Button color="danger">Destroy the Death Star</Button>
+        </Action>
+      </Flex>
 
-      <ModalTrigger>
-        <Button>Offcanvas</Button>
-        <Modal offCanvas>
-          <Heading>Modal title</Heading>
-          <Content>
-            <Section>
-              <Heading>Bla</Heading>
-              <Text>
-                Eine Organisation kannst du dir wie ein Unternehmen vorstellen.
-                An diesem Ort verwaltest du deine Mitarbeiter,
-                Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-              </Text>
-              <TextField isRequired>
-                <Label>Organisationsname</Label>
-              </TextField>
-            </Section>
-            <Section>
-              <Heading>Bla</Heading>
-              <Text>
-                Eine Organisation kannst du dir wie ein Unternehmen vorstellen.
-                An diesem Ort verwaltest du deine Mitarbeiter,
-                Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-              </Text>
-              <TextField isRequired>
-                <Label>Organisationsname</Label>
-              </TextField>
-            </Section>
-          </Content>
-          <ActionGroup>
-            <Action closeOverlay="Modal">
-              <Button color="accent">Organisation anlegen</Button>
-              <Button variant="soft" color="secondary">
-                Abbrechen
-              </Button>
-            </Action>
-          </ActionGroup>
-        </Modal>
-      </ModalTrigger>
-
-      <ModalTrigger>
-        <Button>With columns</Button>
-        <Modal offCanvas size="l">
-          <Heading>Modal title</Heading>
-          <ColumnLayout>
-            <Section>
-              <Heading>Bla</Heading>
-              <Text>
-                Eine Organisation kannst du dir wie ein Unternehmen vorstellen.
-                An diesem Ort verwaltest du deine Mitarbeiter,
-                Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-              </Text>
-              <TextField isRequired>
-                <Label>Organisationsname</Label>
-              </TextField>
-            </Section>
-            <Section>
-              <Heading>Bla</Heading>
-              <Text>
-                Eine Organisation kannst du dir wie ein Unternehmen vorstellen.
-                An diesem Ort verwaltest du deine Mitarbeiter,
-                Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-              </Text>
-              <TextField isRequired>
-                <Label>Organisationsname</Label>
-              </TextField>
-            </Section>
-          </ColumnLayout>
-          <ActionGroup>
-            <Action closeOverlay="Modal">
-              <Button color="accent">Organisation anlegen</Button>
-              <Button variant="soft" color="secondary">
-                Abbrechen
-              </Button>
-            </Action>
-          </ActionGroup>
-        </Modal>
-      </ModalTrigger>
-
-      <LightBoxTrigger>
-        <Button>Lightbox</Button>
-        <LightBox>
-          <Image src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg" />
-        </LightBox>
-      </LightBoxTrigger>
-
-      <Action onAction={() => console.log("Projekt löschen clicked")}>
-        <Modal slot="actionConfirm">
-          <Heading>Projekt löschen</Heading>
-          <Content>
-            Wenn das Projekt &quot;Test&quot; einmal gelöscht ist, kann es nicht
-            wiederhergestellt werden.
-          </Content>
-          <ActionGroup>
-            <Button color="danger">Löschen</Button>
-            <Button color="secondary" variant="soft">
-              Abbrechen
+      <Label>With controller</Label>
+      <Button
+        onPress={() => {
+          controller.open();
+        }}
+      >
+        New squadron
+      </Button>
+      <Modal controller={controller}>
+        <Heading>New squadron</Heading>
+        <Content>
+          <Section>
+            <Text>{squadronExplainer}</Text>
+            <TextField isRequired>
+              <Label>Squadron name</Label>
+            </TextField>
+          </Section>
+        </Content>
+        <ActionGroup>
+          <Action closeModal>
+            <Button color="success">Create squadron</Button>
+            <Button variant="soft" color="secondary">
+              Cancel
             </Button>
-          </ActionGroup>
-        </Modal>
-        <Button color="danger">Projekt löschen</Button>
-      </Action>
-    </Flex>
+          </Action>
+        </ActionGroup>
+      </Modal>
+    </Section>
   );
 }

@@ -4,6 +4,10 @@
   row-gap: var(--menu--item-to-item-spacing);
   padding: var(--popover--padding--s);
 
+  > hr {
+    margin-block: var(--popover--spacing);
+  }
+
   &:focus-visible {
     outline: none;
   }

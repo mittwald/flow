@@ -41,6 +41,8 @@ export const Option = createFlowRemoteComponent(
       onHoverChange: { event: "hoverChange" } as never,
       onHoverEnd: { event: "hoverEnd" } as never,
       onHoverStart: { event: "hoverStart" } as never,
+      onKeyDown: { event: "keyDown" } as never,
+      onKeyUp: { event: "keyUp" } as never,
       onLostPointerCapture: { event: "lostPointerCapture" } as never,
       onLostPointerCaptureCapture: {
         event: "lostPointerCaptureCapture",

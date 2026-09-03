@@ -1,6 +1,14 @@
-import { ActionGroup, Button, Content, Heading, Text } from "../../src/index";
-import { Action, Modal, ModalTrigger } from "../../src/index";
-import { typedList } from "../../src/index";
+import {
+  Action,
+  ActionGroup,
+  Button,
+  Content,
+  Heading,
+  Modal,
+  ModalTrigger,
+  Text,
+  typedList,
+} from "@mittwald/flow-remote-react-components";
 
 const TestModal = (
   <Modal>
@@ -9,7 +17,7 @@ const TestModal = (
       <Text data-testid="modal-content">Content</Text>
     </Content>
     <ActionGroup>
-      <Action closeOverlay="Modal">
+      <Action closeModal>
         <Button data-testid="close-button">Close</Button>
       </Action>
     </ActionGroup>

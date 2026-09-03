@@ -1,0 +1,156 @@
+# Auto-merges Dependabot PRs once the visual regression suite is green.
+#
+# Why this hangs off `workflow_run` instead of `pull_request`:
+#
+#   - `pull_request` on a Dependabot PR gets a READ-ONLY `GITHUB_TOKEN`, so it
+#     cannot comment.
+#   - `pull_request_target` would give a write token to a run that checks out
+#     dependency code. This workflow never checks anything out.
+#   - `workflow_run` runs from the default branch with a write token and only
+#     reads API state. Note the consequence: it is inert until it lands on
+#     `main`, so it cannot be exercised from the PR that introduces it.
+#
+# The merge itself is left to Dependabot (`@dependabot squash and merge`), which
+# waits for the required `main` check before merging. Dependabot is the actor
+# with the ruleset bypass — see CONTRIBUTE.md § Dependency updates. Do NOT
+# switch this to `gh pr merge --auto`: that merges as `github-actions[bot]`,
+# which would need the bypass instead, widening it to every workflow that holds
+# a write token.
+name: Dependabot auto-merge
+
+on:
+  workflow_run:
+    workflows: ["Run Visual Regression Tests"]
+    types:
+      - completed
+
+permissions: {}
+
+jobs:
+  auto-merge:
+    # Visual is the gate this workflow owns. The required `main` check is
+    # enforced by Dependabot when it processes the merge command, and by the
+    # ruleset, which does NOT grant Dependabot a bypass on status checks.
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      startsWith(github.event.workflow_run.head_branch, 'dependabot/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    concurrency:
+      group: dependabot-auto-merge@${{ github.event.workflow_run.head_branch }}
+      cancel-in-progress: false
+
+    permissions:
+      contents: read
+      pull-requests: write # comments the merge command
+
+    steps:
+      - name: Verify the PR and ask Dependabot to merge
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const run = context.payload.workflow_run;
+            const { owner, repo } = context.repo;
+
+            const decline = (reason) => {
+                core.info(`not merging: ${reason}`);
+                core.summary.addRaw(`Not merging \`${run.head_branch}\`: ${reason}`).write();
+            };
+
+            // `workflow_run.pull_requests` is populated for same-repo branches,
+            // which Dependabot branches are — the lookup is only a fallback.
+            let number = run.pull_requests?.[0]?.number;
+            if (!number) {
+                const { data } = await github.rest.pulls.list({
+                    owner,
+                    repo,
+                    state: "open",
+                    head: `${owner}:${run.head_branch}`,
+                });
+                number = data[0]?.number;
+            }
+            if (!number) {
+                return decline("no open PR found for this branch");
+            }
+
+            const { data: pr } = await github.rest.pulls.get({
+                owner,
+                repo,
+                pull_number: number,
+            });
+
+            if (pr.user.login !== "dependabot[bot]") {
+                return decline(`PR #${number} was opened by ${pr.user.login}`);
+            }
+
+            // A rebase may have landed while the suite was running. Merging on a
+            // stale green would merge code the suite never saw.
+            if (run.head_sha !== pr.head.sha) {
+                return decline(
+                    `run tested ${run.head_sha.slice(0, 7)}, PR head is now ${pr.head.sha.slice(0, 7)}`,
+                );
+            }
+
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+                owner,
+                repo,
+                pull_number: number,
+            });
+
+            // The one real hole in granting Dependabot a ruleset bypass: anyone
+            // with write access can push onto an open `dependabot/*` branch, and
+            // that commit would reach main without a code owner review.
+            // Dependabot signs its commits, so a foreign push fails here.
+            for (const commit of commits) {
+                if (commit.author?.login !== "dependabot[bot]") {
+                    return decline(
+                        `${commit.sha.slice(0, 7)} is authored by ${commit.author?.login ?? "an unknown user"}`,
+                    );
+                }
+                if (!commit.commit.verification?.verified) {
+                    return decline(`${commit.sha.slice(0, 7)} has no verified signature`);
+                }
+            }
+
+            // Belt and braces: dependabot.yml ignores majors across every
+            // ecosystem, so reaching this means the config was relaxed.
+            const major = commits.find((commit) =>
+                commit.commit.message.includes("update-type: version-update:semver-major"),
+            );
+            if (major) {
+                return decline("the PR carries a major version update");
+            }
+
+            // Every rebase produces a fresh run, so only skip a command that was
+            // already issued for THIS head commit.
+            const command = "@dependabot squash and merge";
+            const headCommittedAt = commits.at(-1).commit.committer.date;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number: number,
+            });
+            const alreadyAsked = comments.some(
+                (comment) =>
+                    comment.user?.login === "github-actions[bot]" &&
+                    comment.body?.includes(command) &&
+                    comment.created_at > headCommittedAt,
+            );
+            if (alreadyAsked) {
+                return decline("the merge command was already issued for this head commit");
+            }
+
+            await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: number,
+                body: command,
+            });
+
+            core.info(`asked Dependabot to merge #${number}`);
+            core.summary
+                .addRaw(`Asked Dependabot to squash and merge #${number} — it merges once \`main\` is green.`)
+                .write();

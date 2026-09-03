@@ -1,4 +1,4 @@
-import { getIconDefinitions } from "./definitions";
+import { getIconNames } from "./names";
 import { fs } from "./fs";
 import { prettify } from "./prettify";
 import { getIconFileContent, getIndexFileContent } from "./template";
@@ -12,8 +12,11 @@ const getIconComponentFilename = (icon: string): string =>
 const getIndexFilename = (): string =>
   fs.path(`${componentPath}/components/icons/index.ts`);
 
-const definitions = getIconDefinitions(`${componentPath}/icons.yaml`);
-const filenames = Object.keys(definitions).map(getIconComponentFilename);
+const iconsYamlUrl = new URL(
+  import.meta.resolve("@mittwald/flow-icons-base/icons.yaml"),
+);
+const iconNames = getIconNames(iconsYamlUrl.pathname);
+const filenames = Object.keys(iconNames).map(getIconComponentFilename);
 
 fs.find(iconsOutputFolder, {
   matching: "*.tsx",
@@ -23,11 +26,11 @@ fs.find(iconsOutputFolder, {
   }
 });
 
-for (const [iconName, iconDefinition] of Object.entries(definitions)) {
+for (const iconName of iconNames) {
   fs.write(
     getIconComponentFilename(iconName),
-    await prettify(getIconFileContent(iconName, iconDefinition)),
+    await prettify(getIconFileContent(iconName)),
   );
 }
 
-fs.write(getIndexFilename(), await prettify(getIndexFileContent(definitions)));
+fs.write(getIndexFilename(), await prettify(getIndexFileContent(iconNames)));

@@ -1,0 +1,352 @@
+---
+component: List
+description:
+  Die List stellt mehrere List-Items dar und bietet Sortierung, Filter und
+  Suche.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Biete eine passende Ansicht an. Eine Rasteransicht eignet sich, wenn das Bild
+  eines List-Items den Userflow bestimmt; bei mehreren Anwendungsfällen kann der
+  User zwischen Ansichten wechseln.
+- Wähle eine Standardsortierung nach dem häufigsten Anwendungsfall. Ein Beispiel
+  ist „Neueste zuerst“ bei einer Änderungshistorie; biete nur Sortieroptionen
+  mit echtem Mehrwert.
+- Setze bei umfangreichen Lists Filter ein und gruppiere die Kategorien
+  sinnvoll. Sinnvolle Gruppen sind zum Beispiel Typ, Größe oder Status.
+- Platziere weiteren Seiteninhalt oberhalb der List. So verursacht das Nachladen
+  über den „Mehr anzeigen“-Button keine Layout-Verschiebungen; die List nimmt
+  die volle Breite des Contents einer
+  [LayoutCard](/components/structure/layout-card) ein.
+- Beschreibe die List zugänglich. Ist sie der einzige Hauptinhalt einer Seite,
+  erhält sie ein `aria-label`; hat sie eine eigene
+  [Heading](/components/content/heading), wird diese über `aria-labelledby`
+  zugeordnet.
+- Gib jedem Item über `textValue` seinen Text mit. Erst damit findet der User
+  ein Item über die Tastatur, indem er dessen Anfang tippt.
+
+---
+
+# Ansichten
+
+Die List unterstützt drei Ansichten: **Liste**, **Raster** und **Tabelle**. Die
+Default-Ansicht legst du über das Property `defaultViewMode` fest; sind mehrere
+Ansichten verfügbar, wechselt der User über den Ansichts-Button zwischen ihnen.
+
+Jedes Element renderst du über `List.Item`. Den Inhalt gestaltest du frei mit
+einer eigenen View – oder du nutzt die vorgefertigte Layout-Lösung
+[List.ItemView](/components/list/list-item-view), die Avatar, Titel, Content und
+Aktionen einheitlich anordnet.
+
+## Listenansicht
+
+Besonders geeignet, wenn viele Elemente übersichtlich, platzsparend und
+ansprechend dargestellt werden sollen. Nutze `<List.Item />`, um die List in der
+Listenansicht darzustellen.
+
+<LiveCodeEditor example="mode-list" editorCollapsed />
+
+## Rasteransicht
+
+Sinnvoll, wenn die Anzahl der Elemente überschaubar ist oder die visuelle
+Darstellung im Vordergrund steht – das `List.Item` sollte hier nur wenige
+Informationen enthalten. Für die Rasteransicht wird ebenfalls das
+`<List.Item />` verwendet: Aktiviere sie über `showTiles` und deaktiviere die
+Listenansicht bei Bedarf mit `showList={false}`. Über `maxTileWidth` steuerst du
+die maximale Breite der Kacheln.
+
+<LiveCodeEditor example="mode-tile" editorCollapsed />
+
+## Tabellenansicht
+
+Ideal für Daten, die schnell erfassbar sein müssen, während die optische
+Gestaltung zweitrangig ist. Nutze `<List.Table />`, um die List als
+[Table](/components/structure/table) darzustellen – dabei gelten die Guidelines
+der Table.
+
+<LiveCodeEditor example="mode-table" editorCollapsed />
+
+---
+
+# Sortierung
+
+Ist die Standardsortierung aktiv, zeigt der Sortierungs-Button nur „Sortierung“
+an; wählt der User eine Option, wird der Button-Text entsprechend angepasst.
+Lege eine Sortiermethode über `<List.Sorting />` an; mit `customSortingFn` und
+einem vorangestellten `$` im `property` definierst du eine eigene Sortierung.
+
+Benenne die Sortierung so, dass Kriterium und Reihenfolge sofort ersichtlich
+sind.
+
+<DoAndDont>
+  <Do example="sortingDo">
+    Benenne die Sortierung so, dass eindeutig ersichtlich ist, wonach und in
+    welcher Reihenfolge sortiert wird.
+  </Do>
+  <Dont example="sortingDont">
+    Verzichte auf Sortierformulierungen, die nicht eindeutig verständlich sind
+    oder keine klare Reihenfolge vermitteln.
+  </Dont>
+</DoAndDont>
+
+## Sorting Properties
+
+| Property          | Typ                   | Beschreibung                                                                                                                          |
+| ----------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `customSortingFn` | `SortingFn<T>`        | Möglichkeit, eine eigene Sortierfunktion zu definieren                                                                                |
+| `defaultEnabled`  | `boolean \| "hidden"` | Bestimmt, ob die Sortierung als Default gesetzt wird; bei "hidden" ist die Option nicht sichtbar, wird aber im Hintergrund angewendet |
+| `direction`       | `"asc" \| "desc"`     | Auf- oder absteigende Sortierung                                                                                                      |
+| `name`            | `string`              | Der Anzeigename der Sortier-Option                                                                                                    |
+| `directionName`   | `string`              | Der Anzeigename der Sortierrichtung                                                                                                   |
+| `property`        | `string`              | Das für die Sortierung verwendete Property                                                                                            |
+
+---
+
+# Filter
+
+Ein Klick auf den Filter-Button öffnet ein
+[ContextMenu](/components/actions/context-menu), in dem Filter aktiviert oder
+deaktiviert werden können.
+
+- Standardmäßig erlaubt ein Filter die **Mehrfachauswahl**, damit User nach
+  mehreren Kriterien filtern können; die Optionen erscheinen dann als
+  [Checkbox](/components/form-controls/checkbox). Bei **Einzelauswahl** werden
+  sie als [RadioGroup](/components/form-controls/radio-group) dargestellt.
+- Jeder **aktive Filter** wird durch eine [Badge](/components/status/badge)
+  visualisiert, die per Klick entfernt werden kann. Sind mindestens zwei Filter
+  aktiv, erscheint zusätzlich ein „Filter zurücksetzen“-Button.
+- Mehrere Filter **derselben Kategorie** (z. B. Status, Art, Größe) werden in
+  einem eigenen, passend benannten Filter-Button zusammengefasst. Filter ohne
+  Kategorie gruppierst du unter einem allgemeinen „Filter“-Button.
+
+Lege Filter über `<List.Filter />` an. Über `priority` bestimmst du, ob ein
+Filter immer sichtbar ist (`primary`) oder erst im „Alle Filter“-Modal erscheint
+(`secondary`); „Alle Filter“ wird automatisch angezeigt, sobald es secondary
+Filter gibt. Die Anzeige des Filter-Werts lässt sich über eine Funktion anpassen
+(z. B. für Übersetzungen), und mit einem eigenen `matcher` plus vorangestelltem
+`$` im `property` filterst du nach Werten, die nicht in der List vorkommen.
+
+<LiveCodeEditor example="filter" editorCollapsed stretch />
+
+Aktive Filter-Badges sollten selbsterklärend sein. Bei mehrdeutigen Begriffen
+gib zusätzlichen Kontext an.
+
+<DoAndDont>
+  <Do example="namingDo">
+    Intuitiv verständliche Filter benötigen keinen zusätzlichen Kontext.
+    Erklärungsbedürftige Filter sollten mit weiterem Text versehen werden.
+  </Do>
+  <Dont example="namingDont">
+    Bei intuitiven Filtern sollte auf zusätzlichen Text verzichtet werden. Meist
+    genügt ein einzelnes beschreibendes Wort.
+  </Dont>
+</DoAndDont>
+
+## Date Range Filter
+
+Mit `mode="dateRange"` definierst du einen Filter, der die Auswahl eines
+Zeitraums ermöglicht. So lassen sich Einträge gezielt zwischen einem Start- und
+Enddatum eingrenzen.
+
+<LiveCodeEditor example="filterDateRange" editorCollapsed stretch />
+
+## Filter Properties
+
+| Property          | Typ                               | Beschreibung                                                                |
+| ----------------- | --------------------------------- | --------------------------------------------------------------------------- |
+| `defaultSelected` | `string[]`                        | Array der als Default gesetzten Filter                                      |
+| `matcher`         | `FilterMatcher<T, TProp, string>` | Definiert eine eigene Filterlogik für die Listenelemente                    |
+| `mode`            | `"all" \| "some" \| "one"`        | Bestimmt, wie mehrere ausgewählte Filterwerte miteinander kombiniert werden |
+| `name`            | `string`                          | Der Anzeigename des Filters                                                 |
+| `property`        | `string`                          | Das für die Filterung verwendete Property                                   |
+| `values`          | `string[]`                        | Die Optionen für den Filter                                                 |
+
+---
+
+# Suche
+
+Verwende `<List.Search />` innerhalb der List, um ein
+[SearchField](/components/form-controls/search-field) anzuzeigen. Standardmäßig
+startet die Suche automatisch; soll sie erst auf Enter auslösen, setze
+`autoSubmit` auf `false`. Öffnet sich die List in einem
+[Modal](/components/overlays/modal), fokussiere das Suchfeld über `autoFocus`,
+damit der User direkt tippen kann.
+
+---
+
+# Pagination
+
+Standardmäßig zeigt die List maximal 10 List-Items; weitere lädt der User über
+den „Mehr anzeigen“-Button nach. Über `batchSize` änderst du die Anzahl, über
+`hidePagination` schaltest du die Pagination ab. Halte die Zahl niedrig: Über
+Suche, Filter und Sortierung findet der User gezielt, und viele gleichzeitig
+geladene Einträge kosten Performance.
+
+## Infinite Scroll
+
+Für sehr lange Listen, in denen ohne konkretes Suchziel gestöbert wird, kann
+statt des „Mehr anzeigen“-Buttons **Infinite Scroll** aktiviert werden: Die
+nächste Seite lädt automatisch, sobald das Ende der Liste in den sichtbaren
+Bereich scrollt.
+
+```tsx
+<List.List infiniteScroll batchSize={20} aria-label="Domains">
+  {/* ... */}
+</List.List>
+```
+
+- Infinite Scroll ist **opt-in** und sollte nicht der Default sein. Für kurze
+  oder gezielt durchsuchte Listen ist der „Mehr anzeigen“-Button meist die
+  bessere Wahl.
+- Der Mechanismus funktioniert unabhängig davon, ob die Daten statisch,
+  asynchron oder über Hooks geladen werden, und respektiert `manualPagination`.
+- Während des Nachladens wird ein Ladeindikator am Ende der Liste angezeigt.
+
+---
+
+# Lade- und Leeransichten
+
+## Loading View
+
+Während die Daten initial geladen werden, zeigt die List eine Loading View aus
+Skeleton-Platzhaltern an. Ohne weitere Angabe wird ein generisches Skeleton
+verwendet. Über das `loadingView`-Property eines `<List.Item />` – oder eines
+`<TableCell />` in der Tabellenansicht – lässt sich diese Ansicht anpassen. Sie
+gilt in allen Ansichten (List, Tiles, Table) und auch für einzelne Items, die
+nach dem initialen Laden noch suspenden – etwa weil ihr Inhalt eigene Daten
+nachlädt. Gestalte sie mit [Skeleton](/components/content/skeleton) und
+[SkeletonText](/components/content/skeleton-text) so, dass sie dem Inhalt in
+Aufbau und Größe nahekommt, damit der Übergang ohne Layout-Sprung wirkt.
+
+<LiveCodeEditor example="loadingView" editorCollapsed stretch />
+
+## Empty View
+
+Über `emptyView` zeigst du eine eigene Ansicht an, wenn die List keine Einträge
+enthält – in der Regel eine
+[IllustratedMessage](/components/content/illustrated-message), die den User über
+einen [Button](/components/actions/button) einlädt, das erste Element zu
+erstellen. Liefert eine Suche oder ein Filter kein Ergebnis, zeigt
+`emptySearchResultView` einen entsprechenden Hinweis. Ist das jeweilige Property
+nicht gesetzt, verwendet die List eine vordefinierte Ansicht.
+
+<LiveCodeEditor example="customEmptyView" editorCollapsed stretch />
+
+## Initiale Suspense-Boundary
+
+Beim initialen Laden umschließt die List das Laden der Daten standardmäßig mit
+einer eigenen [Suspense](https://react.dev/reference/react/Suspense)-Boundary
+und zeigt währenddessen ihre Loading View. Über `disableInitialSuspenseBoundary`
+an der Datenquelle (`<List.LoaderAsync />`, `<List.LoaderAsyncResource />`,
+`<List.LoaderHooks />`) steuerst du dieses Verhalten:
+
+| Wert              | Verhalten                                                                                                                                                                                    |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `false` (Default) | Die List rendert beim initialen Laden ihre eigene Loading View (Skeleton).                                                                                                                   |
+| `true`            | Die List rendert beim initialen Laden keine eigene Suspense-Boundary. Das Suspending wird an die nächste übergeordnete Boundary weitergereicht; die List erscheint erst mit geladenen Daten. |
+
+Belasse den Wert bei `false`, wenn die List den Hauptinhalt darstellt oder keine
+übergeordnete Ladeanzeige existiert. Setze ihn auf `true`, wenn die List in eine
+Seite eingebettet ist, die bereits einen eigenen Ladezustand anzeigt – so wird
+die List atomar dargestellt und der Layout-Shift zwischen Loading und Empty View
+vermieden. Zeigt deine Anwendung durchgängig eigene Ladezustände, kannst du
+`true` über den `<ComponentDefaultsProvider />` als Standard festlegen.
+
+---
+
+# Daten laden
+
+Die List kann ihre Daten statisch oder asynchron laden.
+
+## Statische Daten
+
+Für statische Daten wird `<List.StaticData />` verwendet. Diese Variante
+benötigt keine zusätzliche Logik für Nachladen oder Filtern.
+
+```tsx
+<List.StaticData data={dataArray} />
+```
+
+## Asynchrone Daten
+
+Mit `<List.LoaderAsync />` werden Daten dynamisch aus einer API oder anderen
+asynchronen Quellen nachgeladen.
+
+```tsx
+<List.LoaderAsync>
+  {async (options) => {
+    const response = await fetchDataFromAPI(options);
+    return {
+      data: response.items,
+      itemTotalCount: response.totalCount,
+    };
+  }}
+</List.LoaderAsync>
+```
+
+Die Loader-Funktion erhält ein `options`-Objekt und muss `data` sowie – für die
+Pagination – `itemTotalCount` zurückgeben.
+
+| Property       | Typ                                                                    | Beschreibung                                                                                             |
+| -------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `filtering`    | `{ [key: string]: { mode: "all" \| "some" \| "one"; values: any[] } }` | Enthält Filter für die Daten. Jedes Key-Value-Paar repräsentiert eine Filterbedingung für ein Datenfeld. |
+| `searchString` | `string`                                                               | Der eingegebene Suchbegriff.                                                                             |
+| `pagination`   | `{ offset: number; limit: number }`                                    | Enthält Offset (Startpunkt) und Limit (maximale Anzahl an Datensätzen).                                  |
+| `sorting`      | `{ [key: string]: "asc" \| "desc" }`                                   | Gibt an, nach welchen Datenfeldern sortiert werden soll.                                                 |
+
+## Laden über Hooks
+
+Mit `<List.LoaderHooks />` werden Daten über React Hooks (z. B. TanStack Query
+oder SWR) nachgeladen. Der Einsatz von Suspense ist hierbei erforderlich.
+
+```tsx
+import { useSuspenseQuery } from "@tanstack/react-query";
+
+<List.LoaderHooks>
+  {(options) => {
+    const response = useSuspenseQuery({
+      queryKey: ["api", options],
+      queryFn: () => fetchDataFromAPI(options),
+    });
+    return {
+      data: response.items,
+      itemTotalCount: response.totalCount,
+    };
+  }}
+</List.LoaderHooks>;
+```
+
+Beim asynchronen Laden lassen sich Pagination (`manualPagination`), Sortierung
+(`manualSorting`), Filterung (`manualFiltering`) und Suche serverseitig
+verarbeiten.
+
+---
+
+# Kombiniere mit ...
+
+## ActionGroup
+
+Verwende `<ActionGroup />` innerhalb der List, um eine
+[ActionGroup](/components/actions/action-group) mit Aktionen anzuzeigen, die
+sich direkt auf die Liste beziehen.
+
+<LiveCodeEditor example="actionGroup" editorCollapsed stretch />
+
+## Summary
+
+Verwende eine `<ListSummary />`, um eine Zusammenfassung anzuzeigen,
+beispielsweise die Gesamtsumme der Beträge. Über das `position`-Property legst
+du fest, ob die Summary oberhalb oder unterhalb der List erscheint.
+
+<LiveCodeEditor example="summary" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

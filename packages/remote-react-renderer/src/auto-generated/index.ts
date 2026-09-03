@@ -19,6 +19,7 @@ import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
 import { CartesianChart as CartesianChart } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
+import { ChartGrid as ChartGrid } from "@mittwald/flow-react-components";
 import { ChartLegend as ChartLegend } from "@mittwald/flow-react-components";
 import { ChartTooltip as ChartTooltip } from "@mittwald/flow-react-components";
 import { Chat as Chat } from "@mittwald/flow-react-components";
@@ -27,8 +28,10 @@ import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-component
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
 import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
+import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
+import { Combine as Combine } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { ComponentPropsContextProvider as ComponentPropsContextProvider } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
@@ -58,17 +61,22 @@ import { Heading as Heading } from "@mittwald/flow-react-components";
 import { Icon as Icon } from "@mittwald/flow-react-components";
 import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components";
 import { Image as Image } from "@mittwald/flow-react-components";
+import { ImageCropper as ImageCropper } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
 import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
 import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
+import { Kbd as Kbd } from "@mittwald/flow-react-components";
 import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
+import { LightBoxGallery as LightBoxGallery } from "@mittwald/flow-react-components";
+import { LightBoxGalleryItem as LightBoxGalleryItem } from "@mittwald/flow-react-components";
 import { Line as Line } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
+import { EmptyViewContainer as ListEmptyViewContainer } from "@mittwald/flow-react-components";
 import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react-components";
 import { ListSummary as ListSummary } from "@mittwald/flow-react-components";
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components";
@@ -91,7 +99,9 @@ import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";
 import { RadioButton as RadioButton } from "@mittwald/flow-react-components";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components";
+import { RangeCalendar as RangeCalendar } from "@mittwald/flow-react-components";
 import { Rating as Rating } from "@mittwald/flow-react-components";
+import { RatingSegment as RatingSegment } from "@mittwald/flow-react-components";
 import { SearchField as SearchField } from "@mittwald/flow-react-components";
 import { Section as Section } from "@mittwald/flow-react-components";
 import { Segment as Segment } from "@mittwald/flow-react-components";
@@ -103,6 +113,7 @@ import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
 import { Tab as Tab } from "@mittwald/flow-react-components";
+import { TabNavigation as TabNavigation } from "@mittwald/flow-react-components";
 import { TabTitle as TabTitle } from "@mittwald/flow-react-components";
 import { Table as Table } from "@mittwald/flow-react-components";
 import { TableBody as TableBody } from "@mittwald/flow-react-components";
@@ -118,6 +129,7 @@ import { TextField as TextField } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
+import { TranslationProvider as TranslationProvider } from "@mittwald/flow-react-components";
 import { Truncate as Truncate } from "@mittwald/flow-react-components";
 import { TunnelEntry as TunnelEntry } from "@mittwald/flow-react-components";
 import { XAxis as XAxis } from "@mittwald/flow-react-components";
@@ -160,6 +172,7 @@ export const flowComponents = {
     "CartesianGrid",
     CartesianGrid,
   ),
+  "flr-chart-grid": createFlowRemoteComponentRenderer("ChartGrid", ChartGrid),
   "flr-chart-legend": createFlowRemoteComponentRenderer(
     "ChartLegend",
     ChartLegend,
@@ -183,11 +196,16 @@ export const flowComponents = {
     ClearPropsContext,
   ),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
+  "flr-code-editor": createFlowRemoteComponentRenderer(
+    "CodeEditor",
+    CodeEditor,
+  ),
   "flr-color": createFlowRemoteComponentRenderer("Color", Color),
   "flr-column-layout": createFlowRemoteComponentRenderer(
     "ColumnLayout",
     ColumnLayout,
   ),
+  "flr-combine": createFlowRemoteComponentRenderer("Combine", Combine),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-component-props-context-provider": createFlowRemoteComponentRenderer(
     "ComponentPropsContextProvider",
@@ -274,6 +292,10 @@ export const flowComponents = {
     IllustratedMessage,
   ),
   "flr-image": createFlowRemoteComponentRenderer("Image", Image),
+  "flr-image-cropper": createFlowRemoteComponentRenderer(
+    "ImageCropper",
+    ImageCropper,
+  ),
   "flr-initials": createFlowRemoteComponentRenderer("Initials", Initials),
   "flr-inline-code": createFlowRemoteComponentRenderer(
     "InlineCode",
@@ -287,6 +309,7 @@ export const flowComponents = {
     "ItemsGridListItem",
     ItemsGridListItem,
   ),
+  "flr-kbd": createFlowRemoteComponentRenderer("Kbd", Kbd),
   "flr-label": createFlowRemoteComponentRenderer("Label", Label),
   "flr-labeled-value": createFlowRemoteComponentRenderer(
     "LabeledValue",
@@ -297,11 +320,23 @@ export const flowComponents = {
     LayoutCard,
   ),
   "flr-legend": createFlowRemoteComponentRenderer("Legend", Legend),
+  "flr-light-box-gallery": createFlowRemoteComponentRenderer(
+    "LightBoxGallery",
+    LightBoxGallery,
+  ),
+  "flr-light-box-gallery-item": createFlowRemoteComponentRenderer(
+    "LightBoxGalleryItem",
+    LightBoxGalleryItem,
+  ),
   "flr-line": createFlowRemoteComponentRenderer("Line", Line),
   "flr-link": createFlowRemoteComponentRenderer("Link", Link),
   "flr-list-empty-view": createFlowRemoteComponentRenderer(
     "ListEmptyView",
     ListEmptyView,
+  ),
+  "flr-list-empty-view-container": createFlowRemoteComponentRenderer(
+    "ListEmptyViewContainer",
+    ListEmptyViewContainer,
   ),
   "flr-list-item-view-content": createFlowRemoteComponentRenderer(
     "ListItemViewContent",
@@ -373,7 +408,15 @@ export const flowComponents = {
     "RadioGroup",
     RadioGroup,
   ),
+  "flr-range-calendar": createFlowRemoteComponentRenderer(
+    "RangeCalendar",
+    RangeCalendar,
+  ),
   "flr-rating": createFlowRemoteComponentRenderer("Rating", Rating),
+  "flr-rating-segment": createFlowRemoteComponentRenderer(
+    "RatingSegment",
+    RatingSegment,
+  ),
   "flr-search-field": createFlowRemoteComponentRenderer(
     "SearchField",
     SearchField,
@@ -394,6 +437,10 @@ export const flowComponents = {
   "flr-slider": createFlowRemoteComponentRenderer("Slider", Slider),
   "flr-switch": createFlowRemoteComponentRenderer("Switch", Switch),
   "flr-tab": createFlowRemoteComponentRenderer("Tab", Tab),
+  "flr-tab-navigation": createFlowRemoteComponentRenderer(
+    "TabNavigation",
+    TabNavigation,
+  ),
   "flr-tab-title": createFlowRemoteComponentRenderer("TabTitle", TabTitle),
   "flr-table": createFlowRemoteComponentRenderer("Table", Table),
   "flr-table-body": createFlowRemoteComponentRenderer("TableBody", TableBody),
@@ -420,6 +467,10 @@ export const flowComponents = {
   "flr-tooltip-trigger": createFlowRemoteComponentRenderer(
     "TooltipTrigger",
     TooltipTrigger,
+  ),
+  "flr-translation-provider": createFlowRemoteComponentRenderer(
+    "TranslationProvider",
+    TranslationProvider,
   ),
   "flr-truncate": createFlowRemoteComponentRenderer("Truncate", Truncate),
   "flr-tunnel-entry": createFlowRemoteComponentRenderer(

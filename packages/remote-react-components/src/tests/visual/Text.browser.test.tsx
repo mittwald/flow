@@ -1,46 +1,75 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
+
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
-  "Text (%s)",
-  async ({ testScreenshot, render, components: { Text, Flex, AccentBox } }) => {
+  "Text colors (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Text, Flex, AccentBox, Wrap, Link },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        {colors.map((color) => (
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
+              <Text color={color}>
+                The Rebel <strong>Alliance struck</strong> a decisive
+                <i>blow against</i> the Empire. Rebel spies <s>stole plans</s>{" "}
+                to the <Link>Death Star</Link> weapon.
+              </Text>
+            </AccentBox>
+          </Wrap>
+        ))}
+      </Flex>,
+    );
+
+    await testScreenshot("Text colors");
+  },
+);
+
+test.each(testEnvironments)(
+  "Text edge cases (%s)",
+  async ({ testScreenshot, render, components: { Text, Flex, IconStar } }) => {
     await render(
       <Flex direction="column" gap="m">
         <Text>
-          Lorem ipsum <strong>dolor sit</strong> amet consectetur
-          <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel voluptas,
-          ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi
-          blanditiis vitae
-          <br />
-          <small>laborum ea tempore, dolore voluptas.</small>
+          AlongtimeagoinagalaxyfarfarawaytheRebelAlliancestruckadecisiveblowagainsttheGalacticEmpireRebelspiesmanagedtostealthesecretplanstotheEmpiresultimateweaponcalledtheDeathStaranarmoredspacestationwithenoughpowertodestroyanentireplanetPrincessLeiaracedhomeaboardherstarshipcustodianofthestolenplansthatcansaveherpeopleandrestorefreedomtothegalaxyHopeRemains
+        </Text>
+        <Text wordBreak="break-word">
+          AlongtimeagoinagalaxyfarfarawaytheRebelAlliancestruckadecisiveblowagainsttheGalacticEmpireRebelspiesmanagedtostealthesecretplanstotheEmpiresultimateweaponcalledtheDeathStaranarmoredspacestationwithenoughpowertodestroyanentireplanetPrincessLeiaracedhomeaboardherstarshipcustodianofthestolenplansthatcansaveherpeopleandrestorefreedomtothegalaxyHopeRemains
+        </Text>
+        <Text>
+          <small>the secret plans to the Death Star.</small>
           <ul>
-            <li>Item</li>
             <li>Item</li>
             <li>Item</li>
           </ul>
           <ol>
             <li>Item</li>
             <li>Item</li>
-            <li>Item</li>
           </ol>
         </Text>
-        <Text color="dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
+        <Text>
+          <IconStar /> The Rebel Alliance struck against the Galactic Empire.
         </Text>
-        <AccentBox>
-          <Text color="light">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas.
-          </Text>
-        </AccentBox>
+        <Text>
+          <small>
+            <IconStar /> The Rebel Alliance struck against the Galactic Empire.
+          </small>
+        </Text>
+        <Text noLigatures>5x4</Text>
+        <Text>5x4</Text>
       </Flex>,
     );
 
-    await testScreenshot("Text");
+    await testScreenshot("Text edge cases");
   },
 );

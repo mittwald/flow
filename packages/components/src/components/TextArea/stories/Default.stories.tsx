@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TextArea } from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
@@ -9,9 +8,21 @@ import { FieldError } from "@/components/FieldError";
 const meta: Meta<typeof TextArea> = {
   title: "Form Controls/TextArea",
   component: TextArea,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+    allowResize: false,
+  },
+  argTypes: {
+    allowResize: {
+      control: "inline-radio",
+      options: [false, true, "horizontal", "vertical"],
+    },
+  },
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>
-      <Label>Message</Label>
+      <Label>Message to the Rebel Alliance</Label>
     </TextArea>
   ),
 };
@@ -21,12 +32,6 @@ export default meta;
 type Story = StoryObj<typeof TextArea>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (
@@ -70,21 +75,5 @@ export const ShowCharacterCount: Story = {
 };
 
 export const AutoResizeable: Story = {
-  args: { rows: 1, autoResizeMaxRows: 5 },
-};
-
-export const Resizeable: Story = {
-  args: { allowResize: true },
-};
-
-export const HorizontallyResizeable: Story = {
-  args: { allowResize: "horizontal" },
-};
-
-export const VerticallyResizeable: Story = {
-  args: { allowResize: "vertical" },
-};
-
-export const VerticallyAndAutoResizeable: Story = {
-  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
+  args: { rows: 3, autoResizeMaxRows: 5 },
 };

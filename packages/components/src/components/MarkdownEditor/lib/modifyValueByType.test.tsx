@@ -14,13 +14,7 @@ const FormatButtonTestCases = [
   ["unorderedList", "Hello\nWorld", "- Hello\n- World", 0, 15],
   ["orderedList", "Hello\nWorld", "1. Hello\n2. World", 0, 17],
   ["link", "Hello world", "[Hello world]()", 14, 14],
-  [
-    "link",
-    "https://mittwald.github.io/flow/",
-    "[](https://mittwald.github.io/flow/)",
-    1,
-    1,
-  ],
+  ["link", "https://flow.mittwald.de/", "[](https://flow.mittwald.de/)", 1, 1],
 ];
 
 describe("will format a give string to markdown", () => {

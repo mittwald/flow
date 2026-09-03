@@ -20,8 +20,8 @@ export default function Page() {
 
   return (
     <Section>
-      <Heading>Demo</Heading>
-      <Text>Some text</Text>
+      <Heading>Death Star</Heading>
+      <Text>Loading the command console…</Text>
       <LoadingIndicator show={!isReady} />
     </Section>
   );

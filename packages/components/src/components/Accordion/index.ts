@@ -1,4 +1,4 @@
 export * from "./view";
 
-export { Accordion, type AccordionProps } from "./Accordion";
+export { type AccordionProps, Accordion } from "./Accordion";
 export { default } from "./Accordion";

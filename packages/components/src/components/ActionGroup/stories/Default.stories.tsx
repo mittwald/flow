@@ -5,16 +5,20 @@ import { Action } from "@/components/Action";
 import { sleep } from "@/lib/promises/sleep";
 import { Switch } from "@/components/Switch";
 import { Link } from "@/components/Link";
+import { Label } from "@/components/Label";
 import { useForm } from "react-hook-form";
 import { Form, SubmitButton } from "@/integrations/react-hook-form";
 
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",
   component: ActionGroup,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <ActionGroup {...props}>
       <Action onAction={() => sleep(1500)}>
-        <Button color="accent">Create customer</Button>
+        <Button color="success">Recruit pilot</Button>
       </Action>
       <Action>
         <Button slot="abort" variant="soft" color="secondary">
@@ -31,18 +35,16 @@ type Story = StoryObj<typeof ActionGroup>;
 
 export const Default: Story = {};
 
-export const Danger: Story = {
+export const Size: Story = {
   render: (props) => (
-    <ActionGroup {...props}>
-      <Button color="danger">Delete project</Button>
-      <Button slot="abort" variant="soft" color="secondary">
-        Abort
-      </Button>
+    <ActionGroup {...props} size="s">
+      <Link slot="abort">Forgot password?</Link>
+      <Button color="success">Login</Button>
     </ActionGroup>
   ),
 };
 
-export const Info: Story = {
+export const PrimaryActionOnly: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button>Ok</Button>
@@ -53,8 +55,8 @@ export const Info: Story = {
 export const WithSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
-      <Button slot="primary" color="accent">
-        Add email address
+      <Button slot="primary" color="success">
+        Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
         Save and add more
@@ -69,8 +71,8 @@ export const WithSecondaryAction: Story = {
 export const WithExtraSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
-      <Button slot="primary" color="accent">
-        Add email address
+      <Button slot="primary" color="success">
+        Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
         Save and add more
@@ -85,15 +87,27 @@ export const WithExtraSecondaryAction: Story = {
   ),
 };
 
-export const Mobile: Story = {
-  parameters: { viewport: { defaultViewport: "mobile1" } },
+export const PreserveOrder: Story = {
+  render: (props) => (
+    <ActionGroup {...props} preserveOrder>
+      <Button color="secondary" variant="soft">
+        Abort
+      </Button>
+      <Button color="success">Create customer</Button>
+      <Button color="secondary" variant="soft">
+        Save as draft
+      </Button>
+    </ActionGroup>
+  ),
 };
 
 export const WithSwitch: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button slot="secondary">Edit</Button>
-      <Switch slot="primary">Activate</Switch>
+      <Switch slot="primary">
+        <Label>Activate</Label>
+      </Switch>
     </ActionGroup>
   ),
 };
@@ -102,7 +116,7 @@ export const WithLink: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Link slot="abort">Forgot password?</Link>
-      <Button color="accent">Login</Button>
+      <Button color="success">Login</Button>
     </ActionGroup>
   ),
 };
@@ -113,7 +127,7 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <ActionGroup {...props}>
-          <SubmitButton color="accent">Submit</SubmitButton>
+          <SubmitButton>Submit</SubmitButton>
           <Button color="secondary" variant="soft">
             Abort
           </Button>

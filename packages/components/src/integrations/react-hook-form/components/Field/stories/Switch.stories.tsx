@@ -15,6 +15,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Switch } from "@/components/Switch";
 import { FieldError } from "@/components/FieldError";
+import { Label } from "@/components/Label";
 
 const submitAction = action("submit");
 
@@ -43,11 +44,13 @@ const meta: Meta<typeof Field> = {
       <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="isEnabled">
-            <Switch>Text</Switch>
+            <Switch>
+              <Label>Engage hyperdrive</Label>
+            </Switch>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -73,13 +76,17 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <Switch {...props}>Field1</Switch>
-        </Field>
-        <Switch>
-          Field2
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </Switch>
+        <Section>
+          <Field name="field">
+            <Switch {...props}>
+              <Label>Field1</Label>
+            </Switch>
+          </Field>
+          <Switch>
+            <Label>Field2</Label>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
+          </Switch>
+        </Section>
       </Form>
     );
   },
@@ -90,26 +97,38 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <Switch {...props}>Field</Switch>
+        <Field name="field">
+          <Switch {...props}>
+            <Label>Field</Label>
+          </Switch>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

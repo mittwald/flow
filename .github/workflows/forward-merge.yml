@@ -1,0 +1,367 @@
+name: Forward-merge main into next
+
+# Forward-merge cascade (ADR 0004). Keeps the higher release line a superset of
+# the lower one BY CONSTRUCTION: every change on `main` is merged up into `next`
+# as a TRUE merge commit (never rebase/squash/cherry-pick), so routine merges
+# never re-collide (ADR 0004 §1). Note that `main` is NOT literally an ancestor
+# of `next` in the steady state: §6/§7 drops a merge that carries no code delta,
+# so the `chore(release):` bump stays behind. The superset holds for CONTENT,
+# which is what matters — do not write ancestry-based checks against it.
+#
+# The workflow is idempotent: it merges the CURRENT `main` tip into `next`, not
+# "a specific commit" (ADR 0004 §2). A `fix:` push and the later
+# `chore(release):` push both trigger a run; both converge on "next carries
+# main's code", and the churn-only run collapses to an empty merge with no push
+# (ADR 0004 §6/§7).
+#
+# Version/changelog divergence between the lines is absorbed by the
+# `.gitattributes` merge drivers (registered below, ADR 0004 §3). Only a genuine
+# code conflict escalates to a sync ISSUE (ADR 0004 §4) — the resolution itself
+# happens in a developer checkout via `pnpm sync:resolve`, because that is the
+# only place the merge drivers run. Any other failure opens an issue too
+# (ADR 0004 §10).
+#
+# The push to `next` triggers `publish.yml`, which re-derives the version and
+# publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
+# version-free — it merges and pushes, nothing more.
+
+on:
+  push:
+    branches:
+      - main
+  # First-class manual recovery/force path (ADR 0004 §2): a manual run merges
+  # the current `main` tip into `next` exactly like an automatic one.
+  workflow_dispatch:
+  # Catch-up trigger. A run of this workflow that is EVICTED from the shared
+  # `mutate-next` concurrency group is retried by nothing: GitHub keeps one
+  # pending run per group and cancels it when a newer run arrives, and a
+  # cancelled run is not a failure. Measured in the #2769 rehearsal: a run
+  # created at 15:45:32 was cancelled at 15:47:28, one second after a `next`
+  # publish run entered the group — it never started a single job, so no
+  # `timeout-minutes` would have helped.
+  #
+  # That publish completing is exactly the moment the group frees up, so re-run
+  # then. This terminates: the catch-up merge is idempotent, normally finds no
+  # code delta, does not push, and therefore triggers no further publish run.
+  #
+  # `publish.yml` serves BOTH lines since the trusted-publisher fix, so this
+  # fires after `main` publishes too. The job guard below drops those: only a
+  # `next` publish holds `mutate-next`, and a `main` publish already triggers
+  # this workflow through its own push.
+  workflow_run:
+    workflows: ["Publish packages to NPM"]
+    types: [completed]
+
+permissions:
+  contents: write # push the merge commit
+  pull-requests: read # check whether a resolution is already in review
+  issues: write # open the sync issue (§4) and the failure issue (§10)
+
+# One shared concurrency group per TARGET branch, used by every workflow that
+# pushes to `next` (this one and `publish.yml`) — serializes all writers of
+# `next` and removes non-fast-forward races by design (ADR 0004 §5).
+concurrency:
+  group: mutate-next
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+  REPO: ${{ github.repository }}
+
+jobs:
+  forward-merge:
+    # The catch-up `workflow_run` trigger is about the `mutate-next` group
+    # freeing up, so only a publish run that HELD it counts — i.e. one on `next`.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.head_branch == 'next'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check whether there is anything to merge
+        id: guard
+        run: |
+          set -euo pipefail
+
+          # Cheap pre-flight, one API call, no checkout. The catch-up
+          # `workflow_run` trigger fires after every `next` publish, and in the
+          # normal case there is nothing to do — cloning this monorepo's full
+          # history just to discover that would be wasteful. `ahead_by` counts
+          # commits on `main` that `next` does not have; churn-only merges still
+          # count here and are handled later by the "no code delta" check.
+          ahead="$(gh api "repos/${REPO}/compare/next...main" --jq '.ahead_by')"
+          if [ "$ahead" = "0" ]; then
+            echo "pending=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::'next' already contains every commit from 'main' — nothing to merge."
+            exit 0
+          fi
+
+          echo "pending=true" >> "$GITHUB_OUTPUT"
+          echo "'main' is ${ahead} commit(s) ahead of 'next' — proceeding."
+
+      - name: Checkout `next` ⬇️
+        if: steps.guard.outputs.pending == 'true'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          ref: next
+          fetch-depth: 0
+          token: ${{ secrets.PUBLISH_PAT }}
+
+      # A pinned Node just for the JSON merge driver (`.github/scripts/merge-
+      # package-json.cjs`); no dependency install — the merge is version-free.
+      - name: Setup Node 🎛️
+        if: steps.guard.outputs.pending == 'true'
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+
+      - name: Git identity 🪪
+        if: steps.guard.outputs.pending == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      # A `merge=<driver>` attribute is inert unless the driver is registered in
+      # the runner's git config too (ADR 0004 §3, Consequences).
+      - name: Register merge drivers 🔧
+        if: steps.guard.outputs.pending == 'true'
+        run: |
+          set -euo pipefail
+          git config merge.ours.driver true
+          git config merge.package-json.driver \
+            "node .github/scripts/merge-package-json.cjs %O %A %B %L %P"
+
+      - name: Forward-merge and push (or open a sync issue) 🔀
+        id: merge
+        if: steps.guard.outputs.pending == 'true'
+        run: |
+          set -euo pipefail
+
+          # This step no longer clears the escalation itself — it only reports
+          # whether the cascade came out healthy, via the `carries` output. The
+          # "Close the escalation" step below acts on it. See the comment there
+          # for why that had to move out of this step.
+
+          # Escalation (ADR 0004 §4). The cascade does NOT create a branch or
+          # a pull request here: a PR is a change proposal, and until a human has
+          # resolved the conflict there is nothing to propose. It opens an issue
+          # and stops.
+          #
+          # The resolution happens in a developer checkout, because that is the
+          # only place the merge drivers actually run — GitHub does not run them.
+          # `pnpm sync:resolve` reproduces exactly this merge, so the churn is
+          # absorbed and only the genuine conflict reaches a human; `--continue`
+          # commits, pushes and opens the PR. Nothing marker-laden ever reaches
+          # git, and the pull request that eventually appears is a clean,
+          # reviewable merge.
+          open_sync_issue() {
+            local conflicted body title existing open_pr fingerprint marker refresh
+            title="Forward-merge blocked: main into next needs a manual resolution"
+
+            conflicted="$(git ls-files --unmerged | cut -f2 | sort -u | sed 's/^/- `/; s/$/`/')"
+
+            # What identifies THIS blockage: the `main` tip that failed to merge,
+            # plus the conflicting paths. The escalation is idempotent on the
+            # FINGERPRINT, not on "an issue is open" (ADR 0004 §4).
+            #
+            # The difference is the whole point of #2963. A human resolved the
+            # first conflict; by the time the sync PR merged, `main` had moved on
+            # and the cascade hit a DIFFERENT conflict. Keyed on "an issue is
+            # open", every run after that went silent against an issue whose body
+            # described the problem that was already fixed. Keyed on the
+            # fingerprint, the new blockage gets a comment.
+            fingerprint="$(printf '%s\n%s\n' "$MAIN_SHA" "$conflicted" | sha1sum | cut -c1-12)"
+            marker="<!-- forward-merge-state: ${fingerprint} -->"
+
+            refresh="$(printf '%s\n' \
+              'The cascade is **still blocked** — and on a different blockage than the one reported above.' \
+              '' \
+              "\`main\` is now at \`${SHORT_SHA}\`. Conflicting files:" \
+              '' \
+              "${conflicted}" \
+              '' \
+              'The procedure is unchanged: `pnpm sync:resolve`, resolve, `pnpm sync:resolve --continue`.' \
+              '' \
+              "${marker}")"
+
+            # An open sync PR means someone has already resolved a blockage and is
+            # waiting for review. Whether it resolves THIS one is the question the
+            # fingerprint answers: if `main` has moved past what the PR merges, the
+            # PR is stale and merging it will leave the cascade blocked.
+            open_pr="$(gh pr list --repo "$REPO" --head "sync/main-to-next" \
+              --base next --state open --json number --jq '.[].number')"
+            if [ -n "$open_pr" ]; then
+              if gh pr view "$open_pr" --repo "$REPO" --json body,comments \
+                   --jq '.body, (.comments[].body)' | grep -qF "$marker"; then
+                echo "::notice::Sync PR #${open_pr} already reports this exact blockage — staying quiet."
+                return 0
+              fi
+              gh pr comment "$open_pr" --repo "$REPO" --body "$refresh"
+              echo "::warning::Sync PR #${open_pr} does not cover the current blockage — commented."
+              return 0
+            fi
+
+            existing="$(gh issue list --repo "$REPO" --state open --label sync \
+              --search "in:title \"${title}\"" --json number --jq '.[].number')"
+            if [ -n "$existing" ]; then
+              if gh issue view "$existing" --repo "$REPO" --json body,comments \
+                   --jq '.body, (.comments[].body)' | grep -qF "$marker"; then
+                echo "::notice::Sync issue #${existing} already reports this exact blockage — not commenting again."
+                return 0
+              fi
+              gh issue comment "$existing" --repo "$REPO" --body "$refresh"
+              echo "::warning::Sync issue #${existing} refreshed — the blockage changed."
+              return 0
+            fi
+
+            gh label create sync --repo "$REPO" --color BFD4F2 \
+              --description "Forward-merge / promotion sync" 2>/dev/null || true
+            gh label create automated --repo "$REPO" --color EDEDED \
+              --description "Opened by automation" 2>/dev/null || true
+
+            body="$(printf '%s\n' \
+              'The automated forward-merge of `main` into `next` hit a genuine code conflict (ADR 0004 §4). **The cascade is paused**: until this is resolved, every later commit on `main` stays out of `next`.' \
+              '' \
+              'Conflicting files:' \
+              '' \
+              "${conflicted}" \
+              '' \
+              'Resolve it in your own checkout — one command each way:' \
+              '' \
+              '```shell' \
+              'pnpm sync:resolve             # merges main into next locally' \
+              '# resolve the conflicts in your editor or with `git mergetool`, then:' \
+              'pnpm sync:resolve --continue  # commits, pushes, opens the PR' \
+              '```' \
+              '' \
+              'It has to happen locally: GitHub does not run the merge drivers declared in `.gitattributes`, they only exist in local git config. Locally they absorb the version and `CHANGELOG.md` divergence between the lines, so the files listed above are all you see — resolving on a pull request would bury them under dozens of mechanical conflicts.' \
+              '' \
+              '`--continue` refuses to commit while conflict markers are left, and keeps the merge a TRUE merge commit so the superset invariant (ADR 0004 §1) holds.' \
+              '' \
+              "${marker}")"
+
+            gh issue create --repo "$REPO" --label sync --label automated \
+              --title "$title" --body "$body"
+          }
+
+          git fetch --no-tags origin main
+          MAIN_SHA="$(git rev-parse origin/main)"
+          SHORT_SHA="$(git rev-parse --short origin/main)"
+          NEXT_BEFORE="$(git rev-parse HEAD)"
+          MERGE_MSG="chore(sync): forward-merge main into next (${SHORT_SHA})"
+
+          echo "Merging main (${SHORT_SHA}) into next ($(git rev-parse --short HEAD))"
+
+          # True merge commit with an explicit conventional message (ADR 0004
+          # §1, §8) — `chore(sync):` is valid-conventional and non-releasing.
+          if git merge --no-ff -m "$MERGE_MSG" "$MAIN_SHA"; then
+            echo "Merge succeeded."
+          elif [ -n "$(git ls-files --unmerged)" ]; then
+            echo "::warning::Merge conflict — escalating to a sync issue."
+            # Before the abort: the escalation reads the unmerged paths.
+            open_sync_issue
+            git merge --abort
+            exit 0
+          else
+            echo "::error::git merge failed without a conflict."
+            exit 1
+          fi
+
+          # Empty forward-merge (ADR 0004 §6/§7): if the merge brought in no code
+          # delta (only version/changelog churn the drivers absorbed), the tree
+          # is unchanged. Drop the empty merge and skip the push, so no spurious
+          # `next` re-publish is triggered.
+          if git diff --quiet "$NEXT_BEFORE" HEAD; then
+            echo "No code delta after merge — skipping push (nothing to re-publish)."
+            git reset --hard "$NEXT_BEFORE"
+            echo "carries=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Push with one fetch-before-push retry on non-fast-forward (ADR 0004
+          # §5, belt-and-suspenders on top of the shared concurrency group).
+          if git push origin HEAD:next; then
+            echo "Pushed forward-merge to next."
+            echo "carries=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "::warning::Push rejected (non-fast-forward) — refetching next and retrying once."
+          git fetch --no-tags origin next
+          if git merge --no-ff -m "$MERGE_MSG" origin/next; then
+            git push origin HEAD:next
+            echo "Pushed forward-merge to next after retry."
+            echo "carries=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ -n "$(git ls-files --unmerged)" ]; then
+            echo "::warning::Conflict against a concurrent next writer — escalating to a sync issue."
+            open_sync_issue
+            git merge --abort
+            exit 0
+          fi
+          echo "::error::Retry re-merge/push failed."
+          exit 1
+
+      # The ONE place that clears an escalation (ADR 0004 §4). It fires whenever
+      # the cascade came out healthy — `next` carries `main`'s CODE — which is
+      # true in three cases:
+      #
+      #   1. the merge was pushed;
+      #   2. the merge carried no code delta and was dropped (§6/§7);
+      #   3. there was nothing to merge at all, so the guard exited early.
+      #
+      # Case 3 is why this is a step and not a function inside the merge step,
+      # where it used to live: the merge step is gated on
+      # `guard.outputs.pending == 'true'`, so a run that finds `next` already
+      # complete skips it — and never closes. That is precisely the state a
+      # merged sync PR leaves behind (`next` absorbed `main`'s tip), i.e. the
+      # resolution the issue asked for. Measured on #2987: resolved and merged
+      # at 09:25, still open afterwards, and it would have stayed open until the
+      # next push to `main` produced a mergeable run. Meanwhile the tracker
+      # claimed "the cascade is paused" and `forward-merge-drift.yml` reads open
+      # sync issues as a live blocker.
+      #
+      # Ancestry is deliberately NOT the signal: §6/§7 leaves `main` one
+      # `chore(release):` commit ahead of `next` forever while being
+      # content-identical.
+      #
+      # GitHub cannot do this from the sync PR — `Closes #n` only fires when a PR
+      # merges into the DEFAULT branch, and the sync PR targets `next`.
+      - name: Close the escalation 🧹
+        if: >-
+          steps.guard.outputs.pending == 'false' ||
+          steps.merge.outputs.carries == 'true'
+        run: |
+          set -euo pipefail
+          for n in $(gh issue list --repo "$REPO" --state open --label sync \
+                       --search 'in:title "Forward-merge blocked"' \
+                       --json number --jq '.[].number'); do
+            gh issue close "$n" --repo "$REPO" \
+              --comment "\`next\` carries \`main\`'s code again — the cascade is unblocked." \
+              && echo "::notice::Closed sync issue #${n}."
+          done
+
+      # A conflict is the expected non-error path (handled above, exits 0). Any
+      # genuine failure (retry exhausted, workflow error) must not let `next`
+      # silently fall behind `main` — open an issue and ping CODEOWNERS (ADR
+      # 0004 §10).
+      - name: Open an issue on failure 🚨
+        if: failure() && steps.guard.outputs.pending == 'true'
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          gh label create automated --repo "$REPO" --color EDEDED \
+            --description "Opened by automation" 2>/dev/null || true
+          body="$(printf '%s\n' \
+            'The automated forward-merge of main into next failed for a reason OTHER THAN a merge conflict (ADR 0004 §10). next may now be falling behind main.' \
+            '' \
+            "Run: ${RUN_URL}" \
+            '' \
+            '/cc @mfal @Lisa18289 @ins0 @maaaathis @Jan-Eimertenbrink')"
+          gh issue create --repo "$REPO" --label automated \
+            --title "Forward-merge main into next failed" \
+            --body "$body" \
+            || echo "::warning::Could not open the failure issue."

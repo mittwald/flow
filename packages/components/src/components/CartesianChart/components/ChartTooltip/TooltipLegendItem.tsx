@@ -1,5 +1,4 @@
 import { LegendItem } from "@/components/Legend/components/LegendItem";
-import type { WithTooltipFormatters } from "./ChartTooltip";
 import type { FC } from "react";
 import type { DefaultTooltipContentProps } from "recharts";
 import type {
@@ -8,16 +7,19 @@ import type {
 } from "recharts/types/component/DefaultTooltipContent";
 import { usePromise } from "@mittwald/react-use-promise";
 
+import type { ChartDataValue } from "@/components/CartesianChart/types";
+import type { WithTooltipFormatters } from "@/components/CartesianChart/components/ChartTooltip/types";
+
 /** @internal */
 export type TooltipPayloadItem = NonNullable<
   DefaultTooltipContentProps<ValueType, NameType>["payload"]
 >[number];
 
 /** @internal */
-interface LegendItemLabelProps extends Pick<
-  WithTooltipFormatters,
-  "formatter"
-> {
+interface LegendItemLabelProps<
+  TData extends ChartDataValue = ChartDataValue,
+  TTooltipLabelValue extends keyof TData = keyof TData,
+> extends Pick<WithTooltipFormatters<TData, TTooltipLabelValue>, "formatter"> {
   item: TooltipPayloadItem;
   index: number;
 }
@@ -28,17 +30,14 @@ export const TooltipLegendItem: FC<LegendItemLabelProps> = ({
   item,
   index,
 }) => {
-  const { value, dataKey, unit, fill } = item;
+  const { value, dataKey, unit, fill, name } = item;
 
   const formattedLabel = usePromise(
-    async (value, dataKey, index, unit, formatter) => {
-      if (!formatter) {
-        return `${dataKey}: ${value}${unit ? ` ${unit}` : ""}`;
-      }
-
-      return formatter(value, dataKey, index, unit);
-    },
-    [value, dataKey, index, unit, formatter] as const,
+    (value, dataKey, index, unit, formatter, name) =>
+      formatter
+        ? formatter(value, String(name), index, unit)
+        : `${name ?? ""} (${value ?? ""}${unit ? unit : ""})`,
+    [value, dataKey, index, unit, formatter, name] as const,
   );
 
   return <LegendItem color={fill}>{formattedLabel}</LegendItem>;

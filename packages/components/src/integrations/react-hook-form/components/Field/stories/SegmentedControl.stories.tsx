@@ -45,15 +45,15 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="user">
             <SegmentedControl>
-              <Label>Role</Label>
-              <Segment value="admin">Admin</Segment>
-              <Segment value="member">Member</Segment>
-              <Segment value="accountant">Accountant</Segment>
+              <Label>Rank</Label>
+              <Segment value="master">Jedi Master</Segment>
+              <Segment value="padawan">Padawan</Segment>
+              <Segment value="sith">Sith Lord</Segment>
             </SegmentedControl>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -79,21 +79,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <SegmentedControl>
-            <Label>Role</Label>
-            <Segment value="admin">Admin</Segment>
-            <Segment value="member">Member</Segment>
-            <Segment value="accountant">Accountant</Segment>
+        <Section>
+          <Field name="field">
+            <SegmentedControl>
+              <Label>Rank</Label>
+              <Segment value="master">Jedi Master</Segment>
+              <Segment value="padawan">Padawan</Segment>
+              <Segment value="sith">Sith Lord</Segment>
+            </SegmentedControl>
+          </Field>
+          <SegmentedControl isInvalid>
+            <Label>Rank</Label>
+            <Segment value="master">Jedi Master</Segment>
+            <Segment value="padawan">Padawan</Segment>
+            <Segment value="sith">Sith Lord</Segment>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </SegmentedControl>
-        </Field>
-        <SegmentedControl isInvalid>
-          <Label>Role</Label>
-          <Segment value="admin">Admin</Segment>
-          <Segment value="member">Member</Segment>
-          <Segment value="accountant">Accountant</Segment>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </SegmentedControl>
+        </Section>
       </Form>
     );
   },
@@ -104,31 +106,41 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <SegmentedControl>
-            <Label>Role</Label>
-            <Segment value="admin">Admin</Segment>
-            <Segment value="member">Member</Segment>
-            <Segment value="accountant">Accountant</Segment>
+            <Label>Rank</Label>
+            <Segment value="master">Jedi Master</Segment>
+            <Segment value="padawan">Padawan</Segment>
+            <Segment value="sith">Sith Lord</Segment>
           </SegmentedControl>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

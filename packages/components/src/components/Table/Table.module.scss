@@ -1,6 +1,14 @@
+@use "@/styles/mixins/scrollbar";
+
 .tableContainer {
+  @include scrollbar.scrollbar;
+
   width: 100%;
   overflow-x: auto;
+}
+
+.tableScrollArea {
+  width: 100%;
 }
 
 .table {
@@ -54,7 +62,7 @@
     }
   }
 
-  .body {
+  :where(.body) {
     :where(.row) {
       &:where(:nth-of-type(odd):not(.footer)) {
         background-color: var(--table--background-color-accent);
@@ -77,5 +85,13 @@
     .column {
       vertical-align: middle;
     }
+  }
+
+  &.layout-auto {
+    table-layout: auto;
+  }
+
+  &.layout-fixed {
+    table-layout: fixed;
   }
 }

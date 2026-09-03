@@ -39,6 +39,7 @@ test.each(testEnvironments)(
         </TimeField>
         <TimeField isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </TimeField>
         <TimeField granularity="hour">
           <Label>Hour only</Label>

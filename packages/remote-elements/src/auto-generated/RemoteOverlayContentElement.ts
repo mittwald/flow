@@ -11,6 +11,7 @@ export class RemoteOverlayContentElement extends FlowRemoteElement<RemoteOverlay
 
   static override get remoteProperties() {
     return {
+      "aria-labelledby": {},
       className: {},
       isDismissable: {},
       isOpen: {},

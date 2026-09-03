@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProgressBar } from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 
 const meta: Meta<typeof ProgressBar> = {
@@ -45,7 +44,6 @@ export const WithPercentage: Story = {
 };
 
 export const WithoutUnit: Story = {
-  args: { showMaxValue: true },
   render: (props) => (
     <ProgressBar
       value={500}
@@ -59,75 +57,42 @@ export const WithoutUnit: Story = {
   ),
 };
 
-export const WithMaxValue: Story = {
-  args: { showMaxValue: true },
-};
-
-export const Small: Story = {
-  args: { size: "s" },
-};
-
 export const WithSegments: Story = {
-  args: {
-    segments: [
-      { title: "Item 1", value: 20 },
-      { title: "Item 2", value: 30 },
-    ],
-    size: "l",
+  parameters: {
+    controls: { exclude: ["status"] },
   },
   render: (props) => (
-    <ProgressBar {...props}>
+    <ProgressBar
+      {...props}
+      segments={[
+        { title: "X-Wings", value: 5 },
+        { title: "Y-Wings", value: 10 },
+        { title: "TIE Fighters", value: 4 },
+        { title: "Star Destroyers", value: 7 },
+        { title: "A-Wings", value: 12 },
+        { title: "B-Wings", value: 24 },
+        { title: "Shuttles", value: 5 },
+        { title: "Freighters", value: 8 },
+      ]}
+    >
       <Label>Storage</Label>
     </ProgressBar>
   ),
 };
 
 export const WithSegmentsAndUnit: Story = {
-  args: {
-    formatOptions: { style: "unit", unit: "gigabyte" },
-    showMaxValue: true,
-    maxValue: 60,
-    segments: [
-      { title: "Backups", value: 20 },
-      { title: "Databases", value: 30 },
-    ],
-    size: "l",
+  parameters: {
+    controls: { exclude: ["status"] },
   },
-  render: (props) => (
-    <ProgressBar {...props}>
-      <Label>Storage</Label>
-    </ProgressBar>
-  ),
-};
-
-export const WithSegmentsAndWithoutLegend: Story = {
-  args: {
-    formatOptions: { style: "unit", unit: "gigabyte" },
-    showMaxValue: true,
-    maxValue: 60,
-    segments: [
-      { title: "Backups", value: 20 },
-      { title: "Databases", value: 30 },
-    ],
-    size: "s",
-    showLegend: false,
-  },
-  render: (props) => (
-    <ProgressBar {...props}>
-      <Label>Storage</Label>
-    </ProgressBar>
-  ),
-};
-
-export const WithValueHigherThanMaxValue: Story = {
-  args: { showMaxValue: true },
   render: (props) => (
     <ProgressBar
-      value={2000}
-      maxValue={1000}
-      minValue={0}
-      formatOptions={{ style: "unit", unit: "gigabyte" }}
       {...props}
+      formatOptions={{ style: "unit", unit: "gigabyte" }}
+      maxValue={60}
+      segments={[
+        { title: "Backups", value: 20 },
+        { title: "Databases", value: 30 },
+      ]}
     >
       <Label>Storage</Label>
     </ProgressBar>
@@ -135,7 +100,6 @@ export const WithValueHigherThanMaxValue: Story = {
 };
 
 export const WithValueLabel: Story = {
-  args: { showMaxValue: true },
   render: (props) => {
     const value = 500;
     const maxValue = 1000;

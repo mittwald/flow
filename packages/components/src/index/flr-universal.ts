@@ -9,6 +9,10 @@ export {
   type BrowserOnlyProps,
   CountryOptions,
   type CountryOptionsProps,
+  DeprecationWarningProvider,
+  type DeprecationWarningHandler,
+  type DeprecationWarningProviderProps,
+  IntlProvider,
   LightBox,
   type LightBoxProps,
   LightBoxTrigger,
@@ -35,3 +39,5 @@ export {
 
 export * from "@/lib/controller/public";
 export * from "@/lib/hooks/public";
+
+export { useControlledRemoteValueProps } from "@/lib/remote/useControlledRemoteValueProps";

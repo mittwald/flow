@@ -1,9 +1,14 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import { page } from "vitest/browser";
-import React from "react";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
-const colors = ["primary", "danger", "unavailable", "dark", "light"] as const;
+const colors = ["default", "danger", "unavailable", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "IllustratedMessage content (%s)",
@@ -62,11 +67,11 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s" align="center">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <IllustratedMessage color={color}>
                 <IconStar />
-                <Heading>Heading</Heading>
+                <Heading>{firstLetterToUppercase(color)}</Heading>
                 <Text>Text</Text>
                 <Button>Button</Button>
               </IllustratedMessage>
@@ -106,10 +111,10 @@ test.each(testEnvironments)(
             <Section>
               <IllustratedMessage color="danger">
                 <IconDanger />
-                <Heading>Lorem ipsum dolor sit amet</Heading>
+                <Heading>A galaxy far, far away</Heading>
                 <Text>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Cumque eius quam quas vel voluptas, ullam aliquid fugit.
+                  A long time ago in a galaxy far, far away, the Rebel Alliance
+                  struck a blow against the Galactic Empire.
                 </Text>
               </IllustratedMessage>
             </Section>
@@ -135,16 +140,16 @@ test.each(testEnvironments)(
     await render(
       <IllustratedMessage>
         <Heading>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire and stole the secret plans
+          to the ultimate weapon, the Death Star.
         </Heading>
         <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas. Earum pariatur, similique corrupti id officia
-          perferendis. Labore, similique.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star, an
+          armored station with power to destroy an entire planet. Pursued by
+          sinister agents, Leia races home.
         </Text>
       </IllustratedMessage>,
     );

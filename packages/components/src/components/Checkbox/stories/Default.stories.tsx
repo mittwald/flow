@@ -1,20 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "../index";
-import React from "react";
 import { action } from "storybook/actions";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof Checkbox> = {
   title: "Form Controls/Checkbox",
   component: Checkbox,
   args: {
     onChange: action("onChange"),
+    isDisabled: false,
+    isReadOnly: false,
+    isIndeterminate: false,
   },
   parameters: {
     controls: { exclude: ["onChange"] },
   },
-  render: (props) => (
-    <Checkbox {...props}>Consent to terms and conditions</Checkbox>
-  ),
+  render: (props) => <Checkbox {...props}>Join the Rebel Alliance</Checkbox>,
 };
 
 export default meta;
@@ -23,11 +24,11 @@ type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const Indeterminate: Story = { args: { isIndeterminate: true } };
-
-export const DisabledSelected: Story = {
-  args: { isDisabled: true, isSelected: true },
+export const WithFieldError: Story = {
+  render: (props) => (
+    <Checkbox {...props} isInvalid>
+      Join the Rebel Alliance
+      <FieldError>Please join to continue</FieldError>
+    </Checkbox>
+  ),
 };

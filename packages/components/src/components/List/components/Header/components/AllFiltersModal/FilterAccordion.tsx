@@ -1,53 +1,36 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import AccordionView from "@/views/AccordionView";
 import HeadingView from "@/views/HeadingView";
 import ContentView from "@/views/ContentView";
-import RadioGroupView from "@/views/RadioGroupView";
-import RadioView from "@/views/RadioView";
-import CheckboxGroupView from "@/views/CheckboxGroupView";
-import CheckboxView from "@/views/CheckboxView";
 import type { Filter } from "@/components/List/model/filter/Filter";
+import { FilterAccordionRadioGroup } from "@/components/List/components/Header/components/AllFiltersModal/FilterAccordionRadioGroup";
+import { FilterAccordionCheckboxGroup } from "@/components/List/components/Header/components/AllFiltersModal/FilterAccordionCheckboxGroup";
+import { FilterAccordionDateRange } from "@/components/List/components/Header/components/AllFiltersModal/FilterAccordionDateRange";
+import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 interface Props {
-  filter: Filter<never, never, never>;
+  filter: Filter | DateRangeFilter;
+  expandAccordions: boolean;
 }
 
 export const FilterAccordion: FC<Props> = (props) => {
-  const { filter } = props;
+  const { filter, expandAccordions } = props;
 
-  const activeKeys = filter.values.filter((v) => v.isActive).map((v) => v.id);
+  const name = filter.name ?? filter.property;
+
+  const content =
+    filter instanceof DateRangeFilter ? (
+      <FilterAccordionDateRange filter={filter} />
+    ) : filter.mode === "one" ? (
+      <FilterAccordionRadioGroup filter={filter} />
+    ) : (
+      <FilterAccordionCheckboxGroup filter={filter} />
+    );
 
   return (
-    <AccordionView>
-      <HeadingView>{filter.name ?? filter.property}</HeadingView>
-      <ContentView>
-        {filter.mode === "one" && (
-          <RadioGroupView value={activeKeys[0]} m={[1, 1]}>
-            {filter.values.map((v) => (
-              <RadioView
-                key={v.id}
-                value={v.id}
-                onPress={() => {
-                  if (!v.isActive) {
-                    v.toggle();
-                  }
-                }}
-              >
-                {v.render()}
-              </RadioView>
-            ))}
-          </RadioGroupView>
-        )}
-        {filter.mode !== "one" && (
-          <CheckboxGroupView value={activeKeys} m={[1, 1]}>
-            {filter.values.map((v) => (
-              <CheckboxView key={v.id} value={v.id} onPress={() => v.toggle()}>
-                {v.render()}
-              </CheckboxView>
-            ))}
-          </CheckboxGroupView>
-        )}
-      </ContentView>
+    <AccordionView defaultExpanded={expandAccordions}>
+      <HeadingView>{name}</HeadingView>
+      <ContentView>{content}</ContentView>
     </AccordionView>
   );
 };

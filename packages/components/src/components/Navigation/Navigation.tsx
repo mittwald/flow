@@ -3,12 +3,12 @@ import styles from "./Navigation.module.scss";
 import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
+import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
 
 export interface NavigationProps
   extends
@@ -28,8 +28,10 @@ export const Navigation = flowComponent("Navigation", (props) => {
     unstyled: true,
     Icon: {
       className: styles.icon,
+      size: "m",
     },
     Badge: { className: styles.badge },
+    AlertBadge: { className: styles.badge },
     CounterBadge: { className: styles.badge },
   };
 
@@ -38,21 +40,20 @@ export const Navigation = flowComponent("Navigation", (props) => {
       props={{
         Link: {
           ...linkPropsContext,
-          tunnelId: "links",
+          tunnel: {
+            id: "links",
+            component: "Navigation",
+          },
         },
         NavigationGroup: {
           Link: linkPropsContext,
         },
       }}
     >
-      <TunnelProvider>
-        <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
-          <ul>
-            <TunnelExit id="links" />
-          </ul>
-          {children}
-        </nav>
-      </TunnelProvider>
+      <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
+        <LinkListTunnelExit id="links" component="Navigation" />
+        {children}
+      </nav>
     </PropsContextProvider>
   );
 });

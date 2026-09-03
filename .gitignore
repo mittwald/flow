@@ -23,3 +23,11 @@ coverage/*.json
 .DS_Store
 **/.DS_Store
 packages/remote-react-components/.vitest-attachments
+
+# Local Claude Code preview launch config
+.claude/launch.json
+
+# Scratch state for agent-driven plan execution (superpowers): task briefs,
+# per-task reports, review diffs and the progress ledger. Session-local
+# bookkeeping, never part of a change.
+.superpowers

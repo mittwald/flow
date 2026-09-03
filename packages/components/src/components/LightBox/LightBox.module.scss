@@ -1,5 +1,20 @@
 .lightBox {
-  background-color: var(--light-box--overlay-background-color);
+  > div {
+    position: fixed;
+    height: var(--visual-viewport-height);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      width: inherit;
+      max-height: var(--visual-viewport-height);
+    }
+  }
 
   [role="dialog"] {
     outline: none;
@@ -11,6 +26,10 @@
 
   .content {
     overflow: auto;
+
+    > img {
+      width: 100%;
+    }
   }
 
   &.fitScreen {
@@ -24,13 +43,43 @@
   .actions,
   .actionGroup {
     display: flex;
-    row-gap: var(--light-box--spacing);
     flex-direction: column;
     flex-shrink: 0;
-    flex-grow: 0;
   }
 
   .actions {
-    padding-left: var(--light-box--spacing);
+    row-gap: var(--light-box--spacing);
+    padding-inline-start: var(--light-box--spacing);
+  }
+
+  .gallery {
+    width: var(--light-box--max-width);
+  }
+
+  &:has(.gallery) {
+    .actions {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .lightBox {
+    [role="dialog"] {
+      max-width: var(--light-box--max-width-mobile);
+      max-height: var(--light-box--max-height-mobile);
+    }
+
+    &.fitScreen {
+      .content {
+        > * {
+          max-height: var(--light-box--max-height-mobile);
+        }
+      }
+    }
+
+    .gallery {
+      width: var(--light-box--max-width-mobile);
+    }
   }
 }

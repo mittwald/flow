@@ -1,8 +1,3 @@
 {
-  "rating.0": "0 of 5",
-  "rating.1": "1 of 5",
-  "rating.2": "2 of 5",
-  "rating.3": "3 of 5",
-  "rating.4": "4 of 5",
-  "rating.5": "5 of 5"
+  "segment": "{value} of {count}"
 }

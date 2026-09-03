@@ -1,4 +1,4 @@
-import RemoteRoot from "../../src/components/RemoteRoot";
+import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
 

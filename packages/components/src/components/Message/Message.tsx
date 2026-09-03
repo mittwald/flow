@@ -1,7 +1,10 @@
-import type { CSSProperties, PropsWithChildren } from "react";
+import { type CSSProperties, type PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type {
+  PropsWithClassName,
+  PropsWithElementType,
+} from "@/lib/types/props";
 import {
   dynamic,
   type PropsContext,
@@ -13,17 +16,33 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import * as Aria from "react-aria-components";
 
 export interface MessageProps
-  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
+  extends
+    PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps,
+    PropsWithElementType<"article" | "li"> {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
+  /** A custom background color of the message as a CSS color value. */
   color?: string;
 }
 
 /** @flr-generate all */
 export const Message = flowComponent("Message", (props) => {
-  const { type = "responder", children, className, color } = props;
+  const {
+    type = "responder",
+    children,
+    className,
+    color,
+    elementType = "article",
+  } = props;
+
+  const Element = elementType;
 
   const rootClassName = clsx(styles.message, styles[type], className);
 
@@ -31,13 +50,22 @@ export const Message = flowComponent("Message", (props) => {
     ? ({ "--message-background": color } as CSSProperties)
     : undefined;
 
+  const formatter = useLocalizedStringFormatter(locales, "Message");
+
+  const senderContext: PropsContext["Combine"] = {
+    wrapWith: <ClearPropsContext />,
+    className: styles.user,
+    Avatar: { Initials: { "aria-hidden": true } },
+  };
+
   const propsContext: PropsContext = {
     Content: {
       className: styles.content,
       children: dynamic((props) => {
         return (
           <>
-            <div className={styles.tip} />
+            <div className={styles.tipBorder} aria-hidden />
+            <div className={styles.tip} aria-hidden />
             {props.children}
           </>
         );
@@ -58,13 +86,21 @@ export const Message = flowComponent("Message", (props) => {
           variant: "plain",
           color: "secondary",
           children: <IconContextMenu />,
+          "aria-label": formatter.format("options"),
         },
       },
       Text: { className: styles.date },
-      Align: {
-        wrapWith: <ClearPropsContext />,
-        className: styles.user,
-      },
+      Combine: senderContext,
+      // Deprecated alias of Combine — keep it arranged the same way.
+      Align: senderContext,
+      children: dynamic((props) => (
+        <>
+          <Aria.VisuallyHidden>
+            {formatter.format("headerLabel")}
+          </Aria.VisuallyHidden>
+          {props.children}
+        </>
+      )),
     },
 
     Button: {
@@ -72,9 +108,10 @@ export const Message = flowComponent("Message", (props) => {
       className: styles.action,
     },
     ActionGroup: {
+      preserveOrder: true,
+      size: "s",
       className: styles.actionGroup,
       Button: {
-        size: "s",
         className: styles.actionGroupAction,
       },
     },
@@ -82,9 +119,9 @@ export const Message = flowComponent("Message", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <article className={rootClassName} style={style}>
+      <Element className={rootClassName} style={style}>
         {children}
-      </article>
+      </Element>
     </PropsContextProvider>
   );
 });

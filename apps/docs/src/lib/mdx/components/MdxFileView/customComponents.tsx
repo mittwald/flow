@@ -2,26 +2,21 @@ import styles from "./customComponents.module.css";
 import {
   Alert,
   AlertBadge,
+  CodeBlock,
   ColumnLayout,
   Content,
-  CopyButton,
   Heading,
   InlineCode,
   Label,
   Link,
   Separator,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
   Text,
 } from "@mittwald/flow-react-components";
-import type { PropsWithChildren } from "react";
+import { Children, isValidElement, type PropsWithChildren } from "react";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
+import { IconLibrary } from "@/lib/mdx/components/IconLibrary/IconLibrary";
 import { onlyText } from "react-children-utilities";
 import { AnchorLinkHeading } from "@/lib/mdx/components/MdxFileView/AnchorLinkHeading";
 
@@ -36,27 +31,39 @@ export const createCustomComponents = () => {
     DoAndDont: ExamplesContainer,
     ColumnLayout,
     DesignTokenTable,
+    IconLibrary,
     Label,
     Link,
 
-    pre: ({ children }: PropsWithChildren) => (
-      <div className={styles.preContainer}>
-        <pre className={styles.pre}>{children}</pre>
-        <CopyButton
-          className={styles.preCopyButton}
-          text={onlyText(children)}
-          variant="plain"
-          size="s"
+    pre: ({ children }: PropsWithChildren) => {
+      const preElementContent = Children.toArray(children)[0];
+
+      return (
+        <CodeBlock
+          copyable={true}
+          language={
+            isValidElement<{ className?: string }>(preElementContent) &&
+            preElementContent.props.className
+              ? preElementContent.props.className.replace("language-", "")
+              : "jsx"
+          }
+          code={String(
+            isValidElement<{ children: string }>(preElementContent)
+              ? preElementContent.props.children
+              : preElementContent,
+          ).trim()}
         />
-      </div>
-    ),
+      );
+    },
 
     code: ({ children }: PropsWithChildren) => (
       <InlineCode>{children}</InlineCode>
     ),
 
     p: ({ children }: PropsWithChildren) => (
-      <Text elementType="p">{children}</Text>
+      <Text elementType="p" className={styles.text}>
+        {children}
+      </Text>
     ),
 
     ul: ({ children }: PropsWithChildren) => (
@@ -123,19 +130,30 @@ export const createCustomComponents = () => {
 
     hr: () => <Separator className={styles.separator} />,
 
+    /**
+     * React Aria Components Table throws error during pre-rendering when used
+     * in combination with MDX. So we are using vanilla HTML with some Flow
+     * classes.
+     */
     table: ({ children }: PropsWithChildren) => (
-      <Table aria-label="Tabelle">{children}</Table>
+      <table aria-label="Tabelle" className="flow--table">
+        {children}
+      </table>
     ),
     thead: ({ children }: PropsWithChildren) => (
-      <TableHeader>{children}</TableHeader>
+      <thead className="flow--table--header">{children}</thead>
     ),
-    tr: ({ children }: PropsWithChildren) => <TableRow>{children}</TableRow>,
+    tr: ({ children }: PropsWithChildren) => (
+      <tr className="flow--table--row">{children}</tr>
+    ),
     th: ({ children }: PropsWithChildren) => (
-      <TableColumn>{children}</TableColumn>
+      <th className="flow--table--column">{children}</th>
     ),
     tbody: ({ children }: PropsWithChildren) => (
-      <TableBody>{children}</TableBody>
+      <tbody className="flow--table--body">{children}</tbody>
     ),
-    td: ({ children }: PropsWithChildren) => <TableCell>{children}</TableCell>,
+    td: ({ children }: PropsWithChildren) => (
+      <td className="flow--table--cell">{children}</td>
+    ),
   } as const;
 };

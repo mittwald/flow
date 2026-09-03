@@ -1,55 +1,53 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CartesianChart from "../CartesianChart";
+import CartesianChart, { typedCartesianChart } from "../CartesianChart";
 import Area from "../components/Area";
 import IllustratedMessage from "@/components/IllustratedMessage";
 import { Heading, IconMonitoring } from "@/components/public";
-import { Line } from "@/components/CartesianChart/components/Line";
 import ChartTooltip from "@/components/CartesianChart/components/ChartTooltip/ChartTooltip";
-import CartesianGrid from "@/components/CartesianChart/components/CartesianGrid/CartesianGrid";
+import ChartGrid from "@/components/CartesianChart/components/ChartGrid/ChartGrid";
 import YAxis from "@/components/CartesianChart/components/YAxis/YAxis";
 import XAxis from "@/components/CartesianChart/components/XAxis/XAxis";
 import ChartLegend from "@/components/CartesianChart/components/ChartLegend/ChartLegend";
-import { sleep } from "@/lib/promises/sleep";
 
 const chartData = [
   {
-    name: "Stat 1",
+    name: "Tatooine",
     firstKey: 4000,
     secondKey: 2400,
     thirdKey: 2400,
   },
   {
-    name: "Stat 2",
+    name: "Hoth",
     firstKey: 3000,
     secondKey: 1398,
     thirdKey: 2210,
   },
   {
-    name: "Stat 3",
+    name: "Endor",
     firstKey: 2000,
     secondKey: 9800,
     thirdKey: 2290,
   },
   {
-    name: "Stat 4",
+    name: "Naboo",
     firstKey: 2780,
     secondKey: 3908,
     thirdKey: 2000,
   },
   {
-    name: "Stat 5",
+    name: "Coruscant",
     firstKey: 1890,
     secondKey: 4800,
     thirdKey: 2181,
   },
   {
-    name: "Stat 6",
+    name: "Dagobah",
     firstKey: 2390,
     secondKey: 3800,
     thirdKey: 2500,
   },
   {
-    name: "Stat 7",
+    name: "Mustafar",
     firstKey: 3490,
     secondKey: 4300,
     thirdKey: 2100,
@@ -62,7 +60,9 @@ const meta: Meta<typeof CartesianChart> = {
   title: "Data Visualisation/CartesianChart",
   component: CartesianChart,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: {
+      disable: true,
+    },
   },
   args: {
     data: chartData,
@@ -75,14 +75,14 @@ export default meta;
 export const Default: Story = {
   render: (props) => (
     <CartesianChart {...props}>
-      <CartesianGrid />
       <Area dataKey="firstKey" />
       <Area dataKey="secondKey" color="palatinate-blue" />
       <Area dataKey="thirdKey" color="#555" />
       <XAxis dataKey="name" />
       <YAxis interval="equidistantPreserveStart" />
-      <ChartTooltip />
+      <ChartGrid />
       <ChartLegend />
+      <ChartTooltip />
     </CartesianChart>
   ),
 };
@@ -91,24 +91,24 @@ export const MultipleSynced: Story = {
   render: (props) => (
     <>
       <CartesianChart {...props} syncId="syncedCharts">
-        <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
         <Area dataKey="thirdKey" color="tangerine" />
         <XAxis dataKey="name" />
         <YAxis />
+        <ChartGrid />
         <ChartTooltip />
         <ChartLegend />
       </CartesianChart>
       <CartesianChart {...props} syncId="syncedCharts">
-        <CartesianGrid />
         <Area dataKey="firstKey" color="magenta" />
         <Area dataKey="secondKey" color="tropical-indigo" />
         <Area dataKey="thirdKey" color="malachite" />
         <XAxis dataKey="name" />
         <YAxis />
-        <ChartTooltip />
+        <ChartGrid />
         <ChartLegend />
+        <ChartTooltip />
       </CartesianChart>
     </>
   ),
@@ -119,20 +119,20 @@ export const WithEmptyView: Story = {
     const emptyView = (
       <IllustratedMessage>
         <IconMonitoring />
-        <Heading>Keine Daten verfügbar</Heading>
+        <Heading>No transmissions received</Heading>
       </IllustratedMessage>
     );
 
     return (
       <CartesianChart emptyView={emptyView}>
-        <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
         <Area dataKey="thirdKey" color="tangerine" />
         <XAxis dataKey="name" />
         <YAxis interval="equidistantPreserveStart" />
-        <ChartTooltip />
+        <ChartGrid />
         <ChartLegend />
+        <ChartTooltip />
       </CartesianChart>
     );
   },
@@ -170,23 +170,116 @@ export const WithLine: Story = {
   args: {
     data: lineChartData,
   },
-  render: (props) => (
-    <CartesianChart {...props}>
-      <CartesianGrid />
-      <Area dataKey="mean" unit="ms" />
-      <Line dataKey="max" color="magenta" unit="ms" />
-      <XAxis dataKey="time" />
-      <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
-      <ChartTooltip
-        headingFormatter={(v) => {
-          return `Sync Format: ${v}`;
-        }}
-        formatter={async (value, name, index, unit) => {
-          await sleep(3000);
-          return `Async Format: ${name}: ${value}${unit ? ` ${unit}` : ""}`;
-        }}
-      />
+  render: () => {
+    interface ChartData {
+      Time: Date;
+      Fleet: number;
+      Squadrons: number;
+      Median: number;
+    }
+
+    const CartesianChart = typedCartesianChart<ChartData>();
+
+    return (
+      <CartesianChart.Chart
+        data={[
+          {
+            Time: new Date(Date.parse("2026-06-11")),
+            Fleet: 40,
+            Squadrons: 24,
+            Median: 32,
+          },
+          {
+            Time: new Date(Date.parse("2026-07-11")),
+            Fleet: 30,
+            Squadrons: 13,
+            Median: 19,
+          },
+          {
+            Time: new Date(Date.parse("2026-08-11")),
+            Fleet: 20,
+            Squadrons: 78,
+            Median: 40,
+          },
+          {
+            Time: new Date(Date.parse("2026-09-11")),
+            Fleet: 27,
+            Squadrons: 39,
+            Median: 33,
+          },
+        ]}
+      >
+        <CartesianChart.Line dataKey="Median" color="magenta" unit="ms" />
+        <CartesianChart.Area dataKey="Fleet" unit="%" />
+        <CartesianChart.Area
+          dataKey="Squadrons"
+          color="palatinate-blue"
+          unit="%"
+        />
+        <CartesianChart.XAxis
+          dataKey="Time"
+          tickFormatter={(d) => {
+            return Intl.DateTimeFormat("en", {
+              month: "short",
+              day: "2-digit",
+            }).format(d);
+          }}
+        />
+        <CartesianChart.YAxis domain={[0, 100]} unit="%" />
+        <CartesianChart.Grid />
+        <CartesianChart.Legend />
+        <CartesianChart.Tooltip
+          headingFormatter={(d) =>
+            Intl.DateTimeFormat("en", {
+              month: "long",
+              day: "2-digit",
+            }).format(d)
+          }
+        />
+      </CartesianChart.Chart>
+    );
+  },
+};
+
+export const WithIntlNumberFormat: Story = {
+  args: {
+    data: lineChartData,
+  },
+  render: () => (
+    <CartesianChart
+      data={[
+        {
+          Time: "00:00",
+          Squadrons: 24,
+          Droids: 13.42,
+        },
+        {
+          Time: "01:00",
+          Squadrons: 13,
+          Droids: 13.42,
+        },
+      ]}
+    >
+      <Area dataKey="Squadrons" color="palatinate-blue" />
+      <Area dataKey="Droids" />
+      <XAxis dataKey="Time" />
+      <YAxis domain={[0, 100]} />
+      <ChartGrid />
       <ChartLegend />
+      <ChartTooltip
+        formatter={(value, name) =>
+          `${name}: ${Intl.NumberFormat(undefined, {
+            style: "unit",
+            unit: "gigabyte",
+          }).format(typeof value === "number" ? value : 0)}`
+        }
+        progressBarFormatter={(value) =>
+          Intl.NumberFormat(undefined, {
+            style: "unit",
+            unit: "gigabyte",
+          }).format(value)
+        }
+      />
     </CartesianChart>
   ),
 };

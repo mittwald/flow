@@ -7,6 +7,7 @@ interface SearchFieldRenderProps extends SupportedSearchFieldProps {
   onChange: (value: SearchValue) => unknown;
   value: SearchValue;
   autoSubmit?: boolean;
+  isDisabled?: boolean;
 }
 
 export type SearchFieldRenderComponent = ComponentType<SearchFieldRenderProps>;
@@ -17,4 +18,5 @@ export interface SearchShape<IgnoredT> {
   render?: SearchFieldRenderComponent;
   textFieldProps: SupportedSearchFieldProps;
   defaultValue?: string;
+  autosave?: boolean;
 }

@@ -8,6 +8,8 @@ import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Notification.module.scss";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>, PropsWithStatus {
@@ -45,6 +47,8 @@ export const Notification: FC<NotificationProps> = (props) => {
     className,
   );
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
   const propsContext: PropsContext = {
     Heading: {
       className: styles.heading,
@@ -68,6 +72,7 @@ export const Notification: FC<NotificationProps> = (props) => {
       variant="plain"
       color="secondary"
       onPress={onClose}
+      aria-label={stringFormatter.format("notification.close")}
     >
       <IconClose />
     </Button>

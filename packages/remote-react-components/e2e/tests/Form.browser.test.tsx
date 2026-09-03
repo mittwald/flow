@@ -14,7 +14,9 @@ const ui = () => ({
   expectResult: async (data: unknown) => {
     const result = page.getByTestId("form-result");
     await expect.poll(() => expect(result).toBeInTheDocument()).toBeTruthy();
-    expect(JSON.parse(result.element().textContent ?? "")).toEqual(data);
+
+    const inputElement = result.element().querySelector("input");
+    expect(JSON.parse(atob(inputElement.value) ?? "")).toEqual(data);
   },
 });
 
@@ -26,7 +28,9 @@ test("SimpleForm is rendered", async () => {
   const { submitButton, result } = ui();
   await userEvent.click(submitButton);
   await expect.element(result).toBeInTheDocument();
-  expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
+
+  const inputElement = result.element().querySelector("input");
+  expect(JSON.parse(atob(inputElement.value) ?? "")).toEqual({});
 });
 
 test("ActionForm is rendered", async () => {
@@ -37,7 +41,9 @@ test("ActionForm is rendered", async () => {
   const { submitButton, result } = ui();
   await userEvent.click(submitButton);
   await expect.element(result).toBeInTheDocument();
-  expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
+
+  const inputElement = result.element().querySelector("input");
+  expect(JSON.parse(atob(inputElement.value) ?? "")).toEqual({});
 });
 
 test("onSubmitHandler is triggered with FormData", async () => {

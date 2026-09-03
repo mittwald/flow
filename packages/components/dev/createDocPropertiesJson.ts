@@ -6,10 +6,30 @@ import * as docgen from "react-docgen-typescript";
 
 import type { ComponentDoc } from "react-docgen-typescript";
 
+/*
+ * `shouldExtractLiteralValuesFromEnum` resolves the members behind a literal
+ * union alias (`gap?: GapSize`), which `typeToString` would print as the bare
+ * alias name. It reports them as `{ name: "enum", value: [...] }` — fold them
+ * back into the union string every consumer reads from `type.name`.
+ */
+function expandLiteralUnions(components: ComponentDoc[]): void {
+  for (const component of components) {
+    for (const prop of Object.values(component.props)) {
+      const { name, value } = prop.type;
+      if (name === "enum" && Array.isArray(value) && value.length > 0) {
+        prop.type.name = value
+          .map((member: { value: unknown }) => String(member.value))
+          .join(" | ");
+      }
+    }
+  }
+}
+
 async function parse(): Promise<ComponentDoc[]> {
   const parser = docgen.withCustomConfig(path.resolve("./tsconfig.json"), {
     skipChildrenPropWithoutDoc: false,
     shouldRemoveUndefinedFromOptional: true,
+    shouldExtractLiteralValuesFromEnum: true,
     savePropValueAsString: true,
   });
 
@@ -22,11 +42,24 @@ async function parse(): Promise<ComponentDoc[]> {
     ],
   });
 
-  return parser.parse(files);
+  const components = parser.parse(files);
+  expandLiteralUnions(components);
+  return components;
 }
 
+const relativeFilePaths = (components: ComponentDoc[]): ComponentDoc[] => {
+  const packageRoot = path.resolve(".");
+
+  return components.map((component) => ({
+    ...component,
+    filePath: path.isAbsolute(component.filePath)
+      ? path.relative(packageRoot, component.filePath)
+      : component.filePath,
+  }));
+};
+
 async function createDocPropertiesJson() {
-  const components = await parse();
+  const components = relativeFilePaths(await parse());
   const targetFile = "./dist/assets/doc-properties.json";
 
   console.log("📝 Writing output file " + path.resolve(targetFile));
@@ -36,10 +69,7 @@ async function createDocPropertiesJson() {
   if (!fsSync.existsSync("./dist/assets")) {
     await fs.mkdir("./dist/assets");
   }
-  await fs.writeFile(
-    "./dist/assets/doc-properties.json",
-    JSON.stringify(components, null, 2),
-  );
+  await fs.writeFile(targetFile, JSON.stringify(components));
 
   console.log("✅  Done");
 }

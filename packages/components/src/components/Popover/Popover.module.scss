@@ -1,3 +1,5 @@
+@use "@/styles/mixins/scrollbar";
+
 .popover {
   background-color: var(--popover--background-color);
   box-shadow: var(--popover--box-shadow);
@@ -14,6 +16,8 @@
   max-width: 100dvw;
 
   :where(.content) {
+    @include scrollbar.scrollbar;
+
     overflow-y: auto;
 
     &:focus-visible {
@@ -30,10 +34,6 @@
       stroke: var(--popover--border-color);
       stroke-width: var(--popover--border-width);
     }
-  }
-
-  hr {
-    margin-block: var(--popover--spacing);
   }
 
   &[data-placement="top"] {
@@ -60,7 +60,7 @@
     --origin: translateX(var(--size-px--s--negative));
 
     &:has(.tip) {
-      margin-left: var(--popover--tip-height);
+      margin-inline-start: var(--popover--tip-height);
     }
 
     .tip svg {
@@ -72,7 +72,7 @@
     --origin: translateX(var(--size-px--s));
 
     &:has(.tip) {
-      margin-right: var(--popover--tip-height);
+      margin-inline-end: var(--popover--tip-height);
     }
 
     .tip svg {

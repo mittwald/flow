@@ -1,5 +1,5 @@
 cartesian-grid:
   color:
-    value: "{color.gray.700}"
+    value: "{neutral.color.800}"
   stroke-width:
     value: "{border-width.100}"

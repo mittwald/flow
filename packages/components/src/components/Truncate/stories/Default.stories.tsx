@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Truncate } from "../index";
-import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
@@ -9,6 +8,9 @@ import { ColumnLayout } from "@/components/ColumnLayout";
 const meta: Meta<typeof Truncate> = {
   title: "Content/Truncate",
   component: Truncate,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => <Truncate {...props}>{dummyText.long}</Truncate>,
 };
 export default meta;

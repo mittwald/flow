@@ -1,11 +1,12 @@
 import { type PropsWithChildren } from "react";
-import React, { Children } from "react";
+import { Children } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Option.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import { IconCheck } from "@/components/Icon/components/icons";
 
 export interface OptionProps
   extends
@@ -33,12 +34,14 @@ export const Option = flowComponent("Option", (props) => {
     <Aria.ListBoxItem
       className={rootClassName}
       ref={ref}
+      id={value}
       {...rest}
       textValue={textValue}
-      id={value}
-      key={value}
     >
-      {hasChildren ? children : textValue}
+      <span className={styles.content}>
+        {hasChildren ? children : textValue}
+      </span>
+      <IconCheck aria-hidden className={styles.checkMark} />
     </Aria.ListBoxItem>
   );
 });

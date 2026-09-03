@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Radio, RadioButton, RadioGroup } from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { FieldError } from "@/components/FieldError";
@@ -12,16 +11,19 @@ const meta: Meta<typeof RadioGroup> = {
   component: RadioGroup,
   args: {
     onChange: action("onChange"),
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
   },
   parameters: {
     controls: { exclude: ["onChange"] },
   },
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
-      <Label>Role</Label>
-      <Radio value="admin">Admin</Radio>
-      <Radio value="member">Member</Radio>
-      <Radio value="accountant">Accountant</Radio>
+      <Label>Rank</Label>
+      <Radio value="admin">Jedi Master</Radio>
+      <Radio value="member">Jedi Knight</Radio>
+      <Radio value="accountant">Padawan</Radio>
     </RadioGroup>
   ),
 };
@@ -32,19 +34,15 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const Default: Story = {};
 
-export const RadioGroupDisabled: Story = { args: { isDisabled: true } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
 export const RadioDisabled: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
-      <Label>Role</Label>
-      <Radio value="admin">Admin</Radio>
+      <Label>Rank</Label>
+      <Radio value="admin">Jedi Master</Radio>
       <Radio value="member" isDisabled>
-        Member
+        Jedi Knight
       </Radio>
-      <Radio value="accountant">Accountant</Radio>
+      <Radio value="accountant">Padawan</Radio>
     </RadioGroup>
   ),
 };
@@ -52,22 +50,10 @@ export const RadioDisabled: Story = {
 export const RadioButtons: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
-      <Label>Role</Label>
-      <RadioButton value="admin">Admin</RadioButton>
-      <RadioButton value="member">Member</RadioButton>
-      <RadioButton value="accountant">Accountant</RadioButton>
-    </RadioGroup>
-  ),
-};
-
-export const RadioButtonsReadOnly: Story = {
-  args: { isReadOnly: true },
-  render: (props) => (
-    <RadioGroup {...props} defaultValue="admin">
-      <Label>Role</Label>
-      <RadioButton value="admin">Admin</RadioButton>
-      <RadioButton value="member">Member</RadioButton>
-      <RadioButton value="accountant">Accountant</RadioButton>
+      <Label>Rank</Label>
+      <RadioButton value="admin">Jedi Master</RadioButton>
+      <RadioButton value="member">Jedi Knight</RadioButton>
+      <RadioButton value="accountant">Padawan</RadioButton>
     </RadioGroup>
   ),
 };
@@ -75,37 +61,40 @@ export const RadioButtonsReadOnly: Story = {
 export const RadioButtonDisabled: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
-      <Label>Role</Label>
-      <RadioButton value="admin">Admin</RadioButton>
+      <Label>Rank</Label>
+      <RadioButton value="admin">Jedi Master</RadioButton>
       <RadioButton value="member" isDisabled>
-        Member
+        Jedi Knight
       </RadioButton>
-      <RadioButton value="accountant">Accountant</RadioButton>
+      <RadioButton value="accountant">Padawan</RadioButton>
     </RadioGroup>
   ),
 };
 
 export const RadioButtonsWithContent: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="domain" aria-label="Domain">
+    <RadioGroup {...props} defaultValue="domain" aria-label="Transport">
       <RadioButton value="domain">
-        <Text>Book domain</Text>
+        <Text>Millennium Falcon</Text>
         <Content>
-          Do you have a desired domain? No problem, we'll help you find the
-          right domain for you.
+          The fastest hunk of junk in the galaxy - she'll make point five past
+          lightspeed and get you clear of any Imperial patrol.
         </Content>
       </RadioButton>
       <RadioButton value="virtualHost">
-        <Text>Add virtual host</Text>
+        <Text>X-Wing Starfighter</Text>
         <Content>
-          The domain remains with your previous provider, but you can use it for
-          your website in our mStudio.
+          A nimble Rebel fighter with an astromech droid, perfect for precise
+          strikes against the Empire.
         </Content>
       </RadioButton>
       <RadioButton value="subdomain">
-        <Text>Add subdomain</Text>
+        <Text>TIE Fighter</Text>
         <Content>
-          Create a subdomain from an existing domain to use for your project.
+          <Text>
+            An Imperial short-range fighter - fast and cheap, but fragile once
+            the dogfight begins.
+          </Text>
         </Content>
       </RadioButton>
     </RadioGroup>
@@ -115,11 +104,11 @@ export const RadioButtonsWithContent: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <RadioGroup {...props} isInvalid isRequired>
-      <Label>Role</Label>
-      <Radio value="admin">Admin</Radio>
-      <Radio value="member">Member</Radio>
-      <Radio value="accountant">Accountant</Radio>
-      <FieldError>Select a role to continue</FieldError>
+      <Label>Rank</Label>
+      <Radio value="admin">Jedi Master</Radio>
+      <Radio value="member">Jedi Knight</Radio>
+      <Radio value="accountant">Padawan</Radio>
+      <FieldError>Select a rank to continue</FieldError>
     </RadioGroup>
   ),
 };
@@ -134,21 +123,6 @@ export const ColumnLayout: Story = {
       <Radio value="4">Option 4</Radio>
       <Radio value="5">Option 5</Radio>
       <Radio value="6">Option 6</Radio>
-    </RadioGroup>
-  ),
-};
-
-export const RadioButtonsWithTextInContent: Story = {
-  render: (props) => (
-    <RadioGroup {...props} defaultValue="domain" aria-label="Domain">
-      <RadioButton value="domain">
-        <Text>2 vCPU</Text>
-        <Content>
-          <Text>4 GiB RAM</Text>
-          <br />
-          <Text>Bis zu 10 Projekte</Text>
-        </Content>
-      </RadioButton>
     </RadioGroup>
   ),
 };

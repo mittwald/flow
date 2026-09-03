@@ -1,8 +1,10 @@
+export * from "./view";
 export {
+  type TranslationProviderProps,
+  type Translations,
   TranslationProvider,
   useTranslationProvider,
 } from "@/components/TranslationProvider/TranslationProvider";
-export type { Translations } from "@/components/TranslationProvider/TranslationProvider";
-export { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
+export { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 export { default } from "@/components/TranslationProvider/TranslationProvider";

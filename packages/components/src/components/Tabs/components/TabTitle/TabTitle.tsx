@@ -1,12 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./TabTitle.module.scss";
 import { Text } from "@/components/Text";
 import { useTabContext } from "@/components/Tabs/components/Tab/context";
-import { TunnelEntry } from "@mittwald/react-tunnel";
 import { MenuItem } from "@/components/MenuItem";
+import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
 
 export interface TabTitleProps
   extends
@@ -18,30 +17,31 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const { id } = useTabContext();
+
   const titleClassName = clsx(styles.tabTitle, className);
 
   return (
     <>
-      <TunnelEntry id="Titles">
+      <UiComponentTunnelEntry id="Titles" component="Tabs">
         <Aria.Tab {...rest} id={id} className={titleClassName}>
           {(p) => (
             <>
               <Text emulateBoldWidth>
                 <span className={styles.text}>{children}</span>
               </Text>
-              <TunnelEntry id="ActiveTitle">
+              <UiComponentTunnelEntry id="ActiveTitle" component="Tabs">
                 {p.isSelected && children}
-              </TunnelEntry>
+              </UiComponentTunnelEntry>
             </>
           )}
         </Aria.Tab>
-      </TunnelEntry>
+      </UiComponentTunnelEntry>
 
-      <TunnelEntry id="ContextMenuItems">
-        <MenuItem className={styles.menuItem} id={id}>
+      <UiComponentTunnelEntry id="ContextMenuItems" component="Tabs">
+        <MenuItem {...rest} className={styles.menuItem} id={id}>
           {children}
         </MenuItem>
-      </TunnelEntry>
+      </UiComponentTunnelEntry>
     </>
   );
 };

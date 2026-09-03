@@ -10,11 +10,12 @@ import styles from "./SegmentedControl.module.scss";
 import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 import { type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SegmentedControlProps
   extends
@@ -22,8 +23,16 @@ export interface SegmentedControlProps
     FlowComponentProps<HTMLDivElement>,
     PropsWithContainerBreakpointSize {}
 
-/** @flr-generate all */
+/**
+ * @deprecated Use `Tabs` to switch content, or `RadioGroup` to select a value.
+ * @flr-generate all
+ */
 export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
+  const warnDeprecation = useWarnDeprecation();
+  warnDeprecation(
+    "The 'SegmentedControl' component is deprecated and will be removed in a future release. Use 'Tabs' instead when it switches content, or 'RadioGroup' instead when it sets a value.",
+  );
+
   const {
     children,
     className,
@@ -37,18 +46,21 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "SegmentedControl");
 
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.segmentedControlContainer,
-    className,
     styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
+    className,
   );
 
   const propsContext: PropsContext = {
     Segment: {
-      tunnelId: "segments",
+      tunnel: {
+        id: "segments",
+        component: "SegmentedControl",
+      },
       className: styles.segment,
     },
     ...fieldPropsContext,
@@ -63,19 +75,20 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
       className={clsx(rootClassName, fieldProps.className)}
       ref={objectRef}
     >
-      <TunnelProvider>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider dependencies={["segment"]} props={propsContext}>
-            <div className={styles.segmentedControl}>
-              <div className={styles.segments}>
-                <TunnelExit id="segments" />
-              </div>
+      <FieldErrorCaptureContext>
+        <PropsContextProvider dependencies={["segment"]} props={propsContext}>
+          <div className={styles.segmentedControl}>
+            <div className={styles.segments}>
+              <UiComponentTunnelExit
+                id="segments"
+                component="SegmentedControl"
+              />
             </div>
-            {children}
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
-        <FieldErrorView />
-      </TunnelProvider>
+          </div>
+          {children}
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.RadioGroup>
   );
 });

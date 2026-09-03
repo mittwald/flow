@@ -29,19 +29,19 @@ export default function Page() {
         <Field name="fileDrop">
           <FileDropZone>
             <IconUpload />
-            <Heading>Datei ablegen</Heading>
+            <Heading>Drop file here</Heading>
             <FileField>
-              <Button>Datei auswählen</Button>
+              <Button>Choose file</Button>
             </FileField>
           </FileDropZone>
         </Field>
         <Field name="files">
           <FileField>
-            <Button>Datei auswählen</Button>
+            <Button>Choose file</Button>
           </FileField>
         </Field>
         <Button type={"submit"}>Submit</Button>
-        <Button onPress={() => form.reset()}>reset</Button>
+        <Button onPress={() => form.reset()}>Reset</Button>
       </Section>
     </Form>
   );

@@ -1,6 +1,6 @@
 import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
-import { srcPathOf } from "dev/remote-components-generator/lib/srcPathOf";
+import { srcPathOf } from "../lib/srcPathOf";
 
 export function generateViewComponentDeclaration(c: ComponentDoc) {
   const t = {

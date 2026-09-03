@@ -1,8 +1,9 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "changelogPreset": "conventionalcommits",
   "npmClient": "pnpm",
   "packages": [
     "packages/*"
   ],
-  "version": "0.2.0-alpha.676"
+  "version": "1.1.12"
 }

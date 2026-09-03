@@ -1,17 +1,22 @@
 .text {
   color: inherit;
+  text-wrap-style: pretty;
 
-  &:where(.light) {
-    color: var(--text--color--light);
+  /* Alpha Colors */
+  @mixin color($color) {
+    &:where(.#{$color}) {
+      color: var(--text--color--#{$color});
+    }
   }
 
-  &:where(.dark) {
-    color: var(--text--color--dark);
-  }
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 
   ul,
   ol {
-    padding-left: var(--text--list-padding);
+    padding-inline-start: var(--text--list-padding);
   }
 
   ul {
@@ -25,9 +30,9 @@
   }
 
   blockquote {
-    border-left: var(--text--blockquote-border-width)
+    border-inline-start: var(--text--blockquote-border-width)
       var(--text--blockquote-border-style) var(--text--blockquote-border-color);
-    padding-left: var(--text--blockquote-padding);
+    padding-inline-start: var(--text--blockquote-padding);
   }
 
   .icon {
@@ -36,8 +41,8 @@
 
   small {
     .icon {
-      width: var(--line-height--s);
-      height: var(--line-height--s);
+      width: var(--line-height-s);
+      height: var(--line-height-s);
     }
   }
 
@@ -63,5 +68,9 @@
 
   &:where(.wrap-pretty) {
     text-wrap: pretty;
+  }
+
+  &:where(.no-ligatures) {
+    font-variant-ligatures: none;
   }
 }

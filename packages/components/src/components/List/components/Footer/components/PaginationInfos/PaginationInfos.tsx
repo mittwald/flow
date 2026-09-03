@@ -3,14 +3,15 @@ import type { TextProps } from "@/components/Text";
 import SkeletonView from "@/views/SkeletonView";
 import TextView from "@/views/TextView";
 import type { FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 export const PaginationInfos: FC<TextProps> = (props) => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const list = useList();
   const pagination = list.batches;
+  const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const isEmpty = list.useIsEmpty();
 
@@ -21,10 +22,13 @@ export const PaginationInfos: FC<TextProps> = (props) => {
     return null;
   }
 
-  const text = isInitiallyLoading ? (
+  const showSkeleton =
+    isLoading && (!list.infiniteScroll || isInitiallyLoading);
+
+  const text = showSkeleton ? (
     <SkeletonView width="200px" />
   ) : (
-    stringFormatter.format("list.paginationInfo", {
+    stringFormatter.format("paginationInfo", {
       visibleItemsCount,
       totalItemsCount,
     })

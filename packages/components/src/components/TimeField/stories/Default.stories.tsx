@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
@@ -10,9 +9,20 @@ import { Time } from "@internationalized/date";
 const meta: Meta<typeof TimeField> = {
   title: "Form Controls/TimeField",
   component: TimeField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
+  argTypes: {
+    granularity: {
+      control: "inline-radio",
+      options: ["hour", "minute", "second"],
+    },
+  },
   render: (props) => (
     <TimeField onChange={action("onChange")} {...props}>
-      <Label>Time</Label>
+      <Label>Departure time</Label>
     </TimeField>
   ),
 };
@@ -23,17 +33,11 @@ type Story = StoryObj<typeof TimeField>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Required: Story = {
-  args: { isRequired: true },
-};
-
 export const WithFieldDescription: Story = {
   render: (props) => (
     <TimeField {...props}>
-      <Label>Time</Label>
-      <FieldDescription>Enter a time</FieldDescription>
+      <Label>Departure time</Label>
+      <FieldDescription>Enter the departure time</FieldDescription>
     </TimeField>
   ),
 };
@@ -41,7 +45,7 @@ export const WithFieldDescription: Story = {
 export const WithDefaultValue: Story = {
   render: (props) => (
     <TimeField {...props} defaultValue={new Time(11, 45)}>
-      <Label>Time</Label>
+      <Label>Departure time</Label>
     </TimeField>
   ),
 };
@@ -49,16 +53,16 @@ export const WithDefaultValue: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <TimeField {...props} isInvalid isRequired>
-      <Label>Time</Label>
-      <FieldError>Time is required</FieldError>
+      <Label>Departure time</Label>
+      <FieldError>Departure time is required</FieldError>
     </TimeField>
   ),
 };
 
-export const Granularity: Story = {
-  args: { granularity: "hour" },
-};
-
 export const MinMaxValue: Story = {
-  args: { minValue: new Time(8, 0), maxValue: new Time(16, 0) },
+  render: (props) => (
+    <TimeField minValue={new Time(8, 0)} maxValue={new Time(16, 0)} {...props}>
+      <Label>Departure time</Label>
+    </TimeField>
+  ),
 };

@@ -1,12 +1,14 @@
-import { type KeyboardEventHandler, useState } from "react";
+import { type ComponentType, type KeyboardEventHandler, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
-import { Markdown, type MarkdownProps } from "@/components/Markdown";
+import {
+  Markdown as DefaultMarkdown,
+  type MarkdownProps,
+} from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
 import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
-import { TunnelProvider } from "@mittwald/react-tunnel";
 import {
   modifyValueByMarkdownSyntax,
   scrollToCursor,
@@ -16,11 +18,23 @@ import {
   modifyValueByType,
 } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
+const toolbarActionsTunnel = {
+  id: "toolbarActions",
+  component: "MarkdownEditor",
+} as const;
+
 export interface MarkdownEditorProps
-  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {}
+  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {
+  /**
+   * Allows replacing the markdown preview renderer implementation. Defaults to
+   * the internal `Markdown` component.
+   */
+  markdownComponent?: ComponentType<MarkdownProps>;
+}
 
 /** @flr-generate all */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
@@ -32,6 +46,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     rows = 5,
     autoResizeMaxRows,
     headingOffset,
+    markdownComponent: MarkdownComponent = DefaultMarkdown,
     value,
     onChange,
     ref,
@@ -40,12 +55,35 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   const inputRef = useObjectRef(ref);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
+  const toolbarActionsDisabled = isDisabled || mode === "preview";
 
   const rootClassName = clsx(
     styles.markdownEditor,
-    className,
     styles[`mode-${mode}`],
+    className,
   );
+
+  const toolbarActionsPropsContext: PropsContext = {
+    Button: {
+      tunnel: toolbarActionsTunnel,
+      size: "s",
+      variant: "plain",
+      color: "dark",
+      isDisabled: toolbarActionsDisabled,
+    },
+    ContextMenuTrigger: {
+      tunnel: toolbarActionsTunnel,
+      Button: { tunnel: null },
+    },
+    ModalTrigger: {
+      tunnel: toolbarActionsTunnel,
+      Button: { tunnel: null },
+    },
+    PopoverTrigger: {
+      tunnel: toolbarActionsTunnel,
+      Button: { tunnel: null },
+    },
+  };
 
   const handleKeyDown: KeyboardEventHandler = (event) => {
     if (event.key !== "Enter") {
@@ -91,21 +129,25 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   return (
     <div className={rootClassName}>
-      <TunnelProvider>
-        <TextArea
-          {...rest}
-          aria-hidden={mode === "preview"}
-          isReadOnly={isReadOnly || mode === "preview"}
-          isDisabled={isDisabled}
-          ref={inputRef}
-          value={value}
-          rows={rows}
-          autoResizeMaxRows={autoResizeMaxRows}
-          onChange={onChange}
-          onKeyDown={handleKeyDown}
+      <TextArea
+        {...rest}
+        aria-hidden={mode === "preview"}
+        isReadOnly={isReadOnly || mode === "preview"}
+        isDisabled={isDisabled}
+        ref={inputRef}
+        value={value}
+        rows={rows}
+        autoResizeMaxRows={autoResizeMaxRows}
+        onChange={onChange}
+        onKeyDown={handleKeyDown}
+      >
+        <PropsContextProvider
+          props={toolbarActionsPropsContext}
+          dependencies={[toolbarActionsDisabled]}
         >
+          {children}
           {mode === "preview" && (
-            <Markdown
+            <MarkdownComponent
               headingOffset={headingOffset}
               className={styles.markdown}
               style={{
@@ -113,17 +155,16 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
               }}
             >
               {value}
-            </Markdown>
+            </MarkdownComponent>
           )}
-          {children}
           <Toolbar
             currentMode={mode}
             isDisabled={isDisabled}
             onModeChange={setMode}
             onToolPressed={handleToolButtonPressed}
           />
-        </TextArea>
-      </TunnelProvider>
+        </PropsContextProvider>
+      </TextArea>
     </div>
   );
 });

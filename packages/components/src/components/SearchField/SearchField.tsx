@@ -1,17 +1,18 @@
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "../FormField/FormField.module.scss";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SearchField.module.scss";
 import clsx from "clsx";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Button } from "@/components/Button";
 import { IconClose, IconSearch } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SearchFieldProps
   extends
@@ -28,7 +29,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "SearchField");
 
   const rootClassName = clsx(
     formFieldStyles.formField,
@@ -36,8 +37,20 @@ export const SearchField = flowComponent("SearchField", (props) => {
     className,
   );
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-  const searchText = stringFormatter.format(`searchField.search`);
+  const stringFormatter = useLocalizedStringFormatter(locales, "SearchField");
+  const searchText = stringFormatter.format(`search`);
+
+  const propsContext: PropsContext = {
+    Kbd: {
+      isDisabled: props.isDisabled,
+      tunnel: {
+        id: "kbd",
+        component: "SearchField",
+      },
+      className: styles.kbd,
+    },
+    ...fieldPropsContext,
+  };
 
   return (
     <Aria.SearchField
@@ -46,24 +59,26 @@ export const SearchField = flowComponent("SearchField", (props) => {
       aria-label={searchText}
       className={clsx(rootClassName, fieldProps.className)}
     >
-      <PropsContextProvider props={fieldPropsContext}>
+      <PropsContextProvider props={propsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+
+        <div className={styles.inputContainer}>
+          <IconSearch className={styles.searchIcon} />
+          <Aria.Input
+            placeholder={searchText}
+            className={styles.input}
+            ref={ref}
+          />
+          <UiComponentTunnelExit id="kbd" component="SearchField" />
+          <Button
+            className={styles.clearButton}
+            variant="plain"
+            color="secondary"
+          >
+            <IconClose />
+          </Button>
+        </div>
       </PropsContextProvider>
-      <div className={styles.inputContainer}>
-        <IconSearch className={styles.searchIcon} />
-        <Aria.Input
-          placeholder={searchText}
-          className={styles.input}
-          ref={ref}
-        />
-        <Button
-          className={styles.clearButton}
-          variant="plain"
-          color="secondary"
-        >
-          <IconClose />
-        </Button>
-      </div>
       <FieldErrorView />
     </Aria.SearchField>
   );

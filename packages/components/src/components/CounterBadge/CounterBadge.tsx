@@ -1,4 +1,3 @@
-import React from "react";
 import type { PropsWithElementType } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./CounterBadge.module.scss";

@@ -17,5 +17,5 @@ tooltip:
     value: "{size-px.s}"
   box-shadow:
     value: "{shadow.overlay}"
-  header-corner-radius:
-    value: "{corner-radius.default}"
+  corner-radius:
+    value: "{corner-radius.m}"

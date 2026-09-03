@@ -1,6 +1,6 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
-import dts from "vite-plugin-dts";
+import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
 
@@ -12,7 +12,7 @@ export default mergeConfig(
       externalizeDeps(),
       dts({
         include: ["src"],
-        outDir: "dist/types",
+        outDirs: "dist/types",
       }),
     ],
     build: {
@@ -27,6 +27,7 @@ export default mergeConfig(
           "index-node": "./src/index-node.ts",
           "index-browser": "./src/index-browser.ts",
           react: "./src/react/index.ts",
+          i18next: "./src/integrations/i18next/index.ts",
         },
         formats: ["es"],
       },

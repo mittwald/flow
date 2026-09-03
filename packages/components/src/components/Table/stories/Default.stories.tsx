@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import {
   Table,
   TableBody,
@@ -16,6 +15,10 @@ import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",
   component: Table,
+  argTypes: {
+    verticalAlign: { control: "inline-radio", options: ["top", "middle"] },
+  },
+  args: { verticalAlign: "top" },
   render: (props) => (
     <Table aria-label="Button Props" {...props}>
       <TableHeader>
@@ -29,7 +32,7 @@ const meta: Meta<typeof Table> = {
           <TableCell>
             <InlineCode>color</InlineCode>
           </TableCell>
-          <TableCell>primary | accent | secondary | danger</TableCell>
+          <TableCell>primary | success | secondary | danger</TableCell>
           <TableCell>primary</TableCell>
           <TableCell>The color of the button</TableCell>
         </TableRow>
@@ -60,10 +63,6 @@ type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {};
 
-export const VerticallyCenteredRows: Story = {
-  args: { verticalAlign: "middle" },
-};
-
 export const WithFooter: Story = {
   render: (props) => (
     <Table {...props} aria-label="Order overview">
@@ -73,15 +72,15 @@ export const WithFooter: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell>Hyperdrive overhaul</TableCell>
           <TableCell horizontalAlign="end">32,00 €</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>20 GB storage</TableCell>
+          <TableCell>Deflector shield repair</TableCell>
           <TableCell horizontalAlign="end">Inclusive</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>20 GB additional storage</TableCell>
+          <TableCell>Hull plating replacement</TableCell>
           <TableCell horizontalAlign="end">2,00 €</TableCell>
         </TableRow>
         <TableFooterRow>
@@ -102,15 +101,15 @@ export const WithRowHeader: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell rowHeader>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell rowHeader>Hyperdrive overhaul</TableCell>
           <TableCell>32,00 €</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell rowHeader>20 GB storage</TableCell>
+          <TableCell rowHeader>Deflector shield repair</TableCell>
           <TableCell>Inclusive</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell rowHeader>20 GB additional storage</TableCell>
+          <TableCell rowHeader>Hull plating replacement</TableCell>
           <TableCell>2,00 €</TableCell>
         </TableRow>
       </TableBody>
@@ -128,13 +127,47 @@ export const HorizontallyCenteredColumns: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>Projekt</TableCell>
+          <TableCell>Death Star plans</TableCell>
           <TableCell horizontalAlign="center">
-            <IconCheck status="success" />
+            <IconCheck color="success" />
           </TableCell>
           <TableCell horizontalAlign="center">
-            <IconClose status="danger" />
+            <IconClose color="danger" />
           </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+};
+
+export const FixedColumnWidths: Story = {
+  render: (props) => (
+    <Table
+      {...props}
+      layout="fixed"
+      minWidth={550}
+      aria-label="Crew assignments"
+    >
+      <TableHeader>
+        <TableColumn width={110}>ID</TableColumn>
+        <TableColumn width="40%">Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>YT-1300</TableCell>
+          <TableCell>Han Solo</TableCell>
+          <TableCell>Captain</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>R2</TableCell>
+          <TableCell>R2-D2</TableCell>
+          <TableCell>Astromech droid</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>TK-421</TableCell>
+          <TableCell>Luke Skywalker</TableCell>
+          <TableCell>Rescue operation</TableCell>
         </TableRow>
       </TableBody>
     </Table>

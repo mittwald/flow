@@ -3,6 +3,12 @@ import { useState, type FC } from "react";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
+/**
+ * Stands in for a boundary, permission gate or empty list — a child that is
+ * present but renders nothing.
+ */
+const RendersNothing: FC = () => null;
+
 test.each(testEnvironments)(
   "Section (%s)",
   async ({
@@ -34,6 +40,7 @@ test.each(testEnvironments)(
               <Heading>
                 Heading<Badge>Badge</Badge>
               </Heading>
+              <Link>Link</Link>
               <Switch>Switch</Switch>
               {showButton && (
                 <Button variant="soft" color="secondary">
@@ -59,19 +66,30 @@ test.each(testEnvironments)(
             </Alert>
             <Heading>Heading</Heading>
             <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
+              A long time ago in a galaxy far, far away, the Rebel Alliance
+              struck a decisive blow against the Galactic Empire. Rebel spies
+              managed to steal secret plans to the Empire's ultimate weapon, the
+              Death Star.
             </Text>
             <Heading level={3}>Sub-Heading</Heading>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
-            </Text>
             <Link>Link</Link>
+          </Section>
+          {/* Must collapse: a section that renders no content may neither draw
+              its own separator nor claim section-to-section spacing, so the
+              section below it keeps exactly one separator. */}
+          <Section>
+            <RendersNothing />
+          </Section>
+          <Section>
+            <Header>
+              <Heading>
+                A long time ago in a galaxy far, far away, the Rebel Alliance
+                struck a decisive blow against the Galactic Empire. Rebel spies
+                managed to steal secret plans to the Empire's ultimate weapon,
+                the Death Star.<Badge>Badge</Badge>
+              </Heading>
+              <Button>Button</Button>
+            </Header>
           </Section>
         </>
       );

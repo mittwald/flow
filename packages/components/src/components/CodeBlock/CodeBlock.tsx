@@ -1,51 +1,28 @@
-import type { FC, PropsWithChildren } from "react";
-import React from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { type FC, type PropsWithChildren, useId, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import { CopyButton } from "@/components/CopyButton";
 import styles from "./CodeBlock.module.scss";
+import { CodeEditor, type CodeEditorProps } from "@/components/CodeEditor";
+import { Button } from "@/components/Button";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import locales from "./locales/*.locale.json";
 
-export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
-  /** Adds a copy icon to the code block to copy its content. */
-  copyable?: boolean;
-  /** The color of the code block. @default "default" */
-  color?: "default" | "light" | "dark";
-  /** The code to display inside the code block. */
-  code?: string | string[];
-
-  // ATTENTION
-  // we reexport by copy the props here - react-typescript-docgen
-  // will not correctly export the props from react-syntax-highlighter
-  // when using OMIT duo some wired circumstances how react-syntax-highlighter
-  // exports his types - the following types are excluded
-  //
-  // children: string | string[];
-  //
-  language?: string | undefined;
-  style?: Record<string, React.CSSProperties> | undefined;
-  customStyle?: React.CSSProperties | undefined;
-  codeTagProps?: React.HTMLProps<HTMLElement> | undefined;
-  useInlineStyles?: boolean | undefined;
-  showLineNumbers?: boolean | undefined;
-  showInlineLineNumbers?: boolean | undefined;
-  startingLineNumber?: number | undefined;
-  lineNumberContainerStyle?: React.CSSProperties | undefined;
-  lineNumberStyle?: React.CSSProperties | lineNumberStyleFunction | undefined;
-  wrapLines?: boolean | undefined;
-  wrapLongLines?: boolean | undefined;
-  lineProps?: lineTagPropsFunction | React.HTMLProps<HTMLElement> | undefined;
-  renderer?: (props: rendererProps) => React.ReactNode;
-  PreTag?:
-    | keyof React.JSX.IntrinsicElements
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | React.ComponentType<any>
-    | undefined;
-  CodeTag?:
-    | keyof React.JSX.IntrinsicElements
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | React.ComponentType<any>
-    | undefined;
+export interface CodeBlockProps
+  extends
+    PropsWithClassName,
+    PropsWithChildren,
+    Partial<
+      Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable">
+    > {
+  /** The code displayed in the block. */
+  code?: string;
+  /**
+   * Controls truncation of long code blocks. `false` disables it, `true`
+   * truncates after 8 lines, and a number sets the maximum line count.
+   *
+   * @default: false
+   */
+  truncateLines?: boolean | number;
 }
 
 /** @flr-generate all */
@@ -53,17 +30,25 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const {
     code,
     className,
-    copyable,
-    color = "default",
+    copyable = false,
+    showLineNumbers = false,
     children,
+    truncateLines = false,
     ...rest
   } = props;
 
-  const rootClassName = clsx(styles.codeBlock, styles[color], className);
+  const [folded, setFolded] = useState(truncateLines !== false);
+  const [maxHeight, setMaxHeight] = useState<number>();
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
+
+  const rootClassName = clsx(styles.codeBlock, className);
+
+  const id = useId();
 
   if (!code) {
     return (
-      <div className={rootClassName}>
+      <div className={clsx(rootClassName, styles.withChildren)}>
         <pre>
           <code>{children}</code>
         </pre>
@@ -71,27 +56,58 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     );
   }
 
+  const maxHeightVariable = maxHeight
+    ? ({ "--max-height": `${maxHeight}px` } as React.CSSProperties)
+    : undefined;
+
   return (
-    <div className={rootClassName}>
-      <SyntaxHighlighter
-        customStyle={{
-          background: "none",
-          padding: "none",
-          margin: "none",
-        }}
-        useInlineStyles={false}
+    <div
+      className={clsx(rootClassName, folded ? styles.folded : undefined)}
+      style={maxHeightVariable}
+    >
+      <CodeEditor
         {...rest}
+        value={code}
+        editable={false}
+        copyable={copyable}
+        showLineNumbers={showLineNumbers}
+        showLinterMarkers={false}
+        showCodeFolding={false}
+        showActiveLineMarker={false}
+        isReadOnly
+        onCreateEditor={(view) => {
+          if (!truncateLines) {
+            return;
+          }
+
+          const lineHeight = 20;
+          const padding = 12;
+
+          const visibleLines =
+            typeof truncateLines === "number" ? truncateLines : 8;
+
+          const totalLines = view.state.doc.lines;
+
+          if (totalLines > visibleLines)
+            setMaxHeight(lineHeight * visibleLines + padding);
+        }}
+        id={id}
       >
-        {code}
-      </SyntaxHighlighter>
-      {copyable && (
-        <CopyButton
-          className={styles.copyButton}
-          size="s"
-          color={color === "default" ? "dark" : color}
-          text={Array.isArray(code) ? code.join("\r\n") : code}
-        />
-      )}
+        {truncateLines && maxHeight && (
+          <div className={clsx(styles.buttonContainer)}>
+            <Button
+              variant="plain"
+              color="secondary"
+              size="s"
+              onPress={() => setFolded((folded) => !folded)}
+              aria-expanded={!folded}
+              aria-controls={id}
+            >
+              {stringFormatter.format(folded ? "showMore" : "showLess")}
+            </Button>
+          </div>
+        )}
+      </CodeEditor>
     </div>
   );
 };

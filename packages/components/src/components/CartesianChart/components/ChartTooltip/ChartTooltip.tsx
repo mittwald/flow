@@ -1,50 +1,40 @@
-import React, { type FC, Suspense } from "react";
+import { type FC, Suspense } from "react";
 import { Tooltip, type TooltipProps } from "recharts";
 import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { type TooltipPayloadItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
 import { TooltipContent } from "@/components/CartesianChart/components/ChartTooltip/TooltipContent";
 import clsx from "clsx";
 import styles from "./ChartTooltip.module.scss";
 import LoadingSpinnerView from "@/views/LoadingSpinnerView";
+import type { ChartDataValue } from "@/components/CartesianChart/types";
+import type { WithTooltipFormatters } from "@/components/CartesianChart/components/ChartTooltip/types";
 
-export type TooltipLineFormatter = (
-  value: TooltipPayloadItem["value"],
-  name: TooltipPayloadItem["dataKey"],
-  index: number,
-  unit?: TooltipPayloadItem["unit"],
-) => Promise<string> | string;
+export { TypedChartTooltip } from "./types";
 
-export type TooltipHeadingFormatter = (
-  title: string | number | undefined,
-) => Promise<string> | string;
-
-export interface WithTooltipFormatters {
-  /**
-   * A formatter function for the lines in the tooltip. Can be used for purposes
-   * like translations.
-   */
-  formatter?: TooltipLineFormatter;
-  /**
-   * A formatter function for the heading of the tooltip. Can be used for
-   * purposes like translations.
-   */
-  headingFormatter?: TooltipHeadingFormatter;
-}
-
-export interface ChartTooltipProps
+export interface ChartTooltipProps<
+  TData extends ChartDataValue = ChartDataValue,
+  XAxisDataKey extends keyof TData = keyof TData,
+>
   extends
     Pick<
       TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
-    WithTooltipFormatters {}
+    WithTooltipFormatters<TData, XAxisDataKey> {
+  /** Show progress bar for stacked areas @default "true" */
+  showProgressBar?: boolean;
+}
 
 /** @flr-generate all */
 export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
-  const { headingFormatter, formatter, ...rest } = props;
+  const {
+    headingFormatter,
+    formatter,
+    showProgressBar = true,
+    ...rest
+  } = props;
 
   return (
     <Tooltip
@@ -55,7 +45,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
           return null;
         }
 
-        const className = clsx(props.wrapperClassName, styles.tooltip);
+        const className = clsx(props.wrapperClassName, styles.chartTooltip);
         return (
           <div className={className}>
             <Suspense fallback={<LoadingSpinnerView />}>
@@ -63,6 +53,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
                 {...props}
                 headingFormatter={headingFormatter}
                 formatter={formatter}
+                showProgressBar={showProgressBar}
               />
             </Suspense>
           </div>

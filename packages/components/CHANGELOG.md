@@ -3,6 +3,2085 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.12](https://github.com/mittwald/flow/compare/1.1.11...1.1.12) (2026-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.11](https://github.com/mittwald/flow/compare/1.1.10...1.1.11) (2026-09-02)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.10](https://github.com/mittwald/flow/compare/1.1.9...1.1.10) (2026-09-02)
+
+### Bug Fixes
+
+* **Link:** prevent text selection on icon element ([#3051](https://github.com/mittwald/flow/issues/3051)) ([9f3160b](https://github.com/mittwald/flow/commit/9f3160b77a92b61c95aeefc15880a1ecf92d3c83))
+
+## [1.1.9](https://github.com/mittwald/flow/compare/1.1.8...1.1.9) (2026-09-02)
+
+### Bug Fixes
+
+* **List:** let items follow the state they are rendered from ([#3065](https://github.com/mittwald/flow/issues/3065)) ([40e0401](https://github.com/mittwald/flow/commit/40e0401f2f484ebbf9f891a7a07d6aea6d0508fe))
+
+## [1.1.8](https://github.com/mittwald/flow/compare/1.1.7...1.1.8) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.7](https://github.com/mittwald/flow/compare/1.1.6...1.1.7) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.6](https://github.com/mittwald/flow/compare/1.1.5...1.1.6) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** install with the project&#x27;s real package manager ([#3041](https://github.com/mittwald/flow/issues/3041)) ([63875ae](https://github.com/mittwald/flow/commit/63875aed0970b93ab7f05d5bad255cc695af63b4))
+
+## [1.1.5](https://github.com/mittwald/flow/compare/1.1.4...1.1.5) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.4](https://github.com/mittwald/flow/compare/1.1.3...1.1.4) (2026-09-01)
+
+### Bug Fixes
+
+* **Heading:** space tunneled content without :has() ([#3046](https://github.com/mittwald/flow/issues/3046)) ([97022ee](https://github.com/mittwald/flow/commit/97022eee9af40664b54b8219062816372c0cf44a))
+
+## [1.1.3](https://github.com/mittwald/flow/compare/1.1.2...1.1.3) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** the SegmentedControl -&gt; RadioGroup direction is a rename ([#3042](https://github.com/mittwald/flow/issues/3042)) ([0832a67](https://github.com/mittwald/flow/commit/0832a67f096ce6550a15dc02fdf655db4c953102))
+
+## [1.1.2](https://github.com/mittwald/flow/compare/1.1.1...1.1.2) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** say that action -&gt; onAction changes the callback type ([#3043](https://github.com/mittwald/flow/issues/3043)) ([9a52148](https://github.com/mittwald/flow/commit/9a52148091e9938ca1e476f63f47b5fc1c01663f))
+* **Tabs:** forward aria-label to the tab list ([#3045](https://github.com/mittwald/flow/issues/3045)) ([cad04b6](https://github.com/mittwald/flow/commit/cad04b67d2d8b0aba6e105a24b65371b417a63f8))
+
+## [1.1.1](https://github.com/mittwald/flow/compare/1.1.0...1.1.1) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.0](https://github.com/mittwald/flow/compare/1.0.16...1.1.0) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.16](https://github.com/mittwald/flow/compare/1.0.15...1.0.16) (2026-08-31)
+
+### Performance Improvements
+
+* **components:** stop shipping design-token build metadata to the browser ([#3007](https://github.com/mittwald/flow/issues/3007)) ([7d3afde](https://github.com/mittwald/flow/commit/7d3afde851c5f51f4a641e36dd549500e6fd759b))
+
+## [1.0.15](https://github.com/mittwald/flow/compare/1.0.14...1.0.15) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.14](https://github.com/mittwald/flow/compare/1.0.13...1.0.14) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.13](https://github.com/mittwald/flow/compare/1.0.12...1.0.13) (2026-08-31)
+
+### Bug Fixes
+
+* **Modal:** keep the heading text next to its icon ([#2998](https://github.com/mittwald/flow/issues/2998)) ([9ff2cae](https://github.com/mittwald/flow/commit/9ff2caef49f67f334b8e6329a32f34f573ac1a7f))
+
+## [1.0.12](https://github.com/mittwald/flow/compare/1.0.11...1.0.12) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+
+### Bug Fixes
+
+* **FileField:** open the file dialog inside a link row ([#2965](https://github.com/mittwald/flow/issues/2965)) ([b77a14c](https://github.com/mittwald/flow/commit/b77a14cb860b7a3df49e8d9a346d3228c338bd56))
+
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+
+### Bug Fixes
+
+* **Table:** will not render in remote ([#2966](https://github.com/mittwald/flow/issues/2966)) ([22929f4](https://github.com/mittwald/flow/commit/22929f4df80ac864921dd889c46af411ef582517))
+
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** hide deprecated values from the properties table ([#2960](https://github.com/mittwald/flow/issues/2960)) ([eaa0349](https://github.com/mittwald/flow/commit/eaa03497fda2fd0aded933776f464eeed0c9aef3))
+
+## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** show full prop types in the properties table ([#2961](https://github.com/mittwald/flow/issues/2961)) ([2c42ad5](https://github.com/mittwald/flow/commit/2c42ad539c00b7dcbfdff044c3a128ef5bf38f8c))
+
+## [1.0.4](https://github.com/mittwald/flow/compare/1.0.3...1.0.4) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.0.3](https://github.com/mittwald/flow/compare/1.0.2...1.0.3) (2026-08-27)
+
+### Bug Fixes
+
+* **CodeBlock:** balance the padding and unify the editor line colors ([#2945](https://github.com/mittwald/flow/issues/2945)) ([6bf57c7](https://github.com/mittwald/flow/commit/6bf57c7c50e4c05ba504df74f4941aa7fdd95809))
+
+## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
+
+### Bug Fixes
+
+* **Remote:** serialization allows duplicate object references ([#2947](https://github.com/mittwald/flow/issues/2947)) ([ac3ef26](https://github.com/mittwald/flow/commit/ac3ef26cc8b0c0dcc5d84b6181a5fbbccc8863ba))
+
+## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
+
+### Bug Fixes
+
+* **Breadcrumb:** fix cursor pointer for spans with role link ([#2943](https://github.com/mittwald/flow/issues/2943)) ([d44d61c](https://github.com/mittwald/flow/commit/d44d61cb83f4ebcb95fee10480e2db8c3d55471a))
+
+## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1058](https://github.com/mittwald/flow/compare/0.2.0-alpha.1057...0.2.0-alpha.1058) (2026-08-26)
+
+### Features
+
+* **SegmentedControl:** deprecate in favor of Tabs and RadioGroup ([#2903](https://github.com/mittwald/flow/issues/2903)) ([3f65b46](https://github.com/mittwald/flow/commit/3f65b46c638be332bebb686cdd3e151cd0b63939))
+
+## [0.2.0-alpha.1057](https://github.com/mittwald/flow/compare/0.2.0-alpha.1056...0.2.0-alpha.1057) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1056](https://github.com/mittwald/flow/compare/0.2.0-alpha.1055...0.2.0-alpha.1056) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1055](https://github.com/mittwald/flow/compare/0.2.0-alpha.1054...0.2.0-alpha.1055) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1054](https://github.com/mittwald/flow/compare/0.2.0-alpha.1053...0.2.0-alpha.1054) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1053](https://github.com/mittwald/flow/compare/0.2.0-alpha.1052...0.2.0-alpha.1053) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1052](https://github.com/mittwald/flow/compare/0.2.0-alpha.1051...0.2.0-alpha.1052) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1051](https://github.com/mittwald/flow/compare/0.2.0-alpha.1050...0.2.0-alpha.1051) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1050](https://github.com/mittwald/flow/compare/0.2.0-alpha.1049...0.2.0-alpha.1050) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1049](https://github.com/mittwald/flow/compare/0.2.0-alpha.1048...0.2.0-alpha.1049) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1048](https://github.com/mittwald/flow/compare/0.2.0-alpha.1047...0.2.0-alpha.1048) (2026-08-25)
+
+### Bug Fixes
+
+* **Link:** stick link icon to last text segment ([#2869](https://github.com/mittwald/flow/issues/2869)) ([2d44edd](https://github.com/mittwald/flow/commit/2d44edd63bdea25bee2fabbff83203ea86e6f672))
+
+# [0.2.0-alpha.1047](https://github.com/mittwald/flow/compare/0.2.0-alpha.1046...0.2.0-alpha.1047) (2026-08-24)
+
+### Features
+
+* **Combine:** rename Align to Combine ([#2871](https://github.com/mittwald/flow/issues/2871)) ([8bbf7bf](https://github.com/mittwald/flow/commit/8bbf7bf69b1753180cf91e5901a7f49e8c6b1fd5))
+
+# [0.2.0-alpha.1046](https://github.com/mittwald/flow/compare/0.2.0-alpha.1045...0.2.0-alpha.1046) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1045](https://github.com/mittwald/flow/compare/0.2.0-alpha.1044...0.2.0-alpha.1045) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1044](https://github.com/mittwald/flow/compare/0.2.0-alpha.1043...0.2.0-alpha.1044) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1043](https://github.com/mittwald/flow/compare/0.2.0-alpha.1042...0.2.0-alpha.1043) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1042](https://github.com/mittwald/flow/compare/0.2.0-alpha.1041...0.2.0-alpha.1042) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1041](https://github.com/mittwald/flow/compare/0.2.0-alpha.1040...0.2.0-alpha.1041) (2026-08-21)
+
+### Bug Fixes
+
+* **Overlay:** fixes aria focus fight with browser extensions ([#2862](https://github.com/mittwald/flow/issues/2862)) ([a94b1b8](https://github.com/mittwald/flow/commit/a94b1b801c4e397440431e8489512d07e1c9bb1c))
+
+# [0.2.0-alpha.1040](https://github.com/mittwald/flow/compare/0.2.0-alpha.1039...0.2.0-alpha.1040) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1039](https://github.com/mittwald/flow/compare/0.2.0-alpha.1038...0.2.0-alpha.1039) (2026-08-21)
+
+### Bug Fixes
+
+* **Section:** set size for section header links ([#2861](https://github.com/mittwald/flow/issues/2861)) ([3d6cd8b](https://github.com/mittwald/flow/commit/3d6cd8bb06c30b7c039de92eba624793b4aed1ce))
+
+# [0.2.0-alpha.1038](https://github.com/mittwald/flow/compare/0.2.0-alpha.1037...0.2.0-alpha.1038) (2026-08-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1037](https://github.com/mittwald/flow/compare/0.2.0-alpha.1036...0.2.0-alpha.1037) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1036](https://github.com/mittwald/flow/compare/0.2.0-alpha.1035...0.2.0-alpha.1036) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1035](https://github.com/mittwald/flow/compare/0.2.0-alpha.1034...0.2.0-alpha.1035) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1034](https://github.com/mittwald/flow/compare/0.2.0-alpha.1033...0.2.0-alpha.1034) (2026-08-18)
+
+### Features
+
+* **NavigationGroup:** add defaultExpanded prop ([#2852](https://github.com/mittwald/flow/issues/2852)) ([f2c2a5b](https://github.com/mittwald/flow/commit/f2c2a5b694e5f7d87a240bf69f54bda531b8b18f))
+
+# [0.2.0-alpha.1033](https://github.com/mittwald/flow/compare/0.2.0-alpha.1032...0.2.0-alpha.1033) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1032](https://github.com/mittwald/flow/compare/0.2.0-alpha.1031...0.2.0-alpha.1032) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1031](https://github.com/mittwald/flow/compare/0.2.0-alpha.1030...0.2.0-alpha.1031) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1030](https://github.com/mittwald/flow/compare/0.2.0-alpha.1029...0.2.0-alpha.1030) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1029](https://github.com/mittwald/flow/compare/0.2.0-alpha.1028...0.2.0-alpha.1029) (2026-08-18)
+
+### Bug Fixes
+
+* **CartesianChart:** render tooltip content without suspending on first hover ([#2848](https://github.com/mittwald/flow/issues/2848)) ([1ff1804](https://github.com/mittwald/flow/commit/1ff180417831b20eb9ca9d4f393cefbcfe7314f5))
+
+# [0.2.0-alpha.1028](https://github.com/mittwald/flow/compare/0.2.0-alpha.1027...0.2.0-alpha.1028) (2026-08-17)
+
+### Features
+
+* **MarkdownEditor:** support custom toolbar tools ([#2781](https://github.com/mittwald/flow/issues/2781)) ([c562ec1](https://github.com/mittwald/flow/commit/c562ec12df11cd439eee0a04d240dcb3ea2412c6))
+
+# [0.2.0-alpha.1027](https://github.com/mittwald/flow/compare/0.2.0-alpha.1026...0.2.0-alpha.1027) (2026-08-17)
+
+### Bug Fixes
+
+* **Autocomplete:** autocomplete popover is not visible in modals ([#2847](https://github.com/mittwald/flow/issues/2847)) ([e8fc3e2](https://github.com/mittwald/flow/commit/e8fc3e2adfc60baa1563969c2d0a064e7af5e24d))
+
+# [0.2.0-alpha.1026](https://github.com/mittwald/flow/compare/0.2.0-alpha.1025...0.2.0-alpha.1026) (2026-08-12)
+
+### Features
+
+* **Link:** support Button in Link ([#2828](https://github.com/mittwald/flow/issues/2828)) ([63505ed](https://github.com/mittwald/flow/commit/63505ed9321bcb4c5f0971e512bd20b095be942a))
+
+# [0.2.0-alpha.1025](https://github.com/mittwald/flow/compare/0.2.0-alpha.1024...0.2.0-alpha.1025) (2026-08-12)
+
+### Bug Fixes
+
+* **SearchField:** hide input outline ([#2832](https://github.com/mittwald/flow/issues/2832)) ([1433d51](https://github.com/mittwald/flow/commit/1433d51876aa48cb1052661171fa0d73836d089f))
+
+# [0.2.0-alpha.1024](https://github.com/mittwald/flow/compare/0.2.0-alpha.1023...0.2.0-alpha.1024) (2026-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1023](https://github.com/mittwald/flow/compare/0.2.0-alpha.1022...0.2.0-alpha.1023) (2026-08-12)
+
+### Bug Fixes
+
+* **Autocomplete:** prevent the options popover from collapsing ([#2820](https://github.com/mittwald/flow/issues/2820)) ([8c2ec64](https://github.com/mittwald/flow/commit/8c2ec64045f4b954a0d0662197022bf5553eaa73))
+
+# [0.2.0-alpha.1022](https://github.com/mittwald/flow/compare/0.2.0-alpha.1021...0.2.0-alpha.1022) (2026-08-11)
+
+### Bug Fixes
+
+* **List:** use the item's loadingView for suspended items ([#2812](https://github.com/mittwald/flow/issues/2812)) ([92e4b32](https://github.com/mittwald/flow/commit/92e4b327eb445525e8e76ab2e318161df6e9480d))
+
+# [0.2.0-alpha.1021](https://github.com/mittwald/flow/compare/0.2.0-alpha.1020...0.2.0-alpha.1021) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1020](https://github.com/mittwald/flow/compare/0.2.0-alpha.1019...0.2.0-alpha.1020) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1019](https://github.com/mittwald/flow/compare/0.2.0-alpha.1018...0.2.0-alpha.1019) (2026-08-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1018](https://github.com/mittwald/flow/compare/0.2.0-alpha.1017...0.2.0-alpha.1018) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1017](https://github.com/mittwald/flow/compare/0.2.0-alpha.1016...0.2.0-alpha.1017) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1016](https://github.com/mittwald/flow/compare/0.2.0-alpha.1015...0.2.0-alpha.1016) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1015](https://github.com/mittwald/flow/compare/0.2.0-alpha.1014...0.2.0-alpha.1015) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1014](https://github.com/mittwald/flow/compare/0.2.0-alpha.1013...0.2.0-alpha.1014) (2026-08-07)
+
+### Bug Fixes
+
+* **Modal:** keep close confirmation armed after an intermediate submit ([#2779](https://github.com/mittwald/flow/issues/2779)) ([9138e11](https://github.com/mittwald/flow/commit/9138e113099f2d2cc48bf361596f5d1c5d87c18e))
+
+# [0.2.0-alpha.1013](https://github.com/mittwald/flow/compare/0.2.0-alpha.1012...0.2.0-alpha.1013) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1012](https://github.com/mittwald/flow/compare/0.2.0-alpha.1011...0.2.0-alpha.1012) (2026-08-07)
+
+### Bug Fixes
+
+* **components:** keep the global stylesheet out of tree shaking ([#2819](https://github.com/mittwald/flow/issues/2819)) ([e3a173c](https://github.com/mittwald/flow/commit/e3a173cd3ff65176d2a3bc3b2ea53047258d7867))
+
+# [0.2.0-alpha.1011](https://github.com/mittwald/flow/compare/0.2.0-alpha.1010...0.2.0-alpha.1011) (2026-08-07)
+
+### Bug Fixes
+
+* **Autocomplete:** apply consumer className to root element ([#2821](https://github.com/mittwald/flow/issues/2821)) ([02ee324](https://github.com/mittwald/flow/commit/02ee324d7733cd960c3b9b8092b1911d40b793d4))
+
+# [0.2.0-alpha.1010](https://github.com/mittwald/flow/compare/0.2.0-alpha.1009...0.2.0-alpha.1010) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1009](https://github.com/mittwald/flow/compare/0.2.0-alpha.1008...0.2.0-alpha.1009) (2026-08-06)
+
+### Features
+
+* **Tooltip:** show tooltips after 400ms ([#2811](https://github.com/mittwald/flow/issues/2811)) ([a80c4f6](https://github.com/mittwald/flow/commit/a80c4f665f2ff043cad8d053ad6c96ef8381f6a9)), closes [#2803](https://github.com/mittwald/flow/issues/2803) [#2803](https://github.com/mittwald/flow/issues/2803)
+
+# [0.2.0-alpha.1008](https://github.com/mittwald/flow/compare/0.2.0-alpha.1007...0.2.0-alpha.1008) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1007](https://github.com/mittwald/flow/compare/0.2.0-alpha.1006...0.2.0-alpha.1007) (2026-08-06)
+
+### Features
+
+* **remote-react-renderer:** report component usage to the host ([#2765](https://github.com/mittwald/flow/issues/2765)) ([0ec1ed9](https://github.com/mittwald/flow/commit/0ec1ed931a71ebd18e9a09d38fc656b5e154786b))
+
+# [0.2.0-alpha.1006](https://github.com/mittwald/flow/compare/0.2.0-alpha.1005...0.2.0-alpha.1006) (2026-08-06)
+
+### Bug Fixes
+
+* **CartesianChart:** render tooltip above legend regardless of child order ([#2810](https://github.com/mittwald/flow/issues/2810)) ([a956acd](https://github.com/mittwald/flow/commit/a956acd393d437318eb84883cbc93f49216e22e5))
+
+# [0.2.0-alpha.1005](https://github.com/mittwald/flow/compare/0.2.0-alpha.1004...0.2.0-alpha.1005) (2026-08-06)
+
+### Features
+
+* **components:** add ComponentDefaultsProvider for application-wide defaults ([#2796](https://github.com/mittwald/flow/issues/2796)) ([c043f6c](https://github.com/mittwald/flow/commit/c043f6c89b2aa2bb669355014698e57cd81ea796))
+
+# [0.2.0-alpha.1004](https://github.com/mittwald/flow/compare/0.2.0-alpha.1003...0.2.0-alpha.1004) (2026-08-06)
+
+### Bug Fixes
+
+* **components:** make third-party style overrides work in the layered stylesheet ([#2799](https://github.com/mittwald/flow/issues/2799)) ([ab20016](https://github.com/mittwald/flow/commit/ab2001688a279dc0194845f0da53342db12a574b))
+
+# [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
+
+### Bug Fixes
+
+* **MarkdownEditor:** enable flex-wrap for toolbar buttons ([#2806](https://github.com/mittwald/flow/issues/2806)) ([8ce4626](https://github.com/mittwald/flow/commit/8ce4626b21ace74549c13769f8e8bba3138132e0))
+
+# [0.2.0-alpha.1002](https://github.com/mittwald/flow/compare/0.2.0-alpha.1001...0.2.0-alpha.1002) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1001](https://github.com/mittwald/flow/compare/0.2.0-alpha.1000...0.2.0-alpha.1001) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1000](https://github.com/mittwald/flow/compare/0.2.0-alpha.999...0.2.0-alpha.1000) (2026-08-05)
+
+### Reverts
+
+* **PasswordCreationField:** move PasswordCreationField to integrations [#2646](https://github.com/mittwald/flow/issues/2646) ([42095b5](https://github.com/mittwald/flow/commit/42095b5e7ff9049a339cd66af86faebfa3721519))
+
+# [0.2.0-alpha.999](https://github.com/mittwald/flow/compare/0.2.0-alpha.998...0.2.0-alpha.999) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.998](https://github.com/mittwald/flow/compare/0.2.0-alpha.997...0.2.0-alpha.998) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
+
+### Bug Fixes
+
+* **AccentBox:** fix default color on gradient ([#2793](https://github.com/mittwald/flow/issues/2793)) ([d6f9384](https://github.com/mittwald/flow/commit/d6f93846c63be96663fa268e4d0fe2e8475f8ffb))
+
+# [0.2.0-alpha.996](https://github.com/mittwald/flow/compare/0.2.0-alpha.995...0.2.0-alpha.996) (2026-08-04)
+
+### Features
+
+* **Icon:** support color property ([#2773](https://github.com/mittwald/flow/issues/2773)) ([a2befb3](https://github.com/mittwald/flow/commit/a2befb363239b8b7705867f8048d1ce0a7c179a9))
+
+# [0.2.0-alpha.995](https://github.com/mittwald/flow/compare/0.2.0-alpha.994...0.2.0-alpha.995) (2026-08-04)
+
+### Bug Fixes
+
+* **CodeEditor:** render label above the editor and align padding ([#2766](https://github.com/mittwald/flow/issues/2766)) ([fa693a8](https://github.com/mittwald/flow/commit/fa693a872169edd782a381b1c1ede7074993825c))
+
+# [0.2.0-alpha.994](https://github.com/mittwald/flow/compare/0.2.0-alpha.993...0.2.0-alpha.994) (2026-08-03)
+
+### Bug Fixes
+
+* add sideEffect config ([#2772](https://github.com/mittwald/flow/issues/2772)) ([cee26cc](https://github.com/mittwald/flow/commit/cee26cc1258623b578aaeac87aa038602cc104e5))
+
+# [0.2.0-alpha.993](https://github.com/mittwald/flow/compare/0.2.0-alpha.992...0.2.0-alpha.993) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.992](https://github.com/mittwald/flow/compare/0.2.0-alpha.991...0.2.0-alpha.992) (2026-08-03)
+
+### Bug Fixes
+
+* **Section:** collapse sections whose content renders nothing ([#2770](https://github.com/mittwald/flow/issues/2770)) ([c9f5745](https://github.com/mittwald/flow/commit/c9f5745f993723c3f5e8fb9ae083f5297f529e6f))
+
+# [0.2.0-alpha.991](https://github.com/mittwald/flow/compare/0.2.0-alpha.990...0.2.0-alpha.991) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.990](https://github.com/mittwald/flow/compare/0.2.0-alpha.989...0.2.0-alpha.990) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.989](https://github.com/mittwald/flow/compare/0.2.0-alpha.988...0.2.0-alpha.989) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.988](https://github.com/mittwald/flow/compare/0.2.0-alpha.987...0.2.0-alpha.988) (2026-07-31)
+
+### Features
+
+* **Modal:** allow manually requiring close confirmation ([#2739](https://github.com/mittwald/flow/issues/2739)) ([6b35d8f](https://github.com/mittwald/flow/commit/6b35d8f5766571218fe4ba92ad6cc07ec7f6dfa3))
+
+# [0.2.0-alpha.987](https://github.com/mittwald/flow/compare/0.2.0-alpha.986...0.2.0-alpha.987) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.986](https://github.com/mittwald/flow/compare/0.2.0-alpha.985...0.2.0-alpha.986) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.985](https://github.com/mittwald/flow/compare/0.2.0-alpha.984...0.2.0-alpha.985) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.984](https://github.com/mittwald/flow/compare/0.2.0-alpha.983...0.2.0-alpha.984) (2026-07-31)
+
+### Features
+
+* **InlineCode:** add whiteSpace prop ([#2754](https://github.com/mittwald/flow/issues/2754)) ([81a2330](https://github.com/mittwald/flow/commit/81a2330de8d012d076cf60429d2c4a23cbb0722d))
+
+# [0.2.0-alpha.983](https://github.com/mittwald/flow/compare/0.2.0-alpha.982...0.2.0-alpha.983) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.982](https://github.com/mittwald/flow/compare/0.2.0-alpha.981...0.2.0-alpha.982) (2026-07-30)
+
+### Features
+
+* **components:** warn on all remaining deprecated APIs via useWarnDeprecation ([#2757](https://github.com/mittwald/flow/issues/2757)) ([8a945e6](https://github.com/mittwald/flow/commit/8a945e652cf919abe8a6b5577f5bda24a62cdcc9))
+
+# [0.2.0-alpha.981](https://github.com/mittwald/flow/compare/0.2.0-alpha.980...0.2.0-alpha.981) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.980](https://github.com/mittwald/flow/compare/0.2.0-alpha.979...0.2.0-alpha.980) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.979](https://github.com/mittwald/flow/compare/0.2.0-alpha.978...0.2.0-alpha.979) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
+
+### Features
+
+* **TabNavigation:** Introduce tab navigation ([#2634](https://github.com/mittwald/flow/issues/2634)) ([b83a414](https://github.com/mittwald/flow/commit/b83a414b18e1868196aa6f839e086d603b7debfb))
+
+# [0.2.0-alpha.976](https://github.com/mittwald/flow/compare/0.2.0-alpha.975...0.2.0-alpha.976) (2026-07-30)
+
+### Features
+
+* **Select:** Support multi select ([#2603](https://github.com/mittwald/flow/issues/2603)) ([fc7b631](https://github.com/mittwald/flow/commit/fc7b6318ea388507cc1bebae303b48b0ce92d625))
+
+# [0.2.0-alpha.975](https://github.com/mittwald/flow/compare/0.2.0-alpha.974...0.2.0-alpha.975) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.974](https://github.com/mittwald/flow/compare/0.2.0-alpha.973...0.2.0-alpha.974) (2026-07-29)
+
+### Features
+
+* **Navigation:** support AlertBadge ([#2737](https://github.com/mittwald/flow/issues/2737)) ([0d022ba](https://github.com/mittwald/flow/commit/0d022ba5d3b7c3da3515c7fe11159c6642282759))
+
+# [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.972](https://github.com/mittwald/flow/compare/0.2.0-alpha.971...0.2.0-alpha.972) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.971](https://github.com/mittwald/flow/compare/0.2.0-alpha.970...0.2.0-alpha.971) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.970](https://github.com/mittwald/flow/compare/0.2.0-alpha.969...0.2.0-alpha.970) (2026-07-29)
+
+### Bug Fixes
+
+* **CodeEditor:** pin CodeMirror/Lezer singletons as direct deps ([#2745](https://github.com/mittwald/flow/issues/2745)) ([020c77d](https://github.com/mittwald/flow/commit/020c77dc4b9f354e1258608b7f09ae6ad6f9d3b5))
+
+# [0.2.0-alpha.969](https://github.com/mittwald/flow/compare/0.2.0-alpha.968...0.2.0-alpha.969) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
+
+### Bug Fixes
+
+* **Switch:** use flex-direction for label-leading instead of direction:rtl ([#2717](https://github.com/mittwald/flow/issues/2717)) ([1539318](https://github.com/mittwald/flow/commit/153931839d015b6a7c6779f9c9ff0ea0fffc6307))
+
+# [0.2.0-alpha.967](https://github.com/mittwald/flow/compare/0.2.0-alpha.966...0.2.0-alpha.967) (2026-07-29)
+
+### Bug Fixes
+
+* **components:** track doc-properties output in status-registry nx hash ([#2734](https://github.com/mittwald/flow/issues/2734)) ([2201f85](https://github.com/mittwald/flow/commit/2201f85a3e0f0c41eac645c6af84606468b40aa2))
+
+# [0.2.0-alpha.966](https://github.com/mittwald/flow/compare/0.2.0-alpha.965...0.2.0-alpha.966) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.965](https://github.com/mittwald/flow/compare/0.2.0-alpha.964...0.2.0-alpha.965) (2026-07-29)
+
+### Features
+
+* **components:** adopt component lifecycle statuses (ADR 0003) ([#2733](https://github.com/mittwald/flow/issues/2733)) ([ae27285](https://github.com/mittwald/flow/commit/ae272850e4decc45bc65c9eaf533bba757b60693))
+
+# [0.2.0-alpha.964](https://github.com/mittwald/flow/compare/0.2.0-alpha.963...0.2.0-alpha.964) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.963](https://github.com/mittwald/flow/compare/0.2.0-alpha.962...0.2.0-alpha.963) (2026-07-28)
+
+### Features
+
+* **components:** add component lifecycle status registry (ADR 0003) ([#2729](https://github.com/mittwald/flow/issues/2729)) ([6a76d1e](https://github.com/mittwald/flow/commit/6a76d1e4ea6cf2e449cdcea0952bb54e9e8725c0))
+
+# [0.2.0-alpha.962](https://github.com/mittwald/flow/compare/0.2.0-alpha.961...0.2.0-alpha.962) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.961](https://github.com/mittwald/flow/compare/0.2.0-alpha.960...0.2.0-alpha.961) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.960](https://github.com/mittwald/flow/compare/0.2.0-alpha.959...0.2.0-alpha.960) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.959](https://github.com/mittwald/flow/compare/0.2.0-alpha.958...0.2.0-alpha.959) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.958](https://github.com/mittwald/flow/compare/0.2.0-alpha.957...0.2.0-alpha.958) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.957](https://github.com/mittwald/flow/compare/0.2.0-alpha.956...0.2.0-alpha.957) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.956](https://github.com/mittwald/flow/compare/0.2.0-alpha.955...0.2.0-alpha.956) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.955](https://github.com/mittwald/flow/compare/0.2.0-alpha.954...0.2.0-alpha.955) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.954](https://github.com/mittwald/flow/compare/0.2.0-alpha.953...0.2.0-alpha.954) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.953](https://github.com/mittwald/flow/compare/0.2.0-alpha.952...0.2.0-alpha.953) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.952](https://github.com/mittwald/flow/compare/0.2.0-alpha.951...0.2.0-alpha.952) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.951](https://github.com/mittwald/flow/compare/0.2.0-alpha.950...0.2.0-alpha.951) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.950](https://github.com/mittwald/flow/compare/0.2.0-alpha.949...0.2.0-alpha.950) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.949](https://github.com/mittwald/flow/compare/0.2.0-alpha.948...0.2.0-alpha.949) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.948](https://github.com/mittwald/flow/compare/0.2.0-alpha.947...0.2.0-alpha.948) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.947](https://github.com/mittwald/flow/compare/0.2.0-alpha.946...0.2.0-alpha.947) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.946](https://github.com/mittwald/flow/compare/0.2.0-alpha.945...0.2.0-alpha.946) (2026-07-24)
+
+### Bug Fixes
+
+* **Modal:** square corners on OffCanvas side panel ([#2713](https://github.com/mittwald/flow/issues/2713)) ([ee56827](https://github.com/mittwald/flow/commit/ee568273426bfa33359705f1d33a3632f950dcad))
+
+# [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.944](https://github.com/mittwald/flow/compare/0.2.0-alpha.943...0.2.0-alpha.944) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.943](https://github.com/mittwald/flow/compare/0.2.0-alpha.942...0.2.0-alpha.943) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.942](https://github.com/mittwald/flow/compare/0.2.0-alpha.941...0.2.0-alpha.942) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.941](https://github.com/mittwald/flow/compare/0.2.0-alpha.940...0.2.0-alpha.941) (2026-07-23)
+
+### Bug Fixes
+
+* **CodeBlock:** fix undefined max height in code block ([8773c73](https://github.com/mittwald/flow/commit/8773c73c7ca63cf3b69a5177712ed8a34bed4fd0))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+
+# [0.2.0-alpha.940](https://github.com/mittwald/flow/compare/0.2.0-alpha.939...0.2.0-alpha.940) (2026-07-23)
+
+### Features
+
+* **Table:** add configurable column widths ([#2682](https://github.com/mittwald/flow/issues/2682)) ([c0b9a45](https://github.com/mittwald/flow/commit/c0b9a45a89f75246cead39a940a8e23d65acf160))
+
+# [0.2.0-alpha.939](https://github.com/mittwald/flow/compare/0.2.0-alpha.938...0.2.0-alpha.939) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.938](https://github.com/mittwald/flow/compare/0.2.0-alpha.937...0.2.0-alpha.938) (2026-07-23)
+
+### Performance Improvements
+
+* **List:** memoize items so they don't re-render when loading more ([#2677](https://github.com/mittwald/flow/issues/2677)) ([deb547a](https://github.com/mittwald/flow/commit/deb547a07849ce89a59bca9aab7e3a5e33812b54))
+
+# [0.2.0-alpha.937](https://github.com/mittwald/flow/compare/0.2.0-alpha.936...0.2.0-alpha.937) (2026-07-22)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fix overflow ([#2686](https://github.com/mittwald/flow/issues/2686)) ([e668e98](https://github.com/mittwald/flow/commit/e668e98b3bd91a4e06089fc3ec21cb5ca2703d70))
+
+# [0.2.0-alpha.936](https://github.com/mittwald/flow/compare/0.2.0-alpha.935...0.2.0-alpha.936) (2026-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.935](https://github.com/mittwald/flow/compare/0.2.0-alpha.934...0.2.0-alpha.935) (2026-07-22)
+
+### Bug Fixes
+
+* **Modal:** keep mobile modals with forms usable when the virtual keyboard opens ([#2423](https://github.com/mittwald/flow/issues/2423)) ([#2671](https://github.com/mittwald/flow/issues/2671)) ([5b1b856](https://github.com/mittwald/flow/commit/5b1b8563d6e5e7a0a5c046620104480f1f7620cd))
+
+# [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
+
+### Features
+
+* **components:** add reusable slim scrollbar mixin and apply to scroll containers ([#2672](https://github.com/mittwald/flow/issues/2672)) ([a06dd9a](https://github.com/mittwald/flow/commit/a06dd9a4e88899612eba19a21f6464ba0a98167e))
+
+# [0.2.0-alpha.933](https://github.com/mittwald/flow/compare/0.2.0-alpha.932...0.2.0-alpha.933) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.932](https://github.com/mittwald/flow/compare/0.2.0-alpha.931...0.2.0-alpha.932) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.931](https://github.com/mittwald/flow/compare/0.2.0-alpha.930...0.2.0-alpha.931) (2026-07-21)
+
+### Bug Fixes
+
+* **List:** stop dimming the list while loading more via infinite scroll ([#2673](https://github.com/mittwald/flow/issues/2673)) ([0587956](https://github.com/mittwald/flow/commit/0587956f06a358b786e0ff53def6622643684242))
+
+# [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.929](https://github.com/mittwald/flow/compare/0.2.0-alpha.928...0.2.0-alpha.929) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.928](https://github.com/mittwald/flow/compare/0.2.0-alpha.927...0.2.0-alpha.928) (2026-07-20)
+
+### Bug Fixes
+
+* **Overlay:** keep browser extension overlays clickable inside modals ([#2668](https://github.com/mittwald/flow/issues/2668)) ([3f105d5](https://github.com/mittwald/flow/commit/3f105d53169d906cd08aa418f774e35e4b3037ef))
+
+# [0.2.0-alpha.927](https://github.com/mittwald/flow/compare/0.2.0-alpha.926...0.2.0-alpha.927) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.926](https://github.com/mittwald/flow/compare/0.2.0-alpha.925...0.2.0-alpha.926) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.925](https://github.com/mittwald/flow/compare/0.2.0-alpha.924...0.2.0-alpha.925) (2026-07-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.924](https://github.com/mittwald/flow/compare/0.2.0-alpha.923...0.2.0-alpha.924) (2026-07-17)
+
+### Bug Fixes
+
+* **components:** correct placeholder and disabled colors for form fields ([#2663](https://github.com/mittwald/flow/issues/2663)) ([89735c0](https://github.com/mittwald/flow/commit/89735c0e86686cdfee259fc5f43b09350e3a69e1))
+
+# [0.2.0-alpha.923](https://github.com/mittwald/flow/compare/0.2.0-alpha.922...0.2.0-alpha.923) (2026-07-16)
+
+### Features
+
+* **ActionGroup:** add preserveOrder prop for DOM-order layout ([#2652](https://github.com/mittwald/flow/issues/2652)) ([a0f14f1](https://github.com/mittwald/flow/commit/a0f14f11fb0a305e3589fa392f7d5dceacb70b00))
+
+# [0.2.0-alpha.922](https://github.com/mittwald/flow/compare/0.2.0-alpha.921...0.2.0-alpha.922) (2026-07-16)
+
+### Features
+
+* **List:** add optional infinite scroll ([#2650](https://github.com/mittwald/flow/issues/2650)) ([9526b46](https://github.com/mittwald/flow/commit/9526b462dea8165d6f9987db7178545c8c59e035))
+
+# [0.2.0-alpha.921](https://github.com/mittwald/flow/compare/0.2.0-alpha.920...0.2.0-alpha.921) (2026-07-16)
+
+### Features
+
+* **Icons:** add Newsletter icon ([#2659](https://github.com/mittwald/flow/issues/2659)) ([87b92d8](https://github.com/mittwald/flow/commit/87b92d85cf6c759a12c54223534a4d4cfed1a81d))
+
+# [0.2.0-alpha.920](https://github.com/mittwald/flow/compare/0.2.0-alpha.919...0.2.0-alpha.920) (2026-07-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.919](https://github.com/mittwald/flow/compare/0.2.0-alpha.918...0.2.0-alpha.919) (2026-07-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.918](https://github.com/mittwald/flow/compare/0.2.0-alpha.917...0.2.0-alpha.918) (2026-07-16)
+
+### Bug Fixes
+
+* **Link:** keep client-side navigation with interactive children ([#2657](https://github.com/mittwald/flow/issues/2657)) ([b4719e5](https://github.com/mittwald/flow/commit/b4719e5c44646c990dc23ef334341e13c174b91c))
+
+# [0.2.0-alpha.917](https://github.com/mittwald/flow/compare/0.2.0-alpha.916...0.2.0-alpha.917) (2026-07-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.916](https://github.com/mittwald/flow/compare/0.2.0-alpha.915...0.2.0-alpha.916) (2026-07-15)
+
+### Bug Fixes
+
+* **Docs:** remove stretch prop ([#2647](https://github.com/mittwald/flow/issues/2647)) ([2d527f9](https://github.com/mittwald/flow/commit/2d527f9a61dc444f7b70587aac764abff9ce8843))
+
+# [0.2.0-alpha.915](https://github.com/mittwald/flow/compare/0.2.0-alpha.914...0.2.0-alpha.915) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.914](https://github.com/mittwald/flow/compare/0.2.0-alpha.913...0.2.0-alpha.914) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.913](https://github.com/mittwald/flow/compare/0.2.0-alpha.912...0.2.0-alpha.913) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.912](https://github.com/mittwald/flow/compare/0.2.0-alpha.911...0.2.0-alpha.912) (2026-07-15)
+
+### Bug Fixes
+
+* **CodeEditor:** fix copy button z-index ([#2649](https://github.com/mittwald/flow/issues/2649)) ([9a806d0](https://github.com/mittwald/flow/commit/9a806d0cad63a1b43e39cacff41005bc7019a89a))
+
+# [0.2.0-alpha.911](https://github.com/mittwald/flow/compare/0.2.0-alpha.910...0.2.0-alpha.911) (2026-07-15)
+
+### Bug Fixes
+
+* **Avatar:** hide decorative avatars from screen readers and add label prop ([#2648](https://github.com/mittwald/flow/issues/2648)) ([1ddda11](https://github.com/mittwald/flow/commit/1ddda1119b3054eadd60af6e5970996a2219f499))
+
+# [0.2.0-alpha.910](https://github.com/mittwald/flow/compare/0.2.0-alpha.909...0.2.0-alpha.910) (2026-07-15)
+
+### Features
+
+* **components:** add opt-in layered stylesheet variant (CSS cascade layers) ([#2643](https://github.com/mittwald/flow/issues/2643)) ([4b190c2](https://github.com/mittwald/flow/commit/4b190c2ad574ff2cbaa2385047e98aeb6384541b))
+
+# [0.2.0-alpha.909](https://github.com/mittwald/flow/compare/0.2.0-alpha.908...0.2.0-alpha.909) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.908](https://github.com/mittwald/flow/compare/0.2.0-alpha.907...0.2.0-alpha.908) (2026-07-15)
+
+### Bug Fixes
+
+* **ci:** fix two flaky visual/browser test failures (firefox hang retry + Modal deflake) ([#2641](https://github.com/mittwald/flow/issues/2641)) ([c6ce4f6](https://github.com/mittwald/flow/commit/c6ce4f69877b9ff04793468dcade412274a7e923))
+
+# [0.2.0-alpha.907](https://github.com/mittwald/flow/compare/0.2.0-alpha.906...0.2.0-alpha.907) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.906](https://github.com/mittwald/flow/compare/0.2.0-alpha.905...0.2.0-alpha.906) (2026-07-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.905](https://github.com/mittwald/flow/compare/0.2.0-alpha.904...0.2.0-alpha.905) (2026-07-14)
+
+### Features
+
+* **remote:** forward remote deprecation notices to the host via onDeprecation ([#2639](https://github.com/mittwald/flow/issues/2639)) ([d17da88](https://github.com/mittwald/flow/commit/d17da885b7a8bf6e1637fa6ad78e729d39cb53ba))
+
+# [0.2.0-alpha.904](https://github.com/mittwald/flow/compare/0.2.0-alpha.903...0.2.0-alpha.904) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.903](https://github.com/mittwald/flow/compare/0.2.0-alpha.902...0.2.0-alpha.903) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.902](https://github.com/mittwald/flow/compare/0.2.0-alpha.901...0.2.0-alpha.902) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.901](https://github.com/mittwald/flow/compare/0.2.0-alpha.900...0.2.0-alpha.901) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.900](https://github.com/mittwald/flow/compare/0.2.0-alpha.899...0.2.0-alpha.900) (2026-07-10)
+
+### Bug Fixes
+
+* **List:** use plain dark variant for list item options button ([#2630](https://github.com/mittwald/flow/issues/2630)) ([bf71490](https://github.com/mittwald/flow/commit/bf7149076763e23b1541c940b5d237ccfdc8e443))
+
+# [0.2.0-alpha.899](https://github.com/mittwald/flow/compare/0.2.0-alpha.898...0.2.0-alpha.899) (2026-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.898](https://github.com/mittwald/flow/compare/0.2.0-alpha.897...0.2.0-alpha.898) (2026-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.897](https://github.com/mittwald/flow/compare/0.2.0-alpha.896...0.2.0-alpha.897) (2026-07-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** adjust validation behavior ([#2618](https://github.com/mittwald/flow/issues/2618)) ([4bb31c3](https://github.com/mittwald/flow/commit/4bb31c3377334bc0f73cd1225f84992c6901422a))
+
+# [0.2.0-alpha.896](https://github.com/mittwald/flow/compare/0.2.0-alpha.895...0.2.0-alpha.896) (2026-07-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.895](https://github.com/mittwald/flow/compare/0.2.0-alpha.894...0.2.0-alpha.895) (2026-07-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.894](https://github.com/mittwald/flow/compare/0.2.0-alpha.893...0.2.0-alpha.894) (2026-07-07)
+
+### Features
+
+* **components:** add deprecation warning provider ([#2614](https://github.com/mittwald/flow/issues/2614)) ([7c95067](https://github.com/mittwald/flow/commit/7c95067b82754bd198d74704ba6d69d0c633745f))
+
+# [0.2.0-alpha.893](https://github.com/mittwald/flow/compare/0.2.0-alpha.892...0.2.0-alpha.893) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.892](https://github.com/mittwald/flow/compare/0.2.0-alpha.891...0.2.0-alpha.892) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.891](https://github.com/mittwald/flow/compare/0.2.0-alpha.890...0.2.0-alpha.891) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.890](https://github.com/mittwald/flow/compare/0.2.0-alpha.889...0.2.0-alpha.890) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.889](https://github.com/mittwald/flow/compare/0.2.0-alpha.888...0.2.0-alpha.889) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.888](https://github.com/mittwald/flow/compare/0.2.0-alpha.887...0.2.0-alpha.888) (2026-07-03)
+
+### Features
+
+* **Remote:** add async serializers ([#2596](https://github.com/mittwald/flow/issues/2596)) ([57e2ee5](https://github.com/mittwald/flow/commit/57e2ee5fdb82a7f13b19fe28574ced14d2a46a93))
+
+# [0.2.0-alpha.887](https://github.com/mittwald/flow/compare/0.2.0-alpha.886...0.2.0-alpha.887) (2026-07-02)
+
+### Bug Fixes
+
+* **CodeEditor:** fix height and colors ([#2592](https://github.com/mittwald/flow/issues/2592)) ([06b2fa2](https://github.com/mittwald/flow/commit/06b2fa224ee5744f7c994af276b1622024d13b29))
+
+# [0.2.0-alpha.886](https://github.com/mittwald/flow/compare/0.2.0-alpha.885...0.2.0-alpha.886) (2026-07-02)
+
+### Bug Fixes
+
+* **Chat:** improve screen reader experience ([#2590](https://github.com/mittwald/flow/issues/2590)) ([2ac1351](https://github.com/mittwald/flow/commit/2ac1351303fab2d647061d85e66bbf92717aa5aa))
+
+# [0.2.0-alpha.885](https://github.com/mittwald/flow/compare/0.2.0-alpha.884...0.2.0-alpha.885) (2026-07-02)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.884](https://github.com/mittwald/flow/compare/0.2.0-alpha.883...0.2.0-alpha.884) (2026-07-01)
+
+### Features
+
+* **icons:** auto-generate icon overview from categorized icon set ([#2591](https://github.com/mittwald/flow/issues/2591)) ([55d6f44](https://github.com/mittwald/flow/commit/55d6f4461d03900b58b8423c08cb9f60abd8a235))
+
+# [0.2.0-alpha.883](https://github.com/mittwald/flow/compare/0.2.0-alpha.882...0.2.0-alpha.883) (2026-07-01)
+
+### Bug Fixes
+
+* **Popover:** hide decorative tip from accessibility tree ([#2589](https://github.com/mittwald/flow/issues/2589)) ([0a06977](https://github.com/mittwald/flow/commit/0a0697744036897456e2cff1b8d8e329c6d5bd56))
+
+# [0.2.0-alpha.882](https://github.com/mittwald/flow/compare/0.2.0-alpha.881...0.2.0-alpha.882) (2026-07-01)
+
+### Bug Fixes
+
+* **Remote:** import flow components from flr-universal only ([#2588](https://github.com/mittwald/flow/issues/2588)) ([9a418a9](https://github.com/mittwald/flow/commit/9a418a91b0360e1f1e27acec512d153083472cea))
+
+# [0.2.0-alpha.881](https://github.com/mittwald/flow/compare/0.2.0-alpha.880...0.2.0-alpha.881) (2026-06-30)
+
+### Features
+
+* add color scheme to all flow classes ([#2587](https://github.com/mittwald/flow/issues/2587)) ([03457ed](https://github.com/mittwald/flow/commit/03457ed26d6f97dbe14c28fda4a16522b04480db))
+
+# [0.2.0-alpha.880](https://github.com/mittwald/flow/compare/0.2.0-alpha.879...0.2.0-alpha.880) (2026-06-30)
+
+### Bug Fixes
+
+* **Calendar:** Fix size for small mobile ([#2586](https://github.com/mittwald/flow/issues/2586)) ([ac6f72c](https://github.com/mittwald/flow/commit/ac6f72cbdbc23d5dd6157bf9289b7665d730b4af))
+
+# [0.2.0-alpha.879](https://github.com/mittwald/flow/compare/0.2.0-alpha.878...0.2.0-alpha.879) (2026-06-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.878](https://github.com/mittwald/flow/compare/0.2.0-alpha.877...0.2.0-alpha.878) (2026-06-29)
+
+### Features
+
+* **LabeledValue:** improve accessibility ([73b9dfa](https://github.com/mittwald/flow/commit/73b9dfa415b576868e33210208ca14eda0071930))
+
+# [0.2.0-alpha.877](https://github.com/mittwald/flow/compare/0.2.0-alpha.876...0.2.0-alpha.877) (2026-06-29)
+
+### Bug Fixes
+
+* **Modal:** fix modal heading accessibility ([1d14ff6](https://github.com/mittwald/flow/commit/1d14ff685fb96ed53ffaeb0e85ff81728694bf34))
+
+### Features
+
+* **Modal:** hide section separators ([#2572](https://github.com/mittwald/flow/issues/2572)) ([5d95034](https://github.com/mittwald/flow/commit/5d9503429bbb5a2d1e84438711db686da5d246df))
+
+# [0.2.0-alpha.876](https://github.com/mittwald/flow/compare/0.2.0-alpha.875...0.2.0-alpha.876) (2026-06-29)
+
+### Features
+
+* **FieldError:** announce fieldError message to aria ([#2581](https://github.com/mittwald/flow/issues/2581)) ([b6809b2](https://github.com/mittwald/flow/commit/b6809b24d76b4435d65ce183a0d6c5df0b6aaa2a))
+
+# [0.2.0-alpha.875](https://github.com/mittwald/flow/compare/0.2.0-alpha.874...0.2.0-alpha.875) (2026-06-25)
+
+### Bug Fixes
+
+* **List:** do not use labelled by and label at the same time ([#2578](https://github.com/mittwald/flow/issues/2578)) ([8595bdd](https://github.com/mittwald/flow/commit/8595bddf1d75d149c27d311f325d14752334d640))
+
+# [0.2.0-alpha.874](https://github.com/mittwald/flow/compare/0.2.0-alpha.873...0.2.0-alpha.874) (2026-06-25)
+
+### Bug Fixes
+
+* **NavigationGroup:** remove unnecessary labelled by ([#2574](https://github.com/mittwald/flow/issues/2574)) ([b3c4b58](https://github.com/mittwald/flow/commit/b3c4b584730a247c1040d2a4e544afa49985db1e))
+
+# [0.2.0-alpha.873](https://github.com/mittwald/flow/compare/0.2.0-alpha.872...0.2.0-alpha.873) (2026-06-25)
+
+### Bug Fixes
+
+* **Cropper:** performance optimization ([#2577](https://github.com/mittwald/flow/issues/2577)) ([108dcee](https://github.com/mittwald/flow/commit/108dceecb6bd4686863bb137ee1d417b25e73bec))
+
+# [0.2.0-alpha.872](https://github.com/mittwald/flow/compare/0.2.0-alpha.871...0.2.0-alpha.872) (2026-06-25)
+
+### Bug Fixes
+
+* **List:** fix expanded filters ([#2576](https://github.com/mittwald/flow/issues/2576)) ([8e2dda4](https://github.com/mittwald/flow/commit/8e2dda48b3efb772a932059664a2afa76b03f70f))
+
+# [0.2.0-alpha.871](https://github.com/mittwald/flow/compare/0.2.0-alpha.870...0.2.0-alpha.871) (2026-06-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.870](https://github.com/mittwald/flow/compare/0.2.0-alpha.869...0.2.0-alpha.870) (2026-06-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.869](https://github.com/mittwald/flow/compare/0.2.0-alpha.868...0.2.0-alpha.869) (2026-06-23)
+
+### Bug Fixes
+
+* rollback to Vite 7 because of broken build files ([79a7818](https://github.com/mittwald/flow/commit/79a7818d5f08885a284bc6efc41b61548026f6c6))
+
+# [0.2.0-alpha.868](https://github.com/mittwald/flow/compare/0.2.0-alpha.867...0.2.0-alpha.868) (2026-06-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.867](https://github.com/mittwald/flow/compare/0.2.0-alpha.866...0.2.0-alpha.867) (2026-06-22)
+
+### Bug Fixes
+
+* **RHF:** press enter on fields will reload complete page when validation is running ([#2568](https://github.com/mittwald/flow/issues/2568)) ([bad596d](https://github.com/mittwald/flow/commit/bad596d4a11c18bd0832b59364521009bb501efc))
+
+# [0.2.0-alpha.866](https://github.com/mittwald/flow/compare/0.2.0-alpha.865...0.2.0-alpha.866) (2026-06-22)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.865](https://github.com/mittwald/flow/compare/0.2.0-alpha.864...0.2.0-alpha.865) (2026-06-22)
+
+### Bug Fixes
+
+* **Markdown:** add remarkPlugins and useTransform prop to correct component ([#2567](https://github.com/mittwald/flow/issues/2567)) ([7e541c6](https://github.com/mittwald/flow/commit/7e541c6736f4375bc99011f15b60f4a7d20f212c))
+
+# [0.2.0-alpha.864](https://github.com/mittwald/flow/compare/0.2.0-alpha.863...0.2.0-alpha.864) (2026-06-19)
+
+### Bug Fixes
+
+* **Accordion:** fix lost focus ([#2565](https://github.com/mittwald/flow/issues/2565)) ([d7fb682](https://github.com/mittwald/flow/commit/d7fb68251ab753e599de5847d3ece0d69cb699b4))
+
+# [0.2.0-alpha.863](https://github.com/mittwald/flow/compare/0.2.0-alpha.862...0.2.0-alpha.863) (2026-06-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.862](https://github.com/mittwald/flow/compare/0.2.0-alpha.861...0.2.0-alpha.862) (2026-06-19)
+
+### Bug Fixes
+
+* **List:** fix empty search view ([#2561](https://github.com/mittwald/flow/issues/2561)) ([082260f](https://github.com/mittwald/flow/commit/082260f5ca004685ec442c1d119345c635e7ee18))
+
+# [0.2.0-alpha.861](https://github.com/mittwald/flow/compare/0.2.0-alpha.860...0.2.0-alpha.861) (2026-06-19)
+
+### Features
+
+* **LightBox:** add gallery ([0526096](https://github.com/mittwald/flow/commit/052609664486d93a6828d3b05f5f38cd7613dd8f))
+
+# [0.2.0-alpha.860](https://github.com/mittwald/flow/compare/0.2.0-alpha.859...0.2.0-alpha.860) (2026-06-18)
+
+### Features
+
+* **Markdown:** allow custom components to override default renderers ([#2541](https://github.com/mittwald/flow/issues/2541)) ([7d429fb](https://github.com/mittwald/flow/commit/7d429fb2f87b858098207167bdef927e0af1bb5a))
+
+# [0.2.0-alpha.859](https://github.com/mittwald/flow/compare/0.2.0-alpha.858...0.2.0-alpha.859) (2026-06-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.858](https://github.com/mittwald/flow/compare/0.2.0-alpha.857...0.2.0-alpha.858) (2026-06-18)
+
+### Features
+
+* **MarkdownEditor:** add support for custom markdown component in preview mode ([31440b6](https://github.com/mittwald/flow/commit/31440b61f51bf947cd6f36ffa8bbcce689dce83e))
+* show loading state in trigger button if context menu suspends ([e18e32a](https://github.com/mittwald/flow/commit/e18e32ae0b02796afe1acedc509acbfa0b990890))
+
+# [0.2.0-alpha.857](https://github.com/mittwald/flow/compare/0.2.0-alpha.856...0.2.0-alpha.857) (2026-06-17)
+
+### Bug Fixes
+
+* **docs:** getting started typo ([#2557](https://github.com/mittwald/flow/issues/2557)) ([7ad6661](https://github.com/mittwald/flow/commit/7ad666139ad799eee3edd0af1c92993d1164f3f4))
+
+# [0.2.0-alpha.856](https://github.com/mittwald/flow/compare/0.2.0-alpha.855...0.2.0-alpha.856) (2026-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.855](https://github.com/mittwald/flow/compare/0.2.0-alpha.854...0.2.0-alpha.855) (2026-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.854](https://github.com/mittwald/flow/compare/0.2.0-alpha.853...0.2.0-alpha.854) (2026-06-17)
+
+### Features
+
+* **Icon:** add stack icon ([#2553](https://github.com/mittwald/flow/issues/2553)) ([a8becec](https://github.com/mittwald/flow/commit/a8bececefc8ca50a5fd25de68d96dc2cb9d95e1e))
+
+# [0.2.0-alpha.853](https://github.com/mittwald/flow/compare/0.2.0-alpha.852...0.2.0-alpha.853) (2026-06-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.852](https://github.com/mittwald/flow/compare/0.2.0-alpha.851...0.2.0-alpha.852) (2026-06-16)
+
+### Bug Fixes
+
+* **Forms:** fixes scroll to input with error in forms ([#2516](https://github.com/mittwald/flow/issues/2516)) ([94e62aa](https://github.com/mittwald/flow/commit/94e62aa76e54ca54f94708ac100294eb488b910b))
+
+# [0.2.0-alpha.851](https://github.com/mittwald/flow/compare/0.2.0-alpha.850...0.2.0-alpha.851) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.850](https://github.com/mittwald/flow/compare/0.2.0-alpha.849...0.2.0-alpha.850) (2026-06-15)
+
+### Bug Fixes
+
+* **Code:** fix active line color ([#2518](https://github.com/mittwald/flow/issues/2518)) ([6055e07](https://github.com/mittwald/flow/commit/6055e073a3cf8b9fac051f4721f1f91414fc8dc1))
+
+# [0.2.0-alpha.849](https://github.com/mittwald/flow/compare/0.2.0-alpha.848...0.2.0-alpha.849) (2026-06-15)
+
+### Bug Fixes
+
+* **Select:** fix placeholder color ([#2547](https://github.com/mittwald/flow/issues/2547)) ([866d340](https://github.com/mittwald/flow/commit/866d34039fdabf4e5db8b9bf3bb09616eb5545cc))
+
+# [0.2.0-alpha.848](https://github.com/mittwald/flow/compare/0.2.0-alpha.847...0.2.0-alpha.848) (2026-06-15)
+
+### Bug Fixes
+
+* **Modal:** fix media queries at threshold ([#2550](https://github.com/mittwald/flow/issues/2550)) ([4f4794a](https://github.com/mittwald/flow/commit/4f4794a44a143efda647b0844509572e60bbb148))
+
+# [0.2.0-alpha.847](https://github.com/mittwald/flow/compare/0.2.0-alpha.846...0.2.0-alpha.847) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.846](https://github.com/mittwald/flow/compare/0.2.0-alpha.845...0.2.0-alpha.846) (2026-06-15)
+
+### Bug Fixes
+
+* **List:** fix tile hover ([#2546](https://github.com/mittwald/flow/issues/2546)) ([e57a9a8](https://github.com/mittwald/flow/commit/e57a9a8bf88e19bafbc7661575e5ef21f4d6cfa6))
+
+# [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.843](https://github.com/mittwald/flow/compare/0.2.0-alpha.842...0.2.0-alpha.843) (2026-06-05)
+
+### Features
+
+* **LoadingSpinner:** use animation delay ([#2530](https://github.com/mittwald/flow/issues/2530)) ([7e79288](https://github.com/mittwald/flow/commit/7e79288a947b227bdefc92486ff9685696a79cd2))
+
+# [0.2.0-alpha.842](https://github.com/mittwald/flow/compare/0.2.0-alpha.841...0.2.0-alpha.842) (2026-06-03)
+
+### Features
+
+* **LoadingSpinner:** use global clock for starting angle ([#2529](https://github.com/mittwald/flow/issues/2529)) ([f97a2a8](https://github.com/mittwald/flow/commit/f97a2a81a0e29f85c71c85684acc6ce326126d54))
+
+# [0.2.0-alpha.841](https://github.com/mittwald/flow/compare/0.2.0-alpha.840...0.2.0-alpha.841) (2026-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.840](https://github.com/mittwald/flow/compare/0.2.0-alpha.839...0.2.0-alpha.840) (2026-05-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.839](https://github.com/mittwald/flow/compare/0.2.0-alpha.838...0.2.0-alpha.839) (2026-05-28)
+
+### Features
+
+* reduce duration of success-feedback ([#2514](https://github.com/mittwald/flow/issues/2514)) ([1d30670](https://github.com/mittwald/flow/commit/1d3067019c5b4ba4c8b32789f8adf4ecc3fb05ba))
+
+# [0.2.0-alpha.838](https://github.com/mittwald/flow/compare/0.2.0-alpha.837...0.2.0-alpha.838) (2026-05-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.837](https://github.com/mittwald/flow/compare/0.2.0-alpha.836...0.2.0-alpha.837) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.836](https://github.com/mittwald/flow/compare/0.2.0-alpha.835...0.2.0-alpha.836) (2026-05-27)
+
+### Bug Fixes
+
+* **Modal:** add missing aria label ([#2495](https://github.com/mittwald/flow/issues/2495)) ([d576882](https://github.com/mittwald/flow/commit/d576882bb4c98cbe6f9beb7967a927ae2a9737f4))
+
+# [0.2.0-alpha.835](https://github.com/mittwald/flow/compare/0.2.0-alpha.834...0.2.0-alpha.835) (2026-05-27)
+
+### Features
+
+* **Rating:** support custom icons ([#2511](https://github.com/mittwald/flow/issues/2511)) ([6c4ef13](https://github.com/mittwald/flow/commit/6c4ef13c5c039d08d937857cce30c57a9788b4d3))
+
+# [0.2.0-alpha.834](https://github.com/mittwald/flow/compare/0.2.0-alpha.833...0.2.0-alpha.834) (2026-05-27)
+
+### Bug Fixes
+
+* **Tabs:** fix collapsed tabs with link ([#2513](https://github.com/mittwald/flow/issues/2513)) ([9ffc8bc](https://github.com/mittwald/flow/commit/9ffc8bca6a8e3eea33112758da9abfa22158dcb5))
+
+# [0.2.0-alpha.833](https://github.com/mittwald/flow/compare/0.2.0-alpha.832...0.2.0-alpha.833) (2026-05-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.832](https://github.com/mittwald/flow/compare/0.2.0-alpha.831...0.2.0-alpha.832) (2026-05-19)
+
+### Features
+
+* **Initials:** support emojis ([#2510](https://github.com/mittwald/flow/issues/2510)) ([9ff88e7](https://github.com/mittwald/flow/commit/9ff88e73c77f711d1f82c97f824204fd6d3780b2))
+
+# [0.2.0-alpha.831](https://github.com/mittwald/flow/compare/0.2.0-alpha.830...0.2.0-alpha.831) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.830](https://github.com/mittwald/flow/compare/0.2.0-alpha.829...0.2.0-alpha.830) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.829](https://github.com/mittwald/flow/compare/0.2.0-alpha.828...0.2.0-alpha.829) (2026-05-18)
+
+### Bug Fixes
+
+* **Tabs:** fix disappearing buttons ([#2500](https://github.com/mittwald/flow/issues/2500)) ([f7845fa](https://github.com/mittwald/flow/commit/f7845fa3d8e1f1b0417913077e3b16d7a2e66349))
+
+### Features
+
+* **Heading:** allow element type ([#2505](https://github.com/mittwald/flow/issues/2505)) ([a550b59](https://github.com/mittwald/flow/commit/a550b594d1b14616d2f1884abcf941a7869a8bad))
+
+# [0.2.0-alpha.828](https://github.com/mittwald/flow/compare/0.2.0-alpha.827...0.2.0-alpha.828) (2026-05-13)
+
+### Bug Fixes
+
+* **CodeBlock:** fix overflow ([#2496](https://github.com/mittwald/flow/issues/2496)) ([a2e6c3b](https://github.com/mittwald/flow/commit/a2e6c3bd3e034dc706551e0515774c5c0cf9667e))
+
+### Features
+
+* **List:** expand accordions in all filters modal ([#2497](https://github.com/mittwald/flow/issues/2497)) ([2faf0bf](https://github.com/mittwald/flow/commit/2faf0bfc25f1ae6d16327b806f0615351d814e83))
+
+# [0.2.0-alpha.827](https://github.com/mittwald/flow/compare/0.2.0-alpha.826...0.2.0-alpha.827) (2026-05-08)
+
+### Features
+
+* **OverlayController:** support onClose callback ([b206009](https://github.com/mittwald/flow/commit/b206009b64406bf6bc3025574634940ca98709ea))
+
+# [0.2.0-alpha.826](https://github.com/mittwald/flow/compare/0.2.0-alpha.825...0.2.0-alpha.826) (2026-05-07)
+
+### Bug Fixes
+
+* **Text:** fix text link alpha colors ([#2486](https://github.com/mittwald/flow/issues/2486)) ([2790dd9](https://github.com/mittwald/flow/commit/2790dd9507641dca1b6d2ae9d99a685cb0bb73ef))
+
+# [0.2.0-alpha.825](https://github.com/mittwald/flow/compare/0.2.0-alpha.824...0.2.0-alpha.825) (2026-05-07)
+
+### Bug Fixes
+
+* **CodeBlock:** fix scrollbar position ([#2479](https://github.com/mittwald/flow/issues/2479)) ([907c3f8](https://github.com/mittwald/flow/commit/907c3f81f0812a7f46383706af21d2673f013ab8))
+
+### Features
+
+* **AccentBox:** set default color for gradient background ([#2491](https://github.com/mittwald/flow/issues/2491)) ([b557223](https://github.com/mittwald/flow/commit/b55722331932107a1b487fa66c4202b73661da3f))
+* **ContextMenu:** support badges ([#2493](https://github.com/mittwald/flow/issues/2493)) ([8e8582f](https://github.com/mittwald/flow/commit/8e8582f44eb44ef2f9c0dded3eaa1f684882c5c7))
+* **List:** improve empty view ([#2490](https://github.com/mittwald/flow/issues/2490)) ([475c1c7](https://github.com/mittwald/flow/commit/475c1c7432c189a113ffad14dfd9547e1a18a724))
+
+# [0.2.0-alpha.824](https://github.com/mittwald/flow/compare/0.2.0-alpha.823...0.2.0-alpha.824) (2026-05-06)
+
+### Bug Fixes
+
+* **Tabs:** fix not found tabs ([cfe541f](https://github.com/mittwald/flow/commit/cfe541f4888de31ec75360aae98fe6c6ae1fb9ef))
+
+# [0.2.0-alpha.823](https://github.com/mittwald/flow/compare/0.2.0-alpha.822...0.2.0-alpha.823) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.822](https://github.com/mittwald/flow/compare/0.2.0-alpha.821...0.2.0-alpha.822) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.821](https://github.com/mittwald/flow/compare/0.2.0-alpha.820...0.2.0-alpha.821) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.820](https://github.com/mittwald/flow/compare/0.2.0-alpha.819...0.2.0-alpha.820) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.819](https://github.com/mittwald/flow/compare/0.2.0-alpha.818...0.2.0-alpha.819) (2026-05-05)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.818](https://github.com/mittwald/flow/compare/0.2.0-alpha.817...0.2.0-alpha.818) (2026-05-05)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.817](https://github.com/mittwald/flow/compare/0.2.0-alpha.816...0.2.0-alpha.817) (2026-05-04)
+
+### Bug Fixes
+
+* **Icon:** fix fa icon size ([#2477](https://github.com/mittwald/flow/issues/2477)) ([331ac3d](https://github.com/mittwald/flow/commit/331ac3d2e6b3aa8904d8d2836aac0e099be768e0))
+
+# [0.2.0-alpha.816](https://github.com/mittwald/flow/compare/0.2.0-alpha.815...0.2.0-alpha.816) (2026-05-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.815](https://github.com/mittwald/flow/compare/0.2.0-alpha.814...0.2.0-alpha.815) (2026-04-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.814](https://github.com/mittwald/flow/compare/0.2.0-alpha.813...0.2.0-alpha.814) (2026-04-28)
+
+### Bug Fixes
+
+* **Navigation:** fix visual style ([#2473](https://github.com/mittwald/flow/issues/2473)) ([39ead3c](https://github.com/mittwald/flow/commit/39ead3c160b1fcdfa891a2e48fa7302b9cc213a6))
+
+# [0.2.0-alpha.813](https://github.com/mittwald/flow/compare/0.2.0-alpha.812...0.2.0-alpha.813) (2026-04-25)
+
+### Bug Fixes
+
+* **List:** fix error when rendering accordion ([bda8df1](https://github.com/mittwald/flow/commit/bda8df1ede78a5feb6d27d19517d7d3e66744885))
+
+# [0.2.0-alpha.812](https://github.com/mittwald/flow/compare/0.2.0-alpha.811...0.2.0-alpha.812) (2026-04-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.811](https://github.com/mittwald/flow/compare/0.2.0-alpha.810...0.2.0-alpha.811) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.810](https://github.com/mittwald/flow/compare/0.2.0-alpha.809...0.2.0-alpha.810) (2026-04-23)
+
+### Bug Fixes
+
+* **CountryOptions:** fix missing countries when sorting ([efdcea2](https://github.com/mittwald/flow/commit/efdcea246e04d15c5b601abe786bb9cc5182a1d8))
+
+# [0.2.0-alpha.809](https://github.com/mittwald/flow/compare/0.2.0-alpha.808...0.2.0-alpha.809) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.808](https://github.com/mittwald/flow/compare/0.2.0-alpha.807...0.2.0-alpha.808) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.807](https://github.com/mittwald/flow/compare/0.2.0-alpha.806...0.2.0-alpha.807) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.806](https://github.com/mittwald/flow/compare/0.2.0-alpha.805...0.2.0-alpha.806) (2026-04-23)
+
+### Features
+
+* **CartesianChart:** typedCartesianChart improvements ([#2467](https://github.com/mittwald/flow/issues/2467)) ([102e84d](https://github.com/mittwald/flow/commit/102e84d932667836eb787c535f75e261fdccd6ed))
+* **Tunnel:** support Tunnel nesting ([#2466](https://github.com/mittwald/flow/issues/2466)) ([ac85de2](https://github.com/mittwald/flow/commit/ac85de2032644a9f8f08c393cf9d3721b44e1173))
+
+# [0.2.0-alpha.805](https://github.com/mittwald/flow/compare/0.2.0-alpha.804...0.2.0-alpha.805) (2026-04-23)
+
+### Features
+
+* **CodeBlock:** add truncate lines option ([#2459](https://github.com/mittwald/flow/issues/2459)) ([99cdbe3](https://github.com/mittwald/flow/commit/99cdbe30468ca814cc3d9d18c8ee870c1a710b28))
+
+# [0.2.0-alpha.804](https://github.com/mittwald/flow/compare/0.2.0-alpha.803...0.2.0-alpha.804) (2026-04-22)
+
+### Features
+
+* **List:** support custom empty views ([#2440](https://github.com/mittwald/flow/issues/2440)) ([67807a8](https://github.com/mittwald/flow/commit/67807a86c1d869c360d6d3bc4ecfd4b936d3f6d2))
+
+# [0.2.0-alpha.803](https://github.com/mittwald/flow/compare/0.2.0-alpha.802...0.2.0-alpha.803) (2026-04-22)
+
+### Features
+
+* **DateRangePicker:** add date picker presets ([#2463](https://github.com/mittwald/flow/issues/2463)) ([06154f3](https://github.com/mittwald/flow/commit/06154f3b97a69fe899dac30a070006a4b3da44d4))
+
+# [0.2.0-alpha.802](https://github.com/mittwald/flow/compare/0.2.0-alpha.801...0.2.0-alpha.802) (2026-04-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.801](https://github.com/mittwald/flow/compare/0.2.0-alpha.800...0.2.0-alpha.801) (2026-04-20)
+
+### Features
+
+* **Tab:** add not found fallback ([#2460](https://github.com/mittwald/flow/issues/2460)) ([e0955cd](https://github.com/mittwald/flow/commit/e0955cdda5eb11e1fef5ed760eda3f1e1fcb1384))
+
+# [0.2.0-alpha.800](https://github.com/mittwald/flow/compare/0.2.0-alpha.799...0.2.0-alpha.800) (2026-04-16)
+
+### Bug Fixes
+
+* **CountryOptions:** fix missing options with same value ([#2458](https://github.com/mittwald/flow/issues/2458)) ([83174c7](https://github.com/mittwald/flow/commit/83174c71e4abdfe675ea0c8d2c22d8dc85d3b4f9))
+
+# [0.2.0-alpha.799](https://github.com/mittwald/flow/compare/0.2.0-alpha.798...0.2.0-alpha.799) (2026-04-15)
+
+### Features
+
+* **CartesianChart:** add typed CartesianChart ([#2456](https://github.com/mittwald/flow/issues/2456)) ([8db3a8b](https://github.com/mittwald/flow/commit/8db3a8b7a312c24b63775e669f151191665ef20a))
+
+# [0.2.0-alpha.798](https://github.com/mittwald/flow/compare/0.2.0-alpha.797...0.2.0-alpha.798) (2026-04-14)
+
+### Features
+
+* **CartesianChart:** add progress bar formatter ([#2449](https://github.com/mittwald/flow/issues/2449)) ([0a54516](https://github.com/mittwald/flow/commit/0a545161dcb9a8a56c0987ff744a534e0298bbed))
+
+# [0.2.0-alpha.797](https://github.com/mittwald/flow/compare/0.2.0-alpha.796...0.2.0-alpha.797) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.796](https://github.com/mittwald/flow/compare/0.2.0-alpha.795...0.2.0-alpha.796) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.795](https://github.com/mittwald/flow/compare/0.2.0-alpha.794...0.2.0-alpha.795) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.794](https://github.com/mittwald/flow/compare/0.2.0-alpha.793...0.2.0-alpha.794) (2026-04-14)
+
+### Bug Fixes
+
+* **storybook:** show mittwald branding ([#2454](https://github.com/mittwald/flow/issues/2454)) ([0991688](https://github.com/mittwald/flow/commit/0991688adda8505fe9256d476623dc7ffba5e3e6))
+
+# [0.2.0-alpha.793](https://github.com/mittwald/flow/compare/0.2.0-alpha.792...0.2.0-alpha.793) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.792](https://github.com/mittwald/flow/compare/0.2.0-alpha.791...0.2.0-alpha.792) (2026-04-14)
+
+### Bug Fixes
+
+* **AccentBox:** make accent box backwards compatible ([#2451](https://github.com/mittwald/flow/issues/2451)) ([c856f2b](https://github.com/mittwald/flow/commit/c856f2b732ff639e3ef50635f9880084d3a2ee11))
+
+### Features
+
+* **Text:** add noLigatures option ([b4b799d](https://github.com/mittwald/flow/commit/b4b799dbdbb7e0ead87ef9a1b4e71d3e25482290))
+
+# [0.2.0-alpha.791](https://github.com/mittwald/flow/compare/0.2.0-alpha.790...0.2.0-alpha.791) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.790](https://github.com/mittwald/flow/compare/0.2.0-alpha.789...0.2.0-alpha.790) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.789](https://github.com/mittwald/flow/compare/0.2.0-alpha.788...0.2.0-alpha.789) (2026-04-13)
+
+### Features
+
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mittwald/flow/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+
+# [0.2.0-alpha.788](https://github.com/mittwald/flow/compare/0.2.0-alpha.787...0.2.0-alpha.788) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.787](https://github.com/mittwald/flow/compare/0.2.0-alpha.786...0.2.0-alpha.787) (2026-04-10)
+
+### Features
+
+* **i18n:** add custom translations & support remote translations ([#2430](https://github.com/mittwald/flow/issues/2430)) ([1b0e238](https://github.com/mittwald/flow/commit/1b0e23813afe8da2743d96ed5cb51c7466ec2c1e))
+
+# [0.2.0-alpha.786](https://github.com/mittwald/flow/compare/0.2.0-alpha.785...0.2.0-alpha.786) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.785](https://github.com/mittwald/flow/compare/0.2.0-alpha.784...0.2.0-alpha.785) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.784](https://github.com/mittwald/flow/compare/0.2.0-alpha.783...0.2.0-alpha.784) (2026-04-10)
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
+# [0.2.0-alpha.783](https://github.com/mittwald/flow/compare/0.2.0-alpha.782...0.2.0-alpha.783) (2026-04-10)
+
+### Features
+
+* **ci:** deploy review apps to mittwald Container Hosting ([#2257](https://github.com/mittwald/flow/issues/2257)) ([5c4861d](https://github.com/mittwald/flow/commit/5c4861d8444aca52709191c513d0bd65bf372199))
+
+# [0.2.0-alpha.782](https://github.com/mittwald/flow/compare/0.2.0-alpha.781...0.2.0-alpha.782) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.781](https://github.com/mittwald/flow/compare/0.2.0-alpha.780...0.2.0-alpha.781) (2026-04-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.780](https://github.com/mittwald/flow/compare/0.2.0-alpha.779...0.2.0-alpha.780) (2026-04-09)
+
+### Features
+
+* **CartesianChart:** add progressbar to chart tooltip ([85e0fec](https://github.com/mittwald/flow/commit/85e0fec0160582ae027711f3b9bb4e526dc3999e))
+
+# [0.2.0-alpha.779](https://github.com/mittwald/flow/compare/0.2.0-alpha.778...0.2.0-alpha.779) (2026-04-09)
+
+### Bug Fixes
+
+* **CodeBlock:** visual improvements ([#2435](https://github.com/mittwald/flow/issues/2435)) ([26a030d](https://github.com/mittwald/flow/commit/26a030d901b0857eff3d746305de4d6e75ec0702))
+
+# [0.2.0-alpha.778](https://github.com/mittwald/flow/compare/0.2.0-alpha.777...0.2.0-alpha.778) (2026-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.777](https://github.com/mittwald/flow/compare/0.2.0-alpha.776...0.2.0-alpha.777) (2026-04-08)
+
+### Features
+
+* improve unavailable status ([#2426](https://github.com/mittwald/flow/issues/2426)) ([d195d50](https://github.com/mittwald/flow/commit/d195d50ee951c84abfddb4b8181357d70ba0672c))
+
+# [0.2.0-alpha.776](https://github.com/mittwald/flow/compare/0.2.0-alpha.775...0.2.0-alpha.776) (2026-04-08)
+
+### Bug Fixes
+
+* **CodeBlock:** set to non-editable ([#2431](https://github.com/mittwald/flow/issues/2431)) ([bf8fd4e](https://github.com/mittwald/flow/commit/bf8fd4ed43fbf9b911354a2aa9525a896dd8a8e7))
+
+# [0.2.0-alpha.775](https://github.com/mittwald/flow/compare/0.2.0-alpha.774...0.2.0-alpha.775) (2026-04-07)
+
+### Bug Fixes
+
+* **List:** fix hidden default sorting not working ([01e3695](https://github.com/mittwald/flow/commit/01e3695717f8f5f3103e5acdef9cdaf9bbf8ab48))
+
+# [0.2.0-alpha.774](https://github.com/mittwald/flow/compare/0.2.0-alpha.773...0.2.0-alpha.774) (2026-04-02)
+
+### Reverts
+
+* Revert "refactor(List): replace grid list with list box (#2420)" ([b4f8171](https://github.com/mittwald/flow/commit/b4f81714add5dd0da76966c483398b3bbd60cb48)), closes [#2420](https://github.com/mittwald/flow/issues/2420)
+
+# [0.2.0-alpha.773](https://github.com/mittwald/flow/compare/0.2.0-alpha.772...0.2.0-alpha.773) (2026-04-01)
+
+### Features
+
+* **ReactHookForm:** add default validation messages ([#2424](https://github.com/mittwald/flow/issues/2424)) ([cdbd8cd](https://github.com/mittwald/flow/commit/cdbd8cdd1604ab3ce54395102b7e748f7b811f5b))
+
+# [0.2.0-alpha.772](https://github.com/mittwald/flow/compare/0.2.0-alpha.771...0.2.0-alpha.772) (2026-04-01)
+
+### Bug Fixes
+
+* **List:** fix initial save of autosaved filters not working ([aeae102](https://github.com/mittwald/flow/commit/aeae102a86f4280623a5527f93d4274c93ce19db))
+
+### Features
+
+* **ImageCropper:** add image cropper component ([9c057b3](https://github.com/mittwald/flow/commit/9c057b320f2c23564758adcc3218f7efdeae7b81))
+
+# [0.2.0-alpha.771](https://github.com/mittwald/flow/compare/0.2.0-alpha.770...0.2.0-alpha.771) (2026-04-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.770](https://github.com/mittwald/flow/compare/0.2.0-alpha.769...0.2.0-alpha.770) (2026-04-01)
+
+### Features
+
+* **List:** add range filter ([444f796](https://github.com/mittwald/flow/commit/444f796ba85262061c1e31a6dbad085110889fcd))
+
+### Performance Improvements
+
+* **List:** less calls to update filters ([75ecad3](https://github.com/mittwald/flow/commit/75ecad372c7ecf708d9e93fa0f2447aa1f5c178c))
+
+# [0.2.0-alpha.769](https://github.com/mittwald/flow/compare/0.2.0-alpha.768...0.2.0-alpha.769) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** autosave filters only if column state changes ([308eba8](https://github.com/mittwald/flow/commit/308eba81aaf0100e4dda4cabda6dbc5546a1312d))
+
+# [0.2.0-alpha.768](https://github.com/mittwald/flow/compare/0.2.0-alpha.767...0.2.0-alpha.768) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** fix rerender loop ([bc15c3e](https://github.com/mittwald/flow/commit/bc15c3e48d07ac977bbe4166704029d37b508b64))
+
+# [0.2.0-alpha.767](https://github.com/mittwald/flow/compare/0.2.0-alpha.766...0.2.0-alpha.767) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** do not store filters if not needed ([8c2ac00](https://github.com/mittwald/flow/commit/8c2ac00dcee50a7f4f9a57cc04c6c25885baf02d))
+
+# [0.2.0-alpha.766](https://github.com/mittwald/flow/compare/0.2.0-alpha.765...0.2.0-alpha.766) (2026-03-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.765](https://github.com/mittwald/flow/compare/0.2.0-alpha.764...0.2.0-alpha.765) (2026-03-30)
+
+### Bug Fixes
+
+* **Settings:** fix settings are not updated on rerender ([ec20056](https://github.com/mittwald/flow/commit/ec200564d9159f79c6eaf1b051d60dbf8595fa1d))
+
+# [0.2.0-alpha.764](https://github.com/mittwald/flow/compare/0.2.0-alpha.763...0.2.0-alpha.764) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix autosaving of search settings ([96b6e07](https://github.com/mittwald/flow/commit/96b6e07c4c8e601cec50e201f6d39a2f865438ee))
+
+# [0.2.0-alpha.763](https://github.com/mittwald/flow/compare/0.2.0-alpha.762...0.2.0-alpha.763) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix not working storage default settings ([032a7d7](https://github.com/mittwald/flow/commit/032a7d7abfebc563e4d6afd0baf7b81bc8a4e873))
+
+# [0.2.0-alpha.762](https://github.com/mittwald/flow/compare/0.2.0-alpha.761...0.2.0-alpha.762) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix settings storage types ([e609727](https://github.com/mittwald/flow/commit/e609727633d1f5300fd1af6d6b02b3a0d39fbdc6))
+
+# [0.2.0-alpha.761](https://github.com/mittwald/flow/compare/0.2.0-alpha.760...0.2.0-alpha.761) (2026-03-30)
+
+### Features
+
+* support List-wide settings storage defaults ([db7b362](https://github.com/mittwald/flow/commit/db7b362ed6f0375c0e00ced1e769753a3a7bcc61))
+
+# [0.2.0-alpha.760](https://github.com/mittwald/flow/compare/0.2.0-alpha.759...0.2.0-alpha.760) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** only show filter modal button if needed ([#2416](https://github.com/mittwald/flow/issues/2416)) ([e2a638c](https://github.com/mittwald/flow/commit/e2a638c82277ab3542e7ca5eefe7dd14d6a4b48b))
+
+# [0.2.0-alpha.759](https://github.com/mittwald/flow/compare/0.2.0-alpha.758...0.2.0-alpha.759) (2026-03-30)
+
+### Bug Fixes
+
+* **TextField:** allow slotting CopyButton into TextField ([#2417](https://github.com/mittwald/flow/issues/2417)) ([ca66da1](https://github.com/mittwald/flow/commit/ca66da1cfc18993f78c2fd9833934b385c04ff8c))
+
+# [0.2.0-alpha.758](https://github.com/mittwald/flow/compare/0.2.0-alpha.757...0.2.0-alpha.758) (2026-03-27)
+
+### Bug Fixes
+
+* **List:** fix overflow wrap ([#2407](https://github.com/mittwald/flow/issues/2407)) ([42d766c](https://github.com/mittwald/flow/commit/42d766cb888b400e8d838092bf36d41f6a64808b))
+
+# [0.2.0-alpha.757](https://github.com/mittwald/flow/compare/0.2.0-alpha.756...0.2.0-alpha.757) (2026-03-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.756](https://github.com/mittwald/flow/compare/0.2.0-alpha.755...0.2.0-alpha.756) (2026-03-27)
+
+### Bug Fixes
+
+* **LightBox:** lightbox is not correct vertical centered on large content ([#2415](https://github.com/mittwald/flow/issues/2415)) ([0b2b500](https://github.com/mittwald/flow/commit/0b2b500c41d98e4f8c9ae16d4b01c441f8e3d683))
+
+# [0.2.0-alpha.755](https://github.com/mittwald/flow/compare/0.2.0-alpha.754...0.2.0-alpha.755) (2026-03-27)
+
+### Features
+
+* **Separator:** allow vertical separator ([#2410](https://github.com/mittwald/flow/issues/2410)) ([e0a671a](https://github.com/mittwald/flow/commit/e0a671a8cc13d72617c3c721324205f1f13df1e0))
+
+# [0.2.0-alpha.754](https://github.com/mittwald/flow/compare/0.2.0-alpha.753...0.2.0-alpha.754) (2026-03-27)
+
+### Features
+
+* introduce static colors ([#2401](https://github.com/mittwald/flow/issues/2401)) ([807837e](https://github.com/mittwald/flow/commit/807837ec97185c3a34286d3de93512920d089edb))
+
+# [0.2.0-alpha.753](https://github.com/mittwald/flow/compare/0.2.0-alpha.752...0.2.0-alpha.753) (2026-03-27)
+
+### Features
+
+* **FormRootError:** render error message as alert ([#2404](https://github.com/mittwald/flow/issues/2404)) ([791c1a3](https://github.com/mittwald/flow/commit/791c1a330d4d5726d4521a3749b2f9b4c98b0bbb))
+
+# [0.2.0-alpha.752](https://github.com/mittwald/flow/compare/0.2.0-alpha.751...0.2.0-alpha.752) (2026-03-27)
+
+### Bug Fixes
+
+* **Badge:** add aria label to close button ([9d7aff1](https://github.com/mittwald/flow/commit/9d7aff17338ffe03d3381b39d953d23b6f57e197))
+
+# [0.2.0-alpha.751](https://github.com/mittwald/flow/compare/0.2.0-alpha.750...0.2.0-alpha.751) (2026-03-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.750](https://github.com/mittwald/flow/compare/0.2.0-alpha.749...0.2.0-alpha.750) (2026-03-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.749](https://github.com/mittwald/flow/compare/0.2.0-alpha.748...0.2.0-alpha.749) (2026-03-26)
+
+### Features
+
+* **ReactHookForm:** add submit controller ([#2406](https://github.com/mittwald/flow/issues/2406)) ([0c620e4](https://github.com/mittwald/flow/commit/0c620e4ee0a5d70cd90e39d067ee8f7a7477c9d9))
+
+# [0.2.0-alpha.748](https://github.com/mittwald/flow/compare/0.2.0-alpha.747...0.2.0-alpha.748) (2026-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.747](https://github.com/mittwald/flow/compare/0.2.0-alpha.746...0.2.0-alpha.747) (2026-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.746](https://github.com/mittwald/flow/compare/0.2.0-alpha.745...0.2.0-alpha.746) (2026-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.745](https://github.com/mittwald/flow/compare/0.2.0-alpha.744...0.2.0-alpha.745) (2026-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.744](https://github.com/mittwald/flow/compare/0.2.0-alpha.743...0.2.0-alpha.744) (2026-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.743](https://github.com/mittwald/flow/compare/0.2.0-alpha.742...0.2.0-alpha.743) (2026-03-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.742](https://github.com/mittwald/flow/compare/0.2.0-alpha.741...0.2.0-alpha.742) (2026-03-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.741](https://github.com/mittwald/flow/compare/0.2.0-alpha.740...0.2.0-alpha.741) (2026-03-20)
+
+### Bug Fixes
+
+* **Icons:** fix icons size for Font Awesome ([#2392](https://github.com/mittwald/flow/issues/2392)) ([e2001b7](https://github.com/mittwald/flow/commit/e2001b7caa119db8ce8a11a17b1a998e74a9c131))
+
+# [0.2.0-alpha.740](https://github.com/mittwald/flow/compare/0.2.0-alpha.739...0.2.0-alpha.740) (2026-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.739](https://github.com/mittwald/flow/compare/0.2.0-alpha.738...0.2.0-alpha.739) (2026-03-20)
+
+### Features
+
+* **List:** add radio filter reset button ([#2376](https://github.com/mittwald/flow/issues/2376)) ([65c012c](https://github.com/mittwald/flow/commit/65c012ccca81ca57a639e660823d84230612d186))
+
+# [0.2.0-alpha.738](https://github.com/mittwald/flow/compare/0.2.0-alpha.737...0.2.0-alpha.738) (2026-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.737](https://github.com/mittwald/flow/compare/0.2.0-alpha.736...0.2.0-alpha.737) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.736](https://github.com/mittwald/flow/compare/0.2.0-alpha.735...0.2.0-alpha.736) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.735](https://github.com/mittwald/flow/compare/0.2.0-alpha.734...0.2.0-alpha.735) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.734](https://github.com/mittwald/flow/compare/0.2.0-alpha.733...0.2.0-alpha.734) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.733](https://github.com/mittwald/flow/compare/0.2.0-alpha.732...0.2.0-alpha.733) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.732](https://github.com/mittwald/flow/compare/0.2.0-alpha.731...0.2.0-alpha.732) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.731](https://github.com/mittwald/flow/compare/0.2.0-alpha.730...0.2.0-alpha.731) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.730](https://github.com/mittwald/flow/compare/0.2.0-alpha.729...0.2.0-alpha.730) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.729](https://github.com/mittwald/flow/compare/0.2.0-alpha.728...0.2.0-alpha.729) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.728](https://github.com/mittwald/flow/compare/0.2.0-alpha.727...0.2.0-alpha.728) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.727](https://github.com/mittwald/flow/compare/0.2.0-alpha.726...0.2.0-alpha.727) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.726](https://github.com/mittwald/flow/compare/0.2.0-alpha.725...0.2.0-alpha.726) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.725](https://github.com/mittwald/flow/compare/0.2.0-alpha.724...0.2.0-alpha.725) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.724](https://github.com/mittwald/flow/compare/0.2.0-alpha.723...0.2.0-alpha.724) (2026-03-18)
+
+### Bug Fixes
+
+* **TextField:** fix padding ([#2391](https://github.com/mittwald/flow/issues/2391)) ([7d54850](https://github.com/mittwald/flow/commit/7d54850dc6f1a2e43f493f2518d33819bbaedea2))
+
+# [0.2.0-alpha.723](https://github.com/mittwald/flow/compare/0.2.0-alpha.722...0.2.0-alpha.723) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.722](https://github.com/mittwald/flow/compare/0.2.0-alpha.721...0.2.0-alpha.722) (2026-03-18)
+
+### Features
+
+* Add interchangeable icon packages ([61faf2d](https://github.com/mittwald/flow/commit/61faf2db0c65ce1f4e299bcd3d6cfab073d97ca5))
+
+# [0.2.0-alpha.721](https://github.com/mittwald/flow/compare/0.2.0-alpha.720...0.2.0-alpha.721) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.720](https://github.com/mittwald/flow/compare/0.2.0-alpha.719...0.2.0-alpha.720) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.719](https://github.com/mittwald/flow/compare/0.2.0-alpha.718...0.2.0-alpha.719) (2026-03-17)
+
+### Bug Fixes
+
+* **Icon:** remove solid icons ([547cce7](https://github.com/mittwald/flow/commit/547cce77756ec408471d7f4632dcca07970c0e59))
+
+# [0.2.0-alpha.718](https://github.com/mittwald/flow/compare/0.2.0-alpha.717...0.2.0-alpha.718) (2026-03-17)
+
+### Bug Fixes
+
+* **SearchField:** fix growing search field in safari ([#2381](https://github.com/mittwald/flow/issues/2381)) ([f74f88d](https://github.com/mittwald/flow/commit/f74f88db205583f7adc05bc4535ac69acac0e19e))
+
+# [0.2.0-alpha.717](https://github.com/mittwald/flow/compare/0.2.0-alpha.716...0.2.0-alpha.717) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.716](https://github.com/mittwald/flow/compare/0.2.0-alpha.715...0.2.0-alpha.716) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.715](https://github.com/mittwald/flow/compare/0.2.0-alpha.714...0.2.0-alpha.715) (2026-03-12)
+
+### Features
+
+* **ShortcutKey:** add component ([fd3012b](https://github.com/mittwald/flow/commit/fd3012b8caf4790ba5648dc1c33d8eb09cf9fc62))
+
+# [0.2.0-alpha.714](https://github.com/mittwald/flow/compare/0.2.0-alpha.713...0.2.0-alpha.714) (2026-03-11)
+
+### Features
+
+* **FormSettingsProvider:** export types and support context ([6071d65](https://github.com/mittwald/flow/commit/6071d65bbab7c90668be48b2262c98f90d6fb97d))
+
+# [0.2.0-alpha.713](https://github.com/mittwald/flow/compare/0.2.0-alpha.712...0.2.0-alpha.713) (2026-03-11)
+
+### Features
+
+* **Form:** add FormSettingsProvider for global settings ([545972a](https://github.com/mittwald/flow/commit/545972ab80cd75b05040cae94c532a84601d2d54))
+
+# [0.2.0-alpha.712](https://github.com/mittwald/flow/compare/0.2.0-alpha.711...0.2.0-alpha.712) (2026-03-10)
+
+### Features
+
+* add abortAction function to improve DX ([42db421](https://github.com/mittwald/flow/commit/42db42199482792820ac27f348cb8c417aeff7ee))
+
+# [0.2.0-alpha.711](https://github.com/mittwald/flow/compare/0.2.0-alpha.710...0.2.0-alpha.711) (2026-03-10)
+
+### Features
+
+* **Form:** add <FormRootError /> component ([0a27499](https://github.com/mittwald/flow/commit/0a2749944d51d873c089230f19130d9557cdd99b))
+
+# [0.2.0-alpha.710](https://github.com/mittwald/flow/compare/0.2.0-alpha.709...0.2.0-alpha.710) (2026-03-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.709](https://github.com/mittwald/flow/compare/0.2.0-alpha.708...0.2.0-alpha.709) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.708](https://github.com/mittwald/flow/compare/0.2.0-alpha.707...0.2.0-alpha.708) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.707](https://github.com/mittwald/flow/compare/0.2.0-alpha.706...0.2.0-alpha.707) (2026-03-06)
+
+### Bug Fixes
+
+* **List:** fix tile heading overflow ([#2354](https://github.com/mittwald/flow/issues/2354)) ([6a293b3](https://github.com/mittwald/flow/commit/6a293b35a3e019a2aca006bfabf7f9b5640b9a59))
+
+# [0.2.0-alpha.706](https://github.com/mittwald/flow/compare/0.2.0-alpha.705...0.2.0-alpha.706) (2026-03-04)
+
+### Features
+
+* **Link:** add size s ([#2352](https://github.com/mittwald/flow/issues/2352)) ([09bc68d](https://github.com/mittwald/flow/commit/09bc68d1de7bcda466c87cbe4561b01217c1035a))
+
+# [0.2.0-alpha.705](https://github.com/mittwald/flow/compare/0.2.0-alpha.704...0.2.0-alpha.705) (2026-03-03)
+
+### Features
+
+* **Modal:** add mobile padding ([#2353](https://github.com/mittwald/flow/issues/2353)) ([ca4d007](https://github.com/mittwald/flow/commit/ca4d0071db941092d518812ab6efd99bed201d16))
+
+# [0.2.0-alpha.704](https://github.com/mittwald/flow/compare/0.2.0-alpha.703...0.2.0-alpha.704) (2026-03-02)
+
+### Features
+
+* **Navigation:** update navigation item size ([#2351](https://github.com/mittwald/flow/issues/2351)) ([7461570](https://github.com/mittwald/flow/commit/7461570fb1c7453dc5f2910e6c6eb648156453fe))
+
+# [0.2.0-alpha.703](https://github.com/mittwald/flow/compare/0.2.0-alpha.702...0.2.0-alpha.703) (2026-03-02)
+
+### Bug Fixes
+
+* **LightBox:** fix light box for svgs without size ([#2349](https://github.com/mittwald/flow/issues/2349)) ([6cef787](https://github.com/mittwald/flow/commit/6cef787b3b993e30f0041557923b500de695217a))
+
+# [0.2.0-alpha.702](https://github.com/mittwald/flow/compare/0.2.0-alpha.701...0.2.0-alpha.702) (2026-02-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.701](https://github.com/mittwald/flow/compare/0.2.0-alpha.700...0.2.0-alpha.701) (2026-02-26)
+
+### Features
+
+* **Icon:** add contract partner icon ([#2345](https://github.com/mittwald/flow/issues/2345)) ([5bd3170](https://github.com/mittwald/flow/commit/5bd3170ec0d049662bdf6577e619558d1fb0c1da))
+
+# [0.2.0-alpha.700](https://github.com/mittwald/flow/compare/0.2.0-alpha.699...0.2.0-alpha.700) (2026-02-25)
+
+### Bug Fixes
+
+* **Modal:** avoid scroll bars on resize ([#2346](https://github.com/mittwald/flow/issues/2346)) ([5d84f8a](https://github.com/mittwald/flow/commit/5d84f8a92494928a4222496c52c7f3c05da9f453))
+
+# [0.2.0-alpha.699](https://github.com/mittwald/flow/compare/0.2.0-alpha.698...0.2.0-alpha.699) (2026-02-25)
+
+### Bug Fixes
+
+* **Modal:** refactor modal technical placement ([#2332](https://github.com/mittwald/flow/issues/2332)) ([11ea4df](https://github.com/mittwald/flow/commit/11ea4df36939f85cbacffaf099e5be222b501ac4))
+
+# [0.2.0-alpha.698](https://github.com/mittwald/flow/compare/0.2.0-alpha.697...0.2.0-alpha.698) (2026-02-25)
+
+### Features
+
+* **List:** update auto submit delay ([#2341](https://github.com/mittwald/flow/issues/2341)) ([ff4efc2](https://github.com/mittwald/flow/commit/ff4efc220b2344571295190d9dd5123baba4e677))
+
+# [0.2.0-alpha.697](https://github.com/mittwald/flow/compare/0.2.0-alpha.696...0.2.0-alpha.697) (2026-02-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.696](https://github.com/mittwald/flow/compare/0.2.0-alpha.695...0.2.0-alpha.696) (2026-02-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.695](https://github.com/mittwald/flow/compare/0.2.0-alpha.694...0.2.0-alpha.695) (2026-02-20)
+
+### Bug Fixes
+
+* **Tab:** fix tab does not change in controlled-mode ([2d206d4](https://github.com/mittwald/flow/commit/2d206d4ea3f4a0bf68501ca8c27ded67b9919a07))
+
+# [0.2.0-alpha.694](https://github.com/mittwald/flow/compare/0.2.0-alpha.693...0.2.0-alpha.694) (2026-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.693](https://github.com/mittwald/flow/compare/0.2.0-alpha.692...0.2.0-alpha.693) (2026-02-19)
+
+### Bug Fixes
+
+* **Modal:** do not show close confirmation when form is resetted ([46277ba](https://github.com/mittwald/flow/commit/46277ba7752a4e987d5b42c1f4ed42159ea3ad88))
+
+# [0.2.0-alpha.692](https://github.com/mittwald/flow/compare/0.2.0-alpha.691...0.2.0-alpha.692) (2026-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.691](https://github.com/mittwald/flow/compare/0.2.0-alpha.690...0.2.0-alpha.691) (2026-02-19)
+
+### Bug Fixes
+
+* **PasswordCreationField:** remove HIBP rule from default password policy ([#2331](https://github.com/mittwald/flow/issues/2331)) ([ca7173d](https://github.com/mittwald/flow/commit/ca7173de09bea3c3e67bf9eb8c2ada6dee09ee58))
+
+# [0.2.0-alpha.690](https://github.com/mittwald/flow/compare/0.2.0-alpha.689...0.2.0-alpha.690) (2026-02-18)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fixes clipboard data not present ([#2324](https://github.com/mittwald/flow/issues/2324)) ([89ab5b1](https://github.com/mittwald/flow/commit/89ab5b14b25ea2ddde782ea8a0a22d432d54f1f1))
+
+# [0.2.0-alpha.689](https://github.com/mittwald/flow/compare/0.2.0-alpha.688...0.2.0-alpha.689) (2026-02-18)
+
+### Bug Fixes
+
+* **table:** set border collapse to initial ([#2330](https://github.com/mittwald/flow/issues/2330)) ([9b55a74](https://github.com/mittwald/flow/commit/9b55a740ee35e0ab4489ed94cfff525d2a592521))
+
+# [0.2.0-alpha.688](https://github.com/mittwald/flow/compare/0.2.0-alpha.687...0.2.0-alpha.688) (2026-02-18)
+
+### Bug Fixes
+
+* **Form:** form should not be dirty after resetting ([d7eb0eb](https://github.com/mittwald/flow/commit/d7eb0eb995d6d9751feccb9ed6b51a7a8a605b4a))
+
+# [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
+
+### Bug Fixes
+
+* **Modal:** skip confirmation when using closeOverlay="Modal" ([9add76f](https://github.com/mittwald/flow/commit/9add76fbb9231d46ee971bcc3779740e5bc7fa7f))
+* **OverlayController:** add removed register handler function ([e9214fb](https://github.com/mittwald/flow/commit/e9214fbaaf44337ee4b3d31318f86569a130af91))
+
+# [0.2.0-alpha.686](https://github.com/mittwald/flow/compare/0.2.0-alpha.685...0.2.0-alpha.686) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.685](https://github.com/mittwald/flow/compare/0.2.0-alpha.684...0.2.0-alpha.685) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.684](https://github.com/mittwald/flow/compare/0.2.0-alpha.683...0.2.0-alpha.684) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.683](https://github.com/mittwald/flow/compare/0.2.0-alpha.682...0.2.0-alpha.683) (2026-02-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.682](https://github.com/mittwald/flow/compare/0.2.0-alpha.681...0.2.0-alpha.682) (2026-02-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.681](https://github.com/mittwald/flow/compare/0.2.0-alpha.680...0.2.0-alpha.681) (2026-02-12)
+
+### Features
+
+* **Form:** closing Modal with unsaved changes must be confirmed ([8c5a1a3](https://github.com/mittwald/flow/commit/8c5a1a3b07b55f49b26cee7cbb720097376571a9))
+
+# [0.2.0-alpha.680](https://github.com/mittwald/flow/compare/0.2.0-alpha.679...0.2.0-alpha.680) (2026-02-12)
+
+### Features
+
+* **Form:** make FormSubmit behave like normal async action ([2cf5f21](https://github.com/mittwald/flow/commit/2cf5f21e84deb20136ee38f7af5229918080f15d))
+
+# [0.2.0-alpha.679](https://github.com/mittwald/flow/compare/0.2.0-alpha.678...0.2.0-alpha.679) (2026-02-11)
+
+### Features
+
+* **ActionBatch:** add ActionBatch to explicitly create batches ([4137d5f](https://github.com/mittwald/flow/commit/4137d5f1165dbb857f11332d7123bdd1b43f9d88))
+
+# [0.2.0-alpha.678](https://github.com/mittwald/flow/compare/0.2.0-alpha.677...0.2.0-alpha.678) (2026-02-11)
+
+### Features
+
+* add various features to handle Overlays and Modals ([ea3ef25](https://github.com/mittwald/flow/commit/ea3ef256ed1eeb96d4a05a8c3f0def6d2eb936e4))
+
+# [0.2.0-alpha.677](https://github.com/mittwald/flow/compare/0.2.0-alpha.676...0.2.0-alpha.677) (2026-02-11)
+
+### Bug Fixes
+
+* **Form:** harden double-submission of forms ([eb96d6e](https://github.com/mittwald/flow/commit/eb96d6e356a5babef108fa75dab00109c00d7d38))
+
+### Features
+
+* **Action:** allow Action to fail without throwing error ([4b1cbcf](https://github.com/mittwald/flow/commit/4b1cbcf90cd45e5342507daeb5bc3fc8040722d1))
+
 # [0.2.0-alpha.676](https://github.com/mittwald/flow/compare/0.2.0-alpha.675...0.2.0-alpha.676) (2026-02-10)
 
 ### Bug Fixes

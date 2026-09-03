@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import ContextMenu, {
   ContextMenuSection,
   ContextMenuTrigger,
@@ -16,6 +15,9 @@ import {
 import { Text } from "@/components/Text";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
+import { usePromise } from "@mittwald/react-use-promise";
+import { sleep } from "@/lib/promises/sleep";
+import type { PropsWithChildren } from "react";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -24,16 +26,14 @@ const meta: Meta<typeof ContextMenu> = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <MenuItem id="item1">Item 1</MenuItem>
-        <MenuItem id="item2">Item 2</MenuItem>
-        <MenuItem id="item3">Item 3</MenuItem>
+        <MenuItem id="item1">Engage hyperdrive</MenuItem>
+        <MenuItem id="item2">Cloak ship</MenuItem>
+        <MenuItem id="item3">Self-destruct</MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
   parameters: {
-    controls: {
-      exclude: ["defaultOpen", "selectionMode", "defaultSelectedKeys"],
-    },
+    controls: { disable: true },
   },
 };
 export default meta;
@@ -162,11 +162,11 @@ export const WithAvatar: Story = {
         <ContextMenuSection>
           <MenuItem>
             <Avatar>
-              <Initials>Max Mustermann</Initials>
+              <Initials>Din Djarin</Initials>
             </Avatar>
             <IconCamera />
           </MenuItem>
-          <Heading>Max Mustermann</Heading>
+          <Heading>Din Djarin</Heading>
         </ContextMenuSection>
         <Separator />
         <ContextMenuSection>
@@ -219,6 +219,26 @@ export const MenuItemStates: Story = {
         <MenuItem isPending>Pending</MenuItem>
         <MenuItem isSucceeded>Succeeded</MenuItem>
         <MenuItem isFailed>Failed</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+};
+
+const WrapInSuspense = (props: PropsWithChildren) => {
+  usePromise(sleep, [2000], { loaderId: "wrappedInSuspense" });
+  return props.children;
+};
+
+export const WithSuspense: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <MenuItem>Squadron Alpha</MenuItem>
+        <MenuItem>Squadron Beta</MenuItem>
+        <WrapInSuspense>
+          <MenuItem>Squadron Gamma</MenuItem>
+        </WrapInSuspense>
       </ContextMenu>
     </ContextMenuTrigger>
   ),

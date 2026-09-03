@@ -49,22 +49,37 @@ interface DynamicLoaderShape {
   manualPagination?: boolean;
 }
 
+interface SuspenseLoaderShape {
+  /**
+   * Whether the List renders no own Suspense boundary while it initially loads.
+   * Suspending is then handed over to the closest Suspense boundary above the
+   * List, so the List appears with loaded data instead of showing its loading
+   * view (skeleton) first.
+   *
+   * @default false
+   */
+  disableInitialSuspenseBoundary?: boolean;
+}
+
 export interface StaticDataLoaderShape<T> {
   staticData: ListData<T>;
 }
 
 export type AsyncResourceFactoryDataLoaderShape<T> = {
   asyncResourceFactory: AsyncResourceFactory<T>;
-} & DynamicLoaderShape;
+} & DynamicLoaderShape &
+  SuspenseLoaderShape;
 
 export type AsyncDataLoaderShape<T> = {
   asyncLoader: AsyncDataLoader<T>;
   dependencies?: DependencyList;
-} & DynamicLoaderShape;
+} & DynamicLoaderShape &
+  SuspenseLoaderShape;
 
 export type HooksDataLoaderShape<T> = {
   useData: HooksDataLoader<T>;
-} & DynamicLoaderShape;
+} & DynamicLoaderShape &
+  SuspenseLoaderShape;
 
 export type DataSource<T> =
   | StaticDataLoaderShape<T>

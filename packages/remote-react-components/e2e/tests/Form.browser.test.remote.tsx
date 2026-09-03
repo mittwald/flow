@@ -7,9 +7,8 @@ import {
   Option,
   Select,
   Button,
-  CodeBlock,
-} from "../../src/auto-generated";
-import { Form } from "../../src/components/Form";
+} from "@mittwald/flow-remote-react-components";
+import { Form } from "@mittwald/flow-remote-react-components";
 import { type FC, useState } from "react";
 
 const TestForm: FC<{
@@ -73,9 +72,9 @@ const TestForm: FC<{
           Submit
         </Button>
         {event && (
-          <CodeBlock
+          <TextField
             data-testid="form-result"
-            code={JSON.stringify(event, undefined, 2)}
+            value={btoa(JSON.stringify(event))}
           />
         )}
       </Section>

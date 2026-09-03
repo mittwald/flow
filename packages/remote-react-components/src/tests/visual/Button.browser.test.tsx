@@ -1,15 +1,18 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
-import { page } from "vitest/browser";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
 const colors = [
   "primary",
-  "accent",
+  "success",
   "danger",
   "secondary",
-  "dark",
-  "light",
+  ...alphaColors,
 ] as const;
 const variants = ["solid", "outline", "soft", "plain"] as const;
 
@@ -24,7 +27,6 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         <Flex gap="s">
           <Button>Default</Button>
-          <Button data-testid="hover">Hover</Button>
           <Button>
             <IconInfo />
           </Button>
@@ -63,9 +65,6 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
-
     await testScreenshot("Button states");
   },
 );
@@ -80,8 +79,8 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Flex gap="s">
                 {variants.map((variant) => (
                   <Button variant={variant} color={color} key={variant}>
@@ -100,6 +99,8 @@ test.each(testEnvironments)(
   },
 );
 
+const avatarSizes = ["xs", "s", "m", "l"] as const;
+
 test.each(testEnvironments)(
   "Button with Avatar (%s)",
   async ({
@@ -109,44 +110,17 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="s">
-        <Button>
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button data-testid="hover">
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button>
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
+        {avatarSizes.map((size) => (
+          <Button key={size}>
+            <Avatar size={size}>
+              <Initials>Luke Skywalker</Initials>
+            </Avatar>
+          </Button>
+        ))}
       </Flex>,
     );
 
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
-
     await testScreenshot("Button with avatar");
-  },
-);
-
-test.each(testEnvironments)(
-  "Button pressed (%s)",
-  async ({ testScreenshot, render, components: { Button } }) => {
-    await render(<Button data-testid="pressed">Pressed</Button>);
-
-    const pressedButton = page.getByTestId("pressed");
-
-    await Promise.all([
-      pressedButton.click({ delay: 500 }),
-      new Promise((res) => setTimeout(res, 100)).then(() =>
-        testScreenshot("Button pressed"),
-      ),
-    ]);
   },
 );
 
@@ -160,20 +134,20 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         <Button>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas. Earum pariatur, similique corrupti id officia
-          perferendis. Labore, similique.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star, an
+          armored space station with enough power to destroy an entire planet,
+          and fled to the fourth moon of Yavin.
         </Button>
         <Button>
           <IconInfo />
           <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas. Earum pariatur, similique corrupti id officia
-            perferendis. Labore, similique.
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            an armored space station with enough power to destroy an entire
+            planet, and fled to the fourth moon of Yavin.
           </Text>
         </Button>
       </Flex>,

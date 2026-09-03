@@ -11,7 +11,7 @@ import {
 export default function Page() {
   return (
     <>
-      <Heading>Tunnel demo</Heading>
+      <Heading>Fleet search</Heading>
       <TunnelEntry id="remote-demo">
         <Button>
           <IconSearch />
@@ -19,7 +19,7 @@ export default function Page() {
       </TunnelEntry>
       <Content>
         <Text>
-          See the <IconSearch size="s" /> in the menu
+          Find the <IconSearch size="s" /> in the menu to search the fleet
         </Text>
       </Content>
     </>

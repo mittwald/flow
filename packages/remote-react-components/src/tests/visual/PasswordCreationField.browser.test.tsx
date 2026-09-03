@@ -80,11 +80,32 @@ test.each(testEnvironments)(
       "PasswordCreationField interaction - password generated",
     );
 
-    const showInfo = page.getByLocator('[aria-label="More information"]');
+    const showInfo = page.getByLocator(
+      '[aria-label="More information about your password requirements"]',
+    );
     await showInfo.click();
 
     await testScreenshot(
       "PasswordCreationField interaction - show info clicked",
     );
+  },
+);
+
+test.each(testEnvironments)(
+  "PasswordCreationField edge cases (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { PasswordCreationField, Label, ColumnLayout },
+  }) => {
+    await render(
+      <ColumnLayout l={[1, 1, 1, 1, 1]}>
+        <PasswordCreationField isRequired>
+          <Label>Default</Label>
+        </PasswordCreationField>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("PasswordCreationField edge cases");
   },
 );

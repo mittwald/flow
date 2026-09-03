@@ -1,6 +1,9 @@
 @use "@/styles/mixins/focus";
+@use "@/styles/mixins/formControl";
 
 .checkbox {
+  @include formControl.formHiddenInputScrollBehaviorFix;
+
   .input {
     display: flex;
     flex-direction: row;

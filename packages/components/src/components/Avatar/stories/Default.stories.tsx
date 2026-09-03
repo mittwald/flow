@@ -5,13 +5,14 @@ import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import IconApp from "@/components/Icon/components/icons/IconApp";
 import { avatarColors } from "@/components/Avatar/avatarColors";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
   component: Avatar,
   render: (props) => (
     <Avatar {...props} color="teal">
-      <Image alt="Gopher" src={dummyText.imageSrc} />
+      <Image alt="Han Solo" src={dummyText.imageSrc} />
     </Avatar>
   ),
   parameters: {
@@ -21,7 +22,7 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m", "l"],
+      options: ["xs", "s", "m", "l"],
     },
     color: {
       control: "inline-radio",
@@ -29,7 +30,10 @@ const meta: Meta<typeof Avatar> = {
     },
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: statusTypes,
+    },
+    label: {
+      control: "text",
     },
   },
 };
@@ -37,17 +41,38 @@ export default meta;
 
 type Story = StoryObj<typeof Avatar>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    controls: { exclude: ["color", "status"] },
+  },
+};
 
 export const WithInitials: Story = {
+  parameters: {
+    controls: { exclude: ["status"] },
+  },
   render: (props) => (
     <Avatar {...props}>
-      <Initials>Max Mustermann</Initials>
+      <Initials>Han Solo</Initials>
+    </Avatar>
+  ),
+};
+
+export const Meaningful: Story = {
+  parameters: {
+    controls: { exclude: ["status"] },
+  },
+  render: (props) => (
+    <Avatar {...props} label="Han Solo">
+      <Initials>Han Solo</Initials>
     </Avatar>
   ),
 };
 
 export const WithIcon: Story = {
+  parameters: {
+    controls: { exclude: ["status"] },
+  },
   render: (props) => (
     <Avatar {...props}>
       <IconApp />
@@ -57,6 +82,9 @@ export const WithIcon: Story = {
 };
 
 export const WithStatus: Story = {
+  parameters: {
+    controls: { exclude: ["color"] },
+  },
   render: (props) => <Avatar {...props} />,
   args: { status: "danger" },
 };

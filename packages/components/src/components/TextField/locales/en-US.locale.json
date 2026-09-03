@@ -1,5 +1,5 @@
 {
-  "textField.characters": "{maxCount, select, 0 {{count}} other {{count}/{maxCount}}} characters",
-  "textField.password.hide": "Show password",
-  "textField.password.show": "Hide password"
+  "characters": "{maxCount, select, 0 {{count}} other {{count}/{maxCount}}} characters",
+  "password.hide": "Show password",
+  "password.show": "Hide password"
 }

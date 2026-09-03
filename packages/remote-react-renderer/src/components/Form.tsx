@@ -4,7 +4,6 @@ import {
   type PropsWithChildren,
   type Ref,
 } from "react";
-import { prepareFormData } from "@/components/lib/prepareFormData";
 
 type FormProps = {
   action?: (data: FormData) => void | Promise<void>;
@@ -21,16 +20,22 @@ export const Form: FC<FormProps> = (props) => {
   } = props;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    /*
+     * React events bubble through portals, so a submit inside a Modal would
+     * reach the Form the Modal sits in and submit it too. An action-only form
+     * needs that guard as well, so the handler always runs.
+     */
+    event.stopPropagation();
+
+    if (!onSubmitFromProps) {
+      return;
+    }
     event.preventDefault();
-    const resolvedData = await prepareFormData(
-      new FormData(event.currentTarget),
-    );
-    await onSubmitFromProps?.(resolvedData);
+    await onSubmitFromProps(new FormData(event.currentTarget));
   };
 
   const onAction = async (formData: FormData) => {
-    const resolvedFormData = await prepareFormData(formData);
-    await onActionFromProps?.(resolvedFormData);
+    await onActionFromProps?.(formData);
   };
 
   return (
@@ -38,7 +43,7 @@ export const Form: FC<FormProps> = (props) => {
       {...rest}
       ref={ref}
       action={onActionFromProps ? onAction : undefined}
-      onSubmit={onSubmitFromProps ? onSubmit : undefined}
+      onSubmit={onSubmit}
     />
   );
 };

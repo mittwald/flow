@@ -57,6 +57,8 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
       hoverChange: {},
       hoverEnd: {},
       hoverStart: {},
+      keyDown: {},
+      keyUp: {},
       lostPointerCapture: {},
       lostPointerCaptureCapture: {},
       mouseDown: {},

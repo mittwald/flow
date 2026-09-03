@@ -1,4 +1,8 @@
+@use "@/styles/mixins/scrollbar";
+
 .layoutCard {
+  @include scrollbar.scrollbar;
+
   align-self: normal;
   background-color: var(--layout-card--background-color);
   box-shadow: var(--layout-card--box-shadow);
@@ -7,35 +11,53 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  border: var(--layout-card--border-width) var(--layout-card--border-style)
+    var(--layout-card--border-color);
 
-  > .tabs {
-    margin: calc(var(--layout-card--padding) * -1);
+  > .tabNavigation {
+    margin-top: calc(var(--layout-card--padding) * -1);
+    margin-inline: calc(var(--layout-card--padding) * -1);
+    margin-bottom: var(--layout-card--padding);
+    border-start-end-radius: calc(var(--layout-card--corner-radius) - 1px);
+    border-start-start-radius: calc(var(--layout-card--corner-radius) - 1px);
 
-    :global(.flow--tabs--tab-list) {
-      border-top-right-radius: var(--layout-card--corner-radius);
-      border-top-left-radius: var(--layout-card--corner-radius);
+    li:first-child :global(.flow--tab-navigation--link) {
+      border-start-start-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
 
-    :global(.flow--tabs--tab-title):first-child {
-      border-top-left-radius: var(--layout-card--corner-radius);
+    :global(.flow--tab-navigation--more-button) {
+      border-start-end-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
   }
 
   &:has(> .accentBox:only-child) {
     padding: 0;
+    border: none;
 
     .accentBox {
       padding: var(--layout-card--padding);
+      border-radius: calc(var(--layout-card--corner-radius) - 1px);
+      flex-grow: 1;
     }
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 768px) {
   .layoutCard {
     padding: var(--layout-card--padding-mobile);
 
-    > .tabs {
-      margin: calc(var(--layout-card--padding-mobile) * -1);
+    > .tabNavigation {
+      margin-top: calc(var(--layout-card--padding-mobile) * -1);
+      margin-inline: calc(var(--layout-card--padding-mobile) * -1);
+      margin-bottom: var(--layout-card--padding-mobile);
+    }
+
+    &:has(> .accentBox:only-child) {
+      padding: 0;
+
+      .accentBox {
+        padding: var(--layout-card--padding-mobile);
+      }
     }
   }
 }

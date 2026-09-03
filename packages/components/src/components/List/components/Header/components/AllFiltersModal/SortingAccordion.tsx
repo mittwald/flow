@@ -1,16 +1,22 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import AccordionView from "@/views/AccordionView";
 import HeadingView from "@/views/HeadingView";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import ContentView from "@/views/ContentView";
 import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
 import { useList } from "@/components/List";
 import locales from "../../../../locales/*.locale.json";
 
-export const SortingAccordion: FC = () => {
+interface Props {
+  expandAccordions: boolean;
+}
+
+export const SortingAccordion: FC<Props> = (props) => {
+  const { expandAccordions } = props;
+
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const sorting = list.visibleSorting;
   const activeSorting = sorting.find((s) => s.isSorted());
@@ -20,8 +26,8 @@ export const SortingAccordion: FC = () => {
   }
 
   return (
-    <AccordionView>
-      <HeadingView>{stringFormatter.format("list.sorting")}</HeadingView>
+    <AccordionView defaultExpanded={expandAccordions}>
+      <HeadingView>{stringFormatter.format("sorting")}</HeadingView>
       <ContentView>
         <RadioGroupView value={activeSorting?.id} m={[1, 1]}>
           {sorting.map((s) => (
@@ -30,7 +36,7 @@ export const SortingAccordion: FC = () => {
               value={s.id}
               onPress={() => list.getSorting(s.id).enable()}
             >
-              {s.name ?? s.property}
+              {`${s.name ?? s.property} ${s.directionName ?? ""}`.trim()}
             </RadioView>
           ))}
         </RadioGroupView>

@@ -1,6 +1,8 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
+import { CalendarDate } from "@internationalized/date";
 
 test.each(testEnvironments)(
   "DateRangePicker states (%s)",
@@ -24,6 +26,7 @@ test.each(testEnvironments)(
         </DateRangePicker>
         <DateRangePicker isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </DateRangePicker>
       </Flex>,
     );
@@ -58,6 +61,65 @@ test.each(testEnvironments)(
     await testScreenshot("DateRangePicker - start date selected");
 
     await userEvent.keyboard("{enter}");
+
+    /*
+     * The second Enter completes the range, which closes the calendar and lets
+     * react-aria restore the focus to the field. The capture below shows that
+     * focused field, so wait for the restore instead of racing it — see
+     * `@/tests/lib/scenarioFocus`.
+     */
+    await waitForFocusInTheScenario();
+
     await testScreenshot("DateRangePicker - range selected");
+  },
+);
+
+test.each(testEnvironments)(
+  "DateRangePicker presets (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { DateRangePicker, Label },
+  }) => {
+    await render(
+      <DateRangePicker withDatePickerPresets>
+        <Label>Label</Label>
+      </DateRangePicker>,
+    );
+
+    vi.setSystemTime(new Date("2025-09-01T11:00:00Z"));
+
+    const button = page.getByLocator("button");
+    await button.click();
+    await testScreenshot("DateRangePicker - presets");
+  },
+);
+
+test.each(testEnvironments)(
+  "DateRangePicker customPresets (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { DateRangePicker, Label },
+  }) => {
+    await render(
+      <DateRangePicker
+        withDatePickerPresets={[
+          {
+            start: new CalendarDate(2025, 1, 1),
+            end: new CalendarDate(2025, 1, 1),
+            label: "Custom Preset",
+          },
+        ]}
+      >
+        <Label>Label</Label>
+      </DateRangePicker>,
+    );
+
+    vi.setSystemTime(new Date("2025-09-01T11:00:00Z"));
+
+    const button = page.getByLocator("button");
+    await button.click();
+    await testScreenshot("DateRangePicker - customPresets");
   },
 );

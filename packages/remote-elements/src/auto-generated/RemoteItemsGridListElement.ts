@@ -11,6 +11,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
 
   static override get remoteProperties() {
     return {
+      UNSTABLE_focusOnEntry: {},
       "aria-describedby": {},
       "aria-details": {},
       "aria-label": {},
@@ -33,7 +34,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
       keyboardNavigationBehavior: {},
       lang: {},
       layout: {},
-      renderEmptyState: {},
+      orientation: {},
       selectedKeys: {},
       selectionBehavior: {},
       selectionMode: {},
@@ -116,7 +117,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["emptyView"];
   }
 }
 

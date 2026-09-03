@@ -1,6 +1,0 @@
-.row {
-  display: flex;
-  flex-flow: row wrap;
-  gap: var(--size-rem--m);
-  align-items: center;
-}

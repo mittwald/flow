@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { Text } from "@/components/Text";
 import styles from "@/components/FileCard/FileCard.module.scss";
 

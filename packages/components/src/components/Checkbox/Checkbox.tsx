@@ -19,6 +19,7 @@ export interface CheckboxProps
       Omit<Aria.CheckboxProps, "children" | "ref" | "inputRef">
     >,
     FlowComponentProps<HTMLInputElement> {
+  /** The class name of the underlying input element. */
   inputClassName?: string;
 }
 
@@ -31,7 +32,7 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Checkbox");
 
   const inputRef = useObjectRef(ref);
 

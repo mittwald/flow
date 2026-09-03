@@ -1,8 +1,8 @@
 .skeleton {
   position: relative;
   overflow: hidden;
-  background-color: rgba(120, 120, 120, 0.2);
-  border-radius: var(--corner-radius--default);
+  background-color: rgba(183, 201, 219, 0.5);
+  border-radius: var(--corner-radius--m);
   width: 100%;
 
   &::before {

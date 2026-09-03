@@ -1,12 +1,9 @@
 import type { FC } from "react";
-import React from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import locales from "../../../../locales/*.locale.json";
-import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
-import { useLocalizedStringFormatter } from "react-aria";
-import { TooltipTrigger } from "@/components/Tooltip";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import {
   IconClose,
   IconSave,
@@ -18,65 +15,89 @@ import DivView from "@/views/DivView";
 import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
+import { Filter } from "@/components/List/model/filter/Filter";
+import { transformDateValueToFormattedDate } from "@/lib/date/transformDateValueToFormattedDate";
+import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
-export const ActiveFilters: FC = observer(() => {
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const ActiveFilters: FC<Props> = observer((props) => {
+  const { isDisabled } = props;
   const list = useList();
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "List");
 
-  const activeFilterValues = list.filters
-    .flatMap((f) => f.values)
-    .filter((v) => v.isActive);
+  const activeFilters = list.filters.flatMap((f) => {
+    if (f instanceof DateRangeFilter) {
+      const value = f.getValue();
+      if (value) {
+        return [
+          <BadgeView
+            key={f.name}
+            onClose={() => f.clear()}
+            isDisabled={isDisabled}
+          >
+            <TextView>
+              {`${transformDateValueToFormattedDate(value.start)} - ${transformDateValueToFormattedDate(value.end)}`}
+            </TextView>
+          </BadgeView>,
+        ];
+      }
+    }
 
-  const activeFilters = activeFilterValues.map((v) => (
-    <BadgeView key={v.id} onClose={() => v.deactivate()}>
-      <TextView>{v.render()}</TextView>
-    </BadgeView>
-  ));
-
-  const someFiltersChanged =
-    list.filters.filter((f) => f.hasChanged()).length > 0;
-
-  const storeFiltersButton = list.supportsSettingsStorage &&
-    someFiltersChanged && (
-      <TooltipTriggerView>
-        <TooltipView>
-          <Translate locales={locales}>list.filters.store</Translate>
-        </TooltipView>
-        <ButtonView
-          size="s"
-          variant="plain"
-          color="secondary"
-          onPress={() => list.storeFilterDefaultSettings()}
-          aria-label={formatter.format("list.filters.store")}
+    return f.values
+      .filter((v) => v.isActive)
+      .map((v) => (
+        <BadgeView
+          key={v.id}
+          onClose={() => v.deactivate()}
+          isDisabled={isDisabled}
         >
-          <IconSave />
-        </ButtonView>
-      </TooltipTriggerView>
-    );
+          <TextView>{v.render()}</TextView>
+        </BadgeView>
+      ));
+  });
 
-  const resetFiltersButton = someFiltersChanged ? (
-    <TooltipTrigger>
-      <TooltipView>
-        <Translate locales={locales}>list.filters.reset</Translate>
-      </TooltipView>
+  const storingAvailable = list.filters.some((f) => f.isStoringAvailable());
+  const hasChanges = list.filters.some((f) => f.hasChanges());
+
+  const storeFiltersButton = storingAvailable && hasChanges && (
+    <TooltipTriggerView isDisabled={isDisabled}>
+      <TooltipView>{formatter.format("filters.store")}</TooltipView>
+      <ButtonView
+        size="s"
+        variant="plain"
+        color="secondary"
+        onPress={() =>
+          Filter.storeFilters(list, { autosave: false, manualSave: true })
+        }
+        aria-label={formatter.format("filters.store")}
+      >
+        <IconSave />
+      </ButtonView>
+    </TooltipTriggerView>
+  );
+
+  const resetFiltersButton = hasChanges ? (
+    <TooltipTriggerView isDisabled={isDisabled}>
+      <TooltipView>{formatter.format("filters.reset")}</TooltipView>
       <ButtonView
         size="s"
         variant="plain"
         color="secondary"
         onPress={() => list.resetFilters()}
-        aria-label={formatter.format("list.filters.reset")}
+        aria-label={formatter.format("filters.reset")}
       >
         <IconUndo />
       </ButtonView>
-    </TooltipTrigger>
+    </TooltipTriggerView>
   ) : undefined;
 
   const removeAllFiltersButton =
     activeFilters.length > 1 ? (
-      <TooltipTrigger>
-        <TooltipView>
-          <Translate locales={locales}>list.filters.clear</Translate>
-        </TooltipView>
+      <TooltipTriggerView isDisabled={isDisabled}>
+        <TooltipView>{formatter.format("filters.clear")}</TooltipView>
         <ButtonView
           size="s"
           variant="plain"
@@ -85,7 +106,7 @@ export const ActiveFilters: FC = observer(() => {
         >
           <IconClose />
         </ButtonView>
-      </TooltipTrigger>
+      </TooltipTriggerView>
     ) : undefined;
 
   if (

@@ -1,16 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { FC } from "react";
-import React from "react";
 import type { MessageProps } from "@/components/Message";
 import { Message } from "@/components/Message";
 import { MessageSeparator, MessageThread } from "@/components/MessageThread";
 import { Header } from "@/components/Header";
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
+import { Button } from "@/components/Button";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
+import MenuItem from "@/components/MenuItem";
 
 interface ExampleMessageProps extends Pick<MessageProps, "type"> {
   name: string;
@@ -21,19 +23,31 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
   return (
     <Message {...rest}>
       <Header>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>{name}</Initials>
           </Avatar>
           <Text>
             <strong>{name}</strong>
+            <span>Rebel Commander</span>
           </Text>
-        </Align>
+        </Combine>
+        <Text>01.09.2024, 12:45</Text>
+
+        <ContextMenuTrigger>
+          <Button />
+          <ContextMenu>
+            <MenuItem>Edit</MenuItem>
+            <MenuItem>Delete</MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
       </Header>
 
       <Content>
         <Text>{content}</Text>
       </Content>
+
+      <Button>Reply</Button>
     </Message>
   );
 };
@@ -41,16 +55,19 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
 const meta: Meta<typeof MessageThread> = {
   title: "Chat/MessageThread",
   component: MessageThread,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <MessageThread {...props}>
       <ExampleMessage
-        name="Max Mustermann"
+        name="Leia Organa"
         content={dummyText.medium}
         type="sender"
       />
 
       <ExampleMessage
-        name="John Doe"
+        name="Han Solo"
         content={dummyText.long}
         type="responder"
       />
@@ -58,7 +75,7 @@ const meta: Meta<typeof MessageThread> = {
       <MessageSeparator {...props}>Conversation closed</MessageSeparator>
 
       <ExampleMessage
-        name="Max Mustermann"
+        name="Leia Organa"
         content={dummyText.short}
         type="sender"
       />

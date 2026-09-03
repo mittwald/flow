@@ -7,6 +7,7 @@ export const getActionGroupSlot = (props: ButtonProps): string => {
     buttonProps.color === undefined ||
     buttonProps.color === "primary" ||
     buttonProps.color === "danger" ||
+    buttonProps.color === "success" ||
     buttonProps.color === "accent"
       ? "primary"
       : "abort";

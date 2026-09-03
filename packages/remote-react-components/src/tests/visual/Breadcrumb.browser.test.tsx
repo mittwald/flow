@@ -1,7 +1,13 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
-const colors = ["primary", "dark", "light"] as const;
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "Breadcrumb colors (%s)",
@@ -13,13 +19,20 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
-              <Breadcrumb color={color}>
-                <Link>Link 1</Link>
-                <Link>Link 2</Link>
-                <Link>Link 3</Link>
-              </Breadcrumb>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
+              <Flex direction="column" gap="m">
+                <Breadcrumb color={color}>
+                  <Link>{firstLetterToUppercase(color)}</Link>
+                  <Link>Tatooine</Link>
+                  <Link>Mos Eisley</Link>
+                </Breadcrumb>
+                <Breadcrumb color={color} size="s">
+                  <Link>Small</Link>
+                  <Link>Tatooine</Link>
+                  <Link>Mos Eisley</Link>
+                </Breadcrumb>
+              </Flex>
             </AccentBox>
           </Wrap>
         ))}
@@ -36,16 +49,16 @@ test.each(testEnvironments)(
     await render(
       <Breadcrumb>
         <Link>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          decisive blow against the Galactic Empire fleet.
         </Link>
         <Link>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          decisive blow against the Galactic Empire fleet.
         </Link>
         <Link>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          decisive blow against the Galactic Empire fleet.
         </Link>
       </Breadcrumb>,
     );

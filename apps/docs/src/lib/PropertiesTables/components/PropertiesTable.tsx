@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { PropertyRow } from "./PropertyRow";
 import {
   Table,
@@ -12,24 +12,19 @@ interface PropertiesTableProps {
   properties: Property[];
 }
 
-export const PropertiesTable: React.FC<PropertiesTableProps> = ({
-  properties,
-}) => {
+export const PropertiesTable: FC<PropertiesTableProps> = ({ properties }) => {
   return (
-    <>
-      <Table aria-label="Properties">
-        <TableHeader>
-          <TableColumn>Property</TableColumn>
-          <TableColumn>Type</TableColumn>
-          <TableColumn>Default</TableColumn>
-          <TableColumn>Description</TableColumn>
-        </TableHeader>
-        <TableBody>
-          {properties.map((prop) => (
-            <PropertyRow property={prop} key={prop.name}></PropertyRow>
-          ))}
-        </TableBody>
-      </Table>
-    </>
+    <Table aria-label="Properties" layout="fixed" minWidth={640}>
+      <TableHeader>
+        <TableColumn width="22%">Property</TableColumn>
+        <TableColumn width="34%">Type</TableColumn>
+        <TableColumn width="44%">Description</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {properties.map((prop) => (
+          <PropertyRow property={prop} key={prop.name}></PropertyRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };

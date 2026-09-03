@@ -1,3 +1,31 @@
+patchedDependencies:
+  "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch"
+  "acorn": "patches/acorn.patch"
+  "@sigstore/sign@4.1.1": "patches/@sigstore__sign@4.1.1.patch"
+  "@mittwald/remote-dom-react@1.2.2-mittwald.10": "patches/@mittwald__remote-dom-react@1.2.2-mittwald.10.patch"
+  "@mfalkenberg/react-live-ssr@4.1.7": "patches/@mfalkenberg__react-live-ssr@4.1.7.patch"
+
+overrides:
+  "typescript": "npm:@typescript/typescript6@^6.0.2"
+  # Next 16.3 defaults experimental.useTypeScriptCli=true, which shells out to
+  # the `tsc` bin of the resolved `typescript` package. The shim's bin is
+  # `tsc6`, so scope the Next 16.3 apps to native TypeScript 7 (bin `tsc`).
+  # Everything else keeps the shim (v6 API) for eslint + TS-API consumers.
+  # A Next app still on <=16.2 (TS API) must NOT be listed here (native has
+  # no API) — add it only once it moves to 16.3.
+  "@mittwald/flow-documentation>typescript": "npm:typescript@^7.0.2"
+  "@mittwald/flow-demo-remote-dom>typescript": "npm:typescript@^7.0.2"
+
+allowBuilds:
+  '@bundled-es-modules/glob': true
+  '@parcel/watcher': true
+  esbuild: true
+  msw: true
+  nx: true
+  sharp: true
+  simple-git-hooks: true
+  style-dictionary: true
+
 packages:
   - "apps/*"
   - "packages/*"

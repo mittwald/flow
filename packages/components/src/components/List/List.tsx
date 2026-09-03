@@ -1,6 +1,6 @@
 import { DataLoader } from "@/components/List/components/DataLoader";
 import { Header } from "@/components/List/components/Header/Header";
-import headerStyles from "@/components/List/components/Header/Header.module.css";
+import headerStyles from "@/components/List/components/Header/Header.module.scss";
 import { Items } from "@/components/List/components/Items/Items";
 import { Table } from "@/components/List/components/Table";
 import ListModel from "@/components/List/model/List";
@@ -26,12 +26,13 @@ import {
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import Footer from "./components/Footer";
-import styles from "./List.module.css";
+import styles from "./List.module.scss";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
 
 export interface ListProps<T, TMeta = unknown>
   extends
@@ -49,7 +50,23 @@ export interface ListProps<T, TMeta = unknown>
     > {
   /** The number of items to be displayed on one page. */
   batchSize?: number;
+  /**
+   * Automatically loads the next batch of items when the user scrolls to the
+   * end of the list, instead of showing a "Show more" button.
+   *
+   * @default false
+   */
+  infiniteScroll?: boolean;
+  /**
+   * Hides the pagination controls below the list.
+   *
+   * @default false
+   */
   hidePagination?: boolean;
+  /** The view rendered when a search or filter returns no results. */
+  emptySearchResultView?: ReactNode;
+  /** The view rendered when the list contains no items. */
+  emptyView?: ReactNode;
 }
 
 export const List = flowComponent("List", (props) => {
@@ -135,6 +152,7 @@ export const List = flowComponent("List", (props) => {
           render: searchProps.children,
           textFieldProps: searchProps,
           defaultValue: searchProps.defaultValue,
+          autosave: searchProps.autosave,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
@@ -173,42 +191,66 @@ export const List = flowComponent("List", (props) => {
 
   const propsContext: PropsContext = {
     ActionGroup: {
-      tunnelId: "actions",
+      preserveOrder: true,
+      tunnel: {
+        id: "actions",
+        component: "List",
+      },
       className: headerStyles.actions,
       Button: {
         className: headerStyles.action,
       },
     },
     ListSummary: {
-      tunnelId: "listSummary",
+      tunnel: {
+        id: "listSummary",
+        component: "List",
+      },
     },
   };
 
+  const isEmpty = listModel.useIsEmpty();
+
+  // IMPORTANT: we always render the emptyView to the dom.
+  // otherwise we will lose e.g. modalState when switching from noItems to itemsAvailable and vise versa.
+  const emptyView = (
+    <DivView
+      aria-hidden={!isEmpty}
+      className={!isEmpty ? styles.hideVisuallyEmptyView : undefined}
+    >
+      <ListEmptyViewContainerView
+        viewType={listModel.getEmptyViewType()}
+        emptySearchResultView={listModel.emptySearchResultView}
+        emptyView={listModel.emptyView}
+      />
+    </DivView>
+  );
+
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <listContext.Provider
-          value={{
-            list: listModel,
-          }}
-        >
-          <DataLoader />
-          <DivView className={styles.list} ref={ref}>
-            {children}
-            <Header />
+      <listContext.Provider
+        value={{
+          list: listModel,
+        }}
+      >
+        <DataLoader />
+        <DivView className={styles.list} ref={ref}>
+          {children}
+          <Header />
 
-            <DivView className={styles.listWrapper}>
-              {listModel.items.entries.length > 0 && (
-                <TunnelExit id="listSummary" />
-              )}
-              {(listModel.viewMode === "list" ||
-                listModel.viewMode === "tiles") && <Items />}
-              {listModel.viewMode === "table" && <Table />}
-            </DivView>
-            {!hidePagination && <Footer />}
+          <DivView className={styles.listWrapper}>
+            {emptyView}
+            {listModel.items.entries.length > 0 && (
+              <UiComponentTunnelExit id="listSummary" component="List" />
+            )}
+            {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
+              <Items />
+            )}
+            {listModel.viewMode.isTable && <Table />}
           </DivView>
-        </listContext.Provider>
-      </TunnelProvider>
+          {!hidePagination && <Footer />}
+        </DivView>
+      </listContext.Provider>
     </PropsContextProvider>
   );
 });

@@ -53,19 +53,19 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="interests">
             <CheckboxGroup>
-              <Label>Interests</Label>
-              <Checkbox value="foo">Foo</Checkbox>
-              <Checkbox value="bar">Bar</Checkbox>
-              <Checkbox value="baz">Baz</Checkbox>
+              <Label>Favorite planets</Label>
+              <Checkbox value="foo">Tatooine</Checkbox>
+              <Checkbox value="bar">Hoth</Checkbox>
+              <Checkbox value="baz">Endor</Checkbox>
             </CheckboxGroup>
           </Field>
 
           <Field name="interestsDefaultValue">
             <CheckboxGroup>
-              <Label>Interests</Label>
-              <Checkbox value="foo">Foo</Checkbox>
-              <Checkbox value="bar">Bar</Checkbox>
-              <Checkbox value="baz">Baz</Checkbox>
+              <Label>Favorite planets</Label>
+              <Checkbox value="foo">Tatooine</Checkbox>
+              <Checkbox value="bar">Hoth</Checkbox>
+              <Checkbox value="baz">Endor</Checkbox>
             </CheckboxGroup>
           </Field>
 
@@ -81,10 +81,10 @@ const meta: Meta<typeof Field> = {
             }}
           >
             <CheckboxGroup>
-              <Label>Interests</Label>
-              <Checkbox value="foo">Foo</Checkbox>
-              <Checkbox value="bar">Bar</Checkbox>
-              <Checkbox value="baz">Baz</Checkbox>
+              <Label>Favorite planets</Label>
+              <Checkbox value="foo">Tatooine</Checkbox>
+              <Checkbox value="bar">Hoth</Checkbox>
+              <Checkbox value="baz">Endor</Checkbox>
               <FieldDescription>Check at least 1 item</FieldDescription>
             </CheckboxGroup>
           </Field>
@@ -101,16 +101,16 @@ const meta: Meta<typeof Field> = {
             }}
           >
             <CheckboxGroup>
-              <Label>Interests</Label>
-              <Checkbox value="foo">Foo</Checkbox>
-              <Checkbox value="bar">Bar</Checkbox>
-              <Checkbox value="baz">Baz</Checkbox>
+              <Label>Favorite planets</Label>
+              <Checkbox value="foo">Tatooine</Checkbox>
+              <Checkbox value="bar">Hoth</Checkbox>
+              <Checkbox value="baz">Endor</Checkbox>
               <FieldDescription>Check max 2 items</FieldDescription>
             </CheckboxGroup>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -136,27 +136,29 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
-            <Label>Options</Label>
-            <Checkbox value="1">Option 1</Checkbox>
-            <Checkbox value="2">Option 2</Checkbox>
-            <Checkbox value="3">Option 3</Checkbox>
-            <Checkbox value="4">Option 4</Checkbox>
-            <Checkbox value="5">Option 5</Checkbox>
-            <Checkbox value="6">Option 6</Checkbox>
+        <Section>
+          <Field name="field">
+            <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
+              <Label>Star systems</Label>
+              <Checkbox value="1">Tatooine</Checkbox>
+              <Checkbox value="2">Hoth</Checkbox>
+              <Checkbox value="3">Endor</Checkbox>
+              <Checkbox value="4">Naboo</Checkbox>
+              <Checkbox value="5">Coruscant</Checkbox>
+              <Checkbox value="6">Dagobah</Checkbox>
+            </CheckboxGroup>
+          </Field>
+          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} isInvalid {...props}>
+            <Label>Star systems</Label>
+            <Checkbox value="1">Tatooine</Checkbox>
+            <Checkbox value="2">Hoth</Checkbox>
+            <Checkbox value="3">Endor</Checkbox>
+            <Checkbox value="4">Naboo</Checkbox>
+            <Checkbox value="5">Coruscant</Checkbox>
+            <Checkbox value="6">Dagobah</Checkbox>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </CheckboxGroup>
-        </Field>
-        <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} isInvalid {...props}>
-          <Label>Options</Label>
-          <Checkbox value="1">Option 1</Checkbox>
-          <Checkbox value="2">Option 2</Checkbox>
-          <Checkbox value="3">Option 3</Checkbox>
-          <Checkbox value="4">Option 4</Checkbox>
-          <Checkbox value="5">Option 5</Checkbox>
-          <Checkbox value="6">Option 6</Checkbox>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </CheckboxGroup>
+        </Section>
       </Form>
     );
   },
@@ -167,34 +169,44 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
-            <Label>Options</Label>
-            <Checkbox value="1">Option 1</Checkbox>
-            <Checkbox value="2">Option 2</Checkbox>
-            <Checkbox value="3">Option 3</Checkbox>
-            <Checkbox value="4">Option 4</Checkbox>
-            <Checkbox value="5">Option 5</Checkbox>
-            <Checkbox value="6">Option 6</Checkbox>
+            <Label>Star systems</Label>
+            <Checkbox value="1">Tatooine</Checkbox>
+            <Checkbox value="2">Hoth</Checkbox>
+            <Checkbox value="3">Endor</Checkbox>
+            <Checkbox value="4">Naboo</Checkbox>
+            <Checkbox value="5">Coruscant</Checkbox>
+            <Checkbox value="6">Dagobah</Checkbox>
           </CheckboxGroup>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

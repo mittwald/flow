@@ -3,18 +3,22 @@ import { CheckboxButton } from "../index";
 import { action } from "storybook/actions";
 import Content from "@/components/Content";
 import Text from "@/components/Text";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof CheckboxButton> = {
   title: "Form Controls/CheckboxButton",
   component: CheckboxButton,
   args: {
     onChange: action("onChange"),
+    isDisabled: false,
+    isReadOnly: false,
+    isIndeterminate: false,
   },
   parameters: {
     controls: { exclude: ["onChange"] },
   },
   render: (props) => (
-    <CheckboxButton {...props}>Consent to terms and conditions</CheckboxButton>
+    <CheckboxButton {...props}>Join the Rebel Alliance</CheckboxButton>
   ),
 };
 
@@ -24,24 +28,20 @@ type Story = StoryObj<typeof CheckboxButton>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const Indeterminate: Story = { args: { isIndeterminate: true } };
-
-export const DisabledSelected: Story = {
-  args: { isDisabled: true, isSelected: true },
-};
-
 export const WithContent: Story = {
   render: (props) => (
     <CheckboxButton {...props}>
-      <Text>Terms and Conditions</Text>
-      <Content>Consent to terms and conditions</Content>
+      <Text>Rebel Alliance</Text>
+      <Content>Enlist with the Rebel Alliance and fight the Empire</Content>
     </CheckboxButton>
   ),
 };
 
-export const Invalid: Story = {
-  args: { isInvalid: true },
+export const WithFieldError: Story = {
+  render: (props) => (
+    <CheckboxButton {...props} isInvalid>
+      Join the Rebel Alliance
+      <FieldError>Please join to continue</FieldError>
+    </CheckboxButton>
+  ),
 };

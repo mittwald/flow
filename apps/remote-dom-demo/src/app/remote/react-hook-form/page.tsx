@@ -8,14 +8,17 @@ import {
   FileField,
   Label,
   Option,
+  Rating,
   MarkdownEditor,
   Section,
   Select,
   TextArea,
   TextField,
+  DateRangePicker,
   PasswordCreationField,
   Autocomplete,
   CheckboxGroup,
+  TranslationProvider,
   Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import {
@@ -23,6 +26,7 @@ import {
   Field,
   SubmitButton,
   ResetButton,
+  useFormSubmitController,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
   Policy,
@@ -42,19 +46,22 @@ const customPolicy = Policy.fromDeclaration({
   ],
 });
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function Page() {
   const form = useForm({
     defaultValues: {
       name: "",
-      account: "p1122",
+      dateRange: [],
+      cantina: 3,
+      account: "Rogue Squadron",
       confirm: false,
+      email: "",
       age: 20,
       comment: "",
       message: "",
-      city: "Minden",
-      city2: "Minden",
+      city: "Tatooine",
+      city2: "Tatooine",
       file: [],
       password: "",
       permissions: [],
@@ -62,9 +69,12 @@ export default function Page() {
     },
   });
 
+  const submitController = useFormSubmitController();
+
   return (
     <Section>
       <Form
+        submitController={submitController}
         form={form}
         onSubmit={async (data) => {
           await sleep(5000);
@@ -87,9 +97,34 @@ export default function Page() {
           }}
         >
           <TextField>
-            <Label>Name</Label>
+            <Label>Mission name</Label>
           </TextField>
         </Field>
+        <Field name="dateRange">
+          <DateRangePicker withDatePickerPresets>
+            <Label>Date range</Label>
+          </DateRangePicker>
+        </Field>
+        <Field name="cantina">
+          <Rating>
+            <Label>Cantina rating</Label>
+          </Rating>
+        </Field>
+        <TranslationProvider
+          translations={{
+            "en-US": {
+              Label: {
+                optional: "(Translated via TranslationProvider -Optional-)",
+              },
+            },
+          }}
+        >
+          <Field name="email">
+            <TextField>
+              <Label>Email</Label>
+            </TextField>
+          </Field>
+        </TranslationProvider>
         <Field
           name="account"
           rules={{
@@ -98,30 +133,30 @@ export default function Page() {
         >
           <Autocomplete>
             <TextField showCharacterCount>
-              <Label>Account</Label>
+              <Label>Squadron</Label>
             </TextField>
-            <Option>p1234</Option>
-            <Option>p1122</Option>
-            <Option>p4567</Option>
+            <Option>Rogue Squadron</Option>
+            <Option>Red Squadron</Option>
+            <Option>Gold Squadron</Option>
           </Autocomplete>
         </Field>
         <Field name="comment">
           <TextArea maxLength={100}>
-            <Label>Comment</Label>
+            <Label>Notes</Label>
           </TextArea>
         </Field>
         <Field name="city">
           <ComboBox>
-            <Label>City</Label>
-            <Option>Minden</Option>
-            <Option>Espelkamp</Option>
+            <Label>Homeworld</Label>
+            <Option>Tatooine</Option>
+            <Option>Alderaan</Option>
           </ComboBox>
         </Field>
         <Field name="city2">
           <Select>
-            <Label>City</Label>
-            <Option>Minden</Option>
-            <Option>Espelkamp</Option>
+            <Label>Homeworld</Label>
+            <Option>Tatooine</Option>
+            <Option>Alderaan</Option>
           </Select>
         </Field>
         <Field
@@ -138,33 +173,37 @@ export default function Page() {
         </Field>
         <Field name="message">
           <MarkdownEditor>
-            <Label>Message</Label>
+            <Label>Release notes</Label>
           </MarkdownEditor>
         </Field>
         <Field name="file">
           <FileField>
-            <Label>Zertifikat</Label>
+            <Label>Holocron</Label>
             <Button variant="outline" color="secondary">
-              Auswählen
+              Choose
             </Button>
           </FileField>
         </Field>
         <Field name="permissions">
           <CheckboxGroup>
-            <Label>Berechtigungen</Label>
-            <Checkbox value="read">Lesen</Checkbox>
-            <Checkbox value="write">Schreiben</Checkbox>
+            <Label>Clearance</Label>
+            <Checkbox value="archives">Jedi Archives</Checkbox>
+            <Checkbox value="command">Command deck</Checkbox>
           </CheckboxGroup>
         </Field>
         <Field name="agreeTerms">
           <Label>Terms</Label>
-          <Checkbox value="true">Verstanden!</Checkbox>
+          <Checkbox value="true">I agree!</Checkbox>
         </Field>
         <ActionGroup>
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton>SubmitButton</SubmitButton>
+          <Button onPress={() => submitController.submit()}>
+            SubmitController
+          </Button>
           <Button
             onPress={() => {
-              form.setValue("email", "demo@test.de");
+              form.setValue("email", "leia@rebel-alliance.com");
+              form.setValue("cantina", 5);
             }}
           >
             Set value
@@ -173,7 +212,7 @@ export default function Page() {
           <Button
             onPress={() => {
               form.reset({
-                email: "resetted@test.de",
+                email: "han@rebel-alliance.com",
               });
             }}
           >

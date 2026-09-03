@@ -10,7 +10,7 @@ export const PopoverTip: FC<PropsWithClassName> = (props) => {
 
   return (
     <Aria.OverlayArrow className={rootClassName}>
-      <svg width={16} height={16} viewBox="0 0 16 16">
+      <svg width={16} height={16} viewBox="0 0 16 16" aria-hidden>
         <path d="M0 0 L8 8 L16 0" />
       </svg>
     </Aria.OverlayArrow>

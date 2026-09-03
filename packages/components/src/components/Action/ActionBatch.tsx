@@ -7,7 +7,9 @@ export type ActionBatchProps = PropsWithChildren;
  * Batches multiple actions together and shows feedback when all actions have
  * completed.
  *
- * By default async actions are automatically batched.
+ * By default function actions are automatically batched. You can use this
+ * component to split function actions into multiple batches with separate
+ * feedback.
  */
 export const ActionBatch: FC<ActionBatchProps> = (props) => {
   const { children } = props;

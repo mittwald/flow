@@ -9,20 +9,24 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SliderProps
   extends
     FlowComponentProps<HTMLInputElement>,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
+  /** Whether the marker for the initial value should be visible */
   showInitialMarker?: boolean;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
+  /** Whether the component is invalid. */
   isInvalid?: boolean;
+  /** Hide Buttons, Label and Value */
+  sliderOnly?: boolean;
 }
 
 /** @flr-generate all */
@@ -36,6 +40,8 @@ export const Slider = flowComponent("Slider", (props) => {
     showInitialMarker,
     isReadOnly,
     ref,
+    step,
+    sliderOnly,
     ...rest
   } = props;
 
@@ -50,18 +56,21 @@ export const Slider = flowComponent("Slider", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Slider");
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Slider");
 
   const objectRef = useObjectRef(ref);
 
   const propsContext: PropsContext = {
     ...fieldPropsContext,
     Label: {
-      unstyled: true,
-      tunnelId: "label",
+      tunnel: {
+        id: "label",
+        component: "Slider",
+      },
       ...fieldPropsContext.Label,
+      className: styles.label,
     },
   };
 
@@ -72,75 +81,80 @@ export const Slider = flowComponent("Slider", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         defaultValue={defaultValue}
+        step={step}
       >
-        <TunnelProvider>
-          <PropsContextProvider props={propsContext}>
-            <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+        <PropsContextProvider props={propsContext}>
+          <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
+          {!sliderOnly && (
             <div className={styles.text}>
-              <Aria.SliderOutput className={styles.value} />
-              <TunnelExit id="label" />
+              <Aria.SliderOutput className={styles.value} />{" "}
+              <UiComponentTunnelExit id="label" component="Slider" />
             </div>
+          )}
 
-            <Aria.SliderTrack className={styles.track}>
-              {({ state }) => (
-                <PropsContextProvider
-                  props={{
-                    Button: {
-                      isPending: false,
-                      isFailed: false,
-                      isSucceeded: false,
-                      isReadOnly: isReadOnly,
-                      excludeFromTabOrder: true,
-                      isDisabled,
-                      variant: "plain",
-                      color: "secondary",
-                    },
-                  }}
-                >
-                  <Button
-                    onPress={() => state.decrementThumb(0)}
-                    aria-label={stringFormatter.format("slider.decrement")}
-                    className={styles.decrement}
-                  >
-                    <IconMinus />
-                  </Button>
+          <Aria.SliderTrack className={styles.track}>
+            {({ state }) => (
+              <PropsContextProvider
+                props={{
+                  Button: {
+                    isPending: false,
+                    isFailed: false,
+                    isSucceeded: false,
+                    isReadOnly: isReadOnly,
+                    excludeFromTabOrder: true,
+                    isDisabled,
+                    variant: "plain",
+                    color: "secondary",
+                    size: "s",
+                  },
+                }}
+              >
+                {!sliderOnly && (
+                  <>
+                    <Button
+                      onPress={() => state.decrementThumb(0, step)}
+                      aria-label={stringFormatter.format("decrement")}
+                      className={styles.decrement}
+                    >
+                      <IconMinus />
+                    </Button>
+                    <Button
+                      onPress={() => state.incrementThumb(0, step)}
+                      aria-label={stringFormatter.format("increment")}
+                      className={styles.increment}
+                    >
+                      <IconPlus />
+                    </Button>
+                  </>
+                )}
 
-                  <Button
-                    onPress={() => state.incrementThumb(0)}
-                    aria-label={stringFormatter.format("slider.increment")}
-                    className={styles.increment}
-                  >
-                    <IconPlus />
-                  </Button>
+                <div
+                  className={styles.fill}
+                  style={{ width: state.getThumbPercent(0) * 100 + "%" }}
+                />
 
-                  <div
-                    className={styles.fill}
-                    style={{ width: state.getThumbPercent(0) * 100 + "%" }}
-                  />
-
-                  {showInitialMarker &&
-                    defaultValue &&
-                    typeof defaultValue === "number" && (
-                      <div
-                        className={styles.initialMarker}
-                        style={{
-                          left: `calc(${state.getValuePercent(defaultValue) * 100}% - 2px)`,
-                        }}
-                      />
-                    )}
-                  <Aria.SliderThumb
-                    inputRef={objectRef}
-                    name={name}
-                    className={styles.handle}
-                    isDisabled={isReadOnly}
-                  />
-                </PropsContextProvider>
-              )}
-            </Aria.SliderTrack>
-            <FieldErrorView />
-          </PropsContextProvider>
-        </TunnelProvider>
+                {showInitialMarker &&
+                  defaultValue &&
+                  typeof defaultValue === "number" && (
+                    <div
+                      className={styles.initialMarker}
+                      style={{
+                        left: `calc(${state.getValuePercent(defaultValue) * 100}% - 2px)`,
+                      }}
+                    />
+                  )}
+                <Aria.SliderThumb
+                  inputRef={objectRef}
+                  name={name}
+                  className={styles.handle}
+                  isDisabled={isReadOnly}
+                />
+              </PropsContextProvider>
+            )}
+          </Aria.SliderTrack>
+          <FieldErrorView />
+        </PropsContextProvider>
       </Aria.Slider>
     </div>
   );

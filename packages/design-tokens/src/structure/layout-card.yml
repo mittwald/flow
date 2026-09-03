@@ -2,10 +2,16 @@ layout-card:
   background-color:
     value: "{neutral.color.100}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.l}"
   padding:
     value: "{size-px.l}"
   padding-mobile:
     value: "{size-px.m}"
   box-shadow:
     value: "{shadow.content}"
+  border-style:
+    value: "{border-style.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral.color.300}"

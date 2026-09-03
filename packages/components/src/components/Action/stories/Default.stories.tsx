@@ -25,18 +25,7 @@ const meta: Meta<typeof Action> = {
     </Action>
   ),
   parameters: {
-    controls: {
-      exclude: [
-        "children",
-        "action",
-        "closeOverlay",
-        "openOverlay",
-        "toggleOverlay",
-        "showFeedback",
-        "break",
-        "skip",
-      ],
-    },
+    controls: { disable: true },
   },
 };
 
@@ -101,8 +90,8 @@ export const WithConfirmationModal: Story = {
   render: () => (
     <Action onAction={asyncLongFunction}>
       <Modal slot="actionConfirm">
-        <Heading>Delete customer</Heading>
-        <Content>Do you really want to delete the customer?</Content>
+        <Heading>Delete droid</Heading>
+        <Content>Do you really want to delete this droid?</Content>
         <ActionGroup>
           <Button color="danger">Confirm</Button>
           <Button color="secondary" variant="soft">
@@ -111,7 +100,7 @@ export const WithConfirmationModal: Story = {
         </ActionGroup>
       </Modal>
       <Button color="secondary" variant="soft">
-        Delete customer
+        Delete droid
       </Button>
     </Action>
   ),

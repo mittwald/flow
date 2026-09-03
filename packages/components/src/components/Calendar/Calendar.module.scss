@@ -1,7 +1,7 @@
 @use "@/styles/mixins/focus";
 
 .calendar {
-  padding: var(--popover--padding--m);
+  width: fit-content;
 
   header {
     display: flex;
@@ -14,8 +14,25 @@
     }
   }
 
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--popover--padding--m);
+
+    .presetMenu {
+      max-width: 200px;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .container {
+      flex-direction: column-reverse;
+    }
+  }
+
   :global(.react-aria-CalendarHeaderCell) {
     font-size: var(--calendar--cell-font-size);
+    height: var(--calendar--cell-size);
   }
 
   table {
@@ -71,7 +88,10 @@
       &[data-selected] {
         &::before {
           content: "";
-          background: var(--calendar--cell-range-background-color);
+          background: var(--calendar--range-background-color);
+          border-block: var(--calendar--range-border-width)
+            var(--calendar--range-border-style)
+            var(--calendar--range-border-color);
           width: calc(100% + 0.375rem);
           height: 100%;
           position: absolute;
@@ -108,17 +128,17 @@
 
         &[data-selection-start] {
           &::before {
-            border-top-left-radius: var(--calendar--cell-corner-radius);
-            border-bottom-left-radius: var(--calendar--cell-corner-radius);
-            left: 0;
+            border-start-start-radius: var(--calendar--cell-corner-radius);
+            border-end-start-radius: var(--calendar--cell-corner-radius);
+            inset-inline-start: 0;
           }
         }
 
         &[data-selection-end] {
           &::before {
-            border-top-right-radius: var(--calendar--cell-corner-radius);
-            border-bottom-right-radius: var(--calendar--cell-corner-radius);
-            right: 0;
+            border-start-end-radius: var(--calendar--cell-corner-radius);
+            border-end-end-radius: var(--calendar--cell-corner-radius);
+            inset-inline-end: 0;
           }
         }
 
@@ -134,5 +154,12 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 360px) {
+  .calendar {
+    --calendar--cell-size: 2.1rem;
+    --calendar--cell-font-size: 0.8rem;
   }
 }

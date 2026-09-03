@@ -37,7 +37,7 @@ const meta: Meta<typeof Field> = {
     const form = useForm<Values>({
       defaultValues: {
         gender: "",
-        genderDefaultValue: "diverse",
+        genderDefaultValue: "jedi",
         genderRequired: "",
       },
     });
@@ -49,36 +49,36 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="gender">
             <RadioGroup>
-              <Label>Gender</Label>
-              <Radio value="male">Male</Radio>
-              <Radio value="female">Female</Radio>
-              <Radio value="diverse">Diverse</Radio>
+              <Label>Allegiance</Label>
+              <Radio value="rebel">Rebel Alliance</Radio>
+              <Radio value="empire">Galactic Empire</Radio>
+              <Radio value="jedi">Jedi Order</Radio>
             </RadioGroup>
           </Field>
 
           <Field name="genderDefaultValue">
             <RadioGroup>
-              <Label>Gender</Label>
-              <Radio value="male">Male</Radio>
-              <Radio value="female">Female</Radio>
-              <Radio value="diverse">Diverse</Radio>
+              <Label>Allegiance</Label>
+              <Radio value="rebel">Rebel Alliance</Radio>
+              <Radio value="empire">Galactic Empire</Radio>
+              <Radio value="jedi">Jedi Order</Radio>
             </RadioGroup>
           </Field>
 
           <Field
             name="genderRequired"
-            rules={{ required: "Please select your gender" }}
+            rules={{ required: "Please select your allegiance" }}
           >
             <RadioGroup>
-              <Label>Gender</Label>
-              <Radio value="male">Male</Radio>
-              <Radio value="female">Female</Radio>
-              <Radio value="diverse">Diverse</Radio>
+              <Label>Allegiance</Label>
+              <Radio value="rebel">Rebel Alliance</Radio>
+              <Radio value="empire">Galactic Empire</Radio>
+              <Radio value="jedi">Jedi Order</Radio>
             </RadioGroup>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -104,21 +104,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <RadioGroup>
-            <Label>Gender</Label>
-            <Radio value="male">Male</Radio>
-            <Radio value="female">Female</Radio>
-            <Radio value="diverse">Diverse</Radio>
+        <Section>
+          <Field name="field">
+            <RadioGroup>
+              <Label>Allegiance</Label>
+              <Radio value="rebel">Rebel Alliance</Radio>
+              <Radio value="empire">Galactic Empire</Radio>
+              <Radio value="jedi">Jedi Order</Radio>
+            </RadioGroup>
+          </Field>
+          <RadioGroup isInvalid>
+            <Label>Allegiance</Label>
+            <Radio value="rebel">Rebel Alliance</Radio>
+            <Radio value="empire">Galactic Empire</Radio>
+            <Radio value="jedi">Jedi Order</Radio>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </RadioGroup>
-        </Field>
-        <RadioGroup isInvalid>
-          <Label>Gender</Label>
-          <Radio value="male">Male</Radio>
-          <Radio value="female">Female</Radio>
-          <Radio value="diverse">Diverse</Radio>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </RadioGroup>
+        </Section>
       </Form>
     );
   },
@@ -129,31 +131,41 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <RadioGroup>
-            <Label>Gender</Label>
-            <Radio value="male">Male</Radio>
-            <Radio value="female">Female</Radio>
-            <Radio value="diverse">Diverse</Radio>
+            <Label>Allegiance</Label>
+            <Radio value="rebel">Rebel Alliance</Radio>
+            <Radio value="empire">Galactic Empire</Radio>
+            <Radio value="jedi">Jedi Order</Radio>
           </RadioGroup>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

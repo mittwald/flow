@@ -1,2 +1,2 @@
-export { BrowserOnly, default } from "./BrowserOnly";
-export type { BrowserOnlyProps } from "./BrowserOnly";
+export { type BrowserOnlyProps, BrowserOnly } from "./BrowserOnly";
+export { default } from "./BrowserOnly";

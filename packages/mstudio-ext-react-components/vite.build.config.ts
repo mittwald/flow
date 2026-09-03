@@ -1,7 +1,7 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
-import banner from "vite-plugin-banner";
-import dts from "vite-plugin-dts";
+import dts from "unplugin-dts/vite";
+import { preserveUseClientBanner } from "../core";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
 
@@ -20,8 +20,9 @@ export default mergeConfig(
         },
         formats: ["es"],
       },
-      rollupOptions: {
+      rolldownOptions: {
         output: {
+          postBanner: preserveUseClientBanner,
           format: "es",
           preserveModules: true,
           entryFileNames: "[name].mjs",
@@ -30,15 +31,10 @@ export default mergeConfig(
     },
     plugins: [
       preserveDirectives(),
-      banner((filename) =>
-        filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
-          ? '"use client"\r\n/* */'
-          : "",
-      ),
       externalizeDeps(),
       dts({
         include: ["src"],
-        outDir: "dist/types",
+        outDirs: "dist/types",
       }),
     ],
   }),

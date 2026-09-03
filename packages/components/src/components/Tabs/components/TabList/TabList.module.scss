@@ -1,18 +1,44 @@
 .tabList {
   background-color: var(--tabs--background-color--default);
   position: relative;
-  overflow-x: clip;
+  border-radius: var(--tabs--corner-radius);
+
+  /* Precedes `.titles` in the DOM, so it is painted below the tab titles
+     without needing a z-index. */
+  .activeIndicator {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: calc(var(--tab-indicator-width));
+    transform: translateX(var(--tab-indicator-x));
+    border-radius: var(--tabs--corner-radius);
+    background-color: var(--tabs--background-color--selected);
+    border: var(--tabs--border-width) var(--tabs--border-style)
+      var(--tabs--border-color);
+    pointer-events: none;
+
+    &.animated {
+      transition-property: transform, width;
+      transition-duration: var(--transition--duration--default);
+    }
+  }
 
   .contextMenuButton {
-    align-self: center;
-    margin: var(--size-px--s);
+    padding-block: var(--tabs--padding-y);
+    padding-inline: var(--tabs--padding-x);
+    background-color: var(--tabs--background-color--selected);
+    border-radius: var(--tabs--corner-radius);
+    border: var(--tabs--border-width) var(--tabs--border-style)
+      var(--tabs--border-color);
+    width: 100%;
   }
 
   .titles {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    width: fit-content;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
   }
 
   &.collapsed {

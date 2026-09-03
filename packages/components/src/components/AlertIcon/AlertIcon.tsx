@@ -7,13 +7,13 @@ import {
   IconWarning,
 } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
-import type { Status } from "@/lib/types/props";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 
-export type AlertIconProps = IconProps;
+export type AlertIconProps = Omit<IconProps, "status"> & PropsWithStatus;
 
-const icons: Record<Status | "unavailable", ComponentType> = {
+const icons: Record<Status, ComponentType> = {
   danger: IconDanger,
   info: IconInfo,
   success: IconSuccess,
@@ -25,13 +25,13 @@ const icons: Record<Status | "unavailable", ComponentType> = {
 export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
 
   const Icon = icons[status];
 
   const iconProps: IconProps = {
-    status,
-    "aria-label": stringFormatter.format(`alertIcon.${status}`),
+    color: status,
+    "aria-label": stringFormatter.format(`status.${status}`),
     ...rest,
   };
 

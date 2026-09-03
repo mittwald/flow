@@ -1,5 +1,3 @@
 export * from "./view";
-
-export * from "./LoadingSpinner";
-
+export { type LoadingSpinnerProps, LoadingSpinner } from "./LoadingSpinner";
 export { default } from "./LoadingSpinner";

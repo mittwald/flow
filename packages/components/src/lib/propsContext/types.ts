@@ -13,8 +13,7 @@ export type PropsContext = Partial<{
 
 export type ComponentPropsContext<C extends FlowComponentName> = Partial<{
   [P in FlowComponentPropName<C>]:
-    | FlowComponentPropType<C, P>
-    | DynamicProp<C, P>;
+    FlowComponentPropType<C, P> | DynamicProp<C, P>;
 }> &
   PropsContext;
 

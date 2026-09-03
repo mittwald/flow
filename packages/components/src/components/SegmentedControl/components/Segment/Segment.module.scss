@@ -1,5 +1,5 @@
 @use "@/styles/mixins/focus";
-@use "../../../../styles/mixins/formControl";
+@use "@/styles/mixins/formControl";
 
 .segment {
   flex: 1;
@@ -7,7 +7,7 @@
   column-gap: var(--form-control--spacing-x);
   grid-template-areas: "label checkmark";
   grid-template-columns: 1fr auto;
-  margin-right: -1px; /* Collapse borders */
+  margin-inline-end: -1px; /* Collapse borders */
   z-index: 1;
 
   @include formControl.formControl();

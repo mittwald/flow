@@ -1,7 +1,9 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-test.each(testEnvironments)(
+const combineSince = "0.2.0-alpha.1050";
+
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
   "Message (%s)",
   async ({
     testScreenshot,
@@ -13,7 +15,7 @@ test.each(testEnvironments)(
       Button,
       ContextMenuTrigger,
       ContextMenu,
-      Align,
+      Combine,
       Avatar,
       Initials,
       Content,
@@ -31,26 +33,26 @@ test.each(testEnvironments)(
               <Button />
               <ContextMenu />
             </ContextMenuTrigger>
-            <Align>
+            <Combine>
               <Avatar>
-                <Initials>Max Mustermann</Initials>
+                <Initials>Luke Skywalker</Initials>
               </Avatar>
-              <Text>Max Mustermann</Text>
-            </Align>
+              <Text>Luke Skywalker</Text>
+            </Combine>
             <Text>01.09.2025, 11:00</Text>
           </Header>
 
           <Content>
             <Flex direction="column" gap="m">
               <Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-                eius quam quas vel voluptas, ullam aliquid fugit. Voluptate
-                harum accusantium rerum ullam modi blanditiis vitae, laborum ea
-                tempore, dolore voluptas.
+                A long time ago in a galaxy far, far away, the Rebel Alliance
+                struck a decisive blow against the Galactic Empire. Rebel spies
+                managed to steal secret plans to the Empire's ultimate weapon,
+                the Death Star.
               </Text>
               <FileCardList>
-                <FileCard name="File 1" />
-                <FileCard name="File 2" />
+                <FileCard name="death-star-plans.pdf" />
+                <FileCard name="rebel-base-map.pdf" />
               </FileCardList>
             </Flex>
           </Content>
@@ -64,10 +66,10 @@ test.each(testEnvironments)(
         <Message type="sender">
           <Content>
             <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
+              A long time ago in a galaxy far, far away, the Rebel Alliance
+              struck a decisive blow against the Galactic Empire. Rebel spies
+              managed to steal secret plans to the Empire's ultimate weapon, the
+              Death Star.
             </Text>
           </Content>
 
@@ -75,7 +77,9 @@ test.each(testEnvironments)(
         </Message>
         <Message color="#ffeedd">
           <Content>
-            <Text>Custom color</Text>
+            {/* A custom color does not adapt to the theme, so neither can the
+                content color. */}
+            <Text color="dark-static">Custom color</Text>
           </Content>
         </Message>
       </Flex>,

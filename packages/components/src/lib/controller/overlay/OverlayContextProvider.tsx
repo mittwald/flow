@@ -1,5 +1,4 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import {
   overlayContext,
   useOverlayContext,

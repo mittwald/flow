@@ -1,25 +1,50 @@
 import {
+  Version,
   type HostExports,
   type HostToRemoteConnection,
+  type HostToRemoteConnectionReadyEvent,
   type NavigationState,
   type RemoteExports,
-  Version,
+  type RemoteExtBridgeConnectionApi,
+  type RemoteReadyEvent,
+  type RemoteReadyEventInput,
 } from "@/connection/types";
+import { parseReportedEvent, type ReportedEvent } from "@/events/remoteEvents";
+import { getWithMergedHostConfig } from "@/ext-bridge/getWithMergedHostConfig";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
-import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
+import type { HostConfig } from "@mittwald/ext-bridge";
 import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadIframe } from "@quilted/threads";
 
 interface Options {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
-  onReady?: (connection: HostToRemoteConnection) => void;
+  hostConfig: HostConfig;
+  onReady?: (event: HostToRemoteConnectionReadyEvent) => void;
   onLoadingChanged?: (isLoading: boolean) => void;
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
-  extBridgeImplementation?: ExtBridgeConnectionApi;
+  onDeprecation?: (message: string) => void;
+  onEvent?: (event: ReportedEvent) => void;
+  extBridgeImplementation?: RemoteExtBridgeConnectionApi;
 }
+
+const normalizeReadyEvent = (
+  event?: RemoteReadyEventInput,
+): RemoteReadyEvent => {
+  if (typeof event === "number") {
+    return {
+      version: event,
+    };
+  }
+
+  return (
+    event ?? {
+      version: Version.v1,
+    }
+  );
+};
 
 export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
   const {
@@ -29,17 +54,29 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
     onLoadingChanged,
     onError,
     onNavigationStateChanged,
-    extBridgeImplementation = emptyImplementation,
+    onDeprecation,
+    onEvent,
+    extBridgeImplementation: extBridgeImplementationProp = emptyImplementation,
+    hostConfig,
   } = opts;
 
-  const result = {
+  const extBridgeImplementation = {
+    ...extBridgeImplementationProp,
+    getConfig: getWithMergedHostConfig(extBridgeImplementationProp, hostConfig),
+  };
+
+  const result: HostToRemoteConnection = {
     thread: new ThreadIframe<RemoteExports, HostExports>(iframe, {
       serialization: new FlowThreadSerialization(),
       exports: {
         ...extBridgeImplementation,
-        setIsReady: async (version = 1) => {
-          result.version = version;
-          onReady?.(result);
+        setIsReady: async (event) => {
+          const readyEvent = normalizeReadyEvent(event);
+          result.version = readyEvent.version;
+          onReady?.({
+            connection: result,
+            remoteReadyEvent: readyEvent,
+          });
         },
         setIsLoading: async (isLoading: boolean) => {
           onLoadingChanged?.(isLoading);
@@ -50,9 +87,20 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         setNavigationState: async (state) => {
           onNavigationStateChanged?.(state);
         },
+        reportDeprecation: async (message: string) => {
+          onDeprecation?.(message);
+        },
+        reportEvent: async (event) => {
+          const parsed = parseReportedEvent(event);
+          if (parsed) {
+            onEvent?.(parsed);
+          }
+        },
+        getHostConfig: async () => {
+          return hostConfig;
+        },
       },
     }),
-    version: 0,
     updateHostPathname: (hostPathname?: string) => {
       if (hostPathname === undefined) {
         return;
@@ -62,6 +110,12 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         result.thread.imports.setPathname(hostPathname);
       }
     },
+    reportHostError: async (error) => {
+      if (result.version >= Version.v5) {
+        await result.thread.imports.setHostError(error);
+      }
+    },
+    version: 0,
   };
 
   result.thread.imports.render(connection);

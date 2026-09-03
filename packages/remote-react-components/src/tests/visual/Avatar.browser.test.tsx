@@ -1,9 +1,9 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import gopher from "@/tests/assets/gopher.webp";
 import { test } from "vitest";
+import { statusTypes } from "@mittwald/flow-react-components/internal";
 
 const sizes = ["xs", "s", "m", "l"] as const;
-const states = ["info", "success", "warning", "danger"] as const;
 const colors = ["blue", "teal", "green", "violet", "lilac"] as const;
 
 test.each(testEnvironments)(
@@ -21,7 +21,7 @@ test.each(testEnvironments)(
               <Image alt="Gopher" src={gopher} />
             </Avatar>
             <Avatar size={size}>
-              <Initials>Max Mustermann</Initials>
+              <Initials>Luke Skywalker</Initials>
             </Avatar>
             <Avatar size={size}>
               <IconStar />
@@ -29,14 +29,14 @@ test.each(testEnvironments)(
           </Flex>
         ))}
         <Flex gap="s">
-          {states.map((status) => (
+          {statusTypes.map((status) => (
             <Avatar key={status} status={status} />
           ))}
         </Flex>
         <Flex gap="s">
           {colors.map((color) => (
             <Avatar color={color} key={color}>
-              <Initials>Max Mustermann</Initials>
+              <Initials>Luke Skywalker</Initials>
             </Avatar>
           ))}
         </Flex>

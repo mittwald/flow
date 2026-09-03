@@ -1,5 +1,4 @@
 import { typedList } from "@/components/List/typedList";
-import React from "react";
 import { expectTypeOf } from "vitest";
 
 interface Item {

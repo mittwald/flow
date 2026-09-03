@@ -1,0 +1,7 @@
+declare const classNames: {
+  readonly table: "table";
+  readonly isLoading: "isLoading";
+  readonly row: "row";
+  readonly hasAction: "hasAction";
+};
+export default classNames;

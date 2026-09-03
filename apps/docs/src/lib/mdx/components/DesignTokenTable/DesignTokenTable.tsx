@@ -1,6 +1,4 @@
 import type { FC } from "react";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
-import { getProperty } from "dot-prop";
 import {
   Table,
   TableBody,
@@ -8,53 +6,30 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  useDesignTokens,
 } from "@mittwald/flow-react-components";
 import { Sample } from "@/lib/mdx/components/DesignTokenTable/Samples/Sample";
+import {
+  collectTokensInPath,
+  tokenName,
+} from "@/lib/designTokens/collectTokens";
 
 interface Props {
   path: string;
 }
 
-interface DesignToken {
-  path: string[];
-  value: string;
-}
-
-function isDesignToken(ref: unknown): ref is DesignToken {
-  return (
-    typeof ref === "object" && ref !== null && "path" in ref && "value" in ref
-  );
-}
-
-function getTokens(current: unknown, collector: DesignToken[] = []) {
-  if (isDesignToken(current)) {
-    collector.push(current);
-  } else if (current !== null && typeof current === "object") {
-    for (const value of Object.values(current)) {
-      getTokens(value, collector);
-    }
-  }
-  return collector;
-}
-
-function recursiveGetTokensInPath(path: string) {
-  const values = getProperty<unknown, string>(tokens, path, undefined);
-  return getTokens(values);
-}
-
 export const DesignTokenTable: FC<Props> = (props) => {
   const { path } = props;
-
-  const designTokens = recursiveGetTokensInPath(path);
+  const designTokens = collectTokensInPath(path, useDesignTokens());
   const rows = designTokens.map((token) => {
-    const tokenName = token.path.join("--");
+    const name = tokenName(token);
 
     return (
-      <TableRow key={tokenName}>
+      <TableRow key={name}>
         <TableCell>
-          <Sample tokenName={tokenName} tokenValue={token.value} />
+          <Sample tokenName={name} tokenValue={token.value} />
         </TableCell>
-        <TableCell>{tokenName}</TableCell>
+        <TableCell>{name}</TableCell>
         <TableCell>{token.value}</TableCell>
       </TableRow>
     );

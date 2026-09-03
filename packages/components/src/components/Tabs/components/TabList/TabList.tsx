@@ -2,52 +2,69 @@ import type { FC } from "react";
 import { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { useTabIndicator } from "../../lib/useTabIndicator";
 import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
 import { Button } from "@/components/Button";
-import { IconContextMenu } from "@/components/Icon/components/icons";
 import clsx from "clsx";
-import TabTitleCollapsed from "@/components/Tabs/components/TabTitle/TabTitleCollapsed";
+import { useMergeRefs } from "use-callback-ref";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
+import { IconChevronDown } from "@/components/Icon/components/icons";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 interface Props {
   selection: Aria.Key | undefined;
   onContextMenuSelectionChange: (key: Aria.Key) => void;
   disabledKeys?: Iterable<Aria.Key>;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
 }
 
 export const TabList: FC<Props> = (props) => {
-  const { selection, disabledKeys, onContextMenuSelectionChange } = props;
+  const {
+    selection,
+    disabledKeys,
+    onContextMenuSelectionChange,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledby,
+  } = props;
 
   const titleCollapsedElementId = useId();
   const overflowObserver = useObserveOverflow();
   const isCollapsed = overflowObserver.isOverflowing;
   const rootClassName = clsx(styles.tabList, isCollapsed && styles.collapsed);
+  const tabIndicator = useTabIndicator(isCollapsed);
+
+  const setTitlesRef = useMergeRefs<HTMLDivElement>([
+    overflowObserver.ref,
+    tabIndicator.titlesRef,
+  ]);
 
   const handleContextMenuSelectionChange = (key: Aria.Key) => {
     onContextMenuSelectionChange(key);
   };
 
   const regularTabTitles = (
-    <Aria.TabList className={styles.titles} ref={overflowObserver.ref}>
-      <TunnelExit id="Titles" />
+    <Aria.TabList
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledby}
+      className={styles.titles}
+      ref={setTitlesRef}
+    >
+      <UiComponentTunnelExit id="Titles" component="Tabs" />
     </Aria.TabList>
-  );
-
-  const singleTabTitleWhenCollapsed = isCollapsed && (
-    <TabTitleCollapsed id={titleCollapsedElementId} />
   );
 
   const contextMenuWhenCollapsed = isCollapsed && (
     <ContextMenuTriggerView>
       <Button
-        variant="soft"
+        variant="solid"
         className={styles.contextMenuButton}
-        color="secondary"
+        color="light"
         aria-labelledby={titleCollapsedElementId}
       >
-        <IconContextMenu />
+        <UiComponentTunnelExit id="ActiveTitle" component="Tabs" />
+        <IconChevronDown />
       </Button>
 
       <ContextMenuView
@@ -56,15 +73,24 @@ export const TabList: FC<Props> = (props) => {
         selectionMode="navigation"
         onAction={(key) => handleContextMenuSelectionChange(key)}
       >
-        <TunnelExit id="ContextMenuItems" />
+        <UiComponentTunnelExit id="ContextMenuItems" component="Tabs" />
       </ContextMenuView>
     </ContextMenuTriggerView>
   );
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} ref={tabIndicator.rootRef}>
+      {!isCollapsed && tabIndicator.indicatorStyle && (
+        <div
+          aria-hidden="true"
+          className={clsx(
+            styles.activeIndicator,
+            tabIndicator.isAnimated && styles.animated,
+          )}
+          style={tabIndicator.indicatorStyle}
+        />
+      )}
       {regularTabTitles}
-      {singleTabTitleWhenCollapsed}
       {contextMenuWhenCollapsed}
     </div>
   );

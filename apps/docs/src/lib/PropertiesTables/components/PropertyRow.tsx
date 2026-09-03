@@ -1,45 +1,65 @@
-import React from "react";
+import type { FC } from "react";
 import type { Property } from "../types";
-import { TableCell, TableRow } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
+import {
+  InlineCode,
+  TableCell,
+  TableRow,
+  Text,
+} from "@mittwald/flow-react-components";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import Markdown from "react-markdown";
 import { omit } from "remeda";
 import { Badge } from "@mittwald/flow-react-components";
+import { formatType } from "@/lib/PropertiesTables/lib/unionType";
+import { TypeValue } from "./TypeValue";
+import styles from "../PropertiesTables.module.scss";
 
 export interface PropertyTableGroupProps {
   property: Property;
 }
 
-export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
-  property,
-}) => {
+export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
   const formattedDescription = property.description
     ?.replaceAll(/{@link (\S+) (.+)}/g, "[$2]($1)")
     .replaceAll(/{@link (\S+)}/g, "[$1]($1)");
 
   const customComponents = createCustomComponents();
+  const type = formatType(property.type, property.default);
 
   return (
     <TableRow>
       <TableCell>
-        <InlineCode>{property.name}</InlineCode>
-        {property.required && <Badge>Required</Badge>}
+        <div className={styles.propertyCell}>
+          <InlineCode>{property.name}</InlineCode>
+          {property.required && <Badge>Required</Badge>}
+        </div>
       </TableCell>
-      <TableCell>{property.type}</TableCell>
-      <TableCell>{property.default || "-"}</TableCell>
       <TableCell>
-        <Markdown
-          components={omit(customComponents, [
-            "Content",
-            "Heading",
-            "Alert",
-            "DoAndDont",
-            "ColumnLayout",
-          ])}
-        >
-          {formattedDescription}
-        </Markdown>
+        <div className={styles.typeCell}>
+          <Text className={styles.type}>
+            <TypeValue {...type} />
+          </Text>
+          {property.default && !type.defaultMember && (
+            <Text className={styles.defaultValue}>
+              default: {property.default}
+            </Text>
+          )}
+        </div>
+      </TableCell>
+      <TableCell>
+        <Text elementType="div">
+          <Markdown
+            components={omit(customComponents, [
+              "Content",
+              "Heading",
+              "Alert",
+              "DoAndDont",
+              "ColumnLayout",
+            ])}
+          >
+            {formattedDescription}
+          </Markdown>
+        </Text>
       </TableCell>
     </TableRow>
   );

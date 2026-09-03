@@ -29,10 +29,14 @@
   }
 
   /* Elements */
-  .icon {
+  :where(.icon) {
     color: var(--menu-item--icon-color--default);
-    transition-property: background-color;
+    transition-property: color;
     transition-duration: var(--transition--duration--default);
+  }
+
+  .checkMark {
+    opacity: 0;
   }
 
   &:hover {
@@ -49,17 +53,26 @@
 
   &:not(:has(.controlIcon)) {
     &[aria-current],
+    &[data-current],
     &[data-selected] {
       background-color: var(--menu-item--background-color--current);
       font-weight: var(--menu-item--font-weight--current);
-      color: var(--menu-item--color--current);
     }
   }
 
   &[aria-current],
+  &[data-current],
   &[data-selected] {
-    .icon {
+    :where(.icon) {
       color: var(--menu-item--icon-color--current);
+    }
+
+    .checkMark {
+      opacity: 1;
+    }
+
+    .controlIcon {
+      color: var(--choice--icon-color--selected);
     }
   }
 
@@ -68,7 +81,7 @@
     background-color: var(--menu-item--disabled-background-color);
     color: var(--menu-item--disabled-color);
 
-    .icon {
+    :where(.icon) {
       color: var(--menu-item--icon-color--disabled);
     }
   }

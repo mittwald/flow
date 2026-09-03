@@ -44,7 +44,7 @@ const meta: Meta<typeof Field> = {
     const form = useForm<Values>({
       defaultValues: {
         domain: "",
-        domainDefaultValue: "mydomain.de",
+        domainDefaultValue: "rebellion.org",
         domainRequired: "",
       },
     });
@@ -57,16 +57,16 @@ const meta: Meta<typeof Field> = {
           <Field name="domain">
             <ComboBox>
               <Label>Domain</Label>
-              <Option value="mydomain.de">mydomain.de</Option>
-              <Option value="anotherdomain.com">anotherdomain.com</Option>
+              <Option value="rebellion.org">rebellion.org</Option>
+              <Option value="empire.gov">empire.gov</Option>
             </ComboBox>
           </Field>
 
           <Field name="domainDefaultValue">
             <ComboBox>
               <Label>Domain</Label>
-              <Option value="mydomain.de">mydomain.de</Option>
-              <Option value="anotherdomain.com">anotherdomain.com</Option>
+              <Option value="rebellion.org">rebellion.org</Option>
+              <Option value="empire.gov">empire.gov</Option>
             </ComboBox>
           </Field>
 
@@ -76,13 +76,13 @@ const meta: Meta<typeof Field> = {
           >
             <ComboBox>
               <Label>Domain</Label>
-              <Option value="mydomain.de">mydomain.de</Option>
-              <Option value="anotherdomain.com">anotherdomain.com</Option>
+              <Option value="rebellion.org">rebellion.org</Option>
+              <Option value="empire.gov">empire.gov</Option>
             </ComboBox>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -112,8 +112,29 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name="field">
-          <ComboBox>
+        <Section>
+          <Field name="field">
+            <ComboBox>
+              <Label>
+                Domain
+                <ContextualHelpTrigger>
+                  <Button />
+                  <ContextualHelp>
+                    <Text>{dummyText.short}</Text>
+                  </ContextualHelp>
+                </ContextualHelpTrigger>
+              </Label>
+              <Option>rebellion.org</Option>
+              <Option>shop.rebellion.org</Option>
+              <Option>empire.gov</Option>
+              <Option>www.empire.gov</Option>
+              <Option>empire.gov/shop</Option>
+              <Option>empire.gov/blog</Option>
+              <Option>jedi.order</Option>
+              <Option>www.jedi.order</Option>
+            </ComboBox>
+          </Field>
+          <ComboBox isInvalid>
             <Label>
               Domain
               <ContextualHelpTrigger>
@@ -123,36 +144,17 @@ export const WithFieldError: Story = {
                 </ContextualHelp>
               </ContextualHelpTrigger>
             </Label>
-            <Option>mydomain.de</Option>
-            <Option>shop.mydomain.de</Option>
-            <Option>anotherdomain.com</Option>
-            <Option>www.anotherdomain.com</Option>
-            <Option>anotherdomain.com/shop</Option>
-            <Option>anotherdomain.com/blog</Option>
-            <Option>onemoredomain.de</Option>
-            <Option>www.onemoredomain.de</Option>
+            <Option>rebellion.org</Option>
+            <Option>shop.rebellion.org</Option>
+            <Option>empire.gov</Option>
+            <Option>www.empire.gov</Option>
+            <Option>empire.gov/shop</Option>
+            <Option>empire.gov/blog</Option>
+            <Option>jedi.order</Option>
+            <Option>www.jedi.order</Option>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </ComboBox>
-        </Field>
-        <ComboBox isInvalid>
-          <Label>
-            Domain
-            <ContextualHelpTrigger>
-              <Button />
-              <ContextualHelp>
-                <Text>{dummyText.short}</Text>
-              </ContextualHelp>
-            </ContextualHelpTrigger>
-          </Label>
-          <Option>mydomain.de</Option>
-          <Option>shop.mydomain.de</Option>
-          <Option>anotherdomain.com</Option>
-          <Option>www.anotherdomain.com</Option>
-          <Option>anotherdomain.com/shop</Option>
-          <Option>anotherdomain.com/blog</Option>
-          <Option>onemoredomain.de</Option>
-          <Option>www.onemoredomain.de</Option>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </ComboBox>
+        </Section>
       </Form>
     );
   },
@@ -167,7 +169,7 @@ export const WithFocus: Story = {
     });
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <ComboBox>
             <Label>
               Domain
@@ -178,33 +180,43 @@ export const WithFocus: Story = {
                 </ContextualHelp>
               </ContextualHelpTrigger>
             </Label>
-            <Option>mydomain.de</Option>
-            <Option>shop.mydomain.de</Option>
-            <Option>anotherdomain.com</Option>
-            <Option>www.anotherdomain.com</Option>
-            <Option>anotherdomain.com/shop</Option>
-            <Option>anotherdomain.com/blog</Option>
-            <Option>onemoredomain.de</Option>
-            <Option>www.onemoredomain.de</Option>
+            <Option>rebellion.org</Option>
+            <Option>shop.rebellion.org</Option>
+            <Option>empire.gov</Option>
+            <Option>www.empire.gov</Option>
+            <Option>empire.gov/shop</Option>
+            <Option>empire.gov/blog</Option>
+            <Option>jedi.order</Option>
+            <Option>www.jedi.order</Option>
           </ComboBox>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

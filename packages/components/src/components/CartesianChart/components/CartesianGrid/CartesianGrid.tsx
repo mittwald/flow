@@ -1,24 +1,20 @@
+import { ChartGrid, type ChartGridProps } from "@/components/CartesianChart";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 import type { FC } from "react";
-import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
 
-export type CartesianGridProps = Pick<
-  Recharts.CartesianGridProps,
-  "className" | "vertical" | "horizontal" | "strokeDasharray"
->;
+/** @deprecated Use ChartGridProps */
+export type CartesianGridProps = ChartGridProps;
 
-/** @flr-generate all */
+/**
+ * @deprecated Use ChartGrid
+ * @flr-generate all
+ */
 export const CartesianGrid: FC<CartesianGridProps> = (props) => {
-  const { vertical = false, ...rest } = props;
+  const warnDeprecation = useWarnDeprecation();
 
-  return (
-    <Recharts.CartesianGrid
-      vertical={vertical}
-      {...rest}
-      stroke={tokens["cartesian-grid"].color.value}
-      strokeWidth={tokens["cartesian-grid"]["stroke-width"].value}
-    />
+  warnDeprecation(
+    "The 'CartesianGrid' component is deprecated and will be removed in a future release. Use 'ChartGrid' instead.",
   );
-};
 
-export default CartesianGrid;
+  return <ChartGrid {...props} />;
+};

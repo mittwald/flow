@@ -1,19 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import Button from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
-import { LightBox } from "@/components/LightBox";
+import {
+  LightBoxGallery,
+  LightBoxGalleryItem,
+  LightBox,
+} from "@/components/LightBox";
 import LightBoxTrigger from "@/components/LightBox/components/LightBoxTrigger";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import { IconDelete, IconDownload } from "@/components/Icon/components/icons";
 import { useOverlayController } from "@/lib/controller";
+import svg from "./test.svg";
+import { Flex } from "@/components/Flex";
+
+const images = [
+  dummyText.imageSrc,
+  "https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg",
+  svg,
+];
 
 const meta: Meta<typeof LightBox> = {
   title: "Overlays/LightBox",
   component: LightBox,
   parameters: {
-    controls: { exclude: ["controller"] },
+    controls: { disable: true },
   },
   render: (props) => {
     return (
@@ -75,5 +86,46 @@ export const WithImageTrigger: Story = {
         <Image alt="Gopher" src={dummyText.imageSrc} />
       </LightBox>
     </LightBoxTrigger>
+  ),
+};
+
+export const WithSvg: Story = {
+  render: () => (
+    <LightBoxTrigger>
+      <Button>
+        <Image withBorder alt="Gopher" src={svg} />
+      </Button>
+      <LightBox>
+        <Image alt="Gopher" src={svg} />
+      </LightBox>
+    </LightBoxTrigger>
+  ),
+};
+
+export const WithGallery: Story = {
+  render: () => (
+    <Flex gap="m" wrap="wrap">
+      {images.map((src, index) => (
+        <LightBoxTrigger key={index}>
+          <Button>
+            <Image alt="" src={src} height="100px" withBorder />
+          </Button>
+          <LightBox>
+            <LightBoxGallery defaultIndex={index}>
+              {images.map((src) => (
+                <LightBoxGalleryItem key={src}>
+                  <Image src={src} />
+                  <ActionGroup>
+                    <Button>
+                      <IconDownload />
+                    </Button>
+                  </ActionGroup>
+                </LightBoxGalleryItem>
+              ))}
+            </LightBoxGallery>
+          </LightBox>
+        </LightBoxTrigger>
+      ))}
+    </Flex>
   ),
 };

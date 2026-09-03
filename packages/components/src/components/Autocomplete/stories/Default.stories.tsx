@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Chat } from "@/components/Chat";
 import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
@@ -10,18 +10,20 @@ const meta: Meta<typeof Chat> = {
   title: "Form Controls/Autocomplete",
   component: Autocomplete,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
   render: () => {
     const suggestEmail = (value: string) => {
-      return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
-        const email = `${value.split("@")[0]}@${d}`;
-        return (
-          <Option key={email} value={email} textValue={email}>
-            {email}
-          </Option>
-        );
-      });
+      return ["rebellion.org", "empire.gov", "jedi.org", "hoth.net"].map(
+        (d) => {
+          const email = `${value.split("@")[0]}@${d}`;
+          return (
+            <Option key={email} value={email} textValue={email}>
+              {email}
+            </Option>
+          );
+        },
+      );
     };
 
     const [input, setInput] = useState("");
@@ -29,7 +31,7 @@ const meta: Meta<typeof Chat> = {
     return (
       <Autocomplete>
         <SearchField onChange={setInput} value={input}>
-          <Label>Test</Label>
+          <Label>Comlink address</Label>
         </SearchField>
         {suggestEmail(input)}
       </Autocomplete>
@@ -38,19 +40,19 @@ const meta: Meta<typeof Chat> = {
 };
 export default meta;
 
+type Story = StoryObj<typeof Autocomplete>;
+
+export const Default: Story = {};
+
 export const FixedOptions: Story = {
   render: () => (
     <Autocomplete>
       <SearchField>
-        <Label>Test</Label>
+        <Label>Comlink address</Label>
       </SearchField>
-      <Option value="example.com">example.com</Option>
-      <Option value="domain.de">domain.de</Option>
-      <Option value="test.org">test.org</Option>
+      <Option value="rebellion.org">rebellion.org</Option>
+      <Option value="empire.gov">empire.gov</Option>
+      <Option value="jedi.org">jedi.org</Option>
     </Autocomplete>
   ),
 };
-
-type Story = StoryObj<typeof Autocomplete>;
-
-export const Default: Story = {};

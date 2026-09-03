@@ -7,7 +7,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import labelStyles from "../Label/Label.module.scss";
+import labelStyles from "@/components/Label/Label.module.scss";
 import { useObjectRef } from "react-aria";
 
 export interface SwitchProps
@@ -33,8 +33,8 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
+    labelPosition !== "trailing" && styles[`label-${labelPosition}`],
     className,
-    styles[`label-${labelPosition}`],
   );
 
   const objectRef = useObjectRef(ref);
@@ -44,13 +44,14 @@ export const Switch = flowComponent("Switch", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Switch");
 
   const propsContext: PropsContext = {
     ...fieldPropsContext,
     Label: {
       ...fieldPropsContext.Label,
       optional: false,
+      className: styles.label,
     },
   };
 

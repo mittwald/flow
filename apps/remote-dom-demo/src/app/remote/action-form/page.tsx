@@ -38,26 +38,26 @@ export default function Page() {
     <Form action={dispatchFormServerAction}>
       <Section>
         <CheckboxGroup name={"check"}>
-          <Label>Berechtigungen</Label>
-          <Checkbox value="read">Lesen</Checkbox>
-          <Checkbox value="write">Schreiben</Checkbox>
+          <Label>Clearance</Label>
+          <Checkbox value="archives">Jedi Archives</Checkbox>
+          <Checkbox value="command">Command deck</Checkbox>
         </CheckboxGroup>
-        <Select name="select" aria-label="Select">
-          <Option value="Foo" textValue="Foo">
-            Foo
+        <Select name="select" aria-label="Homeworld">
+          <Option value="Tatooine" textValue="Tatooine">
+            Tatooine
           </Option>
-          <Option value="Bar" textValue="Bar">
-            Bar
+          <Option value="Alderaan" textValue="Alderaan">
+            Alderaan
           </Option>
-          <Option value="Baz" textValue="Baz">
-            Baz
+          <Option value="Hoth" textValue="Hoth">
+            Hoth
           </Option>
         </Select>
-        <TextField name="test" aria-label="Test" />
+        <TextField name="test" aria-label="Mission name" />
         <FileField multiple name="certificates">
-          <Label>Zertifikate</Label>
+          <Label>Holocrons</Label>
           <Button variant="outline" color="secondary">
-            Auswählen
+            Choose
           </Button>
         </FileField>
         <Button type="submit" isPending={isPending}>

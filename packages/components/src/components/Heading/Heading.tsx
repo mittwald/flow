@@ -1,18 +1,23 @@
-export * from "./view";
+import type { AlphaColor, PropsWithElementType } from "@/lib/types/props";
 import styles from "./Heading.module.scss";
+import { styleClassname } from "@/lib/scss/selectors";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
-export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
+export interface HeadingProps
+  extends
+    Aria.HeadingProps,
+    FlowComponentProps,
+    PropsWithElementType<"span" | "p"> {
   /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
-  /** The color of the heading. @default "primary" */
-  color?: "primary" | "danger" | "unavailable" | "dark" | "light";
+  /** The color of the heading. @default "default" */
+  color?: "default" | "danger" | "unavailable" | AlphaColor;
   /** The text-wrap property of the text. @default undefined */
   wrap?: "wrap" | "balance";
 }
@@ -23,20 +28,24 @@ export const Heading = flowComponent("Heading", (props) => {
     children,
     className,
     level = 2,
-    color = "primary",
+    color = "default",
     wrap,
     size,
     ref,
+    elementType,
     ...rest
   } = props;
 
   const rootClassName = clsx(
     styles.heading,
-    size && styles[size],
-    styles[color],
+    size && styles[`size-${size}`],
+    color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
+    elementType && styleClassname(styles, `h${level}`),
     className,
   );
+
+  const Element = elementType ?? Aria.Heading;
 
   const propsContext: PropsContext = {
     Icon: {
@@ -44,15 +53,24 @@ export const Heading = flowComponent("Heading", (props) => {
       className: styles.icon,
     },
     AlertBadge: {
-      tunnelId: "headingContent",
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
     },
     Badge: {
-      tunnelId: "headingContent",
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
     },
     ContextualHelpTrigger: {
-      tunnelId: "headingContent",
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
       Button: {
-        tunnelId: null,
+        tunnel: null,
       },
     },
     AlertText: {
@@ -64,19 +82,12 @@ export const Heading = flowComponent("Heading", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <Aria.Heading
-          level={level}
-          className={rootClassName}
-          {...rest}
-          ref={ref}
-        >
-          <span className={styles.headingText}>{children}</span>
-          <span className={styles.headingContent}>
-            <TunnelExit id="headingContent" />
-          </span>
-        </Aria.Heading>
-      </TunnelProvider>
+      <Element className={rootClassName} {...rest} ref={ref} level={level}>
+        <span className={styles.headingText}>{children}</span>
+        <span className={styles.headingContent}>
+          <UiComponentTunnelExit id="headingContent" component="Heading" />
+        </span>
+      </Element>
     </PropsContextProvider>
   );
 });

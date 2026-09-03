@@ -1,8 +1,14 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
-const colors = ["primary", "dark", "light"] as const;
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "HeaderNavigation (%s)",
@@ -24,10 +30,10 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <HeaderNavigation color={color}>
-                <Link>Link</Link>
+                <Link>{firstLetterToUppercase(color)}</Link>
                 <Link aria-current="page">Current</Link>
                 <Button>
                   <IconSearch />

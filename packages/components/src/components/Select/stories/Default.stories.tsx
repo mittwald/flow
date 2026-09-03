@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Select from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
@@ -13,19 +12,34 @@ import {
 import { dummyText } from "@/lib/dev/dummyText";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
   component: Select,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+    selectionMode: "single",
+  },
+  argTypes: {
+    selectionMode: {
+      control: "inline-radio",
+      options: ["single", "multiple"],
+    },
+  },
   render: (props) => (
     <Select {...props}>
-      <Label>App</Label>
-      <Option>WordPress</Option>
-      <Option>TYPO3</Option>
-      <Option>Contao</Option>
-      <Option>Drupal</Option>
-      <Option>Joomla!</Option>
-      <Option>Matomo</Option>
+      <Label>Starship</Label>
+      <Option>
+        Millennium Falcon <Badge>Latest</Badge>
+      </Option>
+      <Option>X-Wing</Option>
+      <Option>TIE Fighter</Option>
+      <Option>Star Destroyer</Option>
+      <Option>Y-Wing</Option>
+      <Option>Slave I</Option>
     </Select>
   ),
 };
@@ -35,41 +49,31 @@ type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Required: Story = {
-  args: { isRequired: true },
-};
-
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
-
 export const WithFieldDescription: Story = {
   render: (props) => (
     <Select {...props}>
-      <Label>App</Label>
-      <Option>WordPress</Option>
-      <Option>TYPO3</Option>
-      <Option>Contao</Option>
-      <Option>Drupal</Option>
-      <Option>Joomla!</Option>
-      <Option>Matomo</Option>
-      <FieldDescription>Select an app</FieldDescription>
+      <Label>Starship</Label>
+      <Option>Millennium Falcon</Option>
+      <Option>X-Wing</Option>
+      <Option>TIE Fighter</Option>
+      <Option>Star Destroyer</Option>
+      <Option>Y-Wing</Option>
+      <Option>Slave I</Option>
+      <FieldDescription>Select a starship</FieldDescription>
     </Select>
   ),
 };
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <Select {...props} defaultSelectedKey="WordPress">
-      <Label>App</Label>
-      <Option value="WordPress">WordPress</Option>
-      <Option value="TYPO3">TYPO3</Option>
-      <Option value="Contao">Contao</Option>
-      <Option value="Drupal">Drupal</Option>
-      <Option value="Joomla!">Joomla!</Option>
-      <Option value="Matomo">Matomo</Option>
+    <Select {...props} defaultValue="Millennium Falcon">
+      <Label>Starship</Label>
+      <Option value="Millennium Falcon">Millennium Falcon</Option>
+      <Option value="X-Wing">X-Wing</Option>
+      <Option value="TIE Fighter">TIE Fighter</Option>
+      <Option value="Star Destroyer">Star Destroyer</Option>
+      <Option value="Y-Wing">Y-Wing</Option>
+      <Option value="Slave I">Slave I</Option>
     </Select>
   ),
 };
@@ -77,14 +81,14 @@ export const WithDefaultValue: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <Select {...props} isInvalid isRequired>
-      <Label>App</Label>
-      <Option>WordPress</Option>
-      <Option>TYPO3</Option>
-      <Option>Contao</Option>
-      <Option>Drupal</Option>
-      <Option>Joomla!</Option>
-      <Option>Matomo</Option>
-      <FieldError>Select an app to continue</FieldError>
+      <Label>Starship</Label>
+      <Option>Millennium Falcon</Option>
+      <Option>X-Wing</Option>
+      <Option>TIE Fighter</Option>
+      <Option>Star Destroyer</Option>
+      <Option>Y-Wing</Option>
+      <Option>Slave I</Option>
+      <FieldError>Select a starship to continue</FieldError>
     </Select>
   ),
 };
@@ -104,6 +108,7 @@ export const WithNumbers: Story = {
 export const WithCountryOptions: Story = {
   render: (props) => (
     <Select {...props}>
+      <Label>Country</Label>
       <CountryOptions />
     </Select>
   ),
@@ -112,6 +117,7 @@ export const WithCountryOptions: Story = {
 export const WithCountryOptionsAndCustomSort: Story = {
   render: (props) => (
     <Select {...props}>
+      <Label>Country</Label>
       <CountryOptions sortBy={sortByDachFirst} />
     </Select>
   ),
@@ -121,7 +127,7 @@ export const WithContextualHelp: Story = {
   render: (props) => (
     <Select {...props}>
       <Label>
-        App
+        Starship
         <ContextualHelpTrigger>
           <Button />
           <ContextualHelp>
@@ -129,12 +135,12 @@ export const WithContextualHelp: Story = {
           </ContextualHelp>
         </ContextualHelpTrigger>
       </Label>
-      <Option>WordPress</Option>
-      <Option>TYPO3</Option>
-      <Option>Contao</Option>
-      <Option>Drupal</Option>
-      <Option>Joomla!</Option>
-      <Option>Matomo</Option>
+      <Option>Millennium Falcon</Option>
+      <Option>X-Wing</Option>
+      <Option>TIE Fighter</Option>
+      <Option>Star Destroyer</Option>
+      <Option>Y-Wing</Option>
+      <Option>Slave I</Option>
     </Select>
   ),
 };

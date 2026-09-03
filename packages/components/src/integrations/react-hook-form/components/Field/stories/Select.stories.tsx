@@ -38,7 +38,7 @@ const meta: Meta<typeof Field> = {
     const form = useForm<Values>({
       defaultValues: {
         app: "",
-        appDefaultValue: "wordpress",
+        appDefaultValue: "falcon",
         appRequired: "",
       },
     });
@@ -50,36 +50,36 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="app">
             <Select>
-              <Label>App</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Label>Starship</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
 
           <Field name="appDefaultValue">
             <Select>
-              <Label>App</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Label>Starship</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
 
           <Field
             name="appRequired"
-            rules={{ required: "Please select an app" }}
+            rules={{ required: "Please select a starship" }}
           >
             <Select>
-              <Label>App</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Label>Starship</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -105,21 +105,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <Select>
+        <Section>
+          <Field name="field">
+            <Select>
+              <Label>Field</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
+            </Select>
+          </Field>
+          <Select isInvalid>
             <Label>Field</Label>
-            <Option value="wordpress">WordPress</Option>
-            <Option value="typo3">TYPO3</Option>
-            <Option value="magento">Magento</Option>
+            <Option value="falcon">Millennium Falcon</Option>
+            <Option value="xwing">X-Wing</Option>
+            <Option value="tie">TIE Fighter</Option>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </Select>
-        </Field>
-        <Select isInvalid>
-          <Label>Field</Label>
-          <Option value="wordpress">WordPress</Option>
-          <Option value="typo3">TYPO3</Option>
-          <Option value="magento">Magento</Option>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </Select>
+        </Section>
       </Form>
     );
   },
@@ -130,31 +132,41 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <Select>
             <Label>Field</Label>
-            <Option value="wordpress">WordPress</Option>
-            <Option value="typo3">TYPO3</Option>
-            <Option value="magento">Magento</Option>
+            <Option value="falcon">Millennium Falcon</Option>
+            <Option value="xwing">X-Wing</Option>
+            <Option value="tie">TIE Fighter</Option>
           </Select>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

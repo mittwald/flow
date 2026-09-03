@@ -1,44 +1,82 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test } from "vitest";
-
-const colors = ["default", "dark", "light"] as const;
+import { userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "CodeBlock (%s)",
   async ({
     testScreenshot,
     render,
-    components: { CodeBlock, Flex, Wrap, AccentBox, Color },
+    components: { CodeBlock, Flex, Color },
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
-              <CodeBlock
-                color={color}
-                copyable
-                showLineNumbers
-                code={`{
+        <CodeBlock
+          copyable
+          language="json"
+          showLineNumbers
+          code={`{
     "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
-    "name": "My Project"
+    "name": "Death Star"
 }`}
-              />
-            </AccentBox>
-          </Wrap>
-        ))}
+        />
+
         <CodeBlock>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          A long time ago in a galaxy far, far away, the Rebels.
           <br />
           <Color color="danger">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            A long time ago in a galaxy far, far away, the Rebels.
           </Color>
-          <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <br />A long time ago in a galaxy far, far away, the Rebels.
         </CodeBlock>
       </Flex>,
     );
 
     await testScreenshot("CodeBlock");
+  },
+);
+
+// Element tree comparable from alpha.883.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
+  "CodeBlock truncated (%s)",
+  async ({ testScreenshot, render, components: { CodeBlock } }) => {
+    await render(
+      <CodeBlock
+        language="json"
+        code={`{
+  "name": "Death Star"
+  "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
+  "shortId": "p-123456",
+  "createdAt": "2025-08-25T06:11:21.000Z",
+  "enabled": true,
+  "status": "ready",
+  "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
+  "serverShortId": "s-123456",
+}`}
+        truncateLines={4}
+      />,
+    );
+
+    await userEvent.keyboard("{tab}");
+
+    /*
+     * Both captures below encode the toggle's focus ring, and toggling swaps
+     * its label, so React re-renders the button the focus sits on. Wait for the
+     * focus each time instead of racing it — see `@/tests/lib/scenarioFocus`.
+     */
+    await waitForFocusInTheScenario();
+
+    await userEvent.keyboard("{enter}");
+
+    await waitForFocusInTheScenario();
+
+    await testScreenshot("CodeBlock truncated - expanded");
+
+    await userEvent.keyboard("{enter}");
+
+    await waitForFocusInTheScenario();
+
+    await testScreenshot("CodeBlock truncated - collapsed");
   },
 );

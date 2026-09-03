@@ -16,13 +16,14 @@ export interface DoAndDontTileProps extends PropsWithChildren {
   text?: string;
   type?: "do" | "dont" | "info" | "mstudio";
   zoom?: number;
-  bgColor?: "default" | "dark" | "light";
+  bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
   heading?: string;
   mobile?: boolean;
+  row?: boolean;
 }
 
 export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
-  const { code, text, type, zoom, bgColor, heading, mobile } = props;
+  const { code, text, type, heading, mobile, ...rest } = props;
 
   const headingIcon =
     type === "do" ? (
@@ -50,9 +51,8 @@ export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
           editorDisabled
           code={code}
           className={clsx(styles.doAndDontCode, mobile && styles.mobileCode)}
-          zoom={zoom}
-          bgColor={bgColor}
           mobile={mobile}
+          {...rest}
         />
       )}
       {text && (

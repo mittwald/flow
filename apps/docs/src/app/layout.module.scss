@@ -1,7 +1,7 @@
 .body {
   --header-height: 72px;
 
-  background-color: var(--neutral--color--300);
+  background-color: var(--neutral--color--200);
   isolation: isolate;
 
   * {
@@ -9,47 +9,10 @@
   }
 }
 
-.wave {
+.background {
   position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  min-height: 400px;
-  object-fit: cover;
-}
-
-.headerNavigation {
-  padding-block: var(--layout-card--padding);
-}
-
-.header {
-  background-color: var(--color--hosting-blue--200);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-
-  &.scrolled {
-    box-shadow: var(--shadow--content);
-  }
-}
-
-.headerContent {
-  max-width: 1800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding-inline: calc(var(--size-px--xl) + var(--size-px--l));
-  align-items: center;
-}
-
-.mobileNavigation {
-  display: none;
-}
-
-.logo {
-  height: var(--size-px--xl);
+  inset: 0;
+  background: var(--color--background-gradient);
 }
 
 .wrapper {
@@ -62,8 +25,8 @@
 .mainWrapper {
   display: flex;
   position: relative;
+  padding-block-start: var(--size-px--m);
   padding-inline: var(--size-px--xl);
-  padding-top: var(--size-px--m);
   column-gap: var(--size-px--l);
   width: 1800px;
   max-width: 100%;
@@ -86,20 +49,32 @@
   height: fit-content;
 }
 
+.pageHeading {
+  // This anchor means "the top of the page". The heading always sits within the
+  // first screenful, so a full-viewport offset clamps the jump to 0 — a fixed
+  // length would need re-tuning whenever the header or page padding changes.
+  scroll-margin-top: 100vh;
+}
+
 .main {
   display: flex;
   flex-direction: column;
   row-gap: var(--size-px--m);
   flex-grow: 1;
   min-width: 0;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
 }
 
-.tabsContainer {
+.pageContainer {
   min-width: 0;
   width: 100%;
 }
 
-.tabs {
+.pageCard {
   flex-grow: 1;
   min-width: 0;
 }
@@ -108,54 +83,38 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--section--spacing);
-
-  > h3,
-  > h4 {
-    margin-top: var(--size-px--m);
-  }
 }
 
-.topContent {
-  width: 100%;
-}
-
-.homeTopLayoutCard.homeTopLayoutCard {
-  padding: 0;
-
-  .homeImage {
-    border-bottom: var(--separator--height) var(--border-style--default)
-      var(--separator--color);
+/*
+ * Wide screens give the main navigation more room. The extra 80px go to the
+ * wrapper, so the content keeps the width it has next to a 290px navigation.
+ */
+@media (min-width: 1900px) {
+  .mainWrapper {
+    width: 1880px;
   }
 
-  .homeTopContent {
-    padding: var(--layout-card--padding);
+  .mainNavigation {
+    width: 370px;
   }
 }
 
 @media (max-width: 1400px) {
   .mainNavigation,
   .mainNavigation,
-  .headerNavigation,
   .anchorNavigation {
     display: none !important;
   }
+}
 
-  .mobileNavigation {
-    display: flex;
-    padding-block: var(--size-px--m);
-  }
-
-  .mobileNavigationOffCanvas {
-    h3 {
-      display: none;
-    }
-  }
-
-  .headerContent {
-    padding-inline: var(--size-px--xl);
-  }
-
+@media (max-width: 768px) {
   .mainWrapper {
     padding-inline: var(--size-px--m);
+  }
+}
+
+[data-theme="dark"] {
+  .body {
+    background-color: #121518;
   }
 }

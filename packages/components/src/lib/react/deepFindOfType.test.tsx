@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { deepFilterByType, deepFindOfType } from "./deepFindOfType";
 import { describe, expect, test } from "vitest";
 

@@ -1,35 +1,63 @@
-import type { FC } from "react";
-import React from "react";
+import type { FC, ReactElement } from "react";
 import {
   IconDownload,
   IconExternalLink,
 } from "@/components/Icon/components/icons";
 import type { LinkProps } from "@/components/Link";
 import locales from "../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import styles from "./LinkIcon.module.scss";
 
-export const LinkIcon: FC<LinkProps> = (props) => {
-  const { unstyled, target, download } = props;
+export const LinkIcon: FC<LinkProps & { withZeroWidthJoiner?: boolean }> = (
+  props,
+) => {
+  const {
+    unstyled,
+    target,
+    download,
+    withZeroWidthJoiner = false,
+    children,
+  } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
-  if (unstyled) {
-    return null;
-  }
+  const stringFormatter = useLocalizedStringFormatter(locales, "Link");
+  let icon: ReactElement | null = null;
 
   if (download) {
-    return (
-      <IconDownload aria-label={stringFormatter.format("link.download")} />
+    icon = (
+      <IconDownload
+        className={styles.linkIcon}
+        aria-label={stringFormatter.format("download")}
+      />
+    );
+  } else if (target === "_blank") {
+    icon = (
+      <IconExternalLink
+        className={styles.linkIcon}
+        aria-label={stringFormatter.format("external")}
+      />
     );
   }
 
-  if (target === "_blank") {
+  if (unstyled) {
+    return children;
+  }
+
+  if (withZeroWidthJoiner) {
     return (
-      <IconExternalLink aria-label={stringFormatter.format("link.external")} />
+      <span className={styles.linkIcon}>
+        {"\u200D"}
+        {icon}
+        {children}
+      </span>
     );
   }
 
-  return null;
+  return (
+    <>
+      {icon}
+      {children}
+    </>
+  );
 };
 
 export default LinkIcon;

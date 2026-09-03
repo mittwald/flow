@@ -2,7 +2,6 @@
 import {
   Button,
   Heading,
-  LayoutCard,
   Section,
 } from "@mittwald/flow-remote-react-components";
 import { Title } from "@mittwald/mstudio-ext-react-components";
@@ -13,19 +12,19 @@ export default function Page() {
   const router = useRouter();
   const [isNavigating, startNavigating] = useTransition();
   return (
-    <LayoutCard>
-      <Title>Passwortschutz</Title>
+    <>
+      <Title>Fleet</Title>
       <Section>
-        <Heading>Page 1</Heading>
+        <Heading>Fleet</Heading>
         <Button
           isPending={isNavigating}
           onPress={() =>
             startNavigating(() => router.push("/remote/navigation/subpage"))
           }
         >
-          To Page 2
+          Open Death Star
         </Button>
       </Section>
-    </LayoutCard>
+    </>
   );
 }

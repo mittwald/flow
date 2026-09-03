@@ -1,12 +1,17 @@
-import type { ExtBridgeConfig } from "@/config/types";
+import type { ExtBridgeConfig, ExtBridgeConfigInput } from "@/config/types";
 import type { readinessApi } from "@/readiness";
-export type { ExtBridgeConfig } from "@/config/types";
+export type {
+  ExtBridgeConfig,
+  ExtBridgeConfigInput,
+  ExtBridgeConfigInputWithoutHostConfig,
+  HostConfig,
+} from "@/config/types";
 
 type ReadinessApi = typeof readinessApi;
 
 export interface ExtBridgeConnectionApi {
   getSessionToken: () => Promise<string>;
-  getConfig: () => Promise<ExtBridgeConfig>;
+  getConfig: () => Promise<ExtBridgeConfigInput>;
 }
 
 export interface ExtBridge {

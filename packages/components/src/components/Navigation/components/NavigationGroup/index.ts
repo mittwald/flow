@@ -1,3 +1,3 @@
 export * from "./view";
 export { default } from "./NavigationGroup";
-export { NavigationGroup, type NavigationGroupProps } from "./NavigationGroup";
+export { type NavigationGroupProps, NavigationGroup } from "./NavigationGroup";

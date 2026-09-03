@@ -3,11 +3,22 @@
   flex-direction: column;
   row-gap: var(--section--spacing);
   container-type: inline-size;
+  width: 100%;
 
   > form {
     display: flex;
     flex-direction: column;
     row-gap: var(--section--spacing);
+  }
+
+  /* Children that render nothing still leave the element behind — the guard in
+     Section.tsx only sees the child, not its output (a boundary returning null,
+     an empty fragment, a map over an empty array). Collapse it so it neither
+     draws its own separator nor claims section-to-section spacing, while
+     staying in the sibling chain so the next section keeps exactly one
+     separator. */
+  &:empty {
+    display: none;
   }
 
   + .section {

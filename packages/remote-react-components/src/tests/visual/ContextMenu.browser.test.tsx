@@ -1,16 +1,51 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
+// Basic context menu — only long-standing components, opened via interaction.
+// Cross-version safe (works on every published version).
 test.each(testEnvironments)(
   "ContextMenu (%s)",
   async ({
     testScreenshot,
     render,
     components: {
-      ContextMenu,
       ContextMenuTrigger,
       Button,
+      ContextMenu,
+      MenuItem,
+      Separator,
+    },
+  }) => {
+    await render(
+      <ContextMenuTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <ContextMenu>
+          <MenuItem>Link 1</MenuItem>
+          <MenuItem>Link 2</MenuItem>
+          <Separator />
+          <MenuItem isDisabled>Disabled</MenuItem>
+        </ContextMenu>
+      </ContextMenuTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+
+    await testScreenshot("ContextMenu - opened");
+  },
+);
+
+// Full-featured menu (sections, selection modes, icon, badge, Kbd shortcut).
+// Kbd is available from alpha.791.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
+  "ContextMenu sections and shortcuts (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      ContextMenuTrigger,
+      Button,
+      ContextMenu,
       ContextMenuSection,
       Heading,
       MenuItem,
@@ -19,6 +54,8 @@ test.each(testEnvironments)(
       Text,
       Avatar,
       Initials,
+      Kbd,
+      Badge,
     },
   }) => {
     await render(
@@ -28,23 +65,27 @@ test.each(testEnvironments)(
           <ContextMenuSection>
             <MenuItem>
               <Avatar>
-                <Initials>Max Mustermann</Initials>
+                <Initials>Luke Skywalker</Initials>
               </Avatar>
             </MenuItem>
-            <Heading>Max Mustermann</Heading>
+            <Heading>Luke Skywalker</Heading>
           </ContextMenuSection>
           <Separator />
+
           <ContextMenuSection selectionMode="switch">
             <MenuItem>Switch</MenuItem>
           </ContextMenuSection>
           <Separator />
           <ContextMenuSection>
             <Heading>Heading</Heading>
-            <MenuItem href="#">
+            <MenuItem>
               <IconStar />
               <Text>Link 1</Text>
+              <Badge>Badge</Badge>
             </MenuItem>
-            <MenuItem href="#">Link 2</MenuItem>
+            <MenuItem>
+              Link 2<Kbd keys={["mod", "x"]} />
+            </MenuItem>
           </ContextMenuSection>
           <Separator />
           <ContextMenuSection
@@ -72,10 +113,8 @@ test.each(testEnvironments)(
       </ContextMenuTrigger>,
     );
 
-    const trigger = page.getByTestId("trigger");
+    await page.getByTestId("trigger").click();
 
-    await trigger.click();
-
-    await testScreenshot("ContextMenu - opened");
+    await testScreenshot("ContextMenu sections and shortcuts");
   },
 );

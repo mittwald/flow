@@ -11,6 +11,7 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
 
   static override get remoteProperties() {
     return {
+      "aria-current": {},
       "aria-disabled": {},
       "aria-label": {},
       className: {},
@@ -31,6 +32,7 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
       rel: {},
       routerOptions: {},
       selectionVariant: {},
+      shouldCloseOnSelect: {},
       target: {},
       textValue: {},
       translate: {},
@@ -49,12 +51,15 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
       animationStartCapture: {},
       auxClick: {},
       auxClickCapture: {},
+      blur: {},
       click: {},
       clickCapture: {},
       contextMenu: {},
       contextMenuCapture: {},
       doubleClick: {},
       doubleClickCapture: {},
+      focus: {},
+      focusChange: {},
       gotPointerCapture: {},
       gotPointerCaptureCapture: {},
       hoverChange: {},

@@ -1,17 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Label } from "@/components/Label";
 import { FileField } from "@/components/FileField";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
-import { IconPaperclip } from "@tabler/icons-react";
-import { Icon } from "@/components/Icon";
+import { IconAttachment } from "../../Icon/components/icons";
 
 const meta: Meta<typeof FileField> = {
   title: "Form Controls/FileField",
   component: FileField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <FileField {...props}>
       <Label>Certificate</Label>
@@ -28,11 +32,7 @@ type Story = StoryObj<typeof FileField>;
 
 export const Default: Story = {};
 
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
-
-export const WithDescription: Story = {
+export const WithFieldDescription: Story = {
   render: (props) => (
     <FileField {...props}>
       <Label>Certificate</Label>
@@ -44,7 +44,7 @@ export const WithDescription: Story = {
   ),
 };
 
-export const WithError: Story = {
+export const WithFieldError: Story = {
   render: (props) => (
     <FileField {...props} isInvalid>
       <Label>Certificate</Label>
@@ -60,9 +60,7 @@ export const IconButton: Story = {
   render: (props) => (
     <FileField {...props}>
       <Button variant="soft" aria-label="Select certificate">
-        <Icon>
-          <IconPaperclip />
-        </Icon>
+        <IconAttachment />
       </Button>
     </FileField>
   ),

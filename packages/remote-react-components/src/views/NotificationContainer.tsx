@@ -1,4 +1,4 @@
-import { useNotificationController } from "@mittwald/flow-react-components";
+import { useNotificationController } from "@mittwald/flow-react-components/flr-universal";
 import { ControlledNotification } from "@mittwald/flow-react-components/internal";
 import { type FC } from "react";
 

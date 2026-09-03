@@ -8,15 +8,17 @@ import {
 export const fileListSerializer = new Serializer<FileList, SerializedFile[]>({
   name: "FileList",
   serialize: {
-    isApplicable: (something) => {
-      return something instanceof FileList;
-    },
-    apply: (fileList) => Array.from(fileList).map(fileSerialize),
+    isApplicable: (something): something is FileList =>
+      something instanceof FileList,
+    apply: async (fileList) =>
+      await Promise.all(Array.from(fileList, fileSerialize)),
   },
   deserialize: {
     apply: (arrayFiles) => {
       const dataTransfer = new DataTransfer();
-      arrayFiles.forEach((f) => dataTransfer.items.add(fileDeSerialize(f)));
+      for (const file of arrayFiles) {
+        dataTransfer.items.add(fileDeSerialize(file));
+      }
       return dataTransfer.files;
     },
   },

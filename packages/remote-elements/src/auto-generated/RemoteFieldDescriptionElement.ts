@@ -97,6 +97,7 @@ export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteField
       itemScope: {},
       itemType: {},
       lang: {},
+      noLigatures: {},
       nonce: {},
       part: {},
       popover: {},

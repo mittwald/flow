@@ -10,9 +10,10 @@ import { useAriaAnnounceSearchState } from "@/components/List/hooks/useAriaAnnou
 
 interface Props extends PropsWithClassName {
   search: Search<never>;
+  isDisabled?: boolean;
 }
 
-const autoSubmitTimeout = 800;
+const autoSubmitTimeout = 500;
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   const { onChange, value, autoSubmit = true, ...searchFieldProps } = props;
@@ -68,12 +69,14 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 };
 
 export const SearchField: FC<Props> = (props) => {
-  const { search } = props;
+  const { search, isDisabled } = props;
+
   const render = search.render ?? DefaultSearchFieldRender;
 
   return createElement(render, {
     value: search.value,
     onChange: search.setValue.bind(search),
+    isDisabled,
     ...search.textFieldProps,
   });
 };

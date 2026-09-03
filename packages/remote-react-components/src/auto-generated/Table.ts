@@ -30,6 +30,7 @@ export const Table = createFlowRemoteComponent(
       onContextMenuCapture: { event: "contextMenuCapture" } as never,
       onDoubleClick: { event: "doubleClick" } as never,
       onDoubleClickCapture: { event: "doubleClickCapture" } as never,
+      onExpandedChange: { event: "expandedChange" } as never,
       onGotPointerCapture: { event: "gotPointerCapture" } as never,
       onGotPointerCaptureCapture: {
         event: "gotPointerCaptureCapture",

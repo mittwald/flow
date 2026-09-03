@@ -1,0 +1,96 @@
+.wrapper {
+  gap: 64px;
+  padding-block: 128px;
+  width: 1500px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.top {
+  padding-bottom: 88px !important;
+}
+
+.logo {
+  width: 300px;
+  height: 100px;
+  max-width: 100%;
+}
+
+$release-tile-background-color: #6f459f;
+
+.releaseTile {
+  background-size: auto 240%;
+  background-color: $release-tile-background-color !important;
+  background-position: calc(100% + 86px) center;
+  padding: 0 !important;
+
+  :global(.flow--column-layout--column-layout-container),
+  :global(.flow--column-layout) {
+    height: 100%;
+  }
+}
+
+.releaseContent {
+  height: 100%;
+  border-radius: calc(var(--layout-card--corner-radius) - 2px);
+  padding: var(--layout-card--padding);
+  padding-inline-end: 64px;
+  width: max(80%, 300px);
+  background: linear-gradient(
+    to left,
+    rgba($release-tile-background-color, 0) 0%,
+    rgba($release-tile-background-color, 0.8) 20%
+  );
+}
+
+.imageTile {
+  position: relative;
+
+  .imageContainer {
+    max-height: 400px;
+    width: 100%;
+  }
+
+  :global(.flow--column-layout--column-layout-container),
+  :global(.flow--column-layout),
+  img {
+    height: 100%;
+    width: 100%;
+  }
+
+  :global(.flow--column-layout--column-layout-container) {
+    @container (max-width: 550px) {
+      :global(.flow--column-layout) {
+        flex-direction: column-reverse;
+        display: flex;
+      }
+
+      :global(.flow--section) {
+        width: 100%;
+      }
+    }
+  }
+
+  img {
+    border-radius: var(--corner-radius--m);
+    object-fit: cover;
+    min-height: 400px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  :global(.flow--column-layout) {
+    align-items: center;
+
+    // The copy starts at the top of the tile, not centered next to the image.
+    :global(.flow--section) {
+      align-self: start;
+    }
+  }
+}
+
+.imageTileIcon {
+  position: absolute;
+  top: var(--size-px--xl);
+  inset-inline-end: var(--size-px--xl);
+}

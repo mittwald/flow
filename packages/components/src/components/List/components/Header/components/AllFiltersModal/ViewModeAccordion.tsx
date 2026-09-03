@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import AccordionView from "@/views/AccordionView";
 import HeadingView from "@/views/HeadingView";
 import ContentView from "@/views/ContentView";
@@ -6,30 +6,30 @@ import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import { useList } from "@/components/List";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
-export const ViewModeAccordion: FC = () => {
+interface Props {
+  expandAccordions: boolean;
+}
+
+export const ViewModeAccordion: FC<Props> = (props) => {
+  const { expandAccordions } = props;
+
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const availableViewModes = useAvailableViewModes();
-  const selectedViewMode = list.viewMode;
-
-  if (availableViewModes.length <= 1) {
-    return null;
-  }
+  const selectedViewMode = list.viewMode.value;
 
   return (
-    <AccordionView>
-      <HeadingView>
-        {stringFormatter.format("list.settings.viewMode")}
-      </HeadingView>
+    <AccordionView defaultExpanded={expandAccordions}>
+      <HeadingView>{stringFormatter.format("settings.viewMode")}</HeadingView>
       <ContentView>
         <RadioGroupView value={selectedViewMode} m={[1, 1]}>
           {availableViewModes.map((v) => (
-            <RadioView key={v} value={v} onPress={() => list.setViewMode(v)}>
-              {stringFormatter.format(`list.settings.viewMode.${v}`)}
+            <RadioView key={v} value={v} onPress={() => list.viewMode.set(v)}>
+              {stringFormatter.format(`settings.viewMode.${v}`)}
             </RadioView>
           ))}
         </RadioGroupView>

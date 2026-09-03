@@ -1,10 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
-import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
@@ -12,15 +10,17 @@ import { Button } from "@/components/Button";
 const meta: Meta<typeof ContextualHelp> = {
   title: "Overlays/ContextualHelp",
   component: ContextualHelp,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="ranks & roles">
       <Button />
       <ContextualHelp {...props}>
-        <Heading>Rights & roles</Heading>
         <Text>
-          Each user profile is assigned a role in mStudio for each project
-          and/or organization. This allows you to work in a completely new and
-          modern way.
+          Each member of the Rebel Alliance is assigned a rank for every mission
+          and/or squadron. This allows the fleet to coordinate the fight against
+          the Empire in a completely new and modern way.
         </Text>
         <Link>Learn more</Link>
       </ContextualHelp>

@@ -2,9 +2,11 @@ import type { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
 import { OverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import type { FlowComponentName } from "@/components/propTypes";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { useIsPendingWithWait } from "@/components/Action/hooks/useIsPendingWithWait";
 
 type AriaComponentType = ComponentType<{
   isOpen?: boolean;
@@ -32,20 +34,28 @@ export const OverlayTrigger: FC<Props> = (props) => {
     children,
     controller: controllerFromProps,
   } = props;
+  const buttonPropsContext = useComponentPropsContext("Button");
 
   const newOverlayController = OverlayController.useNew({ isDefaultOpen });
   const overlayController = controllerFromProps ?? newOverlayController;
   const isOpen = overlayController.useIsOpen();
+  const isContentSuspended = overlayController.useIsContentSuspended();
+  const isPending = useIsPendingWithWait(isContentSuspended);
 
   const propsContext: PropsContext = {
     Button: {
       onPress: overlayController.open,
+      isPending,
+      isDisabled: Boolean(buttonPropsContext?.isDisabled) || isContentSuspended,
     },
   };
 
   return (
     <OverlayContextProvider type={overlayType} controller={overlayController}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider
+        props={propsContext}
+        dependencies={[isPending, overlayController]}
+      >
         <AriaOverlayTrigger isOpen={isOpen}>{children}</AriaOverlayTrigger>
       </PropsContextProvider>
     </OverlayContextProvider>

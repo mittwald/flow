@@ -6,7 +6,11 @@ import { usePromise } from "@mittwald/react-use-promise";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
-import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
+import {
+  IconDomain,
+  IconInvoice,
+  IconSubdomain,
+} from "@/components/Icon/components/icons";
 import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
@@ -31,6 +35,11 @@ import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
 import SkeletonText from "@/components/SkeletonText";
 import Skeleton from "@/components/Skeleton";
+import { DateTime } from "luxon";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { dummyText } from "@/lib/dev/dummyText";
+import IllustratedMessage from "@/components/IllustratedMessage";
+import { Suspense, type FC } from "react";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -57,6 +66,9 @@ const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
 const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const DomainList = typedList<Domain>();
     const availableTypes = usePromise(getTypes, []);
@@ -76,7 +88,7 @@ const meta: Meta<typeof List> = {
               <Button color="secondary" variant="soft" slot="secondary">
                 Download
               </Button>
-              <Button color="accent">Add</Button>
+              <Button color="success">Add</Button>
             </ActionGroup>
             <DomainList.LoaderAsync manualPagination manualSorting={false}>
               {loadDomains}
@@ -84,11 +96,17 @@ const meta: Meta<typeof List> = {
             <DomainList.Filter
               values={availableTypes}
               property="type"
-              mode="all"
               name="Type"
+              autosave
+              manualSave
               defaultSelected={["Domain"]}
             />
-
+            <DomainList.Filter
+              property="tld"
+              mode="one"
+              name="TLD"
+              priority="secondary"
+            />
             <DomainList.Search autoFocus />
             <DomainList.Sorting
               property="domain"
@@ -181,48 +199,6 @@ export const WithSummary: Story = {
       <Section>
         <Heading>Invoices</Heading>
         <InvoiceList.List batchSize={5} aria-label="Invoices">
-          <ListSummary>
-            <Flex justify="end">
-              <Text>
-                <strong>Total: 41,00 €</strong>
-              </Text>
-            </Flex>
-          </ListSummary>
-          <InvoiceList.StaticData
-            data={[
-              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
-              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
-              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
-            ]}
-          />
-          <InvoiceList.Item>
-            {(invoice) => (
-              <ListItemView>
-                <Heading>{invoice.id}</Heading>
-                <Text>
-                  {invoice.date} - {invoice.amount}
-                </Text>
-              </ListItemView>
-            )}
-          </InvoiceList.Item>
-        </InvoiceList.List>
-      </Section>
-    );
-  },
-};
-
-export const WithSummaryBottom: Story = {
-  render: () => {
-    const InvoiceList = typedList<{
-      id: string;
-      date: string;
-      amount: string;
-    }>();
-
-    return (
-      <Section>
-        <Heading>Invoices</Heading>
-        <InvoiceList.List batchSize={5} aria-label="Invoices">
           <ListSummary position="bottom">
             <Flex justify="end">
               <Text>
@@ -237,10 +213,10 @@ export const WithSummaryBottom: Story = {
               { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
             ]}
           />
-          <InvoiceList.Item>
+          <InvoiceList.Item textValue={(invoice) => invoice.id}>
             {(invoice) => (
               <ListItemView>
-                <Heading>{invoice.id}</Heading>
+                <Heading level={3}>{invoice.id}</Heading>
                 <Text>
                   {invoice.date} - {invoice.amount}
                 </Text>
@@ -252,45 +228,82 @@ export const WithSummaryBottom: Story = {
     );
   },
 };
-export const WithAccordion: Story = {
+interface Invoice {
+  id: string;
+  date: string;
+  amount: string;
+}
+
+const allInvoices: Invoice[] = Array.from({ length: 460 }, (_, i) => ({
+  id: `RG${100000 + i}`,
+  date: `${(i % 28) + 1}.9.2024`,
+  amount: `${(i % 50) + 1},00 €`,
+}));
+
+const loadInvoices: AsyncDataLoader<Invoice> = async (opts) => {
+  await new Promise((resolve) => setTimeout(resolve, 600));
+
+  const offset = opts?.pagination?.offset ?? 0;
+  const limit = opts?.pagination?.limit ?? allInvoices.length;
+
+  return {
+    data: allInvoices.slice(offset, offset + limit),
+    itemTotalCount: allInvoices.length,
+  };
+};
+
+export const InfiniteScroll: Story = {
   render: () => {
-    const InvoiceList = typedList<{
-      id: string;
-      date: string;
-      amount: string;
-    }>();
+    const InvoiceList = typedList<Invoice>();
 
     return (
       <Section>
         <Heading>Invoices</Heading>
-        <InvoiceList.List batchSize={5} aria-label="Invoices" accordion>
-          <InvoiceList.StaticData
-            data={[
-              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
-              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
-              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
-              { id: "RD100000", date: "1.9.2024", amount: "25,00 €" },
-              { id: "RD100001", date: "12.9.2024", amount: "12,00 €" },
-              { id: "RD100002", date: "3.10.2024", amount: "4,00 €" },
-            ]}
-          />
-          <InvoiceList.Item
-            defaultExpanded={(invoice) => invoice.id === "RG100001"}
-          >
+        <InvoiceList.List batchSize={20} aria-label="Invoices" infiniteScroll>
+          <InvoiceList.LoaderAsync manualPagination>
+            {loadInvoices}
+          </InvoiceList.LoaderAsync>
+          <InvoiceList.Item textValue={(invoice) => invoice.id}>
             {(invoice) => (
               <ListItemView>
-                <Heading>{invoice.id}</Heading>
-                <Content slot="bottom">
-                  <Text>
-                    {invoice.date} - {invoice.amount}
-                  </Text>
-                </Content>
+                <Heading level={3}>{invoice.id}</Heading>
+                <Text>
+                  {invoice.date} - {invoice.amount}
+                </Text>
               </ListItemView>
             )}
           </InvoiceList.Item>
-          <InvoiceList.Search />
         </InvoiceList.List>
       </Section>
+    );
+  },
+};
+
+export const WithAccordion: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+    }>();
+
+    return (
+      <List.List batchSize={5} aria-label="Invoices" accordion>
+        <List.StaticData
+          data={[{ id: "Tatooine" }, { id: "Hoth" }, { id: "Endor" }]}
+        />
+        <List.Item
+          textValue={(invoice) => invoice.id}
+          defaultExpanded={(invoice) => invoice.id === "Tatooine"}
+        >
+          {(invoice) => (
+            <ListItemView>
+              <Heading>{invoice.id}</Heading>
+              <Content slot="bottom">
+                <Text>{dummyText.long}</Text>
+              </Content>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
     );
   },
 };
@@ -302,118 +315,193 @@ const endlessPromise = new Promise(() => {
 export const LoadingView: Story = {
   render: () => {
     return (
-      <Section>
-        <Heading>Invoices</Heading>
-        <List aria-label="Invoices">
-          <ListLoaderHooks>
-            {() => {
-              throw endlessPromise;
-            }}
-          </ListLoaderHooks>
-          <ListItem
-            loadingView={
-              <ListItemView>
-                <Avatar>
-                  <Skeleton height="600px" width="600px" />
-                </Avatar>
-                <Heading>
-                  <SkeletonText width="10em" />
-                </Heading>
-              </ListItemView>
-            }
-            showTiles
-          >
-            {() => <ListItemView />}
-          </ListItem>
-          <Table>
-            <TableHeader>
-              <TableColumn>ID</TableColumn>
-              <TableColumn>Name</TableColumn>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
-                  {() => <Avatar />}
-                </TableCell>
-                <TableCell loadingView={<SkeletonText width="10em" />}>
-                  {() => <Text>Static text</Text>}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </List>
-      </Section>
+      <List aria-label="Invoices">
+        <ListLoaderHooks>
+          {() => {
+            throw endlessPromise;
+          }}
+        </ListLoaderHooks>
+        <ListItem
+          loadingView={
+            <ListItemView>
+              <Avatar>
+                <Skeleton height="600px" width="600px" />
+              </Avatar>
+              <Heading>
+                <SkeletonText width="10em" />
+              </Heading>
+            </ListItemView>
+          }
+          showTiles
+        >
+          {() => <ListItemView />}
+        </ListItem>
+        <Table>
+          <TableHeader>
+            <TableColumn>ID</TableColumn>
+            <TableColumn>Name</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
+                {() => <Avatar />}
+              </TableCell>
+              <TableCell loadingView={<SkeletonText width="10em" />}>
+                {() => <Text>Static text</Text>}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </List>
     );
   },
 };
 
-export const WithSecondaryFilters: Story = {
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const loadPlanets: AsyncDataLoader<string> = async () => {
+  await delay(2000);
+  const data = ["Tatooine", "Hoth", "Endor"];
+  return { data, itemTotalCount: data.length };
+};
+
+const loadPlanetName = async (planet: string) => {
+  await delay(2000);
+  return planet;
+};
+
+/** A tile without `ListItemView` and without a Suspense boundary of its own. */
+const PlanetTile: FC<{ planet: string }> = ({ planet }) => {
+  const name = usePromise(loadPlanetName, [planet]);
+  return <Heading>{name}</Heading>;
+};
+
+const PlanetTileSkeleton: FC = () => (
+  <Heading>
+    <SkeletonText width="6em" />
+  </Heading>
+);
+
+export const LoadingViewOfSuspendedItems: Story = {
   render: () => {
-    const DomainList = typedList<Domain>();
-    const availableTypes = usePromise(getTypes, []);
+    const PlanetList = typedList<string>();
 
     return (
-      <SettingsProvider type="localStorage" storageKey="listStory">
-        <Section>
-          <Heading>Domains</Heading>
-          <DomainList.List
-            batchSize={5}
-            aria-label="Domains"
-            settingStorageKey="domains"
+      <Suspense fallback={<Text>Loading planets…</Text>}>
+        <PlanetList.List aria-label="Planets" defaultViewMode="tiles">
+          <PlanetList.LoaderAsync disableInitialSuspenseBoundary>
+            {loadPlanets}
+          </PlanetList.LoaderAsync>
+          <PlanetList.Item
+            showList={false}
+            showTiles
+            textValue={(planet) => planet}
+            loadingView={<PlanetTileSkeleton />}
           >
-            <ActionGroup>
-              <Button color="secondary" variant="soft" slot="secondary">
-                Download
-              </Button>
-              <Button color="accent">Add</Button>
-            </ActionGroup>
-            <DomainList.LoaderAsync manualPagination manualSorting={false}>
-              {loadDomains}
-            </DomainList.LoaderAsync>
-            <DomainList.Filter
-              values={availableTypes}
-              property="type"
-              mode="all"
-              name="Type"
-              defaultSelected={["Domain"]}
-            />
-            <DomainList.Filter
-              property="tld"
-              mode="one"
-              name="TLD"
-              priority="secondary"
-            />
+            {(planet) => <PlanetTile planet={planet} />}
+          </PlanetList.Item>
+        </PlanetList.List>
+      </Suspense>
+    );
+  },
+};
 
-            <DomainList.Search autoFocus />
-            <DomainList.Sorting
-              property="domain"
-              name="Alphabetical"
-              directionName="ascending"
-              defaultEnabled
-            />
-            <DomainList.Sorting
-              property="domain"
-              name="Alphabetical"
-              directionName="descending"
-              direction="desc"
-            />
-            <DomainList.Sorting property="type" name="Typ" />
-            <DomainList.Sorting property="tld" name="TLD" />
+export const WithDateRangeFilter: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
 
-            <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
-              {(domain) => (
-                <ListItemView>
-                  <Avatar>
-                    <IconDomain />
-                  </Avatar>
-                  <Heading>{domain.hostname}</Heading>
-                  <Text>{domain.type}</Text>
-                </ListItemView>
-              )}
-            </DomainList.Item>
-          </DomainList.List>
-        </Section>
-      </SettingsProvider>
+    return (
+      <List.List batchSize={5} aria-label="Invoices">
+        <List.StaticData
+          data={[
+            { id: "RG100000", date: DateTime.now().toISO() },
+            { id: "RG100001", date: DateTime.now().minus({ day: 7 }).toISO() },
+            { id: "RG100002", date: DateTime.now().minus({ day: 14 }).toISO() },
+          ]}
+        />
+        <List.Filter
+          property="date"
+          name="Date"
+          mode="dateRange"
+          dateRangeOptions={{ maxValue: today(getLocalTimeZone()) }}
+        />
+        <List.Item textValue={(invoice) => invoice.id}>
+          {(invoice) => (
+            <ListItemView>
+              <Heading>{invoice.id}</Heading>
+              <Text>
+                {DateTime.fromISO(invoice.date).toFormat("dd.MM.yyyy")}
+              </Text>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const EmptyView: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    return (
+      <List.List aria-label="Invoices">
+        <List.StaticData data={[]} />
+        <List.Item textValue={(invoice) => invoice.id}>{() => null}</List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const CustomEmptyView: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    const emptyView = (
+      <IllustratedMessage>
+        <IconInvoice />
+        <Heading>No invoices found</Heading>
+        <Text>
+          If you haven't added any invoices yet, start by creating a new one.
+        </Text>
+      </IllustratedMessage>
+    );
+
+    return (
+      <List.List aria-label="Invoices" emptyView={emptyView}>
+        <List.Search />
+        <List.Filter property="id" name="ID" />
+        <List.StaticData data={[]} />
+        <List.Item showTiles textValue={(invoice) => invoice.id}>
+          {() => null}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const NoSearchResultView: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    return (
+      <List.List aria-label="Invoices">
+        <List.Filter property="id" name="ID" defaultSelected={["123"]} />
+        <List.StaticData data={[]} />
+        <List.Item textValue={(invoice) => invoice.id}>{() => null}</List.Item>
+      </List.List>
     );
   },
 };

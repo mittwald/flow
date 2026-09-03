@@ -1,15 +1,18 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconFilter as Tabler } from "@tabler/icons-react";
+import { IconFilter as IconImport } from "@mittwald/flow-icons";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
+import { useContextIcon } from "../IconSetProvider";
 
 export const IconFilter: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => {
+  const fromContext = useContextIcon("Filter");
+  const Icon = fromContext ?? IconImport;
   return (
     <View {...props}>
-      <Tabler />
+      <Icon />
     </View>
   );
 };

@@ -6,7 +6,7 @@ const sleep = () => new Promise((res) => setTimeout(res, 2000));
 
 export async function getServerData() {
   await sleep();
-  return "Data from server action";
+  return "Transmission: the Death Star is fully operational";
 }
 
 export async function login(formState: unknown | null, formData: FormData) {

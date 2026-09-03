@@ -1,0 +1,178 @@
+name: Build & Deploy Preview Apps
+
+on:
+  pull_request:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+# Shared with cleanup-previews.yml: closing a PR queues the cleanup in this same
+# group and cancels any still-running build+deploy for that PR, so the deploy
+# can no longer create preview resources after the cleanup has already run.
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: docs
+            context: apps/docs
+            image_suffix: docs
+          - app: storybook
+            context: packages/components
+            image_suffix: storybook
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - uses: ./.github/actions/prepare-workspace
+
+      # The image used to build this itself, which meant a second toolchain
+      # install and the whole dependency chain rebuilt against a cold nx cache —
+      # 80 of the 449 seconds a docs preview took. Here the restored cache serves
+      # that chain, and the image only packages what comes out.
+      #
+      # NEXT_BASE_PATH was a build-arg for the same reason; the value is the one
+      # the Dockerfile passed.
+      # Next keeps its compiler and render caches here. Restoring them is only
+      # possible now that the build runs on the runner rather than inside the
+      # image, where the directory started empty every time.
+      - name: Cache the Next.js build cache
+        if: matrix.image_suffix == 'docs'
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: apps/docs/.next/cache
+          key:
+            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
+            github.sha }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+            nextjs-${{ runner.os }}-
+
+      - name: Build the docs
+        if: matrix.image_suffix == 'docs'
+        run: pnpm nx build docs
+        env:
+          NEXT_BASE_PATH: ""
+
+      # Two commands because `build:storybook` declares no nx dependency on the
+      # components build — the same pair the Dockerfile ran.
+      - name: Build Storybook
+        if: matrix.image_suffix == 'storybook'
+        run: |
+          pnpm nx build components
+          pnpm nx build:storybook components
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docs
+        id: meta-docs
+        if: matrix.image_suffix == 'docs'
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images:
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
+
+      - name: Extract metadata for Storybook
+        id: meta-storybook
+        if: matrix.image_suffix == 'storybook'
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images:
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        with:
+          # The built output and the server config beside it, nothing else — see
+          # the context's own .dockerignore.
+          context: ${{ matrix.context }}
+          push: true
+          provenance: false # single-manifest image (as before v7); deploy pulls by ref
+          tags:
+            ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.tags ||
+            steps.meta-storybook.outputs.tags }}
+          labels:
+            ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.labels
+            || steps.meta-storybook.outputs.labels }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+
+    # Preview deploy needs the MITTWALD_* secrets, which GitHub withholds from
+    # Dependabot-triggered runs and from forks. Skip there so those PRs don't
+    # fail on missing secrets (the build job above still validates the images).
+    if: >
+      github.event_name == 'pull_request' &&
+      github.actor != 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy preview environment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+          MITTWALD_TLS_CERTIFICATE_ID_DOCS:
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
+          MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
+          # Derive the exact refs the build job pushed (type=ref,event=pr =>
+          # `pr-<number>`). Deriving them here avoids the matrix job-output
+          # clobber that left one of the two empty and half-deployed previews.
+          DOCS_IMAGE_TAG:
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/docs:pr-${{
+            github.event.pull_request.number }}
+          STORYBOOK_IMAGE_TAG:
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/storybook:pr-${{
+            github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          pnpm tsx dev/deploy-review.ts

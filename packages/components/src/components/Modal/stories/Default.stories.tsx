@@ -14,15 +14,15 @@ import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Section } from "@/components/Section";
-import Align from "@/components/Align";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
 import { RadioButton, RadioGroup } from "@/components/RadioGroup";
 import { DatePicker } from "@/components/DatePicker";
 import { FieldDescription } from "@/components/FieldDescription";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useTimeout } from "usehooks-ts";
+import { useModalController } from "@/lib/controller";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -33,35 +33,36 @@ const meta: Meta<typeof Modal> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m"],
+      options: ["s", "m", "l"],
+    },
+    offCanvasOrientation: {
+      control: "inline-radio",
+      options: ["left", "right"],
     },
   },
   args: {
     size: "s",
     offCanvas: false,
+    offCanvasOrientation: "right",
   },
   render: (props) => {
     return (
-      <Modal
-        {...props}
-        controller={useOverlayController("Modal", { isDefaultOpen: true })}
-      >
-        <Heading>New Customer</Heading>
+      <Modal {...props} isDefaultOpen>
+        <Heading>New Squadron</Heading>
         <Content>
           <Section>
             <Text>
-              Create a new customer to manage your projects, members and
-              payments.
+              Create a new squadron to manage your pilots, ships and missions.
             </Text>
             <TextField>
-              <Label>Customer name</Label>
+              <Label>Squadron name</Label>
             </TextField>
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Action onAction={asyncLongFunction}>
-              <Button color="accent">Create customer</Button>
+              <Button color="success">Create squadron</Button>
             </Action>
             <Button color="secondary" variant="soft">
               Abort
@@ -87,23 +88,14 @@ export const WithController: Story = {
 
     return (
       <>
-        <Button color="primary" onPress={controller.open}>
-          Create customer
-        </Button>
+        <Button onPress={controller.open}>Open controller</Button>
         <Modal {...props} controller={controller}>
-          <Heading>New Customer</Heading>
+          <Heading>Imperial Briefing</Heading>
           <Content>
-            <Text>
-              Create a new customer to manage your projects, members and
-              payments.
-            </Text>
-            <TextField>
-              <Label>Customer name</Label>
-            </TextField>
+            <Text>{dummyText.long}</Text>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
-              <Button color="accent">Create customer</Button>
+            <Action closeModal>
               <Button color="secondary" variant="soft">
                 Abort
               </Button>
@@ -118,16 +110,15 @@ export const WithController: Story = {
 export const WithTrigger: Story = {
   render: (props) => (
     <ModalTrigger>
-      <Button color="danger">Delete project</Button>
+      <Button>Trigger</Button>
       <Modal {...props}>
-        <Heading>Delete project</Heading>
+        <Heading>Imperial Briefing</Heading>
         <Content>
-          <Text>Are you sure you want to delete this project?</Text>
+          <Text>{dummyText.long}</Text>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
-            <Button color="danger">Delete project</Button>
-            <Button variant="soft" color="secondary">
+          <Action closeModal>
+            <Button color="secondary" variant="soft">
               Abort
             </Button>
           </Action>
@@ -137,47 +128,38 @@ export const WithTrigger: Story = {
   ),
 };
 
-export const Mobile: Story = {
-  parameters: { viewport: { defaultViewport: "mobile1" } },
-};
-
-export const OffCanvas: Story = {
-  args: { offCanvas: true },
-};
-
-export const OffCanvasOrientationLeft: Story = {
-  args: { offCanvas: true, offCanvasOrientation: "left" },
-};
-
-export const OffCanvasMobile: Story = {
-  args: { offCanvas: true },
-  parameters: { viewport: { defaultViewport: "mobile1" } },
-};
-
 export const WithForm: Story = {
   render: (props) => {
-    const form = useForm<{ name: string }>();
-    const modalController = useOverlayController("Modal");
+    const form = useForm<{ name: string }>({
+      defaultValues: { name: "" },
+    });
+    const controller = useModalController();
 
     return (
       <>
-        <Button color="accent" onPress={modalController.open}>
-          Add customer
+        <Button color="success" onPress={controller.open}>
+          Add pilot
         </Button>
 
-        <Modal {...props} controller={modalController}>
-          <Form form={form} onSubmit={() => modalController.close()}>
-            <Heading>Add Customer</Heading>
+        <Modal
+          {...props}
+          controller={controller}
+          onClose={() => {
+            form.reset();
+          }}
+        >
+          <Form form={form} onSubmit={() => () => controller.close()}>
+            <Heading>Add Pilot</Heading>
             <Content>
               <Field name="name" rules={{ required: "Please enter a name" }}>
                 <TextField>
-                  <Label>Customer name</Label>
+                  <Label>Pilot name</Label>
                 </TextField>
               </Field>
             </Content>
             <ActionGroup>
-              <SubmitButton color="accent">Submit</SubmitButton>
-              <Action closeOverlay="Modal">
+              <SubmitButton>Submit</SubmitButton>
+              <Action closeModal>
                 <Button variant="soft" color="secondary">
                   Abort
                 </Button>
@@ -190,90 +172,55 @@ export const WithForm: Story = {
   },
 };
 
-export const OffCanvasWithForm: Story = {
+export const WithConfirmOnClose: Story = {
   render: (props) => {
-    const form = useForm<{ name: string }>();
-    const modalController = useOverlayController("Modal");
+    const [squadronName, setSquadronName] = useState("");
 
     return (
-      <>
-        <Button color="accent" onPress={modalController.open}>
-          Add customer
-        </Button>
+      <ModalTrigger>
+        <Button>New squadron</Button>
 
-        <Modal offCanvas {...props} controller={modalController}>
-          <Form form={form} onSubmit={() => modalController.close()}>
-            <Heading>Add customer</Heading>
-            <Content>
-              <Field name="name" rules={{ required: "Please enter a name" }}>
-                <TextField>
-                  <Label>Customer name</Label>
-                </TextField>
-              </Field>
-            </Content>
-            <ActionGroup>
-              <SubmitButton color="accent">Submit</SubmitButton>
-              <Action closeOverlay="Modal">
-                <Button variant="soft" color="secondary">
-                  Abort
-                </Button>
-              </Action>
-            </ActionGroup>
-          </Form>
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const WithFormInside: Story = {
-  render: (props) => {
-    const form = useForm<{ name: string }>();
-    const modalController = useOverlayController("Modal");
-
-    return (
-      <>
-        <Button color="accent" onPress={modalController.open}>
-          Add nameservers
-        </Button>
-
-        <Modal {...props} controller={modalController}>
-          <Heading>Add nameservers</Heading>
+        <Modal
+          {...props}
+          confirmOnClose={squadronName !== ""}
+          onClose={() => setSquadronName("")}
+        >
+          <Heading>New Squadron</Heading>
           <Content>
-            <Form form={form} onSubmit={() => modalController.close()}>
-              <Align>
-                <Field name="name" rules={{ required: "Please enter a name" }}>
-                  <TextField>
-                    <Label>Nameservers</Label>
-                  </TextField>
-                </Field>
-                <SubmitButton>Add</SubmitButton>
-              </Align>
-            </Form>
+            <Section>
+              <Text>
+                Enter a name and close the modal with Escape or by clicking
+                outside: the unsaved changes have to be confirmed. Abort closes
+                immediately.
+              </Text>
+              <TextField value={squadronName} onChange={setSquadronName}>
+                <Label>Squadron name</Label>
+              </TextField>
+            </Section>
           </Content>
           <ActionGroup>
-            <Button color="accent">Submit</Button>
-            <Action closeOverlay="Modal">
-              <Button variant="soft" color="secondary">
+            <Action closeModal>
+              <Button color="success">Create squadron</Button>
+              <Button color="secondary" variant="soft">
                 Abort
               </Button>
             </Action>
           </ActionGroup>
         </Modal>
-      </>
+      </ModalTrigger>
     );
   },
 };
 
-export const LargeOffCanvas: Story = {
+export const WithColumnLayout: Story = {
   args: { size: "l", offCanvas: true },
   render: (props) => {
     return (
       <ModalTrigger>
-        <Button color="accent">Book tariff</Button>
+        <Button color="success">Charter a ship</Button>
 
         <Modal {...props}>
-          <Heading>Book tariff</Heading>
+          <Heading>Charter a ship</Heading>
 
           <ColumnLayout>
             <Section>
@@ -291,77 +238,10 @@ export const LargeOffCanvas: Story = {
           </ColumnLayout>
 
           <ActionGroup>
-            <Button color="accent">Submit</Button>
-            <Action closeOverlay="Modal">
+            <Button color="success">Submit</Button>
+            <Action closeModal>
               <Button variant="soft" color="secondary">
                 Abort
-              </Button>
-            </Action>
-          </ActionGroup>
-        </Modal>
-      </ModalTrigger>
-    );
-  },
-};
-
-export const WithSubHeadings: Story = {
-  args: { size: "l", offCanvas: true },
-  render: (props) => {
-    return (
-      <ModalTrigger {...props}>
-        <Button>Add SFTP user</Button>
-        <Modal size="m" offCanvas>
-          <Heading>Add SFTP user</Heading>
-          <Content>
-            <Section>
-              <Heading>Description</Heading>
-              <Text>
-                An SFTP user allows you to connect to your project, for example
-                to upload files.
-              </Text>
-              <ColumnLayout m={[1, 1]}>
-                <TextField isRequired>
-                  <Label>Name</Label>
-                </TextField>
-                <DatePicker>
-                  <Label>Expiration Date</Label>
-                  <FieldDescription>
-                    After this date, the SFTP user will be deleted.
-                  </FieldDescription>
-                </DatePicker>
-              </ColumnLayout>
-            </Section>
-            <Section>
-              <Heading>Permissions</Heading>
-              <Text>Select the permissions the SFTP user should have.</Text>
-              <RadioGroup s={[1, 1]} defaultValue="read&write">
-                <RadioButton value="write">
-                  <Text>Read Access</Text>
-                  <Content>The SFTP user can view and download files.</Content>
-                </RadioButton>
-                <RadioButton value="read&write">
-                  <Text>Read and Write Access</Text>
-                  <Content>
-                    The SFTP user can view, edit, upload, and download files.
-                  </Content>
-                </RadioButton>
-              </RadioGroup>
-            </Section>
-            <Section>
-              <Heading>Directory Selection</Heading>
-              <Text>
-                Specify the directory the SFTP user should have access to.
-              </Text>
-              <TextField isRequired>
-                <Label>Path</Label>
-              </TextField>
-            </Section>
-          </Content>
-          <ActionGroup>
-            <Action closeOverlay="Modal">
-              <Button color="accent">Create SFTP User</Button>
-              <Button variant="soft" color="secondary">
-                Cancel
               </Button>
             </Action>
           </ActionGroup>
@@ -384,11 +264,91 @@ export const WithSuspense: Story = {
     const [isLoading, setIsLoading] = useState(true);
     useTimeout(() => setIsLoading(false), 3000);
     return (
-      <Modal
-        {...props}
-        controller={useOverlayController("Modal", { isDefaultOpen: true })}
-      >
-        {isLoading ? <Loader /> : <Content>Loaded content!</Content>}
+      <Modal {...props} isOpen offCanvas>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <Heading>Imperial Briefing</Heading>
+            <Content>Transmission received!</Content>
+          </>
+        )}
+      </Modal>
+    );
+  },
+};
+
+export const LongContent: Story = {
+  render: (props) => {
+    const permissionsHeadingId = useId();
+
+    return (
+      <Modal {...props} isOpen>
+        <Heading>{dummyText.short}</Heading>
+        <Content>
+          <Section>
+            <Heading>Description</Heading>
+            <Text>
+              An SFTP user allows you to connect to your project, for example to
+              upload files.
+            </Text>
+            <ColumnLayout m={[1, 1]}>
+              <TextField isRequired>
+                <Label>Name</Label>
+              </TextField>
+              <DatePicker>
+                <Label>Expiration Date</Label>
+                <FieldDescription>
+                  After this date, the SFTP user will be deleted.
+                </FieldDescription>
+              </DatePicker>
+            </ColumnLayout>
+
+            <Heading id={permissionsHeadingId}>Permissions</Heading>
+            <Text>Select the permissions the SFTP user should have.</Text>
+            <RadioGroup
+              s={[1, 1]}
+              defaultValue="read&write"
+              aria-labelledby={permissionsHeadingId}
+            >
+              <RadioButton value="write">
+                <Text>Read Access</Text>
+                <Content>The SFTP user can view and download files.</Content>
+              </RadioButton>
+              <RadioButton value="read&write">
+                <Text>Read and Write Access</Text>
+                <Content>
+                  The SFTP user can view, edit, upload, and download files.
+                </Content>
+              </RadioButton>
+            </RadioGroup>
+
+            <Heading>Directory Selection</Heading>
+            <Text>
+              Specify the directory the SFTP user should have access to.
+            </Text>
+            <TextField isRequired>
+              <Label>Path</Label>
+            </TextField>
+
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+          </Section>
+        </Content>
+        <ActionGroup>
+          <Action closeModal>
+            <Button color="success">Create SFTP user</Button>
+            <Button variant="soft" color="secondary">
+              Abort
+            </Button>
+          </Action>
+        </ActionGroup>
       </Modal>
     );
   },

@@ -1,10 +1,9 @@
 import type { FC } from "react";
-import React from "react";
 import { IconFilter } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import { useList } from "@/components/List";
-import styles from "@/components/List/components/Header/Header.module.css";
-import { useLocalizedStringFormatter } from "react-aria";
+import styles from "@/components/List/components/Header/Header.module.scss";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 import ContentView from "@/views/ContentView";
 import SectionView from "@/views/SectionView";
@@ -18,22 +17,45 @@ import HeadingView from "@/views/HeadingView";
 import clsx from "clsx";
 import Modal, { ModalTrigger } from "@/components/Modal";
 import { SkeletonText } from "@/components/SkeletonText";
+import { useAvailableViewModes } from "../../lib";
 
-export const AllFiltersModal: FC = () => {
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const AllFiltersModal: FC<Props> = (props) => {
+  const { isDisabled } = props;
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const totalItemCount =
     list.batches.getTotalItemsCount() ?? list.items.entries.length;
 
+  const availableViewModes = useAvailableViewModes();
+
+  const accordionCount =
+    (availableViewModes.length > 1 ? 1 : 0) +
+    (list.sorting.length > 0 ? 1 : 0) +
+    list.filters.length;
+
+  const expandAccordions = accordionCount <= 2;
+
   const filterAccordions = list.filters.map((f) => (
-    <FilterAccordion filter={f} key={f.name} />
+    <FilterAccordion
+      filter={f}
+      key={f.name}
+      expandAccordions={expandAccordions}
+    />
   ));
 
   const accordions = [
-    <ViewModeAccordion key="viewMode" />,
-    <SortingAccordion key="sorting" />,
+    availableViewModes.length > 1 && (
+      <ViewModeAccordion key="viewMode" expandAccordions={expandAccordions} />
+    ),
+    list.sorting.length > 0 && (
+      <SortingAccordion key="sorting" expandAccordions={expandAccordions} />
+    ),
     ...filterAccordions,
   ].filter(Boolean);
 
@@ -58,8 +80,9 @@ export const AllFiltersModal: FC = () => {
         )}
         variant="outline"
         color="secondary"
+        isDisabled={isDisabled}
       >
-        <TextView>{stringFormatter.format("list.filters.all")}</TextView>
+        <TextView>{stringFormatter.format("filters.all")}</TextView>
         <IconFilter />
       </ButtonView>
 
@@ -67,13 +90,13 @@ export const AllFiltersModal: FC = () => {
         className={styles.hideOnDesktop}
         variant="outline"
         color="secondary"
-        aria-label={stringFormatter.format("list.filters.all")}
+        aria-label={stringFormatter.format("filters.all")}
       >
         <IconFilter />
       </ButtonView>
 
       <Modal offCanvas controller={controller}>
-        <HeadingView>{stringFormatter.format("list.filters.all")}</HeadingView>
+        <HeadingView>{stringFormatter.format("filters.all")}</HeadingView>
         <ContentView>
           <SectionView>{...accordions}</SectionView>
         </ContentView>
@@ -84,7 +107,7 @@ export const AllFiltersModal: FC = () => {
               {isInitiallyLoading ? (
                 <SkeletonText width="16ch" />
               ) : (
-                stringFormatter.format("list.results.show", {
+                stringFormatter.format("results.show", {
                   totalItemCount,
                 })
               )}
@@ -98,7 +121,7 @@ export const AllFiltersModal: FC = () => {
               controller.close();
             }}
           >
-            {stringFormatter.format("list.reset")}
+            {stringFormatter.format("reset")}
           </ButtonView>
         </ActionGroupView>
       </Modal>

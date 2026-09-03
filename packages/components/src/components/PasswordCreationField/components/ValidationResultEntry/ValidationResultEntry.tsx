@@ -1,12 +1,11 @@
 import type { FC } from "react";
-import React from "react";
 import { Text } from "@/components/Text";
-import { IconCircleCheck, IconCircleMinus } from "@tabler/icons-react";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import locales from "./../../locales/*.locale.json";
 import styles from "./ValidationResultEntry.module.scss";
 import type { RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
-import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
+import AlertIcon from "@/components/AlertIcon";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 interface Props {
   result: Partial<RuleValidationResult>;
@@ -16,13 +15,12 @@ interface Props {
 /** @internal */
 export const ValidationResultEntry: FC<Props> = (props) => {
   const { result, unspecifiedRules = false } = props;
-  const translate = useLocalizedContextStringFormatter(locales);
-
-  const icon = result.isValid ? (
-    <IconCircleCheck color="green" />
-  ) : (
-    <IconCircleMinus color="red" />
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
   );
+
+  const icon = <AlertIcon status={result.isValid ? "success" : "warning"} />;
 
   let [translationKey, translationValues] = generateValidationTranslation(
     result,

@@ -1,0 +1,21 @@
+{
+  "implicitDependencies": ["icons-base"],
+  "name": "icons-pro",
+  "projectType": "library",
+  "sourceRoot": "{workspaceRoot}/packages/icons-pro/src",
+  "targets": {
+    "build": {
+      "dependsOn": ["build:icons"],
+      "inputs": ["{projectRoot}/src/**/*"],
+      "outputs": ["{projectRoot}/dist/**/*"]
+    },
+    "build:icons": {
+      "cache": true,
+      "inputs": ["{workspaceRoot}/packages/icons-base/src/**/*"],
+      "outputs": [
+        "{projectRoot}/src/components/**/*",
+        "{projectRoot}/src/iconSet.ts"
+      ]
+    }
+  }
+}

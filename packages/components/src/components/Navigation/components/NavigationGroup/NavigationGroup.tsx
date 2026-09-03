@@ -1,26 +1,39 @@
-import type { ComponentProps, PropsWithChildren } from "react";
+import { type ComponentProps, type PropsWithChildren } from "react";
 import { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Accordion } from "@/components/Accordion";
 import { Content } from "@/components/Content";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
 
 export interface NavigationGroupProps
   extends
     PropsWithChildren<ComponentProps<"section">>,
     FlowComponentProps<HTMLElement> {
   collapsable?: boolean;
+  /**
+   * Whether a `collapsable` group is initially expanded.
+   *
+   * @default true
+   */
+  defaultExpanded?: boolean;
 }
 
 /** @flr-generate all */
 export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
-  const { children, className, collapsable, ...rest } = props;
+  const {
+    children,
+    className,
+    collapsable,
+    defaultExpanded = true,
+    "aria-label": ariaLabel,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(
     styles.navigationGroup,
@@ -32,45 +45,41 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
 
   const propsContext: PropsContext = {
     Label: {
-      id: generatedId,
+      id: ariaLabel ? undefined : generatedId,
       className: styles.label,
     },
     Link: {
-      tunnelId: "groupLinks",
+      tunnel: {
+        id: "groupLinks",
+        component: "NavigationGroup",
+      },
     },
   };
 
-  if (collapsable) {
-    return (
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <Accordion defaultExpanded className={rootClassName}>
-            {children}
-            <Content>
-              <ul>
-                <TunnelExit id="groupLinks" />
-              </ul>
-            </Content>
-          </Accordion>
-        </TunnelProvider>
-      </PropsContextProvider>
-    );
-  }
+  const collapsableUi = (
+    <Accordion defaultExpanded={defaultExpanded} className={rootClassName}>
+      {children}
+      <Content>
+        <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
+      </Content>
+    </Accordion>
+  );
+
+  const defaultUi = (
+    <section
+      aria-labelledby={ariaLabel ? undefined : generatedId}
+      aria-label={ariaLabel}
+      className={rootClassName}
+      {...rest}
+    >
+      {children}
+      <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
+    </section>
+  );
 
   return (
-    <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <section
-          aria-labelledby={generatedId}
-          className={rootClassName}
-          {...rest}
-        >
-          {children}
-          <ul>
-            <TunnelExit id="groupLinks" />
-          </ul>
-        </section>
-      </TunnelProvider>
+    <PropsContextProvider props={propsContext} dependencies={[generatedId]}>
+      {collapsable ? collapsableUi : defaultUi}
     </PropsContextProvider>
   );
 });

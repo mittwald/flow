@@ -1,30 +1,49 @@
 "use client";
 
+import { HostRenderErrorBoundary } from "@/components/HostRenderErrorBoundary";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
+import {
+  toComponentUsageEvent,
+  type ComponentUsageHandler,
+} from "@/lib/componentUsage";
+import { getFlowComponentStatus } from "@mittwald/flow-react-components/internal";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
-import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import {
   connectRemoteIframeRef,
   RemoteError,
   type HostToRemoteConnection,
   type NavigationState,
+  type RemoteExtBridgeConnectionApi,
+  type RemoteReadyEvent,
 } from "@mittwald/flow-remote-core";
-import { usePromise } from "@mittwald/react-use-promise";
+import { refresh, usePromise } from "@mittwald/react-use-promise";
 import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mittwald/remote-dom-react/host";
-import { type CSSProperties, type FC, useMemo, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  type FC,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useLanguage, useTheme } from "@mittwald/flow-react-components";
+import type { HostConfig } from "@mittwald/ext-bridge";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
   src?: string;
   timeoutMs?: number;
   onNavigationStateChanged?: (state: NavigationState) => void;
+  onConnected?: (event: RemoteReadyEvent) => void;
+  onDeprecation?: (message: string) => void;
+  onComponentUsage?: ComponentUsageHandler;
   hostPathname?: string;
-  extBridgeImplementation?: ExtBridgeConnectionApi;
+  extBridgeImplementation?: RemoteExtBridgeConnectionApi;
   /** Internal use only */
   __remoteReceiver?: RemoteReceiver;
 }
@@ -43,16 +62,16 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 ) => {
   const {
     integrations = [],
-    timeoutMs = 10_000,
-    src,
-    extBridgeImplementation,
-    onNavigationStateChanged,
-    hostPathname,
     __remoteReceiver: remoteReceiverFromProps,
+    ...connectedProps
   } = props;
 
   const remoteComponents = useMergedComponents(integrations);
 
+  // The two branches use disjoint sets of hooks, so the connection path lives
+  // in a dedicated component. This keeps each component's hook order stable
+  // (Rules of Hooks) while preserving the exact rendering of both paths.
+  // Note that the receiver path has no connection, so it reports no usage.
   if (remoteReceiverFromProps) {
     return (
       <RemoteRootRenderer
@@ -62,9 +81,43 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     );
   }
 
+  const { src } = connectedProps;
   if (!src) {
     throw new RemoteError("'src' prop is required");
   }
+
+  return (
+    <RemoteRendererConnected
+      {...connectedProps}
+      src={src}
+      remoteComponents={remoteComponents}
+    />
+  );
+};
+
+interface RemoteRendererConnectedProps extends Omit<
+  RemoteRendererBrowserProps,
+  "integrations" | "__remoteReceiver" | "src"
+> {
+  src: string;
+  remoteComponents: ReturnType<typeof useMergedComponents>;
+}
+
+const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
+  const {
+    timeoutMs = 10_000,
+    src,
+    extBridgeImplementation,
+    onNavigationStateChanged,
+    onConnected,
+    onDeprecation,
+    onComponentUsage,
+    hostPathname,
+    remoteComponents,
+  } = props;
+
+  const language = useLanguage();
+  const theme = useTheme();
 
   const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
@@ -74,10 +127,6 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   const [connectionSrc, setConnectionSrc] = useState<string | null>(null);
   const connection = useRef<HostToRemoteConnection>(undefined);
   const [remoteError, setRemoteError] = useState<string | undefined>();
-
-  if (remoteError) {
-    throw new RemoteError(`Remote rendering failed: ${remoteError}`);
-  }
 
   const [receiver, rendererSubscriber] = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
@@ -92,11 +141,18 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   useUpdateHostPathnameOnRemote(hostPathname, connection.current);
 
+  const hostConfig: HostConfig = {
+    language,
+    theme,
+  };
+
   const connect = connectRemoteIframeRef({
     connection: receiver.connection,
-    extBridgeImplementation: extBridgeImplementation,
-    onReady: (establishedConnection) => {
+    extBridgeImplementation,
+    hostConfig,
+    onReady: ({ connection: establishedConnection, remoteReadyEvent }) => {
       establishedConnection.updateHostPathname(hostPathname);
+      onConnected?.(remoteReadyEvent);
       connectionPromise.resolve();
     },
     onLoadingChanged: (isLoading) => {
@@ -108,6 +164,14 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     },
     onError: setRemoteError,
     onNavigationStateChanged,
+    onDeprecation,
+    onEvent: (event) => {
+      if (event.event === "ComponentRendered") {
+        onComponentUsage?.(
+          toComponentUsageEvent(event, getFlowComponentStatus),
+        );
+      }
+    },
   });
 
   const timeoutPromise = (message: string) =>
@@ -135,20 +199,47 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const awaitLoadingPromise = connectionSrc === src;
 
+  const loaderResourceTag = `mittwald/remote-react-renderer/connect/${src}`;
+
+  // refresh on remount
+  useEffect(
+    () => () => {
+      refresh({
+        tag: loaderResourceTag,
+      });
+    },
+    [src],
+  );
+
   usePromise(
     async () => {
       await overallLoading();
       rendererSubscriber.abort();
     },
-    awaitLoadingPromise ? [] : null,
+    // Disabled while erroring so the error is thrown below instead of the
+    // loader suspending indefinitely.
+    awaitLoadingPromise && !remoteError ? [] : null,
     {
       loaderId: src,
+      tags: [loaderResourceTag],
     },
   );
 
+  if (remoteError) {
+    throw new RemoteError(`Remote rendering failed: ${remoteError}`);
+  }
+
   return (
     <>
-      <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
+      <HostRenderErrorBoundary
+        onNoComponentError={async (error) => {
+          await connection.current?.reportHostError(
+            error instanceof Error ? error.message : String(error),
+          );
+        }}
+      >
+        <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
+      </HostRenderErrorBoundary>
       <iframe
         src={src}
         ref={(ref) => {

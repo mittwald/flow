@@ -1,14 +1,14 @@
 :global(.recharts-tooltip-wrapper-right) {
-  margin-left: calc(var(--popover--tip-height) + var(--chart-tooltip--spacing));
+  margin-inline-start: calc(var(--popover--tip-height) + var(--chart-tooltip--spacing));
 }
 
 :global(.recharts-tooltip-wrapper-left) {
-  margin-left: calc(
+  margin-inline-start: calc(
     calc(var(--popover--tip-height) + var(--chart-tooltip--spacing)) * -1
   );
 }
 
-.tooltip {
+.chartTooltip {
   background-color: var(--popover--background-color);
   box-shadow: var(--popover--box-shadow);
   border-radius: var(--popover--corner-radius);
@@ -16,4 +16,8 @@
   border-style: var(--popover--border-style);
   border-color: var(--popover--border-color);
   padding: var(--popover--padding--m);
+
+  &:has(.progressBar) {
+    min-width: 250px;
+  }
 }

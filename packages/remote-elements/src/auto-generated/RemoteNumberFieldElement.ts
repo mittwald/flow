@@ -17,6 +17,7 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFiel
       "aria-labelledby": {},
       autoFocus: {},
       className: {},
+      commitBehavior: {},
       decrementAriaLabel: {},
       defaultValue: {},
       dir: {},

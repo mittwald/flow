@@ -4,9 +4,13 @@
   "namedInputs": {
     "components-src": [
       "default",
+      "!{projectRoot}/MIGRATION.md",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",
+      "!{projectRoot}/src/**/*.module.d.scss.ts",
+      "!{projectRoot}/src/status/component-status.json",
+      "!{projectRoot}/src/status/componentStatus.ts",
       "!{projectRoot}/src/**/*.yaml"
     ]
   },
@@ -15,8 +19,32 @@
   "targets": {
     "build": {
       "cache": true,
-      "dependsOn": ["build:icons", "build:remote-components", "^build"],
+      "dependsOn": [
+        "build:component-index",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry",
+        "^build"
+      ],
       "inputs": ["components-src"]
+    },
+    "build:component-index": {
+      "cache": true,
+      "dependsOn": ["build:docs-properties", "build:status-registry"],
+      "inputs": [
+        "{projectRoot}/dev/component-index/**/*",
+        "!{projectRoot}/dev/component-index/**/*.test.ts",
+        "{projectRoot}/dev/status-registry/exportEntries.ts",
+        "{projectRoot}/dev/status-registry/buildStatusRegistry.ts",
+        "{projectRoot}/dev/status-registry/parseFlrUniversalComponentNames.ts",
+        "{projectRoot}/dev/remote-components-generator/config.ts",
+        "{projectRoot}/dev/remote-components-generator/lib/docTags.ts",
+        "{projectRoot}/src/index/flr-universal.ts",
+        "{projectRoot}/package.json",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+      ],
+      "outputs": ["{projectRoot}/dist/assets/component-index.json"]
     },
     "build:docs-properties": {
       "dependsOn": ["^build"],
@@ -31,7 +59,7 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
-        "{projectRoot}/src/components/Icon/icons.yaml"
+        "{workspaceRoot}/packages/icons-base/src"
       ],
       "outputs": ["{projectRoot}/src/components/Icon/components/icons/*"]
     },
@@ -48,6 +76,53 @@
         "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
+      ]
+    },
+    "build:scss-types": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/src/**/*.scss",
+        "{projectRoot}/dev/scss-types/**/*",
+        "{projectRoot}/vite.config.ts"
+      ],
+      "outputs": ["{projectRoot}/src/**/*.module.d.scss.ts"]
+    },
+    "build:status-registry": {
+      "cache": true,
+      "dependsOn": ["build:docs-properties"],
+      "inputs": [
+        "{projectRoot}/dev/status-registry/**/*",
+        "!{projectRoot}/dev/status-registry/**/*.test.ts",
+        "{projectRoot}/src/status/types.ts",
+        "{projectRoot}/package.json",
+        "{projectRoot}/src/components/public.ts",
+        "{projectRoot}/src/index/flr-universal.ts",
+        "{projectRoot}/src/integrations/**/index.ts",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+      ],
+      "outputs": [
+        "{projectRoot}/src/status/component-status.json",
+        "{projectRoot}/src/status/componentStatus.ts"
+      ]
+    },
+    "test:compile": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry"
+      ]
+    },
+    "test:unit": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry"
       ]
     },
     "test:browser": {

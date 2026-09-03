@@ -8,7 +8,6 @@ import {
   Text,
   Button,
 } from "@mittwald/flow-remote-react-components";
-import React from "react";
 
 export default function Page() {
   const [elemCount, setElemCount] = useState(100);
@@ -26,16 +25,21 @@ export default function Page() {
 
   return (
     <Section>
-      <TextField onChange={(val) => setElemCount(Number.parseInt(val))} />
-      <Button onPress={() => setShowElems((show) => !show)}>Toggle</Button>
+      <TextField
+        aria-label="Number of fleet alerts"
+        onChange={(val) => setElemCount(Number.parseInt(val))}
+      />
+      <Button onPress={() => setShowElems((show) => !show)}>
+        Toggle fleet alerts
+      </Button>
       {isNaN(elemCount) || !showElem
         ? null
         : Array(elemCount)
             .fill(0)
             .map((_, index) => (
               <Alert key={index}>
-                <Heading>Alert title</Heading>
-                <Text>Alert text {ticker}</Text>
+                <Heading>Fleet alert</Heading>
+                <Text>Battle report {ticker}</Text>
               </Alert>
             ))}
     </Section>

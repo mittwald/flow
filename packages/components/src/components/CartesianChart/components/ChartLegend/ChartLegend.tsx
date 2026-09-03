@@ -1,8 +1,8 @@
-import type { FC } from "react";
+import type { ComponentType, FC } from "react";
 import * as Recharts from "recharts";
 import LegendContent from "./LegendContent";
 
-export type ChartLegendFormatter = (text: string) => string;
+export type ChartLegendFormatter = (text: string, index: number) => string;
 
 export interface WithChartLegendFormatters {
   /**
@@ -29,5 +29,8 @@ export const ChartLegend: FC<ChartLegendProps> = (props) => {
     />
   );
 };
+
+export const TypedChartLegend = () =>
+  ChartLegend as ComponentType<ChartLegendProps>;
 
 export default ChartLegend;

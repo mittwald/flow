@@ -3,13 +3,13 @@ date-picker:
     focused:
       value: "{primary-plain-background-color.pressed}"
   date-segment-corner-radius:
-    value: "{size-px.xs}"
+    value: "{corner-radius.s}"
 
 calendar:
   spacing:
     value: "{size-rem.xs}"
   heading-font-size:
-    value: "{font-size-text.default}"
+    value: "{font-size-text.m}"
   cell-size:
     value: 2.25rem
   cell-corner-radius:
@@ -30,7 +30,13 @@ calendar:
       value: "{disabled-plain-content-color}"
     selected:
       value: "{primary-solid-content-color}"
-  cell-range-background-color:
+  range-background-color:
     value: "{primary.color.100}"
+  range-border-color:
+    value: "{form-control.border-color.default}"
+  range-border-width:
+    value: "{border-width.50}"
+  range-border-style:
+    value: "{border-style.default}"
   header-cell-font-weight:
     value: "{font-weight.bold}"

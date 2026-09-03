@@ -35,16 +35,19 @@ export const Initials = flowComponent("Initials", (props) => {
   const rootClassName = clsx(styles.initials, className);
 
   const initialsElements = initials.map((initial, index) => (
-    <span key={index}>{initial}</span>
+    <span aria-hidden role="presentation" key={index}>
+      {initial}
+    </span>
   ));
 
   return (
     <div
       data-dynamic-color={dynamicColor}
       aria-hidden={ariaHidden}
-      aria-label={textContent}
+      aria-label={ariaHidden ? undefined : textContent}
       className={rootClassName}
       ref={ref}
+      role="img"
     >
       {initialsElements}
     </div>

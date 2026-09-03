@@ -1,9 +1,14 @@
-import { testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import type { ListProps } from "@mittwald/flow-react-components";
 
-test.each(testEnvironments)(
+// List element tree comparable from alpha.883.
+const listComparableFrom = "0.2.0-alpha.883";
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
   async ({
     testScreenshot,
@@ -32,7 +37,12 @@ test.each(testEnvironments)(
       }>();
 
       return (
-        <List.List aria-label="list" getItemId={(i) => i.id}>
+        <List.List
+          aria-label="list"
+          getItemId={(i) => i.id}
+          selectedKeys={["2"]}
+          selectionMode="multiple"
+        >
           <ActionGroup>
             <Button>Button</Button>
           </ActionGroup>
@@ -40,14 +50,14 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "1",
-                name: "Max Mustermann",
-                role: "Admin",
+                name: "Luke Skywalker",
+                role: "Jedi Master",
                 status: "active",
               },
               {
                 id: "2",
-                name: "John Doe",
-                role: "Developer",
+                name: "Leia Organa",
+                role: "Rebel Pilot",
                 status: "unavailable",
               },
             ]}
@@ -119,7 +129,7 @@ test.each(testEnvironments)(
     await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{escape}");
     await search.click();
-    await userEvent.keyboard("Max");
+    await userEvent.keyboard("Luke");
     await sleep(1000);
 
     await testScreenshot("List items - searched");
@@ -136,7 +146,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List tiles (%s)",
   async ({
     testScreenshot,
@@ -152,6 +162,7 @@ test.each(testEnvironments)(
       MenuItem,
       Text,
       Content,
+      Checkbox,
     },
   }) => {
     function Wrapper() {
@@ -169,26 +180,28 @@ test.each(testEnvironments)(
           defaultViewMode="tiles"
           aria-label="list"
           getItemId={(i) => i.id}
+          selectedKeys={["2"]}
+          selectionMode="multiple"
         >
           <List.StaticData
             data={[
               {
                 id: "1",
-                name: "Max Mustermann",
-                role: "Admin",
+                name: "Luke Skywalker",
+                role: "Jedi Master",
                 active: true,
                 content: "Content",
                 bottomContent: "Bottom Content",
               },
               {
                 id: "2",
-                name: "John Doe",
-                role: "Developer",
+                name: "Leia Organa",
+                role: "Rebel Pilot",
                 active: false,
                 content:
-                  " Lorem ipsum dolor sit amet consectetur adipisicing elit",
+                  " A long time ago in a galaxy far, far away, a rebellion rose",
                 bottomContent:
-                  " Lorem ipsum dolor sit amet consectetur adipisicing elit",
+                  " A long time ago in a galaxy far, far away, a rebellion rose",
               },
             ]}
           />
@@ -198,9 +211,15 @@ test.each(testEnvironments)(
                 <Avatar>
                   <Initials>{i.name}</Initials>
                 </Avatar>
+                <Checkbox aria-label="select item" defaultSelected={i.active} />
                 <Heading>
                   {i.name}
-                  {i.active && <Badge>Active</Badge>}
+                  {i.active && (
+                    <>
+                      <Badge>Badge</Badge>
+                      <Badge>Another Badge</Badge>
+                    </>
+                  )}
                 </Heading>
                 <Text>{i.role}</Text>
                 <Content>{i.content}</Content>
@@ -222,7 +241,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List table (%s)",
   async ({ testScreenshot, render, components: { typedList } }) => {
     function Wrapper() {
@@ -238,11 +257,35 @@ test.each(testEnvironments)(
           defaultViewMode="table"
           aria-label="list"
           getItemId={(i) => i.id}
+          selectedKeys={["1", "2"]}
+          selectionMode="multiple"
         >
           <List.StaticData
             data={[
-              { id: "1", name: "Max Mustermann", role: "Admin", active: true },
-              { id: "2", name: "John Doe", role: "Developer", active: false },
+              {
+                id: "1",
+                name: "Luke Skywalker",
+                role: "Jedi Master",
+                active: true,
+              },
+              {
+                id: "2",
+                name: "Leia Organa",
+                role: "Rebel Pilot",
+                active: false,
+              },
+              {
+                id: "3",
+                name: "Han Solo",
+                role: "Rebel Pilot",
+                active: false,
+              },
+              {
+                id: "4",
+                name: "Din Djarin",
+                role: "Rebel Pilot",
+                active: false,
+              },
             ]}
           />
           <List.Table>
@@ -264,5 +307,343 @@ test.each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List table");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List edge cases - list view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Text,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+        content: string;
+        bottomContent: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "LukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalker",
+                role: "AdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdmin",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent",
+                bottomContent:
+                  "BottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContent",
+              },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.role}</Text>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - list view");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List edge cases - tile view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Text,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+        content: string;
+        bottomContent: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="tiles"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "LukeSkywalkerLukeSkywalker",
+                role: "AdminAdminAdminAdminAdminAdminAdmin",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContent",
+                bottomContent:
+                  "BottomContentBottomContentBottomContentBottomContentBottomContent",
+              },
+            ]}
+          />
+          <List.Item showList={false} showTiles textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.role}</Text>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - tile view");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List edge cases - column layout (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        content: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "LukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalker",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContent",
+              },
+            ]}
+          />
+          <List.Item showList={false} textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView m={[3, 1]}>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Content>{i.content}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - column layout");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List date range filter (%s)",
+  async ({ testScreenshot, render, components: { typedList } }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="table"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "RG100000",
+                date: "2025-09-01T11:00:00Z",
+              },
+              {
+                id: "RG100001",
+                date: "2025-09-02T11:00:00Z",
+              },
+              {
+                id: "RG100002",
+                date: "2025-09-03T11:00:00Z",
+              },
+            ]}
+          />
+          <List.Filter
+            property="date"
+            mode="dateRange"
+            name="Date"
+            dateRangeOptions={{
+              maxValue: today(getLocalTimeZone()),
+            }}
+          />
+          <List.Table>
+            <List.TableHeader>
+              <List.TableColumn>Rechnung</List.TableColumn>
+              <List.TableColumn>Datum</List.TableColumn>
+            </List.TableHeader>
+
+            <List.TableBody>
+              <List.TableRow>
+                <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
+                <List.TableCell>
+                  {(invoice) =>
+                    new Date(invoice.date).toLocaleDateString("de-DE")
+                  }
+                </List.TableCell>
+              </List.TableRow>
+            </List.TableBody>
+          </List.Table>
+        </List.List>
+      );
+    }
+
+    vi.setSystemTime(new Date("2025-09-03T11:00:00Z"));
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List date range filter - default");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("List date range filter - filter opened");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("List date range filter - filtered");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List empty views (%s)",
+  async ({ testScreenshot, render, components: { typedList, Heading } }) => {
+    function Wrapper(
+      props: ListProps<{
+        id: string;
+        date: string;
+      }>,
+    ) {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id} {...props}>
+          <List.StaticData data={[]} />
+          <List.Search data-testid="search" />
+          <List.Item>{(item) => <>{item.id}</>}</List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+    await testScreenshot("List empty view - default");
+
+    const emptyView = <Heading>Custom nothing in the list</Heading>;
+
+    await render(<Wrapper emptyView={emptyView} />);
+    await testScreenshot("List empty view - custom default");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List empty search views (%s)",
+  async ({ testScreenshot, render, components: { typedList, Heading } }) => {
+    function Wrapper(
+      props: ListProps<{
+        id: string;
+        date: string;
+      }>,
+    ) {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id} {...props}>
+          <List.StaticData data={[{ id: "", date: "" }]} />
+          <List.Search data-testid="search" />
+          <List.Item>{(item) => <>{item.id}</>}</List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+    const search = page.getByPlaceholder("Search");
+    await userEvent.type(search, "test");
+    await sleep(1000);
+    await testScreenshot("List empty search view - default");
+
+    const emptySearchView = <Heading>Custom nothing found</Heading>;
+    await render(<Wrapper emptySearchResultView={emptySearchView} />);
+    await userEvent.type(search, "test");
+    await sleep(1000);
+    await testScreenshot("List empty search view - custom");
   },
 );

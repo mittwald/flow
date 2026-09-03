@@ -31,6 +31,7 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       name: {},
       orientation: {},
       showInitialMarker: {},
+      sliderOnly: {},
       slot: {},
       step: {},
       translate: {},

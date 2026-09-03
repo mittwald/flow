@@ -10,18 +10,26 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Options";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SelectProps
   extends
-    PropsWithChildren<Omit<Aria.SelectProps, "children" | "className" | "ref">>,
+    PropsWithChildren<
+      Omit<
+        Aria.SelectProps<string, "single" | "multiple">,
+        "children" | "className" | "ref"
+      >
+    >,
     FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
-  onChange?: (value: Key | null) => void;
+  onChange?: (value: Key | Key[] | null) => void;
+  /** @deprecated Use `onChange` instead. */
+  onSelectionChange?: (value: Key | Key[] | null) => void;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
 }
@@ -38,12 +46,19 @@ export const Select = flowComponent("Select", (props) => {
     ...rest
   } = props;
 
+  const warnDeprecation = useWarnDeprecation();
+  if (onSelectionChange !== undefined) {
+    warnDeprecation(
+      "The 'onSelectionChange' prop is deprecated and will be removed in a future release. Use 'onChange' instead.",
+    );
+  }
+
   const {
     FieldErrorView,
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Select");
 
   const rootClassName = clsx(
     styles.select,
@@ -53,7 +68,10 @@ export const Select = flowComponent("Select", (props) => {
 
   const propsContext: PropsContext = {
     Option: {
-      tunnelId: "options",
+      tunnel: {
+        id: "options",
+        component: "Select",
+      },
     },
     ...fieldPropsContext,
   };
@@ -78,25 +96,27 @@ export const Select = flowComponent("Select", (props) => {
       isOpen={isOpen}
       data-readonly={isReadOnly}
     >
-      <TunnelProvider>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            <Aria.Button
-              data-readonly={isReadOnly}
-              className={styles.toggle}
-              ref={ref}
-            >
-              <Aria.SelectValue />
-              <IconChevronDown />
-            </Aria.Button>
-            {children}
-            <Options controller={controller}>
-              <TunnelExit id="options" />
-            </Options>
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
-        <FieldErrorView />
-      </TunnelProvider>
+      <FieldErrorCaptureContext>
+        <PropsContextProvider props={propsContext}>
+          <Aria.Button
+            data-readonly={isReadOnly}
+            className={styles.toggle}
+            ref={ref}
+          >
+            <Aria.SelectValue>
+              {({ selectedText, isPlaceholder }) =>
+                isPlaceholder || !selectedText ? undefined : selectedText
+              }
+            </Aria.SelectValue>
+            <IconChevronDown />
+          </Aria.Button>
+          {children}
+          <Options controller={controller}>
+            <UiComponentTunnelExit id="options" component="Select" />
+          </Options>
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.Select>
   );
 });

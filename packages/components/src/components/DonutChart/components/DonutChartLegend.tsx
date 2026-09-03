@@ -1,5 +1,5 @@
 import styles from "../DonutChart.module.scss";
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { useNumberFormatter } from "react-aria";
 import { Legend, LegendItem } from "@/components/Legend";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";

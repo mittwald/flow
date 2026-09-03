@@ -2,19 +2,27 @@ import type {
   ComponentProps,
   ComponentType,
   CSSProperties,
+  MouseEvent,
   PropsWithChildren,
 } from "react";
 import { useContext } from "react";
 import * as Aria from "react-aria-components";
-import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsWithClassName } from "@/lib/types/props";
+import {
+  type AlphaColor,
+  isAlphaColor,
+  type PropsWithClassName,
+} from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
+import { Text } from "@/components/Text";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
+import { handleLinkClick, useRouter } from "@react-aria/utils";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface LinkProps
   extends
@@ -25,12 +33,16 @@ export interface LinkProps
   inline?: boolean;
   /** An alternative link component. */
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
-  /** The color of the link. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  /** The color of the link. @default "default" */
+  color?: "default" | AlphaColor;
+  /** Marks the link as the currently active one, e.g. in a navigation. */
   "aria-current"?: string;
+  /** The name of the slot the link is placed in. */
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];
+  /** The size of the element. @default "m" */
+  size?: "s" | "m";
   /** @internal */
   unstyled?: boolean;
 }
@@ -42,13 +54,17 @@ export const Link = flowComponent("Link", (props) => {
     className,
     inline,
     linkComponent: linkComponentFromProps,
-    color = "primary",
+    color = "default",
     unstyled = false,
     "aria-current": ariaCurrent,
     ref,
     slot: ignoredSlotProp,
     style,
     whiteSpace,
+    size = "m",
+    onClickCapture: onClickCaptureFromProps,
+    target,
+    download,
     ...rest
   } = props;
 
@@ -59,22 +75,61 @@ export const Link = flowComponent("Link", (props) => {
       ? (linkComponentFromContext as typeof Aria.Link)
       : Aria.Link;
 
+  const router = useRouter();
+
+  /**
+   * An interactive child (e.g. a Button) stops click propagation via React
+   * Aria's `usePress`, so the anchor's own `onClick` never runs and navigation
+   * falls back to a full page load. Handling it in the capture phase (top-down,
+   * before the child) keeps navigation client-side. Only needed for React
+   * Aria's `<a>`; custom link components handle navigation themselves.
+   */
+  const handleClickCapture =
+    Link === Aria.Link && props.href
+      ? (event: MouseEvent<HTMLAnchorElement>) => {
+          onClickCaptureFromProps?.(event);
+          if (event.target !== event.currentTarget) {
+            handleLinkClick(event, router, props.href, props.routerOptions);
+          }
+        }
+      : onClickCaptureFromProps;
+
   const rootClassName = unstyled
     ? className
     : clsx(
         styles.link,
         inline && styles.inline,
-        styles[color as keyof typeof styles],
+        isAlphaColor(color) && styles[color],
+        size === "s" && styles["size-s"],
         className,
       );
 
   const propsContext: PropsContext = {
     Icon: {
+      tunnel: {
+        component: "Link",
+        id: "icon",
+      },
       className: styles.icon,
       size: "s",
     },
     AlertText: {
       className: styles.alertText,
+    },
+    AccentBox: { className: styles.accentBox },
+    LayoutCard: { className: styles.layoutCard },
+    Button: {
+      elementType: "span",
+      className: styles.button,
+      size: props.size,
+      color: props.color === "default" ? undefined : props.color,
+      isDisabled: props.isDisabled,
+      children: dynamic((buttonProps) => (
+        <>
+          <Text>{buttonProps.children}</Text>
+          <LinkIcon download={download} target={target} unstyled={unstyled} />
+        </>
+      )),
     },
   };
 
@@ -88,13 +143,23 @@ export const Link = flowComponent("Link", (props) => {
     <Link
       {...unsupportedTypingsLinkProps}
       {...rest}
+      target={target}
+      download={download}
+      onClickCapture={handleClickCapture}
       className={rootClassName}
       ref={ref}
       style={{ ...style, whiteSpace }}
     >
       <PropsContextProvider props={propsContext}>
         {children}
-        <LinkIcon {...props} />
+        <LinkIcon
+          withZeroWidthJoiner
+          unstyled={unstyled}
+          target={target}
+          download={download}
+        >
+          <UiComponentTunnelExit id={"icon"} component={"Link"} />
+        </LinkIcon>
       </PropsContextProvider>
     </Link>
   );

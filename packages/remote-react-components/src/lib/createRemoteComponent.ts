@@ -1,5 +1,5 @@
 import { version } from "@/version";
-import { useControlledRemoteValueProps } from "@mittwald/flow-react-components";
+import { useControlledRemoteValueProps } from "@mittwald/flow-react-components/flr-universal";
 import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
 import { createRemoteComponent as libCreateRemoteComponent } from "@mittwald/remote-dom-react";
 import { createElement } from "react";

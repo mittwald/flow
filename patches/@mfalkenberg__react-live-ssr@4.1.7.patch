@@ -1,0 +1,26 @@
+diff --git a/dist/index.js b/dist/index.js
+index 23323a95e0092b62c6af200f599a6c03a840a99e..b3de209aa2c9d47fd9b8170cb44987142134d10b 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -195,7 +195,7 @@ var import_sucrase = require("sucrase");
+ var defaultTransforms = ["jsx", "imports"];
+ function transform(opts = {}) {
+   const transforms = Array.isArray(opts.transforms) ? opts.transforms.filter(Boolean) : defaultTransforms;
+-  return (code) => (0, import_sucrase.transform)(code, { transforms }).code;
++  return (code) => (0, import_sucrase.transform)(code, { transforms, production: true }).code;
+ }
+ 
+ // src/utils/transpile/errorBoundary.tsx
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 4cf841fc3db17d0609e75e974214c53a810dde99..eb856ac964d7d8953ae9664daf63a95cd29ceef3 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -158,7 +158,7 @@ import { transform as _transform } from "sucrase";
+ var defaultTransforms = ["jsx", "imports"];
+ function transform(opts = {}) {
+   const transforms = Array.isArray(opts.transforms) ? opts.transforms.filter(Boolean) : defaultTransforms;
+-  return (code) => _transform(code, { transforms }).code;
++  return (code) => _transform(code, { transforms, production: true }).code;
+ }
+ 
+ // src/utils/transpile/errorBoundary.tsx

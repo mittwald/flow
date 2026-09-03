@@ -19,8 +19,11 @@ export interface TableCellShape<T> extends TableCellSupportedComponentProps {
 /** Row */
 export type TableRowSupportedComponentProps = Omit<
   TableRowProps,
-  "onAction" | "children" | "footer"
->;
+  "onAction" | "children" | "footer" | "className" | "render"
+> & {
+  className?: string;
+};
+
 export interface TableRowShape<T>
   extends TableRowSupportedComponentProps, PropsWithChildren {
   cells?: TableCellShape<T>[];

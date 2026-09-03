@@ -4,11 +4,11 @@ import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface LabelProps
   extends
@@ -18,7 +18,7 @@ export interface LabelProps
   optional?: boolean;
   /** Whether the label should be displayed as disabled. */
   isDisabled?: boolean;
-  /* @internal */
+  /** @internal */
   unstyled?: boolean;
 }
 
@@ -34,7 +34,7 @@ export const Label = flowComponent("Label", (props) => {
     ...rest
   } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Label");
 
   const rootClassName = unstyled
     ? className
@@ -42,55 +42,62 @@ export const Label = flowComponent("Label", (props) => {
 
   const optionalMarker = (
     <span className={styles.optional}>
-      {stringFormatter.format("label.optional")}
+      {stringFormatter.format("optional")}
     </span>
   );
 
   const propsContext: PropsContext = {
     ContextualHelpTrigger: {
-      tunnelId: "contextualHelp",
+      tunnel: {
+        id: "contextualHelp",
+        component: "Label",
+      },
       Button: {
-        tunnelId: null,
+        tunnel: null,
       },
     },
     Button: {
-      tunnelId: "right",
+      tunnel: {
+        id: "right",
+        component: "Label",
+      },
       size: "s",
     },
     Action: {
-      tunnelId: "right",
+      tunnel: {
+        id: "right",
+        component: "Label",
+      },
       Button: {
-        tunnelId: null,
+        tunnel: null,
       },
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <Aria.Label {...rest} className={rootClassName} ref={ref}>
-          {children}
-          {optional && optionalMarker}
-          <TunnelExit id="contextualHelp">
-            {(children) => {
-              if (React.Children.count(children) >= 1) {
-                return children;
-              }
+      <Aria.Label {...rest} className={rootClassName} ref={ref}>
+        {children}
+        {optional && optionalMarker}
+        <UiComponentTunnelExit id="contextualHelp" component="Label">
+          {(children) => {
+            if (React.Children.count(children) >= 1) {
+              return children;
+            }
 
-              return undefined;
-            }}
-          </TunnelExit>
-          <TunnelExit id="right">
-            {(children) => {
-              if (React.Children.count(children) >= 1) {
-                return <div className={styles.right}>{children}</div>;
-              }
+            return undefined;
+          }}
+        </UiComponentTunnelExit>
+        <UiComponentTunnelExit id="right" component="Label">
+          {(children) => {
+            if (React.Children.count(children) >= 1) {
+              return <div className={styles.right}>{children}</div>;
+            }
 
-              return undefined;
-            }}
-          </TunnelExit>
-        </Aria.Label>
-      </TunnelProvider>
+            return undefined;
+          }}
+        </UiComponentTunnelExit>
+      </Aria.Label>
     </PropsContextProvider>
   );
 });

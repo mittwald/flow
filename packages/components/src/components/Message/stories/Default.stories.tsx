@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import MenuItem from "@/components/MenuItem";
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
@@ -14,8 +14,9 @@ import { ActionGroup } from "@/components/ActionGroup";
 const meta: Meta<typeof Message> = {
   title: "Chat/Message",
   component: Message,
-  parameters: {
-    controls: { exclude: ["className"] },
+  args: { type: "responder" },
+  argTypes: {
+    type: { control: "inline-radio", options: ["sender", "responder"] },
   },
   render: (props) => (
     <Message {...props}>
@@ -23,26 +24,26 @@ const meta: Meta<typeof Message> = {
         <ContextMenuTrigger>
           <Button />
           <ContextMenu>
-            <MenuItem>Bearbeiten</MenuItem>
-            <MenuItem>Löschen</MenuItem>
+            <MenuItem>Edit</MenuItem>
+            <MenuItem>Delete</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
-        <Align>
+        <Combine>
           <Avatar>
-            <Initials>Max Mustermann</Initials>
+            <Initials>Leia Organa</Initials>
           </Avatar>
           <Text>
-            <strong>Max Mustermann</strong>
-            Organisationsinhaber
+            <strong>Leia Organa</strong>
+            <span>Rebel Commander</span>
           </Text>
-        </Align>
+        </Combine>
         <Text>01.09.2024, 12:45</Text>
       </Header>
 
       <Content>
-        <Text>Das ist eine Nachricht</Text>
+        <Text>The Death Star plans are in transit.</Text>
       </Content>
-      <Button>Button</Button>
+      <Button>Reply</Button>
     </Message>
   ),
 };
@@ -52,13 +53,11 @@ type Story = StoryObj<typeof Message>;
 
 export const Default: Story = {};
 
-export const Sender: Story = { args: { type: "sender" } };
-
 export const MessageOnly: Story = {
   render: (props) => (
     <Message {...props}>
       <Content>
-        <Text>Das ist eine Nachricht</Text>
+        <Text>The Death Star plans are in transit.</Text>
       </Content>
     </Message>
   ),
@@ -68,15 +67,11 @@ export const CustomColor: Story = {
   args: { color: "#ffeedd" },
 };
 
-export const SenderCustomColor: Story = {
-  args: { type: "sender", color: "#ffeedd" },
-};
-
 export const WithActionGroup: Story = {
   render: (props) => (
     <Message {...props}>
       <Content>
-        <Text>Das ist eine Nachricht</Text>
+        <Text>The Death Star plans are in transit.</Text>
       </Content>
       <ActionGroup>
         <Button slot="secondary" variant="soft" color="secondary">

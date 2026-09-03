@@ -80,6 +80,7 @@ export class RemoteHeadingElement extends FlowRemoteElement<RemoteHeadingElement
       defaultValue: {},
       dir: {},
       draggable: {},
+      elementType: {},
       enterKeyHint: {},
       exportparts: {},
       hidden: {},

@@ -1,0 +1,59 @@
+import {
+  ActionGroup,
+  Avatar,
+  Button,
+  Content,
+  Heading,
+  IconDomain,
+  typedList,
+  IconEdit,
+  IconDelete,
+} from "@mittwald/flow-react-components";
+import {
+  type Domain,
+  domains,
+} from "@/content/components/list/list-item-view/examples/domainApi";
+
+export default () => {
+  const List = typedList<Domain>();
+
+  return (
+    <List.List
+      batchSize={2}
+      hidePagination
+      aria-label="Domains"
+      getItemId={(domain) => domain.id}
+    >
+      <List.StaticData data={domains} />
+      <List.Item textValue={(domain) => domain.domain}>
+        {(domain) => (
+          <List.ItemView>
+            <Avatar>
+              <IconDomain />
+            </Avatar>
+            <Heading>{domain.hostname}</Heading>
+
+            <Content>
+              <ActionGroup>
+                <Button
+                  aria-label="Bearbeiten"
+                  variant="plain"
+                  color="secondary"
+                >
+                  <IconEdit />
+                </Button>
+                <Button
+                  aria-label="Löschen"
+                  variant="plain"
+                  color="secondary"
+                >
+                  <IconDelete />
+                </Button>
+              </ActionGroup>
+            </Content>
+          </List.ItemView>
+        )}
+      </List.Item>
+    </List.List>
+  );
+};

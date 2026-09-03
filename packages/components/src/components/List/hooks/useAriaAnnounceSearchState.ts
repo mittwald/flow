@@ -1,4 +1,4 @@
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 import { announce } from "@react-aria/live-announcer";
 import { useDebounceCallback } from "usehooks-ts";
@@ -8,7 +8,7 @@ import { useList } from "@/components/List/hooks/useList";
 const announceDebounceMs = 600;
 
 export const useAriaAnnounceSearchState = (): void => {
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "List");
   const list = useList();
   const debouncedAnnounce = useDebounceCallback(announce, announceDebounceMs);
 
@@ -23,9 +23,7 @@ export const useAriaAnnounceSearchState = (): void => {
     }
 
     const text = formatter.format(
-      resultCount > 0
-        ? "list.search.announce.result"
-        : "list.search.announce.noResult",
+      resultCount > 0 ? "search.announce.result" : "search.announce.noResult",
       {
         resultCount,
         searchTerm,

@@ -1,0 +1,21 @@
+code-block:
+  font-size:
+    value: "{font-size-text.s}"
+  font-family:
+    value: "FiraCode, monospace"
+  padding:
+    value: "{size-px.m}"
+  corner-radius:
+    value: "{corner-radius.m}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{separator.color}"
+  background-color:
+    value: "{form-control.background-color.default}"
+  content-color:
+    value: "{neutral-soft-content-color}"
+  show-more-padding:
+    value: "{size-px.xs}"

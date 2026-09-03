@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import type { Sorting } from "@/components/List/model/sorting/Sorting";
 import MenuItemView from "@/views/MenuItemView";
 import { useList } from "@/components/List";

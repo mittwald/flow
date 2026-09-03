@@ -1,54 +1,127 @@
-import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/useHotkeySubmit";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
+import { useComponentDefaults } from "@/components/ComponentDefaultsProvider";
+import { type OverlayController, useModalController } from "@/lib/controller";
 import {
+  type BaseSyntheticEvent,
   type ComponentProps,
   type FC,
-  type FormEvent,
-  type FormEventHandler,
   type PropsWithChildren,
   type Ref,
+  type SubmitEventHandler,
   useId,
   useMemo,
   useRef,
 } from "react";
 import type {
   FieldValues,
+  Path,
   SubmitHandler,
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
+import { useFormRootErrorController } from "../FormRootError/useFormRootErrorController";
+import { FormRootError } from "../../lib/FormRootError";
+import { useFormSettings } from "../FormSettingsProvider/FormSettingsProvider";
+import {
+  useFormSubmitController,
+  type WithFormSubmitControllerProps,
+} from "@/integrations/react-hook-form/components/Form/hooks/useFormSubmitController";
+import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/hooks/useHotkeySubmit";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
 export type AfterFormSubmitCallback = (...unknownArgs: unknown[]) => unknown;
 
+export interface FormAutoResetOptions {
+  /**
+   * Whether the form is reset to its default values after the surrounding modal
+   * has closed.
+   *
+   * @default true
+   */
+  onAfterModalClose?: boolean;
+}
+
 type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
-    onSubmit?: FormEventHandler | FormOnSubmitHandler<never>;
+    onSubmit?: SubmitEventHandler | FormOnSubmitHandler<never>;
     ref?: Ref<HTMLFormElement>;
   }>
 >;
 
 export interface FormProps<F extends FieldValues>
-  extends Omit<ComponentProps<"form">, "onSubmit">, PropsWithChildren {
+  extends
+    Omit<ComponentProps<"form">, "onSubmit">,
+    PropsWithChildren,
+    WithFormSubmitControllerProps {
+  /** The react-hook-form instance returned by `useForm()`. */
   form: UseFormReturn<F>;
+  /**
+   * Called with the validated form values when the form is submitted. Returning
+   * a promise keeps the submit button pending until it settles.
+   */
   onSubmit: FormOnSubmitHandler<F>;
+  /**
+   * The component rendered as the form element. Use it to render the form with
+   * a routers form component. Defaults to a plain `<form />`.
+   */
   formComponent?: FC<Omit<FormComponentType, "ref">>;
+  /**
+   * Whether all fields of the form can be read but not edited.
+   *
+   * @default false
+   */
   isReadOnly?: boolean;
+  /**
+   * When the form is reset to its default values. `true` resets it after the
+   * surrounding modal has closed, `false` never resets it.
+   *
+   * @default true
+   */
+  autoReset?: FormAutoResetOptions | boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
+
+/**
+ * Runs `operation` while closing the surrounding Modal is allowed without a
+ * confirmation, and drops that permission again as soon as the operation has
+ * settled. Scoping it to the operation is what keeps a submit that only
+ * advances a wizard step from disarming the confirmation for good (#2775).
+ */
+const runWithGrantedModalClose = (
+  modalController: OverlayController,
+  operation: () => unknown,
+): unknown => {
+  const releaseGrant = modalController.grantCloseWithoutConfirmation();
+
+  let result: unknown;
+  try {
+    result = operation();
+  } catch (error) {
+    releaseGrant();
+    throw error;
+  }
+
+  if (result instanceof Promise) {
+    return result.finally(releaseGrant);
+  }
+  releaseGrant();
+  return result;
+};
 
 export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
     form,
     children,
-    onSubmit,
+    onSubmit: onSubmitProp,
     formComponent = DefaultFormComponent,
     isReadOnly,
     ref,
     id: idProp,
+    autoReset = true,
+    submitController: submitControllerFromProps,
     ...formProps
   } = props;
 
@@ -56,32 +129,83 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const formId = idProp ?? newFormId;
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
+  const { isDirty } = form.formState;
+  const rootErrorController = useFormRootErrorController();
+
+  const defaultSubmitController = useFormSubmitController();
+  const submitController = submitControllerFromProps
+    ? submitControllerFromProps.submit.extend(defaultSubmitController)
+    : defaultSubmitController;
+
+  const autoResetOptions =
+    typeof autoReset === "boolean"
+      ? { onAfterModalClose: autoReset }
+      : autoReset;
+
+  const { confirmModalCloseOnUnsavedChanges } = useComponentDefaults("Form");
+
+  const modalController = useModalController();
+  modalController.useUpdateOptions({
+    // A dirty Form contributes one close confirmation source to the surrounding
+    // Modal; sources are combined, so a clean Form does not overrule a
+    // `<Modal confirmOnClose>`. The Modal renders the confirmation dialog.
+    // An application that switched the default off contributes nothing at all.
+    confirmOnClose: confirmModalCloseOnUnsavedChanges ? isDirty : undefined,
+  });
+  modalController.useOnClosed(() => {
+    if (autoResetOptions?.onAfterModalClose) {
+      form.reset();
+    }
+  });
+
+  const { submitInterceptor } = useFormSettings();
+  const onSubmit = submitInterceptor
+    ? (values: F) => submitInterceptor<F>(onSubmitProp, values, { form })
+    : onSubmitProp;
 
   const handleSubmitResult = (result: unknown) => {
     if (typeof result === "function") {
       afterSubmitCallback.current = result as AfterFormSubmitCallback;
     }
+    const rootError = form.getFieldState("root" as Path<F>)?.error;
+    if (rootError && !rootErrorController.errorComponentMounted) {
+      throw new FormRootError(rootError);
+    }
   };
 
-  const handleSubmit = (e?: FormEvent | F) => {
-    const formEvent = e && "nativeEvent" in e ? (e as FormEvent) : undefined;
+  const handleSubmit = async (e?: BaseSyntheticEvent | F): Promise<void> => {
+    const formEvent =
+      e && "nativeEvent" in e ? (e as BaseSyntheticEvent) : undefined;
     formEvent?.stopPropagation();
-    return form.handleSubmit((values, event) => {
-      const submitResult = onSubmit(values, event);
-      if (submitResult instanceof Promise) {
-        return submitResult.then(handleSubmitResult);
-      }
-      handleSubmitResult(submitResult);
-    })(formEvent);
+
+    // react-hook-form's submit handler resolves with an unknown value; the
+    // submit controller only awaits it, so drop the result.
+    await form.handleSubmit((values, event) =>
+      runWithGrantedModalClose(modalController, () => {
+        const submitResult = onSubmit(values, event);
+        if (submitResult instanceof Promise) {
+          return submitResult.then(handleSubmitResult);
+        }
+        handleSubmitResult(submitResult);
+      }),
+    )(formEvent);
   };
+  submitController.submit.set(handleSubmit);
 
   const onAfterSuccessFeedback = () => {
-    afterSubmitCallback.current?.();
+    const callback = afterSubmitCallback.current;
+    if (!callback) {
+      return;
+    }
+    // The callback runs after the submit itself has finished (and after
+    // SubmitButton's success feedback), so it needs its own permission to close
+    // the Modal.
+    runWithGrantedModalClose(modalController, callback);
   };
 
   const refWithHotkeySubmit = useHotkeySubmit({
     ref,
-    handleSubmit,
+    submitController,
   });
 
   return (
@@ -91,6 +215,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
         isReadOnly={isReadOnly}
         id={formId}
         onAfterSuccessFeedback={onAfterSuccessFeedback}
+        rootErrorController={rootErrorController}
       >
         <FormComponent
           {...formProps}

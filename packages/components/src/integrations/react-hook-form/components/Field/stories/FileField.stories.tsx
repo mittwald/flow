@@ -45,7 +45,7 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="user">
             <FileField>
-              <Label>Certificate</Label>
+              <Label>Death Star plans</Label>
               <Button variant="outline" color="secondary">
                 Select
               </Button>
@@ -53,7 +53,7 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -83,21 +83,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name="field">
-          <FileField multiple>
-            <Label>Certificate</Label>
+        <Section>
+          <Field name="field">
+            <FileField multiple>
+              <Label>Death Star plans</Label>
+              <Button variant="outline" color="secondary">
+                Select
+              </Button>
+            </FileField>
+          </Field>
+          <FileField multiple isInvalid>
+            <Label>Death Star plans</Label>
             <Button variant="outline" color="secondary">
               Select
             </Button>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </FileField>
-        </Field>
-        <FileField multiple isInvalid>
-          <Label>Certificate</Label>
-          <Button variant="outline" color="secondary">
-            Select
-          </Button>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </FileField>
+        </Section>
       </Form>
     );
   },
@@ -112,31 +114,41 @@ export const WithFocus: Story = {
     });
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <FileField multiple>
-            <Label>Certificate</Label>
+            <Label>Death Star plans</Label>
             <Button variant="outline" color="secondary">
               Select
             </Button>
           </FileField>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

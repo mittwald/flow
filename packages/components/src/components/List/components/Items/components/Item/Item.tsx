@@ -1,24 +1,28 @@
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
 import { useList } from "@/components/List/hooks/useList";
+import type ListModel from "@/components/List/model/List";
 import ItemsGridListItemView from "@/views/ItemsGridListItemView";
-import type { FC, PropsWithChildren } from "react";
-import { Suspense } from "react";
+import { mergeRefs } from "@react-aria/utils";
+import type { FC, PropsWithChildren, Ref } from "react";
+import { memo, Suspense } from "react";
 import type { Key } from "react-aria-components";
 import styles from "./Item.module.scss";
-import { ListItemSkeletonView } from "./components/ListItemSkeletonView/ListItemSkeletonView";
+import { ItemLoadingView } from "./components/ItemLoadingView/ItemLoadingView";
 
 interface Props extends PropsWithChildren {
   id: Key;
   data: never;
+  triggerRef?: Ref<HTMLDivElement>;
+  list: ListModel<never>;
+  isTile: boolean;
 }
 
-export const Item = (props: Props) => {
-  const { id, data } = props;
-  const list = useList();
+const ItemImpl = (props: Props) => {
+  const { id, data, triggerRef, list, isTile } = props;
 
   const itemView = list.itemView;
 
-  const { gridItemProps, children } = useGridItemProps(props);
+  const { gridItemProps, children } = useGridItemProps(props, list);
 
   if (!itemView) {
     return null;
@@ -28,6 +32,11 @@ export const Item = (props: Props) => {
   const href = itemView.href ? itemView.href(data) : undefined;
   const hasAction = !!gridItemProps.onAction || !!href;
 
+  const existingRef = "ref" in gridItemProps ? gridItemProps.ref : undefined;
+  const gridItemPropsWithRef = triggerRef
+    ? { ...gridItemProps, ref: mergeRefs(existingRef, triggerRef) }
+    : gridItemProps;
+
   return (
     <ItemsGridListItemView
       id={id}
@@ -35,23 +44,44 @@ export const Item = (props: Props) => {
       href={href}
       target={itemView.target}
       hasAction={hasAction}
-      isTile={list.viewMode === "tiles"}
-      {...gridItemProps}
+      isTile={isTile}
+      {...gridItemPropsWithRef}
     >
-      <Suspense fallback={<ListItemSkeletonView viewMode={list.viewMode} />}>
-        {children}
-      </Suspense>
+      <Suspense fallback={<ItemLoadingView />}>{children}</Suspense>
     </ItemsGridListItemView>
   );
 };
 
-export const ItemContainer: FC<Props> = (props) => {
+// The list model is rebuilt on every render, so it cannot be compared by
+// identity — but everything an item renders from it can. Those closures come
+// from the consumer's own JSX and only change when the consumer re-renders,
+// so loading more still skips the re-render while parent state no longer
+// leaves an item frozen on the values it first saw.
+export const Item = memo(
+  ItemImpl,
+  (prev, next) =>
+    prev.id === next.id &&
+    prev.data === next.data &&
+    prev.triggerRef === next.triggerRef &&
+    prev.isTile === next.isTile &&
+    prev.list.onAction === next.list.onAction &&
+    prev.list.accordion === next.list.accordion &&
+    !!prev.list.itemView?.rendersSameAs(next.list.itemView),
+);
+Item.displayName = "Item";
+
+interface ItemContainerProps extends PropsWithChildren {
+  id?: Key;
+  data?: never;
+}
+
+export const ItemContainer: FC<ItemContainerProps> = (props) => {
   const list = useList();
   return (
     <ItemsGridListItemView
       textValue="-"
       className={styles.item}
-      isTile={list.viewMode === "tiles"}
+      isTile={list.viewMode.isTiles}
     >
       {props.children}
     </ItemsGridListItemView>

@@ -9,15 +9,11 @@ import { sleep } from "@/lib/promises/sleep";
 import { useStatic } from "@/lib/hooks/useStatic";
 
 export type ActionStateValue =
-  | "isIdle"
-  | "isSucceeded"
-  | "isPending"
-  | "isExecuting"
-  | "isFailed";
+  "isIdle" | "isSucceeded" | "isPending" | "isExecuting" | "isFailed";
 
 export const duration = {
   pending: 1000,
-  succeeded: 1500,
+  succeeded: 800,
   failed: 2000,
 };
 

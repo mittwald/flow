@@ -11,6 +11,7 @@ export class RemoteColorElement extends FlowRemoteElement<RemoteColorElementProp
 
   static override get remoteProperties() {
     return {
+      className: {},
       color: {},
     };
   }

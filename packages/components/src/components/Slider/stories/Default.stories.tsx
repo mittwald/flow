@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Slider } from "@/components/Slider";
 import { Label } from "@/components/Label";
 
@@ -7,14 +6,14 @@ const meta: Meta<typeof Slider> = {
   title: "Form Controls/Slider",
   component: Slider,
   render: (props) => (
-    <Slider {...props}>
-      <Label>Amount</Label>
+    <Slider {...props} defaultValue={20}>
+      <Label>Bounty (credits)</Label>
     </Slider>
   ),
-  parameters: {
-    controls: { exclude: ["tunnelId", "render", "showInitialMarker"] },
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
   },
-  args: { defaultValue: 20 },
 };
 export default meta;
 
@@ -22,11 +21,7 @@ type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {};
 
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
-
-export const WithUnit: Story = {
+export const WithFormatOptions: Story = {
   render: (props) => (
     <Slider
       {...props}
@@ -44,12 +39,10 @@ export const WithUnit: Story = {
   ),
 };
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
 export const WithInitialMarker: Story = {
   render: (props) => (
-    <Slider {...props} showInitialMarker>
-      <Label>Amount</Label>
+    <Slider {...props} showInitialMarker defaultValue={20}>
+      <Label>Bounty (credits)</Label>
     </Slider>
   ),
 };

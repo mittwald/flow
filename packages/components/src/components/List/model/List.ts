@@ -4,27 +4,29 @@ import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
 import type {
+  EmptyViewType,
   GetItemId,
   ItemActionFn,
+  ListSettingsStorageDefaults,
   ListShape,
   ListSupportedComponentProps,
-  ListViewMode,
 } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
-import { useEffect, useState } from "react";
+import { useEffect, type ReactNode } from "react";
+import { ListSettingsStore } from "./ListSettingsStore";
+import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
-import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
-import z from "zod";
+import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
-export class List<T, TMeta = unknown> {
-  public static readonly viewModeSettingsStorageSchema = z
-    .enum(["list", "table", "tiles"])
-    .optional();
-  public readonly filters: Filter<T, never, never>[];
+export class List<T = unknown, TMeta = unknown> {
+  public readonly filters: (
+    Filter<T, never, never> | DateRangeFilter<T, never>
+  )[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
   public readonly search?: Search<T>;
@@ -35,18 +37,16 @@ export class List<T, TMeta = unknown> {
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
   public readonly accordion: boolean;
+  public readonly infiniteScroll: boolean;
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
-  public viewMode: ListViewMode;
-  public readonly setViewMode: (viewMode: ListViewMode) => void;
-  public readonly supportsSettingsStorage: boolean;
-  public readonly settingStorageKey?: string;
   public metadata?: TMeta;
-  private readonly settingsStore?: SettingsStore;
-  private readonly viewModeStorageKey?: string;
-  private readonly filterSettingsStorageKey?: string;
-  private readonly sortingStorageKey?: string;
+  public readonly settingsStorage?: ListSettingsStore<T>;
   public readonly loadingItemsCount;
+  public readonly viewMode: ListViewMode<T>;
+  public readonly emptyView?: ReactNode;
+  public readonly emptySearchResultView?: ReactNode;
+  public readonly settingsStorageDefaults?: ListSettingsStorageDefaults;
 
   public constructor(shape: ListShape<T, TMeta>) {
     const {
@@ -63,29 +63,42 @@ export class List<T, TMeta = unknown> {
       getItemId,
       defaultViewMode,
       accordion = false,
+      infiniteScroll = false,
       loadingItemsCount = 5,
+      settingsStorageDefaults,
+      emptyView,
+      emptySearchResultView,
       ...componentProps
     } = shape;
 
-    this.settingsStore = useSettings();
-    this.settingStorageKey = settingStorageKey;
-    this.filterSettingsStorageKey = settingStorageKey
-      ? `${settingStorageKey}.activeFilters`
-      : undefined;
-    this.viewModeStorageKey = settingStorageKey
-      ? `${settingStorageKey}.viewMode`
-      : undefined;
-    this.sortingStorageKey = settingStorageKey
-      ? `${settingStorageKey}.sorting`
-      : undefined;
-    this.supportsSettingsStorage = !!this.settingStorageKey;
+    const warnDeprecation = useWarnDeprecation();
+    if (itemView?.fallback !== undefined) {
+      warnDeprecation(
+        "The 'fallback' prop is deprecated and will be removed in a future release. Use 'loadingView' instead.",
+      );
+    }
+
+    this.settingsStorageDefaults = settingsStorageDefaults;
+    const generalSettingsStore = useSettings();
+
+    this.settingsStorage =
+      settingStorageKey && generalSettingsStore
+        ? new ListSettingsStore(this, generalSettingsStore, {
+            storageKey: settingStorageKey,
+          })
+        : undefined;
 
     this.items = new ItemCollection(this);
-    this.filters = filters.map((shape) => new Filter(this, shape));
+    this.filters = filters.map((shape) =>
+      shape.mode === "dateRange"
+        ? new DateRangeFilter(this, shape)
+        : new Filter(this, shape),
+    );
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;
     this.accordion = accordion;
+    this.infiniteScroll = infiniteScroll;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
     this.componentProps = componentProps;
@@ -98,106 +111,31 @@ export class List<T, TMeta = unknown> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
-
-    const [viewMode, setViewMode] = useState(
-      this.getStoredViewModeDefaultSetting() ?? defaultViewMode ?? "list",
-    );
-    this.viewMode = viewMode;
-
-    this.setViewMode = (viewMode) => {
-      setViewMode(viewMode);
-      if (this.settingsStore && this.viewModeStorageKey) {
-        this.settingsStore.set(
-          "List",
-          this.viewModeStorageKey,
-          List.viewModeSettingsStorageSchema,
-          viewMode,
-        );
-      }
-    };
+    this.viewMode = new ListViewMode(this, { defaultViewMode });
+    this.emptyView = emptyView;
+    this.emptySearchResultView = emptySearchResultView;
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
     }, [this.filters]);
   }
 
-  public get isFiltered(): boolean {
-    return (
-      this.filters.some((f) => f.isActive()) ||
-      (!!this.search && this.search.isSet)
-    );
+  public getEmptyViewType(): EmptyViewType {
+    return this.hasActiveFilters || this.search?.isSet ? "search" : "list";
+  }
+
+  public get hasActiveFilters(): boolean {
+    return this.filters.some((f) => f.isActive());
   }
 
   public get visibleSorting() {
-    return this.sorting.filter((s) => s.defaultEnabled !== "hidden");
+    return this.sorting.filter((s) => s.initialEnabled !== "hidden");
   }
 
   public static useNew<T, TMeta = unknown>(
     shape: ListShape<T, TMeta>,
   ): List<T, TMeta> {
     return new List<T, TMeta>(shape);
-  }
-
-  public storeFilterDefaultSettings() {
-    if (this.settingsStore && this.filterSettingsStorageKey) {
-      const data = Object.fromEntries(
-        this.filters.map((f) => [
-          f.property,
-          f
-            .getArrayValue()
-            .filter((v) => v.isActive)
-            .map((v) => v.id),
-        ]),
-      );
-
-      this.settingsStore.set(
-        "List",
-        this.filterSettingsStorageKey,
-        Filter.settingsStorageSchema,
-        data,
-      );
-    }
-  }
-
-  public getStoredFilterDefaultSettings() {
-    if (this.settingsStore && this.filterSettingsStorageKey) {
-      return this.settingsStore.get(
-        "List",
-        this.filterSettingsStorageKey,
-        Filter.settingsStorageSchema,
-      );
-    }
-  }
-
-  public getStoredViewModeDefaultSetting() {
-    if (this.settingsStore && this.viewModeStorageKey) {
-      return this.settingsStore.get(
-        "List",
-        this.viewModeStorageKey,
-        List.viewModeSettingsStorageSchema,
-      );
-    }
-  }
-
-  public storeSortingSettings(sorting: Sorting<T>) {
-    if (this.settingsStore && this.sortingStorageKey) {
-      this.settingsStore.set(
-        "List",
-        this.sortingStorageKey,
-        Sorting.storageSchema,
-        { direction: sorting.direction, property: sorting.property },
-      );
-    }
-  }
-
-  public getStoredSortingDefaultSetting() {
-    if (this.settingsStore && this.sortingStorageKey) {
-      return this.settingsStore.get(
-        "List",
-        this.sortingStorageKey,
-        Sorting.storageSchema,
-      );
-    }
   }
 
   public getSorting(id: string): Sorting<T> {

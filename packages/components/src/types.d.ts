@@ -2,22 +2,19 @@
 import type { JSX as Jsx } from "react/jsx-runtime";
 
 import "@vitest/browser/matchers.d.ts";
+import "vitest/globals";
+import "@testing-library/jest-dom";
 
 declare global {
+  declare module "*.grammar" {
+    import type { LRParser } from "@lezer/lr";
+    export const parser: LRParser;
+  }
+
   declare module "*.locale.json" {
     import type { LocalizedStrings } from "react-aria";
     const langFile: LocalizedStrings;
     export default langFile;
-  }
-
-  declare module "*.module.css" {
-    const classes: Record<string, string>;
-    export default classes;
-  }
-
-  declare module "*.module.scss" {
-    const classes: Record<string, string>;
-    export default classes;
   }
 
   // React 19 types workaround for outdated types from third party deps
@@ -32,5 +29,8 @@ declare global {
   }
 }
 
-import "vitest/globals";
-import "@testing-library/jest-dom";
+declare module "vitest/browser" {
+  interface BrowserCommands {
+    setReducedMotion: (value: string) => Promise<void>;
+  }
+}

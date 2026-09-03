@@ -5,42 +5,86 @@ import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
-import type { Status } from "@/lib/types/props";
+import { alphaColors, type Status, statusTypes } from "@/lib/types/props";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
+const iconColors = [
+  "neutral",
+  "blue",
+  "violet",
+  "teal",
+  "lilac",
+  ...statusTypes,
+  ...alphaColors,
+] as const;
+
+type IconColor = (typeof iconColors)[number];
+type IconWithCustomColor = IconColor | (string & {});
+
+function isIconColor(something: unknown): something is IconColor {
+  const anyIconColors = iconColors as readonly string[];
+  return typeof something === "string" && anyIconColors.includes(something);
+}
+
 export interface IconProps
   extends
-    PropsWithChildren<Omit<SvgAttributeProps, "name">>,
+    PropsWithChildren<Omit<SvgAttributeProps, "name" | "color">>,
     FlowComponentProps {
-  status?: Status | "unavailable";
   /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
+  /**
+   * The color of the icon. Besides the Flow colors, any custom CSS color is
+   * supported. Inherits the surrounding text color when unset.
+   */
+  color?: IconWithCustomColor;
+  /**
+   * The elements status.
+   *
+   * @deprecated Use `color` instead.
+   */
+  status?: Status;
 }
 
 /** @flr-generate all */
 export const Icon = flowComponent("Icon", (props) => {
+  const warnDeprecation = useWarnDeprecation();
   const {
     className,
     "aria-label": ariaLabel,
     children,
     size = "m",
     status,
-    ref: ignoredRef,
+    color,
     ...svgAttributes
   } = props;
 
+  if (status !== undefined) {
+    warnDeprecation(
+      "The 'status' prop is deprecated and will be removed in a future release. Use 'color' instead.",
+    );
+  }
+
+  const resolvedColor = color ?? status;
+  const paletteColor = isIconColor(resolvedColor) ? resolvedColor : undefined;
+  const customColor = paletteColor === undefined ? resolvedColor : undefined;
+  const customColorStyle = customColor
+    ? { color: customColor, ...svgAttributes.style }
+    : undefined;
+
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
+    ...(customColorStyle && { style: customColorStyle }),
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
     className: clsx(
       styles.icon,
-      className,
       styles[`size-${size}`],
-      status && styles[status],
+      paletteColor && styles[paletteColor],
+      className,
     ),
   };
 

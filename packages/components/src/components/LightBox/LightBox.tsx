@@ -12,9 +12,11 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { IconClose } from "@/components/Icon/components/icons";
 import styles from "./LightBox.module.scss";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface LightBoxProps
   extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
@@ -45,9 +47,17 @@ export const LightBox = flowComponent("LightBox", (props) => {
 
   const propsContext: PropsContext = {
     ActionGroup: {
+      preserveOrder: true,
+      spacing: "m",
       className: styles.actionGroup,
-      Button: { variant: "solid", color: "light" },
-      tunnelId: "actionGroup",
+      Button: { variant: "solid", color: "light-static" },
+      tunnel: {
+        id: "actionGroup",
+        component: "LightBox",
+      },
+    },
+    LightBoxGallery: {
+      className: styles.gallery,
     },
   };
 
@@ -57,6 +67,8 @@ export const LightBox = flowComponent("LightBox", (props) => {
 
   const controller = controllerFromProps ?? controllerFromContext;
 
+  const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
+
   return (
     <Overlay
       overlayType="LightBox"
@@ -65,19 +77,18 @@ export const LightBox = flowComponent("LightBox", (props) => {
       {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <DivView className={styles.content}>{children}</DivView>
-          <DivView className={styles.actions}>
-            <ButtonView
-              color="light"
-              variant="solid"
-              onPress={controller.close}
-            >
-              <IconClose />
-            </ButtonView>
-            <TunnelExit id="actionGroup" />
-          </DivView>
-        </TunnelProvider>
+        <DivView className={styles.content}>{children}</DivView>
+        <DivView className={styles.actions}>
+          <ButtonView
+            color="light-static"
+            variant="solid"
+            onPress={() => controller.close()}
+            aria-label={stringFormatter.format("close")}
+          >
+            <IconClose />
+          </ButtonView>
+          <UiComponentTunnelExit id="actionGroup" component="LightBox" />
+        </DivView>
       </PropsContextProvider>
     </Overlay>
   );

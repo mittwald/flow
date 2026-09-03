@@ -1,20 +1,26 @@
 import type { FC } from "react";
 import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useList } from "@/components/List";
 import { IconView } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import TextView from "@/views/TextView";
 import { ViewModeMenuItem } from "@/components/List/components/Header/components/ViewModeContextMenu/ViewModeMenuItem";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
-import styles from "@/components/List/components/Header/Header.module.css";
+import styles from "@/components/List/components/Header/Header.module.scss";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
-export const ViewModeContextMenu: FC = () => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const ViewModeContextMenu: FC<Props> = (props) => {
+  const { isDisabled } = props;
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
   const list = useList();
-  const selectedViewMode = list.viewMode;
+  const selectedViewMode = list.viewMode.value;
 
   const availableViewModes = useAvailableViewModes();
 
@@ -27,11 +33,12 @@ export const ViewModeContextMenu: FC = () => {
       <ButtonView
         variant="outline"
         color="secondary"
-        aria-label={stringFormatter.format("list.settings")}
+        aria-label={stringFormatter.format("settings")}
         className={styles.hideOnMobile}
+        isDisabled={isDisabled}
       >
         <TextView>
-          {stringFormatter.format(`list.settings.viewMode.${selectedViewMode}`)}
+          {stringFormatter.format(`settings.viewMode.${selectedViewMode}`)}
         </TextView>
         <IconView />
       </ButtonView>

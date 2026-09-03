@@ -1,12 +1,23 @@
 "use client";
-import { type FC, useEffect, useState } from "react";
-import styles from "../../../layout.module.scss";
-import { Image, Link } from "@mittwald/flow-react-components";
-import logoMittwald from "../../../../../assets/flow-logo.svg";
-import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
+import { type FC } from "react";
+import styles from "./Header.module.scss";
+import {
+  Link,
+  useModalController,
+  HeaderNavigation,
+  Flex,
+} from "@mittwald/flow-react-components";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation";
-import clsx from "clsx";
+import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
+import {
+  SearchButton,
+  SearchDialog,
+} from "@/app/_components/layout/DocsSearch";
+import Groups from "@/app/_components/layout/Groups";
+import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
+import { SkipLink } from "@/app/_components/layout/Header/SkipLink";
+import { GitHubButton } from "@/app/_components/layout/Header/components/GitHubButton";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -14,41 +25,37 @@ interface Props {
 
 const Header: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
-
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const searchController = useModalController();
 
   return (
-    <header className={clsx(styles.header, hasScrolled && styles.scrolled)}>
+    <header className={styles.header}>
       <div className={styles.headerContent}>
-        <Link href="/">
-          <Image
-            className={styles.logo}
-            src={logoMittwald.src}
-            alt="mittwald Flow Logo"
-          />
-        </Link>
-        <HeaderNavigation
-          className={styles.headerNavigation}
-          docs={docs.map((mdx) => mdx.serialize())}
-        />
+        <Flex align="center" gap="l">
+          <div className={styles.brand}>
+            <Link href="/" aria-label="Flow">
+              <FlowLogo className={styles.logo} />
+            </Link>
+            <SkipLink />
+          </div>
+          <HeaderNavigation
+            className={styles.headerNavigation}
+            aria-label="Header Navigation"
+          >
+            <Groups docs={docs.map((mdx) => mdx.serialize())} />
+          </HeaderNavigation>
+        </Flex>
+        <Flex gap="m" className={styles.desktopActions}>
+          <SearchButton controller={searchController} />
+          <GitHubButton />
+          <ThemeSwitcherButton iconOnly />
+        </Flex>
         <MobileNavigation
           docs={docs.map((mdx) => mdx.serialize())}
           className={styles.mobileNavigation}
+          searchController={searchController}
         />
       </div>
+      <SearchDialog controller={searchController} />
     </header>
   );
 };

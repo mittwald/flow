@@ -1,6 +1,5 @@
 import { markAsTransferable } from "@quilted/threads";
 import { Serializer } from "@/serialization/Serializer";
-import { getAwaitArrayBuffer } from "@mittwald/flow-core";
 
 export interface SerializedFile {
   name: string;
@@ -20,12 +19,12 @@ export const isSerializedFile = (value: unknown): value is SerializedFile => {
   );
 };
 
-export const fileSerialize = (file: File): SerializedFile => {
+export const fileSerialize = async (file: File): Promise<SerializedFile> => {
   return {
     name: file.name,
     type: file.type,
     lastModified: file.lastModified,
-    content: markAsTransferable(getAwaitArrayBuffer(file)),
+    content: markAsTransferable(await file.arrayBuffer()),
   };
 };
 

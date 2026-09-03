@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   NotificationProvider,
   useNotificationController,
@@ -9,7 +9,7 @@ import { Notification } from "@/components/Notification";
 import { Heading } from "@/components/Heading";
 
 const meta: Meta<{ autoClose: boolean }> = {
-  title: "Status/Notifications",
+  title: "Status/Notification",
   decorators: [
     (Story) => (
       <NotificationProvider>
@@ -17,6 +17,9 @@ const meta: Meta<{ autoClose: boolean }> = {
       </NotificationProvider>
     ),
   ],
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => {
     const notificationController = useNotificationController();
 
@@ -27,9 +30,10 @@ const meta: Meta<{ autoClose: boolean }> = {
             autoClose={props.autoClose}
             onClick={() => alert("Notification clicked")}
           >
-            <Heading>Email address archived</Heading>
+            <Heading>Transmission received</Heading>
             <Text>
-              Your email address examples@mittwald.de has been archived.
+              A message from leia.organa@rebellion.org has reached the Rebel
+              base.
             </Text>
           </Notification>,
         );
@@ -42,14 +46,14 @@ const meta: Meta<{ autoClose: boolean }> = {
             onClick={() => alert("Notification clicked")}
             status="warning"
           >
-            <Heading>No SSL certificate</Heading>
-            <Text>No SSL certificate could be issued for examples.de.</Text>
+            <Heading>Shields offline</Heading>
+            <Text>Deflector shields could not be raised on Hoth.</Text>
           </Notification>,
         );
       }, 2000);
     }, []);
 
-    return <Text>Notifications incoming...</Text>;
+    return <Text>Transmissions incoming...</Text>;
   },
 };
 
@@ -57,6 +61,6 @@ export default meta;
 
 type Story = StoryObj<{ autoClose: boolean }>;
 
-export const Default: Story = {};
+export const Incoming: Story = {};
 
 export const WithAutoClose: Story = { args: { autoClose: true } };

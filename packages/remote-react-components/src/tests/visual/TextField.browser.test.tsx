@@ -43,6 +43,7 @@ test.each(testEnvironments)(
         </TextField>
         <TextField isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </TextField>
         <TextField type="password">
           <Label>Password</Label>
@@ -76,5 +77,36 @@ test.each(testEnvironments)(
     await userEvent.type(input, "asdf");
 
     await testScreenshot("TextField - text entered");
+  },
+);
+
+test.each(testEnvironments)(
+  "TextField edge cases (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, TextField, Label, Button, IconStar },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <TextField value="A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole the secret plans to the Death Star weapon.">
+          <Label>Default</Label>
+        </TextField>
+        <TextField
+          type="password"
+          value="A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole the secret plans to the Death Star weapon."
+        >
+          <Label>Password</Label>
+        </TextField>
+        <TextField value="A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole the secret plans to the Death Star weapon.">
+          <Label>CustomButton</Label>
+          <Button aria-label="Custom">
+            <IconStar />
+          </Button>
+        </TextField>
+      </Flex>,
+    );
+
+    await testScreenshot("TextField edge cases");
   },
 );
