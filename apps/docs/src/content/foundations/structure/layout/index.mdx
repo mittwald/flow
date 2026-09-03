@@ -34,8 +34,6 @@ Bereiche einteilen: **Header**, **Side-Navigation**, **Content** und
 Components und deren Komposition bestimmt. In unseren Components ist das
 [Spacing](/foundations/structure/spacing) bereits integriert.
 
-Verschiedene Layouts mit Code zum Kopieren finden sich unter Code Templates.
-
 <DoAndDont>
   <Info example="general-layout" heading="Layout-Aufbau">
     Grobes Layout einer Seite. Eingeteilt in Header-, Side-Navigation- und
@@ -46,6 +44,24 @@ Verschiedene Layouts mit Code zum Kopieren finden sich unter Code Templates.
     Navigation.
   </MStudio>
 </DoAndDont>
+
+## Aufbau in Code
+
+Die vier Bereiche entstehen aus der Komposition weniger Components – eigenes
+Grid- oder Flex-CSS braucht es dafür nicht. Der Header trägt eine
+[HeaderNavigation](/components/navigation/header-navigation), die
+Side-Navigation eine [Navigation](/components/navigation/navigation) in einer
+[LayoutCard](/components/structure/layout-card), der Content eine weitere
+LayoutCard mit [Section](/components/structure/section).
+
+Die Aufteilung zwischen Side-Navigation und Content übernimmt das
+[ColumnLayout](/components/structure/column-layout): `l={[1, 4]}` gibt der
+Navigation ein Fünftel der Breite, `s={[null, 1]}` blendet sie auf schmalen
+Containern aus. Es rechnet dabei mit Container Queries, nicht mit der
+Fensterbreite – ein Layout, das in einer Spalte steckt, verhält sich daher
+richtig, ohne dass du Breakpoints pflegst.
+
+<LiveCodeEditor example="page-layout" editorCollapsed />
 
 ## Header
 
