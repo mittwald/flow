@@ -27,6 +27,47 @@ diese Zeile zum Einstiegspunkt deines Projektes hinzu.
 import "@mittwald/flow-react-components/all.css";
 ```
 
+## Flows Styles überschreiben
+
+`all.css` ist ungelayert: welche Regel gewinnt, entscheidet sich über Spezifität
+und Quell-Reihenfolge. Jede eigene Überschreibung muss deshalb den Selektor von
+Flow übertreffen – in der Praxis mit Nachfahren-Ketten oder `!important`.
+
+Willst du Flows Styles überschreiben, importiere stattdessen die gelayerte
+Variante:
+
+```
+import "@mittwald/flow-react-components/all-layered.css";
+```
+
+Ihre Styles liegen in
+[CSS Cascade Layers](https://developer.mozilla.org/de/docs/Web/CSS/@layer). Nach
+deren Regeln gewinnt ungelayertes CSS immer gegen gelayertes – dein eigenes CSS
+setzt sich damit ohne Spezifitäts-Tricks durch:
+
+```css
+/* Gewinnt gegen Flows .flow--button, ohne !important */
+.flow--button {
+  border-radius: 0;
+}
+```
+
+Wie die Klassennamen aufgebaut sind und wann welche Variante passt, steht unter
+[Standalone Stylesheet](/get-started/stylesheet).
+
+## Schriftarten
+
+Das Stylesheet lädt Inter und FiraCode per `@font-face` von `cdn.mittwald.de`.
+Setzt deine Anwendung eine Content Security Policy, muss `font-src` diesen Host
+erlauben:
+
+```
+font-src 'self' https://cdn.mittwald.de;
+```
+
+Fehlt die Freigabe, bricht der Font-Request ab und der Browser stellt die
+Anwendung ohne Rückmeldung in der Systemschrift dar.
+
 ---
 
 # Defaults für Components festlegen
