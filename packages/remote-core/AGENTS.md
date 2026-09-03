@@ -44,6 +44,12 @@ Connection + serialization layer between host (mStudio) and remote apps
   That is a net, not a fix: the prop belongs in a **slot**. The generator fails
   the build on such a prop — see `checkSerializableProps` in the components
   package.
+- **`isSerializableByBase` accepts any function**, so a function prop becomes a
+  thread proxy — and a proxy call is a round trip, so the host gets a Promise,
+  not the value. Fine for `on*` events, which nobody reads the return of; wrong
+  for anything the host uses synchronously (`XAxis.tickFormatter` rendered
+  `[object Promise]` into every tick). `checkSerializableProps` fails the build
+  on a new one.
 - Unit tests run in happy-dom: `pnpm nx test:unit remote-core`. The repeated
   reference and circular reference cases in `FlowThreadSerialization.test.tsx`
   are what fails if the sequential invariant breaks;

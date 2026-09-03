@@ -158,6 +158,15 @@ Remote generation details:
   output, because the host has to call it: that needs an eager slot or
   `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
   prop, so a new one cannot ship.
+- **A function property's return value is a Promise on the host.** Functions do
+  cross — as thread proxies — but calling one is a round trip. Type the return
+  as `Promise<T> | T` and await it on the host (`ChartTooltip`'s formatters), or
+  keep the prop off the remote surface with `@flr-ignore-props` (`XAxis`/`YAxis`
+  `tickFormatter`). A host that reads the result synchronously gets the Promise
+  itself — recharts concatenated it into every tick as `[object Promise]`.
+  `checkSerializableProps` fails generation on a new one; the pre-existing set
+  is listed in `acknowledgedValueReturningProps`, which can neither grow nor go
+  stale.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
