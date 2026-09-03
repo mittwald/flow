@@ -38,6 +38,11 @@ Die List unterstützt drei Ansichten: **Liste**, **Raster** und **Tabelle**. Die
 Default-Ansicht legst du über das Property `defaultViewMode` fest; sind mehrere
 Ansichten verfügbar, wechselt der User über den Ansichts-Button zwischen ihnen.
 
+Jedes Element renderst du über `List.Item`. Den Inhalt gestaltest du frei mit
+einer eigenen View – oder du nutzt die vorgefertigte Layout-Lösung
+[List.ItemView](/components/list/list-item-view), die Avatar, Titel, Content und
+Aktionen einheitlich anordnet.
+
 ## Listenansicht
 
 Besonders geeignet, wenn viele Elemente übersichtlich, platzsparend und
@@ -49,7 +54,7 @@ Listenansicht darzustellen.
 ## Rasteransicht
 
 Sinnvoll, wenn die Anzahl der Elemente überschaubar ist oder die visuelle
-Darstellung im Vordergrund steht – das List-Item sollte hier nur wenige
+Darstellung im Vordergrund steht – das `List.Item` sollte hier nur wenige
 Informationen enthalten. Für die Rasteransicht wird ebenfalls das
 `<List.Item />` verwendet: Aktiviere sie über `showTiles` und deaktiviere die
 Listenansicht bei Bedarf mit `showList={false}`. Über `maxTileWidth` steuerst du
@@ -65,15 +70,6 @@ Gestaltung zweitrangig ist. Nutze `<List.Table />`, um die List als
 der Table.
 
 <LiveCodeEditor example="mode-table" editorCollapsed />
-
----
-
-# List.Item
-
-Jedes Element der List renderst du über `List.Item`. Den Inhalt gestaltest du
-frei mit einer eigenen View – oder du nutzt die vorgefertigte Layout-Lösung
-[`List.ItemView`](/components/list/list-item-view), die Avatar, Titel, Content
-und Aktionen einheitlich anordnet.
 
 ---
 
