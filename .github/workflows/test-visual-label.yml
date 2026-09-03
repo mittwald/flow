@@ -69,15 +69,10 @@ jobs:
   # browsers, so one runner spent 24-34 minutes on it. Sharding is the only split
   # that keeps each file's conditions identical: every shard still runs its own
   # files one at a time, in its own browser process.
-  #
-  # `attempts` matches the scheduled run, and the timeout matches it for the same
-  # reason: three attempts of a shard have to fit inside the job. This is the
-  # path contributors are told to use, so it is the path that must not report a
-  # contended runner as a diff.
   run-visual-tests:
     needs: prepare
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     strategy:
       # A failing shard must not cancel the others — the diffs of the shards
       # still running are what tell you whether the change is broad or local.
@@ -98,7 +93,6 @@ jobs:
         with:
           shard: ${{ matrix.shard }}
           shards: ${{ strategy.job-total }}
-          attempts: "3"
 
       # vitest writes the diffs into `.vitest-attachments`, six directory levels
       # deep. Uploaded as they lie, the zip opens on a dot directory Finder does
