@@ -136,17 +136,17 @@ pnpm format:check                          # prettier --check (part of pnpm lint
 CI enforces `git diff --exit-code` after building: **generated files are
 committed, and hand-editing them is futile** (headers say "auto-generated").
 
-| Generated artifact                                                                   | Generator                                    |
-| ------------------------------------------------------------------------------------ | -------------------------------------------- |
-| `packages/components/src/components/**/view.ts` + `src/views/*`                      | `pnpm nx build:remote-components components` |
-| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**`   | same as above                                |
-| `packages/components/src/**/*.module.d.scss.ts` (CSS-module class-name types)        | `pnpm nx build:scss-types components`        |
-| `packages/components/src/components/Icon/components/icons/*`                         | `pnpm nx build:icons components`             |
-| `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`             | `pnpm nx build:icons icons` / `icons-pro`    |
-| `packages/components/dist/assets/doc-properties.json` (from prop JSDoc)              | `pnpm nx build:docs-properties components`   |
-| `packages/components/dist/assets/component-index.json` (consumer-facing index)       | `pnpm nx build:component-index components`   |
-| `packages/components/MIGRATION.md` + `packages/codemods/src/migrations.generated.ts` | `pnpm nx build codemods`                     |
-| `packages/codemods/src/flowPackages.generated.ts`                                    | same as above                                |
+| Generated artifact                                                                                                                           | Generator                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `packages/components/src/components/**/view.ts` + `src/views/*`                                                                              | `pnpm nx build:remote-components components`                       |
+| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**`                                                           | same as above                                                      |
+| `packages/components/src/**/*.module.d.scss.ts`, `apps/{docs,remote-dom-demo}/src/**/*.module.d.{scss,css}.ts` (CSS-module class-name types) | `pnpm nx build:scss-types components` / `docs` / `remote-dom-demo` |
+| `packages/components/src/components/Icon/components/icons/*`                                                                                 | `pnpm nx build:icons components`                                   |
+| `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`                                                                     | `pnpm nx build:icons icons` / `icons-pro`                          |
+| `packages/components/dist/assets/doc-properties.json` (from prop JSDoc)                                                                      | `pnpm nx build:docs-properties components`                         |
+| `packages/components/dist/assets/component-index.json` (consumer-facing index)                                                               | `pnpm nx build:component-index components`                         |
+| `packages/components/MIGRATION.md` + `packages/codemods/src/migrations.generated.ts`                                                         | `pnpm nx build codemods`                                           |
+| `packages/codemods/src/flowPackages.generated.ts`                                                                                            | same as above                                                      |
 
 Changed props on an `@flr-generate` component, added an icon, edited prop JSDoc,
 or changed a `.module.scss`'s class names? Regenerate (or simply `pnpm build`)

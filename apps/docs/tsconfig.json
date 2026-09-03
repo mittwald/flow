@@ -2,7 +2,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "allowArbitraryExtensions": true
   },
   "extends": "@mittwald/typescript-config/nextjs.json",
   "include": [

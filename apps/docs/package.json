@@ -7,6 +7,7 @@
     "build": "next build",
     "build:deps": "",
     "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
+    "build:scss-types": "tsx dev/generateScssTypes.ts",
     "dev": "next dev",
     "postinstall": "fumadocs-mdx",
     "start": "pnpx serve@latest out",
@@ -54,6 +55,7 @@
     "webpack": "^5.107.2"
   },
   "devDependencies": {
+    "@mittwald/flow-core": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@next/eslint-plugin-next": "~16.3.2",
     "@types/node": "^25.9.3",
