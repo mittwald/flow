@@ -103,8 +103,31 @@ jobs:
       # output made it into the job log, the failure summary never did — three
       # runs in a row went red with nothing but a line cut off mid-word to show
       # for it. Calling vitest directly streams the whole run.
+      #
+      # In the same six shards the verify runs use (test-visual-label.yml,
+      # test-visual-scheduled.yml), one after another: the update needs every
+      # baseline in one checkout, so it cannot spread them over runners. The
+      # split is not for speed. With `fileParallelism: false` vitest opens one
+      # page per browser for the whole run and plays every test file into it as
+      # an iframe, and that page's memory grows with each file — every
+      # unsharded run since 2026-09-02 lost the browser around the 105th of 168
+      # file runs (`[vitest] Browser connection was closed while running
+      # tests`, #3118). Each shard is its own vitest process with fresh
+      # browsers, so no page ever carries more than a sixth of the suite — the
+      # conditions the baselines are verified under. vitest hashes the file
+      # paths into shards, so the split is the verify runs' split.
       - name: Update Visual Regression Screenshots
-        run: pnpm --filter @mittwald/flow-remote-react-components test:visual:update
+        run: |
+          shards=6
+          for shard in $(seq 1 "$shards"); do
+            echo "::group::Visual tests, shard $shard/$shards"
+            if ! pnpm --filter @mittwald/flow-remote-react-components test:visual:update --shard="$shard/$shards"; then
+              echo "::endgroup::"
+              echo "::error::Shard $shard/$shards failed."
+              exit 1
+            fi
+            echo "::endgroup::"
+          done
       # check what changed
       - name: Check for changes
         id: check_changes
