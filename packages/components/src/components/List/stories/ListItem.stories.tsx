@@ -30,7 +30,7 @@ export const WithContent: Story = {
     const List = typedList<{ mail: string }>();
 
     return (
-      <List.List>
+      <List.List aria-label="Mail addresses">
         <List.StaticData data={[{ mail: "luke.skywalker@rebellion.org" }]} />
         <List.Item showTiles textValue={(mail) => mail.mail}>
           {(mail) => (
@@ -63,7 +63,7 @@ export const WithActionGroup: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List>
+      <List.List aria-label="Users">
         <List.StaticData data={[{ name: "Han Solo" }]} />
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
@@ -96,7 +96,7 @@ export const WithCustomTileMaxWidth: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List defaultViewMode="tiles">
+      <List.List aria-label="Users" defaultViewMode="tiles">
         <List.StaticData data={[{ name: "Leia Organa" }]} />
         <List.Item tileMaxWidth={100} showTiles textValue={(user) => user.name}>
           {(user) => (
@@ -120,7 +120,7 @@ export const WithCheckbox: Story = {
     const List = typedList<{ mail: string }>();
 
     return (
-      <List.List>
+      <List.List aria-label="Mail addresses">
         <List.StaticData data={[{ mail: "leia.organa@rebellion.org" }]} />
         <List.Table>
           <List.TableHeader>
@@ -162,7 +162,7 @@ export const WithColumnLayout: Story = {
     const List = typedList<{ mail: string }>();
 
     return (
-      <List.List>
+      <List.List aria-label="Mail addresses">
         <List.StaticData
           data={[
             { mail: "han.solo@rebellion.org" },

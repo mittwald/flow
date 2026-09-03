@@ -88,6 +88,16 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
       "Replace the import path `@mittwald/flow-react-components/password-tools` with `@mittwald/flow-react-components/mittwald-password-tools-js`.",
   },
   {
+    id: "tabs-navigation-usage-to-tab-navigation",
+    since: "0.2.0-alpha.977",
+    title: "Tabs restyled; navigation usage moves to TabNavigation",
+    kind: "migration",
+    action: "manual",
+    remotePackage: true,
+    apply:
+      "Tabs' rendering changed: the tab list now fills the available width with equal-size tabs and a shared, animated indicator that slides between them, replacing the previous fit-content tabs that each carried their own hover/pressed/selected background. Nothing else about `Tabs` changed, and a `Tabs` that switches content within a page needs no code change — the new look applies on upgrade. Where `Tabs` was used to fake real navigation instead — a `TabTitle` given an `href` (`Aria.Tab`'s routing props: `href`, `target`, `routerOptions`, …) so selecting it pushed a real route change — replace it with `TabNavigation`: plain `Link` children instead of `Tab`/`TabTitle`/panels, `aria-current=\"page\"` on the active `Link` instead of `selectedKey`/`defaultSelectedKey`/`onSelectionChange`. `TabNavigation` keeps the visual language the old `Tabs` used to have, because it now owns that use case.",
+  },
+  {
     id: "table-column-width-props",
     since: "0.2.0-alpha.956",
     title: "TableColumn: `maxWidth` removed, `width` and `minWidth` retyped",

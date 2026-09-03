@@ -1,16 +1,19 @@
-import { ProgressBar } from "@mittwald/flow-react-components";
+import {
+  Label,
+  ProgressBar,
+} from "@mittwald/flow-react-components";
 
 <>
   <ProgressBar value={100} status="success">
-    Success
+    <Label>Success</Label>
   </ProgressBar>
   <ProgressBar value={50} status="info">
-    Info
+    <Label>Info</Label>
   </ProgressBar>
   <ProgressBar value={70} status="warning">
-    Warning
+    <Label>Warning</Label>
   </ProgressBar>
   <ProgressBar value={90} status="danger">
-    Danger
+    <Label>Danger</Label>
   </ProgressBar>
 </>;

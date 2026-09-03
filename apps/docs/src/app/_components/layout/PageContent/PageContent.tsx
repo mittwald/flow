@@ -7,6 +7,7 @@ import {
   Section,
 } from "@mittwald/flow-react-components";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
+import { topAnchorId } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { PageActions } from "@/app/_components/layout/PageActions/PageActions";
@@ -31,7 +32,13 @@ export const PageContent: FC<Props> = (props) => {
         <div className={styles.mainContent}>
           <Section>
             <Header>
-              <Heading level={1}>{title}</Heading>
+              <Heading
+                level={1}
+                id={topAnchorId}
+                className={styles.pageHeading}
+              >
+                {title}
+              </Heading>
               <PageActions
                 title={title}
                 markdownUrl={rawMarkdownPath([section, ...mdxFile.slugs])}

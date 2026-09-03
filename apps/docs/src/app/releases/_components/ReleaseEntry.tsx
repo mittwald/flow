@@ -31,12 +31,16 @@ export const ReleaseEntry: FC<{ release: Release }> = ({ release }) => {
 
   return (
     <Section>
-      <Heading level={2} id={releaseSlug(release.version)}>
+      <Heading
+        level={2}
+        id={releaseSlug(release.version)}
+        className={styles.heading}
+      >
         {release.version}{" "}
         <Badge color={release.kind === "major" ? "violet" : "blue"}>
           {release.kind === "major" ? "Major" : "Minor"}
-        </Badge>{" "}
-        – {release.title}
+        </Badge>
+        {release.title && <> – {release.title}</>}
       </Heading>
 
       <Text elementType="p" className={styles.meta}>

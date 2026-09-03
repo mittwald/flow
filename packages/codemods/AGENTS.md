@@ -5,18 +5,18 @@ the `@mittwald/flow-codemods` CLI that runs them.
 
 ## Layout
 
-| Path                                                             | What it holds                                                                                                                                                                                       |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/migrations/<id>/entry.md`                                   | The catalogue. One directory per migration, `entry.md` holding its frontmatter plus prose body. **The source.**                                                                                     |
-| `src/migrations/<id>/transform.ts`                               | The jscodeshift transform, only for entries with `action: codemod`.                                                                                                                                 |
-| `src/migrations/<id>/transform.test.ts`                          | That transform's fixtures, including its idempotency case. Required whenever `transform.ts` exists — see below.                                                                                     |
-| `src/tools`                                                      | Transforms with no catalogue entry, each with a co-located `<name>.test.ts`. Currently only `to-remote-package` — see [Does it apply to the remote package?](#does-it-apply-to-the-remote-package). |
-| `src/catalog`                                                    | Reading, typing and selecting catalogue entries.                                                                                                                                                    |
-| `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                                                                                                                  |
-| `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, package-manager install, and the dirty-working-tree guard for `upgrade`.                                                                                        |
-| `src/run`                                                        | Drives jscodeshift's `Runner` in-process (not the CLI binary).                                                                                                                                      |
-| `dev/generate`, `dev/buildTransforms.ts`                         | The three catalogue generators, plus the transforms' CommonJS compile — see [Transforms are compiled](#transforms-are-compiled-and-that-is-not-optional).                                           |
-| `src/tests`                                                      | Cross-cutting tests: catalogue invariants, remote-scope checks, the transform-test-coverage guard, and `runTransform`, the run-through-the-real-CLI helper every fixture test uses.                 |
+| Path                                                             | What it holds                                                                                                                                                                                                    |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/migrations/<id>/entry.md`                                   | The catalogue. One directory per migration, `entry.md` holding its frontmatter plus prose body. **The source.**                                                                                                  |
+| `src/migrations/<id>/transform.ts`                               | The jscodeshift transform, only for entries with `action: codemod`.                                                                                                                                              |
+| `src/migrations/<id>/transform.test.ts`                          | That transform's fixtures, including its idempotency case. Required whenever `transform.ts` exists — see below.                                                                                                  |
+| `src/tools`                                                      | Transforms with no catalogue entry, each with a co-located `<name>.test.ts`. Currently only `to-remote-package` — see [Does it apply to the remote package?](#does-it-apply-to-the-remote-package).              |
+| `src/catalog`                                                    | Reading, typing and selecting catalogue entries.                                                                                                                                                                 |
+| `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                                                                                                                               |
+| `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, the package-manager install (detection up the tree, `packageManager` pin, corepack bridge — via `package-manager-detector`), and the dirty-working-tree guard for `upgrade`. |
+| `src/run`                                                        | Drives jscodeshift's `Runner` in-process (not the CLI binary).                                                                                                                                                   |
+| `dev/generate`, `dev/buildTransforms.ts`                         | The three catalogue generators, plus the transforms' CommonJS compile — see [Transforms are compiled](#transforms-are-compiled-and-that-is-not-optional).                                                        |
+| `src/tests`                                                      | Cross-cutting tests: catalogue invariants, remote-scope checks, the transform-test-coverage guard, and `runTransform`, the run-through-the-real-CLI helper every fixture test uses.                              |
 
 The directory **is** the id — it appears once, instead of once per filename
 spread across three separate directories. A migration with no codemod is a
@@ -83,6 +83,35 @@ build instead of shipping.
 A transform may import shared helpers from elsewhere in `src` — they are
 compiled along with it. What it must not do is reach anything that stays outside
 `dist`.
+
+### The install is detected, not assumed
+
+`src/install.ts` wraps `package-manager-detector` (zero dependencies) for both
+detection and command resolution; execution stays ours, because that is where
+the test seam (`InstallRunner`, `Probe`), the frozen-lockfile quirks and the
+Windows `shell` flag live.
+
+Three things there are load-bearing and easy to undo by accident:
+
+- **Detection walks up.** A workspace package has no lockfile, and detecting in
+  `cwd` alone fell through to `npm install` — which dies on a `workspace:*`
+  manifest, after `upgrade` already rewrote `package.json`.
+- **pnpm gets `--no-frozen-lockfile`, yarn gets
+  `YARN_ENABLE_IMMUTABLE_INSTALLS=false`.** `upgrade` just made the lockfile
+  stale on purpose, and both managers freeze it themselves when they detect CI.
+  The library's `"install"` is the plain install for every agent, so these
+  quirks are not something it will hand us.
+- **The `packageManager` pin is checked before corepack is used.** Corepack
+  ignores `PATH` and downloads into its own cache, so always routing through it
+  would send every pinned project — most of them — through a download, offline
+  CI included. The comparison is `semver.satisfies`, not a string compare: the
+  library reports a `\d+(\.\d+){0,2}` match, so `pnpm@8` yields the pin `"8"`
+  against a reported `8.15.0`.
+
+`resolveInvoke` is the same detection used for prose: it decides whether a
+printed command says `npx`, `pnpm dlx`, `yarn dlx` or `bun x`. That is why the
+bare `list` is no longer manifest-free — a deliberate trade, recorded in the
+README.
 
 ### Every transform has a test — enforced, not just conventional
 

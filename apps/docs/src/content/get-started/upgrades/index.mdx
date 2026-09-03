@@ -1,0 +1,418 @@
+---
+description:
+  Wie du eine neue Flow-Version einspielst – der Migrationsleitfaden für
+  Breaking Changes, die Codemod-CLI und was direkt nach einem Release zu
+  beachten ist.
+---
+
+---
+
+# Migration bei einer Breaking Change
+
+Jede Änderung, die eine Anpassung in deinem Code erfordert, steht mit
+Vorher-Nachher-Beispiel im Migrationsleitfaden des betroffenen Packages:
+
+- [Migrationsleitfaden @mittwald/flow-react-components](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md)
+  – deckt auch `@mittwald/flow-remote-react-components` ab
+- [Migrationsleitfaden @mittwald/ext-bridge](https://github.com/mittwald/flow/blob/main/packages/ext-bridge/MIGRATION.md)
+
+Die Einträge sind nach Version absteigend sortiert und nennen jeweils die
+Version, ab der die Änderung greift. Suche die Version, von der du kommst, und
+arbeite dich nach oben durch. Was dabei überhaupt als Breaking Change zählt und
+eine neue Major-Version erzwingt, beschreibt
+[Versionierung & Stabilität](/get-started/versioning).
+
+## Nutze die Codemod-CLI
+
+Ein Befehl hebt alle Flow-Abhängigkeiten auf die Zielversion, installiert und
+führt den Codemod jeder Migration bis zu dieser Version aus:
+
+```shell
+npx @mittwald/flow-codemods@latest upgrade
+```
+
+Ohne Argument geht es auf die nächste Minor innerhalb deiner Major.
+`upgrade patch` bleibt auf deiner Minor, `upgrade major` überquert eine
+Major-Grenze, und eine exakte Version oder ein Dist-Tag (`next`) gehen genau
+dorthin.
+
+Der Befehl ändert Dateien direkt und bricht auf einem unsauberen Git-Stand ab.
+
+Der Befehl kennt keine untere Grenze: er listet auch Migrationen, die vor deiner
+aktuellen Version erschienen sind. Nichts hält fest, welche davon dein Projekt
+schon durchgeführt hat – und ein zweiter Durchlauf eines Codemods ändert nichts.
+
+Ein Codemod, der durchgelaufen ist, ist allerdings kein Beweis: jeder Codemod
+ist bewusst eng gefasst und lässt liegen, was er aus dem Code nicht sicher
+entscheiden kann – ein gespreadetes Prop, eine Component, die über einen eigenen
+Wrapper re-exportiert wird, ein dynamischer Zugriff. Einen Fehler meldet er
+dafür nicht. Prüfe nach einem Upgrade deshalb auch die Migrationen mit Codemod
+am Code nach, nicht nur die ohne.
+
+Er ersetzt den Migrationsleitfaden nicht: die meisten Einträge haben keinen
+Codemod. Welche das für deinen Bereich sind, listet der Befehl am Ende auf –
+oder vorab, ohne etwas zu verändern, mit `list` und derselben Revision:
+
+```shell
+npx @mittwald/flow-codemods@latest list minor
+```
+
+`list` ohne Argument zeigt den gesamten Katalog, offline. Mit einer Revision
+liest es dieselbe Version aus deinem `package.json` und zeigt genau den Bereich,
+den `upgrade` mit dieser Revision anfassen würde – ein echter Trockenlauf.
+
+Einen einzelnen Codemod führst du über seine ID aus:
+
+```shell
+npx @mittwald/flow-codemods@latest align-to-combine src
+```
+
+## Lass einen Agenten das Upgrade machen
+
+Was die CLI offen lässt, kann ein Coding-Agent übernehmen: die Migrationen ohne
+Codemod – das sind die meisten – und die Stellen, die ein Codemod übersprungen
+hat. `list --json` liefert ihm dafür pro Migration das Feld `apply`: die
+Anweisung, was zu ändern ist, knapp genug für einen Katalog und präzise genug
+zum Ausführen.
+
+Kopiere den folgenden Prompt in deinen Agenten. Er sucht zuerst, wo Flow
+überhaupt deklariert ist – in einem Monorepo ist das meist mehr als ein Package,
+und `list` wie `upgrade` lesen immer nur die `package.json` des Verzeichnisses,
+in dem sie laufen. Dann klärt er auf, welche Zielversionen zur Wahl stehen und
+was jede davon an Arbeit bedeutet, und fragt dich, welche es sein soll. Danach
+geht er jede Migration im Bereich am Code nach – auch die mit Codemod – und
+ändert nur, wo er das alte Muster wirklich findet.
+
+Was dabei offen bleibt, gibt er dir nicht als Hausaufgabe zurück. Genau die
+Punkte, die eine Entscheidung brauchen, sind die, bei denen er den Diff gelesen
+hat und du nicht – deshalb legt er sie dir gesammelt vor, jeweils mit den
+Optionen und einer Empfehlung, setzt deine Antwort um und lässt die Checks
+erneut laufen. Das wiederholt sich, bis nichts mehr offen ist. Er hört vorher
+nur auf, wenn etwas wirklich nicht hier entschieden werden kann – eine
+Design-Entscheidung, eine Freigabe, ein Zugang – und sagt dann, worauf es wartet
+und wer es tun muss.
+
+Der Prompt ist englisch, weil alles, worauf er zeigt, englisch ist: die
+CLI-Ausgabe, die `apply`-Felder und der Migrationsleitfaden.
+
+```text
+Upgrade this project's mittwald Flow dependencies.
+
+First find out where Flow is declared. Search every `package.json` in the
+project for a `@mittwald/flow-` dependency, but only the ones the project
+actually maintains. `git ls-files "*package.json"` gets that right in one step:
+`node_modules` and build output — `dist`, `build`, `.next`, `.output`, `.nuxt`,
+`.svelte-kit`, `.turbo`, `out`, `coverage`, whatever this project emits — are
+git-ignored, and a copied or generated manifest in there would have you
+upgrading an artefact. Outside a git checkout, exclude those paths yourself.
+
+In a monorepo Flow is usually declared in several workspace packages, and the
+root often declares none. Every command below reads and writes exactly one
+`package.json`: the one in the directory you run it from. Neither `list` nor
+`upgrade` walks a workspace, so a single run at the root silently leaves every
+other package behind. Tell me which packages you found, and which Flow version
+each is currently on.
+
+Then plan — change nothing yet. From one of those packages, run all three and
+read the JSON:
+
+- `npx @mittwald/flow-codemods@latest list patch --json`
+- `npx @mittwald/flow-codemods@latest list minor --json`
+- `npx @mittwald/flow-codemods@latest list major --json`
+
+Each run reports the version it would resolve to (`range.target`) and every
+migration in that range. A relative revision only resolves if such a release
+exists: from a prerelease, or from the newest version on a line, `patch` and
+`minor` exit non-zero with no JSON and a message saying so. That is not an
+error to work around — it means the choice is narrower than three options.
+
+So show me what actually resolved, side by side: target version, how many
+migrations carry a codemod, how many need a hand. If fewer than three resolved,
+say which and why, and put a dist-tag (`next`) or an exact version (`1.4.0`) on
+the table as an equal option rather than a fallback — those always resolve.
+
+Then ask me which target to take, and wait for my answer.
+
+Then, on the target I chose:
+
+- Commit or stash what is open first. Do not pass `--allow-dirty` — that guard
+  is what keeps a bad run `git checkout`-able.
+- Run `npx @mittwald/flow-codemods@latest upgrade <target>`. It bumps the
+  dependencies, installs, and runs the codemod of every migration up to the
+  target. Pass `--path <dir>` unless the sources really are under `./src` —
+  find that directory before the first command, not after.
+- It bumps every package published from the Flow monorepo, not only the
+  `@mittwald/flow-*` ones: `@mittwald/ext-bridge`,
+  `@mittwald/mstudio-ext-react-components` and `@mittwald/react-tunnel` are on
+  the same release train and move too. Tell me which ones it actually rewrote.
+- Only if more than one package declares Flow: run it once per package, from
+  that package's own directory, passing the resolved exact version rather than
+  `patch`/`minor`/`major` — a relative revision resolves from the version that
+  one package is on, so packages that started out apart would land apart. And
+  commit after each one: the dirty-tree guard reads `git status` for the whole
+  repository, so the second run would otherwise refuse. Do not reach for
+  `--allow-dirty` instead; committing keeps each package a revertible step.
+- `peerDependencies` are reported and deliberately left untouched. Note what it
+  named as an open decision for the closing round below — do not hand it to me
+  now and do not narrow a range on your own. That report comes after the
+  install, so a failed install means you never see it; read the manifests
+  yourself then.
+- If the install fails with `ETARGET` or `ERR_PNPM_NO_MATCHING_VERSION` on a
+  Flow package, that is the publishing window right after a release. Wait a few
+  minutes and install again — do not pin anything and do not mix Flow versions
+  to get around it.
+- If the install fails for any other reason, do not wait and retry — that only
+  helps the case above. The manifest is already rewritten while `node_modules`
+  still holds the old version, so read the actual error and finish the install
+  yourself with the project's own package manager. The command detects the
+  manager from lockfiles in the directory it runs in, which in a workspace
+  package is the wrong place to look: check the repository root for a lockfile
+  and a `packageManager` field before trusting what it chose. Confirm the
+  versions it wrote are published, then install; revert the bump only if they
+  are not.
+
+Then check every migration against the code — every entry in the JSON, including
+the ones with `action: "codemod"`. A codemod is deliberately scoped
+narrowly and skips anything it cannot decide from the source: a spread prop, a
+component re-exported through a local wrapper, a dynamic access, a file outside
+the path it ran on. It reports no error for those. A codemod that ran clean is
+therefore not proof the old pattern is gone — treat its run as a head start, not
+as a result. Read the `upgrade` report for what it admits: an entry that changed
+no file, declined every file it looked at, or found nothing to process is the
+strongest hint that its pattern is still there in a shape it could not handle.
+
+One caveat on that report. "No files were processed. Is the path right?" is also
+what a codemod that crashed before touching a file looks like — the counters are
+identical, and the summary line guesses at the path. Check stderr for a stack
+trace before you believe the path is wrong, and tell me if a codemod died: its
+migration then had no run at all, and everything below is the only thing that
+covers it.
+
+Include the entries flagged `catchUp: true`. They shipped before the version
+this project was on and may never have been done here.
+
+For each entry:
+
+1. Read `apply`. It is the whole instruction — the JSON carries no example, and
+   the human-readable `list` output has none either. For a before/after example,
+   look up the entry id in `MIGRATION.md`, which ships inside
+   `@mittwald/flow-react-components` and is also on GitHub. Do not paste the
+   command `list` prints beside an entry: its path argument is hardcoded to
+   `src`, which is wrong wherever `--path` was needed above.
+2. Search for the old pattern across every package that uses Flow, not just the
+   one you last ran in. Resolve Flow imports properly — named, aliased and
+   namespace imports all count — and treat an entry marked `remotePackage: true`
+   as applying to `@mittwald/flow-remote-react-components` too.
+3. No match: say so and move on. No edit.
+4. Match: make the change `apply` describes, by hand. On a codemod entry, do not
+   just run the codemod again — it already saw that site and declined it, so a
+   second run declines it again.
+5. Leave an edit undone only when the right migration is genuinely ambiguous
+   from the code. Do not hand it to me here: record it as an open decision with
+   the entry id, the site, the options you see and which one you would pick and
+   why. The closing round below settles it.
+
+Keep the change scoped to the upgrade. No unrelated refactoring, no reformatting
+of files you did not otherwise touch.
+
+Then run the project's own checks — type check, lint, build, tests, whatever
+`package.json` provides — and fix what the upgrade broke. In a monorepo run them
+at the root so a package you did not touch is covered too: a Flow change in one
+package can break its consumer in another.
+
+A failure that was already there before the upgrade is not yours to fix, and not
+mine to be handed either. Check it against the commit you started from, then
+say which of the two it is. Pre-existing ones: name them in one line each and
+leave them alone — chasing them turns an upgrade into an open-ended cleanup. If
+the project has no checks at all, say that too, so neither of us mistakes
+silence for a green run.
+
+Then finish the migration with me. Do not hand me a list of leftovers — a
+migration that ends in homework is not done, and the open items are exactly the
+ones where you have the context and I do not, having not read the diff.
+
+Go through every open decision you recorded, plus the `peerDependencies` report,
+one at a time. For each: name the entry and the site, show the code as it
+stands, lay out the options in a sentence each, say which one you would pick and
+why, and ask me. Ask them in one pass rather than trickling them out, and put
+the ones that block a check first. If a decision turns out to have one obviously
+right answer once you look properly, take it and tell me — do not spend my
+attention on a question you can answer.
+
+Apply each answer as I give it, then run the checks again: a decision can break
+something the previous pass did not touch, and closing one item can make another
+moot. Repeat until nothing is open.
+
+Stop only when one of these is true, and say which:
+
+- Nothing is open. Every check that passed before the upgrade passes again — or
+  the project has none — and no decision is waiting.
+- What is left genuinely cannot be settled here — it needs someone who owns the
+  design, an approval, a credential, or a change outside this upgrade's scope.
+  Name each one, say exactly what it is waiting on and who has to do it, and put
+  it in a state I can pick up: the code compiling, or a single clearly marked
+  spot to come back to.
+- I told you to stop.
+
+Then summarize: which packages you upgraded and from which version to which,
+which codemods changed files, which entries you fixed by hand, which found
+nothing, what we decided together — and whether anything is still open, with the
+reason from the list above. If nothing is open, say so plainly rather than
+padding the summary with caveats.
+
+Finally, do not leave the whole migration sitting uncommitted. Walk me through
+the diff at the level of what changed and why — not file by file — then propose
+how to commit it: one commit, or one per package in a monorepo, with the
+messages written out. Commit once I say so. If I would rather review first,
+leave the tree as it is and say so in one line; do not commit without an answer,
+and do not push in any case.
+
+```
+
+Zwei Dinge, die der Prompt bewusst nicht tut: Er lässt den Agenten nicht auf
+einem unsauberen Git-Stand starten, damit ein missglückter Lauf ein
+`git checkout` bleibt. Und er lässt ihn nichts an deinen `peerDependencies`
+ändern – was deine eigenen Consumer installieren dürfen, ist deine Entscheidung.
+
+### Optional: erzähl uns, was nicht getragen hat
+
+Ganz unabhängig vom Upgrade: der folgende Prompt ist ein **zweiter, eigener
+Baustein**. Du kopierst ihn – wenn du magst – direkt nach dem Upgrade in
+dieselbe Session. Der Agent hat den Lauf dann noch im Kontext und schreibt
+daraus einen Bericht auf zwei Ebenen. Nicht kopieren ist die Absage; am Upgrade
+ändert das nichts.
+
+**Der Prompt selbst.** Ein Schritt in der falschen Reihenfolge. Eine Annahme,
+die auf dein Projekt nicht zutrifft. Eine Stelle, an der der Agent raten musste
+oder zwei Anweisungen sich widersprachen. Eine Situation, zu der der Prompt
+schweigt. Eine Anweisung, die Arbeit gekostet und nichts geändert hat.
+
+**Die einzelne Migration.** Ein `apply`, das ohne Raten nicht ausführbar war.
+Eine Stelle, die ein Codemod liegen gelassen hat, obwohl er sie hätte
+entscheiden können. Eine Migration ohne Codemod, die mechanisch entscheidbar
+wäre. Ein `apply`, das eine Umbenennung beschreibt, obwohl sich auch die
+Signatur geändert hat. Ein Codemod, der abgestürzt ist. Und der wertvollste
+Fall: ein Bruch, den deine Checks gefunden haben und für den es gar keinen
+Katalogeintrag gibt.
+
+Beide Ebenen sehen wir sonst nicht. Ob eine Migration verständlich beschrieben
+ist und ob der Upgrade-Prompt trägt, zeigt sich erst an einer echten Codebase –
+nicht an unserer. Ein Bericht als
+[Issue](https://github.com/mittwald/flow/issues) hilft uns deshalb wirklich
+weiter: er fließt in den Katalog und in den Prompt zurück, und das nächste
+Upgrade ist für alle etwas weniger Handarbeit. Ein Paste genügt, und eine
+Antwort schuldest du niemandem.
+
+Der Agent reicht ihn nicht selbst ein. Er legt ihn dir vor und sagt dir, was du
+damit tun kannst – du entscheidest, was rausgeht. Code-Beispiele reduziert er
+auf die kleinste anonymisierte Form, aber prüfen musst du das selbst.
+
+```text
+Write a report on that upgrade for Flow's maintainers — not for me. Report where
+their tooling fell short, not what my project needed. Judge every point from
+what actually happened in this session, not from reading any text back: a
+plausible-sounding critique nobody hit is worse than no report, because it sends
+them after a problem that does not exist and nothing here can be checked against
+anything.
+
+It has two parts, and the first is the one nobody ever sends.
+
+Part one, the upgrade prompt you just followed. You ran it end to end against a
+codebase its authors have never seen, which is the only way its gaps show up at
+all. Report:
+
+- A step that came in the wrong order, or that assumed something this project
+  does not have.
+- A point where you had to guess what was meant, or where two instructions
+  pulled in different directions.
+- A situation you ran into that the prompt says nothing about, and what you did
+  instead.
+- An instruction that turned out to be unnecessary, or that cost work without
+  changing the outcome.
+- What you would have wanted to know before you started.
+
+Part two, the migration catalogue. Name the entry id for each:
+
+- Entries whose `apply` you could not execute without guessing. Quote the field
+  and say what it left open.
+- Sites a codemod declined that it looks like it could have handled. Name the
+  shape that defeated it.
+- Entries with `action: "manual"` whose change looks mechanically decidable — a
+  codemod could exist there and does not.
+- Breaks the checks surfaced that no entry in the catalogue covers at all. These
+  matter most: nothing else reveals them.
+- An `apply` that described a rename but was also a type or behaviour change, or
+  that contradicted the code you actually saw.
+- A codemod that crashed, or a command the tool printed that did not work as
+  printed.
+
+Write it as Markdown that can go into an issue unedited, opening with the
+version you went from and to, the package manager, and whether this is a
+monorepo. Reduce every code sample to the smallest anonymised shape that still
+shows the problem:
+no project or package names, no file paths, no business logic. If a point has
+nothing under it, drop the point rather than padding it; if a whole part would
+be empty, say so in one line.
+
+Do not file it anywhere and do not push it. Hand it over, and close by telling
+me what I can do with it:
+
+- Send it as a new issue at https://github.com/mittwald/flow/issues. This is
+  genuinely valuable to the Flow team — a run against a codebase they cannot see
+  is the only way they learn where the catalogue and that prompt fall short, and
+  what comes back feeds into both. It takes one paste.
+- Or drop it. Nothing depends on it and no answer is owed.
+
+Either way the choice is mine, and so is the review: tell me to read it for
+anything about my project I would not put in a public tracker before I send it.
+```
+
+## Deprecation-Warnungen sind der Vorlauf
+
+Wird ein Pfad deprecated, bleibt er funktionsfähig und meldet sich zur Laufzeit
+per `console.warn`. Diese Warnungen sind die Vorwarnzeit vor der nächsten
+Major-Version – behandle sie als Aufgabenliste, nicht als Rauschen. Um sie
+zentral einzusammeln, etwa im Error-Tracking, umschließe deine Anwendung mit
+einem `DeprecationWarningProvider` und gib ihm einen `onWarning`-Handler:
+
+```tsx
+<DeprecationWarningProvider onWarning={(message) => reportToTracking(message)}>
+  <App />
+</DeprecationWarningProvider>
+```
+
+---
+
+# Direkt nach einem Release
+
+Ein Release veröffentlicht die Packages **nacheinander**, nicht gleichzeitig.
+Für einige Minuten liegt in der npm-Registry deshalb für die schon
+veröffentlichten Packages die neue Version, für die restlichen noch die alte.
+Beim Release `1.0.6` lagen zwischen dem ersten und dem letzten Package rund 25
+Minuten.
+
+Du triffst dieses Fenster leicht, denn ein Update betrifft immer mehrere
+Packages: alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version,
+und `@mittwald/flow-react-components` fordert `@mittwald/flow-icons-pro` als
+Peer-Dependency in exakt derselben Version. Ziehst du in diesem Fenster alle
+Flow-Abhängigkeiten auf die neue Version, schlägt die Installation für das
+Package fehl, das noch nicht dran war:
+
+```
+npm error code ETARGET
+npm error notarget No matching version found for @mittwald/flow-react-components@1.0.6
+```
+
+pnpm meldet dasselbe als `ERR_PNPM_NO_MATCHING_VERSION`.
+
+Das ist keine Lücke im Release: sobald der Release-Lauf durch ist, haben alle
+Packages dieselbe Version. Direkt nach einem Release ist dieser Fehler fast
+immer das Veröffentlichungsfenster und nichts anderes.
+
+<Alert>
+  <Heading>Warte ein paar Minuten und installiere erneut</Heading>
+  <Content>
+    Das Fenster schließt sich von selbst. Du brauchst keinen Workaround – pinne
+    nichts fest und mische keine Flow-Versionen, um den Fehler zu umgehen.
+  </Content>
+</Alert>

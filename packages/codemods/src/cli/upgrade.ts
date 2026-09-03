@@ -7,6 +7,7 @@ import { flowPackages } from "../flowPackages.generated.js";
 import { hasUncommittedChanges } from "../git.js";
 import {
   detectPackageManagerIn,
+  resolveInvoke,
   runInstall,
   type InstallRunner,
 } from "../install.js";
@@ -15,7 +16,7 @@ import { fetchVersions } from "../resolve/registry.js";
 import { readInstalledVersion, resolveRange } from "../resolve/range.js";
 import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
 import type { ParsedCommand } from "./args.js";
-import { resolveSourcePath } from "./codemod.js";
+import { displaySourcePath, resolveSourcePath } from "./codemod.js";
 import { renderList } from "./list.js";
 
 export interface UpgradeDeps {
@@ -28,6 +29,13 @@ export interface UpgradeDeps {
   isDirty: (cwd: string) => boolean;
   readInstalledVersion: (cwd: string, name: string) => string | undefined;
   log: (message: string) => void;
+  /**
+   * Emit ANSI colour in the by-hand list. Off by default so a test sees plain
+   * text.
+   */
+  color?: boolean;
+  /** Terminal width to wrap the by-hand list's prose to. */
+  width?: number;
 }
 
 export const defaultUpgradeDeps = (cwd: string): UpgradeDeps => ({
@@ -168,13 +176,18 @@ export const runUpgrade = async (
     );
     reportDependencies();
 
-    const manager = detectPackageManagerIn(cwd);
-    log(`Installing with ${manager}`);
+    const manager = await detectPackageManagerIn(cwd);
     try {
-      deps.install(manager, cwd);
+      // Logged after the run, not before: `install` returns what it actually
+      // ran — agent, pin and command line — so a wrong detection is visible in
+      // the output instead of hidden behind a bare manager name. On a throw the
+      // recovery message below carries the reason anyway.
+      log(`Installed with ${deps.install(manager, cwd)}`);
     } catch (error) {
       log(
-        `The dependency bump was written but the install failed, so package.json is on\n${target} while node_modules still holds ${current}.\n\nEither re-run this command once the install works, or undo the bump with\n  git checkout package.json\n\n${
+        `The dependency bump was written but the install failed, so package.json is on\n${target} while node_modules still holds ${current}.\n\nDetected package manager: ${manager.agent}${
+          manager.version === undefined ? "" : ` (pinned ${manager.version})`
+        }. If that is wrong, finish the install yourself with the right one —\nthe bump in package.json is already correct.\n\nOtherwise re-run this command once the install works, or undo the bump with\n  git checkout package.json\n\n${
           error instanceof Error ? error.message : error
         }`,
       );
@@ -244,37 +257,45 @@ export const runUpgrade = async (
     }
   }
 
-  // Selection has no lower bound (see `selectEntries`), so this loop can run
-  // every codemod in the catalogue on a project that never crossed a version
-  // at all — "N run, 0 changed" is the confirmation that there was nothing to
-  // catch up on, not a list of new work.
-  if (ranCount > 0) {
-    log(
-      `\n${ranCount} codemod${ranCount === 1 ? "" : "s"} run, ${changedCount} changed something.`,
-    );
-  }
-
   if (byHand.length > 0) {
     log(
       `\n${byHand.length} migration(s) in this range have no codemod — apply them by hand:\n`,
     );
-    // `frame: false` — this already printed the heading above and, further
-    // down, its own aggregate ("N codemods run, N changed something");
-    // renderList's own frame (the range/legend on top, the counts at the
-    // bottom) would just repeat both for the same list. `range` is still
-    // passed so each entry gets its catch-up mark — a manual entry that
-    // shipped at or before `current` may already be done, and the mark is
-    // the only thing left that says so now that hiding it is gone.
+    // `frame: false` — this already printed the heading above, and the
+    // closing summaries below cover the same aggregate ("N codemods run, N
+    // changed something") renderList's own frame would otherwise repeat.
+    // `range` is still passed so each entry gets its catch-up mark — a manual
+    // entry that shipped at or before `current` may already be done, and the
+    // mark is the only thing left that says so now that hiding it is gone.
     log(
       renderList({
         entries: byHand,
         range: { from: current, to: target },
         json: false,
+        color: deps.color,
+        width: deps.width,
+        // The same path this run used, so a command copied out of the by-hand
+        // block works instead of falling back to a hardcoded `src`.
+        path: displaySourcePath(parsed.path, cwd),
+        invoke: await resolveInvoke(cwd),
         frame: false,
       }),
     );
   } else {
     log("\nNo migration in this range required a change by hand.");
+  }
+
+  // Both closing summaries trail everything else, not just each other: a
+  // multi-screen by-hand list would otherwise scroll them out of sight before
+  // the reader reaches the end — exactly when they want the counts. Selection
+  // has no lower bound (see `selectEntries`), so this loop can run every
+  // codemod in the catalogue on a project that never crossed a version at
+  // all — "N run, 0 changed" is the confirmation that there was nothing to
+  // catch up on, not a list of new work.
+  if (ranCount > 0) {
+    log(
+      `\n${ranCount} codemod${ranCount === 1 ? "" : "s"} run, ${changedCount} changed something.`,
+    );
   }
 
   if (incomplete.length > 0) {

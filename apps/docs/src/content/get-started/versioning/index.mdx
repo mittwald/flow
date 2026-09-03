@@ -26,7 +26,8 @@ geworden: Wir halten uns an [Semantic Versioning](https://semver.org) und gehen
 
 Entscheidend ist die Grenze: Welche Änderung erzwingt eine neue Major-Version,
 und welche darf in einem Minor oder Patch erscheinen? Die folgenden Abschnitte
-beschreiben diese Grenze aus Sicht der Entwickler.
+beschreiben diese Grenze aus Sicht der Entwickler. Wie du ein Update oder eine
+Migration konkret durchführst, beschreibt [Upgrades](/get-started/upgrades).
 
 ---
 
@@ -129,109 +130,6 @@ Update bewusst und kontrolliert erfolgt. Zu einem bewusst herbeigeführten
 Type-Breaking-Change gehört eine Migrationsnotiz in den Release Notes – so
 bekommst du einen konkreten Upgrade-Pfad, auch wenn die Änderung in einem Minor
 oder Patch erscheint.
-
----
-
-# Migration bei einer Breaking Change
-
-Jede Änderung, die eine Anpassung in deinem Code erfordert, steht mit
-Vorher-Nachher-Beispiel im Migrationsleitfaden des betroffenen Packages:
-
-- [Migrationsleitfaden `@mittwald/flow-react-components`](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md)
-  – deckt auch `@mittwald/flow-remote-react-components` ab
-- [Migrationsleitfaden `@mittwald/ext-bridge`](https://github.com/mittwald/flow/blob/main/packages/ext-bridge/MIGRATION.md)
-
-Die Einträge sind nach Version absteigend sortiert und nennen jeweils die
-Version, ab der die Änderung greift. Suche die Version, von der du kommst, und
-arbeite dich nach oben durch.
-
-## Nutze die Codemod-CLI
-
-Ein Befehl hebt alle Flow-Abhängigkeiten auf die Zielversion, installiert und
-führt den Codemod jeder Migration bis zu dieser Version aus:
-
-```shell
-npx @mittwald/flow-codemods@latest upgrade
-```
-
-Ohne Argument geht es auf die nächste Minor innerhalb deiner Major.
-`upgrade patch` bleibt auf deiner Minor, `upgrade major` überquert eine
-Major-Grenze, und eine exakte Version oder ein Dist-Tag (`next`) gehen genau
-dorthin.
-
-Der Befehl ändert Dateien direkt und bricht auf einem unsauberen Git-Stand ab.
-
-Der Befehl kennt keine untere Grenze: er listet auch Migrationen, die vor deiner
-aktuellen Version erschienen sind. Nichts hält fest, welche davon dein Projekt
-schon durchgeführt hat – und ein zweiter Durchlauf eines Codemods ändert nichts.
-
-Er ersetzt den Migrationsleitfaden nicht: die meisten Einträge haben keinen
-Codemod. Welche das für deinen Bereich sind, listet der Befehl am Ende auf –
-oder vorab, ohne etwas zu verändern, mit `list` und derselben Revision:
-
-```shell
-npx @mittwald/flow-codemods@latest list minor
-```
-
-`list` ohne Argument zeigt den gesamten Katalog, offline. Mit einer Revision
-liest es dieselbe Version aus deinem `package.json` und zeigt genau den Bereich,
-den `upgrade` mit dieser Revision anfassen würde – ein echter Trockenlauf.
-
-Einen einzelnen Codemod führst du über seine ID aus:
-
-```shell
-npx @mittwald/flow-codemods@latest align-to-combine src
-```
-
-## Deprecation-Warnungen sind der Vorlauf
-
-Wird ein Pfad deprecated, bleibt er funktionsfähig und meldet sich zur Laufzeit
-per `console.warn`. Diese Warnungen sind die Vorwarnzeit vor der nächsten
-Major-Version – behandle sie als Aufgabenliste, nicht als Rauschen. Um sie
-zentral einzusammeln, etwa im Error-Tracking, umschließe deine Anwendung mit
-einem `DeprecationWarningProvider` und gib ihm einen `onWarning`-Handler:
-
-```tsx
-<DeprecationWarningProvider onWarning={(message) => reportToTracking(message)}>
-  <App />
-</DeprecationWarningProvider>
-```
-
----
-
-# Direkt nach einem Release
-
-Ein Release veröffentlicht die Packages **nacheinander**, nicht gleichzeitig.
-Für einige Minuten liegt in der npm-Registry deshalb für die schon
-veröffentlichten Packages die neue Version, für die restlichen noch die alte.
-Beim Release `1.0.6` lagen zwischen dem ersten und dem letzten Package rund 25
-Minuten.
-
-Du triffst dieses Fenster leicht, denn ein Update betrifft immer mehrere
-Packages: alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version,
-und `@mittwald/flow-react-components` fordert `@mittwald/flow-icons-pro` als
-Peer-Dependency in exakt derselben Version. Ziehst du in diesem Fenster alle
-Flow-Abhängigkeiten auf die neue Version, schlägt die Installation für das
-Package fehl, das noch nicht dran war:
-
-```
-npm error code ETARGET
-npm error notarget No matching version found for @mittwald/flow-react-components@1.0.6
-```
-
-pnpm meldet dasselbe als `ERR_PNPM_NO_MATCHING_VERSION`.
-
-Das ist keine Lücke im Release: sobald der Release-Lauf durch ist, haben alle
-Packages dieselbe Version. Direkt nach einem Release ist dieser Fehler fast
-immer das Veröffentlichungsfenster und nichts anderes.
-
-<Alert>
-  <Heading>Warte ein paar Minuten und installiere erneut</Heading>
-  <Content>
-    Das Fenster schließt sich von selbst. Du brauchst keinen Workaround – pinne
-    nichts fest und mische keine Flow-Versionen, um den Fehler zu umgehen.
-  </Content>
-</Alert>
 
 ---
 

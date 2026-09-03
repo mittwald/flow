@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.12](https://github.com/mittwald/flow/compare/1.1.11...1.1.12) (2026-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.11](https://github.com/mittwald/flow/compare/1.1.10...1.1.11) (2026-09-02)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.10](https://github.com/mittwald/flow/compare/1.1.9...1.1.10) (2026-09-02)
+
+### Bug Fixes
+
+* **Link:** prevent text selection on icon element ([#3051](https://github.com/mittwald/flow/issues/3051)) ([9f3160b](https://github.com/mittwald/flow/commit/9f3160b77a92b61c95aeefc15880a1ecf92d3c83))
+
+## [1.1.9](https://github.com/mittwald/flow/compare/1.1.8...1.1.9) (2026-09-02)
+
+### Bug Fixes
+
+* **List:** let items follow the state they are rendered from ([#3065](https://github.com/mittwald/flow/issues/3065)) ([40e0401](https://github.com/mittwald/flow/commit/40e0401f2f484ebbf9f891a7a07d6aea6d0508fe))
+
+## [1.1.8](https://github.com/mittwald/flow/compare/1.1.7...1.1.8) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.7](https://github.com/mittwald/flow/compare/1.1.6...1.1.7) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.6](https://github.com/mittwald/flow/compare/1.1.5...1.1.6) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** install with the project&#x27;s real package manager ([#3041](https://github.com/mittwald/flow/issues/3041)) ([63875ae](https://github.com/mittwald/flow/commit/63875aed0970b93ab7f05d5bad255cc695af63b4))
+
+## [1.1.5](https://github.com/mittwald/flow/compare/1.1.4...1.1.5) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.4](https://github.com/mittwald/flow/compare/1.1.3...1.1.4) (2026-09-01)
+
+### Bug Fixes
+
+* **Heading:** space tunneled content without :has() ([#3046](https://github.com/mittwald/flow/issues/3046)) ([97022ee](https://github.com/mittwald/flow/commit/97022eee9af40664b54b8219062816372c0cf44a))
+
 ## [1.1.3](https://github.com/mittwald/flow/compare/1.1.2...1.1.3) (2026-09-01)
 
 ### Bug Fixes
