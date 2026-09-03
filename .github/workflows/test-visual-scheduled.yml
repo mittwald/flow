@@ -12,12 +12,15 @@ jobs:
   # styling from any page it is not showing), and it renders every file in both
   # browsers, so one runner spent 24-34 minutes on it. Sharding is the only split
   # that keeps each file's conditions identical: every shard still runs its own
-  # files one at a time, in its own browser process. The retry lives inside the
-  # shard now, so a flaky firefox hang re-runs a sixth of the suite, not all of
-  # it.
+  # files one at a time, in its own browser process.
+  #
+  # No retry: the three attempts this job carried since before the sharding never
+  # recovered the failure they were aimed at. All three fail identically, because
+  # they share the runner — see #3106. The timeout is the label path's, which is
+  # calibrated for this same shape at one attempt.
   visual:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -33,7 +36,6 @@ jobs:
         with:
           shard: ${{ matrix.shard }}
           shards: ${{ strategy.job-total }}
-          attempts: "3"
 
   alert:
     needs: visual
