@@ -664,13 +664,9 @@ describe("Item rendering", () => {
 });
 
 /*
- * `.list` replaced `container-type: inline-size` with `min-width: 0` (#2655).
- * The containment was zeroing the list's intrinsic inline contribution, and an
- * `Nfr` grid track is `minmax(auto, Nfr)` with a content-based minimum — so
- * without a replacement a list with unbreakable content pushes its own track
- * open and the columns stop being equal. Measured in a 400px two-track grid:
- * 196/196 with either containment or `min-width: 0`, and 479/49 (list view) to
- * 704/49 (table view) with neither.
+ * `.list` needs `min-width: 0` now that it declares no containment (#2655):
+ * with neither, a list with unbreakable content pushes its own `Nfr` grid
+ * track open and equal columns stop being equal.
  */
 test.each(["list", "tiles", "table"] as const)(
   "does not blow out an equal-width grid track (%s view)",
