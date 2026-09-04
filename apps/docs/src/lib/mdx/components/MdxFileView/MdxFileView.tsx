@@ -6,7 +6,6 @@ import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEdi
 import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import styles from "./customComponents.module.css";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
@@ -78,11 +77,7 @@ export const MdxFileView: FC<Props> = (props) => {
       example?: string;
     } & Omit<LiveCodeEditorProps, "code" | "className">
   > = ({ example = "default", ...rest }) => (
-    <LiveCodeEditor
-      className={styles.liveCodeEditor}
-      code={mdxFile.getExample(example)}
-      {...rest}
-    />
+    <LiveCodeEditor code={mdxFile.getExample(example)} {...rest} />
   );
 
   const ExampleDo: FC<ExampleProps> = (props) => {

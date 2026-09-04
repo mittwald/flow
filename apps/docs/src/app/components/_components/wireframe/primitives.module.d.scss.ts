@@ -1,0 +1,24 @@
+declare const classNames: {
+  readonly frame: "frame";
+  readonly stack: "stack";
+  readonly row: "row";
+  readonly box: "box";
+  readonly input: "input";
+  readonly button: "button";
+  readonly line: "line";
+  readonly circle: "circle";
+  readonly text: "text";
+  readonly overlay: "overlay";
+  readonly icon: "icon";
+  readonly iconTone: "iconTone";
+  readonly iconSized: "iconSized";
+  readonly tone100: "tone100";
+  readonly tone200: "tone200";
+  readonly tone300: "tone300";
+  readonly tone400: "tone400";
+  readonly tone500: "tone500";
+  readonly tone600: "tone600";
+  readonly tone700: "tone700";
+  readonly tone800: "tone800";
+};
+export default classNames;

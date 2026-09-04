@@ -8,13 +8,31 @@
       "cache": true,
       "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"]
     },
+    "build:scss-types": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/src/**/*.scss",
+        "{projectRoot}/src/**/*.css",
+        "{projectRoot}/dev/generateScssTypes.ts",
+        "{workspaceRoot}/packages/core/src/scssTypes/**/*"
+      ],
+      "outputs": [
+        "{projectRoot}/src/**/*.module.d.scss.ts",
+        "{projectRoot}/src/**/*.module.d.css.ts"
+      ]
+    },
     "test:links": {
       "cache": true,
       "inputs": ["default"]
     },
+    "test:unit": {
+      "cache": true,
+      "dependsOn": ["^build", "build:scss-types"]
+    },
     "build": {
       "dependsOn": [
         "build:imports",
+        "build:scss-types",
         {
           "projects": ["components"],
           "target": "build:docs-properties"
@@ -25,6 +43,7 @@
     "dev": {
       "dependsOn": [
         "build:imports",
+        "build:scss-types",
         {
           "projects": ["components"],
           "target": "build:docs-properties"
