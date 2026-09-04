@@ -52,18 +52,10 @@ export const Tabs = flowComponent("Tabs", (props) => {
   >(defaultSelectedKey);
 
   /*
-   * `null` — not `undefined` — is what keeps `Aria.Tabs` controlled while
-   * nothing is selected yet. The tab titles reach the tab list through a
-   * tunnel, so the collection is still empty on the first render and react-aria
-   * only picks the default tab in the following commit. With `undefined`,
-   * `Aria.Tabs` starts out uncontrolled and flips to controlled as soon as that
-   * selection lands in `selectedKeyState` — the transition React and
-   * react-aria warn about.
-   *
-   * react-aria's `TabListProps` narrows `selectedKey` to `Key`, while the state
-   * hook behind it reads `null` as "controlled, nothing selected"
-   * (`useControlledState` treats only `undefined` as uncontrolled). The cast at
-   * the call site bridges that gap.
+   * `null`, not `undefined`, keeps `Aria.Tabs` controlled while nothing is
+   * selected yet — see the controlled-from-the-first-render convention in
+   * AGENTS.md. `Aria.TabsProps` narrows `selectedKey` to `Key`, hence the cast
+   * below.
    */
   const selectedKey = selectedKeyProps ?? selectedKeyState ?? null;
 
