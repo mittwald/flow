@@ -11,6 +11,11 @@ name: Commit guard
 #      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
 #        line, not on any standing line (`main` *or* `next`).
 #    This makes the dangerous directions mechanically hard.
+# 3. Commit mixture — the squash merge keeps only the TITLE, so the title has to
+#    be the whole truth about the branch. A PR that mixes a `feat:` and a `fix:`
+#    commit cannot be told in one subject; a `feat:` or breaking commit under a
+#    `fix:` title walks straight past routing onto `main`; and a non-releasing
+#    title over shipping paths announces a released change as documentation.
 
 on:
   pull_request:
@@ -156,3 +161,88 @@ jobs:
       - name: Enforce the version contract
         if: steps.gate.outputs.active == 'true'
         run: node .github/scripts/version-contract-guard.mjs
+
+  commit-mixture:
+    name: Commit mixture (one release class per PR)
+    # Same standing-line scope as routing: only PRs targeting a release line.
+    if: >-
+      github.event.pull_request.base.ref == 'main' ||
+      github.event.pull_request.base.ref == 'next'
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Gate (promotion/sync exemptions)
+        id: gate
+        run: |
+          set -euo pipefail
+
+          # A promotion or sync source carries every class by design — that is
+          # what it is for (ADR 0004 §8) — so it is exempt, same as routing and
+          # the version contract.
+          if [ "$HEAD_REF" = "next" ] \
+             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
+             || printf '%s' "$HEAD_REF" | grep -qE '^(sync|release)/'; then
+            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — commit-mixture guard exempt."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "active=true" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout (full history so the merge base is reachable)
+        if: steps.gate.outputs.active == 'true'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - name: Self-test the classifiers
+        if: steps.gate.outputs.active == 'true'
+        run: |
+          node --test .github/scripts/commit-mixture-lib.test.mjs
+          node --test .github/scripts/release-relevance-lib.test.mjs
+
+      # The same classifier the release gate runs, so both answer alike. It
+      # writes `publish=` to this step's outputs; the snapshots come out of git
+      # rather than the compare API, because this checkout has history.
+      - name: Classify the changed paths
+        id: relevance
+        if: steps.gate.outputs.active == 'true'
+        run: |
+          set -euo pipefail
+
+          base="$(git merge-base "$BASE_SHA" "$HEAD_SHA")"
+          echo "base=${base}" >> "$GITHUB_OUTPUT"
+          files="$(git diff --name-only "${base}" "$HEAD_SHA")"
+
+          export MANIFEST_SNAPSHOT_DIR="${RUNNER_TEMP}/manifests"
+          mkdir -p "${MANIFEST_SNAPSHOT_DIR}/before" "${MANIFEST_SNAPSHOT_DIR}/after"
+          while IFS= read -r manifest; do
+            [ -n "$manifest" ] || continue
+            slug="$(printf '%s' "$manifest" | sed 's|/|__|g')"
+            git show "${base}:${manifest}" \
+              > "${MANIFEST_SNAPSHOT_DIR}/before/${slug}.json" 2>/dev/null \
+              || rm -f "${MANIFEST_SNAPSHOT_DIR}/before/${slug}.json"
+            git show "${HEAD_SHA}:${manifest}" \
+              > "${MANIFEST_SNAPSHOT_DIR}/after/${slug}.json" 2>/dev/null \
+              || rm -f "${MANIFEST_SNAPSHOT_DIR}/after/${slug}.json"
+          done <<< "$(printf '%s\n' "$files" \
+            | grep -E '^(package\.json|packages/[^/]+/package\.json)$' || true)"
+
+          printf '%s\n' "$files" \
+            | node .github/scripts/release-relevance-guard.mjs
+
+      - name: Check the commit mixture
+        if: steps.gate.outputs.active == 'true'
+        env:
+          # Empty when the step above could not answer — then that half is
+          # skipped rather than guessed.
+          PATHS_PUBLISH: ${{ steps.relevance.outputs.publish }}
+        run: |
+          set -euo pipefail
+          git log -z --reverse --format=%s%n%b \
+            "${{ steps.relevance.outputs.base }}..${HEAD_SHA}" \
+            | node .github/scripts/commit-mixture-guard.mjs

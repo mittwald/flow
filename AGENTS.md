@@ -156,6 +156,22 @@ and commit the results.
 
 - **Conventional Commits** with component/package scope — `fix(Button): …`,
   `feat(components): …`. Releases and changelogs are generated from them.
+- **One releasing change per pull request.** The squash merge keeps only the
+  title, and routing reads that title, so a branch may not
+  - mix a `feat:` and a `fix:` commit, nor hide a `feat:` or breaking commit
+    under a `fix:` title — that lands a feature or a breaking change on the
+    wrong line;
+  - carry a releasing commit under a non-releasing title — the change still
+    ships (the changed paths decide that) but the changelog announces it as
+    `docs`/`chore` and the commit's own description is discarded;
+  - spread releasing commits over several scopes — only one subject survives, so
+    the others reach no changelog. Repeats within one scope are fine.
+
+  A CI guard fails the PR on each, naming the offending commits. Non-releasing
+  commits (`docs`, `test`, `chore`, …) mix with anything, and a commit whose
+  subject is not a Conventional Commit (`wip`, `fixup!`) is ignored. Split the
+  PR, or retitle it to what its commits actually carry.
+
 - Merged PRs trigger the publish workflow (lerna-lite, fixed versioning across
   packages) — **unless nothing in the merge can reach a consumer**, which
   publishes nothing at all (no npm release, no version bump commit, no tag, no
