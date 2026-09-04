@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.20](https://github.com/mittwald/flow/compare/1.1.19...1.1.20) (2026-09-04)
+
+### Bug Fixes
+
+* **Option:** infer textValue from mixed children and keep value stable ([#3076](https://github.com/mittwald/flow/issues/3076)) ([e80bf3c](https://github.com/mittwald/flow/commit/e80bf3c6e97543c3d3b2db9d75811e2958e2fd65))
+
 ## [1.1.19](https://github.com/mittwald/flow/compare/1.1.18...1.1.19) (2026-09-04)
 
 ### Bug Fixes
