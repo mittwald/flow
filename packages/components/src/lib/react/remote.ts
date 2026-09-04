@@ -23,7 +23,7 @@ export function isRemoteComponentRendererProps(
 }
 
 /** Whether the node renders text — a string, number, or remote counterpart. */
-export const isTextNode = (child: ReactNode): boolean =>
+const isTextNode = (child: ReactNode): boolean =>
   typeof child === "string" ||
   typeof child === "number" ||
   (isValidElement(child) && isRemoteTextRenderProps(child.props));
