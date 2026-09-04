@@ -37,20 +37,26 @@ const getApiHeaders = () => ({
 });
 
 class ReviewDeployer {
-  private readonly prNumber: string;
+  private readonly previewSlug: string;
+  private readonly prNumber: string | undefined;
   private readonly projectId: string;
   private readonly images: DockerImage[];
 
   constructor() {
     this.validateEnvironment();
-    this.prNumber = process.env.PR_NUMBER || "";
+    this.previewSlug = process.env.PREVIEW_SLUG || "";
+    // A pull-request preview's slug carries its number (`pr-3120`), and that is
+    // the only kind of preview with a PR to guard against and comment on. The
+    // `next` line has none, so both steps drop out instead of being configured
+    // away — the slug stays the single source for what this deployment is.
+    this.prNumber = /^pr-(\d+)$/.exec(this.previewSlug)?.[1];
     this.projectId = process.env.MITTWALD_PROJECT_ID || "";
     this.images = this.parseImages();
   }
 
   private validateEnvironment(): void {
     const required = [
-      "PR_NUMBER",
+      "PREVIEW_SLUG",
       "MITTWALD_PROJECT_ID",
       "MITTWALD_API_TOKEN",
       "DOCS_IMAGE_TAG",
@@ -64,14 +70,37 @@ class ReviewDeployer {
       );
       process.exit(1);
     }
+
+    // The slug is interpolated into service names and into a hostname's
+    // leftmost label, so it has to be a valid one: lowercase alphanumerics and
+    // inner dashes, nothing else.
+    const previewSlug = process.env.PREVIEW_SLUG || "";
+    if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(previewSlug)) {
+      console.error(
+        `Invalid PREVIEW_SLUG (expected a lowercase DNS label such as \`pr-1234\` or \`next\`): ${previewSlug}`,
+      );
+      process.exit(1);
+    }
   }
 
   private parseImages(): DockerImage[] {
+    // The workflow passes one exact ref per app. The value used to come from
+    // docker/metadata-action's multi-line `tags` output, so stay tolerant of
+    // several lines: prefer the one tagged with this preview's slug.
     const parseImageTag = (rawTag: string): string | null => {
-      const lines = rawTag.split("\n").map((line) => line.trim());
-      const prLine = lines.find((line) => line.includes("pr-"));
-      return prLine || null;
+      const lines = rawTag
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+      return (
+        lines.find((line) => line.endsWith(`:${this.previewSlug}`)) ??
+        lines[0] ??
+        null
+      );
     };
+
+    const tagOf = (image: string): string =>
+      image.slice(image.lastIndexOf(":") + 1) || "latest";
 
     const docsTag = parseImageTag(process.env.DOCS_IMAGE_TAG || "");
     const storybookTag = parseImageTag(process.env.STORYBOOK_IMAGE_TAG || "");
@@ -81,7 +110,7 @@ class ReviewDeployer {
     if (docsTag) {
       images.push({
         name: docsTag,
-        tag: docsTag.split(":")[1] || "latest",
+        tag: tagOf(docsTag),
         imageType: "docs",
       });
     }
@@ -89,7 +118,7 @@ class ReviewDeployer {
     if (storybookTag) {
       images.push({
         name: storybookTag,
-        tag: storybookTag.split(":")[1] || "latest",
+        tag: tagOf(storybookTag),
         imageType: "storybook",
       });
     }
@@ -97,16 +126,18 @@ class ReviewDeployer {
     return images;
   }
 
+  // `cleanup-review.ts` deletes a pull-request preview by these two shapes —
+  // keep both in sync with it.
   private getServiceName(imageType: "docs" | "storybook"): string {
-    return `${imageType}pr-${this.prNumber}`;
+    return `${imageType}${this.previewSlug}`;
   }
 
   private getHostname(imageType: "docs" | "storybook"): string {
-    return `pr-${this.prNumber}.${imageType}.review.flow-components.de`;
+    return `${this.previewSlug}.${imageType}.review.flow-components.de`;
   }
 
   private getDescription(imageType: "docs" | "storybook"): string {
-    return `${imageType.toUpperCase()}/PR-${this.prNumber}`;
+    return `${imageType.toUpperCase()}/${this.previewSlug.toUpperCase()}`;
   }
 
   private getTlsCertificateId(
@@ -125,6 +156,10 @@ class ReviewDeployer {
   // longer open. Fail open: only skip when we can positively confirm it's
   // closed, otherwise keep deploying.
   async isPullRequestClosed(): Promise<boolean> {
+    if (!this.prNumber) {
+      return false;
+    }
+
     const token = process.env.GITHUB_TOKEN;
     const repo = process.env.GITHUB_REPOSITORY;
     if (!token || !repo) {
@@ -422,6 +457,13 @@ class ReviewDeployer {
   }
 
   async postGitHubComment(urls: Record<string, string>): Promise<void> {
+    if (!this.prNumber) {
+      console.log(
+        `ℹ️  Preview \`${this.previewSlug}\` belongs to no pull request — nothing to comment on.`,
+      );
+      return;
+    }
+
     const token = process.env.GITHUB_TOKEN;
     if (!token) {
       console.warn("⚠️  GITHUB_TOKEN not set, skipping GitHub comment posting");
@@ -473,7 +515,9 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
 
   async deploy(): Promise<void> {
     try {
-      console.log("🚀 Starting preview deployment process...\n");
+      console.log(
+        `🚀 Starting preview deployment for \`${this.previewSlug}\`...\n`,
+      );
 
       if (await this.isPullRequestClosed()) {
         console.log(

@@ -1,17 +1,25 @@
-name: Build & Deploy Preview Apps
+# The `next` line has no standing environment of its own: pull-request previews
+# die with their PR, and only `main` reaches flow.mittwald.de. So every feature
+# already merged for the next minor was invisible until it was promoted. This
+# publishes the collection branch under a permanent preview host, using the same
+# images, services and ingresses as a pull-request preview — the deploy script
+# is keyed by a slug, and this one's is `next`.
+name: Build & Deploy next preview
 
 on:
-  pull_request:
+  push:
+    branches:
+      - next
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-# Shared with cleanup-previews.yml: closing a PR queues the cleanup in this same
-# group and cancels any still-running build+deploy for that PR, so the deploy
-# can no longer create preview resources after the cleanup has already run.
+# A preview only has to show the branch head, so a push that arrives while the
+# previous one is still building supersedes it. (`deploy-main` cannot do this:
+# there, every push must reach production.)
 concurrency:
-  group: preview-${{ github.event.pull_request.number }}
+  group: deploy-next
   cancel-in-progress: true
 
 jobs:
@@ -39,16 +47,8 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      # The image used to build this itself, which meant a second toolchain
-      # install and the whole dependency chain rebuilt against a cold nx cache —
-      # 80 of the 449 seconds a docs preview took. Here the restored cache serves
-      # that chain, and the image only packages what comes out.
-      #
-      # NEXT_BASE_PATH was a build-arg for the same reason; the value is the one
-      # the Dockerfile passed.
-      # Next keeps its compiler and render caches here. Restoring them is only
-      # possible now that the build runs on the runner rather than inside the
-      # image, where the directory started empty every time.
+      # Next keeps its compiler and render caches here; restoring them is what
+      # keeps a docs build off the cold path (see build-previews.yml).
       - name: Cache the Next.js build cache
         if: matrix.image_suffix == 'docs'
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
@@ -67,13 +67,12 @@ jobs:
         env:
           NEXT_BASE_PATH: ""
           # Not the canonical site, so `robots.ts` emits a blanket Disallow —
-          # a preview must not compete with flow.mittwald.de in search.
-          NEXT_PUBLIC_SITE_URL:
-            https://pr-${{ github.event.pull_request.number
-            }}.docs.review.flow-components.de
+          # this host is permanent and would otherwise compete with
+          # flow.mittwald.de for the same queries.
+          NEXT_PUBLIC_SITE_URL: https://next.docs.review.flow-components.de
 
       # Two commands because `build:storybook` declares no nx dependency on the
-      # components build — the same pair the Dockerfile ran.
+      # components build.
       - name: Build Storybook
         if: matrix.image_suffix == 'storybook'
         run: |
@@ -87,28 +86,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata for Docs
-        id: meta-docs
-        if: matrix.image_suffix == 'docs'
+      # `type=ref,event=branch` is the `next` tag the deploy job pulls by; the
+      # sha tag is there to identify what a running preview actually holds.
+      - name: Extract metadata
+        id: meta
         uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
           tags: |
             type=ref,event=branch
-            type=ref,event=pr
-            type=sha
-
-      - name: Extract metadata for Storybook
-        id: meta-storybook
-        if: matrix.image_suffix == 'storybook'
-        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
-        with:
-          images:
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
             type=sha
 
       - name: Build and push Docker image
@@ -118,13 +105,9 @@ jobs:
           # the context's own .dockerignore.
           context: ${{ matrix.context }}
           push: true
-          provenance: false # single-manifest image (as before v7); deploy pulls by ref
-          tags:
-            ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.tags ||
-            steps.meta-storybook.outputs.tags }}
-          labels:
-            ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.labels
-            || steps.meta-storybook.outputs.labels }}
+          provenance: false # single-manifest image; deploy pulls by ref
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -133,15 +116,6 @@ jobs:
     permissions:
       contents: read
       packages: read
-      pull-requests: write
-
-    # Preview deploy needs the MITTWALD_* secrets, which GitHub withholds from
-    # Dependabot-triggered runs and from forks. Skip there so those PRs don't
-    # fail on missing secrets (the build job above still validates the images).
-    if: >
-      github.event_name == 'pull_request' &&
-      github.actor != 'dependabot[bot]' &&
-      github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
       - name: Checkout repository
@@ -159,25 +133,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Deploy preview environment
+      # The services already exist after the first run, so this is a no-op plus
+      # an image pull from then on. No GITHUB_TOKEN: the PR-state guard and the
+      # preview comment only apply to a `pr-<number>` slug.
+      - name: Deploy the next preview environment
         env:
-          PREVIEW_SLUG: pr-${{ github.event.pull_request.number }}
+          PREVIEW_SLUG: next
           MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
           MITTWALD_TLS_CERTIFICATE_ID_DOCS:
             ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
           MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
             ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
-          # Derive the exact refs the build job pushed (type=ref,event=pr =>
-          # `pr-<number>`). Deriving them here avoids the matrix job-output
-          # clobber that left one of the two empty and half-deployed previews.
-          DOCS_IMAGE_TAG:
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/docs:pr-${{
-            github.event.pull_request.number }}
+          DOCS_IMAGE_TAG: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/docs:next
           STORYBOOK_IMAGE_TAG:
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/storybook:pr-${{
-            github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/storybook:next
         run: |
           pnpm tsx dev/deploy-review.ts
