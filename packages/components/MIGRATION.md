@@ -509,7 +509,7 @@ case.
 
 ## TableColumn: `maxWidth` removed, `width` and `minWidth` retyped
 
-**Since `0.2.0-alpha.956`** · migration · manual change · also applies to
+**Since `0.2.0-alpha.956`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 `maxWidth` has been removed. `width` and `minWidth` are now typed as
@@ -526,9 +526,24 @@ Percentage, pixel and `fr` values keep working as strings or numbers
 (`width="50%"`, `width="200fr"`, `width={300}`). Where you passed `null` to mean
 "no explicit width", omit the prop instead.
 
+A codemod removes `maxWidth` — the prop is gone from the type, so an explicit
+attribute is wrong at any value, an expression included — and removes a `width`
+or `minWidth` written as the literal `null`.
+
+It declines what it cannot decide from the source: `width={maybeNull}` could be
+anything at runtime, and a spread's contents are invisible. Both keep their
+props and need a look by hand.
+
 **Apply:** Remove `maxWidth` from every `TableColumn`. Where `width` or
 `minWidth` was `null`, omit the prop instead — the type no longer accepts
-`null`, only `number | string`.
+`null`, only `number | string`. A codemod does both for the cases it can decide
+from the source. Two it declines: a `width`/`minWidth` whose value is an
+expression (`width={maybeNull}`), and a spread that might carry `maxWidth`
+(`<TableColumn {...props} />`). Check those by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest table-column-width-props src
+```
 
 ---
 
@@ -1070,7 +1085,7 @@ npx @mittwald/flow-codemods@latest imports-to-package-root src
 
 ## Renamed CSS export
 
-**Since `0.1.0-alpha.292`** · migration · manual change
+**Since `0.1.0-alpha.292`** · migration · codemod available
 
 The CSS export `@mittwald/flow-react-components/styles` has renamed to the more
 precise name `@mittwald/flow-react-components/all.css`, because the file
@@ -1083,5 +1098,15 @@ as well. A documentation on how to use them is planned.
 + import "@mittwald/flow-react-components/all.css";
 ```
 
+A codemod rewrites the specifier in every JavaScript and TypeScript form that
+names a module. It cannot reach a `.css` or `.scss` file, so an `@import` of the
+old path there needs a manual search.
+
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
-`@mittwald/flow-react-components/all.css`.
+`@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript
+and TypeScript files. An `@import` of the old path inside a `.css` or `.scss`
+file is not covered — search for it by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest renamed-css-export src
+```

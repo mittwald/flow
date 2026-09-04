@@ -102,10 +102,10 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     since: "0.2.0-alpha.956",
     title: "TableColumn: `maxWidth` removed, `width` and `minWidth` retyped",
     kind: "migration",
-    action: "manual",
+    action: "codemod",
     remotePackage: true,
     apply:
-      "Remove `maxWidth` from every `TableColumn`. Where `width` or `minWidth` was `null`, omit the prop instead — the type no longer accepts `null`, only `number | string`.",
+      "Remove `maxWidth` from every `TableColumn`. Where `width` or `minWidth` was `null`, omit the prop instead — the type no longer accepts `null`, only `number | string`. A codemod does both for the cases it can decide from the source. Two it declines: a `width`/`minWidth` whose value is an expression (`width={maybeNull}`), and a spread that might carry `maxWidth` (`<TableColumn {...props} />`). Check those by hand.",
   },
   {
     id: "table-render-prop-removed",
@@ -254,9 +254,9 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     since: "0.1.0-alpha.292",
     title: "Renamed CSS export",
     kind: "migration",
-    action: "manual",
+    action: "codemod",
     remotePackage: false,
     apply:
-      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`.",
+      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript and TypeScript files. An `@import` of the old path inside a `.css` or `.scss` file is not covered — search for it by hand.",
   },
 ];
