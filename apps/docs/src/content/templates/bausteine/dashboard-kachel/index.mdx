@@ -1,0 +1,92 @@
+---
+title: Dashboard-Kachel
+---
+
+Eine Kachel ist ein Ausschnitt mit einem Ziel: sie zeigt so viel, dass man
+erkennt, ob man hinsehen muss, und verlinkt in die Seite, auf der man damit
+arbeitet. Sie ist eine eigene [LayoutCard](/components/structure/layout-card) –
+anders als ein [Bereich](/templates/bereiche/stammdaten-bereich), der sich die
+Karte mit den anderen Bereichen teilt.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="dashboard-kachel" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Auf einem [Dashboard](/templates/seiten/dashboard).
+
+**Nicht verwenden**, wenn
+
+- die Kachel auf einer Detailseite stünde. Dort teilen sich die Blöcke eine
+  Karte; einzelne Karten dazwischen brechen die Gliederung.
+- der Ausschnitt vollständig ist. Was nichts weglässt, braucht kein Ziel – und
+  ohne Ziel ist es keine Kachel, sondern ein Bereich.
+
+---
+
+# Warum diese Struktur
+
+**Überschrift, Inhalt, Ziel – in dieser Reihenfolge.** Die Überschrift sagt,
+wovon die Rede ist; sie ist auf einem Dashboard aus verschiedenen Quellen nicht
+aus dem Kontext zu erschließen.
+
+**Der Inhalt der Karte steht in einer [Section](/components/structure/section) –
+nicht direkt in der [LayoutCard](/components/structure/layout-card).** Die
+LayoutCard ist die Kartenhülle, die Section der Rhythmus darin: sie setzt den
+Abstand zwischen den Kindern und sie ist es, die den `Header` zur Aktionszeile
+macht. Direkt in der Karte liegen die Kinder bündig aufeinander und die
+Kopfzeile stapelt – ohne Fehlermeldung, denn gültig ist beides.
+
+**Wo das Ziel steht, entscheidet die Art der Kachel.** Eine **Datenkachel** —
+Auslastung, Speicherplatz, Anzahl — setzt den
+[Link](/components/navigation/link) in den
+[Header](/components/structure/section) neben die Überschrift. So steht er bei
+allen Kacheln einer Reihe an derselben Stelle, egal wie hoch ihr Inhalt ist, und
+die Kopfzeile bleibt für Badge oder Aktion frei.
+
+Eine **Inhaltskachel** — ein Blogartikel, ein Angebot, ein Hinweis — setzt ihn
+ans **Ende**, unter den Text, weil er dort die Leserichtung fortsetzt statt sie
+zu unterbrechen. Deren Kopfzeile trägt dann das, was den Zustand meldet: ein
+Badge („Alle Systeme funktionieren") oder einen Button.
+
+**Kurz.** Drei, vier Zeilen. Eine Kachel, die scrollt, ist eine Seite im
+falschen Format.
+
+**Eine Aussage je Kachel.** Zwei Themen in einer Kachel sind zwei Kacheln –
+sonst passt die Überschrift auf eins von beiden nicht.
+
+**Eigener Lade- und Fehlerzustand.** Die Kachel lädt für sich; fällt ihre
+Datenquelle aus, bleibt das übrige Dashboard benutzbar. Der Platzhalter beim
+Laden hat die Höhe des Inhalts, damit die Kacheln darunter nicht springen.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Kennzahl oder Diagramm
+
+Statt Text eine [BigNumber](/components/data-visualisation/big-number), eine
+[ProgressBar](/components/status/progress-bar) oder ein
+[DonutChart](/components/data-visualisation/donut-chart). Der Aufbau bleibt:
+Überschrift, Inhalt, Ziel in der Kopfzeile.
+
+<LiveCodeEditor example="dashboard-kachel-kennzahl" editorCollapsed />
+
+## Als Einstiegshilfe
+
+Eine Kachel kann die nächsten Schritte für einen noch leeren Kontext anbieten.
+Sie hat kein Ziel in der Kopfzeile, sondern eine Aktion im Inhalt – und sie
+verschwindet, sobald sie erledigt ist. Es ist die einzige Kachel, deren
+Sichtbarkeit von den Daten abhängen darf.
+
+<LiveCodeEditor example="dashboard-kachel-einstieg" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Mit Aktion statt Link.** Führt die Kachel nicht auf eine Seite, sondern in
+einen Vorgang, steht statt des Links ein sekundärer Button im Inhalt.

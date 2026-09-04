@@ -1,0 +1,85 @@
+---
+title: Listen-Bereich
+---
+
+Manche Objekte enthalten Sammlungen, die keine eigene Seite verdienen: die
+Weiterleitungen einer E-Mail-Adresse, die Ports eines Containers, die Mitglieder
+einer Organisation. Sie stehen als [List](/components/list/list) in einer
+[Section](/components/structure/section), zwischen den anderen Bereichen der
+Detailseite.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="listen-bereich" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Wenn eine Sammlung zum gezeigten Objekt gehört, überschaubar bleibt und keinen
+eigenen Einstieg braucht.
+
+**Nicht verwenden**, wenn
+
+- die Sammlung der Grund ist, warum man die Seite öffnet. Dann bekommt sie eine
+  eigene [Übersichtsseite](/templates/seiten/uebersichtsseite) oder einen
+  eigenen Tab.
+- sie unbegrenzt wachsen kann. Eine Liste mit Pagination innerhalb einer Seite
+  voller anderer Bereiche wird zum Fremdkörper – ab dann ist es ein eigener Tab.
+- die Einträge nur Wertepaare sind. Vier Zeilen „Label: Wert“ sind ein
+  [Stammdaten-Bereich](/templates/bereiche/stammdaten-bereich), keine Liste.
+
+---
+
+# Warum diese Struktur
+
+**Die Liste liegt in der Section, nicht statt ihr.** Die Überschrift benennt die
+Sammlung, die Liste zeigt sie. Ohne Überschrift ist im Stapel der Bereiche nicht
+erkennbar, wovon die Einträge sind.
+
+**Die Anlegen-Aktion steht in der `ActionGroup` der Liste.** Genauso wie auf der
+[Übersichtsseite](/templates/seiten/uebersichtsseite) – nicht in der Kopfzeile
+der Section, obwohl dort Platz wäre. So steht sie an derselben Stelle,
+unabhängig davon, wo die Liste eingebaut ist.
+
+**Ohne Suche, ohne Filter, ohne Pagination.** Eine Liste, die in einen Bereich
+passt, ist kurz genug, um vollständig gelesen zu werden. Wo das nicht mehr
+stimmt, ist der Bereich das falsche Zuhause.
+
+**Mit Leerzustand.** Auch ein kurzer: „Keine Weiterleitungen eingerichtet“ mit
+der Anlegen-Aktion. Eine Section, die nur aus ihrer Überschrift besteht, sieht
+nach einem Fehler aus.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Leerzustand
+
+Auch ein kurzer Bereich braucht einen: „Keine Weiterleitungen eingerichtet" plus
+die Anlegen-Aktion. Eine Section, die nur aus ihrer Überschrift besteht, sieht
+nach einem Fehler aus.
+
+<LiveCodeEditor example="listen-bereich-leer" editorCollapsed />
+
+## Als Tabelle
+
+Sind die Einträge gleichförmige Wertetupel – Limit, Zeitraum, Wert – liest sich
+das als [Table](/components/structure/table) besser als als Liste. Für einen
+festen, kurzen Satz von Werten wie hier genügt eine eigene Table; für eine
+**Sammlung**, die wachsen kann, ist es stattdessen derselbe `List` im
+Tabellen-Modus, mitsamt Suche und Zählung. Die Abgrenzung der Darstellungen
+beschreibt [Liste, Tile oder Tabelle](/patterns/patterns/list-tile-table).
+
+<LiveCodeEditor example="listen-bereich-tabelle" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Einträge ohne Ziel.** Gibt es keine Detailseite je Eintrag, entfällt das
+`href`. Die Einträge tragen ihre Aktionen dann im
+[Aktionsmenü](/templates/bausteine/aktionsmenue) am Eintrag.
+
+**Mit Verweis auf die volle Ansicht.** Zeigt der Bereich nur die neuesten
+Einträge, steht in seiner Kopfzeile ein Link auf die vollständige Liste.

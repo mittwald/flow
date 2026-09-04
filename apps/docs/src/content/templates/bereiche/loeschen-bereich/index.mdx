@@ -1,0 +1,68 @@
+---
+title: Löschen-Bereich
+---
+
+Ein Projekt, eine Organisation, das eigene Profil: Dinge, in denen man sich
+befindet, während man sie löscht. Über ihnen gibt es keine Liste, an deren Zeile
+ein [Aktionsmenü](/templates/bausteine/aktionsmenue) hängen könnte — deshalb
+bekommt ihr Löschen einen eigenen Bereich, als **letzten** Abschnitt der
+Einstellungsseite.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="loeschen-bereich" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Für den Container, in dem man sich gerade befindet.
+
+**Nicht verwenden**, wenn
+
+- das Objekt über eine Liste erreicht wurde. Dann gehört das Löschen in sein
+  [Aktionsmenü](/templates/bausteine/aktionsmenue), zusammen mit den übrigen
+  Aktionen.
+- nur ein Feldwert entfernt wird. „Telefonnummer entfernen" ist eine
+  Danger-Aktion in der Kopfzeile eines gewöhnlichen
+  [Bereichs](/templates/bereiche/stammdaten-bereich), kein eigener Abschnitt.
+
+---
+
+# Warum diese Struktur
+
+**Er steht immer als letzter.** Nach allem, was man tun kann, kommt das, was
+alles beendet. Die Position ist Teil des Musters: wer die Seite von oben liest,
+findet ihn zuletzt und nicht versehentlich.
+
+**Ein Bereich wie jeder andere — kein abgesetzter Gefahrenbereich.** Kein roter
+Rahmen, keine eigene Karte, keine Warnfarbe auf der Fläche. Nur der Button ist
+als gefährlich ausgezeichnet. Eine eingezäunte Zone würde Aufmerksamkeit
+verbrauchen, die dem Bestätigungs-Overlay zusteht.
+
+**Die Überschrift ist die Aktion.** „Projekt löschen", nicht „Gefahrenzone" und
+nicht „Erweitert". Wer den Abschnitt überfliegt, weiß, was hier passiert.
+
+**Ein Satz zur Folge, nicht zur Aktion.** Dass gelöscht wird, steht in der
+Überschrift. Der Text sagt, was mitgeht: „werden alle abhängigen Komponenten
+mitgelöscht."
+
+**Die Absicherung leistet das Overlay, nicht der Bereich.** Der Button öffnet
+ein [Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay), und dort
+stehen Abhängigkeiten, Unwiderruflichkeit und — falls nötig — die Eingabe des
+Namens.
+
+---
+
+# Varianten und Abwandlung
+
+**Kündigen statt löschen.** Bei etwas, das erst zu einem Termin endet, heißt die
+Überschrift „… kündigen", und der Satz nennt den Termin. Der Bereich bleibt
+sonst gleich.
+
+**Deaktiviert mit Begründung im Bereich.** Kann gerade nicht gelöscht werden —
+ein laufender Vertrag, offene Rechnungen — bleibt der Button sichtbar und
+deaktiviert, und der Grund steht im Text des Bereichs statt im Overlay. Denn ein
+deaktivierter Button öffnet keines.

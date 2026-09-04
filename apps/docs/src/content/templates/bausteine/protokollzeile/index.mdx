@@ -1,0 +1,76 @@
+---
+title: Protokollzeile
+---
+
+Ein Protokoll führt keine Objekte, sondern **Ereignisse**: was passiert ist,
+wann und durch wen. Das Aktivitätsprotokoll, die Benachrichtigungen, die
+Historie eines Cronjobs, die angemeldeten Sitzungen — alle vier bauen ihre Zeile
+gleich, und alle vier bauen sie anders als der
+[Listeneintrag](/templates/bausteine/listeneintrag).
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="protokollzeile" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Wenn die Zeile ein Ereignis ist und nicht ein Ding: angelegt, geändert,
+gelöscht, ausgeführt, angemeldet.
+
+**Nicht verwenden**, wenn
+
+- die Zeile ein Objekt ist, das weiter existiert. Dann ist es ein
+  [Listeneintrag](/templates/bausteine/listeneintrag), auch wenn sein Titel ein
+  Zeitstempel ist — ein Backup ist ein Ding, keine Meldung.
+- der Verlauf als Kurve gelesen wird. Dann ist es eine
+  [Auswertungsseite](/templates/seiten/auswertungsseite).
+
+---
+
+# Warum diese Struktur
+
+**Der Titel ist ein Satz, kein Name.** „Domain **www.example.de** gelöscht" —
+mit dem betroffenen Objekt fett darin. Wer ein Protokoll überfliegt, sucht nach
+dem, was geschehen ist; der Name allein sagt das nicht.
+
+**Das Icon codiert die Aktion, nicht den Objekttyp.** Papierkorb für gelöscht,
+Stift für geändert, Plus für angelegt. Das ist die eine Stelle, an der die Regel
+des Listeneintrags („der Avatar codiert den Typ") absichtlich nicht gilt: der
+Objekttyp steht schon im Satz, die Aktion nirgends sonst.
+
+**Die Metazeile nennt Zeitpunkt und Akteur.** „Gestern um 14:32 Uhr – Felix
+Fritzsche", und bei Systemvorgängen „– Automatisch". Ein Protokoll ohne Akteur
+beantwortet die halbe Frage.
+
+**Junge Zeitpunkte relativ, alte absolut.** „Heute um 14:04 Uhr", „Gestern um",
+„Montag um" — und ab etwa einer Woche das Datum. Was gerade passiert ist, liest
+man in Bezug auf jetzt; was länger her ist, braucht ein Datum.
+
+**Die Zeile navigiert nicht.** Ein Ereignis hat keine Seite. Was es zu sehen
+gibt, zeigt ein [Anzeige-Overlay](/templates/overlays/anzeige-overlay); ein
+Verweis auf das betroffene Objekt gehört ins Menü der Zeile, nicht auf die ganze
+Zeile.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Status-Icon statt Aktions-Icon.** Bei Meldungen, die einen Ausgang haben —
+Benachrichtigungen, Cronjob-Durchläufe — codiert das Icon Erfolg, Warnung oder
+Fehler statt der Aktion.
+
+**Mit einer Quittungs-Aktion je Zeile.** Benachrichtigungen tragen rechts einen
+Häkchen-Button („als gelesen markieren") statt eines Menüs, dazu eine
+Sammelaktion über der Liste („Alle gelesen").
+
+**Als Tabelle.** Für gleichförmige Durchläufe mit Kennzahlen — Startzeit, Dauer,
+Exit-Code — liest sich derselbe `List` im Tabellen-Modus besser. Die
+Bestandteile bleiben, die Zeilenaktionen werden zu Icon-Buttons.
+
+**Ohne Filter geht es selten.** Ein Protokoll wächst unbegrenzt. Typ und
+Zeitraum als [Filter](/components/list/list) sind hier keine Ausstattung,
+sondern die Bedingung dafür, dass die Liste benutzbar bleibt.

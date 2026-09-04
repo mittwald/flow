@@ -1,0 +1,71 @@
+---
+title: Bereich zum Pflegen einer Liste
+---
+
+Manche Sammlungen sind so klein und so einfach, dass ein Overlay für jeden
+Eintrag lächerlich wäre: zusätzliche Rechnungsempfänger, eine Allowlist, eine
+Blocklist. Ein Eintrag besteht aus einem Wert, es gibt kein Bearbeiten, und
+angelegt wird direkt im Bereich.
+
+Die Form ist: **ein Feld mit Hinzufügen-Button in einer Zeile, darunter die
+Einträge mit Entfernen.**
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="listen-pflege" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Wenn ein Eintrag **ein** Wert ist, es nichts zu bearbeiten gibt und die Liste
+kurz bleibt.
+
+**Nicht verwenden**, wenn
+
+- ein Eintrag mehrere Felder hat. Dann führt das Hinzufügen in ein
+  [Formular-Overlay](/templates/overlays/formular-overlay), und der Bereich ist
+  ein [Listen-Bereich](/templates/bereiche/listen-bereich).
+- Einträge bearbeitet werden können. Ein Wert, den man ändern kann, braucht
+  einen Ort dafür — das ist wieder ein Overlay.
+- die Liste wachsen kann. Ohne Suche und Zählung wird sie ab etwa einem Dutzend
+  unbenutzbar; dann ist es ein eigener Tab.
+
+---
+
+# Warum diese Struktur
+
+**Das Eingabefeld steht über der Liste, nicht darunter.** Man kommt hierher, um
+etwas hinzuzufügen; das Bestehende ist Kontext. Unter einer wachsenden Liste
+wandert das Feld nach unten aus dem Blick.
+
+**Feld und Button in einer Zeile.** Der Button gehört zum Feld, nicht zum
+Bereich — deshalb steht er daneben und nicht in der Kopfzeile. In der Kopfzeile
+würde er nach „Overlay öffnen" aussehen.
+
+**Der Button bleibt deaktiviert, solange das Feld leer ist.** Es gibt kein
+Formular und damit keine Validierung beim Absenden; der Zustand des Buttons ist
+die ganze Rückmeldung, die vor dem Klick möglich ist.
+
+**Entfernen ist ein Icon-Button am Eintrag, kein Menü.** Bei genau einer Aktion
+je Zeile kostet ein [Aktionsmenü](/templates/bausteine/aktionsmenue) einen Klick
+und gewinnt nichts.
+
+**Kein Bestätigungs-Overlay beim Entfernen.** Der Eintrag ist mit einer Eingabe
+wiederhergestellt. Eine Rückfrage für etwas, das in fünf Sekunden erneut getippt
+ist, stumpft die Rückfragen ab, die zählen.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Kopfzeilen-Aktion daneben.** Gibt es zusätzlich einen Massenweg — ein
+CSV-Import — steht der als sekundäre Aktion in der Kopfzeile des Bereichs,
+während das Feld für den Einzelfall bleibt.
+
+**Mit Zustand je Eintrag.** Muss ein hinzugefügter Wert erst bestätigt werden,
+trägt die Zeile ein [Badge](/templates/bausteine/listeneintrag) („unbestätigt")
+— dann ist der Eintrag mehr als ein Wert, und die Grenze zum
+[Listen-Bereich](/templates/bereiche/listen-bereich) ist erreicht.

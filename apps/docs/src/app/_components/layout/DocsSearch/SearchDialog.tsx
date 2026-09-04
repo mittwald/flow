@@ -63,6 +63,12 @@ const DEFAULT_SECTIONS = [
       "Wiederkehrende Nutzerabläufe und Best Practices, die zeigen, wie mehrere Components sinnvoll zusammenspielen.",
   },
   {
+    segment: "templates",
+    title: "Templates",
+    description:
+      "Kopierbare Kompositionen für ganze Seiten, Overlays, Bereiche und einzelne Bausteine – mit Hinweisen, wann sie passen und wie sie sich abwandeln lassen.",
+  },
+  {
     segment: "components",
     title: "Components",
     description:
