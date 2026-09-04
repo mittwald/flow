@@ -3,6 +3,7 @@ import path from "path";
 import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator.ts";
 import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin.ts";
 import { unlayeredMarkerPlugin } from "./dev/vite/unlayeredMarker.ts";
+import autoprefixer from "autoprefixer";
 import { lezer } from "@lezer/generator/rollup";
 import sassDts from "vite-plugin-sass-dts";
 
@@ -41,7 +42,11 @@ export default defineConfig({
      * lose to Flow's own unlayered rules – the opposite of its purpose.
      */
     postcss: {
-      plugins: [unlayeredMarkerPlugin()],
+      /*
+       * Autoprefixer sits here, not in the build config: that one merges on top
+       * and concatenates the plugin list, so both pipelines prefix alike.
+       */
+      plugins: [unlayeredMarkerPlugin(), autoprefixer()],
     },
     modules: {
       generateScopedName: cssModuleClassNameGenerator,

@@ -155,6 +155,7 @@
     "@vitest/browser": "^4.1.11",
     "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-v8": "~4.1.11",
+    "autoprefixer": "^10.5.4",
     "camelcase": "^9.0.0",
     "decamelize": "^6.0.1",
     "fs-jetpack": "^5.1.0",
@@ -210,5 +211,8 @@
     "react-hook-form": {
       "optional": true
     }
-  }
+  },
+  "browserslist": [
+    "baseline widely available"
+  ]
 }
