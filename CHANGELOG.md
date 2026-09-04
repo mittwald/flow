@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.21](https://github.com/mittwald/flow/compare/1.2.0-next.20...1.2.0-next.21) (2026-09-04)
+
+### Bug Fixes
+
+* **Button:** treat a string label like a Text child ([#3053](https://github.com/mittwald/flow/issues/3053)) ([13cc756](https://github.com/mittwald/flow/commit/13cc75600f8a2f38c381e990085c36127ac394e8))
+
+## [1.1.16](https://github.com/mittwald/flow/compare/1.2.0-next.19...1.1.16) (2026-09-04)
+
 ## [1.2.0-next.20](https://github.com/mittwald/flow/compare/1.2.0-next.19...1.2.0-next.20) (2026-09-04)
 
 ## [1.1.15](https://github.com/mittwald/flow/compare/1.2.0-next.18...1.1.15) (2026-09-03)
