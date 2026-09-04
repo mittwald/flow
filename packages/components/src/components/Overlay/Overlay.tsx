@@ -11,6 +11,8 @@ import type {
   OverlayOpenHandler,
   OverlayOpenStateHandler,
 } from "@/lib/controller/overlay/OverlayController";
+import { OverlayHoistEntry } from "@/lib/overlayHoist/OverlayHoistEntry";
+import { useOverlayHoistRegistry } from "@/lib/overlayHoist/context";
 import type * as Aria from "react-aria-components";
 
 export interface OverlayProps
@@ -43,27 +45,38 @@ export interface OverlayProps
   confirmOnClose?: boolean;
 }
 
-export const Overlay: FC<OverlayProps> = (props) => {
+interface OverlayContentProps extends OverlayProps {
+  controller: OverlayController;
+}
+
+/**
+ * The overlay itself. Split out of `Overlay` so it can be rendered either in
+ * place or – hoisted out of a context menu – in an `OverlayHoistOutlet`. Every
+ * hook that has to stay alive together with the overlay lives here: rendered
+ * from the outlet, the overlay keeps reacting to its controller even after the
+ * subtree that declared it has unmounted.
+ */
+const OverlayContent: FC<OverlayContentProps> = (props) => {
   const {
-    controller: controllerFromProps,
+    controller,
     children,
     isDismissable = true,
     className,
-    overlayType = "Modal",
-    isDefaultOpen,
     isOpen: isOpenFromProps,
     ref,
     "aria-labelledby": ariaLabelledBy,
-    ...controllerOptions
+    onOpen,
+    onClose,
+    onOpenChange,
+    confirmOnClose,
   } = props;
 
-  const controllerFromContext = useOverlayController(overlayType, {
-    reuseControllerFromContext: true,
-    isDefaultOpen,
+  controller.useUpdateOptions({
+    onOpen,
+    onClose,
+    onOpenChange,
+    confirmOnClose,
   });
-
-  const controller = controllerFromProps ?? controllerFromContext;
-  controller.useUpdateOptions(controllerOptions);
 
   const isOpen = isOpenFromProps ?? controller.useIsOpen();
 
@@ -82,6 +95,37 @@ export const Overlay: FC<OverlayProps> = (props) => {
         {children}
       </OverlayContextProvider>
     </OverlayContentView>
+  );
+};
+
+export const Overlay: FC<OverlayProps> = (props) => {
+  const {
+    controller: controllerFromProps,
+    overlayType = "Modal",
+    isDefaultOpen,
+  } = props;
+
+  const controllerFromContext = useOverlayController(overlayType, {
+    reuseControllerFromContext: true,
+    isDefaultOpen,
+  });
+
+  const controller = controllerFromProps ?? controllerFromContext;
+
+  const hoistRegistry = useOverlayHoistRegistry();
+
+  const overlay = <OverlayContent {...props} controller={controller} />;
+
+  if (!hoistRegistry) {
+    return overlay;
+  }
+
+  return (
+    <OverlayHoistEntry
+      registry={hoistRegistry}
+      controller={controller}
+      overlay={overlay}
+    />
   );
 };
 

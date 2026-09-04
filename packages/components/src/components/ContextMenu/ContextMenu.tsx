@@ -17,6 +17,7 @@ import ContextMenuContentView from "@/views/ContextMenuContentView";
 import type * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
 import { OverlayContentSuspendWatcher } from "@/lib/controller/overlay/OverlayContentSuspendWatcher";
+import { OverlayHoistProvider } from "@/lib/overlayHoist/OverlayHoistProvider";
 
 export interface ContextMenuProps
   extends
@@ -89,37 +90,44 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   return (
-    <OverlayContentSuspendWatcher overlayController={overlayController}>
-      <Popover
-        {...rest}
-        className={styles.popover}
-        controller={overlayController}
-        isDialogContent={false}
-      >
-        <OverlayContextProvider
-          type="ContextMenu"
+    /**
+     * Overlays declared inside the menu are hoisted out of the popover – it
+     * unmounts as soon as the menu closes, which is exactly what activating a
+     * menu item does. See `OverlayHoistProvider`.
+     */
+    <OverlayHoistProvider>
+      <OverlayContentSuspendWatcher overlayController={overlayController}>
+        <Popover
+          {...rest}
+          className={styles.popover}
           controller={overlayController}
+          isDialogContent={false}
         >
-          <ContextMenuContentView
-            className={styles.contextMenu}
-            onAction={onAction}
-            selectionMode={getAriaSelectionMode(selectionMode)}
-            selectedKeys={selectedKeys}
-            defaultSelectedKeys={defaultSelectedKeys}
-            disabledKeys={disabledKeys}
-            onSelectionChange={onSelectionChange}
-            renderEmptyState={renderEmptyState}
-            ref={ref}
+          <OverlayContextProvider
+            type="ContextMenu"
+            controller={overlayController}
           >
-            <PropsContextProvider props={propsContext}>
-              <Action closeOverlay={getCloseOverlayType(selectionMode)}>
-                {children}
-              </Action>
-            </PropsContextProvider>
-          </ContextMenuContentView>
-        </OverlayContextProvider>
-      </Popover>
-    </OverlayContentSuspendWatcher>
+            <ContextMenuContentView
+              className={styles.contextMenu}
+              onAction={onAction}
+              selectionMode={getAriaSelectionMode(selectionMode)}
+              selectedKeys={selectedKeys}
+              defaultSelectedKeys={defaultSelectedKeys}
+              disabledKeys={disabledKeys}
+              onSelectionChange={onSelectionChange}
+              renderEmptyState={renderEmptyState}
+              ref={ref}
+            >
+              <PropsContextProvider props={propsContext}>
+                <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+                  {children}
+                </Action>
+              </PropsContextProvider>
+            </ContextMenuContentView>
+          </OverlayContextProvider>
+        </Popover>
+      </OverlayContentSuspendWatcher>
+    </OverlayHoistProvider>
   );
 });
 
