@@ -229,6 +229,15 @@ The escalation is **idempotent**: while a sync issue or a sync PR is open, the
 cascade does not open a second one, and it never touches the branch a human may
 be working on.
 
+The escalation is **additionally posted to Slack** (`SLACK_WEBHOOK_URL`). It has
+to key on the escalation, not on the run: a conflict is the expected non-error
+path, the run exits 0, and a `failure()` notification would never see a blocked
+cascade. Keying on the escalation also inherits its idempotence — a cascade that
+stays blocked does not re-ping the channel on every push to `main`. The Slack
+step is `continue-on-error`: the issue is the source of truth, and a webhook
+outage must not turn the conflict path into a run failure that §10 would then
+report as a genuine forward-merge failure.
+
 **The sync PR must be merged as a true merge commit** (`main` stays an ancestor
 of `next`). Squash/rebase-merging it would reintroduce trap #1. This is enforced
 by branch protection on `next` (see §5), consistent with §1.
@@ -261,7 +270,8 @@ Two mitigations, both implemented:
   schedule and escalates when the gap outlives a threshold, ignoring drift that
   an open sync issue or sync PR already accounts for — and ageing those too, so
   a forgotten escalation cannot block the cascade indefinitely without saying
-  so.
+  so. Its escalation goes to Slack as well, mirroring the issue and therefore
+  its idempotence: the schedule runs hourly, the alert does not.
 
 Giving `forward-merge.yml` its own group was considered and rejected:
 forward-merge runs evicting each other is harmless (they always merge `main`'s
@@ -349,8 +359,8 @@ bypass actor on `next`. No new GitHub App is introduced for now.
 A **conflict** produces a sync PR (§4) — that is the expected, non-error path. A
 **non-conflict failure** (fetch-before-push retry exhausted, an error in the
 workflow itself, a failing generator) is different: the workflow **opens an
-issue and pings CODEOWNERS**, so a silently-failing sync cannot let `next`
-quietly fall behind `main`.
+issue and pings CODEOWNERS**, and posts the same alert to Slack, so a
+silently-failing sync cannot let `next` quietly fall behind `main`.
 
 ### 11. The major line
 
