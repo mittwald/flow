@@ -2,6 +2,7 @@ import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
 import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
 import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
+import { checkTagIsSet } from "../lib/docTags";
 
 export function generateRemoteReactComponentFile(c: ComponentDoc) {
   const componentProps = c.props;
@@ -17,6 +18,15 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
         return `${propName}: { event: "${formattedName}" } as never`;
       })
       .join(",\n"),
+    /*
+     * `flowComponent` defaults to the `"ui"` provision type, which wraps the
+     * remote element in a `ClearPropsContext`. That is wrong for a provider:
+     * where the local counterpart is not `@flr-generate` — `ModalTrigger`
+     * renders `OverlayTrigger` around `DialogTriggerView` — the provider runs
+     * inside the remote tree, and clearing there drops the props context it
+     * just set. `@flr-provider` carries the type over.
+     */
+    provisionType: checkTagIsSet(c.tags, "provider") ? `type: "provider",` : "",
   };
 
   return `\
@@ -35,6 +45,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
       eventProps: {
           ${t.events}
       },
+      ${t.provisionType}
     });
   `;
 }
