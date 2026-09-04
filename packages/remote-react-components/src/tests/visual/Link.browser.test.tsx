@@ -78,7 +78,11 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Link with Button (%s)",
-  async ({ testScreenshot, render, components: { Link, Flex, Button } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Link, Flex, Button, IconStar },
+  }) => {
     await render(
       <Flex gap="m" direction="column">
         <Link target="_blank">
@@ -95,6 +99,17 @@ test.each(testEnvironments)(
         </Link>
         <Link isDisabled>
           <Button>Disabled</Button>
+        </Link>
+        <Link target="_blank">
+          <Button>
+            <IconStar />
+            Icon & Text
+          </Button>
+        </Link>
+        <Link target="_blank">
+          <Button aria-label="Icon only">
+            <IconStar />
+          </Button>
         </Link>
       </Flex>,
     );

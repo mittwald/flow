@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.19](https://github.com/mittwald/flow/compare/1.1.18...1.1.19) (2026-09-04)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.1.18](https://github.com/mittwald/flow/compare/1.1.17...1.1.18) (2026-09-04)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.1.17](https://github.com/mittwald/flow/compare/1.1.16...1.1.17) (2026-09-04)
+
+### Bug Fixes
+
+* **components:** keep tests and stories out of the published types ([#3103](https://github.com/mittwald/flow/issues/3103)) ([bf947d9](https://github.com/mittwald/flow/commit/bf947d979ccb045d3e045d117f1709223c3f3b25))
+* **Tunnel:** render tunnelled children in the first commit ([#3022](https://github.com/mittwald/flow/issues/3022)) ([09db004](https://github.com/mittwald/flow/commit/09db004acbd1fdb426835768180199c6f45a21a6))
+
+## [1.1.16](https://github.com/mittwald/flow/compare/1.1.15...1.1.16) (2026-09-04)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.1.15](https://github.com/mittwald/flow/compare/1.1.14...1.1.15) (2026-09-03)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.1.14](https://github.com/mittwald/flow/compare/1.1.13...1.1.14) (2026-09-03)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
 ## [1.1.13](https://github.com/mittwald/flow/compare/1.1.12...1.1.13) (2026-09-03)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
