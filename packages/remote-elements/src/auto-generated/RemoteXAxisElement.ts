@@ -21,7 +21,6 @@ export class RemoteXAxisElement extends FlowRemoteElement<RemoteXAxisElementProp
       minTickGap: {},
       orientation: {},
       scale: {},
-      tickFormatter: {},
       type: {},
       unit: {},
     };
