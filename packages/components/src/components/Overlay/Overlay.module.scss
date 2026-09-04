@@ -22,6 +22,20 @@
   }
 }
 
+/* Centering viewport between the backdrop and react-aria's modal wrapper.
+   Sized to the visual viewport so it tracks the on-screen keyboard. Modal,
+   OffCanvas and LightBox refine it (padding, pointer-events) — they used to
+   repeat this whole block behind a `> div` selector each. */
+.viewport {
+  position: fixed;
+  height: var(--visual-viewport-height);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Fallback shown while suspended overlay content loads. */
 .suspense {
   padding: var(--size-px--xl);

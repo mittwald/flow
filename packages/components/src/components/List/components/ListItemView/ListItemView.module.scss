@@ -67,7 +67,7 @@
     .columnLayout {
       flex-grow: 1;
 
-      > div {
+      > :global(.flow--column-layout) {
         flex-grow: 1;
         align-items: center;
       }
@@ -95,7 +95,7 @@
     .action {
       margin-inline-start: auto;
 
-      button {
+      :global(.flow--button) {
         margin-inline-end: 0;
       }
     }
@@ -163,6 +163,8 @@
         var(--list-item--border-style) var(--list-item--border-color);
       aspect-ratio: 16 / 9;
 
+      // A consumer child inside `Avatar` — Flow `Image` or a bare `<img>`.
+      // stylelint-disable-next-line selector-max-type -- bare `<img>` has no class
       img {
         overflow-clip-margin: unset;
         aspect-ratio: 16 / 9;

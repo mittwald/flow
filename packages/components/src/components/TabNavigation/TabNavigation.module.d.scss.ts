@@ -1,5 +1,7 @@
 declare const classNames: {
   readonly tabNavigation: "tabNavigation";
+  readonly list: "list";
+  readonly item: "item";
   readonly link: "link";
   readonly text: "text";
   readonly more: "more";

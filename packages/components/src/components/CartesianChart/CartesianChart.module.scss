@@ -28,6 +28,8 @@
     }
   }
 
+  // recharts renders every svg here; only its outermost surface is classed.
+  // stylelint-disable-next-line selector-max-type -- third-party svgs
   svg {
     overflow: visible;
   }

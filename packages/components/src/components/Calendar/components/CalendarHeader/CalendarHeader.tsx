@@ -5,10 +5,11 @@ import {
   IconChevronLeft,
   IconChevronRight,
 } from "@/components/Icon/components/icons";
+import styles from "../../Calendar.module.scss";
 
 export const CalendarHeader: FC = () => {
   return (
-    <header>
+    <header className={styles.calendarHeader}>
       <Button ariaSlot="previous" variant="plain" color="secondary">
         <IconChevronLeft />
       </Button>

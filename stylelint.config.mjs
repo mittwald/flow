@@ -77,13 +77,16 @@ export default {
   },
   overrides: [
     {
-      // Component styles should reach for classes over element-type selectors
-      // (a recurring review nudge). Kept as a non-blocking warning: some type
-      // selectors are legitimate (e.g. styling React-Aria internals or svg that
-      // carry no class), and there is no autofix.
+      // Component styles must reach for classes over element-type selectors.
+      // Blocking since #3021: every legitimate type selector left in the tree
+      // is opted out with a `stylelint-disable` comment that names why that
+      // element carries no class — react-aria internals, third-party svgs,
+      // consumer-supplied markup, or content the component does not author. So
+      // a new report is a real finding, not backlog. There is still no autofix:
+      // either introduce a class, or disable the line with that reason.
       files: ["**/*.module.css", "**/*.module.scss"],
       rules: {
-        "selector-max-type": [0, { severity: "warning" }],
+        "selector-max-type": 0,
       },
     },
   ],

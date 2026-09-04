@@ -28,6 +28,8 @@
       font-size: var(--font-size-heading--xl);
       padding: var(--donut-chart--padding--l);
 
+      // Raw consumer markup inside the value slot — nothing to class.
+      // stylelint-disable-next-line selector-max-type -- consumer markup
       small {
         font-size: var(--font-size-heading--l);
       }

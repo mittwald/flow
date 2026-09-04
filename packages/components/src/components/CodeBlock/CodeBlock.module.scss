@@ -14,6 +14,12 @@
       var(--code-block--border-color);
     border-radius: var(--code-block--corner-radius);
 
+    /* These stay element selectors on purpose. Classing them would give them a
+       `flow--` class, and the global reset's
+       `*:where([class*="flow--"] [class*="flow--"]) { font: inherit }` would
+       then replace the UA monospace metrics — the code text visibly reflows.
+       Fixing that is a design decision for UX, not a lint cleanup. */
+    // stylelint-disable selector-max-type -- see above
     > pre {
       @include scrollbar.scrollbar;
 
@@ -24,6 +30,7 @@
         text-shadow: none;
       }
     }
+    // stylelint-enable selector-max-type
   }
 
   &.folded {
@@ -47,8 +54,10 @@
     }
   }
 
-  /* A code block is not an input – both axes use its own padding. */
-  &.codeBlock div:global(.flow--code-editor--code-mirror) {
+  /* A code block is not an input – both axes use its own padding. The repeated
+     root class only buys specificity over CodeEditor's own `.codeMirror` rules
+     (incl. `.readonly`); it identifies nothing. */
+  &.codeBlock.codeBlock :global(.flow--code-editor--code-mirror) {
     --form-control--padding-y: var(--code-block--padding);
     --form-control--padding-x: var(--code-block--padding);
 
