@@ -358,6 +358,32 @@ The `next → major line` forward-merge uses the **same mechanism** — same mer
 strategy, drivers, concurrency group (`mutate-major`), sync-PR flow, and message
 convention — only with different branch names. It is not designed separately.
 
+**That holds for the design, not for the configuration.** Every piece of
+automation is written for the two standing lines, and "different branch names"
+is a set of concrete edits, not a parameter:
+
+- `commit-guard.yml` gates both jobs on
+  `base.ref == 'main' || base.ref == 'next'`, so a PR to the major line gets no
+  conventional-title, routing or version-contract check at all.
+- `publish.yml` derives `LINE` — and its concurrency group — as
+  `github.ref == 'refs/heads/next' && 'next' || 'main'`. A major line added to
+  the push trigger without touching those two expressions classifies as the
+  **stable** line and publishes under dist-tag `latest`.
+- `forward-merge.yml`, `forward-merge-drift.yml` and `sync-resolve.cjs` are
+  `main → next` throughout (refs, concurrency group, sync branch, escalation
+  titles). The escalation lookups search a shared title prefix and the bare
+  `sync` label, so two cascade instances would close and suppress each other's
+  issues.
+- The line has no ruleset, and the repo allows merge commits **and** squash
+  merges repo-wide — so an unprotected line offers both buttons. A squashed sync
+  PR is exactly how #2963/#2969 broke the superset invariant on `next`.
+- §6 says "the major line's own prerelease" without naming a dist-tag, and
+  `next` is taken.
+
+These are prerequisites for the line's first pull request, not follow-ups. The
+runbook that records them, together with the promotion and retirement paths, is
+[`docs/major-line-runbook.md`](../major-line-runbook.md).
+
 ## Consequences
 
 **Positive**
