@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.18](https://github.com/mittwald/flow/compare/1.1.17...1.1.18) (2026-09-04)
+
+### Bug Fixes
+
+* **ListItem:** render linked items as real anchors ([#3084](https://github.com/mittwald/flow/issues/3084)) ([de6dc0a](https://github.com/mittwald/flow/commit/de6dc0a9ac8c6419db692165f4eeaa6c7e9394b5))
+
 ## [1.1.17](https://github.com/mittwald/flow/compare/1.1.16...1.1.17) (2026-09-04)
 
 ### Bug Fixes
