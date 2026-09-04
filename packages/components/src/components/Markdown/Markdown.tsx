@@ -42,7 +42,14 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     headingOffset = 0,
     components: customComponents,
     ref,
+    allowElement,
+    allowedElements,
+    disallowedElements,
+    rehypePlugins,
     remarkPlugins,
+    remarkRehypeOptions,
+    skipHtml,
+    unwrapDisallowed,
     urlTransform,
     ...rest
   } = props;
@@ -157,7 +164,14 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   return (
     <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
       <ReactMarkdown
+        allowElement={allowElement}
+        allowedElements={allowedElements}
+        disallowedElements={disallowedElements}
+        rehypePlugins={rehypePlugins}
         remarkPlugins={remarkPlugins ?? [remarkGfm]}
+        remarkRehypeOptions={remarkRehypeOptions}
+        skipHtml={skipHtml}
+        unwrapDisallowed={unwrapDisallowed}
         urlTransform={urlTransform}
         components={mergedComponents}
       >
