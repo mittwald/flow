@@ -10,8 +10,9 @@ import {
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { use, useState, type ReactNode } from "react";
-import { test } from "vitest";
+import { test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
+import { RouterProvider } from "react-aria-components";
 import {
   SettingsProvider,
   type SettingsBackend,
@@ -19,6 +20,8 @@ import {
 } from "../SettingsProvider";
 import { FilterValue } from "./model/filter/FilterValue";
 import Content from "../Content";
+import { Heading } from "../Heading";
+import { ContextMenu, MenuItem } from "../ContextMenu";
 
 interface Data {
   num: number;
@@ -650,5 +653,156 @@ describe("Item rendering", () => {
     await expect
       .element(page.getByText("Item: 42 unselected"))
       .toBeInTheDocument();
+  });
+});
+
+describe("Linked items", () => {
+  const itemHref = `${location.origin}/domains/42`;
+
+  let navigate: Mock;
+  let onAction: Mock;
+  let menuAction: Mock;
+
+  beforeEach(() => {
+    navigate = vitest.fn();
+    onAction = vitest.fn();
+    menuAction = vitest.fn();
+  });
+
+  const getTestElementWithLink = (target?: string) => (
+    <RouterProvider navigate={navigate}>
+      <List aria-label="Test" onAction={onAction}>
+        <ListStaticData<Data> data={[{ num: 42 }]} />
+        <ListItem<Data>
+          textValue={({ num }) => String(num)}
+          href={({ num }) => `${location.origin}/domains/${num}`}
+          target={target}
+        >
+          {({ num }) => (
+            <ListItemView>
+              <Heading>Item: {num}</Heading>
+              <ContextMenu onAction={menuAction}>
+                <MenuItem id="delete">Delete</MenuItem>
+              </ContextMenu>
+            </ListItemView>
+          )}
+        </ListItem>
+      </List>
+    </RouterProvider>
+  );
+
+  const row = page.getByRole("row");
+  const optionsButton = page.getByRole("button", { name: "Options" });
+
+  const getRowLink = async () =>
+    (await row.element()).querySelector<HTMLAnchorElement>("a");
+
+  test("a linked item renders a real anchor carrying the item's href", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    // Only a real <a href> gives the browser something to offer in its context
+    // menu and to open on a middle- or modifier-click.
+    expect(await getRowLink()).toHaveAttribute("href", itemHref);
+  });
+
+  test("the anchor carries the item's link target", async () => {
+    await render(getTestElementWithLink("_blank"));
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    expect(await getRowLink()).toHaveAttribute("target", "_blank");
+  });
+
+  test("an item without a href renders no anchor", async () => {
+    await render(getTestElement([42]));
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    expect((await row.element()).querySelector("a")).toBeNull();
+  });
+
+  test("the anchor adds neither a tab stop nor a second link for screen readers", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    // The row keeps owning activation and semantics — the anchor exists purely
+    // for the browser's own link affordances. It also has to stay untabbable
+    // because react-aria treats a tabbable descendant as interactive content
+    // and then stops the row's own press.
+    const link = await getRowLink();
+    expect(link?.tabIndex).toBe(-1);
+    expect(link).toHaveAttribute("aria-hidden", "true");
+  });
+
+  test("the anchor sits under the pointer, interactive content above it", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(optionsButton).toBeInTheDocument();
+
+    const elementAtCenterOf = (element: Element) => {
+      const { left, top, width, height } = element.getBoundingClientRect();
+      return document.elementFromPoint(left + width / 2, top + height / 2);
+    };
+
+    // The browser's context menu acts on whatever sits under the pointer, so
+    // the anchor has to win over the item's plain content …
+    const link = await getRowLink();
+    expect(elementAtCenterOf(await page.getByText("Item: 42").element())).toBe(
+      link,
+    );
+
+    // … and lose against everything the user is meant to interact with.
+    const button = await optionsButton.element();
+    expect(button.contains(elementAtCenterOf(button))).toBe(true);
+  });
+
+  test("clicking a linked item navigates exactly once", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    await userEvent.click(row);
+
+    // Both the anchor's default action and react-aria's press handler could
+    // navigate — react-aria cancels the former, so this must stay at one.
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledWith(itemHref, undefined);
+    expect(onAction).toHaveBeenCalledTimes(1);
+  });
+
+  test("keyboard activation navigates", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    (await row.element()).focus();
+    await userEvent.keyboard("{Enter}");
+
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledWith(itemHref, undefined);
+  });
+
+  test("a nested context menu stays clickable and does not trigger the item", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(optionsButton).toBeInTheDocument();
+
+    await userEvent.click(optionsButton);
+    await expect
+      .element(page.getByRole("menuitem", { name: "Delete" }))
+      .toBeInTheDocument();
+
+    // Regression guard for #1250's first attempt (#2420, reverted): pressing
+    // interactive content inside an item must not additionally run the item's
+    // action or follow its link.
+    expect(onAction).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
+  });
+
+  test("a nested menu item runs its own action only", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(optionsButton).toBeInTheDocument();
+
+    await userEvent.click(optionsButton);
+    await userEvent.click(page.getByRole("menuitem", { name: "Delete" }));
+
+    expect(menuAction).toHaveBeenCalledWith("delete", undefined);
+    expect(onAction).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
   });
 });
