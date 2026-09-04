@@ -105,17 +105,9 @@ test.each(testEnvironments)(
 );
 
 /*
- * The reporter's structure from #2655: LayoutCard > Section > Section > Switch,
- * where the switch reveals content that is taller than what it replaces. Under
- * `container-type: inline-size` on `Section` — two of them nested here — an
- * affected Chrome kept the stale short height and the card clipped the revealed
- * content until a hover forced a reflow.
- *
- * This scenario cannot reproduce that bug: it is Blink-specific and version-
- * specific, and this suite runs WebKit and Firefox. It guards the height path
- * instead — the card and both sections have to end up as tall as the revealed
- * content, in both environments, so a future change that reintroduces a stale
- * height here shows up as a diff.
+ * Guards the height path of the reporter's structure from #2655 (LayoutCard >
+ * Section > Section > Switch revealing taller content). The bug itself is
+ * Blink-specific and cannot reproduce here — this suite runs WebKit and Firefox.
  */
 test.each(testEnvironments)(
   "Section growing inside a LayoutCard (%s)",
