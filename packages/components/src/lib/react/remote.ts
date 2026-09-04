@@ -3,7 +3,13 @@ import type {
   RemoteTextRendererProps,
 } from "@mittwald/remote-dom-react/host";
 import { isObjectType, isString } from "remeda";
-import { Children, isValidElement, type ReactNode } from "react";
+import {
+  Children,
+  Fragment,
+  isValidElement,
+  type PropsWithChildren,
+  type ReactNode,
+} from "react";
 
 export function isRemoteComponentRendererProps(
   props: unknown,
@@ -15,6 +21,25 @@ export function isRemoteComponentRendererProps(
     "receiver" in props
   );
 }
+
+/** Whether the node renders text — a string, number, or remote counterpart. */
+const isTextNode = (child: ReactNode): boolean =>
+  typeof child === "string" ||
+  typeof child === "number" ||
+  (isValidElement(child) && isRemoteTextRenderProps(child.props));
+
+/**
+ * `Children.toArray` treats a fragment as a single child, so recurse into one
+ * to reach the text a component like `Link` passes down through it.
+ */
+export const containsTextChild = (children: ReactNode): boolean =>
+  Children.toArray(children).some(
+    (child) =>
+      isTextNode(child) ||
+      (isValidElement<PropsWithChildren>(child) &&
+        child.type === Fragment &&
+        containsTextChild(child.props.children)),
+  );
 
 export const extractTextFromFirstChild = (children: ReactNode) => {
   if (Children.count(children) !== 1) {

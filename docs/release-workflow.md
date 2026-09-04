@@ -130,6 +130,14 @@ flowchart LR
   `pnpm-lock.yaml`, the root manifest, `lerna.json` — still reads "Version bump
   only" in every changelog, because no package changed. An entry's scope is the
   commit's, not the changelog's package.
+- **Tests and stories stay out of `dist/types`.** Every release build shares
+  `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
+  `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
+  emit; before that, 196 of `@mittwald/flow-remote-react-components@1.1.10`'s
+  799 tarball entries were `dist/types/tests/**`, and no `exports` path reached
+  them. A story's helper still ships (`Button/stories/lib.tsx`), because
+  `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
+  only `*.stories.tsx`.
 - **The build runs after the version bump.** Both publish workflows version
   first, then `pnpm build`, then publish. Some bundles bake their own version in
   at build time (vite `define` over `package.json` — `remote-react-components`'

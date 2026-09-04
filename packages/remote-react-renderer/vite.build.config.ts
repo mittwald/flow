@@ -1,6 +1,6 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
-import { preserveUseClientBanner } from "../core";
+import { preserveUseClientBanner, publishedDtsOptions } from "../core";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
@@ -13,10 +13,7 @@ export default mergeConfig(
       externalizeDeps({
         except: [/^@mittwald\/remote-dom-react(?:\/.+)?$/],
       }),
-      dts({
-        include: ["src"],
-        outDirs: "dist/types",
-      }),
+      dts(publishedDtsOptions),
     ],
     build: {
       minify: false,
