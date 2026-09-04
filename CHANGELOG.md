@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.22](https://github.com/mittwald/flow/compare/1.2.0-next.21...1.2.0-next.22) (2026-09-04)
+
+### Bug Fixes
+
+* **ci:** read preview TLS certificate IDs from secrets, not vars ([#3125](https://github.com/mittwald/flow/issues/3125)) ([9e331e3](https://github.com/mittwald/flow/commit/9e331e34b72bdca58139dff29a8111df582ed8c7))
+* **components:** keep tests and stories out of the published types ([#3103](https://github.com/mittwald/flow/issues/3103)) ([bf947d9](https://github.com/mittwald/flow/commit/bf947d979ccb045d3e045d117f1709223c3f3b25))
+* **Tunnel:** render tunnelled children in the first commit ([#3022](https://github.com/mittwald/flow/issues/3022)) ([09db004](https://github.com/mittwald/flow/commit/09db004acbd1fdb426835768180199c6f45a21a6))
+
 ## [1.2.0-next.21](https://github.com/mittwald/flow/compare/1.2.0-next.20...1.2.0-next.21) (2026-09-04)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.22](https://github.com/mittwald/flow/compare/1.2.0-next.21...1.2.0-next.22) (2026-09-04)
+
+### Bug Fixes
+
+* **components:** keep tests and stories out of the published types ([#3103](https://github.com/mittwald/flow/issues/3103)) ([bf947d9](https://github.com/mittwald/flow/commit/bf947d979ccb045d3e045d117f1709223c3f3b25))
+
 ## [1.2.0-next.21](https://github.com/mittwald/flow/compare/1.2.0-next.20...1.2.0-next.21) (2026-09-04)
 
 ### Bug Fixes
