@@ -53,6 +53,7 @@ const targets: Record<string, string[]> = {
   "form-resets-after-modal-close": ["Form"],
   "overlay-controller-add-on-close-return-type": ["OverlayController"],
   "cartesian-chart-empty-view": ["CartesianChart"],
+  "option-value-inferred-from-mixed-children": ["Option"],
   "action-prop-to-on-action": ["Action", "ActionProps"],
   "button-props-interfaces": [
     "ResetButtonProps",
