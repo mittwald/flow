@@ -1,8 +1,8 @@
 import { mergeConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../../../core";
-import { REUSED_VISUAL_TESTS } from "./reusedVisualTests";
-import { serveFontsLocally } from "../../dev/vitest/serveFontsLocally";
-import viteConfig from "./vite.config";
+import { vitestBrowserTestConfig } from "../../../core/src/index.ts";
+import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
+import { serveFontsLocally } from "../../dev/vitest/serveFontsLocally.ts";
+import viteConfig from "./vite.config.ts";
 
 // Reuses unmodified visual tests by replacing their environments import. The
 // browser config is INHERITED from the shared vitestBrowserTestConfig so this

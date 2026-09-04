@@ -1,7 +1,10 @@
 import { defineConfig, mergeConfig } from "vite";
-import { preserveUseClientBanner } from "../core";
+import {
+  libraryBuildChecks,
+  preserveUseClientBanner,
+} from "../core/src/index.ts";
 import dts from "unplugin-dts/vite";
-import baseConfig from "./vite.config";
+import baseConfig from "./vite.config.ts";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
@@ -22,6 +25,7 @@ export default defineConfig(
         formats: ["es"],
       },
       rolldownOptions: {
+        checks: libraryBuildChecks,
         output: {
           postBanner: preserveUseClientBanner,
         },

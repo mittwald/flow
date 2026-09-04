@@ -2,6 +2,13 @@ import "../src/styles";
 import type { Preview } from "@storybook/react";
 import type React from "react";
 import { useEffect } from "react";
+/*
+ * The `/client` entry, not the package root: the root entry imports
+ * `next/navigation`, whose Next.js internals reference `process` at module
+ * scope. Storybook's preview is plain Vite with no Next runtime, so that throws
+ * `process is not defined` while the dependency is being evaluated and the
+ * preview never renders. Same API, generic React.
+ */
 import { ThemeProvider, useTheme } from "@teispace/next-themes/client";
 import { addons } from "storybook/manager-api";
 

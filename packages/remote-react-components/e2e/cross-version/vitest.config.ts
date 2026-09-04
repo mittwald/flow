@@ -13,11 +13,11 @@
 // package's `unit-dev` project (node env, no server); see ../../vitest.config.ts.
 import { playwright } from "@vitest/browser-playwright";
 import { mergeConfig } from "vitest/config";
-import defaultConfig from "../../vite.config";
+import defaultConfig from "../../vite.config.ts";
 import {
   CROSS_VERSION_ENV,
   resolveCrossVersionServerPackage,
-} from "./resolveServerPackage";
+} from "./resolveServerPackage.ts";
 
 const candidateVersion = resolveCrossVersionServerPackage(
   process.env[CROSS_VERSION_ENV],

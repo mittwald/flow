@@ -1,6 +1,6 @@
 import { playwright } from "@vitest/browser-playwright";
 import { mergeConfig } from "vitest/config";
-import defaultConfig from "./vite.config";
+import defaultConfig from "./vite.config.ts";
 
 export default mergeConfig(defaultConfig, {
   cacheDir: "e2e/remote-test-server/.vitest/cache/test-browser",
