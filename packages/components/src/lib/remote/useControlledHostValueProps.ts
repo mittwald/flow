@@ -10,15 +10,10 @@ import type { FieldProps } from "@/lib/remote/types";
  * This hook is only necessary for text inputs. If not used the controlled input
  * value may be corrupted by interleaved host inputs and remote events.
  *
- * `emptyValue` is what the field reports while nothing has been entered – `""`
- * for a text input, `NaN` for a number, `null` for a date range. It keeps the
- * field on the controlled side of React's controlled/uncontrolled line for its
- * whole lifetime: the state below owns the value from the first change on, so
- * without it a field that starts with neither `value` nor `defaultValue` hands
- * react-aria `undefined` first and a real value afterwards.
- * `useControlledState` reads only `undefined` as uncontrolled and warns about
- * that transition – and the value changes owner mid-flight, from the DOM input
- * to this hook.
+ * @param emptyValue What the field reports while nothing has been entered —
+ *   `""` for a text input, `NaN` for a number, `null` for a date range. It is
+ *   the sentinel that keeps the field controlled from the first render; see
+ *   that convention in the package's AGENTS.md.
  */
 export const useControlledHostValueProps = <T, P>(
   props: FieldProps<T, P>,
@@ -34,14 +29,10 @@ export const useControlledHostValueProps = <T, P>(
     valueFromProps === controlledRemoteValueMarker ? undefined : valueFromProps;
 
   /*
-   * `undefined` is the only value that falls back, because it is the only one
-   * react-aria reads as uncontrolled. `null` must not: it is how a caller
-   * controls a `DateRangePicker` that has no range selected, so `??` would let
-   * it fall through to `defaultValue`.
-   *
-   * The marker cannot appear on the first render — it is only sent once a
-   * remote event has been handled — so `regularValue` is the caller's own value
-   * here.
+   * Only `undefined` falls back, because only `undefined` reads as
+   * uncontrolled: a caller-supplied `null` controls a `DateRangePicker` with no
+   * range selected, so `??` would swallow it. The marker cannot appear on the
+   * first render, so `regularValue` is the caller's own value here.
    */
   const [value, setValue] = useState(
     regularValue !== undefined
