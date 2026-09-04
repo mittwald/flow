@@ -39,8 +39,6 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/prepare-workspace
-        with:
-          nx-cache: "false" # nothing here builds a package
 
       - name: Lint & check formatting
         run: pnpm lint
@@ -84,15 +82,6 @@ jobs:
       # has already run here.
       - name: Check all generated code is committed
         run: git diff --exit-code
-
-      # The one writer. Every other job restores this, so a PR starts from the
-      # builds `main` already paid for and only rebuilds what it changed.
-      - name: Save the nx cache
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: .nx/cache
-          key: nx-${{ runner.os }}-${{ github.sha }}
 
   browser:
     runs-on: ubuntu-latest
