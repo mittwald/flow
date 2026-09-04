@@ -521,19 +521,12 @@ jobs:
           tag="$(node -p "require('./lerna.json').version")"
 
           echo "Advancing main and tagging ${tag}"
-          # No-op for a pre-graduated promotion (the version commit arrived with
-          # the merge, so HEAD is already origin/main); pushes the new commit for
-          # the one-time-cut / dispatch paths where lerna versioned above.
-          #
-          # --no-verify belongs at both pushes even with
-          # SKIP_INSTALL_SIMPLE_GIT_HOOKS set above: this is the one place where a
-          # hook aborting the push strands a release that npm has already accepted
-          # (#2932), so it does not depend on a workflow-level env var staying put.
-          git push --no-verify origin HEAD:main
-          # Pre-graduated promotion: no tag exists yet — create it at the merge
-          # commit. Cut/dispatch paths: lerna already tagged, so keep that tag.
-          git rev-parse -q --verify "refs/tags/${tag}" >/dev/null || git tag -m "${tag}" "${tag}"
-          git push --no-verify origin "refs/tags/${tag}"
+          # Rebase-and-retry, because `main` can move under this run: the
+          # concurrency group serializes workflow RUNS, but a PR merged through
+          # the GitHub UI is not a run and lands in the ~10 minutes this job
+          # spends building and publishing. The script carries the full
+          # reasoning, the tag handling and the `--no-verify` rule (#2932).
+          node .github/scripts/push-release.mjs main "${tag}"
 
           # Release notes. Preferred source for a promotion: the curated,
           # user-facing notes in the PR body, verbatim between the
@@ -611,8 +604,7 @@ jobs:
           # the stable line: what we publish is what lerna.json says.
           tag="$(node -p "require('./lerna.json').version")"
           echo "Pushing release commit and tag ${tag} to next"
-          # --no-verify at the push itself, not only via the env var above: a hook
-          # aborting here strands a prerelease that npm has already accepted
-          # (#2932).
-          git push --no-verify origin HEAD:next
-          git push --no-verify origin "refs/tags/${tag}"
+          # Same rebase-and-retry as on the stable line, and for the same reason:
+          # `feat` PRs merge straight into `next`, so the window between the
+          # release commit and this push is just as open here.
+          node .github/scripts/push-release.mjs next "${tag}"
