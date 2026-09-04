@@ -1,6 +1,6 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { mergeConfig } from "vite";
-import { preserveUseClientBanner } from "../core";
+import { preserveUseClientBanner, publishedDtsOptions } from "../core";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
@@ -29,12 +29,5 @@ export default mergeConfig(baseConfig, {
       },
     },
   },
-  plugins: [
-    preserveDirectives(),
-    externalizeDeps(),
-    dts({
-      include: ["src"],
-      outDirs: "dist/types",
-    }),
-  ],
+  plugins: [preserveDirectives(), externalizeDeps(), dts(publishedDtsOptions)],
 });
