@@ -91,7 +91,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, "");
 
   const {
     FieldErrorView,
