@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.19](https://github.com/mittwald/flow/compare/1.1.18...1.1.19) (2026-09-04)
+
+### Bug Fixes
+
+* **Tabs:** keep the tab selection controlled from the first render ([#3048](https://github.com/mittwald/flow/issues/3048)) ([dd29fa5](https://github.com/mittwald/flow/commit/dd29fa518099048bc13e17abedea6f85de2b3f7b))
+
 ## [1.1.18](https://github.com/mittwald/flow/compare/1.1.17...1.1.18) (2026-09-04)
 
 ### Bug Fixes
