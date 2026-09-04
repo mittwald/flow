@@ -76,18 +76,24 @@ test.each(testEnvironments)(
       Badge,
       IconStar,
       Text,
+      Truncate,
     },
   }) => {
     await render(
       <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
         <Navigation>
           <Link>
-            Galactic Empire<AlertBadge status="warning">Deprecated</AlertBadge>
+            Galactic Empire of the Outer Rim
+            <AlertBadge status="warning">Deprecated</AlertBadge>
           </Link>
           <Link>
             <IconStar />
-            <Text>Rebel Alliance</Text>
+            <Text>Rebel Alliance High Command</Text>
             <Badge>Neu</Badge>
+          </Link>
+          <Link>
+            <IconStar />
+            <Truncate>Mandalorian Covert of Nevarro</Truncate>
           </Link>
         </Navigation>
       </ColumnLayout>,
