@@ -67,33 +67,69 @@ flowchart LR
   guard that Lerna-Lite 5's changelog config trips over (it recompiles the
   preset's template itself), and the guard then aborts `lerna version`. Re-check
   on the next Lerna-Lite major.
-- **Not every merge releases.** A push to a release line only publishes when it
-  carries a change that can reach a **published package**. Docs-, CI- and
-  repo-tooling-only merges (`apps/**`, `docs/**`, `.github/**`, `dev/**`, root
-  Markdown and editor config) are skipped whole: no npm publish, no
-  `chore(release):` version bump commit, no tag, no GitHub Release (#2931). The
-  decision is made by the `decide` job in `publish.yml`, which classifies the
-  pushed file set with `.github/scripts/release-relevance-lib.mjs`. Two
-  properties matter when you touch that list:
-  - It is a **denylist** — anything not provably docs/CI/tooling counts as
+- **No type is hidden from the changelog** (#3023). The preset hides `docs`,
+  `style`, `chore`, `refactor`, `test`, `build` and `ci` by default, so a
+  release those types triggered had nothing to write and Lerna emitted
+  "**Note:** Version bump only" — four of the first fourteen post-1.0 releases.
+  `lerna.json` therefore configures `changelogPreset` as an object and respells
+  the full `types` list with every `hidden` dropped. Relevance is decided by
+  path, so a release exists only because something can reach a consumer; if a
+  commit was worth a release it is worth a line. That covers the cases a path
+  gate must not suppress — `chore(deps): bump …` changes what consumers resolve,
+  and a `docs:` commit on a shipped `AGENTS.md` really does change the tarball
+  (#2954 cut 1.0.11). `.github/scripts/changelog-preset.test.mjs` asserts every
+  type still renders. Unhiding changes nothing about the bump: without
+  `bumpStrict` the preset's `whatBump` returns patch for any non-empty commit
+  range regardless.
+- **Not every merge releases.** A push to a release line publishes only when it
+  carries a change that can reach a **consumer**. Everything else is skipped
+  whole: no npm publish, no `chore(release):` version bump commit, no tag, no
+  GitHub Release (#2931). The `decide` job in `publish.yml` classifies the
+  pushed file set with `.github/scripts/release-relevance-lib.mjs`, and a
+  **`workflow_dispatch` run always publishes** — the escape hatch when a
+  docs-only change has to go out anyway. Four properties of that classifier:
+  - It is a **denylist**: anything not provably non-shipping counts as
     publishable. Forgetting a docs path costs one needless version; forgetting a
-    source path would silently swallow a real release. So `packages/**` is
-    relevant wholesale, Markdown included: `@mittwald/flow-react-components`
-    ships `AGENTS.md`, `MIGRATION.md` and `USAGE.md` next to `dist`.
-  - **Two files are judged by content, not by path**, because for them the path
-    carries no information:
-    - Root **`package.json`** — a `scripts` or `simple-git-hooks` edit cannot
-      reach a tarball, a `devDependencies` bump can. The `decide` job fetches
-      both versions and compares the top-level keys; an unknown key is relevant
-      like an unknown path is. #2970 added `test:links` to two scripts and cut
-      1.0.9.
-    - **`pnpm-lock.yaml`** — a derived file, relevant when the manifest that
-      moved it is. It follows the manifests in the same push and drops out only
-      when at least one changed and none of them is publish-relevant. Lock churn
-      with NO manifest change (a dedupe, a resolution refresh) stays relevant.
-      #2959 bumped an `apps/docs` dependency and cut 1.0.4.
-  - A **`workflow_dispatch` run always publishes.** That is the escape hatch
-    when a docs-only change has to go out as a release anyway.
+    source path would swallow a real release. Package-local Markdown therefore
+    stays relevant — `@mittwald/flow-react-components` ships `AGENTS.md`,
+    `MIGRATION.md` and `USAGE.md` next to `dist`.
+  - Outside `packages/**`: `apps/**`, `docs/**`, `.github/**`, `dev/**`, root
+    Markdown and editor config are irrelevant.
+  - Inside `packages/**` these are irrelevant too, segment-exact under
+    `packages/<name>/`: `.storybook/**`, `e2e/**`, `src/tests/**`,
+    `dev/cross-version/**`, `dev/vitest/**`, the package's `CONTRIBUTE.md`,
+    `Dockerfile` and `.dockerignore`, and `*.stories.tsx` / `*.test.*` anywhere.
+    The criterion is **no consumer effect**, not "not in the tarball".
+  - A package's **root-level Markdown is judged against that package's `files`**
+    — nothing builds one, so it reaches a consumer exactly if it is published.
+    `flow-react-components` lists `AGENTS.md`, `MIGRATION.md` and `USAGE.md`;
+    `remote-react-components` lists only `USAGE.md`, so ITS `AGENTS.md` reaches
+    nobody. The `files` are read from the checkout, not fetched — only the
+    current state matters. A Markdown file DEEPER in a package keeps its
+    path-level relevance: `codemods/src/migrations/*/entry.md` is a generator
+    input, not documentation.
+    - `packages/*/dev/**` is **not** irrelevant wholesale. In `components` and
+      `codemods` that directory is the build: `dev/vite/*` holds the plugins
+      `vite.build.config.ts` imports, `dev/createDocPropertiesJson.ts` writes
+      the shipped `dist/assets/doc-properties.json`,
+      `dev/remote-components-generator/**` generates `view.ts` and
+      `src/auto-generated/**`, and `codemods`' build script is
+      `tsx dev/generateCli.ts && …`.
+  - **Every `package.json` and `pnpm-lock.yaml` are judged by content**, because
+    their paths carry no information. A `scripts` or `simple-git-hooks` edit
+    cannot reach a consumer, a dependency bump can — the job fetches both sides
+    of each manifest and compares the top-level keys, and an unknown key is
+    relevant like an unknown path is. The lockfile follows the manifests that
+    moved it and stays relevant when none of them changed. #2970 cut 1.0.9 from
+    two root scripts, #3006 cut 1.0.12 from one package's `test:unit`, #2959 cut
+    1.0.4 from an `apps/docs` dependency.
+- **The changelog renders every commit type** (`changelogPreset` in
+  `lerna.json`, asserted by `.github/scripts/changelog-preset.test.mjs`), so a
+  `chore`, `build` or `test` change that touches a package is no longer
+  invisible. A release whose cause lies outside every package —
+  `pnpm-lock.yaml`, the root manifest, `lerna.json` — still reads "Version bump
+  only" in every changelog, because no package changed. An entry's scope is the
+  commit's, not the changelog's package.
 - **Tests and stories stay out of `dist/types`.** Every release build shares
   `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
   `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
