@@ -130,9 +130,13 @@ jobs:
       packages: read
       pull-requests: write
 
-    # Preview deploy needs the MITTWALD_* secrets, which GitHub withholds from
-    # Dependabot-triggered runs and from forks. Skip there so those PRs don't
-    # fail on missing secrets (the build job above still validates the images).
+    # Preview deploy needs the MITTWALD_* secrets, which a Dependabot-triggered
+    # run resolves against the Dependabot secret store (empty there) and a fork
+    # does not get at all. Skip both so those PRs don't fail on missing secrets
+    # (the build job above still validates the images).
+    # A Dependabot PR is deployed all the same — by
+    # `deploy-previews-dependabot.yml`, which this run triggers via
+    # `workflow_run` and which does get the secrets. A fork's is not.
     if: >
       github.event_name == 'pull_request' &&
       github.actor != 'dependabot[bot]' &&

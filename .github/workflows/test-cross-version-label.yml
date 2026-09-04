@@ -5,15 +5,25 @@ on:
   pull_request:
     types:
       - labeled
+      # Dependabot PRs run both harnesses unconditionally rather than on a
+      # label, for the same two reasons as the visual suite: it is a gate
+      # `dependabot-auto-merge.yml` waits for, and labelling from a workflow
+      # would not work anyway — events created with `GITHUB_TOKEN` do not start
+      # new workflow runs. A dependency bump is exactly the change that moves
+      # rendered structure without touching a component.
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   run-cross-version-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     if: >
-      github.event_name == 'workflow_dispatch' || (github.event.label.name ==
-      'run-cross-version-tests' &&
-       github.head_ref != github.event.repository.default_branch)
+      github.event_name == 'workflow_dispatch' ||
+      (github.head_ref != github.event.repository.default_branch &&
+       (github.event.label.name == 'run-cross-version-tests' ||
+        github.event.pull_request.user.login == 'dependabot[bot]'))
 
     # one at a time per branch; re-labeling supersedes an in-flight run
     concurrency:
@@ -26,7 +36,10 @@ jobs:
 
     steps:
       - name: Remove label if exists
-        if: github.event_name == 'pull_request'
+        # Only the run that the label started has a label to remove. Not every
+        # `labeled` event does: Dependabot attaches its own labels right after
+        # opening a PR, and each of those starts a run of this workflow too.
+        if: github.event.label.name == 'run-cross-version-tests'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}
@@ -154,7 +167,10 @@ jobs:
           cat "$RUNNER_TEMP/cross-version-summary.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Comment summary on PR
-        if: always() && github.event_name == 'pull_request'
+        # The comment answers a request. Nobody asked on a Dependabot PR — there
+        # the check run and its step summary are the signal, and
+        # `dependabot-auto-merge.yml` is what acts on the verdict.
+        if: always() && github.event.label.name == 'run-cross-version-tests'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}

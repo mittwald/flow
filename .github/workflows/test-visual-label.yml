@@ -39,9 +39,11 @@ jobs:
 
     steps:
       - name: Remove label if exists
-        # Only the labelled path has a label to remove — and only that path may
-        # write: a `pull_request` event on a Dependabot PR gets a read-only
-        # `GITHUB_TOKEN`, so this call would 403 and fail the whole job.
+        # Only the labelled path has a label to remove. Note that a Dependabot
+        # PR takes this path as well: Dependabot attaches its own labels right
+        # after opening the PR, and each of those `labeled` events starts a run
+        # here too. Removing a label that is not there 404s, which the script
+        # swallows.
         if: github.event.action == 'labeled'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
@@ -169,9 +171,10 @@ jobs:
           cat "$RUNNER_TEMP/visual-summary.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Comment summary on PR
-        # Same read-only-token reason as the label removal above. On a Dependabot
-        # PR the check run and its step summary are the signal; nothing
-        # auto-merges while it is red.
+        # Same path as the label removal above. The `synchronize` run of a
+        # Dependabot PR posts nothing — there the check run and its step summary
+        # are the signal, and `dependabot-auto-merge.yml` is what acts on the
+        # verdict.
         if: github.event.action == 'labeled'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:

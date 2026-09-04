@@ -816,14 +816,44 @@ deliberately by bumping it manually. The moving parts:
   exempt). Nothing is left ungrouped on purpose: every merge invalidates
   `pnpm-lock.yaml` in every other open PR, which makes Dependabot rebase it and
   CI run again, so the number of open PRs is what drives that cascade.
-- The **visual regression suite runs on every Dependabot PR**, not on a label. A
-  `playwright`, `vitest` or `react-aria` bump moves snapshots, and the label
-  route is not even available to a workflow: events created with `GITHUB_TOKEN`
-  do not start new workflow runs.
+- The **visual regression and cross-version suites run on every Dependabot PR**,
+  not on a label. A `playwright`, `vitest` or `react-aria` bump moves snapshots
+  and rendered structure, and the label route is not even available to a
+  workflow: events created with `GITHUB_TOKEN` do not start new workflow runs.
+  Both are the full suites a human gets from the `run-visual-tests` /
+  `run-cross-version-tests` labels — for cross-version that means both harnesses
+  against every published version, not just the iframe smoke test `test.yml`
+  runs on all PRs.
 - [`dependabot-auto-merge.yml`](.github/workflows/dependabot-auto-merge.yml)
-  waits for that suite, re-checks the PR, and comments
+  waits for **both** suites, re-checks the PR, and comments
   `@dependabot squash and merge`. Dependabot merges once the required `main`
-  check is green.
+  check is green. Neither suite is a required status check, so this workflow is
+  the only thing standing between a red one and a merge.
+- **Preview apps are deployed** for a Dependabot PR too, by
+  [`deploy-previews-dependabot.yml`](.github/workflows/deploy-previews-dependabot.yml)
+  and torn down by
+  [`cleanup-previews-dependabot.yml`](.github/workflows/cleanup-previews-dependabot.yml).
+  Both hang off a `workflow_run` for the same reason the auto-merge does: GitHub
+  withholds the `MITTWALD_*` secrets from Dependabot-triggered runs, so the
+  deploy and cleanup jobs in the two ordinary preview workflows skip that actor
+  and these two do the work from the default branch. They never check out the
+  PR's code — only the images its build job already pushed.
+
+**What a Dependabot-triggered run does and does not get.** Both halves are worth
+knowing before you add a workflow that touches these PRs, and only one matches
+the usual folklore:
+
+- **`secrets.*` resolves against the repository's _Dependabot_ secret store**,
+  not the Actions one. An Actions-only secret arrives as an empty string, and
+  the step fails wherever the script validates its environment. Put a secret a
+  Dependabot PR genuinely needs into the Dependabot store (`PUBLISH_PAT` is
+  there); otherwise move the work into a `workflow_run` that runs from the
+  default branch.
+- **The `GITHUB_TOKEN` is not read-only here.** A job gets the permissions it
+  requests — `pull-requests: write` and `packages: write` both work on a
+  Dependabot PR in this repository, which is why the visual summary comment and
+  the ghcr push land. Don't design around a restriction that isn't in force, and
+  don't rely on it staying that way for anything that matters.
 
 **When one goes red.** Nothing merges. Find the culprit in the group, then
 either fix the code or park the dependency with
