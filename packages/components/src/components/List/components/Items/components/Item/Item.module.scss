@@ -1,6 +1,7 @@
 @use "@/styles/mixins/focus";
 
 .item {
+  position: relative;
   cursor: default;
   background-color: var(--list-item--background-color--default);
   transition-property: background-color;
@@ -47,6 +48,48 @@
   :global(.flow--avatar) {
     transition-property: filter;
     transition-duration: var(--transition--duration--default);
+  }
+
+  /* Elements */
+
+  /*
+   * Covers the whole item so a right-click anywhere on it hits a real link.
+   * Interactive content is lifted back above the overlay, so buttons, context
+   * menus and checkboxes keep receiving their own clicks.
+   */
+  .link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &:has(.link) {
+    :where(
+      a,
+      button,
+      input,
+      label,
+      select,
+      summary,
+      textarea,
+      [role="button"],
+      [role="checkbox"],
+      [role="link"],
+      [role="switch"],
+      [tabindex]
+    ):not(.link) {
+      position: relative;
+      z-index: 2;
+    }
+
+    /*
+     * The bottom slot carries arbitrary consumer content (and the accordion's
+     * expanded content), so it stays fully clickable and selectable.
+     */
+    :global(.flow--list--list-item-view--bottom-content) {
+      position: relative;
+      z-index: 2;
+    }
   }
 
   &.tile {
