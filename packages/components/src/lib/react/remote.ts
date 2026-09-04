@@ -22,9 +22,10 @@ export function isRemoteComponentRendererProps(
   );
 }
 
-/** Whether the node renders text — a string, or its remote counterpart. */
+/** Whether the node renders text — a string, number, or remote counterpart. */
 const isTextNode = (child: ReactNode): boolean =>
   typeof child === "string" ||
+  typeof child === "number" ||
   (isValidElement(child) && isRemoteTextRenderProps(child.props));
 
 /**
