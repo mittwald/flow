@@ -315,7 +315,15 @@ class ReviewDeployer {
   ): Promise<void> {
     const certificateId = this.getTlsCertificateId(imageType);
 
+    // Loudly, because this used to be a silent `return`: the workflow read the
+    // IDs from `vars.*` while they are stored as secrets, so every preview fell
+    // back to ACME without a trace in the log — until enough PRs had piled up to
+    // hit the ACME rate limit and the hosts started serving the ingress
+    // controller's placeholder certificate.
     if (!certificateId) {
+      console.warn(
+        `⚠️  No TLS certificate ID configured for ${imageType} — ingress ${ingressId} falls back to ACME`,
+      );
       return;
     }
 
