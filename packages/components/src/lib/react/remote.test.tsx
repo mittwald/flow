@@ -1,6 +1,10 @@
 import type { FC } from "react";
 import { describe, expect, test } from "vitest";
-import { extractTextFromChildren, extractTextFromFirstChild } from "./remote";
+import {
+  containsTextChild,
+  extractTextFromChildren,
+  extractTextFromFirstChild,
+} from "./remote";
 
 /**
  * Stands in for `RemoteTextRenderer`: remotely, a text node arrives as an
@@ -92,10 +96,60 @@ describe("extractTextFromChildren()", () => {
   );
 });
 
+describe("containsTextChild()", () => {
+  test("is true for a text child", () => {
+    expect(containsTextChild("X-Wing")).toBe(true);
+  });
+
+  test("is true for text next to an element", () => {
+    expect(
+      containsTextChild(
+        <>
+          Millennium Falcon <Badge>Latest</Badge>
+        </>,
+      ),
+    ).toBe(true);
+  });
+
+  test("is false when only an element child carries text", () => {
+    expect(containsTextChild(<Badge>Latest</Badge>)).toBe(false);
+  });
+
+  test("is true for a number child", () => {
+    expect(containsTextChild(42)).toBe(true);
+  });
+
+  test("is true for a remote text child", () => {
+    expect(containsTextChild(remoteText("X-Wing"))).toBe(true);
+  });
+
+  test("looks through a fragment", () => {
+    expect(
+      containsTextChild(
+        <>
+          <>Millennium Falcon</>
+        </>,
+      ),
+    ).toBe(true);
+  });
+
+  /**
+   * Whitespace is not a label. `Button` reads this to decide whether it lays
+   * out as icon-only, and a blank string should not push it into the labelled
+   * layout with nothing to show.
+   */
+  test.each([[undefined], [null], [false], [""], ["   "], [[]]])(
+    "is false for %p",
+    (children) => {
+      expect(containsTextChild(children)).toBe(false);
+    },
+  );
+});
+
 /**
- * The narrow helper stays as it is: `Button`, `Markdown`, `Initials` and
- * `Truncate` all depend on "the children are exactly one text node" rather than
- * "the children contain text somewhere".
+ * The narrow helper stays as it is: `Markdown`, `Initials` and `Truncate` all
+ * depend on "the children are exactly one text node" rather than "the children
+ * contain text somewhere".
  */
 describe("extractTextFromFirstChild()", () => {
   test("returns a single text child", () => {

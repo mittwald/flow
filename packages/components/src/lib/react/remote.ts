@@ -65,34 +65,23 @@ const joinTextChildren = (children: ReactNode): string =>
     })
     .join("");
 
-/** Whether the node renders text — a string, number, or remote counterpart. */
-const isTextNode = (child: ReactNode): boolean =>
-  typeof child === "string" ||
-  typeof child === "number" ||
-  (isValidElement(child) && isRemoteTextRenderProps(child.props));
-
 /**
- * `Children.toArray` treats a fragment as a single child, so recurse into one
- * to reach the text a component like `Link` passes down through it.
+ * Whether `children` render any text of their own — what `Button` and `Link`
+ * ask to tell a labelled control from an icon-only one. The same reading as
+ * {@link extractTextFromChildren}, so fragments are transparent and children
+ * that are only whitespace do not count as a label.
  */
 export const containsTextChild = (children: ReactNode): boolean =>
-  Children.toArray(children).some(
-    (child) =>
-      isTextNode(child) ||
-      (isValidElement<PropsWithChildren>(child) &&
-        child.type === Fragment &&
-        containsTextChild(child.props.children)),
-  );
+  extractTextFromChildren(children) !== undefined;
 
 /**
  * The text of `children` when they are exactly one text node — locally a
  * string, remotely a `RemoteTextRenderer` element. `undefined` for anything
  * else, including a single string next to anything at all.
  *
- * That strictness is the point for its callers: `Button` decides its icon-only
- * layout by it, `Markdown` takes it as the markdown source, and `Initials` and
- * `Truncate` operate on the whole content. For "what does this read as", use
- * {@link extractTextFromChildren}.
+ * That strictness is the point for its callers: `Markdown` takes it as the
+ * markdown source, and `Initials` and `Truncate` operate on the whole content.
+ * For "what does this read as", use {@link extractTextFromChildren}.
  */
 export const extractTextFromFirstChild = (children: ReactNode) => {
   if (Children.count(children) !== 1) {
