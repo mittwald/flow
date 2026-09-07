@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.23](https://github.com/mittwald/flow/compare/1.1.22...1.1.23) (2026-09-07)
+
+### Bug Fixes
+
+* **ci:** rebase the release commit when the line moved during publish ([#3126](https://github.com/mittwald/flow/issues/3126)) ([4afbadb](https://github.com/mittwald/flow/commit/4afbadb56a941085fcd96352e74939655d463efc))
+
 ## [1.1.22](https://github.com/mittwald/flow/compare/1.1.21...1.1.22) (2026-09-07)
 
 **Note:** Version bump only for package @mittwald/flow-project
