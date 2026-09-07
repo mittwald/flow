@@ -7,6 +7,16 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "option-value-inferred-from-mixed-children",
+    since: "1.1.12",
+    title: "Option: value is inferred from mixed children",
+    kind: "migration",
+    action: "none",
+    remotePackage: true,
+    apply:
+      "No code change required for the option itself. An `Option` whose children are text plus an element — text and a `Badge`, text and an icon — now carries that text as its key, where it previously fell back to react-aria's generated `react-aria-N`. Check anywhere such a key was read back: a stored or server-side selection, a `defaultValue`/`value` matched against it, or a test asserting on it. Pass an explicit `value` to pin the key to something other than the display text.",
+  },
+  {
     id: "use-design-tokens-build-metadata-removed",
     since: "1.0.16",
     title:

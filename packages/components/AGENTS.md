@@ -342,6 +342,19 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   must affect layout.
 - **Controllers coexist with declarative props** — overlay-like APIs support
   controlled/uncontrolled props _and_ a controller object, not one or the other.
+- **A component without `value` and without `defaultValue` still has to render
+  as controlled** — react-aria's `useControlledState` reads only `undefined` as
+  uncontrolled. A component that mirrors the value in its own state therefore
+  hands react-aria `undefined` on the first render and a real value after the
+  first change: the value changes owner mid-flight, and React and react-aria
+  warn `A component changed from uncontrolled to controlled`. Pass a sentinel
+  instead of `undefined` — `null` where "nothing selected yet" is representable
+  (`Tabs`' `selectedKey`), otherwise the type's empty value (`""` for text,
+  `NaN` for a number, `null` for a date range — `useControlledHostValueProps`'
+  `emptyValue`). Mind `??` once the sentinel is `null`: a caller-supplied `null`
+  must not fall through to `defaultValue`. Nothing breaks visibly, and a
+  component holding its own document state (`CodeEditor`) does not even warn —
+  it changes owner silently.
 - **Complex behavior is split by vocabulary** — `components/` for render,
   `hooks/` for behavior, `lib/` for pure transforms, `models/` for durable
   state.

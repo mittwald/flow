@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.21](https://github.com/mittwald/flow/compare/1.1.20...1.1.21) (2026-09-07)
+
+### Bug Fixes
+
+* **Markdown:** forward the react-markdown options it accepts ([#3105](https://github.com/mittwald/flow/issues/3105)) ([953cb55](https://github.com/mittwald/flow/commit/953cb556f73bed154dc19c0b9a2d0652b0fab503))
+* **Navigation:** keep the badge in the item&#x27;s line and truncate the label ([#3070](https://github.com/mittwald/flow/issues/3070)) ([825bcbc](https://github.com/mittwald/flow/commit/825bcbce8f716d232e07c0e7f96f2a01673190f2))
+
+## [1.1.20](https://github.com/mittwald/flow/compare/1.1.19...1.1.20) (2026-09-04)
+
+### Bug Fixes
+
+* **Option:** infer textValue from mixed children and keep value stable ([#3076](https://github.com/mittwald/flow/issues/3076)) ([e80bf3c](https://github.com/mittwald/flow/commit/e80bf3c6e97543c3d3b2db9d75811e2958e2fd65))
+
+## [1.1.19](https://github.com/mittwald/flow/compare/1.1.18...1.1.19) (2026-09-04)
+
+### Bug Fixes
+
+* **Tabs:** keep the tab selection controlled from the first render ([#3048](https://github.com/mittwald/flow/issues/3048)) ([dd29fa5](https://github.com/mittwald/flow/commit/dd29fa518099048bc13e17abedea6f85de2b3f7b))
+
+## [1.1.18](https://github.com/mittwald/flow/compare/1.1.17...1.1.18) (2026-09-04)
+
+### Bug Fixes
+
+* **ListItem:** render linked items as real anchors ([#3084](https://github.com/mittwald/flow/issues/3084)) ([de6dc0a](https://github.com/mittwald/flow/commit/de6dc0a9ac8c6419db692165f4eeaa6c7e9394b5))
+
+## [1.1.17](https://github.com/mittwald/flow/compare/1.1.16...1.1.17) (2026-09-04)
+
+### Bug Fixes
+
+* **Button:** treat a string label like a Text child ([#3053](https://github.com/mittwald/flow/issues/3053)) ([13cc756](https://github.com/mittwald/flow/commit/13cc75600f8a2f38c381e990085c36127ac394e8))
+* **components:** keep tests and stories out of the published types ([#3103](https://github.com/mittwald/flow/issues/3103)) ([bf947d9](https://github.com/mittwald/flow/commit/bf947d979ccb045d3e045d117f1709223c3f3b25))
+* **Tunnel:** render tunnelled children in the first commit ([#3022](https://github.com/mittwald/flow/issues/3022)) ([09db004](https://github.com/mittwald/flow/commit/09db004acbd1fdb426835768180199c6f45a21a6))
+
+## [1.1.16](https://github.com/mittwald/flow/compare/1.1.15...1.1.16) (2026-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.15](https://github.com/mittwald/flow/compare/1.1.14...1.1.15) (2026-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 ## [1.1.14](https://github.com/mittwald/flow/compare/1.1.13...1.1.14) (2026-09-03)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

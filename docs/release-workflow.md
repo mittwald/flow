@@ -94,6 +94,14 @@ flowchart LR
       #2959 bumped an `apps/docs` dependency and cut 1.0.4.
   - A **`workflow_dispatch` run always publishes.** That is the escape hatch
     when a docs-only change has to go out as a release anyway.
+- **Tests and stories stay out of `dist/types`.** Every release build shares
+  `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
+  `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
+  emit; before that, 196 of `@mittwald/flow-remote-react-components@1.1.10`'s
+  799 tarball entries were `dist/types/tests/**`, and no `exports` path reached
+  them. A story's helper still ships (`Button/stories/lib.tsx`), because
+  `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
+  only `*.stories.tsx`.
 - **The build runs after the version bump.** Both publish workflows version
   first, then `pnpm build`, then publish. Some bundles bake their own version in
   at build time (vite `define` over `package.json` — `remote-react-components`'

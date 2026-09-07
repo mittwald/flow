@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v6
 
       - uses: ./.github/actions/prepare-workspace
 
@@ -76,7 +76,7 @@ jobs:
           pnpm nx build:storybook components
 
       - name: Log in to the Container registry
-        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -140,10 +140,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
 
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -160,9 +160,9 @@ jobs:
           MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
           MITTWALD_TLS_CERTIFICATE_ID_DOCS:
-            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
+            ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
           MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
-            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
+            ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
           # Derive the exact refs the build job pushed (type=ref,event=pr =>
           # `pr-<number>`). Deriving them here avoids the matrix job-output
           # clobber that left one of the two empty and half-deployed previews.
