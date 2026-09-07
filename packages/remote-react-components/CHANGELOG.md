@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.27](https://github.com/mittwald/flow/compare/1.2.0-next.26...1.2.0-next.27) (2026-09-07)
+
+### Bug Fixes
+
+* **Navigation:** keep the badge in the item&#x27;s line and truncate the label ([#3070](https://github.com/mittwald/flow/issues/3070)) ([825bcbc](https://github.com/mittwald/flow/commit/825bcbce8f716d232e07c0e7f96f2a01673190f2))
+
 ## [1.2.0-next.26](https://github.com/mittwald/flow/compare/1.1.20...1.2.0-next.26) (2026-09-07)
 
 ## [1.2.0-next.25](https://github.com/mittwald/flow/compare/1.2.0-next.24...1.2.0-next.25) (2026-09-04)
