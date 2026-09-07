@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.21](https://github.com/mittwald/flow/compare/1.1.20...1.1.21) (2026-09-07)
+
+### Bug Fixes
+
+* **Markdown:** forward the react-markdown options it accepts ([#3105](https://github.com/mittwald/flow/issues/3105)) ([953cb55](https://github.com/mittwald/flow/commit/953cb556f73bed154dc19c0b9a2d0652b0fab503))
+* **Navigation:** keep the badge in the item&#x27;s line and truncate the label ([#3070](https://github.com/mittwald/flow/issues/3070)) ([825bcbc](https://github.com/mittwald/flow/commit/825bcbce8f716d232e07c0e7f96f2a01673190f2))
+
 ## [1.1.20](https://github.com/mittwald/flow/compare/1.1.19...1.1.20) (2026-09-04)
 
 ### Bug Fixes
