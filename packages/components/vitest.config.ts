@@ -39,7 +39,24 @@ export default mergeConfig(
             name: "browser",
             setupFiles: "./dev/vitest/setupBrowser.ts",
             include: ["src/**/*.browser.test.{ts,tsx}"],
-            exclude: ["src/tests/layered/**"],
+            exclude: ["src/tests/layered/**", "src/tests/mouse/**"],
+          },
+        },
+        {
+          /*
+           * Tests that drive the mouse over several steps — a drag that selects
+           * text is the only way to create a real selection. Parallel test files
+           * share one page and therefore one cursor, so another file's click
+           * releases the button mid-drag. Its own project, running one file at a
+           * time, gives them a page of their own.
+           */
+          extends: true,
+          test: {
+            ...browserTestConfig(),
+            name: "browser-mouse",
+            setupFiles: "./dev/vitest/setupBrowser.ts",
+            include: ["src/tests/mouse/**/*.browser.test.{ts,tsx}"],
+            fileParallelism: false,
           },
         },
         {

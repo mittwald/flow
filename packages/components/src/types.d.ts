@@ -32,5 +32,13 @@ declare global {
 declare module "vitest/browser" {
   interface BrowserCommands {
     setReducedMotion: (value: string) => Promise<void>;
+    selectTextByDragging: (
+      selector: string,
+      overshoot?: number,
+    ) => Promise<void>;
+    dragMouse: (
+      from: { x: number; y: number },
+      to: { x: number; y: number },
+    ) => Promise<void>;
   }
 }

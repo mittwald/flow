@@ -39,7 +39,14 @@
     overflow-wrap: anywhere;
   }
 
+  .title {
+    user-select: text;
+    padding-inline: var(--size-px--xs);
+    margin-inline: calc(var(--size-px--xs) * -1);
+  }
+
   .header {
+    user-select: text;
     overflow-wrap: anywhere;
     display: flex;
     gap: var(--list-item--avatar-to-title-spacing);
@@ -211,7 +218,9 @@
 
     &:has(.checkboxContainer:not(:empty)) {
       :global(.flow--heading--heading-content) {
-        inset-inline-start: calc(var(--list-item--padding) * 2 + var(--icon--size--m));
+        inset-inline-start: calc(
+          var(--list-item--padding) * 2 + var(--icon--size--m)
+        );
       }
     }
 

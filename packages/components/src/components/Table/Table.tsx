@@ -1,3 +1,4 @@
+import { useIgnoreClickAfterDrag } from "@/lib/hooks/useIgnoreClickAfterDrag";
 import type { FC } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -33,6 +34,7 @@ export const Table: FC<TableProps> = (props) => {
     minWidth,
     ...rest
   } = props;
+  const dragRef = useIgnoreClickAfterDrag<HTMLDivElement>();
 
   const rootClassName = clsx(
     styles.table,
@@ -42,7 +44,7 @@ export const Table: FC<TableProps> = (props) => {
   );
 
   return (
-    <div className={styles.tableContainer}>
+    <div className={styles.tableContainer} ref={dragRef}>
       <div className={styles.tableScrollArea} style={{ minWidth }}>
         <Aria.Table className={rootClassName} {...rest}>
           {children}
