@@ -211,6 +211,20 @@ if ("action" in props) {
   match prop values (`.size-s`, `.primary`).
 - Class composition with `clsx`, consumer `className` appended last:
   `clsx(styles.button, styles[size], styles[color], className)`.
+- **Element-type selectors are a lint error** — `selector-max-type: 0` on
+  `*.module.{css,scss}`, blocking since #3021. Style what the component renders,
+  through its own class. Where the element genuinely carries no class —
+  react-aria internals, third-party svgs, consumer-supplied children, or content
+  the component does not author (`Markdown`, `Text`) — opt out explicitly and
+  name the reason:
+  `// stylelint-disable-next-line selector-max-type -- react-markdown output`.
+  There is no autofix. Two traps when introducing a class instead: a `flow--`
+  class pulls the global reset's
+  `*:where([class*="flow--"] [class*="flow--"]) { font: inherit }`
+  (`src/styles/globals.scss`) onto the element — that reflows `CodeBlock`'s
+  `<pre>`, so it stays an element selector — and a class raises specificity
+  where an element selector deliberately lost a tie (`Modal`'s `> span` against
+  `.flow--heading--heading-content:empty`).
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
