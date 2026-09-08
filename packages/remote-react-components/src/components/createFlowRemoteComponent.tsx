@@ -5,6 +5,7 @@ import type {
 import {
   flowComponent,
   isFlowComponentName,
+  OverlayHoistProvider,
   useReportComponentUsage,
   ViewCompositionReset,
 } from "@mittwald/flow-react-components/internal";
@@ -17,6 +18,16 @@ import { createRemoteComponent } from "@/lib/createRemoteComponent";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type AnyRecord = Record<string, any>;
+
+/**
+ * Components whose children the host renders inside an overlay that unmounts –
+ * the `ContextMenu` popover, which closes as soon as a menu item is activated.
+ * An overlay declared inside them is rendered as a **sibling** of the remote
+ * element instead, so the host places it outside that popover and it survives
+ * the menu closing. Same mechanism as on the host side, see
+ * `OverlayHoistProvider`.
+ */
+const overlayHoistingComponents = new Set<string>(["ContextMenu"]);
 
 export function createFlowRemoteComponent<
   Tag extends keyof HTMLElementTagNameMap,
@@ -48,11 +59,18 @@ export function createFlowRemoteComponent<
     eventProps,
   });
 
+  const hoistsOverlays = overlayHoistingComponents.has(flowComponentTag);
+
   if (isFlowComponentName(flowComponentTag)) {
     return flowComponent(
       flowComponentTag,
       (p) => {
-        return createElement(element, p as never, p.children);
+        const remoteElement = createElement(element, p as never, p.children);
+        return hoistsOverlays ? (
+          <OverlayHoistProvider>{remoteElement}</OverlayHoistProvider>
+        ) : (
+          remoteElement
+        );
       },
       {
         isRemoteComponent: true,

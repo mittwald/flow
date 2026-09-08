@@ -18,6 +18,10 @@ import { Initials } from "@/components/Initials";
 import { usePromise } from "@mittwald/react-use-promise";
 import { sleep } from "@/lib/promises/sleep";
 import type { PropsWithChildren } from "react";
+import { Action } from "@/components/Action";
+import { ActionGroup } from "@/components/ActionGroup";
+import { Content } from "@/components/Content";
+import { Modal, ModalTrigger } from "@/components/Modal";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -219,6 +223,37 @@ export const MenuItemStates: Story = {
         <MenuItem isPending>Pending</MenuItem>
         <MenuItem isSucceeded>Succeeded</MenuItem>
         <MenuItem isFailed>Failed</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+};
+
+export const WithModalTrigger: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <MenuItem>Engage hyperdrive</MenuItem>
+        <ModalTrigger>
+          <Modal>
+            <Heading>Self-destruct</Heading>
+            <Content>
+              <Text>
+                The ship is destroyed after the countdown. This cannot be
+                undone.
+              </Text>
+            </Content>
+            <ActionGroup>
+              <Action closeModal>
+                <Button color="danger">Start countdown</Button>
+                <Button color="secondary" variant="soft">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+          <MenuItem>Self-destruct</MenuItem>
+        </ModalTrigger>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
