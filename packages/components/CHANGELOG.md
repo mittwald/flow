@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
+### Bug Fixes
+
+* **components:** prefix the CSS properties Safari needs prefixed ([#3066](https://github.com/mittwald/flow/issues/3066)) ([8b3536c](https://github.com/mittwald/flow/commit/8b3536cbcb39106d8de06eda39c46a257b1b4d24))
+
 ## [1.1.25](https://github.com/mittwald/flow/compare/1.1.24...1.1.25) (2026-09-08)
 
 ### Bug Fixes
