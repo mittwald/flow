@@ -84,6 +84,9 @@ export default function Layout(props: PropsWithChildren) {
                         Tab Navigation
                       </NavigationItem>
                       <NavigationItem page="svg">Icon/SVG</NavigationItem>
+                      <NavigationItem page="image-cropper">
+                        ImageCropper
+                      </NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
                       <NavigationItem page="list-selection">
                         List (selection)

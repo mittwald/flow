@@ -8,6 +8,9 @@ import { Button } from "@/components/Button";
 import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { useImageSrc } from "@/lib/hooks/useImageSrc";
+import { IllustratedMessage } from "@/components/IllustratedMessage";
+import { IconDanger } from "@/components/Icon/components/icons";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof ImageCropper> = {
   title: "Upload/ImageCropper",
@@ -46,6 +49,35 @@ export default meta;
 type Story = StoryObj<typeof ImageCropper>;
 
 export const Default: Story = {};
+
+export const WithLoadError: Story = {
+  render: (props) => (
+    <Section>
+      <ImageCropper
+        {...props}
+        image="/this-image-does-not-exist.png"
+        onError={(error) => console.log("ImageCropper error", error)}
+      />
+    </Section>
+  ),
+};
+
+export const WithCustomErrorView: Story = {
+  render: (props) => (
+    <Section>
+      <ImageCropper
+        {...props}
+        image="/this-image-does-not-exist.png"
+        errorView={
+          <IllustratedMessage color="danger">
+            <IconDanger />
+            <Text>This image is no longer available.</Text>
+          </IllustratedMessage>
+        }
+      />
+    </Section>
+  ),
+};
 
 export const WithDownload: Story = {
   render: (props) => {

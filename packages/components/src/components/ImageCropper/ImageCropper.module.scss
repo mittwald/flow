@@ -13,6 +13,13 @@
     border-width: var(--image-cropper--border-width);
   }
 
+  .errorViewContainer {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 }
 
 /*

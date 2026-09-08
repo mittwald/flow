@@ -10,7 +10,7 @@ export function getCroppedImageFile(
     image.crossOrigin = "anonymous";
     image.src = imageSrc;
 
-    image.onload = () => {
+    const cropOntoCanvas = (): void => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
@@ -52,6 +52,7 @@ export function getCroppedImageFile(
       canvas.toBlob(
         (blob) => {
           if (!blob) {
+            reject(new Error("Failed to read the cropped image from canvas"));
             return;
           }
 
@@ -64,6 +65,15 @@ export function getCroppedImageFile(
         sourceImageType,
         quality,
       );
+    };
+
+    image.onload = () => {
+      try {
+        cropOntoCanvas();
+      } catch (cause) {
+        // A tainted canvas makes `drawImage`/`toBlob` throw a SecurityError.
+        reject(cause instanceof Error ? cause : new Error(String(cause)));
+      }
     };
 
     image.onerror = () => {
