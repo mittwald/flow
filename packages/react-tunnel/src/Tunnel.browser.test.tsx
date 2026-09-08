@@ -57,6 +57,34 @@ test("Content from entry is rendered in exit", async () => {
   expect(dom.getByTestId("entry")).toHaveTextContent("");
 });
 
+// Regression guard for the first client commit. Anything that inspects the DOM
+// in a layout effect — react-aria's `useSlot`, which decides whether a slotted
+// `<Label>` exists — only ever sees the first commit. A tunnelled child that
+// arrives after it is invisible, and react-aria then warns about a missing
+// accessible name (mittwald/flow#3015).
+test("Content from entry is in the DOM in the first commit", async () => {
+  const seenInLayoutEffect: string[] = [];
+
+  const Probe: FC<PropsWithChildren> = (props) => {
+    const ref = React.useRef<HTMLDivElement>(null);
+    React.useLayoutEffect(() => {
+      seenInLayoutEffect.push(ref.current?.textContent ?? "");
+    }, []);
+    return <div ref={ref}>{props.children}</div>;
+  };
+
+  await render(
+    <Probe>
+      <TunnelProvider>
+        <TunnelEntry>Hello!</TunnelEntry>
+        <TunnelExit />
+      </TunnelProvider>
+    </Probe>,
+  );
+
+  expect(seenInLayoutEffect).toEqual(["Hello!"]);
+});
+
 test("Content from entry is rendered in exit when using same tunnel ids", async () => {
   const dom = await render(
     <TunnelProvider>
