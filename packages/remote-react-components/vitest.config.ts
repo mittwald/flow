@@ -10,12 +10,6 @@ import { serveFontsLocally } from "./dev/vitest/serveFontsLocally";
  * share those objects, and the second name would overwrite the first – so every
  * browser project gets its own copies. Without them a run filtered to one
  * project reports itself under the other project's name.
- *
- * screenshotFailures is off for both browser projects. A failure would drop a
- * PNG next to the test, and neither __screenshots__ directory is gitignored, so
- * `git add` picks the stray file up. It adds nothing either: a visual mismatch
- * already writes reference, actual and diff to the gitignored
- * .vitest-attachments, and the DOM assertions have no pixels worth capturing.
  */
 const browserTestConfig = () => ({
   ...vitestBrowserTestConfig,
@@ -28,7 +22,6 @@ const browserTestConfig = () => ({
     instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
       (instance) => ({ ...instance }),
     ),
-    screenshotFailures: false,
   },
 });
 
