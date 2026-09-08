@@ -28,7 +28,16 @@ export type YAxisProps<
   tickFormatter?: (value: TDataMatch, index: number) => string;
 };
 
-/** @flr-generate all */
+/**
+ * `tickFormatter` is deliberately not part of the remote surface. A function
+ * property crosses the boundary as a thread proxy whose call returns a Promise,
+ * and recharts concatenates the formatter's result straight into the tick label
+ * — so remotely every tick rendered `[object Promise]`. Dropping it from the
+ * remote surface leaves the raw value there; the prop keeps working locally.
+ *
+ * @flr-generate all
+ * @flr-ignore-props tickFormatter
+ */
 export const YAxis: FC<YAxisProps> = (props) => {
   const { domain, ...rest } = props;
 
