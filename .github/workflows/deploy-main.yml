@@ -39,9 +39,9 @@ jobs:
       - uses: ./.github/actions/prepare-workspace
 
       # The image used to build this itself, which meant a second toolchain
-      # install and the whole dependency chain rebuilt against a cold nx cache —
-      # 80 of the 449 seconds a docs preview took. Here the restored cache serves
-      # that chain, and the image only packages what comes out.
+      # install and the whole dependency chain rebuilt inside the image — 80 of
+      # the 449 seconds a docs preview took. Here the runner builds that chain
+      # and the image only packages what comes out.
       #
       # NEXT_BASE_PATH was a build-arg for the same reason; the value is the one
       # the Dockerfile passed.
@@ -50,6 +50,29 @@ jobs:
         run: pnpm nx build docs
         env:
           NEXT_BASE_PATH: ""
+
+      # `main` is the writer that seeds this cache for everyone else. A PR reads
+      # caches from its own branch and from the default branch, never from
+      # another PR's. Without an entry written here the broadest restore-key in
+      # build-previews.yml finds nothing, so every PR's first docs build
+      # compiles cold. Turbopack's persistent build cache lives in this
+      # directory (~200MB) and is on by default in Next 16.
+      #
+      # Save only — the same split as the nx cache (test.yml writes, everyone
+      # else restores). What this job builds goes straight to production, so it
+      # depends on the source and the lockfile alone, never on a blob an earlier
+      # run left behind. Restoring here would also let the broadest restore-key
+      # carry a cache across a Next version bump into the deployed image. After
+      # the build rather than in a post-step, so a build that failed seeds
+      # nothing.
+      - name: Save the Next.js build cache
+        if: matrix.image_suffix == 'docs'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: apps/docs/.next/cache
+          key:
+            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
+            github.sha }}
 
       # Two commands because `build:storybook` declares no nx dependency on the
       # components build — the same pair the Dockerfile ran.

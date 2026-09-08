@@ -59,6 +59,17 @@ is not the focused one, and running files in parallel leaves most of them
 unfocused. It is set in the visual project's vitest config, so there is no flag
 to pass.
 
+The files also share **one tester iframe** (`isolate: false`, same config).
+Vitest's default gives every file a fresh iframe and removes the previous one,
+but Playwright's WebKit never releases a removed iframe's document — each
+finished file left its whole realm behind (~200 MB: component library, CSS,
+fonts, last render), and the unsharded `update-screenshots` run died at file 105
+of 168 (#3119). One iframe also skips the per-file import of the component
+library; the local full run went from 289 s to 122 s. What this means for a
+test: module state persists across files. Mounted trees do not leak, because
+`render` calls `cleanup()` first — anything a test hangs on `window` or
+`document` does.
+
 If differences are detected, corresponding screenshots are created and listed in
 the test results.
 

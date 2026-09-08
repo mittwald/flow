@@ -122,7 +122,10 @@ jobs:
           test:cross-version-inprocess
 
       - name: Summary
-        if: always()
+        # Not `always()`: that reports a run superseded by `cancel-in-progress`
+        # as a failure, and the comment below is a single upserted one, so the
+        # false ❌ stays on the PR.
+        if: "!cancelled()"
         env:
           IFRAME_OUTCOME: ${{ steps.crossversion.outcome }}
           IFRAME_FAILURES: ${{ steps.crossversion.outputs.failures }}
@@ -170,7 +173,9 @@ jobs:
         # The comment answers a request. Nobody asked on a Dependabot PR — there
         # the check run and its step summary are the signal, and
         # `dependabot-auto-merge.yml` is what acts on the verdict.
-        if: always() && github.event.label.name == 'run-cross-version-tests'
+        if:
+          "!cancelled() && github.event.label.name ==
+          'run-cross-version-tests'"
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}
