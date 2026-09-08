@@ -94,8 +94,13 @@ Props are serialized with `FlowThreadSerialization`
 ([remote-core](https://github.com/mittwald/flow/blob/main/packages/remote-core/src/serialization/FlowThreadSerialization.ts)).
 Worth knowing before you design a prop payload:
 
-- **Functions cross** as proxies — callbacks and event handlers work, including
-  ones that return values.
+- **Functions cross** as proxies, but **their return value does not come back
+  synchronously.** Calling a proxy is a round trip, so the host receives a
+  Promise. Event handlers are unaffected — nothing reads what they return. A
+  formatter or predicate only works where the component awaits it:
+  `ChartTooltip`'s formatters may return `Promise<string> | string`, while
+  `XAxis`/`YAxis` `tickFormatter` is excluded from the remote surface entirely.
+  Format the values in your `data` instead.
 - **`Date`, `File`, `FileList`, `FormData`** and dragged text have dedicated
   serializers and arrive intact. So do `Map`, `Set` and arrays.
 - **`HTMLElement` and `window` are dropped to `null`.** There is no DOM to hand

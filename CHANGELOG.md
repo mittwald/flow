@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.27](https://github.com/mittwald/flow/compare/1.1.26...1.1.27) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
+### Bug Fixes
+
+* **components:** prefix the CSS properties Safari needs prefixed ([#3066](https://github.com/mittwald/flow/issues/3066)) ([8b3536c](https://github.com/mittwald/flow/commit/8b3536cbcb39106d8de06eda39c46a257b1b4d24))
+
+## [1.1.25](https://github.com/mittwald/flow/compare/1.1.24...1.1.25) (2026-09-08)
+
+### Bug Fixes
+
+* **NotificationProvider:** keep notifications interactive over an open overlay ([#3133](https://github.com/mittwald/flow/issues/3133)) ([07ea00d](https://github.com/mittwald/flow/commit/07ea00df067899d21221088bb840bcab1d5f4c43))
+
 ## [1.1.24](https://github.com/mittwald/flow/compare/1.1.23...1.1.24) (2026-09-08)
 
 **Note:** Version bump only for package @mittwald/flow-project

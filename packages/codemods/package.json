@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-codemods",
-  "version": "1.1.24",
+  "version": "1.1.27",
   "type": "module",
   "description": "Codemods and an upgrade CLI for consumers of Flow, mittwald's design system",
   "homepage": "https://flow.mittwald.de",
