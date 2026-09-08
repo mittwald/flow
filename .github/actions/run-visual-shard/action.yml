@@ -15,7 +15,10 @@ inputs:
       How often to run the shard before calling it failed. Firefox
       intermittently hangs on a single file in headless CI — a hang vitest's
       per-test `retry` cannot recover, only a fresh browser process can. A real
-      diff fails every attempt.
+      diff fails every attempt. No caller passes it any more, because the
+      failure it was aimed at is not one a re-run recovers — the attempts share
+      the runner, so all three fail identically (#3106). Kept for a hang that
+      shows up on its own.
     default: "1"
 
 runs:

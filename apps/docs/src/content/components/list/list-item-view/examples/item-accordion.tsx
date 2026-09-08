@@ -1,16 +1,16 @@
 import {
   Avatar,
   Content,
-  ContextMenu,
   Heading,
   IconDomain,
-  MenuItem,
+  ListItemView,
+  Text,
   typedList,
 } from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list-item-view/examples/domainApi";
 
 export default () => {
   const List = typedList<Domain>();
@@ -19,28 +19,21 @@ export default () => {
     <List.List
       batchSize={2}
       hidePagination
+      accordion
       aria-label="Domains"
       getItemId={(domain) => domain.id}
     >
       <List.StaticData data={domains} />
-      <List.Item
-        showTiles
-        textValue={(domain) => domain.domain}
-      >
+      <List.Item textValue={(domain) => domain.domain}>
         {(domain) => (
-          <List.ItemView>
+          <ListItemView>
             <Avatar>
               <IconDomain />
             </Avatar>
             <Heading>{domain.hostname}</Heading>
-
-            <Content slot="top">Top Content</Content>
-            <Content slot="bottom">Bottom Content</Content>
-
-            <ContextMenu>
-              <MenuItem>Details anzeigen</MenuItem>
-            </ContextMenu>
-          </List.ItemView>
+            <Text>{domain.type}</Text>
+            <Content slot="bottom">Mehr Inhalt</Content>
+          </ListItemView>
         )}
       </List.Item>
     </List.List>

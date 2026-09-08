@@ -1,7 +1,5 @@
 import {
-  ActionGroup,
   Avatar,
-  Button,
   Heading,
   IconDomain,
   Text,
@@ -10,28 +8,29 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list-item-view/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
     <DomainList.List
-      batchSize={2}
+      batchSize={3}
       hidePagination
       aria-label="Domains"
       getItemId={(domain) => domain.id}
     >
-      <DomainList.StaticData data={domains} />
-      <ActionGroup>
-        <Button>Anlegen</Button>
-      </ActionGroup>
+      <DomainList.StaticData
+        data={domains.filter(
+          (domain) => domain.type === "Domain",
+        )}
+      />
       <DomainList.Item
         textValue={(domain) => domain.domain}
       >
         {(domain) => (
           <DomainList.ItemView>
-            <Avatar>
+            <Avatar color="blue">
               <IconDomain />
             </Avatar>
             <Heading>{domain.hostname}</Heading>

@@ -1,18 +1,12 @@
 import { defineConfig, mergeConfig } from "vite";
-import { preserveUseClientBanner } from "../core";
+import { preserveUseClientBanner, publishedDtsOptions } from "../core";
 import dts from "unplugin-dts/vite";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
   mergeConfig(baseConfig, {
-    plugins: [
-      externalizeDeps(),
-      dts({
-        include: ["src"],
-        outDirs: "dist/types",
-      }),
-    ],
+    plugins: [externalizeDeps(), dts(publishedDtsOptions)],
     build: {
       emptyOutDir: false,
       lib: {

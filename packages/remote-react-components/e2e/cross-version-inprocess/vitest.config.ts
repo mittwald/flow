@@ -1,6 +1,7 @@
 import { mergeConfig } from "vitest/config";
 import { vitestBrowserTestConfig } from "../../../core";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests";
+import { serveFontsLocally } from "../../dev/vitest/serveFontsLocally";
 import viteConfig from "./vite.config";
 
 // Reuses unmodified visual tests by replacing their environments import. The
@@ -27,10 +28,34 @@ export default mergeConfig(viteConfig, {
       "dev/vitest/setupBrowser.ts",
     ],
     include: REUSED_VISUAL_TESTS,
+    /*
+     * One tester iframe for the whole run, for the same reason the package's
+     * `visual` project sets it: Playwright's WebKit never releases a removed
+     * iframe's document, so vitest's per-file iframe churn leaves every
+     * finished file's realm behind — component library, all.css, fonts, last
+     * render — until the page dies mid-run (#3119). This harness reuses the
+     * same corpus on one browser, and it died at file 60 of 84 with
+     * `Browser connection was closed while running tests`.
+     *
+     * The shared realm suits it: setup.ts's first-wins `customElements.define`
+     * patch keeps the OLD flr-* registrations for the whole run, which is
+     * exactly one version per run anyway.
+     */
+    isolate: false,
+    /*
+     * One page at a time. `browser.fileParallelism` is deprecated in vitest 4
+     * in favour of this top-level option.
+     */
+    fileParallelism: false,
     browser: {
       ...vitestBrowserTestConfig.browser,
+      // dev/vitest/setupBrowser.ts calls it, so it has to be registered here
+      // too — this config inherits the shared browser config, not the package's.
+      commands: {
+        ...vitestBrowserTestConfig.browser?.commands,
+        serveFontsLocally,
+      },
       headless: true,
-      fileParallelism: false,
       // HTML comparison, not pixels — failure screenshots would only pollute the
       // reused tests' src/**/__screenshots__ dir.
       screenshotFailures: false,

@@ -12,24 +12,26 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
     <DomainList.List
-      batchSize={4}
+      batchSize={2}
       aria-label="Domains"
-      hidePagination
-      defaultViewMode="tiles"
       getItemId={(domain) => domain.id}
+      hidePagination
     >
       <DomainList.StaticData data={domains} />
+      <DomainList.Sorting
+        property="domain"
+        name="Name"
+        defaultEnabled
+      />
       <DomainList.Item
         textValue={(domain) => domain.domain}
-        showTiles
-        showList={false}
       >
         {(domain) => (
           <DomainList.ItemView>

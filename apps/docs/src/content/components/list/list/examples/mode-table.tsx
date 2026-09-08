@@ -2,7 +2,7 @@ import { typedList } from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
