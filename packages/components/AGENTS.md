@@ -247,6 +247,17 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **A `z-index` is scoped by the nearest ancestor stacking context** — mark that
+  element `isolation: isolate` explicitly. `position: relative`, a scroll
+  container (`overflow: auto`) and a flex/grid parent are **not** stacking
+  contexts, so without it the value competes with the whole page instead of the
+  siblings it was written for. A `transform` animation in between is one only
+  _while it runs_, so the scope otherwise changes with the animation state.
+  Isolating does not reorder anything inside the component: among positioned
+  siblings, `z-index: auto` and a `0`-equivalent stacking context paint in the
+  same step, in tree order. The exception is an element portalled into
+  `document.body` (`NotificationContainer`) — that one sits in the root stacking
+  context by construction and cannot be scoped; say so in a comment.
 - **Overriding a dependency that injects its own stylesheet** (CodeMirror,
   react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
   `<style>` elements are unlayered, and unlayered CSS beats layered CSS
@@ -360,6 +371,19 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   must affect layout.
 - **Controllers coexist with declarative props** — overlay-like APIs support
   controlled/uncontrolled props _and_ a controller object, not one or the other.
+- **A component without `value` and without `defaultValue` still has to render
+  as controlled** — react-aria's `useControlledState` reads only `undefined` as
+  uncontrolled. A component that mirrors the value in its own state therefore
+  hands react-aria `undefined` on the first render and a real value after the
+  first change: the value changes owner mid-flight, and React and react-aria
+  warn `A component changed from uncontrolled to controlled`. Pass a sentinel
+  instead of `undefined` — `null` where "nothing selected yet" is representable
+  (`Tabs`' `selectedKey`), otherwise the type's empty value (`""` for text,
+  `NaN` for a number, `null` for a date range — `useControlledHostValueProps`'
+  `emptyValue`). Mind `??` once the sentinel is `null`: a caller-supplied `null`
+  must not fall through to `defaultValue`. Nothing breaks visibly, and a
+  component holding its own document state (`CodeEditor`) does not even warn —
+  it changes owner silently.
 - **Complex behavior is split by vocabulary** — `components/` for render,
   `hooks/` for behavior, `lib/` for pure transforms, `models/` for durable
   state.
