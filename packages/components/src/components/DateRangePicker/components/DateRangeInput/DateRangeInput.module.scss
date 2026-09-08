@@ -27,11 +27,11 @@
   }
 
   :global(.react-aria-DateInput):first-of-type {
-    padding-inline-end: 2px;
+    padding-inline-end: var(--size-px--xxs);
   }
 
   :global(.react-aria-DateInput):last-of-type {
-    padding-inline-start: 2px;
+    padding-inline-start: var(--size-px--xxs);
   }
 
   :global(.flow--button) {
