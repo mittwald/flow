@@ -4,7 +4,7 @@ import {
   componentsLayerPluginName,
   isComponentModule,
   isUnlayeredMarker,
-} from "./unlayeredMarker";
+} from "./unlayeredMarker.ts";
 
 const componentsLayer = "flow.components";
 

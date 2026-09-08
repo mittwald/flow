@@ -40,5 +40,11 @@ Next.js documentation site for the flow Styleguide, deployed to
   execute the other's files, so the `.node` infix is what keeps the globs
   disjoint — same role as `*.browser.test.tsx` in `components`. Write a new
   `node:test` file with the infix, or both targets break at once.
+- **Next 16 differs from what a model was trained on** — APIs, conventions and
+  file structure moved. Read the relevant guide in
+  `node_modules/next/dist/docs/` (resolved from this directory; in this monorepo
+  `next` is not visible from the repo root) before writing Next code.
+  `next dev`'s own managed AGENTS.md block is off — see `agentRules` in
+  `next.config.js`.
 - Run `pnpm format` (Prettier, 80-character prose wrap) before committing. The
   local dev server is `pnpm nx dev docs`.

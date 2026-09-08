@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vite";
-import defaultConfig from "../../vite.config";
+import defaultConfig from "../../vite.config.ts";
 
 const packageRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
