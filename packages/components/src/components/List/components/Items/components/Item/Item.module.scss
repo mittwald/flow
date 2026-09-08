@@ -65,6 +65,9 @@
   }
 
   &:has(.link) {
+    // Matches interactive markup the item does not author: consumer children
+    // and react-aria internals, none of which carry a class.
+    // stylelint-disable-next-line selector-max-type -- foreign interactive markup
     :where(
       a,
       button,
