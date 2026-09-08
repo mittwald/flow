@@ -40,9 +40,9 @@ jobs:
       - uses: ./.github/actions/prepare-workspace
 
       # The image used to build this itself, which meant a second toolchain
-      # install and the whole dependency chain rebuilt against a cold nx cache —
-      # 80 of the 449 seconds a docs preview took. Here the restored cache serves
-      # that chain, and the image only packages what comes out.
+      # install and the whole dependency chain rebuilt inside the image — 80 of
+      # the 449 seconds a docs preview took. Here the runner builds that chain
+      # and the image only packages what comes out.
       #
       # NEXT_BASE_PATH was a build-arg for the same reason; the value is the one
       # the Dockerfile passed.
