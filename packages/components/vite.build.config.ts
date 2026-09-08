@@ -8,6 +8,7 @@ import { stylesheetVariantsPlugin } from "./dev/vite/stylesheetVariantsPlugin.ts
 import {
   libraryBuildChecks,
   preserveUseClientBanner,
+  publishedDtsOptions,
 } from "../core/src/index.ts";
 
 export default mergeConfig(
@@ -69,10 +70,7 @@ export default mergeConfig(
       externalizeDeps({
         except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
       }),
-      dts({
-        include: ["src"],
-        outDirs: "dist/types",
-      }),
+      dts(publishedDtsOptions),
     ],
   }),
 );

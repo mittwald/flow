@@ -3,6 +3,7 @@ import { defineConfig, mergeConfig } from "vite";
 import {
   libraryBuildChecks,
   preserveUseClientBanner,
+  publishedDtsOptions,
 } from "../core/src/index.ts";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
@@ -16,10 +17,7 @@ export default mergeConfig(
       externalizeDeps({
         except: [/^@mittwald\/remote-dom-react(?:\/.+)?$/],
       }),
-      dts({
-        include: ["src"],
-        outDirs: "dist/types",
-      }),
+      dts(publishedDtsOptions),
     ],
     build: {
       minify: false,

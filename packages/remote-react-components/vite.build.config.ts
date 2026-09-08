@@ -3,6 +3,7 @@ import { mergeConfig } from "vite";
 import {
   libraryBuildChecks,
   preserveUseClientBanner,
+  publishedDtsOptions,
 } from "../core/src/index.ts";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
@@ -33,12 +34,5 @@ export default mergeConfig(baseConfig, {
       },
     },
   },
-  plugins: [
-    preserveDirectives(),
-    externalizeDeps(),
-    dts({
-      include: ["src"],
-      outDirs: "dist/types",
-    }),
-  ],
+  plugins: [preserveDirectives(), externalizeDeps(), dts(publishedDtsOptions)],
 });
