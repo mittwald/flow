@@ -23,6 +23,9 @@ name: Forward-merge drift check
 # survived even the catch-up, and makes it loud. It deliberately neither merges
 # nor dispatches anything; recovery is the manual `forward-merge.yml` dispatch,
 # already a first-class path. Detection is what was missing.
+#
+# The escalation is an issue plus a Slack message. Slack mirrors the issue and so
+# inherits its idempotence — the schedule runs hourly, the alert must not.
 
 on:
   schedule:
@@ -49,6 +52,7 @@ env:
   GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
   REPO: ${{ github.repository }}
   MAX_DRIFT_MINUTES: ${{ inputs.max_drift_minutes || '120' }}
+  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
 jobs:
   drift:
@@ -61,6 +65,7 @@ jobs:
           fetch-depth: 0
 
       - name: Compare `main` against `next` 🔍
+        id: drift
         run: |
           set -euo pipefail
 
@@ -163,5 +168,43 @@ jobs:
             '' \
             '/cc @mfal @Lisa18289 @ins0 @maaaathis @Jan-Eimertenbrink')"
 
-          gh issue create --repo "$REPO" --label automated \
-            --title "$title" --body "$body"
+          url="$(gh issue create --repo "$REPO" --label automated \
+            --title "$title" --body "$body")"
+
+          # Slack mirrors the ISSUE, so it inherits the issue's idempotence: every
+          # early exit above — no drift, drift below the threshold, a young
+          # blocker, an alert already open — leaves this output empty. Only a
+          # newly opened drift issue reaches the channel, so the hourly schedule
+          # does not repeat itself.
+          {
+            echo "alert<<DRIFT_ALERT_EOF"
+            printf '%s\n%s\n\n%s\n\n<%s|Drift issue> · <%s|Workflow run>\n' \
+              '*`next` has fallen behind `main` (forward-merge drift)*' \
+              "\`next\` is behind \`main\` by ${behind} commit(s), and the oldest un-merged commit is ${age_min} minutes old — past the ${MAX_DRIFT_MINUTES} minute threshold." \
+              "${cause}" "$url" "$RUN_URL"
+            echo "DRIFT_ALERT_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      # `continue-on-error`: the drift issue is the source of truth, Slack is the
+      # additional signal. A webhook outage must not fail the check that just
+      # reported real drift.
+      - name: Notify Slack about the drift 🚨
+        if: steps.drift.outputs.alert != ''
+        continue-on-error: true
+        uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "next has fallen behind main (forward-merge drift)",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(steps.drift.outputs.alert) }}
+                  }
+                }
+              ]
+            }

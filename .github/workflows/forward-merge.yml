@@ -19,7 +19,9 @@ name: Forward-merge main into next
 # code conflict escalates to a sync ISSUE (ADR 0004 §4) — the resolution itself
 # happens in a developer checkout via `pnpm sync:resolve`, because that is the
 # only place the merge drivers run. Any other failure opens an issue too
-# (ADR 0004 §10).
+# (ADR 0004 §10). Both escalations additionally post to Slack — see the
+# `record_escalation` comment below for why the conflict path cannot key its
+# notification on `failure()`.
 #
 # The push to `next` triggers `publish.yml`, which re-derives the version and
 # publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
@@ -67,6 +69,7 @@ concurrency:
 env:
   GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
   REPO: ${{ github.repository }}
+  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
 jobs:
   forward-merge:
@@ -142,6 +145,22 @@ jobs:
           # "Close the escalation" step below acts on it. See the comment there
           # for why that had to move out of this step.
 
+          # Slack mirror of the escalation below (ADR 0004 §4). It keys on the
+          # ESCALATION, not on the run: the conflict path exits 0, so a
+          # `failure()` notification would never see a blocked cascade. And it
+          # fires only where `open_sync_issue` itself speaks up — each of its
+          # quiet `return 0`s, taken when the blockage is already reported,
+          # leaves this output empty, so a cascade that stays blocked does not
+          # re-ping the channel on every push to `main`.
+          record_escalation() {
+            {
+              echo "escalation<<ESCALATION_EOF"
+              printf '%s\n%s\n\n<%s|Escalation> · <%s|Workflow run>\n' \
+                '*Forward-merge blocked: `main` into `next`*' "$1" "$2" "$RUN_URL"
+              echo "ESCALATION_EOF"
+            } >> "$GITHUB_OUTPUT"
+          }
+
           # Escalation (ADR 0004 §4). The cascade does NOT create a branch or
           # a pull request here: a PR is a change proposal, and until a human has
           # resolved the conflict there is nothing to propose. It opens an issue
@@ -155,7 +174,7 @@ jobs:
           # git, and the pull request that eventually appears is a clean,
           # reviewable merge.
           open_sync_issue() {
-            local conflicted body title existing open_pr fingerprint marker refresh
+            local conflicted body title existing open_pr fingerprint marker refresh url
             title="Forward-merge blocked: main into next needs a manual resolution"
 
             conflicted="$(git ls-files --unmerged | cut -f2 | sort -u | sed 's/^/- `/; s/$/`/')"
@@ -196,8 +215,9 @@ jobs:
                 echo "::notice::Sync PR #${open_pr} already reports this exact blockage — staying quiet."
                 return 0
               fi
-              gh pr comment "$open_pr" --repo "$REPO" --body "$refresh"
+              url="$(gh pr comment "$open_pr" --repo "$REPO" --body "$refresh")"
               echo "::warning::Sync PR #${open_pr} does not cover the current blockage — commented."
+              record_escalation "Sync PR #${open_pr} does not cover the current blockage — commented. \`main\` is at \`${SHORT_SHA}\`." "$url"
               return 0
             fi
 
@@ -209,8 +229,9 @@ jobs:
                 echo "::notice::Sync issue #${existing} already reports this exact blockage — not commenting again."
                 return 0
               fi
-              gh issue comment "$existing" --repo "$REPO" --body "$refresh"
+              url="$(gh issue comment "$existing" --repo "$REPO" --body "$refresh")"
               echo "::warning::Sync issue #${existing} refreshed — the blockage changed."
+              record_escalation "Sync issue #${existing} was refreshed — the cascade is blocked on a different conflict than the one reported there." "$url"
               return 0
             fi
 
@@ -240,8 +261,9 @@ jobs:
               '' \
               "${marker}")"
 
-            gh issue create --repo "$REPO" --label sync --label automated \
-              --title "$title" --body "$body"
+            url="$(gh issue create --repo "$REPO" --label sync --label automated \
+              --title "$title" --body "$body")"
+            record_escalation 'The merge hit a genuine code conflict. The cascade is paused: until someone runs `pnpm sync:resolve`, every later commit on `main` stays out of `next`.' "$url"
           }
 
           git fetch --no-tags origin main
@@ -304,6 +326,32 @@ jobs:
           echo "::error::Retry re-merge/push failed."
           exit 1
 
+      # `continue-on-error` keeps Slack out of the cascade's verdict. A webhook
+      # outage or a missing secret must not turn the conflict path — an expected
+      # non-error path — into a run failure, which the §10 step below would then
+      # report as a genuine forward-merge failure and open an issue for. The
+      # sync issue stays the source of truth; Slack is the additional signal.
+      - name: Notify Slack that the cascade is blocked 💬
+        if: steps.merge.outputs.escalation != ''
+        continue-on-error: true
+        uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Forward-merge blocked: main into next",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(steps.merge.outputs.escalation) }}
+                  }
+                }
+              ]
+            }
+
       # The ONE place that clears an escalation (ADR 0004 §4). It fires whenever
       # the cascade came out healthy — `next` carries `main`'s CODE — which is
       # true in three cases:
@@ -349,8 +397,6 @@ jobs:
       # 0004 §10).
       - name: Open an issue on failure 🚨
         if: failure() && steps.guard.outputs.pending == 'true'
-        env:
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
           gh label create automated --repo "$REPO" --color EDEDED \
@@ -365,3 +411,24 @@ jobs:
             --title "Forward-merge main into next failed" \
             --body "$body" \
             || echo "::warning::Could not open the failure issue."
+
+      - name: Notify Slack about the failure 🚨
+        if: failure() && steps.guard.outputs.pending == 'true'
+        continue-on-error: true
+        uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Forward-merge main into next failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Forward-merge `main` into `next` failed.*\nNot a merge conflict (ADR 0004 §10) — `next` may now be falling behind `main`. An issue was opened.\n\n<${{ env.RUN_URL }}|Workflow run>"
+                  }
+                }
+              ]
+            }
