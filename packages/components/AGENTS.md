@@ -229,6 +229,17 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **A `z-index` is scoped by the nearest ancestor stacking context** — mark that
+  element `isolation: isolate` explicitly. `position: relative`, a scroll
+  container (`overflow: auto`) and a flex/grid parent are **not** stacking
+  contexts, so without it the value competes with the whole page instead of the
+  siblings it was written for. A `transform` animation in between is one only
+  _while it runs_, so the scope otherwise changes with the animation state.
+  Isolating does not reorder anything inside the component: among positioned
+  siblings, `z-index: auto` and a `0`-equivalent stacking context paint in the
+  same step, in tree order. The exception is an element portalled into
+  `document.body` (`NotificationContainer`) — that one sits in the root stacking
+  context by construction and cannot be scoped; say so in a comment.
 - **Overriding a dependency that injects its own stylesheet** (CodeMirror,
   react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
   `<style>` elements are unlayered, and unlayered CSS beats layered CSS

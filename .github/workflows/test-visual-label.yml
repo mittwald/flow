@@ -138,10 +138,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-  # Reports for the run as a whole: one comment, whatever the shards did.
+  # Reports for the run as a whole: one comment, whatever the shards did — but
+  # only for a run that was not superseded. `always()` runs on a cancelled run
+  # too, and `cancel-in-progress` cancels one whenever two runs start on the
+  # same branch; the comment is a single upserted one, so a cancelled run's ❌
+  # stays on the PR. `!cancelled()` covers the cancelled run, the `cancelled`
+  # result a shard cancelled without the run itself being.
   summary:
     needs: run-visual-tests
-    if: always() && needs.run-visual-tests.result != 'skipped'
+    if: >
+      !cancelled() &&
+      needs.run-visual-tests.result != 'skipped' &&
+      needs.run-visual-tests.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
