@@ -140,9 +140,9 @@ export class TunnelState {
   // (observer) `TunnelExit` render, and React 19 may invoke a render more than
   // once before committing (StrictMode double-invoke, concurrent re-render), so
   // a consume-on-read here broke SSR hydration. Render-phase children are only a
-  // bridge for the server render and the first (pre-effect) client render; the
-  // exit opts into them via `useRenderPhaseFallback` while `useIsSSR()` is true.
-  // After hydration the committed children are authoritative — even when empty —
+  // bridge for the server render and the first (pre-commit) client render; the
+  // exit opts into them via `useRenderPhaseFallback` for exactly those. From the
+  // first commit on the committed children are authoritative — even when empty —
   // so an entry that never committed (suspended, then removed) leaves no stale
   // content behind.
   public getEntries(
