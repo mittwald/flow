@@ -37,7 +37,7 @@ export const TextField = flowComponent("TextField", (props) => {
     children,
     onChange,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, "");
 
   const [charactersCount, setCharactersCount] = useState(
     props.defaultValue?.length ?? props.value?.length ?? 0,
