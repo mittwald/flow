@@ -26,12 +26,10 @@ export const ComponentCard: FC<Props> = (props) => {
         <Wireframe />
       </div>
       <div className={styles.content}>
-        <Heading level={3} elementType="p" className={styles.title}>
+        <Heading level={3} elementType="p">
           {component.name}
         </Heading>
-        {component.description && (
-          <Text className={styles.description}>{component.description}</Text>
-        )}
+        {component.description && <Text>{component.description}</Text>}
       </div>
     </div>
   );
