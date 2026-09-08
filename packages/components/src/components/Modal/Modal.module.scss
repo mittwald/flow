@@ -47,10 +47,12 @@
     display: none;
   }
 
-  /* The dialog card itself — a flex column. */
+  /* The dialog card itself — a flex column. It is also the scroll container on
+     mobile, and the sticky header/footer stack against its content only. */
   [role="dialog"] {
     display: flex;
     flex-direction: column;
+    isolation: isolate;
     max-height: 100%;
     overflow: hidden;
     outline: none;

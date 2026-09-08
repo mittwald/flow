@@ -2,6 +2,11 @@
 
 .item {
   position: relative;
+
+  /* The link overlay and the interactive content lifted above it (see .link
+     below) stack against each other only — never against anything outside the
+     item. */
+  isolation: isolate;
   cursor: default;
   background-color: var(--list-item--background-color--default);
   transition-property: background-color;
