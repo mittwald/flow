@@ -2,6 +2,7 @@ import colors from "picocolors";
 import { lte } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
 import { selectEntries, sortBySince } from "../catalog/select.js";
+import { isUnreleased } from "../catalog/unreleased.js";
 import {
   defaultRangeDeps,
   resolveRange,
@@ -192,9 +193,16 @@ const field = (
  * This is what may already be done, not what is done: nothing records which
  * migrations a project has actually performed, codemod or manual alike \u2014
  * see `selectEntries`.
+ *
+ * An entry on the `UNRELEASED` placeholder is never catch-up: it has not
+ * shipped under any stable version, so it cannot sit behind `current`. Note
+ * that `selectEntries` treats the placeholder the other way round (always
+ * selected) \u2014 the two questions differ, and so does the answer (#2890).
  */
 const isCatchUp = (entry: CatalogEntry, current: string | undefined): boolean =>
-  current !== undefined && lte(entry.since, current);
+  current !== undefined &&
+  !isUnreleased(entry.since) &&
+  lte(entry.since, current);
 
 const renderEntry = (
   entry: CatalogEntry,

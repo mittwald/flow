@@ -126,6 +126,9 @@ export default tseslint.config(
       globals: {
         process: "readonly",
         console: "readonly",
+        // Resolving a path relative to the script itself — `new URL(…,
+        // import.meta.url)` — is how these scripts reach repo files.
+        URL: "readonly",
       },
     },
   },
