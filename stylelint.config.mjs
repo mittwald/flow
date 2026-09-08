@@ -40,6 +40,7 @@ export default {
     "stylelint-scss",
     "stylelint-plugin-logical-css",
     "./packages/components/dev/stylelint/unlayeredThirdPartyOnly.mjs",
+    "./packages/components/dev/stylelint/noUnknownGlobalFlowClass.mjs",
   ],
   extends: ["stylelint-config-standard", "stylelint-config-recommended-scss"],
   rules: {
@@ -74,6 +75,14 @@ export default {
     // Registered globally, not just for module stylesheets, so the marker is
     // also caught where the build would never strip it.
     "flow/unlayered-third-party-only": true,
+    // A `:global(.flow--…)` name that resolves to nothing fails completely
+    // silently — no build error, no type error, no console warning, and the
+    // docs site and Storybook keep rendering. The names come from the
+    // component's path and drop the suffix when it equals the component name,
+    // so they cannot be derived by hand: a component that moves leaves every
+    // reference to it dead. Checked against the committed *.module.d.scss.ts
+    // stubs, so the rule needs no build.
+    "flow/no-unknown-global-flow-class": true,
   },
   overrides: [
     {

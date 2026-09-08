@@ -225,6 +225,12 @@ if ("action" in props) {
   `<pre>`, so it stays an element selector — and a class raises specificity
   where an element selector deliberately lost a tie (`Modal`'s `> span` against
   `.flow--heading--heading-content:empty`).
+- **`:global(.flow--…)` names are checked** by
+  `flow/no-unknown-global-flow-class` (`dev/stylelint/`), against the classes
+  the committed `*.module.d.scss.ts` stubs declare, run through the build's own
+  `cssModuleClassNameGenerator`. The reference has to name a class some
+  component actually generates — otherwise the selector matches nothing, which
+  used to fail without a single signal anywhere.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
@@ -364,7 +370,10 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   children are left intact.
 - **Semantic generated CSS classes are coordination points** — scoped modules
   still use `:global(.flow--…)` when independently rendered Flow descendants
-  must affect layout.
+  must affect layout. Copy the name from the target component's
+  `*.module.d.scss.ts`; the generator drops a suffix that equals the component
+  name, so a hand-derived name silently matches nothing.
+  `flow/no-unknown-global-flow-class` blocks that.
 - **Controllers coexist with declarative props** — overlay-like APIs support
   controlled/uncontrolled props _and_ a controller object, not one or the other.
 - **A component without `value` and without `defaultValue` still has to render
