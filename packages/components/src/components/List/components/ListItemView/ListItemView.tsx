@@ -3,6 +3,7 @@ import styles from "./ListItemView.module.scss";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
 import {
   dynamic,
+  overlayTriggersTunneledTo,
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
@@ -21,27 +22,24 @@ export const ListItemView = flowComponent(
     const { children, s, m, l } = props;
     const list = useList();
 
+    const buttonTunnel = {
+      id: "button",
+      component: "ListItemView",
+    } as const;
+
     const propsContext: PropsContext = {
+      ...overlayTriggersTunneledTo(buttonTunnel),
       ContextMenu: {
-        tunnel: {
-          id: "button",
-          component: "ListItemView",
-        },
+        tunnel: buttonTunnel,
         placement: "bottom right",
         wrapWith: <OptionsButton className={styles.action} />,
       },
       Button: {
-        tunnel: {
-          id: "button",
-          component: "ListItemView",
-        },
+        tunnel: buttonTunnel,
         size: dynamic(() => (useList().viewMode.isTiles ? "s" : "m")),
       },
       ActionGroup: {
-        tunnel: {
-          id: "button",
-          component: "ListItemView",
-        },
+        tunnel: buttonTunnel,
         Button: {
           tunnel: null,
         },
