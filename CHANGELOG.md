@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.30](https://github.com/mittwald/flow/compare/1.2.0-next.29...1.2.0-next.30) (2026-09-08)
+
+### Bug Fixes
+
+* **NotificationProvider:** keep notifications interactive over an open overlay ([#3133](https://github.com/mittwald/flow/issues/3133)) ([07ea00d](https://github.com/mittwald/flow/commit/07ea00df067899d21221088bb840bcab1d5f4c43))
+
+## [1.1.24](https://github.com/mittwald/flow/compare/1.2.0-next.28...1.1.24) (2026-09-08)
+
 ## [1.2.0-next.29](https://github.com/mittwald/flow/compare/1.2.0-next.28...1.2.0-next.29) (2026-09-08)
 
 ## [1.1.23](https://github.com/mittwald/flow/compare/1.1.22...1.1.23) (2026-09-07)
