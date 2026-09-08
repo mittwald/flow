@@ -249,6 +249,15 @@ territory:
 - **Props typed `ReactNode` become slots**, not serialized data — they cross as
   rendered child content rather than as values that get cloned across the
   connection.
+- **A function property's return value comes back as a Promise.**
+  `isSerializableByBase` accepts any function, so `@quilted/threads` sends it as
+  a proxy, and calling a proxy is a round trip. A host that awaits it is fine —
+  `ChartTooltip`'s formatters are typed `Promise<string> | string` for exactly
+  that reason. A host that reads the result synchronously gets the Promise
+  object: `XAxis.tickFormatter` rendered every tick as `[object Promise]` until
+  it was excluded with `@flr-ignore-props`. `checkSerializableProps` fails
+  generation on a new one; the props that predate the check are listed in
+  `acknowledgedValueReturningProps`.
 - **There are no HTML attributes.** `isAttribute` in the generator is hard-coded
   to `false`
   ([`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`](../packages/components/dev/remote-components-generator/lib/propClassifiers.ts)),

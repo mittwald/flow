@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { apiFetch } from "./apiFetch.ts";
+
 interface MittwaldService {
   id: string;
   serviceName: string;
@@ -53,12 +55,13 @@ class ReviewCleanup {
     console.log("📋 Fetching existing services...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/projects/${this.projectId}/services`,
         {
           method: "GET",
           headers: getApiHeaders(),
         },
+        { label: "fetching services", idempotent: true },
       );
 
       if (!response.ok) {
@@ -76,12 +79,13 @@ class ReviewCleanup {
     console.log("🔗 Fetching existing ingresses...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/ingresses?projectId=${this.projectId}`,
         {
           method: "GET",
           headers: getApiHeaders(),
         },
+        { label: "fetching ingresses", idempotent: true },
       );
 
       if (!response.ok) {
@@ -99,15 +103,18 @@ class ReviewCleanup {
     console.log(`🗑️  Deleting ingress ${hostname} (${ingressId})...`);
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/ingresses/${ingressId}`,
         {
           method: "DELETE",
           headers: getApiHeaders(),
         },
+        { label: `deleting ingress ${hostname}`, idempotent: true },
       );
 
-      if (!response.ok) {
+      // A retried DELETE whose first attempt did reach the server finds the
+      // ingress already gone. That is the goal state, not a failure.
+      if (!response.ok && response.status !== 404) {
         throw new Error(`Failed to delete ingress: ${response.statusText}`);
       }
 
@@ -127,7 +134,7 @@ class ReviewCleanup {
     });
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/stacks/${this.projectId}`,
         {
           method: "PATCH",
@@ -136,6 +143,9 @@ class ReviewCleanup {
             services: serviceUpdates,
           }),
         },
+        // The body is the stack's desired state, so a replay lands on the same
+        // state rather than removing anything else.
+        { label: "deleting services", idempotent: true },
       );
 
       if (!response.ok) {

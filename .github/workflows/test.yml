@@ -39,17 +39,18 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/prepare-workspace
-        with:
-          nx-cache: "false" # nothing here builds a package
 
       - name: Lint & check formatting
         run: pnpm lint
 
       # The CI guard scripts are plain node:test files outside the nx graph, so
       # `pnpm affected:test` never sees them. Run them here so a broken
-      # classifier fails the PR rather than the next release.
+      # classifier fails the PR rather than the next release. `dev/` holds the
+      # same kind of code in TypeScript, so it needs the tsx loader.
       - name: Test the CI guard scripts
-        run: node --test .github/scripts/*.test.mjs
+        run: |
+          node --test .github/scripts/*.test.mjs
+          node --test --import tsx dev/*.test.ts
 
       # Fixed versioning means every Lerna-managed package carries `lerna.json`'s
       # version. A merge can break that silently — no conflict markers, and the
@@ -84,15 +85,6 @@ jobs:
       # has already run here.
       - name: Check all generated code is committed
         run: git diff --exit-code
-
-      # The one writer. Every other job restores this, so a PR starts from the
-      # builds `main` already paid for and only rebuilds what it changed.
-      - name: Save the nx cache
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: .nx/cache
-          key: nx-${{ runner.os }}-${{ github.sha }}
 
   browser:
     runs-on: ubuntu-latest
