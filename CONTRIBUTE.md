@@ -723,7 +723,11 @@ your PR targets depends on the kind of change:
   an unreleased feature.
 - **`next`** is the Collection branch (dist-tag `next`): `main` plus accumulated
   features, released together with a curated changelog when a maintainer
-  promotes it. Feature work goes here.
+  promotes it. Feature work goes here. Its head is deployed continuously, so you
+  can see everything waiting for the next Minor:
+  [next.docs.review.flow-components.de](https://next.docs.review.flow-components.de)
+  and
+  [next.storybook.review.flow-components.de](https://next.storybook.review.flow-components.de).
 - **The major line** is an on-demand branch that collects breaking changes
   toward the next major. Breaking changes are rare by policy — **deprecate,
   don't break** (keep the old path, warn via `useWarnDeprecation`); see
@@ -862,5 +866,9 @@ here, not the review it replaces.
 - 📖 **Docs:** [flow.mittwald.de](https://flow.mittwald.de/)
 - 🧩 **Storybook:**
   [storybook.flow-components.de](https://storybook.flow-components.de)
+- 🔭 **The `next` line** (features awaiting the next Minor):
+  [next.docs.review.flow-components.de](https://next.docs.review.flow-components.de)
+  ·
+  [next.storybook.review.flow-components.de](https://next.storybook.review.flow-components.de)
 
 Happy contributing! 💙

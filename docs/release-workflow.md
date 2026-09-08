@@ -34,14 +34,23 @@ flowchart LR
     major ==>|"Promotion: Major"| main
 ```
 
-- **`main` — the Stable line.** Published to npm under dist-tag `latest`. Only
-  fixes and non-releasing changes land here (`fix:`, `docs:`, `chore:`,
-  `refactor:`, …); merging auto-publishes. This is what "fixes ship fast" means
-  — a fix never has to wait behind an unreleased feature.
+- **`main` — the Stable line.** Published to npm under dist-tag `latest`, and
+  deployed to [flow.mittwald.de](https://flow.mittwald.de) plus
+  [storybook.flow-components.de](https://storybook.flow-components.de)
+  (`deploy-main.yml`). Only fixes and non-releasing changes land here (`fix:`,
+  `docs:`, `chore:`, `refactor:`, …); merging auto-publishes. This is what
+  "fixes ship fast" means — a fix never has to wait behind an unreleased
+  feature.
 - **`next` — the Collection branch.** Equals `main` plus every accumulated,
   not-yet-released feature. Published continuously as `X.Y.0-next.N` under
   dist-tag `next` (an early-adopter channel). `feat:` work lands here and is
-  promoted to `main` in curated bundles.
+  promoted to `main` in curated bundles. Its head is deployed to
+  [next.docs.review.flow-components.de](https://next.docs.review.flow-components.de)
+  and
+  [next.storybook.review.flow-components.de](https://next.storybook.review.flow-components.de)
+  (`deploy-next.yml`), so the accumulated features can be looked at before they
+  are promoted — a pull-request preview dies with its PR, and until then nothing
+  showed the collection branch as a whole.
 - **The major line** — an on-demand branch (e.g. `2.x`) spun up only when a rare
   breaking change appears. Breaking changes are rare _by policy_: **deprecate,
   don't break** — keep the old path and warn via `useWarnDeprecation`.
