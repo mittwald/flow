@@ -1,5 +1,6 @@
 import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
 import styles from "../../ListItemView.module.scss";
+import itemStyles from "@/components/List/components/Items/components/Item/Item.module.scss";
 import {
   dynamic,
   type PropsContext,
@@ -23,12 +24,15 @@ export type ListItemViewContentProps = PropsWithChildren &
     viewMode?: ListViewMode;
   };
 
+/*
+ * The bottom content also carries Item's own `bottomContent` class.
+ * Item.module.scss uses it to exclude this area from the item's hover and
+ * pressed background — it has its own interactive elements.
+ */
 const getStyleForContentSlot = (slot?: string) =>
-  slot === "top"
-    ? styles.topContent
-    : slot === "bottom"
-      ? styles.bottomContent
-      : styles.topContent;
+  slot === "bottom"
+    ? clsx(styles.bottomContent, itemStyles.bottomContent)
+    : styles.topContent;
 
 /** @flr-generate all */
 export const ListItemViewContent = (props: ListItemViewContentProps) => {
@@ -50,10 +54,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     bottom: {
       onMouseDown: (e) => e.stopPropagation(),
       onPointerDown: (e) => e.stopPropagation(),
-      className: styles.bottomContent,
-    },
-    top: {
-      className: styles.topContent,
     },
   };
 
