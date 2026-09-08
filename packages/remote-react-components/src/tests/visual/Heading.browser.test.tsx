@@ -109,3 +109,35 @@ test.each(testEnvironments)(
     await testScreenshot("Heading edge cases");
   },
 );
+
+test.each(testEnvironments)(
+  "Heading with button (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Heading, Flex, Badge, Button, IconEdit },
+  }) => {
+    await render(
+      <Flex gap="m" direction="column">
+        {sizes.map((size) => (
+          <Heading size={size} key={size}>
+            Size {size}
+            <Button variant="soft" color="secondary">
+              Verify
+            </Button>
+          </Heading>
+        ))}
+        <Heading>
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire.
+          <Badge>Badge</Badge>
+          <Button aria-label="Edit" variant="plain" color="secondary">
+            <IconEdit />
+          </Button>
+        </Heading>
+      </Flex>,
+    );
+
+    await testScreenshot("Heading with button");
+  },
+);

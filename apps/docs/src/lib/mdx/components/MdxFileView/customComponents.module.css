@@ -36,12 +36,6 @@
   width: fit-content;
   scroll-margin-top: 6rem;
 
-  > :global(.flow--heading--heading-text) {
-    display: flex;
-    align-items: center;
-    column-gap: var(--size-rem--s);
-  }
-
   .anchorButton {
     opacity: 0;
     transition-property: opacity;
