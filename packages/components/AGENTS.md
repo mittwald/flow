@@ -158,6 +158,15 @@ Remote generation details:
   output, because the host has to call it: that needs an eager slot or
   `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
   prop, so a new one cannot ship.
+- **A function property's return value is a Promise on the host.** Functions do
+  cross — as thread proxies — but calling one is a round trip. Type the return
+  as `Promise<T> | T` and await it on the host (`ChartTooltip`'s formatters), or
+  keep the prop off the remote surface with `@flr-ignore-props` (`XAxis`/`YAxis`
+  `tickFormatter`). A host that reads the result synchronously gets the Promise
+  itself — recharts concatenated it into every tick as `[object Promise]`.
+  `checkSerializableProps` fails generation on a new one; the pre-existing set
+  is listed in `acknowledgedValueReturningProps`, which can neither grow nor go
+  stale.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
@@ -229,6 +238,17 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **A `z-index` is scoped by the nearest ancestor stacking context** — mark that
+  element `isolation: isolate` explicitly. `position: relative`, a scroll
+  container (`overflow: auto`) and a flex/grid parent are **not** stacking
+  contexts, so without it the value competes with the whole page instead of the
+  siblings it was written for. A `transform` animation in between is one only
+  _while it runs_, so the scope otherwise changes with the animation state.
+  Isolating does not reorder anything inside the component: among positioned
+  siblings, `z-index: auto` and a `0`-equivalent stacking context paint in the
+  same step, in tree order. The exception is an element portalled into
+  `document.body` (`NotificationContainer`) — that one sits in the root stacking
+  context by construction and cannot be scoped; say so in a comment.
 - **Overriding a dependency that injects its own stylesheet** (CodeMirror,
   react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
   `<style>` elements are unlayered, and unlayered CSS beats layered CSS

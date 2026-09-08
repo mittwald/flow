@@ -30,7 +30,7 @@ export const NotificationContainer: FC<NotificationsContainerProps> = (
   const content = (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={domAnimation}>
-        <div className={rootClassName} {...rest}>
+        <div className={rootClassName} {...rest} data-react-aria-top-layer>
           <AnimatePresence>
             {notifications.map((n) => (
               <m.div

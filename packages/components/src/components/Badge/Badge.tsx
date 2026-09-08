@@ -13,6 +13,8 @@ import type { PressEvent } from "@react-types/shared";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { ContextualHelpButton } from "@/components/Badge/components/ContextualHelpButton";
 import locales from "./locales/*.locale.json";
 
 export const badgeColors = [
@@ -41,6 +43,11 @@ export interface BadgeProps
   isDisabled?: boolean;
 }
 
+const contextualHelpTunnel = {
+  id: "contextualHelp",
+  component: "Badge",
+} as const;
+
 /** @flr-generate all */
 export const Badge = flowComponent("Badge", (props) => {
   const {
@@ -63,6 +70,8 @@ export const Badge = flowComponent("Badge", (props) => {
     className,
   );
 
+  const buttonColor = isAlphaColor(color) ? color : "dark";
+
   const propsContext: PropsContext = {
     Label: {
       elementType: "span",
@@ -84,6 +93,16 @@ export const Badge = flowComponent("Badge", (props) => {
         className: styles.value,
       },
     },
+    ContextualHelp: {
+      tunnel: contextualHelpTunnel,
+      wrapWith: (
+        <ContextualHelpButton
+          className={styles.action}
+          color={buttonColor}
+          isDisabled={isDisabled}
+        />
+      ),
+    },
   };
 
   return (
@@ -101,11 +120,13 @@ export const Badge = flowComponent("Badge", (props) => {
           </Button>
         )}
 
+        <UiComponentTunnelExit id={contextualHelpTunnel.id} component="Badge" />
+
         {onClose && (
           <Button
             className={styles.close}
             size="s"
-            color={isAlphaColor(color) ? color : "dark"}
+            color={buttonColor}
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}

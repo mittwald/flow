@@ -13,6 +13,7 @@ export * from "./RemoteAutocompleteElement";
 export * from "./RemoteAvatarElement";
 export * from "./RemoteAvatarStackElement";
 export * from "./RemoteBadgeElement";
+export * from "./RemoteBarElement";
 export * from "./RemoteBigNumberElement";
 export * from "./RemoteBreadcrumbElement";
 export * from "./RemoteButtonElement";

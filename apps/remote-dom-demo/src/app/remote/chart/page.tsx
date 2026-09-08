@@ -2,6 +2,7 @@
 
 import {
   Area,
+  Bar,
   CartesianChart,
   CartesianGrid,
   ChartTooltip,
@@ -69,11 +70,32 @@ export default function Page() {
     );
   };
 
+  const BarChart: FC<{ layout: "horizontal" | "vertical" }> = ({ layout }) => {
+    const vertical = layout === "vertical";
+
+    return (
+      <CartesianChart data={data} height="300px" layout={layout}>
+        <CartesianGrid vertical={vertical} horizontal={!vertical} />
+        <Bar dataKey="Shields" />
+        <Bar dataKey="Hull" color="palatinate-blue" />
+        {vertical ? <XAxis unit="%" /> : <XAxis dataKey="time" />}
+        {vertical ? (
+          <YAxis dataKey="time" />
+        ) : (
+          <YAxis domain={[0, 100]} unit="%" />
+        )}
+        <ChartTooltip />
+      </CartesianChart>
+    );
+  };
+
   return (
     <>
       <ExampleChart data={data} />
       <ExampleChart data={data} />
       <ExampleChart data={[]} />
+      <BarChart layout="horizontal" />
+      <BarChart layout="vertical" />
     </>
   );
 }

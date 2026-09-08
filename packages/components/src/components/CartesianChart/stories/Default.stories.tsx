@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CartesianChart, { typedCartesianChart } from "../CartesianChart";
 import Area from "../components/Area";
+import Bar from "../components/Bar";
+import Line from "../components/Line";
 import IllustratedMessage from "@/components/IllustratedMessage";
 import { Heading, IconMonitoring } from "@/components/public";
 import ChartTooltip from "@/components/CartesianChart/components/ChartTooltip/ChartTooltip";
@@ -280,6 +282,65 @@ export const WithIntlNumberFormat: Story = {
           }).format(value)
         }
       />
+    </CartesianChart>
+  ),
+};
+
+export const WithBars: Story = {
+  render: (props) => (
+    <CartesianChart {...props}>
+      <Bar dataKey="firstKey" />
+      <Bar dataKey="secondKey" color="palatinate-blue" />
+      <Bar dataKey="thirdKey" color="tangerine" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <ChartGrid />
+      <ChartLegend />
+      <ChartTooltip />
+    </CartesianChart>
+  ),
+};
+
+export const WithStackedBars: Story = {
+  render: (props) => (
+    <CartesianChart {...props}>
+      <Bar dataKey="firstKey" stackId="storage" />
+      <Bar dataKey="secondKey" color="palatinate-blue" stackId="storage" />
+      <Bar dataKey="thirdKey" color="tangerine" stackId="storage" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <ChartGrid />
+      <ChartLegend />
+      <ChartTooltip />
+    </CartesianChart>
+  ),
+};
+
+export const WithHorizontalBars: Story = {
+  render: (props) => (
+    <CartesianChart {...props} layout="vertical" height="300px">
+      <Bar dataKey="firstKey" />
+      <Bar dataKey="secondKey" color="palatinate-blue" />
+      <XAxis />
+      <YAxis dataKey="name" />
+      <ChartGrid vertical horizontal={false} />
+      <ChartLegend />
+      <ChartTooltip />
+    </CartesianChart>
+  ),
+};
+
+export const WithBarsAndLine: Story = {
+  render: (props) => (
+    <CartesianChart {...props}>
+      <Bar dataKey="firstKey" />
+      <Bar dataKey="secondKey" color="palatinate-blue" />
+      <Line dataKey="thirdKey" color="magenta" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <ChartGrid />
+      <ChartLegend />
+      <ChartTooltip />
     </CartesianChart>
   ),
 };

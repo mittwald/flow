@@ -13,6 +13,7 @@ export * from "./Autocomplete";
 export * from "./Avatar";
 export * from "./AvatarStack";
 export * from "./Badge";
+export * from "./Bar";
 export * from "./BigNumber";
 export * from "./Breadcrumb";
 export * from "./Button";
