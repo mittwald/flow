@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.32](https://github.com/mittwald/flow/compare/1.2.0-next.31...1.2.0-next.32) (2026-09-08)
+
+### Bug Fixes
+
+* **Remote:** tickFormatter rendered [object Promise] across the boundary ([#3112](https://github.com/mittwald/flow/issues/3112)) ([80565b0](https://github.com/mittwald/flow/commit/80565b0149b5db86dd76c77dac1540f4ec29bc47))
+
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
 ## [1.2.0-next.31](https://github.com/mittwald/flow/compare/1.1.25...1.2.0-next.31) (2026-09-08)
 
 ## [1.2.0-next.30](https://github.com/mittwald/flow/compare/1.2.0-next.29...1.2.0-next.30) (2026-09-08)
