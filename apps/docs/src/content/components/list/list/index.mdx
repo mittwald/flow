@@ -259,6 +259,27 @@ vermieden. Zeigt deine Anwendung durchgängig eigene Ladezustände, kannst du
 
 ---
 
+# Item-Inhalte und externer State
+
+Ein Item wird neu gerendert, wenn sich seine Daten ändern oder wenn eine der
+Render-Funktionen an seinem `<List.Item />` ihre Identität wechselt. Eine inline
+im JSX geschriebene Funktion tut das bei jedem Render ihrer Elternkomponente –
+State aus der umgebenden Komponente erreicht das Item damit von allein.
+
+Hat die Render-Funktion eine stabile Identität – aus der Komponente
+herausgezogen, in `useCallback` gewrappt, oder sie liest aus einem externen
+Store –, fehlt dem Item dieses Signal und es behält die Werte, mit denen es
+zuerst gerendert wurde. Liste dann über `dependencies` auf, was die Funktion
+liest:
+
+```tsx
+<List.Item textValue={itemTextValue} dependencies={[selected]}>
+  {renderItem}
+</List.Item>
+```
+
+---
+
 # Daten laden
 
 Die List kann ihre Daten statisch oder asynchron laden.
