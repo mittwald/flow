@@ -5,6 +5,7 @@ import Content from "@/components/Content";
 import Heading from "@/components/Heading";
 import Label from "@/components/Label";
 import ModalTrigger from "@/components/Modal/components/ModalTrigger";
+import Skeleton from "@/components/Skeleton";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
@@ -820,6 +821,14 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
               <Label>Pilot {index + 1}</Label>
             </TextField>
           ))}
+          {/* `position: relative`, so without the sticky elements' z-index it
+              would paint over the header it scrolls underneath. */}
+          <Skeleton />
+          {Array.from({ length: 12 }, (_, index) => (
+            <TextField key={index}>
+              <Label>Gunner {index + 1}</Label>
+            </TextField>
+          ))}
         </Content>
         <ActionGroup>
           <Action closeModal>
@@ -846,6 +855,27 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
     // at rest the header sticks to the top and the footer to the bottom
     expect(getComputedStyle(header).position).toBe("sticky");
     expect(getComputedStyle(footer).position).toBe("sticky");
+
+    // The dialog is a stacking context, so the sticky z-index above cannot
+    // leak out of it into the overlay.
+    expect(getComputedStyle(dialog).isolation).toBe("isolate");
+
+    // Scroll the positioned skeleton up under the header: it comes later in the
+    // DOM, so the sticky z-index is what keeps the header painted on top.
+    const skeleton = dialog.querySelector('[class*="skeleton"]') as HTMLElement;
+    dialog.scrollTop +=
+      skeleton.getBoundingClientRect().top - header.getBoundingClientRect().top;
+    await vitest.waitFor(() => {
+      expect(skeleton.getBoundingClientRect().top).toBeCloseTo(
+        header.getBoundingClientRect().top,
+        0,
+      );
+    });
+
+    const { x, y, width, height } = skeleton.getBoundingClientRect();
+    expect(
+      header.contains(document.elementFromPoint(x + width / 2, y + height / 2)),
+    ).toBe(true);
   } finally {
     await page.viewport(1280, 720);
   }
