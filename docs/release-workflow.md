@@ -94,6 +94,14 @@ flowchart LR
       #2959 bumped an `apps/docs` dependency and cut 1.0.4.
   - A **`workflow_dispatch` run always publishes.** That is the escape hatch
     when a docs-only change has to go out as a release anyway.
+- **Tests and stories stay out of `dist/types`.** Every release build shares
+  `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
+  `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
+  emit; before that, 196 of `@mittwald/flow-remote-react-components@1.1.10`'s
+  799 tarball entries were `dist/types/tests/**`, and no `exports` path reached
+  them. A story's helper still ships (`Button/stories/lib.tsx`), because
+  `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
+  only `*.stories.tsx`.
 - **The build runs after the version bump.** Both publish workflows version
   first, then `pnpm build`, then publish. Some bundles bake their own version in
   at build time (vite `define` over `package.json` — `remote-react-components`'
@@ -103,6 +111,14 @@ flowchart LR
   itself as `0.2.0-alpha.1058`. A `grep` step between build and publish compares
   stamp against manifest, because the mismatch is otherwise invisible — nothing
   fails, the wrong string just ships.
+- **The release commit is pushed last, and rebases if it has to.** Versioning
+  commits and tags locally; the push and the GitHub Release wait until npm has
+  accepted the publish, so a failed publish cannot ratchet a line ahead of npm.
+  The cost is a ~10 minute window in which someone can merge a PR into the same
+  line — the workflow `concurrency` group serializes runs, not UI merges. A
+  plain fast-forward push loses that race after npm is already committed
+  (observed on 1.1.17), so `.github/scripts/push-release.mjs` rebases the
+  release commit onto the new tip, moves the tag with it, and retries.
 - **Forward-merge cascade.** Every push to `main` is automatically merged up
   into `next` (and `next` into the major line when it exists), so the higher
   lines are always a superset of the lower ones — no cherry-picking. Merge

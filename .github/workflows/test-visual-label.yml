@@ -82,7 +82,7 @@ jobs:
 
     steps:
       - name: Checkout selected branch
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
@@ -138,10 +138,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-  # Reports for the run as a whole: one comment, whatever the shards did.
+  # Reports for the run as a whole: one comment, whatever the shards did — but
+  # only for a run that was not superseded. `always()` runs on a cancelled run
+  # too, and `cancel-in-progress` cancels one whenever two runs start on the
+  # same branch; the comment is a single upserted one, so a cancelled run's ❌
+  # stays on the PR. `!cancelled()` covers the cancelled run, the `cancelled`
+  # result a shard cancelled without the run itself being.
   summary:
     needs: run-visual-tests
-    if: always() && needs.run-visual-tests.result != 'skipped'
+    if: >
+      !cancelled() &&
+      needs.run-visual-tests.result != 'skipped' &&
+      needs.run-visual-tests.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
