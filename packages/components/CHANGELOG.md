@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.28](https://github.com/mittwald/flow/compare/1.1.27...1.1.28) (2026-09-09)
+
+### Bug Fixes
+
+* **codemods:** wrap bare function references passed to onAction ([#3075](https://github.com/mittwald/flow/issues/3075)) ([bb98f3c](https://github.com/mittwald/flow/commit/bb98f3c22cb334c6ec6b18c48e08416f4317919f))
+
 ## [1.1.27](https://github.com/mittwald/flow/compare/1.1.26...1.1.27) (2026-09-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
