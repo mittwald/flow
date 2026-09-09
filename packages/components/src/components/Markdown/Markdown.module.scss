@@ -4,10 +4,17 @@
   row-gap: var(--markdown--spacing);
   min-width: 0;
 
+  /* Everything below styles react-markdown's output. Consumers can replace any
+     renderer through the `components` prop, so these rules have to match the
+     element, not a Flow class that a replacement would not carry. */
+  // stylelint-disable-next-line selector-max-type -- react-markdown output
   p {
     white-space: break-spaces;
   }
 
+  // remark-gfm renders the table markup itself — Markdown overrides no table
+  // renderer, so none of these elements carries a class.
+  // stylelint-disable selector-max-type -- react-markdown table output
   table {
     border-radius: var(--table--corner-radius);
     border-width: var(--table--border-width);
@@ -44,4 +51,5 @@
       }
     }
   }
+  // stylelint-enable selector-max-type
 }

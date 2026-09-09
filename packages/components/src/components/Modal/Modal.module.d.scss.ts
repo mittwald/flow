@@ -1,6 +1,8 @@
 declare const classNames: {
   readonly modal: "modal";
   readonly offCanvas: "offCanvas";
+  readonly "flow--overlay--viewport": "flow--overlay--viewport";
+  readonly "react-aria-Modal": "react-aria-Modal";
   readonly actionGroup: "actionGroup";
   readonly closeButton: "closeButton";
   readonly alwaysVisible: "alwaysVisible";

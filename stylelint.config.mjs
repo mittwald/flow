@@ -40,6 +40,7 @@ export default {
     "stylelint-scss",
     "stylelint-plugin-logical-css",
     "./packages/components/dev/stylelint/unlayeredThirdPartyOnly.mjs",
+    "./packages/components/dev/stylelint/noUnknownGlobalFlowClass.mjs",
   ],
   extends: ["stylelint-config-standard", "stylelint-config-recommended-scss"],
   rules: {
@@ -74,16 +75,27 @@ export default {
     // Registered globally, not just for module stylesheets, so the marker is
     // also caught where the build would never strip it.
     "flow/unlayered-third-party-only": true,
+    // A `:global(.flow--…)` name that resolves to nothing fails completely
+    // silently — no build error, no type error, no console warning, and the
+    // docs site and Storybook keep rendering. The names come from the
+    // component's path and drop the suffix when it equals the component name,
+    // so they cannot be derived by hand: a component that moves leaves every
+    // reference to it dead. Checked against the committed *.module.d.scss.ts
+    // stubs, so the rule needs no build.
+    "flow/no-unknown-global-flow-class": true,
   },
   overrides: [
     {
-      // Component styles should reach for classes over element-type selectors
-      // (a recurring review nudge). Kept as a non-blocking warning: some type
-      // selectors are legitimate (e.g. styling React-Aria internals or svg that
-      // carry no class), and there is no autofix.
+      // Component styles must reach for classes over element-type selectors.
+      // Blocking since #3021: every legitimate type selector left in the tree
+      // is opted out with a `stylelint-disable` comment that names why that
+      // element carries no class — react-aria internals, third-party svgs,
+      // consumer-supplied markup, or content the component does not author. So
+      // a new report is a real finding, not backlog. There is still no autofix:
+      // either introduce a class, or disable the line with that reason.
       files: ["**/*.module.css", "**/*.module.scss"],
       rules: {
-        "selector-max-type": [0, { severity: "warning" }],
+        "selector-max-type": 0,
       },
     },
   ],

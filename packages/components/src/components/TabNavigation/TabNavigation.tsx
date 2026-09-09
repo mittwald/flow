@@ -48,7 +48,7 @@ export const TabNavigation = flowComponent("TabNavigation", (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      wrapWith: <li />,
+      wrapWith: <li className={styles.item} />,
       className: styles.link,
       unstyled: true,
       children: dynamic((linkProps) => <LinkContent linkProps={linkProps} />),
@@ -57,7 +57,7 @@ export const TabNavigation = flowComponent("TabNavigation", (props) => {
 
   return (
     <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
-      <ul ref={listRef}>
+      <ul className={styles.list} ref={listRef}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

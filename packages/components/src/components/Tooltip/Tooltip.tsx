@@ -18,7 +18,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
     <ClearPropsContext>
       <Aria.Tooltip {...rest} className={rootClassName}>
         <Aria.OverlayArrow className={styles.tip}>
-          <svg viewBox="0 0 8 8">
+          <svg className={styles.tipIcon} viewBox="0 0 8 8">
             <path d="M0 0 L4 4 L8 0" />
           </svg>
         </Aria.OverlayArrow>

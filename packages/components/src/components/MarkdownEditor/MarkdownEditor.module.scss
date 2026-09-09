@@ -49,7 +49,9 @@
     display: contents;
   }
 
-  textarea,
+  /* The inner text-area element is react-aria's, but Flow's TextArea puts a
+     class on it — select through that class instead of the element type. */
+  :global(.flow--text-area--input),
   .markdown {
     @include scrollbar.scrollbar;
 
@@ -69,7 +71,7 @@
   }
 
   &.mode-preview {
-    textarea {
+    :global(.flow--text-area--input) {
       position: absolute;
       opacity: 0;
       pointer-events: none;
@@ -81,23 +83,23 @@
 
   /* States */
 
-  &:has(textarea:hover) .toolbar {
+  &:has(:global(.flow--text-area--input:hover)) .toolbar {
     background-color: var(--form-control--background-color--hover);
   }
 
-  &:has(textarea[data-invalid]) .toolbar,
-  &:has(textarea[data-invalid]) .markdown {
+  &:has(:global(.flow--text-area--input[data-invalid])) .toolbar,
+  &:has(:global(.flow--text-area--input[data-invalid])) .markdown {
     background-color: var(--form-control--background-color--invalid);
     border-color: var(--form-control--border-color--invalid);
   }
 
-  &:has(textarea[data-focused="true"]) .toolbar,
-  &:has(textarea[data-focused="true"]) .markdown {
+  &:has(:global(.flow--text-area--input[data-focused="true"])) .toolbar,
+  &:has(:global(.flow--text-area--input[data-focused="true"])) .markdown {
     background-color: var(--form-control--background-color--focused);
     border-color: var(--form-control--border-color--focused);
   }
 
-  &:has(textarea[data-disabled]).mode-editor .toolbar {
+  &:has(:global(.flow--text-area--input[data-disabled])).mode-editor .toolbar {
     background-color: var(--form-control--background-color--disabled);
     border-color: var(--form-control--border-color--disabled);
   }

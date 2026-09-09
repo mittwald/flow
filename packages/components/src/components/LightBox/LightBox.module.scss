@@ -1,14 +1,9 @@
 .lightBox {
-  > div {
-    position: fixed;
-    height: var(--visual-viewport-height);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-
-    > div {
+  /* Overlay.module.scss lays the viewport out. */
+  > :global(.flow--overlay--viewport) {
+    /* react-aria's own modal wrapper — no className from Flow, so its
+       default `react-aria-Modal` class is the handle. */
+    > :global(.react-aria-Modal) {
       display: flex;
       justify-content: center;
       width: inherit;
@@ -27,6 +22,8 @@
   .content {
     overflow: auto;
 
+    // The image is a consumer child — Flow `Image` or a bare `<img>`.
+    // stylelint-disable-next-line selector-max-type -- bare `<img>` has no class
     > img {
       width: 100%;
     }

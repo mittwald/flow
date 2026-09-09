@@ -17,6 +17,9 @@
   > :global(.flow--code-block),
   > :global(.flow--file-card),
   > :global(.flow--flex),
+  /* Flow's react-hook-form `Form` renders a class-less `<form>` — hence the
+     element selector next to the `flow--*` classes. */
+  /* stylelint-disable selector-max-type -- no class on `Form`'s element */
   > :global(.flow--form-field),
   > :global(.flow--labeled-value),
   > :global(.flow--list),
@@ -28,6 +31,7 @@
   > form {
     align-self: stretch;
   }
+  /* stylelint-enable selector-max-type */
 
   &.row {
     flex-flow: row wrap;
@@ -83,6 +87,9 @@
     }
   }
 
+  /* prism-react-renderer renders this `<pre>` inside react-live; no prop
+     reaches it. */
+  /* stylelint-disable-next-line selector-max-type -- third-party element */
   .editor pre {
     white-space: pre !important;
     padding: 0 !important;
@@ -119,7 +126,7 @@
   display: flex;
   justify-content: center;
 
-  button {
+  .toggleCode {
     padding-block: var(--size-px--s);
   }
 }

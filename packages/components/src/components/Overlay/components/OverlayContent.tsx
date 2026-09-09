@@ -83,7 +83,10 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
   return (
     <UNSAFE_PortalProvider getContainer={getOverlayContainer}>
       <Aria.ModalOverlay {...restProps} className={className}>
-        <DivView>
+        {/* The centering viewport between the backdrop and react-aria's modal
+            wrapper. Classed so Modal/OffCanvas/LightBox can position it
+            without selecting a bare `div`. */}
+        <DivView className={styles.viewport}>
           <Aria.Modal>
             <Suspense fallback={<Fallback />}>
               <Aria.Dialog aria-labelledby={ariaLabelledBy}>

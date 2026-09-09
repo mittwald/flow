@@ -52,6 +52,8 @@
 }
 
 .menuItem {
+  // The tab's children are the consumer's; a `Text` child renders this span.
+  // stylelint-disable-next-line selector-max-type -- consumer children
   > span {
     display: flex;
     align-items: center;

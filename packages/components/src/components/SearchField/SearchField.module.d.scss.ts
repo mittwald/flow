@@ -4,7 +4,7 @@ declare const classNames: {
   readonly searchIcon: "searchIcon";
   readonly kbd: "kbd";
   readonly inputContainer: "inputContainer";
-  readonly readonly: "readonly";
   readonly input: "input";
+  readonly readonly: "readonly";
 };
 export default classNames;
