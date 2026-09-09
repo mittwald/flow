@@ -1,0 +1,112 @@
+---
+title: Leerzustand
+---
+
+Der Leerzustand ist für viele User der erste Kontakt mit einem Objekttyp – die
+Liste ist leer, weil sie noch nie etwas enthalten hat. Er ist deshalb keine
+Fehlermeldung, sondern der Einstieg: er erklärt, wofür es das gibt, und bietet
+den Weg dorthin an.
+
+Die [IllustratedMessage](/components/content/illustrated-message) trägt Icon,
+Überschrift, Text und Aktion.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="leerzustand" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Überall, wo etwas fehlen kann: als `emptyView` einer
+[List](/components/list/list), auf einer Seite, deren Kontext noch nicht
+eingerichtet ist, in einem Bereich ohne Inhalt.
+
+**Nicht verwenden**, wenn
+
+- eine Suche oder ein Filter kein Ergebnis liefert und dies der einzige Grund
+  ist. Dann lautet die Aussage „Keine Treffer“ und die Aktion „Filter
+  zurücksetzen“ – nicht „Lege dein erstes Objekt an“, wo es zwanzig gibt.
+- Daten noch geladen werden. Dafür gibt es Skeletons; ein Leerzustand, der kurz
+  aufblitzt und dann von Inhalt ersetzt wird, ist eine Falschaussage.
+- ein Fehler aufgetreten ist. Leer und kaputt sind verschiedene Zustände und
+  brauchen verschiedene Texte.
+
+---
+
+# Warum diese Struktur
+
+**Die Überschrift ist eine Aufforderung, keine Feststellung.** „Erste
+E-Mail-Adresse anlegen“ statt „Keine E-Mail-Adressen vorhanden“. Dass nichts da
+ist, sieht man.
+
+**Der Text erklärt den Nutzen, nicht die Leere.** Wozu ist dieser Objekttyp da,
+was kann man damit? Für viele ist das die einzige Erklärung, die sie je
+bekommen.
+
+**Die Aktion ist dieselbe wie in der Liste darüber.** Derselbe Wortlaut,
+dasselbe Ziel. Zwei Formulierungen für denselben Weg lassen zwei Wege vermuten.
+
+**Ein Icon, keine Illustration je Fall.** Es zeigt den Objekttyp und ist
+dasselbe, das der Objekttyp überall sonst trägt.
+
+**Kein Alarm.** Ein leerer Zustand ist normal. Warnfarben verwandeln einen
+Einstieg in ein Problem.
+
+---
+
+# Varianten und Abwandlung
+
+## Für Filter ohne Treffer
+
+Leer und _gefiltert leer_ sind verschiedene Zustände. Hier ist der Objekttyp
+nicht neu, sondern nur gerade ausgeblendet: die Überschrift stellt fest statt
+aufzufordern, und die Aktion räumt den Filter weg, statt etwas anzulegen.
+
+<LiveCodeEditor example="leerzustand-filter" editorCollapsed />
+
+## Für einen wartenden Zustand
+
+Wird gerade etwas bereitgestellt, sagt der Leerzustand, worauf gewartet wird und
+wie lange das ungefähr dauert. Er bietet **keine** Aktion an – es gibt nichts zu
+tun, und ein Button, der daran nichts ändert, verspricht das Gegenteil.
+
+<LiveCodeEditor example="leerzustand-warten" editorCollapsed />
+
+## Wenn eine Voraussetzung fehlt
+
+Manchmal ist die Sammlung nicht leer, weil noch niemand etwas angelegt hat,
+sondern weil es **noch nicht geht**: E-Mail-Adressen brauchen zuerst eine
+Domain. Dann benennt die Überschrift nicht das eigene Objekt, sondern die
+Voraussetzung, und die Aktion führt dorthin — nicht ins eigene Anlegen, das
+gerade fehlschlagen würde.
+
+<LiveCodeEditor example="leerzustand-voraussetzung" editorCollapsed />
+
+## Wenn die Funktion nicht zur Verfügung steht
+
+Fehlt der Anspruch — ein Tarif, ein Servertyp, eine Freigabe — gibt es hier
+keinen Weg vorwärts. Der Zustand sagt, woran es liegt und was ihn auflösen
+würde, und die einzige Aktion führt **hinaus**. Das ist der einzige Leerzustand
+ohne Angebot.
+
+<LiveCodeEditor example="leerzustand-nicht-verfuegbar" editorCollapsed />
+
+## Wenn die Daten von selbst kommen
+
+Messwerte, Auswertungen, Statistiken: es ist nichts zu tun, es dauert nur. Der
+Zustand sagt, **dass** gemessen wird und **wie lange** es dauert, und hebt
+beides im Satz hervor. Keine Aktion — auch kein „Aktualisieren", das nichts
+beschleunigt.
+
+<LiveCodeEditor example="leerzustand-messung" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Ohne Aktion.** Wenn das Anlegen woanders passiert oder von etwas anderem
+abhängt, entfällt der Button und der Text sagt, was zuerst zu tun ist.
+
+**Als ganze Seite.** Ist der Kontext selbst noch nicht eingerichtet, füllt der
+Leerzustand die Seite statt einer Liste – mit demselben Aufbau.

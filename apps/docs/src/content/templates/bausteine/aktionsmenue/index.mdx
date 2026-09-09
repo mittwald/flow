@@ -1,0 +1,93 @@
+---
+title: Aktionsmenü
+---
+
+Alles, was man mit einem Objekt tun kann, sammelt sich an einer Stelle: einem
+[ContextMenu](/components/actions/context-menu) hinter einem Button. Jeder
+Eintrag öffnet ein [Overlay](/templates/overlays/formular-overlay) oder löst
+direkt eine Aktion aus.
+
+Das Menü ist der Ort für das Löschen — bei jedem Objekt, das man über eine Liste
+erreicht. Es steht dort, wo auch die anderen Aktionen stehen, und wird durch ein
+[Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay) abgesichert.
+
+Die Ausnahme ist der Container, in dem man sich gerade befindet — ein Projekt,
+eine Organisation, das eigene Profil. Über ihm gibt es keine Liste, an deren
+Zeile ein Menü hängen könnte; sein Löschen bekommt deshalb einen eigenen Bereich
+als letzten Abschnitt der Einstellungsseite.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="aktionsmenue" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Am Kopf einer [Detailseite](/templates/seiten/detailseite) für alles, was auf
+das ganze Objekt wirkt, und an jedem
+[Listeneintrag](/templates/bausteine/listeneintrag).
+
+**Nicht verwenden**, wenn
+
+- es genau eine Aktion gibt. Ein Menü mit einem Eintrag versteckt sie hinter
+  einem zusätzlichen Klick – dann ein Button.
+- die Aktion zu einem Bereich gehört. Sie steht in dessen Kopfzeile, nicht im
+  Menü der Seite. Häufig gebrauchte Bereichsaktionen dürfen zusätzlich als
+  Schnellzugriff im Menü auftauchen.
+
+---
+
+# Warum diese Struktur
+
+**Jeder Eintrag ist ein Verb.** „Bearbeiten“, „Umbenennen“, „Löschen“ – nicht
+„Einstellungen“ oder „Optionen“. Was passiert, muss vor dem Klick klar sein.
+
+**Icon und Text zusammen.** Das Icon macht bekannte Aktionen auffindbar, ohne zu
+lesen; der Text macht sie eindeutig. Icons ohne Text sind es nicht.
+
+**Das Löschen steht unten — und sonst nichts.** Immer an derselben Stelle, damit
+es nicht versehentlich statt der Aktion darüber getroffen wird. Eine farbliche
+Warnung gibt es nicht: `MenuItem` hat keine Farb-Prop, und mStudio zeichnet
+keinen Menüeintrag rot aus. Die Absicherung leistet allein das
+Bestätigungs-Overlay danach.
+
+**Was gerade nicht geht, bleibt trotzdem anklickbar.** Ein `MenuItem` hat keinen
+Platz für eine Begründung — deshalb sitzt sie nicht im Menü, sondern in dem
+Overlay, das der Eintrag öffnet: dort ist die Aktion deaktiviert **und** der
+Grund steht daneben, siehe
+[Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay). Ein Eintrag,
+der je nach Zustand verschwindet, wäre die schlechtere Wahl: das Menü ändert
+seine Länge, und die Positionen der übrigen Einträge wandern.
+
+**Am Listeneintrag dieselben Einträge wie auf der Detailseite.** Was in der
+Liste geht, geht auf der Detailseite auch – sonst ist nicht klar, wo man suchen
+muss.
+
+---
+
+# Varianten und Abwandlung
+
+## Am Listeneintrag
+
+Die [ListItemView](/components/list/list-item-view) stellt den Auslöser selbst –
+das `ContextMenu` wird nur als Kind übergeben, ohne `ContextMenuTrigger` und
+ohne eigenen Button. Die Einträge sind dieselben wie im Menü der Detailseite.
+
+<LiveCodeEditor example="aktionsmenue-listeneintrag" editorCollapsed />
+
+## Als Anlege-Menü
+
+Gibt es mehrere Wege, ein Objekt anzulegen, sitzt dasselbe Menü hinter dem
+Anlegen-Button in der `ActionGroup` einer Liste. Der Button trägt dann das
+gemeinsame Verb, das Menü die Wege.
+
+<LiveCodeEditor example="aktionsmenue-anlegen" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Ein Eintrag kann ein Badge tragen** — „Aktivitäten Beta" kennzeichnet eine
+Funktion, die noch nicht fertig ist. Trenner dagegen nutzt mStudio nicht: ein
+Menü mit sieben Einträgen bleibt eine ununterbrochene Liste.

@@ -1,0 +1,85 @@
+---
+title: Overlay, das nur zeigt
+---
+
+Nicht jedes Overlay verlangt eine Entscheidung. Manche zeigen etwas, das auf der
+Seite keinen Platz hat: die Einzelheiten eines Protokolleintrags, das Log eines
+Cronjob-Durchlaufs, die vollständige Liste hinter einer Zusammenfassung — oder
+ein Geheimnis, das genau jetzt einmal zu sehen ist.
+
+Sie haben genau eine Aktion, und die ist „Schließen". In mStudio erkennt man sie
+daran: alle nutzen denselben `CloseButton`.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="anzeige-overlay" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Wenn Inhalt zu einem Objekt gehört, aber die Seite sprengen würde, und wenn
+daraus nichts folgt: Details, Protokolle, Vorschauen, Belege.
+
+**Nicht verwenden**, wenn
+
+- etwas eingegeben wird. Dann ist es ein
+  [Formular-Overlay](/templates/overlays/formular-overlay).
+- etwas zu entscheiden ist. Dann ist es ein
+  [Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay) — auch wenn
+  die Entscheidung „nein" heißen darf.
+- der Inhalt immer gebraucht wird. Was jeder Besucher der Seite sehen will, ist
+  ein [Bereich](/templates/bereiche/stammdaten-bereich) und kein Overlay.
+
+---
+
+# Warum diese Struktur
+
+**Eine Aktion, und die schließt.** Kein „Abbrechen", denn es gibt nichts
+abzubrechen, und kein „OK", denn es wird nichts bestätigt. Zwei Buttons würden
+eine Entscheidung suggerieren, die keine ist.
+
+**Mittig, nicht `offCanvas`.** Das Overlay ist so groß wie sein Inhalt und
+verschwindet wieder. Ein einfahrendes Panel kündigt Arbeit an.
+
+**Die Überschrift benennt den Gegenstand, nicht die Handlung.** „Durch mittwald
+verwalteter A-Record gesetzt" — der Satz aus der Zeile, die man angeklickt hat.
+So ist klar, dass man den richtigen Eintrag erwischt hat.
+
+**Metadaten oben, Inhalt darunter.** Wer, wann, woran — als Reihe von
+[LabeledValue](/components/content/labeled-value). Erst darunter das, wofür man
+geöffnet hat. Umgekehrt liest man Werte ohne zu wissen, worauf sie sich
+beziehen.
+
+**Werte, die man weiterverwendet, sind kopierbar.** Ein
+[CopyButton](/templates/bausteine/kopierbarer-wert) an der Zelle — das Overlay
+ist oft der einzige Ort, an dem der Wert überhaupt steht.
+
+---
+
+# Varianten und Abwandlung
+
+## Einmal-Anzeige eines Geheimnisses
+
+Der eine Fall, in dem ein Overlay **nach** dem Anlegen erscheint: das Ergebnis
+enthält etwas, das nicht wieder abgerufen werden kann — ein API-Token, die
+Recovery-Codes der Zwei-Faktor-Anmeldung, ein Auth-Code für einen Domainumzug.
+
+Es beginnt mit dem Warnsatz, nicht mit dem Wert: **erst** muss klar sein, dass
+es keine zweite Gelegenheit gibt. Und es ist die Ausnahme von der Regel, dass
+nach einem erfolgreichen Anlegen keine Meldung kommt.
+
+<LiveCodeEditor example="anzeige-overlay-einmalig" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Als `offCanvas` für lange Inhalte.** Ein Cronjob-Log oder eine Vorschau von
+zweihundert Domains fährt seitlich ein und scrollt für sich. Die einzelne
+Schließen-Aktion bleibt.
+
+**Mit einer Aktion, die weiterführt.** Enthält das Overlay einen Verweis auf das
+betroffene Objekt („Zur Ressource springen"), steht der als Link im Inhalt —
+nicht als zweiter Button in der Aktionsleiste, sonst ist die Aktionsleiste
+wieder eine Entscheidung.

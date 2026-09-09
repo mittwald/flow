@@ -1,0 +1,95 @@
+---
+title: Seite mit Tab-Navigation
+---
+
+Wenn ein Objekt oder ein Themenbereich mehr Inhalt trägt, als auf eine Seite
+passt, wird er auf gleichrangige Unterseiten verteilt. Die
+[TabNavigation](/components/navigation/tab-navigation) sitzt oben in der
+[LayoutCard](/components/structure/layout-card) und bleibt beim Wechsel stehen –
+der Kontext, in dem User sich befinden, ändert sich nicht.
+
+Die Tabs entstehen aus den Unterseiten selbst. Es gibt keine separate Liste, in
+die eine neue Unterseite eingetragen werden müsste: wer eine Unterseite anlegt,
+hat den Tab damit angelegt.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor
+  example="seite-mit-tab-navigation"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+---
+
+# Wann verwenden
+
+Auf zwei Ebenen, mit derselben Struktur:
+
+- **Über einer Detailseite** – ein Objekt, dessen Bereiche sich zu Gruppen
+  bündeln lassen: Allgemein, Weiterleitungen, Autoresponder.
+- **Über mehreren Übersichtsseiten** – fachlich verwandte Objekttypen unter
+  einem Dach: E-Mail-Adressen, Weiterleitungen, Delivery-Boxen.
+
+**Nicht verwenden**, wenn
+
+- es nur zwei Tabs gäbe und beide zusammen auf eine Seite passen. Ein Tab, der
+  drei Werte zeigt, kostet einen Klick und spart nichts.
+- die Unterseiten aufeinander aufbauen und in einer Reihenfolge durchlaufen
+  werden müssen. Tabs sind gleichrangig; ein Ablauf mit Reihenfolge gehört in
+  ein [mehrstufiges Overlay](/templates/overlays/mehrstufiges-overlay).
+- der Wechsel den Kontext verlässt. Führt ein Tab auf ein anderes Objekt, ist es
+  Navigation, keine Tab-Navigation.
+
+---
+
+# Warum diese Struktur
+
+**Die Tabs stehen innerhalb der LayoutCard, nicht darüber.** Sie gehören zum
+Inhalt, nicht zur Seitenhierarchie. Über der Karte stehen Breadcrumb und Titel –
+sie sagen, wo man ist; die Tabs sagen, welchen Ausschnitt man sieht.
+
+**Der erste Tab ist der, den die meisten brauchen.** Er wird beim Aufruf der
+Seite ohne weiteren Pfad angezeigt. „Allgemein“ ist deshalb fast immer der erste
+– nicht aus Konvention, sondern weil dort steht, wofür User die Seite öffnen.
+
+**Jeder Tab ist eine eigene Adresse.** Der Wechsel ist Navigation, kein Zustand
+innerhalb einer Seite: Zurück-Button, Neuladen und geteilte Links funktionieren,
+und ein Tab kann seine Daten für sich laden.
+
+**Ein Tab trägt eigene Aktionen, kein Tab trägt die Aktionen der anderen.** Was
+über alle Tabs hinweg gilt – umbenennen, löschen – steht im Aktionsmenü der
+Seite über der Karte.
+
+---
+
+# Varianten und Abwandlung
+
+## Auf Bereichsebene, über mehreren Übersichtsseiten
+
+Dieselbe Struktur eine Ebene höher: nicht die Unterseiten eines Objekts, sondern
+fachlich verwandte Objekttypen unter einem Dach. Der erste Tab ist der, den die
+meisten brauchen.
+
+<LiveCodeEditor
+  example="tab-navigation-bereichsebene"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+## Weitere Abwandlungen
+
+**Alert-Icon an einem Tab.** Trägt ein Tab einen Zustand, der Aufmerksamkeit
+verlangt, bekommt er ein Alert-Icon. Am ersten Tab ist es überflüssig – der ist
+beim Öffnen ohnehin sichtbar.
+
+**Tabs innerhalb eines Bereichs.** Für kleine, gleichartige Varianten desselben
+Inhalts – IMAP, POP3, SMTP – sind [Tabs](/components/structure/tabs) innerhalb
+einer Section das richtige Mittel. Sie sind keine Navigation, ändern die Adresse
+nicht und gehören nicht in die TabNavigation.
+
+**Verschachtelung.** Eine Ebene Tabs auf der Bereichsseite und eine weitere auf
+der Detailseite darunter ist üblich und funktioniert. Eine dritte Ebene nicht
+mehr – dann fehlt der Gliederung eine Ebene weiter oben.

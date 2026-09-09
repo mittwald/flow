@@ -1,0 +1,82 @@
+---
+title: Bestätigungs-Overlay
+---
+
+Vor einer Aktion, die sich nicht zurücknehmen lässt, steht ein Overlay, das
+erklärt, was passiert – und was danach nicht mehr geht. Es enthält kein
+Formular: es gibt nichts einzugeben, nur zu entscheiden.
+
+Das ist das Gegenstück zum
+[Formular-Overlay](/templates/overlays/formular-overlay) und unterscheidet sich
+strukturell von ihm: kein `offCanvas`, kein Formular, kein Absenden-Button.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="bestaetigungs-overlay" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Wenn eine Aktion Daten unwiederbringlich entfernt, etwas Kostenpflichtiges
+beendet oder andere Objekte mitreißt – löschen, kündigen, entfernen, verlassen,
+Verknüpfung auflösen.
+
+**Nicht verwenden**, wenn
+
+- die Aktion umkehrbar ist. Ein Schalter, der sich wieder umlegen lässt, braucht
+  keine Rückfrage; sie wird sonst weggeklickt, und die Rückfrage vor der
+  gefährlichen Aktion gleich mit.
+- vor der Bestätigung noch etwas anzugeben ist – ein Grund, ein Zieldatum, eine
+  Ersatzzuweisung. Dann ist es ein
+  [Formular-Overlay](/templates/overlays/formular-overlay).
+
+---
+
+# Warum diese Struktur
+
+**Kein `offCanvas`.** Das Overlay erscheint mittig und ist so groß wie sein
+Text. Ein einfahrendes Panel würde eine Eingabe ankündigen, die nicht kommt.
+
+**Der Text benennt die Folgen, nicht die Aktion.** Dass gelöscht wird, steht
+schon in der Überschrift. Der Text sagt, was mit den Daten geschieht und was
+davon abhängt – „Alle E-Mails in diesem Postfach werden gelöscht und können
+nicht wiederhergestellt werden.“
+
+**Abhängigkeiten stehen im Overlay, nicht danach.** Hängt etwas an dem Objekt,
+wird es hier aufgezählt. Nach der Bestätigung ist die Information wertlos.
+
+**Der bestätigende Button trägt das Verb, nicht „OK“.** „Löschen“, nicht „Ja“.
+Er ist die einzige Stelle, an der die Entscheidung noch einmal benannt wird, und
+wird als gefährliche Aktion ausgezeichnet.
+
+**Was nicht geht, wird erklärt, nicht nur verhindert.** Lässt sich ein Objekt
+nicht löschen, weil etwas daran hängt, ist der Button deaktiviert **und** der
+Grund steht im Overlay. Ein grundlos toter Button ist eine Sackgasse.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Eingabe der Bestätigung
+
+Bei besonders folgenreichen Aktionen – ein ganzes Projekt löschen – wird der
+Name des Objekts abgetippt. Das ist die eine Stelle, an der ein
+Bestätigungs-Overlay ein Feld enthält; alles andere bleibt gleich.
+
+<LiveCodeEditor example="bestaetigungs-overlay-eingabe" editorCollapsed />
+
+## Wenn die Aktion nicht möglich ist
+
+Hängt etwas am Objekt, bleibt der Button sichtbar und deaktiviert – **und** das
+Overlay nennt den Grund und was zuerst zu tun ist. Ein grundlos toter Button ist
+eine Sackgasse.
+
+<LiveCodeEditor example="bestaetigungs-overlay-blockiert" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Kündigen statt löschen.** Endet etwas erst zu einem Termin, benennt das
+Overlay diesen Termin und sagt, was bis dahin weiter funktioniert.

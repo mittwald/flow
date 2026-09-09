@@ -1,0 +1,80 @@
+---
+title: Alerts am Seitenkopf
+---
+
+Dauerhafte Zustände eines Objekts – nicht verifiziert, abgelaufen, gesperrt,
+Empfang deaktiviert – stehen als Block aus [Alerts](/components/status/alert)
+über dem ersten Bereich einer [Detailseite](/templates/seiten/detailseite). Sie
+sind das Erste, was gelesen wird, weil sie erklären, warum die Seite darunter
+sich nicht so verhält, wie sie sollte.
+
+Gemeint sind Zustände, nicht Rückmeldungen. Was nach einer Aktion einmalig
+erscheint, gehört an die Aktion, nicht an den Seitenkopf.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="alerts-bereich" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Wenn ein Zustand fortbesteht, bis jemand etwas dagegen tut, und er die Nutzung
+der ganzen Seite betrifft.
+
+**Nicht verwenden**, wenn
+
+- der Zustand nur einen Bereich betrifft. Dann steht der Alert in diesem
+  Bereich, wo auch die Aktion dagegen steht.
+- es eine Rückmeldung auf eine gerade ausgeführte Aktion ist. Die gehört an die
+  Aktion oder in das Overlay, aus dem sie kam.
+- der Zustand normal ist. „Alles in Ordnung“ als Alert stumpft ab – am Ende
+  werden auch die echten überlesen.
+
+---
+
+# Warum diese Struktur
+
+**Über dem ersten Bereich, nicht dazwischen.** Ein Alert mitten im Stapel wird
+beim Überfliegen übersehen, und er sagt dann etwas über die ganze Seite an einer
+Stelle, an der es nach einem Bereich aussieht.
+
+**Jeder Alert nennt eine Ursache und einen Ausweg.** Was ist, warum, und was zu
+tun ist – letzteres als Aktion im Alert selbst, nicht als Verweis auf eine
+Stelle, die man suchen muss.
+
+**Derselbe Zustand erscheint überall gleich.** Ein Zustand mit `danger` oder
+`warning` muss auf allen drei Oberflächen auftauchen: als Alert auf der
+Detailseite, als [AlertBadge](/components/status/alert-badge) am Listeneintrag
+und als Alert-Icon an einem Tab, der nicht der erste ist. Alle drei kommen aus
+derselben Quelle, damit sie nicht auseinanderlaufen.
+
+**Höchste Dringlichkeit zuerst.** `danger` vor `warning` vor `info`. Innerhalb
+einer Stufe die Reihenfolge, in der sich die Zustände beheben lassen.
+
+**Wenige.** Drei Alerts sind viele. Wer regelmäßig mehr sieht, hat kein
+Alert-Problem, sondern ein Zustandsproblem.
+
+---
+
+# Varianten und Abwandlung
+
+## Ohne Aktion, wenn nur gewartet wird
+
+Läuft gerade etwas und ist nichts zu tun, hat der Alert keine Aktion – dafür
+eine Angabe, worauf gewartet wird und wie lange das ungefähr dauert. Ein Button,
+der am Warten nichts ändert, verspricht das Gegenteil.
+
+<LiveCodeEditor example="alerts-bereich-warten" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Auf dem Dashboard.** Zustände, die den ganzen Kontext betreffen – eine offene
+Rechnung, ein auslaufender Vertrag – stehen genauso über der ersten Kachel des
+[Dashboards](/templates/seiten/dashboard).
+
+**Als AccentBox statt Alert.** Ein Hinweis, der nichts verlangt und nur
+einordnet, ist kein Alert. Dafür gibt es die
+[AccentBox](/components/structure/accent-box).

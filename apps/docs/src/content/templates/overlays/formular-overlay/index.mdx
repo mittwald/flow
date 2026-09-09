@@ -1,0 +1,95 @@
+---
+title: Formular-Overlay
+---
+
+Anlegen und Bearbeiten passieren in mStudio nicht auf einer eigenen Seite,
+sondern in einem [Modal](/components/overlays/modal) über der Seite, von der aus
+sie gestartet wurden. Der Kontext bleibt sichtbar, und nach dem Speichern steht
+man wieder dort, wo man war – ohne Rücksprung, ohne Zwischenseite.
+
+Anlegen und Bearbeiten sind dasselbe Template. Sie unterscheiden sich in
+Überschrift, Button-Beschriftung und Vorbelegung der Felder, nicht im Aufbau.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="formular-overlay" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+Für jede Eingabe, die zu einem Objekt gehört: anlegen, bearbeiten,
+konfigurieren.
+
+**Nicht verwenden**, wenn
+
+- nichts einzugeben ist und nur bestätigt werden soll. Dann ist es ein
+  [Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay) – ohne
+  Formular und ohne Absenden-Button.
+- die Eingabe von einer Auswahl abhängt, die vorher getroffen werden muss. Dann
+  ist es ein [mehrstufiges Overlay](/templates/overlays/mehrstufiges-overlay).
+- das Formular so lang ist, dass es nur mit mehrfachem Scrollen auszufüllen ist.
+  Das ist ein Hinweis darauf, dass zu viel auf einmal verlangt wird – aufteilen
+  in mehrere Schritte oder in mehrere Bereiche der Detailseite.
+
+---
+
+# Warum diese Struktur
+
+**`offCanvas` entscheidet die Länge, nicht das Verb.** Ein Formular, das mit der
+Zahl seiner Felder wächst und für sich scrollen muss, fährt von der Seite ein.
+Ein Formular, das auf den Schirm passt, erscheint mittig und ist so groß wie
+sein Inhalt — auch beim Anlegen. In mStudio ist das E-Mail-Adresse-Anlegen ein
+offCanvas, das API-Token-Anlegen mit drei Feldern ein mittiges Modal.
+
+**Die Überschrift benennt Verb und Objekt.** „E-Mail-Adresse anlegen“, nicht
+„Neu“. Sie ist oft der einzige Hinweis darauf, worauf sich das Formular bezieht
+– der Auslöser ist unter dem Overlay verdeckt.
+
+**Der Absenden-Button trägt dasselbe Verb wie die Überschrift.** „Anlegen“ unter
+„E-Mail-Adresse anlegen“, „Speichern“ unter „E-Mail-Adresse bearbeiten“. Ein
+generisches „OK“ zwingt zum Zurücklesen.
+
+**Das Overlay schließt erst, wenn gespeichert ist.** Nicht beim Klick. Bis dahin
+zeigt der Button seinen Ladezustand, und ein Fehler erscheint im Overlay an dem
+Feld, das ihn ausgelöst hat – nicht auf der Seite dahinter, wo niemand ihn
+sieht.
+
+**Markiert wird das optionale Feld, nicht das Pflichtfeld.** Flow hängt den
+Zusatz „(optional)" an das [Label](/components/content/label) jedes Feldes, das
+**nicht** `isRequired` ist; bei einem [Field](/components/react-hook-form/field)
+genügt dafür eine `required`-Regel. Die Folge für den Alltag: ein Feld mit
+Vorgabewert, das trotzdem ausgefüllt werden muss, braucht die Regel — sonst
+steht „(optional)" daran, obwohl es das nicht ist.
+
+---
+
+# Varianten und Abwandlung
+
+## Bearbeiten statt Anlegen
+
+Dieselbe Struktur, drei Unterschiede: die Felder sind vorbelegt, die Überschrift
+heißt „… bearbeiten", und der Button heißt „Speichern". Deshalb sind Anlegen und
+Bearbeiten ein Template und nicht zwei.
+
+<LiveCodeEditor example="formular-overlay-bearbeiten" editorCollapsed />
+
+## Klein, für ein einzelnes Feld
+
+Bei ein oder zwei Feldern lohnt das einfahrende Panel nicht: `size="s"` ohne
+`offCanvas` ist so groß wie sein Inhalt und wirkt wie eine Rückfrage, nicht wie
+ein Formular.
+
+<LiveCodeEditor example="formular-overlay-klein" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Ein Bereich statt eines Overlays.** Wird ein Formular ständig gebraucht –
+mehrmals je Besuch der Seite – kostet das Öffnen mehr, als der erhaltene Kontext
+wert ist. Dann gehört es direkt in einen Bereich der Detailseite.
+
+**Abschnitte im Formular.** Ab etwa acht Feldern werden sie über
+Zwischenüberschriften gegliedert. Das ist der letzte Schritt vor der Aufteilung
+in mehrere Overlay-Stufen.

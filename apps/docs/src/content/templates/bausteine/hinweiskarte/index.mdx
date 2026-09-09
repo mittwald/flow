@@ -1,0 +1,76 @@
+---
+title: Hinweiskarte am Seitenfuß
+---
+
+Unter dem Inhalt einer Seite, außerhalb seiner Karte, steht manchmal ein
+Angebot: ein Umzugsservice bei den E-Mail-Adressen, ein KI-Baukasten bei den
+Apps, eine n8n-Integration bei den API-Token. Es gehört nicht zum Inhalt — es
+steht daneben, weil hier die Leute sind, für die es gemacht ist.
+
+In mStudio läuft das über den `PageBottom`-Slot der Route, nicht über den
+Seiteninhalt.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="hinweiskarte" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Für ein Angebot oder einen Hinweis, der zum Thema der Seite passt, aber nicht zu
+ihrer Aufgabe: ein kostenpflichtiger Zusatz, eine neue Integration, ein
+Programmierweg zum selben Ziel.
+
+**Nicht verwenden**, wenn
+
+- der Hinweis zum Arbeiten gebraucht wird. Was man wissen muss, um die Seite zu
+  benutzen, steht **im** Inhalt — als Einleitung, als
+  [Alert](/templates/bereiche/alerts-bereich) oder als
+  [FieldDescription](/components/content/label).
+- etwas zu tun ist. Ein Zustand, der eine Handlung verlangt, ist ein Alert am
+  Seitenkopf und keine Karte am Fuß.
+- die Seite schon eine trägt. Zwei Angebote unter einer Seite heben sich
+  gegenseitig auf.
+
+---
+
+# Warum diese Struktur
+
+**Eigene Karte, außerhalb der Inhaltskarte.** Der Abstand ist die Aussage: was
+hier steht, ist nicht Teil dessen, wofür man gekommen ist. In den Inhalt
+gerückt, wäre es ein Bereich und würde eine Zuständigkeit behaupten, die es
+nicht hat.
+
+**Unten, nicht oben.** Wer die Seite benutzt, soll erst fertig werden. Über dem
+Inhalt wäre es eine Unterbrechung, und Unterbrechungen gehören den Alerts.
+
+**Sie erklärt, bevor sie verlinkt.** Überschrift, ein Absatz, der den Nutzen
+benennt, dann der Weg. Eine Karte, die nur aus einem Link besteht, muss geraten
+werden.
+
+**Der Abschluss-Link steht am Ende.** Anders als bei der
+[Dashboard-Kachel](/templates/bausteine/dashboard-kachel) mit ihrer Kopfzeile
+folgt er hier der Leserichtung: erst der Grund, dann der Weg.
+
+**Kein Alarm, keine Warnfarbe.** Es ist ein Angebot. Wer es mit Alert-Farben
+bewirbt, verbraucht die Aufmerksamkeit, die den echten Zuständen zusteht — und
+lehrt die Leute, Alerts zu übersehen.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Bild.** Ein Screenshot oder eine Illustration rechts neben dem Text macht
+aus dem Hinweis eine Werbefläche. Angemessen für ein Produkt, unangemessen für
+einen technischen Weg.
+
+**Als [AccentBox](/components/structure/accent-box).** Für den sachlichen
+Hinweis auf einen Programmierweg — REST-API, Terraform, CLI — ist die
+zurückhaltendere Fläche richtiger als eine Karte, die wirbt.
+
+**Auf einer Detailseite.** Der Slot hängt an der Route, nicht an der Seitenform:
+auch unter einer [Detailseite](/templates/seiten/detailseite) kann eine
+Hinweiskarte stehen.
