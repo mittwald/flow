@@ -10,7 +10,7 @@ import {
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { use, useState, type ReactNode } from "react";
-import { test, type Mock } from "vitest";
+import { expect, test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { RouterProvider } from "react-aria-components";
 import {
@@ -20,6 +20,13 @@ import {
 } from "../SettingsProvider";
 import { FilterValue } from "./model/filter/FilterValue";
 import Content from "../Content";
+import { Table } from "./setupComponents/Table";
+import { TableHeader } from "./setupComponents/TableHeader";
+import { TableColumn } from "./setupComponents/TableColumn";
+import { TableBody } from "./setupComponents/TableBody";
+import { TableRow } from "./setupComponents/TableRow";
+import { TableCell } from "./setupComponents/TableCell";
+import { ColumnLayout } from "../ColumnLayout";
 import { Heading } from "../Heading";
 import { ContextMenu, MenuItem } from "../ContextMenu";
 
@@ -655,6 +662,67 @@ describe("Item rendering", () => {
       .toBeInTheDocument();
   });
 });
+
+/*
+ * `.list` needs `min-width: 0` now that it declares no containment (#2655):
+ * with neither, a list with unbreakable content pushes its own `Nfr` grid
+ * track open and equal columns stop being equal.
+ */
+test.each(["list", "tiles", "table"] as const)(
+  "does not blow out an equal-width grid track (%s view)",
+  async (viewMode) => {
+    await render(
+      <div style={{ width: 400 }}>
+        <ColumnLayout s={[1, 1]} gap="s">
+          <List aria-label="Wide" defaultViewMode={viewMode}>
+            <ListStaticData<Data> data={[{ num: 1 }]} />
+            <ListItem<Data> textValue={() => "wide"}>
+              {() => (
+                <span style={{ whiteSpace: "nowrap" }}>
+                  unbreakable-item-content-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </span>
+              )}
+            </ListItem>
+            <Table<Data>>
+              <TableHeader<Data>>
+                <TableColumn<Data>>
+                  Averyverylongcolumnheadingnobreaks
+                </TableColumn>
+                <TableColumn<Data>>
+                  Anotherverylongcolumnheadingnobreaks
+                </TableColumn>
+              </TableHeader>
+              <TableBody<Data>>
+                <TableRow<Data>>
+                  <TableCell<Data>>
+                    {() => "unbreakable-cell-content-aaaaaaaaaaaaaaaa"}
+                  </TableCell>
+                  <TableCell<Data>>
+                    {() => "unbreakable-cell-content-bbbbbbbbbbbbbbbb"}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </List>
+          <span data-testid="sibling">sibling</span>
+        </ColumnLayout>
+      </div>,
+    );
+    const sibling = page.getByTestId("sibling").element();
+    const listElement = sibling.previousElementSibling as HTMLElement;
+
+    // The items load asynchronously; measuring before they are in the DOM
+    // measures an empty list, which cannot blow anything out.
+    await vitest.waitUntil(() =>
+      listElement.textContent?.includes("unbreakable"),
+    );
+
+    expect(listElement.getBoundingClientRect().width).toBeCloseTo(
+      sibling.getBoundingClientRect().width,
+      0,
+    );
+  },
+);
 
 describe("Linked items", () => {
   const itemHref = `${location.origin}/domains/42`;
