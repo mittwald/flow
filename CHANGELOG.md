@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.30](https://github.com/mittwald/flow/compare/1.1.29...1.1.30) (2026-09-09)
+
+### Bug Fixes
+
+* **ci:** render every commit type in the changelog ([#3137](https://github.com/mittwald/flow/issues/3137)) ([8f28777](https://github.com/mittwald/flow/commit/8f287774fa61cffc66980c5c15ef1c75c15990b9))
+
 ## [1.1.29](https://github.com/mittwald/flow/compare/1.1.28...1.1.29) (2026-09-09)
 
 ### Bug Fixes
