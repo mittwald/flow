@@ -190,7 +190,8 @@ and commit the results.
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
-  week and merges them itself once CI and the visual suite are green — see
+  week and merges them itself once CI and the full visual and cross-version
+  suites are green — see
   [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
   deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
   closed PR only makes it come back next week.

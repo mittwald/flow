@@ -1,0 +1,107 @@
+# Tears down the preview apps of a Dependabot PR.
+#
+# The counterpart to `deploy-previews-dependabot.yml`, and it exists for the
+# same reason: Dependabot merges its own PRs, so the `closed` event is a
+# Dependabot-triggered run, where `secrets.*` comes from the Dependabot store
+# and the `MITTWALD_*` credentials are empty. That is not hypothetical — it is
+# what every Dependabot merge did until this pair existed, failing on "Missing
+# required environment variables" after the merge, where nobody looks.
+# `cleanup-previews.yml` now skips its steps for that actor and completes green
+# — this workflow is what its completion triggers, from the default branch, with
+# the secrets.
+#
+# Unlike the deploy side there is no conclusion to filter on: the cleanup run
+# reaches here having done nothing at all, which is the point.
+name: Cleanup Preview Apps (Dependabot)
+
+on:
+  workflow_run:
+    workflows: ["Cleanup Preview Apps"]
+    types:
+      - completed
+
+# See the deploy workflow: the two are keyed the same so that queuing this
+# cleanup cancels a deploy still in flight for the branch.
+concurrency:
+  group: preview-dependabot-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    # The actor test is the exact complement of `CLEAN_UP_HERE` in
+    # `cleanup-previews.yml`: a PR a person closes is cleaned up there, and only
+    # what Dependabot closed itself is left for this run.
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.actor.login == 'dependabot[bot]' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      startsWith(github.event.workflow_run.head_branch, 'dependabot/')
+
+    permissions:
+      contents: read
+      pull-requests: read # resolving the PR number for the branch
+
+    steps:
+      - name: Resolve the pull request
+        id: pr
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const run = context.payload.workflow_run;
+            const { owner, repo } = context.repo;
+
+            // `workflow_run.pull_requests` covers open PRs; by the time a
+            // cleanup is triggered the PR is closed, so the lookup is the normal
+            // path here rather than the fallback it is on the deploy side.
+            let number = run.pull_requests?.[0]?.number;
+            if (!number) {
+                const { data } = await github.rest.pulls.list({
+                    owner,
+                    repo,
+                    state: "closed",
+                    head: `${owner}:${run.head_branch}`,
+                    sort: "created",
+                    direction: "desc",
+                });
+                number = data[0]?.number;
+            }
+            if (!number) {
+                const reason = "no closed PR found for this branch";
+                core.info(`nothing to clean up: ${reason}`);
+                core.summary.addRaw(`Nothing to clean up for \`${run.head_branch}\`: ${reason}.`).write();
+                return;
+            }
+
+            core.setOutput("number", String(number));
+
+      - name: Checkout the default branch
+        if: steps.pr.outputs.number != ''
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v6
+
+      - name: Install pnpm
+        if: steps.pr.outputs.number != ''
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+
+      - name: Setup Node.js
+        if: steps.pr.outputs.number != ''
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.pr.outputs.number != ''
+        run: pnpm install --frozen-lockfile
+
+      - name: Cleanup preview environment
+        if: steps.pr.outputs.number != ''
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+        run: |
+          pnpm tsx dev/cleanup-review.ts

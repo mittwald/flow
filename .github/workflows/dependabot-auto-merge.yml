@@ -1,9 +1,10 @@
-# Auto-merges Dependabot PRs once the visual regression suite is green.
+# Auto-merges Dependabot PRs once the visual regression and cross-version suites
+# are green.
 #
 # Why this hangs off `workflow_run` instead of `pull_request`:
 #
-#   - `pull_request` on a Dependabot PR gets a READ-ONLY `GITHUB_TOKEN`, so it
-#     cannot comment.
+#   - `pull_request` fires when the PR changes, not when a suite finishes, so it
+#     never sees the verdict it is supposed to act on.
 #   - `pull_request_target` would give a write token to a run that checks out
 #     dependency code. This workflow never checks anything out.
 #   - `workflow_run` runs from the default branch with a write token and only
@@ -20,7 +21,10 @@ name: Dependabot auto-merge
 
 on:
   workflow_run:
-    workflows: ["Run Visual Regression Tests"]
+    # Both suites run unconditionally on a Dependabot PR, and either completing
+    # lands here — the one that arrives second is the run that finds them both
+    # green.
+    workflows: ["Run Visual Regression Tests", "Run Cross-Version Tests"]
     types:
       - completed
 
@@ -28,9 +32,11 @@ permissions: {}
 
 jobs:
   auto-merge:
-    # Visual is the gate this workflow owns. The required `main` check is
-    # enforced by Dependabot when it processes the merge command, and by the
-    # ruleset, which does NOT grant Dependabot a bypass on status checks.
+    # Visual and cross-version are the gates this workflow owns: neither is a
+    # required status check, so nothing else stops a merge over a red one. The
+    # required `main` check is enforced by Dependabot when it processes the merge
+    # command, and by the ruleset, which does NOT grant Dependabot a bypass on
+    # status checks.
     if: >
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'pull_request' &&
@@ -43,6 +49,7 @@ jobs:
       cancel-in-progress: false
 
     permissions:
+      actions: read # reads the gate suites' runs for the PR head
       contents: read
       pull-requests: write # comments the merge command
 
@@ -122,6 +129,46 @@ jobs:
             );
             if (major) {
                 return decline("the PR carries a major version update");
+            }
+
+            // The completion that triggered this run says nothing about the
+            // other suite, so check both against the PR head — including the one
+            // that just finished, whose verdict is read here rather than trusted
+            // from the payload.
+            const gates = ["Run Visual Regression Tests", "Run Cross-Version Tests"];
+            const runsForHead = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+                owner,
+                repo,
+                head_sha: pr.head.sha,
+            });
+
+            for (const gate of gates) {
+                // One commit carries several runs of the same workflow: Dependabot
+                // applies its labels right after opening the PR, and every
+                // `labeled` event starts one that the concurrency group then
+                // cancels. Four of them, `created_at` equal to the second — so
+                // order by `id`, which is monotonic, and drop the superseded ones
+                // rather than let a cancelled sibling outvote the run that did
+                // the work. What is left is the newest run that means something:
+                // still going (wait for its own completion to land here),
+                // successful, or failed.
+                const [latest] = runsForHead
+                    .filter((candidate) => candidate.name === gate)
+                    .filter(
+                        (candidate) =>
+                            candidate.conclusion !== "cancelled" && candidate.conclusion !== "skipped",
+                    )
+                    .sort((a, b) => b.id - a.id);
+
+                if (!latest) {
+                    return decline(`${gate} has not run for ${pr.head.sha.slice(0, 7)}`);
+                }
+                if (latest.status !== "completed") {
+                    return decline(`${gate} is still ${latest.status}`);
+                }
+                if (latest.conclusion !== "success") {
+                    return decline(`${gate} concluded ${latest.conclusion}`);
+                }
             }
 
             // Every rebase produces a fresh run, so only skip a command that was
