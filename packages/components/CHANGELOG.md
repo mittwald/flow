@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.29](https://github.com/mittwald/flow/compare/1.1.28...1.1.29) (2026-09-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** update to stable v3 ([#3145](https://github.com/mittwald/flow/issues/3145)) ([8c56d85](https://github.com/mittwald/flow/commit/8c56d85d471d16ed34217df14505a6442684e9b2))
+
 ## [1.1.28](https://github.com/mittwald/flow/compare/1.1.27...1.1.28) (2026-09-09)
 
 ### Bug Fixes
