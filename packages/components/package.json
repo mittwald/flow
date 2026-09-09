@@ -79,7 +79,7 @@
     "@lezer/common": "^1.5.2",
     "@lezer/highlight": "^1.2.3",
     "@mittwald/flow-icons": "workspace:*",
-    "@mittwald/password-tools-js": "3.0.0-alpha.31",
+    "@mittwald/password-tools-js": "^3.0.0",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "@react-aria/form": "^3.2.1",
