@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.36](https://github.com/mittwald/flow/compare/1.2.0-next.35...1.2.0-next.36) (2026-09-09)
+
+### Bug Fixes
+
+* **ci:** render every commit type in the changelog ([#3137](https://github.com/mittwald/flow/issues/3137)) ([8f28777](https://github.com/mittwald/flow/commit/8f287774fa61cffc66980c5c15ef1c75c15990b9))
+
+## [1.1.29](https://github.com/mittwald/flow/compare/1.2.0-next.34...1.1.29) (2026-09-09)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.29 ([9c65be4](https://github.com/mittwald/flow/commit/9c65be4254837ed7a23e6ef79e07ca6717938d19))
+
 ## [1.2.0-next.35](https://github.com/mittwald/flow/compare/1.2.0-next.34...1.2.0-next.35) (2026-09-09)
 
 ### Bug Fixes
