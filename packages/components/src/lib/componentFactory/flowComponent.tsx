@@ -142,7 +142,11 @@ export function flowComponent<C extends FlowComponentName>(
 
     if (tunnel) {
       element = (
-        <UiComponentTunnelEntry id={tunnel.id} component={tunnel.component}>
+        <UiComponentTunnelEntry
+          id={tunnel.id}
+          component={tunnel.component}
+          staticEntryId={tunnel.staticEntryId}
+        >
           {element}
         </UiComponentTunnelEntry>
       );

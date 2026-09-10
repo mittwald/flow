@@ -17,20 +17,24 @@ export interface TunnelEntryProps {
 export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const { children, id, staticEntryId, providerId } = props;
   const tunnel = useTunnelState(providerId);
-  const usedId = useId();
-  const entryId = staticEntryId ?? usedId;
+  /**
+   * Identifies this entry instance, as opposed to `entryId`, which a
+   * `staticEntryId` deliberately shares between several instances.
+   */
+  const ownerId = useId();
+  const entryId = staticEntryId ?? ownerId;
   const index = tunnel.useEntryIndex();
 
   const mounted = useRef(false);
 
   if (!mounted.current) {
-    tunnel.setRenderPhaseChildren(id, entryId, index, children);
+    tunnel.setRenderPhaseChildren(id, entryId, ownerId, index, children);
   }
 
   useLayoutEffect(() => {
     mounted.current = true;
-    tunnel.setChildren(id, entryId, index, children);
-  }, [children, id, entryId, index, providerId]);
+    tunnel.setChildren(id, entryId, ownerId, index, children);
+  }, [children, id, entryId, ownerId, index, providerId]);
 
   useEffect(() => {
     /**
@@ -40,9 +44,9 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
      * in the TunnelExit may be disrupted as well.
      */
     return () => {
-      tunnel.deleteChildren(id, entryId);
+      tunnel.deleteChildren(id, entryId, ownerId);
     };
-  }, [id, entryId, providerId]);
+  }, [id, entryId, ownerId, providerId]);
 
   return null;
 };
