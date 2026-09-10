@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/typescript-config",
   "private": true,
-  "version": "1.1.30",
+  "version": "1.1.31",
   "files": [
     "base.json",
     "library.json",
