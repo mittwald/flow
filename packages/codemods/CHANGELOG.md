@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.37](https://github.com/mittwald/flow/compare/1.2.0-next.36...1.2.0-next.37) (2026-09-10)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
 ## [1.2.0-next.36](https://github.com/mittwald/flow/compare/1.2.0-next.35...1.2.0-next.36) (2026-09-09)
 
 **Note:** Version bump only for package @mittwald/flow-codemods

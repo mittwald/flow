@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.37](https://github.com/mittwald/flow/compare/1.2.0-next.36...1.2.0-next.37) (2026-09-10)
+
+### Bug Fixes
+
+* **Option:** stop every option landing in the collection twice ([#3146](https://github.com/mittwald/flow/issues/3146)) ([f6a8d84](https://github.com/mittwald/flow/commit/f6a8d846d249c100ca68c5fd872f9eec474bbf0a))
+
+## [1.1.30](https://github.com/mittwald/flow/compare/1.2.0-next.35...1.1.30) (2026-09-09)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.30 ([eaa6097](https://github.com/mittwald/flow/commit/eaa60978a71ab1c2fed9b517cb10a6414bb96784))
+
 ## [1.2.0-next.36](https://github.com/mittwald/flow/compare/1.2.0-next.35...1.2.0-next.36) (2026-09-09)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
