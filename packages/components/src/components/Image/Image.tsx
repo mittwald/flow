@@ -41,7 +41,12 @@ export const Image = flowComponent("Image", (props) => {
     <img
       ref={ref}
       className={rootClassName}
-      style={{ ...style, aspectRatio, width, height }}
+      style={{
+        ...style,
+        ...(aspectRatio !== undefined && { aspectRatio }),
+        ...(width !== undefined && { width }),
+        ...(height !== undefined && { height }),
+      }}
       {...rest}
     />
   );
