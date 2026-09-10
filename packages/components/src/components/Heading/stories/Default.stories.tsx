@@ -5,6 +5,8 @@ import { Section } from "@/components/Section";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Badge } from "@/components/Badge";
+import { Button } from "@/components/Button";
+import { IconEdit } from "@/components/Icon/components/icons";
 import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Heading> = {
@@ -61,5 +63,27 @@ export const Wrap: Story = {
         {dummyText.medium}
       </Heading>
     </Section>
+  ),
+};
+
+export const WithButton: Story = {
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Section>
+        <Heading {...props}>
+          E-Mail-Adresse
+          <Button variant="soft" color="secondary">
+            Verify
+          </Button>
+        </Heading>
+        <Heading {...props}>
+          {dummyText.medium}
+          <Badge>Badge</Badge>
+          <Button aria-label="Edit" variant="plain" color="secondary">
+            <IconEdit />
+          </Button>
+        </Heading>
+      </Section>
+    </StoryBackground>
   ),
 };

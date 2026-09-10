@@ -228,3 +228,39 @@ export const WithColumnLayout: Story = {
     );
   },
 };
+
+export const WithHeadingButton: Story = {
+  render: () => {
+    const List = typedList<{ mail: string }>();
+
+    return (
+      <List.List aria-label="Mail addresses">
+        <List.StaticData
+          data={[
+            { mail: "han.solo@rebellion.org" },
+            { mail: "chewbacca.the.wookiee.copilot@rebellion.org" },
+          ]}
+        />
+        <List.Item showTiles textValue={(mail) => mail.mail}>
+          {(mail) => (
+            <List.ItemView>
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>
+                {mail.mail}
+                <Button variant="soft" color="secondary">
+                  Verify
+                </Button>
+              </Heading>
+              <Text>Rebel Alliance</Text>
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
