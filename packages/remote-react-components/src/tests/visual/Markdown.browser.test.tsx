@@ -55,7 +55,8 @@ test.each(testEnvironments)(
           "| Column 1       | Column 2      |\n" +
           "|---------------|---------------|\n" +
           "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
-          "| Row 2 Cell 1  | Row 2 Cell 2  |\n"}
+          "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
+          "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
       </Markdown>,
     );
 

@@ -10,6 +10,7 @@
 
   table {
     border-radius: var(--table--corner-radius);
+    overflow: hidden;
     border-width: var(--table--border-width);
     border-style: var(--table--border-style);
     border-color: var(--table--border-color);
