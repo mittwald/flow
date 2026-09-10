@@ -393,6 +393,20 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
   — as the [Icon page](https://flow.mittwald.de/components/content/icon)
   documents. Nothing errors: types, lint and the console stay clean.
+- **A collection child is rendered twice** — react-aria renders the children of
+  a collection (`Select`, `ComboBox`, `Autocomplete`, `Menu`, `ListBox`, `Tree`,
+  …) once into its hidden collection document and once for real. Both renders
+  are full component instances, so anything derived per instance happens twice
+  for one logical element: `useId` returns two ids, effects run twice, and every
+  registration into shared state lands twice. Whatever such a child registers
+  therefore needs an id derived from the element itself, not a generated one —
+  options pass their collection key as the tunnel's `staticEntryId`
+  (`Option/optionsTunnel.ts`), and a new tunnelled collection child must do the
+  same. Without it the tunnel exit renders each child twice: the keys stay
+  unique, so the DOM and the tests look right, but the collection holds two
+  nodes per key and its `prevKey`/`nextKey` chain closes into a ring — `ArrowUp`
+  on the first item wraps to the last, and react-stately's focus restoration
+  walks `getKeyBefore` forever and freezes the tab (#3146).
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.

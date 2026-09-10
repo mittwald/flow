@@ -1,3 +1,4 @@
+import { getOptionsTunnelProps } from "@/components/Option/optionsTunnel";
 import { useRef, type PropsWithChildren } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -102,10 +103,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     SearchField: inputProps,
     TextField: inputProps,
     Option: {
-      tunnel: {
-        id: "options",
-        component: "Autocomplete",
-      },
+      tunnel: getOptionsTunnelProps("Autocomplete"),
     },
     Popover: {
       className: styles.popover,
