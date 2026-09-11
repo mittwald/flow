@@ -489,6 +489,12 @@ jobs:
           grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
             || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
 
+      # Before the publish, so a guard that cannot classify its own fixtures
+      # stops the release instead of waving it through — same precedent as the
+      # classifier self-test in `decide`. Sub-second; no network.
+      - name: Self-test the completeness guard
+        run: node --test .github/scripts/publish-completeness-lib.test.mjs
+
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
       # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is
       # patched (patches/@sigstore__sign@4.1.1.patch) to default fetchOnConflict
@@ -608,3 +614,27 @@ jobs:
           # `feat` PRs merge straight into `next`, so the window between the
           # release commit and this push is just as open here.
           node .github/scripts/push-release.mjs next "${tag}"
+
+      # LAST, after the push, the tag and the GitHub release — the assert that
+      # every publishable package actually reached npm at this version (#2887).
+      #
+      # `lerna publish` cannot be trusted to report this itself: it treats npm's
+      # `409 Failed to save packument` — the answer to a CONCURRENT write on the
+      # same package document — as "already published", warns, and exits 0
+      # (lerna-lite `is-npm-js-publish-version-conflict.js`). That is how 1.1.31
+      # shipped 10 of 13 packages from a green run, with the tag and the Release
+      # cut: the stable and the `next` line publish the SAME npm packages, their
+      # concurrency groups (`mutate-main` / `mutate-next`) do not serialize them
+      # against each other, and a forward-merge starts the second run seconds
+      # after the first. Both walked the same toposort at the same pace and
+      # collided on three packages. `flow-remote-react-components@1.1.31` then
+      # pinned a `flow-remote-elements@1.1.31` that did not exist — `workspace:*`
+      # packs as an EXACT pin, so the packages that DID publish were
+      # uninstallable.
+      #
+      # It runs last because the remedy is a dispatch with `only_publish`, which
+      # publishes whatever the branch's manifests say. Failing before the push
+      # would leave the branch at N-1 while npm carries N — and the remedy would
+      # then republish N-1, healing nothing.
+      - name: Assert the release is complete on npm 🔍
+        run: node .github/scripts/publish-completeness-guard.mjs
