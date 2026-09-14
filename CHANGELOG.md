@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.38](https://github.com/mittwald/flow/compare/1.2.0-next.37...1.2.0-next.38) (2026-09-14)
+
+### Bug Fixes
+
+* **Activity:** stop a deactivated subtree leaving its overlays on screen ([#3153](https://github.com/mittwald/flow/issues/3153)) ([a6c613b](https://github.com/mittwald/flow/commit/a6c613b2e66fa5e7c18821c542a938ed57468ea0))
+
+## [1.1.31](https://github.com/mittwald/flow/compare/1.2.0-next.36...1.1.31) (2026-09-10)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.31 ([3af9063](https://github.com/mittwald/flow/commit/3af90634c1a4c28b5eacc4162214bc87832fd414))
+
 ## [1.2.0-next.37](https://github.com/mittwald/flow/compare/1.2.0-next.36...1.2.0-next.37) (2026-09-10)
 
 ### Bug Fixes
