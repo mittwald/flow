@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.42](https://github.com/mittwald/flow/compare/1.2.0-next.41...1.2.0-next.42) (2026-09-14)
+
+### Bug Fixes
+
+* **Image:** keep sizing from style when no size props are given ([#3147](https://github.com/mittwald/flow/issues/3147)) ([abfc5a6](https://github.com/mittwald/flow/commit/abfc5a6286ec29471028be0ef49d468c71974e1d))
+
+### Build System
+
+* **deps:** bump the actions group with 2 updates ([#3141](https://github.com/mittwald/flow/issues/3141)) ([548712f](https://github.com/mittwald/flow/commit/548712fe584a28f1057495c083ce44b1b49e1bf1))
+
+## [1.1.35](https://github.com/mittwald/flow/compare/1.2.0-next.40...1.1.35) (2026-09-14)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.35 ([be9a367](https://github.com/mittwald/flow/commit/be9a3678a4f7e936f95b2af51942c6c80fd15f31))
+
 ## [1.2.0-next.41](https://github.com/mittwald/flow/compare/1.2.0-next.40...1.2.0-next.41) (2026-09-14)
 
 ### Build System
