@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.41](https://github.com/mittwald/flow/compare/1.2.0-next.40...1.2.0-next.41) (2026-09-14)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 8 updates ([#3155](https://github.com/mittwald/flow/issues/3155)) ([4b8a593](https://github.com/mittwald/flow/commit/4b8a5936f21ea7cf5d645ec9eadcbaceaea0ad7f))
+
+## [1.1.34](https://github.com/mittwald/flow/compare/1.2.0-next.39...1.1.34) (2026-09-14)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.34 ([e66690a](https://github.com/mittwald/flow/commit/e66690a21b9973690d8d4b5fa836efaec9a7f34b))
+
 ## [1.2.0-next.40](https://github.com/mittwald/flow/compare/1.2.0-next.39...1.2.0-next.40) (2026-09-14)
 
 ### Bug Fixes
