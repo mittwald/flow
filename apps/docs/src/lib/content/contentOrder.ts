@@ -38,6 +38,11 @@ export const CONTENT_ORDER: readonly string[] = [
   "/templates/seiten/detailseite",
   "/templates/seiten/dashboard",
   "/templates/seiten/uebersichtsseite",
+  "/templates/overlays",
+  "/templates/overlays/formular-overlay",
+  "/templates/overlays/bestaetigungs-overlay",
+  "/templates/overlays/anzeige-overlay",
+  "/templates/overlays/mehrstufiges-overlay",
   "/components",
 ];
 
