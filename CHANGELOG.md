@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.33](https://github.com/mittwald/flow/compare/1.1.32...1.1.33) (2026-09-14)
+
+### Build System
+
+* **deps-dev:** bump the dev-minor group with 4 updates ([#3144](https://github.com/mittwald/flow/issues/3144)) ([7e666d1](https://github.com/mittwald/flow/commit/7e666d1a3da87dcb22e1dfaa6d45f8f14884fd34))
+
 ## [1.1.32](https://github.com/mittwald/flow/compare/1.1.31...1.1.32) (2026-09-14)
 
 ### Bug Fixes
