@@ -1,0 +1,59 @@
+---
+title: Detailseite
+description:
+  Die zentrale Seite für ein einzelnes Objekt und der Ausgangspunkt für dessen
+  Bearbeitung.
+---
+
+Ob E-Mail-Adresse, Projekt oder Vertrag: Die Detailseite ist die Arbeitsfläche
+für genau dieses eine Objekt. Von hier aus starten auch Bearbeitungs- und
+Anlegeprozesse.
+
+Getragen wird die Seite von einer
+[LayoutCard](/components/structure/layout-card) als Container und darin
+liegenden [Sections](/components/structure/section). Ein Kopfbereich mit
+[Heading](/components/content/heading) und
+[Breadcrumb](/components/navigation/breadcrumb) gibt Orientierung; der Inhalt
+darunter ist in Themenblöcke gegliedert.
+
+<LiveCodeEditor example="detailseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Verwendung
+
+Nutze die Detailseite, wenn Nutzer sich in **ein einzelnes Objekt** vertiefen
+und es bearbeiten sollen. Sie ist der richtige Ort, sobald zu einem Datensatz
+mehr gehört als eine Zeile in einer Liste: Stammdaten, zusammenhängende
+Aktionen, verschachtelte Informationen.
+
+Der Kopfbereich bietet Orientierung, der Content darunter die eigentlichen
+Informationen und Aktionen. Beginne mit den wichtigsten und staffle Details nach
+unten.
+
+---
+
+# Struktur
+
+Die Trennung in Kopfbereich und Content hält Orientierung und Inhalt sauber
+getrennt: Die [Breadcrumb](/components/navigation/breadcrumb) und der Titel
+bleiben stabil, während der Content je nach Objekt variiert. Die
+[LayoutCard](/components/structure/layout-card) fasst den Content zu einer
+ruhigen Fläche zusammen; [Sections](/components/structure/section) mit
+H2-Überschriften geben ihm eine vorhersehbare Gliederung. Wichtige Funktionen
+liegen zusätzlich als Schnellzugriff im Aktionsmenü aus
+[Button](/components/actions/button) und
+[ContextMenu](/components/actions/context-menu), damit sie ohne Scrollen
+erreichbar sind.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit TabNavigation
+
+Wird der Content einer Detailseite zu umfangreich, teilt eine
+[TabNavigation](/components/navigation/tab-navigation) ihn in gleichrangige
+Unterseiten. Nutzer wechseln zwischen den Tabs, ohne den Kontext des Objekts zu
+verlieren. Gruppiere dafür Sections, die inhaltlich zusammengehören, auf einem
+gemeinsamen Tab.

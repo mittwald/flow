@@ -1,0 +1,93 @@
+---
+title: Übersichtsseite
+description:
+  Die durchsuchbare Liste gleichartiger Objekte und der Einstieg in ihre
+  einzelnen Detailseiten.
+---
+
+Domains, Projekte, Verträge: Wo viele gleichartige Objekte nebeneinander
+existieren, führt die Übersichtsseite sie zusammen. Nutzer suchen, filtern und
+sortieren die Menge und öffnen von hier die
+[Detailseite](/templates/seiten/detailseite) eines einzelnen Objekts.
+
+Getragen wird die Seite von einem Kopfbereich mit
+[Heading](/components/content/heading) und einer
+[LayoutCard](/components/structure/layout-card), die eine
+[List](/components/list/list) umschließt. Die List bringt Such-, Filter- und
+Sortierfunktionen sowie ihre Ansichtsvarianten selbst mit.
+
+<LiveCodeEditor example="uebersichtsseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Verwendung
+
+Nutze die Übersichtsseite, wenn Nutzer aus **vielen gleichartigen Objekten** das
+passende auswählen und anschließend im Detail bearbeiten sollen. Sie zeigt pro
+Objekt genau die Informationen, die zur Auswahl nötig sind, und verlinkt für
+alles Weitere auf dessen [Detailseite](/templates/seiten/detailseite).
+
+Biete häufige Aktionen direkt am Objekt an – etwa über eine
+[ActionGroup](/components/actions/action-group) oder ein
+[ContextMenu](/components/actions/context-menu) –, damit Routineaufgaben ohne
+Umweg erledigt werden.
+
+## Nicht verwenden
+
+Zeige die Tiefe eines einzelnen Objekts nicht in der Übersicht, sondern auf
+seiner [Detailseite](/templates/seiten/detailseite). Ist die Liste nur ein
+Abschnitt neben anderen Inhalten, gehört sie dorthin oder in ein
+[Dashboard](/templates/seiten/dashboard) – nicht auf eine eigene
+Übersichtsseite.
+
+---
+
+# Struktur
+
+Der Kopfbereich mit [Heading](/components/content/heading) benennt den Bereich.
+Darunter umschließt eine [LayoutCard](/components/structure/layout-card) die
+[List](/components/list/list), die alles Weitere selbst trägt:
+
+- **Suche, Filter und Sortierung** sind Teil der List, keine eigene Leiste
+  darüber. Die List verdrahtet sie direkt mit dem Datenabruf – bei
+  serverseitiger Filterung der einzige Weg ohne doppelte Zustandshaltung.
+- **Die Anlege-Aktion** liegt in der
+  [ActionGroup](/components/actions/action-group) der List, nicht im Seitenkopf.
+  Sie gehört zum gezeigten Objekttyp und bleibt so an ihrem Platz, auch wenn die
+  Liste später an anderer Stelle auftaucht.
+- **Verlinke jeden Eintrag in seine
+  [Detailseite](/templates/seiten/detailseite)**, damit die Übersicht ihren
+  Zweck als Einstieg erfüllt.
+- **Plane einen Leerzustand ein.** Der erste Kontakt mit einem Objekttyp ist
+  fast immer die leere Liste.
+
+Ist die zu erwartende Zahl der Einträge begrenzt, kann der Listen-Header mit
+Suche, Filter und Sortierung entfallen; die List dient dann als reine
+Auflistung.
+
+Je nach Inhalt bietet die List eine Listen-, Raster- oder Tabellenansicht. Wähle
+die Ansicht, die die zur Auswahl nötigen Informationen am besten transportiert –
+Details zu den Ansichten stehen auf der Seite der [List](/components/list/list).
+
+---
+
+# Varianten und Abwandlung
+
+## Als Kachelansicht
+
+Trägt ein Vorschaubild oder ein großes Typ-Icon zur Erkennung bei, wird aus dem
+Eintrag eine Kachel. Struktur und Ausstattung der Seite bleiben gleich – es
+ändern sich nur `defaultViewMode` und die Anzeigeform des Eintrags.
+
+<LiveCodeEditor
+  example="uebersichtsseite-kacheln"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+## Tabs über mehreren Übersichtsseiten
+
+Gehören mehrere Objekttypen fachlich zusammen – E-Mail-Adressen,
+Weiterleitungen, Delivery-Boxen –, fasst eine
+[TabNavigation](/components/navigation/tab-navigation) sie zusammen; jeder Tab
+ist für sich eine Übersichtsseite.

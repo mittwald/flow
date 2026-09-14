@@ -33,6 +33,11 @@ export const CONTENT_ORDER: readonly string[] = [
   "/patterns",
   "/patterns/patterns",
   "/patterns/codesnippets",
+  "/templates",
+  "/templates/seiten",
+  "/templates/seiten/detailseite",
+  "/templates/seiten/dashboard",
+  "/templates/seiten/uebersichtsseite",
   "/components",
 ];
 
