@@ -1,7 +1,6 @@
 import {
   Action,
   ActionGroup,
-  Alert,
   Button,
   Content,
   Heading,
@@ -21,18 +20,10 @@ export default () => (
         <Text>
           Die E-Mail-Adresse <b>max@mustermann.de</b> und
           alle darin gespeicherten E-Mails werden gelöscht.
-          Das lässt sich nicht rückgängig machen.
+          Das lässt sich nicht rückgängig machen. Die
+          Weiterleitung von <b>kontakt@mustermann.de</b> auf
+          diese Adresse geht danach ins Leere.
         </Text>
-        <Alert status="warning">
-          <Heading>
-            Eine Weiterleitung zeigt auf diese Adresse
-          </Heading>
-          <Content>
-            kontakt@mustermann.de leitet an diese Adresse
-            weiter und wird nach dem Löschen ins Leere
-            gehen.
-          </Content>
-        </Alert>
       </Content>
       <ActionGroup>
         <Action closeModal>

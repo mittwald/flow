@@ -1,0 +1,63 @@
+---
+title: Anlegen & Bearbeiten
+description:
+  Ein Modal mit Formular über der auslösenden Seite, mit dem ein Objekt angelegt
+  oder bearbeitet wird.
+---
+
+In mStudio öffnen Anlegen und Bearbeiten kein eigenes Ziel, sondern ein
+[Modal](/components/overlays/modal) über der auslösenden Seite. Die
+darunterliegende Seite bleibt sichtbar; nach dem Speichern kehrt der Nutzer an
+dieselbe Stelle zurück.
+
+Anlegen und Bearbeiten teilen sich ein Template. Sie unterscheiden sich in
+Überschrift, Button-Beschriftung und der Vorbelegung der Felder.
+
+<LiveCodeEditor example="formular-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende dieses Overlay für Eingaben, die zu einem Objekt gehören: anlegen,
+bearbeiten oder konfigurieren.
+
+## Nicht verwenden
+
+- Wenn nichts einzugeben ist und nur eine Entscheidung getroffen wird. Dafür
+  eignet sich ein Overlay zum [Bestätigen](/templates/overlays/bestaetigen).
+- Wenn die Eingabe von einer vorgelagerten Auswahl abhängt. Dafür eignet sich
+  ein Overlay mit [mehreren Schritten](/templates/overlays/mehrere-schritte).
+- Wenn das Formular so lang wird, dass mehrfaches Scrollen nötig ist. Teile die
+  Eingabe in mehrere Schritte oder auf Bereiche der
+  [Detailseite](/templates/seiten/detailseite) auf.
+
+---
+
+# Struktur
+
+Die Überschrift benennt Aktion und Objekt, zum Beispiel „E-Mail-Adresse
+anlegen". Sie ist meist der einzige Hinweis auf den Bezug des Formulars, da die
+auslösende Seite verdeckt ist. Der Absenden-Button trägt dieselbe Aktion wie die
+Überschrift – „Anlegen" beziehungsweise „Speichern".
+
+Ob das Modal mittig erscheint oder als `offCanvas` seitlich einfährt, richtet
+sich nach dem Umfang des Formulars. Ein kurzes Formular mit wenigen Feldern ist
+im mittigen [Modal](/components/overlays/modal) gut aufgehoben; ein langes
+Formular fährt als `offCanvas` ein und scrollt für sich. Ab etwa acht Feldern
+gliedern Zwischenüberschriften das Formular in Abschnitte.
+
+Das Overlay schließt erst nach erfolgreichem Speichern. Bis dahin zeigt der
+Button seinen Ladezustand; ein Fehler erscheint im Overlay am betroffenen Feld.
+
+---
+
+# Varianten und Abwandlung
+
+## Bearbeiten
+
+<LiveCodeEditor example="formular-overlay-bearbeiten" editorCollapsed />
+
+## Kurzes Formular
+
+<LiveCodeEditor example="formular-overlay-klein" editorCollapsed />

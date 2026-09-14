@@ -1,7 +1,6 @@
 import {
   Action,
   ActionGroup,
-  Alert,
   Button,
   Content,
   FieldDescription,
@@ -15,39 +14,30 @@ import {
 import { useState } from "react";
 
 export default () => {
-  const projectName = "Mustermann";
+  const profileName = "Max Mustermann";
   const [confirmation, setConfirmation] = useState("");
 
   return (
     <ModalTrigger>
       <Button color="danger" variant="soft">
-        Projekt löschen
+        Profil löschen
       </Button>
       <Modal>
-        <Heading>Projekt löschen</Heading>
+        <Heading>Profil löschen</Heading>
         <Content>
           <Text>
-            Das Projekt <b>{projectName}</b> wird mit allen
-            Apps, Datenbanken und E-Mail-Adressen gelöscht.
+            Das Profil <b>{profileName}</b> wird mit allen
+            zugehörigen Daten und Zugriffsrechten gelöscht.
             Das lässt sich nicht rückgängig machen.
           </Text>
-          <Alert status="danger">
-            <Heading>
-              3 E-Mail-Adressen und 1 Datenbank hängen daran
-            </Heading>
-            <Content>
-              Auch sie werden gelöscht, einschließlich aller
-              gespeicherten E-Mails.
-            </Content>
-          </Alert>
           <TextField
             value={confirmation}
             onChange={setConfirmation}
             isRequired
           >
-            <Label>Projektnamen eingeben</Label>
+            <Label>Namen eingeben</Label>
             <FieldDescription>
-              Tippe <b>{projectName}</b> ab, um das Löschen
+              Tippe <b>{profileName}</b> ab, um das Löschen
               zu bestätigen.
             </FieldDescription>
           </TextField>
@@ -56,9 +46,9 @@ export default () => {
           <Action closeModal>
             <Button
               color="danger"
-              isDisabled={confirmation !== projectName}
+              isDisabled={confirmation !== profileName}
             >
-              Projekt löschen
+              Profil löschen
             </Button>
             <Button variant="soft" color="secondary">
               Abbrechen

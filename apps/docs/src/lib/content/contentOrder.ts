@@ -39,10 +39,10 @@ export const CONTENT_ORDER: readonly string[] = [
   "/templates/seiten/dashboard",
   "/templates/seiten/uebersichtsseite",
   "/templates/overlays",
-  "/templates/overlays/formular-overlay",
-  "/templates/overlays/bestaetigungs-overlay",
-  "/templates/overlays/anzeige-overlay",
-  "/templates/overlays/mehrstufiges-overlay",
+  "/templates/overlays/anlegen-bearbeiten",
+  "/templates/overlays/bestaetigen",
+  "/templates/overlays/anzeigen",
+  "/templates/overlays/mehrere-schritte",
   "/components",
 ];
 

@@ -1,0 +1,59 @@
+---
+title: Bestätigen
+description:
+  Ein Overlay, das vor einer folgenreichen Aktion über ihre Auswirkungen
+  informiert und eine Entscheidung einholt.
+---
+
+Manche Aktionen lassen sich nicht zurücknehmen oder wirken sich an Stellen aus,
+die der Nutzer im Moment der Aktion nicht überblickt. Vor einer solchen Aktion
+informiert ein Overlay darüber, was sie bewirkt und was von ihr abhängt, und
+holt eine bewusste Entscheidung ein.
+
+<LiveCodeEditor example="bestaetigungs-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende dieses Overlay, wenn eine Aktion Daten unwiederbringlich entfernt,
+etwas Kostenpflichtiges beendet oder weitere Objekte betrifft – etwa löschen,
+kündigen oder eine Verknüpfung auflösen.
+
+## Nicht verwenden
+
+- Für Aktionen, die sich sofort wieder rückgängig machen lassen. Eine Rückfrage
+  hält den Nutzer hier nur auf und wird mit der Zeit übersehen.
+- Wenn vor der Entscheidung noch etwas einzugeben ist – ein Grund, ein
+  Zieldatum. Dafür eignet sich ein Overlay zum
+  [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
+
+---
+
+# Struktur
+
+Das Overlay erscheint mittig und ist so groß wie sein Inhalt.
+
+Die Überschrift benennt die Aktion, der Text ihre Folgen: was mit den Daten
+geschieht und was von der Aktion abhängt. Betrifft die Aktion weitere Objekte,
+werden sie hier genannt – nach der Bestätigung ist diese Information nicht mehr
+zugänglich.
+
+Der bestätigende Button trägt die Aktion als Verb, etwa „Löschen" statt „OK",
+und ist als gefährliche Aktion ausgezeichnet.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Eingabe der Bestätigung
+
+Bei besonders folgenreichen Aktionen – etwa dem Löschen des eigenen Profils –
+tippt der Nutzer den Namen des Objekts ab, bevor der Button aktiv wird.
+
+<LiveCodeEditor example="bestaetigungs-overlay-eingabe" editorCollapsed />
+
+## Kündigen statt löschen
+
+Endet etwas erst zu einem Termin, benennt das Overlay diesen Termin und was bis
+dahin verfügbar bleibt.

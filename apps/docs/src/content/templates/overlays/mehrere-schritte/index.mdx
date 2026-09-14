@@ -1,0 +1,73 @@
+---
+title: Mehrere Schritte
+description:
+  Ein Overlay, das die Eingabe auf mehrere Schritte verteilt, weil eine Auswahl
+  bestimmt, welche Felder danach folgen.
+---
+
+Manche Anlegevorgänge lassen sich nicht in einem einzigen Formular abbilden,
+weil erst eine Auswahl feststehen muss, bevor die weiteren Felder feststehen.
+Welche App installiert wird, bestimmt, welche Angaben sie verlangt.
+
+Das Overlay verteilt die Eingabe dafür auf mehrere Schritte. Es bleibt ein
+Overlay – die Schritte sind Zustände darin, keine eigenen Seiten.
+
+<LiveCodeEditor example="mehrstufiges-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende mehrere Schritte, wenn eine Auswahl bestimmt, welche Eingaben danach
+folgen, und diese Auswahl nicht nebenbei in einem Feld getroffen werden kann –
+etwa weil Bild, Beschreibung oder Vergleich dazugehören.
+
+## Nicht verwenden
+
+- Wenn die Felder von Anfang an feststehen. Ein langes Formular wird durch
+  Aufteilen nicht kürzer; es bleibt ein Overlay zum
+  [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
+- Wenn die Auswahl eine reine Wertauswahl ist. Dann genügt ein
+  [Select](/components/form-controls/select) im Formular.
+
+---
+
+# Struktur
+
+Die Auswahl steht am Anfang. Alle weiteren Schritte hängen von ihr ab; eine
+Auswahl mitten im Vorgang würde vorherige Eingaben entwerten. Jeder Schritt
+bildet eine Entscheidung ab, nicht nur eine Feldergruppe: Ein zusätzlicher
+Schritt lohnt sich dort, wo sich sein Inhalt aus der vorherigen Auswahl ergibt.
+
+Der Zurück-Button führt zum vorherigen Schritt und steht in der
+[ActionGroup](/components/actions/action-group) neben der weiterführenden
+Aktion. Abbrechen schließt das gesamte Overlay und steht davon getrennt links.
+Die ActionGroup ordnet die Buttons nach ihrer Farbe: farbige Aktionen rechts,
+`color="secondary"` links im Abbrechen-Slot. Bei drei Buttons erhält der
+Zurück-Button zusätzlich `slot="secondary"`, damit er nicht mit Abbrechen
+zusammenfällt.
+
+Bereits getätigte Eingaben bleiben beim Schritt zurück erhalten, soweit sie zur
+geänderten Auswahl noch passen. Die Überschrift wechselt mit dem Schritt und
+nimmt die Auswahl auf – aus „App auswählen" wird „WordPress anlegen".
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Fortschrittsanzeige
+
+Ab drei Schritten zeigt eine Fortschrittsanzeige, wie weit der Vorgang gediehen
+ist. Sie setzt eine feste Zahl von Schritten voraus.
+
+<LiveCodeEditor example="mehrstufiges-overlay-fortschritt" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Verzweigte Schritte.** Bestimmt die Auswahl, wie viele Schritte folgen, steht
+ihre Zahl vorab nicht fest – in diesem Fall keine Fortschrittsanzeige mit fester
+Länge zeigen.
+
+**Ein Overlay öffnet ein zweites.** Muss während des Vorgangs ein noch nicht
+vorhandenes Objekt angelegt werden – eine Domain, ein API-Key – geschieht das in
+einem eigenen Overlay mit eigenem Controller, nicht als weiterer Schritt.

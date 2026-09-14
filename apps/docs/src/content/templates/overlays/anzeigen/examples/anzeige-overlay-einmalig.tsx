@@ -1,4 +1,5 @@
 import {
+  Action,
   ActionGroup,
   Button,
   Content,
@@ -34,9 +35,11 @@ export default () => (
         </Section>
       </Content>
       <ActionGroup>
-        <Button variant="soft" color="secondary">
-          Schließen
-        </Button>
+        <Action closeModal>
+          <Button variant="soft" color="secondary">
+            Schließen
+          </Button>
+        </Action>
       </ActionGroup>
     </Modal>
   </ModalTrigger>
