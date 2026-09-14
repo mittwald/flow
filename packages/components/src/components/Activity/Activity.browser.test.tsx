@@ -2,6 +2,8 @@ import { beforeEach, expect } from "vitest";
 import { render } from "vitest-browser-react";
 import { Activity } from "@/components/Activity/index";
 import { page } from "vitest/browser";
+import { createPortal } from "react-dom";
+import { useIsActivityActive } from "@/components/Activity/context";
 
 const TestComponent = () => {
   return <span role="status">Active</span>;
@@ -98,4 +100,67 @@ test("Does NOT render children after delay when wrapped in delayed inactive Acti
     </Activity>,
   );
   expect(testComponent()).not.toBeInTheDocument();
+});
+
+const PortalledProbe = () => {
+  const isActive = useIsActivityActive();
+
+  return createPortal(
+    <span data-testid="portalled">{isActive ? "active" : "inactive"}</span>,
+    document.body,
+  );
+};
+
+const portalledText = () =>
+  document.querySelector('[data-testid="portalled"]')?.textContent;
+
+/*
+ * A hidden subtree renders but never commits, and React hides only its inline
+ * DOM — so whatever it portalled elsewhere would stay on screen frozen. The
+ * subtree gets one commit to unmount that content before it is hidden.
+ */
+test.each([[true], [false]])(
+  "Children learn about deactivation before they are hidden (forceCustomActivity=%s)",
+  async (forceCustomActivity: boolean) => {
+    const { rerender } = await render(
+      <Activity isActive forceCustomActivity={forceCustomActivity}>
+        <PortalledProbe />
+      </Activity>,
+    );
+    expect(portalledText()).toBe("active");
+
+    await rerender(
+      <Activity isActive={false} forceCustomActivity={forceCustomActivity}>
+        <PortalledProbe />
+      </Activity>,
+    );
+    expect(portalledText()).toBe("inactive");
+
+    await rerender(
+      <Activity isActive forceCustomActivity={forceCustomActivity}>
+        <PortalledProbe />
+      </Activity>,
+    );
+    expect(portalledText()).toBe("active");
+  },
+);
+
+test("A nested Activity stays inactive while its parent is inactive", async () => {
+  const { rerender } = await render(
+    <Activity isActive forceCustomActivity>
+      <Activity isActive forceCustomActivity>
+        <PortalledProbe />
+      </Activity>
+    </Activity>,
+  );
+  expect(portalledText()).toBe("active");
+
+  await rerender(
+    <Activity isActive={false} forceCustomActivity>
+      <Activity isActive forceCustomActivity>
+        <PortalledProbe />
+      </Activity>
+    </Activity>,
+  );
+  expect(portalledText()).toBe("inactive");
 });
