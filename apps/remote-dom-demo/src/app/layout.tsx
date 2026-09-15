@@ -81,6 +81,9 @@ export default function Layout(props: PropsWithChildren) {
                       <NavigationItem page="context-menu">
                         Context Menu
                       </NavigationItem>
+                      <NavigationItem page="contextual-help">
+                        Contextual Help
+                      </NavigationItem>
                       <NavigationItem page="tab-navigation">
                         Tab Navigation
                       </NavigationItem>
