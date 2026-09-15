@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.46](https://github.com/mittwald/flow/compare/1.2.0-next.45...1.2.0-next.46) (2026-09-15)
+
+### Bug Fixes
+
+* unbreak the Storybook preview and clear the build, test and dev-server warnings ([#3019](https://github.com/mittwald/flow/issues/3019)) ([6024c9f](https://github.com/mittwald/flow/commit/6024c9febce8d4ca94fcc247a66a904ab6438cd2))
+
+## [1.1.38](https://github.com/mittwald/flow/compare/1.2.0-next.44...1.1.38) (2026-09-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.38 ([06879ca](https://github.com/mittwald/flow/commit/06879ca248fbebecf2159605e3dff05ecc35b6e9))
+
 ## [1.2.0-next.45](https://github.com/mittwald/flow/compare/1.2.0-next.44...1.2.0-next.45) (2026-09-15)
 
 ### Bug Fixes
