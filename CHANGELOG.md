@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.37](https://github.com/mittwald/flow/compare/1.1.36...1.1.37) (2026-09-15)
+
+### Build System
+
+* **codemods:** order the unit tests after the remote-components generator ([#3162](https://github.com/mittwald/flow/issues/3162)) ([d9fa5ba](https://github.com/mittwald/flow/commit/d9fa5ba1ed4e9c224f24571b48853dd773c7706c))
+
 ## [1.1.36](https://github.com/mittwald/flow/compare/1.1.35...1.1.36) (2026-09-14)
 
 ### Bug Fixes
