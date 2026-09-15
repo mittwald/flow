@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.43](https://github.com/mittwald/flow/compare/1.2.0-next.42...1.2.0-next.43) (2026-09-15)
+
+### Features
+
+* **List:** let items declare the state they depend on ([b5c3f06](https://github.com/mittwald/flow/commit/b5c3f065b24c6573ac292037bf9af19db829fe45)), closes [#3065](https://github.com/mittwald/flow/issues/3065) [#2777](https://github.com/mittwald/flow/issues/2777)
+
 ## [1.2.0-next.42](https://github.com/mittwald/flow/compare/1.2.0-next.41...1.2.0-next.42) (2026-09-14)
 
 ### Bug Fixes
