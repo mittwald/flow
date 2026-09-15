@@ -6,6 +6,7 @@ import { OverlaySuspenseFallback } from "@/components/Overlay/components/Overlay
 import styles from "../Overlay.module.scss";
 import DivView from "@/views/DivView";
 import { useKeepBrowserExtensionsInteractive } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
+import { useIsActivityActive } from "@/components/Activity/context";
 
 const overlayContainerAttribute = "data-flow-overlays";
 
@@ -70,6 +71,8 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
     ...restProps
   } = props;
 
+  const isActivityActive = useIsActivityActive();
+
   useKeepBrowserExtensionsInteractive(restProps.isOpen ?? false);
 
   const Fallback = () => {
@@ -79,6 +82,10 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
       </DivView>
     );
   };
+
+  if (!isActivityActive) {
+    return null;
+  }
 
   return (
     <UNSAFE_PortalProvider getContainer={getOverlayContainer}>

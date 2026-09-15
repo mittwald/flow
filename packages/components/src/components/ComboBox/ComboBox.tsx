@@ -12,6 +12,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { getOptionsTunnelProps } from "@/components/Option/optionsTunnel";
 import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
@@ -55,10 +56,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   const propsContext: PropsContext = {
     Option: {
-      tunnel: {
-        id: "options",
-        component: "ComboBox",
-      },
+      tunnel: getOptionsTunnelProps("ComboBox"),
     },
     ...fieldPropsContext,
   };

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { apiFetch } from "./apiFetch.ts";
+
 interface DockerImage {
   name: string;
   tag: string;
@@ -136,7 +138,7 @@ class ReviewDeployer {
 
     const [owner, repoName] = repo.split("/");
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.github.com/repos/${owner}/${repoName}/pulls/${this.prNumber}`,
         {
           headers: {
@@ -144,6 +146,7 @@ class ReviewDeployer {
             Accept: "application/vnd.github.v3+json",
           },
         },
+        { label: `PR #${this.prNumber} state`, idempotent: true },
       );
 
       if (!response.ok) {
@@ -168,12 +171,13 @@ class ReviewDeployer {
     console.log("📋 Fetching existing services...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/projects/${this.projectId}/services`,
         {
           method: "GET",
           headers: getApiHeaders(),
         },
+        { label: "fetching services", idempotent: true },
       );
 
       if (!response.ok) {
@@ -191,12 +195,13 @@ class ReviewDeployer {
     console.log("🔗 Fetching existing ingresses...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/ingresses?projectId=${this.projectId}`,
         {
           method: "GET",
           headers: getApiHeaders(),
         },
+        { label: "fetching ingresses", idempotent: true },
       );
 
       if (!response.ok) {
@@ -214,7 +219,7 @@ class ReviewDeployer {
     console.log("🚀 Updating services...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/stacks/${this.projectId}`,
         {
           method: "PATCH",
@@ -224,6 +229,9 @@ class ReviewDeployer {
             volumes: {},
           }),
         },
+        // The body is the stack's desired state, so a replay lands on the same
+        // state rather than adding anything.
+        { label: "updating services", idempotent: true },
       );
 
       if (!response.ok) {
@@ -244,12 +252,14 @@ class ReviewDeployer {
     console.log("🔄 Pulling latest image...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/stacks/${this.projectId}/services/${serviceId}/actions/pull`,
         {
           method: "POST",
           headers: getApiHeaders(),
         },
+        // Pulling the same tag twice is a no-op, so a replay costs nothing.
+        { label: "pulling the image", idempotent: true },
       );
 
       if (!response.ok) {
@@ -273,25 +283,31 @@ class ReviewDeployer {
     console.log(`🌐 Creating ingress for ${hostname}...`);
 
     try {
-      const response = await fetch("https://api.mittwald.de/v2/ingresses", {
-        method: "POST",
-        headers: getApiHeaders(),
-        body: JSON.stringify({
-          projectId: this.projectId,
-          hostname,
-          paths: [
-            {
-              path: "/",
-              target: {
-                container: {
-                  id: containerId,
-                  portProtocol: "80/tcp",
+      const response = await apiFetch(
+        "https://api.mittwald.de/v2/ingresses",
+        {
+          method: "POST",
+          headers: getApiHeaders(),
+          body: JSON.stringify({
+            projectId: this.projectId,
+            hostname,
+            paths: [
+              {
+                path: "/",
+                target: {
+                  container: {
+                    id: containerId,
+                    portProtocol: "80/tcp",
+                  },
                 },
               },
-            },
-          ],
-        }),
-      });
+            ],
+          }),
+        },
+        // Creates a resource: only a failure from before the server saw the
+        // request may be replayed, never a 5xx.
+        { label: `creating the ingress for ${hostname}`, idempotent: false },
+      );
 
       if (!response.ok) {
         const error = await response.text();
@@ -330,7 +346,7 @@ class ReviewDeployer {
     console.log(`🔒 Connecting TLS certificate to ingress ${ingressId}...`);
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/ingresses/${ingressId}/tls`,
         {
           method: "PATCH",
@@ -339,6 +355,7 @@ class ReviewDeployer {
             certificateId,
           }),
         },
+        { label: "connecting the TLS certificate", idempotent: true },
       );
 
       if (!response.ok) {
@@ -446,7 +463,7 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
 `;
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.github.com/repos/${owner}/${repoName}/issues/${this.prNumber}/comments`,
         {
           method: "POST",
@@ -458,6 +475,8 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
             body: comment,
           }),
         },
+        // A replay would post a second comment.
+        { label: "posting the PR comment", idempotent: false },
       );
       if (!response.ok) {
         console.warn(

@@ -4,20 +4,6 @@
   display: block;
 }
 
-.preContainer {
-  background-color: var(--code-block--background-color);
-  border-radius: var(--corner-radius--m);
-  position: relative;
-  min-width: 0;
-  padding-inline-end: var(--size-px--xl);
-}
-
-.preCopyButton {
-  position: absolute !important;
-  top: var(--size-px--s);
-  inset-inline-end: var(--size-px--s);
-}
-
 .text,
 .ul {
   max-width: var(--max-text-width);

@@ -571,7 +571,7 @@ case.
 
 ## TableColumn: `maxWidth` removed, `width` and `minWidth` retyped
 
-**Since `0.2.0-alpha.956`** · migration · manual change · also applies to
+**Since `0.2.0-alpha.956`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 `maxWidth` has been removed. `width` and `minWidth` are now typed as
@@ -588,9 +588,24 @@ Percentage, pixel and `fr` values keep working as strings or numbers
 (`width="50%"`, `width="200fr"`, `width={300}`). Where you passed `null` to mean
 "no explicit width", omit the prop instead.
 
+A codemod removes `maxWidth` — the prop is gone from the type, so an explicit
+attribute is wrong at any value, an expression included — and removes a `width`
+or `minWidth` written as the literal `null`.
+
+It declines what it cannot decide from the source: `width={maybeNull}` could be
+anything at runtime, and a spread's contents are invisible. Both keep their
+props and need a look by hand.
+
 **Apply:** Remove `maxWidth` from every `TableColumn`. Where `width` or
 `minWidth` was `null`, omit the prop instead — the type no longer accepts
-`null`, only `number | string`.
+`null`, only `number | string`. A codemod does both for the cases it can decide
+from the source. Two it declines: a `width`/`minWidth` whose value is an
+expression (`width={maybeNull}`), and a spread that might carry `maxWidth`
+(`<TableColumn {...props} />`). Check those by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest table-column-width-props src
+```
 
 ---
 
@@ -1011,18 +1026,39 @@ Only function **references** are affected. An inline arrow
 (`onAction={() => …}`), a zero-parameter function, and anything already
 accepting `unknown` are all fine.
 
-A codemod renames the prop. It deliberately does not wrap: whether the
-referenced function declares a parameter cannot be decided from the source —
-that needs type information — and wrapping everything would silently drop the
-arguments `Action` passes to handlers that do accept them.
+A codemod renames the prop and wraps the reference.
+
+Whether a reference _needs_ wrapping is not decidable from the source — that
+needs type information. Performing the wrap does not need it: `() => fn()` calls
+what `Action` would have called, and `onAction` takes no arguments. So the wrap
+fixes the reference that needed it and changes nothing for the rest, which makes
+the decision unnecessary.
+
+Wrapped: a plain identifier and a member expression (`close`,
+`controller.close`, `this.handleSave`). Left alone: an arrow function and a
+function expression, which already are the handler; a call (`makeHandler()`,
+`close.bind(controller)`), which produces it; and anything that is not one
+reference (`isOpen ? close : open`, `onClose ?? noop`, `controller?.close`).
+
+Two wraps are worth a look afterwards. A handler that read the event `Action`
+forwards — undocumented, but it does forward the trigger's event — stops
+receiving it. And `onAction={props.onAction}`, where the reference may be
+`undefined`: passing it was fine, calling it is not, so TypeScript now reports
+the call and wants a guard.
 
 **Apply:** Rename the `action` prop on `Action` to `onAction`. Not only a
 rename: the new prop is typed `ActionFn` (`(...args: unknown[]) => unknown`), so
 a function _reference_ that declares a parameter no longer type-checks and needs
 wrapping — `onAction={() => controller.close()}` rather than
-`onAction={controller.close}`. Check every site where you passed a reference
-rather than an inline arrow; the codemod renames the prop but cannot decide this
-one from the source.
+`onAction={controller.close}`. A codemod does both. It wraps every bare
+reference (`close`, `controller.close`), because the wrap is a no-op for a
+reference that did not need it. It leaves a value that already is the handler or
+produces one — an arrow function, a function expression, a call like
+`makeHandler()` or `close.bind(controller)` — and anything that is not one
+reference, such as `isOpen ? close : open` or `controller?.close`. Two wraps to
+look at afterwards: a handler that read the event `Action` forwards stops
+receiving it, and a possibly-undefined reference (`onAction={props.onAction}`)
+becomes a call TypeScript rejects — add the guard it asks for.
 
 ```shell
 npx @mittwald/flow-codemods@latest action-prop-to-on-action src
@@ -1132,7 +1168,7 @@ npx @mittwald/flow-codemods@latest imports-to-package-root src
 
 ## Renamed CSS export
 
-**Since `0.1.0-alpha.292`** · migration · manual change
+**Since `0.1.0-alpha.292`** · migration · codemod available
 
 The CSS export `@mittwald/flow-react-components/styles` has renamed to the more
 precise name `@mittwald/flow-react-components/all.css`, because the file
@@ -1145,5 +1181,15 @@ as well. A documentation on how to use them is planned.
 + import "@mittwald/flow-react-components/all.css";
 ```
 
+A codemod rewrites the specifier in every JavaScript and TypeScript form that
+names a module. It cannot reach a `.css` or `.scss` file, so an `@import` of the
+old path there needs a manual search.
+
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
-`@mittwald/flow-react-components/all.css`.
+`@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript
+and TypeScript files. An `@import` of the old path inside a `.css` or `.scss`
+file is not covered — search for it by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest renamed-css-export src
+```
