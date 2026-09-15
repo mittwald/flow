@@ -21,6 +21,15 @@ export interface PropsWithTunnel {
   tunnel?: {
     id: string;
     component: FlowComponentName;
+    /**
+     * A stable entry id instead of a generated one. Needed wherever the same
+     * component is rendered more than once for a single logical element:
+     * react-aria renders collection children twice — once into its hidden
+     * collection document, once for real — and a generated id would register
+     * each render as its own entry, so the tunnel exit renders every element
+     * twice. Must be unique among the siblings of one tunnel.
+     */
+    staticEntryId?: string;
   } | null;
 }
 

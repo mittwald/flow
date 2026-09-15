@@ -44,7 +44,10 @@ flowchart LR
   promoted to `main` in curated bundles.
 - **The major line** — an on-demand branch (e.g. `2.x`) spun up only when a rare
   breaking change appears. Breaking changes are rare _by policy_: **deprecate,
-  don't break** — keep the old path and warn via `useWarnDeprecation`.
+  don't break** — keep the old path and warn via `useWarnDeprecation`. Opening
+  the line is not a branch creation: the guards, both cascades, the drift check
+  and `publish.yml` are all hardcoded to the two standing lines. See the
+  [major-line runbook](major-line-runbook.md).
 
 ## How changes flow (the mechanics)
 
@@ -67,6 +70,27 @@ flowchart LR
   guard that Lerna-Lite 5's changelog config trips over (it recompiles the
   preset's template itself), and the guard then aborts `lerna version`. Re-check
   on the next Lerna-Lite major.
+- **No type is hidden from the changelog** (#3023). The preset hides `docs`,
+  `style`, `chore`, `refactor`, `test`, `build` and `ci` by default, so a
+  release those types triggered had nothing to write and Lerna emitted
+  "**Note:** Version bump only" — four of the first fourteen post-1.0 releases.
+  `lerna.json` therefore configures `changelogPreset` as an object and respells
+  the full `types` list with every `hidden` dropped. Relevance is decided by
+  path, so a release exists only because something can reach a consumer; if a
+  commit was worth a release it is worth a line. That covers the cases a path
+  gate must not suppress — `chore(deps): bump …` changes what consumers resolve,
+  and a `docs:` commit on a shipped `AGENTS.md` really does change the tarball
+  (#2954 cut 1.0.11). `.github/scripts/changelog-preset.test.mjs` asserts every
+  type still renders. Unhiding changes nothing about the bump: without
+  `bumpStrict` the preset's `whatBump` returns patch for any non-empty commit
+  range regardless.
+
+  What stays unrenderable: a release whose cause lies outside every package —
+  `pnpm-lock.yaml`, the root manifest, `lerna.json`. Lerna attributes commits
+  per package, so with no package changed every changelog honestly reads
+  "Version bump only" (1.1.11, a lock-only Rollup bump). An entry's scope is
+  always the commit's, never the changelog's package.
+
 - **Not every merge releases.** A push to a release line publishes only when it
   carries a change that can reach a **consumer**. Everything else is skipped
   whole: no npm publish, no `chore(release):` version bump commit, no tag, no
