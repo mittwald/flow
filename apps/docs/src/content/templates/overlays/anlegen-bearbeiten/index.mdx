@@ -5,14 +5,6 @@ description:
   oder bearbeitet wird.
 ---
 
-In mStudio öffnen Anlegen und Bearbeiten kein eigenes Ziel, sondern ein
-[Modal](/components/overlays/modal) über der auslösenden Seite. Die
-darunterliegende Seite bleibt sichtbar; nach dem Speichern kehrt der Nutzer an
-dieselbe Stelle zurück.
-
-Anlegen und Bearbeiten teilen sich ein Template. Sie unterscheiden sich in
-Überschrift, Button-Beschriftung und der Vorbelegung der Felder.
-
 <LiveCodeEditor example="formular-overlay" editorCollapsed />
 
 ---
@@ -20,35 +12,32 @@ Anlegen und Bearbeiten teilen sich ein Template. Sie unterscheiden sich in
 # Verwendung
 
 Verwende dieses Overlay für Eingaben, die zu einem Objekt gehören: anlegen,
-bearbeiten oder konfigurieren.
-
-## Nicht verwenden
-
-- Wenn nichts einzugeben ist und nur eine Entscheidung getroffen wird. Dafür
-  eignet sich ein Overlay zum [Bestätigen](/templates/overlays/bestaetigen).
-- Wenn die Eingabe von einer vorgelagerten Auswahl abhängt. Dafür eignet sich
-  ein Overlay mit [mehreren Schritten](/templates/overlays/mehrere-schritte).
-- Wenn das Formular so lang wird, dass mehrfaches Scrollen nötig ist. Teile die
-  Eingabe in mehrere Schritte oder auf Bereiche der
-  [Detailseite](/templates/seiten/detailseite) auf.
+bearbeiten oder konfigurieren. Wird nichts eingegeben, sondern nur eine
+Entscheidung getroffen, nimm ein Overlay zum
+[Bestätigen](/templates/overlays/bestaetigen); hängt die Eingabe von einer
+vorgelagerten Auswahl ab, eines mit
+[mehreren Schritten](/templates/overlays/mehrere-schritte).
 
 ---
 
-# Struktur
+# Aufbau
 
-Die Überschrift benennt Aktion und Objekt, zum Beispiel „E-Mail-Adresse
-anlegen". Sie ist meist der einzige Hinweis auf den Bezug des Formulars, da die
-auslösende Seite verdeckt ist. Der Absenden-Button trägt dieselbe Aktion wie die
-Überschrift – „Anlegen" beziehungsweise „Speichern".
-
-Ob das Modal mittig erscheint oder als `offCanvas` seitlich einfährt, richtet
-sich nach dem Umfang des Formulars. Ein kurzes Formular mit wenigen Feldern ist
-im mittigen [Modal](/components/overlays/modal) gut aufgehoben; ein langes
-Formular fährt als `offCanvas` ein und scrollt für sich. Ab etwa acht Feldern
-gliedern Zwischenüberschriften das Formular in Abschnitte.
-
-Das Overlay schließt erst nach erfolgreichem Speichern. Bis dahin zeigt der
-Button seinen Ladezustand; ein Fehler erscheint im Overlay am betroffenen Feld.
+- **Overlay-Container** – Ein [Modal](/components/overlays/modal) legt sich über
+  die auslösende Seite; sie bleibt sichtbar, und nach dem Speichern kehrt der
+  Nutzer an dieselbe Stelle zurück. Ob es mittig erscheint oder als `offCanvas`
+  seitlich einfährt, richtet sich nach dem Umfang des Formulars: wenige Felder
+  mittig, ein langes Formular als `offCanvas`, das für sich scrollt.
+- **Überschrift** – Eine [Heading](/components/content/heading) benennt Aktion
+  und Objekt, etwa „E-Mail-Adresse anlegen". Sie ist meist der einzige Hinweis
+  auf den Bezug des Formulars, da die auslösende Seite verdeckt ist.
+- **Formular** – Ein [Form](/components/react-hook-form/form) fasst die Felder
+  zusammen. Ab etwa acht Feldern gliedern Zwischenüberschriften und
+  [Sections](/components/structure/section) es in Abschnitte.
+- **Aktionen** – Eine [ActionGroup](/components/actions/action-group) trägt den
+  absendenden [SubmitButton](/components/react-hook-form/submit-button) mit
+  derselben Aktion wie die Überschrift und daneben „Abbrechen". Das Overlay
+  schließt erst nach erfolgreichem Speichern; ein Fehler erscheint am
+  betroffenen Feld.
 
 ---
 
@@ -56,8 +45,14 @@ Button seinen Ladezustand; ein Fehler erscheint im Overlay am betroffenen Feld.
 
 ## Bearbeiten
 
+Anlegen und Bearbeiten teilen sich ein Template. Sie unterscheiden sich in
+Überschrift, Button-Beschriftung und der Vorbelegung der Felder.
+
 <LiveCodeEditor example="formular-overlay-bearbeiten" editorCollapsed />
 
 ## Kurzes Formular
+
+Bei wenigen Feldern ist das Formular im mittigen
+[Modal](/components/overlays/modal) gut aufgehoben.
 
 <LiveCodeEditor example="formular-overlay-klein" editorCollapsed />

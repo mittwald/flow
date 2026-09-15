@@ -1,18 +1,9 @@
 ---
 title: Dashboard
 description:
-  Die Überblicksseite eines Bereichs. Sie bündelt Kennzahlen, Status und
-  Einstiege in Kacheln und macht die Lage auf einen Blick erfassbar.
+  Die Überblicksseite eines Bereichs, die Kennzahlen, Status und Einstiege in
+  Kacheln bündelt und die Lage auf einen Blick erfassbar macht.
 ---
-
-Ein Dashboard ist oft die Startseite eines Bereichs oder der Einstieg in ein
-Objekt mit vielen Facetten. Es verschafft einen schnellen Überblick, bevor
-Nutzer gezielt in einzelne Themen wechseln.
-
-Getragen wird die Seite von mehreren
-[LayoutCards](/components/structure/layout-card), die ein
-[ColumnLayout](/components/structure/column-layout) zu einer kachelartigen
-Struktur ordnet. Jede Kachel bildet ein Thema ab.
 
 <LiveCodeEditor example="dashboard" editorCollapsed bgColor="mstudio" />
 
@@ -21,28 +12,30 @@ Struktur ordnet. Jede Kachel bildet ein Thema ab.
 # Verwendung
 
 Nutze ein Dashboard, wenn Nutzer **mehrere Themen gleichzeitig** im Blick
-behalten und die wichtigsten davon direkt erreichen sollen.
-
-Zeige nur, was einen Mehrwert bietet. Ordne die Kacheln nach Relevanz und mache
-Kennzahlen und Trends sofort ablesbar – etwa mit einer
-[ProgressBar](/components/status/progress-bar) oder einem
-[DonutChart](/components/data-visualisation/donut-chart). Halte die Fläche
-kompakt, damit der Überblick erhalten bleibt.
+behalten und die wichtigsten davon direkt erreichen sollen. Zeige nur, was einen
+Mehrwert bietet, und ordne die Kacheln nach Relevanz. Geht es um viele
+gleichartige Objekte in einer durchsuchbaren Liste, führt die
+[Übersichtsseite](/templates/seiten/uebersichtsseite) dorthin.
 
 ---
 
-# Struktur
+# Aufbau
 
-Jede Kachel ist eine [LayoutCard](/components/structure/layout-card), in der
-[Sections](/components/structure/section) die Gliederung in Header, Content und
-Footer übernehmen. Das [ColumnLayout](/components/structure/column-layout)
-verteilt die Kacheln über die verfügbaren Spalten und passt sich an
-unterschiedliche Breakpoints an.
-
-Für die visuelle Aufbereitung eignen sich neben Diagrammen ein
-[Image](/components/content/image) oder eine
-[AccentBox](/components/structure/accent-box), um einzelne Kacheln gezielt
-hervorzuheben.
+- **Kopfbereich** – Eine [Heading](/components/content/heading) als H1 benennt
+  den Bereich, dessen Lage das Dashboard zusammenfasst.
+- **Kachel-Anordnung** – Ein [ColumnLayout](/components/structure/column-layout)
+  verteilt die Kacheln über die verfügbaren Spalten und passt sich an
+  unterschiedliche Breakpoints an.
+- **Kacheln** – Jede Kachel ist eine
+  [LayoutCard](/components/structure/layout-card), in der
+  [Sections](/components/structure/section) den Inhalt in Header, Content und
+  Footer gliedern. Jede Kachel bildet genau ein Thema ab.
+- **Visuelle Aufbereitung** – Kennzahlen und Trends werden mit Komponenten wie
+  [ProgressBar](/components/status/progress-bar),
+  [DonutChart](/components/data-visualisation/donut-chart) oder einem
+  [Image](/components/content/image) sofort ablesbar; eine
+  [AccentBox](/components/structure/accent-box) hebt einzelne Kacheln gezielt
+  hervor.
 
 ---
 

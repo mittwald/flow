@@ -5,46 +5,37 @@ description:
   Bearbeitung.
 ---
 
-Ob E-Mail-Adresse, Projekt oder Vertrag: Die Detailseite ist die Arbeitsfläche
-für genau dieses eine Objekt. Von hier aus starten auch Bearbeitungs- und
-Anlegeprozesse.
-
-Getragen wird die Seite von einer
-[LayoutCard](/components/structure/layout-card) als Container und darin
-liegenden [Sections](/components/structure/section). Ein Kopfbereich mit
-[Heading](/components/content/heading) und
-[Breadcrumb](/components/navigation/breadcrumb) gibt Orientierung; der Inhalt
-darunter ist in Themenblöcke gegliedert.
-
 <LiveCodeEditor example="detailseite" editorCollapsed bgColor="mstudio" />
 
 ---
 
 # Verwendung
 
-Nutze die Detailseite, wenn Nutzer sich in **ein einzelnes Objekt** vertiefen
-und es bearbeiten sollen. Sie ist der richtige Ort, sobald zu einem Datensatz
-mehr gehört als eine Zeile in einer Liste: Stammdaten, zusammenhängende
-Aktionen, verschachtelte Informationen.
-
-Der Kopfbereich bietet Orientierung, der Content darunter die eigentlichen
-Informationen und Aktionen. Beginne mit den wichtigsten und staffle Details nach
-unten.
+Nutze die Detailseite, wenn sich Nutzer in **ein einzelnes Objekt** vertiefen
+und es bearbeiten sollen – sobald zu einem Datensatz mehr gehört als eine Zeile
+in einer Liste. Geht es um viele gleichartige Objekte nebeneinander, führt die
+[Übersichtsseite](/templates/seiten/uebersichtsseite) dorthin.
 
 ---
 
-# Struktur
+# Aufbau
 
-Die Trennung in Kopfbereich und Content hält Orientierung und Inhalt sauber
-getrennt: Die [Breadcrumb](/components/navigation/breadcrumb) und der Titel
-bleiben stabil, während der Content je nach Objekt variiert. Die
-[LayoutCard](/components/structure/layout-card) fasst den Content zu einer
-ruhigen Fläche zusammen; [Sections](/components/structure/section) mit
-H2-Überschriften geben ihm eine vorhersehbare Gliederung. Wichtige Funktionen
-liegen zusätzlich als Schnellzugriff im Aktionsmenü aus
-[Button](/components/actions/button) und
-[ContextMenu](/components/actions/context-menu), damit sie ohne Scrollen
-erreichbar sind.
+- **Kopfbereich** – Eine [Heading](/components/content/heading) als H1 benennt
+  das Objekt und macht klar, in welchem Bereich sich der Nutzer befindet. Eine
+  [Breadcrumb](/components/navigation/breadcrumb) ergänzt die Orientierung,
+  navigiert im Seitenbaum und führt schnell auf übergeordnete Ebenen zurück;
+  ihre Einträge bleiben möglichst generisch.
+- **Aktionsmenü** – Ein [Button](/components/actions/button) mit einem
+  [ContextMenu](/components/actions/context-menu) bündelt die wichtigsten
+  Aktionen des Objekts und dient den Nutzern als Schnellzugriff.
+- **Content** – Eine [LayoutCard](/components/structure/layout-card) ist die
+  Grundlage jeder Detailseite. Sie bildet den äußeren Container für den Inhalt
+  und stellt Hintergrund und Padding bereit.
+- **Themenblöcke** – [Sections](/components/structure/section) gliedern den
+  Content in Themenblöcke mit eigener H2-Überschrift und eigenen Aktionen im
+  Header. Sie lassen sich beliebig verschachteln, um auch umfangreiche Inhalte
+  strukturiert darzustellen. Ordne sie nach Wichtigkeit und staffle Details nach
+  unten.
 
 ---
 
@@ -52,8 +43,7 @@ erreichbar sind.
 
 ## Mit TabNavigation
 
-Wird der Content einer Detailseite zu umfangreich, teilt eine
+Wird der Inhalt zu umfangreich, teilt eine
 [TabNavigation](/components/navigation/tab-navigation) ihn in gleichrangige
-Unterseiten. Nutzer wechseln zwischen den Tabs, ohne den Kontext des Objekts zu
-verlieren. Gruppiere dafür Sections, die inhaltlich zusammengehören, auf einem
-gemeinsamen Tab.
+Unterseiten – der Objektkontext im Kopfbereich bleibt erhalten. Gruppiere dafür
+Sections, die inhaltlich zusammengehören, auf einem gemeinsamen Tab.

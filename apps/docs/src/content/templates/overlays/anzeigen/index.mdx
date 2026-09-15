@@ -5,11 +5,6 @@ description:
   folgt.
 ---
 
-Manche Inhalte gehören zu einem Objekt, würden die Seite aber überladen: die
-Details eines Protokolleintrags, das Log eines Durchlaufs oder die vollständige
-Liste hinter einer Zusammenfassung. Ein Overlay zeigt sie bei Bedarf und tritt
-danach wieder zurück.
-
 <LiveCodeEditor example="anzeige-overlay" editorCollapsed />
 
 ---
@@ -18,34 +13,31 @@ danach wieder zurück.
 
 Verwende dieses Overlay für Inhalte, die zu einem Objekt gehören, die Seite aber
 sprengen würden und aus denen keine weitere Aktion folgt: Details, Protokolle,
-Vorschauen oder Belege.
-
-## Nicht verwenden
-
-- Wenn etwas eingegeben wird. Dafür eignet sich ein Overlay zum
-  [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
-- Wenn eine Entscheidung zu treffen ist. Dafür eignet sich ein Overlay zum
-  [Bestätigen](/templates/overlays/bestaetigen).
-- Wenn der Inhalt dauerhaft gebraucht wird. Was jeder Besucher sehen soll,
-  gehört fest auf die [Detailseite](/templates/seiten/detailseite).
+Vorschauen oder Belege. Wird etwas eingegeben, nimm ein Overlay zum
+[Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten); ist eine
+Entscheidung zu treffen, eines zum
+[Bestätigen](/templates/overlays/bestaetigen). Was jeder Besucher dauerhaft
+sehen soll, gehört fest auf die [Detailseite](/templates/seiten/detailseite).
 
 ---
 
-# Struktur
+# Aufbau
 
-Die einzige Aktion ist „Schließen". Ein „Abbrechen" oder „OK" entfällt, da
-nichts abzubrechen und nichts zu bestätigen ist.
-
-Kurze Inhalte erscheinen im mittigen [Modal](/components/overlays/modal).
-Umfangreiche Inhalte wie ein Log oder eine lange Liste fahren als `offCanvas`
-ein und scrollen für sich.
-
-Die Überschrift benennt den gezeigten Gegenstand. Bei strukturierten Details
-stehen die Metadaten – wer, wann, woran – oben als Reihe von
-[LabeledValue](/components/content/labeled-value), der eigentliche Inhalt
-darunter. Werte, die weiterverwendet werden, erhalten einen
-[CopyButton](/components/actions/copy-button); das Overlay ist oft der einzige
-Ort, an dem ein Wert vollständig steht.
+- **Overlay-Container** – Ein [Modal](/components/overlays/modal); kurze Inhalte
+  erscheinen mittig, umfangreiche wie ein Log oder eine lange Liste fahren als
+  `offCanvas` ein und scrollen für sich.
+- **Überschrift** – Eine [Heading](/components/content/heading) benennt den
+  gezeigten Gegenstand. Bei strukturierten Details stehen die Metadaten – wer,
+  wann, woran – oben als Reihe von
+  [LabeledValue](/components/content/labeled-value), der eigentliche Inhalt
+  darunter.
+- **Inhalt** – Der gezeigte Gegenstand selbst, etwa ein Log in einem
+  [CodeBlock](/components/content/code-block). Werte, die weiterverwendet
+  werden, erhalten einen [CopyButton](/components/actions/copy-button); das
+  Overlay ist oft der einzige Ort, an dem ein Wert vollständig steht.
+- **Aktion** – Eine [ActionGroup](/components/actions/action-group) trägt als
+  einzige Aktion „Schließen". Ein „Abbrechen" oder „OK" entfällt, da nichts
+  abzubrechen und nichts zu bestätigen ist.
 
 ---
 

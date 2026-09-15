@@ -5,11 +5,6 @@ description:
   informiert und eine Entscheidung einholt.
 ---
 
-Manche Aktionen lassen sich nicht zurücknehmen oder wirken sich an Stellen aus,
-die der Nutzer im Moment der Aktion nicht überblickt. Vor einer solchen Aktion
-informiert ein Overlay darüber, was sie bewirkt und was von ihr abhängt, und
-holt eine bewusste Entscheidung ein.
-
 <LiveCodeEditor example="bestaetigungs-overlay" editorCollapsed />
 
 ---
@@ -18,29 +13,26 @@ holt eine bewusste Entscheidung ein.
 
 Verwende dieses Overlay, wenn eine Aktion Daten unwiederbringlich entfernt,
 etwas Kostenpflichtiges beendet oder weitere Objekte betrifft – etwa löschen,
-kündigen oder eine Verknüpfung auflösen.
-
-## Nicht verwenden
-
-- Für Aktionen, die sich sofort wieder rückgängig machen lassen. Eine Rückfrage
-  hält den Nutzer hier nur auf und wird mit der Zeit übersehen.
-- Wenn vor der Entscheidung noch etwas einzugeben ist – ein Grund, ein
-  Zieldatum. Dafür eignet sich ein Overlay zum
-  [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
+kündigen oder eine Verknüpfung auflösen. Lässt sich die Aktion sofort wieder
+rückgängig machen, halte den Nutzer nicht mit einer Rückfrage auf. Ist vor der
+Entscheidung noch etwas einzugeben, nimm ein Overlay zum
+[Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
 
 ---
 
-# Struktur
+# Aufbau
 
-Das Overlay erscheint mittig und ist so groß wie sein Inhalt.
-
-Die Überschrift benennt die Aktion, der Text ihre Folgen: was mit den Daten
-geschieht und was von der Aktion abhängt. Betrifft die Aktion weitere Objekte,
-werden sie hier genannt – nach der Bestätigung ist diese Information nicht mehr
-zugänglich.
-
-Der bestätigende Button trägt die Aktion als Verb, etwa „Löschen" statt „OK",
-und ist als gefährliche Aktion ausgezeichnet.
+- **Overlay-Container** – Ein [Modal](/components/overlays/modal) erscheint
+  mittig und ist so groß wie sein Inhalt.
+- **Überschrift und Folgen** – Eine [Heading](/components/content/heading)
+  benennt die Aktion, ein [Text](/components/content/text) darunter ihre Folgen:
+  was mit den Daten geschieht und was von der Aktion abhängt. Betrifft die
+  Aktion weitere Objekte, werden sie hier genannt – nach der Bestätigung ist
+  diese Information nicht mehr zugänglich.
+- **Aktionen** – Eine [ActionGroup](/components/actions/action-group) trägt den
+  bestätigenden [Button](/components/actions/button) mit der Aktion als Verb,
+  etwa „Löschen" statt „OK", als gefährliche Aktion ausgezeichnet, und daneben
+  „Abbrechen".
 
 ---
 
