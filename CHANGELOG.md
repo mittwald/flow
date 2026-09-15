@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.51](https://github.com/mittwald/flow/compare/1.2.0-next.50...1.2.0-next.51) (2026-09-15)
+
+### Build System
+
+* **deps:** bump the production group across 1 directory with 19 updates ([#3156](https://github.com/mittwald/flow/issues/3156)) ([443a3bc](https://github.com/mittwald/flow/commit/443a3bcffe7284d644166c932102ec4bceaccd5e))
+
+## [1.1.41](https://github.com/mittwald/flow/compare/1.1.40...1.1.41) (2026-09-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.41 ([d810b78](https://github.com/mittwald/flow/commit/d810b78fe2a20ec43247bc4f148fe956272e943d))
+
 ## [1.2.0-next.50](https://github.com/mittwald/flow/compare/1.1.40...1.2.0-next.50) (2026-09-15)
 
 ### Performance Improvements
