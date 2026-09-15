@@ -91,7 +91,7 @@
      * The bottom slot carries arbitrary consumer content (and the accordion's
      * expanded content), so it stays fully clickable and selectable.
      */
-    :global(.flow--list--list-item-view--bottom-content) {
+    .bottomContent {
       position: relative;
       z-index: 2;
     }

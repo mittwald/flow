@@ -5,7 +5,6 @@ declare const classNames: {
   readonly bottomContent: "bottomContent";
   readonly "flow--avatar": "flow--avatar";
   readonly link: "link";
-  readonly "flow--list--list-item-view--bottom-content": "flow--list--list-item-view--bottom-content";
   readonly tile: "tile";
 };
 export default classNames;
