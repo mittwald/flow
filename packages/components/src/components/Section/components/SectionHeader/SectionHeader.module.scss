@@ -13,6 +13,10 @@
     align-items: center;
   }
 
+  /* Keys on the heading's rendered element, not on `Heading`'s level class: a
+     `Heading` with `elementType` renders a span/p that carries the level class
+     but must not claim heading-to-content spacing. */
+  // stylelint-disable selector-max-type -- element type is the signal, see above
   &:not(:first-child):has(h2),
   &:not(:first-child):has(h3) {
     margin-top: var(--section--sub-heading-spacing-m);
@@ -23,4 +27,5 @@
   &:not(:first-child):has(h6) {
     margin-top: var(--section--sub-heading-spacing-s);
   }
+  // stylelint-enable selector-max-type
 }

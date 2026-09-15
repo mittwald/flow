@@ -5,6 +5,9 @@
   container-type: inline-size;
   width: 100%;
 
+  // A consumer `Form` wrapping the section content. `Form` is a plain FC, so
+  // the props context cannot give it a class.
+  // stylelint-disable-next-line selector-max-type -- consumer form, no class
   > form {
     display: flex;
     flex-direction: column;
@@ -31,6 +34,10 @@
     padding-block-start: var(--section--section-to-section-spacing);
   }
 
+  /* Keys on the heading's rendered element, not on `Heading`'s level class: a
+     `Heading` with `elementType` renders a span/p that carries the level class
+     but must not claim heading-to-content spacing. */
+  // stylelint-disable selector-max-type -- element type is the signal, see above
   h2.heading:not(:first-child),
   h3.heading:not(:first-child) {
     margin-top: var(--section--sub-heading-spacing-m);
@@ -41,4 +48,5 @@
   h6.heading:not(:first-child) {
     margin-top: var(--section--sub-heading-spacing-s);
   }
+  // stylelint-enable selector-max-type
 }

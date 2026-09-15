@@ -21,7 +21,8 @@
     border-start-end-radius: calc(var(--layout-card--corner-radius) - 1px);
     border-start-start-radius: calc(var(--layout-card--corner-radius) - 1px);
 
-    li:first-child :global(.flow--tab-navigation--link) {
+    :global(.flow--tab-navigation--item):first-child
+      :global(.flow--tab-navigation--link) {
       border-start-start-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
 
