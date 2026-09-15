@@ -1,0 +1,91 @@
+.appShell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
+}
+
+/*
+ * The inline frame is a zoomed-out 16:9 thumbnail: the shell renders at 1.6× the
+ * frame size and is scaled back down, so its whole desktop layout (nav, header,
+ * content) reads at a glance. Hovering reveals the button that opens it
+ * near-fullscreen.
+ */
+.previewFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: var(--layout-card--border-width) solid
+    var(--layout-card--border-color);
+  border-radius: var(--layout-card--corner-radius);
+}
+
+.previewScaler {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 160%;
+  height: 160%;
+  transform: scale(0.625);
+  transform-origin: top left;
+
+  /* Non-interactive: the overlay button owns the clicks. */
+  pointer-events: none;
+}
+
+/* Full-cover trigger; a click anywhere (button or dimmed backdrop) opens it. */
+.previewButton {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+
+  /* Keep the normal cursor — the preview does not need to signal a zoom. */
+  cursor: default;
+}
+
+/*
+ * The dimmed backdrop with the decorative "Vorschau" button. Non-interactive:
+ * clicks fall through to the full-cover trigger beneath. Revealed on hover or
+ * keyboard focus of the frame.
+ */
+.previewOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.5);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.previewFrame:hover .previewOverlay,
+.previewFrame:focus-within .previewOverlay {
+  opacity: 1;
+}
+
+/*
+ * The stage fills most of the LightBox so a shell with real navigation reads as
+ * a whole layout; the shell sizes to `height: 100%` inside it.
+ */
+.stage {
+  width: 90vw;
+  height: 85vh;
+  overflow: auto;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xs);
+}
+
+.fileName {
+  font-family: var(--font-family--mono, ui-monospace, monospace);
+  font-size: 0.8125rem;
+  opacity: 0.7;
+}

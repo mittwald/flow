@@ -9,6 +9,10 @@ import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
+import {
+  AppShellPreview,
+  appShellExamples,
+} from "@/lib/mdx/components/AppShellPreview";
 import { usePathname } from "next/navigation";
 import { getWireframe } from "@/app/components/_components/wireframe/registry";
 
@@ -79,6 +83,29 @@ export const MdxFileView: FC<Props> = (props) => {
   > = ({ example = "default", ...rest }) => (
     <LiveCodeEditor code={mdxFile.getExample(example)} {...rest} />
   );
+
+  const ExampleAppShell: FC<{ example: string; files?: string[] }> = ({
+    example,
+    files,
+  }) => {
+    const component = appShellExamples[example];
+    if (!component) {
+      throw new Error(`Unknown App Shell example: ${example}`);
+    }
+    const fileNames = files ?? [`${example}.tsx`, `${example}.module.css`];
+    return (
+      <AppShellPreview
+        component={component}
+        files={fileNames.map((name) => ({
+          name,
+          code: mdxFile.getExample(
+            name.endsWith(".tsx") ? name.slice(0, -".tsx".length) : name,
+          ),
+          language: name.endsWith(".css") ? "css" : "tsx",
+        }))}
+      />
+    );
+  };
 
   const ExampleDo: FC<ExampleProps> = (props) => {
     const { exampleText, example, children, ...rest } = props;
@@ -182,6 +209,7 @@ export const MdxFileView: FC<Props> = (props) => {
 
   const mdxComponents = {
     LiveCodeEditor: ExampleLiveCodeEditor,
+    AppShell: ExampleAppShell,
     Wireframe: WireframePreview,
     PropertiesTables: ExamplePropertiesTables,
     Do: ExampleDo,
