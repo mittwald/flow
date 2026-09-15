@@ -12,6 +12,7 @@
   ],
   "homepage": "https://github.com/mittwald/flow/tree/main/packages/react-tunnel",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

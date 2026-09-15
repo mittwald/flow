@@ -5,6 +5,7 @@
   "description": "React components that can be used by mStudio extension developers",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

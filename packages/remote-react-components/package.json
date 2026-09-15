@@ -5,6 +5,7 @@
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "sideEffects": [
     "**/*.css",
     "**/*.scss"

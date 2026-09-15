@@ -22,8 +22,14 @@
  *
  * `exclude` REPLACES the tsconfig's own list rather than extending it, so
  * `node_modules` and `dist` are repeated here.
+ *
+ * `declarationMap` is on in the shared tsconfig presets, which is right for
+ * cross-package go-to-definition inside the monorepo. In a published tarball
+ * the maps are dead: their `sources` point into `src/`, which no package ships.
+ * Turning them off here leaves the monorepo builds untouched.
  */
 export const publishedDtsOptions = {
+  compilerOptions: { declarationMap: false },
   include: ["src"],
   exclude: [
     "node_modules/**",
