@@ -47,6 +47,8 @@ export const Heading = flowComponent("Heading", (props) => {
 
   const Element = elementType ?? Aria.Heading;
 
+  const buttonSize = size === "xl" || size === "xxl" ? "m" : "s";
+
   const propsContext: PropsContext = {
     Icon: {
       "aria-hidden": true,
@@ -63,6 +65,13 @@ export const Heading = flowComponent("Heading", (props) => {
         id: "headingContent",
         component: "Heading",
       },
+    },
+    Button: {
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
+      size: buttonSize,
     },
     ContextualHelpTrigger: {
       tunnel: {

@@ -4,7 +4,6 @@ declare const classNames: {
   readonly ul: "ul";
   readonly separator: "separator";
   readonly anchorLinkHeading: "anchorLinkHeading";
-  readonly "flow--heading--heading-text": "flow--heading--heading-text";
   readonly anchorButton: "anchorButton";
   readonly doAndDontCode: "doAndDontCode";
   readonly doAndDontText: "doAndDontText";
