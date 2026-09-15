@@ -1,4 +1,15 @@
 /* auto-generated file */
-import { IconAppWindow as Icon } from "@tabler/icons-react";
+/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+import { createTablerIcon } from "../lib/createTablerIcon.ts";
 import type { FC } from "react";
-export const IconApp = Icon as FC;
+
+export const IconApp = createTablerIcon("outline", "app-window", "AppWindow", [
+  [
+    "path",
+    {
+      d: "M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10",
+    },
+  ],
+  ["path", { d: "M6 8h.01" }],
+  ["path", { d: "M9 8h.01" }],
+]) as FC;

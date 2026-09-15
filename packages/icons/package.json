@@ -25,11 +25,9 @@
     "build:icons": "tsx src/dev/generate.ts",
     "clean": "rimraf dist src/components/*"
   },
-  "dependencies": {
-    "@tabler/icons-react": "^3.46.0"
-  },
   "devDependencies": {
     "@mittwald/flow-icons-base": "workspace:*",
+    "@tabler/icons-react": "^3.46.0",
     "@types/react": "^19.2",
     "react": "^19.2.8",
     "rimraf": "^6.1.3",
