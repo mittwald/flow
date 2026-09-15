@@ -1,8 +1,11 @@
 import type { FC, PropsWithChildren, Ref, RefObject } from "react";
+import { useContext } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
+import type { PopoverModality } from "../../Popover";
+import { NonModalPopoverContent } from "../NonModalPopoverContent";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -10,6 +13,8 @@ export interface PopoverContentProps
   isDialogContent?: boolean;
   isOpen?: boolean;
   width?: string | number;
+  modality?: PopoverModality;
+  isNonModal?: boolean;
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef?: RefObject<Element | null>;
@@ -26,16 +31,52 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     ref,
     isOpen,
     width,
+    modality,
+    isNonModal,
+    triggerRef,
     ...rest
   } = props;
 
   const isActivityActive = useIsActivityActive();
 
-  const ContentComponent = isDialogContent ? Aria.Dialog : "div";
+  // A trigger hands its popover a ref through the context react-aria sets up,
+  // and the non-modal popover has to anchor itself with it.
+  const popoverContext = useContext(Aria.PopoverContext);
+  const triggerRefFromContext =
+    popoverContext && "triggerRef" in popoverContext
+      ? popoverContext.triggerRef
+      : undefined;
 
   if (!isActivityActive) {
     return null;
   }
+
+  if (modality === "non-modal") {
+    const anchor = triggerRef ?? triggerRefFromContext;
+
+    // Without an anchor there is nothing to position against. react-aria's own
+    // popover has the same requirement; it just throws further in.
+    if (!anchor) {
+      return null;
+    }
+
+    return (
+      <NonModalPopoverContent
+        {...rest}
+        className={className}
+        ref={ref}
+        isOpen={isOpen}
+        width={width}
+        withTip={withTip}
+        triggerRef={anchor}
+        onOpenChange={onOpenChange}
+      >
+        {children}
+      </NonModalPopoverContent>
+    );
+  }
+
+  const ContentComponent = isDialogContent ? Aria.Dialog : "div";
 
   return (
     <Aria.Popover
@@ -44,6 +85,8 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
       containerPadding={16}
       ref={ref}
       isOpen={isOpen}
+      isNonModal={isNonModal}
+      triggerRef={triggerRef}
       onOpenChange={onOpenChange}
       style={{ width }}
     >
