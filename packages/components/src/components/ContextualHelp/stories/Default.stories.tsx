@@ -6,6 +6,19 @@ import {
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
+import { Heading } from "@/components/Heading";
+import { Section } from "@/components/Section";
+
+// Enough page to scroll: a modal contextual help blocks that, a non-modal one
+// does not.
+const pageContent = Array.from({ length: 12 }, (_, index) => (
+  <Text key={index}>
+    A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+    decisive blow against the Galactic Empire. Rebel spies managed to steal
+    secret plans to the Empire&apos;s ultimate weapon, the Death Star, an
+    armored space station with enough power to destroy an entire planet.
+  </Text>
+));
 
 const meta: Meta<typeof ContextualHelp> = {
   title: "Overlays/ContextualHelp",
@@ -14,17 +27,21 @@ const meta: Meta<typeof ContextualHelp> = {
     controls: { disable: true },
   },
   render: (props) => (
-    <ContextualHelpTrigger subject="ranks & roles">
-      <Button />
-      <ContextualHelp {...props}>
-        <Text>
-          Each member of the Rebel Alliance is assigned a rank for every mission
-          and/or squadron. This allows the fleet to coordinate the fight against
-          the Empire in a completely new and modern way.
-        </Text>
-        <Link>Learn more</Link>
-      </ContextualHelp>
-    </ContextualHelpTrigger>
+    <Section>
+      <ContextualHelpTrigger subject="ranks & roles">
+        <Button />
+        <ContextualHelp {...props}>
+          <Heading>Ranks & roles</Heading>
+          <Text>
+            Each member of the Rebel Alliance is assigned a rank for every
+            mission and/or squadron. This allows the fleet to coordinate the
+            fight against the Empire in a completely new and modern way.
+          </Text>
+          <Link>Learn more</Link>
+        </ContextualHelp>
+      </ContextualHelpTrigger>
+      {pageContent}
+    </Section>
   ),
 };
 export default meta;
@@ -32,3 +49,9 @@ export default meta;
 type Story = StoryObj<typeof ContextualHelp>;
 
 export const Default: Story = {};
+
+export const NonModal: Story = {
+  args: {
+    modality: "non-modal",
+  },
+};

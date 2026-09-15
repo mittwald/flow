@@ -13,7 +13,9 @@ export class RemotePopoverContentElement extends FlowRemoteElement<RemotePopover
     return {
       className: {},
       isDialogContent: {},
+      isNonModal: {},
       isOpen: {},
+      modality: {},
       triggerRef: {},
       width: {},
       withTip: {},
