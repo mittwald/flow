@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.47](https://github.com/mittwald/flow/compare/1.2.0-next.46...1.2.0-next.47) (2026-09-15)
+
+### Bug Fixes
+
+* **components:** keep field values controlled from the first render ([#3078](https://github.com/mittwald/flow/issues/3078)) ([16c6981](https://github.com/mittwald/flow/commit/16c69814f4459476c01392ea5d4935c6bef8c6dd))
+
 ## [1.2.0-next.46](https://github.com/mittwald/flow/compare/1.2.0-next.45...1.2.0-next.46) (2026-09-15)
 
 ### Bug Fixes
