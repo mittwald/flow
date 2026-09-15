@@ -73,6 +73,7 @@ export default function Layout(props: PropsWithChildren) {
 
                     <NavigationGroup collapsable>
                       <Heading>Components</Heading>
+                      <NavigationItem page="activity">Activity</NavigationItem>
                       <NavigationItem page="chart">Chart</NavigationItem>
                       <NavigationItem page="code-editor">
                         CodeEditor
