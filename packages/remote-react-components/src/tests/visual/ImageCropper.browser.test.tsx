@@ -51,8 +51,8 @@ test.skipIf(crossVersion({ below: "1.0.16" })).each(testEnvironments)(
     await render(
       <ImageCropper
         image={brokenImage}
-        height={200}
-        width={200}
+        height={240}
+        width={320}
         errorView={
           <IllustratedMessage color="danger">
             <IconDanger />
