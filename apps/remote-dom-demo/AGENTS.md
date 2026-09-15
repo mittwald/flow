@@ -13,3 +13,10 @@ events, forms, suspense, ext-bridge, navigation, performance).
   `next dev`'s own managed AGENTS.md block is off — see `agentRules` in
   `next.config.js`.
 - Run with `pnpm nx dev remote-dom-demo`.
+- CSS-module class names are typed by committed `*.module.d.scss.ts` stubs
+  (shared generator, see the root
+  [Generated code](../../AGENTS.md#generated-code--must-be-committed) table).
+  `dev` regenerates them, which is the only thing that keeps them current — this
+  app has no build or compile target, so unlike everywhere else CI neither
+  type-checks them nor notices a stale one. Add or rename a class and commit
+  what `pnpm nx build:scss-types remote-dom-demo` writes.
