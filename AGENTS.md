@@ -148,9 +148,11 @@ committed, and hand-editing them is futile** (headers say "auto-generated").
 | `packages/components/MIGRATION.md` + `packages/codemods/src/migrations.generated.ts`                                                         | `pnpm nx build codemods`                                           |
 | `packages/codemods/src/flowPackages.generated.ts`                                                                                            | same as above                                                      |
 
-Changed props on an `@flr-generate` component, added an icon, edited prop JSDoc,
-or changed a `.module.scss`'s class names? Regenerate (or simply `pnpm build`)
-and commit the results.
+Changed props on an `@flr-generate` component, added an icon, **bumped
+`@tabler/icons-react`** (its path data is inlined into `packages/icons` — see
+[icons-base/AGENTS.md](packages/icons-base/AGENTS.md)), edited prop JSDoc, or
+changed a `.module.scss`'s class names? Regenerate (or simply `pnpm build`) and
+commit the results.
 
 ## Development workflow
 

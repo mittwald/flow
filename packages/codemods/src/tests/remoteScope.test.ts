@@ -66,6 +66,7 @@ const targets: Record<string, string[]> = {
   "imports-to-package-root": [],
   "renamed-css-export": [],
   "password-tools-subpath-renamed": [],
+  "tabler-icons-no-longer-transitive": [],
 };
 
 /**
@@ -76,6 +77,7 @@ const notNameScoped = new Set([
   "imports-to-package-root",
   "renamed-css-export",
   "password-tools-subpath-renamed",
+  "tabler-icons-no-longer-transitive",
 ]);
 
 /**
