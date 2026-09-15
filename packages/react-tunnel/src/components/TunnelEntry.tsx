@@ -8,7 +8,20 @@ export type TunnelEntryChildren =
 export interface TunnelEntryProps {
   id?: string;
   children?: TunnelEntryChildren;
-  /** Static entry ID instead of generated ID by `useId` */
+  /**
+   * Static entry ID instead of generated ID by `useId`.
+   *
+   * Needed wherever one logical element is rendered by more than one component
+   * instance — react-aria, for example, renders the children of a collection
+   * twice: once into its hidden collection document, once for real. Each
+   * instance generates its own `useId`, so with a generated entry id the exit
+   * renders the element once per instance. A static id derived from the element
+   * itself collapses them into one entry; the entry is kept until the last of
+   * the instances unmounts.
+   *
+   * Must be unique among the siblings of one tunnel — two unrelated entries
+   * sharing an id overwrite each other.
+   */
   staticEntryId?: string;
   /** Select a dedicated tunnel provider by ID. */
   providerId?: string;
@@ -17,20 +30,24 @@ export interface TunnelEntryProps {
 export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const { children, id, staticEntryId, providerId } = props;
   const tunnel = useTunnelState(providerId);
-  const usedId = useId();
-  const entryId = staticEntryId ?? usedId;
+  /**
+   * Identifies this entry instance, as opposed to `entryId`, which a
+   * `staticEntryId` deliberately shares between several instances.
+   */
+  const ownerId = useId();
+  const entryId = staticEntryId ?? ownerId;
   const index = tunnel.useEntryIndex();
 
   const mounted = useRef(false);
 
   if (!mounted.current) {
-    tunnel.setRenderPhaseChildren(id, entryId, index, children);
+    tunnel.setRenderPhaseChildren(id, entryId, ownerId, index, children);
   }
 
   useLayoutEffect(() => {
     mounted.current = true;
-    tunnel.setChildren(id, entryId, index, children);
-  }, [children, id, entryId, index, providerId]);
+    tunnel.setChildren(id, entryId, ownerId, index, children);
+  }, [children, id, entryId, ownerId, index, providerId]);
 
   useEffect(() => {
     /**
@@ -40,9 +57,9 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
      * in the TunnelExit may be disrupted as well.
      */
     return () => {
-      tunnel.deleteChildren(id, entryId);
+      tunnel.deleteChildren(id, entryId, ownerId);
     };
-  }, [id, entryId, providerId]);
+  }, [id, entryId, ownerId, providerId]);
 
   return null;
 };
