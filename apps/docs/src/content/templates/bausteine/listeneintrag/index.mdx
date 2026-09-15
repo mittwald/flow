@@ -1,0 +1,94 @@
+---
+title: Listeneintrag
+---
+
+Ein Eintrag in einer Liste beantwortet drei Fragen auf einen Blick: Was ist das,
+um welches Objekt geht es, und in welchem Zustand ist es. Dafür hat er feste
+Plätze – Avatar, Titel, Untertitel, Zusatzinformation, Aktionen. Die
+[ListItemView](/components/list/list-item-view) verteilt die Kinder selbst auf
+diese Plätze, unabhängig davon, in welcher Reihenfolge sie im Code stehen.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="listeneintrag" editorCollapsed />
+
+---
+
+# Wann verwenden
+
+In jeder Liste – auf der [Übersichtsseite](/templates/seiten/uebersichtsseite)
+wie im [Listen-Bereich](/templates/bereiche/listen-bereich).
+
+**Nicht verwenden**, wenn
+
+- die Einträge gleichförmige Wertetupel sind. Dann liest sich die Sammlung als
+  Tabelle besser — das ist derselbe `List` im Tabellen-Modus, und dort tritt an
+  die Stelle dieses Bausteins eine Tabellenzeile mit Icon-Buttons.
+- ein Vorschaubild das Erkennungsmerkmal ist. Dann ist die Kachelansicht
+  richtig; die Bestandteile bleiben dieselben.
+
+---
+
+# Warum diese Struktur
+
+**Der Titel ist das, wonach gesucht wird.** Die E-Mail-Adresse, der Hostname,
+der Projektname – nicht der Typ und nicht die ID. Wer eine Liste überfliegt,
+liest die Titel.
+
+**Der Avatar codiert den Typ, nicht die Identität.** Gleiche Farbe und gleiches
+Icon für gleiche Typen, über alle Listen hinweg. Ein Avatar, der je Eintrag
+etwas anderes bedeutet, ist Dekoration.
+
+**Badges am Titel, nicht als Text.** „Nicht verifiziert" als Badge ist
+auffindbar; derselbe Satz im Untertitel geht unter. Badges erledigen dabei drei
+verschiedene Aufgaben, und die Wahl der Komponente folgt der Aufgabe:
+
+- **Alarm** – ein Zustand, der Aufmerksamkeit verlangt, als
+  [AlertBadge](/components/status/alert-badge) mit `danger` oder `warning`.
+  Derselbe Zustand erscheint auf der Detailseite als Alert, aus derselben
+  Quelle.
+- **Aktueller Zustand** – „Aktive Sitzung", „Bezahlt", „Offen": ein
+  [Badge](/components/status/badge), oft in `success`, der sagt, wo man steht.
+- **Herkunft oder Rolle** – „Standard" am systemeigenen Zeitplan, „Beta", „Neu",
+  „Beliebt": ein neutraler Badge, der den Eintrag einordnet statt ihn zu
+  bewerten.
+
+**Die Aktionen liegen im [ContextMenu](/components/actions/context-menu) am
+Eintrag.** Buttons je Eintrag wiederholen sich mit jeder Zeile und ziehen den
+Blick von den Titeln ab.
+
+**Kein Eintrag lädt eigene Daten nach.** Was ein Eintrag zeigt, steht in den
+Daten der Liste. Ein Eintrag, der beim Rendern nachlädt, macht aus einer Liste
+mit zwanzig Zeilen zwanzig Ladezustände.
+
+---
+
+# Varianten und Abwandlung
+
+## Als Kachel
+
+Trägt ein Vorschaubild oder ein großes Typ-Icon zur Erkennung bei, wird aus dem
+Eintrag eine Kachel. Die Bestandteile bleiben dieselben und stehen an denselben
+Plätzen – nur die Anordnung wechselt von Zeile auf Raster.
+
+<LiveCodeEditor example="listeneintrag-kachel" editorCollapsed />
+
+## Mit Mehrfachauswahl
+
+Für eine Aktion auf mehreren Einträgen bekommt der Eintrag eine
+[Checkbox](/components/form-controls/checkbox). Das `href` entfällt dabei – ein
+Eintrag kann nicht gleichzeitig navigieren und auswählen. Die Aktion auf der
+Auswahl steht über der Liste, nicht am Eintrag.
+
+<LiveCodeEditor example="listeneintrag-auswahl" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Mit Kennzahl.** Ein Wert, der Einträge vergleichbar macht – belegter Speicher,
+Laufzeit – steht als Zusatzinformation rechts, nicht im Untertitel.
+
+**Verdichtet.** In einem [Listen-Bereich](/templates/bereiche/listen-bereich)
+reichen oft Titel und eine Zeile darunter. Der Avatar bleibt trotzdem – er hält
+die Einträge über verschiedene Listen hinweg wiedererkennbar.
