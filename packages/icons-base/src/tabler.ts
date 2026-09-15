@@ -4,12 +4,12 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 
 /** A single SVG child of an icon: tag name plus its attributes. */
-export type TablerIconNode = [
+type TablerIconNode = [
   tag: string,
   attributes: Record<string, string | number>,
 ][];
 
-export interface TablerIcon {
+interface TablerIcon {
   /** Selects Tabler's default `<svg>` attribute set. */
   type: "outline" | "filled";
   /** Kebab-case name, used for the `tabler-icon-<name>` class. */
