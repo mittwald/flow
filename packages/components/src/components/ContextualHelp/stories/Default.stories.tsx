@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useRef } from "react";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
@@ -8,6 +9,7 @@ import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
+import { useOverlayController } from "@/lib/controller";
 
 // Enough page to scroll: a modal contextual help blocks that, a non-modal one
 // does not.
@@ -50,8 +52,47 @@ type Story = StoryObj<typeof ContextualHelp>;
 
 export const Default: Story = {};
 
+/*
+ * The feature spotlight: it opens on its own, points at a control the user did
+ * not ask about, and is dismissed with its own button. Scroll the page — it
+ * stays, and rides along with its anchor.
+ */
+const Spotlight = () => {
+  const anchor = useRef<HTMLButtonElement>(null);
+  const controller = useOverlayController("ContextualHelp", {
+    isDefaultOpen: true,
+  });
+
+  return (
+    <Section>
+      <Button ref={anchor} onPress={() => controller.open()}>
+        Assign a rank
+      </Button>
+
+      <ContextualHelp
+        controller={controller}
+        triggerRef={anchor}
+        modality="non-modal"
+        width={320}
+      >
+        <Heading>New: assign a rank</Heading>
+        <Text>
+          You can now assign a rank right here, without going through the
+          squadron overview.
+        </Text>
+        <Button size="s" onPress={() => controller.close()}>
+          Got it
+        </Button>
+      </ContextualHelp>
+
+      {pageContent}
+    </Section>
+  );
+};
+
 export const NonModal: Story = {
   args: {
     modality: "non-modal",
   },
+  render: () => <Spotlight />,
 };
