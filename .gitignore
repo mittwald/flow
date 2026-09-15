@@ -24,6 +24,11 @@ coverage/*.json
 **/.DS_Store
 packages/remote-react-components/.vitest-attachments
 
+# The full react-docgen dump: a build input for the component index, the
+# status registry and the remote-components generator. Outside `dist` so
+# it stays out of the published tarball.
+packages/components/.cache
+
 # Local Claude Code preview launch config
 .claude/launch.json
 

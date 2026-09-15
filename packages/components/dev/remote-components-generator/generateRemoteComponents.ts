@@ -27,16 +27,14 @@ import {
   generateViewComponentDeclaration,
 } from "./generation/generateViewComponent";
 import path from "path";
+import { docPropertiesInternalFileFromRoot } from "../docProperties";
 
 const jetpack = jp.dir("../..");
 
 async function generate() {
   console.log("🤓 Read component specification file");
   let components: ComponentDoc[] =
-    (await jetpack.readAsync(
-      "packages/components/dist/assets/doc-properties.json",
-      "json",
-    )) ?? [];
+    (await jetpack.readAsync(docPropertiesInternalFileFromRoot, "json")) ?? [];
 
   console.log("✅  Done");
   console.log("");
