@@ -32,9 +32,13 @@
     cursor: pointer;
   }
 
-  &:where(.hasAction):not(
-      &:has(:global(.flow--list--items--item--view--bottom-content):hover)
-    ) {
+  /*
+   * The bottom content carries its own interactive elements, so hovering it
+   * must not highlight the whole item. `.bottomContent` is defined here and
+   * applied by ListItemViewContent, so the class name stays type-checked
+   * instead of naming ListItemView's generated class from the outside.
+   */
+  &:where(.hasAction):not(:has(.bottomContent:hover)) {
     &:where(:not(.isSelected)) {
       &:hover {
         background-color: var(--list-item--background-color--hover);
@@ -87,7 +91,7 @@
      * The bottom slot carries arbitrary consumer content (and the accordion's
      * expanded content), so it stays fully clickable and selectable.
      */
-    :global(.flow--list--list-item-view--bottom-content) {
+    .bottomContent {
       position: relative;
       z-index: 2;
     }
