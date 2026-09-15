@@ -9,6 +9,7 @@
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",
       "!{projectRoot}/src/**/*.module.d.scss.ts",
+      "!{projectRoot}/src/**/*.module.d.css.ts",
       "!{projectRoot}/src/status/component-status.json",
       "!{projectRoot}/src/status/componentStatus.ts",
       "!{projectRoot}/src/**/*.yaml"
@@ -82,10 +83,15 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/src/**/*.scss",
+        "{projectRoot}/src/**/*.css",
         "{projectRoot}/dev/scss-types/**/*",
-        "{projectRoot}/vite.config.ts"
+        "{projectRoot}/vite.config.ts",
+        "{workspaceRoot}/packages/core/src/scssTypes/**/*"
       ],
-      "outputs": ["{projectRoot}/src/**/*.module.d.scss.ts"]
+      "outputs": [
+        "{projectRoot}/src/**/*.module.d.scss.ts",
+        "{projectRoot}/src/**/*.module.d.css.ts"
+      ]
     },
     "build:status-registry": {
       "cache": true,

@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.37](https://github.com/mittwald/flow/compare/1.1.36...1.1.37) (2026-09-15)
+
+### Build System
+
+* **codemods:** order the unit tests after the remote-components generator ([#3162](https://github.com/mittwald/flow/issues/3162)) ([d9fa5ba](https://github.com/mittwald/flow/commit/d9fa5ba1ed4e9c224f24571b48853dd773c7706c))
+
+## [1.1.36](https://github.com/mittwald/flow/compare/1.1.35...1.1.36) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.35](https://github.com/mittwald/flow/compare/1.1.34...1.1.35) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.34](https://github.com/mittwald/flow/compare/1.1.33...1.1.34) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.33](https://github.com/mittwald/flow/compare/1.1.32...1.1.33) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.32](https://github.com/mittwald/flow/compare/1.1.31...1.1.32) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.31](https://github.com/mittwald/flow/compare/1.1.30...1.1.31) (2026-09-10)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.30](https://github.com/mittwald/flow/compare/1.1.29...1.1.30) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.29](https://github.com/mittwald/flow/compare/1.1.28...1.1.29) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.28](https://github.com/mittwald/flow/compare/1.1.27...1.1.28) (2026-09-09)
+
+### Bug Fixes
+
+* **codemods:** wrap bare function references passed to onAction ([#3075](https://github.com/mittwald/flow/issues/3075)) ([bb98f3c](https://github.com/mittwald/flow/commit/bb98f3c22cb334c6ec6b18c48e08416f4317919f))
+
+## [1.1.27](https://github.com/mittwald/flow/compare/1.1.26...1.1.27) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.25](https://github.com/mittwald/flow/compare/1.1.24...1.1.25) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
 ## [1.1.24](https://github.com/mittwald/flow/compare/1.1.23...1.1.24) (2026-09-08)
 
 **Note:** Version bump only for package @mittwald/flow-codemods

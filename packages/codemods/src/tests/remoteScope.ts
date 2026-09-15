@@ -90,13 +90,11 @@ const namedExports = (file: string, seen = new Set<string>()): string[] => {
  * What is not in there: prop types other than the universal ones, error
  * classes, and six of the main package's nine entries.
  *
- * Read on demand rather than at import time, and deliberately so:
- * `auto-generated/index.ts` is generated, `components:build` deletes the whole
- * directory and writes `index.ts` back only after generating every component
- * file, and nx can run this package's `test:unit` concurrently with that build.
- * Reading at import time put that ENOENT window in front of every test file
- * that imports this module; on demand it can only reach the tests that actually
- * need the surface.
+ * Read on demand rather than at import time: `auto-generated/index.ts` is
+ * generated, and `components:build:remote-components` deletes the whole
+ * directory before writing `index.ts` back last. `test:unit` depends on that
+ * generator, so the window is closed — reading on demand keeps a future
+ * ordering gap off the test files that never touch the surface.
  */
 let cachedRemoteExports: Set<string> | undefined;
 

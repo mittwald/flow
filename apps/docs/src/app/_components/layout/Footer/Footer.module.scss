@@ -8,10 +8,6 @@
     padding-inline: var(--size-px--xxl);
   }
 
-  .feedback {
-    max-width: 900px;
-  }
-
   .legal,
   .resources {
     flex: 1 1 auto;
@@ -25,10 +21,6 @@
 
 @media (max-width: 1400px) {
   .footer {
-    .feedbackImage {
-      display: none;
-    }
-
     .footerContent {
       padding-inline: var(--size-px--xl);
     }
