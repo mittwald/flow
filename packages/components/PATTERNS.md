@@ -819,10 +819,15 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/CartesianChart/typedCartesianChart.test-types.tsx:27`
   - ✓ specific invalid usages must fail compilation.
   - ✗ runtime validation → runtime test.
-- **Visual snapshots beside browser tests** `[undocumented]` —
-  `__screenshots__/`.
-  - ✓ visual regressions materially matter and it renders in browser tests.
-  - ✗ pure logic / intentionally unstable visuals → behavioral assertions.
+- **Visual regression tests live in the visual suite** — `testScreenshot`,
+  baselines committed beside it.
+  `../remote-react-components/src/tests/visual/Alert.browser.test.tsx:24`
+  - ✓ rendered output materially matters — a new prop, variant or layout.
+  - ✗ pure logic, or a CSS state a screenshot cannot hold (`:hover`) → assert
+    behavior or the computed style in a colocated browser test. This package
+    writes no screenshots at all (`screenshotFailures` is off in
+    `../core/src/vitestBrowserTestConfig.ts`), so a `__screenshots__/` directory
+    appearing here is a stray failure artifact, not a baseline.
 
 ## 12. Imports and file conventions
 
