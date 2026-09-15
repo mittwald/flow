@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.42](https://github.com/mittwald/flow/compare/1.1.41...1.1.42) (2026-09-15)
+
+### Build System
+
+* **deps:** bump the production group across 1 directory with 19 updates ([#3156](https://github.com/mittwald/flow/issues/3156)) ([443a3bc](https://github.com/mittwald/flow/commit/443a3bcffe7284d644166c932102ec4bceaccd5e))
+
 ## [1.1.41](https://github.com/mittwald/flow/compare/1.1.40...1.1.41) (2026-09-15)
 
 ### Performance Improvements
