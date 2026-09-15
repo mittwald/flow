@@ -32,7 +32,7 @@ The CLI's own output does detect it and prints the right form.
 
 ## @tabler/icons-react is no longer installed alongside Flow
 
-**Since `1.1.38`** · migration · manual change · also applies to
+**Since `1.1.40`** · migration · manual change · also applies to
 `@mittwald/flow-remote-react-components`
 
 Flow no longer depends on `@tabler/icons-react`. `@mittwald/flow-icons` carries

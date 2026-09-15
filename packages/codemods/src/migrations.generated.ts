@@ -8,7 +8,7 @@ import type { MigrationEntry } from "./catalog/types.js";
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
     id: "tabler-icons-no-longer-transitive",
-    since: "1.1.38",
+    since: "1.1.40",
     title: "@tabler/icons-react is no longer installed alongside Flow",
     kind: "migration",
     action: "manual",

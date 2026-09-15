@@ -51,7 +51,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     onChange,
     ref,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, "");
 
   const inputRef = useObjectRef(ref);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
