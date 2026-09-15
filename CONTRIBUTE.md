@@ -162,7 +162,10 @@ rest is detail:
    ship with a catalogue entry in `packages/codemods/src/migrations` — which
    generates the `MIGRATION.md` entry — plus a codemod when the change is
    mechanically decidable. `MIGRATION.md` itself is generated; editing it does
-   nothing.
+   nothing. In a `feat:` PR the entry's `since` is the literal `UNRELEASED` —
+   the version it ships in is only known when the release is promoted, and
+   `/prepare-release` fills it in then (see
+   [`packages/codemods/AGENTS.md`](packages/codemods/AGENTS.md)).
 3. **Design comes from UX.** Base design tokens are taboo. Component tokens for
    a new component are fine — model them on existing components and ask when
    unsure. Never invent visual design.

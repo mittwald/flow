@@ -198,7 +198,10 @@ and commit the results.
   `packages/codemods/src/migrations` — which generates the `MIGRATION.md` entry
   — and a codemod when the change is mechanically decidable. The entry's `apply`
   field is the instruction an agent executes; fill it even when there is no
-  codemod, because for those entries it is the whole migration.
+  codemod, because for those entries it is the whole migration. On a `feat:` PR
+  (base `next`) the entry's `since` is the literal `UNRELEASED` — the shipping
+  version is unknown until the release is promoted, and `/prepare-release`
+  resolves it then (#2890).
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
 - **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
   WebKit only is a pragmatic choice, not a support statement.

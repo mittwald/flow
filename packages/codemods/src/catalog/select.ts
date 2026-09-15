@@ -1,5 +1,6 @@
-import { compare, lte } from "semver";
+import { lte } from "semver";
 import type { CatalogEntry } from "./entries.js";
+import { compareSince, isUnreleased } from "./unreleased.js";
 
 /**
  * Oldest first — the order the changes shipped, which is the order to apply
@@ -7,7 +8,7 @@ import type { CatalogEntry } from "./entries.js";
  */
 export const sortBySince = (entries: CatalogEntry[]): CatalogEntry[] =>
   entries.toSorted(
-    (a, b) => compare(a.since, b.since) || a.id.localeCompare(b.id),
+    (a, b) => compareSince(a.since, b.since) || a.id.localeCompare(b.id),
   );
 
 /**
@@ -29,9 +30,18 @@ export const sortBySince = (entries: CatalogEntry[]): CatalogEntry[] =>
  * entries only hid exactly the migrations that consumer needed to see. The
  * `catch-up` rendering in `src/cli/list.ts` now carries the distinction instead
  * of the gate hiding it.
+ *
+ * An entry still on the `UNRELEASED` placeholder is always in. There is no
+ * version to compare it against, and the only catalogue that carries one is a
+ * `next` prerelease of the very release the entry belongs to — previewing it is
+ * the point of that channel (#2890).
  */
 export const selectEntries = (
   entries: CatalogEntry[],
   target: string,
 ): CatalogEntry[] =>
-  sortBySince(entries.filter((entry) => lte(entry.since, target)));
+  sortBySince(
+    entries.filter(
+      (entry) => isUnreleased(entry.since) || lte(entry.since, target),
+    ),
+  );

@@ -21,6 +21,8 @@
     "format:check": "prettier --check '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint . && stylelint '**/*.{css,scss}' && pnpm format:check",
     "prepare": "node .github/scripts/init-merge-drivers.cjs",
+    "release:check-unreleased": "node .github/scripts/migration-unreleased.mjs --check",
+    "release:resolve-unreleased": "node .github/scripts/migration-unreleased.mjs",
     "sync:resolve": "node .github/scripts/sync-resolve.cjs",
     "test": "nx run-many --targets=test:unit,test:compile,test:links",
     "test:browser": "nx run-many --targets=test:browser,test:e2e,test:visual",
