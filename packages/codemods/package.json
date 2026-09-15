@@ -5,6 +5,7 @@
   "description": "Codemods and an upgrade CLI for consumers of Flow, mittwald's design system",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "bin": {
     "flow-codemods": "dist/cli.js"
   },
