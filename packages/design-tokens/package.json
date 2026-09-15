@@ -5,6 +5,7 @@
   "description": "The design tokens used in Flow, mittwald’s design system",
   "homepage": "https://github.com/mittwald/flow/tree/main/packages/design-tokens",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "exports": {
     "./css/*": "./dist/css/*",
     "./css-layered/*": "./dist/css-layered/*",

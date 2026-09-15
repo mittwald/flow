@@ -5,6 +5,7 @@
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts"

@@ -5,6 +5,7 @@
   "description": "A collection of CSS classes used in Flow, mittwald's design system.",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "exports": {
     "./css": "./dist/styles.css",
     "./css-layered": "./dist/styles-layered.css"
