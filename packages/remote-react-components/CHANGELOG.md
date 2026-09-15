@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.45](https://github.com/mittwald/flow/compare/1.2.0-next.44...1.2.0-next.45) (2026-09-15)
+
+### Bug Fixes
+
+* **MessageThread:** restore list markers for ordered lists ([#3160](https://github.com/mittwald/flow/issues/3160)) ([11ad06c](https://github.com/mittwald/flow/commit/11ad06cccd554ca13f6dbeb4c8fdd4698744003f))
+
+## [1.1.37](https://github.com/mittwald/flow/compare/1.2.0-next.43...1.1.37) (2026-09-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.37 ([34b3563](https://github.com/mittwald/flow/commit/34b3563788bf72f680220be321b87b5937579b6e))
+
 ## [1.2.0-next.44](https://github.com/mittwald/flow/compare/1.2.0-next.43...1.2.0-next.44) (2026-09-15)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
