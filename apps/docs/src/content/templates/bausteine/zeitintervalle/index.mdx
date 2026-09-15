@@ -1,0 +1,35 @@
+---
+title: Zeitintervalle
+description:
+  Die Kombination aus Auswahl und dynamisch ergänzten Feldern, mit der Nutzer
+  ein Zeitintervall für wiederkehrende Aktionen wie einen Cronjob festlegen.
+---
+
+<LiveCodeEditor example="zeitintervalle" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende diesen Baustein, wenn Nutzer festlegen, in welchem Intervall eine
+Aktion wiederholt ausgeführt wird – etwa beim Konfigurieren eines Cronjobs.
+Reduziere die Auswahl auf die im Kontext sinnvollen Intervalle, damit die
+Entscheidung leicht fällt.
+
+---
+
+# Aufbau
+
+- **Intervall-Auswahl** – Ein [Select](/components/form-controls/select) schlägt
+  passende Zeitintervalle vor und hält die häufigen Fälle einfach. Sehr kleine
+  Intervalle sind oft weder nötig noch ressourcenschonend; weise bei Bedarf mit
+  einer [AccentBox](/components/structure/accent-box) darauf hin.
+- **Verfeinerung** – Je nach Auswahl wird dynamisch ein weiteres Feld
+  eingeblendet, etwa ein [TimeField](/components/form-controls/time-field) für
+  die Uhrzeit. So bleibt die Oberfläche schlank und überfordert nicht.
+- **Benutzerdefiniert** – Die Option „Benutzerdefiniert" gibt über ein
+  [TextField](/components/form-controls/text-field) mit Cron-Syntax volle
+  Kontrolle; ungültige Ausdrücke werden direkt am Feld gemeldet.
+- **Vorschau** – Ein [LabeledValue](/components/content/labeled-value) zeigt die
+  nächsten Ausführungen zur Kontrolle. Kommuniziere die Zeitzone klar, in der
+  das Intervall gilt, sonst entstehen falsche Erwartungen.

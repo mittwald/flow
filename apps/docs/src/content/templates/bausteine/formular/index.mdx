@@ -1,0 +1,57 @@
+---
+title: Formular
+description:
+  Die Komposition aus Formularfeldern, Struktur und Absenden-Aktion, mit der
+  eine zusammengehörige Dateneingabe erfasst wird.
+---
+
+<LiveCodeEditor example="formular" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende diesen Baustein, wenn Nutzer zusammengehörige Daten eingeben,
+bearbeiten oder übermitteln. Im mStudio steht ein Formular meist in einem
+Overlay zum [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
+
+---
+
+# Aufbau
+
+- **Form** – Ein [Form](/components/react-hook-form/form) klammert die Felder
+  und verbindet sie über [Field](/components/react-hook-form/field) mit React
+  Hook Form. Es sammelt die Werte und übergibt sie beim Absenden.
+- **Felder** – Die Eingaben bestehen aus Form Controls wie
+  [TextField](/components/form-controls/text-field),
+  [Select](/components/form-controls/select) oder
+  [RadioGroup](/components/form-controls/radio-group), jeweils mit einem
+  [Label](/components/content/label).
+- **Struktur** – [Sections](/components/structure/section) gruppieren
+  zusammengehörige Felder, ein
+  [ColumnLayout](/components/structure/column-layout) ordnet sie in Spalten.
+  Ordne die Felder nach Wichtigkeit und stelle zusammengehörige nah beieinander.
+- **Absenden** – Eine [ActionGroup](/components/actions/action-group) trägt den
+  [SubmitButton](/components/react-hook-form/submit-button). Die Validierung
+  erfolgt standardmäßig erst beim Absenden.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Validierung
+
+Über `rules` am [Field](/components/react-hook-form/field) werden Eingaben
+geprüft – etwa `isRequired`, eigene `validate`-Funktionen oder HTML-Properties
+wie `minLength`. Die Fehlermeldung erscheint am betroffenen Feld.
+
+<LiveCodeEditor example="validierung" editorCollapsed />
+
+## Progressive Disclosure
+
+Felder erscheinen erst, wenn sie gebraucht werden. Ein übergeordnetes Control
+wie eine [RadioGroup](/components/form-controls/radio-group) oder eine
+[Checkbox](/components/form-controls/checkbox) blendet die abhängigen Felder ein
+und hält das Formular so schlank.
+
+<LiveCodeEditor example="formular-progressive" editorCollapsed />

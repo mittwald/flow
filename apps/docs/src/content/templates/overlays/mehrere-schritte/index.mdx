@@ -1,0 +1,59 @@
+---
+title: Mehrere Schritte
+description:
+  Ein Overlay, das die Eingabe auf mehrere Schritte verteilt, weil eine Auswahl
+  bestimmt, welche Felder danach folgen.
+---
+
+<LiveCodeEditor example="mehrstufiges-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende mehrere Schritte, wenn eine Auswahl bestimmt, welche Eingaben danach
+folgen, und diese Auswahl nicht nebenbei in einem Feld getroffen werden kann –
+etwa weil Bild, Beschreibung oder Vergleich dazugehören. Stehen die Felder von
+Anfang an fest, genügt ein Overlay zum
+[Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
+
+---
+
+# Aufbau
+
+- **Overlay-Container** – Ein [Modal](/components/overlays/modal), meist als
+  `offCanvas`. Die Schritte sind Zustände darin, keine eigenen Seiten.
+- **Auswahl am Anfang** – Der erste Schritt trifft die Auswahl, von der alle
+  weiteren abhängen; eine Auswahl mitten im Vorgang würde vorherige Eingaben
+  entwerten. Jeder Schritt bildet eine Entscheidung ab, nicht nur eine
+  Feldergruppe.
+- **Überschrift** – Eine [Heading](/components/content/heading) wechselt mit dem
+  Schritt und nimmt die Auswahl auf – aus „App auswählen" wird „WordPress
+  anlegen".
+- **Aktionen** – Eine [ActionGroup](/components/actions/action-group) ordnet die
+  Buttons nach Farbe: die weiterführende Aktion rechts, „Abbrechen" links. Der
+  Zurück-Button führt zum vorherigen Schritt und erhält bei drei Buttons
+  `slot="secondary"`, damit er nicht mit „Abbrechen" zusammenfällt. Bereits
+  getätigte Eingaben bleiben beim Zurückgehen erhalten, soweit sie zur
+  geänderten Auswahl noch passen.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Fortschrittsanzeige
+
+Ab drei Schritten zeigt eine Fortschrittsanzeige, wie weit der Vorgang gediehen
+ist. Sie setzt eine feste Zahl von Schritten voraus.
+
+<LiveCodeEditor example="mehrstufiges-overlay-fortschritt" editorCollapsed />
+
+## Weitere Abwandlungen
+
+**Verzweigte Schritte.** Bestimmt die Auswahl, wie viele Schritte folgen, steht
+ihre Zahl vorab nicht fest – in diesem Fall keine Fortschrittsanzeige mit fester
+Länge zeigen.
+
+**Ein Overlay öffnet ein zweites.** Muss während des Vorgangs ein noch nicht
+vorhandenes Objekt angelegt werden – eine Domain, ein API-Key – geschieht das in
+einem eigenen Overlay mit eigenem Controller, nicht als weiterer Schritt.

@@ -1,0 +1,49 @@
+---
+title: Detailseite
+description:
+  Die zentrale Seite für ein einzelnes Objekt und der Ausgangspunkt für dessen
+  Bearbeitung.
+---
+
+<LiveCodeEditor example="detailseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Verwendung
+
+Nutze die Detailseite, wenn sich Nutzer in **ein einzelnes Objekt** vertiefen
+und es bearbeiten sollen – sobald zu einem Datensatz mehr gehört als eine Zeile
+in einer Liste. Geht es um viele gleichartige Objekte nebeneinander, führt die
+[Übersichtsseite](/templates/seiten/uebersichtsseite) dorthin.
+
+---
+
+# Aufbau
+
+- **Kopfbereich** – Eine [Heading](/components/content/heading) als H1 benennt
+  das Objekt und macht klar, in welchem Bereich sich der Nutzer befindet. Eine
+  [Breadcrumb](/components/navigation/breadcrumb) ergänzt die Orientierung,
+  navigiert im Seitenbaum und führt schnell auf übergeordnete Ebenen zurück;
+  ihre Einträge bleiben möglichst generisch.
+- **Aktionsmenü** – Ein [Button](/components/actions/button) mit einem
+  [ContextMenu](/components/actions/context-menu) bündelt die wichtigsten
+  Aktionen des Objekts und dient den Nutzern als Schnellzugriff.
+- **Content** – Eine [LayoutCard](/components/structure/layout-card) ist die
+  Grundlage jeder Detailseite. Sie bildet den äußeren Container für den Inhalt
+  und stellt Hintergrund und Padding bereit.
+- **Themenblöcke** – [Sections](/components/structure/section) gliedern den
+  Content in Themenblöcke mit eigener H2-Überschrift und eigenen Aktionen im
+  Header. Sie lassen sich beliebig verschachteln, um auch umfangreiche Inhalte
+  strukturiert darzustellen. Ordne sie nach Wichtigkeit und staffle Details nach
+  unten.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit TabNavigation
+
+Wird der Inhalt zu umfangreich, teilt eine
+[TabNavigation](/components/navigation/tab-navigation) ihn in gleichrangige
+Unterseiten – der Objektkontext im Kopfbereich bleibt erhalten. Gruppiere dafür
+Sections, die inhaltlich zusammengehören, auf einem gemeinsamen Tab.

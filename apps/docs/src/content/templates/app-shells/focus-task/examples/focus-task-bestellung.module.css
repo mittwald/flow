@@ -1,0 +1,71 @@
+.page {
+  /* Container-relative here; use 100dvh in a real full-page app. */
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--size-px--xl, 2rem) var(--size-px--l);
+  background: var(--color--background-gradient);
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--size-px--l);
+  width: 100%;
+  max-width: 64rem;
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme. Swap the masked SVG for your own logo.
+ */
+.logo {
+  align-self: flex-start;
+  width: 12rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+}
+
+/*
+ * The RadioButton lays its slots out on a grid ("icon label" / ". content").
+ * A raw child lands in the wrong cell, so the title row claims the label area
+ * and arranges the name and its badge in a flex row.
+ */
+.resourceTitle {
+  grid-area: label;
+  display: flex;
+  align-items: center;
+  gap: var(--size-px--s);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-px--m);
+}
+
+.actionsRight {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-px--m);
+  margin-inline-start: auto;
+}
+
+.voucher {
+  display: flex;
+  align-items: end;
+  gap: var(--size-px--m);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--size-px--l);
+}
