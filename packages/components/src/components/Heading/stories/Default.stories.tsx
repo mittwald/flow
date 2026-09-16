@@ -7,6 +7,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { IconEdit } from "@/components/Icon/components/icons";
+import { CopyButton } from "@/components/CopyButton";
 import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Heading> = {
@@ -71,10 +72,8 @@ export const WithButton: Story = {
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Section>
         <Heading {...props}>
-          E-Mail-Adresse
-          <Button variant="soft" color="secondary">
-            Verify
-          </Button>
+          my-domain.de
+          <CopyButton text="my-domain.de" />
         </Heading>
         <Heading {...props}>
           {dummyText.medium}

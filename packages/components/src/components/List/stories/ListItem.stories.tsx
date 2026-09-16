@@ -15,6 +15,7 @@ import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Checkbox } from "@/components/Checkbox";
+import { CopyButton } from "@/components/CopyButton";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -249,9 +250,7 @@ export const WithHeadingButton: Story = {
               </Avatar>
               <Heading>
                 {mail.mail}
-                <Button variant="soft" color="secondary">
-                  Verify
-                </Button>
+                <CopyButton text={mail.mail} />
               </Heading>
               <Text>Rebel Alliance</Text>
               <ContextMenu>

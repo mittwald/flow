@@ -115,7 +115,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Heading, Flex, Badge, Button, IconEdit },
+    components: { Heading, Flex, Badge, Button, CopyButton, IconEdit },
   }) => {
     await render(
       <Flex gap="m" direction="column">
@@ -127,6 +127,10 @@ test.each(testEnvironments)(
             </Button>
           </Heading>
         ))}
+        <Heading>
+          my-domain.de
+          <CopyButton text="my-domain.de" />
+        </Heading>
         <Heading>
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           decisive blow against the Galactic Empire.

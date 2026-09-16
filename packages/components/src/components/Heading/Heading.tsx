@@ -86,6 +86,13 @@ export const Heading = flowComponent("Heading", (props) => {
       },
       size: buttonSize,
     },
+    CopyButton: {
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
+      size: buttonSize,
+    },
     ContextualHelpTrigger: {
       tunnel: {
         id: "headingContent",
