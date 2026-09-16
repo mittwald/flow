@@ -27,6 +27,7 @@ import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
 import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
+import { CoachMark as CoachMark } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
@@ -195,6 +196,7 @@ export const flowComponents = {
     "ClearPropsContext",
     ClearPropsContext,
   ),
+  "flr-coach-mark": createFlowRemoteComponentRenderer("CoachMark", CoachMark),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
   "flr-code-editor": createFlowRemoteComponentRenderer(
     "CodeEditor",

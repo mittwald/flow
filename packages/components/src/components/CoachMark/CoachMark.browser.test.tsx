@@ -132,3 +132,42 @@ test("A coach mark rides along while the page scrolls", async () => {
 
   window.scrollTo(0, 0);
 });
+
+test("A coach mark finds its anchor by id", async () => {
+  render(
+    <div>
+      <button id="anchor-by-id" data-testid="anchor">
+        Anchor
+      </button>
+      <CoachMark anchor="anchor-by-id" defaultOpen>
+        <Text data-testid="hint">This button now does more.</Text>
+      </CoachMark>
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  // Positioned against the anchor, not parked at the origin.
+  const anchor = document.querySelector("[data-testid='anchor']");
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+  const anchorBottom = anchor?.getBoundingClientRect().bottom ?? 0;
+  const popoverTop = popover?.getBoundingClientRect().top ?? 0;
+
+  expect(popoverTop).toBeGreaterThan(anchorBottom - 1);
+  expect(document.getElementById("anchor-by-id")).toHaveAttribute(
+    "aria-details",
+  );
+});
+
+test("A coach mark without any anchor renders nothing", async () => {
+  render(
+    <CoachMark defaultOpen>
+      <Text data-testid="hint">Nowhere to point.</Text>
+    </CoachMark>,
+  );
+
+  await expect.element(page.getByTestId("hint")).not.toBeInTheDocument();
+});

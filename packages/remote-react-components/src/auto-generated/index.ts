@@ -26,6 +26,7 @@ export * from "./Checkbox";
 export * from "./CheckboxButton";
 export * from "./CheckboxGroup";
 export * from "./ClearPropsContext";
+export * from "./CoachMark";
 export * from "./CodeBlock";
 export * from "./CodeEditor";
 export * from "./Color";

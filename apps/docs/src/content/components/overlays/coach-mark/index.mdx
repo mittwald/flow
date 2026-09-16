@@ -5,6 +5,12 @@ description:
   oder leicht zu übersehen ist.
 ---
 
+<Alert>
+  CoachMark ist als **Beta** markiert. Die Component ist einsatzbereit, ihre
+  Property-Namen können sich aber noch ändern, solange wir Erfahrung damit
+  sammeln.
+</Alert>
+
 <LiveCodeEditor />
 
 ---
@@ -21,21 +27,32 @@ description:
   Aufruf wiederkommt, wird zur Störung.
 - Verlasse dich nicht darauf, dass der Hinweis gelesen wird. Was unerlässlich
   ist, gehört in die Oberfläche selbst.
+- Rendere ein CoachMark in einer mStudio-Extension über die `anchor`-Property.
+  Eine Referenz erreicht den Host nicht, eine id schon.
 
 ---
 
 # Anker
 
-Ein CoachMark zeigt auf ein Element, nicht auf die Seite. Über `anchorRef`
-bekommt es die Referenz darauf – es gibt keinen Trigger, denn niemand öffnet es.
+Ein CoachMark zeigt auf ein Element, nicht auf die Seite. Es gibt keinen
+Trigger, denn niemand öffnet es – stattdessen bekommt es den Anker auf einem von
+zwei Wegen:
 
-Schreibe es **direkt hinter das Element, auf das es zeigt**. Es wird dort
-gerendert, wo es steht, und folgt dem Anker damit auch in der
+- **`anchorRef`** – die Referenz auf das Element. Der Normalfall in einer
+  React-Anwendung.
+- **`anchor`** – die `id` des Elements, nachgeschlagen beim Öffnen. Nutze sie,
+  wo sich keine Referenz teilen lässt: Eine mStudio-Extension rendert in einem
+  anderen Kontext als der Host, eine Ref kommt dort nie an, eine id schon.
+
+Schreibe das CoachMark **direkt hinter das Element, auf das es zeigt**. Es wird
+dort gerendert, wo es steht, und folgt dem Anker damit auch in der
 Vorlesereihenfolge. Zusätzlich verweist der Anker per `aria-details` darauf.
 
 Weil es an seiner Stelle im Dokument bleibt, erbt es seine Umgebung. Platz
 braucht es keinen – es ist absolut positioniert –, aber ein Vorfahre mit
 `overflow: hidden` oder ein eigener Stacking Context kann es abschneiden.
+
+<LiveCodeEditor example="anchorById" editorCollapsed />
 
 ---
 

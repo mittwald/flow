@@ -97,8 +97,8 @@
     "isNew": false
   },
   "@mittwald/flow-react-components#CoachMark": {
-    "level": "stable",
-    "isNew": false
+    "level": "beta",
+    "isNew": true
   },
   "@mittwald/flow-react-components#CodeBlock": {
     "level": "stable",

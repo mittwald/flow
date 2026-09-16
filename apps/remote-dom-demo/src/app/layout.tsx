@@ -75,6 +75,9 @@ export default function Layout(props: PropsWithChildren) {
                       <Heading>Components</Heading>
                       <NavigationItem page="activity">Activity</NavigationItem>
                       <NavigationItem page="chart">Chart</NavigationItem>
+                      <NavigationItem page="coach-mark">
+                        CoachMark
+                      </NavigationItem>
                       <NavigationItem page="code-editor">
                         CodeEditor
                       </NavigationItem>
