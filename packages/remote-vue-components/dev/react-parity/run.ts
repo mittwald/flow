@@ -38,6 +38,33 @@ rmSync(path.join(packageRoot, "e2e/react-parity/.refs"), {
  * interact with what they rendered, so a half-run leaves them timing out on an
  * empty page instead of reporting the reason.
  */
+/**
+ * `CI` decides what vitest does with a missing file snapshot: write it, or
+ * fail. Both are wanted here, one per pass — so neither may inherit the
+ * runner's own `CI`, which is `true` on every GitHub Actions runner and made
+ * the reference pass fail all 187 snapshots at once instead of writing them.
+ */
+const environmentFor = (mode: "reference" | "compare"): NodeJS.ProcessEnv => {
+  const environment: NodeJS.ProcessEnv = {
+    ...process.env,
+    FLOW_PARITY_MODE: mode,
+  };
+
+  if (mode === "reference") {
+    // Writes the references.
+    delete environment.CI;
+    return environment;
+  }
+
+  /*
+   * The comparison must not write what it failed to find. A missing reference
+   * means the reference pass never reached that scenario, and
+   * `toMatchFileSnapshot` would otherwise create it and report a pass — the one
+   * outcome that looks like parity and proves nothing.
+   */
+  return { ...environment, CI: "true" };
+};
+
 const run = (mode: "reference" | "compare"): number => {
   const exclude =
     mode === "compare" && filters.length === 0
@@ -61,18 +88,7 @@ const run = (mode: "reference" | "compare"): number => {
     {
       cwd: packageRoot,
       stdio: "inherit",
-      env: {
-        ...process.env,
-        FLOW_PARITY_MODE: mode,
-        /*
-         * The comparison must not write what it failed to find. A missing
-         * reference means the reference pass never reached that scenario, and
-         * `toMatchFileSnapshot` would otherwise create it and report a pass —
-         * the one outcome that looks like parity and proves nothing. `CI`
-         * makes vitest fail on a missing snapshot instead.
-         */
-        ...(mode === "compare" ? { CI: "true" } : {}),
-      },
+      env: environmentFor(mode),
     },
   );
   return result.status ?? 1;

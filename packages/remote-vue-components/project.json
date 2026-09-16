@@ -26,6 +26,9 @@
         }
       ]
     },
+    "test:compile": {
+      "dependsOn": ["build", "^build"]
+    },
     "test:parity": {
       "dependsOn": ["build", "^build"],
       "cache": true,
