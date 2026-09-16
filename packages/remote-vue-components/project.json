@@ -1,0 +1,18 @@
+{
+  "implicitDependencies": ["components"],
+  "name": "remote-vue-components",
+  "projectType": "library",
+  "sourceRoot": "packages/remote-vue-components/src",
+  "targets": {
+    "build": {
+      "inputs": ["default", "{projectRoot}/src/**/*"],
+      "dependsOn": [
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
+    }
+  }
+}

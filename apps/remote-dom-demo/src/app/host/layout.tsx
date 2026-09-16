@@ -1,115 +1,62 @@
 "use client";
-import { LoadingMessage } from "@/app/_components/LoadingMessage";
-import { getHostPath, getRemotePath } from "@/app/_lib/navigation";
+import { RemoteFrame } from "@/app/host/_components/RemoteFrame";
+import { getRemotePath, getVueRemotePath } from "@/app/_lib/navigation";
 import {
-  Badge,
-  ColumnLayout,
-  Flex,
   IntlProvider,
-  Label,
-  LabeledValue,
   Section,
-  Separator,
-  Text,
+  Tab,
+  Tabs,
+  TabTitle,
 } from "@mittwald/flow-react-components";
-import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
-import type {
-  ComponentUsageEvent,
-  RemoteReadyEvent,
-} from "@mittwald/flow-remote-react-renderer";
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useRef, useState, type FC } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-const UsageList: FC<{ usage: ComponentUsageEvent[] }> = ({ usage }) => (
-  <LabeledValue>
-    <Label>Used components ({usage.length})</Label>
-    <Flex gap="s" wrap="wrap">
-      {usage.map(({ component, status }) => (
-        <Badge
-          key={component}
-          color={
-            status?.level === "deprecated"
-              ? "red"
-              : status?.level === "beta"
-                ? "orange"
-                : "neutral"
-          }
-        >
-          <Label>{component}</Label>
-          <Text>{status?.level ?? "untracked"}</Text>
-        </Badge>
-      ))}
-    </Flex>
-  </LabeledValue>
-);
+type Framework = "react" | "vue";
 
-export default function HostPage() {
-  const router = useRouter();
+export default function HostLayout() {
   const hostPath = usePathname();
-  const remotePath = getRemotePath(hostPath);
-  const srcRef = useRef(remotePath);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const [remoteReadyEvent, setRemoteReadyEvent] = useState<RemoteReadyEvent>();
-  const [componentUsage, setComponentUsage] = useState<ComponentUsageEvent[]>(
-    [],
-  );
-
-  const addComponentUsage = useCallback((event: ComponentUsageEvent) => {
-    setComponentUsage((usage) =>
-      [...usage, event].toSorted((a, b) =>
-        a.component.localeCompare(b.component),
-      ),
-    );
-  }, []);
+  const [framework, setFramework] = useState<Framework>("react");
 
   return (
     <IntlProvider locale="en-US">
       <Section>
-        {isNavigating && <LoadingMessage />}
-        {remoteReadyEvent && (
-          <>
-            <ColumnLayout>
-              <LabeledValue>
-                <Label>Communication version</Label>
-                <Text>{remoteReadyEvent.version}</Text>
-              </LabeledValue>
-              <LabeledValue>
-                <Label>Remote package</Label>
-                <Text>{remoteReadyEvent.packageVersion ?? "unknown"}</Text>
-              </LabeledValue>
-            </ColumnLayout>
-            <Separator />
-          </>
-        )}
-        {componentUsage.length > 0 && (
-          <>
-            <UsageList usage={componentUsage} />
-            <Separator />
-          </>
-        )}
-        <RemoteRenderer
-          onComponentUsage={addComponentUsage}
-          onConnected={setRemoteReadyEvent}
-          onNavigationStateChanged={(state) => {
-            const { pathname, isPending } = state;
-            router.replace(getHostPath(pathname));
-            setIsNavigating(isPending);
-          }}
-          hostPathname={hostPath}
-          src={srcRef.current}
-          extBridgeImplementation={{
-            getConfig: async () => ({
-              extensionId: "ext-death-star",
-              extensionInstanceId: "exti-death-star",
-              sessionId: "session-rebel-alliance",
-              userId: "user-luke-skywalker",
-              appInstallationId: "appi-death-star",
-              customerId: "customer-rebel-alliance",
-              projectId: "mission-death-star",
-            }),
-            getSessionToken: async () => "session-token",
-          }}
-        />
+        {/*
+         * The same demo, rendered from a React and from a Vue remote app.
+         *
+         * Only the selected tab holds a frame. `Tabs` keeps both panels
+         * mounted, and two live remotes both follow the host's pathname and
+         * both report their own back — so they overwrite each other's
+         * navigation and the host bounces between them. One at a time costs a
+         * reconnect per switch and keeps the demo behaving like a real host,
+         * which only ever talks to one extension.
+         *
+         * Only a few demos exist on the Vue side; the Vue app says so itself
+         * for the rest, which keeps the switch available everywhere.
+         */}
+        <Tabs
+          aria-label="Remote framework"
+          selectedKey={framework}
+          onSelectionChange={(key) => setFramework(key as Framework)}
+        >
+          <Tab id="react">
+            <TabTitle>React</TabTitle>
+            {framework === "react" && (
+              <RemoteFrame
+                src={getRemotePath(hostPath)}
+                hostPathname={hostPath}
+              />
+            )}
+          </Tab>
+          <Tab id="vue">
+            <TabTitle>Vue</TabTitle>
+            {framework === "vue" && (
+              <RemoteFrame
+                src={getVueRemotePath(hostPath)}
+                hostPathname={hostPath}
+              />
+            )}
+          </Tab>
+        </Tabs>
       </Section>
     </IntlProvider>
   );
