@@ -266,6 +266,24 @@ required a field label.
 stay registered across a tab switch, exactly as they did as siblings below a
 `SegmentedControl`.
 
+That is a feature for a wizard and a trap for a mode switch. Where the branches
+were mutually exclusive **inputs** — the selection picks how a value is entered,
+and each branch binds the same field name — moving them into tabs registers both
+at once on one name:
+
+```tsx
+<SegmentedControl value={mode} onChange={setMode}>
+  <Segment value="a">…</Segment>
+  <Segment value="b">…</Segment>
+</SegmentedControl>
+{mode === "a" && <Field name="x"><Select … /></Field>}
+{mode === "b" && <Field name="x"><TextField … /></Field>}
+```
+
+This looks like a content switcher — the selection does swap what is shown — but
+it is a value-setting usage with the value's own input attached. Take the
+`RadioGroup` direction and leave the conditional branches as siblings below it.
+
 There is no codemod, and the reason is the choice rather than the edit. Which
 replacement is right cannot be decided from the source: a value-setting usage
 and a content switcher look alike at the call site, and only the surrounding
@@ -283,9 +301,12 @@ their own when the available width runs out, and a `RadioGroup` stacks its
 options anyway.
 
 **Apply:** Replace `SegmentedControl` with `Tabs` when the selection switches
-displayed content, or with `RadioGroup` when it sets a value. Pick per usage.
-The two directions cost very different amounts of work. Towards `RadioGroup` it
-is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` →
+displayed content, or with `RadioGroup` when it sets a value. Pick per usage —
+but one shape decides itself: if the switched branches contain form fields, use
+`RadioGroup`. Tabs keep every panel mounted, so all branches register at once,
+and two branches binding the same field name would both claim it. The two
+directions cost very different amounts of work. Towards `RadioGroup` it is a
+prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` →
 `RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s
 props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying
 over. Only `containerBreakpointSize` has no counterpart, and the joined row is
@@ -900,15 +921,40 @@ whose callbacks are typed from your own data shape.
 **Since `0.2.0-alpha.756`** · migration · manual change · also applies to
 `@mittwald/flow-remote-react-components`
 
-We've replaced the `react-syntax-highlighter` library, which means many
-properties have been removed and the remaining ones have been simplified. See
-the
-[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)
-for details on what's now supported.
+We've replaced the `react-syntax-highlighter` library with Flow's own
+`CodeEditor`. Everything that configured the highlighter is gone; what is left
+is the small set of props the component itself owns.
 
-**Apply:** Check every `CodeBlock` usage against the current props (see the
-[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block))
-and remove or replace props the new implementation does not support.
+Removed, with no replacement: `color` (already deprecated), `style`,
+`customStyle`, `codeTagProps`, `useInlineStyles`, `showInlineLineNumbers`,
+`startingLineNumber`, `lineNumberContainerStyle`, `lineNumberStyle`,
+`wrapLines`, `wrapLongLines`, `lineProps`, `renderer`, `PreTag` and `CodeTag`.
+Appearance and line rendering now come from the component, not the call site.
+
+Kept: `copyable`, `code`, `language`, `showLineNumbers`, `className` and
+children.
+
+`code` is now `string` only — it used to accept `string | string[]`.
+
+```diff
+- <CodeBlock code={lines} language="ts" wrapLongLines showLineNumbers />
++ <CodeBlock code={lines.join("\n")} language="ts" showLineNumbers />
+```
+
+See the
+[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)
+for what the current props do.
+
+**Apply:** Remove these props from every `CodeBlock`: `color`, `style`,
+`customStyle`, `codeTagProps`, `useInlineStyles`, `showInlineLineNumbers`,
+`startingLineNumber`, `lineNumberContainerStyle`, `lineNumberStyle`,
+`wrapLines`, `wrapLongLines`, `lineProps`, `renderer`, `PreTag`, `CodeTag`. They
+were `react-syntax-highlighter`'s own props and have no counterpart — there is
+nothing to replace them with, and styling and line rendering are no longer
+configurable from the call site. `copyable`, `code`, `language`,
+`showLineNumbers`, `className` and children all stay. `code` narrowed from
+`string | string[]` to `string`: where an array was passed, join it
+(`code={lines.join("\n")}`).
 
 ---
 
@@ -1004,7 +1050,7 @@ keeping what the user entered), pass `autoReset={false}` (or
 
 ## CartesianChart.emptyView changed
 
-**Since `0.2.0-alpha.676`** · migration · manual change · also applies to
+**Since `0.2.0-alpha.676`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 Component references are no longer accepted for `emptyView` - must be a rendered
@@ -1015,8 +1061,23 @@ element now.
 + <CartesianChart emptyView={<EmptyState />} />
 ```
 
+A codemod does the rewrite, but only where the file itself says the identifier
+is a component — an import binding, a `function` or `class` declaration, or a
+`const` initialised with a function. A PascalCase name is not evidence on its
+own: `emptyView={Placeholder}` is just as plausibly a variable already holding
+an element, and wrapping that yields `<Placeholder />` on a non-component.
+
 **Apply:** Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}`
-instead of `emptyView={EmptyState}`.
+instead of `emptyView={EmptyState}`. A codemod does this where the source
+resolves the identifier to a component: an import, a `function`/`class`
+declaration, or a `const` holding a function. It declines what it cannot decide
+— an identifier it cannot resolve in the file, a chart built through
+`typedCartesianChart<T>()` (its local binding is a call result, not an import),
+and a spread that might carry `emptyView`. Check those by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest cartesian-chart-empty-view src
+```
 
 ---
 

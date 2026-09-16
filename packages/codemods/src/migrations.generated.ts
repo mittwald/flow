@@ -45,7 +45,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage. The two directions cost very different amounts of work. Towards `RadioGroup` it is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` → `RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying over. Only `containerBreakpointSize` has no counterpart, and the joined row is not reproduced. Towards `Tabs` it is structural: the state props are `selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is no `Label` slot (the group label moves to the surrounding `Heading`, or to `aria-label` on `Tabs` when it should not be visible, or goes away), and the switched panels move inside the tabs — where they stay mounted, so form fields in them keep their registration.",
+      "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage — but one shape decides itself: if the switched branches contain form fields, use `RadioGroup`. Tabs keep every panel mounted, so all branches register at once, and two branches binding the same field name would both claim it. The two directions cost very different amounts of work. Towards `RadioGroup` it is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` → `RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying over. Only `containerBreakpointSize` has no counterpart, and the joined row is not reproduced. Towards `Tabs` it is structural: the state props are `selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is no `Label` slot (the group label moves to the surrounding `Heading`, or to `aria-label` on `Tabs` when it should not be visible, or goes away), and the switched panels move inside the tabs — where they stay mounted, so form fields in them keep their registration.",
   },
   {
     id: "align-to-combine",
@@ -197,7 +197,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "Check every `CodeBlock` usage against the current props (see the [CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)) and remove or replace props the new implementation does not support.",
+      'Remove these props from every `CodeBlock`: `color`, `style`, `customStyle`, `codeTagProps`, `useInlineStyles`, `showInlineLineNumbers`, `startingLineNumber`, `lineNumberContainerStyle`, `lineNumberStyle`, `wrapLines`, `wrapLongLines`, `lineProps`, `renderer`, `PreTag`, `CodeTag`. They were `react-syntax-highlighter`\'s own props and have no counterpart — there is nothing to replace them with, and styling and line rendering are no longer configurable from the call site. `copyable`, `code`, `language`, `showLineNumbers`, `className` and children all stay. `code` narrowed from `string | string[]` to `string`: where an array was passed, join it (`code={lines.join("\\n")}`).',
   },
   {
     id: "muted-action-error-to-abort-action-error",
@@ -234,10 +234,10 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     since: "0.2.0-alpha.676",
     title: "CartesianChart.emptyView changed",
     kind: "migration",
-    action: "manual",
+    action: "codemod",
     remotePackage: true,
     apply:
-      "Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of `emptyView={EmptyState}`.",
+      "Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of `emptyView={EmptyState}`. A codemod does this where the source resolves the identifier to a component: an import, a `function`/`class` declaration, or a `const` holding a function. It declines what it cannot decide — an identifier it cannot resolve in the file, a chart built through `typedCartesianChart<T>()` (its local binding is a call result, not an import), and a spread that might carry `emptyView`. Check those by hand.",
   },
   {
     id: "action-prop-to-on-action",
