@@ -47,6 +47,21 @@ what this prototype established about supporting a framework at all.
   `RemoteRenderer` as the host. A value that would not survive `postMessage`
   fails here the way it fails in an extension. Run it with
   `pnpm nx test:browser remote-vue-components --browser.name=webkit`.
+- **The React package's visual corpus is the parity gate** (`e2e/react-parity`,
+  `pnpm nx test:parity remote-vue-components`). It renders all 85 files twice —
+  once from `remote-react-components`, once from here — and asserts the host
+  builds the same DOM. The corpus is reused **unmodified**: the harness aliases
+  `@/tests/lib/environments` to its own environment, the way the cross-version
+  harness does. 167 of 182 scenarios are compared; the other 15 are listed in
+  `knownGaps.ts` with a reason and filtered out by name.
+  - A scenario's React element tree is rebuilt as Vue vnodes by `reactToVue.ts`:
+    `type` → export name → Vue component, element-valued props → slots. A
+    scenario that defines a React component of its own cannot be converted, and
+    says so.
+  - **Nothing is committed.** The references are written from React on every
+    run, so they cannot drift into a second source of truth.
+  - `knownGaps.divergingScenarios` entries are **self-cleaning**: one that
+    starts matching fails the run, naming the entry to delete.
 - **`flr-universal` is rebuilt by hand** in `src/components/**` and
   `src/overlays/**` — `Modal`, `Popover`, `LightBox` and their triggers,
   `Action`, `NotificationProvider`, `SettingsProvider`, `CountryOptions`,

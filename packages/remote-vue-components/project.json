@@ -20,7 +20,23 @@
         "default",
         "{projectRoot}/src/**/*",
         "{projectRoot}/dev/**/*",
-        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        }
+      ]
+    },
+    "test:parity": {
+      "dependsOn": ["build", "^build"],
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/e2e/react-parity/**/*",
+        "{projectRoot}/dev/react-parity/**/*",
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        }
       ]
     }
   }

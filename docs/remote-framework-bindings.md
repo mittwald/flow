@@ -156,6 +156,30 @@ Two things stay out of reach regardless:
 - Unit tests for the controllers and the tree helpers; browser tests that render
   the binding's tree through the real serializer against
   `@mittwald/flow-remote-react-renderer`.
+- **A parity harness against the React package's visual corpus.** This is the
+  cheapest strong test a binding can have, and the Vue one
+  (`packages/remote-vue-components/e2e/react-parity`) is the worked example:
+  render every scenario twice — once from React, once from the new binding — and
+  assert the host builds the same DOM. Three things make it work:
+  - The corpus is reused **unmodified**, by aliasing `@/tests/lib/environments`
+    to the harness's own environment. Copying the scenarios instead guarantees
+    the copy drifts.
+  - A scenario's React element tree is rebuilt as the binding's vnodes. A React
+    element is plain data, and both packages export the same names, so the
+    mapping is a name lookup. Scenarios that define a React component of their
+    own cannot be converted — they describe React state, not a remote tree.
+  - The references are **written from React on every run and never committed**.
+    The claim is "the binding renders what React renders today", and a committed
+    baseline would quietly become a second source of truth.
+
+  Normalize what two renders of the _same_ tree differ in — react-aria's
+  generated ids and collection keys, measured `style` values, attribute and
+  class order — or the comparison reports noise. Everything else stays, and that
+  is where a dropped prop or a mis-named event surfaces. Keep the gaps in a list
+  with reasons rather than skipping silently, and make the entries
+  self-cleaning: one that starts matching should fail, so a closed gap cannot
+  keep its exemption.
+
 - Port the React package's component tests — they encode the bugs that are worth
   never having again: `RemoteEventListenerRemoval`, `RemoteControlledValue`,
   `RemoteSerialization`, `OptionKeys`, `AxisTickFormatter`,

@@ -94,6 +94,9 @@ in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree.
 
 ## Known gaps
 
+- **`Modal` has no `confirmOnClose`.** The confirmation belongs to Flow's
+  `Action` model, which the rebuild leaves out. The parity harness records it as
+  a known divergence.
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its
   own project, not a prototype step.
@@ -116,3 +119,7 @@ in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree.
   helpers.
 - `pnpm nx test:browser remote-vue-components --browser.name=webkit` — a Vue
   tree, the production serializer, and React's `RemoteRenderer` as the host.
+- `pnpm nx test:parity remote-vue-components` — the React package's whole visual
+  corpus, rendered once from React and once from Vue, asserting the host builds
+  the same DOM. 167 of 182 scenarios are compared;
+  `e2e/react-parity/knownGaps.ts` lists the rest with a reason.
