@@ -121,5 +121,5 @@ in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree.
   tree, the production serializer, and React's `RemoteRenderer` as the host.
 - `pnpm nx test:parity remote-vue-components` — the React package's whole visual
   corpus, rendered once from React and once from Vue, asserting the host builds
-  the same DOM. 167 of 182 scenarios are compared;
+  the same DOM. 171 of 187 scenarios are compared;
   `e2e/react-parity/knownGaps.ts` lists the rest with a reason.

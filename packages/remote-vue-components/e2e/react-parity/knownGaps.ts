@@ -14,16 +14,12 @@
  * binding would change it: a cross-framework corpus can only contain scenarios
  * that describe what to render, not how React holds state while rendering it.
  */
+export const unsupportedFiles: Record<string, string> = {
+  "List.browser.test.tsx":
+    "Flow's List has no Vue rebuild — every scenario in the file needs it, so the file is excluded rather than its scenarios named one by one.",
+};
+
 export const unsupportedScenarios: Record<string, string> = {
-  "List items": "Flow's List has no Vue rebuild.",
-  "List tiles": "Flow's List has no Vue rebuild.",
-  "List table": "Flow's List has no Vue rebuild.",
-  "List edge cases - list view": "Flow's List has no Vue rebuild.",
-  "List edge cases - tile view": "Flow's List has no Vue rebuild.",
-  "List edge cases - column layout": "Flow's List has no Vue rebuild.",
-  "List date range filter": "Flow's List has no Vue rebuild.",
-  "List empty views": "Flow's List has no Vue rebuild.",
-  "List empty search views": "Flow's List has no Vue rebuild.",
   "FileField upload one": "The scenario defines a React Wrapper component.",
   "FileField upload multiple":
     "The scenario defines a React Wrapper component.",
@@ -50,6 +46,10 @@ const scenarioNameOf = (testName: string): string =>
 
 export const divergenceReasonFor = (testName: string): string | undefined =>
   divergingScenarios[scenarioNameOf(testName)];
+
+/** The `--exclude` globs that keep the unsupported files out of the Vue pass. */
+export const excludeUnsupportedFiles = (): string[] =>
+  Object.keys(unsupportedFiles).flatMap((file) => ["--exclude", `**/${file}`]);
 
 /** The `-t` pattern that keeps the unsupported scenarios out of the Vue pass. */
 export const excludeUnsupportedPattern = (): string => {

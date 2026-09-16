@@ -7,7 +7,9 @@
  * to find exactly one tree.
  */
 import {
+  excludeUnsupportedFiles,
   excludeUnsupportedPattern,
+  unsupportedFiles,
   unsupportedScenarios,
 } from "../../e2e/react-parity/knownGaps.ts";
 import { spawnSync } from "node:child_process";
@@ -39,7 +41,7 @@ rmSync(path.join(packageRoot, "e2e/react-parity/.refs"), {
 const run = (mode: "reference" | "compare"): number => {
   const exclude =
     mode === "compare" && filters.length === 0
-      ? ["-t", excludeUnsupportedPattern()]
+      ? [...excludeUnsupportedFiles(), "-t", excludeUnsupportedPattern()]
       : [];
   console.log(
     `\n▶ ${mode === "reference" ? "React (writing references)" : "Vue (comparing)"}\n`,
@@ -86,9 +88,10 @@ if (referenceStatus !== 0) {
 
 const compareStatus = run("compare");
 
-console.log(
-  `\nNot compared — cannot be expressed in Vue (${Object.keys(unsupportedScenarios).length}):`,
-);
+console.log("\nNot compared — cannot be expressed in Vue:");
+for (const [file, reason] of Object.entries(unsupportedFiles)) {
+  console.log(`  · ${file} (whole file) — ${reason}`);
+}
 for (const [name, reason] of Object.entries(unsupportedScenarios)) {
   console.log(`  · ${name} — ${reason}`);
 }

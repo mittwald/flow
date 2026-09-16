@@ -48,12 +48,13 @@ what this prototype established about supporting a framework at all.
   fails here the way it fails in an extension. Run it with
   `pnpm nx test:browser remote-vue-components --browser.name=webkit`.
 - **The React package's visual corpus is the parity gate** (`e2e/react-parity`,
-  `pnpm nx test:parity remote-vue-components`). It renders all 85 files twice —
-  once from `remote-react-components`, once from here — and asserts the host
-  builds the same DOM. The corpus is reused **unmodified**: the harness aliases
-  `@/tests/lib/environments` to its own environment, the way the cross-version
-  harness does. 167 of 182 scenarios are compared; the other 15 are listed in
-  `knownGaps.ts` with a reason and filtered out by name.
+  `pnpm nx test:parity remote-vue-components`). It renders the whole corpus
+  twice — once from `remote-react-components`, once from here — and asserts the
+  host builds the same DOM. The corpus is reused **unmodified**: the harness
+  aliases `@/tests/lib/environments` to its own environment, the way the
+  cross-version harness does. 171 of 187 scenarios are compared; the rest are
+  listed in `knownGaps.ts` with a reason — `List.browser.test.tsx` as a whole
+  file (every scenario in it needs Flow's `List`), the others by name.
   - A scenario's React element tree is rebuilt as Vue vnodes by `reactToVue.ts`:
     `type` → export name → Vue component, element-valued props → slots. A
     scenario that defines a React component of its own cannot be converted, and
