@@ -1,0 +1,2 @@
+# svelte-package's staging directory — the build writes here before copying to dist
+.svelte-kit/
