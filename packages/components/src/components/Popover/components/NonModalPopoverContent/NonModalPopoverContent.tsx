@@ -182,6 +182,18 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     return null;
   }
 
+  /*
+   * Until it has a placement, `useOverlayPosition` parks the popover in the top
+   * left corner (`position: fixed; top: 0; left: 0`) — it has not measured the
+   * anchor yet. Rendered on a server that corner is what ships, and the popover
+   * sits there until hydration measures; an anchor given by id is resolved a
+   * frame later still. Either way it is visibly in the wrong place first and
+   * jumps to the anchor after, so keep it out of sight until it knows where it
+   * belongs. It stays in the DOM, which is what its place in the reading order
+   * and `aria-details` depend on.
+   */
+  const isPositioned = placement !== null;
+
   return (
     <div
       {...overlayProps}
@@ -191,7 +203,11 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
       data-placement={placement ?? undefined}
       data-entering={isEntering || undefined}
       onAnimationEnd={() => setIsEntering(false)}
-      style={{ ...overlayProps.style, width }}
+      style={{
+        ...overlayProps.style,
+        width,
+        ...(isPositioned ? {} : { visibility: "hidden" }),
+      }}
     >
       {withTip && (
         <div
@@ -207,8 +223,13 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
               placement === "top" || placement === "bottom"
                 ? "translateX(-50%)"
                 : "translateY(-50%)",
-            ...(placement ? { [placement]: "100%" } : {}),
+            // `arrowProps.style` carries the offset along the popover's edge and
+            // leaves the other axis `undefined` — which still overwrites. So the
+            // edge the tip sits on is set last: spread first, it silently lost
+            // `top: 100%` and the tip jumped to the popover's top edge, pointing
+            // away from an anchor that was below it.
             ...arrowProps.style,
+            ...(placement ? { [placement]: "100%" } : {}),
           }}
         >
           <svg width={16} height={16} viewBox="0 0 16 16">

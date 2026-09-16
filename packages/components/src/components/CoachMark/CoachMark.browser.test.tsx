@@ -244,6 +244,45 @@ test.for([
   },
 );
 
+test.for(["top", "bottom"] as const)(
+  "The tip sits on the edge facing the anchor when placed %s",
+  async (placement) => {
+    render(
+      <div style={{ paddingBlock: "300px" }}>
+        <button id="tip-anchor" data-testid="anchor">
+          Anchor
+        </button>
+        <CoachMark anchor="tip-anchor" placement={placement} defaultOpen>
+          <Text data-testid="hint">This button now does more.</Text>
+        </CoachMark>
+      </div>,
+    );
+
+    const hint = page.getByTestId("hint");
+    await expect.element(hint).toBeInTheDocument();
+
+    const popover = hint
+      .element()
+      .closest("[class*='flow--popover--content']")?.parentElement;
+    const tip = popover?.querySelector("[class*='tip']");
+
+    await expect.poll(() => popover?.dataset.placement).toBe(placement);
+
+    // Placed above the anchor the tip belongs at the popover's bottom edge, and
+    // the other way round — never floating on the side the anchor is not on.
+    const popoverBox = popover?.getBoundingClientRect();
+    const tipBox = tip?.getBoundingClientRect();
+    const distanceToEdge =
+      popoverBox && tipBox
+        ? placement === "top"
+          ? Math.abs(tipBox.top - popoverBox.bottom)
+          : Math.abs(tipBox.bottom - popoverBox.top)
+        : null;
+
+    expect(distanceToEdge).toBeLessThan(2);
+  },
+);
+
 test("A coach mark without any anchor renders nothing", async () => {
   render(
     <CoachMark defaultOpen>
