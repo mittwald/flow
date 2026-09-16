@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.52](https://github.com/mittwald/flow/compare/1.2.0-next.51...1.2.0-next.52) (2026-09-16)
+
+### Features
+
+* **Heading:** render a CopyButton in the heading content ([8f2725a](https://github.com/mittwald/flow/commit/8f2725a00bc334fdc6dd712f889ea11eef63e21f)), closes [#3136](https://github.com/mittwald/flow/issues/3136)
+* **Heading:** scale the heading Button with the heading size ([6e770fd](https://github.com/mittwald/flow/commit/6e770fd3a628564b09357d02471a926165a15a0a))
+
+### Bug Fixes
+
+* **Heading:** derive the Button size from the rendered heading size ([bb40e43](https://github.com/mittwald/flow/commit/bb40e43eda2cc7a83d006718528a8688d25053da))
+
+### Documentation
+
+* **AGENTS:** turn &quot;Common failures&quot; into a list ([#3171](https://github.com/mittwald/flow/issues/3171)) ([6ebf406](https://github.com/mittwald/flow/commit/6ebf40663e92edf19329fb7c94b59e5778ca0fee))
+
+### Tests
+
+* update the darwin baselines for the heading Button size ([a72d652](https://github.com/mittwald/flow/commit/a72d6529a4aeb3f837e4da3082328354f6e79c86))
+* update visual regression screenshots ([08f6416](https://github.com/mittwald/flow/commit/08f64162fa64fc5960509ea7978ac5f9fd501d4e))
+* update visual regression screenshots ([3ee1268](https://github.com/mittwald/flow/commit/3ee1268b78166df176fbe003cd4677d1c351cf24))
+
+## [1.1.42](https://github.com/mittwald/flow/compare/1.2.0-next.50...1.1.42) (2026-09-15)
+
+### Features
+
+* **Heading:** render a Button in the heading content ([56159fe](https://github.com/mittwald/flow/commit/56159fee9900916cf3a492c008cb2044aadca05e))
+
+### Bug Fixes
+
+* keep the Heading&#x27;s Button size out of injected chrome ([238e8ad](https://github.com/mittwald/flow/commit/238e8ad6b6be7420ea9ff0cfabdf9fa9336089b0))
+
+### Documentation
+
+* **Heading:** drop the docs pages for the heading button ([3cda8f9](https://github.com/mittwald/flow/commit/3cda8f95d1d27ac4b29f1eaa15fe6e9acb0ee3cb))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.42 ([92128a4](https://github.com/mittwald/flow/commit/92128a419f014bb005db3d9f93cc1a992e25c5ad))
+
+### Tests
+
+* restore the baselines the screenshot update overwrote ([4d5ca94](https://github.com/mittwald/flow/commit/4d5ca9417d4cb9be68d651fd76a1e5b7b6b374f1))
+* update visual regression screenshots ([d1ad842](https://github.com/mittwald/flow/commit/d1ad842ca94af355eb54a1e0c4c1b00ac8ab87d3))
+
 ## [1.2.0-next.51](https://github.com/mittwald/flow/compare/1.2.0-next.50...1.2.0-next.51) (2026-09-15)
 
 ### Build System
