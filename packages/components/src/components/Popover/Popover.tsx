@@ -19,7 +19,8 @@ import PopoverContentView from "@/views/PopoverContentView";
  *   a `dialog`.
  * - `"non-modal"` – the page stays scrollable and interactive. The popover
  *   carries no dialog semantics: no role, no label, no focus. Its content is
- *   plain content, read in document order like everything else.
+ *   plain content, and it is rendered where it stands rather than portalled to
+ *   the end of the body, so it keeps its place in the reading order.
  */
 export type PopoverModality = "modal" | "non-modal";
 

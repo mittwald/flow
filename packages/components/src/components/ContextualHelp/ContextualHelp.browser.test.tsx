@@ -197,3 +197,24 @@ test("A modal contextual help cannot be scrolled away from", async () => {
   await expect.element(page.getByTestId("hint")).toBeInTheDocument();
   expect(document.documentElement.style.overflow).toBe("hidden");
 });
+
+test("A non-modal contextual help is rendered where it was written, not at the end of the body", async () => {
+  render(<Spotlight modality="non-modal" />);
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const anchor = document.querySelector("[data-testid='anchor']");
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+
+  // Right after its anchor in reading order — a portal to the body would put
+  // the hint behind the whole page for anyone reading sequentially.
+  expect(anchor).not.toBeNull();
+  expect(popover).not.toBeUndefined();
+  expect(anchor?.parentElement).toBe(popover?.parentElement);
+  expect(popover && anchor?.compareDocumentPosition(popover)).toBe(
+    Node.DOCUMENT_POSITION_FOLLOWING,
+  );
+});
