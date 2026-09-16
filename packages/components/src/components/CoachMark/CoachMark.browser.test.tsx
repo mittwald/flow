@@ -162,42 +162,87 @@ test("A coach mark finds its anchor by id", async () => {
   );
 });
 
-test("A coach mark follows its anchor when the page pushes it down", async () => {
-  const Progressive = () => {
-    const [hasBanner, setHasBanner] = useState(false);
-    const anchor = useRef<HTMLButtonElement>(null);
+/*
+ * Open from the very first render, which is how a coach mark is normally
+ * written. Nothing re-renders between mount and open, so the anchor's ref is
+ * still empty while the popover first renders — the case that has to keep
+ * working, because reading the anchor a moment too early silently leaves it
+ * unobserved.
+ */
+const Progressive = (props: { anchorById?: boolean }) => {
+  const [hasBanner, setHasBanner] = useState(false);
+  const anchor = useRef<HTMLButtonElement>(null);
+  const controller = useOverlayController("CoachMark", {
+    isDefaultOpen: true,
+  });
 
-    return (
-      <div>
-        {/* Stands in for content that arrives late — over a remote connection
-            the host fills the page in piece by piece, and whatever lands above
-            the anchor moves it after the coach mark already placed itself. */}
-        {hasBanner && <div style={{ height: "200px" }}>Loaded later</div>}
-        <button
-          ref={anchor}
-          data-testid="anchor"
-          onClick={() => setHasBanner(true)}
-        >
-          Anchor
+  return (
+    <div>
+      {/* Stands in for content that arrives late — over a remote connection the
+          host fills the page in piece by piece, and whatever lands above the
+          anchor moves it after the coach mark already placed itself. */}
+      {hasBanner && <div style={{ height: "200px" }}>Loaded later</div>}
+      <button id="moving-anchor" ref={anchor} data-testid="anchor">
+        Anchor
+      </button>
+      <CoachMark
+        anchorRef={props.anchorById ? undefined : anchor}
+        anchor={props.anchorById ? "moving-anchor" : undefined}
+        controller={controller}
+      >
+        <Text data-testid="hint">This button now does more.</Text>
+      </CoachMark>
+      {/* Far below, so the coach mark never covers it. */}
+      <div style={{ marginBlockStart: "400px" }}>
+        <button data-testid="grow" onClick={() => setHasBanner(true)}>
+          Grow
         </button>
-        <CoachMark anchorRef={anchor} defaultOpen>
-          <Text data-testid="hint">This button now does more.</Text>
-        </CoachMark>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  render(<Progressive />);
+test.for([
+  ["by ref", false],
+  ["by id", true],
+] as const)(
+  "A coach mark anchored %s follows its anchor when the page pushes it down",
+  async ([, anchorById]) => {
+    render(<Progressive anchorById={anchorById} />);
 
-  await expect.element(page.getByTestId("hint")).toBeInTheDocument();
-  const offsetBefore = offsetToAnchor();
-  expect(offsetBefore).not.toBeNull();
+    const hint = page.getByTestId("hint");
+    await expect.element(hint).toBeInTheDocument();
 
-  await page.getByTestId("anchor").click();
-  await expect.element(page.getByText("Loaded later")).toBeInTheDocument();
+    // Measured from this render's own popover — the whole document holds the
+    // other case's leftovers too, and picking the first match compares a
+    // popover to somebody else's anchor.
+    const popover = hint
+      .element()
+      .closest("[class*='flow--popover--content']")?.parentElement;
+    const anchor = popover?.previousElementSibling;
+    const offset = () =>
+      popover && anchor
+        ? Math.round(
+            popover.getBoundingClientRect().top -
+              anchor.getBoundingClientRect().top,
+          )
+        : null;
 
-  await expect.poll(() => offsetToAnchor()).toBe(offsetBefore);
-});
+    // An anchor given by id is resolved after the commit, so the popover is
+    // briefly unpositioned. Take the baseline once it has been placed.
+    await expect
+      .poll(() => popover?.style.top || popover?.style.bottom)
+      .toBeTruthy();
+
+    const offsetBefore = offset();
+    expect(offsetBefore).not.toBeNull();
+
+    await page.getByTestId("grow").click();
+    await expect.element(page.getByText("Loaded later")).toBeInTheDocument();
+
+    await expect.poll(offset).toBe(offsetBefore);
+  },
+);
 
 test("A coach mark without any anchor renders nothing", async () => {
   render(

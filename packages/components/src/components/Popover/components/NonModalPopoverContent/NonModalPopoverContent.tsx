@@ -47,9 +47,13 @@ const useRepositionWhenAnchorMoves = (
   isOpen: boolean,
   updatePosition: () => void,
 ): void => {
-  const anchor = anchorRef.current;
-
   useEffect(() => {
+    // Read inside the effect. A coach mark that is open from its first render
+    // renders before the anchor's ref is attached, and a ref filling in does not
+    // re-render anything — so reading during render would see `null`, bail, and
+    // leave nothing observing.
+    const anchor = anchorRef.current;
+
     if (!isOpen || !anchor) {
       return;
     }
@@ -65,7 +69,7 @@ const useRepositionWhenAnchorMoves = (
     }
 
     return () => observer.disconnect();
-  }, [anchor, isOpen, updatePosition]);
+  }, [anchorRef, isOpen, updatePosition]);
 };
 
 /*
