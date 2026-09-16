@@ -283,6 +283,96 @@ test.for(["top", "bottom"] as const)(
   },
 );
 
+test("A coach mark stays behind app chrome that claims a stacking level", async () => {
+  render(
+    <div style={{ height: "3000px" }}>
+      {/* A sticky header, the way an application frames its pages. */}
+      <div
+        data-testid="chrome"
+        style={{
+          position: "sticky",
+          insetBlockStart: 0,
+          zIndex: 1,
+          height: "80px",
+          background: "black",
+        }}
+      />
+      <div style={{ paddingBlockStart: "600px" }}>
+        <button id="chrome-anchor" data-testid="anchor">
+          Anchor
+        </button>
+        <CoachMark anchor="chrome-anchor" placement="top" defaultOpen>
+          <Text data-testid="hint">This button now does more.</Text>
+        </CoachMark>
+      </div>
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+
+  // react-aria hands a portalled overlay `z-index: 100000`, which would put this
+  // one in front of the whole application. It renders in place, so it claims no
+  // stacking level and the header keeps its place above it.
+  expect(popover && getComputedStyle(popover).zIndex).toBe("auto");
+
+  // Scroll until the coach mark passes through the sticky header, then ask the
+  // document which of the two is actually painted there.
+  const chrome = page.getByTestId("chrome").element();
+  const popoverTop =
+    (popover?.getBoundingClientRect().top ?? 0) + window.scrollY;
+  window.scrollTo(0, popoverTop - 40);
+  await expect.poll(() => window.scrollY).toBeGreaterThan(0);
+
+  const chromeBox = chrome.getBoundingClientRect();
+  const painted = document.elementFromPoint(
+    Math.round(chromeBox.x + chromeBox.width / 2),
+    Math.round(chromeBox.bottom - 5),
+  );
+
+  expect(popover?.contains(painted)).toBe(false);
+  expect(painted).toBe(chrome);
+
+  window.scrollTo(0, 0);
+});
+
+test("A coach mark below the fold is not squashed to nothing", async () => {
+  render(
+    <div>
+      {/* The anchor starts far below the viewport, the way a hint halfway down
+          a long page does. react-aria caps an overlay at the room left in the
+          viewport, which is none — and page scrolling never recomputes it. */}
+      <div style={{ height: "3000px" }} />
+      <button id="far-anchor" data-testid="anchor">
+        Anchor
+      </button>
+      <CoachMark anchor="far-anchor" defaultOpen>
+        <Heading>New around here</Heading>
+        <Text data-testid="hint">
+          This button now does more than it used to.
+        </Text>
+      </CoachMark>
+      <div style={{ height: "3000px" }} />
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+
+  await expect
+    .poll(() => Math.round(popover?.getBoundingClientRect().height ?? 0))
+    .toBeGreaterThan(40);
+  expect(popover && getComputedStyle(popover).maxHeight).toBe("none");
+});
+
 test("A coach mark without any anchor renders nothing", async () => {
   render(
     <CoachMark defaultOpen>

@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren, Ref, RefObject } from "react";
 import { useEffect, useId, useRef, useState } from "react";
+import clsx from "clsx";
 import { useObjectRef, useOverlayPosition } from "react-aria";
 import type { Placement } from "react-aria";
 import styles from "../../Popover.module.scss";
@@ -199,12 +200,27 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
       {...overlayProps}
       id={id}
       ref={overlayRef}
-      className={className}
+      className={clsx(className, styles["non-modal"])}
       data-placement={placement ?? undefined}
       data-entering={isEntering || undefined}
       onAnimationEnd={() => setIsEntering(false)}
       style={{
         ...overlayProps.style,
+        /*
+         * Two things `useOverlayPosition` adds for an overlay portalled to the
+         * end of `<body>` and pinned to the viewport. This one renders where it
+         * stands and scrolls with the page, so both are wrong here.
+         *
+         * `z-index: 100000` would put it in front of the whole application — it
+         * scrolled over the docs site's sticky header. Claiming no stacking
+         * level leaves that to the page: it still covers the ordinary content
+         * around it, and app chrome that sets a `z-index` keeps its place above.
+         *
+         * The `max-height` it caps the overlay at is wrong here for the same
+         * reason, but it is written straight onto the element and has to be
+         * undone in CSS — see `.non-modal` in Popover.module.scss.
+         */
+        zIndex: undefined,
         width,
         ...(isPositioned ? {} : { visibility: "hidden" }),
       }}
