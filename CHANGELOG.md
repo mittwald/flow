@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.43](https://github.com/mittwald/flow/compare/1.1.42...1.1.43) (2026-09-16)
+
+### Documentation
+
+* **AGENTS:** turn &quot;Common failures&quot; into a list ([#3171](https://github.com/mittwald/flow/issues/3171)) ([6ebf406](https://github.com/mittwald/flow/commit/6ebf40663e92edf19329fb7c94b59e5778ca0fee))
+
+### Tests
+
+* **ImageCropper:** gate the custom error view scenario on 1.1.41 ([#3172](https://github.com/mittwald/flow/issues/3172)) ([f2fa142](https://github.com/mittwald/flow/commit/f2fa142cc691739c9e181cc73f420bd2afc2bf26))
+
+### Build System
+
+* **deps-dev:** bump the dev-minor group with 11 updates ([#3170](https://github.com/mittwald/flow/issues/3170)) ([7348ed6](https://github.com/mittwald/flow/commit/7348ed6b8334e4a0d7a666fb5a39c21f15e83820))
+
 ## [1.1.42](https://github.com/mittwald/flow/compare/1.1.41...1.1.42) (2026-09-15)
 
 ### Build System
