@@ -325,6 +325,13 @@ Run: `pnpm nx test:unit components`,
 | `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use.                                  |
 | `./doc-properties`                                              | `react-docgen-typescript` output in its raw `ComponentDoc[]` shape, filtered to the props a consumer can act on. Prefer `./component-index`. The unfiltered dump the generators above read is `.cache/doc-properties.json`, which is not published. |
 
+**Adding any new export entry?** Add the subpath to `keptSubpaths` in
+`packages/codemods/src/migrations/imports-to-package-root/transform.ts`. That
+codemod collapses subpath imports onto the package root with a catch-all `else`,
+so a subpath that is not listed gets flattened onto a root that does not export
+its names. The guard beside the transform fails the codemods unit tests when you
+forget.
+
 **Adding a new integration export entry?** Also register it in the component
 status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`
 (`dev/status-registry/exportEntries.ts`) — the `FlowExportEntry` union and the
