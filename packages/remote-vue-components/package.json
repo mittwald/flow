@@ -1,12 +1,12 @@
 {
   "name": "@mittwald/flow-remote-vue-components",
-  "private": true,
   "version": "1.1.43",
   "type": "module",
   "description": "Vue components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
   "license": "MIT",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

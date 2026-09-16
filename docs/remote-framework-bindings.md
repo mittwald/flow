@@ -1,9 +1,9 @@
 # Supporting another framework in a remote app
 
 What it takes to let an mStudio extension be written in something other than
-React, and what bites on the way. Written from the Vue prototype
-([packages/remote-vue-components](../packages/remote-vue-components)); the
-findings are not Vue-specific.
+React, and what bites on the way. Written from the Vue binding
+([packages/remote-vue-components](../packages/remote-vue-components), published
+as experimental); the findings are not Vue-specific.
 
 Read [remote-ui.md](./remote-ui.md) first — this assumes the end-to-end picture.
 
@@ -144,7 +144,10 @@ Two things stay out of reach regardless:
 
 ## Checklist for a new binding package
 
-- `packages/remote-<framework>-components`, `private: true` until it ships.
+- `packages/remote-<framework>-components`. It ships as soon as `private` is
+  absent — and a brand-new package name needs its npm **Trusted Publisher**
+  registered first (`publish.yml`, one workflow filename per package), or the
+  first publish fails with `E404 Not found` in the middle of a release.
 - `project.json` with `implicitDependencies: ["components"]` and a `build` that
   depends on `components:build:remote-components`.
 - An emitter in the generator + the output path in `components/project.json`.

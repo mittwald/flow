@@ -6,12 +6,21 @@
   "targets": {
     "build": {
       "inputs": ["default", "{projectRoot}/src/**/*"],
+      "outputs": ["{projectRoot}/dist"],
       "dependsOn": [
         "^build",
         {
           "projects": ["components"],
           "target": "build:remote-components"
         }
+      ]
+    },
+    "test:browser": {
+      "inputs": [
+        "default",
+        "{projectRoot}/src/**/*",
+        "{projectRoot}/dev/**/*",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
       ]
     }
   }

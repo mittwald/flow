@@ -1,12 +1,17 @@
 # @mittwald/flow-remote-vue-components — Agent Guide
 
 Vue API used _inside_ remote apps, the counterpart of
-[`remote-react-components`](../remote-react-components/AGENTS.md). **Prototype —
-not published.** Read [README.md](./README.md) for the shape of the API and the
-gaps, and
+[`remote-react-components`](../remote-react-components/AGENTS.md). **Published,
+but experimental** — no stability promise until `List` and an icon set exist.
+Read [README.md](./README.md) for the shape of the API and the gaps, and
 [docs/remote-framework-bindings.md](../../docs/remote-framework-bindings.md) for
 what this prototype established about supporting a framework at all.
 
+- **Before the first release, npm needs a Trusted Publisher for this package
+  name**, bound to `publish.yml` — npm allows one workflow filename per package
+  and reports a missing binding as `E404 Not found`, mid-release, after the
+  other packages have already gone out. Nothing in this repository can set it
+  up; it is a one-time step on npm.
 - `src/auto-generated/**` is **generated** from `packages/components`
   (`pnpm nx build:remote-components components`) — never edit by hand. The
   emitter is

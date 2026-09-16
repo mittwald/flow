@@ -479,8 +479,8 @@ jobs:
           fi
 
       # AFTER the version bump, never before: some packages bake their own version
-      # into the bundle at build time (vite `define` reading package.json —
-      # remote-react-components' `dist/js/version.mjs`). Building first stamped the
+      # into the bundle at build time (vite `define` reading package.json — the
+      # remote packages' `dist/js/version.mjs`). Building first stamped the
       # PREVIOUS version into every release, and `lerna publish from-package` packs
       # whatever `dist` holds: 1.0.0 shipped `packageVersion = "0.2.0-alpha.1058"`.
       #
@@ -492,12 +492,19 @@ jobs:
 
       # Tripwire for the ordering above — the mismatch is otherwise invisible
       # (nothing fails, the wrong string just ships).
+      #
+      # Every package that stamps its own version is listed: the remote packages
+      # report theirs to the host on connect, which is how mStudio knows which
+      # version an extension was built against. One list, because a second
+      # binding made a single hard-coded path a trap — nothing would have failed
+      # if it kept shipping a stale string.
       - name: Verify the stamped package version 🔍
         run: |
-          pkg=packages/remote-react-components
-          v="$(node -p "require('./${pkg}/package.json').version")"
-          grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
-            || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
+          for pkg in packages/remote-react-components packages/remote-vue-components; do
+            v="$(node -p "require('./${pkg}/package.json').version")"
+            grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
+              || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
+          done
 
       # The two lines publish the SAME npm packages, and nothing above
       # serializes them: the concurrency group follows the ref

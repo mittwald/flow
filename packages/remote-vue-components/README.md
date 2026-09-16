@@ -1,8 +1,10 @@
 # @mittwald/flow-remote-vue-components
 
-> **Prototype.** Not published, not part of the release line. It exists to
-> answer one question: can an mStudio extension be written in Vue and still
-> render real Flow components in the host?
+> **Experimental.** Published so extensions can be built against it, but without
+> a stability promise yet: the API may change while `List` and a
+> framework-agnostic icon set are missing. Everything else in this repository
+> follows deprecate-don't-break — this package will too, once those gaps are
+> closed and the surface is settled.
 
 Vue API for the Flow remote surface — the counterpart of
 [`@mittwald/flow-remote-react-components`](../remote-react-components). The
