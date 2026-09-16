@@ -38,7 +38,6 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       isOpen: {},
       lang: {},
       maxHeight: {},
-      modality: {},
       offset: {},
       placement: {},
       scrollRef: {},
