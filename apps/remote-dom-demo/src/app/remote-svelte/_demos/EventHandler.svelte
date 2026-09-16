@@ -2,7 +2,6 @@
   import {
     Button,
     CodeBlock,
-    Label,
     Section,
     TextField,
   } from "@mittwald/flow-remote-svelte-components";
@@ -12,21 +11,13 @@
    * payload travels back through the connection, and plain Svelte state drives
    * the next render.
    */
-  let events = $state([]);
-
-  const record = (event, payload) => {
-    events = [...events.slice(-9), { event, payload }];
-  };
+  let event = $state(undefined);
 </script>
 
 <Section>
-  <TextField onChange={(value) => record("change", value)}>
-    <Label>Call sign</Label>
-  </TextField>
-  <Button
-    onPress={() => record("press", null)}
-    onHoverStart={() => record("hoverStart", null)}
-    onFocus={() => record("focus", null)}>Fire</Button
+  <Button onPress={(value) => (event = value)} color="danger" variant="outline"
+    >Fire proton torpedo</Button
   >
-  <CodeBlock code={JSON.stringify(events, undefined, 2)} />
+  <TextField onChange={(value) => (event = value)} aria-label="Mission name" />
+  <CodeBlock code={JSON.stringify(event, undefined, 2)} />
 </Section>

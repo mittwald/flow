@@ -1,8 +1,6 @@
 <script>
   import {
     Button,
-    Content,
-    Heading,
     Popover,
     PopoverTrigger,
     Section,
@@ -11,11 +9,10 @@
 </script>
 
 <Section>
-  <Heading>Squadron</Heading>
   <PopoverTrigger>
-    <Button variant="outline">Details</Button>
-    <Popover withTip={true}>
-      <Content><Text>Twelve pilots, four X-wings, one bad feeling.</Text></Content>
+    <Button>Show battle station status</Button>
+    <Popover>
+      <Text>The Death Star is fully operational.</Text>
     </Popover>
   </PopoverTrigger>
 </Section>

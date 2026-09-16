@@ -94,6 +94,17 @@ wrong.
   binding normalizes it (`normalizeWhitespace.ts`) rather than making it a rule
   extension developers have to know. Vue's `h()` never produces one, but a Vue
   binding with SFC templates would hit the same thing.
+- **The wrapper's own props collide with the component's.** A wrapper needs to
+  know which element to render, which component it is, and which of its props
+  are slots — and a framework that passes props as a flat bag has no separate
+  channel for that. Every Flow form field takes a `name`, so
+  `<Wrapper name="TextField" {...props} />` lets `name="callsign"` win: the
+  component reports itself as "callsign" for usage, looks its props context up
+  under it, and the real `name` never reaches the host at all, because the
+  wrapper destructured its own away. The `FormData` the host collects is missing
+  the field and nothing anywhere says so. Put everything the wrapper needs under
+  one key the Flow surface does not use, and spread the app's props **before**
+  it (Svelte: `__flr`).
 - **A function property is a thread proxy.** Calling it is a round trip, so the
   host always receives a Promise. Flow types those props `Promise<T> | T` and
   awaits on the host; the ones that cannot be awaited are off the remote surface
@@ -175,6 +186,30 @@ takes its wrapper as a child and renders that child's children when the
 condition fails.** That needs a framework that can reach inside the child. The
 Svelte binding takes the wrapper as a snippet receiving the content instead —
 different API, same purpose, and arguably the clearer one.
+
+## Testing a binding against the React one
+
+**The visual suite cannot take a third environment.** Its scenarios are
+`(components) => ReactNode`
+(`remote-react-components/src/tests/lib/visualScenario.ts`), which is exactly
+what lets one scenario run both `Local` and `Remote` — and exactly what a
+non-React binding cannot render. Rewriting 86 scenarios per binding is not a
+suite, it is a second suite.
+
+What does work is a scenario that is **data**: a component name, its props, its
+children. Both bindings can build it — the React one with `createElement`, the
+Svelte one with a recursive component — and then the host's DOM is the
+assertion. Same component, same props, same rendering, or the binding is wrong.
+
+It is cheaper than a screenshot and stricter where it matters: a prop that never
+arrived is a missing attribute, not a few pixels. The `name` collision above was
+found by hand and is now caught by five of eleven scenarios
+(`remote-svelte-components/src/tests/Parity.browser.test.ts`). Only react-aria's
+generated ids are normalized away; everything else has to be identical.
+
+The per-binding regression tests stay next to it — `RemoteEventListenerRemoval`,
+`RemoteControlledValue`, `RemoteSerialization` — because those are about the
+binding's own machinery rather than about agreeing with React.
 
 ## Packaging
 

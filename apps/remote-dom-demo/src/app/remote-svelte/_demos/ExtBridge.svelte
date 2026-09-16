@@ -1,5 +1,9 @@
 <script>
-  import { CodeBlock, Section } from "@mittwald/flow-remote-svelte-components";
+  import {
+    BrowserOnly,
+    CodeBlock,
+    Section,
+  } from "@mittwald/flow-remote-svelte-components";
   import { getConfig } from "@mittwald/ext-bridge/browser";
 
   /*
@@ -14,5 +18,5 @@
 </script>
 
 <Section>
-  <CodeBlock code={JSON.stringify(config, undefined, 2)} />
+  <BrowserOnly><CodeBlock code={JSON.stringify(config)} /></BrowserOnly>
 </Section>

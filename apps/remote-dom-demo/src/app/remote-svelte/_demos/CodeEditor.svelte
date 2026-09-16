@@ -1,17 +1,29 @@
 <script>
   import {
+    ActionGroup,
+    Button,
     CodeEditor,
-    Heading,
-    Label,
+    Form,
     Section,
   } from "@mittwald/flow-remote-svelte-components";
 
-  let code = $state('console.log("May the Force be with you");\n');
+  /*
+   * The React page wires the editor through react-hook-form; there is no Svelte
+   * integration, so the value is held here and the form submits it.
+   */
+  let code = $state("hyperdrive_class=1.0");
 </script>
 
 <Section>
-  <Heading>Flight computer</Heading>
-  <CodeEditor language="javascript" value={code} onChange={(next) => (code = next)}>
-    <Label>Autopilot routine</Label>
-  </CodeEditor>
+  <Form onSubmit={() => console.log("Submitted:", { code })}>
+    <CodeEditor
+      language="tsx"
+      name="code"
+      value={code}
+      onChange={(next) => (code = next)}
+    />
+    <ActionGroup>
+      <Button type="submit">Save configuration</Button>
+    </ActionGroup>
+  </Form>
 </Section>

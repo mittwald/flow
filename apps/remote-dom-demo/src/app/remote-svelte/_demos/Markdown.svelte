@@ -1,17 +1,8 @@
 <script>
-  import { Markdown, Section } from "@mittwald/flow-remote-svelte-components";
-
-  const markdown = `
-# Death Star
-
-A **moon-sized** battle station with one *thermal exhaust port*.
-
-- Superlaser
-- Tractor beam
-- [Blueprints](https://example.com)
-`;
+  import { Markdown } from "@mittwald/flow-remote-svelte-components";
 </script>
 
-<Section>
-  <Markdown>{markdown}</Markdown>
-</Section>
+<Markdown
+  >The **Death Star** is fully operational and moving toward the *Endor* system,
+  guarded by the ***entire Imperial fleet***.</Markdown
+>

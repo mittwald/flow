@@ -23,4 +23,5 @@
 <Section>
   <Heading>Death Star</Heading>
   <Button onPress={() => navigate("navigation")}>Back to fleet</Button>
+  <Link href="/remote-svelte/navigation">Back to fleet</Link>
 </Section>

@@ -3,10 +3,14 @@
     Action,
     ActionGroup,
     Button,
+    ColumnLayout,
     Content,
     Flex,
     Heading,
+    Image,
     Label,
+    LightBox,
+    LightBoxTrigger,
     Modal,
     ModalTrigger,
     Section,
@@ -16,57 +20,82 @@
   } from "@mittwald/flow-remote-svelte-components";
 
   /*
-   * Written against the same API as the React page — `ModalTrigger`, `Modal`,
+   * The same API as the React page — `ModalTrigger`, `Modal`,
    * `Action closeModal`, a controller — except that all four are this package's
    * Svelte rebuilds of Flow's React-only components, not remote elements.
+   *
+   * Two of the React page's variants have no counterpart here and are left out:
+   * `confirmOnClose`, and the confirmation `Modal slot="actionConfirm"` an
+   * `Action` opens. Both live in Flow's `ActionModel`, which this rebuild drops.
    */
   const controller = useOverlayController();
 
-  const explainer =
+  const squadronExplainer =
     "Think of a squadron as your crew. This is where you rally your pilots, " +
     "assign ships, and plan your next mission.";
 </script>
 
-{#snippet fields()}
+{#snippet squadronSection()}
   <Section>
     <Heading>What is a squadron?</Heading>
-    <Text>{explainer}</Text>
+    <Text>{squadronExplainer}</Text>
     <TextField isRequired={true}><Label>Squadron name</Label></TextField>
   </Section>
 {/snippet}
 
-{#snippet modalContent(body)}
-  <Heading>New squadron</Heading>
-  <Content>{@render body()}</Content>
+{#snippet actions()}
   <ActionGroup>
     <Action closeModal={true}>
       <Button color="success">Create squadron</Button>
-    </Action>
-    <Action closeModal={true}>
       <Button variant="soft" color="secondary">Cancel</Button>
     </Action>
   </ActionGroup>
-{/snippet}
-
-{#snippet twoFields()}
-  {@render fields()}
-  {@render fields()}
 {/snippet}
 
 <Section>
   <Flex columnGap="s">
     <ModalTrigger>
       <Button>New squadron</Button>
-      <Modal>{@render modalContent(fields)}</Modal>
+      <Modal>
+        <Heading>New squadron</Heading>
+        <Content>{@render squadronSection()}</Content>
+        {@render actions()}
+      </Modal>
     </ModalTrigger>
 
     <ModalTrigger>
-      <Button variant="outline">Offcanvas</Button>
-      <Modal offCanvas={true} size="m">{@render modalContent(twoFields)}</Modal>
+      <Button>Offcanvas</Button>
+      <Modal offCanvas={true}>
+        <Heading>New squadron</Heading>
+        <Content>{@render squadronSection()}{@render squadronSection()}</Content>
+        {@render actions()}
+      </Modal>
     </ModalTrigger>
+
+    <ModalTrigger>
+      <Button>With columns</Button>
+      <Modal offCanvas={true} size="l">
+        <Heading>New squadron</Heading>
+        <ColumnLayout>
+          {@render squadronSection()}{@render squadronSection()}
+        </ColumnLayout>
+        {@render actions()}
+      </Modal>
+    </ModalTrigger>
+
+    <LightBoxTrigger>
+      <Button>Lightbox</Button>
+      <LightBox>
+        <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
+      </LightBox>
+    </LightBoxTrigger>
   </Flex>
 
   <Label>With controller</Label>
   <Button onPress={controller.open}>New squadron</Button>
-  <Modal {controller}>{@render modalContent(fields)}</Modal>
+  <Modal {controller}>
+    <Heading>New squadron</Heading>
+    <Content>{@render squadronSection()}</Content>
+    {@render actions()}
+  </Modal>
 </Section>

@@ -13,19 +13,19 @@
 
 <!--
   A snippet cannot be inspected, so `autoClose` is passed alongside it — where
-  React and Vue read it off the element they were handed.
+  React and Vue read it off the element they were handed. Everything the
+  notification renders itself, `onClick` included, stays in the snippet.
 -->
 {#snippet transmission()}
-  <Notification><Text>Transmission received from Rebel command</Text></Notification>
+  <Notification onClick={() => console.log("Clicked")}
+    ><Text>Transmission received from Rebel command</Text></Notification
+  >
 {/snippet}
 
 <Flex columnGap="s">
   <Button
     onPress={() => {
-      lastId = notifications.add(transmission, {
-        autoClose: true,
-        onClose: () => console.log("Closed"),
-      });
+      lastId = notifications.add(transmission, { autoClose: true });
     }}>Send transmission</Button
   >
   <Button

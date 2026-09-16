@@ -1413,6 +1413,9 @@ importers:
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../components
+      '@mittwald/flow-remote-react-components':
+        specifier: workspace:*
+        version: link:../remote-react-components
       '@mittwald/flow-remote-react-renderer':
         specifier: workspace:*
         version: link:../remote-react-renderer
