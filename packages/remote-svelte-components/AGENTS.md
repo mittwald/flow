@@ -28,6 +28,13 @@ what the bindings established about supporting a framework at all.
   because that is the attribute a Svelte author writes.
   `RemoteRendering.browser.test.ts` guards the dashed props; a well-meant
   normalization would break them silently.
+- **The generated component passes its configuration as one `__flr` prop**, and
+  spreads the app's props **before** it. As sibling props they would collide:
+  every Flow form field takes a `name`, and
+  `<RemoteElement name="TextField" {...props} />` lets `name="callsign"` win —
+  the component then reports itself as "callsign" and the real `name` never
+  reaches the host, because the wrapper destructures its own away. Two of the
+  parity scenarios and `RemoteRendering.browser.test.ts` cover it.
 - **`FlowRemoteProps` adds `data-testid` back.** The generator re-exports the
   **React component's** props type, and `data-testid` is declared one level
   below it, by `FlowRemoteElement`. Vue never noticed — its props arrive
@@ -56,6 +63,13 @@ what the bindings established about supporting a framework at all.
   `flowComponent` of type `ui` does with `ClearPropsContext`. A composite that
   configures a **changing** value puts a getter in the context object; it is
   read once, while a component below initializes.
+- **`Parity.browser.test.ts` renders the same scenario through both bindings**
+  and compares what the host produced. The scenarios are data
+  (`src/tests/lib/parity/scenarios.ts`), so `Render.svelte` and the React
+  `createElement` path can both build them — which is the only way a non-React
+  binding can share a suite with React at all; the visual scenarios in
+  `remote-react-components` are `(components) => ReactNode` and cannot be
+  rendered here. Only react-aria's generated ids are normalized away.
 - **`src/tests/*.browser.test.ts` runs the real thing:** a Svelte tree, the
   production serializer over a MessageChannel, and React's `RemoteRenderer` as
   the host. A value that would not survive `postMessage` fails here the way it

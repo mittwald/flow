@@ -128,10 +128,10 @@ looked inside, so the wrapper is passed as one that receives the content:
 ## Trying it
 
 `pnpm nx dev remote-dom-demo` and open any `/host/…` page: every demo has a
-React/Svelte switch, and the Svelte side serves twenty of them
-(`apps/remote-dom-demo/src/app/remote-svelte`). The rest say so themselves —
-they need Flow's `List`, react-hook-form, a Next server action or a Flow icon
-set.
+React/Svelte switch, and the Svelte side serves 24 of the 27
+(`apps/remote-dom-demo/src/app/remote-svelte`). The three that are missing say
+so themselves: `list` and `list-selection` need Flow's `List`, and
+`react-hook-form` is a React integration.
 
 ## Tests
 
@@ -139,4 +139,5 @@ set.
   settings store.
 - `pnpm nx test:browser remote-svelte-components --browser.name=webkit` — a
   Svelte tree, the production serializer, and React's `RemoteRenderer` as the
-  host.
+  host. `Parity.browser.test.ts` renders the same scenarios through the React
+  binding as well and requires the host's DOM to be identical.
