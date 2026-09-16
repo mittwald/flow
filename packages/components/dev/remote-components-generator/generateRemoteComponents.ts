@@ -20,6 +20,10 @@ import {
 import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
+import {
+  generateRemoteSvelteComponentFile,
+  generateRemoteSvelteComponentIndexFile,
+} from "./generation/generateRemoteSvelteComponentFile";
 import { remoteComponentBaseNameOf } from "./lib/remoteComponentBaseNameOf";
 import { sortBy } from "remeda";
 import {
@@ -117,6 +121,30 @@ async function generate() {
       );
     }
     const indexFile = generateRemoteReactComponentIndexFile(components);
+    await jetpack.writeAsync(
+      `${dir}/index.ts`,
+      await prepareTypeScriptOutput(indexFile),
+    );
+    console.log("✅  Done");
+    console.log("");
+  }
+
+  {
+    console.log("📝️ Generating remote-svelte-component files");
+
+    const dir = `packages/remote-svelte-components/src/auto-generated`;
+    jetpack.remove(dir);
+
+    for (const component of components) {
+      const remoteSvelteComponentFile =
+        generateRemoteSvelteComponentFile(component);
+
+      const fullFilePath = `${dir}/${remoteComponentBaseNameOf(component)}.svelte`;
+      console.log(" - " + fullFilePath);
+
+      await jetpack.writeAsync(fullFilePath, remoteSvelteComponentFile);
+    }
+    const indexFile = generateRemoteSvelteComponentIndexFile(components);
     await jetpack.writeAsync(
       `${dir}/index.ts`,
       await prepareTypeScriptOutput(indexFile),
