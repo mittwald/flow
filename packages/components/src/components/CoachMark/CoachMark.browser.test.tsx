@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { CoachMark } from "@/components/CoachMark";
@@ -160,6 +160,43 @@ test("A coach mark finds its anchor by id", async () => {
   expect(document.getElementById("anchor-by-id")).toHaveAttribute(
     "aria-details",
   );
+});
+
+test("A coach mark follows its anchor when the page pushes it down", async () => {
+  const Progressive = () => {
+    const [hasBanner, setHasBanner] = useState(false);
+    const anchor = useRef<HTMLButtonElement>(null);
+
+    return (
+      <div>
+        {/* Stands in for content that arrives late — over a remote connection
+            the host fills the page in piece by piece, and whatever lands above
+            the anchor moves it after the coach mark already placed itself. */}
+        {hasBanner && <div style={{ height: "200px" }}>Loaded later</div>}
+        <button
+          ref={anchor}
+          data-testid="anchor"
+          onClick={() => setHasBanner(true)}
+        >
+          Anchor
+        </button>
+        <CoachMark anchorRef={anchor} defaultOpen>
+          <Text data-testid="hint">This button now does more.</Text>
+        </CoachMark>
+      </div>
+    );
+  };
+
+  render(<Progressive />);
+
+  await expect.element(page.getByTestId("hint")).toBeInTheDocument();
+  const offsetBefore = offsetToAnchor();
+  expect(offsetBefore).not.toBeNull();
+
+  await page.getByTestId("anchor").click();
+  await expect.element(page.getByText("Loaded later")).toBeInTheDocument();
+
+  await expect.poll(() => offsetToAnchor()).toBe(offsetBefore);
 });
 
 test("A coach mark without any anchor renders nothing", async () => {

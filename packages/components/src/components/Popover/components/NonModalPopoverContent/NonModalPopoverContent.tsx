@@ -26,6 +26,49 @@ export interface NonModalPopoverContentProps
 }
 
 /*
+ * `useOverlayPosition` recalculates when the window resizes, when a scroll
+ * container scrolls, and when the anchor or the popover changes *size*. It never
+ * notices the anchor merely *moving*, because a popover normally opens on a user
+ * interaction, long after the page settled.
+ *
+ * This one opens itself, so it places itself into a page that is still filling
+ * in — and anything appearing above the anchor then pushes the anchor out from
+ * under it. Remotely that is the normal case, not an edge case: the host
+ * materializes the page in pieces as they arrive over the connection.
+ *
+ * Observing the ancestors covers it. In block layout an element moves because
+ * something around it changed size, and a resized ancestor is the one signal
+ * every such reflow has in common. What it does not catch is an ancestor of
+ * fixed height rearranging inside — rare, and the next scroll or resize
+ * corrects it.
+ */
+const useRepositionWhenAnchorMoves = (
+  anchorRef: RefObject<Element | null>,
+  isOpen: boolean,
+  updatePosition: () => void,
+): void => {
+  const anchor = anchorRef.current;
+
+  useEffect(() => {
+    if (!isOpen || !anchor) {
+      return;
+    }
+
+    const observer = new ResizeObserver(updatePosition);
+
+    for (
+      let element = anchor.parentElement;
+      element;
+      element = element.parentElement
+    ) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, [anchor, isOpen, updatePosition]);
+};
+
+/*
  * The non-modal popover deliberately skips react-aria's `usePopover`, which is
  * what a popover normally builds on. That hook couples three things Flow does
  * not want here: it locks page scrolling, it hides the rest of the page from
@@ -64,15 +107,18 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
   const [isEntering, setIsEntering] = useState(true);
   const detailsId = useId();
 
-  const { overlayProps, arrowProps, placement } = useOverlayPosition({
-    ...positionProps,
-    targetRef: triggerRef,
-    overlayRef,
-    arrowRef,
-    isOpen,
-    offset: positionProps.offset ?? 8,
-    containerPadding: 16,
-  });
+  const { overlayProps, arrowProps, placement, updatePosition } =
+    useOverlayPosition({
+      ...positionProps,
+      targetRef: triggerRef,
+      overlayRef,
+      arrowRef,
+      isOpen,
+      offset: positionProps.offset ?? 8,
+      containerPadding: 16,
+    });
+
+  useRepositionWhenAnchorMoves(triggerRef, isOpen, updatePosition);
 
   /*
    * Nothing announces this popover, so the trigger points at it: `aria-details`
