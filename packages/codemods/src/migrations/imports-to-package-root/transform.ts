@@ -29,6 +29,7 @@ const keptSubpaths = new Set([
   // the current export surface
   "internal",
   "flr-universal",
+  "tunnel",
   "nextjs",
   "react-hook-form",
   "mittwald-password-tools-js",
