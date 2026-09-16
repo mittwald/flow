@@ -10,6 +10,7 @@ export default () => (
   <Section style={{ paddingBlockEnd: 200 }}>
     <Button id="backup-button">Backup erstellen</Button>
 
+    {/* Pinned downwards so the hint stays inside this example's frame. */}
     <CoachMark
       shouldFlip={false}
       anchor="backup-button"

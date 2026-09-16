@@ -23,6 +23,7 @@ export default () => {
         Domain verbinden
       </Button>
 
+      {/* Pinned downwards so the hint stays inside this example's frame. */}
       <CoachMark
         shouldFlip={false}
         anchorRef={anchor}
