@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteLightBoxGalleryElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteLightBoxGalleryElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteLightBoxGalleryElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteLightBoxGalleryElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-light-box-gallery", name: "LightBoxGallery", element: RemoteLightBoxGalleryElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-light-box-gallery", name: "LightBoxGallery", element: RemoteLightBoxGalleryElement }}
-/>
+{#if hasContent}<flr-light-box-gallery bind:this={element.node}>{@render children?.()}</flr-light-box-gallery>{:else}<flr-light-box-gallery bind:this={element.node}></flr-light-box-gallery>{/if}

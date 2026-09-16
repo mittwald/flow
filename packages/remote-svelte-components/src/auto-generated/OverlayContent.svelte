@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteOverlayContentElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteOverlayContentElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteOverlayContentElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteOverlayContentElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-overlay-content", name: "OverlayContent", element: RemoteOverlayContentElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-overlay-content", name: "OverlayContent", element: RemoteOverlayContentElement }}
-/>
+{#if hasContent}<flr-overlay-content bind:this={element.node}>{@render children?.()}</flr-overlay-content>{:else}<flr-overlay-content bind:this={element.node}></flr-overlay-content>{/if}

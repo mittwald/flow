@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteSegmentedControlElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteSegmentedControlElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteSegmentedControlElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteSegmentedControlElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-segmented-control", name: "SegmentedControl", element: RemoteSegmentedControlElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-segmented-control", name: "SegmentedControl", element: RemoteSegmentedControlElement }}
-/>
+{#if hasContent}<flr-segmented-control bind:this={element.node}>{@render children?.()}</flr-segmented-control>{:else}<flr-segmented-control bind:this={element.node}></flr-segmented-control>{/if}

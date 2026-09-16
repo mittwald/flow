@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteTruncateElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteTruncateElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteTruncateElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteTruncateElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-truncate", name: "Truncate", element: RemoteTruncateElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-truncate", name: "Truncate", element: RemoteTruncateElement }}
-/>
+{#if hasContent}<flr-truncate bind:this={element.node}>{@render children?.()}</flr-truncate>{:else}<flr-truncate bind:this={element.node}></flr-truncate>{/if}

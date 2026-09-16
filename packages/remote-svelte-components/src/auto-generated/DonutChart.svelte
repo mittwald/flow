@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteDonutChartElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteDonutChartElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteDonutChartElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteDonutChartElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-donut-chart", name: "DonutChart", element: RemoteDonutChartElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-donut-chart", name: "DonutChart", element: RemoteDonutChartElement }}
-/>
+{#if hasContent}<flr-donut-chart bind:this={element.node}>{@render children?.()}</flr-donut-chart>{:else}<flr-donut-chart bind:this={element.node}></flr-donut-chart>{/if}

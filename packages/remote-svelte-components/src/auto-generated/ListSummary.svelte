@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteListSummaryElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteListSummaryElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteListSummaryElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteListSummaryElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-list-summary", name: "ListSummary", element: RemoteListSummaryElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-list-summary", name: "ListSummary", element: RemoteListSummaryElement }}
-/>
+{#if hasContent}<flr-list-summary bind:this={element.node}>{@render children?.()}</flr-list-summary>{:else}<flr-list-summary bind:this={element.node}></flr-list-summary>{/if}

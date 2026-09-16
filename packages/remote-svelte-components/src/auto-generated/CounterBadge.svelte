@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteCounterBadgeElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteCounterBadgeElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteCounterBadgeElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteCounterBadgeElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-counter-badge", name: "CounterBadge", element: RemoteCounterBadgeElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-counter-badge", name: "CounterBadge", element: RemoteCounterBadgeElement }}
-/>
+{#if hasContent}<flr-counter-badge bind:this={element.node}>{@render children?.()}</flr-counter-badge>{:else}<flr-counter-badge bind:this={element.node}></flr-counter-badge>{/if}

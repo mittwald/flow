@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteSkeletonTextElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteSkeletonTextElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteSkeletonTextElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteSkeletonTextElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-skeleton-text", name: "SkeletonText", element: RemoteSkeletonTextElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-skeleton-text", name: "SkeletonText", element: RemoteSkeletonTextElement }}
-/>
+{#if hasContent}<flr-skeleton-text bind:this={element.node}>{@render children?.()}</flr-skeleton-text>{:else}<flr-skeleton-text bind:this={element.node}></flr-skeleton-text>{/if}

@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteBigNumberElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteBigNumberElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteBigNumberElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteBigNumberElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-big-number", name: "BigNumber", element: RemoteBigNumberElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-big-number", name: "BigNumber", element: RemoteBigNumberElement }}
-/>
+{#if hasContent}<flr-big-number bind:this={element.node}>{@render children?.()}</flr-big-number>{:else}<flr-big-number bind:this={element.node}></flr-big-number>{/if}

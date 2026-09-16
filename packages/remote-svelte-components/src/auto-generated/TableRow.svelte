@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteTableRowElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteTableRowElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteTableRowElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteTableRowElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-table-row", name: "TableRow", element: RemoteTableRowElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-table-row", name: "TableRow", element: RemoteTableRowElement }}
-/>
+{#if hasContent}<flr-table-row bind:this={element.node}>{@render children?.()}</flr-table-row>{:else}<flr-table-row bind:this={element.node}></flr-table-row>{/if}

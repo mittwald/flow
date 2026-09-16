@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteAccentBoxElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteAccentBoxElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteAccentBoxElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteAccentBoxElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-accent-box", name: "AccentBox", element: RemoteAccentBoxElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-accent-box", name: "AccentBox", element: RemoteAccentBoxElement }}
-/>
+{#if hasContent}<flr-accent-box bind:this={element.node}>{@render children?.()}</flr-accent-box>{:else}<flr-accent-box bind:this={element.node}></flr-accent-box>{/if}

@@ -10,22 +10,25 @@ const header = `\
 `;
 
 /**
- * The Svelte counterpart of `generateRemoteReactComponentFile`, and much
- * smaller: the event map React needs in every file is already on the element
- * class at runtime (`remoteEventDefinitions`), and `RemoteElement.svelte` reads
- * it there. Only the slot names are written out — they are needed as a _type_,
- * and the element class carries them at runtime only.
+ * The Svelte counterpart of `generateRemoteReactComponentFile`.
  *
- * Unlike the other emitters this one writes its own formatting: the
- * repository's prettier run does not cover `.svelte`, so there is nothing to
- * format the output afterwards.
- */
-/*
- * The app's props are spread **first**, and everything the wrapper needs goes
- * into one `__flr` object after them. As separate props they would collide with
- * the Flow component's own: every form field takes a `name`, and it would win
- * over the wrapper's — leaving the component reporting itself under the field's
- * name and the field without one on the host.
+ * Two things are written out that React's emitter does not need, and both are
+ * about what Svelte puts _inside_ an element:
+ *
+ * - **The tag is written literally.** `<svelte:element this={tag}>` always
+ *   inserts a text anchor into the element, remote-dom carries it across as a
+ *   child, and a component that takes none then breaks on the host — `Image`
+ *   renders an `<img>`, which React refuses to give children. A statically
+ *   written `<flr-image />` has no children at all. The generator knows the
+ *   tag, so it is the one place that can spell it out.
+ * - **The two shapes are branched outside the element.** A block's anchors land
+ *   where the block is written, so the choice between "with content" and
+ *   "empty" is made in the parent's markup rather than inside the element.
+ *
+ * Everything else the wrapper needs — which keys are remote properties, which
+ * are events — is on the element class at runtime (`remotePropertyDefinitions`,
+ * `remoteEventDefinitions`) and read there by `useRemoteElementSync`, so unlike
+ * React's files none of it is emitted.
  */
 export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
   const t = {
@@ -34,27 +37,55 @@ export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
     tag: remoteElementTagNameOf(c),
     slots: Object.keys(c.props)
       .sort()
-      .filter((prop) => isSlot(c, prop))
-      .map((prop) => `"${prop}"`),
+      .filter((prop) => isSlot(c, prop)),
   };
 
-  const slotNameType = t.slots.length > 0 ? `, ${t.slots.join(" | ")}` : "";
-  const slotNames =
-    t.slots.length > 0 ? `, slotNames: [${t.slots.join(", ")}]` : "";
+  const slotNameType =
+    t.slots.length > 0 ? `, ${t.slots.map((s) => `"${s}"`).join(" | ")}` : "";
+
+  const destructured = ["children", ...t.slots].join(", ");
+
+  const hasContent = ["children", ...t.slots]
+    .map((name) => `${name} !== undefined`)
+    .join(" ||\n      ");
+
+  const slotImport =
+    t.slots.length > 0
+      ? `\n  import { slotAttribute } from "../lib/slotAttribute.js";`
+      : "";
+
+  /*
+   * Written without whitespace between the parts: Svelte keeps a text node
+   * wherever the source has whitespace between two nodes, and in a remote tree
+   * that text node is mirrored to the host as a child of the component.
+   */
+  const slotMarkup = t.slots
+    .map(
+      (slot) =>
+        `{#if ${slot}}<flr-slot-root-wrapper use:slotAttribute={"${slot}"}>{@render ${slot}()}</flr-slot-root-wrapper>{/if}`,
+    )
+    .join("");
 
   return `${header}<script lang="ts">
   import type { ${t.element}Props } from "@mittwald/flow-remote-elements";
   import { ${t.element} } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";${slotImport}
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<${t.element}Props${slotNameType}> = $props();
+  let { ${destructured}, ...props }: FlowRemoteProps<${t.element}Props${slotNameType}> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "${t.tag}", name: "${t.name}", element: ${t.element} },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    ${hasContent},
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "${t.tag}", name: "${t.name}", element: ${t.element}${slotNames} }}
-/>
+{#if hasContent}<${t.tag} bind:this={element.node}>{@render children?.()}${slotMarkup}</${t.tag}>{:else}<${t.tag} bind:this={element.node}></${t.tag}>{/if}
 `;
 }
 

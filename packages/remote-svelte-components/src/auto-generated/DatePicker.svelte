@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteDatePickerElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteDatePickerElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteDatePickerElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteDatePickerElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-date-picker", name: "DatePicker", element: RemoteDatePickerElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-date-picker", name: "DatePicker", element: RemoteDatePickerElement }}
-/>
+{#if hasContent}<flr-date-picker bind:this={element.node}>{@render children?.()}</flr-date-picker>{:else}<flr-date-picker bind:this={element.node}></flr-date-picker>{/if}

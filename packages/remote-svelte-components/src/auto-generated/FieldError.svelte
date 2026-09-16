@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteFieldErrorElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteFieldErrorElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteFieldErrorElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteFieldErrorElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-field-error", name: "FieldError", element: RemoteFieldErrorElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-field-error", name: "FieldError", element: RemoteFieldErrorElement }}
-/>
+{#if hasContent}<flr-field-error bind:this={element.node}>{@render children?.()}</flr-field-error>{:else}<flr-field-error bind:this={element.node}></flr-field-error>{/if}

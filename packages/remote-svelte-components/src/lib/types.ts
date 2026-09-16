@@ -1,4 +1,7 @@
-import type { RemoteElement } from "@mittwald/flow-remote-core";
+import type {
+  RemoteElement,
+  RemoteElementConstructor,
+} from "@mittwald/flow-remote-core";
 import type { Snippet } from "svelte";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,3 +48,27 @@ export type PropertiesOf<ElementConstructor> =
   >
     ? Properties
     : never;
+
+/**
+ * What a generated component knows and the app does not pass — in one object,
+ * under one key, on purpose.
+ *
+ * As separate props they would collide with the Flow component's own: every
+ * form field takes a `name`, and `<RemoteElement name="TextField" {...props}
+ * />` lets `name="callsign"` win. The component then reports itself as
+ * "callsign", and the real `name` never reaches the host at all.
+ */
+export interface FlowRemoteElementConfig {
+  /** The custom element to render, e.g. `flr-button`. */
+  tag: string;
+  /** The Flow component's name — how usage and props context refer to it. */
+  name: string;
+  /** The element class, for its property and event definitions. */
+  element: RemoteElementConstructor<AnyRecord, AnyRecord, AnyRecord, AnyRecord>;
+  /**
+   * The Flow component's `ReactNode`-typed props. They arrive as snippets and
+   * travel as slotted children, never as remote properties — a rendered subtree
+   * does not survive structured clone.
+   */
+  slotNames?: readonly string[];
+}

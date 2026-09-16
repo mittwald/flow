@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteNumberFieldElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteNumberFieldElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteNumberFieldElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteNumberFieldElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-number-field", name: "NumberField", element: RemoteNumberFieldElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-number-field", name: "NumberField", element: RemoteNumberFieldElement }}
-/>
+{#if hasContent}<flr-number-field bind:this={element.node}>{@render children?.()}</flr-number-field>{:else}<flr-number-field bind:this={element.node}></flr-number-field>{/if}

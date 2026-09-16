@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteImageCropperElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteImageCropperElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteImageCropperElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteImageCropperElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-image-cropper", name: "ImageCropper", element: RemoteImageCropperElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-image-cropper", name: "ImageCropper", element: RemoteImageCropperElement }}
-/>
+{#if hasContent}<flr-image-cropper bind:this={element.node}>{@render children?.()}</flr-image-cropper>{:else}<flr-image-cropper bind:this={element.node}></flr-image-cropper>{/if}

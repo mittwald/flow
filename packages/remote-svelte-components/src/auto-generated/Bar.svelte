@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteBarElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteBarElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteBarElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteBarElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-bar", name: "Bar", element: RemoteBarElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-bar", name: "Bar", element: RemoteBarElement }}
-/>
+{#if hasContent}<flr-bar bind:this={element.node}>{@render children?.()}</flr-bar>{:else}<flr-bar bind:this={element.node}></flr-bar>{/if}

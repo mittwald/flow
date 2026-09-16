@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteSectionElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteSectionElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteSectionElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteSectionElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-section", name: "Section", element: RemoteSectionElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-section", name: "Section", element: RemoteSectionElement }}
-/>
+{#if hasContent}<flr-section bind:this={element.node}>{@render children?.()}</flr-section>{:else}<flr-section bind:this={element.node}></flr-section>{/if}

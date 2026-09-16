@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteYAxisElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteYAxisElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteYAxisElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteYAxisElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-y-axis", name: "YAxis", element: RemoteYAxisElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-y-axis", name: "YAxis", element: RemoteYAxisElement }}
-/>
+{#if hasContent}<flr-y-axis bind:this={element.node}>{@render children?.()}</flr-y-axis>{:else}<flr-y-axis bind:this={element.node}></flr-y-axis>{/if}

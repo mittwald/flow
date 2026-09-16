@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteAlignElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteAlignElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteAlignElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteAlignElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-align", name: "Align", element: RemoteAlignElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-align", name: "Align", element: RemoteAlignElement }}
-/>
+{#if hasContent}<flr-align bind:this={element.node}>{@render children?.()}</flr-align>{:else}<flr-align bind:this={element.node}></flr-align>{/if}

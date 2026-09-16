@@ -27,11 +27,14 @@ const versionAttributes = new Set(["data-flr-version"]);
 const measuredValue = /-?\d+(\.\d+)?(px|em|rem|ms|s|%)/g;
 
 /*
- * react-aria mints ids as `react-aria<instance>-_r_<counter>_` and puts them in
- * more than the attributes above — a `RadioGroup` gets one as its `name`. The
- * shape is distinctive enough to normalize by value wherever it turns up.
+ * React's `useId` mints `_r_<counter>_`, and react-aria prefixes it with its own
+ * instance (`react-aria<n>-_r_<counter>_`). Both turn up in more than the
+ * attributes above — a `RadioGroup` takes one as its `name`, recharts builds
+ * `clipPath-recharts-bar-_r_5d_` out of one — and the counter depends on how
+ * many components rendered before, which two independent mounts never agree on.
+ * The shape is distinctive enough to normalize by value wherever it appears.
  */
-const generatedId = /react-aria\d*-?_r_[a-z\d]+_?/g;
+const generatedId = /(react-aria\d*-)?_r_[a-z\d]+_/g;
 
 const normalizeAttributeValue = (name: string, value: string): string => {
   if (generatedIdAttributes.has(name) || versionAttributes.has(name)) {
@@ -66,6 +69,15 @@ const normalizeAttributeValue = (name: string, value: string): string => {
   return value;
 };
 
+/*
+ * `PasswordCreationField` generates a password. It is different on every render
+ * by design, so no two runs can agree on it — including two React ones.
+ */
+const isGeneratedPassword = (element: Element, name: string): boolean =>
+  name === "value" &&
+  element.tagName === "INPUT" &&
+  element.getAttribute("type") === "password";
+
 const serializeElement = (element: Element, depth: number): string[] => {
   const indent = "  ".repeat(depth);
   const tag = element.tagName.toLowerCase();
@@ -73,7 +85,9 @@ const serializeElement = (element: Element, depth: number): string[] => {
   const attributes = [...element.attributes]
     .map((attribute) => ({
       name: attribute.name,
-      value: normalizeAttributeValue(attribute.name, attribute.value),
+      value: isGeneratedPassword(element, attribute.name)
+        ? "…"
+        : normalizeAttributeValue(attribute.name, attribute.value),
     }))
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((attribute) => ` ${attribute.name}="${attribute.value}"`)

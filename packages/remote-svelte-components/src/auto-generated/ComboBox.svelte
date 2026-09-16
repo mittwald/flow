@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteComboBoxElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteComboBoxElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteComboBoxElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteComboBoxElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-combo-box", name: "ComboBox", element: RemoteComboBoxElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-combo-box", name: "ComboBox", element: RemoteComboBoxElement }}
-/>
+{#if hasContent}<flr-combo-box bind:this={element.node}>{@render children?.()}</flr-combo-box>{:else}<flr-combo-box bind:this={element.node}></flr-combo-box>{/if}

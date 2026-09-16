@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteLinkElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteLinkElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteLinkElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteLinkElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-link", name: "Link", element: RemoteLinkElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-link", name: "Link", element: RemoteLinkElement }}
-/>
+{#if hasContent}<flr-link bind:this={element.node}>{@render children?.()}</flr-link>{:else}<flr-link bind:this={element.node}></flr-link>{/if}

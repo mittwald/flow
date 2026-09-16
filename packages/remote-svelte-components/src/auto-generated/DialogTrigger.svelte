@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteDialogTriggerElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteDialogTriggerElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteDialogTriggerElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteDialogTriggerElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-dialog-trigger", name: "DialogTrigger", element: RemoteDialogTriggerElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-dialog-trigger", name: "DialogTrigger", element: RemoteDialogTriggerElement }}
-/>
+{#if hasContent}<flr-dialog-trigger bind:this={element.node}>{@render children?.()}</flr-dialog-trigger>{:else}<flr-dialog-trigger bind:this={element.node}></flr-dialog-trigger>{/if}

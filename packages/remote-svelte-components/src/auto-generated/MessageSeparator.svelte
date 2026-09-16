@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteMessageSeparatorElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteMessageSeparatorElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteMessageSeparatorElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteMessageSeparatorElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-message-separator", name: "MessageSeparator", element: RemoteMessageSeparatorElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-message-separator", name: "MessageSeparator", element: RemoteMessageSeparatorElement }}
-/>
+{#if hasContent}<flr-message-separator bind:this={element.node}>{@render children?.()}</flr-message-separator>{:else}<flr-message-separator bind:this={element.node}></flr-message-separator>{/if}

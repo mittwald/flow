@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteRadioElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteRadioElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteRadioElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteRadioElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-radio", name: "Radio", element: RemoteRadioElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-radio", name: "Radio", element: RemoteRadioElement }}
-/>
+{#if hasContent}<flr-radio bind:this={element.node}>{@render children?.()}</flr-radio>{:else}<flr-radio bind:this={element.node}></flr-radio>{/if}

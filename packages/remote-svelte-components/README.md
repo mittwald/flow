@@ -111,18 +111,24 @@ looked inside, so the wrapper is passed as one that receives the content:
 The numbers come from the corpus run (`test:corpus`), which is what these are
 measured against rather than asserted from.
 
-- **Svelte's anchors are comment nodes, and a comment crosses the boundary as a
-  child.** Every `flr-*` element therefore reaches the host with children nobody
-  wrote, and a Flow component that inspects its children notices:
-  `extractTextFromFirstChild` wants exactly one text child, so `Initials`,
-  `Markdown` and `Truncate` render empty. Not fixable inside the binding — an
-  anchor is where Svelte inserts and removes — so it needs a decision on the
-  Flow side: either remote-dom stops carrying comments, or Flow's child
-  inspection ignores them.
-- **A scenario that defines its own React component cannot be rebuilt.** 16 of
-  the 60 failures are this: a `Wrapper` or `TestComponent` written in the
-  scenario file, which is React code rather than a Flow component. Nothing about
-  the binding is being tested there.
+- **A component whose children the app fills gets one child too many.** Svelte
+  marks the render tag with a comment anchor, and remote-dom carries a comment
+  across as a child — so `extractTextFromFirstChild` ("exactly one text child")
+  gives up and `Initials`, `Markdown` and `Truncate` render empty. **10 of the
+  27 failures.** Not fixable inside the binding: an anchor is where Svelte
+  inserts and removes, so it can be neither moved nor deleted. It needs a
+  decision on the Flow side — either remote-dom stops carrying comments, or
+  Flow's child inspection ignores them. A component with _no_ children is fine:
+  the generated files write their tag literally, which has no anchor at all.
+- **A scenario that defines its own React component cannot be rebuilt.** **16 of
+  the 27**: a `Wrapper` or `TestComponent` written in the scenario file, usually
+  holding `useState` and driving the interaction. That is React code rather than
+  a Flow component, and nothing about the binding is measured there — ten of
+  them are `List`, which this package does not rebuild anyway.
+- **`Modal confirmOnClose` is not rebuilt**, and neither is the confirmation
+  modal an `Action` opens. Both live in Flow's `ActionModel`. 1 failure.
+- **`PasswordCreationField` cannot be compared at all**: it generates a random
+  password, so no two runs agree — including two React ones.
 
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its

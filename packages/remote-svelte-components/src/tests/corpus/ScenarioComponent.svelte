@@ -7,9 +7,12 @@
 
   const { node }: { node: ComponentNode } = $props();
 
+  /* The node identifies the component and does not change. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // svelte-ignore state_referenced_locally
   const Component = (components as Record<string, any>)[node.name];
 
+  // svelte-ignore state_referenced_locally
   if (!Component) {
     throw new UnsupportedScenarioError(
       node.name,
@@ -56,11 +59,20 @@
 {#snippet slot7()}<RemoteScenario nodes={node.slots[slotNames[7] ?? ""] ?? []} />{/snippet}
 
 <!--
+  Three branches, and the one that matters most is the first: a component the
+  scenario wrote without children must be rendered without a children snippet,
+  or the binding cannot tell "no children" from "empty children" and puts a
+  render tag — and its comment anchor — inside the element. `<Image />` then
+  reaches the host as an `<img>` with a child, which React refuses outright.
+
   The branch is here rather than inside the element on purpose: a block's
   anchors land wherever the block is written, and inside a remote element they
   become children the host counts.
 -->
-{#if textChildren !== undefined}<ScenarioTextComponent
+{#if node.children.length === 0}<Component
+    {...node.props}
+    {...slotPropsFor(slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7)}
+  />{:else if textChildren !== undefined}<ScenarioTextComponent
     name={node.name}
     props={node.props}
     text={textChildren}

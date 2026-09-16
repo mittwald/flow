@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteHeadingElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteHeadingElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteHeadingElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteHeadingElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-heading", name: "Heading", element: RemoteHeadingElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-heading", name: "Heading", element: RemoteHeadingElement }}
-/>
+{#if hasContent}<flr-heading bind:this={element.node}>{@render children?.()}</flr-heading>{:else}<flr-heading bind:this={element.node}></flr-heading>{/if}

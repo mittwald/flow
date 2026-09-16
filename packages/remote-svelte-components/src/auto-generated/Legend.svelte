@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteLegendElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteLegendElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteLegendElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteLegendElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-legend", name: "Legend", element: RemoteLegendElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-legend", name: "Legend", element: RemoteLegendElement }}
-/>
+{#if hasContent}<flr-legend bind:this={element.node}>{@render children?.()}</flr-legend>{:else}<flr-legend bind:this={element.node}></flr-legend>{/if}

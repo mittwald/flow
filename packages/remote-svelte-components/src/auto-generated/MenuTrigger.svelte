@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteMenuTriggerElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteMenuTriggerElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteMenuTriggerElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteMenuTriggerElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-menu-trigger", name: "MenuTrigger", element: RemoteMenuTriggerElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-menu-trigger", name: "MenuTrigger", element: RemoteMenuTriggerElement }}
-/>
+{#if hasContent}<flr-menu-trigger bind:this={element.node}>{@render children?.()}</flr-menu-trigger>{:else}<flr-menu-trigger bind:this={element.node}></flr-menu-trigger>{/if}

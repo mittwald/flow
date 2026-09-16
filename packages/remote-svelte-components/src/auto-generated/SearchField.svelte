@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteSearchFieldElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteSearchFieldElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteSearchFieldElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-search-field", name: "SearchField", element: RemoteSearchFieldElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-search-field", name: "SearchField", element: RemoteSearchFieldElement }}
-/>
+{#if hasContent}<flr-search-field bind:this={element.node}>{@render children?.()}</flr-search-field>{:else}<flr-search-field bind:this={element.node}></flr-search-field>{/if}

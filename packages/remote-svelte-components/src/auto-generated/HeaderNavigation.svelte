@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteHeaderNavigationElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteHeaderNavigationElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteHeaderNavigationElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-header-navigation", name: "HeaderNavigation", element: RemoteHeaderNavigationElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-header-navigation", name: "HeaderNavigation", element: RemoteHeaderNavigationElement }}
-/>
+{#if hasContent}<flr-header-navigation bind:this={element.node}>{@render children?.()}</flr-header-navigation>{:else}<flr-header-navigation bind:this={element.node}></flr-header-navigation>{/if}

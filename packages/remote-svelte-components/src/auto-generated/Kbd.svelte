@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteKbdElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteKbdElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteKbdElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteKbdElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-kbd", name: "Kbd", element: RemoteKbdElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-kbd", name: "Kbd", element: RemoteKbdElement }}
-/>
+{#if hasContent}<flr-kbd bind:this={element.node}>{@render children?.()}</flr-kbd>{:else}<flr-kbd bind:this={element.node}></flr-kbd>{/if}

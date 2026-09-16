@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteClearPropsContextElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteClearPropsContextElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteClearPropsContextElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteClearPropsContextElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-clear-props-context", name: "ClearPropsContext", element: RemoteClearPropsContextElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-clear-props-context", name: "ClearPropsContext", element: RemoteClearPropsContextElement }}
-/>
+{#if hasContent}<flr-clear-props-context bind:this={element.node}>{@render children?.()}</flr-clear-props-context>{:else}<flr-clear-props-context bind:this={element.node}></flr-clear-props-context>{/if}

@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteAlertIconElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteAlertIconElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteAlertIconElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteAlertIconElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-alert-icon", name: "AlertIcon", element: RemoteAlertIconElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-alert-icon", name: "AlertIcon", element: RemoteAlertIconElement }}
-/>
+{#if hasContent}<flr-alert-icon bind:this={element.node}>{@render children?.()}</flr-alert-icon>{:else}<flr-alert-icon bind:this={element.node}></flr-alert-icon>{/if}

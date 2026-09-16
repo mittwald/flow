@@ -194,11 +194,19 @@ const reactToScenarioNodesIn = (
       return [bridged];
     }
 
+    /*
+     * The icon's own props go to the `Icon`, not to the `<svg>`: a Flow icon
+     * *is* an `Icon` — `size` and `color` are its props — and the host can only
+     * act on them there. `children` is the icon's markup and has already been
+     * rendered.
+     */
+    const { children: ignoredChildren, ...iconProps } = props;
+
     return [
       {
         kind: "component",
         name: "Icon",
-        props: {},
+        props: iconProps,
         slots: {},
         children: [bridged],
       },

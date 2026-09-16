@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteCodeBlockElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteCodeBlockElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteCodeBlockElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteCodeBlockElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-code-block", name: "CodeBlock", element: RemoteCodeBlockElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-code-block", name: "CodeBlock", element: RemoteCodeBlockElement }}
-/>
+{#if hasContent}<flr-code-block bind:this={element.node}>{@render children?.()}</flr-code-block>{:else}<flr-code-block bind:this={element.node}></flr-code-block>{/if}

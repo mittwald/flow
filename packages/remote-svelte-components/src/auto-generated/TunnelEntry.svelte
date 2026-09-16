@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteTunnelEntryElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteTunnelEntryElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteTunnelEntryElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteTunnelEntryElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-tunnel-entry", name: "TunnelEntry", element: RemoteTunnelEntryElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-tunnel-entry", name: "TunnelEntry", element: RemoteTunnelEntryElement }}
-/>
+{#if hasContent}<flr-tunnel-entry bind:this={element.node}>{@render children?.()}</flr-tunnel-entry>{:else}<flr-tunnel-entry bind:this={element.node}></flr-tunnel-entry>{/if}

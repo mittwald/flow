@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteRangeCalendarElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteRangeCalendarElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteRangeCalendarElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteRangeCalendarElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-range-calendar", name: "RangeCalendar", element: RemoteRangeCalendarElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-range-calendar", name: "RangeCalendar", element: RemoteRangeCalendarElement }}
-/>
+{#if hasContent}<flr-range-calendar bind:this={element.node}>{@render children?.()}</flr-range-calendar>{:else}<flr-range-calendar bind:this={element.node}></flr-range-calendar>{/if}

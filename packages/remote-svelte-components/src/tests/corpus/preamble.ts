@@ -87,6 +87,14 @@ export const setNeutralPointerPosition = async (): Promise<void> => {
 export const prepareForSnapshot = async (): Promise<void> => {
   await waitForPaintedContent();
   await waitForSettledContent();
+  /*
+   * Also before the capture, not only after `render`: a scenario that clicked
+   * something leaves the pointer on it, and `data-hovered` / `data-pressed` are
+   * in the DOM the two runs are compared on. The React preamble parks it here
+   * for the same reason, one step further along — there it is a focus ring in a
+   * screenshot.
+   */
+  await setNeutralPointerPosition();
 };
 
 export const rootContainer = (): HTMLElement =>

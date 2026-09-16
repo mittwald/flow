@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteActionGroupElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteActionGroupElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteActionGroupElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteActionGroupElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-action-group", name: "ActionGroup", element: RemoteActionGroupElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-action-group", name: "ActionGroup", element: RemoteActionGroupElement }}
-/>
+{#if hasContent}<flr-action-group bind:this={element.node}>{@render children?.()}</flr-action-group>{:else}<flr-action-group bind:this={element.node}></flr-action-group>{/if}

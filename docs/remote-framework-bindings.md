@@ -237,27 +237,40 @@ The per-binding regression tests stay next to it — `RemoteEventListenerRemoval
 `RemoteControlledValue`, `RemoteSerialization` — because those are about the
 binding's own machinery rather than about agreeing with React.
 
-### What the first run reported
+### What the runs reported
 
-The Svelte binding renders **124 of the corpus's 184 scenarios** identically to
-React. The other 60 are worth reading as the shape of the answer rather than as
-Svelte trivia:
+The Svelte binding renders **157 of the corpus's 184 scenarios** identically to
+React. Getting there was mostly the harness learning what is and is not a
+difference; two findings were about the binding itself, and both generalize:
 
-- **The framework's own anchors become children.** Svelte marks a block or a
-  render tag with a comment node, remote-dom carries a comment across as a
-  child, and a Flow component that inspects its children notices:
-  `extractTextFromFirstChild` wants exactly one text child, so `Initials`,
-  `Markdown` and `Truncate` render empty. It cannot be fixed inside the binding
-  — an anchor is where the framework inserts and removes, so it can be neither
-  moved nor deleted — which makes it a decision for the Flow side: remote-dom
-  stops carrying comments, or Flow's child inspection ignores them. Vue's `v-if`
-  leaves comment placeholders too, so this is not a Svelte question.
-- **A scenario that defines its own React component cannot be rebuilt** — 16
-  failures, a local `Wrapper` or `TestComponent`. That is React code in the
-  corpus rather than a Flow component, and nothing about a binding is measured
-  there.
-- **The rest is the rebuild's own surface**: `List` (10), the charts, the
-  overlays.
+- **A dynamic tag costs you a child.** `<svelte:element this={tag}>` always
+  inserts an anchor into the element, and remote-dom carries every node across
+  as a child. A component that takes no children then still arrives at the host
+  with one — `Image` renders an `<img>`, React refuses children on a void
+  element, and nothing renders at all. Writing the tag literally in the
+  generated file removes it, which is an argument for generating markup rather
+  than a generic wrapper: the generator is the only place that knows the tag.
+  Worth 20 scenarios.
+- **What is left is the render tag.** A component whose children the app fills
+  still gets `{@render children()}`'s anchor next to them, and
+  `extractTextFromFirstChild` ("exactly one text child") gives up — `Initials`,
+  `Markdown`, `Truncate`. 10 scenarios. This one cannot be fixed inside a
+  binding: an anchor is where the framework inserts and removes. The decision
+  belongs where a comment is decided to be a child — remote-dom's serialization,
+  or Flow's own child inspection. Vue's `v-if` leaves comment placeholders too,
+  so it is not a Svelte question.
+
+The rest is honest surface: 16 scenarios define their own React component (a
+`Wrapper` holding `useState`, ten of them in `List`), one uses a `Modal` feature
+the rebuild does not have, and one generates a random password that no two runs
+can agree on.
+
+**What the harness had to learn**, because a binding is not the only source of a
+diff: react-aria's and React's generated ids wherever they appear (including a
+`RadioGroup`'s `name` and recharts' `clipPath` references), measured and
+clock-derived values in `style`, how text happened to be split into nodes, and
+parking the pointer before the capture — otherwise `data-hovered` and
+`data-pressed` differ because one run clicked a moment earlier.
 
 ## Packaging
 

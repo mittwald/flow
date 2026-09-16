@@ -37,10 +37,17 @@ const toNode = (element: Element): ElementNode => ({
  * single element — which is how the caller tells an icon from a component it
  * genuinely cannot render.
  *
- * Flow's own classes are dropped from the root: the icon is handed to `Icon`,
- * and `Icon` is what puts them back — including the ones its surroundings
- * contribute through the props context (`flow--button--icon` on an icon inside
- * a `Button`), which a pre-rendered SVG could not have known about.
+ * Flow's own classes and the inline `style` are dropped from the root: the icon
+ * is handed to `Icon`, and `Icon` is what puts them back — including the ones
+ * its surroundings contribute through the props context (`flow--button--icon`
+ * on an icon inside a `Button`), which a pre-rendered SVG could not have known
+ * about.
+ *
+ * The `style` in particular has to go. A Flow icon renders `color="#0fdf00"` as
+ * an inline style, and the host builds a plain `<svg>` with `createElement`,
+ * where a `style` string is not a valid React prop — it throws and takes the
+ * whole scenario down with it. The colour travels on the `Icon` instead, which
+ * is where it came from.
  */
 export const svgMarkupToNodes = (markup: string): ElementNode | undefined => {
   const template = document.createElement("template");
@@ -53,6 +60,9 @@ export const svgMarkupToNodes = (markup: string): ElementNode | undefined => {
   }
 
   const node = toNode(element);
+
+  delete node.attributes.style;
+
   const className = node.attributes.class;
 
   if (className !== undefined) {

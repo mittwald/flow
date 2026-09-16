@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteNavigationGroupElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteNavigationGroupElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteNavigationGroupElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteNavigationGroupElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-navigation-group", name: "NavigationGroup", element: RemoteNavigationGroupElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-navigation-group", name: "NavigationGroup", element: RemoteNavigationGroupElement }}
-/>
+{#if hasContent}<flr-navigation-group bind:this={element.node}>{@render children?.()}</flr-navigation-group>{:else}<flr-navigation-group bind:this={element.node}></flr-navigation-group>{/if}

@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteLayoutCardElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteLayoutCardElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteLayoutCardElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteLayoutCardElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-layout-card", name: "LayoutCard", element: RemoteLayoutCardElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-layout-card", name: "LayoutCard", element: RemoteLayoutCardElement }}
-/>
+{#if hasContent}<flr-layout-card bind:this={element.node}>{@render children?.()}</flr-layout-card>{:else}<flr-layout-card bind:this={element.node}></flr-layout-card>{/if}

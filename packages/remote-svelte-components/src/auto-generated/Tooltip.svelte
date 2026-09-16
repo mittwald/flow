@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteTooltipElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteTooltipElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteTooltipElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteTooltipElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-tooltip", name: "Tooltip", element: RemoteTooltipElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-tooltip", name: "Tooltip", element: RemoteTooltipElement }}
-/>
+{#if hasContent}<flr-tooltip bind:this={element.node}>{@render children?.()}</flr-tooltip>{:else}<flr-tooltip bind:this={element.node}></flr-tooltip>{/if}

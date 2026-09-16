@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteBreadcrumbElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteBreadcrumbElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteBreadcrumbElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteBreadcrumbElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-breadcrumb", name: "Breadcrumb", element: RemoteBreadcrumbElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-breadcrumb", name: "Breadcrumb", element: RemoteBreadcrumbElement }}
-/>
+{#if hasContent}<flr-breadcrumb bind:this={element.node}>{@render children?.()}</flr-breadcrumb>{:else}<flr-breadcrumb bind:this={element.node}></flr-breadcrumb>{/if}

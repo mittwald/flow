@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteChartGridElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteChartGridElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteChartGridElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteChartGridElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-chart-grid", name: "ChartGrid", element: RemoteChartGridElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-chart-grid", name: "ChartGrid", element: RemoteChartGridElement }}
-/>
+{#if hasContent}<flr-chart-grid bind:this={element.node}>{@render children?.()}</flr-chart-grid>{:else}<flr-chart-grid bind:this={element.node}></flr-chart-grid>{/if}

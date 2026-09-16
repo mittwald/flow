@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteAutocompleteElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteAutocompleteElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteAutocompleteElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteAutocompleteElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-autocomplete", name: "Autocomplete", element: RemoteAutocompleteElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-autocomplete", name: "Autocomplete", element: RemoteAutocompleteElement }}
-/>
+{#if hasContent}<flr-autocomplete bind:this={element.node}>{@render children?.()}</flr-autocomplete>{:else}<flr-autocomplete bind:this={element.node}></flr-autocomplete>{/if}

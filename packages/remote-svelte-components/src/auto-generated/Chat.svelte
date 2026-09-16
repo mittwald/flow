@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteChatElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteChatElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteChatElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteChatElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-chat", name: "Chat", element: RemoteChatElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-chat", name: "Chat", element: RemoteChatElement }}
-/>
+{#if hasContent}<flr-chat bind:this={element.node}>{@render children?.()}</flr-chat>{:else}<flr-chat bind:this={element.node}></flr-chat>{/if}

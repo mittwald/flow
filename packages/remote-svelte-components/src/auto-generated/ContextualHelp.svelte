@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemoteContextualHelpElementProps } from "@mittwald/flow-remote-elements";
   import { RemoteContextualHelpElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemoteContextualHelpElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemoteContextualHelpElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-contextual-help", name: "ContextualHelp", element: RemoteContextualHelpElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-contextual-help", name: "ContextualHelp", element: RemoteContextualHelpElement }}
-/>
+{#if hasContent}<flr-contextual-help bind:this={element.node}>{@render children?.()}</flr-contextual-help>{:else}<flr-contextual-help bind:this={element.node}></flr-contextual-help>{/if}

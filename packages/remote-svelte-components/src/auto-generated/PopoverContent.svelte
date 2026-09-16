@@ -3,13 +3,20 @@
 <script lang="ts">
   import type { RemotePopoverContentElementProps } from "@mittwald/flow-remote-elements";
   import { RemotePopoverContentElement } from "@mittwald/flow-remote-elements";
-  import RemoteElement from "../lib/RemoteElement.svelte";
+  import { useRemoteElementSync } from "../lib/remoteElementSync.svelte.js";
   import type { FlowRemoteProps } from "../lib/types.js";
 
-  let props: FlowRemoteProps<RemotePopoverContentElementProps> = $props();
+  let { children, ...props }: FlowRemoteProps<RemotePopoverContentElementProps> = $props();
+
+  // svelte-ignore state_referenced_locally
+  const element = useRemoteElementSync(
+    { tag: "flr-popover-content", name: "PopoverContent", element: RemotePopoverContentElement },
+    () => props,
+  );
+
+  const hasContent = $derived(
+    children !== undefined,
+  );
 </script>
 
-<RemoteElement
-  {...props}
-  __flr={{ tag: "flr-popover-content", name: "PopoverContent", element: RemotePopoverContentElement }}
-/>
+{#if hasContent}<flr-popover-content bind:this={element.node}>{@render children?.()}</flr-popover-content>{:else}<flr-popover-content bind:this={element.node}></flr-popover-content>{/if}
