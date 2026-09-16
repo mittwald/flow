@@ -71,4 +71,9 @@ export interface FlowRemoteElementConfig {
    * does not survive structured clone.
    */
   slotNames?: readonly string[];
+  /**
+   * Whether the Flow component is a provider (`@flr-provider`). A provider does
+   * not clear the props context for its children — see `consumePropsContext`.
+   */
+  isProvider?: boolean;
 }

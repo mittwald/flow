@@ -1,8 +1,8 @@
-import defaultConfig from "./vite.config";
+import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core";
-import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin";
+import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin.ts";
 
 /*
  * Vitest names a browser project's nested per-browser projects by writing onto

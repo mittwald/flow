@@ -1,4 +1,13 @@
 /* auto-generated file */
-import { IconPuzzle as Icon } from "@tabler/icons-react";
+/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+import { createTablerIcon } from "../lib/createTablerIcon.ts";
 import type { FC } from "react";
-export const IconExtension = Icon as FC;
+
+export const IconExtension = createTablerIcon("outline", "puzzle", "Puzzle", [
+  [
+    "path",
+    {
+      d: "M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1",
+    },
+  ],
+]) as FC;

@@ -114,21 +114,19 @@ measured against rather than asserted from.
 - **A component whose children the app fills gets one child too many.** Svelte
   marks the render tag with a comment anchor, and remote-dom carries a comment
   across as a child — so `extractTextFromFirstChild` ("exactly one text child")
-  gives up and `Initials`, `Markdown` and `Truncate` render empty. **10 of the
-  27 failures.** Not fixable inside the binding: an anchor is where Svelte
+  gives up and `Initials`, `Markdown` and `Truncate` render empty. **11 of the
+  28 failures.** Not fixable inside the binding: an anchor is where Svelte
   inserts and removes, so it can be neither moved nor deleted. It needs a
   decision on the Flow side — either remote-dom stops carrying comments, or
   Flow's child inspection ignores them. A component with _no_ children is fine:
   the generated files write their tag literally, which has no anchor at all.
 - **A scenario that defines its own React component cannot be rebuilt.** **16 of
-  the 27**: a `Wrapper` or `TestComponent` written in the scenario file, usually
+  the 28**: a `Wrapper` or `TestComponent` written in the scenario file, usually
   holding `useState` and driving the interaction. That is React code rather than
   a Flow component, and nothing about the binding is measured there — ten of
   them are `List`, which this package does not rebuild anyway.
 - **`Modal confirmOnClose` is not rebuilt**, and neither is the confirmation
   modal an `Action` opens. Both live in Flow's `ActionModel`. 1 failure.
-- **`PasswordCreationField` cannot be compared at all**: it generates a random
-  password, so no two runs agree — including two React ones.
 
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its
@@ -166,5 +164,5 @@ so themselves: `list` and `list-selection` need Flow's `List`, and
   `remote-react-components`**, all 84 files, run through this binding and
   compared against what the React binding renders today. Neither copied nor
   ported: the files are reached where they are and their environment import is
-  redirected. **124 of its 184 scenarios pass.** What the other 60 say is in
-  [Known gaps](#known-gaps).
+  redirected. **159 of its 187 scenarios pass**, against a reference run green
+  at 187/187. What the other 28 say is in [Known gaps](#known-gaps).

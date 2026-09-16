@@ -36,6 +36,7 @@
       "inputs": [
         "{projectRoot}/dev/component-index/**/*",
         "!{projectRoot}/dev/component-index/**/*.test.ts",
+        "{projectRoot}/dev/docProperties.ts",
         "{projectRoot}/dev/status-registry/exportEntries.ts",
         "{projectRoot}/dev/status-registry/buildStatusRegistry.ts",
         "{projectRoot}/dev/status-registry/parseFlrUniversalComponentNames.ts",
@@ -52,9 +53,14 @@
       "cache": true,
       "inputs": [
         "components-src",
-        "{projectRoot}/dev/createDocPropertiesJson.ts"
+        "{projectRoot}/dev/createDocPropertiesJson.ts",
+        "{projectRoot}/dev/docProperties.ts",
+        "{projectRoot}/dev/component-index/filterProps.ts"
       ],
-      "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
+      "outputs": [
+        "{projectRoot}/.cache/doc-properties.json",
+        "{projectRoot}/dist/assets/doc-properties.json"
+      ]
     },
     "build:icons": {
       "cache": true,
@@ -68,7 +74,8 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/remote-components-generator/**/*",
-        "components-src"
+        "components-src",
+        "{projectRoot}/dev/docProperties.ts"
       ],
       "dependsOn": ["build:docs-properties"],
       "outputs": [
@@ -100,6 +107,7 @@
       "inputs": [
         "{projectRoot}/dev/status-registry/**/*",
         "!{projectRoot}/dev/status-registry/**/*.test.ts",
+        "{projectRoot}/dev/docProperties.ts",
         "{projectRoot}/src/status/types.ts",
         "{projectRoot}/package.json",
         "{projectRoot}/src/components/public.ts",

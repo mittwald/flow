@@ -28,23 +28,38 @@ what the bindings established about supporting a framework at all.
   because that is the attribute a Svelte author writes.
   `RemoteRendering.browser.test.ts` guards the dashed props; a well-meant
   normalization would break them silently.
-- **Svelte's block and render anchors are comment nodes, and remote-dom carries
-  a comment across as a child.** So every `flr-*` element reaches the host with
-  one or more children nobody wrote, and a Flow component that inspects its
-  children sees them: `extractTextFromFirstChild` ("exactly one text child")
-  gives up, which empties `Initials`, `Markdown` and `Truncate`. Measured by
-  removing the comments from the remote tree by hand — the component renders
-  correctly. It cannot be fixed inside the binding: an anchor is where Svelte
+- **A generated component writes its tag literally, and that is load-bearing.**
+  `<svelte:element this={tag}>` always inserts a text anchor into the element,
+  and remote-dom carries every node across as a child — so a component that
+  takes no children still reached the host with one, and `Image` (an `<img>`)
+  failed outright because React refuses children on a void element. A statically
+  written `<flr-image></flr-image>` has none. The generator is the only place
+  that knows the tag, which is why the markup lives in the generated file rather
+  than in a shared wrapper; `useRemoteElementSync` holds everything else. Worth
+  20 corpus scenarios.
+- **The two shapes are branched outside the element.** `{#if hasContent}` sits
+  in the generated file's markup, not inside the tag: a block's anchors land
+  where the block is written, and inside a `flr-*` element they would be exactly
+  the children the branch exists to avoid.
+- **What is left is the render tag.** A component whose children the app _does_
+  fill still gets `{@render children?.()}`'s comment anchor next to them, so
+  `extractTextFromFirstChild` ("exactly one text child") gives up: `Initials`,
+  `Markdown` and `Truncate` render empty, 11 corpus scenarios. Measured by
+  removing the comments from the remote tree by hand — the component then
+  renders correctly. It cannot be fixed from here: an anchor is where Svelte
   inserts and removes, so it can be neither moved nor deleted. The fix belongs
   where a comment is decided to be a child — remote-dom's serialization, or
   Flow's own child inspection.
+- **`@flr-provider` is carried over**, the way the React emitter carries
+  `type: "provider"`: a provider does not clear the props context for its
+  children, or it drops the one set around it (`DialogTrigger`).
 - **The generated component passes its configuration as one `__flr` prop**, and
   spreads the app's props **before** it. As sibling props they would collide:
   every Flow form field takes a `name`, and
   `<RemoteElement name="TextField" {...props} />` lets `name="callsign"` win —
   the component then reports itself as "callsign" and the real `name` never
-  reaches the host, because the wrapper destructures its own away. Two of the
-  parity scenarios and `RemoteRendering.browser.test.ts` cover it.
+  reaches the host, because the wrapper destructures its own away.
+  `RemoteRendering.browser.test.ts` and the corpus both cover it.
 - **`FlowRemoteProps` adds `data-testid` back.** The generator re-exports the
   **React component's** props type, and `data-testid` is declared one level
   below it, by `FlowRemoteElement`. Vue never noticed — its props arrive
@@ -87,6 +102,11 @@ what the bindings established about supporting a framework at all.
   reference per scenario, the Svelte binding compares against it. The references
   live in `.vitest-corpus/`, are regenerated every run and are never committed —
   the claim is "Svelte renders what React renders today".
+
+  **159 of 187 scenarios pass**, with the reference run green at 187/187. The
+  rest is three things and nothing else: the render-tag anchor above (11), a
+  scenario that defines its own React component (16), and
+  `Modal confirmOnClose`, which this package's `Modal` does not rebuild (1).
 
   **Read `src/tests/corpus/environments.tsx` before changing anything here.**
   Three things in it are load-bearing and were each paid for once: the project

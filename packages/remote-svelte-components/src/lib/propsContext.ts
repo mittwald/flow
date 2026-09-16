@@ -36,8 +36,20 @@ export const setPropsContext = (context: FlowPropsContext): void => {
  */
 export const consumePropsContext = (
   component: string,
+  options: { isProvider?: boolean } = {},
 ): AnyRecord | undefined => {
   const context = getContext<FlowPropsContext | undefined>(propsContextKey);
-  setContext(propsContextKey, undefined);
+
+  /*
+   * A provider is the exception, and Flow makes the same one: `flowComponent`
+   * defaults to the `"ui"` type, which clears, and `@flr-provider` carries
+   * `type: "provider"` over so it does not. A provider that cleared would drop
+   * the props context set around it before its own children could read it —
+   * `ModalTrigger` around a `DialogTrigger` around the `Button` it configures.
+   */
+  if (!options.isProvider) {
+    setContext(propsContextKey, undefined);
+  }
+
   return context?.[component];
 };

@@ -1,10 +1,11 @@
 {
   "name": "@mittwald/mstudio-ext-react-components",
-  "version": "1.2.0-next.32",
+  "version": "1.2.0-next.53",
   "type": "module",
   "description": "React components that can be used by mStudio extension developers",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

@@ -10,7 +10,7 @@
 
   // svelte-ignore state_referenced_locally
   const element = useRemoteElementSync(
-    { tag: "flr-dialog-trigger", name: "DialogTrigger", element: RemoteDialogTriggerElement },
+    { tag: "flr-dialog-trigger", name: "DialogTrigger", element: RemoteDialogTriggerElement, isProvider: true },
     () => props,
   );
 

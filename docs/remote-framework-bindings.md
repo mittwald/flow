@@ -239,7 +239,7 @@ binding's own machinery rather than about agreeing with React.
 
 ### What the runs reported
 
-The Svelte binding renders **157 of the corpus's 184 scenarios** identically to
+The Svelte binding renders **159 of the corpus's 187 scenarios** identically to
 React. Getting there was mostly the harness learning what is and is not a
 difference; two findings were about the binding itself, and both generalize:
 
@@ -254,16 +254,15 @@ difference; two findings were about the binding itself, and both generalize:
 - **What is left is the render tag.** A component whose children the app fills
   still gets `{@render children()}`'s anchor next to them, and
   `extractTextFromFirstChild` ("exactly one text child") gives up — `Initials`,
-  `Markdown`, `Truncate`. 10 scenarios. This one cannot be fixed inside a
+  `Markdown`, `Truncate`. 11 scenarios. This one cannot be fixed inside a
   binding: an anchor is where the framework inserts and removes. The decision
   belongs where a comment is decided to be a child — remote-dom's serialization,
   or Flow's own child inspection. Vue's `v-if` leaves comment placeholders too,
   so it is not a Svelte question.
 
 The rest is honest surface: 16 scenarios define their own React component (a
-`Wrapper` holding `useState`, ten of them in `List`), one uses a `Modal` feature
-the rebuild does not have, and one generates a random password that no two runs
-can agree on.
+`Wrapper` holding `useState`, ten of them in `List`), and one uses a `Modal`
+feature the rebuild does not have.
 
 **What the harness had to learn**, because a binding is not the only source of a
 diff: react-aria's and React's generated ids wherever they appear (including a

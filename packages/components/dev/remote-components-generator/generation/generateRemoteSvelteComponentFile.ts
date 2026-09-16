@@ -1,4 +1,5 @@
 import type { ComponentDoc } from "react-docgen-typescript";
+import { checkTagIsSet } from "../lib/docTags";
 import { isSlot } from "../lib/propClassifiers";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
 import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
@@ -38,6 +39,12 @@ export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
     slots: Object.keys(c.props)
       .sort()
       .filter((prop) => isSlot(c, prop)),
+    /*
+     * `@flr-provider`, carried over the same way the React emitter carries
+     * `type: "provider"`: a provider must not clear the props context for its
+     * children, or it drops the one set around it.
+     */
+    provider: checkTagIsSet(c.tags, "provider") ? ", isProvider: true" : "",
   };
 
   const slotNameType =
@@ -76,7 +83,7 @@ export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
 
   // svelte-ignore state_referenced_locally
   const element = useRemoteElementSync(
-    { tag: "${t.tag}", name: "${t.name}", element: ${t.element} },
+    { tag: "${t.tag}", name: "${t.name}", element: ${t.element}${t.provider} },
     () => props,
   );
 

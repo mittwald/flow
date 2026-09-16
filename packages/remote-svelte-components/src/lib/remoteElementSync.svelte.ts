@@ -22,14 +22,14 @@ export const useRemoteElementSync = (
   config: FlowRemoteElementConfig,
   getProps: () => AnyRecord,
 ): RemoteElementBinding => {
-  const { tag, name, element, slotNames = [] } = config;
+  const { tag, name, element, slotNames = [], isProvider = false } = config;
 
   /*
    * Read once, while the component initializes — that is when a Svelte context
    * is readable at all. A composite that configures a changing value puts a
    * getter in the context, so the reads below stay reactive.
    */
-  const contextProps = consumePropsContext(name);
+  const contextProps = consumePropsContext(name, { isProvider });
   const reportUsage = useComponentUsage(name);
   const controlled = controlledRemoteValue(tag);
   const events = element.remoteEventDefinitions;
