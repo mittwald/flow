@@ -36,6 +36,8 @@ export const CONTENT_ORDER: readonly string[] = [
   "/templates",
   "/templates/app-shells",
   "/templates/app-shells/focus-task",
+  "/templates/app-shells/simple-app",
+  "/templates/app-shells/complex-app",
   "/templates/seiten",
   "/templates/seiten/detailseite",
   "/templates/seiten/dashboard",

@@ -1,10 +1,13 @@
 .page {
   /* Container-relative here; use 100dvh in a real full-page app. */
   height: 100%;
+  max-width: 1880px;
+  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--size-px--l);
+  padding-block: var(--size-px--l);
+  padding-inline: 2rem;
   background: var(--color--background-gradient);
 }
 

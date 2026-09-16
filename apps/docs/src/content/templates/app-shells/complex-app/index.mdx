@@ -1,0 +1,64 @@
+---
+title: Complex App
+description:
+  Eine App mit mehreren Navigationsebenen aus globaler Kopfzeile, Seitenleiste
+  und Breadcrumb.
+---
+
+<AppShell example="complex-app" />
+
+---
+
+# Verwendung
+
+Verwende eine Complex App, wenn viele Bereiche über mehrere Navigationsebenen
+erschlossen werden – die mStudio-typische Form. Für ein kleines Werkzeug mit
+wenigen, gleichrangigen Bereichen genügt eine
+[Simple App](/templates/app-shells/simple-app).
+
+---
+
+# Aufbau
+
+- **Kopfzeile** – Eine
+  [HeaderNavigation](/components/navigation/header-navigation) trägt die globale
+  Ebene (Projekte, Organisation, Server) sowie Suche, Benachrichtigungen und den
+  Kontozugang. Der Rahmen ist app-eigenes CSS.
+- **Seitenleiste** – Eine [Navigation](/components/navigation/navigation) in
+  Gruppen erschließt die Bereiche des aktuellen Kontexts. Jeder Eintrag trägt
+  ein Icon; der aktive ist über `aria-current="page"` ausgezeichnet.
+- **Kopfbereich** – Eine [Breadcrumb](/components/navigation/breadcrumb)
+  verortet die Seite in der Tiefe, darunter steht der Titel als
+  [Heading](/components/content/heading) der Ebene 1.
+- **Content** – Der Inhalt in einer
+  [LayoutCard](/components/structure/layout-card); hier bündelt eine
+  [List](/components/list/list) die Objekte mit Suche, Filter und Sortierung.
+- **Fußzeile** – Außerhalb verweisen [Links](/components/navigation/link) mit
+  `color="dark"` auf Datenschutz und Impressum.
+
+---
+
+# Varianten und Abwandlung
+
+## Detailansicht
+
+Ein Objekt aus der Liste öffnet seine Detailseite: Die
+[Breadcrumb](/components/navigation/breadcrumb) wächst um eine Ebene, eine
+[TabNavigation](/components/navigation/tab-navigation) gliedert das Objekt in
+Unterbereiche. Der Content besteht aus [Sections](/components/structure/section)
+mit ihren Aktionen im Kopf – von der
+[ProgressBar](/components/status/progress-bar) für den Speicher über
+[Tabs](/components/structure/tabs) für die Verbindungsprotokolle bis zum
+[Switch](/components/form-controls/switch) für den Spamschutz.
+
+<AppShell example="complex-app-detail" />
+
+## Doku-Layout
+
+Eine einfachere Abwandlung ohne globale Objekt-Tiefe: Die
+[Navigation](/components/navigation/navigation) listet die Bereiche flach, der
+Content steht mittig, und rechts führt ein eigenes Inhaltsverzeichnis („Auf
+dieser Seite") durch die Abschnitte der Seite. Dieser Styleguide selbst folgt
+dem Muster.
+
+<AppShell example="complex-app-doku" />
