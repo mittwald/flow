@@ -325,9 +325,6 @@ importers:
       '@mittwald/mstudio-ext-react-components':
         specifier: workspace:*
         version: link:../../packages/mstudio-ext-react-components
-      '@mittwald/react-tunnel':
-        specifier: workspace:*
-        version: link:../../packages/react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
         version: 4.2.3(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
