@@ -125,6 +125,17 @@ return (
   components break remote rendering.
 - When parent context must not leak into a component's children, use targeted
   clearing, e.g. `wrapWith: <ClearPropsContext />` (see `Modal.tsx`).
+- **A context that tunnels `Button` must tunnel overlay triggers as a whole** —
+  spread `overlayTriggersTunneledTo(tunnel)` (`@/lib/propsContext`). An overlay
+  trigger's button is the react-aria trigger: `OverlayTrigger` pins it with
+  `tunnel: null`, because the press handling, the trigger ref and
+  `aria-haspopup`/`aria-expanded`/`aria-controls` travel through a
+  `PressResponder` that only reaches its own subtree. The list includes
+  `DialogTrigger` because a host sees a different component than the author
+  wrote: `ModalTrigger`, `PopoverTrigger` and `LightBoxTrigger` are not
+  `@flr-generate`, so a remote tree reaches the host as a `DialogTrigger` with
+  no `OverlayTrigger` around it — which is why `DialogTrigger` pins the button
+  itself as well.
 
 Why this works the way it does across the remote boundary:
 [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
@@ -147,6 +158,13 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- `@flr-provider` carries a `flowComponent`'s `type: "provider"` over to the
+  generated remote component. Without it the remote element is created as a
+  `"ui"` component and wrapped in a `ClearPropsContext` — which drops every
+  props context a provider around it just set. It only matters where the
+  provider actually runs inside the remote tree, i.e. where the component that
+  renders it is not itself `@flr-generate` (`ModalTrigger` → `OverlayTrigger` →
+  `DialogTriggerView`).
 - **A prop that carries rendered output has to be a slot, not a property.** A
   remote property is transported as data, and a React element carries
   `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
@@ -316,15 +334,15 @@ Run: `pnpm nx test:unit components`,
 
 ## Public API surfaces
 
-| Export                                                          | Contents                                                                                                                                                                                                           |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                          |
-| `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                        |
-| `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                         |
-| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                        |
-| `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                    |
-| `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use. |
-| `./doc-properties`                                              | Raw `react-docgen-typescript` output — a 13 MB build input for the generators above, not something to read directly.                                                                                               |
+| Export                                                          | Contents                                                                                                                                                                                                                                            |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                                                           |
+| `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                                                         |
+| `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                                                          |
+| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                                                         |
+| `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                                                     |
+| `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use.                                  |
+| `./doc-properties`                                              | `react-docgen-typescript` output in its raw `ComponentDoc[]` shape, filtered to the props a consumer can act on. Prefer `./component-index`. The unfiltered dump the generators above read is `.cache/doc-properties.json`, which is not published. |
 
 **Adding a new integration export entry?** Also register it in the component
 status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`
@@ -416,6 +434,20 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
   — as the [Icon page](https://flow.mittwald.de/components/content/icon)
   documents. Nothing errors: types, lint and the console stay clean.
+- **A collection child is rendered twice** — react-aria renders the children of
+  a collection (`Select`, `ComboBox`, `Autocomplete`, `Menu`, `ListBox`, `Tree`,
+  …) once into its hidden collection document and once for real. Both renders
+  are full component instances, so anything derived per instance happens twice
+  for one logical element: `useId` returns two ids, effects run twice, and every
+  registration into shared state lands twice. Whatever such a child registers
+  therefore needs an id derived from the element itself, not a generated one —
+  options pass their collection key as the tunnel's `staticEntryId`
+  (`Option/optionsTunnel.ts`), and a new tunnelled collection child must do the
+  same. Without it the tunnel exit renders each child twice: the keys stay
+  unique, so the DOM and the tests look right, but the collection holds two
+  nodes per key and its `prevKey`/`nextKey` chain closes into a ring — `ArrowUp`
+  on the first item wraps to the last, and react-stately's focus restoration
+  walks `getKeyBefore` forever and freezes the tab (#3146).
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.

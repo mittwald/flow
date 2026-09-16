@@ -2,6 +2,7 @@ import type { FC, PropsWithChildren, Ref, RefObject } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { useIsActivityActive } from "@/components/Activity/context";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -28,7 +29,13 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     ...rest
   } = props;
 
+  const isActivityActive = useIsActivityActive();
+
   const ContentComponent = isDialogContent ? Aria.Dialog : "div";
+
+  if (!isActivityActive) {
+    return null;
+  }
 
   return (
     <Aria.Popover

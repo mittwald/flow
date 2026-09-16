@@ -21,8 +21,10 @@ export interface SearchFieldProps
 
 /** @flr-generate all */
 export const SearchField = flowComponent("SearchField", (props) => {
-  const { children, className, ref, ...rest } =
-    useControlledHostValueProps(props);
+  const { children, className, ref, ...rest } = useControlledHostValueProps(
+    props,
+    "",
+  );
 
   const {
     FieldErrorView,

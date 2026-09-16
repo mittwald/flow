@@ -4,8 +4,13 @@
   row-gap: var(--message-thread--spacing);
   width: 100%;
 
-  /* Inherited by the list items, which come from Message / MessageSeparator. */
-  list-style: none;
+  /* `> li` is load-bearing: #3160 narrowed it from `li` so that an ordered
+     list inside a message keeps its markers. The items come from `Message` /
+     `MessageSeparator`, so a class would have to enumerate the slot. */
+  // stylelint-disable-next-line selector-max-type -- see above
+  > li {
+    list-style: none;
+  }
 
   .message {
     &.responder {

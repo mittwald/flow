@@ -49,7 +49,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     onChange,
     isReadOnly,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, "");
 
   const [charactersCount, setCharactersCount] = useState(
     props.defaultValue?.length ?? props.value?.length ?? 0,

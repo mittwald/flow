@@ -6,6 +6,8 @@ import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import type { ReactNode } from "react";
+import { Button } from "@/components/Button";
+import { Popover, PopoverTrigger } from "@/components/Popover";
 
 const testElement = (
   <Tabs>
@@ -108,4 +110,39 @@ test("names the tab list with `aria-labelledby`", async () => {
   await expect
     .element(page.getByRole("tablist", { name: "Server settings" }))
     .toBeInTheDocument();
+});
+
+const tabsWithPopover = (selectedKey: string) => (
+  <Tabs selectedKey={selectedKey}>
+    <Tab id="comms">
+      <TabTitle>Comms</TabTitle>
+      <Section>
+        <Text>Comms panel</Text>
+      </Section>
+    </Tab>
+    <Tab id="cargo">
+      <TabTitle>Cargo hold</TabTitle>
+      <Section>
+        <PopoverTrigger>
+          <Button>Open manifest</Button>
+          <Popover>
+            <Text>Manifest entries</Text>
+          </Popover>
+        </PopoverTrigger>
+      </Section>
+    </Tab>
+  </Tabs>
+);
+
+test("Leaving a tab removes an open popover of that tab", async () => {
+  const { rerender } = await render(tabsWithPopover("cargo"));
+
+  await page.getByRole("button", { name: "Open manifest" }).click();
+  await expect.element(page.getByText("Manifest entries")).toBeVisible();
+
+  await rerender(tabsWithPopover("comms"));
+
+  await expect
+    .element(page.getByText("Manifest entries"))
+    .not.toBeInTheDocument();
 });
