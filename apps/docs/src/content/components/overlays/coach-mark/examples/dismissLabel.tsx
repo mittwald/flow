@@ -15,7 +15,7 @@ export default () => {
   });
 
   return (
-    <Section>
+    <Section style={{ paddingBlockEnd: 200 }}>
       <Button
         ref={anchor}
         onPress={() => controller.open()}
@@ -24,6 +24,7 @@ export default () => {
       </Button>
 
       <CoachMark
+        shouldFlip={false}
         anchorRef={anchor}
         controller={controller}
         dismissLabel="Ausprobieren"

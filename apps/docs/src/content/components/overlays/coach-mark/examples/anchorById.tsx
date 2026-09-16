@@ -7,10 +7,14 @@ import {
 } from "@mittwald/flow-react-components";
 
 export default () => (
-  <Section>
+  <Section style={{ paddingBlockEnd: 200 }}>
     <Button id="backup-button">Backup erstellen</Button>
 
-    <CoachMark anchor="backup-button" defaultOpen>
+    <CoachMark
+      shouldFlip={false}
+      anchor="backup-button"
+      defaultOpen
+    >
       <Heading>Neu: Backups planen</Heading>
       <Text>
         Lege fest, wann ein Backup automatisch erstellt

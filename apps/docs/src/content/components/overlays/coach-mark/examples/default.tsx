@@ -15,7 +15,7 @@ export default () => {
   });
 
   return (
-    <Section>
+    <Section style={{ paddingBlockEnd: 200 }}>
       <Button
         ref={anchor}
         onPress={() => controller.open()}
@@ -23,7 +23,11 @@ export default () => {
         Domain verbinden
       </Button>
 
-      <CoachMark anchorRef={anchor} controller={controller}>
+      <CoachMark
+        shouldFlip={false}
+        anchorRef={anchor}
+        controller={controller}
+      >
         <Heading>Neu: Domain verbinden</Heading>
         <Text>
           Du kannst deine Domain jetzt direkt hier verbinden
