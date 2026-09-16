@@ -39,31 +39,34 @@ rmSync(path.join(packageRoot, "e2e/react-parity/.refs"), {
  * empty page instead of reporting the reason.
  */
 /**
- * `CI` decides what vitest does with a missing file snapshot: write it, or
- * fail. Both are wanted here, one per pass — so neither may inherit the
- * runner's own `CI`, which is `true` on every GitHub Actions runner and made
- * the reference pass fail all 187 snapshots at once instead of writing them.
+ * What each pass does with a missing file snapshot: the reference pass writes
+ * it, the comparison has to fail on it.
+ *
+ * Stated as a flag, not as an environment variable. Vitest derives the default
+ * from whether it believes it is on CI, and that is not just `CI` — `std-env`
+ * recognises `GITHUB_ACTIONS` and every other provider's marker too. Unsetting
+ * `CI` therefore changed nothing on the runner, and the pass that is supposed
+ * to write all 187 references failed all 187 instead.
+ *
+ * `--update=true`, not a bare `--update`: the flag's value is optional, so a
+ * bare one swallows the positional test filter that follows it and the run
+ * silently widens to the whole corpus.
  */
-const environmentFor = (mode: "reference" | "compare"): NodeJS.ProcessEnv => {
-  const environment: NodeJS.ProcessEnv = {
-    ...process.env,
-    FLOW_PARITY_MODE: mode,
-  };
+const snapshotArgsFor = (mode: "reference" | "compare"): string[] =>
+  mode === "reference" ? ["--update=true"] : [];
 
-  if (mode === "reference") {
-    // Writes the references.
-    delete environment.CI;
-    return environment;
-  }
-
-  /*
-   * The comparison must not write what it failed to find. A missing reference
-   * means the reference pass never reached that scenario, and
-   * `toMatchFileSnapshot` would otherwise create it and report a pass — the one
-   * outcome that looks like parity and proves nothing.
-   */
-  return { ...environment, CI: "true" };
-};
+/*
+ * The comparison must not write what it failed to find. A missing reference
+ * means the reference pass never reached that scenario, and
+ * `toMatchFileSnapshot` would otherwise create it and report a pass — the one
+ * outcome that looks like parity and proves nothing. `CI` is what makes vitest
+ * refuse to write, and forcing it here makes the comparison strict off CI too.
+ */
+const environmentFor = (mode: "reference" | "compare"): NodeJS.ProcessEnv => ({
+  ...process.env,
+  FLOW_PARITY_MODE: mode,
+  ...(mode === "compare" ? { CI: "true" } : {}),
+});
 
 const run = (mode: "reference" | "compare"): number => {
   const exclude =
@@ -82,6 +85,7 @@ const run = (mode: "reference" | "compare"): number => {
       "--config",
       config,
       "--browser.headless",
+      ...snapshotArgsFor(mode),
       ...exclude,
       ...filters,
     ],
