@@ -149,4 +149,17 @@ describe("runSingleCodemod", () => {
     expect(code).toBe(1);
     expect(output).toContain("declined all 3");
   });
+
+  // The counterpart, and the one the guard used to get wrong: "all" has to
+  // mean all. jscodeshift counts a 0-byte source file as `skip`, so one of
+  // those anywhere in a tree the transform otherwise read happily used to
+  // report a total refusal and return 1 (#3117).
+  test("one declined file among files it read is a clean no-op", async () => {
+    const { code, output } = await call(["align-to-combine", "src"], async () =>
+      result({ changed: 0, unmodified: 29, skipped: 1 }),
+    );
+    expect(code).toBe(0);
+    expect(output).not.toContain("declined all");
+    expect(output).toContain("0 file(s) changed, 29 unchanged, 1 skipped");
+  });
 });

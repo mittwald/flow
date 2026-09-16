@@ -56,6 +56,12 @@ export interface ResolvedRange {
   dependencies: FlowDependency[];
   current: string;
   target: string;
+  /**
+   * What resolving the revision does not say on its own — e.g. a `major` that
+   * found no newer major and stayed inside the current one. `undefined`
+   * whenever there is nothing to add. See `describeUncrossedBoundary`.
+   */
+  note?: string;
   versions: string[];
 }
 
@@ -219,7 +225,7 @@ export const resolveRange = async (
     return { ok: false, reason: describeUnresolvedTarget(resolved.reason) };
   }
 
-  const { target } = resolved;
+  const { target, note } = resolved;
 
   // Defence in depth: `target` is drawn from `versions` (the intersection) or
   // from a dist-tag already validated against it, so this should never find a
@@ -244,6 +250,7 @@ export const resolveRange = async (
     dependencies,
     current,
     target,
+    note,
     versions,
   };
 };
