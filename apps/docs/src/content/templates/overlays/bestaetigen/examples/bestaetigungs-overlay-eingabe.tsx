@@ -4,6 +4,7 @@ import {
   Button,
   Content,
   FieldDescription,
+  Flex,
   Heading,
   Label,
   Modal,
@@ -19,28 +20,31 @@ export default () => {
 
   return (
     <ModalTrigger>
-      <Button color="danger" variant="soft">
+      <Button color="danger" variant="solid">
         Profil löschen
       </Button>
       <Modal>
         <Heading>Profil löschen</Heading>
         <Content>
-          <Text>
-            Das Profil <b>{profileName}</b> wird mit allen
-            zugehörigen Daten und Zugriffsrechten gelöscht.
-            Das lässt sich nicht rückgängig machen.
-          </Text>
-          <TextField
-            value={confirmation}
-            onChange={setConfirmation}
-            isRequired
-          >
-            <Label>Namen eingeben</Label>
-            <FieldDescription>
-              Tippe <b>{profileName}</b> ab, um das Löschen
-              zu bestätigen.
-            </FieldDescription>
-          </TextField>
+          <Flex direction="column" gap="m">
+            <Text>
+              Das Profil <b>{profileName}</b> wird mit allen
+              zugehörigen Daten und Zugriffsrechten
+              gelöscht. Das lässt sich nicht rückgängig
+              machen.
+            </Text>
+            <TextField
+              value={confirmation}
+              onChange={setConfirmation}
+              isRequired
+            >
+              <Label>Namen eingeben</Label>
+              <FieldDescription>
+                Tippe <b>{profileName}</b> ab, um das
+                Löschen zu bestätigen.
+              </FieldDescription>
+            </TextField>
+          </Flex>
         </Content>
         <ActionGroup>
           <Action closeModal>

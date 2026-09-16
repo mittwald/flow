@@ -23,15 +23,16 @@ sehen soll, gehört fest auf die [Detailseite](/templates/seiten/detailseite).
 
 # Aufbau
 
-- **Overlay-Container** – Ein [Modal](/components/overlays/modal); kurze Inhalte
-  erscheinen mittig, umfangreiche wie ein Log oder eine lange Liste fahren als
-  `offCanvas` ein und scrollen für sich.
-- **Überschrift** – Eine [Heading](/components/content/heading) benennt den
-  gezeigten Gegenstand.
-- **Content** – Der gezeigte Gegenstand selbst, mit
+- **Overlay-Container** – Bei wenig Inhalt eignet sich ein
+  [Modal](/components/overlays/modal), das mittig erscheint; bei viel Inhalt mit
+  erwartetem Scrollen – etwa ein Log oder eine lange Liste – bietet sich die
+  `offCanvas`-Variante an, die für sich scrollt.
+- **Überschrift** – Eine [Heading](/components/content/heading) benennt kurz das
+  gezeigte Objekt.
+- **Content** – Der Inhalt lässt sich mit
   [Sections](/components/structure/section) und einem
-  [ColumnLayout](/components/structure/column-layout) übersichtlich angeordnet.
-  Werte, die weiterverwendet werden, erhalten einen
+  [ColumnLayout](/components/structure/column-layout) übersichtlich
+  strukturieren. Werte, die weiterverwendet werden, erhalten einen
   [CopyButton](/components/actions/copy-button); das Overlay ist oft der einzige
   Ort, an dem ein Wert vollständig steht.
 - **Aktion** – Eine [ActionGroup](/components/actions/action-group) trägt als
@@ -49,9 +50,3 @@ Recovery-Codes oder ein Auth-Code. Der Warnhinweis steht vor dem Wert, damit vor
 dem Schließen klar ist, dass es keine zweite Gelegenheit gibt.
 
 <LiveCodeEditor example="anzeige-overlay-einmalig" editorCollapsed />
-
-## Mit weiterführendem Verweis
-
-Verweist das Overlay auf das betroffene Objekt, steht dieser Verweis als Link im
-Inhalt, nicht als zweiter Button in der Aktionsleiste. So bleibt die einzige
-Aktion „Schließen".

@@ -5,6 +5,7 @@ import {
   Content,
   CopyButton,
   Heading,
+  InlineCode,
   Label,
   LabeledValue,
   Modal,
@@ -15,7 +16,7 @@ import {
 
 export default () => (
   <ModalTrigger>
-    <Button>API-Token anlegen</Button>
+    <Button>Geheimnis anzeigen</Button>
     <Modal>
       <Heading>API-Token kopieren</Heading>
       <Content>
@@ -27,10 +28,10 @@ export default () => (
           </Text>
           <LabeledValue>
             <Label>API-Token</Label>
-            <Text>
+            <InlineCode>
               0664f2ab-9556-4a96-a95c-ea72800f379c
-            </Text>
-            <CopyButton value="0664f2ab-9556-4a96-a95c-ea72800f379c" />
+            </InlineCode>
+            <CopyButton text="0664f2ab-9556-4a96-a95c-ea72800f379c" />
           </LabeledValue>
         </Section>
       </Content>

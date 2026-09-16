@@ -2,6 +2,7 @@ import {
   Avatar,
   Breadcrumb,
   Button,
+  ColumnLayout,
   ContextMenu,
   ContextMenuTrigger,
   Content,
@@ -9,6 +10,7 @@ import {
   Header,
   HeaderNavigation,
   Heading,
+  InlineCode,
   IconApp,
   IconCronjob,
   IconDashboard,
@@ -37,12 +39,6 @@ import {
   Tab,
   TabNavigation,
   TabTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
   Tabs,
   Text,
 } from "@mittwald/flow-react-components";
@@ -139,32 +135,22 @@ export default () => (
                 ([key, c]) => (
                   <Tab key={key} id={key}>
                     <TabTitle>{key.toUpperCase()}</TabTitle>
-                    <Table
-                      aria-label={`${key.toUpperCase()}-Verbindung`}
-                    >
-                      <TableHeader>
-                        <TableColumn>Feld</TableColumn>
-                        <TableColumn>Wert</TableColumn>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>
-                            Benutzername
-                          </TableCell>
-                          <TableCell>
-                            max.mustermann@mittwald.de
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Server</TableCell>
-                          <TableCell>{c.server}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Port</TableCell>
-                          <TableCell>{c.port}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <ColumnLayout>
+                      <LabeledValue>
+                        <Label>Benutzername</Label>
+                        <InlineCode>
+                          max.mustermann@mittwald.de
+                        </InlineCode>
+                      </LabeledValue>
+                      <LabeledValue>
+                        <Label>Server</Label>
+                        <InlineCode>{c.server}</InlineCode>
+                      </LabeledValue>
+                      <LabeledValue>
+                        <Label>Port</Label>
+                        <InlineCode>{c.port}</InlineCode>
+                      </LabeledValue>
+                    </ColumnLayout>
                   </Tab>
                 ),
               )}

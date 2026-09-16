@@ -21,20 +21,23 @@ wenigen, gleichrangigen Bereichen genügt eine
 # Aufbau
 
 - **Kopfleiste** – Eine
-  [HeaderNavigation](/components/navigation/header-navigation) trägt die globale
-  Ebene (Projekte, Organisation, Server) sowie Suche, Benachrichtigungen und den
-  Kontozugang. Der Rahmen ist app-eigenes CSS.
-- **Seitenleiste** – Eine [Navigation](/components/navigation/navigation) in
-  Gruppen erschließt die Bereiche des aktuellen Kontexts. Jeder Eintrag trägt
-  ein Icon; der aktive ist über `aria-current="page"` ausgezeichnet.
-- **Kopfbereich** – Eine [Breadcrumb](/components/navigation/breadcrumb)
-  verortet die Seite in der Tiefe, darunter steht der Titel als
-  [Heading](/components/content/heading) der Ebene 1.
-- **Content** – Der Inhalt in einer
-  [LayoutCard](/components/structure/layout-card); hier bündelt eine
-  [List](/components/list/list) die Objekte mit Suche, Filter und Sortierung.
-- **Fußzeile** – Außerhalb verweisen [Links](/components/navigation/link) mit
-  `color="dark"` auf Datenschutz und Impressum.
+  [HeaderNavigation](/components/navigation/header-navigation) trägt die oberste
+  Navigationsebene und bereichsübergreifende Funktionen wie den Zugang zum
+  Profil, zum Support oder eine globale Suche. Der Rahmen ist app-eigenes CSS.
+- **Seitenleiste** – Eine [Navigation](/components/navigation/navigation)
+  erschließt den aktuellen Bereich und führt durch seine Unterseiten; der aktive
+  Eintrag ist über `aria-current="page"` ausgezeichnet. Ein Icon je Eintrag ist
+  möglich, aber nicht nötig.
+- **Content Header** – [Breadcrumb](/components/navigation/breadcrumb) und
+  PageTitle (ein [Heading](/components/content/heading) der Ebene 1)
+  unterstützen die Orientierung in der Tiefe.
+- **Content** – Der Inhalt liegt in einer
+  [LayoutCard](/components/structure/layout-card). Was darin steht, beschreiben
+  die Seitentypen: [Dashboard](/templates/seiten/dashboard),
+  [Übersichtsseite](/templates/seiten/uebersichtsseite) und
+  [Detailseite](/templates/seiten/detailseite).
+- **Fußzeile** – Außerhalb stehen wichtige Verweise, etwa auf Datenschutz oder
+  Impressum, als [Links](/components/navigation/link).
 
 ---
 
@@ -42,14 +45,12 @@ wenigen, gleichrangigen Bereichen genügt eine
 
 ## Detailansicht
 
-Ein Objekt aus der Liste öffnet seine Detailseite: Die
-[Breadcrumb](/components/navigation/breadcrumb) wächst um eine Ebene, eine
-[TabNavigation](/components/navigation/tab-navigation) gliedert das Objekt in
-Unterbereiche. Der Content besteht aus [Sections](/components/structure/section)
-mit ihren Aktionen im Kopf – von der
-[ProgressBar](/components/status/progress-bar) für den Speicher über
-[Tabs](/components/structure/tabs) für die Verbindungsprotokolle bis zum
-[Switch](/components/form-controls/switch) für den Spamschutz.
+Die Detailansicht kombiniert zwei Seitentypen: Über die
+[Übersichtsseite](/templates/seiten/uebersichtsseite) – eine
+[List](/components/list/list) – navigiert man in die Tiefe zu einem einzelnen
+Objekt. [Breadcrumb](/components/navigation/breadcrumb) und PageTitle helfen bei
+der Orientierung; eine [TabNavigation](/components/navigation/tab-navigation)
+gliedert das Objekt in Unterbereiche.
 
 <AppShell example="complex-app-detail" />
 

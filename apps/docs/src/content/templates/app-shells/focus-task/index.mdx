@@ -1,8 +1,8 @@
 ---
 title: Focus Task
 description:
-  Eine einzelne Seite für genau eine Aufgabe, ohne umgebendes
-  Navigations-Chrome.
+  Eine einzelne Seite ohne Navigation, damit sich Nutzer auf eine bestimmte
+  Aufgabe konzentrieren können.
 ---
 
 <AppShell example="focus-task" />
@@ -13,28 +13,20 @@ description:
 
 Verwende einen Focus Task, wenn Nutzer genau eine Aufgabe erledigen sollen –
 anmelden, ein Passwort zurücksetzen, einen Onboarding-Schritt bestätigen.
-Navigations-Chrome entfällt, damit nichts vom Ziel ablenkt.
 
 ---
 
 # Aufbau
 
 - **Rahmen** – Ein zentrierter, breitenbegrenzter Bereich auf dem
-  Hintergrund-Gradienten (`--color--background-gradient`) hält alles im Blick.
-  Der Rahmen ist app-eigenes CSS (`height: 100%`, im echten Vollbild `100dvh`).
-- **Logo** – Über der Card verankert die Marke den Kontext. Als
-  `currentColor`-Maske eingebunden, folgt es dem Theme.
-- **Aufgabe** – Eine [LayoutCard](/components/structure/layout-card) fasst
-  Titel, die Felder und die primäre Aktion zusammen. E-Mail und Passwort sind
-  [TextFields](/components/form-controls/text-field); mit `type="password"`
-  bringt das Feld den Sichtbarkeits-Toggle selbst mit. „Passwort vergessen"
-  steht als [Link](/components/navigation/link) links, „Anmelden" als
-  [Button](/components/actions/button) rechts.
-- **Sekundärer Weg** – Eine Zeile „Du hast noch keinen Nutzer? Registrieren"
-  bietet den Ausweg zur Registrierung, klar der Hauptaufgabe untergeordnet.
-- **Fußzeile** – Außerhalb der Card verweisen
-  [Links](/components/navigation/link) auf Datenschutz und Impressum;
-  `target="_blank"` blendet automatisch das Extern-Icon ein.
+  Hintergrund-Gradienten hält alles im Blick. Der Rahmen ist app-eigenes CSS.
+- **Logo** – Über der Card verankert die Marke den Kontext.
+- **Content** – Der Content wird in einer
+  [LayoutCard](/components/structure/layout-card) dargestellt, mit den Aktionen
+  und Formularen direkt darin. So erfüllt der Nutzer eine bestimmte Aufgabe,
+  etwa mit einem [Button](/components/actions/button) als primärer Aktion.
+- **Fußzeile** – Außerhalb der Card stehen wichtige Verweise, etwa auf
+  Datenschutz oder Impressum, als [Links](/components/navigation/link).
 
 ---
 
@@ -42,12 +34,8 @@ Navigations-Chrome entfällt, damit nichts vom Ziel ablenkt.
 
 ## Konfigurations-Aufgabe
 
-Auch eine mehrteilige Aufgabe bleibt ein Focus Task, solange sie ohne
-Navigations-Chrome auf ein Ziel führt. Die Konfiguration liegt in einer breiten
-[LayoutCard](/components/structure/layout-card) mit
-[RadioButtons](/components/form-controls/radio-group) als auswählbaren Karten,
-daneben fasst eine zweite Card die Kosten in einer
-[Table](/components/structure/table) zusammen. Das Logo rückt nach oben links,
-die primäre Aktion „Weiter" führt den Schritt fort.
+Auch eine mehrteilige Aufgabe bleibt ein Focus Task, solange sie ohne Navigation
+auf ein Ziel führt. Abgebildet ist ein Konfigurator aus mehreren
+[LayoutCards](/components/structure/layout-card).
 
 <AppShell example="focus-task-bestellung" />

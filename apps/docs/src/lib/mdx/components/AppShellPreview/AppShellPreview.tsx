@@ -27,9 +27,12 @@ export interface AppShellPreviewProps {
  * copyable blocks, teaching how to split a shell.
  *
  * The inline frame shows the shell zoomed out (16:9) so its whole layout reads
- * at a glance. Hovering dims it and reveals a centred "Vorschau" button; a
- * click anywhere on it opens the same live component near-fullscreen in a
- * LightBox.
+ * at a glance. It is only a scaled-down picture, so it is `inert`: its controls
+ * stay out of the tab order and swallow no clicks, which keeps keyboard users
+ * from getting trapped in a preview they cannot really operate. Hovering dims
+ * it and reveals a centred "Vorschau" button; a click anywhere on it opens the
+ * same live component near-fullscreen in a LightBox, where it is fully
+ * interactive.
  *
  * The full-cover trigger button is invisible and empty; the visible "Vorschau"
  * button is a decorative Flow Button that sits on top with pointer-events off,
@@ -43,7 +46,7 @@ export const AppShellPreview = ({
 }: AppShellPreviewProps) => (
   <div className={styles.appShell}>
     <div className={styles.previewFrame}>
-      <div className={styles.previewScaler} aria-hidden>
+      <div className={styles.previewScaler} aria-hidden inert>
         <Component />
       </div>
       <LightBoxTrigger>

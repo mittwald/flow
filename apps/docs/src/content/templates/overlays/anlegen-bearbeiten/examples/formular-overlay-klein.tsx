@@ -47,7 +47,7 @@ export default () => {
                 required: "Bitte gib eine Beschreibung ein",
               }}
             >
-              <TextField>
+              <TextField autoFocus>
                 <Label>Beschreibung</Label>
               </TextField>
             </Field>

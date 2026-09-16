@@ -44,20 +44,21 @@ export default () => {
             data={[
               {
                 id: "1",
-                domain: "mjaofd6.project.space",
-                type: "Projekt-Domain",
+                domain: "my-domain.de",
+                type: "Domain",
+                target: "Mein Blog",
               },
               {
                 id: "2",
-                domain: "formel1.de",
-                type: "Domain",
-                target: "Mein WordPress",
+                domain: "www.my-domain.de",
+                type: "Subdomain",
+                target: "Mein Blog",
               },
               {
                 id: "3",
-                domain: "schumi-fanclub.de",
-                type: "Virtual Host",
-                target: "Mein WordPress",
+                domain: "one-more-domain.com",
+                type: "Domain",
+                target: "Mein Shop",
               },
             ]}
           />

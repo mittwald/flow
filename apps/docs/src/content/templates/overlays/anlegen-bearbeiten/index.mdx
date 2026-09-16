@@ -23,10 +23,10 @@ vorgelagerten Auswahl ab, eines mit
 # Aufbau
 
 - **Overlay-Container** – Ein [Modal](/components/overlays/modal) legt sich über
-  die auslösende Seite; sie bleibt sichtbar, und nach dem Speichern kehrt der
-  Nutzer an dieselbe Stelle zurück. Je nach Umfang des Formulars wird das
-  mittige Modal gewählt oder – für lange, ausführliche Inhalte, die sonst im
-  Modal scrollen müssten – die `offCanvas`-Variante.
+  die auslösende Seite; nach dem Speichern kehrt der Nutzer an dieselbe Stelle
+  zurück. Je nach Umfang des Formulars wird das mittige Modal gewählt oder – für
+  lange, ausführliche Inhalte, die sonst im Modal scrollen müssten – die
+  `offCanvas`-Variante.
 - **Überschrift** – Eine [Heading](/components/content/heading) benennt Aktion
   und Objekt, etwa „E-Mail-Adresse anlegen". Sie ist meist der einzige Hinweis
   auf den Bezug des Formulars, da die auslösende Seite verdeckt ist.
@@ -52,6 +52,11 @@ Anlegen und Bearbeiten teilen sich ein Template. Sie unterscheiden sich in
 ## Kurzes Formular
 
 Bei wenigen Feldern ist das Formular im mittigen
-[Modal](/components/overlays/modal) gut aufgehoben.
+[Modal](/components/overlays/modal) gut aufgehoben. Hier kann der Fokus beim
+Öffnen direkt in das erste [TextField](/components/form-controls/text-field)
+springen (`autoFocus`), sodass die Eingabe ohne weiteren Klick beginnt. Setze
+`autoFocus` nur, wenn das Overlay ausschließlich diesem Eingabezweck dient –
+sonst überspringen Screenreader-Nutzer den einleitenden Kontext aus Überschrift
+und Beschreibung.
 
 <LiveCodeEditor example="formular-overlay-klein" editorCollapsed />

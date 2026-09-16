@@ -65,7 +65,7 @@ export default () => {
             </TextField>
           </Field>
         </ColumnLayout>
-        <ColumnLayout m={[2, 1]}>
+        <ColumnLayout m={[2, 1]} s={[2, 1]}>
           <Field
             name="street"
             rules={{
@@ -87,7 +87,7 @@ export default () => {
             </TextField>
           </Field>
         </ColumnLayout>
-        <ColumnLayout m={[1, 2]}>
+        <ColumnLayout m={[1, 2]} s={[1, 2]}>
           <Field
             name="zip"
             rules={{

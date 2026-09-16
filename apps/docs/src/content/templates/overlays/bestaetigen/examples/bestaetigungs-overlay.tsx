@@ -11,7 +11,7 @@ import {
 
 export default () => (
   <ModalTrigger>
-    <Button color="danger" variant="soft">
+    <Button color="danger" variant="solid">
       E-Mail-Adresse löschen
     </Button>
     <Modal>

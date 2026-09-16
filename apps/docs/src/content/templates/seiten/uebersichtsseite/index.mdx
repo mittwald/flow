@@ -29,9 +29,9 @@ neben anderen Inhalten, gehört sie in ein
 - **List** – Die [List](/components/list/list) bringt Suche, Filter und
   Sortierung bereits mit. Je nach Inhalt lässt sich ihre Ansicht als Liste,
   Raster oder Tabelle wählen.
-- **Eintrag** – Jeder [List-Item](/components/list/list-item-view) verlinkt in
-  seine [Detailseite](/templates/seiten/detailseite) und trägt häufige Aktionen
-  direkt am Objekt, etwa über ein
+- **Eintrag** – Ein [List-Item](/components/list/list-item-view) je Objekt
+  verlinkt in seine [Detailseite](/templates/seiten/detailseite) und trägt
+  häufige Aktionen direkt am Objekt, etwa über ein
   [ContextMenu](/components/actions/context-menu).
 - **Anlege-Aktion** – Sie liegt in der
   [ActionGroup](/components/actions/action-group) der List und bleibt so am
@@ -47,9 +47,10 @@ neben anderen Inhalten, gehört sie in ein
 
 ## Als Kachelansicht
 
-Trägt ein Vorschaubild oder ein großes Typ-Icon zur Erkennung bei, wird aus dem
-Eintrag eine Kachel. Struktur und Ausstattung der Seite bleiben gleich – es
-ändern sich nur `defaultViewMode` und die Anzeigeform des Eintrags.
+In der Kachelansicht steht ein großes Vorschaubild im Vordergrund. So erkennen
+Nutzer das passende Objekt auf einen Blick. Struktur und Ausstattung der Seite
+bleiben gleich. Es ändern sich nur `defaultViewMode` und die Anzeigeform des
+Eintrags.
 
 <LiveCodeEditor
   example="uebersichtsseite-kacheln"
@@ -59,7 +60,7 @@ Eintrag eine Kachel. Struktur und Ausstattung der Seite bleiben gleich – es
 
 ## Tabs über mehreren Übersichtsseiten
 
-Gehören mehrere Objekttypen fachlich zusammen – E-Mail-Adressen,
-Weiterleitungen, Delivery-Boxen –, fasst eine
-[TabNavigation](/components/navigation/tab-navigation) sie zusammen; jeder Tab
-ist für sich eine Übersichtsseite.
+Manchmal gehören mehrere Objekttypen fachlich zusammen, etwa E-Mail-Adressen,
+Weiterleitungen und Delivery-Boxen. Eine
+[TabNavigation](/components/navigation/tab-navigation) fasst sie zusammen. Jeder
+Tab ist für sich eine Übersichtsseite.

@@ -22,18 +22,45 @@ Overlay zum [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
 - **Form** – Ein [Form](/components/react-hook-form/form) klammert die Felder
   und verbindet sie über [Field](/components/react-hook-form/field) mit React
   Hook Form. Es sammelt die Werte und übergibt sie beim Absenden.
-- **Felder** – Die Eingaben bestehen aus Form Controls wie
-  [TextField](/components/form-controls/text-field),
-  [Select](/components/form-controls/select) oder
-  [RadioGroup](/components/form-controls/radio-group), jeweils mit einem
-  [Label](/components/content/label).
 - **Struktur** – [Sections](/components/structure/section) gruppieren
   zusammengehörige Felder, ein
-  [ColumnLayout](/components/structure/column-layout) ordnet sie in Spalten.
-  Ordne die Felder nach Wichtigkeit und stelle zusammengehörige nah beieinander.
+  [ColumnLayout](/components/structure/column-layout) ordnet zusammengehörige
+  Felder in eine Zeile – etwa Straße und Hausnummer oder PLZ und Ort. Ordne die
+  Felder nach Wichtigkeit und stelle Zusammengehöriges nah beieinander.
 - **Absenden** – Eine [ActionGroup](/components/actions/action-group) trägt den
   [SubmitButton](/components/react-hook-form/submit-button). Die Validierung
   erfolgt standardmäßig erst beim Absenden.
+
+### Field
+
+Diese Punkte kehren über alle Form Controls hinweg wieder:
+
+- **Label** – Ein gutes [Label](/components/content/label) vermittelt alle
+  notwendigen Informationen klar und prägnant (max. 2 Wörter). Lässt sich die
+  Anforderung aus dem Kontext erschließen, kann ein sichtbares Label entfallen –
+  dann muss das Form Control über `aria-labelledby` verknüpft oder mit
+  `aria-label` beschrieben sein.
+- **Fields & Controls** – Das Design System bietet viele wiederverwendbare Form
+  Controls: Fields wie [TextField](/components/form-controls/text-field),
+  [NumberField](/components/form-controls/number-field) oder
+  [PasswordCreationField](/components/form-controls/password-creation-field)
+  sowie Controls wie [Checkbox](/components/form-controls/checkbox),
+  [Select](/components/form-controls/select) oder
+  [RadioGroup](/components/form-controls/radio-group). Alle findest du unter
+  Components → Form Controls.
+- **FieldDescription** – Die `<FieldDescription />` ist ein optionaler Hilfstext
+  unterhalb des Form Controls mit zusätzlichen Hinweisen, etwa Beispielen oder
+  Formatierungshinweisen. Verwende sie sparsam.
+- **FieldError** – Ein ungültiges Field zeigt immer eine Fehlermeldung über die
+  `<FieldError />`. Sie erklärt verständlich, warum die Eingabe ungültig ist,
+  und hilft bei der Korrektur. Formulierungshinweise stehen in der Guideline zu
+  [Fehlermeldungen](/foundations/content-guidelines/fehlermeldungen).
+- **Placeholder** – Ein Placeholder ersetzt kein Label: Er verschwindet bei der
+  Eingabe und wird von Assistenztechnologien oft nicht zuverlässig erkannt.
+  Nutze ein `Label` für essenzielle Anforderungen und eine `FieldDescription`
+  für Beispiele oder Formatierungshinweise. Eine Ausnahme ist das
+  [SearchField](/components/form-controls/search-field) mit seinem
+  kennzeichnenden Leading-Icon.
 
 ---
 
@@ -41,9 +68,11 @@ Overlay zum [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
 
 ## Mit Validierung
 
-Über `rules` am [Field](/components/react-hook-form/field) werden Eingaben
-geprüft – etwa `isRequired`, eigene `validate`-Funktionen oder HTML-Properties
-wie `minLength`. Die Fehlermeldung erscheint am betroffenen Feld.
+Nutze für die Validierung in der Regel
+[React Hook Form](/components/react-hook-form/form). Alternativ stehen
+`isRequired` (für Pflichtfelder) und `validate` (für eigene Validierungen) zur
+Verfügung. Bei ungültiger Eingabe wird das Field invalidiert; über die
+`FieldError` kann eine Fehlermeldung ausgegeben werden.
 
 <LiveCodeEditor example="validierung" editorCollapsed />
 
