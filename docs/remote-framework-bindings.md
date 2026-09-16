@@ -189,27 +189,75 @@ different API, same purpose, and arguably the clearer one.
 
 ## Testing a binding against the React one
 
-**The visual suite cannot take a third environment.** Its scenarios are
-`(components) => ReactNode`
+**The visual suite's scenarios cannot be rendered by a non-React binding.** They
+are `(components) => ReactNode`
 (`remote-react-components/src/tests/lib/visualScenario.ts`), which is exactly
-what lets one scenario run both `Local` and `Remote` — and exactly what a
-non-React binding cannot render. Rewriting 86 scenarios per binding is not a
-suite, it is a second suite.
+what lets one scenario run both `Local` and `Remote`. Rewriting 84 files per
+binding is not a shared suite, it is a second one that drifts.
 
-What does work is a scenario that is **data**: a component name, its props, its
-children. Both bindings can build it — the React one with `createElement`, the
-Svelte one with a recursive component — and then the host's DOM is the
-assertion. Same component, same props, same rendering, or the binding is wrong.
+**But the corpus does not have to be copied.** Every file imports its
+environment from `@/tests/lib/environments`, and a Vite alias can point exactly
+that import at a binding's own harness — the technique the cross-version harness
+already uses to run the same corpus against old published versions. The corpus
+stays the contract.
 
-It is cheaper than a screenshot and stricter where it matters: a prop that never
-arrived is a missing attribute, not a few pixels. The `name` collision above was
-found by hand and is now caught by five of eleven scenarios
-(`remote-svelte-components/src/tests/Parity.browser.test.ts`). Only react-aria's
-generated ids are normalized away; everything else has to be identical.
+**And a React element is inert data** — `{ type, props, key }`. The scenario is
+handed the components bag, so its element types _are_ the React components: map
+them back to their export names and the tree can be rebuilt with any framework's
+components under the same names. `children` becomes the framework's children, a
+prop whose value is an element becomes a slot (which is what it is on the other
+side too), functions pass through.
+
+**Icons need a bridge.** Flow's icons are React components and there is no icon
+set for anything else. What there is, is their output: render the React icon
+with `renderToStaticMarkup`, parse the `<svg>` and rebuild it — an `<svg>`
+travels as remote DOM like any other node, and handing it to `Icon` is exactly
+what a non-React app does by hand. Without it a quarter of the corpus fails on
+an icon rather than on anything about the binding.
+
+**Compare host DOM, not pixels.** Two runs: the React binding writes a reference
+per scenario, the other binding compares against it. The references are
+regenerated every run and never committed — the claim is "this binding renders
+what React renders _today_", not "what React rendered when someone last updated
+a baseline", and there is no second set of platform-specific screenshots to
+maintain. Two runs rather than two trees side by side, because the corpus
+interacts through `page.getByRole(…)`, which has to find exactly one of them.
+
+Normalize only what cannot be equal between two mounts: react-aria's generated
+ids (in `id`/`for`/`aria-*` **and** wherever else they appear, such as a
+`RadioGroup`'s `name`), measured lengths and clock-derived values in `style`,
+and how text happened to be split into nodes. Element tree, classes, ARIA state
+and text stay strict.
+
+**No skip list.** A scenario the binding cannot express fails with an error
+naming the component. A silent skip would hide the gap the harness exists to
+measure.
 
 The per-binding regression tests stay next to it — `RemoteEventListenerRemoval`,
 `RemoteControlledValue`, `RemoteSerialization` — because those are about the
 binding's own machinery rather than about agreeing with React.
+
+### What the first run reported
+
+The Svelte binding renders **124 of the corpus's 184 scenarios** identically to
+React. The other 60 are worth reading as the shape of the answer rather than as
+Svelte trivia:
+
+- **The framework's own anchors become children.** Svelte marks a block or a
+  render tag with a comment node, remote-dom carries a comment across as a
+  child, and a Flow component that inspects its children notices:
+  `extractTextFromFirstChild` wants exactly one text child, so `Initials`,
+  `Markdown` and `Truncate` render empty. It cannot be fixed inside the binding
+  — an anchor is where the framework inserts and removes, so it can be neither
+  moved nor deleted — which makes it a decision for the Flow side: remote-dom
+  stops carrying comments, or Flow's child inspection ignores them. Vue's `v-if`
+  leaves comment placeholders too, so this is not a Svelte question.
+- **A scenario that defines its own React component cannot be rebuilt** — 16
+  failures, a local `Wrapper` or `TestComponent`. That is React code in the
+  corpus rather than a Flow component, and nothing about a binding is measured
+  there.
+- **The rest is the rebuild's own surface**: `List` (10), the charts, the
+  overlays.
 
 ## Packaging
 

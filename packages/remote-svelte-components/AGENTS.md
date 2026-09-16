@@ -28,6 +28,16 @@ what the bindings established about supporting a framework at all.
   because that is the attribute a Svelte author writes.
   `RemoteRendering.browser.test.ts` guards the dashed props; a well-meant
   normalization would break them silently.
+- **Svelte's block and render anchors are comment nodes, and remote-dom carries
+  a comment across as a child.** So every `flr-*` element reaches the host with
+  one or more children nobody wrote, and a Flow component that inspects its
+  children sees them: `extractTextFromFirstChild` ("exactly one text child")
+  gives up, which empties `Initials`, `Markdown` and `Truncate`. Measured by
+  removing the comments from the remote tree by hand — the component renders
+  correctly. It cannot be fixed inside the binding: an anchor is where Svelte
+  inserts and removes, so it can be neither moved nor deleted. The fix belongs
+  where a comment is decided to be a child — remote-dom's serialization, or
+  Flow's own child inspection.
 - **The generated component passes its configuration as one `__flr` prop**, and
   spreads the app's props **before** it. As sibling props they would collide:
   every Flow form field takes a `name`, and
@@ -63,13 +73,30 @@ what the bindings established about supporting a framework at all.
   `flowComponent` of type `ui` does with `ClearPropsContext`. A composite that
   configures a **changing** value puts a getter in the context object; it is
   read once, while a component below initializes.
-- **`Parity.browser.test.ts` renders the same scenario through both bindings**
-  and compares what the host produced. The scenarios are data
-  (`src/tests/lib/parity/scenarios.ts`), so `Render.svelte` and the React
-  `createElement` path can both build them — which is the only way a non-React
-  binding can share a suite with React at all; the visual scenarios in
-  `remote-react-components` are `(components) => ReactNode` and cannot be
-  rendered here. Only react-aria's generated ids are normalized away.
+- **`pnpm nx test:corpus remote-svelte-components` runs the visual corpus of
+  `remote-react-components` through this binding.** Its 84 files are neither
+  copied nor ported: they import their environment from
+  `@/tests/lib/environments`, and `vitest.corpus.config.ts` redirects exactly
+  that import to `src/tests/corpus/environments.tsx` — the same technique the
+  cross-version harness uses to run the same corpus against old published
+  versions. The corpus is the contract; a Svelte copy of it would drift.
+
+  A scenario is `(components) => ReactNode` and a React element is inert data,
+  so the tree is walked and rebuilt with this package's components
+  (`reactToScenario.tsx`). Two runs: the React binding writes a host-DOM
+  reference per scenario, the Svelte binding compares against it. The references
+  live in `.vitest-corpus/`, are regenerated every run and are never committed —
+  the claim is "Svelte renders what React renders today".
+
+  **Read `src/tests/corpus/environments.tsx` before changing anything here.**
+  Three things in it are load-bearing and were each paid for once: the project
+  root stays this package (`svelte` does not resolve from
+  `remote-react-components`, and a run rooted there splits the runtime into two
+  copies, `effect_orphan`); the upload fixture is copied to `src/tests/assets/`
+  because `FileField` uploads by a root-relative path; and the setup file is the
+  corpus's own, because eighteen files use the `getByLocator` locator it
+  registers.
+
 - **`src/tests/*.browser.test.ts` runs the real thing:** a Svelte tree, the
   production serializer over a MessageChannel, and React's `RemoteRenderer` as
   the host. A value that would not survive `postMessage` fails here the way it

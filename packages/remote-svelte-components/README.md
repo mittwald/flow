@@ -108,6 +108,22 @@ looked inside, so the wrapper is passed as one that receives the content:
 
 ## Known gaps
 
+The numbers come from the corpus run (`test:corpus`), which is what these are
+measured against rather than asserted from.
+
+- **Svelte's anchors are comment nodes, and a comment crosses the boundary as a
+  child.** Every `flr-*` element therefore reaches the host with children nobody
+  wrote, and a Flow component that inspects its children notices:
+  `extractTextFromFirstChild` wants exactly one text child, so `Initials`,
+  `Markdown` and `Truncate` render empty. Not fixable inside the binding — an
+  anchor is where Svelte inserts and removes — so it needs a decision on the
+  Flow side: either remote-dom stops carrying comments, or Flow's child
+  inspection ignores them.
+- **A scenario that defines its own React component cannot be rebuilt.** 16 of
+  the 60 failures are this: a `Wrapper` or `TestComponent` written in the
+  scenario file, which is React code rather than a Flow component. Nothing about
+  the binding is being tested there.
+
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its
   own project, not a prototype step.
@@ -139,5 +155,10 @@ so themselves: `list` and `list-selection` need Flow's `List`, and
   settings store.
 - `pnpm nx test:browser remote-svelte-components --browser.name=webkit` — a
   Svelte tree, the production serializer, and React's `RemoteRenderer` as the
-  host. `Parity.browser.test.ts` renders the same scenarios through the React
-  binding as well and requires the host's DOM to be identical.
+  host.
+- `pnpm nx test:corpus remote-svelte-components` — the **visual corpus of
+  `remote-react-components`**, all 84 files, run through this binding and
+  compared against what the React binding renders today. Neither copied nor
+  ported: the files are reached where they are and their environment import is
+  redirected. **124 of its 184 scenarios pass.** What the other 60 say is in
+  [Known gaps](#known-gaps).

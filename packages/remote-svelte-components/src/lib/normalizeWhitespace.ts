@@ -23,8 +23,12 @@
  * - **Both neighbours are elements or absent.** `<Text>{a} {b}</Text>` puts a
  *   space between two expressions, and that space is the author's.
  *
- * The node is blanked, not removed: Svelte created it and may still hold a
- * reference to it as a block boundary. An empty text node renders as nothing.
+ * The node is removed, not blanked. An empty text node still _is_ a child on
+ * the host, and a Flow component that requires exactly one text child —
+ * `Initials`, `Markdown`, `Truncate`, through `extractTextFromFirstChild` —
+ * counts it and gives up. Removing is safe here precisely because of the
+ * conditions above: what they select is static template whitespace, never one
+ * of Svelte's own anchors, which are empty or comments.
  */
 const isBlankText = (node: Node): node is Text =>
   node.nodeType === Node.TEXT_NODE && /^\s+$/.test(node.nodeValue ?? "");
@@ -70,7 +74,7 @@ const normalizeNode = (node: Node): void => {
     isElementOrAbsent(siblingBefore(node)) &&
     isElementOrAbsent(siblingAfter(node))
   ) {
-    node.nodeValue = "";
+    node.remove();
   }
 };
 

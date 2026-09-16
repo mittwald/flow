@@ -13,6 +13,15 @@
           "target": "build:remote-components"
         }
       ]
+    },
+    "test:corpus": {
+      "dependsOn": [
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
     }
   }
 }
