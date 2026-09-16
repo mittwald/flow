@@ -7,6 +7,16 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "tabler-icons-no-longer-transitive",
+    since: "1.1.40",
+    title: "@tabler/icons-react is no longer installed alongside Flow",
+    kind: "migration",
+    action: "manual",
+    remotePackage: true,
+    apply:
+      "Only affects code that imports from `@tabler/icons-react` — typically a `<Icon><IconSomething /></Icon>` using an icon that is not in Flow's own set. Add the package to your own dependencies (`npm i @tabler/icons-react`); the imports themselves stay unchanged. Flow's own `Icon*` components are unaffected, keep their names, and render exactly as before.",
+  },
+  {
     id: "option-value-inferred-from-mixed-children",
     since: "1.1.12",
     title: "Option: value is inferred from mixed children",

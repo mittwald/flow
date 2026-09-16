@@ -1,2 +1,6 @@
-export { type ImageCropperProps, ImageCropper } from "./ImageCropper";
+export {
+  type ImageCropperError,
+  type ImageCropperProps,
+  ImageCropper,
+} from "./ImageCropper";
 export { default } from "./ImageCropper";

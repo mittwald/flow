@@ -18,7 +18,11 @@ import {
   modifyValueByType,
 } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  overlayTriggersTunneledTo,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -51,7 +55,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     onChange,
     ref,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, "");
 
   const inputRef = useObjectRef(ref);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
@@ -64,24 +68,13 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   );
 
   const toolbarActionsPropsContext: PropsContext = {
+    ...overlayTriggersTunneledTo(toolbarActionsTunnel),
     Button: {
       tunnel: toolbarActionsTunnel,
       size: "s",
       variant: "plain",
       color: "dark",
       isDisabled: toolbarActionsDisabled,
-    },
-    ContextMenuTrigger: {
-      tunnel: toolbarActionsTunnel,
-      Button: { tunnel: null },
-    },
-    ModalTrigger: {
-      tunnel: toolbarActionsTunnel,
-      Button: { tunnel: null },
-    },
-    PopoverTrigger: {
-      tunnel: toolbarActionsTunnel,
-      Button: { tunnel: null },
     },
   };
 

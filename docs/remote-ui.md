@@ -176,7 +176,7 @@ That single tag drives a chain of generated artifacts:
 The whole pipeline runs with `pnpm nx build:remote-components components` (or
 simply `pnpm build`, which runs every generator). It depends on prop
 documentation extracted from JSDoc: `pnpm nx build:docs-properties components`
-writes `packages/components/dist/assets/doc-properties.json`, which the
+writes `packages/components/.cache/doc-properties.json`, which the
 remote-components generator reads to decide which props become which kind of
 contract (see [How props cross the boundary](#implementing-a-component)).
 Because of this dependency, changing prop JSDoc without rebuilding leaves the

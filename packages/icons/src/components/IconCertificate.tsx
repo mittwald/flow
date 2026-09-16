@@ -1,4 +1,16 @@
 /* auto-generated file */
-import { IconFileCertificate as Icon } from "@tabler/icons-react";
+/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+import { createTablerIcon } from "../lib/createTablerIcon.ts";
 import type { FC } from "react";
-export const IconCertificate = Icon as FC;
+
+export const IconCertificate = createTablerIcon(
+  "outline",
+  "file-certificate",
+  "FileCertificate",
+  [
+    ["path", { d: "M14 3v4a1 1 0 0 0 1 1h4" }],
+    ["path", { d: "M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5" }],
+    ["path", { d: "M3 14a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" }],
+    ["path", { d: "M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5" }],
+  ],
+) as FC;
