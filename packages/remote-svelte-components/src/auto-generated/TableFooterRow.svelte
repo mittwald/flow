@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-table-footer-row"
-  name="TableFooterRow"
-  element={RemoteTableFooterRowElement}
   {...props}
+  __flr={{ tag: "flr-table-footer-row", name: "TableFooterRow", element: RemoteTableFooterRowElement }}
 />

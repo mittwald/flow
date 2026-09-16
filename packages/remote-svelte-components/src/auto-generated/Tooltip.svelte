@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-tooltip"
-  name="Tooltip"
-  element={RemoteTooltipElement}
   {...props}
+  __flr={{ tag: "flr-tooltip", name: "Tooltip", element: RemoteTooltipElement }}
 />

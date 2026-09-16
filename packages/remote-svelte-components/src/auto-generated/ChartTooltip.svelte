@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-chart-tooltip"
-  name="ChartTooltip"
-  element={RemoteChartTooltipElement}
   {...props}
+  __flr={{ tag: "flr-chart-tooltip", name: "ChartTooltip", element: RemoteChartTooltipElement }}
 />

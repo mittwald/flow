@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-skeleton-text"
-  name="SkeletonText"
-  element={RemoteSkeletonTextElement}
   {...props}
+  __flr={{ tag: "flr-skeleton-text", name: "SkeletonText", element: RemoteSkeletonTextElement }}
 />

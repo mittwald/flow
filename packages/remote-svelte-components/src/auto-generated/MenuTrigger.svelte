@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-menu-trigger"
-  name="MenuTrigger"
-  element={RemoteMenuTriggerElement}
   {...props}
+  __flr={{ tag: "flr-menu-trigger", name: "MenuTrigger", element: RemoteMenuTriggerElement }}
 />

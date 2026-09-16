@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-counter-badge"
-  name="CounterBadge"
-  element={RemoteCounterBadgeElement}
   {...props}
+  __flr={{ tag: "flr-counter-badge", name: "CounterBadge", element: RemoteCounterBadgeElement }}
 />

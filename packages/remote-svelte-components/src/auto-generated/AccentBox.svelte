@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-accent-box"
-  name="AccentBox"
-  element={RemoteAccentBoxElement}
   {...props}
+  __flr={{ tag: "flr-accent-box", name: "AccentBox", element: RemoteAccentBoxElement }}
 />

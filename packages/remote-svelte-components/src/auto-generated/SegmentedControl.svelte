@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-segmented-control"
-  name="SegmentedControl"
-  element={RemoteSegmentedControlElement}
   {...props}
+  __flr={{ tag: "flr-segmented-control", name: "SegmentedControl", element: RemoteSegmentedControlElement }}
 />

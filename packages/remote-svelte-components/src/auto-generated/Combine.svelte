@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-combine"
-  name="Combine"
-  element={RemoteCombineElement}
   {...props}
+  __flr={{ tag: "flr-combine", name: "Combine", element: RemoteCombineElement }}
 />

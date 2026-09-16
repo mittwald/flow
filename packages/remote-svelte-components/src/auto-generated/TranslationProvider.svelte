@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-translation-provider"
-  name="TranslationProvider"
-  element={RemoteTranslationProviderElement}
   {...props}
+  __flr={{ tag: "flr-translation-provider", name: "TranslationProvider", element: RemoteTranslationProviderElement }}
 />

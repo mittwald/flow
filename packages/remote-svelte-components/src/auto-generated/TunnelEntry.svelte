@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-tunnel-entry"
-  name="TunnelEntry"
-  element={RemoteTunnelEntryElement}
   {...props}
+  __flr={{ tag: "flr-tunnel-entry", name: "TunnelEntry", element: RemoteTunnelEntryElement }}
 />

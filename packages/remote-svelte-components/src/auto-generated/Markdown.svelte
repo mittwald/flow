@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-markdown"
-  name="Markdown"
-  element={RemoteMarkdownElement}
   {...props}
+  __flr={{ tag: "flr-markdown", name: "Markdown", element: RemoteMarkdownElement }}
 />

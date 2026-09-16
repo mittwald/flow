@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-table-column"
-  name="TableColumn"
-  element={RemoteTableColumnElement}
   {...props}
+  __flr={{ tag: "flr-table-column", name: "TableColumn", element: RemoteTableColumnElement }}
 />

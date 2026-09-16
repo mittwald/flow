@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-separator"
-  name="Separator"
-  element={RemoteSeparatorElement}
   {...props}
+  __flr={{ tag: "flr-separator", name: "Separator", element: RemoteSeparatorElement }}
 />

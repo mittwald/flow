@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-avatar"
-  name="Avatar"
-  element={RemoteAvatarElement}
   {...props}
+  __flr={{ tag: "flr-avatar", name: "Avatar", element: RemoteAvatarElement }}
 />

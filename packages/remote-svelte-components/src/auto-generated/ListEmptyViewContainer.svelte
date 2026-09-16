@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-list-empty-view-container"
-  name="ListEmptyViewContainer"
-  element={RemoteListEmptyViewContainerElement}
-  slotNames={["emptySearchResultView", "emptyView"]}
   {...props}
+  __flr={{ tag: "flr-list-empty-view-container", name: "ListEmptyViewContainer", element: RemoteListEmptyViewContainerElement, slotNames: ["emptySearchResultView", "emptyView"] }}
 />

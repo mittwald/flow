@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-accordion"
-  name="Accordion"
-  element={RemoteAccordionElement}
   {...props}
+  __flr={{ tag: "flr-accordion", name: "Accordion", element: RemoteAccordionElement }}
 />

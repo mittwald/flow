@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-range-calendar"
-  name="RangeCalendar"
-  element={RemoteRangeCalendarElement}
   {...props}
+  __flr={{ tag: "flr-range-calendar", name: "RangeCalendar", element: RemoteRangeCalendarElement }}
 />

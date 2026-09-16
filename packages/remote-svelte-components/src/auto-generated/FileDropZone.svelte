@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-file-drop-zone"
-  name="FileDropZone"
-  element={RemoteFileDropZoneElement}
   {...props}
+  __flr={{ tag: "flr-file-drop-zone", name: "FileDropZone", element: RemoteFileDropZoneElement }}
 />

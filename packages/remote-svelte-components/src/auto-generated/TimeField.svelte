@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-time-field"
-  name="TimeField"
-  element={RemoteTimeFieldElement}
   {...props}
+  __flr={{ tag: "flr-time-field", name: "TimeField", element: RemoteTimeFieldElement }}
 />

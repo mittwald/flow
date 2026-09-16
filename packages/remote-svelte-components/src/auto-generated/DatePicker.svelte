@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-date-picker"
-  name="DatePicker"
-  element={RemoteDatePickerElement}
   {...props}
+  __flr={{ tag: "flr-date-picker", name: "DatePicker", element: RemoteDatePickerElement }}
 />

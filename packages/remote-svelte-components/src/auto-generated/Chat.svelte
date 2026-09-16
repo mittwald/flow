@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-chat"
-  name="Chat"
-  element={RemoteChatElement}
   {...props}
+  __flr={{ tag: "flr-chat", name: "Chat", element: RemoteChatElement }}
 />

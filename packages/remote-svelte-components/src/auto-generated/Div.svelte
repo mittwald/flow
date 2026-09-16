@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-div"
-  name="Div"
-  element={RemoteDivElement}
   {...props}
+  __flr={{ tag: "flr-div", name: "Div", element: RemoteDivElement }}
 />

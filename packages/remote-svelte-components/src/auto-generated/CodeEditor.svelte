@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-code-editor"
-  name="CodeEditor"
-  element={RemoteCodeEditorElement}
   {...props}
+  __flr={{ tag: "flr-code-editor", name: "CodeEditor", element: RemoteCodeEditorElement }}
 />

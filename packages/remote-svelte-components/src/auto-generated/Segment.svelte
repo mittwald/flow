@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-segment"
-  name="Segment"
-  element={RemoteSegmentElement}
   {...props}
+  __flr={{ tag: "flr-segment", name: "Segment", element: RemoteSegmentElement }}
 />

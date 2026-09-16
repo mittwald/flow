@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-text"
-  name="Text"
-  element={RemoteTextElement}
   {...props}
+  __flr={{ tag: "flr-text", name: "Text", element: RemoteTextElement }}
 />

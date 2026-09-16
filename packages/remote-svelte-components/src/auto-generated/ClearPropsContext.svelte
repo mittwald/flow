@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-clear-props-context"
-  name="ClearPropsContext"
-  element={RemoteClearPropsContextElement}
   {...props}
+  __flr={{ tag: "flr-clear-props-context", name: "ClearPropsContext", element: RemoteClearPropsContextElement }}
 />

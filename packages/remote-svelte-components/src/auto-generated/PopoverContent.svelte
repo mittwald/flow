@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-popover-content"
-  name="PopoverContent"
-  element={RemotePopoverContentElement}
   {...props}
+  __flr={{ tag: "flr-popover-content", name: "PopoverContent", element: RemotePopoverContentElement }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-checkbox-group"
-  name="CheckboxGroup"
-  element={RemoteCheckboxGroupElement}
   {...props}
+  __flr={{ tag: "flr-checkbox-group", name: "CheckboxGroup", element: RemoteCheckboxGroupElement }}
 />

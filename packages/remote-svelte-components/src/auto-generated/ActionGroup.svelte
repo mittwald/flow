@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-action-group"
-  name="ActionGroup"
-  element={RemoteActionGroupElement}
   {...props}
+  __flr={{ tag: "flr-action-group", name: "ActionGroup", element: RemoteActionGroupElement }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-alert-text"
-  name="AlertText"
-  element={RemoteAlertTextElement}
   {...props}
+  __flr={{ tag: "flr-alert-text", name: "AlertText", element: RemoteAlertTextElement }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-chart-legend"
-  name="ChartLegend"
-  element={RemoteChartLegendElement}
   {...props}
+  __flr={{ tag: "flr-chart-legend", name: "ChartLegend", element: RemoteChartLegendElement }}
 />

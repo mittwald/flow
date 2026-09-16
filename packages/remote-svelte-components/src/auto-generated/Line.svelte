@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-line"
-  name="Line"
-  element={RemoteLineElement}
   {...props}
+  __flr={{ tag: "flr-line", name: "Line", element: RemoteLineElement }}
 />

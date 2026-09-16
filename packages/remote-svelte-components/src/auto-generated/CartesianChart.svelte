@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-cartesian-chart"
-  name="CartesianChart"
-  element={RemoteCartesianChartElement}
-  slotNames={["emptyView"]}
   {...props}
+  __flr={{ tag: "flr-cartesian-chart", name: "CartesianChart", element: RemoteCartesianChartElement, slotNames: ["emptyView"] }}
 />

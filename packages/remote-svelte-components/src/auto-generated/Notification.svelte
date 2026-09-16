@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-notification"
-  name="Notification"
-  element={RemoteNotificationElement}
   {...props}
+  __flr={{ tag: "flr-notification", name: "Notification", element: RemoteNotificationElement }}
 />

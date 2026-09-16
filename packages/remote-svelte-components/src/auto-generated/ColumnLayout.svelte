@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-column-layout"
-  name="ColumnLayout"
-  element={RemoteColumnLayoutElement}
   {...props}
+  __flr={{ tag: "flr-column-layout", name: "ColumnLayout", element: RemoteColumnLayoutElement }}
 />

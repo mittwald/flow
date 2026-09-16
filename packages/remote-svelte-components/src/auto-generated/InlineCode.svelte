@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-inline-code"
-  name="InlineCode"
-  element={RemoteInlineCodeElement}
   {...props}
+  __flr={{ tag: "flr-inline-code", name: "InlineCode", element: RemoteInlineCodeElement }}
 />

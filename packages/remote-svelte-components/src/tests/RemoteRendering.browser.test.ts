@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import DangerButton from "./fixtures/DangerButton.svelte";
 import DashedProps from "./fixtures/DashedProps.svelte";
 import Greeting from "./fixtures/Greeting.svelte";
+import NamedField from "./fixtures/NamedField.svelte";
 import PressButton from "./fixtures/PressButton.svelte";
 import SlottedProgressBar from "./fixtures/SlottedProgressBar.svelte";
 import { cleanupRemote, renderRemote } from "./lib/environment.js";
@@ -53,6 +54,27 @@ describe("A Svelte tree rendered through the host renderer", () => {
     await page.getByRole("button", { name: "Press me" }).click();
 
     await vi.waitFor(() => expect(onPress).toHaveBeenCalledTimes(1));
+  });
+
+  /*
+   * Every form field takes a `name`, and so does the wrapper that renders it —
+   * for usage reporting and the props context. Passed as two sibling props the
+   * app's would win, the component would report itself as "callsign", and the
+   * real `name` would never reach the host: the wrapper destructures its own
+   * away. The `FormData` the host collects would be missing the field, and
+   * nothing anywhere would say so.
+   *
+   * So the wrapper takes everything it needs in one `__flr` object, spread
+   * after the app's props.
+   */
+  test("does not swallow a prop the wrapper also uses", async () => {
+    const { host } = renderRemote(NamedField);
+
+    await expect
+      .poll(() => host.querySelector("input")?.getAttribute("name"), {
+        timeout: 5000,
+      })
+      .toBe("callsign");
   });
 
   /*

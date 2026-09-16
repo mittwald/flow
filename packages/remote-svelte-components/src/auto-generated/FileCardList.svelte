@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-file-card-list"
-  name="FileCardList"
-  element={RemoteFileCardListElement}
   {...props}
+  __flr={{ tag: "flr-file-card-list", name: "FileCardList", element: RemoteFileCardListElement }}
 />

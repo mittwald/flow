@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-image-cropper"
-  name="ImageCropper"
-  element={RemoteImageCropperElement}
   {...props}
+  __flr={{ tag: "flr-image-cropper", name: "ImageCropper", element: RemoteImageCropperElement }}
 />

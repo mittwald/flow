@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-component-props-context-provider"
-  name="ComponentPropsContextProvider"
-  element={RemoteComponentPropsContextProviderElement}
   {...props}
+  __flr={{ tag: "flr-component-props-context-provider", name: "ComponentPropsContextProvider", element: RemoteComponentPropsContextProviderElement }}
 />

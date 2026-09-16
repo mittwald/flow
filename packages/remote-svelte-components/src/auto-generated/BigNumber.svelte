@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-big-number"
-  name="BigNumber"
-  element={RemoteBigNumberElement}
   {...props}
+  __flr={{ tag: "flr-big-number", name: "BigNumber", element: RemoteBigNumberElement }}
 />

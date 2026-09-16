@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-items-grid-list"
-  name="ItemsGridList"
-  element={RemoteItemsGridListElement}
-  slotNames={["emptyView"]}
   {...props}
+  __flr={{ tag: "flr-items-grid-list", name: "ItemsGridList", element: RemoteItemsGridListElement, slotNames: ["emptyView"] }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-truncate"
-  name="Truncate"
-  element={RemoteTruncateElement}
   {...props}
+  __flr={{ tag: "flr-truncate", name: "Truncate", element: RemoteTruncateElement }}
 />

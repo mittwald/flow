@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-number-field"
-  name="NumberField"
-  element={RemoteNumberFieldElement}
   {...props}
+  __flr={{ tag: "flr-number-field", name: "NumberField", element: RemoteNumberFieldElement }}
 />

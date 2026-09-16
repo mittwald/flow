@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-list-empty-view"
-  name="ListEmptyView"
-  element={RemoteListEmptyViewElement}
   {...props}
+  __flr={{ tag: "flr-list-empty-view", name: "ListEmptyView", element: RemoteListEmptyViewElement }}
 />

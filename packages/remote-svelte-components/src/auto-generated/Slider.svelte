@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-slider"
-  name="Slider"
-  element={RemoteSliderElement}
   {...props}
+  __flr={{ tag: "flr-slider", name: "Slider", element: RemoteSliderElement }}
 />

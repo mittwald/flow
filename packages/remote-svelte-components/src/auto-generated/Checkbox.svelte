@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-checkbox"
-  name="Checkbox"
-  element={RemoteCheckboxElement}
   {...props}
+  __flr={{ tag: "flr-checkbox", name: "Checkbox", element: RemoteCheckboxElement }}
 />

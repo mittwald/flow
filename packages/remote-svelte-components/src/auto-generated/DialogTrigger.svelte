@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-dialog-trigger"
-  name="DialogTrigger"
-  element={RemoteDialogTriggerElement}
   {...props}
+  __flr={{ tag: "flr-dialog-trigger", name: "DialogTrigger", element: RemoteDialogTriggerElement }}
 />

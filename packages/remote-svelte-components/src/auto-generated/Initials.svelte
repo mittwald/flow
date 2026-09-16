@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-initials"
-  name="Initials"
-  element={RemoteInitialsElement}
   {...props}
+  __flr={{ tag: "flr-initials", name: "Initials", element: RemoteInitialsElement }}
 />

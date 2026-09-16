@@ -15,8 +15,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-form"
-  name="Form"
-  element={RemoteFormElement}
   {...props}
+  __flr={{ tag: "flr-form", name: "Form", element: RemoteFormElement }}
 />

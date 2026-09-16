@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-context-menu-section"
-  name="ContextMenuSection"
-  element={RemoteContextMenuSectionElement}
   {...props}
+  __flr={{ tag: "flr-context-menu-section", name: "ContextMenuSection", element: RemoteContextMenuSectionElement }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-image"
-  name="Image"
-  element={RemoteImageElement}
   {...props}
+  __flr={{ tag: "flr-image", name: "Image", element: RemoteImageElement }}
 />

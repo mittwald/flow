@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-rating-segment"
-  name="RatingSegment"
-  element={RemoteRatingSegmentElement}
-  slotNames={["iconEmpty", "iconFilled"]}
   {...props}
+  __flr={{ tag: "flr-rating-segment", name: "RatingSegment", element: RemoteRatingSegmentElement, slotNames: ["iconEmpty", "iconFilled"] }}
 />

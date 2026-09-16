@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-tab-title"
-  name="TabTitle"
-  element={RemoteTabTitleElement}
   {...props}
+  __flr={{ tag: "flr-tab-title", name: "TabTitle", element: RemoteTabTitleElement }}
 />

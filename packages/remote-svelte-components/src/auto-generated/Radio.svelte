@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-radio"
-  name="Radio"
-  element={RemoteRadioElement}
   {...props}
+  __flr={{ tag: "flr-radio", name: "Radio", element: RemoteRadioElement }}
 />

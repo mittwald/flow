@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-message-separator"
-  name="MessageSeparator"
-  element={RemoteMessageSeparatorElement}
   {...props}
+  __flr={{ tag: "flr-message-separator", name: "MessageSeparator", element: RemoteMessageSeparatorElement }}
 />

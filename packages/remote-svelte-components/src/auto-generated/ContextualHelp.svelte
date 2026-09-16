@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-contextual-help"
-  name="ContextualHelp"
-  element={RemoteContextualHelpElement}
   {...props}
+  __flr={{ tag: "flr-contextual-help", name: "ContextualHelp", element: RemoteContextualHelpElement }}
 />

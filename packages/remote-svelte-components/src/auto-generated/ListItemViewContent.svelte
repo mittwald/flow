@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-list-item-view-content"
-  name="ListItemViewContent"
-  element={RemoteListItemViewContentElement}
-  slotNames={["avatar", "bottom", "button", "checkbox", "subTitle", "title"]}
   {...props}
+  __flr={{ tag: "flr-list-item-view-content", name: "ListItemViewContent", element: RemoteListItemViewContentElement, slotNames: ["avatar", "bottom", "button", "checkbox", "subTitle", "title"] }}
 />

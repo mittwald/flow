@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-switch"
-  name="Switch"
-  element={RemoteSwitchElement}
   {...props}
+  __flr={{ tag: "flr-switch", name: "Switch", element: RemoteSwitchElement }}
 />

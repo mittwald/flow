@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-layout-card"
-  name="LayoutCard"
-  element={RemoteLayoutCardElement}
   {...props}
+  __flr={{ tag: "flr-layout-card", name: "LayoutCard", element: RemoteLayoutCardElement }}
 />

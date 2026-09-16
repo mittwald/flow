@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-rating"
-  name="Rating"
-  element={RemoteRatingElement}
-  slotNames={["iconEmpty", "iconFilled"]}
   {...props}
+  __flr={{ tag: "flr-rating", name: "Rating", element: RemoteRatingElement, slotNames: ["iconEmpty", "iconFilled"] }}
 />

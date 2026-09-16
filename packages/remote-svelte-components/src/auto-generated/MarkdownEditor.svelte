@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-markdown-editor"
-  name="MarkdownEditor"
-  element={RemoteMarkdownEditorElement}
   {...props}
+  __flr={{ tag: "flr-markdown-editor", name: "MarkdownEditor", element: RemoteMarkdownEditorElement }}
 />

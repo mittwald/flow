@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-kbd"
-  name="Kbd"
-  element={RemoteKbdElement}
   {...props}
+  __flr={{ tag: "flr-kbd", name: "Kbd", element: RemoteKbdElement }}
 />

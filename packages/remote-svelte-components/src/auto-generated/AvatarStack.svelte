@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-avatar-stack"
-  name="AvatarStack"
-  element={RemoteAvatarStackElement}
   {...props}
+  __flr={{ tag: "flr-avatar-stack", name: "AvatarStack", element: RemoteAvatarStackElement }}
 />

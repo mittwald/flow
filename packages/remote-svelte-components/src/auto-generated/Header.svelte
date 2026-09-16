@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-header"
-  name="Header"
-  element={RemoteHeaderElement}
   {...props}
+  __flr={{ tag: "flr-header", name: "Header", element: RemoteHeaderElement }}
 />

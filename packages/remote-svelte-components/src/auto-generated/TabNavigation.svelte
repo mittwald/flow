@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-tab-navigation"
-  name="TabNavigation"
-  element={RemoteTabNavigationElement}
   {...props}
+  __flr={{ tag: "flr-tab-navigation", name: "TabNavigation", element: RemoteTabNavigationElement }}
 />

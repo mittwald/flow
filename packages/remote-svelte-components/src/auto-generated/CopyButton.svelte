@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-copy-button"
-  name="CopyButton"
-  element={RemoteCopyButtonElement}
   {...props}
+  __flr={{ tag: "flr-copy-button", name: "CopyButton", element: RemoteCopyButtonElement }}
 />

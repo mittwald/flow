@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-combo-box"
-  name="ComboBox"
-  element={RemoteComboBoxElement}
   {...props}
+  __flr={{ tag: "flr-combo-box", name: "ComboBox", element: RemoteComboBoxElement }}
 />

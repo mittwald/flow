@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-text-field"
-  name="TextField"
-  element={RemoteTextFieldElement}
   {...props}
+  __flr={{ tag: "flr-text-field", name: "TextField", element: RemoteTextFieldElement }}
 />

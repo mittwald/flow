@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-label"
-  name="Label"
-  element={RemoteLabelElement}
   {...props}
+  __flr={{ tag: "flr-label", name: "Label", element: RemoteLabelElement }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-file-field"
-  name="FileField"
-  element={RemoteFileFieldElement}
   {...props}
+  __flr={{ tag: "flr-file-field", name: "FileField", element: RemoteFileFieldElement }}
 />

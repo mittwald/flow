@@ -20,6 +20,13 @@ const header = `\
  * repository's prettier run does not cover `.svelte`, so there is nothing to
  * format the output afterwards.
  */
+/*
+ * The app's props are spread **first**, and everything the wrapper needs goes
+ * into one `__flr` object after them. As separate props they would collide with
+ * the Flow component's own: every form field takes a `name`, and it would win
+ * over the wrapper's — leaving the component reporting itself under the field's
+ * name and the field without one on the host.
+ */
 export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
   const t = {
     element: remoteComponentNameOf(c),
@@ -32,8 +39,8 @@ export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
   };
 
   const slotNameType = t.slots.length > 0 ? `, ${t.slots.join(" | ")}` : "";
-  const slotNamesProp =
-    t.slots.length > 0 ? `\n  slotNames={[${t.slots.join(", ")}]}` : "";
+  const slotNames =
+    t.slots.length > 0 ? `, slotNames: [${t.slots.join(", ")}]` : "";
 
   return `${header}<script lang="ts">
   import type { ${t.element}Props } from "@mittwald/flow-remote-elements";
@@ -45,10 +52,8 @@ export function generateRemoteSvelteComponentFile(c: ComponentDoc) {
 </script>
 
 <RemoteElement
-  tag="${t.tag}"
-  name="${t.name}"
-  element={${t.element}}${slotNamesProp}
   {...props}
+  __flr={{ tag: "${t.tag}", name: "${t.name}", element: ${t.element}${slotNames} }}
 />
 `;
 }

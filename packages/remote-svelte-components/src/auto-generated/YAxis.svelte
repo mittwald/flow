@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-y-axis"
-  name="YAxis"
-  element={RemoteYAxisElement}
   {...props}
+  __flr={{ tag: "flr-y-axis", name: "YAxis", element: RemoteYAxisElement }}
 />

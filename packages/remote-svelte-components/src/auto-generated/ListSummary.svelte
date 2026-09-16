@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-list-summary"
-  name="ListSummary"
-  element={RemoteListSummaryElement}
   {...props}
+  __flr={{ tag: "flr-list-summary", name: "ListSummary", element: RemoteListSummaryElement }}
 />

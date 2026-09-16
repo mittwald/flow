@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-progress-bar"
-  name="ProgressBar"
-  element={RemoteProgressBarElement}
-  slotNames={["valueLabel"]}
   {...props}
+  __flr={{ tag: "flr-progress-bar", name: "ProgressBar", element: RemoteProgressBarElement, slotNames: ["valueLabel"] }}
 />

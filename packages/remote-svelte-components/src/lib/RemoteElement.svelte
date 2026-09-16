@@ -18,7 +18,18 @@
    * there instead of having the generator write an event map into every
    * generated file, the way the React package does.
    */
-  interface Props {
+  /**
+   * What the generated component knows and the app does not pass — in one
+   * object, under one key, on purpose.
+   *
+   * As separate props they would collide with the Flow component's own: every
+   * form field takes a `name`, and `<RemoteElement name="TextField"
+   * {...props} />` lets `name="callsign"` win. The component then reports
+   * itself as "callsign", and the real `name` never reaches the host at all,
+   * because the wrapper destructures it away — a form field silently without a
+   * name, in the `FormData` the host collects.
+   */
+  interface FlowRemoteElementConfig {
     /** The custom element to render, e.g. `flr-button`. */
     tag: string;
     /** The Flow component's name — how usage and props context refer to it. */
@@ -36,19 +47,20 @@
      * subtree does not survive structured clone.
      */
     slotNames?: readonly string[];
+  }
+
+  interface Props {
+    __flr: FlowRemoteElementConfig;
     children?: Snippet;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [prop: string]: any;
   }
 
-  const {
-    tag,
-    name,
-    element,
-    slotNames = [],
-    children,
-    ...rest
-  }: Props = $props();
+  const { __flr, children, ...rest }: Props = $props();
+
+  // The configuration identifies the component and never changes.
+  // svelte-ignore state_referenced_locally
+  const { tag, name, element, slotNames = [] } = __flr;
 
   /*
    * Read once, while the component initializes — that is when a Svelte context

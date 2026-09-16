@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-loading-spinner"
-  name="LoadingSpinner"
-  element={RemoteLoadingSpinnerElement}
   {...props}
+  __flr={{ tag: "flr-loading-spinner", name: "LoadingSpinner", element: RemoteLoadingSpinnerElement }}
 />

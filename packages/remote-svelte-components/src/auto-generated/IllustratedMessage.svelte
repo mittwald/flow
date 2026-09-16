@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-illustrated-message"
-  name="IllustratedMessage"
-  element={RemoteIllustratedMessageElement}
   {...props}
+  __flr={{ tag: "flr-illustrated-message", name: "IllustratedMessage", element: RemoteIllustratedMessageElement }}
 />

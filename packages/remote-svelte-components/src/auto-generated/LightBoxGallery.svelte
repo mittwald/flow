@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-light-box-gallery"
-  name="LightBoxGallery"
-  element={RemoteLightBoxGalleryElement}
   {...props}
+  __flr={{ tag: "flr-light-box-gallery", name: "LightBoxGallery", element: RemoteLightBoxGalleryElement }}
 />

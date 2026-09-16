@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-overlay-content"
-  name="OverlayContent"
-  element={RemoteOverlayContentElement}
   {...props}
+  __flr={{ tag: "flr-overlay-content", name: "OverlayContent", element: RemoteOverlayContentElement }}
 />

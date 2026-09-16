@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-code-block"
-  name="CodeBlock"
-  element={RemoteCodeBlockElement}
   {...props}
+  __flr={{ tag: "flr-code-block", name: "CodeBlock", element: RemoteCodeBlockElement }}
 />

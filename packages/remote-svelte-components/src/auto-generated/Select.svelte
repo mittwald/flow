@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-select"
-  name="Select"
-  element={RemoteSelectElement}
   {...props}
+  __flr={{ tag: "flr-select", name: "Select", element: RemoteSelectElement }}
 />

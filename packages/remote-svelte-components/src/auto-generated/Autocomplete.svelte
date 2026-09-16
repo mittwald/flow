@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-autocomplete"
-  name="Autocomplete"
-  element={RemoteAutocompleteElement}
   {...props}
+  __flr={{ tag: "flr-autocomplete", name: "Autocomplete", element: RemoteAutocompleteElement }}
 />

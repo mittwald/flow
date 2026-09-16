@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-search-field"
-  name="SearchField"
-  element={RemoteSearchFieldElement}
   {...props}
+  __flr={{ tag: "flr-search-field", name: "SearchField", element: RemoteSearchFieldElement }}
 />

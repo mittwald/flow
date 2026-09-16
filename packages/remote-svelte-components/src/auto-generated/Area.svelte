@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-area"
-  name="Area"
-  element={RemoteAreaElement}
   {...props}
+  __flr={{ tag: "flr-area", name: "Area", element: RemoteAreaElement }}
 />

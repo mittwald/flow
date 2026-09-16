@@ -10,9 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-tabs"
-  name="Tabs"
-  element={RemoteTabsElement}
-  slotNames={["tabNotFoundView"]}
   {...props}
+  __flr={{ tag: "flr-tabs", name: "Tabs", element: RemoteTabsElement, slotNames: ["tabNotFoundView"] }}
 />

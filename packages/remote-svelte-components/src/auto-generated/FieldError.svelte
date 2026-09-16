@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-field-error"
-  name="FieldError"
-  element={RemoteFieldErrorElement}
   {...props}
+  __flr={{ tag: "flr-field-error", name: "FieldError", element: RemoteFieldErrorElement }}
 />

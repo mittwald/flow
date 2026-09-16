@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-cartesian-grid"
-  name="CartesianGrid"
-  element={RemoteCartesianGridElement}
   {...props}
+  __flr={{ tag: "flr-cartesian-grid", name: "CartesianGrid", element: RemoteCartesianGridElement }}
 />

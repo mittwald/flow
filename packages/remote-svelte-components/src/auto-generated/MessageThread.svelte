@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-message-thread"
-  name="MessageThread"
-  element={RemoteMessageThreadElement}
   {...props}
+  __flr={{ tag: "flr-message-thread", name: "MessageThread", element: RemoteMessageThreadElement }}
 />

@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-field-description"
-  name="FieldDescription"
-  element={RemoteFieldDescriptionElement}
   {...props}
+  __flr={{ tag: "flr-field-description", name: "FieldDescription", element: RemoteFieldDescriptionElement }}
 />

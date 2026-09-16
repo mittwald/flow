@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-chart-grid"
-  name="ChartGrid"
-  element={RemoteChartGridElement}
   {...props}
+  __flr={{ tag: "flr-chart-grid", name: "ChartGrid", element: RemoteChartGridElement }}
 />

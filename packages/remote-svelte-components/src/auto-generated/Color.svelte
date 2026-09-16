@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-color"
-  name="Color"
-  element={RemoteColorElement}
   {...props}
+  __flr={{ tag: "flr-color", name: "Color", element: RemoteColorElement }}
 />

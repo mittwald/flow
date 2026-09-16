@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-header-navigation"
-  name="HeaderNavigation"
-  element={RemoteHeaderNavigationElement}
   {...props}
+  __flr={{ tag: "flr-header-navigation", name: "HeaderNavigation", element: RemoteHeaderNavigationElement }}
 />

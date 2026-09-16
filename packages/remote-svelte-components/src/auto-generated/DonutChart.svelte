@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-donut-chart"
-  name="DonutChart"
-  element={RemoteDonutChartElement}
   {...props}
+  __flr={{ tag: "flr-donut-chart", name: "DonutChart", element: RemoteDonutChartElement }}
 />

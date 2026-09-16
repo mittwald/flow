@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-breadcrumb"
-  name="Breadcrumb"
-  element={RemoteBreadcrumbElement}
   {...props}
+  __flr={{ tag: "flr-breadcrumb", name: "Breadcrumb", element: RemoteBreadcrumbElement }}
 />

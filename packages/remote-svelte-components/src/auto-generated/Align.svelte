@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-align"
-  name="Align"
-  element={RemoteAlignElement}
   {...props}
+  __flr={{ tag: "flr-align", name: "Align", element: RemoteAlignElement }}
 />

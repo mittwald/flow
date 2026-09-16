@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-contextual-help-trigger"
-  name="ContextualHelpTrigger"
-  element={RemoteContextualHelpTriggerElement}
   {...props}
+  __flr={{ tag: "flr-contextual-help-trigger", name: "ContextualHelpTrigger", element: RemoteContextualHelpTriggerElement }}
 />

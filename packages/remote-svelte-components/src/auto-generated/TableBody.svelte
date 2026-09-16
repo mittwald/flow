@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-table-body"
-  name="TableBody"
-  element={RemoteTableBodyElement}
   {...props}
+  __flr={{ tag: "flr-table-body", name: "TableBody", element: RemoteTableBodyElement }}
 />

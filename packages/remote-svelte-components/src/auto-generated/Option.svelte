@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-option"
-  name="Option"
-  element={RemoteOptionElement}
   {...props}
+  __flr={{ tag: "flr-option", name: "Option", element: RemoteOptionElement }}
 />

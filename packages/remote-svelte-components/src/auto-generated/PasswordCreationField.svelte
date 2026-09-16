@@ -10,8 +10,6 @@
 </script>
 
 <RemoteElement
-  tag="flr-password-creation-field"
-  name="PasswordCreationField"
-  element={RemotePasswordCreationFieldElement}
   {...props}
+  __flr={{ tag: "flr-password-creation-field", name: "PasswordCreationField", element: RemotePasswordCreationFieldElement }}
 />
