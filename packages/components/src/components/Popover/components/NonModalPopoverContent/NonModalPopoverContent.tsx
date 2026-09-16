@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, Ref, RefObject } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useObjectRef, useOverlayPosition } from "react-aria";
 import type { Placement } from "react-aria";
 import styles from "../../Popover.module.scss";
@@ -18,6 +18,8 @@ export interface NonModalPopoverContentProps
   shouldUpdatePosition?: boolean;
   arrowBoundaryOffset?: number;
   boundaryElement?: Element;
+  /** The id react-aria's trigger points its `aria-controls` at. */
+  id?: string;
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef: RefObject<Element | null>;
@@ -50,6 +52,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     withTip,
     isOpen = false,
     width,
+    id,
     onOpenChange,
     ref,
     triggerRef,
@@ -59,6 +62,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
   const overlayRef = useObjectRef(ref as Ref<HTMLDivElement>);
   const arrowRef = useRef<HTMLDivElement>(null);
   const [isEntering, setIsEntering] = useState(true);
+  const detailsId = useId();
 
   const { overlayProps, arrowProps, placement } = useOverlayPosition({
     ...positionProps,
@@ -69,6 +73,37 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     offset: positionProps.offset ?? 8,
     containerPadding: 16,
   });
+
+  /*
+   * Nothing announces this popover, so the trigger points at it: `aria-details`
+   * tells assistive tech that there is related content and offers a way over to
+   * it — unlike `aria-describedby`, which would flatten the popover into a
+   * string and put its buttons out of reach.
+   *
+   * Set on the trigger element itself, because that element belongs to whoever
+   * rendered it. Whatever it carried before is restored on the way out.
+   */
+  useEffect(() => {
+    const trigger = triggerRef.current;
+
+    if (!isOpen || !trigger) {
+      return;
+    }
+
+    const previous = trigger.getAttribute("aria-details");
+    trigger.setAttribute(
+      "aria-details",
+      previous ? `${previous} ${detailsId}` : detailsId,
+    );
+
+    return () => {
+      if (previous === null) {
+        trigger.removeAttribute("aria-details");
+      } else {
+        trigger.setAttribute("aria-details", previous);
+      }
+    };
+  }, [isOpen, triggerRef, detailsId]);
 
   // Escape closes it. react-aria would do this through `useOverlay`, which is
   // part of the machinery this component leaves out.
@@ -100,6 +135,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
   return (
     <div
       {...overlayProps}
+      id={id}
       ref={overlayRef}
       className={className}
       data-placement={placement ?? undefined}
@@ -130,7 +166,9 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
           </svg>
         </div>
       )}
-      <div className={styles.content}>{children}</div>
+      <div className={styles.content} id={detailsId}>
+        {children}
+      </div>
     </div>
   );
 };

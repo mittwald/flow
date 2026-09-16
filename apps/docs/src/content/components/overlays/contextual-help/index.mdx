@@ -21,38 +21,6 @@ description:
   Überschrift ist nicht nötig.
 - Gib dem Trigger ein aussagekräftiges `aria-label`. Bevorzugt über die
   übersetzte `subject` Property, alternativ als vollständiges `aria-label`.
-- Setze `modality="non-modal"`, wenn sich das ContextualHelp von selbst öffnet.
-  Ein Hinweis, um den der Nutzer nicht gebeten hat, darf die Seite nicht
-  sperren.
-
----
-
-# Modality
-
-Ein ContextualHelp ist standardmäßig modal: Die Seite dahinter ist gesperrt,
-Scrollen ist blockiert, und der Fokus springt in den Dialog. Das passt zu einem
-ContextualHelp, das der Nutzer selbst über den Trigger geöffnet hat – er hat
-danach gefragt und bekommt es sofort vorgelesen.
-
-Öffnet es sich dagegen von selbst – etwa als Hinweis auf eine neue Funktion –,
-setze `modality="non-modal"`. Die Seite bleibt vollständig benutzbar: Scrollen
-funktioniert, der Fokus bleibt, wo er war, und der Hinweis wandert beim Scrollen
-mit seinem Anker mit. Sein Inhalt ist ganz normaler Content – keine
-Dialog-Rolle, kein Label.
-
-Der Preis dafür: **ein non-modales ContextualHelp wird nicht angekündigt.** Wer
-mit einem Screenreader arbeitet, erfährt davon erst beim Lesen. Damit das früh
-passiert, wird es nicht wie ein modales in den Body gehängt, sondern dort
-gerendert, wo du es schreibst – stell es also direkt hinter das Element, auf das
-es zeigt, dann folgt es ihm auch in der Vorlesereihenfolge. Verlasse dich
-trotzdem nicht darauf, dass der Hinweis gelesen wird: Was unerlässlich ist,
-gehört in die Oberfläche selbst.
-
-Weil es an seiner Stelle im Dokument bleibt, erbt es auch seine Umgebung. Es
-braucht keinen Platz – es ist absolut positioniert –, aber ein Vorfahre mit
-`overflow: hidden` oder ein eigener Stacking Context kann es abschneiden.
-
-<LiveCodeEditor example="nonModal" editorCollapsed />
 
 ---
 

@@ -1,0 +1,67 @@
+---
+component: CoachMark
+description:
+  Ein CoachMark weist ungefragt auf ein Bedienelement hin, das neu, verschoben
+  oder leicht zu übersehen ist.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Setze ein CoachMark nur für einen Hinweis ein, um den der Nutzer nicht gebeten
+  hat. Alles, was er selbst abruft, gehört in ein
+  [ContextualHelp](/components/overlays/contextual-help).
+- Zeige höchstens ein CoachMark pro Seite. Mehrere gleichzeitig konkurrieren um
+  dieselbe Aufmerksamkeit und heben sich gegenseitig auf.
+- Halte den Inhalt auf einen Gedanken: was neu ist und was der Nutzer davon hat.
+- Blende es dauerhaft aus, sobald es bestätigt wurde. Ein Hinweis, der bei jedem
+  Aufruf wiederkommt, wird zur Störung.
+- Verlasse dich nicht darauf, dass der Hinweis gelesen wird. Was unerlässlich
+  ist, gehört in die Oberfläche selbst.
+
+---
+
+# Anker
+
+Ein CoachMark zeigt auf ein Element, nicht auf die Seite. Über `anchorRef`
+bekommt es die Referenz darauf – es gibt keinen Trigger, denn niemand öffnet es.
+
+Schreibe es **direkt hinter das Element, auf das es zeigt**. Es wird dort
+gerendert, wo es steht, und folgt dem Anker damit auch in der
+Vorlesereihenfolge. Zusätzlich verweist der Anker per `aria-details` darauf.
+
+Weil es an seiner Stelle im Dokument bleibt, erbt es seine Umgebung. Platz
+braucht es keinen – es ist absolut positioniert –, aber ein Vorfahre mit
+`overflow: hidden` oder ein eigener Stacking Context kann es abschneiden.
+
+---
+
+# Verhalten
+
+Ein CoachMark sperrt die Seite nicht. Scrollen funktioniert, der Fokus bleibt,
+wo er war, und der Hinweis wandert beim Scrollen mit seinem Anker mit. Damit
+unterscheidet es sich bewusst von einem Overlay, das eine Entscheidung erzwingt.
+
+Angekündigt wird es nicht. Wer mit einem Screenreader arbeitet, erfährt davon
+beim Lesen – deshalb die Empfehlung oben, es direkt hinter seinen Anker zu
+setzen.
+
+---
+
+# Schließen
+
+Das CoachMark bringt seinen eigenen Button mit, beschriftet mit einem
+übersetzten „Verstanden". Mit `dismissLabel` gibst du ihm einen eigenen Text,
+mit `hideDismissButton` nimmst du ihn weg – etwa, wenn du das Schließen an eine
+andere Aktion hängst. Escape schließt es ebenfalls.
+
+<LiveCodeEditor example="dismissLabel" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

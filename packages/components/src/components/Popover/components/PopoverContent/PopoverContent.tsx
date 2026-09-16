@@ -47,6 +47,12 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
       ? popoverContext.triggerRef
       : undefined;
 
+  // The trigger points its `aria-controls` at this id while the popover is
+  // open, so the popover has to carry it — react-aria's own only applies it
+  // when the popover is a dialog.
+  const idFromContext =
+    popoverContext && "id" in popoverContext ? popoverContext.id : undefined;
+
   if (!isActivityActive) {
     return null;
   }
@@ -68,6 +74,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
         isOpen={isOpen}
         width={width}
         withTip={withTip}
+        id={idFromContext}
         triggerRef={anchor}
         onOpenChange={onOpenChange}
       >

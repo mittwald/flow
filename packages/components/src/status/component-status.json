@@ -96,6 +96,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#CoachMark": {
+    "level": "stable",
+    "isNew": false
+  },
   "@mittwald/flow-react-components#CodeBlock": {
     "level": "stable",
     "isNew": false
