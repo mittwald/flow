@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.56](https://github.com/mittwald/flow/compare/1.2.0-next.55...1.2.0-next.56) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
 ## [1.2.0-next.55](https://github.com/mittwald/flow/compare/1.1.44...1.2.0-next.55) (2026-09-17)
 
 ## [1.2.0-next.54](https://github.com/mittwald/flow/compare/1.2.0-next.53...1.2.0-next.54) (2026-09-17)

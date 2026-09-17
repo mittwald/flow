@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.56](https://github.com/mittwald/flow/compare/1.2.0-next.55...1.2.0-next.56) (2026-09-17)
+
+### Build System
+
+* **deps:** bump cronstrue from 3.24.0 to 3.25.0 in the production group ([#3167](https://github.com/mittwald/flow/issues/3167)) ([fd25656](https://github.com/mittwald/flow/commit/fd2565615eb37417b3c17444e7f0718f5537cc25))
+* **deps:** bump the actions group with 3 updates ([#3168](https://github.com/mittwald/flow/issues/3168)) ([ec75202](https://github.com/mittwald/flow/commit/ec75202c5c799d1f3df2d4e9bc20d3ec9ee35e99))
+
 ## [1.2.0-next.55](https://github.com/mittwald/flow/compare/1.1.44...1.2.0-next.55) (2026-09-17)
 
 ## [1.2.0-next.54](https://github.com/mittwald/flow/compare/1.2.0-next.53...1.2.0-next.54) (2026-09-17)
