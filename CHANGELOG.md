@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.46](https://github.com/mittwald/flow/compare/1.1.45...1.1.46) (2026-09-17)
+
+### Build System
+
+* **deps-dev:** bump vite-plugin-sass-dts from 1.3.37 to 1.3.39 in the dev-patch group ([#3169](https://github.com/mittwald/flow/issues/3169)) ([22e3d6c](https://github.com/mittwald/flow/commit/22e3d6c83e3040cfe8c27648bd4cad462beb38e0))
+
 ## [1.1.45](https://github.com/mittwald/flow/compare/1.1.44...1.1.45) (2026-09-17)
 
 ### Build System
