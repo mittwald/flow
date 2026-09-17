@@ -475,7 +475,7 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@mittwald/flow-icons':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../icons
       '@mittwald/flow-icons-pro':
         specifier: workspace:*
@@ -484,7 +484,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       '@mittwald/react-tunnel':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
