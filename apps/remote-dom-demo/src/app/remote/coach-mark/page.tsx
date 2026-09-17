@@ -1,5 +1,6 @@
 "use client";
 import {
+  Action,
   Button,
   CoachMark,
   Heading,
@@ -24,6 +25,9 @@ export default function Page() {
           Arming the superlaser no longer takes a trip to the reactor control
           room. Scroll the page — this hint stays with its button.
         </Text>
+        <Action closeOverlay="CoachMark">
+          <Button>Got it</Button>
+        </Action>
       </CoachMark>
 
       {Array.from({ length: 12 }, (_, index) => (

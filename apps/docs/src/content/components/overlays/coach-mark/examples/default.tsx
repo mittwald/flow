@@ -1,4 +1,5 @@
 import {
+  Action,
   Button,
   CoachMark,
   Heading,
@@ -34,6 +35,9 @@ export default () => {
           Du kannst deine Domain jetzt direkt hier verbinden
           – ohne den Umweg über die Domain-Übersicht.
         </Text>
+        <Action closeOverlay="CoachMark">
+          <Button>Verstanden</Button>
+        </Action>
       </CoachMark>
     </Section>
   );

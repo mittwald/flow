@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
+import { Action } from "@/components/Action";
+import { Button } from "@/components/Button";
 import { CoachMark } from "@/components/CoachMark";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { useOverlayController } from "@/lib/controller";
 
-const Spotlight = (props: { dismissLabel?: string; tall?: boolean }) => {
+const Spotlight = (props: { tall?: boolean }) => {
   const anchor = useRef<HTMLButtonElement>(null);
   const controller = useOverlayController("CoachMark", {
     isDefaultOpen: true,
@@ -17,15 +19,14 @@ const Spotlight = (props: { dismissLabel?: string; tall?: boolean }) => {
       <button ref={anchor} data-testid="anchor">
         Anchor
       </button>
-      <CoachMark
-        anchorRef={anchor}
-        controller={controller}
-        dismissLabel={props.dismissLabel}
-      >
+      <CoachMark anchorRef={anchor} controller={controller}>
         <Heading>New around here</Heading>
         <Text data-testid="hint">
           This button now does more than it used to.
         </Text>
+        <Action closeOverlay="CoachMark">
+          <Button>Got it</Button>
+        </Action>
       </CoachMark>
     </div>
   );
@@ -53,7 +54,7 @@ test("A coach mark opens on its own and leaves the page alone", async () => {
   expect(document.activeElement).toBe(document.body);
 });
 
-test("A coach mark is dismissed by its own button", async () => {
+test("A composed action dismisses a coach mark", async () => {
   render(<Spotlight />);
 
   await expect.element(page.getByTestId("hint")).toBeInTheDocument();
@@ -61,14 +62,6 @@ test("A coach mark is dismissed by its own button", async () => {
   await page.getByRole("button", { name: "Got it" }).click();
 
   await expect.element(page.getByTestId("hint")).not.toBeInTheDocument();
-});
-
-test("The dismiss label can be replaced", async () => {
-  render(<Spotlight dismissLabel="Try it" />);
-
-  await expect
-    .element(page.getByRole("button", { name: "Try it" }))
-    .toBeInTheDocument();
 });
 
 test("Escape dismisses a coach mark", async () => {

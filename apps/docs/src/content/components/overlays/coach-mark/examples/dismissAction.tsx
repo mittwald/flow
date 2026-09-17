@@ -1,4 +1,5 @@
 import {
+  Action,
   Button,
   CoachMark,
   Heading,
@@ -28,13 +29,15 @@ export default () => {
         shouldFlip={false}
         anchorRef={anchor}
         controller={controller}
-        dismissLabel="Ausprobieren"
       >
         <Heading>Neu: Backups planen</Heading>
         <Text>
           Lege fest, wann ein Backup automatisch erstellt
           wird.
         </Text>
+        <Action closeOverlay="CoachMark">
+          <Button>Ausprobieren</Button>
+        </Action>
       </CoachMark>
     </Section>
   );
