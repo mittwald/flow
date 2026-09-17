@@ -88,18 +88,23 @@ const svgAttributeName = (name: string): string =>
     : name.replace(/[A-Z]/g, (upper) => `-${upper.toLowerCase()}`);
 
 /*
- * Scanned with sticky patterns over one index rather than matched as whole
- * tags. A single pattern for a tag needs a quantifier over a quantified
- * attribute list — `(?:\s+[^\s=/>]+\s*=\s*"[^"]*")*` — and that is polynomial
- * backtracking on input it cannot complete (CodeQL js/polynomial-redos). Each
- * of these matches one token, at one position, with nothing to backtrack into.
+ * Scanned one token at a time rather than matched as whole tags, and **no
+ * pattern here ends a quantifier in front of something that can fail** —
+ * `\s*>` and `\s*=\s*"` are gone, whitespace is skipped by the loop below
+ * instead. Both properties are needed: a single pattern for a tag needs a
+ * quantifier over a quantified attribute list, and even `\s*=` backtracks once
+ * per space when the `=` never comes. CodeQL rejects both shapes as
+ * js/polynomial-redos, and it reports them at the shared `exec` rather than at
+ * the pattern — so the whole set has to stay clean, not just the one named.
+ *
+ * What is left ends in its quantifier (`[\w:.-]*`, `[^\s=/>]+`) or has none,
+ * which leaves nothing to backtrack into.
  */
-const closeTagPattern = /<\/([a-zA-Z][\w:.-]*)\s*>/y;
+const closeTagPattern = /<\/([a-zA-Z][\w:.-]*)/y;
 const openTagPattern = /<([a-zA-Z][\w:.-]*)/y;
 const tagEndPattern = /(\/?)>/y;
 const attributeNamePattern = /[^\s=/>]+/y;
-const attributeAssignPattern = /\s*=\s*"/y;
-const whitespacePattern = /\s*/y;
+const whitespacePattern = /\s/;
 
 const matchAt = (
   pattern: RegExp,
@@ -110,8 +115,14 @@ const matchAt = (
   return pattern.exec(markup);
 };
 
-const skipWhitespace = (markup: string, at: number): number =>
-  at + (matchAt(whitespacePattern, markup, at)?.[0].length ?? 0);
+/** Tested one character at a time, so there is no quantifier to backtrack. */
+const skipWhitespace = (markup: string, at: number): number => {
+  let next = at;
+  while (next < markup.length && whitespacePattern.test(markup[next] ?? "")) {
+    next += 1;
+  }
+  return next;
+};
 
 const near = (markup: string, at: number): string =>
   JSON.stringify(markup.slice(at, at + 40));
@@ -142,13 +153,20 @@ const readAttributes = (
     }
     at += name[0].length;
 
-    const assign = matchAt(attributeAssignPattern, markup, at);
-    if (!assign) {
+    at = skipWhitespace(markup, at);
+    if (markup[at] !== "=") {
+      throw new Error(
+        `SVG attribute "${name[0]}" has no value at: ${near(markup, at)}.`,
+      );
+    }
+
+    at = skipWhitespace(markup, at + 1);
+    if (markup[at] !== '"') {
       throw new Error(
         `SVG attribute "${name[0]}" has no double-quoted value at: ${near(markup, at)}.`,
       );
     }
-    at += assign[0].length;
+    at += 1;
 
     /* Scanned with `indexOf`, not `"[^"]*"` — one pass, nothing to backtrack. */
     const valueEnd = markup.indexOf('"', at);
@@ -184,7 +202,12 @@ export const parseSvg = (markup: string): SvgNode => {
           `Unbalanced SVG markup: </${close[1]}> closes <${node?.tag ?? "nothing"}>.`,
         );
       }
+
       at = skipWhitespace(markup, at + close[0].length);
+      if (markup[at] !== ">") {
+        throw new Error(`Unterminated closing tag </${close[1]}.`);
+      }
+      at = skipWhitespace(markup, at + 1);
       continue;
     }
 

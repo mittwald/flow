@@ -63,9 +63,11 @@ describe("parseSvg", () => {
    * What it guards is the new scanner, where the `!` run *is* read, as an
    * attribute name that then has no `=`.
    */
-  test("gives up in linear time on input it cannot complete", () => {
-    const markup = `<svg ${"!".repeat(50_000)}`;
-
+  test.each([
+    ["an attribute name that never ends", `<svg ${"!".repeat(50_000)}`],
+    ["whitespace where a value should be", `<svg a${" ".repeat(50_000)}`],
+    ["whitespace inside a closing tag", `<svg></svg${" ".repeat(50_000)}`],
+  ])("gives up in linear time on %s", (ignoredWhat, markup) => {
     const startedAt = performance.now();
     expect(() => parseSvg(markup)).toThrow();
     expect(performance.now() - startedAt).toBeLessThan(1000);
