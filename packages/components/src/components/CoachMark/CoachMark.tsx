@@ -7,15 +7,16 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
-import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
-import ButtonView from "@/views/ButtonView";
-import locales from "./locales/*.locale.json";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
 export interface CoachMarkProps extends Omit<
   PopoverProps,
   // The popover's own shape, which a coach mark decides for itself.
   | "withTip"
   | "modality"
+  // react-aria's own non-modal switch, which would compete with the shape this
+  // component already decided on.
+  | "isNonModal"
   | "isDialogContent"
   | "triggerRef"
   // Positioning and dismissal it does not hand out: it is never dismissed by an
@@ -40,13 +41,6 @@ export interface CoachMarkProps extends Omit<
    * different context than the host, so a ref never arrives, while an id does.
    */
   anchor?: string;
-  /**
-   * The label of the button that dismisses the coach mark. Defaults to a
-   * localized "Got it".
-   */
-  dismissLabel?: string;
-  /** Hides the dismiss button, when the coach mark is closed some other way. */
-  hideDismissButton?: boolean;
 }
 
 /**
@@ -91,13 +85,10 @@ export const CoachMark = flowComponent("CoachMark", (props) => {
     anchorRef,
     anchor,
     isDefaultOpen = false,
-    dismissLabel,
-    hideDismissButton = false,
     ref: ignoredRef,
     ...rest
   } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales, "CoachMark");
   const resolvedAnchorRef = useAnchorRef(anchorRef, anchor);
 
   const controllerFromContext = useOverlayController("CoachMark", {
@@ -114,6 +105,14 @@ export const CoachMark = flowComponent("CoachMark", (props) => {
       level: 5,
       elementType: "span",
     },
+    // The dismiss action is composed, not configured. Flow never closes an
+    // overlay on a consumer's behalf — `Modal` only augments a `closeOverlay`
+    // that is already there — so this sets the shape and leaves the behaviour
+    // to whatever `Action` the consumer wraps the button in.
+    Button: {
+      size: "s",
+      className: styles.dismiss,
+    },
   };
 
   return (
@@ -124,20 +123,11 @@ export const CoachMark = flowComponent("CoachMark", (props) => {
       controller={controller}
       triggerRef={resolvedAnchorRef}
     >
-      <PropsContextProvider props={propsContext}>
-        <div className={styles.coachMark}>
-          {children}
-          {!hideDismissButton && (
-            <ButtonView
-              size="s"
-              className={styles.dismiss}
-              onPress={() => controller.close()}
-            >
-              {dismissLabel ?? stringFormatter.format("dismiss")}
-            </ButtonView>
-          )}
-        </div>
-      </PropsContextProvider>
+      <OverlayContextProvider type="CoachMark" controller={controller}>
+        <PropsContextProvider props={propsContext}>
+          <div className={styles.coachMark}>{children}</div>
+        </PropsContextProvider>
+      </OverlayContextProvider>
     </Popover>
   );
 });

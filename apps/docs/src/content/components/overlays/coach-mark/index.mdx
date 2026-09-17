@@ -78,16 +78,16 @@ Beim Scrollen folgt das CoachMark seinem Anker und bleibt geöffnet.
 
 # Schließen
 
-Das CoachMark enthält standardmäßig einen Button zum Schließen, beschriftet mit
-einem übersetzten „Verstanden". Über `dismissLabel` lässt sich die Beschriftung
-anpassen, mit `hideDismissButton` kann der Button ausgeblendet werden. Auch
-Escape schließt das CoachMark.
+Den Button zum Schließen bringt das CoachMark nicht selbst mit, er wird
+komponiert: Ein [Action](/components/actions/action) mit `closeOverlay` um einen
+[Button](/components/actions/button) schließt das CoachMark. Größe und
+Platzierung gibt das CoachMark dem Button vor. Escape schließt es ebenfalls.
 
 `onOpenChange` meldet jede Änderung, unabhängig davon, welcher Weg sie ausgelöst
 hat. Das ist der Platz, um die Bestätigung zu speichern; beim nächsten Aufruf
 unterdrückt `isDefaultOpen={false}` den Hinweis dann.
 
-<LiveCodeEditor example="dismissLabel" editorCollapsed />
+<LiveCodeEditor example="dismissAction" editorCollapsed />
 
 ---
 

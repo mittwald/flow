@@ -1,4 +1,5 @@
 import {
+  Action,
   Button,
   CoachMark,
   Heading,
@@ -21,6 +22,9 @@ export default () => (
         Lege fest, wann ein Backup automatisch erstellt
         wird.
       </Text>
+      <Action closeOverlay="CoachMark">
+        <Button>Verstanden</Button>
+      </Action>
     </CoachMark>
   </Section>
 );

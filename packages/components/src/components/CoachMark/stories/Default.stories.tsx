@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useRef } from "react";
 import { CoachMark } from "@/components/CoachMark";
+import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
@@ -43,6 +44,9 @@ const meta: Meta<typeof CoachMark> = {
             You can now assign a rank right here, without going through the
             squadron overview.
           </Text>
+          <Action closeOverlay="CoachMark">
+            <Button>Got it</Button>
+          </Action>
         </CoachMark>
 
         {pageContent}
@@ -55,9 +59,3 @@ export default meta;
 type Story = StoryObj<typeof CoachMark>;
 
 export const Default: Story = {};
-
-export const CustomDismissLabel: Story = {
-  args: {
-    dismissLabel: "Ausprobieren",
-  },
-};

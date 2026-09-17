@@ -16,7 +16,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Button, CoachMark, Heading, Text },
+    components: { Action, Button, CoachMark, Heading, Text },
   }) => {
     await render(
       <>
@@ -27,6 +27,9 @@ test.each(testEnvironments)(
             You can now assign a rank right here, without going through the
             squadron overview.
           </Text>
+          <Action closeOverlay="CoachMark">
+            <Button>Got it</Button>
+          </Action>
         </CoachMark>
       </>,
     );
