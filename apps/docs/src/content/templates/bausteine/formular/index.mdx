@@ -29,17 +29,21 @@ Overlay zum [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
   Felder nach Wichtigkeit und stelle Zusammengehöriges nah beieinander.
 - **Absenden** – Eine [ActionGroup](/components/actions/action-group) trägt den
   [SubmitButton](/components/react-hook-form/submit-button). Die Validierung
-  erfolgt standardmäßig erst beim Absenden.
+  erfolgt standardmäßig erst beim Absenden. Quick Submit sendet das Formular
+  zusätzlich per ⌘/Strg + Enter aus jedem Feld ab – besonders hilfreich in einer
+  [TextArea](/components/form-controls/text-area) oder einem
+  [MarkdownEditor](/components/form-controls/markdown-editor).
 
 ### Field
 
 Diese Punkte kehren über alle Form Controls hinweg wieder:
 
 - **Label** – Ein gutes [Label](/components/content/label) vermittelt alle
-  notwendigen Informationen klar und prägnant (max. 2 Wörter). Lässt sich die
-  Anforderung aus dem Kontext erschließen, kann ein sichtbares Label entfallen –
-  dann muss das Form Control über `aria-labelledby` verknüpft oder mit
-  `aria-label` beschrieben sein.
+  notwendigen Informationen klar und prägnant (max. 2 Wörter). Felder sind
+  standardmäßig Pflichtfelder; optionale Felder tragen den Zusatz „(optional)"
+  am Label. Lässt sich die Anforderung aus dem Kontext erschließen, kann ein
+  sichtbares Label entfallen – dann muss das Form Control über `aria-labelledby`
+  verknüpft oder mit `aria-label` beschrieben sein.
 - **Fields & Controls** – Das Design System bietet viele wiederverwendbare Form
   Controls: Fields wie [TextField](/components/form-controls/text-field),
   [NumberField](/components/form-controls/number-field) oder
