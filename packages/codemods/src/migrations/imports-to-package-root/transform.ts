@@ -40,6 +40,22 @@ const keptSubpaths = new Set([
   "password-tools",
 ]);
 
+/**
+ * Splits a bundler's asset query or fragment off a specifier. `all.css?url` is
+ * the subpath `all.css`, requested as a URL — not a subpath named
+ * `all.css?url`. Matching the whole string carried the suffix past the
+ * leave-alone set and into the catch-all below, which rewrote `import
+ * flowStyles from "…/all.css?url"` into a named import of a JS export that does
+ * not exist, and `import "…/all-layered.css?inline"` into a side-effect import
+ * of the package root — stylesheet gone, no error anywhere.
+ */
+const splitAssetSuffix = (subpath: string): [string, string] => {
+  const suffixAt = subpath.search(/[?#]/);
+  return suffixAt === -1
+    ? [subpath, ""]
+    : [subpath.slice(0, suffixAt), subpath.slice(suffixAt)];
+};
+
 const importsToPackageRootTransform: Transform = (fileInfo, { j }) => {
   const flowPackage = "@mittwald/flow-react-components";
 
@@ -53,7 +69,9 @@ const importsToPackageRootTransform: Transform = (fileInfo, { j }) => {
     .forEach((i) => {
       const specifiers = i.node.specifiers ?? [];
       const importPath = String(i.node.source.value);
-      const importRelativePath = importPath.slice(flowPackage.length + 1);
+      const [importRelativePath, assetSuffix] = splitAssetSuffix(
+        importPath.slice(flowPackage.length + 1),
+      );
 
       if (keptSubpaths.has(importRelativePath)) {
         return;
@@ -64,7 +82,15 @@ const importsToPackageRootTransform: Transform = (fileInfo, { j }) => {
         importRelativePath === "globals.css" ||
         importRelativePath === "global.css"
       ) {
-        i.node.source.value = `${flowPackage}/all.css`;
+        i.node.source.value = `${flowPackage}/all.css${assetSuffix}`;
+        return;
+      }
+
+      // Everything below rewrites a *module* import: it moves the specifier
+      // onto a JS entry and turns a default specifier into a named one. An
+      // asset import survives neither, and a suffix reaching this point names a
+      // path this transform cannot resolve to an export — leave it to a human.
+      if (assetSuffix !== "") {
         return;
       }
 
