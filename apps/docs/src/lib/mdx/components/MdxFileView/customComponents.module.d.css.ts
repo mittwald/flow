@@ -5,6 +5,7 @@ declare const classNames: {
   readonly separator: "separator";
   readonly anchorLinkHeading: "anchorLinkHeading";
   readonly anchorButton: "anchorButton";
+  readonly anchorLinkHeadingh3: "anchorLinkHeadingh3";
   readonly doAndDontCode: "doAndDontCode";
   readonly doAndDontText: "doAndDontText";
   readonly doAndDontContent: "doAndDontContent";

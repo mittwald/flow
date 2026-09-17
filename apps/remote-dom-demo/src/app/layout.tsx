@@ -13,7 +13,7 @@ import type { ErrorComponent } from "next/dist/client/components/error-boundary"
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.scss";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { TunnelExit } from "@mittwald/flow-react-components/tunnel";
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { NavigationItem } from "@/app/_components/NavigationItem";
 

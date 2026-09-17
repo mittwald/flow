@@ -267,7 +267,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "codemod",
     remotePackage: false,
     apply:
-      'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
+      'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. Asset imports are not part of this: a CSS specifier stays a CSS specifier — `all.css` and `all-layered.css` unchanged, a stale `global.css` or `globals.css` rewritten to `all.css` — and keeps any bundler query it carries (`?url`, `?inline`, `?raw`). It never becomes a named import from the package root, which has no JS binding behind a stylesheet. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
   },
   {
     id: "renamed-css-export",
@@ -277,6 +277,6 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "codemod",
     remotePackage: false,
     apply:
-      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript and TypeScript files. An `@import` of the old path inside a `.css` or `.scss` file is not covered — search for it by hand.",
+      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`, keeping any bundler query the specifier carries (`.../styles?url` becomes `.../all.css?url`). A codemod does this for JavaScript and TypeScript files. An `@import` of the old path inside a `.css` or `.scss` file is not covered — search for it by hand.",
   },
 ];
