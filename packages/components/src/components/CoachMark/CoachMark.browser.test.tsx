@@ -139,7 +139,7 @@ test("A coach mark finds its anchor by id", async () => {
       <button id="anchor-by-id" data-testid="anchor">
         Anchor
       </button>
-      <CoachMark anchor="anchor-by-id" defaultOpen>
+      <CoachMark anchor="anchor-by-id" isDefaultOpen>
         <Text data-testid="hint">This button now does more.</Text>
       </CoachMark>
     </div>,
@@ -252,7 +252,7 @@ test.for(["top", "bottom"] as const)(
         <button id="tip-anchor" data-testid="anchor">
           Anchor
         </button>
-        <CoachMark anchor="tip-anchor" placement={placement} defaultOpen>
+        <CoachMark anchor="tip-anchor" placement={placement} isDefaultOpen>
           <Text data-testid="hint">This button now does more.</Text>
         </CoachMark>
       </div>,
@@ -301,7 +301,7 @@ test("A coach mark stays behind app chrome that claims a stacking level", async 
         <button id="chrome-anchor" data-testid="anchor">
           Anchor
         </button>
-        <CoachMark anchor="chrome-anchor" placement="top" defaultOpen>
+        <CoachMark anchor="chrome-anchor" placement="top" isDefaultOpen>
           <Text data-testid="hint">This button now does more.</Text>
         </CoachMark>
       </div>
@@ -350,7 +350,7 @@ test("A coach mark below the fold is not squashed to nothing", async () => {
       <button id="far-anchor" data-testid="anchor">
         Anchor
       </button>
-      <CoachMark anchor="far-anchor" defaultOpen>
+      <CoachMark anchor="far-anchor" isDefaultOpen>
         <Heading>New around here</Heading>
         <Text data-testid="hint">
           This button now does more than it used to.
@@ -375,7 +375,7 @@ test("A coach mark below the fold is not squashed to nothing", async () => {
 
 test("A coach mark without any anchor renders nothing", async () => {
   render(
-    <CoachMark defaultOpen>
+    <CoachMark isDefaultOpen>
       <Text data-testid="hint">Nowhere to point.</Text>
     </CoachMark>,
   );

@@ -26,6 +26,9 @@ export interface CoachMarkProps extends Omit<
   | "shouldCloseOnInteractOutside"
   | "isKeyboardDismissDisabled"
   | "UNSTABLE_portalContainer"
+  // Popover keeps this one working for the consumers it already has; a coach
+  // mark has none yet, so it ships only the current name.
+  | "defaultOpen"
 > {
   /**
    * The element the coach mark points at. It is an anchor, not a trigger —
@@ -88,7 +91,7 @@ export const CoachMark = flowComponent("CoachMark", (props) => {
     controller: controllerFromProps,
     anchorRef,
     anchor,
-    defaultOpen = false,
+    isDefaultOpen = false,
     dismissLabel,
     hideDismissButton = false,
     ref: ignoredRef,
@@ -100,7 +103,7 @@ export const CoachMark = flowComponent("CoachMark", (props) => {
 
   const controllerFromContext = useOverlayController("CoachMark", {
     reuseControllerFromContext: true,
-    isDefaultOpen: defaultOpen,
+    isDefaultOpen,
   });
 
   const controller = controllerFromProps ?? controllerFromContext;

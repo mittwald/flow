@@ -18,7 +18,7 @@ export default function Page() {
 
       <Button id="coach-mark-anchor">Arm the superlaser</Button>
 
-      <CoachMark anchor="coach-mark-anchor" defaultOpen>
+      <CoachMark anchor="coach-mark-anchor" isDefaultOpen>
         <Heading>New: arm it from here</Heading>
         <Text>
           Arming the superlaser no longer takes a trip to the reactor control

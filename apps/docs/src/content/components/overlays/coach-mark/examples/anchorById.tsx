@@ -14,7 +14,7 @@ export default () => (
     <CoachMark
       shouldFlip={false}
       anchor="backup-button"
-      defaultOpen
+      isDefaultOpen
     >
       <Heading>Neu: Backups planen</Heading>
       <Text>

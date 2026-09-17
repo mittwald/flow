@@ -17,8 +17,9 @@ description:
 - Zeige höchstens ein CoachMark pro Seite. Mehrere konkurrieren um dieselbe
   Aufmerksamkeit und heben sich gegenseitig auf.
 - Beschränke den Inhalt auf einen Gedanken. Sag, was neu ist und was es bringt.
-- Blende ein bestätigtes CoachMark dauerhaft aus. Ein Hinweis, der bei jedem
-  Aufruf wiederkommt, wird zur Störung.
+- Blende ein bestätigtes CoachMark dauerhaft aus. Merke dir die Bestätigung in
+  `onOpenChange` und setze `isDefaultOpen` beim nächsten Aufruf entsprechend –
+  ein Hinweis, der jedes Mal wiederkommt, wird zur Störung.
 - Verlasse dich nicht darauf, dass der Hinweis gelesen wird. Was unerlässlich
   ist, gehört in die Oberfläche selbst.
 - Schreibe das CoachMark direkt hinter sein Ankerelement. Angekündigt wird es
@@ -86,6 +87,10 @@ Das CoachMark bringt seinen eigenen Button mit, beschriftet mit einem
 übersetzten „Verstanden". Mit `dismissLabel` bekommt er einen eigenen Text, mit
 `hideDismissButton` entfällt er – etwa, wenn das Schließen an einer anderen
 Aktion hängt. Escape schließt das CoachMark ebenfalls.
+
+`onOpenChange` meldet jede Änderung, unabhängig davon, welcher Weg sie ausgelöst
+hat. Das ist der Platz, um die Bestätigung zu speichern; beim nächsten Aufruf
+unterdrückt `isDefaultOpen={false}` den Hinweis dann.
 
 <LiveCodeEditor example="dismissLabel" editorCollapsed />
 

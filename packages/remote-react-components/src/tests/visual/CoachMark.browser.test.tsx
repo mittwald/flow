@@ -21,7 +21,7 @@ test.each(testEnvironments)(
     await render(
       <>
         <Button id="coach-mark-anchor">Assign a rank</Button>
-        <CoachMark anchor="coach-mark-anchor" defaultOpen>
+        <CoachMark anchor="coach-mark-anchor" isDefaultOpen>
           <Heading>New: assign a rank</Heading>
           <Text>
             You can now assign a rank right here, without going through the

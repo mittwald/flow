@@ -13,7 +13,7 @@ test("A server-rendered coach mark is not painted before it is placed", () => {
   const markup = renderToStaticMarkup(
     <div>
       <button id="anchor">Anchor</button>
-      <CoachMark anchor="anchor" defaultOpen>
+      <CoachMark anchor="anchor" isDefaultOpen>
         <Text>This button now does more.</Text>
       </CoachMark>
     </div>,
