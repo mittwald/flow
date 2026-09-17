@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.58](https://github.com/mittwald/flow/compare/1.2.0-next.57...1.2.0-next.58) (2026-09-17)
+
+### Miscellaneous Chores
+
+* **core:** stop writing failure screenshots next to tests ([#3068](https://github.com/mittwald/flow/issues/3068)) ([544e90d](https://github.com/mittwald/flow/commit/544e90d20e43e1b17d73fc959ffe1465a1bb4616))
+
+## [1.1.46](https://github.com/mittwald/flow/compare/1.1.45...1.1.46) (2026-09-17)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.46 ([6e6d23d](https://github.com/mittwald/flow/commit/6e6d23d148abd4884fd8f955e0c26641265a6854))
+
 ## [1.2.0-next.57](https://github.com/mittwald/flow/compare/1.1.45...1.2.0-next.57) (2026-09-17)
 
 ## [1.2.0-next.56](https://github.com/mittwald/flow/compare/1.2.0-next.55...1.2.0-next.56) (2026-09-17)
