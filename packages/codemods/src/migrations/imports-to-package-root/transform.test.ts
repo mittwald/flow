@@ -28,6 +28,7 @@ describe("running it twice changes nothing", () => {
 import { Text } from "@mittwald/flow-react-components/components/Text";
 import { useForm } from "@mittwald/flow-react-components/react-hook-form/x";
 import "@mittwald/flow-react-components/global.css";
+import flowStyles from "@mittwald/flow-react-components/global.css?url";
 `;
 
     const once = runTransform(transform, source);
@@ -61,6 +62,46 @@ import props from "@mittwald/flow-react-components/doc-properties";
    */
   test("a path another migration renames survives for that migration", () => {
     const source = `import { Rule } from "@mittwald/flow-react-components/password-tools";
+`;
+
+    expect(runTransform(transform, source)).toBe(source);
+  });
+});
+
+/**
+ * A bundler addresses an asset through a query or fragment on the specifier, so
+ * the subpath is `all.css` and `?url` is how it is requested. Reading the
+ * suffix as part of the subpath put every such import past the leave-alone set
+ * and into the catch-all, which rewrote `import flowStyles from
+ * "…/all.css?url"` into a named import of a JS export that does not exist — and
+ * `import "…/all-layered.css?inline"` into a side-effect import of the package
+ * root, dropping the stylesheet with no error anywhere.
+ */
+describe("an asset query is not part of the subpath", () => {
+  test("a stylesheet requested as an asset survives", () => {
+    const source = `import flowStyles from "@mittwald/flow-react-components/all.css?url";
+import "@mittwald/flow-react-components/all-layered.css?inline";
+`;
+
+    expect(runTransform(transform, source)).toBe(source);
+  });
+
+  test("a renamed stylesheet keeps the query it was requested with", () => {
+    const source = `import flowStyles from "@mittwald/flow-react-components/global.css?url";
+`;
+
+    expect(runTransform(transform, source))
+      .toBe(`import flowStyles from "@mittwald/flow-react-components/all.css?url";
+`);
+  });
+
+  /**
+   * The catch-all moves a specifier onto a JS entry and turns a default import
+   * into a named one. Neither survives an asset import, and which export such a
+   * path would even name is not decidable here — so it stays for a human.
+   */
+  test("a subpath with a query the transform cannot resolve stays put", () => {
+    const source = `import markup from "@mittwald/flow-react-components/components/Button?raw";
 `;
 
     expect(runTransform(transform, source)).toBe(source);
