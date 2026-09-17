@@ -24,6 +24,10 @@
       "types": "./dist/types/index/flr-universal.d.ts",
       "import": "./dist/js/flr-universal.mjs"
     },
+    "./tunnel": {
+      "types": "./dist/types/index/tunnel.d.ts",
+      "import": "./dist/js/tunnel.mjs"
+    },
     "./nextjs": {
       "types": "./dist/types/integrations/nextjs/index.d.ts",
       "import": "./dist/js/nextjs.mjs"
