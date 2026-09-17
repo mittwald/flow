@@ -6,6 +6,7 @@ declare const classNames: {
   readonly anchorLinkHeading: "anchorLinkHeading";
   readonly "flow--heading--heading-text": "flow--heading--heading-text";
   readonly anchorButton: "anchorButton";
+  readonly anchorLinkHeadingh3: "anchorLinkHeadingh3";
   readonly doAndDontCode: "doAndDontCode";
   readonly doAndDontText: "doAndDontText";
   readonly doAndDontContent: "doAndDontContent";
