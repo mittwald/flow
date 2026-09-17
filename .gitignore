@@ -15,6 +15,7 @@ apps/docs/src/lib/liveCode/dynamicImports.ts
 .idea/material_theme_project_new.xml
 coverage
 .vitest-attachments
+.vitest-screenshots
 packages/components/out
 .nx/workspace-data
 coverage/*.json

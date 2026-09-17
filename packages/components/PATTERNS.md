@@ -825,9 +825,10 @@ and consistency enforced by tooling, not maintained by hand.
   - ✓ rendered output materially matters — a new prop, variant or layout.
   - ✗ pure logic, or a CSS state a screenshot cannot hold (`:hover`) → assert
     behavior or the computed style in a colocated browser test. This package
-    writes no screenshots at all (`screenshotFailures` is off in
+    commits no screenshots at all — a failing browser test writes its capture to
+    the gitignored `.vitest-screenshots` (`browser.screenshotDirectory` in
     `../core/src/vitestBrowserTestConfig.ts`), so a `__screenshots__/` directory
-    appearing here is a stray failure artifact, not a baseline.
+    appearing here is a stray artifact, not a baseline.
 
 ## 12. Imports and file conventions
 

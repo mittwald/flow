@@ -22,11 +22,33 @@ export const vitestBrowserTestConfig: ProjectConfig = {
       setReducedMotion,
     },
     /*
-     * No `__screenshots__` directory is gitignored — they hold the committed
-     * visual baselines — so a failure PNG lands in the next commit. Pass
-     * `--browser.screenshotFailures` to get one back for debugging.
+     * A failure screenshot defaults to `<test dir>/__screenshots__`, which is
+     * where the committed visual baselines live and is gitignored nowhere, so
+     * the stray PNG lands in the next commit. Redirect it. The path resolves
+     * against the process cwd, so `.gitignore` carries a bare
+     * `.vitest-screenshots` that matches at any depth.
      */
-    screenshotFailures: false,
+    screenshotDirectory: ".vitest-screenshots",
+    expect: {
+      toMatchScreenshot: {
+        /*
+         * `screenshotDirectory` also feeds the baseline path, but there it is a
+         * segment inside the test directory. Without this pin to vitest's
+         * default shape the committed baselines move into the gitignored
+         * directory and the visual suite silently re-baselines itself.
+         */
+        resolveScreenshotPath: ({
+          root,
+          testFileDirectory,
+          testFileName,
+          arg,
+          browserName,
+          platform,
+          ext,
+        }) =>
+          `${root}/${testFileDirectory}/__screenshots__/${testFileName}/${arg}-${browserName}-${platform}${ext}`,
+      },
+    },
     provider: playwright({
       /*
        * Bounds a stuck action, not a slow one. One browser context per test
