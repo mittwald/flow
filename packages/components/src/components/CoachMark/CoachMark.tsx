@@ -2,7 +2,6 @@ import type { RefObject } from "react";
 import { useEffect, useMemo, useState } from "react";
 import type { PopoverProps } from "@/components/Popover/Popover";
 import { Popover } from "@/components/Popover/Popover";
-import { PopoverModalityContext } from "@/components/Popover/modalityContext";
 import styles from "./CoachMark.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -16,6 +15,7 @@ export interface CoachMarkProps extends Omit<
   PopoverProps,
   // The popover's own shape, which a coach mark decides for itself.
   | "withTip"
+  | "modality"
   | "isDialogContent"
   | "triggerRef"
   // Positioning and dismissal it does not hand out: it is never dismissed by an
@@ -117,29 +117,28 @@ export const CoachMark = flowComponent("CoachMark", (props) => {
   };
 
   return (
-    <PopoverModalityContext value="non-modal">
-      <Popover
-        withTip
-        {...rest}
-        controller={controller}
-        triggerRef={resolvedAnchorRef}
-      >
-        <PropsContextProvider props={propsContext}>
-          <div className={styles.coachMark}>
-            {children}
-            {!hideDismissButton && (
-              <ButtonView
-                size="s"
-                className={styles.dismiss}
-                onPress={() => controller.close()}
-              >
-                {dismissLabel ?? stringFormatter.format("dismiss")}
-              </ButtonView>
-            )}
-          </div>
-        </PropsContextProvider>
-      </Popover>
-    </PopoverModalityContext>
+    <Popover
+      withTip
+      {...rest}
+      modality="non-modal"
+      controller={controller}
+      triggerRef={resolvedAnchorRef}
+    >
+      <PropsContextProvider props={propsContext}>
+        <div className={styles.coachMark}>
+          {children}
+          {!hideDismissButton && (
+            <ButtonView
+              size="s"
+              className={styles.dismiss}
+              onPress={() => controller.close()}
+            >
+              {dismissLabel ?? stringFormatter.format("dismiss")}
+            </ButtonView>
+          )}
+        </div>
+      </PropsContextProvider>
+    </Popover>
   );
 });
 

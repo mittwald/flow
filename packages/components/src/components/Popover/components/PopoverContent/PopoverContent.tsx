@@ -4,7 +4,6 @@ import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
-import { PopoverModalityContext } from "../../modalityContext";
 import { NonModalPopoverContent } from "../NonModalPopoverContent";
 
 export interface PopoverContentProps
@@ -13,12 +12,17 @@ export interface PopoverContentProps
   isDialogContent?: boolean;
   isOpen?: boolean;
   width?: string | number;
+  /** @internal Set by `CoachMark`; see `PopoverProps`. */
+  modality?: "modal" | "non-modal";
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef?: RefObject<Element | null>;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props modality
+ */
 export const PopoverContent: FC<PopoverContentProps> = (props) => {
   const {
     children,
@@ -29,14 +33,11 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     ref,
     isOpen,
     width,
+    modality,
     ...rest
   } = props;
 
   const isActivityActive = useIsActivityActive();
-
-  // Not a prop: a non-modal popover is not a variant a consumer picks. Only
-  // `CoachMark` sets it, and it sets it for its own subtree.
-  const modality = useContext(PopoverModalityContext);
 
   // A trigger hands its popover a ref through the context react-aria sets up,
   // and the non-modal popover has to anchor itself with it.
