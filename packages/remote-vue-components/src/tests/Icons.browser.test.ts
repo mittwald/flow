@@ -1,7 +1,14 @@
-import { IconClose, IconStar, Text } from "@/index";
+import {
+  IconClose,
+  IconDelete,
+  IconSetProvider,
+  IconStar,
+  Text,
+  type IconSet,
+} from "@/index";
 import { cleanupRemote, renderRemote } from "@/tests/lib/environment";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { defineComponent, h } from "vue";
+import { defineComponent, h, ref } from "vue";
 
 afterEach(() => cleanupRemote());
 
@@ -83,6 +90,83 @@ describe("generated icons", () => {
 
     await vi.waitFor(() =>
       expect(document.querySelector("svg.tabler-icon-x")).not.toBeNull(),
+    );
+  });
+});
+
+/*
+ * The one component here with no counterpart in
+ * `@mittwald/flow-remote-react-components`: React's `IconSetProvider` is
+ * exported from `@mittwald/flow-react-components`, not from the remote surface.
+ * It earns its place because there is no Vue build of the pro set.
+ */
+describe("IconSetProvider", () => {
+  const squareCheck = defineComponent({
+    name: "SquareCheck",
+    setup: () => () =>
+      h("svg", { "^viewBox": "0 0 448 512", "^class": "replacement" }, [
+        h("path", { "^d": "M64 80l320 0z" }),
+      ]),
+  });
+
+  const withSet = (set: IconSet) =>
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(IconSetProvider, { set }, () => [h(IconClose), h(IconDelete)]),
+      ),
+    );
+
+  test("replaces the icons its set names", async () => {
+    withSet({ Close: squareCheck });
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("svg.replacement")).not.toBeNull(),
+    );
+    expect(document.querySelector("svg.tabler-icon-x")).toBeNull();
+  });
+
+  /*
+   * Partial on purpose — React's `IconSet` is `typeof defaultIconSet` and
+   * demands all 132, which works there because the pro set is a complete second
+   * one to hand it. There is none for Vue, so what is left out keeps Flow's.
+   */
+  test("keeps Flow's icon where the set has none", async () => {
+    withSet({ Close: squareCheck });
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("svg.tabler-icon-trash")).not.toBeNull(),
+    );
+  });
+
+  /* The swap is on the `<svg>`: a replacement is an icon, not a new wrapper. */
+  test("gives the replacement Flow's own icon treatment", async () => {
+    withSet({ Close: squareCheck });
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("svg.replacement")).not.toBeNull(),
+    );
+    const svg = document.querySelector("svg.replacement");
+    expect(svg?.getAttribute("class")).toContain("flow--icon");
+    expect(svg?.getAttribute("role")).toBe("img");
+  });
+
+  test("takes a set that is swapped later", async () => {
+    const set = ref<IconSet>({});
+    renderRemote(
+      defineComponent(
+        () => () => h(IconSetProvider, { set: set.value }, () => h(IconClose)),
+      ),
+    );
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("svg.tabler-icon-x")).not.toBeNull(),
+    );
+
+    set.value = { Close: squareCheck };
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("svg.replacement")).not.toBeNull(),
     );
   });
 });

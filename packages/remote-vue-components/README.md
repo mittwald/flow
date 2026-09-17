@@ -89,6 +89,7 @@ themselves. They cannot be generated, so this package rebuilds them in Vue:
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `Modal`, `Popover`, `LightBox`                      | render `OverlayContent` / `PopoverContent` with Flow's own classes, and configure their children      |
 | `Modal confirmOnClose`                              | a confirmation modal bound to the parent's `isConfirmingClose`, with its own copy of the four strings |
+| `IconSetProvider`                                   | provide/inject; its `IconSet` is partial, because there is no complete second set to hand it          |
 | `ModalTrigger`, `PopoverTrigger`, `LightBoxTrigger` | a `DialogTrigger` whose non-overlay child gets the `onPress` that opens it                            |
 | `useOverlayController`                              | a `ref` plus `provide`/`inject`, instead of a MobX model in React context                             |
 | `Action`, `ActionBatch`                             | run, report pending/succeeded/failed on the button, close the overlay                                 |
@@ -113,8 +114,9 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
   own project, not a prototype step.
 - **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
   each consumer licenses itself and which therefore cannot be inlined the way
-  Tabler's is. There is no Vue `IconSetProvider` either. An icon outside Flow's
-  set still goes in as a raw `<svg>` inside `Icon`.
+  Tabler's is. `IconSetProvider` is what fills the gap: hand it your own icons
+  and Flow's components use them. An icon outside Flow's set still goes in as a
+  raw `<svg>` inside `Icon`.
 - **No `IntlProvider`.** React's sets react-aria's locale for what renders
   locally; a Vue app renders nothing locally. `useLanguage()` reports the host's
   language instead.

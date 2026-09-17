@@ -18,6 +18,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outputFolder = path.resolve(here, "../../src/icons/components");
+const iconNamesFile = path.resolve(here, "../../src/icons/iconNames.ts");
 
 const tablerNotice =
   "/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */";
@@ -81,6 +82,16 @@ for (const iconName of iconNames) {
     "utf8",
   );
 }
+
+writeFileSync(
+  iconNamesFile,
+  await prettify(`\
+    /* Every icon Flow ships — the union that makes an \`IconSet\` checkable. */
+    export type IconName =
+      ${iconNames.map((icon) => `| ${JSON.stringify(icon)}`).join("\n")};
+  `),
+  "utf8",
+);
 
 writeFileSync(
   path.join(outputFolder, "index.ts"),

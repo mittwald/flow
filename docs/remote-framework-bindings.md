@@ -163,9 +163,12 @@ One thing stays out of reach regardless:
   filters, sorting, pagination and persisted view settings. Its own project.
 - **The pro icon set.** `packages/icons-pro` renders FontAwesome Pro, which each
   consumer licenses itself — so unlike Tabler's, its path data cannot be
-  inlined, and a binding would need that package as a peer dependency.
-  `IconSetProvider`, which swaps one set for the other, is a React context and
-  needs its own rebuild too.
+  inlined, and a binding would need that package as a peer dependency. Rebuild
+  `IconSetProvider` instead and the gap becomes an app's to fill: it is a React
+  context, a dozen lines in any framework, and the only way a binding's users
+  get a second icon set at all. Note that the React **remote** package does not
+  export it — it lives in `@mittwald/flow-react-components` — so this is a place
+  where a binding can reasonably go beyond its counterpart.
 
 ## Checklist for a new binding package
 

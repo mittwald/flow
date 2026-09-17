@@ -34,6 +34,11 @@ Private icon source + shared generator tooling. See the
   browser ignores an attribute it does not know, and the icon renders unstyled.
   `src/svg.test.ts` pins both halves; run it with
   `pnpm nx test:unit icons-base`.
+- **Keep a generated comment on one line.** `prettify()` resolves the prettier
+  config from _this_ directory and does not reflow a JSDoc block; `pnpm lint`
+  resolves it from the generated file's and does. A multi-line `/** … */` in a
+  template therefore passes generation and fails lint with `Delete ⏎·*` — after
+  the file is already committed.
 - Generated outputs (all committed, never hand-edited):
   - `packages/icons/src/components/*` — default set (Tabler)
   - `packages/icons-pro/src/components/*` — pro set (FontAwesome sharp-regular)

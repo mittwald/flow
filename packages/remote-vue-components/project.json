@@ -23,7 +23,10 @@
         "{projectRoot}/dev/icons/**/*",
         "{workspaceRoot}/pnpm-lock.yaml"
       ],
-      "outputs": ["{projectRoot}/src/icons/components/**/*"]
+      "outputs": [
+        "{projectRoot}/src/icons/components/**/*",
+        "{projectRoot}/src/icons/iconNames.ts"
+      ]
     },
     "test:browser": {
       "inputs": [

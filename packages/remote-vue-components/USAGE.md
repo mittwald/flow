@@ -128,6 +128,20 @@ tree like any other node, and `Icon` gives them Flow's sizing and colour:
 </Icon>
 ```
 
+To replace Flow's icons everywhere instead of one at a time, wrap the app in
+`IconSetProvider`. Each entry is a component rendering an `<svg>`, and Flow's
+`Icon` still supplies the sizing, the colour and the ARIA around it:
+
+```vue
+<IconSetProvider :set="{ Close: MyCloseIcon, Delete: MyDeleteIcon }">
+  <App />
+</IconSetProvider>
+```
+
+The set is partial: an icon you leave out keeps Flow's. This is the component to
+reach for if you license FontAwesome Pro — `@mittwald/flow-icons-pro` is React
+only, so there is nothing to import, but your own build of it goes here.
+
 ## The components that are not generated
 
 Flow's overlays, actions and providers are React compositions rather than remote
@@ -220,6 +234,7 @@ which is the rule Flow's props context writes as well.
 | `useWarnDeprecation()`            | report a deprecated path you still use             |
 | `useSetting(name, default)`       | a value that survives a reload                     |
 | `useIsMounted()`, `useOnChange()` | the small React helpers Flow exports               |
+| `injectContextIcon(name)`         | the icon a surrounding `IconSetProvider` supplies  |
 
 ## Links
 

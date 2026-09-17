@@ -39,8 +39,15 @@ what this prototype established about supporting a framework at all.
     `SVGAnimatedLength`s rather than the strings the host has to receive.
   - **No pro set.** `packages/icons-pro` renders FontAwesome Pro, which each
     consumer licenses itself and which therefore cannot be inlined. A Vue pro
-    set would need that package as a peer dependency, and `IconSetProvider` has
-    no Vue counterpart either.
+    set would need that package as a peer dependency.
+  - **`IconSetProvider` is the one component here with no remote React
+    counterpart.** React's is exported from `@mittwald/flow-react-components`
+    and _not_ from `flr-universal`, so a remote React extension cannot swap its
+    icons at all. It earns its place because there is no Vue pro set: it is how
+    an app brings its own. Its `IconSet` is **partial** where React's is
+    `typeof defaultIconSet` — React can demand all 132 because `icons-pro` is a
+    complete second set to hand it, and even its own test casts a two-entry set
+    through `as unknown`. An icon a Vue set leaves out keeps Flow's.
 - **The component type is annotated, not inferred.** Four chart components
   (`Area`, `CartesianChart`, `ChartTooltip`, `Line`) reference a type that is
   not reachable from this package's module graph, and inference fails with
