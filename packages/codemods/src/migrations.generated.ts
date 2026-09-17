@@ -7,6 +7,17 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "popover-open-state-props",
+    since: "1.1.47",
+    title:
+      "Popover: `defaultOpen` renamed, `isOpen` and `onOpenChange` now work",
+    kind: "migration",
+    action: "codemod",
+    remotePackage: true,
+    apply:
+      "Rename `defaultOpen` to `isDefaultOpen` on `Popover`, `ContextualHelp` and `ContextMenu` — a codemod does it, scoped to those three. Leave `defaultOpen` alone on `Select`, `MenuTrigger`, `Tooltip`, `TooltipTrigger`, `DialogTrigger`, `DatePicker` and `DateRangePicker`, where it is react-aria's own prop and unchanged. Then check every `isOpen` and `onOpenChange` passed to those three by hand, because both changed behaviour and neither is mechanically decidable. `isOpen` used to be ignored and now controls the popover: a value that is not kept up to date through `onOpenChange` keeps the popover closed. `onOpenChange` used to take over the open state and now only reports it, so a handler that performed the close itself — `onOpenChange={(open) => controller.setOpen(open)}` — can drop that call, and a handler that relied on the prop to *suppress* the close no longer does; use the controller's `onClose` for that.",
+  },
+  {
     id: "tabler-icons-no-longer-transitive",
     since: "1.1.40",
     title: "@tabler/icons-react is no longer installed alongside Flow",

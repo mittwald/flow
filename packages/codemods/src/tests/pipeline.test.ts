@@ -87,6 +87,7 @@ const runChain = (source: string): ChainRun => {
  * | `/password-tools`                        | `password-tools-subpath-renamed`           |
  * | `Button color="accent"`                  | `button-color-accent-to-success`           |
  * | `Align`                                  | `align-to-combine`                         |
+ * | `ContextualHelp defaultOpen`             | `popover-open-state-props`                 |
  */
 const legacyApp = `import "@mittwald/flow-react-components/styles";
 import flowStyles from "@mittwald/flow-react-components/styles?url";
@@ -94,6 +95,7 @@ import { AccentBox } from "@mittwald/flow-react-components/components/AccentBox"
 import { Action } from "@mittwald/flow-react-components/components/Action";
 import { Align } from "@mittwald/flow-react-components/components/Align";
 import { Button } from "@mittwald/flow-react-components/components/Button";
+import { ContextualHelp } from "@mittwald/flow-react-components/components/ContextualHelp";
 import { Heading } from "@mittwald/flow-react-components/components/Heading";
 import { MutedActionError } from "@mittwald/flow-react-components/components/Action";
 import { TableColumn } from "@mittwald/flow-react-components/components/TableColumn";
@@ -111,6 +113,7 @@ export const Toolbar = (props: {
 }) => (
   <Align>
     <Heading color="primary">Danger zone</Heading>
+    <ContextualHelp defaultOpen>Rights and roles</ContextualHelp>
     <AccentBox color="violet">
       <TableColumn maxWidth={200} minWidth={null} width={120} />
     </AccentBox>
@@ -136,6 +139,7 @@ import { AccentBox } from "@mittwald/flow-react-components";
 import { Action } from "@mittwald/flow-react-components";
 import { Combine } from "@mittwald/flow-react-components";
 import { Button } from "@mittwald/flow-react-components";
+import { ContextualHelp } from "@mittwald/flow-react-components";
 import { Heading } from "@mittwald/flow-react-components";
 import { AbortActionError } from "@mittwald/flow-react-components";
 import { TableColumn } from "@mittwald/flow-react-components";
@@ -152,6 +156,7 @@ export const Toolbar = (props: {
 }) => (
   <Combine>
     <Heading color="default">Danger zone</Heading>
+    <ContextualHelp isDefaultOpen>Rights and roles</ContextualHelp>
     <AccentBox backgroundColor="violet">
       <TableColumn width={120} />
     </AccentBox>
