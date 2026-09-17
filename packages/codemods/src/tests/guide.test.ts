@@ -24,7 +24,7 @@ describe("the generated migration guide", () => {
     const order = [...committed.matchAll(/<a id="([a-z0-9-]+)"><\/a>/g)].map(
       (match) => match[1],
     );
-    expect(order[0]).toBe("tabler-icons-no-longer-transitive");
+    expect(order[0]).toBe("popover-open-state-props");
     expect(order.at(-1)).toBe("renamed-css-export");
   });
 });
