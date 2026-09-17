@@ -54,6 +54,24 @@ describe("parseSvg", () => {
   });
 
   /*
+   * Pins the property CodeQL asked for after flagging the first version
+   * (js/polynomial-redos): the scanner reads one token at one position, so
+   * input it cannot complete costs one pass, not a quadratic one.
+   *
+   * It does not reproduce the old failure — that version matched a whole tag at
+   * once and rejected this input before its quadratic attribute scan ever ran.
+   * What it guards is the new scanner, where the `!` run *is* read, as an
+   * attribute name that then has no `=`.
+   */
+  test("gives up in linear time on input it cannot complete", () => {
+    const markup = `<svg ${"!".repeat(50_000)}`;
+
+    const startedAt = performance.now();
+    expect(() => parseSvg(markup)).toThrow();
+    expect(performance.now() - startedAt).toBeLessThan(1000);
+  });
+
+  /*
    * Strict on purpose: a parser that skipped what it did not understand would
    * drop a path and generate an icon that renders nothing, with the generator
    * reporting success.

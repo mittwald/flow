@@ -87,17 +87,78 @@ const svgAttributeName = (name: string): string =>
     ? name
     : name.replace(/[A-Z]/g, (upper) => `-${upper.toLowerCase()}`);
 
-const openTagPattern =
-  /^<([a-zA-Z][\w:.-]*)((?:\s+[^\s=/>]+\s*=\s*"[^"]*")*)\s*(\/?)>/;
-const closeTagPattern = /^<\/([a-zA-Z][\w:.-]*)\s*>/;
-const attributePattern = /([^\s=/>]+)\s*=\s*"([^"]*)"/g;
+/*
+ * Scanned with sticky patterns over one index rather than matched as whole
+ * tags. A single pattern for a tag needs a quantifier over a quantified
+ * attribute list — `(?:\s+[^\s=/>]+\s*=\s*"[^"]*")*` — and that is polynomial
+ * backtracking on input it cannot complete (CodeQL js/polynomial-redos). Each
+ * of these matches one token, at one position, with nothing to backtrack into.
+ */
+const closeTagPattern = /<\/([a-zA-Z][\w:.-]*)\s*>/y;
+const openTagPattern = /<([a-zA-Z][\w:.-]*)/y;
+const tagEndPattern = /(\/?)>/y;
+const attributeNamePattern = /[^\s=/>]+/y;
+const attributeAssignPattern = /\s*=\s*"/y;
+const whitespacePattern = /\s*/y;
 
-const readAttributes = (source: string): Record<string, string> => {
-  const attributes: Record<string, string> = {};
-  for (const [, name, value] of source.matchAll(attributePattern)) {
-    attributes[svgAttributeName(name as string)] = value as string;
+const matchAt = (
+  pattern: RegExp,
+  markup: string,
+  at: number,
+): RegExpExecArray | null => {
+  pattern.lastIndex = at;
+  return pattern.exec(markup);
+};
+
+const skipWhitespace = (markup: string, at: number): number =>
+  at + (matchAt(whitespacePattern, markup, at)?.[0].length ?? 0);
+
+const near = (markup: string, at: number): string =>
+  JSON.stringify(markup.slice(at, at + 40));
+
+/**
+ * Reads one element's attributes, from just after its tag name up to the `>`.
+ *
+ * Returns where the tag ended and whether it closed itself.
+ */
+const readAttributes = (
+  markup: string,
+  from: number,
+  attributes: Record<string, string>,
+): { at: number; isSelfClosing: boolean } => {
+  let at = from;
+
+  for (;;) {
+    at = skipWhitespace(markup, at);
+
+    const end = matchAt(tagEndPattern, markup, at);
+    if (end) {
+      return { at: at + end[0].length, isSelfClosing: end[1] === "/" };
+    }
+
+    const name = matchAt(attributeNamePattern, markup, at);
+    if (!name) {
+      throw new Error(`Cannot parse SVG attribute at: ${near(markup, at)}.`);
+    }
+    at += name[0].length;
+
+    const assign = matchAt(attributeAssignPattern, markup, at);
+    if (!assign) {
+      throw new Error(
+        `SVG attribute "${name[0]}" has no double-quoted value at: ${near(markup, at)}.`,
+      );
+    }
+    at += assign[0].length;
+
+    /* Scanned with `indexOf`, not `"[^"]*"` — one pass, nothing to backtrack. */
+    const valueEnd = markup.indexOf('"', at);
+    if (valueEnd === -1) {
+      throw new Error(`Unterminated value for SVG attribute "${name[0]}".`);
+    }
+
+    attributes[svgAttributeName(name[0])] = markup.slice(at, valueEnd);
+    at = valueEnd + 1;
   }
-  return attributes;
 };
 
 /**
@@ -112,10 +173,10 @@ const readAttributes = (source: string): Record<string, string> => {
 export const parseSvg = (markup: string): SvgNode => {
   const roots: SvgNode[] = [];
   const open: SvgNode[] = [];
-  let rest = markup.trim();
+  let at = skipWhitespace(markup, 0);
 
-  while (rest.length > 0) {
-    const close = closeTagPattern.exec(rest);
+  while (at < markup.length) {
+    const close = matchAt(closeTagPattern, markup, at);
     if (close) {
       const node = open.pop();
       if (!node || node.tag !== close[1]) {
@@ -123,27 +184,23 @@ export const parseSvg = (markup: string): SvgNode => {
           `Unbalanced SVG markup: </${close[1]}> closes <${node?.tag ?? "nothing"}>.`,
         );
       }
-      rest = rest.slice(close[0].length).trimStart();
+      at = skipWhitespace(markup, at + close[0].length);
       continue;
     }
 
-    const start = openTagPattern.exec(rest);
+    const start = matchAt(openTagPattern, markup, at);
     if (!start?.[1]) {
-      throw new Error(
-        `Cannot parse SVG markup at: ${JSON.stringify(rest.slice(0, 40))}.`,
-      );
+      throw new Error(`Cannot parse SVG markup at: ${near(markup, at)}.`);
     }
 
-    const node: SvgNode = {
-      tag: start[1],
-      attributes: readAttributes(start[2] ?? ""),
-      children: [],
-    };
+    const node: SvgNode = { tag: start[1], attributes: {}, children: [] };
     (open.at(-1)?.children ?? roots).push(node);
-    if (start[3] !== "/") {
+
+    const tag = readAttributes(markup, at + start[0].length, node.attributes);
+    if (!tag.isSelfClosing) {
       open.push(node);
     }
-    rest = rest.slice(start[0].length).trimStart();
+    at = skipWhitespace(markup, tag.at);
   }
 
   if (open.length > 0) {
