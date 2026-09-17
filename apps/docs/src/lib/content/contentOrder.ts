@@ -32,8 +32,6 @@ export const CONTENT_ORDER: readonly string[] = [
   "/foundations/content-guidelines/informationskonzept",
   "/foundations/content-guidelines/fehlermeldungen",
   "/foundations/content-guidelines/error-handling",
-  "/patterns",
-  "/patterns/codesnippets",
   "/templates",
   "/templates/app-shells",
   "/templates/app-shells/focus-task",
@@ -68,10 +66,10 @@ const segmentsOf = (pathname: string): string[] =>
  * Order two pathnames the way the documentation is authored.
  *
  * Compares them at the level where they first diverge, so a page inherits the
- * position of the section it sits in: `/patterns/patterns/dashboard` precedes
- * `/patterns/codesnippets/multi-upload` because `/patterns/patterns` is listed
- * before `/patterns/codesnippets`. Returns 0 when neither side is ordered at
- * that level — chain a tie-breaker (a label, a filename) behind it.
+ * position of the section it sits in: `/templates/seiten/detailseite` precedes
+ * `/templates/overlays/anlegen-bearbeiten` because `/templates/seiten` is
+ * listed before `/templates/overlays`. Returns 0 when neither side is ordered
+ * at that level — chain a tie-breaker (a label, a filename) behind it.
  */
 export const byContentOrder = (a: string, b: string): number => {
   const segmentsA = segmentsOf(a);
