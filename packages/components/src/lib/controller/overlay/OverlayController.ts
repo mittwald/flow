@@ -75,6 +75,12 @@ export class OverlayController {
    * armed.
    */
   private closeWithoutConfirmationGrants = new Set<object>();
+  /**
+   * The open state a `setOpen` call is currently applying. Handlers run before
+   * `isOpen` is assigned, so a handler that calls `setOpen` again would not be
+   * caught by the equality check at the top and would recurse.
+   */
+  private openStateInFlight: boolean | undefined;
 
   public constructor(options: ConstructorOptions = {}) {
     makeObservable(this, {
@@ -86,6 +92,7 @@ export class OverlayController {
       close: action.bound,
       toggle: action.bound,
       setOpen: action.bound,
+      syncOpen: action.bound,
       setIsContentSuspended: action.bound,
       confirmClose: action.bound,
       cancelConfirmation: action.bound,
@@ -251,10 +258,28 @@ export class OverlayController {
   }
 
   public setOpen(toOpen: boolean, options: CloseOptions = {}): void {
-    if (this.isOpen === toOpen) {
+    if (this.isOpen === toOpen || this.openStateInFlight === toOpen) {
       return;
     }
 
+    this.openStateInFlight = toOpen;
+    try {
+      this.applyOpenState(toOpen, options);
+    } finally {
+      this.openStateInFlight = undefined;
+    }
+  }
+
+  /**
+   * Sets the open state without running any handler. Use it to mirror a
+   * controlled `isOpen` prop, whose change comes from the consumer – notifying
+   * them of their own state would echo it back.
+   */
+  public syncOpen(toOpen: boolean): void {
+    this.isOpen = toOpen;
+  }
+
+  private applyOpenState(toOpen: boolean, options: CloseOptions): void {
     const { bypassConfirmation = false } = options;
 
     if (toOpen === false) {
