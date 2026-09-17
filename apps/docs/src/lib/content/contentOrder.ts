@@ -30,6 +30,7 @@ export const CONTENT_ORDER: readonly string[] = [
   "/foundations/content-guidelines/sprach-guide",
   "/foundations/content-guidelines/informationskonzept",
   "/foundations/content-guidelines/fehlermeldungen",
+  "/foundations/content-guidelines/error-handling",
   "/patterns",
   "/patterns/patterns",
   "/patterns/codesnippets",
