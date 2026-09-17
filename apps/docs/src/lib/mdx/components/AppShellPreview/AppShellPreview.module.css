@@ -12,6 +12,9 @@
  */
 .previewFrame {
   position: relative;
+
+  /* Scope the layer order below (scaler → backdrop → button) to this frame. */
+  isolation: isolate;
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -41,16 +44,20 @@
   position: absolute;
   top: 50%;
   inset-inline-start: 50%;
+
+  /* Above the backdrop (::before) and the scaled-down shell. */
+  z-index: 2;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.15s ease;
 }
 
-/* Dimmed backdrop behind the button, revealed together with it. */
+/* Dimmed backdrop, above the shell scaler but below the button. */
 .previewFrame::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: rgb(0 0 0 / 0.5);
   opacity: 0;
   transition: opacity 0.15s ease;
