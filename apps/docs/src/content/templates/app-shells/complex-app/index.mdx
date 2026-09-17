@@ -11,8 +11,11 @@ description:
 
 # Verwendung
 
-Verwende eine Complex App, wenn viele Bereiche über mehrere Navigationsebenen
-erschlossen werden – die mStudio-typische Form. Für ein kleines Werkzeug mit
+Eine Complex App erschließt viele Bereiche über mehrere Navigationsebenen aus
+globaler Kopfleiste, Seitenleiste und Breadcrumb. Das ist die im mStudio
+typische Form. Verwende sie, wenn eine flache Navigation nicht mehr ausreicht.
+Die gestaffelten Ebenen halten auch eine große Anwendung übersichtlich und
+zeigen dem Nutzer jederzeit, wo er sich befindet. Für ein kleines Werkzeug mit
 wenigen, gleichrangigen Bereichen genügt eine
 [Simple App](/templates/app-shells/simple-app).
 
@@ -21,23 +24,20 @@ wenigen, gleichrangigen Bereichen genügt eine
 # Aufbau
 
 - **Kopfleiste** – Eine
-  [HeaderNavigation](/components/navigation/header-navigation) trägt die oberste
-  Navigationsebene und bereichsübergreifende Funktionen wie den Zugang zum
-  Profil, zum Support oder eine globale Suche. Der Rahmen ist app-eigenes CSS.
-- **Seitenleiste** – Eine [Navigation](/components/navigation/navigation)
-  erschließt den aktuellen Bereich und führt durch seine Unterseiten; der aktive
-  Eintrag ist über `aria-current="page"` ausgezeichnet. Ein Icon je Eintrag ist
-  möglich, aber nicht nötig.
+  [HeaderNavigation](/components/navigation/header-navigation) trägt die globale
+  Navigationsebene und bereichsübergreifende Funktionen.
+- **Seitenleiste** – Eine [Navigation](/components/navigation/navigation) führt
+  durch die Unterseiten des aktuellen Bereichs.
 - **Content Header** – [Breadcrumb](/components/navigation/breadcrumb) und
-  PageTitle (ein [Heading](/components/content/heading) der Ebene 1)
-  unterstützen die Orientierung in der Tiefe.
-- **Content** – Der Inhalt liegt in einer
+  PageTitle (ein [Heading](/components/content/heading) der Ebene 1) orientieren
+  den Nutzer in der Tiefe.
+- **Content** – Der Seiteninhalt liegt in einer
   [LayoutCard](/components/structure/layout-card). Was darin steht, beschreiben
   die Seitentypen: [Dashboard](/templates/seiten/dashboard),
   [Übersichtsseite](/templates/seiten/uebersichtsseite) und
   [Detailseite](/templates/seiten/detailseite).
-- **Fußzeile** – Außerhalb stehen wichtige Verweise, etwa auf Datenschutz oder
-  Impressum, als [Links](/components/navigation/link).
+- **Fußzeile** – [Links](/components/navigation/link) führen zu Verweisen wie
+  Datenschutz oder Impressum.
 
 ---
 
