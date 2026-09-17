@@ -29,16 +29,12 @@ export interface AppShellPreviewProps {
  * The inline frame shows the shell zoomed out (16:9) so its whole layout reads
  * at a glance. It is only a scaled-down picture, so it is `inert`: its controls
  * stay out of the tab order and swallow no clicks, which keeps keyboard users
- * from getting trapped in a preview they cannot really operate. Hovering dims
- * it and reveals a centred "Vorschau" button; a click anywhere on it opens the
- * same live component near-fullscreen in a LightBox, where it is fully
- * interactive.
+ * from getting trapped in a preview they cannot really operate.
  *
- * The full-cover trigger button is invisible and empty; the visible "Vorschau"
- * button is a decorative Flow Button that sits on top with pointer-events off,
- * so clicks fall through to the trigger. They cannot be one element: the
- * trigger spans the whole frame (a click on the dimmed backdrop must open too),
- * and a Flow Button cannot be nested inside another button.
+ * The one real control is the centred "Vorschau" button, which is the LightBox
+ * trigger itself — so it takes keyboard focus and shows its own focus ring.
+ * Hover or focus dims the frame and reveals it; activating it opens the same
+ * live component near-fullscreen in a LightBox, where it is fully interactive.
  */
 export const AppShellPreview = ({
   component: Component,
@@ -51,21 +47,19 @@ export const AppShellPreview = ({
       </div>
       <LightBoxTrigger>
         <Button
-          variant="plain"
+          color="light-static"
+          variant="solid"
           className={styles.previewButton}
           aria-label="Vorschau in Vollbild öffnen"
-        />
+        >
+          Vorschau
+        </Button>
         <LightBox>
           <div className={styles.stage}>
             <Component />
           </div>
         </LightBox>
       </LightBoxTrigger>
-      <div className={styles.previewOverlay} aria-hidden>
-        <Button color="light-static" variant="solid" excludeFromTabOrder>
-          Vorschau
-        </Button>
-      </div>
     </div>
     {files.map((file) => (
       <div key={file.name} className={styles.file}>

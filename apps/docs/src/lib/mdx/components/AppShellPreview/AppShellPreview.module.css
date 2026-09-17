@@ -33,38 +33,34 @@
   pointer-events: none;
 }
 
-/* Full-cover trigger; a click anywhere (button or dimmed backdrop) opens it. */
+/*
+ * The centred trigger button. Hidden until the frame is hovered or the button
+ * takes keyboard focus, then it fades in and shows its own focus ring.
+ */
 .previewButton {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  background: transparent;
-
-  /* Keep the normal cursor — the preview does not need to signal a zoom. */
-  cursor: default;
+  top: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }
 
-/*
- * The dimmed backdrop with the decorative "Vorschau" button. Non-interactive:
- * clicks fall through to the full-cover trigger beneath. Revealed on hover or
- * keyboard focus of the frame.
- */
-.previewOverlay {
+/* Dimmed backdrop behind the button, revealed together with it. */
+.previewFrame::before {
+  content: "";
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: rgb(0 0 0 / 0.5);
   opacity: 0;
   transition: opacity 0.15s ease;
   pointer-events: none;
 }
 
-.previewFrame:hover .previewOverlay,
-.previewFrame:focus-within .previewOverlay {
+.previewFrame:hover .previewButton,
+.previewFrame:focus-within .previewButton,
+.previewFrame:hover::before,
+.previewFrame:focus-within::before {
   opacity: 1;
 }
 
