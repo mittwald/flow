@@ -28,6 +28,19 @@ const squadronFields = () =>
     ),
   ]);
 
+const confirmOnCloseFields = () =>
+  h(Section, null, () => [
+    h(
+      Text,
+      null,
+      () =>
+        "Closing this modal with Escape or with a click outside has to be confirmed. Cancel closes it right away.",
+    ),
+    h(TextField, { isRequired: true }, () =>
+      h(Label, null, () => "Squadron name"),
+    ),
+  ]);
+
 const squadronModalContent = (body: () => VNode | VNode[]) => [
   h(Heading, null, () => "New squadron"),
   h(Content, null, body),
@@ -66,6 +79,13 @@ export const ModalDemo = defineComponent({
             h(Button, { variant: "outline" }, () => "Offcanvas"),
             h(Modal, { offCanvas: true, size: "m" }, () =>
               squadronModalContent(() => [squadronFields(), squadronFields()]),
+            ),
+          ]),
+
+          h(ModalTrigger, null, () => [
+            h(Button, null, () => "Confirm on close"),
+            h(Modal, { confirmOnClose: true }, () =>
+              squadronModalContent(confirmOnCloseFields),
             ),
           ]),
         ]),

@@ -96,6 +96,12 @@ wrong.
   `undefined`** (#2894). Fixed in `remote-core`, but a binding's test suite
   should cover the shape, because the symptom is a component that renders empty
   with no error anywhere.
+- **A slot's result is not normalized until the component reads it.** A binding
+  that inspects or rewrites what a child renders — the props-context stand-in
+  reaching a second level — calls the slot function the vnode carries, and that
+  hands back whatever the author wrote: one node for `() => h(X)`, a list for
+  `() => [h(X)]`. Vue normalizes it only on the way into the component, so the
+  helper has to. It fails as an empty render rather than an error.
 - **Test through the real serializer.** A harness that hands the host the
   receiver's live connection passes values as the very objects the test created,
   and a serializer that drops half of them still goes green. Route through
@@ -115,7 +121,17 @@ so it rebuilds them, and two things make that harder than it looks:
   composite — the `Heading` of a `Modal`, the `Button` of an `Action` — through
   a React context that every `flowComponent` reads. A binding has to reach its
   children directly (Vue: `cloneVNode`), which covers one level rather than the
-  whole subtree.
+  whole subtree. Every rule Flow writes for a _grandchild_ then costs its own
+  code: `Modal` alone has three (`ActionGroup > Action`, `Content > Heading`,
+  `ColumnLayout > AccentBox`), and each of them is a behaviour an extension
+  developer will notice missing rather than a detail.
+- **The composites need Flow's UI text, and it is not published.** A `Modal`
+  with `confirmOnClose` asks "You have unsaved changes…" in the backoffice's
+  language. Those strings live in the component's `locales/*.locale.json`, are
+  compiled into the React bundle by a locale plugin, and no published entry
+  point exposes them — so every binding carries its own copy and drifts when
+  Flow rewords one. A framework-agnostic export of the locale files would fix it
+  for all of them, the same way an icon-path export would.
 - **The composites pass Flow's internal class names.** `Modal` asks for
   `flow--overlay flow--modal flow--modal--size-s` on an `OverlayContent`,
   because that is what makes the host render a modal rather than a bare dialog.

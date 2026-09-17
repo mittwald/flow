@@ -23,6 +23,7 @@ export * from "./overlays/triggers";
 export {
   createOverlayController,
   injectOverlayController,
+  useModalController,
   useOverlayController,
   type OverlayController,
   type UseOverlayControllerOptions,

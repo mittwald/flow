@@ -72,11 +72,21 @@ what this prototype established about supporting a framework at all.
 - **Two things make the rebuilds possible, and both are worth knowing.**
   `mapChildren` (`src/overlays/childProps.ts`) stands in for `PropsContext`: it
   `cloneVNode`s the children the composite was handed, which reaches one level
-  rather than the whole subtree. And the composites pass Flow's own class names
-  (`flow--modal`, `flow--popover`, …) to `OverlayContent`, because that is how
-  the host is asked for a modal rather than a bare dialog. Marking `Modal` and
-  friends `@flr-generate` would remove both — it is the change this layer argues
-  for.
+  rather than the whole subtree. A second level costs an explicit
+  `mapSlottedChildren`, which rebuilds the child around a wrapped default slot —
+  `Modal` needs it to tell the `Action`s inside its `ActionGroup` not to ask for
+  confirmation. **Call the slot's result through `Array.isArray`**: a slot
+  written `() => h(X)` hands back one vnode, because Vue only normalizes a slot
+  when the component itself reads it. And the composites pass Flow's own class
+  names (`flow--modal`, `flow--popover`, …) to `OverlayContent`, because that is
+  how the host is asked for a modal rather than a bare dialog. Marking `Modal`
+  and friends `@flr-generate` would remove both — it is the change this layer
+  argues for.
+- **`Modal confirmOnClose` carries its own translations.** Flow's four strings
+  live in `Modal/locales/*.locale.json`, are compiled into the React bundle by a
+  locale plugin, and are not importable from a published package — so
+  `src/overlays/Modal.ts` repeats them for `de-DE` and `en-US`. A rewording on
+  the Flow side drifts here without failing anything.
 - **A composite's class names are asserted in the browser tests**
   (`Overlays. browser.test.ts`), so a rename in `packages/components` fails here
   rather than in an extension.

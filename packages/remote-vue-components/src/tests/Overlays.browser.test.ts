@@ -37,6 +37,54 @@ const squadronModal = () =>
 
 const dialog = () => page.getByRole("dialog");
 
+/*
+ * A modal that protects unsaved changes, with a close in its body and one in
+ * its footer — the two the confirmation treats differently.
+ */
+const unsavedSquadronModal = () =>
+  h(Modal, { confirmOnClose: true }, () => [
+    h(Heading, null, () => "Unsaved squadron"),
+    h(Content, null, () => [
+      h(Text, null, () => "Rally your pilots."),
+      h(Action, { closeModal: true }, () => h(Button, null, () => "Discard")),
+    ]),
+    h(ActionGroup, null, () =>
+      h(Action, { closeModal: true }, () =>
+        h(Button, { color: "success" }, () => "Create"),
+      ),
+    ),
+  ]);
+
+const openUnsavedSquadron = async () => {
+  renderRemote(
+    defineComponent(
+      () => () =>
+        h(ModalTrigger, null, () => [
+          h(Button, null, () => "Open"),
+          unsavedSquadronModal(),
+        ]),
+    ),
+  );
+
+  await page.getByRole("button", { name: "Open" }).click();
+  await expect
+    .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+    .toBeVisible();
+};
+
+const confirmation = () =>
+  page.getByRole("heading", { name: "Unsaved changes" });
+
+/** No open dialog carries this text any more. */
+const isClosed = (name: string) =>
+  vi.waitFor(() =>
+    expect(
+      [...document.querySelectorAll("[role=dialog]")].some((dialogNode) =>
+        dialogNode.textContent?.includes(name),
+      ),
+    ).toBe(false),
+  );
+
 describe("Modal", () => {
   test("opens from its trigger and renders the host's modal", async () => {
     renderRemote(
@@ -203,5 +251,87 @@ describe("LightBox", () => {
         "Death Star plans",
       ),
     );
+  });
+});
+
+/*
+ * `confirmOnClose` is the one scenario of the React visual corpus the binding
+ * used to render differently. The parity harness compares the host's DOM, which
+ * only proves the parent modal stays open — these cover what the confirmation
+ * itself does.
+ */
+describe("Modal confirmOnClose", () => {
+  test("asks instead of closing", async () => {
+    await openUnsavedSquadron();
+
+    await page.getByRole("button", { name: "Discard" }).click();
+
+    await expect.element(confirmation()).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+      .toBeVisible();
+  });
+
+  test("keeps the modal open when the confirmation is declined", async () => {
+    await openUnsavedSquadron();
+
+    await page.getByRole("button", { name: "Discard" }).click();
+    await expect.element(confirmation()).toBeVisible();
+
+    await page.getByRole("button", { name: "Keep editing" }).click();
+
+    await isClosed("Unsaved changes");
+    await expect
+      .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+      .toBeVisible();
+  });
+
+  test("closes both when the confirmation is accepted", async () => {
+    await openUnsavedSquadron();
+
+    await page.getByRole("button", { name: "Discard" }).click();
+    await expect.element(confirmation()).toBeVisible();
+
+    await page.getByRole("button", { name: "Close" }).click();
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("[role=dialog]")).toBeNull(),
+    );
+  });
+
+  /*
+   * Flow's `Modal` writes `bypassConfirmation` into the props context for the
+   * actions in its footer: those are the deliberate way out, and asking again
+   * would make every "Save" cost two clicks.
+   */
+  test("lets the footer close without asking", async () => {
+    await openUnsavedSquadron();
+
+    await page.getByRole("button", { name: "Create" }).click();
+
+    await vi.waitFor(() =>
+      expect(document.querySelector("[role=dialog]")).toBeNull(),
+    );
+  });
+
+  /*
+   * A dismiss arrives as `openChange(false)` from the host, the same way a
+   * button's close arrives from an `Action` — so it has to be confirmed too, or
+   * Escape becomes the way around the protection.
+   */
+  test("asks when the host dismisses it", async () => {
+    await openUnsavedSquadron();
+
+    await page
+      .getByRole("dialog")
+      .element()
+      .dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      );
+
+    await expect.element(confirmation()).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+      .toBeVisible();
   });
 });

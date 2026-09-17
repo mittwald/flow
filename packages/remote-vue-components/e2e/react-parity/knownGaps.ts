@@ -35,10 +35,7 @@ export const unsupportedScenarios: Record<string, string> = {
  * the real gaps in the binding — and the entries are self-cleaning: one that
  * starts matching fails the run, so a closed gap cannot keep its exemption.
  */
-export const divergingScenarios: Record<string, string> = {
-  "Modal confirmOnClose":
-    "The Vue Modal has no confirmOnClose. The confirmation belongs to Flow's Action model, which the rebuild leaves out — see USAGE.md.",
-};
+export const divergingScenarios: Record<string, string> = {};
 
 /** The corpus appends the environment's label to every test name. */
 const scenarioNameOf = (testName: string): string =>

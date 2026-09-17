@@ -1,4 +1,8 @@
-import { flattenChildren, mapChildren } from "@/overlays/childProps";
+import {
+  flattenChildren,
+  mapChildren,
+  mapSlottedChildren,
+} from "@/overlays/childProps";
 import { describe, expect, test } from "vitest";
 import { createCommentVNode, Fragment, h, type VNode } from "vue";
 
@@ -58,5 +62,53 @@ describe("mapChildren", () => {
     mapChildren([child], () => ({ color: "success" }));
 
     expect(child.props).toEqual({ color: "danger" });
+  });
+});
+
+describe("mapSlottedChildren", () => {
+  const renderedChildren = (node: VNode): VNode[] => {
+    const slots = node.children as { default: () => VNode[] };
+    return slots.default();
+  };
+
+  test("applies the rule to what the child's slot renders", () => {
+    const group = h(Other, { class: "group" }, () => [h(Marker), h(Other)]);
+
+    const mapped = mapSlottedChildren(group, (child) =>
+      child.type === Marker ? { color: "danger" } : undefined,
+    );
+
+    const children = renderedChildren(mapped);
+    expect(children[0]?.props).toMatchObject({ color: "danger" });
+    expect(children[1]?.props).toBeNull();
+  });
+
+  /*
+   * A slot written `() => h(X)` hands back one vnode rather than a list: Vue
+   * only normalizes that when the component itself reads its slots, and this
+   * calls the function the vnode carries.
+   */
+  test("takes a slot that renders a single child", () => {
+    const group = h(Other, null, () => h(Marker));
+
+    const mapped = mapSlottedChildren(group, () => ({ color: "danger" }));
+
+    expect(renderedChildren(mapped)[0]?.props).toMatchObject({
+      color: "danger",
+    });
+  });
+
+  test("keeps the props the child was given", () => {
+    const group = h(Other, { class: "group" }, () => h(Marker));
+
+    expect(mapSlottedChildren(group, () => undefined).props).toMatchObject({
+      class: "group",
+    });
+  });
+
+  test("leaves a child without a default slot alone", () => {
+    const child = h(Marker, { color: "danger" });
+
+    expect(mapSlottedChildren(child, () => ({ color: "success" }))).toBe(child);
   });
 });

@@ -164,9 +164,28 @@ Two differences from the React versions are worth knowing:
   React context to configure the components inside a `Modal` or an `Action`;
   there is no equivalent here, so a `Heading` nested one component deeper than
   the `Modal` expects is left unconfigured. Keep them direct children.
-- **`Action` runs, reports and closes.** It has no confirmation modal and no
-  batching model: an `onAction` drives the button's pending, succeeded and
-  failed states, and `close-modal` closes the surrounding overlay.
+- **`Action` runs, reports and closes.** It has no batching model and no
+  confirmation modal of its own (Flow's `slot="actionConfirm"`): an `onAction`
+  drives the button's pending, succeeded and failed states, and `close-modal`
+  closes the surrounding overlay.
+
+A modal can still protect unsaved changes, the same way React's does:
+
+```vue
+<Modal confirm-on-close>
+  <Heading>New squadron</Heading>
+  <Content>
+    <TextField is-required><Label>Squadron name</Label></TextField>
+  </Content>
+  <ActionGroup>
+    <Action close-modal><Button color="success">Create</Button></Action>
+  </ActionGroup>
+</Modal>
+```
+
+Escape, a click outside and any `Action close-modal` in the body then ask first.
+The actions in the `ActionGroup` do not — the footer is the deliberate way out,
+which is the rule Flow's props context writes as well.
 
 ## What is missing
 
@@ -182,6 +201,7 @@ Two differences from the React versions are worth knowing:
 | Composable                        | What it gives you                                  |
 | --------------------------------- | -------------------------------------------------- |
 | `useOverlayController()`          | open, close and toggle an overlay from anywhere    |
+| `useModalController()`            | the same thing under Flow's name for it            |
 | `useNotificationController()`     | raise and dismiss notifications                    |
 | `useRemoteConnection()`           | the connection to the host, once it is established |
 | `useLanguage()`                   | the backoffice's language                          |

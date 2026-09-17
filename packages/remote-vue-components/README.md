@@ -74,29 +74,29 @@ Flow's remote surface has a second layer: `flr-universal`, the components that
 are React _compositions over_ remote elements rather than remote elements
 themselves. They cannot be generated, so this package rebuilds them in Vue:
 
-| Component                                           | The rebuild                                                                                      |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `Modal`, `Popover`, `LightBox`                      | render `OverlayContent` / `PopoverContent` with Flow's own classes, and configure their children |
-| `ModalTrigger`, `PopoverTrigger`, `LightBoxTrigger` | a `DialogTrigger` whose non-overlay child gets the `onPress` that opens it                       |
-| `useOverlayController`                              | a `ref` plus `provide`/`inject`, instead of a MobX model in React context                        |
-| `Action`, `ActionBatch`                             | run, report pending/succeeded/failed on the button, close the overlay                            |
-| `NotificationProvider`, `useNotificationController` | a reactive list, with the auto-close timer that pauses on hover and focus                        |
-| `DeprecationWarningProvider`, `useWarnDeprecation`  | provide/inject; `RemoteRoot` forwards to the host                                                |
-| `SettingsProvider`, `useSetting`                    | a persisted `ref`, `localStorage` by default                                                     |
-| `CountryOptions`                                    | `Option`s from `country-codes-list`, named by `Intl.DisplayNames`                                |
-| `Wrap`, `BrowserOnly`                               | the same two-line components                                                                     |
-| `useIsMounted`, `useOnChange`, `useLanguage`        | composables                                                                                      |
-| `Form`                                              | `flr-form` has no Flow component behind it, so the generator never sees it                       |
+| Component                                           | The rebuild                                                                                           |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Modal`, `Popover`, `LightBox`                      | render `OverlayContent` / `PopoverContent` with Flow's own classes, and configure their children      |
+| `Modal confirmOnClose`                              | a confirmation modal bound to the parent's `isConfirmingClose`, with its own copy of the four strings |
+| `ModalTrigger`, `PopoverTrigger`, `LightBoxTrigger` | a `DialogTrigger` whose non-overlay child gets the `onPress` that opens it                            |
+| `useOverlayController`                              | a `ref` plus `provide`/`inject`, instead of a MobX model in React context                             |
+| `Action`, `ActionBatch`                             | run, report pending/succeeded/failed on the button, close the overlay                                 |
+| `NotificationProvider`, `useNotificationController` | a reactive list, with the auto-close timer that pauses on hover and focus                             |
+| `DeprecationWarningProvider`, `useWarnDeprecation`  | provide/inject; `RemoteRoot` forwards to the host                                                     |
+| `SettingsProvider`, `useSetting`                    | a persisted `ref`, `localStorage` by default                                                          |
+| `CountryOptions`                                    | `Option`s from `country-codes-list`, named by `Intl.DisplayNames`                                     |
+| `Wrap`, `BrowserOnly`                               | the same two-line components                                                                          |
+| `useIsMounted`, `useOnChange`, `useLanguage`        | composables                                                                                           |
+| `Form`                                              | `flr-form` has no Flow component behind it, so the generator never sees it                            |
 
 Where Flow uses a `PropsContext` to configure the components inside a composite,
 these use `cloneVNode` on the children the composite was handed (`mapChildren`
-in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree.
+in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree —
+a rule for a grandchild costs an explicit `mapSlottedChildren`, which is what
+tells the `Action`s in a modal's footer not to ask for confirmation.
 
 ## Known gaps
 
-- **`Modal` has no `confirmOnClose`.** The confirmation belongs to Flow's
-  `Action` model, which the rebuild leaves out. The parity harness records it as
-  a known divergence.
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its
   own project, not a prototype step.
@@ -110,6 +110,9 @@ in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree.
   (`flow--modal`, `flow--popover`, …). They are how the host is asked to render
   a modal rather than a bare dialog. Making `Modal` and friends `@flr-generate`
   would remove both the class names and most of this layer.
+- **`confirmOnClose` carries its own translations.** Flow's four strings are
+  compiled into the React bundle and are not importable, so `Modal` repeats them
+  in `de-DE` and `en-US`. A rewording on the Flow side drifts here silently.
 - **No SFC build.** The package ships plain TypeScript; a consumer's own build
   handles `.vue` files.
 
@@ -121,5 +124,5 @@ in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree.
   tree, the production serializer, and React's `RemoteRenderer` as the host.
 - `pnpm nx test:parity remote-vue-components` — the React package's whole visual
   corpus, rendered once from React and once from Vue, asserting the host builds
-  the same DOM. 171 of 187 scenarios are compared;
+  the same DOM. 171 of 187 scenarios are compared, and all of them match;
   `e2e/react-parity/knownGaps.ts` lists the rest with a reason.

@@ -36,4 +36,10 @@ export const LoadingIndicator = defineComponent({
   },
 });
 
+/**
+ * The name the React package publishes it under. Exported as well so a port
+ * does not have to rename an import that means the same thing.
+ */
+export const LoadingFallbackTrigger = LoadingIndicator;
+
 export default LoadingIndicator;
