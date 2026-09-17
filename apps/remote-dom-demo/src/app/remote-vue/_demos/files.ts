@@ -5,10 +5,9 @@ import {
   FileField,
   Form,
   Heading,
-  Icon,
+  IconUpload,
   Section,
 } from "@mittwald/flow-remote-vue-components";
-import { iconUpload } from "@/app/remote-vue/_demos/lib/icons";
 import { defineComponent, h, ref } from "vue";
 
 /**
@@ -44,7 +43,7 @@ export const FilesDemo = defineComponent({
         () =>
           h(Section, null, () => [
             h(FileDropZone, null, () => [
-              h(Icon, null, () => iconUpload()),
+              h(IconUpload),
               h(Heading, null, () => "Drop file here"),
               h(FileField, { name: "dropped" }, () =>
                 h(Button, null, () => "Choose file"),

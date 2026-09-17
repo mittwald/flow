@@ -2,11 +2,10 @@ import {
   Button,
   Content,
   Heading,
-  Icon,
+  IconSearch,
   Text,
   TunnelEntry,
 } from "@mittwald/flow-remote-vue-components";
-import { iconSearch } from "@/app/remote-vue/_demos/lib/icons";
 import { defineComponent, h } from "vue";
 
 /**
@@ -21,14 +20,14 @@ export const TunnelDemo = defineComponent({
   setup: () => () => [
     h(Heading, null, () => "Fleet search"),
     h(TunnelEntry, { id: "remote-demo" }, () =>
-      h(Button, null, () => h(Icon, null, () => iconSearch())),
+      h(Button, null, () => h(IconSearch)),
     ),
     h(Content, null, () =>
-      h(
-        Text,
-        null,
-        () => "Find the search button in the menu to search the fleet",
-      ),
+      h(Text, null, () => [
+        "Find the ",
+        h(IconSearch, { size: "s" }),
+        " in the menu to search the fleet",
+      ]),
     ),
   ],
 });

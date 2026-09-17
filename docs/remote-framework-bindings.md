@@ -43,8 +43,17 @@ can drive it.
    config.
 3. **`Form`.** `flr-form` has no Flow component behind it, so the generator
    never emits it.
-4. **A rebuild of `flr-universal`.** See below.
-5. **An emitter in the generator**
+4. **The icon set.** `@mittwald/flow-icons` ships React components, so a binding
+   generates its own from `getIconSources()` in `packages/icons-base` — the
+   default set as data, with no framework in it (Tabler path data, custom SVG
+   parsed into a node tree). What it emits is not a remote element: a Flow icon
+   is `Icon` with an `<svg>` inside, and the host merges its classes, its `role`
+   and its ARIA onto that same `<svg>`. So the binding only has to produce the
+   `<svg>` React produces. Inline the path data rather than depending on
+   `@tabler/icons-react` (74 MB, ~24,000 files), and carry Tabler's MIT notice
+   in the package's LICENSE.
+5. **A rebuild of `flr-universal`.** See below.
+6. **An emitter in the generator**
    (`packages/components/dev/remote-components-generator`) plus the new output
    path in `packages/components/project.json`, so the generated surface stays in
    lockstep with the components.
@@ -131,7 +140,7 @@ so it rebuilds them, and two things make that harder than it looks:
   compiled into the React bundle by a locale plugin, and no published entry
   point exposes them — so every binding carries its own copy and drifts when
   Flow rewords one. A framework-agnostic export of the locale files would fix it
-  for all of them, the same way an icon-path export would.
+  for all of them, the way `getIconSources()` did for the icons.
 - **The composites pass Flow's internal class names.** `Modal` asks for
   `flow--overlay flow--modal flow--modal--size-s` on an `OverlayContent`,
   because that is what makes the host render a modal rather than a bare dialog.
@@ -148,15 +157,15 @@ skip the re-export for names `flr-universal` already carries; the list is
 already parsed for the status registry
 (`dev/status-registry/parseFlrUniversalComponentNames.ts`).
 
-Two things stay out of reach regardless:
+One thing stays out of reach regardless:
 
 - **`List` / `ListItemView` / `typedList`** — 5,500 lines of data sources,
   filters, sorting, pagination and persisted view settings. Its own project.
-- **Icons.** `@mittwald/flow-icons` ships React components. A binding can put a
-  raw `<svg>` inside `Icon` — plain elements travel as remote DOM — but there is
-  no icon set to import. The path data is generated from
-  `packages/icons-base/src/icons.yaml`, so a framework-agnostic export (paths,
-  not components) would serve every binding.
+- **The pro icon set.** `packages/icons-pro` renders FontAwesome Pro, which each
+  consumer licenses itself — so unlike Tabler's, its path data cannot be
+  inlined, and a binding would need that package as a peer dependency.
+  `IconSetProvider`, which swaps one set for the other, is a React context and
+  needs its own rebuild too.
 
 ## Checklist for a new binding package
 

@@ -34,9 +34,6 @@ export class UnsupportedScenarioError extends Error {
   }
 }
 
-const isFlowIcon = (name: string | undefined): boolean =>
-  name !== undefined && /^Icon[A-Z]/.test(name);
-
 /**
  * A component from outside Flow, rendered to the `<svg>` it produces — or
  * `undefined` when it produces something else.
@@ -92,60 +89,6 @@ const domToVNode = (node: Node): VueChild | undefined => {
     .filter((child): child is VueChild => child !== undefined);
 
   return h(node.tagName.toLowerCase(), props, children);
-};
-
-/**
- * A React icon, as the SVG inside a Vue `Icon`.
- *
- * `IconInfo` and friends are `Icon` wrapping a path set — which is why the
- * bridge is not "render it to markup and hand that to the host": an `<svg>`
- * placed bare never gets the classes a surrounding component's props context
- * puts on `Icon` (`flow--button--icon`), and the host renders a subtly
- * different tree. Wrapping is also exactly what an extension has to do with a
- * foreign SVG; see the package README.
- *
- * Flow's own classes and the inline style are stripped from the markup: the
- * host's `Icon` derives both from the props forwarded below, and a `style`
- * baked into the SVG would reach it a second time — as a string, which is not
- * what React accepts for a `style` prop ("expects a mapping ... not a
- * string").
- */
-const flowIconVNode = (element: ReactElement): VNode => {
-  const root = parseElement(renderToStaticMarkup(element));
-
-  if (!root) {
-    throw new UnsupportedScenarioError("an icon whose markup did not parse");
-  }
-
-  root.removeAttribute("style");
-
-  const ownClasses = (root.getAttribute("class") ?? "")
-    .split(/\s+/)
-    .filter((token) => token.length > 0 && !token.startsWith("flow--"));
-  if (ownClasses.length > 0) {
-    root.setAttribute("class", ownClasses.join(" "));
-  } else {
-    root.removeAttribute("class");
-  }
-
-  const svg = domToVNode(root);
-  if (typeof svg !== "object") {
-    throw new UnsupportedScenarioError("an icon that rendered no element");
-  }
-
-  const { props } = element as ReactElement & {
-    props: Record<string, unknown>;
-  };
-  const iconProps = Object.fromEntries(
-    Object.entries(props).filter(([name]) => name !== "children"),
-  );
-
-  const Icon = vueComponents.Icon;
-  if (!Icon) {
-    throw new UnsupportedScenarioError("no Vue Icon to wrap an icon in");
-  }
-
-  return h(Icon, iconProps, { default: () => [svg] });
 };
 
 /**
@@ -231,10 +174,6 @@ export const toVNode = (element: ReactElement): VNode => {
   }
 
   const name = nameOfReactComponent.get(type);
-
-  if (isFlowIcon(name)) {
-    return flowIconVNode(element);
-  }
 
   if (name === undefined || vueComponents[name] === undefined) {
     /*

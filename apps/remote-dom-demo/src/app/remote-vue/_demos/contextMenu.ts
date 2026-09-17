@@ -7,14 +7,13 @@ import {
   ContextMenuTrigger,
   Header,
   Heading,
-  Icon,
+  IconApp,
   MenuItem,
   Modal,
   ModalTrigger,
   Section,
   Text,
 } from "@mittwald/flow-remote-vue-components";
-import { iconApp } from "@/app/remote-vue/_demos/lib/icons";
 import { defineComponent, h } from "vue";
 
 const stationActions = () =>
@@ -22,7 +21,7 @@ const stationActions = () =>
     h(Button, null, () => "Station actions"),
     h(ContextMenu, { onAction: (item: unknown) => console.log(item) }, () => [
       h(MenuItem, null, () => [
-        h(Icon, null, () => iconApp()),
+        h(IconApp),
         h(Text, null, () => "Fire superlaser"),
       ]),
       h(MenuItem, null, () => "Rotate station"),

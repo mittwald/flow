@@ -1,6 +1,12 @@
 export * from "./auto-generated";
 
 /*
+ * Flow's icon set, as Vue components. Generated from the same `icons.yaml` the
+ * React sets come from — see this package's AGENTS.md.
+ */
+export * from "./icons";
+
+/*
  * The Vue rebuilds of Flow's React-only surface (`flr-universal`). Those are
  * React compositions over remote elements rather than remote elements
  * themselves, so they cannot be generated — see this package's AGENTS.md.

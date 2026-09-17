@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-vue-components",
-  "version": "1.2.0-next.53",
+  "version": "1.2.0-next.57",
   "type": "module",
   "description": "Vue components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -26,7 +26,8 @@
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
-    "clean": "rimraf dist",
+    "build:icons": "tsx dev/icons/generate.ts",
+    "clean": "rimraf dist src/icons/components/*",
     "test:browser": "vitest run --project=browser --browser.headless --passWithNoTests",
     "test:browser:dev": "vitest dev --project=browser",
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
     "@mittwald/flow-core": "workspace:*",
+    "@mittwald/flow-icons-base": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",

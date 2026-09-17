@@ -4,12 +4,11 @@ import {
   ChartGrid,
   ChartTooltip,
   Heading,
-  Icon,
+  IconMonitoring,
   IllustratedMessage,
   XAxis,
   YAxis,
 } from "@mittwald/flow-remote-vue-components";
-import { iconMonitoring } from "@/app/remote-vue/_demos/lib/icons";
 import { defineComponent, h } from "vue";
 
 const data = [
@@ -32,7 +31,7 @@ const chart = (chartData: Record<string, unknown>[]) =>
        */
       emptyView: () =>
         h(IllustratedMessage, null, () => [
-          h(Icon, null, () => iconMonitoring()),
+          h(IconMonitoring),
           h(Heading, null, () => "No data available"),
         ]),
       default: () => [

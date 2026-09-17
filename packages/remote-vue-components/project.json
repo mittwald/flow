@@ -1,5 +1,5 @@
 {
-  "implicitDependencies": ["components"],
+  "implicitDependencies": ["components", "icons-base"],
   "name": "remote-vue-components",
   "projectType": "library",
   "sourceRoot": "packages/remote-vue-components/src",
@@ -8,12 +8,22 @@
       "inputs": ["default", "{projectRoot}/src/**/*"],
       "outputs": ["{projectRoot}/dist"],
       "dependsOn": [
+        "build:icons",
         "^build",
         {
           "projects": ["components"],
           "target": "build:remote-components"
         }
       ]
+    },
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/packages/icons-base/src/**/*",
+        "{projectRoot}/dev/icons/**/*",
+        "{workspaceRoot}/pnpm-lock.yaml"
+      ],
+      "outputs": ["{projectRoot}/src/icons/components/**/*"]
     },
     "test:browser": {
       "inputs": [

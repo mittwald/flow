@@ -1,12 +1,11 @@
 import {
   Heading,
-  Icon,
+  IconDanger,
   IllustratedMessage,
   ImageCropper,
   Section,
   Text,
 } from "@mittwald/flow-remote-vue-components";
-import { iconMonitoring } from "@/app/remote-vue/_demos/lib/icons";
 import { defineComponent, h, ref } from "vue";
 
 const workingImage =
@@ -63,7 +62,7 @@ export const ImageCropperDemo = defineComponent({
           {
             errorView: () =>
               h(IllustratedMessage, { color: "danger" }, () => [
-                h(Icon, null, () => iconMonitoring()),
+                h(IconDanger),
                 h(Heading, null, () => "Image unavailable"),
                 h(Text, null, () => "Please upload the image again."),
               ]),

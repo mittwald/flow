@@ -4,10 +4,9 @@ How to build an **mStudio extension** with
 `@mittwald/flow-remote-vue-components`.
 
 > **Experimental.** Published so extensions can be built against it, but without
-> a stability promise yet: the API may change while `List` and a
-> framework-agnostic icon set are missing. Everything else in this repository
-> follows deprecate-don't-break — this package will too, once those gaps are
-> closed and the surface is settled.
+> a stability promise yet: the API may change while `List` is missing.
+> Everything else in this repository follows deprecate-don't-break — this
+> package will too, once those gaps are closed and the surface is settled.
 
 This package's components are generated from
 [`@mittwald/flow-react-components`](https://www.npmjs.com/package/@mittwald/flow-react-components)
@@ -103,9 +102,22 @@ output does not survive the boundary as data:
 
 ## Icons
 
-Flow's icon sets ship as React components, so there is no Vue equivalent to
-import. Put an SVG inside `Icon` — plain elements travel through the remote tree
-like any other node, and `Icon` gives them Flow's sizing and colour:
+Flow's icons are Vue components here, under the same names as in React:
+
+```vue
+<Button>
+  <IconDownload />
+  Download
+</Button>
+```
+
+They take Flow's `Icon` props (`size`, `color`, `aria-label`) and come from the
+same package as everything else.
+
+For an icon that is **not** in Flow's set — including anything from
+`@mittwald/flow-icons-pro`, which renders FontAwesome Pro and has no Vue build —
+put the SVG inside `Icon` yourself. Plain elements travel through the remote
+tree like any other node, and `Icon` gives them Flow's sizing and colour:
 
 ```vue
 <Icon>

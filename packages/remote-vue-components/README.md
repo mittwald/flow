@@ -1,10 +1,9 @@
 # @mittwald/flow-remote-vue-components
 
 > **Experimental.** Published so extensions can be built against it, but without
-> a stability promise yet: the API may change while `List` and a
-> framework-agnostic icon set are missing. Everything else in this repository
-> follows deprecate-don't-break — this package will too, once those gaps are
-> closed and the surface is settled.
+> a stability promise yet: the API may change while `List` is missing.
+> Everything else in this repository follows deprecate-don't-break — this
+> package will too, once those gaps are closed and the surface is settled.
 
 Vue API for the Flow remote surface — the counterpart of
 [`@mittwald/flow-remote-react-components`](../remote-react-components). The
@@ -68,6 +67,18 @@ minus what cannot cross the boundary.
 (`pnpm nx build:remote-components components`) — one line per `@flr-generate`
 component, 134 of them.
 
+`src/icons/**` comes from `packages/icons-base`
+(`pnpm nx build:icons remote-vue-components`) — Flow's 132 icons as Vue
+components, from the same `icons.yaml` the React sets are built from. The Tabler
+path data is inlined, so nothing has to install `@tabler/icons-react`.
+
+```vue
+<Button>
+  <IconDownload />
+  Download
+</Button>
+```
+
 ## What is hand-written
 
 Flow's remote surface has a second layer: `flr-universal`, the components that
@@ -100,9 +111,10 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its
   own project, not a prototype step.
-- **No icon set.** Flow's icons are React components. A Vue app can put a raw
-  `<svg>` inside `Icon`, which travels as remote DOM, but there is no
-  `@mittwald/flow-icons` for Vue.
+- **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
+  each consumer licenses itself and which therefore cannot be inlined the way
+  Tabler's is. There is no Vue `IconSetProvider` either. An icon outside Flow's
+  set still goes in as a raw `<svg>` inside `Icon`.
 - **No `IntlProvider`.** React's sets react-aria's locale for what renders
   locally; a Vue app renders nothing locally. `useLanguage()` reports the host's
   language instead.

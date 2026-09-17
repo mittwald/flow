@@ -1,10 +1,11 @@
 import { h, type VNode } from "vue";
 
 /*
- * Flow's icons are React components, so a Vue app cannot use them. What it can
- * do is put a raw `<svg>` inside `Icon`: plain elements travel through the
- * remote tree like any other node, and `Icon` gives them Flow's sizing and
- * colour. These are Tabler's paths, drawn by hand.
+ * Icons that are *not* in Flow's set. Flow's own ship as Vue components now
+ * (`IconSearch`, `IconApp`, …), but the React demos also reach for Tabler
+ * directly, and a raw `<svg>` inside `Icon` is how any extension does that:
+ * plain elements travel through the remote tree like any other node, and `Icon`
+ * gives them Flow's sizing and colour. These are Tabler's paths, drawn by hand.
  */
 const tablerIcon = (...paths: string[]): VNode =>
   h(
@@ -21,16 +22,6 @@ const tablerIcon = (...paths: string[]): VNode =>
     paths.map((d) => h("path", { d })),
   );
 
-export const iconSearch = () =>
-  tablerIcon("M10 3a7 7 0 1 0 0 14a7 7 0 0 0 0 -14", "M21 21l-6 -6");
-
-export const iconUpload = () =>
-  tablerIcon(
-    "M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2",
-    "M7 9l5 -5l5 5",
-    "M12 4l0 12",
-  );
-
 export const iconApp = () =>
   tablerIcon(
     "M4 4h6v6h-6z",
@@ -38,8 +29,6 @@ export const iconApp = () =>
     "M4 14h6v6h-6z",
     "M14 14h6v6h-6z",
   );
-
-export const iconMonitoring = () => tablerIcon("M3 12h4l3 8l4 -16l3 8h4");
 
 export const iconMoodSad = () =>
   tablerIcon(

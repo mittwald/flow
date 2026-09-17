@@ -2,8 +2,8 @@
 
 Vue API used _inside_ remote apps, the counterpart of
 [`remote-react-components`](../remote-react-components/AGENTS.md). **Published,
-but experimental** — no stability promise until `List` and an icon set exist.
-Read [README.md](./README.md) for the shape of the API and the gaps, and
+but experimental** — no stability promise until `List` exists. Read
+[README.md](./README.md) for the shape of the API and the gaps, and
 [docs/remote-framework-bindings.md](../../docs/remote-framework-bindings.md) for
 what this prototype established about supporting a framework at all.
 
@@ -23,6 +23,24 @@ what this prototype established about supporting a framework at all.
   instead of having the generator write an event map into every file. Only the
   **slot names** are emitted, because a Vue component declares its slots as a
   _type_ and the element carries them at runtime only.
+- **`src/icons/components/**` is generated too**, by `dev/icons/generate.ts`
+  from `getIconSources()` in `icons-base` — the same `icons.yaml` the React sets
+  come from. `pnpm nx build:icons remote-vue-components`, committed like every
+  other generated artifact. The Tabler path data is **inlined** for the reason
+  it is inlined in `@mittwald/flow-icons`: a consumer should not have to install
+  `@tabler/icons-react` (74 MB, ~24,000 files). That inlining is what puts the
+  Tabler MIT notice in this package's LICENSE.
+  - **A Flow icon is not a remote element.** It is `Icon` with an `<svg>` inside
+    it, and the host merges `flow--icon…`, `role` and the ARIA onto that same
+    `<svg>`. So the binding's whole job is to emit the `<svg>` React emits —
+    Tabler's attribute set, the path data, the `tabler-icon…` classes.
+  - **Every SVG attribute is forced (`^`)**, because Vue would otherwise set a
+    matching DOM property, and an SVG element's properties are read-only
+    `SVGAnimatedLength`s rather than the strings the host has to receive.
+  - **No pro set.** `packages/icons-pro` renders FontAwesome Pro, which each
+    consumer licenses itself and which therefore cannot be inlined. A Vue pro
+    set would need that package as a peer dependency, and `IconSetProvider` has
+    no Vue counterpart either.
 - **The component type is annotated, not inferred.** Four chart components
   (`Area`, `CartesianChart`, `ChartTooltip`, `Line`) reference a type that is
   not reachable from this package's module graph, and inference fails with
