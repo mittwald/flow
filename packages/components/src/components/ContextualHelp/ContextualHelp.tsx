@@ -6,7 +6,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
 
-export type ContextualHelpProps = Omit<PopoverProps, "withTip" | "modality">;
+export type ContextualHelpProps = Omit<PopoverProps, "withTip">;
 
 /** @flr-generate all */
 export const ContextualHelp = flowComponent("ContextualHelp", (props) => {

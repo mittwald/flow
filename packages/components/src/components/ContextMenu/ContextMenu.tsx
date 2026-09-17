@@ -20,7 +20,7 @@ import { OverlayContentSuspendWatcher } from "@/lib/controller/overlay/OverlayCo
 
 export interface ContextMenuProps
   extends
-    Omit<PopoverProps, "withTip" | "modality">,
+    Omit<PopoverProps, "withTip">,
     Pick<
       Aria.MenuProps<MenuItemProps>,
       | "onAction"
