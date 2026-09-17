@@ -16,6 +16,7 @@ export {
 } from "./components/CountryOptions.svelte";
 export { default as DeprecationWarningProvider } from "./components/DeprecationWarningProvider.svelte";
 export { default as Form } from "./components/Form.svelte";
+export { default as IntlProvider } from "./components/IntlProvider.svelte";
 export { default as LoadingIndicator } from "./components/LoadingIndicator.svelte";
 export { default as NotificationProvider } from "./components/NotificationProvider.svelte";
 export { default as RemoteRoot } from "./components/RemoteRoot.svelte";
@@ -58,6 +59,7 @@ export {
   useWarnDeprecation,
   type DeprecationWarningHandler,
 } from "./lib/deprecation.js";
+export { useIsMounted, useOnChange } from "./lib/lifecycle.svelte.js";
 export {
   RemoteContext,
   useLanguage,

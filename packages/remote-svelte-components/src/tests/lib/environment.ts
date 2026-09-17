@@ -10,6 +10,16 @@ import { createSerializedReceiver } from "./serializedConnection.js";
 interface RemoteEnvironment {
   /** The host's output — what a real mStudio backoffice would show. */
   host: HTMLElement;
+  /**
+   * The remote app's own tree of `flr-*` elements.
+   *
+   * Two things need it. A property is a property: `value` on an `Option` never
+   * becomes an attribute, so reading it as one would pass on a binding that
+   * never sent it. And the remote tree is mirrored into the same document, so a
+   * text query matches twice — telling the host's node from the mirror needs
+   * this one.
+   */
+  remote: HTMLElement;
   unmount: () => void;
 }
 
@@ -61,6 +71,7 @@ export const renderRemote = (
 
   const environment: RemoteEnvironment = {
     host,
+    remote,
     unmount: () => {
       void unmount(app);
       reactRoot.unmount();

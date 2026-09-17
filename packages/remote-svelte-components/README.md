@@ -89,6 +89,8 @@ themselves. They cannot be generated, so this package rebuilds them in Svelte:
 | `CountryOptions`                                    | `Option`s from `country-codes-list`, named by `Intl.DisplayNames`                                  |
 | `Wrap`, `BrowserOnly`                               | the same two-line components — `Wrap` with a snippet signature, see below                          |
 | `useLanguage`, `useRemoteConnection`                | context accessors returning a reactive box                                                         |
+| `useIsMounted`, `useOnChange`                       | a rune box, and an `$effect` that skips its first run                                              |
+| `IntlProvider`                                      | renders its children — see [Known gaps](#known-gaps)                                               |
 | `Form`                                              | `flr-form` has no Flow component behind it, so the generator never sees it                         |
 
 Where Flow uses a `PropsContext` to configure the components inside a composite,
@@ -115,13 +117,13 @@ measured against rather than asserted from.
   marks the render tag with a comment anchor, and remote-dom carries a comment
   across as a child — so `extractTextFromFirstChild` ("exactly one text child")
   gives up and `Initials`, `Markdown` and `Truncate` render empty. **11 of the
-  28 failures.** Not fixable inside the binding: an anchor is where Svelte
+  27 failures.** Not fixable inside the binding: an anchor is where Svelte
   inserts and removes, so it can be neither moved nor deleted. It needs a
   decision on the Flow side — either remote-dom stops carrying comments, or
   Flow's child inspection ignores them. A component with _no_ children is fine:
   the generated files write their tag literally, which has no anchor at all.
-- **A scenario that defines its own React component cannot be rebuilt.** **16 of
-  the 28**: a `Wrapper` or `TestComponent` written in the scenario file, usually
+- **A scenario that defines its own React component cannot be rebuilt.** **15 of
+  the 27**: a `Wrapper` or `TestComponent` written in the scenario file, usually
   holding `useState` and driving the interaction. That is React code rather than
   a Flow component, and nothing about the binding is measured there — ten of
   them are `List`, which this package does not rebuild anyway.
@@ -134,9 +136,10 @@ measured against rather than asserted from.
 - **No icon set.** Flow's icons are React components. A Svelte app can put a raw
   `<svg>` inside `Icon`, which travels as remote DOM, but there is no
   `@mittwald/flow-icons` for Svelte.
-- **No `IntlProvider`.** React's sets react-aria's locale for what renders
-  locally; a Svelte app renders nothing locally. `useLanguage()` reports the
-  host's language instead.
+- **`IntlProvider` renders its children and nothing else.** React's is
+  react-aria's `I18nProvider`, a context for what renders _locally_ — and a
+  Svelte app renders nothing locally. It exists so the documented surface is
+  complete; `useLanguage()` is how to read the locale the host renders in.
 - **The rebuilt compositions repeat Flow's internal class names**
   (`flow--modal`, `flow--popover`, …). They are how the host is asked to render
   a modal rather than a bare dialog. Making `Modal` and friends `@flr-generate`
@@ -164,5 +167,5 @@ so themselves: `list` and `list-selection` need Flow's `List`, and
   `remote-react-components`**, all 84 files, run through this binding and
   compared against what the React binding renders today. Neither copied nor
   ported: the files are reached where they are and their environment import is
-  redirected. **159 of its 187 scenarios pass**, against a reference run green
-  at 187/187. What the other 28 say is in [Known gaps](#known-gaps).
+  redirected. **160 of its 187 scenarios pass**, against a reference run green
+  at 187/187. What the other 27 say is in [Known gaps](#known-gaps).

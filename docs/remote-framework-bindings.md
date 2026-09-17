@@ -239,7 +239,7 @@ binding's own machinery rather than about agreeing with React.
 
 ### What the runs reported
 
-The Svelte binding renders **159 of the corpus's 187 scenarios** identically to
+The Svelte binding renders **160 of the corpus's 187 scenarios** identically to
 React. Getting there was mostly the harness learning what is and is not a
 difference; two findings were about the binding itself, and both generalize:
 
@@ -260,7 +260,7 @@ difference; two findings were about the binding itself, and both generalize:
   or Flow's own child inspection. Vue's `v-if` leaves comment placeholders too,
   so it is not a Svelte question.
 
-The rest is honest surface: 16 scenarios define their own React component (a
+The rest is honest surface: 15 scenarios define their own React component (a
 `Wrapper` holding `useState`, ten of them in `List`), and one uses a `Modal`
 feature the rebuild does not have.
 
