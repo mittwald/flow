@@ -3,12 +3,10 @@
     Button,
     Content,
     Heading,
-    Icon,
+    IconSearch,
     Text,
     TunnelEntry,
   } from "@mittwald/flow-remote-svelte-components";
-  import { iconSearch } from "./lib/icons.js";
-  import TablerIcon from "./lib/TablerIcon.svelte";
 </script>
 
 <!--
@@ -18,7 +16,7 @@
 -->
 <Heading>Fleet search</Heading>
 <TunnelEntry id="remote-demo">
-  <Button><Icon><TablerIcon paths={iconSearch} /></Icon></Button>
+  <Button><IconSearch /></Button>
 </TunnelEntry>
 <Content>
   <Text>Find the search button in the menu to search the fleet</Text>

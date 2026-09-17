@@ -6,11 +6,9 @@
     FileField,
     Form,
     Heading,
-    Icon,
+    IconUpload,
     Section,
   } from "@mittwald/flow-remote-svelte-components";
-  import { iconUpload } from "./lib/icons.js";
-  import TablerIcon from "./lib/TablerIcon.svelte";
 
   /*
    * The React page wires the fields through react-hook-form; there is no Svelte
@@ -37,7 +35,7 @@
 <Form onSubmit={(data) => void submit(data)}>
   <Section>
     <FileDropZone>
-      <Icon><TablerIcon paths={iconUpload} /></Icon>
+      <IconUpload />
       <Heading>Drop file here</Heading>
       <FileField name="fileDrop"><Button>Choose file</Button></FileField>
     </FileDropZone>

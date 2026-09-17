@@ -1,6 +1,13 @@
 export * from "./auto-generated/index.js";
 
 /*
+ * The icon set, generated from the same `icons.yaml` as the React one — only
+ * the default (Tabler) set, and the custom SVGs. FontAwesome is a Pro package
+ * each consumer licenses itself and has no Svelte binding here.
+ */
+export * from "./icons/index.js";
+
+/*
  * The Svelte rebuilds of Flow's React-only surface (`flr-universal`). Those are
  * React compositions over remote elements rather than remote elements
  * themselves, so they cannot be generated — see this package's AGENTS.md.
@@ -16,6 +23,7 @@ export {
 } from "./components/CountryOptions.svelte";
 export { default as DeprecationWarningProvider } from "./components/DeprecationWarningProvider.svelte";
 export { default as Form } from "./components/Form.svelte";
+export { default as IconSetProvider } from "./components/IconSetProvider.svelte";
 export { default as IntlProvider } from "./components/IntlProvider.svelte";
 export { default as LoadingIndicator } from "./components/LoadingIndicator.svelte";
 export { default as NotificationProvider } from "./components/NotificationProvider.svelte";
@@ -60,6 +68,13 @@ export {
   type DeprecationWarningHandler,
 } from "./lib/deprecation.js";
 export { useIsMounted, useOnChange } from "./lib/lifecycle.svelte.js";
+export {
+  useContextIcon,
+  type FlowIconComponent,
+  type IconSet,
+} from "./lib/iconSet.js";
+export type { FlowIconName } from "./icons/iconNames.js";
+export type { FlowIconProps } from "./lib/iconProps.js";
 export {
   RemoteContext,
   useLanguage,

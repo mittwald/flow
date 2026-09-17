@@ -1406,6 +1406,9 @@ importers:
       '@mittwald/flow-core':
         specifier: workspace:*
         version: link:../core
+      '@mittwald/flow-icons-base':
+        specifier: workspace:*
+        version: link:../icons-base
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../components
@@ -1463,6 +1466,9 @@ importers:
       svelte-check:
         specifier: ^4.7.0
         version: 4.7.6(@typescript/typescript6@6.0.2)(picomatch@4.0.7)(svelte@5.57.0(@typescript-eslint/types@8.70.0))
+      tsx:
+        specifier: ^4.23.13
+        version: 4.23.13
       typescript:
         specifier: npm:@typescript/typescript6@^6.0.2
         version: '@typescript/typescript6@6.0.2'

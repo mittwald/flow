@@ -28,6 +28,19 @@ what the bindings established about supporting a framework at all.
   because that is the attribute a Svelte author writes.
   `RemoteRendering.browser.test.ts` guards the dashed props; a well-meant
   normalization would break them silently.
+- **`src/icons/**` is generated too**
+  (`pnpm nx build:icons remote-svelte-components`), from `icons.yaml` by
+  `packages/icons-base/src/svelteTemplate.ts`. Same reason as the components:
+  the paths are written out literally, because a `{#each}` over them would leave
+  a comment anchor inside the `<svg>`. Shaped after `packages/components`, not
+  `packages/icons` — an icon wraps `Icon`, so `size` is `Icon`'s prop. The
+  corpus is what proves them right: every scenario with an icon renders
+  identically to React.
+- **An icon consults `IconSetProvider` before falling back to its own `<svg>`**,
+  the way React's generated icons call `useContextIcon`. The branch is written
+  _outside_ `<Icon>`: `Icon` takes `Children.toArray(children)[0]` and would
+  survive an anchor, but keeping blocks out of remote elements is the rule. A
+  replacement is rendered with no props — `size` and `color` belong to `Icon`.
 - **A generated component writes its tag literally, and that is load-bearing.**
   `<svelte:element this={tag}>` always inserts a text anchor into the element,
   and remote-dom carries every node across as a child — so a component that

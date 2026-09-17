@@ -93,6 +93,26 @@ themselves. They cannot be generated, so this package rebuilds them in Svelte:
 | `IntlProvider`                                      | renders its children — see [Known gaps](#known-gaps)                                               |
 | `Form`                                              | `flr-form` has no Flow component behind it, so the generator never sees it                         |
 
+The **icon set** is generated as well, from the same `icons.yaml` as React's
+(`pnpm nx build:icons remote-svelte-components`). An icon is a wrapper around
+`Icon` whose child is the raw `<svg>`, exactly as in `packages/components` — so
+`size` is `Icon`'s `"s" | "m" | "l"`, not a pixel count:
+
+```svelte
+<IconStar size="s" color="danger" />
+```
+
+`IconSetProvider` replaces the icons a set names, for everything below it —
+React's exists so mStudio can swap in the FontAwesome Pro set; here it is how an
+app brings its own. The replacement is rendered as `Icon`'s child, so it keeps
+Flow's sizing, colour and classes:
+
+```svelte
+<IconSetProvider set={{ Info: MyOwnInfoIcon }}>
+  <IconInfo size="s" />
+</IconSetProvider>
+```
+
 Where Flow uses a `PropsContext` to configure the components inside a composite,
 so does this package — `setContext`/`getContext` is the same mechanism React's
 context is, so it reaches the whole subtree, and every generated component
@@ -133,9 +153,11 @@ measured against rather than asserted from.
 - **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
   data sources, filters, sorting, pagination and persisted view settings — its
   own project, not a prototype step.
-- **No icon set.** Flow's icons are React components. A Svelte app can put a raw
-  `<svg>` inside `Icon`, which travels as remote DOM, but there is no
-  `@mittwald/flow-icons` for Svelte.
+- **The icon set is the default one only.** All 132 icons of `icons.yaml` are
+  generated (Tabler plus the three custom SVGs), but there is no pro set:
+  FontAwesome is imported at runtime from a package each consumer licenses
+  itself, and it has no Svelte binding here. For an icon Flow does not ship, put
+  a raw `<svg>` inside `Icon` — it travels as remote DOM.
 - **`IntlProvider` renders its children and nothing else.** React's is
   react-aria's `I18nProvider`, a context for what renders _locally_ — and a
   Svelte app renders nothing locally. It exists so the documented surface is

@@ -6,13 +6,11 @@
     CartesianGrid,
     ChartTooltip,
     Heading,
+    IconMonitoring,
     IllustratedMessage,
-    Icon,
     XAxis,
     YAxis,
   } from "@mittwald/flow-remote-svelte-components";
-  import { iconMonitoring } from "./lib/icons.js";
-  import TablerIcon from "./lib/TablerIcon.svelte";
 
   const data = [
     { time: "0:00", Shields: 40, Hull: 24 },
@@ -31,7 +29,7 @@
 -->
 {#snippet emptyView()}
   <IllustratedMessage>
-    <Icon><TablerIcon paths={iconMonitoring} /></Icon>
+    <IconMonitoring />
     <Heading>No data available</Heading>
   </IllustratedMessage>
 {/snippet}

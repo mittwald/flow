@@ -8,22 +8,20 @@
     ContextMenuTrigger,
     Header,
     Heading,
-    Icon,
+    IconApp,
     MenuItem,
     Modal,
     ModalTrigger,
     Section,
     Text,
   } from "@mittwald/flow-remote-svelte-components";
-  import { iconApp } from "./lib/icons.js";
-  import TablerIcon from "./lib/TablerIcon.svelte";
 </script>
 
 {#snippet stationActions()}
   <ContextMenuTrigger>
     <Button>Station actions</Button>
     <ContextMenu onAction={(item) => console.log(item)}>
-      <MenuItem><Icon><TablerIcon paths={iconApp} /></Icon><Text>Fire superlaser</Text></MenuItem>
+      <MenuItem><IconApp /><Text>Fire superlaser</Text></MenuItem>
       <MenuItem>Rotate station</MenuItem>
       <MenuItem>Scan sector</MenuItem>
       <MenuItem>Self-destruct</MenuItem>
