@@ -190,8 +190,13 @@ Two things stay out of reach regardless:
 
   Normalize what two renders of the _same_ tree differ in — react-aria's
   generated ids and collection keys, measured `style` values, attribute and
-  class order — or the comparison reports noise. Everything else stays, and that
-  is where a dropped prop or a mis-named event surfaces. Keep the gaps in a list
+  class order — or the comparison reports noise. **Reading "until the output
+  stops changing" is not enough**: it also stops changing while the host waits
+  on an async job of its own (a policy validation, a fetch), so each pass gets
+  its own coin flip on a class that no remote tree decides. Wait those states
+  out by their marker rather than normalizing the marker away — one that never
+  clears then still reaches the comparison. Everything else stays, and that is
+  where a dropped prop or a mis-named event surfaces. Keep the gaps in a list
   with reasons rather than skipping silently, and make the entries
   self-cleaning: one that starts matching should fail, so a closed gap cannot
   keep its exemption.

@@ -61,6 +61,15 @@ what this prototype established about supporting a framework at all.
     says so.
   - **Nothing is committed.** The references are written from React on every
     run, so they cannot drift into a second source of truth.
+  - **Stable is not settled.** Each pass reads the host's DOM until it stops
+    changing — but the output also stops changing _while_ the host waits on an
+    async job of its own, and the two passes then each get their own coin flip.
+    `PasswordCreationField` validates its empty value on mount and holds
+    `complexity-indicator--loading` until that resolves, which outlasts the
+    sampling window on a loaded runner and fails the run on a class no remote
+    tree decides. `pendingMarkers` in `environments.ts` waits those out; add to
+    it rather than normalizing the class away in `hostHtml.ts`, so a marker that
+    never clears still reaches the comparison.
   - `knownGaps.divergingScenarios` entries are **self-cleaning**: one that
     starts matching fails the run, naming the entry to delete.
 - **`flr-universal` is rebuilt by hand** in `src/components/**` and

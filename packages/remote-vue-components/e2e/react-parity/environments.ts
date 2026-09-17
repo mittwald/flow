@@ -124,6 +124,27 @@ const renderVue = (ui: ReactElement): void => {
   app.mount(remote);
 };
 
+/*
+ * Markers the host leaves on the DOM while an asynchronous job of its own is
+ * still in flight.
+ *
+ * Stable is not the same as settled: the output stops changing *while* one is
+ * pending, so the sampling below can settle on a state that is on its way out.
+ * `PasswordCreationField` validates its (empty) value against the policy on
+ * mount and holds the complexity indicator in `--loading` until that resolves —
+ * a few hundred milliseconds locally, longer on a loaded runner. Each pass then
+ * gets its own coin flip, and the diff is a class that nothing in the remote
+ * tree decides.
+ *
+ * Waited out rather than normalized away, so a marker that never clears still
+ * reaches the comparison: the read falls back to the last sample, both passes
+ * carry it, and a real difference underneath it still fails.
+ */
+const pendingMarkers = ["complexity-indicator--loading"];
+
+const isSettled = (html: string): boolean =>
+  pendingMarkers.every((marker) => !html.includes(marker));
+
 /**
  * The host materialises the tree a round trip after `render` returns, and an
  * overlay can duplicate the DOM for a frame while it measures — so read until
@@ -153,7 +174,7 @@ const readStableHtml = async (
     const next = read();
     if (next === previous) {
       consecutive += 1;
-      if (consecutive >= stableReads && next.length > 0) {
+      if (consecutive >= stableReads && next.length > 0 && isSettled(next)) {
         return next;
       }
     } else {
