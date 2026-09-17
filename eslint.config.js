@@ -126,6 +126,9 @@ export default tseslint.config(
       globals: {
         process: "readonly",
         console: "readonly",
+        // Node >=24 — global since 18 (fetch) and 15 (AbortSignal).
+        fetch: "readonly",
+        AbortSignal: "readonly",
       },
     },
   },
