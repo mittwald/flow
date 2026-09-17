@@ -92,9 +92,12 @@ what this prototype established about supporting a framework at all.
     `PasswordCreationField` validates its empty value on mount and holds
     `complexity-indicator--loading` until that resolves, which outlasts the
     sampling window on a loaded runner and fails the run on a class no remote
-    tree decides. `pendingMarkers` in `environments.ts` waits those out; add to
-    it rather than normalizing the class away in `hostHtml.ts`, so a marker that
-    never clears still reaches the comparison.
+    tree decides. A chart is the other shape of this: recharts wraps an area in
+    an `animationClipPath` layer on the first render that has points and drops
+    it on the next, so one pass read whole `<g>` layers the other never had.
+    `pendingMarkers` in `environments.ts` waits both out; add to it rather than
+    normalizing the class away in `hostHtml.ts`, so a marker that never clears
+    still reaches the comparison.
   - `knownGaps.divergingScenarios` entries are **self-cleaning**: one that
     starts matching fails the run, naming the entry to delete.
 - **`flr-universal` is rebuilt by hand** in `src/components/**` and

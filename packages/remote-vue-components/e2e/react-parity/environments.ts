@@ -140,7 +140,19 @@ const renderVue = (ui: ReactElement): void => {
  * reaches the comparison: the read falls back to the last sample, both passes
  * carry it, and a real difference underneath it still fails.
  */
-const pendingMarkers = ["complexity-indicator--loading"];
+const pendingMarkers = [
+  "complexity-indicator--loading",
+  /*
+   * recharts wraps an area in an `animationClipPath` layer on the first render
+   * that has points, and drops the wrapper on the next one — the animation's
+   * end is itself a re-render, and by then it remembers the previous points and
+   * takes its static branch. So the wrapper marks a chart that has not reached
+   * the shape both passes settle on, and one pass read it before that and the
+   * other after: a diff of whole `<g>` layers, which reads like a missing
+   * component.
+   */
+  "animationClipPath-recharts-",
+];
 
 const isSettled = (html: string): boolean =>
   pendingMarkers.every((marker) => !html.includes(marker));
@@ -153,7 +165,13 @@ const isSettled = (html: string): boolean =>
 const readStableHtml = async (
   stableReads = 4,
   intervalMs = 50,
-  maxSamples = 80,
+  /*
+   * Ten seconds, up from four: the longest wait is now a chart's entry
+   * animation (1.5s by default, and it was a loaded runner that showed this).
+   * The cap is only ever reached when something never settles, and the
+   * scenario's own timeout is 60s.
+   */
+  maxSamples = 200,
 ): Promise<string> => {
   /*
    * The corpus's container, not the React root's wrapper: its box and test id
