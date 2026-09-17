@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.45](https://github.com/mittwald/flow/compare/1.1.44...1.1.45) (2026-09-17)
+
+### Build System
+
+* **deps:** bump cronstrue from 3.24.0 to 3.25.0 in the production group ([#3167](https://github.com/mittwald/flow/issues/3167)) ([fd25656](https://github.com/mittwald/flow/commit/fd2565615eb37417b3c17444e7f0718f5537cc25))
+
 ## [1.1.44](https://github.com/mittwald/flow/compare/1.1.43...1.1.44) (2026-09-17)
 
 ### Bug Fixes
