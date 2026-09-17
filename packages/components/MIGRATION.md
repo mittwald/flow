@@ -1170,6 +1170,21 @@ import { Field } from "@mittwald/flow-react-components/react-hook-form";
 import { Link } from "@mittwald/flow-react-components/nextjs";
 ```
 
+### Stylesheets stay stylesheet imports
+
+A CSS export is a file, not a JS module, so it never moves onto the package
+root. A bundler query addressing it (`?url`, `?inline`, `?raw`) is part of how
+the file is requested, not part of the subpath — both of these stay exactly as
+they are:
+
+```javascript
+import "@mittwald/flow-react-components/all.css";
+import flowStyles from "@mittwald/flow-react-components/all.css?url";
+```
+
+Only a stale `global.css` or `globals.css` is rewritten to `all.css`, query
+included.
+
 ### `tsconfig.json`
 
 Set `"module": "esnext"` in your `tsconfig.json`, if you have trouble with
@@ -1194,8 +1209,13 @@ and the first stable release of Flow is `1.0.0`.
 **Apply:** Rewrite every subdirectory import from
 `@mittwald/flow-react-components` to the package root, except `react-hook-form`
 and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form`
-and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors,
-set `"module": "esnext"` in `tsconfig.json`.
+and `@mittwald/flow-react-components/nextjs`. Asset imports are not part of
+this: a CSS specifier stays a CSS specifier — `all.css` and `all-layered.css`
+unchanged, a stale `global.css` or `globals.css` rewritten to `all.css` — and
+keeps any bundler query it carries (`?url`, `?inline`, `?raw`). It never becomes
+a named import from the package root, which has no JS binding behind a
+stylesheet. If you hit missing module errors, set `"module": "esnext"` in
+`tsconfig.json`.
 
 ```shell
 npx @mittwald/flow-codemods@latest imports-to-package-root src
@@ -1225,9 +1245,10 @@ names a module. It cannot reach a `.css` or `.scss` file, so an `@import` of the
 old path there needs a manual search.
 
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
-`@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript
-and TypeScript files. An `@import` of the old path inside a `.css` or `.scss`
-file is not covered — search for it by hand.
+`@mittwald/flow-react-components/all.css`, keeping any bundler query the
+specifier carries (`.../styles?url` becomes `.../all.css?url`). A codemod does
+this for JavaScript and TypeScript files. An `@import` of the old path inside a
+`.css` or `.scss` file is not covered — search for it by hand.
 
 ```shell
 npx @mittwald/flow-codemods@latest renamed-css-export src
