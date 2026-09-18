@@ -5,6 +5,7 @@ import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
 import { NonModalPopoverContent } from "../NonModalPopoverContent";
+import { popoverViewportPadding } from "../../viewportPadding";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -89,7 +90,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     <Aria.Popover
       {...rest}
       className={className}
-      containerPadding={16}
+      containerPadding={popoverViewportPadding}
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}

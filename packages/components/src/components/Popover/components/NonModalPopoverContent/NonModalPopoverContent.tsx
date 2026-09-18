@@ -5,6 +5,7 @@ import { useObjectRef, useOverlayPosition } from "react-aria";
 import type { Placement } from "react-aria";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { popoverViewportPadding } from "../../viewportPadding";
 
 export interface NonModalPopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -145,7 +146,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
       arrowRef,
       isOpen,
       offset: positionProps.offset ?? 8,
-      containerPadding: 16,
+      containerPadding: popoverViewportPadding,
     });
 
   useRepositionWhenAnchorMoves(triggerRef, isOpen, updatePosition);
