@@ -8,6 +8,7 @@ import type { SortingShape } from "@/components/List/model/sorting/types";
 import type { TableShape } from "@/components/List/model/table/types";
 import type { ItemType } from "@/lib/types/array";
 import type { MultipleSelection, SelectionBehavior } from "@react-types/shared";
+import type { ListSettingsDefaults } from "@mittwald/flow-components-base";
 import type { DeepKeys, DeepValue } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
@@ -36,24 +37,8 @@ export interface ListSupportedComponentProps extends MultipleSelection {
   selectionBehavior?: SelectionBehavior;
 }
 
-export interface ListSettingsStorageDefaults {
-  filters?: {
-    autosave?: boolean;
-    manualSave?: boolean;
-  };
-
-  sorting?: {
-    autosave?: boolean;
-  };
-
-  viewMode?: {
-    autosave?: boolean;
-  };
-
-  search?: {
-    autosave?: boolean;
-  };
-}
+/* One type with the shared model, not a copy of it. */
+export type ListSettingsStorageDefaults = ListSettingsDefaults;
 
 export interface ListShape<
   T,

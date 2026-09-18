@@ -11,6 +11,7 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
+    "@tanstack/table-core": "^8.21.3",
     "mobx": "^6.16.1",
     "remeda": "^2.43.0"
   },

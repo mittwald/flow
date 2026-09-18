@@ -19,14 +19,28 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
 - **State belongs here, the work that produces it does not.** `ListLoaderState`
   holds the batches, the deduplication and the "still loading" rules; _fetching_
   a batch is `usePromise`/Suspense in React and something else in Vue, so it
-  stays with the binding and only reports its outcome here.
+  stays with the binding and only reports its outcome here. Same cut in
+  `ListSearch`: the term, its initial value and its persistence are shared, how
+  the field renders is not. `ListSorting` needed no cut at all — it only
+  translates between the table and the settings store.
+- **`ListModelContext` replaced the `List` back-reference.** The model classes
+  used to carry a whole `List`, which is a React object — its constructor calls
+  hooks. What they need is the TanStack table and the persistence, so that is
+  all the context has, and a binding's list satisfies it with three getters. It
+  is called `dataTable`, not `table`, because Flow's `List` already has a
+  `table` — its own view model — and a getter of that name collides.
+- **The settings port is spelled out per key.** One generic method whose return
+  type indexes a value map reads better and does not typecheck: against a real
+  store TypeScript resolves the return to the _intersection_ of every value, and
+  nothing satisfies `ListSortingSetting & ListSearchSetting`.
 - **Imported as source, bundled by the consumer.** There is no build step —
   `main` is `src/index.ts`, like `@mittwald/flow-core`. The package is private
   and never reaches npm, so both consumers **inline** it: on the Vue side by
   being a devDependency (`externalizeDeps` leaves those alone), on the React
   side additionally through the plugin's `except` list. A move to `dependencies`
   would externalize it and publish a bare import of a package that does not
-  exist. Its own runtime deps (`mobx`, `remeda`) must therefore be real
-  dependencies of **both** consumers.
+  exist. Its own **runtime** deps (`mobx`, `remeda`) must therefore be real
+  dependencies of **both** consumers — `@tanstack/table-core` is not among them,
+  because the model only imports its types.
 - **Relative imports only.** No `@/` alias: the source is compiled by two
   different builds, and an alias would have to be resolvable in both.

@@ -16,7 +16,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import invariant from "invariant";
+import { getListColumn } from "@mittwald/flow-components-base";
 import type {
   OnListChanged,
   PropertyName,
@@ -64,9 +64,7 @@ export class ReactTable<T, TMeta = unknown> {
   }
 
   public getTableColumn(property: PropertyName<T>): Column<T> {
-    const column = this.table.getColumn(property as string);
-    invariant(!!column, `Column #${property} is not defined`);
-    return column;
+    return getListColumn(this.table, property);
   }
 
   private useReactTable(

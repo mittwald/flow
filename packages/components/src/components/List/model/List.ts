@@ -22,8 +22,13 @@ import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import type {
+  ListModelContext,
+  ListSettingsPort,
+} from "@mittwald/flow-components-base";
+import type { Table as ReactTableInstance } from "@tanstack/react-table";
 
-export class List<T = unknown, TMeta = unknown> {
+export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
   public readonly filters: (
     Filter<T, never, never> | DateRangeFilter<T, never>
   )[];
@@ -118,6 +123,24 @@ export class List<T = unknown, TMeta = unknown> {
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
     }, [this.filters]);
+  }
+
+  /*
+   * `ListModelContext` — what the shared model in
+   * `@mittwald/flow-components-base` reaches for, so `Sorting` and `Search` can
+   * keep being handed the list itself. Getters, because the model is built
+   * before the table is.
+   */
+  public get dataTable(): ReactTableInstance<T> {
+    return this.reactTable.table;
+  }
+
+  public get settings(): ListSettingsPort | undefined {
+    return this.settingsStorage;
+  }
+
+  public get settingsDefaults(): ListSettingsStorageDefaults | undefined {
+    return this.settingsStorageDefaults;
   }
 
   public getEmptyViewType(): EmptyViewType {

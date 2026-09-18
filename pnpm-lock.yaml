@@ -805,6 +805,9 @@ importers:
 
   packages/components-base:
     dependencies:
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
       mobx:
         specifier: ^6.16.1
         version: 6.16.1
