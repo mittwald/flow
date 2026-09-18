@@ -163,12 +163,14 @@ const Home: FC = () => {
         </LayoutCard>
         <LayoutCard>
           <Section>
-            <Heading>Patterns</Heading>
+            <Heading>Templates</Heading>
             <Text>
-              Finde passende Pattern für häufige Design- und
+              Finde passende Templates für häufige Design- und
               Interaktionsaufgaben.
             </Text>
-            <Link href="/patterns/patterns/anlegeprozess">Zu den Patterns</Link>
+            <Link href="/templates/app-shells/focus-task">
+              Zu den Templates
+            </Link>
           </Section>
         </LayoutCard>
         <LayoutCard>

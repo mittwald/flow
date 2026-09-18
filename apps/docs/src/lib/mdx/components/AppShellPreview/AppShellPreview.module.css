@@ -1,0 +1,94 @@
+.appShell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
+}
+
+/*
+ * The inline frame is a zoomed-out 16:9 thumbnail: the shell renders at 1.6× the
+ * frame size and is scaled back down, so its whole desktop layout (nav, header,
+ * content) reads at a glance. Hovering reveals the button that opens it
+ * near-fullscreen.
+ */
+.previewFrame {
+  position: relative;
+
+  /* Scope the layer order below (scaler → backdrop → button) to this frame. */
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: var(--layout-card--border-width) solid
+    var(--layout-card--border-color);
+  border-radius: var(--layout-card--corner-radius);
+}
+
+.previewScaler {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 160%;
+  height: 160%;
+  transform: scale(0.625);
+  transform-origin: top left;
+
+  /* Non-interactive: the overlay button owns the clicks. */
+  pointer-events: none;
+}
+
+/*
+ * The centred trigger button. Hidden until the frame is hovered or the button
+ * takes keyboard focus, then it fades in and shows its own focus ring.
+ */
+.previewButton {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+
+  /* Above the backdrop (::before) and the scaled-down shell. */
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Dimmed backdrop, above the shell scaler but below the button. */
+.previewFrame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgb(0 0 0 / 0.5);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.previewFrame:hover .previewButton,
+.previewFrame:focus-within .previewButton,
+.previewFrame:hover::before,
+.previewFrame:focus-within::before {
+  opacity: 1;
+}
+
+/*
+ * The stage fills most of the LightBox so a shell with real navigation reads as
+ * a whole layout; the shell sizes to `height: 100%` inside it.
+ */
+.stage {
+  width: 90vw;
+  height: 85vh;
+  overflow: auto;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xs);
+}
+
+.fileName {
+  font-family: var(--font-family--mono, ui-monospace, monospace);
+  font-size: 0.8125rem;
+  opacity: 0.7;
+}

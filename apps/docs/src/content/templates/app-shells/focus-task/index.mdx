@@ -1,0 +1,39 @@
+---
+title: Focus Task
+description:
+  Eine einzelne Seite ohne Navigation, damit sich Nutzer auf eine bestimmte
+  Aufgabe konzentrieren können.
+---
+
+<AppShell example="focus-task" />
+
+---
+
+# Verwendung
+
+Ein Focus Task ist eine einzelne Seite ohne umgebende Navigation. Verwende ihn
+für einen klar abgegrenzten Vorgang wie Registrierung, Anmeldung, Konfiguration
+oder Bestellung. Ohne Navigation bleibt der Nutzer auf die eine Aufgabe
+konzentriert und schließt sie zielgerichtet ab.
+
+---
+
+# Aufbau
+
+- **Content** – Die Aufgabe liegt in einer
+  [LayoutCard](/components/structure/layout-card): Eingaben und Aktionen stehen
+  direkt darin, ohne umgebende Navigation.
+- **Footer** – Hier lassen sich [Links](/components/navigation/link) platzieren,
+  etwa Verweise auf Datenschutz oder Impressum.
+
+---
+
+# Varianten und Abwandlung
+
+## Konfigurations-Aufgabe
+
+Auch eine mehrteilige Aufgabe bleibt ein Focus Task, solange sie ohne Navigation
+auf ein Ziel führt. Über die [ActionGroup](/components/actions/action-group)
+gelangt der Nutzer zum jeweils nächsten Schritt.
+
+<AppShell example="focus-task-bestellung" />

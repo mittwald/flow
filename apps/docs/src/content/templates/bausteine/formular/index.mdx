@@ -1,0 +1,90 @@
+---
+title: Formular
+description:
+  Die Komposition aus Formularfeldern, Struktur und Absenden-Aktion, mit der
+  eine zusammengehörige Dateneingabe erfasst wird.
+---
+
+<LiveCodeEditor example="formular" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende diesen Baustein, wenn Nutzer zusammengehörige Daten eingeben,
+bearbeiten oder übermitteln. Im mStudio steht ein Formular meist in einem
+Overlay zum [Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten).
+
+---
+
+# Aufbau
+
+- **Form** – Ein [Form](/components/react-hook-form/form) klammert die Felder
+  und verbindet sie über [Field](/components/react-hook-form/field) mit React
+  Hook Form. Es sammelt die Werte und übergibt sie beim Absenden.
+- **Struktur** – [Sections](/components/structure/section) gruppieren
+  zusammengehörige Felder, ein
+  [ColumnLayout](/components/structure/column-layout) ordnet zusammengehörige
+  Felder in eine Zeile – etwa Straße und Hausnummer oder PLZ und Ort. Ordne die
+  Felder nach Wichtigkeit und stelle Zusammengehöriges nah beieinander.
+- **Absenden** – Eine [ActionGroup](/components/actions/action-group) trägt den
+  [SubmitButton](/components/react-hook-form/submit-button). Die Validierung
+  erfolgt standardmäßig erst beim Absenden. Quick Submit sendet das Formular
+  zusätzlich per ⌘/Strg + Enter aus jedem Feld ab – besonders hilfreich in einer
+  [TextArea](/components/form-controls/text-area) oder einem
+  [MarkdownEditor](/components/form-controls/markdown-editor).
+
+### Field
+
+Diese Punkte kehren über alle Form Controls hinweg wieder:
+
+- **Label** – Ein gutes [Label](/components/content/label) vermittelt alle
+  notwendigen Informationen klar und prägnant (max. 2 Wörter). Felder sind
+  standardmäßig Pflichtfelder; optionale Felder tragen den Zusatz „(optional)"
+  am Label. Lässt sich die Anforderung aus dem Kontext erschließen, kann ein
+  sichtbares Label entfallen – dann muss das Form Control über `aria-labelledby`
+  verknüpft oder mit `aria-label` beschrieben sein.
+- **Fields & Controls** – Das Design System bietet viele wiederverwendbare Form
+  Controls: Fields wie [TextField](/components/form-controls/text-field),
+  [NumberField](/components/form-controls/number-field) oder
+  [PasswordCreationField](/components/form-controls/password-creation-field)
+  sowie Controls wie [Checkbox](/components/form-controls/checkbox),
+  [Select](/components/form-controls/select) oder
+  [RadioGroup](/components/form-controls/radio-group). Alle findest du unter
+  Components → Form Controls.
+- **FieldDescription** – Die `<FieldDescription />` ist ein optionaler Hilfstext
+  unterhalb des Form Controls mit zusätzlichen Hinweisen, etwa Beispielen oder
+  Formatierungshinweisen. Verwende sie sparsam.
+- **FieldError** – Ein ungültiges Field zeigt immer eine Fehlermeldung über die
+  `<FieldError />`. Sie erklärt verständlich, warum die Eingabe ungültig ist,
+  und hilft bei der Korrektur. Formulierungshinweise stehen in der Guideline zu
+  [Fehlermeldungen](/foundations/content-guidelines/fehlermeldungen).
+- **Placeholder** – Ein Placeholder ersetzt kein Label: Er verschwindet bei der
+  Eingabe und wird von Assistenztechnologien oft nicht zuverlässig erkannt.
+  Nutze ein `Label` für essenzielle Anforderungen und eine `FieldDescription`
+  für Beispiele oder Formatierungshinweise. Eine Ausnahme ist das
+  [SearchField](/components/form-controls/search-field) mit seinem
+  kennzeichnenden Leading-Icon.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Validierung
+
+Nutze für die Validierung in der Regel
+[React Hook Form](/components/react-hook-form/form). Alternativ stehen
+`isRequired` (für Pflichtfelder) und `validate` (für eigene Validierungen) zur
+Verfügung. Bei ungültiger Eingabe wird das Field invalidiert; über die
+`FieldError` kann eine Fehlermeldung ausgegeben werden.
+
+<LiveCodeEditor example="validierung" editorCollapsed />
+
+## Progressive Disclosure
+
+Felder erscheinen erst, wenn sie gebraucht werden. Ein übergeordnetes Control
+wie eine [RadioGroup](/components/form-controls/radio-group) oder eine
+[Checkbox](/components/form-controls/checkbox) blendet die abhängigen Felder ein
+und hält das Formular so schlank.
+
+<LiveCodeEditor example="formular-progressive" editorCollapsed />
