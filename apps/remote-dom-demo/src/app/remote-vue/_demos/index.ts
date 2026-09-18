@@ -8,6 +8,7 @@ import { EventHandlerDemo } from "@/app/remote-vue/_demos/eventHandler";
 import { ExtBridgeDemo } from "@/app/remote-vue/_demos/extBridge";
 import { FilesDemo } from "@/app/remote-vue/_demos/files";
 import { ImageCropperDemo } from "@/app/remote-vue/_demos/imageCropper";
+import { ListDemo } from "@/app/remote-vue/_demos/list";
 import { MarkdownDemo } from "@/app/remote-vue/_demos/markdown";
 import { ModalDemo } from "@/app/remote-vue/_demos/modal";
 import { MStudioLoadingDemo } from "@/app/remote-vue/_demos/mstudioLoading";
@@ -44,6 +45,7 @@ export const vueDemos: Record<string, Component> = {
   "ext-bridge": ExtBridgeDemo,
   files: FilesDemo,
   "image-cropper": ImageCropperDemo,
+  list: ListDemo,
   markdown: MarkdownDemo,
   modal: ModalDemo,
   "mstudio-loading": MStudioLoadingDemo,

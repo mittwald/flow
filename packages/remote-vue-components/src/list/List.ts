@@ -79,7 +79,8 @@ const readShape = (
           href: item.props.href as ((data: never) => string) | undefined,
           showList: (item.props.showList as boolean | undefined) ?? true,
           showTiles: item.props.showTiles as boolean | undefined,
-          tileMaxWidth: item.props.tileMaxWidth as number | undefined,
+          /* Flow's default, and it reaches the host as a grid template. */
+          tileMaxWidth: (item.props.tileMaxWidth as number | undefined) ?? 230,
         }
       : undefined,
 

@@ -23,6 +23,7 @@ export const listStyles = {
   hideOnDesktop: "flow--list--header--hide-on-desktop",
   activeFilters: "flow--list--header--active-filters",
   searchField: "flow--list--header--search-field",
+  hideVisuallyActions: "flow--list--header--hide-visually-actions",
 } as const;
 
 export const className = (

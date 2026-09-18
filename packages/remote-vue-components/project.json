@@ -48,6 +48,7 @@
       "inputs": [
         "default",
         "{projectRoot}/e2e/react-parity/**/*",
+        "{projectRoot}/e2e/list-parity/**/*",
         "{projectRoot}/dev/react-parity/**/*",
         {
           "dependentTasksOutputFiles": "**/*",

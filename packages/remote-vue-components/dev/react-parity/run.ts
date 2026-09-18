@@ -108,6 +108,34 @@ if (referenceStatus !== 0) {
 
 const compareStatus = run("compare");
 
+/*
+ * The hand-written half of the parity story: the corpus above cannot express
+ * Flow's `List` — its scenarios build one with `typedList<T>()` and a React
+ * component of their own — so the List is written once per binding and compared
+ * the same way, by its own harness. Skipped when a filter was given, because
+ * the filter names a corpus scenario.
+ */
+const listParityStatus =
+  filters.length > 0
+    ? 0
+    : (() => {
+        console.log("\n▶ The List, written once per binding\n");
+        return (
+          spawnSync(
+            "pnpm",
+            [
+              "exec",
+              "vitest",
+              "run",
+              "--config",
+              "e2e/list-parity/vitest.config.ts",
+              "--browser.headless",
+            ],
+            { cwd: packageRoot, stdio: "inherit", env: process.env },
+          ).status ?? 1
+        );
+      })();
+
 console.log("\nNot compared — cannot be expressed in Vue:");
 for (const [file, reason] of Object.entries(unsupportedFiles)) {
   console.log(`  · ${file} (whole file) — ${reason}`);
@@ -116,4 +144,4 @@ for (const [name, reason] of Object.entries(unsupportedScenarios)) {
   console.log(`  · ${name} — ${reason}`);
 }
 
-process.exit(compareStatus);
+process.exit(compareStatus || listParityStatus);

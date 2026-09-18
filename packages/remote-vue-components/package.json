@@ -33,6 +33,8 @@
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
     "test:parity": "tsx dev/react-parity/run.ts",
     "test:parity:dev": "vitest dev --config=e2e/react-parity/vitest.config.ts",
+    "test:parity:list": "vitest run --config e2e/list-parity/vitest.config.ts --browser.headless",
+    "test:parity:list:dev": "vitest dev --config e2e/list-parity/vitest.config.ts",
     "test:unit": "vitest run --project=unit* --passWithNoTests",
     "test:unit:dev": "vitest dev --project=unit* --passWithNoTests"
   },

@@ -72,6 +72,22 @@ what this prototype established about supporting a framework at all.
   `RemoteRenderer` as the host. A value that would not survive `postMessage`
   fails here the way it fails in an extension. Run it with
   `pnpm nx test:browser remote-vue-components --browser.name=webkit`.
+- **The `List` has a parity harness of its own** (`e2e/list-parity`), because
+  the corpus cannot express it. It is written against a list of **bindings**
+  rather than against React and Vue: `harness/bindings/*` each mount a remote
+  app, the first is the reference, and every other is compared against it — so a
+  third framework is a new file and one key per scenario, not a new harness.
+  Three things it does that the corpus harness does not:
+  - **It reads the overlays.** An overlay is portalled to `document.body`, so
+    reading only the root container compares every scenario about a menu except
+    the menu. The corpus harness still has that blind spot: widening it there
+    made 101 of 172 scenarios fail, which is a separate piece of work and not
+    proof of 101 divergences.
+  - **It asserts coverage.** A list of class names has to appear somewhere in
+    what was compared. Comparisons that all pass say nothing about a component
+    that stopped being rendered.
+  - **Both sides are hand-written**, so a scenario can use each binding's own
+    authoring style — `typedList<T>()` on the React side, slots on the Vue side.
 - **The React package's visual corpus is the parity gate** (`e2e/react-parity`,
   `pnpm nx test:parity remote-vue-components`). It renders the whole corpus
   twice — once from `remote-react-components`, once from here — and asserts the

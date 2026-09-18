@@ -1,14 +1,22 @@
 import {
   ActionGroup,
   Button,
+  ClearPropsContext,
   Content,
+  Div,
   Heading,
   OverlayContent,
+  Section,
   Text,
 } from "@/auto-generated";
+import { IconClose } from "@/icons";
 import Action from "@/components/Action";
 import { useLanguage } from "@/composables/remoteContext";
-import { mapChildren, mapSlottedChildren } from "@/overlays/childProps";
+import {
+  mapChildren,
+  mapSlottedChildren,
+  withSlotContent,
+} from "@/overlays/childProps";
 import {
   createOverlayController,
   createOverlayControllerFor,
@@ -22,6 +30,7 @@ import {
   defineComponent,
   h,
   onBeforeUnmount,
+  useId,
   watchEffect,
   type Component,
   type PropType,
@@ -49,6 +58,8 @@ const styles = {
   left: "flow--modal--left",
   size: (size: ModalSize) => `flow--modal--size-${size}`,
   header: "flow--modal--header",
+  headerTitle: "flow--modal--header-title",
+  closeButton: "flow--modal--close-button",
   content: "flow--modal--content",
   actionGroup: "flow--modal--action-group",
 };
@@ -81,6 +92,35 @@ const confirmCloseTexts = {
  * Both spellings, because a vnode carries the prop as the template wrote it and
  * Vue only camelizes when it resolves the props of the component itself.
  */
+/**
+ * The chrome Flow puts around a modal's heading: the title in its own
+ * container, and the close button beside it.
+ *
+ * Not props on the heading but a rebuild of what it was handed — the reason
+ * `withSlotContent` exists. The close button clears the props context around
+ * it, the way Flow's does, so the modal's own rules for `Button` do not reach
+ * it, and it closes without asking again: this button _is_ the deliberate way
+ * out.
+ */
+const withHeaderChrome = (heading: VNode, closeLabel: string): VNode =>
+  withSlotContent(heading, (title) => [
+    h(Div, { class: styles.headerTitle }, () => title),
+    h(ClearPropsContext, null, () =>
+      h(Action, { closeOverlay: { bypassConfirmation: true } }, () =>
+        h(
+          Button,
+          {
+            variant: "plain",
+            color: "secondary",
+            "aria-label": closeLabel,
+            class: styles.closeButton,
+          },
+          () => h(IconClose),
+        ),
+      ),
+    ),
+  ]);
+
 const closePropNames = [
   "closeModal",
   "close-modal",
@@ -199,6 +239,14 @@ export const Modal = markAsOverlay(
     },
 
     setup(props, { slots, attrs }) {
+      const language = useLanguage();
+      /*
+       * The dialog is labelled by its own heading, so the two need an id they
+       * agree on. Flow generates one with `useId`; `useId` exists in Vue too,
+       * and both sides end up with an id the host rewrites anyway — what has to
+       * match is that the heading carries one at all.
+       */
+      const headingId = useId();
       /*
        * Three ways to own the state, in Flow's order of precedence: a
        * controller the app passes, the controller of a surrounding trigger, or
@@ -245,9 +293,13 @@ export const Modal = markAsOverlay(
           .filter(Boolean)
           .join(" ");
 
+        const texts = language.value?.startsWith("de")
+          ? confirmCloseTexts["de-DE"]
+          : confirmCloseTexts["en-US"];
+
         const children: VNode[] = mapChildren(slots.default?.(), (child) => {
           if (child.type === Heading) {
-            return { class: styles.header, level: 2 };
+            return { class: styles.header, level: 2, id: headingId };
           }
           if (child.type === Content) {
             return { class: styles.content };
@@ -256,17 +308,39 @@ export const Modal = markAsOverlay(
             return { class: styles.actionGroup, spacing: "m" };
           }
           return undefined;
-        }).map((child) =>
-          /*
-           * The footer is the deliberate way out, so its actions close without
-           * asking again — the rule Flow's `Modal` writes into the props
-           * context for `ActionGroup > Action`. An `Action` anywhere else in
-           * the modal is an incidental close and is confirmed.
-           */
-          props.confirmOnClose && child.type === ActionGroup
-            ? mapSlottedChildren(child, withBypassedConfirmation)
-            : child,
-        );
+        })
+          .map((child) =>
+            child.type === Heading
+              ? withHeaderChrome(child, texts.close)
+              : child,
+          )
+          .map((child) =>
+            /*
+             * A `Section` in a modal's content drops its separator and drops a
+             * heading level — Flow writes both into the props context for
+             * `Content > Section`, which is a grandchild rule.
+             */
+            child.type === Content
+              ? mapSlottedChildren(child, (grandChild) =>
+                  grandChild.type === Section
+                    ? { hideSeparator: true, level: 3 }
+                    : grandChild.type === Heading
+                      ? { level: 3 }
+                      : undefined,
+                )
+              : child,
+          )
+          .map((child) =>
+            /*
+             * The footer is the deliberate way out, so its actions close without
+             * asking again — the rule Flow's `Modal` writes into the props
+             * context for `ActionGroup > Action`. An `Action` anywhere else in
+             * the modal is an incidental close and is confirmed.
+             */
+            props.confirmOnClose && child.type === ActionGroup
+              ? mapSlottedChildren(child, withBypassedConfirmation)
+              : child,
+          );
 
         if (props.confirmOnClose) {
           children.push(h(ConfirmCloseModal, { parent: controller }));
@@ -278,6 +352,7 @@ export const Modal = markAsOverlay(
             class: className,
             isOpen: controller.isOpen.value,
             isDismissable: props.isDismissable,
+            "aria-labelledby": headingId,
             onOpenChange: controller.setOpen,
           },
           () => children,

@@ -150,7 +150,18 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
   helpers.
 - `pnpm nx test:browser remote-vue-components --browser.name=webkit` — a Vue
   tree, the production serializer, and React's `RemoteRenderer` as the host.
-- `pnpm nx test:parity remote-vue-components` — the React package's whole visual
-  corpus, rendered once from React and once from Vue, asserting the host builds
-  the same DOM. 171 of 187 scenarios are compared, and all of them match;
-  `e2e/react-parity/knownGaps.ts` lists the rest with a reason.
+- `pnpm nx test:parity remote-vue-components` — two harnesses, one target.
+  - `e2e/react-parity`: the React package's whole visual corpus, rendered once
+    from React and once from Vue, asserting the host builds the same DOM. 172 of
+    188 scenarios are compared, and all of them match;
+    `e2e/react-parity/knownGaps.ts` lists the rest with a reason.
+  - `e2e/list-parity`: the `List`, which the corpus cannot express — its
+    scenarios build one with `typedList<T>()` and a React component of their
+    own. So it is written once per binding and compared the same way, including
+    what the host portals out of the list (a menu, the all-filters modal). A
+    final check asserts the scenarios reached every component, so the suite
+    cannot stay green on a shrinking surface.
+
+  The second one is **not React-versus-Vue**: it iterates a list of bindings,
+  the first of which is the reference. A third framework is a file next to
+  `harness/bindings/vue.ts` and one key per scenario.

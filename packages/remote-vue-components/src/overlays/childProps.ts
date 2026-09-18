@@ -101,3 +101,38 @@ export const mapSlottedChildren = (
     },
   });
 };
+
+/**
+ * Rebuilds a child around new default-slot content.
+ *
+ * `mapSlottedChildren` maps the props of what a child was handed; this replaces
+ * that content outright — which is what a composite needs when it does not
+ * configure a child but _wraps_ it. Flow's `Modal` does exactly that to its
+ * heading: the title goes into a container and the close button is appended
+ * beside it.
+ */
+export const withSlotContent = (
+  node: VNode,
+  build: (rendered: VNode[]) => VNode[],
+): VNode => {
+  const slots = node.children;
+  const defaultSlot =
+    slots && typeof slots === "object" && !Array.isArray(slots)
+      ? (slots as Record<string, unknown>).default
+      : undefined;
+
+  const rendered = (...args: unknown[]): VNode[] => {
+    if (typeof defaultSlot !== "function") {
+      return [];
+    }
+    const result = (defaultSlot as (...slotArgs: unknown[]) => VNode | VNode[])(
+      ...args,
+    );
+    return Array.isArray(result) ? result : [result];
+  };
+
+  return h(node.type as Component, node.props ?? undefined, {
+    ...(typeof slots === "object" && !Array.isArray(slots) ? slots : {}),
+    default: (...args: unknown[]) => build(rendered(...args)),
+  });
+};

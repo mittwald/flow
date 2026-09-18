@@ -155,6 +155,12 @@ export class ListModel<T> implements ListPaginationContext<T> {
   }
 
   public get hasActiveFilters(): boolean {
+    /*
+     * Another read of the table's state, so another read of the revision —
+     * without it the empty view keeps saying "no items" after a filter has
+     * emptied the list, which is a different sentence and a different icon.
+     */
+    void this.listTable.revision;
     return this.filters.some((f) => f.isActive());
   }
 

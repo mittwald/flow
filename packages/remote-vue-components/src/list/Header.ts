@@ -12,6 +12,7 @@ import {
   IconDescending,
   IconFilter,
   IconSorting,
+  IconView,
 } from "@/icons";
 import { watchMobxValue } from "@/lib/mobxSelector";
 import { defineComponent, h, ref, watch, type VNodeChild } from "vue";
@@ -98,7 +99,10 @@ const renderViewModeMenu = (
     h(
       Button,
       { ...outlineButton(isDisabled), "aria-label": texts("settings") },
-      () => h(Text, null, () => texts(`settings.viewMode.${selected}`)),
+      () => [
+        h(Text, null, () => texts(`settings.viewMode.${selected}`)),
+        h(IconView),
+      ],
     ),
     h(ContextMenu, { selectionMode: "single", selectedKeys: [selected] }, () =>
       modes.map((mode) =>
@@ -241,9 +245,12 @@ export const Header = defineComponent({
       const modes = availableViewModes(list);
 
       /*
-       * Asked of the model rather than of what the options rendered: the
-       * all-filters modal decides for itself whether it has anything to show,
-       * so a list with nothing to configure would still get a header around it.
+       * The header is rendered even with nothing in it, because Flow's is: it
+       * holds the tunnel exit an app's own `ActionGroup` lands in, and a list
+       * that gained one would otherwise change the DOM around it.
+       *
+       * Asked of the model rather than of what the options rendered — the
+       * all-filters modal decides for itself whether it has anything to show.
        */
       const hasOptions =
         list.filters.length > 0 ||
@@ -251,8 +258,24 @@ export const Header = defineComponent({
         !!list.search ||
         modes.length > 1;
 
-      if (!hasOptions) {
-        return null;
+      /*
+       * Nothing to show yet and nothing to configure it with: Flow hides the
+       * header rather than dropping it, so what an app put in it keeps its
+       * state across the switch to and from the empty view.
+       */
+      if (noItemsAvailable) {
+        return h(
+          Div,
+          { class: listStyles.hideVisuallyActions, "aria-hidden": true },
+          /*
+           * Same nesting and same classes as the branch below, which is what
+           * Flow's comment on this branch asks for — the tunnel's content has
+           * to survive the switch. React arrives at the inner class by reusing
+           * the element rather than by setting it: a `className` that goes from
+           * set to undefined never reaches the host, so the previous one stays.
+           */
+          () => h(Div, { class: listStyles.headerContent }),
+        );
       }
 
       const options: VNodeChild[] = [
@@ -294,7 +317,9 @@ export const Header = defineComponent({
         },
         () => [
           h(Div, { class: listStyles.headerContent }, () =>
-            h(Div, { class: listStyles.headerOptions }, () => options),
+            hasOptions
+              ? h(Div, { class: listStyles.headerOptions }, () => options)
+              : null,
           ),
           h(ActiveFilters, { isDisabled }),
         ],
