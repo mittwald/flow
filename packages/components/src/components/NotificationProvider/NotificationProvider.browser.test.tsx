@@ -111,3 +111,34 @@ test("a notification raised before a modal opens stays interactive", async () =>
 
   await expectNotificationIsInteractive();
 });
+
+test("a notification fits a viewport narrower than its own width", async () => {
+  const Fixture: FC = () => {
+    const controller = useNotificationController();
+    useEffect(() => void notify(controller), [controller]);
+    return null;
+  };
+
+  try {
+    await page.viewport(375, 812);
+
+    render(
+      <NotificationProvider>
+        <Fixture />
+      </NotificationProvider>,
+    );
+
+    await sleep(500);
+
+    const notification = document.querySelector(
+      '[role="alert"]',
+    ) as HTMLElement;
+    const { left, right } = notification.getBoundingClientRect();
+
+    expect(left).toBeGreaterThan(0);
+    expect(left).toBeCloseTo(window.innerWidth - right, 0);
+    expect(document.documentElement.scrollWidth).toBe(window.innerWidth);
+  } finally {
+    await page.viewport(1280, 720);
+  }
+});
