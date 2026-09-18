@@ -13,6 +13,7 @@ const texts = {
   "en-US": {
     filters: "Filters",
     "filters.all": "All filters",
+    "filters.clear": "Clear filters",
     "filters.clearSelection": "Clear selection",
     "filters.reset": "Reset filters",
     "filters.store": "Store filters",
@@ -34,6 +35,7 @@ const texts = {
   "de-DE": {
     filters: "Filter",
     "filters.all": "Alle Filter",
+    "filters.clear": "Filter entfernen",
     "filters.clearSelection": "Auswahl aufheben",
     "filters.reset": "Filter zurücksetzen",
     "filters.store": "Filter speichern",

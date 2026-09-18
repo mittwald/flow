@@ -1,4 +1,4 @@
-import { Button, Div, LoadingSpinner, Skeleton, Text } from "@/auto-generated";
+import { Button, Div, Skeleton, Text } from "@/auto-generated";
 import { watchMobxValue } from "@/lib/mobxSelector";
 import { defineComponent, h, type VNodeChild } from "vue";
 import { injectListModel } from "./listContext";
@@ -32,11 +32,8 @@ export const Footer = defineComponent({
         return null;
       }
 
-      const showSkeleton =
-        isLoading.value && (!list.infiniteScroll || isInitiallyLoading.value);
-
       return h(Text, null, () =>
-        showSkeleton
+        isLoading.value
           ? h(Skeleton, { width: "200px" })
           : texts.value("paginationInfo", {
               visibleItemsCount: counts.value.visible,
@@ -66,10 +63,7 @@ export const Footer = defineComponent({
     return () =>
       h(Div, { class: listStyles.footer }, () => [
         renderPaginationInfo(),
-        list.infiniteScroll ? null : renderShowNextBatch(),
-        list.infiniteScroll && isLoading.value && !isInitiallyLoading.value
-          ? h(LoadingSpinner, { "aria-label": texts.value("loadingMore") })
-          : null,
+        renderShowNextBatch(),
       ]);
   },
 });

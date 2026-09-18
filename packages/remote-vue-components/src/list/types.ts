@@ -72,7 +72,6 @@ export interface VueListShape<T> extends ListDataSourceShape<T> {
   loadingItemsCount?: number;
   getItemId?: (data: T) => string;
   defaultViewMode?: ListViewModeValue;
-  infiniteScroll?: boolean;
   onAction?: (data: T) => void;
   "aria-label"?: string;
   "aria-labelledby"?: string;

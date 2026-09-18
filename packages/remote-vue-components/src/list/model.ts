@@ -150,10 +150,6 @@ export class ListModel<T> implements ListPaginationContext<T> {
     this.listTable.setOptions(this.getTableOptions(this.currentData));
   }
 
-  public get infiniteScroll(): boolean {
-    return this.shape.infiniteScroll ?? false;
-  }
-
   public get loadingItemsCount(): number {
     return this.shape.loadingItemsCount ?? this.batches.batchSize;
   }

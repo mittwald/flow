@@ -27,7 +27,6 @@ export const Items = defineComponent({
     const isInitiallyLoading = watchMobxValue(
       () => list.loaderState.isInitiallyLoading,
     );
-    const isLoadingMore = watchMobxValue(() => list.loaderState.isLoadingMore);
     const isTiles = watchMobxValue(() => list.viewMode.isTiles);
 
     /* Placeholders in the item's shape while the first batch is on its way. */
@@ -65,9 +64,6 @@ export const Items = defineComponent({
         return null;
       }
 
-      const showLoadingState =
-        isLoading.value && !(list.infiniteScroll && isLoadingMore.value);
-
       return h(
         Div,
         {
@@ -80,7 +76,7 @@ export const Items = defineComponent({
             {
               class: className(
                 listStyles.items,
-                showLoadingState && listStyles.itemsLoading,
+                isLoading.value && listStyles.itemsLoading,
                 isTiles.value && listStyles.itemsTiles,
               ),
               "aria-label": list.shape["aria-label"],

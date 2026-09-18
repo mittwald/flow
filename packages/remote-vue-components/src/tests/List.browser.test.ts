@@ -167,6 +167,59 @@ describe("Searching", () => {
   });
 });
 
+describe("Active filters", () => {
+  const filteredList = () =>
+    staticCrewList([
+      h(ListFilter, { property: "rank", mode: "some", name: "Rank" }),
+    ]);
+
+  const selectRank = async (
+    list: ReturnType<typeof staticCrewList>,
+    rank: string,
+  ) => {
+    await userEvent.click(list.getByRole("button", { name: "Rank" }));
+    await userEvent.click(page.getByRole("menuitemcheckbox", { name: rank }));
+    await userEvent.keyboard("{Escape}");
+  };
+
+  test("shows a chip per selected value, and taking one back restores its items", async () => {
+    const list = filteredList();
+
+    await selectRank(list, "Corporal");
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(1);
+
+    /*
+     * By its close button: the chip's own text is the value, which the matching
+     * item shows too, so a text query matches both.
+     */
+    const chip = list.getByRole("button", { name: "Remove" });
+    await expect.element(chip).toBeVisible();
+
+    await userEvent.click(chip);
+
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(3);
+  });
+
+  /*
+   * The button appears only with more than one chip: with a single one, its
+   * own close button already does the job.
+   */
+  test("offers to clear everything once more than one value is on", async () => {
+    const list = filteredList();
+
+    await selectRank(list, "Corporal");
+    expect(
+      list.getByRole("button", { name: "Clear filters" }).query(),
+    ).toBeNull();
+
+    await selectRank(list, "Company Man");
+
+    await userEvent.click(list.getByRole("button", { name: "Clear filters" }));
+
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(3);
+  });
+});
+
 describe("The table view mode", () => {
   const tableList = () =>
     renderList(() => [
@@ -266,6 +319,55 @@ describe("Persisted view settings", () => {
     await expect
       .poll(() => store.values.get("test.List.crew.sorting.autosave"))
       .toBe(JSON.stringify({ property: "name", direction: "asc" }));
+  });
+
+  /*
+   * The second slot: an autosaved selection is what the user currently has, a
+   * stored one is what "reset" goes back to. Only the filters have both.
+   */
+  test("stores the filter selection on demand, in its own slot", async () => {
+    const store = backend();
+
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(SettingsProvider, { backend: store, prefix: "test" }, () =>
+            h(List, { "aria-label": "Crew", settingStorageKey: "crew" }, () => [
+              h(ListStaticData, { data: crew }),
+              h(
+                ListItem,
+                { textValue: (data: Crew) => data.name },
+                {
+                  default: ({ data }: { data: Crew }) =>
+                    h(ListItemView, null, () =>
+                      h(Heading, null, () => data.name),
+                    ),
+                },
+              ),
+              h(ListFilter, {
+                property: "rank",
+                mode: "some",
+                name: "Rank",
+                manualSave: true,
+              }),
+            ]),
+          ),
+      ),
+    );
+
+    const list = page.elementLocator(host);
+
+    await userEvent.click(list.getByRole("button", { name: "Rank" }));
+    await userEvent.click(
+      page.getByRole("menuitemcheckbox", { name: "Corporal" }),
+    );
+    await userEvent.keyboard("{Escape}");
+
+    await userEvent.click(list.getByRole("button", { name: "Store filters" }));
+
+    await expect
+      .poll(() => store.values.get("test.List.crew.activeFilters"))
+      .toContain("rank");
   });
 
   test("restores it on the next render", async () => {

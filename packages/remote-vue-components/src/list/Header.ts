@@ -15,6 +15,7 @@ import {
 } from "@/icons";
 import { watchMobxValue } from "@/lib/mobxSelector";
 import { defineComponent, h, ref, watch, type VNodeChild } from "vue";
+import { ActiveFilters } from "./ActiveFilters";
 import { injectListModel, type AnyListModel } from "./listContext";
 import { useListTexts, type ListTextFormatter } from "./locales";
 import { listStyles } from "./styles";
@@ -244,6 +245,7 @@ export const Header = defineComponent({
         ),
         list.search
           ? h(SearchField, {
+              class: listStyles.searchField,
               isDisabled,
               value: searchInput.value,
               onChange: (value: string) => {
@@ -270,10 +272,12 @@ export const Header = defineComponent({
             .filter(Boolean)
             .join(" "),
         },
-        () =>
+        () => [
           h(Div, { class: listStyles.headerContent }, () =>
             h(Div, { class: listStyles.headerOptions }, () => options),
           ),
+          h(ActiveFilters, { isDisabled }),
+        ],
       );
     };
   },

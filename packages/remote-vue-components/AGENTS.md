@@ -144,10 +144,28 @@ what this prototype established about supporting a framework at all.
   `["void"]`, so a loader driver that only looks for an absent entry never loads
   the first batch. A list whose data array is rebuilt each render hides that,
   because the change resets the state and makes the batch missing for real.
-- **The list has no persistence yet.** `ListSettingsPort` is the seam and
-  `ListModel.settings` returns `undefined`, so a sorting, a search or a view
-  mode the user picks is gone on reload. This package has a `SettingsProvider`;
-  wiring the two is what closes it.
+- **The list's settings go through `ListSettingsPort` into this package's own
+  `SettingsProvider`** (`src/list/settings.ts`), under the key layout React uses
+  — `<prefix>.List.<storageKey>.<setting>` plus a `.autosave` sibling — so the
+  two bindings read each other's values. Unvalidated, unlike React's, which
+  parses each value with a zod schema: a value that is not what it should be is
+  dropped by the model anyway (an unknown filter value is deleted on mount, an
+  unknown sorting never matches), and malformed JSON is caught at the read.
+- **The table view mode's elements are named `ListTable*`.** This package
+  already exports the standalone Flow table's `Table`, `TableColumn` and friends
+  from `src/auto-generated`, and two star exports offering one name resolve to
+  nothing — silently, with the component reaching the host as `undefined`. A
+  column's label is its **children**, not a prop: Flow's `TableColumn` renders
+  `children`, and React's list only looks like it uses a `name` because it
+  spreads both.
+- **`infiniteScroll` is inert across the remote boundary — in React too.** The
+  trigger is an `IntersectionObserver` on the Nth-from-last item
+  (`useInfiniteScrollTrigger` in `packages/components`), and in a remote app
+  that item is a `flr-items-grid-list-item` in the extension's document, which
+  has no layout and never intersects. No prop carries the intent to the host
+  either, because `List` is not `@flr-generate`. So this binding leaves it out
+  rather than shipping a flag that does nothing; closing it needs a host-side
+  signal, which is a change in `packages/components`.
 - **Logic shared with React lives in `@mittwald/flow-components-base`**, not
   here. `ListLoaderState` is the first of it: pure MobX, no framework, and this
   package brings only the subscription (`src/lib/mobxSelector.ts`, ~15 lines).

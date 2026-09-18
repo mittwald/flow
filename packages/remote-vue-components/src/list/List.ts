@@ -110,7 +110,6 @@ const readShape = (
     loadingItemsCount: props.loadingItemsCount as number | undefined,
     getItemId: props.getItemId as ((data: never) => string) | undefined,
     defaultViewMode: props.defaultViewMode as never,
-    infiniteScroll: props.infiniteScroll as boolean | undefined,
     onAction: props.onAction as ((data: never) => void) | undefined,
     "aria-label": props["aria-label"] as string | undefined,
     "aria-labelledby": props["aria-labelledby"] as string | undefined,
@@ -149,8 +148,6 @@ export const List = defineComponent({
       type: String as PropType<"list" | "table" | "tiles">,
       default: undefined,
     },
-    /** Loads the next batch on scroll instead of showing a button. */
-    infiniteScroll: { type: Boolean, default: false },
     /** Hides the pagination controls below the list. */
     hidePagination: { type: Boolean, default: false },
     onAction: {

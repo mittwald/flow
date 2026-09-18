@@ -21,6 +21,8 @@ export const listStyles = {
   headerWithSearch: "flow--list--header--with-search",
   hideOnMobile: "flow--list--header--hide-on-mobile",
   hideOnDesktop: "flow--list--header--hide-on-desktop",
+  activeFilters: "flow--list--header--active-filters",
+  searchField: "flow--list--header--search-field",
 } as const;
 
 export const className = (
