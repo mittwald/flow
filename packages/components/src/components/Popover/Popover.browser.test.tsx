@@ -7,6 +7,7 @@ import Text from "@/components/Text";
 import Popover, { type PopoverProps } from "@/components/Popover/Popover";
 import { PopoverTrigger } from "@/components/Popover";
 import { useOverlayController } from "@/lib/controller";
+import { popoverViewportPadding } from "@/components/Popover/components/PopoverContent/PopoverContent";
 
 const content = page.getByText("These aren't the droids you're looking for.");
 const trigger = page.getByRole("button", { name: "Trigger popover" });
@@ -137,4 +138,48 @@ test("the deprecated defaultOpen keeps working", async () => {
   render(<StandalonePopover defaultOpen />);
 
   await expect.element(content).toBeInTheDocument();
+});
+
+test("a popover keeps a gap to both edges of a narrow viewport", async () => {
+  /*
+   * Content wide enough that the popover wants more room than the viewport
+   * leaves it. A short popover never reaches an edge and would not notice.
+   */
+  const WidePopover = () => {
+    const triggerRef = useRef(null) as RefObject<HTMLButtonElement | null>;
+
+    return (
+      <>
+        <Button ref={triggerRef}>Trigger popover</Button>
+        <Popover triggerRef={triggerRef} isDefaultOpen>
+          <Text>{"wide ".repeat(120)}</Text>
+        </Popover>
+      </>
+    );
+  };
+
+  try {
+    await page.viewport(375, 700);
+
+    render(<WidePopover />);
+
+    const popover = await vitest.waitUntil(
+      () =>
+        document.querySelector("[class*='flow--popover--content']")
+          ?.parentElement,
+    );
+    const box = popover.getBoundingClientRect();
+
+    /*
+     * The popover is positioned one `containerPadding` in from the boundary, so
+     * a width cap of the full viewport lets it grow across the gap on the other
+     * side and sit flush against that edge.
+     */
+    expect(Math.round(box.left)).toBeGreaterThanOrEqual(popoverViewportPadding);
+    expect(Math.round(window.innerWidth - box.right)).toBeGreaterThanOrEqual(
+      popoverViewportPadding,
+    );
+  } finally {
+    await page.viewport(1280, 720);
+  }
 });

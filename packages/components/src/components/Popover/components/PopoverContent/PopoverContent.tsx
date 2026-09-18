@@ -3,6 +3,18 @@ import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
+import tokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
+
+/**
+ * The gap a popover keeps to the viewport edge. The stylesheet caps the
+ * popover's width with it, `containerPadding` insets the position by it — and
+ * `containerPadding` is a number, so it cannot read the CSS variable.
+ *
+ * @internal
+ */
+export const popoverViewportPadding = Number.parseFloat(
+  tokens.popover["viewport-padding"].value,
+);
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -41,7 +53,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     <Aria.Popover
       {...rest}
       className={className}
-      containerPadding={16}
+      containerPadding={popoverViewportPadding}
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
