@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.63](https://github.com/mittwald/flow/compare/1.2.0-next.62...1.2.0-next.63) (2026-09-18)
+
+## [1.1.51](https://github.com/mittwald/flow/compare/1.2.0-next.61...1.1.51) (2026-09-18)
+
+### Bug Fixes
+
+* **Popover:** keep a gap to the viewport edge on a narrow screen ([#3193](https://github.com/mittwald/flow/issues/3193)) ([e607168](https://github.com/mittwald/flow/commit/e60716814cce82519db1e99056506160fe5a1f5e))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.51 ([9c35f57](https://github.com/mittwald/flow/commit/9c35f5735461e719942c702b4e50c9c938ed0056))
+
 ## [1.2.0-next.62](https://github.com/mittwald/flow/compare/1.2.0-next.61...1.2.0-next.62) (2026-09-18)
 
 ### Bug Fixes
