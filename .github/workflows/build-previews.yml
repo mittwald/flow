@@ -130,11 +130,13 @@ jobs:
       packages: read
       pull-requests: write
 
-    # A fork's PR never gets the MITTWALD_* secrets, so skip it rather than let
-    # it fail on missing credentials — the build job above still validates the
-    # images. Dependabot runs do deploy: the credentials are duplicated into the
+    # A fork's PR gets no secrets at all, so skip it rather than let it fail on
+    # the missing API token — the build job above still validates the images.
+    # Dependabot runs do deploy: `MITTWALD_API_TOKEN` also lives in the
     # repository's *Dependabot* secret store, which is what `secrets.*` resolves
-    # against in a Dependabot-triggered run.
+    # against in a Dependabot-triggered run. The project and certificate IDs are
+    # repository variables — not sensitive, and `vars.*` is one store for every
+    # run, Dependabot's included.
     if: >
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository
@@ -172,12 +174,12 @@ jobs:
       - name: Deploy preview environment
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_PROJECT_ID: ${{ vars.MITTWALD_PROJECT_ID }}
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
           MITTWALD_TLS_CERTIFICATE_ID_DOCS:
-            ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
           MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
-            ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
           # Derive the exact refs the build job pushed (type=ref,event=pr =>
           # `pr-<number>`). Deriving them here avoids the matrix job-output
           # clobber that left one of the two empty and half-deployed previews.
