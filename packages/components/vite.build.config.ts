@@ -69,7 +69,16 @@ export default mergeConfig(
       layerOrderPlugin(),
       stylesheetVariantsPlugin(),
       externalizeDeps({
-        except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
+        /*
+         * Bundled, not externalized: all three are private workspace packages
+         * that never reach npm, so an import of one would not resolve for a
+         * consumer.
+         */
+        except: [
+          "@mittwald/flow-design-tokens/**/*",
+          "@mittwald/flow-core",
+          "@mittwald/flow-components-base",
+        ],
       }),
       dts(publishedDtsOptions),
     ],

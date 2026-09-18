@@ -142,6 +142,36 @@ jobs:
         run:
           pnpm nx affected --targets=test:e2e --parallel=1 --browser.name=webkit
 
+  # The Vue binding against the React one: the visual corpus is rendered twice —
+  # once from `remote-react-components`, once from `remote-vue-components` — and
+  # the host's DOM has to come out identical. Its own job because it runs that
+  # corpus twice and would otherwise become the browser job's critical path.
+  #
+  # `nx affected` decides whether it runs at all, so a PR touching neither
+  # package skips it in a second.
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:parity
+
+      - name: Compare the Vue and React remote output
+        run: pnpm nx affected --targets=test:parity --parallel=1
+
   # 74 seconds of the ~24 minutes the scheduled cross-version job spends — and
   # the half that checks the attribute-level contract with published extensions,
   # which is what removing a component or changing its rendered structure
@@ -257,6 +287,7 @@ jobs:
       - unit
       - browser
       - e2e
+      - parity
       - visual
       - cross-version
     steps:

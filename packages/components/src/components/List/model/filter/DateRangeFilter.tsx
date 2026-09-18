@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type List from "@/components/List/model/List";
 import { Filter } from "./Filter";
+import type { ListModelContext } from "@mittwald/flow-components-base";
 import type { FilterShape } from "@/components/List/model/filter/types";
 import type { PropertyName } from "@/components/List/model/types";
 
@@ -18,8 +18,11 @@ export class DateRangeFilter<
 > extends Filter<T, TProp> {
   public readonly dateRangeOptions?: RangeCalendarProps;
 
-  public constructor(list: List<T>, shape: FilterShape<T, TProp, never>) {
-    super(list, shape);
+  public constructor(
+    context: ListModelContext<T>,
+    shape: FilterShape<T, TProp, never>,
+  ) {
+    super(context, shape);
     this.dateRangeOptions = shape.dateRangeOptions;
   }
 
@@ -34,6 +37,6 @@ export class DateRangeFilter<
   }
 
   public setValue(range: RangeValue<DateValue>) {
-    this.list.reactTable.getTableColumn(this.property).setFilterValue(range);
+    this.getTableColumn().setFilterValue(range);
   }
 }

@@ -1,0 +1,5 @@
+# Written from React on every parity run and never compared across runs — a
+# committed reference would become a second source of truth (see
+# e2e/react-parity/environments.ts).
+e2e/react-parity/.refs/
+e2e/react-parity/.vitest/

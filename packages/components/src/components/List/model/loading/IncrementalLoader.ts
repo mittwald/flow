@@ -11,6 +11,7 @@ import { getAsyncResource, usePromise } from "@mittwald/react-use-promise";
 import { useEffect } from "react";
 import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
+import { getListDataLoaderOptions } from "@mittwald/flow-components-base";
 import { hash } from "object-code";
 import type { PropertyName } from "@/components/List/model/types";
 import { useMemo } from "react";
@@ -194,40 +195,16 @@ export class IncrementalLoader<T> {
   }
 
   private getDataLoaderOptions(batchIndex: number): DataLoaderOptions<T> {
-    return {
-      pagination: this.manualPagination
-        ? {
-            limit: this.list.batches.batchSize,
-            offset: this.list.batches.batchSize * batchIndex,
-          }
-        : undefined,
-
-      sorting: this.manualSorting
-        ? (Object.fromEntries(
-            this.list.sorting
-              .filter((s) => s.isSorted())
-              .map((s) => [s.property, s.direction]),
-          ) as DataLoaderOptions<T>["sorting"])
-        : undefined,
-
-      filtering: this.manualFiltering
-        ? (Object.fromEntries(
-            this.list.filters
-              .filter((f) => f.getValue() !== null)
-              .map((f) => [
-                f.property,
-                {
-                  mode: f.mode,
-                  values: f.getArrayValue().map((v) => v.value),
-                },
-              ]),
-          ) as DataLoaderOptions<T>["filtering"])
-        : undefined,
-
-      searchString: this.manualFiltering
-        ? this.list.reactTable.searchString
-        : undefined,
-    };
+    return getListDataLoaderOptions<T>(
+      {
+        batchSize: this.list.batches.batchSize,
+        modes: this,
+        sorting: this.list.sorting,
+        filters: this.list.filters,
+        searchString: this.list.reactTable.searchString,
+      },
+      batchIndex,
+    );
   }
 
   private getBatchDataAsyncResource(

@@ -1,1 +1,1 @@
-export type ItemType<T> = T extends (infer TItem)[] ? TItem : T;
+export type { ItemType } from "@mittwald/flow-components-base";

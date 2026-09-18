@@ -8,6 +8,10 @@ import {
   generateRemoteElementFile,
   generateRemoteElementIndexFile,
 } from "./generation/generateRemoteElementFile";
+import {
+  generateRemoteVueComponentFile,
+  generateRemoteVueComponentIndexFile,
+} from "./generation/generateRemoteVueComponentFile";
 import { config } from "./config";
 import { checkTagIsSet, checkTagListIncludes } from "./lib/docTags";
 import {
@@ -115,6 +119,32 @@ async function generate() {
       );
     }
     const indexFile = generateRemoteReactComponentIndexFile(components);
+    await jetpack.writeAsync(
+      `${dir}/index.ts`,
+      await prepareTypeScriptOutput(indexFile),
+    );
+    console.log("✅  Done");
+    console.log("");
+  }
+
+  {
+    console.log("📝️ Generating remote-vue-component files");
+
+    const dir = `packages/remote-vue-components/src/auto-generated`;
+    jetpack.remove(dir);
+
+    for (const component of components) {
+      const remoteVueComponentFile = generateRemoteVueComponentFile(component);
+
+      const fullFilePath = `${dir}/${remoteComponentBaseNameOf(component)}.ts`;
+      console.log(" - " + fullFilePath);
+
+      await jetpack.writeAsync(
+        fullFilePath,
+        await prepareTypeScriptOutput(remoteVueComponentFile),
+      );
+    }
+    const indexFile = generateRemoteVueComponentIndexFile(components);
     await jetpack.writeAsync(
       `${dir}/index.ts`,
       await prepareTypeScriptOutput(indexFile),

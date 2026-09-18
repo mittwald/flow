@@ -13,6 +13,7 @@ export const flowPackages: string[] = [
   "@mittwald/flow-remote-elements",
   "@mittwald/flow-remote-react-components",
   "@mittwald/flow-remote-react-renderer",
+  "@mittwald/flow-remote-vue-components",
   "@mittwald/flow-stylesheet",
   "@mittwald/mstudio-ext-react-components",
   "@mittwald/react-tunnel",

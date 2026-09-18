@@ -1,0 +1,25 @@
+{
+  "name": "@mittwald/flow-components-base",
+  "private": "true",
+  "version": "1.2.0-next.63",
+  "type": "module",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "@tanstack/table-core": "^8.21.3",
+    "dot-prop": "^10.2.0",
+    "mobx": "^6.16.1",
+    "object-code": "^2.0.0",
+    "remeda": "^2.43.0"
+  },
+  "devDependencies": {
+    "@mittwald/typescript-config": "workspace:*",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
+  }
+}

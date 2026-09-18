@@ -6,21 +6,30 @@ import type { BatchesControllerShape } from "@/components/List/model/pagination/
 import type { SearchShape } from "@/components/List/model/search/types";
 import type { SortingShape } from "@/components/List/model/sorting/types";
 import type { TableShape } from "@/components/List/model/table/types";
-import type { ItemType } from "@/lib/types/array";
 import type { MultipleSelection, SelectionBehavior } from "@react-types/shared";
-import type { DeepKeys, DeepValue } from "@tanstack/react-table";
+import { customPropertyPrefix } from "@mittwald/flow-components-base";
+import type {
+  CustomPropertyName,
+  ListSettingsDefaults,
+  PropertyName,
+  PropertyValue,
+  PropertyValueRenderMethod as ListPropertyValueRenderMethod,
+  ListViewModeValue,
+} from "@mittwald/flow-components-base";
 import type { ReactNode } from "react";
 
-export const customPropertyPrefix = "$" as const;
-export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;
+/*
+ * One set of property types with the shared model, not a second copy. A copy
+ * typechecks on its own and still fails where the two meet: `DeepKeys<T>` is a
+ * conditional type, and two conditionals from two declarations are only
+ * comparable when they are the same declaration.
+ */
+export { customPropertyPrefix };
+export type { CustomPropertyName, PropertyName, PropertyValue };
 
-export type PropertyName<T> = DeepKeys<T> | CustomPropertyName;
-export type PropertyValue<T, TProp> = TProp extends CustomPropertyName
-  ? T
-  : DeepValue<T, TProp>;
-export type PropertyValueRenderMethod<TMatcherValue> = (
-  prop: NonNullable<ItemType<TMatcherValue>>,
-) => ReactNode;
+/** React's rendering of a filter value. */
+export type PropertyValueRenderMethod<TMatcherValue> =
+  ListPropertyValueRenderMethod<TMatcherValue, ReactNode>;
 
 export type OnListChanged<T, TMeta = unknown> = (list: List<T, TMeta>) => void;
 
@@ -36,24 +45,8 @@ export interface ListSupportedComponentProps extends MultipleSelection {
   selectionBehavior?: SelectionBehavior;
 }
 
-export interface ListSettingsStorageDefaults {
-  filters?: {
-    autosave?: boolean;
-    manualSave?: boolean;
-  };
-
-  sorting?: {
-    autosave?: boolean;
-  };
-
-  viewMode?: {
-    autosave?: boolean;
-  };
-
-  search?: {
-    autosave?: boolean;
-  };
-}
+/* One type with the shared model, not a copy of it. */
+export type ListSettingsStorageDefaults = ListSettingsDefaults;
 
 export interface ListShape<
   T,
@@ -119,7 +112,8 @@ export interface ListSettingsStorageShape {
   storageKey: string;
 }
 
-export type ListViewMode = "table" | "list" | "tiles";
+/* An alias, not a re-export: a re-export does not bring the name into scope. */
+export type ListViewMode = ListViewModeValue;
 export type ItemActionFn<T> = (data: T) => void;
 export type GetItemId<T> = (data: T) => string;
 

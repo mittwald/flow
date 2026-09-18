@@ -319,6 +319,9 @@ importers:
       '@mittwald/flow-remote-react-renderer':
         specifier: workspace:*
         version: link:../../packages/remote-react-renderer
+      '@mittwald/flow-remote-vue-components':
+        specifier: workspace:*
+        version: link:../../packages/remote-vue-components
       '@mittwald/flow-stylesheet':
         specifier: workspace:*
         version: link:../../packages/stylesheet
@@ -355,6 +358,9 @@ importers:
       usehooks-ts:
         specifier: ^3.1.1
         version: 3.1.1(react@19.2.8)
+      vue:
+        specifier: ~3.5.38
+        version: 3.5.42(typescript@7.0.2)
       webpack:
         specifier: ^5.107.2
         version: 5.110.3(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.4(@types/node@25.9.5))(uglify-js@3.19.3)
@@ -510,6 +516,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
       '@types/invariant':
         specifier: ^2.2.37
         version: 2.2.37
@@ -634,6 +643,9 @@ importers:
       '@lezer/lr':
         specifier: ^1.4.10
         version: 1.4.10
+      '@mittwald/flow-components-base':
+        specifier: workspace:*
+        version: link:../components-base
       '@mittwald/flow-core':
         specifier: workspace:*
         version: link:../core
@@ -794,6 +806,34 @@ importers:
         specifier: ^2.9.0
         version: 2.9.0
 
+  packages/components-base:
+    dependencies:
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
+      dot-prop:
+        specifier: ^10.2.0
+        version: 10.2.0
+      mobx:
+        specifier: ^6.16.1
+        version: 6.16.1
+      object-code:
+        specifier: ^2.0.0
+        version: 2.0.0
+      remeda:
+        specifier: ^2.43.0
+        version: 2.47.0
+    devDependencies:
+      '@mittwald/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: npm:@typescript/typescript6@^6.0.2
+        version: '@typescript/typescript6@6.0.2'
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.11(@types/node@25.9.5)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.0)(msw@2.7.3(@types/node@25.9.5)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))
+
   packages/core:
     dependencies:
       '@types/invariant':
@@ -948,6 +988,10 @@ importers:
       yaml:
         specifier: ^2.9.0
         version: 2.9.0
+    devDependencies:
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.11(@types/node@25.9.5)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.0)(msw@2.7.3(@types/node@25.9.5)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))
 
   packages/icons-pro:
     dependencies:
@@ -1375,6 +1419,103 @@ importers:
       vitest:
         specifier: ^4.1.11
         version: 4.1.11(@types/node@25.9.5)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.0)(msw@2.7.3(@types/node@25.9.5)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))
+
+  packages/remote-vue-components:
+    dependencies:
+      '@mittwald/flow-remote-core':
+        specifier: workspace:*
+        version: link:../remote-core
+      '@mittwald/flow-remote-elements':
+        specifier: workspace:*
+        version: link:../remote-elements
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
+      country-codes-list:
+        specifier: ^2.0.0
+        version: 2.1.0
+      mobx:
+        specifier: ^6.16.1
+        version: 6.16.1
+      remeda:
+        specifier: ^2.43.0
+        version: 2.47.0
+    devDependencies:
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
+      '@mittwald/flow-components-base':
+        specifier: workspace:*
+        version: link:../components-base
+      '@mittwald/flow-core':
+        specifier: workspace:*
+        version: link:../core
+      '@mittwald/flow-icons-base':
+        specifier: workspace:*
+        version: link:../icons-base
+      '@mittwald/flow-react-components':
+        specifier: workspace:*
+        version: link:../components
+      '@mittwald/flow-remote-react-components':
+        specifier: workspace:*
+        version: link:../remote-react-components
+      '@mittwald/flow-remote-react-renderer':
+        specifier: workspace:*
+        version: link:../remote-react-renderer
+      '@mittwald/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@quilted/threads':
+        specifier: ^3.3.1
+        version: 3.3.1(patch_hash=fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812)(@preact/signals-core@1.14.2)
+      '@types/node':
+        specifier: ^25.9.3
+        version: 25.9.5
+      '@types/react':
+        specifier: ^19.2
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.2
+        version: 19.2.7(@types/react@19.2.18)
+      '@vitest/browser':
+        specifier: ^4.1.11
+        version: 4.1.11(msw@2.7.3(@types/node@25.9.5)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))(vitest@4.1.11)
+      '@vitest/browser-playwright':
+        specifier: ^4.1.11
+        version: 4.1.11(msw@2.7.3(@types/node@25.9.5)(@typescript/typescript6@6.0.2))(playwright@1.61.1)(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))(vitest@4.1.11)
+      nx:
+        specifier: ^22.7.5
+        version: 22.7.9
+      react:
+        specifier: ^19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.8
+        version: 19.2.8(react@19.2.8)
+      rimraf:
+        specifier: ^6.1.3
+        version: 6.1.3
+      tsx:
+        specifier: ^4.23.12
+        version: 4.23.13
+      typescript:
+        specifier: npm:@typescript/typescript6@^6.0.2
+        version: '@typescript/typescript6@6.0.2'
+      unplugin-dts:
+        specifier: ^1.0.3
+        version: 1.1.0(@microsoft/api-extractor@7.58.9(@types/node@25.9.5))(@typescript/typescript6@6.0.2)(esbuild@0.28.2)(rolldown@1.2.7)(rollup@4.63.1)(supports-color@10.2.2)(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))(webpack@5.110.3(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28)(sharp@0.35.4(@types/node@25.9.5))(uglify-js@3.19.3))
+      vite:
+        specifier: ^8.2.2
+        version: 8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)
+      vite-plugin-externalize-deps:
+        specifier: ^0.10.0
+        version: 0.10.0(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.11(@types/node@25.9.5)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.0)(msw@2.7.3(@types/node@25.9.5)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@25.9.5)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.0)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))
+      vue:
+        specifier: ~3.5.38
+        version: 3.5.42(@typescript/typescript6@6.0.2)
 
   packages/stylesheet:
     devDependencies:
@@ -4939,17 +5080,44 @@ packages:
   '@vue/compiler-core@3.5.38':
     resolution: {integrity: sha512-s99aGxWYig9ErHbct27KXEGhrBYlRI6c4MwAgXErOAbX9xiW37/uMa+XUDO69zLz83dng8UUZ70CTOJrLrYrEQ==}
 
+  '@vue/compiler-core@3.5.42':
+    resolution: {integrity: sha512-2Ye1ilMtKXxl8qZUrQ5j0CdgenFp/HFQmta6rfRyfEsTG69L6Wk+tWuNoHYHMx9E8tF2Slvdg1FuwDvAXdy1LQ==}
+
   '@vue/compiler-dom@3.5.38':
     resolution: {integrity: sha512-JTqp25l8aFfJYF7/KmsXZjAxJz7T+SjmTJLoXVjHtc2BrSgSiW2n9Aem/cWq1OPe68A8JL06B3eVdhlP0H4TVw==}
+
+  '@vue/compiler-dom@3.5.42':
+    resolution: {integrity: sha512-qbhQZEFmycr+ni/qyuccS4sucNN7VAbDfbkvNxWOX2VfgFm90MNs3/UhRNKoPMEIVn0F8gdlYjLPvqxHwHeQOA==}
 
   '@vue/compiler-sfc@3.5.38':
     resolution: {integrity: sha512-DuA2GiZawSEW442iw/9+Fkol8hTgb4Ke5KkhmSry65QA7YuyMbIdy8p0XZRMvNwJdgRz307W8g1CSzdvS4nuNg==}
 
+  '@vue/compiler-sfc@3.5.42':
+    resolution: {integrity: sha512-fkCAFB4okcAANGMThboWnScp/gzWjU0ZSkVnjTIiplmMDq2uq0tIB3j+xVu4rhv5rvOgBySCysudmbMd6xRRqw==}
+
   '@vue/compiler-ssr@3.5.38':
     resolution: {integrity: sha512-7s+W5Gc42FGxZMcuwl8H5B29T8BJPMdBT7KHFE+BbAuZ/iTEdTtv7z2XiMjiaUUw4w3ZcCEdHs36RuYJ2VA7bA==}
 
+  '@vue/compiler-ssr@3.5.42':
+    resolution: {integrity: sha512-xmLk3wLkbizPAiLyomjgFFosf2ys9b5Ghb+oh/k2tnvipNz8OFrQOiTcWCzyK7MpBp9KkyGtfvgfLUivbmuGYA==}
+
+  '@vue/reactivity@3.5.42':
+    resolution: {integrity: sha512-TzNNfKpb7hDxbQltwAut8VDQA5YP+BuRlxntHUuRjyKwlMvmAPbs3unhCvieijifY6vFfVBwsS7wG/C7uq+bEQ==}
+
+  '@vue/runtime-core@3.5.42':
+    resolution: {integrity: sha512-9uACtuHs7vJGkm5Bp3xu4xRDLFTIYy5DgxpToVjqGIAhAEKwQfsaLvKINhM6nFVp6bZPRFGdDqd1g52MqKsotA==}
+
+  '@vue/runtime-dom@3.5.42':
+    resolution: {integrity: sha512-rsCmhiWLaRxGltLwhlCWyYkFn7WAbKRh0q17eZ1A6Dq6eqc2ACQ61IIryxz0LrsvCzHSilLA9JHovVwM8CNE2g==}
+
+  '@vue/server-renderer@3.5.42':
+    resolution: {integrity: sha512-2++5dUyYS4gvo7xQXSECUDhB7TS0aOl5SeVfC5qSq1Jgfhjvegw1zqhwTIR3imZ+QYPJQw9gfcFvXGAjGZ7ajQ==}
+
   '@vue/shared@3.5.38':
     resolution: {integrity: sha512-FTW0AFZNaK5/mOqvGBwVfUlNLU38TiQn4+DQgIFUnrBBJQ1crMJ82yeGQLV5jyKFsO8yRukpbuP7x+nRbH6aug==}
+
+  '@vue/shared@3.5.42':
+    resolution: {integrity: sha512-2rPxex1jQf4jvl9MOHl6YaXCPcrNqz/FstMOEh3QWY+/OME9nQTvl9WYeCwhW7AFjaR0SnngZGlp/wkR6rkI6g==}
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -10072,6 +10240,14 @@ packages:
   vscode-uri@3.2.0:
     resolution: {integrity: sha512-m2gXo3bn0G1kT9InzMf07fTbqMbGtyckj3bH5ktLO+1Ssv+yiATZ4dhwaQv9UZWxJh6E9IFGnQyjgWVDWVBDrg==}
 
+  vue@3.5.42:
+    resolution: {integrity: sha512-4RyHQTbQvOPs3MfvUO1Sg0YRrKNnA0mAVtvpd12Tg1fKDN7OHBUl1IqSn8zGJjK9nI3NkNp8cgTpVrSZC5TTcA==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   w3c-keyname@2.2.8:
     resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
 
@@ -10352,7 +10528,7 @@ snapshots:
 
   '@babel/generator@7.29.7':
     dependencies:
-      '@babel/parser': 7.29.7
+      '@babel/parser': 7.29.8
       '@babel/types': 7.29.7
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
@@ -14303,8 +14479,16 @@ snapshots:
 
   '@vue/compiler-core@3.5.38':
     dependencies:
-      '@babel/parser': 7.29.7
+      '@babel/parser': 7.29.8
       '@vue/shared': 3.5.38
+      entities: 7.0.1
+      estree-walker: 2.0.2
+      source-map-js: 1.2.1
+
+  '@vue/compiler-core@3.5.42':
+    dependencies:
+      '@babel/parser': 7.29.8
+      '@vue/shared': 3.5.42
       entities: 7.0.1
       estree-walker: 2.0.2
       source-map-js: 1.2.1
@@ -14313,6 +14497,11 @@ snapshots:
     dependencies:
       '@vue/compiler-core': 3.5.38
       '@vue/shared': 3.5.38
+
+  '@vue/compiler-dom@3.5.42':
+    dependencies:
+      '@vue/compiler-core': 3.5.42
+      '@vue/shared': 3.5.42
 
   '@vue/compiler-sfc@3.5.38':
     dependencies:
@@ -14326,12 +14515,53 @@ snapshots:
       postcss: 8.5.28
       source-map-js: 1.2.1
 
+  '@vue/compiler-sfc@3.5.42':
+    dependencies:
+      '@babel/parser': 7.29.8
+      '@vue/compiler-core': 3.5.42
+      '@vue/compiler-dom': 3.5.42
+      '@vue/compiler-ssr': 3.5.42
+      '@vue/shared': 3.5.42
+      estree-walker: 2.0.2
+      magic-string: 0.30.21
+      postcss: 8.5.28
+      source-map-js: 1.2.1
+
   '@vue/compiler-ssr@3.5.38':
     dependencies:
       '@vue/compiler-dom': 3.5.38
       '@vue/shared': 3.5.38
 
+  '@vue/compiler-ssr@3.5.42':
+    dependencies:
+      '@vue/compiler-dom': 3.5.42
+      '@vue/shared': 3.5.42
+
+  '@vue/reactivity@3.5.42':
+    dependencies:
+      '@vue/shared': 3.5.42
+
+  '@vue/runtime-core@3.5.42':
+    dependencies:
+      '@vue/reactivity': 3.5.42
+      '@vue/shared': 3.5.42
+
+  '@vue/runtime-dom@3.5.42':
+    dependencies:
+      '@vue/reactivity': 3.5.42
+      '@vue/runtime-core': 3.5.42
+      '@vue/shared': 3.5.42
+      csstype: 3.2.3
+
+  '@vue/server-renderer@3.5.42':
+    dependencies:
+      '@vue/compiler-ssr': 3.5.42
+      '@vue/runtime-dom': 3.5.42
+      '@vue/shared': 3.5.42
+
   '@vue/shared@3.5.38': {}
+
+  '@vue/shared@3.5.42': {}
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
@@ -20665,6 +20895,26 @@ snapshots:
   vscode-uri@3.1.0: {}
 
   vscode-uri@3.2.0: {}
+
+  vue@3.5.42(@typescript/typescript6@6.0.2):
+    dependencies:
+      '@vue/compiler-dom': 3.5.42
+      '@vue/compiler-sfc': 3.5.42
+      '@vue/runtime-dom': 3.5.42
+      '@vue/server-renderer': 3.5.42
+      '@vue/shared': 3.5.42
+    optionalDependencies:
+      typescript: '@typescript/typescript6@6.0.2'
+
+  vue@3.5.42(typescript@7.0.2):
+    dependencies:
+      '@vue/compiler-dom': 3.5.42
+      '@vue/compiler-sfc': 3.5.42
+      '@vue/runtime-dom': 3.5.42
+      '@vue/server-renderer': 3.5.42
+      '@vue/shared': 3.5.42
+    optionalDependencies:
+      typescript: 7.0.2
 
   w3c-keyname@2.2.8: {}
 

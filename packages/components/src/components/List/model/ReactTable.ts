@@ -13,10 +13,13 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import invariant from "invariant";
+import {
+  getListColumn,
+  ListTable,
+  mergeHiddenSorting,
+} from "@mittwald/flow-components-base";
 import type {
   OnListChanged,
   PropertyName,
@@ -24,6 +27,8 @@ import type {
 import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useEffectEvent, useState } from "react";
+import { useStatic } from "@/lib/hooks/useStatic";
+import useSelector from "@/lib/mobx/useSelector";
 import { Filter } from "./filter/Filter";
 
 export class ReactTable<T, TMeta = unknown> {
@@ -64,9 +69,7 @@ export class ReactTable<T, TMeta = unknown> {
   }
 
   public getTableColumn(property: PropertyName<T>): Column<T> {
-    const column = this.table.getColumn(property as string);
-    invariant(!!column, `Column #${property} is not defined`);
-    return column;
+    return getListColumn(this.table, property);
   }
 
   private useReactTable(
@@ -88,7 +91,7 @@ export class ReactTable<T, TMeta = unknown> {
 
     this.list.search?.updateInitialState(initialState);
 
-    const table = useReactTable({
+    const options: TableOptions<T> = {
       data,
       state: {
         sorting: this.sortingState,
@@ -106,12 +109,23 @@ export class ReactTable<T, TMeta = unknown> {
       },
       globalFilterFn: "auto",
       ...tableOptions,
-    });
+    } as TableOptions<T>;
+
+    /*
+     * `useReactTable` in twenty lines of MobX, so the Vue binding runs the same
+     * table. What React still owns: the instance has to outlive a render, the
+     * options are rebuilt on every render, and a state change has to re-render.
+     */
+    const listTable = useStatic(() => new ListTable<T>(options));
+    listTable.setOptions(options);
+    useSelector(() => listTable.state);
+
+    const table = listTable.table;
 
     const reactTableState = table.getState();
 
     const onFiltersChanged = useEffectEvent(() => {
-      Filter.storeFilters(this.list, { autosave: true });
+      Filter.storeFilters(this.list, this.list.filters, { autosave: true });
     });
 
     const onStateChanged = useEffectEvent(() => {
@@ -135,15 +149,9 @@ export class ReactTable<T, TMeta = unknown> {
     const newSortingState =
       typeof updater === "function" ? updater(this.sortingState) : updater;
 
-    const additionalHiddenSorting = this.list.sorting
-      .filter(
-        (s) =>
-          s.initialEnabled === "hidden" &&
-          !newSortingState.some((existing) => existing.id === s.property),
-      )
-      .map((s) => s.getReactTableColumnSort());
-
-    this.updateSortingState([...additionalHiddenSorting, ...newSortingState]);
+    this.updateSortingState(
+      mergeHiddenSorting(this.list.sorting, newSortingState),
+    );
   }
 
   private getTableColumnDefs(): ColumnDef<T>[] {
