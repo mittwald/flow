@@ -3,6 +3,7 @@
 .notification {
   border-radius: var(--notification--corner-radius);
   width: var(--notification--width);
+  max-width: var(--notification--max-width);
   box-shadow: var(--notification--box-shadow);
   position: relative;
   border: var(--notification--border-width) var(--notification--border-style)
