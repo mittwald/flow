@@ -1,9 +1,9 @@
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { format, resolveConfig } from "prettier";
-import { rcompare } from "semver";
 import { readCatalog } from "../../src/catalog/read";
 import type { MigrationEntry } from "../../src/catalog/types";
+import { compareSince, isUnreleased } from "../../src/catalog/unreleased";
 
 const target = fileURLToPath(
   new URL("../../../components/MIGRATION.md", import.meta.url),
@@ -40,9 +40,16 @@ cannot know your package manager. Substitute the equivalent if yours differs:
 
 const remoteNote = "also applies to `@mittwald/flow-remote-react-components`";
 
-const renderEntry = (entry: MigrationEntry): string => {
+/** One entry as it appears in the guide. Exported for `guide.test.ts`. */
+export const renderEntry = (entry: MigrationEntry): string => {
   const facts = [
-    `**Since \`${entry.since}\`**`,
+    isUnreleased(entry.since)
+      ? // Only reachable from a `next` prerelease: `/prepare-release` rewrites
+        // the placeholder to the graduated version before the release branch is
+        // pushed (#2890). Spell it out rather than print a bare `UNRELEASED`,
+        // which reads like a broken build to someone on that channel.
+        `**Since \`${entry.since}\`** — ships in the next stable release`
+      : `**Since \`${entry.since}\`**`,
     entry.kind,
     entry.action === "codemod"
       ? "codemod available"
@@ -79,7 +86,11 @@ export const renderMigrationGuide = async (): Promise<string> => {
   const entries = readCatalog()
     // Same `id` tie-break as the generated module, and for the same reason:
     // duplicate `since` values would otherwise order by directory listing.
-    .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id));
+    // Same reversed `compareSince` too — `UNRELEASED` sorts to the top and
+    // `semver.rcompare` would throw on it (#2890).
+    .toSorted(
+      (a, b) => compareSince(b.since, a.since) || a.id.localeCompare(b.id),
+    );
 
   const markdown = [intro, ...entries.map(renderEntry)].join("\n---\n\n");
 

@@ -89,6 +89,11 @@ requires `--from`/`--to` overrides before doing anything else.
        exists;
      - the computed `x.y.0` already exists as a git tag or as a published npm
        version of `@mittwald/flow-react-components`.
+   - **Report** (not a stop): the migration entries still on the `UNRELEASED`
+     placeholder — `pnpm release:check-unreleased` lists every one and exits 1.
+     Failing here is the **normal** state: those entries are exactly what Step
+     10 resolves to `x.y.0`. Name them in the preview so the maintainer knows
+     which migrations this release carries.
 
 6. **Collect raw material.** List the Conventional Commits in
    `origin/<to>..origin/<from>`. Group by type, capture scope and PR number
@@ -177,6 +182,16 @@ requires `--from`/`--to` overrides before doing anything else.
         --yes --no-push --tag-version-prefix ""
       git tag -d x.y.0
 
+      # Resolve the migration entries that could not name their version at PR
+      # time (#2890) and fold the result into the graduation commit.
+      pnpm release:resolve-unreleased --current <current> --target x.y.0
+      pnpm nx build codemods          # regenerates the guide from the catalogue
+      pnpm release:check-unreleased   # HARD-STOP on a surviving placeholder
+      git add 'packages/*/MIGRATION.md' \
+              packages/codemods/src/migrations \
+              packages/codemods/src/migrations.generated.ts
+      git commit --amend --no-edit
+
       git push origin release/x.y.0
       ```
 
@@ -210,6 +225,44 @@ requires `--from`/`--to` overrides before doing anything else.
       under `latest`. (The graduated entry itself is a terse "Version bump only"
       comparing `x.y.0-next.N...x.y.0` — that is expected, and exactly why the
       GitHub release body comes from the curated marker block, not this file.)
+
+      **The migration guides get their version here, and only here (#2890).** A
+      migration entry authored in a `feat:` PR cannot name the version it
+      applies to: the PR lands on `next` and is promoted later, in a bundle
+      whose `x.y.0` depends on what else is promoted with it. So the author
+      writes the literal `UNRELEASED`, and this step fills it in — the first
+      moment both numbers are known.
+
+      `release:resolve-unreleased` globs the guides rather than hardcoding them,
+      and works one layer down in each case:
+
+      - `packages/codemods/src/migrations/<id>/entry.md` — the `since:`
+        frontmatter field. `packages/components/MIGRATION.md` is **generated**
+        from that catalogue, so the rewrite goes into the entry and
+        `pnpm nx build codemods` regenerates the guide. Writing into the
+        generated file would be reverted by the next build; the script detects
+        the `AUTO-GENERATED` marker and refuses.
+      - A hand-written `packages/*/MIGRATION.md` (today only `ext-bridge`'s) —
+        the `## From version …` heading, rewritten to name `<current>` and
+        `>=x.y.0`. All placeholder sections of one release **collapse** into a
+        single heading, bodies concatenated in document order at the position of
+        the first: three promoted PRs each carrying an entry must not produce
+        three identical headings.
+
+      `release:check-unreleased` is the guard, and it is a hard stop. A
+      placeholder that survives into a published release is a silent defect —
+      the entry sits in the guide with no version a reader can match against
+      their own. Run it **after** the regeneration, or it cannot see the guide
+      the catalogue produced.
+
+      The placeholder is **`next`-only**. Nothing resolves one on the hotfix
+      path: a `fix:` PR straight onto `main` is released by `publish.yml`, which
+      never runs this command, and a `fix:` author knows their version anyway
+      (last published, `>=` the next patch). A placeholder that lands on `main`
+      is forward-merged into `next` and would be resolved by the next promotion
+      — under a version far later than the one it actually shipped in. That is
+      why the convention is documented as `next`-only in
+      [`packages/codemods/AGENTS.md`](../../packages/codemods/AGENTS.md).
 
     - Open a **Draft** PR into `<to>`. The title must be a **Conventional
       Commit** — `commit-guard.yml` lints every PR title and rejected a plain
