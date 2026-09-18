@@ -366,12 +366,99 @@ test("A coach mark below the fold is not squashed to nothing", async () => {
   expect(popover && getComputedStyle(popover).maxHeight).toBe("none");
 });
 
-test("A coach mark without any anchor renders nothing", async () => {
+test("A coach mark without an anchor stays in the DOM, out of sight", async () => {
   render(
     <CoachMark isDefaultOpen>
       <Text data-testid="hint">Nowhere to point.</Text>
     </CoachMark>,
   );
 
-  await expect.element(page.getByTestId("hint")).not.toBeInTheDocument();
+  /*
+   * It renders — there is nothing to position against yet, so it waits where it
+   * stands rather than unmounting. `visibility: hidden` keeps it off the screen
+   * and out of the accessibility tree until an anchor turns up.
+   */
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+
+  expect(popover?.style.visibility).toBe("hidden");
+  expect(popover?.dataset.placement).toBeUndefined();
+});
+
+test("A coach mark finds an anchor that mounts after it", async () => {
+  const LateAnchor = () => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    return (
+      <div>
+        {isMounted && (
+          <button id="late-anchor" data-testid="anchor">
+            Anchor
+          </button>
+        )}
+        <CoachMark anchor="late-anchor" isDefaultOpen>
+          <Text data-testid="hint">This button now does more.</Text>
+        </CoachMark>
+        {/* Stands in for the host materializing the page in pieces. */}
+        <button data-testid="mount" onClick={() => setIsMounted(true)}>
+          Mount the anchor
+        </button>
+      </div>
+    );
+  };
+
+  render(<LateAnchor />);
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+  expect(popover?.style.visibility).toBe("hidden");
+
+  await page.getByTestId("mount").click();
+
+  await expect.poll(() => popover?.dataset.placement).toBeTruthy();
+  expect(popover?.style.visibility).toBe("");
+  expect(document.getElementById("late-anchor")).toHaveAttribute(
+    "aria-details",
+  );
+});
+
+test("A coach mark forwards DOM props on its non-modal path", async () => {
+  render(
+    <div>
+      <button id="dom-props-anchor" data-testid="anchor">
+        Anchor
+      </button>
+      <CoachMark
+        anchor="dom-props-anchor"
+        isDefaultOpen
+        aria-label="A hint"
+        lang="en"
+      >
+        <Text data-testid="hint">This button now does more.</Text>
+      </CoachMark>
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  /*
+   * `Aria.Popover` forwards these on the modal path. Here the props are named
+   * one by one, so anything the positioning does not claim has to reach the
+   * element rather than disappear into the hook.
+   */
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+
+  expect(popover).toHaveAttribute("aria-label", "A hint");
+  expect(popover).toHaveAttribute("lang", "en");
 });

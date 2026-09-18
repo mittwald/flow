@@ -30,7 +30,6 @@ export class RemoteCoachMarkElement extends FlowRemoteElement<RemoteCoachMarkEle
       isExiting: {},
       isOpen: {},
       lang: {},
-      maxHeight: {},
       offset: {},
       placement: {},
       scrollRef: {},

@@ -24,6 +24,9 @@ export interface CoachMarkProps extends Omit<
   // stands instead of in a portal.
   | "getTargetRect"
   | "shouldCloseOnInteractOutside"
+  // Overridden in CSS to escape react-aria's viewport clamp, so a value here
+  // would be silently ignored.
+  | "maxHeight"
   | "isKeyboardDismissDisabled"
   | "UNSTABLE_portalContainer"
   // Popover keeps this one working for the consumers it already has; a coach
@@ -36,17 +39,23 @@ export interface CoachMarkProps extends Omit<
    */
   anchorRef?: RefObject<Element | null>;
   /**
-   * The `id` of the element the coach mark points at, looked up when it opens.
-   * Use it where a ref cannot be shared — an mStudio extension renders in a
-   * different context than the host, so a ref never arrives, while an id does.
+   * The `id` of the element the coach mark points at, looked up once the
+   * element exists. Use it where a ref cannot be shared — an mStudio extension
+   * renders in a different context than the host, so a ref never arrives, while
+   * an id does.
    */
   anchor?: string;
 }
 
 /**
  * Resolves whichever anchor was given into something `Popover` can position
- * against. The id is looked up after the commit, so the anchor is in the DOM by
- * then — which it is, since a coach mark belongs right behind it.
+ * against.
+ *
+ * An id is looked up after the commit, and kept looking for until it resolves.
+ * A single lookup would only work for an anchor that is already mounted, which
+ * is the case this prop does not exist for: remotely the host materializes the
+ * page in pieces, so the anchor regularly arrives after the coach mark. Without
+ * the observer the hint stays parked and invisible, and nothing says why.
  */
 const useAnchorRef = (
   anchorRef: RefObject<Element | null> | undefined,
@@ -55,7 +64,30 @@ const useAnchorRef = (
   const [anchorElement, setAnchorElement] = useState<Element | null>(null);
 
   useEffect(() => {
-    setAnchorElement(anchor ? document.getElementById(anchor) : null);
+    if (!anchor) {
+      setAnchorElement(null);
+      return;
+    }
+
+    const element = document.getElementById(anchor);
+    setAnchorElement(element);
+
+    if (element) {
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      const late = document.getElementById(anchor);
+
+      if (late) {
+        setAnchorElement(late);
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
   }, [anchor]);
 
   return useMemo(
