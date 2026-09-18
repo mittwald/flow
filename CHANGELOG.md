@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.51](https://github.com/mittwald/flow/compare/1.1.50...1.1.51) (2026-09-18)
+
+### Bug Fixes
+
+* **Popover:** keep a gap to the viewport edge on a narrow screen ([#3193](https://github.com/mittwald/flow/issues/3193)) ([e607168](https://github.com/mittwald/flow/commit/e60716814cce82519db1e99056506160fe5a1f5e))
+
+### Continuous Integration
+
+* run every suite on Dependabot PRs and deploy their review apps ([#3079](https://github.com/mittwald/flow/issues/3079)) ([baf1ad5](https://github.com/mittwald/flow/commit/baf1ad5c433a10b8f113c3354c35126fc1f474b1))
+
 ## [1.1.50](https://github.com/mittwald/flow/compare/1.1.49...1.1.50) (2026-09-18)
 
 ### Bug Fixes

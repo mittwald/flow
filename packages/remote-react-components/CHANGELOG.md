@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.51](https://github.com/mittwald/flow/compare/1.1.50...1.1.51) (2026-09-18)
+
+### Continuous Integration
+
+* run every suite on Dependabot PRs and deploy their review apps ([#3079](https://github.com/mittwald/flow/issues/3079)) ([baf1ad5](https://github.com/mittwald/flow/commit/baf1ad5c433a10b8f113c3354c35126fc1f474b1))
+
 ## [1.1.50](https://github.com/mittwald/flow/compare/1.1.49...1.1.50) (2026-09-18)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
