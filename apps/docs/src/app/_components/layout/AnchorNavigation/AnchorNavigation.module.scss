@@ -1,4 +1,4 @@
-.navigation ul {
+.navigation :global(.flow--navigation--link-list) {
   gap: var(--size-rem--s);
 }
 

@@ -6,7 +6,9 @@
     display: grid;
     grid-template-areas: "input";
 
-    input {
+    /* react-aria's Input — ComboBox passes no className, so its default
+       class is the handle. */
+    :global(.react-aria-Input) {
       @include formControl.formControl();
 
       grid-area: input;
@@ -34,7 +36,7 @@
   }
 
   &:not([data-disabled="true"]):hover {
-    input:not(:read-only),
+    :global(.react-aria-Input):not(:read-only),
     .toggle:not([data-disabled="true"]) {
       background-color: var(--form-control--background-color--hover);
     }

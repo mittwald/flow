@@ -33,7 +33,7 @@
   }
 
   &:where(.hasAction):not(
-      &:has(:global(.flow--list--items--item--view--bottom-content):hover)
+      &:has(:global(.flow--list--list-item-view--bottom-content):hover)
     ) {
     &:where(:not(.isSelected)) {
       &:hover {
@@ -65,6 +65,9 @@
   }
 
   &:has(.link) {
+    // Matches interactive markup the item does not author: consumer children
+    // and react-aria internals, none of which carry a class.
+    // stylelint-disable-next-line selector-max-type -- foreign interactive markup
     :where(
       a,
       button,

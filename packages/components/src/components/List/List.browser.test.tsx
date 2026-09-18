@@ -656,6 +656,46 @@ describe("Item rendering", () => {
   });
 });
 
+describe("Bottom content", () => {
+  const getTestElementWithBottomContent = () => (
+    <>
+      <List aria-label="Test" onAction={() => undefined}>
+        <ListStaticData<Data> data={[{ num: 42 }]} />
+        <ListItem<Data> textValue={({ num }) => String(num)}>
+          {({ num }) => (
+            <ListItemView>
+              <Heading>Item: {num}</Heading>
+              <Content slot="bottom">Bottom: {num}</Content>
+            </ListItemView>
+          )}
+        </ListItem>
+      </List>
+      {/* Somewhere off the list to park the pointer: the previous test leaves
+          it wherever it was, which would poison an ambient idle reading. */}
+      <span>Outside the list</span>
+    </>
+  );
+
+  // The hover highlight signals "clicking here triggers the item action". The
+  // bottom slot is exempt — it carries arbitrary consumer content with its own
+  // interactions. The rule doing that named a class that a later component
+  // move had renamed, so it matched nothing and the exemption was lost.
+  test("hovering the bottom slot leaves the item unhighlighted", async () => {
+    await render(getTestElementWithBottomContent());
+
+    const row = await page.getByRole("row").element();
+
+    await userEvent.hover(page.getByText("Outside the list"));
+    const idle = getComputedStyle(row).backgroundColor;
+
+    await userEvent.hover(page.getByText("Item: 42"));
+    expect(getComputedStyle(row).backgroundColor).not.toBe(idle);
+
+    await userEvent.hover(page.getByText("Bottom: 42"));
+    expect(getComputedStyle(row).backgroundColor).toBe(idle);
+  });
+});
+
 describe("Linked items", () => {
   const itemHref = `${location.origin}/domains/42`;
 
