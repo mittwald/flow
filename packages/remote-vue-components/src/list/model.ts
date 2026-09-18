@@ -122,6 +122,7 @@ export class ListModel<T> implements ListPaginationContext<T> {
       f.onFilterUpdated(() => {
         this.batches.reset();
         this.loaderState.reset();
+        ListFilter.storeFilters(this, this.filters, { autosave: true });
       }),
     );
     this.search?.onUpdated(() => {
@@ -135,13 +136,8 @@ export class ListModel<T> implements ListPaginationContext<T> {
     return this.listTable.table;
   }
 
-  /**
-   * No persistence yet. The port is what `SettingsProvider` would fill, and
-   * everything above it already asks through it — see this package's
-   * AGENTS.md.
-   */
   public get settings(): ListSettingsPort | undefined {
-    return undefined;
+    return this.shape.settings;
   }
 
   public setSortingState(next: ColumnSort[]): void {

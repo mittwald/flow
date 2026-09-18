@@ -8,6 +8,7 @@ import {
   ListSearch,
   ListSorting,
   ListStaticData,
+  SettingsProvider,
   Text,
 } from "@/index";
 import { cleanupRemote, renderRemote } from "@/tests/lib/environment";
@@ -161,6 +162,102 @@ describe("Searching", () => {
     await expect
       .element(list.getByText("Dwayne Hicks"))
       .not.toBeInTheDocument();
+  });
+});
+
+describe("Persisted view settings", () => {
+  const backend = () => {
+    const values = new Map<string, string>();
+    return {
+      values,
+      get: (key: string) => values.get(key) ?? null,
+      set: (key: string, value: string) => void values.set(key, value),
+    };
+  };
+
+  /*
+   * Under the same keys React writes, so the two bindings read each other's
+   * values — a user who opens the same list in a Vue extension and in the
+   * backoffice sees one set of view settings, not two.
+   */
+  test("writes the sorting the user picked", async () => {
+    const store = backend();
+
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(SettingsProvider, { backend: store, prefix: "test" }, () =>
+            h(List, { "aria-label": "Crew", settingStorageKey: "crew" }, () => [
+              h(ListStaticData, { data: crew }),
+              h(
+                ListItem,
+                { textValue: (data: Crew) => data.name },
+                {
+                  default: ({ data }: { data: Crew }) =>
+                    h(ListItemView, null, () =>
+                      h(Heading, null, () => data.name),
+                    ),
+                },
+              ),
+              h(ListSorting, {
+                property: "name",
+                name: "Name",
+                direction: "asc",
+              }),
+            ]),
+          ),
+      ),
+    );
+
+    const list = page.elementLocator(host);
+    await userEvent.click(list.getByRole("button", { name: "Sorting" }));
+    await userEvent.click(page.getByRole("menuitemradio", { name: "Name" }));
+
+    await expect
+      .poll(() => store.values.get("test.List.crew.sorting.autosave"))
+      .toBe(JSON.stringify({ property: "name", direction: "asc" }));
+  });
+
+  test("restores it on the next render", async () => {
+    const store = backend();
+    store.values.set(
+      "test.List.crew.sorting.autosave",
+      JSON.stringify({ property: "name", direction: "asc" }),
+    );
+
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(SettingsProvider, { backend: store, prefix: "test" }, () =>
+            h(List, { "aria-label": "Crew", settingStorageKey: "crew" }, () => [
+              h(ListStaticData, { data: crew }),
+              h(
+                ListItem,
+                { textValue: (data: Crew) => data.name },
+                {
+                  default: ({ data }: { data: Crew }) =>
+                    h(ListItemView, null, () =>
+                      h(Heading, null, () => data.name),
+                    ),
+                },
+              ),
+              h(ListSorting, {
+                property: "name",
+                name: "Name",
+                direction: "asc",
+              }),
+            ]),
+          ),
+      ),
+    );
+
+    const list = page.elementLocator(host);
+
+    await expect
+      .poll(() =>
+        list.getByRole("row").elements()[0]?.getAttribute("aria-label"),
+      )
+      .toBe("Carter Burke");
   });
 });
 

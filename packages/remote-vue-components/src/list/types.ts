@@ -3,6 +3,7 @@ import type {
   ListData,
   ListFilterShape,
   ListSearchShape,
+  ListSettingsPort,
   ListSortingShape,
   ListViewModeValue,
   PropertyName,
@@ -39,6 +40,8 @@ export interface ListItemViewShape<T> {
 }
 
 export interface VueListShape<T> extends ListDataSourceShape<T> {
+  /** Where the view settings are persisted. Without it, nothing is. */
+  settings?: ListSettingsPort;
   filters?: VueListFilterShape<T>[];
   sorting?: ListSortingShape<T>[];
   search?: ListSearchShape;

@@ -10,6 +10,7 @@ export {
 } from "./setupComponents";
 export { injectListModel, type AnyListModel } from "./listContext";
 export { ListModel } from "./model";
+export { createListSettings, useListSettings } from "./settings";
 export type {
   ListDataSourceShape,
   ListItemViewShape,

@@ -70,6 +70,25 @@ export const SettingsProvider = defineComponent({
 });
 
 /**
+ * The backend the surrounding `SettingsProvider` set, and the prefix it
+ * namespaces keys with.
+ *
+ * For code that persists more than one value under a key of its own — the
+ * `List`'s view settings — where a `Ref` per setting would be the wrong shape.
+ */
+export const injectSettingsBackend = (): {
+  backend: SettingsBackend;
+  prefix: string;
+} => {
+  const store = inject(settingsKey, undefined);
+
+  return {
+    backend: store?.backend ?? localStorageBackend,
+    prefix: store?.prefix ?? "flow",
+  };
+};
+
+/**
  * The storage half of `useSetting`, without the injection — so it can be tested
  * and reused outside a component.
  */

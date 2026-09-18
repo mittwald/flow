@@ -1,12 +1,20 @@
 import { Div, ListEmptyViewContainer } from "@/auto-generated";
 import { watchMobxValue } from "@/lib/mobxSelector";
 import type { AnyRecord } from "@/lib/types";
-import { defineComponent, h, watch, type PropType, type VNodeChild } from "vue";
+import {
+  defineComponent,
+  h,
+  onMounted,
+  watch,
+  type PropType,
+  type VNodeChild,
+} from "vue";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Items } from "./Items";
 import { provideListModel } from "./listContext";
 import { ListModel } from "./model";
+import { useListSettings } from "./settings";
 import {
   findSetup,
   findSetups,
@@ -67,6 +75,7 @@ const readShape = (
         }
       : undefined,
 
+    settings: props.settings as never,
     batchSize: props.batchSize as number | undefined,
     loadingItemsCount: props.loadingItemsCount as number | undefined,
     getItemId: props.getItemId as ((data: never) => string) | undefined,
@@ -91,6 +100,11 @@ export const List = defineComponent({
   name: "List",
 
   props: {
+    /**
+     * The key the list's view settings are persisted under. Needs a surrounding
+     * `<SettingsProvider>`; without a key nothing is persisted.
+     */
+    settingStorageKey: { type: String, default: undefined },
     /** How many items one batch holds. @default 20 */
     batchSize: { type: Number, default: undefined },
     /** How many placeholders to show while the first batch loads. */
@@ -116,8 +130,9 @@ export const List = defineComponent({
   },
 
   setup(props, { slots, attrs }) {
+    const settings = useListSettings(props.settingStorageKey);
     const list = new ListModel<never>(
-      readShape(slots.default?.(), { ...props, ...attrs }),
+      readShape(slots.default?.(), { ...props, ...attrs, settings }),
     );
     provideListModel(list);
 
@@ -153,6 +168,15 @@ export const List = defineComponent({
         }
       },
       { immediate: true },
+    );
+
+    /*
+     * A stored selection can name a value the data no longer has. Dropping it
+     * is not cosmetic: kept, it filters everything away and leaves no control
+     * to take it back.
+     */
+    onMounted(() =>
+      list.filters.forEach((filter) => filter.deleteUnknownFilterValues()),
     );
 
     const data = watchMobxValue(() => list.loaderState.mergedData);
