@@ -609,6 +609,25 @@ where the error points.
   regenerate. `checkSerializableProps` now fails generation on new ones; the
   pre-existing set is listed in `acknowledgedValueReturningProps`
 
+- **Symptom:** A remote-capable component reaches the host as `undefined` —
+  React throws **"Element type is invalid: expected a string … but got:
+  undefined"** — although every generated file for it exists and is committed
+
+  **Cause:** The component is listed in **both** `@flr-generate` and
+  `packages/components/src/index/flr-universal.ts`. The two are either-or.
+  `remote-react-components/src/index.ts` is `export * from "./auto-generated"`
+  plus `export * from "./components"`, and the latter re-exports
+  `@mittwald/flow-react-components/flr-universal`. A name that both star exports
+  provide is ambiguous, and ESM resolves it to nothing — no error, no warning,
+  and the component's own code is never the problem
+
+  **Fix:** Pick one. `@flr-generate` for a component the host materializes from
+  a `flr-*` element; `flr-universal` for one the remote app renders itself
+  (`Action`, `LightBox` and `List` are there, and correspondingly absent from
+  `auto-generated`). To confirm the diagnosis, import the name from
+  `@/auto-generated` and from `@/index` in one file and log both — it is in the
+  first and missing from the second
+
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"
 

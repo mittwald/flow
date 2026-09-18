@@ -1,0 +1,11 @@
+.coachMark {
+  row-gap: var(--popover--spacing);
+  display: flex;
+  flex-direction: column;
+  max-width: var(--coach-mark--max-width);
+  padding: var(--popover--padding--m);
+}
+
+.dismiss {
+  align-self: flex-start;
+}

@@ -1,0 +1,94 @@
+---
+component: CoachMark
+description:
+  Ein CoachMark macht auf neue Features oder verschobene Bedienelemente
+  aufmerksam.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Zeige höchstens ein CoachMark pro Seite. Mehrere konkurrieren um dieselbe
+  Aufmerksamkeit und heben sich gegenseitig auf.
+- Beschränke den Inhalt auf einen Gedanken. Benenne, was neu ist und welchen
+  Vorteil es bringt.
+- Blende ein bestätigtes CoachMark dauerhaft aus. Ein Hinweis, der bei jedem
+  Aufruf erneut erscheint, kann als störend wahrgenommen werden.
+- Platziere unerlässliche Informationen direkt in der Oberfläche. Ein CoachMark
+  sollte nicht die einzige Quelle für wichtige Informationen sein.
+- Platziere das CoachMark direkt hinter seinem Ankerelement. So wird es in der
+  Vorlesereihenfolge an der passenden Stelle erreicht. Steht keine Referenz zur
+  Verfügung, gib den Anker als `id` an.
+
+## CoachMark vs. ContextualHelp
+
+Verwende ein CoachMark, um den User proaktiv auf ein neues oder verschobenes
+Feature aufmerksam zu machen. Für weiterführende Informationen ist ein
+[ContextualHelp](/components/overlays/contextual-help) die bessere Wahl, da der
+User selbst entscheiden kann, ob er diese Information braucht.
+
+<DoAndDont>
+  <Plain heading="Verwende ein CoachMark, um z. B. ...">
+    - auf eine neue oder verschobene Funktion hinzuweisen.
+    - eine Funktion zu zeigen, die leicht zu übersehen ist.
+    - einen Hinweis zu geben, ohne die Arbeit zu unterbrechen.
+
+  </Plain>
+
+  <Plain heading="Verwende ein ContextualHelp, um z. B. ...">
+    - einen Fachbegriff zu erklären.
+    - Hintergrund zu einem Formularfeld anzubieten.
+    - eine Einstellung mit ihren Folgen zu beschreiben.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Anker
+
+Ein CoachMark zeigt auf ein Element, nicht auf die Seite. Einen Trigger gibt es
+nicht, da das CoachMark nicht vom User geöffnet wird. Stattdessen wird sein
+Ankerelement auf einem von zwei Wegen angegeben:
+
+- `anchorRef` ist die Referenz auf das Element. Das ist der Normalfall in einer
+  React-Anwendung.
+- `anchor` ist die `id` des Elements, nachgeschlagen beim Öffnen. Sie hilft
+  dort, wo sich keine Referenz teilen lässt.
+
+Das CoachMark wird direkt hinter seinem Ankerelement im DOM gerendert und folgt
+diesem in der Vorlesereihenfolge. Über `aria-details` verweist der Anker
+zusätzlich auf das CoachMark. Es wird nicht automatisch angekündigt, sondern
+beim Lesen erreicht.
+
+Das CoachMark ist absolut positioniert und benötigt keinen eigenen Platz.
+`overflow: hidden` oder ein eigener Stacking Context eines Vorfahren kann es
+abschneiden.
+
+Beim Scrollen folgt das CoachMark seinem Anker und bleibt geöffnet.
+
+<LiveCodeEditor example="anchorById" editorCollapsed />
+
+---
+
+# Schließen
+
+Den Button zum Schließen bringt das CoachMark nicht selbst mit, er wird
+komponiert: Ein [Action](/components/actions/action) mit `closeOverlay` um einen
+[Button](/components/actions/button) schließt das CoachMark. Größe und
+Platzierung gibt das CoachMark dem Button vor. Escape schließt es ebenfalls.
+
+`onOpenChange` meldet jede Änderung, unabhängig davon, welcher Weg sie ausgelöst
+hat. Das ist der Platz, um die Bestätigung zu speichern; beim nächsten Aufruf
+unterdrückt `isDefaultOpen={false}` den Hinweis dann.
+
+<LiveCodeEditor example="dismissAction" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />
