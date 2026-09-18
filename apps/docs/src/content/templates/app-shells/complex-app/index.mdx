@@ -1,8 +1,8 @@
 ---
 title: Complex App
 description:
-  Eine App mit mehreren Navigationsebenen aus globaler Kopfleiste, Seitenleiste
-  und Breadcrumb.
+  Eine App mit mehreren Navigationsebenen aus globalem Header, Sidebar und
+  Breadcrumb.
 ---
 
 <AppShell example="complex-app" />
@@ -12,32 +12,31 @@ description:
 # Verwendung
 
 Eine Complex App erschließt viele Bereiche über mehrere Navigationsebenen aus
-globaler Kopfleiste, Seitenleiste und Breadcrumb. Das ist die im mStudio
-typische Form. Verwende sie, wenn eine flache Navigation nicht mehr ausreicht.
-Die gestaffelten Ebenen halten auch eine große Anwendung übersichtlich und
-zeigen dem Nutzer jederzeit, wo er sich befindet. Für ein kleines Werkzeug mit
-wenigen, gleichrangigen Bereichen genügt eine
+globalem Header, Sidebar und Breadcrumb. Das ist die im mStudio typische Form.
+Verwende sie, wenn eine flache Navigation nicht mehr ausreicht. Die gestaffelten
+Ebenen halten auch eine große Anwendung übersichtlich und zeigen dem Nutzer
+jederzeit, wo er sich befindet. Für ein kleines Werkzeug mit wenigen,
+gleichrangigen Bereichen genügt eine
 [Simple App](/templates/app-shells/simple-app).
 
 ---
 
 # Aufbau
 
-- **Kopfleiste** – Eine
-  [HeaderNavigation](/components/navigation/header-navigation) trägt die globale
-  Navigationsebene und bereichsübergreifende Funktionen.
-- **Seitenleiste** – Eine [Navigation](/components/navigation/navigation) führt
-  durch die Unterseiten des aktuellen Bereichs.
+- **Header** – Eine [HeaderNavigation](/components/navigation/header-navigation)
+  trägt die globale Navigationsebene und bereichsübergreifende Funktionen.
+- **Sidebar** – Eine [Navigation](/components/navigation/navigation) führt durch
+  die Unterseiten des aktuellen Bereichs.
 - **Content Header** – [Breadcrumb](/components/navigation/breadcrumb) und
   PageTitle (ein [Heading](/components/content/heading) der Ebene 1) orientieren
   den Nutzer in der Tiefe.
-- **Content** – Der Seiteninhalt liegt in einer
-  [LayoutCard](/components/structure/layout-card). Was darin steht, beschreiben
-  die Seitentypen: [Dashboard](/templates/seiten/dashboard),
-  [Übersichtsseite](/templates/seiten/uebersichtsseite) und
-  [Detailseite](/templates/seiten/detailseite).
-- **Fußzeile** – [Links](/components/navigation/link) führen zu Verweisen wie
-  Datenschutz oder Impressum.
+- **Content** – Der Inhalt einer Seite wird in der Regel in
+  [LayoutCards](/components/structure/layout-card) dargestellt. Typische
+  Seitentypen sind beispielsweise [Detailseiten](/templates/seiten/detailseite),
+  [Dashboards](/templates/seiten/dashboard) und
+  [Übersichtsseiten](/templates/seiten/uebersichtsseite).
+- **Footer** – Hier lassen sich [Links](/components/navigation/link) platzieren,
+  etwa Verweise auf Datenschutz oder Impressum.
 
 ---
 
