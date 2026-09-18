@@ -22,6 +22,18 @@ export const ListSearch = setupComponent("ListSearch");
 export const ListSorting = setupComponent("ListSorting");
 export const ListFilter = setupComponent("ListFilter");
 
+/*
+ * The table view's shape. Named `ListTable*` rather than `Table*`: this package
+ * already exports the standalone Flow table's elements under those names, and
+ * two star exports offering one name resolve to nothing — silently.
+ */
+export const ListTable = setupComponent("ListTable");
+export const ListTableHeader = setupComponent("ListTableHeader");
+export const ListTableColumn = setupComponent("ListTableColumn");
+export const ListTableBody = setupComponent("ListTableBody");
+export const ListTableRow = setupComponent("ListTableRow");
+export const ListTableCell = setupComponent("ListTableCell");
+
 export interface FoundSetup {
   props: AnyRecord;
   /** The element's scoped default slot, where it has one. */

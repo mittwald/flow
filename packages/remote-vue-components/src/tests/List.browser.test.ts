@@ -8,6 +8,8 @@ import {
   ListSearch,
   ListSorting,
   ListStaticData,
+  ListTableCell,
+  ListTableColumn,
   SettingsProvider,
   Text,
 } from "@/index";
@@ -162,6 +164,54 @@ describe("Searching", () => {
     await expect
       .element(list.getByText("Dwayne Hicks"))
       .not.toBeInTheDocument();
+  });
+});
+
+describe("The table view mode", () => {
+  const tableList = () =>
+    renderList(() => [
+      h(ListStaticData, { data: crew }),
+      h(
+        ListItem,
+        { textValue: (data: Crew) => data.name },
+        {
+          default: ({ data }: { data: Crew }) =>
+            h(ListItemView, null, () => h(Heading, null, () => data.name)),
+        },
+      ),
+      h(ListTableColumn, null, () => "Name"),
+      h(ListTableColumn, null, () => "Rank"),
+      h(ListTableCell, null, {
+        default: ({ data }: { data: Crew }) => data.name,
+      }),
+      h(ListTableCell, null, {
+        default: ({ data }: { data: Crew }) => data.rank,
+      }),
+    ]);
+
+  /*
+   * Declaring columns is what makes the mode available at all — with no table
+   * to switch to, the menu has one entry and does not render.
+   */
+  test("is offered once the list declares columns", async () => {
+    const list = tableList();
+
+    await expect
+      .element(list.getByRole("button", { name: "Settings" }))
+      .toBeVisible();
+  });
+
+  test("renders the cells the columns describe", async () => {
+    const list = tableList();
+
+    await userEvent.click(list.getByRole("button", { name: "Settings" }));
+    await userEvent.click(page.getByRole("menuitemradio", { name: "Table" }));
+
+    await expect.element(list.getByRole("grid")).toBeVisible();
+    await expect
+      .element(list.getByRole("columnheader", { name: "Rank" }))
+      .toBeVisible();
+    await expect.element(list.getByText("Corporal")).toBeVisible();
   });
 });
 

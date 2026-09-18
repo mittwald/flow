@@ -12,6 +12,7 @@ import {
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Items } from "./Items";
+import { ListTableView } from "./Table";
 import { provideListModel } from "./listContext";
 import { ListModel } from "./model";
 import { useListSettings } from "./settings";
@@ -24,6 +25,12 @@ import {
   ListSearch,
   ListSorting,
   ListStaticData,
+  ListTable,
+  ListTableBody,
+  ListTableCell,
+  ListTableColumn,
+  ListTableHeader,
+  ListTableRow,
 } from "./setupComponents";
 import { className, listStyles } from "./styles";
 import type { VueListShape } from "./types";
@@ -43,6 +50,7 @@ const readShape = (
   const asyncLoader = findSetup(children, ListLoaderAsync);
   const item = findSetup(children, ListItem);
   const search = findSetup(children, ListSearch);
+  const columns = findSetups(children, ListTableColumn);
 
   return {
     staticData: staticData?.props.data as never[] | undefined,
@@ -76,6 +84,28 @@ const readShape = (
       : undefined,
 
     settings: props.settings as never,
+    table:
+      columns.length > 0
+        ? {
+            props: findSetup(children, ListTable)?.props ?? {},
+            headerProps: findSetup(children, ListTableHeader)?.props ?? {},
+            bodyProps: findSetup(children, ListTableBody)?.props ?? {},
+            rowProps: findSetup(children, ListTableRow)?.props ?? {},
+            columns: columns.map((column) => ({
+              props: column.props,
+              render: column.render
+                ? () => column.render?.({}) as VNodeChild
+                : undefined,
+            })),
+            cells: findSetups(children, ListTableCell).map((cell) => ({
+              props: cell.props,
+              render: cell.render
+                ? (data: never) => cell.render?.({ data }) as VNodeChild
+                : undefined,
+            })),
+          }
+        : undefined,
+
     batchSize: props.batchSize as number | undefined,
     loadingItemsCount: props.loadingItemsCount as number | undefined,
     getItemId: props.getItemId as ((data: never) => string) | undefined,
@@ -194,6 +224,7 @@ export const List = defineComponent({
       /* The children are the API, so a changed child has to reach the model. */
       list.shape.itemView = shape.itemView;
       list.shape.onAction = shape.onAction;
+      list.shape.table = shape.table;
       if (shape.staticData && shape.staticData !== list.shape.staticData) {
         list.setStaticData(shape.staticData);
       }
@@ -230,7 +261,7 @@ export const List = defineComponent({
           h(Div, { class: listStyles.listWrapper }, () => [
             emptyView,
             hasItems.value && slots.summary ? slots.summary() : null,
-            isTable.value ? null : h(Items),
+            isTable.value ? h(ListTableView) : h(Items),
           ]),
           props.hidePagination ? null : h(Footer),
         ],

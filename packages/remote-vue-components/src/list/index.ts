@@ -7,6 +7,12 @@ export {
   ListSearch,
   ListSorting,
   ListStaticData,
+  ListTable,
+  ListTableBody,
+  ListTableCell,
+  ListTableColumn,
+  ListTableHeader,
+  ListTableRow,
 } from "./setupComponents";
 export { injectListModel, type AnyListModel } from "./listContext";
 export { ListModel } from "./model";

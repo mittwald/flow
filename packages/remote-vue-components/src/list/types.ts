@@ -39,7 +39,29 @@ export interface ListItemViewShape<T> {
   tileMaxWidth?: number;
 }
 
+export interface ListTableCellShape<T> {
+  render?: (data: T) => VNodeChild;
+  props: Record<string, unknown>;
+}
+
+export interface ListTableColumnShape {
+  props: Record<string, unknown>;
+  /** The column's label, rendered as the element's children. */
+  render?: () => VNodeChild;
+}
+
+export interface ListTableShape<T> {
+  props: Record<string, unknown>;
+  headerProps: Record<string, unknown>;
+  bodyProps: Record<string, unknown>;
+  rowProps: Record<string, unknown>;
+  columns: ListTableColumnShape[];
+  cells: ListTableCellShape<T>[];
+}
+
 export interface VueListShape<T> extends ListDataSourceShape<T> {
+  /** The table view mode. Without columns there is no table to switch to. */
+  table?: ListTableShape<T>;
   /** Where the view settings are persisted. Without it, nothing is. */
   settings?: ListSettingsPort;
   filters?: VueListFilterShape<T>[];

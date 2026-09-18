@@ -115,11 +115,10 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
   table itself — lives in `@mittwald/flow-components-base` and is the same code
   React runs. What is written here is the arrangement plus the one job the
   shared model deliberately leaves open: fetching a batch. Still missing are the
-  **table view mode**, the "all filters" modal with its active-filter chips, and
-  infinite scroll. `typedList` has no counterpart: Vue infers the item type from
-  the `ListItem` slot instead. The view settings _are_ persisted, through
-  `settingStorageKey` and a surrounding `SettingsProvider`, under the same keys
-  React writes.
+  "all filters" modal with its active-filter chips, and infinite scroll.
+  `typedList` has no counterpart: Vue infers the item type from the `ListItem`
+  slot instead. The view settings _are_ persisted, through `settingStorageKey`
+  and a surrounding `SettingsProvider`, under the same keys React writes.
 - **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
   each consumer licenses itself and which therefore cannot be inlined the way
   Tabler's is. `IconSetProvider` is what fills the gap: hand it your own icons

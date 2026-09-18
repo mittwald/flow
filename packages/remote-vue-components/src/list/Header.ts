@@ -56,10 +56,15 @@ interface HeaderFilter {
 }
 
 /** Which layouts this list can actually show. */
-const availableViewModes = (list: AnyListModel): ("list" | "tiles")[] => {
-  const modes: ("list" | "tiles")[] = [];
+type ViewMode = "list" | "table" | "tiles";
+
+const availableViewModes = (list: AnyListModel): ViewMode[] => {
+  const modes: ViewMode[] = [];
   if (list.shape.itemView?.showList) {
     modes.push("list");
+  }
+  if (list.shape.table) {
+    modes.push("table");
   }
   if (list.shape.itemView?.showTiles) {
     modes.push("tiles");
@@ -78,7 +83,7 @@ const renderViewModeMenu = (
   list: AnyListModel,
   texts: ListTextFormatter,
   isDisabled: boolean,
-  selected: "list" | "table" | "tiles",
+  selected: ViewMode,
 ): VNodeChild => {
   const modes = availableViewModes(list);
 
