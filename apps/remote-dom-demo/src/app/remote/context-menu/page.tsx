@@ -60,6 +60,33 @@ export default function Page() {
             <MenuItem>Self-destruct</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
+
+        {/* A ModalTrigger with a MenuItem trigger: the menu closes, the modal
+            stays open because it is rendered outside the menu popover. */}
+        <ContextMenuTrigger>
+          <Button>Station actions with modal</Button>
+          <ContextMenu>
+            <MenuItem>Rotate station</MenuItem>
+            <ModalTrigger>
+              <Modal>
+                <Heading>Self-destruct</Heading>
+                <Content>
+                  The ship is destroyed after the countdown. This cannot be
+                  undone.
+                </Content>
+                <ActionGroup>
+                  <Action closeModal>
+                    <Button color="danger">Start countdown</Button>
+                    <Button color="secondary" variant="soft">
+                      Cancel
+                    </Button>
+                  </Action>
+                </ActionGroup>
+              </Modal>
+              <MenuItem>Self-destruct</MenuItem>
+            </ModalTrigger>
+          </ContextMenu>
+        </ContextMenuTrigger>
       </Content>
     </Section>
   );
