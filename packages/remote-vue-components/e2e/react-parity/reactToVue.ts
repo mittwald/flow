@@ -1,4 +1,9 @@
-import { isValidElement, type ReactElement, type ReactNode } from "react";
+import {
+  Fragment as ReactFragment,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { renderToStaticMarkup } from "react-dom/server.browser";
 import * as VueComponents from "@mittwald/flow-remote-vue-components";
 import * as ReactComponents from "@mittwald/flow-remote-react-components";
@@ -151,7 +156,12 @@ export const toVNode = (element: ReactElement): VNode => {
     props: Record<string, unknown>;
   };
 
-  if (type === (Fragment as unknown)) {
+  /*
+   * Compared against **React's** fragment symbol and rendered with **Vue's**.
+   * The two are different symbols, so the obvious single `Fragment` import is
+   * a check that never matches — silently, until a scenario writes `<>`.
+   */
+  if (type === (ReactFragment as unknown)) {
     return h(
       Fragment,
       { key } as Record<string, unknown>,
