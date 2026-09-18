@@ -13,10 +13,9 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import { getListColumn } from "@mittwald/flow-components-base";
+import { getListColumn, ListTable } from "@mittwald/flow-components-base";
 import type {
   OnListChanged,
   PropertyName,
@@ -24,6 +23,8 @@ import type {
 import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useEffectEvent, useState } from "react";
+import { useStatic } from "@/lib/hooks/useStatic";
+import useSelector from "@/lib/mobx/useSelector";
 import { Filter } from "./filter/Filter";
 
 export class ReactTable<T, TMeta = unknown> {
@@ -86,7 +87,7 @@ export class ReactTable<T, TMeta = unknown> {
 
     this.list.search?.updateInitialState(initialState);
 
-    const table = useReactTable({
+    const options: TableOptions<T> = {
       data,
       state: {
         sorting: this.sortingState,
@@ -104,7 +105,18 @@ export class ReactTable<T, TMeta = unknown> {
       },
       globalFilterFn: "auto",
       ...tableOptions,
-    });
+    } as TableOptions<T>;
+
+    /*
+     * `useReactTable` in twenty lines of MobX, so the Vue binding runs the same
+     * table. What React still owns: the instance has to outlive a render, the
+     * options are rebuilt on every render, and a state change has to re-render.
+     */
+    const listTable = useStatic(() => new ListTable<T>(options));
+    listTable.setOptions(options);
+    useSelector(() => listTable.state);
+
+    const table = listTable.table;
 
     const reactTableState = table.getState();
 

@@ -35,6 +35,7 @@ export type {
   ListSortingSetting,
 } from "./list/settings/types";
 export { ListSorting } from "./list/sorting/ListSorting";
+export { ListTable } from "./list/table/ListTable";
 export type {
   ListSortingShape,
   SortingDefaultMode,

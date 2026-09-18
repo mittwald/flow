@@ -95,6 +95,7 @@
     "@react-types/shared": "^3.36.1",
     "@replit/codemirror-indentation-markers": "^6.5.3",
     "@tanstack/react-table": "^8.21.3",
+    "@tanstack/table-core": "^8.21.3",
     "@types/invariant": "^2.2.37",
     "@types/luxon": "^3.7.5",
     "@types/prop-types": "^15.7.15",

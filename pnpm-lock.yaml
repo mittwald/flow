@@ -516,6 +516,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
       '@types/invariant':
         specifier: ^2.2.37
         version: 2.2.37
@@ -1425,6 +1428,9 @@ importers:
       '@mittwald/flow-remote-elements':
         specifier: workspace:*
         version: link:../remote-elements
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
       country-codes-list:
         specifier: ^2.0.0
         version: 2.1.0

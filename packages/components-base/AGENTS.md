@@ -38,6 +38,14 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   filters is not assignable to `ListFilter<any, …>[]`: a row model sits in a
   contravariant position deep inside `Column`, so `never` and `any` do not meet.
   `storeFilters` takes the two members it reads instead of the class.
+- **`ListTable` is `useReactTable` in MobX.** That hook is `createTable`, a
+  `useState` for the table's own state, and a `setOptions` on every render that
+  folds the state back into the options — and `@tanstack/vue-table` reimplements
+  the same twenty lines against Vue. So the state lives here and each binding
+  brings a subscription. Options still arrive from the binding per render,
+  because that is where they come from: the loaded data, the column definitions
+  the filters and sortings produce. `setState` re-applies them, or a state
+  change would never reach the table.
 - **The view mode is a MobX observable, not the binding's state.** React used
   `useState` inside the model, which meant the model was rebuilt every render
   and the state survived only because the hook did. Shared, it holds the value
@@ -69,7 +77,9 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   side additionally through the plugin's `except` list. A move to `dependencies`
   would externalize it and publish a bare import of a package that does not
   exist. Its own **runtime** deps (`mobx`, `remeda`) must therefore be real
-  dependencies of **both** consumers — `@tanstack/table-core` is not among them,
-  because the model only imports its types.
+  dependencies of **both** consumers, `@tanstack/table-core` included: since
+  `ListTable` calls `createTable`, leaving it out of `packages/components` put a
+  96 kB second copy of it inside that package's bundle, beside the one
+  `@tanstack/react-table` already brings.
 - **Relative imports only.** No `@/` alias: the source is compiled by two
   different builds, and an alias would have to be resolvable in both.
