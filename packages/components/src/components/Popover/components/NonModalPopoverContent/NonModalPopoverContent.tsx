@@ -14,6 +14,7 @@ export interface NonModalPopoverContentProps
   placement?: Placement;
   offset?: number;
   crossOffset?: number;
+  /** Swallowed on purpose — the stylesheet overrides `max-height` here. */
   maxHeight?: number;
   shouldFlip?: boolean;
   shouldUpdatePosition?: boolean;
@@ -104,8 +105,32 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     onOpenChange,
     ref,
     triggerRef,
-    ...positionProps
+    // Named one by one so that everything left over is a DOM prop and reaches
+    // the element. Funnelling the rest into the positioning instead drops
+    // `aria-*`, `data-*` and the like, which `Aria.Popover` forwards on the
+    // modal path.
+    placement: requestedPlacement,
+    offset,
+    crossOffset,
+    maxHeight: ignoredMaxHeight,
+    shouldFlip,
+    shouldUpdatePosition,
+    arrowBoundaryOffset,
+    boundaryElement,
+    ...rest
   } = props;
+
+  void ignoredMaxHeight;
+
+  const positionProps = {
+    placement: requestedPlacement,
+    offset,
+    crossOffset,
+    shouldFlip,
+    shouldUpdatePosition,
+    arrowBoundaryOffset,
+    boundaryElement,
+  };
 
   const overlayRef = useObjectRef(ref as Ref<HTMLDivElement>);
   const arrowRef = useRef<HTMLDivElement>(null);
@@ -197,6 +222,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
 
   return (
     <div
+      {...rest}
       {...overlayProps}
       id={id}
       ref={overlayRef}
