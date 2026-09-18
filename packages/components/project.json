@@ -142,7 +142,7 @@
     "test:browser": {
       "dependsOn": [
         {
-          "projects": ["stylesheet"],
+          "projects": ["tokens"],
           "target": "build"
         }
       ]
@@ -151,7 +151,7 @@
       "cache": true,
       "dependsOn": [
         {
-          "projects": ["stylesheet"],
+          "projects": ["tokens"],
           "target": "build"
         }
       ]
