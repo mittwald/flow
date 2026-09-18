@@ -70,7 +70,11 @@ export const OverlayTrigger: FC<Props> = (props) => {
   };
 
   return (
-    <OverlayContextProvider type={overlayType} controller={overlayController}>
+    <OverlayContextProvider
+      type={overlayType}
+      controller={overlayController}
+      isOverlayContent={false}
+    >
       <PropsContextProvider
         props={propsContext}
         dependencies={[isPending, overlayController]}

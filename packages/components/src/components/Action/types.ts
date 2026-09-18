@@ -21,8 +21,16 @@ export interface ActionProps extends PropsWithChildren, FlowComponentProps {
    * components share one action state.
    */
   actionModel?: ActionModel;
-  /** The overlay to close when the action is triggered. */
-  closeOverlay?: FlowComponentName | OverlayController | CloseOverlayOptions;
+  /**
+   * The overlay to close when the action is triggered. `true` closes the
+   * nearest enclosing overlay, whichever component it is — a name still wins,
+   * so `closeOverlay="Modal"` inside a `Popover` closes the outer modal.
+   *
+   * There is no `openOverlay={true}` counterpart: the nearest overlay is the
+   * one this action renders inside, so it is open by definition.
+   */
+  closeOverlay?:
+    boolean | FlowComponentName | OverlayController | CloseOverlayOptions;
   /** The overlay to open when the action is triggered. */
   openOverlay?: FlowComponentName | OverlayController;
   /** The overlay to open or close when the action is triggered. */
