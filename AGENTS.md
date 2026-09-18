@@ -642,6 +642,24 @@ where the error points.
   any `--write` and revert what you did not mean to touch; nothing downstream
   will flag it
 
+- **Symptom:** A type error you never saw locally sits in the **release
+  build's** log — `vite build --config vite.build.config.ts` prints `error TS…`
+  and still exits **0**, while `pnpm nx test:compile <pkg>` is green on the same
+  tree
+
+  **Cause:** The declaration rollup type-checks under its own program, which is
+  not the one `tsc --noEmit` runs, and the plugin reports what it finds without
+  failing the task. Nothing downstream looks at it: `pnpm build` succeeds, CI's
+  `unit` job runs `test:compile`, and the error reaches nobody. It showed up
+  with two copies of one type — `PropertyName` declared both in
+  `packages/components` and in `packages/components-base`, whose `DeepKeys<T>`
+  conditionals are only comparable when they are the same declaration
+
+  **Fix:** Read the build log after touching types that cross a package boundary
+  — `pnpm nx build <pkg> --skip-nx-cache 2>&1 | grep 'error TS'` — and do not
+  take a green `test:compile` as the whole answer. A type that two packages both
+  need is **re-exported from one of them**, never declared twice
+
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"
 

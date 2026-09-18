@@ -38,6 +38,18 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   filters is not assignable to `ListFilter<any, …>[]`: a row model sits in a
   contravariant position deep inside `Column`, so `never` and `any` do not meet.
   `storeFilters` takes the two members it reads instead of the class.
+- **A type both packages need is re-exported, never declared twice.** Two copies
+  of `PropertyName<T>` typechecked apart and failed where they met:
+  `DeepKeys<T>` is a conditional type, and TypeScript compares two conditionals
+  only when they come from the same declaration. Worse, `tsc --noEmit` stayed
+  green and only the declaration rollup in `packages/components`' release build
+  reported it — without failing. `packages/components` re-exports these from
+  here.
+- **The batches controller does not subscribe to anything.** A filter or a
+  search that changes has to put the list back on its first batch, but the
+  filters are the list's, and handing a list of concrete filters to a shared
+  model is the `Table<never>` trap below. So the controller only exposes
+  `reset()` and the binding's `List` wires it.
 - **The settings port is spelled out per key.** One generic method whose return
   type indexes a value map reads better and does not typecheck: against a real
   store TypeScript resolves the return to the _intersection_ of every value, and

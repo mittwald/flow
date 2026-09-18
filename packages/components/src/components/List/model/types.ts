@@ -6,22 +6,29 @@ import type { BatchesControllerShape } from "@/components/List/model/pagination/
 import type { SearchShape } from "@/components/List/model/search/types";
 import type { SortingShape } from "@/components/List/model/sorting/types";
 import type { TableShape } from "@/components/List/model/table/types";
-import type { ItemType } from "@/lib/types/array";
 import type { MultipleSelection, SelectionBehavior } from "@react-types/shared";
-import type { ListSettingsDefaults } from "@mittwald/flow-components-base";
-import type { DeepKeys, DeepValue } from "@tanstack/react-table";
+import { customPropertyPrefix } from "@mittwald/flow-components-base";
+import type {
+  CustomPropertyName,
+  ListSettingsDefaults,
+  PropertyName,
+  PropertyValue,
+  PropertyValueRenderMethod as ListPropertyValueRenderMethod,
+} from "@mittwald/flow-components-base";
 import type { ReactNode } from "react";
 
-export const customPropertyPrefix = "$" as const;
-export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;
+/*
+ * One set of property types with the shared model, not a second copy. A copy
+ * typechecks on its own and still fails where the two meet: `DeepKeys<T>` is a
+ * conditional type, and two conditionals from two declarations are only
+ * comparable when they are the same declaration.
+ */
+export { customPropertyPrefix };
+export type { CustomPropertyName, PropertyName, PropertyValue };
 
-export type PropertyName<T> = DeepKeys<T> | CustomPropertyName;
-export type PropertyValue<T, TProp> = TProp extends CustomPropertyName
-  ? T
-  : DeepValue<T, TProp>;
-export type PropertyValueRenderMethod<TMatcherValue> = (
-  prop: NonNullable<ItemType<TMatcherValue>>,
-) => ReactNode;
+/** React's rendering of a filter value. */
+export type PropertyValueRenderMethod<TMatcherValue> =
+  ListPropertyValueRenderMethod<TMatcherValue, ReactNode>;
 
 export type OnListChanged<T, TMeta = unknown> = (list: List<T, TMeta>) => void;
 

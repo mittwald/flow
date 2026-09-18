@@ -106,6 +106,16 @@ export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
     this.infiniteScroll = infiniteScroll;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
+
+    /*
+     * The controller no longer subscribes itself: the filters and the search
+     * are this list's, and handing a list of concrete filters to a shared
+     * model is the `Table<never>` variance trap. `IncrementalLoader` still
+     * subscribes in its own constructor, which runs right after this, so the
+     * order of the two resets is unchanged.
+     */
+    this.filters.forEach((f) => f.onFilterUpdated(() => this.batches.reset()));
+    this.search?.onUpdated(() => this.batches.reset());
     this.componentProps = componentProps;
     this.loader = IncrementalLoader.useNew<T>(this, loader);
     this.onAction = onAction;
