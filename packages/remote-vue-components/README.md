@@ -114,10 +114,8 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
   batches, the filters, the sorting, the search, the view mode and the TanStack
   table itself — lives in `@mittwald/flow-components-base` and is the same code
   React runs. What is written here is the arrangement plus the one job the
-  shared model deliberately leaves open: fetching a batch. Still missing is the
-  **"all filters" modal** — the mobile path to the same filters, sortings and
-  view modes the header offers on desktop. `typedList` has no counterpart: Vue
-  infers the item type from the `ListItem` slot instead.
+  shared model deliberately leaves open: fetching a batch. `typedList` has no
+  counterpart: Vue infers the item type from the `ListItem` slot instead.
 - **There is no `infiniteScroll` prop, because it cannot work remotely.** Flow
   attaches an `IntersectionObserver` to the Nth-from-last list item
   (`useInfiniteScrollTrigger`), and in a remote app that item is a

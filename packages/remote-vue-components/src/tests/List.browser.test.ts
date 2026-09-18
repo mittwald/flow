@@ -220,6 +220,74 @@ describe("Active filters", () => {
   });
 });
 
+describe("The all-filters modal", () => {
+  /*
+   * A secondary filter is what puts the modal on desktop: without one, the
+   * button carries `hide-on-desktop` as well and the modal is the mobile-only
+   * path. The filter therefore also has no menu of its own in the header.
+   */
+  const secondaryRank = h(ListFilter, {
+    property: "rank",
+    mode: "some",
+    name: "Rank",
+    priority: "secondary",
+  });
+
+  const openModal = async (list: ReturnType<typeof staticCrewList>) => {
+    await userEvent.click(list.getByRole("button", { name: "All filters" }));
+    return page.getByRole("dialog");
+  };
+
+  /*
+   * By its label, not by its role: Flow hides the real `<input>` under a
+   * `clip: rect(0,0,0,0)` span, and Playwright refuses to click something with
+   * no box.
+   */
+  const pick = async (
+    dialog: ReturnType<typeof page.getByRole>,
+    label: string,
+  ) => userEvent.click(dialog.getByText(label));
+
+  test("carries the filters the header leaves out", async () => {
+    const list = staticCrewList([secondaryRank]);
+
+    expect(list.getByRole("button", { name: "Rank" }).query()).toBeNull();
+
+    const dialog = await openModal(list);
+    await pick(dialog, "Corporal");
+
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(1);
+  });
+
+  test("sorts from inside the modal", async () => {
+    const list = staticCrewList([
+      secondaryRank,
+      h(ListSorting, { property: "name", name: "Name", direction: "asc" }),
+    ]);
+
+    const dialog = await openModal(list);
+    await pick(dialog, "Name");
+
+    await expect
+      .poll(() =>
+        list.getByRole("row").elements()[0]?.getAttribute("aria-label"),
+      )
+      .toBe("Carter Burke");
+  });
+
+  test("closes on the button that counts the results", async () => {
+    const list = staticCrewList([secondaryRank]);
+
+    await openModal(list);
+    const close = page.getByRole("button", { name: "Show 3 Results" });
+    await expect.element(close).toBeVisible();
+
+    await userEvent.click(close);
+
+    await expect.element(close).not.toBeInTheDocument();
+  });
+});
+
 describe("The table view mode", () => {
   const tableList = () =>
     renderList(() => [

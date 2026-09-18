@@ -158,6 +158,17 @@ what this prototype established about supporting a framework at all.
   column's label is its **children**, not a prop: Flow's `TableColumn` renders
   `children`, and React's list only looks like it uses a `name` because it
   spreads both.
+- **A filter's `priority` decides where it appears.** A `primary` filter gets
+  its own menu in the header; a `secondary` one is only in the all-filters modal
+  — which is also what puts that modal on desktop at all, since without a
+  secondary filter its button carries `hide-on-desktop` too and it becomes the
+  mobile-only path. Both rules are Flow's, and a Vue list that ignored them
+  would show every filter twice.
+- **Flow's `results.show` is ICU; this binding splits it in two.** The string is
+  `{n, select, 1 {…} other {…}}`, and `useListTexts` is a `{name}` formatter
+  rather than an ICU parser, so the two branches are `results.show.one` and
+  `results.show.other` and the choice is made in code. A string that needed a
+  real plural rule would be the point to stop copying and generate the `List`.
 - **`infiniteScroll` is inert across the remote boundary — in React too.** The
   trigger is an `IntersectionObserver` on the Nth-from-last item
   (`useInfiniteScrollTrigger` in `packages/components`), and in a remote app

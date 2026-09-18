@@ -25,7 +25,16 @@ const texts = {
     "noResult.text":
       "Your search did not return any results. Please adjust the search query or your filters.",
     paginationInfo: "Showing {visibleItemsCount} of {totalItemsCount}",
+    reset: "Reset",
+    /*
+     * One key per branch, because Flow's is ICU (`{n, select, 1 {…} other {…}}`)
+     * and this binding carries a `{name}` formatter rather than an ICU parser.
+     * The two branches are picked in code — see `AllFiltersModal`.
+     */
+    "results.show.one": "Show {totalItemCount} result",
+    "results.show.other": "Show {totalItemCount} Results",
     settings: "Settings",
+    "settings.viewMode": "View",
     "settings.viewMode.list": "List",
     "settings.viewMode.table": "Table",
     "settings.viewMode.tiles": "Tiles",
@@ -48,7 +57,11 @@ const texts = {
       "Deine Suche ergab keine Ergebnisse. Bitte passe die Suchanfrage oder deine Filter an.",
     paginationInfo:
       "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
+    reset: "Zurücksetzen",
+    "results.show.one": "{totalItemCount} Ergebnis anzeigen",
+    "results.show.other": "{totalItemCount} Ergebnisse anzeigen",
     settings: "Einstellungen",
+    "settings.viewMode": "Ansicht",
     "settings.viewMode.list": "Liste",
     "settings.viewMode.table": "Tabelle",
     "settings.viewMode.tiles": "Raster",

@@ -16,6 +16,7 @@ import {
 import { watchMobxValue } from "@/lib/mobxSelector";
 import { defineComponent, h, ref, watch, type VNodeChild } from "vue";
 import { ActiveFilters } from "./ActiveFilters";
+import { AllFiltersModal } from "./AllFiltersModal";
 import { injectListModel, type AnyListModel } from "./listContext";
 import { useListTexts, type ListTextFormatter } from "./locales";
 import { listStyles } from "./styles";
@@ -51,6 +52,7 @@ interface HeaderFilterValue {
 interface HeaderFilter {
   readonly storageKey: string;
   readonly mode: string;
+  readonly priority: "primary" | "secondary";
   readonly name?: string;
   readonly property: unknown;
   readonly values: HeaderFilterValue[];
@@ -236,13 +238,35 @@ export const Header = defineComponent({
 
       const noItemsAvailable = isEmpty.value && emptyViewType.value === "list";
       const isDisabled = isInitiallyLoading.value || noItemsAvailable;
+      const modes = availableViewModes(list);
+
+      /*
+       * Asked of the model rather than of what the options rendered: the
+       * all-filters modal decides for itself whether it has anything to show,
+       * so a list with nothing to configure would still get a header around it.
+       */
+      const hasOptions =
+        list.filters.length > 0 ||
+        list.visibleSorting.length > 0 ||
+        !!list.search ||
+        modes.length > 1;
+
+      if (!hasOptions) {
+        return null;
+      }
 
       const options: VNodeChild[] = [
         renderViewModeMenu(list, texts.value, isDisabled, viewMode.value),
         renderSortingMenu(list, texts.value, isDisabled),
-        ...(list.filters as HeaderFilter[]).map((filter) =>
-          renderFilterMenu(filter, isDisabled),
-        ),
+        /*
+         * Primary only. A secondary filter is reachable through the
+         * all-filters modal, which is the whole reason that modal shows on
+         * desktop at all.
+         */
+        ...(list.filters as HeaderFilter[])
+          .filter((filter) => filter.priority === "primary")
+          .map((filter) => renderFilterMenu(filter, isDisabled)),
+        h(AllFiltersModal, { isDisabled, viewModes: modes }),
         list.search
           ? h(SearchField, {
               class: listStyles.searchField,
@@ -257,10 +281,6 @@ export const Header = defineComponent({
             })
           : null,
       ];
-
-      if (options.every((option) => option === null)) {
-        return null;
-      }
 
       return h(
         Div,
