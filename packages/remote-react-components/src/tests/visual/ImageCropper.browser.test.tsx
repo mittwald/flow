@@ -40,8 +40,11 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   },
 );
 
-// errorView is available from 1.1.41.
-test.skipIf(crossVersion({ below: "1.1.41" })).each(testEnvironments)(
+// errorView is available from 1.1.41. The next line branched before the fix
+// forward-merged, so 1.2.0-next.0 sorts above 1.1.41 without carrying it.
+test
+  .skipIf(crossVersion({ below: "1.1.41", exclude: ["1.2.0-next.0"] }))
+  .each(testEnvironments)(
   "ImageCropper custom error view (%s)",
   async ({
     testScreenshot,
