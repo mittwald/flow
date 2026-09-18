@@ -29,6 +29,15 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   all the context has, and a binding's list satisfies it with three getters. It
   is called `dataTable`, not `table`, because Flow's `List` already has a
   `table` — its own view model — and a getter of that name collides.
+- **What a value renders to is a type parameter, not a decision.** `ListFilter`
+  has to show its values, and "shown" is the binding's — so it carries
+  `TRendered` (default `unknown`) and React's `Filter` fills it with
+  `ReactNode`. That is the cheaper half of the alternative, which was to keep
+  `FilterValue` in React and have the core construct it through a factory hook.
+- **Beware `Table<never>` where `Table<any>` is expected.** A list of concrete
+  filters is not assignable to `ListFilter<any, …>[]`: a row model sits in a
+  contravariant position deep inside `Column`, so `never` and `any` do not meet.
+  `storeFilters` takes the two members it reads instead of the class.
 - **The settings port is spelled out per key.** One generic method whose return
   type indexes a value map reads better and does not typecheck: against a real
   store TypeScript resolves the return to the _intersection_ of every value, and

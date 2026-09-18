@@ -808,9 +808,15 @@ importers:
       '@tanstack/table-core':
         specifier: ^8.21.3
         version: 8.21.3
+      dot-prop:
+        specifier: ^10.2.0
+        version: 10.2.0
       mobx:
         specifier: ^6.16.1
         version: 6.16.1
+      object-code:
+        specifier: ^2.0.0
+        version: 2.0.0
       remeda:
         specifier: ^2.43.0
         version: 2.47.0

@@ -1,3 +1,12 @@
+export { toArray, type ItemType } from "./lib/array";
+export { ListFilter } from "./list/filter/ListFilter";
+export { ListFilterValue } from "./list/filter/ListFilterValue";
+export type {
+  FilterMatcher,
+  FilterMode,
+  FilterUpdatedCallback,
+  ListFilterShape,
+} from "./list/filter/types";
 export { getListColumn, type ListModelContext } from "./list/ListModelContext";
 export {
   ListLoaderState,
@@ -7,11 +16,12 @@ export type { BatchLoadingState, ListData } from "./list/loading/types";
 export { ListSearch } from "./list/search/ListSearch";
 export type { ListSearchShape, SearchValue } from "./list/search/types";
 export type {
+  ListActiveFiltersSetting,
+  ListSearchSetting,
   ListSettingKey,
   ListSettingsDefaults,
   ListSettingsOperationOptions,
   ListSettingsPort,
-  ListSearchSetting,
   ListSortingSetting,
 } from "./list/settings/types";
 export { ListSorting } from "./list/sorting/ListSorting";
@@ -24,4 +34,6 @@ export {
   customPropertyPrefix,
   type CustomPropertyName,
   type PropertyName,
+  type PropertyValue,
+  type PropertyValueRenderMethod,
 } from "./list/types";

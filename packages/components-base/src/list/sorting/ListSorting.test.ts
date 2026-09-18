@@ -1,5 +1,6 @@
 import { fakeContext } from "../testing/fakeContext";
 import { ListSorting } from "./ListSorting";
+import type { ColumnDef } from "@tanstack/table-core";
 import { describe, expect, test } from "vitest";
 
 interface Pilot {
@@ -102,7 +103,7 @@ describe("ListSorting", () => {
   test("declares its column sortable, with a custom function if given", () => {
     const customSortingFn = (() => 0) as never;
     const { sorting: s } = sorting({ customSortingFn });
-    const def = {};
+    const def = {} as ColumnDef<Pilot>;
 
     s.updateTableColumnDef(def);
 

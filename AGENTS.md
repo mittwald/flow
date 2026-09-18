@@ -631,6 +631,17 @@ where the error points.
   `@/auto-generated` and from `@/index` in one file and log both — it is in the
   first and missing from the second
 
+- **Symptom:** A `.scss` file you never opened appears in your diff, reformatted
+
+  **Cause:** You ran `prettier --write` over a **directory**. The repo's
+  `format`/`format:check` globs list `css` but not `scss`, so SCSS is
+  deliberately unformatted — and `pnpm lint` therefore cannot tell you that you
+  just reformatted one
+
+  **Fix:** Pass the files you changed, not a directory. Check `git status` after
+  any `--write` and revert what you did not mean to touch; nothing downstream
+  will flag it
+
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"
 

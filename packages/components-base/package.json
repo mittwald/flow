@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-components-base",
   "private": "true",
-  "version": "1.2.0-next.59",
+  "version": "1.2.0-next.61",
   "type": "module",
   "main": "src/index.ts",
   "files": [
@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@tanstack/table-core": "^8.21.3",
+    "dot-prop": "^10.2.0",
     "mobx": "^6.16.1",
+    "object-code": "^2.0.0",
     "remeda": "^2.43.0"
   },
   "devDependencies": {

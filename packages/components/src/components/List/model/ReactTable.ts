@@ -109,7 +109,7 @@ export class ReactTable<T, TMeta = unknown> {
     const reactTableState = table.getState();
 
     const onFiltersChanged = useEffectEvent(() => {
-      Filter.storeFilters(this.list, { autosave: true });
+      Filter.storeFilters(this.list, this.list.filters, { autosave: true });
     });
 
     const onStateChanged = useEffectEvent(() => {

@@ -12,7 +12,10 @@ export interface ListSearchSetting {
   value?: string;
 }
 
-export type ListSettingKey = "sorting" | "search";
+/** Which values of each filter are on, keyed by the filter's storage key. */
+export type ListActiveFiltersSetting = Partial<Record<string, string[]>>;
+
+export type ListSettingKey = "sorting" | "search" | "activeFilters";
 
 /**
  * The part of the list's persistence the shared model touches.
@@ -28,6 +31,10 @@ export type ListSettingKey = "sorting" | "search";
  */
 export interface ListSettingsPort {
   get(
+    key: "activeFilters",
+    options: ListSettingsOperationOptions,
+  ): ListActiveFiltersSetting | undefined;
+  get(
     key: "sorting",
     options: ListSettingsOperationOptions,
   ): ListSortingSetting | undefined;
@@ -36,6 +43,11 @@ export interface ListSettingsPort {
     options: ListSettingsOperationOptions,
   ): ListSearchSetting | undefined;
 
+  store(
+    key: "activeFilters",
+    value: ListActiveFiltersSetting | undefined,
+    options: ListSettingsOperationOptions,
+  ): void;
   store(
     key: "sorting",
     value: ListSortingSetting | undefined,
