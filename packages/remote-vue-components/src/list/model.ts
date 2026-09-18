@@ -39,6 +39,16 @@ import type { ListRendered, VueListShape } from "./types";
 
 const emptyData: never[] = [];
 
+/** The same items in the same order, whether or not it is the same array. */
+const isSameData = <T>(
+  current: ListData<T> | undefined,
+  next: ListData<T>,
+): boolean =>
+  current === next ||
+  (current !== undefined &&
+    current.length === next.length &&
+    current.every((item, index) => item === next[index]));
+
 /**
  * Flow's list, without React.
  *
@@ -206,8 +216,18 @@ export class ListModel<T> implements ListPaginationContext<T> {
    *
    * The loader state goes with it: the batches describe the old array, and
    * keeping them would merge the two.
+   *
+   * Compared by content, not by identity, because a consumer writes the array
+   * inline — `h(ListStaticData, { data: [...] })` builds a new one on every
+   * render. On identity that is always "changed", and the reset it triggers
+   * re-renders the list, which builds the array again: Vue reports it as
+   * "Maximum recursive updates exceeded in component <List>".
    */
   public setStaticData(data: ListData<T>): void {
+    if (isSameData(this.shape.staticData, data)) {
+      return;
+    }
+
     this.shape.staticData = data;
     this.loaderState.reset();
   }

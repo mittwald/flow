@@ -87,6 +87,30 @@ describe("Static data", () => {
     await expect.element(list.getByText("Warrant Officer")).toBeVisible();
   });
 
+  /*
+   * A consumer writes the array inline, so every render builds a new one. On
+   * identity that reads as "the data changed", and the reset that follows
+   * re-renders the list, which builds the array again — Vue reports the loop as
+   * "Maximum recursive updates exceeded in component <List>", and the list
+   * renders nothing at all.
+   */
+  test("survives a data array that is rebuilt on every render", async () => {
+    const list = renderList(() => [
+      h(ListStaticData, { data: [...crew] }),
+      h(
+        ListItem,
+        { textValue: (data: Crew) => data.name },
+        {
+          default: ({ data }: { data: Crew }) =>
+            h(ListItemView, null, () => h(Heading, null, () => data.name)),
+        },
+      ),
+    ]);
+
+    await expect.element(list.getByText("Ellen Ripley")).toBeVisible();
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(3);
+  });
+
   test("counts the items in the footer", async () => {
     const list = staticCrewList();
 
