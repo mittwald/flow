@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.61](https://github.com/mittwald/flow/compare/1.2.0-next.60...1.2.0-next.61) (2026-09-18)
+
+### Bug Fixes
+
+* **Overlay:** size the backdrop to the viewport, not the document ([#3184](https://github.com/mittwald/flow/issues/3184)) ([7eb1589](https://github.com/mittwald/flow/commit/7eb1589951b1e80ba34588b2eab832c810066174))
+
+## [1.1.49](https://github.com/mittwald/flow/compare/1.2.0-next.59...1.1.49) (2026-09-18)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.49 ([eb66539](https://github.com/mittwald/flow/commit/eb6653984a27688c3ad0d58c5ac1c078229620b5))
+
 ## [1.2.0-next.60](https://github.com/mittwald/flow/compare/1.2.0-next.59...1.2.0-next.60) (2026-09-18)
 
 ### Bug Fixes
