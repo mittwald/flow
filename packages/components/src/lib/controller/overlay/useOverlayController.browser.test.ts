@@ -22,7 +22,8 @@ describe("useOverlayController", async () => {
     contextController = new OverlayController();
 
     (useOverlayContext as Mock).mockReturnValue({
-      Modal: contextController,
+      byType: { Modal: contextController },
+      nearest: contextController,
     });
   });
 
