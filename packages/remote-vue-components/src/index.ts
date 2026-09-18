@@ -18,6 +18,12 @@ export * from "./components/CountryOptions";
 export * from "./components/DeprecationWarningProvider";
 export * from "./components/Form";
 export * from "./components/LoadingIndicator";
+/*
+ * Flow's `List`, rebuilt here for the same reason as the overlays: it is a
+ * React composition, not a remote element. Its rules come from
+ * `@mittwald/flow-components-base` and are the same objects React runs on.
+ */
+export * from "./list";
 export * from "./components/NotificationProvider";
 export * from "./components/RemoteRoot";
 export * from "./components/SettingsProvider";

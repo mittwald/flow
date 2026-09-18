@@ -1,9 +1,9 @@
 # @mittwald/flow-remote-vue-components
 
 > **Experimental.** Published so extensions can be built against it, but without
-> a stability promise yet: the API may change while `List` is missing.
-> Everything else in this repository follows deprecate-don't-break — this
-> package will too, once those gaps are closed and the surface is settled.
+> a stability promise yet: the API may still change. Everything else in this
+> repository follows deprecate-don't-break — this package will too, once the
+> remaining gaps below are closed and the surface is settled.
 
 Vue API for the Flow remote surface — the counterpart of
 [`@mittwald/flow-remote-react-components`](../remote-react-components). The
@@ -98,6 +98,7 @@ themselves. They cannot be generated, so this package rebuilds them in Vue:
 | `SettingsProvider`, `useSetting`                    | a persisted `ref`, `localStorage` by default                                                          |
 | `CountryOptions`                                    | `Option`s from `country-codes-list`, named by `Intl.DisplayNames`                                     |
 | `Wrap`, `BrowserOnly`                               | the same two-line components                                                                          |
+| `List`, `ListItemView`                              | the arrangement around `@mittwald/flow-components-base`, plus the batch loading                       |
 | `useIsMounted`, `useOnChange`, `useLanguage`        | composables                                                                                           |
 | `Form`                                              | `flr-form` has no Flow component behind it, so the generator never sees it                            |
 
@@ -109,11 +110,16 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
 
 ## Known gaps
 
-- **`List`, `ListItemView` and `typedList` are not rebuilt.** ~2,300 lines of
-  model plus ~2,550 of UI: data sources, filters, sorting, pagination and
-  persisted view settings. The shared half moves to
-  `@mittwald/flow-components-base` one piece at a time — `ListLoaderState` is
-  the first of it.
+- **The `List` is rebuilt, but not all of it.** Everything it _decides_ — the
+  batches, the filters, the sorting, the search, the view mode and the TanStack
+  table itself — lives in `@mittwald/flow-components-base` and is the same code
+  React runs. What is written here is the arrangement plus the one job the
+  shared model deliberately leaves open: fetching a batch. Still missing are the
+  **table view mode**, the "all filters" modal with its active-filter chips,
+  infinite scroll, and **persisted view settings** — `ListSettingsPort` is the
+  seam for the last one, and nothing fills it yet, so a Vue list starts fresh
+  every time. `typedList` has no counterpart: Vue infers the item type from the
+  `ListItem` slot instead.
 - **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
   each consumer licenses itself and which therefore cannot be inlined the way
   Tabler's is. `IconSetProvider` is what fills the gap: hand it your own icons

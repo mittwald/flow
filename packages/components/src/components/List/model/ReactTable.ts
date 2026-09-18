@@ -15,7 +15,11 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import { getListColumn, ListTable } from "@mittwald/flow-components-base";
+import {
+  getListColumn,
+  ListTable,
+  mergeHiddenSorting,
+} from "@mittwald/flow-components-base";
 import type {
   OnListChanged,
   PropertyName,
@@ -145,15 +149,9 @@ export class ReactTable<T, TMeta = unknown> {
     const newSortingState =
       typeof updater === "function" ? updater(this.sortingState) : updater;
 
-    const additionalHiddenSorting = this.list.sorting
-      .filter(
-        (s) =>
-          s.initialEnabled === "hidden" &&
-          !newSortingState.some((existing) => existing.id === s.property),
-      )
-      .map((s) => s.getReactTableColumnSort());
-
-    this.updateSortingState([...additionalHiddenSorting, ...newSortingState]);
+    this.updateSortingState(
+      mergeHiddenSorting(this.list.sorting, newSortingState),
+    );
   }
 
   private getTableColumnDefs(): ColumnDef<T>[] {

@@ -14,7 +14,17 @@ export {
   ListLoaderState,
   type ListLoaderStateOptions,
 } from "./list/loading/ListLoaderState";
-export type { BatchLoadingState, ListData } from "./list/loading/types";
+export {
+  getListDataLoaderOptions,
+  type BatchLoadingState,
+  type ListAsyncDataLoader,
+  type ListData,
+  type ListDataLoaderOptions,
+  type ListDataLoaderOptionsSource,
+  type ListDataLoaderResult,
+  type ListPropertyRecord,
+  type QueryableFilter,
+} from "./list/loading/types";
 export {
   ListBatchesController,
   type ListPaginationContext,
@@ -34,7 +44,7 @@ export type {
   ListSettingsPort,
   ListSortingSetting,
 } from "./list/settings/types";
-export { ListSorting } from "./list/sorting/ListSorting";
+export { ListSorting, mergeHiddenSorting } from "./list/sorting/ListSorting";
 export { ListTable } from "./list/table/ListTable";
 export type {
   ListSortingShape,

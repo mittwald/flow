@@ -16,7 +16,7 @@
  */
 export const unsupportedFiles: Record<string, string> = {
   "List.browser.test.tsx":
-    "Flow's List has no Vue rebuild — every scenario in the file needs it, so the file is excluded rather than its scenarios named one by one.",
+    "The scenarios define a React Wrapper component and build their list with typedList<T>(), which is a factory rather than a component the converter can map. A Vue List exists — src/tests/List.browser.test.ts drives it against the same host.",
 };
 
 export const unsupportedScenarios: Record<string, string> = {

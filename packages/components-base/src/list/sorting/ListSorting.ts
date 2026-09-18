@@ -110,3 +110,25 @@ export class ListSorting<T> {
 }
 
 export default ListSorting;
+
+/**
+ * The next sorting state, with every hidden sorting still in it.
+ *
+ * A hidden sorting is not a user choice — it is how the list is ordered when
+ * nothing else says otherwise, so a click on a visible sorting must not drop
+ * it. The table's own updater knows nothing about that distinction.
+ */
+export const mergeHiddenSorting = <T>(
+  sortings: ListSorting<T>[],
+  next: ColumnSort[],
+): ColumnSort[] => {
+  const hidden = sortings
+    .filter(
+      (s) =>
+        s.initialEnabled === "hidden" &&
+        !next.some((existing) => existing.id === s.property),
+    )
+    .map((s) => s.getReactTableColumnSort());
+
+  return [...hidden, ...next];
+};

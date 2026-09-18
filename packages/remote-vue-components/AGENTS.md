@@ -105,10 +105,12 @@ what this prototype established about supporting a framework at all.
   `Action`, `NotificationProvider`, `SettingsProvider`, `CountryOptions`,
   `Wrap`, `BrowserOnly`, the deprecation provider. Those are React compositions
   **over** remote elements, not remote elements, so the generator never sees
-  them. `List`/`ListItemView`/`typedList` are not rebuilt: ~2,300 lines of model
-  plus ~2,550 of UI, and the model's classes call React hooks from their
-  constructors. `packages/components-base` is where the shared half of that
-  goes, one piece at a time.
+  them. `List` and `ListItemView` are rebuilt too, in `src/list/**` — but only
+  their _arrangement_: every rule the list follows now lives in
+  `packages/components-base` and is the same code React runs, so what is written
+  here is which remote elements the host is asked for, plus the one job the
+  shared model deliberately leaves open, which is fetching a batch. `typedList`
+  has no counterpart — Vue infers the item type from the `ListItem` slot.
 - **Two things make the rebuilds possible, and both are worth knowing.**
   `mapChildren` (`src/overlays/childProps.ts`) stands in for `PropsContext`: it
   `cloneVNode`s the children the composite was handed, which reaches one level
@@ -122,6 +124,30 @@ what this prototype established about supporting a framework at all.
   how the host is asked for a modal rather than a bare dialog. Marking `Modal`
   and friends `@flr-generate` would remove both — it is the change this layer
   argues for.
+- **The Vue `List` reads its configuration off its children**, the way Flow's
+  React list does: `ListStaticData`, `ListItem`, `ListFilter`, `ListSorting`,
+  `ListSearch` and `ListLoaderAsync` render nothing and exist to be found
+  (`src/list/setupComponents.ts`). Two things differ from React by necessity. A
+  loader is a **prop**, not a scoped slot — Vue normalizes a slot's return into
+  vnodes, so a slot hands back a rendered nothing instead of its promise. And
+  `ListItemView` routes its children into the remote element's slots by
+  component type, because Flow's React version does that with tunnels and a
+  props context, neither of which exists here.
+- **Everything the list reads from the table goes through
+  `listTable.revision`.** The rows come out of the options _and_ the state, and
+  only `revision` moves when either does — `renderedItems` and `isEmpty` both
+  read it. Leaving it out is silent and looks like a race: the loader reports
+  its batch, the data reaches the table one turn later, and a component that
+  observed only the loader keeps the answer from before — an empty view reading
+  "No items available" over its own items.
+- **A batch starts as `"void"`, not as missing.** `ListLoaderState` begins with
+  `["void"]`, so a loader driver that only looks for an absent entry never loads
+  the first batch. A list whose data array is rebuilt each render hides that,
+  because the change resets the state and makes the batch missing for real.
+- **The list has no persistence yet.** `ListSettingsPort` is the seam and
+  `ListModel.settings` returns `undefined`, so a sorting, a search or a view
+  mode the user picks is gone on reload. This package has a `SettingsProvider`;
+  wiring the two is what closes it.
 - **Logic shared with React lives in `@mittwald/flow-components-base`**, not
   here. `ListLoaderState` is the first of it: pure MobX, no framework, and this
   package brings only the subscription (`src/lib/mobxSelector.ts`, ~15 lines).

@@ -26,6 +26,15 @@ import type {
 export class ListTable<T extends RowData> {
   public readonly table: Table<T>;
   public state: TableState;
+  /**
+   * Bumped whenever the state _or_ the options changed.
+   *
+   * The row models are derived from both, and the options are plain data that
+   * arrives from the binding — so a binding observing only `state` keeps
+   * rendering the previous rows after new data was handed in. It is the one
+   * signal that says "ask the table again".
+   */
+  public revision = 0;
   private options: TableOptions<T>;
 
   public constructor(options: TableOptions<T>) {
@@ -44,7 +53,9 @@ export class ListTable<T extends RowData> {
 
     makeObservable(this, {
       state: observable.ref,
+      revision: observable,
       setState: action.bound,
+      setOptions: action.bound,
     });
 
     this.applyOptions();
@@ -63,6 +74,7 @@ export class ListTable<T extends RowData> {
 
   private applyOptions(): void {
     const options = this.options;
+    this.revision += 1;
 
     this.table.setOptions((prev) => ({
       ...prev,
