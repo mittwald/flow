@@ -82,6 +82,7 @@ nearest `AGENTS.md` before working in a package.**
 | `packages/icons`, `packages/icons-pro`  | `@mittwald/flow-icons(-pro)`             | Published icon sets, **fully generated** from `icons-base` (Tabler / FontAwesome).         |
 | `packages/stylesheet`                   | `@mittwald/flow-stylesheet`              | Publishes the components' `all.css` as a standalone CSS package.                           |
 | `packages/core`                         | private                                  | Shared utilities: the shared Vitest browser config.                                        |
+| `packages/components-base`              | private                                  | Framework-agnostic component logic (MobX) shared by the React and Vue bindings.            |
 | `packages/remote-core`                  | `@mittwald/flow-remote-core`             | Connection + serialization layer (versioned protocol).                                     |
 | `packages/remote-elements`              | `@mittwald/flow-remote-elements`         | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
 | `packages/remote-react-components`      | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
@@ -648,6 +649,7 @@ where the error points.
 | Vue API for remote apps                     | [packages/remote-vue-components/AGENTS.md](packages/remote-vue-components/AGENTS.md)    |
 | Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                  |
 | Supporting a non-React remote framework     | [docs/remote-framework-bindings.md](docs/remote-framework-bindings.md)                  |
+| Logic shared by the React and Vue bindings  | [packages/components-base/AGENTS.md](packages/components-base/AGENTS.md)                |
 | Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                          |
 | Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |
 | Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md) |

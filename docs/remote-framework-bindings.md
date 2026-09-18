@@ -157,10 +157,28 @@ skip the re-export for names `flr-universal` already carries; the list is
 already parsed for the status registry
 (`dev/status-registry/parseFlrUniversalComponentNames.ts`).
 
-One thing stays out of reach regardless:
+One thing is a project of its own:
 
-- **`List` / `ListItemView` / `typedList`** — 5,500 lines of data sources,
-  filters, sorting, pagination and persisted view settings. Its own project.
+- **`List` / `ListItemView` / `typedList`** — ~2,300 lines of model plus ~2,550
+  of UI per framework: data sources, filters, sorting, pagination and persisted
+  view settings. It runs **entirely in the extension** — only the leaves
+  (`ListEmptyView`, `ListItemViewContent`, `ListSummary`, `ItemsGridList`) are
+  remote elements — so there is no host-side `List` a binding could delegate to.
+
+  What couples it to React is not TanStack: `@tanstack/react-table` is a thin
+  wrapper over `@tanstack/table-core`, and `@tanstack/vue-table` wraps the same
+  core. It is that the model is a graph of classes whose **constructors call
+  hooks** (`useState` in `ReactTable`'s, `useEffect` and `useSettings` in
+  `List`'s, `createElement` in `ItemView`) — the "class-method custom hooks"
+  pattern this repository already keeps `rules-of-hooks` switched off for.
+  Decoupling it is a rewrite of the core, not an extraction of it.
+
+  The way through is `packages/components-base`: pure MobX state there, a
+  per-binding subscription on top. `ListLoaderState` is the worked example — the
+  batching, the deduplication and the "still loading" rules are shared, the
+  ~15-line subscription is written twice (`useSelector`, `watchMobxValue`), and
+  the fetching stays with the binding because Suspense has no Vue counterpart.
+
 - **The pro icon set.** `packages/icons-pro` renders FontAwesome Pro, which each
   consumer licenses itself — so unlike Tabler's, its path data cannot be
   inlined, and a binding would need that package as a peer dependency. Rebuild

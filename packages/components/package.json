@@ -138,6 +138,7 @@
     "@internationalized/date": "^3.12.3",
     "@lezer/generator": "^1.8.0",
     "@lezer/lr": "^1.4.10",
+    "@mittwald/flow-components-base": "workspace:*",
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/flow-icons-base": "workspace:*",

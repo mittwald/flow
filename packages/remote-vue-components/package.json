@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-vue-components",
-  "version": "1.2.0-next.57",
+  "version": "1.2.0-next.59",
   "type": "module",
   "description": "Vue components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -40,10 +40,12 @@
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "country-codes-list": "^2.0.0",
+    "mobx": "^6.16.1",
     "remeda": "^2.43.0"
   },
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/flow-components-base": "workspace:*",
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-icons-base": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",

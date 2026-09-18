@@ -109,9 +109,11 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
 
 ## Known gaps
 
-- **`List`, `ListItemView` and `typedList` are not rebuilt.** 5,500 lines of
-  data sources, filters, sorting, pagination and persisted view settings — its
-  own project, not a prototype step.
+- **`List`, `ListItemView` and `typedList` are not rebuilt.** ~2,300 lines of
+  model plus ~2,550 of UI: data sources, filters, sorting, pagination and
+  persisted view settings. The shared half moves to
+  `@mittwald/flow-components-base` one piece at a time — `ListLoaderState` is
+  the first of it.
 - **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
   each consumer licenses itself and which therefore cannot be inlined the way
   Tabler's is. `IconSetProvider` is what fills the gap: hand it your own icons

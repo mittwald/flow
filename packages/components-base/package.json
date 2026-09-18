@@ -1,0 +1,22 @@
+{
+  "name": "@mittwald/flow-components-base",
+  "private": "true",
+  "version": "1.2.0-next.59",
+  "type": "module",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "mobx": "^6.16.1",
+    "remeda": "^2.43.0"
+  },
+  "devDependencies": {
+    "@mittwald/typescript-config": "workspace:*",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
+  }
+}

@@ -105,7 +105,10 @@ what this prototype established about supporting a framework at all.
   `Action`, `NotificationProvider`, `SettingsProvider`, `CountryOptions`,
   `Wrap`, `BrowserOnly`, the deprecation provider. Those are React compositions
   **over** remote elements, not remote elements, so the generator never sees
-  them. `List`/`ListItemView`/`typedList` are not rebuilt (5,500 lines).
+  them. `List`/`ListItemView`/`typedList` are not rebuilt: ~2,300 lines of model
+  plus ~2,550 of UI, and the model's classes call React hooks from their
+  constructors. `packages/components-base` is where the shared half of that
+  goes, one piece at a time.
 - **Two things make the rebuilds possible, and both are worth knowing.**
   `mapChildren` (`src/overlays/childProps.ts`) stands in for `PropsContext`: it
   `cloneVNode`s the children the composite was handed, which reaches one level
@@ -119,6 +122,15 @@ what this prototype established about supporting a framework at all.
   how the host is asked for a modal rather than a bare dialog. Marking `Modal`
   and friends `@flr-generate` would remove both — it is the change this layer
   argues for.
+- **Logic shared with React lives in `@mittwald/flow-components-base`**, not
+  here. `ListLoaderState` is the first of it: pure MobX, no framework, and this
+  package brings only the subscription (`src/lib/mobxSelector.ts`, ~15 lines).
+  `src/lib/mobxSelector.test.ts` drives that shared state through Vue's
+  reactivity — which is also what keeps a React import out of the core, since
+  nothing else would notice one. The package is a **devDependency** on purpose:
+  it is private, and `externalizeDeps` leaves devDependencies alone, so it is
+  bundled instead of published as a bare import. `mobx` has to be a real
+  dependency here for the same reason.
 - **`Modal confirmOnClose` carries its own translations.** Flow's four strings
   live in `Modal/locales/*.locale.json`, are compiled into the React bundle by a
   locale plugin, and are not importable from a published package — so

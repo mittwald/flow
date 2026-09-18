@@ -1,0 +1,5 @@
+{
+  "name": "components-base",
+  "projectType": "library",
+  "sourceRoot": "packages/components-base/src"
+}
