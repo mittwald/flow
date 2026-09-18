@@ -829,15 +829,24 @@ deliberately by bumping it manually. The moving parts:
   `@dependabot squash and merge`. Dependabot merges once the required `main`
   check is green. Neither suite is a required status check, so this workflow is
   the only thing standing between a red one and a merge.
-- **Preview apps are deployed** for a Dependabot PR too, by
-  [`deploy-previews-dependabot.yml`](.github/workflows/deploy-previews-dependabot.yml)
-  and torn down by
-  [`cleanup-previews-dependabot.yml`](.github/workflows/cleanup-previews-dependabot.yml).
-  Both hang off a `workflow_run` for the same reason the auto-merge does: GitHub
-  withholds the `MITTWALD_*` secrets from Dependabot-triggered runs, so the
-  deploy and cleanup jobs in the two ordinary preview workflows skip that actor
-  and these two do the work from the default branch. They never check out the
-  PR's code — only the images its build job already pushed.
+- **Preview apps are deployed** for a Dependabot PR too, by the ordinary
+  [`build-previews.yml`](.github/workflows/build-previews.yml) /
+  [`cleanup-previews.yml`](.github/workflows/cleanup-previews.yml) pair — no
+  Dependabot-specific workflow. Two things make that work. The `MITTWALD_*`
+  credentials are duplicated into the **Dependabot secret store** under the same
+  names, because that is what `secrets.*` resolves against in a
+  Dependabot-triggered run. And the deploy and cleanup jobs check out
+  `pull_request.base.sha` instead of the PR when the actor is Dependabot, so
+  `pnpm install` resolves the base lockfile and the bumped package's code never
+  executes in a job that holds those credentials. The build job is what
+  exercises the PR's actual dependencies, and it holds none.
+
+  Add a `MITTWALD_*` secret and you have to add it in **both** stores, or
+  Dependabot previews break while everything else stays green. The base checkout
+  is deliberately scoped to Dependabot: on a human PR the deploy still runs the
+  branch's own tooling, so a change to `dev/deploy-review.ts` is exercised by
+  the PR that makes it. The same argument for pinning the deploy to a trusted
+  revision applies to human PRs too — worth revisiting.
 
 **What a Dependabot-triggered run does and does not get.** Both halves are worth
 knowing before you add a workflow that touches these PRs, and only one matches
@@ -846,9 +855,12 @@ the usual folklore:
 - **`secrets.*` resolves against the repository's _Dependabot_ secret store**,
   not the Actions one. An Actions-only secret arrives as an empty string, and
   the step fails wherever the script validates its environment. Put a secret a
-  Dependabot PR genuinely needs into the Dependabot store (`PUBLISH_PAT` is
-  there); otherwise move the work into a `workflow_run` that runs from the
-  default branch.
+  Dependabot PR genuinely needs into the Dependabot store (`PUBLISH_PAT` and the
+  `MITTWALD_*` credentials are there); otherwise move the work into a
+  `workflow_run` that runs from the default branch. Duplicating the secret is
+  the simpler route, but it hands the credential to a job whose workflow file
+  comes from the PR branch — pair it with a checkout of a trusted revision, as
+  the preview deploy does.
 - **The `GITHUB_TOKEN` is not read-only here.** A job gets the permissions it
   requests — `pull-requests: write` and `packages: write` both work on a
   Dependabot PR in this repository, which is why the visual summary comment and

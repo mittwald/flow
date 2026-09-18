@@ -130,21 +130,32 @@ jobs:
       packages: read
       pull-requests: write
 
-    # Preview deploy needs the MITTWALD_* secrets, which a Dependabot-triggered
-    # run resolves against the Dependabot secret store (empty there) and a fork
-    # does not get at all. Skip both so those PRs don't fail on missing secrets
-    # (the build job above still validates the images).
-    # A Dependabot PR is deployed all the same — by
-    # `deploy-previews-dependabot.yml`, which this run triggers via
-    # `workflow_run` and which does get the secrets. A fork's is not.
+    # A fork's PR never gets the MITTWALD_* secrets, so skip it rather than let
+    # it fail on missing credentials — the build job above still validates the
+    # images. Dependabot runs do deploy: the credentials are duplicated into the
+    # repository's *Dependabot* secret store, which is what `secrets.*` resolves
+    # against in a Dependabot-triggered run.
     if: >
       github.event_name == 'pull_request' &&
-      github.actor != 'dependabot[bot]' &&
       github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
+      # On a Dependabot run this job holds the deploy credentials while the PR
+      # bumps a dependency, so check out the base revision instead of the PR:
+      # `pnpm install` then resolves the base lockfile and the bumped package's
+      # code never executes here. The build job above is what exercises the PR's
+      # actual dependencies, and it holds no credentials.
+      #
+      # Only Dependabot for now — on a human PR the deploy keeps running the
+      # branch's own tooling, so a change to `dev/deploy-review.ts` is still
+      # exercised by the PR that makes it. Worth revisiting: the same argument
+      # for pinning the deploy to a trusted revision applies there too.
       - name: Checkout repository
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v6
+        with:
+          ref:
+            ${{ github.actor == 'dependabot[bot]' &&
+            github.event.pull_request.base.sha || '' }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
