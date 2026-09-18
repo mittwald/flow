@@ -1,10 +1,11 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "1.1.24",
+  "version": "1.1.48",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
   "sideEffects": [
     "**/*.css",
     "**/*.scss",
@@ -59,7 +60,7 @@
     "build:scss-types": "tsx dev/scss-types/generateScssTypes.ts",
     "build:status-registry": "tsx dev/status-registry/generateStatusRegistry.ts",
     "build:storybook": "storybook build",
-    "clean": "rimraf dist src/components/Icon/components/icons/*",
+    "clean": "rimraf dist .cache src/components/Icon/components/icons/*",
     "dev": "storybook dev --port 6006",
     "test:browser": "vitest run --project=browser* --browser.headless",
     "test:browser:dev": "vitest dev --project=browser*",
@@ -78,9 +79,9 @@
     "@internationalized/string-compiler": "^3.4.1",
     "@lezer/common": "^1.5.2",
     "@lezer/highlight": "^1.2.3",
-    "@mittwald/flow-icons": "workspace:*",
-    "@mittwald/password-tools-js": "3.0.0-alpha.31",
-    "@mittwald/react-tunnel": "workspace:*",
+    "@mittwald/flow-icons": "workspace:^",
+    "@mittwald/password-tools-js": "^3.0.0",
+    "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^4.2.2",
     "@react-aria/form": "^3.2.1",
     "@react-aria/i18n": "^3.13.1",
@@ -89,7 +90,6 @@
     "@react-stately/form": "^3.3.1",
     "@react-types/shared": "^3.36.1",
     "@replit/codemirror-indentation-markers": "^6.5.3",
-    "@tabler/icons-react": "^3.46.0",
     "@tanstack/react-table": "^8.21.3",
     "@types/invariant": "^2.2.37",
     "@types/luxon": "^3.7.5",
@@ -155,6 +155,7 @@
     "@vitest/browser": "^4.1.11",
     "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-v8": "~4.1.11",
+    "autoprefixer": "^10.5.4",
     "camelcase": "^9.0.0",
     "decamelize": "^6.0.1",
     "fs-jetpack": "^5.1.0",
@@ -162,7 +163,7 @@
     "happy-dom": "^20.11.6",
     "next": "^16.3.2",
     "nx": "^22.7.5",
-    "postcss": "8.5.26",
+    "postcss": "8.5.28",
     "postcss-nested-import": "^1.3.0",
     "postcss-nesting": "^14.0.1",
     "postcss-scss": "^4.0.9",
@@ -210,5 +211,8 @@
     "react-hook-form": {
       "optional": true
     }
-  }
+  },
+  "browserslist": [
+    "baseline widely available"
+  ]
 }

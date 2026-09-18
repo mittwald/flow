@@ -28,6 +28,130 @@ The CLI's own output does detect it and prints the right form.
 
 ---
 
+<a id="popover-open-state-props"></a>
+
+## Popover: `defaultOpen` renamed, `isOpen` and `onOpenChange` now work
+
+**Since `1.1.47`** · migration · codemod available · also applies to
+`@mittwald/flow-remote-react-components`
+
+`Popover`'s open state props now behave the way their names say. This covers
+`ContextualHelp` and `ContextMenu` too, which inherit them.
+
+#### `defaultOpen` is now `isDefaultOpen`
+
+The name matches `Modal` and the other overlays.
+
+```diff
+- <ContextualHelp defaultOpen>
++ <ContextualHelp isDefaultOpen>
+```
+
+`defaultOpen` keeps working and logs a deprecation warning. A codemod renames
+it, on `Popover`, `ContextualHelp` and `ContextMenu` only — the identically
+named react-aria prop on `Select`, `MenuTrigger`, `Tooltip`, `TooltipTrigger`,
+`DialogTrigger`, `DatePicker` and `DateRangePicker` is untouched.
+
+#### `onOpenChange` reports instead of taking over
+
+Passing `onOpenChange` used to switch the popover into a controlled mode that
+had no `isOpen` to control it with: the handler fired, and the popover stopped
+closing. It is now a notification that fires on every path — react-aria's
+dismissal, and a close performed through the controller — and never performs or
+suppresses the change.
+
+```diff
+- <Popover onOpenChange={(isOpen) => controller.setOpen(isOpen)}>
++ <Popover onOpenChange={(isOpen) => track(isOpen)}>
+```
+
+Two things to check:
+
+- A handler that performed the close itself can drop that call. Leaving it in is
+  harmless — the controller ignores a state it is already applying.
+- A handler that relied on the prop to _block_ a close no longer blocks it. Use
+  the controller for that: a handler registered through `useOverlayController`'s
+  `onClose` still aborts by returning `false`.
+
+#### `isOpen` controls the popover
+
+`isOpen` was inherited from react-aria but silently overridden. It is now the
+open state whenever it is set.
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+  …
+</Popover>;
+```
+
+If you pass `isOpen` without updating it from `onOpenChange` — for instance by
+spreading props that happen to carry it — the popover no longer opens. Drop the
+prop, or wire up the state.
+
+A controller stays the third option and needs neither prop: with
+`controller={controller}`, `onOpenChange` is a pure monitor.
+
+**Apply:** Rename `defaultOpen` to `isDefaultOpen` on `Popover`,
+`ContextualHelp` and `ContextMenu` — a codemod does it, scoped to those three.
+Leave `defaultOpen` alone on `Select`, `MenuTrigger`, `Tooltip`,
+`TooltipTrigger`, `DialogTrigger`, `DatePicker` and `DateRangePicker`, where it
+is react-aria's own prop and unchanged. Then check every `isOpen` and
+`onOpenChange` passed to those three by hand, because both changed behaviour and
+neither is mechanically decidable. `isOpen` used to be ignored and now controls
+the popover: a value that is not kept up to date through `onOpenChange` keeps
+the popover closed. `onOpenChange` used to take over the open state and now only
+reports it, so a handler that performed the close itself —
+`onOpenChange={(open) => controller.setOpen(open)}` — can drop that call, and a
+handler that relied on the prop to _suppress_ the close no longer does; use the
+controller's `onClose` for that.
+
+```shell
+npx @mittwald/flow-codemods@latest popover-open-state-props src
+```
+
+---
+
+<a id="tabler-icons-no-longer-transitive"></a>
+
+## @tabler/icons-react is no longer installed alongside Flow
+
+**Since `1.1.40`** · migration · manual change · also applies to
+`@mittwald/flow-remote-react-components`
+
+Flow no longer depends on `@tabler/icons-react`. `@mittwald/flow-icons` carries
+the path data of the 123 icons it uses directly, so a Flow install stops pulling
+in 74 MB and ~24,000 files it never needed.
+
+The icons themselves do not change: same names, same exports, same rendered
+`<svg>` including the `tabler-icon` and `tabler-icon-<name>` classes.
+
+The one thing that breaks is code which imported `@tabler/icons-react` without
+declaring it, and got it because npm hoisted Flow's copy into the project's
+`node_modules`. That copy is gone. Declare the package where you use it:
+
+```shell
+npm i @tabler/icons-react
+```
+
+```tsx
+// unchanged — it just needs the package in your own dependencies now
+import { IconStar } from "@tabler/icons-react";
+
+<Icon>
+  <IconStar />
+</Icon>;
+```
+
+**Apply:** Only affects code that imports from `@tabler/icons-react` — typically
+a `<Icon><IconSomething /></Icon>` using an icon that is not in Flow's own set.
+Add the package to your own dependencies (`npm i @tabler/icons-react`); the
+imports themselves stay unchanged. Flow's own `Icon*` components are unaffected,
+keep their names, and render exactly as before.
+
+---
+
 <a id="option-value-inferred-from-mixed-children"></a>
 
 ## Option: value is inferred from mixed children
@@ -571,7 +695,7 @@ case.
 
 ## TableColumn: `maxWidth` removed, `width` and `minWidth` retyped
 
-**Since `0.2.0-alpha.956`** · migration · manual change · also applies to
+**Since `0.2.0-alpha.956`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 `maxWidth` has been removed. `width` and `minWidth` are now typed as
@@ -588,9 +712,24 @@ Percentage, pixel and `fr` values keep working as strings or numbers
 (`width="50%"`, `width="200fr"`, `width={300}`). Where you passed `null` to mean
 "no explicit width", omit the prop instead.
 
+A codemod removes `maxWidth` — the prop is gone from the type, so an explicit
+attribute is wrong at any value, an expression included — and removes a `width`
+or `minWidth` written as the literal `null`.
+
+It declines what it cannot decide from the source: `width={maybeNull}` could be
+anything at runtime, and a spread's contents are invisible. Both keep their
+props and need a look by hand.
+
 **Apply:** Remove `maxWidth` from every `TableColumn`. Where `width` or
 `minWidth` was `null`, omit the prop instead — the type no longer accepts
-`null`, only `number | string`.
+`null`, only `number | string`. A codemod does both for the cases it can decide
+from the source. Two it declines: a `width`/`minWidth` whose value is an
+expression (`width={maybeNull}`), and a spread that might carry `maxWidth`
+(`<TableColumn {...props} />`). Check those by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest table-column-width-props src
+```
 
 ---
 
@@ -1011,18 +1150,39 @@ Only function **references** are affected. An inline arrow
 (`onAction={() => …}`), a zero-parameter function, and anything already
 accepting `unknown` are all fine.
 
-A codemod renames the prop. It deliberately does not wrap: whether the
-referenced function declares a parameter cannot be decided from the source —
-that needs type information — and wrapping everything would silently drop the
-arguments `Action` passes to handlers that do accept them.
+A codemod renames the prop and wraps the reference.
+
+Whether a reference _needs_ wrapping is not decidable from the source — that
+needs type information. Performing the wrap does not need it: `() => fn()` calls
+what `Action` would have called, and `onAction` takes no arguments. So the wrap
+fixes the reference that needed it and changes nothing for the rest, which makes
+the decision unnecessary.
+
+Wrapped: a plain identifier and a member expression (`close`,
+`controller.close`, `this.handleSave`). Left alone: an arrow function and a
+function expression, which already are the handler; a call (`makeHandler()`,
+`close.bind(controller)`), which produces it; and anything that is not one
+reference (`isOpen ? close : open`, `onClose ?? noop`, `controller?.close`).
+
+Two wraps are worth a look afterwards. A handler that read the event `Action`
+forwards — undocumented, but it does forward the trigger's event — stops
+receiving it. And `onAction={props.onAction}`, where the reference may be
+`undefined`: passing it was fine, calling it is not, so TypeScript now reports
+the call and wants a guard.
 
 **Apply:** Rename the `action` prop on `Action` to `onAction`. Not only a
 rename: the new prop is typed `ActionFn` (`(...args: unknown[]) => unknown`), so
 a function _reference_ that declares a parameter no longer type-checks and needs
 wrapping — `onAction={() => controller.close()}` rather than
-`onAction={controller.close}`. Check every site where you passed a reference
-rather than an inline arrow; the codemod renames the prop but cannot decide this
-one from the source.
+`onAction={controller.close}`. A codemod does both. It wraps every bare
+reference (`close`, `controller.close`), because the wrap is a no-op for a
+reference that did not need it. It leaves a value that already is the handler or
+produces one — an arrow function, a function expression, a call like
+`makeHandler()` or `close.bind(controller)` — and anything that is not one
+reference, such as `isOpen ? close : open` or `controller?.close`. Two wraps to
+look at afterwards: a handler that read the event `Action` forwards stops
+receiving it, and a possibly-undefined reference (`onAction={props.onAction}`)
+becomes a call TypeScript rejects — add the guard it asks for.
 
 ```shell
 npx @mittwald/flow-codemods@latest action-prop-to-on-action src
@@ -1095,6 +1255,21 @@ import { Field } from "@mittwald/flow-react-components/react-hook-form";
 import { Link } from "@mittwald/flow-react-components/nextjs";
 ```
 
+### Stylesheets stay stylesheet imports
+
+A CSS export is a file, not a JS module, so it never moves onto the package
+root. A bundler query addressing it (`?url`, `?inline`, `?raw`) is part of how
+the file is requested, not part of the subpath — both of these stay exactly as
+they are:
+
+```javascript
+import "@mittwald/flow-react-components/all.css";
+import flowStyles from "@mittwald/flow-react-components/all.css?url";
+```
+
+Only a stale `global.css` or `globals.css` is rewritten to `all.css`, query
+included.
+
 ### `tsconfig.json`
 
 Set `"module": "esnext"` in your `tsconfig.json`, if you have trouble with
@@ -1119,8 +1294,13 @@ and the first stable release of Flow is `1.0.0`.
 **Apply:** Rewrite every subdirectory import from
 `@mittwald/flow-react-components` to the package root, except `react-hook-form`
 and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form`
-and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors,
-set `"module": "esnext"` in `tsconfig.json`.
+and `@mittwald/flow-react-components/nextjs`. Asset imports are not part of
+this: a CSS specifier stays a CSS specifier — `all.css` and `all-layered.css`
+unchanged, a stale `global.css` or `globals.css` rewritten to `all.css` — and
+keeps any bundler query it carries (`?url`, `?inline`, `?raw`). It never becomes
+a named import from the package root, which has no JS binding behind a
+stylesheet. If you hit missing module errors, set `"module": "esnext"` in
+`tsconfig.json`.
 
 ```shell
 npx @mittwald/flow-codemods@latest imports-to-package-root src
@@ -1132,7 +1312,7 @@ npx @mittwald/flow-codemods@latest imports-to-package-root src
 
 ## Renamed CSS export
 
-**Since `0.1.0-alpha.292`** · migration · manual change
+**Since `0.1.0-alpha.292`** · migration · codemod available
 
 The CSS export `@mittwald/flow-react-components/styles` has renamed to the more
 precise name `@mittwald/flow-react-components/all.css`, because the file
@@ -1145,5 +1325,16 @@ as well. A documentation on how to use them is planned.
 + import "@mittwald/flow-react-components/all.css";
 ```
 
+A codemod rewrites the specifier in every JavaScript and TypeScript form that
+names a module. It cannot reach a `.css` or `.scss` file, so an `@import` of the
+old path there needs a manual search.
+
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
-`@mittwald/flow-react-components/all.css`.
+`@mittwald/flow-react-components/all.css`, keeping any bundler query the
+specifier carries (`.../styles?url` becomes `.../all.css?url`). A codemod does
+this for JavaScript and TypeScript files. An `@import` of the old path inside a
+`.css` or `.scss` file is not covered — search for it by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest renamed-css-export src
+```

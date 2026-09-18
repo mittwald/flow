@@ -35,10 +35,27 @@ Next.js documentation site for the flow Styleguide, deployed to
   against the pages that exist — it runs as part of `pnpm affected:test`, so a
   link to a moved or renamed page fails the PR. Move a page and the failure
   names the candidates it could mean. External URLs are out of scope.
+- **CSS-module class names are typed, and the types are generated.**
+  `pnpm nx build:scss-types docs` writes a committed `*.module.d.scss.ts` /
+  `*.module.d.css.ts` next to every CSS module (shared generator, see the root
+  [Generated code](../../AGENTS.md#generated-code--must-be-committed) table).
+  Without them Next types every module as `{ readonly [key: string]: string }`,
+  so `styles.typo` and a key from the wrong module both type-check and render as
+  `undefined` — silently, with no `className` and no error anywhere. Add, rename
+  or remove a class and the declaration has to be regenerated and committed, or
+  CI's `git diff --exit-code` fails. `allowArbitraryExtensions` in
+  `tsconfig.json` is what makes TypeScript prefer them over Next's ambient
+  wildcard — remove it and every declaration goes inert without a single error.
 - **Two test runners, two globs.** `test:unit` is Vitest over `*.test.ts`;
   `test:links` is the `node:test` runner over `*.node.test.ts`. Neither can
   execute the other's files, so the `.node` infix is what keeps the globs
   disjoint — same role as `*.browser.test.tsx` in `components`. Write a new
   `node:test` file with the infix, or both targets break at once.
+- **Next 16 differs from what a model was trained on** — APIs, conventions and
+  file structure moved. Read the relevant guide in
+  `node_modules/next/dist/docs/` (resolved from this directory; in this monorepo
+  `next` is not visible from the repo root) before writing Next code.
+  `next dev`'s own managed AGENTS.md block is off — see `agentRules` in
+  `next.config.js`.
 - Run `pnpm format` (Prettier, 80-character prose wrap) before committing. The
   local dev server is `pnpm nx dev docs`.

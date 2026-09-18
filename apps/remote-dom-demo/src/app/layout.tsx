@@ -73,6 +73,7 @@ export default function Layout(props: PropsWithChildren) {
 
                     <NavigationGroup collapsable>
                       <Heading>Components</Heading>
+                      <NavigationItem page="activity">Activity</NavigationItem>
                       <NavigationItem page="chart">Chart</NavigationItem>
                       <NavigationItem page="code-editor">
                         CodeEditor
@@ -84,6 +85,9 @@ export default function Layout(props: PropsWithChildren) {
                         Tab Navigation
                       </NavigationItem>
                       <NavigationItem page="svg">Icon/SVG</NavigationItem>
+                      <NavigationItem page="image-cropper">
+                        ImageCropper
+                      </NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
                       <NavigationItem page="list-selection">
                         List (selection)

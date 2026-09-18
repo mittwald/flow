@@ -45,9 +45,12 @@ jobs:
 
       # The CI guard scripts are plain node:test files outside the nx graph, so
       # `pnpm affected:test` never sees them. Run them here so a broken
-      # classifier fails the PR rather than the next release.
+      # classifier fails the PR rather than the next release. `dev/` holds the
+      # same kind of code in TypeScript, so it needs the tsx loader.
       - name: Test the CI guard scripts
-        run: node --test .github/scripts/*.test.mjs
+        run: |
+          node --test .github/scripts/*.test.mjs
+          node --test --import tsx dev/*.test.ts
 
       # Fixed versioning means every Lerna-managed package carries `lerna.json`'s
       # version. A merge can break that silently — no conflict markers, and the
