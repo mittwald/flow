@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.62](https://github.com/mittwald/flow/compare/1.2.0-next.61...1.2.0-next.62) (2026-09-18)
+
+### Bug Fixes
+
+* **CoachMark:** resolve a late anchor, and stop dropping props on the way ([7f0255c](https://github.com/mittwald/flow/commit/7f0255c612b515882a7aa40be6e3486538de32de))
+
+### Continuous Integration
+
+* run every suite on Dependabot PRs and deploy their review apps ([#3079](https://github.com/mittwald/flow/issues/3079)) ([baf1ad5](https://github.com/mittwald/flow/commit/baf1ad5c433a10b8f113c3354c35126fc1f474b1))
+
+## [1.1.50](https://github.com/mittwald/flow/compare/1.2.0-next.60...1.1.50) (2026-09-18)
+
+### Features
+
+* **CoachMark:** add an anchored hint for a new or moved control ([e7e8ace](https://github.com/mittwald/flow/commit/e7e8aceae318fefdbdede2ea7ec03be319d3f12a))
+* **CoachMark:** anchor by id so an extension can place one ([2bcd60c](https://github.com/mittwald/flow/commit/2bcd60c6754b28fa9948c908625b02ebb8936b2c))
+* **Popover:** add a modality that leaves the page usable ([9005aa2](https://github.com/mittwald/flow/commit/9005aa2df77e03d609f1be8d3fd62b19296e9145))
+
+### Bug Fixes
+
+* **components:** keep an unset *Ref prop out of the ref merge ([693527e](https://github.com/mittwald/flow/commit/693527e7478376cf2b0777b63131af60b9bfae79))
+* **Popover:** place the tip on the edge facing the anchor, and hide an unplaced popover ([22a7ae3](https://github.com/mittwald/flow/commit/22a7ae3a8bf7d3f5667fd13a58e5bdc6abbf4f97))
+* **Popover:** render a non-modal popover where it stands ([aca5280](https://github.com/mittwald/flow/commit/aca52802304ac72109f22dbd8e0aa6209873da4e))
+* **Popover:** reposition a non-modal popover when its anchor moves ([60500db](https://github.com/mittwald/flow/commit/60500dbd1f1437be9311e21815628c2a08838606))
+* **Popover:** stop a non-modal popover claiming the viewport&#x27;s limits ([3d13d90](https://github.com/mittwald/flow/commit/3d13d90486d4be37802a241b0bb0cf5f7dfe6e5f))
+
+### Documentation
+
+* **CoachMark:** drop the bullet the comparison already makes ([6f5a29b](https://github.com/mittwald/flow/commit/6f5a29b121cc75510c3657284df4df066a721503))
+* **CoachMark:** follow the Styleguide content guidelines ([05e3842](https://github.com/mittwald/flow/commit/05e3842c8a10c7a28d5f32bf1ba76b0823fe347c))
+* **CoachMark:** give the examples room below the anchor ([d879b9c](https://github.com/mittwald/flow/commit/d879b9c99968bc14f6d995eb3b4f4adbd60feba9))
+* **CoachMark:** rework the page along the review ([c12d721](https://github.com/mittwald/flow/commit/c12d72146115d6f5ac9c51cbdb162ab06c0c1452)), closes [#3166](https://github.com/mittwald/flow/issues/3166)
+* **CoachMark:** say why the examples pin the placement ([54f91d0](https://github.com/mittwald/flow/commit/54f91d00f89cbaf794acf02cf58c9feed8e36480))
+* drop the hand-written beta notice, record the flr export trap ([4bf7870](https://github.com/mittwald/flow/commit/4bf787093bc4629d3a004b5c3570b242de071401))
+
+### Miscellaneous Chores
+
+* **ContextualHelp:** show the non-modal story as a self-opening spotlight ([d4abdc2](https://github.com/mittwald/flow/commit/d4abdc2a8e88dde179e4302813038d3fae58bd1e))
+* **release:** bump version to 1.1.50 ([0f31779](https://github.com/mittwald/flow/commit/0f3177961278ff3688cd17f878860babee021c41))
+
+### Code Refactoring
+
+* **CoachMark:** compose the dismiss action instead of labelling it ([0034fda](https://github.com/mittwald/flow/commit/0034fdaea5e47dd79cec8b57a4c8d2f8e010f3f3))
+* **CoachMark:** ship isDefaultOpen, and let onOpenChange report the close ([33f6015](https://github.com/mittwald/flow/commit/33f60154dece819fb838cfe39c9b630383441ee2)), closes [#3183](https://github.com/mittwald/flow/issues/3183)
+* keep ContextualHelp and ContextMenu out of the modality ([3408650](https://github.com/mittwald/flow/commit/3408650e915061970f91bca09fe3a7904acfff1b))
+* **Popover:** keep the modality off the public props ([990e3e5](https://github.com/mittwald/flow/commit/990e3e5b4dae37b6cace7f63ad772087b99412e3))
+* **Popover:** pass the modality as an internal prop ([a93dad7](https://github.com/mittwald/flow/commit/a93dad7ca8589f9ccce2ee42d72c3d1ec2791083))
+
+### Tests
+
+* update visual regression screenshots ([39364ce](https://github.com/mittwald/flow/commit/39364cec1f85394b9c4769bc1d066c19a75318a7))
+* update visual regression screenshots ([2954127](https://github.com/mittwald/flow/commit/29541272bb717bfb203cf17185be752e4b23f679))
+
 ## [1.2.0-next.61](https://github.com/mittwald/flow/compare/1.2.0-next.60...1.2.0-next.61) (2026-09-18)
 
 ### Bug Fixes
