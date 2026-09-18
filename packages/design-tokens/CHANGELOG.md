@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.60](https://github.com/mittwald/flow/compare/1.2.0-next.59...1.2.0-next.60) (2026-09-18)
+
+### Bug Fixes
+
+* **Notification:** keep the notification inside narrow viewports ([#3190](https://github.com/mittwald/flow/issues/3190)) ([e35fc7a](https://github.com/mittwald/flow/commit/e35fc7aab1dd63efbab3bf83f809771b07d1f936))
+
+## [1.1.48](https://github.com/mittwald/flow/compare/1.1.47...1.1.48) (2026-09-17)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.1.48 ([29caa83](https://github.com/mittwald/flow/commit/29caa832765bca544d6fae2e4c05e8b3dedcdcb3))
+
 ## [1.2.0-next.59](https://github.com/mittwald/flow/compare/1.1.47...1.2.0-next.59) (2026-09-17)
 
 ## [1.2.0-next.58](https://github.com/mittwald/flow/compare/1.2.0-next.57...1.2.0-next.58) (2026-09-17)
