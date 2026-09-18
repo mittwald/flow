@@ -38,6 +38,14 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   filters is not assignable to `ListFilter<any, …>[]`: a row model sits in a
   contravariant position deep inside `Column`, so `never` and `any` do not meet.
   `storeFilters` takes the two members it reads instead of the class.
+- **The view mode is a MobX observable, not the binding's state.** React used
+  `useState` inside the model, which meant the model was rebuilt every render
+  and the state survived only because the hook did. Shared, it holds the value
+  itself — so the binding both subscribes _and_ keeps the instance:
+  `ListViewMode.useNew` is `useStatic` plus one `useSelector`. Drop that
+  `useSelector` and the list still switches mode while every component that does
+  not own the model keeps rendering the old one, which is what the `View mode`
+  browser test asserts.
 - **A type both packages need is re-exported, never declared twice.** Two copies
   of `PropertyName<T>` typechecked apart and failed where they met:
   `DeepKeys<T>` is a conditional type, and TypeScript compares two conditionals

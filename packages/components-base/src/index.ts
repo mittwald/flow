@@ -40,6 +40,11 @@ export type {
   SortingDefaultMode,
   SortingFn,
 } from "./list/sorting/types";
+export { ListViewMode } from "./list/viewMode/ListViewMode";
+export type {
+  ListViewModeOptions,
+  ListViewModeValue,
+} from "./list/viewMode/types";
 export {
   customPropertyPrefix,
   type CustomPropertyName,

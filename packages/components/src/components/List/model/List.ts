@@ -48,7 +48,7 @@ export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
   public metadata?: TMeta;
   public readonly settingsStorage?: ListSettingsStore<T>;
   public readonly loadingItemsCount;
-  public readonly viewMode: ListViewMode<T>;
+  public readonly viewMode: ListViewMode;
   public readonly emptyView?: ReactNode;
   public readonly emptySearchResultView?: ReactNode;
   public readonly settingsStorageDefaults?: ListSettingsStorageDefaults;
@@ -126,7 +126,7 @@ export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
-    this.viewMode = new ListViewMode(this, { defaultViewMode });
+    this.viewMode = ListViewMode.useNew(this, { defaultViewMode });
     this.emptyView = emptyView;
     this.emptySearchResultView = emptySearchResultView;
 

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { ListViewMode as ListViewModeState } from "@mittwald/flow-components-base";
+import { useStatic } from "@/lib/hooks/useStatic";
+import useSelector from "@/lib/mobx/useSelector";
 import type { ListViewMode as RawListViewMode } from "./types";
 import type { List } from "./List";
 
@@ -7,49 +9,30 @@ interface Options {
   autosave?: boolean;
 }
 
-export class ListViewMode<T = unknown> {
-  public readonly list: List<T>;
-  public readonly autosave: boolean;
-  private readonly state: [
-    RawListViewMode,
-    React.Dispatch<React.SetStateAction<RawListViewMode>>,
-  ];
-
-  public constructor(list: List<T>, options: Options = {}) {
-    const {
-      defaultViewMode,
-      autosave = list.settingsStorageDefaults?.viewMode?.autosave ?? true,
-    } = options;
-
-    this.list = list;
-    this.autosave = autosave;
-    this.state = useState(
-      this.list.settingsStorage?.get("viewMode", { autosave: this.autosave }) ??
-        defaultViewMode ??
-        "list",
+/**
+ * React's view of the list's layout mode.
+ *
+ * The mode itself — the stored value winning over the default, the write-back —
+ * is `ListViewMode` in `@mittwald/flow-components-base`. What is left here is
+ * the subscription, and the fact that the model outlives a render: a view mode
+ * rebuilt every render would forget what the user picked.
+ */
+export class ListViewMode extends ListViewModeState {
+  public static useNew<T>(list: List<T>, options: Options = {}): ListViewMode {
+    const viewMode = useStatic(
+      () =>
+        new ListViewMode({
+          defaultValue: options.defaultViewMode,
+          autosave:
+            options.autosave ??
+            list.settingsStorageDefaults?.viewMode?.autosave,
+          settings: list.settingsStorage,
+        }),
     );
-  }
 
-  public get value() {
-    return this.state[0];
-  }
+    /* `set()` mutates an observable — without this nothing re-renders. */
+    useSelector(() => viewMode.value);
 
-  public get isTiles() {
-    return this.value === "tiles";
-  }
-
-  public get isTable() {
-    return this.value === "table";
-  }
-
-  public get isList() {
-    return this.value === "list";
-  }
-
-  public set(viewMode: RawListViewMode): void {
-    this.state[1](viewMode);
-    this.list.settingsStorage?.store("viewMode", viewMode, {
-      autosave: this.autosave,
-    });
+    return viewMode;
   }
 }

@@ -14,6 +14,7 @@ import type {
   PropertyName,
   PropertyValue,
   PropertyValueRenderMethod as ListPropertyValueRenderMethod,
+  ListViewModeValue,
 } from "@mittwald/flow-components-base";
 import type { ReactNode } from "react";
 
@@ -111,7 +112,8 @@ export interface ListSettingsStorageShape {
   storageKey: string;
 }
 
-export type ListViewMode = "table" | "list" | "tiles";
+/* An alias, not a re-export: a re-export does not bring the name into scope. */
+export type ListViewMode = ListViewModeValue;
 export type ItemActionFn<T> = (data: T) => void;
 export type GetItemId<T> = (data: T) => string;
 

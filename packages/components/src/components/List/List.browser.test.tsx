@@ -560,6 +560,36 @@ describe("Sorting", () => {
   });
 });
 
+describe("View mode", () => {
+  const getSwitchableList = () => (
+    <List aria-label="Test">
+      <ListStaticData<Data> data={[{ num: 42 }]} />
+      <ListItem<Data> showTiles textValue={({ num }) => String(num)}>
+        {({ num }) => <span>Item: {num}</span>}
+      </ListItem>
+    </List>
+  );
+
+  /*
+   * The mode lives in a MobX observable in the shared model, so the trigger —
+   * a component that does not own it — only follows along because the list
+   * subscribes. A mode that switched without this button relabelling would
+   * mean half the list had stopped re-rendering.
+   */
+  test("Switching the mode updates the whole list, not just the items", async () => {
+    await render(getSwitchableList());
+
+    const trigger = page.getByRole("button", { name: "Settings" });
+    await expect.element(trigger).toHaveTextContent("List");
+
+    await userEvent.click(trigger);
+    await userEvent.click(page.getByRole("menuitemradio", { name: "Tiles" }));
+
+    await expect.element(trigger).toHaveTextContent("Tiles");
+    expect(listItem42).toBeInTheDocument();
+  });
+});
+
 describe("Loading view", () => {
   const neverResolvingPromise = new Promise(() => {
     // never resolves

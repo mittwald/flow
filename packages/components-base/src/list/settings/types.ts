@@ -1,3 +1,5 @@
+import type { ListViewModeValue } from "../viewMode/types";
+
 export interface ListSettingsOperationOptions {
   autosave?: boolean;
   manualSave?: boolean;
@@ -15,7 +17,8 @@ export interface ListSearchSetting {
 /** Which values of each filter are on, keyed by the filter's storage key. */
 export type ListActiveFiltersSetting = Partial<Record<string, string[]>>;
 
-export type ListSettingKey = "sorting" | "search" | "activeFilters";
+export type ListSettingKey =
+  "sorting" | "search" | "activeFilters" | "viewMode";
 
 /**
  * The part of the list's persistence the shared model touches.
@@ -42,6 +45,10 @@ export interface ListSettingsPort {
     key: "search",
     options: ListSettingsOperationOptions,
   ): ListSearchSetting | undefined;
+  get(
+    key: "viewMode",
+    options: ListSettingsOperationOptions,
+  ): ListViewModeValue | undefined;
 
   store(
     key: "activeFilters",
@@ -56,6 +63,11 @@ export interface ListSettingsPort {
   store(
     key: "search",
     value: ListSearchSetting | undefined,
+    options: ListSettingsOperationOptions,
+  ): void;
+  store(
+    key: "viewMode",
+    value: ListViewModeValue | undefined,
     options: ListSettingsOperationOptions,
   ): void;
 }
