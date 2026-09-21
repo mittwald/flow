@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.3](https://github.com/mittwald/flow/compare/1.3.0-next.2...1.3.0-next.3) (2026-09-21)
+
+### Features
+
+* **icons:** add an AIHosting icon ([17bc78c](https://github.com/mittwald/flow/commit/17bc78ce347e63ce1e4c1719f4fb0e1eaea18811)), closes [#3214](https://github.com/mittwald/flow/issues/3214)
+
 ## [1.3.0-next.2](https://github.com/mittwald/flow/compare/1.3.0-next.1...1.3.0-next.2) (2026-09-21)
 
 **Note:** Version bump only for package @mittwald/flow-icons-pro
