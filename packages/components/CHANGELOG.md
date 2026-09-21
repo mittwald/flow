@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.64](https://github.com/mittwald/flow/compare/1.2.0-next.63...1.2.0-next.64) (2026-09-21)
+
+### Bug Fixes
+
+* **SectionHeader:** render links in size &quot;m&quot; ([#3200](https://github.com/mittwald/flow/issues/3200)) ([2151330](https://github.com/mittwald/flow/commit/2151330e89c72e7152593f06255b49bac10c6bfa))
+
 ## [1.2.0-next.63](https://github.com/mittwald/flow/compare/1.2.0-next.62...1.2.0-next.63) (2026-09-18)
 
 ## [1.1.51](https://github.com/mittwald/flow/compare/1.2.0-next.61...1.1.51) (2026-09-18)
