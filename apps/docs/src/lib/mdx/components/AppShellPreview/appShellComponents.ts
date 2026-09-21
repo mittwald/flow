@@ -3,6 +3,7 @@ import type { AppShellName } from "./appShellCatalogue";
 import FocusTask from "@/content/templates/app-shells/focus-task/examples/focus-task";
 import FocusTaskBestellung from "@/content/templates/app-shells/focus-task/examples/focus-task-bestellung";
 import SimpleApp from "@/content/templates/app-shells/simple-app/examples/simple-app";
+import SimpleAppSidebar from "@/content/templates/app-shells/simple-app/examples/simple-app-sidebar";
 import ComplexApp from "@/content/templates/app-shells/complex-app/examples/complex-app";
 import ComplexAppDetail from "@/content/templates/app-shells/complex-app/examples/complex-app-detail";
 import ComplexAppDoku from "@/content/templates/app-shells/complex-app/examples/complex-app-doku";
@@ -20,6 +21,7 @@ export const appShellComponents: Record<AppShellName, ComponentType> = {
   "focus-task": FocusTask,
   "focus-task-bestellung": FocusTaskBestellung,
   "simple-app": SimpleApp,
+  "simple-app-sidebar": SimpleAppSidebar,
   "complex-app": ComplexApp,
   "complex-app-detail": ComplexAppDetail,
   "complex-app-doku": ComplexAppDoku,

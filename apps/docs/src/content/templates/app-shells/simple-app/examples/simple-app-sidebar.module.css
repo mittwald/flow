@@ -1,0 +1,104 @@
+.app {
+  /* Container-relative here; use 100dvh in a real full-page app. */
+  min-height: 100%;
+  max-width: 1880px;
+  margin-inline: auto;
+  padding-block: var(--size-px--l);
+  padding-inline: 2rem;
+  background: var(--color--background-gradient);
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme. Swap the masked SVG for your own logo.
+ */
+.logo {
+  width: 9rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+}
+
+/* The reduced top bar keeps its global functions at the far end. */
+.utility {
+  margin-inline-start: auto;
+}
+
+/* The bell and the burger take that place on narrow screens. */
+.mobileActions {
+  margin-inline-start: auto;
+}
+
+/* The bell carries a small count badge in its top-inline-end corner. */
+.notify {
+  position: relative;
+}
+
+.notifyBadge {
+  position: absolute;
+  top: -0.25rem;
+  inset-inline-end: -0.25rem;
+}
+
+/* Sidebar and content fill the space between top bar and footer. */
+.body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* The navigation card keeps a fixed width beside the flexible content. */
+.sidebar {
+  flex: 0 0 17rem;
+  gap: var(--size-px--m);
+}
+
+/* Supplementary points sit at the bottom, set apart from the flat list above. */
+.sidebarBottom {
+  margin-block-start: auto;
+}
+
+.main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Keeps the heading in the accessibility tree while hiding it visually. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.footer {
+  margin-block-start: auto;
+}
+
+/*
+ * Below this width the sidebar has no column of its own, so it hands its links
+ * to the off-canvas behind the burger. The reduced top bar shows the bell and
+ * the burger instead of the profile menu.
+ */
+@media (max-width: 768px) {
+  .utility,
+  .sidebar {
+    display: none;
+  }
+
+  .app {
+    padding-inline: var(--size-px--m);
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileActions {
+    display: none;
+  }
+}

@@ -10,6 +10,7 @@ const titles = {
   "focus-task": "Focus Task",
   "focus-task-bestellung": "Focus Task – Konfigurations-Aufgabe",
   "simple-app": "Simple App",
+  "simple-app-sidebar": "Simple App – Mit seitlicher Navigation",
   "complex-app": "Complex App",
   "complex-app-detail": "Complex App – Detailansicht",
   "complex-app-doku": "Complex App – Doku-Layout",
