@@ -103,6 +103,18 @@ export const Badge = flowComponent("Badge", (props) => {
         />
       ),
     },
+    // A trigger the consumer wrote brings its own button. It goes to the same
+    // place, styled like the one the badge supplies.
+    ContextualHelpTrigger: {
+      tunnel: contextualHelpTunnel,
+      Button: {
+        className: styles.action,
+        color: buttonColor,
+        variant: "plain",
+        size: "s",
+        isDisabled,
+      },
+    },
   };
 
   return (

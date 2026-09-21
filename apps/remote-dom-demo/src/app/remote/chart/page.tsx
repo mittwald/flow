@@ -75,7 +75,7 @@ export default function Page() {
 
     return (
       <CartesianChart data={data} height="300px" layout={layout}>
-        <CartesianGrid vertical={vertical} horizontal={!vertical} />
+        <ChartGrid vertical={vertical} horizontal={!vertical} />
         <Bar dataKey="Shields" />
         <Bar dataKey="Hull" color="palatinate-blue" />
         {vertical ? <XAxis unit="%" /> : <XAxis dataKey="time" />}

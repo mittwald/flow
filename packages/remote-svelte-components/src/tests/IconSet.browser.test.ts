@@ -1,3 +1,4 @@
+import * as flowReact from "@mittwald/flow-react-components";
 import { afterEach, expect, test } from "vitest";
 import * as flowRemoteSvelte from "../index.js";
 import IconSet from "./fixtures/IconSet.svelte";
@@ -17,20 +18,25 @@ afterEach(() => cleanupRemote());
 
 const icons = (host: Element) => [...host.querySelectorAll("svg")];
 
-test("the set is exported from the package", () => {
+/*
+ * Pin the set against React's rather than against a count: both are generated
+ * from the same `icons.yaml`, so an icon added there has to reach both — and a
+ * hard-coded number would only ever report that the file grew.
+ */
+const iconNames = (module: object, notAnIcon: string[]) =>
+  Object.keys(module)
+    .filter((name) => name.startsWith("Icon") && !notAnIcon.includes(name))
+    .sort();
+
+test("the set is exported from the package, and it is React's", () => {
   expect(flowRemoteSvelte).toHaveProperty("IconInfo");
   expect(flowRemoteSvelte).toHaveProperty("IconStar");
-  /*
-   * 132 icons in `icons.yaml`, all of them. `Icon` is the generated component
-   * they wrap and `IconSetProvider` replaces them — neither is one.
-   */
-  const notAnIcon = ["Icon", "IconSetProvider"];
 
-  expect(
-    Object.keys(flowRemoteSvelte).filter(
-      (name) => name.startsWith("Icon") && !notAnIcon.includes(name),
-    ),
-  ).toHaveLength(132);
+  /* `Icon` is the generated component they wrap, `IconSetProvider` replaces
+   * them, and React additionally exports the `IconProps`-adjacent `IconSet`. */
+  expect(iconNames(flowRemoteSvelte, ["Icon", "IconSetProvider"])).toEqual(
+    iconNames(flowReact, ["Icon", "IconSetProvider", "IconSet"]),
+  );
 });
 
 test("an icon reaches the host through Icon, keeping Tabler's classes", async () => {

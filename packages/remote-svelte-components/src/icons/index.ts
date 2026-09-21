@@ -55,6 +55,7 @@ export { default as IconUnorderedList } from "./IconUnorderedList.svelte";
 export { default as IconUpload } from "./IconUpload.svelte";
 export { default as IconView } from "./IconView.svelte";
 export { default as IconAI } from "./IconAI.svelte";
+export { default as IconAIHosting } from "./IconAIHosting.svelte";
 export { default as IconAnalytics } from "./IconAnalytics.svelte";
 export { default as IconApp } from "./IconApp.svelte";
 export { default as IconAutoresponder } from "./IconAutoresponder.svelte";

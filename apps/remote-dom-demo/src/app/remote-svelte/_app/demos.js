@@ -1,5 +1,6 @@
 import ActionForm from "../_demos/ActionForm.svelte";
 import Chart from "../_demos/Chart.svelte";
+import CoachMark from "../_demos/CoachMark.svelte";
 import CodeEditor from "../_demos/CodeEditor.svelte";
 import ContextMenu from "../_demos/ContextMenu.svelte";
 import ErrorDemo from "../_demos/ErrorDemo.svelte";
@@ -32,6 +33,7 @@ import Tunnel from "../_demos/Tunnel.svelte";
 export const demos = {
   "action-form": ActionForm,
   chart: Chart,
+  "coach-mark": CoachMark,
   "code-editor": CodeEditor,
   "context-menu": ContextMenu,
   error: ErrorDemo,

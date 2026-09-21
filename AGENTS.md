@@ -197,7 +197,8 @@ commit the results.
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
-  week and merges them itself once CI and the visual suite are green — see
+  week and merges them itself once CI and the full visual and cross-version
+  suites are green — see
   [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
   deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
   closed PR only makes it come back next week.
@@ -407,7 +408,10 @@ where the error points.
   **Fix:** Add the **`run-cross-version-tests`** PR label
   (`test-cross-version-label.yml`) to run both harnesses on the branch. Fix real
   divergences by gating per-version — `test.skipIf(crossVersion({ below }))` or
-  a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. See
+  a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. A
+  normalizer may only drop notation that carries no meaning at all (`class` is
+  compared as a token set, because separators and token order are not part of
+  it); anything a browser could render differently stays compared. See
   [remote-react-components/CONTRIBUTE.md](packages/remote-react-components/CONTRIBUTE.md#running-them-on-a-pull-request)
 
 - **Symptom:** A vite/vitest config you added floods every build and test run
@@ -609,6 +613,40 @@ where the error points.
   surface with `@flr-ignore-props` (`XAxis`/`YAxis` `tickFormatter` do) and
   regenerate. `checkSerializableProps` now fails generation on new ones; the
   pre-existing set is listed in `acknowledgedValueReturningProps`
+
+- **Symptom:** A remote-capable component reaches the host as `undefined` —
+  React throws **"Element type is invalid: expected a string … but got:
+  undefined"** — although every generated file for it exists and is committed
+
+  **Cause:** The component is listed in **both** `@flr-generate` and
+  `packages/components/src/index/flr-universal.ts`. The two are either-or.
+  `remote-react-components/src/index.ts` is `export * from "./auto-generated"`
+  plus `export * from "./components"`, and the latter re-exports
+  `@mittwald/flow-react-components/flr-universal`. A name that both star exports
+  provide is ambiguous, and ESM resolves it to nothing — no error, no warning,
+  and the component's own code is never the problem
+
+  **Fix:** Pick one. `@flr-generate` for a component the host materializes from
+  a `flr-*` element; `flr-universal` for one the remote app renders itself
+  (`Action`, `LightBox` and `List` are there, and correspondingly absent from
+  `auto-generated`). To confirm the diagnosis, import the name from
+  `@/auto-generated` and from `@/index` in one file and log both — it is in the
+  first and missing from the second
+
+- **Symptom:** A `components` browser test keeps **passing** after you change
+  `packages/icons` — including a test written to fail on exactly that change.
+  The build is not the problem: `pnpm nx build icons` runs `tsc` and `dist`
+  holds the new code
+
+  **Cause:** `packages/components/vite.config.ts` lists `@mittwald/flow-icons`
+  in `optimizeDeps.include`, so vite pre-bundles it. The prebundle is keyed on
+  the lockfile and the config, not on the contents of a linked workspace
+  package's `dist` — so a rebuilt `dist` does not invalidate it and the test
+  keeps loading the old bundle
+
+  **Fix:** Delete `packages/components/node_modules/.vite*` after rebuilding.
+  And confirm a new regression test actually fails without its fix: this one
+  passed in both directions, which is the only symptom you get
 
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"

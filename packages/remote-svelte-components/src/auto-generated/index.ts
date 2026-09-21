@@ -54,6 +54,8 @@ export { default as CheckboxGroup } from "./CheckboxGroup.svelte";
 export type { RemoteCheckboxGroupElementProps as CheckboxGroupProps } from "@mittwald/flow-remote-elements";
 export { default as ClearPropsContext } from "./ClearPropsContext.svelte";
 export type { RemoteClearPropsContextElementProps as ClearPropsContextProps } from "@mittwald/flow-remote-elements";
+export { default as CoachMark } from "./CoachMark.svelte";
+export type { RemoteCoachMarkElementProps as CoachMarkProps } from "@mittwald/flow-remote-elements";
 export { default as CodeBlock } from "./CodeBlock.svelte";
 export type { RemoteCodeBlockElementProps as CodeBlockProps } from "@mittwald/flow-remote-elements";
 export { default as CodeEditor } from "./CodeEditor.svelte";

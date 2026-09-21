@@ -112,3 +112,46 @@ test("the overlay container stays the last child of body", async () => {
     foreign.remove();
   }
 });
+
+test("the backdrop covers the viewport, not the whole document", async () => {
+  // react-aria reads the page's scroll height during render, so the page has to
+  // be long before the overlay mounts.
+  const filler = document.createElement("div");
+  filler.style.height = "5000px";
+  document.body.append(filler);
+
+  try {
+    await render(
+      <Modal isDefaultOpen>
+        <Heading>Install</Heading>
+        <Content>
+          <Text>Hello World</Text>
+        </Content>
+      </Modal>,
+    );
+
+    const overlay = document.querySelector(".flow--overlay");
+    if (!overlay) {
+      throw new Error("no overlay rendered");
+    }
+
+    const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+    const { height } = overlay.getBoundingClientRect();
+
+    expect(document.documentElement.scrollHeight).toBeGreaterThan(
+      viewportHeight * 2,
+    );
+
+    // It must cover everything on screen …
+    expect(height).toBeGreaterThanOrEqual(viewportHeight - 1);
+
+    // … and nothing beyond it. The element is `position: fixed`, so extra
+    // height is never visible — but `backdrop-filter` blurs the whole layer
+    // every frame, and Chromium drops an oversized one for single frames while
+    // scrolling. Sizing this to the document height flickers backdrop and modal
+    // on any page longer than the viewport.
+    expect(height).toBeLessThanOrEqual(viewportHeight + 1);
+  } finally {
+    filler.remove();
+  }
+});

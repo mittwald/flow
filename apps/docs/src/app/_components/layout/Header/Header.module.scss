@@ -16,7 +16,7 @@
 }
 
 .headerContent {
-  max-width: 1800px;
+  max-width: var(--page-width);
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

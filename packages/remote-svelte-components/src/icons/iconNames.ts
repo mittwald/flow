@@ -56,6 +56,7 @@ export type FlowIconName =
   | "Upload"
   | "View"
   | "AI"
+  | "AIHosting"
   | "Analytics"
   | "App"
   | "Autoresponder"
