@@ -359,20 +359,24 @@ const MobileMenu = () => (
     <Modal offCanvas showCloseButton>
       <Heading>Menü</Heading>
       <Content>
-        <Navigation aria-label="Hauptnavigation">
-          <GlobalNavigationLinks />
-        </Navigation>
+        <Section>
+          <ActionGroup preserveOrder>
+            <Button variant="soft" color="secondary">
+              <IconNotification />
+              <Text>Benachrichtigungen</Text>
+            </Button>
+            <Button variant="soft" color="secondary">
+              <IconLogout />
+              <Text>Abmelden</Text>
+            </Button>
+          </ActionGroup>
+        </Section>
+        <Section>
+          <Navigation aria-label="Hauptnavigation">
+            <GlobalNavigationLinks />
+          </Navigation>
+        </Section>
       </Content>
-      <ActionGroup>
-        <Button variant="soft" color="secondary">
-          <IconNotification />
-          <Text>Benachrichtigungen</Text>
-        </Button>
-        <Button variant="soft" color="secondary">
-          <IconLogout />
-          <Text>Abmelden</Text>
-        </Button>
-      </ActionGroup>
     </Modal>
   </ModalTrigger>
 );

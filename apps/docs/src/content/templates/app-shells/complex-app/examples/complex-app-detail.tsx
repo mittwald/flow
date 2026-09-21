@@ -275,6 +275,22 @@ const MobileMenu = () => (
       <Heading>Menü</Heading>
       <Content>
         <Section>
+          <ActionGroup preserveOrder>
+            <Button variant="soft" color="secondary">
+              <IconSearch />
+              <Text>Suche</Text>
+            </Button>
+            <Button variant="soft" color="secondary">
+              <IconSupport />
+              <Text>Support</Text>
+            </Button>
+            <Button variant="soft" color="secondary">
+              <IconLogout />
+              <Text>Abmelden</Text>
+            </Button>
+          </ActionGroup>
+        </Section>
+        <Section>
           <Navigation aria-label="Hauptnavigation">
             <GlobalNavigationLinks />
           </Navigation>
@@ -284,20 +300,6 @@ const MobileMenu = () => (
           <ProjectNavigation />
         </Section>
       </Content>
-      <ActionGroup>
-        <Button variant="soft" color="secondary">
-          <IconSearch />
-          <Text>Suche</Text>
-        </Button>
-        <Button variant="soft" color="secondary">
-          <IconSupport />
-          <Text>Support</Text>
-        </Button>
-        <Button variant="soft" color="secondary">
-          <IconLogout />
-          <Text>Abmelden</Text>
-        </Button>
-      </ActionGroup>
     </Modal>
   </ModalTrigger>
 );
