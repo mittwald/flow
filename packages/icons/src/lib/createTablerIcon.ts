@@ -76,9 +76,12 @@ export const createTablerIcon = (
         ...defaultAttributes[type],
         width: size,
         height: size,
-        className: ["tabler-icon", `tabler-icon-${iconName}`, className].join(
-          " ",
-        ),
+        // `filter(Boolean)` matches @tabler/icons-react >= 3.47.0. Without it
+        // an icon that gets no `className` ends on a trailing space, which
+        // diverges from what the upstream package renders.
+        className: ["tabler-icon", `tabler-icon-${iconName}`, className]
+          .filter(Boolean)
+          .join(" "),
         ...(type === "filled"
           ? { fill: color }
           : { strokeWidth: stroke, stroke: color }),
