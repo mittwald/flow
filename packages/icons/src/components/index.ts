@@ -55,6 +55,7 @@ export { IconUnorderedList } from "./IconUnorderedList.tsx";
 export { IconUpload } from "./IconUpload.tsx";
 export { IconView } from "./IconView.tsx";
 export { IconAI } from "./IconAI.tsx";
+export { IconAIHosting } from "./IconAIHosting.tsx";
 export { IconAnalytics } from "./IconAnalytics.tsx";
 export { IconApp } from "./IconApp.tsx";
 export { IconAutoresponder } from "./IconAutoresponder.tsx";
