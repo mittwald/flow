@@ -462,3 +462,48 @@ test("A coach mark forwards DOM props on its non-modal path", async () => {
   expect(popover).toHaveAttribute("aria-label", "A hint");
   expect(popover).toHaveAttribute("lang", "en");
 });
+
+test("A width reaches the content, past the coach mark's own cap", async () => {
+  render(
+    <div>
+      <button id="width-anchor">Anchor</button>
+      {/* Wider than `--coach-mark--max-width` (360px), which caps the content
+          of a coach mark nobody sized. */}
+      <CoachMark anchor="width-anchor" isDefaultOpen width={500}>
+        <Text data-testid="hint">This button now does more.</Text>
+      </CoachMark>
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const content = hint.element().closest("[class*='flow--coach-mark']");
+  const popover = content?.parentElement?.parentElement;
+
+  expect(popover?.getBoundingClientRect().width).toBe(500);
+  // The content fills the popover's inner box — `clientWidth` leaves out the
+  // border the width is measured over.
+  expect(content?.getBoundingClientRect().width).toBe(popover?.clientWidth);
+});
+
+test("Without a width the coach mark keeps its own cap", async () => {
+  render(
+    <div>
+      <button id="capped-anchor">Anchor</button>
+      <CoachMark anchor="capped-anchor" isDefaultOpen>
+        <Text data-testid="hint">
+          A hint long enough to run past the cap on its own: this button now
+          does considerably more than it used to, and here is why that matters.
+        </Text>
+      </CoachMark>
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const content = hint.element().closest("[class*='flow--coach-mark']");
+
+  expect(content?.getBoundingClientRect().width).toBe(360);
+});

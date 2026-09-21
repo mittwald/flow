@@ -6,6 +6,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
 import { NonModalPopoverContent } from "../NonModalPopoverContent";
 import { popoverViewportPadding } from "../../viewportPadding";
+import { popoverWidthStyle } from "../../widthStyle";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -94,7 +95,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      style={{ width }}
+      style={popoverWidthStyle(width)}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
