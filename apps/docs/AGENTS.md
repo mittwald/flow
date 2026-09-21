@@ -11,8 +11,8 @@ Next.js documentation site for the flow Styleguide, deployed to
   (`get-started`, `foundations`, `patterns`, `components`). A component page is
   a single `index.mdx` — the former `overview`, `develop` and `guidelines` tabs
   are consolidated onto it. Their routes under
-  `src/app/components/[group]/[component]/` are `redirect()`-only, kept so
-  existing links (and their fragments) keep working.
+  `src/app/(docs)/components/[group]/[component]/` are `redirect()`-only, kept
+  so existing links (and their fragments) keep working.
 - **Directory names are the public URL**, and they carry no order. The authored
   order lives in `src/lib/content/contentOrder.ts` — a flat list of pathnames
   that the navigation, the header, `llms.txt` and the sitemap all sort by.
@@ -22,6 +22,12 @@ Next.js documentation site for the flow Styleguide, deployed to
 - The sections lost their `NN-` prefixes, so `nginx.conf` carries a `rewrite`
   that strips such a prefix from any segment and 301s. Old links keep working —
   do not write new ones against the old paths.
+- **Two root layouts.** `src/app/(docs)` is the Styleguide (header, navigation,
+  footer); `src/app/(preview)` renders an App Shell alone, which is what the
+  "Vorschau" link on a Template page opens in a new tab. Route groups do not
+  appear in the URL, so a page belongs in one of the two — a `page.tsx` directly
+  under `src/app` has no layout at all. `buildPageInventory` strips the group
+  from the pathname; keep that in mind when adding a group.
 - Code examples are `.tsx` files in the `examples/` directory next to the MDX
   file, referenced via `example="<name>"` (see "Page Building Blocks" in the
   README).

@@ -27,7 +27,6 @@ export default () => (
       align="center"
       wrap="wrap"
       gap="m"
-      className={styles.topbar}
     >
       <span
         className={styles.logo}

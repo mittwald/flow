@@ -11,8 +11,11 @@ import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import {
   AppShellPreview,
-  appShellExamples,
+  appShellPreviewPath,
+  appShellTitles,
+  isAppShellName,
 } from "@/lib/mdx/components/AppShellPreview";
+import { appShellComponents } from "@/lib/mdx/components/AppShellPreview/appShellComponents";
 import { usePathname } from "next/navigation";
 import { getWireframe } from "@/app/components/_components/wireframe/registry";
 
@@ -88,14 +91,15 @@ export const MdxFileView: FC<Props> = (props) => {
     example,
     files,
   }) => {
-    const component = appShellExamples[example];
-    if (!component) {
+    if (!isAppShellName(example)) {
       throw new Error(`Unknown App Shell example: ${example}`);
     }
     const fileNames = files ?? [`${example}.tsx`, `${example}.module.css`];
     return (
       <AppShellPreview
-        component={component}
+        component={appShellComponents[example]}
+        title={appShellTitles[example]}
+        previewHref={appShellPreviewPath(example)}
         files={fileNames.map((name) => ({
           name,
           code: mdxFile.getExample(

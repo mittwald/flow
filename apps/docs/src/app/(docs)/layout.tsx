@@ -1,9 +1,9 @@
 import "@mittwald/flow-react-components/all-layered.css";
-import "./global.scss";
+import "../global.scss";
 import type { Metadata } from "next";
 import { type FC, type PropsWithChildren } from "react";
 import clsx from "clsx";
-import styles from "./layout.module.scss";
+import styles from "../layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import { Matomo } from "@/app/_components/Matomo";

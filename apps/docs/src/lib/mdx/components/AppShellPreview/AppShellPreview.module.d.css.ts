@@ -2,8 +2,7 @@ declare const classNames: {
   readonly appShell: "appShell";
   readonly previewFrame: "previewFrame";
   readonly previewScaler: "previewScaler";
-  readonly previewButton: "previewButton";
-  readonly stage: "stage";
+  readonly previewLink: "previewLink";
   readonly file: "file";
   readonly fileName: "fileName";
 };

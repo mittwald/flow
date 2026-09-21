@@ -1,10 +1,5 @@
 import type { ComponentType } from "react";
-import {
-  Button,
-  CodeBlock,
-  LightBox,
-  LightBoxTrigger,
-} from "@mittwald/flow-react-components";
+import { Button, CodeBlock, Link } from "@mittwald/flow-react-components";
 import styles from "./AppShellPreview.module.css";
 
 export interface AppShellSourceFile {
@@ -16,6 +11,10 @@ export interface AppShellSourceFile {
 export interface AppShellPreviewProps {
   /** The imported shell component, live-rendered in the preview frame. */
   component: ComponentType;
+  /** Where the full-size shell lives — opened in a new tab. */
+  previewHref: string;
+  /** Names the shell in the link's accessible name. */
+  title: string;
   /** The shell's source files, shown as copyable code blocks below the preview. */
   files: AppShellSourceFile[];
 }
@@ -31,13 +30,16 @@ export interface AppShellPreviewProps {
  * stay out of the tab order and swallow no clicks, which keeps keyboard users
  * from getting trapped in a preview they cannot really operate.
  *
- * The one real control is the centred "Vorschau" button, which is the LightBox
- * trigger itself — so it takes keyboard focus and shows its own focus ring.
- * Hover or focus dims the frame and reveals it; activating it opens the same
- * live component near-fullscreen in a LightBox, where it is fully interactive.
+ * The one real control is the centred "Vorschau" link, which takes keyboard
+ * focus and shows its own focus ring. Hover or focus dims the frame and reveals
+ * it; following it opens the shell on its own page in a new tab, at full size
+ * and fully interactive. It wears a Button — inside a Link that renders it as a
+ * span, so the button look costs no nested interactive element.
  */
 export const AppShellPreview = ({
   component: Component,
+  previewHref,
+  title,
   files,
 }: AppShellPreviewProps) => (
   <div className={styles.appShell}>
@@ -45,21 +47,15 @@ export const AppShellPreview = ({
       <div className={styles.previewScaler} aria-hidden inert>
         <Component />
       </div>
-      <LightBoxTrigger>
-        <Button
-          color="light-static"
-          variant="solid"
-          className={styles.previewButton}
-          aria-label="Vorschau in Vollbild öffnen"
-        >
-          Vorschau
-        </Button>
-        <LightBox>
-          <div className={styles.stage}>
-            <Component />
-          </div>
-        </LightBox>
-      </LightBoxTrigger>
+      <Link
+        href={previewHref}
+        target="_blank"
+        color="light-static"
+        className={styles.previewLink}
+        aria-label={`${title} in einem neuen Tab öffnen`}
+      >
+        <Button variant="solid">Vorschau</Button>
+      </Link>
     </div>
     {files.map((file) => (
       <div key={file.name} className={styles.file}>

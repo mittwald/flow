@@ -1,0 +1,20 @@
+// The shells size themselves against their container (`min-height: 100%`), so
+// the document has to pass the viewport height down to them.
+:global(html),
+:global(body) {
+  height: 100%;
+}
+
+.body {
+  background-color: var(--neutral--color--200);
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+[data-theme="dark"] {
+  .body {
+    background-color: #121518;
+  }
+}

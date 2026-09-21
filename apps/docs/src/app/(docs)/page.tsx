@@ -15,9 +15,9 @@ import {
 } from "@mittwald/flow-react-components";
 import type { FC } from "react";
 import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
-import flow10Tile from "../../public/assets/flow-1-0-tile.png";
-import developerTile from "../../public/assets/developer-tile.png";
-import extensionsTile from "../../public/assets/extensions-tile.webp";
+import flow10Tile from "../../../public/assets/flow-1-0-tile.png";
+import developerTile from "../../../public/assets/developer-tile.png";
+import extensionsTile from "../../../public/assets/extensions-tile.webp";
 import { ComposingCodeExample } from "@/app/_components/ComposingCodeExample";
 import styles from "./page.module.scss";
 
