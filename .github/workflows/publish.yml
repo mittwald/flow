@@ -38,6 +38,8 @@ on:
 permissions:
   id-token: write
   contents: write
+  # Read this workflow's own runs, for the publish turnstile below.
+  actions: read
 
 env:
   # Keep the local git hooks out of this workflow. simple-git-hooks' postinstall
@@ -215,7 +217,7 @@ jobs:
           token: ${{ secrets.PUBLISH_PAT }}
 
       - name: Install pnpm
-        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
 
       - name: Setup Node 🎛️
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -496,6 +498,35 @@ jobs:
           v="$(node -p "require('./${pkg}/package.json').version")"
           grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
             || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
+
+      # The two lines publish the SAME npm packages, and nothing above
+      # serializes them: the concurrency group follows the ref
+      # (`mutate-main` / `mutate-next`), so a push to `main` and the
+      # forward-merge it triggers produce two publish runs seconds apart. Both
+      # then walk the same toposort with `--concurrency 1` at the same pace.
+      #
+      # Two writes to one package document at the same moment make npm answer
+      # the loser `409 Failed to save packument`, which `lerna publish` maps to
+      # "already published": it warns and exits 0. 1.1.31 shipped 10 of 13
+      # packages that way — green, tagged, released — and left
+      # `flow-remote-react-components@1.1.31` pinned to a
+      # `flow-remote-elements@1.1.31` that did not exist (#2887).
+      #
+      # NOT a shared concurrency group across the lines: GitHub keeps one
+      # pending run per group and cancels it when a newer run arrives. That
+      # eviction is documented in `forward-merge.yml`, which survives it with a
+      # `workflow_run` catch-up trigger — a publish has none, so an evicted run
+      # would be a release that silently never happened.
+      #
+      # Here, not before the build: both lines build in parallel and only the
+      # ~2min publish serializes. The turnstile never fails the job — past its
+      # cap it warns and publishes anyway, which is the behaviour it replaces.
+      - name: Wait for earlier publish runs 🚦
+        env:
+          # The default token with `actions: read`, not PUBLISH_PAT: this reads
+          # the run list and writes nothing.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/publish-turnstile.mjs
 
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
       # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is

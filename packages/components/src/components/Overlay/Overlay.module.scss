@@ -1,14 +1,21 @@
 /* Full-page backdrop behind every overlay (Modal, LightBox, …).
-   react-aria publishes two custom properties on the overlay element that this
-   package relies on: `--page-height` (full scrollable page height, used here)
-   and `--visual-viewport-height` (space above the on-screen keyboard, used by
-   Modal). Both update as the visual viewport changes. */
+
+   Sized to `--visual-viewport-height`, the property the Modal wrapper uses too,
+   so the whole overlay stack tracks the on-screen keyboard as one. react-aria
+   publishes it on this element and updates it with the visual viewport.
+
+   Not `--page-height` (the full document height): this element is `fixed`, so
+   anything past the viewport never shows, while `backdrop-filter` blurs the
+   whole layer every frame. Chromium drops an oversized one for single frames
+   while scrolling, flickering backdrop and modal alike. #2338 switched
+   `absolute` → `fixed` and added the blur, but kept the `--page-height` that
+   `absolute` had needed. */
 .overlay {
   position: fixed;
   top: 0;
   inset-inline-start: 0;
   width: 100%;
-  height: var(--page-height);
+  height: var(--visual-viewport-height);
   isolation: isolate;
   background: var(--overlay--backdrop-color);
   backdrop-filter: blur(var(--blur));

@@ -40,6 +40,19 @@ import { Button } from "@mittwald/flow-react-components";
     expect(runTransform(transform, source)).toBe(source);
   });
 
+  test("carries a bundler query over to the new path", () => {
+    // `?url` addresses the export, it does not name a different one — matching
+    // the whole specifier would leave this pointing at an export that is gone.
+    const source = `import flowStyles from "@mittwald/flow-react-components/styles?url";
+import "@mittwald/flow-react-components/styles?inline";
+`;
+
+    expect(runTransform(transform, source))
+      .toBe(`import flowStyles from "@mittwald/flow-react-components/all.css?url";
+import "@mittwald/flow-react-components/all.css?inline";
+`);
+  });
+
   test("does not touch the layered stylesheet or a deeper path", () => {
     // `./styles` was a single export with nothing under it, so this transform
     // matches exactly and never prefixes — `all-layered.css` is a deliberate
@@ -61,6 +74,7 @@ describe("running it twice changes nothing", () => {
   test("stays idempotent", () => {
     const source = `import "@mittwald/flow-react-components/styles";
 import "@mittwald/flow-react-components/all.css";
+import flowStyles from "@mittwald/flow-react-components/styles?url";
 `;
 
     const once = runTransform(transform, source);

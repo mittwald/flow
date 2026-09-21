@@ -656,43 +656,46 @@ describe("Item rendering", () => {
   });
 });
 
-describe("Bottom content", () => {
-  const getTestElementWithBottomContent = () => (
-    <>
-      <List aria-label="Test" onAction={() => undefined}>
-        <ListStaticData<Data> data={[{ num: 42 }]} />
-        <ListItem<Data> textValue={({ num }) => String(num)}>
-          {({ num }) => (
-            <ListItemView>
-              <Heading>Item: {num}</Heading>
-              <Content slot="bottom">Bottom: {num}</Content>
-            </ListItemView>
-          )}
-        </ListItem>
-      </List>
-      {/* Somewhere off the list to park the pointer: the previous test leaves
-          it wherever it was, which would poison an ambient idle reading. */}
-      <span>Outside the list</span>
-    </>
+describe("Item hover", () => {
+  // The item's hover background is carved out for the bottom content, which
+  // carries its own interactive elements. The carve-out is a `:has()` rule in
+  // Item.module.scss matching a class ListItemViewContent applies — a coupling
+  // across two files that no other test would notice going stale.
+  const HoverableList = () => (
+    <List aria-label="Test" onAction={() => undefined}>
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
+      <ListItem<Data> textValue={({ num }) => String(num)}>
+        {({ num }) => (
+          <ListItemView>
+            <Content>Top {num}</Content>
+            <Content slot="bottom">Bottom {num}</Content>
+          </ListItemView>
+        )}
+      </ListItem>
+    </List>
   );
 
-  // The hover highlight signals "clicking here triggers the item action". The
-  // bottom slot is exempt — it carries arbitrary consumer content with its own
-  // interactions. The rule doing that named a class that a later component
-  // move had renamed, so it matched nothing and the exemption was lost.
-  test("hovering the bottom slot leaves the item unhighlighted", async () => {
-    await render(getTestElementWithBottomContent());
+  const topContent = page.getByText("Top 42");
+  const bottomContent = page.getByText("Bottom 42");
+  const hoveredRow = page.getByRole("row").nth(0);
+  // Never hovered, so it shows the default background whatever the pointer did
+  // before this test — reading the hovered item's own "before" state would not,
+  // since the pointer may already rest on it at render time.
+  const restingRow = page.getByRole("row").nth(1);
 
-    const row = await page.getByRole("row").element();
+  test("bottom content does not trigger the item hover background", async () => {
+    await render(<HoverableList />);
 
-    await userEvent.hover(page.getByText("Outside the list"));
-    const idle = getComputedStyle(row).backgroundColor;
+    const backgrounds = () => [
+      getComputedStyle(hoveredRow.element()).backgroundColor,
+      getComputedStyle(restingRow.element()).backgroundColor,
+    ];
 
-    await userEvent.hover(page.getByText("Item: 42"));
-    expect(getComputedStyle(row).backgroundColor).not.toBe(idle);
+    await userEvent.hover(topContent);
+    await expect.poll(() => backgrounds()[0]).not.toBe(backgrounds()[1]);
 
-    await userEvent.hover(page.getByText("Bottom: 42"));
-    expect(getComputedStyle(row).backgroundColor).toBe(idle);
+    await userEvent.hover(bottomContent);
+    await expect.poll(() => backgrounds()[0]).toBe(backgrounds()[1]);
   });
 });
 

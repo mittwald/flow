@@ -158,6 +158,22 @@ flowchart LR
   plain fast-forward push loses that race after npm is already committed
   (observed on 1.1.17), so `.github/scripts/push-release.mjs` rebases the
   release commit onto the new tip, moves the tag with it, and retries.
+- **The two lines never publish at the same moment.** They publish the SAME npm
+  packages, and the workflow `concurrency` group follows the ref (`mutate-main`
+  / `mutate-next`), so a push to `main` and the forward-merge it triggers
+  produce two publish runs seconds apart. Two writes to one package document
+  make npm answer the loser `409 Failed to save packument`, which
+  `lerna publish` reads as "already published" — it warns and exits 0. That is
+  how `1.1.31` shipped 10 of 13 packages from a green, tagged and released run,
+  leaving `flow-remote-react-components@1.1.31` pinned to a
+  `flow-remote-elements@1.1.31` that did not exist (#2887). A turnstile step
+  holds a run just before its publish until no earlier publish run is active,
+  ordered by run id — the earliest always proceeds, so the chain drains and
+  cannot deadlock. The cost is a `next` publish waiting out the `main` one, a
+  few minutes. Deliberately **not** a shared concurrency group across the lines:
+  GitHub cancels a superseded pending run, and unlike `forward-merge.yml` a
+  publish has no `workflow_run` catch-up to survive that — the release would
+  silently never happen.
 - **Forward-merge cascade.** Every push to `main` is automatically merged up
   into `next` (and `next` into the major line when it exists), so the higher
   lines are always a superset of the lower ones — no cherry-picking. Merge
