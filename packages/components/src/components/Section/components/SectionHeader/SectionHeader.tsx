@@ -47,6 +47,9 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
           tunnel: null,
         },
         Link: {
+          // Wins over the size the ActionGroup sets for its own links — a
+          // nested props context takes precedence.
+          size: "m",
           tunnel: null,
         },
       },
