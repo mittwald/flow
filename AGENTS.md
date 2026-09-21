@@ -646,6 +646,23 @@ where the error points.
   And confirm a new regression test actually fails without its fix: this one
   passed in both directions, which is the only symptom you get
 
+- **Symptom:** CI's **`lint`** job fails at "Check version consistency" —
+  `1.2.0-next.63 — lerna.json says 1.2.0-next.65` — on a branch you have merged
+  `next` into, again and again after every release
+
+  **Cause:** A package that exists **only on your branch**. Lerna versions the
+  packages it can see, so a release on the base branch never touched yours, and
+  a forward-merge brings the new `lerna.json` without bumping it. Every release
+  on the base branch reopens it for as long as the PR is open
+
+  **Fix:** `node .github/scripts/version-consistency-guard.mjs --fix` sets every
+  mismatching manifest to `lerna.json`'s version; review the diff and commit it
+  with the merge. The flag exists for exactly this and CI never passes it — a
+  guard that repairs the tree it checks reports green on something nobody
+  reviewed. It refuses in the one shape where writing is the wrong direction:
+  when **every** package agrees and only `lerna.json` differs, `lerna.json` is
+  the file left behind and setting the packages to it would undo a release
+
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"
 
