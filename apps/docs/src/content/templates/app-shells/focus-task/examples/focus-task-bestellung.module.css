@@ -38,3 +38,10 @@
 .actionsRight {
   margin-inline-start: auto;
 }
+
+/* The generous page padding is too much for a narrow screen. */
+@media (max-width: 768px) {
+  .page {
+    padding-inline: var(--size-px--m);
+  }
+}

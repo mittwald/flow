@@ -1,14 +1,18 @@
 import {
   Badge,
   Button,
+  Content,
   Flex,
-  Heading,
   HeaderNavigation,
+  Heading,
   Icon,
+  IconMenu,
   IconSearch,
   Label,
   LayoutCard,
   Link,
+  Modal,
+  ModalTrigger,
   Navigation,
   NavigationGroup,
   Section,
@@ -37,12 +41,7 @@ export default () => (
         aria-label="Hauptnavigation"
         className={styles.topnav}
       >
-        <Link href="#">Get Started</Link>
-        <Link href="#">Foundations</Link>
-        <Link href="#">Templates</Link>
-        <Link href="#" aria-current="page">
-          Components
-        </Link>
+        <GlobalNavigationLinks />
         <Button aria-label="Suche">
           <IconSearch />
         </Button>
@@ -52,6 +51,7 @@ export default () => (
           </Icon>
         </Button>
       </HeaderNavigation>
+      <MobileMenu />
     </Flex>
 
     <Flex
@@ -61,31 +61,7 @@ export default () => (
       className={styles.body}
     >
       <LayoutCard className={styles.sidebar}>
-        <Navigation aria-label="Komponenten">
-          <NavigationGroup>
-            <Label>Actions</Label>
-            <Link href="#">Action</Link>
-            <Link href="#">ActionGroup</Link>
-            <Link href="#" aria-current="page">
-              Button
-            </Link>
-            <Link href="#">ContextMenu</Link>
-          </NavigationGroup>
-          <NavigationGroup>
-            <Label>Form Controls</Label>
-            <Link href="#">Autocomplete</Link>
-            <Link href="#">Checkbox</Link>
-            <Link href="#">CheckboxButton</Link>
-            <Link href="#">
-              <Text>CodeEditor</Text>
-              <Badge color="blue">Neu</Badge>
-            </Link>
-            <Link href="#">Combobox</Link>
-            <Link href="#">DatePicker</Link>
-            <Link href="#">Select</Link>
-            <Link href="#">Switch</Link>
-          </NavigationGroup>
-        </Navigation>
+        <ComponentNavigation />
       </LayoutCard>
 
       <LayoutCard
@@ -152,4 +128,79 @@ export default () => (
       </Link>
     </Flex>
   </Flex>
+);
+
+/*
+ * The section links, shared by the top bar and the off-canvas. Each renders
+ * them through its own props context, so the same Links read as a header bar
+ * in one and as a navigation list in the other.
+ */
+const GlobalNavigationLinks = () => (
+  <>
+    <Link href="#">Get Started</Link>
+    <Link href="#">Foundations</Link>
+    <Link href="#">Templates</Link>
+    <Link href="#" aria-current="page">
+      Components
+    </Link>
+  </>
+);
+
+const ComponentNavigation = () => (
+  <Navigation aria-label="Komponenten">
+    <NavigationGroup>
+      <Label>Actions</Label>
+      <Link href="#">Action</Link>
+      <Link href="#">ActionGroup</Link>
+      <Link href="#" aria-current="page">
+        Button
+      </Link>
+      <Link href="#">ContextMenu</Link>
+    </NavigationGroup>
+    <NavigationGroup>
+      <Label>Form Controls</Label>
+      <Link href="#">Autocomplete</Link>
+      <Link href="#">Checkbox</Link>
+      <Link href="#">CheckboxButton</Link>
+      <Link href="#">
+        <Text>CodeEditor</Text>
+        <Badge color="blue">Neu</Badge>
+      </Link>
+      <Link href="#">Combobox</Link>
+      <Link href="#">DatePicker</Link>
+      <Link href="#">Select</Link>
+      <Link href="#">Switch</Link>
+    </NavigationGroup>
+  </Navigation>
+);
+
+/*
+ * On a narrow screen the top bar has no room for the sections and the
+ * component navigation has no column of its own, so both move in here.
+ */
+const MobileMenu = () => (
+  <ModalTrigger>
+    <Button
+      variant="plain"
+      color="secondary"
+      aria-label="Menü öffnen"
+      className={styles.menuButton}
+    >
+      <IconMenu />
+    </Button>
+    <Modal offCanvas showCloseButton>
+      <Heading>Menü</Heading>
+      <Content>
+        <Section>
+          <Navigation aria-label="Hauptnavigation">
+            <GlobalNavigationLinks />
+          </Navigation>
+        </Section>
+        <Section>
+          <Heading>Components</Heading>
+          <ComponentNavigation />
+        </Section>
+      </Content>
+    </Modal>
+  </ModalTrigger>
 );

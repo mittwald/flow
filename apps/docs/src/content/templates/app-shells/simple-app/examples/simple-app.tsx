@@ -1,4 +1,5 @@
 import {
+  ActionGroup,
   Avatar,
   Button,
   CartesianChart,
@@ -18,6 +19,7 @@ import {
   Heading,
   Icon,
   IconLogout,
+  IconMenu,
   IconNotification,
   IconSettings,
   Initials,
@@ -27,6 +29,9 @@ import {
   MenuItem,
   Message,
   MessageThread,
+  Modal,
+  ModalTrigger,
+  Navigation,
   Rating,
   Section,
   Text,
@@ -131,11 +136,7 @@ export default () => (
         aria-label="Hauptnavigation"
         className={styles.nav}
       >
-        <Link href="#" aria-current="page">
-          Dashboard
-        </Link>
-        <Link href="#">Kündigungen</Link>
-        <Link href="#">Vertragsbestand</Link>
+        <GlobalNavigationLinks />
         <Button
           aria-label="Benachrichtigungen"
           className={styles.notify}
@@ -164,6 +165,7 @@ export default () => (
           </ContextMenu>
         </ContextMenuTrigger>
       </HeaderNavigation>
+      <MobileMenu />
     </Flex>
 
     <Flex elementType="main" direction="column" gap="l">
@@ -323,6 +325,56 @@ export default () => (
       </Link>
     </Flex>
   </Flex>
+);
+
+/*
+ * The navigation links, shared by the top bar and the off-canvas. Each renders
+ * them through its own props context, so the same Links read as a header bar
+ * in one and as a navigation list in the other.
+ */
+const GlobalNavigationLinks = () => (
+  <>
+    <Link href="#" aria-current="page">
+      Dashboard
+    </Link>
+    <Link href="#">Kündigungen</Link>
+    <Link href="#">Vertragsbestand</Link>
+  </>
+);
+
+/*
+ * On a narrow screen the top bar has no room for the navigation, so it moves
+ * in here. The burger is then the shell's only navigation control.
+ */
+const MobileMenu = () => (
+  <ModalTrigger>
+    <Button
+      variant="plain"
+      color="secondary"
+      aria-label="Menü öffnen"
+      className={styles.menuButton}
+    >
+      <IconMenu />
+    </Button>
+    <Modal offCanvas showCloseButton>
+      <Heading>Menü</Heading>
+      <Content>
+        <Navigation aria-label="Hauptnavigation">
+          <GlobalNavigationLinks />
+        </Navigation>
+      </Content>
+      <ActionGroup>
+        <Button variant="soft" color="secondary">
+          <IconNotification />
+          <Text>Benachrichtigungen</Text>
+        </Button>
+        <Button variant="soft" color="secondary">
+          <IconLogout />
+          <Text>Abmelden</Text>
+        </Button>
+      </ActionGroup>
+    </Modal>
+  </ModalTrigger>
 );
 
 interface FeedbackProps {

@@ -26,6 +26,11 @@
   margin-inline-start: auto;
 }
 
+/* The burger takes that place once the navigation gives it up. */
+.menuButton {
+  margin-inline-start: auto;
+}
+
 /* Navigation, content and table of contents sit in three columns. */
 .body {
   flex: 1;
@@ -57,4 +62,25 @@
 
 .footer {
   margin-block-start: auto;
+}
+
+/*
+ * Below this width neither the section links nor the component navigation
+ * fits, so both hand their links to the off-canvas behind the burger.
+ */
+@media (max-width: 768px) {
+  .topnav,
+  .sidebar {
+    display: none;
+  }
+
+  .app {
+    padding-inline: var(--size-px--m);
+  }
+}
+
+@media (min-width: 769px) {
+  .menuButton {
+    display: none;
+  }
 }

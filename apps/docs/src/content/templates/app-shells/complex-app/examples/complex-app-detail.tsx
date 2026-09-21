@@ -1,17 +1,17 @@
 import {
+  ActionGroup,
   Avatar,
   Breadcrumb,
   Button,
   ColumnLayout,
+  Content,
   ContextMenu,
   ContextMenuTrigger,
-  Content,
   CounterBadge,
   Flex,
   Header,
   HeaderNavigation,
   Heading,
-  InlineCode,
   IconApp,
   IconCronjob,
   IconDashboard,
@@ -20,6 +20,7 @@ import {
   IconEmail,
   IconLogout,
   IconMember,
+  IconMenu,
   IconMonitoring,
   IconNotification,
   IconSearch,
@@ -27,11 +28,14 @@ import {
   IconSshSftp,
   IconSupport,
   Initials,
+  InlineCode,
   Label,
   LabeledValue,
   LayoutCard,
   Link,
   MenuItem,
+  Modal,
+  ModalTrigger,
   Navigation,
   NavigationGroup,
   ProgressBar,
@@ -39,8 +43,8 @@ import {
   Switch,
   Tab,
   TabNavigation,
-  TabTitle,
   Tabs,
+  TabTitle,
   Text,
 } from "@mittwald/flow-react-components";
 import styles from "./complex-app-detail.module.css";
@@ -181,6 +185,22 @@ export default () => (
   </Flex>
 );
 
+/*
+ * The global navigation links, shared by the top bar and the off-canvas. Each
+ * renders them through its own props context, so the same Links read as a
+ * header bar in one and as a navigation list in the other.
+ */
+const GlobalNavigationLinks = () => (
+  <>
+    <Link href="#">Dashboard</Link>
+    <Link href="#">Organisation</Link>
+    <Link href="#">Server</Link>
+    <Link href="#" aria-current="page">
+      Projekte
+    </Link>
+  </>
+);
+
 const Topbar = () => (
   <Flex
     elementType="header"
@@ -197,12 +217,7 @@ const Topbar = () => (
       aria-label="Hauptnavigation"
       className={styles.topnav}
     >
-      <Link href="#">Dashboard</Link>
-      <Link href="#">Organisation</Link>
-      <Link href="#">Server</Link>
-      <Link href="#" aria-current="page">
-        Projekte
-      </Link>
+      <GlobalNavigationLinks />
       <Button aria-label="Suche">
         <IconSearch />
       </Button>
@@ -237,64 +252,115 @@ const Topbar = () => (
         </ContextMenu>
       </ContextMenuTrigger>
     </HeaderNavigation>
+    <MobileMenu />
   </Flex>
+);
+
+/*
+ * On a narrow screen the top bar has no room for the navigation and the
+ * sidebar has no column of its own, so both move in here. The burger is then
+ * the shell's only navigation control.
+ */
+const MobileMenu = () => (
+  <ModalTrigger>
+    <Button
+      variant="plain"
+      color="secondary"
+      aria-label="Menü öffnen"
+      className={styles.menuButton}
+    >
+      <IconMenu />
+    </Button>
+    <Modal offCanvas showCloseButton>
+      <Heading>Menü</Heading>
+      <Content>
+        <Section>
+          <Navigation aria-label="Hauptnavigation">
+            <GlobalNavigationLinks />
+          </Navigation>
+        </Section>
+        <Section>
+          <Heading>Mein Projekt</Heading>
+          <ProjectNavigation />
+        </Section>
+      </Content>
+      <ActionGroup>
+        <Button variant="soft" color="secondary">
+          <IconSearch />
+          <Text>Suche</Text>
+        </Button>
+        <Button variant="soft" color="secondary">
+          <IconSupport />
+          <Text>Support</Text>
+        </Button>
+        <Button variant="soft" color="secondary">
+          <IconLogout />
+          <Text>Abmelden</Text>
+        </Button>
+      </ActionGroup>
+    </Modal>
+  </ModalTrigger>
 );
 
 const ProjectSidebar = () => (
   <LayoutCard className={styles.sidebar}>
     <Heading level={2}>Mein Projekt</Heading>
-    <Navigation aria-label="Projektnavigation">
-      <NavigationGroup>
-        <Label>Allgemein</Label>
-        <Link href="#">
-          <IconDashboard />
-          <Text>Dashboard</Text>
-        </Link>
-        <Link href="#">
-          <IconMonitoring />
-          <Text>Monitoring</Text>
-        </Link>
-      </NavigationGroup>
-      <NavigationGroup>
-        <Label>Komponenten</Label>
-        <Link href="#">
-          <IconApp />
-          <Text>Apps</Text>
-        </Link>
-        <Link href="#">
-          <IconDomain />
-          <Text>Domains</Text>
-        </Link>
-        <Link href="#" aria-current="page">
-          <IconEmail />
-          <Text>E-Mails</Text>
-        </Link>
-        <Link href="#">
-          <IconDatabase />
-          <Text>Datenbanken</Text>
-        </Link>
-        <Link href="#">
-          <IconCronjob />
-          <Text>Cronjobs</Text>
-        </Link>
-        <Link href="#">
-          <IconSshSftp />
-          <Text>SSH/SFTP</Text>
-        </Link>
-      </NavigationGroup>
-      <NavigationGroup>
-        <Label>Verwaltung</Label>
-        <Link href="#">
-          <IconMember />
-          <Text>Mitglieder</Text>
-        </Link>
-        <Link href="#">
-          <IconSettings />
-          <Text>Einstellungen</Text>
-        </Link>
-      </NavigationGroup>
-    </Navigation>
+    <ProjectNavigation />
   </LayoutCard>
+);
+
+const ProjectNavigation = () => (
+  <Navigation aria-label="Projektnavigation">
+    <NavigationGroup>
+      <Label>Allgemein</Label>
+      <Link href="#">
+        <IconDashboard />
+        <Text>Dashboard</Text>
+      </Link>
+      <Link href="#">
+        <IconMonitoring />
+        <Text>Monitoring</Text>
+      </Link>
+    </NavigationGroup>
+    <NavigationGroup>
+      <Label>Komponenten</Label>
+      <Link href="#">
+        <IconApp />
+        <Text>Apps</Text>
+      </Link>
+      <Link href="#">
+        <IconDomain />
+        <Text>Domains</Text>
+      </Link>
+      <Link href="#" aria-current="page">
+        <IconEmail />
+        <Text>E-Mails</Text>
+      </Link>
+      <Link href="#">
+        <IconDatabase />
+        <Text>Datenbanken</Text>
+      </Link>
+      <Link href="#">
+        <IconCronjob />
+        <Text>Cronjobs</Text>
+      </Link>
+      <Link href="#">
+        <IconSshSftp />
+        <Text>SSH/SFTP</Text>
+      </Link>
+    </NavigationGroup>
+    <NavigationGroup>
+      <Label>Verwaltung</Label>
+      <Link href="#">
+        <IconMember />
+        <Text>Mitglieder</Text>
+      </Link>
+      <Link href="#">
+        <IconSettings />
+        <Text>Einstellungen</Text>
+      </Link>
+    </NavigationGroup>
+  </Navigation>
 );
 
 const Footer = () => (
