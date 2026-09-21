@@ -406,7 +406,10 @@ where the error points.
   **Fix:** Add the **`run-cross-version-tests`** PR label
   (`test-cross-version-label.yml`) to run both harnesses on the branch. Fix real
   divergences by gating per-version — `test.skipIf(crossVersion({ below }))` or
-  a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. See
+  a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. A
+  normalizer may only drop notation that carries no meaning at all (`class` is
+  compared as a token set, because separators and token order are not part of
+  it); anything a browser could render differently stays compared. See
   [remote-react-components/CONTRIBUTE.md](packages/remote-react-components/CONTRIBUTE.md#running-them-on-a-pull-request)
 
 - **Symptom:** A vite/vitest config you added floods every build and test run
@@ -627,6 +630,21 @@ where the error points.
   `auto-generated`). To confirm the diagnosis, import the name from
   `@/auto-generated` and from `@/index` in one file and log both — it is in the
   first and missing from the second
+
+- **Symptom:** A `components` browser test keeps **passing** after you change
+  `packages/icons` — including a test written to fail on exactly that change.
+  The build is not the problem: `pnpm nx build icons` runs `tsc` and `dist`
+  holds the new code
+
+  **Cause:** `packages/components/vite.config.ts` lists `@mittwald/flow-icons`
+  in `optimizeDeps.include`, so vite pre-bundles it. The prebundle is keyed on
+  the lockfile and the config, not on the contents of a linked workspace
+  package's `dist` — so a rebuilt `dist` does not invalidate it and the test
+  keeps loading the old bundle
+
+  **Fix:** Delete `packages/components/node_modules/.vite*` after rebuilding.
+  And confirm a new regression test actually fails without its fix: this one
+  passed in both directions, which is the only symptom you get
 
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"
