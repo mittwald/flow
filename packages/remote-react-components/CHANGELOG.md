@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.2](https://github.com/mittwald/flow/compare/1.3.0-next.1...1.3.0-next.2) (2026-09-21)
+
+### Tests
+
+* **remote-react-components:** express the ImageCropper gate as a range ([ca546cd](https://github.com/mittwald/flow/commit/ca546cdf93e4783e12a3ab1cc125e354c683eca3)), closes [#3024](https://github.com/mittwald/flow/issues/3024)
+* **remote-react-components:** gate two cross-version scenarios per version ([cdbdb95](https://github.com/mittwald/flow/commit/cdbdb95f33846dfebeb5088c1ec52affb4f09878)), closes [#3024](https://github.com/mittwald/flow/issues/3024)
+
 ## [1.3.0-next.1](https://github.com/mittwald/flow/compare/1.3.0-next.0...1.3.0-next.1) (2026-09-21)
 
 ### Bug Fixes

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.2](https://github.com/mittwald/flow/compare/1.3.0-next.1...1.3.0-next.2) (2026-09-21)
+
+### Documentation
+
+* **releases:** scale the release-note figures to their capture scale ([#3216](https://github.com/mittwald/flow/issues/3216)) ([13c62be](https://github.com/mittwald/flow/commit/13c62be488c019f7fa8d6fb12bfe230072b86e24))
+
+## [1.2.1](https://github.com/mittwald/flow/compare/1.3.0-next.0...1.2.1) (2026-09-21)
+
+### Features
+
+* **Action:** close the nearest overlay with a bare closeOverlay ([d47133a](https://github.com/mittwald/flow/commit/d47133a77c7af241f5d44d8f014c01a73477c427)), closes [#506](https://github.com/mittwald/flow/issues/506)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.1 ([c20fd6f](https://github.com/mittwald/flow/commit/c20fd6f1fab68c17f65daa66f036cb038d87ae27))
+
+### Code Refactoring
+
+* **ContextMenu:** use the bare closeOverlay for the select action ([f7bf167](https://github.com/mittwald/flow/commit/f7bf1672a6451d4ce0ee79284ccb874d5dd0cb40))
+
+### Tests
+
+* **remote-react-components:** express the ImageCropper gate as a range ([ca546cd](https://github.com/mittwald/flow/commit/ca546cdf93e4783e12a3ab1cc125e354c683eca3)), closes [#3024](https://github.com/mittwald/flow/issues/3024)
+* **remote-react-components:** gate two cross-version scenarios per version ([cdbdb95](https://github.com/mittwald/flow/commit/cdbdb95f33846dfebeb5088c1ec52affb4f09878)), closes [#3024](https://github.com/mittwald/flow/issues/3024)
+
 ## [1.3.0-next.1](https://github.com/mittwald/flow/compare/1.3.0-next.0...1.3.0-next.1) (2026-09-21)
 
 ### Bug Fixes

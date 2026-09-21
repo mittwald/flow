@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.2](https://github.com/mittwald/flow/compare/1.3.0-next.1...1.3.0-next.2) (2026-09-21)
+
+### Features
+
+* **Action:** close the nearest overlay with a bare closeOverlay ([d47133a](https://github.com/mittwald/flow/commit/d47133a77c7af241f5d44d8f014c01a73477c427)), closes [#506](https://github.com/mittwald/flow/issues/506)
+
+### Code Refactoring
+
+* **ContextMenu:** use the bare closeOverlay for the select action ([f7bf167](https://github.com/mittwald/flow/commit/f7bf1672a6451d4ce0ee79284ccb874d5dd0cb40))
+
 ## [1.3.0-next.1](https://github.com/mittwald/flow/compare/1.3.0-next.0...1.3.0-next.1) (2026-09-21)
 
 ### Bug Fixes
