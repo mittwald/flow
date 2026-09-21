@@ -3,10 +3,14 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
 import { resolveRange, type RangeDeps } from "../resolve/range";
+import type { RegistryVersions } from "../resolve/registry";
 
 const registry = {
   versions: ["0.2.0-alpha.646", "1.0.0", "1.0.1", "1.0.5", "1.1.0", "1.2.0"],
   distTags: { latest: "1.2.0" },
+  // Empty by default so the peer section stays out of the way of the tests
+  // that are not about it; the ones that are bring their own fixture.
+  peerDependencies: {},
 };
 
 const project = (dependencies: Record<string, string>): string => {
@@ -80,14 +84,16 @@ describe("resolveRange", () => {
       "@mittwald/flow-react-components": "^1.0.0",
     });
 
-    const perPackage: Record<string, typeof registry> = {
+    const perPackage: Record<string, RegistryVersions> = {
       "@mittwald/flow-icons": {
         versions: ["2.0.0"],
         distTags: { latest: "2.0.0" },
+        peerDependencies: {},
       },
       "@mittwald/flow-react-components": {
         versions: ["3.0.0"],
         distTags: { latest: "3.0.0" },
+        peerDependencies: {},
       },
     };
 

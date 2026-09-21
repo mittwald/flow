@@ -3,12 +3,25 @@ import registryUrl from "registry-url";
 export interface RegistryVersions {
   versions: string[];
   distTags: Record<string, string>;
+  /**
+   * What each published version declares as `peerDependencies`, keyed by
+   * version.
+   *
+   * Kept rather than discarded because the abbreviated packument below carries
+   * it for free — see `fetchVersions`. A version with no peers maps to an empty
+   * object, so a lookup never has to distinguish "none" from "not fetched".
+   */
+  peerDependencies: Record<string, Record<string, string>>;
 }
 
 /** Only the fields this CLI reads out of a packument. */
 interface Packument {
-  versions?: Record<string, unknown>;
+  versions?: Record<string, PackumentVersion | undefined>;
   "dist-tags"?: Record<string, string>;
+}
+
+interface PackumentVersion {
+  peerDependencies?: Record<string, string>;
 }
 
 /**
@@ -31,7 +44,9 @@ const registryFor = (packageName: string): string => {
  * Every published version of a package, plus its dist-tags.
  *
  * Uses the abbreviated packument media type: the full document for a package
- * with hundreds of releases is megabytes, and none of it is needed here.
+ * with hundreds of releases is megabytes, and none of it is needed here. The
+ * abbreviated form still carries `peerDependencies` per version, which is why
+ * the peer summary costs no request of its own (#3059).
  */
 export const fetchVersions = async (
   packageName: string,
@@ -60,9 +75,17 @@ export const fetchVersions = async (
     );
   }
 
+  const versions = Object.entries(packument.versions ?? {});
+
   return {
-    versions: Object.keys(packument.versions ?? {}),
+    versions: versions.map(([version]) => version),
     distTags: packument["dist-tags"] ?? {},
+    peerDependencies: Object.fromEntries(
+      versions.map(([version, manifest]) => [
+        version,
+        manifest?.peerDependencies ?? {},
+      ]),
+    ),
   };
 };
 

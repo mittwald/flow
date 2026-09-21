@@ -4,10 +4,14 @@ import { join } from "node:path";
 import { describe, expect, test } from "vitest";
 import { parseArguments } from "../cli/args";
 import { runUpgrade, type UpgradeDeps } from "../cli/upgrade";
+import type { RegistryVersions } from "../resolve/registry";
 
 const registry = {
   versions: ["0.2.0-alpha.646", "1.0.0", "1.0.1", "1.0.5", "1.1.0", "1.2.0"],
   distTags: { latest: "1.2.0" },
+  // Empty by default so the peer section stays out of the way of the tests
+  // that are not about it; the ones that are bring their own fixture.
+  peerDependencies: {},
 };
 
 const project = (dependencies: Record<string, string>): string => {
@@ -422,17 +426,16 @@ describe("runUpgrade", () => {
     });
     const recorded = record();
 
-    const perPackage: Record<
-      string,
-      { versions: string[]; distTags: Record<string, string> }
-    > = {
+    const perPackage: Record<string, RegistryVersions> = {
       "@mittwald/flow-icons": {
         versions: ["1.0.0", "1.0.1", "1.0.5", "1.0.6"],
         distTags: { latest: "1.0.6" },
+        peerDependencies: {},
       },
       "@mittwald/flow-react-components": {
         versions: ["1.0.0", "1.0.1", "1.0.5"],
         distTags: { latest: "1.0.5" },
+        peerDependencies: {},
       },
     };
 
@@ -461,17 +464,16 @@ describe("runUpgrade", () => {
     const recorded = record();
     const before = readFileSync(join(cwd, "package.json"), "utf8");
 
-    const perPackage: Record<
-      string,
-      { versions: string[]; distTags: Record<string, string> }
-    > = {
+    const perPackage: Record<string, RegistryVersions> = {
       "@mittwald/flow-icons": {
         versions: ["2.0.0"],
         distTags: { latest: "2.0.0" },
+        peerDependencies: {},
       },
       "@mittwald/flow-react-components": {
         versions: ["3.0.0"],
         distTags: { latest: "3.0.0" },
+        peerDependencies: {},
       },
     };
 
@@ -498,17 +500,16 @@ describe("runUpgrade", () => {
     const recorded = record();
     const before = readFileSync(join(cwd, "package.json"), "utf8");
 
-    const perPackage: Record<
-      string,
-      { versions: string[]; distTags: Record<string, string> }
-    > = {
+    const perPackage: Record<string, RegistryVersions> = {
       "@mittwald/flow-icons": {
         versions: ["1.0.0", "1.0.6"],
         distTags: { latest: "1.0.6" },
+        peerDependencies: {},
       },
       "@mittwald/flow-react-components": {
         versions: ["1.0.0"],
         distTags: { latest: "1.0.6" },
+        peerDependencies: {},
       },
     };
 
@@ -522,5 +523,106 @@ describe("runUpgrade", () => {
 
     expect(code).toBe(1);
     expect(readFileSync(join(cwd, "package.json"), "utf8")).toBe(before);
+  });
+  describe("peer requirements (#3059)", () => {
+    // Only 1.2.0 carries peers, so a test that reads them at the wrong
+    // version gets an empty section rather than a passing assertion.
+    const withPeers = {
+      ...registry,
+      peerDependencies: {
+        "1.2.0": { react: "^19.2.0", "react-hook-form": "^7.65.0" },
+      },
+    };
+
+    test("names the peer ranges and who asks for them", async () => {
+      const cwd = project({
+        "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+      });
+      const recorded = record();
+
+      await runUpgrade(
+        parseArguments(["upgrade", "major", "-y"]),
+        deps(cwd, recorded, { fetchVersions: async () => withPeers }),
+      );
+
+      const output = recorded.output.join("\n");
+      expect(output).toContain("react ^19.2.0");
+      expect(output).toContain("react-hook-form ^7.65.0");
+      expect(output).toContain("@mittwald/flow-react-components");
+    });
+
+    test("prints before the install, so a failed one still leaves them on screen", async () => {
+      const cwd = project({
+        "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+      });
+      const recorded = record();
+
+      const code = await runUpgrade(
+        parseArguments(["upgrade", "major", "-y"]),
+        deps(cwd, recorded, {
+          fetchVersions: async () => withPeers,
+          install: () => {
+            throw new Error("network unreachable");
+          },
+        }),
+      );
+
+      expect(code).toBe(1);
+      const output = recorded.output.join("\n");
+      expect(output).toContain("react ^19.2.0");
+      // Order is the point, not mere presence: the recovery message is the
+      // last thing printed, and a peer range below it would scroll away
+      // behind the install's own error output.
+      expect(output.indexOf("react ^19.2.0")).toBeLessThan(
+        output.indexOf("network unreachable"),
+      );
+    });
+
+    test("--dry says the same thing the real run does", async () => {
+      const cwd = project({
+        "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+      });
+      const recorded = record();
+
+      await runUpgrade(
+        parseArguments(["upgrade", "major", "--dry", "-y"]),
+        deps(cwd, recorded, { fetchVersions: async () => withPeers }),
+      );
+
+      const output = recorded.output.join("\n");
+      expect(output).toContain("react ^19.2.0");
+      expect(output.indexOf("react ^19.2.0")).toBeLessThan(
+        output.indexOf("--dry: skipping the install."),
+      );
+    });
+
+    test("a project already on the target still gets them", async () => {
+      const cwd = project({ "@mittwald/flow-react-components": "^1.2.0" });
+      const recorded = record();
+
+      await runUpgrade(
+        parseArguments(["upgrade", "latest", "-y"]),
+        deps(cwd, recorded, { fetchVersions: async () => withPeers }),
+      );
+
+      expect(recorded.installs).toEqual([]);
+      const output = recorded.output.join("\n");
+      expect(output).toMatch(/already on/i);
+      expect(output).toContain("react ^19.2.0");
+    });
+
+    test("nothing is printed when the target declares no peers", async () => {
+      const cwd = project({
+        "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+      });
+      const recorded = record();
+
+      await runUpgrade(
+        parseArguments(["upgrade", "major", "-y"]),
+        deps(cwd, recorded),
+      );
+
+      expect(recorded.output.join("\n")).not.toMatch(/peer requirements/i);
+    });
   });
 });

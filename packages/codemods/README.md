@@ -60,6 +60,34 @@ and where to get the right one — rather than installing with the wrong manager
 The log line names the agent, the pin and the command it actually ran, so a
 wrong detection is visible instead of silent.
 
+#### Peer requirements
+
+Before the install, `upgrade` prints what the Flow packages you declare peer on
+at the target — react, react-dom, react-hook-form, `@internationalized/date`,
+next, i18next — grouped by range and naming every package that asks for it:
+
+```
+Peer requirements at 1.1.48 — what the Flow packages you declare ask of your
+project:
+
+  react ^19.2.0
+    @mittwald/ext-bridge, @mittwald/flow-icons, @mittwald/flow-react-components
+```
+
+Your package manager reports conflicts too, but only the ones it decides to name
+— Yarn's "`@mittwald/ext-bridge` and other dependencies" never enumerates the
+others. This list is complete, and it is printed **before** the install, so a
+failed install still leaves it on screen. `list [revision]` prints the same
+thing without touching anything.
+
+These are the ranges Flow declares, **not** a check of what you have installed.
+Nothing here reads your `node_modules`; whether your project satisfies them is
+the package manager's call during the install.
+
+A Flow-internal peer the target does not satisfy gets its own warning. Flow
+publishes those as exact pins, so it normally means the pinned version was never
+published — see the publish-hole caveat in the repository's release docs.
+
 After installing, `upgrade` runs the codemod of every migration whose `since` is
 at or below the target and prints the ones with no codemod, for you to apply by
 hand.
@@ -105,8 +133,10 @@ involve.
 Options:
 
 - `--json` — machine-readable output: an object with `range`
-  (`current`/`target`, or `null` for the offline whole-catalogue form) and
-  `migrations`, each entry carrying `catchUp`
+  (`current`/`target`, or `null` for the offline whole-catalogue form),
+  `migrations`, each entry carrying `catchUp`, and `peers` — `external` and
+  `flowPins`, each a list of `{ peer, range, requiredBy }`, or `null` for the
+  offline whole-catalogue form, which has no target to read them at
 
 ### `<id> [path]`
 

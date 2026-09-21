@@ -8,6 +8,7 @@ import {
   type FlowDependency,
   type Manifest,
 } from "../manifest.js";
+import { collectPeers, type PeerSummary } from "./peers.js";
 import {
   fetchAllVersions,
   fetchVersions,
@@ -57,6 +58,16 @@ export interface ResolvedRange {
   current: string;
   target: string;
   versions: string[];
+  /**
+   * What the declared Flow dependencies peer on at `target` — the answer to
+   * "which Flow package needs which peer range", which otherwise takes reading
+   * every Flow `package.json` by hand (#3059).
+   *
+   * Resolved here rather than in either command because both need it and the
+   * packuments are already fetched above: `list <revision>` can then answer it
+   * before anything is written, which is where the answer is worth most.
+   */
+  peers: PeerSummary;
 }
 
 export interface UnresolvedRange {
@@ -245,5 +256,6 @@ export const resolveRange = async (
     current,
     target,
     versions,
+    peers: collectPeers(fetched, target, flowPackages),
   };
 };

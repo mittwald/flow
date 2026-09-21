@@ -4,7 +4,8 @@ import { join } from "node:path";
 import { describe, expect, test } from "vitest";
 import type { CatalogEntry } from "../catalog/entries";
 import { parseArguments } from "../cli/args";
-import { renderList, runList, stripAnsi, type ListDeps } from "../cli/list";
+import { renderList, runList, type ListDeps } from "../cli/list";
+import { stripAnsi } from "../cli/text";
 
 const entry = (
   id: string,
@@ -414,6 +415,9 @@ describe("catch-up", () => {
 const registry = {
   versions: ["0.2.0-alpha.646", "1.0.0", "1.0.1", "1.0.5", "1.1.0", "1.2.0"],
   distTags: { latest: "1.2.0" },
+  // Empty by default so the peer section stays out of the way of the tests
+  // that are not about it; the ones that are bring their own fixture.
+  peerDependencies: {},
 };
 
 const project = (dependencies: Record<string, string>): string => {
@@ -536,5 +540,79 @@ describe("runList", () => {
     await runList(parseArguments(["list", "minor", "--json"]), recorded);
 
     expect(() => JSON.parse(recorded.written.join(""))).not.toThrow();
+  });
+  describe("peer requirements (#3059)", () => {
+    const withPeers = {
+      ...registry,
+      peerDependencies: {
+        "1.2.0": { react: "^19.2.0", "react-hook-form": "^7.65.0" },
+      },
+    };
+
+    test("a revision answers which peers the target needs, before anything is written", async () => {
+      const cwd = project({ "@mittwald/flow-react-components": "^1.0.1" });
+      const recorded = deps(cwd, { fetchVersions: async () => withPeers });
+
+      const code = await runList(parseArguments(["list", "minor"]), recorded);
+
+      expect(code).toBe(0);
+      const output = stripAnsi(recorded.written.join(""));
+      expect(output).toContain("react ^19.2.0");
+      expect(output).toContain("@mittwald/flow-react-components");
+    });
+
+    test("they print even when the range selects no migration at all", async () => {
+      const cwd = project({ "@mittwald/flow-react-components": "1.2.0" });
+      const recorded = deps(cwd, {
+        fetchVersions: async () => ({
+          ...withPeers,
+          // A single version, so no catalogue entry can fall in the range.
+          versions: ["1.2.0"],
+        }),
+        readInstalledVersion: () => "1.2.0",
+      });
+
+      const code = await runList(parseArguments(["list", "1.2.0"]), recorded);
+
+      expect(code).toBe(0);
+      const output = stripAnsi(recorded.written.join(""));
+      expect(output).toContain("react ^19.2.0");
+    });
+
+    test("--json carries them as data, not as prose", async () => {
+      const cwd = project({ "@mittwald/flow-react-components": "^1.0.1" });
+      const recorded = deps(cwd, { fetchVersions: async () => withPeers });
+
+      await runList(parseArguments(["list", "minor", "--json"]), recorded);
+
+      const parsed = JSON.parse(recorded.written.join("")) as {
+        peers: {
+          external: { peer: string; range: string; requiredBy: string[] }[];
+          flowPins: unknown[];
+        };
+      };
+      expect(parsed.peers.external).toContainEqual({
+        peer: "react",
+        range: "^19.2.0",
+        requiredBy: ["@mittwald/flow-react-components"],
+      });
+      expect(parsed.peers.flowPins).toEqual([]);
+    });
+
+    test("a bare `list` reports null rather than an empty summary it cannot know", async () => {
+      const cwd = mkdtempSync(join(tmpdir(), "flow-list-peers-bare-"));
+      const recorded = deps(cwd, {
+        fetchVersions: () => {
+          throw new Error("must not be called for a bare `list`");
+        },
+      });
+
+      await runList(parseArguments(["list", "--json"]), recorded);
+
+      const parsed = JSON.parse(recorded.written.join("")) as {
+        peers: unknown;
+      };
+      expect(parsed.peers).toBeNull();
+    });
   });
 });

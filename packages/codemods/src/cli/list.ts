@@ -1,13 +1,15 @@
-import colors from "picocolors";
 import { lte } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
 import { selectEntries, sortBySince } from "../catalog/select.js";
+import type { PeerSummary } from "../resolve/peers.js";
 import {
   defaultRangeDeps,
   resolveRange,
   type RangeDeps,
 } from "../resolve/range.js";
 import type { ParsedCommand } from "./args.js";
+import { renderPeers } from "./peers.js";
+import { painter, wrap, type Painter, type Tone } from "./text.js";
 
 export interface RenderListInput {
   entries: CatalogEntry[];
@@ -18,6 +20,15 @@ export interface RenderListInput {
    */
   range?: { from: string; to: string };
   json: boolean;
+  /**
+   * The peer ranges the Flow packages declare at `range.to`, from
+   * `resolveRange`.
+   *
+   * Only meaningful together with `range`, and omitted by `upgrade`, which
+   * prints its own peer section before the install rather than inside this list
+   * — see `runUpgrade`.
+   */
+  peers?: PeerSummary;
   /** Emit ANSI colour. Off by default so a test sees plain text. */
   color?: boolean;
   /** Terminal width to wrap prose to. */
@@ -53,9 +64,6 @@ export interface RenderListInput {
   frame?: boolean;
 }
 
-/** A palette key from `painter()` — see the `tone` field on `actions` below. */
-type Tone = "green" | "yellow" | "blue";
-
 /**
  * What the reader has to do, and the colour that says it at a glance.
  *
@@ -79,41 +87,6 @@ const actions: Record<
 };
 
 /**
- * ANSI escapes have no width; measuring must ignore them.
- *
- * Built from a char code rather than written as a literal, so no control
- * character sits in the source — which is also what `no-control-regex` wants.
- */
-const ansi = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g");
-export const stripAnsi = (text: string): string => text.replace(ansi, "");
-const visibleWidth = (text: string): number => stripAnsi(text).length;
-
-/**
- * Wraps to `width`, measuring visible width so already-coloured text still
- * breaks in the right place.
- */
-const wrap = (text: string, width: number): string[] => {
-  const lines: string[] = [];
-  let line = "";
-
-  for (const word of text.split(/\s+/).filter((part) => part !== "")) {
-    if (line === "") {
-      line = word;
-    } else if (visibleWidth(line) + 1 + visibleWidth(word) <= width) {
-      line = `${line} ${word}`;
-    } else {
-      lines.push(line);
-      line = word;
-    }
-  }
-  if (line !== "") {
-    lines.push(line);
-  }
-
-  return lines.length > 0 ? lines : [""];
-};
-
-/**
  * Renders `code` spans as colour instead of literal backticks.
  *
  * The catalogue bodies are Markdown, so its prose fields carry backticks. In a
@@ -122,34 +95,6 @@ const wrap = (text: string, width: number): string[] => {
  */
 const inlineCode = (text: string, paint: Painter): string =>
   text.replace(/`([^`]+)`/g, (_, code: string) => paint.code(code));
-
-interface Painter extends Record<Tone, (text: string) => string> {
-  bold: (text: string) => string;
-  dim: (text: string) => string;
-  code: (text: string) => string;
-}
-
-/**
- * Builds a palette from `color`, and only from `color`.
- *
- * `colors` (the module-level `picocolors` default export) auto-detects a TTY
- * and disables itself under one — reading `colors.green` etc. directly would
- * make the _environment_, not this argument, the real decider, silently
- * disagreeing with `cli.ts`'s own TTY/`NO_COLOR`/`--json` check. `createColors`
- * returns a palette with colour forced on or off, so `color` is the only input
- * to how this renders.
- */
-const painter = (color: boolean): Painter => {
-  const palette = colors.createColors(color);
-  return {
-    bold: palette.bold,
-    dim: palette.dim,
-    code: palette.cyan,
-    green: palette.green,
-    yellow: palette.yellow,
-    blue: palette.blue,
-  };
-};
 
 /**
  * The invocation to print when nobody says otherwise.
@@ -339,6 +284,7 @@ export const renderList = ({
   entries,
   range,
   json,
+  peers,
   color = false,
   width = 80,
   path = "src",
@@ -373,14 +319,27 @@ export const renderList = ({
           ...entry,
           catchUp: isCatchUp(entry, range?.from),
         })),
+        // `null` rather than omitted, so a consumer can tell "no peers at this
+        // target" from "this form does not carry peers" — a bare `list` has no
+        // range to read them at.
+        peers: peers ?? null,
       },
       null,
       2,
     )}\n`;
   }
 
+  // A property of the range, not of the entries, so it prints even when no
+  // migration falls in it: a consumer already sitting on `target` can still be
+  // missing a peer, and that is exactly the range that selects nothing.
+  const peerSection =
+    peers === undefined || range === undefined
+      ? ""
+      : renderPeers({ summary: peers, target: range.to, color, width });
+
   if (selected.length === 0) {
-    return "Nothing to migrate in that range.\n";
+    const nothing = "Nothing to migrate in that range.\n";
+    return peerSection === "" ? nothing : `${nothing}\n${peerSection}`;
   }
 
   const body = selected
@@ -408,7 +367,9 @@ export const renderList = ({
   const context = renderContext(selected, range, color, width);
   const summary = renderSummary(selected, color);
 
-  return `${context === "" ? "" : `${context}\n\n`}${body}\n\n${summary}\n`;
+  return `${context === "" ? "" : `${context}\n\n`}${
+    peerSection === "" ? "" : `${peerSection}\n`
+  }${body}\n\n${summary}\n`;
 };
 
 export interface ListDeps extends RangeDeps {
@@ -475,6 +436,7 @@ export const runList = async (
       entries: allEntries,
       range: { from: resolved.current, to: resolved.target },
       json: parsed.json,
+      peers: resolved.peers,
       color: deps.color,
       width: deps.width,
       path: deps.path,
