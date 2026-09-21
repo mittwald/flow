@@ -101,7 +101,21 @@ export const normalizeHtml = (html: string): string => {
     "--animation-delay: 0ms",
   );
 
-  // 5. Collapse insignificant whitespace between tags. NOTE: this assumes
+  // 5. Compare `class` as a token SET — sorted, de-duplicated, single-spaced.
+  //    A class attribute is a space-separated token list, so the number of
+  //    separators and the order of the tokens carry no meaning; the harness
+  //    compares HTML as text and would report them as a divergence. This
+  //    normalizes the notation, not the content: a class present on one side
+  //    and absent on the other still differs.
+  out = out.replace(
+    /(\sclass=")([^"]*)(")/gi,
+    (_match, prefix, value: string, suffix) => {
+      const tokens = [...new Set(value.split(/\s+/).filter(Boolean))].sort();
+      return `${prefix}${tokens.join(" ")}${suffix}`;
+    },
+  );
+
+  // 6. Collapse insignificant whitespace between tags. NOTE: this assumes
   //    block-level component boundaries (whitespace between tags is not
   //    meaningful). An inline-composition scenario where a space between
   //    adjacent inline elements is significant would need a more careful rule.
