@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  # `publish.yml` dispatches this after it created a GitHub Release that no push
+  # to `main` follows — a pre-graduated promotion (RFC #2711). The docs bake the
+  # GitHub Releases list in at build time (`output: "export"`), so without a
+  # rebuild `/releases` keeps showing the release before the promotion. Also the
+  # manual handle for any other "the deployed site is stale" case.
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
