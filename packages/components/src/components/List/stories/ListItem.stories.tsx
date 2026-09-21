@@ -15,6 +15,7 @@ import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Checkbox } from "@/components/Checkbox";
+import { CopyButton } from "@/components/CopyButton";
 import { Combine } from "@/components/Combine";
 import {
   ContextualHelp,
@@ -223,6 +224,40 @@ export const WithColumnLayout: Story = {
                 </ProgressBar>
               </Content>
 
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithHeadingButton: Story = {
+  render: () => {
+    const List = typedList<{ mail: string }>();
+
+    return (
+      <List.List aria-label="Mail addresses">
+        <List.StaticData
+          data={[
+            { mail: "han.solo@rebellion.org" },
+            { mail: "chewbacca.the.wookiee.copilot@rebellion.org" },
+          ]}
+        />
+        <List.Item showTiles textValue={(mail) => mail.mail}>
+          {(mail) => (
+            <List.ItemView>
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>
+                {mail.mail}
+                <CopyButton text={mail.mail} />
+              </Heading>
+              <Text>Rebel Alliance</Text>
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>

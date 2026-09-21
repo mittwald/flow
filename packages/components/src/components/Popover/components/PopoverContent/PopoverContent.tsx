@@ -1,20 +1,12 @@
 import type { FC, PropsWithChildren, Ref, RefObject } from "react";
+import { useContext } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
-import tokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
-
-/**
- * The gap a popover keeps to the viewport edge. The stylesheet caps the
- * popover's width with it, `containerPadding` insets the position by it — and
- * `containerPadding` is a number, so it cannot read the CSS variable.
- *
- * @internal
- */
-export const popoverViewportPadding = Number.parseFloat(
-  tokens.popover["viewport-padding"].value,
-);
+import { NonModalPopoverContent } from "../NonModalPopoverContent";
+import { popoverViewportPadding } from "../../viewportPadding";
+import { popoverWidthStyle } from "../../widthStyle";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -22,12 +14,17 @@ export interface PopoverContentProps
   isDialogContent?: boolean;
   isOpen?: boolean;
   width?: string | number;
+  /** @internal Set by `CoachMark`; see `PopoverProps`. */
+  modality?: "modal" | "non-modal";
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef?: RefObject<Element | null>;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props modality
+ */
 export const PopoverContent: FC<PopoverContentProps> = (props) => {
   const {
     children,
@@ -38,15 +35,56 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     ref,
     isOpen,
     width,
+    modality,
     ...rest
   } = props;
 
   const isActivityActive = useIsActivityActive();
 
+  // A trigger hands its popover a ref through the context react-aria sets up,
+  // and the non-modal popover has to anchor itself with it.
+  const popoverContext = useContext(Aria.PopoverContext);
+  const triggerRefFromContext =
+    popoverContext && "triggerRef" in popoverContext
+      ? popoverContext.triggerRef
+      : undefined;
+
+  // The trigger points its `aria-controls` at this id while the popover is
+  // open, so the popover has to carry it — react-aria's own only applies it
+  // when the popover is a dialog.
+  const idFromContext =
+    popoverContext && "id" in popoverContext ? popoverContext.id : undefined;
+
   const ContentComponent = isDialogContent ? Aria.Dialog : "div";
 
   if (!isActivityActive) {
     return null;
+  }
+
+  if (modality === "non-modal") {
+    const anchor = rest.triggerRef ?? triggerRefFromContext;
+
+    // Without an anchor there is nothing to position against. react-aria's own
+    // popover has the same requirement; it just throws further in.
+    if (!anchor) {
+      return null;
+    }
+
+    return (
+      <NonModalPopoverContent
+        {...rest}
+        className={className}
+        ref={ref}
+        isOpen={isOpen}
+        width={width}
+        withTip={withTip}
+        id={idFromContext}
+        triggerRef={anchor}
+        onOpenChange={onOpenChange}
+      >
+        {children}
+      </NonModalPopoverContent>
+    );
   }
 
   return (
@@ -57,7 +95,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      style={{ width }}
+      style={popoverWidthStyle(width)}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>

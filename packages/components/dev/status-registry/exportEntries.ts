@@ -2,9 +2,11 @@
  * The component-bearing public export entries of
  * `@mittwald/flow-react-components`. Asset/tooling entries (`./internal`,
  * `./all.css`, `./doc-properties`) are not listed — they export no components.
- * `indexFile` is the source parsed for the entry's exported names; `sourceRoot`
- * is the path fragment its components' source files live under (used to
- * disambiguate same-named components across entries).
+ * Neither is `./tunnel`: it re-exports another package's API, which carries no
+ * Flow lifecycle status, and its one Flow component (`TunnelEntry`) already has
+ * an entry under `.`. `indexFile` is the source parsed for the entry's exported
+ * names; `sourceRoot` is the path fragment its components' source files live
+ * under (used to disambiguate same-named components across entries).
  */
 export interface StatusExportEntry {
   key: string;

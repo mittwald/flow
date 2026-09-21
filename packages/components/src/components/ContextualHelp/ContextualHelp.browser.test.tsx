@@ -73,3 +73,29 @@ test("An aria label on the button still wins over the trigger", async () => {
     .element(page.getByRole("button"))
     .toHaveAttribute("aria-label", "From button");
 });
+
+test("A width reaches the content, past the contextual help's own cap", async () => {
+  render(
+    <ContextualHelpTrigger>
+      <Button />
+      {/* Wider than `--contextual-help--max-width` (500px), which caps the
+          content of a contextual help nobody sized. */}
+      <ContextualHelp width={700}>
+        <Text data-testid="help">Each user profile is assigned a role.</Text>
+      </ContextualHelp>
+    </ContextualHelpTrigger>,
+  );
+
+  await page.getByRole("button").click();
+
+  const help = page.getByTestId("help");
+  await expect.element(help).toBeInTheDocument();
+
+  const content = help.element().closest("[class*='flow--contextual-help']");
+  const popover = content?.parentElement?.parentElement;
+
+  expect(popover?.getBoundingClientRect().width).toBe(700);
+  // The content fills the popover's inner box — `clientWidth` leaves out the
+  // border the width is measured over.
+  expect(content?.getBoundingClientRect().width).toBe(popover?.clientWidth);
+});

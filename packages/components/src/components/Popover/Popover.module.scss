@@ -1,5 +1,21 @@
 @use "@/styles/mixins/scrollbar";
 
+/* Variants */
+
+/*
+ * A non-modal popover stays in the document and scrolls with the page, so the
+ * height react-aria caps it at — the room left in the viewport when it was last
+ * measured — is not a limit that applies to it. Anchored below the fold that
+ * room is zero, and the hint renders as a two-pixel sliver.
+ *
+ * `useOverlayPosition` writes the value straight onto the element
+ * (`overlay.style.maxHeight = …`) rather than returning it among its props, so
+ * no React style can remove it and only `!important` reaches it.
+ */
+.non-modal {
+  max-height: none !important;
+}
+
 .popover {
   background-color: var(--popover--background-color);
   box-shadow: var(--popover--box-shadow);

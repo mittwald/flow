@@ -67,6 +67,17 @@ export const OverlayTrigger: FC<Props> = (props) => {
     DialogTrigger: {
       tunnel: null,
     },
+    /*
+     * The overlay is already placed — this trigger owns it. A surrounding
+     * props context that moves or wraps the bare overlay, so that it can be
+     * written without a trigger (`Badge`), must not reach this one: it would
+     * pull the overlay out of its trigger and add a second trigger button
+     * around it.
+     */
+    [overlayType]: {
+      tunnel: null,
+      wrapWith: null,
+    },
   };
 
   return (

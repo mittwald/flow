@@ -7,8 +7,8 @@ import type { ListProps } from "@mittwald/flow-react-components";
 
 // List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
-// A Combine inside a Text only stays in the line from 1.1.54.
-const combinedSubTitleFrom = "1.1.54";
+// A Combine inside a Text only stays in the line from 1.2.2.
+const combinedSubTitleFrom = "1.2.2";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
@@ -716,5 +716,70 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     await userEvent.type(search, "test");
     await sleep(1000);
     await testScreenshot("List empty search view - custom");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List item heading button (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      Button,
+      ContextMenu,
+      MenuItem,
+      Text,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              { id: "1", name: "Luke Skywalker", role: "Jedi Master" },
+              {
+                id: "2",
+                name: "LeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrgana",
+                role: "Rebel Pilot",
+              },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>
+                  {i.name}
+                  <Button variant="soft" color="secondary">
+                    Verify
+                  </Button>
+                </Heading>
+                <Text>{i.role}</Text>
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                </ContextMenu>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List item heading button");
   },
 );
