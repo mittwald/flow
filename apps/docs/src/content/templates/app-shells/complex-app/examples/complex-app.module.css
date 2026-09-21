@@ -26,8 +26,8 @@
   margin-inline-start: auto;
 }
 
-/* The burger takes that place once the navigation gives it up. */
-.menuButton {
+/* The bell and the burger take that place once the navigation gives it up. */
+.mobileActions {
   margin-inline-start: auto;
 }
 
@@ -79,7 +79,7 @@
 }
 
 @media (min-width: 769px) {
-  .menuButton {
+  .mobileActions {
     display: none;
   }
 }

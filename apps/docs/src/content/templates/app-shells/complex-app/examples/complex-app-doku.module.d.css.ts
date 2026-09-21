@@ -2,7 +2,7 @@ declare const classNames: {
   readonly app: "app";
   readonly logo: "logo";
   readonly topnav: "topnav";
-  readonly menuButton: "menuButton";
+  readonly mobileActions: "mobileActions";
   readonly body: "body";
   readonly sidebar: "sidebar";
   readonly toc: "toc";

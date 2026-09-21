@@ -26,7 +26,6 @@ import {
   IconSearch,
   IconSettings,
   IconSshSftp,
-  IconSupport,
   Initials,
   InlineCode,
   Label,
@@ -218,22 +217,8 @@ const Topbar = () => (
       className={styles.topnav}
     >
       <GlobalNavigationLinks />
-      <Button aria-label="Suche">
-        <IconSearch />
-      </Button>
-      <Button aria-label="Support">
-        <IconSupport />
-      </Button>
-      <Button
-        aria-label="Benachrichtigungen"
-        className={styles.notify}
-      >
-        <IconNotification />
-        <CounterBadge
-          count={2}
-          className={styles.notifyBadge}
-        />
-      </Button>
+      <SearchButton />
+      <NotificationButton />
       <ContextMenuTrigger>
         <Button aria-label="Konto">
           <Avatar>
@@ -252,8 +237,45 @@ const Topbar = () => (
         </ContextMenu>
       </ContextMenuTrigger>
     </HeaderNavigation>
-    <MobileMenu />
+    <Flex
+      align="center"
+      gap="s"
+      className={styles.mobileActions}
+    >
+      <SearchButton />
+      <NotificationButton />
+      <MobileMenu />
+    </Flex>
   </Flex>
+);
+
+/*
+ * Search and the bell keep their place next to the burger: both are worth
+ * reaching without opening the menu first.
+ */
+const SearchButton = () => (
+  <Button
+    variant="plain"
+    color="secondary"
+    aria-label="Suche"
+  >
+    <IconSearch />
+  </Button>
+);
+
+const NotificationButton = () => (
+  <Button
+    variant="plain"
+    color="secondary"
+    aria-label="Benachrichtigungen"
+    className={styles.notify}
+  >
+    <IconNotification />
+    <CounterBadge
+      count={2}
+      className={styles.notifyBadge}
+    />
+  </Button>
 );
 
 /*
@@ -267,29 +289,12 @@ const MobileMenu = () => (
       variant="plain"
       color="secondary"
       aria-label="Menü öffnen"
-      className={styles.menuButton}
     >
       <IconMenu />
     </Button>
     <Modal offCanvas showCloseButton>
       <Heading>Menü</Heading>
       <Content>
-        <Section>
-          <ActionGroup preserveOrder>
-            <Button variant="soft" color="secondary">
-              <IconSearch />
-              <Text>Suche</Text>
-            </Button>
-            <Button variant="soft" color="secondary">
-              <IconSupport />
-              <Text>Support</Text>
-            </Button>
-            <Button variant="soft" color="secondary">
-              <IconLogout />
-              <Text>Abmelden</Text>
-            </Button>
-          </ActionGroup>
-        </Section>
         <Section>
           <Navigation aria-label="Hauptnavigation">
             <GlobalNavigationLinks />
@@ -300,6 +305,12 @@ const MobileMenu = () => (
           <ProjectNavigation />
         </Section>
       </Content>
+      <ActionGroup>
+        <Button variant="soft" color="secondary">
+          <IconLogout />
+          <Text>Abmelden</Text>
+        </Button>
+      </ActionGroup>
     </Modal>
   </ModalTrigger>
 );

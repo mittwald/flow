@@ -1,4 +1,5 @@
 import {
+  ActionGroup,
   Badge,
   Button,
   Content,
@@ -42,16 +43,21 @@ export default () => (
         className={styles.topnav}
       >
         <GlobalNavigationLinks />
-        <Button aria-label="Suche">
-          <IconSearch />
-        </Button>
+        <SearchButton />
         <Button aria-label="Theme wechseln">
           <Icon>
             <IconContrastFilled />
           </Icon>
         </Button>
       </HeaderNavigation>
-      <MobileMenu />
+      <Flex
+        align="center"
+        gap="s"
+        className={styles.mobileActions}
+      >
+        <SearchButton />
+        <MobileMenu />
+      </Flex>
     </Flex>
 
     <Flex
@@ -131,6 +137,20 @@ export default () => (
 );
 
 /*
+ * Search keeps its place next to the burger: it is worth reaching without
+ * opening the menu first.
+ */
+const SearchButton = () => (
+  <Button
+    variant="plain"
+    color="secondary"
+    aria-label="Suche"
+  >
+    <IconSearch />
+  </Button>
+);
+
+/*
  * The section links, shared by the top bar and the off-canvas. Each renders
  * them through its own props context, so the same Links read as a header bar
  * in one and as a navigation list in the other.
@@ -184,13 +204,22 @@ const MobileMenu = () => (
       variant="plain"
       color="secondary"
       aria-label="Menü öffnen"
-      className={styles.menuButton}
     >
       <IconMenu />
     </Button>
     <Modal offCanvas showCloseButton>
       <Heading>Menü</Heading>
       <Content>
+        <Section>
+          <ActionGroup>
+            <Button variant="soft" color="secondary">
+              <Icon>
+                <IconContrastFilled />
+              </Icon>
+              <Text>Theme wechseln</Text>
+            </Button>
+          </ActionGroup>
+        </Section>
         <Section>
           <Navigation aria-label="Hauptnavigation">
             <GlobalNavigationLinks />

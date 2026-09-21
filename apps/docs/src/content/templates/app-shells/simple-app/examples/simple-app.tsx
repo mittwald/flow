@@ -137,16 +137,7 @@ export default () => (
         className={styles.nav}
       >
         <GlobalNavigationLinks />
-        <Button
-          aria-label="Benachrichtigungen"
-          className={styles.notify}
-        >
-          <IconNotification />
-          <CounterBadge
-            count={2}
-            className={styles.notifyBadge}
-          />
-        </Button>
+        <NotificationButton />
         <ContextMenuTrigger>
           <Button aria-label="Konto">
             <Avatar>
@@ -165,7 +156,14 @@ export default () => (
           </ContextMenu>
         </ContextMenuTrigger>
       </HeaderNavigation>
-      <MobileMenu />
+      <Flex
+        align="center"
+        gap="s"
+        className={styles.mobileActions}
+      >
+        <NotificationButton />
+        <MobileMenu />
+      </Flex>
     </Flex>
 
     <Flex elementType="main" direction="column" gap="l">
@@ -328,6 +326,25 @@ export default () => (
 );
 
 /*
+ * The bell keeps its place next to the burger: a pending notification is worth
+ * seeing without opening the menu first.
+ */
+const NotificationButton = () => (
+  <Button
+    variant="plain"
+    color="secondary"
+    aria-label="Benachrichtigungen"
+    className={styles.notify}
+  >
+    <IconNotification />
+    <CounterBadge
+      count={2}
+      className={styles.notifyBadge}
+    />
+  </Button>
+);
+
+/*
  * The navigation links, shared by the top bar and the off-canvas. Each renders
  * them through its own props context, so the same Links read as a header bar
  * in one and as a navigation list in the other.
@@ -352,31 +369,22 @@ const MobileMenu = () => (
       variant="plain"
       color="secondary"
       aria-label="Menü öffnen"
-      className={styles.menuButton}
     >
       <IconMenu />
     </Button>
     <Modal offCanvas showCloseButton>
       <Heading>Menü</Heading>
       <Content>
-        <Section>
-          <ActionGroup preserveOrder>
-            <Button variant="soft" color="secondary">
-              <IconNotification />
-              <Text>Benachrichtigungen</Text>
-            </Button>
-            <Button variant="soft" color="secondary">
-              <IconLogout />
-              <Text>Abmelden</Text>
-            </Button>
-          </ActionGroup>
-        </Section>
-        <Section>
-          <Navigation aria-label="Hauptnavigation">
-            <GlobalNavigationLinks />
-          </Navigation>
-        </Section>
+        <Navigation aria-label="Hauptnavigation">
+          <GlobalNavigationLinks />
+        </Navigation>
       </Content>
+      <ActionGroup>
+        <Button variant="soft" color="secondary">
+          <IconLogout />
+          <Text>Abmelden</Text>
+        </Button>
+      </ActionGroup>
     </Modal>
   </ModalTrigger>
 );
