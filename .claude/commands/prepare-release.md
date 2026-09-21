@@ -158,11 +158,20 @@ requires `--from`/`--to` overrides before doing anything else.
 
       ```shell
       git checkout -B release/x.y.0 origin/<from>
+
+      # Usually a no-op that creates NO commit: the forward-merge cascade leaves
+      # <to> an ancestor of <from>, and git then prints "Already up to date."
+      # It only produces a merge commit when <to> carries something <from> never
+      # received — which Step 2 has already ruled out for code.
       git merge --no-ff -m "chore(sync): merge <to> into release/x.y.0" origin/<to>
 
-      # The changelogs must come from <to>, not <from> — see below.
+      # The changelogs must come from <to>, not <from> — see below. Commit that
+      # on its own. Do NOT `git commit --amend`: there is usually no merge commit
+      # to amend, and HEAD is then <from>'s own `chore(release): bump version to
+      # x.y.z-next.N` — a commit already published on origin/<from>.
       git checkout origin/<to> -- '*CHANGELOG.md'
-      git commit --amend --no-edit
+      git diff --cached --quiet ||
+        git commit -m "chore(release): restore the stable changelogs before graduating"
 
       # Graduate the prerelease to the stable x.y.0 IN the PR (RFC #2711): bump
       # every package + lerna.json, prepend the x.y.0 changelog entry, and create
@@ -180,13 +189,22 @@ requires `--from`/`--to` overrides before doing anything else.
       git push origin release/x.y.0
       ```
 
-      The merge is what makes the PR mergeable at all. **GitHub does not run the
-      `.gitattributes` merge drivers** — a driver only exists in local git
-      config — so a merge computed on GitHub's side surfaces every `version` and
-      `CHANGELOG.md` divergence between the lines as a conflict. Measured in the
-      #2769 rehearsal: the first promotion PR came out `CONFLICTING` across 35
-      files, 34 of them mechanical. Here the drivers are registered (Step 2), so
-      the churn is absorbed.
+      **Expect the merge to do nothing, and do not build on it.** In the healthy
+      steady state `<to>` is already an ancestor of `<from>`, so git prints
+      "Already up to date." and writes no commit — measured on the 1.2.0
+      promotion (#3210), where `origin/next..origin/main` was empty. Any step
+      that assumes a fresh merge commit exists is therefore wrong by default;
+      that is why the changelog restore commits on its own above.
+
+      The merge stays in the recipe for the case where it _is_ needed: `<to>`
+      may carry a commit `<from>` never received, and then this merge is what
+      makes the PR mergeable. **GitHub does not run the `.gitattributes` merge
+      drivers** — a driver only exists in local git config — so a merge computed
+      on GitHub's side surfaces every `version` and `CHANGELOG.md` divergence
+      between the lines as a conflict. Measured in the #2769 rehearsal: the
+      first promotion PR came out `CONFLICTING` across 35 files, 34 of them
+      mechanical. Here the drivers are registered (Step 2), so the churn is
+      absorbed.
 
       It cannot change any content: Step 2 already established that merging
       `<to>` into `<from>` produces no code delta, so this merge only moves
@@ -241,7 +259,8 @@ requires `--from`/`--to` overrides before doing anything else.
 ## You do NOT
 
 Build, create/push git tags, publish to npm, or create the GitHub release — all
-of that happens in CI on merge. You **do** graduate the version: a single local
+of that happens in CI on merge. You **do** graduate the version: the local
 `chore(release): bump version to x.y.0` commit on the release branch (Step 10),
-with its lerna-created tag dropped. You create no other commits and push no
-tags.
+with its lerna-created tag dropped, preceded by the changelog restore commit —
+and, where `<to>` is not already an ancestor, the sync merge. You create no
+commits beyond those and push no tags.
