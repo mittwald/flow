@@ -197,8 +197,8 @@ export class IncrementalLoader<T> {
     return {
       pagination: this.manualPagination
         ? {
-            limit: this.list.batches.batchSize,
-            offset: this.list.batches.batchSize * batchIndex,
+            limit: this.list.batches.getBatchSize(batchIndex),
+            offset: this.list.batches.getBatchOffset(batchIndex),
           }
         : undefined,
 

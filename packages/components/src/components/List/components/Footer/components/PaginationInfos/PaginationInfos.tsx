@@ -23,7 +23,7 @@ export const PaginationInfos: FC<TextProps> = (props) => {
   }
 
   const showSkeleton =
-    isLoading && (!list.infiniteScroll || isInitiallyLoading);
+    isLoading && (!list.batches.isInfiniteScrollActive() || isInitiallyLoading);
 
   const text = showSkeleton ? (
     <SkeletonView width="200px" />

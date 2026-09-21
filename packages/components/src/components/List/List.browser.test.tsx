@@ -546,6 +546,139 @@ describe("Infinite scroll", () => {
   });
 });
 
+describe("Pagination modes (prototype, mstudio#3836)", () => {
+  const twentyItems = Array.from({ length: 20 }, (_, i) => ({ num: i }));
+  const showMoreButton = page.getByRole("button", { name: "Show more" });
+
+  const renderTallItems = (num: number) => (
+    <span style={{ display: "block", height: "100vh" }}>Item: {num}</span>
+  );
+
+  test("Hybrid A loads two batches on scroll, then hands over to the button", async () => {
+    await render(
+      <List
+        aria-label="Test"
+        batchSize={3}
+        pagination={{ mode: "scrollThenButton", autoLoadBatches: 2 }}
+      >
+        <ListStaticData<Data> data={twentyItems} />
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => renderTallItems(num)}
+        </ListItem>
+      </List>,
+    );
+
+    // While the auto-load budget lasts, the list scrolls instead of asking.
+    await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
+    expect(showMoreButton.query()).not.toBeInTheDocument();
+
+    await (await page.getByText("Item: 2").element()).scrollIntoView();
+    await expect.element(page.getByText("Item: 5")).toBeInTheDocument();
+
+    // Budget spent after the second batch — the button takes over and the list
+    // stops growing on its own, so the list end becomes reachable again.
+    await expect.element(showMoreButton).toBeInTheDocument();
+    await (await page.getByText("Item: 5").element()).scrollIntoView();
+    expect(page.getByText("Item: 6").query()).not.toBeInTheDocument();
+  });
+
+  test("Hybrid B switches to infinite scroll after the first button press", async () => {
+    await render(
+      <List
+        aria-label="Test"
+        batchSize={3}
+        pagination={{ mode: "buttonThenScroll", manualBatches: 1 }}
+      >
+        <ListStaticData<Data> data={twentyItems} />
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => renderTallItems(num)}
+        </ListItem>
+      </List>,
+    );
+
+    // Nothing loads without intent: the trigger row is on screen and ignored.
+    await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
+    await expect.element(showMoreButton).toBeInTheDocument();
+    expect(page.getByText("Item: 3").query()).not.toBeInTheDocument();
+
+    await userEvent.click(await showMoreButton.element());
+    await expect.element(page.getByText("Item: 5")).toBeInTheDocument();
+
+    // The press is read as "I want to browse" — from here on scrolling loads.
+    await expect.element(showMoreButton).not.toBeInTheDocument();
+    await (await page.getByText("Item: 5").element()).scrollIntoView();
+    await expect.element(page.getByText("Item: 8")).toBeInTheDocument();
+  });
+
+  test("Hybrid C requests nextBatchSize items for every batch after the first", async () => {
+    const requests: { offset: number; limit: number }[] = [];
+
+    const loader: AsyncDataLoader<Data> = async (opts) => {
+      const offset = opts?.pagination?.offset ?? 0;
+      const limit = opts?.pagination?.limit ?? twentyItems.length;
+      requests.push({ offset, limit });
+      return {
+        data: twentyItems.slice(offset, offset + limit),
+        itemTotalCount: twentyItems.length,
+      };
+    };
+
+    await render(
+      <List
+        aria-label="Test"
+        batchSize={3}
+        pagination={{ mode: "growingBatches", nextBatchSize: 6 }}
+      >
+        <ListLoaderAsync<Data> manualPagination>{loader}</ListLoaderAsync>
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
+    expect(requests).toEqual([{ offset: 0, limit: 3 }]);
+
+    // The second batch is the larger one, and it starts right after the first.
+    await userEvent.click(await showMoreButton.element());
+    await expect.element(page.getByText("Item: 8")).toBeInTheDocument();
+    expect(requests).toEqual([
+      { offset: 0, limit: 3 },
+      { offset: 3, limit: 6 },
+    ]);
+
+    // Offsets keep accounting for the mixed batch sizes.
+    await userEvent.click(await showMoreButton.element());
+    await expect.element(page.getByText("Item: 14")).toBeInTheDocument();
+    expect(requests).toEqual([
+      { offset: 0, limit: 3 },
+      { offset: 3, limit: 6 },
+      { offset: 9, limit: 6 },
+    ]);
+  });
+
+  test("Hybrid C stops offering more once the last item is loaded", async () => {
+    await render(
+      <List
+        aria-label="Test"
+        batchSize={3}
+        pagination={{ mode: "growingBatches", nextBatchSize: 6 }}
+      >
+        <ListStaticData<Data> data={twentyItems.slice(0, 9)} />
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
+    await userEvent.click(await showMoreButton.element());
+
+    await expect.element(page.getByText("Item: 8")).toBeInTheDocument();
+    await expect.element(showMoreButton).not.toBeInTheDocument();
+  });
+});
+
 describe("Sorting", () => {
   test("Hidden sorting works", async () => {
     await render(
