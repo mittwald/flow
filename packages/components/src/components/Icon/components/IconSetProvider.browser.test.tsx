@@ -3,7 +3,10 @@ import {
   FontAwesomeIcon,
   type FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
-import type { defaultIconSet } from "@mittwald/flow-icons";
+import {
+  type defaultIconSet,
+  IconDelete as IconDeleteFromSet,
+} from "@mittwald/flow-icons";
 import type { FC } from "react";
 import { render } from "vitest-browser-react";
 import { IconSetProvider } from "@/components/Icon";
@@ -52,6 +55,22 @@ test("without a provider the icons come from the default set", async () => {
   expect(rendered.getByLocator("[aria-label=delete]").element()).toHaveClass(
     "tabler-icon-trash",
   );
+});
+
+test("a default-set icon renders no stray class separator", async () => {
+  const rendered = await render(<IconDeleteFromSet aria-label="delete" />);
+
+  /*
+   * The class attribute is compared as text by the cross-version harness, and
+   * `toHaveClass` normalizes whitespace — so only the raw attribute catches a
+   * separator left behind by the absent `className`.
+   */
+  expect(
+    rendered
+      .getByLocator("[aria-label=delete]")
+      .element()
+      .getAttribute("class"),
+  ).toBe("tabler-icon tabler-icon-trash");
 });
 
 test("IconSetProvider replaces them with the icons of the given set", async () => {
