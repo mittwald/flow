@@ -30,7 +30,7 @@ export const ReleaseEntry: FC<{ release: Release }> = ({ release }) => {
   const fixes = fixesMarkdown(release);
 
   return (
-    <Section>
+    <Section className={styles.entry}>
       <Heading
         level={2}
         id={releaseSlug(release.version)}
