@@ -3,19 +3,9 @@
   min-height: 100%;
   max-width: 1880px;
   margin-inline: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-px--l);
   padding-block: var(--size-px--l);
   padding-inline: 2rem;
   background: var(--color--background-gradient);
-}
-
-.topbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--size-px--m);
 }
 
 /*
@@ -31,43 +21,25 @@
   -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
 }
 
+/* The global navigation is pushed to the far end of the top bar. */
 .topnav {
   margin-inline-start: auto;
 }
 
 /* Navigation, content and table of contents sit in three columns. */
 .body {
-  display: flex;
-  flex-wrap: wrap;
   flex: 1;
-  gap: var(--size-px--l);
-  align-items: stretch;
   min-height: 0;
 }
 
-/* The component navigation lives in its own full-height card. */
-.sidebar {
-  flex: 0 0 17rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-px--m);
-  padding: var(--layout-card--padding);
-  background: var(--layout-card--background-color);
-  border: var(--layout-card--border-width) solid
-    var(--layout-card--border-color);
-  border-radius: var(--layout-card--corner-radius);
-}
-
-/* The table of contents is a real LayoutCard, so it only needs its width. */
+/* Both cards keep a fixed width; only the content column flexes. */
+.sidebar,
 .toc {
   flex: 0 0 17rem;
 }
 
 .main {
-  display: flex;
   flex: 1 1 20rem;
-  flex-direction: column;
-  min-width: 0;
 }
 
 /* Anchor links read as underlined text; the active one drops the underline. */
@@ -84,9 +56,5 @@
 }
 
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--size-px--l);
   margin-block-start: auto;
 }

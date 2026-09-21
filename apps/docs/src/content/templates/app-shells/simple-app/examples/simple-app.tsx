@@ -12,6 +12,7 @@ import {
   ContextMenuTrigger,
   CounterBadge,
   DonutChart,
+  Flex,
   Header,
   HeaderNavigation,
   Heading,
@@ -114,8 +115,14 @@ const contracts = [
 ];
 
 export default () => (
-  <div className={styles.app}>
-    <header className={styles.topbar}>
+  <Flex direction="column" gap="l" className={styles.app}>
+    <Flex
+      elementType="header"
+      align="center"
+      wrap="wrap"
+      gap="m"
+      className={styles.topbar}
+    >
       <span
         className={styles.logo}
         role="img"
@@ -158,9 +165,9 @@ export default () => (
           </ContextMenu>
         </ContextMenuTrigger>
       </HeaderNavigation>
-    </header>
+    </Flex>
 
-    <main className={styles.content}>
+    <Flex elementType="main" direction="column" gap="l">
       {/* The active area is already named in the navigation, so the page
           heading is only exposed to assistive technology. */}
       <Heading level={1} className={styles.visuallyHidden}>
@@ -199,7 +206,12 @@ export default () => (
 
           <ColumnLayout l={[1, 1]} m={[1, 1]}>
             <LayoutCard>
-              <div className={styles.stat}>
+              <Flex
+                direction="column"
+                align="center"
+                gap="xs"
+                className={styles.stat}
+              >
                 <Icon size="l" color="success">
                   <IconTrendingUp />
                 </Icon>
@@ -209,10 +221,15 @@ export default () => (
                 <Text className={styles.statLabel}>
                   Vertragsbestand (30 Tage)
                 </Text>
-              </div>
+              </Flex>
             </LayoutCard>
             <LayoutCard>
-              <div className={styles.stat}>
+              <Flex
+                direction="column"
+                align="center"
+                gap="xs"
+                className={styles.stat}
+              >
                 <Icon size="l" color="danger">
                   <IconTrendingDown />
                 </Icon>
@@ -220,7 +237,7 @@ export default () => (
                 <Text className={styles.statLabel}>
                   Neuverträge (30 Tage)
                 </Text>
-              </div>
+              </Flex>
             </LayoutCard>
           </ColumnLayout>
 
@@ -290,17 +307,23 @@ export default () => (
           </Section>
         </LayoutCard>
       </ColumnLayout>
-    </main>
+    </Flex>
 
-    <footer className={styles.footer}>
+    <Flex
+      elementType="footer"
+      justify="center"
+      wrap="wrap"
+      gap="l"
+      className={styles.footer}
+    >
       <Link href="#" target="_blank" color="dark">
         Datenschutz
       </Link>
       <Link href="#" target="_blank" color="dark">
         Impressum
       </Link>
-    </footer>
-  </div>
+    </Flex>
+  </Flex>
 );
 
 interface FeedbackProps {

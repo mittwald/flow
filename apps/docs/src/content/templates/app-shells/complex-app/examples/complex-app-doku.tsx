@@ -1,6 +1,7 @@
 import {
   Badge,
   Button,
+  Flex,
   Heading,
   HeaderNavigation,
   Icon,
@@ -20,8 +21,14 @@ const lorem =
   "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.";
 
 export default () => (
-  <div className={styles.app}>
-    <header className={styles.topbar}>
+  <Flex direction="column" gap="l" className={styles.app}>
+    <Flex
+      elementType="header"
+      align="center"
+      wrap="wrap"
+      gap="m"
+      className={styles.topbar}
+    >
       <span
         className={styles.logo}
         role="img"
@@ -46,10 +53,15 @@ export default () => (
           </Icon>
         </Button>
       </HeaderNavigation>
-    </header>
+    </Flex>
 
-    <div className={styles.body}>
-      <aside className={styles.sidebar}>
+    <Flex
+      gap="l"
+      wrap="wrap"
+      align="stretch"
+      className={styles.body}
+    >
+      <LayoutCard className={styles.sidebar}>
         <Navigation aria-label="Komponenten">
           <NavigationGroup>
             <Label>Actions</Label>
@@ -75,24 +87,25 @@ export default () => (
             <Link href="#">Switch</Link>
           </NavigationGroup>
         </Navigation>
-      </aside>
+      </LayoutCard>
 
-      <main className={styles.main}>
-        <LayoutCard>
-          <Section>
-            <Heading level={1}>Button</Heading>
-            <Text>{lorem}</Text>
-            <Heading level={2}>Colors</Heading>
-            <Text>{lorem}</Text>
-            <Heading level={3}>Light und Dark</Heading>
-            <Text>{lorem}</Text>
-            <Heading level={2}>Sizes</Heading>
-            <Text>{lorem}</Text>
-            <Heading level={2}>Variants</Heading>
-            <Text>{lorem}</Text>
-          </Section>
-        </LayoutCard>
-      </main>
+      <LayoutCard
+        elementType="main"
+        className={styles.main}
+      >
+        <Section>
+          <Heading level={1}>Button</Heading>
+          <Text>{lorem}</Text>
+          <Heading level={2}>Colors</Heading>
+          <Text>{lorem}</Text>
+          <Heading level={3}>Light und Dark</Heading>
+          <Text>{lorem}</Text>
+          <Heading level={2}>Sizes</Heading>
+          <Text>{lorem}</Text>
+          <Heading level={2}>Variants</Heading>
+          <Text>{lorem}</Text>
+        </Section>
+      </LayoutCard>
 
       <LayoutCard className={styles.toc}>
         <Section>
@@ -123,15 +136,21 @@ export default () => (
           </Navigation>
         </Section>
       </LayoutCard>
-    </div>
+    </Flex>
 
-    <footer className={styles.footer}>
+    <Flex
+      elementType="footer"
+      justify="center"
+      wrap="wrap"
+      gap="l"
+      className={styles.footer}
+    >
       <Link href="#" target="_blank" color="dark">
         Datenschutz
       </Link>
       <Link href="#" target="_blank" color="dark">
         Impressum
       </Link>
-    </footer>
-  </div>
+    </Flex>
+  </Flex>
 );

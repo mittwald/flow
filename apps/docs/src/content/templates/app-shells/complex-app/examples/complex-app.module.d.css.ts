@@ -1,6 +1,5 @@
 declare const classNames: {
   readonly app: "app";
-  readonly topbar: "topbar";
   readonly logo: "logo";
   readonly topnav: "topnav";
   readonly notify: "notify";

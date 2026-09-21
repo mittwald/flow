@@ -7,6 +7,7 @@ import {
   ContextMenuTrigger,
   Content,
   CounterBadge,
+  Flex,
   Heading,
   HeaderNavigation,
   IconApp,
@@ -77,11 +78,16 @@ const mailboxes: Mailbox[] = [
 const MailboxList = typedList<Mailbox>();
 
 export default () => (
-  <div className={styles.app}>
+  <Flex direction="column" gap="l" className={styles.app}>
     <Topbar />
-    <div className={styles.body}>
+    <Flex gap="l" align="stretch" className={styles.body}>
       <ProjectSidebar />
-      <main className={styles.main}>
+      <Flex
+        elementType="main"
+        direction="column"
+        gap="m"
+        className={styles.main}
+      >
         <Breadcrumb>
           <Link href="#">Projekt</Link>
           <Link href="#">E-Mails</Link>
@@ -154,14 +160,20 @@ export default () => (
             </MailboxList.Item>
           </MailboxList.List>
         </LayoutCard>
-      </main>
-    </div>
+      </Flex>
+    </Flex>
     <Footer />
-  </div>
+  </Flex>
 );
 
 const Topbar = () => (
-  <header className={styles.topbar}>
+  <Flex
+    elementType="header"
+    align="center"
+    wrap="wrap"
+    gap="m"
+    className={styles.topbar}
+  >
     <span
       className={styles.logo}
       role="img"
@@ -211,11 +223,11 @@ const Topbar = () => (
         </ContextMenu>
       </ContextMenuTrigger>
     </HeaderNavigation>
-  </header>
+  </Flex>
 );
 
 const ProjectSidebar = () => (
-  <aside className={styles.sidebar}>
+  <LayoutCard className={styles.sidebar}>
     <Heading level={2}>Mein Projekt</Heading>
     <Navigation aria-label="Projektnavigation">
       <NavigationGroup>
@@ -268,16 +280,22 @@ const ProjectSidebar = () => (
         </Link>
       </NavigationGroup>
     </Navigation>
-  </aside>
+  </LayoutCard>
 );
 
 const Footer = () => (
-  <footer className={styles.footer}>
+  <Flex
+    elementType="footer"
+    justify="center"
+    wrap="wrap"
+    gap="l"
+    className={styles.footer}
+  >
     <Link href="#" target="_blank" color="dark">
       Datenschutz
     </Link>
     <Link href="#" target="_blank" color="dark">
       Impressum
     </Link>
-  </footer>
+  </Flex>
 );

@@ -3,6 +3,7 @@ import {
   Button,
   ColumnLayout,
   Content,
+  Flex,
   Heading,
   Label,
   LayoutCard,
@@ -23,8 +24,14 @@ import {
 import styles from "./focus-task-bestellung.module.css";
 
 export default () => (
-  <div className={styles.page}>
-    <main className={styles.center}>
+  <Flex justify="center" className={styles.page}>
+    <Flex
+      elementType="main"
+      direction="column"
+      align="stretch"
+      gap="l"
+      className={styles.center}
+    >
       <span
         className={styles.logo}
         role="img"
@@ -60,10 +67,14 @@ export default () => (
                 <Content>1 GiB RAM</Content>
               </RadioButton>
               <RadioButton value="rec">
-                <div className={styles.resourceTitle}>
+                <Flex
+                  align="center"
+                  gap="s"
+                  className={styles.resourceTitle}
+                >
                   <Text>1 vCPU</Text>
                   <Badge color="blue">Empfehlung</Badge>
-                </div>
+                </Flex>
                 <Content>2 GiB RAM</Content>
               </RadioButton>
               <RadioButton value="large">
@@ -93,17 +104,26 @@ export default () => (
               </RadioButton>
             </RadioGroup>
 
-            <div className={styles.actions}>
+            <Flex
+              align="center"
+              justify="space-between"
+              wrap="wrap"
+              gap="m"
+            >
               <Button variant="soft" color="secondary">
                 Abbrechen
               </Button>
-              <div className={styles.actionsRight}>
+              <Flex
+                wrap="wrap"
+                gap="m"
+                className={styles.actionsRight}
+              >
                 <Button variant="soft" color="secondary">
                   Zurück
                 </Button>
                 <Button>Weiter</Button>
-              </div>
-            </div>
+              </Flex>
+            </Flex>
           </Section>
         </LayoutCard>
 
@@ -145,26 +165,26 @@ export default () => (
               </TableBody>
             </Table>
 
-            <div className={styles.voucher}>
+            <Flex align="end" gap="m">
               <TextField>
                 <Label>Gutscheincode</Label>
               </TextField>
               <Button variant="soft" color="secondary">
                 Einlösen
               </Button>
-            </div>
+            </Flex>
           </Section>
         </LayoutCard>
       </ColumnLayout>
 
-      <div className={styles.footer}>
+      <Flex justify="center" wrap="wrap" gap="l">
         <Link href="#" target="_blank" color="dark">
           Datenschutz
         </Link>
         <Link href="#" target="_blank" color="dark">
           Impressum
         </Link>
-      </div>
-    </main>
-  </div>
+      </Flex>
+    </Flex>
+  </Flex>
 );
