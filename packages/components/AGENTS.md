@@ -136,6 +136,12 @@ return (
   `@flr-generate`, so a remote tree reaches the host as a `DialogTrigger` with
   no `OverlayTrigger` around it — which is why `DialogTrigger` pins the button
   itself as well.
+- **A context that places a bare overlay gets the written-out trigger for
+  free.** `Badge` accepts a `ContextualHelp` on its own and wraps it with a
+  trigger button (`tunnel` + `wrapWith`). `OverlayTrigger` pins its own overlay
+  with `tunnel: null, wrapWith: null`, so a `ContextualHelpTrigger` the consumer
+  wrote keeps its help and its button — tunnel the trigger as well and style its
+  `Button` through the context, and both spellings land in the same slot.
 
 Why this works the way it does across the remote boundary:
 [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
