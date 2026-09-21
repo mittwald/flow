@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.67](https://github.com/mittwald/flow/compare/1.2.0-next.66...1.2.0-next.67) (2026-09-21)
+
+### Bug Fixes
+
+* **Badge:** place a written-out contextual help trigger instead of adding a second one ([a304967](https://github.com/mittwald/flow/commit/a30496799e0c7f30dac25ddfec2bb5f6410b8990)), closes [#3049](https://github.com/mittwald/flow/issues/3049)
+
 ## [1.2.0-next.66](https://github.com/mittwald/flow/compare/1.1.53...1.2.0-next.66) (2026-09-21)
 
 ## [1.2.0-next.65](https://github.com/mittwald/flow/compare/1.1.52...1.2.0-next.65) (2026-09-21)
