@@ -146,3 +146,54 @@ test("Leaving a tab removes an open popover of that tab", async () => {
     .element(page.getByText("Manifest entries"))
     .not.toBeInTheDocument();
 });
+
+const collapsibleTabs = (containerWidth: number) => (
+  <div
+    data-testid="container"
+    style={{ width: containerWidth, overflow: "hidden" }}
+  >
+    <Tabs>
+      <Tab id="comms">
+        <TabTitle>Communications array</TabTitle>
+        <Text>Comms</Text>
+      </Tab>
+      <Tab id="cargo">
+        <TabTitle>Cargo hold manifest</TabTitle>
+        <Text>Cargo</Text>
+      </Tab>
+      <Tab id="nav">
+        <TabTitle>Navigation console</TabTitle>
+        <Text>Nav</Text>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+test("Collapsed tabs do not widen their container", async () => {
+  render(collapsibleTabs(240));
+
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .toBeVisible();
+
+  const container = page.getByTestId("container").element();
+
+  expect(container.scrollWidth).toBe(container.clientWidth);
+});
+
+test("Collapsed tabs expand again once they fit", async () => {
+  const { rerender } = await render(collapsibleTabs(240));
+
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .toBeVisible();
+
+  await rerender(collapsibleTabs(900));
+
+  await expect
+    .element(page.getByRole("tab", { name: "Communications array" }))
+    .toBeVisible();
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .not.toBeInTheDocument();
+});
