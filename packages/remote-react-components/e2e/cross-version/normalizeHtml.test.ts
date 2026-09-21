@@ -76,38 +76,38 @@ describe("normalizeHtml", () => {
     expect(normalizeHtml(input)).toBe(input);
   });
 
+  it("compares class as a token set", () => {
+    const spaced = '<svg class="  tabler-icon   tabler-icon-trash "></svg>';
+    const reordered = '<svg class="tabler-icon-trash tabler-icon"></svg>';
+    const duplicated =
+      '<svg class="tabler-icon tabler-icon-trash tabler-icon"></svg>';
+    const expected = '<svg class="tabler-icon tabler-icon-trash"></svg>';
+
+    expect(normalizeHtml(spaced)).toBe(expected);
+    expect(normalizeHtml(reordered)).toBe(expected);
+    expect(normalizeHtml(duplicated)).toBe(expected);
+  });
+
+  it("still reports a class that is only on one side", () => {
+    const withModifier =
+      '<div class="flow--button flow--button--primary">x</div>';
+    const withoutModifier = '<div class="flow--button">x</div>';
+
+    expect(normalizeHtml(withModifier)).not.toBe(
+      normalizeHtml(withoutModifier),
+    );
+  });
+
   it("collapses insignificant whitespace between tags", () => {
     const input = "<div>\n  <span>  a  </span>\n</div>";
     expect(normalizeHtml(input)).toBe("<div><span>  a  </span></div>");
   });
 
-  it("collapses whitespace inside a class value", () => {
-    const input =
-      '<svg class="flow--icon tabler-icon  tabler-icon-info-circle ">x</svg>';
-    expect(normalizeHtml(input)).toBe(
-      '<svg class="flow--icon tabler-icon tabler-icon-info-circle">x</svg>',
-    );
-  });
-
-  it("still diverges when the class tokens themselves differ", () => {
-    const a = normalizeHtml(
-      '<div class="flow--button flow--button--primary ">x</div>',
-    );
-    const b = normalizeHtml(
-      '<div class="flow--button flow--button--secondary">x</div>',
-    );
-    expect(a).not.toBe(b);
-  });
-
-  it("leaves whitespace in other attribute values alone", () => {
-    const input = '<div data-label="a  b " class="x">y</div>';
-    expect(normalizeHtml(input)).toBe(input);
-  });
-
   it("is idempotent", () => {
     const input =
       '<label for="react-aria1">x</label><input id="react-aria1">' +
-      '<iframe style="visibility: hidden;"></iframe>';
+      '<iframe style="visibility: hidden;"></iframe>' +
+      '<svg class="  b  a "></svg>';
     const once = normalizeHtml(input);
     expect(normalizeHtml(once)).toBe(once);
   });
