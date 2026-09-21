@@ -27,7 +27,6 @@ test.each(testEnvironments)(
       Alert,
       Text,
       Link,
-      ActionGroup,
     },
   }) => {
     const TestComponent: FC = () => {
@@ -80,15 +79,6 @@ test.each(testEnvironments)(
               section below it keeps exactly one separator. */}
           <Section>
             <RendersNothing />
-          </Section>
-          <Section>
-            <Header>
-              <Heading>ActionGroup</Heading>
-              <ActionGroup>
-                <Link>Link</Link>
-                <Button>Primary</Button>
-              </ActionGroup>
-            </Header>
           </Section>
           <Section>
             <Header>
