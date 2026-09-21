@@ -6,6 +6,7 @@ import type { Placement } from "react-aria";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { popoverViewportPadding } from "../../viewportPadding";
+import { popoverWidthStyle } from "../../widthStyle";
 
 export interface NonModalPopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -248,7 +249,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
          * undone in CSS — see `.non-modal` in Popover.module.scss.
          */
         zIndex: undefined,
-        width,
+        ...popoverWidthStyle(width),
         ...(isPositioned ? {} : { visibility: "hidden" }),
       }}
     >

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { CoachMark } from "@/components/CoachMark";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
+import { Flex } from "@/components/Flex";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
@@ -34,9 +35,14 @@ const meta: Meta<typeof CoachMark> = {
 
     return (
       <Section>
-        <Button ref={anchor} onPress={() => controller.open()}>
-          Assign a rank
-        </Button>
+        {/* A neighbour for the anchor: the coach mark points at one button,
+            not at the row. */}
+        <Flex gap="m">
+          <Button variant="soft">Squadron overview</Button>
+          <Button ref={anchor} onPress={() => controller.open()}>
+            Assign a rank
+          </Button>
+        </Flex>
 
         <CoachMark {...props} anchorRef={anchor} controller={controller}>
           <Heading>New: assign a rank</Heading>
@@ -59,3 +65,10 @@ export default meta;
 type Story = StoryObj<typeof CoachMark>;
 
 export const Default: Story = {};
+
+/** A `width` overrides the default cap the coach mark sizes itself with. */
+export const FixedWidth: Story = {
+  args: {
+    width: 500,
+  },
+};

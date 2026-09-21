@@ -2,6 +2,12 @@
   row-gap: var(--popover--spacing);
   display: flex;
   flex-direction: column;
-  max-width: var(--contextual-help--max-width);
+
+  /*
+   * The default cap. A `width` on the popover unsets
+   * `--popover-content-max-width` so that it reaches the content too —
+   * see `popoverWidthStyle`.
+   */
+  max-width: var(--popover-content-max-width, var(--contextual-help--max-width));
   padding: var(--popover--padding--m);
 }
