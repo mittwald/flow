@@ -101,7 +101,22 @@ export const normalizeHtml = (html: string): string => {
     "--animation-delay: 0ms",
   );
 
-  // 5. Collapse insignificant whitespace between tags. NOTE: this assumes
+  // 5. Collapse whitespace INSIDE a `class` value. A class attribute is an
+  //    unordered set of tokens separated by whitespace, so `"a b "` and `"a b"`
+  //    name the same set — the difference is formatting, not rendering. Old
+  //    versions carry it wherever a Tabler icon rendered: up to #3164 the class
+  //    came from `@tabler/icons-react`, which appended the caller's (empty)
+  //    className behind a space; the inlined `createTablerIcon` does not.
+  //
+  //    This does not weaken the comparison: the tokens themselves are left
+  //    alone, so a class added, removed or renamed still diverges.
+  out = out.replace(
+    /(\sclass=")([^"]*)(")/gi,
+    (_match, prefix: string, value: string, suffix: string) =>
+      `${prefix}${value.trim().replace(/\s+/g, " ")}${suffix}`,
+  );
+
+  // 6. Collapse insignificant whitespace between tags. NOTE: this assumes
   //    block-level component boundaries (whitespace between tags is not
   //    meaningful). An inline-composition scenario where a space between
   //    adjacent inline elements is significant would need a more careful rule.

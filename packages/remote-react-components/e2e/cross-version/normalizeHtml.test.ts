@@ -81,6 +81,29 @@ describe("normalizeHtml", () => {
     expect(normalizeHtml(input)).toBe("<div><span>  a  </span></div>");
   });
 
+  it("collapses whitespace inside a class value", () => {
+    const input =
+      '<svg class="flow--icon tabler-icon  tabler-icon-info-circle ">x</svg>';
+    expect(normalizeHtml(input)).toBe(
+      '<svg class="flow--icon tabler-icon tabler-icon-info-circle">x</svg>',
+    );
+  });
+
+  it("still diverges when the class tokens themselves differ", () => {
+    const a = normalizeHtml(
+      '<div class="flow--button flow--button--primary ">x</div>',
+    );
+    const b = normalizeHtml(
+      '<div class="flow--button flow--button--secondary">x</div>',
+    );
+    expect(a).not.toBe(b);
+  });
+
+  it("leaves whitespace in other attribute values alone", () => {
+    const input = '<div data-label="a  b " class="x">y</div>';
+    expect(normalizeHtml(input)).toBe(input);
+  });
+
   it("is idempotent", () => {
     const input =
       '<label for="react-aria1">x</label><input id="react-aria1">' +
