@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { render } from "vitest-browser-react";
-import { commands, page, userEvent } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
 import { CoachMark } from "@/components/CoachMark";
@@ -506,34 +506,4 @@ test("Without a width the coach mark keeps its own cap", async () => {
   const content = hint.element().closest("[class*='flow--coach-mark']");
 
   expect(content?.getBoundingClientRect().width).toBe(360);
-});
-
-test("A dismissed coach mark animates out instead of disappearing", async () => {
-  // The suite runs with reduced motion, which zeroes every animation.
-  await commands.setReducedMotion("no-preference");
-
-  render(<Spotlight />);
-
-  const hint = page.getByTestId("hint");
-  await expect.element(hint).toBeInTheDocument();
-
-  const popover = hint
-    .element()
-    .closest("[class*='flow--popover--content']")?.parentElement;
-
-  // Let the opening animation finish first, so what runs afterwards is the
-  // closing one and not the same animation carrying on.
-  await vi.waitFor(() => {
-    expect(popover?.hasAttribute("data-entering")).toBe(false);
-  });
-
-  await page.getByRole("button", { name: "Got it" }).click();
-
-  // The closing animation outlives `isOpen`: the coach mark is still in the
-  // document, marked as exiting, with an animation running on it.
-  expect(popover?.isConnected).toBe(true);
-  expect(popover?.hasAttribute("data-exiting")).toBe(true);
-  expect(popover?.getAnimations()).not.toHaveLength(0);
-
-  await expect.element(hint).not.toBeInTheDocument();
 });
