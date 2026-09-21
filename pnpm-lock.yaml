@@ -951,6 +951,10 @@ importers:
       yaml:
         specifier: ^2.9.0
         version: 2.9.1
+    devDependencies:
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.11(@types/node@25.9.8)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.5)(msw@2.7.3(@types/node@25.9.8)(@typescript/typescript6@6.0.2))(vite@8.3.1(@types/node@25.9.8)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.105.1)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/icons-pro:
     dependencies:
@@ -14304,7 +14308,7 @@ snapshots:
       istanbul-reports: 3.2.0
       magicast: 0.5.4
       obug: 2.1.4
-      std-env: 4.2.0
+      std-env: 4.3.0
       tinyrainbow: 3.1.1
       vitest: 4.1.11(@types/node@25.9.8)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.5)(msw@2.7.3(@types/node@25.9.8)(typescript@7.0.2))(vite@8.3.1(@types/node@25.9.8)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.105.1)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
     optionalDependencies:
