@@ -55,3 +55,8 @@ lerna.json
 # keep them out of the format gate.
 **/*.module.d.scss.ts
 **/*.module.d.css.ts
+
+# Written by the cross-version `prepare` (gitignored). It only exists after a
+# local harness run, so format-checking it turns the pre-push lint red for
+# whoever ran the harness and for nobody else.
+packages/remote-react-components/cross-version.manifest.json

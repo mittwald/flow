@@ -52,12 +52,71 @@ const fetchPublishedVersions = (): string[] => {
   return JSON.parse(raw) as string[];
 };
 
-const installVersion = (version: string): boolean => {
+/**
+ * Publish timestamps of every version, used to pin each install to the
+ * dependency tree of its own release date.
+ */
+const fetchPublishTimes = (): Record<string, string> => {
+  const raw = execFileSync("npm", ["view", PACKAGE_NAME, "time", "--json"], {
+    encoding: "utf8",
+  });
+  return JSON.parse(raw) as Record<string, string>;
+};
+
+/*
+ * A published version's manifest pins only its own @mittwald/* deps exactly;
+ * everything else is a range, and npm resolves a range to whatever is newest
+ * at install time. That makes the OLD side of the comparison drift with the
+ * registry: a dependency release changes what the old version renders, with
+ * no commit in this repo, and the harness turns red or green depending on
+ * whether the CI cache happens to hold an older install.
+ *
+ * `--before` resolves every dependency as of the version's own publish date,
+ * which is both deterministic and what the harness actually means by "what
+ * this old version rendered". The stamp invalidates installs from before this
+ * policy, which a restored cache still carries.
+ */
+const RESOLUTION_POLICY = "before-publish-date+1h";
+
+/*
+ * One release publishes every package in turn, so a sibling this version
+ * depends on can carry a timestamp a few seconds later than its own — a cutoff
+ * at the exact publish time drops it with ETARGET. An hour covers a release
+ * run and stays far short of the next third-party release.
+ */
+const RESOLUTION_MARGIN_MS = 60 * 60 * 1000;
+
+const resolutionCutoff = (publishedAt: string): string =>
+  new Date(Date.parse(publishedAt) + RESOLUTION_MARGIN_MS).toISOString();
+const stampPathFor = (dir: string): string =>
+  join(dir, ".cross-version-resolution");
+
+const installIsCurrent = (dir: string, target: string): boolean => {
+  if (!existsSync(target)) {
+    return false;
+  }
+  try {
+    return readFileSync(stampPathFor(dir), "utf8").trim() === RESOLUTION_POLICY;
+  } catch {
+    return false;
+  }
+};
+
+const installVersion = (version: string, publishedAt?: string): boolean => {
   const dir = join(installRoot, version);
   const target = installPathFor(version);
-  if (existsSync(target)) {
+  if (installIsCurrent(dir, target)) {
     console.log(`[cross-version] ${version} already installed, skipping`);
     return true;
+  }
+  // A stale install from an earlier policy, or a partial one from an aborted
+  // run, would otherwise be kept by npm. Best-effort: npm overwrites anyway.
+  if (existsSync(dir)) {
+    try {
+      rmSync(dir, { recursive: true, force: true, maxRetries: 3 });
+    } catch {
+      // best-effort cleanup
+    }
   }
   mkdirSync(dir, { recursive: true });
   writeFileSync(
@@ -68,15 +127,21 @@ const installVersion = (version: string): boolean => {
       2,
     ),
   );
-  console.log(`[cross-version] installing ${PACKAGE_NAME}@${version}`);
+  const cutoff = publishedAt ? resolutionCutoff(publishedAt) : undefined;
+  const before = cutoff ? ["--before", cutoff] : [];
+  console.log(
+    `[cross-version] installing ${PACKAGE_NAME}@${version}` +
+      (cutoff ? ` (deps as of ${cutoff})` : " (deps unpinned)"),
+  );
   try {
     execFileSync(
       "npm",
-      ["install", "--prefix", dir, `${PACKAGE_NAME}@${version}`],
+      ["install", "--prefix", dir, ...before, `${PACKAGE_NAME}@${version}`],
       {
         stdio: "inherit",
       },
     );
+    writeFileSync(stampPathFor(dir), RESOLUTION_POLICY);
     return true;
   } catch (err) {
     // Remove the partial install dir so a later run doesn't treat it as
@@ -99,6 +164,7 @@ const installVersion = (version: string): boolean => {
 const main = (): void => {
   const currentVersion = readCurrentVersion();
   const published = fetchPublishedVersions();
+  const publishTimes = fetchPublishTimes();
   const excluded = readExcluded();
 
   const targets = selectCrossVersionTargetVersions(
@@ -116,7 +182,7 @@ const main = (): void => {
   const installed: SelectedTargetVersion[] = [];
   const dropped: SelectedTargetVersion[] = [];
   for (const target of targets) {
-    if (installVersion(target.version)) {
+    if (installVersion(target.version, publishTimes[target.version])) {
       installed.push(target);
     } else {
       dropped.push(target);
