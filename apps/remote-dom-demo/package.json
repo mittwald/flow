@@ -6,7 +6,8 @@
     "build:deps": "",
     "build:scss-types": "tsx dev/generateScssTypes.ts",
     "clean": "rimraf .next",
-    "dev": "next dev"
+    "dev": "next dev",
+    "test:compile": "tsc --noEmit"
   },
   "dependencies": {
     "@internationalized/date": "^3.12.3",
