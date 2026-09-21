@@ -46,10 +46,11 @@
     flex-direction: row;
     justify-content: space-between;
 
+    /* No own width: the observer reads the natural width off `scrollWidth`,
+       and a box that wide widens every ancestor up to the document. */
     .titles {
       visibility: hidden;
       position: absolute;
-      width: auto;
     }
   }
 }
