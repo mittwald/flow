@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.53](https://github.com/mittwald/flow/compare/1.1.52...1.1.53) (2026-09-21)
+
+### Bug Fixes
+
+* **icons:** drop the trailing separator from an icon&#x27;s class attribute ([#3203](https://github.com/mittwald/flow/issues/3203)) ([8a48c83](https://github.com/mittwald/flow/commit/8a48c8357b99b10eb8e1bbe608a3fdd797722825))
+
 ## [1.1.52](https://github.com/mittwald/flow/compare/1.1.51...1.1.52) (2026-09-21)
 
 ### Bug Fixes
