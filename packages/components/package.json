@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "1.1.53",
+  "version": "1.2.0",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
@@ -23,6 +23,10 @@
     "./flr-universal": {
       "types": "./dist/types/index/flr-universal.d.ts",
       "import": "./dist/js/flr-universal.mjs"
+    },
+    "./tunnel": {
+      "types": "./dist/types/index/tunnel.d.ts",
+      "import": "./dist/js/tunnel.mjs"
     },
     "./nextjs": {
       "types": "./dist/types/integrations/nextjs/index.d.ts",

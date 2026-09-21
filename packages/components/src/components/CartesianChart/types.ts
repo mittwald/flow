@@ -37,3 +37,10 @@ export const isDataKeyWithLabel = <TData extends ChartDataValue>(
     typeof obj.dataKeyLabel === "string"
   );
 };
+
+/**
+ * The orientation of the chart's axes and graphical items. `"horizontal"` puts
+ * the category axis on the x-axis (bars grow upwards), `"vertical"` puts it on
+ * the y-axis (bars grow to the side).
+ */
+export type CartesianChartLayout = "horizontal" | "vertical";
