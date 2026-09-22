@@ -28,29 +28,50 @@ const walk = (dir, files = []) => {
   return files;
 };
 
+/** Every class name a stylesheet names inside a `:global(…)`. */
+const globalTargetsOf = (stylesheet) => {
+  const targets = new Set();
+
+  for (const [, inner] of fs
+    .readFileSync(stylesheet, "utf8")
+    .matchAll(/:global\(([^)]*)\)/g)) {
+    for (const [, className] of inner.matchAll(/\.([\w-]+)/g)) {
+      targets.add(className);
+    }
+  }
+
+  return targets;
+};
+
 /**
  * Every `flow--…` class the component build emits, derived from the committed
  * `*.module.d.scss.ts` stubs — the only source that also lists classes a mixin
  * or an interpolation produces — run through the very generator the build uses.
  * Reading the built `dist/css/all.css` instead would be circular: a `:global()`
  * selector is emitted verbatim, so a broken reference would find itself there.
+ *
+ * A stub lists every class its stylesheet mentions, its `:global()` targets
+ * included, and those are not local classes: scoping `react-aria-Heading` from
+ * `Calendar` would invent `flow--calendar--react-aria-heading`, which nothing
+ * generates but a typo could name. They are therefore excluded by looking them
+ * up in the stylesheet. A name used both ways would be dropped too — that
+ * direction is the safe one, because a wrong exclusion only rejects a valid
+ * reference, loudly, while a wrong inclusion silently reopens the hole this
+ * rule exists to close.
  */
 export const collectKnownGlobalFlowClasses = (src = componentsSrc) => {
   const known = new Set();
 
   for (const stub of walk(src)) {
     const stylesheet = stub.replace(/\.d\.(s?css)\.ts$/, ".$1");
+    const globalTargets = globalTargetsOf(stylesheet);
 
     for (const [, quoted, bare] of fs
       .readFileSync(stub, "utf8")
       .matchAll(/readonly\s+(?:"([^"]+)"|([\w$]+))\s*:/g)) {
       const localName = quoted ?? bare;
 
-      // A stub lists every class its stylesheet mentions, `:global()` targets
-      // included. Feeding those back in would let a broken reference help
-      // vouch for itself, so drop them: a local class is camelCase, never
-      // already a generated name.
-      if (localName.startsWith("flow--")) {
+      if (globalTargets.has(localName)) {
         continue;
       }
 

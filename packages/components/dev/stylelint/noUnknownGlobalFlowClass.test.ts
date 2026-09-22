@@ -44,10 +44,23 @@ describe("collectKnownGlobalFlowClasses", () => {
   });
 
   test("ignores the :global() targets a stub echoes back", () => {
-    // `Item.module.scss` references `:global(.flow--avatar)`, so its stub lists
-    // that name too. Taking it as a local class would mangle it into a name
-    // nothing generates — and would let a broken reference vouch for itself.
+    // A stub lists its stylesheet's `:global()` targets too. Taking a Flow one
+    // as a local class would mangle it into a name nothing generates — and
+    // would let a broken reference vouch for itself.
     expect(known).not.toContain("flow--list--items--item--flow--avatar");
+  });
+
+  test("does not scope a third-party global into a lookalike Flow class", () => {
+    // `Calendar.module.scss` styles react-aria's own classes through
+    // `:global()`, so its stub lists `react-aria-Heading`. Scoping that as if
+    // it were a local class invents `flow--calendar--react-aria-heading`: a
+    // name no component generates, but one a typo could plausibly write — and
+    // the rule would have waved it through.
+    expect(known).not.toContain("flow--calendar--react-aria-heading");
+    expect(known).not.toContain("flow--code-editor--cm-editor");
+    expect(known).not.toContain(
+      "flow--cartesian-chart--recharts-cartesian-grid",
+    );
   });
 
   test("collects classes a mixin produces, which the stylesheet never spells out", () => {
@@ -128,6 +141,14 @@ describe("flow/no-unknown-global-flow-class", () => {
       expect(warning?.endColumn).toBe(
         ".toolbar:has(:global(.flow--nope".length + 1,
       );
+    });
+
+    test("a lookalike built from a third-party global", async () => {
+      const [warning] = await lint(
+        ":global(.flow--calendar--react-aria-heading) { color: red; }",
+      );
+
+      expect(warning?.text).toMatch(/matches nothing/);
     });
 
     test("reports every unknown class in one selector", async () => {
