@@ -564,7 +564,9 @@ pnpm nx test:unit:dev components
 pnpm nx test:browser:dev components
 ```
 
-Browser tests need the Playwright browsers installed once:
+The nx browser targets install the Playwright browsers themselves. On a fresh
+machine, or on Linux where the browsers also need system libraries, do it once
+with system dependencies:
 
 ```shell
 pnpm test:browser:prepare

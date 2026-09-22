@@ -121,7 +121,7 @@ pnpm affected:test                         # only affected vs. main (what CI run
 pnpm nx test:unit components               # unit tests for one package
 pnpm nx test:compile components            # tsc --noEmit for one package
 
-pnpm test:browser:prepare                  # install Playwright browsers (once)
+pnpm test:browser:prepare                  # install Playwright browsers + system deps
 pnpm nx test:browser components --browser.name=webkit
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 pnpm nx test:visual:update remote-react-components              # update visual snapshots
@@ -346,13 +346,6 @@ where the error points.
   **Fix:** Use **bare `pnpm nx …`** for graph targets (`build`, `dev`, anything
   with `dependsOn`/`^build`). `corepack pnpm --filter <pkg> <script>` stays fine
   for single-package scripts
-
-- **Symptom:** Browser tests fail instantly with a missing-executable / "no
-  browser" error
-
-  **Cause:** Playwright browsers not installed in this environment
-
-  **Fix:** `pnpm test:browser:prepare` once
 
 - **Symptom:** A visual test stays red in CI after you regenerated screenshots
   locally on macOS
