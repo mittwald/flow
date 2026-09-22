@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.5](https://github.com/mittwald/flow/compare/1.2.4...1.2.5) (2026-09-22)
+
+### Bug Fixes
+
+* **Tooltip:** hide a tooltip that never got positioned ([#3226](https://github.com/mittwald/flow/issues/3226)) ([81c1aff](https://github.com/mittwald/flow/commit/81c1aff5dd4034b80960e5f8bc53014ffc752ac6))
+
 ## [1.2.4](https://github.com/mittwald/flow/compare/1.2.3...1.2.4) (2026-09-22)
 
 ### Bug Fixes
