@@ -90,7 +90,12 @@ export const Accordion: FC<AccordionProps> = flowComponent(
 
     return (
       <div {...rest} className={rootClassName}>
-        <PropsContextProvider props={propsContext}>
+        {/*
+         * The props context is memoized, and the header button reads `expanded`
+         * from it – without the dependency the toggle keeps announcing the state
+         * it was first rendered with.
+         */}
+        <PropsContextProvider dependencies={[expanded]} props={propsContext}>
           {children}
           <div
             aria-labelledby={headerId}
