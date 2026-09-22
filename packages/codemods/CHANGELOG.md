@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.8](https://github.com/mittwald/flow/compare/1.3.0-next.7...1.3.0-next.8) (2026-09-22)
+
+### Features
+
+* **codemods:** report the Flow packages&#x27; own peer ranges ([f534b5b](https://github.com/mittwald/flow/commit/f534b5b8c18138037819b12653df72b2dc62d8da)), closes [#2887](https://github.com/mittwald/flow/issues/2887) [#3059](https://github.com/mittwald/flow/issues/3059)
+
+### Bug Fixes
+
+* **codemods:** count a two-field dependency once, and name the right cause ([bacb596](https://github.com/mittwald/flow/commit/bacb5967283154eba18553d8aa22a6c0edcdd63f)), closes [#3204](https://github.com/mittwald/flow/issues/3204) [#2887](https://github.com/mittwald/flow/issues/2887)
+* **codemods:** mark optional peers, and stop flagging prerelease pins ([88a880a](https://github.com/mittwald/flow/commit/88a880a001ce45449bf35a8853b8506b0b8ecf4b)), closes [#3204](https://github.com/mittwald/flow/issues/3204)
+
 ## [1.3.0-next.7](https://github.com/mittwald/flow/compare/1.2.5...1.3.0-next.7) (2026-09-22)
 
 ## [1.3.0-next.6](https://github.com/mittwald/flow/compare/1.2.4...1.3.0-next.6) (2026-09-22)
