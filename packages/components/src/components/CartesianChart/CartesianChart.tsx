@@ -6,6 +6,7 @@ import {
   isValidElement,
   type PropsWithChildren,
   type ReactNode,
+  useId,
   useMemo,
 } from "react";
 import clsx from "clsx";
@@ -110,7 +111,11 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     return null;
   }, [emptyView]);
 
-  const contextValue = useMemo(() => ({ layout }), [layout]);
+  const chartId = useId().replaceAll(/[^\w-]/g, "");
+  const contextValue = useMemo(
+    () => ({ layout, stackIdPrefix: `${chartId}-` }),
+    [layout, chartId],
+  );
 
   return (
     <CartesianChartContextProvider value={contextValue}>

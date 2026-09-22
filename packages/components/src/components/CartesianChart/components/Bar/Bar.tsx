@@ -9,6 +9,7 @@ import {
   isDataKeyWithLabel,
 } from "@/components/CartesianChart/types";
 import { useCartesianChartContext } from "@/components/CartesianChart/context";
+import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedStackId";
 import { useDesignTokens } from "@/lib/theming";
 
 type BarBaseProps = Pick<
@@ -47,6 +48,7 @@ export const Bar: FC<BarProps> = (props) => {
 
   const tokens = useDesignTokens();
   const { layout } = useCartesianChartContext();
+  const stackId = useScopedStackId(props.stackId);
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`
@@ -54,19 +56,31 @@ export const Bar: FC<BarProps> = (props) => {
 
   const cornerRadius = parseInt(tokens.bar["corner-radius"].value);
   const radius: Recharts.BarProps["radius"] =
-    props.stackId !== undefined
-      ? 0
-      : layout === "vertical"
-        ? [0, cornerRadius, cornerRadius, 0]
-        : [cornerRadius, cornerRadius, 0, 0];
+    layout === "vertical"
+      ? [0, cornerRadius, cornerRadius, 0]
+      : [cornerRadius, cornerRadius, 0, 0];
 
-  return (
+  const bar = (
     <Recharts.Bar
       name={isDataKeyWithLabel(props) ? props.dataKeyLabel : props.dataKey}
       {...rest}
+      stackId={stackId}
       fill={color}
-      radius={radius}
+      radius={stackId === undefined ? radius : 0}
     />
+  );
+
+  if (stackId === undefined) {
+    return bar;
+  }
+
+  // Every Bar of a stack renders its own BarStack, because a Bar cannot know
+  // its siblings — they all describe the same clip path, so the duplicates are
+  // redundant rather than conflicting.
+  return (
+    <Recharts.BarStack stackId={stackId} radius={radius}>
+      {bar}
+    </Recharts.BarStack>
   );
 };
 
