@@ -49,7 +49,7 @@
     "test:unit:dev": "vitest dev --project=unit* --passWithNoTests",
     "test:visual": "vitest run --project=visual --browser.headless",
     "test:visual:dev": "vitest dev --project=visual",
-    "test:visual:update": "vitest run --project=visual --browser.headless --update"
+    "test:visual:update": "vitest run --project=visual --browser.headless --update=true"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:*",

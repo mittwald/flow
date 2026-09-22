@@ -530,19 +530,6 @@ where the error points.
   suite renders a component missing the prop, not the `DataCloneError`. Read the
   console, or verify in `apps/remote-dom-demo` over the iframe connection
 
-- **Symptom:** `vitest run --update <file>` rewrites **every** baseline instead
-  of the one file's, and `git status` shows snapshots you never touched
-
-  **Cause:** `--update` takes an optional value, so it swallows the positional
-  test filter that follows it. The run then matches all files, updates all of
-  them, and reports the full test count (354, not 2) — the only signal that
-  anything went wrong
-
-  **Fix:** Put the filter **before** the flag (`vitest run <file> --update`) or
-  pin the flag's value (`--update=true <file>`). Check `git status` after any
-  `--update` and revert baselines outside your change; a stray one is
-  indistinguishable from an intentional update once committed
-
 - **Symptom:** One environment of a visual scenario fails while the other
   passes, and the **`update-screenshots`** label reports _"No Screenshot Updates
   Required"_
