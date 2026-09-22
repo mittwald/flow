@@ -339,15 +339,16 @@ where the error points.
   builds and regenerates every dependency first. Reach for a direct
   single-package script only when the dependencies are already current
 
-- **Symptom:** An `nx` graph target dies with **"configured to use 10.28.2 of
+- **Symptom:** An `nx` graph target dies with **"configured to use 11.19.0 of
   pnpm … your current pnpm is v…"**
 
   **Cause:** You prefixed a dependency-graph target with `corepack`; nested
-  per-task pnpm spawns resolve to a pnpm other than the pinned `10.28.2`
+  per-task pnpm spawns resolve to a pnpm other than the pinned `11.19.0`
 
   **Fix:** Use **bare `pnpm nx …`** for graph targets (`build`, `dev`, anything
   with `dependsOn`/`^build`). `corepack pnpm --filter <pkg> <script>` stays fine
-  for single-package scripts
+  for single-package scripts. The version in the message is whatever
+  `packageManager` pins, so read it there rather than from this entry
 
 - **Symptom:** A visual test stays red in CI after you regenerated screenshots
   locally on macOS

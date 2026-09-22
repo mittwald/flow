@@ -37,7 +37,7 @@ coding agents, but great reference docs for humans too.
 | Tool        | Version                                                             |
 | ----------- | ------------------------------------------------------------------- |
 | **Node.js** | `>=24` (`engines.node` in the root `package.json`; CI runs Node 24) |
-| **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack     |
+| **pnpm**    | `11.19.0` — pinned via the `packageManager` field, use Corepack     |
 | **Git**     | any recent version                                                  |
 
 We use [pnpm](https://pnpm.io/) as the package manager. The easiest way to get
