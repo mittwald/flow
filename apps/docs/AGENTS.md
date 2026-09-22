@@ -24,7 +24,8 @@ Next.js documentation site for the flow Styleguide, deployed to
   do not write new ones against the old paths.
 - Code examples are `.tsx` files in the `examples/` directory next to the MDX
   file, referenced via `example="<name>"` (see "Page Building Blocks" in the
-  README).
+  README). Every example keeps its imports — they are what the editor builds its
+  scope from — but the editor strips them before showing the code.
 - **No pop-culture or Star Wars references in example content.** Use neutral,
   realistic content from the mittwald domain (hosting products, projects,
   members/roles, prices, component props) — see the existing `table/examples`

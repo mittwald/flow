@@ -18,6 +18,7 @@ import {
 } from "@mittwald/flow-react-components";
 import { IconArrowBarBoth } from "@tabler/icons-react";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
+import { stripImports } from "@/lib/liveCode/stripImports";
 
 export interface LiveCodeEditorProps {
   code: string | JSX.Element;
@@ -207,7 +208,9 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
-  const codeToDisplay = code.replace(/;\r?\n$/, "");
+  // The scope above already carries the imports, so the editor shows only the
+  // example itself.
+  const codeToDisplay = stripImports(code).replace(/;$/, "");
 
   /**
    * The two controls are either-or: an example that starts open is truncated
