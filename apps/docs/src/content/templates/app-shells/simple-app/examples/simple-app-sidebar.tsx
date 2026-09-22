@@ -109,7 +109,7 @@ export default () => {
 
   return (
     <Flex direction="column" gap="l" className={styles.app}>
-      <div className={styles.body}>
+      <Flex gap="l" align="stretch" className={styles.body}>
         <LayoutCard className={styles.sidebar}>
           <span
             className={styles.logo}
@@ -117,7 +117,11 @@ export default () => {
             aria-label="mittwald"
           />
           <AreaNavigation />
-          <div className={styles.sidebarBottom}>
+          <Flex
+            direction="column"
+            gap="m"
+            className={styles.sidebarBottom}
+          >
             <AdminNavigation />
             {/* The current user sits at the very bottom of the sidebar. */}
             <Flex
@@ -139,7 +143,7 @@ export default () => {
                 <IconLogout />
               </Button>
             </Flex>
-          </div>
+          </Flex>
         </LayoutCard>
 
         <Flex
@@ -236,7 +240,7 @@ export default () => {
             </Section>
           </LayoutCard>
         </Flex>
-      </div>
+      </Flex>
 
       <Flex
         elementType="footer"

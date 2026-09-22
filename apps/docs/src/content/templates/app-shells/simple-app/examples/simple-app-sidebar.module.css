@@ -36,9 +36,6 @@
 
 /* Sidebar and content fill the available height side by side. */
 .body {
-  display: flex;
-  gap: var(--size-px--l);
-  align-items: stretch;
   flex: 1;
   min-height: 0;
 }
@@ -54,9 +51,6 @@
 
 /* Settings and the user profile sit at the bottom, apart from the areas above. */
 .sidebarBottom {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-px--m);
   margin-block-start: auto;
 }
 
