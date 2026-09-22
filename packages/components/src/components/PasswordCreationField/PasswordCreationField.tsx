@@ -42,6 +42,10 @@ import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import {
+  useAriaAnnouncePasswordVisibility,
+  useAriaAnnounceValidationState,
+} from "@/components/PasswordCreationField/lib/ariaAnnounce";
 
 export interface PasswordCreationFieldProps
   extends
@@ -92,13 +96,6 @@ export const PasswordCreationField = flowComponent(
       onChange,
       ...rest
     } = useControlledHostValueProps(props, "");
-
-    const {
-      FieldErrorView,
-      FieldErrorCaptureContext,
-      fieldProps,
-      fieldPropsContext,
-    } = useFieldComponent(props, "PasswordCreationField");
 
     const translate = useLocalizedStringFormatter(
       locales,
@@ -181,6 +178,22 @@ export const PasswordCreationField = flowComponent(
     const isInvalidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid === false;
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
+
+    // The field derives its invalid state from the policy validation, so the
+    // hook has to see that state — not just the `isInvalid` prop — to describe
+    // the input with the field error.
+    const {
+      FieldErrorView,
+      FieldErrorCaptureContext,
+      fieldProps,
+      fieldPropsContext,
+    } = useFieldComponent({ ...props, isInvalid }, "PasswordCreationField");
+
+    useAriaAnnounceValidationState(
+      latestValidationErrorText,
+      !isEmptyValue && policyValidationResult.isValid !== "indeterminate",
+    );
+    useAriaAnnouncePasswordVisibility(isPasswordRevealed);
 
     const setOptimisticPolicyValidationResult = (
       state: Partial<ResolvedPolicyValidationResult> = {},
@@ -268,6 +281,7 @@ export const PasswordCreationField = flowComponent(
     return (
       <Aria.TextField
         {...rest}
+        {...fieldProps}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}
         onChange={onChange}

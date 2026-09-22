@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import * as Aria from "react-aria-components";
 import { Text } from "@/components/Text";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import locales from "./../../locales/*.locale.json";
@@ -20,7 +21,21 @@ export const ValidationResultEntry: FC<Props> = (props) => {
     "PasswordCreationField",
   );
 
-  const icon = <AlertIcon status={result.isValid ? "success" : "warning"} />;
+  const icon = (
+    <AlertIcon
+      status={result.isValid ? "success" : "warning"}
+      // The status is spelled out as text right next to it, so the icon is
+      // decorative. Overriding `AlertIcon`'s generic "Status …" label with
+      // `undefined` is what makes `Icon` hide it from the accessibility tree.
+      aria-label={undefined}
+    />
+  );
+
+  const status = translate.format(
+    result.isValid
+      ? "password.requirements.rule.fulfilled"
+      : "password.requirements.rule.unfulfilled",
+  );
 
   let [translationKey, translationValues] = generateValidationTranslation(
     result,
@@ -33,15 +48,17 @@ export const ValidationResultEntry: FC<Props> = (props) => {
   }
 
   return (
-    <Text
+    <li
       className={styles.validationResultEntry}
       data-rule={result.ruleType}
       data-rule-valid={result.isValid}
-      key={translationKey}
     >
       {icon}
-      {translate.format(translationKey, translationValues)}
-    </Text>
+      <Text>
+        <Aria.VisuallyHidden elementType="span">{`${status}: `}</Aria.VisuallyHidden>
+        {translate.format(translationKey, translationValues)}
+      </Text>
+    </li>
   );
 };
 

@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useId } from "react";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 import locales from "./../../locales/*.locale.json";
@@ -11,6 +11,7 @@ import {
 } from "@/components/ContextualHelp";
 import { Heading } from "@/components/Heading";
 import type { PropsWithClassName } from "@/lib/types/props";
+import styles from "./ValidationResultButton.module.scss";
 
 interface Props extends PropsWithClassName {
   policyValidationResult?: ResolvedPolicyValidationResult;
@@ -25,6 +26,7 @@ export const ValidationResultButton: FC<Props> = (props) => {
     locales,
     "PasswordCreationField",
   );
+  const headingId = useId();
 
   let validationResults = policyValidationResult?.ruleResults?.filter((r) => {
     return isEmptyValue ? !r.isValid : true;
@@ -54,11 +56,21 @@ export const ValidationResultButton: FC<Props> = (props) => {
         className={className}
       />
       <ContextualHelp>
-        <Heading>{translate.format("password.requirements.heading")}</Heading>
-        {validationResultComponents.length === 0 && (
-          <ValidationResultEntry result={{ isValid: true }} unspecifiedRules />
-        )}
-        {validationResultComponents}
+        <Heading id={headingId}>
+          {translate.format("password.requirements.heading")}
+        </Heading>
+        {/* A list, so a screen reader announces the requirements as one unit
+            with their number — and each rule with its status. */}
+        <ul aria-labelledby={headingId} className={styles.validationResultList}>
+          {validationResultComponents.length === 0 ? (
+            <ValidationResultEntry
+              result={{ isValid: true }}
+              unspecifiedRules
+            />
+          ) : (
+            validationResultComponents
+          )}
+        </ul>
       </ContextualHelp>
     </ContextualHelpTrigger>
   );

@@ -23,6 +23,9 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
         isDisabled={isDisabled}
         variant="plain"
         color="secondary"
+        // The button sits in the label, where "Generate" alone does not say
+        // what is generated.
+        aria-label={translate.format("button.generate.label")}
       >
         {translate.format("button.generate")}
       </Button>
