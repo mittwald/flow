@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.8](https://github.com/mittwald/flow/compare/1.2.7...1.2.8) (2026-09-22)
+
+### Bug Fixes
+
+* **PasswordCreationField:** make the field usable with a screen reader ([#3234](https://github.com/mittwald/flow/issues/3234)) ([33fde0b](https://github.com/mittwald/flow/commit/33fde0bea077bb45dbfd22a256a26d590f8965a2))
+
 ## [1.2.7](https://github.com/mittwald/flow/compare/1.2.6...1.2.7) (2026-09-22)
 
 ### Bug Fixes
