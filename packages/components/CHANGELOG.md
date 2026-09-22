@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.4](https://github.com/mittwald/flow/compare/1.2.2...1.3.0-next.4) (2026-09-22)
+
+### Bug Fixes
+
+* **CoachMark:** play the closing animation instead of vanishing ([#3224](https://github.com/mittwald/flow/issues/3224)) ([75d9bda](https://github.com/mittwald/flow/commit/75d9bdad04a98a5b4cd18b60d13ad121405b196f))
+
+## [1.3.0-next.3](https://github.com/mittwald/flow/compare/1.3.0-next.2...1.3.0-next.3) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.3 ([6afc49e](https://github.com/mittwald/flow/commit/6afc49e243f752620463555a0f7e34d58ac80def))
+
+## [1.3.0-next.2](https://github.com/mittwald/flow/compare/1.3.0-next.1...1.3.0-next.2) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.2 ([29fc649](https://github.com/mittwald/flow/commit/29fc6492e907cf441ae67c63004e09c4f344477b))
+
+## [1.3.0-next.1](https://github.com/mittwald/flow/compare/1.2.1...1.3.0-next.1) (2026-09-21)
+
+### Features
+
+* **icons:** add an AIHosting icon ([17bc78c](https://github.com/mittwald/flow/commit/17bc78ce347e63ce1e4c1719f4fb0e1eaea18811)), closes [#3214](https://github.com/mittwald/flow/issues/3214)
+
+### Bug Fixes
+
+* **components:** invalidate build:icons when the icon source changes ([7c1d490](https://github.com/mittwald/flow/commit/7c1d490ad7fecfe81f1f5d6ea24084df215dd00b))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.1 ([80a465b](https://github.com/mittwald/flow/commit/80a465ba999fa7dc74a36ef81fb5c72a66138248))
+
+## [1.3.0-next.0](https://github.com/mittwald/flow/compare/1.2.0...1.3.0-next.0) (2026-09-21)
+
+### Features
+
+* **Action:** close the nearest overlay with a bare closeOverlay ([d47133a](https://github.com/mittwald/flow/commit/d47133a77c7af241f5d44d8f014c01a73477c427)), closes [#506](https://github.com/mittwald/flow/issues/506)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.0 ([5b5ef78](https://github.com/mittwald/flow/commit/5b5ef7835ddf1b1c50f9cd0917abd4b435676fe9))
+
+### Code Refactoring
+
+* **ContextMenu:** use the bare closeOverlay for the select action ([f7bf167](https://github.com/mittwald/flow/commit/f7bf1672a6451d4ce0ee79284ccb874d5dd0cb40))
+
 ## [1.3.0-next.3](https://github.com/mittwald/flow/compare/1.3.0-next.2...1.3.0-next.3) (2026-09-21)
 
 ### Features

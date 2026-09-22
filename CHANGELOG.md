@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.4](https://github.com/mittwald/flow/compare/1.2.2...1.3.0-next.4) (2026-09-22)
+
+### Bug Fixes
+
+* **ci:** poll for created preview services and upsert the preview comment ([#3212](https://github.com/mittwald/flow/issues/3212)) ([b685268](https://github.com/mittwald/flow/commit/b6852683eca193338f6f49067a79df1743c6f768))
+* **CoachMark:** play the closing animation instead of vanishing ([#3224](https://github.com/mittwald/flow/issues/3224)) ([75d9bda](https://github.com/mittwald/flow/commit/75d9bdad04a98a5b4cd18b60d13ad121405b196f))
+* **docs:** align header and footer with the content width ([#3221](https://github.com/mittwald/flow/issues/3221)) ([98a5efc](https://github.com/mittwald/flow/commit/98a5efc6eaf2fd565150a97f2764504cfb85c547))
+* **remote-dom-demo:** unbreak the chart demo page and type-check the app in CI ([#3222](https://github.com/mittwald/flow/issues/3222)) ([c96579a](https://github.com/mittwald/flow/commit/c96579ad08bdc1e7ac2f28b6413e738f0ae5ed99))
+
+### Documentation
+
+* **release:** reserve inline code for what the reader types ([#3225](https://github.com/mittwald/flow/issues/3225)) ([7efaf7b](https://github.com/mittwald/flow/commit/7efaf7b847c75d4c644beecf51f39a48b5a7f28f))
+
+## [1.3.0-next.3](https://github.com/mittwald/flow/compare/1.3.0-next.2...1.3.0-next.3) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.3 ([6afc49e](https://github.com/mittwald/flow/commit/6afc49e243f752620463555a0f7e34d58ac80def))
+
+## [1.3.0-next.2](https://github.com/mittwald/flow/compare/1.3.0-next.1...1.3.0-next.2) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.2 ([29fc649](https://github.com/mittwald/flow/commit/29fc6492e907cf441ae67c63004e09c4f344477b))
+
+## [1.3.0-next.1](https://github.com/mittwald/flow/compare/1.2.1...1.3.0-next.1) (2026-09-21)
+
+### Features
+
+* **icons:** add an AIHosting icon ([17bc78c](https://github.com/mittwald/flow/commit/17bc78ce347e63ce1e4c1719f4fb0e1eaea18811)), closes [#3214](https://github.com/mittwald/flow/issues/3214)
+
+### Bug Fixes
+
+* **components:** invalidate build:icons when the icon source changes ([7c1d490](https://github.com/mittwald/flow/commit/7c1d490ad7fecfe81f1f5d6ea24084df215dd00b))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.1 ([80a465b](https://github.com/mittwald/flow/commit/80a465ba999fa7dc74a36ef81fb5c72a66138248))
+
+## [1.3.0-next.0](https://github.com/mittwald/flow/compare/1.2.0...1.3.0-next.0) (2026-09-21)
+
+### Features
+
+* **Action:** close the nearest overlay with a bare closeOverlay ([d47133a](https://github.com/mittwald/flow/commit/d47133a77c7af241f5d44d8f014c01a73477c427)), closes [#506](https://github.com/mittwald/flow/issues/506)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.0-next.0 ([5b5ef78](https://github.com/mittwald/flow/commit/5b5ef7835ddf1b1c50f9cd0917abd4b435676fe9))
+
+### Code Refactoring
+
+* **ContextMenu:** use the bare closeOverlay for the select action ([f7bf167](https://github.com/mittwald/flow/commit/f7bf1672a6451d4ce0ee79284ccb874d5dd0cb40))
+
+### Tests
+
+* **remote-react-components:** express the ImageCropper gate as a range ([ca546cd](https://github.com/mittwald/flow/commit/ca546cdf93e4783e12a3ab1cc125e354c683eca3)), closes [#3024](https://github.com/mittwald/flow/issues/3024)
+* **remote-react-components:** gate two cross-version scenarios per version ([cdbdb95](https://github.com/mittwald/flow/commit/cdbdb95f33846dfebeb5088c1ec52affb4f09878)), closes [#3024](https://github.com/mittwald/flow/issues/3024)
+
 ## [1.3.0-next.3](https://github.com/mittwald/flow/compare/1.3.0-next.2...1.3.0-next.3) (2026-09-21)
 
 ### Features
