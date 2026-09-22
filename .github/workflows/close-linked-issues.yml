@@ -84,7 +84,14 @@ jobs:
       - name: Checkout the base branch ⬇️
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          # `repository` defaults to the BASE repo under `pull_request_target`,
+          # and `branches:` above constrains this ref to `next` / `next-major` —
+          # so this is a trusted branch of this repository, never a fork's.
           ref: ${{ github.event.pull_request.base.ref }}
+          # Nothing here uses git after the checkout: `gh` authenticates through
+          # `GH_TOKEN`. Not writing the token into `.git/config` keeps it out of
+          # reach of any step a later edit might add.
+          persist-credentials: false
 
       # This run closes issues with no human in the loop, so the parser proves
       # itself first — same reason `publish.yml` self-tests its classifier.
