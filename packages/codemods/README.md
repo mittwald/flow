@@ -28,7 +28,9 @@ Flow monorepo shares one version, so `@mittwald/ext-bridge`,
 
 - `patch` — stays inside the current minor
 - `minor` (default) — stays inside the current major
-- `major` — no ceiling
+- `major` — no ceiling. Not "the next major": with no newer major published it
+  resolves inside the current one, which is the same target `minor` reaches. The
+  command says so, and `--json` carries it as `range.stayedWithin`
 - a dist-tag, e.g. `latest` or `next`
 - an exact version, e.g. `1.4.0`
 
@@ -154,12 +156,12 @@ involve.
 
 Options:
 
-- `--json` — machine-readable output: an object with `range`
-  (`current`/`target`, or `null` for the offline whole-catalogue form),
-  `migrations`, each entry carrying `catchUp`, and `peers` — `external` and
-  `flowPins`, each a list of `{ peer, range, requiredBy, optionalFor }`, or
-  `null` for the offline whole-catalogue form, which has no target to read them
-  at
+- `--json` — machine-readable output: an object with `range` (`current`,
+  `target`, the `revision` that produced it and `stayedWithin`; or `null` for
+  the offline whole-catalogue form), `migrations`, each entry carrying
+  `catchUp`, and `peers` — `external` and `flowPins`, each a list of
+  `{ peer, range, requiredBy, optionalFor }`, or `null` for the offline
+  whole-catalogue form, which has no target to read them at
 
 ### `<id> [path]`
 
@@ -179,6 +181,20 @@ rewrites every Flow import.
 ```shell
 npx @mittwald/flow-codemods@latest to-remote-package src
 ```
+
+## Reading a codemod's counts
+
+`N file(s) changed, M unchanged`, plus `K declined` and `E empty` where those
+are not zero. `upgrade` prints the same clause per codemod as a single-id run
+does.
+
+`M` is how much of the tree was read: `0 changed, 0 unchanged` looked at
+nothing, `0 changed, 240 unchanged` looked at everything and found nothing.
+`declined` is a file the transform read and returned nothing for — a shape it
+could not decide from the source, and the likeliest place the old pattern
+survives. `empty` is a 0-byte source file; jscodeshift cannot tell one apart
+from a decline (both come back as `skip`), so it is counted separately here and
+never reported as a failure.
 
 ## Exit codes
 

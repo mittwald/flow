@@ -351,12 +351,36 @@ required a field label.
 stay registered across a tab switch, exactly as they did as siblings below a
 `SegmentedControl`.
 
+#### When a usage is both at once
+
+A selection that sets a mode value **and** swaps which input is rendered below
+it fits both descriptions. Take `RadioGroup`.
+
+```tsx
+<SegmentedControl value={mode} onChange={setMode}>
+  <Segment value="a">…</Segment>
+  <Segment value="b">…</Segment>
+</SegmentedControl>
+{mode === "a" && <Field name="x"><Select … /></Field>}
+{mode === "b" && <Field name="x"><TextField … /></Field>}
+```
+
+The `Tabs` example above has the same shape — a switcher followed by a
+conditional — but the branches there hold no form fields. Here they do, and
+"panels stay mounted" stops being a convenience: as siblings below the control
+exactly one branch was mounted at a time, so exactly one input was registered.
+Inside `Tabs` both are mounted, both register, and on one field name they
+collide. `RadioGroup` leaves the conditional where it is, so the mounting does
+not change at all.
+
 There is no codemod, and the reason is the choice rather than the edit. Which
 replacement is right cannot be decided from the source: a value-setting usage
 and a content switcher look alike at the call site, and only the surrounding
-intention separates them. The `RadioGroup` direction would be mechanical **once
-that decision is made** — if you have many usages that all go that way, a
-find-and-replace of `SegmentedControl`/`Segment` gets you most of it.
+intention separates them. The form-field rule above is the one part that is
+decidable, and it decides the overlap rather than the whole question. The
+`RadioGroup` direction would be mechanical **once that decision is made** — if
+you have many usages that all go that way, a find-and-replace of
+`SegmentedControl`/`Segment` gets you most of it.
 
 `SegmentedControl` and `Segment` (and the `flr-segmented-control` /
 `flr-segment` remote elements) keep working unchanged and will be removed in a
@@ -368,18 +392,21 @@ their own when the available width runs out, and a `RadioGroup` stacks its
 options anyway.
 
 **Apply:** Replace `SegmentedControl` with `Tabs` when the selection switches
-displayed content, or with `RadioGroup` when it sets a value. Pick per usage.
-The two directions cost very different amounts of work. Towards `RadioGroup` it
-is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` →
-`RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s
-props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying
-over. Only `containerBreakpointSize` has no counterpart, and the joined row is
-not reproduced. Towards `Tabs` it is structural: the state props are
-`selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is
-no `Label` slot (the group label moves to the surrounding `Heading`, or to
-`aria-label` on `Tabs` when it should not be visible, or goes away), and the
-switched panels move inside the tabs — where they stay mounted, so form fields
-in them keep their registration.
+displayed content, or with `RadioGroup` when it sets a value. Pick per usage —
+and where the usage does both, one rule decides it: if the switched branches
+contain form fields, take `RadioGroup`. `Tabs` keeps every panel mounted, so
+branches that were alternatives become siblings, and two branches registering
+the same field name collide. The two directions cost very different amounts of
+work. Towards `RadioGroup` it is a prop-compatible rename: `SegmentedControl` →
+`RadioGroup` and `Segment` → `RadioButton` (always `RadioButton`, not `Radio`;
+it takes exactly `Segment`'s props), with `value`/`defaultValue`/`onChange` and
+a `Label` child all carrying over. Only `containerBreakpointSize` has no
+counterpart, and the joined row is not reproduced. Towards `Tabs` it is
+structural: the state props are `selectedKey`/`defaultSelectedKey` rather than
+`value`/`defaultValue`, there is no `Label` slot (the group label moves to the
+surrounding `Heading`, or to `aria-label` on `Tabs` when it should not be
+visible, or goes away), and the switched panels move inside the tabs — where
+they stay mounted, so form fields in them keep their registration.
 
 ---
 
@@ -982,7 +1009,7 @@ whose callbacks are typed from your own data shape.
 
 ## Removed the underlying react-syntax-highlighter library from CodeBlock
 
-**Since `0.2.0-alpha.756`** · migration · manual change · also applies to
+**Since `0.2.0-alpha.756`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 We've replaced the `react-syntax-highlighter` library, which means many
@@ -991,9 +1018,43 @@ the
 [CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)
 for details on what's now supported.
 
-**Apply:** Check every `CodeBlock` usage against the current props (see the
-[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block))
-and remove or replace props the new implementation does not support.
+```diff
+  <CodeBlock
+    code="const a = 1;"
+    language="ts"
+    showLineNumbers
+-   wrapLongLines
+-   startingLineNumber={5}
+-   useInlineStyles={false}
+  />
+```
+
+`style` is in the removed set and is easy to misread: on `CodeBlock` it was
+never the DOM `style` attribute, it was the highlighter's theme object. There is
+no `style` prop on the component now.
+
+`code` no longer accepts `string[]`. Where you passed an array, join it — the
+separator is yours to choose, which is why no codemod does it for you.
+
+The prop that replaces most of what the removed ones were used for is
+`truncateLines`: `false` (the default) disables truncation, `true` truncates
+after 8 lines, and a number sets the maximum line count.
+
+**Apply:** Remove these props from every `CodeBlock`: `color`, `style`,
+`customStyle`, `codeTagProps`, `useInlineStyles`, `showInlineLineNumbers`,
+`startingLineNumber`, `lineNumberContainerStyle`, `lineNumberStyle`,
+`wrapLines`, `wrapLongLines`, `lineProps`, `renderer`, `PreTag`, `CodeTag`. They
+were re-exported from `react-syntax-highlighter` and none of them exists any
+more. `code`, `copyable`, `language`, `showLineNumbers`, `className` and the
+children stay — note that `showLineNumbers` survived and `showInlineLineNumbers`
+did not. A codemod removes all fifteen. Two things it declines: a spread that
+might carry one (`<CodeBlock {...props} />`), and `code`, which narrowed from
+`string | string[]` to `string` — join an array yourself, with the line
+separator you want.
+
+```shell
+npx @mittwald/flow-codemods@latest code-block-syntax-highlighter-removed src
+```
 
 ---
 
@@ -1049,13 +1110,30 @@ npx @mittwald/flow-codemods@latest muted-action-error-to-abort-action-error src
 
 The return type changed from `() => void` to `() => unknown`
 
+```diff
+- controller.addOnClose(() => hasUnsavedChanges && warn());
++ controller.addOnClose(() => {
++   hasUnsavedChanges && warn();
++ });
+```
+
+The diff is not a type fix — both versions compile. It is the veto: the
+expression body returns whatever `hasUnsavedChanges && warn()` evaluates to, and
+if that is `false` the overlay no longer closes. A block body returns
+`undefined`, which is not a veto.
+
 **Apply:** No type change needed: the return type widened from `() => void` to
 `() => unknown`, and a `() => void` callback stays assignable. Instead, check
 every callback passed to `addOnClose`/`addOnOpen` for one that can return
-`false` — for example an arrow function whose body is an expression evaluating
-to `false`. `executeHandlers` now treats any handler returning `false` as a veto
-and cancels the close/open. A callback that returned `false` incidentally, with
-no intent to block anything, now silently cancels closes.
+`false`. `executeHandlers` now treats any handler returning `false` as a veto
+and cancels the close/open, so a callback that returned `false` incidentally,
+with no intent to block anything, now silently cancels closes. Only one shape is
+at risk: an arrow function with an **expression** body, where the expression is
+the return value (`addOnClose(() => setDirty(false))`). A block body without a
+`return` cannot return anything, and a function reference is worth one look at
+its body. So the search is the expression-body call sites — `addOnClose(() =>`
+and `addOnOpen(() =>` without a following `{` — and the question at each is
+whether that expression can evaluate to `false`.
 
 ---
 
@@ -1100,8 +1178,31 @@ element now.
 + <CartesianChart emptyView={<EmptyState />} />
 ```
 
+The old form still renders — `CartesianChart` calls the value as a component
+when it is not a valid element — but logs a deprecation warning and will stop
+working in a future major version.
+
+An `emptyView` that was already an element needs nothing:
+
+```tsx
+// unchanged, both before and after
+const emptyView = <EmptyState />;
+<CartesianChart emptyView={emptyView} />;
+```
+
+Telling the two apart is what a codemod cannot do. `emptyView={X}` says nothing
+about whether `X` is a component or a value holding an element — both are
+idiomatic, both are usually capitalised, and only following the declaration
+answers it. Resolve each site by hand; the runtime warning names the ones that
+are still on the old form.
+
 **Apply:** Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}`
-instead of `emptyView={EmptyState}`.
+instead of `emptyView={EmptyState}` — wherever the value is a **component**.
+Leave it alone wherever the value is already an element, including a variable
+holding one (`const view = <EmptyState />; emptyView={view}`), which was valid
+before and still is. That distinction is why there is no codemod: an uppercase
+identifier is a naming convention, not proof, and wrapping an element in JSX
+breaks it.
 
 ---
 
