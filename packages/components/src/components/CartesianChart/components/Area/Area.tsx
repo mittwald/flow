@@ -9,6 +9,7 @@ import {
   type DataKeyWithLabel,
   isDataKeyWithLabel,
 } from "@/components/CartesianChart/types";
+import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedStackId";
 import { useDesignTokens } from "@/lib/theming";
 
 type AreaBaseProps = Pick<
@@ -44,12 +45,13 @@ export type AreaProps<TData extends ChartDataValue = ChartDataValue> =
 export const Area: FC<AreaProps> = (props) => {
   const {
     color: colorFromProps = "sea-green",
-    stackId = 1,
+    stackId: stackIdFromProps = 1,
     fillOpacity = 1,
     ...rest
   } = props;
 
   const tokens = useDesignTokens();
+  const stackId = useScopedStackId(stackIdFromProps);
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`
