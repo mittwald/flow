@@ -19,6 +19,7 @@ interface Props extends PropsWithClassName {
   isEmptyValue: boolean;
 }
 
+/** @internal */
 export const ValidationResultButton: FC<Props> = (props) => {
   const { policyValidationResult, isDisabled, isEmptyValue, className } = props;
 

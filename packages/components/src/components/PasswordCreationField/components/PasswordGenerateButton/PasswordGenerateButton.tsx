@@ -9,6 +9,7 @@ interface Props {
   onGeneratePasswordAction?: ActionFn;
 }
 
+/** @internal */
 export const PasswordGenerateButton: FC<Props> = (props) => {
   const { isDisabled, onGeneratePasswordAction } = props;
   const translate = useLocalizedStringFormatter(

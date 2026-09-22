@@ -11,6 +11,8 @@ import locales from "./../locales/*.locale.json";
  * is only read when the field receives focus. The field keeps focus while the
  * password is typed, so without a live region a screen reader reports the field
  * as invalid and never says why.
+ *
+ * @internal
  */
 export const useAriaAnnounceValidationState = (
   text: string | undefined,
@@ -39,6 +41,8 @@ export const useAriaAnnounceValidationState = (
  * Announces that the password became visible or hidden. The toggle button keeps
  * focus, and a screen reader does not report that the input switched between
  * masked characters and plain text on its own.
+ *
+ * @internal
  */
 export const useAriaAnnouncePasswordVisibility = (
   isRevealed: boolean,
