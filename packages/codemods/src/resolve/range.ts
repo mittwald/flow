@@ -197,8 +197,15 @@ export const resolveRange = async (
   // pick a version some of the others never published. Resolve instead from
   // the intersection of what every declared dependency has actually
   // published, so the version this returns is always installable.
+  // Deduplicated, because `findFlowDependencies` returns one entry per
+  // manifest *field*: a library that wraps Flow declares it in both
+  // `peerDependencies` and `devDependencies`, and that package would otherwise
+  // be fetched twice and counted twice — once per field — in every peer line it
+  // appears in (#3204 review). `dependencies` itself keeps both entries, on
+  // purpose: the two fields are reported separately, one rewritten and one left
+  // alone.
   const fetched = await fetchAllVersions(
-    dependencies.map(({ name }) => name),
+    [...new Set(dependencies.map(({ name }) => name))],
     deps.fetchVersions,
   );
   const versions = intersectVersions(fetched);

@@ -115,7 +115,7 @@ export const renderPeers = ({
       [
         ...wrap(
           paint.yellow(
-            `${summary.flowPins.length} Flow-internal peer pin(s) do not accept ${target}. Flow publishes these as exact pins, so this normally means the pinned version was never published (#2887) — install with your package manager's peer diagnostics on before trusting the result.`,
+            `${summary.flowPins.length} Flow-internal peer pin(s) do not accept ${target}. Flow publishes these as exact pins and releases only the packages that changed, so a pin usually names a neighbouring release rather than the version you are installing — your package manager will report the conflict. Rarely the pinned version was never published at all (#2887).`,
           ),
           width,
         ),

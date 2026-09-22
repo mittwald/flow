@@ -33,15 +33,19 @@ export interface PeerSummary {
    * Flow's internal peers publish as exact pins (`@mittwald/flow-remote-core`
    * peers on `@mittwald/flow-react-components: "1.1.52"`), so the expected case
    * — the pin naming the version being installed — is noise. What is not noise
-   * is a pin pointing somewhere else: with the publish holes of #2887 it can
-   * name a version its peer never published, and nothing else in the output
-   * would say so.
+   * is a pin pointing somewhere else: upgrading every declared package to one
+   * target then leaves it unsatisfied, and nothing else in the output says so.
    *
    * This is not hypothetical. Across the published history of the five remote
    * packages, 2253 of 6210 Flow-internal peer entries pin a version other than
    * the one they ship with — e.g. `flow-remote-core@0.2.0-alpha.700` peers on
-   * `ext-bridge@0.2.0-alpha.699`. Upgrading every declared package to one
-   * target leaves that pin unsatisfied.
+   * `ext-bridge@0.2.0-alpha.699`.
+   *
+   * What it usually is **not** is a publish hole. Lerna releases only the
+   * packages that changed, so the pin names a neighbouring release that exists:
+   * 2207 of those 2253 point at a published version, leaving 46 that are
+   * genuinely missing (#2887). The rendered warning leads with the common cause
+   * for that reason (#3204 review).
    */
   flowPins: PeerRequirement[];
 }

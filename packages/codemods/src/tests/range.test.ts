@@ -147,4 +147,52 @@ describe("resolveRange", () => {
 
     expect(range).toMatchObject({ current: "1.1.0" });
   });
+  // A library that wraps Flow declares it in both `peerDependencies` (what it
+  // supports) and `devDependencies` (what it builds against).
+  test("a package declared in two fields is fetched and counted once", async () => {
+    const cwd = mkdtempSync(join(tmpdir(), "flow-range-twofields-"));
+    writeFileSync(
+      join(cwd, "package.json"),
+      JSON.stringify({
+        name: "a-library-wrapping-flow",
+        peerDependencies: { "@mittwald/flow-react-components": "^1.0.1" },
+        devDependencies: { "@mittwald/flow-react-components": "^1.0.1" },
+      }),
+    );
+
+    const fetchedNames: string[] = [];
+    const range = await resolveRange(
+      "minor",
+      deps(cwd, {
+        fetchVersions: async (name) => {
+          fetchedNames.push(name);
+          return {
+            ...registry,
+            peerDependencies: {
+              "1.2.0": { react: { range: "^19.2.0", optional: false } },
+            },
+          };
+        },
+      }),
+    );
+
+    // One request, not one per field.
+    expect(fetchedNames).toEqual(["@mittwald/flow-react-components"]);
+
+    expect(range.ok).toBe(true);
+    if (range.ok) {
+      // Both fields still show up in `dependencies` — they are reported
+      // separately, one rewritten and one left alone — but the peer line names
+      // the package once.
+      expect(range.dependencies).toHaveLength(2);
+      expect(range.peers.external).toEqual([
+        {
+          peer: "react",
+          range: "^19.2.0",
+          requiredBy: ["@mittwald/flow-react-components"],
+          optionalFor: [],
+        },
+      ]);
+    }
+  });
 });

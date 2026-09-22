@@ -67,26 +67,48 @@ at the target — react, react-dom, react-hook-form, `@internationalized/date`,
 next, i18next — grouped by range and naming every package that asks for it:
 
 ```
-Peer requirements at 1.1.48 — what the Flow packages you declare ask of your
+Peer requirements at 1.2.4 — what the Flow packages you declare ask of your
 project:
 
-  react ^19.2.0
-    @mittwald/ext-bridge, @mittwald/flow-icons, @mittwald/flow-react-components
+  next ^16.2.3 — optional
+    @mittwald/flow-react-components
+  react ^19.2.0 — required
+    required by @mittwald/flow-react-components
+    optional for @mittwald/ext-bridge
 ```
+
+Each peer carries its status, because that is the question you have: **must I
+install this at all?** One package requiring it settles that, however many
+others call it optional — so `react` above reads `required`, and the two sides
+are broken out underneath. Where every package agrees, the status alone carries
+it.
+
+**Optionality is per package**, and it comes from `peerDependenciesMeta`: the
+same `react ^19.2.0` is a hard requirement of `flow-react-components` and an
+optional peer of `ext-bridge`. An optional peer need not be installed at all —
+it only has to match the range if it is. Most of what Flow peers on is optional,
+so the ranges alone would tell a Vite project it needs Next 16.
 
 Your package manager reports conflicts too, but only the ones it decides to name
 — Yarn's "`@mittwald/ext-bridge` and other dependencies" never enumerates the
-others. This list is complete, and it is printed **before** the install, so a
-failed install still leaves it on screen. `list [revision]` prints the same
-thing without touching anything.
+others. This list names every one of them, and it is printed **before** the
+install, so a failed install still leaves it on screen. `list [revision]` prints
+the same thing without touching anything.
+
+The list covers the Flow packages your `package.json` **declares**. A project
+depending only on `flow-react-components` never sees what `flow-remote-core`
+peers on, because it never asks for it.
 
 These are the ranges Flow declares, **not** a check of what you have installed.
 Nothing here reads your `node_modules`; whether your project satisfies them is
 the package manager's call during the install.
 
 A Flow-internal peer the target does not satisfy gets its own warning. Flow
-publishes those as exact pins, so it normally means the pinned version was never
-published — see the publish-hole caveat in the repository's release docs.
+publishes those as exact pins and releases only the packages that changed, so
+the pin usually names a neighbouring release rather than the version you are
+installing — your package manager will report the conflict. Rarely the pinned
+version was never published at all; see the publish-hole caveat in the
+repository's release docs.
 
 After installing, `upgrade` runs the codemod of every migration whose `since` is
 at or below the target and prints the ones with no codemod, for you to apply by
