@@ -20,6 +20,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 import { IconContrastFilled } from "@tabler/icons-react";
+import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./complex-app-doku.module.css";
 
 const lorem =
@@ -33,11 +34,7 @@ export default () => (
       wrap="wrap"
       gap="m"
     >
-      <span
-        className={styles.logo}
-        role="img"
-        aria-label="mittwald"
-      />
+      <MittwaldLogo className={styles.logo} />
       <HeaderNavigation
         aria-label="Hauptnavigation"
         className={styles.topnav}
@@ -50,14 +47,10 @@ export default () => (
           </Icon>
         </Button>
       </HeaderNavigation>
-      <Flex
-        align="center"
-        gap="s"
-        className={styles.mobileActions}
-      >
+      <HeaderNavigation className={styles.mobileActions}>
         <SearchButton />
         <MobileMenu />
-      </Flex>
+      </HeaderNavigation>
     </Flex>
 
     <Flex
@@ -92,28 +85,13 @@ export default () => (
         <Section>
           <Heading level={4}>Auf dieser Seite</Heading>
           <Navigation aria-label="Auf dieser Seite">
-            <Link
-              href="#"
-              aria-current="page"
-              className={styles.tocLink}
-            >
+            <Link href="#" aria-current="page">
               Button
             </Link>
-            <Link href="#" className={styles.tocLink}>
-              Colors
-            </Link>
-            <Link
-              href="#"
-              className={`${styles.tocLink} ${styles.tocSub}`}
-            >
-              Light und Dark
-            </Link>
-            <Link href="#" className={styles.tocLink}>
-              Sizes
-            </Link>
-            <Link href="#" className={styles.tocLink}>
-              Variants
-            </Link>
+            <Link href="#">Colors</Link>
+            <Link href="#">Light und Dark</Link>
+            <Link href="#">Sizes</Link>
+            <Link href="#">Variants</Link>
           </Navigation>
         </Section>
       </LayoutCard>
@@ -200,11 +178,7 @@ const ComponentNavigation = () => (
  */
 const MobileMenu = () => (
   <ModalTrigger>
-    <Button
-      variant="plain"
-      color="secondary"
-      aria-label="Menü öffnen"
-    >
+    <Button aria-label="Menü öffnen">
       <IconMenu />
     </Button>
     <Modal offCanvas showCloseButton>

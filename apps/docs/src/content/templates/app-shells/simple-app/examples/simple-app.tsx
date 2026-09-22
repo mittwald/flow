@@ -42,6 +42,7 @@ import {
   IconTrendingDown,
   IconTrendingUp,
 } from "@tabler/icons-react";
+import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./simple-app.module.css";
 
 const contracts = [
@@ -127,11 +128,7 @@ export default () => (
       wrap="wrap"
       gap="m"
     >
-      <span
-        className={styles.logo}
-        role="img"
-        aria-label="mittwald"
-      />
+      <MittwaldLogo className={styles.logo} />
       <HeaderNavigation
         aria-label="Hauptnavigation"
         className={styles.nav}
@@ -156,14 +153,10 @@ export default () => (
           </ContextMenu>
         </ContextMenuTrigger>
       </HeaderNavigation>
-      <Flex
-        align="center"
-        gap="s"
-        className={styles.mobileActions}
-      >
+      <HeaderNavigation className={styles.mobileActions}>
         <NotificationButton />
         <MobileMenu />
-      </Flex>
+      </HeaderNavigation>
     </Flex>
 
     <Flex elementType="main" direction="column" gap="l">
@@ -330,11 +323,7 @@ export default () => (
  * seeing without opening the menu first.
  */
 const NotificationButton = () => (
-  <Button
-    variant="plain"
-    color="secondary"
-    aria-label="Benachrichtigungen"
-  >
+  <Button aria-label="Benachrichtigungen">
     <IconNotification />
     <CounterBadge count={2} />
   </Button>
@@ -361,11 +350,7 @@ const GlobalNavigationLinks = () => (
  */
 const MobileMenu = () => (
   <ModalTrigger>
-    <Button
-      variant="plain"
-      color="secondary"
-      aria-label="Menü öffnen"
-    >
+    <Button aria-label="Menü öffnen">
       <IconMenu />
     </Button>
     <Modal offCanvas showCloseButton>

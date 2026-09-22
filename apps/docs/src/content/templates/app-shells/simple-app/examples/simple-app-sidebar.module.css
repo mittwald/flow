@@ -5,33 +5,18 @@
   height: 100%;
   overflow: hidden;
   padding-block: var(--size-px--l);
-  padding-inline: 2rem;
+  padding-inline: var(--size-px--xl);
   background: var(--color--background-gradient);
 }
 
-/*
- * The wordmark rides on `currentColor` through a CSS mask, so it follows the
- * theme. Swap the masked SVG for your own logo.
- */
+/* Sized here; the wordmark itself fills with `currentColor`. */
 .logo {
   width: 100%;
-  aspect-ratio: 300 / 57;
-
-  /* Side padding keeps the wordmark from filling the full sidebar width;
-     content-box confines both fill and mask so the padding takes effect. */
-  box-sizing: border-box;
   padding-inline: var(--size-px--xl);
+  box-sizing: border-box;
 
   /* Extra breathing room between the wordmark and the search below it. */
   margin-block-end: var(--size-px--m);
-  background: currentcolor;
-  background-clip: content-box;
-  mask: url("./mittwald.svg") no-repeat center / contain;
-  mask-origin: content-box;
-  mask-clip: content-box;
-  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
-  -webkit-mask-origin: content-box;
-  -webkit-mask-clip: content-box;
 }
 
 /* Sidebar and content fill the available height side by side. */

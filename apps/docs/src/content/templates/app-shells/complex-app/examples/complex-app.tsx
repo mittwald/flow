@@ -38,6 +38,7 @@ import {
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
+import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./complex-app.module.css";
 
 interface Mailbox {
@@ -192,11 +193,7 @@ const Topbar = () => (
     wrap="wrap"
     gap="m"
   >
-    <span
-      className={styles.logo}
-      role="img"
-      aria-label="mittwald"
-    />
+    <MittwaldLogo className={styles.logo} />
     <HeaderNavigation
       aria-label="Hauptnavigation"
       className={styles.topnav}
@@ -222,15 +219,11 @@ const Topbar = () => (
         </ContextMenu>
       </ContextMenuTrigger>
     </HeaderNavigation>
-    <Flex
-      align="center"
-      gap="s"
-      className={styles.mobileActions}
-    >
+    <HeaderNavigation className={styles.mobileActions}>
       <SearchButton />
       <NotificationButton />
       <MobileMenu />
-    </Flex>
+    </HeaderNavigation>
   </Flex>
 );
 
@@ -249,11 +242,7 @@ const SearchButton = () => (
 );
 
 const NotificationButton = () => (
-  <Button
-    variant="plain"
-    color="secondary"
-    aria-label="Benachrichtigungen"
-  >
+  <Button aria-label="Benachrichtigungen">
     <IconNotification />
     <CounterBadge count={2} />
   </Button>
@@ -266,11 +255,7 @@ const NotificationButton = () => (
  */
 const MobileMenu = () => (
   <ModalTrigger>
-    <Button
-      variant="plain"
-      color="secondary"
-      aria-label="Menü öffnen"
-    >
+    <Button aria-label="Menü öffnen">
       <IconMenu />
     </Button>
     <Modal offCanvas showCloseButton>

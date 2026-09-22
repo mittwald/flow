@@ -22,6 +22,7 @@ import {
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
+import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./simple-app-sidebar.module.css";
 
 type Status = "Bezahlt" | "Offen" | "Überfällig";
@@ -111,11 +112,7 @@ export default () => {
     <Flex direction="column" gap="l" className={styles.app}>
       <Flex gap="l" align="stretch" className={styles.body}>
         <LayoutCard className={styles.sidebar}>
-          <span
-            className={styles.logo}
-            role="img"
-            aria-label="mittwald"
-          />
+          <MittwaldLogo className={styles.logo} />
           <AreaNavigation />
           <Flex
             direction="column"
