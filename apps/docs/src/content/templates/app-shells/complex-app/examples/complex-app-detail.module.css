@@ -29,17 +29,6 @@
   margin-inline-start: auto;
 }
 
-/* The bell carries a small count badge in its top-inline-end corner. */
-.notify {
-  position: relative;
-}
-
-.notifyBadge {
-  position: absolute;
-  top: -0.25rem;
-  inset-inline-end: -0.25rem;
-}
-
 /* Sidebar and content fill the space between top bar and footer. */
 .body {
   flex: 1;
@@ -49,7 +38,6 @@
 /* The navigation card keeps a fixed width beside the flexible content. */
 .sidebar {
   flex: 0 0 17rem;
-  gap: var(--size-px--m);
 }
 
 .main {

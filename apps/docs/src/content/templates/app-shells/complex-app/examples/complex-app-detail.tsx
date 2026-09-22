@@ -268,13 +268,9 @@ const NotificationButton = () => (
     variant="plain"
     color="secondary"
     aria-label="Benachrichtigungen"
-    className={styles.notify}
   >
     <IconNotification />
-    <CounterBadge
-      count={2}
-      className={styles.notifyBadge}
-    />
+    <CounterBadge count={2} />
   </Button>
 );
 
@@ -317,8 +313,10 @@ const MobileMenu = () => (
 
 const ProjectSidebar = () => (
   <LayoutCard className={styles.sidebar}>
-    <Heading level={2}>Mein Projekt</Heading>
-    <ProjectNavigation />
+    <Section>
+      <Heading>Mein Projekt</Heading>
+      <ProjectNavigation />
+    </Section>
   </LayoutCard>
 );
 

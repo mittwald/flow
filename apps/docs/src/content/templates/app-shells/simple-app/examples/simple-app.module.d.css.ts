@@ -3,8 +3,6 @@ declare const classNames: {
   readonly logo: "logo";
   readonly nav: "nav";
   readonly mobileActions: "mobileActions";
-  readonly notify: "notify";
-  readonly notifyBadge: "notifyBadge";
   readonly visuallyHidden: "visuallyHidden";
   readonly stat: "stat";
   readonly statValue: "statValue";

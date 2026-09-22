@@ -334,13 +334,9 @@ const NotificationButton = () => (
     variant="plain"
     color="secondary"
     aria-label="Benachrichtigungen"
-    className={styles.notify}
   >
     <IconNotification />
-    <CounterBadge
-      count={2}
-      className={styles.notifyBadge}
-    />
+    <CounterBadge count={2} />
   </Button>
 );
 

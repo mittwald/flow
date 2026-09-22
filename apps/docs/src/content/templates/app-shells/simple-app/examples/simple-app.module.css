@@ -29,17 +29,6 @@
   margin-inline-start: auto;
 }
 
-/* The bell carries a small count badge in its top-inline-end corner. */
-.notify {
-  position: relative;
-}
-
-.notifyBadge {
-  position: absolute;
-  top: -0.25rem;
-  inset-inline-end: -0.25rem;
-}
-
 /* Keeps the heading in the accessibility tree while hiding it visually. */
 .visuallyHidden {
   position: absolute;
