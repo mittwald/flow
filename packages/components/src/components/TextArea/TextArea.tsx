@@ -6,7 +6,12 @@ import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
-import { type PropsWithChildren, useEffect, useState } from "react";
+import {
+  type PropsWithChildren,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
@@ -48,12 +53,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
     className,
     onChange,
     isReadOnly,
+    value,
     ...rest
   } = useControlledHostValueProps(props, "");
-
-  const [charactersCount, setCharactersCount] = useState(
-    props.defaultValue?.length ?? props.value?.length ?? 0,
-  );
 
   if (allowHorizontalResize !== undefined) {
     warnDeprecation(
@@ -97,9 +99,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
       return;
     }
 
-    if (showCharacterCount) {
-      setCharactersCount(v.length);
-    }
     if (onChange) {
       onChange(v);
     }
@@ -107,8 +106,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
 
   const translation = useLocalizedStringFormatter(locales, "TextArea");
 
+  // Derived, so that a value the field never saw typed is counted as well.
   const charactersCountDescription = translation.format("characters", {
-    count: charactersCount,
+    count: value.length,
     maxCount: props.maxLength ?? 0,
   });
 
@@ -162,20 +162,28 @@ export const TextArea = flowComponent("TextArea", (props) => {
     };
   }, [resized]);
 
-  const updateHeight = () => {
-    if (localRef.current && autoResizable && !verticallyResizable) {
-      // https://stackoverflow.com/a/60795884
-      localRef.current.style.height = "0px";
-      const scrollHeight = localRef.current.scrollHeight;
-      // + 2 to add border height
-      localRef.current.style.height = scrollHeight + 2 + "px";
+  /*
+   * The height depends on the rendered content, so it cannot be a style. It is
+   * synced to the value instead of to the `change` event, because a value the
+   * field never saw typed — an initial value, or a draft loaded into a
+   * controlled field — has to resize it just the same.
+   */
+  useLayoutEffect(() => {
+    const textArea = localRef.current;
+    if (!textArea || !autoResizable || verticallyResizable) {
+      return;
     }
-  };
+    // https://stackoverflow.com/a/60795884
+    textArea.style.height = "0px";
+    // + 2 to add border height
+    textArea.style.height = `${textArea.scrollHeight + 2}px`;
+  }, [value, autoResizable, verticallyResizable]);
 
   return (
     <Aria.TextField
       {...rest}
       {...fieldProps}
+      value={value}
       className={rootClassName}
       onChange={handleChange}
     >
@@ -189,7 +197,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
           placeholder={placeholder}
           className={inputClassName}
           ref={localRef}
-          onChange={updateHeight}
           style={{
             caretColor: isReadOnly ? "transparent" : undefined,
             minHeight: getHeight(rows),
