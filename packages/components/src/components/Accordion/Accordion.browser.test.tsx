@@ -59,3 +59,20 @@ test("defaultExpanded renders the content expanded", async () => {
   await expect.element(toggle()).toHaveAttribute("aria-expanded", "true");
   await expect.element(content()).toBeVisible();
 });
+
+/*
+ * The toggle is the element the press came from, so it has to survive the state
+ * change it triggers – a header button that React remounts takes the focus with
+ * it and drops the user back on the document.
+ */
+test("the toggle keeps the focus it received", async () => {
+  renderAccordion(true);
+
+  await toggle().click();
+
+  await expect.element(toggle()).toHaveFocus();
+
+  await toggle().click();
+
+  await expect.element(toggle()).toHaveFocus();
+});
