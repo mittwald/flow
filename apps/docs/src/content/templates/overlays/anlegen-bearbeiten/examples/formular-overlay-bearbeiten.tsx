@@ -4,10 +4,10 @@ import {
   Button,
   ColumnLayout,
   Content,
-  FieldDescription,
   Heading,
   Label,
   Modal,
+  NumberField,
   Section,
   Switch,
   TextField,
@@ -25,12 +25,12 @@ export default () => {
 
   const form = useForm<{
     description: string;
-    storageInGb: string;
+    storageInGb: number;
     spamProtection: boolean;
   }>({
     defaultValues: {
       description: "Persönliches Postfach",
-      storageInGb: "2",
+      storageInGb: 2,
       spamProtection: true,
     },
   });
@@ -59,9 +59,6 @@ export default () => {
                 <Field name="description">
                   <TextField>
                     <Label>Beschreibung</Label>
-                    <FieldDescription>
-                      Nur für dich sichtbar.
-                    </FieldDescription>
                   </TextField>
                 </Field>
                 <Field
@@ -71,9 +68,15 @@ export default () => {
                       "Bitte gib einen Speicherplatz an",
                   }}
                 >
-                  <TextField>
-                    <Label>Speicherplatz in GB</Label>
-                  </TextField>
+                  <NumberField
+                    minValue={1}
+                    formatOptions={{
+                      style: "unit",
+                      unit: "gigabyte",
+                    }}
+                  >
+                    <Label>Speicherplatz</Label>
+                  </NumberField>
                 </Field>
               </ColumnLayout>
 

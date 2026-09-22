@@ -117,12 +117,14 @@ export default () => {
                     "Bitte gib einen Speicherplatz an",
                 }}
               >
-                <NumberField minValue={1}>
-                  <Label>Speicherplatz in GB</Label>
-                  <FieldDescription>
-                    Der Speicherplatz lässt sich später
-                    jederzeit ändern.
-                  </FieldDescription>
+                <NumberField
+                  minValue={1}
+                  formatOptions={{
+                    style: "unit",
+                    unit: "gigabyte",
+                  }}
+                >
+                  <Label>Speicherplatz</Label>
                 </NumberField>
               </Field>
 
