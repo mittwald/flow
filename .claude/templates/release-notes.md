@@ -8,7 +8,7 @@
   - Inline code only for what the reader types or matches: prop names, values,
     commands, symbols, package names. Version numbers and component names in
     running prose stay plain — a paragraph of code chips stops the eye at every
-    token and is what made the 1.0.0 notes hard to read (#3039).
+    token.
   - Minor/major only — patches release separately, so there is NO Fixes section.
     Fold a user-relevant fix into the related feature's text if it matters.
   - Drop noise entirely: chore/deps/release bumps, internal refactors, CI.
