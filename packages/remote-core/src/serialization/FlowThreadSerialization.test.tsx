@@ -462,10 +462,21 @@ describe("values structured clone handles itself", () => {
  * The counterpart to the list above, and the reason it is a list and not
  * "everything that is not a basic object": a `URL` is not structured-cloneable.
  * Adding it to `isSerializableByBase` would turn a silently emptied object into
- * a `DataCloneError` that takes down the whole mutation batch. Giving it a named
- * serializer would break older peers. It stays broken on purpose — if a prop
- * ever needs one, send the string.
+ * a `DataCloneError` — and the send takes the whole mutation batch with it, so
+ * the cure is worse than the disease. A named serializer would break older
+ * peers. It stays flattened on purpose; if a prop ever needs one, send the
+ * string.
+ *
+ * Asserting the flattened result is what makes this a guard rather than a note:
+ * claim `URL` in `isSerializableByBase` and this send throws instead.
  */
-test("a URL cannot be sent, because structured clone refuses it", () => {
+test("a URL stays flattened, because structured clone refuses it", async () => {
+  const received = await sendThroughThread({
+    href: new URL("https://example.com/a?b=c"),
+  });
+
+  expect(received).toStrictEqual({ href: {} });
+
+  // the reason it cannot simply join the list above
   expect(() => structuredClone(new URL("https://example.com"))).toThrow();
 });
