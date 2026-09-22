@@ -139,22 +139,8 @@
         "build:status-registry"
       ]
     },
-    "test:browser": {
-      "dependsOn": [
-        {
-          "projects": ["tokens"],
-          "target": "build"
-        }
-      ]
-    },
     "test:browser:dev": {
-      "cache": true,
-      "dependsOn": [
-        {
-          "projects": ["tokens"],
-          "target": "build"
-        }
-      ]
+      "cache": true
     }
   }
 }
