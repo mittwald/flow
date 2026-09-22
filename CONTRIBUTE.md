@@ -667,6 +667,25 @@ Enforced conventions (see `eslint.config.js` / `.prettierrc.json`):
 - `import type { … }` for type-only imports (separated from value imports).
 - Unused variables are errors — intentionally-unused ones need `ignored` in
   their name (e.g. `argIgnored`).
+- No `forwardRef` — React 19 passes `ref` as a normal prop.
+- No `as keyof typeof styles` — index `styles` with a narrow union, or use
+  `styleClassname(styles, key)` for a string-typed key.
+- The name in `flowComponent("<Name>", …)` matches the file it lives in.
+- `stories/lib.tsx` fixtures stay in stories; component code doesn't import
+  them.
+- Colors in a component's `*.module.scss` come from design tokens — no hex,
+  `rgb()` or `hsl()` literals.
+- Vite/vitest configs and everything they import spell out import extensions and
+  give JSON imports a `with { type: "json" }` attribute.
+
+Three conventions that no type or lint rule can see are checked as tests in
+`packages/components/dev/conventions/` (they run with
+`pnpm nx test:unit components`):
+
+- A component is either `@flr-generate` or exported from `flr-universal.ts` —
+  never both.
+- Every `PropsContext` entry names a remote-capable component.
+- Every `locales/` directory carries all languages, with the same keys in each.
 
 ## Commit conventions
 
