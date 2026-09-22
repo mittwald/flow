@@ -33,9 +33,10 @@ export interface FlowComponentProps<R = HTMLDivElement>
    * A React element the component is wrapped with. The element is cloned and
    * receives the component as its only child — useful to render the component
    * inside a link, a tooltip trigger or any other wrapper without changing the
-   * surrounding markup.
+   * surrounding markup. `null` takes a wrapper a surrounding props context set
+   * back off, the way `tunnel: null` does for a tunnel.
    */
-  wrapWith?: ReactElement;
+  wrapWith?: ReactElement | null;
 }
 
 export type FlowComponentImplementationProps<C extends FlowComponentName> =
@@ -142,7 +143,11 @@ export function flowComponent<C extends FlowComponentName>(
 
     if (tunnel) {
       element = (
-        <UiComponentTunnelEntry id={tunnel.id} component={tunnel.component}>
+        <UiComponentTunnelEntry
+          id={tunnel.id}
+          component={tunnel.component}
+          staticEntryId={tunnel.staticEntryId}
+        >
           {element}
         </UiComponentTunnelEntry>
       );

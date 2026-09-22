@@ -50,7 +50,7 @@ export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
         <LiveCodeEditor
           editorDisabled
           code={code}
-          className={clsx(styles.doAndDontCode, mobile && styles.mobileCode)}
+          className={styles.doAndDontCode}
           mobile={mobile}
           {...rest}
         />

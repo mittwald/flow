@@ -44,7 +44,13 @@ export default function Page() {
               });
             }}
           </DemoList.LoaderAsync>
-          <DemoList.Item textValue={(d) => d.name} showTiles>
+          {/* The href makes the host render a real anchor, so the browser's
+              context menu, middle-click and modifier-click work on an item. */}
+          <DemoList.Item
+            textValue={(d) => d.name}
+            href={(d) => `#${d.name}`}
+            showTiles
+          >
             {(d) => {
               const c = useModalController();
               return (

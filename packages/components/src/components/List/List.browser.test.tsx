@@ -9,9 +9,10 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { use, useState, type ReactNode } from "react";
-import { test } from "vitest";
+import { use, useState, useSyncExternalStore, type ReactNode } from "react";
+import { test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
+import { RouterProvider } from "react-aria-components";
 import {
   SettingsProvider,
   type SettingsBackend,
@@ -19,6 +20,8 @@ import {
 } from "../SettingsProvider";
 import { FilterValue } from "./model/filter/FilterValue";
 import Content from "../Content";
+import { Heading } from "../Heading";
+import { ContextMenu, MenuItem } from "../ContextMenu";
 
 interface Data {
   num: number;
@@ -650,5 +653,263 @@ describe("Item rendering", () => {
     await expect
       .element(page.getByText("Item: 42 unselected"))
       .toBeInTheDocument();
+  });
+
+  // A render function whose identity never changes leaves the memoized item no
+  // signal to follow — `dependencies` is the consumer's way to give it one.
+  const store = {
+    selected: [] as number[],
+    version: 0,
+    listeners: new Set<() => void>(),
+    toggle(num: number) {
+      store.selected = store.selected.includes(num)
+        ? store.selected.filter((n) => n !== num)
+        : [...store.selected, num];
+      store.version++;
+      store.listeners.forEach((listener) => listener());
+    },
+  };
+
+  const subscribeToStore = (listener: () => void) => {
+    store.listeners.add(listener);
+    return () => {
+      store.listeners.delete(listener);
+    };
+  };
+
+  const renderStoreItem = ({ num }: Data) => (
+    <span>
+      Item: {num} {store.selected.includes(num) ? "selected" : "unselected"}
+    </span>
+  );
+
+  const storeItemTextValue = ({ num }: Data) => String(num);
+
+  const toggleStoreItem = ({ num }: Data) => {
+    store.toggle(num);
+  };
+
+  const StoreList = () => {
+    const version = useSyncExternalStore(subscribeToStore, () => store.version);
+
+    return (
+      <List aria-label="Test" onAction={toggleStoreItem}>
+        <ListStaticData<Data> data={selectableData} />
+        <ListItem<Data> textValue={storeItemTextValue} dependencies={[version]}>
+          {renderStoreItem}
+        </ListItem>
+      </List>
+    );
+  };
+
+  test("items follow the dependencies a stable render function declares", async () => {
+    store.selected = [];
+    store.version = 0;
+
+    await render(<StoreList />);
+
+    await userEvent.click(page.getByText("Item: 42 unselected"));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByText("Item: 42 selected"));
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+  });
+});
+
+describe("Item hover", () => {
+  // The item's hover background is carved out for the bottom content, which
+  // carries its own interactive elements. The carve-out is a `:has()` rule in
+  // Item.module.scss matching a class ListItemViewContent applies — a coupling
+  // across two files that no other test would notice going stale.
+  const HoverableList = () => (
+    <List aria-label="Test" onAction={() => undefined}>
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
+      <ListItem<Data> textValue={({ num }) => String(num)}>
+        {({ num }) => (
+          <ListItemView>
+            <Content>Top {num}</Content>
+            <Content slot="bottom">Bottom {num}</Content>
+          </ListItemView>
+        )}
+      </ListItem>
+    </List>
+  );
+
+  const topContent = page.getByText("Top 42");
+  const bottomContent = page.getByText("Bottom 42");
+  const hoveredRow = page.getByRole("row").nth(0);
+  // Never hovered, so it shows the default background whatever the pointer did
+  // before this test — reading the hovered item's own "before" state would not,
+  // since the pointer may already rest on it at render time.
+  const restingRow = page.getByRole("row").nth(1);
+
+  test("bottom content does not trigger the item hover background", async () => {
+    await render(<HoverableList />);
+
+    const backgrounds = () => [
+      getComputedStyle(hoveredRow.element()).backgroundColor,
+      getComputedStyle(restingRow.element()).backgroundColor,
+    ];
+
+    await userEvent.hover(topContent);
+    await expect.poll(() => backgrounds()[0]).not.toBe(backgrounds()[1]);
+
+    await userEvent.hover(bottomContent);
+    await expect.poll(() => backgrounds()[0]).toBe(backgrounds()[1]);
+  });
+});
+
+describe("Linked items", () => {
+  const itemHref = `${location.origin}/domains/42`;
+
+  let navigate: Mock;
+  let onAction: Mock;
+  let menuAction: Mock;
+
+  beforeEach(() => {
+    navigate = vitest.fn();
+    onAction = vitest.fn();
+    menuAction = vitest.fn();
+  });
+
+  const getTestElementWithLink = (target?: string) => (
+    <RouterProvider navigate={navigate}>
+      <List aria-label="Test" onAction={onAction}>
+        <ListStaticData<Data> data={[{ num: 42 }]} />
+        <ListItem<Data>
+          textValue={({ num }) => String(num)}
+          href={({ num }) => `${location.origin}/domains/${num}`}
+          target={target}
+        >
+          {({ num }) => (
+            <ListItemView>
+              <Heading>Item: {num}</Heading>
+              <ContextMenu onAction={menuAction}>
+                <MenuItem id="delete">Delete</MenuItem>
+              </ContextMenu>
+            </ListItemView>
+          )}
+        </ListItem>
+      </List>
+    </RouterProvider>
+  );
+
+  const row = page.getByRole("row");
+  const optionsButton = page.getByRole("button", { name: "Options" });
+
+  const getRowLink = async () =>
+    (await row.element()).querySelector<HTMLAnchorElement>("a");
+
+  test("a linked item renders a real anchor carrying the item's href", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    // Only a real <a href> gives the browser something to offer in its context
+    // menu and to open on a middle- or modifier-click.
+    expect(await getRowLink()).toHaveAttribute("href", itemHref);
+  });
+
+  test("the anchor carries the item's link target", async () => {
+    await render(getTestElementWithLink("_blank"));
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    expect(await getRowLink()).toHaveAttribute("target", "_blank");
+  });
+
+  test("an item without a href renders no anchor", async () => {
+    await render(getTestElement([42]));
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    expect((await row.element()).querySelector("a")).toBeNull();
+  });
+
+  test("the anchor adds neither a tab stop nor a second link for screen readers", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    // The row keeps owning activation and semantics — the anchor exists purely
+    // for the browser's own link affordances. It also has to stay untabbable
+    // because react-aria treats a tabbable descendant as interactive content
+    // and then stops the row's own press.
+    const link = await getRowLink();
+    expect(link?.tabIndex).toBe(-1);
+    expect(link).toHaveAttribute("aria-hidden", "true");
+  });
+
+  test("the anchor sits under the pointer, interactive content above it", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(optionsButton).toBeInTheDocument();
+
+    const elementAtCenterOf = (element: Element) => {
+      const { left, top, width, height } = element.getBoundingClientRect();
+      return document.elementFromPoint(left + width / 2, top + height / 2);
+    };
+
+    // The browser's context menu acts on whatever sits under the pointer, so
+    // the anchor has to win over the item's plain content …
+    const link = await getRowLink();
+    expect(elementAtCenterOf(await page.getByText("Item: 42").element())).toBe(
+      link,
+    );
+
+    // … and lose against everything the user is meant to interact with.
+    const button = await optionsButton.element();
+    expect(button.contains(elementAtCenterOf(button))).toBe(true);
+  });
+
+  test("clicking a linked item navigates exactly once", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    await userEvent.click(row);
+
+    // Both the anchor's default action and react-aria's press handler could
+    // navigate — react-aria cancels the former, so this must stay at one.
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledWith(itemHref, undefined);
+    expect(onAction).toHaveBeenCalledTimes(1);
+  });
+
+  test("keyboard activation navigates", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    (await row.element()).focus();
+    await userEvent.keyboard("{Enter}");
+
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledWith(itemHref, undefined);
+  });
+
+  test("a nested context menu stays clickable and does not trigger the item", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(optionsButton).toBeInTheDocument();
+
+    await userEvent.click(optionsButton);
+    await expect
+      .element(page.getByRole("menuitem", { name: "Delete" }))
+      .toBeInTheDocument();
+
+    // Regression guard for #1250's first attempt (#2420, reverted): pressing
+    // interactive content inside an item must not additionally run the item's
+    // action or follow its link.
+    expect(onAction).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
+  });
+
+  test("a nested menu item runs its own action only", async () => {
+    await render(getTestElementWithLink());
+    await expect.element(optionsButton).toBeInTheDocument();
+
+    await userEvent.click(optionsButton);
+    await userEvent.click(page.getByRole("menuitem", { name: "Delete" }));
+
+    expect(menuAction).toHaveBeenCalledWith("delete", undefined);
+    expect(onAction).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
   });
 });

@@ -5,6 +5,7 @@ import Content from "@/components/Content";
 import Heading from "@/components/Heading";
 import Label from "@/components/Label";
 import ModalTrigger from "@/components/Modal/components/ModalTrigger";
+import Skeleton from "@/components/Skeleton";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
@@ -70,6 +71,60 @@ test("Modal can be controlled with modal controller", async () => {
 
   await userEvent.click(openModalButton);
   expect(modalText).toBeInTheDocument();
+});
+
+/*
+ * Nothing inside a mounted modal may cross React's controlled/uncontrolled
+ * line. #3026 read the nine warnings this file used to emit as a flip of the
+ * modal's own open state; they came from the `TextField` in the tests below,
+ * whose value only became controlled once the first keystroke landed.
+ */
+test("Modal and its fields stay on one side of the controlled line", async () => {
+  const warn = vitest.spyOn(console, "warn");
+
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ModalTrigger>
+        <Button>Open Modal</Button>
+        <Modal>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form form={form} onSubmit={vitest.fn()}>
+              <Field name="testField">
+                <TextField aria-label="Test field" />
+              </Field>
+            </Form>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button>Close modal</Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  };
+
+  try {
+    const dom = await render(<Test />);
+
+    await userEvent.click(
+      dom.getByRole("button", { name: "Open Modal", exact: true }),
+    );
+    await userEvent.type(dom.getByRole("textbox"), "Some changes");
+    await userEvent.click(
+      dom.getByRole("button", { name: "Close modal", exact: true }),
+    );
+    expect(dom.getByTestId("modal-text")).not.toBeInTheDocument();
+
+    expect(warn.mock.calls.flat().join("\n")).not.toContain(
+      "uncontrolled to controlled",
+    );
+  } finally {
+    warn.mockRestore();
+  }
 });
 
 test("Modal with dirty form requires confirmation", async () => {
@@ -766,6 +821,14 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
               <Label>Pilot {index + 1}</Label>
             </TextField>
           ))}
+          {/* `position: relative`, so without the sticky elements' z-index it
+              would paint over the header it scrolls underneath. */}
+          <Skeleton />
+          {Array.from({ length: 12 }, (_, index) => (
+            <TextField key={index}>
+              <Label>Gunner {index + 1}</Label>
+            </TextField>
+          ))}
         </Content>
         <ActionGroup>
           <Action closeModal>
@@ -792,6 +855,27 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
     // at rest the header sticks to the top and the footer to the bottom
     expect(getComputedStyle(header).position).toBe("sticky");
     expect(getComputedStyle(footer).position).toBe("sticky");
+
+    // The dialog is a stacking context, so the sticky z-index above cannot
+    // leak out of it into the overlay.
+    expect(getComputedStyle(dialog).isolation).toBe("isolate");
+
+    // Scroll the positioned skeleton up under the header: it comes later in the
+    // DOM, so the sticky z-index is what keeps the header painted on top.
+    const skeleton = dialog.querySelector('[class*="skeleton"]') as HTMLElement;
+    dialog.scrollTop +=
+      skeleton.getBoundingClientRect().top - header.getBoundingClientRect().top;
+    await vitest.waitFor(() => {
+      expect(skeleton.getBoundingClientRect().top).toBeCloseTo(
+        header.getBoundingClientRect().top,
+        0,
+      );
+    });
+
+    const { x, y, width, height } = skeleton.getBoundingClientRect();
+    expect(
+      header.contains(document.elementFromPoint(x + width / 2, y + height / 2)),
+    ).toBe(true);
   } finally {
     await page.viewport(1280, 720);
   }

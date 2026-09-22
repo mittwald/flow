@@ -4,7 +4,7 @@ import {
   Area,
   Bar,
   CartesianChart,
-  CartesianGrid,
+  ChartGrid,
   ChartTooltip,
   Heading,
   IconMonitoring,
@@ -52,7 +52,7 @@ export default function Page() {
   const ExampleChart: FC<{ data: Record<string, unknown>[] }> = ({ data }) => {
     return (
       <CartesianChart emptyView={emptyView} data={data} height="300px">
-        <CartesianGrid />
+        <ChartGrid />
         <Area dataKey="Shields" />
         <Area dataKey="Hull" color="palatinate-blue" />
         <XAxis dataKey="time" />
@@ -75,7 +75,7 @@ export default function Page() {
 
     return (
       <CartesianChart data={data} height="300px" layout={layout}>
-        <CartesianGrid vertical={vertical} horizontal={!vertical} />
+        <ChartGrid vertical={vertical} horizontal={!vertical} />
         <Bar dataKey="Shields" />
         <Bar dataKey="Hull" color="palatinate-blue" />
         {vertical ? <XAxis unit="%" /> : <XAxis dataKey="time" />}

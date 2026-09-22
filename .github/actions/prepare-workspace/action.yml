@@ -1,14 +1,5 @@
 name: Prepare workspace
-description:
-  Node, pnpm and the workspace dependencies, plus the nx cache the test jobs
-  share.
-
-inputs:
-  nx-cache:
-    description:
-      Restore nx's local task cache. Every job that builds workspace packages
-      before it can test wants this; a job that only lints does not.
-    default: "true"
+description: Node, pnpm and the workspace dependencies.
 
 runs:
   using: composite
@@ -26,16 +17,16 @@ runs:
       shell: bash
       run: pnpm install --frozen-lockfile
 
-    # Restore only. Every job below builds the same workspace packages through
-    # `^build` before it can test, and a hit turns those ~40s into unpacking.
-    # Only `main` writes the cache (see test.yml): a cache created on a PR branch
-    # is visible to that branch alone, while the default branch's is visible to
-    # every PR.
-    - name: Restore the nx cache
-      if: inputs.nx-cache == 'true'
-      uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-      with:
-        path: .nx/cache
-        key: nx-${{ runner.os }}-${{ github.sha }}
-        restore-keys: |
-          nx-${{ runner.os }}-
+    # There is deliberately no nx cache here, and restoring one is futile: nx 20
+    # replaced the file-system cache with a database keyed by the machine ID —
+    # `/etc/machine-id` on Linux, which every hosted runner generates fresh. A
+    # restored `.nx/cache` is artifacts nx has no metadata for, so it warns
+    # "Unrecognized Cache Artifacts" and rebuilds everything; a restored
+    # `.nx/workspace-data` is a database under a filename nx never opens. The
+    # old escape hatches are gone too — `DbCache` ignores
+    # NX_REJECT_UNKNOWN_LOCAL_CACHE, and `useLegacyCache` no longer exists.
+    #
+    # This cost 4s a job to download 15MB and then miss every task. Sharing
+    # build results across runners needs a remote cache (Nx Cloud, or nx's
+    # self-hosted cache API); until there is one, every job pays its own
+    # `^build`.

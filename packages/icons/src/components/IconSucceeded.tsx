@@ -1,4 +1,8 @@
 /* auto-generated file */
-import { IconCheck as Icon } from "@tabler/icons-react";
+/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+import { createTablerIcon } from "../lib/createTablerIcon.ts";
 import type { FC } from "react";
-export const IconSucceeded = Icon as FC;
+
+export const IconSucceeded = createTablerIcon("outline", "check", "Check", [
+  ["path", { d: "M5 12l5 5l10 -10" }],
+]) as FC;

@@ -1,9 +1,13 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { mergeConfig } from "vite";
-import { preserveUseClientBanner } from "../core";
+import {
+  libraryBuildChecks,
+  preserveUseClientBanner,
+  publishedDtsOptions,
+} from "../core/src/index.ts";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
-import baseConfig from "./vite.config";
+import baseConfig from "./vite.config.ts";
 
 export default mergeConfig(baseConfig, {
   build: {
@@ -21,6 +25,7 @@ export default mergeConfig(baseConfig, {
       formats: ["es"],
     },
     rolldownOptions: {
+      checks: libraryBuildChecks,
       output: {
         format: "es",
         preserveModules: true,
@@ -29,12 +34,5 @@ export default mergeConfig(baseConfig, {
       },
     },
   },
-  plugins: [
-    preserveDirectives(),
-    externalizeDeps(),
-    dts({
-      include: ["src"],
-      outDirs: "dist/types",
-    }),
-  ],
+  plugins: [preserveDirectives(), externalizeDeps(), dts(publishedDtsOptions)],
 });

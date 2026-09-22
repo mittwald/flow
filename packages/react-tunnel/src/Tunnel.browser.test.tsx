@@ -57,6 +57,34 @@ test("Content from entry is rendered in exit", async () => {
   expect(dom.getByTestId("entry")).toHaveTextContent("");
 });
 
+// Regression guard for the first client commit. Anything that inspects the DOM
+// in a layout effect — react-aria's `useSlot`, which decides whether a slotted
+// `<Label>` exists — only ever sees the first commit. A tunnelled child that
+// arrives after it is invisible, and react-aria then warns about a missing
+// accessible name (mittwald/flow#3015).
+test("Content from entry is in the DOM in the first commit", async () => {
+  const seenInLayoutEffect: string[] = [];
+
+  const Probe: FC<PropsWithChildren> = (props) => {
+    const ref = React.useRef<HTMLDivElement>(null);
+    React.useLayoutEffect(() => {
+      seenInLayoutEffect.push(ref.current?.textContent ?? "");
+    }, []);
+    return <div ref={ref}>{props.children}</div>;
+  };
+
+  await render(
+    <Probe>
+      <TunnelProvider>
+        <TunnelEntry>Hello!</TunnelEntry>
+        <TunnelExit />
+      </TunnelProvider>
+    </Probe>,
+  );
+
+  expect(seenInLayoutEffect).toEqual(["Hello!"]);
+});
+
 test("Content from entry is rendered in exit when using same tunnel ids", async () => {
   const dom = await render(
     <TunnelProvider>
@@ -355,6 +383,70 @@ test("Order of multiple children is changed when entries are changing", async ()
   expect(dom.getByTestId("exit")).toHaveTextContent("ACB");
 });
 
+describe("Static entry id", () => {
+  /*
+   * A `staticEntryId` is shared on purpose: react-aria renders collection
+   * children twice — once into its hidden collection document, once for real —
+   * and both renders register the same entry. With a generated id each render
+   * became its own entry and the exit rendered every element twice.
+   */
+  test("Entries sharing a static entry id are rendered once", async () => {
+    const dom = await render(
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit />
+        </div>
+        <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+        <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+      </TunnelProvider>,
+    );
+
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+  });
+
+  test("Content stays while one of the entries sharing a static entry id unmounts", async () => {
+    const Test: FC<{ renderSecondEntry: boolean }> = (props) => (
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit />
+        </div>
+        <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+        {props.renderSecondEntry && (
+          <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+        )}
+      </TunnelProvider>
+    );
+
+    const dom = await render(<Test renderSecondEntry />);
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+
+    await dom.rerender(<Test renderSecondEntry={false} />);
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+  });
+
+  test("Content is removed once the last entry sharing a static entry id unmounts", async () => {
+    const Test: FC<{ renderEntries: boolean }> = (props) => (
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit />
+        </div>
+        {props.renderEntries && (
+          <>
+            <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+            <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+          </>
+        )}
+      </TunnelProvider>
+    );
+
+    const dom = await render(<Test renderEntries />);
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+
+    await dom.rerender(<Test renderEntries={false} />);
+    expect(dom.getByTestId("exit")).toHaveTextContent("");
+  });
+});
+
 vitest.useFakeTimers();
 
 test("Content is not rendered if removing previously suspended tunnel entry", async () => {
@@ -484,7 +576,7 @@ describe("Nested tunnel provider", () => {
 describe("SSR hydration", () => {
   test("getEntries is a pure read, idempotent across repeated render invocations", () => {
     const state = new TunnelState();
-    state.setRenderPhaseChildren("default", "entry-1", 0, "Hello!");
+    state.setRenderPhaseChildren("default", "entry-1", "owner-1", 0, "Hello!");
 
     // Read render-phase children (as the exit does during SSR / first render).
     const first = state.getEntries("default", true);

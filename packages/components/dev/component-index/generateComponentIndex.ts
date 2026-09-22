@@ -5,8 +5,9 @@ import path from "path";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { buildComponentIndex, type StatusEntry } from "./buildComponentIndex";
 import { parseFlrUniversalComponentNames } from "../status-registry/parseFlrUniversalComponentNames";
+import { docPropertiesInternalFile } from "../docProperties";
 
-const DOC_PROPERTIES_FILE = "./dist/assets/doc-properties.json";
+const DOC_PROPERTIES_FILE = docPropertiesInternalFile;
 const STATUS_FILE = "./src/status/component-status.json";
 const FLR_UNIVERSAL_FILE = "./src/index/flr-universal.ts";
 const PACKAGE_JSON_FILE = "./package.json";

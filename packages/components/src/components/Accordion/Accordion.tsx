@@ -78,6 +78,7 @@ export const Accordion: FC<AccordionProps> = flowComponent(
         children: dynamic((props) => (
           <HeaderButton>{props.children}</HeaderButton>
         )),
+        Button: { size: "m" },
       },
       Label: {
         className: styles.header,

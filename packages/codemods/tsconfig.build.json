@@ -2,6 +2,10 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "dist",
+    // The preset turns declaration maps on for cross-package go-to-definition.
+    // `files` ships only `dist`, so a published map points at a `src/` that is
+    // not there.
+    "declarationMap": false,
     "rootDir": "src",
     // Outside `dist`, which `files` ships to consumers — the buildinfo is a
     // local incremental-build cache, not a build artefact for npm.

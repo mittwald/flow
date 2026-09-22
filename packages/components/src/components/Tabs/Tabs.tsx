@@ -51,7 +51,13 @@ export const Tabs = flowComponent("Tabs", (props) => {
     Aria.Key | undefined
   >(defaultSelectedKey);
 
-  const selectedKey = selectedKeyProps ?? selectedKeyState;
+  /*
+   * `null`, not `undefined`, keeps `Aria.Tabs` controlled while nothing is
+   * selected yet — see the controlled-from-the-first-render convention in
+   * AGENTS.md. `Aria.TabsProps` narrows `selectedKey` to `Key`, hence the cast
+   * below.
+   */
+  const selectedKey = selectedKeyProps ?? selectedKeyState ?? null;
 
   const isSsr = useIsSSR();
 
@@ -62,7 +68,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
         slot={null}
         className={rootClassName}
         {...rest}
-        selectedKey={selectedKey}
+        selectedKey={selectedKey as Aria.Key | undefined}
         onSelectionChange={(key) => {
           setSelectedKeyState(key);
           if (onSelectionChange) {

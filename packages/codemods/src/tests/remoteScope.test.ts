@@ -53,7 +53,12 @@ const targets: Record<string, string[]> = {
   "form-resets-after-modal-close": ["Form"],
   "overlay-controller-add-on-close-return-type": ["OverlayController"],
   "cartesian-chart-empty-view": ["CartesianChart"],
+  "option-value-inferred-from-mixed-children": ["Option"],
   "action-prop-to-on-action": ["Action", "ActionProps"],
+  // `Popover` itself is not `@flr-generate` and not in `flr-universal`,
+  // so only the two components that inherit its props reach the remote
+  // package.
+  "popover-open-state-props": ["ContextualHelp", "ContextMenu"],
   "button-props-interfaces": [
     "ResetButtonProps",
     "SubmitButtonProps",
@@ -65,6 +70,7 @@ const targets: Record<string, string[]> = {
   "imports-to-package-root": [],
   "renamed-css-export": [],
   "password-tools-subpath-renamed": [],
+  "tabler-icons-no-longer-transitive": [],
 };
 
 /**
@@ -75,6 +81,7 @@ const notNameScoped = new Set([
   "imports-to-package-root",
   "renamed-css-export",
   "password-tools-subpath-renamed",
+  "tabler-icons-no-longer-transitive",
 ]);
 
 /**

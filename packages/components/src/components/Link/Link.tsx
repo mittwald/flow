@@ -19,7 +19,6 @@ import {
   type PropsWithClassName,
 } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
-import { Text } from "@/components/Text";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 import { handleLinkClick, useRouter } from "@react-aria/utils";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
@@ -126,7 +125,7 @@ export const Link = flowComponent("Link", (props) => {
       isDisabled: props.isDisabled,
       children: dynamic((buttonProps) => (
         <>
-          <Text>{buttonProps.children}</Text>
+          {buttonProps.children}
           <LinkIcon download={download} target={target} unstyled={unstyled} />
         </>
       )),

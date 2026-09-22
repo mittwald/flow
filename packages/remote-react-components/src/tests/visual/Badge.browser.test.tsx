@@ -25,12 +25,29 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { AccentBox, Badge, ContextualHelp, Flex, Label, Text, Wrap },
+    components: {
+      AccentBox,
+      Badge,
+      Button,
+      ContextualHelp,
+      ContextualHelpTrigger,
+      Flex,
+      Label,
+      Text,
+      Wrap,
+    },
   }) => {
     const contextualHelp = (
       <ContextualHelp>
         <Text>Every value has a story to tell.</Text>
       </ContextualHelp>
+    );
+
+    const contextualHelpTrigger = (
+      <ContextualHelpTrigger subject="the value">
+        <Button />
+        {contextualHelp}
+      </ContextualHelpTrigger>
     );
 
     await render(
@@ -61,6 +78,10 @@ test.each(testEnvironments)(
                 <Badge color={color}>
                   Value
                   {contextualHelp}
+                </Badge>
+                <Badge color={color}>
+                  Value
+                  {contextualHelpTrigger}
                 </Badge>
                 <Badge color={color} onClose={() => console.log("onClose")}>
                   Value

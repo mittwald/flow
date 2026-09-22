@@ -1,11 +1,15 @@
 import dts from "unplugin-dts/vite";
-import baseConfig from "./vite.config";
+import baseConfig from "./vite.config.ts";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin.ts";
 import { layerOrderPlugin } from "./dev/vite/layerOrderPlugin.ts";
 import { stylesheetVariantsPlugin } from "./dev/vite/stylesheetVariantsPlugin.ts";
-import { preserveUseClientBanner } from "../core";
+import {
+  libraryBuildChecks,
+  preserveUseClientBanner,
+  publishedDtsOptions,
+} from "../core/src/index.ts";
 
 export default mergeConfig(
   baseConfig,
@@ -22,6 +26,7 @@ export default mergeConfig(
           default: "./src/index/default.ts",
           internal: "./src/index/internal.ts",
           "flr-universal": "./src/index/flr-universal.ts",
+          tunnel: "./src/index/tunnel.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
           "@mittwald/password-tools-js":
@@ -32,6 +37,7 @@ export default mergeConfig(
       },
       emptyOutDir: false,
       rolldownOptions: {
+        checks: libraryBuildChecks,
         output: {
           postBanner: preserveUseClientBanner,
           format: "es",
@@ -65,10 +71,7 @@ export default mergeConfig(
       externalizeDeps({
         except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
       }),
-      dts({
-        include: ["src"],
-        outDirs: "dist/types",
-      }),
+      dts(publishedDtsOptions),
     ],
   }),
 );

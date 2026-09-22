@@ -2,7 +2,8 @@ import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
-import baseConfig from "./vite.config";
+import { libraryBuildChecks, publishedDtsOptions } from "../core/src/index.ts";
+import baseConfig from "./vite.config.ts";
 
 export default mergeConfig(
   baseConfig,
@@ -10,10 +11,7 @@ export default mergeConfig(
     plugins: [
       preserveDirectives(),
       externalizeDeps(),
-      dts({
-        include: ["src"],
-        outDirs: "dist/types",
-      }),
+      dts(publishedDtsOptions),
     ],
     build: {
       minify: false,
@@ -32,6 +30,7 @@ export default mergeConfig(
         formats: ["es"],
       },
       rollupOptions: {
+        checks: libraryBuildChecks,
         output: {
           format: "es",
           preserveModules: true,

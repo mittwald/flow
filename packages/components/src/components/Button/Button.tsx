@@ -6,12 +6,11 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
-import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
-import { extractTextFromFirstChild } from "@/lib/react/remote";
+import { containsTextChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
 import { filterDOMProps } from "@react-aria/utils";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
@@ -130,6 +129,12 @@ export const Button = flowComponent("Button", (props) => {
 
   const color = colorFromProps === "accent" ? "success" : colorFromProps;
 
+  /**
+   * A string child renders no element the CSS could match, so the button itself
+   * carries the marker. An explicit `Text` child is matched by `:has(.text)`.
+   */
+  const hasText = containsTextChild(children);
+
   const rootClassName = unstyled
     ? className
     : clsx(
@@ -145,6 +150,7 @@ export const Button = flowComponent("Button", (props) => {
          * by now, so this Button will be visually disabled via CSS.
          */
         ariaDisabled && styles.ariaDisabled,
+        hasText && styles.hasText,
         className,
       );
 
@@ -186,17 +192,11 @@ export const Button = flowComponent("Button", (props) => {
     <LoadingSpinner size={size} className={styles.stateIcon} />
   ) : undefined;
 
-  const isStringContent = extractTextFromFirstChild(children) !== undefined;
-
   const content = (
     <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text className={styles.text}>{children}</Text>
-            </Wrap>
-          </span>
+          <span className={styles.content}>{children}</span>
         </Wrap>
       </PropsContextProvider>
       {stateIcon}

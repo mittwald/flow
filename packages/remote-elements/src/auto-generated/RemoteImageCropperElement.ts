@@ -23,11 +23,12 @@ export class RemoteImageCropperElement extends FlowRemoteElement<RemoteImageCrop
   static override get remoteEvents() {
     return {
       cropComplete: {},
+      error: {},
     };
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["errorView"];
   }
 }
 

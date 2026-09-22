@@ -19,6 +19,7 @@ import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanv
 import { ConfirmUnsavedChangesModal } from "@/components/Modal/components/ConfirmUnsavedChangesModal/ConfirmUnsavedChangesModal";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import { useVirtualKeyboardVisible } from "@/lib/hooks/dom/useVirtualKeyboardVisible";
 import locales from "./locales/*.locale.json";
@@ -94,23 +95,27 @@ export const Modal = flowComponent("Modal", (props) => {
   const header = (children: ReactNode) => (
     <>
       <DivView className={styles.headerTitle}>{children}</DivView>
-      <Action closeModal={{ bypassConfirmation: true }}>
-        <ButtonView
-          variant="plain"
-          color="secondary"
-          aria-label={stringFormatter.format("close")}
-          className={clsx(
-            styles.closeButton,
-            showCloseButton === true
-              ? styles.alwaysVisible
-              : showCloseButton === false
-                ? styles.alwaysHidden
-                : undefined,
-          )}
-        >
-          <IconClose />
-        </ButtonView>
-      </Action>
+      <ClearPropsContext>
+        <ClearPropsContextView>
+          <Action closeModal={{ bypassConfirmation: true }}>
+            <ButtonView
+              variant="plain"
+              color="secondary"
+              aria-label={stringFormatter.format("close")}
+              className={clsx(
+                styles.closeButton,
+                showCloseButton === true
+                  ? styles.alwaysVisible
+                  : showCloseButton === false
+                    ? styles.alwaysHidden
+                    : undefined,
+              )}
+            >
+              <IconClose />
+            </ButtonView>
+          </Action>
+        </ClearPropsContextView>
+      </ClearPropsContext>
     </>
   );
 
@@ -162,21 +167,27 @@ export const Modal = flowComponent("Modal", (props) => {
           };
         }),
         closeOverlay: dynamic((props) => {
-          if (props.closeOverlay === undefined) {
-            return;
+          const { closeOverlay } = props;
+          if (closeOverlay === undefined || closeOverlay === false) {
+            return closeOverlay;
+          }
+          // `true` keeps its "the nearest overlay" meaning by leaving `overlay`
+          // unset – the options object means the same thing.
+          if (closeOverlay === true) {
+            return { bypassConfirmation: true };
           }
           if (
-            props.closeOverlay instanceof OverlayController ||
-            typeof props.closeOverlay === "string"
+            closeOverlay instanceof OverlayController ||
+            typeof closeOverlay === "string"
           ) {
             return {
               bypassConfirmation: true,
-              overlay: props.closeOverlay,
+              overlay: closeOverlay,
             };
           }
           return {
             bypassConfirmation: true,
-            ...props.closeOverlay,
+            ...closeOverlay,
           };
         }),
       },

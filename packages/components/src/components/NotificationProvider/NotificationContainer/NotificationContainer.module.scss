@@ -1,3 +1,8 @@
+/* This container is portalled into `document.body`, so its z-index lives in the
+   root stacking context and cannot be isolated. It has to: overlays render into
+   a container that is kept as body's *last* child (see
+   `OverlayContent.getOverlayContainer`), and this is what keeps a notification
+   painted over an open modal. */
 .notificationContainer {
   position: fixed;
   top: var(--notification-provider--window-to-provider-spacing);

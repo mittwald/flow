@@ -1,3 +1,4 @@
+import { expect, test, vitest } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { Tab, Tabs, TabTitle } from "@/components/Tabs";
@@ -5,6 +6,21 @@ import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import type { ReactNode } from "react";
+import { Button } from "@/components/Button";
+import { Popover, PopoverTrigger } from "@/components/Popover";
+
+const testElement = (
+  <Tabs>
+    <Tab id="comms">
+      <TabTitle>Comms</TabTitle>
+      <Text>Comms panel</Text>
+    </Tab>
+    <Tab id="cargo">
+      <TabTitle>Cargo hold</TabTitle>
+      <Text>Cargo panel</Text>
+    </Tab>
+  </Tabs>
+);
 
 const renderTabs = (props: {
   "aria-label"?: string;
@@ -34,6 +50,49 @@ const renderTabs = (props: {
     </>,
   );
 
+test("First tab is selected when no selection is given", async () => {
+  render(testElement);
+
+  await expect
+    .element(page.getByRole("tab", { name: "Comms" }))
+    .toHaveAttribute("aria-selected", "true");
+  await expect.element(page.getByText("Comms panel")).toBeVisible();
+});
+
+test("Selecting a tab shows its panel", async () => {
+  render(testElement);
+
+  await page.getByRole("tab", { name: "Cargo hold" }).click();
+
+  await expect
+    .element(page.getByRole("tab", { name: "Cargo hold" }))
+    .toHaveAttribute("aria-selected", "true");
+  await expect.element(page.getByText("Cargo panel")).toBeVisible();
+});
+
+/*
+ * The tab titles reach the tab list through a tunnel, so react-aria picks the
+ * default tab one commit after the first render. Tabs has to be controlled
+ * before that happens, or the selection landing in its state flips it from
+ * uncontrolled to controlled.
+ */
+test("Tabs do not switch from uncontrolled to controlled", async () => {
+  const warn = vitest.spyOn(console, "warn");
+
+  try {
+    render(testElement);
+    await expect
+      .element(page.getByRole("tab", { name: "Comms" }))
+      .toHaveAttribute("aria-selected", "true");
+
+    expect(warn.mock.calls.flat().join("\n")).not.toContain(
+      "uncontrolled to controlled",
+    );
+  } finally {
+    warn.mockRestore();
+  }
+});
+
 test("names the tab list with `aria-label`", async () => {
   renderTabs({ "aria-label": "Server settings" });
 
@@ -51,4 +110,90 @@ test("names the tab list with `aria-labelledby`", async () => {
   await expect
     .element(page.getByRole("tablist", { name: "Server settings" }))
     .toBeInTheDocument();
+});
+
+const tabsWithPopover = (selectedKey: string) => (
+  <Tabs selectedKey={selectedKey}>
+    <Tab id="comms">
+      <TabTitle>Comms</TabTitle>
+      <Section>
+        <Text>Comms panel</Text>
+      </Section>
+    </Tab>
+    <Tab id="cargo">
+      <TabTitle>Cargo hold</TabTitle>
+      <Section>
+        <PopoverTrigger>
+          <Button>Open manifest</Button>
+          <Popover>
+            <Text>Manifest entries</Text>
+          </Popover>
+        </PopoverTrigger>
+      </Section>
+    </Tab>
+  </Tabs>
+);
+
+test("Leaving a tab removes an open popover of that tab", async () => {
+  const { rerender } = await render(tabsWithPopover("cargo"));
+
+  await page.getByRole("button", { name: "Open manifest" }).click();
+  await expect.element(page.getByText("Manifest entries")).toBeVisible();
+
+  await rerender(tabsWithPopover("comms"));
+
+  await expect
+    .element(page.getByText("Manifest entries"))
+    .not.toBeInTheDocument();
+});
+
+const collapsibleTabs = (containerWidth: number) => (
+  <div
+    data-testid="container"
+    style={{ width: containerWidth, overflow: "hidden" }}
+  >
+    <Tabs>
+      <Tab id="comms">
+        <TabTitle>Communications array</TabTitle>
+        <Text>Comms</Text>
+      </Tab>
+      <Tab id="cargo">
+        <TabTitle>Cargo hold manifest</TabTitle>
+        <Text>Cargo</Text>
+      </Tab>
+      <Tab id="nav">
+        <TabTitle>Navigation console</TabTitle>
+        <Text>Nav</Text>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+test("Collapsed tabs do not widen their container", async () => {
+  render(collapsibleTabs(240));
+
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .toBeVisible();
+
+  const container = page.getByTestId("container").element();
+
+  expect(container.scrollWidth).toBe(container.clientWidth);
+});
+
+test("Collapsed tabs expand again once they fit", async () => {
+  const { rerender } = await render(collapsibleTabs(240));
+
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .toBeVisible();
+
+  await rerender(collapsibleTabs(900));
+
+  await expect
+    .element(page.getByRole("tab", { name: "Communications array" }))
+    .toBeVisible();
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .not.toBeInTheDocument();
 });

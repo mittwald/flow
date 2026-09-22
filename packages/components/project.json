@@ -9,6 +9,7 @@
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",
       "!{projectRoot}/src/**/*.module.d.scss.ts",
+      "!{projectRoot}/src/**/*.module.d.css.ts",
       "!{projectRoot}/src/status/component-status.json",
       "!{projectRoot}/src/status/componentStatus.ts",
       "!{projectRoot}/src/**/*.yaml"
@@ -35,6 +36,7 @@
       "inputs": [
         "{projectRoot}/dev/component-index/**/*",
         "!{projectRoot}/dev/component-index/**/*.test.ts",
+        "{projectRoot}/dev/docProperties.ts",
         "{projectRoot}/dev/status-registry/exportEntries.ts",
         "{projectRoot}/dev/status-registry/buildStatusRegistry.ts",
         "{projectRoot}/dev/status-registry/parseFlrUniversalComponentNames.ts",
@@ -51,15 +53,20 @@
       "cache": true,
       "inputs": [
         "components-src",
-        "{projectRoot}/dev/createDocPropertiesJson.ts"
+        "{projectRoot}/dev/createDocPropertiesJson.ts",
+        "{projectRoot}/dev/docProperties.ts",
+        "{projectRoot}/dev/component-index/filterProps.ts"
       ],
-      "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
+      "outputs": [
+        "{projectRoot}/.cache/doc-properties.json",
+        "{projectRoot}/dist/assets/doc-properties.json"
+      ]
     },
     "build:icons": {
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
-        "{workspaceRoot}/packages/icons-base/src"
+        "{workspaceRoot}/packages/icons-base/src/**/*"
       ],
       "outputs": ["{projectRoot}/src/components/Icon/components/icons/*"]
     },
@@ -67,7 +74,8 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/remote-components-generator/**/*",
-        "components-src"
+        "components-src",
+        "{projectRoot}/dev/docProperties.ts"
       ],
       "dependsOn": ["build:docs-properties"],
       "outputs": [
@@ -82,10 +90,15 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/src/**/*.scss",
+        "{projectRoot}/src/**/*.css",
         "{projectRoot}/dev/scss-types/**/*",
-        "{projectRoot}/vite.config.ts"
+        "{projectRoot}/vite.config.ts",
+        "{workspaceRoot}/packages/core/src/scssTypes/**/*"
       ],
-      "outputs": ["{projectRoot}/src/**/*.module.d.scss.ts"]
+      "outputs": [
+        "{projectRoot}/src/**/*.module.d.scss.ts",
+        "{projectRoot}/src/**/*.module.d.css.ts"
+      ]
     },
     "build:status-registry": {
       "cache": true,
@@ -93,6 +106,7 @@
       "inputs": [
         "{projectRoot}/dev/status-registry/**/*",
         "!{projectRoot}/dev/status-registry/**/*.test.ts",
+        "{projectRoot}/dev/docProperties.ts",
         "{projectRoot}/src/status/types.ts",
         "{projectRoot}/package.json",
         "{projectRoot}/src/components/public.ts",

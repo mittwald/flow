@@ -8,11 +8,7 @@ import { ActionExecution } from "@/components/Action/models/ActionExecution";
 import { ActionStateContext } from "@/components/Action/models/ActionStateContext";
 import type { OverlayContext } from "@/lib/controller/overlay/context";
 import { useOverlayContext } from "@/lib/controller/overlay/context";
-import type { FlowComponentName } from "@/components/propTypes";
-import type {
-  CloseModalOptions,
-  CloseOverlayOptions,
-} from "@/lib/controller/overlay/OverlayController";
+import type { OverlayReference } from "@/lib/controller/overlay/OverlayController";
 
 interface InitObject {
   actionProps: ActionProps;
@@ -96,53 +92,58 @@ export class ActionModel {
     });
   }
 
+  /**
+   * Resolves an overlay reference against this action's overlay context.
+   *
+   * Returns `undefined` unless the action carries one of the overlay props –
+   * `Action` relies on that to tell whether it owns a surrounding `Modal`'s
+   * controller.
+   */
   public getOverlayController(
-    from:
-      | FlowComponentName
-      | OverlayController
-      | CloseOverlayOptions
-      | CloseModalOptions,
+    from: OverlayReference,
   ): OverlayController | undefined {
-    const getController = (
-      controller?:
-        | OverlayController
-        | FlowComponentName
-        | CloseOverlayOptions
-        | CloseModalOptions,
-    ): OverlayController | undefined => {
-      if (controller === undefined) {
-        return undefined;
-      }
-      if (from instanceof OverlayController) {
-        return from;
-      }
-      if (typeof from === "string") {
-        return this.overlayContext[from];
-      }
-      if ("overlay" in from) {
-        return this.getOverlayController(from.overlay);
-      }
-      return this.getOverlayController("Modal");
-    };
-
-    return (
-      getController(this.actionProps.openOverlay) ??
-      getController(this.actionProps.closeOverlay) ??
-      getController(this.actionProps.toggleOverlay) ??
-      getController(this.actionProps.openModal ? "Modal" : undefined) ??
-      getController(this.actionProps.closeModal ? "Modal" : undefined) ??
-      getController(this.actionProps.toggleModal ? "Modal" : undefined)
-    );
+    return this.hasOverlayProps
+      ? this.resolveOverlayReference(from)
+      : undefined;
   }
 
-  public static getCloseOverlayOptions = (
-    options?:
-      | OverlayController
-      | FlowComponentName
-      | CloseOverlayOptions
-      | CloseModalOptions
-      | true,
-  ) => {
+  private get hasOverlayProps(): boolean {
+    const {
+      openOverlay,
+      closeOverlay,
+      toggleOverlay,
+      openModal,
+      closeModal,
+      toggleModal,
+    } = this.actionProps;
+
+    return [
+      openOverlay,
+      closeOverlay,
+      toggleOverlay,
+      openModal,
+      closeModal,
+      toggleModal,
+    ].some(Boolean);
+  }
+
+  private resolveOverlayReference(
+    from: OverlayReference,
+  ): OverlayController | undefined {
+    if (from instanceof OverlayController) {
+      return from;
+    }
+    if (typeof from === "string") {
+      return this.overlayContext.byType[from];
+    }
+    // `true` and options without an `overlay` both mean "the nearest one".
+    if (from === true || !("overlay" in from) || from.overlay === undefined) {
+      return this.overlayContext.nearest;
+    }
+    return this.resolveOverlayReference(from.overlay);
+  }
+
+  public static getCloseOverlayOptions = (options?: OverlayReference) => {
     if (
       options === undefined ||
       options instanceof OverlayController ||

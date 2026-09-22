@@ -91,7 +91,7 @@ export const PasswordCreationField = flowComponent(
       value,
       onChange,
       ...rest
-    } = useControlledHostValueProps(props);
+    } = useControlledHostValueProps(props, "");
 
     const {
       FieldErrorView,

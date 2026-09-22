@@ -54,3 +54,4 @@ lerna.json
 # generator over files it already formats. They're pure generated artifacts —
 # keep them out of the format gate.
 **/*.module.d.scss.ts
+**/*.module.d.css.ts

@@ -125,6 +125,23 @@ return (
   components break remote rendering.
 - When parent context must not leak into a component's children, use targeted
   clearing, e.g. `wrapWith: <ClearPropsContext />` (see `Modal.tsx`).
+- **A context that tunnels `Button` must tunnel overlay triggers as a whole** —
+  spread `overlayTriggersTunneledTo(tunnel)` (`@/lib/propsContext`). An overlay
+  trigger's button is the react-aria trigger: `OverlayTrigger` pins it with
+  `tunnel: null`, because the press handling, the trigger ref and
+  `aria-haspopup`/`aria-expanded`/`aria-controls` travel through a
+  `PressResponder` that only reaches its own subtree. The list includes
+  `DialogTrigger` because a host sees a different component than the author
+  wrote: `ModalTrigger`, `PopoverTrigger` and `LightBoxTrigger` are not
+  `@flr-generate`, so a remote tree reaches the host as a `DialogTrigger` with
+  no `OverlayTrigger` around it — which is why `DialogTrigger` pins the button
+  itself as well.
+- **A context that places a bare overlay gets the written-out trigger for
+  free.** `Badge` accepts a `ContextualHelp` on its own and wraps it with a
+  trigger button (`tunnel` + `wrapWith`). `OverlayTrigger` pins its own overlay
+  with `tunnel: null, wrapWith: null`, so a `ContextualHelpTrigger` the consumer
+  wrote keeps its help and its button — tunnel the trigger as well and style its
+  `Button` through the context, and both spellings land in the same slot.
 
 Why this works the way it does across the remote boundary:
 [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
@@ -147,6 +164,13 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- `@flr-provider` carries a `flowComponent`'s `type: "provider"` over to the
+  generated remote component. Without it the remote element is created as a
+  `"ui"` component and wrapped in a `ClearPropsContext` — which drops every
+  props context a provider around it just set. It only matters where the
+  provider actually runs inside the remote tree, i.e. where the component that
+  renders it is not itself `@flr-generate` (`ModalTrigger` → `OverlayTrigger` →
+  `DialogTriggerView`).
 - **A prop that carries rendered output has to be a slot, not a property.** A
   remote property is transported as data, and a React element carries
   `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
@@ -158,6 +182,15 @@ Remote generation details:
   output, because the host has to call it: that needs an eager slot or
   `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
   prop, so a new one cannot ship.
+- **A function property's return value is a Promise on the host.** Functions do
+  cross — as thread proxies — but calling one is a round trip. Type the return
+  as `Promise<T> | T` and await it on the host (`ChartTooltip`'s formatters), or
+  keep the prop off the remote surface with `@flr-ignore-props` (`XAxis`/`YAxis`
+  `tickFormatter`). A host that reads the result synchronously gets the Promise
+  itself — recharts concatenated it into every tick as `[object Promise]`.
+  `checkSerializableProps` fails generation on a new one; the pre-existing set
+  is listed in `acknowledgedValueReturningProps`, which can neither grow nor go
+  stale.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
@@ -229,6 +262,17 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **A `z-index` is scoped by the nearest ancestor stacking context** — mark that
+  element `isolation: isolate` explicitly. `position: relative`, a scroll
+  container (`overflow: auto`) and a flex/grid parent are **not** stacking
+  contexts, so without it the value competes with the whole page instead of the
+  siblings it was written for. A `transform` animation in between is one only
+  _while it runs_, so the scope otherwise changes with the animation state.
+  Isolating does not reorder anything inside the component: among positioned
+  siblings, `z-index: auto` and a `0`-equivalent stacking context paint in the
+  same step, in tree order. The exception is an element portalled into
+  `document.body` (`NotificationContainer`) — that one sits in the root stacking
+  context by construction and cannot be scoped; say so in a comment.
 - **Overriding a dependency that injects its own stylesheet** (CodeMirror,
   react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
   `<style>` elements are unlayered, and unlayered CSS beats layered CSS
@@ -276,15 +320,23 @@ Run: `pnpm nx test:unit components`,
 
 ## Public API surfaces
 
-| Export                                                          | Contents                                                                                                                                                                                                           |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                          |
-| `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                        |
-| `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                         |
-| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                        |
-| `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                    |
-| `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use. |
-| `./doc-properties`                                              | Raw `react-docgen-typescript` output — a 13 MB build input for the generators above, not something to read directly.                                                                                               |
+| Export                                                          | Contents                                                                                                                                                                                                                                            |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                                                           |
+| `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                                                         |
+| `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                                                          |
+| `./tunnel`                                                      | `@mittwald/react-tunnel` re-exported (`src/index/tunnel.ts`) plus `getTunnelProviderId`, so a consumer's own tunnels share Flow's module instance instead of creating a second React context.                                                       |
+| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                                                         |
+| `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                                                     |
+| `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use.                                  |
+| `./doc-properties`                                              | `react-docgen-typescript` output in its raw `ComponentDoc[]` shape, filtered to the props a consumer can act on. Prefer `./component-index`. The unfiltered dump the generators above read is `.cache/doc-properties.json`, which is not published. |
+
+**Adding any new export entry?** Add the subpath to `keptSubpaths` in
+`packages/codemods/src/migrations/imports-to-package-root/transform.ts`. That
+codemod collapses subpath imports onto the package root with a catch-all `else`,
+so a subpath that is not listed gets flattened onto a root that does not export
+its names. The guard beside the transform fails the codemods unit tests when you
+forget.
 
 **Adding a new integration export entry?** Also register it in the component
 status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`
@@ -342,6 +394,19 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   must affect layout.
 - **Controllers coexist with declarative props** — overlay-like APIs support
   controlled/uncontrolled props _and_ a controller object, not one or the other.
+- **A component without `value` and without `defaultValue` still has to render
+  as controlled** — react-aria's `useControlledState` reads only `undefined` as
+  uncontrolled. A component that mirrors the value in its own state therefore
+  hands react-aria `undefined` on the first render and a real value after the
+  first change: the value changes owner mid-flight, and React and react-aria
+  warn `A component changed from uncontrolled to controlled`. Pass a sentinel
+  instead of `undefined` — `null` where "nothing selected yet" is representable
+  (`Tabs`' `selectedKey`), otherwise the type's empty value (`""` for text,
+  `NaN` for a number, `null` for a date range — `useControlledHostValueProps`'
+  `emptyValue`). Mind `??` once the sentinel is `null`: a caller-supplied `null`
+  must not fall through to `defaultValue`. Nothing breaks visibly, and a
+  component holding its own document state (`CodeEditor`) does not even warn —
+  it changes owner silently.
 - **Complex behavior is split by vocabulary** — `components/` for render,
   `hooks/` for behavior, `lib/` for pure transforms, `models/` for durable
   state.
@@ -360,6 +425,20 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
   — as the [Icon page](https://flow.mittwald.de/components/content/icon)
   documents. Nothing errors: types, lint and the console stay clean.
+- **A collection child is rendered twice** — react-aria renders the children of
+  a collection (`Select`, `ComboBox`, `Autocomplete`, `Menu`, `ListBox`, `Tree`,
+  …) once into its hidden collection document and once for real. Both renders
+  are full component instances, so anything derived per instance happens twice
+  for one logical element: `useId` returns two ids, effects run twice, and every
+  registration into shared state lands twice. Whatever such a child registers
+  therefore needs an id derived from the element itself, not a generated one —
+  options pass their collection key as the tunnel's `staticEntryId`
+  (`Option/optionsTunnel.ts`), and a new tunnelled collection child must do the
+  same. Without it the tunnel exit renders each child twice: the keys stay
+  unique, so the DOM and the tests look right, but the collection holds two
+  nodes per key and its `prevKey`/`nextKey` chain closes into a ring — `ArrowUp`
+  on the first item wraps to the last, and react-stately's focus restoration
+  walks `getKeyBefore` forever and freezes the tab (#3146).
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.

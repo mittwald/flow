@@ -1,8 +1,8 @@
-import defaultConfig from "./vite.config";
+import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core";
-import { serveFontsLocally } from "./dev/vitest/serveFontsLocally";
+import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { serveFontsLocally } from "./dev/vitest/serveFontsLocally.ts";
 
 /*
  * Vitest names a browser project's nested per-browser projects by writing onto
@@ -10,12 +10,6 @@ import { serveFontsLocally } from "./dev/vitest/serveFontsLocally";
  * share those objects, and the second name would overwrite the first – so every
  * browser project gets its own copies. Without them a run filtered to one
  * project reports itself under the other project's name.
- *
- * screenshotFailures is off for both browser projects. A failure would drop a
- * PNG next to the test, and neither __screenshots__ directory is gitignored, so
- * `git add` picks the stray file up. It adds nothing either: a visual mismatch
- * already writes reference, actual and diff to the gitignored
- * .vitest-attachments, and the DOM assertions have no pixels worth capturing.
  */
 const browserTestConfig = () => ({
   ...vitestBrowserTestConfig,
@@ -28,7 +22,6 @@ const browserTestConfig = () => ({
     instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
       (instance) => ({ ...instance }),
     ),
-    screenshotFailures: false,
   },
 });
 
@@ -80,6 +73,27 @@ export default mergeConfig(
             },
             name: "visual",
             include: ["src/tests/visual/**/*.browser.test.{ts,tsx}"],
+            /*
+             * One tester iframe for the whole run. Vitest's default gives every
+             * test file a fresh iframe and removes the previous one, and
+             * Playwright's WebKit never releases a removed iframe's document:
+             * a forced GC afterwards keeps every one of them alive (Chromium and
+             * Firefox collect them), and navigating the iframe to `about:blank`
+             * before removing it changes nothing. Each finished file therefore
+             * left its whole realm behind — component library, all.css, fonts,
+             * last render — about 200 MB per file in this suite, until the
+             * unsharded `update-screenshots` run died at file 105 of 168
+             * (#3119). Reproduced outside vitest with a bare page that adds and
+             * removes a heavy same-origin iframe.
+             *
+             * Without the churn nothing accumulates, and the run also skips the
+             * per-file import of the library: locally 122 s instead of 289 s for
+             * both browsers. The price is shared module state across files.
+             * Mounted trees are not part of it — `render` calls `cleanup()`
+             * first — and the setup files only set the theme and load fonts,
+             * which are meant to persist anyway.
+             */
+            isolate: false,
             /*
              * One page at a time, because a screenshot depends on the page
              * holding the document focus. Firefox drops `:focus`/`:focus-within`
