@@ -36,6 +36,12 @@
  * - **A hanging webfont never settles `document.fonts.ready`**, which Playwright
  *   waits on before every screenshot (#3106). The three faces `fonts.scss`
  *   declares are served from the local copies the visual suite already keeps.
+ *   Playwright settles the composition page's fonts, never the story frames'
+ *   own — so each panel waits for its iframe's `document.fonts.ready` before it
+ *   is measured, or the figure is sized and captured in the fallback face.
+ * - **`pnpm test:browser:prepare` installs only Firefox and WebKit**, so a clean
+ *   checkout has no Chromium. The browser is chosen from what is actually
+ *   installed, and the capture names the one it used.
  */
 
 import { spawn } from "node:child_process";
@@ -66,26 +72,65 @@ const LOCAL_FONTS = join(
 const COMFORTABLE_DISPLAY_WIDTH = 900;
 
 /**
+ * Browsers to try, in order. Chromium renders the figures closest to what a
+ * reader sees, but `pnpm test:browser:prepare` installs only Firefox and WebKit
+ * — so a clean checkout falls through to one of those rather than dying on a
+ * missing executable.
+ */
+const BROWSERS = ["chromium", "webkit", "firefox"];
+
+/**
+ * The spec is the single source of the output path, so there is deliberately no
+ * `--out` override: it would bypass the only check confining the figure to the
+ * release-assets tree.
+ *
  * @param {string[]} argv
  * @returns {{
  *   spec: string;
  *   storybookUrl: string | null;
- *   out: string | null;
+ *   browser: string | null;
  * }}
  */
 const parseArgs = (argv) => {
-  const args = { spec: "", storybookUrl: null, out: null };
+  const args = { spec: "", storybookUrl: null, browser: null };
   for (let i = 0; i < argv.length; i++) {
     const [flag, inline] = argv[i].split(/=(.*)/s);
     const value = inline ?? argv[++i];
     if (flag === "--spec") args.spec = value;
     else if (flag === "--storybook-url") args.storybookUrl = value;
-    else if (flag === "--out") args.out = value;
+    else if (flag === "--browser") args.browser = value;
     else throw new Error(`unknown argument ${argv[i]}`);
   }
   if (!args.spec)
     throw new Error("--spec <path to figure spec json> is required");
+  if (args.browser && !BROWSERS.includes(args.browser)) {
+    throw new Error(
+      `--browser must be one of ${BROWSERS.join(", ")}, got ${args.browser}`,
+    );
+  }
   return args;
+};
+
+/**
+ * Launch the requested browser, or the first one actually installed.
+ *
+ * @param {import("playwright")} playwright
+ * @param {string | null} requested
+ * @returns {Promise<{ browser: import("playwright").Browser; name: string }>}
+ */
+const launchBrowser = async (playwright, requested) => {
+  const candidates = requested ? [requested] : BROWSERS;
+  const installed = candidates.filter((name) =>
+    existsSync(playwright[name].executablePath()),
+  );
+  if (installed.length === 0) {
+    throw new Error(
+      `no Playwright browser installed for: ${candidates.join(", ")}\n` +
+        `  run \`pnpm exec playwright install ${candidates[0]}\` (or \`pnpm test:browser:prepare\` for the suite's firefox + webkit)`,
+    );
+  }
+  const name = installed[0];
+  return { browser: await playwright[name].launch(), name };
 };
 
 /** @returns {Promise<number>} A port free right now */
@@ -164,11 +209,20 @@ const startStorybook = async () => {
  * Runs inside the composition page, which is same-origin with the story iframes
  * — that is the only reason it can reach into `contentDocument` at all.
  */
-const MEASURE_PANEL = `(({ index, expectations }) => {
+const MEASURE_PANEL = `(async ({ index, expectations }) => {
   const frame = document.querySelector('iframe[data-panel="' + index + '"]');
   const doc = frame.contentDocument;
   const root = doc.querySelector('#storybook-root');
   if (!root || root.childElementCount === 0) return null;
+  // Each iframe has its OWN font set. Playwright settles the composition page's
+  // fonts before a screenshot, never the frames' — so measuring here without
+  // this wait can size and capture the fallback face, which changes wrapping
+  // and the bottom edge. Bounded, so a font that never arrives cannot hang the
+  // capture; the outer poll re-enters.
+  await Promise.race([
+    doc.fonts.ready,
+    new Promise((resolve) => setTimeout(resolve, 5000)),
+  ]);
   const style = getComputedStyle(doc.body);
   const rect = root.getBoundingClientRect();
   // .bottom, not .height: the rect is relative to the iframe viewport, so
@@ -255,7 +309,7 @@ const main = async () => {
   const spec = normalizeFigureSpec(
     JSON.parse(await readFile(resolve(args.spec), "utf8")),
   );
-  const outPath = args.out ?? spec.out;
+  const outPath = spec.out;
 
   const storybook = args.storybookUrl
     ? { url: args.storybookUrl.replace(/\/$/, ""), stop: () => undefined }
@@ -284,8 +338,9 @@ const main = async () => {
       );
     }
 
-    const { chromium } = await import("playwright");
-    browser = await chromium.launch();
+    const playwright = await import("playwright");
+    const launched = await launchBrowser(playwright, args.browser);
+    browser = launched.browser;
     const context = await browser.newContext({
       viewport: { width: spec.width, height: 800 },
       deviceScaleFactor: spec.scale,
@@ -357,6 +412,7 @@ const main = async () => {
       [
         `Wrote ${outPath}`,
         `  panels:  ${spec.panels.length} (${spec.panels.map((p) => p.story).join(", ")})`,
+        `  browser: ${launched.name}`,
         `  layout:  ${spec.width} CSS px wide, captured at ${spec.scale}×`,
         `  image:   ${pixelWidth} px wide — the size it is shown at where nothing constrains it`,
         `  url:     ${rawFigureUrl("0".repeat(40), outPath).replace("0".repeat(40), "<commit-sha>")}`,

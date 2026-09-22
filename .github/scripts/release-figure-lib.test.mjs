@@ -9,6 +9,7 @@ import {
   findUnknownStories,
   normalizeFigureSpec,
   rawFigureUrl,
+  resolveOutputPath,
 } from "./release-figure-lib.mjs";
 
 /** @param {object} overrides */
@@ -187,7 +188,46 @@ describe("normalizeFigureSpec", () => {
   it("rejects an output path the notes could never reference", () => {
     assert.throws(
       () => normalizeFigureSpec(spec({ out: "/tmp/rating.png" })),
-      /must be a repo path under apps\/docs\/public\/assets\/releases\//,
+      /must be a normalized repo path under apps\/docs\/public\/assets\/releases\//,
+    );
+  });
+
+  it("does not let a traversal escape the release-assets tree", () => {
+    // `startsWith` alone would accept this and then resolve outside the tree.
+    assert.throws(
+      () =>
+        normalizeFigureSpec(
+          spec({
+            out: "apps/docs/public/assets/releases/1.2.0/../../../../.github/x.png",
+          }),
+        ),
+      /must be a normalized repo path/,
+    );
+  });
+
+  it("rejects an extension that would lie about the bytes written", () => {
+    assert.throws(
+      () =>
+        normalizeFigureSpec(
+          spec({ out: "apps/docs/public/assets/releases/1.2.0/rating.jpg" }),
+        ),
+      /must end in \.png/,
+    );
+  });
+
+  it("rejects a background that could close the style block", () => {
+    assert.throws(
+      () =>
+        normalizeFigureSpec(
+          spec({ background: "#fff</style><script>alert(1)</script>" }),
+        ),
+      /must be a plain CSS color/,
+    );
+    assert.doesNotThrow(() =>
+      normalizeFigureSpec(spec({ background: "rgb(255, 255, 255)" })),
+    );
+    assert.doesNotThrow(() =>
+      normalizeFigureSpec(spec({ background: "transparent" })),
     );
   });
 
@@ -204,6 +244,30 @@ describe("normalizeFigureSpec", () => {
 
   it("rejects a spec with no panels", () => {
     assert.throws(() => normalizeFigureSpec(spec({ panels: [] })), /non-empty/);
+  });
+});
+
+describe("resolveOutputPath", () => {
+  it("returns the path unchanged when it is already normalized", () => {
+    assert.equal(
+      resolveOutputPath("apps/docs/public/assets/releases/1.2.0/rating.png"),
+      "apps/docs/public/assets/releases/1.2.0/rating.png",
+    );
+  });
+
+  it("rejects an absolute path, a traversal and a non-png", () => {
+    for (const bad of [
+      "/etc/passwd.png",
+      "apps/docs/public/assets/releases/../../../x.png",
+      "apps/docs/public/assets/releases/1.2.0/x.svg",
+      "../apps/docs/public/assets/releases/1.2.0/x.png",
+    ]) {
+      assert.throws(
+        () => resolveOutputPath(bad),
+        /spec\.out/,
+        `accepted ${bad}`,
+      );
+    }
   });
 });
 

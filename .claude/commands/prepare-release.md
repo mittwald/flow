@@ -164,6 +164,13 @@ requires `--from`/`--to` overrides before doing anything else.
    via `pnpm nx dev components` and stops it again. That is slower, and it gives
    you no server to resolve story ids against.
 
+   The renderer is whichever Playwright browser is installed — Chromium first,
+   then WebKit, then Firefox, and the run names the one it used. Pin it with
+   `--browser <name>`. `pnpm test:browser:prepare` installs only WebKit and
+   Firefox, so add `pnpm exec playwright install chromium` if you want Chromium.
+   There is no `--out`: the spec is the only source of the output path, which
+   keeps every figure inside the release-assets tree.
+
    **`expect` is not optional decoration.** Storybook filters `args=` down to
    the story's declared `argTypes` and drops everything else **silently** — the
    story still renders, just not in the state that was asked for. `defaultValue`

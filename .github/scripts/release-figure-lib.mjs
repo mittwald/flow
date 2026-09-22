@@ -13,6 +13,7 @@
  * correct until someone opens the file.
  */
 
+import { posix } from "node:path";
 import { URLSearchParams } from "node:url";
 
 /**
@@ -33,6 +34,14 @@ const STORYBOOK_NUMBER = /^-?[0-9]+(\.[0-9]+)?$/;
 const VERSION = /^[0-9]+\.[0-9]+\.[0-9]+$/;
 const FIGURE_NAME = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const SHA = /^[0-9a-f]{7,40}$/;
+
+/**
+ * The CSS colors a background may use. Narrow on purpose: the value is
+ * interpolated into the composition page's `<style>`, where anything
+ * unconstrained could close the block.
+ */
+const CSS_COLOR =
+  /^(transparent|#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9a-zA-Z .,%/-]+\)|[a-zA-Z]+)$/;
 
 export class FigureSpecError extends Error {}
 
@@ -143,6 +152,37 @@ export const rawFigureUrl = (sha, outPath) => {
 };
 
 /**
+ * Confine a figure's output path to the release-assets tree.
+ *
+ * `startsWith` alone is not containment: `…/releases/1.2.0/../../../x.png`
+ * passes it and then resolves outside the tree. The extension is checked here
+ * too, because the capture always writes PNG bytes — a `.jpg` path would name a
+ * file that is not what it contains.
+ *
+ * @param {unknown} out
+ * @returns {string} The normalized repo-relative path
+ */
+export const resolveOutputPath = (out) => {
+  check(typeof out === "string", "spec.out must be a string when given");
+  // The notes reference the figure by its commit-SHA raw URL, so it has to be
+  // a committed repo path — an absolute or scratch path cannot be referenced
+  // at all, and finding that out after the capture wastes the whole run.
+  const normalized = posix.normalize(out);
+  check(
+    normalized === out &&
+      !posix.isAbsolute(normalized) &&
+      normalized.startsWith(`${FIGURE_ROOT}/`) &&
+      !normalized.split("/").includes(".."),
+    `spec.out must be a normalized repo path under ${FIGURE_ROOT}/, got ${JSON.stringify(out)}`,
+  );
+  check(
+    normalized.endsWith(".png"),
+    `spec.out must end in .png — the capture writes PNG bytes, got ${JSON.stringify(out)}`,
+  );
+  return normalized;
+};
+
+/**
  * @typedef {object} NormalizedPanel
  * @property {string} story
  * @property {string | null} caption
@@ -177,14 +217,8 @@ export const normalizeFigureSpec = (raw) => {
 
   check(typeof spec.version === "string", "spec.version is required (x.y.z)");
   check(typeof spec.name === "string", "spec.name is required (kebab-case)");
-  const out = spec.out ?? figureOutputPath(spec.version, spec.name);
-  check(typeof out === "string", "spec.out must be a string when given");
-  // The notes reference the figure by its commit-SHA raw URL, so it has to be
-  // a committed repo path — an absolute or scratch path cannot be referenced
-  // at all, and finding that out after the capture wastes the whole run.
-  check(
-    out.startsWith(`${FIGURE_ROOT}/`),
-    `spec.out must be a repo path under ${FIGURE_ROOT}/, got ${JSON.stringify(out)}`,
+  const out = resolveOutputPath(
+    spec.out ?? figureOutputPath(spec.version, spec.name),
   );
 
   const width = spec.width ?? 700;
@@ -204,7 +238,10 @@ export const normalizeFigureSpec = (raw) => {
   );
 
   const background = spec.background ?? "#ffffff";
-  check(typeof background === "string", "spec.background must be a CSS color");
+  check(
+    typeof background === "string" && CSS_COLOR.test(background),
+    `spec.background must be a plain CSS color, got ${JSON.stringify(background)}`,
+  );
 
   check(
     Array.isArray(spec.panels) && spec.panels.length > 0,
