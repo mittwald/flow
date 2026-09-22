@@ -47,6 +47,7 @@ import type {
   ContextualHelpProps,
   ContextualHelpTriggerProps,
 } from "@/components/ContextualHelp";
+import type { CoachMarkProps } from "@/components/CoachMark";
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { ListItemViewContentProps, ListProps } from "@/components/List";
@@ -73,7 +74,10 @@ import type { MessageThreadProps } from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
-import type { MenuTriggerProps } from "@/components/OverlayTrigger";
+import type {
+  DialogTriggerProps,
+  MenuTriggerProps,
+} from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
 import type { NavigationProps } from "@/components/Navigation";
@@ -123,6 +127,7 @@ export interface FlowComponentPropsTypes {
   ContextMenu: ContextMenuProps;
   ContextMenuSection: ContextMenuSectionProps;
   ContextMenuTrigger: ContextMenuTriggerProps;
+  CoachMark: CoachMarkProps;
   ContextualHelp: ContextualHelpProps;
   ContextualHelpTrigger: ContextualHelpTriggerProps;
   CopyButton: CopyButtonProps;
@@ -130,6 +135,7 @@ export interface FlowComponentPropsTypes {
   CountryOptions: CountryOptionsProps;
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
+  DialogTrigger: DialogTriggerProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   FileCard: FileCardProps;
@@ -219,6 +225,7 @@ const propsContextSupportingComponentsMap: Record<
   ContextMenu: true,
   ContextMenuSection: true,
   ContextMenuTrigger: true,
+  CoachMark: true,
   ContextualHelp: true,
   ContextualHelpTrigger: true,
   CopyButton: true,
@@ -226,6 +233,7 @@ const propsContextSupportingComponentsMap: Record<
   CountryOptions: true,
   DatePicker: true,
   DateRangePicker: true,
+  DialogTrigger: true,
   FieldDescription: true,
   FieldError: true,
   FileCard: true,

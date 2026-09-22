@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+import { apiFetch } from "./apiFetch.ts";
+import { pollUntil } from "./pollUntil.ts";
+
 interface DockerImage {
   name: string;
   tag: string;
@@ -15,6 +18,11 @@ interface MittwaldService {
     image: string;
   };
   requiresRecreate: boolean;
+}
+
+interface GitHubComment {
+  id: number;
+  body?: string;
 }
 
 interface MittwaldIngress {
@@ -35,6 +43,24 @@ const getApiHeaders = () => ({
   "content-type": "application/json",
   "x-access-token": process.env.MITTWALD_API_TOKEN || "",
 });
+
+const getGitHubHeaders = (token: string) => ({
+  Authorization: `Bearer ${token}`,
+  Accept: "application/vnd.github.v3+json",
+});
+
+// Identifies the deployment comment across runs, so a later deploy edits that
+// one instead of posting another. An HTML comment, so it does not render.
+const COMMENT_MARKER = "<!-- flow-preview-deployment -->";
+
+// The marker sits in the comment posted at the PR's first deploy, so page one
+// finds it on any normal PR; the bound just keeps a pathological one finite.
+const COMMENTS_PER_PAGE = 100;
+const MAX_COMMENT_PAGES = 10;
+
+// GitHub can hand a body back with CRLF line endings.
+const isSameBody = (stored: string | undefined, wanted: string): boolean =>
+  stored?.replace(/\r\n/g, "\n").trim() === wanted.trim();
 
 class ReviewDeployer {
   private readonly prNumber: string;
@@ -136,14 +162,10 @@ class ReviewDeployer {
 
     const [owner, repoName] = repo.split("/");
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.github.com/repos/${owner}/${repoName}/pulls/${this.prNumber}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/vnd.github.v3+json",
-          },
-        },
+        { headers: getGitHubHeaders(token) },
+        { label: `PR #${this.prNumber} state`, idempotent: true },
       );
 
       if (!response.ok) {
@@ -168,12 +190,13 @@ class ReviewDeployer {
     console.log("📋 Fetching existing services...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/projects/${this.projectId}/services`,
         {
           method: "GET",
           headers: getApiHeaders(),
         },
+        { label: "fetching services", idempotent: true },
       );
 
       if (!response.ok) {
@@ -191,12 +214,13 @@ class ReviewDeployer {
     console.log("🔗 Fetching existing ingresses...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/ingresses?projectId=${this.projectId}`,
         {
           method: "GET",
           headers: getApiHeaders(),
         },
+        { label: "fetching ingresses", idempotent: true },
       );
 
       if (!response.ok) {
@@ -214,7 +238,7 @@ class ReviewDeployer {
     console.log("🚀 Updating services...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/stacks/${this.projectId}`,
         {
           method: "PATCH",
@@ -224,6 +248,9 @@ class ReviewDeployer {
             volumes: {},
           }),
         },
+        // The body is the stack's desired state, so a replay lands on the same
+        // state rather than adding anything.
+        { label: "updating services", idempotent: true },
       );
 
       if (!response.ok) {
@@ -244,12 +271,14 @@ class ReviewDeployer {
     console.log("🔄 Pulling latest image...");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/stacks/${this.projectId}/services/${serviceId}/actions/pull`,
         {
           method: "POST",
           headers: getApiHeaders(),
         },
+        // Pulling the same tag twice is a no-op, so a replay costs nothing.
+        { label: "pulling the image", idempotent: true },
       );
 
       if (!response.ok) {
@@ -273,25 +302,31 @@ class ReviewDeployer {
     console.log(`🌐 Creating ingress for ${hostname}...`);
 
     try {
-      const response = await fetch("https://api.mittwald.de/v2/ingresses", {
-        method: "POST",
-        headers: getApiHeaders(),
-        body: JSON.stringify({
-          projectId: this.projectId,
-          hostname,
-          paths: [
-            {
-              path: "/",
-              target: {
-                container: {
-                  id: containerId,
-                  portProtocol: "80/tcp",
+      const response = await apiFetch(
+        "https://api.mittwald.de/v2/ingresses",
+        {
+          method: "POST",
+          headers: getApiHeaders(),
+          body: JSON.stringify({
+            projectId: this.projectId,
+            hostname,
+            paths: [
+              {
+                path: "/",
+                target: {
+                  container: {
+                    id: containerId,
+                    portProtocol: "80/tcp",
+                  },
                 },
               },
-            },
-          ],
-        }),
-      });
+            ],
+          }),
+        },
+        // Creates a resource: only a failure from before the server saw the
+        // request may be replayed, never a 5xx.
+        { label: `creating the ingress for ${hostname}`, idempotent: false },
+      );
 
       if (!response.ok) {
         const error = await response.text();
@@ -330,7 +365,7 @@ class ReviewDeployer {
     console.log(`🔒 Connecting TLS certificate to ingress ${ingressId}...`);
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `https://api.mittwald.de/v2/ingresses/${ingressId}/tls`,
         {
           method: "PATCH",
@@ -339,6 +374,7 @@ class ReviewDeployer {
             certificateId,
           }),
         },
+        { label: "connecting the TLS certificate", idempotent: true },
       );
 
       if (!response.ok) {
@@ -391,13 +427,15 @@ class ReviewDeployer {
 
       await this.updateServices(serviceUpdates);
 
-      const updatedServices = await this.getServices();
-      const newService = updatedServices.find(
-        (s) => s.serviceName === serviceName,
+      // The API is eventually consistent, so the list that follows the create
+      // can still answer without it — which read as "failed to create" and
+      // failed the deploy over a service that existed (PR #3204). Wait for it
+      // to show up instead of reading once.
+      const newService = await pollUntil(
+        async () =>
+          (await this.getServices()).find((s) => s.serviceName === serviceName),
+        { label: `Service ${serviceName}` },
       );
-      if (!newService) {
-        throw new Error(`Failed to create service ${serviceName}`);
-      }
       containerId = newService.id;
     }
 
@@ -421,6 +459,48 @@ class ReviewDeployer {
     return hostname;
   }
 
+  /**
+   * The preview comment an earlier deploy left on this PR, if any. Keyed on the
+   * hidden marker rather than on the author or the position, so it also finds
+   * the comment across a token change and past every other bot's comments.
+   */
+  private async findPreviewComment(
+    owner: string,
+    repoName: string,
+    token: string,
+  ): Promise<GitHubComment | undefined> {
+    for (let page = 1; page <= MAX_COMMENT_PAGES; page++) {
+      const response = await apiFetch(
+        `https://api.github.com/repos/${owner}/${repoName}/issues/${this.prNumber}/comments?per_page=${COMMENTS_PER_PAGE}&page=${page}`,
+        { headers: getGitHubHeaders(token) },
+        { label: "listing the PR comments", idempotent: true },
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to list the comments on PR #${this.prNumber}: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const comments = (await response.json()) as GitHubComment[];
+      const existing = comments.find((c) => c.body?.includes(COMMENT_MARKER));
+
+      if (existing || comments.length < COMMENTS_PER_PAGE) {
+        return existing;
+      }
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Upserts the preview comment: edits the one this PR already carries,
+   * otherwise posts it. Runs after every successful deploy, which is what keeps
+   * the URLs current and lets a PR whose first deploy died halfway still get
+   * its comment on the next one — the old "only on the first deployment" rule
+   * read the service list as a stand-in for "no comment yet", and a half-failed
+   * run left that proxy wrong forever (PR #3204).
+   */
   async postGitHubComment(urls: Record<string, string>): Promise<void> {
     const token = process.env.GITHUB_TOKEN;
     if (!token) {
@@ -431,7 +511,8 @@ class ReviewDeployer {
     const repo = process.env.GITHUB_REPOSITORY || "unknown";
     const [owner, repoName] = repo.split("/");
 
-    const comment = `## 🚀 Preview Deployment
+    const comment = `${COMMENT_MARKER}
+## 🚀 Preview Deployment
 
 Preview environments are ready:
 
@@ -446,28 +527,57 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
 `;
 
     try {
-      const response = await fetch(
-        `https://api.github.com/repos/${owner}/${repoName}/issues/${this.prNumber}/comments`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/vnd.github.v3+json",
-          },
-          body: JSON.stringify({
-            body: comment,
-          }),
-        },
-      );
+      const existing = await this.findPreviewComment(owner, repoName, token);
+
+      if (isSameBody(existing?.body, comment)) {
+        console.log("✅ Preview comment is already up to date");
+        return;
+      }
+
+      const response = existing
+        ? await apiFetch(
+            `https://api.github.com/repos/${owner}/${repoName}/issues/comments/${existing.id}`,
+            {
+              method: "PATCH",
+              headers: getGitHubHeaders(token),
+              body: JSON.stringify({
+                body: comment,
+              }),
+            },
+            // The body is the comment's desired state, so a replay lands on the
+            // same state rather than adding anything.
+            { label: "updating the PR comment", idempotent: true },
+          )
+        : await apiFetch(
+            `https://api.github.com/repos/${owner}/${repoName}/issues/${this.prNumber}/comments`,
+            {
+              method: "POST",
+              headers: getGitHubHeaders(token),
+              body: JSON.stringify({
+                body: comment,
+              }),
+            },
+            // The upsert dedupes across runs, not within one: the marker was
+            // looked up before this request, so replaying a POST the server did
+            // see would still stack a second comment. Losing the POST is the
+            // cheaper failure — the next deploy upserts it.
+            { label: "posting the PR comment", idempotent: false },
+          );
+
       if (!response.ok) {
         console.warn(
-          `⚠️  Failed to post GitHub comment: ${response.status} ${response.statusText}`,
+          `⚠️  Failed to ${existing ? "update" : "post"} the preview comment: ${response.status} ${response.statusText}`,
         );
         return;
       }
-      console.log("✅ Posted comment to GitHub PR");
+
+      console.log(
+        existing
+          ? "✅ Updated the comment on the GitHub PR"
+          : "✅ Posted comment to GitHub PR",
+      );
     } catch (error) {
-      console.warn("⚠️  Failed to post GitHub comment:", error);
+      console.warn("⚠️  Failed to upsert the preview comment:", error);
     }
   }
 
@@ -499,12 +609,6 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
         this.getIngresses(),
       ]);
 
-      const isFirstDeployment = !this.images.some((image) =>
-        existingServices.some(
-          (s) => s.serviceName === this.getServiceName(image.imageType),
-        ),
-      );
-
       const urls: Record<string, string> = {};
       for (const image of this.images) {
         urls[image.imageType] = await this.deployImage(
@@ -514,9 +618,7 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
         );
       }
 
-      if (isFirstDeployment) {
-        await this.postGitHubComment(urls);
-      }
+      await this.postGitHubComment(urls);
 
       console.log("\n✨ Deployment completed successfully!");
       console.log("\nPreview URLs:");

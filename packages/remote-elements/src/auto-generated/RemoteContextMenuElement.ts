@@ -29,6 +29,7 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       getTargetRect: {},
       hidden: {},
       inert: {},
+      isDefaultOpen: {},
       isDialogContent: {},
       isEntering: {},
       isExiting: {},

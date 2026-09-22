@@ -3,6 +3,163 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.1](https://github.com/mittwald/flow/compare/1.2.0...1.2.1) (2026-09-21)
+
+### Bug Fixes
+
+* **Tabs:** keep collapsed tab titles out of the scrollable overflow ([#3213](https://github.com/mittwald/flow/issues/3213)) ([7595357](https://github.com/mittwald/flow/commit/7595357396476deeb3d1b63d4105a3ade84f8e83))
+
+## [1.2.0](https://github.com/mittwald/flow/compare/1.2.0-next.67...1.2.0) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** restore the stable changelogs before graduating ([94edc1d](https://github.com/mittwald/flow/commit/94edc1d4dfa5e83dadbad1fa84142f8ff7e37815))
+
+## [1.1.53](https://github.com/mittwald/flow/compare/1.1.52...1.1.53) (2026-09-21)
+
+### Bug Fixes
+
+* **icons:** drop the trailing separator from an icon&#x27;s class attribute ([#3203](https://github.com/mittwald/flow/issues/3203)) ([8a48c83](https://github.com/mittwald/flow/commit/8a48c8357b99b10eb8e1bbe608a3fdd797722825))
+
+## [1.1.52](https://github.com/mittwald/flow/compare/1.1.51...1.1.52) (2026-09-21)
+
+### Bug Fixes
+
+* **SectionHeader:** render links in size &quot;m&quot; ([#3200](https://github.com/mittwald/flow/issues/3200)) ([2151330](https://github.com/mittwald/flow/commit/2151330e89c72e7152593f06255b49bac10c6bfa))
+
+## [1.1.51](https://github.com/mittwald/flow/compare/1.1.50...1.1.51) (2026-09-18)
+
+### Continuous Integration
+
+* run every suite on Dependabot PRs and deploy their review apps ([#3079](https://github.com/mittwald/flow/issues/3079)) ([baf1ad5](https://github.com/mittwald/flow/commit/baf1ad5c433a10b8f113c3354c35126fc1f474b1))
+
+## [1.1.50](https://github.com/mittwald/flow/compare/1.1.49...1.1.50) (2026-09-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.49](https://github.com/mittwald/flow/compare/1.1.48...1.1.49) (2026-09-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.48](https://github.com/mittwald/flow/compare/1.1.47...1.1.48) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.47](https://github.com/mittwald/flow/compare/1.1.46...1.1.47) (2026-09-17)
+
+### Miscellaneous Chores
+
+* **core:** stop writing failure screenshots next to tests ([#3068](https://github.com/mittwald/flow/issues/3068)) ([544e90d](https://github.com/mittwald/flow/commit/544e90d20e43e1b17d73fc959ffe1465a1bb4616))
+
+## [1.1.46](https://github.com/mittwald/flow/compare/1.1.45...1.1.46) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.45](https://github.com/mittwald/flow/compare/1.1.44...1.1.45) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.44](https://github.com/mittwald/flow/compare/1.1.43...1.1.44) (2026-09-17)
+
+### Miscellaneous Chores
+
+* load every package&#x27;s AGENTS.md automatically ([#3173](https://github.com/mittwald/flow/issues/3173)) ([a3bff5a](https://github.com/mittwald/flow/commit/a3bff5a7ad0c7c255774c387e40e88454d0d679c))
+
+## [1.1.43](https://github.com/mittwald/flow/compare/1.1.42...1.1.43) (2026-09-16)
+
+### Tests
+
+* **ImageCropper:** gate the custom error view scenario on 1.1.41 ([#3172](https://github.com/mittwald/flow/issues/3172)) ([f2fa142](https://github.com/mittwald/flow/commit/f2fa142cc691739c9e181cc73f420bd2afc2bf26))
+
+## [1.1.42](https://github.com/mittwald/flow/compare/1.1.41...1.1.42) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.41](https://github.com/mittwald/flow/compare/1.1.40...1.1.41) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.40](https://github.com/mittwald/flow/compare/1.1.39...1.1.40) (2026-09-15)
+
+### Bug Fixes
+
+* **components:** keep overlay trigger buttons inside their trigger ([#3025](https://github.com/mittwald/flow/issues/3025)) ([7210212](https://github.com/mittwald/flow/commit/7210212778fc1fd57aa4309226ce992408fe6c50))
+
+## [1.1.39](https://github.com/mittwald/flow/compare/1.1.38...1.1.39) (2026-09-15)
+
+### Bug Fixes
+
+* **components:** keep field values controlled from the first render ([#3078](https://github.com/mittwald/flow/issues/3078)) ([16c6981](https://github.com/mittwald/flow/commit/16c69814f4459476c01392ea5d4935c6bef8c6dd))
+* unbreak the Storybook preview and clear the build, test and dev-server warnings ([#3019](https://github.com/mittwald/flow/issues/3019)) ([6024c9f](https://github.com/mittwald/flow/commit/6024c9febce8d4ca94fcc247a66a904ab6438cd2))
+
+## [1.1.38](https://github.com/mittwald/flow/compare/1.1.37...1.1.38) (2026-09-15)
+
+### Bug Fixes
+
+* **MessageThread:** restore list markers for ordered lists ([#3160](https://github.com/mittwald/flow/issues/3160)) ([11ad06c](https://github.com/mittwald/flow/commit/11ad06cccd554ca13f6dbeb4c8fdd4698744003f))
+
+## [1.1.37](https://github.com/mittwald/flow/compare/1.1.36...1.1.37) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.36](https://github.com/mittwald/flow/compare/1.1.35...1.1.36) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.35](https://github.com/mittwald/flow/compare/1.1.34...1.1.35) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.34](https://github.com/mittwald/flow/compare/1.1.33...1.1.34) (2026-09-14)
+
+### Bug Fixes
+
+* **Markdown:** clip striped table cells to the rounded corners ([#3149](https://github.com/mittwald/flow/issues/3149)) ([a1ade85](https://github.com/mittwald/flow/commit/a1ade854c5724248c2e867e041e88119e81f168e))
+
+## [1.1.33](https://github.com/mittwald/flow/compare/1.1.32...1.1.33) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.32](https://github.com/mittwald/flow/compare/1.1.31...1.1.32) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.31](https://github.com/mittwald/flow/compare/1.1.30...1.1.31) (2026-09-10)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.30](https://github.com/mittwald/flow/compare/1.1.29...1.1.30) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.29](https://github.com/mittwald/flow/compare/1.1.28...1.1.29) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.28](https://github.com/mittwald/flow/compare/1.1.27...1.1.28) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.27](https://github.com/mittwald/flow/compare/1.1.26...1.1.27) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.1.25](https://github.com/mittwald/flow/compare/1.1.24...1.1.25) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.1.24](https://github.com/mittwald/flow/compare/1.1.23...1.1.24) (2026-09-08)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

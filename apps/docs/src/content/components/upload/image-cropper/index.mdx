@@ -42,6 +42,22 @@ werden.
 
 ---
 
+# Fehlerzustand
+
+Kann das Bild nicht geladen oder nicht gelesen werden — eine abgelaufene URL,
+ein 404 oder ein Bild von einer fremden Domain ohne CORS-Header —, zeigt der
+ImageCropper eine Fehlermeldung anstelle des Ausschnitts. Über `onError` erfährt
+die Anwendung davon, zum Beispiel um den Upload zurückzusetzen.
+
+<LiveCodeEditor example="error" editorCollapsed />
+
+Über `errorView` kann die Fehlermeldung ersetzt werden, etwa um dem User eine
+Handlung anzubieten.
+
+<LiveCodeEditor example="error-view" editorCollapsed />
+
+---
+
 # Kombiniere mit ...
 
 ## FileDropZone

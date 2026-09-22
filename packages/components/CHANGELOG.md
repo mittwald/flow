@@ -3,6 +3,189 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+### Bug Fixes
+
+* **CoachMark:** play the closing animation instead of vanishing ([#3224](https://github.com/mittwald/flow/issues/3224)) ([75d9bda](https://github.com/mittwald/flow/commit/75d9bdad04a98a5b4cd18b60d13ad121405b196f))
+
+## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
+
+### Bug Fixes
+
+* **components:** invalidate build:icons when the icon source changes ([#3220](https://github.com/mittwald/flow/issues/3220)) ([9978fa1](https://github.com/mittwald/flow/commit/9978fa17911210637befbbcfc7d654edf00177ad))
+
+## [1.2.1](https://github.com/mittwald/flow/compare/1.2.0...1.2.1) (2026-09-21)
+
+### Bug Fixes
+
+* **Tabs:** keep collapsed tab titles out of the scrollable overflow ([#3213](https://github.com/mittwald/flow/issues/3213)) ([7595357](https://github.com/mittwald/flow/commit/7595357396476deeb3d1b63d4105a3ade84f8e83))
+
+## [1.2.0](https://github.com/mittwald/flow/compare/1.2.0-next.67...1.2.0) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** restore the stable changelogs before graduating ([94edc1d](https://github.com/mittwald/flow/commit/94edc1d4dfa5e83dadbad1fa84142f8ff7e37815))
+
+## [1.1.53](https://github.com/mittwald/flow/compare/1.1.52...1.1.53) (2026-09-21)
+
+### Bug Fixes
+
+* **icons:** drop the trailing separator from an icon&#x27;s class attribute ([#3203](https://github.com/mittwald/flow/issues/3203)) ([8a48c83](https://github.com/mittwald/flow/commit/8a48c8357b99b10eb8e1bbe608a3fdd797722825))
+
+## [1.1.52](https://github.com/mittwald/flow/compare/1.1.51...1.1.52) (2026-09-21)
+
+### Bug Fixes
+
+* **SectionHeader:** render links in size &quot;m&quot; ([#3200](https://github.com/mittwald/flow/issues/3200)) ([2151330](https://github.com/mittwald/flow/commit/2151330e89c72e7152593f06255b49bac10c6bfa))
+
+## [1.1.51](https://github.com/mittwald/flow/compare/1.1.50...1.1.51) (2026-09-18)
+
+### Bug Fixes
+
+* **Popover:** keep a gap to the viewport edge on a narrow screen ([#3193](https://github.com/mittwald/flow/issues/3193)) ([e607168](https://github.com/mittwald/flow/commit/e60716814cce82519db1e99056506160fe5a1f5e))
+
+## [1.1.50](https://github.com/mittwald/flow/compare/1.1.49...1.1.50) (2026-09-18)
+
+### Bug Fixes
+
+* **Overlay:** size the backdrop to the viewport, not the document ([#3184](https://github.com/mittwald/flow/issues/3184)) ([7eb1589](https://github.com/mittwald/flow/commit/7eb1589951b1e80ba34588b2eab832c810066174))
+
+## [1.1.49](https://github.com/mittwald/flow/compare/1.1.48...1.1.49) (2026-09-18)
+
+### Bug Fixes
+
+* **Notification:** keep the notification inside narrow viewports ([#3190](https://github.com/mittwald/flow/issues/3190)) ([e35fc7a](https://github.com/mittwald/flow/commit/e35fc7aab1dd63efbab3bf83f809771b07d1f936))
+
+## [1.1.48](https://github.com/mittwald/flow/compare/1.1.47...1.1.48) (2026-09-17)
+
+### Bug Fixes
+
+* **Popover:** report the open state instead of taking it over ([#3183](https://github.com/mittwald/flow/issues/3183)) ([0524e54](https://github.com/mittwald/flow/commit/0524e54be6dd0be980ce6c3c8f10e708ee063804))
+
+## [1.1.47](https://github.com/mittwald/flow/compare/1.1.46...1.1.47) (2026-09-17)
+
+### Miscellaneous Chores
+
+* **core:** stop writing failure screenshots next to tests ([#3068](https://github.com/mittwald/flow/issues/3068)) ([544e90d](https://github.com/mittwald/flow/commit/544e90d20e43e1b17d73fc959ffe1465a1bb4616))
+
+## [1.1.46](https://github.com/mittwald/flow/compare/1.1.45...1.1.46) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.45](https://github.com/mittwald/flow/compare/1.1.44...1.1.45) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.44](https://github.com/mittwald/flow/compare/1.1.43...1.1.44) (2026-09-17)
+
+### Bug Fixes
+
+* **codemods:** stop migrations breaking asset imports and skipping the password-tools rule ([#3181](https://github.com/mittwald/flow/issues/3181)) ([3fa8963](https://github.com/mittwald/flow/commit/3fa89631e8210b67a94f573fb7d3de5a783d3e45))
+
+## [1.1.43](https://github.com/mittwald/flow/compare/1.1.42...1.1.43) (2026-09-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.42](https://github.com/mittwald/flow/compare/1.1.41...1.1.42) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.41](https://github.com/mittwald/flow/compare/1.1.40...1.1.41) (2026-09-15)
+
+### Performance Improvements
+
+* **icons:** inline the Tabler icon path data instead of depending on @tabler/icons-react ([#3164](https://github.com/mittwald/flow/issues/3164)) ([11be0f2](https://github.com/mittwald/flow/commit/11be0f2226ab737d5a650566ee96d3fe398c016c))
+
+## [1.1.40](https://github.com/mittwald/flow/compare/1.1.39...1.1.40) (2026-09-15)
+
+### Bug Fixes
+
+* **components:** keep overlay trigger buttons inside their trigger ([#3025](https://github.com/mittwald/flow/issues/3025)) ([7210212](https://github.com/mittwald/flow/commit/7210212778fc1fd57aa4309226ce992408fe6c50))
+
+## [1.1.39](https://github.com/mittwald/flow/compare/1.1.38...1.1.39) (2026-09-15)
+
+### Bug Fixes
+
+* **components:** keep field values controlled from the first render ([#3078](https://github.com/mittwald/flow/issues/3078)) ([16c6981](https://github.com/mittwald/flow/commit/16c69814f4459476c01392ea5d4935c6bef8c6dd))
+* unbreak the Storybook preview and clear the build, test and dev-server warnings ([#3019](https://github.com/mittwald/flow/issues/3019)) ([6024c9f](https://github.com/mittwald/flow/commit/6024c9febce8d4ca94fcc247a66a904ab6438cd2))
+
+## [1.1.38](https://github.com/mittwald/flow/compare/1.1.37...1.1.38) (2026-09-15)
+
+### Bug Fixes
+
+* **MessageThread:** restore list markers for ordered lists ([#3160](https://github.com/mittwald/flow/issues/3160)) ([11ad06c](https://github.com/mittwald/flow/commit/11ad06cccd554ca13f6dbeb4c8fdd4698744003f))
+
+## [1.1.37](https://github.com/mittwald/flow/compare/1.1.36...1.1.37) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.36](https://github.com/mittwald/flow/compare/1.1.35...1.1.36) (2026-09-14)
+
+### Bug Fixes
+
+* **Image:** keep sizing from style when no size props are given ([#3147](https://github.com/mittwald/flow/issues/3147)) ([abfc5a6](https://github.com/mittwald/flow/commit/abfc5a6286ec29471028be0ef49d468c71974e1d))
+
+## [1.1.35](https://github.com/mittwald/flow/compare/1.1.34...1.1.35) (2026-09-14)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 8 updates ([#3155](https://github.com/mittwald/flow/issues/3155)) ([4b8a593](https://github.com/mittwald/flow/commit/4b8a5936f21ea7cf5d645ec9eadcbaceaea0ad7f))
+
+## [1.1.34](https://github.com/mittwald/flow/compare/1.1.33...1.1.34) (2026-09-14)
+
+### Bug Fixes
+
+* **Markdown:** clip striped table cells to the rounded corners ([#3149](https://github.com/mittwald/flow/issues/3149)) ([a1ade85](https://github.com/mittwald/flow/commit/a1ade854c5724248c2e867e041e88119e81f168e))
+
+## [1.1.33](https://github.com/mittwald/flow/compare/1.1.32...1.1.33) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.32](https://github.com/mittwald/flow/compare/1.1.31...1.1.32) (2026-09-14)
+
+### Bug Fixes
+
+* **Activity:** stop a deactivated subtree leaving its overlays on screen ([#3153](https://github.com/mittwald/flow/issues/3153)) ([a6c613b](https://github.com/mittwald/flow/commit/a6c613b2e66fa5e7c18821c542a938ed57468ea0))
+
+## [1.1.31](https://github.com/mittwald/flow/compare/1.1.30...1.1.31) (2026-09-10)
+
+### Bug Fixes
+
+* **Option:** stop every option landing in the collection twice ([#3146](https://github.com/mittwald/flow/issues/3146)) ([f6a8d84](https://github.com/mittwald/flow/commit/f6a8d846d249c100ca68c5fd872f9eec474bbf0a))
+
+## [1.1.30](https://github.com/mittwald/flow/compare/1.1.29...1.1.30) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.29](https://github.com/mittwald/flow/compare/1.1.28...1.1.29) (2026-09-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** update to stable v3 ([#3145](https://github.com/mittwald/flow/issues/3145)) ([8c56d85](https://github.com/mittwald/flow/commit/8c56d85d471d16ed34217df14505a6442684e9b2))
+
+## [1.1.28](https://github.com/mittwald/flow/compare/1.1.27...1.1.28) (2026-09-09)
+
+### Bug Fixes
+
+* **codemods:** wrap bare function references passed to onAction ([#3075](https://github.com/mittwald/flow/issues/3075)) ([bb98f3c](https://github.com/mittwald/flow/commit/bb98f3c22cb334c6ec6b18c48e08416f4317919f))
+
+## [1.1.27](https://github.com/mittwald/flow/compare/1.1.26...1.1.27) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
+### Bug Fixes
+
+* **components:** prefix the CSS properties Safari needs prefixed ([#3066](https://github.com/mittwald/flow/issues/3066)) ([8b3536c](https://github.com/mittwald/flow/commit/8b3536cbcb39106d8de06eda39c46a257b1b4d24))
+
+## [1.1.25](https://github.com/mittwald/flow/compare/1.1.24...1.1.25) (2026-09-08)
+
+### Bug Fixes
+
+* **NotificationProvider:** keep notifications interactive over an open overlay ([#3133](https://github.com/mittwald/flow/issues/3133)) ([07ea00d](https://github.com/mittwald/flow/commit/07ea00df067899d21221088bb840bcab1d5f4c43))
+
 ## [1.1.24](https://github.com/mittwald/flow/compare/1.1.23...1.1.24) (2026-09-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

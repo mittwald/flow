@@ -9,7 +9,7 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { use, useState, type ReactNode } from "react";
+import { use, useState, useSyncExternalStore, type ReactNode } from "react";
 import { expect, test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { RouterProvider } from "react-aria-components";
@@ -660,6 +660,113 @@ describe("Item rendering", () => {
     await expect
       .element(page.getByText("Item: 42 unselected"))
       .toBeInTheDocument();
+  });
+
+  // A render function whose identity never changes leaves the memoized item no
+  // signal to follow — `dependencies` is the consumer's way to give it one.
+  const store = {
+    selected: [] as number[],
+    version: 0,
+    listeners: new Set<() => void>(),
+    toggle(num: number) {
+      store.selected = store.selected.includes(num)
+        ? store.selected.filter((n) => n !== num)
+        : [...store.selected, num];
+      store.version++;
+      store.listeners.forEach((listener) => listener());
+    },
+  };
+
+  const subscribeToStore = (listener: () => void) => {
+    store.listeners.add(listener);
+    return () => {
+      store.listeners.delete(listener);
+    };
+  };
+
+  const renderStoreItem = ({ num }: Data) => (
+    <span>
+      Item: {num} {store.selected.includes(num) ? "selected" : "unselected"}
+    </span>
+  );
+
+  const storeItemTextValue = ({ num }: Data) => String(num);
+
+  const toggleStoreItem = ({ num }: Data) => {
+    store.toggle(num);
+  };
+
+  const StoreList = () => {
+    const version = useSyncExternalStore(subscribeToStore, () => store.version);
+
+    return (
+      <List aria-label="Test" onAction={toggleStoreItem}>
+        <ListStaticData<Data> data={selectableData} />
+        <ListItem<Data> textValue={storeItemTextValue} dependencies={[version]}>
+          {renderStoreItem}
+        </ListItem>
+      </List>
+    );
+  };
+
+  test("items follow the dependencies a stable render function declares", async () => {
+    store.selected = [];
+    store.version = 0;
+
+    await render(<StoreList />);
+
+    await userEvent.click(page.getByText("Item: 42 unselected"));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByText("Item: 42 selected"));
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+  });
+});
+
+describe("Item hover", () => {
+  // The item's hover background is carved out for the bottom content, which
+  // carries its own interactive elements. The carve-out is a `:has()` rule in
+  // Item.module.scss matching a class ListItemViewContent applies — a coupling
+  // across two files that no other test would notice going stale.
+  const HoverableList = () => (
+    <List aria-label="Test" onAction={() => undefined}>
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
+      <ListItem<Data> textValue={({ num }) => String(num)}>
+        {({ num }) => (
+          <ListItemView>
+            <Content>Top {num}</Content>
+            <Content slot="bottom">Bottom {num}</Content>
+          </ListItemView>
+        )}
+      </ListItem>
+    </List>
+  );
+
+  const topContent = page.getByText("Top 42");
+  const bottomContent = page.getByText("Bottom 42");
+  const hoveredRow = page.getByRole("row").nth(0);
+  // Never hovered, so it shows the default background whatever the pointer did
+  // before this test — reading the hovered item's own "before" state would not,
+  // since the pointer may already rest on it at render time.
+  const restingRow = page.getByRole("row").nth(1);
+
+  test("bottom content does not trigger the item hover background", async () => {
+    await render(<HoverableList />);
+
+    const backgrounds = () => [
+      getComputedStyle(hoveredRow.element()).backgroundColor,
+      getComputedStyle(restingRow.element()).backgroundColor,
+    ];
+
+    await userEvent.hover(topContent);
+    await expect.poll(() => backgrounds()[0]).not.toBe(backgrounds()[1]);
+
+    await userEvent.hover(bottomContent);
+    await expect.poll(() => backgrounds()[0]).toBe(backgrounds()[1]);
   });
 });
 

@@ -1,5 +1,6 @@
 .body {
   --header-height: 72px;
+  --page-width: 1800px;
 
   background-color: var(--neutral--color--200);
   isolation: isolate;
@@ -28,7 +29,7 @@
   padding-block-start: var(--size-px--m);
   padding-inline: var(--size-px--xl);
   column-gap: var(--size-px--l);
-  width: 1800px;
+  width: var(--page-width);
   max-width: 100%;
   margin: 0 auto auto;
 }
@@ -90,8 +91,8 @@
  * wrapper, so the content keeps the width it has next to a 290px navigation.
  */
 @media (min-width: 1900px) {
-  .mainWrapper {
-    width: 1880px;
+  .body {
+    --page-width: 1880px;
   }
 
   .mainNavigation {

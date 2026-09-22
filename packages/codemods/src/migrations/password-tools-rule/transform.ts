@@ -23,13 +23,24 @@ const passwordToolsRuleTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components/mittwald-password-tools-js",
   ];
+  /**
+   * The same entry under the name it had when this change shipped. It was
+   * renamed later (alpha.1000, `password-tools-subpath-renamed`), and `since`
+   * puts that rename _after_ this transform — so a consumer coming from before
+   * alpha.802 still spells the import `password-tools` when this runs, and
+   * matching only the current name left `AsyncRule` untouched for the rename to
+   * carry onto an entry that does not export it. Kept out of `flowPackages`
+   * because `remoteScope.test.ts` holds every name in there against the export
+   * map the packages have _today_, where this one is gone.
+   */
+  const renamedFlowPackage = "@mittwald/flow-react-components/password-tools";
   const renames = new Map([
     ["AsyncRule", "Rule"],
     ["SyncRule", "Rule"],
   ]);
 
   const isFlowImport = (source: string): boolean =>
-    flowPackages.includes(source);
+    flowPackages.includes(source) || source === renamedFlowPackage;
 
   // ast-types models `importKind` on the declaration only, while babel also
   // puts it on the specifier — which is where a per-specifier `type X` lives.

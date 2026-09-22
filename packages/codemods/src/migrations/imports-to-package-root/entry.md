@@ -8,8 +8,13 @@ apply:
   'Rewrite every subdirectory import from `@mittwald/flow-react-components` to
   the package root, except `react-hook-form` and `nextjs`, which move to
   `@mittwald/flow-react-components/react-hook-form` and
-  `@mittwald/flow-react-components/nextjs`. If you hit missing module errors,
-  set `"module": "esnext"` in `tsconfig.json`.'
+  `@mittwald/flow-react-components/nextjs`. Asset imports are not part of this:
+  a CSS specifier stays a CSS specifier — `all.css` and `all-layered.css`
+  unchanged, a stale `global.css` or `globals.css` rewritten to `all.css` — and
+  keeps any bundler query it carries (`?url`, `?inline`, `?raw`). It never
+  becomes a named import from the package root, which has no JS binding behind a
+  stylesheet. If you hit missing module errors, set `"module": "esnext"` in
+  `tsconfig.json`.'
 ---
 
 With the latest update to `@mittwald/flow-react-components`, the way package
@@ -37,6 +42,21 @@ import { useOverlayController } from "@mittwald/flow-react-components";
 import { Field } from "@mittwald/flow-react-components/react-hook-form";
 import { Link } from "@mittwald/flow-react-components/nextjs";
 ```
+
+### Stylesheets stay stylesheet imports
+
+A CSS export is a file, not a JS module, so it never moves onto the package
+root. A bundler query addressing it (`?url`, `?inline`, `?raw`) is part of how
+the file is requested, not part of the subpath — both of these stay exactly as
+they are:
+
+```javascript
+import "@mittwald/flow-react-components/all.css";
+import flowStyles from "@mittwald/flow-react-components/all.css?url";
+```
+
+Only a stale `global.css` or `globals.css` is rewritten to `all.css`, query
+included.
 
 ### `tsconfig.json`
 

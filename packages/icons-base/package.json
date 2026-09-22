@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-icons-base",
   "private": true,
-  "version": "1.1.24",
+  "version": "1.2.3",
   "type": "module",
   "exports": {
     ".": {
@@ -15,6 +15,7 @@
     "src"
   ],
   "dependencies": {
+    "@tabler/icons-react": "^3.46.0",
     "fs-jetpack": "^5.1.0",
     "prettier": "^3.9.6",
     "typescript": "^6.0.3",
