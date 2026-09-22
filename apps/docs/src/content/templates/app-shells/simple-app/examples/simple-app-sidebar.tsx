@@ -65,8 +65,19 @@ const pseudoRandom = (seed: number) => {
   return x - Math.floor(x);
 };
 
-const pick = <T,>(options: readonly T[], seed: number): T =>
-  options[Math.floor(pseudoRandom(seed) * options.length)];
+const pick = <T,>(
+  options: readonly T[],
+  seed: number,
+): T => {
+  const value =
+    options[
+      Math.floor(pseudoRandom(seed) * options.length)
+    ];
+  if (value === undefined) {
+    throw new Error("Cannot pick from an empty list");
+  }
+  return value;
+};
 
 // A page of invoices, one per day counting back from 30.09.2026, with enough
 // rows to sort, filter and search through.
