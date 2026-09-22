@@ -70,3 +70,52 @@ test.each(testEnvironments)(
     await testScreenshot("CoachMark with a width");
   },
 );
+
+/*
+ * The collision from #3232, with both sides as they actually occur: a hint
+ * anchored in a page header, and the card with the tab bar that sits below it.
+ * The card's tab bar is positioned, so before the coach mark claimed a stacking
+ * level of its own it painted over the hint's lower half — visible as a strip
+ * of tab bar across it, and only in this arrangement.
+ */
+test.each(testEnvironments)(
+  "CoachMark over a positioned sibling (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Button,
+      CoachMark,
+      Heading,
+      LayoutCard,
+      Link,
+      TabNavigation,
+      Text,
+    },
+  }) => {
+    await render(
+      <>
+        <Button id="coach-mark-stacking-anchor">Assign a rank</Button>
+        <CoachMark anchor="coach-mark-stacking-anchor" isDefaultOpen>
+          <Heading>New: assign a rank</Heading>
+          <Text>
+            You can now assign a rank right here, without going through the
+            squadron overview.
+          </Text>
+        </CoachMark>
+        <LayoutCard>
+          <TabNavigation aria-label="Tab navigation">
+            <Link href="#" aria-current="page">
+              Squadron
+            </Link>
+            <Link href="#">Pilots</Link>
+            <Link href="#">Starfighters</Link>
+            <Link href="#">Missions</Link>
+          </TabNavigation>
+        </LayoutCard>
+      </>,
+    );
+
+    await testScreenshot("CoachMark over a positioned sibling");
+  },
+);
