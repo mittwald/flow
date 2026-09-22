@@ -77,9 +77,14 @@ your time when developing components.
 
 ### Git hooks
 
-`pnpm dev:init-githooks` wires up
-[simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
-installed:
+The root `prepare` installs
+[simple-git-hooks](https://github.com/toplenboren/simple-git-hooks) after every
+`pnpm install`, so a normal checkout has the hooks without thinking about it;
+`pnpm dev:init-githooks` does the same on demand. Both go through
+`.github/scripts/init-git-hooks.cjs`, which skips CI — the package's own
+`postinstall` is denied in `pnpm-workspace.yaml` precisely because it did not,
+and a `pre-push` lint on a runner aborted pushes after a publish had already
+happened (#2932). Once installed:
 
 - **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
   repo. It blocks the push, not the commit — unformatted files surface once the

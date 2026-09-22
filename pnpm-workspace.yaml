@@ -23,7 +23,10 @@ allowBuilds:
   msw: true
   nx: true
   sharp: true
-  simple-git-hooks: true
+  # Denied on purpose. Its postinstall writes .git/hooks on EVERY `pnpm install`,
+  # runners included — see .github/scripts/init-git-hooks.cjs, which installs
+  # them from the root `prepare` instead and skips CI.
+  simple-git-hooks: false
   style-dictionary: true
 
 packages:

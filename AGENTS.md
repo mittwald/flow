@@ -189,9 +189,11 @@ commit the results.
   `pnpm install` — expect installs after switching branches. `pre-push` runs
   `pnpm lint` — which includes `format:check`, so a stray unformatted
   `.md`/`.json`/`.yml` blocks the push, not the commit; `pnpm format` fixes it.
-  The hooks are written by simple-git-hooks' `postinstall` (allowlisted in
-  `allowBuilds`), so a **runner** gets them too — CI workflows that write git
-  set `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to opt out (#2932).
+  The hooks are installed by the root `prepare`
+  (`.github/scripts/init-git-hooks.cjs`), which skips CI — simple-git-hooks' own
+  `postinstall` is denied in `allowBuilds`, because it ran on runners too and a
+  `pre-push` lint there aborted pushes after a publish had already happened
+  (#2932).
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
@@ -445,20 +447,6 @@ where the error points.
   `unit*`. (Each project's browser instances come from
   `createVitestBrowserTestConfig()`, which hands out fresh objects per call, so
   the projects cannot collide over their generated names.)
-
-- **Symptom:** A CI workflow that runs `pnpm install` and then pushes, merges or
-  checks out spends minutes in `eslint`/`stylelint`/`prettier`, or reinstalls in
-  the middle of a merge
-
-  **Cause:** simple-git-hooks is allowlisted in `allowBuilds`, so its
-  `postinstall` writes `.git/hooks` on **every** `pnpm install` — runners
-  included. `pre-push` is `pnpm lint`, `post-merge`/`post-checkout` are
-  `pnpm install`
-
-  **Fix:** Add `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to the workflow's `env` (see
-  `publish.yml`). Where a failed push would strand something already published,
-  also pass `git push --no-verify` — that guard sits at the push and does not
-  depend on the env var staying put (#2932)
 
 - **Symptom:** A visual test that hovers before `testScreenshot` captures the
   **non-hovered** state — the diff looks as if the CSS never applied
