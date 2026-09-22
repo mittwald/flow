@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.6](https://github.com/mittwald/flow/compare/1.2.5...1.2.6) (2026-09-22)
+
+### Tests
+
+* **components:** compile the browser tests&#x27; base styles from source ([#3196](https://github.com/mittwald/flow/issues/3196)) ([2320245](https://github.com/mittwald/flow/commit/2320245f4d91e698fc959bd2ff6e08c3eb0ccc78))
+
 ## [1.2.5](https://github.com/mittwald/flow/compare/1.2.4...1.2.5) (2026-09-22)
 
 ### Bug Fixes
