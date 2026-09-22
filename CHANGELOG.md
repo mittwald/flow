@@ -3,6 +3,114 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
+
+### Bug Fixes
+
+* **components:** invalidate build:icons when the icon source changes ([#3220](https://github.com/mittwald/flow/issues/3220)) ([9978fa1](https://github.com/mittwald/flow/commit/9978fa17911210637befbbcfc7d654edf00177ad))
+
+### Documentation
+
+* **releases:** scale the release-note figures to their capture scale ([#3216](https://github.com/mittwald/flow/issues/3216)) ([13c62be](https://github.com/mittwald/flow/commit/13c62be488c019f7fa8d6fb12bfe230072b86e24))
+
+## [1.2.1](https://github.com/mittwald/flow/compare/1.2.0...1.2.1) (2026-09-21)
+
+### Bug Fixes
+
+* **Tabs:** keep collapsed tab titles out of the scrollable overflow ([#3213](https://github.com/mittwald/flow/issues/3213)) ([7595357](https://github.com/mittwald/flow/commit/7595357396476deeb3d1b63d4105a3ade84f8e83))
+
+## [1.2.0](https://github.com/mittwald/flow/compare/1.2.0-next.67...1.2.0) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** restore the stable changelogs before graduating ([94edc1d](https://github.com/mittwald/flow/commit/94edc1d4dfa5e83dadbad1fa84142f8ff7e37815))
+
+## [1.1.53](https://github.com/mittwald/flow/compare/1.1.52...1.1.53) (2026-09-21)
+
+### Bug Fixes
+
+* **icons:** drop the trailing separator from an icon&#x27;s class attribute ([#3203](https://github.com/mittwald/flow/issues/3203)) ([8a48c83](https://github.com/mittwald/flow/commit/8a48c8357b99b10eb8e1bbe608a3fdd797722825))
+
+## [1.1.52](https://github.com/mittwald/flow/compare/1.1.51...1.1.52) (2026-09-21)
+
+### Bug Fixes
+
+* **SectionHeader:** render links in size &quot;m&quot; ([#3200](https://github.com/mittwald/flow/issues/3200)) ([2151330](https://github.com/mittwald/flow/commit/2151330e89c72e7152593f06255b49bac10c6bfa))
+
+## [1.1.51](https://github.com/mittwald/flow/compare/1.1.50...1.1.51) (2026-09-18)
+
+### Bug Fixes
+
+* **Popover:** keep a gap to the viewport edge on a narrow screen ([#3193](https://github.com/mittwald/flow/issues/3193)) ([e607168](https://github.com/mittwald/flow/commit/e60716814cce82519db1e99056506160fe5a1f5e))
+
+### Continuous Integration
+
+* run every suite on Dependabot PRs and deploy their review apps ([#3079](https://github.com/mittwald/flow/issues/3079)) ([baf1ad5](https://github.com/mittwald/flow/commit/baf1ad5c433a10b8f113c3354c35126fc1f474b1))
+
+## [1.1.50](https://github.com/mittwald/flow/compare/1.1.49...1.1.50) (2026-09-18)
+
+### Bug Fixes
+
+* **Overlay:** size the backdrop to the viewport, not the document ([#3184](https://github.com/mittwald/flow/issues/3184)) ([7eb1589](https://github.com/mittwald/flow/commit/7eb1589951b1e80ba34588b2eab832c810066174))
+
+## [1.1.49](https://github.com/mittwald/flow/compare/1.1.48...1.1.49) (2026-09-18)
+
+### Bug Fixes
+
+* **Notification:** keep the notification inside narrow viewports ([#3190](https://github.com/mittwald/flow/issues/3190)) ([e35fc7a](https://github.com/mittwald/flow/commit/e35fc7aab1dd63efbab3bf83f809771b07d1f936))
+
+## [1.1.48](https://github.com/mittwald/flow/compare/1.1.47...1.1.48) (2026-09-17)
+
+### Bug Fixes
+
+* **Popover:** report the open state instead of taking it over ([#3183](https://github.com/mittwald/flow/issues/3183)) ([0524e54](https://github.com/mittwald/flow/commit/0524e54be6dd0be980ce6c3c8f10e708ee063804))
+
+## [1.1.47](https://github.com/mittwald/flow/compare/1.1.46...1.1.47) (2026-09-17)
+
+### Miscellaneous Chores
+
+* **core:** stop writing failure screenshots next to tests ([#3068](https://github.com/mittwald/flow/issues/3068)) ([544e90d](https://github.com/mittwald/flow/commit/544e90d20e43e1b17d73fc959ffe1465a1bb4616))
+
+### Continuous Integration
+
+* **publish:** stop the two release lines publishing to npm at once ([#3182](https://github.com/mittwald/flow/issues/3182)) ([68c0fe7](https://github.com/mittwald/flow/commit/68c0fe7072b2d9c198f8c1d4556560c82ca7d22f))
+
+## [1.1.46](https://github.com/mittwald/flow/compare/1.1.45...1.1.46) (2026-09-17)
+
+### Build System
+
+* **deps-dev:** bump vite-plugin-sass-dts from 1.3.37 to 1.3.39 in the dev-patch group ([#3169](https://github.com/mittwald/flow/issues/3169)) ([22e3d6c](https://github.com/mittwald/flow/commit/22e3d6c83e3040cfe8c27648bd4cad462beb38e0))
+
+## [1.1.45](https://github.com/mittwald/flow/compare/1.1.44...1.1.45) (2026-09-17)
+
+### Build System
+
+* **deps:** bump cronstrue from 3.24.0 to 3.25.0 in the production group ([#3167](https://github.com/mittwald/flow/issues/3167)) ([fd25656](https://github.com/mittwald/flow/commit/fd2565615eb37417b3c17444e7f0718f5537cc25))
+
+## [1.1.44](https://github.com/mittwald/flow/compare/1.1.43...1.1.44) (2026-09-17)
+
+### Bug Fixes
+
+* **codemods:** stop migrations breaking asset imports and skipping the password-tools rule ([#3181](https://github.com/mittwald/flow/issues/3181)) ([3fa8963](https://github.com/mittwald/flow/commit/3fa89631e8210b67a94f573fb7d3de5a783d3e45))
+
+### Miscellaneous Chores
+
+* load every package&#x27;s AGENTS.md automatically ([#3173](https://github.com/mittwald/flow/issues/3173)) ([a3bff5a](https://github.com/mittwald/flow/commit/a3bff5a7ad0c7c255774c387e40e88454d0d679c))
+
+## [1.1.43](https://github.com/mittwald/flow/compare/1.1.42...1.1.43) (2026-09-16)
+
+### Documentation
+
+* **AGENTS:** turn &quot;Common failures&quot; into a list ([#3171](https://github.com/mittwald/flow/issues/3171)) ([6ebf406](https://github.com/mittwald/flow/commit/6ebf40663e92edf19329fb7c94b59e5778ca0fee))
+
+### Tests
+
+* **ImageCropper:** gate the custom error view scenario on 1.1.41 ([#3172](https://github.com/mittwald/flow/issues/3172)) ([f2fa142](https://github.com/mittwald/flow/commit/f2fa142cc691739c9e181cc73f420bd2afc2bf26))
+
+### Build System
+
+* **deps-dev:** bump the dev-minor group with 11 updates ([#3170](https://github.com/mittwald/flow/issues/3170)) ([7348ed6](https://github.com/mittwald/flow/commit/7348ed6b8334e4a0d7a666fb5a39c21f15e83820))
+
 ## [1.1.42](https://github.com/mittwald/flow/compare/1.1.41...1.1.42) (2026-09-15)
 
 ### Build System

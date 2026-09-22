@@ -7,6 +7,17 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "popover-open-state-props",
+    since: "1.1.47",
+    title:
+      "Popover: `defaultOpen` renamed, `isOpen` and `onOpenChange` now work",
+    kind: "migration",
+    action: "codemod",
+    remotePackage: true,
+    apply:
+      "Rename `defaultOpen` to `isDefaultOpen` on `Popover`, `ContextualHelp` and `ContextMenu` — a codemod does it, scoped to those three. Leave `defaultOpen` alone on `Select`, `MenuTrigger`, `Tooltip`, `TooltipTrigger`, `DialogTrigger`, `DatePicker` and `DateRangePicker`, where it is react-aria's own prop and unchanged. Then check every `isOpen` and `onOpenChange` passed to those three by hand, because both changed behaviour and neither is mechanically decidable. `isOpen` used to be ignored and now controls the popover: a value that is not kept up to date through `onOpenChange` keeps the popover closed. `onOpenChange` used to take over the open state and now only reports it, so a handler that performed the close itself — `onOpenChange={(open) => controller.setOpen(open)}` — can drop that call, and a handler that relied on the prop to *suppress* the close no longer does; use the controller's `onClose` for that.",
+  },
+  {
     id: "tabler-icons-no-longer-transitive",
     since: "1.1.40",
     title: "@tabler/icons-react is no longer installed alongside Flow",
@@ -267,7 +278,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "codemod",
     remotePackage: false,
     apply:
-      'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
+      'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. Asset imports are not part of this: a CSS specifier stays a CSS specifier — `all.css` and `all-layered.css` unchanged, a stale `global.css` or `globals.css` rewritten to `all.css` — and keeps any bundler query it carries (`?url`, `?inline`, `?raw`). It never becomes a named import from the package root, which has no JS binding behind a stylesheet. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
   },
   {
     id: "renamed-css-export",
@@ -277,6 +288,6 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "codemod",
     remotePackage: false,
     apply:
-      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript and TypeScript files. An `@import` of the old path inside a `.css` or `.scss` file is not covered — search for it by hand.",
+      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`, keeping any bundler query the specifier carries (`.../styles?url` becomes `.../all.css?url`). A codemod does this for JavaScript and TypeScript files. An `@import` of the old path inside a `.css` or `.scss` file is not covered — search for it by hand.",
   },
 ];

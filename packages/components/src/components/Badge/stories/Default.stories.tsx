@@ -7,6 +7,11 @@ import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { useOverlayController } from "@/lib/controller";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { Button } from "@/components/Button";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
 
 const meta: Meta<typeof Badge> = {
   title: "Status/Badge",
@@ -61,6 +66,37 @@ export const WithActions: Story = {
       >
         <Label>Scope</Label>
         <Text>Value</Text>
+      </Badge>
+    </StoryBackground>
+  ),
+};
+
+export const WithContextualHelp: Story = {
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Badge {...props}>
+        <Label>Scope</Label>
+        <Text>Value</Text>
+        <ContextualHelp>
+          <Text>Every value has a story to tell.</Text>
+        </ContextualHelp>
+      </Badge>
+    </StoryBackground>
+  ),
+};
+
+export const WithContextualHelpTrigger: Story = {
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Badge {...props}>
+        <Label>Scope</Label>
+        <Text>Value</Text>
+        <ContextualHelpTrigger subject="the value">
+          <Button />
+          <ContextualHelp>
+            <Text>Every value has a story to tell.</Text>
+          </ContextualHelp>
+        </ContextualHelpTrigger>
       </Badge>
     </StoryBackground>
   ),

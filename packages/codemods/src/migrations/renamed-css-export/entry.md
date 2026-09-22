@@ -6,9 +6,10 @@ action: codemod
 remotePackage: false
 apply: >-
   Replace the import `@mittwald/flow-react-components/styles` with
-  `@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript
-  and TypeScript files. An `@import` of the old path inside a `.css` or `.scss`
-  file is not covered — search for it by hand.
+  `@mittwald/flow-react-components/all.css`, keeping any bundler query the
+  specifier carries (`.../styles?url` becomes `.../all.css?url`). A codemod does
+  this for JavaScript and TypeScript files. An `@import` of the old path inside
+  a `.css` or `.scss` file is not covered — search for it by hand.
 ---
 
 The CSS export `@mittwald/flow-react-components/styles` has renamed to the more

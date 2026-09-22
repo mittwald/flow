@@ -5,18 +5,18 @@ the `@mittwald/flow-codemods` CLI that runs them.
 
 ## Layout
 
-| Path                                                             | What it holds                                                                                                                                                                                                    |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/migrations/<id>/entry.md`                                   | The catalogue. One directory per migration, `entry.md` holding its frontmatter plus prose body. **The source.**                                                                                                  |
-| `src/migrations/<id>/transform.ts`                               | The jscodeshift transform, only for entries with `action: codemod`.                                                                                                                                              |
-| `src/migrations/<id>/transform.test.ts`                          | That transform's fixtures, including its idempotency case. Required whenever `transform.ts` exists — see below.                                                                                                  |
-| `src/tools`                                                      | Transforms with no catalogue entry, each with a co-located `<name>.test.ts`. Currently only `to-remote-package` — see [Does it apply to the remote package?](#does-it-apply-to-the-remote-package).              |
-| `src/catalog`                                                    | Reading, typing and selecting catalogue entries.                                                                                                                                                                 |
-| `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                                                                                                                               |
-| `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, the package-manager install (detection up the tree, `packageManager` pin, corepack bridge — via `package-manager-detector`), and the dirty-working-tree guard for `upgrade`. |
-| `src/run`                                                        | Drives jscodeshift's `Runner` in-process (not the CLI binary).                                                                                                                                                   |
-| `dev/generate`, `dev/buildTransforms.ts`                         | The three catalogue generators, plus the transforms' CommonJS compile — see [Transforms are compiled](#transforms-are-compiled-and-that-is-not-optional).                                                        |
-| `src/tests`                                                      | Cross-cutting tests: catalogue invariants, remote-scope checks, the transform-test-coverage guard, and `runTransform`, the run-through-the-real-CLI helper every fixture test uses.                              |
+| Path                                                             | What it holds                                                                                                                                                                                                                     |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/migrations/<id>/entry.md`                                   | The catalogue. One directory per migration, `entry.md` holding its frontmatter plus prose body. **The source.**                                                                                                                   |
+| `src/migrations/<id>/transform.ts`                               | The jscodeshift transform, only for entries with `action: codemod`.                                                                                                                                                               |
+| `src/migrations/<id>/transform.test.ts`                          | That transform's fixtures, including its idempotency case. Required whenever `transform.ts` exists — see below.                                                                                                                   |
+| `src/tools`                                                      | Transforms with no catalogue entry, each with a co-located `<name>.test.ts`. Currently only `to-remote-package` — see [Does it apply to the remote package?](#does-it-apply-to-the-remote-package).                               |
+| `src/catalog`                                                    | Reading, typing and selecting catalogue entries.                                                                                                                                                                                  |
+| `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                                                                                                                                                |
+| `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, the package-manager install (detection up the tree, `packageManager` pin, corepack bridge — via `package-manager-detector`), and the dirty-working-tree guard for `upgrade`.                  |
+| `src/run`                                                        | Drives jscodeshift's `Runner` in-process (not the CLI binary).                                                                                                                                                                    |
+| `dev/generate`, `dev/buildTransforms.ts`                         | The three catalogue generators, plus the transforms' CommonJS compile — see [Transforms are compiled](#transforms-are-compiled-and-that-is-not-optional).                                                                         |
+| `src/tests`                                                      | Cross-cutting tests: catalogue invariants, remote-scope checks, the transform-test-coverage guard, the whole-catalogue run (`pipeline.test.ts`), and `runTransform`, the run-through-the-real-CLI helper every fixture test uses. |
 
 The directory **is** the id — it appears once, instead of once per filename
 spread across three separate directories. A migration with no codemod is a
@@ -128,6 +128,29 @@ scans `src/migrations/*/` directly and fails the moment a `transform.ts` shows
 up with no `transform.test.ts` next to it, independent of what any individual
 test file claims to do.
 
+### The chain, not just the links
+
+`src/tests/pipeline.test.ts` runs **every** codemod over one file, oldest
+`since` first — what `upgrade` does to a consumer who never ran this tool. A
+per-transform fixture cannot see the two failures that live between transforms:
+
+- One transform eats what a later one needs. `imports-to-package-root` flattens
+  every subpath, so `password-tools` has to be in its leave-alone set or
+  `password-tools-subpath-renamed` finds nothing to rename — and both report
+  success.
+- A transform names an entry by a spelling the consumer does not have **at that
+  point in the chain**. `password-tools-rule` matched only
+  `mittwald-password-tools-js`, the name that entry got two migrations later, so
+  `AsyncRule` survived and the rename carried it onto an entry without it.
+
+The chain is read from the catalogue, so a new codemod joins it automatically —
+and the test asserts that **every** id in it changed the fixture. A migration
+with nothing to do there is carried, not covered, so a new one comes with a line
+in `legacyApp` and the matching change in `migratedApp`. Both are asserted whole
+and inline rather than snapshotted: the claim is that the output is correct
+against today's API, which is something a reviewer can check and a snapshot
+cannot.
+
 ## Does it apply to the remote package?
 
 `@mittwald/flow-remote-react-components` mirrors the component API, so most
@@ -184,7 +207,10 @@ by id like any other transform.
    add the id to `notNameScoped` when the entry is about the package layout
    rather than names in it (as `imports-to-package-root` and
    `renamed-css-export` are).
-5. `pnpm nx build codemods` and commit the regenerated
+5. Give the new codemod a line in `legacyApp` in `src/tests/pipeline.test.ts`
+   and update `migratedApp` — see
+   [The chain, not just the links](#the-chain-not-just-the-links).
+6. `pnpm nx build codemods` and commit the regenerated
    `src/migrations.generated.ts` and `packages/components/MIGRATION.md`.
 
 ## Commands

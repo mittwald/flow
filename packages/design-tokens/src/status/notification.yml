@@ -15,6 +15,9 @@ notification:
     value: "{shadow.overlay}"
   width:
     value: 355px
+  max-width:
+    value:
+      "calc(100dvw - 2 * {notification-provider.window-to-provider-spacing})"
   heading-to-text-spacing:
     value: "{size-rem.xs}"
   spacing:

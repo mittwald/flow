@@ -33,6 +33,7 @@ export * from "@/components/ComponentDefaultsProvider";
 export * from "@/components/ComponentPropsContextProvider";
 export * from "@/components/Content";
 export * from "@/components/ContextMenu";
+export * from "@/components/CoachMark";
 export * from "@/components/ContextualHelp";
 export * from "@/components/CopyButton";
 export * from "@/components/CounterBadge";

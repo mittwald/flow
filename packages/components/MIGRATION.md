@@ -28,6 +28,91 @@ The CLI's own output does detect it and prints the right form.
 
 ---
 
+<a id="popover-open-state-props"></a>
+
+## Popover: `defaultOpen` renamed, `isOpen` and `onOpenChange` now work
+
+**Since `1.1.47`** · migration · codemod available · also applies to
+`@mittwald/flow-remote-react-components`
+
+`Popover`'s open state props now behave the way their names say. This covers
+`ContextualHelp` and `ContextMenu` too, which inherit them.
+
+#### `defaultOpen` is now `isDefaultOpen`
+
+The name matches `Modal` and the other overlays.
+
+```diff
+- <ContextualHelp defaultOpen>
++ <ContextualHelp isDefaultOpen>
+```
+
+`defaultOpen` keeps working and logs a deprecation warning. A codemod renames
+it, on `Popover`, `ContextualHelp` and `ContextMenu` only — the identically
+named react-aria prop on `Select`, `MenuTrigger`, `Tooltip`, `TooltipTrigger`,
+`DialogTrigger`, `DatePicker` and `DateRangePicker` is untouched.
+
+#### `onOpenChange` reports instead of taking over
+
+Passing `onOpenChange` used to switch the popover into a controlled mode that
+had no `isOpen` to control it with: the handler fired, and the popover stopped
+closing. It is now a notification that fires on every path — react-aria's
+dismissal, and a close performed through the controller — and never performs or
+suppresses the change.
+
+```diff
+- <Popover onOpenChange={(isOpen) => controller.setOpen(isOpen)}>
++ <Popover onOpenChange={(isOpen) => track(isOpen)}>
+```
+
+Two things to check:
+
+- A handler that performed the close itself can drop that call. Leaving it in is
+  harmless — the controller ignores a state it is already applying.
+- A handler that relied on the prop to _block_ a close no longer blocks it. Use
+  the controller for that: a handler registered through `useOverlayController`'s
+  `onClose` still aborts by returning `false`.
+
+#### `isOpen` controls the popover
+
+`isOpen` was inherited from react-aria but silently overridden. It is now the
+open state whenever it is set.
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+  …
+</Popover>;
+```
+
+If you pass `isOpen` without updating it from `onOpenChange` — for instance by
+spreading props that happen to carry it — the popover no longer opens. Drop the
+prop, or wire up the state.
+
+A controller stays the third option and needs neither prop: with
+`controller={controller}`, `onOpenChange` is a pure monitor.
+
+**Apply:** Rename `defaultOpen` to `isDefaultOpen` on `Popover`,
+`ContextualHelp` and `ContextMenu` — a codemod does it, scoped to those three.
+Leave `defaultOpen` alone on `Select`, `MenuTrigger`, `Tooltip`,
+`TooltipTrigger`, `DialogTrigger`, `DatePicker` and `DateRangePicker`, where it
+is react-aria's own prop and unchanged. Then check every `isOpen` and
+`onOpenChange` passed to those three by hand, because both changed behaviour and
+neither is mechanically decidable. `isOpen` used to be ignored and now controls
+the popover: a value that is not kept up to date through `onOpenChange` keeps
+the popover closed. `onOpenChange` used to take over the open state and now only
+reports it, so a handler that performed the close itself —
+`onOpenChange={(open) => controller.setOpen(open)}` — can drop that call, and a
+handler that relied on the prop to _suppress_ the close no longer does; use the
+controller's `onClose` for that.
+
+```shell
+npx @mittwald/flow-codemods@latest popover-open-state-props src
+```
+
+---
+
 <a id="tabler-icons-no-longer-transitive"></a>
 
 ## @tabler/icons-react is no longer installed alongside Flow
@@ -1170,6 +1255,21 @@ import { Field } from "@mittwald/flow-react-components/react-hook-form";
 import { Link } from "@mittwald/flow-react-components/nextjs";
 ```
 
+### Stylesheets stay stylesheet imports
+
+A CSS export is a file, not a JS module, so it never moves onto the package
+root. A bundler query addressing it (`?url`, `?inline`, `?raw`) is part of how
+the file is requested, not part of the subpath — both of these stay exactly as
+they are:
+
+```javascript
+import "@mittwald/flow-react-components/all.css";
+import flowStyles from "@mittwald/flow-react-components/all.css?url";
+```
+
+Only a stale `global.css` or `globals.css` is rewritten to `all.css`, query
+included.
+
 ### `tsconfig.json`
 
 Set `"module": "esnext"` in your `tsconfig.json`, if you have trouble with
@@ -1194,8 +1294,13 @@ and the first stable release of Flow is `1.0.0`.
 **Apply:** Rewrite every subdirectory import from
 `@mittwald/flow-react-components` to the package root, except `react-hook-form`
 and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form`
-and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors,
-set `"module": "esnext"` in `tsconfig.json`.
+and `@mittwald/flow-react-components/nextjs`. Asset imports are not part of
+this: a CSS specifier stays a CSS specifier — `all.css` and `all-layered.css`
+unchanged, a stale `global.css` or `globals.css` rewritten to `all.css` — and
+keeps any bundler query it carries (`?url`, `?inline`, `?raw`). It never becomes
+a named import from the package root, which has no JS binding behind a
+stylesheet. If you hit missing module errors, set `"module": "esnext"` in
+`tsconfig.json`.
 
 ```shell
 npx @mittwald/flow-codemods@latest imports-to-package-root src
@@ -1225,9 +1330,10 @@ names a module. It cannot reach a `.css` or `.scss` file, so an `@import` of the
 old path there needs a manual search.
 
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
-`@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript
-and TypeScript files. An `@import` of the old path inside a `.css` or `.scss`
-file is not covered — search for it by hand.
+`@mittwald/flow-react-components/all.css`, keeping any bundler query the
+specifier carries (`.../styles?url` becomes `.../all.css?url`). A codemod does
+this for JavaScript and TypeScript files. An `@import` of the old path inside a
+`.css` or `.scss` file is not covered — search for it by hand.
 
 ```shell
 npx @mittwald/flow-codemods@latest renamed-css-export src
