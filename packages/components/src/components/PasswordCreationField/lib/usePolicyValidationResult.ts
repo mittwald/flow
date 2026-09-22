@@ -3,6 +3,7 @@ import type { Policy } from "@/integrations/@mittwald/password-tools-js";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import { useDebouncedCallback } from "use-debounce";
 
+/** @internal */
 export const usePolicyValidationResult = (
   validationPolicy: Policy,
   password: string,
