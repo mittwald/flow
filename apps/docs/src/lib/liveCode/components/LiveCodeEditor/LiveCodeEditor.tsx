@@ -1,5 +1,5 @@
 import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   LiveEditor,
   LiveError,
@@ -10,7 +10,12 @@ import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import clsx from "clsx";
-import { Button, Icon, LayoutCard } from "@mittwald/flow-react-components";
+import {
+  Button,
+  CopyButton,
+  Icon,
+  LayoutCard,
+} from "@mittwald/flow-react-components";
 import { IconArrowBarBoth } from "@tabler/icons-react";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 
@@ -30,6 +35,12 @@ export interface LiveCodeEditorProps {
    */
   resizable?: boolean;
 }
+
+/**
+ * Number of code lines shown before the example is truncated. Three quarters of
+ * the examples are shorter than this, so only the long ones fold.
+ */
+const truncateLines = 20;
 
 /** Narrowest container the handle can be dragged to. */
 const minWidth = 280;
@@ -68,10 +79,13 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const [editorCollapsed, setEditorCollapsed] = useState(
     editorInitiallyCollapsed,
   );
+  const [codeFolded, setCodeFolded] = useState(true);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [draggedWidth, setDraggedWidth] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
+  const editorId = useId();
+  const codeId = useId();
 
   const available = metrics
     ? Math.floor(metrics.track - metrics.frame - metrics.handle)
@@ -195,6 +209,20 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
   const codeToDisplay = code.replace(/;\r?\n$/, "");
 
+  /**
+   * The two controls are either-or: an example that starts open is truncated
+   * and expands in place, one that starts hidden keeps the show/hide toggle it
+   * was given. Stacking both on one example would be two controls for the same
+   * code.
+   */
+  const truncatable =
+    codeToDisplay.split("\n").length > truncateLines &&
+    !editorInitiallyCollapsed;
+  const folded = truncatable && codeFolded;
+
+  const showFoldToggle = !editorDisabled && truncatable;
+  const showHideToggle = !editorDisabled && !!editorInitiallyCollapsed;
+
   const resizeTo = (width: number) => {
     if (maxWidth !== null) {
       setDraggedWidth(
@@ -287,28 +315,59 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         )}
 
         {!editorDisabled && (
-          <div className={styles.editorContainer}>
+          <div
+            className={clsx(styles.editorWrapper, folded && styles.folded)}
+            id={editorId}
+            style={{ "--truncated-lines": truncateLines } as CSSProperties}
+          >
             {!editorCollapsed && (
-              <LiveEditor
-                tabMode="focus"
-                theme={flowTheme}
-                className={styles.editor}
-              />
+              <>
+                <div className={styles.editorContainer} id={codeId}>
+                  <LiveEditor
+                    tabMode="focus"
+                    theme={flowTheme}
+                    className={styles.editor}
+                  />
+                </div>
+                <CopyButton
+                  className={styles.copyButton}
+                  size="s"
+                  variant="soft"
+                  text={codeToDisplay}
+                />
+              </>
             )}
           </div>
         )}
 
-        {!editorDisabled && (
+        {(showFoldToggle || showHideToggle) && (
           <div className={styles.actions}>
-            <Button
-              className={styles.toggleCode}
-              size="s"
-              variant="plain"
-              color="secondary"
-              onPress={() => setEditorCollapsed(!editorCollapsed)}
-            >
-              {editorCollapsed ? <>Code anzeigen</> : <>Code ausblenden</>}
-            </Button>
+            {showFoldToggle && (
+              <Button
+                className={styles.toggleCode}
+                size="s"
+                variant="plain"
+                color="secondary"
+                onPress={() => setCodeFolded(!codeFolded)}
+                aria-expanded={!folded}
+                aria-controls={codeId}
+              >
+                {folded ? <>Mehr anzeigen</> : <>Weniger anzeigen</>}
+              </Button>
+            )}
+            {showHideToggle && (
+              <Button
+                className={styles.toggleCode}
+                size="s"
+                variant="plain"
+                color="secondary"
+                onPress={() => setEditorCollapsed(!editorCollapsed)}
+                aria-expanded={!editorCollapsed}
+                aria-controls={editorId}
+              >
+                {editorCollapsed ? <>Code anzeigen</> : <>Code ausblenden</>}
+              </Button>
+            )}
           </div>
         )}
 

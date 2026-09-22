@@ -91,8 +91,56 @@
   }
 }
 
+.editorWrapper {
+  position: relative;
+}
+
+/*
+ * Without an actions bar below it the editor paints the frame's bottom corners
+ * itself, and its square background would spill past the rounded border.
+ */
+.editorWrapper:last-child {
+  border-end-start-radius: var(--corner-radius--m);
+  border-end-end-radius: var(--corner-radius--m);
+  overflow: hidden;
+}
+
 .editorContainer {
   overflow-x: auto;
+}
+
+/*
+ * `1lh` resolves against the `pre`'s own line height, so the clamp lands on a
+ * whole number of code lines whatever the editor's font size is. The extra half
+ * line slices the next one in two, which reads as "there is more" where a cut
+ * on the line boundary reads as the end of the example. The fade sits on the
+ * wrapper instead of the scroller, so it stays put while the code scrolls
+ * sideways underneath it.
+ */
+.folded .editor pre {
+  max-height: calc((var(--truncated-lines) + 0.5) * 1lh);
+  overflow: hidden;
+}
+
+.folded::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--size-px--xxl);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--code-block--background-color)
+  );
+}
+
+.copyButton {
+  position: absolute;
+  inset-block-start: var(--size-px--s);
+  inset-inline-end: var(--size-px--s);
+  z-index: 1;
 }
 
 .toggleCode {

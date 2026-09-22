@@ -25,7 +25,10 @@ declare const classNames: {
   readonly lightStaticBackground: "lightStaticBackground";
   readonly mstudioBackground: "mstudioBackground";
   readonly editor: "editor";
+  readonly editorWrapper: "editorWrapper";
   readonly editorContainer: "editorContainer";
+  readonly folded: "folded";
+  readonly copyButton: "copyButton";
   readonly toggleCode: "toggleCode";
   readonly actions: "actions";
   readonly resizeTrack: "resizeTrack";

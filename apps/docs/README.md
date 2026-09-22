@@ -465,7 +465,11 @@ The most important MDX Components for writing content:
   from the `examples` directory next to the MDX file. Common props:
   `editorCollapsed` (code initially hidden), `editorDisabled` (no editor), `row`
   (side-by-side grid), `resizable` (handle to drag the container width, for
-  examples whose behaviour depends on it), `bgColor`, `zoom`.
+  examples whose behaviour depends on it), `bgColor`, `zoom`. An example that
+  starts open and runs longer than 20 lines is shown truncated with a „Mehr
+  anzeigen“ control; an `editorCollapsed` one keeps its show/hide toggle
+  instead. Every visible example carries a copy button. None of this takes a
+  prop.
 - `<PropertiesTables />` — renders the generated props documentation in the
   `# Properties` section.
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.
