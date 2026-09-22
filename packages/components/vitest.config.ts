@@ -3,6 +3,7 @@ import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
 import { vitestBrowserTestConfig } from "../core/src/index.ts";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin.ts";
+import { unlayeredStylesPlugin } from "./dev/vite/unlayeredStylesPlugin.ts";
 
 /*
  * Vitest names a browser project's nested per-browser projects by writing onto
@@ -33,7 +34,16 @@ export default mergeConfig(
 
       projects: [
         {
+          /*
+           * The default, unlayered stylesheet variant. Both variants are
+           * compiled from `src/styles/index.scss`, which declares Flow's
+           * layers; this project flattens them, the way the release build
+           * derives `all.css` from `all-layered.css`.
+           */
           extends: true,
+          css: {
+            postcss: { plugins: [unlayeredStylesPlugin()] },
+          },
           test: {
             ...browserTestConfig(),
             name: "browser",

@@ -40,8 +40,7 @@ export const assertNoUnlayeredMarkers = (
   );
 };
 
-export const stripCascadeLayers = (css: string): string => {
-  const root = postcss.parse(css);
+export const stripCascadeLayersFromRoot = (root: postcss.Root): void => {
   const layerAtRules: AtRule[] = [];
 
   root.walkAtRules("layer", (atRule) => {
@@ -55,7 +54,11 @@ export const stripCascadeLayers = (css: string): string => {
       atRule.remove();
     }
   }
+};
 
+export const stripCascadeLayers = (css: string): string => {
+  const root = postcss.parse(css);
+  stripCascadeLayersFromRoot(root);
   return root.toString();
 };
 
