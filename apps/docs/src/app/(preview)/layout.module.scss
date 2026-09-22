@@ -12,3 +12,14 @@
     box-sizing: border-box;
   }
 }
+
+/*
+ * Not --neutral--color--200: in dark mode the background gradient starts at
+ * #121518, and the page ground has to meet it seamlessly. In light mode the
+ * token already is the gradient's first stop, so only dark needs saying.
+ */
+[data-theme="dark"] {
+  .body {
+    background-color: #121518;
+  }
+}

@@ -64,6 +64,13 @@
   }
 }
 
+/* Matches the dark background gradient's first stop, not the neutral token. */
+[data-theme="dark"] {
+  .header {
+    background-color: color-mix(in srgb, #121518 40%, transparent);
+  }
+}
+
 @media (max-width: 768px) {
   .headerContent {
     padding-inline: var(--size-px--m);
