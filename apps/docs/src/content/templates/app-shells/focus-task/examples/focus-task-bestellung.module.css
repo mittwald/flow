@@ -1,8 +1,6 @@
 .page {
   /* Container-relative here; use 100dvh in a real full-page app. */
   min-height: 100%;
-  max-width: 1880px;
-  margin-inline: auto;
   padding-block: var(--size-px--xl, 2rem);
   padding-inline: 2rem;
   background: var(--color--background-gradient);
@@ -10,7 +8,7 @@
 
 .center {
   width: 100%;
-  max-width: 64rem;
+  max-width: 72rem;
 }
 
 /*

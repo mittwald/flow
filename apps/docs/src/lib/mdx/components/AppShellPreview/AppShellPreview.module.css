@@ -64,10 +64,17 @@
   pointer-events: none;
 }
 
+/*
+ * Focus is matched as :focus-visible, not :focus-within: following the link
+ * opens the shell in a new tab and leaves the link focused here, so
+ * :focus-within kept the frame dimmed for good once the user came back. A
+ * mouse click sets no :focus-visible, a Tab does — which is exactly who still
+ * needs to see the link.
+ */
 .previewFrame:hover .previewLink,
-.previewFrame:focus-within .previewLink,
 .previewFrame:hover::before,
-.previewFrame:focus-within::before {
+.previewFrame:has(.previewLink:focus-visible) .previewLink,
+.previewFrame:has(.previewLink:focus-visible)::before {
   opacity: 1;
 }
 
