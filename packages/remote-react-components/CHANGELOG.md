@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.5](https://github.com/mittwald/flow/compare/1.3.0-next.4...1.3.0-next.5) (2026-09-22)
+
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+### Bug Fixes
+
+* **Combine:** keep a text and its small button in the line ([c524c72](https://github.com/mittwald/flow/commit/c524c7218d3093351062e16b44449c0e0393fd9e))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.3 ([c95f099](https://github.com/mittwald/flow/commit/c95f099e0c5a94b515f4cd2a1a615e73971da2a5))
+
+### Tests
+
+* update visual regression screenshots ([71c3c92](https://github.com/mittwald/flow/commit/71c3c92250c68cbec9c2da12cd385b203c19c669))
+
 ## [1.3.0-next.4](https://github.com/mittwald/flow/compare/1.2.2...1.3.0-next.4) (2026-09-22)
 
 ## [1.3.0-next.3](https://github.com/mittwald/flow/compare/1.3.0-next.2...1.3.0-next.3) (2026-09-21)
