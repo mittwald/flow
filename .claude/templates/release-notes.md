@@ -16,8 +16,12 @@
     `ExtBridgeConfigInput`).
   - Group by feature/area, never by commit. One "## " section per notable
     feature; link its PR(s), e.g. (#1234).
-  - Screenshots/GIFs: leave the placeholder for the maintainer — do NOT
-    fabricate images. Code examples are fine when grounded in the real API.
+  - Screenshots: capture them, never fabricate them. A capture of a real story
+    rendered from the release branch is not a fabrication — a mocked, drawn or
+    generated image is, and stays forbidden. `/prepare-release` step 8 produces
+    the figures with `pnpm release:figure`; a feature with no story (a CLI, a
+    build change) simply gets none. Code examples are fine when grounded in the
+    real API.
   - Delete these comments and every unused/empty section in the final text.
 -->
 
@@ -51,7 +55,12 @@
 // optional usage example, grounded in the real component API
 ```
 
-<!-- ![caption](url) — maintainer adds a screenshot/GIF if useful -->
+<!-- One captured figure per notable feature, never one per prop variant —
+     compose the variants into a single image. Markdown image syntax, NOT an
+     HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw tag
+     renders on GitHub and silently vanishes on /releases. -->
+
+![{{ caption }}](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png)
 
 ## Migrations
 
