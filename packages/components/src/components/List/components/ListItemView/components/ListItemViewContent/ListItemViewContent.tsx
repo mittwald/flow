@@ -98,11 +98,18 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     viewMode === "tiles" ? styles.tileView : styles.listView,
   );
 
+  /*
+   * The title carries Item's own `selectableText` class. A linked item overlays
+   * an anchor across the whole row, and Item.module.scss uses the class to lift
+   * the title and subtitle back above it so they stay selectable.
+   */
+  const titleClassName = clsx(styles.title, itemStyles.selectableText);
+
   const header = (
     <div className={styles.header}>
       <div className={styles.checkboxContainer}>{checkbox}</div>
       {avatar}
-      <div className={styles.title}>
+      <div className={titleClassName}>
         {title}
         <div className={styles.subTitle}>{subTitle}</div>
       </div>
@@ -147,7 +154,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
       <div className={styles.content}>
         <div className={styles.header}>
           <div className={styles.checkboxContainer}>{checkbox}</div>
-          <div className={styles.title}>
+          <div className={titleClassName}>
             {title}
             <div className={styles.subTitle}>{subTitle}</div>
           </div>

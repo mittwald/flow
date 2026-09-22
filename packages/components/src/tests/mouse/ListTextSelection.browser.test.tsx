@@ -137,6 +137,55 @@ describe("Text selection", () => {
     });
   });
 
+  /*
+   * A linked item overlays an empty anchor across the whole row, so the text
+   * has to sit above it — otherwise every press lands on the anchor and no
+   * selection can start.
+   */
+  describe("Linked item", () => {
+    const LinkedList = () => (
+      <List aria-label="Test">
+        <ListStaticData<Data> data={[{ num: 42 }]} />
+        <ListItem<Data> textValue={() => heading} href={() => "#link"}>
+          {() => (
+            <ListItemView>
+              <Heading>{heading}</Heading>
+              <Text>{subTitle}</Text>
+            </ListItemView>
+          )}
+        </ListItem>
+      </List>
+    );
+
+    test("selecting the heading of a linked item with the mouse", async () => {
+      await render(<LinkedList />);
+      await expect.element(page.getByText(heading)).toBeInTheDocument();
+
+      await commands.selectTextByDragging(headingSelector);
+
+      expect(selectedText()).toBe(heading);
+    });
+
+    test("selecting the subtitle of a linked item with the mouse", async () => {
+      await render(<LinkedList />);
+      await expect.element(page.getByText(subTitle)).toBeInTheDocument();
+
+      await commands.selectTextByDragging(subTitleSelector);
+
+      expect(selectedText()).toBe(subTitle);
+    });
+
+    // Lifting the text above the overlay takes it out of the anchor's reach,
+    // so this is what keeps the title itself following the link.
+    test("clicking the heading of a linked item follows the link", async () => {
+      await render(<LinkedList />);
+
+      await userEvent.click(page.getByText(heading));
+
+      expect(window.location.hash).toBe("#link");
+    });
+  });
+
   describe("Table view", () => {
     const cellSelector = ".flow--table--cell";
 

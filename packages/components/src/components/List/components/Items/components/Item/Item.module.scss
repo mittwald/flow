@@ -58,9 +58,10 @@
   /* Elements */
 
   /*
-   * Covers the whole item so a right-click anywhere on it hits a real link.
-   * Interactive content is lifted back above the overlay, so buttons, context
-   * menus and checkboxes keep receiving their own clicks.
+   * Covers the item so a right-click on it hits a real link. Interactive
+   * content and the item's text are lifted back above the overlay, so buttons,
+   * context menus and checkboxes keep receiving their own clicks and the text
+   * stays selectable.
    */
   .link {
     position: absolute;
@@ -92,6 +93,17 @@
      * expanded content), so it stays fully clickable and selectable.
      */
     .bottomContent {
+      position: relative;
+      z-index: 2;
+    }
+
+    /*
+     * A press on the overlay starts no selection — it is an empty element — so
+     * the title and subtitle have to sit above it to stay selectable. The row
+     * still owns activation, so a click on them activates the item as before;
+     * only the browser's own link menu moves to the rest of the item.
+     */
+    .selectableText {
       position: relative;
       z-index: 2;
     }

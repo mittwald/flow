@@ -840,7 +840,7 @@ describe("Linked items", () => {
     expect(link).toHaveAttribute("aria-hidden", "true");
   });
 
-  test("the anchor sits under the pointer, interactive content above it", async () => {
+  test("the anchor sits under the pointer, text and interactive content above it", async () => {
     await render(getTestElementWithLink());
     await expect.element(optionsButton).toBeInTheDocument();
 
@@ -850,11 +850,15 @@ describe("Linked items", () => {
     };
 
     // The browser's context menu acts on whatever sits under the pointer, so
-    // the anchor has to win over the item's plain content …
-    const link = await getRowLink();
-    expect(elementAtCenterOf(await page.getByText("Item: 42").element())).toBe(
-      link,
+    // the anchor has to win over the item's empty area …
+    const { left, bottom } = (await row.element()).getBoundingClientRect();
+    expect(document.elementFromPoint(left + 20, bottom - 4)).toBe(
+      await getRowLink(),
     );
+
+    // … lose against the text, which a press on the anchor could not select …
+    const title = await page.getByText("Item: 42").element();
+    expect(title.contains(elementAtCenterOf(title))).toBe(true);
 
     // … and lose against everything the user is meant to interact with.
     const button = await optionsButton.element();

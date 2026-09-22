@@ -31,22 +31,35 @@ const selectTextByDragging: BrowserCommand<
   [selector: string, overshoot?: number]
 > = async ({ page, frame, iframe }, selector, overshoot = 0) => {
   const locator = iframe.locator(selector).first();
-  const box = await locator.boundingBox();
   const text = (await locator.textContent())?.trim();
 
-  if (!box || !text) {
+  if (!text) {
     throw new Error(`No visible element with text matches "${selector}"`);
   }
 
   const selectedText = async () =>
     (await (await frame()).evaluate(() => String(getSelection()))).trim();
 
-  const y = box.y + box.height / 2;
-
   for (let attempt = 1; attempt <= 5; attempt++) {
+    /*
+     * Measured per attempt, and each retry reaches a pixel further than the
+     * last. A box measured before a webfont lands describes text that has since
+     * moved, and an end point inside the final glyph rather than past it selects
+     * everything but the last character — repeating the identical drag recovers
+     * from neither.
+     */
+    const box = await locator.boundingBox();
+
+    if (!box) {
+      throw new Error(`No visible element with text matches "${selector}"`);
+    }
+
+    const y = box.y + box.height / 2;
+    const reach = overshoot + attempt - 1;
+
     await page.mouse.move(box.x + 1 - overshoot, y);
     await page.mouse.down();
-    await page.mouse.move(box.x + box.width - 1 + overshoot, y, { steps: 12 });
+    await page.mouse.move(box.x + box.width - 1 + reach, y, { steps: 12 });
     await page.mouse.up();
 
     for (let poll = 1; poll <= 10; poll++) {
