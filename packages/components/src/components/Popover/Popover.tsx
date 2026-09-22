@@ -22,6 +22,15 @@ export interface PopoverProps
   withTip?: boolean;
   /** Whether the popover contains a dialog. */
   isDialogContent?: boolean;
+  /**
+   * @internal How the popover relates to the rest of the page. `"modal"` locks
+   * the page below — scrolling blocked, everything outside `inert`, focus moved
+   * in, and the popover a `dialog`. `"non-modal"` leaves the page alone: no
+   * dialog semantics, and rendered where it stands instead of portalled to the
+   * end of the body, so it keeps its place in the reading order. Not a variant
+   * to pick — it is the shape `CoachMark` needs, and that component sets it.
+   */
+  modality?: "modal" | "non-modal";
   /** An overlay controller to control the popover state. */
   controller?: OverlayController;
   /** A fixed width for the popover. */

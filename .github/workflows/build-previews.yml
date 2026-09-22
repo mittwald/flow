@@ -130,17 +130,34 @@ jobs:
       packages: read
       pull-requests: write
 
-    # Preview deploy needs the MITTWALD_* secrets, which GitHub withholds from
-    # Dependabot-triggered runs and from forks. Skip there so those PRs don't
-    # fail on missing secrets (the build job above still validates the images).
+    # A fork's PR gets no secrets at all, so skip it rather than let it fail on
+    # the missing API token — the build job above still validates the images.
+    # Dependabot runs do deploy: `MITTWALD_API_TOKEN` also lives in the
+    # repository's *Dependabot* secret store, which is what `secrets.*` resolves
+    # against in a Dependabot-triggered run. The project and certificate IDs are
+    # repository variables — not sensitive, and `vars.*` is one store for every
+    # run, Dependabot's included.
     if: >
       github.event_name == 'pull_request' &&
-      github.actor != 'dependabot[bot]' &&
       github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
+      # On a Dependabot run this job holds the deploy credentials while the PR
+      # bumps a dependency, so check out the base revision instead of the PR:
+      # `pnpm install` then resolves the base lockfile and the bumped package's
+      # code never executes here. The build job above is what exercises the PR's
+      # actual dependencies, and it holds no credentials.
+      #
+      # Only Dependabot for now — on a human PR the deploy keeps running the
+      # branch's own tooling, so a change to `dev/deploy-review.ts` is still
+      # exercised by the PR that makes it. Worth revisiting: the same argument
+      # for pinning the deploy to a trusted revision applies there too.
       - name: Checkout repository
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v6
+        with:
+          ref:
+            ${{ github.actor == 'dependabot[bot]' &&
+            github.event.pull_request.base.sha || '' }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
@@ -157,12 +174,12 @@ jobs:
       - name: Deploy preview environment
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_PROJECT_ID: ${{ vars.MITTWALD_PROJECT_ID }}
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
           MITTWALD_TLS_CERTIFICATE_ID_DOCS:
-            ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
           MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
-            ${{ secrets.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
           # Derive the exact refs the build job pushed (type=ref,event=pr =>
           # `pr-<number>`). Deriving them here avoids the matrix job-output
           # clobber that left one of the two empty and half-deployed previews.

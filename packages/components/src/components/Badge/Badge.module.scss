@@ -30,16 +30,25 @@
   }
 
   .button,
+  .action,
   .close {
     @include focus.focus;
   }
 
   @extend .neutral;
 
-  &:has(.close) {
+  &:has(.close),
+  &:has(.action) {
     .button,
     .content {
       padding-inline-end: calc(var(--content-size) + var(--badge--spacing));
+    }
+  }
+
+  &:has(.action):has(.close) {
+    .button,
+    .content {
+      padding-inline-end: calc(var(--content-size) * 2 + var(--badge--spacing));
     }
   }
 
@@ -59,7 +68,8 @@
       flex-shrink: 0;
     }
 
-    &:has(.close) {
+    &:has(.close),
+    &:has(.action) {
       .button,
       .content {
         padding-inline-end: var(--content-size);
@@ -69,18 +79,43 @@
         }
       }
     }
+
+    &:has(.action):has(.close) {
+      .button,
+      .content {
+        padding-inline-end: calc(var(--content-size) * 2);
+      }
+    }
   }
 
+  .action,
   .close {
     height: var(--content-size);
     padding: calc(var(--badge--padding-y) - var(--badge--border-width));
     border-radius: 0;
-    border-end-end-radius: var(--badge-size);
-    border-start-end-radius: var(--badge-size);
     margin-inline-start: calc(
-      (var(--badge-size) - var(--badge--border-width)) * -1
+      (var(--content-size) + var(--badge--border-width)) * -1
     );
     margin-top: var(--badge--border-width);
+  }
+
+  /* The trailing button rounds off the badge */
+  .close,
+  &:not(:has(.close)) .action {
+    border-end-end-radius: var(--badge-size);
+    border-start-end-radius: var(--badge-size);
+  }
+
+  &:has(.action):has(.close) {
+    .action {
+      margin-inline-start: calc(
+        (var(--content-size) * 2 + var(--badge--border-width)) * -1
+      );
+    }
+
+    .close {
+      margin-inline-start: 0;
+    }
   }
 
   /* Colors */
@@ -135,6 +170,7 @@
       color: var(--badge--disabled-content-color);
     }
 
+    .action,
     .close {
       color: var(--badge--disabled-content-color);
     }
@@ -156,6 +192,7 @@
         color: var(--badge--disabled-#{$color}-content-color);
       }
 
+      .action,
       .close {
         color: var(--badge--disabled-#{$color}-content-color);
       }

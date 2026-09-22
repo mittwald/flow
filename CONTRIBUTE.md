@@ -816,14 +816,65 @@ deliberately by bumping it manually. The moving parts:
   exempt). Nothing is left ungrouped on purpose: every merge invalidates
   `pnpm-lock.yaml` in every other open PR, which makes Dependabot rebase it and
   CI run again, so the number of open PRs is what drives that cascade.
-- The **visual regression suite runs on every Dependabot PR**, not on a label. A
-  `playwright`, `vitest` or `react-aria` bump moves snapshots, and the label
-  route is not even available to a workflow: events created with `GITHUB_TOKEN`
-  do not start new workflow runs.
+- The **visual regression and cross-version suites run on every Dependabot PR**,
+  not on a label. A `playwright`, `vitest` or `react-aria` bump moves snapshots
+  and rendered structure, and the label route is not even available to a
+  workflow: events created with `GITHUB_TOKEN` do not start new workflow runs.
+  Both are the full suites a human gets from the `run-visual-tests` /
+  `run-cross-version-tests` labels — for cross-version that means both harnesses
+  against every published version, not just the iframe smoke test `test.yml`
+  runs on all PRs.
 - [`dependabot-auto-merge.yml`](.github/workflows/dependabot-auto-merge.yml)
-  waits for that suite, re-checks the PR, and comments
+  waits for **both** suites, re-checks the PR, and comments
   `@dependabot squash and merge`. Dependabot merges once the required `main`
-  check is green.
+  check is green. Neither suite is a required status check, so this workflow is
+  the only thing standing between a red one and a merge.
+- **Preview apps are deployed** for a Dependabot PR too, by the ordinary
+  [`build-previews.yml`](.github/workflows/build-previews.yml) /
+  [`cleanup-previews.yml`](.github/workflows/cleanup-previews.yml) pair — no
+  Dependabot-specific workflow. Two things make that work. Only
+  `MITTWALD_API_TOKEN` is a secret, and it also lives in the **Dependabot secret
+  store**, because that is what `secrets.*` resolves against in a
+  Dependabot-triggered run; the project and certificate IDs are **repository
+  variables**, and `vars.*` is one store for every run. And the deploy and
+  cleanup jobs check out `pull_request.base.sha` instead of the PR when the
+  actor is Dependabot, so `pnpm install` resolves the base lockfile and the
+  bumped package's code never executes in a job that holds the token. The build
+  job is what exercises the PR's actual dependencies, and it holds none.
+
+  Add a **secret** the preview deploy needs and you have to add it in **both**
+  stores, or Dependabot previews break while everything else stays green. A
+  variable has no such trap — which is the reason to keep anything that isn't
+  genuinely sensitive in `vars.*`. The base checkout is deliberately scoped to
+  Dependabot: on a human PR the deploy still runs the branch's own tooling, so a
+  change to `dev/deploy-review.ts` is exercised by the PR that makes it. The
+  same argument for pinning the deploy to a trusted revision applies to human
+  PRs too — worth revisiting.
+
+**What a Dependabot-triggered run does and does not get.** Both halves are worth
+knowing before you add a workflow that touches these PRs, and only one matches
+the usual folklore:
+
+- **`secrets.*` resolves against the repository's _Dependabot_ secret store**,
+  not the Actions one. An Actions-only secret arrives as an empty string, and
+  the step fails wherever the script validates its environment. Put a secret a
+  Dependabot PR genuinely needs into the Dependabot store (`PUBLISH_PAT` and
+  `MITTWALD_API_TOKEN` are there); otherwise move the work into a `workflow_run`
+  that runs from the default branch. Duplicating the secret is the simpler
+  route, but it hands the credential to a job whose workflow file comes from the
+  PR branch — pair it with a checkout of a trusted revision, as the preview
+  deploy does.
+
+  **`vars.*` has no such split** — repository variables resolve in a Dependabot
+  run like any other. Anything that isn't genuinely sensitive (ids, project
+  references) belongs there rather than in a secret, and the duplication problem
+  disappears with it.
+
+- **The `GITHUB_TOKEN` is not read-only here.** A job gets the permissions it
+  requests — `pull-requests: write` and `packages: write` both work on a
+  Dependabot PR in this repository, which is why the visual summary comment and
+  the ghcr push land. Don't design around a restriction that isn't in force, and
+  don't rely on it staying that way for anything that matters.
 
 **When one goes red.** Nothing merges. Find the culprit in the group, then
 either fix the code or park the dependency with

@@ -6,7 +6,8 @@
     "build:deps": "",
     "build:scss-types": "tsx dev/generateScssTypes.ts",
     "clean": "rimraf .next",
-    "dev": "next dev"
+    "dev": "next dev",
+    "test:compile": "tsc --noEmit"
   },
   "dependencies": {
     "@internationalized/date": "^3.12.3",
@@ -17,7 +18,6 @@
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/flow-stylesheet": "workspace:*",
     "@mittwald/mstudio-ext-react-components": "workspace:*",
-    "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "@tabler/icons-react": "^3.46.0",
     "clsx": "^2.1.1",

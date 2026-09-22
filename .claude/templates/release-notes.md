@@ -5,6 +5,10 @@
   Authoring rules:
   - Audience: extension developers & Flow consumers. Write user-facing prose,
     not commit subjects.
+  - Inline code only for what the reader types or matches: prop names, values,
+    commands, symbols, package names. Version numbers and component names in
+    running prose stay plain — a paragraph of code chips stops the eye at every
+    token.
   - Minor/major only — patches release separately, so there is NO Fixes section.
     Fold a user-relevant fix into the related feature's text if it matters.
   - Drop noise entirely: chore/deps/release bumps, internal refactors, CI.
