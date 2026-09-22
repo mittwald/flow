@@ -1,8 +1,9 @@
 import type { FC, PropsWithChildren, Ref, RefObject } from "react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 import clsx from "clsx";
 import { useObjectRef, useOverlayPosition } from "react-aria";
 import type { Placement } from "react-aria";
+import { useEnterAnimation, useExitAnimation } from "@react-aria/utils";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { popoverViewportPadding } from "../../viewportPadding";
@@ -27,6 +28,14 @@ export interface NonModalPopoverContentProps
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef: RefObject<Element | null>;
+}
+
+interface NonModalPopoverContentInnerProps extends Omit<
+  NonModalPopoverContentProps,
+  "ref"
+> {
+  overlayRef: RefObject<HTMLDivElement | null>;
+  isExiting: boolean;
 }
 
 /*
@@ -93,8 +102,38 @@ const useRepositionWhenAnchorMoves = (
  * next to what it points at. Being absolutely positioned it still takes no
  * space; what it does inherit is its surroundings, so an ancestor that clips
  * (`overflow: hidden`) or a stacking context can cut it off.
+ *
+ * Mounting is split across two components for the same reason `Aria.Popover`
+ * splits it: the closing animation has to outlive `isOpen`, so the element that
+ * plays it cannot be unmounted by the render that closes it. This outer half
+ * keeps the ref and the mount decision and survives across open and closed; the
+ * inner half holds the positioning and remounts on every open, which is what
+ * resets the entry animation.
  */
 export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
+  props,
+) => {
+  const { isOpen = false, ref, ...rest } = props;
+
+  const overlayRef = useObjectRef(ref as Ref<HTMLDivElement>);
+
+  const isExiting = useExitAnimation(overlayRef, isOpen);
+
+  if (!isOpen && !isExiting) {
+    return null;
+  }
+
+  return (
+    <NonModalPopoverContentInner
+      {...rest}
+      overlayRef={overlayRef}
+      isOpen={isOpen}
+      isExiting={isExiting}
+    />
+  );
+};
+
+const NonModalPopoverContentInner: FC<NonModalPopoverContentInnerProps> = (
   props,
 ) => {
   const {
@@ -102,10 +141,11 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     className,
     withTip,
     isOpen = false,
+    isExiting,
     width,
     id,
     onOpenChange,
-    ref,
+    overlayRef,
     triggerRef,
     // Named one by one so that everything left over is a DOM prop and reaches
     // the element. Funnelling the rest into the positioning instead drops
@@ -134,9 +174,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     boundaryElement,
   };
 
-  const overlayRef = useObjectRef(ref as Ref<HTMLDivElement>);
   const arrowRef = useRef<HTMLDivElement>(null);
-  const [isEntering, setIsEntering] = useState(true);
   const detailsId = useId();
 
   const { overlayProps, arrowProps, placement, updatePosition } =
@@ -151,6 +189,22 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     });
 
   useRepositionWhenAnchorMoves(triggerRef, isOpen, updatePosition);
+
+  /*
+   * Until it has a placement, `useOverlayPosition` parks the popover in the top
+   * left corner (`position: fixed; top: 0; left: 0`) — it has not measured the
+   * anchor yet. Rendered on a server that corner is what ships, and the popover
+   * sits there until hydration measures; an anchor given by id is resolved a
+   * frame later still. Either way it is visibly in the wrong place first and
+   * jumps to the anchor after, so keep it out of sight until it knows where it
+   * belongs. It stays in the DOM, which is what its place in the reading order
+   * and `aria-details` depend on.
+   */
+  const isPositioned = placement !== null;
+
+  // Held back until the popover knows where it belongs — an entry animation
+  // that plays while the popover is still hidden is one the user never sees.
+  const isEntering = useEnterAnimation(overlayRef, isPositioned);
 
   /*
    * Nothing announces this popover, so the trigger points at it: `aria-details`
@@ -200,28 +254,6 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
     return () => document.removeEventListener("keydown", closeOnEscape);
   }, [isOpen, onOpenChange]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      setIsEntering(true);
-    }
-  }, [isOpen]);
-
-  if (!isOpen) {
-    return null;
-  }
-
-  /*
-   * Until it has a placement, `useOverlayPosition` parks the popover in the top
-   * left corner (`position: fixed; top: 0; left: 0`) — it has not measured the
-   * anchor yet. Rendered on a server that corner is what ships, and the popover
-   * sits there until hydration measures; an anchor given by id is resolved a
-   * frame later still. Either way it is visibly in the wrong place first and
-   * jumps to the anchor after, so keep it out of sight until it knows where it
-   * belongs. It stays in the DOM, which is what its place in the reading order
-   * and `aria-details` depend on.
-   */
-  const isPositioned = placement !== null;
-
   return (
     <div
       {...rest}
@@ -231,7 +263,7 @@ export const NonModalPopoverContent: FC<NonModalPopoverContentProps> = (
       className={clsx(className, styles["non-modal"])}
       data-placement={placement ?? undefined}
       data-entering={isEntering || undefined}
-      onAnimationEnd={() => setIsEntering(false)}
+      data-exiting={isExiting || undefined}
       style={{
         ...overlayProps.style,
         /*

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/mittwald/flow/compare/1.2.3...1.2.4) (2026-09-22)
+
+### Bug Fixes
+
+* **Combine:** keep a text and its small button in the line ([c524c72](https://github.com/mittwald/flow/commit/c524c7218d3093351062e16b44449c0e0393fd9e))
+
+### Miscellaneous Chores
+
+* drop the contextual-help docs example and the Combine comment ([4bec742](https://github.com/mittwald/flow/commit/4bec7420c4ada8714f6dd548d45116c24e58cc1c))
+
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+### Bug Fixes
+
+* **CoachMark:** play the closing animation instead of vanishing ([#3224](https://github.com/mittwald/flow/issues/3224)) ([75d9bda](https://github.com/mittwald/flow/commit/75d9bdad04a98a5b4cd18b60d13ad121405b196f))
+
 ## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
 
 ### Bug Fixes

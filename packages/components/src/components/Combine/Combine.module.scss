@@ -41,13 +41,13 @@
 
   &:has(.text):has(.contextualHelpTriggerButton),
   &:has(.text):has(.copyButton) {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     column-gap: var(--combine--text-button--spacing);
   }
 
   &:has(> .text):has(> .icon) {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     column-gap: var(--combine--icon-text--spacing);
   }

@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/mittwald/flow/compare/1.2.3...1.2.4) (2026-09-22)
+
+### Bug Fixes
+
+* **Combine:** keep a text and its small button in the line ([c524c72](https://github.com/mittwald/flow/commit/c524c7218d3093351062e16b44449c0e0393fd9e))
+
+### Miscellaneous Chores
+
+* drop the contextual-help docs example and the Combine comment ([4bec742](https://github.com/mittwald/flow/commit/4bec7420c4ada8714f6dd548d45116c24e58cc1c))
+
+### Tests
+
+* update visual regression screenshots ([71c3c92](https://github.com/mittwald/flow/commit/71c3c92250c68cbec9c2da12cd385b203c19c669))
+
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+### Bug Fixes
+
+* **ci:** poll for created preview services and upsert the preview comment ([#3212](https://github.com/mittwald/flow/issues/3212)) ([b685268](https://github.com/mittwald/flow/commit/b6852683eca193338f6f49067a79df1743c6f768))
+* **CoachMark:** play the closing animation instead of vanishing ([#3224](https://github.com/mittwald/flow/issues/3224)) ([75d9bda](https://github.com/mittwald/flow/commit/75d9bdad04a98a5b4cd18b60d13ad121405b196f))
+* **docs:** align header and footer with the content width ([#3221](https://github.com/mittwald/flow/issues/3221)) ([98a5efc](https://github.com/mittwald/flow/commit/98a5efc6eaf2fd565150a97f2764504cfb85c547))
+* **remote-dom-demo:** unbreak the chart demo page and type-check the app in CI ([#3222](https://github.com/mittwald/flow/issues/3222)) ([c96579a](https://github.com/mittwald/flow/commit/c96579ad08bdc1e7ac2f28b6413e738f0ae5ed99))
+
+### Documentation
+
+* **release:** reserve inline code for what the reader types ([#3225](https://github.com/mittwald/flow/issues/3225)) ([7efaf7b](https://github.com/mittwald/flow/commit/7efaf7b847c75d4c644beecf51f39a48b5a7f28f))
+
 ## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
 
 ### Bug Fixes
