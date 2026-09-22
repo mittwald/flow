@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.10](https://github.com/mittwald/flow/compare/1.3.0-next.9...1.3.0-next.10) (2026-09-22)
+
+### Bug Fixes
+
+* **TextArea:** resize and count a value the field never saw typed ([#3237](https://github.com/mittwald/flow/issues/3237)) ([a0df423](https://github.com/mittwald/flow/commit/a0df42334f44ff1b65dbeeaf90b70fdf35359fcf))
+
+## [1.2.6](https://github.com/mittwald/flow/compare/1.3.0-next.8...1.2.6) (2026-09-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.6 ([7a8678c](https://github.com/mittwald/flow/commit/7a8678cbdc18f6a627271131c25972d2b46b3ca7))
+
 ## [1.3.0-next.9](https://github.com/mittwald/flow/compare/1.3.0-next.8...1.3.0-next.9) (2026-09-22)
 
 ### Tests

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.10](https://github.com/mittwald/flow/compare/1.3.0-next.9...1.3.0-next.10) (2026-09-22)
+
+### Bug Fixes
+
+* **TextArea:** resize and count a value the field never saw typed ([#3237](https://github.com/mittwald/flow/issues/3237)) ([a0df423](https://github.com/mittwald/flow/commit/a0df42334f44ff1b65dbeeaf90b70fdf35359fcf))
+
+### Documentation
+
+* hide imports in code examples ([#3230](https://github.com/mittwald/flow/issues/3230)) ([f16ac40](https://github.com/mittwald/flow/commit/f16ac409a58865d86acb8301b71115e9dd1902c1))
+
+### Tests
+
+* **CoachMark:** gate the cross-version scenarios per version ([#3233](https://github.com/mittwald/flow/issues/3233)) ([e3b7446](https://github.com/mittwald/flow/commit/e3b7446ece590a09136f5ba7e403f82f8aa2e5d1))
+
+## [1.2.6](https://github.com/mittwald/flow/compare/1.3.0-next.8...1.2.6) (2026-09-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.6 ([7a8678c](https://github.com/mittwald/flow/commit/7a8678cbdc18f6a627271131c25972d2b46b3ca7))
+
 ## [1.3.0-next.9](https://github.com/mittwald/flow/compare/1.3.0-next.8...1.3.0-next.9) (2026-09-22)
 
 ### Tests
