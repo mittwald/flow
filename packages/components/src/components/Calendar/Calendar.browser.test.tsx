@@ -41,11 +41,20 @@ test("the header buttons page through the months", async () => {
   await expect.poll(shownMonth).not.toBe(initial);
 });
 
-test("the grid marks today", async () => {
+/*
+ * Today is marked with `data-today`, which the calendar's styles hang off, and
+ * announced through the cell's label. The attribute is what is asserted here:
+ * the label is localized, the marker is not.
+ */
+test("the grid renders its days and marks today", async () => {
   await render(<Calendar />);
 
   await expect.element(page.getByRole("grid")).toBeVisible();
-  await expect
-    .element(page.getByRole("button", { name: /^Today/ }))
-    .toBeInTheDocument();
+
+  const days = document.querySelectorAll("[role='grid'] [role='button']");
+  const today = document.querySelectorAll("[role='grid'] [data-today]");
+
+  expect(days.length).toBeGreaterThan(27);
+  expect(today).toHaveLength(1);
+  expect(today[0]?.getAttribute("aria-label")).toMatch(/^Today,/);
 });

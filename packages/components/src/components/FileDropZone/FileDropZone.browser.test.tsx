@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
+import { useState } from "react";
 import { FileDropZone } from "@/components/FileDropZone";
 import { FileField } from "@/components/FileField";
 import { Button } from "@/components/Button";
@@ -12,6 +13,8 @@ const fileInput = () =>
 
 const textFile = (name: string) =>
   new File(["content"], name, { type: "text/plain" });
+
+const pngFile = (name: string) => new File([""], name, { type: "image/png" });
 
 /*
  * react-aria's drop zone reads the native drag events, so a drop is three of
@@ -104,22 +107,59 @@ test("a multiple zone keeps every dropped file", async () => {
   await expect.poll(() => onChange.mock.lastCall?.[0]?.length).toBe(2);
 });
 
+const reportedNames = (onChange: ReturnType<typeof vi.fn>) =>
+  onChange.mock.calls.map((call) => call[0]?.[0]?.name);
+
+/*
+ * Both of the following drop a file that must be ignored and then one that must
+ * not. The second drop is the control: `onDropHandler` is async, so polling for
+ * "no call" right after the first drop would pass before the handler ever got
+ * to report anything — and polling for a call *count* latches on the transient
+ * value on the way there. Waiting for the accepted file by name is what settles
+ * it: once it has arrived, the ignored one has been through the same path, and
+ * the length is then a decision, not a race.
+ */
 test("accept filters out a dropped file of another type", async () => {
   const onChange = vi.fn();
   await renderZone({ accept: "image/png", onChange });
 
   dropFiles([textFile("notes.txt")]);
+  dropFiles([pngFile("logo.png")]);
 
-  await expect.poll(() => onChange.mock.calls.length).toBe(0);
+  await expect.poll(() => reportedNames(onChange)).toContain("logo.png");
+  expect(reportedNames(onChange)).toEqual(["logo.png"]);
 });
 
 test("a read-only zone ignores a drop", async () => {
   const onChange = vi.fn();
-  await renderZone({ isReadOnly: true, onChange });
 
-  dropFiles([textFile("dropped.txt")]);
+  const Fixture = () => {
+    const [isReadOnly, setIsReadOnly] = useState(true);
 
-  await expect.poll(() => onChange.mock.calls.length).toBe(0);
+    return (
+      <>
+        <Button onPress={() => setIsReadOnly(false)}>Unlock</Button>
+        <FileDropZone isReadOnly={isReadOnly} onChange={onChange}>
+          <Heading>Drop a file</Heading>
+          <FileField>
+            <Button>Select file</Button>
+          </FileField>
+        </FileDropZone>
+      </>
+    );
+  };
+
+  await render(<Fixture />);
+
+  dropFiles([textFile("ignored.txt")]);
+
+  // Awaiting the press commits the state change before the second drop.
+  await page.getByRole("button", { name: "Unlock" }).click();
+
+  dropFiles([textFile("accepted.txt")]);
+
+  await expect.poll(() => reportedNames(onChange)).toContain("accepted.txt");
+  expect(reportedNames(onChange)).toEqual(["accepted.txt"]);
 });
 
 test("a disabled zone disables its file field", async () => {
