@@ -591,14 +591,6 @@ where the error points.
   And confirm a new regression test actually fails without its fix: this one
   passed in both directions, which is the only symptom you get
 
-- **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
-  "Check all generated code is committed"
-
-  **Cause:** `MIGRATION.md` is generated from
-  `packages/codemods/src/migrations/<id>/entry.md`
-
-  **Fix:** Edit the catalogue entry, run `pnpm nx build codemods`, commit both
-
 ## Where to look next
 
 | Topic                                       | Read                                                                                    |
