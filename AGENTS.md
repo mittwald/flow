@@ -442,20 +442,16 @@ where the error points.
   artifact, not just the plugin in isolation — a unit test and a test project
   with their own config both stay green while the release build is wrong
 
-- **Symptom:** A second **browser** vitest project makes the run die at startup
-  with **"Cannot define a nested project for a &lt;browser&gt; browser. The
-  project name '&lt;name&gt; (&lt;browser&gt;)' was already defined"**
+- **Symptom:** A **browser** vitest project you added never runs, and the suite
+  reports success
 
-  **Cause:** Vitest names the per-browser child projects by writing onto the
-  `browser.instances` objects. Spreading the shared `vitestBrowserTestConfig`
-  into two projects shares those objects by reference, so the second project's
-  name overwrites the first
+  **Cause:** The package's `test:browser` script selects projects by name. A
+  bare `--project=browser` matches only that one and silently skips the new one
 
-  **Fix:** Give each browser project its own copies:
-  `instances: vitestBrowserTestConfig.browser.instances.map((instance) => ({ ...instance }))`.
-  Also check the package's `test:browser` script actually selects the new
-  project — a bare `--project=browser` silently skips it, a glob like
-  `--project=browser*` (as `test:unit` already does with `unit*`) picks both up
+  **Fix:** Use a glob — `--project=browser*`, as `test:unit` already does with
+  `unit*`. (Each project's browser instances come from
+  `createVitestBrowserTestConfig()`, which hands out fresh objects per call, so
+  the projects cannot collide over their generated names.)
 
 - **Symptom:** A CI workflow that runs `pnpm install` and then pushes, merges or
   checks out spends minutes in `eslint`/`stylelint`/`prettier`, or reinstalls in

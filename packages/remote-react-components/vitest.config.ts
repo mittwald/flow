@@ -1,29 +1,23 @@
 import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../core/src/index.ts";
 import { serveFontsLocally } from "./dev/vitest/serveFontsLocally.ts";
 
-/*
- * Vitest names a browser project's nested per-browser projects by writing onto
- * the instance objects. Two projects that spread the shared browser config would
- * share those objects, and the second name would overwrite the first – so every
- * browser project gets its own copies. Without them a run filtered to one
- * project reports itself under the other project's name.
- */
-const browserTestConfig = () => ({
-  ...vitestBrowserTestConfig,
-  browser: {
-    ...vitestBrowserTestConfig.browser,
-    commands: {
-      ...vitestBrowserTestConfig.browser?.commands,
-      serveFontsLocally,
+/** The shared browser config plus this package's own browser command. */
+const browserTestConfig = () => {
+  const config = createVitestBrowserTestConfig();
+  return {
+    ...config,
+    browser: {
+      ...config.browser,
+      commands: {
+        ...config.browser?.commands,
+        serveFontsLocally,
+      },
     },
-    instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
-      (instance) => ({ ...instance }),
-    ),
-  },
-});
+  };
+};
 
 /** Held in one place so the `browser` override below reuses its instance copies. */
 const visualTestConfig = browserTestConfig();
