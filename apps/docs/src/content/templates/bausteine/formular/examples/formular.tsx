@@ -21,6 +21,7 @@ export default () => {
     houseNumber: string;
     zip: string;
     city: string;
+    email: string;
     phone?: string;
   }>({
     defaultValues: {
@@ -30,6 +31,7 @@ export default () => {
       houseNumber: "",
       zip: "",
       city: "",
+      email: "",
       phone: "",
     },
   });
@@ -65,53 +67,69 @@ export default () => {
             </TextField>
           </Field>
         </ColumnLayout>
-        <ColumnLayout m={[2, 1]} s={[2, 1]}>
+        <ColumnLayout l={[1, 1]}>
+          <ColumnLayout m={[2, 1]} s={[2, 1]}>
+            <Field
+              name="street"
+              rules={{
+                required: "Bitte gib eine Straße ein",
+              }}
+            >
+              <TextField>
+                <Label>Straße</Label>
+              </TextField>
+            </Field>
+            <Field
+              name="houseNumber"
+              rules={{
+                required: "Bitte gib eine Hausnr. ein",
+              }}
+            >
+              <TextField>
+                <Label>Hausnummer</Label>
+              </TextField>
+            </Field>
+          </ColumnLayout>
+          <ColumnLayout m={[1, 2]} s={[1, 2]}>
+            <Field
+              name="zip"
+              rules={{
+                required: "Bitte gib eine Postleitzahl ein",
+              }}
+            >
+              <TextField>
+                <Label>Postleitzahl</Label>
+              </TextField>
+            </Field>
+            <Field
+              name="city"
+              rules={{
+                required: "Bitte gib einen Ort ein",
+              }}
+            >
+              <TextField>
+                <Label>Ort</Label>
+              </TextField>
+            </Field>
+          </ColumnLayout>
+        </ColumnLayout>
+        <ColumnLayout l={[1, 1]}>
           <Field
-            name="street"
+            name="email"
             rules={{
-              required: "Bitte gib eine Straße ein",
+              required: "Bitte gib eine E-Mail-Adresse ein",
             }}
           >
-            <TextField>
-              <Label>Straße</Label>
+            <TextField type="email">
+              <Label>E-Mail-Adresse</Label>
             </TextField>
           </Field>
-          <Field
-            name="houseNumber"
-            rules={{
-              required: "Bitte gib eine Hausnr. ein",
-            }}
-          >
+          <Field name="phone">
             <TextField>
-              <Label>Hausnummer</Label>
+              <Label>Telefonnummer</Label>
             </TextField>
           </Field>
         </ColumnLayout>
-        <ColumnLayout m={[1, 2]} s={[1, 2]}>
-          <Field
-            name="zip"
-            rules={{
-              required: "Bitte gib eine Postleitzahl ein",
-            }}
-          >
-            <TextField>
-              <Label>Postleitzahl</Label>
-            </TextField>
-          </Field>
-          <Field
-            name="city"
-            rules={{ required: "Bitte gib einen Ort ein" }}
-          >
-            <TextField>
-              <Label>Ort</Label>
-            </TextField>
-          </Field>
-        </ColumnLayout>
-        <Field name="phone">
-          <TextField>
-            <Label>Telefonnummer</Label>
-          </TextField>
-        </Field>
         <ActionGroup>
           <SubmitButton>Speichern</SubmitButton>
         </ActionGroup>

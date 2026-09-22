@@ -47,9 +47,9 @@ export const CONTENT_ORDER: readonly string[] = [
   "/templates/overlays/anzeigen",
   "/templates/overlays/mehrere-schritte",
   "/templates/bausteine",
+  "/templates/bausteine/formular",
   "/templates/bausteine/multi-upload",
   "/templates/bausteine/zeitintervalle",
-  "/templates/bausteine/formular",
   "/components",
 ];
 
