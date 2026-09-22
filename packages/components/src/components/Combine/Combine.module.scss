@@ -39,12 +39,6 @@
     }
   }
 
-  /*
-   * A text with a small button next to it is a phrase, not a block: inside a
-   * Text it has to join the line instead of breaking it. As a flex item — the
-   * usual case, in a column layout — `inline-flex` is blockified back to
-   * `flex`, so nothing changes there.
-   */
   &:has(.text):has(.contextualHelpTriggerButton),
   &:has(.text):has(.copyButton) {
     display: inline-flex;
