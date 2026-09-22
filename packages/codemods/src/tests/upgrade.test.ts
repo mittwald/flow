@@ -530,7 +530,10 @@ describe("runUpgrade", () => {
     const withPeers = {
       ...registry,
       peerDependencies: {
-        "1.2.0": { react: "^19.2.0", "react-hook-form": "^7.65.0" },
+        "1.2.0": {
+          react: { range: "^19.2.0", optional: false },
+          "react-hook-form": { range: "^7.65.0", optional: true },
+        },
       },
     };
 

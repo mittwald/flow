@@ -135,8 +135,9 @@ Options:
 - `--json` — machine-readable output: an object with `range`
   (`current`/`target`, or `null` for the offline whole-catalogue form),
   `migrations`, each entry carrying `catchUp`, and `peers` — `external` and
-  `flowPins`, each a list of `{ peer, range, requiredBy }`, or `null` for the
-  offline whole-catalogue form, which has no target to read them at
+  `flowPins`, each a list of `{ peer, range, requiredBy, optionalFor }`, or
+  `null` for the offline whole-catalogue form, which has no target to read them
+  at
 
 ### `<id> [path]`
 

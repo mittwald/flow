@@ -1,14 +1,24 @@
 import { satisfies, validRange } from "semver";
 import type { PackageVersions } from "./registry.js";
 
-/** One peer range, and every Flow package that states it. */
+/** One peer range, and how each Flow package that states it treats it. */
 export interface PeerRequirement {
   /** The peer package, e.g. `react`. */
   peer: string;
   /** The range, exactly as the Flow packages authored it. */
   range: string;
-  /** The declared Flow dependencies stating it, sorted. */
+  /** The declared Flow dependencies that require it, sorted. */
   requiredBy: string[];
+  /**
+   * The declared Flow dependencies that mark it `optional`, sorted.
+   *
+   * Separate from `requiredBy` rather than a flag on the requirement, because
+   * optionality is **per package**: at 1.2.2 `react ^19.2.0` is required by
+   * `flow-react-components` and optional for `ext-bridge`. One line carrying
+   * both lists says that; a single boolean would have to pick a side, and
+   * either choice is wrong for half the readers.
+   */
+  optionalFor: string[];
 }
 
 export interface PeerSummary {
@@ -26,6 +36,12 @@ export interface PeerSummary {
    * is a pin pointing somewhere else: with the publish holes of #2887 it can
    * name a version its peer never published, and nothing else in the output
    * would say so.
+   *
+   * This is not hypothetical. Across the published history of the five remote
+   * packages, 2253 of 6210 Flow-internal peer entries pin a version other than
+   * the one they ship with — e.g. `flow-remote-core@0.2.0-alpha.700` peers on
+   * `ext-bridge@0.2.0-alpha.699`. Upgrading every declared package to one
+   * target leaves that pin unsatisfied.
    */
   flowPins: PeerRequirement[];
 }
@@ -38,16 +54,33 @@ export interface PeerSummary {
  * range — `workspace:*`, from a package resolved straight out of a checkout
  * rather than the registry — is not a claim about `target` at all, so it is
  * reported rather than silently judged.
+ *
+ * `includePrerelease` is load-bearing, not tidiness: without it a prerelease
+ * satisfies **no** non-prerelease range, `*` included. The historical
+ * Flow-internal pin _is_ `*` (2328 of 6210 published entries), and `next` and
+ * `experimental` are prerelease dist-tags — so every prerelease target reported
+ * a publish hole for a pin that accepts everything.
  */
 const expectedFlowPin = (range: string, target: string): boolean =>
-  validRange(range) !== null && satisfies(target, range);
+  validRange(range) !== null &&
+  satisfies(target, range, { includePrerelease: true });
+
+/**
+ * Ties break on the string, not on the locale.
+ *
+ * `localeCompare` depends on the runtime's ICU data, which differs between Node
+ * builds and would reorder hyphenated names like `react-dom` from one machine
+ * to the next — including between a developer's run and CI's.
+ */
+const byString = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
  * What the declared Flow dependencies require of their peers at `target`.
  *
  * Grouped by peer **and** range, not by peer alone: two Flow packages asking
  * for different ranges of the same peer is precisely what a consumer needs to
- * see, and collapsing them would hide it.
+ * see, and collapsing them would hide it. Optionality does **not** split a
+ * group — it is recorded per package inside it (see `optionalFor`).
  *
  * Ranges are reported exactly as authored — this never decides whether the
  * project satisfies them. That is the package manager's job, it already does it
@@ -63,28 +96,29 @@ export const collectPeers = (
 
   for (const pkg of packages) {
     const peers = pkg.peerDependencies[target] ?? {};
-    for (const [peer, range] of Object.entries(peers)) {
+    for (const [peer, { range, optional }] of Object.entries(peers)) {
       // Keyed on both halves, so the two sides of a disagreement survive as
       // two entries. JSON rather than a joined string: no separator to pick
       // that a package name or a range could contain.
       const key = JSON.stringify([peer, range]);
-      const existing = grouped.get(key);
-      if (existing === undefined) {
-        grouped.set(key, { peer, range, requiredBy: [pkg.name] });
-      } else {
-        existing.requiredBy.push(pkg.name);
-      }
+      const existing = grouped.get(key) ?? {
+        peer,
+        range,
+        requiredBy: [],
+        optionalFor: [],
+      };
+      (optional ? existing.optionalFor : existing.requiredBy).push(pkg.name);
+      grouped.set(key, existing);
     }
   }
 
   const sorted = [...grouped.values()]
     .map((requirement) => ({
       ...requirement,
-      requiredBy: [...requirement.requiredBy].sort(),
+      requiredBy: [...requirement.requiredBy].sort(byString),
+      optionalFor: [...requirement.optionalFor].sort(byString),
     }))
-    .sort(
-      (a, b) => a.peer.localeCompare(b.peer) || a.range.localeCompare(b.range),
-    );
+    .sort((a, b) => byString(a.peer, b.peer) || byString(a.range, b.range));
 
   return {
     external: sorted.filter(({ peer }) => !flowPackages.includes(peer)),

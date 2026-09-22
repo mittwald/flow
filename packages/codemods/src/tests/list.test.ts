@@ -545,7 +545,10 @@ describe("runList", () => {
     const withPeers = {
       ...registry,
       peerDependencies: {
-        "1.2.0": { react: "^19.2.0", "react-hook-form": "^7.65.0" },
+        "1.2.0": {
+          react: { range: "^19.2.0", optional: false },
+          "react-hook-form": { range: "^7.65.0", optional: true },
+        },
       },
     };
 
@@ -587,7 +590,12 @@ describe("runList", () => {
 
       const parsed = JSON.parse(recorded.written.join("")) as {
         peers: {
-          external: { peer: string; range: string; requiredBy: string[] }[];
+          external: {
+            peer: string;
+            range: string;
+            requiredBy: string[];
+            optionalFor: string[];
+          }[];
           flowPins: unknown[];
         };
       };
@@ -595,6 +603,17 @@ describe("runList", () => {
         peer: "react",
         range: "^19.2.0",
         requiredBy: ["@mittwald/flow-react-components"],
+        optionalFor: [],
+      });
+      // Optionality has to survive into the machine-readable form too — a
+      // consumer reading only `requiredBy` would otherwise install an optional
+      // peer as if it were mandatory, which is the human-side bug in JSON
+      // clothing.
+      expect(parsed.peers.external).toContainEqual({
+        peer: "react-hook-form",
+        range: "^7.65.0",
+        requiredBy: [],
+        optionalFor: ["@mittwald/flow-react-components"],
       });
       expect(parsed.peers.flowPins).toEqual([]);
     });

@@ -20,21 +20,48 @@ const indent = "  ";
  * The askers go on their own wrapped line rather than trailing the range — at
  * eight Flow packages the list is longer than the range it belongs to, and
  * inline it pushes the next range off the scannable left edge.
+ *
+ * Both lists are labelled, even when only one is present. An unlabelled list
+ * with a marker appended somewhere would leave the reader guessing how far the
+ * marker reaches — and "does this project actually need react?" is the whole
+ * question this output exists to answer.
  */
 const renderRequirement = (
-  { peer, range, requiredBy }: PeerRequirement,
+  { peer, range, requiredBy, optionalFor }: PeerRequirement,
   width: number,
   paint: Painter,
 ): string => {
   const gutter = indent.repeat(2);
-  const askers = wrap(
-    requiredBy.join(", "),
-    Math.max(width - gutter.length, 20),
-  )
-    .map((line) => `${gutter}${paint.dim(line)}`)
+  const required = requiredBy.length > 0;
+
+  // The status sits on the peer line, in colour, because it answers the
+  // question the reader actually has — "must I install this at all?" — and one
+  // package requiring it settles that no matter how many others call it
+  // optional. Underneath everything is dim, so each entry has exactly one
+  // bright thing to land on when scanning.
+  const status = required ? paint.yellow("required") : paint.dim("optional");
+
+  // Only a disagreement earns the two labelled lines. Where every package
+  // treats the peer the same way, the labels would repeat what the status
+  // already said, once per entry, for the whole list.
+  const rows: readonly (readonly [string, string[]])[] =
+    required && optionalFor.length > 0
+      ? [
+          ["required by ", requiredBy],
+          ["optional for ", optionalFor],
+        ]
+      : [["", required ? requiredBy : optionalFor]];
+
+  const askers = rows
+    .flatMap(([label, names]) =>
+      wrap(
+        `${label}${names.join(", ")}`,
+        Math.max(width - gutter.length, 20),
+      ).map((line) => `${gutter}${paint.dim(line)}`),
+    )
     .join("\n");
 
-  return `${indent}${paint.bold(peer)} ${paint.code(range)}\n${askers}`;
+  return `${indent}${paint.bold(peer)} ${paint.code(range)} — ${status}\n${askers}`;
 };
 
 /**
@@ -75,7 +102,7 @@ export const renderPeers = ({
         "",
         ...wrap(
           paint.dim(
-            "Ranges as Flow declares them, not a check of what you have installed — your package manager decides that during the install.",
+            "Ranges as Flow declares them, not a check of what you have installed — your package manager decides that during the install. An optional peer need not be installed at all; it only has to match the range if it is.",
           ),
           width,
         ),
