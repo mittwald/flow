@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
+
+### Bug Fixes
+
+* **components:** invalidate build:icons when the icon source changes ([#3220](https://github.com/mittwald/flow/issues/3220)) ([9978fa1](https://github.com/mittwald/flow/commit/9978fa17911210637befbbcfc7d654edf00177ad))
+
+### Documentation
+
+* **releases:** scale the release-note figures to their capture scale ([#3216](https://github.com/mittwald/flow/issues/3216)) ([13c62be](https://github.com/mittwald/flow/commit/13c62be488c019f7fa8d6fb12bfe230072b86e24))
+
 ## [1.2.1](https://github.com/mittwald/flow/compare/1.2.0...1.2.1) (2026-09-21)
 
 ### Bug Fixes
