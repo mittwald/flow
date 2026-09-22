@@ -66,7 +66,7 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
-        "{workspaceRoot}/packages/icons-base/src"
+        "{workspaceRoot}/packages/icons-base/src/**/*"
       ],
       "outputs": ["{projectRoot}/src/components/Icon/components/icons/*"]
     },
@@ -139,22 +139,8 @@
         "build:status-registry"
       ]
     },
-    "test:browser": {
-      "dependsOn": [
-        {
-          "projects": ["stylesheet"],
-          "target": "build"
-        }
-      ]
-    },
     "test:browser:dev": {
-      "cache": true,
-      "dependsOn": [
-        {
-          "projects": ["stylesheet"],
-          "target": "build"
-        }
-      ]
+      "cache": true
     }
   }
 }

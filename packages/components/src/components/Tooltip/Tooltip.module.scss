@@ -11,6 +11,19 @@
 
   --translate-origin-length: var(--tooltip--tooltip-to-trigger-spacing) / 2;
 
+  /**
+   * React Aria sets `data-placement` once it has computed a position, and
+   * renders the overlay at `top: 0; left: 0` of the viewport until then. It
+   * skips computing one when the tooltip mounts for its exit animation alone –
+   * swapping quickly between neighbouring triggers does that – and never
+   * retries afterwards, so such a tooltip stays parked in the corner for its
+   * whole lifetime. Keep it out of sight instead. `visibility` rather than
+   * `display`, so the overlay stays measurable for the positioning pass.
+   */
+  &:not([data-placement]) {
+    visibility: hidden;
+  }
+
   /* Placement */
   &[data-placement="top"] {
     margin-bottom: var(--tooltip--tooltip-to-trigger-spacing);

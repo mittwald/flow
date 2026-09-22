@@ -47,6 +47,7 @@ import type {
   ContextualHelpProps,
   ContextualHelpTriggerProps,
 } from "@/components/ContextualHelp";
+import type { CoachMarkProps } from "@/components/CoachMark";
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { ListItemViewContentProps, ListProps } from "@/components/List";
@@ -126,6 +127,7 @@ export interface FlowComponentPropsTypes {
   ContextMenu: ContextMenuProps;
   ContextMenuSection: ContextMenuSectionProps;
   ContextMenuTrigger: ContextMenuTriggerProps;
+  CoachMark: CoachMarkProps;
   ContextualHelp: ContextualHelpProps;
   ContextualHelpTrigger: ContextualHelpTriggerProps;
   CopyButton: CopyButtonProps;
@@ -223,6 +225,7 @@ const propsContextSupportingComponentsMap: Record<
   ContextMenu: true,
   ContextMenuSection: true,
   ContextMenuTrigger: true,
+  CoachMark: true,
   ContextualHelp: true,
   ContextualHelpTrigger: true,
   CopyButton: true,

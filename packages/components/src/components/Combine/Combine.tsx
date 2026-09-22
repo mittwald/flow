@@ -28,6 +28,7 @@ export const CombineImplementation: FC<CombineProps> = (props) => {
     ContextualHelpTrigger: {
       Button: {
         className: styles.contextualHelpTriggerButton,
+        color: "secondary",
       },
     },
   };

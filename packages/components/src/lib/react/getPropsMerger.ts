@@ -63,12 +63,20 @@ export const getPropsMerger =
         for (const refProp of refProps) {
           const collectedRefObjects = sortedByLevel
             .map((p) => (isObjectType(p) && refProp in p ? p[refProp] : null))
-            .filter((r): r is Ref<unknown> => r !== null);
+            // A ref nobody supplied contributes nothing. `undefined` used to
+            // survive this filter and merge into a callback ref — harmless for
+            // a ref the component attaches, fatal for one it reads instead
+            // (`anchorRef`, `triggerRef`): nothing ever calls the callback, so
+            // `.current` stays empty and the element is never found. Writing
+            // `anchorRef={condition ? ref : undefined}` was enough to hit it.
+            .filter((r): r is Ref<unknown> => r != null);
 
           setProperty(
             mergedProps,
             refProp,
-            mergeRefsFn(...collectedRefObjects),
+            collectedRefObjects.length > 0
+              ? mergeRefsFn(...collectedRefObjects)
+              : undefined,
           );
         }
       }

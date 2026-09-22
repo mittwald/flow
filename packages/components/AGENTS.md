@@ -136,6 +136,12 @@ return (
   `@flr-generate`, so a remote tree reaches the host as a `DialogTrigger` with
   no `OverlayTrigger` around it — which is why `DialogTrigger` pins the button
   itself as well.
+- **A context that places a bare overlay gets the written-out trigger for
+  free.** `Badge` accepts a `ContextualHelp` on its own and wraps it with a
+  trigger button (`tunnel` + `wrapWith`). `OverlayTrigger` pins its own overlay
+  with `tunnel: null, wrapWith: null`, so a `ContextualHelpTrigger` the consumer
+  wrote keeps its help and its button — tunnel the trigger as well and style its
+  `Button` through the context, and both spellings land in the same slot.
 
 Why this works the way it does across the remote boundary:
 [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
@@ -310,6 +316,20 @@ Run: `pnpm nx test:unit components`,
 `pnpm nx test:browser components --browser.name=webkit`. Browser tests need
 `pnpm test:browser:prepare` once.
 
+**Iterate through nx too**, not with a bare `vitest`. Everything after the `--`
+goes to vitest, so a single file and watch mode have nx targets as well:
+
+```shell
+pnpm nx test:browser components -- src/components/Popover --browser.name=webkit
+pnpm nx test:browser:dev components
+```
+
+Only the nx target's `dependsOn` rebuilds the design tokens the styles entry
+compiles against. A bare `vitest run` skips it and renders against whatever
+`packages/design-tokens/dist` happens to hold — a token added in the same branch
+is simply absent, and CSS drops every declaration referencing it without a
+warning (#3194).
+
 ## i18n & a11y
 
 - Component-internal UI text lives in colocated `locales/de-DE.locale.json`
@@ -339,10 +359,18 @@ Run: `pnpm nx test:unit components`,
 | `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                                                           |
 | `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                                                         |
 | `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                                                          |
+| `./tunnel`                                                      | `@mittwald/react-tunnel` re-exported (`src/index/tunnel.ts`) plus `getTunnelProviderId`, so a consumer's own tunnels share Flow's module instance instead of creating a second React context.                                                       |
 | `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                                                         |
 | `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                                                     |
 | `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use.                                  |
 | `./doc-properties`                                              | `react-docgen-typescript` output in its raw `ComponentDoc[]` shape, filtered to the props a consumer can act on. Prefer `./component-index`. The unfiltered dump the generators above read is `.cache/doc-properties.json`, which is not published. |
+
+**Adding any new export entry?** Add the subpath to `keptSubpaths` in
+`packages/codemods/src/migrations/imports-to-package-root/transform.ts`. That
+codemod collapses subpath imports onto the package root with a catch-all `else`,
+so a subpath that is not listed gets flattened onto a root that does not export
+its names. The guard beside the transform fails the codemods unit tests when you
+forget.
 
 **Adding a new integration export entry?** Also register it in the component
 status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`

@@ -22,6 +22,17 @@ export interface HeadingProps
   wrap?: "wrap" | "balance";
 }
 
+/**
+ * The font size each heading level renders at — the TypeScript half of the
+ * level-based `--font-size` rules in Heading.module.scss. Levels 4 to 6 fall
+ * through to the `xs` default.
+ */
+const sizeByLevel: Record<number, NonNullable<HeadingProps["size"]>> = {
+  1: "xl",
+  2: "m",
+  3: "s",
+};
+
 /** @flr-generate all */
 export const Heading = flowComponent("Heading", (props) => {
   const {
@@ -50,6 +61,10 @@ export const Heading = flowComponent("Heading", (props) => {
 
   const Element = elementType ?? Aria.Heading;
 
+  const effectiveSize = size ?? sizeByLevel[level] ?? "xs";
+  const buttonSize =
+    effectiveSize === "xl" || effectiveSize === "xxl" ? "m" : "s";
+
   const propsContext: PropsContext = {
     Icon: {
       "aria-hidden": true,
@@ -66,6 +81,20 @@ export const Heading = flowComponent("Heading", (props) => {
         id: "headingContent",
         component: "Heading",
       },
+    },
+    Button: {
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
+      size: buttonSize,
+    },
+    CopyButton: {
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
+      size: buttonSize,
     },
     ContextualHelpTrigger: {
       tunnel: {

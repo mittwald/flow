@@ -462,7 +462,8 @@ The most important MDX Components for writing content:
 - `<LiveCodeEditor />` — renders an interactive code example, and the primary
   building block of a Component page. Without an `example` prop it uses
   `examples/default.tsx`; with `example="name"` it renders `examples/name.tsx`
-  from the `examples` directory next to the MDX file. Common props:
+  from the `examples` directory next to the MDX file. The example's imports are
+  not shown — write them anyway, they provide the editor's scope. Common props:
   `editorCollapsed` (code initially hidden), `editorDisabled` (no editor), `row`
   (side-by-side grid), `resizable` (handle to drag the container width, for
   examples whose behaviour depends on it), `bgColor`, `zoom`.

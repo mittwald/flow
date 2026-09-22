@@ -7,7 +7,7 @@ import Text from "@/components/Text";
 import Popover, { type PopoverProps } from "@/components/Popover/Popover";
 import { PopoverTrigger } from "@/components/Popover";
 import { useOverlayController } from "@/lib/controller";
-import { popoverViewportPadding } from "@/components/Popover/components/PopoverContent/PopoverContent";
+import { popoverViewportPadding } from "@/components/Popover/viewportPadding";
 
 const content = page.getByText("These aren't the droids you're looking for.");
 const trigger = page.getByRole("button", { name: "Trigger popover" });

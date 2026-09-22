@@ -1,6 +1,7 @@
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import type { ComplexityStatus } from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 
+/** @internal */
 export const getStatusFromPolicyValidationResult = (
   isValid: ResolvedPolicyValidationResult["isValid"],
   result: ResolvedPolicyValidationResult,

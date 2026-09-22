@@ -70,12 +70,41 @@ overrides), `RouterProvider` (so `Link` and navigation use your router),
 | `@mittwald/flow-react-components/nextjs`                     | Next.js integration                             |
 | `@mittwald/flow-react-components/react-hook-form`            | react-hook-form integration                     |
 | `@mittwald/flow-react-components/mittwald-password-tools-js` | password-strength integration                   |
+| `@mittwald/flow-react-components/tunnel`                     | Tunnels — see below                             |
 | `@mittwald/flow-react-components/all.css`                    | Stylesheet                                      |
 | `@mittwald/flow-react-components/component-index`            | Machine-readable component + prop index (below) |
 
 **Do not import from `/internal`.** It exposes Flow's own infrastructure
 (`flowComponent`, prop helper types, the status registry) and is not a consumer
 API.
+
+### Tunnels
+
+`@mittwald/flow-react-components/tunnel` re-exports `TunnelProvider`,
+`TunnelEntry` and `TunnelExit`. Import them from there — **never add
+`@mittwald/react-tunnel` to your own dependencies.** Its React context lives in
+a module-level `createContext`, so a second copy of the package is a second,
+unrelated context: your `TunnelEntry` stops finding any provider and
+`useTunnelState` throws at runtime. Nothing in `tsc` or ESLint warns first.
+
+The same entry point exports `getTunnelProviderId`, which names the tunnel Flow
+opens around every ui/layout component. That is how you render into a Flow
+component's own exits — a `Heading`'s `headingContent`, for example, the slot
+`Badge` and `AlertBadge` use:
+
+```tsx
+import {
+  TunnelEntry,
+  getTunnelProviderId,
+} from "@mittwald/flow-react-components/tunnel";
+
+<Heading>
+  <ModelTitle model={model} />
+  <TunnelEntry id="headingContent" providerId={getTunnelProviderId("Heading")}>
+    {titleSuffix}
+  </TunnelEntry>
+</Heading>;
+```
 
 ## Finding the right component
 

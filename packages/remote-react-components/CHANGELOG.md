@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.8](https://github.com/mittwald/flow/compare/1.2.7...1.2.8) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.7](https://github.com/mittwald/flow/compare/1.2.6...1.2.7) (2026-09-22)
+
+### Bug Fixes
+
+* **TextArea:** resize and count a value the field never saw typed ([#3237](https://github.com/mittwald/flow/issues/3237)) ([a0df423](https://github.com/mittwald/flow/commit/a0df42334f44ff1b65dbeeaf90b70fdf35359fcf))
+
+### Tests
+
+* **CoachMark:** gate the cross-version scenarios per version ([#3233](https://github.com/mittwald/flow/issues/3233)) ([e3b7446](https://github.com/mittwald/flow/commit/e3b7446ece590a09136f5ba7e403f82f8aa2e5d1))
+
+## [1.2.6](https://github.com/mittwald/flow/compare/1.2.5...1.2.6) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.5](https://github.com/mittwald/flow/compare/1.2.4...1.2.5) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.4](https://github.com/mittwald/flow/compare/1.2.3...1.2.4) (2026-09-22)
+
+### Bug Fixes
+
+* **Combine:** keep a text and its small button in the line ([c524c72](https://github.com/mittwald/flow/commit/c524c7218d3093351062e16b44449c0e0393fd9e))
+
+### Tests
+
+* update visual regression screenshots ([71c3c92](https://github.com/mittwald/flow/commit/71c3c92250c68cbec9c2da12cd385b203c19c669))
+
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.2.1](https://github.com/mittwald/flow/compare/1.2.0...1.2.1) (2026-09-21)
+
+### Bug Fixes
+
+* **Tabs:** keep collapsed tab titles out of the scrollable overflow ([#3213](https://github.com/mittwald/flow/issues/3213)) ([7595357](https://github.com/mittwald/flow/commit/7595357396476deeb3d1b63d4105a3ade84f8e83))
+
+## [1.2.0](https://github.com/mittwald/flow/compare/1.2.0-next.67...1.2.0) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** restore the stable changelogs before graduating ([94edc1d](https://github.com/mittwald/flow/commit/94edc1d4dfa5e83dadbad1fa84142f8ff7e37815))
+
+## [1.1.53](https://github.com/mittwald/flow/compare/1.1.52...1.1.53) (2026-09-21)
+
+### Bug Fixes
+
+* **icons:** drop the trailing separator from an icon&#x27;s class attribute ([#3203](https://github.com/mittwald/flow/issues/3203)) ([8a48c83](https://github.com/mittwald/flow/commit/8a48c8357b99b10eb8e1bbe608a3fdd797722825))
+
 ## [1.1.52](https://github.com/mittwald/flow/compare/1.1.51...1.1.52) (2026-09-21)
 
 ### Bug Fixes
