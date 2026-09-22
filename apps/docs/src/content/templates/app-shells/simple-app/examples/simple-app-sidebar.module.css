@@ -1,6 +1,9 @@
 .app {
-  /* Container-relative here; use 100dvh in a real full-page app. */
-  min-height: 100%;
+  /* Fixed to the viewport height (container-relative here; use 100dvh in a real
+     full-page app) so the cards below can fill it and scroll their own content
+     instead of growing the page. */
+  height: 100%;
+  overflow: hidden;
   padding-block: var(--size-px--l);
   padding-inline: 2rem;
   background: var(--color--background-gradient);
@@ -11,55 +14,65 @@
  * theme. Swap the masked SVG for your own logo.
  */
 .logo {
-  width: 9rem;
-  max-width: 100%;
+  width: 100%;
   aspect-ratio: 300 / 57;
+
+  /* Side padding keeps the wordmark from filling the full sidebar width;
+     content-box confines both fill and mask so the padding takes effect. */
+  box-sizing: border-box;
+  padding-inline: var(--size-px--xl);
+
+  /* Extra breathing room between the wordmark and the search below it. */
+  margin-block-end: var(--size-px--m);
   background: currentcolor;
+  background-clip: content-box;
   mask: url("./mittwald.svg") no-repeat center / contain;
+  mask-origin: content-box;
+  mask-clip: content-box;
   -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask-origin: content-box;
+  -webkit-mask-clip: content-box;
 }
 
-/* The reduced top bar keeps its global functions at the far end. */
-.utility {
-  margin-inline-start: auto;
-}
-
-/* The bell and the burger take that place on narrow screens. */
-.mobileActions {
-  margin-inline-start: auto;
-}
-
-/* The bell carries a small count badge in its top-inline-end corner. */
-.notify {
-  position: relative;
-}
-
-.notifyBadge {
-  position: absolute;
-  top: -0.25rem;
-  inset-inline-end: -0.25rem;
-}
-
-/* Sidebar and content fill the space between top bar and footer. */
+/* Sidebar and content fill the available height side by side. */
 .body {
+  display: flex;
+  gap: var(--size-px--l);
+  align-items: stretch;
   flex: 1;
   min-height: 0;
 }
 
-/* The navigation card keeps a fixed width beside the flexible content. */
+/* The navigation card keeps a fixed width beside the flexible content and
+   scrolls its own content if the viewport is too short for it. */
 .sidebar {
-  flex: 0 0 17rem;
+  flex: 0 0 20rem;
   gap: var(--size-px--m);
+  min-height: 0;
+  overflow: auto;
 }
 
-/* Supplementary points sit at the bottom, set apart from the flat list above. */
+/* Settings and the user profile sit at the bottom, apart from the areas above. */
 .sidebarBottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
   margin-block-start: auto;
 }
 
 .main {
   flex: 1 1 auto;
   min-width: 0;
+  min-height: 0;
+}
+
+/* The content card grows with its content, but only up to the viewport: once it
+   would run past the bottom it stops there and scrolls its own overflow (the
+   long invoice list) instead of growing the page. */
+.contentCard {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: auto;
 }
 
 /* Keeps the heading in the accessibility tree while hiding it visually. */
@@ -80,23 +93,32 @@
 }
 
 /*
- * Below this width the sidebar has no column of its own, so it hands its links
- * to the off-canvas behind the burger. The reduced top bar shows the bell and
- * the burger instead of the profile menu.
+ * On narrow screens the two cards stack, and the page scrolls as a whole rather
+ * than each card scrolling on its own inside a fixed height.
  */
 @media (max-width: 768px) {
-  .utility,
-  .sidebar {
-    display: none;
-  }
-
   .app {
+    height: auto;
+    overflow: visible;
     padding-inline: var(--size-px--m);
   }
-}
 
-@media (min-width: 769px) {
-  .mobileActions {
-    display: none;
+  .body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex-basis: auto;
+    overflow: visible;
+  }
+
+  .main {
+    min-height: auto;
+  }
+
+  .contentCard {
+    flex: none;
+    min-height: auto;
+    overflow: visible;
   }
 }

@@ -1,11 +1,8 @@
 import {
-  ActionGroup,
   Avatar,
   Badge,
   Button,
-  ContextMenu,
-  ContextMenuTrigger,
-  Content,
+  Combine,
   CounterBadge,
   Flex,
   Heading,
@@ -13,7 +10,6 @@ import {
   IconDashboard,
   IconInvoice,
   IconLogout,
-  IconMenu,
   IconNotification,
   IconPayment,
   IconQuote,
@@ -21,18 +17,10 @@ import {
   Initials,
   LayoutCard,
   Link,
-  MenuItem,
-  Modal,
-  ModalTrigger,
   Navigation,
   Section,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
   Text,
+  typedList,
 } from "@mittwald/flow-react-components";
 import styles from "./simple-app-sidebar.module.css";
 
@@ -50,192 +38,216 @@ const statusColor: Record<
 interface Invoice {
   number: string;
   customer: string;
-  date: string;
+  createdAt: string; // ISO date, sorted on
+  date: string; // formatted for display
   amount: string;
   status: Status;
 }
 
-const invoices: Invoice[] = [
-  {
-    number: "RE-2026-0148",
-    customer: "KD-1042",
-    date: "03.09.2026",
-    amount: "1.290,00 €",
-    status: "Bezahlt",
-  },
-  {
-    number: "RE-2026-0149",
-    customer: "KD-0987",
-    date: "05.09.2026",
-    amount: "540,00 €",
-    status: "Offen",
-  },
-  {
-    number: "RE-2026-0150",
-    customer: "KD-1120",
-    date: "28.08.2026",
-    amount: "2.310,00 €",
-    status: "Überfällig",
-  },
-  {
-    number: "RE-2026-0151",
-    customer: "KD-1042",
-    date: "10.09.2026",
-    amount: "780,00 €",
-    status: "Offen",
-  },
-  {
-    number: "RE-2026-0152",
-    customer: "KD-0765",
-    date: "12.09.2026",
-    amount: "96,00 €",
-    status: "Bezahlt",
-  },
+const statuses: Status[] = [
+  "Bezahlt",
+  "Offen",
+  "Überfällig",
+];
+const customers = [
+  "KD-1042",
+  "KD-0987",
+  "KD-1120",
+  "KD-0765",
+  "KD-1298",
+  "KD-0553",
 ];
 
-export default () => (
-  <Flex direction="column" gap="l" className={styles.app}>
-    <Flex
-      elementType="header"
-      align="center"
-      wrap="wrap"
-      gap="m"
-    >
-      <span
-        className={styles.logo}
-        role="img"
-        aria-label="mittwald"
-      />
-      {/* The reduced top bar carries only global functions, no navigation. */}
-      <Flex
-        align="center"
-        gap="s"
-        className={styles.utility}
-      >
-        <NotificationButton />
-        <ContextMenuTrigger>
-          <Button aria-label="Nutzerprofil">
-            <Avatar>
-              <Initials>Max Mustermann</Initials>
-            </Avatar>
-          </Button>
-          <ContextMenu>
-            <MenuItem>
-              <IconSettings />
-              <Text>Profil</Text>
-            </MenuItem>
-            <MenuItem>
-              <IconLogout />
-              <Text>Abmelden</Text>
-            </MenuItem>
-          </ContextMenu>
-        </ContextMenuTrigger>
-      </Flex>
-      <Flex
-        align="center"
-        gap="s"
-        className={styles.mobileActions}
-      >
-        <NotificationButton />
-        <MobileMenu />
-      </Flex>
-    </Flex>
+// Deterministic pseudo-randomness: the sample data should look unordered, but
+// stay identical between the server and client render (Math.random would not).
+const pseudoRandom = (seed: number) => {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+};
 
-    <Flex gap="l" align="stretch" className={styles.body}>
-      <LayoutCard className={styles.sidebar}>
-        <AreaNavigation />
-        <div className={styles.sidebarBottom}>
-          <AdminNavigation />
-        </div>
-      </LayoutCard>
+const pick = <T,>(options: readonly T[], seed: number): T =>
+  options[Math.floor(pseudoRandom(seed) * options.length)];
 
-      <Flex
-        elementType="main"
-        direction="column"
-        gap="m"
-        className={styles.main}
-      >
-        {/* The active area is already named in the navigation, so the page
-            heading is only exposed to assistive technology. */}
-        <Heading
-          level={1}
-          className={styles.visuallyHidden}
-        >
-          Rechnungen
-        </Heading>
+// A page of invoices, one per day counting back from 30.09.2026, with enough
+// rows to sort, filter and search through.
+const invoices: Invoice[] = Array.from(
+  { length: 20 },
+  (_, i) => {
+    const day = new Date(2026, 8, 30 - i);
+    const yyyy = day.getFullYear();
+    const mm = String(day.getMonth() + 1).padStart(2, "0");
+    const dd = String(day.getDate()).padStart(2, "0");
+    const value =
+      90 + Math.floor(pseudoRandom(i + 50) * 3000);
+    return {
+      number: `RE-2026-${String(148 + i).padStart(4, "0")}`,
+      customer: pick(customers, i + 1),
+      createdAt: `${yyyy}-${mm}-${dd}`,
+      date: `${dd}.${mm}.${yyyy}`,
+      amount: value.toLocaleString("de-DE", {
+        style: "currency",
+        currency: "EUR",
+      }),
+      status: pick(statuses, i + 100),
+    };
+  },
+);
 
-        <LayoutCard>
-          <Section>
-            <Heading>Rechnungen</Heading>
-            <Table aria-label="Rechnungen">
-              <TableHeader>
-                <TableColumn>Rechnungsnummer</TableColumn>
-                <TableColumn>Kundennummer</TableColumn>
-                <TableColumn>Ausstellungsdatum</TableColumn>
-                <TableColumn>Betrag</TableColumn>
-                <TableColumn>Status</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {invoices.map((invoice) => (
-                  <TableRow key={invoice.number}>
-                    <TableCell>{invoice.number}</TableCell>
-                    <TableCell>
-                      {invoice.customer}
-                    </TableCell>
-                    <TableCell>{invoice.date}</TableCell>
-                    <TableCell>{invoice.amount}</TableCell>
-                    <TableCell>
-                      <Badge
-                        color={statusColor[invoice.status]}
-                      >
-                        {invoice.status}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Section>
+export default () => {
+  const InvoiceList = typedList<Invoice>();
+
+  return (
+    <Flex direction="column" gap="l" className={styles.app}>
+      <div className={styles.body}>
+        <LayoutCard className={styles.sidebar}>
+          <span
+            className={styles.logo}
+            role="img"
+            aria-label="mittwald"
+          />
+          <AreaNavigation />
+          <div className={styles.sidebarBottom}>
+            <AdminNavigation />
+            {/* The current user sits at the very bottom of the sidebar. */}
+            <Flex
+              align="center"
+              justify="space-between"
+              gap="s"
+            >
+              <Combine>
+                <Avatar>
+                  <Initials>Max Mustermann</Initials>
+                </Avatar>
+                <Text>Max Mustermann</Text>
+              </Combine>
+              <Button
+                variant="plain"
+                color="secondary"
+                aria-label="Abmelden"
+              >
+                <IconLogout />
+              </Button>
+            </Flex>
+          </div>
         </LayoutCard>
+
+        <Flex
+          elementType="main"
+          direction="column"
+          gap="m"
+          className={styles.main}
+        >
+          {/* The active area is already named in the navigation, so the page
+            heading is only exposed to assistive technology. */}
+          <Heading
+            level={1}
+            className={styles.visuallyHidden}
+          >
+            Rechnungen
+          </Heading>
+
+          <LayoutCard className={styles.contentCard}>
+            <Section>
+              <InvoiceList.List
+                aria-label="Rechnungen"
+                defaultViewMode="table"
+                batchSize={20}
+                getItemId={(invoice) => invoice.number}
+              >
+                <InvoiceList.StaticData data={invoices} />
+                <InvoiceList.Search />
+                <InvoiceList.Filter
+                  property="status"
+                  mode="some"
+                  name="Status"
+                />
+                <InvoiceList.Sorting
+                  property="createdAt"
+                  name="Erstelldatum"
+                  direction="desc"
+                  directionName="absteigend"
+                  defaultEnabled
+                />
+                <InvoiceList.Sorting
+                  property="createdAt"
+                  name="Erstelldatum"
+                  direction="asc"
+                  directionName="aufsteigend"
+                />
+                <InvoiceList.Table>
+                  <InvoiceList.TableHeader>
+                    <InvoiceList.TableColumn>
+                      Rechnungsnummer
+                    </InvoiceList.TableColumn>
+                    <InvoiceList.TableColumn>
+                      Kundennummer
+                    </InvoiceList.TableColumn>
+                    <InvoiceList.TableColumn>
+                      Ausstellungsdatum
+                    </InvoiceList.TableColumn>
+                    <InvoiceList.TableColumn>
+                      Betrag
+                    </InvoiceList.TableColumn>
+                    <InvoiceList.TableColumn>
+                      Status
+                    </InvoiceList.TableColumn>
+                  </InvoiceList.TableHeader>
+
+                  <InvoiceList.TableBody>
+                    <InvoiceList.TableRow>
+                      <InvoiceList.TableCell>
+                        {(invoice) => invoice.number}
+                      </InvoiceList.TableCell>
+                      <InvoiceList.TableCell>
+                        {(invoice) => invoice.customer}
+                      </InvoiceList.TableCell>
+                      <InvoiceList.TableCell>
+                        {(invoice) => invoice.date}
+                      </InvoiceList.TableCell>
+                      <InvoiceList.TableCell>
+                        {(invoice) => invoice.amount}
+                      </InvoiceList.TableCell>
+                      <InvoiceList.TableCell>
+                        {(invoice) => (
+                          <Badge
+                            color={
+                              statusColor[invoice.status]
+                            }
+                          >
+                            {invoice.status}
+                          </Badge>
+                        )}
+                      </InvoiceList.TableCell>
+                    </InvoiceList.TableRow>
+                  </InvoiceList.TableBody>
+                </InvoiceList.Table>
+              </InvoiceList.List>
+            </Section>
+          </LayoutCard>
+        </Flex>
+      </div>
+
+      <Flex
+        elementType="footer"
+        justify="center"
+        wrap="wrap"
+        gap="l"
+        className={styles.footer}
+      >
+        <Link href="#" target="_blank" color="dark">
+          Datenschutz
+        </Link>
+        <Link href="#" target="_blank" color="dark">
+          Impressum
+        </Link>
       </Flex>
     </Flex>
-
-    <Flex
-      elementType="footer"
-      justify="center"
-      wrap="wrap"
-      gap="l"
-      className={styles.footer}
-    >
-      <Link href="#" target="_blank" color="dark">
-        Datenschutz
-      </Link>
-      <Link href="#" target="_blank" color="dark">
-        Impressum
-      </Link>
-    </Flex>
-  </Flex>
-);
-
-const NotificationButton = () => (
-  <Button
-    variant="plain"
-    color="secondary"
-    aria-label="Benachrichtigungen"
-    className={styles.notify}
-  >
-    <IconNotification />
-    <CounterBadge
-      count={2}
-      className={styles.notifyBadge}
-    />
-  </Button>
-);
+  );
+};
 
 /*
- * The flat list of equal-ranking areas. Shared by the sidebar and the
- * off-canvas, so the same links read as a sidebar on wide screens and as a
- * navigation list behind the burger on narrow ones.
+ * The flat list of equal-ranking areas — the single navigation level of a
+ * Simple App, moved from the header into the sidebar.
  */
 const AreaNavigation = () => (
   <Navigation aria-label="Bereiche">
@@ -263,47 +275,19 @@ const AreaNavigation = () => (
 );
 
 /*
- * Supplementary points that would be out of place in a header. They sit apart
- * from the flat list of areas above.
+ * Supplementary points that would be out of place among the areas. They sit
+ * apart from the flat list above.
  */
 const AdminNavigation = () => (
   <Navigation aria-label="Verwaltung">
+    <Link href="#">
+      <IconNotification />
+      <Text>Benachrichtigungen</Text>
+      <CounterBadge count={2} />
+    </Link>
     <Link href="#">
       <IconSettings />
       <Text>Einstellungen</Text>
     </Link>
   </Navigation>
-);
-
-/*
- * On a narrow screen the sidebar has no column of its own, so its navigation
- * moves in here. The burger is then the shell's only navigation control.
- */
-const MobileMenu = () => (
-  <ModalTrigger>
-    <Button
-      variant="plain"
-      color="secondary"
-      aria-label="Menü öffnen"
-    >
-      <IconMenu />
-    </Button>
-    <Modal offCanvas showCloseButton>
-      <Heading>Menü</Heading>
-      <Content>
-        <Section>
-          <AreaNavigation />
-        </Section>
-        <Section>
-          <AdminNavigation />
-        </Section>
-      </Content>
-      <ActionGroup>
-        <Button variant="soft" color="secondary">
-          <IconLogout />
-          <Text>Abmelden</Text>
-        </Button>
-      </ActionGroup>
-    </Modal>
-  </ModalTrigger>
 );
