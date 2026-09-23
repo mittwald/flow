@@ -87,22 +87,11 @@ Regeln, welche Änderung eine neue Major-Version erzwingt.
 
 Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
 bewusst nicht durch die Versionierung abgedeckt. Sie können sich in jedem
-Release ändern, auch in einem Minor oder Patch.
+Release ändern, auch in einem Minor oder Patch – ohne Major-Version und ohne
+Deprecation-Phase.
 
-<Alert status="warning">
-  <Heading>
-    Best-effort: TypeScript-Typen, CSS-Klassennamen, Design Tokens
-  </Heading>
-  <Content>
-    Diese drei Bereiche sind best-effort und fallen nicht unter Semantic
-    Versioning. Eine Änderung daran ist unwahrscheinlich – wir nehmen sie nicht
-    leichtfertig vor –, aber möglich: Sie kann in jedem Release erscheinen, auch
-    in einem Patch, ohne Major-Version und ohne Deprecation-Phase. Wenn du dich
-    auf einen davon stützt, lies „So schützt du dich“.
-  </Content>
-</Alert>
-
-**Best-effort – eine Änderung ist unwahrscheinlich, aber jederzeit möglich:**
+**Best-effort – eine Änderung ist unwahrscheinlich, weil wir sie nicht
+leichtfertig vornehmen, aber jederzeit möglich:**
 
 - **TypeScript-Typen.** Alle Änderungen auf Type-Ebene sind best-effort und
   nicht durch Semantic Versioning geschützt. Auch das Entfernen oder Umbenennen
@@ -113,6 +102,8 @@ Release ändern, auch in einem Minor oder Patch.
   Existenz noch ihre Schreibweise ist zugesagt.
 - **Namen und Werte von Design Tokens.** Ein Token kann umbenannt werden, einen
   anderen Wert bekommen oder verschwinden.
+
+Wenn du dich auf einen dieser drei Bereiche stützt, lies „So schützt du dich“.
 
 **Ebenfalls nicht abgedeckt:**
 
