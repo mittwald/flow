@@ -32,7 +32,7 @@ The CLI's own output does detect it and prints the right form.
 
 ## Image: rounded corners by default, withBorder draws only the border
 
-**Since `1.2.11`** · migration · no code change needed · also applies to
+**Since `1.3.0`** · migration · no code change needed · also applies to
 `@mittwald/flow-remote-react-components`
 
 `Image` now has rounded corners by default, with or without a border. Previously

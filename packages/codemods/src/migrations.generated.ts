@@ -8,7 +8,7 @@ import type { MigrationEntry } from "./catalog/types.js";
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
     id: "image-rounded-corners-default",
-    since: "1.2.11",
+    since: "1.3.0",
     title:
       "Image: rounded corners by default, withBorder draws only the border",
     kind: "migration",
