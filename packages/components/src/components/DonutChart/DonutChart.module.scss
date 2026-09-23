@@ -12,6 +12,14 @@
     stroke: var(--donut-chart--background-color);
   }
 
+  .fill,
+  .segment {
+    transform: rotate(var(--donut-chart--fill-rotation));
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: donut-chart-fill var(--donut-chart--transition-duration) ease;
+  }
+
   .value {
     position: absolute;
     inset: 0;
@@ -75,5 +83,13 @@
     .legend {
       justify-content: start;
     }
+  }
+}
+
+/* The implicit "to" keyframe picks up the fill's own offset and rotation. */
+@keyframes donut-chart-fill {
+  from {
+    stroke-dashoffset: var(--donut-chart--circumference);
+    transform: rotate(-90deg);
   }
 }

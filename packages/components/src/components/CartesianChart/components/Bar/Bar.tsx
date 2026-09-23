@@ -11,6 +11,7 @@ import {
 import { useCartesianChartContext } from "@/components/CartesianChart/context";
 import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedStackId";
 import { useDesignTokens } from "@/lib/theming";
+import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
 
 type BarBaseProps = Pick<
   Recharts.BarProps,
@@ -47,6 +48,7 @@ export const Bar: FC<BarProps> = (props) => {
   const { color: colorFromProps = "sea-green", ...rest } = props;
 
   const tokens = useDesignTokens();
+  const animation = useChartAnimation();
   const { layout } = useCartesianChartContext();
   const stackId = useScopedStackId(props.stackId);
 
@@ -67,6 +69,7 @@ export const Bar: FC<BarProps> = (props) => {
       stackId={stackId}
       fill={color}
       radius={stackId === undefined ? radius : 0}
+      {...animation}
     />
   );
 

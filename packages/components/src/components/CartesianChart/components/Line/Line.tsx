@@ -8,6 +8,7 @@ import type {
   DataKey,
 } from "@/components/CartesianChart/types";
 import { useDesignTokens } from "@/lib/theming";
+import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
 
 export interface LineProps<
   TData extends ChartDataValue = ChartDataValue,
@@ -25,6 +26,7 @@ export const Line: FC<LineProps> = (props) => {
   const { color: colorFromProps = "sea-green", ...rest } = props;
 
   const tokens = useDesignTokens();
+  const animation = useChartAnimation();
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`
@@ -38,6 +40,7 @@ export const Line: FC<LineProps> = (props) => {
       dot={false}
       stroke={color}
       strokeWidth={tokens.line["border-width"].value}
+      {...animation}
     />
   );
 };
