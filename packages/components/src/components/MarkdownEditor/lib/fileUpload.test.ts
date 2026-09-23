@@ -47,6 +47,18 @@ describe("uploadedFileMarkdown", () => {
     ).toBe("![The roof](https://cdn/a.png)");
   });
 
+  /*
+   * Escaping only the brackets would turn `a\\]b` into `a\\\\]b` — an escaped
+   * backslash followed by a bare `]`, which ends the label early.
+   */
+  test("escapes a backslash in the label along with the brackets", () => {
+    expect(
+      uploadedFileMarkdown(file(String.raw`a\]b.png`), {
+        url: "https://cdn/a",
+      }),
+    ).toBe(String.raw`![a\\\]b.png](https://cdn/a)`);
+  });
+
   test("escapes brackets and line breaks in the label", () => {
     expect(
       uploadedFileMarkdown(file("[draft]\nv2.png"), { url: "https://cdn/a" }),

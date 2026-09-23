@@ -28,9 +28,16 @@ const escapeComment = (fileName: string) => fileName.replaceAll("-->", "--");
 /*
  * Brackets are what ends a markdown link label, and a line break ends the link
  * altogether. A file name may legally contain both.
+ *
+ * The backslash is escaped in the same pass, and has to be: escaping only the
+ * brackets turns `a\]b` into `a\\]b`, which markdown reads as an escaped
+ * backslash followed by a bare `]` — the label ends right there.
  */
 const escapeLinkLabel = (label: string) =>
-  label.replace(/[[\]]/g, "\\$&").replace(/\s+/g, " ").trim();
+  label
+    .replace(/[\\[\]]/g, "\\$&")
+    .replace(/\s+/g, " ")
+    .trim();
 
 /*
  * A bare link target ends at the first whitespace or unbalanced parenthesis.
