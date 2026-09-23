@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.15](https://github.com/mittwald/flow/compare/1.2.14...1.2.15) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group across 1 directory with 19 updates ([453d99f](https://github.com/mittwald/flow/commit/453d99f505017b0680b5de3de1bb417b93567a93))
+
 ## [1.2.14](https://github.com/mittwald/flow/compare/1.2.13...1.2.14) (2026-09-23)
 
 ### Miscellaneous Chores
