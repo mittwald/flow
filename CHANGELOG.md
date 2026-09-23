@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.13](https://github.com/mittwald/flow/compare/1.2.12...1.2.13) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-minor group across 1 directory with 3 updates ([3b478e2](https://github.com/mittwald/flow/commit/3b478e210dc718f3f5602898225ce4d33d9ecbb2))
+* **deps:** bump docker/build-push-action ([55e24b2](https://github.com/mittwald/flow/commit/55e24b234e06b836b34c9bd56205b9e17430a67e))
+
+### Tests
+
+* **CartesianChart:** gate the Bar scenarios below 1.2.0 ([697a90e](https://github.com/mittwald/flow/commit/697a90e9b1c7ca6a928936634b25ab3f4d9c6d98))
+* **cross-version:** never resolve a target to a prerelease version ([3b48995](https://github.com/mittwald/flow/commit/3b48995634f83270c821fcb0966426aeb8787d60))
+
 ## [1.2.12](https://github.com/mittwald/flow/compare/1.2.11...1.2.12) (2026-09-23)
 
 ### Bug Fixes
