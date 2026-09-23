@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.14](https://github.com/mittwald/flow/compare/1.3.0-next.13...1.3.0-next.14) (2026-09-23)
+
+## [1.2.10](https://github.com/mittwald/flow/compare/1.3.0-next.12...1.2.10) (2026-09-23)
+
+### Bug Fixes
+
+* **DonutChart:** keep the value centred in a stretching flex row ([866cd4f](https://github.com/mittwald/flow/commit/866cd4f513d7575d8dc8cdc05ae3a64d27118ce5))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.10 ([3a57100](https://github.com/mittwald/flow/commit/3a571000fbba5f93423150199b4b2bd13a1d621b))
+
+### Tests
+
+* update visual regression screenshots ([2256a62](https://github.com/mittwald/flow/commit/2256a627f9852ac21158d792aa5c963e121d7ac3))
+
 ## [1.3.0-next.13](https://github.com/mittwald/flow/compare/1.3.0-next.12...1.3.0-next.13) (2026-09-23)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
