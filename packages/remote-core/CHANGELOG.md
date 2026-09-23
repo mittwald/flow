@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.12](https://github.com/mittwald/flow/compare/1.3.0-next.11...1.3.0-next.12) (2026-09-23)
+
+### Bug Fixes
+
+* **remote-core:** carry Date and other built-ins across the remote boundary ([#3246](https://github.com/mittwald/flow/issues/3246)) ([534e62d](https://github.com/mittwald/flow/commit/534e62de9e635a99b23f18c4fa04ed883b7e2316))
+
+## [1.2.8](https://github.com/mittwald/flow/compare/1.3.0-next.10...1.2.8) (2026-09-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.8 ([80b855b](https://github.com/mittwald/flow/commit/80b855b4fe9afa5aff8bfc5d0fe252024fc1d46e))
+
 ## [1.3.0-next.11](https://github.com/mittwald/flow/compare/1.3.0-next.10...1.3.0-next.11) (2026-09-22)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
