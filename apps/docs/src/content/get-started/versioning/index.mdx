@@ -89,14 +89,13 @@ Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
 bewusst nicht durch die Versionierung abgedeckt. Sie können sich in jedem
 Release ändern, auch in einem Minor oder Patch.
 
-**TypeScript-Typen, CSS-Klassennamen und Design Tokens** sind best-effort und
-fallen nicht unter Semantic Versioning. Eine Änderung daran ist unwahrscheinlich
-– wir nehmen sie nicht leichtfertig vor –, aber möglich: Sie kann in jedem
-Release erscheinen, auch in einem Patch, ohne Major-Version und ohne
-Deprecation-Phase. Wenn du dich auf einen davon stützt, lies „So schützt du
-dich“.
+## Best-effort
 
-**Best-effort:**
+TypeScript-Typen, CSS-Klassennamen und Design Tokens fallen nicht unter Semantic
+Versioning. Eine Änderung daran ist unwahrscheinlich – wir nehmen sie nicht
+leichtfertig vor –, aber möglich: Sie kann in jedem Release erscheinen, auch in
+einem Patch, ohne Major-Version und ohne Deprecation-Phase. Wenn du dich auf
+einen davon stützt, lies „So schützt du dich“.
 
 - **TypeScript-Typen.** Das gilt für die gesamte Type-Ebene: Auch das Entfernen
   oder Umbenennen eines exportierten Typs oder das Verengen eines Prop-Typs ist
@@ -107,7 +106,7 @@ dich“.
 - **Namen und Werte von Design Tokens.** Ein Token kann umbenannt werden, einen
   anderen Wert bekommen oder verschwinden.
 
-**Ebenfalls nicht abgedeckt:**
+## Ebenfalls nicht abgedeckt
 
 - **Das visuelle Erscheinungsbild.**
 - **Die interne DOM-Struktur.**
