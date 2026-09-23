@@ -1,5 +1,5 @@
 ---
-since: 1.2.10
+since: 1.2.11
 title: "Image: rounded corners by default, withBorder draws only the border"
 kind: migration
 action: none
