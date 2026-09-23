@@ -87,30 +87,52 @@ Regeln, welche Änderung eine neue Major-Version erzwingt.
 
 Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
 bewusst nicht durch die Versionierung abgedeckt. Sie können sich in jedem
-Release ändern, auch in einem Minor oder Patch:
+Release ändern, auch in einem Minor oder Patch.
 
-- **Alle Änderungen auf Type-Ebene (TypeScript).** Die Typen sind best-effort
-  und nicht durch Semantic Versioning geschützt. Auch das Entfernen oder
-  Umbenennen eines exportierten Typs oder das Verengen eines Prop-Typs ist für
-  sich genommen kein Breaking Change. Nennenswerte Type-Änderungen werden
-  dennoch im Changelog erwähnt.
+<Alert status="warning">
+  <Heading>
+    Best-effort: TypeScript-Typen, CSS-Klassennamen, Design Tokens
+  </Heading>
+  <Content>
+    Diese drei Bereiche sind best-effort und fallen nicht unter Semantic
+    Versioning. Eine Änderung daran ist unwahrscheinlich – wir nehmen sie nicht
+    leichtfertig vor –, aber möglich: Sie kann in jedem Release erscheinen, auch
+    in einem Patch, ohne Major-Version und ohne Deprecation-Phase. Wenn du dich
+    auf einen davon stützt, lies „So schützt du dich“.
+  </Content>
+</Alert>
+
+**Best-effort – eine Änderung ist unwahrscheinlich, aber jederzeit möglich:**
+
+- **TypeScript-Typen.** Alle Änderungen auf Type-Ebene sind best-effort und
+  nicht durch Semantic Versioning geschützt. Auch das Entfernen oder Umbenennen
+  eines exportierten Typs oder das Verengen eines Prop-Typs ist für sich
+  genommen kein Breaking Change. Nennenswerte Type-Änderungen werden dennoch im
+  Changelog erwähnt.
+- **CSS-Klassennamen.** Ein internes Implementierungsdetail – weder ihre
+  Existenz noch ihre Schreibweise ist zugesagt.
+- **Namen und Werte von Design Tokens.** Ein Token kann umbenannt werden, einen
+  anderen Wert bekommen oder verschwinden.
+
+**Ebenfalls nicht abgedeckt:**
+
 - **Das visuelle Erscheinungsbild.**
 - **Die interne DOM-Struktur.**
-- **CSS-Klassennamen.**
-- **Namen und Werte von Design Tokens.**
 
 ---
 
 # So schützt du dich
 
-Weil die oben genannten Bereiche bewusst nicht garantiert sind, gibt es zwei
+Weil die best-effort-Bereiche bewusst nicht garantiert sind, gibt es drei
 Regeln, an die du dich als Entwickler halten solltest.
 
 <Alert>
-  <Heading>Zwei Regeln für den stabilen Betrieb</Heading>
+  <Heading>Drei Regeln für den stabilen Betrieb</Heading>
   <Content>
-    Style nicht gegen interne CSS-Klassen, und behandle Flows TypeScript-Typen
-    als best-effort. Beide Bereiche können sich in jedem Release ändern.
+    Style nicht gegen interne CSS-Klassen, referenziere Design Tokens nicht
+    ungeprüft über Releases hinweg, und behandle Flows TypeScript-Typen als
+    best-effort. Alle drei Bereiche ändern sich selten – aber wenn, dann ohne
+    Vorwarnung in einem beliebigen Release.
   </Content>
 </Alert>
 
@@ -120,6 +142,14 @@ Die CSS-Klassennamen der Components sind ein internes Implementierungsdetail und
 können sich in jedem Release ändern. Verlasse dich für eigenes Styling nicht
 darauf, dass eine bestimmte interne Klasse existiert oder gleich heißt.
 Andernfalls kann bereits ein Patch dein Styling brechen.
+
+## Behandle Design Tokens als best-effort
+
+Design Tokens sind für die Verwendung innerhalb von Flow gedacht. Greifst du in
+eigenem Code auf eine Token-CSS-Variable zu, prüfe sie nach einem Update: Name
+und Wert können sich auch in einem Patch ändern, und ein nicht mehr
+existierender Token fällt still auf den Browser-Default zurück statt einen
+Fehler zu werfen.
 
 ## Behandle TypeScript-Typen als best-effort
 
