@@ -44,6 +44,19 @@ Connection + serialization layer between host (mStudio) and remote apps
   That is a net, not a fix: the prop belongs in a **slot**. The generator fails
   the build on such a prop — see `checkSerializableProps` in the components
   package.
+- **`isSerializableByBase` is the list of structured-clone-native types**, and
+  everything it does not claim falls through to `serialize({ ...val })` — which
+  keeps own enumerable properties only. For a built-in holding its state in
+  internal slots that is total, silent loss: a `Date` crossed as `{}`, a
+  `RegExp` and an `Error` the same, a `Uint8Array` as `{"0":1,"1":2}`. **Fix
+  such a gap by extending that list, not with a named serializer** — the value
+  then crosses in its native clone form, which an older peer's base deserializer
+  returns unchanged, while a serializer name an older peer does not know leaves
+  it holding the raw wrapper object. The list is not "everything non-basic":
+  `URL` is _not_ structured-cloneable, and adding it would upgrade a silently
+  emptied object into a `DataCloneError` that drops the whole batch. `File`
+  stays with `fileSerializer` (transferable content, wire format part of the
+  protocol), so the `Blob` entry excludes it.
 - **`isSerializableByBase` accepts any function**, so a function prop becomes a
   thread proxy — and a proxy call is a round trip, so the host gets a Promise,
   not the value. Fine for `on*` events, which nobody reads the return of; wrong
