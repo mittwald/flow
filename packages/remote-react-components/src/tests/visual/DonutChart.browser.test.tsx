@@ -63,7 +63,11 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "DonutChart edge cases (%s)",
-  async ({ testScreenshot, render, components: { Flex, DonutChart } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, DonutChart, ProgressBar },
+  }) => {
     await render(
       <Flex direction="column" gap="m">
         <DonutChart
@@ -74,6 +78,17 @@ test.each(testEnvironments)(
         <DonutChart aria-label="label" value={10}>
           The Death Star is now fully operational.
         </DonutChart>
+        {/* A flex row stretches its items, which must not move the value. */}
+        <Flex gap="l">
+          <DonutChart aria-label="label" value={30}>
+            In Flex
+          </DonutChart>
+          <Flex direction="column" gap="m" grow>
+            {[80, 45, 20].map((value) => (
+              <ProgressBar aria-label="label" key={value} value={value} />
+            ))}
+          </Flex>
+        </Flex>
       </Flex>,
     );
 
