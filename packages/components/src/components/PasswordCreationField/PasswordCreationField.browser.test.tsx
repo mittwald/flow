@@ -12,6 +12,7 @@ import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
 import Button from "@/components/Button";
 import { userEvent } from "vitest/browser";
+import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
 
 const policyDecl: PolicyDeclaration = {
@@ -32,6 +33,17 @@ const policyDecl: PolicyDeclaration = {
 };
 
 const policy = Policy.fromDeclaration(policyDecl);
+
+const politeAnnouncements = (): string[] =>
+  Array.from(
+    document.querySelectorAll('[data-live-announcer] [aria-live="polite"] > *'),
+  ).map((node) => node.textContent ?? "");
+
+const describedByText = (input: Element): string[] =>
+  (input.getAttribute("aria-describedby") ?? "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((id) => document.getElementById(id)?.textContent ?? "");
 
 const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
   props,
@@ -58,6 +70,7 @@ describe("PasswordCreationField Tests", () => {
 
   afterEach(() => {
     vitest.useRealTimers();
+    destroyAnnouncer();
   });
 
   test("renders empty list without errors", async () => {
@@ -234,6 +247,132 @@ describe("PasswordCreationField Tests", () => {
       "data-complexity-status",
       "success",
     );
+  });
+
+  test("labels the generate button with what it generates", async () => {
+    const renderResult = await render(
+      <I18nProvider locale="de">
+        <PasswordCreationFieldTestComponent validationPolicy={policy}>
+          <Label>Password</Label>
+        </PasswordCreationFieldTestComponent>
+      </I18nProvider>,
+    );
+    await vi.runAllTimersAsync();
+
+    const generateButton = renderResult.getByLocator(
+      'button[data-component="generatePassword"]',
+    );
+
+    expect(generateButton).toHaveAttribute("aria-label", "Passwort generieren");
+    expect(generateButton).toHaveTextContent("Generieren");
+  });
+
+  test("describes the field with the rule the password misses", async () => {
+    const renderResult = await render(
+      <I18nProvider locale="de">
+        <PasswordCreationFieldTestComponent validationPolicy={policy}>
+          <Label>Password</Label>
+        </PasswordCreationFieldTestComponent>
+      </I18nProvider>,
+    );
+    await vi.runAllTimersAsync();
+
+    const inputElement = renderResult.getByRole("textbox");
+    await userEvent.type(inputElement, "abc");
+    await vi.runAllTimersAsync();
+
+    await expect
+      .poll(() => describedByText(inputElement.element()))
+      .toContain("Bitte wähle ein Passwort mit mindestens 8 Zeichen.");
+  });
+
+  test("announces the validation result", async () => {
+    vitest.useRealTimers();
+
+    const renderResult = await render(
+      <I18nProvider locale="de">
+        <PasswordCreationFieldTestComponent validationPolicy={policy}>
+          <Label>Password</Label>
+        </PasswordCreationFieldTestComponent>
+      </I18nProvider>,
+    );
+
+    const inputElement = renderResult.getByRole("textbox");
+    expect(politeAnnouncements()).toEqual([]);
+
+    await userEvent.type(inputElement, "abc");
+    await expect
+      .poll(() => politeAnnouncements())
+      .toContain("Bitte wähle ein Passwort mit mindestens 8 Zeichen.");
+
+    await userEvent.clear(inputElement);
+    await userEvent.type(inputElement, "d!iBCsc8(l~i");
+    await expect
+      .poll(() => politeAnnouncements())
+      .toContain("Sehr gut! Dein Passwort ist sicher.");
+  });
+
+  test("announces when the password visibility changes", async () => {
+    vitest.useRealTimers();
+
+    const renderResult = await render(
+      <I18nProvider locale="de">
+        <PasswordCreationFieldTestComponent validationPolicy={policy}>
+          <Label>Password</Label>
+        </PasswordCreationFieldTestComponent>
+      </I18nProvider>,
+    );
+
+    const revealButton = renderResult.getByLocator(
+      'button[data-component="toggleRevealPassword"]',
+    );
+    expect(politeAnnouncements()).toEqual([]);
+
+    await revealButton.click();
+    await expect
+      .poll(() => politeAnnouncements())
+      .toContain("Passwort wird angezeigt");
+
+    await revealButton.click();
+    await expect
+      .poll(() => politeAnnouncements())
+      .toContain("Passwort wird verborgen");
+  });
+
+  test("shows the password rules as a labelled list with their status", async () => {
+    const renderResult = await render(
+      <I18nProvider locale="de">
+        <PasswordCreationFieldTestComponent validationPolicy={policy}>
+          <Label>Password</Label>
+        </PasswordCreationFieldTestComponent>
+      </I18nProvider>,
+    );
+    await vi.runAllTimersAsync();
+
+    const infoButton = renderResult.getByLocator(
+      'button[data-component="showPasswordRules"]',
+    );
+    await userEvent.click(infoButton);
+
+    const rulesList = renderResult.getByRole("list", {
+      name: "Anforderungen an dein Passwort",
+    });
+    expect(rulesList).toBeInTheDocument();
+
+    const rules = rulesList.getByRole("listitem");
+    expect(rules).toHaveLength(2);
+    expect(rules.first()).toHaveTextContent(
+      "Nicht erfüllt: Mindestens 8 Zeichen",
+    );
+
+    await userEvent.keyboard("{escape}");
+    await userEvent.type(renderResult.getByRole("textbox"), "abcdefgh1");
+    await vi.runAllTimersAsync();
+    await userEvent.click(infoButton);
+
+    await expect
+      .poll(() => rules.first().element().textContent)
+      .toBe("Erfüllt: Mindestens 8 Zeichen");
   });
 
   test("will pass custom buttons to input area", async () => {

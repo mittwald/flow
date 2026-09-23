@@ -1,5 +1,8 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+
+// CoachMark landed in 1.2.0-next.62 and shipped in 1.2.0.
+const coachMarkSince = "1.2.0";
 
 /*
  * Anchored by id, not by ref — which is the only anchor that survives the
@@ -11,7 +14,7 @@ import { test } from "vitest";
  * react-aria's `usePopover`, so placement, tip and entry animation come from a
  * different path here and are what this guards.
  */
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: coachMarkSince })).each(testEnvironments)(
   "CoachMark (%s)",
   async ({
     testScreenshot,
@@ -44,7 +47,7 @@ test.each(testEnvironments)(
  * background beside the content — so what this guards is that the box and the
  * text inside it end at the same edge.
  */
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: coachMarkSince })).each(testEnvironments)(
   "CoachMark with a width (%s)",
   async ({
     testScreenshot,

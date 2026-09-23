@@ -1,0 +1,8 @@
+.validationResultList {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--password-creation-field--rule-to-rule-spacing);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

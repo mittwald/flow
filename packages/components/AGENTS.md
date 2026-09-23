@@ -296,6 +296,20 @@ Run: `pnpm nx test:unit components`,
 `pnpm nx test:browser components --browser.name=webkit`. Browser tests need
 `pnpm test:browser:prepare` once.
 
+**Iterate through nx too**, not with a bare `vitest`. Everything after the `--`
+goes to vitest, so a single file and watch mode have nx targets as well:
+
+```shell
+pnpm nx test:browser components -- src/components/Popover --browser.name=webkit
+pnpm nx test:browser:dev components
+```
+
+Only the nx target's `dependsOn` rebuilds the design tokens the styles entry
+compiles against. A bare `vitest run` skips it and renders against whatever
+`packages/design-tokens/dist` happens to hold — a token added in the same branch
+is simply absent, and CSS drops every declaration referencing it without a
+warning (#3194).
+
 ## i18n & a11y
 
 - Component-internal UI text lives in colocated `locales/de-DE.locale.json`

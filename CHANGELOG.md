@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/mittwald/flow/compare/1.2.8...1.2.9) (2026-09-23)
+
+### Bug Fixes
+
+* **docs:** put close button in abort slot on error handling example ([#3254](https://github.com/mittwald/flow/issues/3254)) ([2178f58](https://github.com/mittwald/flow/commit/2178f582ff41aa908d13c1d76ea79c24bd87fc2c))
+* **remote-core:** carry Date and other built-ins across the remote boundary ([#3246](https://github.com/mittwald/flow/issues/3246)) ([534e62d](https://github.com/mittwald/flow/commit/534e62de9e635a99b23f18c4fa04ed883b7e2316))
+
+## [1.2.8](https://github.com/mittwald/flow/compare/1.2.7...1.2.8) (2026-09-22)
+
+### Bug Fixes
+
+* **PasswordCreationField:** make the field usable with a screen reader ([#3234](https://github.com/mittwald/flow/issues/3234)) ([33fde0b](https://github.com/mittwald/flow/commit/33fde0bea077bb45dbfd22a256a26d590f8965a2))
+
+## [1.2.7](https://github.com/mittwald/flow/compare/1.2.6...1.2.7) (2026-09-22)
+
+### Bug Fixes
+
+* **TextArea:** resize and count a value the field never saw typed ([#3237](https://github.com/mittwald/flow/issues/3237)) ([a0df423](https://github.com/mittwald/flow/commit/a0df42334f44ff1b65dbeeaf90b70fdf35359fcf))
+
+### Documentation
+
+* hide imports in code examples ([#3230](https://github.com/mittwald/flow/issues/3230)) ([f16ac40](https://github.com/mittwald/flow/commit/f16ac409a58865d86acb8301b71115e9dd1902c1))
+
+### Tests
+
+* **CoachMark:** gate the cross-version scenarios per version ([#3233](https://github.com/mittwald/flow/issues/3233)) ([e3b7446](https://github.com/mittwald/flow/commit/e3b7446ece590a09136f5ba7e403f82f8aa2e5d1))
+
+## [1.2.6](https://github.com/mittwald/flow/compare/1.2.5...1.2.6) (2026-09-22)
+
+### Tests
+
+* **components:** compile the browser tests&#x27; base styles from source ([#3196](https://github.com/mittwald/flow/issues/3196)) ([2320245](https://github.com/mittwald/flow/commit/2320245f4d91e698fc959bd2ff6e08c3eb0ccc78))
+
+## [1.2.5](https://github.com/mittwald/flow/compare/1.2.4...1.2.5) (2026-09-22)
+
+### Bug Fixes
+
+* **Tooltip:** hide a tooltip that never got positioned ([#3226](https://github.com/mittwald/flow/issues/3226)) ([81c1aff](https://github.com/mittwald/flow/commit/81c1aff5dd4034b80960e5f8bc53014ffc752ac6))
+
+## [1.2.4](https://github.com/mittwald/flow/compare/1.2.3...1.2.4) (2026-09-22)
+
+### Bug Fixes
+
+* **Combine:** keep a text and its small button in the line ([c524c72](https://github.com/mittwald/flow/commit/c524c7218d3093351062e16b44449c0e0393fd9e))
+
+### Miscellaneous Chores
+
+* drop the contextual-help docs example and the Combine comment ([4bec742](https://github.com/mittwald/flow/commit/4bec7420c4ada8714f6dd548d45116c24e58cc1c))
+
+### Tests
+
+* update visual regression screenshots ([71c3c92](https://github.com/mittwald/flow/commit/71c3c92250c68cbec9c2da12cd385b203c19c669))
+
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+### Bug Fixes
+
+* **ci:** poll for created preview services and upsert the preview comment ([#3212](https://github.com/mittwald/flow/issues/3212)) ([b685268](https://github.com/mittwald/flow/commit/b6852683eca193338f6f49067a79df1743c6f768))
+* **CoachMark:** play the closing animation instead of vanishing ([#3224](https://github.com/mittwald/flow/issues/3224)) ([75d9bda](https://github.com/mittwald/flow/commit/75d9bdad04a98a5b4cd18b60d13ad121405b196f))
+* **docs:** align header and footer with the content width ([#3221](https://github.com/mittwald/flow/issues/3221)) ([98a5efc](https://github.com/mittwald/flow/commit/98a5efc6eaf2fd565150a97f2764504cfb85c547))
+* **remote-dom-demo:** unbreak the chart demo page and type-check the app in CI ([#3222](https://github.com/mittwald/flow/issues/3222)) ([c96579a](https://github.com/mittwald/flow/commit/c96579ad08bdc1e7ac2f28b6413e738f0ae5ed99))
+
+### Documentation
+
+* **release:** reserve inline code for what the reader types ([#3225](https://github.com/mittwald/flow/issues/3225)) ([7efaf7b](https://github.com/mittwald/flow/commit/7efaf7b847c75d4c644beecf51f39a48b5a7f28f))
+
 ## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
 
 ### Bug Fixes

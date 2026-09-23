@@ -84,16 +84,26 @@ jobs:
           git config merge.ours.driver true
           git config merge.package-json.driver \
             "node .github/scripts/merge-package-json.cjs %O %A %B %L %P"
+          # `git merge` refuses to start without a committer identity, even with
+          # `--no-commit`. Nothing is ever committed here, so any identity works.
+          git config user.name "forward-merge-drift"
+          git config user.email "forward-merge-drift@users.noreply.github.com"
           git checkout -q --detach origin/next
 
-          if git merge --no-ff --no-commit origin/main >/dev/null 2>&1; then
+          # stdout is one "Auto-merging" line per file; stderr stays visible.
+          if git merge --no-ff --no-commit origin/main >/dev/null; then
             if git diff --cached --quiet origin/next; then
               echo "Merging main into next produces no code delta — no drift."
               exit 0
             fi
             echo "The merge is clean but carries a code delta — next is behind."
-          else
+          elif [ -n "$(git ls-files --unmerged)" ]; then
             echo "The merge conflicts — next is behind, and a human is needed."
+          else
+            # Not a conflict: the probe itself broke. Fail the run instead of
+            # reporting drift that nobody measured.
+            echo "::error::git merge failed without a conflict."
+            exit 1
           fi
           git merge --abort >/dev/null 2>&1 || git reset -q --hard origin/next
 
