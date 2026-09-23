@@ -13,6 +13,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import type { DropEvent, FocusableElement } from "@react-types/shared";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { getAcceptedFiles } from "@/lib/files/acceptedFiles";
 
 export interface FileDropZoneProps
   extends
@@ -82,15 +83,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         return;
       }
 
-      const fileDropItems = event.items.filter(
-        (file) => file.kind === "file",
-      ) as Aria.FileDropItem[];
-
-      const files = await Promise.all(
-        fileDropItems
-          .filter((f) => !accept || accept?.includes(f.type))
-          .map(async (f) => await f.getFile()),
-      );
+      const files = await getAcceptedFiles(event.items, accept);
 
       if (files.length > 0) {
         const fileTransfer = new DataTransfer();
