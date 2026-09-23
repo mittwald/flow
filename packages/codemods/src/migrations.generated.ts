@@ -7,6 +7,17 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "image-rounded-corners-default",
+    since: "1.2.10",
+    title:
+      "Image: rounded corners by default, withBorder draws only the border",
+    kind: "migration",
+    action: "none",
+    remotePackage: true,
+    apply:
+      "No code change required. To keep square corners on an `Image` without `withBorder`, pass `withRoundedCorners={false}`.",
+  },
+  {
     id: "popover-open-state-props",
     since: "1.1.47",
     title:
