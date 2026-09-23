@@ -6,4 +6,4 @@ image:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{neutral.color.500}"

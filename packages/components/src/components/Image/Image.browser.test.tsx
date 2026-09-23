@@ -34,3 +34,23 @@ test("keeps aspectRatio from style when no aspectRatio prop is given", async () 
 
   expect(imageOf(screen.container).style.aspectRatio).toBe("16 / 9");
 });
+
+test("rounds the corners without a border by default", async () => {
+  const screen = await render(<Image alt="" src={src} />);
+
+  const style = getComputedStyle(imageOf(screen.container));
+
+  expect(style.borderTopLeftRadius).not.toBe("0px");
+  expect(style.borderTopStyle).toBe("none");
+});
+
+test("shows a border without rounded corners", async () => {
+  const screen = await render(
+    <Image alt="" src={src} withBorder withRoundedCorners={false} />,
+  );
+
+  const style = getComputedStyle(imageOf(screen.container));
+
+  expect(style.borderTopLeftRadius).toBe("0px");
+  expect(style.borderTopStyle).not.toBe("none");
+});
