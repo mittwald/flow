@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
 test.each(testEnvironments)(
@@ -118,7 +118,8 @@ const barChartData = [
   },
 ];
 
-test.each(testEnvironments)(
+// Bar is available from 1.2.0-next.6.
+test.skipIf(crossVersion({ below: "1.2.0-next.6" })).each(testEnvironments)(
   "CartesianChart with Bars (%s)",
   async ({
     testScreenshot,
@@ -149,7 +150,8 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+// Bar is available from 1.2.0-next.6.
+test.skipIf(crossVersion({ below: "1.2.0-next.6" })).each(testEnvironments)(
   "CartesianChart with stacked Bars (%s)",
   async ({
     testScreenshot,
@@ -171,7 +173,8 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+// Bar is available from 1.2.0-next.6.
+test.skipIf(crossVersion({ below: "1.2.0-next.6" })).each(testEnvironments)(
   "CartesianChart with horizontal Bars (%s)",
   async ({
     testScreenshot,

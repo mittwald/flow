@@ -346,15 +346,19 @@ its ephemeral current refs, then loops over the same installed versions;
   );
   ```
 
-  `crossVersion({ below, exclude })` returns `true` (skip) when the tested
-  version is older than `below`, or is listed in `exclude` (for non-monotonic
-  breakage). In the normal visual suite it is always `false`, so the test runs
-  everywhere. The whole test is skipped — render, interaction, and comparison —
-  which covers both causes uniformly: a **component missing** in the old bundle
-  (would throw on render), and a **legitimately evolved element tree** (a real
-  structural diff). Determine the boundary rather than guessing (bisect the
-  installed versions), keep the one-line reason next to the test, and **never**
-  weaken `structuralHtml.ts` to hide an unexplained diff.
+  `crossVersion({ below, exclude, excludeRange })` returns `true` (skip) when
+  the tested version is older than `below`, is listed in `exclude`, or satisfies
+  the semver range `excludeRange` (prereleases included). The latter two cover
+  non-monotonic breakage — e.g. a fix that landed in `1.1.41` but reached `next`
+  by forward-merge only in `1.2.0-next.50`, so `1.2.0-next.0`–`49` lack it
+  although semver ranks them above `1.1.41`. In the normal visual suite it is
+  always `false`, so the test runs everywhere. The whole test is skipped —
+  render, interaction, and comparison — which covers both causes uniformly: a
+  **component missing** in the old bundle (would throw on render), and a
+  **legitimately evolved element tree** (a real structural diff). Determine the
+  boundary rather than guessing (bisect the installed versions), keep the
+  one-line reason next to the test, and **never** weaken `structuralHtml.ts` to
+  hide an unexplained diff.
 
 ### Which versions are tested
 

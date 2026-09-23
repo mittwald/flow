@@ -258,6 +258,12 @@ export interface CrossVersionSkip {
   below?: string;
   /** Skip these exact versions (for non-monotonic breakage). */
   exclude?: string[];
+  /**
+   * Skip versions inside this semver range, prereleases included. For a fix
+   * that reached release lines at different versions, e.g. a forward-merge into
+   * `next`.
+   */
+  excludeRange?: string;
 }
 
 /**
