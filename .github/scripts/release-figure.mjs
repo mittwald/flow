@@ -37,8 +37,10 @@
  *   waits on before every screenshot (#3106). The three faces `fonts.scss`
  *   declares are served from the local copies the visual suite already keeps.
  *   Playwright settles the composition page's fonts, never the story frames'
- *   own — so each panel waits for its iframe's `document.fonts.ready` before it
- *   is measured, or the figure is sized and captured in the fallback face.
+ *   own — and the composition page has no webfonts, so nothing else waits for
+ *   these at all. Each panel therefore checks its iframe's own font status and
+ *   is not measured until it is `loaded`; a face that never arrives aborts the
+ *   run rather than producing a figure in the fallback face.
  * - **`pnpm test:browser:prepare` installs only Firefox and WebKit**, so a clean
  *   checkout has no Chromium. The browser is chosen from what is actually
  *   installed, and the capture names the one it used.
@@ -146,22 +148,29 @@ const freePort = () =>
   });
 
 /**
+ * Poll until Storybook answers, or until `signal` says to stop.
+ *
+ * The signal is not a nicety: without it the loop's own timers keep the event
+ * loop alive for the whole timeout, so a run that has already failed still sits
+ * there for five minutes after reporting why.
+ *
  * @param {string} url
  * @param {number} timeoutMs
+ * @param {AbortSignal} [signal]
  * @returns {Promise<Record<string, any>>} Storybook's `/index.json`
  */
-const waitForStorybook = async (url, timeoutMs) => {
+const waitForStorybook = async (url, timeoutMs, signal) => {
   const deadline = Date.now() + timeoutMs;
   let lastError = "not started";
-  while (Date.now() < deadline) {
+  while (Date.now() < deadline && !signal?.aborted) {
     try {
-      const response = await globalThis.fetch(`${url}/index.json`);
+      const response = await globalThis.fetch(`${url}/index.json`, { signal });
       if (response.ok) return await response.json();
       lastError = `HTTP ${response.status}`;
     } catch (error) {
       lastError = /** @type {Error} */ (error).message;
     }
-    await sleep(500);
+    await sleep(500, undefined, { signal });
   }
   throw new Error(`Storybook at ${url} did not come up: ${lastError}`);
 };
@@ -173,6 +182,12 @@ const waitForStorybook = async (url, timeoutMs) => {
  * dependency first. A bare `storybook dev` would serve whatever `dist` happens
  * to hold, which for a release figure is precisely the wrong thing.
  *
+ * The chain is `pnpm → nx → storybook dev`, and signalling only the `pnpm`
+ * wrapper can leave the inner dev server holding the port. Worse, an orphan
+ * keeps the inherited stdout/stderr pipes open, so this script would not exit
+ * either. `detached` puts the whole chain in its own process group, which the
+ * stop handle then signals as a group.
+ *
  * @returns {Promise<{ url: string; stop: () => void }>}
  */
 const startStorybook = async () => {
@@ -182,24 +197,45 @@ const startStorybook = async () => {
   const child = spawn(
     "pnpm",
     ["nx", "dev", "components", "--", "--port", String(port), "--no-open"],
-    { cwd: repoRoot, stdio: ["ignore", "pipe", "pipe"] },
+    { cwd: repoRoot, stdio: ["ignore", "pipe", "pipe"], detached: true },
   );
   const log = [];
   child.stdout.on("data", (chunk) => log.push(String(chunk)));
   child.stderr.on("data", (chunk) => log.push(String(chunk)));
-  child.on("exit", (code) => {
-    if (code !== 0 && code !== null) {
-      process.stderr.write(log.join(""));
+
+  const stop = () => {
+    try {
+      // Negative pid = the process group, i.e. nx and storybook too.
+      process.kill(-child.pid, "SIGTERM");
+    } catch {
+      // Already gone; nothing to signal.
     }
+  };
+
+  // A Storybook that dies during the build never answers /index.json, and
+  // polling it to the full timeout hides the build error for five minutes.
+  // Aborting the poll is the other half: losing the race is not enough, because
+  // the loop's pending timer would keep the process alive until the timeout.
+  const abort = new globalThis.AbortController();
+  const died = new Promise((_ignored, reject) => {
+    child.on("exit", (code, signal) => {
+      abort.abort();
+      reject(
+        new Error(
+          `Storybook exited before it was ready (code ${code}, signal ${signal})`,
+        ),
+      );
+    });
   });
+
   try {
-    await waitForStorybook(url, 300_000);
+    await Promise.race([waitForStorybook(url, 300_000, abort.signal), died]);
   } catch (error) {
-    child.kill("SIGTERM");
+    stop();
     process.stderr.write(log.join(""));
     throw error;
   }
-  return { url, stop: () => child.kill("SIGTERM") };
+  return { url, stop };
 };
 
 /**
@@ -215,14 +251,20 @@ const MEASURE_PANEL = `(async ({ index, expectations }) => {
   const root = doc.querySelector('#storybook-root');
   if (!root || root.childElementCount === 0) return null;
   // Each iframe has its OWN font set. Playwright settles the composition page's
-  // fonts before a screenshot, never the frames' — so measuring here without
-  // this wait can size and capture the fallback face, which changes wrapping
-  // and the bottom edge. Bounded, so a font that never arrives cannot hang the
-  // capture; the outer poll re-enters.
+  // fonts before a screenshot, never the frames' — and the composition page has
+  // no webfonts at all, so nothing else waits for these. Measuring early sizes
+  // and captures the fallback face, which changes wrapping and the bottom edge:
+  // the #3106 failure mode.
+  //
+  // The race only bounds how long ONE evaluate may block. The status check
+  // after it is what decides: still loading means this panel is not ready, so
+  // report nothing and let measurePanel's 30s deadline abort loudly rather than
+  // return a figure rendered in the wrong face.
   await Promise.race([
     doc.fonts.ready,
     new Promise((resolve) => setTimeout(resolve, 5000)),
   ]);
+  if (doc.fonts.status !== 'loaded') return null;
   const style = getComputedStyle(doc.body);
   const rect = root.getBoundingClientRect();
   // .bottom, not .height: the rect is relative to the iframe viewport, so
@@ -243,13 +285,17 @@ const MEASURE_PANEL = `(async ({ index, expectations }) => {
   };
 })`;
 
+/** Give one panel's iframe the height its content measured. */
+const SIZE_PANEL = `(({ index, height }) => {
+  document.querySelector('iframe[data-panel="' + index + '"]').style.height =
+    height + 'px';
+})`;
+
 /**
- * Give one panel's iframe the height its content measured, and align the
- * captions with Storybook's own body inset so the figure reads as one page.
+ * Align the captions with Storybook's own body inset, so the figure reads as
+ * one page. Set once, from the first panel — every story shares the inset.
  */
-const SIZE_PANEL = `(({ index, height, inset }) => {
-  const frame = document.querySelector('iframe[data-panel="' + index + '"]');
-  frame.style.height = height + 'px';
+const SET_CAPTION_INSET = `((inset) => {
   document.documentElement.style.setProperty('--caption-inset', inset);
 })`;
 
@@ -268,7 +314,7 @@ const measurePanel = async (page, index, expectations, story) => {
     if (measured) return measured;
     if (Date.now() > deadline) {
       throw new Error(
-        `panel ${index} (${story}) rendered nothing into #storybook-root within 30s — open the story in Storybook and check its console`,
+        `panel ${index} (${story}) never became ready within 30s — either nothing rendered into #storybook-root, or its fonts never finished loading. Open the story in Storybook and check its console and network tab`,
       );
     }
     await sleep(250);
@@ -354,8 +400,19 @@ const main = async () => {
     if (existsSync(LOCAL_FONTS)) {
       await context.route(`${CDN_FONTS}*`, async (route) => {
         const file = new URL(route.request().url()).pathname.split("/").pop();
+        const local = join(LOCAL_FONTS, String(file));
+        // A face added to fonts.scss has no local copy yet. Throwing here would
+        // leave the request unanswered, which is the one thing that must not
+        // happen to a font — let it go to the network instead.
+        if (!existsSync(local)) {
+          process.stderr.write(
+            `No local copy of ${file}; fetching it from the CDN.\n`,
+          );
+          await route.continue();
+          return;
+        }
         await route.fulfill({
-          body: await readFile(join(LOCAL_FONTS, String(file))),
+          body: await readFile(local),
           contentType: "font/woff2",
         });
       });
@@ -390,12 +447,13 @@ const main = async () => {
       );
       failures.push(...checkExpectations(panel, index, measured.results));
       await page.evaluate(
-        `${SIZE_PANEL}(${JSON.stringify({
-          index,
-          height: measured.height,
-          inset: measured.insetLeft,
-        })})`,
+        `${SIZE_PANEL}(${JSON.stringify({ index, height: measured.height })})`,
       );
+      if (index === 0) {
+        await page.evaluate(
+          `${SET_CAPTION_INSET}(${JSON.stringify(measured.insetLeft)})`,
+        );
+      }
     }
     if (failures.length > 0) {
       throw new Error(

@@ -55,10 +55,13 @@
 // optional usage example, grounded in the real component API
 ```
 
-<!-- One captured figure per notable feature, never one per prop variant —
-     compose the variants into a single image. Markdown image syntax, NOT an
-     HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw tag
-     renders on GitHub and silently vanishes on /releases. -->
+<!-- DELETE this line when the feature has no story to capture (a CLI, a build
+     change) — an unfilled image link is worse than no figure.
+
+     Otherwise: one captured figure per notable feature, never one per prop
+     variant — compose the variants into a single image. Markdown image syntax,
+     NOT an HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw
+     tag renders on GitHub and silently vanishes on /releases. -->
 
 ![{{ caption }}](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png)
 
