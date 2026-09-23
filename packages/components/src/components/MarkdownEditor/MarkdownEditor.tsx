@@ -1,4 +1,9 @@
-import { type ComponentType, type KeyboardEventHandler, useState } from "react";
+import {
+  type ComponentType,
+  type KeyboardEventHandler,
+  useRef,
+  useState,
+} from "react";
 import styles from "./MarkdownEditor.module.scss";
 import {
   Markdown as DefaultMarkdown,
@@ -17,6 +22,8 @@ import {
   type InsertType,
   modifyValueByType,
 } from "@/components/MarkdownEditor/lib/modifyValueByType";
+import type { MarkdownEditorUpload } from "@/components/MarkdownEditor/lib/fileUpload";
+import { useFileUpload } from "@/components/MarkdownEditor/lib/useFileUpload";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import {
   overlayTriggersTunneledTo,
@@ -25,6 +32,8 @@ import {
 } from "@/lib/propsContext";
 
 export type MarkdownEditorMode = "editor" | "preview";
+
+export type { MarkdownEditorUpload };
 
 const toolbarActionsTunnel = {
   id: "toolbarActions",
@@ -38,6 +47,24 @@ export interface MarkdownEditorProps
    * the internal `Markdown` component.
    */
   markdownComponent?: ComponentType<MarkdownProps>;
+  /**
+   * Uploads a file the user dropped onto the editor, pasted into it or picked
+   * with its attachment button. A placeholder comment sits at the cursor while
+   * the returned promise is pending: resolving replaces it with markdown
+   * linking to the file — an image embed for an image — and rejecting takes it
+   * back out. Without this prop the editor takes no files at all.
+   *
+   * Named without an `on` prefix on purpose: the remote generator turns an
+   * `on*` prop into a fire-and-forget event, and this one has to hand a result
+   * back.
+   */
+  uploadFile?: (file: File) => Promise<MarkdownEditorUpload>;
+  /**
+   * Which file types the editor takes, as the `accept` attribute of a file
+   * input: a comma separated list of MIME types (`image/png`), MIME wildcards
+   * (`image/*`) and file extensions (`.png`). Defaults to every type.
+   */
+  accept?: string;
 }
 
 /** @flr-generate all */
@@ -53,17 +80,31 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     markdownComponent: MarkdownComponent = DefaultMarkdown,
     value,
     onChange,
+    uploadFile,
+    accept,
     ref,
     ...rest
   } = useControlledHostValueProps(props, "");
 
   const inputRef = useObjectRef(ref);
+  const rootRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
   const toolbarActionsDisabled = isDisabled || mode === "preview";
+
+  const { dropProps, isDropTarget, uploadFiles } = useFileUpload({
+    accept,
+    uploadFile,
+    isDisabled: isDisabled || isReadOnly || mode === "preview",
+    value,
+    onChange,
+    textAreaRef: inputRef,
+    dropTargetRef: rootRef,
+  });
 
   const rootClassName = clsx(
     styles.markdownEditor,
     styles[`mode-${mode}`],
+    isDropTarget && styles.dropTarget,
     className,
   );
 
@@ -121,7 +162,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   };
 
   return (
-    <div className={rootClassName}>
+    <div {...dropProps} ref={rootRef} className={rootClassName}>
       <TextArea
         {...rest}
         aria-hidden={mode === "preview"}
@@ -155,6 +196,9 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
             isDisabled={isDisabled}
             onModeChange={setMode}
             onToolPressed={handleToolButtonPressed}
+            accept={accept}
+            isReadOnly={isReadOnly}
+            onFilesSelected={uploadFiles}
           />
         </PropsContextProvider>
       </TextArea>

@@ -103,4 +103,14 @@
     background-color: var(--form-control--background-color--disabled);
     border-color: var(--form-control--border-color--disabled);
   }
+
+  /* A drag over the editor reads as its focused state -- dropping focuses it. */
+  &.dropTarget {
+    .toolbar,
+    .markdown,
+    textarea {
+      background-color: var(--form-control--background-color--focused);
+      border-color: var(--form-control--border-color--focused);
+    }
+  }
 }
