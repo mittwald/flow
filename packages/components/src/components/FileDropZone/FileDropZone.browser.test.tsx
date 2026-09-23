@@ -130,6 +130,22 @@ test("accept filters out a dropped file of another type", async () => {
   expect(reportedNames(onChange)).toEqual(["logo.png"]);
 });
 
+/*
+ * The drop path used to filter with `accept.includes(item.type)`, which a MIME
+ * wildcard never matches — so `image/*` dropped every image on the floor while
+ * the file input inside the same zone honoured it.
+ */
+test("accept takes a dropped file that a MIME wildcard covers", async () => {
+  const onChange = vi.fn();
+  await renderZone({ accept: "image/*", onChange });
+
+  dropFiles([textFile("notes.txt")]);
+  dropFiles([pngFile("logo.png")]);
+
+  await expect.poll(() => reportedNames(onChange)).toContain("logo.png");
+  expect(reportedNames(onChange)).toEqual(["logo.png"]);
+});
+
 test("a read-only zone ignores a drop", async () => {
   const onChange = vi.fn();
 
