@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.13](https://github.com/mittwald/flow/compare/1.3.0-next.12...1.3.0-next.13) (2026-09-23)
+
+### Bug Fixes
+
+* **components:** announce accordion state and gallery position ([#3229](https://github.com/mittwald/flow/issues/3229)) ([62e4c41](https://github.com/mittwald/flow/commit/62e4c41feb0ad1f39a046a4da75b617ccd04f894))
+
+## [1.2.9](https://github.com/mittwald/flow/compare/1.3.0-next.11...1.2.9) (2026-09-23)
+
+### Bug Fixes
+
+* **ci:** stop the drift check reporting drift it never measured ([d6d8d38](https://github.com/mittwald/flow/commit/d6d8d38eda6066e306cbacce6b72d68dee4a585b)), closes [#3248](https://github.com/mittwald/flow/issues/3248) [#3231](https://github.com/mittwald/flow/issues/3231) [#3186](https://github.com/mittwald/flow/issues/3186) [#3185](https://github.com/mittwald/flow/issues/3185) [#3096](https://github.com/mittwald/flow/issues/3096) [#2967](https://github.com/mittwald/flow/issues/2967)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.9 ([4334bec](https://github.com/mittwald/flow/commit/4334bec129c5ddafbc1c373a38ddc7ccf3a42a89))
+
 ## [1.3.0-next.12](https://github.com/mittwald/flow/compare/1.3.0-next.11...1.3.0-next.12) (2026-09-23)
 
 ### Bug Fixes
