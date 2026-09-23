@@ -1,5 +1,5 @@
 diff --git a/dist/index.js b/dist/index.js
-index 23323a95e0092b62c6af200f599a6c03a840a99e..b3de209aa2c9d47fd9b8170cb44987142134d10b 100644
+index 23323a95e0092b62c6af200f599a6c03a840a99e..6309a5db01d10de7fa852c19b5a88cc1f0a0b1e1 100644
 --- a/dist/index.js
 +++ b/dist/index.js
 @@ -195,7 +195,7 @@ var import_sucrase = require("sucrase");
@@ -11,8 +11,26 @@ index 23323a95e0092b62c6af200f599a6c03a840a99e..b3de209aa2c9d47fd9b8170cb4498714
  }
  
  // src/utils/transpile/errorBoundary.tsx
+@@ -318,10 +318,16 @@ function LiveProvider({
+   }
+   function transpileAsync(newCode) {
+     return __async(this, null, function* () {
++      // PATCHED: keep the last transpiled code instead of consuming the entry
++      // with a "used" sentinel. A LiveEditor calls onChange once on mount with
++      // the code unchanged, and without this that call transpiles again. A
++      // fresh transpile is a new component function, so React unmounts the
++      // preview and mounts a new one — restarting anything that animates on
++      // mount. A real edit still differs from the cache and transpiles.
+       if (cache.current === newCode) {
+-        cache.current = "used";
+         return Promise.resolve();
+       }
++      cache.current = newCode;
+       const errorCallback = (error) => {
+         setState({ error: error.toString(), element: void 0 });
+       };
 diff --git a/dist/index.mjs b/dist/index.mjs
-index 4cf841fc3db17d0609e75e974214c53a810dde99..eb856ac964d7d8953ae9664daf63a95cd29ceef3 100644
+index 4cf841fc3db17d0609e75e974214c53a810dde99..62883ba238a2754dcfabd1e98ba957344cfb2fb8 100644
 --- a/dist/index.mjs
 +++ b/dist/index.mjs
 @@ -158,7 +158,7 @@ import { transform as _transform } from "sucrase";
@@ -24,3 +42,21 @@ index 4cf841fc3db17d0609e75e974214c53a810dde99..eb856ac964d7d8953ae9664daf63a95c
  }
  
  // src/utils/transpile/errorBoundary.tsx
+@@ -281,10 +281,16 @@ function LiveProvider({
+   }
+   function transpileAsync(newCode) {
+     return __async(this, null, function* () {
++      // PATCHED: keep the last transpiled code instead of consuming the entry
++      // with a "used" sentinel. A LiveEditor calls onChange once on mount with
++      // the code unchanged, and without this that call transpiles again. A
++      // fresh transpile is a new component function, so React unmounts the
++      // preview and mounts a new one — restarting anything that animates on
++      // mount. A real edit still differs from the cache and transpiles.
+       if (cache.current === newCode) {
+-        cache.current = "used";
+         return Promise.resolve();
+       }
++      cache.current = newCode;
+       const errorCallback = (error) => {
+         setState({ error: error.toString(), element: void 0 });
+       };
