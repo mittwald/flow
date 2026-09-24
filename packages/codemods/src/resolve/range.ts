@@ -8,6 +8,7 @@ import {
   type FlowDependency,
   type Manifest,
 } from "../manifest.js";
+import { collectPeers, type PeerSummary } from "./peers.js";
 import {
   fetchAllVersions,
   fetchVersions,
@@ -57,6 +58,16 @@ export interface ResolvedRange {
   current: string;
   target: string;
   versions: string[];
+  /**
+   * What the declared Flow dependencies peer on at `target` — the answer to
+   * "which Flow package needs which peer range", which otherwise takes reading
+   * every Flow `package.json` by hand (#3059).
+   *
+   * Resolved here rather than in either command because both need it and the
+   * packuments are already fetched above: `list <revision>` can then answer it
+   * before anything is written, which is where the answer is worth most.
+   */
+  peers: PeerSummary;
 }
 
 export interface UnresolvedRange {
@@ -186,8 +197,15 @@ export const resolveRange = async (
   // pick a version some of the others never published. Resolve instead from
   // the intersection of what every declared dependency has actually
   // published, so the version this returns is always installable.
+  // Deduplicated, because `findFlowDependencies` returns one entry per
+  // manifest *field*: a library that wraps Flow declares it in both
+  // `peerDependencies` and `devDependencies`, and that package would otherwise
+  // be fetched twice and counted twice — once per field — in every peer line it
+  // appears in (#3204 review). `dependencies` itself keeps both entries, on
+  // purpose: the two fields are reported separately, one rewritten and one left
+  // alone.
   const fetched = await fetchAllVersions(
-    dependencies.map(({ name }) => name),
+    [...new Set(dependencies.map(({ name }) => name))],
     deps.fetchVersions,
   );
   const versions = intersectVersions(fetched);
@@ -245,5 +263,6 @@ export const resolveRange = async (
     current,
     target,
     versions,
+    peers: collectPeers(fetched, target, flowPackages),
   };
 };

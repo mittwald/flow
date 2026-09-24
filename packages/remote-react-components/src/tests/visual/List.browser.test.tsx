@@ -7,6 +7,8 @@ import type { ListProps } from "@mittwald/flow-react-components";
 
 // List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
+// A Combine inside a Text only stays in the line from 1.2.2.
+const combinedSubTitleFrom = "1.2.2";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
@@ -143,6 +145,75 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
 
     await contextMenu.click();
     await testScreenshot("List items - ContextMenu opened");
+  },
+);
+
+test
+  .skipIf(crossVersion({ below: combinedSubTitleFrom }))
+  .each(testEnvironments)(
+  "List item with a combined subtitle (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      Text,
+      Combine,
+      Button,
+      ContextualHelp,
+      ContextualHelpTrigger,
+      ContextMenu,
+      MenuItem,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{ id: string; name: string; runtime: string }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              { id: "1", name: "Millennium Falcon", runtime: "PHP 8.2" },
+              { id: "2", name: "X-Wing", runtime: "PHP 8.4" },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.runtime}</Text>
+                <Text>
+                  <Combine>
+                    <Text>Deprecated</Text>
+                    <ContextualHelpTrigger subject={i.runtime}>
+                      <Button />
+                      <ContextualHelp>
+                        <Text>Update the runtime to keep getting patches.</Text>
+                      </ContextualHelp>
+                    </ContextualHelpTrigger>
+                  </Combine>
+                </Text>
+                <Text>Last deploy 2 days ago</Text>
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                </ContextMenu>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List item with a combined subtitle");
   },
 );
 
