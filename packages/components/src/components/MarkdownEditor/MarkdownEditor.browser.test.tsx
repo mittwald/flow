@@ -17,6 +17,7 @@ import { Text } from "@/components/Text";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
 import { useState } from "react";
+import styles from "./MarkdownEditor.module.scss";
 
 const expandSteps = (value: string) => {
   const result = [];
@@ -337,5 +338,369 @@ describe("MarkdownEditor Tests", () => {
     const mentionChip = page.getByTestId("mention-chip");
     await expect(mentionChip).toBeInTheDocument();
     await expect(mentionChip).toHaveTextContent("@max");
+  });
+});
+
+describe("MarkdownEditor file upload", () => {
+  const imageFile = (name = "cat.png") =>
+    new File(["binary"], name, { type: "image/png" });
+
+  const fileTransfer = (...files: File[]) => {
+    const transfer = new DataTransfer();
+    for (const file of files) {
+      transfer.items.add(file);
+    }
+    return transfer;
+  };
+
+  /*
+   * The toolbar's input is visually hidden, so it is set directly instead of
+   * going through the OS file dialog a click would open.
+   */
+  const selectFiles = (...files: File[]) => {
+    const input =
+      document.querySelector<HTMLInputElement>('input[type="file"]');
+
+    if (!input) {
+      throw new Error("The editor rendered no file input");
+    }
+
+    input.files = fileTransfer(...files).files;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  };
+
+  const textArea = () => {
+    const element = document.querySelector("textarea");
+
+    if (!element) {
+      throw new Error("The editor rendered no textarea");
+    }
+
+    return element;
+  };
+
+  test("replaces the placeholder with markdown once the upload resolves", async () => {
+    let resolveUpload!: (upload: { url: string }) => void;
+
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        defaultValue="Look at this:"
+        uploadFile={() =>
+          new Promise<{ url: string }>((resolve) => {
+            resolveUpload = resolve;
+          })
+        }
+      />,
+    );
+
+    selectFiles(imageFile());
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue('Look at this:\n<!-- Uploading "cat.png"... -->\n');
+
+    resolveUpload({ url: "https://cdn.example/cat.png" });
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("Look at this:\n![cat.png](https://cdn.example/cat.png)\n");
+  });
+
+  test("links a file that is not an image", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/r.pdf" })}
+      />,
+    );
+
+    selectFiles(
+      new File(["binary"], "report.pdf", { type: "application/pdf" }),
+    );
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("[report.pdf](https://cdn.example/r.pdf)\n");
+  });
+
+  test("takes the placeholder back out when the upload fails", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        defaultValue="Look at this:"
+        uploadFile={() => Promise.reject(new Error("no upload service"))}
+      />,
+    );
+
+    selectFiles(imageFile());
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("Look at this:\n");
+  });
+
+  test("keeps the placeholder of the file that is still uploading", async () => {
+    const resolvers = new Map<string, (upload: { url: string }) => void>();
+
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={(file) =>
+          new Promise<{ url: string }>((resolve) => {
+            resolvers.set(file.name, resolve);
+          })
+        }
+      />,
+    );
+
+    selectFiles(imageFile("one.png"), imageFile("two.png"));
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue(
+        '<!-- Uploading "one.png"... -->\n<!-- Uploading "two.png"... -->\n',
+      );
+
+    resolvers.get("two.png")?.({ url: "https://cdn.example/two.png" });
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue(
+        '<!-- Uploading "one.png"... -->\n![two.png](https://cdn.example/two.png)\n',
+      );
+  });
+
+  test("uploads a pasted file and leaves a pasted text alone", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/cat.png" })}
+      />,
+    );
+
+    const input = textArea();
+    input.focus();
+
+    input.dispatchEvent(
+      new ClipboardEvent("paste", {
+        clipboardData: fileTransfer(imageFile()),
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("![cat.png](https://cdn.example/cat.png)\n");
+
+    const textPaste = new ClipboardEvent("paste", {
+      clipboardData: new DataTransfer(),
+      bubbles: true,
+      cancelable: true,
+    });
+    input.dispatchEvent(textPaste);
+
+    expect(textPaste.defaultPrevented).toBe(false);
+  });
+
+  test("skips a file the accept list does not cover", async () => {
+    const uploadFile = vi.fn(async () => ({ url: "https://cdn.example/a" }));
+
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        accept="image/*"
+        uploadFile={uploadFile}
+      />,
+    );
+
+    textArea().dispatchEvent(
+      new ClipboardEvent("paste", {
+        clipboardData: fileTransfer(
+          new File(["binary"], "notes.txt", { type: "text/plain" }),
+        ),
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+
+    await expect.element(page.getByRole("textbox")).toHaveValue("");
+    expect(uploadFile).not.toHaveBeenCalled();
+  });
+
+  /*
+   * Clicking the attachment button takes the focus out of the textarea, so the
+   * caret cannot be read from `document.activeElement`. A textarea keeps its
+   * `selectionStart` across the blur, and that is what the insert has to use —
+   * otherwise every file picked with the button lands at the end of the text.
+   */
+  test("inserts at the caret the textarea had before the button took focus", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        defaultValue="AB"
+        uploadFile={() => new Promise<{ url: string }>(() => undefined)}
+      />,
+    );
+
+    const input = textArea();
+    input.focus();
+    input.setSelectionRange(1, 1);
+
+    await userEvent.click(page.getByRole("button", { name: "Attach file" }));
+    selectFiles(imageFile());
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue('A\n<!-- Uploading "cat.png"... -->\nB');
+  });
+
+  /*
+   * The toolbar renders inside the TextArea, so the hidden file input sits
+   * inside its `Aria.TextField`. An `Aria.Input` there reads the field's own
+   * value out of `InputContext`, and a file input rejects any value but the
+   * empty string — so the editor threw the moment it held any text. The input
+   * is a plain one for that reason; this test is what says so out loud.
+   */
+  test("keeps taking text while the attachment button is rendered", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/a" })}
+      />,
+    );
+
+    await userEvent.fill(page.getByRole("textbox"), "hello");
+
+    await expect.element(page.getByRole("textbox")).toHaveValue("hello");
+  });
+
+  /*
+   * The attachment button behaves like every other tool: preview mode disables
+   * it rather than removing it, so the toolbar keeps its shape.
+   */
+  test.each([
+    ["preview mode", {}, true],
+    ["a disabled editor", { isDisabled: true }, false],
+    ["a read-only editor", { isReadOnly: true }, false],
+  ] as const)(
+    "disables the attachment button in %s instead of hiding it",
+    async (_name, props, enterPreview) => {
+      await render(
+        <MarkdownEditor
+          {...props}
+          aria-label="Message"
+          uploadFile={async () => ({ url: "https://cdn.example/a" })}
+        />,
+      );
+
+      if (enterPreview) {
+        await userEvent.click(page.getByRole("button", { name: "Preview" }));
+      }
+
+      await expect
+        .element(page.getByRole("button", { name: "Attach file" }))
+        .toBeDisabled();
+    },
+  );
+
+  const dragEvent = (type: string, dataTransfer: DataTransfer) =>
+    new DragEvent(type, { dataTransfer, bubbles: true, cancelable: true });
+
+  /** Drops onto the textarea; the handlers sit on the editor root above it. */
+  const dropOnEditor = (dataTransfer: DataTransfer) => {
+    const target = textArea();
+
+    for (const type of ["dragenter", "dragover"]) {
+      target.dispatchEvent(dragEvent(type, dataTransfer));
+    }
+
+    const drop = dragEvent("drop", dataTransfer);
+    target.dispatchEvent(drop);
+    return drop;
+  };
+
+  const textTransfer = () => {
+    const transfer = new DataTransfer();
+    transfer.setData("text/plain", "dragged text");
+    return transfer;
+  };
+
+  const editorRoot = () => {
+    const root = document.querySelector(`.${styles.markdownEditor}`);
+
+    if (!root) {
+      throw new Error("The editor root is not rendered");
+    }
+
+    return root;
+  };
+
+  test("uploads a dropped file", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/cat.png" })}
+      />,
+    );
+
+    dropOnEditor(fileTransfer(imageFile()));
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("![cat.png](https://cdn.example/cat.png)\n");
+  });
+
+  /*
+   * react-aria's `useDrop` claims every drag it sees, which would swallow a
+   * plain text drag into the textarea — moving a selection with the mouse would
+   * stop working as soon as `uploadFile` is set.
+   */
+  test("leaves a drag that carries no files to the textarea", async () => {
+    const uploadFile = vi.fn(async () => ({ url: "https://cdn.example/a" }));
+
+    await render(
+      <MarkdownEditor aria-label="Message" uploadFile={uploadFile} />,
+    );
+
+    const drop = dropOnEditor(textTransfer());
+
+    expect(drop.defaultPrevented).toBe(false);
+    expect(uploadFile).not.toHaveBeenCalled();
+    await expect.element(page.getByRole("textbox")).toHaveValue("");
+  });
+
+  test("highlights the editor only while a drag carries files", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/a" })}
+      />,
+    );
+
+    textArea().dispatchEvent(dragEvent("dragenter", textTransfer()));
+    expect(editorRoot().className).not.toContain(styles.dropTarget);
+
+    textArea().dispatchEvent(dragEvent("dragenter", fileTransfer(imageFile())));
+    await expect
+      .poll(() => editorRoot().className)
+      .toContain(styles.dropTarget);
+
+    textArea().dispatchEvent(dragEvent("dragleave", fileTransfer(imageFile())));
+    await expect
+      .poll(() => editorRoot().className)
+      .not.toContain(styles.dropTarget);
+  });
+
+  test("offers no attachment button without an upload handler", async () => {
+    await render(<MarkdownEditor aria-label="Message" />);
+
+    await expect
+      .element(page.getByRole("button", { name: "Bold" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Attach file" }))
+      .not.toBeInTheDocument();
   });
 });
