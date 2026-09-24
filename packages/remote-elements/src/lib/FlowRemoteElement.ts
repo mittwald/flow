@@ -1,4 +1,3 @@
-import { eventHandlerContext } from "@mittwald/flow-react-components";
 import {
   RemoteElement,
   RemoteEvent,
@@ -8,6 +7,29 @@ import type { EmptyObject } from "type-fest";
 
 // eslint-disable-next-line
 type ExplicitAny = any;
+
+/*
+ * React Flow's `eventHandlerContext`, registered under this key by
+ * `packages/components/src/lib/remote/eventHandlerContext.ts`. Read per event:
+ * nothing orders this module after React Flow's. Absent without React Flow.
+ */
+const eventHandlerContextKey = Symbol.for(
+  "@mittwald/flow-remote-elements/eventHandlerContext",
+);
+
+interface EventHandlerCascade {
+  run: <R>(value: { remoteEvent: { type: string } }, fn: () => R) => R;
+}
+
+const runInEventHandlerContext = <R>(type: string, fn: () => R): R => {
+  const cascade = (
+    globalThis as Partial<
+      Record<typeof eventHandlerContextKey, EventHandlerCascade>
+    >
+  )[eventHandlerContextKey];
+
+  return cascade ? cascade.run({ remoteEvent: { type } }, fn) : fn();
+};
 
 export class FlowRemoteElement<
   Properties extends Record<string, ExplicitAny> = EmptyObject,
@@ -50,13 +72,8 @@ export class FlowRemoteElement<
       : () => undefined;
 
     const handleRemoteEvent: EventListener = (event) =>
-      eventHandlerContext.run(
-        {
-          remoteEvent: {
-            type: event.type,
-          },
-        },
-        () => handleEvent(event instanceof RemoteEvent ? event.detail : event),
+      runInEventHandlerContext(event.type, () =>
+        handleEvent(event instanceof RemoteEvent ? event.detail : event),
       );
 
     this.eventListenerMap.set(listener, handleRemoteEvent);
