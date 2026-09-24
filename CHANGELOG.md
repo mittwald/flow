@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.22](https://github.com/mittwald/flow/compare/1.2.21...1.2.22) (2026-09-24)
+
+### Bug Fixes
+
+* **List:** make infiniteScroll work in table view mode ([#3279](https://github.com/mittwald/flow/issues/3279)) ([bd171f8](https://github.com/mittwald/flow/commit/bd171f87da36d1e2bc9ec2b9b4930c11a997f0cd))
+
 ## [1.2.21](https://github.com/mittwald/flow/compare/1.2.20...1.2.21) (2026-09-24)
 
 ### Bug Fixes
