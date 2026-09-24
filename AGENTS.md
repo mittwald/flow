@@ -667,6 +667,27 @@ where the error points.
   when **every** package agrees and only `lerna.json` differs, `lerna.json` is
   the file left behind and setting the packages to it would undo a release
 
+- **Symptom:** A release build fails in `unplugin-dts` with **"Published
+  declarations of &lt;pkg&gt;: … imports "&lt;dep&gt;", which &lt;pkg&gt; does
+  not declare"**, although `test:compile` is green
+
+  **Cause:** A declaration a consumer can reach — anything the `types` entries
+  in `exports` import, transitively — names a package the consumer does not get
+  installed: a devDependency, or a private workspace package whose JavaScript
+  `externalizeDeps({ except })` inlines. Inside the monorepo the workspace
+  symlink resolves it, so no local check notices; a consumer's public type turns
+  `any` under `skipLibCheck`, or fails with TS2307 without. The check
+  (`packages/core/src/publishedDeclarations.ts`) runs in every package's
+  `publishedDtsOptions`
+
+  **Fix:** Declare the package as a dependency or peer if consumers need it
+  anyway. For a private workspace package, give it a declaration `build` target
+  and wrap the `dts()` options in `withBundledDeclarations()` — see
+  `packages/components/vite.build.config.ts` and
+  [components-base/AGENTS.md](packages/components-base/AGENTS.md).
+  `acknowledgedUndeclaredTypeImports` holds the pre-existing exceptions; it can
+  only shrink
+
 - **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
   "Check all generated code is committed"
 
