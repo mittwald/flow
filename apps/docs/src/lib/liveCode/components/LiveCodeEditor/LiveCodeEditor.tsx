@@ -224,9 +224,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
+  /*
+   * An inline zoom would beat the stylesheet, so the default is left out
+   * entirely — that is what lets the mobile breakpoint scale the preview.
+   */
+  const zoomStyle = zoom === 1 ? undefined : { zoom };
+
   const frameStyle: CSSProperties = containerWidth
-    ? { zoom, boxSizing: "content-box", width: containerWidth }
-    : { zoom };
+    ? { ...zoomStyle, boxSizing: "content-box", width: containerWidth }
+    : { ...zoomStyle };
 
   const preview = (
     <LivePreview
@@ -235,7 +241,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         row && styles.row,
         resizable && styles.framedPreview,
       )}
-      style={resizable ? undefined : { zoom }}
+      style={resizable ? undefined : zoomStyle}
     />
   );
 

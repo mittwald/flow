@@ -1,7 +1,8 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
-import { expect, test } from "vitest";
+import { commands, page } from "vitest/browser";
+import { afterEach, describe, expect, test } from "vitest";
 import { DonutChart } from "@/components/DonutChart";
+import styles from "@/components/DonutChart/DonutChart.module.scss";
 import { Text } from "@/components/Text";
 
 const chart = () => page.getByRole("progressbar");
@@ -80,4 +81,33 @@ test("children replace the value in the middle", async () => {
 
   await expect.element(chart()).toHaveTextContent("Almost full");
   await expect.element(chart()).not.toHaveTextContent("40 %");
+});
+
+describe("with motion allowed", () => {
+  afterEach(() => commands.setReducedMotion("reduce"));
+
+  test("the fill and every segment grow into their value", async () => {
+    await commands.setReducedMotion("no-preference");
+    const screen = await render(
+      <>
+        <DonutChart aria-label="Storage" value={40} />
+        <DonutChart
+          aria-label="Storage"
+          segments={[
+            { value: 30, title: "Documents" },
+            { value: 20, title: "Images" },
+          ]}
+        />
+      </>,
+    );
+
+    const circles = screen.container.querySelectorAll(
+      `.${styles.fill}, .${styles.segment}`,
+    );
+    expect(circles).toHaveLength(3);
+    for (const circle of circles) {
+      expect(getComputedStyle(circle).animationName).not.toBe("none");
+      expect(getComputedStyle(circle).animationDuration).toBe("0.8s");
+    }
+  });
 });

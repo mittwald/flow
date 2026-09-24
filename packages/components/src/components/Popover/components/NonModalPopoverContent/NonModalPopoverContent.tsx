@@ -272,9 +272,9 @@ const NonModalPopoverContentInner: FC<NonModalPopoverContentInnerProps> = (
          * stands and scrolls with the page, so both are wrong here.
          *
          * `z-index: 100000` would put it in front of the whole application — it
-         * scrolled over the docs site's sticky header. Claiming no stacking
-         * level leaves that to the page: it still covers the ordinary content
-         * around it, and app chrome that sets a `z-index` keeps its place above.
+         * scrolled over the docs site's sticky header. Dropping the value here
+         * hands the level to CSS, where `.non-modal` claims the lowest one that
+         * still clears ordinary page content.
          *
          * The `max-height` it caps the overlay at is wrong here for the same
          * reason, but it is written straight onto the element and has to be
@@ -308,7 +308,12 @@ const NonModalPopoverContentInner: FC<NonModalPopoverContentInnerProps> = (
             ...(placement ? { [placement]: "100%" } : {}),
           }}
         >
-          <svg width={16} height={16} viewBox="0 0 16 16">
+          <svg
+            className={styles.tipIcon}
+            width={16}
+            height={16}
+            viewBox="0 0 16 16"
+          >
             <path d="M0 0 L8 8 L16 0" />
           </svg>
         </div>

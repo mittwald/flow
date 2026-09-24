@@ -2,10 +2,11 @@ declare const classNames: {
   readonly donutChart: "donutChart";
   readonly border: "border";
   readonly background: "background";
+  readonly fill: "fill";
+  readonly segment: "segment";
   readonly value: "value";
   readonly "size-l": "size-l";
   readonly info: "info";
-  readonly fill: "fill";
   readonly success: "success";
   readonly danger: "danger";
   readonly warning: "warning";
