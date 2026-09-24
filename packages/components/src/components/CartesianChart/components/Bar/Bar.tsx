@@ -10,8 +10,8 @@ import {
 } from "@/components/CartesianChart/types";
 import { useCartesianChartContext } from "@/components/CartesianChart/context";
 import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedStackId";
-import { useDesignTokens } from "@/lib/theming";
 import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
+import { useDesignTokens } from "@/lib/theming";
 
 type BarBaseProps = Pick<
   Recharts.BarProps,

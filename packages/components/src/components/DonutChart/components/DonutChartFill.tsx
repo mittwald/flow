@@ -58,6 +58,8 @@ export const DonutChartFill: FC<Props> = (props) => {
         ? `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`
         : s.color;
 
+    // Index keys: a segment added after mount animates alone out of 12 o'clock,
+    // over the segments already there.
     return (
       <circle
         key={i}

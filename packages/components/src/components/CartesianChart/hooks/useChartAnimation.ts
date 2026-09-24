@@ -4,6 +4,11 @@ import { useDesignTokens } from "@/lib/theming";
 /**
  * Animation props for the chart's graphical items. Recharts animates on mount
  * by default and does not look at the user's motion preference on its own.
+ *
+ * Replaces recharts' default `"auto"`, which means "not during SSR" – moot
+ * here, since `ResponsiveContainer` renders nothing on the server.
+ *
+ * @internal
  */
 export const useChartAnimation = () => {
   const prefersReducedMotion = useReducedMotion();
