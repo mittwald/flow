@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { CSSProperties, FC } from "react";
 import styles from "@/components/DonutChart/DonutChart.module.scss";
 import type { DonutChartProps } from "@/components/DonutChart";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
@@ -10,6 +10,18 @@ interface Props extends Pick<DonutChartProps, "segments"> {
   radius: number;
   maxValue: number;
 }
+
+/**
+ * The rotation is a custom property instead of a `transform` attribute so that
+ * the load-in keyframes can animate it – growing every segment out of 12
+ * o'clock instead of leaving gaps between them. They need the circumference,
+ * too, to animate out of an empty circle.
+ */
+const fillStyle = (rotation: number, circumference: number) =>
+  ({
+    "--donut-chart--fill-rotation": `${rotation}deg`,
+    "--donut-chart--circumference": circumference,
+  }) as CSSProperties;
 
 export const DonutChartFill: FC<Props> = (props) => {
   const { center, value = 0, radius, segments, maxValue } = props;
@@ -27,7 +39,7 @@ export const DonutChartFill: FC<Props> = (props) => {
         r={radius}
         strokeDasharray={`${circumference} ${circumference}`}
         strokeDashoffset={circumference - (percent / 100) * circumference}
-        transform={`rotate(-90 ${center} ${center})`}
+        style={fillStyle(-90, circumference)}
       />
     );
   }
@@ -46,9 +58,12 @@ export const DonutChartFill: FC<Props> = (props) => {
         ? `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`
         : s.color;
 
+    // Index keys: a segment added after mount animates alone out of 12 o'clock,
+    // over the segments already there.
     return (
       <circle
         key={i}
+        className={styles.segment}
         cx={center}
         cy={center}
         r={radius}
@@ -57,7 +72,7 @@ export const DonutChartFill: FC<Props> = (props) => {
           circumference - (segmentPercent / 100) * circumference
         }
         stroke={color}
-        transform={`rotate(${-90 + currentRotationOffset} ${center} ${center})`}
+        style={fillStyle(-90 + currentRotationOffset, circumference)}
       />
     );
   });

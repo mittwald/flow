@@ -1,4 +1,6 @@
 progress-bar:
+  transition-duration:
+    value: 800ms
   font-size:
     value: "{font-size-text.m}"
   font-size-s:
