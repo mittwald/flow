@@ -21,6 +21,8 @@ interface MountedHost {
   readonly receiver: RemoteReceiver;
   /** Where the binding mounts its remote app. */
   readonly remote: HTMLElement;
+  /** Hands over what unmounts the remote app, so the teardown takes it down. */
+  readonly adoptRemote: (unmount: () => void) => void;
 }
 
 let mounted: (MountedHost & { tearDown: () => void }) | undefined;
@@ -50,11 +52,23 @@ export const mountHost = (): MountedHost => {
     ),
   );
 
+  let unmountRemote: (() => void) | undefined;
+
   mounted = {
     container,
     receiver,
     remote,
+    adoptRemote: (unmount) => {
+      unmountRemote = unmount;
+    },
+    /*
+     * The remote app first, then the host. Removing the container alone left
+     * the app running — its observers, timers and connection — and with
+     * `isolate: false` every scenario's app piled up in the one iframe the run
+     * shares, which is the WebKit failure mode of #3119.
+     */
     tearDown: () => {
+      unmountRemote?.();
       reactRoot.unmount();
       container.remove();
       remote.remove();

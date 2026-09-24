@@ -9,12 +9,14 @@ export const reactBinding: ParityBinding = {
   name: "react",
 
   mount: (tree, container, receiver) => {
-    createRoot(container).render(
+    const root = createRoot(container);
+    root.render(
       createElement(
         RemoteRoot,
         { __remoteReceiver: receiver as never },
         createElement(NotificationProvider, null, (tree as () => ReactNode)()),
       ),
     );
+    return () => root.unmount();
   },
 };

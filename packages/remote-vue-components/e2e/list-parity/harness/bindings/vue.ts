@@ -6,13 +6,15 @@ export const vueBinding: ParityBinding = {
   name: "vue",
 
   mount: (tree, container, receiver) => {
-    createApp({
+    const app = createApp({
       render: () =>
         h(
           RemoteRoot,
           { __remoteReceiver: receiver as never },
           { default: tree as () => VNodeChild },
         ),
-    }).mount(container);
+    });
+    app.mount(container);
+    return () => app.unmount();
   },
 };
