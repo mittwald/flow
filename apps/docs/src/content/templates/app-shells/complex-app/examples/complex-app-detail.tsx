@@ -98,16 +98,20 @@ export default () => (
               </Button>
               <Button>E-Mail-Adresse bearbeiten</Button>
             </Header>
-            <LabeledValue>
-              <Label>E-Mail-Adresse</Label>
-              <Content>max.mustermann@mittwald.de</Content>
-            </LabeledValue>
-            <LabeledValue>
-              <Label>Webmailer</Label>
-              <Link href="#" target="_blank">
-                mittwald Webmailer
-              </Link>
-            </LabeledValue>
+            <ColumnLayout>
+              <LabeledValue>
+                <Label>E-Mail-Adresse</Label>
+                <Content>
+                  max.mustermann@mittwald.de
+                </Content>
+              </LabeledValue>
+              <LabeledValue>
+                <Label>Webmailer</Label>
+                <Link href="#" target="_blank">
+                  mittwald Webmailer
+                </Link>
+              </LabeledValue>
+            </ColumnLayout>
           </Section>
 
           <Section>
