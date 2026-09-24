@@ -26,6 +26,8 @@ export const unsupportedScenarios: Record<string, string> = {
   "Modal in ContextMenu": "The scenario defines a React component.",
   Notification: "The scenario defines a React component.",
   Section: "The scenario defines a React component with useState.",
+  "Section growing inside a LayoutCard":
+    "The scenario defines a React component with useState.",
   IntlProvider:
     "There is no Vue IntlProvider: React's sets the locale for what renders locally, and a Vue app renders nothing locally. useLanguage() reports the host's.",
 };
