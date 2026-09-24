@@ -647,8 +647,10 @@ const coverage = [
   "flow--illustrated-message",
   "flow--initials",
   "flow--list--list-summary",
-  "flow--modal",
-  "flow--radio",
+  /* The all-filters modal is off-canvas, which carries no `flow--modal`. */
+  "flow--modal--off-canvas",
+  /* The sorting's radios, as a RadioGroup renders them. */
+  "flow--radio-group--radio",
   "flow--search-field",
   "flow--table",
   "flow--text",
