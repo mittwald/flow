@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.27](https://github.com/mittwald/flow/compare/1.3.0-next.26...1.3.0-next.27) (2026-09-24)
+
+### Features
+
+* **Image:** split corner radius from withBorder, tone down border color ([296f7e4](https://github.com/mittwald/flow/commit/296f7e4b84206dc3ce07ee9918e2de532499b1ce)), closes [#3251](https://github.com/mittwald/flow/issues/3251)
+
+### Documentation
+
+* **Image:** explain when to use withBorder, add migration entry ([a70e731](https://github.com/mittwald/flow/commit/a70e7310834eccf9dc7f7bb1dad5120a1a75eb00))
+* **Image:** target the migration entry at 1.2.11 ([c4c307b](https://github.com/mittwald/flow/commit/c4c307b5a01fb5740a2798cb0aa4c838cc0b3ca9))
+* **Image:** target the migration entry at 1.3.0 ([81ac75a](https://github.com/mittwald/flow/commit/81ac75a64091eefe53b28e069f6b9e30ec5dc8ab))
+
+### Tests
+
+* **Image:** drop browser tests the visual scenario already covers ([98a42df](https://github.com/mittwald/flow/commit/98a42dfdab6e738fdc39ee54b44e6b211ebd309e))
+
 ## [1.3.0-next.26](https://github.com/mittwald/flow/compare/1.3.0-next.25...1.3.0-next.26) (2026-09-24)
 
 ### Bug Fixes
