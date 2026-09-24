@@ -31,6 +31,14 @@ export default function Page() {
           <DemoList.Filter property="faction" name="Faction">
             {(val) => <>{val}</>}
           </DemoList.Filter>
+          <DemoList.Filter
+            property="homeworld"
+            name="Homeworld"
+            mode="one"
+            priority="secondary"
+          >
+            {(val) => <>{val}</>}
+          </DemoList.Filter>
           <DemoList.Search autoSubmit />
           <DemoList.LoaderAsync>
             {() => {
