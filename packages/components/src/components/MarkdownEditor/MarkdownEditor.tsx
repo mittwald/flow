@@ -1,9 +1,4 @@
-import {
-  type ComponentType,
-  type KeyboardEventHandler,
-  useRef,
-  useState,
-} from "react";
+import { type ComponentType, type KeyboardEventHandler, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import {
   Markdown as DefaultMarkdown,
@@ -87,7 +82,6 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   } = useControlledHostValueProps(props, "");
 
   const inputRef = useObjectRef(ref);
-  const rootRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
   const toolbarActionsDisabled = isDisabled || mode === "preview";
 
@@ -98,7 +92,6 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     value,
     onChange,
     textAreaRef: inputRef,
-    dropTargetRef: rootRef,
   });
 
   const rootClassName = clsx(
@@ -162,7 +155,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   };
 
   return (
-    <div {...dropProps} ref={rootRef} className={rootClassName}>
+    <div {...dropProps} className={rootClassName}>
       <TextArea
         {...rest}
         aria-hidden={mode === "preview"}

@@ -17,6 +17,7 @@ import { Text } from "@/components/Text";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
 import { useState } from "react";
+import styles from "./MarkdownEditor.module.scss";
 
 const expandSteps = (value: string) => {
   const result = [];
@@ -603,6 +604,94 @@ describe("MarkdownEditor file upload", () => {
         .toBeDisabled();
     },
   );
+
+  const dragEvent = (type: string, dataTransfer: DataTransfer) =>
+    new DragEvent(type, { dataTransfer, bubbles: true, cancelable: true });
+
+  /** Drops onto the textarea; the handlers sit on the editor root above it. */
+  const dropOnEditor = (dataTransfer: DataTransfer) => {
+    const target = textArea();
+
+    for (const type of ["dragenter", "dragover"]) {
+      target.dispatchEvent(dragEvent(type, dataTransfer));
+    }
+
+    const drop = dragEvent("drop", dataTransfer);
+    target.dispatchEvent(drop);
+    return drop;
+  };
+
+  const textTransfer = () => {
+    const transfer = new DataTransfer();
+    transfer.setData("text/plain", "dragged text");
+    return transfer;
+  };
+
+  const editorRoot = () => {
+    const root = document.querySelector(`.${styles.markdownEditor}`);
+
+    if (!root) {
+      throw new Error("The editor root is not rendered");
+    }
+
+    return root;
+  };
+
+  test("uploads a dropped file", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/cat.png" })}
+      />,
+    );
+
+    dropOnEditor(fileTransfer(imageFile()));
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("![cat.png](https://cdn.example/cat.png)\n");
+  });
+
+  /*
+   * react-aria's `useDrop` claims every drag it sees, which would swallow a
+   * plain text drag into the textarea — moving a selection with the mouse would
+   * stop working as soon as `uploadFile` is set.
+   */
+  test("leaves a drag that carries no files to the textarea", async () => {
+    const uploadFile = vi.fn(async () => ({ url: "https://cdn.example/a" }));
+
+    await render(
+      <MarkdownEditor aria-label="Message" uploadFile={uploadFile} />,
+    );
+
+    const drop = dropOnEditor(textTransfer());
+
+    expect(drop.defaultPrevented).toBe(false);
+    expect(uploadFile).not.toHaveBeenCalled();
+    await expect.element(page.getByRole("textbox")).toHaveValue("");
+  });
+
+  test("highlights the editor only while a drag carries files", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        uploadFile={async () => ({ url: "https://cdn.example/a" })}
+      />,
+    );
+
+    textArea().dispatchEvent(dragEvent("dragenter", textTransfer()));
+    expect(editorRoot().className).not.toContain(styles.dropTarget);
+
+    textArea().dispatchEvent(dragEvent("dragenter", fileTransfer(imageFile())));
+    await expect
+      .poll(() => editorRoot().className)
+      .toContain(styles.dropTarget);
+
+    textArea().dispatchEvent(dragEvent("dragleave", fileTransfer(imageFile())));
+    await expect
+      .poll(() => editorRoot().className)
+      .not.toContain(styles.dropTarget);
+  });
 
   test("offers no attachment button without an upload handler", async () => {
     await render(<MarkdownEditor aria-label="Message" />);

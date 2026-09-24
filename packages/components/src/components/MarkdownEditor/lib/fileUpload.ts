@@ -20,10 +20,12 @@ export interface ValueEdit {
 }
 
 /*
- * `-->` inside the file name would end the comment early and leave the rest of
- * it as visible text. Nothing else in a file name can escape an HTML comment.
+ * A file name that closes the comment early would leave the rest of it as
+ * visible text. Every way to close one starts with `--`: `-->` does, `--!>`
+ * does too, and dropping only `-->` can forge a new one — `a-->>b` collapses to
+ * `a-->b`. Breaking up every `--` is what holds in all three.
  */
-const escapeComment = (fileName: string) => fileName.replaceAll("-->", "--");
+const escapeComment = (fileName: string) => fileName.replace(/-(?=-)/g, "- ");
 
 /*
  * Brackets are what ends a markdown link label, and a line break ends the link

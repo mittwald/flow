@@ -1,8 +1,13 @@
-import { type RefObject, useEffect, useRef } from "react";
-import { useDrop } from "react-aria";
+import {
+  type DragEvent as ReactDragEvent,
+  type DragEventHandler,
+  type RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { announce } from "@react-aria/live-announcer";
-import type { DOMAttributes, FocusableElement } from "@react-types/shared";
-import { getAcceptedFiles, matchesAccept } from "@/lib/files/acceptedFiles";
+import { matchesAccept } from "@/lib/files/acceptedFiles";
 import {
   insertAtCaret,
   type MarkdownEditorUpload,
@@ -14,6 +19,10 @@ import {
 } from "@/components/MarkdownEditor/lib/fileUpload";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
+
+/** The files of a paste or a drop that `accept` covers. */
+const acceptedFrom = (files: FileList | null | undefined, accept?: string) =>
+  Array.from(files ?? []).filter((file) => matchesAccept(file, accept));
 
 /** @internal */
 export type MarkdownEditorFileUploadHandler = (
@@ -30,12 +39,18 @@ interface Options {
   value: string;
   onChange: (value: string) => void;
   textAreaRef: RefObject<HTMLTextAreaElement | null>;
-  dropTargetRef: RefObject<HTMLDivElement | null>;
+}
+
+interface DropProps {
+  onDragEnter?: DragEventHandler;
+  onDragOver?: DragEventHandler;
+  onDragLeave?: DragEventHandler;
+  onDrop?: DragEventHandler;
 }
 
 interface FileUpload {
   /** Drop handling for the editor's root element. */
-  dropProps: DOMAttributes;
+  dropProps: DropProps;
   /** Whether a drag is currently over the editor. */
   isDropTarget: boolean;
   /**
@@ -53,15 +68,8 @@ interface FileUpload {
  * @internal
  */
 export const useFileUpload = (options: Options): FileUpload => {
-  const {
-    accept,
-    uploadFile,
-    isDisabled,
-    value,
-    onChange,
-    textAreaRef,
-    dropTargetRef,
-  } = options;
+  const { accept, uploadFile, isDisabled, value, onChange, textAreaRef } =
+    options;
 
   const stringFormatter = useLocalizedStringFormatter(
     locales,
@@ -228,9 +236,7 @@ export const useFileUpload = (options: Options): FileUpload => {
     }
 
     const handlePaste = (event: ClipboardEvent) => {
-      const files = Array.from(event.clipboardData?.files ?? []).filter(
-        (file) => matchesAccept(file, accept),
-      );
+      const files = acceptedFrom(event.clipboardData?.files, accept);
 
       if (files.length === 0) {
         return;
@@ -244,15 +250,71 @@ export const useFileUpload = (options: Options): FileUpload => {
     return () => textArea.removeEventListener("paste", handlePaste);
   }, [isEnabled, accept, textAreaRef]);
 
-  const { dropProps, isDropTarget } = useDrop({
-    ref: dropTargetRef as RefObject<FocusableElement | null>,
-    isDisabled: !isEnabled,
-    onDrop: (event) => {
-      void (async () => {
-        uploadFilesRef.current(await getAcceptedFiles(event.items, accept));
-      })();
-    },
-  });
+  /*
+   * Native handlers rather than react-aria's `useDrop`: that one claims every
+   * drag it sees — its `onDrop` calls `preventDefault` and `stopPropagation`
+   * unconditionally — which is right for a dedicated drop surface like
+   * `FileDropZone`, but here it would swallow a plain text drag into the
+   * textarea. A drag is claimed only when it carries files, and
+   * `dataTransfer.types` is the only place that says so: the public
+   * `DragTypes` of `getDropOperation` offers just `has(type)`, which cannot
+   * express it — the wildcard type is always true, and WebKit reports every
+   * file drag as an unknown type that answers true to anything.
+   */
+  const dragHasFiles = (event: ReactDragEvent) =>
+    event.dataTransfer.types.includes("Files");
+
+  /*
+   * `dragenter` and `dragleave` fire again for every child the pointer
+   * crosses, so the highlight follows their balance rather than the last one.
+   */
+  const dragDepth = useRef(0);
+  const [isDropTarget, setIsDropTarget] = useState(false);
+
+  const endDrag = () => {
+    dragDepth.current = 0;
+    setIsDropTarget(false);
+  };
+
+  const dropProps: DropProps = isEnabled
+    ? {
+        onDragEnter: (event) => {
+          if (!dragHasFiles(event)) {
+            return;
+          }
+          event.preventDefault();
+          dragDepth.current += 1;
+          setIsDropTarget(true);
+        },
+        onDragOver: (event) => {
+          if (!dragHasFiles(event)) {
+            return;
+          }
+          // Without this the browser refuses the drop and opens the file instead.
+          event.preventDefault();
+          event.dataTransfer.dropEffect = "copy";
+        },
+        onDragLeave: (event) => {
+          if (!dragHasFiles(event)) {
+            return;
+          }
+          dragDepth.current = Math.max(0, dragDepth.current - 1);
+          if (dragDepth.current === 0) {
+            setIsDropTarget(false);
+          }
+        },
+        onDrop: (event) => {
+          if (!dragHasFiles(event)) {
+            return;
+          }
+          event.preventDefault();
+          endDrag();
+          uploadFilesRef.current(
+            acceptedFrom(event.dataTransfer.files, accept),
+          );
+        },
+      }
+    : {};
 
   return {
     dropProps,

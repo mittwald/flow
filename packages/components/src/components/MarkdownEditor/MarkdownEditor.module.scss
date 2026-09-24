@@ -108,7 +108,7 @@
   &.dropTarget {
     .toolbar,
     .markdown,
-    textarea {
+    :global(.flow--text-area--input) {
       background-color: var(--form-control--background-color--focused);
       border-color: var(--form-control--border-color--focused);
     }

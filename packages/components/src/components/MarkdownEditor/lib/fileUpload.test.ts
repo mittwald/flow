@@ -16,10 +16,26 @@ describe("uploadPlaceholder", () => {
     );
   });
 
-  test("keeps a file name from ending the comment early", () => {
-    expect(uploadPlaceholder("we-->done.png")).toBe(
-      '<!-- Uploading "we--done.png"... -->',
+  /*
+   * Every way to close an HTML comment starts with `--`, and dropping only
+   * `-->` can forge a new one, so each case is checked on the placeholder it
+   * actually produces.
+   */
+  test.each([
+    ["we-->done.png", "we- ->done.png"],
+    ["a-->>b.png", "a- ->>b.png"],
+    ["x--!>y.png", "x- -!>y.png"],
+    ["a---b.png", "a- - -b.png"],
+  ])("keeps %s from ending the comment early", (fileName, escaped) => {
+    const placeholder = uploadPlaceholder(fileName);
+
+    expect(placeholder).toBe(`<!-- Uploading "${escaped}"... -->`);
+    // Only the name can carry a sequence that closes the comment.
+    const name = placeholder.slice(
+      '<!-- Uploading "'.length,
+      -'"... -->'.length,
     );
+    expect(name).not.toContain("--");
   });
 });
 
