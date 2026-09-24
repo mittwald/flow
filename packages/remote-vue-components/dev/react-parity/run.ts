@@ -5,100 +5,51 @@
  * Two processes rather than two environments in one run, because the reused
  * tests locate what they interact with through `page.getByRole(…)` — which has
  * to find exactly one tree.
+ *
+ * Positional arguments are file filters and narrow both corpus passes; flags
+ * (`--browser.name=webkit`) go to every vitest invocation — see
+ * `splitArguments`.
  */
 import {
-  excludeUnsupportedFiles,
-  excludeUnsupportedPattern,
+  packageRoot,
+  resetReferences,
+  runCorpusPass,
+  runListParity,
+  splitArguments,
+} from "./passes.ts";
+import { readCorpus, staleKnownGaps } from "./staleKnownGaps.ts";
+import {
   unsupportedFiles,
   unsupportedScenarios,
 } from "../../e2e/react-parity/knownGaps.ts";
-import { spawnSync } from "node:child_process";
-import { rmSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const here = path.dirname(fileURLToPath(import.meta.url));
-const packageRoot = path.resolve(here, "../..");
-const config = "e2e/react-parity/vitest.config.ts";
-const filters = process.argv.slice(2);
+const runnerArguments = splitArguments(process.argv.slice(2));
+const isFullRun = runnerArguments.filters.length === 0;
 
 /*
- * Rebuilt every run. A committed reference would become a second source of
- * truth: the claim is "Vue renders what React renders today", not "what React
- * rendered when someone last updated a file".
+ * The reference pass's own report, next to the references it wrote and reset
+ * with them. Only a full run reports the whole corpus, so only a full run
+ * checks the known gaps against it.
  */
-rmSync(path.join(packageRoot, "e2e/react-parity/.refs"), {
-  recursive: true,
-  force: true,
-});
+const reportPath = path.join(
+  packageRoot,
+  "e2e/react-parity/.refs/reference-report.json",
+);
 
-/*
- * The Vue pass skips what cannot be expressed in Vue at all. Filtered by name
- * rather than swallowed in the environment: several of those scenarios
- * interact with what they rendered, so a half-run leaves them timing out on an
- * empty page instead of reporting the reason.
- */
-/**
- * What each pass does with a missing file snapshot: the reference pass writes
- * it, the comparison has to fail on it.
- *
- * Stated as a flag, not as an environment variable. Vitest derives the default
- * from whether it believes it is on CI, and that is not just `CI` — `std-env`
- * recognises `GITHUB_ACTIONS` and every other provider's marker too. Unsetting
- * `CI` therefore changed nothing on the runner, and the pass that is supposed
- * to write all 187 references failed all 187 instead.
- *
- * `--update=true`, not a bare `--update`: the flag's value is optional, so a
- * bare one swallows the positional test filter that follows it and the run
- * silently widens to the whole corpus.
- */
-const snapshotArgsFor = (mode: "reference" | "compare"): string[] =>
-  mode === "reference" ? ["--update=true"] : [];
+resetReferences();
 
-/*
- * The comparison must not write what it failed to find. A missing reference
- * means the reference pass never reached that scenario, and
- * `toMatchFileSnapshot` would otherwise create it and report a pass — the one
- * outcome that looks like parity and proves nothing. `CI` is what makes vitest
- * refuse to write, and forcing it here makes the comparison strict off CI too.
- */
-const environmentFor = (mode: "reference" | "compare"): NodeJS.ProcessEnv => ({
-  ...process.env,
-  FLOW_PARITY_MODE: mode,
-  ...(mode === "compare" ? { CI: "true" } : {}),
-});
-
-const run = (mode: "reference" | "compare"): number => {
-  const exclude =
-    mode === "compare" && filters.length === 0
-      ? [...excludeUnsupportedFiles(), "-t", excludeUnsupportedPattern()]
-      : [];
-  console.log(
-    `\n▶ ${mode === "reference" ? "React (writing references)" : "Vue (comparing)"}\n`,
-  );
-  const result = spawnSync(
-    "pnpm",
-    [
-      "exec",
-      "vitest",
-      "run",
-      "--config",
-      config,
-      "--browser.headless",
-      ...snapshotArgsFor(mode),
-      ...exclude,
-      ...filters,
-    ],
-    {
-      cwd: packageRoot,
-      stdio: "inherit",
-      env: environmentFor(mode),
-    },
-  );
-  return result.status ?? 1;
-};
-
-const referenceStatus = run("reference");
+const referenceStatus = runCorpusPass(
+  "reference",
+  runnerArguments,
+  isFullRun
+    ? [
+        "--reporter=default",
+        "--reporter=json",
+        `--outputFile.json=${reportPath}`,
+      ]
+    : [],
+);
 if (referenceStatus !== 0) {
   console.error(
     "\nThe reference pass failed. That is a broken harness or a broken visual test, not a Vue divergence.",
@@ -106,7 +57,9 @@ if (referenceStatus !== 0) {
   process.exit(referenceStatus);
 }
 
-const compareStatus = run("compare");
+const staleEntries = isFullRun ? staleKnownGaps(readCorpus(reportPath)) : [];
+
+const compareStatus = runCorpusPass("compare", runnerArguments);
 
 /*
  * The hand-written half of the parity story: the corpus above cannot express
@@ -115,26 +68,7 @@ const compareStatus = run("compare");
  * the same way, by its own harness. Skipped when a filter was given, because
  * the filter names a corpus scenario.
  */
-const listParityStatus =
-  filters.length > 0
-    ? 0
-    : (() => {
-        console.log("\n▶ The List, written once per binding\n");
-        return (
-          spawnSync(
-            "pnpm",
-            [
-              "exec",
-              "vitest",
-              "run",
-              "--config",
-              "e2e/list-parity/vitest.config.ts",
-              "--browser.headless",
-            ],
-            { cwd: packageRoot, stdio: "inherit", env: process.env },
-          ).status ?? 1
-        );
-      })();
+const listParityStatus = isFullRun ? runListParity(runnerArguments) : 0;
 
 console.log("\nNot compared — cannot be expressed in Vue:");
 for (const [file, reason] of Object.entries(unsupportedFiles)) {
@@ -144,4 +78,15 @@ for (const [name, reason] of Object.entries(unsupportedScenarios)) {
   console.log(`  · ${name} — ${reason}`);
 }
 
-process.exit(compareStatus || listParityStatus);
+if (staleEntries.length > 0) {
+  console.error(
+    "\nknownGaps.ts names what the corpus no longer has. Delete or rename these entries:",
+  );
+  for (const entry of staleEntries) {
+    console.error(`  · ${entry}`);
+  }
+}
+
+process.exit(
+  compareStatus || listParityStatus || (staleEntries.length > 0 ? 1 : 0),
+);
