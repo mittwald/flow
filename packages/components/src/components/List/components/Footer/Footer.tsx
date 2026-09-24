@@ -11,7 +11,7 @@ import locales from "../../locales/*.locale.json";
 export const Footer: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
   const list = useList();
-  const infiniteScroll = list.infiniteScroll;
+  const infiniteScroll = list.batches.isInfiniteScrollActive();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
 

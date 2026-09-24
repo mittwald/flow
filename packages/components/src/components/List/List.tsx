@@ -5,6 +5,7 @@ import { Items } from "@/components/List/components/Items/Items";
 import { Table } from "@/components/List/components/Table";
 import ListModel from "@/components/List/model/List";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import type { ListPaginationShape } from "@/components/List/model/pagination/types";
 import type { ListShape } from "@/components/List/model/types";
 import { ListFilter } from "@/components/List/setupComponents/ListFilter";
 import { ListItem } from "@/components/List/setupComponents/ListItem";
@@ -63,6 +64,14 @@ export interface ListProps<T, TMeta = unknown>
    * @default false
    */
   hidePagination?: boolean;
+  /**
+   * PROTOTYPE (mstudio#3836) — how the list loads the batches after the first
+   * one. Overrides `infiniteScroll`. Not part of the public API yet; the hybrid
+   * modes exist to be compared, not to be rolled out.
+   *
+   * @internal
+   */
+  pagination?: ListPaginationShape;
   /** The view rendered when a search or filter returns no results. */
   emptySearchResultView?: ReactNode;
   /** The view rendered when the list contains no items. */
@@ -77,6 +86,7 @@ export const List = flowComponent("List", (props) => {
     onChange,
     ref,
     hidePagination,
+    pagination,
     ...restProps
   } = props;
 
@@ -184,6 +194,7 @@ export const List = flowComponent("List", (props) => {
 
     batchesController: {
       batchSize,
+      ...pagination,
     },
     loadingItemsCount,
     ...restProps,

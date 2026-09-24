@@ -4,7 +4,6 @@ import DivView from "@/views/DivView";
 import ItemsGridListView from "@/views/ItemsGridListView";
 import clsx from "clsx";
 import type { FC } from "react";
-import { useRef } from "react";
 import styles from "./Items.module.scss";
 import { FallbackItems } from "./components/FallbackItems";
 import {
@@ -19,17 +18,18 @@ export const Items: FC = () => {
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const isLoadingMore = list.loader.useIsLoadingMore();
 
-  const triggerRef = useRef<HTMLDivElement>(null);
-  useInfiniteScrollTrigger(triggerRef);
+  const triggerRef = useInfiniteScrollTrigger();
 
   if (!list.itemView) {
     return null;
   }
 
+  const infiniteScroll = list.batches.isInfiniteScrollActive();
+
   const triggerIndex = Math.max(
     0,
     list.items.entries.length -
-      getLoadMoreThresholdRows(list.batches.batchSize),
+      getLoadMoreThresholdRows(list.batches.getCurrentBatchSize()),
   );
 
   const items = list.items.entries.map((item, index) => (
@@ -40,14 +40,14 @@ export const Items: FC = () => {
       list={list}
       isTile={tiles}
       triggerRef={
-        list.infiniteScroll && index === triggerIndex ? triggerRef : undefined
+        infiniteScroll && index === triggerIndex ? triggerRef : undefined
       }
     />
   ));
 
   const rootClassName = clsx(
     styles.items,
-    isLoading && !(list.infiniteScroll && isLoadingMore) && styles.isLoading,
+    isLoading && !(infiniteScroll && isLoadingMore) && styles.isLoading,
     tiles && styles.tiles,
   );
 
