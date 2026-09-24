@@ -8,14 +8,36 @@ import {
   Tabs,
   TabTitle,
 } from "@mittwald/flow-react-components";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Framework = "react" | "vue";
 
+/** `?framework=vue` selects the Vue remote; React is the default and unmarked. */
+const frameworkParameter = "framework";
+
 export default function HostLayout() {
   const hostPath = usePathname();
-  const [framework, setFramework] = useState<Framework>("react");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [framework, setFramework] = useState<Framework>(() =>
+    searchParams.get(frameworkParameter) === "vue" ? "vue" : "react",
+  );
+
+  /*
+   * Mirrored into the URL, so a reload keeps the choice. The state stays the
+   * source of truth, because every navigation drops the parameter — a
+   * sidebar link, and the remote reporting its own path — and this puts it
+   * back.
+   */
+  useEffect(() => {
+    const expected = framework === "vue" ? "vue" : null;
+    if (searchParams.get(frameworkParameter) !== expected) {
+      router.replace(
+        expected ? `${hostPath}?${frameworkParameter}=${expected}` : hostPath,
+      );
+    }
+  }, [framework, hostPath, router, searchParams]);
 
   return (
     <IntlProvider locale="en-US">
@@ -30,8 +52,9 @@ export default function HostLayout() {
          * reconnect per switch and keeps the demo behaving like a real host,
          * which only ever talks to one extension.
          *
-         * Only a few demos exist on the Vue side; the Vue app says so itself
-         * for the rest, which keeps the switch available everywhere.
+         * All but three demos exist on the Vue side; for those three the Vue
+         * app says so itself (`NotPortedDemo`), which keeps the switch
+         * available everywhere.
          */}
         <Tabs
           aria-label="Remote framework"
