@@ -15,7 +15,7 @@ const extensionUrlSchemes = [
   "safari-extension:",
 ];
 
-const isBrowserExtensionNode = (element: Element): boolean => {
+export const isBrowserExtensionNode = (element: Element): boolean => {
   if (element.tagName.includes("-")) {
     return true;
   }

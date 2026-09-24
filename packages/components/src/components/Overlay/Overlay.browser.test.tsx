@@ -1,7 +1,9 @@
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
+import Label from "@/components/Label";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
+import TextField from "@/components/TextField";
 import { sleep } from "@/lib/promises/sleep";
 import { render } from "vitest-browser-react";
 
@@ -155,3 +157,38 @@ test("the backdrop covers the viewport, not the whole document", async () => {
     filler.remove();
   }
 });
+
+const LoginModal = ({ label }: { label: string }) => (
+  <Modal isDefaultOpen>
+    <Heading>Login</Heading>
+    <Content>
+      <TextField autoFocus>
+        <Label>{label}</Label>
+      </TextField>
+    </Content>
+  </Modal>
+);
+
+test.each([
+  // 1Password appends its inline menu to body when a field gets focus.
+  ["a browser extension", "com-1password-button"],
+  ["the page", "div"],
+])(
+  "a focused field in an Overlay keeps focus when %s appends to body",
+  async (_, tagName) => {
+    const dom = await render(<LoginModal label="Email" />);
+    const input = document.querySelector("input");
+    await expect.poll(() => document.activeElement).toBe(input);
+
+    const foreign = document.createElement(tagName);
+    document.body.append(foreign);
+
+    try {
+      await dom.rerender(<LoginModal label="E-Mail" />);
+      await sleep(50);
+      expect(document.activeElement).toBe(input);
+    } finally {
+      foreign.remove();
+    }
+  },
+);

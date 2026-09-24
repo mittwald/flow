@@ -5,7 +5,10 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { OverlaySuspenseFallback } from "@/components/Overlay/components/OverlaySuspenseFallback";
 import styles from "../Overlay.module.scss";
 import DivView from "@/views/DivView";
-import { useKeepBrowserExtensionsInteractive } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
+import {
+  isBrowserExtensionNode,
+  useKeepBrowserExtensionsInteractive,
+} from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
 import { useIsActivityActive } from "@/components/Activity/context";
 
 const overlayContainerAttribute = "data-flow-overlays";
@@ -27,7 +30,49 @@ const overlayContainerAttribute = "data-flow-overlays";
  * later (toasts, third-party widgets, remounted app root) can render above open
  * overlays. Then overlays can appear behind page content, and the backdrop blur
  * no longer covers the page.
+ *
+ * Nodes a browser extension appends (e.g. 1Password's inline menu) are ignored:
+ * they belong on top anyway, and moving the container blurs a focused field
+ * inside it (#3268).
  */
+const isCoveredByPageContent = (container: HTMLElement): boolean => {
+  for (
+    let node = container.nextElementSibling;
+    node;
+    node = node.nextElementSibling
+  ) {
+    if (!isBrowserExtensionNode(node)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * Appending a node that contains the focused element blurs it. `moveBefore`
+ * keeps the focus; where it is missing, focus is restored after the move.
+ */
+const moveToEnd = (container: HTMLElement): void => {
+  const body = document.body as HTMLElement & {
+    moveBefore?: (node: Node, child: Node | null) => void;
+  };
+
+  if (typeof body.moveBefore === "function") {
+    body.moveBefore(container, null);
+    return;
+  }
+
+  const focused = document.activeElement;
+  body.append(container);
+  if (
+    focused instanceof HTMLElement &&
+    container.contains(focused) &&
+    document.activeElement !== focused
+  ) {
+    focused.focus({ preventScroll: true });
+  }
+};
+
 const getOverlayContainer = (): HTMLElement | null => {
   if (typeof document === "undefined") {
     return null;
@@ -38,8 +83,8 @@ const getOverlayContainer = (): HTMLElement | null => {
   );
 
   if (existingContainer) {
-    if (existingContainer !== document.body.lastElementChild) {
-      document.body.append(existingContainer);
+    if (isCoveredByPageContent(existingContainer)) {
+      moveToEnd(existingContainer);
     }
     return existingContainer;
   }
