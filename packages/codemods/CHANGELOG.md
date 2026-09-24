@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.20](https://github.com/mittwald/flow/compare/1.3.0-next.19...1.3.0-next.20) (2026-09-24)
+
+### Bug Fixes
+
+* **codemods:** stop one empty source file failing a whole upgrade ([#3239](https://github.com/mittwald/flow/issues/3239)) ([36dc53f](https://github.com/mittwald/flow/commit/36dc53f534f2163f05f8579dece5db6ad1fbef12))
+
+## [1.2.17](https://github.com/mittwald/flow/compare/1.3.0-next.18...1.2.17) (2026-09-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.17 ([069b32e](https://github.com/mittwald/flow/commit/069b32e72bac3917e27c54e9df65046f6c91ddeb))
+
 ## [1.3.0-next.19](https://github.com/mittwald/flow/compare/1.3.0-next.18...1.3.0-next.19) (2026-09-24)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
