@@ -98,9 +98,19 @@ export const testParity = (
 
     if (coverage.length > 0) {
       test("the scenarios reach every component", () => {
-        const missing = coverage.filter(
-          (marker) => !comparedHtml.some((html) => html.includes(marker)),
+        /*
+         * Whole class tokens, not substrings: half the markers are prefixes of
+         * others (`flow--list` of `flow--list--items--item`), and a substring
+         * match let the longer class stand in for the missing one.
+         */
+        const classes = new Set(
+          comparedHtml.flatMap((html) =>
+            Array.from(html.matchAll(/\sclass="([^"]*)"/g), ([, value]) =>
+              (value ?? "").split(/\s+/),
+            ).flat(),
+          ),
         );
+        const missing = coverage.filter((marker) => !classes.has(marker));
 
         expect(
           missing,
