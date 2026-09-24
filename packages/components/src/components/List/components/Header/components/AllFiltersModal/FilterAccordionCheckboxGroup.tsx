@@ -29,7 +29,9 @@ export const FilterAccordionCheckboxGroup: FC<Props> = (props) => {
         isEveryValueActive ? filter.deselectAll() : filter.selectAll()
       }
     >
-      {formatter.format("filters.selectAll")}
+      {formatter.format(
+        isEveryValueActive ? "filters.deselectAll" : "filters.selectAll",
+      )}
     </CheckboxView>
   );
 

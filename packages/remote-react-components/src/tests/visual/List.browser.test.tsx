@@ -9,7 +9,7 @@ import type { ListProps } from "@mittwald/flow-react-components";
 const listComparableFrom = "0.2.0-alpha.883";
 // A Combine inside a Text only stays in the line from 1.2.2.
 const combinedSubTitleFrom = "1.2.2";
-// The "All" option of multiple-choice filters exists from 1.2.16.
+// The "Select all" option of multiple-choice filters exists from 1.2.16.
 const filterSelectAllFrom = "1.2.16";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
@@ -835,12 +835,16 @@ test
     await page.getByRole("menuitemcheckbox", { name: "Hoth" }).click();
     await testScreenshot("List filter select all - partially selected");
 
-    await page.getByRole("menuitemcheckbox", { name: "All" }).click();
+    await page.getByRole("menuitemcheckbox", { name: "Select all" }).click();
     await testScreenshot("List filter select all - all selected");
 
     await userEvent.keyboard("{Escape}");
     await page.getByRole("button", { name: "All filters" }).first().click();
-    await page.getByText("Hoth", { exact: true }).last().click();
+    await page
+      .getByRole("dialog")
+      .getByText("Hoth", { exact: true })
+      .last()
+      .click();
     await testScreenshot("List filter select all - all filters modal");
   },
 );

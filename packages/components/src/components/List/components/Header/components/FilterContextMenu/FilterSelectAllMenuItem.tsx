@@ -25,7 +25,11 @@ export const FilterSelectAllMenuItem: FC<Props> = (props) => {
         isEveryValueActive ? filter.deselectAll() : filter.selectAll()
       }
     >
-      <TextView>{formatter.format("filters.selectAll")}</TextView>
+      <TextView>
+        {formatter.format(
+          isEveryValueActive ? "filters.deselectAll" : "filters.selectAll",
+        )}
+      </TextView>
     </MenuItemView>
   );
 };

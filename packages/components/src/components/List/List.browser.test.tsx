@@ -138,7 +138,10 @@ describe("Filter", () => {
 
 describe("Select all", () => {
   const tenItems = Array.from({ length: 10 }, (_, i) => i + 1);
-  const selectAllMenuItem = page.getByRole("menuitemcheckbox", { name: "All" });
+  const selectAllLabel = /^(Select|Deselect) all$/;
+  const selectAllMenuItem = page.getByRole("menuitemcheckbox", {
+    name: selectAllLabel,
+  });
   const menuItemCheckbox = (num: number) =>
     page.getByRole("menuitemcheckbox", { name: String(num), exact: true });
   const isIndeterminateIcon = (element: Element) =>
@@ -178,11 +181,13 @@ describe("Select all", () => {
     );
     await userEvent.click(filterButton);
 
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
     await userEvent.click(selectAllMenuItem);
     expect(onChange).toHaveBeenCalledExactlyOnceWith(tenItems);
     await expect
       .element(selectAllMenuItem)
       .toHaveAttribute("aria-checked", "true");
+    await expect.element(selectAllMenuItem).toHaveTextContent("Deselect all");
     await expect
       .element(menuItemCheckbox(5))
       .toHaveAttribute("aria-checked", "true");
@@ -238,17 +243,22 @@ describe("Select all", () => {
       page.getByRole("button", { name: "All filters" }).first(),
     );
 
-    const selectAllCheckbox = page.getByRole("checkbox", { name: "All" });
+    const selectAllCheckbox = page.getByRole("checkbox", {
+      name: selectAllLabel,
+    });
     await userEvent.click(page.getByText("3", { exact: true }));
     await expect.element(selectAllCheckbox).toBePartiallyChecked();
 
-    await userEvent.click(page.getByText("All", { exact: true }));
+    await userEvent.click(page.getByText("Select all", { exact: true }));
     await expect.element(selectAllCheckbox).toBeChecked();
+    await expect
+      .element(selectAllCheckbox)
+      .toHaveAccessibleName("Deselect all");
     await expect
       .element(page.getByRole("checkbox", { name: "7", exact: true }))
       .toBeChecked();
 
-    await userEvent.click(page.getByText("All", { exact: true }));
+    await userEvent.click(page.getByText("Deselect all", { exact: true }));
     await expect.element(selectAllCheckbox).not.toBeChecked();
     await expect.element(selectAllCheckbox).not.toBePartiallyChecked();
   });
