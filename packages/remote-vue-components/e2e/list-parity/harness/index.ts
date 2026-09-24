@@ -7,7 +7,7 @@ import {
   unmountHost,
   waitForHost,
 } from "./host";
-import { createSerializedReceiver } from "../../react-parity/serializedConnection";
+import { createSerializedReceiver } from "../../../../remote-react-components/src/tests/lib/serializedConnection";
 import type { ParityBinding, ParityScenario } from "./types";
 import { afterAll, describe, expect, test } from "vitest";
 

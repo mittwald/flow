@@ -1,16 +1,17 @@
 import { hostHtml } from "./hostHtml";
 import { divergenceReasonFor } from "./knownGaps";
 import { toVNode } from "./reactToVue";
-import { createSerializedReceiver } from "./serializedConnection";
 /*
- * A relative path, not `@/`: that alias means this package's `src` to
+ * Relative paths, not `@/`: that alias means this package's `src` to
  * TypeScript and the React package's to the harness's vite config. Spelling it
- * out is what lets the harness be typechecked at all.
+ * out is what lets the harness be typechecked at all. The serializing
+ * connection is the one the React visual suite's `Remote` environment runs on.
  */
 import {
   RootContainer,
   rootContainerLocator,
 } from "../../../remote-react-components/src/tests/lib/RootContainer";
+import { createSerializedReceiver } from "../../../remote-react-components/src/tests/lib/serializedConnection";
 import { RemoteReceiver } from "@mittwald/flow-remote-core";
 import * as ReactComponents from "@mittwald/flow-remote-react-components";
 import ReactRemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
