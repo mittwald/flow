@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.16](https://github.com/mittwald/flow/compare/1.3.0-next.15...1.3.0-next.16) (2026-09-24)
+
+## [1.2.12](https://github.com/mittwald/flow/compare/1.2.11...1.2.12) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.12 ([dc50796](https://github.com/mittwald/flow/commit/dc5079684edfe337907e0e8a8cdc58b24a24d678))
+
+### Tests
+
+* **CartesianChart:** gate the Bar scenarios below 1.2.0 ([697a90e](https://github.com/mittwald/flow/commit/697a90e9b1c7ca6a928936634b25ab3f4d9c6d98))
+* **cross-version:** never resolve a target to a prerelease version ([3b48995](https://github.com/mittwald/flow/commit/3b48995634f83270c821fcb0966426aeb8787d60))
+
 ## [1.3.0-next.15](https://github.com/mittwald/flow/compare/1.2.11...1.3.0-next.15) (2026-09-23)
 
 ## [1.3.0-next.14](https://github.com/mittwald/flow/compare/1.3.0-next.13...1.3.0-next.14) (2026-09-23)
