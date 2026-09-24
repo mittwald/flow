@@ -22,7 +22,7 @@ import {
   Modal,
   Section,
   Text,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-remote-vue-components";
 import { defineComponent, type PropType } from "vue";
 
@@ -30,9 +30,9 @@ import { defineComponent, type PropType } from "vue";
  * The `list` demo as a Vue remote app — the counterpart of
  * `src/app/remote/list/page.tsx`.
  *
- * Deliberately the same list: an async loader that takes its time, a filter, a
- * search, tiles, a table view, and a context menu per item that opens that
- * item's own modal.
+ * Deliberately the same list: an async loader that takes its time, two filters,
+ * a search, two sortings, tiles, a table view, and a context menu per item that
+ * opens that item's own modal.
  */
 const loadCharacters = () =>
   new Promise<{ data: DemoCharacter[]; itemTotalCount: number }>((resolve) => {
@@ -58,7 +58,7 @@ const CharacterItem = defineComponent({
   },
 
   setup(props) {
-    const controller = useOverlayController();
+    const controller = useModalController();
 
     return () => [
       <ListItemView>

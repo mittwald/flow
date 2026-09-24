@@ -16,7 +16,7 @@ import {
   Section,
   Text,
   TextField,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-remote-vue-components";
 import { defineComponent, type VNode } from "vue";
 
@@ -83,7 +83,7 @@ export const ModalDemo = defineComponent({
   name: "ModalDemo",
 
   setup() {
-    const controller = useOverlayController();
+    const controller = useModalController();
 
     return () => (
       <Section>
