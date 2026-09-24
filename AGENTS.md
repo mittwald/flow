@@ -36,10 +36,36 @@ component — see [docs/remote-ui.md](docs/remote-ui.md).
 
 ```
 extension (iframe)                          host (mStudio)
-RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteReceiver
+RemoteRoot + remote components        ───►  RemoteRenderer + RemoteReceiver
    │  @quilted/threads connection              │
    └─ hidden remote DOM (flr-* elements) ───►  maps flr-* to Flow components
 ```
+
+**The extension side is one binding per framework**, and every one of them is
+maintained here. React is the reference (`remote-react-components`); the second
+is Vue (`remote-vue-components`, **beta**). The host is React whatever the
+extension is written in — what crosses the boundary is a tree of `flr-*`
+elements, which any framework can build. What a second binding costs day to day:
+
+| A change to…                                    | Reaches the other bindings                                        |
+| ----------------------------------------------- | ----------------------------------------------------------------- |
+| a `@flr-generate` component's props             | by generator — regenerate and commit, nothing hand-written        |
+| an icon                                         | by generator                                                      |
+| a `flr-universal` composition (`Modal`, `List`) | **not at all** — every binding rebuilds it by hand                |
+| a class name or UI string one of those uses     | **not at all** — the rebuilds repeat them and drift silently      |
+| the `List`'s behaviour                          | through `packages/components-base`, if the change is in the model |
+
+The gate is the **`parity` CI job**: it renders the React package's whole visual
+corpus through the Vue binding and asserts the host builds the same DOM —
+overlays included — plus a `List` harness written once per binding. The `List`
+harness takes a **list of bindings** (`e2e/list-parity/harness/bindings/*`), so
+a third framework joins it as a file. The corpus harness does not: React is the
+reference and Vue the compared pass, and a third binding needs a converter next
+to `reactToVue.ts` and a pass of its own. Both suites live in the Vue package:
+`pnpm nx test:parity remote-vue-components`. Neither can see what the corpus
+does not render, so a `flr-universal` change still needs a look at each
+binding's rebuild — for Vue that is
+`packages/remote-vue-components/src/{components,overlays,list}`.
 
 - `remote-core` owns connection + serialization (`@quilted/threads`). The
   protocol is **versioned** — the host negotiates with different remote versions
@@ -47,7 +73,8 @@ RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteRecei
 - Components tagged `/** @flr-generate all */` get generated artifacts: a
   `view.ts` next to the component, view components in
   `packages/components/src/views/`, and files under `src/auto-generated/` in
-  `remote-elements`, `remote-react-components` and `remote-react-renderer`.
+  `remote-elements`, `remote-react-components`, `remote-react-renderer` and
+  `remote-vue-components`.
 - **Props of `@flr-generate` components are a contract with extension
   developers.** Avoid breaking changes. When an API must change, keep the old
   path working and log usage with `useWarnDeprecation` (from
@@ -87,6 +114,7 @@ nearest `AGENTS.md` before working in a package.**
 | `packages/remote-elements`              | `@mittwald/flow-remote-elements`         | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
 | `packages/remote-react-components`      | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
 | `packages/remote-react-renderer`        | `@mittwald/flow-remote-react-renderer`   | Host-side renderer mapping `flr-*` elements to Flow components; map auto-generated.        |
+| `packages/remote-vue-components`        | `@mittwald/flow-remote-vue-components`   | **Beta.** Vue API for remote apps; mirrors the React one, auto-generated.                  |
 | `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
 | `packages/react-tunnel`                 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility (MobX-based).                                      |
 | `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components` | Helpers for extension developers (mStudio page header customization).                      |
@@ -140,9 +168,10 @@ committed, and hand-editing them is futile** (headers say "auto-generated").
 | Generated artifact                                                                                                                                        | Generator                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | `packages/components/src/components/**/view.ts` + `src/views/*`                                                                                           | `pnpm nx build:remote-components components`                       |
-| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**`                                                                        | same as above                                                      |
+| `packages/remote-{elements,react-components,react-renderer,vue-components}/src/auto-generated/**`                                                         | same as above                                                      |
 | `packages/components/src/**/*.module.d.scss.ts`, `apps/{docs,remote-dom-demo}/src/**/*.module.d.{scss,css}.ts` (CSS-module class-name types)              | `pnpm nx build:scss-types components` / `docs` / `remote-dom-demo` |
 | `packages/components/src/components/Icon/components/icons/*`                                                                                              | `pnpm nx build:icons components`                                   |
+| `packages/remote-vue-components/src/icons/{components/*,iconNames.ts}`                                                                                    | `pnpm nx build:icons remote-vue-components`                        |
 | `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`                                                                                  | `pnpm nx build:icons icons` / `icons-pro`                          |
 | `packages/components/.cache/doc-properties.json` (build input) + `dist/assets/doc-properties.json` (published, consumer props only), both from prop JSDoc | `pnpm nx build:docs-properties components`                         |
 | `packages/components/dist/assets/component-index.json` (consumer-facing index)                                                                            | `pnpm nx build:component-index components`                         |
@@ -237,8 +266,18 @@ A new or substantially changed component comes with:
 6. Public components exported from `src/components/public.ts`
    (`flr-universal.ts` additionally, only when remote-capable)
 7. Remote-capable (`@flr-generate`): generated code regenerated + committed, and
-   a demo page in `apps/remote-dom-demo`
-8. Visual changes: run the suite on demand with the `run-visual-tests` PR label
+   a demo page in `apps/remote-dom-demo`. Add the Vue counterpart under
+   `src/app/remote-vue/_demos` where you can — the React/Vue switch is only
+   worth something while a pair describes the same page — but while the Vue
+   binding is beta, a missing one does not block a change
+8. Part of `flr-universal` (a composition the remote app renders itself):
+   `pnpm nx test:parity remote-vue-components` passes. Bring the Vue rebuild
+   (`packages/remote-vue-components/src/{components,overlays,list}`) along where
+   you can; where you cannot, record the divergence in
+   `packages/remote-vue-components/e2e/react-parity/knownGaps.ts` with its
+   reason. Behaviour that is not rendering belongs in
+   `packages/components-base`, where every binding runs the same code
+9. Visual changes: run the suite on demand with the `run-visual-tests` PR label
    (verify only); for intentional changes, update snapshots
    (`test:visual:update` or the `update-screenshots` PR label)
 
@@ -651,6 +690,17 @@ where the error points.
   And confirm a new regression test actually fails without its fix: this one
   passed in both directions, which is the only symptom you get
 
+- **Symptom:** A `.scss` file you never opened appears in your diff, reformatted
+
+  **Cause:** You ran `prettier --write` over a **directory**. The repo's
+  `format`/`format:check` globs list `css` but not `scss`, so SCSS is
+  deliberately unformatted — and `pnpm lint` therefore cannot tell you that you
+  just reformatted one
+
+  **Fix:** Pass the files you changed, not a directory. Check `git status` after
+  any `--write` and revert what you did not mean to touch; nothing downstream
+  will flag it
+
 - **Symptom:** A type error you never saw locally sits in the **release
   build's** log — `vite build --config vite.build.config.ts` prints `error TS…`
   and still exits **0**, while `pnpm nx test:compile <pkg>` is green on the same
@@ -739,7 +789,9 @@ where the error points.
 | Component patterns, styling, testing, i18n  | [packages/components/AGENTS.md](packages/components/AGENTS.md)                          |
 | Remote connection & serialization           | [packages/remote-core/AGENTS.md](packages/remote-core/AGENTS.md)                        |
 | Remote elements / React API / host renderer | `packages/remote-{elements,react-components,react-renderer}/AGENTS.md`                  |
+| Vue API for remote apps                     | [packages/remote-vue-components/AGENTS.md](packages/remote-vue-components/AGENTS.md)    |
 | Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                  |
+| Supporting a non-React remote framework     | [docs/remote-framework-bindings.md](docs/remote-framework-bindings.md)                  |
 | Logic shared by the React and Vue bindings  | [packages/components-base/AGENTS.md](packages/components-base/AGENTS.md)                |
 | Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                          |
 | Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |

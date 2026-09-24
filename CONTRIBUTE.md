@@ -624,6 +624,30 @@ branch.
 > gitignored; use the images to inspect the failure but **never commit them** —
 > only the baselines belong in the repo.
 
+### Parity testing — the other remote bindings
+
+An extension can be written in React or in another framework, and each one has a
+binding in this repository (`packages/remote-{react,vue}-components`). Every
+binding but React's rebuilds by hand what `flr-universal` keeps in React —
+`Modal`, `Action`, `List` and their triggers. Nothing generates those, so a
+change in `packages/components` can leave the bindings describing different UIs.
+
+The **`parity`** job is what notices. It renders the visual corpus above through
+every binding and asserts the host builds the same DOM, and runs a
+`List`-specific harness written once per binding:
+
+```shell
+pnpm nx test:parity remote-vue-components
+```
+
+The `List` harness iterates a list of bindings — the first is the reference, the
+rest are compared against it — so a third framework joins it as a file. The
+corpus harness compares Vue against React only; a third binding needs its own
+converter and pass there. Both compare only what their scenarios render,
+overlays included; a rule worth keeping gets a scenario. What it takes to add a
+binding at all is
+[docs/remote-framework-bindings.md](docs/remote-framework-bindings.md).
+
 To run everything the way CI does:
 
 ```shell
@@ -633,10 +657,10 @@ pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/vi
 ```
 
 Locally that is one command after the other. CI runs the same targets as
-separate jobs — `lint`, `unit`, `browser`, `e2e` and four `visual` shards — so
-its wall clock is the slowest job rather than the sum. `main` is the job that
-aggregates them and the check the branch ruleset requires; a red job turns it
-red.
+separate jobs — `lint`, `unit`, `browser`, `e2e`, `parity` and four `visual`
+shards — so its wall clock is the slowest job rather than the sum. `main` is the
+job that aggregates them and the check the branch ruleset requires; a red job
+turns it red.
 
 > ⚠️ **Generated code must be committed.** CI runs `git diff --exit-code` after
 > the unit tests. If you changed a component with `@flr-generate` or touched
