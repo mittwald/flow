@@ -192,3 +192,54 @@ test.each([
     }
   },
 );
+
+test("a scrolled Overlay keeps its scroll position when the page appends to body", async () => {
+  const TallModal = ({ label }: { label: string }) => (
+    <Modal isDefaultOpen>
+      <Heading>{label}</Heading>
+      <Content>
+        <div style={{ height: "3000px" }} />
+      </Content>
+    </Modal>
+  );
+
+  const dom = await render(<TallModal label="Install" />);
+  const content = document.querySelector<HTMLElement>(".flow--modal--content");
+  if (!content) {
+    throw new Error("no modal content rendered");
+  }
+  content.scrollTop = 200;
+  expect(content.scrollTop).toBe(200);
+
+  // react-aria mounts hidden description nodes on body while a popover inside
+  // the modal opens — a plain `div`, appended after the overlay container.
+  const foreign = document.createElement("div");
+  document.body.append(foreign);
+
+  try {
+    await dom.rerender(<TallModal label="Changed" />);
+    await sleep(50);
+    expect(content.scrollTop).toBe(200);
+  } finally {
+    foreign.remove();
+  }
+});
+
+test("page content appended after the overlay container moves in front of it, extension UI stays behind", async () => {
+  const dom = await render(<LoginModal label="Email" />);
+  const container = document.querySelector("body > [data-flow-overlays]");
+
+  const page = document.createElement("div");
+  const extension = document.createElement("com-1password-button");
+  document.body.append(page, extension);
+
+  try {
+    await dom.rerender(<LoginModal label="E-Mail" />);
+    await sleep(50);
+    expect(page.nextElementSibling).toBe(container);
+    expect(container?.nextElementSibling).toBe(extension);
+  } finally {
+    page.remove();
+    extension.remove();
+  }
+});
