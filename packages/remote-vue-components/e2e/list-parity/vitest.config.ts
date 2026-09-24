@@ -12,8 +12,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
  * only double the runtime.
  */
 export default mergeConfig(viteConfig, {
+  /* Vite's own option, not a `test` one: vitest keeps its prebundle under it. */
+  cacheDir: path.join(here, ".vitest/cache"),
   test: {
-    cacheDir: path.join(here, ".vitest/cache"),
     globals: true,
     setupFiles: [path.join(here, "setup.ts")],
     include: [path.join(here, "*.parity.test.tsx")],
