@@ -16,6 +16,13 @@ const reactPackage = path.resolve(here, "../../../remote-react-components");
  * compares HTML, not pixels, so a second browser would only double the runtime.
  */
 export default mergeConfig(viteConfig, {
+  /*
+   * Vite's own option, not a `test` one — vitest keeps its prebundle under it.
+   * Without it the prebundle landed in the root's `node_modules/.vite`, which
+   * here is the React package's: a rebuilt Vue `dist` does not invalidate a
+   * prebundle, and nobody looks for this package's in the other one.
+   */
+  cacheDir: path.join(here, ".vitest/cache"),
   test: {
     /*
      * The React package, not this one: the corpus is what runs, and it resolves
@@ -23,7 +30,6 @@ export default mergeConfig(viteConfig, {
      * absolutely.
      */
     root: reactPackage,
-    cacheDir: path.join(here, ".vitest/cache"),
     globals: true,
     setupFiles: [path.join(here, "setup.ts")],
     include: REUSED_VISUAL_TESTS,

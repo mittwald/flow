@@ -36,10 +36,11 @@ events, forms, suspense, ext-bridge, navigation, performance).
   lists them); everywhere else it checks the keys Vue needs on `.map()` output.
 - **A Vue demo runs against the built package**, not its source: it imports
   `@mittwald/flow-remote-vue-components` through the package entry, which is
-  `dist`. After changing that package, `pnpm nx build remote-vue-components` —
-  and delete `packages/remote-vue-components/node_modules/.vite*` before a
-  parity run, because vite pre-bundles it and a rebuilt `dist` does not
-  invalidate the prebundle.
+  `dist`. After changing that package, `pnpm nx build remote-vue-components`
+  (`pnpm nx dev remote-dom-demo` and the parity targets build it first). The
+  parity harnesses serve that `dist` as it is: their prebundles, under each
+  harness's `e2e/*/.vitest`, hold npm dependencies only — the `@mittwald/**/*`
+  glob in the package's `optimizeDeps.include` matches no workspace package.
 - CSS-module class names are typed by committed `*.module.d.scss.ts` stubs
   (shared generator, see the root
   [Generated code](../../AGENTS.md#generated-code--must-be-committed) table).
