@@ -34,19 +34,22 @@
   -webkit-mask-clip: content-box;
 }
 
-/* Sidebar and content fill the available height side by side. A plain element
-   rather than Flex, whose inline direction would beat the media query below. */
+/* Sidebar and content fill the available height side by side; the column
+   layout stacks them once its container gets narrow. */
 .body {
-  display: flex;
   flex: 1;
-  gap: var(--size-px--l);
   min-height: 0;
 }
 
-/* The navigation card keeps a fixed width beside the flexible content and
-   scrolls its own content if the viewport is too short for it. */
+/* The column layout's inner grid fills that height, so its row stretches. */
+.body > * {
+  height: 100%;
+}
+
+/* The navigation card scrolls its own content if the viewport is too short for
+   it. */
 .sidebar {
-  flex: 0 0 20rem;
+  align-self: stretch;
   gap: var(--size-px--m);
   min-height: 0;
   overflow: auto;
@@ -58,7 +61,7 @@
 }
 
 .main {
-  flex: 1 1 auto;
+  align-self: stretch;
   min-width: 0;
   min-height: 0;
 }
@@ -90,8 +93,8 @@
 }
 
 /*
- * On narrow screens the two cards stack, and the page scrolls as a whole rather
- * than each card scrolling on its own inside a fixed height.
+ * On narrow screens the page scrolls as a whole rather than each card scrolling
+ * on its own inside a fixed height.
  */
 @media (max-width: 768px) {
   .app {
@@ -100,12 +103,7 @@
     padding-inline: var(--size-px--m);
   }
 
-  .body {
-    flex-direction: column;
-  }
-
   .sidebar {
-    flex-basis: auto;
     overflow: visible;
   }
 

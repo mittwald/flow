@@ -2,6 +2,7 @@ import {
   Avatar,
   Badge,
   Button,
+  ColumnLayout,
   Combine,
   CounterBadge,
   Flex,
@@ -214,7 +215,12 @@ export default () => {
 
   return (
     <Flex direction="column" gap="l" className={styles.app}>
-      <div className={styles.body}>
+      <ColumnLayout
+        l={[1, 3]}
+        m={[1, 2]}
+        gap="l"
+        className={styles.body}
+      >
         <LayoutCard className={styles.sidebar}>
           <span
             className={styles.logo}
@@ -345,7 +351,7 @@ export default () => {
             </Section>
           </LayoutCard>
         </Flex>
-      </div>
+      </ColumnLayout>
 
       <Flex
         elementType="footer"
