@@ -187,9 +187,14 @@
   touch-action: none;
 }
 
-/* Same breakpoint the LayoutCard switches its own padding at. */
+/*
+ * Same breakpoint the LayoutCard switches its own padding at. The examples
+ * are laid out for a desktop viewport, so they also shrink a little here —
+ * `zoom` scales the layout with the text, unlike a transform.
+ */
 @media (max-width: 768px) {
   .preview {
     padding: var(--layout-card--padding-mobile);
+    zoom: 0.85;
   }
 }

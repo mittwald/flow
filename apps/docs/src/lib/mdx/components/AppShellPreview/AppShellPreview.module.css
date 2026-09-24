@@ -5,9 +5,9 @@
 }
 
 /*
- * The inline frame is a zoomed-out 16:9 thumbnail: the shell renders at 1.6× the
- * frame size and is scaled back down, so its whole desktop layout (nav, header,
- * content) reads at a glance. Hovering reveals the link to the full-size shell.
+ * The inline frame is a zoomed-out thumbnail: the shell lays out as if it had
+ * 1.6× the frame's width, so its whole desktop layout (nav, header, content)
+ * reads at a glance. Hovering reveals the link to the full-size shell.
  */
 .previewFrame {
   position: relative;
@@ -15,7 +15,6 @@
   /* Scope the layer order below (scaler → backdrop → link) to this frame. */
   isolation: isolate;
   width: 100%;
-  aspect-ratio: 16 / 9;
   overflow: hidden;
 
   /* The same border the LiveCodeEditor draws, so both previews read alike. */
@@ -23,14 +22,12 @@
   border-radius: var(--corner-radius--m);
 }
 
+/*
+ * `zoom` rather than a transform: it shrinks the layout box with the content,
+ * so the frame takes the shell's full height instead of cropping it.
+ */
 .previewScaler {
-  position: absolute;
-  top: 0;
-  inset-inline-start: 0;
-  width: 160%;
-  height: 160%;
-  transform: scale(0.625);
-  transform-origin: top left;
+  zoom: 0.625;
 
   /* Non-interactive: the overlay link owns the clicks. */
   pointer-events: none;
