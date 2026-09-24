@@ -27,7 +27,7 @@ const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   propertyValue,
 ) => filterValue === propertyValue;
 
-const selectAllMinValueCount = 10;
+const selectAllMinValueCount = 6;
 
 const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);

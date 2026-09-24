@@ -137,7 +137,7 @@ describe("Filter", () => {
 });
 
 describe("Select all", () => {
-  const tenItems = Array.from({ length: 10 }, (_, i) => i + 1);
+  const sixItems = Array.from({ length: 6 }, (_, i) => i + 1);
   const selectAllLabel = /^(Select|Deselect) all$/;
   const selectAllMenuItem = page.getByRole("menuitemcheckbox", {
     name: selectAllLabel,
@@ -147,15 +147,15 @@ describe("Select all", () => {
   const isIndeterminateIcon = (element: Element) =>
     element.querySelector(".tabler-icon-square-minus-filled") !== null;
 
-  test("is offered in 'some' mode from ten values on", async () => {
-    await render(getTestElement(tenItems, <ListFilter<Data> property="num" />));
+  test("is offered in 'some' mode from six values on", async () => {
+    await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
     await userEvent.click(filterButton);
     await expect.element(selectAllMenuItem).toBeInTheDocument();
   });
 
-  test("is not offered with fewer than ten values", async () => {
+  test("is not offered with fewer than six values", async () => {
     await render(
-      getTestElement(tenItems.slice(1), <ListFilter<Data> property="num" />),
+      getTestElement(sixItems.slice(1), <ListFilter<Data> property="num" />),
     );
     await userEvent.click(filterButton);
     await expect.element(menuItemCheckbox(2)).toBeInTheDocument();
@@ -164,7 +164,7 @@ describe("Select all", () => {
 
   test("is not offered in 'all' mode", async () => {
     await render(
-      getTestElement(tenItems, <ListFilter<Data> property="num" mode="all" />),
+      getTestElement(sixItems, <ListFilter<Data> property="num" mode="all" />),
     );
     await userEvent.click(filterButton);
     await expect.element(menuItemCheckbox(1)).toBeInTheDocument();
@@ -175,7 +175,7 @@ describe("Select all", () => {
     const onChange = vitest.fn();
     await render(
       getTestElement(
-        tenItems,
+        sixItems,
         <ListFilter<Data> property="num" onChange={onChange} />,
       ),
     );
@@ -183,7 +183,7 @@ describe("Select all", () => {
 
     await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
     await userEvent.click(selectAllMenuItem);
-    expect(onChange).toHaveBeenCalledExactlyOnceWith(tenItems);
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(sixItems);
     await expect
       .element(selectAllMenuItem)
       .toHaveAttribute("aria-checked", "true");
@@ -201,7 +201,7 @@ describe("Select all", () => {
   });
 
   test("shows a partial selection and completes it on click", async () => {
-    await render(getTestElement(tenItems, <ListFilter<Data> property="num" />));
+    await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
     await userEvent.click(filterButton);
 
     expect(isIndeterminateIcon(selectAllMenuItem.element())).toBe(false);
@@ -235,7 +235,7 @@ describe("Select all", () => {
   test("is offered as a tri-state checkbox in the all filters modal", async () => {
     await render(
       getTestElement(
-        tenItems,
+        sixItems,
         <ListFilter<Data> property="num" priority="secondary" />,
       ),
     );
@@ -255,7 +255,7 @@ describe("Select all", () => {
       .element(selectAllCheckbox)
       .toHaveAccessibleName("Deselect all");
     await expect
-      .element(page.getByRole("checkbox", { name: "7", exact: true }))
+      .element(page.getByRole("checkbox", { name: "5", exact: true }))
       .toBeChecked();
 
     await userEvent.click(page.getByText("Deselect all", { exact: true }));
