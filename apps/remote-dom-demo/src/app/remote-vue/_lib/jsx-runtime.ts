@@ -1,4 +1,4 @@
-import { h, isVNode, type VNode } from "vue";
+import { cloneVNode, h, isVNode, type VNode } from "vue";
 import type { NativeElements, ReservedProps } from "vue";
 
 /**
@@ -24,6 +24,30 @@ const isSlotsObject = (
   children !== null &&
   !Array.isArray(children) &&
   !isVNode(children);
+
+/*
+ * A copy of the children for every call of the slot.
+ *
+ * JSX builds the children once, when the parent renders, but a component calls
+ * its slot again on every render of its own. Vue mounts a vnode in place — it
+ * writes `el` onto it and normalizes an element's children array into itself —
+ * so the second call would hand it nodes that already belong to the first
+ * render. The copy goes as deep as the arrays go: a component's own children
+ * are a slot again, and copied when that slot is called.
+ */
+const freshCopy = (children: unknown): unknown => {
+  if (Array.isArray(children)) {
+    return children.map(freshCopy);
+  }
+  if (!isVNode(children)) {
+    return children;
+  }
+  const copy = cloneVNode(children);
+  if (Array.isArray(copy.children)) {
+    copy.children = copy.children.map(freshCopy) as VNode[];
+  }
+  return copy;
+};
 
 export const jsx = (
   type: Parameters<typeof h>[0],
@@ -52,7 +76,7 @@ export const jsx = (
     return h(type, attributes, children);
   }
 
-  return h(type, attributes, { default: () => children });
+  return h(type, attributes, { default: () => freshCopy(children) });
 };
 
 export const jsxs = jsx;
