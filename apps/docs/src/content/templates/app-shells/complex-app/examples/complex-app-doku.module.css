@@ -1,0 +1,71 @@
+.app {
+  /* Container-relative here; use 100dvh in a real full-page app. */
+  min-height: 100%;
+  padding-block: var(--size-px--l);
+  padding-inline: var(--size-px--xl);
+  background: var(--color--background-gradient);
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme. Swap the masked SVG for your own logo.
+ */
+.logo {
+  width: 8rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+}
+
+/* The global navigation is pushed to the far end of the top bar. */
+.topnav {
+  margin-inline-start: auto;
+}
+
+/* Search and the burger take that place once the navigation gives it up. */
+.mobileActions {
+  margin-inline-start: auto;
+}
+
+/* Navigation, content and table of contents sit in three columns. */
+.body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Both cards keep a fixed width; only the content column flexes. */
+.sidebar,
+.toc {
+  flex: 0 0 17rem;
+}
+
+.main {
+  flex: 1 1 20rem;
+}
+
+.footer {
+  margin-block-start: auto;
+}
+
+/*
+ * Below this width neither the section links nor the component navigation
+ * fits, so both hand their links to the off-canvas behind the burger.
+ */
+@media (max-width: 768px) {
+  .topnav,
+  .sidebar {
+    display: none;
+  }
+
+  .app {
+    padding-inline: var(--size-px--m);
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileActions {
+    display: none;
+  }
+}

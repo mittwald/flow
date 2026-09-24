@@ -1,0 +1,68 @@
+---
+title: Complex App
+description:
+  Eine App mit mehreren Navigationsebenen aus globalem Header, Sidebar und
+  Breadcrumb.
+---
+
+<AppShell example="complex-app" />
+
+---
+
+# Verwendung
+
+Eine Complex App erschließt viele Bereiche über mehrere Navigationsebenen aus
+globalem Header, Sidebar und Breadcrumb. Das ist die im mStudio typische Form.
+Verwende sie, wenn eine flache Navigation nicht mehr ausreicht. Die gestaffelten
+Ebenen halten auch eine große Anwendung übersichtlich und zeigen dem Nutzer
+jederzeit, wo er sich befindet. Für ein kleines Werkzeug mit wenigen,
+gleichrangigen Bereichen genügt eine
+[Simple App](/templates/app-shells/simple-app).
+
+---
+
+# Aufbau
+
+- **Header** – Eine [HeaderNavigation](/components/navigation/header-navigation)
+  trägt die globale Navigationsebene und bereichsübergreifende Funktionen.
+- **Sidebar** – Eine [Navigation](/components/navigation/navigation) führt durch
+  die Unterseiten des aktuellen Bereichs.
+- **Content Header** – [Breadcrumb](/components/navigation/breadcrumb) und
+  PageTitle (ein [Heading](/components/content/heading) der Ebene 1) orientieren
+  den Nutzer in der Tiefe.
+- **Content** – Der Inhalt einer Seite wird in der Regel in
+  [LayoutCards](/components/structure/layout-card) dargestellt. Typische
+  Seitentypen sind beispielsweise [Detailseiten](/templates/seiten/detailseite),
+  [Dashboards](/templates/seiten/dashboard) und
+  [Übersichtsseiten](/templates/seiten/uebersichtsseite).
+- **Footer** – Hier lassen sich [Links](/components/navigation/link) platzieren,
+  etwa Verweise auf Datenschutz oder Impressum.
+
+Auf schmalen Screens ist für Header-Navigation und Sidebar kein Platz. Beide
+geben ihre Links an ein [OffCanvas](/components/overlays/modal) ab, das ein
+Burger-Menü in der Kopfleiste öffnet.
+
+---
+
+# Varianten und Abwandlung
+
+## Detailansicht
+
+Die Detailansicht kombiniert zwei Seitentypen: Über die
+[Übersichtsseite](/templates/seiten/uebersichtsseite) – eine
+[List](/components/list/list) – navigiert man in die Tiefe zu einem einzelnen
+Objekt. [Breadcrumb](/components/navigation/breadcrumb) und PageTitle helfen bei
+der Orientierung; eine [TabNavigation](/components/navigation/tab-navigation)
+gliedert das Objekt in Unterbereiche.
+
+<AppShell example="complex-app-detail" />
+
+## Doku-Layout
+
+Eine einfachere Abwandlung ohne globale Objekt-Tiefe: Die
+[Navigation](/components/navigation/navigation) listet die Bereiche flach, der
+Content steht mittig, und rechts führt ein eigenes Inhaltsverzeichnis („Auf
+dieser Seite") durch die Abschnitte der Seite. Dieser Styleguide selbst folgt
+dem Muster.
+
+<AppShell example="complex-app-doku" />
