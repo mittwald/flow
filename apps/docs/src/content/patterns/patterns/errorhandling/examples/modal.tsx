@@ -58,7 +58,7 @@ export default () => {
           <ActionGroup>
             <Action closeModal>
               <Button
-                slot="primary"
+                slot="abort"
                 variant="soft"
                 color="secondary"
               >

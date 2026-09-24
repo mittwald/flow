@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.15](https://github.com/mittwald/flow/compare/1.2.14...1.2.15) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group across 1 directory with 19 updates ([453d99f](https://github.com/mittwald/flow/commit/453d99f505017b0680b5de3de1bb417b93567a93))
+
+## [1.2.14](https://github.com/mittwald/flow/compare/1.2.13...1.2.14) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 7 updates ([3463327](https://github.com/mittwald/flow/commit/34633272f000e1a3d7b266be12852cf33863036d))
+
+## [1.2.13](https://github.com/mittwald/flow/compare/1.2.12...1.2.13) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-minor group across 1 directory with 3 updates ([3b478e2](https://github.com/mittwald/flow/commit/3b478e210dc718f3f5602898225ce4d33d9ecbb2))
+* **deps:** bump docker/build-push-action ([55e24b2](https://github.com/mittwald/flow/commit/55e24b234e06b836b34c9bd56205b9e17430a67e))
+
+### Tests
+
+* **CartesianChart:** gate the Bar scenarios below 1.2.0 ([697a90e](https://github.com/mittwald/flow/commit/697a90e9b1c7ca6a928936634b25ab3f4d9c6d98))
+* **cross-version:** never resolve a target to a prerelease version ([3b48995](https://github.com/mittwald/flow/commit/3b48995634f83270c821fcb0966426aeb8787d60))
+
+## [1.2.12](https://github.com/mittwald/flow/compare/1.2.11...1.2.12) (2026-09-23)
+
+### Bug Fixes
+
+* **FileDropZone:** match dropped files against accept like the attribute does ([7118f1d](https://github.com/mittwald/flow/commit/7118f1d33c8553880627e00046d696299a2206e4))
+
+## [1.2.11](https://github.com/mittwald/flow/compare/1.2.10...1.2.11) (2026-09-23)
+
+### Bug Fixes
+
+* **DonutChart:** keep the value centred in a stretching flex row ([866cd4f](https://github.com/mittwald/flow/commit/866cd4f513d7575d8dc8cdc05ae3a64d27118ce5))
+
+### Documentation
+
+* **docs:** highlight the best-effort areas of the stability guarantee ([#3261](https://github.com/mittwald/flow/issues/3261)) ([aa46cc9](https://github.com/mittwald/flow/commit/aa46cc9965353bfcdaf3dfdbdbb29c4d7f38f39f))
+
+### Tests
+
+* update visual regression screenshots ([2256a62](https://github.com/mittwald/flow/commit/2256a627f9852ac21158d792aa5c963e121d7ac3))
+
+## [1.2.10](https://github.com/mittwald/flow/compare/1.2.9...1.2.10) (2026-09-23)
+
+### Bug Fixes
+
+* **ci:** stop the drift check reporting drift it never measured ([d6d8d38](https://github.com/mittwald/flow/commit/d6d8d38eda6066e306cbacce6b72d68dee4a585b)), closes [#3248](https://github.com/mittwald/flow/issues/3248) [#3231](https://github.com/mittwald/flow/issues/3231) [#3186](https://github.com/mittwald/flow/issues/3186) [#3185](https://github.com/mittwald/flow/issues/3185) [#3096](https://github.com/mittwald/flow/issues/3096) [#2967](https://github.com/mittwald/flow/issues/2967)
+* **components:** announce accordion state and gallery position ([#3229](https://github.com/mittwald/flow/issues/3229)) ([62e4c41](https://github.com/mittwald/flow/commit/62e4c41feb0ad1f39a046a4da75b617ccd04f894))
+
+## [1.2.9](https://github.com/mittwald/flow/compare/1.2.8...1.2.9) (2026-09-23)
+
+### Bug Fixes
+
+* **docs:** put close button in abort slot on error handling example ([#3254](https://github.com/mittwald/flow/issues/3254)) ([2178f58](https://github.com/mittwald/flow/commit/2178f582ff41aa908d13c1d76ea79c24bd87fc2c))
+* **remote-core:** carry Date and other built-ins across the remote boundary ([#3246](https://github.com/mittwald/flow/issues/3246)) ([534e62d](https://github.com/mittwald/flow/commit/534e62de9e635a99b23f18c4fa04ed883b7e2316))
+
 ## [1.2.8](https://github.com/mittwald/flow/compare/1.2.7...1.2.8) (2026-09-22)
 
 ### Bug Fixes
