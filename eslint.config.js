@@ -158,6 +158,23 @@ export default tseslint.config(
     },
   },
   {
+    /*
+     * Vue JSX, not React's. The demo app's Vue apps compile against their own
+     * runtime (`_lib/jsx-runtime.ts`), so React's JSX rules do not apply: Vue
+     * keys a static array of children by position, and a key there says
+     * nothing. Its JSX namespace also has to be a namespace, which is the
+     * one shape TypeScript accepts.
+     */
+    files: ["apps/remote-dom-demo/src/app/remote-vue/**"],
+    rules: {
+      "react/jsx-key": "off",
+      "react/no-unknown-property": "off",
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/consistent-indexed-object-style": "off",
+    },
+  },
+  {
     // Node ES-module CLI scripts (run by GitHub Actions, not bundled).
     files: [".github/scripts/**/*.mjs"],
     languageOptions: {

@@ -88,6 +88,7 @@
         "{projectRoot}/src/views/*",
         "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
+        "{workspaceRoot}/packages/remote-vue-components/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
       ]
     },

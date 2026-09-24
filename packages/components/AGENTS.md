@@ -370,6 +370,39 @@ Three traps cost time in every new browser test:
 - Form fields wire label/description/error via `useFieldComponent` (generates
   ids, sets `aria-describedby`).
 
+## Every remote binding reads this package
+
+An extension can be written in React or in another framework, and each one has a
+binding of its own in this repository — `remote-react-components` as the
+reference, `remote-vue-components` as the second. Only part of what you change
+here reaches the others by itself.
+
+- **A `@flr-generate` component is free.** Props, events and slots are generated
+  for every binding — regenerate and commit, and each wrapper is current.
+- **A `flr-universal` composition is not.** `Modal`, `Popover`, `LightBox`,
+  `Action`, `List` and their triggers are React compositions over remote
+  elements, so every other binding rebuilds them by hand (Vue's are in
+  `packages/remote-vue-components/src/{components,overlays,list}`). While the
+  Vue binding is beta, bring its rebuild along where you can; where you cannot,
+  record the divergence with its reason in
+  `packages/remote-vue-components/e2e/react-parity/knownGaps.ts`.
+- **Their class names and UI strings are a contract.** The rebuilds pass
+  `flow--modal`, `flow--list--…` to the host and carry their own copy of the
+  four `confirmOnClose` strings, because neither is importable from a published
+  entry point. Renaming a class or rewording a string in such a composition
+  breaks every other binding silently.
+- **Behaviour that is not rendering belongs in
+  `@mittwald/flow-components-base`**, where every binding runs the same code —
+  that is where the `List`'s loader state, filters, sorting, search, view mode
+  and table live. Beware of writing React's lifecycle into it: a cache that a
+  per-render model refreshes for free is a permanent one for a binding that
+  keeps its model.
+
+The gate is `pnpm nx test:parity remote-vue-components`, which renders the
+visual corpus through React and Vue and compares the host's DOM, overlays
+included. It only sees what the corpus renders — a scenario is the cheapest way
+to make a rule stick.
+
 ## Public API surfaces
 
 | Export                                                          | Contents                                                                                                                                                                                                                                            |
