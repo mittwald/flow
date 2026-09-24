@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.17](https://github.com/mittwald/flow/compare/1.2.16...1.2.17) (2026-09-24)
+
+### Features
+
+* **docs:** add Simple App and Complex App shells ([be0a392](https://github.com/mittwald/flow/commit/be0a392d7d8e513b2cb65423650ccf3cd02caf22))
+* **docs:** add Templates area with the Seiten rung ([fdd628e](https://github.com/mittwald/flow/commit/fdd628e6ef7e55da23a8c1fb56b1037859ef2b40)), closes [#3108](https://github.com/mittwald/flow/issues/3108) [#2857](https://github.com/mittwald/flow/issues/2857)
+* **docs:** add the App Shells rung with Focus Task ([3d51b24](https://github.com/mittwald/flow/commit/3d51b24a14a09868df06c3e3c793dc72f8002904))
+* **docs:** add the Bausteine rung to Templates ([305e527](https://github.com/mittwald/flow/commit/305e527d29b543efe40a1140c3ad299aa73a76e7))
+* **docs:** add the Overlays rung to Templates ([a74df48](https://github.com/mittwald/flow/commit/a74df481643bd078cf722e0f56825a872069bfc8)), closes [#3108](https://github.com/mittwald/flow/issues/3108) [#2857](https://github.com/mittwald/flow/issues/2857)
+
+### Bug Fixes
+
+* **components:** stop declaring query containers nothing queries ([#3082](https://github.com/mittwald/flow/issues/3082)) ([c4d03bf](https://github.com/mittwald/flow/commit/c4d03bf6d6d6a7acafedb48a35e4c07552795814))
+* **docs:** restore the dimmed backdrop behind the preview button ([f47d11c](https://github.com/mittwald/flow/commit/f47d11c000d66f3883d57e6725dd3cce8a01dc84))
+
+### Documentation
+
+* **foundations:** move Error Handling from patterns into Foundations ([68d0324](https://github.com/mittwald/flow/commit/68d0324691a93b3782924e2a1cd7e1aaabd72ec1))
+* **foundations:** move Navigation from patterns into Foundations ([fbc7f94](https://github.com/mittwald/flow/commit/fbc7f943b5e81f558b6ab674a60d59a78f15bc93))
+* keep the hardcoded dark page ground, and say why ([2dffc60](https://github.com/mittwald/flow/commit/2dffc600418af957ad9a9917ffe22a1eecb7bb7d)), closes [#121518](https://github.com/mittwald/flow/issues/121518) [#292F37](https://github.com/mittwald/flow/issues/292F37)
+* pad the live preview like a LayoutCard ([3e70abe](https://github.com/mittwald/flow/commit/3e70abee82dca070b965613c38cf280caff50399))
+* shrink and left-align the Simple App sidebar logo ([477a785](https://github.com/mittwald/flow/commit/477a785cc7fddab2973058475b17cc823930464e))
+* shrink the live preview on mobile, uncrop the App Shell frame ([60960d0](https://github.com/mittwald/flow/commit/60960d019d98874074784b185f095a2f2f47b421))
+* stack Simple App sidebar cards on mobile ([5028614](https://github.com/mittwald/flow/commit/5028614706b8aa4aa5ccdab468425f082e5dbf95))
+* stack the Simple App sidebar cards from size m ([acc4878](https://github.com/mittwald/flow/commit/acc487871e3cebef29ee08b92025e78c37a4f34c))
+* take the dark background from the token, not a hardcoded hex ([1bf3efd](https://github.com/mittwald/flow/commit/1bf3efd325a2e6905aa2ed09342db5e625ebe6a3)), closes [#121518](https://github.com/mittwald/flow/issues/121518) [#292F37](https://github.com/mittwald/flow/issues/292F37)
+* **templates:** absorb &quot;Anlegen und Bearbeiten&quot; pattern into templates ([0ad9e64](https://github.com/mittwald/flow/commit/0ad9e64f8c60604df06f517592880ee61f02aa8f))
+* **templates:** absorb the detail-page pattern into the Detailseite template ([0fd78b9](https://github.com/mittwald/flow/commit/0fd78b9438e1da9a51573494cca26f5d44873cec))
+* **templates:** absorb the Forms pattern into the Formular baustein ([6699907](https://github.com/mittwald/flow/commit/66999070476ce380b7159a8f86e7083f6253c9ac))
+* **templates:** add a sidebar-navigation variant to the Simple App ([5a4effc](https://github.com/mittwald/flow/commit/5a4effc2788fd3df360a93d4a1d702556a27c6df))
+* **templates:** add an IllustratedMessage variant to the Anzeigen overlay ([e95de8f](https://github.com/mittwald/flow/commit/e95de8f685eb916a0ca59f3c43f29f54343fa926))
+* **templates:** address App Shell and Seiten review comments ([9ab28a4](https://github.com/mittwald/flow/commit/9ab28a4fa9cecc5786b82843062ed8c4952b2b37))
+* **templates:** address follow-up review comments ([10caab4](https://github.com/mittwald/flow/commit/10caab40cf38476d0ca6f2fdbdc43bbcdffe9ba0))
+* **templates:** build the App Shell layouts from Flow components ([5f5651e](https://github.com/mittwald/flow/commit/5f5651eb7797713462f90e37f96a8185b19c117d))
+* **templates:** build the sidebar variant&#x27;s layout from Flex too ([3177dc5](https://github.com/mittwald/flow/commit/3177dc56959ec051e069e6ac1f20c6282e56dd8a))
+* **templates:** dissolve the Patterns section into Templates ([31b21a0](https://github.com/mittwald/flow/commit/31b21a05b4de055eb4c44f25a809e21187ae0285))
+* **templates:** drop CSS the design system already provides ([b3aa3db](https://github.com/mittwald/flow/commit/b3aa3db72d486f2c004ecbe2a7cca66777e8f0ba)), closes [#121518](https://github.com/mittwald/flow/issues/121518) [#F4F8FC](https://github.com/mittwald/flow/issues/F4F8FC) [#292F37](https://github.com/mittwald/flow/issues/292F37)
+* **templates:** fix type error in the Simple App sidebar sample data ([1afc374](https://github.com/mittwald/flow/commit/1afc374c90547df9e82ac974bc067179d3be4679))
+* **templates:** give the App Shells a mobile layout ([8cc248d](https://github.com/mittwald/flow/commit/8cc248d0f9f11aa67b8bfaddc93986f7ca7a8ee4))
+* **templates:** incorporate PR review feedback ([1c250e1](https://github.com/mittwald/flow/commit/1c250e1b3e68832d01c6d2d80173dd005f3c33b6))
+* **templates:** keep search and the bell in the mobile top bar ([4a4dbfe](https://github.com/mittwald/flow/commit/4a4dbfeee23546c9f3879ddd4a45ba99e1e77ba3))
+* **templates:** let an App Shell fill the viewport on its own page ([323c7a5](https://github.com/mittwald/flow/commit/323c7a5dfa9eccc472436884427db65bd88e64ba))
+* **templates:** let Flow supply what the App Shells hand-rolled ([ac1aba9](https://github.com/mittwald/flow/commit/ac1aba9f30ea20003574b3b1439f047c5893afbf))
+* **templates:** make App Shell Verwendung and Aufbau generic ([fd3d711](https://github.com/mittwald/flow/commit/fd3d7115257307be42474a417e387dc275bdfb4b))
+* **templates:** move the App Shell menu actions above the navigation ([c5bf6c6](https://github.com/mittwald/flow/commit/c5bf6c60d15d7146dfdac1db8b5b6e5641b66dac))
+* **templates:** open an App Shell in a new tab instead of a LightBox ([a2baf8c](https://github.com/mittwald/flow/commit/a2baf8cc9ed286ec93a60b31a59a1d0b40dc1689))
+* **templates:** pair the address and webmailer values in a ColumnLayout ([4ee3cf4](https://github.com/mittwald/flow/commit/4ee3cf4e8a9807b39dd7602b1283235a15d3b1e3))
+* **templates:** put the logo back per example, drop the invoice generator ([dba829b](https://github.com/mittwald/flow/commit/dba829be71ce7b2f6ba6116c0d4391658ada035e))
+* **templates:** rebuild the Simple App sidebar variant ([139fdae](https://github.com/mittwald/flow/commit/139fdaee0d17479b29cc54eb7405a4a6f6acdbee))
+* **templates:** retire the Dashboard pattern page ([8b1d0ab](https://github.com/mittwald/flow/commit/8b1d0ab0708b8aa9ba074d68af76ba331d7e613a))
+* **templates:** review round — preview border, modal sections, message spacing ([6d56fd0](https://github.com/mittwald/flow/commit/6d56fd094fe738ec32ebd942746231db420012cd))
+* **templates:** rework the Formular example layout and order it first in Bausteine ([17774a0](https://github.com/mittwald/flow/commit/17774a06cb2d478958240eb6b676ec0b1d20eaaa))
+* **templates:** rework the multi-step overlay example as a DNS record wizard ([cd66beb](https://github.com/mittwald/flow/commit/cd66beb725e0eb041507c8e914fb847b206c3a3f))
+* **templates:** sharpen the FieldDescription guidance in the Formular baustein ([e1a4778](https://github.com/mittwald/flow/commit/e1a4778e7b7be1061c6feb2254304cd9ad0663b7))
+* **templates:** show the second overlay on the multi-step page ([d6bfd25](https://github.com/mittwald/flow/commit/d6bfd25bb3e766b67cc6facf44c9b62b35072bd8))
+* **templates:** trim redundant field helptext and show the storage unit in the field ([ca18539](https://github.com/mittwald/flow/commit/ca1853909ec3c67d9abc9578469611581cafd695))
+* **templates:** use a Checkbox for the form&#x27;s spam protection ([d0fe0bb](https://github.com/mittwald/flow/commit/d0fe0bb04034075bb3277c6d25c29598a87e4722))
+* use ColumnLayout for the Simple App sidebar cards ([bab58dd](https://github.com/mittwald/flow/commit/bab58dd4808c0442ba3ebf218de920d313f68065))
+
+### Miscellaneous Chores
+
+* exclude .scratch from the format gate ([a1a843e](https://github.com/mittwald/flow/commit/a1a843e33d359d51a6b5739364b9d04148fa7236)), closes [#2857](https://github.com/mittwald/flow/issues/2857)
+
+### Code Refactoring
+
+* **docs:** recast Template pages as build guides ([bdb8eb4](https://github.com/mittwald/flow/commit/bdb8eb4d4abe5e145346e0543844b4492469be11))
+* **docs:** rework the Overlays entries after review ([51cbfed](https://github.com/mittwald/flow/commit/51cbfed568a04597724b4c35ef2796c2d3682b42)), closes [#2857](https://github.com/mittwald/flow/issues/2857)
+* **docs:** tighten Aufbau sections after review ([9bc8b93](https://github.com/mittwald/flow/commit/9bc8b9310408b56d9b051220fcb6685093d345a8))
+* **docs:** unify Template terminology and voice ([8bd174b](https://github.com/mittwald/flow/commit/8bd174b39bbc108b538f0992a57b5d24947b41b1))
+
+### Tests
+
+* cover the untested pure lib functions ([#3242](https://github.com/mittwald/flow/issues/3242)) ([d01f4eb](https://github.com/mittwald/flow/commit/d01f4eb0bda2316768a55a7475aabaa022e03607))
+* **docs:** type-check the app in CI ([b13e30c](https://github.com/mittwald/flow/commit/b13e30c1e49b4296aac38675f4a0535f02aa6c94))
+
 ## [1.2.16](https://github.com/mittwald/flow/compare/1.2.15...1.2.16) (2026-09-24)
 
 ### Bug Fixes
