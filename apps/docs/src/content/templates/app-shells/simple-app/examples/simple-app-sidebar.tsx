@@ -214,7 +214,7 @@ export default () => {
 
   return (
     <Flex direction="column" gap="l" className={styles.app}>
-      <Flex gap="l" align="stretch" className={styles.body}>
+      <div className={styles.body}>
         <LayoutCard className={styles.sidebar}>
           <span
             className={styles.logo}
@@ -345,7 +345,7 @@ export default () => {
             </Section>
           </LayoutCard>
         </Flex>
-      </Flex>
+      </div>
 
       <Flex
         elementType="footer"
