@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.17](https://github.com/mittwald/flow/compare/1.3.0-next.16...1.3.0-next.17) (2026-09-24)
+
+## [1.2.15](https://github.com/mittwald/flow/compare/1.2.14...1.2.15) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.15 ([bbe32d7](https://github.com/mittwald/flow/commit/bbe32d7352d9dfcb9549c1eeb29848016c410643))
+
+## [1.2.14](https://github.com/mittwald/flow/compare/1.2.13...1.2.14) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 7 updates ([3463327](https://github.com/mittwald/flow/commit/34633272f000e1a3d7b266be12852cf33863036d))
+* **release:** bump version to 1.2.14 ([3ad110f](https://github.com/mittwald/flow/commit/3ad110f7a1234ecb427d4eac75f1955f99884e6e))
+
+## [1.2.13](https://github.com/mittwald/flow/compare/1.3.0-next.15...1.2.13) (2026-09-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.13 ([110a4ea](https://github.com/mittwald/flow/commit/110a4ea3aef251502293d9522191d7ec0e4ceefd))
+
 ## [1.3.0-next.16](https://github.com/mittwald/flow/compare/1.3.0-next.15...1.3.0-next.16) (2026-09-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
