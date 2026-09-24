@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { ListViewMode as ListViewModeState } from "@mittwald/flow-components-base";
+import { useStatic } from "@/lib/hooks/useStatic";
+import useSelector from "@/lib/mobx/useSelector";
 import type { ListViewMode as RawListViewMode } from "./types";
 import type { List } from "./List";
 
@@ -7,49 +9,50 @@ interface Options {
   autosave?: boolean;
 }
 
-export class ListViewMode<T = unknown> {
-  public readonly list: List<T>;
-  public readonly autosave: boolean;
-  private readonly state: [
-    RawListViewMode,
-    React.Dispatch<React.SetStateAction<RawListViewMode>>,
-  ];
+/**
+ * React's view of the list's layout mode.
+ *
+ * The mode itself — the stored value winning over the default, the write-back —
+ * is `ListViewMode` in `@mittwald/flow-components-base`. What is left here is
+ * the subscription, and the fact that the model outlives a render: a view mode
+ * rebuilt every render would forget what the user picked. The list, its
+ * settings store and `autosave` are taken from the current render, as they were
+ * when this class was rebuilt with the list.
+ */
+export class ListViewMode<T = unknown> extends ListViewModeState {
+  private currentList: List<T>;
 
-  public constructor(list: List<T>, options: Options = {}) {
-    const {
-      defaultViewMode,
-      autosave = list.settingsStorageDefaults?.viewMode?.autosave ?? true,
-    } = options;
-
-    this.list = list;
-    this.autosave = autosave;
-    this.state = useState(
-      this.list.settingsStorage?.get("viewMode", { autosave: this.autosave }) ??
-        defaultViewMode ??
-        "list",
-    );
-  }
-
-  public get value() {
-    return this.state[0];
-  }
-
-  public get isTiles() {
-    return this.value === "tiles";
-  }
-
-  public get isTable() {
-    return this.value === "table";
-  }
-
-  public get isList() {
-    return this.value === "list";
-  }
-
-  public set(viewMode: RawListViewMode): void {
-    this.state[1](viewMode);
-    this.list.settingsStorage?.store("viewMode", viewMode, {
-      autosave: this.autosave,
+  private constructor(list: List<T>, options: Options) {
+    super({
+      defaultValue: options.defaultViewMode,
+      ...ListViewMode.storageOf(list, options),
     });
+    this.currentList = list;
+  }
+
+  public get list(): List<T> {
+    return this.currentList;
+  }
+
+  private static storageOf<T>(list: List<T>, options: Options) {
+    return {
+      autosave:
+        options.autosave ?? list.settingsStorageDefaults?.viewMode?.autosave,
+      settings: list.settingsStorage,
+    };
+  }
+
+  public static useNew<T>(
+    list: List<T>,
+    options: Options = {},
+  ): ListViewMode<T> {
+    const viewMode = useStatic(() => new ListViewMode<T>(list, options));
+    viewMode.currentList = list;
+    viewMode.updateStorage(ListViewMode.storageOf(list, options));
+
+    /* `set()` mutates an observable — without this nothing re-renders. */
+    useSelector(() => viewMode.value);
+
+    return viewMode;
   }
 }

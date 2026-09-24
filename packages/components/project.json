@@ -5,6 +5,7 @@
     "components-src": [
       "default",
       "!{projectRoot}/MIGRATION.md",
+      "{workspaceRoot}/packages/components-base/src/**/*",
       "{workspaceRoot}/packages/core/src/**/*",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
