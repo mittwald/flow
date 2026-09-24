@@ -11,6 +11,7 @@
   "include": [
     "${configDir}/vite*.ts",
     "${configDir}/e2e/**/*.ts",
+    "${configDir}/e2e/**/*.tsx",
     "${configDir}/dev/**/*.ts"
   ]
 }
