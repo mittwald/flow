@@ -45,7 +45,9 @@ const renderAndRead = async (
   }
 
   const host = mountHost();
-  binding.mount(tree, host.remote, createSerializedReceiver(host.receiver));
+  host.adoptRemote(
+    binding.mount(tree, host.remote, createSerializedReceiver(host.receiver)),
+  );
   await waitForHost();
   await scenario.interact?.();
   await setNeutralPointerPosition();

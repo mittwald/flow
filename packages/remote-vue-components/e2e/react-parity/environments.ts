@@ -49,10 +49,17 @@ interface Mounted {
   unmount: () => void;
 }
 
+interface MountedHost {
+  receiver: RemoteReceiver;
+  remote: HTMLDivElement;
+  /** Hands over what unmounts the remote app, so the teardown takes it down. */
+  adoptRemote: (unmount: () => void) => void;
+}
+
 let mounted: Mounted | undefined;
 
 /** The host half: a React renderer fed by a receiver, as mStudio runs it. */
-const mountHost = (): { receiver: RemoteReceiver; remote: HTMLDivElement } => {
+const mountHost = (): MountedHost => {
   mounted?.unmount();
 
   const host = document.createElement("div");
@@ -74,13 +81,19 @@ const mountHost = (): { receiver: RemoteReceiver; remote: HTMLDivElement } => {
     ),
   );
 
+  let unmountRemote: (() => void) | undefined;
+
   /*
-   * The remote half is torn down by removing its container: both roots live
-   * only for one scenario, and the next one mounts its own pair.
+   * Both halves live for one scenario, and the next one mounts its own pair.
+   * The remote app goes first: removing its container alone left it running —
+   * its observers, timers and connection — and with `isolate: false` every
+   * scenario's app piled up in the one iframe the run shares, which is the
+   * WebKit failure mode of #3119.
    */
   mounted = {
     host,
     unmount: () => {
+      unmountRemote?.();
       reactRoot.unmount();
       host.remove();
       remote.remove();
@@ -88,22 +101,30 @@ const mountHost = (): { receiver: RemoteReceiver; remote: HTMLDivElement } => {
     },
   };
 
-  return { receiver, remote };
+  return {
+    receiver,
+    remote,
+    adoptRemote: (unmount) => {
+      unmountRemote = unmount;
+    },
+  };
 };
 
 const renderReference = (ui: ReactElement): void => {
-  const { receiver, remote } = mountHost();
-  createRoot(remote).render(
+  const { receiver, remote, adoptRemote } = mountHost();
+  const root = createRoot(remote);
+  root.render(
     createElement(
       ReactRemoteRoot,
       { __remoteReceiver: createSerializedReceiver(receiver) },
       createElement(ReactComponents.NotificationProvider, null, ui),
     ),
   );
+  adoptRemote(() => root.unmount());
 };
 
 const renderVue = (ui: ReactElement): void => {
-  const { receiver, remote } = mountHost();
+  const { receiver, remote, adoptRemote } = mountHost();
 
   /*
    * Converted once before mounting, only to let the conversion fail out here.
@@ -123,6 +144,7 @@ const renderVue = (ui: ReactElement): void => {
       ),
   });
   app.mount(remote);
+  adoptRemote(() => app.unmount());
 };
 
 /*

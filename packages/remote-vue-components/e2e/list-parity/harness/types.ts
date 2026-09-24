@@ -16,13 +16,13 @@ export interface ParityBinding {
   readonly name: string;
   /**
    * Mounts a remote app that renders `tree` into `container`, talking to the
-   * host through `receiver`.
+   * host through `receiver`, and returns what unmounts it again.
    */
   readonly mount: (
     tree: unknown,
     container: HTMLElement,
     receiver: unknown,
-  ) => void;
+  ) => () => void;
 }
 
 /**
