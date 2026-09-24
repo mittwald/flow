@@ -27,6 +27,8 @@ const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   propertyValue,
 ) => filterValue === propertyValue;
 
+const selectAllMinValueCount = 10;
+
 const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);
 
@@ -334,6 +336,27 @@ export class Filter<
       .getTableColumn(this.property)
       .setFilterValue(updatedValue);
     this.callOnChangedHandlers(updatedValue);
+  }
+
+  public get isSelectAllAvailable(): boolean {
+    return this.mode === "some" && this.values.length >= selectAllMinValueCount;
+  }
+
+  public isEveryValueActive(): boolean {
+    return this.values.every((v) => v.isActive);
+  }
+
+  public selectAll(): void {
+    this.setArrayValue(this.values);
+  }
+
+  public deselectAll(): void {
+    this.setArrayValue([]);
+  }
+
+  private setArrayValue(value: FilterValue[]): void {
+    this.list.reactTable.getTableColumn(this.property).setFilterValue(value);
+    this.callOnChangedHandlers(value);
   }
 
   public onFilterUpdated(cb: () => unknown): void {

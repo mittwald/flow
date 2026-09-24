@@ -7,6 +7,10 @@ import { FilterMenuItem } from "@/components/List/components/Header/components/F
 import styles from "@/components/List/components/Header/Header.module.scss";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
+import {
+  FilterSelectAllMenuItem,
+  filterSelectAllMenuItemId,
+} from "@/components/List/components/Header/components/FilterContextMenu/FilterSelectAllMenuItem";
 
 interface Props {
   filter: Filter;
@@ -24,7 +28,15 @@ export const FilterContextMenu: FC<Props> = (props) => {
     <FilterMenuItem filterValue={v} key={v.id} selectionMode={selectionMode} />
   ));
 
+  const selectAllItem = filter.isSelectAllAvailable && (
+    <FilterSelectAllMenuItem filter={filter} />
+  );
+
   const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
+
+  if (selectAllItem && filter.isEveryValueActive()) {
+    activeFilterKeys.push(filterSelectAllMenuItemId);
+  }
 
   return (
     <ContextMenuTriggerView>
@@ -41,6 +53,7 @@ export const FilterContextMenu: FC<Props> = (props) => {
         selectionMode={selectionMode}
         selectedKeys={activeFilterKeys}
       >
+        {selectAllItem}
         {filterItems}
       </ContextMenuView>
     </ContextMenuTriggerView>

@@ -5,6 +5,7 @@
   "filters.clear": "Clear filters",
   "filters.clearSelection": "Clear selection",
   "filters.reset": "Reset filters",
+  "filters.selectAll": "All",
   "filters.store": "Store filters",
   "loadingMore": "Loading more items",
   "noItems.heading": "No items available",

@@ -9,6 +9,8 @@ import type { ListProps } from "@mittwald/flow-react-components";
 const listComparableFrom = "0.2.0-alpha.883";
 // A Combine inside a Text only stays in the line from 1.2.2.
 const combinedSubTitleFrom = "1.2.2";
+// The "All" option of multiple-choice filters exists from 1.2.16.
+const filterSelectAllFrom = "1.2.16";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
@@ -781,5 +783,64 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List item heading button");
+  },
+);
+
+test
+  .skipIf(crossVersion({ below: filterSelectAllFrom }))
+  .each(testEnvironments)(
+  "List filter with select all option (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { typedList, ListItemView, Heading },
+  }) => {
+    const planets = [
+      "Alderaan",
+      "Bespin",
+      "Coruscant",
+      "Dagobah",
+      "Endor",
+      "Hoth",
+      "Jakku",
+      "Kashyyyk",
+      "Naboo",
+      "Tatooine",
+    ];
+
+    function Wrapper() {
+      const List = typedList<{ id: string; planet: string }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={planets.map((planet) => ({ id: planet, planet }))}
+          />
+          <List.Filter property="planet" name="Planet" />
+          <List.Filter property="id" name="Planet ID" priority="secondary" />
+          <List.Item textValue={(i) => i.planet}>
+            {(i) => (
+              <ListItemView>
+                <Heading>{i.planet}</Heading>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await page.getByRole("button", { name: "Planet", exact: true }).click();
+    await page.getByRole("menuitemcheckbox", { name: "Hoth" }).click();
+    await testScreenshot("List filter select all - partially selected");
+
+    await page.getByRole("menuitemcheckbox", { name: "All" }).click();
+    await testScreenshot("List filter select all - all selected");
+
+    await userEvent.keyboard("{Escape}");
+    await page.getByRole("button", { name: "All filters" }).first().click();
+    await page.getByText("Hoth", { exact: true }).last().click();
+    await testScreenshot("List filter select all - all filters modal");
   },
 );
