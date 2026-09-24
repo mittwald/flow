@@ -184,5 +184,6 @@ npx @mittwald/flow-codemods@latest to-remote-package src
 
 `0` on success, `1` on a refusal — dirty tree, unresolvable revision, failed
 install, an unknown id, or an id whose migration has no codemod — and `1` when a
-codemod reports an error, is declined for every file it looked at, or found
-nothing under `path` to process.
+codemod reports an error, found nothing under `path` to process, or declined
+every file it looked at. "Every" means every: a decline among files the
+transform did read is a per-file fact, not a failed run.
