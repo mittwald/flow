@@ -27,25 +27,26 @@ description:
 Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`,
 `<Line />`, `<Bar />` oder eine Kombination daraus verwendet werden.
 
-Die Darstellungstypen bauen auf [Recharts](https://recharts.github.io) auf und
-reichen viele Properties unverändert durch. Deren Verhalten beschreibt die
-Recharts-Dokumentation, verlinkt beim jeweiligen Typ. Nicht jede
-Recharts-Property ist verfügbar: Farben, Linienstärke und Punkte setzt Flow
-selbst.
+Unter der Haube arbeitet [Recharts](https://recharts.github.io). Flow hat
+einiges daran angepasst: Farben, Linienstärke und Punkte folgen dem Flow-Design,
+Tooltip und Legende sind eigene Flow-Komponenten, und die Properties sind auf
+das Wesentliche reduziert. Die vorhandenen Properties verhalten sich wie in
+Recharts. Details dazu findest du in der Recharts-Dokumentation, die bei jedem
+Darstellungstyp verlinkt ist.
 
 ## Line
 
 Zeigt die Entwicklung einzelner Objekte über einen Zeitraum und ermöglicht den
-Vergleich zwischen ihnen. Durchgereicht werden etwa `type` und `unit`, siehe
-[Line in Recharts](https://recharts.github.io/en-US/api/Line/).
+Vergleich zwischen ihnen. Properties wie `type` und `unit` entsprechen denen von
+Recharts, siehe [Line in Recharts](https://recharts.github.io/en-US/api/Line/).
 
 <LiveCodeEditor example="line" editorCollapsed />
 
 ## Area
 
 Zeigt die Entwicklung des Gesamtwerts über einen Zeitraum und den jeweiligen
-Anteil einzelner Objekte daran. Durchgereicht werden etwa `type`, `stackId` und
-`fillOpacity`, siehe
+Anteil einzelner Objekte daran. Properties wie `type`, `stackId` und
+`fillOpacity` entsprechen denen von Recharts, siehe
 [Area in Recharts](https://recharts.github.io/en-US/api/Area/).
 
 <LiveCodeEditor example="area" editorCollapsed />
@@ -53,8 +54,8 @@ Anteil einzelner Objekte daran. Durchgereicht werden etwa `type`, `stackId` und
 ## Bar
 
 Vergleicht Werte einzelner Kategorien miteinander. Ohne `stackId` stehen die
-Balken einer Kategorie nebeneinander. Durchgereicht werden etwa `barSize`,
-`maxBarSize` und `minPointSize`, siehe
+Balken einer Kategorie nebeneinander. Properties wie `barSize`, `maxBarSize` und
+`minPointSize` entsprechen denen von Recharts, siehe
 [Bar in Recharts](https://recharts.github.io/en-US/api/Bar/).
 
 <LiveCodeEditor example="bar" editorCollapsed />
