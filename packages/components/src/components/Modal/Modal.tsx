@@ -167,21 +167,27 @@ export const Modal = flowComponent("Modal", (props) => {
           };
         }),
         closeOverlay: dynamic((props) => {
-          if (props.closeOverlay === undefined) {
-            return;
+          const { closeOverlay } = props;
+          if (closeOverlay === undefined || closeOverlay === false) {
+            return closeOverlay;
+          }
+          // `true` keeps its "the nearest overlay" meaning by leaving `overlay`
+          // unset – the options object means the same thing.
+          if (closeOverlay === true) {
+            return { bypassConfirmation: true };
           }
           if (
-            props.closeOverlay instanceof OverlayController ||
-            typeof props.closeOverlay === "string"
+            closeOverlay instanceof OverlayController ||
+            typeof closeOverlay === "string"
           ) {
             return {
               bypassConfirmation: true,
-              overlay: props.closeOverlay,
+              overlay: closeOverlay,
             };
           }
           return {
             bypassConfirmation: true,
-            ...props.closeOverlay,
+            ...closeOverlay,
           };
         }),
       },
