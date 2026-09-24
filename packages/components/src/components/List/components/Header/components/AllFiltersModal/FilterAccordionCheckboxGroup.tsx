@@ -4,8 +4,7 @@ import CheckboxView from "@/views/CheckboxView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-
-const selectAllCheckboxValue = "FilterSelectAll";
+import styles from "../FilterContextMenu/FilterSelectAll.module.scss";
 
 interface Props {
   filter: Filter;
@@ -23,9 +22,10 @@ export const FilterAccordionCheckboxGroup: FC<Props> = (props) => {
 
   const selectAllCheckbox = filter.isSelectAllAvailable && (
     <CheckboxView
-      value={selectAllCheckboxValue}
+      className={styles.selectAllCheckbox}
+      isSelected={isEveryValueActive}
       isIndeterminate={filter.isActive() && !isEveryValueActive}
-      onPress={() =>
+      onChange={() =>
         isEveryValueActive ? filter.deselectAll() : filter.selectAll()
       }
     >
@@ -35,18 +35,16 @@ export const FilterAccordionCheckboxGroup: FC<Props> = (props) => {
     </CheckboxView>
   );
 
-  if (selectAllCheckbox && isEveryValueActive) {
-    activeKeys.push(selectAllCheckboxValue);
-  }
-
   return (
-    <CheckboxGroupView value={activeKeys} m={[1, 1]} aria-label={name}>
+    <>
       {selectAllCheckbox}
-      {filter.values.map((v) => (
-        <CheckboxView key={v.id} value={v.id} onPress={() => v.toggle()}>
-          {v.render()}
-        </CheckboxView>
-      ))}
-    </CheckboxGroupView>
+      <CheckboxGroupView value={activeKeys} m={[1, 1]} aria-label={name}>
+        {filter.values.map((v) => (
+          <CheckboxView key={v.id} value={v.id} onPress={() => v.toggle()}>
+            {v.render()}
+          </CheckboxView>
+        ))}
+      </CheckboxGroupView>
+    </>
   );
 };

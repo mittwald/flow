@@ -1,0 +1,8 @@
+.selectAll {
+  margin-block-end: var(--size-px--s);
+}
+
+/* Outside the checkbox grid, so it adds the grid's row gap itself */
+.selectAllCheckbox {
+  margin-block-end: calc(var(--column-layout--gap--s) + var(--size-px--s));
+}
