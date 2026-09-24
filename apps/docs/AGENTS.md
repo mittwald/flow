@@ -58,6 +58,19 @@ Next.js documentation site for the flow Styleguide, deployed to
   execute the other's files, so the `.node` infix is what keeps the globs
   disjoint — same role as `*.browser.test.tsx` in `components`. Write a new
   `node:test` file with the infix, or both targets break at once.
+- **`pnpm nx test:compile docs` type-checks the app** (`tsc --noEmit`) and runs
+  in CI via `affected:test`. It depends on `^build`, `build:imports` and
+  `build:scss-types`, so it sees freshly built workspace packages, the generated
+  `dynamicImports.ts` and fresh CSS-module stubs. `build:imports` therefore has
+  to declare its output — its result is gitignored, so on a cache hit nx only
+  restores it if it is listed in `outputs`, and `getDynamicComponent.ts` fails
+  as TS2307 otherwise.
+- **`types.d.ts` carries Next's ambient types** next to the MDX globals
+  (`LiveCodeEditor`, `Do`, `Dont`, …), via `/// <reference types="next" />` and
+  `/// <reference types="next/image-types/global" />`. Next writes the same two
+  directives to `next-env.d.ts`, but that file is generated and gitignored, so
+  it is absent in a fresh CI checkout — without the committed stand-in every
+  `.png`/`.webp` import in `src/app/page.tsx` fails as TS2307.
 - **Next 16 differs from what a model was trained on** — APIs, conventions and
   file structure moved. Read the relevant guide in
   `node_modules/next/dist/docs/` (resolved from this directory; in this monorepo
