@@ -9,8 +9,8 @@ import type { ListProps } from "@mittwald/flow-react-components";
 const listComparableFrom = "0.2.0-alpha.883";
 // A Combine inside a Text only stays in the line from 1.2.2.
 const combinedSubTitleFrom = "1.2.2";
-// The "Select all" option of multiple-choice filters exists from 1.2.16.
-const filterSelectAllFrom = "1.2.16";
+// The "Select all" option of multiple-choice filters exists from 1.3.0-next.18.
+const filterSelectAllFrom = "1.3.0-next.18";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
