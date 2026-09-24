@@ -159,19 +159,37 @@ export default tseslint.config(
   },
   {
     /*
-     * Vue JSX, not React's. The demo app's Vue apps compile against their own
-     * runtime (`_lib/jsx-runtime.ts`), so React's JSX rules do not apply: Vue
-     * keys a static array of children by position, and a key there says
-     * nothing. Its JSX namespace also has to be a namespace, which is the
-     * one shape TypeScript accepts.
+     * The Vue demos' JSX namespace (`_lib/jsx-runtime.ts`) has to be a
+     * namespace — the one shape TypeScript accepts for `@jsxImportSource` — and
+     * mirrors Vue's own, empty interfaces and index signature included.
      */
-    files: ["apps/remote-dom-demo/src/app/remote-vue/**"],
+    files: ["apps/remote-dom-demo/src/app/remote-vue/_lib/jsx-*runtime.ts"],
     rules: {
-      "react/jsx-key": "off",
-      "react/no-unknown-property": "off",
       "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/consistent-indexed-object-style": "off",
+    },
+  },
+  {
+    /*
+     * Vue demos that hand a slot a static array of children
+     * (`default: () => [<A />, <B />]`), the Vue JSX idiom for a slot with
+     * several children. Vue matches those by position, so a key there says
+     * nothing. `react/jsx-key` has no option to tell such an array from an
+     * iterator's output, which Vue does need keyed — so it is off per file,
+     * and every other Vue demo keeps the check on `.map()` and `Array.from`.
+     */
+    files: [
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/chart.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/imageCropper.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/list.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/listSelection.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/modal.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/navigation.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/tunnel.tsx",
+    ],
+    rules: {
+      "react/jsx-key": "off",
     },
   },
   {
