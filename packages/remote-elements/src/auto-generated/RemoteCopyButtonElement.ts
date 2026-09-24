@@ -70,6 +70,7 @@ export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonE
       clickCapture: {},
       contextMenu: {},
       contextMenuCapture: {},
+      copy: {},
       doubleClick: {},
       doubleClickCapture: {},
       focus: {},
