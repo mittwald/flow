@@ -28,7 +28,10 @@
         "build:status-registry",
         "^build"
       ],
-      "inputs": ["components-src"]
+      "inputs": [
+        "components-src",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+      ]
     },
     "build:component-index": {
       "cache": true,
