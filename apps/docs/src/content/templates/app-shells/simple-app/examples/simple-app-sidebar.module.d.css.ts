@@ -1,4 +1,5 @@
 declare const classNames: {
+  readonly shell: "shell";
   readonly app: "app";
   readonly logo: "logo";
   readonly body: "body";

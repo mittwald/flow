@@ -1,3 +1,9 @@
+/* The container the page-scroll switch below is measured against. */
+.shell {
+  container-type: inline-size;
+  height: 100%;
+}
+
 .app {
   /* Fixed to the viewport height (container-relative here; use 100dvh in a real
      full-page app) so the cards below can fill it and scroll their own content
@@ -84,14 +90,14 @@
 }
 
 /*
- * On narrow screens the page scrolls as a whole rather than each card scrolling
- * on its own inside a fixed height.
+ * Once the column layout stacks the cards (its content box at or below 850px,
+ * i.e. 850px plus the xl side padding), the page scrolls as a whole rather than
+ * each card scrolling on its own inside a fixed height.
  */
-@media (max-width: 768px) {
+@container (max-width: 914px) {
   .app {
     height: auto;
     overflow: visible;
-    padding-inline: var(--size-px--m);
   }
 
   .sidebar {
@@ -106,5 +112,11 @@
     flex: none;
     min-height: auto;
     overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding-inline: var(--size-px--m);
   }
 }

@@ -168,206 +168,172 @@ const invoices: Invoice[] = [
     amount: "871,00 €",
     status: "Überfällig",
   },
-  {
-    number: "RE-2026-0163",
-    customer: "KD-0553",
-    createdAt: "2026-09-15",
-    date: "15.09.2026",
-    amount: "950,00 €",
-    status: "Offen",
-  },
-  {
-    number: "RE-2026-0164",
-    customer: "KD-1042",
-    createdAt: "2026-09-14",
-    date: "14.09.2026",
-    amount: "1.555,00 €",
-    status: "Offen",
-  },
-  {
-    number: "RE-2026-0165",
-    customer: "KD-1042",
-    createdAt: "2026-09-13",
-    date: "13.09.2026",
-    amount: "2.490,00 €",
-    status: "Bezahlt",
-  },
-  {
-    number: "RE-2026-0166",
-    customer: "KD-1298",
-    createdAt: "2026-09-12",
-    date: "12.09.2026",
-    amount: "2.259,00 €",
-    status: "Offen",
-  },
-  {
-    number: "RE-2026-0167",
-    customer: "KD-1120",
-    createdAt: "2026-09-11",
-    date: "11.09.2026",
-    amount: "545,00 €",
-    status: "Überfällig",
-  },
 ];
 
 export default () => {
   const InvoiceList = typedList<Invoice>();
 
   return (
-    <Flex direction="column" gap="l" className={styles.app}>
-      <ColumnLayout
-        l={[1, 3]}
-        m={[1, 2]}
+    <div className={styles.shell}>
+      <Flex
+        direction="column"
         gap="l"
-        className={styles.body}
+        className={styles.app}
       >
-        <LayoutCard className={styles.sidebar}>
-          <span
-            className={styles.logo}
-            role="img"
-            aria-label="mittwald"
-          />
-          <AreaNavigation />
+        <ColumnLayout
+          l={[1, 3]}
+          m={[1]}
+          gap="l"
+          className={styles.body}
+        >
+          <LayoutCard className={styles.sidebar}>
+            <span
+              className={styles.logo}
+              role="img"
+              aria-label="mittwald"
+            />
+            <AreaNavigation />
+            <Flex
+              direction="column"
+              gap="m"
+              className={styles.sidebarBottom}
+            >
+              <AdminNavigation />
+              {/* The current user sits at the very bottom of the sidebar. */}
+              <Flex
+                align="center"
+                justify="space-between"
+                gap="s"
+              >
+                <Combine>
+                  <Avatar>
+                    <Initials>Max Mustermann</Initials>
+                  </Avatar>
+                  <Text>Max Mustermann</Text>
+                </Combine>
+                <Button
+                  variant="plain"
+                  color="secondary"
+                  aria-label="Abmelden"
+                >
+                  <IconLogout />
+                </Button>
+              </Flex>
+            </Flex>
+          </LayoutCard>
+
           <Flex
+            elementType="main"
             direction="column"
             gap="m"
-            className={styles.sidebarBottom}
+            className={styles.main}
           >
-            <AdminNavigation />
-            {/* The current user sits at the very bottom of the sidebar. */}
-            <Flex
-              align="center"
-              justify="space-between"
-              gap="s"
+            {/* The active area is already named in the navigation, so the page
+            heading is only exposed to assistive technology. */}
+            <Heading
+              level={1}
+              className={styles.visuallyHidden}
             >
-              <Combine>
-                <Avatar>
-                  <Initials>Max Mustermann</Initials>
-                </Avatar>
-                <Text>Max Mustermann</Text>
-              </Combine>
-              <Button
-                variant="plain"
-                color="secondary"
-                aria-label="Abmelden"
-              >
-                <IconLogout />
-              </Button>
-            </Flex>
+              Rechnungen
+            </Heading>
+
+            <LayoutCard className={styles.contentCard}>
+              <Section>
+                <InvoiceList.List
+                  aria-label="Rechnungen"
+                  defaultViewMode="table"
+                  batchSize={20}
+                  getItemId={(invoice) => invoice.number}
+                >
+                  <InvoiceList.StaticData data={invoices} />
+                  <InvoiceList.Search />
+                  <InvoiceList.Filter
+                    property="status"
+                    mode="some"
+                    name="Status"
+                  />
+                  <InvoiceList.Sorting
+                    property="createdAt"
+                    name="Erstelldatum"
+                    direction="desc"
+                    directionName="absteigend"
+                    defaultEnabled
+                  />
+                  <InvoiceList.Sorting
+                    property="createdAt"
+                    name="Erstelldatum"
+                    direction="asc"
+                    directionName="aufsteigend"
+                  />
+                  <InvoiceList.Table>
+                    <InvoiceList.TableHeader>
+                      <InvoiceList.TableColumn>
+                        Rechnungsnummer
+                      </InvoiceList.TableColumn>
+                      <InvoiceList.TableColumn>
+                        Kundennummer
+                      </InvoiceList.TableColumn>
+                      <InvoiceList.TableColumn>
+                        Ausstellungsdatum
+                      </InvoiceList.TableColumn>
+                      <InvoiceList.TableColumn>
+                        Betrag
+                      </InvoiceList.TableColumn>
+                      <InvoiceList.TableColumn>
+                        Status
+                      </InvoiceList.TableColumn>
+                    </InvoiceList.TableHeader>
+
+                    <InvoiceList.TableBody>
+                      <InvoiceList.TableRow>
+                        <InvoiceList.TableCell>
+                          {(invoice) => invoice.number}
+                        </InvoiceList.TableCell>
+                        <InvoiceList.TableCell>
+                          {(invoice) => invoice.customer}
+                        </InvoiceList.TableCell>
+                        <InvoiceList.TableCell>
+                          {(invoice) => invoice.date}
+                        </InvoiceList.TableCell>
+                        <InvoiceList.TableCell>
+                          {(invoice) => invoice.amount}
+                        </InvoiceList.TableCell>
+                        <InvoiceList.TableCell>
+                          {(invoice) => (
+                            <Badge
+                              color={
+                                statusColor[invoice.status]
+                              }
+                            >
+                              {invoice.status}
+                            </Badge>
+                          )}
+                        </InvoiceList.TableCell>
+                      </InvoiceList.TableRow>
+                    </InvoiceList.TableBody>
+                  </InvoiceList.Table>
+                </InvoiceList.List>
+              </Section>
+            </LayoutCard>
           </Flex>
-        </LayoutCard>
+        </ColumnLayout>
 
         <Flex
-          elementType="main"
-          direction="column"
-          gap="m"
-          className={styles.main}
+          elementType="footer"
+          justify="center"
+          wrap="wrap"
+          gap="l"
+          className={styles.footer}
         >
-          {/* The active area is already named in the navigation, so the page
-            heading is only exposed to assistive technology. */}
-          <Heading
-            level={1}
-            className={styles.visuallyHidden}
-          >
-            Rechnungen
-          </Heading>
-
-          <LayoutCard className={styles.contentCard}>
-            <Section>
-              <InvoiceList.List
-                aria-label="Rechnungen"
-                defaultViewMode="table"
-                batchSize={20}
-                getItemId={(invoice) => invoice.number}
-              >
-                <InvoiceList.StaticData data={invoices} />
-                <InvoiceList.Search />
-                <InvoiceList.Filter
-                  property="status"
-                  mode="some"
-                  name="Status"
-                />
-                <InvoiceList.Sorting
-                  property="createdAt"
-                  name="Erstelldatum"
-                  direction="desc"
-                  directionName="absteigend"
-                  defaultEnabled
-                />
-                <InvoiceList.Sorting
-                  property="createdAt"
-                  name="Erstelldatum"
-                  direction="asc"
-                  directionName="aufsteigend"
-                />
-                <InvoiceList.Table>
-                  <InvoiceList.TableHeader>
-                    <InvoiceList.TableColumn>
-                      Rechnungsnummer
-                    </InvoiceList.TableColumn>
-                    <InvoiceList.TableColumn>
-                      Kundennummer
-                    </InvoiceList.TableColumn>
-                    <InvoiceList.TableColumn>
-                      Ausstellungsdatum
-                    </InvoiceList.TableColumn>
-                    <InvoiceList.TableColumn>
-                      Betrag
-                    </InvoiceList.TableColumn>
-                    <InvoiceList.TableColumn>
-                      Status
-                    </InvoiceList.TableColumn>
-                  </InvoiceList.TableHeader>
-
-                  <InvoiceList.TableBody>
-                    <InvoiceList.TableRow>
-                      <InvoiceList.TableCell>
-                        {(invoice) => invoice.number}
-                      </InvoiceList.TableCell>
-                      <InvoiceList.TableCell>
-                        {(invoice) => invoice.customer}
-                      </InvoiceList.TableCell>
-                      <InvoiceList.TableCell>
-                        {(invoice) => invoice.date}
-                      </InvoiceList.TableCell>
-                      <InvoiceList.TableCell>
-                        {(invoice) => invoice.amount}
-                      </InvoiceList.TableCell>
-                      <InvoiceList.TableCell>
-                        {(invoice) => (
-                          <Badge
-                            color={
-                              statusColor[invoice.status]
-                            }
-                          >
-                            {invoice.status}
-                          </Badge>
-                        )}
-                      </InvoiceList.TableCell>
-                    </InvoiceList.TableRow>
-                  </InvoiceList.TableBody>
-                </InvoiceList.Table>
-              </InvoiceList.List>
-            </Section>
-          </LayoutCard>
+          <Link href="#" target="_blank" color="dark">
+            Datenschutz
+          </Link>
+          <Link href="#" target="_blank" color="dark">
+            Impressum
+          </Link>
         </Flex>
-      </ColumnLayout>
-
-      <Flex
-        elementType="footer"
-        justify="center"
-        wrap="wrap"
-        gap="l"
-        className={styles.footer}
-      >
-        <Link href="#" target="_blank" color="dark">
-          Datenschutz
-        </Link>
-        <Link href="#" target="_blank" color="dark">
-          Impressum
-        </Link>
       </Flex>
-    </Flex>
+    </div>
   );
 };
 
