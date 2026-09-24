@@ -6,7 +6,8 @@
   "targets": {
     "build:imports": {
       "cache": true,
-      "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"]
+      "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"],
+      "outputs": ["{projectRoot}/src/lib/liveCode/dynamicImports.ts"]
     },
     "build:scss-types": {
       "cache": true,
@@ -20,6 +21,10 @@
         "{projectRoot}/src/**/*.module.d.scss.ts",
         "{projectRoot}/src/**/*.module.d.css.ts"
       ]
+    },
+    "test:compile": {
+      "cache": true,
+      "dependsOn": ["^build", "build:imports", "build:scss-types"]
     },
     "test:links": {
       "cache": true,
