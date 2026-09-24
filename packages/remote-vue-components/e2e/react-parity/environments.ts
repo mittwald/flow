@@ -178,6 +178,14 @@ const pendingMarkers = [
    * component.
    */
   "animationClipPath-recharts-",
+  /*
+   * CodeMirror matches brackets against its syntax tree, and parses the part
+   * outside the viewport in idle time. A truncated CodeBlock shows three lines,
+   * so its opening `{` reads as unmatched until the parse reaches the closing
+   * one — which on a loaded machine outlasts the sampling window in one pass
+   * and not the other.
+   */
+  "cm-nonmatchingBracket",
 ];
 
 const isSettled = (html: string): boolean =>
