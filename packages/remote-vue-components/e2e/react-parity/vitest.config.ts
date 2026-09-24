@@ -1,12 +1,31 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vitest/config";
+import { BaseSequencer, type TestSpecification } from "vitest/node";
 import { vitestBrowserTestConfig } from "../../../core/src/index.ts";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
 import viteConfig from "./vite.config.ts";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const reactPackage = path.resolve(here, "../../../remote-react-components");
+
+/*
+ * Files by path, in both passes. Vitest's own order comes from its cache —
+ * failures first, then the slowest — and the reference pass writes the very
+ * cache the comparison then reads, so the two ran the corpus in different
+ * orders. With one iframe for the whole run, what a file finds in the document
+ * (an overlay container an earlier modal created) then depends on which pass
+ * it is in.
+ */
+class FileOrderSequencer extends BaseSequencer {
+  public override async sort(
+    files: TestSpecification[],
+  ): Promise<TestSpecification[]> {
+    return [...files].sort((left, right) =>
+      left.moduleId.localeCompare(right.moduleId),
+    );
+  }
+}
 
 /*
  * The browser config is inherited from the shared one, so the reused tests run
@@ -40,6 +59,7 @@ export default mergeConfig(viteConfig, {
      */
     isolate: false,
     fileParallelism: false,
+    sequence: { sequencer: FileOrderSequencer },
     testTimeout: 60_000,
     browser: {
       ...vitestBrowserTestConfig.browser,
