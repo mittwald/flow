@@ -14,32 +14,58 @@ import { useIsActivityActive } from "@/components/Activity/context";
 const overlayContainerAttribute = "data-flow-overlays";
 
 /**
- * Moves the page content that follows the overlay container in front of it.
- *
- * The container itself never moves: moving a node blurs a focused field inside
- * it and resets every scroll container it contains to the top (#3268). Moving
- * the nodes appended after it instead keeps the container last at the cost of
- * those nodes' state — `moveBefore` preserves it where the browser supports
- * it.
- *
- * Nodes a browser extension appends (e.g. 1Password's inline menu) stay where
- * they are: they belong on top anyway. The same heuristic also spares custom
- * elements and shadow hosts the page itself appends, which then render above
- * open overlays.
+ * Nodes a browser extension appends (e.g. 1Password's inline menu) don't count
+ * as covering: they belong on top anyway, and moving the container for them
+ * blurs a focused field inside it (#3268). The same heuristic also spares
+ * custom elements and shadow hosts the page itself appends, which then render
+ * above open overlays.
  */
-const movePageContentBeforeContainer = (container: HTMLElement): void => {
-  const body = document.body;
-
-  for (let node = container.nextElementSibling; node;) {
-    const next = node.nextElementSibling;
+const isCoveredByPageContent = (container: HTMLElement): boolean => {
+  for (
+    let node = container.nextElementSibling;
+    node;
+    node = node.nextElementSibling
+  ) {
     if (!isBrowserExtensionNode(node)) {
-      if (typeof body.moveBefore === "function") {
-        body.moveBefore(node, container);
-      } else {
-        body.insertBefore(node, container);
-      }
+      return true;
     }
-    node = next;
+  }
+  return false;
+};
+
+/**
+ * Only the container moves, never the nodes appended after it: those are
+ * foreign, and moving them costs state we cannot restore (an iframe reloads).
+ * The container's own state we can. Moving a node blurs the focused element
+ * inside it and resets every scroll container inside to the top. `moveBefore`
+ * keeps the focus (and, in Chromium, the scroll positions); the rest is
+ * restored afterwards.
+ */
+const moveToEnd = (container: HTMLElement): void => {
+  const body = document.body;
+  const focused = document.activeElement;
+  const scrolled = Array.from(container.querySelectorAll<HTMLElement>("*"))
+    .filter((element) => element.scrollTop !== 0 || element.scrollLeft !== 0)
+    .map(
+      (element) => [element, element.scrollTop, element.scrollLeft] as const,
+    );
+
+  if (typeof body.moveBefore === "function") {
+    body.moveBefore(container, null);
+  } else {
+    body.append(container);
+  }
+
+  for (const [element, scrollTop, scrollLeft] of scrolled) {
+    element.scrollTop = scrollTop;
+    element.scrollLeft = scrollLeft;
+  }
+  if (
+    focused instanceof HTMLElement &&
+    container.contains(focused) &&
+    document.activeElement !== focused
+  ) {
+    focused.focus({ preventScroll: true });
   }
 };
 
@@ -71,7 +97,9 @@ const getOverlayContainer = (): HTMLElement | null => {
   );
 
   if (existingContainer) {
-    movePageContentBeforeContainer(existingContainer);
+    if (isCoveredByPageContent(existingContainer)) {
+      moveToEnd(existingContainer);
+    }
     return existingContainer;
   }
 

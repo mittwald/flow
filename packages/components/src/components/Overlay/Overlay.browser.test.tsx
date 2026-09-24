@@ -225,21 +225,42 @@ test("a scrolled Overlay keeps its scroll position when the page appends to body
   }
 });
 
-test("page content appended after the overlay container moves in front of it, extension UI stays behind", async () => {
+test("an extension node appended after the overlay container leaves it in place", async () => {
   const dom = await render(<LoginModal label="Email" />);
   const container = document.querySelector("body > [data-flow-overlays]");
 
-  const page = document.createElement("div");
   const extension = document.createElement("com-1password-button");
-  document.body.append(page, extension);
+  document.body.append(extension);
 
   try {
     await dom.rerender(<LoginModal label="E-Mail" />);
     await sleep(50);
-    expect(page.nextElementSibling).toBe(container);
     expect(container?.nextElementSibling).toBe(extension);
   } finally {
-    page.remove();
     extension.remove();
+  }
+});
+
+test("nodes appended after the overlay container are not moved", async () => {
+  const dom = await render(<LoginModal label="Email" />);
+
+  // Moving an iframe reloads it. The remote renderer's iframe lives in page
+  // content, so pushing page content around costs extension state.
+  const iframe = document.createElement("iframe");
+  iframe.srcdoc = "<p>remote</p>";
+  let loads = 0;
+  iframe.addEventListener("load", () => loads++);
+  document.body.append(iframe);
+  await expect.poll(() => loads).toBe(1);
+
+  try {
+    await dom.rerender(<LoginModal label="E-Mail" />);
+    await sleep(100);
+    expect(loads).toBe(1);
+    expect(document.body.lastElementChild).toBe(
+      document.querySelector("body > [data-flow-overlays]"),
+    );
+  } finally {
+    iframe.remove();
   }
 });
