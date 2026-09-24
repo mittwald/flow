@@ -38,6 +38,10 @@
     border-radius: var(--corner-radius--round);
     transition-property: transform;
     transition-duration: var(--transition--duration--default);
+
+    /* Subtle overshoot: the handle settles with a slight spring, like a
+       physical toggle. */
+    transition-timing-function: cubic-bezier(0.34, 1.35, 0.5, 1);
     transform: translateX(0);
     position: absolute;
     top: var(--switch--track-padding);
