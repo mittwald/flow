@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.20](https://github.com/mittwald/flow/compare/1.2.19...1.2.20) (2026-09-24)
+
+### Styles
+
+* **components:** animate DonutChart, ProgressBar and chart on load ([9bc282b](https://github.com/mittwald/flow/commit/9bc282b5c5101a3ffe1ed1e997ec16411d526b7b))
+
+### Tests
+
+* **components:** cover the load-in animations ([b6d9e4a](https://github.com/mittwald/flow/commit/b6d9e4a4b1e90eb8b15113aa270c204a5375b51d))
+
 ## [1.2.19](https://github.com/mittwald/flow/compare/1.2.18...1.2.19) (2026-09-24)
 
 ### Code Refactoring
