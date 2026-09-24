@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.24](https://github.com/mittwald/flow/compare/1.3.0-next.23...1.3.0-next.24) (2026-09-24)
+
+### Features
+
+* **MarkdownEditor:** insert uploaded files as markdown at the cursor ([1166a0a](https://github.com/mittwald/flow/commit/1166a0a69120b9e44db9512179f600c770845887))
+
 ## [1.3.0-next.23](https://github.com/mittwald/flow/compare/1.2.20...1.3.0-next.23) (2026-09-24)
 
 ## [1.3.0-next.22](https://github.com/mittwald/flow/compare/1.3.0-next.21...1.3.0-next.22) (2026-09-24)
