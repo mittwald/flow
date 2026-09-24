@@ -2,6 +2,7 @@ import {
   Action,
   ActionGroup,
   Button,
+  Checkbox,
   ColumnLayout,
   Content,
   FieldDescription,
@@ -13,7 +14,6 @@ import {
   PasswordCreationField,
   Section,
   Select,
-  Switch,
   TextField,
   useModalController,
 } from "@mittwald/flow-react-components";
@@ -128,10 +128,11 @@ export default () => {
                 </NumberField>
               </Field>
 
+              <Heading level={3}>Spamschutz</Heading>
               <Field name="spamProtection">
-                <Switch>
+                <Checkbox>
                   <Label>Spamschutz aktivieren</Label>
-                </Switch>
+                </Checkbox>
               </Field>
             </Section>
           </Content>
