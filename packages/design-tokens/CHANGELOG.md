@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.22](https://github.com/mittwald/flow/compare/1.3.0-next.21...1.3.0-next.22) (2026-09-24)
+
+## [1.2.19](https://github.com/mittwald/flow/compare/1.3.0-next.20...1.2.19) (2026-09-24)
+
+### Styles
+
+* **components:** animate DonutChart, ProgressBar and chart on load ([9bc282b](https://github.com/mittwald/flow/commit/9bc282b5c5101a3ffe1ed1e997ec16411d526b7b))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.19 ([6eb5763](https://github.com/mittwald/flow/commit/6eb57635153f0c8a2d142697d5abe9842ad5afdd))
+
 ## [1.3.0-next.21](https://github.com/mittwald/flow/compare/1.3.0-next.20...1.3.0-next.21) (2026-09-24)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
