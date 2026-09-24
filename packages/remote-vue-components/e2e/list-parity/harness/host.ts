@@ -1,4 +1,4 @@
-import { hostHtml } from "../../react-parity/hostHtml";
+import { hostHtml, hostOutput } from "../../react-parity/hostHtml";
 /*
  * A relative path into the React package, the way the corpus harness reaches
  * for the same container: it carries the 1280x720 box and the `root-container`
@@ -112,39 +112,15 @@ export const readStableHostHtml = async (
       "[data-testid='root-container']",
     );
 
-    if (!container) {
+    if (!mounted || !container) {
       return "";
     }
 
     /*
-     * The container plus whatever the host portalled out of it.
-     *
-     * An overlay — a context menu, the all-filters modal — is rendered into
-     * `document.body` rather than into the tree that opened it, so reading only
-     * the container compares everything about a menu except the menu. What is
-     * left out is the harness's own two roots: the host's, which the container
-     * is inside, and the binding's remote tree, whose `flr-*` elements differ by
-     * construction.
-     *
-     * And react-aria's live announcer, which is neither binding's output: one
-     * element for the whole document, created when something is announced and
-     * emptied on a timer of its own. A search in one scenario was still
-     * announcing "0 matches" while the next one was read.
+     * The container plus whatever the host portalled out of it — a context
+     * menu, the all-filters modal. `hostOutput` says what it leaves out.
      */
-    const portalled = Array.from(document.body.children).filter(
-      (child) =>
-        child !== mounted?.container &&
-        child !== mounted?.remote &&
-        !child.hasAttribute("data-live-announcer"),
-    );
-
-    const read = document.createElement("div");
-    read.append(
-      ...Array.from(container.children).map((child) => child.cloneNode(true)),
-      ...portalled.map((child) => child.cloneNode(true)),
-    );
-
-    return hostHtml(read);
+    return hostHtml(hostOutput(container, [mounted.container, mounted.remote]));
   };
 
   let previous = read();

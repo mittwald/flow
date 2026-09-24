@@ -1,5 +1,5 @@
-import { hostHtml } from "./hostHtml";
-import { divergenceReasonFor } from "./knownGaps";
+import { hostHtml, hostOutput } from "./hostHtml";
+import { divergenceReasonFor, scenarioNameOf } from "./knownGaps";
 import { toVNode } from "./reactToVue";
 /*
  * Relative paths, not `@/`: that alias means this package's `src` to
@@ -19,7 +19,8 @@ import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import VueRemoteRoot from "@mittwald/flow-remote-vue-components/RemoteRoot";
 import { createElement, type ReactElement } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { expect } from "vitest";
+import { expect, onTestFinished } from "vitest";
+import { commands } from "vitest/browser";
 import { createApp, h, type App } from "vue";
 
 declare const __PARITY_MODE__: "reference" | "compare";
@@ -46,6 +47,7 @@ export { rootContainerLocator };
 
 interface Mounted {
   host: HTMLElement;
+  remote: HTMLElement;
   unmount: () => void;
 }
 
@@ -92,6 +94,7 @@ const mountHost = (): MountedHost => {
    */
   mounted = {
     host,
+    remote,
     unmount: () => {
       unmountRemote?.();
       reactRoot.unmount();
@@ -199,13 +202,18 @@ const readStableHtml = async (
   /*
    * The corpus's container, not the React root's wrapper: its box and test id
    * are part of what the scenarios were written against, and comparing the
-   * wrapper would fold the harness's own markup into the assertion.
+   * wrapper would fold the harness's own markup into the assertion. Plus what
+   * the host portalled out of it: reading the container alone compared every
+   * scenario that opens a Modal, a Select, a date picker, a ContextMenu or a
+   * Tooltip except for the overlay itself.
    */
   const read = () => {
     const container = mounted?.host.querySelector(
       "[data-testid='root-container']",
     );
-    return container ? hostHtml(container) : "";
+    return mounted && container
+      ? hostHtml(hostOutput(container, [mounted.host, mounted.remote]))
+      : "";
   };
   let previous = read();
   let consecutive = 1;
@@ -275,6 +283,41 @@ const waitForHost = async (): Promise<void> => {
     .toBe(true);
 };
 
+/*
+ * A known divergence still has to be a divergence. Matching means the gap was
+ * closed, and the entry would otherwise sit there forever, quietly exempting a
+ * scenario that no longer needs it.
+ *
+ * Judged per test, when it finishes: a scenario usually diverges in one of its
+ * screenshots and matches in the others — a modal matches while it is closed.
+ * Compared by reading the reference rather than through `toMatchFileSnapshot`,
+ * so an expected mismatch leaves vitest's snapshot count alone.
+ */
+let currentDivergence: { testName: string; diverged: boolean } | undefined;
+
+const recordKnownDivergence = async (
+  html: string,
+  reference: string,
+): Promise<void> => {
+  const testName = currentTestName();
+
+  if (currentDivergence?.testName !== testName) {
+    const current = { testName, diverged: false };
+    currentDivergence = current;
+    onTestFinished(() => {
+      if (!current.diverged) {
+        throw new Error(
+          `"${scenarioNameOf(testName)}" matches React again. Remove its entry from knownGaps.ts.`,
+        );
+      }
+    });
+  }
+
+  if ((await commands.readFile(reference)) !== html) {
+    currentDivergence.diverged = true;
+  }
+};
+
 const parityEnvironment = {
   /*
    * The same label in both passes, because the reused tests put it in their
@@ -322,23 +365,7 @@ const parityEnvironment = {
       return;
     }
 
-    /*
-     * A known divergence still has to be a divergence. Matching means the gap
-     * was closed, and the entry would otherwise sit there forever, quietly
-     * exempting a scenario that no longer needs it.
-     */
-    let matched = true;
-    try {
-      await expect(html).toMatchFileSnapshot(reference);
-    } catch {
-      matched = false;
-    }
-
-    if (matched) {
-      throw new Error(
-        `"${currentTestName()}" matches React again. Remove its entry from knownGaps.ts.`,
-      );
-    }
+    await recordKnownDivergence(html, reference);
   },
 };
 
