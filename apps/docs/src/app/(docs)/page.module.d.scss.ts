@@ -8,6 +8,7 @@ declare const classNames: {
   readonly releaseContent: "releaseContent";
   readonly imageTile: "imageTile";
   readonly imageContainer: "imageContainer";
+  readonly "flow--image": "flow--image";
   readonly "flow--section": "flow--section";
   readonly imageTileIcon: "imageTileIcon";
 };

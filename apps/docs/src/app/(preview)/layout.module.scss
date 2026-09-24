@@ -1,9 +1,12 @@
 // The shells size themselves against their container (`min-height: 100%`), so
 // the document has to pass the viewport height down to them.
+// The document root and body carry no class and cannot be given one.
+// stylelint-disable selector-max-type -- document-level elements
 :global(html),
 :global(body) {
   height: 100%;
 }
+// stylelint-enable selector-max-type
 
 .body {
   background-color: var(--neutral--color--200);

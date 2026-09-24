@@ -4,6 +4,9 @@
   row-gap: var(--menu--item-to-item-spacing);
   padding: var(--popover--padding--s);
 
+  // A consumer-placed `Separator`. Its `flow--separator` class also covers the
+  // vertical `<div>` variant, which must not get this block margin.
+  // stylelint-disable-next-line selector-max-type -- see above
   > hr {
     margin-block: var(--popover--spacing);
   }

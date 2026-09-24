@@ -308,7 +308,12 @@ const NonModalPopoverContentInner: FC<NonModalPopoverContentInnerProps> = (
             ...(placement ? { [placement]: "100%" } : {}),
           }}
         >
-          <svg width={16} height={16} viewBox="0 0 16 16">
+          <svg
+            className={styles.tipIcon}
+            width={16}
+            height={16}
+            viewBox="0 0 16 16"
+          >
             <path d="M0 0 L8 8 L16 0" />
           </svg>
         </div>

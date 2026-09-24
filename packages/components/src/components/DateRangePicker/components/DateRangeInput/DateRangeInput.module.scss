@@ -6,7 +6,7 @@
 
   @include formControl.formControl();
 
-  > div {
+  > .inputs {
     display: flex;
     align-items: center;
   }
@@ -24,11 +24,6 @@
       background: var(--date-picker--date-segment-background-color--focused);
       outline: none;
     }
-  }
-
-  > span {
-    display: flex;
-    align-items: center;
   }
 
   :global(.react-aria-DateInput):first-of-type {
