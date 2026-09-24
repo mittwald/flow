@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.18](https://github.com/mittwald/flow/compare/1.3.0-next.17...1.3.0-next.18) (2026-09-24)
+
+### Bug Fixes
+
+* **Overlay:** keep focus when an extension appends to body ([d00fd5f](https://github.com/mittwald/flow/commit/d00fd5f141204b1b68aaab8e3527158851200601)), closes [#3268](https://github.com/mittwald/flow/issues/3268)
+* **Overlay:** move page content in front of the container instead of moving it ([02653a8](https://github.com/mittwald/flow/commit/02653a81e9717f1809f94984b7cd22cedf26f0a7))
+* **Overlay:** move the container again, restore focus and scroll positions ([3ee38eb](https://github.com/mittwald/flow/commit/3ee38ebfff7405774e84c056b38789975652b36e))
+
 ## [1.3.0-next.17](https://github.com/mittwald/flow/compare/1.3.0-next.16...1.3.0-next.17) (2026-09-24)
 
 ## [1.2.15](https://github.com/mittwald/flow/compare/1.2.14...1.2.15) (2026-09-23)
