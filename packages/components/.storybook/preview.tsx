@@ -33,7 +33,7 @@ const preview: Preview = {
       const theme = context.globals.theme;
 
       document.body.style.backgroundColor =
-        theme === "dark" ? "#1b1f24" : "#FFF";
+        theme === "dark" ? "#141516" : "#FFF";
 
       return (
         <ThemeProvider attribute="data-theme">

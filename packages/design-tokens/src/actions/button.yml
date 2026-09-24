@@ -1,6 +1,6 @@
 button:
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.pill}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
@@ -30,7 +30,7 @@ button:
   line-height-s:
     value: "{single-line-height}"
   corner-radius-s:
-    value: "{corner-radius.s}"
+    value: "{corner-radius.pill}"
 
   # Success Solid
   success-solid-background-color:

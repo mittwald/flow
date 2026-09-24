@@ -1,6 +1,5 @@
 declare const classNames: {
   readonly body: "body";
-  readonly background: "background";
   readonly wrapper: "wrapper";
   readonly mainWrapper: "mainWrapper";
   readonly mainNavigation: "mainNavigation";
@@ -8,6 +7,7 @@ declare const classNames: {
   readonly pageHeading: "pageHeading";
   readonly main: "main";
   readonly pageContainer: "pageContainer";
+  readonly pageColumn: "pageColumn";
   readonly pageCard: "pageCard";
   readonly mainContent: "mainContent";
 };

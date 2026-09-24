@@ -1,10 +1,24 @@
+@use "../../../_lib/brand" as *;
+
+// Dark in both themes, like the mittwald.de footer.
 .footer {
-  margin-top: var(--size-px--l);
+  @include grain;
+
+  margin-top: var(--size-px--xxl);
+  background:
+    radial-gradient(
+      70% 120% at 85% 120%,
+      rgb(124 78 230 / 45%),
+      rgb(47 34 234 / 12%) 50%,
+      transparent 80%
+    ),
+    $stage-black;
+  color: #fff;
 
   .footerContent {
     max-width: var(--page-width);
     margin: 0 auto;
-    padding-block: var(--size-px--xl);
+    padding-block: 96px var(--size-px--xxl);
     padding-inline: var(--size-px--xxl);
   }
 
@@ -13,10 +27,19 @@
     flex: 1 1 auto;
   }
 
+  .muted {
+    color: $on-dark-muted;
+  }
+
   .mittwaldLogo {
     width: 240px !important;
     height: 50px !important;
+    color: #fff;
   }
+}
+
+:global([data-theme="dark"]) .footer {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
 @media (max-width: 1400px) {

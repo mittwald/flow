@@ -24,10 +24,12 @@ const Footer: FC = () => {
               gap="s"
               className={styles.resources}
             >
-              <Heading size="s">Ressourcen</Heading>
+              <Heading size="s" color="light-static">
+                Ressourcen
+              </Heading>
               <Link
                 whiteSpace="nowrap"
-                color="dark"
+                color="light-static"
                 href="https://github.com/mittwald/flow"
                 target="_blank"
               >
@@ -35,7 +37,7 @@ const Footer: FC = () => {
               </Link>
               <Link
                 whiteSpace="nowrap"
-                color="dark"
+                color="light-static"
                 href="https://developer.mittwald.de/"
                 target="_blank"
               >
@@ -48,10 +50,12 @@ const Footer: FC = () => {
               gap="s"
               className={styles.legal}
             >
-              <Heading size="s">Rechtliches</Heading>
+              <Heading size="s" color="light-static">
+                Rechtliches
+              </Heading>
               <Link
                 whiteSpace="nowrap"
-                color="dark"
+                color="light-static"
                 href="https://www.mittwald.de/impressum"
                 target="_blank"
               >
@@ -59,7 +63,7 @@ const Footer: FC = () => {
               </Link>
               <Link
                 whiteSpace="nowrap"
-                color="dark"
+                color="light-static"
                 href="https://www.mittwald.de/datenschutz"
                 target="_blank"
               >
@@ -69,20 +73,22 @@ const Footer: FC = () => {
           </Flex>
           <Flex direction="column" gap="xs">
             <MittwaldLogo />
-            <Text>
+            <Text className={styles.muted}>
               <small>© {year} Mittwald CM Service GmbH & Co. KG</small>
             </Text>
           </Flex>
         </Flex>
 
         <Flex elementType="section" direction="column" gap="s">
-          <Heading size="s">Hilf uns, Flow noch besser zu machen!</Heading>
-          <Text>
+          <Heading size="s" color="light-static">
+            Hilf uns, Flow noch besser zu machen!
+          </Heading>
+          <Text className={styles.muted}>
             Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
             Feedback? Dann teile es uns gerne auf GitHub mit.
           </Text>
           <Link
-            color="dark"
+            color="light-static"
             href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
             target="_blank"
           >

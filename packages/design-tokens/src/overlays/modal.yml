@@ -1,6 +1,6 @@
 modal:
   corner-radius:
-    value: "{corner-radius.l}"
+    value: "{corner-radius.xl}"
   padding:
     value: "{size-px.l}"
   padding-mobile:

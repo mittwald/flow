@@ -57,7 +57,7 @@ html body *:where([class*="flow--"] [class*="flow--"]) {
 
 // CSS Specificity: 0-0-2
 html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-family--body);
   -webkit-font-smoothing: antialiased;
   line-height: var(--line-height);
   font-size: var(--size-rem--m);

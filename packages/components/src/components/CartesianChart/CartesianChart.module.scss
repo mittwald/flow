@@ -1,5 +1,5 @@
 .cartesianChart {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-family--body);
   isolation: isolate;
 
   *:focus:not(:focus-visible) {

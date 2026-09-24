@@ -1,7 +1,7 @@
 color:
   gray:
     100:
-      value: "#1B1F24"
+      value: "#141516"
     200:
       value: "#292F37"
     300:
@@ -48,6 +48,30 @@ color:
       value: "#E0EBFF"
     1100:
       value: "#F0F5FF"
+
+  mittwald-blue:
+    100:
+      value: "#171842"
+    200:
+      value: "#1D1B6B"
+    300:
+      value: "#2521A7"
+    400:
+      value: "#2D23E8"
+    500:
+      value: "#4751EC"
+    600:
+      value: "#6970EF"
+    700:
+      value: "#8D8BF0"
+    800:
+      value: "#AAAAF3"
+    900:
+      value: "#B3B4F3"
+    1000:
+      value: "#D2D3F9"
+    1100:
+      value: "#F2F2FE"
 
   amaranth-red:
     100:
@@ -340,13 +364,74 @@ color:
     800:
       value: "rgb(255 255 255 / 100%)"
 
+  # mittwald brand colors, exactly as defined in https://branding.mittwald.de/farben.html
+  brand:
+    blue:
+      100:
+        value: "#171842"
+      200:
+        value: "#1D1B6B"
+      300:
+        value: "#2D23E8"
+    navy:
+      100:
+        value: "#2E3552"
+      200:
+        value: "#4A568D"
+      300:
+        value: "#6F81DB"
+    green:
+      100:
+        value: "#4A5150"
+      200:
+        value: "#666F6C"
+      300:
+        value: "#919C96"
+    lilac:
+      100:
+        value: "#594874"
+      200:
+        value: "#8E6EBA"
+      300:
+        value: "#B187E8"
+    orange:
+      100:
+        value: "#523F39"
+      200:
+        value: "#92695A"
+      300:
+        value: "#D2937C"
+    neutral-base:
+      value: "#141516"
+    neutral-default:
+      value: "#000000"
+    neutral-secondary:
+      value: "rgb(255 255 255 / 8%)"
+    text-primary:
+      value: "rgb(255 255 255 / 64%)"
+    text-highlight:
+      value: "#FFFFFF"
+
+  # Brand 100 tones as surfaces for text. Green and lilac are brand 100 moved
+  # towards neutral base (22 % / 24 %), so text-primary and links keep 4.5:1.
+  brand-surface:
+    blue:
+      value: "{color.brand.blue.100}"
+    navy:
+      value: "{color.brand.navy.100}"
+    green:
+      value: "#3E4443"
+    lilac:
+      value: "#483C5D"
+
+  # mittwald "Abstract Gradient": brand light glowing up from a dark ground,
+  # see https://branding.mittwald.de/bildwelt.html
   gradient:
     value:
-      "radial-gradient(circle at 18% 20%, #3D55C159, transparent 22%),
-      radial-gradient(circle at 82% 18%, #00A1B54D, transparent 18%),
-      radial-gradient(circle at 70% 82%, #715DEE47, transparent 24%),
-      linear-gradient(180deg, #06070A 0%, #0A0E18 45%, #0F1424 100%)"
+      "radial-gradient(ellipse at 20% 110%, #2D23E859, transparent 55%),
+      radial-gradient(ellipse at 85% 105%, #C194FF1F, transparent 45%),
+      radial-gradient(ellipse at 55% 120%, #E7A1871A, transparent 40%),
+      linear-gradient(180deg, #000000 0%, {color.brand.neutral-base} 100%)"
 
   background-gradient:
-    value:
-      "linear-gradient(180deg,rgba(18, 21, 24, 1) 0%, rgba(35, 41, 64, 1) 80%)"
+    value: "{color.brand.neutral-base}"
