@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.19](https://github.com/mittwald/flow/compare/1.2.18...1.2.19) (2026-09-24)
+
+### Code Refactoring
+
+* **components:** make the selector lint rules blocking and gate :global class names ([#3091](https://github.com/mittwald/flow/issues/3091)) ([c7a0262](https://github.com/mittwald/flow/commit/c7a0262d9a38a016987b7ebaf72cfab44046ad7f))
+
 ## [1.2.18](https://github.com/mittwald/flow/compare/1.2.17...1.2.18) (2026-09-24)
 
 ### Bug Fixes
