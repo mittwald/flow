@@ -1,5 +1,5 @@
 import RemoteRoot from "@/components/RemoteRoot";
-import { createSerializedReceiver } from "@/tests/lib/serializedConnection";
+import { createSerializedReceiver } from "../../../../remote-react-components/src/tests/lib/serializedConnection";
 import { RemoteReceiver } from "@mittwald/flow-remote-core";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
