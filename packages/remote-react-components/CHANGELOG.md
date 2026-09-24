@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.25](https://github.com/mittwald/flow/compare/1.3.0-next.24...1.3.0-next.25) (2026-09-24)
+
+### Features
+
+* **CopyButton:** add onCopy, called with the copied text after a successful copy ([def4698](https://github.com/mittwald/flow/commit/def4698d975bfdc7b33fc1dc1e130ba1ab891d0f))
+
 ## [1.3.0-next.24](https://github.com/mittwald/flow/compare/1.3.0-next.23...1.3.0-next.24) (2026-09-24)
 
 ### Features
