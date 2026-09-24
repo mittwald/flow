@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "composite": false,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "rootDir": "${configDir}/../..",
+    "types": ["@vitest/browser-playwright", "node", "vite/client"]
+  },
+  "extends": "./tsconfig.json",
+  "include": [
+    "${configDir}/vite*.ts",
+    "${configDir}/e2e/**/*.ts",
+    "${configDir}/dev/**/*.ts"
+  ]
+}

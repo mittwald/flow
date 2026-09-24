@@ -1,0 +1,3 @@
+{
+  "extends": "@mittwald/typescript-config/web-library.json"
+}

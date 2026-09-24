@@ -18,6 +18,21 @@ events, forms, suspense, ext-bridge, navigation, performance).
   `build:scss-types`, so it sees freshly built workspace packages and freshly
   generated stubs. There is still no `build` target — nothing here runs
   `next build`, so errors only a production build surfaces stay unseen.
+- **The Vue demos are JSX, against their own runtime.** Each file starts with
+  `/** @jsxImportSource @/app/remote-vue/_lib */`, which points Next's compiler
+  and TypeScript at `src/app/remote-vue/_lib/jsx-runtime.ts` — so a Vue demo
+  reads like the React page beside it, which is the point. Vue's own
+  `vue/jsx-runtime` works too, but it hands a component its children as a value
+  and Vue then warns "Non-function value encountered for default slot" once per
+  element; the local runtime wraps them. Named and scoped slots are the Vue JSX
+  idiom, `<Comp>{{ name: () => … }}</Comp>`, and pass through untouched. React's
+  JSX lint rules are switched off for this directory in `eslint.config.js`.
+- **A Vue demo runs against the built package**, not its source: it imports
+  `@mittwald/flow-remote-vue-components` through the package entry, which is
+  `dist`. After changing that package, `pnpm nx build remote-vue-components` —
+  and delete `packages/remote-vue-components/node_modules/.vite*` before a
+  parity run, because vite pre-bundles it and a rebuilt `dist` does not
+  invalidate the prebundle.
 - CSS-module class names are typed by committed `*.module.d.scss.ts` stubs
   (shared generator, see the root
   [Generated code](../../AGENTS.md#generated-code--must-be-committed) table).
