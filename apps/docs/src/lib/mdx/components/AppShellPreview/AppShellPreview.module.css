@@ -1,0 +1,89 @@
+.appShell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
+}
+
+/*
+ * The inline frame is a zoomed-out thumbnail: the shell lays out as if it had
+ * 1.6× the frame's width, so its whole desktop layout (nav, header, content)
+ * reads at a glance. Hovering reveals the link to the full-size shell.
+ */
+.previewFrame {
+  position: relative;
+
+  /* Scope the layer order below (scaler → backdrop → link) to this frame. */
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+
+  /* The same border the LiveCodeEditor draws, so both previews read alike. */
+  border: 1px solid var(--neutral-outline-border-color);
+  border-radius: var(--corner-radius--m);
+}
+
+/*
+ * `zoom` rather than a transform: it shrinks the layout box with the content,
+ * so the frame takes the shell's full height instead of cropping it.
+ */
+.previewScaler {
+  zoom: 0.625;
+
+  /* Non-interactive: the overlay link owns the clicks. */
+  pointer-events: none;
+}
+
+/*
+ * The centred link into the full-size shell. Hidden until the frame is hovered
+ * or the link takes keyboard focus, then it fades in and shows its own focus
+ * ring.
+ */
+.previewLink {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+
+  /* Above the backdrop (::before) and the scaled-down shell. */
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Dimmed backdrop, above the shell scaler but below the link. */
+.previewFrame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgb(0 0 0 / 0.5);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+/*
+ * Focus is matched as :focus-visible, not :focus-within: following the link
+ * opens the shell in a new tab and leaves the link focused here, so
+ * :focus-within kept the frame dimmed for good once the user came back. A
+ * mouse click sets no :focus-visible, a Tab does — which is exactly who still
+ * needs to see the link.
+ */
+.previewFrame:hover .previewLink,
+.previewFrame:hover::before,
+.previewFrame:has(.previewLink:focus-visible) .previewLink,
+.previewFrame:has(.previewLink:focus-visible)::before {
+  opacity: 1;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xs);
+}
+
+.fileName {
+  font-family: var(--font-family--mono, ui-monospace, monospace);
+  font-size: 0.8125rem;
+  opacity: 0.7;
+}

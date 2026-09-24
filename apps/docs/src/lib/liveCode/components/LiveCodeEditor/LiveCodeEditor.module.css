@@ -1,5 +1,5 @@
 .preview {
-  padding: var(--size-px--l);
+  padding: var(--layout-card--padding);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +80,7 @@
     .preview {
       border-inline: 4px solid var(--neutral--color--600);
       margin: 0 auto;
-      padding: var(--size-px--l);
+      padding: var(--layout-card--padding-mobile);
       width: 400px;
       max-width: 100%;
       height: 100%;
@@ -192,4 +192,16 @@
   /* Everything else is the plain Button's own styling. */
   cursor: col-resize;
   touch-action: none;
+}
+
+/*
+ * Same breakpoint the LayoutCard switches its own padding at. The examples
+ * are laid out for a desktop viewport, so they also shrink a little here —
+ * `zoom` scales the layout with the text, unlike a transform.
+ */
+@media (max-width: 768px) {
+  .preview {
+    padding: var(--layout-card--padding-mobile);
+    zoom: 0.85;
+  }
 }

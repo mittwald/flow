@@ -330,6 +330,24 @@ compiles against. A bare `vitest run` skips it and renders against whatever
 is simply absent, and CSS drops every declaration referencing it without a
 warning (#3194).
 
+Three traps cost time in every new browser test:
+
+- **Click the label, not the control.** `Checkbox`, `Radio`, `Switch` and
+  `Rating` stack their icons on top of a visually hidden input, so playwright
+  refuses the input with `<svg …> intercepts pointer events`. Query the control
+  by role for assertions and click its label text
+  (`page.getByText(name, { exact: true })`).
+- **Hover needs the pointer modality first.** react-aria only counts a hover as
+  a hover while `getInteractionModality() === "pointer"`, and a freshly loaded
+  page has no modality at all — so `Tooltip` and everything else that opens on
+  hover stays closed no matter how long the test waits. Press something neutral
+  with the mouse once before hovering.
+- **`await render(...)` before any bare DOM query.** A locator assertion polls
+  and waits the first render out; a `document.querySelector` right after
+  `render()` runs before React has committed and reads `null`. That turns an
+  assertion that something is _absent_ into a silent pass, so give any helper
+  that queries the DOM directly a guard that throws when its element is missing.
+
 ## i18n & a11y
 
 - Component-internal UI text lives in colocated `locales/de-DE.locale.json`

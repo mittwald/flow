@@ -78,10 +78,51 @@ describe("selectCrossVersionTargetVersions — exclusions", () => {
   });
 });
 
+describe("selectCrossVersionTargetVersions — prereleases", () => {
+  // The real shape since the two-line release model: every line opens with a
+  // run of `X.Y.0-next.N` on the next branch before `X.Y.0` ships.
+  const withNext = [
+    "1.1.52",
+    "1.1.53",
+    "1.2.0-next.0",
+    "1.2.0-next.1",
+    "1.2.0",
+    "1.2.1",
+    "1.2.2",
+    "1.3.0-next.0",
+  ];
+
+  it("never selects a prerelease as a target", () => {
+    const result = selectCrossVersionTargetVersions("1.2.2", withNext);
+    for (const target of result) {
+      expect(target.version).not.toContain("-");
+    }
+  });
+
+  it("resolves firstOfLine to the line's first stable release, not its first prerelease", () => {
+    const result = selectCrossVersionTargetVersions("1.2.2", withNext);
+    const byCategory = Object.fromEntries(
+      result.map((r) => [r.category, r.version]),
+    );
+    expect(byCategory.firstOfLine).toBe("1.2.0");
+    expect(byCategory.previous).toBe("1.2.1");
+    expect(byCategory.latestOfPreviousLine).toBe("1.1.53");
+  });
+
+  it("selects stable targets while the current version is itself a prerelease", () => {
+    // On the next line: the current line has no stable release yet, so
+    // firstOfLine drops and the previous line's latest carries the coverage.
+    const result = selectCrossVersionTargetVersions("1.3.0-next.1", withNext);
+    const versions = result.map((r) => r.version);
+    expect(versions).toEqual(["1.2.2"]);
+    expect(result.find((r) => r.category === "firstOfLine")).toBeUndefined();
+  });
+});
+
 describe("selectCrossVersionTargetVersions — alpha-offset fallback", () => {
   const alpha = Array.from({ length: 250 }, (_, i) => `0.2.0-alpha.${i + 1}`);
 
-  it("falls back to computed offsets when categories collapse on a prerelease line", () => {
+  it("falls back to computed offsets when no stable release has been published yet", () => {
     const current = "0.2.0-alpha.250";
     const result = selectCrossVersionTargetVersions(current, alpha, [], {
       offsets: [10, 100, 200],
