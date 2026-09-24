@@ -107,7 +107,13 @@ export const runSingleCodemod = async (
   // declines a file by returning nothing counts as `skipped`, not `unmodified`.
   // If every file was skipped and none changed, "0 file(s) changed" would read
   // as a clean no-op run when in fact the transform bailed on everything.
-  if (result.changed === 0 && result.skipped > 0) {
+  //
+  // `unmodified === 0` is what makes "all" true. Without it a single declined
+  // file among hundreds the transform read happily lands here — and a 0-byte
+  // source file is exactly that, since jscodeshift counts an empty file as
+  // `skip`. The run was then a clean no-op, but this reported it as a total
+  // refusal and returned 1 (#3117).
+  if (result.changed === 0 && result.unmodified === 0 && result.skipped > 0) {
     log(
       `${id}: the transform declined all ${result.skipped} file(s) it looked at, and changed none.`,
     );

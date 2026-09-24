@@ -15,8 +15,13 @@ export interface RenderListInput {
    * The version range to show migrations for. Both bounds always arrive
    * together — there is no partial range — so omitting it entirely is what
    * lists the whole catalogue.
+   *
+   * `note` qualifies what `to` means where resolving alone does not say it — a
+   * `major` that found no newer major and landed inside the current one, so
+   * that this list is identical to the one `minor` produces (#3117). See
+   * `describeUncrossedBoundary`.
    */
-  range?: { from: string; to: string };
+  range?: { from: string; to: string; note?: string };
   json: boolean;
   /** Emit ANSI colour. Off by default so a test sees plain text. */
   color?: boolean;
@@ -267,12 +272,15 @@ const renderContext = (
     isCatchUp(entry, range.from),
   ).length;
 
-  const rangeText =
+  const rangeText = [
     range.from === range.to
       ? catchUpCount > 0
         ? `nothing newer than ${range.to}; entries below are catch-up`
         : `nothing newer than ${range.to}`
-      : `from ${range.from} to ${range.to}`;
+      : `from ${range.from} to ${range.to}`,
+    // Wrapped like the legend below — the note is a full sentence, not a label.
+    ...(range.note === undefined ? [] : wrap(range.note, width)),
+  ].join("\n");
 
   if (catchUpCount === 0) {
     return rangeText;
@@ -368,7 +376,7 @@ export const renderList = ({
         range:
           range === undefined
             ? null
-            : { current: range.from, target: range.to },
+            : { current: range.from, target: range.to, note: range.note },
         migrations: selected.map((entry) => ({
           ...entry,
           catchUp: isCatchUp(entry, range?.from),
@@ -473,7 +481,11 @@ export const runList = async (
   deps.write(
     renderList({
       entries: allEntries,
-      range: { from: resolved.current, to: resolved.target },
+      range: {
+        from: resolved.current,
+        to: resolved.target,
+        note: resolved.note,
+      },
       json: parsed.json,
       color: deps.color,
       width: deps.width,
