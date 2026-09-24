@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.21](https://github.com/mittwald/flow/compare/1.2.20...1.2.21) (2026-09-24)
+
+### Bug Fixes
+
+* **Popover:** lift a non-modal popover over ordinary page content ([#3238](https://github.com/mittwald/flow/issues/3238)) ([7705faa](https://github.com/mittwald/flow/commit/7705faa9c53b1fb0f46d5668a20eb1dbbbb2a2d2))
+
 ## [1.2.20](https://github.com/mittwald/flow/compare/1.2.19...1.2.20) (2026-09-24)
 
 ### Styles
