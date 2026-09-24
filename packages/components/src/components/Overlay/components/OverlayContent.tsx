@@ -5,10 +5,69 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { OverlaySuspenseFallback } from "@/components/Overlay/components/OverlaySuspenseFallback";
 import styles from "../Overlay.module.scss";
 import DivView from "@/views/DivView";
-import { useKeepBrowserExtensionsInteractive } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
+import {
+  isBrowserExtensionNode,
+  useKeepBrowserExtensionsInteractive,
+} from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
 import { useIsActivityActive } from "@/components/Activity/context";
 
 const overlayContainerAttribute = "data-flow-overlays";
+
+/**
+ * Nodes a browser extension appends (e.g. 1Password's inline menu) don't count
+ * as covering: they belong on top anyway, and moving the container for them
+ * blurs a focused field inside it (#3268). The same heuristic also spares
+ * custom elements and shadow hosts the page itself appends, which then render
+ * above open overlays.
+ */
+const isCoveredByPageContent = (container: HTMLElement): boolean => {
+  for (
+    let node = container.nextElementSibling;
+    node;
+    node = node.nextElementSibling
+  ) {
+    if (!isBrowserExtensionNode(node)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * Only the container moves, never the nodes appended after it: those are
+ * foreign, and moving them costs state we cannot restore (an iframe reloads).
+ * The container's own state we can. Moving a node blurs the focused element
+ * inside it and resets every scroll container inside to the top. `moveBefore`
+ * keeps the focus (and, in Chromium, the scroll positions); the rest is
+ * restored afterwards.
+ */
+const moveToEnd = (container: HTMLElement): void => {
+  const body = document.body;
+  const focused = document.activeElement;
+  const scrolled = Array.from(container.querySelectorAll<HTMLElement>("*"))
+    .filter((element) => element.scrollTop !== 0 || element.scrollLeft !== 0)
+    .map(
+      (element) => [element, element.scrollTop, element.scrollLeft] as const,
+    );
+
+  if (typeof body.moveBefore === "function") {
+    body.moveBefore(container, null);
+  } else {
+    body.append(container);
+  }
+
+  for (const [element, scrollTop, scrollLeft] of scrolled) {
+    element.scrollTop = scrollTop;
+    element.scrollLeft = scrollLeft;
+  }
+  if (
+    focused instanceof HTMLElement &&
+    container.contains(focused) &&
+    document.activeElement !== focused
+  ) {
+    focused.focus({ preventScroll: true });
+  }
+};
 
 /**
  * Render overlays into a dedicated container instead of `document.body`.
@@ -38,8 +97,8 @@ const getOverlayContainer = (): HTMLElement | null => {
   );
 
   if (existingContainer) {
-    if (existingContainer !== document.body.lastElementChild) {
-      document.body.append(existingContainer);
+    if (isCoveredByPageContent(existingContainer)) {
+      moveToEnd(existingContainer);
     }
     return existingContainer;
   }
