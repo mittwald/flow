@@ -51,15 +51,28 @@ export const useCollapsingItems = (): UseCollapsingItemsReturn => {
     );
 
     const containerStyle = window.getComputedStyle(container);
+    /*
+     * `clientWidth` and a computed padding are layout pixels, while
+     * `getBoundingClientRect` below reports rendered ones. Where an ancestor
+     * scales the subtree — a `transform`, a CSS `zoom` — comparing the two
+     * overstates the room by the scale factor, and the items stay visible
+     * instead of collapsing. The container's own two border-box widths give
+     * the factor; `clientWidth` would be off by the border.
+     */
+    const scale =
+      container.offsetWidth > 0
+        ? container.getBoundingClientRect().width / container.offsetWidth
+        : 1;
+
     const availableWidth =
       container.clientWidth -
       (parseFloat(containerStyle.paddingInlineStart) || 0) -
       (parseFloat(containerStyle.paddingInlineEnd) || 0);
 
     const visibleCount = getVisibleItemCount(
-      items.map((item) => item.getBoundingClientRect().width),
+      items.map((item) => item.getBoundingClientRect().width / scale),
       availableWidth,
-      more.getBoundingClientRect().width,
+      more.getBoundingClientRect().width / scale,
     );
 
     items.forEach((item, index) => {
