@@ -269,6 +269,23 @@ const referencePathFor = (description: string): string => {
 const currentTestName = (): string =>
   expect.getState().currentTestName ?? "unknown test";
 
+/*
+ * The comparison refuses to run without its reference. Off CI,
+ * `toMatchFileSnapshot` writes a missing file from what it was handed and
+ * passes — here that is Vue's output, and the one outcome that looks like
+ * parity and proves nothing. The runner forces `CI` for the same reason; this
+ * covers a Vue pass started any other way.
+ */
+const assertReferenceExists = async (reference: string): Promise<void> => {
+  try {
+    await commands.readFile(reference);
+  } catch {
+    throw new Error(
+      `No React reference for "${currentTestName()}": the reference pass never reached it. Run the comparison through \`pnpm nx test:parity remote-vue-components\` or \`test:parity:dev\`, which write the references first.`,
+    );
+  }
+};
+
 const waitForHost = async (): Promise<void> => {
   await expect
     .poll(
@@ -359,6 +376,10 @@ const parityEnvironment = {
     const knownDivergence = isReference
       ? undefined
       : divergenceReasonFor(currentTestName());
+
+    if (!isReference) {
+      await assertReferenceExists(reference);
+    }
 
     if (knownDivergence === undefined) {
       await expect(html).toMatchFileSnapshot(reference);

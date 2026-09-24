@@ -2,7 +2,10 @@
  * What the Vue side does not reproduce, and why.
  *
  * This list is the report the harness produces. Everything not on it must
- * render a host tree identical to React's.
+ * render a host tree identical to React's. Every entry is matched by name, and
+ * a full run fails when one no longer names a corpus file or scenario (see
+ * `dev/react-parity/staleKnownGaps.ts`) — so an entry cannot outlive what it
+ * exempts.
  */
 
 /**
