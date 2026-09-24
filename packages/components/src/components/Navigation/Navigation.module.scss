@@ -6,7 +6,7 @@
   flex-direction: column;
   min-width: 0;
 
-  ul {
+  .linkList {
     display: flex;
     flex-direction: column;
     row-gap: var(--menu--item-to-item-spacing);
@@ -40,6 +40,9 @@
     }
   }
 
+  // A consumer-placed `Separator`, which is a plain FC — Navigation's props
+  // context cannot inject a class into it.
+  // stylelint-disable-next-line selector-max-type -- consumer separator
   hr {
     margin-bottom: var(--menu--group-to-group-spacing);
   }

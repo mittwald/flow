@@ -4,6 +4,8 @@
 $figure-scale: 0.5;
 
 .entry {
+  // react-markdown renders the release body, so the image carries no class.
+  // stylelint-disable-next-line selector-max-type -- markdown output
   img {
     zoom: $figure-scale;
     max-width: 100%;

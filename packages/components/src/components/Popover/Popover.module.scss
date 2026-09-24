@@ -44,7 +44,7 @@
   .tip {
     width: var(--popover--tip-width);
 
-    svg {
+    .tipIcon {
       display: block;
       fill: var(--popover--background-color);
       stroke: var(--popover--border-color);
@@ -67,7 +67,7 @@
       margin-top: var(--popover--tip-height);
     }
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(180deg);
     }
   }
@@ -79,7 +79,7 @@
       margin-inline-start: var(--popover--tip-height);
     }
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(90deg);
     }
   }
@@ -91,7 +91,7 @@
       margin-inline-end: var(--popover--tip-height);
     }
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(-90deg);
     }
   }
