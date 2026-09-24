@@ -17,9 +17,10 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: var(--layout-card--border-width) solid
-    var(--layout-card--border-color);
-  border-radius: var(--layout-card--corner-radius);
+
+  /* The same border the LiveCodeEditor draws, so both previews read alike. */
+  border: 1px solid var(--neutral-outline-border-color);
+  border-radius: var(--corner-radius--m);
 }
 
 .previewScaler {

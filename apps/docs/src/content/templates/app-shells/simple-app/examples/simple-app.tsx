@@ -264,7 +264,6 @@ export default () => (
                 ]}
               >
                 <strong>1,2 K</strong>
-                <small>Gesamt</small>
               </DonutChart>
             </Section>
           </LayoutCard>
@@ -399,13 +398,15 @@ const Feedback = ({
       <Text>{date}</Text>
     </Header>
     <Content>
-      <Rating
-        value={rating}
-        isReadOnly
-        size="s"
-        aria-label={`Bewertung: ${rating} von 5 Sternen`}
-      />
-      <Text>{text}</Text>
+      <Flex direction="column" gap="xs">
+        <Rating
+          value={rating}
+          isReadOnly
+          size="s"
+          aria-label={`Bewertung: ${rating} von 5 Sternen`}
+        />
+        <Text>{text}</Text>
+      </Flex>
     </Content>
   </Message>
 );

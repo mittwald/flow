@@ -2,7 +2,7 @@ import {
   Action,
   ActionGroup,
   Button,
-  Checkbox,
+  CheckboxButton,
   ColumnLayout,
   Content,
   Heading,
@@ -79,12 +79,14 @@ export default () => {
                   </NumberField>
                 </Field>
               </ColumnLayout>
+            </Section>
 
-              <Heading level={3}>Spamschutz</Heading>
+            <Section>
+              <Heading>Spamschutz</Heading>
               <Field name="spamProtection">
-                <Checkbox>
-                  <Label>Spamschutz aktivieren</Label>
-                </Checkbox>
+                <CheckboxButton>
+                  Spamschutz aktivieren
+                </CheckboxButton>
               </Field>
             </Section>
           </Content>

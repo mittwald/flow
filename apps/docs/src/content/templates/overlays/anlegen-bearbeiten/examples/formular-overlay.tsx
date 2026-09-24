@@ -2,7 +2,7 @@ import {
   Action,
   ActionGroup,
   Button,
-  Checkbox,
+  CheckboxButton,
   ColumnLayout,
   Content,
   FieldDescription,
@@ -108,8 +108,10 @@ export default () => {
                   <Label>Passwort</Label>
                 </PasswordCreationField>
               </Field>
+            </Section>
 
-              <Heading level={3}>Speicherplatz</Heading>
+            <Section>
+              <Heading>Speicherplatz</Heading>
               <Field
                 name="storageInGb"
                 rules={{
@@ -127,12 +129,14 @@ export default () => {
                   <Label>Speicherplatz</Label>
                 </NumberField>
               </Field>
+            </Section>
 
-              <Heading level={3}>Spamschutz</Heading>
+            <Section>
+              <Heading>Spamschutz</Heading>
               <Field name="spamProtection">
-                <Checkbox>
-                  <Label>Spamschutz aktivieren</Label>
-                </Checkbox>
+                <CheckboxButton>
+                  Spamschutz aktivieren
+                </CheckboxButton>
               </Field>
             </Section>
           </Content>

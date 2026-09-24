@@ -1,11 +1,13 @@
 import {
   Action,
   ActionGroup,
-  Alert,
   Button,
+  ColumnLayout,
   Content,
   FieldDescription,
+  Header,
   Heading,
+  InlineCode,
   Label,
   Modal,
   Option,
@@ -18,36 +20,77 @@ import {
 import { useState } from "react";
 
 export default () => {
-  const recordController = useModalController();
-  const domainController = useModalController();
+  const appController = useModalController();
+  const subdomainController = useModalController();
 
   const [domains, setDomains] = useState([
     "mustermann.de",
     "muster-shop.de",
   ]);
-  const [domain, setDomain] = useState("mustermann.de");
-  const [newDomain, setNewDomain] = useState("");
+  const [domain, setDomain] = useState<string | null>(null);
+  const [subdomain, setSubdomain] = useState("");
 
-  const addDomain = () => {
-    setDomains((all) => [...all, newDomain]);
-    setDomain(newDomain);
-    setNewDomain("");
-    domainController.close();
+  const addSubdomain = () => {
+    const name = `${subdomain}.mustermann.de`;
+    setDomains((all) => [...all, name]);
+    setDomain(name);
+    setSubdomain("");
+    subdomainController.close();
   };
 
   return (
     <>
-      <Button onPress={recordController.open}>
-        DNS-Eintrag anlegen
+      <Button onPress={appController.open}>
+        App anlegen
       </Button>
 
-      <Modal controller={recordController} offCanvas>
-        <Heading>DNS-Eintrag anlegen</Heading>
+      <Modal controller={appController} offCanvas>
+        <Heading>App anlegen</Heading>
 
         <Content>
           <Section>
+            <ColumnLayout m={[2, 1]}>
+              <TextField isRequired>
+                <Label>Name</Label>
+              </TextField>
+              <Select
+                isRequired
+                defaultSelectedKey="6.7.14.1"
+              >
+                <Label>Version</Label>
+                <Option value="6.7.14.1">6.7.14.1</Option>
+                <Option value="6.7.13.0">6.7.13.0</Option>
+                <Option value="6.6.10.7">6.6.10.7</Option>
+              </Select>
+            </ColumnLayout>
+
+            <TextField isRequired>
+              <Label>Installationsverzeichnis</Label>
+              <FieldDescription>
+                Deine App wird unter{" "}
+                <InlineCode>
+                  {"/html/<installationsverzeichnis>"}
+                </InlineCode>{" "}
+                installiert
+              </FieldDescription>
+            </TextField>
+          </Section>
+
+          <Section>
+            <Header>
+              <Heading>Hauptdomain zuweisen</Heading>
+              {/*
+               * Its own controller, not another step: the app overlay stays
+               * open underneath and keeps what was already entered.
+               */}
+              <Button onPress={subdomainController.open}>
+                Subdomain anlegen
+              </Button>
+            </Header>
+
             <Select
               isRequired
+              placeholder="Domain wählen"
               selectedKey={domain}
               onChange={(key) => setDomain(String(key))}
             >
@@ -58,29 +101,6 @@ export default () => {
                 </Option>
               ))}
             </Select>
-
-            <Alert status="info">
-              <Heading>Domain nicht dabei?</Heading>
-              <Content>
-                <Text>
-                  Eine Domain, die noch nicht im Projekt
-                  liegt, legst du hier an, ohne den Vorgang
-                  zu verlassen.
-                </Text>
-                <Button
-                  variant="soft"
-                  color="secondary"
-                  onPress={domainController.open}
-                >
-                  Domain hinzufügen
-                </Button>
-              </Content>
-            </Alert>
-
-            <TextField isRequired>
-              <Label>Name</Label>
-              <FieldDescription>z. B. www</FieldDescription>
-            </TextField>
           </Section>
         </Content>
 
@@ -96,35 +116,36 @@ export default () => {
         </ActionGroup>
       </Modal>
 
-      {/*
-       * Its own controller, not another step: the record overlay stays open
-       * underneath and keeps what was already entered. The new domain is
-       * selected when this one closes.
-       */}
-      <Modal controller={domainController}>
-        <Heading>Domain hinzufügen</Heading>
+      <Modal controller={subdomainController}>
+        <Heading>Subdomain anlegen</Heading>
 
         <Content>
           <Section>
+            <Text>
+              Eine Subdomain ist der Teil einer Domain, der
+              vor dem eigentlichen Domainnamen steht und
+              durch einen Punkt getrennt ist. Subdomains
+              sind eine praktische Möglichkeit, verschiedene
+              Bereiche einer Website voneinander zu trennen.
+            </Text>
+
             <TextField
               isRequired
-              value={newDomain}
-              onChange={setNewDomain}
+              value={subdomain}
+              onChange={setSubdomain}
             >
-              <Label>Domain</Label>
-              <FieldDescription>
-                z. B. muster-blog.de
-              </FieldDescription>
+              <Label>Subdomain</Label>
             </TextField>
           </Section>
         </Content>
 
         <ActionGroup>
           <Button
-            isDisabled={newDomain.length === 0}
-            onPress={addDomain}
+            color="success"
+            isDisabled={subdomain.length === 0}
+            onPress={addSubdomain}
           >
-            Hinzufügen
+            Anlegen
           </Button>
           <Action closeModal>
             <Button variant="soft" color="secondary">
