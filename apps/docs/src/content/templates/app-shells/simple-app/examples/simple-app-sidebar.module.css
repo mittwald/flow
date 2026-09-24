@@ -14,24 +14,15 @@
  * theme. Swap the masked SVG for your own logo.
  */
 .logo {
-  width: 100%;
+  width: 9rem;
+  max-width: 100%;
   aspect-ratio: 300 / 57;
 
-  /* Side padding keeps the wordmark from filling the full sidebar width;
-     content-box confines both fill and mask so the padding takes effect. */
-  box-sizing: border-box;
-  padding-inline: var(--size-px--xl);
-
-  /* Extra breathing room between the wordmark and the search below it. */
+  /* Extra breathing room between the wordmark and the navigation below it. */
   margin-block-end: var(--size-px--m);
   background: currentcolor;
-  background-clip: content-box;
-  mask: url("./mittwald.svg") no-repeat center / contain;
-  mask-origin: content-box;
-  mask-clip: content-box;
-  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
-  -webkit-mask-origin: content-box;
-  -webkit-mask-clip: content-box;
+  mask: url("./mittwald.svg") no-repeat left center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat left center / contain;
 }
 
 /* Sidebar and content fill the available height side by side; the column
