@@ -93,11 +93,21 @@ const passEnvironmentFor = (mode: PassMode): NodeJS.ProcessEnv => ({
  * The Vue pass skips what cannot be expressed in Vue at all. Filtered by name
  * rather than swallowed in the environment: several of those scenarios
  * interact with what they rendered, so a half-run leaves them timing out on an
- * empty page instead of reporting the reason. A filter names scenarios
- * explicitly, so it runs them as asked — an unsupported one then says why.
+ * empty page instead of reporting the reason. Applied under a file filter too,
+ * so a filtered run compares what a full run compares — except when the flags
+ * bring a test-name pattern of their own, which asks for scenarios by name and
+ * would collide with this one.
  */
-const exclusionsFor = (mode: PassMode, { filters }: RunnerArguments) =>
-  mode === "compare" && filters.length === 0
+const namesScenarios = (flags: readonly string[]): boolean =>
+  flags.some(
+    (flag) =>
+      flag === "-t" ||
+      flag.startsWith("-t=") ||
+      flag.startsWith("--testNamePattern"),
+  );
+
+const exclusionsFor = (mode: PassMode, { flags }: RunnerArguments) =>
+  mode === "compare" && !namesScenarios(flags)
     ? [...excludeUnsupportedFiles(), "-t", excludeUnsupportedPattern()]
     : [];
 
