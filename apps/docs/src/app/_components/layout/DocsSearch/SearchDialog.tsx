@@ -57,10 +57,10 @@ const DEFAULT_SECTIONS = [
       "Die Grundlagen des Designsystems – von Designprinzipien bis zu Farben, Typografie und weiteren Basisbausteinen.",
   },
   {
-    segment: "patterns",
-    title: "Patterns",
+    segment: "templates",
+    title: "Templates",
     description:
-      "Wiederkehrende Nutzerabläufe und Best Practices, die zeigen, wie mehrere Components sinnvoll zusammenspielen.",
+      "Wiederkehrende Vorlagen von App Shells bis Bausteinen, die zeigen, wie mehrere Components zu ganzen Seiten und Abläufen zusammenspielen.",
   },
   {
     segment: "components",
