@@ -51,6 +51,7 @@ const targets: Record<string, string[]> = {
     "AbortActionError",
   ],
   "form-resets-after-modal-close": ["Form"],
+  "image-rounded-corners-default": ["Image"],
   "overlay-controller-add-on-close-return-type": ["OverlayController"],
   "cartesian-chart-empty-view": ["CartesianChart"],
   "option-value-inferred-from-mixed-children": ["Option"],

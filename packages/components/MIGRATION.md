@@ -28,6 +28,30 @@ The CLI's own output does detect it and prints the right form.
 
 ---
 
+<a id="image-rounded-corners-default"></a>
+
+## Image: rounded corners by default, withBorder draws only the border
+
+**Since `1.3.0`** · migration · no code change needed · also applies to
+`@mittwald/flow-remote-react-components`
+
+`Image` now has rounded corners by default, with or without a border. Previously
+only `withBorder` rounded them. `withBorder` now draws only the border, and the
+new `withRoundedCorners` prop (default `true`) controls the corner radius on its
+own. The border color is also more muted.
+
+Keep square corners where an image needs them:
+
+```diff
+- <Image src={src} alt="" />
++ <Image src={src} alt="" withRoundedCorners={false} />
+```
+
+**Apply:** No code change required. To keep square corners on an `Image` without
+`withBorder`, pass `withRoundedCorners={false}`.
+
+---
+
 <a id="popover-open-state-props"></a>
 
 ## Popover: `defaultOpen` renamed, `isOpen` and `onOpenChange` now work
