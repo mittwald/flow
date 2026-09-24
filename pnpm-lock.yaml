@@ -507,9 +507,9 @@ importers:
       '@replit/codemirror-indentation-markers':
         specifier: ^6.5.3
         version: 6.5.3(@codemirror/language@6.12.4)(@codemirror/state@6.7.5)(@codemirror/view@6.43.12)
-      '@tanstack/react-table':
+      '@tanstack/table-core':
         specifier: ^8.21.3
-        version: 8.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        version: 8.21.3
       '@types/invariant':
         specifier: ^2.2.37
         version: 2.2.37
@@ -634,6 +634,9 @@ importers:
       '@lezer/lr':
         specifier: ^1.4.10
         version: 1.4.10
+      '@mittwald/flow-components-base':
+        specifier: workspace:*
+        version: link:../components-base
       '@mittwald/flow-core':
         specifier: workspace:*
         version: link:../core
@@ -793,6 +796,43 @@ importers:
       yaml:
         specifier: ^2.9.0
         version: 2.9.1
+
+  packages/components-base:
+    dependencies:
+      '@internationalized/date':
+        specifier: ^3.12.3
+        version: 3.12.4
+      '@tanstack/table-core':
+        specifier: ^8.21.3
+        version: 8.21.3
+      dot-prop:
+        specifier: ^10.2.0
+        version: 10.2.0
+      luxon:
+        specifier: ^3.7.2
+        version: 3.7.2
+      mobx:
+        specifier: ^6.16.1
+        version: 6.16.1
+      object-code:
+        specifier: ^2.0.0
+        version: 2.0.0
+      remeda:
+        specifier: ^2.43.0
+        version: 2.50.0
+    devDependencies:
+      '@mittwald/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/luxon':
+        specifier: ^3.7.5
+        version: 3.7.5
+      typescript:
+        specifier: npm:@typescript/typescript6@^6.0.2
+        version: '@typescript/typescript6@6.0.2'
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.11(@types/node@25.9.7)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.5)(msw@2.7.3(@types/node@25.9.7)(@typescript/typescript6@6.0.2))(vite@8.3.0(@types/node@25.9.7)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.104.1)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.1))
 
   packages/core:
     dependencies:
@@ -4417,13 +4457,6 @@ packages:
 
   '@tabler/icons@3.46.0':
     resolution: {integrity: sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==}
-
-  '@tanstack/react-table@8.21.3':
-    resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
 
   '@tanstack/table-core@8.21.3':
     resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
@@ -13636,12 +13669,6 @@ snapshots:
       react: 19.3.0
 
   '@tabler/icons@3.46.0': {}
-
-  '@tanstack/react-table@8.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
-    dependencies:
-      '@tanstack/table-core': 8.21.3
-      react: 19.3.0
-      react-dom: 19.3.0(react@19.3.0)
 
   '@tanstack/table-core@8.21.3': {}
 
