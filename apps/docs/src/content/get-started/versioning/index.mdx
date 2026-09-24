@@ -13,7 +13,8 @@ description:
 
 Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
 Zusage gilt damit einheitlich für jedes Package. Es gibt keine
-Package-spezifischen Sonderregeln.
+Package-spezifischen Sonderregeln – ausgenommen ein Package, das als Ganzes Beta
+ist (siehe [Component Lifecycle](#component-lifecycle)).
 
 Seit Version `1.0.0` ist aus einer guten Absicht eine verlässliche Zusage
 geworden: Wir halten uns an [Semantic Versioning](https://semver.org) und gehen
@@ -165,6 +166,11 @@ Lifecycle-Status, der die obigen Regeln überschreibt:
 - **Stable** (Standard) – vollständig durch die obigen Regeln gebunden.
 - **Deprecated** – bis zur Entfernung in einer Major-Version weiter abgesichert
   und mit einem Migrationspfad versehen.
+
+Auch ein ganzes Package kann Beta sein. Das gilt derzeit für
+`@mittwald/flow-remote-vue-components`, die Vue-Anbindung für
+mStudio-Extensions: Es teilt die gemeinsame Version, ist aber von der
+Breaking-Change-Zusage ausgenommen.
 
 Das vollständige Lifecycle-Modell beschreibt
 [ADR 0003](https://github.com/mittwald/flow/blob/main/docs/adr/0003-component-lifecycle-status.md).
