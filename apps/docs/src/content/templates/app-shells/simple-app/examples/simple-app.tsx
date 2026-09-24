@@ -42,7 +42,6 @@ import {
   IconTrendingDown,
   IconTrendingUp,
 } from "@tabler/icons-react";
-import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./simple-app.module.css";
 
 const contracts = [
@@ -128,7 +127,11 @@ export default () => (
       wrap="wrap"
       gap="m"
     >
-      <MittwaldLogo className={styles.logo} />
+      <span
+        className={styles.logo}
+        role="img"
+        aria-label="mittwald"
+      />
       <HeaderNavigation
         aria-label="Hauptnavigation"
         className={styles.nav}

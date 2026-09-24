@@ -9,7 +9,6 @@ import {
   Text,
   TextField,
 } from "@mittwald/flow-react-components";
-import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./focus-task.module.css";
 
 export default () => (
@@ -25,7 +24,11 @@ export default () => (
       gap="l"
       className={styles.center}
     >
-      <MittwaldLogo className={styles.logo} />
+      <span
+        className={styles.logo}
+        role="img"
+        aria-label="mittwald"
+      />
       <LayoutCard>
         <Section>
           <Heading>Login</Heading>

@@ -22,7 +22,6 @@ import {
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
-import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./simple-app-sidebar.module.css";
 
 type Status = "Bezahlt" | "Offen" | "Überfällig";
@@ -45,65 +44,170 @@ interface Invoice {
   status: Status;
 }
 
-const statuses: Status[] = [
-  "Bezahlt",
-  "Offen",
-  "Überfällig",
-];
-const customers = [
-  "KD-1042",
-  "KD-0987",
-  "KD-1120",
-  "KD-0765",
-  "KD-1298",
-  "KD-0553",
-];
-
-// Deterministic pseudo-randomness: the sample data should look unordered, but
-// stay identical between the server and client render (Math.random would not).
-const pseudoRandom = (seed: number) => {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-};
-
-const pick = <T,>(
-  options: readonly T[],
-  seed: number,
-): T => {
-  const value =
-    options[
-      Math.floor(pseudoRandom(seed) * options.length)
-    ];
-  if (value === undefined) {
-    throw new Error("Cannot pick from an empty list");
-  }
-  return value;
-};
-
 // A page of invoices, one per day counting back from 30.09.2026, with enough
 // rows to sort, filter and search through.
-const invoices: Invoice[] = Array.from(
-  { length: 20 },
-  (_, i) => {
-    const day = new Date(2026, 8, 30 - i);
-    const yyyy = day.getFullYear();
-    const mm = String(day.getMonth() + 1).padStart(2, "0");
-    const dd = String(day.getDate()).padStart(2, "0");
-    const value =
-      90 + Math.floor(pseudoRandom(i + 50) * 3000);
-    return {
-      number: `RE-2026-${String(148 + i).padStart(4, "0")}`,
-      customer: pick(customers, i + 1),
-      createdAt: `${yyyy}-${mm}-${dd}`,
-      date: `${dd}.${mm}.${yyyy}`,
-      amount: value.toLocaleString("de-DE", {
-        style: "currency",
-        currency: "EUR",
-      }),
-      status: pick(statuses, i + 100),
-    };
+const invoices: Invoice[] = [
+  {
+    number: "RE-2026-0148",
+    customer: "KD-1298",
+    createdAt: "2026-09-30",
+    date: "30.09.2026",
+    amount: "844,00 €",
+    status: "Offen",
   },
-);
+  {
+    number: "RE-2026-0149",
+    customer: "KD-0553",
+    createdAt: "2026-09-29",
+    date: "29.09.2026",
+    amount: "965,00 €",
+    status: "Bezahlt",
+  },
+  {
+    number: "RE-2026-0150",
+    customer: "KD-0987",
+    createdAt: "2026-09-28",
+    date: "28.09.2026",
+    amount: "917,00 €",
+    status: "Bezahlt",
+  },
+  {
+    number: "RE-2026-0151",
+    customer: "KD-0553",
+    createdAt: "2026-09-27",
+    date: "27.09.2026",
+    amount: "844,00 €",
+    status: "Überfällig",
+  },
+  {
+    number: "RE-2026-0152",
+    customer: "KD-1298",
+    createdAt: "2026-09-26",
+    date: "26.09.2026",
+    amount: "418,00 €",
+    status: "Überfällig",
+  },
+  {
+    number: "RE-2026-0153",
+    customer: "KD-0553",
+    createdAt: "2026-09-25",
+    date: "25.09.2026",
+    amount: "1.434,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0154",
+    customer: "KD-0553",
+    createdAt: "2026-09-24",
+    date: "24.09.2026",
+    amount: "1.559,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0155",
+    customer: "KD-0765",
+    createdAt: "2026-09-23",
+    date: "23.09.2026",
+    amount: "2.032,00 €",
+    status: "Überfällig",
+  },
+  {
+    number: "RE-2026-0156",
+    customer: "KD-0987",
+    createdAt: "2026-09-22",
+    date: "22.09.2026",
+    amount: "2.269,00 €",
+    status: "Bezahlt",
+  },
+  {
+    number: "RE-2026-0157",
+    customer: "KD-1298",
+    createdAt: "2026-09-21",
+    date: "21.09.2026",
+    amount: "1.230,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0158",
+    customer: "KD-1042",
+    createdAt: "2026-09-20",
+    date: "20.09.2026",
+    amount: "2.771,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0159",
+    customer: "KD-0987",
+    createdAt: "2026-09-19",
+    date: "19.09.2026",
+    amount: "2.556,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0160",
+    customer: "KD-1298",
+    createdAt: "2026-09-18",
+    date: "18.09.2026",
+    amount: "669,00 €",
+    status: "Bezahlt",
+  },
+  {
+    number: "RE-2026-0161",
+    customer: "KD-1042",
+    createdAt: "2026-09-17",
+    date: "17.09.2026",
+    amount: "1.761,00 €",
+    status: "Bezahlt",
+  },
+  {
+    number: "RE-2026-0162",
+    customer: "KD-0553",
+    createdAt: "2026-09-16",
+    date: "16.09.2026",
+    amount: "871,00 €",
+    status: "Überfällig",
+  },
+  {
+    number: "RE-2026-0163",
+    customer: "KD-0553",
+    createdAt: "2026-09-15",
+    date: "15.09.2026",
+    amount: "950,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0164",
+    customer: "KD-1042",
+    createdAt: "2026-09-14",
+    date: "14.09.2026",
+    amount: "1.555,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0165",
+    customer: "KD-1042",
+    createdAt: "2026-09-13",
+    date: "13.09.2026",
+    amount: "2.490,00 €",
+    status: "Bezahlt",
+  },
+  {
+    number: "RE-2026-0166",
+    customer: "KD-1298",
+    createdAt: "2026-09-12",
+    date: "12.09.2026",
+    amount: "2.259,00 €",
+    status: "Offen",
+  },
+  {
+    number: "RE-2026-0167",
+    customer: "KD-1120",
+    createdAt: "2026-09-11",
+    date: "11.09.2026",
+    amount: "545,00 €",
+    status: "Überfällig",
+  },
+];
 
 export default () => {
   const InvoiceList = typedList<Invoice>();
@@ -112,7 +216,11 @@ export default () => {
     <Flex direction="column" gap="l" className={styles.app}>
       <Flex gap="l" align="stretch" className={styles.body}>
         <LayoutCard className={styles.sidebar}>
-          <MittwaldLogo className={styles.logo} />
+          <span
+            className={styles.logo}
+            role="img"
+            aria-label="mittwald"
+          />
           <AreaNavigation />
           <Flex
             direction="column"

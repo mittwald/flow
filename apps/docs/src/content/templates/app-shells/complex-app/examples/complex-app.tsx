@@ -38,7 +38,6 @@ import {
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
-import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./complex-app.module.css";
 
 interface Mailbox {
@@ -193,7 +192,11 @@ const Topbar = () => (
     wrap="wrap"
     gap="m"
   >
-    <MittwaldLogo className={styles.logo} />
+    <span
+      className={styles.logo}
+      role="img"
+      aria-label="mittwald"
+    />
     <HeaderNavigation
       aria-label="Hauptnavigation"
       className={styles.topnav}

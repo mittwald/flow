@@ -20,7 +20,6 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 import { IconContrastFilled } from "@tabler/icons-react";
-import { MittwaldLogo } from "../../MittwaldLogo";
 import styles from "./complex-app-doku.module.css";
 
 const lorem =
@@ -34,7 +33,11 @@ export default () => (
       wrap="wrap"
       gap="m"
     >
-      <MittwaldLogo className={styles.logo} />
+      <span
+        className={styles.logo}
+        role="img"
+        aria-label="mittwald"
+      />
       <HeaderNavigation
         aria-label="Hauptnavigation"
         className={styles.topnav}
