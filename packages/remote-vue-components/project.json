@@ -33,6 +33,7 @@
         "default",
         "{projectRoot}/src/**/*",
         "{projectRoot}/dev/**/*",
+        "{workspaceRoot}/packages/remote-react-components/src/tests/lib/**/*",
         {
           "dependentTasksOutputFiles": "**/*",
           "transitive": false
