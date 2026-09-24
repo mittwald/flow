@@ -2,6 +2,7 @@
 import {
   Button,
   CodeBlock,
+  CopyButton,
   Section,
   TextField,
 } from "@mittwald/flow-remote-react-components";
@@ -16,6 +17,7 @@ export default function Page() {
         Fire proton torpedo
       </Button>
       <TextField onChange={setEvent} aria-label="Mission name" />
+      <CopyButton text="ssh://rebelbase.org" onCopy={setEvent} />
       <CodeBlock code={JSON.stringify(event, undefined, 2)} />
     </Section>
   );

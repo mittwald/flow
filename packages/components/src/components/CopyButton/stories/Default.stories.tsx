@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
 import { CopyButton } from "../CopyButton";
 
 const meta: Meta<typeof CopyButton> = {
@@ -7,6 +8,7 @@ const meta: Meta<typeof CopyButton> = {
   render: (props) => <CopyButton {...props} />,
   args: {
     text: "May the Force be with you.",
+    onCopy: action("onCopy"),
   },
   parameters: {
     controls: { disable: true },

@@ -29,6 +29,7 @@ export const CopyButton = createFlowRemoteComponent(
       onClickCapture: { event: "clickCapture" } as never,
       onContextMenu: { event: "contextMenu" } as never,
       onContextMenuCapture: { event: "contextMenuCapture" } as never,
+      onCopy: { event: "copy" } as never,
       onDoubleClick: { event: "doubleClick" } as never,
       onDoubleClickCapture: { event: "doubleClickCapture" } as never,
       onFocus: { event: "focus" } as never,
