@@ -177,16 +177,24 @@ export const hostHtml = (root: Element): string => {
 };
 
 /**
- * Elements react-aria and recharts keep once per document, not per render.
+ * Elements kept once per document, not per render — so whether one exists, or
+ * what it holds, depends on which scenarios ran before.
  *
  * - React-aria's live announcer, filled when something is announced and emptied
  *   on a timer of its own — a search in one scenario was still announcing "0
  *   matches" while the next one was read.
  * - Recharts' text-measurement span, holding whatever it measured last.
+ * - Flow's overlay container (`data-flow-overlays`, `OverlayContent`) while it is
+ *   empty. It is created by the first modal in the document and never removed,
+ *   so an empty one only says that some earlier scenario opened a modal — and
+ *   vitest orders the files of the two passes differently. Once it holds a
+ *   modal it is compared like any other overlay.
  */
 const isDocumentSingleton = (element: Element): boolean =>
   element.hasAttribute("data-live-announcer") ||
-  element.id === "recharts_measurement_span";
+  element.id === "recharts_measurement_span" ||
+  (element.hasAttribute("data-flow-overlays") &&
+    element.childElementCount === 0);
 
 /**
  * React-aria's description nodes (`useDescription`): one per description text
