@@ -4,7 +4,7 @@ import { gt } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
 import { selectEntries } from "../catalog/select.js";
 import { flowPackages } from "../flowPackages.generated.js";
-import { hasUncommittedChanges } from "../git.js";
+import { changedPaths, hasUncommittedChanges } from "../git.js";
 import {
   detectPackageManagerIn,
   resolveInvoke,
@@ -16,8 +16,8 @@ import { fetchVersions } from "../resolve/registry.js";
 import { readInstalledVersion, resolveRange } from "../resolve/range.js";
 import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
 import type { ParsedCommand } from "./args.js";
-import { displaySourcePath, resolveSourcePath } from "./codemod.js";
-import { renderList } from "./list.js";
+import { countsOf, displaySourcePath, resolveSourcePath } from "./codemod.js";
+import { describeStayedWithin, renderList } from "./list.js";
 import { renderPeers } from "./peers.js";
 
 export interface UpgradeDeps {
@@ -28,6 +28,8 @@ export interface UpgradeDeps {
   /** Which codemods to apply. `-y` and a non-TTY pass everything through. */
   choose: (entries: CatalogEntry[]) => Promise<CatalogEntry[]>;
   isDirty: (cwd: string) => boolean;
+  /** Paths git currently reports as changed — see `reportInstallSideEffects`. */
+  changedPaths: (cwd: string) => string[];
   readInstalledVersion: (cwd: string, name: string) => string | undefined;
   log: (message: string) => void;
   /**
@@ -46,6 +48,7 @@ export const defaultUpgradeDeps = (cwd: string): UpgradeDeps => ({
   runCodemod,
   choose: async (entries) => entries,
   isDirty: hasUncommittedChanges,
+  changedPaths,
   readInstalledVersion,
   log: (message) => process.stdout.write(`${message}\n`),
 });
@@ -73,6 +76,63 @@ const isOutside = (path: string, cwd: string): boolean => {
 const detectIndent = (raw: string): string => {
   const match = /\n([ \t]+)\S/.exec(raw);
   return match?.[1] ?? "  ";
+};
+
+/**
+ * The files an `upgrade` is expected to leave changed, by basename.
+ *
+ * Everything else the install rewrote is worth naming — see
+ * `reportInstallSideEffects`.
+ */
+const expectedChanges = new Set([
+  "package.json",
+  "package-lock.json",
+  "npm-shrinkwrap.json",
+  "pnpm-lock.yaml",
+  "yarn.lock",
+  "bun.lock",
+  "bun.lockb",
+]);
+
+/**
+ * Names files the install rewrote beyond the manifest and the lockfile.
+ *
+ * Pnpm 11 adds a `minimumReleaseAgeExclude` entry to `pnpm-workspace.yaml` when
+ * an install carries an explicit bump, so that `minimumReleaseAge` does not
+ * refuse a version published minutes ago. On pnpm 11.5 it appends a **second**
+ * entry for a package that already has one, and pnpm's own
+ * `verifyDepsBeforeRun` then matches the first entry and ignores the second —
+ * after which every script in that package fails with
+ * `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` before running anything. The install
+ * itself succeeded, so none of the recovery advice above applies, and the tool
+ * used to leave `git status` as the only trace that the file had been touched
+ * at all (#3117).
+ *
+ * Deliberately not pnpm-specific: any manager may grow a habit like this, and a
+ * reader who is told which files moved can check them whatever wrote them.
+ * `before` is taken ahead of the manifest write so `--allow-dirty` does not
+ * turn the consumer's own open changes into a finding.
+ */
+const reportInstallSideEffects = (
+  before: string[],
+  after: string[],
+  log: (message: string) => void,
+): void => {
+  const known = new Set(before);
+  const unexpected = after.filter(
+    (path) =>
+      !known.has(path) && !expectedChanges.has(path.split("/").at(-1) ?? path),
+  );
+
+  if (unexpected.length === 0) {
+    return;
+  }
+
+  log(
+    `\nThe install also changed ${unexpected.join(
+      ", ",
+    )} — not this command, the package manager.\nReview the diff before you commit: pnpm writes minimumReleaseAgeExclude entries\nthere, and a duplicate entry makes every later script in that package fail with\nERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION.`,
+  );
 };
 
 /**
@@ -135,7 +195,22 @@ export const runUpgrade = async (
     current,
     target,
     peers,
+    stayedWithin,
   } = range;
+
+  // A keyword that offered to cross a boundary and found nothing above it
+  // resolves to the same version the narrower keyword does. Said here as well
+  // as in `list` because an `upgrade major` that lands inside the current major
+  // looks, in every other line of this report, exactly like one that crossed.
+  const stayedWithinNote = describeStayedWithin({
+    from: current,
+    to: target,
+    revision,
+    stayedWithin,
+  });
+  if (stayedWithinNote !== "") {
+    log(stayedWithinNote);
+  }
 
   // A stale dist-tag or an exact version at or below `current` resolves
   // without complaint — `resolveRange` deliberately does not judge that
@@ -194,6 +269,9 @@ export const runUpgrade = async (
     log("--dry: skipping the install.");
   } else {
     log(`Upgrading Flow from ${current} to ${target}`);
+    // Taken before the write, not after: with `--allow-dirty` the tree already
+    // carries the consumer's own changes, and those are not the install's doing.
+    const changedBefore = deps.changedPaths(cwd);
     const indent = detectIndent(manifestRaw);
     writeFileSync(
       manifestPath,
@@ -214,6 +292,7 @@ export const runUpgrade = async (
       // the output instead of hidden behind a bare manager name. On a throw the
       // recovery message below carries the reason anyway.
       log(`Installed with ${deps.install(manager, cwd)}`);
+      reportInstallSideEffects(changedBefore, deps.changedPaths(cwd), log);
     } catch (error) {
       log(
         `The dependency bump was written but the install failed, so package.json is on\n${target} while node_modules still holds ${current}.\n\nDetected package manager: ${manager.agent}${
@@ -271,20 +350,24 @@ export const runUpgrade = async (
       changedCount += 1;
     }
 
-    // Same three-way distinction as the single-codemod command: "0 changed" on
-    // its own would read as success where nothing was looked at, or where the
-    // transform declined everything it saw.
+    // Same three-way distinction as the single-codemod command, and the same
+    // reading of "declined all": `unmodified > 0` proves the transform read
+    // files and handed them back, so it did not bail on the tree.
     if (result.errors > 0) {
       hadFailure = true;
       log(`  ${entry.id}: ${result.errors} file(s) failed to transform`);
     } else if (result.processedNothing) {
       hadFailure = true;
       log(`  ${entry.id}: no files under ${path} were processed`);
-    } else if (result.changed === 0 && result.skipped > 0) {
+    } else if (
+      result.changed === 0 &&
+      result.unmodified === 0 &&
+      result.skipped > 0
+    ) {
       hadFailure = true;
       log(`  ${entry.id}: declined all ${result.skipped} file(s) it looked at`);
     } else {
-      log(`  ${entry.id}: ${result.changed} file(s) changed`);
+      log(`  ${entry.id}: ${countsOf(result)}`);
     }
   }
 

@@ -56,7 +56,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage. The two directions cost very different amounts of work. Towards `RadioGroup` it is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` → `RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying over. Only `containerBreakpointSize` has no counterpart, and the joined row is not reproduced. Towards `Tabs` it is structural: the state props are `selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is no `Label` slot (the group label moves to the surrounding `Heading`, or to `aria-label` on `Tabs` when it should not be visible, or goes away), and the switched panels move inside the tabs — where they stay mounted, so form fields in them keep their registration.",
+      "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage — and where the usage does both, one rule decides it: if the switched branches contain form fields, take `RadioGroup`. `Tabs` keeps every panel mounted, so branches that were alternatives become siblings, and two branches registering the same field name collide. The two directions cost very different amounts of work. Towards `RadioGroup` it is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` → `RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying over. Only `containerBreakpointSize` has no counterpart, and the joined row is not reproduced. Towards `Tabs` it is structural: the state props are `selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is no `Label` slot (the group label moves to the surrounding `Heading`, or to `aria-label` on `Tabs` when it should not be visible, or goes away), and the switched panels move inside the tabs — where they stay mounted, so form fields in them keep their registration.",
   },
   {
     id: "align-to-combine",
@@ -205,10 +205,10 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     title:
       "Removed the underlying react-syntax-highlighter library from CodeBlock",
     kind: "migration",
-    action: "manual",
+    action: "codemod",
     remotePackage: true,
     apply:
-      "Check every `CodeBlock` usage against the current props (see the [CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)) and remove or replace props the new implementation does not support.",
+      "Remove these props from every `CodeBlock`: `color`, `style`, `customStyle`, `codeTagProps`, `useInlineStyles`, `showInlineLineNumbers`, `startingLineNumber`, `lineNumberContainerStyle`, `lineNumberStyle`, `wrapLines`, `wrapLongLines`, `lineProps`, `renderer`, `PreTag`, `CodeTag`. They were re-exported from `react-syntax-highlighter` and none of them exists any more. `code`, `copyable`, `language`, `showLineNumbers`, `className` and the children stay — note that `showLineNumbers` survived and `showInlineLineNumbers` did not. A codemod removes all fifteen. Two things it declines: a spread that might carry one (`<CodeBlock {...props} />`), and `code`, which narrowed from `string | string[]` to `string` — join an array yourself, with the line separator you want.",
   },
   {
     id: "muted-action-error-to-abort-action-error",
@@ -228,7 +228,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "No type change needed: the return type widened from `() => void` to `() => unknown`, and a `() => void` callback stays assignable. Instead, check every callback passed to `addOnClose`/`addOnOpen` for one that can return `false` — for example an arrow function whose body is an expression evaluating to `false`. `executeHandlers` now treats any handler returning `false` as a veto and cancels the close/open. A callback that returned `false` incidentally, with no intent to block anything, now silently cancels closes.",
+      "No type change needed: the return type widened from `() => void` to `() => unknown`, and a `() => void` callback stays assignable. Instead, check every callback passed to `addOnClose`/`addOnOpen` for one that can return `false`. `executeHandlers` now treats any handler returning `false` as a veto and cancels the close/open, so a callback that returned `false` incidentally, with no intent to block anything, now silently cancels closes. Only one shape is at risk: an arrow function with an **expression** body, where the expression is the return value (`addOnClose(() => setDirty(false))`). A block body without a `return` cannot return anything, and a function reference is worth one look at its body. So the search is the expression-body call sites — `addOnClose(() =>` and `addOnOpen(() =>` without a following `{` — and the question at each is whether that expression can evaluate to `false`.",
   },
   {
     id: "form-resets-after-modal-close",
@@ -248,7 +248,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of `emptyView={EmptyState}`.",
+      "Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of `emptyView={EmptyState}` — wherever the value is a **component**. Leave it alone wherever the value is already an element, including a variable holding one (`const view = <EmptyState />; emptyView={view}`), which was valid before and still is. That distinction is why there is no codemod: an uppercase identifier is a naming convention, not proof, and wrapping an element in JSX breaks it.",
   },
   {
     id: "action-prop-to-on-action",

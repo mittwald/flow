@@ -2,7 +2,37 @@ import { existsSync } from "node:fs";
 import { isAbsolute, join } from "node:path";
 import { allEntries, unknownCodemodMessage } from "../catalog/entries.js";
 import type { ParsedCommand } from "./args.js";
-import { runCodemod, transformExists } from "../run/jscodeshift.js";
+import {
+  runCodemod,
+  transformExists,
+  type CodemodResult,
+} from "../run/jscodeshift.js";
+
+/**
+ * What a run did, as one clause: "3 file(s) changed, 27 unchanged".
+ *
+ * Shared with `upgrade`, which printed the change count alone. "0 file(s)
+ * changed" reads the same whether the codemod looked at one file or thirty, so
+ * nothing in an `upgrade` report said how much of the tree was visited — in
+ * exactly the mode that runs ten codemods (#3117).
+ *
+ * `declined` and `empty` are appended only when non-zero: on a healthy run both
+ * are zero, and two permanent ", 0 …" clauses would bury the counts that carry
+ * the answer.
+ */
+export const countsOf = (result: CodemodResult): string => {
+  const parts = [
+    `${result.changed} file(s) changed`,
+    `${result.unmodified} unchanged`,
+  ];
+  if (result.skipped > 0) {
+    parts.push(`${result.skipped} declined`);
+  }
+  if (result.empty > 0) {
+    parts.push(`${result.empty} empty`);
+  }
+  return parts.join(", ");
+};
 
 /**
  * Which sources to transform, resolved against `cwd`.
@@ -105,17 +135,20 @@ export const runSingleCodemod = async (
 
   // The same trap as `processedNothing`, one field over: a transform that
   // declines a file by returning nothing counts as `skipped`, not `unmodified`.
-  // If every file was skipped and none changed, "0 file(s) changed" would read
+  // If every file was declined and none changed, "0 file(s) changed" would read
   // as a clean no-op run when in fact the transform bailed on everything.
-  if (result.changed === 0 && result.skipped > 0) {
+  //
+  // "All" means all: `unmodified > 0` says the transform read those files and
+  // handed them back, so a decline among them is a per-file fact, not a failed
+  // run.
+  if (result.changed === 0 && result.unmodified === 0 && result.skipped > 0) {
     log(
       `${id}: the transform declined all ${result.skipped} file(s) it looked at, and changed none.`,
     );
     return 1;
   }
 
-  const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
-  const summary = `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.`;
+  const summary = `${id}: ${countsOf(result)}.`;
   // Only a catalogued id has a migration guide entry to point at — a transform
   // like `to-remote-package` with no catalogue entry has no anchor in
   // `MIGRATION.md` to link, so pointing there would be a dead link.
