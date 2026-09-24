@@ -71,6 +71,7 @@ describe("runSingleCodemod", () => {
     changed: 1,
     unmodified: 0,
     skipped: 0,
+    empty: 0,
     errors: 0,
     processedNothing: false,
     ...over,
@@ -148,5 +149,24 @@ describe("runSingleCodemod", () => {
     );
     expect(code).toBe(1);
     expect(output).toContain("declined all 3");
+  });
+
+  // #3117: one 0-byte file in a tree of thirty made this branch fire and the
+  // command exit 1, over a run that had read the other twenty-nine in full.
+  test("a decline among files the transform did read is not a failed run", async () => {
+    const { code, output } = await call(["align-to-combine", "src"], async () =>
+      result({ changed: 0, unmodified: 29, skipped: 1 }),
+    );
+    expect(code).toBe(0);
+    expect(output).not.toContain("declined all");
+    expect(output).toContain("0 file(s) changed, 29 unchanged, 1 skipped");
+  });
+
+  test("empty files are counted apart from declines and do not fail the run", async () => {
+    const { code, output } = await call(["align-to-combine", "src"], async () =>
+      result({ changed: 0, unmodified: 29, skipped: 0, empty: 1 }),
+    );
+    expect(code).toBe(0);
+    expect(output).toContain("0 file(s) changed, 29 unchanged, 1 empty");
   });
 });

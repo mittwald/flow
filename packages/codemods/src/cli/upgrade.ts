@@ -240,16 +240,20 @@ export const runUpgrade = async (
       changedCount += 1;
     }
 
-    // Same three-way distinction as the single-codemod command: "0 changed" on
-    // its own would read as success where nothing was looked at, or where the
-    // transform declined everything it saw.
+    // Same three-way distinction as the single-codemod command, and the same
+    // reading of "declined all": `unmodified > 0` proves the transform read
+    // files and handed them back, so it did not bail on the tree.
     if (result.errors > 0) {
       hadFailure = true;
       log(`  ${entry.id}: ${result.errors} file(s) failed to transform`);
     } else if (result.processedNothing) {
       hadFailure = true;
       log(`  ${entry.id}: no files under ${path} were processed`);
-    } else if (result.changed === 0 && result.skipped > 0) {
+    } else if (
+      result.changed === 0 &&
+      result.unmodified === 0 &&
+      result.skipped > 0
+    ) {
       hadFailure = true;
       log(`  ${entry.id}: declined all ${result.skipped} file(s) it looked at`);
     } else {
