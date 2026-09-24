@@ -27,24 +27,35 @@ description:
 Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`,
 `<Line />`, `<Bar />` oder eine Kombination daraus verwendet werden.
 
+Die Darstellungstypen bauen auf [Recharts](https://recharts.github.io) auf und
+reichen viele Properties unverändert durch. Deren Verhalten beschreibt die
+Recharts-Dokumentation, verlinkt beim jeweiligen Typ. Nicht jede
+Recharts-Property ist verfügbar: Farben, Linienstärke und Punkte setzt Flow
+selbst.
+
 ## Line
 
 Zeigt die Entwicklung einzelner Objekte über einen Zeitraum und ermöglicht den
-Vergleich zwischen ihnen.
+Vergleich zwischen ihnen. Durchgereicht werden etwa `type` und `unit`, siehe
+[Line in Recharts](https://recharts.github.io/en-US/api/Line/).
 
 <LiveCodeEditor example="line" editorCollapsed />
 
 ## Area
 
 Zeigt die Entwicklung des Gesamtwerts über einen Zeitraum und den jeweiligen
-Anteil einzelner Objekte daran.
+Anteil einzelner Objekte daran. Durchgereicht werden etwa `type`, `stackId` und
+`fillOpacity`, siehe
+[Area in Recharts](https://recharts.github.io/en-US/api/Area/).
 
 <LiveCodeEditor example="area" editorCollapsed />
 
 ## Bar
 
 Vergleicht Werte einzelner Kategorien miteinander. Ohne `stackId` stehen die
-Balken einer Kategorie nebeneinander.
+Balken einer Kategorie nebeneinander. Durchgereicht werden etwa `barSize`,
+`maxBarSize` und `minPointSize`, siehe
+[Bar in Recharts](https://recharts.github.io/en-US/api/Bar/).
 
 <LiveCodeEditor example="bar" editorCollapsed />
 
