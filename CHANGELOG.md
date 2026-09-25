@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.32](https://github.com/mittwald/flow/compare/1.3.0-next.31...1.3.0-next.32) (2026-09-25)
+
+## [1.2.26](https://github.com/mittwald/flow/compare/1.3.0-next.30...1.2.26) (2026-09-25)
+
+### Bug Fixes
+
+* **Link:** inherit the font size of the surrounding text for inline links ([dcbe4fe](https://github.com/mittwald/flow/commit/dcbe4fe5e7dac98dc0cea0e4b474b8f1a8d09382))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.26 ([1e2d3f5](https://github.com/mittwald/flow/commit/1e2d3f55e04885c22790d8f988914c3d71f7f05b))
+
+### Tests
+
+* update visual regression screenshots ([117f663](https://github.com/mittwald/flow/commit/117f663a782b8fb614ada623db9280efd52a8ae7))
+
 ## [1.3.0-next.31](https://github.com/mittwald/flow/compare/1.3.0-next.30...1.3.0-next.31) (2026-09-25)
 
 ### Styles
