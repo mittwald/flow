@@ -31,6 +31,7 @@
     "clean": "rimraf dist",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
+    "test:browser:prepare": "playwright install firefox webkit",
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json"
   },
   "dependencies": {

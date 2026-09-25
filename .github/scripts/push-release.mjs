@@ -50,10 +50,10 @@ function fail(message) {
   process.exit(1);
 }
 
-// `--no-verify` at every push even though the workflow sets
-// SKIP_INSTALL_SIMPLE_GIT_HOOKS: this is the one place where a `pre-push` hook
-// aborting strands a release npm has already accepted (#2932), so the guard
-// does not depend on a workflow-level env var staying put.
+// `--no-verify` at every push even though a runner no longer gets git hooks at
+// all (.github/scripts/init-git-hooks.cjs skips CI): this is the one place where
+// a `pre-push` hook aborting strands a release npm has already accepted (#2932),
+// so the guard does not depend on that staying true.
 const push = () => tryGit("push", "--no-verify", "origin", `HEAD:${branch}`);
 
 for (let attempt = 1; push() !== 0; attempt++) {

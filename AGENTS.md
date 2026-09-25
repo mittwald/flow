@@ -121,7 +121,7 @@ pnpm affected:test                         # only affected vs. main (what CI run
 pnpm nx test:unit components               # unit tests for one package
 pnpm nx test:compile components            # tsc --noEmit for one package
 
-pnpm test:browser:prepare                  # install Playwright browsers (once)
+pnpm test:browser:prepare                  # install Playwright browsers + system deps
 pnpm nx test:browser components --browser.name=webkit
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 pnpm nx test:visual:update remote-react-components              # update visual snapshots
@@ -189,9 +189,11 @@ commit the results.
   `pnpm install` — expect installs after switching branches. `pre-push` runs
   `pnpm lint` — which includes `format:check`, so a stray unformatted
   `.md`/`.json`/`.yml` blocks the push, not the commit; `pnpm format` fixes it.
-  The hooks are written by simple-git-hooks' `postinstall` (allowlisted in
-  `allowBuilds`), so a **runner** gets them too — CI workflows that write git
-  set `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to opt out (#2932).
+  The hooks are installed by the root `prepare`
+  (`.github/scripts/init-git-hooks.cjs`), which skips CI — simple-git-hooks' own
+  `postinstall` is denied in `allowBuilds`, because it ran on runners too and a
+  `pre-push` lint there aborted pushes after a publish had already happened
+  (#2932).
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
@@ -337,22 +339,16 @@ where the error points.
   builds and regenerates every dependency first. Reach for a direct
   single-package script only when the dependencies are already current
 
-- **Symptom:** An `nx` graph target dies with **"configured to use 10.28.2 of
+- **Symptom:** An `nx` graph target dies with **"configured to use 11.19.0 of
   pnpm … your current pnpm is v…"**
 
   **Cause:** You prefixed a dependency-graph target with `corepack`; nested
-  per-task pnpm spawns resolve to a pnpm other than the pinned `10.28.2`
+  per-task pnpm spawns resolve to a pnpm other than the pinned `11.19.0`
 
   **Fix:** Use **bare `pnpm nx …`** for graph targets (`build`, `dev`, anything
   with `dependsOn`/`^build`). `corepack pnpm --filter <pkg> <script>` stays fine
-  for single-package scripts
-
-- **Symptom:** Browser tests fail instantly with a missing-executable / "no
-  browser" error
-
-  **Cause:** Playwright browsers not installed in this environment
-
-  **Fix:** `pnpm test:browser:prepare` once
+  for single-package scripts. The version in the message is whatever
+  `packageManager` pins, so read it there rather than from this entry
 
 - **Symptom:** A visual test stays red in CI after you regenerated screenshots
   locally on macOS
@@ -442,34 +438,16 @@ where the error points.
   artifact, not just the plugin in isolation — a unit test and a test project
   with their own config both stay green while the release build is wrong
 
-- **Symptom:** A second **browser** vitest project makes the run die at startup
-  with **"Cannot define a nested project for a &lt;browser&gt; browser. The
-  project name '&lt;name&gt; (&lt;browser&gt;)' was already defined"**
+- **Symptom:** A **browser** vitest project you added never runs, and the suite
+  reports success
 
-  **Cause:** Vitest names the per-browser child projects by writing onto the
-  `browser.instances` objects. Spreading the shared `vitestBrowserTestConfig`
-  into two projects shares those objects by reference, so the second project's
-  name overwrites the first
+  **Cause:** The package's `test:browser` script selects projects by name. A
+  bare `--project=browser` matches only that one and silently skips the new one
 
-  **Fix:** Give each browser project its own copies:
-  `instances: vitestBrowserTestConfig.browser.instances.map((instance) => ({ ...instance }))`.
-  Also check the package's `test:browser` script actually selects the new
-  project — a bare `--project=browser` silently skips it, a glob like
-  `--project=browser*` (as `test:unit` already does with `unit*`) picks both up
-
-- **Symptom:** A CI workflow that runs `pnpm install` and then pushes, merges or
-  checks out spends minutes in `eslint`/`stylelint`/`prettier`, or reinstalls in
-  the middle of a merge
-
-  **Cause:** simple-git-hooks is allowlisted in `allowBuilds`, so its
-  `postinstall` writes `.git/hooks` on **every** `pnpm install` — runners
-  included. `pre-push` is `pnpm lint`, `post-merge`/`post-checkout` are
-  `pnpm install`
-
-  **Fix:** Add `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to the workflow's `env` (see
-  `publish.yml`). Where a failed push would strand something already published,
-  also pass `git push --no-verify` — that guard sits at the push and does not
-  depend on the env var staying put (#2932)
+  **Fix:** Use a glob — `--project=browser*`, as `test:unit` already does with
+  `unit*`. (Each project's browser instances come from
+  `createVitestBrowserTestConfig()`, which hands out fresh objects per call, so
+  the projects cannot collide over their generated names.)
 
 - **Symptom:** A visual test that hovers before `testScreenshot` captures the
   **non-hovered** state — the diff looks as if the CSS never applied
@@ -533,19 +511,6 @@ where the error points.
   to `null` with a `console.error` before `postMessage` ever sees them — so the
   suite renders a component missing the prop, not the `DataCloneError`. Read the
   console, or verify in `apps/remote-dom-demo` over the iframe connection
-
-- **Symptom:** `vitest run --update <file>` rewrites **every** baseline instead
-  of the one file's, and `git status` shows snapshots you never touched
-
-  **Cause:** `--update` takes an optional value, so it swallows the positional
-  test filter that follows it. The run then matches all files, updates all of
-  them, and reports the full test count (354, not 2) — the only signal that
-  anything went wrong
-
-  **Fix:** Put the filter **before** the flag (`vitest run <file> --update`) or
-  pin the flag's value (`--update=true <file>`). Check `git status` after any
-  `--update` and revert baselines outside your change; a stray one is
-  indistinguishable from an intentional update once committed
 
 - **Symptom:** One environment of a visual scenario fails while the other
   passes, and the **`update-screenshots`** label reports _"No Screenshot Updates
@@ -612,25 +577,6 @@ where the error points.
   regenerate. `checkSerializableProps` now fails generation on new ones; the
   pre-existing set is listed in `acknowledgedValueReturningProps`
 
-- **Symptom:** A remote-capable component reaches the host as `undefined` —
-  React throws **"Element type is invalid: expected a string … but got:
-  undefined"** — although every generated file for it exists and is committed
-
-  **Cause:** The component is listed in **both** `@flr-generate` and
-  `packages/components/src/index/flr-universal.ts`. The two are either-or.
-  `remote-react-components/src/index.ts` is `export * from "./auto-generated"`
-  plus `export * from "./components"`, and the latter re-exports
-  `@mittwald/flow-react-components/flr-universal`. A name that both star exports
-  provide is ambiguous, and ESM resolves it to nothing — no error, no warning,
-  and the component's own code is never the problem
-
-  **Fix:** Pick one. `@flr-generate` for a component the host materializes from
-  a `flr-*` element; `flr-universal` for one the remote app renders itself
-  (`Action`, `LightBox` and `List` are there, and correspondingly absent from
-  `auto-generated`). To confirm the diagnosis, import the name from
-  `@/auto-generated` and from `@/index` in one file and log both — it is in the
-  first and missing from the second
-
 - **Symptom:** A `components` browser test keeps **passing** after you change
   `packages/icons` — including a test written to fail on exactly that change.
   The build is not the problem: `pnpm nx build icons` runs `tsc` and `dist`
@@ -645,14 +591,6 @@ where the error points.
   **Fix:** Delete `packages/components/node_modules/.vite*` after rebuilding.
   And confirm a new regression test actually fails without its fix: this one
   passed in both directions, which is the only symptom you get
-
-- **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
-  "Check all generated code is committed"
-
-  **Cause:** `MIGRATION.md` is generated from
-  `packages/codemods/src/migrations/<id>/entry.md`
-
-  **Fix:** Edit the catalogue entry, run `pnpm nx build codemods`, commit both
 
 - **Symptom:** `stylelint` fails with **`flow/no-unknown-global-flow-class`** —
   a `:global(.flow--…)` name resolves to nothing

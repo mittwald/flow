@@ -18,6 +18,11 @@ import {
   rejectedProps,
 } from "./lib/checkSerializableProps";
 import type { ComponentDoc } from "react-docgen-typescript";
+import {
+  findUniversalExportOverlap,
+  formatUniversalExportOverlapReport,
+  readUniversalExportNames,
+} from "./lib/checkUniversalExportOverlap";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
 import { remoteComponentBaseNameOf } from "./lib/remoteComponentBaseNameOf";
@@ -30,6 +35,13 @@ import path from "path";
 import { docPropertiesInternalFileFromRoot } from "../docProperties";
 
 const jetpack = jp.dir("../..");
+
+/**
+ * The curated remote-safe surface, read as text — see
+ * checkUniversalExportOverlap.
+ */
+const universalExportSurfaceFile =
+  "packages/components/src/index/flr-universal.ts";
 
 async function generate() {
   console.log("🤓 Read component specification file");
@@ -86,6 +98,22 @@ async function generate() {
   const obsolete = obsoleteBaselineEntries(unserializableProps);
   if (obsolete.length > 0) {
     throw new Error(formatObsoleteBaselineReport(obsolete));
+  }
+
+  /*
+   * Thrown for the same reason: a component that is both generated and
+   * universal reaches the extension developer as `undefined`, with every
+   * generated file present and correct. This is the only place that sees both
+   * lists.
+   */
+  const overlap = findUniversalExportOverlap(
+    components.map((c) => remoteComponentBaseNameOf(c)),
+    readUniversalExportNames(
+      (await jetpack.readAsync(universalExportSurfaceFile)) ?? "",
+    ),
+  );
+  if (overlap.length > 0) {
+    throw new Error(formatUniversalExportOverlapReport(overlap));
   }
 
   const acknowledged = unserializableProps.length - rejected.length;

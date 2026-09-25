@@ -38,13 +38,10 @@ browser (`--browser.name=webkit`) only verifies one of them.
 
 ### Running the Tests
 
-First, install the required test browsers:
+The nx targets install the required test browsers themselves. On Linux they also
+need system libraries, which `pnpm test:browser:prepare` adds once.
 
-```sh
-pnpm test:browser:prepare
-```
-
-You can then run the tests using the following command:
+Run the tests using the following command:
 
 ```sh
 pnpm nx run remote-react-components:test:visual --browser.name=webkit

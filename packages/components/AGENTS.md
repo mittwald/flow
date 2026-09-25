@@ -313,8 +313,9 @@ if ("action" in props) {
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
 
 Run: `pnpm nx test:unit components`,
-`pnpm nx test:browser components --browser.name=webkit`. Browser tests need
-`pnpm test:browser:prepare` once.
+`pnpm nx test:browser components --browser.name=webkit`. The browser targets
+install the Playwright browsers themselves; `pnpm test:browser:prepare` adds the
+system libraries Linux needs.
 
 **Iterate through nx too**, not with a bare `vitest`. Everything after the `--`
 goes to vitest, so a single file and watch mode have nx targets as well:

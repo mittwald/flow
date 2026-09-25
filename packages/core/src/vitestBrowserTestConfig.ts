@@ -12,7 +12,17 @@ const setReducedMotion: BrowserCommand<
   });
 };
 
-export const vitestBrowserTestConfig: ProjectConfig = {
+/*
+ * A factory, not a shared object: vitest names a browser project's nested
+ * per-browser projects by writing onto the `browser.instances` objects. Two
+ * projects built from one shared config would share those objects, the second
+ * name would overwrite the first, and the run dies at startup with "Cannot
+ * define a nested project for a <browser> browser. The project name … was
+ * already defined". Every call hands out its own instances, so a consumer
+ * cannot get that wrong — and neither can one that reshapes them with `filter`
+ * or `map`, which copy the array but not its objects.
+ */
+export const createVitestBrowserTestConfig = (): ProjectConfig => ({
   css: {
     include: /.+/,
   },
@@ -66,11 +76,11 @@ export const vitestBrowserTestConfig: ProjectConfig = {
     instances: [
       {
         browser: "firefox",
-        viewport,
+        viewport: { ...viewport },
       },
       {
         browser: "webkit",
-        viewport,
+        viewport: { ...viewport },
       },
       /**
        * Exclude Chromium for visual tests for now due to flakiness in CI
@@ -89,4 +99,4 @@ export const vitestBrowserTestConfig: ProjectConfig = {
        */
     ],
   },
-};
+});
