@@ -1,7 +1,6 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test } from "vitest";
-import { userEvent } from "vitest/browser";
+import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
   "CodeBlock (%s)",
@@ -54,28 +53,19 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
   "serverShortId": "s-123456",
 }`}
+        showLineNumbers
         truncateLines={4}
       />,
     );
 
-    await userEvent.keyboard("{tab}");
+    /* A mouse click leaves no focus ring in the captures. */
+    const toggle = page.getByRole("button", { name: /show (more|less)/i });
 
-    /*
-     * Both captures below encode the toggle's focus ring, and toggling swaps
-     * its label, so React re-renders the button the focus sits on. Wait for the
-     * focus each time instead of racing it — see `@/tests/lib/scenarioFocus`.
-     */
-    await waitForFocusInTheScenario();
-
-    await userEvent.keyboard("{enter}");
-
-    await waitForFocusInTheScenario();
+    await toggle.click();
 
     await testScreenshot("CodeBlock truncated - expanded");
 
-    await userEvent.keyboard("{enter}");
-
-    await waitForFocusInTheScenario();
+    await toggle.click();
 
     await testScreenshot("CodeBlock truncated - collapsed");
   },

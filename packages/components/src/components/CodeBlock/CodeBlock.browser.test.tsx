@@ -42,6 +42,52 @@ test("long code folds behind a toggle that unfolds it again", async () => {
   await expect.element(showMore()).toBeVisible();
 });
 
+/*
+ * The toggle animates to a measured height, which must not outlive the
+ * animation – code that grows later would be clipped. Without motion (as here)
+ * there is no transition to end, so the height is never pinned.
+ */
+test("unfolded code is not clipped", async () => {
+  await render(<CodeBlock code={lines(20)} truncateLines />);
+
+  await showMore().click();
+  await expect.element(showLess()).toBeVisible();
+
+  const editor = document.querySelector<HTMLElement>(".cm-editor");
+  if (!editor) {
+    throw new Error("CodeMirror editor not found");
+  }
+  expect(getComputedStyle(editor).maxHeight).toBe("none");
+  expect(editor.clientHeight).toBe(editor.scrollHeight);
+});
+
+/*
+ * The line numbers are as tall as the whole document. Clipping only the code
+ * left them stretching a folded block to its full height.
+ */
+test("line numbers fold with the code", async () => {
+  await render(
+    <>
+      <CodeBlock code={lines(20)} truncateLines />
+      <CodeBlock code={lines(20)} truncateLines showLineNumbers />
+    </>,
+  );
+
+  await expect.element(showMore().first()).toBeVisible();
+  await expect.element(showMore().last()).toBeVisible();
+
+  const [withoutNumbers, withNumbers] = Array.from(
+    document.querySelectorAll<HTMLElement>(".cm-editor"),
+  );
+  if (!withoutNumbers || !withNumbers) {
+    throw new Error("CodeMirror editors not found");
+  }
+  expect(withNumbers.querySelector(".cm-gutters")).not.toBeNull();
+  expect(withNumbers.getBoundingClientRect().height).toBe(
+    withoutNumbers.getBoundingClientRect().height,
+  );
+});
+
 test("a line count sets where the folding starts", async () => {
   await render(<CodeBlock code={lines(5)} truncateLines={4} />);
 

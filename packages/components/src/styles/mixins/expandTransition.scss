@@ -1,0 +1,6 @@
+/* Timing of content that expands and collapses (Accordion, CodeBlock): an
+   ease-out that starts fast and settles softly. */
+@mixin expandTransition {
+  transition-duration: var(--transition--duration--default);
+  transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
