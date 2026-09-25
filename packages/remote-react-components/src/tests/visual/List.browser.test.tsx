@@ -168,6 +168,7 @@ test
       ContextualHelpTrigger,
       ContextMenu,
       MenuItem,
+      Link,
     },
   }) => {
     function Wrapper() {
@@ -200,7 +201,12 @@ test
                     </ContextualHelpTrigger>
                   </Combine>
                 </Text>
-                <Text>Last deploy 2 days ago</Text>
+                <Text>
+                  Last deploy 2 days ago,{" "}
+                  <Link href="#" target="_blank">
+                    see logs
+                  </Link>
+                </Text>
                 <ContextMenu>
                   <MenuItem>Show details</MenuItem>
                 </ContextMenu>
