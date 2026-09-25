@@ -318,6 +318,7 @@ jobs:
       # deferred to after a successful publish below. That deferral is what kept
       # the failed `next` publishes of 2026-08-27 harmless.
       - name: Version 🏷️
+        id: version
         if: ${{ !inputs.only_publish && env.LINE == 'main' }}
         env:
           RELEASE_AS: ${{ inputs.release_as }}
@@ -336,6 +337,9 @@ jobs:
           # rehearsal. So detect the pre-graduated promotion and skip.
           if [ -n "$PROMOTION_VERSION" ] && [ "$current" = "$PROMOTION_VERSION" ]; then
             echo "Promotion branch already graduated to ${current} in the PR — skipping lerna version."
+            # Read by the release step below: this is the one path that creates
+            # no commit, so nothing pushes `main` and nothing rebuilds the docs.
+            echo "graduated=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -551,6 +555,7 @@ jobs:
         env:
           PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
           PR: ${{ steps.ctx.outputs.pr }}
+          GRADUATED: ${{ steps.version.outputs.graduated }}
         run: |
           # The tag is the version we actually published — read it from source,
           # NOT from `git describe`. A pre-graduated promotion (RFC #2711) creates
@@ -630,6 +635,28 @@ jobs:
             --notes-file release-notes.md \
             ${prerelease}
           rm -f release-notes.md
+
+          # The docs site renders /releases from the GitHub Releases API at
+          # BUILD time (`apps/docs` is `output: "export"`), and `deploy-main.yml`
+          # only runs on a push to `main`. So the page is only ever as current as
+          # the last push.
+          #
+          # A normal release pushes its `chore(release):` bump commit a few lines
+          # above, and the deploy that push triggers reaches the page minutes
+          # later — after this Release exists. A pre-graduated promotion (RFC
+          # #2711) pushes no commit: `main` already carries the version, only the
+          # tag moves, and a tag push does not trigger the deploy. The 1.2.0
+          # promotion left flow.mittwald.de/releases at 1.1.53 that way.
+          #
+          # `graduated` is set by the Version step on exactly that path, so it
+          # is the signal that nothing will rebuild the docs. Never fatal: the
+          # publish and the Release are already done, and a stale docs page is
+          # not worth a red release run.
+          if [ "${GRADUATED}" = "true" ]; then
+            echo "No new commit on main — dispatching a docs rebuild for ${tag}."
+            gh workflow run deploy-main.yml --ref main \
+              || echo "::warning::Could not dispatch deploy-main.yml — /releases will stay stale until the next push to main. Run it by hand."
+          fi
 
       # Same deferral, same reason — but deliberately NO GitHub Release. Per RFC
       # #2711 the curated GitHub Release is canonical only at PROMOTION

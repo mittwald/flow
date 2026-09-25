@@ -215,6 +215,17 @@ flowchart LR
   and
   [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
 
+- **The docs site is rebuilt after a promotion.** `flow.mittwald.de/releases`
+  renders the GitHub Releases API at **build** time (`apps/docs` is
+  `output: "export"`), and `deploy-main.yml` runs on a push to `main`. A normal
+  release pushes its `chore(release):` commit, and the deploy that push triggers
+  renders the page minutes later — after the Release exists. A promotion pushes
+  no commit (the version is already graduated in the PR), only the tag moves,
+  and a tag push triggers nothing: the 1.2.0 promotion left the page at 1.1.53.
+  So `publish.yml` dispatches `deploy-main.yml` itself on that path. The
+  dispatch is non-fatal — a stale page is not worth failing a run whose packages
+  are already on npm.
+
 - **The cut (history).** The move from the `0.2.0-alpha.*` line to `1.0.0` was a
   one-time manual `workflow_dispatch` off `main`; `next` was branched from
   `main` immediately afterwards. Both standing lines have been live since — the
