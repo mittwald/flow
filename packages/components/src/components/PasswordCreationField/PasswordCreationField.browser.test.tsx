@@ -11,7 +11,7 @@ import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
 import Button from "@/components/Button";
-import { userEvent } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
 
@@ -68,9 +68,14 @@ describe("PasswordCreationField Tests", () => {
     vitest.useFakeTimers();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     vitest.useRealTimers();
     destroyAnnouncer();
+    // Every test renders the same layout. A pointer left on a button hovers the
+    // next test's button, and its tooltip then swallows that test's Escape.
+    await page
+      .elementLocator(document.body)
+      .hover({ position: { x: 0, y: 0 }, force: true });
   });
 
   test("renders empty list without errors", async () => {
@@ -147,8 +152,10 @@ describe("PasswordCreationField Tests", () => {
 
     await userEvent.click(infoButton);
     const rules = renderResult.getByLocator("[data-rule]");
-    expect(rules).toHaveLength(1);
-    expect(rules.first()).toHaveAttribute("data-rule-valid", "true");
+    await expect.poll(() => rules.elements()).toHaveLength(1);
+    await expect
+      .element(rules.first())
+      .toHaveAttribute("data-rule-valid", "true");
     expect(rules.first()).toHaveTextContent("Maximal 2 Zahlen");
     await userEvent.keyboard("{escape}");
 
@@ -159,8 +166,10 @@ describe("PasswordCreationField Tests", () => {
 
     await userEvent.click(infoButton);
 
-    expect(rules).toHaveLength(1);
-    expect(rules.first()).toHaveAttribute("data-rule-valid", "false");
+    await expect.poll(() => rules.elements()).toHaveLength(1);
+    await expect
+      .element(rules.first())
+      .toHaveAttribute("data-rule-valid", "false");
     expect(rules.first()).toHaveTextContent("Maximal 2 Zahlen");
   });
 
@@ -180,7 +189,7 @@ describe("PasswordCreationField Tests", () => {
     await userEvent.click(infoButton);
 
     const rules = renderResult.getByLocator("[data-rule]");
-    expect(rules).toHaveLength(2);
+    await expect.poll(() => rules.elements()).toHaveLength(2);
   });
 
   test("will reveal and hide password when clicked", async () => {
@@ -360,10 +369,10 @@ describe("PasswordCreationField Tests", () => {
     expect(rulesList).toBeInTheDocument();
 
     const rules = rulesList.getByRole("listitem");
-    expect(rules).toHaveLength(2);
-    expect(rules.first()).toHaveTextContent(
-      "Nicht erfüllt: Mindestens 8 Zeichen",
-    );
+    await expect.poll(() => rules.elements()).toHaveLength(2);
+    await expect
+      .element(rules.first())
+      .toHaveTextContent("Nicht erfüllt: Mindestens 8 Zeichen");
 
     await userEvent.keyboard("{escape}");
     await userEvent.type(renderResult.getByRole("textbox"), "abcdefgh1");
