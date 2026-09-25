@@ -10,6 +10,12 @@ and have the same names, props and composition rules. **Read that package's
 depend on, and where the documentation lives. It applies here unchanged; nothing
 below repeats it.
 
+That package is a dependency of this one. npm and yarn hoist it, so its guide is
+at `node_modules/@mittwald/flow-react-components/USAGE.md`. pnpm does not, so
+there it is not reachable from your project — fetch
+`https://cdn.jsdelivr.net/npm/@mittwald/flow-react-components@<version>/USAGE.md`
+instead, with this package's version: all Flow packages share one version.
+
 What follows is only what is different because your UI renders across a process
 boundary.
 
@@ -48,6 +54,16 @@ The full explainer:
   },
 }
 ```
+
+Under pnpm the index is not importable from your project either (see above); it
+is at
+`https://cdn.jsdelivr.net/npm/@mittwald/flow-react-components@<version>/dist/assets/component-index.json`.
+The documentation carries the same information: every component page opens with
+its remote import and the props that do not cross (e.g.
+`https://flow.mittwald.de/raw/components/actions/button.md`), and
+`https://flow.mittwald.de/llms.json` has it as `remote` per page. The page
+examples import from `@mittwald/flow-react-components` — in extension code,
+import from this package instead.
 
 Check `remote.available` before reaching for a component. These ten have no
 remote counterpart:

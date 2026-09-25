@@ -244,6 +244,26 @@ if ("action" in props) {
   match prop values (`.size-s`, `.primary`).
 - Class composition with `clsx`, consumer `className` appended last:
   `clsx(styles.button, styles[size], styles[color], className)`.
+- **Element-type selectors are a lint error** — `selector-max-type: 0` on
+  `*.module.{css,scss}`, blocking since #3021. Style what the component renders,
+  through its own class. Where the element genuinely carries no class —
+  react-aria internals, third-party svgs, consumer-supplied children, or content
+  the component does not author (`Markdown`, `Text`) — opt out explicitly and
+  name the reason:
+  `// stylelint-disable-next-line selector-max-type -- react-markdown output`.
+  There is no autofix. Two traps when introducing a class instead: a `flow--`
+  class pulls the global reset's
+  `*:where([class*="flow--"] [class*="flow--"]) { font: inherit }`
+  (`src/styles/globals.scss`) onto the element — that reflows `CodeBlock`'s
+  `<pre>`, so it stays an element selector — and a class raises specificity
+  where an element selector deliberately lost a tie (`Modal`'s `> span` against
+  `.flow--heading--heading-content:empty`).
+- **`:global(.flow--…)` names are checked** by
+  `flow/no-unknown-global-flow-class` (`dev/stylelint/`), against the classes
+  the committed `*.module.d.scss.ts` stubs declare, run through the build's own
+  `cssModuleClassNameGenerator`. The reference has to name a class some
+  component actually generates — otherwise the selector matches nothing, which
+  used to fail without a single signal anywhere.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
@@ -309,6 +329,24 @@ compiles against. A bare `vitest run` skips it and renders against whatever
 `packages/design-tokens/dist` happens to hold — a token added in the same branch
 is simply absent, and CSS drops every declaration referencing it without a
 warning (#3194).
+
+Three traps cost time in every new browser test:
+
+- **Click the label, not the control.** `Checkbox`, `Radio`, `Switch` and
+  `Rating` stack their icons on top of a visually hidden input, so playwright
+  refuses the input with `<svg …> intercepts pointer events`. Query the control
+  by role for assertions and click its label text
+  (`page.getByText(name, { exact: true })`).
+- **Hover needs the pointer modality first.** react-aria only counts a hover as
+  a hover while `getInteractionModality() === "pointer"`, and a freshly loaded
+  page has no modality at all — so `Tooltip` and everything else that opens on
+  hover stays closed no matter how long the test waits. Press something neutral
+  with the mouse once before hovering.
+- **`await render(...)` before any bare DOM query.** A locator assertion polls
+  and waits the first render out; a `document.querySelector` right after
+  `render()` runs before React has committed and reads `null`. That turns an
+  assertion that something is _absent_ into a silent pass, so give any helper
+  that queries the DOM directly a guard that throws when its element is missing.
 
 ## i18n & a11y
 
@@ -405,7 +443,10 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   children are left intact.
 - **Semantic generated CSS classes are coordination points** — scoped modules
   still use `:global(.flow--…)` when independently rendered Flow descendants
-  must affect layout.
+  must affect layout. Copy the name from the target component's
+  `*.module.d.scss.ts`; the generator drops a suffix that equals the component
+  name, so a hand-derived name silently matches nothing.
+  `flow/no-unknown-global-flow-class` blocks that.
 - **Controllers coexist with declarative props** — overlay-like APIs support
   controlled/uncontrolled props _and_ a controller object, not one or the other.
 - **A component without `value` and without `defaultValue` still has to render

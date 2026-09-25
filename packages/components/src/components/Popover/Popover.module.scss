@@ -14,6 +14,21 @@
  */
 .non-modal {
   max-height: none !important;
+
+  /*
+   * The lowest level that still puts the popover in front of the page. Claiming
+   * none at all left it in the `z-index: auto` group, where paint order is tree
+   * order — so anything positioned that came later in the document painted over
+   * it, and a `position: relative` written as a containing block for something
+   * inside it was enough (a `TabNavigation` in a `LayoutCard` below the anchor,
+   * #3232). Nothing an overlay can read tells that apart from a deliberate
+   * claim, so it has to outrank the whole group.
+   *
+   * The cost is app chrome that claims level 1 itself: the popover comes later
+   * in the document than a header does, so it now wins that tie. Chrome that has
+   * to stay above a coach mark claims 2 — the docs site's own header does.
+   */
+  z-index: 1;
 }
 
 .popover {
@@ -44,7 +59,7 @@
   .tip {
     width: var(--popover--tip-width);
 
-    svg {
+    .tipIcon {
       display: block;
       fill: var(--popover--background-color);
       stroke: var(--popover--border-color);
@@ -67,7 +82,7 @@
       margin-top: var(--popover--tip-height);
     }
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(180deg);
     }
   }
@@ -79,7 +94,7 @@
       margin-inline-start: var(--popover--tip-height);
     }
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(90deg);
     }
   }
@@ -91,7 +106,7 @@
       margin-inline-end: var(--popover--tip-height);
     }
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(-90deg);
     }
   }

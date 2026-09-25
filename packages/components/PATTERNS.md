@@ -532,10 +532,12 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/LayoutCard/LayoutCard.module.scss:16`
   - ✓ a layout must style standalone Flow classes unreachable via props/context.
   - ✗ normal composition → PropsContext classes.
-- **Container-query ownership** `[undocumented]` — inline-size container at the
-  semantic boundary. `src/components/Section/Section.module.scss:5`
+- **Container-query ownership** `[undocumented]` — the component that queries a
+  container declares it itself.
+  `src/components/ColumnLayout/ColumnLayout.module.scss:2`
   - ✓ descendants adapt to this component's available space.
   - ✗ viewport-wide adaptation → responsive primitives/media.
+  - ✗ a container nothing queries → no `container-type` at all.
 - **Logical CSS properties** `[undocumented]` — `padding-inline`,
   `margin-inline-start`. `src/components/Button/Button.module.scss:13`
   - ✓ direction-safe spacing/border/size.

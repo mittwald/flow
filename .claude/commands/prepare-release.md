@@ -6,10 +6,11 @@ argument-hint: "optional free-text, e.g. --from next --to main --version 0.3.0"
 ---
 
 Prepare the **promotion / release PR** for mittwald Flow, following the release
-model in RFC #2711. You draft a curated, user-facing changelog, freeze the
-release state on a branch, **graduate the version to the stable `x.y.0` in the
-PR itself**, and open a **Draft** PR. You do **not** build, tag, publish, or
-create the GitHub release — CI does all of that on merge.
+model in RFC #2711. You draft a curated, user-facing changelog, **capture its
+figures from the real stories**, freeze the release state on a branch,
+**graduate the version to the stable `x.y.0` in the PR itself**, and open a
+**Draft** PR. You do **not** build, tag, publish, or create the GitHub release —
+CI does all of that on merge.
 
 Graduating in the PR (rather than leaving CI to bump on merge) is deliberate:
 the PR diff then reads honestly as `x.(y-1).z → x.y.0` instead of promoting a
@@ -101,7 +102,121 @@ requires `--from`/`--to` overrides before doing anything else.
    migrate** (breaking changes with concrete migration steps); otherwise omit
    the whole section.
 
-8. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
+   For each feature section, note whether it maps to a component with stories.
+   Those get a figure in the next step; a feature with no story — the
+   `@mittwald/flow-codemods` CLI, a build change — gets none, and you say so
+   rather than leaving an empty placeholder behind.
+
+8. **Capture the figures.** One per notable feature that has stories, never one
+   per prop variant: compose the variants into a single image.
+
+   Storybook renders the **working tree**, so freeze the release content first.
+   This is local; nothing reaches the remote before the gate in Step 10:
+
+   ```shell
+   git checkout -B release/x.y.0 origin/<from>
+   ```
+
+   Start one Storybook and reuse it for both halves of the step. Port 6006 is
+   routinely held by another worktree's Storybook, so name a free one:
+
+   ```shell
+   pnpm nx dev components -- --port 6007 --no-open
+
+   # Resolve a component's story ids — `componentPath` is the mapping.
+   curl -s http://localhost:6007/index.json \
+     | jq -r '.entries[] | select(.componentPath == "@/components/Rating") | .id'
+   ```
+
+   Write a spec per figure — strict JSON, no comments and no trailing commas —
+   and capture it:
+
+   ```json
+   {
+     "name": "rating",
+     "panels": [
+       {
+         "story": "form-controls-rating--default",
+         "caption": "maxValue={10}",
+         "args": { "maxValue": 10 },
+         "expect": [{ "selector": "input[type=radio]", "count": 10 }]
+       },
+       { "story": "form-controls-rating--with-segments" }
+     ],
+     "scale": 2,
+     "version": "1.1.0",
+     "width": 500
+   }
+   ```
+
+   `version` + `name` give the output path
+   (`apps/docs/public/assets/releases/1.1.0/rating.png`); `width` is the CSS px
+   the stories render at and `scale` the `deviceScaleFactor`; `caption` is the
+   monospace line above a panel, naming the prop it demonstrates; `args` and
+   `globals` (e.g. `{ "theme": "dark" }`) drive the variant; `expect` asserts
+   what the panel actually rendered.
+
+   ```shell
+   pnpm release:figure --spec <spec.json> --storybook-url http://localhost:6007
+   ```
+
+   Omit `--storybook-url` and the script starts its own Storybook on a free port
+   via `pnpm nx dev components` and stops it again. That is slower, and it gives
+   you no server to resolve story ids against.
+
+   The renderer is whichever Playwright browser is installed — Chromium first,
+   then WebKit, then Firefox, and the run names the one it used. Pin it with
+   `--browser <name>`. `pnpm test:browser:prepare` installs only WebKit and
+   Firefox, so add `pnpm exec playwright install chromium` if you want Chromium.
+   There is no `--out`: the spec is the only source of the output path, which
+   keeps every figure inside the release-assets tree.
+
+   **`expect` is not optional decoration.** Storybook filters `args=` down to
+   the story's declared `argTypes` and drops everything else **silently** — the
+   story still renders, just not in the state that was asked for. `defaultValue`
+   went that way while #3029 was being prepared. The URL is therefore evidence
+   of nothing, and the script rejects a spec whose args-driving panel asserts no
+   DOM.
+
+   **Then open every PNG and look at it.** A capture that is clipped, cropped
+   wrong or showing the wrong state renders fine and reads as plausible; the
+   first #3029 capture lost the bottom of its icons and survived a first pass.
+   Re-capture rather than ship a bad crop. Check the content too: these figures
+   are served from the docs site, where the Star Wars fixtures that are fine in
+   a story are out of place — prefer a story with neutral content, or pass
+   realistic content through an arg where the story declares one.
+
+   **Commit the figures on the release branch and reference them by the commit's
+   SHA.** Not a `user-attachments` upload: GitHub has no API for those — they
+   need an interactive logged-in browser session, which is exactly where #3029
+   stopped. A SHA URL needs no session, resolves the moment the commit exists
+   (so it works during PR review), and keeps resolving after `release/x.y.0` is
+   deleted post-merge. A branch URL does not, and a tag URL does not exist yet
+   at review time.
+
+   ```shell
+   git add apps/docs/public/assets/releases/x.y.0
+   git commit -m "docs(releases): add the x.y.0 release-note figures"
+   git rev-parse HEAD   # ← FIGURE_SHA, substituted into the notes in Step 9
+   ```
+
+   The merge carries the asset onto `<to>`, and under
+   `apps/docs/public/assets/releases/<version>/` the docs site serves it too —
+   which matters because `/releases` mirrors the GitHub Releases, so one asset
+   covers both surfaces. Committed binaries are no new precedent: `main` already
+   carries ~950 PNG/GIF files.
+
+   Two constraints the `/releases` rendering imposes, both verified:
+   - **Markdown image syntax, never an HTML `<img>`.** GitHub renders raw HTML
+     in a release body; the docs site's `<Markdown>` does not enable
+     `rehype-raw` and drops it. An HTML tag therefore works on one surface and
+     silently vanishes on the other — and with it any `width` attribute.
+   - **Nothing can resize the figure afterwards**, since that `width` attribute
+     is unavailable. Both surfaces cap it with `max-width: 100%`, so an
+     oversized figure is scaled down and an undersized one is simply small.
+     `width × scale` is the pixel width, and the script prints it.
+
+9. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
 
    ```markdown
    ## Release {{VERSION}}
@@ -131,6 +246,13 @@ requires `--from`/`--to` overrides before doing anything else.
    </details>
    ```
 
+   Every figure from Step 8 goes into `{{CURATED_NOTES}}` as a markdown image at
+   the SHA that step recorded:
+
+   ```markdown
+   ![Rating figure](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/rating.png)
+   ```
+
    The curated notes MUST sit **verbatim** between
    `<!-- release-notes:start -->` and `<!-- release-notes:end -->`, with nothing
    else between the markers — that block is the intended single source CI reads
@@ -147,22 +269,29 @@ requires `--from`/`--to` overrides before doing anything else.
    > prerelease→stable graduation produces only a useless "Version bump only"
    > changelog entry — the curated block is the real release body.
 
-9. **Preview + confirm.** Show the full assembled PR body plus the plan (branch
-   `release/x.y.0`, `from → to`, `current → target` version). Ask for explicit
-   confirmation **before any push or PR creation**. If declined, stop and change
-   nothing on the remote.
+10. **Preview + confirm.** Show the full assembled PR body plus the plan (branch
+    `release/x.y.0`, `from → to`, `current → target` version) and the figures
+    captured in Step 8. Ask for explicit confirmation **before any push or PR
+    creation** — pushing is what makes the figure URLs publicly resolvable. If
+    declined, stop and change nothing on the remote.
 
-10. **Freeze branch + Draft PR** (only after confirmation):
-    - Create `release/x.y.0` from `origin/<from>`, **merge `<to>` into it**, and
-      push it to `origin`:
+11. **Push the branch + open the Draft PR** (only after confirmation):
+    - `release/x.y.0` already exists locally from Step 8 and carries the figure
+      commit. **Do not re-create it** — a second
+      `git checkout -B … origin/<from>` resets the branch and drops the figures,
+      and the notes then point at a SHA that never reaches the remote. **Merge
+      `<to>` into it** and push:
 
       ```shell
-      git checkout -B release/x.y.0 origin/<from>
       git merge --no-ff -m "chore(sync): merge <to> into release/x.y.0" origin/<to>
 
-      # The changelogs must come from <to>, not <from> — see below.
+      # The changelogs must come from <to>, not <from> — see below. Commit that
+      # on its own. Do NOT `git commit --amend`: the merge above usually creates
+      # no commit, so HEAD is Step 8's figure commit — amending it would change
+      # its SHA and break every image URL in the notes.
       git checkout origin/<to> -- '*CHANGELOG.md'
-      git commit --amend --no-edit
+      git diff --cached --quiet ||
+        git commit -m "chore(sync): take the stable changelogs from <to>"
 
       # Graduate the prerelease to the stable x.y.0 IN the PR (RFC #2711): bump
       # every package + lerna.json, prepend the x.y.0 changelog entry, and create
@@ -180,13 +309,21 @@ requires `--from`/`--to` overrides before doing anything else.
       git push origin release/x.y.0
       ```
 
-      The merge is what makes the PR mergeable at all. **GitHub does not run the
-      `.gitattributes` merge drivers** — a driver only exists in local git
-      config — so a merge computed on GitHub's side surfaces every `version` and
-      `CHANGELOG.md` divergence between the lines as a conflict. Measured in the
-      #2769 rehearsal: the first promotion PR came out `CONFLICTING` across 35
-      files, 34 of them mechanical. Here the drivers are registered (Step 2), so
-      the churn is absorbed.
+      **Expect the merge to do nothing, and do not build on it.** In the healthy
+      steady state `<to>` is already an ancestor of `<from>`, so git prints
+      "Already up to date." and writes no commit — measured on the 1.2.0
+      promotion (#3210), where `origin/next..origin/main` was empty. Any step
+      that assumes a fresh merge commit exists is wrong by default.
+
+      The merge stays in the recipe for the case where it _is_ needed: `<to>`
+      may carry a commit `<from>` never received, and then this merge is what
+      makes the PR mergeable at all. **GitHub does not run the `.gitattributes`
+      merge drivers** — a driver only exists in local git config — so a merge
+      computed on GitHub's side surfaces every `version` and `CHANGELOG.md`
+      divergence between the lines as a conflict. Measured in the #2769
+      rehearsal: the first promotion PR came out `CONFLICTING` across 35 files,
+      34 of them mechanical. Here the drivers are registered (Step 2), so the
+      churn is absorbed.
 
       It cannot change any content: Step 2 already established that merging
       `<to>` into `<from>` produces no code delta, so this merge only moves
@@ -223,25 +360,40 @@ requires `--from`/`--to` overrides before doing anything else.
         --body-file <path-to-body>
       ```
 
-      > ⚠️ **Merge as a merge commit, not squash/rebase.** The graduation commit
-      > on the branch _is_ `chore(release): bump version to x.y.0`. A `--no-ff`
-      > merge makes `<to>`'s new tip the merge commit (a non-`chore(release):`
-      > message) so `publish.yml` runs. A **rebase** merge would leave the
-      > `chore(release):` commit as `<to>`'s head and the skip-guard would abort
-      > the publish; a **squash** merge collapses the graduation and its tree
-      > together but is untested here — stick to the merge commit the model
-      > assumes.
+      > **How the PR may be merged.** Two mechanisms decide this, and neither is
+      > the merge's shape as such: `publish.yml` resolves the graduation from
+      > the merged PR's **head ref** (`commits/{sha}/pulls` → `release/x.y.0` →
+      > `1.1.0`), and its skip-guard tests the **subject line of `<to>`'s new
+      > tip** against `chore(release):` — which the graduation commit on the
+      > branch _is_.
+      >
+      > 1. **Merge commit — do this.** `<to>`'s tip becomes the merge commit, so
+      >    the guard passes and the history stays intact in one step.
+      > 2. **Squash — works, loses the history.** Verified on 1.1.0 (#3029): the
+      >    tip is titled from the PR title, which `commit-guard.yml` already
+      >    forces to be a Conventional Commit and which this command already
+      >    forbids from starting with `chore(release):`. All 148 commits
+      >    collapsed into one, so the individual history is reachable only
+      >    through `<from>`. Acceptable only if someone deliberately wants that.
+      > 3. **Rebase — never.** It leaves the branch's own
+      >    `chore(release): bump version to x.y.0` as `<to>`'s tip, the
+      >    skip-guard aborts, and nothing is published.
 
-11. **Summary.** Print the PR URL, the target version, and the maintainer's next
-    steps: curate the notes in the PR, mark Draft → Ready, and merge as a merge
-    commit — after which CI builds, publishes under `latest`, tags `x.y.0`, and
-    creates the GitHub release from the marker block. (CI does **not**
-    re-version — the branch is already graduated.)
+12. **Summary.** Print the PR URL, the target version, the figures captured (or
+    why a feature has none), and the maintainer's next steps: curate the notes
+    in the PR, mark Draft → Ready, and merge as a merge commit — after which CI
+    builds, publishes under `latest`, tags `x.y.0`, and creates the GitHub
+    release from the marker block. (CI does **not** re-version — the branch is
+    already graduated.)
 
 ## You do NOT
 
 Build, create/push git tags, publish to npm, or create the GitHub release — all
-of that happens in CI on merge. You **do** graduate the version: a single local
-`chore(release): bump version to x.y.0` commit on the release branch (Step 10),
-with its lerna-created tag dropped. You create no other commits and push no
-tags.
+of that happens in CI on merge. You also do **not** fabricate an image: a figure
+is a capture of a real story or it does not exist.
+
+You **do** graduate the version: the local
+`chore(release): bump version to x.y.0` commit on the release branch (Step 11),
+with its lerna-created tag dropped — preceded by Step 8's figure commit, the
+changelog restore, and, where `<to>` is not already an ancestor, the sync merge.
+You create no commits beyond those and push no tags.

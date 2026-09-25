@@ -1,6 +1,7 @@
 .donutChart {
   position: relative;
   width: fit-content;
+  height: fit-content;
   flex-shrink: 0;
 
   .border {
@@ -9,6 +10,14 @@
 
   .background {
     stroke: var(--donut-chart--background-color);
+  }
+
+  .fill,
+  .segment {
+    transform: rotate(var(--donut-chart--fill-rotation));
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: donut-chart-fill var(--donut-chart--transition-duration) ease;
   }
 
   .value {
@@ -28,6 +37,8 @@
       font-size: var(--font-size-heading--xl);
       padding: var(--donut-chart--padding--l);
 
+      // Raw consumer markup inside the value slot — nothing to class.
+      // stylelint-disable-next-line selector-max-type -- consumer markup
       small {
         font-size: var(--font-size-heading--l);
       }
@@ -74,5 +85,13 @@
     .legend {
       justify-content: start;
     }
+  }
+}
+
+/* The implicit "to" keyframe picks up the fill's own offset and rotation. */
+@keyframes donut-chart-fill {
+  from {
+    stroke-dashoffset: var(--donut-chart--circumference);
+    transform: rotate(-90deg);
   }
 }

@@ -23,6 +23,18 @@ const isDynamicRoute = (dir: string): boolean =>
   dir.split("/").some((segment) => segment.startsWith("["));
 
 /**
+ * Route groups — `app/(docs)/components` serves `/components`. The app has two
+ * of them because the App Shell preview pages need a root layout without the
+ * Styleguide chrome; without this the inventory would hold `/(docs)/…` and
+ * every link into the site would read as broken.
+ */
+const stripRouteGroups = (dir: string): string =>
+  dir
+    .split("/")
+    .filter((segment) => !segment.startsWith("("))
+    .join("/") || ".";
+
+/**
  * Every pathname the site serves, with the fragments each page offers.
  *
  * Content directories mirror the route structure one to one, so a single rule
@@ -50,7 +62,7 @@ export const buildPageInventory = (): PageInventory => {
 
   for (const dir of sourceDirs) {
     for (const file of jetpack.find(dir, { matching: "**/page.tsx" })) {
-      const routeDir = path.dirname(path.relative(dir, file));
+      const routeDir = stripRouteGroups(path.dirname(path.relative(dir, file)));
 
       if (isDynamicRoute(routeDir)) {
         continue;

@@ -1,5 +1,5 @@
 .preview {
-  padding: var(--size-px--l);
+  padding: var(--layout-card--padding);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +17,9 @@
   > :global(.flow--code-block),
   > :global(.flow--file-card),
   > :global(.flow--flex),
+  /* Flow's react-hook-form `Form` renders a class-less `<form>` — hence the
+     element selector next to the `flow--*` classes. */
+  /* stylelint-disable selector-max-type -- no class on `Form`'s element */
   > :global(.flow--form-field),
   > :global(.flow--labeled-value),
   > :global(.flow--list),
@@ -28,6 +31,7 @@
   > form {
     align-self: stretch;
   }
+  /* stylelint-enable selector-max-type */
 
   &.row {
     flex-flow: row wrap;
@@ -76,13 +80,16 @@
     .preview {
       border-inline: 4px solid var(--neutral--color--600);
       margin: 0 auto;
-      padding: var(--size-px--l);
+      padding: var(--layout-card--padding-mobile);
       width: 400px;
       max-width: 100%;
       height: 100%;
     }
   }
 
+  /* prism-react-renderer renders this `<pre>` inside react-live; no prop
+     reaches it. */
+  /* stylelint-disable-next-line selector-max-type -- third-party element */
   .editor pre {
     white-space: pre !important;
     padding: 0 !important;
@@ -167,7 +174,7 @@
   display: flex;
   justify-content: center;
 
-  button {
+  .toggleCode {
     padding-block: var(--size-px--s);
   }
 }
@@ -233,4 +240,16 @@
   /* Everything else is the plain Button's own styling. */
   cursor: col-resize;
   touch-action: none;
+}
+
+/*
+ * Same breakpoint the LayoutCard switches its own padding at. The examples
+ * are laid out for a desktop viewport, so they also shrink a little here —
+ * `zoom` scales the layout with the text, unlike a transform.
+ */
+@media (max-width: 768px) {
+  .preview {
+    padding: var(--layout-card--padding-mobile);
+    zoom: 0.85;
+  }
 }
