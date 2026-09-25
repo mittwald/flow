@@ -50,9 +50,10 @@ Bestätigungs-Dialog erscheinen. Aktionen im Footer und der Close-Button in der
 
 Enthält das Modal eine
 [Form (React Hook Form)](/components/react-hook-form/form), passiert das
-automatisch, sobald sie ungespeicherte Änderungen enthält. Ohne Form – oder wenn
-du selbst entscheiden willst, wann es etwas zu verlieren gibt – setzt du
-`confirmOnClose`.
+automatisch, sobald sie ungespeicherte Änderungen enthält. Soll eine einzelne
+Form das nicht auslösen, setzt du an ihr
+`confirmModalCloseOnUnsavedChanges={false}`. Ohne Form – oder wenn du selbst
+entscheiden willst, wann es etwas zu verlieren gibt – setzt du `confirmOnClose`.
 
 <LiveCodeEditor example="confirmOnClose" editorCollapsed />
 

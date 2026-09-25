@@ -7,9 +7,12 @@ remotePackage: true
 apply:
   "No code change required — if you had
   `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default
-  matches it. To keep the previous behaviour (closing without confirmation), set
-  `Form: { confirmModalCloseOnUnsavedChanges: false }` via
-  `<ComponentDefaultsProvider />`, or its deprecated equivalent, the
+  matches it. To keep the previous behaviour (closing without confirmation),
+  pass `confirmModalCloseOnUnsavedChanges={false}` to `Form` — this also works
+  in remote apps (`@mittwald/flow-remote-react-components/react-hook-form`). To
+  switch it off app-wide, set `Form: { confirmModalCloseOnUnsavedChanges: false
+  }` via `<ComponentDefaultsProvider />` (not available in remote apps), or its
+  deprecated equivalent, the
   `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment."
 ---
 
@@ -20,5 +23,13 @@ or a `form.reset()` the modal closes right away, and actions in the
 `<ActionGroup />` as well as the close button in the heading still close it
 immediately.
 
-Nothing to do if you had the flag enabled. To keep the previous behavior, switch
-the default off (see below).
+Nothing to do if you had the flag enabled. To keep the previous behavior, opt
+out per form:
+
+```diff
+- <Form form={form} onSubmit={onSubmit}>
++ <Form form={form} onSubmit={onSubmit} confirmModalCloseOnUnsavedChanges={false}>
+```
+
+Outside of remote apps you can switch the default off for the whole app instead
+(see below).
