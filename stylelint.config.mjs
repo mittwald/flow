@@ -98,5 +98,17 @@ export default {
         "selector-max-type": 0,
       },
     },
+    {
+      // Colors come from design tokens, so they follow the theme. A literal
+      // does not: it stays what it is in dark mode, in a themed context and
+      // behind a consumer's token override. Component tokens for a new
+      // component are fine — model them on existing ones and ask UX when
+      // unsure — but the value itself belongs in design-tokens, not here.
+      files: ["packages/components/src/**/*.module.{css,scss}"],
+      rules: {
+        "color-no-hex": true,
+        "function-disallowed-list": ["rgb", "rgba", "hsl", "hsla"],
+      },
+    },
   ],
 };
