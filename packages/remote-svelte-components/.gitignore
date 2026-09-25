@@ -1,0 +1,6 @@
+# svelte-package's staging directory — the build writes here before copying to dist
+.svelte-kit/
+
+# Host-DOM references the corpus reference run writes — regenerated every run,
+# never a baseline (see AGENTS.md).
+.vitest-corpus/

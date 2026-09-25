@@ -1,0 +1,85 @@
+{
+  "name": "@mittwald/flow-remote-svelte-components",
+  "private": true,
+  "version": "1.3.0-next.17",
+  "type": "module",
+  "description": "Svelte components that can be used in a remote environment",
+  "homepage": "https://flow.mittwald.de",
+  "repository": "https://github.com/mittwald/flow",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./RemoteRoot.svelte": {
+      "types": "./dist/components/RemoteRoot.svelte.d.ts",
+      "svelte": "./dist/components/RemoteRoot.svelte",
+      "default": "./dist/components/RemoteRoot.svelte"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "svelte-package --input src --output dist",
+    "build:icons": "tsx dev/icons/generate.ts",
+    "clean": "rimraf dist",
+    "test:browser": "vitest run --project=browser --browser.headless --passWithNoTests",
+    "test:browser:dev": "vitest dev --project=browser",
+    "test:compile": "svelte-check --tsconfig ./tsconfig.json --threshold error && tsc --noEmit -p tsconfig.vite.json",
+    "test:corpus": "vitest run --config=vitest.corpus.config.ts --project=corpus-reference --browser.headless && vitest run --config=vitest.corpus.config.ts --project=corpus-svelte --browser.headless",
+    "test:corpus:reference": "vitest run --config=vitest.corpus.config.ts --project=corpus-reference --browser.headless",
+    "test:corpus:svelte": "vitest run --config=vitest.corpus.config.ts --project=corpus-svelte --browser.headless",
+    "test:unit": "vitest run --project=unit* --passWithNoTests",
+    "test:unit:dev": "vitest dev --project=unit* --passWithNoTests"
+  },
+  "dependencies": {
+    "@mittwald/flow-remote-core": "workspace:*",
+    "@mittwald/flow-remote-elements": "workspace:*",
+    "country-codes-list": "^2.0.0",
+    "remeda": "^2.43.0"
+  },
+  "devDependencies": {
+    "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/flow-core": "workspace:*",
+    "@mittwald/flow-icons-base": "workspace:*",
+    "@mittwald/flow-react-components": "workspace:*",
+    "@mittwald/flow-remote-react-components": "workspace:*",
+    "@mittwald/flow-remote-react-renderer": "workspace:*",
+    "@mittwald/typescript-config": "workspace:*",
+    "@quilted/threads": "^3.3.1",
+    "@sveltejs/package": "^2.5.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@types/node": "^25.9.3",
+    "@types/react": "^19.2",
+    "@types/react-dom": "^19.2",
+    "@vitejs/plugin-react": "5.2.0",
+    "@vitest/browser": "^4.1.11",
+    "@vitest/browser-playwright": "^4.1.11",
+    "nx": "^22.7.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rimraf": "^6.1.3",
+    "svelte": "^5.46.4",
+    "svelte-check": "^4.7.0",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
+  },
+  "peerDependencies": {
+    "@mittwald/ext-bridge": "workspace:*",
+    "svelte": "^5.46.4"
+  },
+  "peerDependenciesMeta": {
+    "@mittwald/ext-bridge": {
+      "optional": true
+    }
+  },
+  "svelte": "./dist/index.js"
+}

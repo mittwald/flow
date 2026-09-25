@@ -74,25 +74,26 @@ nx + pnpm workspace monorepo. Node `>=24`, pnpm pinned via `packageManager` (use
 corepack). Several packages ship their own `AGENTS.md` — **always read the
 nearest `AGENTS.md` before working in a package.**
 
-| Path                                    | Package                                  | Role                                                                                       |
-| --------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `packages/components`                   | `@mittwald/flow-react-components`        | The heart: all React components.                                                           |
-| `packages/design-tokens`                | `@mittwald/flow-design-tokens`           | Token source (YAML, design authority) → CSS vars + JSON via style-dictionary.              |
-| `packages/icons-base`                   | private                                  | Icon source of truth (`src/icons.yaml`) + shared generator tooling.                        |
-| `packages/icons`, `packages/icons-pro`  | `@mittwald/flow-icons(-pro)`             | Published icon sets, **fully generated** from `icons-base` (Tabler / FontAwesome).         |
-| `packages/stylesheet`                   | `@mittwald/flow-stylesheet`              | Publishes the components' `all.css` as a standalone CSS package.                           |
-| `packages/core`                         | private                                  | Shared utilities: the shared Vitest browser config.                                        |
-| `packages/remote-core`                  | `@mittwald/flow-remote-core`             | Connection + serialization layer (versioned protocol).                                     |
-| `packages/remote-elements`              | `@mittwald/flow-remote-elements`         | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
-| `packages/remote-react-components`      | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
-| `packages/remote-react-renderer`        | `@mittwald/flow-remote-react-renderer`   | Host-side renderer mapping `flr-*` elements to Flow components; map auto-generated.        |
-| `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
-| `packages/react-tunnel`                 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility (MobX-based).                                      |
-| `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components` | Helpers for extension developers (mStudio page header customization).                      |
-| `packages/codemods`                     | `@mittwald/flow-codemods`                | The `upgrade` CLI and the migration catalogue that generates `MIGRATION.md`.               |
-| `packages/typescript-config`            | private                                  | Shared tsconfig presets (`base`, `library`, `web-library`, `react-library`, `nextjs`).     |
-| `apps/docs`                             | private                                  | User documentation site (Next.js); content in `src/content`, deployed to flow.mittwald.de. |
-| `apps/remote-dom-demo`                  | private                                  | Demo app for remote rendering. Remote-capable components should have a demo here.          |
+| Path                                    | Package                                   | Role                                                                                       |
+| --------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `packages/components`                   | `@mittwald/flow-react-components`         | The heart: all React components.                                                           |
+| `packages/design-tokens`                | `@mittwald/flow-design-tokens`            | Token source (YAML, design authority) → CSS vars + JSON via style-dictionary.              |
+| `packages/icons-base`                   | private                                   | Icon source of truth (`src/icons.yaml`) + shared generator tooling.                        |
+| `packages/icons`, `packages/icons-pro`  | `@mittwald/flow-icons(-pro)`              | Published icon sets, **fully generated** from `icons-base` (Tabler / FontAwesome).         |
+| `packages/stylesheet`                   | `@mittwald/flow-stylesheet`               | Publishes the components' `all.css` as a standalone CSS package.                           |
+| `packages/core`                         | private                                   | Shared utilities: the shared Vitest browser config.                                        |
+| `packages/remote-core`                  | `@mittwald/flow-remote-core`              | Connection + serialization layer (versioned protocol).                                     |
+| `packages/remote-elements`              | `@mittwald/flow-remote-elements`          | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
+| `packages/remote-react-components`      | `@mittwald/flow-remote-react-components`  | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
+| `packages/remote-react-renderer`        | `@mittwald/flow-remote-react-renderer`    | Host-side renderer mapping `flr-*` elements to Flow components; map auto-generated.        |
+| `packages/remote-svelte-components`     | `@mittwald/flow-remote-svelte-components` | **Experimental.** Svelte API for remote apps; mirrors the React one, auto-generated.       |
+| `packages/ext-bridge`                   | `@mittwald/ext-bridge`                    | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
+| `packages/react-tunnel`                 | `@mittwald/react-tunnel`                  | Generic "portal for components" utility (MobX-based).                                      |
+| `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components`  | Helpers for extension developers (mStudio page header customization).                      |
+| `packages/codemods`                     | `@mittwald/flow-codemods`                 | The `upgrade` CLI and the migration catalogue that generates `MIGRATION.md`.               |
+| `packages/typescript-config`            | private                                   | Shared tsconfig presets (`base`, `library`, `web-library`, `react-library`, `nextjs`).     |
+| `apps/docs`                             | private                                   | User documentation site (Next.js); content in `src/content`, deployed to flow.mittwald.de. |
+| `apps/remote-dom-demo`                  | private                                   | Demo app for remote rendering. Remote-capable components should have a demo here.          |
 
 ## Technology stack
 
@@ -139,10 +140,11 @@ committed, and hand-editing them is futile** (headers say "auto-generated").
 | Generated artifact                                                                                                                                        | Generator                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | `packages/components/src/components/**/view.ts` + `src/views/*`                                                                                           | `pnpm nx build:remote-components components`                       |
-| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**`                                                                        | same as above                                                      |
+| `packages/remote-{elements,react-components,react-renderer,svelte-components}/src/auto-generated/**`                                                      | same as above                                                      |
 | `packages/components/src/**/*.module.d.scss.ts`, `apps/{docs,remote-dom-demo}/src/**/*.module.d.{scss,css}.ts` (CSS-module class-name types)              | `pnpm nx build:scss-types components` / `docs` / `remote-dom-demo` |
 | `packages/components/src/components/Icon/components/icons/*`                                                                                              | `pnpm nx build:icons components`                                   |
 | `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`                                                                                  | `pnpm nx build:icons icons` / `icons-pro`                          |
+| `packages/remote-svelte-components/src/icons/*` (Svelte set: Tabler + custom SVG)                                                                         | `pnpm nx build:icons remote-svelte-components`                     |
 | `packages/components/.cache/doc-properties.json` (build input) + `dist/assets/doc-properties.json` (published, consumer props only), both from prop JSDoc | `pnpm nx build:docs-properties components`                         |
 | `packages/components/dist/assets/component-index.json` (consumer-facing index)                                                                            | `pnpm nx build:component-index components`                         |
 | `packages/components/MIGRATION.md` + `packages/codemods/src/migrations.generated.ts`                                                                      | `pnpm nx build codemods`                                           |
@@ -673,13 +675,15 @@ where the error points.
 
 ## Where to look next
 
-| Topic                                       | Read                                                                                    |
-| ------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Component patterns, styling, testing, i18n  | [packages/components/AGENTS.md](packages/components/AGENTS.md)                          |
-| Remote connection & serialization           | [packages/remote-core/AGENTS.md](packages/remote-core/AGENTS.md)                        |
-| Remote elements / React API / host renderer | `packages/remote-{elements,react-components,react-renderer}/AGENTS.md`                  |
-| Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                  |
-| Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                          |
-| Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |
-| Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md) |
-| Remote demo app                             | [apps/remote-dom-demo/AGENTS.md](apps/remote-dom-demo/AGENTS.md)                        |
+| Topic                                       | Read                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Component patterns, styling, testing, i18n  | [packages/components/AGENTS.md](packages/components/AGENTS.md)                             |
+| Remote connection & serialization           | [packages/remote-core/AGENTS.md](packages/remote-core/AGENTS.md)                           |
+| Remote elements / React API / host renderer | `packages/remote-{elements,react-components,react-renderer}/AGENTS.md`                     |
+| Svelte API for remote apps                  | [packages/remote-svelte-components/AGENTS.md](packages/remote-svelte-components/AGENTS.md) |
+| Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                     |
+| Supporting a non-React remote framework     | [docs/remote-framework-bindings.md](docs/remote-framework-bindings.md)                     |
+| Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                             |
+| Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                       |
+| Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md)    |
+| Remote demo app                             | [apps/remote-dom-demo/AGENTS.md](apps/remote-dom-demo/AGENTS.md)                           |
