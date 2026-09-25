@@ -36,4 +36,26 @@
   .icon {
     color: var(--choice--icon-color--default);
   }
+
+  /* When the box becomes checked/indeterminate, React mounts the checked icon.
+     It settles in softly from a slightly smaller, half-faded state; the box
+     never fully disappears, so the swap does not flicker. Unchecking
+     mounts the empty icon, which is intentionally left un-animated. */
+  .input[data-selected] .icon,
+  .input[data-indeterminate] .icon {
+    animation: check-pop var(--transition--duration--fast)
+      cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+@keyframes check-pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
