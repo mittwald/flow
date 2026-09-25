@@ -5,6 +5,8 @@
     "components-src": [
       "default",
       "!{projectRoot}/MIGRATION.md",
+      "{workspaceRoot}/packages/components-base/src/**/*",
+      "{workspaceRoot}/packages/core/src/**/*",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",
@@ -86,6 +88,7 @@
         "{projectRoot}/src/views/*",
         "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
+        "{workspaceRoot}/packages/remote-vue-components/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
       ]
     },

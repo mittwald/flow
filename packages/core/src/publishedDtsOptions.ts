@@ -1,3 +1,5 @@
+import { assertInstallableTypeImports } from "./publishedDeclarations.ts";
+
 /**
  * The `unplugin-dts` options every package's release build shares.
  *
@@ -27,6 +29,10 @@
  * cross-package go-to-definition inside the monorepo. In a published tarball
  * the maps are dead: their `sources` point into `src/`, which no package ships.
  * Turning them off here leaves the monorepo builds untouched.
+ *
+ * `afterBuild` fails the build when a declaration imports a package the
+ * consumer does not get installed (`publishedDeclarations.ts`). `vite build`
+ * runs in the package's directory, which is also where `outDirs` resolves.
  */
 export const publishedDtsOptions = {
   compilerOptions: { declarationMap: false },
@@ -40,4 +46,5 @@ export const publishedDtsOptions = {
     "**/*.test.*",
   ],
   outDirs: "dist/types",
+  afterBuild: () => assertInstallableTypeImports(process.cwd()),
 };

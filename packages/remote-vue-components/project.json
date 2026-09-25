@@ -1,0 +1,91 @@
+{
+  "implicitDependencies": ["components", "icons-base"],
+  "name": "remote-vue-components",
+  "projectType": "library",
+  "sourceRoot": "packages/remote-vue-components/src",
+  "targets": {
+    "build": {
+      "inputs": [
+        "default",
+        "{projectRoot}/src/**/*",
+        "{workspaceRoot}/packages/components-base/src/**/*"
+      ],
+      "outputs": ["{projectRoot}/dist"],
+      "dependsOn": [
+        "build:icons",
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
+    },
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/packages/icons-base/src/**/*",
+        "{projectRoot}/dev/icons/**/*",
+        "{workspaceRoot}/pnpm-lock.yaml"
+      ],
+      "outputs": [
+        "{projectRoot}/src/icons/components/**/*",
+        "{projectRoot}/src/icons/iconNames.ts"
+      ]
+    },
+    "test:browser": {
+      "inputs": [
+        "default",
+        "{projectRoot}/src/**/*",
+        "{workspaceRoot}/packages/components-base/src/**/*",
+        "{projectRoot}/dev/**/*",
+        "{workspaceRoot}/packages/remote-react-components/src/tests/lib/**/*",
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        }
+      ]
+    },
+    "test:compile": {
+      "dependsOn": ["build", "^build"]
+    },
+    "test:parity": {
+      "dependsOn": ["build", "^build"],
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/e2e/react-parity/**/*",
+        "{projectRoot}/e2e/list-parity/**/*",
+        "{projectRoot}/dev/react-parity/**/*",
+        "{workspaceRoot}/packages/remote-react-components/src/tests/**/*",
+        "{workspaceRoot}/packages/core/src/**/*",
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        }
+      ]
+    },
+    "test:parity:dev": {
+      "dependsOn": ["build", "^build"],
+      "cache": false
+    },
+    "test:parity:list": {
+      "dependsOn": ["build", "^build"],
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/e2e/list-parity/**/*",
+        "{projectRoot}/e2e/react-parity/hostHtml.ts",
+        "{workspaceRoot}/packages/remote-react-components/src/tests/lib/**/*",
+        "{workspaceRoot}/packages/core/src/**/*",
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        }
+      ]
+    },
+    "test:parity:list:dev": {
+      "dependsOn": ["build", "^build"],
+      "cache": false
+    }
+  }
+}

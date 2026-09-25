@@ -619,6 +619,48 @@ describe("Infinite scroll", () => {
   });
 });
 
+describe("Item identity", () => {
+  test("getItemId drops an item a later batch delivers again", async () => {
+    // Two batches that overlap in item 2 — what an offset-paged API returns
+    // when an item was inserted between the two requests.
+    const batches = [
+      [0, 1, 2],
+      [2, 3, 4],
+    ];
+
+    const loader: AsyncDataLoader<Data> = async (opts) => {
+      const offset = opts?.pagination?.offset ?? 0;
+      return {
+        data: (batches[offset / 3] ?? []).map((num) => ({ num })),
+        itemTotalCount: 6,
+      };
+    };
+
+    await render(
+      <List
+        aria-label="Test"
+        batchSize={3}
+        getItemId={(i) => String((i as Data).num)}
+      >
+        <ListLoaderAsync<Data> manualPagination>{loader}</ListLoaderAsync>
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
+    await userEvent.click(page.getByRole("button", { name: "Show more" }));
+    await expect.element(page.getByText("Item: 4")).toBeInTheDocument();
+
+    // Five distinct items, not six rows of which two share an id.
+    await expect.element(page.getByText("Showing 5 of 6")).toBeInTheDocument();
+    expect(page.getByText("Item: 2", { exact: true }).elements()).toHaveLength(
+      1,
+    );
+  });
+});
+
 describe("Sorting", () => {
   test("Hidden sorting works", async () => {
     await render(
@@ -630,6 +672,36 @@ describe("Sorting", () => {
     expect(page.getByRole("grid")).toHaveTextContent(
       listItem42TextContent + listItem43TextContent,
     );
+  });
+});
+
+describe("View mode", () => {
+  const getSwitchableList = () => (
+    <List aria-label="Test">
+      <ListStaticData<Data> data={[{ num: 42 }]} />
+      <ListItem<Data> showTiles textValue={({ num }) => String(num)}>
+        {({ num }) => <span>Item: {num}</span>}
+      </ListItem>
+    </List>
+  );
+
+  /*
+   * The mode lives in a MobX observable in the shared model, so the trigger —
+   * a component that does not own it — only follows along because the list
+   * subscribes. A mode that switched without this button relabelling would
+   * mean half the list had stopped re-rendering.
+   */
+  test("Switching the mode updates the whole list, not just the items", async () => {
+    await render(getSwitchableList());
+
+    const trigger = page.getByRole("button", { name: "Settings" });
+    await expect.element(trigger).toHaveTextContent("List");
+
+    await userEvent.click(trigger);
+    await userEvent.click(page.getByRole("menuitemradio", { name: "Tiles" }));
+
+    await expect.element(trigger).toHaveTextContent("Tiles");
+    expect(listItem42).toBeInTheDocument();
   });
 });
 

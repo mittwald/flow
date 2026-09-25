@@ -99,6 +99,8 @@ Bevor du UI mit Flow baust oder änderst:
      node_modules/@mittwald/flow-remote-react-components/USAGE.md. Importiere
      dann immer aus diesem Paket, auch wenn die Beispiele der Dokumentation
      `@mittwald/flow-react-components` zeigen.
+   - `@mittwald/flow-remote-vue-components` (mStudio-Extension in Vue, Beta):
+     node_modules/@mittwald/flow-remote-vue-components/USAGE.md.
 2. Lies https://flow.mittwald.de/llms.txt und öffne die dort verlinkte Seite,
    bevor du eine Component, ein Layout oder einen UI-Text festlegst. Antworte
    nicht aus dem Gedächtnis.
@@ -108,3 +110,23 @@ Die `USAGE.md` passt zur installierten Version, `llms.txt` beschreibt den
 aktuellen Stand der Dokumentation und verlinkt jede Seite als Markdown. Auf
 jeder Seite dieser Dokumentation führt außerdem „Markdowndatei öffnen“ zur
 Markdown-Fassung.
+
+---
+
+# mStudio-Extensions mit Vue (Beta)
+
+Eine mStudio-Extension kann statt in React auch in Vue geschrieben werden. Das
+Package `@mittwald/flow-remote-vue-components` ist das Vue-Gegenstück zu
+`@mittwald/flow-remote-react-components`: Die Extension rendert damit dieselben
+Flow Components im mStudio.
+
+```shell
+yarn add @mittwald/flow-remote-vue-components vue
+```
+
+Das Package ist **Beta**. Es ist von der Breaking-Change-Zusage ausgenommen,
+seine API kann sich auch außerhalb einer Major-Version ändern (siehe
+[Component Lifecycle](/get-started/versioning#component-lifecycle)). Welche
+Components und Funktionen es schon abdeckt und welche noch fehlen, beschreibt
+seine
+[USAGE.md](https://github.com/mittwald/flow/blob/main/packages/remote-vue-components/USAGE.md).

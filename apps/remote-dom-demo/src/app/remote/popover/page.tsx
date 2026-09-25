@@ -4,6 +4,7 @@ import {
   Popover,
   PopoverTrigger,
   Section,
+  Text,
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
@@ -12,7 +13,7 @@ export default function Page() {
       <PopoverTrigger>
         <Button>Show battle station status</Button>
         <Popover>
-          <>The Death Star is fully operational.</>
+          <Text>The Death Star is fully operational.</Text>
         </Popover>
       </PopoverTrigger>
     </Section>

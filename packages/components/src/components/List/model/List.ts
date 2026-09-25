@@ -22,8 +22,13 @@ import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import type {
+  ListModelContext,
+  ListSettingsPort,
+} from "@mittwald/flow-components-base";
+import type { Table as ReactTableInstance } from "@tanstack/table-core";
 
-export class List<T = unknown, TMeta = unknown> {
+export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
   public readonly filters: (
     Filter<T, never, never> | DateRangeFilter<T, never>
   )[];
@@ -101,23 +106,55 @@ export class List<T = unknown, TMeta = unknown> {
     this.infiniteScroll = infiniteScroll;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
+
+    /*
+     * The controller no longer subscribes itself: the filters and the search
+     * are this list's, and handing a list of concrete filters to a shared
+     * model is the `Table<never>` variance trap. `IncrementalLoader` still
+     * subscribes in its own constructor, which runs right after this, so the
+     * order of the two resets is unchanged.
+     */
+    this.filters.forEach((f) => f.onFilterUpdated(() => this.batches.reset()));
+    this.search?.onUpdated(() => this.batches.reset());
     this.componentProps = componentProps;
+    /*
+     * Before the loader: its state takes `getItemId` over in its constructor,
+     * and a loader built first would never deduplicate.
+     */
+    this.getItemId = getItemId;
     this.loader = IncrementalLoader.useNew<T>(this, loader);
     this.onAction = onAction;
-    this.getItemId = getItemId;
     this.loadingItemsCount = loadingItemsCount;
     this.reactTable = ReactTable.useNew(this, onChange, {
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
-    this.viewMode = new ListViewMode(this, { defaultViewMode });
+    this.viewMode = ListViewMode.useNew(this, { defaultViewMode });
     this.emptyView = emptyView;
     this.emptySearchResultView = emptySearchResultView;
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
     }, [this.filters]);
+  }
+
+  /*
+   * `ListModelContext` — what the shared model in
+   * `@mittwald/flow-components-base` reaches for, so `Sorting` and `Search` can
+   * keep being handed the list itself. Getters, because the model is built
+   * before the table is.
+   */
+  public get dataTable(): ReactTableInstance<T> {
+    return this.reactTable.table;
+  }
+
+  public get settings(): ListSettingsPort | undefined {
+    return this.settingsStorage;
+  }
+
+  public get settingsDefaults(): ListSettingsStorageDefaults | undefined {
+    return this.settingsStorageDefaults;
   }
 
   public getEmptyViewType(): EmptyViewType {

@@ -8,7 +8,7 @@ import { SortingFunctions, typedList } from "@/components/List";
 import { Text } from "@/components/Text";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import type { Meta, StoryObj } from "@storybook/react";
-import type { SortingFn } from "@tanstack/react-table";
+import type { SortingFn } from "@tanstack/table-core";
 import type List from "../List";
 import { domains } from "../testData/domainApi";
 import defaultMeta from "./Default.stories";

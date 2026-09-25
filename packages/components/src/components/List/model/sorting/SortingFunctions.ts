@@ -1,4 +1,4 @@
-import type { Row, SortingFn } from "@tanstack/react-table";
+import type { Row, SortingFn } from "@tanstack/table-core";
 import invariant from "invariant";
 
 export const SortingFunctions = {
