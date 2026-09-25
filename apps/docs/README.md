@@ -136,12 +136,14 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 # <dev edge case>     rare dev-only note (e.g. Suspense ordering); just above Properties
 ---
 # Properties          <PropertiesTables />
+---
+# Design Tokens       <ComponentTokenTable /> — only when the Component has tokens
 ```
 
 Separators: no rule between the frontmatter and the opening example; a `---`
 between every top-level `#` section (the first one right before
 `# Best Practices`), and **none** between a `#` and its own `##`. `# Properties`
-is always last.
+comes last, followed only by `# Design Tokens`.
 
 ### Opening example
 
@@ -271,6 +273,19 @@ not invent one — only lift a genuine edge case out of the feature sections.
 Always the last section: a `# Properties` heading containing
 `<PropertiesTables />`, which renders the props documentation generated from the
 prop JSDoc.
+
+### Design Tokens
+
+After `# Properties`, for every Component that has component tokens: a
+`# Design Tokens` heading containing `<ComponentTokenTable />`. It lists the
+tokens of the namespace named after the Component (`TextField` → `text-field`)
+with their resolved value, in two tables: `Größen & Stile`, and `Farben` with a
+Light and a Dark column (plus any other token that differs between the themes).
+An info icon behind a token name shows the tokens it references on the way to
+its value. A Component styled by another namespace names it explicitly:
+`<ComponentTokenTable tokens="form-control" />`, several separated by commas. A
+string, not an array: next-mdx-remote strips JS expressions from MDX. A
+namespace that does not exist fails `pnpm nx test:unit docs`.
 
 ---
 
