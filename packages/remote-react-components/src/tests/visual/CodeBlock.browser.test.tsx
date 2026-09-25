@@ -80,3 +80,30 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
     await testScreenshot("CodeBlock truncated - collapsed");
   },
 );
+
+// Element tree comparable from alpha.883.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
+  "CodeBlock truncated after 8 lines (%s)",
+  async ({ testScreenshot, render, components: { CodeBlock } }) => {
+    await render(
+      <CodeBlock
+        language="json"
+        code={`{
+  "name": "Death Star"
+  "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
+  "shortId": "p-123456",
+  "createdAt": "2025-08-25T06:11:21.000Z",
+  "enabled": true,
+  "status": "ready",
+  "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
+  "serverShortId": "s-123456",
+  "customerId": "5f1c1d0e-9a7b-4c3e-8d2f-1a2b3c4d5e6f",
+  "isReady": true,
+}`}
+        truncateLines
+      />,
+    );
+
+    await testScreenshot("CodeBlock truncated after 8 lines");
+  },
+);
