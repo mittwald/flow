@@ -784,6 +784,12 @@ must be a valid Conventional Commit. `.github/workflows/commit-guard.yml` lints
 both the title and that it matches the base branch (see
 [Choosing the base branch](#choosing-the-base-branch)).
 
+`Closes #123` in the PR body works on **both** lines. GitHub resolves it only on
+`main`, because that is the default branch; for a PR merged into `next`,
+`.github/workflows/close-linked-issues.yml` does it instead and comments on the
+issue naming the PR. So write the keyword where you would anyway — and keep
+using `Part of #123` when you mean a link rather than a close.
+
 ## Releases
 
 You don't need to do anything to release. Flow uses **fixed versioning** — all
