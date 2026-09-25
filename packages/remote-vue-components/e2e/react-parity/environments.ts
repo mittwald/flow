@@ -60,9 +60,28 @@ interface MountedHost {
 
 let mounted: Mounted | undefined;
 
+/*
+ * Whether this scenario pressed a password field's generate button — the one
+ * source of a value neither pass can predict. Reset with every host.
+ */
+let hasGeneratedPassword = false;
+document.addEventListener(
+  "click",
+  (event) => {
+    if (
+      event.target instanceof Element &&
+      event.target.closest("[data-component='generatePassword']")
+    ) {
+      hasGeneratedPassword = true;
+    }
+  },
+  { capture: true },
+);
+
 /** The host half: a React renderer fed by a receiver, as mStudio runs it. */
 const mountHost = (): MountedHost => {
   mounted?.unmount();
+  hasGeneratedPassword = false;
 
   const host = document.createElement("div");
   const remote = document.createElement("div");
@@ -220,7 +239,9 @@ const readStableHtml = async (
       "[data-testid='root-container']",
     );
     return mounted && container
-      ? hostHtml(hostOutput(container, [mounted.host, mounted.remote]))
+      ? hostHtml(hostOutput(container, [mounted.host, mounted.remote]), {
+          hasGeneratedPassword,
+        })
       : "";
   };
   let previous = read();
