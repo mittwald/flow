@@ -42,6 +42,25 @@ test("long code folds behind a toggle that unfolds it again", async () => {
   await expect.element(showMore()).toBeVisible();
 });
 
+/*
+ * The toggle animates to a measured height, which must not outlive the
+ * animation – code that grows later would be clipped. Without motion (as here)
+ * there is no transition to end, so the height is never pinned.
+ */
+test("unfolded code is not clipped", async () => {
+  await render(<CodeBlock code={lines(20)} truncateLines />);
+
+  await showMore().click();
+  await expect.element(showLess()).toBeVisible();
+
+  const content = document.querySelector<HTMLElement>(".cm-content");
+  if (!content) {
+    throw new Error("CodeMirror content not found");
+  }
+  expect(getComputedStyle(content).maxHeight).toBe("none");
+  expect(content.clientHeight).toBe(content.scrollHeight);
+});
+
 test("a line count sets where the folding starts", async () => {
   await render(<CodeBlock code={lines(5)} truncateLines={4} />);
 

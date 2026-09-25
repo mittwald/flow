@@ -1,4 +1,11 @@
-import { type FC, type PropsWithChildren, useId, useState } from "react";
+import {
+  type FC,
+  type PropsWithChildren,
+  useId,
+  useRef,
+  useState,
+} from "react";
+import { flushSync } from "react-dom";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./CodeBlock.module.scss";
@@ -39,6 +46,9 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 
   const [folded, setFolded] = useState(truncateLines !== false);
   const [maxHeight, setMaxHeight] = useState<number>();
+  /* The full height, only while the toggle animates to or from it. */
+  const [expandedHeight, setExpandedHeight] = useState<number>();
+  const contentRef = useRef<HTMLElement>(null);
 
   const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
 
@@ -59,14 +69,52 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     );
   }
 
-  const maxHeightVariable = maxHeight
-    ? ({ "--max-height": `${maxHeight}px` } as React.CSSProperties)
-    : undefined;
+  const heightVariables = {
+    ...(maxHeight ? { "--max-height": `${maxHeight}px` } : {}),
+    ...(expandedHeight
+      ? { "--expanded-max-height": `${expandedHeight}px` }
+      : {}),
+  } as React.CSSProperties;
+
+  /* A height transition needs a length on both ends – `none` does not
+     interpolate. So the full height is measured for the transition and
+     released once it ended, and code that changes later is not clipped. */
+  const toggleFolded = () => {
+    const content = contentRef.current;
+
+    if (!content) {
+      setFolded((folded) => !folded);
+      return;
+    }
+
+    const animates = getComputedStyle(content)
+      .transitionDuration.split(",")
+      .some((duration) => parseFloat(duration) > 0);
+
+    if (folded) {
+      setExpandedHeight(animates ? content.scrollHeight : undefined);
+      setFolded(false);
+    } else {
+      flushSync(() => setExpandedHeight(content.scrollHeight));
+      // Applies the start height before the folded one replaces it.
+      content.getBoundingClientRect();
+      setFolded(true);
+    }
+  };
 
   return (
     <div
-      className={clsx(rootClassName, folded ? styles.folded : undefined)}
-      style={maxHeightVariable}
+      className={clsx(
+        rootClassName,
+        maxHeight && styles.truncated,
+        folded && styles.folded,
+      )}
+      style={heightVariables}
+      onTransitionEnd={(event) => {
+        if (!folded && event.propertyName === "max-height") {
+          setExpandedHeight(undefined);
+        }
+      }}
     >
       <CodeEditor
         {...rest}
@@ -79,6 +127,8 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
         showActiveLineMarker={false}
         isReadOnly
         onCreateEditor={(view) => {
+          contentRef.current = view.contentDOM;
+
           if (!truncateLines) {
             return;
           }
@@ -102,7 +152,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
               variant="plain"
               color="secondary"
               size="s"
-              onPress={() => setFolded((folded) => !folded)}
+              onPress={toggleFolded}
               aria-expanded={!folded}
               aria-controls={id}
             >

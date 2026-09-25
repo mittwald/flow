@@ -1,3 +1,4 @@
+@use "@/styles/mixins/expandTransition";
 @use "@/styles/mixins/scrollbar";
 
 /* The show-more strip: a size-s button plus the container's padding. */
@@ -52,11 +53,15 @@ $inner-corner-radius: calc(
     // stylelint-enable selector-max-type
   }
 
-  /* Collapsed, the show-more button lies over the code, which runs down to
-     the border and fades out behind it. */
-  &.folded {
+  /* Truncatable: collapsed, the show-more button lies over the code, which
+     runs down to the border and fades out behind it. Toggling animates the
+     height, the fade and the button's position together. */
+  &.truncated {
     :global(.flow--code-editor--code-mirror) {
-      padding-block-end: 0;
+      transition-property:
+        color, background-color, border-color, padding-block-end;
+
+      @include expandTransition.expandTransition;
     }
 
     :global(.cm-editor) {
@@ -65,10 +70,12 @@ $inner-corner-radius: calc(
       border-end-end-radius: $inner-corner-radius;
     }
 
-    /* Grows by the button strip, so the button covers none of the lines. */
     :global(.cm-content) {
-      max-height: calc(var(--max-height) + #{$show-more-height});
+      max-height: var(--expanded-max-height, none);
       overflow: hidden;
+      transition-property: max-height;
+
+      @include expandTransition.expandTransition;
 
       &::after {
         content: "";
@@ -77,6 +84,10 @@ $inner-corner-radius: calc(
         bottom: 0;
         height: min(calc(var(--size-px--xxl) + #{$show-more-height}), 75%);
         pointer-events: none;
+        opacity: 0;
+        transition-property: opacity;
+
+        @include expandTransition.expandTransition;
 
         /* Eased stops: no visible edge on top, the code only shimmers through
            behind the button. */
@@ -91,6 +102,27 @@ $inner-corner-radius: calc(
           fade-color(95%) 85%,
           fade-color(96%)
         );
+      }
+    }
+
+    .buttonContainer {
+      transition-property: margin-top, margin-bottom;
+
+      @include expandTransition.expandTransition;
+    }
+  }
+
+  &.folded {
+    :global(.flow--code-editor--code-mirror) {
+      padding-block-end: 0;
+    }
+
+    /* Grows by the button strip, so the button covers none of the lines. */
+    :global(.cm-content) {
+      max-height: calc(var(--max-height) + #{$show-more-height});
+
+      &::after {
+        opacity: 1;
       }
     }
 
