@@ -28,6 +28,7 @@ declare const classNames: {
   readonly editorWrapper: "editorWrapper";
   readonly editorContainer: "editorContainer";
   readonly folded: "folded";
+  readonly foldToggle: "foldToggle";
   readonly copyButton: "copyButton";
   readonly toggleCode: "toggleCode";
   readonly actions: "actions";

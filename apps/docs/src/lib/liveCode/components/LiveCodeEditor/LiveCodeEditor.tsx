@@ -1,5 +1,5 @@
 import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   LiveEditor,
   LiveError,
@@ -7,7 +7,7 @@ import {
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
+import { transformCode } from "@/lib/liveCode/components/LiveCodeEditor/lib/transformCode";
 import styles from "./LiveCodeEditor.module.css";
 import clsx from "clsx";
 import {
@@ -87,6 +87,13 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const editorId = useId();
   const codeId = useId();
+
+  // A new scope identity re-transpiles the example and remounts its preview —
+  // expanding the code would reset whatever the reader did in the preview.
+  const scope = useMemo(
+    () => (typeof code === "string" ? extractEditorScope(code) : {}),
+    [code],
+  );
 
   const available = metrics
     ? Math.floor(metrics.track - metrics.frame - metrics.handle)
@@ -198,16 +205,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     throw new Error("Expected code prop to be of type 'string'.");
   }
 
-  const scope = extractEditorScope(code);
-
-  const transformCode = (code: string) => {
-    try {
-      return extractDefaultExport(code);
-    } catch (error) {
-      return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
-    }
-  };
-
   // The scope above already carries the imports, so the editor shows only the
   // example itself.
   const codeToDisplay = stripImports(code).replace(/;$/, "");
@@ -276,9 +273,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   return (
     <LiveProvider
       code={codeToDisplay}
-      scope={{
-        ...scope,
-      }}
+      scope={scope}
       transformCode={transformCode}
     >
       <div
@@ -344,39 +339,38 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
                   variant="soft"
                   text={codeToDisplay}
                 />
+                {showFoldToggle && (
+                  <div className={styles.foldToggle}>
+                    <Button
+                      size="s"
+                      variant="plain"
+                      color="secondary"
+                      onPress={() => setCodeFolded(!codeFolded)}
+                      aria-expanded={!folded}
+                      aria-controls={codeId}
+                    >
+                      {folded ? <>Mehr anzeigen</> : <>Weniger anzeigen</>}
+                    </Button>
+                  </div>
+                )}
               </>
             )}
           </div>
         )}
 
-        {(showFoldToggle || showHideToggle) && (
+        {showHideToggle && (
           <div className={styles.actions}>
-            {showFoldToggle && (
-              <Button
-                className={styles.toggleCode}
-                size="s"
-                variant="plain"
-                color="secondary"
-                onPress={() => setCodeFolded(!codeFolded)}
-                aria-expanded={!folded}
-                aria-controls={codeId}
-              >
-                {folded ? <>Mehr anzeigen</> : <>Weniger anzeigen</>}
-              </Button>
-            )}
-            {showHideToggle && (
-              <Button
-                className={styles.toggleCode}
-                size="s"
-                variant="plain"
-                color="secondary"
-                onPress={() => setEditorCollapsed(!editorCollapsed)}
-                aria-expanded={!editorCollapsed}
-                aria-controls={editorId}
-              >
-                {editorCollapsed ? <>Code anzeigen</> : <>Code ausblenden</>}
-              </Button>
-            )}
+            <Button
+              className={styles.toggleCode}
+              size="s"
+              variant="plain"
+              color="secondary"
+              onPress={() => setEditorCollapsed(!editorCollapsed)}
+              aria-expanded={!editorCollapsed}
+              aria-controls={editorId}
+            >
+              {editorCollapsed ? <>Code anzeigen</> : <>Code ausblenden</>}
+            </Button>
           </div>
         )}
 
