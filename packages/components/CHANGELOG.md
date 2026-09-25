@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.31](https://github.com/mittwald/flow/compare/1.3.0-next.30...1.3.0-next.31) (2026-09-25)
+
+### Styles
+
+* **components:** subtle micro-interactions for interactive components ([#3253](https://github.com/mittwald/flow/issues/3253)) ([fc68bcc](https://github.com/mittwald/flow/commit/fc68bcc59bf83a69525bd8189cc7dcf08329ae02))
+
+## [1.2.25](https://github.com/mittwald/flow/compare/1.3.0-next.29...1.2.25) (2026-09-25)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.25 ([f2b7870](https://github.com/mittwald/flow/commit/f2b7870cdb8cb1c008ff316af67023ffdda9235f))
+
 ## [1.3.0-next.30](https://github.com/mittwald/flow/compare/1.3.0-next.29...1.3.0-next.30) (2026-09-25)
 
 ### Bug Fixes
