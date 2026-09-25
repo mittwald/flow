@@ -34,6 +34,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-vue-components";
 import { page, userEvent } from "vitest/browser";
+import { expect } from "vitest";
 import { h } from "vue";
 
 interface Crew {
@@ -428,6 +429,18 @@ const scenarios: ParityScenario[] = [
     name: "a search that matches nothing",
     interact: async () => {
       await userEvent.fill(page.getByRole("searchbox"), "Bishop");
+      /*
+       * The search submits after a pause of its own, longer than it takes the
+       * output to read as stable — so without this both passes compare the
+       * typed field over the unfiltered list.
+       */
+      await expect
+        .element(
+          page
+            .getByTestId("root-container")
+            .getByText("No search results found"),
+        )
+        .toBeVisible();
     },
     trees: {
       react: () => (

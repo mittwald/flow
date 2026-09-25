@@ -378,6 +378,16 @@ const parityEnvironment = {
    * maintain.
    */
   testScreenshot: async (description: string): Promise<void> => {
+    /*
+     * Settled first, parked second. Parking moves the mouse, and react-aria
+     * takes any `mousemove` as the pointer becoming the input modality —
+     * silently, for whatever receives focus next. An overlay whose close is
+     * still on its way through the round trip then restores focus to its
+     * trigger under "pointer" in one pass and under "keyboard" in the other,
+     * and `data-focus-visible` on the trigger records which pass was faster on
+     * that runner rather than what either binding built.
+     */
+    await readStableHtml();
     await setNeutralPointerPosition();
     const html = await readStableHtml();
     const reference = referencePathFor(description);

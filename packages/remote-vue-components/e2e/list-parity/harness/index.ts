@@ -50,6 +50,13 @@ const renderAndRead = async (
   );
   await waitForHost();
   await scenario.interact?.();
+  /*
+   * Settled first, parked second, as in the corpus harness: parking moves the
+   * mouse, react-aria takes that as the pointer becoming the input modality,
+   * and a menu whose close is still on its way back restores focus to its
+   * trigger under a different modality in each pass.
+   */
+  await readStableHostHtml();
   await setNeutralPointerPosition();
 
   return readStableHostHtml();
