@@ -8,6 +8,9 @@ declare const classNames: {
   readonly alwaysVisible: "alwaysVisible";
   readonly alwaysHidden: "alwaysHidden";
   readonly header: "header";
+  readonly "flow--heading--heading-text-spacer": "flow--heading--heading-text-spacer";
+  readonly "flow--heading--heading-content": "flow--heading--heading-content";
+  readonly "flow--heading--heading-content-item": "flow--heading--heading-content-item";
   readonly headerTitle: "headerTitle";
   readonly content: "content";
   readonly columnLayout: "columnLayout";

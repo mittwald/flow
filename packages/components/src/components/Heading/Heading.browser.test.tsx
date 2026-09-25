@@ -4,6 +4,8 @@ import { expect, test } from "vitest";
 import { Heading } from "@/components/Heading";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { CopyButton } from "@/components/CopyButton";
+import { AlertBadge } from "@/components/AlertBadge";
 import styles from "./Heading.module.scss";
 
 const heading = () => page.getByRole("heading");
@@ -80,4 +82,36 @@ test("a button in the heading lands beside the title as well", async () => {
       .querySelector(`.${styles.headingContent}`)
       ?.querySelector("button"),
   ).not.toBeNull();
+});
+
+/*
+ * Everything beside the title wraps one item at a time: a badge that no longer
+ * fits must not take the CopyButton before it onto the next line, and starts
+ * that line flush with the title instead of indented by the item spacing.
+ */
+test("a CopyButton stays beside the title when only the badge wraps", async () => {
+  await render(
+    <div style={{ width: 320 }}>
+      <Heading>
+        my-domain.de
+        <CopyButton text="my-domain.de" />
+        <AlertBadge status="danger">SSL request deadline exceeded</AlertBadge>
+      </Heading>
+    </div>,
+  );
+
+  const title = page
+    .getByText("my-domain.de", { exact: true })
+    .element()
+    .getBoundingClientRect();
+  const copyButton = page.getByRole("button").element().getBoundingClientRect();
+  const badge = page
+    .getByText("SSL request deadline exceeded")
+    .element()
+    .closest(`.${styles.headingContentItem}`)
+    ?.getBoundingClientRect();
+
+  expect(copyButton.top).toBeLessThan(title.bottom);
+  expect(badge?.top).toBeGreaterThanOrEqual(title.bottom);
+  expect(badge?.left).toBe(title.left);
 });

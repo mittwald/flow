@@ -24,5 +24,7 @@ declare const classNames: {
   readonly "flow--avatar--initials": "flow--avatar--initials";
   readonly "flow--checkbox": "flow--checkbox";
   readonly "flow--checkbox--icon": "flow--checkbox--icon";
+  readonly "flow--heading--heading-text-spacer": "flow--heading--heading-text-spacer";
+  readonly "flow--heading--heading-content-item": "flow--heading--heading-content-item";
 };
 export default classNames;
