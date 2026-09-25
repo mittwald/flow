@@ -36,6 +36,15 @@ export class UnsupportedScenarioError extends Error {
   public constructor(what: string) {
     super(`This scenario cannot be expressed in Vue: ${what}.`);
     this.name = "UnsupportedScenarioError";
+    /*
+     * WebKit's stack is frames only, and vitest's JSON report carries the
+     * stack — so without the header the runner could not tell this refusal
+     * from any other failure (`unconfirmedUnsupported`).
+     */
+    const header = `${this.name}: ${this.message}`;
+    if (!this.stack?.startsWith(header)) {
+      this.stack = `${header}\n${this.stack ?? ""}`;
+    }
   }
 }
 

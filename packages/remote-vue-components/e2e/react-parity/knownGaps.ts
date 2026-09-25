@@ -4,8 +4,9 @@
  * This list is the report the harness produces. Everything not on it must
  * render a host tree identical to React's. Every entry is matched by name, and
  * a full run fails when one no longer names a corpus file or scenario (see
- * `dev/react-parity/staleKnownGaps.ts`) — so an entry cannot outlive what it
- * exempts.
+ * `dev/react-parity/staleKnownGaps.ts`). A full run also converts every
+ * unsupported scenario once more and fails when one converts — so an entry
+ * cannot outlive what it exempts, renamed or fixed.
  */
 
 /**
@@ -55,10 +56,15 @@ export const divergenceReasonFor = (testName: string): string | undefined =>
 export const excludeUnsupportedFiles = (): string[] =>
   Object.keys(unsupportedFiles).flatMap((file) => ["--exclude", `**/${file}`]);
 
+const unsupportedNamesPattern = (): string =>
+  Object.keys(unsupportedScenarios)
+    .map((name) => name.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&"))
+    .join("|");
+
 /** The `-t` pattern that keeps the unsupported scenarios out of the Vue pass. */
-export const excludeUnsupportedPattern = (): string => {
-  const names = Object.keys(unsupportedScenarios).map((name) =>
-    name.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&"),
-  );
-  return `^(?!(?:${names.join("|")}) \\(Parity\\)$)`;
-};
+export const excludeUnsupportedPattern = (): string =>
+  `^(?!(?:${unsupportedNamesPattern()}) \\(Parity\\)$)`;
+
+/** The `-t` pattern that selects exactly the unsupported scenarios. */
+export const includeUnsupportedPattern = (): string =>
+  `^(?:${unsupportedNamesPattern()}) \\(Parity\\)$`;
