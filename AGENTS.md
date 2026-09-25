@@ -210,8 +210,9 @@ commit the results.
   field is the instruction an agent executes; fill it even when there is no
   codemod, because for those entries it is the whole migration.
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
-- **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
-  WebKit only is a pragmatic choice, not a support statement.
+- **Browser support:** all three engines (Chromium, Firefox, WebKit). CI driving
+  WebKit, plus a non-blocking Firefox leg for the browser tests, is a pragmatic
+  choice, not a support statement.
 
 ## Definition of Done — component work
 
@@ -357,6 +358,25 @@ where the error points.
   **Cause:** Playwright browsers not installed in this environment
 
   **Fix:** `pnpm test:browser:prepare` once
+
+- **Symptom:** On macOS 27, every Firefox run dies before a single test with
+  **`Failed to connect to the browser session … [browser (firefox)]`** /
+  `browserType.launch: Timeout 180000ms exceeded`, while WebKit runs fine
+
+  **Cause:** Firefox.app is installed, and macOS 27 then protects
+  `~/Library/Application Support/Firefox` — which Playwright's bundled Firefox
+  reads at startup
+  ([microsoft/playwright#42768](https://github.com/microsoft/playwright/issues/42768),
+  fixed in Gecko, not yet in a Playwright release). The
+  `sandbox_extension_issue_file_to_process` and `RenderCompositorSWGL` lines in
+  the log are red herrings
+
+  **Fix:** It is no test result — report Firefox as unchecked, never as red. To
+  get one, run the suite in the Playwright Linux image matching the repo's
+  `playwright` version (`mcr.microsoft.com/playwright:v<version>-noble`, the
+  platform CI gates on) with its own `pnpm install` — the host's `node_modules`
+  are darwin builds. Pin cores with `--cpuset-cpus`, not `--cpus`: vitest sizes
+  its parallelism from `nproc`, which `--cpus` leaves at the host's count
 
 - **Symptom:** A visual test stays red in CI after you regenerated screenshots
   locally on macOS

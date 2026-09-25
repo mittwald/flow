@@ -7,8 +7,8 @@
 # packages/remote-react-components/vitest.config.ts).
 #
 # Every suite is driven in WebKit. Should be changed to Chromium when flakiness
-# is resolved, because of Chromium wider usage. BTW: Using Webkit for now,
-# because Firefox has issues with parallel visual tests.
+# is resolved, because of Chromium wider usage. The browser tests run in Firefox
+# as well — without a vote on `main` for now, see the `browser` job.
 #
 # `main` at the bottom is the aggregate. Keep that job id: it is the required
 # status check in the branch ruleset, and the check Dependabot waits for before
@@ -89,6 +89,16 @@ jobs:
   browser:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      # A red WebKit leg must not cancel the Firefox one, whose result is what
+      # it runs for.
+      fail-fast: false
+      matrix:
+        browser: [webkit, firefox]
+    # Firefox still flakes on tests that need keyboard focus, so its leg shows
+    # red but cannot fail `main`: a job with `continue-on-error` counts as a
+    # success for the jobs that need it. Drop this once the leg stays green.
+    continue-on-error: ${{ matrix.browser == 'firefox' }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -105,15 +115,16 @@ jobs:
       - uses: ./.github/actions/prepare-browser-tests
         with:
           target: test:browser
+          browser: ${{ matrix.browser }}
 
       # `nx affected` is still the authority on what runs — it just no-ops in a
       # second when nothing is. `--parallel=1` throughout: the suites are
       # unchanged, one browser at a time on the runner, exactly as they ran in
       # the single job. What overlaps now are jobs, not suites inside a job.
-      - name: Run browser tests in Webkit
+      - name: Run browser tests in ${{ matrix.browser }}
         run:
           pnpm nx affected --targets=test:browser --parallel=1
-          --browser.name=webkit
+          --browser.name=${{ matrix.browser }}
 
   # Its own job rather than a second target on `browser`: run behind it, the two
   # of them together would take longer than the visual shards below and become
