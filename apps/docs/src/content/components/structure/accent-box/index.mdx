@@ -78,6 +78,14 @@ Eine AccentBox mit Gradient hebt sich visuell stärker hervor. Dadurch eignet
 sich diese Variante besonders für aufmerksamkeitsstarke Inhalte wie
 Werbemaßnahmen.
 
+Der Gradient folgt der
+[mittwald Bildwelt](https://branding.mittwald.de/bildwelt.html): Im Light Mode
+ist es der Simple Gradient von Orange zu Lilac, im Dark Mode ein Abstract
+Gradient auf dunklem Grund. Beide tragen das Filmkorn der Marke. Das Korn liegt
+unter dem Inhalt, Text bleibt scharf. Bei erhöhtem Kontrast
+(`prefers-contrast: more`) entfällt es. Es wird als `data:`-Bild eingebunden;
+blockiert eine Content Security Policy `data:` für Bilder, fehlt nur das Korn.
+
 <LiveCodeEditor example="gradient" editorCollapsed />
 
 ---

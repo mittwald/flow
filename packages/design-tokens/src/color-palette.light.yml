@@ -5,7 +5,7 @@ color:
     200:
       value: "#F4F8FC"
     300:
-      value: "#E5EFF8"
+      value: "#EBEFF3"
     400:
       value: "#DCE9F7"
     500:
@@ -21,7 +21,7 @@ color:
     1000:
       value: "#1B1F24"
     1100:
-      value: "#121518"
+      value: "#1D1E1F"
     1200:
       value: "#000000"
 
@@ -48,6 +48,30 @@ color:
       value: "#002A7B"
     1100:
       value: "#00205C"
+
+  mittwald-blue:
+    100:
+      value: "#F2F2FE"
+    200:
+      value: "#D2D3F9"
+    300:
+      value: "#B3B4F3"
+    400:
+      value: "#A0A0F2"
+    500:
+      value: "#8D8BF0"
+    600:
+      value: "#6970EF"
+    700:
+      value: "#4751EC"
+    800:
+      value: "#2D23E8"
+    900:
+      value: "#231BB3"
+    1000:
+      value: "#191381"
+    1100:
+      value: "#0F0B52"
 
   amaranth-red:
     100:
@@ -340,19 +364,72 @@ color:
     800:
       value: "rgb(255 255 255 / 100%)"
 
+  # mittwald brand colors, exactly as defined in https://branding.mittwald.de/farben.html
+  brand:
+    blue:
+      100:
+        value: "#B3B4F3"
+      200:
+        value: "#8D8BF0"
+      300:
+        value: "#2D23E8"
+    navy:
+      100:
+        value: "#BBC5EC"
+      200:
+        value: "#A2AEE6"
+      300:
+        value: "#8898E0"
+    green:
+      100:
+        value: "#C6CFCE"
+      200:
+        value: "#A7B2AC"
+      300:
+        value: "#919C96"
+    lilac:
+      100:
+        value: "#D8C3FB"
+      200:
+        value: "#CBA7FD"
+      300:
+        value: "#C294FF"
+    orange:
+      100:
+        value: "#E6C8BF"
+      200:
+        value: "#E7B09D"
+      300:
+        value: "#E7A187"
+    neutral-base:
+      value: "#EBEFF3"
+    neutral-default:
+      value: "#FFFFFF"
+    neutral-secondary:
+      value: "rgb(0 0 0 / 8%)"
+    text-primary:
+      value: "rgb(0 0 0 / 64%)"
+    text-highlight:
+      value: "#1D1E1F"
+
+  # Brand 100 tones as surfaces for text. Blue is brand blue 100 lifted 10 %
+  # towards white, so links (primary 800) keep 4.5:1 on it.
+  brand-surface:
+    blue:
+      value: "#BBBCF4"
+    navy:
+      value: "{color.brand.navy.100}"
+    green:
+      value: "{color.brand.green.100}"
+    lilac:
+      value: "{color.brand.lilac.100}"
+
+  # mittwald "Simple Gradient", measured from the brand guide's reference
+  # (branding.mittwald.de/assets/figma/9eafc.webp, Bildwelt > mittwald Gradient):
+  # linear, top to bottom. The stops are not palette steps; the brand fixes the
+  # gradient as a whole.
   gradient:
-    value:
-      "radial-gradient(circle at 27.74% 38.09%,#d8e9f8,transparent
-      60%),radial-gradient(circle at 63.98% 99.4%,#e4b8ff,transparent
-      37%),radial-gradient(circle at 79.7% 64.93%,#d8e9f8,transparent
-      52%),radial-gradient(circle at 10.9% 91.41%,#d8e9f8,transparent
-      56%),radial-gradient(circle at 3.68% 3.26%,#0056ff,transparent
-      31%),radial-gradient(circle at 99.62% 17.78%,#48c7d8,transparent
-      26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
-      55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
-      100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
+    value: "linear-gradient(180deg, #D48E75 0%, #986C97 100%)"
 
   background-gradient:
-    value:
-      "linear-gradient( 180deg, rgba(244, 248, 252, 1) 20%, rgba(208, 214, 243,
-      1) 100% )"
+    value: "{color.brand.neutral-base}"

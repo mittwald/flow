@@ -1,5 +1,5 @@
 .inlineCode {
-  font-family: FiraCode, monospace;
+  font-family: var(--font-family--code);
   font-size: var(--inline-code--font-size);
   overflow-wrap: anywhere;
   padding-inline: var(--inline-code--padding-x);

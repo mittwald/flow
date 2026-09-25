@@ -23,7 +23,12 @@ menu-item:
     disabled:
       value: "{disabled-plain-content-color}"
     current:
-      value: "{text.color.default}"
+      value: "{color.brand.text-highlight}"
+
+  # Highlight, not text-primary: the current background is too light for
+  # text-primary in dark mode.
+  color-current:
+    value: "{color.brand.text-highlight}"
 
   background-color:
     default:

@@ -56,6 +56,7 @@
     &[data-current],
     &[data-selected] {
       background-color: var(--menu-item--background-color--current);
+      color: var(--menu-item--color-current);
       font-weight: var(--menu-item--font-weight--current);
     }
   }

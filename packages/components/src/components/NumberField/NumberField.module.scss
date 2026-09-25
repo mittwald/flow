@@ -27,6 +27,7 @@
     border-width: var(--form-control--border-width);
     border-color: var(--form-control--border-color--default);
     border-style: solid;
+    border-radius: var(--form-control--corner-radius);
   }
 
   &[aria-invalid] {

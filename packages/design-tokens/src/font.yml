@@ -1,6 +1,17 @@
+font-family:
+  body:
+    value: "Inter, sans-serif"
+  # Proxima Nova is the brand headline font. Flow does not ship it (licensed
+  # font); apps that provide it get it, everyone else falls back to Inter.
+  heading:
+    value: '"Proxima Nova", Inter, sans-serif'
+  code:
+    value: "FiraCode, monospace"
 font-weight:
   normal:
     value: normal
+  semibold:
+    value: 600
   bold:
     value: bold
 line-height:

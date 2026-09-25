@@ -1,4 +1,13 @@
+@use "../../_lib/brand" as *;
+
 .timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
   flex-grow: 1;
   min-width: 0;
+}
+
+.timelineCard {
+  border-radius: $tile-radius;
 }

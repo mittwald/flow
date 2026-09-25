@@ -1,19 +1,19 @@
+@use "./_lib/brand" as *;
+
 .body {
   --header-height: 72px;
   --page-width: 1800px;
 
-  background-color: var(--neutral--color--200);
+  // The brand's neutral ground, as on mittwald.de.
+  background-color: $neutral-base;
+  // Flow text inherits its colour; outside a card it would inherit the
+  // browser's canvas text instead of the brand's primary text colour.
+  color: var(--text--color--default);
   isolation: isolate;
 
   * {
     box-sizing: border-box;
   }
-}
-
-.background {
-  position: fixed;
-  inset: 0;
-  background: var(--color--background-gradient);
 }
 
 .wrapper {
@@ -75,9 +75,26 @@
   width: 100%;
 }
 
+// The page stage above the page card.
+.pageColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
+  flex-grow: 1;
+  min-width: 0;
+}
+
 .pageCard {
   flex-grow: 1;
   min-width: 0;
+}
+
+// Only the Styleguide's own cards get the rounder brand tile; a LayoutCard in
+// an example keeps its token.
+.pageCard,
+.mainNavigation,
+.anchorNavigation {
+  border-radius: $tile-radius;
 }
 
 .mainContent {
@@ -111,16 +128,5 @@
 @media (max-width: 768px) {
   .mainWrapper {
     padding-inline: var(--size-px--m);
-  }
-}
-
-/*
- * Not --neutral--color--200: in dark mode the background gradient starts at
- * #121518, and the page ground has to meet it seamlessly. In light mode the
- * token already is the gradient's first stop, so only dark needs saying.
- */
-[data-theme="dark"] {
-  .body {
-    background-color: #121518;
   }
 }

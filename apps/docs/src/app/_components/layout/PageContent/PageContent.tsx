@@ -1,25 +1,26 @@
 import type { FC, ReactNode } from "react";
-import {
-  Flex,
-  Header,
-  Heading,
-  LayoutCard,
-  Section,
-} from "@mittwald/flow-react-components";
+import { Flex, LayoutCard } from "@mittwald/flow-react-components";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
-import { topAnchorId } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { PageActions } from "@/app/_components/layout/PageActions/PageActions";
+import PageStage from "@/app/_components/layout/PageStage";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
-import styles from "@/app/layout.module.scss";
+import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
+import layoutStyles from "@/app/layout.module.scss";
 
 interface Props {
   mdxFile: MdxFile;
   section: string;
-  /** Rendered between the description and the page body. */
+  /** Rendered above the page body. */
   notice?: ReactNode;
 }
+
+/** "Components · Actions": the section, and the group when there is one. */
+const eyebrowText = (section: string, slugs: string[]) =>
+  [section, ...slugs.slice(0, slugs.length > 1 ? 1 : 0)]
+    .map(extractTextFromPath)
+    .join(" · ");
 
 export const PageContent: FC<Props> = (props) => {
   const { mdxFile, section, notice } = props;
@@ -27,33 +28,30 @@ export const PageContent: FC<Props> = (props) => {
   const title = mdxFile.getTitle();
 
   return (
-    <Flex columnGap="m" className={styles.pageContainer}>
-      <LayoutCard className={styles.pageCard}>
-        <div className={styles.mainContent}>
-          <Section>
-            <Header>
-              <Heading
-                level={1}
-                id={topAnchorId}
-                className={styles.pageHeading}
-              >
-                {title}
-              </Heading>
-              <PageActions
-                title={title}
-                markdownUrl={rawMarkdownPath([section, ...mdxFile.slugs])}
-                gitHubUrl={mdxFile.getGitHubUrl()}
-              />
-            </Header>
+    <Flex columnGap="m" className={layoutStyles.pageContainer}>
+      <div className={layoutStyles.pageColumn}>
+        <PageStage
+          eyebrow={eyebrowText(section, mdxFile.slugs)}
+          title={title}
+          description={mdxFile.mdxSource.frontmatter.description}
+          section={section}
+          actions={
+            <PageActions
+              title={title}
+              markdownUrl={rawMarkdownPath([section, ...mdxFile.slugs])}
+              gitHubUrl={mdxFile.getGitHubUrl()}
+              color="light-static"
+            />
+          }
+        />
 
-            {mdxFile.mdxSource.frontmatter.description}
-
+        <LayoutCard className={layoutStyles.pageCard}>
+          <div className={layoutStyles.mainContent}>
             {notice}
-          </Section>
-
-          <MdxFileView mdxFile={mdxFile.serialize()} />
-        </div>
-      </LayoutCard>
+            <MdxFileView mdxFile={mdxFile.serialize()} />
+          </div>
+        </LayoutCard>
+      </div>
 
       <AnchorNavigation
         currentPath={`/${section}${mdxFile.pathname}`}
