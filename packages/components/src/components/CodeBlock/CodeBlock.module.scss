@@ -67,6 +67,11 @@
   .buttonContainer {
     position: relative;
     margin-top: calc(var(--code-block--show-more-padding) * -1);
+
+    /* Covers the editor's bottom padding – the container brings its own. */
+    margin-bottom: calc(
+      var(--form-control--border-width) - var(--form-control--padding-y)
+    );
     display: flex;
     justify-content: center;
     padding-block: var(--code-block--show-more-padding);
