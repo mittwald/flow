@@ -80,6 +80,14 @@ export interface FormProps<F extends FieldValues>
    * @default true
    */
   autoReset?: FormAutoResetOptions | boolean;
+  /**
+   * Whether closing the surrounding modal must be confirmed while the form has
+   * unsaved changes. Overrides `Form.confirmModalCloseOnUnsavedChanges` of the
+   * `ComponentDefaultsProvider`.
+   *
+   * @default true
+   */
+  confirmModalCloseOnUnsavedChanges?: boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
@@ -121,6 +129,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     ref,
     id: idProp,
     autoReset = true,
+    confirmModalCloseOnUnsavedChanges: confirmModalCloseOnUnsavedChangesProp,
     submitController: submitControllerFromProps,
     ...formProps
   } = props;
@@ -142,14 +151,17 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       ? { onAfterModalClose: autoReset }
       : autoReset;
 
-  const { confirmModalCloseOnUnsavedChanges } = useComponentDefaults("Form");
+  const defaults = useComponentDefaults("Form");
+  const confirmModalCloseOnUnsavedChanges =
+    confirmModalCloseOnUnsavedChangesProp ??
+    defaults.confirmModalCloseOnUnsavedChanges;
 
   const modalController = useModalController();
   modalController.useUpdateOptions({
     // A dirty Form contributes one close confirmation source to the surrounding
     // Modal; sources are combined, so a clean Form does not overrule a
     // `<Modal confirmOnClose>`. The Modal renders the confirmation dialog.
-    // An application that switched the default off contributes nothing at all.
+    // A Form that switched it off contributes nothing at all.
     confirmOnClose: confirmModalCloseOnUnsavedChanges ? isDirty : undefined,
   });
   modalController.useOnClosed(() => {
