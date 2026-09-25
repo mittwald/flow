@@ -104,6 +104,14 @@
 }
 
 .editorWrapper {
+  /* The show-more strip: a size-s button plus the toggle's padding. */
+  --show-more-button-height: calc(
+    var(--button--line-height-s) + 2 * var(--button--padding-s-y)
+  );
+  --show-more-height: calc(
+    var(--show-more-button-height) + 2 * var(--code-block--show-more-padding)
+  );
+
   position: relative;
 }
 
@@ -126,27 +134,55 @@
  * whole number of code lines whatever the editor's font size is. The extra half
  * line slices the next one in two, which reads as "there is more" where a cut
  * on the line boundary reads as the end of the example.
+ *
+ * Collapsed, the toggle lies over the code, which runs down to the border and
+ * fades out behind it — as in Flow's `CodeBlock`. The clamp grows by the toggle,
+ * so the toggle covers none of the lines.
  */
+.folded .editor {
+  padding-block-end: 0;
+}
+
 .folded .editor :global(.prism-code) {
-  max-height: calc((var(--truncated-lines) + 0.5) * 1lh);
+  max-height: calc(
+    (var(--truncated-lines) + 0.5) * 1lh + var(--show-more-height)
+  );
   overflow: hidden;
+}
+
+.folded .foldToggle {
+  margin-top: calc(var(--show-more-height) * -1);
+  background-color: transparent;
+
+  /* Keeps the fade below the button but above the code. */
+  isolation: isolate;
 }
 
 /*
  * The fade hangs off the toggle rather than the scroller, so it stays put while
- * the code scrolls sideways underneath it and ends where the toggle begins.
+ * the code scrolls sideways underneath it. Its eased stops leave no visible
+ * edge on top and let the code shimmer through behind the button.
  */
 .folded .foldToggle::before {
+  --fade-color: var(--code-block--background-color);
+
   content: "";
   position: absolute;
+  z-index: -1;
   inset-inline: 0;
-  bottom: 100%;
-  height: var(--size-px--xxl);
+  bottom: 0;
+  height: calc(var(--size-px--xxl) + var(--show-more-height));
   pointer-events: none;
   background: linear-gradient(
     to bottom,
     transparent,
-    var(--code-block--background-color)
+    color-mix(in srgb, var(--fade-color) 10%, transparent) 15%,
+    color-mix(in srgb, var(--fade-color) 30%, transparent) 30%,
+    color-mix(in srgb, var(--fade-color) 60%, transparent) 45%,
+    color-mix(in srgb, var(--fade-color) 82%, transparent) 58%,
+    color-mix(in srgb, var(--fade-color) 92%, transparent) 68%,
+    color-mix(in srgb, var(--fade-color) 95%, transparent) 85%,
+    color-mix(in srgb, var(--fade-color) 96%, transparent)
   );
 }
 
@@ -157,7 +193,10 @@
   z-index: 1;
 }
 
-/* Same spacing as the toggle of Flow's `CodeBlock`, so both fold alike. */
+/*
+ * Same spacing as the toggle of Flow's `CodeBlock`, so both fold alike.
+ * Expanded, it sits below the code.
+ */
 .foldToggle {
   position: relative;
   margin-top: calc(var(--code-block--show-more-padding) * -1);
