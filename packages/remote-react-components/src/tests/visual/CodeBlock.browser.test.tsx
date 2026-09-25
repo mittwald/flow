@@ -53,6 +53,7 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
   "serverShortId": "s-123456",
 }`}
+        showLineNumbers
         truncateLines={4}
       />,
     );

@@ -4,7 +4,7 @@ declare const classNames: {
   readonly truncated: "truncated";
   readonly "flow--code-editor--code-mirror": "flow--code-editor--code-mirror";
   readonly "cm-editor": "cm-editor";
-  readonly "cm-content": "cm-content";
+  readonly "cm-scroller": "cm-scroller";
   readonly buttonContainer: "buttonContainer";
   readonly folded: "folded";
 };

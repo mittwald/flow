@@ -64,15 +64,13 @@ $inner-corner-radius: calc(
       @include expandTransition.expandTransition;
     }
 
+    /* The editor holds the code and the line numbers, so both are clipped
+       and fade out together. */
     :global(.cm-editor) {
+      max-height: var(--expanded-max-height, none);
       overflow: hidden;
       border-end-start-radius: $inner-corner-radius;
       border-end-end-radius: $inner-corner-radius;
-    }
-
-    :global(.cm-content) {
-      max-height: var(--expanded-max-height, none);
-      overflow: hidden;
       transition-property: max-height;
 
       @include expandTransition.expandTransition;
@@ -90,7 +88,7 @@ $inner-corner-radius: calc(
         @include expandTransition.expandTransition;
 
         /* Eased stops: no visible edge on top, the code only shimmers through
-           behind the button. */
+         behind the button. */
         background: linear-gradient(
           to bottom,
           transparent,
@@ -103,6 +101,14 @@ $inner-corner-radius: calc(
           fade-color(96%)
         );
       }
+    }
+
+    /* Keeps its full height instead of shrinking into the editor, so the
+       editor clips it rather than the scroller scrolling within. The
+       scroller's own z-index (CodeMirror's) keeps the line numbers under the
+       fade. */
+    :global(.cm-scroller) {
+      flex-shrink: 0;
     }
 
     .buttonContainer {
@@ -118,7 +124,7 @@ $inner-corner-radius: calc(
     }
 
     /* Grows by the button strip, so the button covers none of the lines. */
-    :global(.cm-content) {
+    :global(.cm-editor) {
       max-height: calc(var(--max-height) + #{$show-more-height});
 
       &::after {

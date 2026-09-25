@@ -48,7 +48,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const [maxHeight, setMaxHeight] = useState<number>();
   /* The full height, only while the toggle animates to or from it. */
   const [expandedHeight, setExpandedHeight] = useState<number>();
-  const contentRef = useRef<HTMLElement>(null);
+  const editorRef = useRef<HTMLElement>(null);
 
   const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
 
@@ -80,24 +80,24 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
      interpolate. So the full height is measured for the transition and
      released once it ended, and code that changes later is not clipped. */
   const toggleFolded = () => {
-    const content = contentRef.current;
+    const editor = editorRef.current;
 
-    if (!content) {
+    if (!editor) {
       setFolded((folded) => !folded);
       return;
     }
 
-    const animates = getComputedStyle(content)
+    const animates = getComputedStyle(editor)
       .transitionDuration.split(",")
       .some((duration) => parseFloat(duration) > 0);
 
     if (folded) {
-      setExpandedHeight(animates ? content.scrollHeight : undefined);
+      setExpandedHeight(animates ? editor.scrollHeight : undefined);
       setFolded(false);
     } else {
-      flushSync(() => setExpandedHeight(content.scrollHeight));
+      flushSync(() => setExpandedHeight(editor.scrollHeight));
       // Applies the start height before the folded one replaces it.
-      content.getBoundingClientRect();
+      editor.getBoundingClientRect();
       setFolded(true);
     }
   };
@@ -127,7 +127,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
         showActiveLineMarker={false}
         isReadOnly
         onCreateEditor={(view) => {
-          contentRef.current = view.contentDOM;
+          editorRef.current = view.dom;
 
           if (!truncateLines) {
             return;
