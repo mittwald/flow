@@ -1,7 +1,7 @@
 import { type Extension, lineNumbers } from "@uiw/react-codemirror";
 import { lintGutter } from "@codemirror/lint";
 import supportedCodeEditorLanguages, {
-  type CodeEditorLanguage,
+  isCodeEditorLanguage,
 } from "@/components/CodeEditor/languages";
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
@@ -20,7 +20,6 @@ const indentationMarkerColors = {
   activeDark: markerColor,
 };
 
-/** @internal */
 export interface CodeEditorSetup {
   /**
    * Whether the line the cursor is on is highlighted.
@@ -56,7 +55,7 @@ export interface CodeEditorSetup {
 
 /** @internal */
 export const useCodeEditorExtensions = (
-  language?: CodeEditorLanguage,
+  language?: string,
   extensions: Extension[] = [],
   options: CodeEditorSetup = {
     showCodeFolding: true,
@@ -100,7 +99,7 @@ export const useCodeEditorExtensions = (
     extensions.push(indentationMarkers({ colors: indentationMarkerColors }));
   }
 
-  if (language) {
+  if (language && isCodeEditorLanguage(language)) {
     supportedCodeEditorLanguages[language]?.map((loader) =>
       extensions.push(loader()),
     );

@@ -1,5 +1,5 @@
 import type { PropsContext } from "@/lib/propsContext/types";
-import type { PropsWithTunnel } from "@/lib/types/props";
+import type { TunnelTarget } from "@/lib/types/props";
 
 /**
  * Props context entries that send every overlay trigger into `tunnel`.
@@ -22,7 +22,7 @@ import type { PropsWithTunnel } from "@/lib/types/props";
  * sent somewhere else (see `Label`).
  */
 export const overlayTriggersTunneledTo = (
-  tunnel: PropsWithTunnel["tunnel"],
+  tunnel: TunnelTarget,
 ): PropsContext => ({
   ContextMenuTrigger: { tunnel },
   ContextualHelpTrigger: { tunnel },

@@ -10,7 +10,6 @@ import { usePromise } from "@mittwald/react-use-promise";
 import type { ChartDataValue } from "@/components/CartesianChart/types";
 import type { WithTooltipFormatters } from "@/components/CartesianChart/components/ChartTooltip/types";
 
-/** @internal */
 export type TooltipPayloadItem = NonNullable<
   DefaultTooltipContentProps<ValueType, NameType>["payload"]
 >[number];
