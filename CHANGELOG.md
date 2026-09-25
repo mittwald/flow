@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.28](https://github.com/mittwald/flow/compare/1.2.27...1.2.28) (2026-09-25)
+
+### Code Refactoring
+
+* **Popover:** render the tip from one component ([#3285](https://github.com/mittwald/flow/issues/3285)) ([c764de4](https://github.com/mittwald/flow/commit/c764de44d3111779991d63bdad34ccae45f2eeaf))
+
+### Tests
+
+* **PasswordCreationField:** reset pointer between tests and poll rule list ([88f97bd](https://github.com/mittwald/flow/commit/88f97bd39e7c8a016cdba05cc7eb15086b568505))
+
+### Continuous Integration
+
+* close linked issues when a pull request merges into next ([#3241](https://github.com/mittwald/flow/issues/3241)) ([1ea74cc](https://github.com/mittwald/flow/commit/1ea74ccccbac6368fee8b08f9b916cb47342ef62))
+* **release:** rebuild the docs after a promotion ([#3215](https://github.com/mittwald/flow/issues/3215)) ([163e413](https://github.com/mittwald/flow/commit/163e413fddc2eac422e5715be8875d5b2c646052))
+
 ## [1.2.27](https://github.com/mittwald/flow/compare/1.2.26...1.2.27) (2026-09-25)
 
 ### Bug Fixes
