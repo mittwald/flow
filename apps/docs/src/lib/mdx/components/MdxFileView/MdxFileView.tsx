@@ -4,6 +4,7 @@ import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
+import { ComponentTokenTable } from "@/lib/mdx/components/ComponentTokenTable/ComponentTokenTable";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
@@ -182,12 +183,15 @@ export const MdxFileView: FC<Props> = (props) => {
     );
   };
 
+  const componentName =
+    props.indexFile?.mdxSource.frontmatter?.component || mdxFile.getTitle();
+
   const ExamplePropertiesTables = () => (
-    <PropertiesTables
-      name={
-        props.indexFile?.mdxSource.frontmatter?.component || mdxFile.getTitle()
-      }
-    />
+    <PropertiesTables name={componentName} />
+  );
+
+  const ExampleComponentTokenTable: FC<{ tokens?: string }> = ({ tokens }) => (
+    <ComponentTokenTable componentName={componentName} tokens={tokens} />
   );
 
   const WireframePreview: FC = () => {
@@ -216,6 +220,7 @@ export const MdxFileView: FC<Props> = (props) => {
     AppShell: ExampleAppShell,
     Wireframe: WireframePreview,
     PropertiesTables: ExamplePropertiesTables,
+    ComponentTokenTable: ExampleComponentTokenTable,
     Do: ExampleDo,
     Dont: ExampleDont,
     Info: ExampleInfo,

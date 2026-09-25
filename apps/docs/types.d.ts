@@ -22,5 +22,6 @@ declare global {
   declare const Info: ComponentType<DoAndDontProps>;
   declare const Row: ComponentType<PropsWithChildren>;
   declare const PropertiesTables: ComponentType;
+  declare const ComponentTokenTable: ComponentType<{ tokens?: string }>;
   declare const Column: ComponentType<PropsWithChildren>;
 }
