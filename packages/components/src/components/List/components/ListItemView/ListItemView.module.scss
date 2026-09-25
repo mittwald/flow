@@ -201,11 +201,22 @@
       width: 100%;
       min-width: 0;
 
+      :global(.flow--heading--heading-text-spacer) {
+        display: none;
+      }
+
       :global(.flow--heading--heading-content) {
         position: absolute;
         top: var(--list-item--padding);
         inset-inline: var(--list-item--padding);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--heading--icon-to-text-spacing);
         justify-content: end;
+      }
+
+      :global(.flow--heading--heading-content-item):not(:last-child) {
+        margin-inline-end: 0;
       }
     }
 

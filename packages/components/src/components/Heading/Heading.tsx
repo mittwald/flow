@@ -7,6 +7,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
+import { Children } from "react";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface HeadingProps
@@ -115,9 +116,24 @@ export const Heading = flowComponent("Heading", (props) => {
   return (
     <PropsContextProvider props={propsContext}>
       <Element className={rootClassName} {...rest} ref={ref} level={level}>
-        <span className={styles.headingText}>{children}</span>
+        <span className={styles.headingText}>
+          {children}
+          <UiComponentTunnelExit id="headingContent" component="Heading">
+            {(items) =>
+              Children.count(items) > 0 && (
+                <span className={styles.headingTextSpacer} />
+              )
+            }
+          </UiComponentTunnelExit>
+        </span>
         <span className={styles.headingContent}>
-          <UiComponentTunnelExit id="headingContent" component="Heading" />
+          <UiComponentTunnelExit id="headingContent" component="Heading">
+            {(items) =>
+              Children.map(items, (item) => (
+                <span className={styles.headingContentItem}>{item}</span>
+              ))
+            }
+          </UiComponentTunnelExit>
         </span>
       </Element>
     </PropsContextProvider>
