@@ -142,6 +142,134 @@ describe("Filter", () => {
   });
 });
 
+describe("Select all", () => {
+  const sixItems = Array.from({ length: 6 }, (_, i) => i + 1);
+  const selectAllLabel = /^(Select|Deselect) all$/;
+  const selectAllMenuItem = page.getByRole("menuitemcheckbox", {
+    name: selectAllLabel,
+  });
+  const menuItemCheckbox = (num: number) =>
+    page.getByRole("menuitemcheckbox", { name: String(num), exact: true });
+  const isIndeterminateIcon = (element: Element) =>
+    element.querySelector(".tabler-icon-square-minus-filled") !== null;
+
+  test("is offered in 'some' mode from six values on", async () => {
+    await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
+    await userEvent.click(filterButton);
+    await expect.element(selectAllMenuItem).toBeInTheDocument();
+  });
+
+  test("is not offered with fewer than six values", async () => {
+    await render(
+      getTestElement(sixItems.slice(1), <ListFilter<Data> property="num" />),
+    );
+    await userEvent.click(filterButton);
+    await expect.element(menuItemCheckbox(2)).toBeInTheDocument();
+    expect(selectAllMenuItem.query()).toBeNull();
+  });
+
+  test("is not offered in 'all' mode", async () => {
+    await render(
+      getTestElement(sixItems, <ListFilter<Data> property="num" mode="all" />),
+    );
+    await userEvent.click(filterButton);
+    await expect.element(menuItemCheckbox(1)).toBeInTheDocument();
+    expect(selectAllMenuItem.query()).toBeNull();
+  });
+
+  test("selects and deselects all values with one onChange call each", async () => {
+    const onChange = vitest.fn();
+    await render(
+      getTestElement(
+        sixItems,
+        <ListFilter<Data> property="num" onChange={onChange} />,
+      ),
+    );
+    await userEvent.click(filterButton);
+
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
+    await userEvent.click(selectAllMenuItem);
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(sixItems);
+    await expect
+      .element(selectAllMenuItem)
+      .toHaveAttribute("aria-checked", "true");
+    await expect.element(selectAllMenuItem).toHaveTextContent("Deselect all");
+    await expect
+      .element(menuItemCheckbox(5))
+      .toHaveAttribute("aria-checked", "true");
+
+    onChange.mockClear();
+    await userEvent.click(selectAllMenuItem);
+    expect(onChange).toHaveBeenCalledExactlyOnceWith([]);
+    await expect
+      .element(menuItemCheckbox(5))
+      .toHaveAttribute("aria-checked", "false");
+  });
+
+  test("shows a partial selection and completes it on click", async () => {
+    await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
+    await userEvent.click(filterButton);
+
+    expect(isIndeterminateIcon(selectAllMenuItem.element())).toBe(false);
+    await userEvent.click(menuItemCheckbox(3));
+    await expect
+      .poll(() => isIndeterminateIcon(selectAllMenuItem.element()))
+      .toBe(true);
+    await expect
+      .element(selectAllMenuItem)
+      .toHaveAttribute("aria-checked", "false");
+
+    await userEvent.click(selectAllMenuItem);
+    await expect
+      .element(selectAllMenuItem)
+      .toHaveAttribute("aria-checked", "true");
+    expect(isIndeterminateIcon(selectAllMenuItem.element())).toBe(false);
+
+    await userEvent.click(menuItemCheckbox(3));
+    await expect
+      .element(selectAllMenuItem)
+      .toHaveAttribute("aria-checked", "false");
+    await expect.element(listItem42).not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Item: 3", { exact: true }))
+      .not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Item: 4", { exact: true }))
+      .toBeInTheDocument();
+  });
+
+  test("is offered as a tri-state checkbox in the all filters modal", async () => {
+    await render(
+      getTestElement(
+        sixItems,
+        <ListFilter<Data> property="num" priority="secondary" />,
+      ),
+    );
+    await userEvent.click(
+      page.getByRole("button", { name: "All filters" }).first(),
+    );
+
+    const selectAllCheckbox = page.getByRole("checkbox", {
+      name: selectAllLabel,
+    });
+    await userEvent.click(page.getByText("3", { exact: true }));
+    await expect.element(selectAllCheckbox).toBePartiallyChecked();
+
+    await userEvent.click(page.getByText("Select all", { exact: true }));
+    await expect.element(selectAllCheckbox).toBeChecked();
+    await expect
+      .element(selectAllCheckbox)
+      .toHaveAccessibleName("Deselect all");
+    await expect
+      .element(page.getByRole("checkbox", { name: "5", exact: true }))
+      .toBeChecked();
+
+    await userEvent.click(page.getByText("Deselect all", { exact: true }));
+    await expect.element(selectAllCheckbox).not.toBeChecked();
+    await expect.element(selectAllCheckbox).not.toBePartiallyChecked();
+  });
+});
+
 describe("Storage", async () => {
   class MemorySettingsStorageBackend implements SettingsBackend {
     public data: SettingsJson = {};

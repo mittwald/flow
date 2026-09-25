@@ -15,6 +15,11 @@ export interface MenuItemProps
     PropsWithChildren,
     FlowComponentProps {
   selectionVariant?: "control" | "navigation" | "switch";
+  /**
+   * Shows the checkbox of a multiple-selection item as partially checked,
+   * unless the item is selected.
+   */
+  isIndeterminate?: boolean;
   /** Whether the button is in a pending state. */
   isPending?: boolean;
   /** Whether the button is in a succeeded state. */
@@ -53,6 +58,7 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     children,
     className,
     selectionVariant,
+    isIndeterminate,
     id,
     ref,
     "aria-disabled": ariaDisabled,
@@ -109,6 +115,7 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     <Aria.MenuItem
       {...rest}
       {...currentProps}
+      data-indeterminate={isIndeterminate || undefined}
       key={id}
       id={id}
       className={rootClassName}
@@ -116,7 +123,11 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     >
       {(props) => (
         <>
-          <MenuItemContent {...props} selectionVariant={selectionVariant}>
+          <MenuItemContent
+            {...props}
+            selectionVariant={selectionVariant}
+            isIndeterminate={isIndeterminate}
+          >
             {children}
           </MenuItemContent>
           {stateIcon}

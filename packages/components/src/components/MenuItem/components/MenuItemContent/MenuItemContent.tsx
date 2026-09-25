@@ -6,6 +6,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import {
   IconCheckboxChecked,
   IconCheckboxEmpty,
+  IconCheckboxIndeterminate,
   IconRadioOff,
   IconRadioOn,
 } from "@/components/Icon/components/icons";
@@ -14,6 +15,7 @@ import { Switch } from "@/components/Switch";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
   selectionVariant?: "control" | "navigation" | "switch";
+  isIndeterminate?: boolean;
 }
 
 export const MenuItemContent: FC<Props> = (props) => {
@@ -21,6 +23,7 @@ export const MenuItemContent: FC<Props> = (props) => {
     selectionMode,
     isSelected,
     selectionVariant = "control",
+    isIndeterminate,
     children,
   } = props;
 
@@ -59,6 +62,8 @@ export const MenuItemContent: FC<Props> = (props) => {
       <IconRadioOff />
     ) : selectionMode === "multiple" && isSelected ? (
       <IconCheckboxChecked />
+    ) : selectionMode === "multiple" && isIndeterminate ? (
+      <IconCheckboxIndeterminate />
     ) : (
       <IconCheckboxEmpty />
     );
