@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.31](https://github.com/mittwald/flow/compare/1.3.0-next.30...1.3.0-next.31) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.0-next.30](https://github.com/mittwald/flow/compare/1.3.0-next.29...1.3.0-next.30) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.0-next.29](https://github.com/mittwald/flow/compare/1.3.0-next.28...1.3.0-next.29) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.0-next.28](https://github.com/mittwald/flow/compare/1.3.0-next.27...1.3.0-next.28) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
 ## [1.3.0-next.27](https://github.com/mittwald/flow/compare/1.3.0-next.26...1.3.0-next.27) (2026-09-24)
 
 **Note:** Version bump only for package @mittwald/typescript-config

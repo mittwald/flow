@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.31](https://github.com/mittwald/flow/compare/1.3.0-next.30...1.3.0-next.31) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.3.0-next.30](https://github.com/mittwald/flow/compare/1.3.0-next.29...1.3.0-next.30) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.3.0-next.29](https://github.com/mittwald/flow/compare/1.3.0-next.28...1.3.0-next.29) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.3.0-next.28](https://github.com/mittwald/flow/compare/1.3.0-next.27...1.3.0-next.28) (2026-09-25)
+
+### Documentation
+
+* point llms.txt at the Markdown pages and add extension guidance ([#3281](https://github.com/mittwald/flow/issues/3281)) ([39831cf](https://github.com/mittwald/flow/commit/39831cfa8cfb34a11be9e3b1b8d29794a7b6aba9))
+
+## [1.2.22](https://github.com/mittwald/flow/compare/1.3.0-next.25...1.2.22) (2026-09-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.22 ([66ea3f2](https://github.com/mittwald/flow/commit/66ea3f2d645f07997a729e4050be56cd9879c44f))
+
 ## [1.3.0-next.27](https://github.com/mittwald/flow/compare/1.3.0-next.26...1.3.0-next.27) (2026-09-24)
 
 ### Features
