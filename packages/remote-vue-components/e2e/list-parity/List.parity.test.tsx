@@ -34,6 +34,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-vue-components";
 import { page, userEvent } from "vitest/browser";
+import { expect } from "vitest";
 import { h } from "vue";
 
 interface Crew {
@@ -52,6 +53,16 @@ const crew: Crew[] = [
   },
   { id: "2", name: "Dwayne Hicks", rank: "Corporal", joined: "2024-06-11" },
   { id: "3", name: "Carter Burke", rank: "Company Man", joined: "2024-09-27" },
+];
+
+/* Six values: from that many on, a multiple-choice filter offers "Select all". */
+const ranks = [
+  "Warrant Officer",
+  "Corporal",
+  "Company Man",
+  "Private",
+  "Sergeant",
+  "Lieutenant",
 ];
 
 const getItemId = (data: Crew) => data.id;
@@ -425,9 +436,49 @@ const scenarios: ParityScenario[] = [
   },
 
   {
+    name: "a filter with many values, all selected from its menu",
+    interact: async () => {
+      await userEvent.click(page.getByRole("button", { name: "Rank" }));
+      await userEvent.click(page.getByRole("menu").getByText("Select all"));
+    },
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew} />
+          {reactItem}
+          <L.Filter property="rank" mode="some" name="Rank" values={ranks} />
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew }),
+          vueItem(),
+          h(ListFilter, {
+            property: "rank",
+            mode: "some",
+            name: "Rank",
+            values: ranks,
+          }),
+        ]),
+    },
+  },
+
+  {
     name: "a search that matches nothing",
     interact: async () => {
       await userEvent.fill(page.getByRole("searchbox"), "Bishop");
+      /*
+       * The search submits after a pause of its own, longer than it takes the
+       * output to read as stable — so without this both passes compare the
+       * typed field over the unfiltered list.
+       */
+      await expect
+        .element(
+          page
+            .getByTestId("root-container")
+            .getByText("No search results found"),
+        )
+        .toBeVisible();
     },
     trees: {
       react: () => (
@@ -579,6 +630,45 @@ const scenarios: ParityScenario[] = [
   },
 
   {
+    /* Indeterminate while only some are on, "Deselect all" once all are. */
+    name: "the all-filters modal, selecting all of a filter's values",
+    interact: async () => {
+      await userEvent.click(page.getByRole("button", { name: "All filters" }));
+      /* The label, not the input: the checkbox's icons cover it. */
+      const modal = page.getByRole("dialog");
+      await userEvent.click(modal.getByText("Corporal"));
+      await userEvent.click(modal.getByText("Select all"));
+    },
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew} />
+          {reactItem}
+          <L.Filter
+            property="rank"
+            mode="some"
+            name="Rank"
+            priority="secondary"
+            values={ranks}
+          />
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew }),
+          vueItem(),
+          h(ListFilter, {
+            property: "rank",
+            mode: "some",
+            name: "Rank",
+            priority: "secondary",
+            values: ranks,
+          }),
+        ]),
+    },
+  },
+
+  {
     name: "a list summary above the items",
     trees: {
       react: () => (
@@ -642,6 +732,8 @@ const coverage = [
   "flow--button",
   "flow--checkbox",
   "flow--context-menu",
+  "flow--context-menu--select-all",
+  "flow--list--header--all-filters-modal--select-all-checkbox",
   "flow--heading",
   "flow--icon",
   "flow--illustrated-message",
