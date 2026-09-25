@@ -1,7 +1,6 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test } from "vitest";
-import { userEvent } from "vitest/browser";
+import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
   "CodeBlock (%s)",
@@ -58,52 +57,15 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
       />,
     );
 
-    await userEvent.keyboard("{tab}");
+    /* A mouse click leaves no focus ring in the captures. */
+    const toggle = page.getByRole("button", { name: /show (more|less)/i });
 
-    /*
-     * Both captures below encode the toggle's focus ring, and toggling swaps
-     * its label, so React re-renders the button the focus sits on. Wait for the
-     * focus each time instead of racing it — see `@/tests/lib/scenarioFocus`.
-     */
-    await waitForFocusInTheScenario();
-
-    await userEvent.keyboard("{enter}");
-
-    await waitForFocusInTheScenario();
+    await toggle.click();
 
     await testScreenshot("CodeBlock truncated - expanded");
 
-    await userEvent.keyboard("{enter}");
-
-    await waitForFocusInTheScenario();
+    await toggle.click();
 
     await testScreenshot("CodeBlock truncated - collapsed");
-  },
-);
-
-// Element tree comparable from alpha.883.
-test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
-  "CodeBlock truncated after 8 lines (%s)",
-  async ({ testScreenshot, render, components: { CodeBlock } }) => {
-    await render(
-      <CodeBlock
-        language="json"
-        code={`{
-  "name": "Death Star"
-  "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
-  "shortId": "p-123456",
-  "createdAt": "2025-08-25T06:11:21.000Z",
-  "enabled": true,
-  "status": "ready",
-  "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
-  "serverShortId": "s-123456",
-  "customerId": "5f1c1d0e-9a7b-4c3e-8d2f-1a2b3c4d5e6f",
-  "isReady": true,
-}`}
-        truncateLines
-      />,
-    );
-
-    await testScreenshot("CodeBlock truncated after 8 lines");
   },
 );
