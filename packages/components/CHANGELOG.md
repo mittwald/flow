@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.29](https://github.com/mittwald/flow/compare/1.3.0-next.28...1.3.0-next.29) (2026-09-25)
+
+### Bug Fixes
+
+* **Accordion:** name the toggle of a label header ([#3292](https://github.com/mittwald/flow/issues/3292)) ([c526710](https://github.com/mittwald/flow/commit/c5267105e8df9dbb4461f5dcee8d0df43fbc1b27))
+
+## [1.2.23](https://github.com/mittwald/flow/compare/1.3.0-next.27...1.2.23) (2026-09-25)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.23 ([f7885de](https://github.com/mittwald/flow/commit/f7885de743b9e5a853273a84199753d999b10559))
+
 ## [1.3.0-next.28](https://github.com/mittwald/flow/compare/1.3.0-next.27...1.3.0-next.28) (2026-09-25)
 
 ### Documentation
