@@ -19,7 +19,11 @@ import path from "node:path";
 interface VitestJsonReport {
   testResults: {
     name: string;
-    assertionResults: { fullName: string }[];
+    assertionResults: {
+      fullName: string;
+      status: string;
+      failureMessages?: string[];
+    }[];
   }[];
 }
 
@@ -56,3 +60,35 @@ export const staleKnownGaps = (corpus: Corpus): string[] => [
     .filter((name) => !corpus.scenarios.has(name))
     .map((name) => `divergingScenarios: no corpus scenario "${name}"`),
 ];
+
+/**
+ * Unsupported scenarios the converter no longer refuses — read from the report
+ * `runUnsupportedCheck` wrote. Refusing is the entry's whole claim, so a
+ * scenario that converted (and then passed, or failed on something else) keeps
+ * an exemption it may not need: delete the entry and let the comparison say.
+ */
+export const unconfirmedUnsupported = (reportPath: string): string[] => {
+  const report = JSON.parse(
+    readFileSync(reportPath, "utf8"),
+  ) as VitestJsonReport;
+  const refused = new Set(
+    report.testResults.flatMap((file) =>
+      file.assertionResults
+        .filter(
+          (test) =>
+            test.status === "failed" &&
+            test.failureMessages?.some((message) =>
+              message.includes("UnsupportedScenarioError"),
+            ),
+        )
+        .map((test) => scenarioNameOf(test.fullName)),
+    ),
+  );
+
+  return Object.keys(unsupportedScenarios)
+    .filter((name) => !refused.has(name))
+    .map(
+      (name) =>
+        `unsupportedScenarios: "${name}" converts to Vue now — delete the entry and let the comparison decide`,
+    );
+};

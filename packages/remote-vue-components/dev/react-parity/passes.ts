@@ -5,6 +5,7 @@
 import {
   excludeUnsupportedFiles,
   excludeUnsupportedPattern,
+  includeUnsupportedPattern,
 } from "../../e2e/react-parity/knownGaps.ts";
 import { spawnSync } from "node:child_process";
 import { rmSync } from "node:fs";
@@ -106,7 +107,10 @@ const namesScenarios = (flags: readonly string[]): boolean =>
       flag.startsWith("--testNamePattern"),
   );
 
-const exclusionsFor = (mode: PassMode, { flags }: RunnerArguments) =>
+export const exclusionsFor = (
+  mode: PassMode,
+  { flags }: RunnerArguments,
+): string[] =>
   mode === "compare" && !namesScenarios(flags)
     ? [...excludeUnsupportedFiles(), "-t", excludeUnsupportedPattern()]
     : [];
@@ -137,6 +141,43 @@ export const runCorpusPass = (
     { cwd: packageRoot, stdio: "inherit", env: passEnvironmentFor(mode) },
   );
   return result.status ?? 1;
+};
+
+/**
+ * Converts the scenarios `knownGaps.ts` calls inexpressible, and nothing else.
+ *
+ * Each is expected to fail on the spot with the converter's
+ * `UnsupportedScenarioError` — that is the claim the entry makes. The report
+ * says which did; one that failed for another reason, or passed, no longer
+ * needs its exemption as far as the converter is concerned.
+ */
+export const runUnsupportedCheck = (
+  { flags }: RunnerArguments,
+  reportPath: string,
+): void => {
+  console.log("\n▶ Vue (confirming what knownGaps.ts calls inexpressible)\n");
+  spawnSync(
+    "pnpm",
+    [
+      "exec",
+      "vitest",
+      "run",
+      "--config",
+      corpusConfig,
+      "--browser.headless",
+      ...excludeUnsupportedFiles(),
+      "-t",
+      includeUnsupportedPattern(),
+      "--reporter=json",
+      `--outputFile.json=${reportPath}`,
+      ...flags,
+    ],
+    {
+      cwd: packageRoot,
+      stdio: "inherit",
+      env: passEnvironmentFor("compare"),
+    },
+  );
 };
 
 export const runListParity = ({ flags }: RunnerArguments): number => {

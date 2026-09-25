@@ -15,9 +15,14 @@ import {
   resetReferences,
   runCorpusPass,
   runListParity,
+  runUnsupportedCheck,
   splitArguments,
 } from "./passes.ts";
-import { readCorpus, staleKnownGaps } from "./staleKnownGaps.ts";
+import {
+  readCorpus,
+  staleKnownGaps,
+  unconfirmedUnsupported,
+} from "./staleKnownGaps.ts";
 import {
   unsupportedFiles,
   unsupportedScenarios,
@@ -35,6 +40,10 @@ const isFullRun = runnerArguments.filters.length === 0;
 const reportPath = path.join(
   packageRoot,
   "e2e/react-parity/.refs/reference-report.json",
+);
+const unsupportedReportPath = path.join(
+  packageRoot,
+  "e2e/react-parity/.refs/unsupported-report.json",
 );
 
 resetReferences();
@@ -58,6 +67,11 @@ if (referenceStatus !== 0) {
 }
 
 const staleEntries = isFullRun ? staleKnownGaps(readCorpus(reportPath)) : [];
+
+if (isFullRun) {
+  runUnsupportedCheck(runnerArguments, unsupportedReportPath);
+  staleEntries.push(...unconfirmedUnsupported(unsupportedReportPath));
+}
 
 const compareStatus = runCorpusPass("compare", runnerArguments);
 

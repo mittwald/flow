@@ -12,6 +12,7 @@
 import {
   corpusConfig,
   environmentFor,
+  exclusionsFor,
   packageRoot,
   resetReferences,
   runCorpusPass,
@@ -41,6 +42,8 @@ process.exit(
       "dev",
       "--config",
       corpusConfig,
+      /* What a full run leaves out, so the watcher compares the same thing. */
+      ...exclusionsFor("compare", runnerArguments),
       ...runnerArguments.flags,
       ...runnerArguments.filters,
     ],
