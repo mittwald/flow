@@ -1,5 +1,6 @@
 import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import {
   LiveEditor,
   LiveError,
@@ -81,6 +82,9 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorInitiallyCollapsed,
   );
   const [codeFolded, setCodeFolded] = useState(true);
+  /** The full code height, only while the toggle animates to or from it. */
+  const [expandedHeight, setExpandedHeight] = useState<number>();
+  const codeRef = useRef<HTMLDivElement>(null);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [draggedWidth, setDraggedWidth] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -220,6 +224,35 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     !editorInitiallyCollapsed;
   const folded = truncatable && codeFolded;
 
+  /**
+   * A height transition needs a length on both ends – `none` does not
+   * interpolate. So the full height is measured for the transition and released
+   * once it ended, and code that grows while editing is not clipped. Without
+   * motion there is no transition to end, so the height is never pinned.
+   */
+  const toggleFolded = () => {
+    const content = codeRef.current?.querySelector("pre");
+
+    if (!content) {
+      setCodeFolded(!codeFolded);
+      return;
+    }
+
+    const animates = getComputedStyle(content)
+      .transitionDuration.split(",")
+      .some((duration) => parseFloat(duration) > 0);
+
+    if (codeFolded) {
+      setExpandedHeight(animates ? content.scrollHeight : undefined);
+      setCodeFolded(false);
+    } else {
+      flushSync(() => setExpandedHeight(content.scrollHeight));
+      // Applies the start height before the folded one replaces it.
+      content.getBoundingClientRect();
+      setCodeFolded(true);
+    }
+  };
+
   const showFoldToggle = !editorDisabled && truncatable;
   const showHideToggle = !editorDisabled && !!editorInitiallyCollapsed;
 
@@ -320,13 +353,33 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
         {!editorDisabled && (
           <div
-            className={clsx(styles.editorWrapper, folded && styles.folded)}
+            className={clsx(
+              styles.editorWrapper,
+              truncatable && styles.truncatable,
+              folded && styles.folded,
+            )}
             id={editorId}
-            style={{ "--truncated-lines": truncateLines } as CSSProperties}
+            style={
+              {
+                "--truncated-lines": truncateLines,
+                ...(expandedHeight
+                  ? { "--expanded-max-height": `${expandedHeight}px` }
+                  : {}),
+              } as CSSProperties
+            }
+            onTransitionEnd={(event) => {
+              if (event.propertyName === "max-height") {
+                setExpandedHeight(undefined);
+              }
+            }}
           >
             {!editorCollapsed && (
               <>
-                <div className={styles.editorContainer} id={codeId}>
+                <div
+                  className={styles.editorContainer}
+                  id={codeId}
+                  ref={codeRef}
+                >
                   <LiveEditor
                     tabMode="focus"
                     theme={flowTheme}
@@ -345,7 +398,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
                       size="s"
                       variant="plain"
                       color="secondary"
-                      onPress={() => setCodeFolded(!codeFolded)}
+                      onPress={toggleFolded}
                       aria-expanded={!folded}
                       aria-controls={codeId}
                     >

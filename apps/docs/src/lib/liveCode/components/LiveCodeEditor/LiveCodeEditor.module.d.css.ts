@@ -27,9 +27,10 @@ declare const classNames: {
   readonly editor: "editor";
   readonly editorWrapper: "editorWrapper";
   readonly editorContainer: "editorContainer";
-  readonly folded: "folded";
+  readonly truncatable: "truncatable";
   readonly "prism-code": "prism-code";
   readonly foldToggle: "foldToggle";
+  readonly folded: "folded";
   readonly copyButton: "copyButton";
   readonly toggleCode: "toggleCode";
   readonly actions: "actions";

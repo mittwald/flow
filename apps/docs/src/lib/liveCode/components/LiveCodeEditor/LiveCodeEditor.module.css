@@ -112,7 +112,14 @@
     var(--show-more-button-height) + 2 * var(--code-block--show-more-padding)
   );
 
+  /* The expand timing of Flow's `CodeBlock` and `Accordion`. */
+  --expand-duration: var(--transition--duration--default);
+  --expand-easing: cubic-bezier(0.25, 1, 0.5, 1);
+
   position: relative;
+
+  /* Behind the toggle, which lies over the code when collapsed. */
+  background-color: var(--code-block--background-color);
 }
 
 /*
@@ -130,32 +137,31 @@
 }
 
 /*
- * `1lh` resolves against the editor's own line height, so the clamp lands on a
- * whole number of code lines whatever the editor's font size is. The extra half
- * line slices the next one in two, which reads as "there is more" where a cut
- * on the line boundary reads as the end of the example.
+ * Truncatable: collapsed, the toggle lies over the code, which runs down to the
+ * border and fades out behind it — as in Flow's `CodeBlock`. Toggling animates
+ * the height, the fade and the toggle's position together.
  *
- * Collapsed, the toggle lies over the code, which runs down to the border and
- * fades out behind it — as in Flow's `CodeBlock`. The clamp grows by the toggle,
- * so the toggle covers none of the lines.
+ * `max-height: none` does not interpolate, so the component pins the full
+ * height in `--expanded-max-height` while the transition runs.
  */
-.folded .editor {
-  padding-block-end: 0;
+.truncatable .editor {
+  transition-property: padding-block-end;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
 }
 
-.folded .editor :global(.prism-code) {
-  max-height: calc(
-    (var(--truncated-lines) + 0.5) * 1lh + var(--show-more-height)
-  );
+.truncatable .editor :global(.prism-code) {
+  max-height: var(--expanded-max-height, none);
   overflow: hidden;
+  transition-property: max-height;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
 }
 
-.folded .foldToggle {
-  margin-top: calc(var(--show-more-height) * -1);
-  background-color: transparent;
-
-  /* Keeps the fade below the button but above the code. */
-  isolation: isolate;
+.truncatable .foldToggle {
+  transition-property: margin-top;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
 }
 
 /*
@@ -163,7 +169,7 @@
  * the code scrolls sideways underneath it. Its eased stops leave no visible
  * edge on top and let the code shimmer through behind the button.
  */
-.folded .foldToggle::before {
+.truncatable .foldToggle::before {
   --fade-color: var(--code-block--background-color);
 
   content: "";
@@ -173,6 +179,10 @@
   bottom: 0;
   height: calc(var(--size-px--xxl) + var(--show-more-height));
   pointer-events: none;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
   background: linear-gradient(
     to bottom,
     transparent,
@@ -184,6 +194,31 @@
     color-mix(in srgb, var(--fade-color) 95%, transparent) 85%,
     color-mix(in srgb, var(--fade-color) 96%, transparent)
   );
+}
+
+.folded .editor {
+  padding-block-end: 0;
+}
+
+/*
+ * `1lh` resolves against the editor's own line height, so the clamp lands on a
+ * whole number of code lines whatever the editor's font size is. The extra half
+ * line slices the next one in two, which reads as "there is more" where a cut
+ * on the line boundary reads as the end of the example. The clamp grows by the
+ * toggle, so the toggle covers none of the lines.
+ */
+.folded .editor :global(.prism-code) {
+  max-height: calc(
+    (var(--truncated-lines) + 0.5) * 1lh + var(--show-more-height)
+  );
+}
+
+.folded .foldToggle {
+  margin-top: calc(var(--show-more-height) * -1);
+}
+
+.folded .foldToggle::before {
+  opacity: 1;
 }
 
 .copyButton {
@@ -203,7 +238,9 @@
   display: flex;
   justify-content: center;
   padding-block: var(--code-block--show-more-padding);
-  background-color: var(--code-block--background-color);
+
+  /* Keeps the fade below the button but above the code. */
+  isolation: isolate;
 }
 
 .toggleCode {
