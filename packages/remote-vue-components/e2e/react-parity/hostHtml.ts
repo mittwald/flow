@@ -118,7 +118,18 @@ const normalizedDeclarations = (element: Element, style: string): string => {
     .trim();
 };
 
-export const hostHtml = (root: Element): string => {
+export interface HostHtmlOptions {
+  /**
+   * Whether the scenario generated a password. Only then is a password value
+   * masked — one the scenario typed is content like any other.
+   */
+  hasGeneratedPassword?: boolean;
+}
+
+export const hostHtml = (
+  root: Element,
+  { hasGeneratedPassword = false }: HostHtmlOptions = {},
+): string => {
   const clone = root.cloneNode(true) as Element;
   const rewriteIds = createIdRewriter();
 
@@ -129,6 +140,7 @@ export const hostHtml = (root: Element): string => {
      * same non-determinism.
      */
     if (
+      hasGeneratedPassword &&
       element.getAttribute("type") === "password" &&
       element.hasAttribute("value")
     ) {
