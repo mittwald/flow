@@ -77,3 +77,34 @@ Welche Änderung ab welcher Version greift und wie Deprecation-Warnungen den
 Vorlauf bilden, steht unter [Upgrades](/get-started/upgrades). Was Flow dir
 innerhalb einer Linie zusichert, steht unter
 [Versionierung & Stabilität](/get-started/versioning).
+
+---
+
+# Mit KI-Agents arbeiten
+
+Ein Coding-Agent liest von sich aus nur die Anweisungen deines Projekts. Diese
+Dokumentation und die Hinweise im Paket findet er nur, wenn sie dort genannt
+sind. Füge deshalb diesen Block in die `AGENTS.md` (oder `CLAUDE.md`) deines
+Projekts ein:
+
+```markdown
+## UI mit Flow
+
+Bevor du UI mit Flow baust oder änderst:
+
+1. Lies die USAGE.md des Flow-Pakets, das in package.json steht:
+   - `@mittwald/flow-react-components` (Anwendung):
+     node_modules/@mittwald/flow-react-components/USAGE.md
+   - `@mittwald/flow-remote-react-components` (mStudio-Extension):
+     node_modules/@mittwald/flow-remote-react-components/USAGE.md. Importiere
+     dann immer aus diesem Paket, auch wenn die Beispiele der Dokumentation
+     `@mittwald/flow-react-components` zeigen.
+2. Lies https://flow.mittwald.de/llms.txt und öffne die dort verlinkte Seite,
+   bevor du eine Component, ein Layout oder einen UI-Text festlegst. Antworte
+   nicht aus dem Gedächtnis.
+```
+
+Die `USAGE.md` passt zur installierten Version, `llms.txt` beschreibt den
+aktuellen Stand der Dokumentation und verlinkt jede Seite als Markdown. Auf
+jeder Seite dieser Dokumentation führt außerdem „Markdowndatei öffnen“ zur
+Markdown-Fassung.
