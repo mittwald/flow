@@ -42,8 +42,11 @@ export interface CodeEditorProps
   isInvalid?: boolean;
   /** The elements class name. */
   className?: string;
-  /** The language the code is highlighted as. */
-  language?: CodeEditorLanguage;
+  /**
+   * The language the code is highlighted as. A language the editor does not
+   * know is shown as plain text.
+   */
+  language?: CodeEditorLanguage | (string & {});
   /**
    * Whether a button to copy the code to the clipboard is shown.
    *
