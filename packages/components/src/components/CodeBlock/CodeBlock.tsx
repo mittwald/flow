@@ -111,7 +111,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       )}
       style={heightVariables}
       onTransitionEnd={(event) => {
-        if (!folded && event.propertyName === "max-height") {
+        if (event.propertyName === "max-height") {
           setExpandedHeight(undefined);
         }
       }}
