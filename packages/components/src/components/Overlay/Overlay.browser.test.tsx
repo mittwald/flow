@@ -1,7 +1,9 @@
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
+import Label from "@/components/Label";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
+import TextField from "@/components/TextField";
 import { sleep } from "@/lib/promises/sleep";
 import { render } from "vitest-browser-react";
 
@@ -153,5 +155,112 @@ test("the backdrop covers the viewport, not the whole document", async () => {
     expect(height).toBeLessThanOrEqual(viewportHeight + 1);
   } finally {
     filler.remove();
+  }
+});
+
+const LoginModal = ({ label }: { label: string }) => (
+  <Modal isDefaultOpen>
+    <Heading>Login</Heading>
+    <Content>
+      <TextField autoFocus>
+        <Label>{label}</Label>
+      </TextField>
+    </Content>
+  </Modal>
+);
+
+test.each([
+  // 1Password appends its inline menu to body when a field gets focus.
+  ["a browser extension", "com-1password-button"],
+  ["the page", "div"],
+])(
+  "a focused field in an Overlay keeps focus when %s appends to body",
+  async (_, tagName) => {
+    const dom = await render(<LoginModal label="Email" />);
+    const input = document.querySelector("input");
+    await expect.poll(() => document.activeElement).toBe(input);
+
+    const foreign = document.createElement(tagName);
+    document.body.append(foreign);
+
+    try {
+      await dom.rerender(<LoginModal label="E-Mail" />);
+      await sleep(50);
+      expect(document.activeElement).toBe(input);
+    } finally {
+      foreign.remove();
+    }
+  },
+);
+
+test("a scrolled Overlay keeps its scroll position when the page appends to body", async () => {
+  const TallModal = ({ label }: { label: string }) => (
+    <Modal isDefaultOpen>
+      <Heading>{label}</Heading>
+      <Content>
+        <div style={{ height: "3000px" }} />
+      </Content>
+    </Modal>
+  );
+
+  const dom = await render(<TallModal label="Install" />);
+  const content = document.querySelector<HTMLElement>(".flow--modal--content");
+  if (!content) {
+    throw new Error("no modal content rendered");
+  }
+  content.scrollTop = 200;
+  expect(content.scrollTop).toBe(200);
+
+  // react-aria mounts hidden description nodes on body while a popover inside
+  // the modal opens — a plain `div`, appended after the overlay container.
+  const foreign = document.createElement("div");
+  document.body.append(foreign);
+
+  try {
+    await dom.rerender(<TallModal label="Changed" />);
+    await sleep(50);
+    expect(content.scrollTop).toBe(200);
+  } finally {
+    foreign.remove();
+  }
+});
+
+test("an extension node appended after the overlay container leaves it in place", async () => {
+  const dom = await render(<LoginModal label="Email" />);
+  const container = document.querySelector("body > [data-flow-overlays]");
+
+  const extension = document.createElement("com-1password-button");
+  document.body.append(extension);
+
+  try {
+    await dom.rerender(<LoginModal label="E-Mail" />);
+    await sleep(50);
+    expect(container?.nextElementSibling).toBe(extension);
+  } finally {
+    extension.remove();
+  }
+});
+
+test("nodes appended after the overlay container are not moved", async () => {
+  const dom = await render(<LoginModal label="Email" />);
+
+  // Moving an iframe reloads it. The remote renderer's iframe lives in page
+  // content, so pushing page content around costs extension state.
+  const iframe = document.createElement("iframe");
+  iframe.srcdoc = "<p>remote</p>";
+  let loads = 0;
+  iframe.addEventListener("load", () => loads++);
+  document.body.append(iframe);
+  await expect.poll(() => loads).toBe(1);
+
+  try {
+    await dom.rerender(<LoginModal label="E-Mail" />);
+    await sleep(100);
+    expect(loads).toBe(1);
+    expect(document.body.lastElementChild).toBe(
+      document.querySelector("body > [data-flow-overlays]"),
+    );
+  } finally {
+    iframe.remove();
   }
 });

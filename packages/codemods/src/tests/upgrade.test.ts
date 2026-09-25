@@ -50,6 +50,7 @@ const deps = (
       changed: 1,
       unmodified: 0,
       skipped: 0,
+      empty: 0,
       errors: 0,
       processedNothing: false,
     };
@@ -107,6 +108,7 @@ describe("runUpgrade", () => {
             changed: 0,
             unmodified: 1,
             skipped: 0,
+            empty: 0,
             errors: 0,
             processedNothing: false,
           };
@@ -174,6 +176,7 @@ describe("runUpgrade", () => {
             changed: 0,
             unmodified: 1,
             skipped: 0,
+            empty: 0,
             errors: 0,
             processedNothing: false,
           };
@@ -354,6 +357,7 @@ describe("runUpgrade", () => {
             changed: 1,
             unmodified: 0,
             skipped: 0,
+            empty: 0,
             errors: 0,
             processedNothing: false,
           };
@@ -381,6 +385,7 @@ describe("runUpgrade", () => {
             changed: 0,
             unmodified: 0,
             skipped: 0,
+            empty: 0,
             errors: 2,
             processedNothing: false,
           };
@@ -389,6 +394,36 @@ describe("runUpgrade", () => {
     );
 
     expect(code).toBe(1);
+  });
+
+  // #3117: one 0-byte file in a tree of thirty made every codemod report
+  // "declined all 1 file(s) it looked at" and the command exit 1.
+  // `unmodified > 0` proves the transform read the tree.
+  test("a decline among files the transform did read is not a failed run", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        runCodemod: async ({ id }) => {
+          recorded.codemods.push(id);
+          return {
+            changed: 0,
+            unmodified: 29,
+            skipped: 1,
+            empty: 0,
+            errors: 0,
+            processedNothing: false,
+          };
+        },
+      }),
+    );
+
+    expect(code).toBe(0);
+    expect(recorded.output.join("\n")).not.toContain("declined all");
   });
 
   test("declining a subset in `choose` runs only that subset", async () => {

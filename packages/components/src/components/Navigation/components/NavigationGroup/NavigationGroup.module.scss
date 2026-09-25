@@ -1,5 +1,5 @@
 .navigationGroup {
-  &:not(.collapsable) ul {
+  &:not(.collapsable) :global(.flow--navigation--link-list) {
     padding-inline: var(--accordion--padding-x);
     padding-block: var(--accordion--padding-y);
   }

@@ -276,16 +276,70 @@ test.for(["top", "bottom"] as const)(
   },
 );
 
+test("A coach mark paints over ordinary content that follows it in the DOM", async () => {
+  render(
+    <div>
+      {/* The page header an mStudio detail page anchors its hints in. */}
+      <div>
+        <button id="ordinary-anchor" data-testid="anchor">
+          Anchor
+        </button>
+        <CoachMark anchor="ordinary-anchor" isDefaultOpen>
+          <Text data-testid="hint">This button now does more.</Text>
+        </CoachMark>
+      </div>
+      {/* And the card with the tab bar that every such page has below it.
+          `position: relative` is a containing block for something inside it,
+          not a claim to a stacking level — but without a level of its own the
+          coach mark loses to it, because paint order is then tree order. */}
+      <div
+        data-testid="content"
+        style={{
+          position: "relative",
+          height: "300px",
+          background: "black",
+        }}
+      />
+    </div>,
+  );
+
+  const hint = page.getByTestId("hint");
+  await expect.element(hint).toBeInTheDocument();
+
+  const popover = hint
+    .element()
+    .closest("[class*='flow--popover--content']")?.parentElement;
+
+  await expect.poll(() => popover?.dataset.placement).toBeTruthy();
+
+  // The coach mark opens downwards, into the block below it.
+  const popoverBox = popover?.getBoundingClientRect();
+  const contentBox = page
+    .getByTestId("content")
+    .element()
+    .getBoundingClientRect();
+  const x = Math.round((popoverBox?.x ?? 0) + (popoverBox?.width ?? 0) / 2);
+  const y = Math.round((popoverBox?.y ?? 0) + (popoverBox?.height ?? 0) / 2);
+
+  expect(y).toBeGreaterThan(contentBox.top);
+  expect(y).toBeLessThan(contentBox.bottom);
+
+  // Ask the document which of the two is actually painted there.
+  expect(popover?.contains(document.elementFromPoint(x, y))).toBe(true);
+});
+
 test("A coach mark stays behind app chrome that claims a stacking level", async () => {
   render(
     <div style={{ height: "3000px" }}>
-      {/* A sticky header, the way an application frames its pages. */}
+      {/* A sticky header, the way an application frames its pages. Level 2,
+          because the coach mark itself claims 1 to clear ordinary content and
+          comes later in the document — a header on 1 would lose that tie. */}
       <div
         data-testid="chrome"
         style={{
           position: "sticky",
           insetBlockStart: 0,
-          zIndex: 1,
+          zIndex: 2,
           height: "80px",
           background: "black",
         }}
@@ -309,9 +363,9 @@ test("A coach mark stays behind app chrome that claims a stacking level", async 
     .closest("[class*='flow--popover--content']")?.parentElement;
 
   // react-aria hands a portalled overlay `z-index: 100000`, which would put this
-  // one in front of the whole application. It renders in place, so it claims no
-  // stacking level and the header keeps its place above it.
-  expect(popover && getComputedStyle(popover).zIndex).toBe("auto");
+  // one in front of the whole application. It renders in place, so it claims the
+  // lowest level that clears ordinary content and nothing beyond it.
+  expect(popover && getComputedStyle(popover).zIndex).toBe("1");
 
   // Scroll until the coach mark passes through the sticky header, then ask the
   // document which of the two is actually painted there.

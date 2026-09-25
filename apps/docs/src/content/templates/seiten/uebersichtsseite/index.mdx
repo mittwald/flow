@@ -1,0 +1,66 @@
+---
+title: Übersichtsseite
+description:
+  Die durchsuchbare Liste gleichartiger Objekte und der Einstieg in ihre
+  einzelnen Detailseiten.
+---
+
+<LiveCodeEditor example="uebersichtsseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Verwendung
+
+Verwende die Übersichtsseite, wenn Nutzer aus **vielen gleichartigen Objekten**
+das passende auswählen und anschließend im Detail bearbeiten sollen. Die Tiefe
+eines einzelnen Objekts gehört auf seine
+[Detailseite](/templates/seiten/detailseite); ist die Liste nur ein Abschnitt
+neben anderen Inhalten, gehört sie in ein
+[Dashboard](/templates/seiten/dashboard).
+
+---
+
+# Aufbau
+
+- **Content Header** – Eine [Heading](/components/content/heading) als H1
+  benennt den Objekttyp, den die Seite auflistet.
+- **Content** – Eine [LayoutCard](/components/structure/layout-card) umschließt
+  die [List](/components/list/list), die das Hauptelement der Seite ist.
+- **List** – Die [List](/components/list/list) bringt Suche, Filter und
+  Sortierung bereits mit. Je nach Inhalt lässt sich ihre Ansicht als Liste,
+  Raster oder Tabelle wählen.
+- **Eintrag** – Ein [List-Item](/components/list/list-item-view) je Objekt
+  verlinkt in seine [Detailseite](/templates/seiten/detailseite) und trägt
+  häufige Aktionen direkt am Objekt, etwa über ein
+  [ContextMenu](/components/actions/context-menu).
+- **Anlege-Aktion** – Sie liegt in der
+  [ActionGroup](/components/actions/action-group) der List und bleibt so am
+  Objekttyp, auch wenn die Liste später an anderer Stelle auftaucht.
+- **Leerzustand** – Die List bringt automatisch eine
+  [Empty View](/components/list/list#lade-und-leeransichten-empty-view) mit;
+  passe sie an das anzulegende Objekt an, denn der erste Kontakt mit einem
+  Objekttyp ist fast immer die leere Liste.
+
+---
+
+# Varianten und Abwandlung
+
+## Als Kachelansicht
+
+In der Kachelansicht steht ein großes Vorschaubild im Vordergrund. So erkennen
+Nutzer das passende Objekt auf einen Blick. Struktur und Ausstattung der Seite
+bleiben gleich. Es ändern sich nur `defaultViewMode` und die Anzeigeform des
+Eintrags.
+
+<LiveCodeEditor
+  example="uebersichtsseite-kacheln"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+## Tabs über mehreren Übersichtsseiten
+
+Manchmal gehören mehrere Objekttypen fachlich zusammen, etwa E-Mail-Adressen,
+Weiterleitungen und Delivery-Boxen. Eine
+[TabNavigation](/components/navigation/tab-navigation) fasst sie zusammen. Jeder
+Tab ist für sich eine Übersichtsseite.

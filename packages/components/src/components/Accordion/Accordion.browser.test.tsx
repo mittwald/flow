@@ -3,6 +3,7 @@ import { page } from "vitest/browser";
 import { expect, test } from "vitest";
 import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
+import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 
@@ -75,4 +76,43 @@ test("the toggle keeps the focus it received", async () => {
   await toggle().click();
 
   await expect.element(toggle()).toHaveFocus();
+});
+
+const renderLabelAccordion = () =>
+  render(
+    <Accordion>
+      <Label>Server details</Label>
+      <Content>
+        <Text>The server runs in Frankfurt.</Text>
+      </Content>
+    </Accordion>,
+  );
+
+/*
+ * A label header wrapping the toggle in a <label> leaves the toggle nameless:
+ * the name is computed from the label, whose only content is that same toggle.
+ * Chromium reports an empty name for it, and every role-and-name query — this
+ * one included — walks past the toggle as if it were not there.
+ */
+test("a label header names the toggle just like a heading header", async () => {
+  renderLabelAccordion();
+
+  await expect.element(toggle()).toBeInTheDocument();
+});
+
+test("a label header's toggle expands the content", async () => {
+  renderLabelAccordion();
+
+  await toggle().click();
+
+  await expect.element(toggle()).toHaveAttribute("aria-expanded", "true");
+  await expect.element(content()).toBeVisible();
+});
+
+test("the content region is named by the toggle", async () => {
+  renderAccordion(true);
+
+  await expect
+    .element(page.getByRole("region", { name: "Server details" }))
+    .toBeInTheDocument();
 });
