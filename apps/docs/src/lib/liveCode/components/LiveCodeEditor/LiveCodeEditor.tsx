@@ -1,5 +1,5 @@
 import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   LiveEditor,
   LiveError,
@@ -182,15 +182,24 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     throw new Error("Expected code prop to be of type 'string'.");
   }
 
-  const scope = extractEditorScope(code);
+  /*
+   * react-live transpiles synchronously during the first render, so the client
+   * renders what the server did and React hydrates the preview. Its post-mount
+   * effect re-transpiles whenever one of its dependencies changes, and a fresh
+   * transpile is a new component function — React then unmounts the preview
+   * and mounts a new one, restarting anything that animates on mount. `scope`
+   * and `transformCode` are dependencies, so a new object or function here
+   * replaces the whole example on the next render of this component.
+   */
+  const scope = useMemo(() => extractEditorScope(code), [code]);
 
-  const transformCode = (code: string) => {
+  const transformCode = useCallback((code: string) => {
     try {
       return extractDefaultExport(code);
     } catch (error) {
       return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
     }
-  };
+  }, []);
 
   // The scope above already carries the imports, so the editor shows only the
   // example itself.
@@ -246,9 +255,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   return (
     <LiveProvider
       code={codeToDisplay}
-      scope={{
-        ...scope,
-      }}
+      scope={scope}
       transformCode={transformCode}
     >
       <div
