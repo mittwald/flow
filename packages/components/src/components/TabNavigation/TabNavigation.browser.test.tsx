@@ -88,3 +88,24 @@ test("marks a collapsed current page as the current menu item", async () => {
     .element(page.getByRole("menuitem", { name: "Domains" }))
     .not.toHaveAttribute("data-current");
 });
+
+/*
+ * The items are measured with `getBoundingClientRect` but compared against a
+ * `clientWidth`. In a scaled container those are different units, so without
+ * compensation the room is overstated and nothing collapses.
+ */
+test("collapses overflowing links in a scaled container", async () => {
+  await render(
+    <div style={{ zoom: 0.5, width: 400 }}>
+      <TabNavigation aria-label="Project navigation">
+        <Link href="#apps">Apps</Link>
+        <Link href="#container">Container</Link>
+        <Link href="#domains">Domains</Link>
+        <Link href="#emails">E-Mails</Link>
+        <Link href="#backups">Backups</Link>
+      </TabNavigation>
+    </div>,
+  );
+
+  await expect.element(overflowButton()).toBeVisible();
+});

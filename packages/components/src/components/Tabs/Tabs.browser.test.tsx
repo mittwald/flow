@@ -197,3 +197,43 @@ test("Collapsed tabs expand again once they fit", async () => {
     .element(page.getByRole("button", { name: "Communications array" }))
     .not.toBeInTheDocument();
 });
+
+const scaledTabs = (scale: number) => (
+  <div style={{ zoom: scale, width: 600 }}>
+    <Tabs aria-label="Ship systems">
+      <Tab id="comms">
+        <TabTitle>Comms</TabTitle>
+        <Text>Comms panel</Text>
+      </Tab>
+      <Tab id="cargo">
+        <TabTitle>Cargo hold</TabTitle>
+        <Text>Cargo panel</Text>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+/*
+ * The indicator is measured with `getBoundingClientRect` but written back as a
+ * CSS length read inside the same subtree. In a scaled container those are not
+ * the same unit, so without compensation the indicator is scaled twice.
+ */
+test("Active tab indicator matches the tab in a scaled container", async () => {
+  await render(scaledTabs(0.5));
+
+  const selectedTab = page.getByRole("tab", { name: "Comms" });
+  await expect.element(selectedTab).toBeVisible();
+
+  const tab = selectedTab.element() as HTMLElement;
+
+  const indicatorWidth = await vitest.waitFor(() => {
+    const indicator = document.querySelector<HTMLElement>(
+      "[style*='--tab-indicator-width']",
+    );
+    const width = indicator?.style.getPropertyValue("--tab-indicator-width");
+    expect(width).toBeTruthy();
+    return parseFloat(width as string);
+  });
+
+  expect(indicatorWidth).toBeCloseTo(tab.offsetWidth, 0);
+});
