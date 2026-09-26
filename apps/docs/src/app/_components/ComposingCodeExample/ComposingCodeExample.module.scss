@@ -53,7 +53,8 @@
     // editor — the editor is only as tall as its lines, so both would stop
     // short of the bottom edge.
     .editorContainer {
-      border-inline-start: 1px solid var(--border-color);
+      border-inline-start: var(--code-block--border-width)
+        var(--code-block--border-style) var(--border-color);
       background-color: var(--code-block--background-color);
     }
 

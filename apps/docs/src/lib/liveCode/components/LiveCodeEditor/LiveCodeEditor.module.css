@@ -39,10 +39,11 @@
 }
 
 .liveCodeEditor {
-  --border-color: var(--neutral-outline-border-color);
+  --border-color: var(--code-block--border-color);
 
-  border: 1px solid var(--border-color);
-  border-radius: var(--corner-radius--m);
+  border: var(--code-block--border-width) var(--code-block--border-style)
+    var(--border-color);
+  border-radius: var(--code-block--corner-radius);
   background-color: var(--neutral--color--100);
   display: flex;
   flex-direction: column;
@@ -76,12 +77,152 @@
     white-space: pre !important;
     padding: 0 !important;
     background-color: var(--code-block--background-color) !important;
-    font-size: var(--font-size-text--s);
+    font-family: var(--code-block--font-family) !important;
+    font-size: var(--code-block--font-size);
+
+    /* CodeMirror's own line height, which `CodeBlock` renders with. */
+    line-height: 1.4;
   }
+}
+
+.editorWrapper {
+  /* The show-more strip: a size-s button plus the toggle's padding. */
+  --show-more-button-height: calc(
+    var(--button--line-height-s) + 2 * var(--button--padding-s-y)
+  );
+  --show-more-height: calc(
+    var(--show-more-button-height) + 2 * var(--code-block--show-more-padding)
+  );
+
+  /* The expand timing of Flow's `CodeBlock` and `Accordion`. */
+  --expand-duration: var(--transition--duration--default);
+  --expand-easing: cubic-bezier(0.25, 1, 0.5, 1);
+
+  position: relative;
+
+  /* Behind the toggle, which lies over the code when collapsed. */
+  background-color: var(--code-block--background-color);
+}
+
+/*
+ * Without an actions bar below it the editor paints the frame's bottom corners
+ * itself, and its square background would spill past the rounded border.
+ */
+.editorWrapper:last-child {
+  border-end-start-radius: var(--code-block--corner-radius);
+  border-end-end-radius: var(--code-block--corner-radius);
+  overflow: hidden;
 }
 
 .editorContainer {
   overflow-x: auto;
+}
+
+/*
+ * Truncatable: collapsed, the toggle lies over the code, which runs down to the
+ * border and fades out behind it — as in Flow's `CodeBlock`. Toggling animates
+ * the height, the fade and the toggle's position together.
+ *
+ * `max-height: none` does not interpolate, so the component pins the full
+ * height in `--expanded-max-height` while the transition runs.
+ */
+.truncatable .editor {
+  transition-property: padding-block-end;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
+}
+
+.truncatable .editor :global(.prism-code) {
+  max-height: var(--expanded-max-height, none);
+  overflow: hidden;
+  transition-property: max-height;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
+}
+
+.truncatable .foldToggle {
+  transition-property: margin-top;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
+}
+
+/*
+ * The fade hangs off the toggle rather than the scroller, so it stays put while
+ * the code scrolls sideways underneath it. Its eased stops leave no visible
+ * edge on top and let the code shimmer through behind the button.
+ */
+.truncatable .foldToggle::before {
+  --fade-color: var(--code-block--background-color);
+
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  bottom: 0;
+  height: calc(var(--size-px--xxl) + var(--show-more-height));
+  pointer-events: none;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: var(--expand-duration);
+  transition-timing-function: var(--expand-easing);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--fade-color) 10%, transparent) 15%,
+    color-mix(in srgb, var(--fade-color) 30%, transparent) 30%,
+    color-mix(in srgb, var(--fade-color) 60%, transparent) 45%,
+    color-mix(in srgb, var(--fade-color) 82%, transparent) 58%,
+    color-mix(in srgb, var(--fade-color) 92%, transparent) 68%,
+    color-mix(in srgb, var(--fade-color) 95%, transparent) 85%,
+    color-mix(in srgb, var(--fade-color) 96%, transparent)
+  );
+}
+
+.folded .editor {
+  padding-block-end: 0;
+}
+
+/*
+ * `1lh` resolves against the editor's own line height, so the clamp lands on a
+ * whole number of code lines whatever the editor's font size is. The extra half
+ * line slices the next one in two, which reads as "there is more" where a cut
+ * on the line boundary reads as the end of the example. The clamp grows by the
+ * toggle, so the toggle covers none of the lines.
+ */
+.folded .editor :global(.prism-code) {
+  max-height: calc(
+    (var(--truncated-lines) + 0.5) * 1lh + var(--show-more-height)
+  );
+}
+
+.folded .foldToggle {
+  margin-top: calc(var(--show-more-height) * -1);
+}
+
+.folded .foldToggle::before {
+  opacity: 1;
+}
+
+.copyButton {
+  position: absolute;
+  inset-block-start: var(--code-block--padding);
+  inset-inline-end: var(--code-block--padding);
+  z-index: 1;
+}
+
+/*
+ * Same spacing as the toggle of Flow's `CodeBlock`, so both fold alike.
+ * Expanded, it sits below the code.
+ */
+.foldToggle {
+  position: relative;
+  margin-top: calc(var(--code-block--show-more-padding) * -1);
+  display: flex;
+  justify-content: center;
+  padding-block: var(--code-block--show-more-padding);
+
+  /* Keeps the fade below the button but above the code. */
+  isolation: isolate;
 }
 
 .toggleCode {
@@ -90,21 +231,22 @@
 }
 
 .editor {
-  font-family: monospace;
   min-width: min-content;
-  border-top: 1px solid var(--border-color);
+  border-top: var(--code-block--border-width) var(--code-block--border-style)
+    var(--border-color);
   display: grid;
   grid-template-rows: 1fr;
-  padding: var(--size-px--m);
+  padding: var(--code-block--padding);
   background-color: var(--code-block--background-color) !important;
 }
 
 .actions {
   margin-block-start: auto;
   background-color: var(--neutral--color--100);
-  border-top: 1px solid var(--border-color);
-  border-end-start-radius: var(--corner-radius--m);
-  border-end-end-radius: var(--corner-radius--m);
+  border-top: var(--code-block--border-width) var(--code-block--border-style)
+    var(--border-color);
+  border-end-start-radius: var(--code-block--corner-radius);
+  border-end-end-radius: var(--code-block--corner-radius);
   display: flex;
   justify-content: center;
 
