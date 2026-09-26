@@ -1063,7 +1063,8 @@ no intent to block anything, now silently cancels closes.
 
 ## Form: resets itself after the surrounding modal closes
 
-**Since `0.2.0-alpha.694`** · migration · no code change needed
+**Since `0.2.0-alpha.694`** · migration · no code change needed · also applies
+to `@mittwald/flow-remote-react-components`
 
 A react-hook-form `<Form>` inside a `Modal` now resets to its default values
 once the modal has closed. Previously it kept what the user had entered, so
