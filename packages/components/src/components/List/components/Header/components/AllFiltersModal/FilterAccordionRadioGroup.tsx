@@ -3,7 +3,7 @@ import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import ButtonView from "@/views/ButtonView";
-import { Flex } from "@/components/Flex";
+import FlexView from "@/views/FlexView";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
@@ -21,7 +21,7 @@ export const FilterAccordionRadioGroup: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
-    <Flex direction="column" gap="m">
+    <FlexView direction="column" gap="m">
       <RadioGroupView
         value={activeKeys[0]}
         m={[1, 1]}
@@ -52,6 +52,6 @@ export const FilterAccordionRadioGroup: FC<Props> = (props) => {
           {stringFormatter.format("filters.clearSelection")}
         </ButtonView>
       )}
-    </Flex>
+    </FlexView>
   );
 };
