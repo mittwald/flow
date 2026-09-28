@@ -75,8 +75,11 @@ what this binding establishes about supporting a framework at all.
   spells with a `default*` sibling, and when the element has the event reporting
   it: `isOpen` → `openChange`, `inputValue` → `inputChange`, `selectedKey` →
   `selectionChange`, `value` and `isSelected` → `change`. `.trim` and `.number`
-  are applied by hand, since no `emit` runs. The types in `src/lib/types.ts`
-  follow the same `default*` rule.
+  are applied by hand, since no `emit` runs — and their result, written back,
+  counts as the echo of what the field shows (`controlledRemoteValue`), as it
+  does for Vue's own `<input v-model.trim>`. Applied, it would take the space
+  between two words while it is typed. The types in `src/lib/types.ts` follow
+  the same `default*` rule.
 - **A reactive array or object is watched deeply.** Changed in place, it is the
   same reference, and both the wrapper and remote-dom skip a property whose
   value is identical — so `data.value.push(point)` never reached the host. A

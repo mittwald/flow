@@ -59,8 +59,14 @@ test("v-model applies .trim", async () => {
     ),
   );
 
-  await userEvent.type(textbox(), "  Vasquez ");
-  await expect.poll(() => name.value).toBe("Vasquez");
+  /*
+   * The spaces are what `.trim` is about: the trimmed value written back must
+   * not reach the field, or the space between two words is taken while it is
+   * typed and the letters after it land out of order.
+   */
+  await userEvent.type(textbox(), "  Jenette Vasquez ");
+  await expect.poll(() => name.value).toBe("Jenette Vasquez");
+  await expect.element(textbox()).toHaveValue("  Jenette Vasquez ");
 });
 
 test("a bare v-model on a checkbox binds isSelected", async () => {

@@ -202,11 +202,11 @@ export function createFlowRemoteComponent<
               .find((value) => value !== undefined);
             if (handlers.length > 0) {
               addListeners(binding.event, [
-                (payload: unknown) =>
-                  callHandlers(
-                    handlers,
-                    applyModelModifiers(payload, modifiers),
-                  ),
+                (payload: unknown) => {
+                  const modelled = applyModelModifiers(payload, modifiers);
+                  controlled.recordModelledValue(modelled);
+                  callHandlers(handlers, modelled);
+                },
               ]);
             }
             continue;
