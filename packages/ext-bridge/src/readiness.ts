@@ -21,7 +21,18 @@ const startTimeout = () => {
 export const readinessApi = {
   isReady: async () => {
     assertBrowserEnv();
-    await Promise.race([readiness, startTimeout()]);
+    try {
+      await Promise.race([readiness, startTimeout()]);
+    } catch (error) {
+      if (mwExtBridge.connection === undefined) {
+        throw new ExtBridgeError(
+          `Ext Bridge not ready after ${timeoutMs}ms: the host never connected. ` +
+            "If this extension renders <RemoteRoot>, make sure initExtBridge() has run " +
+            "(import '@mittwald/ext-bridge/browser') before the first render.",
+        );
+      }
+      throw error;
+    }
   },
   setIsReady: async () => {
     const config = await mwExtBridge.connection.getConfig();
