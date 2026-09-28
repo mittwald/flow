@@ -185,15 +185,14 @@ commit the results.
   list can survive from one run while `dist` is restored from another — after
   which `tsc` finds it current, emits nothing, and the build reports success
   over an incomplete `dist`.
-- **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
-  `pnpm install` — expect installs after switching branches. `pre-push` runs
-  `pnpm lint` — which includes `format:check`, so a stray unformatted
-  `.md`/`.json`/`.yml` blocks the push, not the commit; `pnpm format` fixes it.
-  The hooks are installed by the root `prepare`
-  (`.github/scripts/init-git-hooks.cjs`), which skips CI — simple-git-hooks' own
-  `postinstall` is denied in `allowBuilds`, because it ran on runners too and a
-  `pre-push` lint there aborted pushes after a publish had already happened
-  (#2932).
+- **Git hooks** live in `.githooks/`: `post-checkout` (branch checkouts only)
+  and `post-merge` run `pnpm install` — expect installs after switching
+  branches. `pre-push` runs `pnpm lint` — which includes `format:check`, so a
+  stray unformatted `.md`/`.json`/`.yml` blocks the push, not the commit;
+  `pnpm format` fixes it. `SKIP_GIT_HOOKS=1` skips any of them. The root
+  `prepare` points git at them (`core.hooksPath`, via
+  `.github/scripts/init-git-hooks.cjs`) and skips CI: on a runner a `pre-push`
+  lint aborted pushes after a publish had already happened (#2932).
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a

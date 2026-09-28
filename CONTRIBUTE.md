@@ -77,20 +77,21 @@ your time when developing components.
 
 ### Git hooks
 
-The root `prepare` installs
-[simple-git-hooks](https://github.com/toplenboren/simple-git-hooks) after every
+The hooks are ordinary shell scripts in `.githooks/`, and git runs them because
+`core.hooksPath` points there. The root `prepare` sets that after every
 `pnpm install`, so a normal checkout has the hooks without thinking about it;
-`pnpm dev:init-githooks` does the same on demand. Both go through
-`.github/scripts/init-git-hooks.cjs`, which skips CI — the package's own
-`postinstall` is denied in `pnpm-workspace.yaml` precisely because it did not,
-and a `pre-push` lint on a runner aborted pushes after a publish had already
-happened (#2932). Once installed:
+`pnpm dev:init-githooks` does it on demand. Both go through
+`.github/scripts/init-git-hooks.cjs`, which skips CI — a `pre-push` lint on a
+runner aborted pushes after a publish had already happened (#2932). The path is
+relative, so each worktree runs its own checked-out copy and the hooks version
+with the branch. `SKIP_GIT_HOOKS=1` skips a hook for one command.
 
 - **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
   repo. It blocks the push, not the commit — unformatted files surface once the
   commits already exist; `pnpm format` fixes them.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
-  stay in sync after switching branches or pulling.
+  stay in sync after switching branches or pulling. `post-checkout` only fires
+  on a branch checkout, not on `git checkout -- <file>`.
 
 ### Resolving a blocked forward-merge
 
