@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.4](https://github.com/mittwald/flow/compare/1.4.0-next.3...1.4.0-next.4) (2026-09-28)
+
+### Bug Fixes
+
+* **List:** compose filter UI through views in remote context ([#3283](https://github.com/mittwald/flow/issues/3283)) ([e218d14](https://github.com/mittwald/flow/commit/e218d14fc9a99ff4dacdb18f0a88256ff23fedb1))
+
+## [1.3.4](https://github.com/mittwald/flow/compare/1.3.3...1.3.4) (2026-09-28)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.4 ([2645216](https://github.com/mittwald/flow/commit/26452168e2d824f62fcb1c5d6b589229e5571d92))
+
 ## [1.4.0-next.3](https://github.com/mittwald/flow/compare/1.3.3...1.4.0-next.3) (2026-09-28)
 
 ### Bug Fixes
