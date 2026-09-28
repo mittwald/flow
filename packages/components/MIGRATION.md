@@ -568,8 +568,8 @@ out per form:
 + <Form form={form} onSubmit={onSubmit} confirmModalCloseOnUnsavedChanges={false}>
 ```
 
-Outside of remote apps you can switch the default off for the whole app instead
-(see below).
+Or switch the default off for the whole app with the
+`<ComponentDefaultsProvider />` (see below).
 
 **Apply:** No code change required — if you had
 `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default matches
@@ -577,9 +577,9 @@ it. To keep the previous behaviour (closing without confirmation), pass
 `confirmModalCloseOnUnsavedChanges={false}` to `Form` — this also works in
 remote apps (`@mittwald/flow-remote-react-components/react-hook-form`). To
 switch it off app-wide, set `Form: { confirmModalCloseOnUnsavedChanges: false }`
-via `<ComponentDefaultsProvider />` (not available in remote apps), or its
-deprecated equivalent, the
-`flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.
+via `<ComponentDefaultsProvider />`, or outside of remote apps its deprecated
+equivalent, the `flags.requireCloseModalConfirmationOnUnsavedChanges = false`
+assignment.
 
 ---
 
