@@ -115,7 +115,6 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     <Aria.MenuItem
       {...rest}
       {...currentProps}
-      data-indeterminate={isIndeterminate || undefined}
       key={id}
       id={id}
       className={rootClassName}

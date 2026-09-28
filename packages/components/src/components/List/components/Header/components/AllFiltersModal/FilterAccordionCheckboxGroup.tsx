@@ -4,7 +4,7 @@ import CheckboxView from "@/views/CheckboxView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-import styles from "../FilterContextMenu/FilterSelectAll.module.scss";
+import styles from "./FilterAccordionCheckboxGroup.module.scss";
 
 interface Props {
   filter: Filter;

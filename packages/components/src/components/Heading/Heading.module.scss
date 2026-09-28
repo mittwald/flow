@@ -30,24 +30,16 @@
   }
 
   .headingContent {
-    &:empty {
-      display: none;
-    }
-  }
-
-  .headingTextSpacer {
-    margin-inline-end: var(--heading--icon-to-text-spacing);
-  }
-
-  .headingContentItem {
     vertical-align: bottom;
     display: inline-flex;
-    max-width: 100%;
+    margin-inline-start: var(--heading--icon-to-text-spacing);
     min-height: var(--heading-line-height);
     align-items: center;
+    gap: var(--heading--icon-to-text-spacing);
+    flex-wrap: wrap;
 
-    &:not(:last-child) {
-      margin-inline-end: var(--heading--icon-to-text-spacing);
+    &:empty {
+      display: none;
     }
   }
 

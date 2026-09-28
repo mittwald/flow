@@ -145,13 +145,15 @@ describe("Filter", () => {
 describe("Select all", () => {
   const sixItems = Array.from({ length: 6 }, (_, i) => i + 1);
   const selectAllLabel = /^(Select|Deselect) all$/;
-  const selectAllMenuItem = page.getByRole("menuitemcheckbox", {
+  const selectAllMenuItem = page.getByRole("menuitem", {
     name: selectAllLabel,
   });
   const menuItemCheckbox = (num: number) =>
     page.getByRole("menuitemcheckbox", { name: String(num), exact: true });
   const isIndeterminateIcon = (element: Element) =>
     element.querySelector(".tabler-icon-square-minus-filled") !== null;
+  const isCheckedIcon = (element: Element) =>
+    element.querySelector(".tabler-icon-square-check-filled") !== null;
 
   test("is offered in 'some' mode from six values on", async () => {
     await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
@@ -190,10 +192,8 @@ describe("Select all", () => {
     await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
     await userEvent.click(selectAllMenuItem);
     expect(onChange).toHaveBeenCalledExactlyOnceWith(sixItems);
-    await expect
-      .element(selectAllMenuItem)
-      .toHaveAttribute("aria-checked", "true");
     await expect.element(selectAllMenuItem).toHaveTextContent("Deselect all");
+    expect(isCheckedIcon(selectAllMenuItem.element())).toBe(true);
     await expect
       .element(menuItemCheckbox(5))
       .toHaveAttribute("aria-checked", "true");
@@ -206,6 +206,27 @@ describe("Select all", () => {
       .toHaveAttribute("aria-checked", "false");
   });
 
+  test("a single value still toggles with one onChange call", async () => {
+    const onChange = vitest.fn();
+    await render(
+      getTestElement(
+        sixItems,
+        <ListFilter<Data> property="num" onChange={onChange} />,
+      ),
+    );
+    await userEvent.click(filterButton);
+
+    await userEvent.click(menuItemCheckbox(2));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith([2]);
+    await expect
+      .element(menuItemCheckbox(2))
+      .toHaveAttribute("aria-checked", "true");
+
+    onChange.mockClear();
+    await userEvent.click(menuItemCheckbox(2));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith([]);
+  });
+
   test("shows a partial selection and completes it on click", async () => {
     await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
     await userEvent.click(filterButton);
@@ -215,20 +236,14 @@ describe("Select all", () => {
     await expect
       .poll(() => isIndeterminateIcon(selectAllMenuItem.element()))
       .toBe(true);
-    await expect
-      .element(selectAllMenuItem)
-      .toHaveAttribute("aria-checked", "false");
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
 
     await userEvent.click(selectAllMenuItem);
-    await expect
-      .element(selectAllMenuItem)
-      .toHaveAttribute("aria-checked", "true");
+    await expect.element(selectAllMenuItem).toHaveTextContent("Deselect all");
     expect(isIndeterminateIcon(selectAllMenuItem.element())).toBe(false);
 
     await userEvent.click(menuItemCheckbox(3));
-    await expect
-      .element(selectAllMenuItem)
-      .toHaveAttribute("aria-checked", "false");
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
     await expect.element(listItem42).not.toBeInTheDocument();
     await expect
       .element(page.getByText("Item: 3", { exact: true }))

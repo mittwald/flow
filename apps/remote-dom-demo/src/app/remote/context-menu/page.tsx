@@ -49,6 +49,19 @@ export default function Page() {
       </Header>
       <Content>
         <ContextMenuTrigger>
+          <Button>Target sectors</Button>
+          <ContextMenu
+            selectionMode="multiple"
+            showSelectAll
+            onSelectionChange={(keys) => console.log(keys)}
+          >
+            <MenuItem id="alderaan">Alderaan</MenuItem>
+            <MenuItem id="yavin">Yavin</MenuItem>
+            <MenuItem id="hoth">Hoth</MenuItem>
+            <MenuItem id="endor">Endor</MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
+        <ContextMenuTrigger>
           <Button>Station actions</Button>
           <ContextMenu onAction={(item) => console.log(item)}>
             <MenuItem>

@@ -44,7 +44,11 @@ export const MenuItemContent: FC<Props> = (props) => {
 
   const controlIconPropsContext: PropsContext = {
     Icon: {
-      className: clsx(styles.controlIcon, styles.icon),
+      className: clsx(
+        styles.controlIcon,
+        styles.icon,
+        (isSelected || isIndeterminate) && styles.controlIconActive,
+      ),
     },
     Switch: {
       className: clsx(styles.controlIcon, styles.switch),

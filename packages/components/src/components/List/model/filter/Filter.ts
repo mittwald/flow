@@ -350,6 +350,11 @@ export class Filter<
     this.setArrayValue(this.values);
   }
 
+  public setActiveValueIds(ids: Iterable<unknown>): void {
+    const idSet = new Set(ids);
+    this.setArrayValue(this.values.filter((v) => idSet.has(v.id)));
+  }
+
   public deselectAll(): void {
     this.setArrayValue([]);
   }

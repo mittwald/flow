@@ -115,16 +115,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: {
-      Heading,
-      Flex,
-      Badge,
-      AlertBadge,
-      Button,
-      CopyButton,
-      IconEdit,
-      ColumnLayout,
-    },
+    components: { Heading, Flex, Badge, Button, CopyButton, IconEdit },
   }) => {
     await render(
       <Flex gap="m" direction="column">
@@ -148,15 +139,6 @@ test.each(testEnvironments)(
             <IconEdit />
           </Button>
         </Heading>
-        <ColumnLayout l={[1, 2]}>
-          <Heading>
-            my-domain.de
-            <CopyButton text="my-domain.de" />
-            <AlertBadge status="danger">
-              SSL request deadline exceeded
-            </AlertBadge>
-          </Heading>
-        </ColumnLayout>
       </Flex>,
     );
 

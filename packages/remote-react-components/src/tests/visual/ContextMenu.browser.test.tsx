@@ -1,4 +1,7 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+
+// showSelectAll exists from 1.4.0-next.3.
+const selectAllFrom = "1.4.0-next.3";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
@@ -116,5 +119,35 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
     await page.getByTestId("trigger").click();
 
     await testScreenshot("ContextMenu sections and shortcuts");
+  },
+);
+
+test.skipIf(crossVersion({ below: selectAllFrom })).each(testEnvironments)(
+  "ContextMenu with select all (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ContextMenuTrigger, Button, ContextMenu, MenuItem },
+  }) => {
+    await render(
+      <ContextMenuTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <ContextMenu
+          selectionMode="multiple"
+          showSelectAll
+          defaultSelectedKeys={["hoth"]}
+        >
+          <MenuItem id="alderaan">Alderaan</MenuItem>
+          <MenuItem id="hoth">Hoth</MenuItem>
+          <MenuItem id="endor">Endor</MenuItem>
+        </ContextMenu>
+      </ContextMenuTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+    await testScreenshot("ContextMenu select all - partially selected");
+
+    await page.getByRole("menuitem", { name: "Select all" }).click();
+    await testScreenshot("ContextMenu select all - all selected");
   },
 );
