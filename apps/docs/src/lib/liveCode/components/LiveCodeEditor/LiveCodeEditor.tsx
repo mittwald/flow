@@ -90,8 +90,16 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const editorId = useId();
   const codeId = useId();
 
-  // A new scope identity re-transpiles the example and remounts its preview —
-  // expanding the code would reset whatever the reader did in the preview.
+  /*
+   * react-live transpiles synchronously during the first render, so the client
+   * renders what the server did and React hydrates the preview. Its post-mount
+   * effect re-transpiles whenever one of its dependencies changes, and a fresh
+   * transpile is a new component function — React then unmounts the preview
+   * and mounts a new one, restarting anything that animates on mount. `scope`
+   * and `transformCode` are dependencies, so a new object here replaces the
+   * whole example on the next render of this component, e.g. on expanding the
+   * code. `transformCode` is stable because it lives at module level.
+   */
   const scope = useMemo(
     () => (typeof code === "string" ? extractEditorScope(code) : {}),
     [code],
