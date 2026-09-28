@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-next.34](https://github.com/mittwald/flow/compare/1.3.0-next.33...1.3.0-next.34) (2026-09-28)
+
+### Tests
+
+* **CoachMark:** gate the stacking scenario below 1.2.0 ([9960a8f](https://github.com/mittwald/flow/commit/9960a8f7030924850740b5925f2470c0f5fc681b)), closes [#3238](https://github.com/mittwald/flow/issues/3238)
+* **CodeBlock:** capture truncation with and without line numbers ([61edf3c](https://github.com/mittwald/flow/commit/61edf3c2d44caae4c97a1273129ed8bfc8b914bb))
+* update visual regression screenshots ([5e7b375](https://github.com/mittwald/flow/commit/5e7b3755292c0df2a45e992e30c990fc6c48ccd3))
+
+## [1.2.28](https://github.com/mittwald/flow/compare/1.2.27...1.2.28) (2026-09-25)
+
+### Bug Fixes
+
+* **CodeBlock:** fold the line numbers with the code ([bad890a](https://github.com/mittwald/flow/commit/bad890ac4828513c51164baf18f71a2f6cd5d2dc))
+* **CodeBlock:** let the collapsed code run under the show-more button ([87777ab](https://github.com/mittwald/flow/commit/87777ab4ff86e227241bea3ef0aa3b10e8cae310))
+* **CodeBlock:** move the show-more button closer to the bottom edge ([0bc3bda](https://github.com/mittwald/flow/commit/0bc3bda22dac4c58b7e5ad673442b9998a878c8f))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.2.28 ([a8ab3d4](https://github.com/mittwald/flow/commit/a8ab3d4f43b6ce646cdd5722b1dd438cd29501f7))
+
+### Tests
+
+* **CodeBlock:** capture the truncated states without a focus ring ([b0fffac](https://github.com/mittwald/flow/commit/b0fffacfce0669d75035e20fa67d1200ee9dd3fe))
+* update visual regression screenshots ([4434230](https://github.com/mittwald/flow/commit/4434230b3d1db4f5ad6aaeacb6bf69443bb900e0))
+* update visual regression screenshots ([6608d3f](https://github.com/mittwald/flow/commit/6608d3f400de4d5fd3c913017b0af1e53c5afc60))
+* update visual regression screenshots ([7808154](https://github.com/mittwald/flow/commit/78081543731670880d421e3dad0250e6f3dd0197))
+* update visual regression screenshots ([94bd5ea](https://github.com/mittwald/flow/commit/94bd5ea155d9f6e555053844348219f02939fef4))
+
 ## [1.3.0-next.33](https://github.com/mittwald/flow/compare/1.2.27...1.3.0-next.33) (2026-09-25)
 
 ## [1.3.0-next.32](https://github.com/mittwald/flow/compare/1.3.0-next.31...1.3.0-next.32) (2026-09-25)
