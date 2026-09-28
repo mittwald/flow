@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/mittwald/flow/compare/1.3.6...1.3.7) (2026-09-28)
+
+### Bug Fixes
+
+* **ColumnLayout:** keep the column ratio when content is wider ([#3309](https://github.com/mittwald/flow/issues/3309)) ([abb824b](https://github.com/mittwald/flow/commit/abb824b91e74d1ed19642f11b0d845e28ed6bcf9))
+
 ## [1.3.6](https://github.com/mittwald/flow/compare/1.3.5...1.3.6) (2026-09-28)
 
 ### Bug Fixes

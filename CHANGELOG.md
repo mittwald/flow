@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/mittwald/flow/compare/1.3.6...1.3.7) (2026-09-28)
+
+### Bug Fixes
+
+* **ColumnLayout:** keep the column ratio when content is wider ([#3309](https://github.com/mittwald/flow/issues/3309)) ([abb824b](https://github.com/mittwald/flow/commit/abb824b91e74d1ed19642f11b0d845e28ed6bcf9))
+
+### Documentation
+
+* collapse every example but the first on component pages ([#3312](https://github.com/mittwald/flow/issues/3312)) ([243dbae](https://github.com/mittwald/flow/commit/243dbae80a19a66813c4d39f4aa7b881b6ca0ae8))
+* include App Shell example code in the page markdown ([#3310](https://github.com/mittwald/flow/issues/3310)) ([e3c4c04](https://github.com/mittwald/flow/commit/e3c4c04cd760853d44ecca15387ebdd229ad72c9))
+* **Layout:** link the Code Templates reference ([6818c5f](https://github.com/mittwald/flow/commit/6818c5fbee3a7fa724f696a3333b06ea24a1f294))
+
 ## [1.3.6](https://github.com/mittwald/flow/compare/1.3.5...1.3.6) (2026-09-28)
 
 ### Bug Fixes
