@@ -1,4 +1,24 @@
+@use "@/styles/mixins/expandTransition";
 @use "@/styles/mixins/scrollbar";
+
+/* The show-more strip: a size-s button plus the container's padding. */
+$button-height-s: calc(
+  var(--button--line-height-s) + 2 * var(--button--padding-s-y)
+);
+$show-more-height: calc(
+  #{$button-height-s} + 2 * var(--code-block--show-more-padding)
+);
+$inner-corner-radius: calc(
+  var(--code-block--corner-radius) - var(--form-control--border-width)
+);
+
+@function fade-color($amount) {
+  @return color-mix(
+    in srgb,
+    var(--code-block--background-color) $amount,
+    transparent
+  );
+}
 
 .codeBlock {
   display: block;
@@ -33,24 +53,88 @@
     // stylelint-enable selector-max-type
   }
 
-  &.folded {
-    :global(.cm-content) {
-      max-height: var(--max-height);
+  /* Truncatable: collapsed, the show-more button lies over the code, which
+     runs down to the border and fades out behind it. Toggling animates the
+     height, the fade and the button's position together. */
+  &.truncated {
+    :global(.flow--code-editor--code-mirror) {
+      transition-property:
+        color, background-color, border-color, padding-block-end;
+
+      @include expandTransition.expandTransition;
+    }
+
+    /* The editor holds the code and the line numbers, so both are clipped
+       and fade out together. */
+    :global(.cm-editor) {
+      max-height: var(--expanded-max-height, none);
       overflow: hidden;
+      border-end-start-radius: $inner-corner-radius;
+      border-end-end-radius: $inner-corner-radius;
+      transition-property: max-height;
+
+      @include expandTransition.expandTransition;
 
       &::after {
         content: "";
         position: absolute;
         inset-inline: 0;
         bottom: 0;
-        height: 50%;
+        height: min(calc(var(--size-px--xxl) + #{$show-more-height}), 75%);
         pointer-events: none;
+        opacity: 0;
+        transition-property: opacity;
+
+        @include expandTransition.expandTransition;
+
+        /* Eased stops: no visible edge on top, the code only shimmers through
+         behind the button. */
         background: linear-gradient(
           to bottom,
           transparent,
-          var(--code-block--background-color)
+          fade-color(10%) 15%,
+          fade-color(30%) 30%,
+          fade-color(60%) 45%,
+          fade-color(82%) 58%,
+          fade-color(92%) 68%,
+          fade-color(95%) 85%,
+          fade-color(96%)
         );
       }
+    }
+
+    /* Keeps its full height instead of shrinking into the editor, so the
+       editor clips it rather than the scroller scrolling within. The
+       scroller's own z-index (CodeMirror's) keeps the line numbers under the
+       fade. */
+    :global(.cm-scroller) {
+      flex-shrink: 0;
+    }
+
+    .buttonContainer {
+      transition-property: margin-top, margin-bottom;
+
+      @include expandTransition.expandTransition;
+    }
+  }
+
+  &.folded {
+    :global(.flow--code-editor--code-mirror) {
+      padding-block-end: 0;
+    }
+
+    /* Grows by the button strip, so the button covers none of the lines. */
+    :global(.cm-editor) {
+      max-height: calc(var(--max-height) + #{$show-more-height});
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    .buttonContainer {
+      margin-top: calc(#{$show-more-height} * -1);
+      margin-bottom: 0;
     }
   }
 
@@ -67,6 +151,11 @@
   .buttonContainer {
     position: relative;
     margin-top: calc(var(--code-block--show-more-padding) * -1);
+
+    /* Covers the editor's bottom padding – the container brings its own. */
+    margin-bottom: calc(
+      var(--form-control--border-width) - var(--form-control--padding-y)
+    );
     display: flex;
     justify-content: center;
     padding-block: var(--code-block--show-more-padding);
