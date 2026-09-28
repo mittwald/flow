@@ -7,22 +7,22 @@ import { extractHostConfig } from "./config/extractHostConfig";
 const timeoutMs = 7500;
 
 const [readiness, resolveReadiness] = controllablePromise();
-const [timoutPromise, , rejectOnTimeout] = controllablePromise();
-
-const startTimeout = () => {
-  setTimeout(() => {
-    rejectOnTimeout(
-      new ExtBridgeError(`Ext Bridge not ready after ${timeoutMs}ms`),
-    );
-  }, timeoutMs);
-  return timoutPromise;
-};
 
 export const readinessApi = {
   isReady: async () => {
     assertBrowserEnv();
+    let timeoutId: ReturnType<typeof setTimeout>;
     try {
-      await Promise.race([readiness, startTimeout()]);
+      await Promise.race([
+        readiness,
+        new Promise((_, reject) => {
+          timeoutId = setTimeout(() => {
+            reject(
+              new ExtBridgeError(`Ext Bridge not ready after ${timeoutMs}ms`),
+            );
+          }, timeoutMs);
+        }),
+      ]);
     } catch (error) {
       if (mwExtBridge.connection === undefined) {
         throw new ExtBridgeError(
@@ -32,6 +32,8 @@ export const readinessApi = {
         );
       }
       throw error;
+    } finally {
+      clearTimeout(timeoutId!);
     }
   },
   setIsReady: async () => {
