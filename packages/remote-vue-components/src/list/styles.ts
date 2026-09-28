@@ -24,6 +24,8 @@ export const listStyles = {
   activeFilters: "flow--list--header--active-filters",
   searchField: "flow--list--header--search-field",
   hideVisuallyActions: "flow--list--header--hide-visually-actions",
+  selectAllCheckbox:
+    "flow--list--header--all-filters-modal--select-all-checkbox",
 } as const;
 
 /** The list item view's own classes, from `ListItemView.module.scss`. */

@@ -64,6 +64,7 @@ export const ActiveFilters = defineComponent({
       label: ListTextKey,
       icon: unknown,
       onPress: () => void,
+      { labelled = true }: { labelled?: boolean } = {},
     ): VNodeChild =>
       h(TooltipTrigger, { isDisabled: props.isDisabled }, () => [
         h(Tooltip, null, () => texts.value(label)),
@@ -73,7 +74,7 @@ export const ActiveFilters = defineComponent({
             size: "s",
             variant: "plain",
             color: "secondary",
-            "aria-label": texts.value(label),
+            "aria-label": labelled ? texts.value(label) : undefined,
             onPress,
           },
           () => h(icon as never),
@@ -142,8 +143,16 @@ export const ActiveFilters = defineComponent({
 
       const clearButton =
         chips.length > 1
-          ? iconButton("filters.clear", IconClose, () =>
-              list.filters.forEach((filter) => filter.clear()),
+          ? iconButton(
+              "filters.clear",
+              IconClose,
+              () => list.filters.forEach((filter) => filter.clear()),
+              /*
+               * Flow's `ActiveFilters` gives this one no `aria-label`, unlike
+               * its two siblings — the tooltip is all it has. Kept, so the
+               * host builds the same button; the label belongs in Flow first.
+               */
+              { labelled: false },
             )
           : undefined;
 

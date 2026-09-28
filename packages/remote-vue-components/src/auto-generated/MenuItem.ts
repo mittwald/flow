@@ -18,6 +18,7 @@ export const MenuItem: FlowRemoteVueComponent<RemoteMenuItemElementProps> =
         "inert",
         "isDisabled",
         "isFailed",
+        "isIndeterminate",
         "isPending",
         "isSucceeded",
         "shouldCloseOnSelect",

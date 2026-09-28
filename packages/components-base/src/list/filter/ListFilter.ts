@@ -24,6 +24,9 @@ const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   propertyValue,
 ) => filterValue === propertyValue;
 
+/** From how many values on a multiple-choice filter offers "Select all". */
+const selectAllMinValueCount = 6;
+
 const stringCastRenderMethod: PropertyValueRenderMethod<unknown, never> = (
   value,
 ) => String(value) as never;
@@ -383,6 +386,37 @@ export class ListFilter<
 
     this.getTableColumn().setFilterValue(updatedValue);
     this.callOnChangedHandlers(updatedValue);
+  }
+
+  /**
+   * Whether the filter offers "Select all" — a `some` filter with enough
+   * values.
+   */
+  public get isSelectAllAvailable(): boolean {
+    return this.mode === "some" && this.values.length >= selectAllMinValueCount;
+  }
+
+  public isEveryValueActive(): boolean {
+    return this.values.every((v) => v.isActive);
+  }
+
+  public selectAll(): void {
+    this.setArrayValue(this.values);
+  }
+
+  /** Makes exactly these values active — what a multiple-selection menu reports. */
+  public setActiveValueIds(ids: Iterable<unknown>): void {
+    const idSet = new Set(ids);
+    this.setArrayValue(this.values.filter((v) => idSet.has(v.id)));
+  }
+
+  public deselectAll(): void {
+    this.setArrayValue([]);
+  }
+
+  private setArrayValue(value: ListFilterValue<TRendered>[]): void {
+    this.getTableColumn().setFilterValue(value);
+    this.callOnChangedHandlers(value);
   }
 
   public onFilterUpdated(cb: () => unknown): void {

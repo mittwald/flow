@@ -26,6 +26,7 @@ export const ContextMenu: FlowRemoteVueComponent<RemoteContextMenuElementProps> 
         "shouldFlip",
         "shouldSkipAnimation",
         "shouldUpdatePosition",
+        "showSelectAll",
       ],
     },
   );

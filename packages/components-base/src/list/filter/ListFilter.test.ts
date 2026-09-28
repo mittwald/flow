@@ -279,4 +279,58 @@ describe("ListFilter", () => {
 
     expect(filter.getArrayValue()).toHaveLength(1);
   });
+
+  describe("select all", () => {
+    const squadron = ["wedge", "biggs", "porkins", "dack", "hobbie", "janson"];
+
+    test("is offered on a multiple-choice filter with six values or more", () => {
+      const context = fakeContext<Pilot>();
+      expect(filterOn(context, { values: squadron }).isSelectAllAvailable).toBe(
+        true,
+      );
+      expect(
+        filterOn(context, { values: squadron.slice(0, 5) })
+          .isSelectAllAvailable,
+      ).toBe(false);
+      expect(
+        filterOn(context, { values: squadron, mode: "one" })
+          .isSelectAllAvailable,
+      ).toBe(false);
+      expect(
+        filterOn(context, { values: squadron, mode: "all" })
+          .isSelectAllAvailable,
+      ).toBe(false);
+    });
+
+    test("selects and deselects every value, and reports it", () => {
+      const onChange = vi.fn();
+      const filter = filterOn(fakeContext<Pilot>(), {
+        values: squadron,
+        onChange,
+      });
+
+      filter.selectAll();
+      expect(filter.isEveryValueActive()).toBe(true);
+      expect(onChange).toHaveBeenLastCalledWith(squadron);
+
+      filter.deselectAll();
+      expect(filter.isActive()).toBe(false);
+      expect(onChange).toHaveBeenLastCalledWith([]);
+    });
+
+    /* What a multiple-selection menu reports: the whole selection, by id. */
+    test("makes exactly the given ids active", () => {
+      const filter = filterOn(fakeContext<Pilot>(), { values: squadron });
+      const [wedge, biggs, porkins] = filter.values;
+
+      filter.selectAll();
+      filter.setActiveValueIds(new Set([wedge?.id, porkins?.id]));
+
+      expect(filter.getArrayValue().map((v) => v.value)).toEqual([
+        "wedge",
+        "porkins",
+      ]);
+      expect(biggs?.isActive).toBe(false);
+    });
+  });
 });

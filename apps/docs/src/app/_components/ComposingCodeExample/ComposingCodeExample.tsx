@@ -8,9 +8,9 @@ import clsx from "clsx";
 import type { FC } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import codeStyles from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor.module.css";
-import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
+import { transformCode } from "@/lib/liveCode/components/LiveCodeEditor/lib/transformCode";
 import { buildAnimation } from "./buildFrames";
 import { composingCodeExamples, exampleImports } from "./steps";
 import styles from "./ComposingCodeExample.module.scss";
@@ -26,16 +26,6 @@ const endOfExample = (index: number) => {
     }
   }
   return lastFrameIndex;
-};
-
-// Stable identities: `LiveProvider` re-transpiles whenever `scope` or
-// `transformCode` change identity, which would loop endlessly on re-render.
-const transformCode = (code: string) => {
-  try {
-    return extractDefaultExport(code);
-  } catch (error) {
-    return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
-  }
 };
 
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";

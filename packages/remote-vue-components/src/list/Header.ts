@@ -86,6 +86,9 @@ interface HeaderFilter {
   readonly name?: string;
   readonly property: unknown;
   readonly values: HeaderFilterValue[];
+  readonly isSelectAllAvailable: boolean;
+  selectAll(): void;
+  setActiveValueIds(ids: Iterable<unknown>): void;
 }
 
 /** Which layouts this list can actually show. */
@@ -254,6 +257,18 @@ const renderFilterMenu = (
       {
         selectionMode,
         selectedKeys: values.filter((v) => v.isActive).map((v) => v.id),
+        /*
+         * Flow's: a multiple-choice menu reports its whole selection, and the
+         * "Select all" entry the host adds reports it as `"all"`.
+         */
+        onSelectionChange:
+          selectionMode === "multiple"
+            ? (keys: unknown) =>
+                keys === "all"
+                  ? filter.selectAll()
+                  : filter.setActiveValueIds(keys as Iterable<unknown>)
+            : undefined,
+        showSelectAll: filter.isSelectAllAvailable,
       },
       () =>
         values.map((value) =>
@@ -262,8 +277,9 @@ const renderFilterMenu = (
             {
               key: value.id,
               id: value.id,
+              /* A multiple choice goes through `onSelectionChange`. */
               onAction: () => {
-                if (selectionMode === "multiple" || !value.isActive) {
+                if (selectionMode === "single" && !value.isActive) {
                   value.toggle();
                 }
               },

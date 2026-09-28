@@ -45,6 +45,11 @@ interface ModalFilter {
   readonly mode: string;
   readonly priority: "primary" | "secondary";
   readonly values: ModalFilterValue[];
+  readonly isSelectAllAvailable: boolean;
+  isActive(): boolean;
+  isEveryValueActive(): boolean;
+  selectAll(): void;
+  deselectAll(): void;
   clear(): void;
 }
 
@@ -108,6 +113,31 @@ const renderDateRangeAccordion = (
   );
 };
 
+/*
+ * Flow's `FilterAccordionCheckboxGroup`: outside the checkbox group, so it is
+ * not one of the values, and indeterminate while only some of them are on.
+ */
+const renderSelectAllCheckbox = (
+  filter: ModalFilter,
+  texts: ListTextFormatter,
+): VNodeChild => {
+  const isEveryValueActive = filter.isEveryValueActive();
+
+  return h(
+    Checkbox,
+    {
+      key: "select-all",
+      class: listStyles.selectAllCheckbox,
+      isSelected: isEveryValueActive,
+      isIndeterminate: filter.isActive() && !isEveryValueActive,
+      onChange: () =>
+        isEveryValueActive ? filter.deselectAll() : filter.selectAll(),
+    },
+    () =>
+      texts(isEveryValueActive ? "filters.deselectAll" : "filters.selectAll"),
+  );
+};
+
 const renderFilterAccordion = (
   filter: ModalFilter,
   expanded: boolean,
@@ -162,22 +192,27 @@ const renderFilterAccordion = (
               )
             : null,
         ])
-      : h(
-          CheckboxGroup,
-          { value: activeIds, m: [1, 1], "aria-label": name },
-          () =>
-            filter.values.map((value) =>
-              h(
-                Checkbox,
-                {
-                  key: value.id,
-                  value: value.id,
-                  onPress: () => value.toggle(),
-                },
-                () => value.render(),
+      : [
+          filter.isSelectAllAvailable
+            ? renderSelectAllCheckbox(filter, texts)
+            : null,
+          h(
+            CheckboxGroup,
+            { value: activeIds, m: [1, 1], "aria-label": name },
+            () =>
+              filter.values.map((value) =>
+                h(
+                  Checkbox,
+                  {
+                    key: value.id,
+                    value: value.id,
+                    onPress: () => value.toggle(),
+                  },
+                  () => value.render(),
+                ),
               ),
-            ),
-        );
+          ),
+        ];
 
   return accordion(`filter-${name}`, name, expanded, content);
 };

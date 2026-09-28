@@ -353,16 +353,25 @@ describe("Active filters", () => {
    */
   test("offers to clear everything once more than one value is on", async () => {
     const list = filteredList();
+    /*
+     * Unlabelled, as Flow's is — its tooltip is all it has — so it is found as
+     * the one plain button among the active filters without a label.
+     */
+    const clearButton = () =>
+      list
+        .element()
+        .querySelector(
+          ".flow--list--header--active-filters .flow--button--plain:not([aria-label])",
+        );
 
     await selectRank(list, "Corporal");
     await expect.poll(() => list.getByRole("row").elements().length).toBe(1);
-    expect(
-      list.getByRole("button", { name: "Clear filters" }).query(),
-    ).toBeNull();
+    expect(clearButton()).toBeNull();
 
     await selectRank(list, "Company Man");
 
-    await userEvent.click(list.getByRole("button", { name: "Clear filters" }));
+    await expect.poll(clearButton).not.toBeNull();
+    await userEvent.click(page.elementLocator(clearButton() as Element));
 
     await expect.poll(() => list.getByRole("row").elements().length).toBe(3);
   });

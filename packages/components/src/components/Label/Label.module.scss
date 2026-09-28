@@ -19,3 +19,8 @@
     margin-inline-start: auto;
   }
 }
+
+// Carries the id only; its content stays laid out by the label.
+.text {
+  display: contents;
+}
