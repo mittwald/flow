@@ -38,7 +38,11 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
       className={clsx(fieldProps.className, styles.checkboxButton, className)}
     >
       <FieldErrorCaptureContext>
-        <Checkbox {...rest} inputClassName={clsx(inputClassName, styles.input)}>
+        <Checkbox
+          {...rest}
+          className={styles.checkbox}
+          inputClassName={clsx(inputClassName, styles.input)}
+        >
           <PropsContextProvider props={mergedPropsContext}>
             {children}
           </PropsContextProvider>
