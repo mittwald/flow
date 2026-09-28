@@ -50,7 +50,7 @@
     }
   }
 
-  &:has(input:read-only):not([aria-disabled="true"]) {
+  &:has(.input:read-only):not([aria-disabled="true"]) {
     .decrementButton,
     .incrementButton {
       border-color: var(--form-control--border-color--default);
@@ -108,6 +108,10 @@
         height: var(--icon--size--m);
       }
 
+      // Hides every icon the stepper buttons render except the coarse-pointer
+      // one — Button's own pending/success/failure icons included, and those
+      // share no class with the chevrons.
+      // stylelint-disable-next-line selector-max-type -- see above
       svg:not(.coarsePointerIcon) {
         display: none;
       }

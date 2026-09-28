@@ -68,6 +68,10 @@ Das CoachMark ist absolut positioniert und benötigt keinen eigenen Platz.
 `overflow: hidden` oder ein eigener Stacking Context eines Vorfahren kann es
 abschneiden.
 
+Damit es über dem Seiteninhalt liegt, beansprucht es `z-index: 1` – die
+niedrigste Stufe, die dafür reicht. Anwendungs-Chrome, das darüber bleiben soll
+– etwa ein Sticky Header –, braucht deshalb einen höheren Wert.
+
 Beim Scrollen folgt das CoachMark seinem Anker und bleibt geöffnet.
 
 <LiveCodeEditor example="anchorById" editorCollapsed />

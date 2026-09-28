@@ -5,6 +5,10 @@ are changing Flow itself, read [AGENTS.md](./AGENTS.md) instead — the two
 audiences need opposite advice, and applying the contributor patterns in an
 application is the most common mistake made here.
 
+Building an **mStudio extension**? Read the `USAGE.md` of
+`@mittwald/flow-remote-react-components` as well — it covers what differs across
+the remote boundary, starting with the import address.
+
 ## The documentation is machine-readable
 
 The prose that decides most questions — which component covers a use case, how
@@ -13,8 +17,8 @@ published for machine consumption:
 
 | URL                                      | What it is                                                     |
 | ---------------------------------------- | -------------------------------------------------------------- |
-| `https://flow.mittwald.de/llms.txt`      | Index of every page, grouped by section                        |
-| `https://flow.mittwald.de/llms.json`     | Manifest: title, description, page URL, Markdown URL per page  |
+| `https://flow.mittwald.de/llms.txt`      | Index of every page as Markdown links, grouped by section      |
+| `https://flow.mittwald.de/llms.json`     | Manifest: page URL, Markdown URL, remote availability per page |
 | `https://flow.mittwald.de/raw/<path>.md` | One page as Markdown, e.g. `/raw/components/actions/button.md` |
 | `https://flow.mittwald.de/llms-full.txt` | Every page in one file (~1.7 MB)                               |
 
@@ -24,10 +28,14 @@ States, Props) are not translated.
 
 Start with these:
 
-- `/raw/foundations/structure/layout.md` and `spacing.md` — how layout and
-  spacing are meant to be composed
-- `/raw/patterns/patterns/forms.md`, `detail-page.md`, `errorhandling.md`,
-  `list-tile-table.md` — the recurring flows
+- `/raw/foundations/structure/layout.md` and
+  `/raw/foundations/structure/spacing.md` — how layout and spacing are meant to
+  be composed
+- `/raw/templates/bausteine/formular.md`,
+  `/raw/templates/seiten/uebersichtsseite.md`,
+  `/raw/templates/seiten/detailseite.md` — the recurring flows
+- `/raw/foundations/content-guidelines/error-handling.md` — preventing and
+  presenting errors
 - `/raw/foundations/content-guidelines/sprach-guide.md` — UI wording
 - `/raw/get-started/versioning.md` — what you may depend on
 

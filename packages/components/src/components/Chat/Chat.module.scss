@@ -21,6 +21,10 @@
     margin-top: var(--chat--spacing);
   }
 
+  /* The `<form>` comes from the consumer wrapping the controls in the
+     react-hook-form `Form` (or its own `formComponent`). `Form` is a plain FC,
+     not a flowComponent, so Chat's props context cannot give it a class. */
+  // stylelint-disable selector-max-type -- consumer-supplied form, no class
   .controls:not(:has(form)),
   .controls form {
     display: flex;
@@ -43,6 +47,7 @@
       margin-inline-start: auto;
     }
   }
+  // stylelint-enable selector-max-type
 }
 
 @media (max-width: 550px) {

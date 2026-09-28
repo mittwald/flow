@@ -12,8 +12,11 @@
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-y);
   padding-inline: var(--button--padding-x);
-  transition-property: color, background-color;
-  transition-duration: var(--transition--duration--default);
+  transition-property: color, background-color, transform;
+  transition-duration:
+    var(--transition--duration--default), var(--transition--duration--default),
+    var(--transition--duration--fast);
+  transition-timing-function: ease, ease, ease-out;
   max-width: 100%;
   display: grid;
   align-items: center;
@@ -42,6 +45,10 @@
     justify-content: center;
     text-align: start;
     text-wrap-style: pretty;
+
+    /* Fade the label out when a state icon (pending/success/fail) takes over. */
+    transition-property: opacity;
+    transition-duration: var(--transition--duration--fast);
   }
 
   .content,
@@ -71,6 +78,13 @@
 
   /* States */
 
+  /* Subtle tactile press feedback: a slight inward scale while pressed.
+     Overlay triggers keep data-pressed while their overlay is open, so an
+     expanded trigger is excluded. */
+  &[data-pressed]:where(:not([data-readonly], [aria-expanded="true"])) {
+    transform: scale(0.97);
+  }
+
   &.isPending,
   &.isFailed,
   &.isSucceeded {
@@ -82,6 +96,16 @@
   &.isPending {
     .stateIcon {
       color: var(--button--pending-icon-color);
+    }
+  }
+
+  /* Success/failure icon pops in when it replaces the label. The pending
+     spinner is left alone — it has its own animation. */
+  &.isSucceeded,
+  &.isFailed {
+    .stateIcon {
+      animation: state-icon-pop var(--transition--duration--default)
+        cubic-bezier(0.34, 1.35, 0.5, 1);
     }
   }
 
@@ -237,5 +261,17 @@
     .image {
       width: 100%;
     }
+  }
+}
+
+@keyframes state-icon-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

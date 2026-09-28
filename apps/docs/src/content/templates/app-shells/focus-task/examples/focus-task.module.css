@@ -1,0 +1,37 @@
+.page {
+  /* Container-relative here; use 100dvh in a real full-page app. */
+  height: 100%;
+  padding-block: var(--size-px--l);
+  padding-inline: var(--size-px--xl);
+  background: var(--color--background-gradient);
+}
+
+.center {
+  width: 100%;
+  max-width: 30rem;
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme (dark on light, light on dark). Swap the masked SVG for your own logo.
+ */
+.logo {
+  align-self: center;
+  width: 18rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+}
+
+.registerLine {
+  text-align: end;
+}
+
+/* The generous page padding is too much for a narrow screen. */
+@media (max-width: 768px) {
+  .page {
+    padding-inline: var(--size-px--m);
+  }
+}

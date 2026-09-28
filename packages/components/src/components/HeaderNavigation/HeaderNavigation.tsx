@@ -31,7 +31,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      wrapWith: <li />,
+      wrapWith: <li className={styles.item} />,
       className: styles.link,
       unstyled: true,
       children: dynamic((props) => (
@@ -42,13 +42,13 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
       className: styles.button,
       color: isAlphaColor(color) ? color : "secondary",
       variant: "plain",
-      wrapWith: <li />,
+      wrapWith: <li className={styles.item} />,
     },
   };
 
   return (
     <nav className={rootClassName} role="navigation" {...rest}>
-      <ul>
+      <ul className={styles.list}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

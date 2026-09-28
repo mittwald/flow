@@ -3,13 +3,15 @@
 .calendar {
   width: fit-content;
 
-  header {
+  .calendarHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--calendar--spacing);
 
-    h2 {
+    /* react-aria's Heading — CalendarHeader passes no className, so its
+       default class is the handle. */
+    :global(.react-aria-Heading) {
       font-size: var(--calendar--heading-font-size);
     }
   }
@@ -35,7 +37,7 @@
     height: var(--calendar--cell-size);
   }
 
-  table {
+  :global(.react-aria-CalendarGrid) {
     border-spacing: var(--calendar--spacing);
   }
 

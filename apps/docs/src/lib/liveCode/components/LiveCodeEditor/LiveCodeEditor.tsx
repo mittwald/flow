@@ -22,7 +22,6 @@ export interface LiveCodeEditorProps {
   editorDisabled?: boolean;
   zoom?: number;
   bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
-  mobile?: boolean;
   row?: boolean;
   /**
    * Whether the preview gets a handle to drag its width. Use it for examples
@@ -61,7 +60,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorDisabled,
     zoom = 1,
     bgColor,
-    mobile,
     row,
     resizable,
   } = props;
@@ -224,9 +222,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
+  /*
+   * An inline zoom would beat the stylesheet, so the default is left out
+   * entirely — that is what lets the mobile breakpoint scale the preview.
+   */
+  const zoomStyle = zoom === 1 ? undefined : { zoom };
+
   const frameStyle: CSSProperties = containerWidth
-    ? { zoom, boxSizing: "content-box", width: containerWidth }
-    : { zoom };
+    ? { ...zoomStyle, boxSizing: "content-box", width: containerWidth }
+    : { ...zoomStyle };
 
   const preview = (
     <LivePreview
@@ -235,7 +239,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         row && styles.row,
         resizable && styles.framedPreview,
       )}
-      style={resizable ? undefined : { zoom }}
+      style={resizable ? undefined : zoomStyle}
     />
   );
 
@@ -251,7 +255,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         className={clsx(
           styles.liveCodeEditor,
           bgColor && styles[`${bgColor}Background`],
-          mobile && styles.mobile,
           className,
         )}
       >

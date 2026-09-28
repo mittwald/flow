@@ -14,6 +14,8 @@
 
   /* Elements */
 
+  // The image is a child the consumer passes — Flow `Image` or a bare `<img>`.
+  // stylelint-disable-next-line selector-max-type -- bare `<img>` has no class
   img {
     width: 100%;
     height: 100%;

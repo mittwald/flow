@@ -39,6 +39,8 @@
     border-color: var(--table--border-color);
     border-width: 0;
 
+    // Cell content is the consumer's — a Flow icon or a raw `<svg>`.
+    // stylelint-disable-next-line selector-max-type -- consumer content
     > svg {
       vertical-align: bottom;
     }

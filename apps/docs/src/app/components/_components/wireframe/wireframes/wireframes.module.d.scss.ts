@@ -27,5 +27,6 @@ declare const classNames: {
   readonly sliderTrack: "sliderTrack";
   readonly sliderKnob: "sliderKnob";
   readonly chartBars: "chartBars";
+  readonly chartBar: "chartBar";
 };
 export default classNames;
