@@ -150,6 +150,10 @@ opening sentence. The Component name, its one-sentence description, and the
 GitHub / Markdown links render above it from the frontmatter, so the body starts
 with the `<LiveCodeEditor />` that renders the implicit `examples/default.tsx`.
 
+Only this opening example shows its code by default. Every later
+`<LiveCodeEditor />` on the page gets `editorCollapsed`. A long opening example
+stays open too — it is truncated with „Mehr anzeigen“ automatically.
+
 A single `<Alert>` may sit above the editor when it flags an
 integration-critical caveat — an accessibility warning (Truncate) or a usage
 pitfall (Select's dynamic-`Options` `key` warning). Otherwise the editor is the
