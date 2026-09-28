@@ -187,8 +187,8 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
 - `pnpm nx test:parity remote-vue-components` — two harnesses, one target.
   - `e2e/react-parity`: the React package's whole visual corpus, rendered once
     from React and once from Vue, asserting the host builds the same DOM,
-    overlays included. 175 of 193 scenarios are compared, and all of them match;
-    `e2e/react-parity/knownGaps.ts` lists the rest with a reason.
+    overlays included. Every scenario is compared, and all of them match, except
+    those `e2e/react-parity/knownGaps.ts` lists with a reason.
   - `e2e/list-parity`: the `List`, which the corpus cannot express — its
     scenarios build one with `typedList<T>()` and a React component of their
     own. So it is written once per binding and compared the same way, including
