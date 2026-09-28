@@ -584,15 +584,26 @@ or a `form.reset()` the modal closes right away, and actions in the
 `<ActionGroup />` as well as the close button in the heading still close it
 immediately.
 
-Nothing to do if you had the flag enabled. To keep the previous behavior, switch
-the default off (see below).
+Nothing to do if you had the flag enabled. To keep the previous behavior, opt
+out per form:
+
+```diff
+- <Form form={form} onSubmit={onSubmit}>
++ <Form form={form} onSubmit={onSubmit} confirmModalCloseOnUnsavedChanges={false}>
+```
+
+Or switch the default off for the whole app with the
+`<ComponentDefaultsProvider />` (see below).
 
 **Apply:** No code change required — if you had
 `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default matches
-it. To keep the previous behaviour (closing without confirmation), set
-`Form: { confirmModalCloseOnUnsavedChanges: false }` via
-`<ComponentDefaultsProvider />`, or its deprecated equivalent, the
-`flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.
+it. To keep the previous behaviour (closing without confirmation), pass
+`confirmModalCloseOnUnsavedChanges={false}` to `Form` — this also works in
+remote apps (`@mittwald/flow-remote-react-components/react-hook-form`). To
+switch it off app-wide, set `Form: { confirmModalCloseOnUnsavedChanges: false }`
+via `<ComponentDefaultsProvider />`, or outside of remote apps its deprecated
+equivalent, the `flags.requireCloseModalConfirmationOnUnsavedChanges = false`
+assignment.
 
 ---
 
@@ -1087,7 +1098,8 @@ no intent to block anything, now silently cancels closes.
 
 ## Form: resets itself after the surrounding modal closes
 
-**Since `0.2.0-alpha.694`** · migration · no code change needed
+**Since `0.2.0-alpha.694`** · migration · no code change needed · also applies
+to `@mittwald/flow-remote-react-components`
 
 A react-hook-form `<Form>` inside a `Modal` now resets to its default values
 once the modal has closed. Previously it kept what the user had entered, so

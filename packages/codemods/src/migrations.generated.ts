@@ -117,7 +117,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "none",
     remotePackage: true,
     apply:
-      "No code change required — if you had `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default matches it. To keep the previous behaviour (closing without confirmation), set `Form: { confirmModalCloseOnUnsavedChanges: false }` via `<ComponentDefaultsProvider />`, or its deprecated equivalent, the `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.",
+      "No code change required — if you had `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default matches it. To keep the previous behaviour (closing without confirmation), pass `confirmModalCloseOnUnsavedChanges={false}` to `Form` — this also works in remote apps (`@mittwald/flow-remote-react-components/react-hook-form`). To switch it off app-wide, set `Form: { confirmModalCloseOnUnsavedChanges: false }` via `<ComponentDefaultsProvider />`, or outside of remote apps its deprecated equivalent, the `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.",
   },
   {
     id: "password-tools-subpath-renamed",
@@ -247,7 +247,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     title: "Form: resets itself after the surrounding modal closes",
     kind: "migration",
     action: "none",
-    remotePackage: false,
+    remotePackage: true,
     apply:
       "No code change required. To keep the previous behaviour (the form keeping what the user entered), pass `autoReset={false}` (or `autoReset={{ onAfterModalClose: false }}`) to `Form`.",
   },

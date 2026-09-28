@@ -3,7 +3,7 @@ since: 0.2.0-alpha.694
 title: "Form: resets itself after the surrounding modal closes"
 kind: migration
 action: none
-remotePackage: false
+remotePackage: true
 apply:
   "No code change required. To keep the previous behaviour (the form keeping
   what the user entered), pass `autoReset={false}` (or `autoReset={{

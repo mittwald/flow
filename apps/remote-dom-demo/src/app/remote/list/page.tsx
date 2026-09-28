@@ -51,11 +51,12 @@ export default function Page() {
 
           <DemoList.Filter property="faction" name="Faction" mode="some" />
           {/* `secondary` keeps it out of the header — it lives in the
-              all-filters modal, which is what puts that modal on desktop. */}
+              all-filters modal, which is what puts that modal on desktop.
+              `one` renders it there as a radio group. */}
           <DemoList.Filter
             property="homeworld"
             name="Homeworld"
-            mode="some"
+            mode="one"
             priority="secondary"
           />
           <DemoList.Search />

@@ -16,7 +16,7 @@ import { useOverlayController } from "@/lib/controller";
 import HeadingView from "@/views/HeadingView";
 import clsx from "clsx";
 import Modal, { ModalTrigger } from "@/components/Modal";
-import { SkeletonText } from "@/components/SkeletonText";
+import SkeletonTextView from "@/views/SkeletonTextView";
 import { useAvailableViewModes } from "../../lib";
 
 interface Props {
@@ -105,7 +105,7 @@ export const AllFiltersModal: FC<Props> = (props) => {
           <ButtonView onPress={() => controller.close()}>
             <TextView>
               {isInitiallyLoading ? (
-                <SkeletonText width="16ch" />
+                <SkeletonTextView width="16ch" />
               ) : (
                 stringFormatter.format("results.show", {
                   totalItemCount,

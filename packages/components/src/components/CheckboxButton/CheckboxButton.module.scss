@@ -11,6 +11,7 @@
 
     & {
       order: unset;
+      height: 100%;
     }
 
     /* With content */
@@ -25,10 +26,10 @@
 
     &:has(.content) {
       display: grid;
-      grid-template-areas:
-        "icon label"
-        ".    content";
-      grid-template-rows: auto 1fr;
+      grid-template:
+        "icon label" auto
+        ".    content" 1fr
+        / auto 1fr;
 
       .label {
         font-weight: var(--font-weight--bold);
@@ -37,6 +38,10 @@
   }
 
   /* Elements */
+  .checkbox {
+    flex-grow: 1;
+  }
+
   .label {
     grid-area: label;
   }

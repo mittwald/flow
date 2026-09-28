@@ -110,7 +110,7 @@ export const ListDemo = defineComponent({
         <ListFilter
           property="homeworld"
           name="Homeworld"
-          mode="some"
+          mode="one"
           priority="secondary"
         />
         <ListSearch />
