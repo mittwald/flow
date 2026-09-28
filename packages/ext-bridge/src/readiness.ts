@@ -11,7 +11,7 @@ const [readiness, resolveReadiness] = controllablePromise();
 export const readinessApi = {
   isReady: async () => {
     assertBrowserEnv();
-    let timeoutId: ReturnType<typeof setTimeout>;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     try {
       await Promise.race([
         readiness,
@@ -33,7 +33,9 @@ export const readinessApi = {
       }
       throw error;
     } finally {
-      clearTimeout(timeoutId!);
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
     }
   },
   setIsReady: async () => {
