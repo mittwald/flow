@@ -43,7 +43,7 @@ The full explainer:
 
 ## Not every component exists remotely
 
-**114 of Flow's 124 public components are available here.** The
+**116 of Flow's 126 public components are available here.** The
 [component index](https://www.npmjs.com/package/@mittwald/flow-react-components)
 (`@mittwald/flow-react-components/component-index`) records this per component:
 
@@ -68,9 +68,9 @@ import from this package instead.
 Check `remote.available` before reaching for a component. These ten have no
 remote counterpart:
 
-`Activity`, `ComponentDefaultsProvider`, `FormAction`, `FormRootError`,
-`FormSettingsProvider`, `LinkProvider`, `Overlay`, `OverlayTrigger`,
-`RouterProvider`, `SuspenseTrigger`
+`Activity`, `FormAction`, `FormRootError`, `FormSettingsProvider`, `Link` (from
+`@mittwald/flow-react-components/nextjs`), `LinkProvider`, `Overlay`,
+`OverlayTrigger`, `RouterProvider`, `SuspenseTrigger`
 
 Three components move to a different address: `Field`, `ResetButton` and
 `SubmitButton` come from
