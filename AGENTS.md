@@ -167,6 +167,10 @@ commit the results.
   and a `scripts`-only manifest diff. The rule lives in
   `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
+- **`Closes #…` in a PR body works on `next` too.** GitHub only resolves it on
+  the default branch (`main`); `.github/workflows/close-linked-issues.yml`
+  closes the referenced issues when a PR merges into `next`. Write the keyword
+  when the PR finishes an issue, and keep `Part of #…` for a plain link.
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
