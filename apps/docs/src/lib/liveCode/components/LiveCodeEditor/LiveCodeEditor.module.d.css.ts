@@ -19,7 +19,6 @@ declare const classNames: {
   readonly row: "row";
   readonly liveCodeEditor: "liveCodeEditor";
   readonly darkBackground: "darkBackground";
-  readonly mobile: "mobile";
   readonly lightBackground: "lightBackground";
   readonly darkStaticBackground: "darkStaticBackground";
   readonly lightStaticBackground: "lightStaticBackground";

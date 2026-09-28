@@ -81,7 +81,7 @@ test.skipIf(crossVersion({ below: coachMarkSince })).each(testEnvironments)(
  * level of its own it painted over the hint's lower half — visible as a strip
  * of tab bar across it, and only in this arrangement.
  */
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: coachMarkSince })).each(testEnvironments)(
   "CoachMark over a positioned sibling (%s)",
   async ({
     testScreenshot,

@@ -8,6 +8,7 @@ import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { popoverViewportPadding } from "../../viewportPadding";
 import { popoverWidthStyle } from "../../widthStyle";
+import { PopoverTip } from "../PopoverTip";
 
 export interface NonModalPopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -308,14 +309,7 @@ const NonModalPopoverContentInner: FC<NonModalPopoverContentInnerProps> = (
             ...(placement ? { [placement]: "100%" } : {}),
           }}
         >
-          <svg
-            className={styles.tipIcon}
-            width={16}
-            height={16}
-            viewBox="0 0 16 16"
-          >
-            <path d="M0 0 L8 8 L16 0" />
-          </svg>
+          <PopoverTip />
         </div>
       )}
       <div className={styles.content} id={detailsId}>

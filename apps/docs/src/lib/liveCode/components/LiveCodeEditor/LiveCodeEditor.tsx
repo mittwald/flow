@@ -28,7 +28,6 @@ export interface LiveCodeEditorProps {
   editorDisabled?: boolean;
   zoom?: number;
   bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
-  mobile?: boolean;
   row?: boolean;
   /**
    * Whether the preview gets a handle to drag its width. Use it for examples
@@ -73,7 +72,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorDisabled,
     zoom = 1,
     bgColor,
-    mobile,
     row,
     resizable,
   } = props;
@@ -313,7 +311,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         className={clsx(
           styles.liveCodeEditor,
           bgColor && styles[`${bgColor}Background`],
-          mobile && styles.mobile,
           className,
         )}
       >
