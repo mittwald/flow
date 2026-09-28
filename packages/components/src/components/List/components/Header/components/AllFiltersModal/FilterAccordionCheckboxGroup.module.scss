@@ -1,4 +1,6 @@
+$select-all-spacing: var(--context-menu--select-all-to-item-spacing);
+
 /* Outside the checkbox grid, so it adds the grid's row gap itself */
 .selectAllCheckbox {
-  margin-block-end: calc(var(--column-layout--gap--s) + var(--size-px--s));
+  margin-block-end: calc(var(--column-layout--gap--s) + #{$select-all-spacing});
 }
