@@ -1,0 +1,122 @@
+/* The container the page-scroll switch below is measured against. */
+.shell {
+  container-type: inline-size;
+  height: 100%;
+}
+
+.app {
+  /* Fixed to the viewport height (container-relative here; use 100dvh in a real
+     full-page app) so the cards below can fill it and scroll their own content
+     instead of growing the page. */
+  height: 100%;
+  overflow: hidden;
+  padding-block: var(--size-px--l);
+  padding-inline: var(--size-px--xl);
+  background: var(--color--background-gradient);
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme. Swap the masked SVG for your own logo.
+ */
+.logo {
+  width: 9rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+
+  /* Extra breathing room between the wordmark and the navigation below it. */
+  margin-block-end: var(--size-px--m);
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat left center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat left center / contain;
+}
+
+/* Sidebar and content fill the available height side by side; the column
+   layout stacks them once its container gets narrow. */
+.body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* The column layout's inner grid fills that height, so its row stretches. */
+.body > * {
+  height: 100%;
+}
+
+/* The navigation card scrolls its own content if the viewport is too short for
+   it. */
+.sidebar {
+  align-self: stretch;
+  gap: var(--size-px--m);
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Settings and the user profile sit at the bottom, apart from the areas above. */
+.sidebarBottom {
+  margin-block-start: auto;
+}
+
+.main {
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* The content card grows with its content, but only up to the viewport: once it
+   would run past the bottom it stops there and scrolls its own overflow (the
+   long invoice list) instead of growing the page. */
+.contentCard {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Keeps the heading in the accessibility tree while hiding it visually. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.footer {
+  margin-block-start: auto;
+}
+
+/*
+ * Once the column layout stacks the cards (its content box at or below 850px,
+ * i.e. 850px plus the xl side padding), the page scrolls as a whole rather than
+ * each card scrolling on its own inside a fixed height.
+ */
+@container (max-width: 914px) {
+  .app {
+    height: auto;
+    overflow: visible;
+  }
+
+  .sidebar {
+    overflow: visible;
+  }
+
+  .main {
+    min-height: auto;
+  }
+
+  .contentCard {
+    flex: none;
+    min-height: auto;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding-inline: var(--size-px--m);
+  }
+}

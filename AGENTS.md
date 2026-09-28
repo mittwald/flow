@@ -167,6 +167,10 @@ commit the results.
   and a `scripts`-only manifest diff. The rule lives in
   `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
+- **`Closes #…` in a PR body works on `next` too.** GitHub only resolves it on
+  the default branch (`main`); `.github/workflows/close-linked-issues.yml`
+  closes the referenced issues when a PR merges into `next`. Write the keyword
+  when the PR finishes an issue, and keep `Part of #…` for a plain link.
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
@@ -653,6 +657,23 @@ where the error points.
   `packages/codemods/src/migrations/<id>/entry.md`
 
   **Fix:** Edit the catalogue entry, run `pnpm nx build codemods`, commit both
+
+- **Symptom:** `stylelint` fails with **`flow/no-unknown-global-flow-class`** —
+  a `:global(.flow--…)` name resolves to nothing
+
+  **Cause:** The class-name generator
+  (`packages/components/dev/vite/cssModuleClassNameGenerator.ts`) **drops the
+  suffix when it equals the component name**, so `ColumnLayout`'s
+  `.columnLayout` compiles to `flow--column-layout`, not
+  `flow--column-layout--column-layout`. The names cannot be derived by hand, and
+  a component that moves leaves every reference to it dead
+
+  **Fix:** Copy the name from the component's committed `*.module.d.scss.ts` —
+  that is what the rule checks against — or take the rule's "Did you mean"
+  suggestion. Just added the class? Regenerate the stubs first:
+  `pnpm nx build:scss-types components`. Before the rule (#3091) this class of
+  bug failed completely silently: no build error, no console warning, and the
+  docs site and Storybook kept rendering
 
 ## Where to look next
 

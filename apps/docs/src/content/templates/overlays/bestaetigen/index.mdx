@@ -1,0 +1,51 @@
+---
+title: Bestätigen
+description:
+  Ein Overlay, das vor einer folgenreichen Aktion über ihre Auswirkungen
+  informiert und eine Entscheidung einholt.
+---
+
+<LiveCodeEditor example="bestaetigungs-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende dieses Overlay, wenn eine Aktion Daten unwiederbringlich entfernt,
+etwas Kostenpflichtiges beendet oder weitere Objekte betrifft – etwa löschen,
+kündigen oder eine Verknüpfung auflösen. Der Sinn dieses Overlays ist, den
+Workflow bewusst zu unterbrechen und den Nutzer auf die Tragweite der Aktion
+aufmerksam zu machen. Lässt sich eine Aktion dagegen sofort und mit geringem
+Aufwand rückgängig machen, wirkt eine Rückfrage schnell lästig und das Overlay
+ist verzichtbar.
+
+---
+
+# Aufbau
+
+- **Overlay-Container** – Ein [Modal](/components/overlays/modal) erscheint
+  mittig und ist so groß wie sein Inhalt. Meist ist das Modal die richtige Wahl,
+  da es um eine kurze Rückfrage geht; werden viele abhängige Objekte
+  aufgelistet, die mitgelöscht werden, kann die `offCanvas`-Variante sinnvoll
+  sein.
+- **Überschrift und Folgen** – Die Überschrift ist kurz und prägnant. Ein
+  [Text](/components/content/text) darunter klärt den Nutzer verständlich über
+  die Folgen der Aktion auf. Wichtige Informationen (z. B. das zu löschende
+  Objekt) können mit **Fettschrift** hervorgehoben werden. Betrifft die Aktion
+  weitere Objekte, werden sie hier genannt.
+- **Aktionen** – Eine [ActionGroup](/components/actions/action-group) trägt die
+  bestätigende Aktion mit der Aktion als Verb, daneben ein zurückhaltendes
+  „Abbrechen". Je nach Konsequenz nutzt die bestätigende Aktion einen
+  [Button](/components/actions/button) in `color="success"` oder
+  `color="danger"`, um die Folge zu verdeutlichen.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit Eingabe der Bestätigung
+
+Bei besonders folgenreichen Aktionen, etwa dem Löschen des eigenen Profils,
+tippt der Nutzer den Namen des Objekts ab, bevor der Button aktiv wird.
+
+<LiveCodeEditor example="bestaetigungs-overlay-eingabe" editorCollapsed />

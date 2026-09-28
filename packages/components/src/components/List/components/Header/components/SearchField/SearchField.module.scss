@@ -3,6 +3,9 @@
   margin-inline-start: auto;
   flex-grow: 1;
 
+  // The list's search field can be swapped out by the consumer's
+  // `search.render`, so this has to match whatever input that renders.
+  // stylelint-disable-next-line selector-max-type -- replaceable field
   input {
     width: 200px;
   }

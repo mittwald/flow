@@ -4,6 +4,11 @@ import path from "path";
 import humanizeString from "humanize-string";
 import { mdxToMarkdown } from "@/lib/llms/mdxToMarkdown";
 import { byContentOrder } from "@/lib/content/contentOrder";
+import {
+  remoteNoticeMarkdown,
+  remoteUsageOf,
+  type RemoteUsage,
+} from "@/lib/llms/remoteUsage";
 
 const CONTENT_ROOT = "./src/content";
 const COMPONENTS_SECTION = "components";
@@ -12,6 +17,10 @@ export interface DocPage {
   segments: string[];
   title: string;
   description?: string;
+  /** Component pages only: the component the page documents. */
+  component?: string;
+  /** Component pages only, when the component index knows the component. */
+  remote?: RemoteUsage;
   toMarkdown: () => string;
 }
 
@@ -45,12 +54,18 @@ const componentPages = (): DocPage[] => {
     const componentName = frontmatter.component ?? humanizeString(component);
     const title = frontmatter.title ?? componentName;
     const description = normalizeWhitespace(frontmatter.description);
-    const header = pageHeader(title, description);
+    const remote = remoteUsageOf(componentName);
+    const header = [
+      pageHeader(title, description),
+      ...(remote ? [remoteNoticeMarkdown(componentName, remote)] : []),
+    ].join("\n\n");
 
     return {
       segments: [COMPONENTS_SECTION, group, component],
       title,
       description,
+      component: componentName,
+      ...(remote ? { remote } : {}),
       toMarkdown: () =>
         `${header}\n\n${mdxToMarkdown(indexFile, { componentName })}\n`,
     };

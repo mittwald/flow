@@ -1,7 +1,8 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
-import { expect, test } from "vitest";
+import { commands, page } from "vitest/browser";
+import { afterEach, describe, expect, test } from "vitest";
 import { ProgressBar } from "@/components/ProgressBar";
+import styles from "@/components/ProgressBar/ProgressBar.module.scss";
 
 const bar = () => page.getByRole("progressbar");
 
@@ -90,4 +91,22 @@ test("showLegend false drops the legend but keeps the value", async () => {
 
   await expect.element(bar()).toHaveAttribute("aria-valuenow", "30");
   await expect.element(bar()).not.toHaveTextContent("Documents");
+});
+
+describe("with motion allowed", () => {
+  afterEach(() => commands.setReducedMotion("reduce"));
+
+  test("the fill grows into its value", async () => {
+    await commands.setReducedMotion("no-preference");
+    const screen = await render(
+      <ProgressBar aria-label="Storage" value={40} />,
+    );
+
+    const fills = screen.container.querySelectorAll(`.${styles.fill}`);
+    expect(fills).toHaveLength(1);
+    for (const fill of fills) {
+      expect(getComputedStyle(fill).animationName).not.toBe("none");
+      expect(getComputedStyle(fill).animationDuration).toBe("0.8s");
+    }
+  });
 });

@@ -1,0 +1,53 @@
+---
+title: Simple App
+description: Eine App mit flacher Navigation über wenige gleichrangige Bereiche.
+---
+
+<AppShell example="simple-app" />
+
+---
+
+# Verwendung
+
+Eine Simple App führt wenige gleichrangige Bereiche unter einer einzigen,
+flachen Navigationsebene zusammen. Verwende sie für ein überschaubares Werkzeug,
+dessen Bereiche alle auf einer Ebene liegen. Die flache Struktur macht jeden
+Bereich mit einem Klick erreichbar. Sobald eine zweite Navigationsebene nötig
+wird, ist es eine [Complex App](/templates/app-shells/complex-app).
+
+---
+
+# Aufbau
+
+- **Header** – Eine [HeaderNavigation](/components/navigation/header-navigation)
+  bildet die einzige, flache Navigationsebene über die gleichrangigen Bereiche
+  und bietet Raum für bereichsübergreifende Funktionen wie eine Suche oder die
+  Profilverwaltung.
+- **Content** – Der Inhalt einer Seite wird in der Regel in
+  [LayoutCards](/components/structure/layout-card) dargestellt. Typische
+  Seitentypen sind beispielsweise [Detailseiten](/templates/seiten/detailseite),
+  [Dashboards](/templates/seiten/dashboard) und
+  [Übersichtsseiten](/templates/seiten/uebersichtsseite).
+- **Footer** – Hier lassen sich [Links](/components/navigation/link) platzieren,
+  etwa Verweise auf Datenschutz oder Impressum.
+
+Auf schmalen Screens ist für die Header-Navigation kein Platz. Sie gibt ihre
+Links an ein [OffCanvas](/components/overlays/modal) ab, das ein Burger-Menü in
+der Kopfleiste öffnet.
+
+---
+
+# Varianten und Abwandlung
+
+## Mit seitlicher Navigation
+
+Wenn der Header nicht genug Platz für alle gleichrangigen Bereiche bietet,
+wandert die flache Navigation nach links in eine
+[Navigation](/components/navigation/navigation). Sie nimmt auch das Logo,
+globale Funktionen wie Benachrichtigungen und Einstellungen sowie das
+Nutzerprofil auf, sodass der Header ganz entfällt. Die Struktur bleibt einstufig
+und damit eine Simple App. Öffnet ein Wechsel je Bereich eine eigene
+Seitennavigation, entsteht eine
+[Complex App](/templates/app-shells/complex-app).
+
+<AppShell example="simple-app-sidebar" />

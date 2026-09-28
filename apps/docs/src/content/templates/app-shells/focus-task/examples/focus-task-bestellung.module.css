@@ -1,0 +1,45 @@
+.page {
+  /* Container-relative here; use 100dvh in a real full-page app. */
+  min-height: 100%;
+  padding-block: var(--size-px--xl);
+  padding-inline: var(--size-px--xl);
+  background: var(--color--background-gradient);
+}
+
+.center {
+  width: 100%;
+  max-width: 84rem;
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme. Swap the masked SVG for your own logo.
+ */
+.logo {
+  align-self: flex-start;
+  width: 12rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+}
+
+/*
+ * The RadioButton lays its slots out on a grid ("icon label" / ". content").
+ * A raw child lands in the wrong cell, so the title row claims the label area.
+ */
+.resourceTitle {
+  grid-area: label;
+}
+
+.actionsRight {
+  margin-inline-start: auto;
+}
+
+/* The generous page padding is too much for a narrow screen. */
+@media (max-width: 768px) {
+  .page {
+    padding-inline: var(--size-px--m);
+  }
+}

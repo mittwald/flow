@@ -1,4 +1,6 @@
 donut-chart:
+  transition-duration:
+    value: 800ms
   border-color:
     value: "{neutral-outline-border-color}"
   background-color:
