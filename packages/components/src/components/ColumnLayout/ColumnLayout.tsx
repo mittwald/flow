@@ -89,9 +89,13 @@ export const ColumnLayout = flowComponent(
       }
     });
 
-    const columnsS = s ? getColumns(s) : "1fr";
-    const columnsM = m ? getColumns(m) : s ? columnsS : "1fr 1fr";
-    const columnsL = l ? getColumns(l) : m || s ? columnsM : "1fr 1fr 1fr";
+    const columnsS = getColumns(s ?? [1]);
+    const columnsM = m ? getColumns(m) : s ? columnsS : getColumns([1, 1]);
+    const columnsL = l
+      ? getColumns(l)
+      : m || s
+        ? columnsM
+        : getColumns([1, 1, 1]);
 
     const style = {
       ...styleFromProps,
