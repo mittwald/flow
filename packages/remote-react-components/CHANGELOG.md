@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.5](https://github.com/mittwald/flow/compare/1.4.0-next.4...1.4.0-next.5) (2026-09-28)
+
+## [1.3.5](https://github.com/mittwald/flow/compare/1.4.0-next.3...1.3.5) (2026-09-28)
+
+### Bug Fixes
+
+* **Heading:** wrap heading content items one at a time ([#3297](https://github.com/mittwald/flow/issues/3297)) ([cd1e4b1](https://github.com/mittwald/flow/commit/cd1e4b1112fb60fbb269ab3e45bb5201de6c9e72))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.5 ([155c5a0](https://github.com/mittwald/flow/commit/155c5a0a46c4dab14adeee9fd531c5524cdabf0f))
+
 ## [1.4.0-next.4](https://github.com/mittwald/flow/compare/1.4.0-next.3...1.4.0-next.4) (2026-09-28)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
