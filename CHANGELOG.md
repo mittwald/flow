@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/mittwald/flow/compare/1.3.3...1.3.4) (2026-09-28)
+
+### Bug Fixes
+
+* **codemods:** mark form-resets-after-modal-close as applying to the remote package ([#3288](https://github.com/mittwald/flow/issues/3288)) ([79ce51e](https://github.com/mittwald/flow/commit/79ce51e5df61f395367312696cdd4efa75615dee))
+
 ## [1.3.3](https://github.com/mittwald/flow/compare/1.3.2...1.3.3) (2026-09-28)
 
 ### Bug Fixes
