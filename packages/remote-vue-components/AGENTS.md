@@ -120,9 +120,9 @@ what this binding establishes about supporting a framework at all.
   twice — once from `remote-react-components`, once from here — and asserts the
   host builds the same DOM. The corpus is reused **unmodified**: the harness
   aliases `@/tests/lib/environments` to its own environment, the way the
-  cross-version harness does. 175 of 193 scenarios are compared; the rest are
-  listed in `knownGaps.ts` with a reason — `List.browser.test.tsx` as a whole
-  file (every scenario in it needs Flow's `List`), the others by name.
+  cross-version harness does. Every scenario is compared except those listed in
+  `knownGaps.ts` with a reason — `List.browser.test.tsx` as a whole file (every
+  scenario in it needs Flow's `List`), the others by name.
   - **A stale known gap fails the run.** A full run has the React pass write
     vitest's JSON report, and every `knownGaps.ts` entry has to name a corpus
     file or scenario in it (`dev/react-parity/staleKnownGaps.ts`); a
