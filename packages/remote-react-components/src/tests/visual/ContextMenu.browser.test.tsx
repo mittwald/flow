@@ -1,7 +1,7 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 
-// showSelectAll exists from 1.4.0-next.3.
-const selectAllFrom = "1.4.0-next.3";
+// showSelectAll exists from 1.4.0-next.6.
+const selectAllFrom = "1.4.0-next.6";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
