@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.6](https://github.com/mittwald/flow/compare/1.4.0-next.5...1.4.0-next.6) (2026-09-28)
+
+### Bug Fixes
+
+* **remote-react-components:** prune stale versions from the cross-version cache ([#3308](https://github.com/mittwald/flow/issues/3308)) ([30e0b46](https://github.com/mittwald/flow/commit/30e0b46e89e6354392add302a4d8316bc080dd09))
+
 ## [1.4.0-next.5](https://github.com/mittwald/flow/compare/1.4.0-next.4...1.4.0-next.5) (2026-09-28)
 
 ## [1.3.5](https://github.com/mittwald/flow/compare/1.4.0-next.3...1.3.5) (2026-09-28)
