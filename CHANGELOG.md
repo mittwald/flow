@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/mittwald/flow/compare/1.3.1...1.3.2) (2026-09-28)
+
+### Bug Fixes
+
+* **docs:** note the transpile cache only compares the code ([4346c6e](https://github.com/mittwald/flow/commit/4346c6e8c523af2487a80f32ccd99cd4901f8bf2))
+* **docs:** stop react-live from remounting a preview with an open editor ([fcb88c5](https://github.com/mittwald/flow/commit/fcb88c535a4d9b29fe0f7dd942720be78956a207))
+
+### Documentation
+
+* keep react-live from remounting the example preview ([2352221](https://github.com/mittwald/flow/commit/235222113dba81b217a26cee2a3f20b97bfdfb43))
+
 ## [1.3.1](https://github.com/mittwald/flow/compare/1.3.0...1.3.1) (2026-09-28)
 
 ### Bug Fixes
