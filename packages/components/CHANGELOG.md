@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/mittwald/flow/compare/1.2.28...1.3.0) (2026-09-28)
+
+### Features
+
+* **CodeBlock:** animate showing more and less ([20485fc](https://github.com/mittwald/flow/commit/20485fcd233197fc3da54f2d784b4c9197e84dda))
+
+### Bug Fixes
+
+* **Accordion:** ease the expand animation out ([40ff5de](https://github.com/mittwald/flow/commit/40ff5de2ef51c8a1873d1edfa201d6abbaf4d344))
+* **CodeBlock:** fold the line numbers with the code ([bad890a](https://github.com/mittwald/flow/commit/bad890ac4828513c51164baf18f71a2f6cd5d2dc))
+* **CodeBlock:** let the collapsed code run under the show-more button ([87777ab](https://github.com/mittwald/flow/commit/87777ab4ff86e227241bea3ef0aa3b10e8cae310))
+* **CodeBlock:** move the show-more button closer to the bottom edge ([0bc3bda](https://github.com/mittwald/flow/commit/0bc3bda22dac4c58b7e5ad673442b9998a878c8f))
+
+### Code Refactoring
+
+* **CodeBlock:** release the measured height after collapsing too ([6771d8e](https://github.com/mittwald/flow/commit/6771d8ec4d84f9f5fc1893bb844c2f67562861d0))
+
 ## [1.2.28](https://github.com/mittwald/flow/compare/1.2.27...1.2.28) (2026-09-25)
 
 ### Code Refactoring
