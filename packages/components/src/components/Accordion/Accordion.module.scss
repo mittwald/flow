@@ -1,3 +1,4 @@
+@use "@/styles/mixins/expandTransition";
 @use "@/styles/mixins/focus";
 
 .accordion {
@@ -38,20 +39,23 @@
     display: grid;
     grid-template-rows: 0fr;
     transition-property: grid-template-rows, visibility;
-    transition-duration: var(--transition--duration--default);
     visibility: hidden;
+
+    @include expandTransition.expandTransition;
   }
 
   .contentInner {
     overflow: hidden;
     padding-inline: var(--accordion--padding-x);
     transition-property: padding;
-    transition-duration: var(--transition--duration--default);
+
+    @include expandTransition.expandTransition;
   }
 
   .chevron {
     transition-property: transform;
-    transition-duration: var(--transition--duration--fast);
+
+    @include expandTransition.expandTransition;
   }
 
   &.outline {
