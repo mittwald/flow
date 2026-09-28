@@ -91,6 +91,15 @@
       display: contents;
     }
 
+    :global(.flow--heading--heading-text-spacer) {
+      display: none;
+    }
+
+    :global(.flow--heading--heading-content)
+      :global(.flow--heading--heading-content-item):not(:last-child) {
+      margin-inline-end: 0;
+    }
+
     .headerTitle {
       min-width: 0;
     }
