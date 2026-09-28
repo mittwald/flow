@@ -137,17 +137,18 @@ export class MdxFileFactory {
   }
 
   private static getExamples(filename: string): MdxFileExamples {
-    const exampleExt = ".tsx";
+    const dir = path.dirname(filename);
 
-    const exampleFiles = jetpack.find(path.dirname(filename), {
-      matching: `examples/*${exampleExt}`,
-    });
+    // `.tsx` examples key by bare basename (`foo`) — the name passed to
+    // `<LiveCodeEditor example="foo" />`. Co-located App Shell frame styles
+    // (`foo.module.css`) key by their full basename so both files of a
+    // multi-file example are available as raw source to `<AppShell>`.
+    const tsxFiles = jetpack.find(dir, { matching: "examples/*.tsx" });
+    const cssFiles = jetpack.find(dir, { matching: "examples/*.module.css" });
 
-    const getExampleName = (exampleFile: string) =>
-      path.basename(exampleFile, exampleExt);
-
-    return Object.fromEntries(
-      exampleFiles.map((f) => [getExampleName(f), jetpack.read(f) ?? ""]),
-    );
+    return Object.fromEntries([
+      ...tsxFiles.map((f) => [path.basename(f, ".tsx"), jetpack.read(f) ?? ""]),
+      ...cssFiles.map((f) => [path.basename(f), jetpack.read(f) ?? ""]),
+    ]);
   }
 }

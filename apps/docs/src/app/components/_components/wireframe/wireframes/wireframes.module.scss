@@ -257,7 +257,7 @@
   height: 58%;
 }
 
-.chartBars span {
+.chartBars .chartBar {
   display: block;
   background: var(--neutral--color--500);
   border-radius: var(--corner-radius--m) var(--corner-radius--m) 0 0;

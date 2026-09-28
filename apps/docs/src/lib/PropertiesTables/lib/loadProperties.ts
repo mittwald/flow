@@ -1,39 +1,9 @@
-import componentIndexFile from "@mittwald/flow-react-components/component-index";
+import { componentIndexEntry } from "@/lib/componentIndex";
 import type { Properties, Property } from "../types";
 import { splitUnion, unquote } from "./unionType";
 
 const eventRegex = /^on[A-Z]+.*/;
 const a11yRegex = /^aria-.+/;
-
-interface ComponentIndexFile {
-  components: Record<
-    string,
-    {
-      props: Record<
-        string,
-        {
-          type: string;
-          required?: true;
-          default?: string;
-          description?: string;
-          deprecated?: true;
-        }
-      >;
-    }
-  >;
-}
-
-const componentIndex = (componentIndexFile as unknown as ComponentIndexFile)
-  .components;
-
-const byLocalName = new Map<string, ComponentIndexFile["components"][string]>();
-for (const [key, entry] of Object.entries(componentIndex)) {
-  const separator = key.indexOf("#");
-  const localName = key.slice(separator + 1).toLowerCase();
-  if (separator === -1 || !byLocalName.has(localName)) {
-    byLocalName.set(localName, entry);
-  }
-}
 
 /** `@deprecatedValues accent, plain` — but not the prop-level `@deprecated`. */
 const deprecatedValuesRegex = /^[ \t]*@deprecatedValues[ \t]+(.*)$/m;
@@ -70,7 +40,7 @@ const normalizeDefaultValue = (value: unknown): string | null => {
 };
 
 export default function loadProperties(name: string): Properties | null {
-  const component = byLocalName.get(name.toLowerCase().replaceAll(" ", ""));
+  const component = componentIndexEntry(name);
 
   if (!component) {
     return null;

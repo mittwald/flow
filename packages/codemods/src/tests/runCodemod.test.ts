@@ -100,6 +100,37 @@ describe("runCodemod", () => {
     expect(dependencySource).not.toContain("Combine");
   });
 
+  // #3117: on an empty file both `root.toSource()` and `fileInfo.source` are
+  // `""`, and jscodeshift's worker tests the result for truthiness — so the
+  // file lands in `skip`, which the callers read as "the transform bailed".
+  test("an empty file is counted as empty, not as a decline", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "flow-codemods-empty-"));
+    writeFileSync(join(dir, "a.tsx"), usesAlign);
+    writeFileSync(join(dir, "b.tsx"), `export const nothing = 1;\n`);
+    writeFileSync(join(dir, "empty.ts"), "");
+
+    const result = await runCodemod({ id: "align-to-combine", path: dir });
+
+    expect(result).toMatchObject({
+      changed: 1,
+      unmodified: 1,
+      skipped: 0,
+      empty: 1,
+      errors: 0,
+    });
+  });
+
+  test("an empty file under an ignored directory is not counted", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "flow-codemods-empty-ignored-"));
+    mkdirSync(join(dir, "node_modules", "dep"), { recursive: true });
+    writeFileSync(join(dir, "a.tsx"), usesAlign);
+    writeFileSync(join(dir, "node_modules", "dep", "empty.ts"), "");
+
+    const result = await runCodemod({ id: "align-to-combine", path: dir });
+
+    expect(result).toMatchObject({ changed: 1, skipped: 0, empty: 0 });
+  });
+
   test("an unknown id fails with a message naming it", async () => {
     const dir = project(usesAlign);
     await expect(

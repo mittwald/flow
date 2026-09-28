@@ -1,14 +1,14 @@
 @use "@/styles/mixins/focus";
 
 .headerNavigation {
-  ul {
+  .list {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     gap: var(--header-navigation--spacing);
   }
 
-  li {
+  .item {
     list-style: none;
   }
 

@@ -40,7 +40,13 @@ async function generateImportMappings(pattern: string, outputPath: string) {
     ),
   );
 
-  const imports = mapImports(fileContents.flatMap(extractRawImports));
+  const imports = mapImports(
+    fileContents
+      .flatMap(extractRawImports)
+      // Relative imports (e.g. an App Shell example's `./x.module.css`) are not
+      // resolvable in the react-live scope and would emit broken static imports.
+      .filter((i) => !String(i.source).startsWith(".")),
+  );
 
   const staticImports = Object.entries(imports).map(([name, source], index) => {
     const namedExport = getNamedExport(name);

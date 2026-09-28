@@ -42,6 +42,7 @@
   .fill {
     height: 100%;
     display: flex;
+    animation: progress-bar-fill var(--progress-bar--transition-duration) ease;
   }
 
   .legend {
@@ -83,4 +84,11 @@
   @include status(success);
   @include status(danger);
   @include status(warning);
+}
+
+/* The implicit "to" keyframe picks up the fill's inline width. */
+@keyframes progress-bar-fill {
+  from {
+    width: 0%;
+  }
 }

@@ -5,6 +5,7 @@ import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
 import { NonModalPopoverContent } from "../NonModalPopoverContent";
+import { PopoverTip } from "../PopoverTip";
 import { popoverViewportPadding } from "../../viewportPadding";
 import { popoverWidthStyle } from "../../widthStyle";
 
@@ -99,9 +100,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
-          <svg width={16} height={16} viewBox="0 0 16 16">
-            <path d="M0 0 L8 8 L16 0" />
-          </svg>
+          <PopoverTip />
         </Aria.OverlayArrow>
       )}
       <ContentComponent className={styles.content}>{children}</ContentComponent>

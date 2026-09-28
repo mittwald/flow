@@ -1,5 +1,5 @@
 import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   LiveEditor,
   LiveError,
@@ -22,7 +22,6 @@ export interface LiveCodeEditorProps {
   editorDisabled?: boolean;
   zoom?: number;
   bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
-  mobile?: boolean;
   row?: boolean;
   /**
    * Whether the preview gets a handle to drag its width. Use it for examples
@@ -61,7 +60,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorDisabled,
     zoom = 1,
     bgColor,
-    mobile,
     row,
     resizable,
   } = props;
@@ -184,15 +182,24 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     throw new Error("Expected code prop to be of type 'string'.");
   }
 
-  const scope = extractEditorScope(code);
+  /*
+   * react-live transpiles synchronously during the first render, so the client
+   * renders what the server did and React hydrates the preview. Its post-mount
+   * effect re-transpiles whenever one of its dependencies changes, and a fresh
+   * transpile is a new component function — React then unmounts the preview
+   * and mounts a new one, restarting anything that animates on mount. `scope`
+   * and `transformCode` are dependencies, so a new object or function here
+   * replaces the whole example on the next render of this component.
+   */
+  const scope = useMemo(() => extractEditorScope(code), [code]);
 
-  const transformCode = (code: string) => {
+  const transformCode = useCallback((code: string) => {
     try {
       return extractDefaultExport(code);
     } catch (error) {
       return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
     }
-  };
+  }, []);
 
   // The scope above already carries the imports, so the editor shows only the
   // example itself.
@@ -224,9 +231,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
+  /*
+   * An inline zoom would beat the stylesheet, so the default is left out
+   * entirely — that is what lets the mobile breakpoint scale the preview.
+   */
+  const zoomStyle = zoom === 1 ? undefined : { zoom };
+
   const frameStyle: CSSProperties = containerWidth
-    ? { zoom, boxSizing: "content-box", width: containerWidth }
-    : { zoom };
+    ? { ...zoomStyle, boxSizing: "content-box", width: containerWidth }
+    : { ...zoomStyle };
 
   const preview = (
     <LivePreview
@@ -235,23 +248,20 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         row && styles.row,
         resizable && styles.framedPreview,
       )}
-      style={resizable ? undefined : { zoom }}
+      style={resizable ? undefined : zoomStyle}
     />
   );
 
   return (
     <LiveProvider
       code={codeToDisplay}
-      scope={{
-        ...scope,
-      }}
+      scope={scope}
       transformCode={transformCode}
     >
       <div
         className={clsx(
           styles.liveCodeEditor,
           bgColor && styles[`${bgColor}Background`],
-          mobile && styles.mobile,
           className,
         )}
       >

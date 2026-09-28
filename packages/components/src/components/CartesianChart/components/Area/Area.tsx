@@ -10,6 +10,7 @@ import {
   isDataKeyWithLabel,
 } from "@/components/CartesianChart/types";
 import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedStackId";
+import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
 import { useDesignTokens } from "@/lib/theming";
 
 type AreaBaseProps = Pick<
@@ -52,6 +53,7 @@ export const Area: FC<AreaProps> = (props) => {
 
   const tokens = useDesignTokens();
   const stackId = useScopedStackId(stackIdFromProps);
+  const animation = useChartAnimation();
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`
@@ -67,6 +69,7 @@ export const Area: FC<AreaProps> = (props) => {
       fill={color}
       stroke={tokens.area["border-color"].value}
       strokeWidth={tokens.area["border-width"].value}
+      {...animation}
     />
   );
 };
