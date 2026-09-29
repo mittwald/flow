@@ -144,10 +144,11 @@ top of the shimmer.
   (`de-DE` and `en-US`). There is no `aria-busy`: `SkeletonMode` renders no
   layout element, so flex and grid layouts don't break, and `aria-busy` would
   need one.
-- **Reduced motion:** no shimmer under `prefers-reduced-motion: reduce`, only
-  the background. `Skeleton` and `SkeletonText` gain this too; they lack it
-  today.
-- **`forced-colors`:** bars and surfaces in `CanvasText`/`Canvas`.
+- **Reduced motion:** `globals.scss` already stops every animation under
+  `prefers-reduced-motion: reduce`. The shimmer ends with the highlight outside
+  the surface, so only the background stays.
+- **`forced-colors`:** bars and surfaces in the system color `GrayText`, without
+  shimmer.
 - **Focus on toggle:** if focus sits in a component while `isEnabled` switches
   to `true`, the focus falls back to `body`. Accepted and documented. Switching
   back to the real UI has no focus effect.
@@ -169,27 +170,34 @@ top of the shimmer.
 
 ## Styling and code layout
 
-- **Component tokens** in `packages/design-tokens/src/content/skeleton.yml`:
-  background and shimmer color, with today's values (`rgba(183, 201, 219, 0.5)`
-  and the white gradient). `Skeleton` and `SkeletonText` move onto them with no
-  visual change. No base tokens are touched.
-- **`packages/components/src/lib/skeleton/`** holds:
-  - the context,
-  - `useSkeletonMode()`,
-  - the reset provider for surfaces,
-  - the SCSS mixins `skeleton-surface` (base rule) and `skeleton-text` (text
-    rule).
-
-  Each component only includes the matching mixin under its skeleton class, so
-  the skeleton logic lives in one place.
-
-- `packages/components/src/components/SkeletonMode/` holds the component, with
-  `view.ts` generated.
+- **No component tokens.** The skeleton color `rgba(183, 201, 219, 0.5)` is in
+  no palette, and no component token carries a raw color. The value lives once
+  in `src/styles/mixins/skeleton.scss`. A token follows once UX picks a palette
+  color.
+- **`src/styles/mixins/skeleton.scss`** holds the mixins `surface` (base rule),
+  `text` (text rule) and `keyframes`. `Skeleton` and `SkeletonText` use
+  `surface` with no visual change. Components set `--skeleton-radius` to keep
+  their shape.
+- **`src/components/SkeletonMode/`** holds:
+  - the component, with `view.ts` generated;
+  - `skeletonModeContext.tsx`: the context, `useSkeletonMode()` and
+    `SkeletonModeReset` for surfaces;
+  - `components/SkeletonTextContent`: the text rule for a text component's
+    children;
+  - `components/SkeletonRawText`: the text rule for raw text in containers
+    (`Content`), locally strings and numbers, remotely `RemoteTextRenderer`
+    elements;
+  - `lib/`: `hasContent`, `isTextChild`.
+- A text component renders `inert` on its root and wraps its children in
+  `SkeletonTextContent`. `Link` renders a `span` instead of its anchor in the
+  mode, because react-aria's `Link` drops `inert`, and a skeleton needs no
+  anchor.
+- `SkeletonMode` carries `@flowStatus beta, new` until PR 5 completes the
+  coverage.
 
 ## Testing
 
-- **Unit** (`src/lib/skeleton`): nesting, `isEnabled={false}`, reset below
-  surfaces.
+- **Unit** (`SkeletonMode/lib`): `hasContent` for local and remote text.
 - **Browser** (`SkeletonMode.browser.test.tsx`):
   - `inert` sits on leaves, not on containers.
   - A nested `isEnabled={false}` subtree stays focusable and operable.
@@ -198,10 +206,11 @@ top of the shimmer.
     engine.
   - A `Text` inside a `Button` draws no bar.
 - **Visual**
-  (`remote-react-components/src/tests/visual/SkeletonMode.browser.test.tsx`):
-  one scenario per group. Each runs `Local` and `Remote`, WebKit in light and
-  Firefox in dark theme. One extra scenario covers `forced-colors`. Every PR
-  extends the file for its group and gets the `run-visual-tests` label.
+  (`remote-react-components/src/tests/visual/SkeletonMode<Group>.browser.test.tsx`):
+  one file per group, so the PRs don't conflict. Each runs `Local` and `Remote`,
+  WebKit in light and Firefox in dark theme. Every PR adds the file for its
+  group and gets the `run-visual-tests` label. `forced-colors` has no test:
+  vitest's browser mode cannot emulate it.
 - **Cross-version:** PR 1 runs with `run-cross-version-tests`.
 
 ## Docs and Definition of Done
@@ -221,9 +230,8 @@ top of the shimmer.
 One spec, five PRs, each with its own tests, visual scenarios and docs:
 
 1. **Foundation + text:**
-   - `SkeletonMode`, the context and hook, the mixins and the tokens.
-   - `Skeleton`/`SkeletonText` moved onto the tokens, plus reduced motion and
-     `forced-colors`.
+   - `SkeletonMode`, the context and hook, and the mixins.
+   - `Skeleton`/`SkeletonText` moved onto the mixin, plus `forced-colors`.
    - The text group, the docs page, the story, the demo, and the cross-version
      check.
 2. **Visual + interactive**, including the context reset.

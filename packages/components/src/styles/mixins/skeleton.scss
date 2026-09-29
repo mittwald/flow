@@ -1,0 +1,88 @@
+/*
+  Shared look of every skeleton placeholder: `Skeleton`, `SkeletonText` and
+  every component rendered inside an enabled `SkeletonMode`.
+ */
+
+$background-color: rgba(183, 201, 219, 0.5);
+$shimmer-color: rgba(255, 255, 255, 0.4);
+
+$shimmer-gradient: linear-gradient(
+  90deg,
+  rgba(255, 255, 255, 0) 0,
+  $shimmer-color 60%,
+  rgba(255, 255, 255, 0)
+);
+
+/* Block surface. The shimmer moves over it in an `::after`. Needs
+   `@include keyframes` at the top level of the same module. */
+@mixin surface {
+  position: relative;
+  overflow: hidden;
+  background-color: $background-color;
+  border-radius: var(--skeleton-radius, var(--corner-radius--m));
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: $shimmer-gradient;
+    animation: skeleton-surface-shimmer 3s infinite;
+    content: "";
+  }
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background-color: GrayText;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+/* Inline bars over the real text, one per line in the width of that line. The
+   content keeps its layout and becomes invisible. Needs `@include keyframes`
+   at the top level of the same module. */
+@mixin text {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+  border-radius: var(--skeleton-radius, var(--corner-radius--m));
+  box-decoration-break: clone;
+  background-color: $background-color;
+  background-image: $shimmer-gradient;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation: skeleton-text-shimmer 3s infinite;
+
+  /* Icons, images and other elements inside the text */
+  * {
+    visibility: hidden;
+  }
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background-color: GrayText;
+    background-image: none;
+  }
+}
+
+@mixin keyframes {
+  @keyframes skeleton-surface-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Both ends keep the highlight outside the bar, so the end state of a
+     reduced-motion run (see `globals.scss`) shows no highlight. */
+  @keyframes skeleton-text-shimmer {
+    0% {
+      background-position: 150% 0;
+    }
+
+    100% {
+      background-position: -50% 0;
+    }
+  }
+}

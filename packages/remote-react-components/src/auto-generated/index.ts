@@ -110,6 +110,7 @@ export * from "./SegmentedControl";
 export * from "./Select";
 export * from "./Separator";
 export * from "./Skeleton";
+export * from "./SkeletonMode";
 export * from "./SkeletonText";
 export * from "./Slider";
 export * from "./Switch";
