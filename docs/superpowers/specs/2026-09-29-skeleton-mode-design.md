@@ -45,7 +45,7 @@ Mantine only wrap single elements. Details that changed this design:
 - **S2 resets the skeleton context below a skeleton surface** (Button, Badge),
   so inner text draws no second bar. Adopted.
 - **S2 forces `isDisabled` on form fields** instead of shimmering them. Not
-  adopted, see [Open question](#open-question).
+  adopted, see [Decision: form fields shimmer](#decision-form-fields-shimmer).
 - **Polaris announces loading once** with `role="status"` and an i18n label. No
   other kit announces anything. Adopted.
 - **Carbon handles `forced-colors`.** Adopted.
@@ -227,14 +227,16 @@ One spec, five PRs, each with its own tests, visual scenarios and docs:
    - The text group, the docs page, the story, the demo, and the cross-version
      check.
 2. **Visual + interactive**, including the context reset.
-3. **Form fields**, after the UX decision below.
+3. **Form fields.**
 4. **Navigation + status.**
 5. **Content, charts/editors, overlays, list/table items.**
 
-## Open question
+## Decision: form fields shimmer
 
-**Form fields: shimmer or disabled?** S2 forces `isDisabled` on fields in
-skeleton mode. Fields then stay visible and assistive technology announces them
-as dimmed. This spec shimmers them and adds `inert`. That is consistent with
-every other group and cleaner for assistive technology, but it looks different
-from a disabled form. Settle this with UX before PR 3.
+S2 forces `isDisabled` on fields in skeleton mode. Fields then stay visible and
+assistive technology announces them as dimmed. Flow shimmers them and adds
+`inert` instead:
+
+- It matches every other group.
+- It keeps loading placeholders out of the accessibility tree.
+- A disabled form would claim a state the data doesn't have yet.
