@@ -1,7 +1,11 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-test.each(testEnvironments)(
+/* The first published version with SkeletonMode — 1.4.0-next.9 is out without
+   it. Pin to the real release once it is published. */
+const skeletonModeSince = "1.4.0-next.10";
+
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode input fields (%s)",
   async ({
     testScreenshot,
@@ -101,7 +105,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode choice fields (%s)",
   async ({
     testScreenshot,
