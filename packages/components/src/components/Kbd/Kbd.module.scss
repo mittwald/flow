@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .kbd {
   font-family: Inter, sans-serif;
   font-size: var(--font-size-text--s);
@@ -40,4 +42,19 @@
       color: var(--kbd--content-color-plain--disabled);
     }
   }
+
+  /* SkeletonMode — after the variants, and as specific as the disabled ones,
+     so the surface wins over their colors */
+
+  &.skeleton,
+  &.skeleton.disabled {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--kbd--corner-radius);
+
+    /* An inline box clips no overflow, so the shimmer would run past it. */
+    display: inline-block;
+  }
 }
+
+@include skeleton.keyframes;

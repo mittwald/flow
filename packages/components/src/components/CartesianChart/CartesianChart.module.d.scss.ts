@@ -4,5 +4,6 @@ declare const classNames: {
   readonly emptyView: "emptyView";
   readonly "recharts-cartesian-grid": "recharts-cartesian-grid";
   readonly "recharts-tooltip-wrapper": "recharts-tooltip-wrapper";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

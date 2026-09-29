@@ -10,6 +10,7 @@ declare const classNames: {
   readonly success: "success";
   readonly danger: "danger";
   readonly warning: "warning";
+  readonly skeleton: "skeleton";
   readonly donutChartContainer: "donutChartContainer";
   readonly bottom: "bottom";
   readonly top: "top";

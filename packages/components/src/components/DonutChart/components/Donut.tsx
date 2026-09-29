@@ -10,11 +10,17 @@ interface Props extends Pick<
   value?: number;
 }
 
+const getFillWidth = (size: DonutChartProps["size"]) => (size === "m" ? 8 : 12);
+
+/** The width and height of the rendered donut in px. */
+export const getDonutSize = (size: DonutChartProps["size"]) =>
+  getFillWidth(size) * 16;
+
 export const Donut: FC<Props> = (props) => {
   const { value = 0, segments, size, maxValue: maxValueFromProps } = props;
 
   const strokeWidth = 0.5;
-  const fillWidth = size === "m" ? 8 : 12;
+  const fillWidth = getFillWidth(size);
   const center = fillWidth * 4;
   const radius = center - fillWidth / 2;
   const maxValue = maxValueFromProps ?? 100;

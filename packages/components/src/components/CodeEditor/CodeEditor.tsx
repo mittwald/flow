@@ -20,6 +20,7 @@ import {
 } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface CodeEditorProps
   extends
@@ -163,44 +164,73 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
 
   useMakeFocusable(localRef);
 
+  const isSkeleton = useSkeletonMode();
+
+  /* No CodeMirror: one surface, as high as the code in the editor's line
+     height. The children still render, so a label or a field description
+     tunnels out and follows its own skeleton rule. */
+  const skeleton = (
+    <div
+      className={clsx(
+        styles.codeMirror,
+        isReadOnly && styles.readonly,
+        styles.skeleton,
+      )}
+    >
+      <div
+        className={styles.skeletonLines}
+        style={{ height: height ?? minHeight }}
+      >
+        {(value ?? "").split("\n").map((line, index) => (
+          <div key={index}>{line || " "}</div>
+        ))}
+      </div>
+      {children}
+    </div>
+  );
+
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} inert={isSkeleton || undefined}>
       <PropsContextProvider props={propsContext}>
         <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
-          <CodeMirror
-            {...rest}
-            value={value}
-            basicSetup={{
-              highlightActiveLine: showActiveLineMarker,
-              highlightActiveLineGutter: showActiveLineMarker,
-              autocompletion: false,
-              lineNumbers: false,
-              foldGutter: false,
-              highlightSelectionMatches: false,
-            }}
-            theme={defaultLightTheme}
-            data-invalid={isInvalid || undefined}
-            readOnly={isReadOnly}
-            className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
-            ref={(codeMirrorRef) => {
-              if (codeMirrorRef?.editor) {
-                localRef.current = codeMirrorRef.editor;
-              }
-            }}
-            extensions={[...enabledExtensions, contentAttributes]}
-            height={height ?? minHeight}
-          >
-            {copyable && (
-              <CopyButton
-                className={styles.copyButton}
-                size="s"
-                variant="soft"
-                text={value}
-              />
-            )}
-            {children}
-          </CodeMirror>
+          {isSkeleton ? (
+            skeleton
+          ) : (
+            <CodeMirror
+              {...rest}
+              value={value}
+              basicSetup={{
+                highlightActiveLine: showActiveLineMarker,
+                highlightActiveLineGutter: showActiveLineMarker,
+                autocompletion: false,
+                lineNumbers: false,
+                foldGutter: false,
+                highlightSelectionMatches: false,
+              }}
+              theme={defaultLightTheme}
+              data-invalid={isInvalid || undefined}
+              readOnly={isReadOnly}
+              className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
+              ref={(codeMirrorRef) => {
+                if (codeMirrorRef?.editor) {
+                  localRef.current = codeMirrorRef.editor;
+                }
+              }}
+              extensions={[...enabledExtensions, contentAttributes]}
+              height={height ?? minHeight}
+            >
+              {copyable && (
+                <CopyButton
+                  className={styles.copyButton}
+                  size="s"
+                  variant="soft"
+                  text={value}
+                />
+              )}
+              {children}
+            </CodeMirror>
+          )}
         </FieldErrorCaptureContext>
         <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
         <FieldErrorView />

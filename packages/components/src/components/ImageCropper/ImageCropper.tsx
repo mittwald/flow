@@ -19,6 +19,10 @@ import { useDebouncedCallback } from "use-debounce";
 import { IllustratedMessage } from "@/components/IllustratedMessage";
 import { IconDanger } from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 /** Why an {@link ImageCropper} cannot work with the given image. */
 export interface ImageCropperError {
@@ -84,7 +88,13 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const errorReported = useRef(false);
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ImageCropper");
-  const rootClassName = clsx(styles.imageCropper, className);
+  const isSkeleton = useSkeletonMode();
+
+  const rootClassName = clsx(
+    styles.imageCropper,
+    isSkeleton && styles.skeleton,
+    className,
+  );
 
   const reportError = (
     reason: ImageCropperError["reason"],
@@ -145,49 +155,59 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   const errorElement = error ? (errorView ?? defaultErrorView) : undefined;
 
+  /* The skeleton is one surface in the size of cropper and slider. It mounts
+     no cropper, so the image is not loaded. */
+  const cropper = isSkeleton ? null : errorElement ? (
+    <div className={styles.errorViewContainer}>{errorElement}</div>
+  ) : (
+    <Cropper
+      style={{
+        containerStyle: {
+          borderRadius: "calc(var(--image-cropper--corner-radius) - 1px)",
+        },
+      }}
+      aspect={aspectRatio}
+      crop={crop}
+      image={imageSrc}
+      onCropChange={setCrop}
+      zoom={zoom}
+      onZoomChange={setZoom}
+      mediaProps={{
+        onError: () =>
+          reportError("load", `Failed to load image "${imageSrc}"`),
+      }}
+      onMediaLoaded={() => setMediaLoaded(true)}
+      onCropComplete={(_, croppedAreaPixels) => {
+        if (mediaLoaded) {
+          debouncedCropComplete(croppedAreaPixels);
+        }
+      }}
+      {...rest}
+    />
+  );
+
   return (
-    <div className={rootClassName} style={{ width }}>
-      <div className={styles.cropperContainer} style={{ height }}>
-        {errorElement ? (
-          <div className={styles.errorViewContainer}>{errorElement}</div>
-        ) : (
-          <Cropper
-            style={{
-              containerStyle: {
-                borderRadius: "calc(var(--image-cropper--corner-radius) - 1px)",
-              },
-            }}
-            aspect={aspectRatio}
-            crop={crop}
-            image={imageSrc}
-            onCropChange={setCrop}
-            zoom={zoom}
-            onZoomChange={setZoom}
-            mediaProps={{
-              onError: () =>
-                reportError("load", `Failed to load image "${imageSrc}"`),
-            }}
-            onMediaLoaded={() => setMediaLoaded(true)}
-            onCropComplete={(_, croppedAreaPixels) => {
-              if (mediaLoaded) {
-                debouncedCropComplete(croppedAreaPixels);
-              }
-            }}
-            {...rest}
+    <div
+      className={rootClassName}
+      style={{ width }}
+      inert={isSkeleton || undefined}
+    >
+      <SkeletonModeReset>
+        <div className={styles.cropperContainer} style={{ height }}>
+          {cropper}
+        </div>
+        {!errorElement && (
+          <Slider
+            minValue={1}
+            maxValue={3}
+            step={0.01}
+            value={zoom}
+            sliderOnly
+            onChange={(zoom) => setZoom(zoom as number)}
+            aria-label={stringFormatter.format("zoom")}
           />
         )}
-      </div>
-      {!errorElement && (
-        <Slider
-          minValue={1}
-          maxValue={3}
-          step={0.01}
-          value={zoom}
-          sliderOnly
-          onChange={(zoom) => setZoom(zoom as number)}
-          aria-label={stringFormatter.format("zoom")}
-        />
-      )}
+      </SkeletonModeReset>
     </div>
   );
 };

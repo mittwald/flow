@@ -13,6 +13,10 @@ import { CodeEditor, type CodeEditorProps } from "@/components/CodeEditor";
 import { Button } from "@/components/Button";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import locales from "./locales/*.locale.json";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface CodeBlockProps
   extends
@@ -51,19 +55,29 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const editorRef = useRef<HTMLElement>(null);
 
   const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
+  const isSkeleton = useSkeletonMode();
 
-  const rootClassName = clsx(styles.codeBlock, className);
+  const rootClassName = clsx(
+    styles.codeBlock,
+    isSkeleton && styles.skeleton,
+    className,
+  );
 
   const id = useId();
 
   if (!code) {
     return (
-      <div className={clsx(rootClassName, styles.withChildren)}>
+      <div
+        className={clsx(rootClassName, styles.withChildren)}
+        inert={isSkeleton || undefined}
+      >
         {/* Deliberately class-less: a `flow--` class would make the global
             reset's `font: inherit` apply and replace the UA monospace
             metrics. See CodeBlock.module.scss. */}
         <pre>
-          <code>{children}</code>
+          <code>
+            <SkeletonModeReset>{children}</SkeletonModeReset>
+          </code>
         </pre>
       </div>
     );
@@ -115,52 +129,57 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
           setExpandedHeight(undefined);
         }
       }}
+      inert={isSkeleton || undefined}
     >
-      <CodeEditor
-        {...rest}
-        value={code}
-        editable={false}
-        copyable={copyable}
-        showLineNumbers={showLineNumbers}
-        showLinterMarkers={false}
-        showCodeFolding={false}
-        showActiveLineMarker={false}
-        isReadOnly
-        onCreateEditor={(view) => {
-          editorRef.current = view.dom;
+      {/* The code block is one skeleton surface in the size of its code, so
+          the editor inside renders for real, but invisibly. */}
+      <SkeletonModeReset>
+        <CodeEditor
+          {...rest}
+          value={code}
+          editable={false}
+          copyable={copyable}
+          showLineNumbers={showLineNumbers}
+          showLinterMarkers={false}
+          showCodeFolding={false}
+          showActiveLineMarker={false}
+          isReadOnly
+          onCreateEditor={(view) => {
+            editorRef.current = view.dom;
 
-          if (!truncateLines) {
-            return;
-          }
+            if (!truncateLines) {
+              return;
+            }
 
-          const lineHeight = 20;
-          const padding = 12;
+            const lineHeight = 20;
+            const padding = 12;
 
-          const visibleLines =
-            typeof truncateLines === "number" ? truncateLines : 8;
+            const visibleLines =
+              typeof truncateLines === "number" ? truncateLines : 8;
 
-          const totalLines = view.state.doc.lines;
+            const totalLines = view.state.doc.lines;
 
-          if (totalLines > visibleLines)
-            setMaxHeight(lineHeight * visibleLines + padding);
-        }}
-        id={id}
-      >
-        {truncateLines && maxHeight && (
-          <div className={clsx(styles.buttonContainer)}>
-            <Button
-              variant="plain"
-              color="secondary"
-              size="s"
-              onPress={toggleFolded}
-              aria-expanded={!folded}
-              aria-controls={id}
-            >
-              {stringFormatter.format(folded ? "showMore" : "showLess")}
-            </Button>
-          </div>
-        )}
-      </CodeEditor>
+            if (totalLines > visibleLines)
+              setMaxHeight(lineHeight * visibleLines + padding);
+          }}
+          id={id}
+        >
+          {truncateLines && maxHeight && (
+            <div className={clsx(styles.buttonContainer)}>
+              <Button
+                variant="plain"
+                color="secondary"
+                size="s"
+                onPress={toggleFolded}
+                aria-expanded={!folded}
+                aria-controls={id}
+              >
+                {stringFormatter.format(folded ? "showMore" : "showLess")}
+              </Button>
+            </div>
+          )}
+        </CodeEditor>
+      </SkeletonModeReset>
     </div>
   );
 };

@@ -29,6 +29,7 @@ import { TypedChartLegend } from "@/components/CartesianChart/components/ChartLe
 import { TypedChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";
 import { TypedLine } from "@/components/CartesianChart/components/Line";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 /** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
@@ -116,6 +117,24 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     () => ({ layout, stackIdPrefix: `${chartId}-` }),
     [layout, chartId],
   );
+
+  const isSkeleton = useSkeletonMode();
+
+  /* No recharts and no svg: one surface in the size the chart would take. */
+  if (isSkeleton) {
+    return (
+      <div
+        className={styles.skeleton}
+        style={{
+          height,
+          aspectRatio: height ? undefined : 3,
+          flex: flexGrow ? 1 : undefined,
+        }}
+        aria-hidden
+        inert
+      />
+    );
+  }
 
   return (
     <CartesianChartContextProvider value={contextValue}>
