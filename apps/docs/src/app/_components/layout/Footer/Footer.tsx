@@ -14,8 +14,7 @@ const Footer: FC = () => {
         gap="xl"
         justify="space-between"
         wrap="wrap-reverse"
-        paddingTop="xl"
-        paddingBottom="xl"
+        paddingBlock="xl"
         className={styles.footerContent}
       >
         <Flex direction="column" grow gap="xl">
