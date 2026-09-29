@@ -120,7 +120,13 @@ const contracts = [
 ];
 
 export default () => (
-  <Flex direction="column" gap="l" className={styles.app}>
+  <Flex
+    direction="column"
+    gap="l"
+    paddingTop="l"
+    paddingBottom="l"
+    className={styles.app}
+  >
     <Flex
       elementType="header"
       align="center"

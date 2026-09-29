@@ -64,7 +64,13 @@ const connections = {
 };
 
 export default () => (
-  <Flex direction="column" gap="l" className={styles.app}>
+  <Flex
+    direction="column"
+    gap="l"
+    paddingTop="l"
+    paddingBottom="l"
+    className={styles.app}
+  >
     <Topbar />
     <Flex gap="l" align="stretch" className={styles.body}>
       <ProjectSidebar />

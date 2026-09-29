@@ -1,7 +1,6 @@
 .page {
   /* Container-relative here; use 100dvh in a real full-page app. */
   min-height: 100%;
-  padding-block: var(--size-px--xl);
   padding-inline: var(--size-px--xl);
   background: var(--color--background-gradient);
 }

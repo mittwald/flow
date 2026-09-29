@@ -15,6 +15,8 @@ export default () => (
   <Flex
     justify="center"
     align="center"
+    paddingTop="l"
+    paddingBottom="l"
     className={styles.page}
   >
     <Flex

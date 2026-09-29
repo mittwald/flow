@@ -178,6 +178,8 @@ export default () => {
       <Flex
         direction="column"
         gap="l"
+        paddingTop="l"
+        paddingBottom="l"
         className={styles.app}
       >
         <ColumnLayout
