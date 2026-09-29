@@ -19,8 +19,8 @@ instead, with this package's version: all Flow packages share one version.
 What follows is only what is different because your UI renders across a process
 boundary.
 
-**Start from a template here too** — see that guide's "Start from a template".
-Two things differ in an extension:
+**Building a new app, page or flow: pick the matching template here too** — see
+that guide's "Start from a template". Two things differ in an extension:
 
 - Skip the app shells unless your extension renders a whole app of its own. When
   it renders into an mStudio page, mStudio provides the navigation and the page

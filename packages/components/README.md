@@ -24,6 +24,10 @@ import { Button } from "@mittwald/flow-react-components";
 <Button onPress={() => alert("Hi")}>Los geht's</Button>;
 ```
 
+**Building a new app, page or flow: pick the matching template first** — the app
+shell, then the page template — and start from its example code. See
+[Start from a template](./USAGE.md#start-from-a-template).
+
 ## Documentation
 
 - **[USAGE.md](./USAGE.md)** — how to build an application with Flow: component
