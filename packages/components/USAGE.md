@@ -31,13 +31,39 @@ Start with these:
 - `/raw/foundations/structure/layout.md` and
   `/raw/foundations/structure/spacing.md` — how layout and spacing are meant to
   be composed
-- `/raw/templates/bausteine/formular.md`,
-  `/raw/templates/seiten/uebersichtsseite.md`,
-  `/raw/templates/seiten/detailseite.md` — the recurring flows
+- the templates — see [Start from a template](#start-from-a-template)
 - `/raw/foundations/content-guidelines/error-handling.md` — preventing and
   presenting errors
 - `/raw/foundations/content-guidelines/sprach-guide.md` — UI wording
 - `/raw/get-started/versioning.md` — what you may depend on
+
+## Start from a template
+
+**Building a new app, page or flow: pick the matching template before you lay
+out anything.** Pick the app shell first, then the page template, then the
+overlays and building blocks inside it. Fetch the template's page and start from
+its example code. Deviate only when the user explicitly asks for a different
+layout. This applies to quick prototypes too — a prototype that invents its own
+frame shows nothing about how the real thing will look.
+
+| You are building…                                           | Start from                                      |
+| ----------------------------------------------------------- | ----------------------------------------------- |
+| An app with a few equal areas on one navigation level       | `/raw/templates/app-shells/simple-app.md`       |
+| An app with several navigation levels (typical for mStudio) | `/raw/templates/app-shells/complex-app.md`      |
+| A single task without navigation (sign-up, order, setup)    | `/raw/templates/app-shells/focus-task.md`       |
+| A list of many similar objects to pick from                 | `/raw/templates/seiten/uebersichtsseite.md`     |
+| One object to inspect and edit                              | `/raw/templates/seiten/detailseite.md`          |
+| Several topics at a glance                                  | `/raw/templates/seiten/dashboard.md`            |
+| Creating, editing or configuring an object in an overlay    | `/raw/templates/overlays/anlegen-bearbeiten.md` |
+| Showing details, logs or previews in an overlay             | `/raw/templates/overlays/anzeigen.md`           |
+| Confirming a destructive or costly action                   | `/raw/templates/overlays/bestaetigen.md`        |
+| An overlay whose inputs depend on a preceding choice        | `/raw/templates/overlays/mehrere-schritte.md`   |
+| A form                                                      | `/raw/templates/bausteine/formular.md`          |
+| Uploading several files at once                             | `/raw/templates/bausteine/multi-upload.md`      |
+| Choosing a repeat interval (e.g. a cronjob)                 | `/raw/templates/bausteine/zeitintervalle.md`    |
+
+Nothing fits? Say so and compose from the closest template, rather than
+designing a layout from scratch.
 
 ## Setup
 
