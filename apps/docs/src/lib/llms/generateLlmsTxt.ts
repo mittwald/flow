@@ -10,6 +10,9 @@ import { SITE_URL, rawMarkdownPath } from "@/lib/llms/siteUrls";
 export const START_PAGES = [
   "foundations/structure/layout",
   "foundations/structure/spacing",
+  "templates/app-shells/simple-app",
+  "templates/app-shells/complex-app",
+  "templates/app-shells/focus-task",
   "templates/bausteine/formular",
   "templates/seiten/uebersichtsseite",
   "templates/seiten/detailseite",
@@ -59,6 +62,12 @@ const header = (pages: DocPage[]): string =>
       "design tokens and patterns for mStudio user interfaces. The " +
       "documentation is written in German; component names and " +
       "design-system terms (Variants, Colors, Props) are not translated.",
+    "",
+    "**Building a new app, page or flow:** pick the matching template " +
+      "first — the app shell, then the page template, then overlays and " +
+      "building blocks (see the Templates section below). Start from its " +
+      "example code. Deviate only when the user explicitly asks for a " +
+      "different layout; this applies to quick prototypes too.",
     "",
     "Every link below points to the Markdown version of a page. Fetch the " +
       "page before you decide on a component, a layout or a UI text — do not " +
