@@ -12,6 +12,11 @@ import styles from "./Checkbox.module.scss";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "react-aria";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface CheckboxProps
   extends
@@ -32,13 +37,34 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
+    skeletonProps,
   } = useFieldComponent(props, "Checkbox");
 
   const inputRef = useObjectRef(ref);
+  const isSkeleton = useSkeletonMode();
+
+  const renderIcon = (isSelected: boolean, isIndeterminate: boolean) => {
+    const icon = isSelected ? (
+      <IconCheckboxChecked className={styles.icon} />
+    ) : isIndeterminate ? (
+      <IconCheckboxIndeterminate className={styles.icon} />
+    ) : (
+      <IconCheckboxEmpty className={styles.icon} />
+    );
+
+    return isSkeleton ? (
+      <span className={styles.skeletonIcon}>
+        <SkeletonModeReset>{icon}</SkeletonModeReset>
+      </span>
+    ) : (
+      icon
+    );
+  };
 
   return (
     <div
       {...fieldProps}
+      {...skeletonProps}
       className={clsx(styles.checkbox, className, fieldProps.className)}
     >
       <FieldErrorCaptureContext>
@@ -49,14 +75,8 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
         >
           {({ isSelected, isIndeterminate }) => (
             <PropsContextProvider props={fieldPropsContext}>
-              {isSelected ? (
-                <IconCheckboxChecked className={styles.icon} />
-              ) : isIndeterminate ? (
-                <IconCheckboxIndeterminate className={styles.icon} />
-              ) : (
-                <IconCheckboxEmpty className={styles.icon} />
-              )}
-              {children}
+              {renderIcon(isSelected, isIndeterminate)}
+              <SkeletonRawText>{children}</SkeletonRawText>
             </PropsContextProvider>
           )}
         </Aria.Checkbox>

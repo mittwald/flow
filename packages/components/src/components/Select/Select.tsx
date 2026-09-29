@@ -59,6 +59,7 @@ export const Select = flowComponent("Select", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
+    skeletonProps,
   } = useFieldComponent(props, "Select");
 
   const rootClassName = clsx(
@@ -83,6 +84,7 @@ export const Select = flowComponent("Select", (props) => {
     <Aria.Select
       {...rest}
       {...fieldProps}
+      {...skeletonProps}
       className={clsx(rootClassName, fieldProps.className)}
       onChange={(value) => {
         if (!isReadOnly) {

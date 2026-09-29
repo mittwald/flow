@@ -48,6 +48,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "ComboBox");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
@@ -79,6 +80,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
+      {...skeletonProps}
       onSelectionChange={handleSelectionChange}
       onOpenChange={(isOpen) => {
         controller.setOpen(isOpen);

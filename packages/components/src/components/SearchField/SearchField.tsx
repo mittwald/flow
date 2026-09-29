@@ -31,6 +31,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "SearchField");
 
   const rootClassName = clsx(
@@ -58,6 +59,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     <Aria.SearchField
       {...rest}
       {...fieldProps}
+      {...skeletonProps}
       aria-label={searchText}
       className={clsx(rootClassName, fieldProps.className)}
     >

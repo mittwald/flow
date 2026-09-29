@@ -4,6 +4,7 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
 import clsx, { type ClassValue } from "clsx";
 import type { FlowComponentName } from "@/components/propTypes";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 interface FieldComponentProps {
   className?: ClassValue;
@@ -21,6 +22,15 @@ export interface UseFieldComponent {
     "aria-describedby"?: string;
     className?: ReturnType<typeof clsx>;
   };
+  /**
+   * Belongs on the field's root element. In an enabled `SkeletonMode` it makes
+   * the field `inert`, and `data-skeleton` turns its control into a surface
+   * (`formSkeleton` in `@/styles/mixins/formControl`).
+   */
+  skeletonProps: {
+    inert?: true;
+    "data-skeleton"?: true;
+  };
 }
 
 export const useFieldComponent = (
@@ -32,6 +42,7 @@ export const useFieldComponent = (
     fieldErrorId,
     component,
   });
+  const isSkeleton = useSkeletonMode();
 
   // setting up the props context for all components that
   // are part of a form control
@@ -56,5 +67,6 @@ export const useFieldComponent = (
         : props["aria-describedby"],
       className: clsx(formFieldStyles.formField),
     },
+    skeletonProps: isSkeleton ? { inert: true, "data-skeleton": true } : {},
   } as const;
 };

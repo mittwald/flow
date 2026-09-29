@@ -56,6 +56,9 @@
       border-color: var(--form-control--border-color--default);
     }
   }
+
+  /* Skeleton: input and stepper buttons form one surface */
+  @include formControl.formSkeleton;
 }
 
 @media (pointer: fine) {
