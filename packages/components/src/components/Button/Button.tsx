@@ -14,6 +14,10 @@ import { containsTextChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
 import { filterDOMProps } from "@react-aria/utils";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface ButtonProps
   extends
@@ -101,6 +105,7 @@ export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
   const warnDeprecation = useWarnDeprecation();
+  const isSkeleton = useSkeletonMode();
 
   const {
     color: colorFromProps = "primary",
@@ -151,6 +156,7 @@ export const Button = flowComponent("Button", (props) => {
          */
         ariaDisabled && styles.ariaDisabled,
         hasText && styles.hasText,
+        isSkeleton && styles.skeleton,
         className,
       );
 
@@ -192,7 +198,7 @@ export const Button = flowComponent("Button", (props) => {
     <LoadingSpinner size={size} className={styles.stateIcon} />
   ) : undefined;
 
-  const content = (
+  const buttonContent = (
     <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
@@ -203,12 +209,21 @@ export const Button = flowComponent("Button", (props) => {
     </>
   );
 
+  /* A styled button is one skeleton surface, so its content draws no skeleton
+     of its own. An unstyled button draws no surface, so its content does. */
+  const content = (
+    <Wrap if={!unstyled}>
+      <SkeletonModeReset>{buttonContent}</SkeletonModeReset>
+    </Wrap>
+  );
+
   if (elementType === "span") {
     const spanProps = filterDOMProps(restProps, { global: true });
 
     return (
       <span
         {...spanProps}
+        inert={isSkeleton || undefined}
         data-disabled={restProps.isDisabled || undefined}
         className={
           typeof rootClassName === "string" ? rootClassName : undefined
@@ -226,6 +241,7 @@ export const Button = flowComponent("Button", (props) => {
       slot={slot}
       {...(isReadOnly === true ? { "data-readonly": true } : {})}
       {...restProps}
+      inert={isSkeleton || undefined}
     >
       {content}
     </Aria.Button>

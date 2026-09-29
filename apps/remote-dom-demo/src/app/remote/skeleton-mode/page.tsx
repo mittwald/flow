@@ -12,6 +12,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
+import { VisualDemo } from "./VisualDemo";
 
 export default function Page() {
   const [isEnabled, setIsEnabled] = useState(true);
@@ -39,6 +40,7 @@ export default function Page() {
           <SkeletonMode isEnabled={false}>
             <Text>Dieser Text ist bereits geladen.</Text>
           </SkeletonMode>
+          <VisualDemo />
         </Section>
       </SkeletonMode>
     </Section>
