@@ -81,13 +81,7 @@ const mailboxes: Mailbox[] = [
 const MailboxList = typedList<Mailbox>();
 
 export default () => (
-  <Flex
-    direction="column"
-    gap="l"
-    paddingBlock="l"
-    paddingInline="xl"
-    className={styles.app}
-  >
+  <Flex direction="column" gap="l" className={styles.app}>
     <Topbar />
     <Flex gap="l" align="stretch" className={styles.body}>
       <ProjectSidebar />

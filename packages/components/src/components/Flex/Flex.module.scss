@@ -35,12 +35,13 @@
   padding-bottom: var(--flex--padding-bottom);
 }
 
-/* `paddingLeft` and `paddingRight` follow the writing direction, so they swap
-   sides under `direction: rtl`. */
-.padding-inline-start {
-  padding-inline-start: var(--flex--padding-inline-start);
+/* The props are named physically, so they stay physical under `direction: rtl`. */
+.padding-left {
+  // stylelint-disable-next-line logical-css/require-logical-properties -- `paddingLeft` prop
+  padding-left: var(--flex--padding-left);
 }
 
-.padding-inline-end {
-  padding-inline-end: var(--flex--padding-inline-end);
+.padding-right {
+  // stylelint-disable-next-line logical-css/require-logical-properties -- `paddingRight` prop
+  padding-right: var(--flex--padding-right);
 }

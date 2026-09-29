@@ -41,23 +41,13 @@ export interface FlexProps
   wrap?: CSSProperties["flexWrap"];
   /** The padding of the element. */
   padding?: "xs" | "s" | "m" | "l" | "xl";
-  /** The padding top and bottom of the element. Takes precedence over `padding`. */
-  paddingBlock?: "xs" | "s" | "m" | "l" | "xl";
-  /** The padding left and right of the element. Takes precedence over `padding`. */
-  paddingInline?: "xs" | "s" | "m" | "l" | "xl";
   /** The padding top of the element. */
   paddingTop?: "xs" | "s" | "m" | "l" | "xl";
   /** The padding bottom of the element. */
   paddingBottom?: "xs" | "s" | "m" | "l" | "xl";
-  /**
-   * The padding left of the element – the inline start, so it is on the right
-   * under `direction: rtl`.
-   */
+  /** The padding left of the element. */
   paddingLeft?: "xs" | "s" | "m" | "l" | "xl";
-  /**
-   * The padding right of the element – the inline end, so it is on the left
-   * under `direction: rtl`.
-   */
+  /** The padding right of the element. */
   paddingRight?: "xs" | "s" | "m" | "l" | "xl";
 }
 
@@ -80,8 +70,6 @@ export const Flex: FC<FlexProps> = (props) => {
     grow,
     wrap = "nowrap",
     padding,
-    paddingBlock,
-    paddingInline,
     paddingTop,
     paddingBottom,
     paddingLeft,
@@ -92,10 +80,10 @@ export const Flex: FC<FlexProps> = (props) => {
 
   const columnGapSize = columnGap ?? gap;
   const rowGapSize = rowGap ?? gap;
-  const paddingTopSize = paddingTop ?? paddingBlock ?? padding;
-  const paddingBottomSize = paddingBottom ?? paddingBlock ?? padding;
-  const paddingInlineStartSize = paddingLeft ?? paddingInline ?? padding;
-  const paddingInlineEndSize = paddingRight ?? paddingInline ?? padding;
+  const paddingTopSize = paddingTop ?? padding;
+  const paddingBottomSize = paddingBottom ?? padding;
+  const paddingLeftSize = paddingLeft ?? padding;
+  const paddingRightSize = paddingRight ?? padding;
 
   const rootClassName = clsx(
     styles.flex,
@@ -106,8 +94,8 @@ export const Flex: FC<FlexProps> = (props) => {
     rowGapSize && styles["row-gap"],
     paddingTopSize && styles["padding-top"],
     paddingBottomSize && styles["padding-bottom"],
-    paddingInlineStartSize && styles["padding-inline-start"],
-    paddingInlineEndSize && styles["padding-inline-end"],
+    paddingLeftSize && styles["padding-left"],
+    paddingRightSize && styles["padding-right"],
     className,
   );
 
@@ -121,8 +109,8 @@ export const Flex: FC<FlexProps> = (props) => {
     "--flex--row-gap": sizeVariable(rowGapSize),
     "--flex--padding-top": sizeVariable(paddingTopSize),
     "--flex--padding-bottom": sizeVariable(paddingBottomSize),
-    "--flex--padding-inline-start": sizeVariable(paddingInlineStartSize),
-    "--flex--padding-inline-end": sizeVariable(paddingInlineEndSize),
+    "--flex--padding-left": sizeVariable(paddingLeftSize),
+    "--flex--padding-right": sizeVariable(paddingRightSize),
   };
 
   const Element = elementType;
