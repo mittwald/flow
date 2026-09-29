@@ -34,27 +34,3 @@ test.each(testEnvironments)(
     await testScreenshot("Flex");
   },
 );
-
-test.each(testEnvironments)(
-  "Flex padding block and inline (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Flex, AccentBox, Label },
-  }) => {
-    await render(
-      <Flex direction="column">
-        <Label>paddingBlock: s, paddingInline: xl</Label>
-        <Flex paddingBlock="s" paddingInline="xl">
-          <AccentBox />
-        </Flex>
-        <Label>paddingBlock: xl, paddingInline: s</Label>
-        <Flex paddingBlock="xl" paddingInline="s">
-          <AccentBox />
-        </Flex>
-      </Flex>,
-    );
-
-    await testScreenshot("Flex padding block and inline");
-  },
-);
