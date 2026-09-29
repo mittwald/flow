@@ -4,6 +4,7 @@ import { expect, test } from "vitest";
 import { getAllDocPages } from "./docPages";
 import { generateLlmsTxt } from "./generateLlmsTxt";
 import { SITE_URL, rawMarkdownPath } from "./siteUrls";
+import { TEMPLATE_RULE_LEAD } from "./templateRule";
 
 const llmsTxt = generateLlmsTxt();
 const pages = getAllDocPages();
@@ -51,6 +52,26 @@ test("the header asks for a template first", () => {
   expect(header).toContain("pick the matching template");
   expect(header).toContain("/raw/templates/app-shells/simple-app.md");
   expect(llmsTxt).toContain("\n## Templates\n");
+});
+
+/*
+ * Agents enter through different files, so each one carries the template rule
+ * itself (#3313). The package component index has its own test in
+ * `packages/components/dev/component-index/docsMeta.test.ts`.
+ */
+test.each([
+  "packages/components/README.md",
+  "packages/components/USAGE.md",
+  "packages/remote-react-components/USAGE.md",
+])("%s carries the template rule", (file) => {
+  const content = fs.readFileSync(
+    path.resolve(import.meta.dirname, "../../../../..", file),
+    "utf-8",
+  );
+
+  expect(content).toContain(
+    `${TEMPLATE_RULE_LEAD}: pick the matching template`,
+  );
 });
 
 /*
