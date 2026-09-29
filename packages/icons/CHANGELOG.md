@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.9](https://github.com/mittwald/flow/compare/1.3.8...1.3.9) (2026-09-29)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
 ## [1.3.8](https://github.com/mittwald/flow/compare/1.3.7...1.3.8) (2026-09-29)
 
 **Note:** Version bump only for package @mittwald/flow-icons
