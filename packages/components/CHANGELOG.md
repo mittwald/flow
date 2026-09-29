@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.13](https://github.com/mittwald/flow/compare/1.4.0-next.12...1.4.0-next.13) (2026-09-29)
+
+### Bug Fixes
+
+* **Rating:** round decimal values to the nearest segment ([b6a0c0a](https://github.com/mittwald/flow/commit/b6a0c0ad366fedb24655e30f61831cc0c402d278))
+
+## [1.3.11](https://github.com/mittwald/flow/compare/1.3.10...1.3.11) (2026-09-29)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.11 ([35ffdd1](https://github.com/mittwald/flow/commit/35ffdd14c7b75b002b2095d564599d3717be701e))
+
 ## [1.4.0-next.12](https://github.com/mittwald/flow/compare/1.3.10...1.4.0-next.12) (2026-09-29)
 
 ## [1.4.0-next.11](https://github.com/mittwald/flow/compare/1.4.0-next.10...1.4.0-next.11) (2026-09-29)
