@@ -1,6 +1,7 @@
 @use "@/styles/mixins/ellipsis";
 @use "@/styles/mixins/focus";
 @use "@/styles/mixins/avatarButton";
+@use "@/styles/mixins/skeleton";
 
 .button {
   position: relative;
@@ -262,7 +263,25 @@
       width: 100%;
     }
   }
+
+  /* SkeletonMode — after the variants, so the surface wins over their colors */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--button--corner-radius);
+
+    &:where(.size-s) {
+      --skeleton-radius: var(--button--corner-radius-s);
+    }
+
+    &:where(:has(.avatar)) {
+      --skeleton-radius: var(--corner-radius--round);
+    }
+  }
 }
+
+@include skeleton.keyframes;
 
 @keyframes state-icon-pop {
   from {

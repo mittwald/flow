@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .image {
   max-width: 100%;
 
@@ -18,4 +20,21 @@
     width: fit-content;
     overflow: hidden;
   }
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: 0;
+
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.skeleton.roundedCorners {
+    --skeleton-radius: var(--image--corner-radius);
+  }
 }
+
+@include skeleton.keyframes;
