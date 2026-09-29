@@ -40,3 +40,33 @@ test("a nested Flex does not inherit the props of its parent", async () => {
   expect(style.alignItems).toBe("normal");
   expect(style.flexDirection).toBe("row");
 });
+
+test("paddingLeft follows the writing direction", async () => {
+  const screen = await render(
+    <div dir="rtl">
+      <Flex data-testid="flex" paddingLeft="xl" />
+    </div>,
+  );
+
+  const style = styleOf(screen.container, "flex");
+
+  expect(style.paddingLeft).toBe("0px");
+  expect(style.paddingRight).not.toBe("0px");
+});
+
+test("paddingBlock and paddingInline set both sides of their axis", async () => {
+  const screen = await render(
+    <Flex
+      data-testid="flex"
+      padding="xs"
+      paddingBlock="xl"
+      paddingInline="s"
+    />,
+  );
+
+  const style = styleOf(screen.container, "flex");
+
+  expect(style.paddingTop).toBe(style.paddingBottom);
+  expect(style.paddingLeft).toBe(style.paddingRight);
+  expect(style.paddingTop).not.toBe(style.paddingLeft);
+});
