@@ -1,7 +1,11 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import { page } from "vitest/browser";
 import gopher from "@/tests/assets/gopher.webp";
+
+/* The first published version with SkeletonMode — 1.4.0-next.9 is out without
+   it. Pin to the real release once it is published. */
+const skeletonModeSince = "1.4.0-next.10";
 
 const nginxConfig = `server {
   listen 443 ssl;
@@ -18,7 +22,7 @@ const markdown = [
   "| Eintrag | Wert |\n| --- | --- |\n| A | 192.0.2.10 |",
 ].join("\n\n");
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode content (%s)",
   async ({
     testScreenshot,
@@ -91,7 +95,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode code and markdown (%s)",
   async ({
     testScreenshot,
@@ -112,7 +116,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode chat (%s)",
   async ({
     testScreenshot,
@@ -161,7 +165,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode charts and editors (%s)",
   async ({
     testScreenshot,
@@ -220,7 +224,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode cropper and calendar (%s)",
   async ({
     testScreenshot,
@@ -240,7 +244,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode lists and tables (%s)",
   async ({
     testScreenshot,
@@ -315,7 +319,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode modal (%s)",
   async ({
     testScreenshot,
