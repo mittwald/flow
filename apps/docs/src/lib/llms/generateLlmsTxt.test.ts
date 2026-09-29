@@ -45,6 +45,14 @@ test("the extension guidance names the remote package", () => {
   expect(llmsTxt).toMatch(/Not available remotely: .*`Overlay`/);
 });
 
+test("the header asks for a template first", () => {
+  const header = llmsTxt.slice(0, llmsTxt.indexOf("\n## "));
+
+  expect(header).toContain("pick the matching template");
+  expect(header).toContain("/raw/templates/app-shells/simple-app.md");
+  expect(llmsTxt).toContain("\n## Templates\n");
+});
+
 /*
  * The packages' USAGE.md files send agents to `/raw/<path>.md` pages. Nothing
  * else notices when such a page moves — the docs link check covers the docs
