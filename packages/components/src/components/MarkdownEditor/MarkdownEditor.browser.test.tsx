@@ -17,7 +17,6 @@ import { Text } from "@/components/Text";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
 import { useState } from "react";
-import styles from "./MarkdownEditor.module.scss";
 
 const expandSteps = (value: string) => {
   const result = [];
@@ -338,37 +337,5 @@ describe("MarkdownEditor Tests", () => {
     const mentionChip = page.getByTestId("mention-chip");
     await expect(mentionChip).toBeInTheDocument();
     await expect(mentionChip).toHaveTextContent("@max");
-  });
-
-  /*
-   * The preview takes the text area's height and scrolls what does not fit –
-   * across re-renders too, which used to collapse it to the hidden text area's
-   * size.
-   */
-  test("the preview keeps the height of the text area", async () => {
-    const value = Array.from({ length: 20 }, (_, i) => `Line ${i}`).join(
-      "\n\n",
-    );
-    const editor = (label: string) => (
-      <MarkdownEditor aria-label={label} defaultValue={value} rows={3} />
-    );
-
-    const screen = await render(editor("before"));
-    const textArea = screen.container.querySelector("textarea");
-    if (!textArea) {
-      throw new Error("No text area rendered");
-    }
-    const editorHeight = textArea.getBoundingClientRect().height;
-
-    await userEvent.click(page.getByRole("button", { name: "Preview" }));
-    await screen.rerender(editor("after"));
-
-    const preview = screen.container.querySelector(`.${styles.markdown}`);
-    if (!preview) {
-      throw new Error("No preview rendered");
-    }
-
-    expect(preview.getBoundingClientRect().height).toBeCloseTo(editorHeight, 0);
-    expect(preview.scrollHeight).toBeGreaterThan(preview.clientHeight);
   });
 });

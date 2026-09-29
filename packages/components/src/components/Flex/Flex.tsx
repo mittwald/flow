@@ -51,11 +51,6 @@ export interface FlexProps
   paddingRight?: "xs" | "s" | "m" | "l" | "xl";
 }
 
-type FlexSize = "xs" | "s" | "m" | "l" | "xl";
-
-const sizeVariable = (size: FlexSize | undefined) =>
-  size && `var(--size-px--${size})`;
-
 /** @flr-generate all */
 export const Flex: FC<FlexProps> = (props) => {
   const {
@@ -78,45 +73,57 @@ export const Flex: FC<FlexProps> = (props) => {
     ...restProps
   } = props;
 
-  const columnGapSize = columnGap ?? gap;
-  const rowGapSize = rowGap ?? gap;
-  const paddingTopSize = paddingTop ?? padding;
-  const paddingBottomSize = paddingBottom ?? padding;
-  const paddingLeftSize = paddingLeft ?? padding;
-  const paddingRightSize = paddingRight ?? padding;
-
-  const rootClassName = clsx(
-    styles.flex,
-    align && styles.align,
-    justify && styles.justify,
-    grow && styles.grow,
-    columnGapSize && styles["column-gap"],
-    rowGapSize && styles["row-gap"],
-    paddingTopSize && styles["padding-top"],
-    paddingBottomSize && styles["padding-bottom"],
-    paddingLeftSize && styles["padding-left"],
-    paddingRightSize && styles["padding-right"],
-    className,
-  );
-
-  const style: CSSProperties = {
-    "--flex--direction": direction,
-    "--flex--wrap": wrap,
-    "--flex--align":
-      align === "end" ? "flex-end" : align === "start" ? "flex-start" : align,
-    "--flex--justify": justify,
-    "--flex--column-gap": sizeVariable(columnGapSize),
-    "--flex--row-gap": sizeVariable(rowGapSize),
-    "--flex--padding-top": sizeVariable(paddingTopSize),
-    "--flex--padding-bottom": sizeVariable(paddingBottomSize),
-    "--flex--padding-left": sizeVariable(paddingLeftSize),
-    "--flex--padding-right": sizeVariable(paddingRightSize),
-  };
+  const rootClassName = clsx(styles.flex, className);
 
   const Element = elementType;
 
   return (
-    <Element {...restProps} className={rootClassName} style={style}>
+    <Element
+      {...restProps}
+      className={rootClassName}
+      style={{
+        flexDirection: direction,
+        alignItems:
+          align === "end"
+            ? "flex-end"
+            : align === "start"
+              ? "flex-start"
+              : align,
+        justifyContent: justify,
+        columnGap: columnGap
+          ? `var(--size-px--${columnGap})`
+          : gap
+            ? `var(--size-px--${gap})`
+            : undefined,
+        rowGap: rowGap
+          ? `var(--size-px--${rowGap})`
+          : gap
+            ? `var(--size-px--${gap})`
+            : undefined,
+        flexGrow: grow ? 1 : undefined,
+        flexWrap: wrap,
+        paddingTop: paddingTop
+          ? `var(--size-px--${paddingTop})`
+          : padding
+            ? `var(--size-px--${padding})`
+            : undefined,
+        paddingBottom: paddingBottom
+          ? `var(--size-px--${paddingBottom})`
+          : padding
+            ? `var(--size-px--${padding})`
+            : undefined,
+        paddingLeft: paddingLeft
+          ? `var(--size-px--${paddingLeft})`
+          : padding
+            ? `var(--size-px--${padding})`
+            : undefined,
+        paddingRight: paddingRight
+          ? `var(--size-px--${paddingRight})`
+          : padding
+            ? `var(--size-px--${padding})`
+            : undefined,
+      }}
+    >
       {children}
     </Element>
   );

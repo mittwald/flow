@@ -143,6 +143,9 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
             <MarkdownComponent
               headingOffset={headingOffset}
               className={styles.markdown}
+              style={{
+                height: inputRef.current?.offsetHeight,
+              }}
             >
               {value}
             </MarkdownComponent>

@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
@@ -131,9 +131,7 @@ export const Slider = flowComponent("Slider", (props) => {
 
                 <div
                   className={styles.fill}
-                  style={{
-                    "--slider--value": state.getThumbPercent(0),
-                  }}
+                  style={{ width: state.getThumbPercent(0) * 100 + "%" }}
                 />
 
                 {showInitialMarker &&
@@ -142,8 +140,7 @@ export const Slider = flowComponent("Slider", (props) => {
                     <div
                       className={styles.initialMarker}
                       style={{
-                        "--slider--initial-value":
-                          state.getValuePercent(defaultValue),
+                        left: `calc(${state.getValuePercent(defaultValue) * 100}% - 2px)`,
                       }}
                     />
                   )}
