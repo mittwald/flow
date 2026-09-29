@@ -13,6 +13,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertText } from "@/components/AlertText";
 import { Alert } from "@/components/Alert";
 import { Heading } from "@/components/Heading";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface FieldErrorProps
   extends
@@ -27,6 +28,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
   const { children, className, ref, renderAlert, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
+  const isSkeleton = useSkeletonMode();
   const fieldErrorFromAriaContext = useContext(FieldErrorContext);
   const isInvalidFromChildren = React.Children.count(children) >= 1;
 
@@ -65,7 +67,8 @@ export const FieldError = flowComponent("FieldError", (props) => {
     };
   }, [fieldErrorFromAriaContext, children]);
 
-  if (!mergedErrorState.isInvalid) {
+  // A skeleton claims no state, and an error is one.
+  if (!mergedErrorState.isInvalid || isSkeleton) {
     return undefined;
   }
 

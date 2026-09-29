@@ -46,6 +46,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
+    skeletonProps,
   } = useFieldComponent(props, "SegmentedControl");
 
   const rootClassName = clsx(
@@ -72,6 +73,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      {...skeletonProps}
       className={clsx(rootClassName, fieldProps.className)}
       ref={objectRef}
     >

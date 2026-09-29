@@ -91,6 +91,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
+    skeletonProps,
   } = useFieldComponent(props, "Autocomplete");
 
   const rootClassName = clsx(
@@ -112,7 +113,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <div {...fieldProps} className={rootClassName}>
+    <div {...fieldProps} {...skeletonProps} className={rootClassName}>
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}

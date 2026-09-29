@@ -37,6 +37,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "NumberField");
 
   const rootClassName = clsx(formFieldStyles.formField, className);
@@ -44,6 +45,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
   return (
     <Aria.NumberField
       {...rest}
+      {...skeletonProps}
       isWheelDisabled={isWheelDisabled}
       className={clsx(rootClassName, fieldProps.className)}
     >

@@ -29,6 +29,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "RadioGroup");
 
   const rootClassName = clsx(formFieldStyles.formField, className);
@@ -54,6 +55,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      {...skeletonProps}
       className={clsx(rootClassName, fieldProps.className)}
       ref={localRadioRef}
     >

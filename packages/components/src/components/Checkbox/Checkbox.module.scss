@@ -46,6 +46,14 @@
     animation: check-pop var(--transition--duration--fast)
       cubic-bezier(0.2, 0, 0, 1);
   }
+
+  /* Skeleton: a box around the icon is the surface */
+  .skeletonIcon {
+    display: flex;
+    align-self: start;
+
+    @include formControl.formSkeletonShape(var(--corner-radius--s));
+  }
 }
 
 @keyframes check-pop {
