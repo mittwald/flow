@@ -29,6 +29,14 @@
   @media (max-width: 530px) {
     .container {
       flex-direction: column-reverse;
+
+      /* The presets move below the grid, so the separator turns horizontal. */
+      .presetSeparator {
+        border-inline-end: 0;
+        border-top: var(--separator--height) var(--separator--border-style)
+          var(--separator--color);
+        width: 100%;
+      }
     }
   }
 

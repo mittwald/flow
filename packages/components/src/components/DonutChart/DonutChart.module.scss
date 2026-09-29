@@ -14,7 +14,9 @@
 
   .fill,
   .segment {
-    transform: rotate(var(--donut-chart--fill-rotation));
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--donut-chart--percent));
+    transform: rotate(calc(var(--donut-chart--offset) * 3.6deg - 90deg));
     transform-box: fill-box;
     transform-origin: center;
     animation: donut-chart-fill var(--donut-chart--transition-duration) ease;
@@ -91,7 +93,7 @@
 /* The implicit "to" keyframe picks up the fill's own offset and rotation. */
 @keyframes donut-chart-fill {
   from {
-    stroke-dashoffset: var(--donut-chart--circumference);
+    stroke-dashoffset: 100;
     transform: rotate(-90deg);
   }
 }

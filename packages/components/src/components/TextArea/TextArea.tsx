@@ -7,6 +7,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import {
+  type CSSProperties,
   type PropsWithChildren,
   useEffect,
   useLayoutEffect,
@@ -114,10 +115,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
 
   const localRef = useObjectRef(ref);
 
-  const getHeight = (rows: number) => {
-    return `calc(var(--line-height-m) * ${rows} + (var(--form-control--padding-y) * 2))`;
-  };
-
   const [resized, setResized] = useState(false);
 
   const autoResizable = rows !== autoResizeMaxRows;
@@ -197,13 +194,14 @@ export const TextArea = flowComponent("TextArea", (props) => {
           placeholder={placeholder}
           className={inputClassName}
           ref={localRef}
-          style={{
-            caretColor: isReadOnly ? "transparent" : undefined,
-            minHeight: getHeight(rows),
-            maxHeight: verticallyResizable
-              ? undefined
-              : getHeight(autoResizeMaxRows),
-          }}
+          style={
+            {
+              "--text-area--rows": rows,
+              "--text-area--max-rows": verticallyResizable
+                ? undefined
+                : autoResizeMaxRows,
+            } as CSSProperties
+          }
         />
         {showCharacterCount && (
           <FieldDescription>{charactersCountDescription}</FieldDescription>
