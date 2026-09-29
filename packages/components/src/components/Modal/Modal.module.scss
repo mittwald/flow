@@ -1,4 +1,7 @@
 @use "@/styles/mixins/scrollbar";
+@use "@/styles/mixins/skeleton";
+
+@include skeleton.keyframes;
 
 /* Caps the dialog width per size token (`size-s` / `size-m` / `size-l`). */
 @mixin size($size) {
@@ -107,6 +110,27 @@
     .closeButton {
       order: 1;
       margin-inline-start: auto;
+    }
+
+    /* SkeletonMode: the heading's text bar wraps title and close button. It
+       gives up its box, so both stay in the header row, and each draws its
+       own skeleton. */
+    :global(.flow--skeleton-mode--skeleton-text-content) {
+      display: contents;
+
+      > .headerTitle {
+        @include skeleton.text;
+
+        visibility: visible;
+      }
+
+      > .closeButton {
+        @include skeleton.shape;
+
+        --skeleton-radius: var(--button--corner-radius);
+
+        visibility: visible;
+      }
     }
   }
 

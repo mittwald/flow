@@ -5,6 +5,7 @@ import clsx from "clsx";
 import styles from "../../Table.module.scss";
 import { SkeletonText } from "@/components/SkeletonText";
 import { TableColumn } from "@/components/Table/components/TableColumn/TableColumn";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface TableCellProps
   extends
@@ -34,7 +35,9 @@ export const TableCell: FC<TableCellProps> = (props) => {
   );
 
   const content = (
-    <Suspense fallback={<SkeletonText width="100px" />}>{children}</Suspense>
+    <Suspense fallback={<SkeletonText width="100px" />}>
+      <SkeletonRawText>{children}</SkeletonRawText>
+    </Suspense>
   );
 
   if (rowHeader) {

@@ -14,6 +14,10 @@ import {
 import type { DropEvent, FocusableElement } from "@react-types/shared";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { getAcceptedFiles } from "@/lib/files/acceptedFiles";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface FileDropZoneProps
   extends
@@ -51,9 +55,12 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     } = useFieldComponent(props, "FileDropZone");
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
+    const isSkeleton = useSkeletonMode();
+
     const rootClassName = clsx(
       styles.fileDropZone,
       isDisabled && styles.disabled,
+      isSkeleton && styles.skeleton,
       className,
     );
 
@@ -101,7 +108,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <div {...fieldProps}>
+      <div {...fieldProps} inert={isSkeleton || undefined}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             <Aria.DropZone
@@ -110,7 +117,10 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
               isDisabled={isDisabled}
               data-readonly={isReadOnly}
             >
-              <IllustratedMessage color="dark">{children}</IllustratedMessage>
+              {/* The drop zone is one skeleton surface, its content draws none. */}
+              <SkeletonModeReset>
+                <IllustratedMessage color="dark">{children}</IllustratedMessage>
+              </SkeletonModeReset>
             </Aria.DropZone>
           </PropsContextProvider>
         </FieldErrorCaptureContext>

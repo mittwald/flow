@@ -25,6 +25,10 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -94,10 +98,13 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     textAreaRef: inputRef,
   });
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.markdownEditor,
     styles[`mode-${mode}`],
     isDropTarget && styles.dropTarget,
+    isSkeleton && styles.skeleton,
     className,
   );
 
@@ -155,7 +162,11 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   };
 
   return (
-    <div {...dropProps} className={rootClassName}>
+    <div
+      {...dropProps}
+      className={rootClassName}
+      inert={isSkeleton || undefined}
+    >
       <TextArea
         {...rest}
         aria-hidden={mode === "preview"}
@@ -184,17 +195,23 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
               {value}
             </MarkdownComponent>
           )}
-          <Toolbar
-            currentMode={mode}
-            isDisabled={isDisabled}
-            onModeChange={setMode}
-            onToolPressed={handleToolButtonPressed}
-            accept={accept}
-            isReadOnly={isReadOnly}
-            onFilesSelected={uploadFiles}
-          />
+          {/* Covered by the skeleton surface, so its buttons draw none. */}
+          <SkeletonModeReset>
+            <Toolbar
+              currentMode={mode}
+              isDisabled={isDisabled}
+              onModeChange={setMode}
+              onToolPressed={handleToolButtonPressed}
+              accept={accept}
+              isReadOnly={isReadOnly}
+              onFilesSelected={uploadFiles}
+            />
+          </SkeletonModeReset>
         </PropsContextProvider>
       </TextArea>
+      {/* One surface over toolbar and text area. The label and the field
+          description keep their own skeleton rule. */}
+      {isSkeleton && <div className={styles.skeletonSurface} />}
     </div>
   );
 });

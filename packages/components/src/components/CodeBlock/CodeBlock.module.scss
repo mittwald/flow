@@ -1,5 +1,6 @@
 @use "@/styles/mixins/expandTransition";
 @use "@/styles/mixins/scrollbar";
+@use "@/styles/mixins/skeleton";
 
 /* The show-more strip: a size-s button plus the container's padding. */
 $button-height-s: calc(
@@ -160,4 +161,14 @@ $inner-corner-radius: calc(
     justify-content: center;
     padding-block: var(--code-block--show-more-padding);
   }
+
+  /* SkeletonMode — after the variants, so the surface wins over their colors */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--code-block--corner-radius);
+  }
 }
+
+@include skeleton.keyframes;

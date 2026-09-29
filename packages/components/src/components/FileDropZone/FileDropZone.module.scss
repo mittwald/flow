@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .fileDropZone {
   border-style: var(--file-drop-zone--border-style--default);
   border-width: var(--file-drop-zone--border-width);
@@ -32,4 +34,14 @@
       color: var(--file-drop-zone--content-color--disabled);
     }
   }
+
+  /* SkeletonMode — after the states, so the surface wins over their colors */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--file-drop-zone--corner-radius);
+  }
 }
+
+@include skeleton.keyframes;

@@ -3,6 +3,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface TableColumnProps
   extends
@@ -46,7 +47,7 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
       style={{ width, minWidth }}
     >
       <PropsContextProvider props={propsContext}>
-        {children}
+        <SkeletonRawText>{children}</SkeletonRawText>
       </PropsContextProvider>
     </Aria.Column>
   );
