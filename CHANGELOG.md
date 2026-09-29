@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.11](https://github.com/mittwald/flow/compare/1.4.0-next.10...1.4.0-next.11) (2026-09-29)
+
+### Bug Fixes
+
+* **Calendar:** stop the preset menu from growing on every layout ([#3323](https://github.com/mittwald/flow/issues/3323)) ([3cee28e](https://github.com/mittwald/flow/commit/3cee28e4b9cba13eb4010e364e3a55543bf365ba))
+
+## [1.3.9](https://github.com/mittwald/flow/compare/1.4.0-next.9...1.3.9) (2026-09-29)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.9 ([97e6719](https://github.com/mittwald/flow/commit/97e6719a4db7c85be3e3a3d75d212b9838622a32))
+
 ## [1.4.0-next.10](https://github.com/mittwald/flow/compare/1.4.0-next.9...1.4.0-next.10) (2026-09-29)
 
 ### Documentation
