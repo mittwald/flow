@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .legendItem {
   display: flex;
   flex-direction: row;
@@ -8,5 +10,14 @@
     height: var(--legend-item--marker--size);
     width: var(--legend-item--marker--size);
     border-radius: var(--legend-item--marker--corner-radius);
+
+    /* SkeletonMode: a surface instead of the color */
+    &.skeleton {
+      @include skeleton.surface;
+
+      --skeleton-radius: var(--legend-item--marker--corner-radius);
+    }
   }
 }
+
+@include skeleton.keyframes;

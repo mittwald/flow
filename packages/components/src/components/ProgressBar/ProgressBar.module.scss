@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .progressBar {
   display: grid;
   grid-template-areas:
@@ -84,7 +86,24 @@
   @include status(success);
   @include status(danger);
   @include status(warning);
+
+  /* SkeletonMode: the track is a surface, the value stays hidden */
+  &.skeleton {
+    .bar {
+      @include skeleton.surface;
+
+      --skeleton-radius: var(--progress-bar--corner-radius);
+
+      box-shadow: none;
+    }
+
+    .value {
+      visibility: hidden;
+    }
+  }
 }
+
+@include skeleton.keyframes;
 
 /* The implicit "to" keyframe picks up the fill's inline width. */
 @keyframes progress-bar-fill {

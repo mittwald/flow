@@ -13,6 +13,10 @@ import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { RatingSegmentContextProvider } from "@/components/Rating/context";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface RatingProps
   extends
@@ -73,10 +77,13 @@ export const Rating = flowComponent("Rating", (props) => {
     fieldPropsContext,
   } = useFieldComponent(props, "Rating");
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.rating,
     styles[`size-${size}`],
     styles[`fill-${fill}`],
+    isSkeleton && styles.skeleton,
     fieldProps.className,
     className,
   );
@@ -106,6 +113,7 @@ export const Rating = flowComponent("Rating", (props) => {
       value={value?.toString()}
       defaultValue={defaultValue?.toString()}
       ref={localRef}
+      inert={isSkeleton || undefined}
     >
       <FieldErrorCaptureContext>
         <PropsContextProvider
@@ -115,24 +123,26 @@ export const Rating = flowComponent("Rating", (props) => {
           {children}
         </PropsContextProvider>
         <div className={styles.ratingSegments}>
-          <UiComponentTunnelExit id={segmentsTunnelId} component="Rating">
-            {(tunnelChildren) => {
-              const tunneledSegments = Children.toArray(tunnelChildren);
-              const segments =
-                tunneledSegments.length > 0
-                  ? tunneledSegments
-                  : defaultSegments;
+          <SkeletonModeReset>
+            <UiComponentTunnelExit id={segmentsTunnelId} component="Rating">
+              {(tunnelChildren) => {
+                const tunneledSegments = Children.toArray(tunnelChildren);
+                const segments =
+                  tunneledSegments.length > 0
+                    ? tunneledSegments
+                    : defaultSegments;
 
-              return segments.map((segment, index) => (
-                <RatingSegmentContextProvider
-                  key={index}
-                  value={{ value: index + 1, count: segments.length }}
-                >
-                  {segment}
-                </RatingSegmentContextProvider>
-              ));
-            }}
-          </UiComponentTunnelExit>
+                return segments.map((segment, index) => (
+                  <RatingSegmentContextProvider
+                    key={index}
+                    value={{ value: index + 1, count: segments.length }}
+                  >
+                    {segment}
+                  </RatingSegmentContextProvider>
+                ));
+              }}
+            </UiComponentTunnelExit>
+          </SkeletonModeReset>
         </div>
       </FieldErrorCaptureContext>
       <FieldErrorView />

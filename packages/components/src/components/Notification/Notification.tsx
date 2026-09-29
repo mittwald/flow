@@ -10,6 +10,7 @@ import type { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Notification.module.scss";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>, PropsWithStatus {
@@ -40,14 +41,16 @@ export const Notification: FC<NotificationProps> = (props) => {
     ...rest
   } = props;
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.notification,
     styles[status],
-    (onClick || onClose || href) && styles.hasLink,
+    (onClick || onClose || href) && !isSkeleton && styles.hasLink,
+    isSkeleton && styles.skeleton,
     className,
   );
-
-  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const propsContext: PropsContext = {
     Heading: {
@@ -78,6 +81,22 @@ export const Notification: FC<NotificationProps> = (props) => {
     </Button>
   );
 
+  const content = (
+    <PropsContextProvider props={propsContext}>{children}</PropsContextProvider>
+  );
+
+  /*
+   * In the mode, the content is not wrapped in a link: a link would draw its
+   * whole content as one text bar, and there is nothing to click.
+   */
+  const body = isSkeleton ? (
+    <div className={styles.link}>{content}</div>
+  ) : (
+    <Link unstyled href={href} className={styles.link} onPress={onClick}>
+      {content}
+    </Link>
+  );
+
   return (
     <div
       {...rest}
@@ -86,11 +105,7 @@ export const Notification: FC<NotificationProps> = (props) => {
       // See https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useInteractOutside.ts#L126C31-L126C58
       data-react-aria-top-layer
     >
-      <Link unstyled href={href} className={styles.link} onPress={onClick}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </Link>
+      {body}
       {closeButton}
     </div>
   );
