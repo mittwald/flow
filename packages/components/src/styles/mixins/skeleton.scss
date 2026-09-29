@@ -40,6 +40,25 @@ $shimmer-gradient: linear-gradient(
   }
 }
 
+/* The base rule of `SkeletonMode`: the component keeps its real markup, size,
+   spacing and radius, its content becomes invisible and its box a surface.
+   Set `--skeleton-radius` on the component to keep a round shape. Needs
+   `@include keyframes` at the top level of the same module. */
+@mixin shape {
+  @include surface;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+  user-select: none;
+
+  * {
+    visibility: hidden;
+  }
+}
+
 /* Inline bars over the real text, one per line in the width of that line. The
    content keeps its layout and becomes invisible. Needs `@include keyframes`
    at the top level of the same module. */
