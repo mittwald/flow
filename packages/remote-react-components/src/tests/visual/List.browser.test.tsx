@@ -5,13 +5,17 @@ import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
 
+type TestEnvironment = (typeof testEnvironments)[number];
+
 // List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
 // A Combine inside a Text only stays in the line from 1.2.2.
 const combinedSubTitleFrom = "1.2.2";
+// The "clear filters" button carries its label from 1.3.11.
+const clearFiltersLabelledFrom = "1.3.11";
 
-test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
-  "List items (%s)",
+const listItems =
+  (part: "one value" | "two values") =>
   async ({
     testScreenshot,
     render,
@@ -29,7 +33,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       Text,
       Content,
     },
-  }) => {
+  }: TestEnvironment) => {
     function Wrapper() {
       const List = typedList<{
         id: string;
@@ -113,19 +117,31 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     const contextMenu = page.getByLocator('[aria-label="Options"]');
     const allFilters = page.getByRole("button", { name: "All Filters" });
 
-    await testScreenshot("List items - default");
+    /*
+     * Up to "filtered" one filter value is on. The second one brings the
+     * "clear filters" button, whose label an older remote does not send — so
+     * the two-value part walks the same path without capturing it.
+     */
+    const captureFirstPart =
+      part === "one value" ? testScreenshot : async () => undefined;
+
+    await captureFirstPart("List items - default");
 
     await sorting.click();
     await userEvent.keyboard("{arrowDown}");
     await userEvent.keyboard("{enter}");
 
-    await testScreenshot("List items - sorted");
+    await captureFirstPart("List items - sorted");
 
     await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{enter}");
 
-    await testScreenshot("List items - filtered");
+    await captureFirstPart("List items - filtered");
+
+    if (part === "one value") {
+      return;
+    }
 
     await userEvent.keyboard("{arrowDown}");
     await userEvent.keyboard("{enter}");
@@ -145,7 +161,18 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
 
     await contextMenu.click();
     await testScreenshot("List items - ContextMenu opened");
-  },
+  };
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List items (%s)",
+  listItems("one value"),
+);
+
+test
+  .skipIf(crossVersion({ below: clearFiltersLabelledFrom }))
+  .each(testEnvironments)(
+  "List items with two filter values (%s)",
+  listItems("two values"),
 );
 
 test
