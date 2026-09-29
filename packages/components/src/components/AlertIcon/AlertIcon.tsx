@@ -10,6 +10,8 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
+import { SkeletonIconSurface } from "@/components/SkeletonMode/components/SkeletonIconSurface";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export type AlertIconProps = Omit<IconProps, "status"> & PropsWithStatus;
 
@@ -26,6 +28,7 @@ export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
+  const isSkeleton = useSkeletonMode();
 
   const Icon = icons[status];
 
@@ -34,6 +37,15 @@ export const AlertIcon: FC<AlertIconProps> = (props) => {
     "aria-label": stringFormatter.format(`status.${status}`),
     ...rest,
   };
+
+  if (isSkeleton) {
+    const { className, ...iconPropsWithoutClassName } = iconProps;
+    return (
+      <SkeletonIconSurface className={className}>
+        <Icon {...iconPropsWithoutClassName} />
+      </SkeletonIconSurface>
+    );
+  }
 
   return <Icon {...iconProps} />;
 };

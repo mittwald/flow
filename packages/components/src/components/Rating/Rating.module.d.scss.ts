@@ -9,5 +9,6 @@ declare const classNames: {
   readonly "fill-single": "fill-single";
   readonly "size-s": "size-s";
   readonly "size-m": "size-m";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

@@ -3,6 +3,7 @@ import { type FC } from "react";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 interface Props extends Pick<ProgressBarProps, "segments"> {
   percentage?: number;
@@ -11,6 +12,13 @@ interface Props extends Pick<ProgressBarProps, "segments"> {
 
 export const ProgressBarBar: FC<Props> = (props) => {
   const { segments, segmentsTotalValue, percentage } = props;
+
+  const isSkeleton = useSkeletonMode();
+
+  /* In the mode, the track stays and shows no value. */
+  if (isSkeleton) {
+    return <div className={styles.bar} />;
+  }
 
   const segmentFill =
     segmentsTotalValue && segments && segments?.length > 0

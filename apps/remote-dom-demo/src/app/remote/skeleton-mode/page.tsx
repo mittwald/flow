@@ -12,6 +12,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
+import { NavigationStatusDemo } from "./NavigationStatusDemo";
 
 export default function Page() {
   const [isEnabled, setIsEnabled] = useState(true);
@@ -40,6 +41,7 @@ export default function Page() {
             <Text>Dieser Text ist bereits geladen.</Text>
           </SkeletonMode>
         </Section>
+        <NavigationStatusDemo />
       </SkeletonMode>
     </Section>
   );

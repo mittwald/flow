@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .alert {
   border-radius: var(--alert--corner-radius);
   border-width: var(--alert--border-width);
@@ -45,6 +47,11 @@
   @include status(danger);
   @include status(success);
   @include status(unavailable);
+
+  /* SkeletonMode: no status color while the content loads */
+  &.skeleton {
+    border-color: skeleton.$background-color;
+  }
 
   /* Layout */
 

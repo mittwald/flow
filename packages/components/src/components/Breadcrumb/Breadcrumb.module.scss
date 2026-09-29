@@ -60,6 +60,12 @@
     }
   }
 
+  /* SkeletonMode: no underline over the bars, no current item */
+  &.skeleton .breadcrumbItem .link {
+    text-decoration: none;
+    font-weight: var(--breadcrumb--font-weight--default);
+  }
+
   /* Size s */
 
   &.size-s {
