@@ -7,7 +7,6 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import {
-  type CSSProperties,
   type PropsWithChildren,
   useEffect,
   useLayoutEffect,
@@ -194,14 +193,12 @@ export const TextArea = flowComponent("TextArea", (props) => {
           placeholder={placeholder}
           className={inputClassName}
           ref={localRef}
-          style={
-            {
-              "--text-area--rows": rows,
-              "--text-area--max-rows": verticallyResizable
-                ? undefined
-                : autoResizeMaxRows,
-            } as CSSProperties
-          }
+          style={{
+            "--text-area--rows": rows,
+            "--text-area--max-rows": verticallyResizable
+              ? undefined
+              : autoResizeMaxRows,
+          }}
         />
         {showCharacterCount && (
           <FieldDescription>{charactersCountDescription}</FieldDescription>

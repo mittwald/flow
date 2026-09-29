@@ -16,11 +16,10 @@ interface Props extends Pick<DonutChartProps, "segments"> {
  * and rotates each circle from its share and its offset alone – and the load-in
  * keyframes can grow every segment out of 12 o'clock.
  */
-const fillStyle = (percent: number, offsetPercent: number) =>
-  ({
-    "--donut-chart--percent": percent,
-    "--donut-chart--offset": offsetPercent,
-  }) as CSSProperties;
+const fillStyle = (percent: number, offsetPercent: number): CSSProperties => ({
+  "--donut-chart--percent": percent,
+  "--donut-chart--offset": offsetPercent,
+});
 
 export const DonutChartFill: FC<Props> = (props) => {
   const { center, value = 0, radius, segments, maxValue } = props;

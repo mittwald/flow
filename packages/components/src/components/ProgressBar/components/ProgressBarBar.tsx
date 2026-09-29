@@ -1,5 +1,5 @@
 import styles from "@/components/ProgressBar/ProgressBar.module.scss";
-import type { CSSProperties, FC } from "react";
+import type { FC } from "react";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
@@ -25,12 +25,10 @@ export const ProgressBarBar: FC<Props> = (props) => {
               key={s.title}
               aria-hidden
               className={styles.segment}
-              style={
-                {
-                  backgroundColor,
-                  "--progress-bar--segment-value": s.value,
-                } as CSSProperties
-              }
+              style={{
+                backgroundColor,
+                "--progress-bar--segment-value": s.value,
+              }}
             />
           );
         })
@@ -40,7 +38,7 @@ export const ProgressBarBar: FC<Props> = (props) => {
     <div className={styles.bar}>
       <div
         className={styles.fill}
-        style={{ "--progress-bar--percentage": percentage } as CSSProperties}
+        style={{ "--progress-bar--percentage": percentage }}
       >
         {segmentFill}
       </div>
