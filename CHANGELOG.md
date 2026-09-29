@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.11](https://github.com/mittwald/flow/compare/1.3.10...1.3.11) (2026-09-29)
+
+### Bug Fixes
+
+* **react-tunnel:** fill the exit before paint when it mounts in a Suspense reveal ([#3314](https://github.com/mittwald/flow/issues/3314)) ([28676af](https://github.com/mittwald/flow/commit/28676af0cc5a84a853b04fad0f4374f9d9113516))
+
 ## [1.3.10](https://github.com/mittwald/flow/compare/1.3.9...1.3.10) (2026-09-29)
 
 ### Bug Fixes
