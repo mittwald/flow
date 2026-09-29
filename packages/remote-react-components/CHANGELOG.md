@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.9](https://github.com/mittwald/flow/compare/1.4.0-next.8...1.4.0-next.9) (2026-09-29)
+
+### Documentation
+
+* tell coding agents to start from a template ([9e2566b](https://github.com/mittwald/flow/commit/9e2566bbb532ef98de310bf04c002e1af7ae4498)), closes [#3313](https://github.com/mittwald/flow/issues/3313)
+
+## [1.3.7](https://github.com/mittwald/flow/compare/1.4.0-next.7...1.3.7) (2026-09-28)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.7 ([5834181](https://github.com/mittwald/flow/commit/58341817cef399baa2e62cbfe42f5e9f013a32d7))
+
 ## [1.4.0-next.8](https://github.com/mittwald/flow/compare/1.4.0-next.7...1.4.0-next.8) (2026-09-28)
 
 ### Bug Fixes
