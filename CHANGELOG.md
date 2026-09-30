@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/mittwald/flow/compare/1.4.0...1.4.1) (2026-09-30)
+
+### Bug Fixes
+
+* **Flex:** let a className override the layout props ([#3330](https://github.com/mittwald/flow/issues/3330)) ([a4ea169](https://github.com/mittwald/flow/commit/a4ea169c4f4d995855c94be97c74789012b3af62))
+
+### Continuous Integration
+
+* **release:** pass the bump explicitly and route every commit of a PR ([#3338](https://github.com/mittwald/flow/issues/3338)) ([6fe9a17](https://github.com/mittwald/flow/commit/6fe9a17fa098ef4599ab2b3396ba42a876f8a32e))
+
 ## [1.4.0](https://github.com/mittwald/flow/compare/1.4.0-next.14...1.4.0) (2026-09-30)
 
 ### Bug Fixes
