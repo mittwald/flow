@@ -167,14 +167,21 @@ flowchart LR
   itself as `0.2.0-alpha.1058`. A `grep` step between build and publish compares
   stamp against manifest, because the mismatch is otherwise invisible — nothing
   fails, the wrong string just ships.
-- **The release commit is pushed last, and rebases if it has to.** Versioning
+- **The release commit is pushed last, and merges if it has to.** Versioning
   commits and tags locally; the push and the GitHub Release wait until npm has
   accepted the publish, so a failed publish cannot ratchet a line ahead of npm.
   The cost is a ~10 minute window in which someone can merge a PR into the same
   line — the workflow `concurrency` group serializes runs, not UI merges. A
   plain fast-forward push loses that race after npm is already committed
-  (observed on 1.1.17), so `.github/scripts/push-release.mjs` rebases the
-  release commit onto the new tip, moves the tag with it, and retries.
+  (observed on 1.1.17), so `.github/scripts/push-release.mjs` pushes a merge
+  commit instead: the release commit as first parent, the new tip as second. The
+  tag stays on the release commit, which is what was built. It used to rebase
+  the release commit onto the new tip and move the tag along, which put the
+  concurrent PR under the tag although the packages did not contain it: #3289
+  then appeared in no changelog and got no release of its own (#3351). The merge
+  commit is not a `chore(release):` commit, so its push starts a regular publish
+  run that releases the concurrent PR; that run's relevance is read from the
+  first parent, not from the push range, which is only version churn.
 - **The two lines never publish at the same moment.** They publish the SAME npm
   packages, and the workflow `concurrency` group follows the ref (`mutate-main`
   / `mutate-next`), so a push to `main` and the forward-merge it triggers

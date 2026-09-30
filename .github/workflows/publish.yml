@@ -121,6 +121,27 @@ jobs:
             exit 0
           fi
 
+          # A release merge from `push-release.mjs` (#3351): the first parent is
+          # the release commit that was built and tagged, the second what merged
+          # while it was building. The push range holds only the version churn
+          # between the two, so classify what the release did NOT contain — first
+          # parent to head. A plain PR merge right after a release has the same
+          # first parent as BEFORE, so reading it that way changes nothing there.
+          # Any API failure keeps the push range, which is relevant by its
+          # version churn: the fail-safe "publish". As below, the EXIT STATUS
+          # decides, never the output (`gh api` prints an error body to stdout).
+          if ! first_parent="$(gh api "repos/${REPO}/commits/${AFTER}" \
+            --jq 'if (.parents | length) == 2 then .parents[0].sha else "" end')"; then
+            first_parent=""
+          fi
+          if [ -n "$first_parent" ] \
+            && is_release="$(gh api "repos/${REPO}/commits/${first_parent}" \
+              --jq '.commit.message | startswith("chore(release):")')" \
+            && [ "$is_release" = "true" ]; then
+            echo "::notice::Release merge — classifying ${first_parent:0:9}...${AFTER:0:9}, what the release did not contain."
+            BEFORE="$first_parent"
+          fi
+
           # The compare API, not `git diff`: it needs no history, so this job
           # stays a shallow checkout.
           #
@@ -574,11 +595,12 @@ jobs:
           tag="$(node -p "require('./lerna.json').version")"
 
           echo "Advancing main and tagging ${tag}"
-          # Rebase-and-retry, because `main` can move under this run: the
+          # Merge-and-retry, because `main` can move under this run: the
           # concurrency group serializes workflow RUNS, but a PR merged through
           # the GitHub UI is not a run and lands in the ~10 minutes this job
           # spends building and publishing. The script carries the full
-          # reasoning, the tag handling and the `--no-verify` rule (#2932).
+          # reasoning, the tag handling (#3351) and the `--no-verify` rule
+          # (#2932).
           node .github/scripts/push-release.mjs main "${tag}"
 
           # Release notes. Preferred source for a promotion: the curated,
@@ -679,7 +701,7 @@ jobs:
           # the stable line: what we publish is what lerna.json says.
           tag="$(node -p "require('./lerna.json').version")"
           echo "Pushing release commit and tag ${tag} to next"
-          # Same rebase-and-retry as on the stable line, and for the same reason:
+          # Same merge-and-retry as on the stable line, and for the same reason:
           # `feat` PRs merge straight into `next`, so the window between the
           # release commit and this push is just as open here.
           node .github/scripts/push-release.mjs next "${tag}"
