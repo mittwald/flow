@@ -62,7 +62,7 @@ const header = (pages: DocPage[]): string =>
     "# mittwald Flow",
     "",
     "> Flow is the design system of mittwald: accessible React components, " +
-      "design tokens and patterns for mStudio user interfaces. The " +
+      "design tokens and templates for mStudio user interfaces. The " +
       "documentation is written in German; component names and " +
       "design-system terms (Variants, Colors, Props) are not translated.",
     "",

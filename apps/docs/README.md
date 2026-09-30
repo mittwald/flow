@@ -16,8 +16,9 @@ The Styleguide is available at:
 https://flow.mittwald.de/
 
 All content lives in `src/content`, organized in one directory per section
-(`get-started`, `foundations`, `patterns`, `components`). Pages are written in
-MDX. Directory names are the URL — a page's path is its directory path.
+(`get-started`, `foundations`, `templates`, `components`, `releases`). Pages are
+written in MDX. Directory names are the URL — a page's path is its directory
+path.
 
 The order sections and their groups appear in is authored explicitly in
 `src/lib/content/contentOrder.ts`; anything not listed there sorts
@@ -74,22 +75,26 @@ Typical topics include:
   messages)
 - Accessibility
 
-The internal structure of this section may evolve over time. Note that complex
-user flows — such as how error handling behaves across a page — are documented
-in **Patterns**, not here.
+The internal structure of this section may evolve over time. Note that recurring
+structures built from several Components — such as a detail page or a form — are
+documented in **Templates**, not here.
 
-### Patterns
+### Templates
 
-**Patterns** document common user flows and interactions involving multiple
-Components. Examples are Forms, Errorhandling, or the structure of a detail
-page.
+**Templates** are ready-made starting points that combine several Components
+into a recurring structure. They are grouped by scope:
 
-They demonstrate recurring solutions through concise code examples that can
-easily be reused. Code examples should remain compact to avoid excessive
+- **App Shells** — the frame of an application (`simple-app`, `complex-app`,
+  `focus-task`)
+- **Seiten** — page types such as Dashboard, Übersichtsseite, Detailseite
+- **Overlays** — Modal flows such as creating, confirming, or multi-step tasks
+- **Bausteine** — smaller building blocks inside a page, such as a Formular or
+  Multi Upload
+
+Each Template page opens with a `LiveCodeEditor` example that can be copied as a
+whole, followed by `# Verwendung`, `# Aufbau`, and optionally
+`# Varianten und Abwandlung`. Keep the example code compact to avoid excessive
 scrolling.
-
-Smaller implementation examples belong in **Code Snippets**, a subsection of
-Patterns.
 
 ### Components
 
@@ -163,8 +168,8 @@ first element on the page.
 
 The single entry point to a Component's guidance: a flat checklist a developer
 scans once to know **what to watch out for when using this Component** — across
-accessibility, interplay with other Components, higher-level patterns (for
-example Forms), and Component-specific rules.
+accessibility, interplay with other Components, Templates (for example the
+Formular), and Component-specific rules.
 
 - **Flat bullet list, most important first.** No sub-headings, no shared opening
   sentence.
@@ -190,10 +195,10 @@ example Forms), and Component-specific rules.
   rule (example, Do/Dont, rationale); they never introduce a rule the checklist
   omits. A bullet may link inline to a section or page that goes deeper, but the
   link is optional — no arrow prefix, no forced cross-reference.
-- **Higher-level patterns are normal bullets with an inline link,** shown only
-  when they matter (often as the first bullet): „Folge in einem Formular dem
-  [Form-Pattern](…). Dort sind Aufbau, Validierung und Fehlerbehandlung
-  geregelt."
+- **Templates are normal bullets with an inline link,** shown only when they
+  matter (often as the first bullet): „Folge in einem Formular dem
+  [Formular-Template](/templates/bausteine/formular). Dort sind Aufbau,
+  Validierung und Fehlerbehandlung geregelt."
 - **Soft cap of roughly 5–8 bullets.** If a rule needs more than a directive
   sentence plus one reason sentence, move the depth into a feature section and
   let the bullet summarise. A longer list signals that something belongs in its
@@ -429,7 +434,7 @@ Use inline links generously to connect related documentation.
 - Component names in prose link to the Component's page:
   `[Section](/components/structure/section)`.
 - Links are root-relative (starting with `/get-started`, `/foundations`,
-  `/patterns`, or `/components`).
+  `/templates`, `/components`, or `/releases`).
 - Verify a link target exists before adding it, and avoid linking to the same
   page multiple times within a short section unless it improves readability.
 

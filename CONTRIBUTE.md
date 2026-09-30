@@ -525,7 +525,7 @@ When to touch the docs:
   JSDoc; regenerate it with `pnpm nx build:docs-properties components` and
   commit the result.
 - **Cross-cutting guidance.** Design principles, wording rules, and flows that
-  span multiple components live under `foundations` and `patterns`, not on a
+  span multiple components live under `foundations` and `templates`, not on a
   single component page.
 
 **Follow the content guidelines** in [apps/docs/README.md](apps/docs/README.md)
