@@ -79,6 +79,38 @@ test("a preset sets the whole range in one click and closes the calendar", async
   await expect.element(calendar()).not.toBeInTheDocument();
 });
 
+/*
+ * A preset menu that grew on every layout resized the popover inside
+ * react-aria's resize observer on it, which the browser reports as an error –
+ * in production too, where error trackers pick it up.
+ */
+test("opening the calendar with presets causes no ResizeObserver loop", async () => {
+  const errors: string[] = [];
+  const onError = (event: ErrorEvent) => errors.push(event.message);
+  window.addEventListener("error", onError);
+
+  try {
+    renderPicker({
+      withDatePickerPresets: [
+        { label: "First week of March", start: march(1), end: march(7) },
+      ],
+    });
+
+    await calendarButton().click();
+    await expect.element(preset("First week of March")).toBeVisible();
+
+    for (let frame = 0; frame < 10; frame++) {
+      await new Promise(requestAnimationFrame);
+    }
+  } finally {
+    window.removeEventListener("error", onError);
+  }
+
+  expect(
+    errors.filter((message) => message.includes("ResizeObserver")),
+  ).toEqual([]);
+});
+
 test("custom presets replace the built-in ones", async () => {
   const onChange = vi.fn();
   renderPicker({

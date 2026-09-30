@@ -150,6 +150,10 @@ opening sentence. The Component name, its one-sentence description, and the
 GitHub / Markdown links render above it from the frontmatter, so the body starts
 with the `<LiveCodeEditor />` that renders the implicit `examples/default.tsx`.
 
+Only this opening example shows its code by default. Every later
+`<LiveCodeEditor />` on the page gets `editorCollapsed`. A long opening example
+stays open too — it is truncated with „Mehr anzeigen“ automatically.
+
 A single `<Alert>` may sit above the editor when it flags an
 integration-critical caveat — an accessibility warning (Truncate) or a usage
 pitfall (Select's dynamic-`Options` `key` warning). Otherwise the editor is the
@@ -466,7 +470,11 @@ The most important MDX Components for writing content:
   not shown — write them anyway, they provide the editor's scope. Common props:
   `editorCollapsed` (code initially hidden), `editorDisabled` (no editor), `row`
   (side-by-side grid), `resizable` (handle to drag the container width, for
-  examples whose behaviour depends on it), `bgColor`, `zoom`.
+  examples whose behaviour depends on it), `bgColor`, `zoom`. An example that
+  starts open and runs longer than 20 lines is shown truncated with a „Mehr
+  anzeigen“ control; an `editorCollapsed` one keeps its show/hide toggle
+  instead. Every visible example carries a copy button. None of this takes a
+  prop.
 - `<PropertiesTables />` — renders the generated props documentation in the
   `# Properties` section.
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.

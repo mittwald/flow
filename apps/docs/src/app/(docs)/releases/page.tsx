@@ -30,7 +30,7 @@ export default async function ReleasesPage() {
     { slug: topAnchorId, text: "Releases", level: 2 },
     ...releases.map((r) => ({
       slug: releaseSlug(r.version),
-      text: `${r.version} · ${formatReleaseDate(r.date)}`,
+      text: `${r.version} – ${formatReleaseDate(r.date)}`,
       level: 2,
     })),
   ];

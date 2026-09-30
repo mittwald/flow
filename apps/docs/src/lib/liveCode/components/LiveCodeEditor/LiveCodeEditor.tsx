@@ -1,5 +1,6 @@
 import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import {
   LiveEditor,
   LiveError,
@@ -7,10 +8,15 @@ import {
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
+import { transformCode } from "@/lib/liveCode/components/LiveCodeEditor/lib/transformCode";
 import styles from "./LiveCodeEditor.module.css";
 import clsx from "clsx";
-import { Button, Icon, LayoutCard } from "@mittwald/flow-react-components";
+import {
+  Button,
+  CopyButton,
+  Icon,
+  LayoutCard,
+} from "@mittwald/flow-react-components";
 import { IconArrowBarBoth } from "@tabler/icons-react";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 import { stripImports } from "@/lib/liveCode/stripImports";
@@ -30,6 +36,12 @@ export interface LiveCodeEditorProps {
    */
   resizable?: boolean;
 }
+
+/**
+ * Number of code lines shown before the example is truncated. Three quarters of
+ * the examples are shorter than this, so only the long ones fold.
+ */
+const truncateLines = 20;
 
 /** Narrowest container the handle can be dragged to. */
 const minWidth = 280;
@@ -67,10 +79,31 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const [editorCollapsed, setEditorCollapsed] = useState(
     editorInitiallyCollapsed,
   );
+  const [codeFolded, setCodeFolded] = useState(true);
+  /** The full code height, only while the toggle animates to or from it. */
+  const [expandedHeight, setExpandedHeight] = useState<number>();
+  const codeRef = useRef<HTMLDivElement>(null);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [draggedWidth, setDraggedWidth] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
+  const editorId = useId();
+  const codeId = useId();
+
+  /*
+   * react-live transpiles synchronously during the first render, so the client
+   * renders what the server did and React hydrates the preview. Its post-mount
+   * effect re-transpiles whenever one of its dependencies changes, and a fresh
+   * transpile is a new component function — React then unmounts the preview
+   * and mounts a new one, restarting anything that animates on mount. `scope`
+   * and `transformCode` are dependencies, so a new object here replaces the
+   * whole example on the next render of this component, e.g. on expanding the
+   * code. `transformCode` is stable because it lives at module level.
+   */
+  const scope = useMemo(
+    () => (typeof code === "string" ? extractEditorScope(code) : {}),
+    [code],
+  );
 
   const available = metrics
     ? Math.floor(metrics.track - metrics.frame - metrics.handle)
@@ -182,28 +215,52 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     throw new Error("Expected code prop to be of type 'string'.");
   }
 
-  /*
-   * react-live transpiles synchronously during the first render, so the client
-   * renders what the server did and React hydrates the preview. Its post-mount
-   * effect re-transpiles whenever one of its dependencies changes, and a fresh
-   * transpile is a new component function — React then unmounts the preview
-   * and mounts a new one, restarting anything that animates on mount. `scope`
-   * and `transformCode` are dependencies, so a new object or function here
-   * replaces the whole example on the next render of this component.
-   */
-  const scope = useMemo(() => extractEditorScope(code), [code]);
-
-  const transformCode = useCallback((code: string) => {
-    try {
-      return extractDefaultExport(code);
-    } catch (error) {
-      return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
-    }
-  }, []);
-
   // The scope above already carries the imports, so the editor shows only the
   // example itself.
   const codeToDisplay = stripImports(code).replace(/;$/, "");
+
+  /**
+   * The two controls are either-or: an example that starts open is truncated
+   * and expands in place, one that starts hidden keeps the show/hide toggle it
+   * was given. Stacking both on one example would be two controls for the same
+   * code.
+   */
+  const truncatable =
+    codeToDisplay.split("\n").length > truncateLines &&
+    !editorInitiallyCollapsed;
+  const folded = truncatable && codeFolded;
+
+  /**
+   * A height transition needs a length on both ends – `none` does not
+   * interpolate. So the full height is measured for the transition and released
+   * once it ended, and code that grows while editing is not clipped. Without
+   * motion there is no transition to end, so the height is never pinned.
+   */
+  const toggleFolded = () => {
+    const content = codeRef.current?.querySelector("pre");
+
+    if (!content) {
+      setCodeFolded(!codeFolded);
+      return;
+    }
+
+    const animates = getComputedStyle(content)
+      .transitionDuration.split(",")
+      .some((duration) => parseFloat(duration) > 0);
+
+    if (codeFolded) {
+      setExpandedHeight(animates ? content.scrollHeight : undefined);
+      setCodeFolded(false);
+    } else {
+      flushSync(() => setExpandedHeight(content.scrollHeight));
+      // Applies the start height before the folded one replaces it.
+      content.getBoundingClientRect();
+      setCodeFolded(true);
+    }
+  };
+
+  const showFoldToggle = !editorDisabled && truncatable;
+  const showHideToggle = !editorDisabled && !!editorInitiallyCollapsed;
 
   const resizeTo = (width: number) => {
     if (maxWidth !== null) {
@@ -300,18 +357,66 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         )}
 
         {!editorDisabled && (
-          <div className={styles.editorContainer}>
+          <div
+            className={clsx(
+              styles.editorWrapper,
+              truncatable && styles.truncatable,
+              folded && styles.folded,
+            )}
+            id={editorId}
+            style={
+              {
+                "--truncated-lines": truncateLines,
+                ...(expandedHeight
+                  ? { "--expanded-max-height": `${expandedHeight}px` }
+                  : {}),
+              } as CSSProperties
+            }
+            onTransitionEnd={(event) => {
+              if (event.propertyName === "max-height") {
+                setExpandedHeight(undefined);
+              }
+            }}
+          >
             {!editorCollapsed && (
-              <LiveEditor
-                tabMode="focus"
-                theme={flowTheme}
-                className={styles.editor}
-              />
+              <>
+                <div
+                  className={styles.editorContainer}
+                  id={codeId}
+                  ref={codeRef}
+                >
+                  <LiveEditor
+                    tabMode="focus"
+                    theme={flowTheme}
+                    className={styles.editor}
+                  />
+                </div>
+                <CopyButton
+                  className={styles.copyButton}
+                  size="s"
+                  variant="soft"
+                  text={codeToDisplay}
+                />
+                {showFoldToggle && (
+                  <div className={styles.foldToggle}>
+                    <Button
+                      size="s"
+                      variant="plain"
+                      color="secondary"
+                      onPress={toggleFolded}
+                      aria-expanded={!folded}
+                      aria-controls={codeId}
+                    >
+                      {folded ? <>Mehr anzeigen</> : <>Weniger anzeigen</>}
+                    </Button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
 
-        {!editorDisabled && (
+        {showHideToggle && (
           <div className={styles.actions}>
             <Button
               className={styles.toggleCode}
@@ -319,6 +424,8 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
               variant="plain"
               color="secondary"
               onPress={() => setEditorCollapsed(!editorCollapsed)}
+              aria-expanded={!editorCollapsed}
+              aria-controls={editorId}
             >
               {editorCollapsed ? <>Code anzeigen</> : <>Code ausblenden</>}
             </Button>
