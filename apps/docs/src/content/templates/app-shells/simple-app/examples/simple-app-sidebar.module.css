@@ -10,8 +10,6 @@
      instead of growing the page. */
   height: 100%;
   overflow: hidden;
-  padding-block: var(--size-px--l);
-  padding-inline: var(--size-px--xl);
   background: var(--color--background-gradient);
 }
 
