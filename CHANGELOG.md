@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.13](https://github.com/mittwald/flow/compare/1.3.12...1.3.13) (2026-09-30)
+
+### Bug Fixes
+
+* **release-figure:** wait for images before measuring a panel ([b07f1d5](https://github.com/mittwald/flow/commit/b07f1d5527e47b42d9fab301534f210f1110175d)), closes [#storybook-root](https://github.com/mittwald/flow/issues/storybook-root)
+
+### Documentation
+
+* separate version and date with a dash in the releases jump menu ([e548559](https://github.com/mittwald/flow/commit/e54855922429040ecb89303d6d522fbdc65a1a56))
+
+### Code Refactoring
+
+* **components:** move style computations from JS to CSS ([#3319](https://github.com/mittwald/flow/issues/3319)) ([bab8880](https://github.com/mittwald/flow/commit/bab888046a2be4eab432d0e9a8184d14305df5a0))
+
 ## [1.3.12](https://github.com/mittwald/flow/compare/1.3.11...1.3.12) (2026-09-30)
 
 ### Bug Fixes
