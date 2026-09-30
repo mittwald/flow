@@ -1,12 +1,9 @@
 import type { ComponentType } from "react";
-import { Button, CodeBlock, Link } from "@mittwald/flow-react-components";
+import { Button, Link } from "@mittwald/flow-react-components";
+import { type SourceFile, SourceFiles } from "@/lib/mdx/components/SourceFiles";
 import styles from "./AppShellPreview.module.css";
 
-export interface AppShellSourceFile {
-  name: string;
-  code: string;
-  language: string;
-}
+export type AppShellSourceFile = SourceFile;
 
 export interface AppShellPreviewProps {
   /** The imported shell component, live-rendered in the preview frame. */
@@ -57,16 +54,6 @@ export const AppShellPreview = ({
         <Button variant="solid">Vorschau</Button>
       </Link>
     </div>
-    {files.map((file) => (
-      <div key={file.name} className={styles.file}>
-        <span className={styles.fileName}>{file.name}</span>
-        <CodeBlock
-          copyable
-          truncateLines={12}
-          language={file.language}
-          code={file.code}
-        />
-      </div>
-    ))}
+    <SourceFiles files={files} />
   </div>
 );

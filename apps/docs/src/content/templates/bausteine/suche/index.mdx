@@ -1,0 +1,46 @@
+---
+title: Suche
+description:
+  Ein Trigger öffnet ein zentriertes Modal, in dem Nutzer suchen, per Tastatur
+  durch die Treffer navigieren und direkt zum Ziel springen.
+---
+
+<FileExample example="suche" />
+
+---
+
+# Verwendung
+
+Verwende diesen Baustein, um in deiner Anwendung eine globale Suche anzubieten,
+über die Nutzer schnell zum gewünschten Ziel navigieren.
+
+---
+
+# Aufbau
+
+- **Trigger** – Ein [Button](/components/actions/button) mit Suchicon in der
+  [HeaderNavigation](/components/navigation/header-navigation) öffnet die Suche,
+  wie in der [Complex App](/templates/app-shells/complex-app). Zusätzlich lässt
+  sich der Trigger über ein Tastenkürzel wie `⌘ + K` auslösen. Zeige das
+  Tastenkürzel mit einem [Kbd](/components/content/kbd) am Trigger an.
+- **Modal** – Ein [Modal](/components/overlays/modal) in Größe `m` enthält ein
+  [SearchField](/components/form-controls/search-field) mit `autoFocus`, sodass
+  Nutzer sofort tippen können.
+- **Trefferliste** – Jeder Treffer zeigt den Titel mit hervorgehobenem
+  Suchbegriff, darunter den Kontext als Pfad und eine kurze Beschreibung. Die
+  Suchlogik im Beispiel ist ein Platzhalter über Beispieldaten; setze hier deine
+  eigene, meist serverseitige Suche ein.
+- **Tastaturnavigation** – Mit den Pfeiltasten wählen Nutzer einen Treffer, mit
+  Enter öffnen sie ihn. Der Fokus bleibt dabei im SearchField, sodass Nutzer
+  weitertippen können.
+
+---
+
+# Varianten und Abwandlung
+
+## Hervorgehobene Suche
+
+Wenn deine Suche besonders präsent sein soll, nutze als Trigger einen Button im
+Look eines SearchField. Semantisch bleibt er ein Button, der die Suche öffnet.
+
+<FileExample example="suche-hervorgehoben" />

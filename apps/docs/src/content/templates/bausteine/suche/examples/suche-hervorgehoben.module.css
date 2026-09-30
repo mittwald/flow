@@ -1,0 +1,85 @@
+/*
+ * The SearchField look, built from the form-control tokens the SearchField
+ * itself uses – so the trigger follows it across themes.
+ */
+.trigger {
+  width: 240px;
+  padding-block: calc(
+    var(--form-control--padding-y) - var(--form-control--border-width)
+  );
+  padding-inline: var(--size-px--s) var(--form-control--padding-x);
+  border-width: var(--form-control--border-width);
+  border-style: var(--form-control--border-style);
+  border-color: var(--form-control--border-color--default);
+  border-radius: var(--form-control--corner-radius);
+  background-color: var(--form-control--background-color--default);
+  color: var(--form-control--placeholder-color--default);
+  font-weight: normal;
+}
+
+/* Icon and text start left, like the SearchField's icon and placeholder. */
+.trigger :global(.flow--button--content) {
+  justify-content: flex-start;
+}
+
+.trigger:hover {
+  background-color: var(--form-control--background-color--hover);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: min(60vh, 480px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.results[hidden] {
+  display: none;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xs);
+  padding: var(--size-px--s) var(--size-px--m);
+  border-radius: var(--corner-radius--m);
+  cursor: pointer;
+  scroll-margin-block: var(--size-px--s);
+}
+
+.result[aria-selected="true"] {
+  background-color: var(--neutral--color--200);
+}
+
+.title {
+  font-weight: var(--font-weight--bold);
+}
+
+.context,
+.description {
+  font-size: var(--font-size-text--s);
+  color: var(--neutral--color--800);
+}
+
+/* Two lines at most – enough to tell similar results apart. */
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mark {
+  background-color: transparent;
+  color: inherit;
+  font-weight: var(--font-weight--bold);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}

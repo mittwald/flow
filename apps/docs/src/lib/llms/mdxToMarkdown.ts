@@ -45,8 +45,8 @@ const readExample = (dir: string, name: string): string | null => {
 const attr = (tag: string, name: string): string | undefined =>
   new RegExp(`${name}=["']([^"']*)["']`).exec(tag)?.[1];
 
-// Same file list the rendered `<AppShell>` shows as tabs.
-const appShellFiles = (tag: string, example: string): string[] => {
+// Same file list the rendered `<AppShell>` / `<FileExample>` shows.
+const multiFileExampleFiles = (tag: string, example: string): string[] => {
   const files = /files=\{\[([^\]]*)\]\}/.exec(tag)?.[1];
   if (files === undefined) {
     return [`${example}.tsx`, `${example}.module.css`];
@@ -57,12 +57,12 @@ const appShellFiles = (tag: string, example: string): string[] => {
   );
 };
 
-const appShellToMarkdown = (dir: string, tag: string): string => {
+const multiFileExampleToMarkdown = (dir: string, tag: string): string => {
   const example = attr(tag, "example");
   if (!example) {
     return "";
   }
-  return appShellFiles(tag, example)
+  return multiFileExampleFiles(tag, example)
     .flatMap((fileName) => {
       const code = fileName.endsWith(".tsx")
         ? readExample(dir, fileName.slice(0, -".tsx".length))
@@ -142,9 +142,10 @@ export const mdxToMarkdown = (
     return code ? `\n\n${stash(`\`\`\`tsx\n${code}\n\`\`\``)}\n\n` : "";
   });
 
-  // AppShell -> one fenced code block per file of the multi-file example.
-  body = body.replaceAll(/<AppShell\b[\s\S]*?\/>/g, (tag) => {
-    const code = appShellToMarkdown(dir, tag);
+  // AppShell / FileExample -> one fenced code block per file of the
+  // multi-file example.
+  body = body.replaceAll(/<(?:AppShell|FileExample)\b[\s\S]*?\/>/g, (tag) => {
+    const code = multiFileExampleToMarkdown(dir, tag);
     return code ? `\n\n${stash(code)}\n\n` : "";
   });
 
