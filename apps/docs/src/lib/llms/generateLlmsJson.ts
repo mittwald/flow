@@ -21,7 +21,7 @@ export const generateLlmsJson = () => {
     name: "mittwald Flow",
     description:
       "Design system of mittwald: accessible, brand-aligned React components, " +
-      "design tokens and templates. Documentation is written in German.",
+      "design tokens and patterns. Documentation is written in German.",
     // Ahead of `pages`: an agent that filters the page list by component names
     // never reaches the templates otherwise (#3313).
     instructions: {
