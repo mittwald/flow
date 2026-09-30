@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.4](https://github.com/mittwald/flow/compare/1.4.3...1.4.4) (2026-09-30)
+
+### Documentation
+
+* replace stale Patterns references with Templates ([#3350](https://github.com/mittwald/flow/issues/3350)) ([d8c6ba6](https://github.com/mittwald/flow/commit/d8c6ba6a770be9f64cfadbc7abd375ee75e90990))
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump eslint from 10.10.0 to 10.11.0 in the dev-minor group ([#3348](https://github.com/mittwald/flow/issues/3348)) ([aff66cd](https://github.com/mittwald/flow/commit/aff66cd1327cd24f4bfd4fd43834120ef1613f5f))
+
+### Continuous Integration
+
+* **release:** merge a concurrent change instead of rebasing the release commit ([#3352](https://github.com/mittwald/flow/issues/3352)) ([67dddff](https://github.com/mittwald/flow/commit/67dddfff121fae7060bde53d011af22f6d31cdac))
+* **release:** only a branch of this repository is a promotion ([#3353](https://github.com/mittwald/flow/issues/3353)) ([705bc22](https://github.com/mittwald/flow/commit/705bc22975c3e23492d50a1ebf8df715b37e06b3))
+
 ## [1.4.3](https://github.com/mittwald/flow/compare/1.4.2...1.4.3) (2026-09-30)
 
 ### Bug Fixes
