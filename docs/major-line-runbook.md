@@ -253,10 +253,10 @@ parameterised, and the pieces it depends on carry over:
   promotion it would overwrite the stable release history that `publish.yml`
   builds GitHub Release bodies from (ADR 0004 §3).
 - `publish.yml` detects the pre-graduated version and skips its own
-  `lerna version`; the graduation keys on a `release/*` head ref, which is what
-  the command creates regardless of the source line.
-- Routing and the version contract exempt `release/*` heads, so the promotion PR
-  is not blocked by the breaking changes it exists to ship.
+  `lerna version`; the graduation keys on a `release/*` head ref of this
+  repository, which is what the command creates regardless of the source line.
+- Routing and the version contract exempt `release/*` heads of this repository,
+  so the promotion PR is not blocked by the breaking changes it exists to ship.
 
 Then retire the line, in this order:
 

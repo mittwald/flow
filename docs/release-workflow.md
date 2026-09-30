@@ -214,7 +214,11 @@ flowchart LR
   It does **not** build, tag, publish, or create the GitHub Release. **Merging
   the PR is the release moment**: `publish.yml` detects the already-graduated
   version, publishes `latest`, and builds the GitHub Release from that marker
-  block verbatim (#2724). Full behaviour + the notes shape:
+  block verbatim (#2724). Only a `release/*` branch of this repository is a
+  promotion: a fork can give any branch that name, and merged it would otherwise
+  graduate `latest` to the name and publish its own PR body as the GitHub
+  Release. A fork's PR body never supplies release notes. Full behaviour + the
+  notes shape:
   [`.claude/commands/prepare-release.md`](../.claude/commands/prepare-release.md)
   and
   [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
