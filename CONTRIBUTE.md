@@ -486,9 +486,8 @@ neighbor like `actions/button/`):
   `@mittwald/flow-react-components`, pulled in with
   `<LiveCodeEditor example="…" />`
 
-One page per component, not one per tab: `overview.mdx`, `guidelines.mdx` and
-`develop.mdx` were consolidated into `index.mdx` (#2730) and no longer exist.
-The full authoring guide is [apps/docs/README.md](apps/docs/README.md).
+One page per component. The full authoring guide is
+[apps/docs/README.md](apps/docs/README.md).
 
 The docs prose is written in **German**. Preview with `pnpm nx dev docs`.
 
@@ -525,7 +524,7 @@ When to touch the docs:
   JSDoc; regenerate it with `pnpm nx build:docs-properties components` and
   commit the result.
 - **Cross-cutting guidance.** Design principles, wording rules, and flows that
-  span multiple components live under `foundations` and `patterns`, not on a
+  span multiple components live under `foundations` and `templates`, not on a
   single component page.
 
 **Follow the content guidelines** in [apps/docs/README.md](apps/docs/README.md)
