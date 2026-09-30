@@ -82,9 +82,13 @@ export const routingErrors = ({
 
   /** @type {string[]} */
   const errors = [];
-  const pr = classifyMessage(`${title}\n\n${body}`);
+  // The body never reaches a commit (squash and merge messages are blank), so
+  // it keeps the strict, case-sensitive footer: the parser's wide one would
+  // only fail a description line like "Breaking change: none".
+  const pr = classifyMessage(title);
+  const bodyIsBreaking = /^[ \t]*BREAKING[- ]CHANGE:/m.test(body);
 
-  if (pr.isBreaking) {
+  if (pr.isBreaking || bodyIsBreaking) {
     errors.push(
       `PR marks a breaking change — breaking changes target the major line, not '${baseRef}'.`,
     );

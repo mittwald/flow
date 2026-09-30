@@ -82,12 +82,11 @@ flowchart LR
   `feat(X)!:`, so the commit parses to no type and the writer drops it — the
   entry does not move into a BREAKING section, it disappears (#2883). The
   configured preset understands `!` and renders a `⚠ BREAKING CHANGES` section.
-  It would also recommend a Major, but no release path derives one: routing
-  keeps `!` off `main` and `next`, and the cut and promotion paths set the
-  version explicitly. The preset is pinned to `^9`: `10.x` ships a legacy-writer
-  guard that Lerna-Lite 5's changelog config trips over (it recompiles the
-  preset's template itself), and the guard then aborts `lerna version`. Re-check
-  on the next Lerna-Lite major.
+  It would also recommend a Major, but no release path derives one: every path
+  sets the bump explicitly. The preset is pinned to `^9`: `10.x` ships a
+  legacy-writer guard that Lerna-Lite 5's changelog config trips over (it
+  recompiles the preset's template itself), and the guard then aborts
+  `lerna version`. Re-check on the next Lerna-Lite major.
 - **No type is hidden from the changelog** (#3023). The preset hides `docs`,
   `style`, `chore`, `refactor`, `test`, `build` and `ci` by default, so a
   release those types triggered had nothing to write and Lerna emitted

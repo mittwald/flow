@@ -181,6 +181,20 @@ test("breaking: a footer in the PR body fails", () => {
   );
 });
 
+test("breaking: the PR body keeps the strict footer", () => {
+  for (const body of [
+    "Breaking change: none",
+    "* breaking change: none",
+    "Summary\n\nbreaking-change: no",
+  ]) {
+    assert.deepEqual(routingErrors(pr({ body })), [], body);
+  }
+});
+
+test("breaking: a bang in the PR title fails", () => {
+  assert.equal(routingErrors(pr({ title: "Fix()!: x" })).length, 1);
+});
+
 test("exempt heads skip every rule", () => {
   assert.deepEqual(
     routingErrors(
