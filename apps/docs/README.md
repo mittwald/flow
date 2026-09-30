@@ -99,9 +99,7 @@ scrolling.
 ### Components
 
 Each Component has its own documentation page. A page is a **single**
-`index.mdx` file — one continuous page, read top to bottom. (Earlier the content
-was split across three tabs, `overview.mdx`, `develop.mdx`, and
-`guidelines.mdx`; these are consolidated into `index.mdx`.)
+`index.mdx` file — one continuous page, read top to bottom.
 
 The frontmatter defines the Component name and its introduction:
 
