@@ -68,6 +68,31 @@ const releaseCommit = (work, version) => {
   git(work, "tag", "-m", version, version);
 };
 
+const subject = (cwd, rev) => git(cwd, "log", "--format=%s", "-1", rev);
+
+/**
+ * The shape #3351 needs after a concurrent merge: the line's tip is a merge
+ * whose FIRST parent is the tagged release commit and whose second parent is
+ * the tip that advanced meanwhile.
+ */
+const assertReleaseMerge = (origin, version, secondParent) => {
+  assert.equal(
+    git(origin, "rev-list", "--parents", "-n", "1", "main").split(" ").length,
+    3,
+    "the tip is a merge commit",
+  );
+  assert.equal(
+    git(origin, "rev-parse", `${version}^{commit}`),
+    git(origin, "rev-parse", "main^1"),
+    "the tag stays on the release commit, the first parent",
+  );
+  assert.equal(
+    subject(origin, "main^1"),
+    `chore(release): bump version to ${version}`,
+  );
+  assert.equal(subject(origin, "main^2"), secondParent);
+};
+
 test("pushes and tags when nothing else touched the line", async (t) => {
   const { origin, work } = setup(t);
   releaseCommit(work, "1.0.1");
@@ -85,7 +110,7 @@ test("pushes and tags when nothing else touched the line", async (t) => {
   );
 });
 
-test("rebases onto a merge that landed while the release was building", async (t) => {
+test("merges a change that landed while the release was building", async (t) => {
   const { root, origin, work } = setup(t);
   releaseCommit(work, "1.0.1");
   concurrentMerge(root, origin, "concurrent");
@@ -94,23 +119,29 @@ test("rebases onto a merge that landed while the release was building", async (t
 
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /advanced while this release was building/);
+  assertReleaseMerge(origin, "1.0.1", "fix: concurrent");
 
-  // The release commit sits on top of the merge, and both are on the line.
-  const log = git(origin, "log", "--format=%s", "main").split("\n");
-  assert.deepEqual(log.slice(0, 2), [
-    "chore(release): bump version to 1.0.1",
-    "fix: concurrent",
-  ]);
+  // Not a `chore(release):` commit, so its push starts a regular publish run —
+  // and not a Conventional Commit, so it stays out of the next changelog.
+  assert.equal(subject(origin, "main"), "Merge main into release 1.0.1");
 
-  // The tag followed the rebase instead of staying on the orphaned commit.
+  // lerna-lite resolves the last release with `git describe --first-parent`,
+  // and the next release's range then holds the concurrent change.
   assert.equal(
-    git(origin, "rev-parse", "1.0.1^{commit}"),
-    git(origin, "rev-parse", "main"),
+    git(origin, "describe", "--first-parent", "--abbrev=0", "main"),
+    "1.0.1",
   );
+  assert.deepEqual(
+    git(origin, "log", "--format=%s", "1.0.1..main").split("\n"),
+    ["Merge main into release 1.0.1", "fix: concurrent"],
+  );
+
+  // Both sides' content is on the line.
   assert.equal(
-    git(origin, "show", "1.0.1:package.json").trim(),
+    git(origin, "show", "main:package.json").trim(),
     '{"version":"1.0.1"}',
   );
+  assert.equal(git(origin, "show", "main:concurrent.md"), "merged mid-build");
 });
 
 test("survives several merges landing in a row", async (t) => {
@@ -122,33 +153,31 @@ test("survives several merges landing in a row", async (t) => {
   const result = pushRelease(work, "main", "1.0.1");
 
   assert.equal(result.status, 0, result.stderr);
+  assertReleaseMerge(origin, "1.0.1", "fix: second");
   assert.deepEqual(
-    git(origin, "log", "--format=%s", "main").split("\n").slice(0, 3),
-    ["chore(release): bump version to 1.0.1", "fix: second", "fix: first"],
+    git(origin, "log", "--format=%s", "1.0.1..main").split("\n"),
+    ["Merge main into release 1.0.1", "fix: second", "fix: first"],
   );
 });
 
-test("fast-forwards a pre-graduated promotion whose line advanced", async (t) => {
+test("tags a pre-graduated promotion in place when the line advanced", async (t) => {
   // RFC #2711: the version commit arrived with the merge, so the runner has no
-  // commit of its own to replay — but the line moved on and the plain push is
-  // still rejected. The tag does not exist yet and is created here.
+  // commit of its own — the promotion is already on the line, and only the
+  // concurrent merge is newer. The tag does not exist yet and is created here,
+  // on what was built rather than on the concurrent merge.
   const { root, origin, work } = setup(t);
+  const promotion = git(work, "rev-parse", "HEAD");
   concurrentMerge(root, origin, "concurrent");
 
   const result = pushRelease(work, "main", "1.0.1");
 
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(
-    git(origin, "rev-parse", "1.0.1^{commit}"),
-    git(origin, "rev-parse", "main"),
-  );
-  assert.equal(
-    git(origin, "log", "--format=%s", "-1", "main"),
-    "fix: concurrent",
-  );
+  assert.match(result.stdout, /already contains/);
+  assert.equal(git(origin, "rev-parse", "1.0.1^{commit}"), promotion);
+  assert.equal(subject(origin, "main"), "fix: concurrent");
 });
 
-test("aborts the rebase and fails loudly on a conflict", async (t) => {
+test("aborts the merge and fails loudly on a conflict", async (t) => {
   const { root, origin, work } = setup(t);
   releaseCommit(work, "1.0.1");
 
@@ -164,21 +193,21 @@ test("aborts the rebase and fails loudly on a conflict", async (t) => {
   assert.match(result.stderr, /hit a conflict/);
   assert.match(result.stderr, /already on npm/);
 
-  // Nothing half-applied: the line is untouched and no rebase is in progress.
-  assert.equal(
-    git(origin, "log", "--format=%s", "-1", "main"),
-    "fix: conflicting",
-  );
+  // Nothing half-applied: the line is untouched and no merge is in progress.
+  assert.equal(subject(origin, "main"), "fix: conflicting");
   assert.equal(git(work, "status", "--porcelain"), "");
-  assert.equal(
-    git(work, "log", "--format=%s", "-1", "HEAD"),
-    "chore(release): bump version to 1.0.1",
+  assert.notEqual(
+    spawnSync("git", ["rev-parse", "-q", "--verify", "MERGE_HEAD"], {
+      cwd: work,
+    }).status,
+    0,
   );
+  assert.equal(subject(work, "HEAD"), "chore(release): bump version to 1.0.1");
 });
 
-test("rebases past a build artifact left in the working tree", async (t) => {
+test("merges past a build artifact left in the working tree", async (t) => {
   // `pnpm build` runs between the release commit and this push, so the tree can
-  // carry a regenerated file. Rebase refuses outright on unstaged changes.
+  // carry a regenerated file. Merge refuses to overwrite local changes.
   const { root, origin, work } = setup(t);
   releaseCommit(work, "1.0.1");
   concurrentMerge(root, origin, "concurrent");
@@ -190,15 +219,12 @@ test("rebases past a build artifact left in the working tree", async (t) => {
   const result = pushRelease(work, "main", "1.0.1");
 
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(
-    git(origin, "log", "--format=%s", "-1", "main"),
-    "chore(release): bump version to 1.0.1",
-  );
+  assertReleaseMerge(origin, "1.0.1", "fix: concurrent");
 });
 
-test("rebases when the clone tracks a single branch", async (t) => {
+test("merges when the clone tracks a single branch", async (t) => {
   // actions/checkout narrows `remote.origin.fetch` to the run's own branch, so
-  // `origin/<branch>` is not guaranteed to follow the fetch — the rebase has to
+  // `origin/<branch>` is not guaranteed to follow the fetch — the merge has to
   // go through FETCH_HEAD.
   const { root, origin, work } = setup(t);
   git(
@@ -213,10 +239,7 @@ test("rebases when the clone tracks a single branch", async (t) => {
   const result = pushRelease(work, "main", "1.0.1");
 
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(
-    git(origin, "rev-parse", "1.0.1^{commit}"),
-    git(origin, "rev-parse", "main"),
-  );
+  assertReleaseMerge(origin, "1.0.1", "fix: concurrent");
 });
 
 test("refuses to run without both arguments", async (t) => {
