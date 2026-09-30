@@ -35,6 +35,16 @@ export const isExemptPr = ({ headRef, headRepo, repo }) =>
     /^(sync|release)\//.test(headRef));
 
 /**
+ * The standing lines (RFC #2711), the only bases that reject a breaking change.
+ * A major line (`2.x`) exists to take one, and opening it per the major-line
+ * runbook makes this guard run for it too.
+ *
+ * @param {string} baseRef
+ */
+export const isStandingLine = (baseRef) =>
+  baseRef === "main" || baseRef === "next";
+
+/**
  * Classify one conventional-commit message (header plus body/footers).
  *
  * - `feature` is a minor too: the preset's `whatBump` checks `type === 'feat' ||
@@ -87,8 +97,9 @@ export const routingErrors = ({
   // only fail a description line like "Breaking change: none".
   const pr = classifyMessage(title);
   const bodyIsBreaking = /^[ \t]*BREAKING[- ]CHANGE:/m.test(body);
+  const standing = isStandingLine(baseRef);
 
-  if (pr.isBreaking || bodyIsBreaking) {
+  if (standing && (pr.isBreaking || bodyIsBreaking)) {
     errors.push(
       `PR marks a breaking change — breaking changes target the major line, not '${baseRef}'.`,
     );
@@ -100,7 +111,7 @@ export const routingErrors = ({
   for (const { sha, message } of commits) {
     const commit = classifyMessage(message);
     const header = message.split("\n", 1)[0];
-    if (commit.isBreaking) {
+    if (standing && commit.isBreaking) {
       errors.push(
         `Commit ${sha} marks a breaking change ("${header}") — a merge commit brings it onto '${baseRef}', and breaking changes target the major line. Reword it or squash the branch locally.`,
       );
