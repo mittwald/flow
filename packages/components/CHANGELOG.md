@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.15](https://github.com/mittwald/flow/compare/1.4.0-next.14...1.4.0-next.15) (2026-09-30)
+
+### Code Refactoring
+
+* **components:** move style computations from JS to CSS ([#3319](https://github.com/mittwald/flow/issues/3319)) ([bab8880](https://github.com/mittwald/flow/commit/bab888046a2be4eab432d0e9a8184d14305df5a0))
+
+## [1.3.12](https://github.com/mittwald/flow/compare/1.4.0-next.13...1.3.12) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.12 ([d9396d3](https://github.com/mittwald/flow/commit/d9396d3543b7f9e998ed8f60491fd8ce7f9ea29e))
+
 ## [1.4.0-next.14](https://github.com/mittwald/flow/compare/1.4.0-next.13...1.4.0-next.14) (2026-09-30)
 
 ### Documentation
