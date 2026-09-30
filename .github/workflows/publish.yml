@@ -368,8 +368,8 @@ jobs:
           else
             # Standing path (push: main). Whether this is still a prerelease
             # line is a property of the CURRENT VERSION, not of a flag someone
-            # has to remember to flip: while `main` sits on `0.2.0-alpha.N`,
-            # --conventional-prerelease keeps it there; the moment the cut sets a
+            # has to remember to flip: while `main` sits on `0.2.0-alpha.N`, the
+            # prerelease counter keeps it there; the moment the cut sets a
             # stable `1.0.0`, the same condition graduates every later push to
             # `X.Y.Z` under `latest`.
             #
@@ -381,20 +381,27 @@ jobs:
             # that atomic does not hold.
             #
             # The `next` line decides its own line the same way, one step below.
+            #
+            # The bump is explicit, never derived from commit types: a push to
+            # `main` is a patch (minors arrive pre-graduated by promotion, majors
+            # from the major line). Derived, a `feat` or `!` commit that a merge
+            # commit carried onto `main` cut a release of its own — #3290 released
+            # 1.3.0 that way (#3333). The keyword overrides the derivation only;
+            # --conventional-commits still writes the changelog.
             case "$current" in
               *-*)
-                echo "Prerelease line (${current}) — keeping --conventional-prerelease."
-                pnpm lerna version \
+                echo "Prerelease line (${current}) — counting up the prerelease."
+                pnpm lerna version prerelease \
                   --force-publish \
-                  --conventional-commits --conventional-prerelease="*" \
+                  --conventional-commits \
                   --message "chore(release): bump version to %v" \
                   --yes \
                   --no-push \
                   --tag-version-prefix ""
                 ;;
               *)
-                echo "Stable line (${current}) — publishing X.Y.Z under latest."
-                pnpm lerna version \
+                echo "Stable line (${current}) — publishing a patch under latest."
+                pnpm lerna version patch \
                   --force-publish \
                   --conventional-commits \
                   --message "chore(release): bump version to %v" \
@@ -409,8 +416,8 @@ jobs:
       # push only after npm accepted the packages.
       #
       # The shape ADR 0004 §6 asks for is `X.Y.0-next.N` — a MINOR prerelease
-      # line, because `next` is where features collect. `--conventional-prerelease`
-      # alone does not produce it: once the version is a prerelease, semver's
+      # line, because `next` is where features collect. Counting up does not
+      # produce it: once the version is a prerelease, semver's
       # `inc('prerelease')` only moves the counter, whatever the commit type. The
       # base is therefore frozen by the FIRST prerelease publish on the line — and
       # that one is a patch by construction, since `next` is branched off a stable
@@ -472,9 +479,11 @@ jobs:
               --tag-version-prefix ""
           else
             # The line is running and still ahead of `main` → count up `-next.N`.
-            pnpm lerna version \
+            # Explicitly: derived, a `!` commit a merge brought onto `next`
+            # became a premajor and published `2.0.0-next.0` (#3199).
+            pnpm lerna version prerelease \
               --force-publish \
-              --conventional-commits --conventional-prerelease="*" \
+              --conventional-commits \
               --preid next \
               --message "chore(release): bump version to %v" \
               --yes \

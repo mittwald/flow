@@ -676,6 +676,23 @@ where the error points.
   bug failed completely silently: no build error, no console warning, and the
   docs site and Storybook kept rendering
 
+- **Symptom:** The **Routing** check fails on a `fix:` PR with
+  **`Commit <sha> is a 'feat' (…) — a merge commit brings it onto 'main'`**, or
+  on a `feat:` PR into `next` with **`Commit <sha> marks a breaking change`** —
+  although the PR title is valid
+
+  **Cause:** The check reads every commit of the PR, not just the title. `main`
+  allows merge commits and `next` allows only those, and a merge commit brings
+  each branch commit onto the line. #3290 carried a `feat` commit under a `fix:`
+  title and released `main` as 1.3.0 (#3333); #3166 carried a `!` commit and
+  opened `2.0.0-next.0` (#3199). The check counts `feature` as `feat` and
+  matches breaking markers the way lerna's parser does (`Fix!:`, `fix()!:`,
+  `* BREAKING CHANGE:`)
+
+  **Fix:** Reword the commit (`git rebase -i`, then force-push your branch),
+  squash the branch locally into one commit, or move the feature to `next`. A PR
+  with more than 250 commits fails too — GitHub lists no more, so split it
+
 ## Where to look next
 
 | Topic                                       | Read                                                                                    |
