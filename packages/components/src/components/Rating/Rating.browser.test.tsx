@@ -48,6 +48,16 @@ test("a segment label can be overridden", async () => {
     .toBeInTheDocument();
 });
 
+test.each([
+  [1.3, [true, false, false, false, false]],
+  [1.5, [true, true, false, false, false]],
+  [3.7, [true, true, true, true, false]],
+])("a value of %s is rounded to whole segments", async (value, expected) => {
+  await render(<Rating aria-label="Rating" value={value} />);
+
+  await expect.poll(fillStates).toEqual(expected);
+});
+
 test("single fill previews the hovered segment", async () => {
   await render(<Rating aria-label="Rating" fill="single" value={2} />);
 

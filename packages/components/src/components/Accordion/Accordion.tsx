@@ -20,6 +20,7 @@ export interface AccordionProps extends PropsWithChildren<
 }
 
 interface HeaderButtonProps extends PropsWithChildren {
+  id: string;
   contentId: string;
   isExpanded: boolean;
   onToggle: () => void;
@@ -31,12 +32,13 @@ interface HeaderButtonProps extends PropsWithChildren {
  * and the toggle loses the focus it just received on its own press.
  */
 const HeaderButton: FC<HeaderButtonProps> = (props) => {
-  const { children, contentId, isExpanded, onToggle } = props;
+  const { children, id, contentId, isExpanded, onToggle } = props;
 
   return (
     <Button
       tunnel={null}
       unstyled
+      id={id}
       aria-expanded={isExpanded}
       className={styles.headerButton}
       onPress={onToggle}
@@ -79,6 +81,7 @@ export const Accordion: FC<AccordionProps> = flowComponent(
 
     const renderHeaderButton = (children: ReactNode) => (
       <HeaderButton
+        id={headerId}
         contentId={contentId}
         isExpanded={expanded}
         onToggle={toggle}
@@ -104,17 +107,20 @@ export const Accordion: FC<AccordionProps> = flowComponent(
       },
       Label: {
         className: styles.header,
+        /*
+         * A <label> names the first labelable element below it — here the
+         * toggle, whose own text is the label's only content. The name
+         * computation walks into the label, meets the button it started from
+         * and stops, so the toggle ends up with an empty name. A <span> names
+         * nothing and the name comes from the toggle's content again.
+         */
+        elementType: "span",
         children: dynamic((props) => renderHeaderButton(props.children)),
       },
     };
 
     return (
       <div {...rest} className={rootClassName}>
-        {/*
-         * The props context is memoized, and the header button reads `expanded`
-         * from it – without the dependency the toggle keeps announcing the state
-         * it was first rendered with.
-         */}
         {/*
          * The props context is memoized, and the header button takes `expanded`
          * from it – without the dependency the toggle keeps announcing the

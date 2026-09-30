@@ -19,9 +19,15 @@ export interface RatingProps
     FlowComponentProps,
     PropsWithChildren,
     Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
-  /** The value sets the amount of filled stars. @default: 0 */
+  /**
+   * The value sets the amount of filled stars. Decimals are rounded to the
+   * nearest whole star. @default: 0
+   */
   value?: number;
-  /** The defaultValue sets the amount of default filled stars. @default: 0 */
+  /**
+   * The defaultValue sets the amount of default filled stars. Decimals are
+   * rounded to the nearest whole star. @default: 0
+   */
   defaultValue?: number;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
@@ -46,6 +52,10 @@ export interface RatingProps
 }
 
 const segmentsTunnelId = "segments";
+
+// Segment values are whole numbers, so a decimal would match no segment.
+const toSegmentValue = (value?: number) =>
+  value === undefined ? undefined : Math.round(value).toString();
 
 /**
  * @flr-generate all
@@ -103,8 +113,8 @@ export const Rating = flowComponent("Rating", (props) => {
     <Aria.RadioGroup
       {...rest}
       className={rootClassName}
-      value={value?.toString()}
-      defaultValue={defaultValue?.toString()}
+      value={toSegmentValue(value)}
+      defaultValue={toSegmentValue(defaultValue)}
       ref={localRef}
     >
       <FieldErrorCaptureContext>

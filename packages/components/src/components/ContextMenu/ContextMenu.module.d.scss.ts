@@ -3,5 +3,6 @@ declare const classNames: {
   readonly section: "section";
   readonly "flow--avatar": "flow--avatar";
   readonly popover: "popover";
+  readonly selectAll: "selectAll";
 };
 export default classNames;

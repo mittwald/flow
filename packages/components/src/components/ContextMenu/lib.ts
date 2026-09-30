@@ -19,10 +19,10 @@ export const getMenuItemSelectionVariant = (
     : selectionMode;
 };
 
-export const getCloseOverlayType = (
-  selectionMode?: ContextMenuSelectionMode,
-) => {
-  return selectionMode === "multiple" || selectionMode === "switch"
-    ? undefined
-    : "ContextMenu";
+/**
+ * Whether selecting an item closes the menu. A mode that collects several
+ * selections keeps it open.
+ */
+export const closesOnSelect = (selectionMode?: ContextMenuSelectionMode) => {
+  return selectionMode !== "multiple" && selectionMode !== "switch";
 };

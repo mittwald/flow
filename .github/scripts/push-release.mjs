@@ -17,11 +17,25 @@
 // release ended up on npm with no version bump commit, no tag and no GitHub
 // Release on `main`.
 //
+// WHY A MERGE, NOT A REBASE (#3351)
+// The tag has to stay on the commit that was built. Rebasing the release commit
+// onto the concurrent merge put that merge UNDER the tag although the published
+// packages did not contain it: the next release started its changelog at the
+// tag, so the change was in no changelog, and its own publish run had been
+// cancelled by the release push, so it got no release either (#3289 in 1.3.0).
+// Instead the line gets a merge commit whose FIRST parent is the release commit
+// and whose second parent is the new tip. The push stays a fast-forward,
+// lerna-lite's `git describe --first-parent` still finds the tag, and the next
+// range `tag..HEAD` holds the concurrent change. The merge commit is not a
+// `chore(release):` commit, so its push starts a regular publish run that
+// releases the change; `publish.yml` classifies that run's relevance from the
+// first parent, not from the push range, which is only version churn.
+//
 // Usage: node .github/scripts/push-release.mjs <branch> <tag>
 
 import { spawnSync } from "node:child_process";
 
-// Enough to outlast a burst of merges; one rebase attempt costs about a second.
+// Enough to outlast a burst of merges; one merge attempt costs about a second.
 // Bounded so a pathological loop fails the job instead of running to the step
 // timeout.
 const MAX_ATTEMPTS = 5;
@@ -50,6 +64,13 @@ function fail(message) {
   process.exit(1);
 }
 
+// What was built and published: lerna's release commit, or — for a
+// pre-graduated promotion (RFC #2711), whose version commit arrived with the
+// merge — the promotion merge itself. The tag goes here, whatever the line does.
+const released = spawnSync("git", ["rev-parse", "HEAD"], {
+  encoding: "utf8",
+}).stdout.trim();
+
 // `--no-verify` at every push even though a runner no longer gets git hooks at
 // all (.github/scripts/init-git-hooks.cjs skips CI): this is the one place where
 // a `pre-push` hook aborting strands a release npm has already accepted (#2932),
@@ -63,40 +84,56 @@ for (let attempt = 1; push() !== 0; attempt++) {
     );
   }
 
-  console.log(
-    `::warning::'${branch}' advanced while this release was building — ` +
-      `rebasing the release commit onto the new tip (attempt ${attempt}).`,
-  );
-
-  git("fetch", "origin", branch);
-
-  // Rebase onto FETCH_HEAD, not `origin/<branch>`: actions/checkout configures
-  // a single-branch refspec, so whether the remote-tracking ref follows this
+  // FETCH_HEAD, not `origin/<branch>`: actions/checkout configures a
+  // single-branch refspec, so whether the remote-tracking ref follows this
   // fetch depends on which line the run is on. FETCH_HEAD is what we just
   // fetched, always.
-  //
-  // The only commit replayed is the `chore(release):` bump — or nothing at all,
-  // for a pre-graduated promotion whose version commit arrived with the merge,
-  // where the rebase degenerates into the fast-forward that push needed. It
-  // touches package manifests and changelogs, which no concurrent merge writes:
-  // every other writer of those files serializes on the same concurrency group.
-  // A conflict therefore means something unmodelled happened. Stop with the
-  // working tree clean rather than resolve it blind.
-  //
-  // `--autostash` because `pnpm build` ran between the release commit and here:
-  // a stray regenerated file would otherwise make rebase refuse outright, and
-  // the tree's contents no longer matter — everything is published.
-  if (tryGit("rebase", "--autostash", "FETCH_HEAD") !== 0) {
-    tryGit("rebase", "--abort");
-    fail(`Rebasing the release commit onto 'origin/${branch}' hit a conflict.`);
+  git("fetch", "origin", branch);
+
+  // A pre-graduated promotion is already on the line; only the concurrent merge
+  // is newer. Nothing to push — tag the promotion where it is.
+  if (tryGit("merge-base", "--is-ancestor", released, "FETCH_HEAD") === 0) {
+    console.log(
+      `::notice::'${branch}' already contains ${released.slice(0, 9)} — tagging it in place.`,
+    );
+    break;
+  }
+
+  console.log(
+    `::warning::'${branch}' advanced while this release was building — ` +
+      `merging it into the release commit (attempt ${attempt}).`,
+  );
+
+  // Back to the release commit on every attempt, so the merge always has it as
+  // first parent and the latest tip as second. `--hard` also drops what
+  // `pnpm build` regenerated since the release commit: the tree's contents no
+  // longer matter, everything is published.
+  git("reset", "--quiet", "--hard", released);
+
+  // The release commit touches package manifests and changelogs, which no
+  // concurrent merge writes: every other writer of those files serializes on
+  // the same concurrency group. A conflict therefore means something unmodelled
+  // happened. Stop with the working tree clean rather than resolve it blind.
+  if (
+    tryGit(
+      "merge",
+      "--no-ff",
+      "-m",
+      `Merge ${branch} into release ${tag}`,
+      "-m",
+      `'${branch}' advanced while ${tag} was building. The first parent is the\n` +
+        `release commit that was built and tagged, the second brings what\n` +
+        `merged meanwhile; this commit's own publish run releases it (#3351).`,
+      "FETCH_HEAD",
+    ) !== 0
+  ) {
+    tryGit("merge", "--abort");
+    fail(`Merging 'origin/${branch}' into the release commit hit a conflict.`);
   }
 }
 
-// Re-point rather than create-if-missing. A rebase leaves lerna's tag on the
-// pre-rebase commit, which is now unreachable — without `-f` the tag would mark
-// a commit that is on no branch. In the happy path HEAD is already what lerna
-// tagged, so this rewrites the tag onto the same commit: a no-op. The
-// pre-graduated promotion path (RFC #2711) has no tag yet and gets one here,
-// exactly as before.
-git("tag", "-f", "-m", tag, tag, "HEAD");
+// Re-point rather than create-if-missing. In the happy path lerna's tag already
+// marks `released`, so this is a no-op; the pre-graduated promotion path has no
+// tag yet and gets one here.
+git("tag", "-f", "-m", tag, tag, released);
 git("push", "--no-verify", "origin", `refs/tags/${tag}`);

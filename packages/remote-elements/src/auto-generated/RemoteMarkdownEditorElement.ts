@@ -11,6 +11,7 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
 
   static override get remoteProperties() {
     return {
+      accept: {},
       allowHorizontalResize: {},
       allowResize: {},
       allowVerticalResize: {},
@@ -56,6 +57,7 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
       spellCheck: {},
       translate: {},
       type: {},
+      uploadFile: {},
       validate: {},
       validationBehavior: {},
       value: {},

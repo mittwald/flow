@@ -492,9 +492,8 @@ neighbor like `actions/button/`):
   `@mittwald/flow-react-components`, pulled in with
   `<LiveCodeEditor example="…" />`
 
-One page per component, not one per tab: `overview.mdx`, `guidelines.mdx` and
-`develop.mdx` were consolidated into `index.mdx` (#2730) and no longer exist.
-The full authoring guide is [apps/docs/README.md](apps/docs/README.md).
+One page per component. The full authoring guide is
+[apps/docs/README.md](apps/docs/README.md).
 
 The docs prose is written in **German**. Preview with `pnpm nx dev docs`.
 
@@ -531,7 +530,7 @@ When to touch the docs:
   JSDoc; regenerate it with `pnpm nx build:docs-properties components` and
   commit the result.
 - **Cross-cutting guidance.** Design principles, wording rules, and flows that
-  span multiple components live under `foundations` and `patterns`, not on a
+  span multiple components live under `foundations` and `templates`, not on a
   single component page.
 
 **Follow the content guidelines** in [apps/docs/README.md](apps/docs/README.md)
@@ -679,8 +678,10 @@ Enforced conventions (see `eslint.config.js` / `.prettierrc.json`):
 ## Commit conventions
 
 Flow uses [Conventional Commits](https://www.conventionalcommits.org/). This is
-**not optional cosmetics** — Lerna-Lite derives version bumps and the changelog
-from your commit messages.
+**not optional cosmetics** — Lerna-Lite writes the changelog from your commit
+messages, and the routing guard decides by them which line a change may land on.
+The version bump itself is fixed per line (patch on `main`, `-next.N` on
+`next`).
 
 ```
 <type>(<scope>): <short summary>
@@ -745,20 +746,23 @@ higher lines always contain the lower ones.
 ### The routing is enforced
 
 `.github/workflows/commit-guard.yml` runs on every PR and turns the rules above
-into a gate. Because this repo **squash-merges** — the PR title becomes the
-release commit — it lints the **PR title**, not the individual commits:
+into a gate. Lerna-Lite reads every commit that reaches a line: a squash merge
+turns the PR title into that commit, a merge commit brings every branch commit
+along. So the guard checks both:
 
 - **Conventional PR title.** The title must be a valid Conventional Commit of a
   known type (`feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`,
   `build`, `ci`, `chore`, `revert`); a scope is optional.
-- **Routing.** A `feat:` title is rejected on `main` (features belong on
-  `next`), and a breaking change (a `!` in the title, or `BREAKING CHANGE:` in
-  the body) is rejected on **both** `main` and `next` (it belongs on the major
-  line).
+- **Routing.** A `feat:` title **or commit** is rejected on `main` (features
+  belong on `next`), and a breaking change (a `!` in the header, or
+  `BREAKING CHANGE:` in the PR body or a commit body) is rejected on **both**
+  `main` and `next` (it belongs on the major line).
 
 Target the wrong branch and the check fails with a message like
 `PR title is a 'feat' — features target 'next', not 'main'.`; fix it by
-retitling the PR or changing its base.
+retitling the PR or changing its base. A `feat:` commit inside a `fix:` PR fails
+too, whatever merge method you intend — reword the commit (`git rebase -i`, then
+force-push) or target `next`. That case released `main` as 1.3.0 once (#3290).
 
 > Promotion and sync sources are exempt — `next`, a major line (e.g. `2.x`),
 > `release/*` and `sync/*` — because those PRs are _supposed_ to carry `feat:`
@@ -787,17 +791,24 @@ CI (`.github/workflows/test.yml`) runs lint, unit tests, and browser tests
 in parallel and report through one required check, `main`. A preview deployment
 of docs + Storybook is built for each PR so reviewers can see your changes live.
 
-PRs are **squash-merged**, so the **PR title becomes the release commit** — it
-must be a valid Conventional Commit. `.github/workflows/commit-guard.yml` lints
-both the title and that it matches the base branch (see
+The **PR title** must be a valid Conventional Commit — a squash merge turns it
+into the release commit. The commits in your branch count too, because a merge
+commit hands each of them to the release. `.github/workflows/commit-guard.yml`
+checks the title, and that the title and every commit match the base branch (see
 [Choosing the base branch](#choosing-the-base-branch)).
+
+`Closes #123` in the PR body works on **both** lines. GitHub resolves it only on
+`main`, because that is the default branch; for a PR merged into `next`,
+`.github/workflows/close-linked-issues.yml` does it instead and comments on the
+issue naming the PR. So write the keyword where you would anyway — and keep
+using `Part of #123` when you mean a link rather than a close.
 
 ## Releases
 
 You don't need to do anything to release. Flow uses **fixed versioning** — all
 `@mittwald/flow-*` packages share one version — and releases are automated from
-your Conventional Commit **PR titles** (the repo squash-merges, so the title is
-the commit Lerna-Lite reads). Where your change lands decides how it ships:
+your Conventional Commits — the **PR title** for a squash merge, every branch
+commit for a merge commit. Where your change lands decides how it ships:
 
 - **`fix:` (and non-releasing `docs:`/`chore:`/… ) → `main`** — publishes to npm
   under dist-tag `latest` as soon as it merges.

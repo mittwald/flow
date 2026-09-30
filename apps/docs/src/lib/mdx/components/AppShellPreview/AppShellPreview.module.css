@@ -17,9 +17,10 @@
   width: 100%;
   overflow: hidden;
 
-  /* The same border the LiveCodeEditor draws, so both previews read alike. */
-  border: 1px solid var(--neutral-outline-border-color);
-  border-radius: var(--corner-radius--m);
+  /* The same border the LiveCodeEditor and the code blocks draw. */
+  border: var(--code-block--border-width) var(--code-block--border-style)
+    var(--code-block--border-color);
+  border-radius: var(--code-block--corner-radius);
 }
 
 /*

@@ -55,6 +55,7 @@ export { IconUnorderedList } from "./IconUnorderedList";
 export { IconUpload } from "./IconUpload";
 export { IconView } from "./IconView";
 export { IconAI } from "./IconAI";
+export { IconAIHosting } from "./IconAIHosting";
 export { IconAnalytics } from "./IconAnalytics";
 export { IconApp } from "./IconApp";
 export { IconAutoresponder } from "./IconAutoresponder";

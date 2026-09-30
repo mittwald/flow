@@ -1,6 +1,7 @@
 {
   "mode.editor": "Exit Preview",
   "mode.preview": "Preview",
+  "toolbar.attachment": "Attach file",
   "toolbar.bold": "Bold",
   "toolbar.code": "Code",
   "toolbar.italic": "Italic",
@@ -8,5 +9,8 @@
   "toolbar.orderedList": "Ordered List",
   "toolbar.quote": "Quote",
   "toolbar.strikeThrough": "Strike through",
-  "toolbar.unorderedList": "List"
+  "toolbar.unorderedList": "List",
+  "upload.failed": "Could not upload {name}",
+  "upload.pending": "Uploading {name}",
+  "upload.succeeded": "Uploaded {name}"
 }

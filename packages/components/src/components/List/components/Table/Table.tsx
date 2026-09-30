@@ -9,6 +9,7 @@ import TableRowView from "@/views/TableRowView";
 import TableCellView from "@/views/TableCellView";
 import TableColumnView from "@/views/TableColumnView";
 import { TableBodyLoadingView } from "@/components/List/components/Table/components/TableBodyLoadingView";
+import { useInfiniteScrollTrigger } from "@/components/List/hooks/useInfiniteScrollTrigger";
 
 export const Table: FC = () => {
   const list = useList();
@@ -17,6 +18,9 @@ export const Table: FC = () => {
 
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
+  const isLoadingMore = list.loader.useIsLoadingMore();
+
+  const { triggerRef, triggerIndex } = useInfiniteScrollTrigger();
 
   if (!table || listIsEmpty) {
     return null;
@@ -26,11 +30,11 @@ export const Table: FC = () => {
 
   const tableClassName = clsx(
     styles.table,
-    isLoading && styles.isLoading,
+    isLoading && !(list.infiniteScroll && isLoadingMore) && styles.isLoading,
     table.componentProps.className,
   );
 
-  const rows = list.items.entries.map((item) => (
+  const rows = list.items.entries.map((item, index) => (
     <TableRowView
       className={clsx(
         styles.row,
@@ -41,6 +45,7 @@ export const Table: FC = () => {
       id={item.id}
       onAction={rowAction ? () => rowAction(item.data) : undefined}
       {...table.body.row.componentProps}
+      {...(index === triggerIndex ? { ref: triggerRef } : {})}
     >
       {table.body.row?.cells.map((cell, i) => (
         <TableCellView key={i} {...cell.componentProps}>

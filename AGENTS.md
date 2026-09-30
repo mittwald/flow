@@ -123,6 +123,7 @@ pnpm nx test:compile components            # tsc --noEmit for one package
 
 pnpm test:browser:prepare                  # install Playwright browsers + system deps
 pnpm nx test:browser components --browser.name=webkit
+pnpm nx test:browser components -- --browser.name=webkit src/components/Button  # filtered: flags after --
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 pnpm nx test:visual:update remote-react-components              # update visual snapshots
 
@@ -167,6 +168,10 @@ commit the results.
   and a `scripts`-only manifest diff. The rule lives in
   `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
+- **`Closes #…` in a PR body works on `next` too.** GitHub only resolves it on
+  the default branch (`main`); `.github/workflows/close-linked-issues.yml`
+  closes the referenced issues when a PR merges into `next`. Write the keyword
+  when the PR finishes an issue, and keep `Part of #…` for a plain link.
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
@@ -607,6 +612,23 @@ where the error points.
   `pnpm nx build:scss-types components`. Before the rule (#3091) this class of
   bug failed completely silently: no build error, no console warning, and the
   docs site and Storybook kept rendering
+
+- **Symptom:** The **Routing** check fails on a `fix:` PR with
+  **`Commit <sha> is a 'feat' (…) — a merge commit brings it onto 'main'`**, or
+  on a `feat:` PR into `next` with **`Commit <sha> marks a breaking change`** —
+  although the PR title is valid
+
+  **Cause:** The check reads every commit of the PR, not just the title. `main`
+  allows merge commits and `next` allows only those, and a merge commit brings
+  each branch commit onto the line. #3290 carried a `feat` commit under a `fix:`
+  title and released `main` as 1.3.0 (#3333); #3166 carried a `!` commit and
+  opened `2.0.0-next.0` (#3199). The check counts `feature` as `feat` and
+  matches breaking markers the way lerna's parser does (`Fix!:`, `fix()!:`,
+  `* BREAKING CHANGE:`)
+
+  **Fix:** Reword the commit (`git rebase -i`, then force-push your branch),
+  squash the branch locally into one commit, or move the feature to `next`. A PR
+  with more than 250 commits fails too — GitHub lists no more, so split it
 
 ## Where to look next
 
