@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0-next.14](https://github.com/mittwald/flow/compare/1.4.0-next.13...1.4.0-next.14) (2026-09-30)
+
+### Documentation
+
+* **Image:** target the migration entry at 1.4.0 ([3cc50ff](https://github.com/mittwald/flow/commit/3cc50ffa86aa27de02c32dbc024c54277d46496a)), closes [#3290](https://github.com/mittwald/flow/issues/3290)
+
 ## [1.4.0-next.13](https://github.com/mittwald/flow/compare/1.4.0-next.12...1.4.0-next.13) (2026-09-29)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
