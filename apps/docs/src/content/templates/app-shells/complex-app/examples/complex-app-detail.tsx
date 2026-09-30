@@ -64,127 +64,138 @@ const connections = {
 };
 
 export default () => (
-  <Flex direction="column" gap="l" className={styles.app}>
+  <Flex direction="column" className={styles.app}>
     <Topbar />
-    <Flex gap="l" align="stretch" className={styles.body}>
-      <ProjectSidebar />
-      <Flex
-        elementType="main"
-        direction="column"
-        gap="m"
-        className={styles.main}
-      >
-        <Breadcrumb>
-          <Link href="#">Projekt</Link>
-          <Link href="#">E-Mails</Link>
-          <Link href="#">E-Mail-Details</Link>
-        </Breadcrumb>
-        <Heading level={1}>
-          max.mustermann@mittwald.de
-        </Heading>
-        <LayoutCard>
-          <TabNavigation aria-label="E-Mail-Bereiche">
-            <Link href="#" aria-current="page">
-              Allgemein
-            </Link>
-            <Link href="#">Weiterleitungen</Link>
-            <Link href="#">Autoresponder</Link>
-          </TabNavigation>
-          <Section>
-            <Header>
-              <Heading>E-Mail-Adresse</Heading>
-              <Button variant="soft" color="secondary">
-                Passwort ändern
-              </Button>
-              <Button>E-Mail-Adresse bearbeiten</Button>
-            </Header>
-            <ColumnLayout>
-              <LabeledValue>
-                <Label>E-Mail-Adresse</Label>
-                <Content>
-                  max.mustermann@mittwald.de
-                </Content>
-              </LabeledValue>
-              <LabeledValue>
-                <Label>Webmailer</Label>
-                <Link href="#" target="_blank">
-                  mittwald Webmailer
-                </Link>
-              </LabeledValue>
-            </ColumnLayout>
-          </Section>
+    <Flex
+      direction="column"
+      gap="l"
+      grow
+      className={styles.content}
+    >
+      <Flex gap="l" align="stretch" className={styles.body}>
+        <ProjectSidebar />
+        <Flex
+          elementType="main"
+          direction="column"
+          gap="m"
+          className={styles.main}
+        >
+          <Breadcrumb>
+            <Link href="#">Projekt</Link>
+            <Link href="#">E-Mails</Link>
+            <Link href="#">E-Mail-Details</Link>
+          </Breadcrumb>
+          <Heading level={1}>
+            max.mustermann@mittwald.de
+          </Heading>
+          <LayoutCard>
+            <TabNavigation aria-label="E-Mail-Bereiche">
+              <Link href="#" aria-current="page">
+                Allgemein
+              </Link>
+              <Link href="#">Weiterleitungen</Link>
+              <Link href="#">Autoresponder</Link>
+            </TabNavigation>
+            <Section>
+              <Header>
+                <Heading>E-Mail-Adresse</Heading>
+                <Button variant="soft" color="secondary">
+                  Passwort ändern
+                </Button>
+                <Button>E-Mail-Adresse bearbeiten</Button>
+              </Header>
+              <ColumnLayout>
+                <LabeledValue>
+                  <Label>E-Mail-Adresse</Label>
+                  <Content>
+                    max.mustermann@mittwald.de
+                  </Content>
+                </LabeledValue>
+                <LabeledValue>
+                  <Label>Webmailer</Label>
+                  <Link href="#" target="_blank">
+                    mittwald Webmailer
+                  </Link>
+                </LabeledValue>
+              </ColumnLayout>
+            </Section>
 
-          <Section>
-            <Header>
-              <Heading>Speicherplatz</Heading>
-              <Button variant="soft" color="secondary">
-                Bearbeiten
-              </Button>
-            </Header>
-            <Text>
-              Die E-Mail-Adresse verfügt über Speicherplatz
-              zum Empfangen und Speichern von E-Mails. Wir
-              empfehlen mindestens 2 GB.
-            </Text>
-            <ProgressBar
-              showMaxValue
-              value={1}
-              maxValue={2}
-              formatOptions={{
-                style: "unit",
-                unit: "gigabyte",
-              }}
-            >
-              <Label>Speicherplatz</Label>
-            </ProgressBar>
-          </Section>
+            <Section>
+              <Header>
+                <Heading>Speicherplatz</Heading>
+                <Button variant="soft" color="secondary">
+                  Bearbeiten
+                </Button>
+              </Header>
+              <Text>
+                Die E-Mail-Adresse verfügt über
+                Speicherplatz zum Empfangen und Speichern
+                von E-Mails. Wir empfehlen mindestens 2 GB.
+              </Text>
+              <ProgressBar
+                showMaxValue
+                value={1}
+                maxValue={2}
+                formatOptions={{
+                  style: "unit",
+                  unit: "gigabyte",
+                }}
+              >
+                <Label>Speicherplatz</Label>
+              </ProgressBar>
+            </Section>
 
-          <Section>
-            <Heading>Verbindungsinformationen</Heading>
-            <Tabs aria-label="Verbindungsprotokoll">
-              {Object.entries(connections).map(
-                ([key, c]) => (
-                  <Tab key={key} id={key}>
-                    <TabTitle>{key.toUpperCase()}</TabTitle>
-                    <ColumnLayout>
-                      <LabeledValue>
-                        <Label>Benutzername</Label>
-                        <InlineCode>
-                          max.mustermann@mittwald.de
-                        </InlineCode>
-                      </LabeledValue>
-                      <LabeledValue>
-                        <Label>Server</Label>
-                        <InlineCode>{c.server}</InlineCode>
-                      </LabeledValue>
-                      <LabeledValue>
-                        <Label>Port</Label>
-                        <InlineCode>{c.port}</InlineCode>
-                      </LabeledValue>
-                    </ColumnLayout>
-                  </Tab>
-                ),
-              )}
-            </Tabs>
-          </Section>
+            <Section>
+              <Heading>Verbindungsinformationen</Heading>
+              <Tabs aria-label="Verbindungsprotokoll">
+                {Object.entries(connections).map(
+                  ([key, c]) => (
+                    <Tab key={key} id={key}>
+                      <TabTitle>
+                        {key.toUpperCase()}
+                      </TabTitle>
+                      <ColumnLayout>
+                        <LabeledValue>
+                          <Label>Benutzername</Label>
+                          <InlineCode>
+                            max.mustermann@mittwald.de
+                          </InlineCode>
+                        </LabeledValue>
+                        <LabeledValue>
+                          <Label>Server</Label>
+                          <InlineCode>
+                            {c.server}
+                          </InlineCode>
+                        </LabeledValue>
+                        <LabeledValue>
+                          <Label>Port</Label>
+                          <InlineCode>{c.port}</InlineCode>
+                        </LabeledValue>
+                      </ColumnLayout>
+                    </Tab>
+                  ),
+                )}
+              </Tabs>
+            </Section>
 
-          <Section>
-            <Header>
-              <Heading>Spamschutz</Heading>
-              <Switch defaultSelected>
-                <Label>Aktivieren</Label>
-              </Switch>
-            </Header>
-            <Text>
-              Der Spamfilter schützt dich vor ungewollten
-              E-Mails. Wir empfehlen, ihn immer aktiviert zu
-              lassen.
-            </Text>
-          </Section>
-        </LayoutCard>
+            <Section>
+              <Header>
+                <Heading>Spamschutz</Heading>
+                <Switch defaultSelected>
+                  <Label>Aktivieren</Label>
+                </Switch>
+              </Header>
+              <Text>
+                Der Spamfilter schützt dich vor ungewollten
+                E-Mails. Wir empfehlen, ihn immer aktiviert
+                zu lassen.
+              </Text>
+            </Section>
+          </LayoutCard>
+        </Flex>
       </Flex>
+      <Footer />
     </Flex>
-    <Footer />
   </Flex>
 );
 
@@ -205,48 +216,50 @@ const GlobalNavigationLinks = () => (
 );
 
 const Topbar = () => (
-  <Flex
-    elementType="header"
-    align="center"
-    wrap="wrap"
-    gap="m"
-  >
-    <span
-      className={styles.logo}
-      role="img"
-      aria-label="mittwald"
-    />
-    <HeaderNavigation
-      aria-label="Hauptnavigation"
-      className={styles.topnav}
+  <header className={styles.header}>
+    <Flex
+      align="center"
+      wrap="wrap"
+      gap="m"
+      className={styles.headerContent}
     >
-      <GlobalNavigationLinks />
-      <SearchButton />
-      <NotificationButton />
-      <ContextMenuTrigger>
-        <Button aria-label="Konto">
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <ContextMenu>
-          <MenuItem>
-            <IconSettings />
-            <Text>Profil</Text>
-          </MenuItem>
-          <MenuItem>
-            <IconLogout />
-            <Text>Abmelden</Text>
-          </MenuItem>
-        </ContextMenu>
-      </ContextMenuTrigger>
-    </HeaderNavigation>
-    <HeaderNavigation className={styles.mobileActions}>
-      <SearchButton />
-      <NotificationButton />
-      <MobileMenu />
-    </HeaderNavigation>
-  </Flex>
+      <span
+        className={styles.logo}
+        role="img"
+        aria-label="mittwald"
+      />
+      <HeaderNavigation
+        aria-label="Hauptnavigation"
+        className={styles.topnav}
+      >
+        <GlobalNavigationLinks />
+        <SearchButton />
+        <NotificationButton />
+        <ContextMenuTrigger>
+          <Button aria-label="Konto">
+            <Avatar>
+              <Initials>Max Mustermann</Initials>
+            </Avatar>
+          </Button>
+          <ContextMenu>
+            <MenuItem>
+              <IconSettings />
+              <Text>Profil</Text>
+            </MenuItem>
+            <MenuItem>
+              <IconLogout />
+              <Text>Abmelden</Text>
+            </MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
+      </HeaderNavigation>
+      <HeaderNavigation className={styles.mobileActions}>
+        <SearchButton />
+        <NotificationButton />
+        <MobileMenu />
+      </HeaderNavigation>
+    </Flex>
+  </header>
 );
 
 /*
