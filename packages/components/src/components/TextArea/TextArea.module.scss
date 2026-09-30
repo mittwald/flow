@@ -1,11 +1,25 @@
 @use "@/styles/mixins/formControl";
 @use "@/styles/mixins/scrollbar";
 
+@function rows-height($rows) {
+  $padding: calc(var(--form-control--padding-y) * 2);
+
+  @return calc(var(--line-height-m) * #{$rows} + #{$padding});
+}
+
 .input {
   @include scrollbar.scrollbar;
 
   resize: none;
   min-width: 100%;
+  min-height: rows-height(var(--text-area--rows));
+
+  /* Unset while the user may resize vertically, which drops the cap. */
+  max-height: rows-height(var(--text-area--max-rows));
+
+  &[data-readonly] {
+    caret-color: transparent;
+  }
 
   &.horizontalResize {
     resize: inline;
