@@ -1,4 +1,7 @@
 import { ActionGroup } from "@/components/ActionGroup";
+import { Alert } from "@/components/Alert";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
 import { Label } from "@/components/Label";
 import { Section } from "@/components/Section";
 import { TextField } from "@/components/TextField";
@@ -230,6 +233,48 @@ export const WithRootError: Story = {
             </TextField>
             <FormRootError />
           </Field>
+          <ActionGroup>
+            <SubmitButton>Submit</SubmitButton>
+          </ActionGroup>
+        </Section>
+      </Form>
+    );
+  },
+};
+
+export const WithCustomRootError: Story = {
+  render: (props) => {
+    const form = useForm<Values>({
+      defaultValues: {
+        name: "error",
+      },
+    });
+    const Field = typedField(form);
+
+    return (
+      <Form
+        {...props}
+        form={form}
+        onSubmit={(values) => {
+          if (values.name === "error") {
+            form.setError("root", { type: "invalidCredentials" });
+          }
+        }}
+      >
+        <Section>
+          <Field name="name">
+            <TextField>
+              <Label>Name</Label>
+            </TextField>
+          </Field>
+          <FormRootError>
+            {(error) => (
+              <Alert status="danger">
+                <Heading>Invalid credentials</Heading>
+                <Text>Error type: {error.type}</Text>
+              </Alert>
+            )}
+          </FormRootError>
           <ActionGroup>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
