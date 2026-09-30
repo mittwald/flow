@@ -51,13 +51,18 @@ flowchart LR
 
 ## How changes flow (the mechanics)
 
-- **Conventional PR titles drive everything.** The repo **squash-merges**, so
-  the _PR title_ becomes the release commit that Lerna-Lite reads to derive the
-  version bump and changelog. A CI guard (`.github/workflows/commit-guard.yml`)
-  enforces both that the title is a valid Conventional Commit and that it is
-  routed to the right line — a `feat:` is rejected on `main` (features belong on
-  `next`), and a breaking change on both `main` and `next` (it belongs on the
-  major line).
+- **The line decides the bump, commits decide the changelog.** `publish.yml`
+  passes the bump explicitly: a push to `main` is a patch, a push to `next`
+  counts up `-next.N`, minors come pre-graduated by promotion. Lerna-Lite writes
+  the changelog from every commit since the last tag — a squash merge turns the
+  _PR title_ into that commit, a merge commit brings every branch commit along.
+  Derived instead, a `feat:` commit a merge carried onto `main` released 1.3.0
+  (#3290, #3333), and a `!` commit on `next` opened `2.0.0-next.0` (#3199).
+- **Conventional commits are routed.** A CI guard
+  (`.github/workflows/commit-guard.yml`) enforces that the title is a valid
+  Conventional Commit and that the title **and every commit** are routed to the
+  right line — a `feat:` is rejected on `main` (features belong on `next`), and
+  a breaking change on both `main` and `next` (it belongs on the major line).
 - **`Closes #…` works on both lines.** GitHub resolves a closing keyword only
   against the default branch, so a PR merged into `next` closed nothing — the
   link rendered in the sidebar and the issue stayed open until somebody noticed.
@@ -238,8 +243,10 @@ The model relies on a few repository settings, not just the workflows. They are
 configured in GitHub (repo admin), and mirrored on the rehearsal fork so a
 dry-run is faithful:
 
-- **Squash-only merge**, with the squash commit defaulting to the **PR title** —
-  that title is the release commit Lerna-Lite reads.
+- **Merge methods per line:** `main` allows squash and merge commits (the
+  promotion PR must be merged as a merge commit), `next` allows merge commits
+  only. A squash commit defaults to the **PR title**. Because merge commits are
+  allowed, the routing guard checks every commit of a PR, not just its title.
 - **Branch protection + required status checks** on `main` and `next`
   (Conventional PR title, Routing, Version contract, the build), prepared the
   same way for the on-demand major line once it exists.
