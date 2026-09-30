@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/mittwald/flow/compare/1.4.1...1.4.2) (2026-09-30)
+
+### Bug Fixes
+
+* **MarkdownEditor:** keep the preview height across re-renders ([#3331](https://github.com/mittwald/flow/issues/3331)) ([cc1e148](https://github.com/mittwald/flow/commit/cc1e1489b4660ed73b459d7b5067f69bc70de420))
+
 ## [1.4.1](https://github.com/mittwald/flow/compare/1.4.0...1.4.1) (2026-09-30)
 
 ### Bug Fixes
