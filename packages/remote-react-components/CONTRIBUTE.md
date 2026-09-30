@@ -38,8 +38,9 @@ browser (`--browser.name=webkit`) only verifies one of them.
 
 ### Running the Tests
 
-The nx targets install the required test browsers themselves. On Linux they also
-need system libraries, which `pnpm test:browser:prepare` adds once.
+The nx targets install the required test browsers for you, locally (on CI the
+workflows do it per job). On Linux they also need system libraries, which
+`pnpm test:browser:prepare` adds once.
 
 Run the tests using the following command:
 
