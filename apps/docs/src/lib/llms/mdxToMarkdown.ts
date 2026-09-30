@@ -8,6 +8,12 @@ import {
   tokenName,
 } from "@/lib/designTokens/collectTokens";
 import { absoluteUrl } from "@/lib/llms/siteUrls";
+import {
+  loadComponentTokens,
+  parseTokensAttribute,
+  resolveNamespaces,
+  splitByTheme,
+} from "@/lib/componentTokens/loadComponentTokens";
 
 interface Options {
   componentName?: string;
@@ -58,6 +64,38 @@ const designTokenTableToMarkdown = (tokenPath: string): string => {
       (token) => `| \`--${tokenName(token)}\` | \`${token.value}\` |`,
     ),
   ].join("\n");
+};
+
+const componentTokenTableToMarkdown = (namespaces: string[]): string => {
+  const { single, perTheme } = splitByTheme(loadComponentTokens(namespaces));
+  const tables = [];
+
+  if (single.length > 0) {
+    tables.push(
+      [
+        "## Größen & Stile",
+        "",
+        "| Token | Wert |",
+        "| --- | --- |",
+        ...single.map((token) => `| \`${token.name}\` | \`${token.light}\` |`),
+      ].join("\n"),
+    );
+  }
+  if (perTheme.length > 0) {
+    tables.push(
+      [
+        "## Farben",
+        "",
+        "| Token | Light | Dark |",
+        "| --- | --- | --- |",
+        ...perTheme.map(
+          (token) =>
+            `| \`${token.name}\` | \`${token.light}\` | \`${token.dark ?? token.light}\` |`,
+        ),
+      ].join("\n"),
+    );
+  }
+  return tables.join("\n\n");
 };
 
 const dedent = (content: string): string => {
@@ -132,6 +170,17 @@ export const mdxToMarkdown = (
       return "";
     }
     const table = designTokenTableToMarkdown(tokenPath);
+    return table ? `\n\n${stash(table)}\n\n` : "";
+  });
+
+  // ComponentTokenTable -> the same rows the rendered table shows.
+  body = body.replaceAll(/<ComponentTokenTable\b[^>]*\/>/g, (tag) => {
+    if (!options.componentName) {
+      return "";
+    }
+    const table = componentTokenTableToMarkdown(
+      resolveNamespaces(options.componentName, parseTokensAttribute(tag)),
+    );
     return table ? `\n\n${stash(table)}\n\n` : "";
   });
 
