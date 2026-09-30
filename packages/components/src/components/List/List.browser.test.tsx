@@ -140,6 +140,29 @@ describe("Filter", () => {
     expect(listItem42).toBeInTheDocument();
     expect(listItem43).not.toBeInTheDocument();
   });
+
+  /*
+   * Icon-only, like the store and reset buttons beside it — the tooltip alone
+   * gives a screen reader nothing to announce.
+   */
+  test("The button that clears all filters is named", async () => {
+    await render(
+      getTestElement(
+        [42, 43, 44],
+        <ListFilter<Data>
+          property="num"
+          mode="some"
+          defaultSelected={[42, 43]}
+        />,
+      ),
+    );
+    const listItem44 = page.getByText("Item: 44");
+    expect(listItem44).not.toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Clear filters" }));
+
+    await expect.element(listItem44).toBeInTheDocument();
+  });
 });
 
 describe("Storage", async () => {

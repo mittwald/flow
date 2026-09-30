@@ -103,6 +103,7 @@ export const ActiveFilters: FC<Props> = observer((props) => {
           variant="plain"
           color="secondary"
           onPress={() => list.clearFilters()}
+          aria-label={formatter.format("filters.clear")}
         >
           <IconClose />
         </ButtonView>
