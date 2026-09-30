@@ -281,13 +281,24 @@ jobs:
             pulls="$(gh api \
               "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls")"
             head_ref="$(printf '%s' "$pulls" | jq -r '.[0].head.ref // ""')"
-            pr="$(printf '%s' "$pulls" | jq -r '.[0].number // ""')"
-            case "$head_ref" in
-              release/*)
-                version="${head_ref#release/}"
-                echo "::notice::Promotion merge from '${head_ref}' (PR #${pr}) — graduating to ${version}."
-                ;;
-            esac
+            head_repo="$(printf '%s' "$pulls" | jq -r '.[0].head.repo.full_name // ""')"
+            merged="$(printf '%s' "$pulls" | jq -r '.[0].number // ""')"
+            # Only a branch OF THIS REPOSITORY counts, for the version and for
+            # the notes. A fork can name any branch `release/2.0.0`: merged, the
+            # name alone graduated `latest` to 2.0.0, and the fork's PR body
+            # became the GitHub Release. A deleted fork leaves `head.repo` null,
+            # which reads as "not this repository" too.
+            if [ "$head_repo" = "${{ github.repository }}" ]; then
+              pr="$merged"
+              case "$head_ref" in
+                release/*)
+                  version="${head_ref#release/}"
+                  echo "::notice::Promotion merge from '${head_ref}' (PR #${pr}) — graduating to ${version}."
+                  ;;
+              esac
+            elif [ -n "$merged" ]; then
+              echo "::notice::PR #${merged} comes from '${head_repo:-a deleted fork}' — no promotion, no curated notes."
+            fi
           elif [ -n "${{ inputs.release_as }}" ] && [ "${{ github.ref_name }}" != "main" ]; then
             # The one-time cut is dispatched ON ITS OWN BRANCH, never merged
             # first: merging it would itself publish, and with
