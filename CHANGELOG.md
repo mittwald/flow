@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.12](https://github.com/mittwald/flow/compare/1.3.11...1.3.12) (2026-09-30)
+
+### Bug Fixes
+
+* **Rating:** round decimal values to the nearest segment ([b6a0c0a](https://github.com/mittwald/flow/commit/b6a0c0ad366fedb24655e30f61831cc0c402d278))
+
 ## [1.3.11](https://github.com/mittwald/flow/compare/1.3.10...1.3.11) (2026-09-29)
 
 ### Bug Fixes
