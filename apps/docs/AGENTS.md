@@ -28,6 +28,11 @@ Next.js documentation site for the flow Styleguide, deployed to
   appear in the URL, so a page belongs in one of the two — a `page.tsx` directly
   under `src/app` has no layout at all. `buildPageInventory` strips the group
   from the pathname; keep that in mind when adding a group.
+- **`page.dev.tsx` is a page under `next dev` only.** `next.config.js` adds
+  `dev.tsx` to `pageExtensions` in the development phase alone, so the static
+  export ships none of these routes. `/example-preview/<path>` is one: it
+  renders a single example, framed as on its page, for `pnpm release:figure` to
+  capture release-note figures from.
 - Code examples are `.tsx` files in the `examples/` directory next to the MDX
   file, referenced via `example="<name>"` (see "Page Building Blocks" in the
   README). Every example keeps its imports — they are what the editor builds its
