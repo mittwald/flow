@@ -42,6 +42,18 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("MarkdownEditor states - custom button");
+
+    await render(
+      <MarkdownEditor
+        rows={1}
+        accept="image/*"
+        uploadFile={async () => ({ url: "https://example.com/a.png" })}
+      >
+        <Label>With attachment button</Label>
+      </MarkdownEditor>,
+    );
+
+    await testScreenshot("MarkdownEditor states - attachment button");
   },
 );
 

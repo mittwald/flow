@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/mittwald/flow/compare/1.4.0-next.14...1.4.0) (2026-09-30)
+
+### Bug Fixes
+
+* **release-figure:** wait for images before measuring a panel ([b07f1d5](https://github.com/mittwald/flow/commit/b07f1d5527e47b42d9fab301534f210f1110175d)), closes [#storybook-root](https://github.com/mittwald/flow/issues/storybook-root)
+
+### Documentation
+
+* **releases:** add the 1.4.0 Image figure ([ee6b502](https://github.com/mittwald/flow/commit/ee6b502646d05143d8aee53915eb594bf2bb0c2e))
+* **releases:** add the 1.4.0 release-note figures ([5dafc60](https://github.com/mittwald/flow/commit/5dafc6070bc47f5fb6c2e32b62b5ab1ce9175c21))
+
+### Miscellaneous Chores
+
+* **sync:** take the stable changelogs from main ([6805373](https://github.com/mittwald/flow/commit/68053736e184c042b7540e63393f72f909675ebb))
+
 ## [1.3.13](https://github.com/mittwald/flow/compare/1.3.12...1.3.13) (2026-09-30)
 
 ### Bug Fixes
