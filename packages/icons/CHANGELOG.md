@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.0](https://github.com/mittwald/flow/compare/1.4.0-next.15...1.5.0-next.0) (2026-09-30)
+
+## [1.3.13](https://github.com/mittwald/flow/compare/1.4.0-next.14...1.3.13) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.3.13 ([7795e04](https://github.com/mittwald/flow/commit/7795e0462026e9db5962b763c047b64ca1be97ea))
+* **release:** bump version to 1.4.0 ([6edb48e](https://github.com/mittwald/flow/commit/6edb48e857b682f359bba6d4471976742acaf6d9))
+* **sync:** take the stable changelogs from main ([6805373](https://github.com/mittwald/flow/commit/68053736e184c042b7540e63393f72f909675ebb))
+
 ## [1.4.0-next.15](https://github.com/mittwald/flow/compare/1.4.0-next.14...1.4.0-next.15) (2026-09-30)
 
 **Note:** Version bump only for package @mittwald/flow-icons
