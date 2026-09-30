@@ -41,6 +41,10 @@
  *   these at all. Each panel therefore checks its iframe's own font status and
  *   is not measured until it is `loaded`; a face that never arrives aborts the
  *   run rather than producing a figure in the fallback face.
+ * - **Nothing waits for a story's `<img>` either.** Measured before it loads, an
+ *   image has no intrinsic size: the panel comes out ~80px tall and the figure
+ *   shows a thin strip of the picture. Each panel waits until every image in
+ *   its iframe has loaded; a broken one aborts the run.
  * - **`pnpm test:browser:prepare` installs only Firefox and WebKit**, so a clean
  *   checkout has no Chromium. The browser is chosen from what is actually
  *   installed, and the capture names the one it used.
@@ -265,6 +269,18 @@ const MEASURE_PANEL = `(async ({ index, expectations }) => {
     new Promise((resolve) => setTimeout(resolve, 5000)),
   ]);
   if (doc.fonts.status !== 'loaded') return null;
+  // An unloaded <img> has no intrinsic size yet, so the panel measures a few
+  // pixels tall and the capture shows a thin strip of it. Same pattern as the
+  // fonts: the race bounds one evaluate, the check after it decides. A broken
+  // image counts as not ready too — it must abort, not land in the figure.
+  const images = [...doc.images];
+  await Promise.race([
+    Promise.all(images.map((img) => img.decode().catch(() => {}))),
+    new Promise((resolve) => setTimeout(resolve, 5000)),
+  ]);
+  if (images.some((img) => !img.complete || img.naturalWidth === 0)) {
+    return null;
+  }
   const style = getComputedStyle(doc.body);
   const rect = root.getBoundingClientRect();
   // .bottom, not .height: the rect is relative to the iframe viewport, so
@@ -314,7 +330,7 @@ const measurePanel = async (page, index, expectations, story) => {
     if (measured) return measured;
     if (Date.now() > deadline) {
       throw new Error(
-        `panel ${index} (${story}) never became ready within 30s — either nothing rendered into #storybook-root, or its fonts never finished loading. Open the story in Storybook and check its console and network tab`,
+        `panel ${index} (${story}) never became ready within 30s — either nothing rendered into #storybook-root, or its fonts or images never finished loading. Open the story in Storybook and check its console and network tab`,
       );
     }
     await sleep(250);
