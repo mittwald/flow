@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { KeyboardEvent, MouseEvent, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./MenuItem.module.scss";
 import clsx from "clsx";
@@ -32,14 +32,48 @@ export interface MenuItemProps
   "aria-current"?: string;
 }
 
-const disablePendingProps = (props: MenuItemProps) => {
-  if (
+const isMuted = (props: MenuItemProps) =>
+  !!(
     props.isPending ||
     props.isSucceeded ||
     props.isFailed ||
     props["aria-disabled"]
-  ) {
+  );
+
+type RenderFunction = NonNullable<MenuItemProps["render"]>;
+
+const renderElement: RenderFunction = (domProps) =>
+  "href" in domProps ? <a {...domProps} /> : <div {...domProps} />;
+
+/**
+ * React Aria drops `aria-disabled` from the props it forwards to the DOM, so it
+ * is added to the rendered element. Its `onClick` runs the menu's `onAction`,
+ * follows the link and toggles the selection, and Enter and Space toggle the
+ * selection on key down, so both handlers are replaced as well.
+ */
+const renderMuted =
+  (render: RenderFunction = renderElement): RenderFunction =>
+  (domProps, renderProps) =>
+    render(
+      {
+        ...domProps,
+        "aria-disabled": true,
+        onClick: (e: MouseEvent) => e.preventDefault(),
+        onKeyDown: (e: KeyboardEvent<HTMLDivElement & HTMLAnchorElement>) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+          } else {
+            domProps.onKeyDown?.(e);
+          }
+        },
+      },
+      renderProps,
+    );
+
+const disablePendingProps = (props: MenuItemProps) => {
+  if (isMuted(props)) {
     props = { ...props };
+    props.onAction = undefined;
     props.onPress = undefined;
     props.onPressStart = undefined;
     props.onPressEnd = undefined;
@@ -52,6 +86,7 @@ const disablePendingProps = (props: MenuItemProps) => {
 
 /** @flr-generate all */
 export const MenuItem = flowComponent("MenuItem", (props) => {
+  const muted = isMuted(props);
   props = disablePendingProps(props);
 
   const {
@@ -61,8 +96,9 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     isIndeterminate,
     id,
     ref,
-    "aria-disabled": ariaDisabled,
+    "aria-disabled": ignoredAriaDisabled,
     "aria-current": ariaCurrent,
+    render,
     isPending,
     isSucceeded,
     isFailed,
@@ -79,15 +115,7 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
   const currentProps =
     ariaCurrent && ariaCurrent !== "false" ? { "data-current": true } : {};
 
-  const rootClassName = clsx(
-    styles.menuItem /**
-     * Workaround warning: The Aria.MenuItem does not support "aria-disabled" by
-     * now, so this MenuItem will be visually disabled via CSS.
-     */,
-    (ariaDisabled || isFailed || isSucceeded || isPending) &&
-      styles.ariaDisabled,
-    className,
-  );
+  const rootClassName = clsx(styles.menuItem, className);
 
   useAriaAnnounceActionState(
     isPending
@@ -115,6 +143,7 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     <Aria.MenuItem
       {...rest}
       {...currentProps}
+      render={muted ? renderMuted(render) : render}
       key={id}
       id={id}
       className={rootClassName}
