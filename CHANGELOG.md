@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.7](https://github.com/mittwald/flow/compare/1.5.0-next.6...1.5.0-next.7) (2026-10-01)
+
+### Bug Fixes
+
+* **Button:** expose muted presses as aria-disabled ([#3318](https://github.com/mittwald/flow/issues/3318)) ([90bbfa3](https://github.com/mittwald/flow/commit/90bbfa33f7b954c4708dfcbd46f9e375edea6e53))
+
+## [1.4.5](https://github.com/mittwald/flow/compare/1.5.0-next.5...1.4.5) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.5 ([738ed04](https://github.com/mittwald/flow/commit/738ed0403e0356688de9b5eba7a784d605307664))
+
 ## [1.5.0-next.6](https://github.com/mittwald/flow/compare/1.5.0-next.5...1.5.0-next.6) (2026-10-01)
 
 ### Bug Fixes
