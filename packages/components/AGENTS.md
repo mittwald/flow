@@ -263,7 +263,13 @@ if ("action" in props) {
   the committed `*.module.d.scss.ts` stubs declare, run through the build's own
   `cssModuleClassNameGenerator`. The reference has to name a class some
   component actually generates — otherwise the selector matches nothing, which
-  used to fail without a single signal anywhere.
+  used to fail without a single signal anywhere. Its ESLint twin
+  `flow/no-unknown-flow-class` (`dev/eslint/`) checks hardcoded `flow--…` names
+  in `src/**` TS/TSX strings — `className`s, `querySelector`s, test assertions —
+  against the same set (`dev/flowClassNames/`). A runtime-built prefix
+  (`` `flow--button--${color}` ``) passes if a known class starts with it; a
+  test asserting a removed class stays absent needs an
+  `eslint-disable-next-line` with the reason.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
