@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.12](https://github.com/mittwald/flow/compare/1.5.0-next.11...1.5.0-next.12) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group across 1 directory with 14 updates ([#3363](https://github.com/mittwald/flow/issues/3363)) ([d0b2526](https://github.com/mittwald/flow/commit/d0b25269a05646b384c7fe12c7a68c9e3ed0f8cd))
+
 ## [1.5.0-next.11](https://github.com/mittwald/flow/compare/1.4.8...1.5.0-next.11) (2026-10-01)
 
 ## [1.5.0-next.10](https://github.com/mittwald/flow/compare/1.5.0-next.9...1.5.0-next.10) (2026-10-01)
