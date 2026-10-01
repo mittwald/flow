@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.9](https://github.com/mittwald/flow/compare/1.4.8...1.4.9) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group across 1 directory with 14 updates ([#3363](https://github.com/mittwald/flow/issues/3363)) ([d0b2526](https://github.com/mittwald/flow/commit/d0b25269a05646b384c7fe12c7a68c9e3ed0f8cd))
+
+## [1.4.8](https://github.com/mittwald/flow/compare/1.4.7...1.4.8) (2026-10-01)
+
+### Bug Fixes
+
+* **List:** keep tile images square at the bottom ([#3349](https://github.com/mittwald/flow/issues/3349)) ([ecc88fc](https://github.com/mittwald/flow/commit/ecc88fc44f154d93db1595f11d35add38e5446bf))
+
+### Documentation
+
+* keep the App Shell header and sidebars in view ([#3326](https://github.com/mittwald/flow/issues/3326)) ([2d0f248](https://github.com/mittwald/flow/commit/2d0f248312b85e4ad5a05bf40114935bb0850f01))
+
+### Continuous Integration
+
+* **commit-guard:** allow breaking changes on a major line ([4d9ebdd](https://github.com/mittwald/flow/commit/4d9ebdde6897ed584a4a24a6633b717d9e9582f1))
+
+## [1.4.7](https://github.com/mittwald/flow/compare/1.4.6...1.4.7) (2026-10-01)
+
+### Bug Fixes
+
+* **Accordion:** animate the content height instead of the grid rows ([d16e177](https://github.com/mittwald/flow/commit/d16e1770fe6608739ca453b69824530b5326b42e))
+
+## [1.4.6](https://github.com/mittwald/flow/compare/1.4.5...1.4.6) (2026-10-01)
+
+### Bug Fixes
+
+* **Button:** expose muted presses as aria-disabled ([#3318](https://github.com/mittwald/flow/issues/3318)) ([90bbfa3](https://github.com/mittwald/flow/commit/90bbfa33f7b954c4708dfcbd46f9e375edea6e53))
+
+## [1.4.5](https://github.com/mittwald/flow/compare/1.4.4...1.4.5) (2026-10-01)
+
+### Bug Fixes
+
+* **ContextMenu:** pass labeling props to the menu instead of the popover ([#3354](https://github.com/mittwald/flow/issues/3354)) ([e0e1756](https://github.com/mittwald/flow/commit/e0e1756d6ff719163a939a208058bcd0f8fb4120))
+
+### Miscellaneous Chores
+
+* **deps:** bump the actions group with 2 updates ([#3345](https://github.com/mittwald/flow/issues/3345)) ([856a840](https://github.com/mittwald/flow/commit/856a840d8f585242bc27322d389595750179f74f))
+
+### Tests
+
+* **MarkdownEditor:** gate the attachment button scenario below 1.4.0 ([#3358](https://github.com/mittwald/flow/issues/3358)) ([d25c061](https://github.com/mittwald/flow/commit/d25c061257d8e6306b1b8f58f902264e15dadd72))
+
+## [1.4.4](https://github.com/mittwald/flow/compare/1.4.3...1.4.4) (2026-09-30)
+
+### Documentation
+
+* replace stale Patterns references with Templates ([#3350](https://github.com/mittwald/flow/issues/3350)) ([d8c6ba6](https://github.com/mittwald/flow/commit/d8c6ba6a770be9f64cfadbc7abd375ee75e90990))
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump eslint from 10.10.0 to 10.11.0 in the dev-minor group ([#3348](https://github.com/mittwald/flow/issues/3348)) ([aff66cd](https://github.com/mittwald/flow/commit/aff66cd1327cd24f4bfd4fd43834120ef1613f5f))
+
+### Continuous Integration
+
+* **release:** merge a concurrent change instead of rebasing the release commit ([#3352](https://github.com/mittwald/flow/issues/3352)) ([67dddff](https://github.com/mittwald/flow/commit/67dddfff121fae7060bde53d011af22f6d31cdac))
+* **release:** only a branch of this repository is a promotion ([#3353](https://github.com/mittwald/flow/issues/3353)) ([705bc22](https://github.com/mittwald/flow/commit/705bc22975c3e23492d50a1ebf8df715b37e06b3))
+
 ## [1.4.3](https://github.com/mittwald/flow/compare/1.4.2...1.4.3) (2026-09-30)
 
 ### Bug Fixes

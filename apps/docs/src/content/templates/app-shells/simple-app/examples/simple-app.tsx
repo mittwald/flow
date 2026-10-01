@@ -120,202 +120,216 @@ const contracts = [
 ];
 
 export default () => (
-  <Flex direction="column" gap="l" className={styles.app}>
-    <Flex
-      elementType="header"
-      align="center"
-      wrap="wrap"
-      gap="m"
-    >
-      <span
-        className={styles.logo}
-        role="img"
-        aria-label="mittwald"
-      />
-      <HeaderNavigation
-        aria-label="Hauptnavigation"
-        className={styles.nav}
+  <Flex direction="column" className={styles.app}>
+    <header className={styles.header}>
+      <Flex
+        align="center"
+        wrap="wrap"
+        gap="m"
+        className={styles.headerContent}
       >
-        <GlobalNavigationLinks />
-        <NotificationButton />
-        <ContextMenuTrigger>
-          <Button aria-label="Konto">
-            <Avatar>
-              <Initials>Max Mustermann</Initials>
-            </Avatar>
-          </Button>
-          <ContextMenu>
-            <MenuItem>
-              <IconSettings />
-              <Text>Profil</Text>
-            </MenuItem>
-            <MenuItem>
-              <IconLogout />
-              <Text>Abmelden</Text>
-            </MenuItem>
-          </ContextMenu>
-        </ContextMenuTrigger>
-      </HeaderNavigation>
-      <HeaderNavigation className={styles.mobileActions}>
-        <NotificationButton />
-        <MobileMenu />
-      </HeaderNavigation>
-    </Flex>
+        <span
+          className={styles.logo}
+          role="img"
+          aria-label="mittwald"
+        />
+        <HeaderNavigation
+          aria-label="Hauptnavigation"
+          className={styles.nav}
+        >
+          <GlobalNavigationLinks />
+          <NotificationButton />
+          <ContextMenuTrigger>
+            <Button aria-label="Konto">
+              <Avatar>
+                <Initials>Max Mustermann</Initials>
+              </Avatar>
+            </Button>
+            <ContextMenu>
+              <MenuItem>
+                <IconSettings />
+                <Text>Profil</Text>
+              </MenuItem>
+              <MenuItem>
+                <IconLogout />
+                <Text>Abmelden</Text>
+              </MenuItem>
+            </ContextMenu>
+          </ContextMenuTrigger>
+        </HeaderNavigation>
+        <HeaderNavigation className={styles.mobileActions}>
+          <NotificationButton />
+          <MobileMenu />
+        </HeaderNavigation>
+      </Flex>
+    </header>
 
-    <Flex elementType="main" direction="column" gap="l">
-      {/* The active area is already named in the navigation, so the page
-          heading is only exposed to assistive technology. */}
-      <Heading level={1} className={styles.visuallyHidden}>
-        Dashboard
-      </Heading>
+    <Flex
+      direction="column"
+      gap="l"
+      grow
+      className={styles.content}
+    >
+      <Flex elementType="main" direction="column" gap="l">
+        {/* The active area is already named in the navigation, so the page
+            heading is only exposed to assistive technology. */}
+        <Heading
+          level={1}
+          className={styles.visuallyHidden}
+        >
+          Dashboard
+        </Heading>
 
-      <ColumnLayout l={[1, 1]} m={[1]}>
-        <ColumnLayout l={[1]} m={[1]}>
-          <LayoutCard>
-            <Section>
-              <Heading>Neuverträge</Heading>
-              <CartesianChart
-                data={contracts}
-                height="18rem"
-              >
-                <Line
-                  dataKey="Webhosting"
-                  color="sea-green"
-                />
-                <Line
-                  dataKey="vServer"
-                  color="palatinate-blue"
-                />
-                <Line
-                  dataKey="Dedicated Server"
-                  color="tangerine"
-                />
-                <XAxis dataKey="month" />
-                <YAxis domain={[0, 200]} />
-                <ChartGrid />
-                <ChartLegend />
-                <ChartTooltip />
-              </CartesianChart>
-            </Section>
-          </LayoutCard>
-
-          <ColumnLayout l={[1, 1]} m={[1, 1]}>
+        <ColumnLayout l={[1, 1]} m={[1]}>
+          <ColumnLayout l={[1]} m={[1]}>
             <LayoutCard>
-              <Flex
-                direction="column"
-                align="center"
-                gap="xs"
-                className={styles.stat}
-              >
-                <Icon size="l" color="success">
-                  <IconTrendingUp />
-                </Icon>
-                <span className={styles.statValue}>
-                  + 2.000 €
-                </span>
-                <Text className={styles.statLabel}>
-                  Vertragsbestand (30 Tage)
-                </Text>
-              </Flex>
+              <Section>
+                <Heading>Neuverträge</Heading>
+                <CartesianChart
+                  data={contracts}
+                  height="18rem"
+                >
+                  <Line
+                    dataKey="Webhosting"
+                    color="sea-green"
+                  />
+                  <Line
+                    dataKey="vServer"
+                    color="palatinate-blue"
+                  />
+                  <Line
+                    dataKey="Dedicated Server"
+                    color="tangerine"
+                  />
+                  <XAxis dataKey="month" />
+                  <YAxis domain={[0, 200]} />
+                  <ChartGrid />
+                  <ChartLegend />
+                  <ChartTooltip />
+                </CartesianChart>
+              </Section>
             </LayoutCard>
+
+            <ColumnLayout l={[1, 1]} m={[1, 1]}>
+              <LayoutCard>
+                <Flex
+                  direction="column"
+                  align="center"
+                  gap="xs"
+                  className={styles.stat}
+                >
+                  <Icon size="l" color="success">
+                    <IconTrendingUp />
+                  </Icon>
+                  <span className={styles.statValue}>
+                    + 2.000 €
+                  </span>
+                  <Text className={styles.statLabel}>
+                    Vertragsbestand (30 Tage)
+                  </Text>
+                </Flex>
+              </LayoutCard>
+              <LayoutCard>
+                <Flex
+                  direction="column"
+                  align="center"
+                  gap="xs"
+                  className={styles.stat}
+                >
+                  <Icon size="l" color="danger">
+                    <IconTrendingDown />
+                  </Icon>
+                  <span className={styles.statValue}>
+                    40
+                  </span>
+                  <Text className={styles.statLabel}>
+                    Neuverträge (30 Tage)
+                  </Text>
+                </Flex>
+              </LayoutCard>
+            </ColumnLayout>
+
             <LayoutCard>
-              <Flex
-                direction="column"
-                align="center"
-                gap="xs"
-                className={styles.stat}
-              >
-                <Icon size="l" color="danger">
-                  <IconTrendingDown />
-                </Icon>
-                <span className={styles.statValue}>40</span>
-                <Text className={styles.statLabel}>
-                  Neuverträge (30 Tage)
-                </Text>
-              </Flex>
+              <Section>
+                <Heading>Vertragszusammensetzung</Heading>
+                <DonutChart
+                  aria-label="Vertragszusammensetzung"
+                  size="l"
+                  legendPosition="bottom"
+                  maxValue={1200}
+                  formatOptions={{ style: "decimal" }}
+                  segments={[
+                    {
+                      title: "Webhosting",
+                      value: 700,
+                      color: "sea-green",
+                    },
+                    {
+                      title: "vServer",
+                      value: 300,
+                      color: "palatinate-blue",
+                    },
+                    {
+                      title: "Dedicated Server",
+                      value: 200,
+                      color: "tangerine",
+                    },
+                  ]}
+                >
+                  <strong>1,2 K</strong>
+                </DonutChart>
+              </Section>
             </LayoutCard>
           </ColumnLayout>
 
           <LayoutCard>
             <Section>
-              <Heading>Vertragszusammensetzung</Heading>
-              <DonutChart
-                aria-label="Vertragszusammensetzung"
-                size="l"
-                legendPosition="bottom"
-                maxValue={1200}
-                formatOptions={{ style: "decimal" }}
-                segments={[
-                  {
-                    title: "Webhosting",
-                    value: 700,
-                    color: "sea-green",
-                  },
-                  {
-                    title: "vServer",
-                    value: 300,
-                    color: "palatinate-blue",
-                  },
-                  {
-                    title: "Dedicated Server",
-                    value: 200,
-                    color: "tangerine",
-                  },
-                ]}
-              >
-                <strong>1,2 K</strong>
-              </DonutChart>
+              <Heading>Letzte Kundenfeedbacks</Heading>
+              <MessageThread>
+                <Feedback
+                  name="Lena Brinkmann"
+                  date="13.09.24, 10:40"
+                  rating={5}
+                  text="Der Umzug meiner drei WordPress-Seiten lief völlig reibungslos. Der Support hat sogar proaktiv nachgefragt, ob alles passt – klare Empfehlung."
+                />
+                <Feedback
+                  name="Jonas Weber"
+                  date="12.09.24, 16:12"
+                  rating={5}
+                  text="Performance ist top und das Backup-Handling hat mir bei einem eigenen Fehler den Tag gerettet. So stelle ich mir Hosting vor."
+                />
+                <Feedback
+                  name="Miriam Kessler"
+                  date="11.09.24, 09:03"
+                  rating={3}
+                  text="Technisch stark, aber die Ersteinrichtung war für mich als Umsteiger etwas zäh. Mit dem Support ging es dann zügig."
+                />
+                <Feedback
+                  name="Tobias Reinhardt"
+                  date="10.09.24, 14:27"
+                  rating={4}
+                  text="Faires Preis-Leistungs-Verhältnis und schnelle Reaktionszeiten. Das mStudio könnte an ein, zwei Stellen noch aufgeräumter sein."
+                />
+              </MessageThread>
             </Section>
           </LayoutCard>
         </ColumnLayout>
+      </Flex>
 
-        <LayoutCard>
-          <Section>
-            <Heading>Letzte Kundenfeedbacks</Heading>
-            <MessageThread>
-              <Feedback
-                name="Lena Brinkmann"
-                date="13.09.24, 10:40"
-                rating={5}
-                text="Der Umzug meiner drei WordPress-Seiten lief völlig reibungslos. Der Support hat sogar proaktiv nachgefragt, ob alles passt – klare Empfehlung."
-              />
-              <Feedback
-                name="Jonas Weber"
-                date="12.09.24, 16:12"
-                rating={5}
-                text="Performance ist top und das Backup-Handling hat mir bei einem eigenen Fehler den Tag gerettet. So stelle ich mir Hosting vor."
-              />
-              <Feedback
-                name="Miriam Kessler"
-                date="11.09.24, 09:03"
-                rating={3}
-                text="Technisch stark, aber die Ersteinrichtung war für mich als Umsteiger etwas zäh. Mit dem Support ging es dann zügig."
-              />
-              <Feedback
-                name="Tobias Reinhardt"
-                date="10.09.24, 14:27"
-                rating={4}
-                text="Faires Preis-Leistungs-Verhältnis und schnelle Reaktionszeiten. Das mStudio könnte an ein, zwei Stellen noch aufgeräumter sein."
-              />
-            </MessageThread>
-          </Section>
-        </LayoutCard>
-      </ColumnLayout>
-    </Flex>
-
-    <Flex
-      elementType="footer"
-      justify="center"
-      wrap="wrap"
-      gap="l"
-      className={styles.footer}
-    >
-      <Link href="#" target="_blank" color="dark">
-        Datenschutz
-      </Link>
-      <Link href="#" target="_blank" color="dark">
-        Impressum
-      </Link>
+      <Flex
+        elementType="footer"
+        justify="center"
+        wrap="wrap"
+        gap="l"
+        className={styles.footer}
+      >
+        <Link href="#" target="_blank" color="dark">
+          Datenschutz
+        </Link>
+        <Link href="#" target="_blank" color="dark">
+          Impressum
+        </Link>
+      </Flex>
     </Flex>
   </Flex>
 );
