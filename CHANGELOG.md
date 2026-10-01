@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.9](https://github.com/mittwald/flow/compare/1.5.0-next.8...1.5.0-next.9) (2026-10-01)
+
+## [1.4.6](https://github.com/mittwald/flow/compare/1.5.0-next.6...1.4.6) (2026-10-01)
+
+### Bug Fixes
+
+* **Accordion:** animate the content height instead of the grid rows ([d16e177](https://github.com/mittwald/flow/commit/d16e1770fe6608739ca453b69824530b5326b42e))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.6 ([122a508](https://github.com/mittwald/flow/commit/122a508c8dc1e1d88ee00cf8d0d43fb12aec96fb))
+
 ## [1.5.0-next.8](https://github.com/mittwald/flow/compare/1.5.0-next.7...1.5.0-next.8) (2026-10-01)
 
 ### Features
