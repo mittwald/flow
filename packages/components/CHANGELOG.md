@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.6](https://github.com/mittwald/flow/compare/1.5.0-next.5...1.5.0-next.6) (2026-10-01)
+
+### Bug Fixes
+
+* **ContextMenu:** pass labeling props to the menu instead of the popover ([#3354](https://github.com/mittwald/flow/issues/3354)) ([e0e1756](https://github.com/mittwald/flow/commit/e0e1756d6ff719163a939a208058bcd0f8fb4120))
+
+## [1.4.4](https://github.com/mittwald/flow/compare/1.5.0-next.4...1.4.4) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.4 ([5319bbc](https://github.com/mittwald/flow/commit/5319bbc61288fdeb0854148dd8f74cd1d4f4da63))
+
 ## [1.5.0-next.5](https://github.com/mittwald/flow/compare/1.5.0-next.4...1.5.0-next.5) (2026-09-30)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
