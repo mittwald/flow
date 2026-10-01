@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.9](https://github.com/mittwald/flow/compare/1.5.0-next.8...1.5.0-next.9) (2026-10-01)
+
+## [1.4.6](https://github.com/mittwald/flow/compare/1.5.0-next.6...1.4.6) (2026-10-01)
+
+### Bug Fixes
+
+* **Accordion:** animate the content height instead of the grid rows ([d16e177](https://github.com/mittwald/flow/commit/d16e1770fe6608739ca453b69824530b5326b42e))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.6 ([122a508](https://github.com/mittwald/flow/commit/122a508c8dc1e1d88ee00cf8d0d43fb12aec96fb))
+
+## [1.5.0-next.8](https://github.com/mittwald/flow/compare/1.5.0-next.7...1.5.0-next.8) (2026-10-01)
+
+### Features
+
+* **FormRootError:** allow custom content via children ([26a0569](https://github.com/mittwald/flow/commit/26a056956f6870b79fc24db1207fa2b3854a8c5a))
+
+## [1.5.0-next.7](https://github.com/mittwald/flow/compare/1.5.0-next.6...1.5.0-next.7) (2026-10-01)
+
+### Bug Fixes
+
+* **Button:** expose muted presses as aria-disabled ([#3318](https://github.com/mittwald/flow/issues/3318)) ([90bbfa3](https://github.com/mittwald/flow/commit/90bbfa33f7b954c4708dfcbd46f9e375edea6e53))
+
+## [1.4.5](https://github.com/mittwald/flow/compare/1.5.0-next.5...1.4.5) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.5 ([738ed04](https://github.com/mittwald/flow/commit/738ed0403e0356688de9b5eba7a784d605307664))
+
+## [1.5.0-next.6](https://github.com/mittwald/flow/compare/1.5.0-next.5...1.5.0-next.6) (2026-10-01)
+
+### Bug Fixes
+
+* **ContextMenu:** pass labeling props to the menu instead of the popover ([#3354](https://github.com/mittwald/flow/issues/3354)) ([e0e1756](https://github.com/mittwald/flow/commit/e0e1756d6ff719163a939a208058bcd0f8fb4120))
+
+### Miscellaneous Chores
+
+* **deps:** bump the actions group with 2 updates ([#3345](https://github.com/mittwald/flow/issues/3345)) ([856a840](https://github.com/mittwald/flow/commit/856a840d8f585242bc27322d389595750179f74f))
+
+### Tests
+
+* **MarkdownEditor:** gate the attachment button scenario below 1.4.0 ([#3358](https://github.com/mittwald/flow/issues/3358)) ([d25c061](https://github.com/mittwald/flow/commit/d25c061257d8e6306b1b8f58f902264e15dadd72))
+
+## [1.4.4](https://github.com/mittwald/flow/compare/1.5.0-next.4...1.4.4) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.4 ([5319bbc](https://github.com/mittwald/flow/commit/5319bbc61288fdeb0854148dd8f74cd1d4f4da63))
+
+## [1.5.0-next.5](https://github.com/mittwald/flow/compare/1.5.0-next.4...1.5.0-next.5) (2026-09-30)
+
+### Documentation
+
+* replace stale Patterns references with Templates ([#3350](https://github.com/mittwald/flow/issues/3350)) ([d8c6ba6](https://github.com/mittwald/flow/commit/d8c6ba6a770be9f64cfadbc7abd375ee75e90990))
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump eslint from 10.10.0 to 10.11.0 in the dev-minor group ([#3348](https://github.com/mittwald/flow/issues/3348)) ([aff66cd](https://github.com/mittwald/flow/commit/aff66cd1327cd24f4bfd4fd43834120ef1613f5f))
+
+### Continuous Integration
+
+* **release:** merge a concurrent change instead of rebasing the release commit ([#3352](https://github.com/mittwald/flow/issues/3352)) ([67dddff](https://github.com/mittwald/flow/commit/67dddfff121fae7060bde53d011af22f6d31cdac))
+* **release:** only a branch of this repository is a promotion ([#3353](https://github.com/mittwald/flow/issues/3353)) ([705bc22](https://github.com/mittwald/flow/commit/705bc22975c3e23492d50a1ebf8df715b37e06b3))
+
+## [1.4.3](https://github.com/mittwald/flow/compare/1.5.0-next.2...1.4.3) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.3 ([ac0391b](https://github.com/mittwald/flow/commit/ac0391bfb522499e4af439ade2e3f68faaac42c1))
+
+## [1.5.0-next.4](https://github.com/mittwald/flow/compare/1.5.0-next.3...1.5.0-next.4) (2026-09-30)
+
+### Features
+
+* **Flex:** add paddingBlock and paddingInline ([241184d](https://github.com/mittwald/flow/commit/241184dce0e62d848622b38dcb5789355a1e6968))
+
 ## [1.5.0-next.3](https://github.com/mittwald/flow/compare/1.5.0-next.2...1.5.0-next.3) (2026-09-30)
 
 ### Bug Fixes
