@@ -105,9 +105,13 @@ export const runSingleCodemod = async (
 
   // The same trap as `processedNothing`, one field over: a transform that
   // declines a file by returning nothing counts as `skipped`, not `unmodified`.
-  // If every file was skipped and none changed, "0 file(s) changed" would read
+  // If every file was declined and none changed, "0 file(s) changed" would read
   // as a clean no-op run when in fact the transform bailed on everything.
-  if (result.changed === 0 && result.skipped > 0) {
+  //
+  // "All" means all: `unmodified > 0` says the transform read those files and
+  // handed them back, so a decline among them is a per-file fact, not a failed
+  // run.
+  if (result.changed === 0 && result.unmodified === 0 && result.skipped > 0) {
     log(
       `${id}: the transform declined all ${result.skipped} file(s) it looked at, and changed none.`,
     );
@@ -115,7 +119,8 @@ export const runSingleCodemod = async (
   }
 
   const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
-  const summary = `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.`;
+  const empty = result.empty > 0 ? `, ${result.empty} empty` : "";
+  const summary = `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}${empty}.`;
   // Only a catalogued id has a migration guide entry to point at — a transform
   // like `to-remote-package` with no catalogue entry has no anchor in
   // `MIGRATION.md` to link, so pointing there would be a dead link.

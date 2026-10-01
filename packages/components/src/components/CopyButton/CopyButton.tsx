@@ -16,6 +16,11 @@ export interface CopyButtonProps
     FlowComponentProps<HTMLButtonElement> {
   /** The text to copy. */
   text?: string;
+  /**
+   * Called with the copied text once it has been written to the clipboard. Not
+   * called when copying fails.
+   */
+  onCopy?: (text: string) => void;
 }
 
 /** @flr-generate all */
@@ -25,6 +30,7 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
     ref,
     variant = "plain",
     color = "secondary",
+    onCopy,
     ...buttonProps
   } = props;
 
@@ -32,8 +38,11 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
 
   const tooltip = stringFormatter.format("copy");
 
-  const copyValue = () => {
-    copy(onlyText(text));
+  const copyValue = async () => {
+    const copiedText = onlyText(text);
+    if (await copy(copiedText)) {
+      onCopy?.(copiedText);
+    }
   };
 
   return (

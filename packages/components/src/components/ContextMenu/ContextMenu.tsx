@@ -17,6 +17,7 @@ import ContextMenuContentView from "@/views/ContextMenuContentView";
 import type * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
 import { OverlayContentSuspendWatcher } from "@/lib/controller/overlay/OverlayContentSuspendWatcher";
+import { ContextMenuSelectAll } from "@/components/ContextMenu/components/ContextMenuSelectAll/ContextMenuSelectAll";
 
 export interface ContextMenuProps
   extends
@@ -35,6 +36,11 @@ export interface ContextMenuProps
   selectionMode?: ContextMenuSelectionMode;
   /** Sets the context menu to a fixed width. */
   width?: string | number;
+  /**
+   * Adds a first entry that selects or deselects all items at once. Only
+   * applies to `selectionMode="multiple"`.
+   */
+  showSelectAll?: boolean;
 }
 
 /** @flr-generate all */
@@ -48,8 +54,13 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     disabledKeys,
     onSelectionChange,
     renderEmptyState,
+    showSelectAll,
     ref,
     controller: overlayControllerFromProps,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    "aria-describedby": ariaDescribedBy,
+    "aria-details": ariaDetails,
     ...rest
   } = props;
 
@@ -61,6 +72,10 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     overlayControllerFromProps ?? overlayControllerFromContext;
 
   const selectionVariant = getMenuItemSelectionVariant(selectionMode);
+
+  const selectAll = showSelectAll && selectionMode === "multiple" && (
+    <ContextMenuSelectAll />
+  );
 
   const propsContext: PropsContext = {
     MenuItem: {
@@ -109,8 +124,13 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             disabledKeys={disabledKeys}
             onSelectionChange={onSelectionChange}
             renderEmptyState={renderEmptyState}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            aria-describedby={ariaDescribedBy}
+            aria-details={ariaDetails}
             ref={ref}
           >
+            {selectAll}
             <PropsContextProvider props={propsContext}>
               <Action closeOverlay={closesOnSelect(selectionMode)}>
                 {children}

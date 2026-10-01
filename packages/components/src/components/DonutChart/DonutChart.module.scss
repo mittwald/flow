@@ -12,6 +12,16 @@
     stroke: var(--donut-chart--background-color);
   }
 
+  .fill,
+  .segment {
+    /* No `calc()`: with a unitless one on the dash, Firefox drew full circles. */
+    stroke-dasharray: var(--donut-chart--percent) 100;
+    transform: rotate(calc(var(--donut-chart--offset) * 3.6deg - 90deg));
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: donut-chart-fill var(--donut-chart--transition-duration) ease;
+  }
+
   .value {
     position: absolute;
     inset: 0;
@@ -29,6 +39,8 @@
       font-size: var(--font-size-heading--xl);
       padding: var(--donut-chart--padding--l);
 
+      // Raw consumer markup inside the value slot — nothing to class.
+      // stylelint-disable-next-line selector-max-type -- consumer markup
       small {
         font-size: var(--font-size-heading--l);
       }
@@ -75,5 +87,13 @@
     .legend {
       justify-content: start;
     }
+  }
+}
+
+/* The implicit "to" keyframe picks up the fill's own dash and rotation. */
+@keyframes donut-chart-fill {
+  from {
+    stroke-dasharray: 0 100;
+    transform: rotate(-90deg);
   }
 }

@@ -114,10 +114,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
 
   const localRef = useObjectRef(ref);
 
-  const getHeight = (rows: number) => {
-    return `calc(var(--line-height-m) * ${rows} + (var(--form-control--padding-y) * 2))`;
-  };
-
   const [resized, setResized] = useState(false);
 
   const autoResizable = rows !== autoResizeMaxRows;
@@ -198,11 +194,10 @@ export const TextArea = flowComponent("TextArea", (props) => {
           className={inputClassName}
           ref={localRef}
           style={{
-            caretColor: isReadOnly ? "transparent" : undefined,
-            minHeight: getHeight(rows),
-            maxHeight: verticallyResizable
+            "--text-area--rows": rows,
+            "--text-area--max-rows": verticallyResizable
               ? undefined
-              : getHeight(autoResizeMaxRows),
+              : autoResizeMaxRows,
           }}
         />
         {showCharacterCount && (

@@ -1,0 +1,3 @@
+cartesian-chart:
+  transition-duration:
+    value: 800ms

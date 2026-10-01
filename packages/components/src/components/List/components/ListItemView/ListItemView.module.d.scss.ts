@@ -11,9 +11,11 @@ declare const classNames: {
   readonly badge: "badge";
   readonly listView: "listView";
   readonly columnLayout: "columnLayout";
+  readonly "flow--column-layout": "flow--column-layout";
   readonly contentWrapper: "contentWrapper";
   readonly title: "title";
   readonly action: "action";
+  readonly "flow--button": "flow--button";
   readonly avatar: "avatar";
   readonly "flow--heading--heading-content": "flow--heading--heading-content";
   readonly tileView: "tileView";
@@ -22,5 +24,7 @@ declare const classNames: {
   readonly "flow--avatar--initials": "flow--avatar--initials";
   readonly "flow--checkbox": "flow--checkbox";
   readonly "flow--checkbox--icon": "flow--checkbox--icon";
+  readonly "flow--heading--heading-text-spacer": "flow--heading--heading-text-spacer";
+  readonly "flow--heading--heading-content-item": "flow--heading--heading-content-item";
 };
 export default classNames;

@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import type { Selection } from "react-aria-components";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import { IconFilter } from "@/components/Icon/components/icons";
 import TextView from "@/views/TextView";
@@ -26,6 +27,12 @@ export const FilterContextMenu: FC<Props> = (props) => {
 
   const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
 
+  const onSelectionChange =
+    selectionMode === "multiple"
+      ? (keys: Selection) =>
+          keys === "all" ? filter.selectAll() : filter.setActiveValueIds(keys)
+      : undefined;
+
   return (
     <ContextMenuTriggerView>
       <ButtonView
@@ -40,6 +47,8 @@ export const FilterContextMenu: FC<Props> = (props) => {
       <ContextMenuView
         selectionMode={selectionMode}
         selectedKeys={activeFilterKeys}
+        onSelectionChange={onSelectionChange}
+        showSelectAll={filter.isSelectAllAvailable}
       >
         {filterItems}
       </ContextMenuView>

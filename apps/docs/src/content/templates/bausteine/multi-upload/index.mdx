@@ -1,0 +1,34 @@
+---
+title: Multi-Upload
+description:
+  Die Kombination aus Auswahlfeld und Dateiliste, die mehrere Dateien bis zum
+  Absenden zwischenspeichert, sodass Nutzer sie sammeln, prüfen und einzeln
+  entfernen können.
+---
+
+<LiveCodeEditor example="multi-upload" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende diesen Baustein, wenn Nutzer mehrere Dateien auf einmal auswählen und
+vor dem Absenden noch prüfen oder einzelne wieder entfernen sollen. Für eine
+einzelne Datei genügt ein [FileField](/components/form-controls/file-field) oder
+eine [FileDropZone](/components/upload/file-drop-zone).
+
+---
+
+# Aufbau
+
+- **Auswahl** – Eine [FileDropZone](/components/upload/file-drop-zone) nimmt
+  Dateien per Drag-and-drop entgegen und enthält ein
+  [FileField](/components/form-controls/file-field) für den Dateidialog.
+  `multiple` erlaubt mehrere Dateien auf einmal.
+- **Dateiliste** – Eine [FileCardList](/components/upload/file-card-list) aus
+  [FileCards](/components/upload/file-card) zeigt die ausgewählten Dateien mit
+  Name, Typ und Größe; über `onDelete` entfernt der Nutzer einzelne vor dem
+  Upload.
+- **Zwischenspeicher** – Die ausgewählten Dateien liegen in einem Array im State
+  (`File[]`) und werden erst beim Absenden übertragen; bis dahin lassen sie sich
+  prüfen und einzeln entfernen.

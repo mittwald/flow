@@ -20,6 +20,9 @@
     }
 
     &[data-invalid]:not([data-selected]) {
+      // Every icon in the checkbox, consumer icons in the label included —
+      // the indicator's own `flow--checkbox--icon` would narrow the match.
+      // stylelint-disable-next-line selector-max-type -- see above
       svg {
         color: var(--form-control--border-color--default);
       }

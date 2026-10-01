@@ -432,6 +432,91 @@ test("Modal with dirty form does not require confirmation when the default is sw
   expect(modalText).not.toBeInTheDocument();
 });
 
+test("Modal with dirty form does not require confirmation when the form switches it off", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <Modal isDefaultOpen>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+          <Form
+            form={form}
+            onSubmit={vitest.fn()}
+            confirmModalCloseOnUnsavedChanges={false}
+          >
+            <Field name="testField">
+              <TextField />
+            </Field>
+            <Action closeModal>
+              <Button>Try close</Button>
+            </Action>
+          </Form>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const tryCloseModalButton = dom.getByRole("button", {
+    name: "Try close",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+  await userEvent.click(tryCloseModalButton);
+  expect(modalText).not.toBeInTheDocument();
+});
+
+test("Modal with dirty form requires confirmation when the form switches it on against the default", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ComponentDefaultsProvider
+        defaults={{ Form: { confirmModalCloseOnUnsavedChanges: false } }}
+      >
+        <Modal isDefaultOpen>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form
+              form={form}
+              onSubmit={vitest.fn()}
+              confirmModalCloseOnUnsavedChanges
+            >
+              <Field name="testField">
+                <TextField />
+              </Field>
+              <Action closeModal>
+                <Button>Try close</Button>
+              </Action>
+            </Form>
+          </Content>
+        </Modal>
+      </ComponentDefaultsProvider>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const tryCloseModalButton = dom.getByRole("button", {
+    name: "Try close",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+  await userEvent.click(tryCloseModalButton);
+  expect(modalText).toBeInTheDocument();
+  await expect
+    .element(dom.getByRole("button", { name: "Keep editing", exact: true }))
+    .toBeInTheDocument();
+});
+
 test("Modal with confirmOnClose requires confirmation", async () => {
   const dom = await render(
     <Modal isDefaultOpen confirmOnClose>

@@ -3,5 +3,6 @@ declare const classNames: {
   readonly disabled: "disabled";
   readonly optional: "optional";
   readonly right: "right";
+  readonly text: "text";
 };
 export default classNames;
