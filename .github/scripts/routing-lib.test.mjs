@@ -1,7 +1,12 @@
 // @ts-check
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classifyMessage, isExemptPr, routingErrors } from "./routing-lib.mjs";
+import {
+  classifyMessage,
+  isExemptPr,
+  isStandingLine,
+  routingErrors,
+} from "./routing-lib.mjs";
 
 const REPO = "mittwald/flow";
 
@@ -193,6 +198,38 @@ test("breaking: the PR body keeps the strict footer", () => {
 
 test("breaking: a bang in the PR title fails", () => {
   assert.equal(routingErrors(pr({ title: "Fix()!: x" })).length, 1);
+});
+
+test("standing lines: only main and next", () => {
+  for (const base of ["main", "next"]) {
+    assert.equal(isStandingLine(base), true, base);
+  }
+  for (const base of ["2.x", "3.0", "next-major", "claude/some-branch"]) {
+    assert.equal(isStandingLine(base), false, base);
+  }
+});
+
+test("major line: breaking title, commits and body pass", () => {
+  // The line exists to take breaking changes, and opening it per the
+  // major-line runbook makes this guard run for `2.x` too.
+  for (const baseRef of ["2.x", "next-major"]) {
+    assert.deepEqual(
+      routingErrors(
+        pr({
+          baseRef,
+          title: "feat(Button)!: drop the deprecated color prop",
+          body: "BREAKING CHANGE: `color` is gone, use `variant`.",
+          commits: [
+            commit("feat(Button)!: drop the deprecated color prop"),
+            commit("refactor(Button): x\n\nBREAKING CHANGE: y"),
+            commit("feat(List): add a sort option"),
+          ],
+        }),
+      ),
+      [],
+      baseRef,
+    );
+  }
 });
 
 test("exempt heads skip every rule", () => {
