@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.8](https://github.com/mittwald/flow/compare/1.5.0-next.7...1.5.0-next.8) (2026-10-01)
+
+### Features
+
+* **FormRootError:** allow custom content via children ([26a0569](https://github.com/mittwald/flow/commit/26a056956f6870b79fc24db1207fa2b3854a8c5a))
+
 ## [1.5.0-next.7](https://github.com/mittwald/flow/compare/1.5.0-next.6...1.5.0-next.7) (2026-10-01)
 
 ### Bug Fixes
