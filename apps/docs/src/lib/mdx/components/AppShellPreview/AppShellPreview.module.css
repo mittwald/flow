@@ -76,15 +76,3 @@
 .previewFrame:has(.previewLink:focus-visible)::before {
   opacity: 1;
 }
-
-.file {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-px--xs);
-}
-
-.fileName {
-  font-family: var(--font-family--mono, ui-monospace, monospace);
-  font-size: 0.8125rem;
-  opacity: 0.7;
-}
