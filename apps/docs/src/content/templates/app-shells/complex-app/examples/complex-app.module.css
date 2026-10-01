@@ -1,7 +1,43 @@
 .app {
+  /* Header and content share one maximum width, so their edges line up. */
+  --page-width: 1800px;
+
+  /* The header's tint is mixed from the gradient's first stop. */
+  --header-ground: var(--neutral--color--200);
+
+  /* The header's rendered height; the sticky sidebar starts just below it. */
+  --header-height: 72px;
+
   /* Container-relative here; use 100dvh in a real full-page app. */
   min-height: 100%;
   background: var(--color--background-gradient);
+}
+
+/*
+ * The header stays at the top while the page scrolls beneath it. Its tint is
+ * translucent and blurred, so the navigation stays legible above the content.
+ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-block: var(--size-px--m);
+  background-color: color-mix(in srgb, var(--header-ground) 40%, transparent);
+  backdrop-filter: blur(var(--blur));
+}
+
+.headerContent {
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--size-px--xl);
+}
+
+.content {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-block: var(--size-px--s) var(--size-px--l);
+  padding-inline: var(--size-px--xl);
 }
 
 /*
@@ -33,9 +69,20 @@
   min-height: 0;
 }
 
-/* The navigation card keeps a fixed width beside the flexible content. */
+/*
+ * The navigation card keeps a fixed width beside the flexible content. It stays
+ * below the header while the page scrolls, and scrolls its own links once they
+ * outgrow the viewport.
+ */
 .sidebar {
   flex: 0 0 17rem;
+  position: sticky;
+  top: calc(var(--header-height) + var(--size-px--s));
+  align-self: flex-start;
+  max-height: calc(
+    100dvh - var(--header-height) - var(--size-px--s) - var(--size-px--l)
+  );
+  overflow: auto;
 }
 
 .main {
@@ -57,7 +104,8 @@
     display: none;
   }
 
-  .app {
+  .headerContent,
+  .content {
     padding-inline: var(--size-px--m);
   }
 }
@@ -66,4 +114,16 @@
   .mobileActions {
     display: none;
   }
+}
+
+@media (prefers-contrast: more), (prefers-reduced-transparency) {
+  .header {
+    background-color: var(--header-ground);
+    backdrop-filter: none;
+  }
+}
+
+/* The dark gradient starts darker than the neutral token. */
+[data-theme="dark"] .app {
+  --header-ground: #121518;
 }
