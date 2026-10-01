@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.10](https://github.com/mittwald/flow/compare/1.5.0-next.9...1.5.0-next.10) (2026-10-01)
+
+## [1.4.7](https://github.com/mittwald/flow/compare/1.5.0-next.8...1.4.7) (2026-10-01)
+
+### Features
+
+* **CartesianChart:** add width prop to YAxis, size category axes automatically ([7e7e5a1](https://github.com/mittwald/flow/commit/7e7e5a15cf60b0e64bf5c7b4c4046f2003b80c08))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.7 ([8c2434e](https://github.com/mittwald/flow/commit/8c2434e1104926170d427dbe9ca51f5ce195ae4e))
+
+### Continuous Integration
+
+* **commit-guard:** allow breaking changes on a major line ([4d9ebdd](https://github.com/mittwald/flow/commit/4d9ebdde6897ed584a4a24a6633b717d9e9582f1))
+
 ## [1.5.0-next.9](https://github.com/mittwald/flow/compare/1.5.0-next.8...1.5.0-next.9) (2026-10-01)
 
 ## [1.4.6](https://github.com/mittwald/flow/compare/1.5.0-next.6...1.4.6) (2026-10-01)
