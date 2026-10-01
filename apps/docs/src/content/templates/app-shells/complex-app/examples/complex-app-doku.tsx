@@ -26,99 +26,102 @@ const lorem =
   "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.";
 
 export default () => (
-  <Flex
-    direction="column"
-    gap="l"
-    paddingBlock="l"
-    paddingInline="xl"
-    className={styles.app}
-  >
-    <Flex
-      elementType="header"
-      align="center"
-      wrap="wrap"
-      gap="m"
-    >
-      <span
-        className={styles.logo}
-        role="img"
-        aria-label="mittwald"
-      />
-      <HeaderNavigation
-        aria-label="Hauptnavigation"
-        className={styles.topnav}
+  <Flex direction="column" className={styles.app}>
+    <header className={styles.header}>
+      <Flex
+        align="center"
+        wrap="wrap"
+        gap="m"
+        className={styles.headerContent}
       >
-        <GlobalNavigationLinks />
-        <SearchButton />
-        <Button aria-label="Theme wechseln">
-          <Icon>
-            <IconContrastFilled />
-          </Icon>
-        </Button>
-      </HeaderNavigation>
-      <HeaderNavigation className={styles.mobileActions}>
-        <SearchButton />
-        <MobileMenu />
-      </HeaderNavigation>
-    </Flex>
+        <span
+          className={styles.logo}
+          role="img"
+          aria-label="mittwald"
+        />
+        <HeaderNavigation
+          aria-label="Hauptnavigation"
+          className={styles.topnav}
+        >
+          <GlobalNavigationLinks />
+          <SearchButton />
+          <Button aria-label="Theme wechseln">
+            <Icon>
+              <IconContrastFilled />
+            </Icon>
+          </Button>
+        </HeaderNavigation>
+        <HeaderNavigation className={styles.mobileActions}>
+          <SearchButton />
+          <MobileMenu />
+        </HeaderNavigation>
+      </Flex>
+    </header>
 
     <Flex
+      direction="column"
       gap="l"
-      wrap="wrap"
-      align="stretch"
-      className={styles.body}
+      grow
+      className={styles.content}
     >
-      <LayoutCard className={styles.sidebar}>
-        <ComponentNavigation />
-      </LayoutCard>
-
-      <LayoutCard
-        elementType="main"
-        className={styles.main}
+      <Flex
+        gap="l"
+        wrap="wrap"
+        align="stretch"
+        className={styles.body}
       >
-        <Section>
-          <Heading level={1}>Button</Heading>
-          <Text>{lorem}</Text>
-          <Heading level={2}>Colors</Heading>
-          <Text>{lorem}</Text>
-          <Heading level={3}>Light und Dark</Heading>
-          <Text>{lorem}</Text>
-          <Heading level={2}>Sizes</Heading>
-          <Text>{lorem}</Text>
-          <Heading level={2}>Variants</Heading>
-          <Text>{lorem}</Text>
-        </Section>
-      </LayoutCard>
+        <LayoutCard className={styles.sidebar}>
+          <ComponentNavigation />
+        </LayoutCard>
 
-      <LayoutCard className={styles.toc}>
-        <Section>
-          <Heading level={4}>Auf dieser Seite</Heading>
-          <Navigation aria-label="Auf dieser Seite">
-            <Link href="#" aria-current="page">
-              Button
-            </Link>
-            <Link href="#">Colors</Link>
-            <Link href="#">Light und Dark</Link>
-            <Link href="#">Sizes</Link>
-            <Link href="#">Variants</Link>
-          </Navigation>
-        </Section>
-      </LayoutCard>
-    </Flex>
+        <LayoutCard
+          elementType="main"
+          className={styles.main}
+        >
+          <Section>
+            <Heading level={1}>Button</Heading>
+            <Text>{lorem}</Text>
+            <Heading level={2}>Colors</Heading>
+            <Text>{lorem}</Text>
+            <Heading level={3}>Light und Dark</Heading>
+            <Text>{lorem}</Text>
+            <Heading level={2}>Sizes</Heading>
+            <Text>{lorem}</Text>
+            <Heading level={2}>Variants</Heading>
+            <Text>{lorem}</Text>
+          </Section>
+        </LayoutCard>
 
-    <Flex
-      elementType="footer"
-      justify="center"
-      wrap="wrap"
-      gap="l"
-      className={styles.footer}
-    >
-      <Link href="#" target="_blank" color="dark">
-        Datenschutz
-      </Link>
-      <Link href="#" target="_blank" color="dark">
-        Impressum
-      </Link>
+        <LayoutCard className={styles.toc}>
+          <Section>
+            <Heading level={4}>Auf dieser Seite</Heading>
+            <Navigation aria-label="Auf dieser Seite">
+              <Link href="#" aria-current="page">
+                Button
+              </Link>
+              <Link href="#">Colors</Link>
+              <Link href="#">Light und Dark</Link>
+              <Link href="#">Sizes</Link>
+              <Link href="#">Variants</Link>
+            </Navigation>
+          </Section>
+        </LayoutCard>
+      </Flex>
+
+      <Flex
+        elementType="footer"
+        justify="center"
+        wrap="wrap"
+        gap="l"
+        className={styles.footer}
+      >
+        <Link href="#" target="_blank" color="dark">
+          Datenschutz
+        </Link>
+        <Link href="#" target="_blank" color="dark">
+          Impressum
+        </Link>
+      </Flex>
     </Flex>
   </Flex>
 );
