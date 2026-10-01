@@ -103,19 +103,19 @@ test.each(testEnvironments)(
 
 const barChartData = [
   {
-    name: "Stat 1",
+    name: "Production Webshop",
     first: 40,
     second: 24,
     third: 75,
   },
   {
-    name: "Stat 2",
+    name: "Staging Webshop",
     first: 30,
     second: 13,
     third: 50,
   },
   {
-    name: "Stat 3",
+    name: "Company Blog",
     first: 20,
     second: 68,
     third: 100,

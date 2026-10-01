@@ -8,6 +8,18 @@ description: Die FormRootError-Component zeigt Fehler auf Form-Ebene an.
 
 ---
 
+# Eigener Inhalt
+
+Ohne Children zeigt die FormRootError die `message` des Root-Fehlers als Alert
+an. Children ersetzen diesen Alert, zum Beispiel für einen Alert mit Heading und
+Text. Sie werden nur gerendert, solange ein Root-Fehler gesetzt ist. Als
+Funktion erhalten sie den Root-Fehler und können den Inhalt so nach dessen
+`type` wählen.
+
+<LiveCodeEditor example="customContent" editorCollapsed />
+
+---
+
 # Properties
 
 <PropertiesTables />
