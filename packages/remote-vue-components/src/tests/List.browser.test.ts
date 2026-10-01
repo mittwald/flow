@@ -387,9 +387,11 @@ describe("A date-range filter", () => {
 
     await userEvent.click(list.getByRole("button", { name: "Joined" }));
 
-    await expect
-      .element(page.getByRole("button", { name: "Tuesday, September 1, 2026" }))
-      .toBeVisible();
+    /*
+     * The grid, not a day: the calendar opens on the current month, so a named
+     * date goes stale with the calendar.
+     */
+    await expect.element(page.getByRole("grid")).toBeVisible();
     expect(page.getByRole("menuitemcheckbox").query()).toBeNull();
   });
 
