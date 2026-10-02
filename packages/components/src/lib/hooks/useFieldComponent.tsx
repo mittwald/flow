@@ -51,9 +51,13 @@ export const useFieldComponent = (
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps: {
-      "aria-describedby": props.isInvalid
-        ? fieldErrorId
-        : props["aria-describedby"],
+      // Always reference the error: the field cannot tell whether one is
+      // shown (`validate`, server errors and `FieldError` children all render
+      // one without `isInvalid`). While none is rendered, the id points to
+      // nothing, and the accessible description skips a missing id.
+      "aria-describedby": [fieldErrorId, props["aria-describedby"]]
+        .filter(Boolean)
+        .join(" "),
       className: clsx(formFieldStyles.formField),
     },
   } as const;

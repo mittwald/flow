@@ -31,25 +31,24 @@ export const FieldError = flowComponent("FieldError", (props) => {
   const isInvalidFromChildren = React.Children.count(children) >= 1;
 
   const mergedErrorState = useMemo(() => {
-    const errors: (string | ReactNode)[] =
-      fieldErrorFromAriaContext?.validationErrors ?? [];
+    // Never mutate the context's errors: for a valid field react-aria hands
+    // out one module-level array shared by every field of the page.
+    const lastError: ReactNode = isInvalidFromChildren
+      ? children
+      : fieldErrorFromAriaContext?.validationErrors.at(-1);
 
-    if (isInvalidFromChildren) {
-      errors.push(children);
-    }
-
+    // Children are an error message of their own, so they make the error
+    // visible even inside a field that is valid.
     const isInvalid = !!(
       isInvalidFromChildren || fieldErrorFromAriaContext?.isInvalid
     );
-    const lastError =
-      errors.length >= 1 ? errors[errors.length - 1] : undefined;
+    const contextDetails = fieldErrorFromAriaContext?.validationDetails;
 
     return {
-      isInvalid: isInvalid,
+      ...fieldErrorFromAriaContext,
+      isInvalid,
       validationDetails: {
-        valid: !isInvalid,
         badInput: false,
-        customError: isInvalid,
         patternMismatch: false,
         rangeOverflow: false,
         rangeUnderflow: false,
@@ -58,12 +57,13 @@ export const FieldError = flowComponent("FieldError", (props) => {
         tooShort: false,
         valueMissing: false,
         typeMismatch: false,
-        ...fieldErrorFromAriaContext?.validationDetails,
+        ...contextDetails,
+        valid: !isInvalid,
+        customError: !!contextDetails?.customError || isInvalidFromChildren,
       },
-      ...fieldErrorFromAriaContext,
       validationErrors: lastError ? [lastError] : [],
     };
-  }, [fieldErrorFromAriaContext, children]);
+  }, [fieldErrorFromAriaContext, children, isInvalidFromChildren]);
 
   if (!mergedErrorState.isInvalid) {
     return undefined;
