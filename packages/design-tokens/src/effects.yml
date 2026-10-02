@@ -13,3 +13,31 @@ transition:
       value: 300ms
     slow:
       value: 400ms
+
+# Film grain of the mittwald "Simple Gradients"
+# (branding.mittwald.de/assets/figma/9eafc.webp), for gradients only. Each
+# pixel is black or white, its alpha the noise's distance from the middle: in
+# normal blending that leaves the gradient's colour and mean untouched and only
+# adds grey grain. Frequency and opacity are measured against the reference at
+# 1x, then one step finer: grain about two thirds of a CSS pixel, strength ≈
+# 5/255.
+grain:
+  image:
+    value:
+      'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27
+      width=%27256%27 height=%27256%27%3E%3Cfilter id=%27g%27 x=%270%27
+      y=%270%27 width=%27100%25%27 height=%27100%25%27
+      color-interpolation-filters=%27sRGB%27%3E%3CfeTurbulence
+      type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%272%27
+      stitchTiles=%27stitch%27/%3E%3CfeColorMatrix type=%27matrix%27 values=%271
+      0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0
+      0%27/%3E%3CfeComponentTransfer%3E%3CfeFuncR type=%27discrete%27
+      tableValues=%270 1%27/%3E%3CfeFuncG type=%27discrete%27 tableValues=%270
+      1%27/%3E%3CfeFuncB type=%27discrete%27 tableValues=%270 1%27/%3E%3CfeFuncA
+      type=%27table%27 tableValues=%271 0
+      1%27/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width=%27100%25%27
+      height=%27100%25%27 filter=%27url%28%23g%29%27/%3E%3C/svg%3E")'
+  blend-mode:
+    value: normal
+  opacity:
+    value: 0.17

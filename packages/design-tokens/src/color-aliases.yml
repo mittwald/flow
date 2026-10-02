@@ -1,52 +1,52 @@
 primary:
   color:
     100:
-      value: "{color.hosting-blue.100}"
+      value: "{color.mittwald-blue.100}"
     200:
-      value: "{color.hosting-blue.200}"
+      value: "{color.mittwald-blue.200}"
     300:
-      value: "{color.hosting-blue.300}"
+      value: "{color.mittwald-blue.300}"
     400:
-      value: "{color.hosting-blue.400}"
+      value: "{color.mittwald-blue.400}"
     500:
-      value: "{color.hosting-blue.500}"
+      value: "{color.mittwald-blue.500}"
     600:
-      value: "{color.hosting-blue.600}"
+      value: "{color.mittwald-blue.600}"
     700:
-      value: "{color.hosting-blue.700}"
+      value: "{color.mittwald-blue.700}"
     800:
-      value: "{color.hosting-blue.800}"
+      value: "{color.mittwald-blue.800}"
     900:
-      value: "{color.hosting-blue.900}"
+      value: "{color.mittwald-blue.900}"
     1000:
-      value: "{color.hosting-blue.1000}"
+      value: "{color.mittwald-blue.1000}"
     1100:
-      value: "{color.hosting-blue.1100}"
+      value: "{color.mittwald-blue.1100}"
 
 info:
   color:
     100:
-      value: "{color.hosting-blue.100}"
+      value: "{color.mittwald-blue.100}"
     200:
-      value: "{color.hosting-blue.200}"
+      value: "{color.mittwald-blue.200}"
     300:
-      value: "{color.hosting-blue.300}"
+      value: "{color.mittwald-blue.300}"
     400:
-      value: "{color.hosting-blue.400}"
+      value: "{color.mittwald-blue.400}"
     500:
-      value: "{color.hosting-blue.500}"
+      value: "{color.mittwald-blue.500}"
     600:
-      value: "{color.hosting-blue.600}"
+      value: "{color.mittwald-blue.600}"
     700:
-      value: "{color.hosting-blue.700}"
+      value: "{color.mittwald-blue.700}"
     800:
-      value: "{color.hosting-blue.800}"
+      value: "{color.mittwald-blue.800}"
     900:
-      value: "{color.hosting-blue.900}"
+      value: "{color.mittwald-blue.900}"
     1000:
-      value: "{color.hosting-blue.1000}"
+      value: "{color.mittwald-blue.1000}"
     1100:
-      value: "{color.hosting-blue.1100}"
+      value: "{color.mittwald-blue.1100}"
 
 success:
   color:

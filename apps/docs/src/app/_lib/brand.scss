@@ -1,0 +1,61 @@
+// Brand values from https://branding.mittwald.de (Farben, Typografie) for the
+// Styleguide's own frame (stages, headlines, footer). Values the design tokens
+// carry come from there; the rest belongs to the always-dark stages and stays
+// fixed across themes.
+$stage-black: #06050a;
+$neutral-base: var(--color--brand--neutral-base);
+$brand-orange-100: #e6c8bf;
+$brand-orange-300: #e7a187;
+$on-dark-muted: rgb(255 255 255 / 64%);
+$on-light-muted: rgb(0 0 0 / 64%);
+$stage-radius: 32px;
+$tile-radius: var(--corner-radius--xl);
+
+// Film grain, for CSS gradients only. Images (the Lightnodes visuals, photos,
+// illustrations) and flat surfaces stay clean.
+@mixin grain($opacity: var(--grain--opacity)) {
+  position: relative;
+  isolation: isolate;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: var(--grain--image);
+    mix-blend-mode: var(--grain--blend-mode);
+    opacity: $opacity;
+    pointer-events: none;
+
+    @media (prefers-contrast: more), (forced-colors: active) {
+      display: none;
+    }
+  }
+}
+
+// A dark surface carrying a visual from `--visual`, in both themes.
+@mixin dark-stage($radius: $stage-radius) {
+  position: relative;
+  isolation: isolate;
+  border-radius: $radius;
+  background-color: $stage-black;
+  background-image: var(--visual);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+// The stages stay dark in the dark theme too; there they need an edge.
+@mixin dark-stage-edge {
+  :global([data-theme="dark"]) & {
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+  }
+}
+
+// Brand headlines: line-height 100 %, never all-caps, tracking untouched.
+// Pass the fluid part as a string, Sass cannot add rem and vw.
+@mixin brand-title($min, $fluid, $max) {
+  font-size: clamp(#{$min}, #{$fluid}, #{$max});
+  line-height: 1;
+}

@@ -8,6 +8,7 @@ import {
 import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import styles from "@/lib/mdx/components/MdxFileView/customComponents.module.css";
 import slugify from "slugify";
+import clsx from "clsx";
 
 interface Props extends PropsWithChildren {
   level: number;
@@ -30,7 +31,15 @@ export const AnchorLinkHeading: FC<Props> = (props) => {
   };
 
   return (
-    <Heading level={level} className={styles.anchorLinkHeading} id={slug}>
+    <Heading
+      level={level}
+      className={clsx(
+        styles.anchorLinkHeading,
+        level === 2 && styles.sectionHeading,
+        level === 3 && styles.subSectionHeading,
+      )}
+      id={slug}
+    >
       {children}
       <Action onAction={copyValue} showFeedback>
         <Button

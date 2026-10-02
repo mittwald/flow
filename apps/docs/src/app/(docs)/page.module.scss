@@ -1,96 +1,348 @@
-.wrapper {
-  gap: 64px;
-  padding-block: 128px;
+@use "../_lib/brand" as *;
+
+// The homepage is composed of Flow components (AccentBox, ColumnLayout,
+// Section, …). What is left here has no prop: the brand headline scale, the
+// hero's height and glow, the teasers overlapping the hero, and the fades that
+// keep copy on images readable.
+
+$release-tile-background-color: #5d4abf;
+
+.home {
+  gap: 128px;
   width: 1500px;
+  max-width: 100%;
   margin: 0 auto;
-  max-width: 100%;
+  padding-block-end: 128px;
 }
 
-.top {
-  padding-bottom: 88px !important;
+/* Text */
+
+// Eyebrows are highlight text; on the dark stages that is white.
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-px--xs);
+  font-weight: var(--font-weight--bold);
+  color: var(--color--brand--text-highlight);
 }
 
-.logo {
-  width: 300px;
-  height: 100px;
-  max-width: 100%;
-}
-
-$release-tile-background-color: #6f459f;
-
-.releaseTile {
-  background-size: auto 240%;
-  background-color: $release-tile-background-color !important;
-  background-position: calc(100% + 86px) center;
-  padding: 0 !important;
-
-  :global(.flow--column-layout--column-layout-container),
-  :global(.flow--column-layout) {
-    height: 100%;
+.hero,
+.releaseTeaser,
+.entryTile,
+.facts,
+.portal {
+  .eyebrow {
+    color: #fff;
   }
 }
 
-.releaseContent {
-  height: 100%;
-  border-radius: calc(var(--layout-card--corner-radius) - 2px);
-  padding: var(--layout-card--padding);
-  padding-inline-end: 64px;
-  width: max(80%, 300px);
-  background: linear-gradient(
-    to left,
-    rgba($release-tile-background-color, 0) 0%,
-    rgba($release-tile-background-color, 0.8) 20%
-  );
+.extensionsTeaser {
+  .eyebrow {
+    color: var(--text--color--dark);
+  }
 }
 
-.imageTile {
+.onDarkText {
+  color: $on-dark-muted;
+}
+
+.heroTitle {
+  @include brand-title(2.75rem, "1.5rem + 5vw", 5.5rem);
+
+  text-align: center;
+  text-wrap: balance;
+}
+
+.heroLead {
+  max-width: 720px;
+  color: $on-dark-muted;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.sectionTitle {
+  @include brand-title(2.25rem, "1.25rem + 3vw", 3.5rem);
+
+  text-wrap: balance;
+}
+
+.sectionLead {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  text-wrap: pretty;
+}
+
+.tileTitle {
+  @include brand-title(1.75rem, "1.2rem + 1.4vw", 2.25rem);
+}
+
+.factTitle {
+  @include brand-title(1.5rem, "1.25rem + 0.6vw", 1.75rem);
+}
+
+/* Stages: AccentBoxes carrying an image. The ::before lies between the
+   image and the content. */
+
+.hero,
+.entryTile,
+.facts,
+.portal {
+  background-color: $stage-black;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  :global([data-theme="dark"]) & {
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+  }
+}
+
+/* Hero */
+
+.hero {
+  justify-content: center;
+  align-items: center;
+  min-height: min(760px, 86dvh);
+  padding: 96px var(--size-px--xl) 200px;
+  background-position: center bottom;
+
+  // The soft glow from above that opens every mittwald.de page, and a shade
+  // behind the copy so the horizon's light stays under it.
+  &::before {
+    background:
+      radial-gradient(
+        45% 38% at 50% 56%,
+        rgb(6 5 10 / 60%),
+        rgb(6 5 10 / 30%) 60%,
+        transparent 100%
+      ),
+      radial-gradient(
+        60% 55% at 50% 0%,
+        rgb(124 78 230 / 55%),
+        rgb(47 34 234 / 18%) 55%,
+        transparent 100%
+      );
+  }
+}
+
+/* Teasers, overlapping the hero's lower edge */
+
+// The hero's lower edge cuts the teasers at the golden section: 38.2 % of
+// their height on the hero, 61.8 % below it.
+$teaser-height: 312px;
+$teaser-overlap: $teaser-height * 0.382;
+
+.teasers {
+  margin-block-start: calc(-128px - #{$teaser-overlap});
+  padding-inline: var(--size-px--xl);
   position: relative;
+}
 
-  .imageContainer {
-    max-height: 400px;
-    width: 100%;
+.releaseTeaser,
+.extensionsTeaser {
+  min-height: $teaser-height;
+  justify-content: flex-end;
+  padding: var(--size-px--l);
+  box-shadow: 0 24px 64px rgb(0 0 0 / 35%);
+}
+
+.teaserContent {
+  max-width: 560px;
+}
+
+.releaseTeaser {
+  background-color: $release-tile-background-color;
+  background-size: auto 240%;
+  background-position: calc(100% + 86px) center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(
+      to right,
+      $release-tile-background-color 35%,
+      rgb(93 74 191 / 0%) 75%
+    );
   }
 
-  :global(.flow--column-layout--column-layout-container),
-  :global(.flow--column-layout),
-  :global(.flow--image) {
-    height: 100%;
-    width: 100%;
-  }
-
-  :global(.flow--column-layout--column-layout-container) {
-    @container (max-width: 550px) {
-      :global(.flow--column-layout) {
-        flex-direction: column-reverse;
-        display: flex;
-      }
-
-      :global(.flow--section) {
-        width: 100%;
-      }
-    }
-  }
-
-  :global(.flow--image) {
-    border-radius: var(--corner-radius--m);
-    object-fit: cover;
-    min-height: 400px;
-    flex: 1;
-    min-width: 0;
-  }
-
-  :global(.flow--column-layout) {
-    align-items: center;
-
-    // The copy starts at the top of the tile, not centered next to the image.
-    :global(.flow--section) {
-      align-self: start;
-    }
+  .teaserContent {
+    max-width: 70%;
   }
 }
 
-.imageTileIcon {
-  position: absolute;
-  top: var(--size-px--xl);
-  inset-inline-end: var(--size-px--xl);
+// Sky into horizon glow, as in the hero above it, from brand navy and orange.
+.extensionsTeaser {
+  --accent-box--background-color-gradient: linear-gradient(
+    180deg,
+    var(--color--brand--navy--100) 0%,
+    var(--color--brand--orange--100) 100%
+  );
+
+  justify-content: center;
+}
+
+.teaserPhoto {
+  width: 100%;
+  height: 100%;
+  object-position: 50% 25%;
+}
+
+/* Developer Experience */
+
+.dx {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xl);
+
+  // Wide screens: copy on the left, the example beside it. There the card
+  // stays below the example's 850px, so preview and code stack.
+  @media (min-width: 1200px) {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+    gap: var(--size-px--xxl);
+  }
+}
+
+.dxHead {
+  max-width: 820px;
+}
+
+// The example puts its two panes side by side from 850px of container width
+// and stacks them below. Its own card is the width that counts, not the page.
+.exampleCard {
+  container-type: inline-size;
+}
+
+/* Entry tiles */
+
+.entryTile {
+  container-type: inline-size;
+  justify-content: flex-end;
+  padding: var(--size-px--l);
+  background-size: auto 115%;
+  background-position: center top;
+  transition: background-size 0.6s ease;
+
+  &:hover,
+  &:focus-within {
+    background-size: auto 125%;
+  }
+
+  // Four tiles in a row get narrow: the title scales with the tile and
+  // breaks between words only.
+  .tileTitle {
+    font-size: clamp(1.375rem, 13cqi, 2.25rem);
+    overflow-wrap: normal;
+  }
+
+  // The copy sits on black, never on the visual's bright parts.
+  &::before {
+    background: linear-gradient(to top, $stage-black 30%, rgb(6 5 10 / 0%) 65%);
+  }
+}
+
+/* Facts band */
+
+.facts {
+  padding: 96px var(--size-px--xxl);
+  background-size: auto 140%;
+  background-position: right center;
+
+  // Copy sits across the whole band, so the visual stays dimmed under it.
+  &::before {
+    background: linear-gradient(
+      to right,
+      $stage-black 35%,
+      rgb(6 5 10 / 55%) 100%
+    );
+  }
+}
+
+/* Developer Portal */
+
+.portal {
+  justify-content: center;
+  min-height: 420px;
+  padding: var(--size-px--xxl);
+  overflow: hidden;
+  background-size: auto 150%;
+  background-position: right 60%;
+
+  &::before {
+    background: linear-gradient(
+      to right,
+      $stage-black 30%,
+      rgb(6 5 10 / 0%) 70%
+    );
+  }
+
+  // The square visual (150 % of the band's height) ends inside the band.
+  // This covers exactly the visual and fades its left edge into the black.
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    z-index: -1;
+    max-inline-size: 100%;
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(to right, $stage-black, rgb(6 5 10 / 0%) 25%);
+    pointer-events: none;
+  }
+}
+
+.portalContent {
+  max-width: 560px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .home {
+    gap: 96px;
+  }
+
+  .teasers {
+    margin-block-start: calc(-96px - #{$teaser-overlap});
+    padding-inline: var(--size-px--m);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 64px var(--size-px--m) 200px;
+  }
+
+  .releaseTeaser .teaserContent {
+    max-width: none;
+  }
+
+  .facts,
+  .portal {
+    padding: var(--size-px--xl) var(--size-px--l);
+  }
+
+  .portal::before {
+    background: linear-gradient(to top, $stage-black 45%, rgb(6 5 10 / 40%));
+  }
+
+  .portal::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entryTile {
+    transition: none;
+  }
 }
