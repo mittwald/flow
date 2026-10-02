@@ -676,6 +676,27 @@ where the error points.
   bug failed completely silently: no build error, no console warning, and the
   docs site and Storybook kept rendering
 
+- **Symptom:** A PR's diff suddenly **deletes hundreds of `CHANGELOG.md`
+  lines**, often in every package at once — and GitHub reports a merge conflict
+  although your local merge of the base branch went through cleanly
+
+  **Cause:** Something on the branch changed a `CHANGELOG.md` — typically a
+  commit whose tree comes from an older base (rebuilt with `git commit-tree`,
+  checked out from a stale snapshot). The next merge of the base branch then
+  finds the file changed on **both** sides, so `**/CHANGELOG.md merge=ours`
+  (`.gitattributes`, registered by `pnpm install`) keeps the branch's version
+  without a conflict. Every entry the base gained is gone. GitHub runs no
+  drivers, so it shows the same merge as a conflict. The stale tree can carry
+  reverted source files too — the changelogs are just the loudest symptom
+
+  **Fix:** After merging the base branch, check
+  `git diff origin/<base> HEAD -- '*CHANGELOG.md'` — on a feature branch it must
+  be empty. Restore with
+  `git diff --name-only -z origin/<base> HEAD -- '*CHANGELOG.md' | xargs -0 git checkout origin/<base> --`,
+  then read `git diff --stat origin/<base> HEAD` for other files outside your
+  change. Rebuild a commit only from your own diff (`git diff <true base> <tip>`
+  re-applied with `git apply -3`), never from a snapshot tree
+
 - **Symptom:** The **Routing** check fails on a `fix:` PR with
   **`Commit <sha> is a 'feat' (…) — a merge commit brings it onto 'main'`**, or
   on a `feat:` PR into `next` with **`Commit <sha> marks a breaking change`** —
