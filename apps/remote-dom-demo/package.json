@@ -16,6 +16,7 @@
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
+    "@mittwald/flow-remote-svelte-components": "workspace:*",
     "@mittwald/flow-stylesheet": "workspace:*",
     "@mittwald/mstudio-ext-react-components": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
@@ -27,6 +28,8 @@
     "react-hook-form": "^7.86.0",
     "remeda": "^2.43.0",
     "sass": "^1.103.1",
+    "svelte": "^5.46.4",
+    "svelte-loader": "^3.2.4",
     "usehooks-ts": "^3.1.1",
     "webpack": "^5.107.2"
   },

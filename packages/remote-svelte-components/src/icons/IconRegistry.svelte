@@ -1,0 +1,14 @@
+<!-- prettier-ignore -->
+<!-- This file is auto-generated with the icon generator -->
+<script lang="ts">
+  /* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+  import Icon from "../auto-generated/Icon.svelte";
+  import type { FlowIconProps } from "../lib/iconProps.js";
+  import { useContextIcon } from "../lib/iconSet.js";
+
+  let props: FlowIconProps = $props();
+
+  const ContextIcon = useContextIcon("Registry");
+</script>
+
+{#if ContextIcon}<Icon {...props}><ContextIcon /></Icon>{:else}<Icon {...props}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-packages"><path d="M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5" /><path d="M2 13.5v5.5l5 3" /><path d="M7 16.545l5 -3.03" /><path d="M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5" /><path d="M12 19l5 3" /><path d="M17 16.5l5 -3" /><path d="M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5" /><path d="M7 5.03v5.455" /><path d="M12 8l5 -3" /></svg></Icon>{/if}
