@@ -86,6 +86,8 @@ const IRRELEVANT_ROOT_FILES = new Set([
  * - `dev/cross-version/`, `dev/vitest/` — the cross-version runner and the vitest
  *   setup files. #3006 changed `dev/cross-version/**`, `src/tests/visual/**`, a
  *   `CONTRIBUTE.md` and two npm scripts, and cut 1.0.12.
+ * - `dev/react-parity/` — the runner of `remote-vue-components`' parity suite,
+ *   invoked only by its `test:parity` script.
  *
  * `packages/*\/dev/` is deliberately NOT here wholesale, although #3023
  * proposed it: in `components` and `codemods` that directory IS the build.
@@ -101,6 +103,7 @@ const IRRELEVANT_PACKAGE_LOCAL_DIRS = [
   "e2e",
   "src/tests",
   "dev/cross-version",
+  "dev/react-parity",
   "dev/vitest",
 ];
 

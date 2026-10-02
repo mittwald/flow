@@ -21,6 +21,12 @@ dist
 # Cross-version HTML-output references are exact snapshots compared byte-for-byte
 # by toMatchFileSnapshot; reformatting them would break the comparison.
 packages/remote-react-components/e2e/cross-version/__html__
+
+# The Vue parity run writes its React references and vitest's JSON report here
+# on every run (gitignored in the package). Prettier reads only the root
+# .gitignore, so a local run would otherwise fail `pnpm lint` — and the push.
+packages/remote-vue-components/e2e/*/.refs
+packages/remote-vue-components/e2e/*/.vitest
 .nx
 .yarn
 .next

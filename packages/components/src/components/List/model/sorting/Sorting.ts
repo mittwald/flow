@@ -1,109 +1,19 @@
-import type List from "@/components/List/model/List";
-import type {
-  SortingDefaultMode,
-  SortingShape,
-} from "@/components/List/model/sorting/types";
-import type { PropertyName } from "@/components/List/model/types";
-import type {
-  Column,
-  ColumnDef,
-  ColumnSort,
-  SortDirection,
-  SortingFn,
-} from "@tanstack/react-table";
+import { ListSorting } from "@mittwald/flow-components-base";
+import type { List } from "@/components/List/model/List";
 
-export class Sorting<T> {
-  public readonly list: List<T>;
-  public readonly property: PropertyName<T>;
-  public readonly name?: string;
-  public readonly directionName?: string;
-  public readonly direction: SortDirection;
-  public readonly initialEnabled: SortingDefaultMode;
-  public readonly customSortingFn?: SortingFn<T>;
-  public readonly autosave: boolean;
-
-  public constructor(list: List<T>, shape: SortingShape<T>) {
-    const {
-      property,
-      name,
-      directionName,
-      direction = "asc",
-      customSortingFn,
-      autosave = list.settingsStorageDefaults?.sorting?.autosave ?? true,
-    } = shape;
-
-    this.autosave = autosave;
-    this.list = list;
-    this.property = property;
-    this.name = name;
-    this.directionName = directionName;
-    this.direction = direction;
-    this.customSortingFn = customSortingFn;
-    this.initialEnabled = this.getInitialEnabled(shape);
-  }
-
-  private getInitialEnabled(shape: SortingShape<T>): SortingDefaultMode {
-    if (shape.defaultEnabled === "hidden") {
-      return "hidden";
-    }
-
-    const storedSorting = this.list.settingsStorage?.get("sorting", {
-      autosave: this.autosave,
-    });
-
-    const storedEnabled = storedSorting
-      ? storedSorting.property === this.property &&
-        storedSorting.direction === this.direction
-      : undefined;
-
-    return storedEnabled ?? shape.defaultEnabled ?? false;
-  }
-
-  public updateTableColumnDef(def: ColumnDef<T>): void {
-    def.enableSorting = true;
-    if (this.customSortingFn) {
-      def.sortingFn = this.customSortingFn;
-    }
-  }
-
-  public getReactTableColumnSort(): ColumnSort {
-    return {
-      id: this.property as string,
-      desc: this.direction === "desc",
-    };
-  }
-
-  public isSorted(): boolean {
-    const col = this.getTableColumn();
-    return col.getIsSorted() == this.direction;
-  }
-
-  public getTableColumn(): Column<T> {
-    return this.list.reactTable.getTableColumn(this.property);
-  }
-
-  public enable(): void {
-    this.list.reactTable
-      .getTableColumn(this.property)
-      .toggleSorting(this.direction === "desc", false);
-
-    this.list.settingsStorage?.store(
-      "sorting",
-      {
-        property: this.property,
-        direction: this.direction,
-      },
-      {
-        autosave: this.autosave,
-      },
-    );
-  }
-
-  public clear(): void {
-    this.list.reactTable.getTableColumn(this.property).clearSorting();
-  }
-
-  public get id(): string {
-    return `${this.getTableColumn().id}:${this.direction}`;
+/**
+ * React's sorting: the shared one, plus the list it belongs to.
+ *
+ * A sorting only translates between the TanStack table and the settings store,
+ * and both are frameworkless, so everything it does is `ListSorting` in
+ * `@mittwald/flow-components-base`. What is left here is `list` — the shared
+ * class calls its list `context` and types it as the model's port, while
+ * React's API has always handed out the `List` itself.
+ */
+export class Sorting<T> extends ListSorting<T> {
+  public get list(): List<T> {
+    return this.context as List<T>;
   }
 }
+
+export default Sorting;

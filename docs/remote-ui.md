@@ -82,6 +82,27 @@ Five packages divide the responsibilities along this flow:
 | `@mittwald/flow-remote-react-renderer`   | host   | Maps `flr-*` elements to real Flow components; `RemoteRendererBrowser` wires the hidden iframe + `RemoteReceiver`. |
 | `@mittwald/flow-react-components`        | both   | The components themselves; `@flr-generate` marks the ones that get remote artifacts.                               |
 
+## More than one binding
+
+The remote side is not React's alone. A binding exists per framework, and each
+one is maintained here:
+[`remote-react-components`](../packages/remote-react-components) is the
+reference, [`remote-vue-components`](../packages/remote-vue-components) (beta)
+is the second. Everything below the element layer is the same for all of them —
+the connection, the serialization, the `flr-*` elements and the host. What
+differs is who builds the element tree.
+
+Two consequences run through the rest of this document:
+
+- A `@flr-generate` component reaches every binding through the generator.
+  Nothing below is React-specific because the component is React; it is specific
+  because the **host** is React, and the host is shared.
+- A `flr-universal` composition — `Modal`, `Action`, `List` and friends — does
+  not. It is React code the extension runs itself, so every other binding
+  rebuilds it, and they are held together by the `parity` CI job rather than by
+  a compiler. See
+  [remote-framework-bindings.md](./remote-framework-bindings.md).
+
 ## The mental model
 
 The clearest way to think about remote-UI is as two worlds separated by a
@@ -172,6 +193,8 @@ That single tag drives a chain of generated artifacts:
 - An entry in the host-side component map in
   `packages/remote-react-renderer/src/auto-generated/`, which is what lets
   `RemoteRenderer` turn the `flr-*` element back into the real component.
+- A Vue component in `packages/remote-vue-components/src/auto-generated/`, the
+  same element wrapped for the Vue binding.
 
 The whole pipeline runs with `pnpm nx build:remote-components components` (or
 simply `pnpm build`, which runs every generator). It depends on prop
@@ -349,7 +372,15 @@ Beyond the general
 [Definition of Done](../AGENTS.md#definition-of-done--component-work) for
 component work, a remote-capable component additionally needs: regenerated and
 committed generated artifacts, a demo page in `apps/remote-dom-demo`, and
-passing visual tests in **both** the `Local` and `Remote` test targets.
+passing visual tests in **both** the `Local` and `Remote` test targets. Add the
+Vue counterpart of the demo under `src/app/remote-vue/_demos` where you can —
+the demo's React/Vue switch only means something while a pair describes the same
+page — but while the Vue binding is beta, a missing one does not block a change.
+
+A component that is `flr-universal` rather than `@flr-generate` needs one thing
+more: `pnpm nx test:parity remote-vue-components` passes. Bring the Vue rebuild
+along where you can; where you cannot, record the divergence in
+`packages/remote-vue-components/e2e/react-parity/knownGaps.ts` with its reason.
 
 ## Versioning & backwards compatibility
 

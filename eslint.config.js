@@ -5,6 +5,12 @@ import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
+const designTokensJsonImport = {
+  group: ["@mittwald/flow-design-tokens/json/*"],
+  message:
+    "Import @mittwald/flow-design-tokens/json-runtime/* instead. The json build carries style-dictionary metadata (filePath, isSource, original, attributes) on every token, which dwarfs the values and lands in the bundle as dead weight. json-runtime holds the same values with only `value` and `path`. Need `original` for build-time tooling? Read json outside src/.",
+};
+
 export default tseslint.config(
   {
     ignores: [
@@ -107,16 +113,83 @@ export default tseslint.config(
     rules: {
       "no-restricted-imports": [
         "error",
+        { patterns: [designTokensJsonImport] },
+      ],
+    },
+  },
+  {
+    /*
+     * Compiled by the React and the Vue binding alike, so neither framework
+     * may enter — nor the `@/` alias, which would resolve against whichever
+     * package is building it. Repeats the pattern above: a later block
+     * replaces a rule's options instead of merging them.
+     */
+    files: ["packages/components-base/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
         {
           patterns: [
+            designTokensJsonImport,
             {
-              group: ["@mittwald/flow-design-tokens/json/*"],
+              group: [
+                "react",
+                "react/*",
+                "react-dom",
+                "react-dom/*",
+                "vue",
+                "vue/*",
+                "@vue/*",
+                "@mittwald/flow-react-components",
+                "@mittwald/flow-react-components/*",
+                "@mittwald/react-use-promise",
+              ],
               message:
-                "Import @mittwald/flow-design-tokens/json-runtime/* instead. The json build carries style-dictionary metadata (filePath, isSource, original, attributes) on every token, which dwarfs the values and lands in the bundle as dead weight. json-runtime holds the same values with only `value` and `path`. Need `original` for build-time tooling? Read json outside src/.",
+                "components-base is framework-free: the React and the Vue binding both run it. Keep the framework in the binding and hand the shared model what it needs.",
+            },
+            {
+              group: ["@/*"],
+              message:
+                "Use a relative import. components-base is compiled by two packages, and `@/` resolves against whichever one is building it.",
             },
           ],
         },
       ],
+    },
+  },
+  {
+    /*
+     * The Vue demos' JSX namespace (`_lib/jsx-runtime.ts`) has to be a
+     * namespace — the one shape TypeScript accepts for `@jsxImportSource` — and
+     * mirrors Vue's own, empty interfaces and index signature included.
+     */
+    files: ["apps/remote-dom-demo/src/app/remote-vue/_lib/jsx-*runtime.ts"],
+    rules: {
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/consistent-indexed-object-style": "off",
+    },
+  },
+  {
+    /*
+     * Vue demos that hand a slot a static array of children
+     * (`default: () => [<A />, <B />]`), the Vue JSX idiom for a slot with
+     * several children. Vue matches those by position, so a key there says
+     * nothing. `react/jsx-key` has no option to tell such an array from an
+     * iterator's output, which Vue does need keyed — so it is off per file,
+     * and every other Vue demo keeps the check on `.map()` and `Array.from`.
+     */
+    files: [
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/chart.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/imageCropper.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/list.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/listSelection.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/modal.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/navigation.tsx",
+      "apps/remote-dom-demo/src/app/remote-vue/_demos/tunnel.tsx",
+    ],
+    rules: {
+      "react/jsx-key": "off",
     },
   },
   {

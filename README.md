@@ -88,7 +88,7 @@ and accessibility without shipping its own copy of the design system.
 
 ```
 extension (iframe)                          host (mStudio)
-RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteReceiver
+RemoteRoot + remote components        ───►  RemoteRenderer + RemoteReceiver
    │  @quilted/threads connection              │
    └─ hidden remote DOM (flr-* elements) ───►  maps flr-* to Flow components
 ```
@@ -96,6 +96,11 @@ RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteRecei
 The connection protocol is **versioned** — the host negotiates with each remote
 version, and the props of remote-capable components are a stable contract with
 extension developers. Full picture: [docs/remote-ui.md](docs/remote-ui.md).
+
+An extension is written in React (`@mittwald/flow-remote-react-components`) or —
+in **beta** — in Vue (`@mittwald/flow-remote-vue-components`). The Vue binding
+renders the same Flow components in the host, but its API carries no stability
+promise yet; see its [README](packages/remote-vue-components/README.md).
 
 ### 3. Token pipeline
 
@@ -118,6 +123,7 @@ nx + pnpm workspace monorepo. The published packages:
 | `@mittwald/flow-remote-elements`         | Custom `flr-*` elements for the remote side.                                |
 | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions).                           |
 | `@mittwald/flow-remote-react-renderer`   | Host-side renderer mapping `flr-*` elements to Flow components.             |
+| `@mittwald/flow-remote-vue-components`   | **Beta.** Vue API used _inside_ remote apps (extensions).                   |
 | `@mittwald/ext-bridge`                   | mStudio extension bridge (node / browser / react / i18next entries).        |
 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility.                                    |
 | `@mittwald/mstudio-ext-react-components` | Helpers for mStudio extension developers (page header customization).       |

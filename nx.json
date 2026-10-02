@@ -63,6 +63,10 @@
       "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
       "cache": true
     },
+    "test:parity": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
     "test:unit": {
       "dependsOn": ["^build"],
       "cache": true
