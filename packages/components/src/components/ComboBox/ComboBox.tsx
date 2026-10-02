@@ -80,10 +80,10 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   return (
     <Aria.ComboBox
-      {...controlProps}
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
+      {...controlProps}
       onSelectionChange={handleSelectionChange}
       onOpenChange={(isOpen) => {
         controller.setOpen(isOpen);

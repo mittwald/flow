@@ -36,7 +36,10 @@ const error = <FieldError>{message}</FieldError>;
 const label = <Label>Field</Label>;
 
 interface Case {
-  render: (props: { isInvalid?: boolean }) => ReactNode;
+  render: (props: {
+    isInvalid?: boolean;
+    "aria-describedby"?: string;
+  }) => ReactNode;
   /** The element the error has to describe: the control, or its group. */
   target: () => Locator;
   /**
@@ -45,6 +48,8 @@ interface Case {
    * field is valid.
    */
   standalone?: true;
+  /** The field takes no `aria-describedby` of its own. */
+  withoutConsumerDescription?: true;
 }
 
 const byLabel = () => page.getByLabelText(/^Field/).first();
@@ -278,8 +283,8 @@ const cases: Record<string, Case> = {
   },
   "Autocomplete (error in the Autocomplete)": {
     standalone: true,
-    render: () => (
-      <Autocomplete>
+    render: (p) => (
+      <Autocomplete aria-describedby={p["aria-describedby"]}>
         <SearchField>{label}</SearchField>
         <Option value="a">A</Option>
         {error}
@@ -289,6 +294,7 @@ const cases: Record<string, Case> = {
   },
   FileDropZone: {
     standalone: true,
+    withoutConsumerDescription: true,
     render: () => (
       <FileDropZone>
         <Heading>Drop</Heading>
@@ -320,7 +326,7 @@ const expectNoMissingReference = () => {
 
 describe.each(Object.entries(cases))(
   "%s",
-  (_, { render: field, target, standalone }) => {
+  (_, { render: field, target, standalone, withoutConsumerDescription }) => {
     test("shows the FieldError of an invalid field and describes the input", async () => {
       await render(<>{field({ isInvalid: true })}</>);
 
@@ -345,6 +351,27 @@ describe.each(Object.entries(cases))(
           await expect.element(target()).toBeVisible();
           await expect.element(page.getByText(message)).not.toBeInTheDocument();
         }
+        expectNoMissingReference();
+      },
+    );
+
+    // A consumer's own `aria-describedby` joins the error instead of replacing it.
+    test.skipIf(withoutConsumerDescription)(
+      "keeps a consumer aria-describedby next to the error",
+      async () => {
+        await render(
+          <>
+            <span id="hint">Visible to everyone</span>
+            {field({ isInvalid: true, "aria-describedby": "hint" })}
+          </>,
+        );
+
+        await expect
+          .element(target())
+          .toHaveAccessibleDescription(/Probe error/);
+        await expect
+          .element(target())
+          .toHaveAccessibleDescription(/Visible to everyone/);
         expectNoMissingReference();
       },
     );
