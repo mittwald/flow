@@ -4,6 +4,7 @@ import { expect, test, vi } from "vitest";
 import { CalendarDate } from "@internationalized/date";
 import { DatePicker } from "@/components/DatePicker";
 import { Label } from "@/components/Label";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -74,4 +75,15 @@ test("a disabled date picker does not open its calendar", async () => {
   await calendarButton().click({ force: true });
 
   await expect.element(calendar()).not.toBeInTheDocument();
+});
+
+testFormFieldContract("DatePicker", {
+  render: (props) => <DatePicker {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new CalendarDate(2025, 3, 10), new CalendarDate(2025, 4, 11)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen) => {
+    await screen.getByRole("spinbutton").first().click();
+    await userEvent.keyboard("04112025");
+  },
 });

@@ -5,6 +5,7 @@ import { createRef } from "react";
 import { Time } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
 import { Label } from "@/components/Label";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 
@@ -100,4 +101,15 @@ test("a read-only field keeps its value", async () => {
 
   await expect.element(segment("hour")).toHaveTextContent("07");
   expect(onChange).not.toHaveBeenCalled();
+});
+
+testFormFieldContract("TimeField", {
+  render: (props) => <TimeField {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new Time(9, 30), new Time(10, 45)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen) => {
+    await screen.getByRole("spinbutton").first().click();
+    await userEvent.keyboard("1045");
+  },
 });
