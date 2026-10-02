@@ -6,6 +6,7 @@ import { DatePicker } from "@/components/DatePicker";
 import { Label } from "@/components/Label";
 import { Popover, PopoverTrigger } from "@/components/Popover";
 import { Button } from "@/components/Button";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -99,4 +100,15 @@ test("inside a popover, it keeps its own calendar state", async () => {
 
   await expect.element(calendar()).not.toBeInTheDocument();
   await expect.element(calendarButton()).toBeVisible();
+});
+
+testFormFieldContract("DatePicker", {
+  render: (props) => <DatePicker {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new CalendarDate(2025, 3, 10), new CalendarDate(2025, 4, 11)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen) => {
+    await screen.getByRole("spinbutton").first().click();
+    await userEvent.keyboard("04112025");
+  },
 });

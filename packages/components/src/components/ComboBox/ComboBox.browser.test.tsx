@@ -3,6 +3,7 @@ import { page } from "vitest/browser";
 import { ComboBox } from "@/components/ComboBox";
 import { Label } from "@/components/Label";
 import { Option } from "@/components/Option";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 /*
  * react-aria hands the options popover its `isNonModal` through context, not
@@ -26,4 +27,21 @@ test("The options of a combo box do not lock the page", async () => {
   await expect.element(page.getByRole("listbox")).toBeVisible();
   // Assert the delta: a modal popover would set it to "hidden".
   expect(document.documentElement.style.overflow).toBe(overflowBefore);
+});
+
+testFormFieldContract("ComboBox", {
+  render: (props) => (
+    <ComboBox {...props}>
+      {props.children}
+      <Option value="rebelbase.org">rebelbase.org</Option>
+      <Option value="tatooine.com">tatooine.com</Option>
+    </ComboBox>
+  ),
+  getControl: (screen) => screen.getByRole("combobox"),
+  values: ["rebelbase.org", "tatooine.com"],
+  toFormValue: (value) => value,
+  changeValue: async (screen) => {
+    await screen.getByRole("combobox").click();
+    await screen.getByRole("option", { name: "tatooine.com" }).click();
+  },
 });
