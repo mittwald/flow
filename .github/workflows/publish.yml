@@ -41,16 +41,6 @@ permissions:
   # Read this workflow's own runs, for the publish turnstile below.
   actions: read
 
-env:
-  # Keep the local git hooks out of this workflow. simple-git-hooks' postinstall
-  # runs on every `pnpm install` (it is allowlisted in pnpm-workspace.yaml) and
-  # writes .git/hooks from package.json — including `pre-push` = `pnpm lint`. On a
-  # runner that hook fires on every push this workflow makes: ~95s of the release
-  # step was two full lint runs, and a lint failure there aborts the push AFTER
-  # the npm publish succeeded — the version lands on npm with no release commit,
-  # no tag and no GitHub Release (#2932).
-  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
-
 # Shared per-target-branch concurrency group (ADR 0004 §5): every writer of a
 # standing line serializes on that line's group, removing non-fast-forward races
 # by design. `mutate-next` is the SAME group `forward-merge.yml` uses.

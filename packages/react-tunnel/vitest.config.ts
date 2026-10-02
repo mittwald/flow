@@ -1,7 +1,7 @@
 import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../core/src/index.ts";
 
 export default mergeConfig(
   defaultConfig,
@@ -16,7 +16,7 @@ export default mergeConfig(
         {
           extends: true,
           test: {
-            ...vitestBrowserTestConfig,
+            ...createVitestBrowserTestConfig(),
             name: "browser",
             include: ["src/**/*.browser.test.{ts,tsx}"],
           },
