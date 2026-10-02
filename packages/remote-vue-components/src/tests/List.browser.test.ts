@@ -353,16 +353,25 @@ describe("Active filters", () => {
    */
   test("offers to clear everything once more than one value is on", async () => {
     const list = filteredList();
+    /*
+     * Unlabelled, as Flow's is — its tooltip is all it has — so it is found as
+     * the one plain button among the active filters without a label.
+     */
+    const clearButton = () =>
+      list
+        .element()
+        .querySelector(
+          ".flow--list--header--active-filters .flow--button--plain:not([aria-label])",
+        );
 
     await selectRank(list, "Corporal");
     await expect.poll(() => list.getByRole("row").elements().length).toBe(1);
-    expect(
-      list.getByRole("button", { name: "Clear filters" }).query(),
-    ).toBeNull();
+    expect(clearButton()).toBeNull();
 
     await selectRank(list, "Company Man");
 
-    await userEvent.click(list.getByRole("button", { name: "Clear filters" }));
+    await expect.poll(clearButton).not.toBeNull();
+    await userEvent.click(page.elementLocator(clearButton() as Element));
 
     await expect.poll(() => list.getByRole("row").elements().length).toBe(3);
   });
@@ -388,10 +397,17 @@ describe("A date-range filter", () => {
     await userEvent.click(list.getByRole("button", { name: "Joined" }));
 
     /*
-     * The grid, not a day: the calendar opens on the current month, so a named
-     * date goes stale with the calendar.
+     * The month's grid, not a day: the calendar opens on the current month, so
+     * a fixed date goes stale, and today's cell is named "Today, …". Named,
+     * because the list's own items are a grid too.
      */
-    await expect.element(page.getByRole("grid")).toBeVisible();
+    const currentMonth = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric",
+    }).format(new Date());
+    await expect
+      .element(page.getByRole("grid", { name: currentMonth }))
+      .toBeVisible();
     expect(page.getByRole("menuitemcheckbox").query()).toBeNull();
   });
 
