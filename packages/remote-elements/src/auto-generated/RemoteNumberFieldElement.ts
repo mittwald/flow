@@ -39,6 +39,7 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFiel
       slot: {},
       step: {},
       translate: {},
+      unit: {},
       validate: {},
       validationBehavior: {},
       value: {},

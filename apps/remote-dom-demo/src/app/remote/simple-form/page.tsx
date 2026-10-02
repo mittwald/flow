@@ -14,6 +14,7 @@ import {
   Checkbox,
   Button,
   Autocomplete,
+  NumberField,
 } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
 
@@ -70,6 +71,9 @@ export default function Page() {
             Hoth
           </Option>
         </Select>
+        <NumberField name="memory" unit="MiB" defaultValue={512}>
+          <Label>Droid memory</Label>
+        </NumberField>
         <FileField multiple name="certificates">
           <Label>Holocrons</Label>
           <Button variant="outline" color="secondary">

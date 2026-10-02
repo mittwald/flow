@@ -8,7 +8,7 @@ test.each(testEnvironments)(
     testScreenshot,
     render,
     components: {
-      Flex,
+      ColumnLayout,
       NumberField,
       Label,
       FieldError,
@@ -19,7 +19,7 @@ test.each(testEnvironments)(
     },
   }) => {
     await render(
-      <Flex direction="column" gap="m">
+      <ColumnLayout m={[1, 1]} l={[1, 1]}>
         <NumberField isRequired>
           <Label>
             Default
@@ -49,13 +49,19 @@ test.each(testEnvironments)(
         >
           <Label>Unit</Label>
         </NumberField>
+        <NumberField unit="MiB" defaultValue={512}>
+          <Label>Custom unit</Label>
+        </NumberField>
+        <NumberField unit="MiB" defaultValue={512} isDisabled>
+          <Label>Custom unit disabled</Label>
+        </NumberField>
         <NumberField minValue={5} defaultValue={5}>
           <Label>Disabled increment</Label>
         </NumberField>
         <NumberField maxValue={5} defaultValue={5}>
           <Label>Disabled decrement</Label>
         </NumberField>
-      </Flex>,
+      </ColumnLayout>,
     );
 
     await testScreenshot("NumberField states");
