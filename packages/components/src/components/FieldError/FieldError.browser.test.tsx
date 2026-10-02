@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { expect, test } from "vitest";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FieldErrorContext } from "react-aria-components";
 import { FieldError } from "@/components/FieldError";
 import styles from "@/components/FieldError/FieldError.module.scss";
@@ -134,6 +134,31 @@ test("children do not leak into other fields", async () => {
   await screen.rerender(fields);
 
   await expect.element(page.getByTestId("errors")).toHaveTextContent("0");
+});
+
+/*
+ * Re-rendering the field updates the error in place. A remount would swap its
+ * DOM nodes on every keystroke of a controlled field.
+ */
+test("the error is not remounted when the field re-renders", async () => {
+  const ControlledField = () => {
+    const [value, setValue] = useState("");
+    return (
+      <TextField value={value} onChange={setValue}>
+        <Label>Project name</Label>
+        <FieldError>The name is already taken</FieldError>
+      </TextField>
+    );
+  };
+
+  await render(<ControlledField />);
+  await expect.element(message()).toBeVisible();
+  const before = message().element();
+
+  await userEvent.type(page.getByRole("textbox"), "ab");
+
+  await expect.element(page.getByRole("textbox")).toHaveValue("ab");
+  expect(message().element()).toBe(before);
 });
 
 // `renderAlert` swaps the inline text for a full alert with a heading.
