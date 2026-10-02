@@ -50,3 +50,37 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
     await testScreenshot("CodeEditor");
   },
 );
+
+// isDisabled is available from 1.4.10. The next line releases it once main is
+// merged into it, so 1.5.0-next.0 up to 1.5.0-next.12 sort above 1.4.10
+// without carrying it.
+test
+  .skipIf(
+    crossVersion({
+      below: "1.4.10",
+      excludeRange: ">=1.5.0-next.0 <=1.5.0-next.12",
+    }),
+  )
+  .each(testEnvironments)(
+  "CodeEditor disabled (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { CodeEditor, Label, FieldDescription },
+  }) => {
+    await render(
+      <CodeEditor
+        isDisabled
+        language="json"
+        value={`{
+    "disabled": true
+}`}
+      >
+        <Label>Disabled</Label>
+        <FieldDescription>FieldDescription</FieldDescription>
+      </CodeEditor>,
+    );
+
+    await testScreenshot("CodeEditor disabled");
+  },
+);
