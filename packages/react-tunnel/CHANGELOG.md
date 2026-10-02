@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.14](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.5.0-next.14) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **repo:** solve six documented footguns at their root ([#3247](https://github.com/mittwald/flow/issues/3247)) ([9e2fe6f](https://github.com/mittwald/flow/commit/9e2fe6f2165dd8bddb3ecfcba13cada8a7a8b7ae))
+
+## [1.4.10](https://github.com/mittwald/flow/compare/1.5.0-next.12...1.4.10) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.10 ([0019299](https://github.com/mittwald/flow/commit/0019299f219cf9a4c3c48d512cf840c71014bb81))
+
 ## [1.5.0-next.13](https://github.com/mittwald/flow/compare/1.5.0-next.12...1.5.0-next.13) (2026-10-02)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
