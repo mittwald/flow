@@ -27,8 +27,7 @@ export const readinessApi = {
       if (mwExtBridge.connection === undefined) {
         throw new ExtBridgeError(
           `Ext Bridge not ready after ${timeoutMs}ms: the host never connected. ` +
-            "If this extension renders <RemoteRoot>, make sure initExtBridge() has run " +
-            "(import '@mittwald/ext-bridge/browser') before the first render.",
+            "Make sure the extension renders <RemoteRoot> and runs inside mStudio.",
         );
       }
       throw error;
