@@ -397,10 +397,17 @@ describe("A date-range filter", () => {
     await userEvent.click(list.getByRole("button", { name: "Joined" }));
 
     /*
-     * The grid, not a day: the calendar opens on the current month, so a named
-     * date goes stale with the calendar.
+     * The month's grid, not a day: the calendar opens on the current month, so
+     * a fixed date goes stale, and today's cell is named "Today, …". Named,
+     * because the list's own items are a grid too.
      */
-    await expect.element(page.getByRole("grid")).toBeVisible();
+    const currentMonth = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric",
+    }).format(new Date());
+    await expect
+      .element(page.getByRole("grid", { name: currentMonth }))
+      .toBeVisible();
     expect(page.getByRole("menuitemcheckbox").query()).toBeNull();
   });
 
