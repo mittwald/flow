@@ -1,5 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
+import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
@@ -108,6 +108,16 @@ test.each(testEnvironments)(
         <FieldError>This password was already used</FieldError>
       </PasswordCreationField>,
     );
+
+    // The policy rates the password asynchronously; until then the bar shows
+    // a provisional width. Capture the final rating, not the race.
+    await expect
+      .poll(() =>
+        document
+          .querySelector("[data-complexity-percentage]")
+          ?.getAttribute("data-complexity-percentage"),
+      )
+      .toBe("100");
 
     await testScreenshot("PasswordCreationField invalid strong password");
   },
