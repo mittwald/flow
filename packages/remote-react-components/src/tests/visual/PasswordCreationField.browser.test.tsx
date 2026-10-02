@@ -91,6 +91,28 @@ test.each(testEnvironments)(
   },
 );
 
+/*
+ * An error from outside the policy (a server error) turns the bar danger like
+ * the field, even for a password the policy rates strong.
+ */
+test.each(testEnvironments)(
+  "PasswordCreationField invalid strong password (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { PasswordCreationField, Label, FieldError },
+  }) => {
+    await render(
+      <PasswordCreationField isInvalid defaultValue="Imperial-March-1977!">
+        <Label>Password</Label>
+        <FieldError>This password was already used</FieldError>
+      </PasswordCreationField>,
+    );
+
+    await testScreenshot("PasswordCreationField invalid strong password");
+  },
+);
+
 test.each(testEnvironments)(
   "PasswordCreationField edge cases (%s)",
   async ({

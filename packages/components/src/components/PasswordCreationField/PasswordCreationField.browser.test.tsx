@@ -15,6 +15,7 @@ import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
 import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
+import { FieldError } from "@/components/FieldError";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -80,6 +81,20 @@ test("an empty field shows no error", async () => {
   expect(document.querySelector(`.${fieldErrorStyles.fieldError}`)).toBeNull();
 });
 
+const complexityIndicator = () =>
+  document.querySelector("[data-complexity-status]");
+
+const complexityStatus = () =>
+  complexityIndicator()?.getAttribute("data-complexity-status");
+
+/** Waits until the generated password is rated at full strength. */
+const expectFullStrength = () =>
+  expect
+    .poll(() =>
+      complexityIndicator()?.getAttribute("data-complexity-percentage"),
+    )
+    .toBe("100");
+
 /*
  * The policy result for a valid password describes the input. It appears only
  * after the asynchronous validation, and a generated password never makes the
@@ -103,6 +118,51 @@ test("a valid password's result describes the input", async () => {
   await userEvent.clear(input);
 
   await expect.element(input).not.toHaveAttribute("aria-describedby");
+});
+
+/*
+ * A shown error hides the field's descriptions (FormField styles), so the
+ * hidden result must not describe the input either – it would still be
+ * announced.
+ */
+test("an error replaces a valid password's result", async () => {
+  await render(
+    <PasswordCreationField isInvalid>
+      <Label>Password</Label>
+      <FieldError>Already used</FieldError>
+    </PasswordCreationField>,
+  );
+  const input = page.getByRole("textbox");
+  await expect.element(input).toHaveAccessibleDescription(/Already used/);
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expectFullStrength();
+
+  await expect.element(input).toHaveAccessibleDescription(/Already used/);
+  await expect.element(input).not.toHaveAccessibleDescription(/secure/);
+});
+
+/*
+ * An error from outside the policy (a server error) makes the bar danger like
+ * the field – a green bar next to an error reads as a contradiction.
+ */
+test("the bar of an invalid field shows danger for a strong password", async () => {
+  const Field = ({ isInvalid }: { isInvalid: boolean }) => (
+    <PasswordCreationField isInvalid={isInvalid}>
+      <Label>Password</Label>
+      <FieldError>Already used</FieldError>
+    </PasswordCreationField>
+  );
+  const screen = await render(<Field isInvalid />);
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expectFullStrength();
+
+  expect(complexityStatus()).toBe("danger");
+
+  await screen.rerender(<Field isInvalid={false} />);
+
+  await expect.poll(complexityStatus).toBe("success");
 });
 
 describe("PasswordCreationField Tests", () => {

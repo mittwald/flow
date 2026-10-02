@@ -187,6 +187,7 @@ export const PasswordCreationField = flowComponent(
       wrapperProps,
       controlProps,
       fieldPropsContext,
+      renderedFieldErrorId,
     } = useFieldComponent(props, "PasswordCreationField");
 
     /**
@@ -195,6 +196,9 @@ export const PasswordCreationField = flowComponent(
      * field's validity changes, so a result that appears while the field stays
      * valid (a generated password) was never linked. It gets its own id
      * instead, referenced only while it is rendered.
+     *
+     * A shown error replaces it: the FormField styles hide descriptions next to
+     * an error, and a hidden description would still be announced.
      */
     const resultDescriptionId = useId();
     const [isResultDescriptionRendered, setIsResultDescriptionRendered] =
@@ -348,9 +352,10 @@ export const PasswordCreationField = flowComponent(
                 isLoading={policyValidationResult.isValid === "indeterminate"}
                 policyValidationResult={policyValidationResult}
                 validationResultState={stateFromValidationResult}
+                isInvalid={invalidFromProps}
               />
             </Aria.Group>
-            {isValidFromValidationResult && (
+            {isValidFromValidationResult && !renderedFieldErrorId && (
               // Out of react-aria's description slot, which would set its own
               // id – see `resultDescriptionId`.
               <Aria.TextContext.Provider value={null}>

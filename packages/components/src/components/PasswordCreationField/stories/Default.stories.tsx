@@ -70,11 +70,27 @@ export const WithCopyButton: Story = {
   },
 };
 
+// A server error for the submitted password, shown until the password changes.
 export const WithFieldError: Story = {
-  render: (props) => (
-    <PasswordCreationField {...props} isInvalid>
-      <Label>Password</Label>
-      <FieldError>This password was already used on the Death Star</FieldError>
-    </PasswordCreationField>
-  ),
+  render: (props) => {
+    const [value, setValue] = useState("Imperial-March-1977!");
+    const [error, setError] = useState<string>(
+      "This password was already used on the Death Star",
+    );
+
+    return (
+      <PasswordCreationField
+        {...props}
+        value={value}
+        onChange={(password) => {
+          setValue(password);
+          setError("");
+        }}
+        isInvalid={!!error}
+      >
+        <Label>Password</Label>
+        <FieldError>{error}</FieldError>
+      </PasswordCreationField>
+    );
+  },
 };
