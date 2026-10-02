@@ -109,9 +109,9 @@ test.each(testEnvironments)(
       </PasswordCreationField>,
     );
 
-    // The policy rates the password asynchronously; until then the bar shows
-    // a provisional width. Capture the final rating, not the race – it takes
-    // well over a second on CI.
+    // The policy rates the password asynchronously (about a second); until
+    // then the bar shows a provisional width. Capture the final rating, not
+    // the race.
     await expect
       .poll(
         () =>

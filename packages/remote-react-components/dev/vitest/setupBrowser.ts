@@ -28,6 +28,18 @@ beforeAll(async () => {
   await document.fonts.ready;
 });
 
+/*
+ * The suites run with `isolate: false`, so a clock a test sets with
+ * `vi.setSystemTime` stays set for every file that runs after it on the page.
+ * A frozen `Date.now()` stops whatever measures elapsed time: `use-debounce`
+ * never sees its wait pass, so PasswordCreationField never rated a password in
+ * any scenario that ran after List's date filter (CI shard 3). Hand every test
+ * the real clock back.
+ */
+afterEach(() => {
+  vi.useRealTimers();
+});
+
 locators.extend({
   getByLocator(locator: string) {
     return locator;
