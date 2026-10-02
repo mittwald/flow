@@ -35,4 +35,9 @@ Object.keys(langs).forEach((key) => {
 
 supportedCodeEditorLanguages.dotEnv = DotEnvLanguage;
 
+export const isCodeEditorLanguage = (
+  language: string,
+): language is CodeEditorLanguage =>
+  Object.hasOwn(supportedCodeEditorLanguages, language);
+
 export default supportedCodeEditorLanguages;
