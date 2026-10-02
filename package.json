@@ -15,12 +15,12 @@
     "clean": "nx reset",
     "postclean": "nx run-many --targets=clean",
     "dev": "nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
-    "dev:init-githooks": "simple-git-hooks",
+    "dev:init-githooks": "node .github/scripts/init-git-hooks.cjs",
     "dev:init-merge-drivers": "node .github/scripts/init-merge-drivers.cjs",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "format:check": "prettier --check '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint . && stylelint '**/*.{css,scss}' && pnpm format:check",
-    "prepare": "node .github/scripts/init-merge-drivers.cjs",
+    "prepare": "node .github/scripts/init-merge-drivers.cjs && node .github/scripts/init-git-hooks.cjs",
     "release:figure": "node .github/scripts/release-figure.mjs",
     "sync:resolve": "node .github/scripts/sync-resolve.cjs",
     "test": "nx run-many --targets=test:unit,test:compile,test:links",
@@ -28,11 +28,6 @@
     "test:browser:prepare": "pnpm exec playwright install --with-deps firefox webkit",
     "test:visual": "nx run-many --targets=test:visual",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
-  },
-  "simple-git-hooks": {
-    "post-checkout": "pnpm install",
-    "post-merge": "pnpm install",
-    "pre-push": "pnpm lint"
   },
   "dependencies": {
     "eslint-scope": "^9.1.2",
@@ -67,7 +62,6 @@
     "prettier-plugin-pkgsort": "^0.3.0",
     "prettier-plugin-sort-json": "^4.2.0",
     "react-docgen-typescript": "^2.4.0",
-    "simple-git-hooks": "^2.13.1",
     "stylelint": "^17.14.1",
     "stylelint-config-recommended-scss": "^17.0.1",
     "stylelint-config-standard": "^40.0.0",
