@@ -125,7 +125,7 @@ export const PasswordCreationField = flowComponent(
     );
 
     const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
-    usePolicyValidationResult(
+    const { rememberValidationResult } = usePolicyValidationResult(
       validationPolicy,
       value ?? "",
       () => {
@@ -229,14 +229,17 @@ export const PasswordCreationField = flowComponent(
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
-      setOptimisticPolicyValidationResult({
-        ...initialPolicyValidationState,
-        isValid: true,
-        ruleResults: policyValidationResult.ruleResults.map((r) => ({
-          ...r,
-          isValid: true,
-        })),
-      });
+      /**
+       * The generator returns only passwords the policy accepts, so the rating
+       * is set with the password instead of after the typing debounce. It is
+       * the policy's own result: a guessed one (full strength) was overturned
+       * by the real rating, e.g. to "meets the minimum requirements". Cached,
+       * so the debounced validation of this password does not rate it again.
+       */
+      const generatedPasswordResult =
+        await validationPolicy.validate(generatedPassword);
+      rememberValidationResult(generatedPassword, generatedPasswordResult);
+      setPolicyValidationResult(generatedPasswordResult);
       setIsPasswordRevealed(true);
       onChange(generatedPassword);
     };
