@@ -1,10 +1,11 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../../../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../../../core/src/index.ts";
 import viteConfig from "./vite.config.ts";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+const browserTestConfig = createVitestBrowserTestConfig();
 
 /*
  * The same browser the corpus harness uses — 1280x720, en-US, reduced motion,
@@ -22,10 +23,10 @@ export default mergeConfig(viteConfig, {
     fileParallelism: false,
     testTimeout: 60_000,
     browser: {
-      ...vitestBrowserTestConfig.browser,
+      ...browserTestConfig.browser,
       headless: true,
       screenshotFailures: false,
-      instances: vitestBrowserTestConfig.browser?.instances?.filter(
+      instances: browserTestConfig.browser?.instances?.filter(
         (instance) => instance.browser === "webkit",
       ),
     },

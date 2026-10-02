@@ -2,11 +2,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vitest/config";
 import { BaseSequencer, type TestSpecification } from "vitest/node";
-import { vitestBrowserTestConfig } from "../../../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../../../core/src/index.ts";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
 import viteConfig from "./vite.config.ts";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+const browserTestConfig = createVitestBrowserTestConfig();
 const reactPackage = path.resolve(here, "../../../remote-react-components");
 
 /*
@@ -62,10 +63,10 @@ export default mergeConfig(viteConfig, {
     sequence: { sequencer: FileOrderSequencer },
     testTimeout: 60_000,
     browser: {
-      ...vitestBrowserTestConfig.browser,
+      ...browserTestConfig.browser,
       headless: true,
       screenshotFailures: false,
-      instances: vitestBrowserTestConfig.browser?.instances?.filter(
+      instances: browserTestConfig.browser?.instances?.filter(
         (instance) => instance.browser === "webkit",
       ),
     },

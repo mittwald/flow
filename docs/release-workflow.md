@@ -144,13 +144,13 @@ flowchart LR
       `src/auto-generated/**`, and `codemods`' build script is
       `tsx dev/generateCli.ts && …`.
   - **Every `package.json` and `pnpm-lock.yaml` are judged by content**, because
-    their paths carry no information. A `scripts` or `simple-git-hooks` edit
-    cannot reach a consumer, a dependency bump can — the job fetches both sides
-    of each manifest and compares the top-level keys, and an unknown key is
-    relevant like an unknown path is. The lockfile follows the manifests that
-    moved it and stays relevant when none of them changed. #2970 cut 1.0.9 from
-    two root scripts, #3006 cut 1.0.12 from one package's `test:unit`, #2959 cut
-    1.0.4 from an `apps/docs` dependency.
+    their paths carry no information. A `scripts` edit cannot reach a consumer,
+    a dependency bump can — the job fetches both sides of each manifest and
+    compares the top-level keys, and an unknown key is relevant like an unknown
+    path is. The lockfile follows the manifests that moved it and stays relevant
+    when none of them changed. #2970 cut 1.0.9 from two root scripts, #3006 cut
+    1.0.12 from one package's `test:unit`, #2959 cut 1.0.4 from an `apps/docs`
+    dependency.
 - **Tests and stories stay out of `dist/types`.** Every release build shares
   `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
   `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration

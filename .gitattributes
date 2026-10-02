@@ -49,3 +49,11 @@
 # rehearsal). The package-json driver is generic: it normalises the first
 # top-level `"version"` string, which in `lerna.json` is the only one.
 lerna.json merge=package-json
+
+# Compiled from `packages/codemods/src/migrations/<id>/entry.md` by
+# `pnpm nx build codemods` — an edit here is reverted by the next build, and CI
+# fails "Check all generated code is committed" in the meantime. The file says
+# so in its header; this marks it for GitHub too, which collapses a generated
+# file's diff by default instead of offering it for review like a source file.
+# Local `git diff` and the CI check are unaffected.
+packages/components/MIGRATION.md linguist-generated=true

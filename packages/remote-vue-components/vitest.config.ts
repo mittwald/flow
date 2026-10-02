@@ -1,7 +1,9 @@
 import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../core/src/index.ts";
+
+const browserTestConfig = createVitestBrowserTestConfig();
 
 export default mergeConfig(
   defaultConfig,
@@ -12,12 +14,9 @@ export default mergeConfig(
         {
           extends: true,
           test: {
-            ...vitestBrowserTestConfig,
+            ...browserTestConfig,
             browser: {
-              ...vitestBrowserTestConfig.browser,
-              instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
-                (instance) => ({ ...instance }),
-              ),
+              ...browserTestConfig.browser,
               screenshotFailures: false,
             },
             name: "browser",
