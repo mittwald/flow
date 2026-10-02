@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.13](https://github.com/mittwald/flow/compare/1.5.0-next.12...1.5.0-next.13) (2026-10-02)
+
+### Bug Fixes
+
+* **ext-bridge:** name the likely cause when the host never connects, use local timeout ([#3315](https://github.com/mittwald/flow/issues/3315)) ([7b86979](https://github.com/mittwald/flow/commit/7b86979bf218c57180de80f0fd046c9afb0d6628))
+
+## [1.4.9](https://github.com/mittwald/flow/compare/1.5.0-next.11...1.4.9) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.9 ([a1f5091](https://github.com/mittwald/flow/commit/a1f5091b8f85228c92497af00a80ff0794f0127e))
+
 ## [1.5.0-next.12](https://github.com/mittwald/flow/compare/1.5.0-next.11...1.5.0-next.12) (2026-10-01)
 
 **Note:** Version bump only for package @mittwald/ext-bridge

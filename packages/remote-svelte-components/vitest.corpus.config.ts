@@ -5,7 +5,7 @@ import path from "node:path";
 import { defineConfig } from "vitest/config";
 import type { BrowserCommand, ProjectConfig } from "vitest/node";
 import { serveFontsLocally } from "../remote-react-components/dev/vitest/serveFontsLocally.ts";
-import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../core/src/index.ts";
 import packageJson from "./package.json" with { type: "json" };
 
 /*
@@ -78,72 +78,82 @@ const readCorpusReference: BrowserCommand<[key: string]> = async (
  * One browser, and the same one for both runs. The comparison is between the
  * two bindings, so anything else that differs — the theme each browser project
  * picks, its layout arithmetic — is noise the reference would carry.
+ *
+ * A fresh factory call per project: vitest names a browser project's nested
+ * per-browser projects by writing onto the `browser.instances` objects, so two
+ * projects must not share them.
  */
-const corpusBrowser: ProjectConfig["browser"] = {
-  ...vitestBrowserTestConfig.browser,
+const corpusBrowser = (
+  base: ProjectConfig["browser"],
+): ProjectConfig["browser"] => ({
+  ...base,
   commands: {
-    ...vitestBrowserTestConfig.browser?.commands,
+    ...base?.commands,
     serveFontsLocally,
     writeCorpusReference,
     readCorpusReference,
   },
   instances: [{ browser: "webkit", viewport: { width: 1280, height: 720 } }],
   screenshotFailures: false,
-};
-
-const corpusProject = (name: string, mode: "react" | "svelte") => ({
-  /*
-   * The root stays this package, although the tests live in the other one:
-   * `svelte` is not resolvable from `remote-react-components`, so a run rooted
-   * there ends up with two copies of the runtime and every `$effect` a harness
-   * component creates lands outside the root `mount()` opened
-   * (`effect_orphan`). The corpus is reached through `include` instead, and the
-   * two things it addresses from its own root — the upload fixture and the
-   * setup file — are handled below.
-   */
-  server: { fs: { allow: [workspaceRoot] } },
-  optimizeDeps: { include: ["svelte", "@mittwald/**/*"] },
-  plugins: [react(), svelte()],
-  define: {
-    __FLOW_CORPUS_MODE__: JSON.stringify(mode),
-    __FLOW_REMOTE_SVELTE_COMPONENTS_PACKAGE_VERSION__: JSON.stringify(
-      packageJson.version,
-    ),
-  },
-  resolve: {
-    dedupe: ["svelte"],
-    alias: [
-      { find: /^@\/tests\/lib\/environments$/, replacement: corpusHarness },
-      { find: /^@\//, replacement: `${reactPackageSrc}/` },
-    ],
-  },
-  test: {
-    ...vitestBrowserTestConfig,
-    browser: corpusBrowser,
-    name,
-    globals: true,
-    include: [
-      "../remote-react-components/src/tests/visual/**/*.browser.test.tsx",
-    ],
-    /*
-     * The corpus's own setup, not this package's: it serves the fonts from the
-     * repository (a hanging CDN request takes a whole run down, #3106) and
-     * registers the `getByLocator` locator eighteen of the files use.
-     */
-    setupFiles: "../remote-react-components/dev/vitest/setupBrowser.ts",
-    /*
-     * The same budget the visual project runs with. A scenario renders,
-     * interacts and snapshots, and the paint budget alone is 20s.
-     */
-    testTimeout: 60_000,
-    fileParallelism: false,
-    /*
-     * One page for the whole run. Per-file isolation costs a fresh iframe per
-     * file, and WebKit never frees a removed one (#3119).
-     */
-    isolate: false,
-  },
 });
+
+const corpusProject = (name: string, mode: "react" | "svelte") => {
+  const browserTestConfig = createVitestBrowserTestConfig();
+
+  return {
+    /*
+     * The root stays this package, although the tests live in the other one:
+     * `svelte` is not resolvable from `remote-react-components`, so a run rooted
+     * there ends up with two copies of the runtime and every `$effect` a harness
+     * component creates lands outside the root `mount()` opened
+     * (`effect_orphan`). The corpus is reached through `include` instead, and the
+     * two things it addresses from its own root — the upload fixture and the
+     * setup file — are handled below.
+     */
+    server: { fs: { allow: [workspaceRoot] } },
+    optimizeDeps: { include: ["svelte", "@mittwald/**/*"] },
+    plugins: [react(), svelte()],
+    define: {
+      __FLOW_CORPUS_MODE__: JSON.stringify(mode),
+      __FLOW_REMOTE_SVELTE_COMPONENTS_PACKAGE_VERSION__: JSON.stringify(
+        packageJson.version,
+      ),
+    },
+    resolve: {
+      dedupe: ["svelte"],
+      alias: [
+        { find: /^@\/tests\/lib\/environments$/, replacement: corpusHarness },
+        { find: /^@\//, replacement: `${reactPackageSrc}/` },
+      ],
+    },
+    test: {
+      ...browserTestConfig,
+      browser: corpusBrowser(browserTestConfig.browser),
+      name,
+      globals: true,
+      include: [
+        "../remote-react-components/src/tests/visual/**/*.browser.test.tsx",
+      ],
+      /*
+       * The corpus's own setup, not this package's: it serves the fonts from the
+       * repository (a hanging CDN request takes a whole run down, #3106) and
+       * registers the `getByLocator` locator eighteen of the files use.
+       */
+      setupFiles: "../remote-react-components/dev/vitest/setupBrowser.ts",
+      /*
+       * The same budget the visual project runs with. A scenario renders,
+       * interacts and snapshots, and the paint budget alone is 20s.
+       */
+      testTimeout: 60_000,
+      fileParallelism: false,
+      /*
+       * One page for the whole run. Per-file isolation costs a fresh iframe per
+       * file, and WebKit never frees a removed one (#3119).
+       */
+      isolate: false,
+    },
+  };
+};
 
 export default defineConfig({
   test: {

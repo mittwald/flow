@@ -37,7 +37,7 @@ coding agents, but great reference docs for humans too.
 | Tool        | Version                                                             |
 | ----------- | ------------------------------------------------------------------- |
 | **Node.js** | `>=24` (`engines.node` in the root `package.json`; CI runs Node 24) |
-| **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack     |
+| **pnpm**    | `11.19.0` — pinned via the `packageManager` field, use Corepack     |
 | **Git**     | any recent version                                                  |
 
 We use [pnpm](https://pnpm.io/) as the package manager. The easiest way to get
@@ -77,15 +77,21 @@ your time when developing components.
 
 ### Git hooks
 
-`pnpm dev:init-githooks` wires up
-[simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
-installed:
+The hooks are ordinary shell scripts in `.githooks/`, and git runs them because
+`core.hooksPath` points there. The root `prepare` sets that after every
+`pnpm install`, so a normal checkout has the hooks without thinking about it;
+`pnpm dev:init-githooks` does it on demand. Both go through
+`.github/scripts/init-git-hooks.cjs`, which skips CI — a `pre-push` lint on a
+runner aborted pushes after a publish had already happened (#2932). The path is
+relative, so each worktree runs its own checked-out copy and the hooks version
+with the branch. `SKIP_GIT_HOOKS=1` skips a hook for one command.
 
 - **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
   repo. It blocks the push, not the commit — unformatted files surface once the
   commits already exist; `pnpm format` fixes them.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
-  stay in sync after switching branches or pulling.
+  stay in sync after switching branches or pulling. `post-checkout` only fires
+  on a branch checkout, not on `git checkout -- <file>`.
 
 ### Resolving a blocked forward-merge
 
@@ -563,7 +569,12 @@ pnpm nx test:unit:dev components
 pnpm nx test:browser:dev components
 ```
 
-Browser tests need the Playwright browsers installed once:
+The nx browser targets install the Playwright browsers for you, locally. (On CI
+they skip it: each workflow installs exactly the browsers its job needs, with
+system dependencies, under its own cache key — `browser` takes webkit only, the
+visual workflows add Firefox, and the keys are kept apart on purpose.) On a
+fresh machine, or on Linux where the browsers also need system libraries, do it
+once with system dependencies:
 
 ```shell
 pnpm test:browser:prepare

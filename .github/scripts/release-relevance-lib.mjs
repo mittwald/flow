@@ -228,12 +228,11 @@ function looksLikePath(line) {
 /**
  * Manifest keys whose change cannot reach a consumer.
  *
- * Both are provably local: `scripts` is task wiring run by CI and by
- * developers, `simple-git-hooks` configures the local git hooks. Every other
- * key — the dependency blocks, `resolutions`, `packageManager`, `workspaces`,
- * `files`, `exports`, `type`, `engines`, `version` — can move a built artifact,
- * the toolchain that produces it, or what a consumer resolves; an UNKNOWN key
- * is relevant like an unknown path is.
+ * `scripts` is provably local: task wiring run by CI and by developers. Every
+ * other key — the dependency blocks, `resolutions`, `packageManager`,
+ * `workspaces`, `files`, `exports`, `type`, `engines`, `version` — can move a
+ * built artifact, the toolchain that produces it, or what a consumer resolves;
+ * an UNKNOWN key is relevant like an unknown path is.
  *
  * A published tarball DOES contain `scripts` — npm strips nothing but a few
  * lifecycle-adjacent fields. The argument is "no consumer effect", not "not in
@@ -241,7 +240,7 @@ function looksLikePath(line) {
  * package's `test:unit` or `build` script. Same reasoning as for the story and
  * test `.d.ts` files above.
  */
-const IRRELEVANT_MANIFEST_KEYS = new Set(["scripts", "simple-git-hooks"]);
+const IRRELEVANT_MANIFEST_KEYS = new Set(["scripts"]);
 
 /**
  * Can a change to a `package.json` reach a consumer?

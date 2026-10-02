@@ -1,4 +1,5 @@
 import ActionForm from "../_demos/ActionForm.svelte";
+import Activity from "../_demos/Activity.svelte";
 import Chart from "../_demos/Chart.svelte";
 import CoachMark from "../_demos/CoachMark.svelte";
 import CodeEditor from "../_demos/CodeEditor.svelte";
@@ -7,6 +8,7 @@ import ErrorDemo from "../_demos/ErrorDemo.svelte";
 import EventHandler from "../_demos/EventHandler.svelte";
 import ExtBridge from "../_demos/ExtBridge.svelte";
 import Files from "../_demos/Files.svelte";
+import ImageCropper from "../_demos/ImageCropper.svelte";
 import Markdown from "../_demos/Markdown.svelte";
 import Modal from "../_demos/Modal.svelte";
 import MStudioLoading from "../_demos/MStudioLoading.svelte";
@@ -32,6 +34,7 @@ import Tunnel from "../_demos/Tunnel.svelte";
  */
 export const demos = {
   "action-form": ActionForm,
+  activity: Activity,
   chart: Chart,
   "coach-mark": CoachMark,
   "code-editor": CodeEditor,
@@ -40,6 +43,7 @@ export const demos = {
   "event-handler": EventHandler,
   "ext-bridge": ExtBridge,
   files: Files,
+  "image-cropper": ImageCropper,
   markdown: Markdown,
   modal: Modal,
   "mstudio-loading": MStudioLoading,

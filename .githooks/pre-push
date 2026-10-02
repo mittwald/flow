@@ -1,9 +1,10 @@
 #!/bin/sh
-if [ "$SKIP_SIMPLE_GIT_HOOKS" = "1" ]; then
-    echo "[INFO] SKIP_SIMPLE_GIT_HOOKS is set to 1, skipping hook."
-    exit 0
-fi
-if [ -f "$SIMPLE_GIT_HOOKS_RC" ]; then
-    . "$SIMPLE_GIT_HOOKS_RC"
-fi
+# Blocks the push, not the commit — so unformatted files surface once the
+# commits already exist. `pnpm format` fixes the formatting half.
+#
+# `git push --no-verify` skips it. .github/scripts/push-release.mjs always
+# passes that: a hook aborting there would strand a release npm has already
+# accepted (#2932).
+[ "$SKIP_GIT_HOOKS" = "1" ] && exit 0
+
 pnpm lint

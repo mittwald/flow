@@ -111,9 +111,6 @@ importers:
       react-docgen-typescript:
         specifier: ^2.4.0
         version: 2.4.0(@typescript/typescript6@6.0.2)
-      simple-git-hooks:
-        specifier: ^2.13.1
-        version: 2.14.0
       stylelint:
         specifier: ^17.14.1
         version: 17.15.0(@typescript/typescript6@6.0.2)(supports-color@7.2.0)
@@ -9392,10 +9389,6 @@ packages:
   sigstore@4.1.1:
     resolution: {integrity: sha512-endqECJkfhozrXMK5ngu/UAA0xVcVEFdnHJCElGaExypjW+HK5i6zu3NteLoaX/iFbRUbC3+DjttQs0GARr+5w==}
     engines: {node: ^20.17.0 || >=22.9.0}
-
-  simple-git-hooks@2.14.0:
-    resolution: {integrity: sha512-kkTORPAuxQz2g1QUuN0J8yGWT28tjGBfPOdJ4xT7Vbeu30veKUZQIoID2qGgCDAakaQn59UeZJJ4cFGB8PVP2A==}
-    hasBin: true
 
   sirv@3.0.2:
     resolution: {integrity: sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==}
@@ -19966,8 +19959,6 @@ snapshots:
       '@sigstore/verify': 3.1.1
     transitivePeerDependencies:
       - supports-color
-
-  simple-git-hooks@2.14.0: {}
 
   sirv@3.0.2:
     dependencies:

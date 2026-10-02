@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "1.5.0-next.12",
+  "version": "1.5.0-next.13",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
@@ -68,6 +68,7 @@
     "dev": "storybook dev --port 6006",
     "test:browser": "vitest run --project=browser* --browser.headless",
     "test:browser:dev": "vitest dev --project=browser*",
+    "test:browser:prepare": "if [ -z \"$CI\" ]; then playwright install firefox webkit; fi",
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
     "test:unit": "vitest run --project=unit*",
     "test:unit:dev": "vitest dev --project=unit*"

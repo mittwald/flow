@@ -137,13 +137,13 @@ measured against rather than asserted from.
   marks the render tag with a comment anchor, and remote-dom carries a comment
   across as a child — so `extractTextFromFirstChild` ("exactly one text child")
   gives up and `Initials`, `Markdown` and `Truncate` render empty. **11 of the
-  27 failures.** Not fixable inside the binding: an anchor is where Svelte
+  30 failures.** Not fixable inside the binding: an anchor is where Svelte
   inserts and removes, so it can be neither moved nor deleted. It needs a
   decision on the Flow side — either remote-dom stops carrying comments, or
   Flow's child inspection ignores them. A component with _no_ children is fine:
   the generated files write their tag literally, which has no anchor at all.
-- **A scenario that defines its own React component cannot be rebuilt.** **15 of
-  the 27**: a `Wrapper` or `TestComponent` written in the scenario file, usually
+- **A scenario that defines its own React component cannot be rebuilt.** **18 of
+  the 30**: a `Wrapper` or `TestComponent` written in the scenario file, usually
   holding `useState` and driving the interaction. That is React code rather than
   a Flow component, and nothing about the binding is measured there — ten of
   them are `List`, which this package does not rebuild anyway.
@@ -173,7 +173,7 @@ measured against rather than asserted from.
 ## Trying it
 
 `pnpm nx dev remote-dom-demo` and open any `/host/…` page: every demo has a
-React/Svelte switch, and the Svelte side serves 24 of the 27
+React/Svelte switch, and the Svelte side serves 27 of the 30
 (`apps/remote-dom-demo/src/app/remote-svelte`). The three that are missing say
 so themselves: `list` and `list-selection` need Flow's `List`, and
 `react-hook-form` is a React integration.
@@ -189,5 +189,5 @@ so themselves: `list` and `list-selection` need Flow's `List`, and
   `remote-react-components`**, all 84 files, run through this binding and
   compared against what the React binding renders today. Neither copied nor
   ported: the files are reached where they are and their environment import is
-  redirected. **160 of its 187 scenarios pass**, against a reference run green
-  at 187/187. What the other 27 say is in [Known gaps](#known-gaps).
+  redirected. **167 of its 197 scenarios pass**, against a reference run green
+  at 197/197. What the other 30 say is in [Known gaps](#known-gaps).
