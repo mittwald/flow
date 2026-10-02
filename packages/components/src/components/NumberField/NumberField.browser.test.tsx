@@ -3,6 +3,7 @@ import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
 import { NumberField } from "@/components/NumberField";
 import { Label } from "@/components/Label";
+import { FieldDescription } from "@/components/FieldDescription";
 
 // react-aria labels the stepper buttons after the field.
 const increase = () => page.getByRole("button", { name: "Increase Age" });
@@ -95,4 +96,61 @@ test("a disabled number field cannot be stepped", async () => {
 
   await expect.element(input()).toHaveValue("5");
   expect(onChange).not.toHaveBeenCalled();
+});
+
+/*
+ * React-aria cannot parse a unit Intl.NumberFormat does not know, so a custom
+ * unit stays out of the input value. The field's name carries it instead, like
+ * a unit written into the label.
+ */
+test("a custom unit is shown behind the number and named with the field", async () => {
+  const onChange = vi.fn();
+  await render(
+    <NumberField unit="MiB" defaultValue={512} onChange={onChange}>
+      <Label>Age</Label>
+      <FieldDescription>Per project</FieldDescription>
+    </NumberField>,
+  );
+
+  const field = page.getByRole("textbox", {
+    name: "Age (optional) MiB",
+    exact: true,
+  });
+
+  await expect.element(page.getByText("MiB")).toBeVisible();
+  await expect.element(field).toHaveValue("512");
+  await expect.element(field).toHaveAccessibleDescription("Per project");
+
+  await userEvent.fill(field, "1024");
+  await userEvent.tab();
+
+  expect(onChange).toHaveBeenLastCalledWith(1024);
+});
+
+test("a custom unit is hidden but named while the field is empty", async () => {
+  await render(
+    <NumberField unit="MiB">
+      <Label>Age</Label>
+    </NumberField>,
+  );
+
+  const field = page.getByRole("textbox", {
+    name: "Age (optional) MiB",
+    exact: true,
+  });
+
+  await expect.element(page.getByText("MiB")).not.toBeVisible();
+  await expect.element(field).toBeInTheDocument();
+
+  await userEvent.fill(field, "3");
+
+  await expect.element(page.getByText("MiB")).toBeVisible();
+});
+
+test("a custom unit extends an aria-label", async () => {
+  await render(<NumberField unit="MiB" aria-label="Age" />);
+
+  await expect
+    .element(page.getByRole("textbox", { name: "Age MiB", exact: true }))
+    .toBeInTheDocument();
 });
