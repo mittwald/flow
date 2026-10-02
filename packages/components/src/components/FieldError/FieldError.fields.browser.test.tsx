@@ -12,7 +12,9 @@ import { ComboBox } from "@/components/ComboBox";
 import { DatePicker } from "@/components/DatePicker";
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { FieldError } from "@/components/FieldError";
+import { FileDropZone } from "@/components/FileDropZone";
 import { FileField } from "@/components/FileField";
+import { Heading } from "@/components/Heading";
 import { Label } from "@/components/Label";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { NumberField } from "@/components/NumberField";
@@ -37,18 +39,27 @@ interface Case {
   render: (props: { isInvalid?: boolean }) => ReactNode;
   /** The element the error has to describe: the control, or its group. */
   target: () => Locator;
+  /**
+   * The field has no validation state of its own (react-aria provides no
+   * `FieldErrorContext`), so a FieldError with a message shows even while the
+   * field is valid.
+   */
+  standalone?: true;
+  /**
+   * The field references an id outside the error that may not exist. Only the
+   * error's reference is checked then.
+   */
+  danglingReferenceOutsideError?: string;
 }
 
 const byLabel = () => page.getByLabelText(/^Field/).first();
 
 /*
- * Every field takes a `FieldError` as a child. The message is shown whether or
- * not the field itself is invalid, and it describes what assistive technology
- * lands on — the control, or the group for grouped controls.
- *
- * Not covered: `FileDropZone`. `Aria.DropZone` drops `aria-describedby`, and
- * the `FileField` inside has no prop to take it, so its error is shown but not
- * linked.
+ * Every field takes a `FieldError` as a child. Inside a field with a validation
+ * state the field decides whether it shows, the children only give the
+ * message; a field without one shows it whenever it has a message. A shown
+ * error describes what assistive technology lands on – the control, or the
+ * group for grouped controls – and a hidden one is referenced nowhere.
  */
 const cases: Record<string, Case> = {
   TextField: {
@@ -124,6 +135,9 @@ const cases: Record<string, Case> = {
     target: byLabel,
   },
   CodeEditor: {
+    standalone: true,
+    danglingReferenceOutsideError:
+      "its FieldDescription id, referenced even without a description",
     render: (p) => (
       <CodeEditor {...p}>
         {label}
@@ -142,6 +156,7 @@ const cases: Record<string, Case> = {
     target: () => page.getByRole("textbox"),
   },
   Checkbox: {
+    standalone: true,
     render: (p) => (
       <Checkbox {...p}>
         Field
@@ -151,6 +166,7 @@ const cases: Record<string, Case> = {
     target: () => page.getByRole("checkbox"),
   },
   CheckboxButton: {
+    standalone: true,
     render: (p) => (
       <CheckboxButton {...p}>
         Field
@@ -160,6 +176,7 @@ const cases: Record<string, Case> = {
     target: () => page.getByRole("checkbox"),
   },
   Switch: {
+    standalone: true,
     render: (p) => (
       <Switch {...p}>
         Field
@@ -228,6 +245,7 @@ const cases: Record<string, Case> = {
     target: () => page.getByRole("combobox"),
   },
   Slider: {
+    standalone: true,
     render: (p) => (
       <Slider {...p}>
         {label}
@@ -266,8 +284,9 @@ const cases: Record<string, Case> = {
     target: () => page.getByRole("searchbox"),
   },
   "Autocomplete (error in the Autocomplete)": {
-    render: (p) => (
-      <Autocomplete {...p}>
+    standalone: true,
+    render: () => (
+      <Autocomplete>
         <SearchField>{label}</SearchField>
         <Option value="a">A</Option>
         {error}
@@ -275,16 +294,69 @@ const cases: Record<string, Case> = {
     ),
     target: () => page.getByRole("searchbox"),
   },
+  FileDropZone: {
+    standalone: true,
+    render: () => (
+      <FileDropZone>
+        <Heading>Drop</Heading>
+        <FileField>
+          <Button>Select</Button>
+        </FileField>
+        {error}
+      </FileDropZone>
+    ),
+    target: () => {
+      const input = document.querySelector("input[type=file]");
+      if (!input) {
+        throw new Error("FileDropZone renders no file input");
+      }
+      return page.elementLocator(input);
+    },
+  },
 };
 
-describe.each(Object.entries(cases))("%s", (_, { render: field, target }) => {
-  test.each([
-    ["an invalid field", { isInvalid: true }],
-    ["a valid field", {}],
-  ])("shows the FieldError in %s and describes the input", async (_, p) => {
-    await render(<>{field(p)}</>);
+/** Every id an `aria-describedby` on the page points to exists. */
+const expectNoMissingReference = (knownGap?: string) => {
+  if (knownGap) {
+    return;
+  }
+  for (const element of document.querySelectorAll("[aria-describedby]")) {
+    const ids = (element.getAttribute("aria-describedby") ?? "").split(" ");
+    for (const id of ids) {
+      expect(document.getElementById(id), `#${id}`).not.toBeNull();
+    }
+  }
+};
 
-    await expect.element(page.getByText(message)).toBeVisible();
-    await expect.element(target()).toHaveAccessibleDescription(/Probe error/);
-  });
-});
+describe.each(Object.entries(cases))(
+  "%s",
+  (_, { render: field, target, standalone, danglingReferenceOutsideError }) => {
+    test("shows the FieldError of an invalid field and describes the input", async () => {
+      await render(<>{field({ isInvalid: true })}</>);
+
+      await expect.element(page.getByText(message)).toBeVisible();
+      await expect.element(target()).toHaveAccessibleDescription(/Probe error/);
+      expectNoMissingReference(danglingReferenceOutsideError);
+    });
+
+    test(
+      standalone
+        ? "shows the FieldError of a valid field – it has no state of its own"
+        : "hides the FieldError of a valid field and references nothing",
+      async () => {
+        await render(<>{field({})}</>);
+
+        if (standalone) {
+          await expect.element(page.getByText(message)).toBeVisible();
+          await expect
+            .element(target())
+            .toHaveAccessibleDescription(/Probe error/);
+        } else {
+          await expect.element(target()).toBeVisible();
+          await expect.element(page.getByText(message)).not.toBeInTheDocument();
+        }
+        expectNoMissingReference(danglingReferenceOutsideError);
+      },
+    );
+  },
+);

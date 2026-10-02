@@ -26,7 +26,8 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
   const {
     FieldErrorView,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     FieldErrorCaptureContext,
   } = useFieldComponent(props, "CheckboxGroup");
 
@@ -56,9 +57,9 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
   return (
     <Aria.CheckboxGroup
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       isInvalid={isInvalid}
-      className={clsx(fieldProps.className, className)}
+      className={clsx(wrapperProps.className, className)}
       ref={objectRef}
     >
       <FieldErrorCaptureContext>

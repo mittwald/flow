@@ -43,7 +43,8 @@ export const Switch = flowComponent("Switch", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
   } = useFieldComponent(props, "Switch");
 
   const propsContext: PropsContext = {
@@ -56,11 +57,11 @@ export const Switch = flowComponent("Switch", (props) => {
   };
 
   return (
-    <div className={fieldProps.className}>
+    <div className={wrapperProps.className}>
       <FieldErrorCaptureContext>
         <Aria.Switch
           {...rest}
-          aria-describedby={fieldProps["aria-describedby"]}
+          aria-describedby={controlProps["aria-describedby"]}
           className={rootClassName}
           inputRef={objectRef}
         >

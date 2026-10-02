@@ -35,7 +35,8 @@ export const NumberField = flowComponent("NumberField", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "NumberField");
 
@@ -45,8 +46,8 @@ export const NumberField = flowComponent("NumberField", (props) => {
     <Aria.NumberField
       {...rest}
       isWheelDisabled={isWheelDisabled}
-      aria-describedby={fieldProps["aria-describedby"]}
-      className={clsx(rootClassName, fieldProps.className)}
+      aria-describedby={controlProps["aria-describedby"]}
+      className={clsx(rootClassName, wrapperProps.className)}
     >
       <PropsContextProvider props={fieldPropsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>

@@ -17,7 +17,8 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
 
   const {
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     FieldErrorView,
     FieldErrorCaptureContext,
   } = useFieldComponent(props, "CheckboxButton");
@@ -34,12 +35,12 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
 
   return (
     <div
-      className={clsx(fieldProps.className, styles.checkboxButton, className)}
+      className={clsx(wrapperProps.className, styles.checkboxButton, className)}
     >
       <FieldErrorCaptureContext>
         <Checkbox
           {...rest}
-          aria-describedby={fieldProps["aria-describedby"]}
+          aria-describedby={controlProps["aria-describedby"]}
           className={styles.checkbox}
           inputClassName={clsx(inputClassName, styles.input)}
         >

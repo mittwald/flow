@@ -2,14 +2,13 @@ import { type FC, type PropsWithChildren, useId } from "react";
 import { type PropsContext } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
-import clsx, { type ClassValue } from "clsx";
+import { type ClassValue } from "clsx";
 import type { FlowComponentName } from "@/components/propTypes";
 
 interface FieldComponentProps {
   className?: ClassValue;
   isRequired?: boolean;
   isDisabled?: boolean;
-  isInvalid?: boolean;
   "aria-describedby"?: string;
 }
 
@@ -17,21 +16,36 @@ export interface UseFieldComponent {
   FieldErrorCaptureContext: FC<PropsWithChildren>;
   FieldErrorView: FC;
   fieldPropsContext: PropsContext;
-  fieldProps: {
-    "aria-describedby"?: string;
-    className?: ReturnType<typeof clsx>;
+  /** For the field's outer element. */
+  wrapperProps: {
+    className: string;
   };
+  /**
+   * For what assistive technology lands on — the input, or the group of a
+   * grouped control. Where the react-aria root forwards `aria-describedby` to
+   * its input itself, spread it on the root together with `wrapperProps`.
+   */
+  controlProps: {
+    "aria-describedby"?: string;
+  };
+  /** The id of the error while one is rendered, without the consumer's ids. */
+  renderedFieldErrorId?: string;
 }
+
+/** Joins id references, dropping empty ones. @internal */
+export const joinIds = (...ids: (string | false | null | undefined)[]) =>
+  ids.filter(Boolean).join(" ") || undefined;
 
 export const useFieldComponent = (
   props: FieldComponentProps,
   component: FlowComponentName,
 ): UseFieldComponent => {
   const fieldErrorId = useId();
-  const { FieldErrorView, FieldErrorCaptureContext } = useFieldError({
-    fieldErrorId,
-    component,
-  });
+  const { FieldErrorView, FieldErrorCaptureContext, renderedFieldErrorId } =
+    useFieldError({
+      fieldErrorId,
+      component,
+    });
 
   // setting up the props context for all components that
   // are part of a form control
@@ -50,15 +64,17 @@ export const useFieldComponent = (
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps: {
-      // Always reference the error: the field cannot tell whether one is
-      // shown (`validate`, server errors and `FieldError` children all render
-      // one without `isInvalid`). While none is rendered, the id points to
-      // nothing, and the accessible description skips a missing id.
-      "aria-describedby": [fieldErrorId, props["aria-describedby"]]
-        .filter(Boolean)
-        .join(" "),
-      className: clsx(formFieldStyles.formField),
+    wrapperProps: {
+      className: formFieldStyles.formField,
     },
+    controlProps: {
+      // Reference the error only while it is rendered – an id that points to
+      // nothing fails HTML validators and a11y checks.
+      "aria-describedby": joinIds(
+        renderedFieldErrorId,
+        props["aria-describedby"],
+      ),
+    },
+    renderedFieldErrorId,
   } as const;
 };
