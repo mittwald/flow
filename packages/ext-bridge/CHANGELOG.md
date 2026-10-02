@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.10](https://github.com/mittwald/flow/compare/1.4.9...1.4.10) (2026-10-02)
+
+### Bug Fixes
+
+* **ext-bridge:** name the likely cause when the host never connects, use local timeout ([#3315](https://github.com/mittwald/flow/issues/3315)) ([7b86979](https://github.com/mittwald/flow/commit/7b86979bf218c57180de80f0fd046c9afb0d6628))
+
 ## [1.4.9](https://github.com/mittwald/flow/compare/1.4.8...1.4.9) (2026-10-01)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
