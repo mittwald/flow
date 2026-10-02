@@ -1,6 +1,7 @@
 import TextField from "@/components/TextField";
 import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 test("TextField has typed value on blur", async () => {
   const dom = await render(<TextField aria-label="test" />);
@@ -32,4 +33,14 @@ test("TextField stays controlled across the first change", async () => {
   } finally {
     warn.mockRestore();
   }
+});
+
+testFormFieldContract("TextField", {
+  render: (props) => <TextField {...props} />,
+  getControl: (screen) => screen.getByRole("textbox"),
+  values: ["foo", "bar"],
+  toFormValue: (value) => value,
+  changeValue: async (screen) => {
+    await userEvent.fill(screen.getByRole("textbox"), "bar");
+  },
 });

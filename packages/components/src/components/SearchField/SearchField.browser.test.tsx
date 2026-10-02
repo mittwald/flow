@@ -3,6 +3,7 @@ import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
 import { SearchField } from "@/components/SearchField";
 import { Label } from "@/components/Label";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 const searchBox = () => page.getByRole("searchbox");
 const clearButton = () => page.getByRole("button", { name: "Clear search" });
@@ -71,4 +72,14 @@ test("a disabled search field cannot be typed into or cleared", async () => {
 
   await expect.element(searchBox()).toHaveValue("rebelbase");
   expect(onChange).not.toHaveBeenCalled();
+});
+
+testFormFieldContract("SearchField", {
+  render: (props) => <SearchField {...props} />,
+  getControl: (screen) => screen.getByRole("searchbox"),
+  values: ["foo", "bar"],
+  toFormValue: (value) => value,
+  changeValue: async (screen) => {
+    await userEvent.fill(screen.getByRole("searchbox"), "bar");
+  },
 });
