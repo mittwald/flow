@@ -45,11 +45,6 @@ interface Case {
    * field is valid.
    */
   standalone?: true;
-  /**
-   * The field references an id outside the error that may not exist. Only the
-   * error's reference is checked then.
-   */
-  danglingReferenceOutsideError?: string;
 }
 
 const byLabel = () => page.getByLabelText(/^Field/).first();
@@ -136,8 +131,6 @@ const cases: Record<string, Case> = {
   },
   CodeEditor: {
     standalone: true,
-    danglingReferenceOutsideError:
-      "its FieldDescription id, referenced even without a description",
     render: (p) => (
       <CodeEditor {...p}>
         {label}
@@ -316,10 +309,7 @@ const cases: Record<string, Case> = {
 };
 
 /** Every id an `aria-describedby` on the page points to exists. */
-const expectNoMissingReference = (knownGap?: string) => {
-  if (knownGap) {
-    return;
-  }
+const expectNoMissingReference = () => {
   for (const element of document.querySelectorAll("[aria-describedby]")) {
     const ids = (element.getAttribute("aria-describedby") ?? "").split(" ");
     for (const id of ids) {
@@ -330,13 +320,13 @@ const expectNoMissingReference = (knownGap?: string) => {
 
 describe.each(Object.entries(cases))(
   "%s",
-  (_, { render: field, target, standalone, danglingReferenceOutsideError }) => {
+  (_, { render: field, target, standalone }) => {
     test("shows the FieldError of an invalid field and describes the input", async () => {
       await render(<>{field({ isInvalid: true })}</>);
 
       await expect.element(page.getByText(message)).toBeVisible();
       await expect.element(target()).toHaveAccessibleDescription(/Probe error/);
-      expectNoMissingReference(danglingReferenceOutsideError);
+      expectNoMissingReference();
     });
 
     test(
@@ -355,7 +345,7 @@ describe.each(Object.entries(cases))(
           await expect.element(target()).toBeVisible();
           await expect.element(page.getByText(message)).not.toBeInTheDocument();
         }
-        expectNoMissingReference(danglingReferenceOutsideError);
+        expectNoMissingReference();
       },
     );
   },
