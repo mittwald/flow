@@ -76,6 +76,13 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     optionsOverlayController.close();
   };
 
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props, "Autocomplete");
+
   const inputProps: SearchFieldProps & TextFieldProps = {
     onKeyDown: (e) => {
       if (e.key === "Enter" && optionsOverlayController.isOpen) {
@@ -84,14 +91,8 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     },
     ref: inputRef,
     onChange: handleInputChange,
+    "aria-describedby": fieldProps["aria-describedby"],
   };
-
-  const {
-    FieldErrorView,
-    FieldErrorCaptureContext,
-    fieldPropsContext,
-    fieldProps,
-  } = useFieldComponent(props, "Autocomplete");
 
   const rootClassName = clsx(
     styles.autocomplete,
@@ -112,7 +113,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <div {...fieldProps} className={rootClassName}>
+    <div className={rootClassName}>
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}

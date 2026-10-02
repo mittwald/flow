@@ -72,6 +72,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      aria-describedby={fieldProps["aria-describedby"]}
       className={clsx(rootClassName, fieldProps.className)}
       ref={objectRef}
     >

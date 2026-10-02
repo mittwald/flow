@@ -61,6 +61,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   return (
     <Aria.DateRangePicker
       {...rest}
+      aria-describedby={fieldProps["aria-describedby"]}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}

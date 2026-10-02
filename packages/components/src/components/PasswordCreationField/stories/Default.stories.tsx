@@ -6,6 +6,7 @@ import { action } from "storybook/actions";
 import { Button } from "@/components/Button";
 import { IconDanger } from "@/components/Icon/components/icons";
 import { CopyButton } from "@/components/CopyButton";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
@@ -67,4 +68,13 @@ export const WithCopyButton: Story = {
       </PasswordCreationField>
     );
   },
+};
+
+export const WithFieldError: Story = {
+  render: (props) => (
+    <PasswordCreationField {...props} isInvalid>
+      <Label>Password</Label>
+      <FieldError>This password was already used on the Death Star</FieldError>
+    </PasswordCreationField>
+  ),
 };

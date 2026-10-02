@@ -75,7 +75,7 @@ export const Slider = flowComponent("Slider", (props) => {
   };
 
   return (
-    <div {...fieldProps}>
+    <div className={fieldProps.className}>
       <Aria.Slider
         {...rest}
         className={rootClassName}
@@ -149,6 +149,7 @@ export const Slider = flowComponent("Slider", (props) => {
                   )}
                 <Aria.SliderThumb
                   inputRef={objectRef}
+                  aria-describedby={fieldProps["aria-describedby"]}
                   name={name}
                   className={styles.handle}
                   isDisabled={isReadOnly}

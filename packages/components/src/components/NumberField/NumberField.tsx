@@ -45,6 +45,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     <Aria.NumberField
       {...rest}
       isWheelDisabled={isWheelDisabled}
+      aria-describedby={fieldProps["aria-describedby"]}
       className={clsx(rootClassName, fieldProps.className)}
     >
       <PropsContextProvider props={fieldPropsContext}>

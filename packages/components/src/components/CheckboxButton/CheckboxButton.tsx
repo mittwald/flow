@@ -34,12 +34,12 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
 
   return (
     <div
-      {...fieldProps}
       className={clsx(fieldProps.className, styles.checkboxButton, className)}
     >
       <FieldErrorCaptureContext>
         <Checkbox
           {...rest}
+          aria-describedby={fieldProps["aria-describedby"]}
           className={styles.checkbox}
           inputClassName={clsx(inputClassName, styles.input)}
         >

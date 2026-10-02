@@ -37,13 +37,11 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
   const inputRef = useObjectRef(ref);
 
   return (
-    <div
-      {...fieldProps}
-      className={clsx(styles.checkbox, className, fieldProps.className)}
-    >
+    <div className={clsx(styles.checkbox, className, fieldProps.className)}>
       <FieldErrorCaptureContext>
         <Aria.Checkbox
           {...rest}
+          aria-describedby={fieldProps["aria-describedby"]}
           inputRef={inputRef}
           className={clsx(inputClassName, styles.input)}
         >

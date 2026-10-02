@@ -61,6 +61,7 @@ export const FileField = flowComponent("FileField", (props) => {
 
   const inputProps = {
     ...restInputProps,
+    "aria-describedby": fieldProps["aria-describedby"],
     "aria-invalid": formValidationState.displayValidation.isInvalid,
     value: undefined,
   };
@@ -72,10 +73,7 @@ export const FileField = flowComponent("FileField", (props) => {
   };
 
   return (
-    <div
-      {...fieldProps}
-      className={clsx(fieldProps.className, styles.fileField)}
-    >
+    <div className={clsx(fieldProps.className, styles.fileField)}>
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={fieldPropsContext}>

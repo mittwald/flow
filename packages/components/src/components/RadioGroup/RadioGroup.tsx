@@ -54,6 +54,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      aria-describedby={fieldProps["aria-describedby"]}
       className={clsx(rootClassName, fieldProps.className)}
       ref={localRadioRef}
     >

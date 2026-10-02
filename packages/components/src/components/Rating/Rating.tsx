@@ -112,6 +112,7 @@ export const Rating = flowComponent("Rating", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      aria-describedby={fieldProps["aria-describedby"]}
       className={rootClassName}
       value={toSegmentValue(value)}
       defaultValue={toSegmentValue(defaultValue)}
