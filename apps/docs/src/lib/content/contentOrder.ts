@@ -20,6 +20,7 @@ export const CONTENT_ORDER: readonly string[] = [
   "/foundations/design/design-tokens",
   "/foundations/design/colors",
   "/foundations/design/themes",
+  "/foundations/design/states",
   "/foundations/design/accessibility",
   "/foundations/design/typography",
   "/foundations/structure",
