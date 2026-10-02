@@ -367,8 +367,11 @@ Three traps cost time in every new browser test:
   initially: every `locales/` directory in the package gets the new file.
 - Icon-only buttons get a localized `aria-label`; decorative icons are
   `aria-hidden` (the `Icon` component handles this when no label is given).
-- Form fields wire label/description/error via `useFieldComponent` (generates
-  ids, sets `aria-describedby`).
+- Form fields wire label/description/error via `useFieldComponent`.
+  `wrapperProps` go on the outer element, `controlProps` on what assistive
+  technology lands on (the input or the group), spread after `rest`: its
+  `aria-describedby` references the error only while one is rendered and already
+  contains the consumer's own ids.
 
 ## Public API surfaces
 

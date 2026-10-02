@@ -201,7 +201,8 @@ test("a generated password shows its final rating at once", async () => {
   await expect
     .poll(() => shownStatuses.length, { timeout: 10_000 })
     .toBeGreaterThan(0);
-  // Past the typing debounce (350 ms), after which the rating was redone.
+  // Past the typing debounce (350 ms), when the debounced validation runs: it
+  // must leave the rating alone.
   await new Promise((resolve) => setTimeout(resolve, 1000));
   observer.disconnect();
 

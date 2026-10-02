@@ -24,6 +24,8 @@ export interface UseFieldComponent {
    * For what assistive technology lands on — the input, or the group of a
    * grouped control. Where the react-aria root forwards `aria-describedby` to
    * its input itself, spread it on the root together with `wrapperProps`.
+   * Spread it after `rest`: it already contains the consumer's
+   * `aria-describedby`, which `rest` would otherwise put back alone.
    */
   controlProps: {
     "aria-describedby"?: string;
