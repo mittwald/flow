@@ -110,12 +110,15 @@ test.each(testEnvironments)(
     );
 
     // The policy rates the password asynchronously; until then the bar shows
-    // a provisional width. Capture the final rating, not the race.
+    // a provisional width. Capture the final rating, not the race – it takes
+    // well over a second on CI.
     await expect
-      .poll(() =>
-        document
-          .querySelector("[data-complexity-percentage]")
-          ?.getAttribute("data-complexity-percentage"),
+      .poll(
+        () =>
+          document
+            .querySelector("[data-complexity-percentage]")
+            ?.getAttribute("data-complexity-percentage"),
+        { timeout: 10_000 },
       )
       .toBe("100");
 
