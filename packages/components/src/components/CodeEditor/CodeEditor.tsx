@@ -35,6 +35,13 @@ export interface CodeEditorProps
    */
   isReadOnly?: boolean;
   /**
+   * Whether the editor is disabled. The code can neither be edited, focused nor
+   * copied.
+   *
+   * @default false
+   */
+  isDisabled?: boolean;
+  /**
    * Whether the editor is displayed as invalid.
    *
    * @default false
@@ -76,6 +83,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     language,
     extensions,
     isReadOnly,
+    isDisabled,
     isInvalid,
     isRequired,
     validationBehavior: _ignoredValidationBehavior,
@@ -157,6 +165,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     ...(describedBy ? { "aria-describedby": describedBy } : {}),
     ...(isRequired ? { "aria-required": "true" } : {}),
     ...(isInvalid ? { "aria-invalid": "true" } : {}),
+    ...(isDisabled ? { "aria-disabled": "true" } : {}),
   });
 
   const localRef = useObjectRef(ref);
@@ -164,7 +173,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   useMakeFocusable(localRef);
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} data-disabled={isDisabled || undefined}>
       <PropsContextProvider props={propsContext}>
         <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
@@ -172,8 +181,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             {...rest}
             value={value}
             basicSetup={{
-              highlightActiveLine: showActiveLineMarker,
-              highlightActiveLineGutter: showActiveLineMarker,
+              highlightActiveLine: showActiveLineMarker && !isDisabled,
+              highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
               autocompletion: false,
               lineNumbers: false,
               foldGutter: false,
@@ -181,7 +190,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             }}
             theme={defaultLightTheme}
             data-invalid={isInvalid || undefined}
-            readOnly={isReadOnly}
+            data-disabled={isDisabled || undefined}
+            readOnly={isReadOnly || isDisabled}
+            editable={!isDisabled}
             className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
             ref={(codeMirrorRef) => {
               if (codeMirrorRef?.editor) {
@@ -197,6 +208,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
                 size="s"
                 variant="soft"
                 text={value}
+                isDisabled={isDisabled}
               />
             )}
             {children}
