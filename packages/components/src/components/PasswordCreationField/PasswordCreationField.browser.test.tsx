@@ -80,6 +80,31 @@ test("an empty field shows no error", async () => {
   expect(document.querySelector(`.${fieldErrorStyles.fieldError}`)).toBeNull();
 });
 
+/*
+ * The policy result for a valid password describes the input. It appears only
+ * after the asynchronous validation, and a generated password never makes the
+ * field invalid on the way – the input references the result only while it is
+ * shown.
+ */
+test("a valid password's result describes the input", async () => {
+  await render(
+    <PasswordCreationField>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+  const input = page.getByRole("textbox");
+  await expect.element(input).toBeVisible();
+  await expect.element(input).not.toHaveAttribute("aria-describedby");
+
+  await page.getByRole("button", { name: /generate/i }).click();
+
+  await expect.element(input).toHaveAccessibleDescription(/secure/);
+
+  await userEvent.clear(input);
+
+  await expect.element(input).not.toHaveAttribute("aria-describedby");
+});
+
 describe("PasswordCreationField Tests", () => {
   beforeEach(() => {
     vitest.resetAllMocks();

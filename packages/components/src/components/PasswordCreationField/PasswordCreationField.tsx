@@ -2,6 +2,8 @@ import {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
+  useCallback,
+  useId,
   useMemo,
   useRef,
 } from "react";
@@ -37,7 +39,7 @@ import {
   Policy,
 } from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
-import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { joinIds, useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
@@ -187,6 +189,24 @@ export const PasswordCreationField = flowComponent(
       fieldPropsContext,
     } = useFieldComponent(props, "PasswordCreationField");
 
+    /**
+     * The result for a valid password appears after the asynchronous policy
+     * validation. react-aria resolves its description slot only when the
+     * field's validity changes, so a result that appears while the field stays
+     * valid (a generated password) was never linked. It gets its own id
+     * instead, referenced only while it is rendered.
+     */
+    const resultDescriptionId = useId();
+    const [isResultDescriptionRendered, setIsResultDescriptionRendered] =
+      useState(false);
+    const resultDescriptionRef = useCallback((element: Element | null) => {
+      setIsResultDescriptionRendered(!!element);
+    }, []);
+    const describedBy = joinIds(
+      isResultDescriptionRendered && resultDescriptionId,
+      controlProps["aria-describedby"],
+    );
+
     useAriaAnnounceValidationState(
       latestValidationErrorText,
       !isEmptyValue && policyValidationResult.isValid !== "indeterminate",
@@ -279,7 +299,7 @@ export const PasswordCreationField = flowComponent(
     return (
       <Aria.TextField
         {...rest}
-        {...controlProps}
+        aria-describedby={describedBy}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}
         onChange={onChange}
@@ -331,7 +351,16 @@ export const PasswordCreationField = flowComponent(
               />
             </Aria.Group>
             {isValidFromValidationResult && (
-              <FieldDescription>{latestValidationErrorText}</FieldDescription>
+              // Out of react-aria's description slot, which would set its own
+              // id – see `resultDescriptionId`.
+              <Aria.TextContext.Provider value={null}>
+                <FieldDescription
+                  id={resultDescriptionId}
+                  ref={resultDescriptionRef}
+                >
+                  {latestValidationErrorText}
+                </FieldDescription>
+              </Aria.TextContext.Provider>
             )}
           </PropsContextProvider>
         </FieldErrorCaptureContext>
