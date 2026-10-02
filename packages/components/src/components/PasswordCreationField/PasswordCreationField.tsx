@@ -292,7 +292,8 @@ export const PasswordCreationField = flowComponent(
         isRequired={isRequired}
       >
         <FieldErrorCaptureContext>
-          {latestValidationErrorText && (
+          {/* A FieldError with a message always shows – gate it on the field. */}
+          {isInvalid && latestValidationErrorText && (
             <FieldError>{latestValidationErrorText}</FieldError>
           )}
           <PropsContextProvider

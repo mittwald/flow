@@ -14,6 +14,7 @@ import Button from "@/components/Button";
 import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
+import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -61,6 +62,23 @@ const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
     />
   );
 };
+
+/*
+ * The policy hint is a rule to meet, not an error, until the password misses
+ * it. The policy resolves asynchronously, so this runs on real timers and gives
+ * it time to land.
+ */
+test("an empty field shows no error", async () => {
+  await render(
+    <PasswordCreationField>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+  await expect.element(page.getByRole("textbox")).toBeVisible();
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  expect(document.querySelector(`.${fieldErrorStyles.fieldError}`)).toBeNull();
+});
 
 describe("PasswordCreationField Tests", () => {
   beforeEach(() => {
