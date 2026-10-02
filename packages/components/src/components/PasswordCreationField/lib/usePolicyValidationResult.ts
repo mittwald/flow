@@ -53,4 +53,18 @@ export const usePolicyValidationResult = (
       validatePassword(password);
     }
   }, [password, validationPolicy]);
+
+  /**
+   * Stores a result the caller already has (a generated password), so the
+   * validation of that password answers from the cache instead of rating it
+   * again.
+   */
+  const rememberValidationResult = (
+    pwd: string,
+    results: ResolvedPolicyValidationResult,
+  ) => {
+    cache.current = { password: pwd, results };
+  };
+
+  return { rememberValidationResult } as const;
 };

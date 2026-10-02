@@ -5,6 +5,7 @@ import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
 import { SearchField } from "@/components/SearchField";
 import Option from "@/components/Option";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof Chat> = {
   title: "Form Controls/Autocomplete",
@@ -52,6 +53,19 @@ export const FixedOptions: Story = {
       </SearchField>
       <Option value="rebellion.org">rebellion.org</Option>
       <Option value="empire.gov">empire.gov</Option>
+      <Option value="jedi.org">jedi.org</Option>
+    </Autocomplete>
+  ),
+};
+
+export const WithFieldError: Story = {
+  render: () => (
+    <Autocomplete>
+      <SearchField isInvalid defaultValue="sith.org">
+        <Label>Comlink address</Label>
+        <FieldError>This domain is blocked by the Rebel Alliance</FieldError>
+      </SearchField>
+      <Option value="rebellion.org">rebellion.org</Option>
       <Option value="jedi.org">jedi.org</Option>
     </Autocomplete>
   ),
