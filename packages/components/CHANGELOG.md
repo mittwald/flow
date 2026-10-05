@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.16](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.5.0-next.16) (2026-10-05)
+
+### Documentation
+
+* route app builders to USAGE.md from every repo entry point ([#3382](https://github.com/mittwald/flow/issues/3382)) ([8fb4670](https://github.com/mittwald/flow/commit/8fb4670412d3ea8298bae7c41990f30e3910c4b2))
+
+## [1.4.12](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.4.12) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.12 ([73e26a9](https://github.com/mittwald/flow/commit/73e26a9ad5aeefd16053298d338bb7f2241f28d4))
+
 ## [1.5.0-next.15](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.5.0-next.15) (2026-10-05)
 
 ### Bug Fixes
