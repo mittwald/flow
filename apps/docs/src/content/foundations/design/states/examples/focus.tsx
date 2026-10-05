@@ -1,6 +1,7 @@
 import { Button } from "@mittwald/flow-react-components";
 
 <Button
+  isReadOnly
   style={{
     outline:
       "var(--focus--outline-width) solid var(--focus--outline-color)",

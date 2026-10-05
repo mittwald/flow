@@ -1,7 +1,13 @@
 import { Button } from "@mittwald/flow-react-components";
 
 <>
-  <Button isPending>Button</Button>
-  <Button isSucceeded>Button</Button>
-  <Button isFailed>Button</Button>
+  <Button isPending isReadOnly>
+    Button
+  </Button>
+  <Button isSucceeded isReadOnly>
+    Button
+  </Button>
+  <Button isFailed isReadOnly>
+    Button
+  </Button>
 </>;

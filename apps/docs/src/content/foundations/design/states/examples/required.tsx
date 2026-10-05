@@ -3,6 +3,6 @@ import {
   TextField,
 } from "@mittwald/flow-react-components";
 
-<TextField isRequired>
+<TextField isRequired isReadOnly>
   <Label>Projektname</Label>
 </TextField>;

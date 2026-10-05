@@ -1,5 +1,5 @@
 import { Checkbox } from "@mittwald/flow-react-components";
 
-<Checkbox isIndeterminate>
+<Checkbox isIndeterminate isReadOnly>
   Alle Projekte auswählen
 </Checkbox>;
