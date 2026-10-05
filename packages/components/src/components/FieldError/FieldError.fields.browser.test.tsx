@@ -7,6 +7,7 @@ import { Button } from "@/components/Button";
 import { Checkbox } from "@/components/Checkbox";
 import { CheckboxButton } from "@/components/CheckboxButton";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
+import { CodeEditor } from "@/components/CodeEditor";
 import { ComboBox } from "@/components/ComboBox";
 import { DatePicker } from "@/components/DatePicker";
 import { DateRangePicker } from "@/components/DateRangePicker";
@@ -132,6 +133,16 @@ const cases: Record<string, Case> = {
       </PasswordCreationField>
     ),
     target: byLabel,
+  },
+  CodeEditor: {
+    standalone: true,
+    render: (p) => (
+      <CodeEditor {...p}>
+        {label}
+        {error}
+      </CodeEditor>
+    ),
+    target: () => page.getByRole("textbox"),
   },
   MarkdownEditor: {
     render: (p) => (
