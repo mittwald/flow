@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.18](https://github.com/mittwald/flow/compare/1.5.0-next.17...1.5.0-next.18) (2026-10-05)
+
+### Bug Fixes
+
+* **ext-bridge:** allow minor updates of @mittwald/react-use-promise ([7247a48](https://github.com/mittwald/flow/commit/7247a484182a96f8794aac5051e382c21e3ee5ed))
+
+## [1.4.14](https://github.com/mittwald/flow/compare/1.5.0-next.16...1.4.14) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.14 ([a457ecd](https://github.com/mittwald/flow/commit/a457ecdab4bd4705cf4763d5191b65176ff99b25))
+
 ## [1.5.0-next.17](https://github.com/mittwald/flow/compare/1.5.0-next.16...1.5.0-next.17) (2026-10-05)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
