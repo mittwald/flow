@@ -1,5 +1,9 @@
 # mittwald Flow — Agent Guide
 
+**Building an app or mStudio extension in your own project?** Read
+[packages/components/USAGE.md](packages/components/USAGE.md) first. Everything
+below is for changing Flow.
+
 Canonical guidance for AI coding agents (and a good primer for humans) working
 in this repository. Package-specific deep dives live next to the code — see
 [Where to look next](#where-to-look-next).
