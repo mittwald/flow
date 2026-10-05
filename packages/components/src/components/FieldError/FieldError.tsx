@@ -1,4 +1,8 @@
-import React, { type PropsWithChildren, useContext } from "react";
+import React, {
+  type PropsWithChildren,
+  useContext,
+  useLayoutEffect,
+} from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
 import { FieldErrorContext, TextContext } from "react-aria-components";
@@ -8,6 +12,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertText } from "@/components/AlertText";
 import { Alert } from "@/components/Alert";
 import { Heading } from "@/components/Heading";
+import { FieldErrorRenderedContext } from "@/lib/hooks/fieldErrorRenderedContext";
+import { useObjectRef } from "react-aria";
 
 export interface FieldErrorProps
   extends
@@ -23,6 +29,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
 
   const rootClassName = clsx(styles.fieldError, className);
   const fieldValidation = useContext(FieldErrorContext);
+  const reportRendered = useContext(FieldErrorRenderedContext);
   const hasChildren = React.Children.count(children) >= 1;
 
   // Inside a field the field decides whether there is an error – children only
@@ -53,6 +60,19 @@ export const FieldError = flowComponent("FieldError", (props) => {
     validationErrors: message ? [message] : [],
   };
 
+  // Report what is actually in the document: inside a collection (`Select`,
+  // `ComboBox`) react-aria renders the children a second time into a hidden
+  // collection document, where no field context exists and no id resolves.
+  const localRef = useObjectRef(ref);
+  useLayoutEffect(() => {
+    const element = localRef.current;
+    if (!reportRendered || !isInvalid || !element?.isConnected || !element.id) {
+      return;
+    }
+    reportRendered(element.id);
+    return () => reportRendered(undefined);
+  }, [reportRendered, isInvalid, rest.id, localRef]);
+
   if (!isInvalid) {
     return undefined;
   }
@@ -60,7 +80,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
   return (
     <Aria.Provider values={[[TextContext, { slot: undefined }]]}>
       <FieldErrorContext value={errorState as never}>
-        <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
+        <Aria.FieldError ref={localRef} {...rest} className={rootClassName}>
           {({ validationErrors }) => {
             return renderAlert ? (
               <Alert status="danger">

@@ -1,10 +1,16 @@
-import React, { type FC, type PropsWithChildren, useMemo } from "react";
+import React, {
+  type FC,
+  type PropsWithChildren,
+  useMemo,
+  useState,
+} from "react";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 import { useProps } from "@/lib/hooks/useProps";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import type { FlowComponentName } from "@/components/propTypes";
+import { FieldErrorRenderedContext } from "@/lib/hooks/fieldErrorRenderedContext";
 
 export interface UseFieldErrorOptions {
   fieldErrorId: string;
@@ -25,6 +31,8 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
       className: formFieldStyles.fieldError,
     },
   };
+
+  const [renderedFieldErrorId, setRenderedFieldErrorId] = useState<string>();
 
   const FieldErrorCaptureContext: FC<PropsWithChildren> = useMemo(
     () => (props) => {
@@ -49,12 +57,14 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
       }
 
       return (
-        <UiComponentTunnelExit id={tunnelId} component={options.component}>
-          {(children) => {
-            const childrenArray = React.Children.toArray(children);
-            return <ClearPropsContext>{childrenArray[0]}</ClearPropsContext>;
-          }}
-        </UiComponentTunnelExit>
+        <FieldErrorRenderedContext value={setRenderedFieldErrorId}>
+          <UiComponentTunnelExit id={tunnelId} component={options.component}>
+            {(children) => {
+              const childrenArray = React.Children.toArray(children);
+              return <ClearPropsContext>{childrenArray[0]}</ClearPropsContext>;
+            }}
+          </UiComponentTunnelExit>
+        </FieldErrorRenderedContext>
       );
     },
     [currentTunnelId, tunnelId, options.component],
@@ -63,5 +73,11 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
   return {
     FieldErrorCaptureContext,
     FieldErrorView,
+    /**
+     * The id of the error while one is rendered for this field. A nested field
+     * (a `Checkbox` inside a `CheckboxButton`) renders its error at the outer
+     * one, so only the outer field ever gets an id here.
+     */
+    renderedFieldErrorId,
   } as const;
 };

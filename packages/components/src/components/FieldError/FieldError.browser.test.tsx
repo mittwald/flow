@@ -7,6 +7,10 @@ import { FieldError } from "@/components/FieldError";
 import styles from "@/components/FieldError/FieldError.module.scss";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
+import { Slider } from "@/components/Slider";
+import { Autocomplete } from "@/components/Autocomplete";
+import { SearchField } from "@/components/SearchField";
+import { Option } from "@/components/Option";
 
 const message = () => page.getByText("The name is already taken");
 
@@ -91,6 +95,42 @@ test("isInvalid of the field shows and hides a written-down message", async () =
     .not.toHaveAttribute("aria-describedby");
 });
 
+test("an error from validate describes the input", async () => {
+  await render(
+    <TextField
+      validate={() => "The name is too short"}
+      validationBehavior="aria"
+    >
+      <Label>Project name</Label>
+      <FieldError />
+    </TextField>,
+  );
+
+  await expect
+    .element(page.getByRole("textbox"))
+    .toHaveAccessibleDescription(/The name is too short/);
+});
+
+test("the error keeps a description passed by the consumer", async () => {
+  await render(
+    <>
+      <span id="hint">Visible to everyone</span>
+      <TextField isInvalid aria-describedby="hint">
+        <Label>Project name</Label>
+        <FieldError>The name is already taken</FieldError>
+      </TextField>
+    </>,
+  );
+
+  const input = page.getByRole("textbox");
+  await expect
+    .element(input)
+    .toHaveAccessibleDescription(/The name is already taken/);
+  await expect
+    .element(input)
+    .toHaveAccessibleDescription(/Visible to everyone/);
+});
+
 /*
  * For a valid field react-aria hands out one module-level `validationErrors`
  * array shared by every field. A message written into it would surface in
@@ -144,6 +184,51 @@ test("the error is not remounted when the field re-renders", async () => {
 
   await expect.element(page.getByRole("textbox")).toHaveValue("ab");
   expect(message().element()).toBe(before);
+});
+
+/*
+ * react-aria joins the slider's `aria-describedby` with the thumb's own, so a
+ * consumer id passed to both would be announced twice.
+ */
+test("a Slider describes its thumb with a consumer id only once", async () => {
+  await render(
+    <>
+      <span id="hint">Visible to everyone</span>
+      <Slider isInvalid aria-describedby="hint">
+        <Label>Volume</Label>
+        <FieldError>Too loud</FieldError>
+      </Slider>
+    </>,
+  );
+
+  const slider = page.getByRole("slider");
+  await expect.element(slider).toHaveAccessibleDescription(/Too loud/);
+  const ids = (slider.element().getAttribute("aria-describedby") ?? "").split(
+    " ",
+  );
+  expect(ids.filter((id) => id === "hint")).toHaveLength(1);
+});
+
+// The Autocomplete's error and the field's own description both stay linked.
+test("an Autocomplete error survives a SearchField's own description", async () => {
+  await render(
+    <>
+      <span id="hint">Visible to everyone</span>
+      <Autocomplete>
+        <SearchField aria-describedby="hint">
+          <Label>Address</Label>
+        </SearchField>
+        <Option value="a">A</Option>
+        <FieldError>Blocked domain</FieldError>
+      </Autocomplete>
+    </>,
+  );
+
+  const input = page.getByRole("searchbox");
+  await expect.element(input).toHaveAccessibleDescription(/Blocked domain/);
+  await expect
+    .element(input)
+    .toHaveAccessibleDescription(/Visible to everyone/);
 });
 
 // `renderAlert` swaps the inline text for a full alert with a heading.

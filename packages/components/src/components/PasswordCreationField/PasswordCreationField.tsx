@@ -179,15 +179,13 @@ export const PasswordCreationField = flowComponent(
       !isEmptyValue && stateFromValidationResult?.isValid === false;
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
-    // The field derives its invalid state from the policy validation, so the
-    // hook has to see that state — not just the `isInvalid` prop — to describe
-    // the input with the field error.
     const {
       FieldErrorView,
       FieldErrorCaptureContext,
-      fieldProps,
+      wrapperProps,
+      controlProps,
       fieldPropsContext,
-    } = useFieldComponent({ ...props, isInvalid }, "PasswordCreationField");
+    } = useFieldComponent(props, "PasswordCreationField");
 
     useAriaAnnounceValidationState(
       latestValidationErrorText,
@@ -281,12 +279,12 @@ export const PasswordCreationField = flowComponent(
     return (
       <Aria.TextField
         {...rest}
-        {...fieldProps}
+        {...controlProps}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}
         onChange={onChange}
         onPaste={onPasswordPasteHandler}
-        className={clsx(className, fieldProps.className)}
+        className={clsx(className, wrapperProps.className)}
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         isRequired={isRequired}

@@ -96,12 +96,13 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "CodeEditor");
 
   const rootClassName = clsx(
-    fieldProps.className,
+    wrapperProps.className,
     styles.codeEditor,
     className,
   );
@@ -148,8 +149,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
 
   const describedBy =
-    [descriptionId, fieldProps["aria-describedby"]].filter(Boolean).join(" ") ||
-    undefined;
+    [descriptionId, controlProps["aria-describedby"]]
+      .filter(Boolean)
+      .join(" ") || undefined;
 
   const contentAttributes = EditorView.contentAttributes.of({
     "aria-labelledby": labelledBy,
