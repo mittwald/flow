@@ -6,7 +6,6 @@ import clsx from "clsx";
 import { MenuItem } from "@/components/MenuItem";
 import { useCalendarDateRangePresets } from "@/components/Calendar/components/RangeCalendar/helpers/useCalendarDateRangePresets";
 import { Separator } from "@/components/Separator";
-import { useMediaQuery } from "usehooks-ts";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import {
   SkeletonModeReset,
@@ -23,7 +22,6 @@ export type RangeCalendarProps = Omit<
 const InnerRangeCalendar: FC<RangeCalendarProps> = ({
   withDatePickerPresets,
 }) => {
-  const isSmallViewport = useMediaQuery("(max-width: 530px)");
   const dateRangeHelper = useCalendarDateRangePresets(withDatePickerPresets);
 
   const predefinedDateHelperItems = dateRangeHelper.map((present) => {
@@ -47,7 +45,8 @@ const InnerRangeCalendar: FC<RangeCalendarProps> = ({
             {predefinedDateHelperItems}
           </Aria.Menu>
           <Separator
-            orientation={isSmallViewport ? "horizontal" : "vertical"}
+            orientation="vertical"
+            className={styles.presetSeparator}
           />
         </>
       )}

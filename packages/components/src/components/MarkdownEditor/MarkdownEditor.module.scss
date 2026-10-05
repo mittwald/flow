@@ -71,14 +71,17 @@
     }
   }
 
+  /* The hidden text area keeps its place in the grid cell, so the row keeps
+     its height – a resized one included. `contain: size` stops the preview from
+     growing the row, and stretching fills it exactly. */
   &.mode-preview {
     :global(.flow--text-area--input) {
-      position: absolute;
       opacity: 0;
       pointer-events: none;
-      width: 1px;
-      height: 1px;
-      inset-inline-start: 0;
+    }
+
+    .markdown {
+      contain: size;
     }
   }
 

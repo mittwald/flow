@@ -21,12 +21,15 @@
       "cache": false
     },
     "test:browser": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "test:browser:prepare"],
       "cache": true
     },
     "test:browser:dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "test:browser:prepare"],
       "cache": true
+    },
+    "test:browser:prepare": {
+      "cache": false
     },
     "test:compile": {
       "dependsOn": ["^build", "build:icons", "build:scss-types"],
@@ -53,11 +56,11 @@
       "cache": true
     },
     "test:e2e": {
-      "dependsOn": ["^build", "test:e2e:prepare"],
+      "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
       "cache": true
     },
     "test:e2e:dev": {
-      "dependsOn": ["^build", "test:e2e:prepare"],
+      "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
       "cache": true
     },
     "test:unit": {
@@ -65,11 +68,11 @@
       "cache": true
     },
     "test:visual:update": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "test:browser:prepare"],
       "cache": true
     },
     "test:visual": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "test:browser:prepare"],
       "cache": true
     }
   }

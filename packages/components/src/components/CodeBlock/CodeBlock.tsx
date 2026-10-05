@@ -83,12 +83,12 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     );
   }
 
-  const heightVariables = {
+  const heightVariables: React.CSSProperties = {
     ...(maxHeight ? { "--max-height": `${maxHeight}px` } : {}),
     ...(expandedHeight
       ? { "--expanded-max-height": `${expandedHeight}px` }
       : {}),
-  } as React.CSSProperties;
+  };
 
   /* A height transition needs a length on both ends – `none` does not
      interpolate. So the full height is measured for the transition and

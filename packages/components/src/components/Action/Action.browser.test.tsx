@@ -198,7 +198,9 @@ test("Button is enabled again when async action has completed", async () => {
   );
   const { rerender } = await render(ui());
   await clickTrigger();
-  await vitest.advanceTimersByTimeAsync(asyncActionDuration);
+  await vitest.advanceTimersByTimeAsync(
+    asyncActionDuration + duration.succeeded,
+  );
   await rerender(ui());
   expect(getButton()).not.toBeDisabled();
 });
@@ -570,5 +572,44 @@ describe("Pending state", () => {
     await vitest.advanceTimersByTimeAsync(3000);
     await rerender(ui());
     expectNoIconInDom();
+  });
+});
+
+describe("aria-disabled", () => {
+  test("is rendered while the action is executing", async () => {
+    await render(
+      <Action onAction={asyncAction1}>
+        <TestButton />
+      </Action>,
+    );
+    expect(getButton()).not.toHaveAttribute("aria-disabled");
+    await clickTrigger();
+    await expect.element(getButton()).toHaveAttribute("aria-disabled", "true");
+  });
+
+  test("is rendered while succeeded feedback is shown", async () => {
+    await render(
+      <Action onAction={syncAction1} showFeedback>
+        <TestButton />
+      </Action>,
+    );
+    await clickTrigger();
+    expectIconInDom("check");
+    expect(getButton()).toHaveAttribute("aria-disabled", "true");
+  });
+
+  test("is rendered while failed feedback is shown", async () => {
+    await render(
+      <Action
+        onAction={() => {
+          throw new Error("Whoops");
+        }}
+      >
+        <TestButton />
+      </Action>,
+    );
+    await clickTrigger();
+    expectIconInDom("x");
+    expect(getButton()).toHaveAttribute("aria-disabled", "true");
   });
 });

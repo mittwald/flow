@@ -50,7 +50,8 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     const {
       FieldErrorView,
       FieldErrorCaptureContext,
-      fieldProps,
+      wrapperProps,
+      controlProps,
       fieldPropsContext,
     } = useFieldComponent(props, "FileDropZone");
 
@@ -76,6 +77,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
           Button: { variant: "outline", color: "dark" },
           isDisabled,
           isReadOnly,
+          "aria-describedby": controlProps["aria-describedby"],
         },
         Heading: {
           className: styles.heading,
@@ -108,22 +110,29 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <div {...fieldProps} inert={isSkeleton || undefined}>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            <Aria.DropZone
-              className={rootClassName}
-              onDrop={onDropHandler}
-              isDisabled={isDisabled}
-              data-readonly={isReadOnly}
-            >
-              {/* The drop zone is one skeleton surface, its content draws none. */}
-              <SkeletonModeReset>
-                <IllustratedMessage color="dark">{children}</IllustratedMessage>
-              </SkeletonModeReset>
-            </Aria.DropZone>
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
+      <div
+        className={wrapperProps.className}
+        inert={isSkeleton || undefined}
+      >
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[controlProps["aria-describedby"]]}
+        >
+          <Aria.DropZone
+            className={rootClassName}
+            onDrop={onDropHandler}
+            isDisabled={isDisabled}
+            data-readonly={isReadOnly}
+          >
+            {/* The drop zone is one skeleton surface, its content draws none. */}
+            <SkeletonModeReset>
+              <IllustratedMessage color="dark">
+                {/* Inside: IllustratedMessage clears the props context it gets. */}
+                <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+              </IllustratedMessage>
+            </SkeletonModeReset>
+          </Aria.DropZone>
+        </PropsContextProvider>
         <FieldErrorView />
       </div>
     );

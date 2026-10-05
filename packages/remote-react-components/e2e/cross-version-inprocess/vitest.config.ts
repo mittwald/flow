@@ -1,11 +1,13 @@
 import { mergeConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../../../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../../../core/src/index.ts";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
 import { serveFontsLocally } from "../../dev/vitest/serveFontsLocally.ts";
 import viteConfig from "./vite.config.ts";
 
+const sharedBrowserTestConfig = createVitestBrowserTestConfig();
+
 // Reuses unmodified visual tests by replacing their environments import. The
-// browser config is INHERITED from the shared vitestBrowserTestConfig so this
+// browser config is INHERITED from the shared browser test config so this
 // harness runs exactly like the screenshot tests — same 1280x720 viewport (the
 // visual tests render responsively and expect desktop width; a narrow viewport
 // hides buttons the tests click), en-US locale (they assert English labels), and
@@ -47,15 +49,15 @@ export default mergeConfig(viteConfig, {
      */
     fileParallelism: false,
     browser: {
-      ...vitestBrowserTestConfig.browser,
+      ...sharedBrowserTestConfig.browser,
       // dev/vitest/setupBrowser.ts calls it, so it has to be registered here
       // too — this config inherits the shared browser config, not the package's.
       commands: {
-        ...vitestBrowserTestConfig.browser?.commands,
+        ...sharedBrowserTestConfig.browser?.commands,
         serveFontsLocally,
       },
       headless: true,
-      instances: vitestBrowserTestConfig.browser?.instances?.filter(
+      instances: sharedBrowserTestConfig.browser?.instances?.filter(
         (instance) => instance.browser === "webkit",
       ),
     },
