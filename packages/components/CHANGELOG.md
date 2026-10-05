@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.17](https://github.com/mittwald/flow/compare/1.5.0-next.16...1.5.0-next.17) (2026-10-05)
+
+### Bug Fixes
+
+* **DatePicker:** keep the calendar closed inside a popover ([#3386](https://github.com/mittwald/flow/issues/3386)) ([a702b4f](https://github.com/mittwald/flow/commit/a702b4f22939fbee91698eb9d5da6dc81560d33e))
+
+## [1.4.13](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.4.13) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.13 ([b549754](https://github.com/mittwald/flow/commit/b54975477e250fc893e9feffe86a3be3afc9ad3c))
+
 ## [1.5.0-next.16](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.5.0-next.16) (2026-10-05)
 
 ### Documentation
