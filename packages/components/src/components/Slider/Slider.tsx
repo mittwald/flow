@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
@@ -43,6 +43,9 @@ export const Slider = flowComponent("Slider", (props) => {
     ref,
     step,
     sliderOnly,
+    // Reaches the thumb through `controlProps` – react-aria would add it a
+    // second time from the slider.
+    "aria-describedby": ignoredAriaDescribedBy,
     ...rest
   } = props;
 
@@ -56,7 +59,8 @@ export const Slider = flowComponent("Slider", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     skeletonProps,
   } = useFieldComponent(props, "Slider");
 
@@ -77,7 +81,7 @@ export const Slider = flowComponent("Slider", (props) => {
   };
 
   return (
-    <div {...fieldProps} {...skeletonProps}>
+    <div {...skeletonProps} className={wrapperProps.className}>
       <Aria.Slider
         {...rest}
         className={rootClassName}
@@ -139,7 +143,9 @@ export const Slider = flowComponent("Slider", (props) => {
 
                 <div
                   className={styles.fill}
-                  style={{ width: state.getThumbPercent(0) * 100 + "%" }}
+                  style={{
+                    "--slider--value": state.getThumbPercent(0),
+                  }}
                 />
 
                 {showInitialMarker &&
@@ -148,12 +154,14 @@ export const Slider = flowComponent("Slider", (props) => {
                     <div
                       className={styles.initialMarker}
                       style={{
-                        left: `calc(${state.getValuePercent(defaultValue) * 100}% - 2px)`,
+                        "--slider--initial-value":
+                          state.getValuePercent(defaultValue),
                       }}
                     />
                   )}
                 <Aria.SliderThumb
                   inputRef={objectRef}
+                  aria-describedby={controlProps["aria-describedby"]}
                   name={name}
                   className={styles.handle}
                   isDisabled={isReadOnly}

@@ -365,6 +365,10 @@ test("a field error is not rendered", async () => {
   await expect.element(status()).toBeInTheDocument();
 
   expect(document.body.textContent).not.toContain("bereits vergeben");
+  // The skipped error reports no id, so the input references nothing.
+  expect(document.querySelector("input")).not.toHaveAttribute(
+    "aria-describedby",
+  );
 });
 
 test("a nested isEnabled={false} field stays operable", async () => {

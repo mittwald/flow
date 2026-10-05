@@ -1,7 +1,11 @@
 import { getOptionsTunnelProps } from "@/components/Option/optionsTunnel";
 import { useRef, type PropsWithChildren } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { useOverlayController } from "@/lib/controller";
 import {
@@ -20,7 +24,7 @@ import {
   useLocalizedStringFormatter,
   useObjectRef,
 } from "react-aria";
-import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { joinIds, useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
@@ -76,6 +80,15 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     optionsOverlayController.close();
   };
 
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    wrapperProps,
+    controlProps,
+    skeletonProps,
+  } = useFieldComponent(props, "Autocomplete");
+
   const inputProps: SearchFieldProps & TextFieldProps = {
     onKeyDown: (e) => {
       if (e.key === "Enter" && optionsOverlayController.isOpen) {
@@ -86,23 +99,29 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     onChange: handleInputChange,
   };
 
-  const {
-    FieldErrorView,
-    FieldErrorCaptureContext,
-    fieldPropsContext,
-    fieldProps,
-    skeletonProps,
-  } = useFieldComponent(props, "Autocomplete");
+  const errorDescribedBy = controlProps["aria-describedby"];
 
   const rootClassName = clsx(
     styles.autocomplete,
-    fieldProps.className,
+    wrapperProps.className,
     className,
   );
 
   const propsContext: PropsContext = {
-    SearchField: inputProps,
-    TextField: inputProps,
+    // Merged, not replaced: a field's own `aria-describedby` must not unlink
+    // the Autocomplete's error.
+    SearchField: {
+      ...inputProps,
+      "aria-describedby": dynamic((p) =>
+        joinIds(errorDescribedBy, p["aria-describedby"]),
+      ),
+    },
+    TextField: {
+      ...inputProps,
+      "aria-describedby": dynamic((p) =>
+        joinIds(errorDescribedBy, p["aria-describedby"]),
+      ),
+    },
     Option: {
       tunnel: getOptionsTunnelProps("Autocomplete"),
     },
@@ -113,11 +132,11 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <div {...fieldProps} {...skeletonProps} className={rootClassName}>
+    <div {...skeletonProps} className={rootClassName}>
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}
-          dependencies={[optionsOverlayController]}
+          dependencies={[optionsOverlayController, errorDescribedBy]}
         >
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>

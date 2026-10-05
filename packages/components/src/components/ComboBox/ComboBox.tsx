@@ -46,14 +46,19 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
     skeletonProps,
   } = useFieldComponent(props, "ComboBox");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
 
-  const rootClassName = clsx(fieldProps.className, styles.comboBox, className);
+  const rootClassName = clsx(
+    wrapperProps.className,
+    styles.comboBox,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Option: {
@@ -76,10 +81,10 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   return (
     <Aria.ComboBox
-      {...fieldProps}
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
+      {...controlProps}
       {...skeletonProps}
       onSelectionChange={handleSelectionChange}
       onOpenChange={(isOpen) => {

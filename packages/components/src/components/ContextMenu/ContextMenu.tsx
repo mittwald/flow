@@ -57,6 +57,10 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     showSelectAll,
     ref,
     controller: overlayControllerFromProps,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    "aria-describedby": ariaDescribedBy,
+    "aria-details": ariaDetails,
     ...rest
   } = props;
 
@@ -120,6 +124,10 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             disabledKeys={disabledKeys}
             onSelectionChange={onSelectionChange}
             renderEmptyState={renderEmptyState}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            aria-describedby={ariaDescribedBy}
+            aria-details={ariaDetails}
             ref={ref}
           >
             {selectAll}

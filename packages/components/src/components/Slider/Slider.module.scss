@@ -42,6 +42,7 @@
 
   .fill {
     position: absolute;
+    width: calc(var(--slider--value) * 100%);
     height: var(--slider--track-height);
     background-color: var(--slider--color--default);
     top: calc(50% - var(--slider--track-height) / 2);
@@ -50,6 +51,7 @@
 
   .initialMarker {
     position: absolute;
+    inset-inline-start: calc(var(--slider--initial-value) * 100% - 2px);
     height: var(--slider--initial-marker-height);
     width: var(--slider--initial-marker-border-width);
     background-color: var(--slider--color--default);

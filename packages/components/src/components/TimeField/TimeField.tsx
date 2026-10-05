@@ -22,12 +22,19 @@ export const TimeField = flowComponent("TimeField", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     skeletonProps,
   } = useFieldComponent(props, "TimeField");
 
   return (
-    <Aria.TimeField hourCycle={24} {...rest} {...fieldProps} {...skeletonProps}>
+    <Aria.TimeField
+      hourCycle={24}
+      {...rest}
+      {...wrapperProps}
+      {...controlProps}
+      {...skeletonProps}
+    >
       <FieldErrorCaptureContext>
         <DateInput className={styles.dateInput} ref={ref} />
         <PropsContextProvider props={fieldPropsContext}>

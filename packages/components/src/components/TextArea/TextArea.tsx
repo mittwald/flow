@@ -72,7 +72,8 @@ export const TextArea = flowComponent("TextArea", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     skeletonProps,
   } = useFieldComponent(props, "TextArea");
 
@@ -83,7 +84,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     allowResize = "horizontal";
   }
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   const inputClassName = clsx(
     styles.input,
@@ -114,10 +115,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
   });
 
   const localRef = useObjectRef(ref);
-
-  const getHeight = (rows: number) => {
-    return `calc(var(--line-height-m) * ${rows} + (var(--form-control--padding-y) * 2))`;
-  };
 
   const [resized, setResized] = useState(false);
 
@@ -183,7 +180,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
   return (
     <Aria.TextField
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       {...skeletonProps}
       value={value}
       className={rootClassName}
@@ -200,11 +197,10 @@ export const TextArea = flowComponent("TextArea", (props) => {
           className={inputClassName}
           ref={localRef}
           style={{
-            caretColor: isReadOnly ? "transparent" : undefined,
-            minHeight: getHeight(rows),
-            maxHeight: verticallyResizable
+            "--text-area--rows": rows,
+            "--text-area--max-rows": verticallyResizable
               ? undefined
-              : getHeight(autoResizeMaxRows),
+              : autoResizeMaxRows,
           }}
         />
         {showCharacterCount && (

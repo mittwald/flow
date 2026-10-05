@@ -4,6 +4,8 @@ import { expect, test, vi } from "vitest";
 import { CalendarDate, today, getLocalTimeZone } from "@internationalized/date";
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { Label } from "@/components/Label";
+import { Popover, PopoverTrigger } from "@/components/Popover";
+import { Button } from "@/components/Button";
 import type { DateRangePresets } from "@/components/Calendar";
 
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -79,6 +81,38 @@ test("a preset sets the whole range in one click and closes the calendar", async
   await expect.element(calendar()).not.toBeInTheDocument();
 });
 
+/*
+ * A preset menu that grew on every layout resized the popover inside
+ * react-aria's resize observer on it, which the browser reports as an error –
+ * in production too, where error trackers pick it up.
+ */
+test("opening the calendar with presets causes no ResizeObserver loop", async () => {
+  const errors: string[] = [];
+  const onError = (event: ErrorEvent) => errors.push(event.message);
+  window.addEventListener("error", onError);
+
+  try {
+    renderPicker({
+      withDatePickerPresets: [
+        { label: "First week of March", start: march(1), end: march(7) },
+      ],
+    });
+
+    await calendarButton().click();
+    await expect.element(preset("First week of March")).toBeVisible();
+
+    for (let frame = 0; frame < 10; frame++) {
+      await new Promise(requestAnimationFrame);
+    }
+  } finally {
+    window.removeEventListener("error", onError);
+  }
+
+  expect(
+    errors.filter((message) => message.includes("ResizeObserver")),
+  ).toEqual([]);
+});
+
 test("custom presets replace the built-in ones", async () => {
   const onChange = vi.fn();
   renderPicker({
@@ -127,4 +161,28 @@ test("a disabled range picker does not open its calendar", async () => {
   await calendarButton().click({ force: true });
 
   await expect.element(calendar()).not.toBeInTheDocument();
+});
+
+test("inside a popover, it keeps its own calendar state", async () => {
+  render(
+    <PopoverTrigger>
+      <Button>Open</Button>
+      <Popover>
+        <DateRangePicker defaultValue={{ start: march(10), end: march(11) }}>
+          <Label>Booking</Label>
+        </DateRangePicker>
+      </Popover>
+    </PopoverTrigger>,
+  );
+
+  await page.getByRole("button", { name: "Open" }).click();
+  await expect.element(calendarButton()).toBeVisible();
+  await expect.element(calendar()).not.toBeInTheDocument();
+
+  await calendarButton().click();
+  await day(/March 12, 2025/).click();
+  await day(/March 14, 2025/).click();
+
+  await expect.element(calendar()).not.toBeInTheDocument();
+  await expect.element(calendarButton()).toBeVisible();
 });

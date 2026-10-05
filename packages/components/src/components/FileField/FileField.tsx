@@ -17,7 +17,7 @@ export interface FileFieldProps
   extends
     PropsWithChildren,
     FlowComponentProps<HTMLInputElement>,
-    Pick<Aria.InputProps, "accept" | "multiple" | "name">,
+    Pick<Aria.InputProps, "accept" | "multiple" | "name" | "aria-describedby">,
     Pick<
       Aria.TextFieldProps,
       "isRequired" | "isInvalid" | "validationBehavior" | "isDisabled"
@@ -45,7 +45,8 @@ export const FileField = flowComponent("FileField", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
     skeletonProps,
   } = useFieldComponent(props, "FileField");
@@ -62,6 +63,7 @@ export const FileField = flowComponent("FileField", (props) => {
 
   const inputProps = {
     ...restInputProps,
+    "aria-describedby": controlProps["aria-describedby"],
     "aria-invalid": formValidationState.displayValidation.isInvalid,
     value: undefined,
   };
@@ -74,9 +76,8 @@ export const FileField = flowComponent("FileField", (props) => {
 
   return (
     <div
-      {...fieldProps}
       {...skeletonProps}
-      className={clsx(fieldProps.className, styles.fileField)}
+      className={clsx(wrapperProps.className, styles.fileField)}
     >
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <FieldErrorCaptureContext>

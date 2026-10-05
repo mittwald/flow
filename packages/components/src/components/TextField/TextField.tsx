@@ -49,11 +49,12 @@ export const TextField = flowComponent("TextField", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     skeletonProps,
   } = useFieldComponent(props, "TextField");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   const propsContext: PropsContext = {
     Button: {
@@ -94,7 +95,7 @@ export const TextField = flowComponent("TextField", (props) => {
   return (
     <Aria.TextField
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       {...skeletonProps}
       className={rootClassName}
       onChange={handleChange}

@@ -12,21 +12,17 @@ interface Props extends Pick<DonutChartProps, "segments"> {
 }
 
 /**
- * The rotation is a custom property instead of a `transform` attribute so that
- * the load-in keyframes can animate it – growing every segment out of 12
- * o'clock instead of leaving gaps between them. They need the circumference,
- * too, to animate out of an empty circle.
+ * `pathLength="100"` measures the stroke in percent, so the stylesheet draws
+ * and rotates each circle from its share and its offset alone – and the load-in
+ * keyframes can grow every segment out of 12 o'clock.
  */
-const fillStyle = (rotation: number, circumference: number) =>
-  ({
-    "--donut-chart--fill-rotation": `${rotation}deg`,
-    "--donut-chart--circumference": circumference,
-  }) as CSSProperties;
+const fillStyle = (percent: number, offsetPercent: number): CSSProperties => ({
+  "--donut-chart--percent": percent,
+  "--donut-chart--offset": offsetPercent,
+});
 
 export const DonutChartFill: FC<Props> = (props) => {
   const { center, value = 0, radius, segments, maxValue } = props;
-
-  const circumference = 2 * radius * Math.PI;
 
   const percent = (100 / maxValue) * value;
 
@@ -37,21 +33,20 @@ export const DonutChartFill: FC<Props> = (props) => {
         cx={center}
         cy={center}
         r={radius}
-        strokeDasharray={`${circumference} ${circumference}`}
-        strokeDashoffset={circumference - (percent / 100) * circumference}
-        style={fillStyle(-90, circumference)}
+        pathLength={100}
+        style={fillStyle(percent, 0)}
       />
     );
   }
 
-  let rotationOffset = 0;
+  let offsetPercent = 0;
 
   return segments.map((s, i) => {
     const segmentPercent = (100 / maxValue) * s.value;
 
-    const currentRotationOffset = rotationOffset;
+    const currentOffsetPercent = offsetPercent;
 
-    rotationOffset = rotationOffset + (360 / 100) * segmentPercent;
+    offsetPercent = offsetPercent + segmentPercent;
 
     const color =
       !s.color || isCategoricalColor(s.color)
@@ -67,12 +62,9 @@ export const DonutChartFill: FC<Props> = (props) => {
         cx={center}
         cy={center}
         r={radius}
-        strokeDasharray={`${circumference} ${circumference}`}
-        strokeDashoffset={
-          circumference - (segmentPercent / 100) * circumference
-        }
+        pathLength={100}
         stroke={color}
-        style={fillStyle(-90 + currentRotationOffset, circumference)}
+        style={fillStyle(segmentPercent, currentOffsetPercent)}
       />
     );
   });

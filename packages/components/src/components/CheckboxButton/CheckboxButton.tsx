@@ -21,7 +21,8 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
 
   const {
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     FieldErrorView,
     FieldErrorCaptureContext,
     skeletonProps,
@@ -42,6 +43,7 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   const checkbox = (
     <Checkbox
       {...rest}
+      aria-describedby={controlProps["aria-describedby"]}
       className={styles.checkbox}
       inputClassName={clsx(inputClassName, styles.input)}
     >
@@ -53,9 +55,8 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
 
   return (
     <div
-      {...fieldProps}
       {...skeletonProps}
-      className={clsx(fieldProps.className, styles.checkboxButton, className)}
+      className={clsx(wrapperProps.className, styles.checkboxButton, className)}
     >
       <FieldErrorCaptureContext>
         {/* The whole button is the surface, its content draws no bars. */}

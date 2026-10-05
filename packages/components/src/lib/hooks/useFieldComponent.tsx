@@ -2,7 +2,7 @@ import { type FC, type PropsWithChildren, useId } from "react";
 import { type PropsContext } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
-import clsx, { type ClassValue } from "clsx";
+import { type ClassValue } from "clsx";
 import type { FlowComponentName } from "@/components/propTypes";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
@@ -10,7 +10,6 @@ interface FieldComponentProps {
   className?: ClassValue;
   isRequired?: boolean;
   isDisabled?: boolean;
-  isInvalid?: boolean;
   "aria-describedby"?: string;
 }
 
@@ -18,10 +17,22 @@ export interface UseFieldComponent {
   FieldErrorCaptureContext: FC<PropsWithChildren>;
   FieldErrorView: FC;
   fieldPropsContext: PropsContext;
-  fieldProps: {
-    "aria-describedby"?: string;
-    className?: ReturnType<typeof clsx>;
+  /** For the field's outer element. */
+  wrapperProps: {
+    className: string;
   };
+  /**
+   * For what assistive technology lands on — the input, or the group of a
+   * grouped control. Where the react-aria root forwards `aria-describedby` to
+   * its input itself, spread it on the root together with `wrapperProps`.
+   * Spread it after `rest`: it already contains the consumer's
+   * `aria-describedby`, which `rest` would otherwise put back alone.
+   */
+  controlProps: {
+    "aria-describedby"?: string;
+  };
+  /** The id of the error while one is rendered, without the consumer's ids. */
+  renderedFieldErrorId?: string;
   /**
    * Belongs on the field's root element. In an enabled `SkeletonMode` it makes
    * the field `inert`, and `data-skeleton` turns its control into a surface
@@ -33,15 +44,20 @@ export interface UseFieldComponent {
   };
 }
 
+/** Joins id references, dropping empty ones. @internal */
+export const joinIds = (...ids: (string | false | null | undefined)[]) =>
+  ids.filter(Boolean).join(" ") || undefined;
+
 export const useFieldComponent = (
   props: FieldComponentProps,
   component: FlowComponentName,
 ): UseFieldComponent => {
   const fieldErrorId = useId();
-  const { FieldErrorView, FieldErrorCaptureContext } = useFieldError({
-    fieldErrorId,
-    component,
-  });
+  const { FieldErrorView, FieldErrorCaptureContext, renderedFieldErrorId } =
+    useFieldError({
+      fieldErrorId,
+      component,
+    });
   const isSkeleton = useSkeletonMode();
 
   // setting up the props context for all components that
@@ -61,12 +77,18 @@ export const useFieldComponent = (
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps: {
-      "aria-describedby": props.isInvalid
-        ? fieldErrorId
-        : props["aria-describedby"],
-      className: clsx(formFieldStyles.formField),
+    wrapperProps: {
+      className: formFieldStyles.formField,
     },
+    controlProps: {
+      // Reference the error only while it is rendered – an id that points to
+      // nothing fails HTML validators and a11y checks.
+      "aria-describedby": joinIds(
+        renderedFieldErrorId,
+        props["aria-describedby"],
+      ),
+    },
+    renderedFieldErrorId,
     skeletonProps: isSkeleton ? { inert: true, "data-skeleton": true } : {},
   } as const;
 };
