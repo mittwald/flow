@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.15](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.5.0-next.15) (2026-10-05)
+
+### Bug Fixes
+
+* **CodeEditor:** reference label and description only while rendered ([bf96178](https://github.com/mittwald/flow/commit/bf9617811991b39030810953657cd4e082731a08))
+* **FieldError:** link field errors to their control while shown ([3abb135](https://github.com/mittwald/flow/commit/3abb135f7f4cd744c5d57a0a181bd8b05aeef00e))
+* **FieldError:** stop leaking messages into other fields ([031dd4a](https://github.com/mittwald/flow/commit/031dd4a38d9bee75b4341f2369ed30f2790d3423))
+* **FieldError:** stop remounting the error on every field render ([7b51522](https://github.com/mittwald/flow/commit/7b515223646688ef3d4bd34f9a741fe9c4384a36))
+* **PasswordCreationField:** link a valid password&#x27;s result to the input ([9280413](https://github.com/mittwald/flow/commit/9280413df9f0d301bcd97ddb2fad9771e47685a5))
+* **PasswordCreationField:** show a generated password&#x27;s rating at once ([f7c203e](https://github.com/mittwald/flow/commit/f7c203ea4b7c102a713b25524fcfd5e2fd7b4e35))
+* **PasswordCreationField:** show danger on the bar while the field is invalid ([42627ef](https://github.com/mittwald/flow/commit/42627ef3c41ade3cfc9eb06e6197b18a25686668))
+
+## [1.4.11](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.4.11) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.11 ([65691c4](https://github.com/mittwald/flow/commit/65691c43528e2a132cd512016c89c209aa01d11f))
+
 ## [1.5.0-next.14](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.5.0-next.14) (2026-10-02)
 
 ### Miscellaneous Chores
