@@ -98,11 +98,7 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
             valueLabel={valueLabel}
           />
 
-          <ProgressBarBar
-            percentage={percentage}
-            segmentsTotalValue={segmentsTotalValue}
-            segments={segments}
-          />
+          <ProgressBarBar percentage={percentage} segments={segments} />
 
           <ProgressBarLegend
             showLegend={showLegend}

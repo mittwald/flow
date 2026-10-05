@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "../index";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof Switch> = {
   title: "Form Controls/Switch",
@@ -33,3 +34,13 @@ export default meta;
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {};
+
+// Switch has no invalid state – a FieldError with a message shows the error.
+export const WithFieldError: Story = {
+  render: (props) => (
+    <Switch {...props}>
+      <Label>Hyperdrive</Label>
+      <FieldError>Engage the hyperdrive to continue</FieldError>
+    </Switch>
+  ),
+};

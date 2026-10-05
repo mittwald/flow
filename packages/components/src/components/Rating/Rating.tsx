@@ -23,9 +23,15 @@ export interface RatingProps
     FlowComponentProps,
     PropsWithChildren,
     Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
-  /** The value sets the amount of filled stars. @default: 0 */
+  /**
+   * The value sets the amount of filled stars. Decimals are rounded to the
+   * nearest whole star. @default: 0
+   */
   value?: number;
-  /** The defaultValue sets the amount of default filled stars. @default: 0 */
+  /**
+   * The defaultValue sets the amount of default filled stars. Decimals are
+   * rounded to the nearest whole star. @default: 0
+   */
   defaultValue?: number;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
@@ -51,6 +57,10 @@ export interface RatingProps
 
 const segmentsTunnelId = "segments";
 
+// Segment values are whole numbers, so a decimal would match no segment.
+const toSegmentValue = (value?: number) =>
+  value === undefined ? undefined : Math.round(value).toString();
+
 /**
  * @flr-generate all
  * @flr-slot-props iconEmpty, iconFilled
@@ -73,7 +83,8 @@ export const Rating = flowComponent("Rating", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "Rating");
 
@@ -84,7 +95,7 @@ export const Rating = flowComponent("Rating", (props) => {
     styles[`size-${size}`],
     styles[`fill-${fill}`],
     isSkeleton && styles.skeleton,
-    fieldProps.className,
+    wrapperProps.className,
     className,
   );
 
@@ -109,9 +120,10 @@ export const Rating = flowComponent("Rating", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      aria-describedby={controlProps["aria-describedby"]}
       className={rootClassName}
-      value={value?.toString()}
-      defaultValue={defaultValue?.toString()}
+      value={toSegmentValue(value)}
+      defaultValue={toSegmentValue(defaultValue)}
       ref={localRef}
       inert={isSkeleton || undefined}
     >

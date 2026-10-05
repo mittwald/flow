@@ -24,7 +24,11 @@ import {
 import styles from "./focus-task-bestellung.module.css";
 
 export default () => (
-  <Flex justify="center" className={styles.page}>
+  <Flex
+    justify="center"
+    padding="xl"
+    className={styles.page}
+  >
     <Flex
       elementType="main"
       direction="column"

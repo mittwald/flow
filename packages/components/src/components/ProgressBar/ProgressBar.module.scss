@@ -43,8 +43,14 @@
 
   .fill {
     height: 100%;
+    width: calc(var(--progress-bar--percentage) * 1%);
     display: flex;
     animation: progress-bar-fill var(--progress-bar--transition-duration) ease;
+  }
+
+  /* Segments share the fill in proportion to their values. */
+  .segment {
+    flex: var(--progress-bar--segment-value) 1 0;
   }
 
   .legend {

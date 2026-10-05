@@ -7,21 +7,35 @@ import { extractHostConfig } from "./config/extractHostConfig";
 const timeoutMs = 7500;
 
 const [readiness, resolveReadiness] = controllablePromise();
-const [timoutPromise, , rejectOnTimeout] = controllablePromise();
-
-const startTimeout = () => {
-  setTimeout(() => {
-    rejectOnTimeout(
-      new ExtBridgeError(`Ext Bridge not ready after ${timeoutMs}ms`),
-    );
-  }, timeoutMs);
-  return timoutPromise;
-};
 
 export const readinessApi = {
   isReady: async () => {
     assertBrowserEnv();
-    await Promise.race([readiness, startTimeout()]);
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await Promise.race([
+        readiness,
+        new Promise((_, reject) => {
+          timeoutId = setTimeout(() => {
+            reject(
+              new ExtBridgeError(`Ext Bridge not ready after ${timeoutMs}ms`),
+            );
+          }, timeoutMs);
+        }),
+      ]);
+    } catch (error) {
+      if (mwExtBridge.connection === undefined) {
+        throw new ExtBridgeError(
+          `Ext Bridge not ready after ${timeoutMs}ms: the host never connected. ` +
+            "Make sure the extension renders <RemoteRoot> and runs inside mStudio.",
+        );
+      }
+      throw error;
+    } finally {
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
+    }
   },
   setIsReady: async () => {
     const config = await mwExtBridge.connection.getConfig();
