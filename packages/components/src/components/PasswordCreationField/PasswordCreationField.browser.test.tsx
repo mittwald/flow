@@ -166,6 +166,49 @@ test("the bar of an invalid field shows danger for a strong password", async () 
   await expect.poll(complexityStatus).toBe("success");
 });
 
+/*
+ * The generator only returns passwords its policy accepts, so the field shows
+ * the policy's rating together with the password – not a guess that the real
+ * rating overturns once the typing debounce has passed. With a short policy a
+ * generated password lands at the minimum complexity, which the guess (full
+ * strength) used to contradict.
+ */
+test("a generated password shows its final rating at once", async () => {
+  const shortPolicy = Policy.fromDeclaration({
+    minComplexity: 1,
+    rules: [{ ruleType: RuleType.length, min: 2, max: 5 }],
+  });
+  await render(
+    <PasswordCreationField validationPolicy={shortPolicy}>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+
+  const shownStatuses: string[] = [];
+  const recordStatus = () => {
+    const indicator = complexityIndicator();
+    const status = indicator?.getAttribute("data-complexity-status");
+    const isVisible =
+      indicator?.getAttribute("data-complexity-visible") === "true";
+    if (isVisible && status && shownStatuses.at(-1) !== status) {
+      shownStatuses.push(status);
+    }
+  };
+  const observer = new MutationObserver(recordStatus);
+  observer.observe(document.body, { subtree: true, attributes: true });
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expect
+    .poll(() => shownStatuses.length, { timeout: 10_000 })
+    .toBeGreaterThan(0);
+  // Past the typing debounce (350 ms), when the debounced validation runs: it
+  // must leave the rating alone.
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  observer.disconnect();
+
+  expect(shownStatuses).toEqual(["warning"]);
+});
+
 describe("PasswordCreationField Tests", () => {
   beforeEach(() => {
     vitest.resetAllMocks();
