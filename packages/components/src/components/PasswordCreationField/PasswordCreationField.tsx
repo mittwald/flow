@@ -351,6 +351,7 @@ export const PasswordCreationField = flowComponent(
                 isLoading={policyValidationResult.isValid === "indeterminate"}
                 policyValidationResult={policyValidationResult}
                 validationResultState={stateFromValidationResult}
+                isInvalid={invalidFromProps}
               />
             </Aria.Group>
             {isValidFromValidationResult && !renderedFieldErrorId && (

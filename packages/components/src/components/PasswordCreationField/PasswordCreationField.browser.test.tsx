@@ -84,6 +84,9 @@ test("an empty field shows no error", async () => {
 const complexityIndicator = () =>
   document.querySelector("[data-complexity-status]");
 
+const complexityStatus = () =>
+  complexityIndicator()?.getAttribute("data-complexity-status");
+
 /** Waits until the generated password is rated at full strength. */
 const expectFullStrength = () =>
   expect
@@ -138,6 +141,29 @@ test("an error replaces a valid password's result", async () => {
 
   await expect.element(input).toHaveAccessibleDescription(/Already used/);
   await expect.element(input).not.toHaveAccessibleDescription(/secure/);
+});
+
+/*
+ * An error from outside the policy (a server error) makes the bar danger like
+ * the field – a green bar next to an error reads as a contradiction.
+ */
+test("the bar of an invalid field shows danger for a strong password", async () => {
+  const Field = ({ isInvalid }: { isInvalid: boolean }) => (
+    <PasswordCreationField isInvalid={isInvalid}>
+      <Label>Password</Label>
+      <FieldError>Already used</FieldError>
+    </PasswordCreationField>
+  );
+  const screen = await render(<Field isInvalid />);
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expectFullStrength();
+
+  expect(complexityStatus()).toBe("danger");
+
+  await screen.rerender(<Field isInvalid={false} />);
+
+  await expect.poll(complexityStatus).toBe("success");
 });
 
 describe("PasswordCreationField Tests", () => {
