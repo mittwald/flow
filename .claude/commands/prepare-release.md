@@ -363,9 +363,9 @@ requires `--from`/`--to` overrides before doing anything else.
       > **How the PR may be merged.** Two mechanisms decide this, and neither is
       > the merge's shape as such: `publish.yml` resolves the graduation from
       > the merged PR's **head ref** (`commits/{sha}/pulls` → `release/x.y.0` →
-      > `1.1.0`), and its skip-guard tests the **subject line of `<to>`'s new
-      > tip** against `chore(release):` — which the graduation commit on the
-      > branch _is_.
+      > `1.1.0`) — a branch of this repository only, never a fork's — and its
+      > skip-guard tests the **subject line of `<to>`'s new tip** against
+      > `chore(release):` — which the graduation commit on the branch _is_.
       >
       > 1. **Merge commit — do this.** `<to>`'s tip becomes the merge commit, so
       >    the guard passes and the history stays intact in one step.

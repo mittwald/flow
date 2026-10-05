@@ -9,10 +9,12 @@
 
 ## Base branch & title
 
-This repo **squash-merges**, so your **PR title becomes the release commit** —
-it must be a valid [Conventional Commit](https://www.conventionalcommits.org/)
-(e.g. `fix(Button): correct focus ring`). A CI guard lints the title _and_ that
-it matches the base branch. Pick the base by change type
+Your **PR title** must be a valid
+[Conventional Commit](https://www.conventionalcommits.org/) (e.g.
+`fix(Button): correct focus ring`) — a squash merge turns it into the release
+commit. Your **branch commits** count too: a merge commit brings each of them
+onto the line. A CI guard checks that the title and every commit match the base
+branch. Pick the base by change type
 ([details](https://github.com/mittwald/flow/blob/main/CONTRIBUTE.md#choosing-the-base-branch)):
 
 - `fix:` / `docs:` / `chore:` / `refactor:` / … → base **`main`**

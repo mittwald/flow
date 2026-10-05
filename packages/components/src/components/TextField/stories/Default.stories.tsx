@@ -85,6 +85,23 @@ export const WithFieldError: Story = {
   ),
 };
 
+// The error comes from `validate` – no `isInvalid` and no message as children.
+export const WithValidation: Story = {
+  render: (props) => (
+    <TextField
+      {...props}
+      defaultValue="http://"
+      validationBehavior="aria"
+      validate={(value) =>
+        value.startsWith("https://") ? undefined : 'Start with "https://"'
+      }
+    >
+      <Label>URL</Label>
+      <FieldError />
+    </TextField>
+  ),
+};
+
 export const Password: Story = {
   args: { type: "password" },
   render: (props) => (

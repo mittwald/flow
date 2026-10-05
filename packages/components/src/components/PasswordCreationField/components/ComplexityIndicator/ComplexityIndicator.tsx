@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import styles from "./ComplexityIndicator.module.scss";
 import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import clsx from "clsx";
@@ -13,6 +13,11 @@ export interface ComplexityIndicatorProps {
   isEmptyValue: boolean;
   validationResultState: StateFromLatestPolicyValidationResult;
   policyValidationResult: ResolvedPolicyValidationResult;
+  /**
+   * The field is invalid for a reason outside the policy, e.g. a server error.
+   * The bar then shows danger like the field, not the password's strength.
+   */
+  isInvalid?: boolean;
 }
 
 /** @internal */
@@ -22,6 +27,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     validationResultState,
     isLoading,
     isEmptyValue,
+    isInvalid,
   } = props;
 
   let complexityVisible;
@@ -51,10 +57,12 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     status = "success";
   } else {
     complexityVisible = true;
-    status = getStatusFromPolicyValidationResult(
-      validationResultState?.isValid ?? policyValidationResult.isValid,
-      policyValidationResult,
-    );
+    status = isInvalid
+      ? "danger"
+      : getStatusFromPolicyValidationResult(
+          validationResultState?.isValid ?? policyValidationResult.isValid,
+          policyValidationResult,
+        );
   }
 
   const complexityFulfilled = totalFulfilledPercentage === 100;
@@ -83,7 +91,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     >
       <div
         style={{
-          width: `${totalFulfilledPercentage}%`,
+          "--complexity-indicator--percentage": totalFulfilledPercentage,
         }}
         className={percentageClassName}
       />
