@@ -14,6 +14,8 @@ import Button from "@/components/Button";
 import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
+import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
+import { FieldError } from "@/components/FieldError";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -61,6 +63,82 @@ const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
     />
   );
 };
+
+/*
+ * The policy hint is a rule to meet, not an error, until the password misses
+ * it. The policy resolves asynchronously, so this runs on real timers and gives
+ * it time to land.
+ */
+test("an empty field shows no error", async () => {
+  await render(
+    <PasswordCreationField>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+  await expect.element(page.getByRole("textbox")).toBeVisible();
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  expect(document.querySelector(`.${fieldErrorStyles.fieldError}`)).toBeNull();
+});
+
+const complexityIndicator = () =>
+  document.querySelector("[data-complexity-status]");
+
+/** Waits until the generated password is rated at full strength. */
+const expectFullStrength = () =>
+  expect
+    .poll(
+      () => complexityIndicator()?.getAttribute("data-complexity-percentage"),
+      { timeout: 10_000 },
+    )
+    .toBe("100");
+
+/*
+ * The policy result for a valid password describes the input. It appears only
+ * after the asynchronous validation, and a generated password never makes the
+ * field invalid on the way – the input references the result only while it is
+ * shown.
+ */
+test("a valid password's result describes the input", async () => {
+  await render(
+    <PasswordCreationField>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+  const input = page.getByRole("textbox");
+  await expect.element(input).toBeVisible();
+  await expect.element(input).not.toHaveAttribute("aria-describedby");
+
+  await page.getByRole("button", { name: /generate/i }).click();
+
+  await expect.element(input).toHaveAccessibleDescription(/secure/);
+
+  await userEvent.clear(input);
+
+  await expect.element(input).not.toHaveAttribute("aria-describedby");
+});
+
+/*
+ * A shown error hides the field's descriptions (FormField styles), so the
+ * hidden result must not describe the input either – it would still be
+ * announced.
+ */
+test("an error replaces a valid password's result", async () => {
+  await render(
+    <PasswordCreationField isInvalid>
+      <Label>Password</Label>
+      <FieldError>Already used</FieldError>
+    </PasswordCreationField>,
+  );
+  const input = page.getByRole("textbox");
+  await expect.element(input).toHaveAccessibleDescription(/Already used/);
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expectFullStrength();
+
+  await expect.element(input).toHaveAccessibleDescription(/Already used/);
+  await expect.element(input).not.toHaveAccessibleDescription(/secure/);
+});
 
 describe("PasswordCreationField Tests", () => {
   beforeEach(() => {
