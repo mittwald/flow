@@ -5,11 +5,17 @@ import {
   componentsWithoutRemote,
 } from "@/lib/llms/remoteUsage";
 import { SITE_URL, rawMarkdownPath } from "@/lib/llms/siteUrls";
+import {
+  APP_SHELL_PAGES,
+  TEMPLATE_RULE,
+  TEMPLATE_RULE_LEAD,
+} from "@/lib/llms/templateRule";
 
 /** The pages that decide most questions, in reading order. */
 export const START_PAGES = [
   "foundations/structure/layout",
   "foundations/structure/spacing",
+  ...APP_SHELL_PAGES,
   "templates/bausteine/formular",
   "templates/seiten/uebersichtsseite",
   "templates/seiten/detailseite",
@@ -59,6 +65,9 @@ const header = (pages: DocPage[]): string =>
       "design tokens and patterns for mStudio user interfaces. The " +
       "documentation is written in German; component names and " +
       "design-system terms (Variants, Colors, Props) are not translated.",
+    "",
+    `**${TEMPLATE_RULE_LEAD}:** ${TEMPLATE_RULE} The templates are listed ` +
+      "in the Templates section below.",
     "",
     "Every link below points to the Markdown version of a page. Fetch the " +
       "page before you decide on a component, a layout or a UI text — do not " +

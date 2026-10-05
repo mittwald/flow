@@ -34,3 +34,37 @@ test("the color 'success' does not warn", async () => {
   await expect.element(button).toHaveClass("flow--button--success");
   expect(onWarning).not.toHaveBeenCalled();
 });
+
+const pressAndGetTransform = async (props: Record<string, unknown>) => {
+  await render(<Button {...props}>Save</Button>);
+  const button = page.getByRole("button", { name: "Save" }).element();
+  if (!(button instanceof HTMLElement)) {
+    throw new Error("Button not found");
+  }
+  button.style.transition = "none";
+  button.dispatchEvent(
+    new PointerEvent("pointerdown", {
+      bubbles: true,
+      pointerId: 1,
+      pointerType: "mouse",
+      button: 0,
+      isPrimary: true,
+    }),
+  );
+  await expect.element(button).toHaveAttribute("data-pressed", "true");
+  return getComputedStyle(button).transform;
+};
+
+test("a pressed button scales down", async () => {
+  expect(await pressAndGetTransform({})).not.toBe("none");
+});
+
+test.each([
+  "isPending",
+  "isSucceeded",
+  "isFailed",
+  "aria-disabled",
+  "isReadOnly",
+])("a pressed button marked %s does not scale down", async (state) => {
+  expect(await pressAndGetTransform({ [state]: true })).toBe("none");
+});

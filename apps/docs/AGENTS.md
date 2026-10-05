@@ -8,11 +8,10 @@ Next.js documentation site for the flow Styleguide, deployed to
   the section and page structures, heading conventions, tone of voice, and
   language rules (German content, English Design System terminology).
 - Content lives in `src/content` as MDX, one directory per section
-  (`get-started`, `foundations`, `patterns`, `components`). A component page is
-  a single `index.mdx` — the former `overview`, `develop` and `guidelines` tabs
-  are consolidated onto it. Their routes under
-  `src/app/(docs)/components/[group]/[component]/` are `redirect()`-only, kept
-  so existing links (and their fragments) keep working.
+  (`get-started`, `foundations`, `templates`, `components`, `releases`). A
+  component page is a single `index.mdx`. The `overview`, `develop` and
+  `guidelines` routes under `src/app/(docs)/components/[group]/[component]/`
+  only `redirect()` to it; they keep old links (and their fragments) working.
 - **Directory names are the public URL**, and they carry no order. The authored
   order lives in `src/lib/content/contentOrder.ts` — a flat list of pathnames
   that the navigation, the header, `llms.txt` and the sitemap all sort by.

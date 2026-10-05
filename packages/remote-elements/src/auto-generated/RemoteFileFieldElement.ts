@@ -12,6 +12,7 @@ export class RemoteFileFieldElement extends FlowRemoteElement<RemoteFileFieldEle
   static override get remoteProperties() {
     return {
       accept: {},
+      "aria-describedby": {},
       isDisabled: {},
       isInvalid: {},
       isReadOnly: {},

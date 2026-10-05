@@ -121,8 +121,11 @@ case "$BASE_REF" in
 esac
 ```
 
-Routing itself needs no new rule: a breaking change is rejected on `main` and
-`next` and allowed everywhere else, which is exactly right for `2.x`.
+Routing itself needs no new rule: `routingErrors` rejects a breaking change only
+on the standing lines (`isStandingLine` in `.github/scripts/routing-lib.mjs`:
+`main` and `next`) and allows it everywhere else, which is exactly right for
+`2.x`. Before that check existed it rejected one on any base the job ran for, so
+following this step would have blocked every breaking PR into the line.
 
 ## 3. `publish.yml` — six places, not one
 
@@ -253,10 +256,10 @@ parameterised, and the pieces it depends on carry over:
   promotion it would overwrite the stable release history that `publish.yml`
   builds GitHub Release bodies from (ADR 0004 §3).
 - `publish.yml` detects the pre-graduated version and skips its own
-  `lerna version`; the graduation keys on a `release/*` head ref, which is what
-  the command creates regardless of the source line.
-- Routing and the version contract exempt `release/*` heads, so the promotion PR
-  is not blocked by the breaking changes it exists to ship.
+  `lerna version`; the graduation keys on a `release/*` head ref of this
+  repository, which is what the command creates regardless of the source line.
+- Routing and the version contract exempt `release/*` heads of this repository,
+  so the promotion PR is not blocked by the breaking changes it exists to ship.
 
 Then retire the line, in this order:
 
