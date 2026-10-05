@@ -26,16 +26,17 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "DatePicker");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   return (
     <Aria.DatePicker
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
