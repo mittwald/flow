@@ -1,10 +1,10 @@
 # @mittwald/flow-react-components — Agent Guide
 
-> **Building an application _with_ Flow?** Read [USAGE.md](./USAGE.md) instead —
-> component selection, layout and spacing, what is safe to depend on, and where
-> the documentation lives in machine-readable form. This guide is about changing
-> Flow itself, and its patterns (`flowComponent`, `PropsContext`, views, CSS
-> modules) do not belong in an application.
+**Building an app or mStudio extension in your own project?** Read
+[USAGE.md](./USAGE.md) first — component selection, templates, layout and
+spacing, what is safe to depend on. Everything below is for changing Flow, and
+its patterns (`flowComponent`, `PropsContext`, views, CSS modules) do not belong
+in an application.
 
 Component patterns for the core package. Read the
 [root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md) first for
