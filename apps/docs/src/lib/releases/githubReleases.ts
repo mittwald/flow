@@ -1,4 +1,5 @@
 import type { Fix, PatchGroup, Release } from "./types";
+import { themedFigures } from "./themedFigures";
 
 interface GhRelease {
   tag_name: string;
@@ -178,7 +179,7 @@ export const getReleases = async (): Promise<Release[]> => {
         b.version.localeCompare(a.version, undefined, { numeric: true }),
       );
 
-    const { headline, body } = splitHeadline(head.body ?? "");
+    const { headline, body } = splitHeadline(themedFigures(head.body ?? ""));
     // A hand-titled Release is the only case where `name` carries a headline —
     // the publish workflow always sets it to the bare version.
     const name = head.name?.trim();

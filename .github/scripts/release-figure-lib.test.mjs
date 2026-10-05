@@ -5,11 +5,13 @@ import {
   buildExampleUrl,
   composeFigureHtml,
   examplePathOf,
+  figureMarkdown,
   figureOutputPath,
   findUnknownExamples,
   normalizeFigureSpec,
   rawFigureUrl,
   resolveOutputPath,
+  themedOutputPath,
 } from "./release-figure-lib.mjs";
 
 /** @param {object} overrides */
@@ -55,6 +57,44 @@ describe("figureOutputPath", () => {
     assert.throws(() => figureOutputPath("1.2.0-next.3", "x"), /x\.y\.z/);
     assert.throws(() => figureOutputPath("1.2.0", "CoachMark"), /kebab-case/);
   });
+
+  it("rejects a name that would collide with another figure's dark capture", () => {
+    assert.throws(
+      () => figureOutputPath("1.2.0", "coach-mark-dark"),
+      /must not end in -dark/,
+    );
+  });
+});
+
+describe("themedOutputPath", () => {
+  it("keeps the spec's path for light and suffixes it for dark", () => {
+    const out = "apps/docs/public/assets/releases/1.2.0/coach-mark.png";
+    assert.equal(themedOutputPath(out, "light"), out);
+    assert.equal(
+      themedOutputPath(out, "dark"),
+      "apps/docs/public/assets/releases/1.2.0/coach-mark-dark.png",
+    );
+  });
+});
+
+describe("figureMarkdown", () => {
+  it("offers the dark capture to dark mode and falls back to light", () => {
+    const sha = "c2b3f6ddc658b9b7ac22a685294dab5cc8ab9394";
+    const base = `https://raw.githubusercontent.com/mittwald/flow/${sha}/apps/docs/public/assets/releases/1.1.0`;
+    assert.equal(
+      figureMarkdown({
+        sha,
+        out: "apps/docs/public/assets/releases/1.1.0/rating.png",
+        alt: 'Rating with "maxValue"',
+      }),
+      [
+        "<picture>",
+        `  <source media="(prefers-color-scheme: dark)" srcset="${base}/rating-dark.png">`,
+        `  <img src="${base}/rating.png" alt="Rating with &quot;maxValue&quot;">`,
+        "</picture>",
+      ].join("\n"),
+    );
+  });
 });
 
 describe("rawFigureUrl", () => {
@@ -81,7 +121,7 @@ describe("rawFigureUrl", () => {
 });
 
 describe("normalizeFigureSpec", () => {
-  it("defaults the output path, width, scale and background", () => {
+  it("defaults the output path, width and scale", () => {
     const normalized = normalizeFigureSpec(spec());
     assert.equal(
       normalized.out,
@@ -89,7 +129,6 @@ describe("normalizeFigureSpec", () => {
     );
     assert.equal(normalized.width, 700);
     assert.equal(normalized.scale, 2);
-    assert.equal(normalized.background, "#ffffff");
     assert.deepEqual(normalized.panels[0].expect, []);
     assert.equal(normalized.panels[0].caption, null);
   });
@@ -172,19 +211,10 @@ describe("normalizeFigureSpec", () => {
     );
   });
 
-  it("rejects a background that could close the style block", () => {
+  it("turns a background away — each theme brings its own ground", () => {
     assert.throws(
-      () =>
-        normalizeFigureSpec(
-          spec({ background: "#fff</style><script>alert(1)</script>" }),
-        ),
-      /must be a plain CSS color/,
-    );
-    assert.doesNotThrow(() =>
-      normalizeFigureSpec(spec({ background: "rgb(255, 255, 255)" })),
-    );
-    assert.doesNotThrow(() =>
-      normalizeFigureSpec(spec({ background: "transparent" })),
+      () => normalizeFigureSpec(spec({ background: "#ffffff" })),
+      /spec\.background is gone/,
     );
   });
 
@@ -270,7 +300,7 @@ describe("composeFigureHtml", () => {
   it("renders one iframe per panel, in order", () => {
     const html = composeFigureHtml({
       width: 500,
-      background: "#ffffff",
+      theme: "light",
       panels: [{ caption: "maxValue={10}" }, { caption: null }],
       urls: ["http://localhost:3001/a", "http://localhost:3001/b"],
     });
@@ -284,11 +314,24 @@ describe("composeFigureHtml", () => {
   it("escapes a caption instead of letting it become markup", () => {
     const html = composeFigureHtml({
       width: 500,
-      background: "#ffffff",
+      theme: "light",
       panels: [{ caption: "<RatingSegment> children" }],
       urls: ["http://localhost:3001/a"],
     });
     assert.match(html, /&lt;RatingSegment&gt; children/);
     assert.ok(!html.includes("<RatingSegment>"));
+  });
+
+  it("colors its own ground per theme", () => {
+    /** @param {"light" | "dark"} theme */
+    const ground = (theme) =>
+      composeFigureHtml({
+        width: 500,
+        theme,
+        panels: [{ caption: null }],
+        urls: ["http://localhost:3001/a"],
+      }).match(/html, body \{[^}]*background: (#[0-9a-f]+);/)?.[1];
+    assert.equal(ground("light"), "#ffffff");
+    assert.equal(ground("dark"), "#1b1f24");
   });
 });

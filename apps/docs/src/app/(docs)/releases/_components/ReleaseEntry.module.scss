@@ -12,6 +12,15 @@ $figure-scale: 0.5;
     height: auto;
     border-radius: calc(var(--corner-radius--m) / #{$figure-scale});
   }
+
+  // A figure with a dark capture arrives as two images (`themedFigures`); the
+  // one for the other theme is hidden.
+  // stylelint-disable selector-max-type -- markdown output
+  :global(:root:not([data-theme="dark"])) & img[src$="#dark-only"],
+  :global([data-theme="dark"]) & img[src$="#light-only"] {
+    display: none;
+  }
+  // stylelint-enable selector-max-type
 }
 
 .heading {

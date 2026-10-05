@@ -8,9 +8,9 @@
  * ```
  *
  * The spec names the examples and what each panel must render. The script
- * stacks the panels into one PNG under
- * `apps/docs/public/assets/releases/<version>/` and prints the path plus the
- * `raw.githubusercontent.com` URL template the notes reference.
+ * stacks the panels into one PNG per theme (`<name>.png`, `<name>-dark.png`)
+ * under `apps/docs/public/assets/releases/<version>/` and prints the
+ * `<picture>` block the notes reference them by.
  *
  * It captures; it never invents. Every pixel comes from an example rendered out
  * of the working tree, and the script has no path that produces an image
@@ -71,12 +71,14 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { URL, fileURLToPath } from "node:url";
 import {
   EXAMPLE_GLOB,
+  FIGURE_THEMES,
   buildExampleUrl,
   composeFigureHtml,
   examplePathOf,
+  figureMarkdown,
   findUnknownExamples,
   normalizeFigureSpec,
-  rawFigureUrl,
+  themedOutputPath,
 } from "./release-figure-lib.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -442,13 +444,102 @@ const captureSettled = async (figure) => {
   );
 };
 
+/**
+ * Capture one theme of the figure into `out`.
+ *
+ * @param {import("playwright").Browser} browser
+ * @param {string} docsUrl
+ * @param {import("./release-figure-lib.mjs").NormalizedFigureSpec} spec
+ * @param {import("./release-figure-lib.mjs").FigureTheme} theme
+ * @param {string} out
+ */
+const captureTheme = async (browser, docsUrl, spec, theme, out) => {
+  const context = await browser.newContext({
+    viewport: { width: spec.width, height: 800 },
+    deviceScaleFactor: spec.scale,
+    // The preview layout follows the system theme, so this alone themes the
+    // examples.
+    colorScheme: theme,
+  });
+  try {
+    await context.addInitScript(HIDE_DEV_INDICATOR);
+
+    // Serve the three declared faces locally. A font request that never
+    // settles keeps `document.fonts.ready` pending, and Playwright waits on it
+    // before every screenshot — the capture then times out or, worse, renders
+    // in the fallback face and still produces a file (#3106).
+    if (existsSync(LOCAL_FONTS)) {
+      await context.route(`${CDN_FONTS}*`, async (route) => {
+        const file = new URL(route.request().url()).pathname.split("/").pop();
+        const local = join(LOCAL_FONTS, String(file));
+        // A face added to fonts.scss has no local copy yet. Throwing here would
+        // leave the request unanswered, which is the one thing that must not
+        // happen to a font — let it go to the network instead.
+        if (!existsSync(local)) {
+          process.stderr.write(
+            `No local copy of ${file}; fetching it from the CDN.\n`,
+          );
+          await route.continue();
+          return;
+        }
+        await route.fulfill({
+          body: await readFile(local),
+          contentType: "font/woff2",
+        });
+      });
+    }
+
+    const page = await context.newPage();
+    const urls = spec.panels.map((panel) =>
+      buildExampleUrl(docsUrl, panel.example),
+    );
+    const html = composeFigureHtml({
+      width: spec.width,
+      theme,
+      panels: spec.panels,
+      urls,
+    });
+
+    // The composition page is served ON the docs origin, so it is same-origin
+    // with the example iframes and can measure and assert them.
+    const figureUrl = `${docsUrl}/__release-figure__.html`;
+    await page.route(figureUrl, (route) =>
+      route.fulfill({ contentType: "text/html; charset=utf-8", body: html }),
+    );
+    await page.goto(figureUrl, { waitUntil: "load" });
+
+    const failures = [];
+    for (const [index, panel] of spec.panels.entries()) {
+      const measured = await measurePanel(page, index, panel, urls[index]);
+      failures.push(...measured.failures);
+      await page.evaluate(
+        `${SIZE_PANEL}(${JSON.stringify({ index, height: measured.height })})`,
+      );
+      if (index === 0) {
+        await page.evaluate(
+          `${SET_CAPTION_INSET}(${JSON.stringify(measured.insetLeft)})`,
+        );
+      }
+    }
+    if (failures.length > 0) {
+      throw new Error(
+        `the ${theme} capture would not show what the spec asks for:\n  ${failures.join("\n  ")}`,
+      );
+    }
+
+    await mkdir(dirname(resolve(repoRoot, out)), { recursive: true });
+    const png = await captureSettled(page.locator("#figure"));
+    await writeFile(resolve(repoRoot, out), png);
+  } finally {
+    await context.close();
+  }
+};
+
 const main = async () => {
   const args = parseArgs(process.argv.slice(2));
   const spec = normalizeFigureSpec(
     JSON.parse(await readFile(resolve(args.spec), "utf8")),
   );
-  const outPath = spec.out;
-
   // Checked against the working tree before any server starts: a typo would
   // otherwise surface as a 404 page, minutes into the run.
   const known = [];
@@ -489,91 +580,34 @@ const main = async () => {
     const playwright = await import("playwright");
     const launched = await launchBrowser(playwright, args.browser);
     browser = launched.browser;
-    const context = await browser.newContext({
-      viewport: { width: spec.width, height: 800 },
-      deviceScaleFactor: spec.scale,
-      colorScheme: "light",
-    });
-    await context.addInitScript(HIDE_DEV_INDICATOR);
 
-    // Serve the three declared faces locally. A font request that never
-    // settles keeps `document.fonts.ready` pending, and Playwright waits on it
-    // before every screenshot — the capture then times out or, worse, renders
-    // in the fallback face and still produces a file (#3106).
-    if (existsSync(LOCAL_FONTS)) {
-      await context.route(`${CDN_FONTS}*`, async (route) => {
-        const file = new URL(route.request().url()).pathname.split("/").pop();
-        const local = join(LOCAL_FONTS, String(file));
-        // A face added to fonts.scss has no local copy yet. Throwing here would
-        // leave the request unanswered, which is the one thing that must not
-        // happen to a font — let it go to the network instead.
-        if (!existsSync(local)) {
-          process.stderr.write(
-            `No local copy of ${file}; fetching it from the CDN.\n`,
-          );
-          await route.continue();
-          return;
-        }
-        await route.fulfill({
-          body: await readFile(local),
-          contentType: "font/woff2",
-        });
-      });
+    const written = [];
+    for (const theme of FIGURE_THEMES) {
+      const out = themedOutputPath(spec.out, theme);
+      await captureTheme(browser, docs.url, spec, theme, out);
+      written.push(out);
     }
-
-    const page = await context.newPage();
-    const urls = spec.panels.map((panel) =>
-      buildExampleUrl(docs.url, panel.example),
-    );
-    const html = composeFigureHtml({
-      width: spec.width,
-      background: spec.background,
-      panels: spec.panels,
-      urls,
-    });
-
-    // The composition page is served ON the docs origin, so it is same-origin
-    // with the example iframes and can measure and assert them.
-    const figureUrl = `${docs.url}/__release-figure__.html`;
-    await page.route(figureUrl, (route) =>
-      route.fulfill({ contentType: "text/html; charset=utf-8", body: html }),
-    );
-    await page.goto(figureUrl, { waitUntil: "load" });
-
-    const failures = [];
-    for (const [index, panel] of spec.panels.entries()) {
-      const measured = await measurePanel(page, index, panel, urls[index]);
-      failures.push(...measured.failures);
-      await page.evaluate(
-        `${SIZE_PANEL}(${JSON.stringify({ index, height: measured.height })})`,
-      );
-      if (index === 0) {
-        await page.evaluate(
-          `${SET_CAPTION_INSET}(${JSON.stringify(measured.insetLeft)})`,
-        );
-      }
-    }
-    if (failures.length > 0) {
-      throw new Error(
-        `the capture would not show what the spec asks for:\n  ${failures.join("\n  ")}`,
-      );
-    }
-
-    await mkdir(dirname(resolve(repoRoot, outPath)), { recursive: true });
-    const png = await captureSettled(page.locator("#figure"));
-    await writeFile(resolve(repoRoot, outPath), png);
 
     const pixelWidth = spec.width * spec.scale;
+    const placeholderSha = "0".repeat(40);
+    const snippet = figureMarkdown({
+      sha: placeholderSha,
+      out: spec.out,
+      alt: "<caption>",
+    }).replaceAll(placeholderSha, "<commit-sha>");
     process.stdout.write(
       [
-        `Wrote ${outPath}`,
+        ...written.map((out) => `Wrote ${out}`),
         `  panels:  ${spec.panels.length} (${spec.panels.map((p) => p.example).join(", ")})`,
         `  browser: ${launched.name}`,
         `  layout:  ${spec.width} CSS px wide, captured at ${spec.scale}×`,
         `  image:   ${pixelWidth} px wide — the size it is shown at where nothing constrains it`,
-        `  url:     ${rawFigureUrl("0".repeat(40), outPath).replace("0".repeat(40), "<commit-sha>")}`,
         "",
-        "Open the file and look at it before it goes anywhere: a clipped or",
+        "Reference it from the notes as:",
+        "",
+        snippet,
+        "",
+        "Open both files and look at them before they go anywhere: a clipped or",
         "wrongly framed capture renders fine and reads as plausible.",
         "",
       ].join("\n"),
