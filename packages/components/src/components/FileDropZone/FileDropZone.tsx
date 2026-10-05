@@ -110,10 +110,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <div
-        className={wrapperProps.className}
-        inert={isSkeleton || undefined}
-      >
+      <div className={wrapperProps.className} inert={isSkeleton || undefined}>
         <PropsContextProvider
           props={propsContext}
           dependencies={[controlProps["aria-describedby"]]}
