@@ -22,7 +22,9 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, onChange, ref, ...rest } = props;
 
-  const popoverController = useOverlayController("Popover");
+  const popoverController = useOverlayController("Popover", {
+    reuseControllerFromContext: false,
+  });
   const {
     FieldErrorView,
     FieldErrorCaptureContext,

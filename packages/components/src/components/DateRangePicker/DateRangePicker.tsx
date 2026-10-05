@@ -41,7 +41,9 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     ...rest
   } = useControlledHostValueProps(props, null);
 
-  const popoverController = useOverlayController("Popover");
+  const popoverController = useOverlayController("Popover", {
+    reuseControllerFromContext: false,
+  });
   const {
     FieldErrorView,
     FieldErrorCaptureContext,

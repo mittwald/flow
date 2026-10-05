@@ -4,6 +4,8 @@ import { expect, test, vi } from "vitest";
 import { CalendarDate } from "@internationalized/date";
 import { DatePicker } from "@/components/DatePicker";
 import { Label } from "@/components/Label";
+import { Popover, PopoverTrigger } from "@/components/Popover";
+import { Button } from "@/components/Button";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -74,4 +76,27 @@ test("a disabled date picker does not open its calendar", async () => {
   await calendarButton().click({ force: true });
 
   await expect.element(calendar()).not.toBeInTheDocument();
+});
+
+test("inside a popover, it keeps its own calendar state", async () => {
+  render(
+    <PopoverTrigger>
+      <Button>Open</Button>
+      <Popover>
+        <DatePicker defaultValue={new CalendarDate(2025, 3, 10)}>
+          <Label>Departure</Label>
+        </DatePicker>
+      </Popover>
+    </PopoverTrigger>,
+  );
+
+  await page.getByRole("button", { name: "Open" }).click();
+  await expect.element(calendarButton()).toBeVisible();
+  await expect.element(calendar()).not.toBeInTheDocument();
+
+  await calendarButton().click();
+  await day(/March 12, 2025/).click();
+
+  await expect.element(calendar()).not.toBeInTheDocument();
+  await expect.element(calendarButton()).toBeVisible();
 });
