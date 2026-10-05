@@ -160,16 +160,32 @@ Enddatum eingrenzen.
 
 <LiveCodeEditor example="filterDateRange" editorCollapsed stretch />
 
+## Date Range Filter mit Uhrzeit
+
+Mit `granularity: "minute"` in `dateRangeOptions` grenzt der User zusätzlich
+nach Uhrzeit ein, etwa bei Logs, Backups oder Cronjob-Ausführungen. Statt des
+Kalenders zeigt der Filter dann je ein Feld für Startdatum, Startzeit, Enddatum
+und Endzeit.
+
+- Ohne Uhrzeit gilt der ganze Tag: Der Start beginnt um 00:00, das Ende schließt
+  den ganzen Tag ein.
+- Eine Endzeit schließt die ganze Minute ein.
+- Bleibt Start- oder Enddatum leer, ist der Zeitraum nach dieser Seite offen.
+- Die Uhrzeit gilt in der lokalen Zeitzone des Users.
+
+<LiveCodeEditor example="filterDateTimeRange" editorCollapsed stretch />
+
 ## Filter Properties
 
-| Property          | Typ                               | Beschreibung                                                                |
-| ----------------- | --------------------------------- | --------------------------------------------------------------------------- |
-| `defaultSelected` | `string[]`                        | Array der als Default gesetzten Filter                                      |
-| `matcher`         | `FilterMatcher<T, TProp, string>` | Definiert eine eigene Filterlogik für die Listenelemente                    |
-| `mode`            | `"all" \| "some" \| "one"`        | Bestimmt, wie mehrere ausgewählte Filterwerte miteinander kombiniert werden |
-| `name`            | `string`                          | Der Anzeigename des Filters                                                 |
-| `property`        | `string`                          | Das für die Filterung verwendete Property                                   |
-| `values`          | `string[]`                        | Die Optionen für den Filter                                                 |
+| Property           | Typ                                       | Beschreibung                                                                                                                  |
+| ------------------ | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `defaultSelected`  | `string[]`                                | Array der als Default gesetzten Filter                                                                                        |
+| `dateRangeOptions` | `DateRangeFilterOptions`                  | Optionen des Date Range Filters: `granularity` (`"day"` oder `"minute"`) sowie `minValue`, `maxValue` und `isDateUnavailable` |
+| `matcher`          | `FilterMatcher<T, TProp, string>`         | Definiert eine eigene Filterlogik für die Listenelemente                                                                      |
+| `mode`             | `"all" \| "some" \| "one" \| "dateRange"` | Bestimmt, wie mehrere ausgewählte Filterwerte miteinander kombiniert werden                                                   |
+| `name`             | `string`                                  | Der Anzeigename des Filters                                                                                                   |
+| `property`         | `string`                                  | Das für die Filterung verwendete Property                                                                                     |
+| `values`           | `string[]`                                | Die Optionen für den Filter                                                                                                   |
 
 ---
 
@@ -351,6 +367,27 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 Beim asynchronen Laden lassen sich Pagination (`manualPagination`), Sortierung
 (`manualSorting`), Filterung (`manualFiltering`) und Suche serverseitig
 verarbeiten.
+
+Filterst du einen Date Range Filter serverseitig, übersetzt
+`resolveDateRangeFilterValue` seinen Wert in die Zeitpunkte, die er umfasst. So
+gelten auf dem Server dieselben Grenzen wie in der List: Ein Datum umfasst den
+ganzen Tag, eine Uhrzeit die ganze Minute.
+
+```tsx
+import { resolveDateRangeFilterValue } from "@mittwald/flow-react-components";
+
+<List.LoaderAsync manualFiltering>
+  {async (options) => {
+    const [range] = options.filtering?.createdAt?.values ?? [];
+    const { start, end } = range ? resolveDateRangeFilterValue(range) : {};
+    const response = await fetchLogs({
+      from: start?.toISOString(),
+      to: end?.toISOString(),
+    });
+    return { data: response.items, itemTotalCount: response.totalCount };
+  }}
+</List.LoaderAsync>;
+```
 
 ---
 

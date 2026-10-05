@@ -1,5 +1,12 @@
 {
   "dateRange": "Zeitraum",
+  "dateRange.endDate": "Enddatum",
+  "dateRange.endTime": "Endzeit",
+  "dateRange.endTimeBeforeStartTime": "Die Endzeit darf nicht vor der Startzeit liegen.",
+  "dateRange.from": "ab {date}",
+  "dateRange.startDate": "Startdatum",
+  "dateRange.startTime": "Startzeit",
+  "dateRange.until": "bis {date}",
   "filters": "Filter",
   "filters.all": "Alle Filter",
   "filters.clear": "Filter entfernen",

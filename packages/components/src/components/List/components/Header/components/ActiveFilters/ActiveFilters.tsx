@@ -16,8 +16,9 @@ import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
 import { Filter } from "@/components/List/model/filter/Filter";
-import { transformDateValueToFormattedDate } from "@/lib/date/transformDateValueToFormattedDate";
 import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
+import { useLanguage } from "@/lib/hooks/useLanguage";
+import { formatDateRangeFilterValue } from "./formatDateRangeFilterValue";
 
 interface Props {
   isDisabled?: boolean;
@@ -27,6 +28,7 @@ export const ActiveFilters: FC<Props> = observer((props) => {
   const { isDisabled } = props;
   const list = useList();
   const formatter = useLocalizedStringFormatter(locales, "List");
+  const locale = useLanguage();
 
   const activeFilters = list.filters.flatMap((f) => {
     if (f instanceof DateRangeFilter) {
@@ -39,7 +41,7 @@ export const ActiveFilters: FC<Props> = observer((props) => {
             isDisabled={isDisabled}
           >
             <TextView>
-              {`${transformDateValueToFormattedDate(value.start)} - ${transformDateValueToFormattedDate(value.end)}`}
+              {formatDateRangeFilterValue(value, locale, formatter.format)}
             </TextView>
           </BadgeView>,
         ];

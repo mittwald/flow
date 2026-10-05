@@ -1,0 +1,10 @@
+.dateTimeRangeFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--column-layout--gap--m);
+
+  /* An error wraps instead of widening the popover */
+  :global(.flow--field-error) {
+    contain: inline-size;
+  }
+}

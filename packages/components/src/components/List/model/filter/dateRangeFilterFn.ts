@@ -1,12 +1,20 @@
 import { DateTime } from "luxon";
-import { CalendarDate } from "@internationalized/date";
+import {
+  CalendarDate,
+  CalendarDateTime,
+  ZonedDateTime,
+} from "@internationalized/date";
 import type { Row } from "@tanstack/react-table";
-import { transformDateValueToDateTime } from "@/lib/date/transformDateValueToDateTime";
+import type { DateRangeFilterValue } from "@/components/List/model/filter/types";
+import {
+  dateValueToLocalDateTime,
+  resolveDateRangeFilterValue,
+} from "@/components/List/model/filter/resolveDateRangeFilterValue";
 
 export function dateRangeFilterFn<T>(
   row: Row<T>,
   columnId: string,
-  range?: { start?: CalendarDate; end?: CalendarDate },
+  range?: DateRangeFilterValue,
 ): boolean {
   if (!range) {
     return true;
@@ -18,8 +26,12 @@ export function dateRangeFilterFn<T>(
 
   if (value instanceof DateTime) {
     dateValue = value;
-  } else if (value instanceof CalendarDate) {
-    dateValue = transformDateValueToDateTime(value);
+  } else if (
+    value instanceof CalendarDate ||
+    value instanceof CalendarDateTime ||
+    value instanceof ZonedDateTime
+  ) {
+    dateValue = dateValueToLocalDateTime(value);
   } else if (typeof value === "string") {
     dateValue = DateTime.fromISO(value);
   }
@@ -28,17 +40,11 @@ export function dateRangeFilterFn<T>(
     return true;
   }
 
-  const startDate = range.start
-    ? transformDateValueToDateTime(range.start)
-    : undefined;
+  const { start, end } = resolveDateRangeFilterValue(range);
 
-  const endDate = range.end
-    ? transformDateValueToDateTime(range.end).endOf("day")
-    : undefined;
-
-  if (startDate && dateValue < startDate) {
+  if (start && dateValue.toMillis() < start.getTime()) {
     return false;
   }
 
-  return !(endDate && dateValue > endDate);
+  return !(end && dateValue.toMillis() > end.getTime());
 }
