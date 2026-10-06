@@ -19,7 +19,13 @@ export interface ButtonProps
   extends
     PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<HTMLButtonElement> {
-  /** Slot for button placement in action groups. */
+  /**
+   * Slot for button placement in action groups: `primary` (at the end),
+   * `secondary` (before the primary action) or `abort` (at the start). Without
+   * a slot, an action group places the colors primary, success and danger in
+   * `primary` and every other color in `abort`. A secondary-colored button that
+   * does not abort therefore needs `slot="secondary"`.
+   */
   slot?: string;
   /**
    * The color of the button.

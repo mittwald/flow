@@ -54,6 +54,40 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
+  "ActionGroup multiple abort (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, ActionGroup, Button, Separator },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <ActionGroup>
+          <Button variant="soft" color="secondary">
+            Abort 1
+          </Button>
+          <Button variant="soft" color="secondary">
+            Abort 2
+          </Button>
+          <Button>Primary</Button>
+        </ActionGroup>
+        <Separator />
+        <ActionGroup>
+          <Button variant="soft" color="secondary">
+            Abort 1
+          </Button>
+          <Button variant="soft" color="secondary">
+            Abort 2
+          </Button>
+        </ActionGroup>
+      </Flex>,
+    );
+
+    await testScreenshot("ActionGroup-multipleAbort");
+  },
+);
+
+test.each(testEnvironments)(
   "ActionGroup preserveOrder (%s)",
   async ({
     testScreenshot,

@@ -36,7 +36,11 @@ export interface LinkProps
   color?: "default" | AlphaColor;
   /** Marks the link as the currently active one, e.g. in a navigation. */
   "aria-current"?: string;
-  /** The name of the slot the link is placed in. */
+  /**
+   * The name of the slot the link is placed in. In action groups: `primary` (at
+   * the end), `secondary` (before the primary action) or `abort` (at the
+   * start). Without a slot, the link is placed before all slotted actions.
+   */
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];
