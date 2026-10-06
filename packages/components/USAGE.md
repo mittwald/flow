@@ -182,6 +182,8 @@ against Flow components.**
 - `LayoutCard` — the page-content container; brings its own padding.
 - `Section` — vertical structure inside a card. Spacing between sections is
   automatic, driven by sibling selectors, so `Section`s must be actual siblings.
+  A `Modal`'s `Content` brings only padding, like a `LayoutCard`: put its
+  components in a `Section`, or they stick together.
 - `ColumnLayout` — the column grid, with `gap` / `rowGap` / `columnGap`
   (`s | m | l | xl`).
 - `Flex` — the general-purpose flex container. It is the one component with a
