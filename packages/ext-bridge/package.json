@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "1.4.14",
+  "version": "1.4.16",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://flow.mittwald.de",
@@ -41,7 +41,7 @@
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json"
   },
   "dependencies": {
-    "@mittwald/react-use-promise": "~4.2.2",
+    "@mittwald/react-use-promise": "^4.2.2",
     "axios": "^1.19.0",
     "jose": "^6.2.10",
     "std-env": "^4.1.0",
