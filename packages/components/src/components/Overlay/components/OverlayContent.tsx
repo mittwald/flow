@@ -19,14 +19,22 @@ const overlayContainerAttribute = "data-flow-overlays";
  * blurs a focused field inside it (#3268). The same heuristic also spares
  * custom elements and shadow hosts the page itself appends, which then render
  * above open overlays.
+ *
+ * Hidden nodes don't count either: react-aria appends a `display: none`
+ * description node whenever a DatePicker's value changes, and moving the
+ * container for it on every keystroke resets the segment being typed into.
  */
+const isHiddenNode = (node: Element): boolean =>
+  node instanceof HTMLElement &&
+  (node.hidden === true || node.style.display === "none");
+
 const isCoveredByPageContent = (container: HTMLElement): boolean => {
   for (
     let node = container.nextElementSibling;
     node;
     node = node.nextElementSibling
   ) {
-    if (!isBrowserExtensionNode(node)) {
+    if (!isBrowserExtensionNode(node) && !isHiddenNode(node)) {
       return true;
     }
   }
