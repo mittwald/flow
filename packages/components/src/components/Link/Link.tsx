@@ -39,7 +39,7 @@ export interface LinkProps
   /**
    * The name of the slot the link is placed in. In action groups: `primary` (at
    * the end), `secondary` (before the primary action) or `abort` (at the
-   * start). Without a slot, the link is placed before all slotted actions.
+   * start).
    */
   slot?: string;
   /** The whiteSpace css value of the element. */
