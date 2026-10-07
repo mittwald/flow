@@ -2,7 +2,6 @@ import { typedList } from "@mittwald/flow-react-components";
 import {
   getLocalTimeZone,
   now,
-  today,
 } from "@internationalized/date";
 
 export default () => {
@@ -59,10 +58,7 @@ export default () => {
         property="startedAt"
         mode="dateRange"
         name="Zeitraum"
-        dateRangeOptions={{
-          granularity: "minute",
-          maxValue: today(getLocalTimeZone()),
-        }}
+        dateRangeOptions={{ granularity: "minute" }}
       />
       <CronjobRunList.Table>
         <CronjobRunList.TableHeader>
