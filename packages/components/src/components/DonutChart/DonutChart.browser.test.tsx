@@ -83,6 +83,19 @@ test("children replace the value in the middle", async () => {
   await expect.element(chart()).not.toHaveTextContent("40 %");
 });
 
+// `Children.count(false)` is 1, but a remote host cannot tell `false` from no
+// children, so both have to show the value.
+test("a conditional child that renders nothing keeps the value", async () => {
+  const showText = false as boolean;
+  render(
+    <DonutChart aria-label="Storage" value={40}>
+      {showText && <Text>Almost full</Text>}
+    </DonutChart>,
+  );
+
+  await expect.element(chart()).toHaveTextContent("40 %");
+});
+
 describe("with motion allowed", () => {
   afterEach(() => commands.setReducedMotion("reduce"));
 
