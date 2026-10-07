@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.19](https://github.com/mittwald/flow/compare/1.4.18...1.4.19) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 16 updates ([#3401](https://github.com/mittwald/flow/issues/3401)) ([21b2626](https://github.com/mittwald/flow/commit/21b2626b8ec74e2bf32e716afde7d23709f2514d))
+
 ## [1.4.18](https://github.com/mittwald/flow/compare/1.4.17...1.4.18) (2026-10-07)
 
 ### Bug Fixes
