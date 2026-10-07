@@ -1,5 +1,17 @@
+import { afterEach, vi } from "vitest";
 import { locators } from "vitest/browser";
 import "@mittwald/flow-react-components/all.css";
+
+/*
+ * What the React package's `setupBrowser.ts` does for its suites, and for the
+ * same reason: the harness runs with `isolate: false`, so a clock a reused test
+ * sets with `vi.setSystemTime` (the date pickers do) stays frozen for every
+ * later file. A frozen `Date.now()` stops `use-debounce`, and PasswordCreationField
+ * then never rates a password — the reference pass failed on it.
+ */
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 /*
  * The reused tests query with `page.getByLocator("input")` — a custom locator
