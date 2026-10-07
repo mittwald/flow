@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.20](https://github.com/mittwald/flow/compare/1.5.0-next.19...1.5.0-next.20) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.5.0-next.19](https://github.com/mittwald/flow/compare/1.5.0-next.18...1.5.0-next.19) (2026-10-06)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
