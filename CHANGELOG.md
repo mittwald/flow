@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.22](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.5.0-next.22) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 16 updates ([#3401](https://github.com/mittwald/flow/issues/3401)) ([21b2626](https://github.com/mittwald/flow/commit/21b2626b8ec74e2bf32e716afde7d23709f2514d))
+
+## [1.4.18](https://github.com/mittwald/flow/compare/1.5.0-next.20...1.4.18) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.18 ([a22d7bf](https://github.com/mittwald/flow/commit/a22d7bf1327998a16b7bc0e8e2af13eaf38b0ff8))
+
 ## [1.5.0-next.21](https://github.com/mittwald/flow/compare/1.5.0-next.20...1.5.0-next.21) (2026-10-07)
 
 ### Bug Fixes
