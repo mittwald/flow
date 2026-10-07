@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.24](https://github.com/mittwald/flow/compare/1.5.0-next.23...1.5.0-next.24) (2026-10-07)
+
+### Bug Fixes
+
+* **LayoutCard:** space alerts stacked directly in a LayoutCard ([#3394](https://github.com/mittwald/flow/issues/3394)) ([b4a0a1c](https://github.com/mittwald/flow/commit/b4a0a1c702e9b9c1235b2c0935fb593eb27702cb))
+
+## [1.4.19](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.4.19) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.19 ([53da658](https://github.com/mittwald/flow/commit/53da6580e6ed90346ca2d488672fbdbcc043aafa))
+
 ## [1.5.0-next.23](https://github.com/mittwald/flow/compare/1.5.0-next.22...1.5.0-next.23) (2026-10-07)
 
 ### Features
