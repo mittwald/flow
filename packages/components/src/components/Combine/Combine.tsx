@@ -25,6 +25,7 @@ export const CombineImplementation: FC<CombineProps> = (props) => {
     Avatar: { className: styles.avatar, size: "m" },
     CopyButton: { size: "s", className: styles.copyButton },
     Icon: { size: "s", className: styles.icon, color: "neutral" },
+    Kbd: { className: styles.kbd },
     ContextualHelpTrigger: {
       Button: {
         className: styles.contextualHelpTriggerButton,
