@@ -1,9 +1,6 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-
-/* The first published version with SkeletonMode — 1.4.0-next.9 is out without
-   it. Pin to the real release once it is published. */
-const skeletonModeSince = "1.4.0-next.10";
+import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode navigation (%s)",
