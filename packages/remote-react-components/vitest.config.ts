@@ -85,7 +85,10 @@ export default mergeConfig(
              * both browsers. The price is shared module state across files.
              * Mounted trees are not part of it — `render` calls `cleanup()`
              * first — and the setup files only set the theme and load fonts,
-             * which are meant to persist anyway.
+             * which are meant to persist anyway. Global mocks are part of it: a
+             * `vi.setSystemTime` clock froze `Date.now()` for every later file
+             * until `setupBrowser.ts` started handing each test the real clock
+             * back.
              */
             isolate: false,
             /*

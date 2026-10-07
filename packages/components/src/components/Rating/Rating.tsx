@@ -79,7 +79,8 @@ export const Rating = flowComponent("Rating", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "Rating");
 
@@ -87,7 +88,7 @@ export const Rating = flowComponent("Rating", (props) => {
     styles.rating,
     styles[`size-${size}`],
     styles[`fill-${fill}`],
-    fieldProps.className,
+    wrapperProps.className,
     className,
   );
 
@@ -112,6 +113,7 @@ export const Rating = flowComponent("Rating", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      aria-describedby={controlProps["aria-describedby"]}
       className={rootClassName}
       value={toSegmentValue(value)}
       defaultValue={toSegmentValue(defaultValue)}

@@ -3,6 +3,122 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.25](https://github.com/mittwald/flow/compare/1.5.0-next.24...1.5.0-next.25) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.0-next.24](https://github.com/mittwald/flow/compare/1.5.0-next.23...1.5.0-next.24) (2026-10-07)
+
+### Bug Fixes
+
+* **LayoutCard:** space alerts stacked directly in a LayoutCard ([#3394](https://github.com/mittwald/flow/issues/3394)) ([b4a0a1c](https://github.com/mittwald/flow/commit/b4a0a1c702e9b9c1235b2c0935fb593eb27702cb))
+
+## [1.4.19](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.4.19) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.19 ([53da658](https://github.com/mittwald/flow/commit/53da6580e6ed90346ca2d488672fbdbcc043aafa))
+
+## [1.5.0-next.23](https://github.com/mittwald/flow/compare/1.5.0-next.22...1.5.0-next.23) (2026-10-07)
+
+### Features
+
+* **Combine:** add Kbd + Kbd and Kbd + Text combinations ([510996f](https://github.com/mittwald/flow/commit/510996f91dea6976674d7cf3ce249a88aa549ece))
+
+## [1.5.0-next.22](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.5.0-next.22) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 16 updates ([#3401](https://github.com/mittwald/flow/issues/3401)) ([21b2626](https://github.com/mittwald/flow/commit/21b2626b8ec74e2bf32e716afde7d23709f2514d))
+
+## [1.4.18](https://github.com/mittwald/flow/compare/1.5.0-next.20...1.4.18) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.18 ([a22d7bf](https://github.com/mittwald/flow/commit/a22d7bf1327998a16b7bc0e8e2af13eaf38b0ff8))
+
+## [1.5.0-next.21](https://github.com/mittwald/flow/compare/1.5.0-next.20...1.5.0-next.21) (2026-10-07)
+
+### Bug Fixes
+
+* **ActionGroup:** keep multiple abort actions together at the start ([#3397](https://github.com/mittwald/flow/issues/3397)) ([16c3464](https://github.com/mittwald/flow/commit/16c346406dd9d48872425e9604c8e03aaf1b8680))
+
+## [1.4.17](https://github.com/mittwald/flow/compare/1.5.0-next.19...1.4.17) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.17 ([95ef8a1](https://github.com/mittwald/flow/commit/95ef8a11ee7845b1aaabc508fc270bd1705b4d41))
+
+## [1.5.0-next.20](https://github.com/mittwald/flow/compare/1.5.0-next.19...1.5.0-next.20) (2026-10-07)
+
+### Documentation
+
+* structure modal content with Section ([#3393](https://github.com/mittwald/flow/issues/3393)) ([860bad0](https://github.com/mittwald/flow/commit/860bad0f23185b0e6e8171a7eacd7080bd33567b))
+
+## [1.4.16](https://github.com/mittwald/flow/compare/1.5.0-next.18...1.4.16) (2026-10-06)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.16 ([0fb09d7](https://github.com/mittwald/flow/commit/0fb09d796a6736bc23cd3a64b2ecaa724e4de5a8))
+
+## [1.5.0-next.19](https://github.com/mittwald/flow/compare/1.5.0-next.18...1.5.0-next.19) (2026-10-06)
+
+### Bug Fixes
+
+* **components:** keep typed dates and times while a remote value is on its way ([#3387](https://github.com/mittwald/flow/issues/3387)) ([e1e2bf6](https://github.com/mittwald/flow/commit/e1e2bf67fd7cf40d0d06dff2701e64f4986c8fc9))
+
+## [1.4.15](https://github.com/mittwald/flow/compare/1.5.0-next.17...1.4.15) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.15 ([5da9f55](https://github.com/mittwald/flow/commit/5da9f553e326a1577ea38ec23432bbf7c2eb49ae))
+
+## [1.5.0-next.18](https://github.com/mittwald/flow/compare/1.5.0-next.17...1.5.0-next.18) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.0-next.17](https://github.com/mittwald/flow/compare/1.5.0-next.16...1.5.0-next.17) (2026-10-05)
+
+### Bug Fixes
+
+* **DatePicker:** keep the calendar closed inside a popover ([#3386](https://github.com/mittwald/flow/issues/3386)) ([a702b4f](https://github.com/mittwald/flow/commit/a702b4f22939fbee91698eb9d5da6dc81560d33e))
+
+## [1.4.13](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.4.13) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.13 ([b549754](https://github.com/mittwald/flow/commit/b54975477e250fc893e9feffe86a3be3afc9ad3c))
+
+## [1.5.0-next.16](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.5.0-next.16) (2026-10-05)
+
+### Documentation
+
+* route app builders to USAGE.md from every repo entry point ([#3382](https://github.com/mittwald/flow/issues/3382)) ([8fb4670](https://github.com/mittwald/flow/commit/8fb4670412d3ea8298bae7c41990f30e3910c4b2))
+
+## [1.4.12](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.4.12) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.12 ([73e26a9](https://github.com/mittwald/flow/commit/73e26a9ad5aeefd16053298d338bb7f2241f28d4))
+
+## [1.5.0-next.15](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.5.0-next.15) (2026-10-05)
+
+### Bug Fixes
+
+* **CodeEditor:** reference label and description only while rendered ([bf96178](https://github.com/mittwald/flow/commit/bf9617811991b39030810953657cd4e082731a08))
+* **FieldError:** link field errors to their control while shown ([3abb135](https://github.com/mittwald/flow/commit/3abb135f7f4cd744c5d57a0a181bd8b05aeef00e))
+* **FieldError:** stop leaking messages into other fields ([031dd4a](https://github.com/mittwald/flow/commit/031dd4a38d9bee75b4341f2369ed30f2790d3423))
+* **FieldError:** stop remounting the error on every field render ([7b51522](https://github.com/mittwald/flow/commit/7b515223646688ef3d4bd34f9a741fe9c4384a36))
+* **PasswordCreationField:** link a valid password&#x27;s result to the input ([9280413](https://github.com/mittwald/flow/commit/9280413df9f0d301bcd97ddb2fad9771e47685a5))
+* **PasswordCreationField:** show a generated password&#x27;s rating at once ([f7c203e](https://github.com/mittwald/flow/commit/f7c203ea4b7c102a713b25524fcfd5e2fd7b4e35))
+* **PasswordCreationField:** show danger on the bar while the field is invalid ([42627ef](https://github.com/mittwald/flow/commit/42627ef3c41ade3cfc9eb06e6197b18a25686668))
+
+## [1.4.11](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.4.11) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.11 ([65691c4](https://github.com/mittwald/flow/commit/65691c43528e2a132cd512016c89c209aa01d11f))
+
 ## [1.5.0-next.14](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.5.0-next.14) (2026-10-02)
 
 ### Miscellaneous Chores

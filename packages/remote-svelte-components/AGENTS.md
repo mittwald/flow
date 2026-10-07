@@ -116,7 +116,7 @@ what the bindings established about supporting a framework at all.
   live in `.vitest-corpus/`, are regenerated every run and are never committed —
   the claim is "Svelte renders what React renders today".
 
-  **167 of 197 scenarios pass**, with the reference run green at 197/197. The
+  **171 of 201 scenarios pass**, with the reference run green at 201/201. The
   rest is three things and nothing else: the render-tag anchor above (11), a
   scenario that defines its own React component (18), and
   `Modal confirmOnClose`, which this package's `Modal` does not rebuild (1).

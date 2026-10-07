@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.25](https://github.com/mittwald/flow/compare/1.5.0-next.24...1.5.0-next.25) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.24](https://github.com/mittwald/flow/compare/1.5.0-next.23...1.5.0-next.24) (2026-10-07)
+
+### Bug Fixes
+
+* **LayoutCard:** space alerts stacked directly in a LayoutCard ([#3394](https://github.com/mittwald/flow/issues/3394)) ([b4a0a1c](https://github.com/mittwald/flow/commit/b4a0a1c702e9b9c1235b2c0935fb593eb27702cb))
+
+## [1.4.19](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.4.19) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.19 ([53da658](https://github.com/mittwald/flow/commit/53da6580e6ed90346ca2d488672fbdbcc043aafa))
+
+## [1.5.0-next.23](https://github.com/mittwald/flow/compare/1.5.0-next.22...1.5.0-next.23) (2026-10-07)
+
+### Features
+
+* **Combine:** add Kbd + Kbd and Kbd + Text combinations ([510996f](https://github.com/mittwald/flow/commit/510996f91dea6976674d7cf3ce249a88aa549ece))
+
+## [1.5.0-next.22](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.5.0-next.22) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.21](https://github.com/mittwald/flow/compare/1.5.0-next.20...1.5.0-next.21) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.20](https://github.com/mittwald/flow/compare/1.5.0-next.19...1.5.0-next.20) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.19](https://github.com/mittwald/flow/compare/1.5.0-next.18...1.5.0-next.19) (2026-10-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.18](https://github.com/mittwald/flow/compare/1.5.0-next.17...1.5.0-next.18) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.17](https://github.com/mittwald/flow/compare/1.5.0-next.16...1.5.0-next.17) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.16](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.5.0-next.16) (2026-10-05)
+
+### Documentation
+
+* route app builders to USAGE.md from every repo entry point ([#3382](https://github.com/mittwald/flow/issues/3382)) ([8fb4670](https://github.com/mittwald/flow/commit/8fb4670412d3ea8298bae7c41990f30e3910c4b2))
+
+## [1.4.12](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.4.12) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.12 ([73e26a9](https://github.com/mittwald/flow/commit/73e26a9ad5aeefd16053298d338bb7f2241f28d4))
+
+## [1.5.0-next.15](https://github.com/mittwald/flow/compare/1.5.0-next.14...1.5.0-next.15) (2026-10-05)
+
+### Bug Fixes
+
+* **FieldError:** link field errors to their control while shown ([3abb135](https://github.com/mittwald/flow/commit/3abb135f7f4cd744c5d57a0a181bd8b05aeef00e))
+* **PasswordCreationField:** show danger on the bar while the field is invalid ([42627ef](https://github.com/mittwald/flow/commit/42627ef3c41ade3cfc9eb06e6197b18a25686668))
+
+## [1.4.11](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.4.11) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.11 ([65691c4](https://github.com/mittwald/flow/commit/65691c43528e2a132cd512016c89c209aa01d11f))
+
 ## [1.5.0-next.14](https://github.com/mittwald/flow/compare/1.5.0-next.13...1.5.0-next.14) (2026-10-02)
 
 ### Miscellaneous Chores
