@@ -1,8 +1,8 @@
 {
   "dateRange": "Date range",
+  "dateRange.endBeforeStart": "The end must not be before the start.",
   "dateRange.endDate": "End date",
   "dateRange.endTime": "End time",
-  "dateRange.endTimeBeforeStartTime": "The end time must not be before the start time.",
   "dateRange.from": "from {date}",
   "dateRange.startDate": "Start date",
   "dateRange.startTime": "Start time",

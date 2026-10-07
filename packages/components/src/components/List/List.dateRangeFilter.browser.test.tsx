@@ -3,6 +3,8 @@ import { List, ListFilter, ListItem, ListStaticData } from "@/components/List";
 import type { DateRangeFilterOptions } from "@/components/List";
 import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
+import { CalendarDate } from "@internationalized/date";
+import { I18nProvider } from "react-aria-components";
 
 interface Entry {
   id: string;
@@ -17,25 +19,26 @@ const entries: Entry[] = [
   { id: "nextDay", date: "2026-10-02T10:00:00" },
 ];
 
-const renderList = (
+const list = (
   dateRangeOptions: DateRangeFilterOptions = { granularity: "minute" },
   priority?: "primary" | "secondary",
-) =>
-  render(
-    <List aria-label="Entries">
-      <ListStaticData<Entry> data={entries} />
-      <ListFilter<Entry>
-        property="date"
-        mode="dateRange"
-        name="Date"
-        priority={priority}
-        dateRangeOptions={dateRangeOptions}
-      />
-      <ListItem<Entry> textValue={(e) => e.id}>
-        {({ id }) => <span>Entry: {id}</span>}
-      </ListItem>
-    </List>,
-  );
+) => (
+  <List aria-label="Entries">
+    <ListStaticData<Entry> data={entries} />
+    <ListFilter<Entry>
+      property="date"
+      mode="dateRange"
+      name="Date"
+      priority={priority}
+      dateRangeOptions={dateRangeOptions}
+    />
+    <ListItem<Entry> textValue={(e) => e.id}>
+      {({ id }) => <span>Entry: {id}</span>}
+    </ListItem>
+  </List>
+);
+
+const renderList = (...args: Parameters<typeof list>) => render(list(...args));
 
 const field = (name: string) => page.getByRole("group", { name });
 
@@ -91,34 +94,68 @@ test("ignores a time without a date", async () => {
   await expectEntries("early", "morning", "noon", "evening", "nextDay");
 });
 
-test("shows an error while the end time is before the start time", async () => {
+const rangeError = () =>
+  page.getByText("The end must not be before the start.");
+
+test("keeps the last valid range while the end is before the start", async () => {
   await renderList();
   await openFilter();
 
   await enter("Start date", "10012026");
   await enter("Start time", "1200");
   await enter("End date", "10012026");
+  await expectEntries("noon", "evening");
+
   await enter("End time", "0800");
 
+  await expect.element(rangeError()).toBeVisible();
   await expect
-    .element(page.getByText("The end time must not be before the start time."))
-    .toBeVisible();
-  await expectEntries();
+    .element(field("End time"))
+    .toHaveAccessibleDescription(/The end must not be before the start\./);
+  await expectEntries("noon", "evening");
 });
 
-test("limits the end date to the start date and later", async () => {
+test("shows the range error whichever field is filled first", async () => {
   await renderList();
   await openFilter();
 
-  await enter("Start date", "10152026");
-  await userEvent.click(field("End date").getByRole("button"));
+  await enter("End date", "10012026");
+  await enter("Start date", "10022026");
 
-  await expect
-    .element(page.getByRole("button", { name: /October 14, 2026/ }))
-    .toHaveAttribute("aria-disabled", "true");
-  await expect
-    .element(page.getByRole("button", { name: /October 15, 2026/ }))
-    .not.toHaveAttribute("aria-disabled");
+  await expect.element(rangeError()).toBeVisible();
+  await expectEntries("early", "morning", "noon", "evening");
+
+  await enter("Start date", "09302026");
+
+  await expect.element(rangeError()).not.toBeInTheDocument();
+});
+
+test("shows an error while a date is out of range", async () => {
+  await renderList({
+    granularity: "minute",
+    maxValue: new CalendarDate(2026, 10, 2),
+  });
+  await openFilter();
+
+  await enter("End date", "10052026");
+  await userEvent.keyboard("{Tab}");
+
+  await expect.element(page.getByText(/or earlier/)).toBeVisible();
+  await expectEntries("early", "morning", "noon", "evening", "nextDay");
+});
+
+test("keeps the popover width while typing", async () => {
+  // In de-DE a typed date is wider than its placeholder
+  await render(<I18nProvider locale="de-DE">{list()}</I18nProvider>);
+  await openFilter();
+
+  const popover = page.getByRole("dialog").element();
+  const initialWidth = popover.getBoundingClientRect().width;
+
+  await enter("Startdatum", "28122025");
+  await enter("Startzeit", "2359");
+
+  expect(popover.getBoundingClientRect().width).toBe(initialWidth);
 });
 
 test("shows the range with time in the active filter", async () => {

@@ -1,4 +1,4 @@
-import { type FC, useState } from "react";
+import { type FC, useId, useState } from "react";
 import {
   type CalendarDate,
   type DateValue,
@@ -19,6 +19,7 @@ import type {
   AnyDateRangeFilter,
   DateRangeFilterValue,
 } from "@/components/List/model/filter/types";
+import { resolveDateRangeFilterValue } from "@/components/List/model/filter/resolveDateRangeFilterValue";
 import styles from "./DateTimeRangeFields.module.scss";
 
 interface Props {
@@ -53,11 +54,13 @@ const toBound = (date: CalendarDate | null, time: Time | null) =>
 const isSameBound = (a?: DateValue, b?: DateValue) =>
   a?.toString() === b?.toString();
 
-const earliest = (a: CalendarDate | null, b: CalendarDate | null) =>
-  !a || (b && b.compare(a) < 0) ? b : a;
-
-const latest = (a: CalendarDate | null, b: CalendarDate | null) =>
-  !a || (b && b.compare(a) > 0) ? b : a;
+const isEndBeforeStart = (fields: Fields) => {
+  const { start, end } = resolveDateRangeFilterValue({
+    start: toBound(fields.startDate, fields.startTime),
+    end: toBound(fields.endDate, fields.endTime),
+  });
+  return !!start && !!end && end < start;
+};
 
 export const DateTimeRangeFields: FC<Props> = (props) => {
   const { filter, className } = props;
@@ -73,9 +76,32 @@ export const DateTimeRangeFields: FC<Props> = (props) => {
     setFields(fieldsFromValue(value));
   }
 
+  const options = filter.dateTimeRangeOptions;
+  const minValue = toDate(options?.minValue);
+  const maxValue = toDate(options?.maxValue);
+
+  // react-aria reports a typed year digit by digit (2, 20, 202, 2026)
+  const isDateValid = (date: CalendarDate | null) =>
+    !date ||
+    !(
+      date.year < 1000 ||
+      (minValue && date.compare(minValue) < 0) ||
+      (maxValue && date.compare(maxValue) > 0) ||
+      options?.isDateUnavailable?.(date)
+    );
+
   const update = (change: Partial<Fields>) => {
     const next = { ...fields, ...change };
     setFields(next);
+
+    // An invalid range keeps the last valid one applied
+    if (
+      !isDateValid(next.startDate) ||
+      !isDateValid(next.endDate) ||
+      isEndBeforeStart(next)
+    ) {
+      return;
+    }
 
     const start = toBound(next.startDate, next.startTime);
     const end = toBound(next.endDate, next.endTime);
@@ -97,17 +123,9 @@ export const DateTimeRangeFields: FC<Props> = (props) => {
     }
   };
 
-  const options = filter.dateTimeRangeOptions;
-  const minValue = toDate(options?.minValue);
-  const maxValue = toDate(options?.maxValue);
-
-  const isEndTimeBeforeStartTime =
-    !!fields.startDate &&
-    !!fields.endDate &&
-    fields.startDate.compare(fields.endDate) === 0 &&
-    !!fields.startTime &&
-    !!fields.endTime &&
-    fields.endTime.compare(fields.startTime) < 0;
+  const rangeErrorId = useId();
+  const hasRangeError = isEndBeforeStart(fields);
+  const describedBy = hasRangeError ? rangeErrorId : undefined;
 
   return (
     <DivView className={clsx(styles.dateTimeRangeFields, className)}>
@@ -115,16 +133,19 @@ export const DateTimeRangeFields: FC<Props> = (props) => {
         value={fields.startDate}
         onChange={(date) => update({ startDate: toDate(date) })}
         minValue={minValue}
-        maxValue={earliest(maxValue, fields.endDate)}
+        maxValue={maxValue}
+        aria-describedby={describedBy}
         isDateUnavailable={options?.isDateUnavailable}
       >
         <LabelView optional={false}>
           {stringFormatter.format("dateRange.startDate")}
         </LabelView>
+        <FieldErrorView />
       </DatePickerView>
       <TimeFieldView
         value={fields.startTime}
         onChange={(time) => update({ startTime: toTime(time) })}
+        aria-describedby={describedBy}
       >
         <LabelView optional={false}>
           {stringFormatter.format("dateRange.startTime")}
@@ -133,26 +154,30 @@ export const DateTimeRangeFields: FC<Props> = (props) => {
       <DatePickerView
         value={fields.endDate}
         onChange={(date) => update({ endDate: toDate(date) })}
-        minValue={latest(minValue, fields.startDate)}
+        minValue={minValue}
         maxValue={maxValue}
+        aria-describedby={describedBy}
         isDateUnavailable={options?.isDateUnavailable}
       >
         <LabelView optional={false}>
           {stringFormatter.format("dateRange.endDate")}
         </LabelView>
+        <FieldErrorView />
       </DatePickerView>
       <TimeFieldView
         value={fields.endTime}
         onChange={(time) => update({ endTime: toTime(time) })}
-        isInvalid={isEndTimeBeforeStartTime}
+        aria-describedby={describedBy}
       >
         <LabelView optional={false}>
           {stringFormatter.format("dateRange.endTime")}
         </LabelView>
-        <FieldErrorView>
-          {stringFormatter.format("dateRange.endTimeBeforeStartTime")}
-        </FieldErrorView>
       </TimeFieldView>
+      {hasRangeError && (
+        <FieldErrorView id={rangeErrorId} className={styles.rangeError}>
+          {stringFormatter.format("dateRange.endBeforeStart")}
+        </FieldErrorView>
+      )}
     </DivView>
   );
 };

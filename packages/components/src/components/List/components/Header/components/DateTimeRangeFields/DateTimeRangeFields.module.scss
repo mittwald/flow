@@ -1,10 +1,17 @@
 .dateTimeRangeFields {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  /* Fixed widths that fit the widest value or placeholder (en-US date, 24h
+     time), so typing does not resize the popover */
+  grid-template-columns: minmax(0, 9.25rem) minmax(0, 6.25rem);
   gap: var(--column-layout--gap--m);
 
   /* An error wraps instead of widening the popover */
   :global(.flow--field-error) {
     contain: inline-size;
   }
+}
+
+.rangeError {
+  grid-column: 1 / -1;
 }
