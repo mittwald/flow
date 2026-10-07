@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.28](https://github.com/mittwald/flow/compare/1.5.0-next.27...1.5.0-next.28) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **components:** flag hardcoded flow-- class names that nothing generates ([#3362](https://github.com/mittwald/flow/issues/3362)) ([ad7e7ac](https://github.com/mittwald/flow/commit/ad7e7ac6159ff6c3a9564da3b22f3de3c821d60a))
+
+## [1.4.22](https://github.com/mittwald/flow/compare/1.5.0-next.26...1.4.22) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.22 ([3590303](https://github.com/mittwald/flow/commit/35903034549bd872fa6fec6feb0c974ad813a79e))
+
 ## [1.5.0-next.27](https://github.com/mittwald/flow/compare/1.5.0-next.26...1.5.0-next.27) (2026-10-07)
 
 ### Bug Fixes
