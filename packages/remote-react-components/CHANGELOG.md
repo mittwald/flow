@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.26](https://github.com/mittwald/flow/compare/1.5.0-next.25...1.5.0-next.26) (2026-10-07)
+
+### Features
+
+* **CodeEditor:** support isDisabled ([fa93228](https://github.com/mittwald/flow/commit/fa9322889f14ca9c52bb8cddc1ac0c252e64199f))
+
 ## [1.5.0-next.25](https://github.com/mittwald/flow/compare/1.5.0-next.24...1.5.0-next.25) (2026-10-07)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
