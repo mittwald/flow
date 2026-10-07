@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.27](https://github.com/mittwald/flow/compare/1.5.0-next.26...1.5.0-next.27) (2026-10-07)
+
+### Bug Fixes
+
+* **Overlay:** keep typed dates when react-aria appends a hidden node to body ([#3395](https://github.com/mittwald/flow/issues/3395)) ([26403a0](https://github.com/mittwald/flow/commit/26403a00d04ddf10715dca84340e39af8d7f6d83))
+
+## [1.4.21](https://github.com/mittwald/flow/compare/1.5.0-next.24...1.4.21) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.21 ([6c20623](https://github.com/mittwald/flow/commit/6c20623b0684a1c0488c662ecc0322e3cbdf0d08))
+
 ## [1.5.0-next.26](https://github.com/mittwald/flow/compare/1.5.0-next.25...1.5.0-next.26) (2026-10-07)
 
 ### Features
