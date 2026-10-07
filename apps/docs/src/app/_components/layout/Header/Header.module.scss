@@ -1,10 +1,8 @@
+@use "../../../_lib/brand" as *;
+
 .header {
   backdrop-filter: blur(5px);
-  background-color: color-mix(
-    in srgb,
-    var(--neutral--color--200) 40%,
-    transparent
-  );
+  background-color: color-mix(in srgb, $neutral-base 60%, transparent);
   position: sticky;
   top: 0;
 
@@ -63,14 +61,7 @@
 @media (prefers-contrast: more), (prefers-reduced-transparency) {
   .header {
     backdrop-filter: none;
-    background-color: var(--neutral--color--200);
-  }
-}
-
-/* Matches the dark background gradient's first stop, not the neutral token. */
-[data-theme="dark"] {
-  .header {
-    background-color: color-mix(in srgb, #121518 40%, transparent);
+    background-color: $neutral-base;
   }
 }
 

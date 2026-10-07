@@ -1,0 +1,88 @@
+@use "../../../_lib/brand" as *;
+
+.stage {
+  @include dark-stage($tile-radius);
+  @include dark-stage-edge;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--size-px--l);
+  min-height: 320px;
+  padding: var(--size-px--xxl) var(--size-px--xl) var(--size-px--xl);
+
+  // The visual sits on the right; the copy on the left stays on black.
+  background-image:
+    linear-gradient(to right, $stage-black 40%, rgb(6 5 10 / 25%) 85%),
+    var(--visual, none);
+  background-size:
+    100% 100%,
+    auto 180%;
+  background-position:
+    0 0,
+    right 45%;
+  background-repeat: no-repeat;
+
+  // The square visual (180 % of the stage's height) ends inside the stage.
+  // This covers exactly the visual and fades its left edge into the black.
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    z-index: -1;
+    max-inline-size: 100%;
+    aspect-ratio: 9 / 5;
+    background: linear-gradient(to right, $stage-black, rgb(6 5 10 / 0%) 25%);
+    pointer-events: none;
+  }
+}
+
+.stageContent {
+  flex: 1 1 auto;
+  max-width: 760px;
+  align-self: flex-end;
+}
+
+.eyebrow {
+  color: #fff;
+  font-weight: var(--font-weight--bold);
+}
+
+.title {
+  @include brand-title(2.5rem, "1.5rem + 3vw", 4.5rem);
+
+  text-wrap: balance;
+}
+
+.description {
+  color: $on-dark-muted;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  text-wrap: pretty;
+}
+
+.actions {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .stage {
+    flex-direction: column-reverse;
+    min-height: 0;
+    padding: var(--size-px--xl) var(--size-px--l) var(--size-px--l);
+    background-size:
+      100% 100%,
+      auto 120%;
+    background-image:
+      linear-gradient(to top, $stage-black 40%, rgb(6 5 10 / 40%) 100%),
+      var(--visual, none);
+
+    &::after {
+      aspect-ratio: 6 / 5;
+    }
+  }
+
+  .stageContent {
+    align-self: stretch;
+  }
+}
