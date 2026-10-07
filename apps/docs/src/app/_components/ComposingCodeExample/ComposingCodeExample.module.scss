@@ -27,19 +27,27 @@
     // until a Flow component arranges them.
     align-items: flex-start;
     justify-content: flex-start;
+
+    // A finished IllustratedMessage centers itself across the pane.
+    > :global(.flow--illustrated-message) {
+      align-self: stretch;
+    }
   }
 
   // The example always sits under the copy, so it has the whole card width to
   // work with. From the column layout's l breakpoint up that is enough for two
   // panes side by side, which halves the height of the tile and gives the code
   // enough room to show its longest line.
-  @container (min-width: 850px) {
-    flex-direction: row;
-    overflow: hidden;
-
+  // From 550px of card width the tallest example wraps to at most 310px.
+  @container (min-width: 550px) {
     .preview {
       min-height: 19.5rem;
     }
+  }
+
+  @container (min-width: 850px) {
+    flex-direction: row;
+    overflow: hidden;
 
     .preview,
     .editorContainer {

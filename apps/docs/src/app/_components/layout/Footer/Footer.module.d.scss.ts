@@ -3,6 +3,7 @@ declare const classNames: {
   readonly footerContent: "footerContent";
   readonly legal: "legal";
   readonly resources: "resources";
+  readonly muted: "muted";
   readonly mittwaldLogo: "mittwaldLogo";
 };
 export default classNames;
