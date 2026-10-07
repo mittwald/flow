@@ -50,3 +50,29 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
     await testScreenshot("CodeEditor");
   },
 );
+
+// isDisabled ships on the next line. Which 1.5.0-next.N carries it first is
+// not known yet, so the gate starts at 1.5.0.
+test.skipIf(crossVersion({ below: "1.5.0" })).each(testEnvironments)(
+  "CodeEditor disabled (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { CodeEditor, Label, FieldDescription },
+  }) => {
+    await render(
+      <CodeEditor
+        isDisabled
+        language="json"
+        value={`{
+    "disabled": true
+}`}
+      >
+        <Label>Disabled</Label>
+        <FieldDescription>FieldDescription</FieldDescription>
+      </CodeEditor>,
+    );
+
+    await testScreenshot("CodeEditor disabled");
+  },
+);

@@ -58,6 +58,21 @@ test("CodeEditor is marked and styled as invalid", async () => {
   expect(editor.closest("[data-invalid]")).not.toBeNull();
 });
 
+test("CodeEditor can be disabled", async () => {
+  const dom = await render(
+    <CodeEditor value="const jedi = true;" isDisabled>
+      <Label>Source code</Label>
+    </CodeEditor>,
+  );
+
+  const editor = dom.getByRole("textbox").element();
+
+  expect(editor).toHaveAttribute("aria-disabled", "true");
+  expect(editor).toHaveAttribute("contenteditable", "false");
+  expect(editor.closest("[data-disabled]")).not.toBeNull();
+  await expect.element(dom.getByRole("button")).toBeDisabled();
+});
+
 /*
  * Label and description are optional and tunnelled out of the editor. It
  * references them only while they are rendered – a dangling id fails HTML
