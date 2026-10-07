@@ -1,4 +1,5 @@
 import { isReactSuspendedStyle, isStyleProp } from "@/lib/propClassifiers";
+import { withoutEmptyChildren } from "@/lib/withoutEmptyChildren";
 import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
 import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
@@ -41,7 +42,7 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
       }
     }
 
-    return <Component {...(restProps as P)} />;
+    return <Component {...withoutEmptyChildren(restProps as P)} />;
   }
   HostComponent.displayName = `FlowRemoteRenderer(${name})`;
   return createRemoteComponentRenderer(HostComponent, {
