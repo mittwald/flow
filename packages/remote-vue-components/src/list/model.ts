@@ -59,16 +59,49 @@ const isSameData = <T>(
  */
 const setupSignature = (value: unknown): string => String(hash(value));
 
-const withoutFunctions = (value: unknown): unknown =>
-  Array.isArray(value)
-    ? value.map(withoutFunctions)
-    : typeof value === "object" && value !== null
-      ? Object.fromEntries(
-          Object.entries(value)
-            .filter(([, entry]) => typeof entry !== "function")
-            .map(([key, entry]) => [key, withoutFunctions(entry)]),
-        )
-      : value;
+const isPlainObject = (value: unknown): value is Record<string, unknown> => {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const prototype: unknown = Object.getPrototypeOf(value);
+  return prototype === Object.prototype || prototype === null;
+};
+
+/*
+ * Walks plain objects and arrays only. Anything else — a `Date`, a `Map`, a
+ * class instance — goes to `hash` as it is, which reads it the way React's
+ * loader does. A cycle is copied as a cycle, which `hash` detects.
+ */
+const withoutFunctions = (
+  value: unknown,
+  copies = new Map<object, unknown>(),
+): unknown => {
+  if (!Array.isArray(value) && !isPlainObject(value)) {
+    return value;
+  }
+  const existing = copies.get(value);
+  if (existing !== undefined) {
+    return existing;
+  }
+
+  if (Array.isArray(value)) {
+    const copy: unknown[] = [];
+    copies.set(value, copy);
+    for (const entry of value) {
+      copy.push(withoutFunctions(entry, copies));
+    }
+    return copy;
+  }
+
+  const copy: Record<string, unknown> = {};
+  copies.set(value, copy);
+  for (const [key, entry] of Object.entries(value)) {
+    if (typeof entry !== "function") {
+      copy[key] = withoutFunctions(entry, copies);
+    }
+  }
+  return copy;
+};
 
 /** The parts of the shape a render can change after the list was built. */
 export type ListSetupShape<T> = Pick<
