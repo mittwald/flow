@@ -71,7 +71,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <AlertBadge status="warning">Zertifikat läuft ab</AlertBadge>
           </Flex>
           <ColumnLayout m={[1, 1, 1]}>
-            <Image alt="Vorschau" src={gopher} />
+            <Image alt="Vorschau" src={gopher} aspectRatio={1} />
             <Flex gap="m" align="center">
               <Image alt="Vorschau" src={gopher} width={160} height={90} />
               <Image
