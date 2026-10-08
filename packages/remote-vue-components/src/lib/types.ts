@@ -1,5 +1,6 @@
 import type { RemoteElement } from "@mittwald/flow-remote-core";
 import type { Slot, VNodeProps } from "vue";
+import type { defaultModelProperties, modelEventAliases } from "@/lib/vModel";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyRecord = Record<string, any>;
@@ -26,42 +27,71 @@ export type RemoteVueProps<Props, SlotName extends string> = Partial<
   };
 
 /**
- * The props `v-model` can bind: those Flow makes controllable, which it spells
- * with a `default*` sibling — `value`/`defaultValue`, `isOpen`/`defaultOpen`.
- * The runtime rule is in `src/lib/vModel.ts`.
+ * The props `v-model` can bind — the rule `src/lib/vModel.ts` applies at
+ * runtime, over the props type. A prop is controllable, which Flow spells with
+ * a `default*` sibling (`value`/`defaultValue`, `isOpen`/`defaultOpen` or
+ * `isDefaultOpen`), and the component has the event reporting it (`onChange`,
+ * `onOpenChange`, …).
  */
-type ControllableKey<Props> = {
-  [K in keyof Props & string]: `default${Capitalize<K>}` extends keyof Props
-    ? K
-    : K extends `is${infer Flag}`
-      ? `default${Flag}` extends keyof Props
-        ? K
-        : never
-      : never;
+type ModelKey<Props> = {
+  [K in keyof Props & string]: [
+    Extract<DefaultSibling<K>, keyof Props>,
+  ] extends [never]
+    ? never
+    : [Extract<`on${Capitalize<ModelEvent<K>>}`, keyof Props>] extends [never]
+      ? never
+      : K;
 }[keyof Props & string];
 
+/** `isOpen` → `Open`; nothing for a key that is not `is<Upper>…`. */
+type Flag<K extends string> = K extends `is${infer Rest}`
+  ? Rest extends Uncapitalize<Rest>
+    ? never
+    : Rest
+  : never;
+
+type DefaultSibling<K extends string> =
+  `default${Capitalize<K>}` | `default${Flag<K>}` | `isDefault${Flag<K>}`;
+
+/** `isOpen` → `open`, `inputValue` → `input`, `selectedKeys` → `selected`. */
+type ModelBase<K extends string> = Uncapitalize<
+  WithoutValueSuffix<[Flag<K>] extends [never] ? K : Flag<K>>
+>;
+
+type WithoutValueSuffix<K extends string> = K extends "value"
+  ? ""
+  : K extends `${infer Base}Value`
+    ? Base
+    : K extends `${infer Base}Keys`
+      ? Base
+      : K extends `${infer Base}Key`
+        ? Base
+        : K;
+
+type ModelEvent<K extends string> =
+  | (ModelBase<K> extends "" ? never : `${ModelBase<K>}Change`)
+  | (ModelBase<K> extends keyof typeof modelEventAliases
+      ? (typeof modelEventAliases)[ModelBase<K>][number]
+      : never);
+
 /** What a bare `v-model` binds: the first of these the component has. */
-type DefaultModelKey<Props> =
-  Extract<
-    ControllableKey<Props>,
-    "value" | "isSelected" | "selectedKey" | "selectedKeys"
-  > extends infer Candidates
-    ? "value" extends Candidates
-      ? "value"
-      : "isSelected" extends Candidates
-        ? "isSelected"
-        : "selectedKey" extends Candidates
-          ? "selectedKey"
-          : "selectedKeys" extends Candidates
-            ? "selectedKeys"
-            : never
-    : never;
+type DefaultModelKey<
+  Props,
+  Candidates extends readonly string[] = typeof defaultModelProperties,
+> = Candidates extends readonly [
+  infer Head extends string,
+  ...infer Rest extends readonly string[],
+]
+  ? Head extends ModelKey<Props>
+    ? Head
+    : DefaultModelKey<Props, Rest>
+  : never;
 
 /* What the element reports is the new value itself, never `undefined`. */
 type Reported<Value> = Exclude<Value, undefined>;
 
 type ModelProps<Props> = {
-  [K in ControllableKey<Props> as `onUpdate:${K}`]?: (
+  [K in ModelKey<Props> as `onUpdate:${K}`]?: (
     value: Reported<Props[K]>,
   ) => void;
 } & ([DefaultModelKey<Props>] extends [never]

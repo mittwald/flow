@@ -12,8 +12,10 @@ import { hyphenate } from "@/lib/propKeys";
  * `openChange`, `selectedKey` and `selectionChange`.
  *
  * A prop can be bound when it is controllable, which Flow — like react-aria —
- * spells as a `default*` sibling (`defaultValue`, `defaultOpen` for `isOpen`),
- * and when the element has the event that reports it.
+ * spells as a `default*` sibling (`defaultValue`, `defaultOpen` or
+ * `isDefaultOpen` for `isOpen`), and when the element has the event that
+ * reports it. `ModelKey` in `src/lib/types.ts` is the same rule over the props
+ * type.
  */
 export interface ModelBinding {
   property: string;
@@ -21,12 +23,22 @@ export interface ModelBinding {
 }
 
 /** Tried in order for a bare `v-model`: the first the element has wins. */
-const defaultModelProperties = [
+export const defaultModelProperties = [
   "value",
   "isSelected",
   "selectedKey",
   "selectedKeys",
-];
+] as const;
+
+/**
+ * Events a prop reports through besides `<base>Change`, by base name — the prop
+ * without `is`, and without a trailing `Value`/`Key`/`Keys`.
+ */
+export const modelEventAliases = {
+  "": ["change"],
+  selected: ["selectionChange", "change"],
+  focused: ["focusChange"],
+} as const satisfies Record<string, readonly string[]>;
 
 const capitalize = (value: string): string =>
   value.charAt(0).toUpperCase() + value.slice(1);
@@ -44,14 +56,16 @@ const isControllable = (
   const [, flag] = /^is([A-Z].*)$/.exec(property) ?? [];
   return (
     properties.has(`default${capitalize(property)}`) ||
-    (flag !== undefined && properties.has(`default${flag}`))
+    (flag !== undefined &&
+      (properties.has(`default${flag}`) || properties.has(`isDefault${flag}`)))
   );
 };
 
 /**
  * The event that reports a prop: `isOpen` → `openChange`, `inputValue` →
  * `inputChange`, `expandedKeys` → `expandedChange`, `selectedKey` →
- * `selectionChange`. `value` and `isSelected` report through `change`.
+ * `selectionChange`, `focusedValue` → `focusChange`. `value` and `isSelected`
+ * report through `change`.
  */
 const eventCandidates = (property: string): string[] => {
   const base = uncapitalize(
@@ -59,12 +73,11 @@ const eventCandidates = (property: string): string[] => {
       .replace(/^is(?=[A-Z])/, "")
       .replace(/(^value|Value|Keys|Key)$/, ""),
   );
+  const aliases: readonly string[] = Object.hasOwn(modelEventAliases, base)
+    ? modelEventAliases[base as keyof typeof modelEventAliases]
+    : [];
 
-  return [
-    ...(base === "" ? [] : [`${base}Change`]),
-    ...(base === "selected" ? ["selectionChange", "change"] : []),
-    ...(base === "" ? ["change"] : []),
-  ];
+  return [...(base === "" ? [] : [`${base}Change`]), ...aliases];
 };
 
 export const createModelResolver = (

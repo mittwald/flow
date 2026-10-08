@@ -31,12 +31,35 @@ describe("createModelResolver", () => {
       ["expandedChange"],
       "expandedChange",
     ],
+    /* CoachMark: `isDefaultOpen` is its only default sibling. */
+    ["isOpen", ["isOpen", "isDefaultOpen"], ["openChange"], "openChange"],
+    [
+      "focusedValue",
+      ["focusedValue", "defaultFocusedValue"],
+      ["focusChange"],
+      "focusChange",
+    ],
   ])("v-model:%s reports through the element's event", (arg, p, e, event) => {
     expect(element(p, e).resolve(arg)?.event).toBe(event);
   });
 
   test("a prop without a default sibling is not controllable", () => {
     expect(element(["label"], ["change"]).resolve("label")).toBeUndefined();
+  });
+
+  test("an isDefault sibling makes only its own flag controllable", () => {
+    expect(
+      element(["isOpen", "isDefaultExpanded"], ["openChange"]).resolve(
+        "isOpen",
+      ),
+    ).toBeUndefined();
+  });
+
+  test.each([
+    ["items", ["items", "defaultItems"], ["change", "inputChange"]],
+    ["width", ["width", "defaultWidth"], ["resize"]],
+  ])("v-model:%s binds nothing without its event", (arg, p, e) => {
+    expect(element(p, e).resolve(arg)).toBeUndefined();
   });
 
   test("a prop whose change the element does not report is not bound", () => {

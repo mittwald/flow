@@ -63,12 +63,13 @@ type straight from the remote element class, which takes it from the React
 component. So `Button` in Vue accepts exactly what `Button` accepts in React,
 minus what cannot cross the boundary.
 
-`v-model` binds any prop Flow makes controllable — the ones with a `default*`
-sibling — to the event that reports it: `value` and `isSelected` to `change`,
-`isOpen` to `openChange`, `selectedKey` to `selectionChange`. A bare `v-model`
-takes the first of `value`, `isSelected`, `selectedKey` the component has, and
-`.trim` / `.number` work. A `v-model` with nothing to bind warns. It is the
-generated components that take it; `Modal` and the other rebuilt overlays take a
+`v-model` binds any prop Flow makes controllable — the ones with a `default*` or
+`isDefault*` sibling — to the event that reports it: `value` and `isSelected` to
+`change`, `isOpen` to `openChange`, `selectedKey` to `selectionChange`,
+`focusedValue` to `focusChange`. A bare `v-model` takes the first of `value`,
+`isSelected`, `selectedKey`, `selectedKeys` the component has, and `.trim` /
+`.number` work. A `v-model` with nothing to bind warns. It is the generated
+components that take it; `Modal` and the other rebuilt overlays take a
 `controller` instead.
 
 An array or object changed in place — `points.value.push(point)` — reaches the
