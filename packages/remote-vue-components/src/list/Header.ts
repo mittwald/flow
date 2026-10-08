@@ -292,7 +292,8 @@ const renderFilterMenu = (
 };
 
 /**
- * The list's controls: layout, sorting, filters, search.
+ * The list's controls: layout, sorting, filters, search — plus the app's own
+ * `ActionGroup`, which the `List` hands over as the `actions` slot.
  *
  * Each one is a remote element the host materialises — a context menu trigger
  * with a button and a menu — and what they act on is the shared model, so a
@@ -301,7 +302,7 @@ const renderFilterMenu = (
 export const Header = defineComponent({
   name: "ListHeader",
 
-  setup() {
+  setup(_props, { slots }) {
     const list = injectListModel();
     const texts = useListTexts();
 
@@ -390,10 +391,12 @@ export const Header = defineComponent({
       const isDisabled = isInitiallyLoading.value || noItemsAvailable;
       const modes = availableViewModes(renderShape.value);
 
+      const actions = slots.actions?.();
+
       /*
        * The header is rendered even with nothing in it, because Flow's is: it
-       * holds the tunnel exit an app's own `ActionGroup` lands in, and a list
-       * that gained one would otherwise change the DOM around it.
+       * holds the app's own `ActionGroup`, and a list that gained one would
+       * otherwise change the DOM around it.
        *
        * Asked of the model rather than of what the options rendered — the
        * all-filters modal decides for itself whether it has anything to show.
@@ -420,7 +423,7 @@ export const Header = defineComponent({
            * the element rather than by setting it: a `className` that goes from
            * set to undefined never reaches the host, so the previous one stays.
            */
-          () => h(Div, { class: listStyles.headerContent }),
+          () => h(Div, { class: listStyles.headerContent }, () => actions),
         );
       }
 
@@ -477,11 +480,12 @@ export const Header = defineComponent({
             .join(" "),
         },
         () => [
-          h(Div, { class: listStyles.headerContent }, () =>
+          h(Div, { class: listStyles.headerContent }, () => [
+            actions,
             hasOptions
               ? h(Div, { class: listStyles.headerOptions }, () => options)
               : null,
-          ),
+          ]),
           h(ActiveFilters, { isDisabled }),
         ],
       );

@@ -1,4 +1,10 @@
-import { Div, ListEmptyViewContainer } from "@/auto-generated";
+import {
+  ActionGroup,
+  Button,
+  Div,
+  ListEmptyViewContainer,
+  ListSummary,
+} from "@/auto-generated";
 import { watchMobxValue } from "@/lib/mobxSelector";
 import type { AnyRecord } from "@/lib/types";
 import {
@@ -9,6 +15,7 @@ import {
   onMounted,
   watch,
   type PropType,
+  type VNode,
   type VNodeChild,
 } from "vue";
 import { ListComposableBatchLoader } from "./ComposableLoader";
@@ -22,6 +29,7 @@ import { useListSettings } from "./settings";
 import {
   findSetup,
   findSetups,
+  isListSetupComponent,
   ListFilter,
   ListItem,
   ListLoaderAsync,
@@ -40,6 +48,48 @@ import { className, listStyles } from "./styles";
 import type { VueListShape } from "./types";
 import { composition } from "@/lib/composition";
 import { useComponentUsage } from "@/composables/useComponentUsage";
+import {
+  flattenChildren,
+  mapSlottedChildren,
+  withContextProps,
+} from "@/overlays/childProps";
+
+/**
+ * Where the children that are not setup elements go — Flow's props context for
+ * the `List`: an `ActionGroup` into the header, a `ListSummary` above the
+ * items, anything else where it was written.
+ */
+const arrangeChildren = (children: unknown) => {
+  const actions: VNode[] = [];
+  const summary: VNode[] = [];
+  const rest: VNode[] = [];
+
+  for (const child of flattenChildren(children)) {
+    if (isListSetupComponent(child.type)) {
+      continue;
+    }
+    if (child.type === ActionGroup) {
+      actions.push(
+        mapSlottedChildren(
+          withContextProps(child, {
+            preserveOrder: true,
+            class: listStyles.headerActions,
+          }),
+          (action) =>
+            action.type === Button
+              ? { class: listStyles.headerAction }
+              : undefined,
+        ),
+      );
+    } else if (child.type === ListSummary) {
+      summary.push(child);
+    } else {
+      rest.push(child);
+    }
+  }
+
+  return { actions, summary, rest };
+};
 
 /**
  * Reads the list's configuration off the elements inside it.
@@ -335,6 +385,7 @@ export const List = defineComponent({
     return () => {
       const children = slots.default?.();
       const shape = readShape(children, { ...props, ...attrs });
+      const { actions, summary, rest } = arrangeChildren(children);
 
       /* The children are the API, so a changed child has to reach the model. */
       list.setRenderShape(shape);
@@ -379,10 +430,11 @@ export const List = defineComponent({
           ...composableBatches.value.map((index) =>
             h(ListComposableBatchLoader, { key: index, batchIndex: index }),
           ),
-          h(Header),
+          ...rest,
+          h(Header, null, { actions: () => actions }),
           h(Div, { class: listStyles.listWrapper }, () => [
             emptyView,
-            hasItems.value && slots.summary ? slots.summary() : null,
+            ...(hasItems.value ? [...summary, slots.summary?.()] : []),
             isTable.value ? h(ListTableView) : h(Items),
           ]),
           props.hidePagination ? null : h(Footer),

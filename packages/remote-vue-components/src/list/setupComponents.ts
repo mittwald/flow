@@ -43,6 +43,10 @@ const setupComponent = (
   return component;
 };
 
+/** Whether a child of the list configures it rather than rendering. */
+export const isListSetupComponent = (type: unknown): boolean =>
+  typeof type === "function" && booleanPropsOf.has(type as Component);
+
 const loaderFlags = ["manualPagination", "manualFiltering", "manualSorting"];
 
 export const ListStaticData = setupComponent("ListStaticData");

@@ -1,5 +1,6 @@
 import { testParity, type ParityScenario } from "./harness";
 import {
+  ActionGroup as ReactActionGroup,
   Avatar as ReactAvatar,
   Button as ReactButton,
   Content as ReactContent,
@@ -13,6 +14,7 @@ import {
   typedList,
 } from "@mittwald/flow-remote-react-components";
 import {
+  ActionGroup,
   Avatar,
   Button,
   Content,
@@ -692,6 +694,81 @@ const scenarios: ParityScenario[] = [
         ),
     },
   },
+
+  {
+    /* React's way of writing it: the summary is a child, not a slot. */
+    name: "a list summary written as a child",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew} />
+          {reactItem}
+          <ReactListSummary>
+            <ReactText>Three aboard</ReactText>
+          </ReactListSummary>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew }),
+          vueItem(),
+          h(ListSummary, null, () => h(Text, null, () => "Three aboard")),
+        ]),
+    },
+  },
+
+  {
+    /*
+     * An `ActionGroup` goes into the header, configured as Flow's props
+     * context configures it; any other child stays where it was written.
+     */
+    name: "an action group in the header, and a child in place",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew} />
+          {reactItem}
+          <ReactText>Sulaco manifest</ReactText>
+          <ReactActionGroup>
+            <ReactButton>Add crew</ReactButton>
+            <ReactButton>Export</ReactButton>
+          </ReactActionGroup>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew }),
+          vueItem(),
+          h(Text, null, () => "Sulaco manifest"),
+          h(ActionGroup, null, () => [
+            h(Button, null, () => "Add crew"),
+            h(Button, null, () => "Export"),
+          ]),
+        ]),
+    },
+  },
+
+  {
+    /* Hidden, not dropped, while there is nothing to list. */
+    name: "an action group in the header of an empty list",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={[]} />
+          {reactItem}
+          <ReactActionGroup>
+            <ReactButton>Add crew</ReactButton>
+          </ReactActionGroup>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: [] }),
+          vueItem(),
+          h(ActionGroup, null, () => h(Button, null, () => "Add crew")),
+        ]),
+    },
+  },
 ];
 
 /*
@@ -708,6 +785,8 @@ const coverage = [
   "flow--list--header--active-filters",
   "flow--list--header--hide-visually-actions",
   "flow--list--header--search-field",
+  "flow--list--header--actions",
+  "flow--list--header--action",
   "flow--list--list-wrapper",
   "flow--list--hide-visually-empty-view",
   "flow--list--items",

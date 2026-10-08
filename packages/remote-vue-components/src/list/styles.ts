@@ -19,6 +19,8 @@ export const listStyles = {
   headerContent: "flow--list--header--header-content",
   headerOptions: "flow--list--header--options",
   headerWithSearch: "flow--list--header--with-search",
+  headerActions: "flow--list--header--actions",
+  headerAction: "flow--list--header--action",
   hideOnMobile: "flow--list--header--hide-on-mobile",
   hideOnDesktop: "flow--list--header--hide-on-desktop",
   activeFilters: "flow--list--header--active-filters",
