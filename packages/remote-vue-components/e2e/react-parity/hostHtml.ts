@@ -79,23 +79,14 @@ const createIdRewriter = () => {
  *
  * - `--animation-delay` on a loading spinner is taken from the clock, so that
  *   every spinner on a page turns in step.
- * - CodeMirror draws its caret from a measurement it takes in a frame of its own,
- *   before or after the editor font has loaded. The same corpus gave the caret
- *   17.23px in a full React pass and 16px in a React pass of only the code
- *   scenarios — history, not binding.
  *
- * Measured positions elsewhere stay compared on evidence: react-aria's overlay
- * placement, the modal's viewport variables, the tab indicator and recharts'
- * geometry came out identical to the sub-pixel in two React passes and the Vue
- * one. They are also where a dropped `offset` or `placement` shows up, and
- * nowhere else.
+ * Measured positions stay compared on evidence: react-aria's overlay placement,
+ * the modal's viewport variables, the tab indicator and recharts' geometry came
+ * out identical to the sub-pixel in two React passes and the Vue one. They are
+ * also where a dropped `offset` or `placement` shows up, and nowhere else.
  */
-const normalizedDeclarations = (element: Element, style: string): string => {
-  const isCodeMirrorCaret =
-    element.classList.contains("cm-cursor") ||
-    element.classList.contains("cm-selectionBackground");
-
-  return style
+const normalizedDeclarations = (style: string): string =>
+  style
     .split(";")
     .map((declaration) => {
       const separator = declaration.indexOf(":");
@@ -106,17 +97,10 @@ const normalizedDeclarations = (element: Element, style: string): string => {
       if (property === "--animation-delay") {
         return ` ${property}: ‹clock›`;
       }
-      if (
-        isCodeMirrorCaret &&
-        ["left", "top", "width", "height"].includes(property)
-      ) {
-        return ` ${property}: ‹measured›`;
-      }
       return declaration;
     })
     .join(";")
     .trim();
-};
 
 export interface HostHtmlOptions {
   /**
@@ -149,7 +133,7 @@ export const hostHtml = (
 
     const style = element.getAttribute("style");
     if (style !== null) {
-      element.setAttribute("style", normalizedDeclarations(element, style));
+      element.setAttribute("style", normalizedDeclarations(style));
     }
 
     /*
