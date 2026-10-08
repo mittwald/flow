@@ -256,6 +256,46 @@ const scenarios: ParityScenario[] = [
   },
 
   {
+    /* The item view's `placement` is a default: the author's wins. */
+    name: "an item with a context menu the author placed",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew.slice(0, 1)} />
+          <L.Item textValue={textValue}>
+            {(data) => (
+              <ReactListItemView>
+                <ReactHeading>{data.name}</ReactHeading>
+                <ReactContextMenu placement="bottom left">
+                  <ReactMenuItem>Show details</ReactMenuItem>
+                </ReactContextMenu>
+              </ReactListItemView>
+            )}
+          </L.Item>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew.slice(0, 1) }),
+          h(
+            ListItem,
+            { textValue },
+            {
+              default: ({ data }: { data: Crew }) =>
+                h(ListItemView, null, () => [
+                  h(Heading, null, () => data.name),
+                  h(ContextMenu, { placement: "bottom left" }, () =>
+                    h(MenuItem, null, () => "Show details"),
+                  ),
+                ]),
+            },
+          ),
+        ]),
+    },
+    interact: openMenu("Options"),
+  },
+
+  {
     /*
      * Selection belongs to the host's grid list — both bindings only hand the
      * props through, and the checkboxes it draws are the proof that they did.

@@ -122,7 +122,7 @@ export const ListItemView = defineComponent({
             },
             () => h(IconContextMenu),
           ),
-          cloneVNode(node, { placement: "bottom right" }),
+          withContextProps(node, { placement: "bottom right" }),
         ]);
       }
       return node;
