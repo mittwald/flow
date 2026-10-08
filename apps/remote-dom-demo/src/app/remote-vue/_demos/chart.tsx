@@ -53,7 +53,7 @@ const chart = (chartData: Record<string, unknown>[]) => (
             value: unknown,
             name: unknown,
             _index: unknown,
-            unit?: string,
+            unit?: unknown,
           ) => {
             await sleep(3000);
             return `Async Format: ${name}: ${value}${unit ? ` ${unit}` : ""}`;
