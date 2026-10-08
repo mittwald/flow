@@ -9,6 +9,8 @@ import { inject, provide, type InjectionKey, type Ref } from "vue";
  * `ListItemView` injects it.
  */
 export interface ListItemAccordion {
+  /** Whether the list is in accordion mode, which can change at runtime. */
+  readonly isActive: Readonly<Ref<boolean>>;
   readonly isExpanded: Ref<boolean>;
   readonly contentId: string;
   toggle: () => void;
@@ -19,6 +21,6 @@ const key: InjectionKey<ListItemAccordion> = Symbol("flowListItemAccordion");
 export const provideItemAccordion = (accordion: ListItemAccordion): void =>
   provide(key, accordion);
 
-/** `undefined` unless the list is in accordion mode. */
+/** `undefined` outside a list item. */
 export const injectItemAccordion = (): ListItemAccordion | undefined =>
   inject(key, undefined);

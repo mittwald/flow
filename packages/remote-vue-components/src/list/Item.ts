@@ -1,6 +1,6 @@
 import { ItemsGridListItem } from "@/auto-generated";
 import { watchMobxValue } from "@/lib/mobxSelector";
-import { defineComponent, h, ref, useId, type PropType } from "vue";
+import { computed, defineComponent, h, ref, useId, type PropType } from "vue";
 import { provideItemAccordion } from "./itemContext";
 import { injectListModel } from "./listContext";
 import { composition } from "@/lib/composition";
@@ -35,9 +35,12 @@ export const ListItemRow = defineComponent({
       renderShape.value.onAction?.(props.data);
     };
 
-    if (renderShape.value.accordion) {
-      provideItemAccordion({ isExpanded, contentId, toggle });
-    }
+    provideItemAccordion({
+      isActive: computed(() => !!renderShape.value.accordion),
+      isExpanded,
+      contentId,
+      toggle,
+    });
 
     return () => {
       const { itemView, onAction, accordion } = renderShape.value;

@@ -204,7 +204,8 @@ export const ListItemView = defineComponent({
        * After the item's own buttons, wherever its content was written. An
        * item with nothing to expand gets no toggle.
        */
-      const toggle = accordion && routed.bottom ? accordion : undefined;
+      const toggle =
+        accordion?.isActive.value && routed.bottom ? accordion : undefined;
       if (toggle) {
         (routed.button ??= []).push(renderToggle(toggle));
 

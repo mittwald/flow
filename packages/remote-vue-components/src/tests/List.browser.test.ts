@@ -479,6 +479,45 @@ describe("Accordion items", () => {
 
     expect(document.activeElement).toBe(node);
   });
+
+  test("follows accordion mode switched at runtime", async () => {
+    const accordion = ref(false);
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(List, { "aria-label": "Crew", accordion: accordion.value }, () => [
+            h(ListStaticData, { data: crew }),
+            h(
+              ListItem,
+              { textValue: (data: Crew) => data.name },
+              {
+                default: ({ data }: { data: Crew }) =>
+                  h(ListItemView, null, () => [
+                    h(Heading, null, () => data.name),
+                    h(Content, { slot: "bottom" }, () =>
+                      h(Text, null, () => data.rank),
+                    ),
+                  ]),
+              },
+            ),
+          ]),
+      ),
+    );
+    const list = hostLocator(host);
+    const toggles = () =>
+      list.getByRole("button", { name: "Show more" }).elements().length;
+
+    await expect.element(list.getByText("Warrant Officer")).toBeVisible();
+    expect(toggles()).toBe(0);
+
+    accordion.value = true;
+    await expect.poll(toggles).toBe(3);
+    expect(list.getByText("Warrant Officer").query()).toBeNull();
+
+    accordion.value = false;
+    await expect.element(list.getByText("Warrant Officer")).toBeVisible();
+    expect(toggles()).toBe(0);
+  });
 });
 
 describe("The all-filters modal", () => {
