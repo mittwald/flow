@@ -385,6 +385,17 @@ describe("MarkdownEditor file upload", () => {
     return transfer;
   };
 
+  // Firefox replaces a `clipboardData` passed to the constructor with an empty
+  // one, so the transfer is set on the event itself.
+  const pasteEvent = (clipboardData: DataTransfer) => {
+    const event = new ClipboardEvent("paste", {
+      bubbles: true,
+      cancelable: true,
+    });
+    Object.defineProperty(event, "clipboardData", { value: clipboardData });
+    return event;
+  };
+
   /*
    * The toolbar's input is visually hidden, so it is set directly instead of
    * going through the OS file dialog a click would open.
@@ -514,23 +525,13 @@ describe("MarkdownEditor file upload", () => {
     const input = textArea();
     input.focus();
 
-    input.dispatchEvent(
-      new ClipboardEvent("paste", {
-        clipboardData: fileTransfer(imageFile()),
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
+    input.dispatchEvent(pasteEvent(fileTransfer(imageFile())));
 
     await expect
       .element(page.getByRole("textbox"))
       .toHaveValue("![cat.png](https://cdn.example/cat.png)\n");
 
-    const textPaste = new ClipboardEvent("paste", {
-      clipboardData: new DataTransfer(),
-      bubbles: true,
-      cancelable: true,
-    });
+    const textPaste = pasteEvent(new DataTransfer());
     input.dispatchEvent(textPaste);
 
     expect(textPaste.defaultPrevented).toBe(false);
@@ -548,13 +549,9 @@ describe("MarkdownEditor file upload", () => {
     );
 
     textArea().dispatchEvent(
-      new ClipboardEvent("paste", {
-        clipboardData: fileTransfer(
-          new File(["binary"], "notes.txt", { type: "text/plain" }),
-        ),
-        bubbles: true,
-        cancelable: true,
-      }),
+      pasteEvent(
+        fileTransfer(new File(["binary"], "notes.txt", { type: "text/plain" })),
+      ),
     );
 
     await expect.element(page.getByRole("textbox")).toHaveValue("");
