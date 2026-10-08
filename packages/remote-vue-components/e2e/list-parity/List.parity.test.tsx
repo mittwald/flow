@@ -1,5 +1,6 @@
 import { testParity, type ParityScenario } from "./harness";
 import {
+  Action as ReactAction,
   ActionGroup as ReactActionGroup,
   Avatar as ReactAvatar,
   Button as ReactButton,
@@ -20,6 +21,7 @@ import {
   typedList,
 } from "@mittwald/flow-remote-react-components";
 import {
+  Action,
   ActionGroup,
   Avatar,
   Button,
@@ -996,6 +998,57 @@ const scenarios: ParityScenario[] = [
           h(ActionGroup, null, () => [
             h(Button, null, () => "Add crew"),
             h(Button, null, () => "Export"),
+          ]),
+        ]),
+    },
+  },
+
+  {
+    /*
+     * The header's button class reaches through a trigger and an `Action`,
+     * not into the modal the trigger opens.
+     */
+    name: "a trigger and an action in the header's action group",
+    interact: async () => {
+      await userEvent.click(page.getByRole("button", { name: "Add crew" }));
+      await expect.element(page.getByRole("dialog")).toBeVisible();
+    },
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew} />
+          {reactItem}
+          <ReactActionGroup>
+            <ReactModalTrigger>
+              <ReactButton>Add crew</ReactButton>
+              <ReactModal>
+                <ReactHeading>New crew member</ReactHeading>
+                <ReactActionGroup>
+                  <ReactButton>Save</ReactButton>
+                </ReactActionGroup>
+              </ReactModal>
+            </ReactModalTrigger>
+            <ReactAction onAction={() => undefined}>
+              <ReactButton>Export</ReactButton>
+            </ReactAction>
+          </ReactActionGroup>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew }),
+          vueItem(),
+          h(ActionGroup, null, () => [
+            h(ModalTrigger, null, () => [
+              h(Button, null, () => "Add crew"),
+              h(Modal, null, () => [
+                h(Heading, null, () => "New crew member"),
+                h(ActionGroup, null, () => h(Button, null, () => "Save")),
+              ]),
+            ]),
+            h(Action, { onAction: () => undefined }, () =>
+              h(Button, null, () => "Export"),
+            ),
           ]),
         ]),
     },

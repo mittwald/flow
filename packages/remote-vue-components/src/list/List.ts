@@ -49,11 +49,37 @@ import type { VueListShape } from "./types";
 import { composition } from "@/lib/composition";
 import { useComponentUsage } from "@/composables/useComponentUsage";
 import {
+  applyChildRules,
   flattenChildren,
-  mapChildren,
   withContextProps,
   withSlotContent,
+  type ChildRules,
 } from "@/overlays/childProps";
+import { Action } from "@/components/Action";
+import {
+  LightBoxTrigger,
+  ModalTrigger,
+  PopoverTrigger,
+} from "@/overlays/triggers";
+
+/*
+ * Flow's `ActionGroup: { Button: … }` entry. It reaches a button through what
+ * passes a props context on — the overlay triggers and `Action` — but not into
+ * the `Modal` or `Popover` a trigger opens, which clear it.
+ */
+const passesContextOn = new Set<unknown>([
+  Action,
+  ModalTrigger,
+  PopoverTrigger,
+  LightBoxTrigger,
+]);
+
+const headerActionRules: ChildRules = (child) =>
+  child.type === Button
+    ? { props: { class: listStyles.headerAction } }
+    : passesContextOn.has(child.type)
+      ? { children: headerActionRules }
+      : undefined;
 
 /**
  * Where the children that are not setup elements go — Flow's props context for
@@ -76,12 +102,7 @@ const arrangeChildren = (children: unknown) => {
             preserveOrder: true,
             class: listStyles.headerActions,
           }),
-          (rendered) =>
-            mapChildren(rendered, (action) =>
-              action.type === Button
-                ? { class: listStyles.headerAction }
-                : undefined,
-            ),
+          (rendered) => applyChildRules(rendered, headerActionRules),
         ),
       );
     } else if (child.type === ListSummary) {

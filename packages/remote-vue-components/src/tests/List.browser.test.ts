@@ -1,4 +1,6 @@
 import {
+  ActionGroup,
+  Button,
   Content,
   Heading,
   List,
@@ -12,6 +14,8 @@ import {
   ListStaticData,
   ListTableCell,
   ListTableColumn,
+  Modal,
+  ModalTrigger,
   SettingsProvider,
   Text,
   useListMetadata,
@@ -1271,6 +1275,60 @@ describe("Following the app's state", () => {
       .element(list.getByText("Dwayne Hicks"))
       .not.toBeInTheDocument();
     await expect.element(list.getByText("Ellen Ripley")).toBeVisible();
+  });
+});
+
+describe("The header's action group", () => {
+  const renderWithModal = (data: { value: Crew[] }) => {
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(List, { "aria-label": "Crew" }, () => [
+            h(ListStaticData, { data: data.value }),
+            h(
+              ListItem,
+              { textValue: (row: Crew) => row.name },
+              {
+                default: ({ data: row }: { data: Crew }) =>
+                  h(ListItemView, null, () => h(Heading, null, () => row.name)),
+              },
+            ),
+            h(ActionGroup, null, () =>
+              h(ModalTrigger, null, () => [
+                h(Button, null, () => "Add crew"),
+                h(Modal, null, () => h(Heading, null, () => "New crew member")),
+              ]),
+            ),
+          ]),
+      ),
+    );
+    return hostLocator(host);
+  };
+
+  /* Flow's header keeps the same nesting in both branches for exactly this. */
+  test("keeps a modal open while the list turns empty", async () => {
+    const data = ref<Crew[]>([...crew]);
+    const list = renderWithModal(data);
+
+    await userEvent.click(list.getByRole("button", { name: "Add crew" }));
+    await expect.element(page.getByRole("dialog")).toBeVisible();
+
+    data.value = [];
+    await expect.element(list.getByText("No items available")).toBeVisible();
+
+    await expect.element(page.getByRole("dialog")).toBeVisible();
+  });
+
+  /*
+   * Flow's props context reaches the trigger's button through the trigger;
+   * the host styles a header action by this class.
+   */
+  test("marks a trigger's button as a header action", async () => {
+    const list = renderWithModal(ref([...crew]));
+
+    await expect
+      .element(list.getByRole("button", { name: "Add crew" }))
+      .toHaveClass("flow--list--header--action");
   });
 });
 
