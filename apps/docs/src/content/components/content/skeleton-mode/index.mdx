@@ -1,0 +1,55 @@
+---
+component: SkeletonMode
+description:
+  Der SkeletonMode stellt die echte Oberfläche als Skeleton dar, bis der Content
+  geladen ist.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Umschließe die finale Oberfläche mit dem SkeletonMode, statt eine eigene
+  Ladeansicht aus [Skeleton](/components/content/skeleton) und
+  [SkeletonText](/components/content/skeleton-text) nachzubauen. So entspricht
+  die Vorschau dem finalen Layout, und es entsteht kein Layout-Sprung.
+- Gib Platzhalter-Inhalt mit, wenn ein Balken eine bestimmte Breite haben soll.
+  Components mit Inhalt übernehmen dessen Breite, Components ohne Inhalt nutzen
+  eine Standardbreite.
+- Nimm bereits geladene Bereiche mit `isEnabled={false}` aus dem Skeleton
+  heraus.
+- Setze den SkeletonMode nur für das initiale, kurzzeitige Laden ein. Für andere
+  Lade- oder Feedbackprozesse eignet sich etwa der
+  [LoadingSpinner](/components/status/loading-spinner).
+- Verlass dich auf die eingebaute Ansage. Der SkeletonMode meldet Screenreadern
+  einmal „Inhalt wird geladen“ und nimmt die Platzhalter selbst aus dem
+  Accessibility Tree.
+- Schalte den SkeletonMode nicht ein, während der Fokus in seinem Inhalt liegt.
+  Der Fokus geht dabei verloren.
+
+---
+
+# Inhalt und Breite
+
+Components mit Inhalt werden zu einem Balken pro Zeile, in der Breite dieser
+Zeile. Components ohne Inhalt zeigen einen Balken in einer Standardbreite.
+
+<LiveCodeEditor example="width" editorCollapsed />
+
+---
+
+# Teilweise geladen
+
+Ein verschachtelter SkeletonMode mit `isEnabled={false}` stellt seinen Inhalt
+als echte Oberfläche dar – etwa eine Überschrift, die schon vor den Daten
+feststeht.
+
+<LiveCodeEditor example="partially-loaded" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />
