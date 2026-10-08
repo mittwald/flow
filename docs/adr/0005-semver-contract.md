@@ -19,9 +19,9 @@
 > this ADR records it.
 
 > **Amended 2026-10-08 by [ADR 0007](0007-beta-packages.md) (beta packages).** A
-> whole package may be beta: its own API is then exempt from §1, the way §5
-> exempts a beta component. The uniform contract below holds for every other
-> package.
+> whole package may be beta: its own API is then exempt from §1 and its peer
+> ranges from §3, the way §5 exempts a beta component. The uniform contract
+> below holds for every other package.
 
 ## Context
 
@@ -75,6 +75,11 @@ Fixed versioning (one version across all `@mittwald/flow-*` packages, per RFC
 ### 3. React peer range
 
 React is a genuine runtime peer in every package.
+
+> **Amended by [ADR 0007](0007-beta-packages.md).** Not in
+> `@mittwald/flow-remote-vue-components`: it peers on `vue`, and React reaches
+> it through its `@mittwald/flow-react-components` peer. While that package is
+> beta, its peer ranges are exempt from this section.
 
 - **Widening** the accepted range (e.g. `^19` → `^19 || ^20`) is
   **non-breaking** (Minor).

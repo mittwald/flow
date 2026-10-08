@@ -4,8 +4,8 @@
 - **Date:** 2026-10-08
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `@mittwald/flow-remote-vue-components` and any later framework
-  binding, `apps/docs` (the Versionierung page), a future breaking-change guard
-  (see [RFC #2711](https://github.com/mittwald/flow/issues/2711))
+  binding, `apps/docs` (the Versionierung page), the version-contract guard
+  (`.github/scripts/version-contract-lib.mjs`)
 
 > This ADR lets a **whole package** be beta. It amends
 > [ADR 0005](0005-semver-contract.md), whose contract applies uniformly to every
@@ -36,22 +36,31 @@ component in `packages/components`, read into the status registry.
 
 ### 1. A whole package may be beta
 
-A package is beta when its README opens with a beta notice. The same notice
-opens its `USAGE.md` and its `AGENTS.md`, and the docs site's Versionierung page
-names the package. Today this is `@mittwald/flow-remote-vue-components` alone.
+A package is beta when its `package.json` says `"flowStatus": "beta"`. That
+field is the one marker tooling reads. A beta notice opens the package's README,
+`USAGE.md` and `AGENTS.md`, and the docs site's Versionierung page names the
+package. Today this is `@mittwald/flow-remote-vue-components` alone.
 
 ### 2. What beta exempts
 
 **The package's own API is exempt from ADR 0005 §1**: its exports, the props,
-slots and events its components accept, how they map to the framework (`v-model`
-bindings, slot names), and its framework peer range (`vue`). A breaking change
-to any of these may ship in a Minor or Patch.
+slots and events its components accept, and how they map to the framework
+(`v-model` bindings, slot names). **Its peer ranges are exempt from ADR 0005
+§3**, the framework's (`vue`) among them. A breaking change to any of these may
+ship in a Minor or Patch.
 
 Such a change carries no breaking marker (`!`, `BREAKING CHANGE`): the marker
 routes a commit to the major line
 ([ADR 0004](0004-forward-merge-main-into-next.md)). It ships a migration note in
 the commit body and the release notes instead, as a deliberate type break does
 (ADR 0005 §4).
+
+It needs no entry in the migration catalogue
+([ADR 0006](0006-migration-catalogue.md)). The catalogue covers
+`@mittwald/flow-react-components` and `@mittwald/flow-remote-react-components`:
+its guide is the React package's `MIGRATION.md`, and its codemods parse TSX, not
+Vue templates. An entry for a Vue break would only add a manual step to every
+React consumer's `upgrade`. The release note is the migration.
 
 **Unchanged for a beta package:**
 
@@ -67,14 +76,14 @@ the commit body and the release notes instead, as a deliberate type break does
 The beta ends when both hold:
 
 - **The gaps are closed.** Every entry in the README's "Known gaps" is closed,
-  or recorded there as permanent — a gap no API change can close, such as
-  `infiniteScroll`, which is inert in React too.
+  or recorded there as permanent — a gap no API change of this package can
+  close, such as `infiniteScroll`, which is inert in React too.
 - **The surface has settled.** Closing what remains would not change an API the
   package ships.
 
-One change then removes every beta notice from §1 and records the ending version
-in an amendment to this ADR. From that release on, ADR 0005 applies to the
-package in full.
+One change then removes the `flowStatus` field and every beta notice from §1 and
+records the ending version in an amendment to this ADR. From that release on,
+ADR 0005 applies to the package in full.
 
 ### 4. Relation to ADR 0003 and ADR 0005
 
@@ -82,8 +91,12 @@ package in full.
   now reads "except §2 and a beta package".
 - **ADR 0003** — beta means the same at package level: exempt from the
   breaking-change promise. The status registry stays per component and does not
-  list packages. A future breaking-change guard excludes a beta package by name,
-  as it excludes a beta component through the registry.
+  list packages; `flowStatus` borrows the name of its `@flowStatus` tag.
+- **The version-contract guard** (`collectFindings` in
+  `.github/scripts/version-contract-lib.mjs`) skips the peer ranges of a package
+  that is beta at both the base and the head of a PR. It still checks the Node
+  floor, and it checks a package that enters or leaves the beta in that PR in
+  full. A future breaking-change guard reads the same field.
 
 ## Consequences
 
@@ -95,8 +108,8 @@ package in full.
 
 **Negative / trade-offs**
 
-- Beta lives in two places: the registry for components, the README notice for
-  packages. Nothing machine-readable marks a beta package; a guard has to name
-  it.
+- Beta lives in two places: the registry for components, the `flowStatus` field
+  for packages. The notices repeat the field, and nothing checks that they
+  agree.
 - An extension that adopts the package early carries breaking changes in Minor
   releases, with a migration note but no Major to plan around.
