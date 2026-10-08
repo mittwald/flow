@@ -23,6 +23,19 @@ serialization. **That applies here unchanged too**: both packages drive the same
 
 What follows is only what is different because you write Vue.
 
+## Installation
+
+```shell
+pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components vue
+```
+
+`@mittwald/flow-react-components` is required for the **prop types**: this
+package types every component with Flow's React prop types, read from that
+package's declarations. None of its code reaches your bundle. Without it,
+nothing errors — every prop silently becomes `any` under `skipLibCheck`, so a
+wrong prop type compiles. Install it explicitly; `yarn` and
+`npm --legacy-peer-deps` do not install peers on their own.
+
 ## The model
 
 Your extension runs in a hidden iframe. It does not render DOM — it builds a

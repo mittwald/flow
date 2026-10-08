@@ -79,6 +79,7 @@
   },
   "peerDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/flow-react-components": "workspace:*",
     "vue": "^3.5.0"
   },
   "peerDependenciesMeta": {

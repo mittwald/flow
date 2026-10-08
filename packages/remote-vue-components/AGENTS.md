@@ -14,6 +14,11 @@ what this binding establishes about supporting a framework at all.
   and reports a missing binding as `E404 Not found`, mid-release, after the
   other packages have already gone out. Nothing in this repository can set it
   up; it is a one-time step on npm.
+- **`@mittwald/flow-react-components` is a peer for the types only.** Every prop
+  type comes from its declarations through `remote-elements`; no runtime import
+  of it exists here. Without it a consumer's props are silently `any`, and the
+  declaration guard cannot see that — it checks this package's own `.d.ts`, not
+  what `remote-elements` imports.
 - `src/auto-generated/**` is **generated** from `packages/components`
   (`pnpm nx build:remote-components components`) — never edit by hand. The
   emitter is

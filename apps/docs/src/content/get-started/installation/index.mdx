@@ -128,8 +128,12 @@ Package `@mittwald/flow-remote-vue-components` ist das Vue-Gegenstück zu
 Flow Components im mStudio.
 
 ```shell
-yarn add @mittwald/flow-remote-vue-components vue
+yarn add @mittwald/flow-remote-vue-components @mittwald/flow-react-components vue
 ```
+
+`@mittwald/flow-react-components` liefert die Prop-Typen der Components. Fehlt
+es, meldet TypeScript keinen Fehler, sondern typisiert jede Prop still als
+`any`. In das Bundle der Extension gelangt davon nichts.
 
 Das Package ist **Beta**. Es ist von der Breaking-Change-Zusage ausgenommen,
 seine API kann sich auch außerhalb einer Major-Version ändern (siehe

@@ -12,6 +12,17 @@ mStudio host materializes them as React Flow components. Nothing about that
 pipeline is React-specific below the element layer, which is what makes this
 package possible.
 
+```shell
+pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components vue
+```
+
+`@mittwald/flow-react-components` is a peer dependency for the **prop types**
+only: every component's props are Flow's React prop types, read from that
+package's declarations. Nothing of it reaches your bundle. Leave it out and
+TypeScript does not complain — every prop silently becomes `any` (with
+`skipLibCheck`), or the build fails with TS2307 (without). Package managers that
+skip peers (`yarn`, `npm --legacy-peer-deps`) need it named explicitly.
+
 ```vue
 <script setup lang="ts">
 import { ref } from "vue";
