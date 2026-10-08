@@ -1,11 +1,13 @@
 import {
   computed,
   inject,
+  markRaw,
   provide,
   ref,
   watchEffect,
   type ComputedRef,
   type InjectionKey,
+  type Raw,
   type Ref,
 } from "vue";
 
@@ -25,7 +27,11 @@ export interface OverlayCloseOptions {
   bypassConfirmation?: boolean;
 }
 
-export interface OverlayController {
+/*
+ * `Raw`, as `markRaw` makes it: reactive state keeps the controller as it is,
+ * and its type says so too.
+ */
+export interface OverlayController extends Raw<Record<never, never>> {
   isOpen: Ref<boolean>;
   /**
    * Whether closing has to be confirmed first. Set by a `<Modal
@@ -172,7 +178,11 @@ export const createOverlayControllerFor = (
     addOnClose: addTo(onCloseHandlers),
     addOnOpenChange: addTo(onOpenChangeHandlers),
   };
-  controllers.add(controller);
+  /*
+   * Raw, so `reactive()`, `ref()` or a store hold the controller itself: a
+   * proxy would unwrap its refs and miss the `controllers` set.
+   */
+  controllers.add(markRaw(controller));
   return controller;
 };
 

@@ -18,6 +18,7 @@ import {
   useModalController,
   useOverlayController,
 } from "@/index";
+import { createOverlayController } from "@/overlays/overlayController";
 import {
   cleanupRemote,
   hostOverlay,
@@ -25,7 +26,7 @@ import {
 } from "@/tests/lib/environment";
 import { page } from "vitest/browser";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { defineComponent, h, ref } from "vue";
+import { defineComponent, h, reactive, ref } from "vue";
 
 afterEach(() => cleanupRemote());
 
@@ -173,6 +174,55 @@ describe("Modal", () => {
     await expect
       .element(page.getByRole("heading", { name: "Controlled" }))
       .toBeVisible();
+  });
+
+  test("opens from a controller kept in reactive state", async () => {
+    renderRemote(
+      defineComponent(() => {
+        const state = reactive({ editor: useOverlayController() });
+        return () => [
+          h(Button, { onPress: () => state.editor.open() }, () => "Open"),
+          h(Modal, { controller: state.editor }, () =>
+            h(Heading, null, () => "Kept in state"),
+          ),
+        ];
+      }),
+    );
+
+    await page.getByRole("button", { name: "Open" }).click();
+
+    await expect
+      .element(page.getByRole("heading", { name: "Kept in state" }))
+      .toBeVisible();
+  });
+
+  /*
+   * A proxy is no controller to `Action`: it would read as options and close
+   * the nearest overlay instead of the one named.
+   */
+  test("closes the overlay a controller in reactive state names", async () => {
+    const state = reactive({
+      editor: createOverlayController({ isDefaultOpen: true }),
+    });
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(Modal, { isDefaultOpen: true }, () => [
+            h(Heading, null, () => "Squadron"),
+            h(Content, null, () =>
+              h(Action, { closeOverlay: state.editor }, () =>
+                h(Button, null, () => "Close editor"),
+              ),
+            ),
+          ]),
+      ),
+    );
+
+    await page.getByRole("button", { name: "Close editor" }).click();
+
+    await vi.waitFor(() => expect(state.editor.isOpen.value).toBe(false));
+    expect(hostOverlay("flow--modal")).not.toBeNull();
   });
 
   /* Flow reads the prop on every render, so a swapped controller takes over. */

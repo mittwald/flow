@@ -1,11 +1,25 @@
 import {
   createOverlayController,
   createOverlayControllerFor,
+  isOverlayController,
 } from "@/overlays/overlayController";
 import { describe, expect, test } from "vitest";
-import { ref } from "vue";
+import { isRef, reactive, ref } from "vue";
 
 describe("createOverlayController", () => {
+  /* Where an app keeps state: `reactive()`, `ref()`, a Pinia store. */
+  test("stays itself inside reactive state", () => {
+    const controller = createOverlayController();
+    const state = reactive({ editor: controller });
+    const held = ref(controller);
+
+    for (const kept of [state.editor, held.value]) {
+      expect(kept).toBe(controller);
+      expect(isOverlayController(kept)).toBe(true);
+      expect(isRef(kept.isOpen)).toBe(true);
+    }
+  });
+
   test("starts closed", () => {
     expect(createOverlayController().isOpen.value).toBe(false);
   });
