@@ -396,12 +396,16 @@ here reaches the others by itself.
   `packages/remote-vue-components/src/{components,overlays,list}`). While the
   Vue binding is beta, bring its rebuild along where you can; where you cannot,
   record the divergence with its reason in
-  `packages/remote-vue-components/e2e/react-parity/knownGaps.ts`.
+  `packages/remote-vue-components/e2e/react-parity/knownGaps.ts`. The `List` has
+  no such list: `e2e/list-parity` needs every scenario from every binding, so a
+  `List` change brings the Vue `List` along.
 - **Their class names and UI strings are a contract.** The rebuilds pass
-  `flow--modal`, `flow--list--…` to the host and carry their own copy of the
-  four `confirmOnClose` strings, because neither is importable from a published
-  entry point. Renaming a class or rewording a string in such a composition
-  breaks every other binding silently.
+  `flow--modal`, `flow--list--…` to the host and carry their own copies of the
+  UI text they show (the `List`'s, `confirmOnClose`'s, the `LightBox` close
+  label), because neither is importable from a published entry point. A rename
+  fails lint (`flow/no-unknown-flow-class`), a rewording fails
+  `src/tests/CopiedTexts.test.ts` in the Vue package — update the binding's copy
+  in the same change.
 - **Behaviour that is not rendering belongs in
   `@mittwald/flow-components-base`**, where every binding runs the same code —
   that is where the `List`'s loader state, filters, sorting, search, view mode

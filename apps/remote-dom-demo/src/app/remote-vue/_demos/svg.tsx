@@ -11,10 +11,12 @@ import { defineComponent } from "vue";
 /**
  * The Vue counterpart of `/remote/svg`.
  *
- * The React page renders a Flow icon, a Tabler icon and a raw `<svg>`. Only the
- * third has a Vue equivalent — Flow's icon sets are React components — so the
- * other two are drawn as SVG too. That an `<svg>` survives the boundary at all
- * is the point: it travels as remote DOM, not as a prop.
+ * The React page renders `AlertIcon`, a Tabler icon from `@tabler/icons-react`
+ * and a raw `<svg>`. `AlertIcon` is the same remote component here. Tabler has
+ * no Vue package in this repository, so its icon is drawn by hand
+ * (`lib/icons.ts`) — a raw `<svg>` inside `Icon`, the way an extension brings
+ * any icon outside Flow's set. That an `<svg>` survives the boundary at all is
+ * the point: it travels as remote DOM, not as a prop.
  */
 export const SvgDemo = defineComponent({
   name: "SvgDemo",

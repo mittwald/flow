@@ -5,8 +5,9 @@ How to build an **mStudio extension** with
 
 > **Beta.** Extensions can be built against it, but the API is exempt from
 > Flow's breaking-change promise until the beta ends. Everything else in this
-> repository follows deprecate-don't-break — this package will too, once the
-> gaps below are closed and the surface is settled.
+> repository follows deprecate-don't-break — this package will too, once every
+> gap below is closed or recorded as permanent and the surface has settled
+> ([ADR 0007](https://github.com/mittwald/flow/blob/main/docs/adr/0007-beta-packages.md)).
 
 This package's components are generated from
 [`@mittwald/flow-react-components`](https://www.npmjs.com/package/@mittwald/flow-react-components)
@@ -271,10 +272,9 @@ Two differences from the React versions are worth knowing:
   React context to configure the components inside a `Modal` or an `Action`;
   there is no equivalent here, so a `Heading` nested one component deeper than
   the `Modal` expects is left unconfigured. Keep them direct children.
-- **`Action` runs, reports and closes.** It has no batching model and no
-  confirmation modal of its own (Flow's `slot="actionConfirm"`): an `onAction`
-  drives the button's pending, succeeded and failed states, and `close-modal`
-  closes the surrounding overlay.
+- **`Action` runs, reports and closes.** It has no confirmation modal of its own
+  (Flow's `slot="actionConfirm"`): an `onAction` drives the button's pending,
+  succeeded and failed states, and `close-modal` closes the surrounding overlay.
 
 A modal can still protect unsaved changes, the same way React's does:
 
@@ -441,6 +441,8 @@ in it.
   and `auto-focus`, and an item's `loadingView`.
 - **`IntlProvider`.** React's sets the locale for what renders locally; a Vue
   app renders nothing locally. `useLanguage()` reports the host's language.
+- **`ComponentDefaultsProvider`.** Its two settings belong to React's Suspense
+  and to the react-hook-form integration, neither of which exists here.
 - **The react-hook-form integration.** Use `Form` and read the submitted
   `FormData`, or bring your own Vue form library.
 

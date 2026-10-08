@@ -4,10 +4,11 @@ import { defineComponent } from "vue";
 
 /**
  * Stands in for a demo that only exists as a React remote app. Three do:
- * `react-hook-form` and `server-actions` are a React form integration and a
- * Next server action, and `coach-mark` closes its overlay with `<Action
- * closeOverlay="CoachMark">` — a target named by component, which the Vue
- * `Action` does not resolve (it closes the overlay it sits in).
+ * `react-hook-form` is a React form integration, `coach-mark` closes its
+ * overlay with `<Action closeOverlay="CoachMark">` — a target named by
+ * component, which the Vue `Action` does not resolve (it closes the overlay it
+ * sits in) — and `skeleton-mode` has not been ported yet, although
+ * `SkeletonMode` is generated for Vue.
  *
  * Rendered instead of nothing so the Vue app stays mounted while the host
  * navigates: unmounting would drop the connection, and the next demo would have

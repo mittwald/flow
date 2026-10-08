@@ -510,8 +510,8 @@ Some source files are **generated** and must not be hand-edited:
   ask when unsure.
 - **Icons** have a single source of truth: `packages/icons-base/src/icons.yaml`.
   The icon sets and the component-internal icons are generated from it:
-  `pnpm nx build:icons icons`, `… icons-pro`, `… components` — or simply
-  `pnpm build`.
+  `pnpm nx build:icons icons`, `… icons-pro`, `… components`,
+  `… remote-vue-components` — or simply `pnpm build`.
 
 ## Documentation
 

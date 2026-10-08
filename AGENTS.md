@@ -56,7 +56,7 @@ elements, which any framework can build. What a second binding costs day to day:
 | a `@flr-generate` component's props             | by generator — regenerate and commit, nothing hand-written        |
 | an icon                                         | by generator                                                      |
 | a `flr-universal` composition (`Modal`, `List`) | **not at all** — every binding rebuilds it by hand                |
-| a class name or UI string one of those uses     | **not at all** — the rebuilds repeat them and drift silently      |
+| a class name or UI string one of those uses     | **not at all** — copied by hand; lint and a unit test catch drift |
 | the `List`'s behaviour                          | through `packages/components-base`, if the change is in the model |
 
 The gate is the **`parity` CI job**: it renders the React package's whole visual
@@ -118,7 +118,7 @@ nearest `AGENTS.md` before working in a package.**
 | `packages/remote-elements`              | `@mittwald/flow-remote-elements`         | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
 | `packages/remote-react-components`      | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
 | `packages/remote-react-renderer`        | `@mittwald/flow-remote-react-renderer`   | Host-side renderer mapping `flr-*` elements to Flow components; map auto-generated.        |
-| `packages/remote-vue-components`        | `@mittwald/flow-remote-vue-components`   | **Beta.** Vue API for remote apps; mirrors the React one, auto-generated.                  |
+| `packages/remote-vue-components`        | `@mittwald/flow-remote-vue-components`   | **Beta.** Vue API for remote apps; mirrors the React one, partly generated.                |
 | `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
 | `packages/react-tunnel`                 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility (MobX-based).                                      |
 | `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components` | Helpers for extension developers (mStudio page header customization).                      |
@@ -281,7 +281,9 @@ A new or substantially changed component comes with:
    (`packages/remote-vue-components/src/{components,overlays,list}`) along where
    you can; where you cannot, record the divergence in
    `packages/remote-vue-components/e2e/react-parity/knownGaps.ts` with its
-   reason. Behaviour that is not rendering belongs in
+   reason. That list covers the corpus only: `e2e/list-parity` has none, and
+   each of its scenarios needs a tree per binding, so a `List` change brings the
+   Vue `List` along. Behaviour that is not rendering belongs in
    `packages/components-base`, where every binding runs the same code
 9. Visual changes: run the suite on demand with the `run-visual-tests` PR label
    (verify only); for intentional changes, update snapshots

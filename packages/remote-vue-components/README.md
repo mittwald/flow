@@ -2,8 +2,9 @@
 
 > **Beta.** Extensions can be built against it, but the API is exempt from
 > Flow's breaking-change promise until the beta ends. Everything else in this
-> repository follows deprecate-don't-break — this package will too, once the
-> remaining gaps below are closed and the surface is settled.
+> repository follows deprecate-don't-break — this package will too, once every
+> gap below is closed or recorded as permanent and the surface has settled
+> ([ADR 0007](../../docs/adr/0007-beta-packages.md)).
 
 Vue API for the Flow remote surface — the counterpart of
 [`@mittwald/flow-remote-react-components`](../remote-react-components). The
@@ -168,10 +169,9 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
   in the format React writes.
 - **`Action` runs, reports and closes.** An `onAction` drives the pending,
   succeeded and failed states, and `closeModal` / `closeOverlay` closes the
-  overlay the action sits in. What it has not got is a batching model, the
-  `actionConfirm` modal, and a target named by component
-  (`closeOverlay="CoachMark"`), which is why the `coach-mark` demo has no Vue
-  counterpart.
+  overlay the action sits in. What it has not got is the `actionConfirm` modal
+  and a target named by component (`closeOverlay="CoachMark"`), which is why the
+  `coach-mark` demo has no Vue counterpart.
 - **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
   each consumer licenses itself and which therefore cannot be inlined the way
   Tabler's is. `IconSetProvider` is what fills the gap: hand it your own icons
@@ -180,20 +180,27 @@ tells the `Action`s in a modal's footer not to ask for confirmation.
 - **No `IntlProvider`.** React's sets react-aria's locale for what renders
   locally; a Vue app renders nothing locally. `useLanguage()` reports the host's
   language instead.
+- **No `ComponentDefaultsProvider`.** Both of its settings belong to something
+  this binding does not have: `List.disableInitialSuspenseBoundary` to React's
+  Suspense, `Form.confirmModalCloseOnUnsavedChanges` to the react-hook-form
+  integration.
 - **The rebuilt compositions repeat Flow's internal class names**
   (`flow--modal`, `flow--popover`, …). They are how the host is asked to render
-  a modal rather than a bare dialog. Making `Modal` and friends `@flr-generate`
-  would remove both the class names and most of this layer.
-- **`confirmOnClose` carries its own translations.** Flow's four strings are
-  compiled into the React bundle and are not importable, so `Modal` repeats them
-  in `de-DE` and `en-US`. A rewording on the Flow side drifts here silently.
+  a modal rather than a bare dialog; `flow/no-unknown-flow-class` fails lint on
+  one Flow no longer generates. Making `Modal` and friends `@flr-generate` would
+  remove both the class names and most of this layer.
+- **The rebuilds carry their own copy of Flow's UI text.** Flow's strings are
+  compiled into the React bundle and are not importable, so this package repeats
+  the `List`'s texts, the four `confirmOnClose` strings and the `LightBox` close
+  label in `de-DE` and `en-US`. `src/tests/CopiedTexts.test.ts` compares them
+  with Flow's locale files, so a rewording fails the unit tests.
 - **No SFC build.** The package ships plain TypeScript; a consumer's own build
   handles `.vue` files.
 
 ## Tests
 
-- `pnpm nx test:unit remote-vue-components` — the controllers and the vnode
-  helpers.
+- `pnpm nx test:unit remote-vue-components` — the controllers, the vnode
+  helpers, and the UI text copied from Flow.
 - `pnpm nx test:browser remote-vue-components --browser.name=webkit` — a Vue
   tree, the production serializer, and React's `RemoteRenderer` as the host.
 - `pnpm nx test:parity remote-vue-components` — two harnesses, one target.

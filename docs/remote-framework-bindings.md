@@ -3,7 +3,8 @@
 What it takes to let an mStudio extension be written in something other than
 React, and what bites on the way. Written from the Vue binding
 ([packages/remote-vue-components](../packages/remote-vue-components), published
-as beta); the findings are not Vue-specific.
+as beta — [ADR 0007](./adr/0007-beta-packages.md) says what that exempts and
+what ends it); the findings are not Vue-specific.
 
 Read [remote-ui.md](./remote-ui.md) first — this assumes the end-to-end picture.
 
@@ -11,10 +12,11 @@ Read [remote-ui.md](./remote-ui.md) first — this assumes the end-to-end pictur
 
 **The boundary is framework-agnostic; the layer above it is not.** A binding is
 small where it wraps `flr-*` elements and large where it has to rebuild Flow's
-React compositions. The Vue binding is ~7,300 hand-written lines, tests left
-out, against ~2,700 generated ones in 135 files. The element wrapper, its
-`v-model` mapping and the root are ~750 of them; the rest is `flr-universal`,
-and 3,300 of that is the `List` alone.
+React compositions. In the Vue binding, tests left out, the hand-written code is
+about two and a half times the generated wrappers (one file per `@flr-generate`
+component). The element wrapper, its `v-model` mapping and the root are about a
+tenth of it; the rest is `flr-universal`, and the `List` alone is nearly half of
+the hand-written code.
 
 ## What already works for any framework
 
@@ -128,10 +130,11 @@ wrong.
 
 `Modal`, `ModalTrigger`, `Popover`, `PopoverTrigger`, `LightBox`,
 `LightBoxTrigger`, `Action`, `ActionBatch`, `List`, `ListItemView`,
-`NotificationProvider`, `SettingsProvider`, `CountryOptions`, `Wrap`,
-`BrowserOnly`, `IntlProvider`, `DeprecationWarningProvider` — React components
-that _emit_ remote elements rather than being one. A binding cannot import them,
-so it rebuilds them, and two things make that harder than it looks:
+`NotificationProvider`, `SettingsProvider`, `ComponentDefaultsProvider`,
+`CountryOptions`, `Wrap`, `BrowserOnly`, `IntlProvider`,
+`DeprecationWarningProvider` — React components that _emit_ remote elements
+rather than being one. A binding cannot import them, so it rebuilds them, and
+two things make that harder than it looks:
 
 - **`PropsContext` has no equivalent.** Flow configures the components inside a
   composite — the `Heading` of a `Modal`, the `Button` of an `Action` — through
@@ -145,14 +148,17 @@ so it rebuilds them, and two things make that harder than it looks:
   with `confirmOnClose` asks "You have unsaved changes…" in the backoffice's
   language. Those strings live in the component's `locales/*.locale.json`, are
   compiled into the React bundle by a locale plugin, and no published entry
-  point exposes them — so every binding carries its own copy and drifts when
-  Flow rewords one. A framework-agnostic export of the locale files would fix it
-  for all of them, the way `getIconSources()` did for the icons.
+  point exposes them — so every binding carries its own copy. Nothing else
+  notices when Flow rewords one, so the binding needs a test that compares its
+  copies with Flow's locale files (Vue: `src/tests/CopiedTexts.test.ts`). A
+  framework-agnostic export of the locale files would remove the copies for all
+  of them, the way `getIconSources()` did for the icons.
 - **The composites pass Flow's internal class names.** `Modal` asks for
   `flow--overlay flow--modal flow--modal--size-s` on an `OverlayContent`,
   because that is what makes the host render a modal rather than a bare dialog.
-  Every binding repeats them, and a rename in `packages/components` breaks all
-  of them silently.
+  Every binding repeats them. `flow/no-unknown-flow-class` lints every `flow--…`
+  string under a package's `src/` against the classes Flow generates, so a
+  rename in `packages/components` fails lint rather than the host.
 
 **The fix is on the Flow side, not in the bindings.** Marking the overlay family
 `@flr-generate` would let the host materialize the whole composition from one
@@ -178,13 +184,13 @@ other:
   call hooks** — the "class-method custom hooks" pattern this repository already
   keeps `rules-of-hooks` switched off for.
 
-  The way through is `packages/components-base`: ~1,600 lines of MobX with no
-  framework in them, holding everything the list decides — the loader state,
-  sorting, search, filters, batching, the item collection, the view mode and the
-  table, whose `useState` is an observable. Each binding brings the subscription
-  (~15 lines: `useSelector`, `watchMobxValue`) and the one job the shared model
-  leaves open, which is fetching a batch. React was rewired onto each piece as
-  it moved, so both bindings run the same rules rather than two copies of them.
+  The way through is `packages/components-base`: MobX with no framework in it,
+  holding everything the list decides — the loader state, sorting, search,
+  filters, batching, the item collection, the view mode and the table, whose
+  `useState` is an observable. Each binding brings the subscription (~15 lines:
+  `useSelector`, `watchMobxValue`) and the one job the shared model leaves open,
+  which is fetching a batch. React was rewired onto each piece as it moved, so
+  both bindings run the same rules rather than two copies of them.
 
   Two things stay per binding, and both are shapes of the same problem.
   Fetching, because Suspense has no Vue counterpart: Vue's list drives the async
@@ -206,9 +212,12 @@ other:
 ## Checklist for a new binding package
 
 - `packages/remote-<framework>-components`. It ships as soon as `private` is
-  absent — and a brand-new package name needs its npm **Trusted Publisher**
-  registered first (`publish.yml`, one workflow filename per package), or the
-  first publish fails with `E404 Not found` in the middle of a release.
+  absent — and a brand-new package name needs two one-time steps on npm before
+  the merge, or `publish.yml` fails with `E404 Not found` in the middle of a
+  release. npm binds a **Trusted Publisher** only to a package that exists, so a
+  maintainer first **publishes it by hand** (`@mittwald/flow-codemods` did:
+  `1.1.0-next.10` by hand, provenance from `1.1.0-next.11` on), then binds the
+  Trusted Publisher to `publish.yml` — one workflow filename per package.
 - `project.json` with `implicitDependencies: ["components"]` and a `build` that
   depends on `components:build:remote-components`.
 - An emitter in the generator + the output path in `components/project.json`.
@@ -270,11 +279,6 @@ other:
 - **Does every binding own its `flr-universal` rebuild, or does Flow move the
   compositions behind generated elements?** Every binding added before that
   decision pays for it twice.
-- **When does a second binding get the support promise?** The React package's
-  props are a contract with extension developers (no breaking changes, deprecate
-  instead). The Vue binding ships as **beta** — the lifecycle status that
-  exempts a component from that promise, applied to the whole package — and what
-  ends the beta is not decided yet.
 - **One demo app or one per framework?** The switcher in `remote-dom-demo`
   works, but each framework needs its own route tree, and only one remote may be
   connected at a time.

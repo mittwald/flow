@@ -3,17 +3,21 @@
 Vue API used _inside_ remote apps, the counterpart of
 [`remote-react-components`](../remote-react-components/AGENTS.md). **Beta** —
 extensions can be built against it, but the API is exempt from Flow's
-breaking-change promise until the beta ends, which is when the gaps are closed
-and the surface has settled. Read [README.md](./README.md) for the shape of the
-API and the gaps, and
+breaking-change promise until the beta ends: once every known gap is closed or
+recorded as permanent and the surface has settled
+([ADR 0007](../../docs/adr/0007-beta-packages.md)). Read
+[README.md](./README.md) for the shape of the API and the gaps, and
 [docs/remote-framework-bindings.md](../../docs/remote-framework-bindings.md) for
 what this binding establishes about supporting a framework at all.
 
-- **Before the first release, npm needs a Trusted Publisher for this package
-  name**, bound to `publish.yml` — npm allows one workflow filename per package
-  and reports a missing binding as `E404 Not found`, mid-release, after the
-  other packages have already gone out. Nothing in this repository can set it
-  up; it is a one-time step on npm.
+- **Before the first release, two one-time steps on npm, both before the
+  merge.** npm binds a Trusted Publisher only to a package that already exists,
+  so a maintainer first publishes this package **by hand**, under the `next`
+  dist-tag. `@mittwald/flow-codemods` started the same way: `1.1.0-next.10` by
+  hand, provenance from `1.1.0-next.11` on. Then its Trusted Publisher is bound
+  to `publish.yml`; npm allows one workflow filename per package. Miss either
+  and `publish.yml` fails with `E404 Not found` mid-release, after the other
+  packages have already gone out. Nothing in this repository can do either.
 - **`@mittwald/flow-react-components` is a peer for the types only.** Every prop
   type comes from its declarations through `remote-elements`; no runtime import
   of it exists here. Without it a consumer's props are silently `any`, and the
@@ -311,10 +315,11 @@ what this binding establishes about supporting a framework at all.
   to `<body>`.
 - **A date range is compared in the shared model** (`dateRangeFilterFn` in
   `components-base`), so the two bindings cannot disagree about which rows a
-  range covers. It matches a date by shape rather than by class — a
-  `CalendarDate`, a luxon `DateTime` and the plain object one becomes after
-  crossing the remote boundary all carry the same three numbers — and reads a
-  date-only string as the day it spells, which `new Date()` would not.
+  range covers. A cell counts as a date by class — a luxon `DateTime`, a
+  `CalendarDate`, or an ISO 8601 string, a date-only one read as the day it
+  spells, which `new Date()` would not. Anything else, a plain
+  `{ year, month, day }` included, keeps its row. Only the range's own ends are
+  read by shape, because they arrive serialized from the host.
 - **`infiniteScroll` is inert across the remote boundary — in React too.** The
   trigger is an `IntersectionObserver` on the Nth-from-last item
   (`useInfiniteScrollTrigger` in `packages/components`), and in a remote app
@@ -332,11 +337,17 @@ what this binding establishes about supporting a framework at all.
   **devDependency** on purpose: it is private, and `externalizeDeps` leaves
   devDependencies alone, so it is bundled instead of published as a bare import.
   `mobx` has to be a real dependency here for the same reason.
-- **`Modal confirmOnClose` carries its own translations.** Flow's four strings
-  live in `Modal/locales/*.locale.json`, are compiled into the React bundle by a
-  locale plugin, and are not importable from a published package — so
-  `src/overlays/Modal.ts` repeats them for `de-DE` and `en-US`. A rewording on
-  the Flow side drifts here without failing anything.
-- **A composite's class names are asserted in the browser tests**
-  (`Overlays.browser.test.ts`), so a rename in `packages/components` fails here
-  rather than in an extension.
+- **The rebuilds carry copies of Flow's UI text.** Flow's strings live in each
+  component's `locales/*.locale.json`, are compiled into the React bundle by a
+  locale plugin, and are not importable from a published package — so this
+  package repeats them for `de-DE` and `en-US`: the `List`'s texts
+  (`src/list/locales.ts`), the four `Modal confirmOnClose` strings and the
+  `LightBox` close label (`src/overlays/locales.ts`).
+  `src/tests/CopiedTexts.test.ts` compares every copy with Flow's locale files,
+  so a rewording on the Flow side fails here instead of drifting.
+- **A composite's class names are linted.** `flow/no-unknown-flow-class` checks
+  every hardcoded `flow--…` string against the classes Flow generates, so a
+  rename in `packages/components` fails `pnpm lint` here. A name completed at
+  runtime (`` `flow--modal--size-${size}` ``) is checked up to the
+  interpolation. The browser tests (`Overlays.browser.test.ts`) do not catch a
+  rename: they find the class this package passed itself.
