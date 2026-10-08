@@ -27,6 +27,18 @@ definieren (s.
 
 <LiveCodeEditor example="unit" editorCollapsed stretch />
 
+## Eigene Einheit
+
+Kennt `Intl.NumberFormat` die Einheit nicht (etwa `MiB` oder `GiB`), übergib sie
+als Text über das Property `unit`. Das NumberField zeigt sie hinter der Zahl an;
+der Wert bleibt eine reine Zahl.
+
+- Nutze `unit` nur, wenn `formatOptions` die Einheit nicht abdeckt –
+  `formatOptions` lokalisiert Einheit und Schreibweise automatisch.
+- Übersetze die Einheit selbst, wenn sie sprachabhängig ist.
+
+<LiveCodeEditor example="customUnit" editorCollapsed stretch />
+
 ---
 
 # Validierung
