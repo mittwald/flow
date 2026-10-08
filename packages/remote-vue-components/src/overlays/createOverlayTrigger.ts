@@ -7,7 +7,8 @@ import {
   type OverlayType,
 } from "@/overlays/overlayController";
 import { isOverlay } from "@/overlays/overlayRegistry";
-import { defineComponent, h, type PropType } from "vue";
+import { useComponentUsage } from "@/composables/useComponentUsage";
+import { defineComponent, h, onMounted, type PropType } from "vue";
 
 /**
  * Builds `ModalTrigger`, `PopoverTrigger` and `LightBoxTrigger`.
@@ -17,8 +18,15 @@ import { defineComponent, h, type PropType } from "vue";
  * that gives the trigger its `onPress`. Here the trigger's props are merged
  * into the child directly, and the overlay recognises itself by being
  * registered as one.
+ *
+ * `reportsUsage`: whether Flow's React trigger is a `flowComponent`, which
+ * reports itself.
  */
-export const createOverlayTrigger = (name: string, overlayType: OverlayType) =>
+export const createOverlayTrigger = (
+  name: string,
+  overlayType: OverlayType,
+  { reportsUsage }: { reportsUsage: boolean },
+) =>
   defineComponent({
     name,
 
@@ -33,6 +41,10 @@ export const createOverlayTrigger = (name: string, overlayType: OverlayType) =>
     },
 
     setup(props, { slots }) {
+      if (reportsUsage) {
+        onMounted(useComponentUsage(name));
+      }
+
       const controller = useOwnController(
         () => props.controller,
         undefined,

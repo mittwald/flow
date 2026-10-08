@@ -12,12 +12,14 @@ import { ActionState } from "@mittwald/flow-components-base";
 import {
   defineComponent,
   inject,
+  onMounted,
   provide,
   type ExtractPropTypes,
   type InjectionKey,
   type PropType,
 } from "vue";
 import { composition } from "@/lib/composition";
+import { useComponentUsage } from "@/composables/useComponentUsage";
 
 export type ActionFn = (...args: never[]) => unknown | Promise<unknown>;
 
@@ -287,6 +289,9 @@ export const Action = defineComponent({
   props: actionProps,
 
   setup(props, { slots }) {
+    /* Flow's React `Action` is a `flowComponent` and reports itself. */
+    onMounted(useComponentUsage("Action"));
+
     const model: ActionModel = {
       props,
       parent: inject(actionKey, undefined),

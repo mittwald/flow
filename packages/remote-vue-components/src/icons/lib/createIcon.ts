@@ -14,6 +14,7 @@
 import { Icon } from "@/auto-generated";
 import { injectContextIcon } from "@/icons/IconSetProvider";
 import type { IconName } from "@/icons/iconNames";
+import { composition } from "@/lib/composition";
 import {
   defineComponent,
   h,
@@ -95,33 +96,40 @@ const IconElement = Icon as Component;
  */
 export type FlowIconComponent = DefineComponent<Record<string, never>>;
 
-/** Flow's `Icon` around an `<svg>`, with everything the caller passed on it. */
+/**
+ * Flow's `Icon` around an `<svg>`, with everything the caller passed on it.
+ *
+ * A composition, and reporting nothing itself: Flow's React icons render
+ * `IconView`, so neither the icon nor its `Icon` counts as usage.
+ */
 const flowIcon = (name: IconName, renderSvg: () => VNode): FlowIconComponent =>
-  defineComponent({
-    name: `Icon${name}`,
-    /*
-     * The props are Flow `Icon`'s, not this component's — `size`, `color`, an
-     * `aria-label`. Declaring them would mean copying that contract; passing
-     * `attrs` on hands the element the same set React forwards to `IconView`.
-     */
-    inheritAttrs: false,
-    setup(_props, { attrs }) {
+  composition(
+    defineComponent({
+      name: `Icon${name}`,
       /*
-       * The swap happens on the `<svg>`, not on the `Icon` around it — a
-       * replacement is another icon, and it gets Flow's sizing, colour and
-       * ARIA like the built-in one. Same place React's `useContextIcon` does
-       * it.
+       * The props are Flow `Icon`'s, not this component's — `size`, `color`, an
+       * `aria-label`. Declaring them would mean copying that contract; passing
+       * `attrs` on hands the element the same set React forwards to `IconView`.
        */
-      const replacement = injectContextIcon(name);
+      inheritAttrs: false,
+      setup(_props, { attrs }) {
+        /*
+         * The swap happens on the `<svg>`, not on the `Icon` around it — a
+         * replacement is another icon, and it gets Flow's sizing, colour and
+         * ARIA like the built-in one. Same place React's `useContextIcon` does
+         * it.
+         */
+        const replacement = injectContextIcon(name);
 
-      return () =>
-        h(IconElement, attrs, {
-          default: () => [
-            replacement.value ? h(replacement.value) : renderSvg(),
-          ],
-        });
-    },
-  });
+        return () =>
+          h(IconElement, attrs, {
+            default: () => [
+              replacement.value ? h(replacement.value) : renderSvg(),
+            ],
+          });
+      },
+    }),
+  );
 
 /** A Tabler icon, from the path data inlined into the generated file. */
 export const tablerIcon = (
