@@ -1,4 +1,5 @@
 import type { List } from "@/components/List/model/List";
+import type { ListFilter, ListItem } from "@mittwald/flow-components-base";
 import { expectTypeOf } from "vitest";
 
 /*
@@ -17,3 +18,14 @@ expectTypeOf<Value["filter"]["list"]>().toEqualTypeOf<List<unknown>>();
 expectTypeOf<Value["filter"]["property"]>().toEqualTypeOf<string>();
 expectTypeOf<ActiveValue["filter"]["list"]>().toEqualTypeOf<List<unknown>>();
 expectTypeOf<AnyItem["collection"]["list"]>().toEqualTypeOf<CrewList>();
+
+// @ts-expect-error a collection keeps its list's item type
+expectTypeOf<AnyItem["collection"]["list"]>().toEqualTypeOf<List<unknown>>();
+// @ts-expect-error a filter value's list is not narrowed to the item type
+expectTypeOf<Value["filter"]["list"]>().toEqualTypeOf<CrewList>();
+
+/* Without React's subclasses there is no `list` to reach. */
+// @ts-expect-error the shared filter has no `list`
+expectTypeOf<ListFilter<{ name: string }>>().toHaveProperty("list");
+// @ts-expect-error the shared item's collection has no `list`
+expectTypeOf<ListItem<{ name: string }>["collection"]>().toHaveProperty("list");
