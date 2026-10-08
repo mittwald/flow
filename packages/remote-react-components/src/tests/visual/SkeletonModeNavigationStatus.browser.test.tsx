@@ -1,14 +1,12 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
+import { SkeletonComparison } from "@/tests/lib/SkeletonComparison";
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode navigation (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      SkeletonMode,
+  async ({ testScreenshot, render, components }) => {
+    const {
       Section,
       ColumnLayout,
       Navigation,
@@ -22,10 +20,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       Link,
       Label,
       Text,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <HeaderNavigation aria-label="Hauptnavigation">
             <Link href="#" aria-current="page">
@@ -83,7 +81,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             </Tabs>
           </ColumnLayout>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode navigation");
@@ -92,11 +90,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode status (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      SkeletonMode,
+  async ({ testScreenshot, render, components }) => {
+    const {
       Section,
       ColumnLayout,
       Alert,
@@ -112,10 +107,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       ProgressBar,
       Rating,
       LoadingSpinner,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <Alert status="danger">
             <Heading>Zertifikat abgelaufen</Heading>
@@ -156,7 +151,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
           >
             <Label>Speicherplatz</Label>
           </ProgressBar>
-          <ColumnLayout m={[1, 1, 1, 1]}>
+          <ColumnLayout m={[1, 1]}>
             <AlertText status="warning">
               Das Zertifikat läuft bald ab.
             </AlertText>
@@ -165,7 +160,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <LoadingSpinner />
           </ColumnLayout>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode status");
