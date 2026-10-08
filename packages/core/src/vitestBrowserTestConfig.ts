@@ -77,6 +77,11 @@ export const createVitestBrowserTestConfig = (): ProjectConfig => ({
       {
         browser: "firefox",
         viewport: { ...viewport },
+        /*
+         * Firefox hands the document focus to one page at a time, so tests
+         * that need keyboard focus flake when files run in parallel.
+         */
+        fileParallelism: false,
       },
       {
         browser: "webkit",

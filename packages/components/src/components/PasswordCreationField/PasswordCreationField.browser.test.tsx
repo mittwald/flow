@@ -14,8 +14,13 @@ import Button from "@/components/Button";
 import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
+import { parkPointer } from "@/lib/dev/parkPointer";
 import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
 import { FieldError } from "@/components/FieldError";
+
+// Every test renders the same layout. A pointer left on a button hovers the
+// next test's button, and its tooltip then swallows that test's Escape.
+beforeEach(parkPointer);
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -215,14 +220,9 @@ describe("PasswordCreationField Tests", () => {
     vitest.useFakeTimers();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     vitest.useRealTimers();
     destroyAnnouncer();
-    // Every test renders the same layout. A pointer left on a button hovers the
-    // next test's button, and its tooltip then swallows that test's Escape.
-    await page
-      .elementLocator(document.body)
-      .hover({ position: { x: 0, y: 0 }, force: true });
   });
 
   test("renders empty list without errors", async () => {
