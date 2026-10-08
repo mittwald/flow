@@ -55,7 +55,7 @@
       "dependsOn": ["build", "^build"]
     },
     "test:parity": {
-      "dependsOn": ["build", "^build"],
+      "dependsOn": ["build", "^build", "test:browser:prepare"],
       "cache": true,
       "inputs": [
         "default",
@@ -73,11 +73,11 @@
       ]
     },
     "test:parity:dev": {
-      "dependsOn": ["build", "^build"],
+      "dependsOn": ["build", "^build", "test:browser:prepare"],
       "cache": false
     },
     "test:parity:list": {
-      "dependsOn": ["build", "^build"],
+      "dependsOn": ["build", "^build", "test:browser:prepare"],
       "cache": true,
       "inputs": [
         "default",
@@ -95,7 +95,7 @@
       ]
     },
     "test:parity:list:dev": {
-      "dependsOn": ["build", "^build"],
+      "dependsOn": ["build", "^build", "test:browser:prepare"],
       "cache": false
     }
   }
