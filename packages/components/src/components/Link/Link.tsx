@@ -152,15 +152,13 @@ export const Link = flowComponent("Link", (props) => {
      becoming a text bar. */
   const hasOnlyElements = hasContent(children) && !containsTextChild(children);
 
-  const text = hasOnlyElements ? (
-    children
-  ) : (
+  const textBars = (
     <SkeletonTextContent defaultWidth="6em">{children}</SkeletonTextContent>
   );
 
   const content = (
     <PropsContextProvider props={propsContext}>
-      {text}
+      {hasOnlyElements ? children : textBars}
       <LinkIcon
         withZeroWidthJoiner
         unstyled={unstyled}
