@@ -12,11 +12,15 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import {
   acknowledgedUndeclaredTypeImports,
   assertInstallableTypeImports,
+  declarationGraphOf,
   findUndeclaredTypeImports,
   importedPackagesOf,
   packageNameOf,
+  referencedTypesOf,
   rewriteBundledImports,
   typeEntriesOf,
+  typesPackagesOf,
+  untypedExportsOf,
   withBundledDeclarations,
 } from "./publishedDeclarations.ts";
 
@@ -41,8 +45,30 @@ describe("importedPackagesOf", () => {
     ].join("\n");
 
     expect(importedPackagesOf(content).sort()).toEqual(
-      ["@scope/a", "b", "c", "d", "e", "f"].sort(),
+      ["@scope/a", "b", "c", "d", "f"].sort(),
     );
+  });
+});
+
+describe("referencedTypesOf", () => {
+  test("finds every reference to types, not to paths", () => {
+    const content = [
+      `/// <reference types="node" />`,
+      `/// <reference types='vite/client' />`,
+      `/// <reference path="./globals.d.ts" />`,
+    ].join("\n");
+
+    expect(referencedTypesOf(content)).toEqual(["node", "vite/client"]);
+  });
+});
+
+describe("typesPackagesOf", () => {
+  test("names the package and its DefinitelyTyped package", () => {
+    expect(typesPackagesOf("vite/client")).toEqual(["vite", "@types/vite"]);
+    expect(typesPackagesOf("@scope/name")).toEqual([
+      "@scope/name",
+      "@types/scope__name",
+    ]);
   });
 });
 
@@ -106,6 +132,168 @@ describe("typeEntriesOf", () => {
   });
 });
 
+describe("untypedExportsOf", () => {
+  test("names every subpath that reaches JavaScript without types", () => {
+    expect(
+      untypedExportsOf({
+        name: "x",
+        exports: {
+          ".": { types: "./dist/index.d.ts", default: "./dist/index.mjs" },
+          "./untyped": { import: "./dist/untyped.mjs" },
+          "./nested": {
+            import: { types: "./dist/n.d.mts", default: "./dist/n.mjs" },
+            require: { default: "./dist/n.cjs" },
+          },
+          "./bare": "./dist/bare.js",
+          "./styles.css": "./dist/styles.css",
+          "./data": "./dist/data.json",
+        },
+      }),
+    ).toEqual(["./untyped", "./nested", "./bare"]);
+  });
+
+  test("reads conditions and strings without subpaths as the root", () => {
+    expect(untypedExportsOf({ name: "x", exports: "./index.js" })).toEqual([
+      ".",
+    ]);
+    expect(
+      untypedExportsOf({ name: "x", exports: { default: "./index.js" } }),
+    ).toEqual(["."]);
+    expect(
+      untypedExportsOf({
+        name: "x",
+        exports: { types: "./index.d.ts", default: "./index.js" },
+      }),
+    ).toEqual([]);
+  });
+});
+
+describe("declarationGraphOf", () => {
+  let root: string;
+
+  const write = (file: string, content: string) => {
+    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    writeFileSync(path.join(root, file), content);
+  };
+
+  const fixture = (exports: unknown, files: Record<string, string> = {}) => {
+    root = mkdtempSync(path.join(tmpdir(), "declaration-graph-"));
+    write("package.json", JSON.stringify({ name: "pkg", exports }));
+    for (const [file, content] of Object.entries(files)) {
+      write(file, content);
+    }
+  };
+
+  const relative = (files: string[]) =>
+    files.map((file) => path.relative(root, file)).sort();
+
+  afterEach(() => rmSync(root, { recursive: true, force: true }));
+
+  test("fails when the manifest names no types entry", () => {
+    fixture({ ".": { default: "./dist/index.mjs" } });
+
+    expect(declarationGraphOf(root).problems).toEqual([
+      `exports["."] points at JavaScript without a "types" condition — a consumer gets no declarations for it.`,
+      `package.json names no "types" entry — nothing to check.`,
+    ]);
+  });
+
+  test("fails on a types entry that does not exist", () => {
+    fixture({ ".": { types: "./dist/types/index.d.ts" } });
+
+    expect(declarationGraphOf(root).problems).toEqual([
+      `The "types" entry "./dist/types/index.d.ts" matches no file.`,
+    ]);
+  });
+
+  test("follows every file a pattern entry matches", () => {
+    fixture(
+      { "./icons/*": { types: "./dist/types/icons/*.d.ts" } },
+      {
+        "dist/types/icons/a.d.ts": `export * from "../shared";`,
+        "dist/types/icons/nested/b.d.ts": "export {};",
+        "dist/types/icons/c.d.mts": "export {};",
+        "dist/types/shared.d.ts": "export {};",
+      },
+    );
+
+    expect(declarationGraphOf(root).problems).toEqual([]);
+    expect(relative(declarationGraphOf(root).files)).toEqual([
+      path.join("dist", "types", "icons", "a.d.ts"),
+      path.join("dist", "types", "icons", "nested", "b.d.ts"),
+      path.join("dist", "types", "shared.d.ts"),
+    ]);
+  });
+
+  test("fails on a pattern entry that matches nothing", () => {
+    fixture(
+      { "./icons/*": { types: "./dist/types/icons/*.d.ts" } },
+      { "dist/types/other.d.ts": "export {};" },
+    );
+
+    expect(declarationGraphOf(root).problems).toEqual([
+      `The "types" entry "./dist/types/icons/*.d.ts" matches no file.`,
+    ]);
+  });
+
+  test("fails on a relative import it cannot resolve", () => {
+    fixture(
+      { ".": { types: "./dist/index.d.ts" } },
+      { "dist/index.d.ts": `export * from "./missing";` },
+    );
+
+    expect(declarationGraphOf(root).problems).toEqual([
+      `${path.join("dist", "index.d.ts")} imports "./missing", which resolves to no declaration file.`,
+    ]);
+  });
+
+  test("resolves the declaration forms a consumer's compiler does", () => {
+    fixture(
+      { ".": { types: "./dist/index.d.ts" } },
+      {
+        "dist/index.d.ts": [
+          `export * from "./js.js";`,
+          `export * from "./esm.mjs";`,
+          `export * from "./dir";`,
+          `import styles from "./x.module.scss";`,
+          `import data from "./data.json";`,
+          `/// <reference path="./globals.d.ts" />`,
+        ].join("\n"),
+        "dist/js.d.ts": "export {};",
+        "dist/esm.d.mts": "export {};",
+        "dist/dir/index.d.ts": "export {};",
+        "dist/x.module.d.scss.ts": "export {};",
+        "dist/data.json": "{}",
+        "dist/globals.d.ts": "export {};",
+      },
+    );
+
+    const { files, problems } = declarationGraphOf(root);
+    expect(problems).toEqual([]);
+    expect(relative(files)).toEqual(
+      [
+        "dir/index.d.ts",
+        "esm.d.mts",
+        "globals.d.ts",
+        "index.d.ts",
+        "js.d.ts",
+        "x.module.d.scss.ts",
+      ].map((file) => path.join("dist", file)),
+    );
+  });
+
+  test("fails on a reference path that does not exist", () => {
+    fixture(
+      { ".": { types: "./dist/index.d.ts" } },
+      { "dist/index.d.ts": `/// <reference path="./globals.d.ts" />` },
+    );
+
+    expect(declarationGraphOf(root).problems).toEqual([
+      `${path.join("dist", "index.d.ts")} references "./globals.d.ts", which does not exist.`,
+    ]);
+  });
+});
+
 describe("findUndeclaredTypeImports", () => {
   let root: string;
 
@@ -152,6 +340,35 @@ describe("findUndeclaredTypeImports", () => {
 
     expect(findUndeclaredTypeImports(root)).toEqual([]);
   });
+
+  test("accepts a reference to node, a declared package or its @types", () => {
+    fixture({
+      name: "pkg",
+      exports: { ".": { types: "./dist/types/index.d.ts" } },
+      dependencies: {
+        declared: "1",
+        undeclared: "1",
+        vite: "1",
+        "@types/scope__typed": "1",
+      },
+    });
+    write(
+      "dist/types/model/index.d.ts",
+      [
+        `/// <reference types="node" />`,
+        `/// <reference types="vite/client" />`,
+        `/// <reference types="@scope/typed" />`,
+        `/// <reference types="missing" />`,
+      ].join("\n"),
+    );
+
+    expect(findUndeclaredTypeImports(root)).toEqual([
+      {
+        file: path.join("dist", "types", "model", "index.d.ts"),
+        packageName: "missing",
+      },
+    ]);
+  });
 });
 
 describe("assertInstallableTypeImports", () => {
@@ -186,6 +403,14 @@ describe("assertInstallableTypeImports", () => {
 
     expect(() => assertInstallableTypeImports(root)).toThrow(
       `${path.join("dist", "types", "index.d.ts")} imports "undeclared", which @test/installable does not declare`,
+    );
+  });
+
+  test("fails on what it cannot resolve", () => {
+    fixture(manifest, `export * from "./missing";`);
+
+    expect(() => assertInstallableTypeImports(root)).toThrow(
+      `${path.join("dist", "types", "index.d.ts")} imports "./missing", which resolves to no declaration file.`,
     );
   });
 

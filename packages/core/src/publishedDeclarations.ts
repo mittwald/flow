@@ -1,4 +1,11 @@
-import { cpSync, existsSync, readFileSync, rmSync } from "node:fs";
+import {
+  cpSync,
+  existsSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+} from "node:fs";
 import { builtinModules, createRequire } from "node:module";
 import path from "node:path";
 
@@ -24,6 +31,8 @@ const specifierPattern =
 
 const referenceTypesPattern = /\/\/\/\s*<reference\s+types=(["'])([^"']+)\1/g;
 
+const referencePathPattern = /\/\/\/\s*<reference\s+path=(["'])([^"']+)\1/g;
+
 const isBare = (specifier: string): boolean =>
   !specifier.startsWith(".") && !path.isAbsolute(specifier);
 
@@ -35,13 +44,33 @@ export const packageNameOf = (specifier: string): string => {
     : (segments[0] ?? specifier);
 };
 
-/** Every package a declaration file imports, `/// <reference types>` included. */
+/** Every package a declaration file imports. */
 export const importedPackagesOf = (content: string): string[] => {
-  const specifiers = [
-    ...Array.from(content.matchAll(specifierPattern), (m) => m[3] ?? ""),
-    ...Array.from(content.matchAll(referenceTypesPattern), (m) => m[2] ?? ""),
-  ];
+  const specifiers = Array.from(
+    content.matchAll(specifierPattern),
+    (m) => m[3] ?? "",
+  );
   return [...new Set(specifiers.filter(isBare).map(packageNameOf))];
+};
+
+/** Every `/// <reference types>` of a declaration file, as written. */
+export const referencedTypesOf = (content: string): string[] => [
+  ...new Set(
+    Array.from(content.matchAll(referenceTypesPattern), (m) => m[2] ?? ""),
+  ),
+];
+
+/**
+ * The packages a `/// <reference types="name" />` can resolve to: `name`
+ * itself, or its DefinitelyTyped package (`@scope/name` →
+ * `@types/scope__name`).
+ */
+export const typesPackagesOf = (reference: string): string[] => {
+  const name = packageNameOf(reference);
+  const typesName = name.startsWith("@")
+    ? name.slice(1).replace("/", "__")
+    : name;
+  return [name, `@types/${typesName}`];
 };
 
 const unscoped = (packageName: string): string =>
@@ -115,55 +144,176 @@ export const typeEntriesOf = (manifest: Manifest): string[] => {
   return [...new Set(entries)];
 };
 
+const isJavaScript = (target: string): boolean => /\.[cm]?js$/.test(target);
+
+/** Whether an `exports` value reaches JavaScript without a `types` beside it. */
+const hasUntypedJavaScript = (value: unknown): boolean => {
+  if (typeof value === "string") {
+    return isJavaScript(value);
+  }
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  if ("types" in value) {
+    return false;
+  }
+  return Object.values(value).some(hasUntypedJavaScript);
+};
+
+/**
+ * The `exports` subpaths that point at JavaScript without a `types` condition.
+ * A consumer importing one gets no declarations for it.
+ */
+export const untypedExportsOf = (manifest: Manifest): string[] => {
+  const { exports } = manifest;
+  const isSubpathMap =
+    !!exports &&
+    typeof exports === "object" &&
+    !Array.isArray(exports) &&
+    Object.keys(exports).some((key) => key.startsWith("."));
+  if (!isSubpathMap) {
+    return hasUntypedJavaScript(exports) ? ["."] : [];
+  }
+  return Object.entries(exports)
+    .filter(([, value]) => hasUntypedJavaScript(value))
+    .map(([subpath]) => subpath);
+};
+
+const filesBelow = (directory: string): string[] =>
+  existsSync(directory)
+    ? readdirSync(directory, { recursive: true, encoding: "utf8" })
+        .map((file) => path.join(directory, file))
+        .filter((file) => statSync(file).isFile())
+    : [];
+
+/**
+ * The files a `types` entry names. A pattern entry (`./dist/types/*.d.ts`)
+ * names every file its `*` matches, in subdirectories too, as a subpath pattern
+ * in `exports` does.
+ */
+export const typeEntryFiles = (root: string, entry: string): string[] => {
+  const star = entry.indexOf("*");
+  if (star === -1) {
+    const file = path.resolve(root, entry);
+    return existsSync(file) ? [file] : [];
+  }
+  const head = entry.slice(0, star);
+  const prefix = path.resolve(root, head);
+  const suffix = entry.slice(star + 1);
+  const directory = head.endsWith("/") ? prefix : path.dirname(prefix);
+  return filesBelow(directory).filter(
+    (file) =>
+      file.startsWith(prefix) &&
+      file.endsWith(suffix) &&
+      file.length > prefix.length + suffix.length,
+  );
+};
+
 const relativeSpecifiersOf = (content: string): string[] =>
   Array.from(content.matchAll(specifierPattern), (m) => m[3] ?? "").filter(
     (specifier) => specifier.startsWith("."),
   );
 
-/** The declaration file a relative specifier names, if there is one. */
+const isFile = (file: string): boolean =>
+  existsSync(file) && statSync(file).isFile();
+
+/** `x.d.ts`, `x.d.mts`, `x.d.cts`, or `x.d.css.ts` for an arbitrary extension. */
+const isDeclarationFile = (file: string): boolean =>
+  /\.d\.([cm]?ts|[^./]+\.ts)$/.test(file);
+
+/**
+ * The file a relative specifier names for a consumer's compiler: a declaration
+ * file — `.d.mts` for `.mjs`, `x.d.css.ts` for `x.css` — or a JSON module.
+ */
 const resolveDeclaration = (
   fromFile: string,
   specifier: string,
 ): string | undefined => {
   const base = path.resolve(path.dirname(fromFile), specifier);
+  const extension = path.extname(base);
+  const stem = base.slice(0, base.length - extension.length);
   const candidates = [
     base,
-    base.replace(/\.[cm]?js$/, ".d.ts"),
+    base.replace(/\.js$/, ".d.ts"),
+    base.replace(/\.mjs$/, ".d.mts"),
+    base.replace(/\.cjs$/, ".d.cts"),
     `${base}.d.ts`,
     path.join(base, "index.d.ts"),
+    ...(extension === "" ? [] : [`${stem}.d${extension}.ts`]),
   ];
   return candidates.find(
-    (candidate) => /\.d\.[cm]?ts$/.test(candidate) && existsSync(candidate),
+    (candidate) =>
+      (isDeclarationFile(candidate) || candidate.endsWith(".json")) &&
+      isFile(candidate),
   );
 };
 
 /**
- * The declaration files a consumer's compiler can reach: the `types` entries
- * and everything they import relatively. A file nothing reaches — a story
- * helper, a test augmentation — is dead weight, but it cannot fail anyone's
- * build.
+ * The declaration files a consumer's compiler can reach — the `types` entries
+ * and everything they import relatively or name in a `/// <reference path>` —
+ * and every part of that the guard cannot resolve. A file nothing reaches — a
+ * story helper, a test augmentation — is dead weight, but it cannot fail
+ * anyone's build. What cannot be resolved is a problem: the check would
+ * otherwise pass on files it never read.
  */
-export const reachableDeclarationFiles = (root: string): string[] => {
-  const queue = typeEntriesOf(readManifest(root)).map((entry) =>
-    path.resolve(root, entry),
+export const declarationGraphOf = (
+  root: string,
+): { files: string[]; problems: string[] } => {
+  const manifest = readManifest(root);
+  const problems = untypedExportsOf(manifest).map(
+    (subpath) =>
+      `exports["${subpath}"] points at JavaScript without a "types" condition — a consumer gets no declarations for it.`,
   );
-  const seen = new Set<string>();
+  const entries = typeEntriesOf(manifest);
+  if (entries.length === 0) {
+    problems.push(`package.json names no "types" entry — nothing to check.`);
+  }
 
+  const queue: string[] = [];
+  for (const entry of entries) {
+    const files = typeEntryFiles(root, entry);
+    if (files.length === 0) {
+      problems.push(`The "types" entry "${entry}" matches no file.`);
+    }
+    queue.push(...files);
+  }
+
+  const seen = new Set<string>();
   for (let file = queue.pop(); file !== undefined; file = queue.pop()) {
-    if (seen.has(file) || !existsSync(file)) {
+    if (seen.has(file) || !isDeclarationFile(file)) {
       continue;
     }
     seen.add(file);
-    for (const specifier of relativeSpecifiersOf(readFileSync(file, "utf8"))) {
+    const content = readFileSync(file, "utf8");
+    const from = path.relative(root, file);
+    for (const specifier of relativeSpecifiersOf(content)) {
       const next = resolveDeclaration(file, specifier);
-      if (next) {
+      if (next === undefined) {
+        problems.push(
+          `${from} imports "${specifier}", which resolves to no declaration file.`,
+        );
+      } else {
         queue.push(next);
+      }
+    }
+    for (const [, , reference = ""] of content.matchAll(referencePathPattern)) {
+      const next = path.resolve(path.dirname(file), reference);
+      if (isFile(next)) {
+        queue.push(next);
+      } else {
+        problems.push(
+          `${from} references "${reference}", which does not exist.`,
+        );
       }
     }
   }
 
-  return [...seen];
+  return { files: [...seen], problems };
 };
+
+/** The declaration files a consumer's compiler can reach. */
+export const reachableDeclarationFiles = (root: string): string[] =>
+  declarationGraphOf(root).files;
 
 /**
  * Packages whose declarations reference something they do not declare, and the
@@ -180,10 +330,14 @@ export const acknowledgedUndeclaredTypeImports: Record<
   },
 };
 
+const isBuiltin = (name: string) =>
+  name.startsWith("node:") || builtinModules.includes(name);
+
 /**
  * Every package a reachable declaration imports must be one the consumer gets
  * installed: this package itself, one of its dependencies, peer or optional
- * dependencies, or a Node built-in.
+ * dependencies, or a Node built-in. A `/// <reference types>` may name such a
+ * package or its `@types` package; `node` names the built-ins.
  */
 export const findUndeclaredTypeImports = (
   root: string,
@@ -195,17 +349,25 @@ export const findUndeclaredTypeImports = (
     ...Object.keys(manifest.peerDependencies ?? {}),
     ...Object.keys(manifest.optionalDependencies ?? {}),
   ]);
-  const isBuiltin = (name: string) =>
-    name.startsWith("node:") || builtinModules.includes(name);
+  const isInstalledReference = (reference: string) =>
+    reference === "node" ||
+    typesPackagesOf(reference).some((name) => allowed.has(name));
 
-  return reachableDeclarationFiles(root).flatMap((file) =>
-    importedPackagesOf(readFileSync(file, "utf8"))
-      .filter((name) => !allowed.has(name) && !isBuiltin(name))
-      .map((packageName) => ({
-        file: path.relative(root, file),
-        packageName,
-      })),
-  );
+  return reachableDeclarationFiles(root).flatMap((file) => {
+    const content = readFileSync(file, "utf8");
+    const undeclared = [
+      ...importedPackagesOf(content).filter(
+        (name) => !allowed.has(name) && !isBuiltin(name),
+      ),
+      ...referencedTypesOf(content)
+        .filter((reference) => !isInstalledReference(reference))
+        .map(packageNameOf),
+    ];
+    return [...new Set(undeclared)].map((packageName) => ({
+      file: path.relative(root, file),
+      packageName,
+    }));
+  });
 };
 
 export const assertInstallableTypeImports = (root: string): void => {
@@ -219,6 +381,7 @@ export const assertInstallableTypeImports = (root: string): void => {
   );
 
   const problems = [
+    ...declarationGraphOf(root).problems,
     ...unexpected.map(
       (f) =>
         `${f.file} imports "${f.packageName}", which ${name} does not declare — a consumer cannot resolve it. Declare it, or bundle its declarations with withBundledDeclarations().`,
