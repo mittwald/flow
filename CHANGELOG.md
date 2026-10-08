@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.32](https://github.com/mittwald/flow/compare/1.5.0-next.31...1.5.0-next.32) (2026-10-08)
+
+### Bug Fixes
+
+* **ci:** stop the PR cross-version job saving the old-versions cache ([#3306](https://github.com/mittwald/flow/issues/3306)) ([74315db](https://github.com/mittwald/flow/commit/74315db0a60c14673319ff40d0d91e7d9be3ce1a))
+* **components:** keep published declarations valid under stripInternal ([c9f8dff](https://github.com/mittwald/flow/commit/c9f8dff8ae018c22812dae20f8a0e519db703622))
+
 ## [1.5.0-next.31](https://github.com/mittwald/flow/compare/1.5.0-next.30...1.5.0-next.31) (2026-10-08)
 
 ### Documentation
