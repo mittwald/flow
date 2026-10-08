@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.26](https://github.com/mittwald/flow/compare/1.4.25...1.4.26) (2026-10-08)
+
+### Bug Fixes
+
+* **ci:** stop the PR cross-version job saving the old-versions cache ([#3306](https://github.com/mittwald/flow/issues/3306)) ([74315db](https://github.com/mittwald/flow/commit/74315db0a60c14673319ff40d0d91e7d9be3ce1a))
+* **components:** keep published declarations valid under stripInternal ([c9f8dff](https://github.com/mittwald/flow/commit/c9f8dff8ae018c22812dae20f8a0e519db703622))
+
+### Documentation
+
+* add States foundations page ([5096ca5](https://github.com/mittwald/flow/commit/5096ca5825dad4ee7641d8e618696e7e7313241c))
+* **States:** address review feedback ([c3c809c](https://github.com/mittwald/flow/commit/c3c809c6bbd5975596e6a40a2b49d6cddb106423))
+
 ## [1.4.25](https://github.com/mittwald/flow/compare/1.4.24...1.4.25) (2026-10-08)
 
 ### Documentation
