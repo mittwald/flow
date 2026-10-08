@@ -172,80 +172,59 @@ const rebuildWithSlots = (
   return rebuilt;
 };
 
+/* Vue's `cloneIfMounted`: a mounted vnode is patched in place, never reused. */
+const cloneIfMounted = (child: VNode): VNode =>
+  child.el === null ? child : cloneVNode(child);
+
 /**
- * Applies the same rules one level deeper: to the children a child was handed.
+ * The default slot of a node, whatever form its children took.
  *
- * Flow's props context reaches a whole subtree, so a rule it writes for
- * `ActionGroup > Action` finds the actions inside the group. `mapChildren`
- * reaches one level, so a composite that has to configure a grandchild — the
- * `Modal` telling the actions in its footer not to ask for confirmation — asks
- * for that second level explicitly.
- *
- * Rebuilt rather than cloned: `cloneVNode` merges props and leaves children
- * alone, and the children of a component are its slot functions.
- *
- * The slot is called raw, the way the vnode carries it — Vue only normalizes a
- * slot's result when the component itself reads it, so a slot written `() =>
- * h(Action, …)` hands back one vnode and not a list.
+ * A template and `h(X, null, () => …)` hand a component a slot object.
+ * `vue/jsx-runtime` and `h(X, null, [ … ])` hand it a string or an array, which
+ * Vue turns into a default slot only when the component mounts — as it does a
+ * slot object whose `default` is a value rather than a function.
  */
-export const mapSlottedChildren = (
-  node: VNode,
-  decide: (child: VNode) => AnyRecord | undefined,
-): VNode => {
-  const slots = node.children;
-
-  if (!slots || typeof slots !== "object" || Array.isArray(slots)) {
-    return node;
+const defaultSlotOf = (
+  children: unknown,
+): ((...args: unknown[]) => unknown) | undefined => {
+  if (children === null || children === undefined) {
+    return undefined;
   }
-
-  const defaultSlot = (slots as Record<string, unknown>).default;
-
-  if (typeof defaultSlot !== "function") {
-    return node;
+  if (typeof children !== "object" || Array.isArray(children)) {
+    return () => children;
   }
-
-  return rebuildWithSlots(node, {
-    ...(slots as Record<string, unknown>),
-    default: (...args: unknown[]) => {
-      const rendered = (
-        defaultSlot as (...slotArgs: unknown[]) => VNode | VNode[]
-      )(...args);
-      return mapChildren(
-        Array.isArray(rendered) ? rendered : [rendered],
-        decide,
-      );
-    },
-  });
+  const slot = (children as Record<string, unknown>).default;
+  if (typeof slot === "function") {
+    return slot as (...args: unknown[]) => unknown;
+  }
+  return slot === null || slot === undefined ? undefined : () => slot;
 };
 
 /**
  * Rebuilds a child around new default-slot content.
  *
- * `mapSlottedChildren` maps the props of what a child was handed; this replaces
- * that content outright — which is what a composite needs when it does not
- * configure a child but _wraps_ it. Flow's `Modal` does exactly that to its
- * heading: the title goes into a container and the close button is appended
- * beside it.
+ * This replaces what a child was handed outright — which is what a composite
+ * needs when it does not configure a child but _wraps_ it. Flow's `Modal` does
+ * exactly that to its heading: the title goes into a container and the close
+ * button is appended beside it.
+ *
+ * Rebuilt rather than cloned: `cloneVNode` merges props and leaves children
+ * alone. The slot is called raw, the way the vnode carries it, and Vue only
+ * normalizes a slot's result when the component itself reads it — so the result
+ * goes through `flattenChildren`: a slot written `() => h(X)` hands back one
+ * vnode, not a list.
  */
 export const withSlotContent = (
   node: VNode,
   build: (rendered: VNode[]) => VNode[],
 ): VNode => {
   const slots = node.children;
-  const defaultSlot =
-    slots && typeof slots === "object" && !Array.isArray(slots)
-      ? (slots as Record<string, unknown>).default
-      : undefined;
+  const defaultSlot = defaultSlotOf(slots);
 
-  const rendered = (...args: unknown[]): VNode[] => {
-    if (typeof defaultSlot !== "function") {
-      return [];
-    }
-    const result = (defaultSlot as (...slotArgs: unknown[]) => VNode | VNode[])(
-      ...args,
-    );
-    return Array.isArray(result) ? result : [result];
-  };
+  const rendered = (...args: unknown[]): VNode[] =>
+    defaultSlot
+      ? flattenChildren(defaultSlot(...args)).map(cloneIfMounted)
+      : [];
 
   /*
    * The content is the author's, the wrapping around it the composite's: what

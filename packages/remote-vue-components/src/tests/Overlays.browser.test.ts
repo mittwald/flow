@@ -292,6 +292,30 @@ describe("Modal's props context", () => {
       .toBeVisible();
   });
 
+  /*
+   * What `vue/jsx-runtime` and `h()` with non-function children produce: the
+   * children as a string or an array, not as a slot.
+   */
+  test("keeps children handed as a string or an array", async () => {
+    renderOpenModal(() => [
+      h(Heading, null, "Crew roster"),
+      h(Content, null, [h(Text, null, () => "Rally your pilots.")]),
+      h(ActionGroup, null, [h(Button, null, () => "Create")]),
+    ]);
+
+    await expect
+      .element(page.getByRole("heading", { name: "Crew roster", level: 2 }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "Create" }))
+      .toBeVisible();
+    const modal = hostOverlay("flow--modal");
+    expect(modal?.textContent).toContain("Rally your pilots.");
+    expect(
+      modal?.querySelector(".flow--modal--header-title")?.textContent,
+    ).toBe("Crew roster");
+  });
+
   test("keeps the close button visible with showCloseButton", async () => {
     renderOpenModal(() => [h(Heading, null, () => "Squadron")], {
       showCloseButton: true,
@@ -585,6 +609,29 @@ describe("LightBox", () => {
     await page.getByRole("button", { name: "Close" }).click();
 
     await vi.waitFor(() => expect(hostOverlay("flow--light-box")).toBeNull());
+  });
+
+  test("keeps children handed as an array", async () => {
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(LightBox, { isOpen: true }, () => [
+            h(Text, null, "Death Star plans"),
+            h(ActionGroup, null, [
+              h(Action, { onAction: () => undefined }, [
+                h(Button, null, "Download"),
+              ]),
+            ]),
+          ]),
+      ),
+    );
+
+    const download = page.getByRole("button", { name: "Download" });
+    await expect.element(download).toBeVisible();
+    await expect.element(download).toHaveClass("flow--button--light-static");
+    expect(hostOverlay("flow--light-box")?.textContent).toContain(
+      "Death Star plans",
+    );
   });
 
   test("reports opening through onOpenChange", async () => {

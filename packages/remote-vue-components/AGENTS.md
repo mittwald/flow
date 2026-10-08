@@ -197,16 +197,17 @@ what this binding establishes about supporting a framework at all.
 - **Two things make the rebuilds possible, and both are worth knowing.**
   `mapChildren` (`src/overlays/childProps.ts`) stands in for `PropsContext`: it
   `cloneVNode`s the children the composite was handed, which reaches one level
-  rather than the whole subtree. A second level costs an explicit
-  `mapSlottedChildren`, which rebuilds the child around a wrapped default slot —
-  `Modal` needs it to tell the `Action`s inside its `ActionGroup` not to ask for
-  confirmation. **Call the slot's result through `Array.isArray`**: a slot
-  written `() => h(X)` hands back one vnode, because Vue only normalizes a slot
-  when the component itself reads it. And the composites pass Flow's own class
-  names (`flow--modal`, `flow--popover`, …) to `OverlayContent`, because that is
-  how the host is asked for a modal rather than a bare dialog. Marking `Modal`
-  and friends `@flr-generate` would remove both — it is the change this layer
-  argues for.
+  rather than the whole subtree. A second level costs a nested rule
+  (`applyChildRules`), which rebuilds the child around a wrapped default slot
+  (`withSlotContent`) — `Modal` needs it to tell the `Action`s inside its
+  `ActionGroup` not to ask for confirmation. **Normalize what the child was
+  handed**, as Vue does on mount: a slot written `() => h(X)` hands back one
+  vnode, and `vue/jsx-runtime` or `h(X, null, [ … ])` hand over a string or an
+  array instead of a slot. And the composites pass Flow's own class names
+  (`flow--modal`, `flow--popover`, …) to `OverlayContent`, because that is how
+  the host is asked for a modal rather than a bare dialog. Marking `Modal` and
+  friends `@flr-generate` would remove both — it is the change this layer argues
+  for.
 - **The overlay controller keeps Flow's names, so it keeps Flow's meaning.**
   `close()` asks first on a `confirm-on-close` modal, and only
   `close({ bypassConfirmation: true })` does not — code ported from React that

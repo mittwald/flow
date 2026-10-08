@@ -2,10 +2,10 @@ import {
   dynamic,
   flattenChildren,
   mapChildren,
-  mapSlottedChildren,
+  withSlotContent,
 } from "@/overlays/childProps";
 import { describe, expect, test } from "vitest";
-import { createCommentVNode, Fragment, h, type VNode } from "vue";
+import { createCommentVNode, Fragment, h, Text, type VNode } from "vue";
 
 const Marker = { name: "Marker", render: () => null };
 const Other = { name: "Other", render: () => null };
@@ -135,50 +135,64 @@ describe("mapChildren", () => {
   });
 });
 
-describe("mapSlottedChildren", () => {
-  const renderedChildren = (node: VNode): VNode[] => {
-    const slots = node.children as { default: () => VNode[] };
-    return slots.default();
+describe("withSlotContent", () => {
+  /* What the rebuilt node renders, with `build` handing the content back. */
+  const content = (node: VNode): VNode[] => {
+    const rebuilt = withSlotContent(node, (rendered) => rendered);
+    return (rebuilt.children as { default: () => VNode[] }).default();
   };
 
-  test("applies the rule to what the child's slot renders", () => {
-    const group = h(Other, { class: "group" }, () => [h(Marker), h(Other)]);
+  const describeChild = (child: VNode) =>
+    child.type === Text ? child.children : child.type;
 
-    const mapped = mapSlottedChildren(group, (child) =>
-      child.type === Marker ? { color: "danger" } : undefined,
-    );
-
-    const children = renderedChildren(mapped);
-    expect(children[0]?.props).toMatchObject({ color: "danger" });
-    expect(children[1]?.props).toBeNull();
+  test("reads a slot function", () => {
+    expect(
+      content(h(Other, null, () => [h(Marker), "text"])).map(describeChild),
+    ).toEqual([Marker, "text"]);
   });
 
   /*
    * A slot written `() => h(X)` hands back one vnode rather than a list: Vue
-   * only normalizes that when the component itself reads its slots, and this
-   * calls the function the vnode carries.
+   * only normalizes that when the component itself reads its slots.
    */
   test("takes a slot that renders a single child", () => {
-    const group = h(Other, null, () => h(Marker));
+    expect(content(h(Other, null, () => h(Marker))).map(describeChild)).toEqual(
+      [Marker],
+    );
+  });
 
-    const mapped = mapSlottedChildren(group, () => ({ color: "danger" }));
+  /* What `vue/jsx-runtime` and `h()` with non-function children produce. */
+  test("reads children handed as a string", () => {
+    expect(content(h(Other, null, "Crew roster")).map(describeChild)).toEqual([
+      "Crew roster",
+    ]);
+  });
 
-    expect(renderedChildren(mapped)[0]?.props).toMatchObject({
-      color: "danger",
-    });
+  test("reads children handed as an array", () => {
+    expect(
+      content(h(Other, null, [h(Marker), h(Fragment, [h(Other)])])).map(
+        describeChild,
+      ),
+    ).toEqual([Marker, Other]);
+  });
+
+  test("reads a slot object whose default is a value", () => {
+    expect(
+      content(h(Other, null, { default: [h(Marker)] } as never)).map(
+        describeChild,
+      ),
+    ).toEqual([Marker]);
   });
 
   test("keeps the props the child was given", () => {
     const group = h(Other, { class: "group" }, () => h(Marker));
 
-    expect(mapSlottedChildren(group, () => undefined).props).toMatchObject({
+    expect(withSlotContent(group, (rendered) => rendered).props).toMatchObject({
       class: "group",
     });
   });
 
-  test("leaves a child without a default slot alone", () => {
-    const child = h(Marker, { color: "danger" });
-
-    expect(mapSlottedChildren(child, () => ({ color: "success" }))).toBe(child);
+  test("renders nothing for a child without children", () => {
+    expect(content(h(Marker))).toEqual([]);
   });
 });

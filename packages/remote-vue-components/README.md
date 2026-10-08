@@ -133,8 +133,8 @@ themselves. They cannot be generated, so this package rebuilds them in Vue:
 Where Flow uses a `PropsContext` to configure the components inside a composite,
 these use `cloneVNode` on the children the composite was handed (`mapChildren`
 in `src/overlays/childProps.ts`). It reaches one level, not the whole subtree —
-a rule for a grandchild costs an explicit `mapSlottedChildren`, which is what
-tells the `Action`s in a modal's footer not to ask for confirmation.
+a rule for a grandchild costs an explicit nested rule (`applyChildRules`), which
+is what tells the `Action`s in a modal's footer not to ask for confirmation.
 
 ## Known gaps
 
