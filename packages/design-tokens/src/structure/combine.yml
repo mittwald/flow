@@ -11,3 +11,9 @@ combine:
   icon-text:
     spacing:
       value: "{size-rem.s}"
+  kbd-kbd:
+    spacing:
+      value: "{size-rem.xs}"
+  kbd-text:
+    spacing:
+      value: "{size-rem.s}"

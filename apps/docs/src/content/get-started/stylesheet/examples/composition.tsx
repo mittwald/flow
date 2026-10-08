@@ -1,9 +1,9 @@
 import ExampleSvg from "@/content/get-started/stylesheet/examples/components/ExampleSvg";
 
 <aside className="flow--alert">
-  <h3 className="flow--heading flow--heading--s flow--alert--heading">
+  <h3 className="flow--heading flow--heading--size-s flow--alert--heading">
     <span className="flow--heading--heading-text">
-      <ExampleSvg className="flow--icon flow--alert-icon flow--heading--icon" />
+      <ExampleSvg className="flow--icon flow--alert--icon flow--heading--icon" />
       E-Mail-Adresse wurde archiviert
     </span>
   </h3>

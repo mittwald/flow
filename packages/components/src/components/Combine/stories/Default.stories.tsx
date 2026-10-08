@@ -11,6 +11,7 @@ import {
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
 import { CopyButton } from "@/components/CopyButton";
+import { Kbd } from "@/components/Kbd";
 
 const meta: Meta<typeof Combine> = {
   title: "Structure/Combine",
@@ -68,6 +69,34 @@ export const TextCopyButton: Story = {
     <Combine {...props}>
       <Text>comms.rebellion.org</Text>
       <CopyButton text="comms.rebellion.org" />
+    </Combine>
+  ),
+};
+
+export const KbdKbd: Story = {
+  render: (props) => (
+    <Combine {...props}>
+      <Kbd variant="soft">↑</Kbd>
+      <Kbd variant="soft">↓</Kbd>
+    </Combine>
+  ),
+};
+
+export const KbdText: Story = {
+  render: (props) => (
+    <Combine {...props}>
+      <Kbd variant="soft">Esc</Kbd>
+      <Text>Close</Text>
+    </Combine>
+  ),
+};
+
+export const KbdKbdText: Story = {
+  render: (props) => (
+    <Combine {...props}>
+      <Kbd variant="soft">↑</Kbd>
+      <Kbd variant="soft">↓</Kbd>
+      <Text>Select</Text>
     </Combine>
   ),
 };

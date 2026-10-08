@@ -3,6 +3,264 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.32](https://github.com/mittwald/flow/compare/1.5.0-next.31...1.5.0-next.32) (2026-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.31](https://github.com/mittwald/flow/compare/1.5.0-next.30...1.5.0-next.31) (2026-10-08)
+
+### Features
+
+* **SkeletonMode:** add SkeletonMode with text components ([f6dcc43](https://github.com/mittwald/flow/commit/f6dcc433c47ad4c577c068c75ccc3aa2563377b6))
+
+## [1.5.0-next.30](https://github.com/mittwald/flow/compare/1.5.0-next.29...1.5.0-next.30) (2026-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.29](https://github.com/mittwald/flow/compare/1.4.24...1.5.0-next.29) (2026-10-08)
+
+## [1.5.0-next.28](https://github.com/mittwald/flow/compare/1.4.23...1.5.0-next.28) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.28 ([31e1a0d](https://github.com/mittwald/flow/commit/31e1a0dfc9d1e758a9b8eae66b61f158e77016a0))
+
+## [1.5.0-next.27](https://github.com/mittwald/flow/compare/1.4.22...1.5.0-next.27) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.27 ([d2a44c8](https://github.com/mittwald/flow/commit/d2a44c89190f8d4c910513506f0d97d68fcda417))
+
+## [1.5.0-next.26](https://github.com/mittwald/flow/compare/1.5.0-next.25...1.5.0-next.26) (2026-10-07)
+
+### Features
+
+* **CodeEditor:** support isDisabled ([fa93228](https://github.com/mittwald/flow/commit/fa9322889f14ca9c52bb8cddc1ac0c252e64199f))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.26 ([2ff47a8](https://github.com/mittwald/flow/commit/2ff47a897693af357dc952f2b1d2e35407604334))
+
+## [1.5.0-next.25](https://github.com/mittwald/flow/compare/1.4.21...1.5.0-next.25) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.25 ([9c478d1](https://github.com/mittwald/flow/commit/9c478d1c37c2221ab0323bcdadd9fa3eeecd57cf))
+
+## [1.5.0-next.24](https://github.com/mittwald/flow/compare/1.4.20...1.5.0-next.24) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.24 ([ad5cedd](https://github.com/mittwald/flow/commit/ad5cedd5fa77372d8b3c80dc952b0b2c434c9350))
+
+## [1.5.0-next.23](https://github.com/mittwald/flow/compare/1.5.0-next.22...1.5.0-next.23) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.23 ([f716c3c](https://github.com/mittwald/flow/commit/f716c3c00feb3589a23e3e9f9bf802c420ecfca3))
+
+## [1.5.0-next.22](https://github.com/mittwald/flow/compare/1.4.19...1.5.0-next.22) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.22 ([1849bda](https://github.com/mittwald/flow/commit/1849bda38bc564fdeb710e10899001a582a5dca9))
+
+## [1.5.0-next.21](https://github.com/mittwald/flow/compare/1.4.18...1.5.0-next.21) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.21 ([31952dd](https://github.com/mittwald/flow/commit/31952dd4ecf6319b2c6c78a44206055ba2178599))
+
+## [1.5.0-next.20](https://github.com/mittwald/flow/compare/1.4.17...1.5.0-next.20) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.20 ([d2a82c0](https://github.com/mittwald/flow/commit/d2a82c05ec10ff1362326b152afdd909eb958c20))
+
+## [1.5.0-next.19](https://github.com/mittwald/flow/compare/1.4.16...1.5.0-next.19) (2026-10-06)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.19 ([13bc592](https://github.com/mittwald/flow/commit/13bc59298962dccdbfb3737dbd26caa5da05ac2a))
+
+## [1.5.0-next.18](https://github.com/mittwald/flow/compare/1.4.15...1.5.0-next.18) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.18 ([839228d](https://github.com/mittwald/flow/commit/839228dbb0ef4548c2a337c1b719d4a2269b9661))
+
+## [1.5.0-next.17](https://github.com/mittwald/flow/compare/1.4.14...1.5.0-next.17) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.17 ([4d6ed05](https://github.com/mittwald/flow/commit/4d6ed05e1ffc6a86da5d425fad6bc2e38f858571))
+
+## [1.5.0-next.16](https://github.com/mittwald/flow/compare/1.4.13...1.5.0-next.16) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.16 ([9896203](https://github.com/mittwald/flow/commit/9896203e56f2d78894c1ac1a2845e1a9da1c137f))
+
+## [1.5.0-next.15](https://github.com/mittwald/flow/compare/1.4.12...1.5.0-next.15) (2026-10-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.15 ([e1b4a6d](https://github.com/mittwald/flow/commit/e1b4a6de5283b8e93e9277227b93cca839b648a9))
+
+## [1.5.0-next.14](https://github.com/mittwald/flow/compare/1.4.11...1.5.0-next.14) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.14 ([5d75bc4](https://github.com/mittwald/flow/commit/5d75bc45be56605e82ea05155b5a60927bda1b39))
+
+## [1.5.0-next.13](https://github.com/mittwald/flow/compare/1.4.10...1.5.0-next.13) (2026-10-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.13 ([da614d1](https://github.com/mittwald/flow/commit/da614d12c9689301781070253a1ee42a28777fe9))
+
+## [1.5.0-next.12](https://github.com/mittwald/flow/compare/1.4.9...1.5.0-next.12) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.12 ([b6a3e2f](https://github.com/mittwald/flow/commit/b6a3e2fd84ee965ef46190b9bcf66acfc5773bd5))
+
+## [1.5.0-next.11](https://github.com/mittwald/flow/compare/1.4.8...1.5.0-next.11) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.11 ([9a13e3c](https://github.com/mittwald/flow/commit/9a13e3c47dc54622a2b8a3f1eba0ee15422a5d9b))
+
+## [1.5.0-next.10](https://github.com/mittwald/flow/compare/1.5.0-next.9...1.5.0-next.10) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.10 ([4675bcc](https://github.com/mittwald/flow/commit/4675bccd33e78a7b4cf279168a8aedc8c2265326))
+
+## [1.5.0-next.9](https://github.com/mittwald/flow/compare/1.4.7...1.5.0-next.9) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.9 ([0e23e83](https://github.com/mittwald/flow/commit/0e23e83976d053838f8d02fd9b42093ad5c9bf14))
+
+## [1.5.0-next.8](https://github.com/mittwald/flow/compare/1.5.0-next.7...1.5.0-next.8) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.8 ([5125630](https://github.com/mittwald/flow/commit/512563065849610b77b5b2d484ee49ccbbfeae79))
+
+## [1.5.0-next.7](https://github.com/mittwald/flow/compare/1.4.6...1.5.0-next.7) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.7 ([b8197d5](https://github.com/mittwald/flow/commit/b8197d594872c5342fb4da079a7ef473243bfea4))
+
+## [1.5.0-next.6](https://github.com/mittwald/flow/compare/1.4.5...1.5.0-next.6) (2026-10-01)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.6 ([c10f2f6](https://github.com/mittwald/flow/commit/c10f2f697376fa25b4c871ab949defa546cd2288))
+
+## [1.5.0-next.5](https://github.com/mittwald/flow/compare/1.4.4...1.5.0-next.5) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.5 ([e9daa8b](https://github.com/mittwald/flow/commit/e9daa8bfb8f8c3b89bd9001696b970bb48067ead))
+
+## [1.5.0-next.4](https://github.com/mittwald/flow/compare/1.5.0-next.3...1.5.0-next.4) (2026-09-30)
+
+### Features
+
+* **Flex:** add paddingBlock and paddingInline ([241184d](https://github.com/mittwald/flow/commit/241184dce0e62d848622b38dcb5789355a1e6968))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.4 ([df1f240](https://github.com/mittwald/flow/commit/df1f240e826f1ccf4932daa323f0bd11c802112e))
+
+## [1.5.0-next.3](https://github.com/mittwald/flow/compare/1.4.3...1.5.0-next.3) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.3 ([08a0785](https://github.com/mittwald/flow/commit/08a07852732a16bab90f066ace75fc65b7445740))
+
+## [1.5.0-next.2](https://github.com/mittwald/flow/compare/1.4.2...1.5.0-next.2) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.2 ([a1b587c](https://github.com/mittwald/flow/commit/a1b587c6c7bab8380d608aaed55331348f36d3d8))
+
+## [1.5.0-next.1](https://github.com/mittwald/flow/compare/1.4.1...1.5.0-next.1) (2026-09-30)
+
+### Features
+
+* **CartesianChart:** add width prop to YAxis, size category axes automatically ([7e7e5a1](https://github.com/mittwald/flow/commit/7e7e5a15cf60b0e64bf5c7b4c4046f2003b80c08))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.1 ([9602250](https://github.com/mittwald/flow/commit/960225094d5ee4e519ccdd7020d4dd138fa3bceb))
+
+## [1.5.0-next.0](https://github.com/mittwald/flow/compare/1.4.0...1.5.0-next.0) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.0-next.0 ([8f28ecd](https://github.com/mittwald/flow/commit/8f28ecdc568addeb83eac40f35f0653c70766141))
+
+## [1.4.0-next.15](https://github.com/mittwald/flow/compare/1.3.13...1.4.0-next.15) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.0-next.15 ([3513984](https://github.com/mittwald/flow/commit/35139842357e3bb7fd62662dc7b7acbda2fcadf6))
+
+## [1.5.0-next.28](https://github.com/mittwald/flow/compare/1.5.0-next.27...1.5.0-next.28) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.27](https://github.com/mittwald/flow/compare/1.5.0-next.26...1.5.0-next.27) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.26](https://github.com/mittwald/flow/compare/1.5.0-next.25...1.5.0-next.26) (2026-10-07)
+
+### Features
+
+* **CodeEditor:** support isDisabled ([fa93228](https://github.com/mittwald/flow/commit/fa9322889f14ca9c52bb8cddc1ac0c252e64199f))
+
+## [1.5.0-next.25](https://github.com/mittwald/flow/compare/1.5.0-next.24...1.5.0-next.25) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.24](https://github.com/mittwald/flow/compare/1.5.0-next.23...1.5.0-next.24) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.23](https://github.com/mittwald/flow/compare/1.5.0-next.22...1.5.0-next.23) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.22](https://github.com/mittwald/flow/compare/1.5.0-next.21...1.5.0-next.22) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.21](https://github.com/mittwald/flow/compare/1.5.0-next.20...1.5.0-next.21) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.20](https://github.com/mittwald/flow/compare/1.5.0-next.19...1.5.0-next.20) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.19](https://github.com/mittwald/flow/compare/1.5.0-next.18...1.5.0-next.19) (2026-10-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.18](https://github.com/mittwald/flow/compare/1.5.0-next.17...1.5.0-next.18) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.0-next.17](https://github.com/mittwald/flow/compare/1.5.0-next.16...1.5.0-next.17) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 ## [1.5.0-next.16](https://github.com/mittwald/flow/compare/1.5.0-next.15...1.5.0-next.16) (2026-10-05)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
