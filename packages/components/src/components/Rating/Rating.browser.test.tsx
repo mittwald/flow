@@ -8,6 +8,7 @@ import { Label } from "@/components/Label";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { RatingSegment } from "@/components/Rating/components/RatingSegment";
 import { IconStarFilled } from "@/components/Icon/components/icons";
+import { parkPointer } from "@/lib/dev/parkPointer";
 import styles from "./Rating.module.scss";
 
 const segments = (): HTMLElement[] =>
@@ -20,15 +21,8 @@ const fillStates = (): boolean[] =>
     return !!filled && getComputedStyle(filled).opacity === "1";
   });
 
-// The pointer stays where an earlier test, or file, left it, and Firefox
-// previews the segment a fresh Rating renders underneath. Tests render from the
-// top left, so park it in the opposite corner.
-beforeEach(async () => {
-  await page.elementLocator(document.documentElement).hover({
-    position: { x: window.innerWidth - 1, y: window.innerHeight - 1 },
-    force: true,
-  });
-});
+// A pointer left over the next Rating previews a segment in Firefox.
+beforeEach(parkPointer);
 
 test("segment children set the number of segments and their labels", async () => {
   await render(
