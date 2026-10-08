@@ -614,9 +614,11 @@ where the error points.
   **Fix:** Copy the name from the component's committed `*.module.d.scss.ts` —
   that is what the rule checks against — or take the rule's "Did you mean"
   suggestion. Just added the class? Regenerate the stubs first:
-  `pnpm nx build:scss-types components`. Before the rule (#3091) this class of
-  bug failed completely silently: no build error, no console warning, and the
-  docs site and Storybook kept rendering
+  `pnpm nx build:scss-types components`. The same applies to ESLint's
+  `flow/no-unknown-flow-class`, which checks hardcoded `flow--…` strings in
+  TS/TSX (#3095). Before the rule (#3091) this class of bug failed completely
+  silently: no build error, no console warning, and the docs site and Storybook
+  kept rendering
 
 - **Symptom:** The **Routing** check fails on a `fix:` PR with
   **`Commit <sha> is a 'feat' (…) — a merge commit brings it onto 'main'`**, or

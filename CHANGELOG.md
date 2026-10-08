@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.24](https://github.com/mittwald/flow/compare/1.4.23...1.4.24) (2026-10-07)
+
+### Bug Fixes
+
+* **List:** include the whole end day in the date range filter ([#3383](https://github.com/mittwald/flow/issues/3383)) ([f02d3d5](https://github.com/mittwald/flow/commit/f02d3d50d7de0e5a2a53950047e3f75431ac18d0))
+
+### Documentation
+
+* capture from the docs examples, not Storybook ([#3342](https://github.com/mittwald/flow/issues/3342)) ([c6c3d7a](https://github.com/mittwald/flow/commit/c6c3d7afe05ace7aa8eb987d74e99cdc69214328))
+
+## [1.4.23](https://github.com/mittwald/flow/compare/1.4.22...1.4.23) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **components:** flag hardcoded flow-- class names that nothing generates ([#3362](https://github.com/mittwald/flow/issues/3362)) ([ad7e7ac](https://github.com/mittwald/flow/commit/ad7e7ac6159ff6c3a9564da3b22f3de3c821d60a))
+
+## [1.4.22](https://github.com/mittwald/flow/compare/1.4.21...1.4.22) (2026-10-07)
+
+### Bug Fixes
+
+* **Overlay:** keep typed dates when react-aria appends a hidden node to body ([#3395](https://github.com/mittwald/flow/issues/3395)) ([26403a0](https://github.com/mittwald/flow/commit/26403a00d04ddf10715dca84340e39af8d7f6d83))
+
+## [1.4.21](https://github.com/mittwald/flow/compare/1.4.20...1.4.21) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group across 1 directory with 13 updates ([#3400](https://github.com/mittwald/flow/issues/3400)) ([af37f4d](https://github.com/mittwald/flow/commit/af37f4d576ac75242f1e9e47d3476037ec168627))
+
+## [1.4.20](https://github.com/mittwald/flow/compare/1.4.19...1.4.20) (2026-10-07)
+
+### Bug Fixes
+
+* **LayoutCard:** space alerts stacked directly in a LayoutCard ([#3394](https://github.com/mittwald/flow/issues/3394)) ([b4a0a1c](https://github.com/mittwald/flow/commit/b4a0a1c702e9b9c1235b2c0935fb593eb27702cb))
+
+## [1.4.19](https://github.com/mittwald/flow/compare/1.4.18...1.4.19) (2026-10-07)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 16 updates ([#3401](https://github.com/mittwald/flow/issues/3401)) ([21b2626](https://github.com/mittwald/flow/commit/21b2626b8ec74e2bf32e716afde7d23709f2514d))
+
+## [1.4.18](https://github.com/mittwald/flow/compare/1.4.17...1.4.18) (2026-10-07)
+
+### Bug Fixes
+
+* **ActionGroup:** keep multiple abort actions together at the start ([#3397](https://github.com/mittwald/flow/issues/3397)) ([16c3464](https://github.com/mittwald/flow/commit/16c346406dd9d48872425e9604c8e03aaf1b8680))
+
+## [1.4.17](https://github.com/mittwald/flow/compare/1.4.16...1.4.17) (2026-10-07)
+
+### Documentation
+
+* structure modal content with Section ([#3393](https://github.com/mittwald/flow/issues/3393)) ([860bad0](https://github.com/mittwald/flow/commit/860bad0f23185b0e6e8171a7eacd7080bd33567b))
+
 ## [1.4.16](https://github.com/mittwald/flow/compare/1.4.15...1.4.16) (2026-10-06)
 
 ### Bug Fixes
