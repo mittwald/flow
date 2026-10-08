@@ -19,7 +19,7 @@ wie er formuliert ist.
 - Wähle die Komponente passend zum Umfang des Fehlers: AlertText für kleine
   Elemente, IllustratedMessage für ganze Bereiche, Modal für fehlgeschlagene
   Aktionen.
-- Schreibe aus Sicht von "wir" und vermeide Schuldzuweisungen.
+- Bleibe sachlich: keine Schuldzuweisungen und keine Entschuldigungen.
 - Formuliere kurz und positiv. Das hilft Nutzern, schnell zu handeln.
 
 ---
@@ -84,9 +84,10 @@ ist das Registrieren einer Domain. Mehr dazu steht im
 
 # Wie wir Fehler formulieren
 
-Die allgemeinen Regeln zu aktiver Sprache, Anrede und Satzlänge stehen im
-[Sprach-Guide](/foundations/content-guidelines/sprach-guide). Für
-Fehlermeldungen gilt zusätzlich:
+Die allgemeinen Regeln zu Anrede und Satzlänge stehen im
+[Sprach-Guide](/foundations/content-guidelines/sprach-guide). Dort steht auch,
+dass Passiv in Ordnung ist, wenn ein System handelt. Das trifft bei
+Fehlermeldungen oft zu. Für sie gilt zusätzlich:
 
 ## Kurz, mit Lösung
 
@@ -102,58 +103,24 @@ name@domain.de ein."
   />
 </DoAndDont>
 
+## Schuldzuweisungen vermeiden
+
+Beschreibe, was passiert ist, und nicht, was der Nutzer falsch gemacht hat. Ein
+Fehler ist an sich schon frustrierend.
+
 <DoAndDont>
-  <Do exampleText="Bitte wähle ein Passwort mit mindestens 8 Zeichen."></Do>
-  <Dont
-    exampleText="Das eingegebene Passwort entspricht nicht den Mindestanforderungen. Stelle
-sicher, dass es min. 8 Zeichen, einen Groß- und Kleinbuchstaben, eine Ziffer und
-ein Sonderzeichen enthält."
-  ></Dont>
+  <Do exampleText="Das Bild konnte nicht hochgeladen werden. Wähle eine Datei bis 10 MB." />
+  <Dont exampleText="Du hast ein ungültiges Bild hochgeladen. Wähle eine Datei bis 10 MB." />
 </DoAndDont>
 
-## Keine Schuldzuweisung, "wir" als Absender
+## Sachlich bleiben, nicht entschuldigen
 
-Ein Fehler ist an sich schon frustrierend. Vermittle Unterstützung statt
-Schuldgefühl. Wenn das System als "wir" und der Nutzer als "du" auftritt, ist
-klar, wo etwas schiefgegangen ist und wer handeln muss.
-
-<DoAndDont>
-  <Do
-    exampleText="Wir konnten das Bild nicht hochladen. Bitte überprüfe die Dateigröße und
-versuche es erneut."
-  />
-  <Dont
-    exampleText="Du hast ein ungültiges Bild hochgeladen. Überprüfe die Dateigröße und versuche
-es erneut."
-  />
-</DoAndDont>
+Formuliere Fehlermeldungen sachlich und fachlich. Entschuldigungen lenken vom
+Wesentlichen ab und lassen Fehler größer wirken.
 
 <DoAndDont>
-  <Do
-    exampleText="Wir konnten dein Passwort nicht zurücksetzen. Bitte überprüfe die E-Mail-Adresse
-und versuche es erneut."
-  />
-  <Dont exampleText="Fehler beim Zurücksetzen des Passworts. Bitte versuche es erneut." />
-</DoAndDont>
-
-## Entschuldigen nur bei ernsten Fehlern
-
-Entschuldigungen für Kleinigkeiten lenken vom Wesentlichen ab und lassen Fehler
-größer wirken. Spare sie für ernste Fälle auf, zum Beispiel Datenverlust oder
-wenn Nutzer viel tun müssen, um das Problem zu beheben.
-
-<DoAndDont>
-  <Do exampleText="Es tut uns leid, durch einen Serverfehler konnten wir deine Eingabe nicht speichern. Bitte versuche es erneut.">
-
-    Entschuldige dich bei ernsten Fehlern, z. B. einem systembedingten Verlust von Daten.
-
-  </Do>
-  <Dont exampleText="Es tut uns leid, wir unterstützen das Dateiformat nicht.">
-
-    Entschuldige dich nicht für Kleinigkeiten oder wenn das System keine Schuld
-    trägt.
-
-  </Dont>
+  <Do exampleText="Die Eingabe konnte nicht gespeichert werden. Versuche es erneut." />
+  <Dont exampleText="Es tut uns leid, wir konnten deine Eingabe nicht speichern. Versuche es erneut." />
 </DoAndDont>
 
 ## Positiv formulieren
@@ -164,7 +131,7 @@ fehlgeschlagen, falsch oder ungültig. Bei Systemfehlern ohne direkte Lösung
 gelingt das nicht immer.
 
 <DoAndDont>
-  <Do exampleText="Wir konnten keine Verbindung zum Server herstellen. Bitte versuche es erneut."></Do>
+  <Do exampleText="Die Verbindung zum Server konnte nicht hergestellt werden. Versuche es erneut."></Do>
   <Dont exampleText="Durch ein Problem mit dem Server ist die Verbindung fehlgeschlagen."></Dont>
 </DoAndDont>
 
@@ -174,9 +141,9 @@ Formuliere eher allgemein als zu spezifisch. Details wie Dateinamen oder Ordner
 finden Nutzer meist an anderer Stelle in der Oberfläche.
 
 <DoAndDont>
-  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY."></Do>
+  <Do exampleText="Die Datei konnte nicht hochgeladen werden. Verwende eine Datei vom Typ XY."></Do>
   <Dont
-    exampleText="Wir konnten die Datei „example_file-20.4.24.xy“ nicht hochladen. Bitte verwende
+    exampleText="Die Datei „example_file-20.4.24.xy“ konnte nicht hochgeladen werden. Verwende
 eine Datei vom Typ XY."
   ></Dont>
 </DoAndDont>
