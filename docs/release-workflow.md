@@ -51,13 +51,18 @@ flowchart LR
 
 ## How changes flow (the mechanics)
 
-- **Conventional PR titles drive everything.** The repo **squash-merges**, so
-  the _PR title_ becomes the release commit that Lerna-Lite reads to derive the
-  version bump and changelog. A CI guard (`.github/workflows/commit-guard.yml`)
-  enforces both that the title is a valid Conventional Commit and that it is
-  routed to the right line — a `feat:` is rejected on `main` (features belong on
-  `next`), and a breaking change on both `main` and `next` (it belongs on the
-  major line).
+- **The line decides the bump, commits decide the changelog.** `publish.yml`
+  passes the bump explicitly: a push to `main` is a patch, a push to `next`
+  counts up `-next.N`, minors come pre-graduated by promotion. Lerna-Lite writes
+  the changelog from every commit since the last tag — a squash merge turns the
+  _PR title_ into that commit, a merge commit brings every branch commit along.
+  Derived instead, a `feat:` commit a merge carried onto `main` released 1.3.0
+  (#3290, #3333), and a `!` commit on `next` opened `2.0.0-next.0` (#3199).
+- **Conventional commits are routed.** A CI guard
+  (`.github/workflows/commit-guard.yml`) enforces that the title is a valid
+  Conventional Commit and that the title **and every commit** are routed to the
+  right line — a `feat:` is rejected on `main` (features belong on `next`), and
+  a breaking change on both `main` and `next` (it belongs on the major line).
 - **`Closes #…` works on both lines.** GitHub resolves a closing keyword only
   against the default branch, so a PR merged into `next` closed nothing — the
   link rendered in the sidebar and the issue stayed open until somebody noticed.
@@ -77,12 +82,11 @@ flowchart LR
   `feat(X)!:`, so the commit parses to no type and the writer drops it — the
   entry does not move into a BREAKING section, it disappears (#2883). The
   configured preset understands `!` and renders a `⚠ BREAKING CHANGES` section.
-  It would also recommend a Major, but no release path derives one: routing
-  keeps `!` off `main` and `next`, and the cut and promotion paths set the
-  version explicitly. The preset is pinned to `^9`: `10.x` ships a legacy-writer
-  guard that Lerna-Lite 5's changelog config trips over (it recompiles the
-  preset's template itself), and the guard then aborts `lerna version`. Re-check
-  on the next Lerna-Lite major.
+  It would also recommend a Major, but no release path derives one: every path
+  sets the bump explicitly. The preset is pinned to `^9`: `10.x` ships a
+  legacy-writer guard that Lerna-Lite 5's changelog config trips over (it
+  recompiles the preset's template itself), and the guard then aborts
+  `lerna version`. Re-check on the next Lerna-Lite major.
 - **No type is hidden from the changelog** (#3023). The preset hides `docs`,
   `style`, `chore`, `refactor`, `test`, `build` and `ci` by default, so a
   release those types triggered had nothing to write and Lerna emitted
@@ -139,13 +143,13 @@ flowchart LR
       `src/auto-generated/**`, and `codemods`' build script is
       `tsx dev/generateCli.ts && …`.
   - **Every `package.json` and `pnpm-lock.yaml` are judged by content**, because
-    their paths carry no information. A `scripts` or `simple-git-hooks` edit
-    cannot reach a consumer, a dependency bump can — the job fetches both sides
-    of each manifest and compares the top-level keys, and an unknown key is
-    relevant like an unknown path is. The lockfile follows the manifests that
-    moved it and stays relevant when none of them changed. #2970 cut 1.0.9 from
-    two root scripts, #3006 cut 1.0.12 from one package's `test:unit`, #2959 cut
-    1.0.4 from an `apps/docs` dependency.
+    their paths carry no information. A `scripts` edit cannot reach a consumer,
+    a dependency bump can — the job fetches both sides of each manifest and
+    compares the top-level keys, and an unknown key is relevant like an unknown
+    path is. The lockfile follows the manifests that moved it and stays relevant
+    when none of them changed. #2970 cut 1.0.9 from two root scripts, #3006 cut
+    1.0.12 from one package's `test:unit`, #2959 cut 1.0.4 from an `apps/docs`
+    dependency.
 - **Tests and stories stay out of `dist/types`.** Every release build shares
   `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
   `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
@@ -163,14 +167,21 @@ flowchart LR
   itself as `0.2.0-alpha.1058`. A `grep` step between build and publish compares
   stamp against manifest, because the mismatch is otherwise invisible — nothing
   fails, the wrong string just ships.
-- **The release commit is pushed last, and rebases if it has to.** Versioning
+- **The release commit is pushed last, and merges if it has to.** Versioning
   commits and tags locally; the push and the GitHub Release wait until npm has
   accepted the publish, so a failed publish cannot ratchet a line ahead of npm.
   The cost is a ~10 minute window in which someone can merge a PR into the same
   line — the workflow `concurrency` group serializes runs, not UI merges. A
   plain fast-forward push loses that race after npm is already committed
-  (observed on 1.1.17), so `.github/scripts/push-release.mjs` rebases the
-  release commit onto the new tip, moves the tag with it, and retries.
+  (observed on 1.1.17), so `.github/scripts/push-release.mjs` pushes a merge
+  commit instead: the release commit as first parent, the new tip as second. The
+  tag stays on the release commit, which is what was built. It used to rebase
+  the release commit onto the new tip and move the tag along, which put the
+  concurrent PR under the tag although the packages did not contain it: #3289
+  then appeared in no changelog and got no release of its own (#3351). The merge
+  commit is not a `chore(release):` commit, so its push starts a regular publish
+  run that releases the concurrent PR; that run's relevance is read from the
+  first parent, not from the push range, which is only version churn.
 - **The two lines never publish at the same moment.** They publish the SAME npm
   packages, and the workflow `concurrency` group follows the ref (`mutate-main`
   / `mutate-next`), so a push to `main` and the forward-merge it triggers
@@ -210,7 +221,11 @@ flowchart LR
   It does **not** build, tag, publish, or create the GitHub Release. **Merging
   the PR is the release moment**: `publish.yml` detects the already-graduated
   version, publishes `latest`, and builds the GitHub Release from that marker
-  block verbatim (#2724). Full behaviour + the notes shape:
+  block verbatim (#2724). Only a `release/*` branch of this repository is a
+  promotion: a fork can give any branch that name, and merged it would otherwise
+  graduate `latest` to the name and publish its own PR body as the GitHub
+  Release. A fork's PR body never supplies release notes. Full behaviour + the
+  notes shape:
   [`.claude/commands/prepare-release.md`](../.claude/commands/prepare-release.md)
   and
   [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
@@ -238,8 +253,10 @@ The model relies on a few repository settings, not just the workflows. They are
 configured in GitHub (repo admin), and mirrored on the rehearsal fork so a
 dry-run is faithful:
 
-- **Squash-only merge**, with the squash commit defaulting to the **PR title** —
-  that title is the release commit Lerna-Lite reads.
+- **Merge methods per line:** `main` allows squash and merge commits (the
+  promotion PR must be merged as a merge commit), `next` allows merge commits
+  only. A squash commit defaults to the **PR title**. Because merge commits are
+  allowed, the routing guard checks every commit of a PR, not just its title.
 - **Branch protection + required status checks** on `main` and `next`
   (Conventional PR title, Routing, Version contract, the build), prepared the
   same way for the on-demand major line once it exists.

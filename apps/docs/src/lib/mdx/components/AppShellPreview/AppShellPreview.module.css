@@ -28,6 +28,8 @@
  * so the frame takes the shell's full height instead of cropping it.
  */
 .previewScaler {
+  /* Keeps the shell's own z-indices (its sticky header) below the backdrop. */
+  isolation: isolate;
   zoom: 0.625;
 
   /* Non-interactive: the overlay link owns the clicks. */

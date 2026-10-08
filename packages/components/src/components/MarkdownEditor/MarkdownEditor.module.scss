@@ -70,14 +70,17 @@
     }
   }
 
+  /* The hidden text area keeps its place in the grid cell, so the row keeps
+     its height – a resized one included. `contain: size` stops the preview from
+     growing the row, and stretching fills it exactly. */
   &.mode-preview {
     :global(.flow--text-area--input) {
-      position: absolute;
       opacity: 0;
       pointer-events: none;
-      width: 1px;
-      height: 1px;
-      inset-inline-start: 0;
+    }
+
+    .markdown {
+      contain: size;
     }
   }
 
@@ -102,5 +105,15 @@
   &:has(:global(.flow--text-area--input[data-disabled])).mode-editor .toolbar {
     background-color: var(--form-control--background-color--disabled);
     border-color: var(--form-control--border-color--disabled);
+  }
+
+  /* A drag over the editor reads as its focused state -- dropping focuses it. */
+  &.dropTarget {
+    .toolbar,
+    .markdown,
+    :global(.flow--text-area--input) {
+      background-color: var(--form-control--background-color--focused);
+      border-color: var(--form-control--border-color--focused);
+    }
   }
 }

@@ -55,6 +55,7 @@ import { IconUnorderedList as UnorderedList } from "./components/IconUnorderedLi
 import { IconUpload as Upload } from "./components/IconUpload.tsx";
 import { IconView as View } from "./components/IconView.tsx";
 import { IconAI as AI } from "./components/IconAI.tsx";
+import { IconAIHosting as AIHosting } from "./components/IconAIHosting.tsx";
 import { IconAnalytics as Analytics } from "./components/IconAnalytics.tsx";
 import { IconApp as App } from "./components/IconApp.tsx";
 import { IconAutoresponder as Autoresponder } from "./components/IconAutoresponder.tsx";
@@ -189,6 +190,7 @@ export const defaultIconSet = {
   Upload,
   View,
   AI,
+  AIHosting,
   Analytics,
   App,
   Autoresponder,

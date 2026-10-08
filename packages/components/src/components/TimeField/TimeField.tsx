@@ -8,6 +8,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import styles from "./TimeField.module.scss";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import DateInput from "@/components/DateInput";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
   extends
@@ -16,17 +17,24 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
 
 /** @flr-generate all */
 export const TimeField = flowComponent("TimeField", (props) => {
-  const { children, ref, ...rest } = props;
+  // `null` is what react-aria's time field state uses for "no time"
+  const { children, ref, ...rest } = useControlledHostValueProps(props, null);
 
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
   } = useFieldComponent(props, "TimeField");
 
   return (
-    <Aria.TimeField hourCycle={24} {...rest} {...fieldProps}>
+    <Aria.TimeField
+      hourCycle={24}
+      {...rest}
+      {...wrapperProps}
+      {...controlProps}
+    >
       <FieldErrorCaptureContext>
         <DateInput className={styles.dateInput} ref={ref} />
         <PropsContextProvider props={fieldPropsContext}>

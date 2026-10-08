@@ -1,5 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
+import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
@@ -88,6 +88,41 @@ test.each(testEnvironments)(
     await testScreenshot(
       "PasswordCreationField interaction - show info clicked",
     );
+  },
+);
+
+/*
+ * An error from outside the policy (a server error) turns the bar danger like
+ * the field, even for a password the policy rates strong.
+ */
+test.each(testEnvironments)(
+  "PasswordCreationField invalid strong password (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { PasswordCreationField, Label, FieldError },
+  }) => {
+    await render(
+      <PasswordCreationField isInvalid defaultValue="Imperial-March-1977!">
+        <Label>Password</Label>
+        <FieldError>This password was already used</FieldError>
+      </PasswordCreationField>,
+    );
+
+    // The policy rates the password asynchronously (about a second); until
+    // then the bar shows a provisional width. Capture the final rating, not
+    // the race.
+    await expect
+      .poll(
+        () =>
+          document
+            .querySelector("[data-complexity-percentage]")
+            ?.getAttribute("data-complexity-percentage"),
+        { timeout: 10_000 },
+      )
+      .toBe("100");
+
+    await testScreenshot("PasswordCreationField invalid strong password");
   },
 );
 

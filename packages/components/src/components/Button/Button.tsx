@@ -19,7 +19,13 @@ export interface ButtonProps
   extends
     PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<HTMLButtonElement> {
-  /** Slot for button placement in action groups. */
+  /**
+   * Slot for button placement in action groups: `primary` (at the end),
+   * `secondary` (before the primary action) or `abort` (at the start). Without
+   * a slot, an action group places the colors primary, success and danger in
+   * `primary` and every other color in `abort`. A secondary-colored button that
+   * does not abort therefore needs `slot="secondary"`.
+   */
   slot?: string;
   /**
    * The color of the button.
@@ -51,14 +57,17 @@ export interface ButtonProps
   elementType?: "button" | "span";
 }
 
-const disablePendingProps = (props: ButtonProps) => {
-  if (
+const isMuted = (props: ButtonProps) =>
+  !!(
     props.isPending ||
     props.isSucceeded ||
     props.isFailed ||
     props["aria-disabled"] ||
     props.isReadOnly
-  ) {
+  );
+
+const disablePendingProps = (props: ButtonProps) => {
+  if (isMuted(props)) {
     props = { ...props };
 
     const mutedActionHandler = (e: unknown) => {
@@ -98,6 +107,7 @@ const disablePendingProps = (props: ButtonProps) => {
 
 /** @flr-generate all */
 export const Button = flowComponent("Button", (props) => {
+  const muted = isMuted(props);
   props = disablePendingProps(props);
 
   const warnDeprecation = useWarnDeprecation();
@@ -145,10 +155,6 @@ export const Button = flowComponent("Button", (props) => {
         size === "s" && styles["size-s"],
         styles[color],
         styles[variant],
-        /**
-         * Workaround warning: The Aria.Button does not support "aria-disabled"
-         * by now, so this Button will be visually disabled via CSS.
-         */
         ariaDisabled && styles.ariaDisabled,
         hasText && styles.hasText,
         className,
@@ -226,6 +232,7 @@ export const Button = flowComponent("Button", (props) => {
       slot={slot}
       {...(isReadOnly === true ? { "data-readonly": true } : {})}
       {...restProps}
+      aria-disabled={muted || undefined}
     >
       {content}
     </Aria.Button>

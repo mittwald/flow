@@ -10,7 +10,7 @@ import {
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import type { Anchor } from "@/lib/mdx/MdxFile";
 import { topAnchorId } from "@/lib/mdx/MdxFile";
-import { getReleases } from "@/lib/releases/githubReleases";
+import { getReleases, releasesFeedUrl } from "@/lib/releases/githubReleases";
 import ReleaseEntry from "./_components/ReleaseEntry";
 import { releaseSlug } from "./_lib/releaseSlug";
 import { formatReleaseDate } from "./_lib/formatReleaseDate";
@@ -21,6 +21,16 @@ export const metadata: Metadata = {
   title: "Releases",
   description:
     "Überblick über die veröffentlichten Flow-Releases, ihre Highlights und die enthaltenen Fixes.",
+  alternates: {
+    types: {
+      "application/atom+xml": [
+        {
+          url: releasesFeedUrl,
+          title: "Flow-Releases (inkl. Vorab-Versionen)",
+        },
+      ],
+    },
+  },
 };
 
 export default async function ReleasesPage() {
@@ -31,7 +41,7 @@ export default async function ReleasesPage() {
     { slug: topAnchorId, text: "Releases", level: 2 },
     ...releases.map((r) => ({
       slug: releaseSlug(r.version),
-      text: `${r.version} · ${formatReleaseDate(r.date)}`,
+      text: `${r.version} – ${formatReleaseDate(r.date)}`,
       level: 2,
     })),
   ];
@@ -55,6 +65,14 @@ export default async function ReleasesPage() {
               Upgrades
             </Link>
             .
+          </Text>
+          <Text>
+            Neue Releases kannst du über den{" "}
+            <Link inline href={releasesFeedUrl} target="_blank">
+              Atom-Feed von GitHub
+            </Link>{" "}
+            abonnieren. Anders als diese Seite zeigt er auch Vorab-Versionen und
+            beschränkt sich auf die zehn aktuellsten Releases.
           </Text>
         </Section>
 
