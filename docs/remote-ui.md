@@ -506,8 +506,8 @@ render-and-mirror model above and are worth knowing about directly:
     "compose through views" is what makes the exclusion complete; where a
     component breaks it, the signal over-reports.
   - Components that are neither remote components nor `flowComponent`s report
-    nothing — `ModalTrigger` and the other plain wrappers around
-    `OverlayTrigger`.
+    nothing — `LightBoxTrigger`, a plain wrapper around `OverlayTrigger`.
+    `ModalTrigger` and `PopoverTrigger` are `flowComponent`s and do report.
 
 ## Where to go deeper
 
