@@ -30,6 +30,7 @@
     "clean": "rimraf dist src/icons/components/*",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
+    "test:browser:prepare": "if [ -z \"$CI\" ]; then playwright install firefox webkit; fi",
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
     "test:parity": "tsx dev/react-parity/run.ts",
     "test:parity:dev": "tsx dev/react-parity/dev.ts",
