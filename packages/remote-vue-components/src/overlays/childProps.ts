@@ -184,7 +184,7 @@ const cloneIfMounted = (child: VNode): VNode =>
  * Vue turns into a default slot only when the component mounts — as it does a
  * slot object whose `default` is a value rather than a function.
  */
-const defaultSlotOf = (
+export const defaultSlotOf = (
   children: unknown,
 ): ((...args: unknown[]) => unknown) | undefined => {
   if (children === null || children === undefined) {

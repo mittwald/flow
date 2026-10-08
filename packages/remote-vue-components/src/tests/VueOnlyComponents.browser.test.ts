@@ -124,6 +124,26 @@ describe("Wrap", () => {
       .element(page.getByRole("heading", { name: "Unwrapped" }))
       .toBeVisible();
   });
+
+  /* Every form Vue itself accepts for a child's children when it mounts. */
+  test.each([
+    ["an array", () => [h(Heading, null, () => "Unwrapped")]],
+    [
+      "a slot object with a value",
+      () => ({ default: [h(Text, null, () => "Unwrapped")] }),
+    ],
+    ["a string", () => "Unwrapped"],
+  ])("unwraps children handed as %s", async (_, children) => {
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(Wrap, { if: false }, () => h(Section, null, children() as never)),
+      ),
+    );
+
+    await expect.poll(() => host.textContent).toBe("Unwrapped");
+    expect(host.querySelector("section")).toBeNull();
+  });
 });
 
 describe("BrowserOnly", () => {

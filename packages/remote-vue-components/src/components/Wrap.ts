@@ -1,5 +1,5 @@
-import { flattenChildren } from "@/overlays/childProps";
-import { defineComponent, type VNode } from "vue";
+import { defaultSlotOf, flattenChildren } from "@/overlays/childProps";
+import { defineComponent } from "vue";
 import { composition } from "@/lib/composition";
 
 /**
@@ -21,15 +21,8 @@ export const Wrap = defineComponent({
         return child;
       }
 
-      /*
-       * Unwrapping means rendering what the child was given. A slot function is
-       * the usual case; an array child is what `h(X, null, [a, b])` produces.
-       */
-      const children = child.children;
-      if (typeof children === "object" && children && "default" in children) {
-        return (children.default as () => VNode[])();
-      }
-      return children as VNode[] | undefined;
+      /* Unwrapping means rendering what the child was given, in any form. */
+      return flattenChildren(defaultSlotOf(child.children)?.());
     };
   },
 });
