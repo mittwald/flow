@@ -1,0 +1,7 @@
+@use "@/styles/mixins/skeleton";
+
+.skeletonTextContent {
+  @include skeleton.text;
+}
+
+@include skeleton.keyframes;

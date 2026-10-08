@@ -110,6 +110,7 @@ export * from "./RemoteSegmentedControlElement";
 export * from "./RemoteSelectElement";
 export * from "./RemoteSeparatorElement";
 export * from "./RemoteSkeletonElement";
+export * from "./RemoteSkeletonModeElement";
 export * from "./RemoteSkeletonTextElement";
 export * from "./RemoteSliderElement";
 export * from "./RemoteSwitchElement";
