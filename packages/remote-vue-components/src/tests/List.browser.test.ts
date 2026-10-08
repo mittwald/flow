@@ -1062,6 +1062,51 @@ describe("A composable loader", () => {
     await expect.element(list.getByText("Showing 2 of 3")).toBeVisible();
   });
 
+  /*
+   * A sorting or a search changes the table's state, not what a row renders —
+   * React skips the rows for it, and so does this list.
+   */
+  test("leaves the rows alone when the list's own state changes", async () => {
+    const rendered = vi.fn();
+    const list = renderList(() => [
+      h(ListLoaderComposable, {
+        loader: () => computed(() => ({ data: crew })),
+      }),
+      h(ListSorting, { property: "name", name: "Name", direction: "asc" }),
+      h(ListSearch),
+      h(
+        ListItem,
+        { textValue: (data: Crew) => data.name },
+        {
+          default: ({ data }: { data: Crew }) => {
+            rendered(data.name);
+            return h(ListItemView, null, () =>
+              h(Heading, null, () => data.name),
+            );
+          },
+        },
+      ),
+    ]);
+
+    await expect.element(list.getByText("Ellen Ripley")).toBeVisible();
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(3);
+    rendered.mockClear();
+
+    await userEvent.click(list.getByRole("button", { name: "Sorting" }));
+    await userEvent.click(page.getByRole("menuitemradio", { name: "Name" }));
+    await expect
+      .poll(() =>
+        list.getByRole("row").elements()[0]?.getAttribute("aria-label"),
+      )
+      .toBe("Carter Burke");
+
+    /* The row that stays is the same row. */
+    await userEvent.fill(list.getByRole("searchbox"), "Hicks");
+    await expect.poll(() => list.getByRole("row").elements().length).toBe(1);
+
+    expect(rendered).not.toHaveBeenCalled();
+  });
+
   test("sees a changed search through the options getter", async () => {
     const list = renderList(() => [
       h(ListLoaderComposable, {
