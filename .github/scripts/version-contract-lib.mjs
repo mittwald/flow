@@ -3,7 +3,7 @@
  * Version-contract classification — pure functions, no git / no IO.
  *
  * Implements the engines.node + peer-range half of the 1.0.0 semver contract
- * (ADR 0005 §2/§3). See
+ * (ADR 0005 §2/§3), with ADR 0007's exemption for beta packages. See
  * docs/superpowers/specs/2026-07-29-version-contract-guard-design.md
  *
  * @typedef {[number, number, number]} Version Major.minor.patch
@@ -163,6 +163,14 @@ function isPublishable(pkg) {
 }
 
 /**
+ * A beta package (ADR 0007): its manifest says `"flowStatus": "beta"`. Its own
+ * peer ranges are exempt from the contract; its Node floor is not.
+ */
+export function isBetaPackage(pkg) {
+  return pkg?.flowStatus === "beta";
+}
+
+/**
  * @typedef {{
  *   package: string;
  *   surface: string;
@@ -198,6 +206,10 @@ export function collectFindings(packages) {
         });
       }
     }
+
+    // Beta on both sides: a package turning beta in this PR, or leaving the
+    // beta in it, is still checked.
+    if (isBetaPackage(base) && isBetaPackage(head)) continue;
 
     const basePeers = base.peerDependencies ?? {};
     const headPeers = head.peerDependencies ?? {};
