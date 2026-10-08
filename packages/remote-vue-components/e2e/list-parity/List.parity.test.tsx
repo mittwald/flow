@@ -5,11 +5,17 @@ import {
   Button as ReactButton,
   Content as ReactContent,
   ContextMenu as ReactContextMenu,
+  ContextualHelp as ReactContextualHelp,
+  ContextualHelpTrigger as ReactContextualHelpTrigger,
   Heading as ReactHeading,
   Initials as ReactInitials,
   ListItemView as ReactListItemView,
   ListSummary as ReactListSummary,
   MenuItem as ReactMenuItem,
+  Modal as ReactModal,
+  ModalTrigger as ReactModalTrigger,
+  Popover as ReactPopover,
+  PopoverTrigger as ReactPopoverTrigger,
   Text as ReactText,
   typedList,
 } from "@mittwald/flow-remote-react-components";
@@ -19,6 +25,8 @@ import {
   Button,
   Content,
   ContextMenu,
+  ContextualHelp,
+  ContextualHelpTrigger,
   Heading,
   Initials,
   List,
@@ -33,6 +41,10 @@ import {
   ListTableCell,
   ListTableColumn,
   MenuItem,
+  Modal,
+  ModalTrigger,
+  Popover,
+  PopoverTrigger,
   Text,
 } from "@mittwald/flow-remote-vue-components";
 import { page, userEvent } from "vitest/browser";
@@ -349,6 +361,247 @@ const scenarios: ParityScenario[] = [
                   h(ListItemView, null, () =>
                     h(Heading, null, () => data.name),
                   ),
+              },
+            ),
+          ],
+        ),
+    },
+  },
+
+  {
+    /*
+     * Every overlay trigger goes into the item's button slot, as Flow's props
+     * context tunnels them (`overlayTriggersTunneledTo`).
+     */
+    name: "an item with overlay triggers",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId}>
+          <L.StaticData data={crew.slice(0, 1)} />
+          <L.Item textValue={textValue}>
+            {(data) => (
+              <ReactListItemView>
+                <ReactHeading>{data.name}</ReactHeading>
+                <ReactModalTrigger>
+                  <ReactButton>Edit</ReactButton>
+                  <ReactModal>
+                    <ReactHeading>Edit {data.name}</ReactHeading>
+                  </ReactModal>
+                </ReactModalTrigger>
+                <ReactPopoverTrigger>
+                  <ReactButton>Details</ReactButton>
+                  <ReactPopover>
+                    <ReactText>{data.rank}</ReactText>
+                  </ReactPopover>
+                </ReactPopoverTrigger>
+                <ReactContextualHelpTrigger>
+                  <ReactButton>Help</ReactButton>
+                  <ReactContextualHelp>
+                    <ReactText>Joined {data.joined}</ReactText>
+                  </ReactContextualHelp>
+                </ReactContextualHelpTrigger>
+                <ReactText>{data.rank}</ReactText>
+              </ReactListItemView>
+            )}
+          </L.Item>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId }, () => [
+          h(ListStaticData, { data: crew.slice(0, 1) }),
+          h(
+            ListItem,
+            { textValue },
+            {
+              default: ({ data }: { data: Crew }) =>
+                h(ListItemView, null, () => [
+                  h(Heading, null, () => data.name),
+                  h(ModalTrigger, null, () => [
+                    h(Button, null, () => "Edit"),
+                    h(Modal, null, () =>
+                      h(Heading, null, () => `Edit ${data.name}`),
+                    ),
+                  ]),
+                  h(PopoverTrigger, null, () => [
+                    h(Button, null, () => "Details"),
+                    h(Popover, null, () => h(Text, null, () => data.rank)),
+                  ]),
+                  h(ContextualHelpTrigger, null, () => [
+                    h(Button, null, () => "Help"),
+                    h(ContextualHelp, null, () =>
+                      h(Text, null, () => `Joined ${data.joined}`),
+                    ),
+                  ]),
+                  h(Text, null, () => data.rank),
+                ]),
+            },
+          ),
+        ]),
+    },
+  },
+
+  {
+    /* A tile is smaller, and so is every button in it. */
+    name: "items in tiles view, with buttons",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId} defaultViewMode="tiles">
+          <L.StaticData data={crew.slice(0, 1)} />
+          <L.Item textValue={textValue} showTiles>
+            {(data) => (
+              <ReactListItemView>
+                <ReactHeading>{data.name}</ReactHeading>
+                <ReactButton>Assign</ReactButton>
+                <ReactActionGroup>
+                  <ReactButton>Promote</ReactButton>
+                  <ReactButton>Demote</ReactButton>
+                </ReactActionGroup>
+                <ReactModalTrigger>
+                  <ReactButton>Edit</ReactButton>
+                  <ReactModal>
+                    <ReactHeading>Edit {data.name}</ReactHeading>
+                  </ReactModal>
+                </ReactModalTrigger>
+                <ReactContextMenu>
+                  <ReactMenuItem>Show details</ReactMenuItem>
+                </ReactContextMenu>
+              </ReactListItemView>
+            )}
+          </L.Item>
+        </L.List>
+      ),
+      vue: () =>
+        h(
+          List,
+          { "aria-label": "Crew", getItemId, defaultViewMode: "tiles" },
+          () => [
+            h(ListStaticData, { data: crew.slice(0, 1) }),
+            h(
+              ListItem,
+              { textValue, showTiles: true },
+              {
+                default: ({ data }: { data: Crew }) =>
+                  h(ListItemView, null, () => [
+                    h(Heading, null, () => data.name),
+                    h(Button, null, () => "Assign"),
+                    h(ActionGroup, null, () => [
+                      h(Button, null, () => "Promote"),
+                      h(Button, null, () => "Demote"),
+                    ]),
+                    h(ModalTrigger, null, () => [
+                      h(Button, null, () => "Edit"),
+                      h(Modal, null, () =>
+                        h(Heading, null, () => `Edit ${data.name}`),
+                      ),
+                    ]),
+                    h(ContextMenu, null, () =>
+                      h(MenuItem, null, () => "Show details"),
+                    ),
+                  ]),
+              },
+            ),
+          ],
+        ),
+    },
+  },
+
+  {
+    /*
+     * Accordion mode makes every item act, but only an item with something to
+     * expand gets the toggle.
+     */
+    name: "an accordion item with nothing to expand",
+    trees: {
+      react: () => (
+        <L.List aria-label="Crew" getItemId={getItemId} accordion>
+          <L.StaticData data={crew.slice(0, 2)} />
+          <L.Item textValue={textValue}>
+            {(data) => (
+              <ReactListItemView>
+                <ReactHeading>{data.name}</ReactHeading>
+                {data.id === "1" && (
+                  <ReactContent slot="bottom">
+                    <ReactText>{data.rank}</ReactText>
+                  </ReactContent>
+                )}
+              </ReactListItemView>
+            )}
+          </L.Item>
+        </L.List>
+      ),
+      vue: () =>
+        h(List, { "aria-label": "Crew", getItemId, accordion: true }, () => [
+          h(ListStaticData, { data: crew.slice(0, 2) }),
+          h(
+            ListItem,
+            { textValue },
+            {
+              default: ({ data }: { data: Crew }) =>
+                h(ListItemView, null, () => [
+                  h(Heading, null, () => data.name),
+                  data.id === "1"
+                    ? h(Content, { slot: "bottom" }, () =>
+                        h(Text, null, () => data.rank),
+                      )
+                    : null,
+                ]),
+            },
+          ),
+        ]),
+    },
+  },
+
+  {
+    /*
+     * The toggle comes after the item's own buttons, even when its content
+     * was written before one, and is the one button a tile does not shrink.
+     */
+    name: "an accordion item in tiles view, its content before a button",
+    trees: {
+      react: () => (
+        <L.List
+          aria-label="Crew"
+          getItemId={getItemId}
+          defaultViewMode="tiles"
+          accordion
+        >
+          <L.StaticData data={crew.slice(0, 1)} />
+          <L.Item textValue={textValue} showTiles>
+            {(data) => (
+              <ReactListItemView>
+                <ReactHeading>{data.name}</ReactHeading>
+                <ReactContent slot="bottom">
+                  <ReactText>{data.rank}</ReactText>
+                </ReactContent>
+                <ReactButton>Assign</ReactButton>
+              </ReactListItemView>
+            )}
+          </L.Item>
+        </L.List>
+      ),
+      vue: () =>
+        h(
+          List,
+          {
+            "aria-label": "Crew",
+            getItemId,
+            defaultViewMode: "tiles",
+            accordion: true,
+          },
+          () => [
+            h(ListStaticData, { data: crew.slice(0, 1) }),
+            h(
+              ListItem,
+              { textValue, showTiles: true },
+              {
+                default: ({ data }: { data: Crew }) =>
+                  h(ListItemView, null, () => [
+                    h(Heading, null, () => data.name),
+                    h(Content, { slot: "bottom" }, () =>
+                      h(Text, null, () => data.rank),
+                    ),
+                    h(Button, null, () => "Assign"),
+                  ]),
               },
             ),
           ],

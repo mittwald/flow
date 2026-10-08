@@ -6,12 +6,16 @@ import {
   Content,
   ContextMenu,
   ContextMenuTrigger,
+  ContextualHelpTrigger,
+  DialogTrigger,
   Heading,
   ListItemViewContent,
   Text,
 } from "@/auto-generated";
 import { IconChevronDown, IconChevronUp, IconContextMenu } from "@/icons";
 import { watchMobxValue } from "@/lib/mobxSelector";
+import { dynamic, withContextProps } from "@/overlays/childProps";
+import { ModalTrigger, PopoverTrigger } from "@/overlays/triggers";
 import {
   cloneVNode,
   defineComponent,
@@ -21,11 +25,20 @@ import {
   type VNode,
   type VNodeChild,
 } from "vue";
-import { injectItemAccordion } from "./itemContext";
+import { injectItemAccordion, type ListItemAccordion } from "./itemContext";
 import { injectListModel } from "./listContext";
 import { useListTexts } from "./locales";
-import { itemViewStyles } from "./styles";
+import { itemViewStyles, listStyles } from "./styles";
 import { composition } from "@/lib/composition";
+
+/* Flow's `overlayTriggersTunneledTo`: every trigger goes where the buttons go. */
+const overlayTriggers = new Set<unknown>([
+  ContextMenuTrigger,
+  ContextualHelpTrigger,
+  DialogTrigger,
+  ModalTrigger,
+  PopoverTrigger,
+]);
 
 /**
  * Where a child of `<ListItemView>` belongs.
@@ -53,8 +66,8 @@ const slotOfChild = (child: VNode): string | undefined => {
   if (
     type === Button ||
     type === ContextMenu ||
-    type === ContextMenuTrigger ||
-    type === ActionGroup
+    type === ActionGroup ||
+    overlayTriggers.has(type)
   ) {
     return "button";
   }
@@ -77,6 +90,69 @@ export const ListItemView = defineComponent({
     const accordion = injectItemAccordion();
     const texts = useListTexts();
 
+    /*
+     * Flow's props context for the item's buttons. A bare `ContextMenu` needs
+     * the button that opens it (`wrapWith: <OptionsButton/>`, plus `placement=
+     * "bottom right"`) — without it the host renders a menu nobody can open,
+     * which looks like nothing at all. A `Button` is `size="s"` in a tile and
+     * `m` otherwise. An `ActionGroup` also gets what the `List`'s context sets
+     * for every `ActionGroup` inside it.
+     */
+    const configureButton = (node: VNode): VNode => {
+      if (node.type === Button) {
+        return withContextProps(node, {
+          size: dynamic(viewMode.value === "tiles" ? "s" : "m"),
+        });
+      }
+      if (node.type === ActionGroup) {
+        return withContextProps(node, {
+          preserveOrder: true,
+          class: listStyles.headerActions,
+        });
+      }
+      if (node.type === ContextMenu) {
+        return h(ContextMenuTrigger, null, () => [
+          h(
+            Button,
+            {
+              class: itemViewStyles.action,
+              variant: "plain",
+              color: "dark",
+              "aria-label": texts.value("options"),
+            },
+            () => h(IconContextMenu),
+          ),
+          cloneVNode(node, { placement: "bottom right" }),
+        ]);
+      }
+      return node;
+    };
+
+    /*
+     * The toggle, and the rule that the expanded content is only in the tree
+     * while it is open. Flow wraps the item's `Content slot="bottom"` with both
+     * through a props context; here the item provides them and this injects
+     * them.
+     */
+    const renderToggle = (current: ListItemAccordion): VNode =>
+      h(
+        Button,
+        {
+          class: itemViewStyles.action,
+          variant: "plain",
+          color: "secondary",
+          "aria-label": texts.value(
+            current.isExpanded.value
+              ? "toggleExpandButton.collapse"
+              : "toggleExpandButton.expand",
+          ),
+          "aria-controls": current.contentId,
+          "aria-expanded": current.isExpanded.value,
+          onPress: current.toggle,
+        },
+        () => h(current.isExpanded.value ? IconChevronUp : IconChevronDown),
+      );
+
     return () => {
       const routed: Record<string, VNodeChild[]> = {};
       const rest: VNodeChild[] = [];
@@ -98,7 +174,9 @@ export const ListItemView = defineComponent({
         }
 
         const slot = slotOfChild(node);
-        if (slot) {
+        if (slot === "button") {
+          (routed.button ??= []).push(configureButton(node));
+        } else if (slot) {
           (routed[slot] ??= []).push(node);
         } else {
           rest.push(node);
@@ -106,33 +184,6 @@ export const ListItemView = defineComponent({
       };
 
       route(slots.default?.());
-
-      /*
-       * A bare `ContextMenu` needs the button that opens it. Flow's React
-       * `ListItemView` gives it one through its props context
-       * (`wrapWith: <OptionsButton/>`, plus `placement="bottom right"`); a
-       * menu without it reaches the host as a menu nobody can open, which
-       * looks like nothing at all.
-       */
-      if (routed.button) {
-        routed.button = routed.button.map((node): VNodeChild =>
-          isVNode(node) && node.type === ContextMenu
-            ? h(ContextMenuTrigger, null, () => [
-                h(
-                  Button,
-                  {
-                    class: itemViewStyles.action,
-                    variant: "plain",
-                    color: "dark",
-                    "aria-label": texts.value("options"),
-                  },
-                  () => h(IconContextMenu),
-                ),
-                cloneVNode(node, { placement: "bottom right" }),
-              ])
-            : (node as VNodeChild),
-        );
-      }
 
       /* An explicit named slot wins — it says where the content goes. */
       for (const name of [
@@ -150,41 +201,17 @@ export const ListItemView = defineComponent({
       }
 
       /*
-       * The toggle, and the rule that the expanded content is only in the tree
-       * while it is open. Flow puts both on the item's `Content slot="bottom"`
-       * through a props context; here the item provides them and this injects
-       * them.
+       * After the item's own buttons, wherever its content was written. An
+       * item with nothing to expand gets no toggle.
        */
-      if (accordion) {
-        const label = texts.value(
-          accordion.isExpanded.value
-            ? "toggleExpandButton.collapse"
-            : "toggleExpandButton.expand",
-        );
+      const toggle = accordion && routed.bottom ? accordion : undefined;
+      if (toggle) {
+        (routed.button ??= []).push(renderToggle(toggle));
 
-        (routed.button ??= []).push(
-          h(
-            Button,
-            {
-              class: itemViewStyles.action,
-              variant: "plain",
-              color: "secondary",
-              "aria-label": label,
-              "aria-controls": accordion.contentId,
-              "aria-expanded": accordion.isExpanded.value,
-              onPress: accordion.toggle,
-            },
-            () =>
-              h(accordion.isExpanded.value ? IconChevronUp : IconChevronDown),
-          ),
-        );
-
-        if (accordion.isExpanded.value) {
+        if (toggle.isExpanded.value) {
           /* What the toggle's `aria-controls` points at. */
           routed.bottom = (routed.bottom ?? []).map((node) =>
-            isVNode(node)
-              ? cloneVNode(node, { id: accordion.contentId })
-              : node,
+            isVNode(node) ? cloneVNode(node, { id: toggle.contentId }) : node,
           );
         } else {
           delete routed.bottom;
