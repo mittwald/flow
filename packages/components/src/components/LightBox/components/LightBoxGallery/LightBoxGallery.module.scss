@@ -44,8 +44,8 @@
   }
 
   /* The item's height is indefinite, so a percentage size here is cyclic and
-     engines resolve it differently (WebKit 2336+ stretched the image). An
-     explicit cap scales the image down along its aspect ratio instead. */
+     engines resolve it differently (WebKit stretched the image). An explicit
+     cap scales the image down along its aspect ratio instead. */
   .image {
     animation: fade-in var(--transition--duration--default) ease-in forwards;
     max-height: var(--gallery-item-max-height);
