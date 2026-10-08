@@ -10,6 +10,7 @@ import {
 } from "vitest";
 import {
   createApp,
+  defineAsyncComponent,
   defineComponent,
   h,
   onMounted,
@@ -110,8 +111,24 @@ describe("An error in a remote Vue app", () => {
     );
   });
 
-  /* React's error boundary does not catch these either. */
+  /*
+   * Narrower than React's error boundary, which also catches what an effect
+   * throws synchronously and a failed lazy load. Vue reports a hook's or a
+   * watcher's error under the same info whether it was thrown or rejected,
+   * and React leaves a rejected one to the app. A failed loader reaches
+   * `onErrorCaptured` even where the app's `errorComponent` already shows it.
+   */
   test.each([
+    [
+      "a mounted hook",
+      () =>
+        defineComponent(() => {
+          onMounted(() => {
+            throw new Error("Late failure");
+          });
+          return () => null;
+        }),
+    ],
     [
       "an async mounted hook",
       () =>
@@ -121,6 +138,11 @@ describe("An error in a remote Vue app", () => {
           });
           return () => null;
         }),
+    ],
+    [
+      "an async component's loader",
+      () =>
+        defineAsyncComponent(() => Promise.reject(new Error("Late failure"))),
     ],
     [
       "a watchEffect",
