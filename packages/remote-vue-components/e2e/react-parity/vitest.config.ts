@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vitest/config";
 import { BaseSequencer, type TestSpecification } from "vitest/node";
 import { createVitestBrowserTestConfig } from "../../../core/src/index.ts";
+import { serveFontsLocally } from "../../../remote-react-components/dev/vitest/serveFontsLocally.ts";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
 import viteConfig from "./vite.config.ts";
 
@@ -64,6 +65,7 @@ export default mergeConfig(viteConfig, {
     testTimeout: 60_000,
     browser: {
       ...browserTestConfig.browser,
+      commands: { ...browserTestConfig.browser?.commands, serveFontsLocally },
       headless: true,
       screenshotFailures: false,
       instances: browserTestConfig.browser?.instances?.filter(

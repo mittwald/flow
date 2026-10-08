@@ -4,3 +4,7 @@
  * secondary filter, and the scenarios click whichever one the viewport shows.
  */
 import "@mittwald/flow-react-components/all.css";
+import { beforeAll } from "vitest";
+import { loadFontsLocally } from "../react-parity/fonts.ts";
+
+beforeAll(loadFontsLocally);

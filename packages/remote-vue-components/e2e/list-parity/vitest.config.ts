@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vitest/config";
 import { createVitestBrowserTestConfig } from "../../../core/src/index.ts";
+import { serveFontsLocally } from "../../../remote-react-components/dev/vitest/serveFontsLocally.ts";
 import viteConfig from "./vite.config.ts";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -24,6 +25,7 @@ export default mergeConfig(viteConfig, {
     testTimeout: 60_000,
     browser: {
       ...browserTestConfig.browser,
+      commands: { ...browserTestConfig.browser?.commands, serveFontsLocally },
       headless: true,
       screenshotFailures: false,
       instances: browserTestConfig.browser?.instances?.filter(

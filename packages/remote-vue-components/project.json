@@ -63,6 +63,8 @@
         "{projectRoot}/e2e/list-parity/**/*",
         "{projectRoot}/dev/react-parity/**/*",
         "{workspaceRoot}/packages/remote-react-components/src/tests/**/*",
+        "{workspaceRoot}/packages/remote-react-components/dev/vitest/serveFontsLocally.ts",
+        "{workspaceRoot}/packages/remote-react-components/dev/vitest/fonts/**/*",
         "{workspaceRoot}/packages/core/src/**/*",
         {
           "dependentTasksOutputFiles": "**/*",
@@ -81,7 +83,10 @@
         "default",
         "{projectRoot}/e2e/list-parity/**/*",
         "{projectRoot}/e2e/react-parity/hostHtml.ts",
+        "{projectRoot}/e2e/react-parity/fonts.ts",
         "{workspaceRoot}/packages/remote-react-components/src/tests/lib/**/*",
+        "{workspaceRoot}/packages/remote-react-components/dev/vitest/serveFontsLocally.ts",
+        "{workspaceRoot}/packages/remote-react-components/dev/vitest/fonts/**/*",
         "{workspaceRoot}/packages/core/src/**/*",
         {
           "dependentTasksOutputFiles": "**/*",
