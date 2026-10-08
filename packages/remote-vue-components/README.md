@@ -14,15 +14,23 @@ pipeline is React-specific below the element layer, which is what makes this
 package possible.
 
 ```shell
-pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components vue
+pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components @mittwald/ext-bridge vue react react-dom
 ```
 
-`@mittwald/flow-react-components` is a peer dependency for the **prop types**
-only: every component's props are Flow's React prop types, read from that
-package's declarations. Nothing of it reaches your bundle. Leave it out and
-TypeScript does not complain — every prop silently becomes `any` (with
-`skipLibCheck`), or the build fails with TS2307 (without). Package managers that
-skip peers (`yarn`, `npm --legacy-peer-deps`) need it named explicitly.
+`@mittwald/flow-react-components` is a peer dependency at **runtime and for the
+types**:
+
+- **Runtime.** `@mittwald/flow-remote-core` serializes password policies with
+  its `mittwald-password-tools-js` entry, which imports `react`. Without it, or
+  without `react`, the bundle fails to build. With it,
+  `@mittwald/password-tools-js` and its dictionaries land in your bundle.
+- **Types.** Every component's props are Flow's React prop types, read from that
+  package's declarations.
+
+`@mittwald/ext-bridge` is a peer because `RemoteRoot` imports it. `react` and
+`react-dom` are peers of `@mittwald/flow-react-components`, not of this package.
+npm and pnpm install peers on their own; `yarn` and `npm --legacy-peer-deps` do
+not, so name all of them.
 
 ```vue
 <script setup lang="ts">
@@ -164,9 +172,12 @@ is what tells the `Action`s in a modal's footer not to ask for confirmation.
   layout and is never on screen. Nothing carries the intent to the host either:
   `List` is not `@flr-generate`, so no `infiniteScroll` prop crosses. The React
   binding has the same hole; it is inert there too, silently. Loading the next
-  batch from a scroll position needs a host-side signal. The view settings _are_
-  persisted, through `settingStorageKey` and a surrounding `SettingsProvider`,
-  in the format React writes.
+  batch from a scroll position needs a host-side signal. **This gap is
+  permanent** in the sense of
+  [ADR 0007 §3](../../docs/adr/0007-beta-packages.md#3-how-the-beta-ends): no
+  API change in this package can close it, so it does not hold the beta open.
+  The view settings _are_ persisted, through `settingStorageKey` and a
+  surrounding `SettingsProvider`, in the format React writes.
 - **`Action` runs, reports and closes.** An `onAction` drives the pending,
   succeeded and failed states, and `closeModal` / `closeOverlay` closes the
   overlay the action sits in. What it has not got is the `actionConfirm` modal

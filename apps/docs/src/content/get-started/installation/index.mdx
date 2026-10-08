@@ -128,12 +128,17 @@ Package `@mittwald/flow-remote-vue-components` ist das Vue-Gegenstück zu
 Flow Components im mStudio.
 
 ```shell
-yarn add @mittwald/flow-remote-vue-components @mittwald/flow-react-components vue
+yarn add @mittwald/flow-remote-vue-components @mittwald/flow-react-components @mittwald/ext-bridge vue react react-dom
 ```
 
-`@mittwald/flow-react-components` liefert die Prop-Typen der Components. Fehlt
-es, meldet TypeScript keinen Fehler, sondern typisiert jede Prop still als
-`any`. In das Bundle der Extension gelangt davon nichts.
+`@mittwald/flow-react-components` ist eine Laufzeit- und Typ-Abhängigkeit: Die
+Remote-Verbindung serialisiert Passwort-Policies über seinen Einstiegspunkt
+`mittwald-password-tools-js`, der `react` importiert, und die Prop-Typen der
+Components stammen aus seinen Deklarationen. Fehlt das Package oder `react`,
+schlägt der Build der Extension fehl, ebenso ohne `@mittwald/ext-bridge`, das
+`RemoteRoot` importiert. `react-dom` ist eine Peer-Dependency von
+`@mittwald/flow-react-components`. `yarn` installiert Peer-Dependencies nicht
+selbst, deshalb stehen alle in der Zeile.
 
 Das Package ist **Beta**. Es ist von der Breaking-Change-Zusage ausgenommen,
 seine API kann sich auch außerhalb einer Major-Version ändern (siehe

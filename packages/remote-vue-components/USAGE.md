@@ -27,14 +27,16 @@ What follows is only what is different because you write Vue.
 ## Installation
 
 ```shell
-pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components vue
+pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components @mittwald/ext-bridge vue react react-dom
 ```
 
-`@mittwald/flow-react-components` is required for the **prop types**: this
-package types every component with Flow's React prop types, read from that
-package's declarations. None of its code reaches your bundle. Without it,
-nothing errors — every prop silently becomes `any` under `skipLibCheck`, so a
-wrong prop type compiles. Install it explicitly; `yarn` and
+`@mittwald/flow-react-components` is a **runtime and type** dependency. The
+remote connection imports its `mittwald-password-tools-js` entry to serialize
+password policies, and that entry imports `react` — without either, your bundle
+fails to build. Every component's props are typed with Flow's React prop types,
+read from that package's declarations. `@mittwald/ext-bridge` is needed because
+`RemoteRoot` imports it; `react` and `react-dom` are peers of
+`@mittwald/flow-react-components`. Install all of them explicitly: `yarn` and
 `npm --legacy-peer-deps` do not install peers on their own.
 
 ## The model

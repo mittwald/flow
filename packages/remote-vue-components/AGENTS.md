@@ -18,11 +18,17 @@ what this binding establishes about supporting a framework at all.
   to `publish.yml`; npm allows one workflow filename per package. Miss either
   and `publish.yml` fails with `E404 Not found` mid-release, after the other
   packages have already gone out. Nothing in this repository can do either.
-- **`@mittwald/flow-react-components` is a peer for the types only.** Every prop
-  type comes from its declarations through `remote-elements`; no runtime import
-  of it exists here. Without it a consumer's props are silently `any`, and the
-  declaration guard cannot see that — it checks this package's own `.d.ts`, not
-  what `remote-elements` imports.
+- **`@mittwald/flow-react-components` is a runtime and type peer — never make it
+  optional.** This package imports nothing of it directly, but `remote-core`'s
+  password-policy serializer imports its `mittwald-password-tools-js` entry at
+  runtime, and that entry imports `react`. `FlowThreadSerialization` takes every
+  serializer, so no bundler can drop it. Every prop type comes from its
+  declarations through `remote-elements`; the declaration guard cannot see that
+  — it checks this package's own `.d.ts`, not what `remote-elements` imports.
+  `react` and `react-dom` reach a consumer as its peers, not as this package's.
+  `@mittwald/ext-bridge` is a required peer too: the root entry exports
+  `RemoteRoot`, which imports it. React's binding marks it optional because only
+  its `./RemoteRoot` entry imports it.
 - `src/auto-generated/**` is **generated** from `packages/components`
   (`pnpm nx build:remote-components components`) — never edit by hand. The
   emitter is
