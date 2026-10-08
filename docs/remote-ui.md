@@ -249,12 +249,12 @@ territory:
 - **Props typed `ReactNode` become slots**, not serialized data — they cross as
   rendered child content rather than as values that get cloned across the
   connection. An unset slot prop arrives as `undefined`.
-- **`children` cannot tell "nothing" apart.** The host receives an array of the
-  rendered child nodes, so `undefined`, `null` and `false` all arrive as `[]`.
-  The renderer drops the empty array (`withoutEmptyChildren`), and so does
-  `flowComponent`'s `useProps`. A component still sees `false` locally, though —
-  `{cond && …}` — and `Children.count(false)` is `1`. Check for content with
-  `areChildrenEmpty`, not with `??` or `Children.count`.
+- **`children` cannot tell "nothing" apart.** The host receives the rendered
+  child nodes, so `undefined`, `null` and `false` all arrive as no children. Our
+  `remote-dom-react` patch passes `undefined` then, not `[]`. Locally, a
+  component still sees the `false` of `{cond && …}`, and `Children.count(false)`
+  is `1`. Check for content with `areChildrenEmpty`, and count with
+  `Children.toArray(children).length`.
 - **A function property's return value comes back as a Promise.**
   `isSerializableByBase` accepts any function, so `@quilted/threads` sends it as
   a proxy, and calling a proxy is a round trip. A host that awaits it is fine —
