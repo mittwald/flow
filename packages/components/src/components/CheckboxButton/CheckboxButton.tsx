@@ -53,18 +53,16 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
     </Checkbox>
   );
 
+  /* The whole button is the surface, its content draws no bars. */
+  const skeletonCheckbox = <SkeletonModeReset>{checkbox}</SkeletonModeReset>;
+
   return (
     <div
       {...skeletonProps}
       className={clsx(wrapperProps.className, styles.checkboxButton, className)}
     >
       <FieldErrorCaptureContext>
-        {/* The whole button is the surface, its content draws no bars. */}
-        {isSkeleton ? (
-          <SkeletonModeReset>{checkbox}</SkeletonModeReset>
-        ) : (
-          checkbox
-        )}
+        {isSkeleton ? skeletonCheckbox : checkbox}
       </FieldErrorCaptureContext>
       <FieldErrorView />
     </div>

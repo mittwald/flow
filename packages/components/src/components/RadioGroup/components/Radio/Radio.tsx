@@ -24,20 +24,19 @@ export const Radio = flowComponent("Radio", (props) => {
 
   const rootClassName = clsx(styles.radio, className);
 
-  const renderIcon = (isSelected: boolean) => {
-    const icon = isSelected ? (
-      <IconRadioOn className={styles.icon} />
-    ) : (
-      <IconRadioOff className={styles.icon} />
-    );
+  const onIcon = <IconRadioOn className={styles.icon} />;
+  const offIcon = <IconRadioOff className={styles.icon} />;
 
-    return isSkeleton ? (
+  const renderIcon = (isSelected: boolean) => {
+    const icon = isSelected ? onIcon : offIcon;
+
+    const skeletonIcon = (
       <span className={styles.skeletonIcon}>
         <SkeletonModeReset>{icon}</SkeletonModeReset>
       </span>
-    ) : (
-      icon
     );
+
+    return isSkeleton ? skeletonIcon : icon;
   };
 
   return (

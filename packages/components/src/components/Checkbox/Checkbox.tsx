@@ -44,22 +44,26 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
   const inputRef = useObjectRef(ref);
   const isSkeleton = useSkeletonMode();
 
-  const renderIcon = (isSelected: boolean, isIndeterminate: boolean) => {
-    const icon = isSelected ? (
-      <IconCheckboxChecked className={styles.icon} />
-    ) : isIndeterminate ? (
-      <IconCheckboxIndeterminate className={styles.icon} />
-    ) : (
-      <IconCheckboxEmpty className={styles.icon} />
-    );
+  const checkedIcon = <IconCheckboxChecked className={styles.icon} />;
+  const indeterminateIcon = (
+    <IconCheckboxIndeterminate className={styles.icon} />
+  );
+  const emptyIcon = <IconCheckboxEmpty className={styles.icon} />;
 
-    return isSkeleton ? (
+  const renderIcon = (isSelected: boolean, isIndeterminate: boolean) => {
+    const icon = isSelected
+      ? checkedIcon
+      : isIndeterminate
+        ? indeterminateIcon
+        : emptyIcon;
+
+    const skeletonIcon = (
       <span className={styles.skeletonIcon}>
         <SkeletonModeReset>{icon}</SkeletonModeReset>
       </span>
-    ) : (
-      icon
     );
+
+    return isSkeleton ? skeletonIcon : icon;
   };
 
   return (
