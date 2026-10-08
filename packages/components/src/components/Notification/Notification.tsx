@@ -89,9 +89,9 @@ export const Notification: FC<NotificationProps> = (props) => {
    * In the mode, the content is not wrapped in a link: a link would draw its
    * whole content as one text bar, and there is nothing to click.
    */
-  const body = isSkeleton ? (
-    <div className={styles.link}>{content}</div>
-  ) : (
+  const skeletonBody = <div className={styles.link}>{content}</div>;
+
+  const linkBody = (
     <Link unstyled href={href} className={styles.link} onPress={onClick}>
       {content}
     </Link>
@@ -105,7 +105,7 @@ export const Notification: FC<NotificationProps> = (props) => {
       // See https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useInteractOutside.ts#L126C31-L126C58
       data-react-aria-top-layer
     >
-      {body}
+      {isSkeleton ? skeletonBody : linkBody}
       {closeButton}
     </div>
   );
