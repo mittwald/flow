@@ -211,17 +211,17 @@ test("a generated password shows its final rating at once", async () => {
 });
 
 describe("PasswordCreationField Tests", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     vitest.resetAllMocks();
-    vitest.useFakeTimers();
-  });
-
-  afterEach(async () => {
-    vitest.useRealTimers();
-    destroyAnnouncer();
     // Every test renders the same layout. A pointer left on a button hovers the
     // next test's button, and its tooltip then swallows that test's Escape.
     await parkPointer();
+    vitest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vitest.useRealTimers();
+    destroyAnnouncer();
   });
 
   test("renders empty list without errors", async () => {

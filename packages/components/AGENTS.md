@@ -356,13 +356,14 @@ Four traps cost time in every new browser test:
   assertion that something is _absent_ into a silent pass, so give any helper
   that queries the DOM directly a guard that throws when its element is missing.
 - **A pointer left behind hovers the next render.** The pointer stays where the
-  last test — in a serial run, the last file — left it, and Firefox hovers what
-  a test renders underneath. The symptom is an `expect.poll` that keeps reading
-  a hover state (a Rating preview, an open tooltip) until "Matcher did not
-  succeed in time". Call `parkPointer()` from `@/lib/dev/parkPointer` in the
-  file's `beforeEach` or `afterEach` (`Rating`, `PasswordCreationField`). It is
-  opt-in on purpose: moving the pointer before every test breaks `Tooltip`'s
-  keyboard-focus test.
+  last test left it, and that can be the previous file: each browser page runs
+  file after file, in parallel runs too. Firefox hovers what a test renders
+  underneath. The symptom is an `expect.poll` that keeps reading a hover state
+  (a Rating preview, an open tooltip) until "Matcher did not succeed in time".
+  Call `parkPointer()` from `@/lib/dev/parkPointer` in the file's `beforeEach`
+  (`Rating`, `PasswordCreationField`); an `afterEach` leaves the file's first
+  test exposed. It is opt-in on purpose: moving the pointer before every test
+  breaks `Tooltip`'s keyboard-focus test.
 
 ## i18n & a11y
 

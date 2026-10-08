@@ -217,7 +217,7 @@ commit the results.
   codemod, because for those entries it is the whole migration.
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
 - **Browser support:** all three engines (Chromium, Firefox, WebKit). CI driving
-  WebKit, plus a non-blocking Firefox leg for the browser tests, is a pragmatic
+  WebKit, plus a non-blocking Firefox job for the browser tests, is a pragmatic
   choice, not a support statement.
 
 ## Definition of Done — component work

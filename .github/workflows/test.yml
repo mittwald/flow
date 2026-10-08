@@ -117,13 +117,15 @@ jobs:
           --browser.name=webkit
 
   # Deliberately not in `main`'s `needs`: Firefox still flakes on tests that need
-  # keyboard focus, so this job reports without a vote. Not a matrix leg with
-  # `continue-on-error` either — that covers a failure, but a job that hits its
-  # `timeout-minutes` ends `cancelled`, and `main` fails on that. Add it to
-  # `needs` once it stays green.
+  # keyboard focus, so this job reports without a vote. `continue-on-error` alone
+  # would not do — a job that hits `timeout-minutes` ends `cancelled`, and `main`
+  # fails on that. It is still needed here: without it a red Firefox makes the
+  # whole run fail, and on `main` nx-set-shas then bases `nx affected` on the
+  # last fully green run. Add the job to `needs` once it stays green.
   browser-firefox:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    continue-on-error: true
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
