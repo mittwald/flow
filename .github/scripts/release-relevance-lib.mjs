@@ -134,11 +134,13 @@ const IRRELEVANT_PACKAGE_LOCAL_FILES = new Set([
  * `scripts` in a manifest: no consumer effect, not "not in the tarball".
  *
  * `.test.` is not always the last extension — the remote e2e specs are
- * `*.browser.test.remote.tsx`.
+ * `*.browser.test.remote.tsx`. Type tests (`*.test-types.ts`) only run under
+ * `tsc --noEmit`.
  */
 const IRRELEVANT_FILENAME_PATTERNS = [
   { label: "*.stories.tsx", pattern: /\.stories\.tsx$/ },
   { label: "*.test.*", pattern: /\.test\.[^/]+$/ },
+  { label: "*.test-types.*", pattern: /\.test-types\.[^/]+$/ },
 ];
 
 /** The path below `packages/<name>/`, or `undefined` outside a package. */

@@ -44,6 +44,7 @@ export const publishedDtsOptions = {
     "**/e2e/**",
     "**/*.stories.*",
     "**/*.test.*",
+    "**/*.test-types.*",
   ],
   outDirs: "dist/types",
   afterBuild: () => assertInstallableTypeImports(process.cwd()),

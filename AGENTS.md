@@ -199,8 +199,8 @@ commit the results.
   GitHub Release). That covers docs, CI and repo tooling, and inside `packages/`
   also `.storybook/**`, `e2e/**`, `src/tests/**`,
   `dev/{cross-version,react-parity,vitest}/**`, `CONTRIBUTE.md`,
-  `*.stories.tsx`, `*.test.*` and a `scripts`-only manifest diff. The rule lives
-  in `.github/scripts/release-relevance-lib.mjs`; see
+  `*.stories.tsx`, `*.test.*`, `*.test-types.*` and a `scripts`-only manifest
+  diff. The rule lives in `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
 - **`Closes #…` in a PR body works on `next` too.** GitHub only resolves it on
   the default branch (`main`); `.github/workflows/close-linked-issues.yml`

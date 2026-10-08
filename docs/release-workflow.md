@@ -126,8 +126,8 @@ flowchart LR
     `packages/<name>/`: `.storybook/**`, `e2e/**`, `src/tests/**`,
     `dev/cross-version/**`, `dev/react-parity/**`, `dev/vitest/**`, the
     package's `CONTRIBUTE.md`, `Dockerfile` and `.dockerignore`, and
-    `*.stories.tsx` / `*.test.*` anywhere. The criterion is **no consumer
-    effect**, not "not in the tarball".
+    `*.stories.tsx` / `*.test.*` / `*.test-types.*` anywhere. The criterion is
+    **no consumer effect**, not "not in the tarball".
   - A package's **root-level Markdown is judged against that package's `files`**
     — nothing builds one, so it reaches a consumer exactly if it is published.
     `flow-react-components` lists `AGENTS.md`, `MIGRATION.md` and `USAGE.md`;
@@ -153,10 +153,11 @@ flowchart LR
     dependency.
 - **Tests and stories stay out of `dist/types`.** Every release build shares
   `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
-  `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
-  emit; before that, 196 of `@mittwald/flow-remote-react-components@1.1.10`'s
-  799 tarball entries were `dist/types/tests/**`, and no `exports` path reached
-  them. A story's helper still ships (`Button/stories/lib.tsx`), because
+  `*.stories.*`, `*.test.*`, `*.test-types.*`, `src/tests/**` and `e2e/**` out
+  of the declaration emit; before that, 196 of
+  `@mittwald/flow-remote-react-components@1.1.10`'s 799 tarball entries were
+  `dist/types/tests/**`, and no `exports` path reached them. A story's helper
+  still ships (`Button/stories/lib.tsx`), because
   `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
   only `*.stories.tsx`.
 - **The build runs after the version bump.** Both publish workflows version

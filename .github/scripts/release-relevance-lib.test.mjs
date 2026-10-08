@@ -422,6 +422,9 @@ test("isPublishRelevant: stories and tests are irrelevant wherever they sit", ()
     "packages/components/dev/vite/layerOrderPlugin.test.ts",
     // `.test.` is not always the last extension.
     "packages/remote-react-components/e2e/tests/Button.browser.test.remote.tsx",
+    // Type tests, checked by `tsc --noEmit` only.
+    "packages/components/src/components/List/model/listModel.test-types.ts",
+    "packages/components/src/components/List/typedList.test-types.tsx",
   ]) {
     assert.equal(isPublishRelevant(path), false, path);
   }
