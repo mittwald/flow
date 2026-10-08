@@ -1,6 +1,6 @@
 # ADR 0005 – Semver contract at 1.0.0
 
-- **Status:** Accepted
+- **Status:** Accepted (amended by ADR 0007, 2026-10-08)
 - **Date:** 2026-07-29
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** every published `@mittwald/flow-*` package, `public.ts` and the
@@ -17,6 +17,11 @@
 > [RFC #2711](https://github.com/mittwald/flow/issues/2711). The Node/React
 > portion below landed with [#2728](https://github.com/mittwald/flow/pull/2728);
 > this ADR records it.
+
+> **Amended 2026-10-08 by [ADR 0007](0007-beta-packages.md) (beta packages).** A
+> whole package may be beta: its own API is then exempt from §1, the way §5
+> exempts a beta component. The uniform contract below holds for every other
+> package.
 
 ## Context
 
@@ -100,6 +105,8 @@ surface rules above:
 - **`stable`** (default) — fully bound by §1–§4.
 - **`deprecated`** — under the guarantee until removed in a Major, and ships a
   migration path.
+
+A whole package can be `beta` too — see [ADR 0007](0007-beta-packages.md).
 
 ### 6. Public documentation obligations
 
