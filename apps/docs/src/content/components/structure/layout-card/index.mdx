@@ -14,6 +14,8 @@ description:
 - Strukturiere den Content sinnvoll, zum Beispiel mit
   [Section](/components/structure/section) und
   [ColumnLayout](/components/structure/column-layout).
+- Platziere einen seitenweiten [Alert](/components/status/alert) in der
+  LayoutCard vor der ersten Section.
 - Kombiniere die LayoutCard bei Bedarf mit einer
   [AccentBox](/components/structure/accent-box). So hebst du Inhalte besonders
   hervor.
@@ -29,6 +31,16 @@ LayoutCard, um zwischen den Unterseiten zu navigieren. Der Inhalt der aktiven
 Seite wird darunter in derselben LayoutCard dargestellt.
 
 <LiveCodeEditor example="tab-navigation" editorCollapsed stretch />
+
+## Alert
+
+Gilt ein [Alert](/components/status/alert#position-seitenweit) für die gesamte
+Seite, platziere ihn in der LayoutCard vor der ersten Section – nicht oberhalb
+der LayoutCard. Enthält die LayoutCard eine TabNavigation, steht der Alert
+unterhalb der Tabs. Verteilt sich die Seite auf mehrere LayoutCards, gehört der
+Alert in die LayoutCard, deren Inhalt er betrifft.
+
+<LiveCodeEditor example="alert" bgColor="light" editorCollapsed stretch />
 
 ---
 

@@ -19,10 +19,15 @@ description: Die ActionGroup gruppiert zusammengehörige Actions.
 # Slots
 
 Die [Actions](/components/actions/action) werden von der ActionGroup automatisch
-in die Slots `primary`, `secondary` und `abort` sortiert. So werden
-[Buttons](/components/actions/button) mit der Color Primary (Standard), Success
-und Danger automatisch dem Slot `primary` zugeordnet, der am Ende der
-ActionGroup positioniert ist.
+in die Slots `primary`, `secondary` und `abort` sortiert. `primary` steht am
+Ende der ActionGroup, `secondary` direkt davor und `abort` am Anfang. Die
+Reihenfolge im Code spielt dabei keine Rolle.
+
+Hat ein [Button](/components/actions/button) keinen `slot`, entscheidet seine
+Color: Primary (Standard), Success und Danger landen in `primary`, alle anderen
+Colors in `abort`. Ein Button mit der Color Secondary, der nicht abbricht – etwa
+„Nur prüfen“ oder „Als Entwurf speichern“ –, braucht deshalb `slot="secondary"`.
+Sonst landet er neben „Abbrechen“ am Anfang der ActionGroup.
 
 <LiveCodeEditor example="slots" editorCollapsed />
 

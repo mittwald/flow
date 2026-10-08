@@ -21,8 +21,9 @@ export interface ActionGroupProps
   /** The size of the buttons and links inside the action group. @default "m" */
   size?: ButtonProps["size"];
   /**
-   * When set, the buttons are not sorted automatically but stay in source
-   * order. @default false
+   * When set, the buttons are not sorted into the slots `primary`, `secondary`
+   * and `abort` but stay in source order. Use it when the actions have no such
+   * hierarchy, e.g. a row of equal actions or icon buttons. @default false
    */
   preserveOrder?: boolean;
 }
