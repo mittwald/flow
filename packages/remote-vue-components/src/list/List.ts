@@ -50,8 +50,9 @@ import { composition } from "@/lib/composition";
 import { useComponentUsage } from "@/composables/useComponentUsage";
 import {
   flattenChildren,
-  mapSlottedChildren,
+  mapChildren,
   withContextProps,
+  withSlotContent,
 } from "@/overlays/childProps";
 
 /**
@@ -70,15 +71,17 @@ const arrangeChildren = (children: unknown) => {
     }
     if (child.type === ActionGroup) {
       actions.push(
-        mapSlottedChildren(
+        withSlotContent(
           withContextProps(child, {
             preserveOrder: true,
             class: listStyles.headerActions,
           }),
-          (action) =>
-            action.type === Button
-              ? { class: listStyles.headerAction }
-              : undefined,
+          (rendered) =>
+            mapChildren(rendered, (action) =>
+              action.type === Button
+                ? { class: listStyles.headerAction }
+                : undefined,
+            ),
         ),
       );
     } else if (child.type === ListSummary) {
