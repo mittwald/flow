@@ -8,12 +8,13 @@
 #
 # Every suite is driven in WebKit. Should be changed to Chromium when flakiness
 # is resolved, because of Chromium wider usage. The browser tests run in Firefox
-# as well — without a vote on `main` for now, see the `browser` job.
+# as well — without a vote on `main` for now, see `browser-firefox`.
 #
 # `main` at the bottom is the aggregate. Keep that job id: it is the required
 # status check in the branch ruleset, and the check Dependabot waits for before
 # it merges its own PRs (see dependabot-auto-merge.yml). Renaming it, or adding a
 # job below without adding it to `needs`, silently drops that gate.
+# `browser-firefox` is the one job left out on purpose.
 name: Run tests
 on:
   push:
@@ -89,16 +90,6 @@ jobs:
   browser:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    strategy:
-      # A red WebKit leg must not cancel the Firefox one, whose result is what
-      # it runs for.
-      fail-fast: false
-      matrix:
-        browser: [webkit, firefox]
-    # Firefox still flakes on tests that need keyboard focus, so its leg shows
-    # red but cannot fail `main`: a job with `continue-on-error` counts as a
-    # success for the jobs that need it. Drop this once the leg stays green.
-    continue-on-error: ${{ matrix.browser == 'firefox' }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -115,16 +106,46 @@ jobs:
       - uses: ./.github/actions/prepare-browser-tests
         with:
           target: test:browser
-          browser: ${{ matrix.browser }}
 
       # `nx affected` is still the authority on what runs — it just no-ops in a
       # second when nothing is. `--parallel=1` throughout: the suites are
       # unchanged, one browser at a time on the runner, exactly as they ran in
       # the single job. What overlaps now are jobs, not suites inside a job.
-      - name: Run browser tests in ${{ matrix.browser }}
+      - name: Run browser tests in Webkit
         run:
           pnpm nx affected --targets=test:browser --parallel=1
-          --browser.name=${{ matrix.browser }}
+          --browser.name=webkit
+
+  # Deliberately not in `main`'s `needs`: Firefox still flakes on tests that need
+  # keyboard focus, so this job reports without a vote. Not a matrix leg with
+  # `continue-on-error` either — that covers a failure, but a job that hits its
+  # `timeout-minutes` ends `cancelled`, and `main` fails on that. Add it to
+  # `needs` once it stays green.
+  browser-firefox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:browser
+          browser: firefox
+
+      - name: Run browser tests in Firefox
+        run:
+          pnpm nx affected --targets=test:browser --parallel=1
+          --browser.name=firefox
 
   # Its own job rather than a second target on `browser`: run behind it, the two
   # of them together would take longer than the visual shards below and become
