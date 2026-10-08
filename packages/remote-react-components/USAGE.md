@@ -19,6 +19,15 @@ instead, with this package's version: all Flow packages share one version.
 What follows is only what is different because your UI renders across a process
 boundary.
 
+**Building a new app, page or flow: pick the matching template here too** — see
+that guide's "Start from a template". Two things differ in an extension:
+
+- Skip the app shells unless your extension renders a whole app of its own. When
+  it renders into an mStudio page, mStudio provides the navigation and the page
+  frame; start with the page template (`/raw/templates/seiten/*.md`).
+- The template examples import from `@mittwald/flow-react-components`. Change
+  the import to this package when you copy them.
+
 ## The model
 
 Your extension runs in a hidden iframe. It does not render DOM — it builds a
@@ -43,7 +52,7 @@ The full explainer:
 
 ## Not every component exists remotely
 
-**114 of Flow's 124 public components are available here.** The
+**116 of Flow's 126 public components are available here.** The
 [component index](https://www.npmjs.com/package/@mittwald/flow-react-components)
 (`@mittwald/flow-react-components/component-index`) records this per component:
 
@@ -68,9 +77,9 @@ import from this package instead.
 Check `remote.available` before reaching for a component. These ten have no
 remote counterpart:
 
-`Activity`, `ComponentDefaultsProvider`, `FormAction`, `FormRootError`,
-`FormSettingsProvider`, `LinkProvider`, `Overlay`, `OverlayTrigger`,
-`RouterProvider`, `SuspenseTrigger`
+`Activity`, `FormAction`, `FormRootError`, `FormSettingsProvider`, `Link` (from
+`@mittwald/flow-react-components/nextjs`), `LinkProvider`, `Overlay`,
+`OverlayTrigger`, `RouterProvider`, `SuspenseTrigger`
 
 Three components move to a different address: `Field`, `ResetButton` and
 `SubmitButton` come from

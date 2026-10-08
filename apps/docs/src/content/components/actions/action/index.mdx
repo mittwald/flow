@@ -32,6 +32,9 @@ Wenn eine asynchrone Aktion länger als 1000 Millisekunden dauert, wird der
 Wenn ein visuelles Feedback nach einer Userinteraktion angezeigt werden soll,
 kann das Property `showFeedback` genutzt werden.
 
+Solange die Aktion läuft oder Feedback anzeigt, nimmt der Button keine Klicks an
+und ist als `aria-disabled` markiert.
+
 <LiveCodeEditor example="feedback" editorCollapsed />
 
 ---
@@ -80,7 +83,7 @@ aufgerufen wird.
 Umschließende Actions bei einer Verschachtelung von Actions werden ebenfalls
 abgebrochen, wenn `abortAction` in einer inneren Action aufgerufen wird.
 
-<LiveCodeEditor example="abort" />
+<LiveCodeEditor example="abort" editorCollapsed />
 
 ---
 

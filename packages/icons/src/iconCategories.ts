@@ -59,6 +59,7 @@ export const iconCategories = {
   ],
   decorative: [
     "AI",
+    "AIHosting",
     "Analytics",
     "App",
     "Autoresponder",

@@ -48,8 +48,10 @@ Dafür umschließt du deine Anwendung mit dem `<ComponentDefaultsProvider />`:
 
 Jede einzelne Verwendung bleibt stärker als der Standard: Setzt eine
 [List](/components/list/list) das `disableInitialSuspenseBoundary`-Property an
-ihrer Datenquelle, gilt dort dieser Wert. Verschachtelte Provider gelten jeweils
-für ihren Teilbaum und übernehmen die Werte, die sie nicht selbst nennen.
+ihrer Datenquelle oder eine [Form](/components/react-hook-form/form) das
+`confirmModalCloseOnUnsavedChanges`-Property, gilt dort dieser Wert.
+Verschachtelte Provider gelten jeweils für ihren Teilbaum und übernehmen die
+Werte, die sie nicht selbst nennen.
 
 Diese Defaults stehen zur Verfügung:
 
@@ -102,6 +104,11 @@ Bevor du UI mit Flow baust oder änderst:
 2. Lies https://flow.mittwald.de/llms.txt und öffne die dort verlinkte Seite,
    bevor du eine Component, ein Layout oder einen UI-Text festlegst. Antworte
    nicht aus dem Gedächtnis.
+3. Baust du eine neue App, Seite oder einen Ablauf, wähle zuerst das passende
+   Template aus dem Abschnitt „Templates“ in llms.txt: erst die App-Shell, dann
+   das Seiten-Template, dann Overlays und Bausteine. Starte vom Beispielcode des
+   Templates. Weiche nur davon ab, wenn ausdrücklich ein anderes Layout
+   gewünscht ist – auch bei schnellen Prototypen.
 ```
 
 Die `USAGE.md` passt zur installierten Version, `llms.txt` beschreibt den

@@ -27,7 +27,8 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "RadioGroup");
 
@@ -54,7 +55,8 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
-      className={clsx(rootClassName, fieldProps.className)}
+      aria-describedby={controlProps["aria-describedby"]}
+      className={clsx(rootClassName, wrapperProps.className)}
       ref={localRadioRef}
     >
       <FieldErrorCaptureContext>

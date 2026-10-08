@@ -7,6 +7,7 @@ declare const classNames: {
   readonly ariaDisabled: "ariaDisabled";
   readonly avatar: "avatar";
   readonly stateIcon: "stateIcon";
+  readonly controlIconActive: "controlIconActive";
   readonly kbd: "kbd";
   readonly badge: "badge";
 };

@@ -30,3 +30,33 @@ test.each(testEnvironments)(
     await testScreenshot("FileDropZone states");
   },
 );
+
+// The error renders below the drop zone, like in every other field.
+test.each(testEnvironments)(
+  "FileDropZone with FieldError (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      FileDropZone,
+      IconUpload,
+      Heading,
+      FileField,
+      Button,
+      FieldError,
+    },
+  }) => {
+    await render(
+      <FileDropZone>
+        <IconUpload />
+        <Heading>Upload certificate</Heading>
+        <FileField name="file">
+          <Button>Select file</Button>
+        </FileField>
+        <FieldError>The file is too large</FieldError>
+      </FileDropZone>,
+    );
+
+    await testScreenshot("FileDropZone with FieldError");
+  },
+);

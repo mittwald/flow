@@ -85,6 +85,54 @@ test("Content from entry is in the DOM in the first commit", async () => {
   expect(seenInLayoutEffect).toEqual(["Hello!"]);
 });
 
+// Regression guard for an exit that mounts in a Suspense reveal and precedes its
+// entry in tree order — `ListItemView` renders its exits ahead of the tunnelled
+// `Avatar`, `Heading` and `Text`. The exit subscribes to the tunnel state in a
+// passive effect, and React runs the passive effects of a reveal after paint.
+// Without a re-render in the layout phase, the browser paints one frame with an
+// empty exit.
+test("Content from entry is in the DOM when the exit mounts in a Suspense reveal", async () => {
+  let resolveData!: () => void;
+  const data = new Promise<void>((resolve) => {
+    resolveData = resolve;
+  });
+
+  const Suspending: FC<PropsWithChildren> = (props) => {
+    React.use(data);
+    return props.children;
+  };
+
+  const dom = await render(
+    <TunnelProvider>
+      <Suspense fallback="Loading">
+        <Suspending>
+          <div data-testid="exit">
+            <TunnelExit />
+          </div>
+          <TunnelEntry>Hello!</TunnelEntry>
+        </Suspending>
+      </Suspense>
+    </TunnelProvider>,
+  );
+
+  // A MutationObserver callback runs right after the task that committed the
+  // reveal — before any later task that could fill the exit.
+  const exitContentOnReveal = new Promise<string>((resolve) => {
+    const observer = new MutationObserver(() => {
+      const exit = dom.container.querySelector('[data-testid="exit"]');
+      if (exit) {
+        observer.disconnect();
+        resolve(exit.textContent ?? "");
+      }
+    });
+    observer.observe(dom.container, { childList: true, subtree: true });
+  });
+
+  resolveData();
+
+  expect(await exitContentOnReveal).toBe("Hello!");
+});
+
 test("Content from entry is rendered in exit when using same tunnel ids", async () => {
   const dom = await render(
     <TunnelProvider>
@@ -489,9 +537,13 @@ test("Content is not rendered if removing previously suspended tunnel entry", as
   const dom = await render(<TestComponent renderEntries />);
   expect(dom.getByTestId("exit")).toHaveTextContent("");
 
-  vitest.advanceTimersByTime(1000);
-  await dom.rerender(<TestComponent renderEntries />);
-  expect(dom.getByTestId("exit")).toHaveTextContent("AB");
+  // React pre-renders the suspended siblings in a later task, so `Lazy500` may
+  // only start its timer after the first advance.
+  await vitest.waitFor(async () => {
+    vitest.advanceTimersByTime(1000);
+    await dom.rerender(<TestComponent renderEntries />);
+    expect(dom.getByTestId("exit")).toHaveTextContent("AB");
+  });
 
   await dom.rerender(<TestComponent renderEntries={false} />);
   expect(dom.getByTestId("exit")).toHaveTextContent("");

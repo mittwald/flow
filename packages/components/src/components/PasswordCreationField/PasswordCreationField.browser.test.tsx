@@ -11,9 +11,11 @@ import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
 import Button from "@/components/Button";
-import { userEvent } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
+import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
+import { FieldError } from "@/components/FieldError";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -62,15 +64,165 @@ const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
   );
 };
 
+/*
+ * The policy hint is a rule to meet, not an error, until the password misses
+ * it. The policy resolves asynchronously, so this runs on real timers and gives
+ * it time to land.
+ */
+test("an empty field shows no error", async () => {
+  await render(
+    <PasswordCreationField>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+  await expect.element(page.getByRole("textbox")).toBeVisible();
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  expect(document.querySelector(`.${fieldErrorStyles.fieldError}`)).toBeNull();
+});
+
+const complexityIndicator = () =>
+  document.querySelector("[data-complexity-status]");
+
+const complexityStatus = () =>
+  complexityIndicator()?.getAttribute("data-complexity-status");
+
+/** Waits until the generated password is rated at full strength. */
+const expectFullStrength = () =>
+  expect
+    .poll(
+      () => complexityIndicator()?.getAttribute("data-complexity-percentage"),
+      { timeout: 10_000 },
+    )
+    .toBe("100");
+
+/*
+ * The policy result for a valid password describes the input. It appears only
+ * after the asynchronous validation, and a generated password never makes the
+ * field invalid on the way – the input references the result only while it is
+ * shown.
+ */
+test("a valid password's result describes the input", async () => {
+  await render(
+    <PasswordCreationField>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+  const input = page.getByRole("textbox");
+  await expect.element(input).toBeVisible();
+  await expect.element(input).not.toHaveAttribute("aria-describedby");
+
+  await page.getByRole("button", { name: /generate/i }).click();
+
+  await expect.element(input).toHaveAccessibleDescription(/secure/);
+
+  await userEvent.clear(input);
+
+  await expect.element(input).not.toHaveAttribute("aria-describedby");
+});
+
+/*
+ * A shown error hides the field's descriptions (FormField styles), so the
+ * hidden result must not describe the input either – it would still be
+ * announced.
+ */
+test("an error replaces a valid password's result", async () => {
+  await render(
+    <PasswordCreationField isInvalid>
+      <Label>Password</Label>
+      <FieldError>Already used</FieldError>
+    </PasswordCreationField>,
+  );
+  const input = page.getByRole("textbox");
+  await expect.element(input).toHaveAccessibleDescription(/Already used/);
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expectFullStrength();
+
+  await expect.element(input).toHaveAccessibleDescription(/Already used/);
+  await expect.element(input).not.toHaveAccessibleDescription(/secure/);
+});
+
+/*
+ * An error from outside the policy (a server error) makes the bar danger like
+ * the field – a green bar next to an error reads as a contradiction.
+ */
+test("the bar of an invalid field shows danger for a strong password", async () => {
+  const Field = ({ isInvalid }: { isInvalid: boolean }) => (
+    <PasswordCreationField isInvalid={isInvalid}>
+      <Label>Password</Label>
+      <FieldError>Already used</FieldError>
+    </PasswordCreationField>
+  );
+  const screen = await render(<Field isInvalid />);
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expectFullStrength();
+
+  expect(complexityStatus()).toBe("danger");
+
+  await screen.rerender(<Field isInvalid={false} />);
+
+  await expect.poll(complexityStatus).toBe("success");
+});
+
+/*
+ * The generator only returns passwords its policy accepts, so the field shows
+ * the policy's rating together with the password – not a guess that the real
+ * rating overturns once the typing debounce has passed. With a short policy a
+ * generated password lands at the minimum complexity, which the guess (full
+ * strength) used to contradict.
+ */
+test("a generated password shows its final rating at once", async () => {
+  const shortPolicy = Policy.fromDeclaration({
+    minComplexity: 1,
+    rules: [{ ruleType: RuleType.length, min: 2, max: 5 }],
+  });
+  await render(
+    <PasswordCreationField validationPolicy={shortPolicy}>
+      <Label>Password</Label>
+    </PasswordCreationField>,
+  );
+
+  const shownStatuses: string[] = [];
+  const recordStatus = () => {
+    const indicator = complexityIndicator();
+    const status = indicator?.getAttribute("data-complexity-status");
+    const isVisible =
+      indicator?.getAttribute("data-complexity-visible") === "true";
+    if (isVisible && status && shownStatuses.at(-1) !== status) {
+      shownStatuses.push(status);
+    }
+  };
+  const observer = new MutationObserver(recordStatus);
+  observer.observe(document.body, { subtree: true, attributes: true });
+
+  await page.getByRole("button", { name: /generate/i }).click();
+  await expect
+    .poll(() => shownStatuses.length, { timeout: 10_000 })
+    .toBeGreaterThan(0);
+  // Past the typing debounce (350 ms), when the debounced validation runs: it
+  // must leave the rating alone.
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  observer.disconnect();
+
+  expect(shownStatuses).toEqual(["warning"]);
+});
+
 describe("PasswordCreationField Tests", () => {
   beforeEach(() => {
     vitest.resetAllMocks();
     vitest.useFakeTimers();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     vitest.useRealTimers();
     destroyAnnouncer();
+    // Every test renders the same layout. A pointer left on a button hovers the
+    // next test's button, and its tooltip then swallows that test's Escape.
+    await page
+      .elementLocator(document.body)
+      .hover({ position: { x: 0, y: 0 }, force: true });
   });
 
   test("renders empty list without errors", async () => {
@@ -147,8 +299,10 @@ describe("PasswordCreationField Tests", () => {
 
     await userEvent.click(infoButton);
     const rules = renderResult.getByLocator("[data-rule]");
-    expect(rules).toHaveLength(1);
-    expect(rules.first()).toHaveAttribute("data-rule-valid", "true");
+    await expect.poll(() => rules.elements()).toHaveLength(1);
+    await expect
+      .element(rules.first())
+      .toHaveAttribute("data-rule-valid", "true");
     expect(rules.first()).toHaveTextContent("Maximal 2 Zahlen");
     await userEvent.keyboard("{escape}");
 
@@ -159,8 +313,10 @@ describe("PasswordCreationField Tests", () => {
 
     await userEvent.click(infoButton);
 
-    expect(rules).toHaveLength(1);
-    expect(rules.first()).toHaveAttribute("data-rule-valid", "false");
+    await expect.poll(() => rules.elements()).toHaveLength(1);
+    await expect
+      .element(rules.first())
+      .toHaveAttribute("data-rule-valid", "false");
     expect(rules.first()).toHaveTextContent("Maximal 2 Zahlen");
   });
 
@@ -180,7 +336,7 @@ describe("PasswordCreationField Tests", () => {
     await userEvent.click(infoButton);
 
     const rules = renderResult.getByLocator("[data-rule]");
-    expect(rules).toHaveLength(2);
+    await expect.poll(() => rules.elements()).toHaveLength(2);
   });
 
   test("will reveal and hide password when clicked", async () => {
@@ -360,10 +516,10 @@ describe("PasswordCreationField Tests", () => {
     expect(rulesList).toBeInTheDocument();
 
     const rules = rulesList.getByRole("listitem");
-    expect(rules).toHaveLength(2);
-    expect(rules.first()).toHaveTextContent(
-      "Nicht erfüllt: Mindestens 8 Zeichen",
-    );
+    await expect.poll(() => rules.elements()).toHaveLength(2);
+    await expect
+      .element(rules.first())
+      .toHaveTextContent("Nicht erfüllt: Mindestens 8 Zeichen");
 
     await userEvent.keyboard("{escape}");
     await userEvent.type(renderResult.getByRole("textbox"), "abcdefgh1");
