@@ -184,6 +184,11 @@ against Flow components.**
   automatic, driven by sibling selectors, so `Section`s must be actual siblings.
   A `Modal`'s `Content` brings only padding, like a `LayoutCard`: put its
   components in a `Section`, or they stick together.
+- `Alert` — placement follows what it is about. A page-wide alert goes
+  **inside** the `LayoutCard`: before the first `Section`, below a
+  `TabNavigation` if there is one — never above the card. With several cards, it
+  goes into the card it concerns. An alert about one section goes into that
+  section. Pages without a `LayoutCard` place it freely.
 - `ColumnLayout` — the column grid, with `gap` / `rowGap` / `columnGap`
   (`s | m | l | xl`).
 - `Flex` — the general-purpose flex container. It is the one component with a
