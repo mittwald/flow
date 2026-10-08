@@ -1,4 +1,4 @@
-import { cloneVNode, h, isVNode, type VNode } from "vue";
+import { cloneVNode, Fragment, h, isVNode, type VNode } from "vue";
 import type { NativeElements, ReservedProps } from "vue";
 
 /**
@@ -66,6 +66,20 @@ export const jsx = (
     return h(type, attributes, children as never);
   }
 
+  /* `<>…</>` has no slots either, and a fragment mounts only an array. */
+  if ((type as unknown) === Fragment) {
+    return h(
+      Fragment,
+      attributes,
+      (Array.isArray(children) ? children : [children]) as never,
+    );
+  }
+
+  /* `<Comp>{(props) => …}</Comp>` is the default slot, scoped or not. */
+  if (typeof children === "function") {
+    return h(type, attributes, { default: children as () => unknown });
+  }
+
   /*
    * `<Comp>{{ default: () => …, footer: () => … }}</Comp>` is how Vue JSX
    * writes named and scoped slots, and that object is handed through
@@ -81,7 +95,7 @@ export const jsx = (
 
 export const jsxs = jsx;
 export const jsxDEV = jsx;
-export { Fragment } from "vue";
+export { Fragment };
 
 export namespace JSX {
   export interface Element extends VNode {}

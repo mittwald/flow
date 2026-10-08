@@ -216,7 +216,8 @@ And Vue's JSX namespace has no `ElementChildrenAttribute`, so TypeScript checks
 children against the props; declaring `children?: unknown` on
 `JSX.IntrinsicAttributes` is the fix.
 `apps/remote-dom-demo/src/app/remote-vue/_lib/jsx-runtime.ts` in the Flow
-repository is both, in one file.
+repository is both, in one file — and passes `<>…</>` through as a fragment and
+takes a function child (`<Comp>{(props) => …}</Comp>`) as the default slot.
 
 ## The components that are not generated
 
