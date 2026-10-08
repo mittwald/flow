@@ -104,10 +104,6 @@ export interface ListShape<
   emptyView?: ReactNode;
 }
 
-export type PropertyRecord<T, TValue> = Partial<
-  Record<PropertyName<T>, TValue>
->;
-
 export interface ListSettingsStorageShape {
   storageKey: string;
 }
