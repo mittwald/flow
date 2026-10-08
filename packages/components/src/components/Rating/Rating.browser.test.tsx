@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { beforeEach, expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { useForm } from "react-hook-form";
@@ -19,6 +19,16 @@ const fillStates = (): boolean[] =>
     const filled = segment.querySelector(`.${styles.filled}`);
     return !!filled && getComputedStyle(filled).opacity === "1";
   });
+
+// The pointer stays where an earlier test, or file, left it, and Firefox
+// previews the segment a fresh Rating renders underneath. Tests render from the
+// top left, so park it in the opposite corner.
+beforeEach(async () => {
+  await page.elementLocator(document.documentElement).hover({
+    position: { x: window.innerWidth - 1, y: window.innerHeight - 1 },
+    force: true,
+  });
+});
 
 test("segment children set the number of segments and their labels", async () => {
   await render(
