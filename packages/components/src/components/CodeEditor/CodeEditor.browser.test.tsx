@@ -28,6 +28,23 @@ test("CodeEditor can be named with an aria-label instead", async () => {
     .toHaveAccessibleName("Source code");
 });
 
+test.each(["log", "constructor"])(
+  "CodeEditor shows code in the unknown language %s as plain text",
+  async (language) => {
+    const dom = await render(
+      <CodeEditor
+        value="const jedi = true;"
+        language={language}
+        aria-label="Source code"
+      />,
+    );
+
+    await expect
+      .element(dom.getByRole("textbox"))
+      .toHaveTextContent("const jedi = true;");
+  },
+);
+
 test("CodeEditor is described by its field description", async () => {
   const dom = await render(
     <CodeEditor value="const jedi = true;">
@@ -56,6 +73,21 @@ test("CodeEditor is marked and styled as invalid", async () => {
     expect.stringContaining("Invalid TypeScript"),
   );
   expect(editor.closest("[data-invalid]")).not.toBeNull();
+});
+
+test("CodeEditor can be disabled", async () => {
+  const dom = await render(
+    <CodeEditor value="const jedi = true;" isDisabled>
+      <Label>Source code</Label>
+    </CodeEditor>,
+  );
+
+  const editor = dom.getByRole("textbox").element();
+
+  expect(editor).toHaveAttribute("aria-disabled", "true");
+  expect(editor).toHaveAttribute("contenteditable", "false");
+  expect(editor.closest("[data-disabled]")).not.toBeNull();
+  await expect.element(dom.getByRole("button")).toBeDisabled();
 });
 
 /*
