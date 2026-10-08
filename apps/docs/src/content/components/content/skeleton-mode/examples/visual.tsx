@@ -52,8 +52,8 @@ export default () => {
           <Image
             src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
             alt="mittwald"
-            width={200}
-            height={100}
+            width={100}
+            aspectRatio={1}
           />
           <ActionGroup>
             <Link href="#">
