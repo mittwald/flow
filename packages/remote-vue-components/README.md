@@ -125,7 +125,7 @@ themselves. They cannot be generated, so this package rebuilds them in Vue:
 | `Modal`, `Popover`, `LightBox`                      | render `OverlayContent` / `PopoverContent` with Flow's own classes, and configure their children      |
 | `Modal confirmOnClose`                              | a confirmation modal bound to the parent's `isConfirmingClose`, with its own copy of the four strings |
 | `IconSetProvider`                                   | provide/inject; its `IconSet` is partial, because there is no complete second set to hand it          |
-| `ModalTrigger`, `PopoverTrigger`, `LightBoxTrigger` | a `DialogTrigger` whose non-overlay child gets the `onPress` that opens it                            |
+| `ModalTrigger`, `PopoverTrigger`, `LightBoxTrigger` | a `DialogTrigger` whose `Button` (also inside an `Action`) gets the `onPress` that opens it           |
 | `useOverlayController`, `useModalController`        | a `ref` plus `provide`/`inject`; given a type, the surrounding overlay's controller, as in Flow       |
 | `Action`, `ActionBatch`                             | run, report pending/succeeded/failed on the button, close the overlay                                 |
 | `NotificationProvider`, `useNotificationController` | a reactive list, with the auto-close timer that pauses on hover and focus                             |
