@@ -13,6 +13,7 @@ export const ContextMenuContent: FlowRemoteVueComponent<RemoteContextMenuContent
     RemoteContextMenuContentElement,
     {
       booleans: [
+        "autoFocus",
         "disallowEmptySelection",
         "hidden",
         "inert",

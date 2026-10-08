@@ -9,6 +9,11 @@ export { type RemoteLabelElementProps as LabelProps } from "@mittwald/flow-remot
 export const Label: FlowRemoteVueComponent<RemoteLabelElementProps> =
   createFlowRemoteComponent("flr-label", "Label", RemoteLabelElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

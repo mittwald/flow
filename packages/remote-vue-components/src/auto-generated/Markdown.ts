@@ -7,4 +7,6 @@ import type { RemoteMarkdownElementProps } from "@mittwald/flow-remote-elements"
 export { type RemoteMarkdownElementProps as MarkdownProps } from "@mittwald/flow-remote-elements";
 
 export const Markdown: FlowRemoteVueComponent<RemoteMarkdownElementProps> =
-  createFlowRemoteComponent("flr-markdown", "Markdown", RemoteMarkdownElement);
+  createFlowRemoteComponent("flr-markdown", "Markdown", RemoteMarkdownElement, {
+    booleans: ["skipHtml", "unwrapDisallowed"],
+  });

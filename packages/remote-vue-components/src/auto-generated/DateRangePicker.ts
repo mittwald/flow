@@ -24,7 +24,9 @@ export const DateRangePicker: FlowRemoteVueComponent<RemoteDateRangePickerElemen
         "isOpen",
         "isReadOnly",
         "isRequired",
+        "shouldCloseOnSelect",
         "shouldForceLeadingZeros",
+        "withDatePickerPresets",
       ],
     },
   );

@@ -13,6 +13,11 @@ export const TabNavigation: FlowRemoteVueComponent<RemoteTabNavigationElementPro
     RemoteTabNavigationElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

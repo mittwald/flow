@@ -9,6 +9,11 @@ export { type RemoteMessageElementProps as MessageProps } from "@mittwald/flow-r
 export const Message: FlowRemoteVueComponent<RemoteMessageElementProps> =
   createFlowRemoteComponent("flr-message", "Message", RemoteMessageElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

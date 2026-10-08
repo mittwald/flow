@@ -11,5 +11,14 @@ export const AlertIcon: FlowRemoteVueComponent<RemoteAlertIconElementProps> =
     "flr-alert-icon",
     "AlertIcon",
     RemoteAlertIconElement,
-    { booleans: ["suppressHydrationWarning"] },
+    {
+      booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
+        "suppressHydrationWarning",
+      ],
+    },
   );

@@ -11,5 +11,5 @@ export const CodeBlock: FlowRemoteVueComponent<RemoteCodeBlockElementProps> =
     "flr-code-block",
     "CodeBlock",
     RemoteCodeBlockElement,
-    { booleans: ["copyable", "showLineNumbers"] },
+    { booleans: ["copyable", "showLineNumbers", "truncateLines"] },
   );

@@ -13,6 +13,11 @@ export const InlineCode: FlowRemoteVueComponent<RemoteInlineCodeElementProps> =
     RemoteInlineCodeElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

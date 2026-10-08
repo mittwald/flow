@@ -9,6 +9,11 @@ export { type RemoteSectionElementProps as SectionProps } from "@mittwald/flow-r
 export const Section: FlowRemoteVueComponent<RemoteSectionElementProps> =
   createFlowRemoteComponent("flr-section", "Section", RemoteSectionElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

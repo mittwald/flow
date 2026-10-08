@@ -9,6 +9,11 @@ export { type RemoteTextElementProps as TextProps } from "@mittwald/flow-remote-
 export const Text: FlowRemoteVueComponent<RemoteTextElementProps> =
   createFlowRemoteComponent("flr-text", "Text", RemoteTextElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "emulateBoldWidth",

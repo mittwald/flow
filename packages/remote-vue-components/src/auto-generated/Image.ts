@@ -9,6 +9,11 @@ export { type RemoteImageElementProps as ImageProps } from "@mittwald/flow-remot
 export const Image: FlowRemoteVueComponent<RemoteImageElementProps> =
   createFlowRemoteComponent("flr-image", "Image", RemoteImageElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

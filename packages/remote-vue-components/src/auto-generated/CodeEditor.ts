@@ -13,6 +13,11 @@ export const CodeEditor: FlowRemoteVueComponent<RemoteCodeEditorElementProps> =
     RemoteCodeEditorElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "copyable",
         "defaultChecked",

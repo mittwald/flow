@@ -13,6 +13,11 @@ export const Accordion: FlowRemoteVueComponent<RemoteAccordionElementProps> =
     RemoteAccordionElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "defaultExpanded",

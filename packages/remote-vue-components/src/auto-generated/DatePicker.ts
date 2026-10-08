@@ -23,6 +23,7 @@ export const DatePicker: FlowRemoteVueComponent<RemoteDatePickerElementProps> =
         "isOpen",
         "isReadOnly",
         "isRequired",
+        "shouldCloseOnSelect",
         "shouldForceLeadingZeros",
       ],
     },

@@ -9,6 +9,11 @@ export { type RemoteSkeletonElementProps as SkeletonProps } from "@mittwald/flow
 export const Skeleton: FlowRemoteVueComponent<RemoteSkeletonElementProps> =
   createFlowRemoteComponent("flr-skeleton", "Skeleton", RemoteSkeletonElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

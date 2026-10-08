@@ -11,5 +11,14 @@ export const LoadingSpinner: FlowRemoteVueComponent<RemoteLoadingSpinnerElementP
     "flr-loading-spinner",
     "LoadingSpinner",
     RemoteLoadingSpinnerElement,
-    { booleans: ["suppressHydrationWarning"] },
+    {
+      booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
+        "suppressHydrationWarning",
+      ],
+    },
   );

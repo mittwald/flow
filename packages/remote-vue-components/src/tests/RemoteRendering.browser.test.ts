@@ -1,4 +1,12 @@
-import { Button, Heading, Label, Section, TextField } from "@/index";
+import {
+  Button,
+  CodeBlock,
+  Heading,
+  Label,
+  Section,
+  TextArea,
+  TextField,
+} from "@/index";
 import { cleanupRemote, renderRemote } from "@/tests/lib/environment";
 import { page } from "vitest/browser";
 import { afterEach, describe, expect, test, vi } from "vitest";
@@ -97,6 +105,36 @@ describe("A Vue tree rendered through the host renderer", () => {
     await expect
       .element(page.getByRole("button", { name: "Archive" }))
       .toHaveClass("flow--button--aria-disabled");
+  });
+
+  /*
+   * A prop whose union has `boolean` in it is cast too, and only the bare
+   * attribute: `truncateLines` takes a number as well, which has to pass.
+   */
+  test("reads a bare attribute of a boolean union as true", async () => {
+    renderRemote(
+      defineComponent(() => () => [
+        h(TextArea, { "allow-resize": "" } as never, () =>
+          h(Label, null, () => "Notes"),
+        ),
+        h(CodeBlock, { code: "a\nb\nc", "truncate-lines": "" } as never),
+        h(CodeBlock, { code: "d\ne\nf", "truncate-lines": 2 } as never),
+      ]),
+    );
+
+    await expect
+      .element(page.getByRole("textbox", { name: "Notes" }))
+      .toHaveClass("flow--text-area--resize");
+    const textArea = document.querySelector("flr-text-area");
+    const codeBlocks = document.querySelectorAll("flr-code-block");
+    expect((textArea as { allowResize?: unknown } | null)?.allowResize).toBe(
+      true,
+    );
+    expect(
+      [...codeBlocks].map(
+        (element) => (element as { truncateLines?: unknown }).truncateLines,
+      ),
+    ).toEqual([true, 2]);
   });
 
   /*

@@ -9,6 +9,11 @@ export { type RemoteHeaderElementProps as HeaderProps } from "@mittwald/flow-rem
 export const Header: FlowRemoteVueComponent<RemoteHeaderElementProps> =
   createFlowRemoteComponent("flr-header", "Header", RemoteHeaderElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

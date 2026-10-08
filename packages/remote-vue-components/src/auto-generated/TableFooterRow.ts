@@ -11,5 +11,14 @@ export const TableFooterRow: FlowRemoteVueComponent<RemoteTableFooterRowElementP
     "flr-table-footer-row",
     "TableFooterRow",
     RemoteTableFooterRowElement,
-    { booleans: ["footer", "hasChildItems", "hidden", "inert", "isDisabled"] },
+    {
+      booleans: [
+        "download",
+        "footer",
+        "hasChildItems",
+        "hidden",
+        "inert",
+        "isDisabled",
+      ],
+    },
   );

@@ -13,6 +13,11 @@ export const Notification: FlowRemoteVueComponent<RemoteNotificationElementProps
     RemoteNotificationElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoClose",
         "autoFocus",
         "defaultChecked",

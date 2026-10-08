@@ -10,6 +10,7 @@ export const Link: FlowRemoteVueComponent<RemoteLinkElementProps> =
   createFlowRemoteComponent("flr-link", "Link", RemoteLinkElement, {
     booleans: [
       "autoFocus",
+      "download",
       "hidden",
       "inert",
       "inline",

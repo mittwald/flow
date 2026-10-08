@@ -20,6 +20,7 @@ export const RangeCalendar: FlowRemoteVueComponent<RemoteRangeCalendarElementPro
         "isDisabled",
         "isInvalid",
         "isReadOnly",
+        "withDatePickerPresets",
       ],
     },
   );

@@ -13,6 +13,11 @@ export const SkeletonText: FlowRemoteVueComponent<RemoteSkeletonTextElementProps
     RemoteSkeletonTextElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

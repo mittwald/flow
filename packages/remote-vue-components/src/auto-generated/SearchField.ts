@@ -13,6 +13,7 @@ export const SearchField: FlowRemoteVueComponent<RemoteSearchFieldElementProps> 
     RemoteSearchFieldElement,
     {
       booleans: [
+        "aria-haspopup",
         "autoFocus",
         "excludeFromTabOrder",
         "hidden",

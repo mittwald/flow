@@ -13,6 +13,11 @@ export const IllustratedMessage: FlowRemoteVueComponent<RemoteIllustratedMessage
     RemoteIllustratedMessageElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

@@ -13,6 +13,11 @@ export const HeaderNavigation: FlowRemoteVueComponent<RemoteHeaderNavigationElem
     RemoteHeaderNavigationElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

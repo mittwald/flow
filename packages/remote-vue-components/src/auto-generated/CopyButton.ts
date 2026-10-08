@@ -13,7 +13,11 @@ export const CopyButton: FlowRemoteVueComponent<RemoteCopyButtonElementProps> =
     RemoteCopyButtonElement,
     {
       booleans: [
+        "aria-current",
         "aria-disabled",
+        "aria-expanded",
+        "aria-haspopup",
+        "aria-pressed",
         "autoFocus",
         "excludeFromTabOrder",
         "formNoValidate",

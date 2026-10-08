@@ -11,5 +11,14 @@ export const TableRow: FlowRemoteVueComponent<RemoteTableRowElementProps> =
     "flr-table-row",
     "TableRow",
     RemoteTableRowElement,
-    { booleans: ["footer", "hasChildItems", "hidden", "inert", "isDisabled"] },
+    {
+      booleans: [
+        "download",
+        "footer",
+        "hasChildItems",
+        "hidden",
+        "inert",
+        "isDisabled",
+      ],
+    },
   );

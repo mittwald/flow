@@ -16,6 +16,7 @@ export const ItemsGridList: FlowRemoteVueComponent<
   {
     slots: ["emptyView"],
     booleans: [
+      "autoFocus",
       "disallowEmptySelection",
       "disallowTypeAhead",
       "hidden",

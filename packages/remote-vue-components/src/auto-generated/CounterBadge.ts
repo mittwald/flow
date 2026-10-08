@@ -13,6 +13,11 @@ export const CounterBadge: FlowRemoteVueComponent<RemoteCounterBadgeElementProps
     RemoteCounterBadgeElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

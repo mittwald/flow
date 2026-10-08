@@ -13,6 +13,7 @@ export const TextField: FlowRemoteVueComponent<RemoteTextFieldElementProps> =
     RemoteTextFieldElement,
     {
       booleans: [
+        "aria-haspopup",
         "autoFocus",
         "excludeFromTabOrder",
         "hidden",

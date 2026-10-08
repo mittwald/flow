@@ -8,5 +8,5 @@ export { type RemoteOptionElementProps as OptionProps } from "@mittwald/flow-rem
 
 export const Option: FlowRemoteVueComponent<RemoteOptionElementProps> =
   createFlowRemoteComponent("flr-option", "Option", RemoteOptionElement, {
-    booleans: ["hidden", "inert", "isDisabled"],
+    booleans: ["download", "hidden", "inert", "isDisabled"],
   });

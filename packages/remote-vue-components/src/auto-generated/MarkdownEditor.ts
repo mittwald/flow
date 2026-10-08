@@ -14,7 +14,9 @@ export const MarkdownEditor: FlowRemoteVueComponent<RemoteMarkdownEditorElementP
     {
       booleans: [
         "allowHorizontalResize",
+        "allowResize",
         "allowVerticalResize",
+        "aria-haspopup",
         "autoFocus",
         "excludeFromTabOrder",
         "hidden",

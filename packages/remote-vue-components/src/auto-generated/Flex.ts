@@ -9,6 +9,11 @@ export { type RemoteFlexElementProps as FlexProps } from "@mittwald/flow-remote-
 export const Flex: FlowRemoteVueComponent<RemoteFlexElementProps> =
   createFlowRemoteComponent("flr-flex", "Flex", RemoteFlexElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "grow",

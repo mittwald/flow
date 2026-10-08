@@ -13,6 +13,11 @@ export const NavigationGroup: FlowRemoteVueComponent<RemoteNavigationGroupElemen
     RemoteNavigationGroupElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "collapsable",
         "defaultChecked",

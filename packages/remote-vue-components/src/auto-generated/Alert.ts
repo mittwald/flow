@@ -9,6 +9,11 @@ export { type RemoteAlertElementProps as AlertProps } from "@mittwald/flow-remot
 export const Alert: FlowRemoteVueComponent<RemoteAlertElementProps> =
   createFlowRemoteComponent("flr-alert", "Alert", RemoteAlertElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

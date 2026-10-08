@@ -2,7 +2,7 @@ import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
 import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
 import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
-import { isEvent, isSlot } from "../lib/propClassifiers";
+import { isBoolean, isSlot } from "../lib/propClassifiers";
 
 /**
  * The Vue counterpart of `generateRemoteReactComponentFile`, and deliberately
@@ -12,7 +12,8 @@ import { isEvent, isSlot } from "../lib/propClassifiers";
  * they are needed as a _type_ — a Vue component declares its slots, and the
  * element class carries them at runtime only. And the boolean props, because
  * the element carries no types at all, and a bare attribute (`<TextField
- * is-required>`) arrives as `""`.
+ * is-required>`) arrives as `""`. A prop counts when its union has `boolean`
+ * among its members.
  */
 export function generateRemoteVueComponentFile(c: ComponentDoc) {
   const quoted = (props: string[]) =>
@@ -26,14 +27,7 @@ export function generateRemoteVueComponentFile(c: ComponentDoc) {
     name: remoteComponentBaseNameOf(c),
     tag: remoteElementTagNameOf(c),
     slots: quoted(Object.keys(c.props).filter((prop) => isSlot(c, prop))),
-    booleans: quoted(
-      Object.keys(c.props).filter(
-        (prop) =>
-          !isEvent(prop) &&
-          !isSlot(c, prop) &&
-          c.props[prop]?.type.name === "boolean",
-      ),
-    ),
+    booleans: quoted(Object.keys(c.props).filter((prop) => isBoolean(c, prop))),
   };
 
   const optionEntries = [

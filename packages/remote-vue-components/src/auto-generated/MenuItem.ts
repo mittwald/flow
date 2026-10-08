@@ -14,6 +14,7 @@ export const MenuItem: FlowRemoteVueComponent<RemoteMenuItemElementProps> =
     {
       booleans: [
         "aria-disabled",
+        "download",
         "hidden",
         "inert",
         "isDisabled",

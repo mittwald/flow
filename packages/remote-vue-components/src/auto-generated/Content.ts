@@ -9,6 +9,11 @@ export { type RemoteContentElementProps as ContentProps } from "@mittwald/flow-r
 export const Content: FlowRemoteVueComponent<RemoteContentElementProps> =
   createFlowRemoteComponent("flr-content", "Content", RemoteContentElement, {
     booleans: [
+      "aria-checked",
+      "aria-current",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-pressed",
       "autoFocus",
       "defaultChecked",
       "hidden",

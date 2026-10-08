@@ -13,6 +13,11 @@ export const ColumnLayout: FlowRemoteVueComponent<RemoteColumnLayoutElementProps
     RemoteColumnLayoutElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

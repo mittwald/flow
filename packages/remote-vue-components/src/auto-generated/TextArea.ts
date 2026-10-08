@@ -14,7 +14,9 @@ export const TextArea: FlowRemoteVueComponent<RemoteTextAreaElementProps> =
     {
       booleans: [
         "allowHorizontalResize",
+        "allowResize",
         "allowVerticalResize",
+        "aria-haspopup",
         "autoFocus",
         "excludeFromTabOrder",
         "hidden",

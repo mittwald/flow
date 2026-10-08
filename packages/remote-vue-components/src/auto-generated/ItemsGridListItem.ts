@@ -14,6 +14,7 @@ export const ItemsGridListItem: FlowRemoteVueComponent<RemoteItemsGridListItemEl
     {
       booleans: [
         "allowsArrowNavigation",
+        "download",
         "hasAction",
         "hidden",
         "inert",

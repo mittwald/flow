@@ -13,8 +13,14 @@ export const FileCard: FlowRemoteVueComponent<RemoteFileCardElementProps> =
     RemoteFileCardElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
+        "download",
         "hidden",
         "inert",
         "isFailed",

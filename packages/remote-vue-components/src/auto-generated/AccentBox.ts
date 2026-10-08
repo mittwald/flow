@@ -13,6 +13,11 @@ export const AccentBox: FlowRemoteVueComponent<RemoteAccentBoxElementProps> =
     RemoteAccentBoxElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "hidden",

@@ -9,7 +9,11 @@ export { type RemoteButtonElementProps as ButtonProps } from "@mittwald/flow-rem
 export const Button: FlowRemoteVueComponent<RemoteButtonElementProps> =
   createFlowRemoteComponent("flr-button", "Button", RemoteButtonElement, {
     booleans: [
+      "aria-current",
       "aria-disabled",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-pressed",
       "autoFocus",
       "excludeFromTabOrder",
       "formNoValidate",

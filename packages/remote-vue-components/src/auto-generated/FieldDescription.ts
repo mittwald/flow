@@ -13,6 +13,11 @@ export const FieldDescription: FlowRemoteVueComponent<RemoteFieldDescriptionElem
     RemoteFieldDescriptionElement,
     {
       booleans: [
+        "aria-checked",
+        "aria-current",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-pressed",
         "autoFocus",
         "defaultChecked",
         "emulateBoldWidth",

@@ -13,6 +13,7 @@ export const PasswordCreationField: FlowRemoteVueComponent<RemotePasswordCreatio
     RemotePasswordCreationFieldElement,
     {
       booleans: [
+        "aria-haspopup",
         "autoFocus",
         "excludeFromTabOrder",
         "hidden",
