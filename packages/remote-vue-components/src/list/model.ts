@@ -22,6 +22,7 @@ import {
 } from "@mittwald/flow-components-base";
 import { action, makeObservable, observable } from "mobx";
 import { hash } from "object-code";
+import { isRef } from "vue";
 import {
   getCoreRowModel,
   getFacetedUniqueValues,
@@ -68,14 +69,19 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> => {
 };
 
 /*
- * Walks plain objects and arrays only. Anything else — a `Date`, a `Map`, a
- * class instance — goes to `hash` as it is, which reads it the way React's
- * loader does. A cycle is copied as a cycle, which `hash` detects.
+ * Walks plain objects and arrays only, and unwraps a ref or a computed to its
+ * value: its object carries its subscribers, which change without the value.
+ * Anything else — a `Date`, a `Map`, a class instance — goes to `hash` as it
+ * is, which reads it the way React's loader does. A cycle is copied as a
+ * cycle, which `hash` detects.
  */
 const withoutFunctions = (
   value: unknown,
   copies = new Map<object, unknown>(),
 ): unknown => {
+  if (isRef(value)) {
+    return withoutFunctions(value.value, copies);
+  }
   if (!Array.isArray(value) && !isPlainObject(value)) {
     return value;
   }

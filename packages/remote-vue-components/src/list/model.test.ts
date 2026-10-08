@@ -1,5 +1,6 @@
 import { ListModel } from "@/list/model";
 import { describe, expect, test } from "vitest";
+import { computed, ref, watchEffect } from "vue";
 
 const loader = () => Promise.resolve({ data: [], itemTotalCount: 0 });
 
@@ -52,6 +53,34 @@ describe("A loader's dependencies", () => {
     };
 
     expect(reloads(cyclic(), cyclic())).toBe(false);
+  });
+
+  /*
+   * A ref's object carries its subscribers, which change whenever something
+   * starts or stops reading it — not a change of what it holds.
+   */
+  test("compare a ref or a computed by its value", () => {
+    const ship = ref("Sulaco");
+    const label = computed(() => `USS ${ship.value}`);
+    const dependencies = () => [ship, { label }];
+
+    const list = new ListModel<never>({
+      asyncLoader: loader,
+      dependencies: dependencies(),
+    });
+    const reloaded = () => {
+      list.loaderState.setBatchLoadingState(0, "loaded");
+      list.updateSetup({ asyncLoader: loader, dependencies: dependencies() });
+      return list.loaderState.batchLoadingStates[0] === undefined;
+    };
+
+    const stop = watchEffect(() => void label.value);
+    expect(reloaded()).toBe(false);
+    stop();
+    expect(reloaded()).toBe(false);
+
+    ship.value = "Nostromo";
+    expect(reloaded()).toBe(true);
   });
 
   test("ignore functions", () => {
