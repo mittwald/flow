@@ -71,8 +71,8 @@ export default async function ReleasesPage() {
             <Link inline href={releasesFeedUrl} target="_blank">
               Atom-Feed von GitHub
             </Link>{" "}
-            abonnieren. Anders als diese Seite enthält er auch Vorab-Versionen
-            und nur die zehn neuesten Releases.
+            abonnieren. Anders als diese Seite zeigt er auch Vorab-Versionen und
+            beschränkt sich auf die zehn aktuellsten Releases.
           </Text>
         </Section>
 
