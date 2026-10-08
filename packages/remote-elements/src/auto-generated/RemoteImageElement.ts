@@ -132,6 +132,7 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       vocab: {},
       width: {},
       withBorder: {},
+      withRoundedCorners: {},
     };
   }
 

@@ -130,3 +130,41 @@ test("keeps inline code untouched by JSX stripping", () => {
     "Nutze `<Button />` dafür.\n",
   );
 });
+
+const writeExample = (fileName: string, content: string): void => {
+  fs.mkdirSync(path.join(dir, "examples"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "examples", fileName), content);
+};
+
+test("expands an AppShell to its tsx and css files", () => {
+  writeExample("shell.tsx", "export default () => <Header />;\n");
+  writeExample("shell.module.css", ".frame {\n  display: grid;\n}\n");
+
+  expect(convert('<AppShell example="shell" />\n')).toBe(
+    [
+      "**shell.tsx**",
+      "",
+      "```tsx",
+      "export default () => <Header />",
+      "```",
+      "",
+      "**shell.module.css**",
+      "",
+      "```css",
+      ".frame {",
+      "  display: grid;",
+      "}",
+      "```",
+      "",
+    ].join("\n"),
+  );
+});
+
+test("an AppShell's files prop picks the files it shows", () => {
+  writeExample("picked.tsx", "export default () => null;\n");
+  writeExample("picked.module.css", ".unused {}\n");
+
+  expect(
+    convert('<AppShell example="picked" files={["picked.tsx"]} />\n'),
+  ).toBe("**picked.tsx**\n\n```tsx\nexport default () => null\n```\n");
+});

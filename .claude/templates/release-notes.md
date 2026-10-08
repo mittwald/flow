@@ -20,11 +20,13 @@
     `ExtBridgeConfigInput`).
   - Group by feature/area, never by commit. One "## " section per notable
     feature; link its PR(s), e.g. (#1234).
-  - Screenshots: capture them, never fabricate them. A capture of a real story
-    rendered from the release branch is not a fabrication — a mocked, drawn or
-    generated image is, and stays forbidden. `/prepare-release` step 8 produces
-    the figures with `pnpm release:figure`; a feature with no story (a CLI, a
-    build change) simply gets none. Code examples are fine when grounded in the
+  - Screenshots: capture them, never fabricate them. A capture of a real
+    Styleguide example rendered from the release branch is not a fabrication —
+    a mocked, drawn or generated image is, and stays forbidden. Storybook
+    stories are no source: their Star Wars fixtures do not belong on the docs
+    site. `/prepare-release` step 8 produces the figures with
+    `pnpm release:figure`; a feature with no example (a CLI, a build change)
+    simply gets none. Code examples are fine when grounded in the
     real API.
   - Delete these comments and every unused/empty section in the final text.
 -->
@@ -59,8 +61,8 @@
 // optional usage example, grounded in the real component API
 ```
 
-<!-- DELETE this line when the feature has no story to capture (a CLI, a build
-     change) — an unfilled image link is worse than no figure.
+<!-- DELETE this line when the feature has no example to capture (a CLI, a
+     build change) — an unfilled image link is worse than no figure.
 
      Otherwise: one captured figure per notable feature, never one per prop
      variant — compose the variants into a single image. Markdown image syntax,

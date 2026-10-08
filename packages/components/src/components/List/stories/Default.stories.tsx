@@ -443,6 +443,46 @@ export const WithDateRangeFilter: Story = {
   },
 };
 
+export const WithManyFilterValues: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      planet: string;
+    }>();
+
+    const planets = [
+      "Alderaan",
+      "Bespin",
+      "Coruscant",
+      "Dagobah",
+      "Endor",
+      "Hoth",
+      "Jakku",
+      "Kashyyyk",
+      "Mustafar",
+      "Naboo",
+      "Tatooine",
+      "Yavin",
+    ];
+
+    return (
+      <List.List batchSize={5} aria-label="Planets">
+        <List.StaticData
+          data={planets.map((planet) => ({ id: planet, planet }))}
+        />
+        <List.Filter property="planet" name="Planet" />
+        <List.Item textValue={(item) => item.planet}>
+          {(item) => (
+            <ListItemView>
+              <Heading>{item.planet}</Heading>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
 export const EmptyView: Story = {
   render: () => {
     const List = typedList<{

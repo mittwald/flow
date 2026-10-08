@@ -258,6 +258,12 @@ export interface CrossVersionSkip {
   below?: string;
   /** Skip these exact versions (for non-monotonic breakage). */
   exclude?: string[];
+  /**
+   * Skip every version in this semver range. What `below` cannot express: a fix
+   * that reached `main` after the next line branched, so the versions published
+   * on that line in between sort above the threshold without carrying it.
+   */
+  excludeRange?: string;
 }
 
 /**

@@ -46,7 +46,8 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     const {
       FieldErrorView,
       FieldErrorCaptureContext,
-      fieldProps,
+      wrapperProps,
+      controlProps,
       fieldPropsContext,
     } = useFieldComponent(props, "FileDropZone");
 
@@ -69,6 +70,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
           Button: { variant: "outline", color: "dark" },
           isDisabled,
           isReadOnly,
+          "aria-describedby": controlProps["aria-describedby"],
         },
         Heading: {
           className: styles.heading,
@@ -101,19 +103,23 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <div {...fieldProps}>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            <Aria.DropZone
-              className={rootClassName}
-              onDrop={onDropHandler}
-              isDisabled={isDisabled}
-              data-readonly={isReadOnly}
-            >
-              <IllustratedMessage color="dark">{children}</IllustratedMessage>
-            </Aria.DropZone>
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
+      <div className={wrapperProps.className}>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[controlProps["aria-describedby"]]}
+        >
+          <Aria.DropZone
+            className={rootClassName}
+            onDrop={onDropHandler}
+            isDisabled={isDisabled}
+            data-readonly={isReadOnly}
+          >
+            <IllustratedMessage color="dark">
+              {/* Inside: IllustratedMessage clears the props context it gets. */}
+              <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+            </IllustratedMessage>
+          </Aria.DropZone>
+        </PropsContextProvider>
         <FieldErrorView />
       </div>
     );

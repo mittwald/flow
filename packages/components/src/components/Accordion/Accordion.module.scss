@@ -1,3 +1,4 @@
+@use "@/styles/mixins/expandTransition";
 @use "@/styles/mixins/focus";
 
 .accordion {
@@ -34,24 +35,33 @@
     }
   }
 
+  /* Animates `height` to `auto` instead of the `grid-template-rows: 0fr/1fr`
+     trick: in Chromium, hover backgrounds inside a grid row sporadically
+     drop out for a frame. Browsers without `interpolate-size` expand without
+     animation. `display: block` overrides the `hidden` attribute. */
   .content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition-property: grid-template-rows, visibility;
-    transition-duration: var(--transition--duration--default);
+    display: block;
+    height: 0;
+    overflow: hidden;
+    interpolate-size: allow-keywords;
+    transition-property: height, visibility;
     visibility: hidden;
+
+    @include expandTransition.expandTransition;
   }
 
   .contentInner {
     overflow: hidden;
     padding-inline: var(--accordion--padding-x);
     transition-property: padding;
-    transition-duration: var(--transition--duration--default);
+
+    @include expandTransition.expandTransition;
   }
 
   .chevron {
     transition-property: transform;
-    transition-duration: var(--transition--duration--fast);
+
+    @include expandTransition.expandTransition;
   }
 
   &.outline {
@@ -63,7 +73,7 @@
 
   &.expanded {
     .content {
-      grid-template-rows: 1fr;
+      height: auto;
       visibility: visible;
     }
 

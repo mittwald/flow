@@ -21,7 +21,7 @@ export function dateRangeFilterFn<T>(
   } else if (value instanceof CalendarDate) {
     dateValue = transformDateValueToDateTime(value);
   } else if (typeof value === "string") {
-    dateValue = DateTime.fromISO(value).startOf("day");
+    dateValue = DateTime.fromISO(value);
   }
 
   if (!dateValue) {
@@ -33,7 +33,7 @@ export function dateRangeFilterFn<T>(
     : undefined;
 
   const endDate = range.end
-    ? transformDateValueToDateTime(range.end)
+    ? transformDateValueToDateTime(range.end).endOf("day")
     : undefined;
 
   if (startDate && dateValue < startDate) {
