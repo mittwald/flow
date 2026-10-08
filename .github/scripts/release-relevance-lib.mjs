@@ -128,10 +128,10 @@ const IRRELEVANT_PACKAGE_LOCAL_FILES = new Set([
  *
  * Stories and tests are never reachable from a build entry — the component
  * bundle is built from the explicit entry list in `vite.build.config.ts` with
- * `preserveModules`. `unplugin-dts` does emit a `.d.ts` for every file under
- * `src`, stories and tests included, so these DO land in the tarball; no
- * `exports` path reaches them, so no consumer can. Same argument as for
- * `scripts` in a manifest: no consumer effect, not "not in the tarball".
+ * `preserveModules`. Their declarations stay out too: `publishedDtsOptions`
+ * (`packages/core/src/publishedDtsOptions.ts`) excludes the same globs from
+ * `unplugin-dts`, so none of them lands in the tarball. Keep the two lists in
+ * step.
  *
  * `.test.` is not always the last extension — the remote e2e specs are
  * `*.browser.test.remote.tsx`. Type tests (`*.test-types.ts`) only run under
