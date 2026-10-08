@@ -322,6 +322,14 @@ export class ListModel<T> implements ListPaginationContext<T> {
     this.renderShape = pickRenderShape(shape);
   }
 
+  /**
+   * Drops every request still on its way: its answer, or its failure, belongs
+   * to a list that is gone.
+   */
+  public discardPendingLoads(): void {
+    this.pendingLoads.clear();
+  }
+
   private resetLoaderState(): void {
     this.pendingLoads.clear();
     this.loaderState.reset();

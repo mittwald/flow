@@ -933,6 +933,51 @@ describe("An async loader, answering out of order", () => {
     );
     await vi.waitFor(() => expect(skeletons()).toBe(0));
   });
+
+  /*
+   * Vue hands a rejected watch promise up the parent chain without asking
+   * whether the instance is still mounted — so a load that fails after the
+   * list is gone would reach whatever replaced it.
+   */
+  test("drops a failure that arrives after the list is gone", async () => {
+    const errors: unknown[] = [];
+    const isShown = ref(true);
+    let reject: (error: Error) => void = () => undefined;
+
+    const { host } = renderRemote(
+      defineComponent(() => {
+        onErrorCaptured((error) => {
+          errors.push(error);
+          return false;
+        });
+        return () =>
+          isShown.value
+            ? h(List, { "aria-label": "Crew" }, () => [
+                h(ListLoaderAsync, {
+                  loader: () =>
+                    new Promise((_resolve, rejectLoad) => {
+                      reject = rejectLoad;
+                    }),
+                }),
+                crewItem(),
+              ])
+            : h(Text, null, () => "Elsewhere");
+      }),
+    );
+    const list = hostLocator(host);
+    await vi.waitFor(() =>
+      expect(
+        host.querySelectorAll('[role=row][aria-label="-"]').length,
+      ).toBeGreaterThan(0),
+    );
+
+    isShown.value = false;
+    await expect.element(list.getByText("Elsewhere")).toBeVisible();
+    reject(new Error("Comms are down"));
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    expect(errors).toEqual([]);
+  });
 });
 
 describe("A composable loader", () => {

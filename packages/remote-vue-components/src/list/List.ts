@@ -5,6 +5,7 @@ import {
   computed,
   defineComponent,
   h,
+  onBeforeUnmount,
   onMounted,
   watch,
   type PropType,
@@ -267,8 +268,11 @@ export const List = defineComponent({
     /*
      * Returns the loads, so a failed one reaches Vue's error handling: a watch
      * callback's rejected promise goes to `onErrorCaptured` and the app's
-     * `errorHandler`, and `RemoteRoot` reports it to the host.
+     * `errorHandler`, and `RemoteRoot` reports it to the host. Unmounted, the
+     * list discards them, or a late failure would still reach its former
+     * parents.
      */
+    onBeforeUnmount(() => list.discardPendingLoads());
     watch(
       loadState,
       () => {
