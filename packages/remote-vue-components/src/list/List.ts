@@ -333,11 +333,7 @@ export const List = defineComponent({
       const shape = readShape(children, { ...props, ...attrs });
 
       /* The children are the API, so a changed child has to reach the model. */
-      list.shape.itemView = shape.itemView;
-      list.shape.onAction = shape.onAction;
-      list.shape.componentProps = shape.componentProps;
-      list.shape.accordion = shape.accordion;
-      list.shape.table = shape.table;
+      list.setRenderShape(shape);
       list.updateSetup(shape);
       /*
        * Compared item by item, which also makes this render depend on every

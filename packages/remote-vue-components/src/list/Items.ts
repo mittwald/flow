@@ -36,6 +36,7 @@ export const Items = defineComponent({
     );
     const isTiles = watchMobxValue(() => list.viewMode.isTiles);
     const viewMode = watchMobxValue(() => list.viewMode.value);
+    const renderShape = watchMobxValue(() => list.renderShape);
 
     /*
      * Placeholders in the item's shape while the first batch is on its way —
@@ -85,7 +86,9 @@ export const Items = defineComponent({
       );
 
     return () => {
-      if (!list.shape.itemView) {
+      const shape = renderShape.value;
+      const itemView = shape.itemView;
+      if (!itemView) {
         return null;
       }
 
@@ -99,18 +102,18 @@ export const Items = defineComponent({
           h(
             ItemsGridList,
             {
-              ...list.shape.componentProps,
+              ...shape.componentProps,
               class: className(
                 listStyles.items,
                 isLoading.value && listStyles.itemsLoading,
                 isTiles.value && listStyles.itemsTiles,
               ),
-              "aria-label": list.shape["aria-label"],
-              "aria-labelledby": list.shape["aria-label"]
+              "aria-label": shape["aria-label"],
+              "aria-labelledby": shape["aria-label"]
                 ? undefined
-                : list.shape["aria-labelledby"],
+                : shape["aria-labelledby"],
               layout: isTiles.value ? "grid" : "stack",
-              tileMaxWidth: list.shape.itemView?.tileMaxWidth,
+              tileMaxWidth: itemView.tileMaxWidth,
             },
             () =>
               items.value.length === 0 && isInitiallyLoading.value

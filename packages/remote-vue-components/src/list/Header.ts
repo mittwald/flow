@@ -35,6 +35,7 @@ import { AllFiltersModal } from "./AllFiltersModal";
 import { isDateRangeFilter } from "./dateRangeFilter";
 import { injectListModel, type AnyListModel } from "./listContext";
 import { useListTexts, type ListTextFormatter } from "./locales";
+import type { ListRenderShape } from "./model";
 import { listStyles } from "./styles";
 import type { ListRendered } from "./types";
 import { composition } from "@/lib/composition";
@@ -94,15 +95,15 @@ interface HeaderFilter {
 /** Which layouts this list can actually show. */
 type ViewMode = "list" | "table" | "tiles";
 
-const availableViewModes = (list: AnyListModel): ViewMode[] => {
+const availableViewModes = (shape: ListRenderShape<never>): ViewMode[] => {
   const modes: ViewMode[] = [];
-  if (list.shape.itemView?.showList) {
+  if (shape.itemView?.showList) {
     modes.push("list");
   }
-  if (list.shape.table) {
+  if (shape.table) {
     modes.push("table");
   }
-  if (list.shape.itemView?.showTiles) {
+  if (shape.itemView?.showTiles) {
     modes.push("tiles");
   }
   return modes;
@@ -117,12 +118,11 @@ const outlineButton = (isDisabled: boolean) => ({
 
 const renderViewModeMenu = (
   list: AnyListModel,
+  modes: ViewMode[],
   texts: ListTextFormatter,
   isDisabled: boolean,
   selected: ViewMode,
 ): VNodeChild => {
-  const modes = availableViewModes(list);
-
   if (modes.length <= 1) {
     return null;
   }
@@ -313,6 +313,7 @@ export const Header = defineComponent({
     const viewMode = watchMobxValue(() => list.viewMode.value);
     /* Filters and sortings read the table, so they follow its revision. */
     const tableRevision = watchMobxValue(() => list.listTable.revision);
+    const renderShape = watchMobxValue(() => list.renderShape);
 
     /*
      * One controller per date filter, kept for as long as the header is.
@@ -387,7 +388,7 @@ export const Header = defineComponent({
 
       const noItemsAvailable = isEmpty.value && emptyViewType.value === "list";
       const isDisabled = isInitiallyLoading.value || noItemsAvailable;
-      const modes = availableViewModes(list);
+      const modes = availableViewModes(renderShape.value);
 
       /*
        * The header is rendered even with nothing in it, because Flow's is: it
@@ -424,7 +425,13 @@ export const Header = defineComponent({
       }
 
       const options: VNodeChild[] = [
-        renderViewModeMenu(list, texts.value, isDisabled, viewMode.value),
+        renderViewModeMenu(
+          list,
+          modes,
+          texts.value,
+          isDisabled,
+          viewMode.value,
+        ),
         renderSortingMenu(list, texts.value, isDisabled),
         /*
          * Primary only. A secondary filter is reachable through the

@@ -1,4 +1,5 @@
 import { ItemsGridListItem } from "@/auto-generated";
+import { watchMobxValue } from "@/lib/mobxSelector";
 import { defineComponent, h, ref, useId, type PropType } from "vue";
 import { provideItemAccordion } from "./itemContext";
 import { injectListModel } from "./listContext";
@@ -23,23 +24,23 @@ export const ListItemRow = defineComponent({
   setup(props) {
     const list = injectListModel();
     const contentId = useId();
+    const renderShape = watchMobxValue(() => list.renderShape);
 
     const isExpanded = ref(
-      list.shape.itemView?.defaultExpanded?.(props.data) ?? false,
+      renderShape.value.itemView?.defaultExpanded?.(props.data) ?? false,
     );
 
     const toggle = () => {
       isExpanded.value = !isExpanded.value;
-      list.shape.onAction?.(props.data);
+      renderShape.value.onAction?.(props.data);
     };
 
-    if (list.shape.accordion) {
+    if (renderShape.value.accordion) {
       provideItemAccordion({ isExpanded, contentId, toggle });
     }
 
     return () => {
-      const itemView = list.shape.itemView;
-      const onAction = list.shape.onAction;
+      const { itemView, onAction, accordion } = renderShape.value;
 
       return h(
         ItemsGridListItem,
@@ -49,10 +50,10 @@ export const ListItemRow = defineComponent({
           href: itemView?.href?.(props.data),
           target: itemView?.target,
           /* In accordion mode every item acts — the action is the toggle. */
-          hasAction: !!list.shape.accordion || !!onAction || !!itemView?.href,
+          hasAction: !!accordion || !!onAction || !!itemView?.href,
           isTile: props.isTile,
           /* In accordion mode the item's action is the toggle, as in Flow. */
-          onAction: list.shape.accordion
+          onAction: accordion
             ? toggle
             : onAction
               ? () => onAction(props.data)

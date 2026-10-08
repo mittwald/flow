@@ -76,6 +76,30 @@ export type ListSetupShape<T> = Pick<
   "filters" | "sorting" | "search" | "asyncLoader" | "dependencies"
 >;
 
+const renderShapeKeys = [
+  "itemView",
+  "onAction",
+  "componentProps",
+  "accordion",
+  "table",
+  "aria-label",
+  "aria-labelledby",
+] as const;
+
+/**
+ * The parts of the shape the list's components hand on to the elements as they
+ * are. Every render of the `List` replaces them.
+ */
+export type ListRenderShape<T> = Pick<
+  VueListShape<T>,
+  (typeof renderShapeKeys)[number]
+>;
+
+const pickRenderShape = <T>(shape: VueListShape<T>): ListRenderShape<T> =>
+  Object.fromEntries(
+    renderShapeKeys.map((key) => [key, shape[key]]),
+  ) as ListRenderShape<T>;
+
 /**
  * Flow's list, without React.
  *
@@ -89,7 +113,13 @@ export type ListSetupShape<T> = Pick<
  * component reads it through `watchMobxValue`.
  */
 export class ListModel<T> implements ListPaginationContext<T> {
-  public readonly shape: VueListShape<T>;
+  public readonly shape: Omit<VueListShape<T>, keyof ListRenderShape<T>>;
+  /**
+   * Observable, and a new object on every render of the `List`: the components
+   * reading it render without props, so Vue would otherwise skip them and the
+   * host would keep the first `selectedKeys` it was handed.
+   */
+  public renderShape: ListRenderShape<T>;
   public readonly loaderState: ListLoaderState<T>;
   public readonly loader: ListLoaderModes;
   public readonly staticDataProperties: PropertyName<T>[] = [];
@@ -125,6 +155,7 @@ export class ListModel<T> implements ListPaginationContext<T> {
 
   public constructor(shape: VueListShape<T>) {
     this.shape = shape;
+    this.renderShape = pickRenderShape(shape);
 
     this.loader = {
       manualPagination: shape.manualPagination ?? false,
@@ -147,6 +178,8 @@ export class ListModel<T> implements ListPaginationContext<T> {
     makeObservable(this, {
       sortingState: observable.ref,
       setSortingState: action.bound,
+      renderShape: observable.ref,
+      setRenderShape: action.bound,
     });
 
     this.listTable = new ListTable<T>(this.getTableOptions(emptyData));
@@ -249,6 +282,11 @@ export class ListModel<T> implements ListPaginationContext<T> {
       this.shape.dependencies = shape.dependencies;
       this.resetLoaderState();
     }
+  }
+
+  /** Takes what this render hands on to the elements. */
+  public setRenderShape(shape: VueListShape<T>): void {
+    this.renderShape = pickRenderShape(shape);
   }
 
   private resetLoaderState(): void {

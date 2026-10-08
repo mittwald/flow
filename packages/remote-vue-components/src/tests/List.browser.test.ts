@@ -1228,3 +1228,112 @@ describe("Following the app's state", () => {
     await expect.element(list.getByText("Ellen Ripley")).toBeVisible();
   });
 });
+
+/*
+ * Selection is the host's, but a controlled one is the app's: every change of
+ * `selectedKeys` has to reach the grid list and the table, not just the first.
+ */
+describe("Controlled selection", () => {
+  const getItemId = (data: Crew) => data.name;
+
+  const renderSelectable = (selected: { value: string[] }, columns = false) => {
+    const { host } = renderRemote(
+      defineComponent(
+        () => () =>
+          h(
+            List,
+            {
+              "aria-label": "Crew",
+              getItemId,
+              selectionMode: "multiple",
+              selectedKeys: selected.value,
+              defaultViewMode: columns ? "table" : undefined,
+              onSelectionChange: (keys: unknown) => {
+                selected.value =
+                  keys === "all"
+                    ? crew.map(getItemId)
+                    : [...(keys as Iterable<string>)];
+              },
+            },
+            () => [
+              h(ListStaticData, { data: crew }),
+              h(
+                ListItem,
+                { textValue: (data: Crew) => data.name },
+                {
+                  default: ({ data }: { data: Crew }) =>
+                    h(ListItemView, null, () =>
+                      h(Heading, null, () => data.name),
+                    ),
+                },
+              ),
+              ...(columns
+                ? [
+                    h(ListTableColumn, null, () => "Name"),
+                    h(ListTableCell, null, {
+                      default: ({ data }: { data: Crew }) => data.name,
+                    }),
+                  ]
+                : []),
+            ],
+          ),
+      ),
+    );
+    return hostLocator(host);
+  };
+
+  const selectedRows = (list: ReturnType<typeof hostLocator>) =>
+    list
+      .getByRole("row")
+      .elements()
+      .filter((row) => row.getAttribute("aria-selected") === "true")
+      .map((row) => row.getAttribute("aria-label") ?? row.textContent?.trim());
+
+  const remoteSelectedKeys = (tag: string) =>
+    (document.querySelector(tag) as { selectedKeys?: unknown } | null)
+      ?.selectedKeys;
+
+  test("follows the keys the app sets", async () => {
+    const selected = ref(["Ellen Ripley"]);
+    const list = renderSelectable(selected);
+
+    await expect.poll(() => selectedRows(list)).toEqual(["Ellen Ripley"]);
+
+    selected.value = ["Dwayne Hicks"];
+
+    await expect
+      .poll(() => remoteSelectedKeys("flr-items-grid-list"))
+      .toEqual(["Dwayne Hicks"]);
+    await expect.poll(() => selectedRows(list)).toEqual(["Dwayne Hicks"]);
+  });
+
+  test("shows what the app made of a click on the host", async () => {
+    const selected = ref(["Ellen Ripley"]);
+    const list = renderSelectable(selected);
+    await expect.poll(() => selectedRows(list)).toEqual(["Ellen Ripley"]);
+
+    await userEvent.click(list.getByRole("row", { name: "Dwayne Hicks" }));
+
+    await expect
+      .poll(() => [...selected.value].sort())
+      .toEqual(["Dwayne Hicks", "Ellen Ripley"]);
+    await expect
+      .poll(() => [...selectedRows(list)].sort())
+      .toEqual(["Dwayne Hicks", "Ellen Ripley"]);
+  });
+
+  test("follows the keys the app sets in the table view", async () => {
+    const selected = ref(["Ellen Ripley"]);
+    renderSelectable(selected, true);
+
+    await expect
+      .poll(() => remoteSelectedKeys("flr-table"))
+      .toEqual(["Ellen Ripley"]);
+
+    selected.value = ["Carter Burke"];
+
+    await expect
+      .poll(() => remoteSelectedKeys("flr-table"))
+      .toEqual(["Carter Burke"]);
+  });
+});

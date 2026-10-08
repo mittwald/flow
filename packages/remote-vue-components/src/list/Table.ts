@@ -39,15 +39,17 @@ export const ListTableView = defineComponent({
     const isInitiallyLoading = watchMobxValue(
       () => list.loaderState.isInitiallyLoading,
     );
+    const renderShape = watchMobxValue(() => list.renderShape);
 
     return () => {
-      const table = list.shape.table;
+      const shape = renderShape.value;
+      const table = shape.table;
 
       if (!table || isEmpty.value) {
         return null;
       }
 
-      const onAction = list.shape.onAction;
+      const onAction = shape.onAction;
 
       const renderCells = (data: never): VNodeChild[] =>
         table.cells.map((cell, index) =>
@@ -90,9 +92,9 @@ export const ListTableView = defineComponent({
       return h(
         Table,
         {
-          "aria-label": list.shape["aria-label"],
-          "aria-labelledby": list.shape["aria-labelledby"],
-          ...list.shape.componentProps,
+          "aria-label": shape["aria-label"],
+          "aria-labelledby": shape["aria-labelledby"],
+          ...shape.componentProps,
           ...table.props,
           class: className(
             tableStyles.table,
