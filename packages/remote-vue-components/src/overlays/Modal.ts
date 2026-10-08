@@ -34,7 +34,6 @@ import {
   type OverlayOpenHandler,
   type OverlayOpenStateHandler,
 } from "@/overlays/overlayController";
-import { markAsOverlay } from "@/overlays/overlayRegistry";
 import type { AnyRecord } from "@/lib/types";
 import {
   defineComponent,
@@ -235,213 +234,211 @@ const ConfirmCloseModal: Component = defineComponent({
   },
 });
 
-export const Modal = markAsOverlay(
-  defineComponent({
-    name: "Modal",
+export const Modal = defineComponent({
+  name: "Modal",
 
-    /* Like Flow's, a modal passes on only the props it knows. */
-    inheritAttrs: false,
+  /* Like Flow's, a modal passes on only the props it knows. */
+  inheritAttrs: false,
 
-    props: {
-      /** The size of the modal. @default "s" */
-      size: { type: String as PropType<ModalSize>, default: "s" },
-      /** Whether the modal is displayed as an off canvas. */
-      offCanvas: { type: Boolean, default: false },
-      /** Which side the off canvas comes from. @default "right" */
-      offCanvasOrientation: {
-        type: String as PropType<"left" | "right">,
-        default: "right",
-      },
-      /** Whether a click outside closes the modal. @default true */
-      isDismissable: { type: Boolean, default: true },
-      /**
-       * Whether the close button is always visible (`true`) or always hidden
-       * (`false`). By default Flow decides by screen size.
-       */
-      showCloseButton: { type: Boolean, default: undefined },
-      /**
-       * Whether closing the modal has to be confirmed — use it to protect
-       * unsaved changes.
-       */
-      confirmOnClose: { type: Boolean, default: false },
-      /** A controller to open and close the modal from anywhere. */
-      controller: {
-        type: Object as PropType<OverlayController>,
-        default: undefined,
-      },
-      /** Whether the modal is open. Use it to control the modal state. */
-      isOpen: { type: Boolean, default: undefined },
-      /**
-       * Whether the modal is open initially, when it has a controller of its
-       * own — not one from a trigger or the `controller` prop. @default false
-       */
-      isDefaultOpen: { type: Boolean, default: undefined },
-      /** Called when the modal opens. Returning `false` keeps it closed. */
-      onOpen: {
-        type: Function as PropType<OverlayOpenHandler>,
-        default: undefined,
-      },
-      /** Called when the modal closes. Returning `false` keeps it open. */
-      onClose: {
-        type: Function as PropType<OverlayCloseHandler>,
-        default: undefined,
-      },
-      /**
-       * Called with the new state whenever the modal opens or closes. Returning
-       * `false` aborts the change.
-       */
-      onOpenChange: {
-        type: Function as PropType<OverlayOpenStateHandler>,
-        default: undefined,
-      },
+  props: {
+    /** The size of the modal. @default "s" */
+    size: { type: String as PropType<ModalSize>, default: "s" },
+    /** Whether the modal is displayed as an off canvas. */
+    offCanvas: { type: Boolean, default: false },
+    /** Which side the off canvas comes from. @default "right" */
+    offCanvasOrientation: {
+      type: String as PropType<"left" | "right">,
+      default: "right",
     },
+    /** Whether a click outside closes the modal. @default true */
+    isDismissable: { type: Boolean, default: true },
+    /**
+     * Whether the close button is always visible (`true`) or always hidden
+     * (`false`). By default Flow decides by screen size.
+     */
+    showCloseButton: { type: Boolean, default: undefined },
+    /**
+     * Whether closing the modal has to be confirmed — use it to protect unsaved
+     * changes.
+     */
+    confirmOnClose: { type: Boolean, default: false },
+    /** A controller to open and close the modal from anywhere. */
+    controller: {
+      type: Object as PropType<OverlayController>,
+      default: undefined,
+    },
+    /** Whether the modal is open. Use it to control the modal state. */
+    isOpen: { type: Boolean, default: undefined },
+    /**
+     * Whether the modal is open initially, when it has a controller of its own
+     * — not one from a trigger or the `controller` prop. @default false
+     */
+    isDefaultOpen: { type: Boolean, default: undefined },
+    /** Called when the modal opens. Returning `false` keeps it closed. */
+    onOpen: {
+      type: Function as PropType<OverlayOpenHandler>,
+      default: undefined,
+    },
+    /** Called when the modal closes. Returning `false` keeps it open. */
+    onClose: {
+      type: Function as PropType<OverlayCloseHandler>,
+      default: undefined,
+    },
+    /**
+     * Called with the new state whenever the modal opens or closes. Returning
+     * `false` aborts the change.
+     */
+    onOpenChange: {
+      type: Function as PropType<OverlayOpenStateHandler>,
+      default: undefined,
+    },
+  },
 
-    setup(props, { slots, attrs }) {
-      /* Flow's React `Modal` is a `flowComponent` and reports itself. */
-      onMounted(useComponentUsage("Modal"));
+  setup(props, { slots, attrs }) {
+    /* Flow's React `Modal` is a `flowComponent` and reports itself. */
+    onMounted(useComponentUsage("Modal"));
 
-      const language = useLanguage();
-      /*
-       * The dialog is labelled by its own heading, so the two need an id they
-       * agree on. Flow generates one with `useId`; `useId` exists in Vue too,
-       * and both sides end up with an id the host rewrites anyway — what has to
-       * match is that the heading carries one at all.
-       */
-      const headingId = useId();
-      /*
-       * Three ways to own the state, in Flow's order of precedence: a
-       * controller the app passes, the controller of a surrounding trigger, or
-       * one of its own.
-       */
-      const controller = useOwnController(
-        () => props.controller,
-        "Modal",
-        () => ({ isDefaultOpen: props.isDefaultOpen }),
+    const language = useLanguage();
+    /*
+     * The dialog is labelled by its own heading, so the two need an id they
+     * agree on. Flow generates one with `useId`; `useId` exists in Vue too,
+     * and both sides end up with an id the host rewrites anyway — what has to
+     * match is that the heading carries one at all.
+     */
+    const headingId = useId();
+    /*
+     * Three ways to own the state, in Flow's order of precedence: a
+     * controller the app passes, the controller of a surrounding trigger, or
+     * one of its own.
+     */
+    const controller = useOwnController(
+      () => props.controller,
+      "Modal",
+      () => ({ isDefaultOpen: props.isDefaultOpen }),
+    );
+
+    // So an `Action` inside finds it.
+    provideOverlayContext("Modal", () => controller.value);
+
+    useOverlayHandlers(() => controller.value, {
+      onOpen: () => props.onOpen,
+      onClose: () => props.onClose,
+      onOpenChange: () => props.onOpenChange,
+    });
+
+    /*
+     * The requirement lives on the controller, not on this component: what
+     * asks for the confirmation is a close, and a close arrives at the
+     * controller — from an `Action` inside, from the host's dismiss, or from
+     * an app holding the controller itself.
+     */
+    watchEffect(() => {
+      controller.value.confirmOnClose.value = props.confirmOnClose;
+    });
+
+    /*
+     * Taken back, because the controller usually outlives the modal: a
+     * trigger keeps it, and the next modal it opens would inherit a
+     * requirement it never asked for. The same goes for a controller the
+     * app swapped for another.
+     */
+    const release = (released: OverlayController) => {
+      released.confirmOnClose.value = false;
+      released.isConfirmingClose.value = false;
+    };
+    watch(controller, (next, previous) => release(previous));
+    onBeforeUnmount(() => release(controller.value));
+
+    /* Flow's props context for the modal's children, rule for rule. */
+    const childRules: ChildRules = (child) => {
+      if (child.type === Heading) {
+        return { props: { class: styles.header, level: 2, id: headingId } };
+      }
+      if (child.type === Content) {
+        return {
+          props: { class: styles.content },
+          children: nestedHeadingRules,
+        };
+      }
+      if (child.type === ColumnLayout) {
+        return {
+          props: { class: styles.columnLayout, l: [2, 1], m: [1] },
+          children: (grandChild) =>
+            grandChild.type === AccentBox
+              ? {
+                  props: {
+                    class: styles.accentBox,
+                    backgroundColor: "neutral",
+                  },
+                }
+              : nestedHeadingRules(grandChild),
+        };
+      }
+      if (child.type === ActionGroup) {
+        /*
+         * The footer is the deliberate way out, so its actions close
+         * without asking again — the rule Flow's `Modal` writes for
+         * `ActionGroup > Action`. An `Action` anywhere else in the modal is
+         * an incidental close and is confirmed.
+         */
+        return {
+          props: { class: styles.actionGroup, spacing: "m" },
+          children: (grandChild) => {
+            const props = withBypassedConfirmation(grandChild);
+            return props ? { props } : undefined;
+          },
+        };
+      }
+      return undefined;
+    };
+
+    return () => {
+      const className = [
+        styles.overlay,
+        props.offCanvas ? styles.offCanvas : styles.modal,
+        styles.size(props.size),
+        props.offCanvas && props.offCanvasOrientation === "left"
+          ? styles.left
+          : undefined,
+        attrs.class,
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      const texts = language.value?.startsWith("de")
+        ? confirmCloseTexts["de-DE"]
+        : confirmCloseTexts["en-US"];
+
+      const children: VNode[] = applyChildRules(
+        slots.default?.(),
+        childRules,
+      ).map((child) =>
+        child.type === Heading
+          ? withHeaderChrome(child, texts.close, props.showCloseButton)
+          : child,
       );
 
-      // So an `Action` inside finds it.
-      provideOverlayContext("Modal", () => controller.value);
+      if (props.confirmOnClose) {
+        children.push(h(ConfirmCloseModal, { parent: controller.value }));
+      }
 
-      useOverlayHandlers(() => controller.value, {
-        onOpen: () => props.onOpen,
-        onClose: () => props.onClose,
-        onOpenChange: () => props.onOpenChange,
-      });
-
-      /*
-       * The requirement lives on the controller, not on this component: what
-       * asks for the confirmation is a close, and a close arrives at the
-       * controller — from an `Action` inside, from the host's dismiss, or from
-       * an app holding the controller itself.
-       */
-      watchEffect(() => {
-        controller.value.confirmOnClose.value = props.confirmOnClose;
-      });
-
-      /*
-       * Taken back, because the controller usually outlives the modal: a
-       * trigger keeps it, and the next modal it opens would inherit a
-       * requirement it never asked for. The same goes for a controller the
-       * app swapped for another.
-       */
-      const release = (released: OverlayController) => {
-        released.confirmOnClose.value = false;
-        released.isConfirmingClose.value = false;
-      };
-      watch(controller, (next, previous) => release(previous));
-      onBeforeUnmount(() => release(controller.value));
-
-      /* Flow's props context for the modal's children, rule for rule. */
-      const childRules: ChildRules = (child) => {
-        if (child.type === Heading) {
-          return { props: { class: styles.header, level: 2, id: headingId } };
-        }
-        if (child.type === Content) {
-          return {
-            props: { class: styles.content },
-            children: nestedHeadingRules,
-          };
-        }
-        if (child.type === ColumnLayout) {
-          return {
-            props: { class: styles.columnLayout, l: [2, 1], m: [1] },
-            children: (grandChild) =>
-              grandChild.type === AccentBox
-                ? {
-                    props: {
-                      class: styles.accentBox,
-                      backgroundColor: "neutral",
-                    },
-                  }
-                : nestedHeadingRules(grandChild),
-          };
-        }
-        if (child.type === ActionGroup) {
-          /*
-           * The footer is the deliberate way out, so its actions close
-           * without asking again — the rule Flow's `Modal` writes for
-           * `ActionGroup > Action`. An `Action` anywhere else in the modal is
-           * an incidental close and is confirmed.
-           */
-          return {
-            props: { class: styles.actionGroup, spacing: "m" },
-            children: (grandChild) => {
-              const props = withBypassedConfirmation(grandChild);
-              return props ? { props } : undefined;
-            },
-          };
-        }
-        return undefined;
-      };
-
-      return () => {
-        const className = [
-          styles.overlay,
-          props.offCanvas ? styles.offCanvas : styles.modal,
-          styles.size(props.size),
-          props.offCanvas && props.offCanvasOrientation === "left"
-            ? styles.left
-            : undefined,
-          attrs.class,
-        ]
-          .filter(Boolean)
-          .join(" ");
-
-        const texts = language.value?.startsWith("de")
-          ? confirmCloseTexts["de-DE"]
-          : confirmCloseTexts["en-US"];
-
-        const children: VNode[] = applyChildRules(
-          slots.default?.(),
-          childRules,
-        ).map((child) =>
-          child.type === Heading
-            ? withHeaderChrome(child, texts.close, props.showCloseButton)
-            : child,
-        );
-
-        if (props.confirmOnClose) {
-          children.push(h(ConfirmCloseModal, { parent: controller.value }));
-        }
-
-        /* A UI component: Flow clears the host's props context around it. */
-        return h(ClearPropsContext, null, () =>
-          h(
-            OverlayContent,
-            {
-              class: className,
-              isOpen: props.isOpen ?? controller.value.isOpen.value,
-              isDismissable: props.isDismissable,
-              "aria-labelledby": headingId,
-              onOpenChange: controller.value.setOpen,
-            },
-            () => children,
-          ),
-        );
-      };
-    },
-  }),
-);
+      /* A UI component: Flow clears the host's props context around it. */
+      return h(ClearPropsContext, null, () =>
+        h(
+          OverlayContent,
+          {
+            class: className,
+            isOpen: props.isOpen ?? controller.value.isOpen.value,
+            isDismissable: props.isDismissable,
+            "aria-labelledby": headingId,
+            onOpenChange: controller.value.setOpen,
+          },
+          () => children,
+        ),
+      );
+    };
+  },
+});
 
 composition(ConfirmCloseModal);
 composition(Modal);

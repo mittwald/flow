@@ -526,6 +526,49 @@ describe("A trigger", () => {
     await expect.element(dialog()).toBeVisible();
     expect(onPress).toHaveBeenCalledTimes(1);
   });
+
+  /* Flow's trigger configures `Button` only. */
+  test("hands no press handler to a child that is not a button", async () => {
+    const warn = vi.spyOn(console, "warn");
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(ModalTrigger, null, () => [
+            h(Text, null, () => "Squadron"),
+            h(Button, null, () => "Open"),
+            squadronModal(),
+          ]),
+      ),
+    );
+
+    await page.getByRole("button", { name: "Open" }).click();
+    await expect.element(dialog()).toBeVisible();
+
+    expect(warn).not.toHaveBeenCalledWith(
+      expect.stringContaining("has no event for onPress"),
+    );
+  });
+
+  /* Flow's `Action` passes the trigger's props context on to its button. */
+  test("opens from a button inside an Action", async () => {
+    const onAction = vi.fn();
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(ModalTrigger, null, () => [
+            h(Action, { onAction }, () => h(Button, null, () => "Open")),
+            squadronModal(),
+          ]),
+      ),
+    );
+
+    await page.getByRole("button", { name: "Open" }).click();
+
+    await expect.element(dialog()).toBeVisible();
+    expect(onAction).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("Popover", () => {

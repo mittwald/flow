@@ -1,12 +1,12 @@
-import { DialogTrigger } from "@/auto-generated";
-import { mapChildren } from "@/overlays/childProps";
+import { Button, DialogTrigger } from "@/auto-generated";
+import { Action } from "@/components/Action";
+import { applyChildRules, type ChildRules } from "@/overlays/childProps";
 import {
   provideOverlayContext,
   useOwnController,
   type OverlayController,
   type OverlayType,
 } from "@/overlays/overlayController";
-import { isOverlay } from "@/overlays/overlayRegistry";
 import { useComponentUsage } from "@/composables/useComponentUsage";
 import { defineComponent, h, onMounted, type PropType } from "vue";
 
@@ -15,9 +15,8 @@ import { defineComponent, h, onMounted, type PropType } from "vue";
  *
  * In Flow all three are the same component with a different overlay type — a
  * `DialogTrigger` around a trigger element and an overlay, with a props context
- * that gives the trigger its `onPress`. Here the trigger's props are merged
- * into the child directly, and the overlay recognises itself by being
- * registered as one.
+ * that gives the trigger's `Button` its `onPress`. Here that is merged into the
+ * `Button` directly.
  *
  * `reportsUsage`: whether Flow's React trigger is a `flowComponent`, which
  * reports itself.
@@ -56,15 +55,19 @@ export const createOverlayTrigger = (
         isOverlayContent: false,
       });
 
+      /*
+       * Flow's props context names `Button`, and reaches it through an
+       * `Action`, which passes the context on.
+       */
+      const triggerRules: ChildRules = (child) =>
+        child.type === Button
+          ? { props: { onPress: controller.value.open } }
+          : child.type === Action
+            ? { children: triggerRules }
+            : undefined;
+
       return () => {
-        /*
-         * Everything that is not the overlay is the trigger. Flow's props
-         * context names `Button` specifically; matching on "not the overlay"
-         * covers the same case and keeps a wrapped trigger working.
-         */
-        const children = mapChildren(slots.default?.(), (child) =>
-          isOverlay(child) ? undefined : { onPress: controller.value.open },
-        );
+        const children = applyChildRules(slots.default?.(), triggerRules);
 
         return h(
           DialogTrigger,

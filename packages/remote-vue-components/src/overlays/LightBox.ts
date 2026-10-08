@@ -25,7 +25,6 @@ import {
   type OverlayOpenHandler,
   type OverlayOpenStateHandler,
 } from "@/overlays/overlayController";
-import { markAsOverlay } from "@/overlays/overlayRegistry";
 import { defineComponent, h, onMounted, type PropType, type VNode } from "vue";
 import { composition } from "@/lib/composition";
 import { useComponentUsage } from "@/composables/useComponentUsage";
@@ -65,110 +64,108 @@ const childRules: ChildRules = (child) =>
       ? { props: { class: styles.gallery } }
       : undefined;
 
-export const LightBox = markAsOverlay(
-  defineComponent({
-    name: "LightBox",
+export const LightBox = defineComponent({
+  name: "LightBox",
 
-    inheritAttrs: false,
+  inheritAttrs: false,
 
-    props: {
-      /** Whether content may exceed the available screen space. @default true */
-      fitScreen: { type: Boolean, default: true },
-      /** A controller to open and close the light box from anywhere. */
-      controller: {
-        type: Object as PropType<OverlayController>,
-        default: undefined,
-      },
-      /** Whether a click outside closes the light box. @default true */
-      isDismissable: { type: Boolean, default: true },
-      /** Whether the light box is open. Use it to control its state. */
-      isOpen: { type: Boolean, default: undefined },
-      onOpen: {
-        type: Function as PropType<OverlayOpenHandler>,
-        default: undefined,
-      },
-      onClose: {
-        type: Function as PropType<OverlayCloseHandler>,
-        default: undefined,
-      },
-      onOpenChange: {
-        type: Function as PropType<OverlayOpenStateHandler>,
-        default: undefined,
-      },
+  props: {
+    /** Whether content may exceed the available screen space. @default true */
+    fitScreen: { type: Boolean, default: true },
+    /** A controller to open and close the light box from anywhere. */
+    controller: {
+      type: Object as PropType<OverlayController>,
+      default: undefined,
     },
+    /** Whether a click outside closes the light box. @default true */
+    isDismissable: { type: Boolean, default: true },
+    /** Whether the light box is open. Use it to control its state. */
+    isOpen: { type: Boolean, default: undefined },
+    onOpen: {
+      type: Function as PropType<OverlayOpenHandler>,
+      default: undefined,
+    },
+    onClose: {
+      type: Function as PropType<OverlayCloseHandler>,
+      default: undefined,
+    },
+    onOpenChange: {
+      type: Function as PropType<OverlayOpenStateHandler>,
+      default: undefined,
+    },
+  },
 
-    setup(props, { slots, attrs }) {
-      /* Flow's React `LightBox` is a `flowComponent` and reports itself. */
-      onMounted(useComponentUsage("LightBox"));
+  setup(props, { slots, attrs }) {
+    /* Flow's React `LightBox` is a `flowComponent` and reports itself. */
+    onMounted(useComponentUsage("LightBox"));
 
-      const language = useLanguage();
-      const controller = useOwnController(() => props.controller, "LightBox");
+    const language = useLanguage();
+    const controller = useOwnController(() => props.controller, "LightBox");
 
-      /* Registered as a `Modal`, as Flow's `Overlay` registers it. */
-      provideOverlayContext("Modal", () => controller.value);
+    /* Registered as a `Modal`, as Flow's `Overlay` registers it. */
+    provideOverlayContext("Modal", () => controller.value);
 
-      useOverlayHandlers(() => controller.value, {
-        onOpen: () => props.onOpen,
-        onClose: () => props.onClose,
-        onOpenChange: () => props.onOpenChange,
-      });
+    useOverlayHandlers(() => controller.value, {
+      onOpen: () => props.onOpen,
+      onClose: () => props.onClose,
+      onOpenChange: () => props.onOpenChange,
+    });
 
-      return () => {
-        const className = [
-          styles.overlay,
-          styles.lightBox,
-          props.fitScreen ? styles.fitScreen : undefined,
-          attrs.class,
-        ]
-          .filter(Boolean)
-          .join(" ");
+    return () => {
+      const className = [
+        styles.overlay,
+        styles.lightBox,
+        props.fitScreen ? styles.fitScreen : undefined,
+        attrs.class,
+      ]
+        .filter(Boolean)
+        .join(" ");
 
-        /*
-         * Flow tunnels the `ActionGroup` out of the content into the actions,
-         * behind the close button.
-         */
-        const children = applyChildRules(slots.default?.(), childRules);
-        const isActionGroup = (child: VNode) => child.type === ActionGroup;
-        const actionGroups = flattenChildren(children).filter(isActionGroup);
-        const content = flattenChildren(children).filter(
-          (child) => !isActionGroup(child),
-        );
+      /*
+       * Flow tunnels the `ActionGroup` out of the content into the actions,
+       * behind the close button.
+       */
+      const children = applyChildRules(slots.default?.(), childRules);
+      const isActionGroup = (child: VNode) => child.type === ActionGroup;
+      const actionGroups = flattenChildren(children).filter(isActionGroup);
+      const content = flattenChildren(children).filter(
+        (child) => !isActionGroup(child),
+      );
 
-        const closeButton = h(
-          Button,
+      const closeButton = h(
+        Button,
+        {
+          ...lightStaticButton,
+          "aria-label": language.value?.startsWith("de")
+            ? lightBoxCloseTexts["de-DE"]
+            : lightBoxCloseTexts["en-US"],
+          onPress: () => controller.value.close(),
+        },
+        () => h(IconClose),
+      );
+
+      /* A UI component: Flow clears the host's props context around it. */
+      return h(ClearPropsContext, null, () =>
+        h(
+          OverlayContent,
           {
-            ...lightStaticButton,
-            "aria-label": language.value?.startsWith("de")
-              ? lightBoxCloseTexts["de-DE"]
-              : lightBoxCloseTexts["en-US"],
-            onPress: () => controller.value.close(),
+            class: className,
+            isOpen: props.isOpen ?? controller.value.isOpen.value,
+            isDismissable: props.isDismissable,
+            onOpenChange: controller.value.setOpen,
           },
-          () => h(IconClose),
-        );
-
-        /* A UI component: Flow clears the host's props context around it. */
-        return h(ClearPropsContext, null, () =>
-          h(
-            OverlayContent,
-            {
-              class: className,
-              isOpen: props.isOpen ?? controller.value.isOpen.value,
-              isDismissable: props.isDismissable,
-              onOpenChange: controller.value.setOpen,
-            },
-            () => [
-              h(Div, { class: styles.content }, () => content),
-              h(Div, { class: styles.actions }, () => [
-                closeButton,
-                ...actionGroups,
-              ]),
-            ],
-          ),
-        );
-      };
-    },
-  }),
-);
+          () => [
+            h(Div, { class: styles.content }, () => content),
+            h(Div, { class: styles.actions }, () => [
+              closeButton,
+              ...actionGroups,
+            ]),
+          ],
+        ),
+      );
+    };
+  },
+});
 
 composition(LightBox);
 
