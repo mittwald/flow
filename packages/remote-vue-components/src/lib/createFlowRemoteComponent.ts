@@ -1,6 +1,13 @@
 import { controlledRemoteValue } from "@/lib/controlledRemoteValue";
 import { useComponentUsage } from "@/composables/useComponentUsage";
-import { callHandlers, flattenHandlers } from "@/lib/handlers";
+import {
+  callHandlers,
+  flattenHandlers,
+  isHandlerKey,
+  resolveEventKey,
+  type AnyHandler,
+  type EventKey,
+} from "@/lib/handlers";
 import { hyphenate } from "@/lib/propKeys";
 import {
   applyModelModifiers,
@@ -96,6 +103,14 @@ export function createFlowRemoteComponent<
         `change event instead.`,
     );
   };
+  const warnedListeners = new Set<string>();
+  const warnListener = (key: string, message: string) => {
+    if (warnedListeners.has(key)) {
+      return;
+    }
+    warnedListeners.add(key);
+    console.warn(`[flow] ${message}`);
+  };
 
   const component = defineComponent({
     name: `FlowRemote(${name})`,
@@ -166,8 +181,45 @@ export function createFlowRemoteComponent<
        */
       const attachedListeners = new Map<string, EventListener>();
       let currentHandlers = new Map<string, unknown[]>();
+      /* The `.once` listeners that have fired, by their v-on key. */
+      const firedOnce = new Set<string>();
       const reportUsage = useComponentUsage(name);
       const controlled = controlledRemoteValue(tag);
+
+      /**
+       * The handlers for one v-on key, its modifiers applied. `.once` holds per
+       * component instance, as it does for Vue's own `emit`. `.capture` and
+       * `.passive` have nothing to act on in the host's event.
+       */
+      const listenerFor = (
+        key: string,
+        { event, modifiers }: EventKey,
+        handlers: AnyHandler[],
+      ): AnyHandler[] => {
+        const ignored = (["capture", "passive"] as const).filter((modifier) =>
+          modifiers.has(modifier),
+        );
+        if (ignored.length > 0) {
+          warnListener(
+            key,
+            `@${hyphenate(event)}.${ignored.join(".")} on <${name}>: the ` +
+              `host's event has no ${ignored.join(" or ")} mode, so the ` +
+              `modifier is ignored and the handler runs without it.`,
+          );
+        }
+        if (!modifiers.has("once")) {
+          return handlers;
+        }
+        return [
+          (...args: unknown[]) => {
+            if (firedOnce.has(key)) {
+              return;
+            }
+            firedOnce.add(key);
+            callHandlers(handlers, ...args);
+          },
+        ];
+      };
 
       /**
        * Splits the attrs Vue collected into remote properties and event
@@ -242,20 +294,31 @@ export function createFlowRemoteComponent<
            * `@press` and `@hover-change` both compile to `onPress` /
            * `onHoverChange`: Vue's compiler camelizes a v-on argument. What is
            * left is mapping that back onto the element's event name, which is
-           * the React prop without its `on` prefix.
+           * the React prop without its `on` prefix — and without the modifiers
+           * Vue appended to it (`onPressOnce`).
            */
-          const [, initial, rest] = /^on([A-Z])(.*)$/.exec(rawKey) ?? [];
-          if (initial !== undefined) {
-            const event = initial.toLowerCase() + rest;
+          if (isHandlerKey(rawKey)) {
             /*
              * A list when a composite merged its handler with the author's —
              * Vue's `mergeProps` combines both into an array.
              */
             const handlers = flattenHandlers(value);
-            if (events.has(event) && (handlers.length > 0 || value == null)) {
+            const resolved = resolveEventKey(rawKey, events);
+            if (resolved && (handlers.length > 0 || value == null)) {
               if (handlers.length > 0) {
-                addListeners(event, handlers);
+                addListeners(
+                  resolved.event,
+                  listenerFor(rawKey, resolved, handlers),
+                );
               }
+              continue;
+            }
+            /* A handler never becomes an attribute holding its source. */
+            if (!resolved && handlers.length > 0) {
+              warnListener(
+                rawKey,
+                `<${name}> has no event for ${rawKey}; the handler is dropped.`,
+              );
               continue;
             }
           }

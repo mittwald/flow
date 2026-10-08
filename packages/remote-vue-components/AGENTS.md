@@ -67,7 +67,13 @@ what this binding establishes about supporting a framework at all.
   last value it was handed.
 - **Events are matched by name, not by a map.** `@press` and `@press-change`
   both compile to `onPress` / `onPressChange` (Vue's compiler camelizes a v-on
-  argument), and the element's event is that name without `on`.
+  argument), and the element's event is that name without `on`. Vue appends the
+  `.once`, `.capture` and `.passive` modifiers to the key (`onPressOnce`), so
+  `resolveEventKey` strips them where the exact name is no event: `.once` is
+  applied by the wrapper, and `.capture`/`.passive` warn and are ignored —
+  unless the element has a React capture event (`clickCapture`), which
+  `.capture` then binds. A handler whose key names no event is dropped with a
+  warning, never set as an attribute.
 - **`v-model` is mapped, not declared** (`src/lib/vModel.ts`). Vue compiles it
   to `modelValue` plus `onUpdate:modelValue` (or `<arg>` plus `onUpdate:<arg>`),
   keys no element knows — left alone, a field shows nothing and never writes
