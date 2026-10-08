@@ -155,11 +155,11 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   const errorElement = error ? (errorView ?? defaultErrorView) : undefined;
 
-  /* The skeleton is one surface in the size of cropper and slider. It mounts
-     no cropper, so the image is not loaded. */
-  const cropper = isSkeleton ? null : errorElement ? (
+  const errorContainer = (
     <div className={styles.errorViewContainer}>{errorElement}</div>
-  ) : (
+  );
+
+  const cropper = (
     <Cropper
       style={{
         containerStyle: {
@@ -194,7 +194,9 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     >
       <SkeletonModeReset>
         <div className={styles.cropperContainer} style={{ height }}>
-          {cropper}
+          {/* The skeleton is one surface in the size of cropper and slider.
+              It mounts no cropper, so the image is not loaded. */}
+          {!isSkeleton && (errorElement ? errorContainer : cropper)}
         </div>
         {!errorElement && (
           <Slider

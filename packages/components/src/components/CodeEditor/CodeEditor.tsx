@@ -217,6 +217,45 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     </div>
   );
 
+  const editor = (
+    <CodeMirror
+      {...rest}
+      value={value}
+      basicSetup={{
+        highlightActiveLine: showActiveLineMarker && !isDisabled,
+        highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
+        autocompletion: false,
+        lineNumbers: false,
+        foldGutter: false,
+        highlightSelectionMatches: false,
+      }}
+      theme={defaultLightTheme}
+      data-invalid={isInvalid || undefined}
+      data-disabled={isDisabled || undefined}
+      readOnly={isReadOnly || isDisabled}
+      editable={!isDisabled}
+      className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
+      ref={(codeMirrorRef) => {
+        if (codeMirrorRef?.editor) {
+          localRef.current = codeMirrorRef.editor;
+        }
+      }}
+      extensions={[...enabledExtensions, contentAttributes]}
+      height={height ?? minHeight}
+    >
+      {copyable && (
+        <CopyButton
+          className={styles.copyButton}
+          size="s"
+          variant="soft"
+          text={value}
+          isDisabled={isDisabled}
+        />
+      )}
+      {children}
+    </CodeMirror>
+  );
+
   return (
     <div
       className={rootClassName}
@@ -226,46 +265,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
       <PropsContextProvider props={propsContext}>
         <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
-          {isSkeleton ? (
-            skeleton
-          ) : (
-            <CodeMirror
-              {...rest}
-              value={value}
-              basicSetup={{
-                highlightActiveLine: showActiveLineMarker && !isDisabled,
-                highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
-                autocompletion: false,
-                lineNumbers: false,
-                foldGutter: false,
-                highlightSelectionMatches: false,
-              }}
-              theme={defaultLightTheme}
-              data-invalid={isInvalid || undefined}
-              data-disabled={isDisabled || undefined}
-              readOnly={isReadOnly || isDisabled}
-              editable={!isDisabled}
-              className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
-              ref={(codeMirrorRef) => {
-                if (codeMirrorRef?.editor) {
-                  localRef.current = codeMirrorRef.editor;
-                }
-              }}
-              extensions={[...enabledExtensions, contentAttributes]}
-              height={height ?? minHeight}
-            >
-              {copyable && (
-                <CopyButton
-                  className={styles.copyButton}
-                  size="s"
-                  variant="soft"
-                  text={value}
-                  isDisabled={isDisabled}
-                />
-              )}
-              {children}
-            </CodeMirror>
-          )}
+          {isSkeleton ? skeleton : editor}
         </FieldErrorCaptureContext>
         <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
         <FieldErrorView />

@@ -66,31 +66,32 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
   const isSkeleton = useSkeletonMode();
   const donutSize = getDonutSize(size);
 
+  const displayedValue = segmentsTotalValue ?? value;
+
   /* No svg: the donut is one round surface in its size. The legend follows
      the skeleton rules of its items. */
-  const donut = isSkeleton ? (
+  const skeletonDonut = (
     <span
       className={clsx(styles.donutChart, styles.skeleton, className)}
       style={{ width: donutSize, height: donutSize }}
       aria-hidden
       inert
     />
-  ) : (
+  );
+
+  const donut = (
     <Aria.ProgressBar
       className={rootClassName}
-      value={segmentsTotalValue ?? value}
+      value={displayedValue}
       {...rest}
     >
       <Donut
-        value={segmentsTotalValue ?? value}
+        value={displayedValue}
         segments={segments}
         size={size}
         maxValue={maxValue}
       />
-      <DonutChartValue
-        value={segmentsTotalValue ?? value}
-        formatOptions={formatOptions}
-      >
+      <DonutChartValue value={displayedValue} formatOptions={formatOptions}>
         {children}
       </DonutChartValue>
     </Aria.ProgressBar>
@@ -99,7 +100,7 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
   return (
     <Wrap if={showLegend && segments}>
       <div className={clsx(styles.donutChartContainer, styles[legendPosition])}>
-        {donut}
+        {isSkeleton ? skeletonDonut : donut}
 
         {showLegend && segments && (
           <DonutChartLegend
