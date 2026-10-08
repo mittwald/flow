@@ -96,6 +96,21 @@ test("a conditional child that renders nothing keeps the value", async () => {
   await expect.element(chart()).toHaveTextContent("40 %");
 });
 
+test("an empty list next to a conditional child keeps the value", async () => {
+  const notes: string[] = [];
+  const showText = false as boolean;
+  render(
+    <DonutChart aria-label="Storage" value={40}>
+      {notes.map((note) => (
+        <Text key={note}>{note}</Text>
+      ))}
+      {showText && <Text>Almost full</Text>}
+    </DonutChart>,
+  );
+
+  await expect.element(chart()).toHaveTextContent("40 %");
+});
+
 describe("with motion allowed", () => {
   afterEach(() => commands.setReducedMotion("reduce"));
 

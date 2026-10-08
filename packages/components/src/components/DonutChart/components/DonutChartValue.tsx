@@ -1,8 +1,7 @@
 import styles from "../DonutChart.module.scss";
-import { type FC } from "react";
+import { Children, type FC } from "react";
 import { useNumberFormatter } from "react-aria";
 import type { DonutChartProps } from "@/components/DonutChart";
-import { areChildrenEmpty } from "@/lib/react/areChildrenEmpty";
 
 interface Props extends Pick<DonutChartProps, "formatOptions" | "children"> {
   value?: number;
@@ -13,7 +12,7 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   const formatter = useNumberFormatter(formatOptions);
 
-  if (!areChildrenEmpty(children)) {
+  if (Children.toArray(children).length > 0) {
     return <span className={styles.value}>{children}</span>;
   }
 

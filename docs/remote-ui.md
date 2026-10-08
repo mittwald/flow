@@ -252,9 +252,9 @@ territory:
 - **`children` cannot tell "nothing" apart.** The host receives the rendered
   child nodes, so `undefined`, `null` and `false` all arrive as no children. Our
   `remote-dom-react` patch passes `undefined` then, not `[]`. Locally, a
-  component still sees the `false` of `{cond && …}`, and `Children.count(false)`
-  is `1`. Check for content with `areChildrenEmpty`, and count with
-  `Children.toArray(children).length`.
+  component still sees the `false` of `{cond && …}`, or `[[], false]` next to an
+  empty list, and `Children.count(false)` is `1`. Check for content and count
+  with `Children.toArray(children).length`, which drops all of them.
 - **A function property's return value comes back as a Promise.**
   `isSerializableByBase` accepts any function, so `@quilted/threads` sends it as
   a proxy, and calling a proxy is a round trip. A host that awaits it is fine —
