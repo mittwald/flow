@@ -1,6 +1,7 @@
 import { DeprecationWarningProvider } from "@/components/DeprecationWarningProvider";
 import { provideRemoteContext } from "@/composables/remoteContext";
 import { useWatchPathname } from "@/composables/useWatchPathname";
+import { isRenderError } from "@/lib/isRenderError";
 import { stringifyError } from "@/lib/stringifyError";
 import { packageVersion } from "@/version";
 import {
@@ -106,13 +107,14 @@ export const RemoteRoot = defineComponent({
 
     /*
      * A render error in the extension is not the host's error to guess at: the
-     * host shows its own failure state and the message travels with it. Vue
-     * stops propagation when the hook returns `false`, which is what keeps the
-     * error from reaching the app's global handler twice.
+     * host shows its own failure state and the message travels with it. Any
+     * other error — a hook, a watcher, an event handler, sync or async — is
+     * left to the app. Every error goes on to `app.config.errorHandler`.
      */
-    onErrorCaptured((error) => {
-      connection.value?.imports.setError(stringifyError(error));
-      return false;
+    onErrorCaptured((error, _instance, info) => {
+      if (isRenderError(info)) {
+        void connection.value?.imports.setError(stringifyError(error));
+      }
     });
 
     onMounted(() => {
