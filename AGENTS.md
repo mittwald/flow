@@ -244,7 +244,10 @@ commit the results.
   `packages/codemods/src/migrations` — which generates the `MIGRATION.md` entry
   — and a codemod when the change is mechanically decidable. The entry's `apply`
   field is the instruction an agent executes; fill it even when there is no
-  codemod, because for those entries it is the whole migration.
+  codemod, because for those entries it is the whole migration. Exception: a
+  break in a **beta package** (`"flowStatus": "beta"`) gets a migration note in
+  the commit body and release notes instead
+  ([ADR 0007](docs/adr/0007-beta-packages.md)).
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
 - **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
   WebKit only is a pragmatic choice, not a support statement.
