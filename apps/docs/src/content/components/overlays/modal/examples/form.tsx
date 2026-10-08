@@ -6,6 +6,7 @@ import {
   Heading,
   Label,
   Modal,
+  Section,
   TextField,
   useModalController,
 } from "@mittwald/flow-react-components";
@@ -42,16 +43,18 @@ export default () => {
           <Heading>Organisation anlegen</Heading>
 
           <Content>
-            <Field
-              name="name"
-              rules={{
-                required: "Bitte gib einen Namen ein",
-              }}
-            >
-              <TextField>
-                <Label>Name</Label>
-              </TextField>
-            </Field>
+            <Section>
+              <Field
+                name="name"
+                rules={{
+                  required: "Bitte gib einen Namen ein",
+                }}
+              >
+                <TextField>
+                  <Label>Name</Label>
+                </TextField>
+              </Field>
+            </Section>
           </Content>
 
           <ActionGroup>
