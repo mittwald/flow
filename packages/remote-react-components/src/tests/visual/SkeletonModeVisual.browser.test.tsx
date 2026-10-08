@@ -2,13 +2,12 @@ import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
 import gopher from "@/tests/assets/gopher.webp";
+import { SkeletonComparison } from "@/tests/lib/SkeletonComparison";
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode visual (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
+  async ({ testScreenshot, render, components }) => {
+    const {
       SkeletonMode,
       Section,
       Heading,
@@ -30,10 +29,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       MenuItem,
       Flex,
       ColumnLayout,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <Heading>
             Webshop Relaunch
@@ -118,7 +117,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             </Flex>
           </SkeletonMode>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode visual");
