@@ -8,7 +8,12 @@
       "inputs": [
         "default",
         "{projectRoot}/src/**/*",
-        "{workspaceRoot}/packages/components-base/src/**/*"
+        "{workspaceRoot}/packages/components-base/src/**/*",
+        "{workspaceRoot}/packages/core/src/**/*",
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        }
       ],
       "outputs": ["{projectRoot}/dist"],
       "dependsOn": [
@@ -37,6 +42,7 @@
         "default",
         "{projectRoot}/src/**/*",
         "{workspaceRoot}/packages/components-base/src/**/*",
+        "{workspaceRoot}/packages/core/src/**/*",
         "{projectRoot}/dev/**/*",
         "{workspaceRoot}/packages/remote-react-components/src/tests/lib/**/*",
         {
