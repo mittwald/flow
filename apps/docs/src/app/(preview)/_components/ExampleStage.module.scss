@@ -1,0 +1,6 @@
+// Opaque, so the capture never shows the layout's page ground — neither around
+// the frame nor behind its rounded corners.
+.stage {
+  padding: var(--size-px--m);
+  background-color: var(--neutral--color--100);
+}
