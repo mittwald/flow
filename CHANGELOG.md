@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.27](https://github.com/mittwald/flow/compare/1.4.26...1.4.27) (2026-10-08)
+
+### Documentation
+
+* link the GitHub releases Atom feed ([#3366](https://github.com/mittwald/flow/issues/3366)) ([55c75f0](https://github.com/mittwald/flow/commit/55c75f006b660f5cf4701c8bb87bb2d56bb5624a))
+
+### Continuous Integration
+
+* add a non-blocking Firefox job to the browser tests ([#3298](https://github.com/mittwald/flow/issues/3298)) ([3771a4d](https://github.com/mittwald/flow/commit/3771a4d7b76fd8513b5e45318b453d28a9977fdb))
+
 ## [1.4.26](https://github.com/mittwald/flow/compare/1.4.25...1.4.26) (2026-10-08)
 
 ### Bug Fixes
