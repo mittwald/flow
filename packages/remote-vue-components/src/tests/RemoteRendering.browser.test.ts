@@ -4,6 +4,7 @@ import {
   Heading,
   Label,
   Section,
+  Text,
   TextArea,
   TextField,
 } from "@/index";
@@ -95,6 +96,8 @@ describe("A Vue tree rendered through the host renderer", () => {
         ),
         h(Button, { "is-disabled": "is-disabled" } as never, () => "Delete"),
         h(Button, { "aria-disabled": "" } as never, () => "Archive"),
+        /* `aria-hidden` is typed `Booleanish`, which docgen prints by name. */
+        h(Text, { "aria-hidden": "" } as never, () => "Decoration"),
       ]),
     );
 
@@ -105,6 +108,14 @@ describe("A Vue tree rendered through the host renderer", () => {
     await expect
       .element(page.getByRole("button", { name: "Archive" }))
       .toHaveClass("flow--button--aria-disabled");
+    /* The remote tree is in the document too, as `flr-text`. */
+    await expect
+      .poll(() =>
+        [...document.querySelectorAll("span")]
+          .find((element) => element.textContent === "Decoration")
+          ?.getAttribute("aria-hidden"),
+      )
+      .toBe("true");
   });
 
   /*

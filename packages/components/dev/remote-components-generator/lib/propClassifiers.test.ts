@@ -46,6 +46,8 @@ describe("isBoolean", () => {
     truncateLines: "number | boolean",
     shouldCloseOnSelect: "boolean | (() => boolean)",
     skipHtml: "boolean | null",
+    "aria-hidden": "Booleanish",
+    contentEditable: 'Booleanish | "inherit" | "plaintext-only"',
     shouldCloseOnInteractOutside: "((element: Element) => boolean)",
     isValid: "() => boolean",
     flags: "boolean[]",
@@ -59,6 +61,8 @@ describe("isBoolean", () => {
     "truncateLines",
     "shouldCloseOnSelect",
     "skipHtml",
+    "aria-hidden",
+    "contentEditable",
   ])("%s takes a boolean", (prop) => {
     expect(isBoolean(component, prop)).toBe(true);
   });

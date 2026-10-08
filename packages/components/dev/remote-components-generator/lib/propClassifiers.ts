@@ -89,14 +89,25 @@ const isParenthesized = (member: string): boolean => {
   return false;
 };
 
+/*
+ * react-docgen-typescript prints React's alias `Booleanish`
+ * (`boolean | "true" | "false"`) by name, so its `boolean` never shows up as a
+ * union member of its own. The `aria-*` props, `draggable` and `spellCheck`
+ * are typed with it.
+ */
+const booleanMembers = new Set(["boolean", "Booleanish"]);
+
 /**
  * A prop that takes `boolean`, alone or in a union (`boolean | number`,
- * `boolean | FocusStrategy`) — but not a function returning one.
+ * `boolean | FocusStrategy`, `Booleanish | "inherit"`) — but not a function
+ * returning one.
  */
 export const isBoolean = (comp: ComponentDoc, name: string) =>
   !isEvent(name) &&
   !isSlot(comp, name) &&
-  unionMembers(comp.props[name]?.type.name ?? "").includes("boolean");
+  unionMembers(comp.props[name]?.type.name ?? "").some((member) =>
+    booleanMembers.has(member),
+  );
 
 export const isProp = (comp: ComponentDoc, name: string) =>
   !isSlot(comp, name) && !isEvent(name) && !isAttribute(comp, name);

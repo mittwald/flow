@@ -9,11 +9,27 @@ export { type RemoteIconElementProps as IconProps } from "@mittwald/flow-remote-
 export const Icon: FlowRemoteVueComponent<RemoteIconElementProps> =
   createFlowRemoteComponent("flr-icon", "Icon", RemoteIconElement, {
     booleans: [
+      "aria-atomic",
+      "aria-busy",
       "aria-checked",
       "aria-current",
+      "aria-disabled",
+      "aria-expanded",
+      "aria-grabbed",
       "aria-haspopup",
+      "aria-hidden",
       "aria-invalid",
+      "aria-modal",
+      "aria-multiline",
+      "aria-multiselectable",
       "aria-pressed",
+      "aria-readonly",
+      "aria-required",
+      "aria-selected",
+      "autoReverse",
+      "externalResourcesRequired",
+      "focusable",
+      "preserveAlpha",
       "suppressHydrationWarning",
     ],
   });
