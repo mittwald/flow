@@ -6,10 +6,11 @@ import { computed, type ComputedRef } from "vue";
  *
  * Flow's strings are compiled into the React bundle by a locale plugin and are
  * not importable from a published package, so a Vue binding has to carry its
- * own — the same trade as `Modal`'s four confirm-close strings, at a larger
- * count. A rewording on the Flow side drifts here without failing anything.
+ * own — the same trade as the overlays' strings (`src/overlays/locales.ts`), at
+ * a larger count. A rewording on the Flow side fails
+ * `src/tests/CopiedTexts.test.ts`.
  */
-const texts = {
+export const texts = {
   "en-US": {
     dateRange: "Date range",
     filters: "Filters",

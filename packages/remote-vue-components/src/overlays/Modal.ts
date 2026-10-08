@@ -15,6 +15,7 @@ import {
 import { IconClose } from "@/icons";
 import Action from "@/components/Action";
 import { useLanguage } from "@/composables/remoteContext";
+import { confirmCloseTexts } from "@/overlays/locales";
 import {
   applyChildRules,
   dynamic,
@@ -79,30 +80,6 @@ const styles = {
   columnLayout: "flow--modal--column-layout",
   accentBox: "flow--modal--accent-box",
   actionGroup: "flow--modal--action-group",
-};
-
-/*
- * Copied from `packages/components/src/components/Modal/locales/*.locale.json`.
- *
- * Flow's are compiled into the React bundle by a locale plugin and are not
- * importable from a published package, so the only way a Vue binding can put
- * words on this modal is to carry its own. Four strings, and a rewording on the
- * Flow side is a translation drift rather than a broken modal — but it is a
- * second copy, and the generated `Modal` this layer argues for would remove it.
- */
-const confirmCloseTexts = {
-  "en-US": {
-    heading: "Unsaved changes",
-    text: "You have unsaved changes. Are you sure you want to close the modal? All changes will be lost.",
-    close: "Close",
-    keepOpen: "Keep editing",
-  },
-  "de-DE": {
-    heading: "Ungespeicherte Änderungen",
-    text: "Du hast ungespeicherte Änderungen. Möchtest du das Modal wirklich schließen? Alle Änderungen gehen dabei verloren.",
-    close: "Schließen",
-    keepOpen: "Weiter bearbeiten",
-  },
 };
 
 /**

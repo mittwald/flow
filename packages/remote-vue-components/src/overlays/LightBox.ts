@@ -10,6 +10,7 @@ import Action from "@/components/Action";
 import ActionBatch from "@/components/ActionBatch";
 import { useLanguage } from "@/composables/remoteContext";
 import { IconClose } from "@/icons";
+import { lightBoxCloseTexts } from "@/overlays/locales";
 import {
   applyChildRules,
   flattenChildren,
@@ -39,9 +40,6 @@ const styles = {
   actionGroup: "flow--light-box--action-group",
   gallery: "flow--light-box--gallery",
 };
-
-/* From `packages/components/src/components/LightBox/locales/*.locale.json`. */
-const closeTexts = { "de-DE": "Schließen", "en-US": "Close" };
 
 const lightStaticButton = { variant: "solid", color: "light-static" } as const;
 
@@ -141,8 +139,8 @@ export const LightBox = markAsOverlay(
           {
             ...lightStaticButton,
             "aria-label": language.value?.startsWith("de")
-              ? closeTexts["de-DE"]
-              : closeTexts["en-US"],
+              ? lightBoxCloseTexts["de-DE"]
+              : lightBoxCloseTexts["en-US"],
             onPress: () => controller.value.close(),
           },
           () => h(IconClose),
