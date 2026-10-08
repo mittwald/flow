@@ -422,8 +422,14 @@ export const Header = defineComponent({
            * to survive the switch. React arrives at the inner class by reusing
            * the element rather than by setting it: a `className` that goes from
            * set to undefined never reaches the host, so the previous one stays.
+           *
+           * `[actions, null]`, not `actions`: Vue wraps a nested array in a
+           * fragment, so only the same array shape keeps the actions at the
+           * same position in the same fragment — anything else remounts them,
+           * and a modal open from the header closes.
            */
-          () => h(Div, { class: listStyles.headerContent }, () => actions),
+          () =>
+            h(Div, { class: listStyles.headerContent }, () => [actions, null]),
         );
       }
 
