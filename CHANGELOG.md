@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.25](https://github.com/mittwald/flow/compare/1.4.24...1.4.25) (2026-10-08)
+
+### Documentation
+
+* place page-wide alerts inside the LayoutCard ([#3389](https://github.com/mittwald/flow/issues/3389)) ([97c50b0](https://github.com/mittwald/flow/commit/97c50b080d5f556c7db6dbae5eccc73dfc6b6350))
+
 ## [1.4.24](https://github.com/mittwald/flow/compare/1.4.23...1.4.24) (2026-10-07)
 
 ### Bug Fixes
