@@ -18,6 +18,10 @@ import { parkPointer } from "@/lib/dev/parkPointer";
 import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
 import { FieldError } from "@/components/FieldError";
 
+// Every test renders the same layout. A pointer left on a button hovers the
+// next test's button, and its tooltip then swallows that test's Escape.
+beforeEach(parkPointer);
+
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
   rules: [
@@ -211,11 +215,8 @@ test("a generated password shows its final rating at once", async () => {
 });
 
 describe("PasswordCreationField Tests", () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     vitest.resetAllMocks();
-    // Every test renders the same layout. A pointer left on a button hovers the
-    // next test's button, and its tooltip then swallows that test's Escape.
-    await parkPointer();
     vitest.useFakeTimers();
   });
 

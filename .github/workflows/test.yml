@@ -121,7 +121,8 @@ jobs:
   # would not do — a job that hits `timeout-minutes` ends `cancelled`, and `main`
   # fails on that. It is still needed here: without it a red Firefox makes the
   # whole run fail, and on `main` nx-set-shas then bases `nx affected` on the
-  # last fully green run. Add the job to `needs` once it stays green.
+  # last fully green run. Add the job to `needs` once it stays green, and drop
+  # `continue-on-error` then: kept, a red Firefox still reads `success` there.
   browser-firefox:
     runs-on: ubuntu-latest
     timeout-minutes: 20
