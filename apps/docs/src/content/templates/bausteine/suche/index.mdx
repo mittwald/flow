@@ -1,8 +1,8 @@
 ---
 title: Suche
 description:
-  Ein Trigger öffnet ein zentriertes Modal, in dem Nutzer suchen, per Tastatur
-  durch die Treffer navigieren und direkt zum Ziel springen.
+  Ein Trigger öffnet ein zentriertes Modal, in dem Nutzer suchen und direkt zum
+  Ziel springen.
 ---
 
 <FileExample example="suche" />
@@ -25,14 +25,14 @@ Verwende diesen Baustein, um in deiner Anwendung eine globale Suche anzubieten,
   Tastenkürzel mit einem [Kbd](/components/content/kbd) am Trigger an.
 - **Modal** – Ein [Modal](/components/overlays/modal) in Größe `m` enthält ein
   [SearchField](/components/form-controls/search-field) mit `autoFocus`, sodass
-  Nutzer sofort tippen können.
-- **Trefferliste** – Jeder Treffer zeigt den Titel mit hervorgehobenem
-  Suchbegriff, darunter den Kontext als Pfad und eine kurze Beschreibung. Die
-  Suchlogik im Beispiel ist ein Platzhalter über Beispieldaten; setze hier deine
-  eigene, meist serverseitige Suche ein.
-- **Tastaturnavigation** – Mit den Pfeiltasten wählen Nutzer einen Treffer, mit
-  Enter öffnen sie ihn. Der Fokus bleibt dabei im SearchField, sodass Nutzer
-  weitertippen können.
+  Nutzer sofort tippen können. Das SearchField ersetzt Überschrift und
+  Schließen-Button: Blende die Heading nur visuell aus, damit Screenreader den
+  Dialog weiterhin benennen, und setze `showCloseButton={false}`. Nutzer
+  schließen die Suche mit Escape.
+- **Trefferliste** – Eine [List](/components/list/list) zeigt die Treffer mit
+  Titel und Kontext. Mit Tab wechseln Nutzer in die Liste, mit Enter öffnen sie
+  einen Treffer. Die Suchlogik im Beispiel ist ein Platzhalter über
+  Beispieldaten; setze hier deine eigene, meist serverseitige Suche ein.
 
 ---
 

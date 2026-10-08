@@ -26,60 +26,15 @@
   background-color: var(--form-control--background-color--hover);
 }
 
-.results {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-px--xs);
-  margin: 0;
+/* Hidden visually, but still names the dialog for screen readers. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
   padding: 0;
-  list-style: none;
-  max-height: min(60vh, 480px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-.results[hidden] {
-  display: none;
-}
-
-.result {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-px--xs);
-  padding: var(--size-px--s) var(--size-px--m);
-  border-radius: var(--corner-radius--m);
-  cursor: pointer;
-  scroll-margin-block: var(--size-px--s);
-}
-
-.result[aria-selected="true"] {
-  background-color: var(--neutral--color--200);
-}
-
-.title {
-  font-weight: var(--font-weight--bold);
-}
-
-.context,
-.description {
-  font-size: var(--font-size-text--s);
-  color: var(--neutral--color--800);
-}
-
-/* Two lines at most – enough to tell similar results apart. */
-.description {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.mark {
-  background-color: transparent;
-  color: inherit;
-  font-weight: var(--font-weight--bold);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

@@ -89,9 +89,17 @@ export const MdxFileView: FC<Props> = (props) => {
     <LiveCodeEditor code={mdxFile.getExample(example)} {...rest} />
   );
 
-  /** A multi-file example's sources; by default its `.tsx` and CSS module. */
+  /**
+   * A multi-file example's sources; by default its `.tsx` and, when it has one,
+   * its CSS module.
+   */
   const sourceFiles = (example: string, files?: string[]) =>
-    (files ?? [`${example}.tsx`, `${example}.module.css`]).map((name) => ({
+    (
+      files ??
+      [`${example}.tsx`, `${example}.module.css`].filter(
+        (name) => name.endsWith(".tsx") || mdxFile.hasExample(name),
+      )
+    ).map((name) => ({
       name,
       code: mdxFile.getExample(
         name.endsWith(".tsx") ? name.slice(0, -".tsx".length) : name,
