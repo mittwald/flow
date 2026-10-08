@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.31](https://github.com/mittwald/flow/compare/1.5.0-next.30...1.5.0-next.31) (2026-10-08)
+
+### Features
+
+* **SkeletonMode:** add SkeletonMode with text components ([f6dcc43](https://github.com/mittwald/flow/commit/f6dcc433c47ad4c577c068c75ccc3aa2563377b6))
+* **SkeletonMode:** add the shape mixin for the base rule ([c3986ff](https://github.com/mittwald/flow/commit/c3986ff31ead7dfbbf3eb5c0d6bb22bf3eeeb23f))
+
 ## [1.5.0-next.30](https://github.com/mittwald/flow/compare/1.5.0-next.29...1.5.0-next.30) (2026-10-08)
 
 ### Documentation

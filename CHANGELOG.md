@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.31](https://github.com/mittwald/flow/compare/1.5.0-next.30...1.5.0-next.31) (2026-10-08)
+
+### Documentation
+
+* **SkeletonMode:** load real content in the width example ([180e439](https://github.com/mittwald/flow/commit/180e439cf56a0be9c81af742be3c91478459769f))
+* **SkeletonMode:** toggle the mode in every example ([530ddbc](https://github.com/mittwald/flow/commit/530ddbcbd9bb01115d825fcb8c327444c05fc716))
+
+## [1.4.25](https://github.com/mittwald/flow/compare/1.5.0-next.29...1.4.25) (2026-10-08)
+
+### Features
+
+* **SkeletonMode:** add SkeletonMode with text components ([f6dcc43](https://github.com/mittwald/flow/commit/f6dcc433c47ad4c577c068c75ccc3aa2563377b6))
+* **SkeletonMode:** add the shape mixin for the base rule ([c3986ff](https://github.com/mittwald/flow/commit/c3986ff31ead7dfbbf3eb5c0d6bb22bf3eeeb23f))
+
+### Documentation
+
+* add SkeletonMode design spec ([5aabe8c](https://github.com/mittwald/flow/commit/5aabe8c0245b62a13311de7bd9b10680693870c8))
+* add States foundations page ([5096ca5](https://github.com/mittwald/flow/commit/5096ca5825dad4ee7641d8e618696e7e7313241c))
+* settle form fields shimmering in SkeletonMode spec ([96cc9f7](https://github.com/mittwald/flow/commit/96cc9f74242c0faa8cfd3a3a133610acad2703d1))
+* **States:** address review feedback ([c3c809c](https://github.com/mittwald/flow/commit/c3c809c6bbd5975596e6a40a2b49d6cddb106423))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.25 ([2ff3ae2](https://github.com/mittwald/flow/commit/2ff3ae2532dc07f255a9d089257447a19d2c24ea))
+
+### Tests
+
+* **SkeletonMode:** gate the visual scenario below 1.5.0-next.27 ([4ad6bd5](https://github.com/mittwald/flow/commit/4ad6bd54fe3d6bac76f7ccaa504c14c49ae2e8a1))
+* **SkeletonMode:** skip the visual scenario for versions without it ([b1d71be](https://github.com/mittwald/flow/commit/b1d71be2696f9a48890100376fbbcd6369b50438))
+* update visual regression screenshots ([b0c53e4](https://github.com/mittwald/flow/commit/b0c53e47a08af844b3e45fe7f644aa0bd897e56b))
+
 ## [1.5.0-next.30](https://github.com/mittwald/flow/compare/1.5.0-next.29...1.5.0-next.30) (2026-10-08)
 
 ### Documentation
