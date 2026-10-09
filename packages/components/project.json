@@ -30,6 +30,7 @@
       ],
       "inputs": [
         "components-src",
+        "{workspaceRoot}/packages/core/src/**/*",
         { "dependentTasksOutputFiles": "**/*", "transitive": false }
       ]
     },
