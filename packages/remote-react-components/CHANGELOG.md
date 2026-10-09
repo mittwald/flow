@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.29](https://github.com/mittwald/flow/compare/1.4.28...1.4.29) (2026-10-09)
+
+### Bug Fixes
+
+* **LightBox:** keep the gallery image&#x27;s aspect ratio ([#3402](https://github.com/mittwald/flow/issues/3402)) ([ab32089](https://github.com/mittwald/flow/commit/ab320890d32920b8bd7036b18e423a2adda0f2ae))
+
 ## [1.4.28](https://github.com/mittwald/flow/compare/1.4.27...1.4.28) (2026-10-09)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
