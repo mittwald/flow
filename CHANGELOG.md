@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.35](https://github.com/mittwald/flow/compare/1.5.0-next.34...1.5.0-next.35) (2026-10-09)
+
+### Bug Fixes
+
+* **LightBox:** keep the gallery image&#x27;s aspect ratio ([#3402](https://github.com/mittwald/flow/issues/3402)) ([ab32089](https://github.com/mittwald/flow/commit/ab320890d32920b8bd7036b18e423a2adda0f2ae))
+
+## [1.4.28](https://github.com/mittwald/flow/compare/1.5.0-next.33...1.4.28) (2026-10-09)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.28 ([c6649fb](https://github.com/mittwald/flow/commit/c6649fb3f39ae3f99791d3fc30888a67cf4d1db3))
+
+## [1.5.0-next.34](https://github.com/mittwald/flow/compare/1.5.0-next.33...1.5.0-next.34) (2026-10-09)
+
+### Bug Fixes
+
+* **remote-react-renderer:** drop an empty children array on the host ([#3403](https://github.com/mittwald/flow/issues/3403)) ([9d852fd](https://github.com/mittwald/flow/commit/9d852fdacb6875762d39059daaaf08353f835b02))
+
+## [1.4.27](https://github.com/mittwald/flow/compare/1.5.0-next.32...1.4.27) (2026-10-08)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.27 ([8b11091](https://github.com/mittwald/flow/commit/8b110913807fe2433ab4178016cb733bcf97d60a))
+
 ## [1.5.0-next.33](https://github.com/mittwald/flow/compare/1.5.0-next.32...1.5.0-next.33) (2026-10-08)
 
 ### Continuous Integration

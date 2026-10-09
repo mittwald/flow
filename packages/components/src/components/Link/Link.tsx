@@ -24,6 +24,8 @@ import { handleLinkClick, useRouter } from "@react-aria/utils";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { hasContent } from "@/components/SkeletonMode/lib/hasContent";
+import { containsTextChild } from "@/lib/react/remote";
 
 export interface LinkProps
   extends
@@ -145,9 +147,18 @@ export const Link = flowComponent("Link", (props) => {
       } as Record<string, unknown>)
     : {};
 
+  /* Without text of its own — a Link styled as a Button, a Link around a
+     LayoutCard — the content follows its own skeleton rules instead of
+     becoming a text bar. */
+  const hasOnlyElements = hasContent(children) && !containsTextChild(children);
+
+  const textBars = (
+    <SkeletonTextContent defaultWidth="6em">{children}</SkeletonTextContent>
+  );
+
   const content = (
     <PropsContextProvider props={propsContext}>
-      <SkeletonTextContent defaultWidth="6em">{children}</SkeletonTextContent>
+      {hasOnlyElements ? children : textBars}
       <LinkIcon
         withZeroWidthJoiner
         unstyled={unstyled}

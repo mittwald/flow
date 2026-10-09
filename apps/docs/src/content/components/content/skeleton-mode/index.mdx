@@ -18,6 +18,8 @@ description:
 - Gib Platzhalter-Inhalt mit, wenn ein Balken eine bestimmte Breite haben soll.
   Components mit Inhalt übernehmen dessen Breite, Components ohne Inhalt nutzen
   eine Standardbreite.
+- Gib einem Image ohne feste Größe ein `aspectRatio`. Das Skeleton lädt das Bild
+  nicht, kennt sein Seitenverhältnis also nicht und nimmt sonst 16:9 an.
 - Nimm bereits geladene Bereiche mit `isEnabled={false}` aus dem Skeleton
   heraus.
 - Setze den SkeletonMode nur für das initiale, kurzzeitige Laden ein. Für andere
@@ -47,6 +49,20 @@ als echte Oberfläche dar – etwa eine Überschrift, die schon vor den Daten
 feststeht.
 
 <LiveCodeEditor example="partially-loaded" editorCollapsed />
+
+---
+
+# Bilder, Badges und Buttons
+
+Avatare, Icons, Images, Badges und Buttons behalten Form und Größe und werden zu
+einer Fläche. Ihr Inhalt ist ausgeblendet, ein Text in einem Button oder Badge
+zeigt keinen eigenen Balken. Ein Image lädt im SkeletonMode nichts. Es nimmt die
+Größe aus `width` und `height`. Eine fehlende Angabe ergibt sich aus
+`aspectRatio`, sonst aus dem Seitenverhältnis 16:9. Ohne beide Angaben füllt es
+die verfügbare Breite. Buttons, als Button gestaltete Links und
+ContextMenu-Trigger lassen sich nicht bedienen.
+
+<LiveCodeEditor example="visual" editorCollapsed />
 
 ---
 
