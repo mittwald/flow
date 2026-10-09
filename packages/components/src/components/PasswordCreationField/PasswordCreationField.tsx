@@ -40,7 +40,6 @@ import {
 } from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
 import { joinIds, useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
@@ -191,7 +190,6 @@ export const PasswordCreationField = flowComponent(
       renderedFieldErrorId,
       skeletonProps,
     } = useFieldComponent(props, "PasswordCreationField");
-    const isSkeleton = useSkeletonMode();
 
     /**
      * The result for a valid password appears after the asynchronous policy
@@ -288,11 +286,6 @@ export const PasswordCreationField = flowComponent(
       Label: {
         ...fieldPropsContext.Label,
         children: dynamic((localProps) => {
-          // The label bar takes the width of the label text alone.
-          if (isSkeleton) {
-            return localProps.children;
-          }
-
           return (
             <>
               {localProps.children}
@@ -337,7 +330,6 @@ export const PasswordCreationField = flowComponent(
               value,
               policyValidationResult,
               isEmptyValue,
-              isSkeleton,
             ]}
           >
             {children}

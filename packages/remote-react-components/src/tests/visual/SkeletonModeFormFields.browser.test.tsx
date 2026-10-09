@@ -1,13 +1,12 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
+import { SkeletonComparison } from "@/tests/lib/SkeletonComparison";
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode input fields (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
+  async ({ testScreenshot, render, components }) => {
+    const {
       SkeletonMode,
       Section,
       ColumnLayout,
@@ -28,10 +27,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       DateRangePicker,
       TimeField,
       FileField,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <ColumnLayout m={[1, 1, 1]}>
             <TextField defaultValue="wordpress_prod" isRequired>
@@ -95,7 +94,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             </TextField>
           </SkeletonMode>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode input fields");
@@ -104,10 +103,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode choice fields (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
+  async ({ testScreenshot, render, components }) => {
+    const {
       SkeletonMode,
       Section,
       ColumnLayout,
@@ -124,10 +121,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       Radio,
       RadioButton,
       Switch,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <ColumnLayout m={[1, 1]}>
             <Slider defaultValue={20} minValue={5} maxValue={100}>
@@ -170,7 +167,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <Switch>Wartungsmodus</Switch>
           </SkeletonMode>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode choice fields");

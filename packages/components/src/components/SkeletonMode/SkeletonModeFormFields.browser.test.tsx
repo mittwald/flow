@@ -346,7 +346,11 @@ test("the buttons inside a field are hidden", async () => {
   );
   await expect.element(status()).toBeInTheDocument();
 
-  const buttons = [...document.querySelectorAll("button")];
+  // Buttons in the label row (PasswordCreationField's generate button) are
+  // not part of the control; they follow the Button rule.
+  const buttons = [...document.querySelectorAll("button")].filter(
+    (button) => !button.closest("label"),
+  );
   expect(buttons.length).toBeGreaterThanOrEqual(7);
   expect(buttons.map((button) => getComputedStyle(button).visibility)).toEqual(
     buttons.map(() => "hidden"),
