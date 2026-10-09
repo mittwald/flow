@@ -11,6 +11,15 @@ inputs:
 runs:
   using: composite
   steps:
+    # Browser builds and .debs differ per Ubuntu release, so both caches are
+    # keyed on it: `ubuntu-latest` moves from 24.04 to 26.04.
+    - name: Read the OS release
+      id: os
+      shell: bash
+      run: |
+        . /etc/os-release
+        echo "release=$ID$VERSION_ID" >> "$GITHUB_OUTPUT"
+
     # One key per browser, and apart from the visual workflows' cache, which
     # holds both browsers: under one shared key whichever job saved first would
     # decide what the others find.
@@ -19,10 +28,10 @@ runs:
       with:
         path: ~/.cache/ms-playwright
         key:
-          playwright-${{ inputs.browser }}-${{ runner.os }}-${{
+          playwright-${{ inputs.browser }}-${{ steps.os.outputs.release }}-${{
           hashFiles('pnpm-lock.yaml') }}
         restore-keys: |
-          playwright-${{ inputs.browser }}-${{ runner.os }}-
+          playwright-${{ inputs.browser }}-${{ steps.os.outputs.release }}-
 
     # `--with-deps` downloads ~120 MB of .debs on every job, and a slow Ubuntu
     # mirror can stretch that past the job timeout. Restored, apt finds them in
@@ -34,7 +43,8 @@ runs:
       uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
         path: ~/.cache/playwright-debs
-        key: playwright-${{ inputs.browser }}-debs-${{ runner.os }}-
+        key:
+          playwright-${{ inputs.browser }}-debs-${{ steps.os.outputs.release }}-
 
     # apt reuses a .deb in its archive when name, version and checksum match,
     # and downloads only the rest. `autoclean` drops versions the mirror no
@@ -50,7 +60,7 @@ runs:
         sudo apt-get autoclean -qq
         rm -f "$debs"/*.deb
         find /var/cache/apt/archives -maxdepth 1 -name '*.deb' -exec cp -t "$debs" {} +
-        echo "key=playwright-${{ inputs.browser }}-debs-${{ runner.os }}-$(ls "$debs" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+        echo "key=playwright-${{ inputs.browser }}-debs-${{ steps.os.outputs.release }}-$(ls "$debs" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
 
     # Saves only a package set the cache does not hold yet.
     - name: Save the system packages
