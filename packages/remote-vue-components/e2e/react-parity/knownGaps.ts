@@ -32,6 +32,8 @@ export const unsupportedScenarios: Record<string, string> = {
   Section: "The scenario defines a React component with useState.",
   "Section growing inside a LayoutCard":
     "The scenario defines a React component with useState.",
+  "SkeletonMode visual":
+    "The scenario wraps its tree in SkeletonComparison, a React component of the corpus's test library.",
   IntlProvider:
     "There is no Vue IntlProvider: React's sets the locale for what renders locally, and a Vue app renders nothing locally. useLanguage() reports the host's.",
 };
