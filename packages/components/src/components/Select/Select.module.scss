@@ -27,6 +27,11 @@
     }
   }
 
+  /* Skeleton: as specific as the invalid state above, and after it */
+  &[data-skeleton] .toggle {
+    @include formControl.formSkeletonShape;
+  }
+
   :global(.react-aria-SelectValue) {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -49,4 +49,9 @@
   .content {
     grid-area: content;
   }
+
+  /* Skeleton: as specific as the invalid state above, and after it */
+  &[data-skeleton] .checkbox .input {
+    @include formControl.formSkeletonShape;
+  }
 }

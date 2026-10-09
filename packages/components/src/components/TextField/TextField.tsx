@@ -51,6 +51,7 @@ export const TextField = flowComponent("TextField", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "TextField");
 
   const rootClassName = clsx(wrapperProps.className, className);
@@ -95,6 +96,7 @@ export const TextField = flowComponent("TextField", (props) => {
     <Aria.TextField
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       className={rootClassName}
       onChange={handleChange}
       type={type}

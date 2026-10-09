@@ -13,6 +13,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
 
 export interface SliderProps
   extends
@@ -60,6 +61,7 @@ export const Slider = flowComponent("Slider", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "Slider");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Slider");
@@ -79,7 +81,7 @@ export const Slider = flowComponent("Slider", (props) => {
   };
 
   return (
-    <div className={wrapperProps.className}>
+    <div {...skeletonProps} className={wrapperProps.className}>
       <Aria.Slider
         {...rest}
         className={rootClassName}
@@ -92,7 +94,13 @@ export const Slider = flowComponent("Slider", (props) => {
 
           {!sliderOnly && (
             <div className={styles.text}>
-              <Aria.SliderOutput className={styles.value} />{" "}
+              <Aria.SliderOutput className={styles.value}>
+                {({ defaultChildren }) => (
+                  <SkeletonTextContent defaultWidth="2em">
+                    {defaultChildren}
+                  </SkeletonTextContent>
+                )}
+              </Aria.SliderOutput>{" "}
               <UiComponentTunnelExit id="label" component="Slider" />
             </div>
           )}

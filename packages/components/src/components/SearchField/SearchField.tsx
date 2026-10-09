@@ -32,6 +32,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "SearchField");
 
   const rootClassName = clsx(
@@ -59,6 +60,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     <Aria.SearchField
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       aria-label={searchText}
       className={clsx(rootClassName, wrapperProps.className)}
     >

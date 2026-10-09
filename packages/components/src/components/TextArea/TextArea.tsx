@@ -74,6 +74,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "TextArea");
 
   let { allowResize } = props;
@@ -180,6 +181,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     <Aria.TextField
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       value={value}
       className={rootClassName}
       onChange={handleChange}

@@ -26,6 +26,7 @@ export const TimeField = flowComponent("TimeField", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "TimeField");
 
   return (
@@ -34,6 +35,7 @@ export const TimeField = flowComponent("TimeField", (props) => {
       {...rest}
       {...wrapperProps}
       {...controlProps}
+      {...skeletonProps}
     >
       <FieldErrorCaptureContext>
         <DateInput className={styles.dateInput} ref={ref} />

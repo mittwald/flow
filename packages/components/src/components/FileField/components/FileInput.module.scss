@@ -1,7 +1,12 @@
+@use "@/styles/mixins/formControl";
+
 .trigger {
   order: 2;
 
   &[data-disabled="true"] ~ .fieldDescription {
     color: var(--label--color--disabled);
   }
+
+  /* Skeleton: the button is the control of the field */
+  @include formControl.formSkeleton(var(--button--corner-radius));
 }

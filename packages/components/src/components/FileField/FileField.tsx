@@ -48,6 +48,7 @@ export const FileField = flowComponent("FileField", (props) => {
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "FileField");
 
   const inputRef = useObjectRef(ref);
@@ -74,7 +75,10 @@ export const FileField = flowComponent("FileField", (props) => {
   };
 
   return (
-    <div className={clsx(wrapperProps.className, styles.fileField)}>
+    <div
+      {...skeletonProps}
+      className={clsx(wrapperProps.className, styles.fileField)}
+    >
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={fieldPropsContext}>

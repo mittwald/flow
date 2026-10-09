@@ -14,6 +14,7 @@ import { Alert } from "@/components/Alert";
 import { Heading } from "@/components/Heading";
 import { FieldErrorRenderedContext } from "@/lib/hooks/fieldErrorRenderedContext";
 import { useObjectRef } from "react-aria";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface FieldErrorProps
   extends
@@ -28,6 +29,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
   const { children, className, ref, renderAlert, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
+  const isSkeleton = useSkeletonMode();
   const fieldValidation = useContext(FieldErrorContext);
   const reportRendered = useContext(FieldErrorRenderedContext);
   const hasChildren = React.Children.count(children) >= 1;
@@ -35,6 +37,8 @@ export const FieldError = flowComponent("FieldError", (props) => {
   // Inside a field the field decides whether there is an error – children only
   // provide its message. Without a field, children are the error.
   const isInvalid = fieldValidation ? fieldValidation.isInvalid : hasChildren;
+  // A skeleton claims no state, and an error is one.
+  const isShown = isInvalid && !isSkeleton;
 
   // Never mutate the context's errors: for a valid field react-aria hands out
   // one module-level array shared by every field of the page.
@@ -66,14 +70,14 @@ export const FieldError = flowComponent("FieldError", (props) => {
   const localRef = useObjectRef(ref);
   useLayoutEffect(() => {
     const element = localRef.current;
-    if (!reportRendered || !isInvalid || !element?.isConnected || !element.id) {
+    if (!reportRendered || !isShown || !element?.isConnected || !element.id) {
       return;
     }
     reportRendered(element.id);
     return () => reportRendered(undefined);
-  }, [reportRendered, isInvalid, rest.id, localRef]);
+  }, [reportRendered, isShown, rest.id, localRef]);
 
-  if (!isInvalid) {
+  if (!isShown) {
     return undefined;
   }
 

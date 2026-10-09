@@ -73,3 +73,8 @@
     align-self: stretch;
   }
 }
+
+/* Skeleton: as specific as the disabled state above, and after it */
+.searchField[data-skeleton] .inputContainer {
+  @include formControl.formSkeletonShape;
+}

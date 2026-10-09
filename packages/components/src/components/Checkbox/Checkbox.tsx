@@ -12,6 +12,11 @@ import styles from "./Checkbox.module.scss";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "react-aria";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface CheckboxProps
   extends
@@ -33,12 +38,39 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "Checkbox");
 
   const inputRef = useObjectRef(ref);
+  const isSkeleton = useSkeletonMode();
+
+  const checkedIcon = <IconCheckboxChecked className={styles.icon} />;
+  const indeterminateIcon = (
+    <IconCheckboxIndeterminate className={styles.icon} />
+  );
+  const emptyIcon = <IconCheckboxEmpty className={styles.icon} />;
+
+  const renderIcon = (isSelected: boolean, isIndeterminate: boolean) => {
+    const icon = isSelected
+      ? checkedIcon
+      : isIndeterminate
+        ? indeterminateIcon
+        : emptyIcon;
+
+    const skeletonIcon = (
+      <span className={styles.skeletonIcon}>
+        <SkeletonModeReset>{icon}</SkeletonModeReset>
+      </span>
+    );
+
+    return isSkeleton ? skeletonIcon : icon;
+  };
 
   return (
-    <div className={clsx(styles.checkbox, className, wrapperProps.className)}>
+    <div
+      {...skeletonProps}
+      className={clsx(styles.checkbox, className, wrapperProps.className)}
+    >
       <FieldErrorCaptureContext>
         <Aria.Checkbox
           {...rest}
@@ -48,14 +80,8 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
         >
           {({ isSelected, isIndeterminate }) => (
             <PropsContextProvider props={fieldPropsContext}>
-              {isSelected ? (
-                <IconCheckboxChecked className={styles.icon} />
-              ) : isIndeterminate ? (
-                <IconCheckboxIndeterminate className={styles.icon} />
-              ) : (
-                <IconCheckboxEmpty className={styles.icon} />
-              )}
-              {children}
+              {renderIcon(isSelected, isIndeterminate)}
+              <SkeletonRawText>{children}</SkeletonRawText>
             </PropsContextProvider>
           )}
         </Aria.Checkbox>

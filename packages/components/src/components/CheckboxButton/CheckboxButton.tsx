@@ -7,6 +7,10 @@ import { Checkbox } from "@/components/Checkbox";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface CheckboxButtonProps
   extends CheckboxProps, FlowComponentProps<HTMLInputElement> {}
@@ -21,7 +25,10 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
     controlProps,
     FieldErrorView,
     FieldErrorCaptureContext,
+    skeletonProps,
   } = useFieldComponent(props, "CheckboxButton");
+
+  const isSkeleton = useSkeletonMode();
 
   const mergedPropsContext: PropsContext = {
     Text: {
@@ -33,21 +40,29 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
     ...fieldPropsContext,
   };
 
+  const checkbox = (
+    <Checkbox
+      {...rest}
+      aria-describedby={controlProps["aria-describedby"]}
+      className={styles.checkbox}
+      inputClassName={clsx(inputClassName, styles.input)}
+    >
+      <PropsContextProvider props={mergedPropsContext}>
+        {children}
+      </PropsContextProvider>
+    </Checkbox>
+  );
+
+  /* The whole button is the surface, its content draws no bars. */
+  const skeletonCheckbox = <SkeletonModeReset>{checkbox}</SkeletonModeReset>;
+
   return (
     <div
+      {...skeletonProps}
       className={clsx(wrapperProps.className, styles.checkboxButton, className)}
     >
       <FieldErrorCaptureContext>
-        <Checkbox
-          {...rest}
-          aria-describedby={controlProps["aria-describedby"]}
-          className={styles.checkbox}
-          inputClassName={clsx(inputClassName, styles.input)}
-        >
-          <PropsContextProvider props={mergedPropsContext}>
-            {children}
-          </PropsContextProvider>
-        </Checkbox>
+        {isSkeleton ? skeletonCheckbox : checkbox}
       </FieldErrorCaptureContext>
       <FieldErrorView />
     </div>

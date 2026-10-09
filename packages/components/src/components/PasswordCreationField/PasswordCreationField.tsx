@@ -188,6 +188,7 @@ export const PasswordCreationField = flowComponent(
       controlProps,
       fieldPropsContext,
       renderedFieldErrorId,
+      skeletonProps,
     } = useFieldComponent(props, "PasswordCreationField");
 
     /**
@@ -306,6 +307,7 @@ export const PasswordCreationField = flowComponent(
     return (
       <Aria.TextField
         {...rest}
+        {...skeletonProps}
         aria-describedby={describedBy}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}

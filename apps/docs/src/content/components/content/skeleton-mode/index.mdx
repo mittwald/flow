@@ -66,6 +66,26 @@ ContextMenu-Trigger lassen sich nicht bedienen.
 
 ---
 
+# Formularfelder
+
+Formularfelder behalten ihre Größe. Label und FieldDescription werden zu Balken,
+das Eingabefeld oder Steuerelement – etwa die Box einer
+[Checkbox](/components/form-controls/checkbox) oder der Track eines
+[Switch](/components/form-controls/switch) – wird zu einer Fläche. Ein
+FieldError wird nicht angezeigt, auch wenn das Feld ungültig ist.
+
+- Die Felder sind nicht fokussierbar und nehmen keine Eingaben an. Auch Popover
+  wie das Kalender-Popover des
+  [DatePicker](/components/form-controls/date-picker) oder die Optionen eines
+  [Select](/components/form-controls/select) öffnen sich nicht.
+- Die Felder behalten ihr echtes `input`. Wird ein Formular während des Ladens
+  abgeschickt, sendet es die leeren Werte der Felder. Verhindere das Absenden,
+  solange der SkeletonMode aktiv ist.
+
+<LiveCodeEditor example="form-fields" editorCollapsed />
+
+---
+
 # Properties
 
 <PropertiesTables />
