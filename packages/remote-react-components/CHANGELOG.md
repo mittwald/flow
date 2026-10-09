@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.37](https://github.com/mittwald/flow/compare/1.5.0-next.36...1.5.0-next.37) (2026-10-09)
+
+### Tests
+
+* **SkeletonMode:** pin the cross-version gate to 1.5.0-next.31 ([957f5ac](https://github.com/mittwald/flow/commit/957f5acc7aa29022c5bbcefff051160738cc5516)), closes [#3317](https://github.com/mittwald/flow/issues/3317)
+
 ## [1.5.0-next.36](https://github.com/mittwald/flow/compare/1.5.0-next.35...1.5.0-next.36) (2026-10-09)
 
 ### Features
