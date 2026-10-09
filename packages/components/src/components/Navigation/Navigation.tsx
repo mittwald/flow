@@ -11,6 +11,7 @@ import {
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
 import { containsTextChild } from "@/lib/react/remote";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
 
 export interface NavigationProps
   extends
@@ -23,9 +24,15 @@ export interface NavigationProps
  * the label an element the item can truncate.
  */
 const wrapTextInLabel = (children: ReactNode): ReactNode =>
-  Children.map(children, (child) =>
-    containsTextChild(child) ? <span>{child}</span> : child,
-  );
+  Children.map(children, (child) => {
+    const label = (
+      <span>
+        <SkeletonTextContent defaultWidth="6em">{child}</SkeletonTextContent>
+      </span>
+    );
+
+    return containsTextChild(child) ? label : child;
+  });
 
 /** @flr-generate all */
 export const Navigation = flowComponent("Navigation", (props) => {

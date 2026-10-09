@@ -338,7 +338,7 @@ compiles against. A bare `vitest run` skips it and renders against whatever
 is simply absent, and CSS drops every declaration referencing it without a
 warning (#3194).
 
-Three traps cost time in every new browser test:
+Four traps cost time in every new browser test:
 
 - **Click the label, not the control.** `Checkbox`, `Radio`, `Switch` and
   `Rating` stack their icons on top of a visually hidden input, so playwright
@@ -355,6 +355,15 @@ Three traps cost time in every new browser test:
   `render()` runs before React has committed and reads `null`. That turns an
   assertion that something is _absent_ into a silent pass, so give any helper
   that queries the DOM directly a guard that throws when its element is missing.
+- **A pointer left behind hovers the next render.** The pointer stays where the
+  last test left it, and that can be the previous file: each browser page runs
+  file after file, in parallel runs too. Firefox hovers what a test renders
+  underneath. The symptom is an `expect.poll` that keeps reading a hover state
+  (a Rating preview, an open tooltip) until "Matcher did not succeed in time".
+  Call `parkPointer()` from `@/lib/dev/parkPointer` in the file's `beforeEach`
+  (`Rating`, `PasswordCreationField`); an `afterEach` leaves the file's first
+  test exposed. It is opt-in on purpose: moving the pointer before every test
+  breaks `Tooltip`'s keyboard-focus test.
 
 ## i18n & a11y
 

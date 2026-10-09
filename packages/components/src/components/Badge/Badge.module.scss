@@ -1,5 +1,6 @@
 @use "@/styles/mixins/focus";
 @use "@/styles/mixins/ellipsis";
+@use "@/styles/mixins/skeleton";
 
 .badge {
   display: flex;
@@ -210,4 +211,14 @@
   @include alphaColor("light");
   @include alphaColor("dark-static");
   @include alphaColor("light-static");
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--badge--corner-radius);
+  }
 }
+
+@include skeleton.keyframes;

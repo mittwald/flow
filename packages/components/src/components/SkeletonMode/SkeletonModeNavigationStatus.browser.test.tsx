@@ -48,12 +48,6 @@ const bars = () =>
     )
     .map((bar) => bar.textContent);
 
-/**
- * `Text emulateBoldWidth` renders its content twice, the second copy invisible
- * and bold, so a bar around it carries the label twice.
- */
-const emulatedBold = (label: string) => `${label}${label}`;
-
 const iconSurfaceSelector = `.${surfaceStyles.skeletonIconSurface}`;
 
 const iconSurfaces = () => document.querySelectorAll(iconSurfaceSelector);
@@ -140,10 +134,7 @@ test("HeaderNavigation items become inert bars without an underline", async () =
     </HeaderNavigation>,
   );
 
-  expect(bars()).toEqual([
-    emulatedBold("Projekte"),
-    emulatedBold("Organisationen"),
-  ]);
+  expect(bars()).toEqual(["Projekte", "Organisationen"]);
   expect(document.querySelectorAll("[aria-current]")).toHaveLength(0);
 
   const [current, other] = queryPair("nav li > span");
@@ -164,7 +155,7 @@ test("TabNavigation items and the more menu are inert", async () => {
     </TabNavigation>,
   );
 
-  expect(bars()).toEqual([emulatedBold("Übersicht"), emulatedBold("Backups")]);
+  expect(bars()).toEqual(["Übersicht", "Backups"]);
   expect(document.querySelectorAll("[aria-current]")).toHaveLength(0);
 
   const [current, other] = queryPair("nav li > span");
