@@ -7,4 +7,3 @@ export const getContainerBreakpointSizeClassName = (
   containerBreakpointSize: ContainerBreakpointSize,
 ): ContainerBreakpointSizeClassName =>
   `container-breakpoint-size-${containerBreakpointSize}`;
-// TEMP(ci): touches the components to run the browser suites — drop before merge
