@@ -24,7 +24,9 @@ export const ViewModeAccordion: FC<Props> = (props) => {
 
   return (
     <AccordionView defaultExpanded={expandAccordions}>
-      <HeadingView>{stringFormatter.format("settings.viewMode")}</HeadingView>
+      <HeadingView level={3}>
+        {stringFormatter.format("settings.viewMode")}
+      </HeadingView>
       <ContentView>
         <RadioGroupView value={selectedViewMode} m={[1, 1]}>
           {availableViewModes.map((v) => (

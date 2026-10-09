@@ -7,7 +7,16 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, Accordion, Heading, Content, Label },
+    components: {
+      Flex,
+      Accordion,
+      Heading,
+      Content,
+      Text,
+      Label,
+      Badge,
+      AlertBadge,
+    },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -16,15 +25,26 @@ test.each(testEnvironments)(
           <Content>Content</Content>
         </Accordion>
         <Accordion defaultExpanded>
-          <Heading>Default Expanded</Heading>
+          <Heading>
+            Default Expanded
+            <Badge>3 open</Badge>
+            <AlertBadge status="warning">Overdue</AlertBadge>
+          </Heading>
+          <Content>Content</Content>
+        </Accordion>
+        <Accordion>
+          <Text>Text</Text>
+          <Content>Content</Content>
+        </Accordion>
+        <Accordion>
+          <Text>
+            Text with badge
+            <Badge>Beta</Badge>
+          </Text>
           <Content>Content</Content>
         </Accordion>
         <Accordion>
           <Label>Label</Label>
-          <Content>Content</Content>
-        </Accordion>
-        <Accordion variant="outline">
-          <Heading>Outline</Heading>
           <Content>Content</Content>
         </Accordion>
       </Flex>,
@@ -83,5 +103,51 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Accordion edge cases");
+  },
+);
+
+test.each(testEnvironments)(
+  "AccordionGroup (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Section, AccordionGroup, Accordion, Heading, Content, Text },
+  }) => {
+    await render(
+      <>
+        <Section>
+          <Heading>Separators</Heading>
+          <AccordionGroup defaultExpandedKeys={["second"]}>
+            <Accordion>
+              <Heading>First</Heading>
+              <Content>Content</Content>
+            </Accordion>
+            <Accordion id="second">
+              <Heading>Second</Heading>
+              <Content>Content</Content>
+            </Accordion>
+            <Accordion>
+              <Heading>Third</Heading>
+              <Content>Content</Content>
+            </Accordion>
+          </AccordionGroup>
+        </Section>
+        <Section>
+          <Heading>Without separators</Heading>
+          <AccordionGroup separators={false}>
+            <Accordion>
+              <Text>First</Text>
+              <Content>Content</Content>
+            </Accordion>
+            <Accordion>
+              <Text>Second</Text>
+              <Content>Content</Content>
+            </Accordion>
+          </AccordionGroup>
+        </Section>
+      </>,
+    );
+
+    await testScreenshot("AccordionGroup");
   },
 );

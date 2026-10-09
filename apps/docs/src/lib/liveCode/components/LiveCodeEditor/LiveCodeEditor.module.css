@@ -12,6 +12,7 @@
   }
 
   > :global(.flow--accordion),
+  > :global(.flow--accordion-group),
   > :global(.flow--action-group),
   > :global(.flow--breadcrumb),
   > :global(.flow--code-block),

@@ -1,0 +1,39 @@
+.accordionGroup {
+  display: flex;
+  flex-direction: column;
+
+  /* The gap around each toggle; Section subtracts it from its heading
+     spacing as well. */
+  --accordion-group--toggle-gap: var(--size-px--xs);
+
+  /* Elements */
+
+  /* The toggles keep a small gap to each other and to the separators, the
+     way menu items do. Selecting every child but the content panel matches
+     the header whichever class it carries, and leaves accordions nested in
+     the content out. */
+  .accordion > :not(:global(.flow--accordion--content)) {
+    padding-block: var(--accordion-group--toggle-gap);
+  }
+
+  /* The gap above already counts towards the heading-to-content spacing. */
+  .accordion
+    > :global(.flow--accordion--content)
+    > :global(.flow--accordion--content-inner) {
+    $spacing: var(--accordion--header-to-content-spacing);
+    $toggle-padding: var(--toggle-padding-y);
+    $gap: var(--accordion-group--toggle-gap);
+
+    padding-block-start: calc($spacing - $toggle-padding - $gap);
+  }
+
+  /* Variants */
+
+  /* The accordion reaches past the content edge, the separator does not. */
+  &.separators .accordion + .accordion::before {
+    content: "";
+    margin-inline: var(--accordion--padding-x);
+    border-block-start: var(--separator--height) var(--separator--border-style)
+      var(--separator--color);
+  }
+}
