@@ -813,3 +813,30 @@ test("outside SkeletonMode nothing changes", async () => {
   expect(document.querySelector("[class*='skeleton']")).toBeNull();
   expect(document.querySelector("[role='progressbar']")).not.toBeNull();
 });
+
+test("a truncated text shows no ellipsis over its bar", async () => {
+  await render(
+    <div style={{ width: 240 }}>
+      <SkeletonMode>
+        <FileCard
+          name="rechnung-2026-09-webshop-relaunch-mittwald.pdf"
+          type="application/pdf"
+        />
+      </SkeletonMode>
+    </div>,
+  );
+
+  await expect
+    .poll(() => document.querySelector("[class*=skeleton-text-content]"))
+    .toBeTruthy();
+
+  const bar = document.querySelector("[class*=skeleton-text-content]");
+  let truncating = bar?.parentElement;
+  while (truncating && getComputedStyle(truncating).whiteSpace !== "nowrap") {
+    truncating = truncating.parentElement;
+  }
+  if (!truncating) {
+    throw new Error("No truncating ancestor found");
+  }
+  expect(getComputedStyle(truncating).textOverflow).toBe("clip");
+});

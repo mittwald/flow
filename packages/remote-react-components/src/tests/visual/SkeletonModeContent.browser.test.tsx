@@ -3,6 +3,7 @@ import { expect, test } from "vitest";
 import { page } from "vitest/browser";
 import gopher from "@/tests/assets/gopher.webp";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
+import { SkeletonComparison } from "@/tests/lib/SkeletonComparison";
 
 const nginxConfig = `server {
   listen 443 ssl;
@@ -21,11 +22,8 @@ const markdown = [
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode content (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      SkeletonMode,
+  async ({ testScreenshot, render, components }) => {
+    const {
       Section,
       Flex,
       Text,
@@ -40,10 +38,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       FileField,
       Button,
       IconUpload,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <Flex gap="m" align="center">
             <Text>Kopieren mit</Text>
@@ -85,7 +83,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             />
           </FileCardList>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode content");
@@ -94,19 +92,17 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode code and markdown (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { SkeletonMode, Section, CodeBlock, Markdown },
-  }) => {
+  async ({ testScreenshot, render, components }) => {
+    const { Section, CodeBlock, Markdown } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <CodeBlock code={nginxConfig} />
           <CodeBlock>ssh p-4711@ssh.example-domain.de</CodeBlock>
           <Markdown>{markdown}</Markdown>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode code and markdown");
@@ -115,11 +111,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode chat (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      SkeletonMode,
+  async ({ testScreenshot, render, components }) => {
+    const {
       Text,
       Avatar,
       Initials,
@@ -128,10 +121,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       Message,
       Header,
       Content,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Chat height={220}>
           <MessageThread>
             <Message>
@@ -155,7 +148,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             </Message>
           </MessageThread>
         </Chat>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode chat");
@@ -164,11 +157,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode charts and editors (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      SkeletonMode,
+  async ({ testScreenshot, render, components }) => {
+    const {
       Section,
       ColumnLayout,
       CartesianChart,
@@ -180,10 +170,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       MarkdownEditor,
       Label,
       FieldDescription,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <ColumnLayout m={[2, 1]}>
             <CartesianChart
@@ -214,7 +204,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <Label>Hinweis für das Team</Label>
           </MarkdownEditor>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode charts and editors");
@@ -223,18 +213,16 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode cropper and calendar (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { SkeletonMode, Flex, ImageCropper, RangeCalendar },
-  }) => {
+  async ({ testScreenshot, render, components }) => {
+    const { Flex, ImageCropper, RangeCalendar } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Flex gap="xl" align="start">
           <ImageCropper image={gopher} width={240} height={160} />
           <RangeCalendar aria-label="Zeitraum" />
         </Flex>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode cropper and calendar");
@@ -243,11 +231,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode lists and tables (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      SkeletonMode,
+  async ({ testScreenshot, render, components }) => {
+    const {
       Section,
       Heading,
       Text,
@@ -261,12 +246,12 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       TableRow,
       TableCell,
       typedList,
-    },
-  }) => {
+    } = components;
+
     const DomainList = typedList<{ hostname: string; type: string }>();
 
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <DomainList.List aria-label="Domains">
             <DomainList.StaticData
@@ -309,7 +294,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             </TableBody>
           </Table>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode lists and tables");

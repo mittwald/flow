@@ -4,4 +4,13 @@
   @include skeleton.text;
 }
 
+/* An ancestor that truncates the text paints its ellipsis in its own color,
+   outside the bar. The bar sits one level deeper when a flex parent needs an
+   outer span. `!important`: the truncation comes from the component, with any
+   specificity. */
+*:has(> .skeletonTextContent),
+*:has(> * > .skeletonTextContent) {
+  text-overflow: clip !important;
+}
+
 @include skeleton.keyframes;
