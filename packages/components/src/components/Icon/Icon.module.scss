@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .icon {
   flex-shrink: 0;
   max-width: none;
@@ -58,4 +60,14 @@
   @include color("light");
   @include color("dark-static");
   @include color("light-static");
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--corner-radius--s);
+  }
 }
+
+@include skeleton.keyframes;

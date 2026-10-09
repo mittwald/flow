@@ -19,5 +19,6 @@ declare const classNames: {
   readonly light: "light";
   readonly "dark-static": "dark-static";
   readonly "light-static": "light-static";
+  readonly skeleton: "skeleton";
 };
 export default classNames;
