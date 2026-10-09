@@ -125,6 +125,32 @@ test("drops a DesignTokenTable with an unknown path", () => {
   expect(convert('<DesignTokenTable path="color.nope" />\n')).toBe("\n");
 });
 
+test("expands a ComponentTokenTable to the component's tokens", () => {
+  const filePath = path.join(dir, "index.mdx");
+  fs.writeFileSync(filePath, "<ComponentTokenTable />\n");
+  const markdown = mdxToMarkdown(filePath, { componentName: "Button" });
+
+  expect(markdown).toContain("## Größen & Stile");
+  expect(markdown).toContain("| `--button--padding-x` | `16px` |");
+  expect(markdown).toContain("## Farben");
+  expect(markdown).toContain("| Token | Light | Dark |");
+  expect(markdown).toMatch(
+    /\| `--button--pending-icon-color` \| `#\w+` \| `#\w+` \|/,
+  );
+});
+
+test("expands a ComponentTokenTable to the namespaces in tokens", () => {
+  const filePath = path.join(dir, "index.mdx");
+  fs.writeFileSync(
+    filePath,
+    '<ComponentTokenTable tokens="list, list-item" />\n',
+  );
+  const markdown = mdxToMarkdown(filePath, { componentName: "List" });
+
+  expect(markdown).toContain("`--list--");
+  expect(markdown).toContain("`--list-item--");
+});
+
 test("keeps inline code untouched by JSX stripping", () => {
   expect(convert("Nutze `<Button />` dafür.\n")).toBe(
     "Nutze `<Button />` dafür.\n",
