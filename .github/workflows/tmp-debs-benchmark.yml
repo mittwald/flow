@@ -1,0 +1,43 @@
+# TEMP — benchmark for PR #3433, removed before merge.
+name: TEMP .deb fetch benchmark
+on:
+  push:
+    branches:
+      - claude/cache-playwright-webkit-debs
+
+permissions:
+  contents: read
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        run: [1, 2, 3, 4, 5, 6]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - name: Benchmark apt alone vs. parallel fetch (cold, separate archives)
+        shell: bash
+        run: |
+          apt_alone() {
+            mkdir -p /tmp/apt-a/partial
+            pkgs=$(pnpm exec playwright install-deps --dry-run webkit | sed -n 's/^  //p')
+            s=$SECONDS
+            sudo timeout 15m apt-get install -y -qq --download-only --no-install-recommends \
+              -o Dir::Cache::Archives=/tmp/apt-a/ $pkgs > /tmp/apt-a.log 2>&1
+            echo "apt alone: exit $? in $((SECONDS - s)) s, $(ls /tmp/apt-a/*.deb | wc -l) debs, $(du -sm /tmp/apt-a | cut -f1) MB"
+            grep "Fetched" /tmp/apt-a.log
+          }
+          parallel() {
+            mkdir -p /tmp/apt-b/partial
+            s=$SECONDS
+            ARCHIVES=/tmp/apt-b .github/actions/install-playwright/fetch-debs.sh webkit
+            echo "parallel fetch: $((SECONDS - s)) s total, $(ls /tmp/apt-b/*.deb | wc -l) debs, $(du -sm /tmp/apt-b | cut -f1) MB"
+          }
+          sudo apt-get update -qq
+          if [ $(( ${{ matrix.run }} % 2 )) -eq 1 ]; then apt_alone; parallel; else parallel; apt_alone; fi
