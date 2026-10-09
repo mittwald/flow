@@ -1,12 +1,10 @@
+import type { ListSettingsOperationOptions } from "@mittwald/flow-components-base";
 import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
 import type { ListSettingsStorageShape } from "./types";
 import type List from "./List";
 import z from "zod";
 
-export interface ListSettingsStoreOperationOptions {
-  autosave?: boolean;
-  manualSave?: boolean;
-}
+export type ListSettingsStoreOperationOptions = ListSettingsOperationOptions;
 
 const supportedSettings = {
   activeFilters: {

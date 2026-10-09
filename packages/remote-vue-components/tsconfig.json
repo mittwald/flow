@@ -1,0 +1,13 @@
+{
+  /*
+   * `src/tests` is type-checked by `tsconfig.vite.json` instead. It reuses the
+   * React package's test tooling (`serializedConnection`), which lies outside
+   * this config's `rootDir`; nothing outside `src/tests` imports it.
+   */
+  "exclude": [
+    "${configDir}/node_modules",
+    "${configDir}/dist",
+    "${configDir}/src/tests"
+  ],
+  "extends": "@mittwald/typescript-config/web-library.json"
+}

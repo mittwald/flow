@@ -407,6 +407,8 @@ test("isPublishRelevant: package-local non-shipping directories are irrelevant",
     // only under vitest.
     "packages/remote-react-components/dev/cross-version/run.ts",
     "packages/components/dev/vitest/setupBrowser.ts",
+    // The Vue binding's parity runner, invoked only by `test:parity`.
+    "packages/remote-vue-components/dev/react-parity/run.ts",
   ]) {
     assert.equal(isPublishRelevant(path), false, path);
   }
@@ -420,6 +422,9 @@ test("isPublishRelevant: stories and tests are irrelevant wherever they sit", ()
     "packages/components/dev/vite/layerOrderPlugin.test.ts",
     // `.test.` is not always the last extension.
     "packages/remote-react-components/e2e/tests/Button.browser.test.remote.tsx",
+    // Type tests, checked by `tsc --noEmit` only.
+    "packages/components/src/components/List/model/listModel.test-types.ts",
+    "packages/components/src/components/List/typedList.test-types.tsx",
   ]) {
     assert.equal(isPublishRelevant(path), false, path);
   }
@@ -428,7 +433,7 @@ test("isPublishRelevant: stories and tests are irrelevant wherever they sit", ()
 test("isPublishRelevant: package-local build tooling in dev/ stays relevant", () => {
   // `packages/*/dev/**` is NOT irrelevant wholesale: in `components` and
   // `codemods` that directory IS the build. Only the test-harness subtrees are
-  // denylisted, so these four keep publishing.
+  // denylisted, so these keep publishing.
   for (const path of [
     // Imported by vite.build.config.ts — changes the emitted CSS.
     "packages/components/dev/vite/layerOrderPlugin.ts",
@@ -438,6 +443,9 @@ test("isPublishRelevant: package-local build tooling in dev/ stays relevant", ()
     "packages/components/dev/remote-components-generator/lib/propClassifiers.ts",
     // `codemods`' build script is `tsx dev/generateCli.ts && …`.
     "packages/codemods/dev/generateCli.ts",
+    // Generates the Vue icon components the package bundles — the parity
+    // runner beside it is exempt, the rest of that `dev/` is not.
+    "packages/remote-vue-components/dev/icons/generate.ts",
   ]) {
     assert.equal(isPublishRelevant(path), true, path);
   }

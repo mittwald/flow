@@ -1,6 +1,6 @@
 # ADR 0003 – Component lifecycle status
 
-- **Status:** Accepted
+- **Status:** Accepted (extended by ADR 0007, 2026-10-08)
 - **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `@mittwald/flow-react-components`, `apps/docs`, Storybook, and a
@@ -12,6 +12,10 @@
 > overall Flow package version — it is the per-component switch for the semver
 > contract described in
 > [RFC #2711](https://github.com/mittwald/flow/issues/2711).
+
+> **Extended 2026-10-08 by [ADR 0007](0007-beta-packages.md) (beta packages).**
+> `beta` also applies to a whole package, with the same meaning. The registry
+> below stays per component and does not list packages.
 
 ## Context
 
