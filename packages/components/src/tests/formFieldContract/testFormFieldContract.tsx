@@ -30,6 +30,7 @@ export interface FormFieldContractProps<V> {
 }
 
 export type FormFieldContractAspect =
+  | "label"
   | "isDisabled"
   | "isReadOnly"
   | "isRequired"
@@ -39,6 +40,7 @@ export type FormFieldContractAspect =
   | "formSubmission"
   | "uncontrolled"
   | "controlled"
+  | "controlledChange"
   | "ref"
   | "autoFocus"
   | "focusEvents";
@@ -48,15 +50,24 @@ export interface FormFieldContractOptions<V> {
   render: (props: FormFieldContractProps<V>) => ReactElement;
   /** The focusable element that carries the field's ARIA state. */
   getControl: (screen: RenderResult) => Locator;
-  /** Two distinct values the field can hold. */
+  /** Two distinct values the field can hold. `values[0]` submits an entry. */
   values: [V, V];
   /**
    * What the field submits with a form for one of `values`: an entry, several
    * entries under the field's name, or `null` when it submits nothing.
    */
   toFormValue: (value: V) => FormDataEntryValue | FormDataEntryValue[] | null;
-  /** Changes the value from `values[0]` to `values[1]` by user interaction. */
-  changeValue: (screen: RenderResult) => Promise<void>;
+  /**
+   * Changes the value from `values[0]` to `values[1]` by user interaction.
+   * Passes `force` on to every interaction, so the attempt also runs against a
+   * disabled or read-only field instead of waiting for it to become operable.
+   */
+  changeValue: (
+    screen: RenderResult,
+    options: { force: boolean },
+  ) => Promise<void>;
+  /** The inner buttons that change the value. Defaults to all buttons. */
+  getValueButtons?: (screen: RenderResult) => Locator;
   /**
    * Aspects of the contract the field deliberately does not support, each with
    * the reason. Use sparingly — every entry is a gap a user can hit.
@@ -66,6 +77,13 @@ export interface FormFieldContractOptions<V> {
 
 const formId = "form-field-contract";
 const fieldName = "field";
+
+// An Enter in a field submits the form implicitly, which reloads the test page.
+const ContractForm = (props: { children?: ReactNode }) => (
+  <form id={formId} onSubmit={(event) => event.preventDefault()}>
+    {props.children}
+  </form>
+);
 
 const getForm = () => {
   const form = document.getElementById(formId);
@@ -102,6 +120,7 @@ export const testFormFieldContract = <V,>(
     values,
     toFormValue,
     changeValue,
+    getValueButtons = (screen) => screen.getByRole("button"),
     exceptions = {},
   } = options;
 
@@ -109,6 +128,11 @@ export const testFormFieldContract = <V,>(
     const formValue = toFormValue(value);
     return formValue === null ? [] : [formValue].flat();
   };
+
+  // Otherwise the submission checks compare empty lists and always pass.
+  if (toFormEntries(values[0]).length === 0) {
+    throw new Error(`${name}: values[0] has to submit an entry`);
+  }
 
   const field = (
     props: Partial<FormFieldContractProps<V>> = {},
@@ -128,7 +152,7 @@ export const testFormFieldContract = <V,>(
   const renderField = (
     props: Partial<FormFieldContractProps<V>> = {},
     extraChildren?: ReactNode,
-  ) => render(<form id={formId}>{field(props, extraChildren)}</form>);
+  ) => render(<ContractForm>{field(props, extraChildren)}</ContractForm>);
 
   // Updates `value` from `onChange`, like react-hook-form's `Field` does.
   const StatefulField = (props: { onChange: (value: unknown) => void }) => {
@@ -142,8 +166,14 @@ export const testFormFieldContract = <V,>(
     });
   };
 
+  const getControlElement = async (screen: RenderResult) => {
+    const control = getControl(screen);
+    await expect.element(control).toBeInTheDocument();
+    return control.element();
+  };
+
   const getButtons = (screen: RenderResult) =>
-    Array.from(screen.container.querySelectorAll("button"));
+    screen.getByRole("button").elements();
 
   const getLabel = (screen: RenderResult) => {
     const label = screen.container.querySelector(`.${labelStyles.label}`);
@@ -153,12 +183,15 @@ export const testFormFieldContract = <V,>(
     return label;
   };
 
-  const aspect = (
+  const contractTest = (
     aspect: FormFieldContractAspect,
     title: string,
     fn: () => Promise<void>,
   ) => {
     const reason = exceptions[aspect];
+    if (reason?.trim() === "") {
+      throw new Error(`${name}: the "${aspect}" exception needs a reason`);
+    }
     if (reason !== undefined) {
       // Fails the run once the aspect passes, so a fixed gap drops its entry.
       test.fails(`${title} (not supported: ${reason})`, fn);
@@ -168,63 +201,86 @@ export const testFormFieldContract = <V,>(
   };
 
   describe(`${name} form field contract`, () => {
-    aspect(
+    contractTest("label", "Label names the control", async () => {
+      const screen = await renderField();
+
+      await expect.element(getControl(screen)).toHaveAccessibleName(/Label/);
+    });
+
+    contractTest(
       "isDisabled",
       "isDisabled disables control, inner buttons and label",
       async () => {
+        const onChange = vi.fn();
         const screen = await renderField({
           isDisabled: true,
           defaultValue: values[0],
+          onChange,
         });
-        const control = getControl(screen).element();
+        const control = await getControlElement(screen);
 
         expect(isDisabledElement(control)).toBe(true);
         for (const button of getButtons(screen)) {
           expect(isDisabledElement(button)).toBe(true);
         }
         expect(getLabel(screen)).toHaveClass(labelStyles.disabled);
+
+        await changeValue(screen, { force: true });
+        expect(onChange).not.toHaveBeenCalled();
       },
     );
 
-    aspect(
+    contractTest(
       "isReadOnly",
-      "isReadOnly makes the control read-only and turns inner buttons off",
+      "isReadOnly keeps the value, the control focusable and submitted",
       async () => {
+        const onChange = vi.fn();
         const screen = await renderField({
           isReadOnly: true,
           defaultValue: values[0],
+          onChange,
         });
-        const control = getControl(screen).element();
+        const control = await getControlElement(screen);
 
         expect(isReadOnlyElement(control)).toBe(true);
         expect(isDisabledElement(control)).toBe(false);
-        for (const button of getButtons(screen)) {
+        for (const button of getValueButtons(screen).elements()) {
           expect(isDisabledElement(button)).toBe(true);
         }
+        if (!(control instanceof HTMLElement)) {
+          throw new Error("Control is not an HTMLElement");
+        }
+        control.focus();
+        await expect.element(getControl(screen)).toHaveFocus();
+
+        await changeValue(screen, { force: true });
+        expect(onChange).not.toHaveBeenCalled();
         expect(getFormEntries()).toEqual(toFormEntries(values[0]));
       },
     );
 
-    aspect(
+    contractTest(
       "isRequired",
       "isRequired marks the control and drops the optional marker",
       async () => {
         const optional = await renderField();
-        expect(isRequiredElement(getControl(optional).element())).toBe(false);
+        expect(isRequiredElement(await getControlElement(optional))).toBe(
+          false,
+        );
         expect(
           getLabel(optional).querySelector(`.${labelStyles.optional}`),
         ).not.toBeNull();
         await optional.unmount();
 
         const required = await renderField({ isRequired: true });
-        expect(isRequiredElement(getControl(required).element())).toBe(true);
+        expect(isRequiredElement(await getControlElement(required))).toBe(true);
         expect(
           getLabel(required).querySelector(`.${labelStyles.optional}`),
         ).toBeNull();
       },
     );
 
-    aspect(
+    contractTest(
       "validationBehavior",
       "validationBehavior decides whether native validation blocks the form",
       async () => {
@@ -240,7 +296,7 @@ export const testFormFieldContract = <V,>(
       },
     );
 
-    aspect(
+    contractTest(
       "isInvalid",
       "isInvalid marks the control and describes it with the error",
       async () => {
@@ -255,7 +311,7 @@ export const testFormFieldContract = <V,>(
       },
     );
 
-    aspect(
+    contractTest(
       "description",
       "FieldDescription describes the control",
       async () => {
@@ -270,13 +326,13 @@ export const testFormFieldContract = <V,>(
       },
     );
 
-    aspect(
+    contractTest(
       "formSubmission",
       "name and form submit the value with the form",
       async () => {
         const screen = await render(
           <>
-            <form id={formId} />
+            <ContractForm />
             {field({ form: formId, defaultValue: values[0] })}
           </>,
         );
@@ -286,7 +342,7 @@ export const testFormFieldContract = <V,>(
       },
     );
 
-    aspect(
+    contractTest(
       "uncontrolled",
       "defaultValue sets the initial value and user changes are reported",
       async () => {
@@ -297,46 +353,46 @@ export const testFormFieldContract = <V,>(
         });
         expect(getFormEntries()).toEqual(toFormEntries(values[0]));
 
-        await changeValue(screen);
+        await changeValue(screen, { force: false });
 
         await expect.poll(getFormEntries).toEqual(toFormEntries(values[1]));
         expect(onChange).toHaveBeenLastCalledWith(values[1]);
       },
     );
 
-    aspect("controlled", "value controls the field", async () => {
+    contractTest("controlled", "value controls the field", async () => {
       const onChange = vi.fn();
       const screen = await renderField({ value: values[0], onChange });
       expect(getFormEntries()).toEqual(toFormEntries(values[0]));
 
       await screen.rerender(
-        <form id={formId}>{field({ value: values[1], onChange })}</form>,
+        <ContractForm>{field({ value: values[1], onChange })}</ContractForm>,
       );
 
       await expect.poll(getFormEntries).toEqual(toFormEntries(values[1]));
       expect(onChange).not.toHaveBeenCalled();
     });
 
-    aspect(
-      "controlled",
+    contractTest(
+      "controlledChange",
       "user changes of a controlled field are reported",
       async () => {
         const onChange = vi.fn();
         const screen = await render(
-          <form id={formId}>
+          <ContractForm>
             <StatefulField onChange={onChange} />
-          </form>,
+          </ContractForm>,
         );
         expect(getFormEntries()).toEqual(toFormEntries(values[0]));
 
-        await changeValue(screen);
+        await changeValue(screen, { force: false });
 
         await expect.poll(getFormEntries).toEqual(toFormEntries(values[1]));
         expect(onChange).toHaveBeenLastCalledWith(values[1]);
       },
     );
 
-    aspect("ref", "ref points at the focusable control", async () => {
+    contractTest("ref", "ref points at the focusable control", async () => {
       let refElement: Element | null = null;
       const screen = await renderField({
         ref: (element) => {
@@ -344,20 +400,20 @@ export const testFormFieldContract = <V,>(
         },
       });
 
-      expect(refElement).toBe(getControl(screen).element());
+      expect(refElement).toBe(await getControlElement(screen));
     });
 
-    aspect("autoFocus", "autoFocus focuses the control", async () => {
+    contractTest("autoFocus", "autoFocus focuses the control", async () => {
       const screen = await renderField({ autoFocus: true });
 
       await expect.element(getControl(screen)).toHaveFocus();
     });
 
-    aspect("focusEvents", "onFocus and onBlur are called", async () => {
+    contractTest("focusEvents", "onFocus and onBlur are called", async () => {
       const onFocus = vi.fn();
       const onBlur = vi.fn();
       const screen = await renderField({ onFocus, onBlur });
-      const control = getControl(screen).element();
+      const control = await getControlElement(screen);
       if (!(control instanceof HTMLElement)) {
         throw new Error("Control is not an HTMLElement");
       }

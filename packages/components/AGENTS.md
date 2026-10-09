@@ -385,11 +385,9 @@ Three traps cost time in every new browser test:
 ## Building a form field
 
 A form field is any component a user enters a value with — anything that calls
-`useFieldComponent`. Fields are built one at a time, and each used to miss
-something different: `CodeEditor` shipped without `isDisabled`, `Slider` ignores
-`isInvalid`, `FileDropZone` drops `ref` and `onBlur` (#3368). Every field
-supports the whole contract below, end to end: prop → behavior → styling →
-`Label` state → test.
+`useFieldComponent`. It supports the whole contract below, end to end: prop →
+behavior → styling → `Label` state → test. Gaps in existing fields are tracked
+in #3368.
 
 | Aspect                          | Requirement                                                                                                                                                                                                                     |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -398,7 +396,7 @@ supports the whole contract below, end to end: prop → behavior → styling →
 | `isRequired`                    | `required` or `aria-required` on the control; `Label` drops its "optional" marker (`useFieldComponent` does that).                                                                                                              |
 | `isInvalid`                     | `aria-invalid` on the control, invalid styling, `FieldError` rendered and linked.                                                                                                                                               |
 | `validationBehavior`            | `"native"` blocks form submission on a constraint violation, `"aria"` does not. react-hook-form's `Field` passes `"aria"`.                                                                                                      |
-| `Label` / `FieldDescription`    | Children slots via `useFieldComponent`; `controlProps` (with `aria-describedby`) land on the **focusable control**, not on a wrapper `div`.                                                                                     |
+| `Label` / `FieldDescription`    | Children slots via `useFieldComponent`; `Label` names the control. `controlProps` (with `aria-describedby`) land on the **focusable control** (or the group of a grouped control), not on a wrapper `div`.                      |
 | `name` / `form`                 | The value is in the `FormData` of the surrounding (or `form`-referenced) form. A custom control renders a hidden input.                                                                                                         |
 | `defaultValue` / `value`        | Both work; `onChange` reports user changes with the field's own value type (a `number` field reports a `number`).                                                                                                               |
 | `ref`                           | Points at the focusable control — react-hook-form focuses it on a validation error.                                                                                                                                             |
@@ -411,9 +409,12 @@ Checklist beyond the component itself:
 
 - **Contract test.** Call `testFormFieldContract`
   (`src/tests/formFieldContract/`) in the field's `*.browser.test.tsx`. The
-  adapter renders the field, names its control, two values, their `FormData`
-  entries and a user interaction that changes the value; justified exceptions go
-  in `exceptions` with their reason. An excepted aspect must fail — once it
+  adapter renders the field, names its control, two values (the first one
+  submits an entry), their `FormData` entries and a user interaction that
+  changes the value. The interaction passes `force` on, so the test can also try
+  it on a disabled or read-only field. `getValueButtons` narrows the inner
+  buttons a read-only field turns off; it defaults to all. Justified exceptions
+  go in `exceptions` with their reason. An excepted aspect must fail — once it
   passes, the run fails until the entry is removed:
 
   ```tsx
@@ -422,8 +423,8 @@ Checklist beyond the component itself:
     getControl: (screen) => screen.getByRole("textbox"),
     values: ["foo", "bar"],
     toFormValue: (value) => value,
-    changeValue: async (screen) => {
-      await userEvent.fill(screen.getByRole("textbox"), "bar");
+    changeValue: async (screen, { force }) => {
+      await userEvent.fill(screen.getByRole("textbox"), "bar", { force });
     },
   });
   ```
@@ -437,10 +438,13 @@ Checklist beyond the component itself:
   `name`, `value` and `defaultValue` together, `onChange`, `onBlur`, `ref`,
   `form`, `isRequired`, `isReadOnly`, `isInvalid` and `validationBehavior` —
   spread the rest props through instead of destructuring a fixed list, or they
-  are dropped silently.
+  are dropped silently. A field whose value prop is not `value` gets it mapped
+  there (`selectedKey` for `ComboBox`, `isSelected` for `Checkbox`). `Field`
+  does not pass `isDisabled` yet (#3368).
 - **Remote.** A field that mirrors its value with `useControlledHostValueProps`
-  (pass the type's empty value — see the controlled-from-the-first-render
-  convention below) needs its `flr-*` tag in `controlledComponentNames`
+  passes the type's empty value (see the controlled-from-the-first-render
+  convention below). A text input among them also needs its `flr-*` tag in
+  `controlledComponentNames`
   (`packages/remote-react-components/src/lib/createRemoteComponent.ts`), or it
   drops characters under fast typing
   ([docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md)).

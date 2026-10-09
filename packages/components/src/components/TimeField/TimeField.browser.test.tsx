@@ -139,8 +139,8 @@ testFormFieldContract("TimeField", {
   getControl: (screen) => screen.getByRole("spinbutton").first(),
   values: [new Time(9, 30), new Time(10, 45)],
   toFormValue: (value) => value.toString(),
-  changeValue: async (screen) => {
-    await screen.getByRole("spinbutton").first().click();
+  changeValue: async (screen, { force }) => {
+    await screen.getByRole("spinbutton").first().click({ force });
     await userEvent.keyboard("1045");
   },
 });

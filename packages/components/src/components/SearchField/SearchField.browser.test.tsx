@@ -79,7 +79,7 @@ testFormFieldContract("SearchField", {
   getControl: (screen) => screen.getByRole("searchbox"),
   values: ["foo", "bar"],
   toFormValue: (value) => value,
-  changeValue: async (screen) => {
-    await userEvent.fill(screen.getByRole("searchbox"), "bar");
+  changeValue: async (screen, { force }) => {
+    await userEvent.fill(screen.getByRole("searchbox"), "bar", { force });
   },
 });

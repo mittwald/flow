@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { ComboBox } from "@/components/ComboBox";
 import { Label } from "@/components/Label";
 import { Option } from "@/components/Option";
@@ -33,15 +33,17 @@ testFormFieldContract("ComboBox", {
   render: (props) => (
     <ComboBox {...props}>
       {props.children}
-      <Option value="rebelbase.org">rebelbase.org</Option>
-      <Option value="tatooine.com">tatooine.com</Option>
+      <Option value="rebelbase">rebelbase.org</Option>
+      <Option value="tatooine">tatooine.com</Option>
     </ComboBox>
   ),
   getControl: (screen) => screen.getByRole("combobox"),
-  values: ["rebelbase.org", "tatooine.com"],
+  values: ["rebelbase", "tatooine"],
   toFormValue: (value) => value,
-  changeValue: async (screen) => {
-    await screen.getByRole("combobox").click();
-    await screen.getByRole("option", { name: "tatooine.com" }).click();
+  // Keyboard only: a click on an option would wait for a list that a disabled
+  // or read-only combo box never opens.
+  changeValue: async (screen, { force }) => {
+    await userEvent.fill(screen.getByRole("combobox"), "tatooine", { force });
+    await userEvent.keyboard("{ArrowDown}{Enter}");
   },
 });

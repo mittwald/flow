@@ -40,7 +40,7 @@ testFormFieldContract("TextField", {
   getControl: (screen) => screen.getByRole("textbox"),
   values: ["foo", "bar"],
   toFormValue: (value) => value,
-  changeValue: async (screen) => {
-    await userEvent.fill(screen.getByRole("textbox"), "bar");
+  changeValue: async (screen, { force }) => {
+    await userEvent.fill(screen.getByRole("textbox"), "bar", { force });
   },
 });

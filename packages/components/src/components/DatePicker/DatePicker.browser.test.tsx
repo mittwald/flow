@@ -133,8 +133,8 @@ testFormFieldContract("DatePicker", {
   getControl: (screen) => screen.getByRole("spinbutton").first(),
   values: [new CalendarDate(2025, 3, 10), new CalendarDate(2025, 4, 11)],
   toFormValue: (value) => value.toString(),
-  changeValue: async (screen) => {
-    await screen.getByRole("spinbutton").first().click();
+  changeValue: async (screen, { force }) => {
+    await screen.getByRole("spinbutton").first().click({ force });
     await userEvent.keyboard("04112025");
   },
 });
