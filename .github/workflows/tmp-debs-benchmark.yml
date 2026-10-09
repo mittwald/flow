@@ -24,6 +24,7 @@ jobs:
       - name: Benchmark apt alone vs. parallel fetch (cold, separate archives)
         shell: bash
         run: |
+          set +e
           apt_alone() {
             mkdir -p /tmp/apt-a/partial
             pkgs=$(pnpm exec playwright install-deps --dry-run webkit | sed -n 's/^  //p')
