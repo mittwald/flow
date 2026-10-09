@@ -269,6 +269,29 @@ describe("readonly", () => {
   });
 });
 
+describe("disabled", () => {
+  const TestForm = () => {
+    const form = useForm<object>({ disabled: true });
+    return (
+      <Form
+        form={form}
+        onSubmit={() => {
+          // void
+        }}
+      >
+        <Field name="test">
+          <TextField aria-label="test" />
+        </Field>
+      </Form>
+    );
+  };
+
+  test("disabled form disables its fields", async () => {
+    await render(<TestForm />);
+    await expect.element(page.getByLabelText("test")).toBeDisabled();
+  });
+});
+
 describe("FormSettingsProvider", () => {
   const TestForm: FC<Omit<FormProps<object>, "form">> = (props) => {
     const form = useForm<object>({
