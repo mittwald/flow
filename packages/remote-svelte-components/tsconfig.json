@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    /*
+     * `module: preserve` implies this, but svelte-check runs its own language
+     * service and does not apply the implication — without it every workspace
+     * import fails to resolve.
+     */
+    "moduleResolution": "bundler",
+    /* The corpus harness converts React elements, so it is written as `.tsx`. */
+    "jsx": "react-jsx"
+  },
+  "extends": "@mittwald/typescript-config/web-library.json"
+}

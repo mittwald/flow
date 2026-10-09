@@ -18,6 +18,8 @@ export default tseslint.config(
       ".next/**/*",
       ".nx",
       "**/.vitest",
+      // svelte-package's staging directory: generated .js/.d.ts copies of src
+      "**/.svelte-kit",
       "**/.source",
       ".claude/worktrees/**",
     ],

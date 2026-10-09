@@ -56,3 +56,6 @@ lerna.json
 # keep them out of the format gate.
 **/*.module.d.scss.ts
 **/*.module.d.css.ts
+
+# svelte-package staging directory
+.svelte-kit
