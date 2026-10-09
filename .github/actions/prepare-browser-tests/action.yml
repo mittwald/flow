@@ -7,6 +7,9 @@ inputs:
   target:
     description: The nx target the calling job runs, e.g. `test:visual`.
     required: true
+  browser:
+    description: The Playwright browser the suite runs in.
+    default: webkit
 
 outputs:
   run:
@@ -33,4 +36,6 @@ runs:
 
     - name: Install the Playwright browser
       if: steps.affected.outputs.run == 'true'
-      uses: ./.github/actions/install-playwright-webkit
+      uses: ./.github/actions/install-playwright
+      with:
+        browser: ${{ inputs.browser }}

@@ -1,22 +1,28 @@
-name: Install Playwright WebKit
+name: Install a Playwright browser
 description:
-  Installs WebKit and the system libraries it needs, both from cache when
-  possible.
+  Installs one Playwright browser and the system libraries it needs, both from
+  cache when possible.
+
+inputs:
+  browser:
+    description: The Playwright browser to install.
+    default: webkit
 
 runs:
   using: composite
   steps:
-    # Keyed apart from the visual workflows' cache on purpose. They install
-    # Firefox as well, and under one shared key whichever workflow saved first
-    # would decide what the other one finds.
+    # One key per browser, and apart from the visual workflows' cache, which
+    # holds both browsers: under one shared key whichever job saved first would
+    # decide what the others find.
     - name: Cache the Playwright browser
       uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
         path: ~/.cache/ms-playwright
         key:
-          playwright-webkit-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          playwright-${{ inputs.browser }}-${{ runner.os }}-${{
+          hashFiles('pnpm-lock.yaml') }}
         restore-keys: |
-          playwright-webkit-${{ runner.os }}-
+          playwright-${{ inputs.browser }}-${{ runner.os }}-
 
     # `--with-deps` downloads ~120 MB of .debs on every job, and a slow Ubuntu
     # mirror can stretch that past the job timeout. Restored, apt finds them in
@@ -27,8 +33,8 @@ runs:
       id: restore
       uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
-        path: ~/.cache/playwright-webkit-debs
-        key: playwright-webkit-debs-${{ runner.os }}-
+        path: ~/.cache/playwright-debs
+        key: playwright-${{ inputs.browser }}-debs-${{ runner.os }}-
 
     # apt reuses a .deb in its archive when name, version and checksum match,
     # and downloads only the rest. `autoclean` drops versions the mirror no
@@ -37,19 +43,19 @@ runs:
       id: install
       shell: bash
       run: |
-        debs=~/.cache/playwright-webkit-debs
+        debs=~/.cache/playwright-debs
         mkdir -p "$debs"
         sudo find "$debs" -name '*.deb' -exec cp -t /var/cache/apt/archives {} +
-        pnpm exec playwright install --with-deps webkit
+        pnpm exec playwright install --with-deps ${{ inputs.browser }}
         sudo apt-get autoclean -qq
         rm -f "$debs"/*.deb
         find /var/cache/apt/archives -maxdepth 1 -name '*.deb' -exec cp -t "$debs" {} +
-        echo "key=playwright-webkit-debs-${{ runner.os }}-$(ls "$debs" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+        echo "key=playwright-${{ inputs.browser }}-debs-${{ runner.os }}-$(ls "$debs" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
 
     # Saves only a package set the cache does not hold yet.
     - name: Save the system packages
       if: steps.install.outputs.key != steps.restore.outputs.cache-matched-key
       uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
-        path: ~/.cache/playwright-webkit-debs
+        path: ~/.cache/playwright-debs
         key: ${{ steps.install.outputs.key }}

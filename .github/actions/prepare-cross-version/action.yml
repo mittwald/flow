@@ -9,7 +9,7 @@ runs:
     # Both harnesses are WebKit-only, so this is the same cache the PR suites
     # fill — not the two-browser one the visual workflows keep.
     - name: Install the Playwright browser
-      uses: ./.github/actions/install-playwright-webkit
+      uses: ./.github/actions/install-playwright
 
     # Restore only: `cross-version-resolve` writes this cache, and every job
     # below reads what it left. A published tarball never changes and `prepare`
