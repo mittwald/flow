@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.37](https://github.com/mittwald/flow/compare/1.5.0-next.36...1.5.0-next.37) (2026-10-09)
+
+## [1.4.30](https://github.com/mittwald/flow/compare/1.5.0-next.35...1.4.30) (2026-10-09)
+
+### Bug Fixes
+
+* **Modal:** keep an older remote&#x27;s close button in the top-right corner ([#3408](https://github.com/mittwald/flow/issues/3408)) ([f145be7](https://github.com/mittwald/flow/commit/f145be75337bcc5e97b2aff97eda08e20b65e02d))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.30 ([fbd51af](https://github.com/mittwald/flow/commit/fbd51af8df2047a966541dfaaf5a7b1f26ded785))
+
+## [1.4.29](https://github.com/mittwald/flow/compare/1.5.0-next.34...1.4.29) (2026-10-09)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.29 ([abad221](https://github.com/mittwald/flow/commit/abad221a4b67665b116f1f8346d30e699ae728fb))
+
+## [1.5.0-next.36](https://github.com/mittwald/flow/compare/1.5.0-next.35...1.5.0-next.36) (2026-10-09)
+
+### Features
+
+* **SkeletonMode:** support visual and interactive components ([b8bd9f7](https://github.com/mittwald/flow/commit/b8bd9f7482cb75616ce3bb4309e953e067a1fb3a))
+
+### Code Refactoring
+
+* **Link:** pick the text bars with a plain ternary ([00159b7](https://github.com/mittwald/flow/commit/00159b756bb3424e20d2fb9fb5ff4dd127e2947c))
+
 ## [1.5.0-next.35](https://github.com/mittwald/flow/compare/1.5.0-next.34...1.5.0-next.35) (2026-10-09)
 
 ### Bug Fixes
