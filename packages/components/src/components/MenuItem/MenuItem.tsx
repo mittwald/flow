@@ -47,9 +47,11 @@ const renderElement: RenderFunction = (domProps) =>
 
 /**
  * React Aria drops `aria-disabled` from the props it forwards to the DOM, so it
- * is added to the rendered element. Its `onClick` runs the menu's `onAction`,
- * follows the link and toggles the selection, and Enter and Space toggle the
- * selection on key down, so both handlers are replaced as well.
+ * is added to the rendered element. React Aria's `onClick` runs the menu's
+ * `onAction`, follows the link and toggles the selection. A mouse release that
+ * started outside the item toggles it on pointer up, Enter and Space toggle it
+ * on key down. All three handlers are replaced, and like React Aria they stop
+ * the event.
  */
 const renderMuted =
   (render: RenderFunction = renderElement): RenderFunction =>
@@ -58,10 +60,15 @@ const renderMuted =
       {
         ...domProps,
         "aria-disabled": true,
-        onClick: (e: MouseEvent) => e.preventDefault(),
+        onClick: (e: MouseEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+        },
+        onPointerUp: undefined,
         onKeyDown: (e: KeyboardEvent<HTMLDivElement & HTMLAnchorElement>) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
+            e.stopPropagation();
           } else {
             domProps.onKeyDown?.(e);
           }
