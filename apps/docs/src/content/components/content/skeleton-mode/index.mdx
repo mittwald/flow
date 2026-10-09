@@ -66,6 +66,20 @@ ContextMenu-Trigger lassen sich nicht bedienen.
 
 ---
 
+# Inhalte, Diagramme und Editoren
+
+Kbd, CodeBlock, FileDropZone, Kalender und ImageCropper werden zu einer Fläche
+in ihrer Größe. Markdown, Tabellen und Listen folgen den Regeln ihres Inhalts.
+Diagramme und Editoren zeigen eine Fläche und laden weder Diagramm noch Editor.
+Die Höhe stammt aus `height`, beim CodeEditor aus der Zahl der Code-Zeilen. Ein
+Bild in Markdown oder im ImageCropper wird nicht geladen. Overlays lassen sich
+über einen Trigger im SkeletonMode nicht öffnen. Ein bereits geöffnetes Modal
+zeigt seinen Inhalt als Skeleton und schließt mit Escape.
+
+<LiveCodeEditor example="content" editorCollapsed />
+
+---
+
 # Properties
 
 <PropertiesTables />

@@ -9,5 +9,6 @@ declare const classNames: {
   readonly "react-aria-CalendarGrid": "react-aria-CalendarGrid";
   readonly "react-aria-CalendarCell": "react-aria-CalendarCell";
   readonly range: "range";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

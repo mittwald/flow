@@ -20,6 +20,7 @@ import {
 } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface CodeEditorProps
   extends
@@ -191,47 +192,80 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
 
   useMakeFocusable(localRef);
 
+  const isSkeleton = useSkeletonMode();
+
+  /* No CodeMirror: one surface, as high as the code in the editor's line
+     height. The children still render, so a label or a field description
+     tunnels out and follows its own skeleton rule. */
+  const skeleton = (
+    <div
+      className={clsx(
+        styles.codeMirror,
+        isReadOnly && styles.readonly,
+        styles.skeleton,
+      )}
+    >
+      <div
+        className={styles.skeletonLines}
+        style={{ height: height ?? minHeight }}
+      >
+        {(value ?? "").split("\n").map((line, index) => (
+          <div key={index}>{line || " "}</div>
+        ))}
+      </div>
+      {children}
+    </div>
+  );
+
+  const editor = (
+    <CodeMirror
+      {...rest}
+      value={value}
+      basicSetup={{
+        highlightActiveLine: showActiveLineMarker && !isDisabled,
+        highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
+        autocompletion: false,
+        lineNumbers: false,
+        foldGutter: false,
+        highlightSelectionMatches: false,
+      }}
+      theme={defaultLightTheme}
+      data-invalid={isInvalid || undefined}
+      data-disabled={isDisabled || undefined}
+      readOnly={isReadOnly || isDisabled}
+      editable={!isDisabled}
+      className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
+      ref={(codeMirrorRef) => {
+        if (codeMirrorRef?.editor) {
+          localRef.current = codeMirrorRef.editor;
+        }
+      }}
+      extensions={[...enabledExtensions, contentAttributes]}
+      height={height ?? minHeight}
+    >
+      {copyable && (
+        <CopyButton
+          className={styles.copyButton}
+          size="s"
+          variant="soft"
+          text={value}
+          isDisabled={isDisabled}
+        />
+      )}
+      {children}
+    </CodeMirror>
+  );
+
   return (
-    <div className={rootClassName} data-disabled={isDisabled || undefined}>
+    <div
+      className={rootClassName}
+      data-disabled={isDisabled || undefined}
+      inert={isSkeleton || undefined}
+    >
       <PropsContextProvider props={propsContext}>
         <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
-          <CodeMirror
-            {...rest}
-            value={value}
-            basicSetup={{
-              highlightActiveLine: showActiveLineMarker && !isDisabled,
-              highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
-              autocompletion: false,
-              lineNumbers: false,
-              foldGutter: false,
-              highlightSelectionMatches: false,
-            }}
-            theme={defaultLightTheme}
-            data-invalid={isInvalid || undefined}
-            data-disabled={isDisabled || undefined}
-            readOnly={isReadOnly || isDisabled}
-            editable={!isDisabled}
-            className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
-            ref={(codeMirrorRef) => {
-              if (codeMirrorRef?.editor) {
-                localRef.current = codeMirrorRef.editor;
-              }
-            }}
-            extensions={[...enabledExtensions, contentAttributes]}
-            height={height ?? minHeight}
-          >
-            {copyable && (
-              <CopyButton
-                className={styles.copyButton}
-                size="s"
-                variant="soft"
-                text={value}
-                isDisabled={isDisabled}
-              />
-            )}
-            {children}
-          </CodeMirror>
+          {isSkeleton ? skeleton : editor}
         </FieldErrorCaptureContext>
         <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
         <FieldErrorView />

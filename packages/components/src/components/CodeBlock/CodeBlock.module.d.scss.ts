@@ -7,5 +7,6 @@ declare const classNames: {
   readonly "cm-scroller": "cm-scroller";
   readonly buttonContainer: "buttonContainer";
   readonly folded: "folded";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

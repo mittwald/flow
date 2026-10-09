@@ -7,6 +7,10 @@ import { MenuItem } from "@/components/MenuItem";
 import { useCalendarDateRangePresets } from "@/components/Calendar/components/RangeCalendar/helpers/useCalendarDateRangePresets";
 import { Separator } from "@/components/Separator";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export type RangeCalendarProps = Omit<
   Aria.RangeCalendarProps<Aria.DateValue>,
@@ -59,11 +63,25 @@ const InnerRangeCalendar: FC<RangeCalendarProps> = ({
 /** @flr-generate all */
 export const RangeCalendar: FC<RangeCalendarProps> = (props) => {
   const { className, withDatePickerPresets, ...rest } = props;
-  const rootClassName = clsx(styles.calendar, styles.range, className);
+  const isSkeleton = useSkeletonMode();
+
+  const rootClassName = clsx(
+    styles.calendar,
+    styles.range,
+    isSkeleton && styles.skeleton,
+    className,
+  );
 
   return (
-    <Aria.RangeCalendar {...rest} className={rootClassName}>
-      <InnerRangeCalendar withDatePickerPresets={withDatePickerPresets} />
+    <Aria.RangeCalendar
+      {...rest}
+      className={rootClassName}
+      inert={isSkeleton || undefined}
+    >
+      {/* The calendar is one skeleton surface, its content draws none. */}
+      <SkeletonModeReset>
+        <InnerRangeCalendar withDatePickerPresets={withDatePickerPresets} />
+      </SkeletonModeReset>
     </Aria.RangeCalendar>
   );
 };

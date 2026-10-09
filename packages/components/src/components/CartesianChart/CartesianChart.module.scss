@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .cartesianChart {
   font-family: Inter, sans-serif;
   isolation: isolate;
@@ -30,3 +32,13 @@
     z-index: 1;
   }
 }
+
+/* SkeletonMode */
+
+.skeleton {
+  @include skeleton.surface;
+
+  width: 100%;
+}
+
+@include skeleton.keyframes;
