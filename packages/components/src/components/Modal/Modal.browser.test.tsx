@@ -725,15 +725,35 @@ test("useOnClosed is called when the closing animation has finished", async () =
   expect(modalText).toBeInTheDocument();
   expect(onClosed).not.toHaveBeenCalled();
 
+  // Hold the close animation as soon as it starts. The observer runs before the
+  // next frame, so the assertions below do not race the animation's duration.
+  const heldAnimations: Animation[] = [];
+  const exitObserver = new MutationObserver((mutations) => {
+    for (const { target } of mutations) {
+      if (target instanceof Element && target.hasAttribute("data-exiting")) {
+        for (const animation of target.getAnimations()) {
+          if (animation.playState === "running") {
+            animation.pause();
+            heldAnimations.push(animation);
+          }
+        }
+      }
+    }
+  });
+  exitObserver.observe(document.body, {
+    subtree: true,
+    attributeFilter: ["data-exiting"],
+  });
+  onTestFinished(() => exitObserver.disconnect());
+
   await userEvent.click(closeButton);
-  await sleep(50);
 
+  expect(heldAnimations).not.toHaveLength(0);
   expect(modalText).toBeInTheDocument();
-  expect(onClosed).not.toHaveBeenCalledOnce();
+  expect(onClosed).not.toHaveBeenCalled();
 
-  // Wait for the close animation to finish and the Modal to unmount instead of
-  // relying on a fixed delay: the animation duration varies and a hard-coded
-  // sleep races against it under CI load, which made this test flaky.
+  heldAnimations.forEach((animation) => animation.play());
+
   await vitest.waitFor(() => expect(modalText).not.toBeInTheDocument(), {
     timeout: 2000,
   });
