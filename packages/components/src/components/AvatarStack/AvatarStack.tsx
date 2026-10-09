@@ -32,7 +32,7 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
     onCountPress,
   } = props;
 
-  const avatarCount = Children.count(children);
+  const avatarCount = Children.toArray(children).length;
 
   const additionalItemsCount = totalCount - avatarCount;
 
