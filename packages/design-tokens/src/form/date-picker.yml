@@ -40,3 +40,14 @@ calendar:
     value: "{border-style.default}"
   header-cell-font-weight:
     value: "{font-weight.bold}"
+  # Width the range background reaches into the gap to the next cell
+  range-background-overhang:
+    value: 0.375rem
+  preset-menu-max-width:
+    value: 200px
+
+  # Small viewports
+  cell-size-s:
+    value: 2.1rem
+  cell-font-size-s:
+    value: 0.8rem

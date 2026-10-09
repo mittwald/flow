@@ -64,11 +64,11 @@
   /* Animation */
 
   &[data-entering] {
-    animation: slide 200ms;
+    animation: slide var(--transition--duration--fast);
   }
 
   &[data-exiting] {
-    animation: slide 200ms reverse ease-in;
+    animation: slide var(--transition--duration--fast) reverse ease-in;
   }
 
   .tip {

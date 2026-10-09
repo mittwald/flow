@@ -1,3 +1,5 @@
 cartesian-chart:
   transition-duration:
     value: 800ms
+  font-family:
+    value: "Inter, sans-serif"

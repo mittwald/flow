@@ -1,4 +1,6 @@
 inline-code:
+  font-family:
+    value: "FiraCode, monospace"
   font-size:
     value: "{font-size-text.s}"
   padding-x:

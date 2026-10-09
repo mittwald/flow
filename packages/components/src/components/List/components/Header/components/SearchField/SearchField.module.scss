@@ -1,5 +1,5 @@
 .searchField {
-  max-width: 500px;
+  max-width: var(--list--search-field-max-width);
   margin-inline-start: auto;
   flex-grow: 1;
 
@@ -7,6 +7,6 @@
   // `search.render`, so this has to match whatever input that renders.
   // stylelint-disable-next-line selector-max-type -- replaceable field
   input {
-    width: 200px;
+    width: var(--list--search-field-input-width);
   }
 }

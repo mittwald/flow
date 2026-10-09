@@ -4,9 +4,9 @@
 
 .button {
   position: relative;
-  font-family: Inter, sans-serif;
+  font-family: var(--button--font-family);
   font-size: var(--font-size-text--m);
-  font-weight: bold;
+  font-weight: var(--font-weight--bold);
   line-height: var(--line-height);
   border: none;
   border-radius: var(--button--corner-radius);
