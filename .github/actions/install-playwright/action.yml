@@ -47,8 +47,9 @@ runs:
           playwright-${{ inputs.browser }}-debs-${{ steps.os.outputs.release }}-
 
     # apt reuses a .deb in its archive when name, version and checksum match,
-    # and downloads only the rest. `autoclean` drops versions the mirror no
-    # longer offers, so updated packages replace their old .debs in the cache.
+    # and downloads only the rest — fetch-debs.sh fetches those first, bounded.
+    # `autoclean` drops versions the mirror no longer offers, so updated
+    # packages replace their old .debs in the cache.
     - name: Install the Playwright browser
       id: install
       shell: bash
@@ -56,6 +57,7 @@ runs:
         debs=~/.cache/playwright-debs
         mkdir -p "$debs"
         sudo find "$debs" -name '*.deb' -exec cp -t /var/cache/apt/archives {} +
+        "${{ github.action_path }}/fetch-debs.sh" ${{ inputs.browser }}
         pnpm exec playwright install --with-deps ${{ inputs.browser }}
         sudo apt-get autoclean -qq
         rm -f "$debs"/*.deb
