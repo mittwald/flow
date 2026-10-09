@@ -5,6 +5,18 @@
   display: flex;
   flex-direction: column;
 
+  /* Header and content text line up with the content around the accordion;
+     only the hover background reaches past it. */
+  margin-inline: calc(var(--accordion--padding-x) * -1);
+
+  /* The toggle's block padding; a text or label header is more compact than
+     a heading. */
+  --toggle-padding-y: var(--accordion--padding-y);
+
+  &:has(> .textHeader) {
+    --toggle-padding-y: var(--accordion--text-padding-y);
+  }
+
   /* Elements */
 
   .header {
@@ -19,7 +31,7 @@
     text-align: start;
     flex-grow: 1;
     padding-inline: var(--accordion--padding-x);
-    padding-block: var(--accordion--padding-y);
+    padding-block: var(--toggle-padding-y);
     border-radius: var(--accordion--corner-radius);
     column-gap: var(--accordion--spacing);
     border: none;
@@ -35,54 +47,51 @@
     }
   }
 
-  /* Animates `height` to `auto` instead of the `grid-template-rows: 0fr/1fr`
-     trick: in Chromium, hover backgrounds inside a grid row sporadically
-     drop out for a frame. Browsers without `interpolate-size` expand without
-     animation. `display: block` overrides the `hidden` attribute. */
+  /* Takes the full width up to the chevron, so the header content can lay
+     itself out across it. */
+  .headerContent {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--accordion--spacing);
+    min-width: 0;
+  }
+
+  /* React Aria sets the panel height, animates between pixel values and keeps
+     a collapsed panel `hidden="until-found"`, so find-in-page still reaches
+     its content. */
   .content {
-    display: block;
-    height: 0;
-    overflow: hidden;
-    interpolate-size: allow-keywords;
-    transition-property: height, visibility;
-    visibility: hidden;
+    height: var(--disclosure-panel-height);
+    overflow: clip;
+    transition-property: height;
 
     @include expandTransition.expandTransition;
   }
 
+  /* Heading and content text are as far apart as a heading and its text in a
+     section; the toggle's own padding already covers part of the distance. */
   .contentInner {
-    overflow: hidden;
-    padding-inline: var(--accordion--padding-x);
-    transition-property: padding;
+    $padding-top: calc(
+      var(--accordion--header-to-content-spacing) - var(--toggle-padding-y)
+    );
 
-    @include expandTransition.expandTransition;
+    padding-inline: var(--accordion--padding-x);
+    padding-block: $padding-top var(--accordion--content-padding-bottom);
   }
 
   .chevron {
+    flex-shrink: 0;
     transition-property: transform;
 
     @include expandTransition.expandTransition;
   }
 
-  &.outline {
-    border-color: var(--accordion--border-color);
-    border-width: var(--accordion--border-width);
-    border-style: var(--accordion--border-style);
-    border-radius: var(--accordion--corner-radius);
-  }
+  /* States */
 
-  &.expanded {
-    .content {
-      height: auto;
-      visibility: visible;
-    }
-
-    .contentInner {
-      padding-block: var(--accordion--padding-y);
-    }
-
-    .chevron {
-      transform: rotate(180deg);
-    }
+  /* Skipping the content panel leaves the chevrons of nested accordions
+     alone. */
+  &.expanded > :not(.content) .chevron {
+    transform: rotate(180deg);
   }
 }

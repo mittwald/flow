@@ -27,7 +27,7 @@ export const SortingAccordion: FC<Props> = (props) => {
 
   return (
     <AccordionView defaultExpanded={expandAccordions}>
-      <HeadingView>{stringFormatter.format("sorting")}</HeadingView>
+      <HeadingView level={3}>{stringFormatter.format("sorting")}</HeadingView>
       <ContentView>
         <RadioGroupView value={activeSorting?.id} m={[1, 1]}>
           {sorting.map((s) => (

@@ -2,9 +2,12 @@ import {
   Accordion,
   Content,
   Label,
+  Text,
 } from "@mittwald/flow-react-components";
 
 <Accordion>
-  <Label>Accordion Titel</Label>
-  <Content>Inhalt des Accordions</Content>
+  <Label>Filter</Label>
+  <Content>
+    <Text>Zeige nur Projekte mit aktivem Backup.</Text>
+  </Content>
 </Accordion>;

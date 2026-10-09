@@ -48,5 +48,32 @@
   h6.heading:not(:first-child) {
     margin-top: var(--section--sub-heading-spacing-s);
   }
+
+  /* An accordion headed by a heading is a sub-heading as well. The toggle's padding, and in a group the gap between
+     the toggles, already count towards the spacing. */
+  $accordion: ":global(.flow--accordion)";
+  $group: ":global(.flow--accordion-group)";
+  $toggle-padding: var(--accordion--padding-y);
+  $group-gap: var(--accordion-group--toggle-gap);
+
+  > #{$accordion}:not(:first-child):has(> h2, > h3) {
+    margin-top: calc(var(--section--sub-heading-spacing-m) - $toggle-padding);
+  }
+
+  > #{$accordion}:not(:first-child):has(> h4, > h5, > h6) {
+    margin-top: calc(var(--section--sub-heading-spacing-s) - $toggle-padding);
+  }
+
+  > #{$group}:not(:first-child):has(> :first-child > :is(h2, h3)) {
+    margin-top: calc(
+      var(--section--sub-heading-spacing-m) - $toggle-padding - $group-gap
+    );
+  }
+
+  > #{$group}:not(:first-child):has(> :first-child > :is(h4, h5, h6)) {
+    margin-top: calc(
+      var(--section--sub-heading-spacing-s) - $toggle-padding - $group-gap
+    );
+  }
   // stylelint-enable selector-max-type
 }

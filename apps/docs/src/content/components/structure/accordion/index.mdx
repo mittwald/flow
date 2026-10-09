@@ -1,7 +1,7 @@
 ---
 component: Accordion
 description:
-  Das Accordion blendet Content-Bereiche ein und aus und spart so Platz.
+  Das Accordion blendet einen Content-Bereich ein und aus und spart so Platz.
 ---
 
 <LiveCodeEditor />
@@ -12,37 +12,63 @@ description:
 
 - Verberge keine essenziellen Inhalte im Accordion. Eingeklappte Inhalte werden
   standardmäßig nicht direkt wahrgenommen.
+- Nutze eine Heading als Titel, wenn das Accordion einen Abschnitt der Seite
+  bildet. Nur dann erscheint es in der Seitenstruktur, über die
+  Screenreader-Nutzer navigieren.
+- Wähle das Level der Heading passend zur umgebenden Seite, ohne Ebenen zu
+  überspringen. Ohne `level` ist die Heading eine `h3`.
+- Fasse mehrere Accordions untereinander in einer
+  [AccordionGroup](/components/structure/accordion-group) zusammen. Sie wirken
+  dann als kompakter Block.
+- Platziere keine interaktiven Elemente wie Buttons im Titel. Der Titel ist
+  selbst ein Button.
 - Formuliere die Titel klar und prägnant.
-- Stelle die relevantesten Informationen in das zuerst geöffnete Element.
 
 ---
 
-# Outline Variant
+# Mit Text
 
-Verwende die `outline`-Variante, wenn das Accordion klar vom umgebenden Inhalt
-abgehoben oder inhaltlich stärker strukturiert werden soll.
+Mit einem Text als Titel ist das Accordion keine Überschrift und erscheint in
+normaler Textschrift. Nutze ihn für ergänzende Inhalte wie weitere Optionen oder
+Details.
 
-<LiveCodeEditor example="outline" editorCollapsed />
-
----
-
-# Default Expanded
-
-Über `defaultExpanded` werden ein oder mehrere Accordion-Elemente beim Laden der
-Seite standardmäßig geöffnet dargestellt.
-
-<LiveCodeEditor example="default-expanded" editorCollapsed />
+<LiveCodeEditor example="text" editorCollapsed />
 
 ---
 
 # Mit Label
 
-Statt einer [Heading](/components/content/heading) kann auch ein
-[Label](/components/content/label) verwendet werden. Ein Label eignet sich, wenn
-der Inhalt ergänzend oder sekundär ist und nicht im Fokus der Seite steht – zum
-Beispiel bei Filtern, Formularfeldern oder optionalen Einstellungen.
+Mit einem Label als Titel ist das Accordion keine Überschrift und erscheint als
+Label. Nutze es für kompakte Bereiche wie Filter oder Einstellungen.
 
 <LiveCodeEditor example="label" editorCollapsed />
+
+---
+
+# Default Expanded
+
+Über `defaultExpanded` ist das Accordion beim Laden der Seite geöffnet.
+
+<LiveCodeEditor example="default-expanded" editorCollapsed />
+
+---
+
+# Kombiniere mit …
+
+## AccordionGroup
+
+Die [AccordionGroup](/components/structure/accordion-group) fasst mehrere
+Accordions zu einem Block mit Trennlinien zusammen.
+
+<LiveCodeEditor example="accordion-group" editorCollapsed />
+
+## Badge und AlertBadge
+
+Ein [Badge](/components/status/badge) oder
+[AlertBadge](/components/status/alert-badge) im Titel wird Teil des Buttons und
+damit Teil seines Namens für Screenreader.
+
+<LiveCodeEditor example="badges" editorCollapsed />
 
 ---
 

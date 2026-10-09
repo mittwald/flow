@@ -6,6 +6,10 @@
   flex-direction: column;
   min-width: 0;
 
+  /* Label and link texts line up with the content around the navigation;
+     only the hover backgrounds reach past it. */
+  margin-inline: calc(var(--menu-item--padding-x) * -1);
+
   .linkList {
     display: flex;
     flex-direction: column;

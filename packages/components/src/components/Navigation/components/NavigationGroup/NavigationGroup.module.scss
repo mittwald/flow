@@ -1,16 +1,32 @@
+/* Group label and toggle sit on the menu item's edge; the links are indented
+   by one menu item padding, hover areas included. */
 .navigationGroup {
-  &:not(.collapsable) :global(.flow--navigation--link-list) {
-    padding-inline: var(--accordion--padding-x);
-    padding-block: var(--accordion--padding-y);
+  :global(.flow--navigation--link-list) {
+    padding-block: var(--menu--item-to-item-spacing);
+    padding-inline: var(--menu-item--padding-x);
   }
 
   &:not(:last-child) {
     margin-bottom: var(--menu--group-to-group-spacing);
   }
 
-  .label {
+  &:not(.collapsable) .label {
     display: block;
-    padding-block: var(--accordion--padding-y);
-    padding-inline: var(--accordion--padding-x);
+    padding-block: var(--menu-item--padding-y);
+    padding-inline: var(--menu-item--padding-x);
+  }
+
+  &.collapsable {
+    margin-inline: 0;
+
+    :global(.flow--accordion--header-button) {
+      padding-block: var(--menu-item--padding-y);
+      padding-inline: var(--menu-item--padding-x);
+      border-radius: var(--menu-item--corner-radius);
+    }
+
+    :global(.flow--accordion--content-inner) {
+      padding: 0;
+    }
   }
 }

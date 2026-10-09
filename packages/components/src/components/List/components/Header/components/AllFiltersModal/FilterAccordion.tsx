@@ -29,7 +29,7 @@ export const FilterAccordion: FC<Props> = (props) => {
 
   return (
     <AccordionView defaultExpanded={expandAccordions}>
-      <HeadingView>{name}</HeadingView>
+      <HeadingView level={3}>{name}</HeadingView>
       <ContentView>{content}</ContentView>
     </AccordionView>
   );

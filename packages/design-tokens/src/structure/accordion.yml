@@ -12,7 +12,13 @@ accordion:
   padding-x:
     value: "{size-px.s}"
   padding-y:
+    value: "{size-px.s}"
+  text-padding-y:
     value: "{size-px.xs}"
+  content-padding-bottom:
+    value: "{size-px.l}"
+  header-to-content-spacing:
+    value: "{section.spacing}"
   background-color:
     hover:
       value: "{neutral-outline-background-color.hover}"

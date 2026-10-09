@@ -50,6 +50,7 @@ const targets: Record<string, string[]> = {
   ],
   "form-resets-after-modal-close": ["Form"],
   "image-rounded-corners-default": ["Image"],
+  "accordion-variant-deprecated": ["Accordion"],
   "overlay-controller-add-on-close-return-type": ["OverlayController"],
   "cartesian-chart-empty-view": ["CartesianChart"],
   "option-value-inferred-from-mixed-children": ["Option"],
