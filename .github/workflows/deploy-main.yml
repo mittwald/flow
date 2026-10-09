@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
+      actions: write # prune superseded Next.js cache entries
       contents: read
       packages: write
 
@@ -79,6 +80,30 @@ jobs:
           key:
             nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
             github.sha }}
+
+      # Every push to main saves a new ~200 MB entry, and only the newest is
+      # ever restored. Leaving the rest to expire keeps the repo's Actions
+      # cache over its 10 GB limit, so LRU evicts caches that are still in use.
+      # Deletes nothing unless the entry above exists — a key that drifted from
+      # the save step must not take the only seed with it. The job's
+      # concurrency group serializes runs, so no newer entry can exist yet.
+      - name: Prune superseded Next.js build caches
+        if: matrix.image_suffix == 'docs'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          KEY:
+            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
+            github.sha }}
+        run: |
+          entries=$(gh cache list --ref "$GITHUB_REF" --key nextjs- --limit 100 --json id,key)
+          if ! jq -e --arg key "$KEY" 'any(.key == $key)' <<<"$entries" >/dev/null; then
+            echo "::warning::$KEY not found, pruning nothing"
+            exit 0
+          fi
+          jq -r --arg key "$KEY" '.[] | select(.key != $key) | .id' <<<"$entries" |
+            xargs -r -n1 gh cache delete
 
       # Two commands because `build:storybook` declares no nx dependency on the
       # components build — the same pair the Dockerfile ran.
