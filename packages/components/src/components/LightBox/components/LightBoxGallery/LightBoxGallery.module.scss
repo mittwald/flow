@@ -27,6 +27,7 @@
     position: relative;
     margin: 0 auto;
     user-select: none;
+    max-height: var(--gallery-item-max-height);
   }
 
   .actions {
@@ -42,10 +43,12 @@
     flex-direction: column;
   }
 
+  /* The item's height is indefinite, so a percentage size here is cyclic and
+     engines resolve it differently (WebKit stretched the image). An explicit
+     cap scales the image down along its aspect ratio instead. */
   .image {
     animation: fade-in var(--transition--duration--default) ease-in forwards;
-    height: 100%;
-    width: 100%;
+    max-height: var(--gallery-item-max-height);
     pointer-events: none;
   }
 
@@ -90,7 +93,9 @@
   }
 
   .galleryItem {
-    max-height: calc(var(--light-box--max-height) - var(--indicator-height));
+    --gallery-item-max-height: calc(
+      var(--light-box--max-height) - var(--indicator-height)
+    );
   }
 
   .indicators {
@@ -122,7 +127,7 @@
   }
 
   .galleryItem {
-    max-height: calc(
+    --gallery-item-max-height: calc(
       var(--light-box--max-height) - var(--button-size-plus-spacing)
     );
   }
