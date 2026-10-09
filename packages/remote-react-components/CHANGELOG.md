@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.36](https://github.com/mittwald/flow/compare/1.5.0-next.35...1.5.0-next.36) (2026-10-09)
+
+### Features
+
+* **SkeletonMode:** support visual and interactive components ([b8bd9f7](https://github.com/mittwald/flow/commit/b8bd9f7482cb75616ce3bb4309e953e067a1fb3a))
+
+### Tests
+
+* **SkeletonMode:** give the unsized image an aspectRatio ([2acbea0](https://github.com/mittwald/flow/commit/2acbea04568b7328bfd05283fd23dc3eda2efc2f))
+* **SkeletonMode:** show the loaded UI next to the skeleton ([52f3b4a](https://github.com/mittwald/flow/commit/52f3b4a42bbfc89b0e37582d8472219f3b51cdaf))
+* **SkeletonMode:** skip the visual scenarios for versions without it ([9fa6ca8](https://github.com/mittwald/flow/commit/9fa6ca88a177d39a2295b39d436b0705d063e417))
+* **SkeletonMode:** use the shared skeletonModeSince gate ([b9b0ec0](https://github.com/mittwald/flow/commit/b9b0ec0d1b3963129618872cc52e394bfcc01e00))
+* update visual regression screenshots ([fe0bf8d](https://github.com/mittwald/flow/commit/fe0bf8d6c4a96f8cb1b2409d571225383195acd3))
+* update visual regression screenshots ([c55ac9a](https://github.com/mittwald/flow/commit/c55ac9afb7468b6e20d2bba3fa5d2c0895949c97))
+* update visual regression screenshots ([c556e39](https://github.com/mittwald/flow/commit/c556e39583eb21adcbe6b41e4f6c3fadea018fdf))
+
+## [1.5.0-next.35](https://github.com/mittwald/flow/compare/1.5.0-next.34...1.5.0-next.35) (2026-10-09)
+
+### Bug Fixes
+
+* **LightBox:** keep the gallery image&#x27;s aspect ratio ([#3402](https://github.com/mittwald/flow/issues/3402)) ([ab32089](https://github.com/mittwald/flow/commit/ab320890d32920b8bd7036b18e423a2adda0f2ae))
+
+## [1.4.28](https://github.com/mittwald/flow/compare/1.5.0-next.33...1.4.28) (2026-10-09)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.28 ([c6649fb](https://github.com/mittwald/flow/commit/c6649fb3f39ae3f99791d3fc30888a67cf4d1db3))
+
+## [1.5.0-next.34](https://github.com/mittwald/flow/compare/1.5.0-next.33...1.5.0-next.34) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.0-next.33](https://github.com/mittwald/flow/compare/1.5.0-next.32...1.5.0-next.33) (2026-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.5.0-next.32](https://github.com/mittwald/flow/compare/1.5.0-next.31...1.5.0-next.32) (2026-10-08)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

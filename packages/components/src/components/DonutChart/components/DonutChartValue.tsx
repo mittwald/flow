@@ -12,7 +12,7 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   const formatter = useNumberFormatter(formatOptions);
 
-  if (Children.count(children) > 0) {
+  if (Children.toArray(children).length > 0) {
     return <span className={styles.value}>{children}</span>;
   }
 

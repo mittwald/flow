@@ -107,9 +107,23 @@
       min-width: 0;
     }
 
-    .closeButton {
+    /* Remote apps built against Flow < 1.2.0 send the close button without
+       ClearPropsContext, so the Heading tunnels it into a content item — that
+       item is the flex item then — and passes it its button size `s`. */
+    .closeButton,
+    :global(.flow--heading--heading-content-item):has(.closeButton) {
       order: 1;
       margin-inline-start: auto;
+    }
+
+    .closeButton:global(.flow--button--size-s) {
+      padding: var(--button--padding-icon-only);
+      border-radius: var(--button--corner-radius);
+
+      :global(.flow--icon) {
+        width: var(--icon--size--m);
+        height: var(--icon--size--m);
+      }
     }
 
     /* SkeletonMode: the heading's text bar wraps title and close button. It

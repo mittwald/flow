@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.36](https://github.com/mittwald/flow/compare/1.5.0-next.35...1.5.0-next.36) (2026-10-09)
+
+### Features
+
+* **SkeletonMode:** support visual and interactive components ([b8bd9f7](https://github.com/mittwald/flow/commit/b8bd9f7482cb75616ce3bb4309e953e067a1fb3a))
+
+### Documentation
+
+* **SkeletonMode:** keep the logo square in the visual example ([bf013ba](https://github.com/mittwald/flow/commit/bf013ba1cecbee781db3d65d2acb177d9a1f4a74))
+* **SkeletonMode:** toggle the mode in the visual example ([b8031cb](https://github.com/mittwald/flow/commit/b8031cb84c1f3f37c0a17928fc788bd1db079c99))
+
+### Code Refactoring
+
+* **Link:** pick the text bars with a plain ternary ([00159b7](https://github.com/mittwald/flow/commit/00159b756bb3424e20d2fb9fb5ff4dd127e2947c))
+
+### Tests
+
+* **SkeletonMode:** give the unsized image an aspectRatio ([2acbea0](https://github.com/mittwald/flow/commit/2acbea04568b7328bfd05283fd23dc3eda2efc2f))
+* **SkeletonMode:** show the loaded UI next to the skeleton ([52f3b4a](https://github.com/mittwald/flow/commit/52f3b4a42bbfc89b0e37582d8472219f3b51cdaf))
+* **SkeletonMode:** skip the visual scenarios for versions without it ([9fa6ca8](https://github.com/mittwald/flow/commit/9fa6ca88a177d39a2295b39d436b0705d063e417))
+* **SkeletonMode:** use the shared skeletonModeSince gate ([b9b0ec0](https://github.com/mittwald/flow/commit/b9b0ec0d1b3963129618872cc52e394bfcc01e00))
+* update visual regression screenshots ([fe0bf8d](https://github.com/mittwald/flow/commit/fe0bf8d6c4a96f8cb1b2409d571225383195acd3))
+* update visual regression screenshots ([c55ac9a](https://github.com/mittwald/flow/commit/c55ac9afb7468b6e20d2bba3fa5d2c0895949c97))
+* update visual regression screenshots ([c556e39](https://github.com/mittwald/flow/commit/c556e39583eb21adcbe6b41e4f6c3fadea018fdf))
+
+## [1.5.0-next.35](https://github.com/mittwald/flow/compare/1.5.0-next.34...1.5.0-next.35) (2026-10-09)
+
+### Bug Fixes
+
+* **LightBox:** keep the gallery image&#x27;s aspect ratio ([#3402](https://github.com/mittwald/flow/issues/3402)) ([ab32089](https://github.com/mittwald/flow/commit/ab320890d32920b8bd7036b18e423a2adda0f2ae))
+
+## [1.4.28](https://github.com/mittwald/flow/compare/1.5.0-next.33...1.4.28) (2026-10-09)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.28 ([c6649fb](https://github.com/mittwald/flow/commit/c6649fb3f39ae3f99791d3fc30888a67cf4d1db3))
+
+## [1.5.0-next.34](https://github.com/mittwald/flow/compare/1.5.0-next.33...1.5.0-next.34) (2026-10-09)
+
+### Bug Fixes
+
+* **remote-react-renderer:** drop an empty children array on the host ([#3403](https://github.com/mittwald/flow/issues/3403)) ([9d852fd](https://github.com/mittwald/flow/commit/9d852fdacb6875762d39059daaaf08353f835b02))
+
+## [1.4.27](https://github.com/mittwald/flow/compare/1.5.0-next.32...1.4.27) (2026-10-08)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.27 ([8b11091](https://github.com/mittwald/flow/commit/8b110913807fe2433ab4178016cb733bcf97d60a))
+
+## [1.5.0-next.33](https://github.com/mittwald/flow/compare/1.5.0-next.32...1.5.0-next.33) (2026-10-08)
+
+### Continuous Integration
+
+* add a non-blocking Firefox job to the browser tests ([#3298](https://github.com/mittwald/flow/issues/3298)) ([3771a4d](https://github.com/mittwald/flow/commit/3771a4d7b76fd8513b5e45318b453d28a9977fdb))
+
+## [1.4.26](https://github.com/mittwald/flow/compare/1.5.0-next.31...1.4.26) (2026-10-08)
+
+### Documentation
+
+* link the GitHub releases Atom feed ([#3366](https://github.com/mittwald/flow/issues/3366)) ([55c75f0](https://github.com/mittwald/flow/commit/55c75f006b660f5cf4701c8bb87bb2d56bb5624a))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.26 ([83aa5b9](https://github.com/mittwald/flow/commit/83aa5b9554a9dbd1f219671a2c819b747a03f715))
+
 ## [1.5.0-next.32](https://github.com/mittwald/flow/compare/1.5.0-next.31...1.5.0-next.32) (2026-10-08)
 
 ### Bug Fixes
