@@ -19,7 +19,7 @@ export const START_PAGES = [
   "templates/bausteine/formular",
   "templates/seiten/uebersichtsseite",
   "templates/seiten/detailseite",
-  "foundations/content-guidelines/error-handling",
+  "foundations/content-guidelines/fehlermeldungen",
   "foundations/content-guidelines/sprach-guide",
   "get-started/versioning",
 ];
