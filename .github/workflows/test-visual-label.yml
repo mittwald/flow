@@ -13,9 +13,21 @@ on:
       - reopened
       - synchronize
 
-# one at a time per branch; re-labeling supersedes an in-flight run
+# One at a time per branch; re-labeling supersedes an in-flight run. Only runs
+# that pass the `prepare` gate share the group: every `labeled` event starts a
+# run, whatever the label, and so does every push. Sharing the group, such a
+# run cancelled the visual run and then skipped itself — adding
+# `run-visual-tests` together with another label left no visual run at all.
+# Every other run gets a group of its own. The condition mirrors `prepare.if`;
+# keep the two in sync.
 concurrency:
-  group: visual-regression-run@${{ github.head_ref || github.ref }}
+  group: >-
+    visual-regression-run@${{ github.head_ref || github.ref }}${{
+    !(github.event_name == 'workflow_dispatch' ||
+    (github.head_ref != github.event.repository.default_branch &&
+    (github.event.label.name == 'run-visual-tests' ||
+    github.event.pull_request.user.login == 'dependabot[bot]'))) &&
+    format('@skip-{0}', github.run_id) || '' }}
   cancel-in-progress: true
 
 permissions:
@@ -23,7 +35,8 @@ permissions:
 
 jobs:
   # The gate for the whole run: the shards and the summary hang off this job, so
-  # a skip here skips them too.
+  # a skip here skips them too. The workflow's `concurrency.group` repeats this
+  # condition; keep the two in sync.
   prepare:
     runs-on: ubuntu-latest
     timeout-minutes: 5
