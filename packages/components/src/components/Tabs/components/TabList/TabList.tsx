@@ -11,6 +11,7 @@ import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 interface Props {
   selection: Aria.Key | null;
@@ -30,6 +31,7 @@ export const TabList: FC<Props> = (props) => {
   } = props;
 
   const titleCollapsedElementId = useId();
+  const isSkeleton = useSkeletonMode();
   const overflowObserver = useObserveOverflow();
   const isCollapsed = overflowObserver.isOverflowing;
   const rootClassName = clsx(styles.tabList, isCollapsed && styles.collapsed);
@@ -78,9 +80,17 @@ export const TabList: FC<Props> = (props) => {
     </ContextMenuTriggerView>
   );
 
+  /* In the mode, no tab shows as selected. */
+  const showIndicator =
+    !isCollapsed && !isSkeleton && tabIndicator.indicatorStyle;
+
   return (
-    <div className={rootClassName} ref={tabIndicator.rootRef}>
-      {!isCollapsed && tabIndicator.indicatorStyle && (
+    <div
+      className={rootClassName}
+      ref={tabIndicator.rootRef}
+      inert={isSkeleton || undefined}
+    >
+      {showIndicator && (
         <div
           aria-hidden="true"
           className={clsx(

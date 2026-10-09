@@ -6,6 +6,7 @@ import { Text } from "@/components/Text";
 import { useTabContext } from "@/components/Tabs/components/Tab/context";
 import { MenuItem } from "@/components/MenuItem";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface TabTitleProps
   extends
@@ -17,8 +18,13 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const { id } = useTabContext();
+  const isSkeleton = useSkeletonMode();
 
-  const titleClassName = clsx(styles.tabTitle, className);
+  const titleClassName = clsx(
+    styles.tabTitle,
+    isSkeleton && styles.skeleton,
+    className,
+  );
 
   return (
     <>

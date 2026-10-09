@@ -1,0 +1,16 @@
+@use "@/styles/mixins/skeleton";
+
+.skeletonIconSurface {
+  @include skeleton.shape;
+
+  --skeleton-radius: 50%;
+
+  display: inline-flex;
+  flex-shrink: 0;
+
+  /* The icon's size, also as a stretched flex or grid item */
+  width: fit-content;
+  height: fit-content;
+}
+
+@include skeleton.keyframes;

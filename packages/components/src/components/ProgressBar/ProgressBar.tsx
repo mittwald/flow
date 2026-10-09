@@ -13,6 +13,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { Status } from "@/lib/types/props";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface ProgressBarProps
   extends
@@ -55,10 +56,13 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
     ...rest
   } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.progressBar,
     styles[`size-${size}`],
     styles[status],
+    isSkeleton && styles.skeleton,
     className,
   );
 
@@ -80,6 +84,7 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
       formatOptions={formatOptions}
       maxValue={maxValue}
       {...rest}
+      inert={isSkeleton || undefined}
     >
       {({ percentage }) => (
         <PropsContextProvider props={propsContext}>

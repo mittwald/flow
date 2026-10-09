@@ -21,6 +21,7 @@ import { LinkContent } from "./components/LinkContent";
 import styles from "./TabNavigation.module.scss";
 import locales from "./locales/*.locale.json";
 import { useCollapsingItems } from "./lib/useCollapsingItems";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface TabNavigationProps
   extends
@@ -36,6 +37,7 @@ export const TabNavigation = flowComponent("TabNavigation", (props) => {
   const { children, className, ref, ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "TabNavigation");
+  const isSkeleton = useSkeletonMode();
 
   const { listRef, moreRef, visibleCount, hasOverflow, menuHasCurrentItem } =
     useCollapsingItems();
@@ -62,7 +64,11 @@ export const TabNavigation = flowComponent("TabNavigation", (props) => {
           {children}
         </PropsContextProvider>
       </ul>
-      <div className={styles.more} ref={moreRef}>
+      <div
+        className={styles.more}
+        ref={moreRef}
+        inert={isSkeleton || undefined}
+      >
         <ContextMenuTriggerView>
           <Button
             unstyled
