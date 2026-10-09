@@ -20,6 +20,15 @@
 
     @include focus.focus;
 
+    /* Combined with a Button, the Button carries the look */
+    &:has(> .button) {
+      display: block;
+      padding: 0;
+      border-radius: var(--header-navigation--corner-radius-round);
+    }
+  }
+
+  .link:not(:has(> .button)) {
     &:hover:not([aria-current]) {
       background-color: var(--header-navigation--background-color--hover);
     }
@@ -59,7 +68,10 @@
       .link,
       .button {
         color: var(--header-navigation--color-#{$color});
+      }
 
+      .link:not(:has(> .button)),
+      .button {
         &:hover:not([aria-current]) {
           background-color: var(
             --header-navigation--background-color-#{$color}--hover

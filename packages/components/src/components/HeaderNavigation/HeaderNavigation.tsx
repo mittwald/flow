@@ -12,6 +12,7 @@ import {
   type PropsWithClassName,
 } from "@/lib/types/props";
 import { Text } from "@/components/Text";
+import { containsTextChild } from "@/lib/react/remote";
 
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>, PropsWithClassName {
@@ -29,19 +30,32 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
     className,
   );
 
+  const buttonPropsContext = {
+    className: styles.button,
+    color: isAlphaColor(color) ? color : "secondary",
+    variant: "plain",
+  } as const;
+
   const propsContext: PropsContext = {
     Link: {
       wrapWith: <li className={styles.item} />,
       className: styles.link,
       unstyled: true,
-      children: dynamic((props) => (
-        <Text emulateBoldWidth>{props.children}</Text>
-      )),
+      /**
+       * `Text` clears the props context, so a link combined with a button must
+       * not get it — the button would lose the context of `Link`.
+       */
+      children: dynamic((props) =>
+        containsTextChild(props.children) ? (
+          <Text emulateBoldWidth>{props.children}</Text>
+        ) : (
+          props.children
+        ),
+      ),
+      Button: buttonPropsContext,
     },
     Button: {
-      className: styles.button,
-      color: isAlphaColor(color) ? color : "secondary",
-      variant: "plain",
+      ...buttonPropsContext,
       wrapWith: <li className={styles.item} />,
     },
   };

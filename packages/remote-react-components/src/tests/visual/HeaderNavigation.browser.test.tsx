@@ -21,6 +21,7 @@ test.each(testEnvironments)(
       Link,
       Button,
       IconSearch,
+      IconStar,
       Wrap,
       AccentBox,
       Avatar,
@@ -35,6 +36,11 @@ test.each(testEnvironments)(
               <HeaderNavigation color={color}>
                 <Link>{firstLetterToUppercase(color)}</Link>
                 <Link aria-current="page">Current</Link>
+                <Link href="#" target="_blank" aria-label="Star">
+                  <Button>
+                    <IconStar />
+                  </Button>
+                </Link>
                 <Button>
                   <IconSearch />
                 </Button>
