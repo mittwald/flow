@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { CalendarDate, parseDate } from "@internationalized/date";
+import {
+  CalendarDate,
+  CalendarDateTime,
+  parseDate,
+} from "@internationalized/date";
 import type { Row } from "@tanstack/react-table";
 import { DateTime } from "luxon";
 import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
@@ -100,4 +104,38 @@ test("compares a DateTime in another zone by its instant", () => {
 
   expect(matches(endDayAfternoon, range)).toBe(true);
   expect(matches(dayAfterEnd, range)).toBe(false);
+});
+
+describe("range with time", () => {
+  const timeRange = {
+    start: new CalendarDateTime(2026, 3, 10, 8, 0),
+    end: new CalendarDateTime(2026, 3, 10, 12, 0),
+  };
+
+  test.each([
+    ["07:59:59.999", false],
+    ["08:00:00.000", true],
+    ["12:00:59.999", true],
+    ["12:01:00.000", false],
+  ])("matches 2026-03-10 at %s: %s", (time, expected) => {
+    expect(matches(`2026-03-10T${time}`, timeRange)).toBe(expected);
+  });
+
+  test("combines a time with a whole day", () => {
+    const mixed = {
+      start: timeRange.start,
+      end: new CalendarDate(2026, 3, 11),
+    };
+    expect(matches("2026-03-10T07:00:00", mixed)).toBe(false);
+    expect(matches("2026-03-11T23:30:00", mixed)).toBe(true);
+  });
+
+  test("compares CalendarDateTime row values", () => {
+    expect(matches(new CalendarDateTime(2026, 3, 10, 9, 30), timeRange)).toBe(
+      true,
+    );
+    expect(matches(new CalendarDateTime(2026, 3, 10, 13, 0), timeRange)).toBe(
+      false,
+    );
+  });
 });

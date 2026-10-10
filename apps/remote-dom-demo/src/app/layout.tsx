@@ -92,6 +92,9 @@ export default function Layout(props: PropsWithChildren) {
                         ImageCropper
                       </NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
+                      <NavigationItem page="list-date-range">
+                        List (date range)
+                      </NavigationItem>
                       <NavigationItem page="list-selection">
                         List (selection)
                       </NavigationItem>
