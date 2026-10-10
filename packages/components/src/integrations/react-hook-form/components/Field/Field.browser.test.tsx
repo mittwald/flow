@@ -5,6 +5,25 @@ import { Option } from "@/components/Option";
 import { Select } from "@/components/Select";
 import { Switch } from "@/components/Switch";
 import TextField from "@/components/TextField";
+import Autocomplete from "@/components/Autocomplete";
+import CheckboxButton from "@/components/CheckboxButton";
+import CheckboxGroup from "@/components/CheckboxGroup";
+import ComboBox from "@/components/ComboBox";
+import DatePicker from "@/components/DatePicker";
+import DateRangePicker from "@/components/DateRangePicker";
+import FileDropZone from "@/components/FileDropZone";
+import FileField from "@/components/FileField";
+import MarkdownEditor from "@/components/MarkdownEditor";
+import NumberField from "@/components/NumberField";
+import PasswordCreationField from "@/components/PasswordCreationField";
+import { Radio, RadioGroup } from "@/components/RadioGroup";
+import Rating from "@/components/Rating";
+import SearchField from "@/components/SearchField";
+import SegmentedControl, { Segment } from "@/components/SegmentedControl";
+import Slider from "@/components/Slider";
+import TextArea from "@/components/TextArea";
+import TimeField from "@/components/TimeField";
+import { type ReactNode, useState } from "react";
 import {
   Form,
   typedField,
@@ -13,7 +32,7 @@ import {
 import { useForm } from "react-hook-form";
 import { beforeEach, expect, vitest } from "vitest";
 import { render } from "vitest-browser-react";
-import { page, userEvent } from "vitest/browser";
+import { type Locator, page, userEvent } from "vitest/browser";
 
 const handleSubmit = vitest.fn();
 
@@ -220,6 +239,226 @@ describe("Text field", () => {
       "aria-invalid",
       "true",
     );
+  });
+});
+
+describe("disabled", () => {
+  const isMarkedDisabled = (control: Element) =>
+    control.hasAttribute("disabled") ||
+    control.hasAttribute("data-disabled") ||
+    control.getAttribute("aria-disabled") === "true";
+
+  const disabledFields: Record<
+    string,
+    { field: ReactNode; control: () => Locator }
+  > = {
+    Autocomplete: {
+      field: (
+        <Autocomplete>
+          <TextField aria-label="field" />
+          <Option value="a">a</Option>
+        </Autocomplete>
+      ),
+      control: () => page.getByLabelText("field"),
+    },
+    SearchField: {
+      field: <SearchField />,
+      control: () => page.getByRole("searchbox"),
+    },
+    TextField: {
+      field: <TextField aria-label="field" />,
+      control: () => page.getByLabelText("field"),
+    },
+    TextArea: {
+      field: <TextArea aria-label="field" />,
+      control: () => page.getByLabelText("field"),
+    },
+    MarkdownEditor: {
+      field: <MarkdownEditor aria-label="field" />,
+      control: () => page.getByLabelText("field"),
+    },
+    Checkbox: {
+      field: <Checkbox>field</Checkbox>,
+      control: () => page.getByRole("checkbox"),
+    },
+    CheckboxGroup: {
+      field: (
+        <CheckboxGroup aria-label="field">
+          <Checkbox value="a">a</Checkbox>
+        </CheckboxGroup>
+      ),
+      control: () => page.getByRole("checkbox"),
+    },
+    CheckboxButton: {
+      field: <CheckboxButton>field</CheckboxButton>,
+      control: () => page.getByRole("checkbox"),
+    },
+    FileField: {
+      field: (
+        <FileField>
+          <Button>Select</Button>
+        </FileField>
+      ),
+      control: () => page.getByRole("button", { name: "Select" }),
+    },
+    FileDropZone: {
+      field: (
+        <FileDropZone>
+          <FileField>
+            <Button>Select</Button>
+          </FileField>
+        </FileDropZone>
+      ),
+      control: () => page.getByRole("button", { name: "Select" }),
+    },
+    NumberField: {
+      field: <NumberField aria-label="field" />,
+      control: () => page.getByRole("textbox"),
+    },
+    RadioGroup: {
+      field: (
+        <RadioGroup aria-label="field">
+          <Radio value="a">a</Radio>
+        </RadioGroup>
+      ),
+      control: () => page.getByRole("radio"),
+    },
+    Switch: {
+      field: <Switch>field</Switch>,
+      control: () => page.getByRole("switch"),
+    },
+    Slider: {
+      field: <Slider aria-label="field" />,
+      control: () => page.getByRole("slider"),
+    },
+    PasswordCreationField: {
+      field: <PasswordCreationField aria-label="field" />,
+      control: () => page.getByLabelText("field"),
+    },
+    DatePicker: {
+      field: <DatePicker aria-label="field" />,
+      control: () => page.getByRole("spinbutton").first(),
+    },
+    DateRangePicker: {
+      field: <DateRangePicker aria-label="field" />,
+      control: () => page.getByRole("spinbutton").first(),
+    },
+    TimeField: {
+      field: <TimeField aria-label="field" />,
+      control: () => page.getByRole("spinbutton").first(),
+    },
+    SegmentedControl: {
+      field: (
+        <SegmentedControl aria-label="field">
+          <Segment value="a">a</Segment>
+        </SegmentedControl>
+      ),
+      control: () => page.getByRole("radio"),
+    },
+    Select: {
+      field: (
+        <Select aria-label="field">
+          <Option value="a">a</Option>
+        </Select>
+      ),
+      control: () => page.getByRole("button"),
+    },
+    ComboBox: {
+      field: (
+        <ComboBox aria-label="field">
+          <Option value="a">a</Option>
+        </ComboBox>
+      ),
+      control: () => page.getByRole("combobox"),
+    },
+    Rating: {
+      field: <Rating aria-label="field" />,
+      control: () => page.getByRole("radio").first(),
+    },
+  };
+
+  test.each(
+    Object.entries(disabledFields).map(([name, testCase]) => ({
+      name,
+      ...testCase,
+    })),
+  )("disabled Field disables $name", async ({ field, control }) => {
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Field name="test" disabled>
+            {field}
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    await expect.poll(() => isMarkedDisabled(control().element())).toBe(true);
+  });
+
+  test("disabled Field wins over isDisabled of the field", async () => {
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Field name="test" disabled>
+            <TextField aria-label="Test field" isDisabled={false} />
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    await expect.element(page.getByLabelText("Test field")).toBeDisabled();
+  });
+
+  test("disabled Field disables the file input of FileField", async () => {
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Field name="test" disabled>
+            <FileField>
+              <Button>Select</Button>
+            </FileField>
+          </Field>
+        </Form>
+      );
+    };
+
+    const { container } = await render(<TestForm />);
+    const fileInput = container.querySelector("input[type=file]");
+    if (!fileInput) {
+      throw new Error("File input not rendered");
+    }
+    await expect.element(page.elementLocator(fileInput)).toBeDisabled();
+  });
+
+  test("Field is enabled again when disabled is reset", async () => {
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      const [disabled, setDisabled] = useState(true);
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Button onPress={() => setDisabled(false)}>Enable</Button>
+          <Field name="test" disabled={disabled}>
+            <TextField aria-label="Test field" />
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    const field = page.getByLabelText("Test field");
+    await expect.element(field).toBeDisabled();
+    await userEvent.click(page.getByRole("button", { name: "Enable" }));
+    await expect.element(field).toBeEnabled();
   });
 });
 
