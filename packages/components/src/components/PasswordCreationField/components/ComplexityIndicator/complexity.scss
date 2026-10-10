@@ -1,13 +1,18 @@
-$animation-background-color-change: linear 100ms;
-$animation-width-responsiveness: ease-in-out 200ms;
+$animation-background-color-change: linear
+  var(--password-creation-field--transition-duration-show);
+$animation-width-responsiveness: ease-in-out var(--transition--duration--fast);
 
-$animation-in-duration: 100ms;
+$animation-in-duration: var(
+  --password-creation-field--transition-duration-show
+);
 
 @mixin animation-in($property) {
   transition: #{$property} ease-out #{$animation-in-duration};
 }
 
-$animation-out-duration: 50ms;
+$animation-out-duration: var(
+  --password-creation-field--transition-duration-hide
+);
 
 @mixin animation-out($property) {
   transition: #{$property} ease-in #{$animation-out-duration};

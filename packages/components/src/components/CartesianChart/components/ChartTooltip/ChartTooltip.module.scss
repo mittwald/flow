@@ -1,5 +1,7 @@
 :global(.recharts-tooltip-wrapper-right) {
-  margin-inline-start: calc(var(--popover--tip-height) + var(--chart-tooltip--spacing));
+  margin-inline-start: calc(
+    var(--popover--tip-height) + var(--chart-tooltip--spacing)
+  );
 }
 
 :global(.recharts-tooltip-wrapper-left) {
@@ -18,6 +20,6 @@
   padding: var(--popover--padding--m);
 
   &:has(.progressBar) {
-    min-width: 250px;
+    min-width: var(--chart-tooltip--progress-bar-min-width);
   }
 }

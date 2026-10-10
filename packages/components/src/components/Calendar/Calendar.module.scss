@@ -22,7 +22,7 @@
     gap: var(--popover--padding--m);
 
     .presetMenu {
-      max-width: 200px;
+      max-width: var(--calendar--preset-menu-max-width);
 
       /*
        * With an auto width, WebKit resolved the menu one item padding wider on
@@ -114,7 +114,7 @@
           border-block: var(--calendar--range-border-width)
             var(--calendar--range-border-style)
             var(--calendar--range-border-color);
-          width: calc(100% + 0.375rem);
+          width: calc(100% + var(--calendar--range-background-overhang));
           height: 100%;
           position: absolute;
           z-index: -1;
@@ -181,7 +181,7 @@
 
 @media (max-width: 360px) {
   .calendar {
-    --calendar--cell-size: 2.1rem;
-    --calendar--cell-font-size: 0.8rem;
+    --calendar--cell-size: var(--calendar--cell-size-s);
+    --calendar--cell-font-size: var(--calendar--cell-font-size-s);
   }
 }
