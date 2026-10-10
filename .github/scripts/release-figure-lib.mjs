@@ -39,13 +39,25 @@ const EXAMPLE_ROUTE = "/example-preview";
 /** The source files `/example-preview/` serves, relative to the repo root. */
 export const EXAMPLE_GLOB = "apps/docs/src/content/**/examples/*.tsx";
 
+/** Every figure is captured once per theme. Light comes first. */
+export const FIGURE_THEMES = /** @type {const} */ (["light", "dark"]);
+
+/** @typedef {(typeof FIGURE_THEMES)[number]} FigureTheme */
+
 /**
- * The CSS colors a background may use. Narrow on purpose: the value is
- * interpolated into the composition page's `<style>`, where anything
- * unconstrained could close the block.
+ * The composition page's own colors around the examples. The ground matches the
+ * stage's `--neutral--color--100`, so the caption rows join the frames
+ * seamlessly. Dark takes the gray-palette steps that mirror the light ones.
+ *
+ * @type {Record<
+ *   FigureTheme,
+ *   { ground: string; separator: string; caption: string }
+ * >}
  */
-const CSS_COLOR =
-  /^(transparent|#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9a-zA-Z .,%/-]+\)|[a-zA-Z]+)$/;
+const FIGURE_COLORS = {
+  light: { ground: "#ffffff", separator: "#e4e6eb", caption: "#6b7280" },
+  dark: { ground: "#1b1f24", separator: "#3a434e", caption: "#8fa1b4" },
+};
 
 export class FigureSpecError extends Error {}
 
@@ -94,8 +106,39 @@ export const figureOutputPath = (version, name) => {
     FIGURE_NAME.test(name),
     `figure name must be kebab-case, got ${JSON.stringify(name)}`,
   );
+  check(
+    !name.endsWith("-dark"),
+    `figure name must not end in -dark — that suffix marks the dark capture, got ${JSON.stringify(name)}`,
+  );
   return `${FIGURE_ROOT}/${version}/${name}.png`;
 };
+
+/**
+ * The file one theme's capture is written to: the spec's path for light, the
+ * same path with `-dark` before the extension for dark.
+ *
+ * @param {string} out A normalized `.png` path from the spec
+ * @param {FigureTheme} theme
+ * @returns {string}
+ */
+export const themedOutputPath = (out, theme) =>
+  theme === "light" ? out : out.replace(/\.png$/, "-dark.png");
+
+/**
+ * The release-notes snippet for one figure. GitHub picks the `<source>` in dark
+ * mode; the docs site rewrites the block (`themedFigures` in
+ * `apps/docs/src/lib/releases`), because its markdown drops raw HTML.
+ *
+ * @param {{ sha: string; out: string; alt: string }} args
+ * @returns {string}
+ */
+export const figureMarkdown = ({ sha, out, alt }) =>
+  [
+    "<picture>",
+    `  <source media="(prefers-color-scheme: dark)" srcset="${rawFigureUrl(sha, themedOutputPath(out, "dark"))}">`,
+    `  <img src="${rawFigureUrl(sha, out)}" alt="${escapeHtml(alt)}">`,
+    "</picture>",
+  ].join("\n");
 
 /**
  * The URL the release notes reference. A commit SHA, never a branch: it
@@ -160,7 +203,6 @@ export const resolveOutputPath = (out) => {
  * @property {string} out
  * @property {number} width
  * @property {number} scale
- * @property {string} background
  * @property {NormalizedPanel[]} panels
  */
 
@@ -199,10 +241,9 @@ export const normalizeFigureSpec = (raw) => {
     `spec.scale (deviceScaleFactor) must be 1, 2 or 3, got ${scale}`,
   );
 
-  const background = spec.background ?? "#ffffff";
   check(
-    typeof background === "string" && CSS_COLOR.test(background),
-    `spec.background must be a plain CSS color, got ${JSON.stringify(background)}`,
+    spec.background === undefined,
+    "spec.background is gone — each theme brings its own ground",
   );
 
   check(
@@ -269,7 +310,6 @@ export const normalizeFigureSpec = (raw) => {
     out,
     width,
     scale,
-    background,
     panels,
   };
 };
@@ -331,13 +371,14 @@ const escapeHtml = (value) =>
  *
  * @param {{
  *   width: number;
- *   background: string;
+ *   theme: FigureTheme;
  *   panels: { caption: string | null }[];
  *   urls: string[];
  * }} args
  * @returns {string}
  */
-export const composeFigureHtml = ({ width, background, panels, urls }) => {
+export const composeFigureHtml = ({ width, theme, panels, urls }) => {
+  const colors = FIGURE_COLORS[theme];
   const body = panels
     .map((panel, index) => {
       const caption =
@@ -352,14 +393,14 @@ export const composeFigureHtml = ({ width, background, panels, urls }) => {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>release figure</title><style>
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: ${background}; }
+  html, body { margin: 0; padding: 0; background: ${colors.ground}; }
   #figure { width: ${width}px; overflow: hidden; }
-  .panel + .panel { border-top: 1px solid #e4e6eb; }
+  .panel + .panel { border-top: 1px solid ${colors.separator}; }
   .caption {
     margin: 0;
     padding: 12px var(--caption-inset, 16px) 0;
     font: 12px/1.5 ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    color: #6b7280;
+    color: ${colors.caption};
   }
   iframe { display: block; width: 100%; height: 2000px; border: 0; }
 </style></head>
