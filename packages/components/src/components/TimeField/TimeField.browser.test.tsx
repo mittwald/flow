@@ -6,6 +6,7 @@ import { Time } from "@internationalized/date";
 import type { TimeValue } from "react-aria-components";
 import { TimeField } from "@/components/TimeField";
 import { Label } from "@/components/Label";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 
@@ -131,4 +132,15 @@ test("keeps typing while a controlled value arrives late", async () => {
   }
 
   await expect.element(segment("minute")).toHaveTextContent("45");
+});
+
+testFormFieldContract("TimeField", {
+  render: (props) => <TimeField {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new Time(9, 30), new Time(10, 45)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen, { force }) => {
+    await screen.getByRole("spinbutton").first().click({ force });
+    await userEvent.keyboard("1045");
+  },
 });

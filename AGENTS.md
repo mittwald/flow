@@ -236,7 +236,8 @@ A new or substantially changed component comes with:
    `packages/remote-react-components/src/tests/visual` — it runs in both the
    `Local` and `Remote` environments and guards the whole path.** The browser
    also picks the theme (webkit = light, firefox = dark), so a full run covers
-   both themes.
+   both themes. **A form field passes `testFormFieldContract`** — see
+   [Building a form field](packages/components/AGENTS.md#building-a-form-field).
 5. UI text in `locales/de-DE.locale.json` **and** `locales/en-US.locale.json`
    (import pattern: i18n section of
    [packages/components/AGENTS.md](packages/components/AGENTS.md))
