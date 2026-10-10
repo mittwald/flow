@@ -186,6 +186,28 @@ test("expands an AppShell to its tsx and css files", () => {
   );
 });
 
+test("expands a FileExample like an AppShell", () => {
+  writeExample("block.tsx", "export default () => <Button />;\n");
+  writeExample("block.module.css", ".trigger {}\n");
+
+  expect(convert('<FileExample example="block" />\n')).toBe(
+    [
+      "**block.tsx**",
+      "",
+      "```tsx",
+      "export default () => <Button />",
+      "```",
+      "",
+      "**block.module.css**",
+      "",
+      "```css",
+      ".trigger {}",
+      "```",
+      "",
+    ].join("\n"),
+  );
+});
+
 test("an AppShell's files prop picks the files it shows", () => {
   writeExample("picked.tsx", "export default () => null;\n");
   writeExample("picked.module.css", ".unused {}\n");
