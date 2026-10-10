@@ -8,10 +8,54 @@
     "input increment"
     "input decrement";
 
-  .input {
+  .inputContainer {
     grid-area: input;
+    display: grid;
+    // Without it the column takes the input's intrinsic width
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
 
+  .input,
+  .unitOverlay {
+    grid-area: 1 / 1;
+  }
+
+  .input {
     @include formControl.formControl();
+  }
+
+  // Mirrors the input's box so the text lines up with the input text
+  .unitOverlay {
+    @include formControl.formBorder();
+    @include formControl.formOutline();
+
+    // Grid items paint in `order`; formControl moves the input to 2
+    order: 2;
+    border-color: transparent;
+    color: var(--form-control--content-color--default);
+    white-space: pre;
+    pointer-events: none;
+    contain: inline-size;
+
+    &[data-empty] {
+      visibility: hidden;
+    }
+  }
+
+  // The input clips its text at the content box, `overflow` clips at the
+  // padding box — so the overlay keeps the padding and clips one level deeper
+  .unitClip {
+    display: block;
+    overflow: hidden;
+  }
+
+  .unitSpacer {
+    visibility: hidden;
+  }
+
+  &[aria-disabled="true"] .unitOverlay {
+    color: var(--form-control--content-color--disabled);
   }
 
   .decrementButton {
