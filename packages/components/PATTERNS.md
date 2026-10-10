@@ -125,11 +125,17 @@ and consistency enforced by tooling, not maintained by hand.
   - ✓ root styling combines base, variants, state, and consumer classes.
   - ✗ a single invariant class → pass it directly.
 - **Readable JSX via extracted expressions** — lift computed nodes (icon, label,
-  tooltip text) and non-trivial conditionals into named consts above the
-  `return`; the returned tree stays scannable — no large inline ternaries, no
-  deep logic in the markup. `src/components/Button/Button.tsx:168`
+  tooltip text) into named consts above the `return`; the returned tree stays
+  scannable — no large inline ternaries, no deep logic in the markup.
+  `src/components/Button/Button.tsx:168`
   - ✓ markup mixes conditional content or several computed values.
   - ✗ a single self-evident inline expression → keep it inline.
+- **One const per variant, the JSX picks** — when the output switches between
+  alternative UI parts, each part is its own const and the returned JSX decides
+  with a one-line ternary or `&&` (`{isSkeleton ? skeletonDonut : donut}`).
+  - ✓ two or more multi-line alternatives.
+  - ✗ a multi-line ternary assigned to a const → split it into one const per
+    branch.
 - **Helpers outside the component** `[undocumented]` — hookless pure
   helpers/constants live above the component const.
   `src/components/Button/Button.tsx:45`
