@@ -125,8 +125,72 @@ test("drops a DesignTokenTable with an unknown path", () => {
   expect(convert('<DesignTokenTable path="color.nope" />\n')).toBe("\n");
 });
 
+test("expands a ComponentTokenTable to the component's tokens", () => {
+  const filePath = path.join(dir, "index.mdx");
+  fs.writeFileSync(filePath, "<ComponentTokenTable />\n");
+  const markdown = mdxToMarkdown(filePath, { componentName: "Button" });
+
+  expect(markdown).toContain("## Größen & Stile");
+  expect(markdown).toContain("| `--button--padding-x` | `16px` |");
+  expect(markdown).toContain("## Farben");
+  expect(markdown).toContain("| Token | Light | Dark |");
+  expect(markdown).toMatch(
+    /\| `--button--pending-icon-color` \| `#\w+` \| `#\w+` \|/,
+  );
+});
+
+test("expands a ComponentTokenTable to the namespaces in tokens", () => {
+  const filePath = path.join(dir, "index.mdx");
+  fs.writeFileSync(
+    filePath,
+    '<ComponentTokenTable tokens="list, list-item" />\n',
+  );
+  const markdown = mdxToMarkdown(filePath, { componentName: "List" });
+
+  expect(markdown).toContain("`--list--");
+  expect(markdown).toContain("`--list-item--");
+});
+
 test("keeps inline code untouched by JSX stripping", () => {
   expect(convert("Nutze `<Button />` dafür.\n")).toBe(
     "Nutze `<Button />` dafür.\n",
   );
+});
+
+const writeExample = (fileName: string, content: string): void => {
+  fs.mkdirSync(path.join(dir, "examples"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "examples", fileName), content);
+};
+
+test("expands an AppShell to its tsx and css files", () => {
+  writeExample("shell.tsx", "export default () => <Header />;\n");
+  writeExample("shell.module.css", ".frame {\n  display: grid;\n}\n");
+
+  expect(convert('<AppShell example="shell" />\n')).toBe(
+    [
+      "**shell.tsx**",
+      "",
+      "```tsx",
+      "export default () => <Header />",
+      "```",
+      "",
+      "**shell.module.css**",
+      "",
+      "```css",
+      ".frame {",
+      "  display: grid;",
+      "}",
+      "```",
+      "",
+    ].join("\n"),
+  );
+});
+
+test("an AppShell's files prop picks the files it shows", () => {
+  writeExample("picked.tsx", "export default () => null;\n");
+  writeExample("picked.module.css", ".unused {}\n");
+
+  expect(
+    convert('<AppShell example="picked" files={["picked.tsx"]} />\n'),
+  ).toBe("**picked.tsx**\n\n```tsx\nexport default () => null\n```\n");
 });

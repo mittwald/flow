@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { beforeEach, expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { Label } from "@/components/Label";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { RatingSegment } from "@/components/Rating/components/RatingSegment";
 import { IconStarFilled } from "@/components/Icon/components/icons";
+import { parkPointer } from "@/lib/dev/parkPointer";
 import styles from "./Rating.module.scss";
 
 const segments = (): HTMLElement[] =>
@@ -19,6 +20,9 @@ const fillStates = (): boolean[] =>
     const filled = segment.querySelector(`.${styles.filled}`);
     return !!filled && getComputedStyle(filled).opacity === "1";
   });
+
+// A pointer left over the next Rating previews a segment in Firefox.
+beforeEach(parkPointer);
 
 test("segment children set the number of segments and their labels", async () => {
   await render(
@@ -46,6 +50,16 @@ test("a segment label can be overridden", async () => {
   await expect
     .element(page.getByRole("radio", { name: "Terrible" }))
     .toBeInTheDocument();
+});
+
+test.each([
+  [1.3, [true, false, false, false, false]],
+  [1.5, [true, true, false, false, false]],
+  [3.7, [true, true, true, true, false]],
+])("a value of %s is rounded to whole segments", async (value, expected) => {
+  await render(<Rating aria-label="Rating" value={value} />);
+
+  await expect.poll(fillStates).toEqual(expected);
 });
 
 test("single fill previews the hovered segment", async () => {

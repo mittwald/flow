@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import ButtonView from "@/views/ButtonView";
-import { Flex } from "@/components/Flex";
+import FlexView from "@/views/FlexView";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 import RangeCalendarView from "@/views/RangeCalendarView";
@@ -18,7 +18,7 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
-    <Flex direction="column" gap="m">
+    <FlexView direction="column" gap="m">
       <RangeCalendarView
         {...filter.dateRangeOptions}
         value={currentValue}
@@ -36,6 +36,6 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
           {stringFormatter.format("filters.clearSelection")}
         </ButtonView>
       )}
-    </Flex>
+    </FlexView>
   );
 };

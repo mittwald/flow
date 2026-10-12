@@ -1,7 +1,6 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test } from "vitest";
-import { userEvent } from "vitest/browser";
+import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
   "CodeBlock (%s)",
@@ -40,11 +39,8 @@ test.each(testEnvironments)(
 // Element tree comparable from alpha.883.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "CodeBlock truncated (%s)",
-  async ({ testScreenshot, render, components: { CodeBlock } }) => {
-    await render(
-      <CodeBlock
-        language="json"
-        code={`{
+  async ({ testScreenshot, render, components: { CodeBlock, Flex } }) => {
+    const code = `{
   "name": "Death Star"
   "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
   "shortId": "p-123456",
@@ -53,29 +49,30 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "status": "ready",
   "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
   "serverShortId": "s-123456",
-}`}
-        truncateLines={4}
-      />,
+}`;
+
+    await render(
+      <Flex direction="column" gap="m">
+        <CodeBlock language="json" code={code} truncateLines={4} />
+        <CodeBlock
+          language="json"
+          code={code}
+          showLineNumbers
+          truncateLines={4}
+        />
+      </Flex>,
     );
 
-    await userEvent.keyboard("{tab}");
+    /* A mouse click leaves no focus ring in the captures. */
+    const toggles = page.getByRole("button", { name: /show (more|less)/i });
 
-    /*
-     * Both captures below encode the toggle's focus ring, and toggling swaps
-     * its label, so React re-renders the button the focus sits on. Wait for the
-     * focus each time instead of racing it — see `@/tests/lib/scenarioFocus`.
-     */
-    await waitForFocusInTheScenario();
-
-    await userEvent.keyboard("{enter}");
-
-    await waitForFocusInTheScenario();
+    await toggles.nth(0).click();
+    await toggles.nth(1).click();
 
     await testScreenshot("CodeBlock truncated - expanded");
 
-    await userEvent.keyboard("{enter}");
-
-    await waitForFocusInTheScenario();
+    await toggles.nth(0).click();
+    await toggles.nth(1).click();
 
     await testScreenshot("CodeBlock truncated - collapsed");
   },

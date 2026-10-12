@@ -6,7 +6,8 @@ describe("MdxFile.titleFrom", () => {
   it("prefers the frontmatter title", () => {
     assert.equal(
       MdxFile.titleFrom({ title: "Multi Upload", component: "FileField" }, [
-        "03-patterns",
+        "templates",
+        "bausteine",
         "multi-upload",
       ]),
       "Multi Upload",

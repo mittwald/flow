@@ -1,12 +1,12 @@
 import type { ReactCodeMirrorProps } from "@uiw/react-codemirror";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
-import { useId } from "react";
+import { useCallback, useId, useState } from "react";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
-import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { joinIds, useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./CodeEditor.module.scss";
@@ -35,6 +35,13 @@ export interface CodeEditorProps
    */
   isReadOnly?: boolean;
   /**
+   * Whether the editor is disabled. The code can neither be edited, focused nor
+   * copied.
+   *
+   * @default false
+   */
+  isDisabled?: boolean;
+  /**
    * Whether the editor is displayed as invalid.
    *
    * @default false
@@ -42,8 +49,11 @@ export interface CodeEditorProps
   isInvalid?: boolean;
   /** The elements class name. */
   className?: string;
-  /** The language the code is highlighted as. */
-  language?: CodeEditorLanguage;
+  /**
+   * The language the code is highlighted as. A language the editor does not
+   * know is shown as plain text.
+   */
+  language?: CodeEditorLanguage | (string & {});
   /**
    * Whether a button to copy the code to the clipboard is shown.
    *
@@ -76,6 +86,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     language,
     extensions,
     isReadOnly,
+    isDisabled,
     isInvalid,
     isRequired,
     validationBehavior: _ignoredValidationBehavior,
@@ -96,18 +107,34 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "CodeEditor");
 
   const rootClassName = clsx(
-    fieldProps.className,
+    wrapperProps.className,
     styles.codeEditor,
     className,
   );
 
   const labelId = useId();
   const descriptionId = useId();
+
+  /**
+   * Both are optional. Their refs tell whether they are rendered, so the editor
+   * never references an element that does not exist – a dangling id fails HTML
+   * validators and a11y checks. The callbacks are stable: a new one per render
+   * would detach and re-attach on every render.
+   */
+  const [hasLabel, setHasLabel] = useState(false);
+  const [hasDescription, setHasDescription] = useState(false);
+  const labelRef = useCallback((element: Element | null) => {
+    setHasLabel(!!element);
+  }, []);
+  const descriptionRef = useCallback((element: Element | null) => {
+    setHasDescription(!!element);
+  }, []);
 
   /**
    * The label and the field description are declared as children of the code
@@ -120,11 +147,13 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     Label: {
       ...fieldPropsContext.Label,
       id: labelId,
+      ref: labelRef,
       tunnel: { id: "label", component: "CodeEditor" },
     },
     FieldDescription: {
       ...fieldPropsContext.FieldDescription,
       id: descriptionId,
+      ref: descriptionRef,
       tunnel: { id: "fieldDescription", component: "CodeEditor" },
     },
   };
@@ -141,22 +170,21 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
    * root element the props are applied to. Its ARIA attributes are set through
    * the content attributes facet.
    *
-   * The label reference only resolves when a label is given. Without one, an
-   * `aria-label` names the editor instead – the name computation skips
-   * references that point at nothing.
+   * Without a label, an `aria-label` names the editor instead.
    */
-  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
-
-  const describedBy =
-    [descriptionId, fieldProps["aria-describedby"]].filter(Boolean).join(" ") ||
-    undefined;
+  const labelledBy = joinIds(ariaLabelledBy, hasLabel && labelId);
+  const describedBy = joinIds(
+    hasDescription && descriptionId,
+    controlProps["aria-describedby"],
+  );
 
   const contentAttributes = EditorView.contentAttributes.of({
-    "aria-labelledby": labelledBy,
+    ...(labelledBy ? { "aria-labelledby": labelledBy } : {}),
     ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
     ...(describedBy ? { "aria-describedby": describedBy } : {}),
     ...(isRequired ? { "aria-required": "true" } : {}),
     ...(isInvalid ? { "aria-invalid": "true" } : {}),
+    ...(isDisabled ? { "aria-disabled": "true" } : {}),
   });
 
   const localRef = useObjectRef(ref);
@@ -164,7 +192,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   useMakeFocusable(localRef);
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} data-disabled={isDisabled || undefined}>
       <PropsContextProvider props={propsContext}>
         <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
@@ -172,8 +200,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             {...rest}
             value={value}
             basicSetup={{
-              highlightActiveLine: showActiveLineMarker,
-              highlightActiveLineGutter: showActiveLineMarker,
+              highlightActiveLine: showActiveLineMarker && !isDisabled,
+              highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
               autocompletion: false,
               lineNumbers: false,
               foldGutter: false,
@@ -181,7 +209,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             }}
             theme={defaultLightTheme}
             data-invalid={isInvalid || undefined}
-            readOnly={isReadOnly}
+            data-disabled={isDisabled || undefined}
+            readOnly={isReadOnly || isDisabled}
+            editable={!isDisabled}
             className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
             ref={(codeMirrorRef) => {
               if (codeMirrorRef?.editor) {
@@ -197,6 +227,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
                 size="s"
                 variant="soft"
                 text={value}
+                isDisabled={isDisabled}
               />
             )}
             {children}

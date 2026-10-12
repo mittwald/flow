@@ -13,6 +13,8 @@ import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface LabelProps
   extends
@@ -38,7 +40,15 @@ export const Label = flowComponent("Label", (props) => {
     ...rest
   } = props;
 
+  const [labelProps, labelRef] = Aria.useContextProps(
+    rest,
+    ref,
+    Aria.LabelContext,
+  );
+  const { id, ...rootProps } = labelProps;
+
   const stringFormatter = useLocalizedStringFormatter(locales, "Label");
+  const isSkeleton = useSkeletonMode();
 
   const rootClassName = unstyled
     ? className
@@ -78,28 +88,45 @@ export const Label = flowComponent("Label", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Aria.Label {...rest} className={rootClassName} ref={ref}>
-        {children}
-        {optional && optionalMarker}
-        <UiComponentTunnelExit id="contextualHelp" component="Label">
-          {(children) => {
-            if (React.Children.count(children) >= 1) {
-              return children;
-            }
+      {/* The context is already merged into `labelProps` above. */}
+      <Aria.LabelContext.Provider value={null}>
+        <Aria.Label
+          {...rootProps}
+          className={rootClassName}
+          ref={labelRef}
+          inert={isSkeleton || undefined}
+        >
+          {/*
+           * Fields point `aria-labelledby` at the label's id, and the name
+           * computation takes every descendant's name, buttons included. The
+           * id sits on this span so the tunnelled buttons stay out of it.
+           */}
+          <span id={id} className={styles.text}>
+            <SkeletonTextContent defaultWidth="6em">
+              {children}
+              {optional && optionalMarker}
+            </SkeletonTextContent>
+          </span>
+          <UiComponentTunnelExit id="contextualHelp" component="Label">
+            {(children) => {
+              if (React.Children.count(children) >= 1) {
+                return children;
+              }
 
-            return undefined;
-          }}
-        </UiComponentTunnelExit>
-        <UiComponentTunnelExit id="right" component="Label">
-          {(children) => {
-            if (React.Children.count(children) >= 1) {
-              return <div className={styles.right}>{children}</div>;
-            }
+              return undefined;
+            }}
+          </UiComponentTunnelExit>
+          <UiComponentTunnelExit id="right" component="Label">
+            {(children) => {
+              if (React.Children.count(children) >= 1) {
+                return <div className={styles.right}>{children}</div>;
+              }
 
-            return undefined;
-          }}
-        </UiComponentTunnelExit>
-      </Aria.Label>
+              return undefined;
+            }}
+          </UiComponentTunnelExit>
+        </Aria.Label>
+      </Aria.LabelContext.Provider>
     </PropsContextProvider>
   );
 });

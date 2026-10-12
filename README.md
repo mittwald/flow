@@ -61,6 +61,11 @@ export default function App() {
 }
 ```
 
+**Building an app or mStudio extension in your own project?** Read
+[packages/components/USAGE.md](packages/components/USAGE.md) before you lay out
+anything — templates, layout and spacing, what is safe to depend on. It routes
+extension developers on.
+
 Prefer to override Flow's styles without specificity tricks? Import the
 [CSS Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)
 variant instead — `@mittwald/flow-react-components/all-layered.css`. See the
@@ -157,9 +162,9 @@ pnpm test             # unit + compile tests
 pnpm lint             # eslint + stylelint + format:check
 ```
 
-This repo is optimized for AI coding agents as well as humans: every package
-ships an `AGENTS.md` next to its code with the patterns and footguns specific to
-that area. Start with the root [AGENTS.md](AGENTS.md).
+Working on Flow itself, as a human or an AI coding agent? Start with the root
+[AGENTS.md](AGENTS.md). Most packages add their own `AGENTS.md` with the
+patterns and footguns of that area.
 
 ## License
 

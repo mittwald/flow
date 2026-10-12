@@ -532,10 +532,12 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/LayoutCard/LayoutCard.module.scss:16`
   - ✓ a layout must style standalone Flow classes unreachable via props/context.
   - ✗ normal composition → PropsContext classes.
-- **Container-query ownership** `[undocumented]` — inline-size container at the
-  semantic boundary. `src/components/Section/Section.module.scss:5`
+- **Container-query ownership** `[undocumented]` — the component that queries a
+  container declares it itself.
+  `src/components/ColumnLayout/ColumnLayout.module.scss:2`
   - ✓ descendants adapt to this component's available space.
   - ✗ viewport-wide adaptation → responsive primitives/media.
+  - ✗ a container nothing queries → no `container-type` at all.
 - **Logical CSS properties** `[undocumented]` — `padding-inline`,
   `margin-inline-start`. `src/components/Button/Button.module.scss:13`
   - ✓ direction-safe spacing/border/size.
@@ -610,14 +612,16 @@ and consistency enforced by tooling, not maintained by hand.
 
 ## 8. Forms / accessibility
 
-- **Shared field wiring (`useFieldComponent`)** — field context, wrapper props,
-  error infra. `src/components/Checkbox/Checkbox.tsx:34`
+- **Shared field wiring (`useFieldComponent`)** — field context, `wrapperProps`
+  / `controlProps`, error infra. `src/components/Checkbox/Checkbox.tsx:34`
   - ✓ a form control joins label/description/validation/error composition.
   - ✗ a non-field interactive control → Aria primitive directly.
-- **Generated error description id** — replaces `aria-describedby` while
-  invalid. `src/lib/hooks/useFieldComponent.tsx:54`
-  - ✓ an error message joins the control relationship.
-  - ✗ no error description rendered → omit.
+- **Rendered error description** — `controlProps` references the error's id
+  while a `FieldError` is rendered, joined with the consumer's
+  `aria-describedby`. `src/lib/hooks/useFieldComponent.tsx:73`
+  - ✓ spread `controlProps` on what assistive technology lands on (the input or
+    the group), after `rest` — it already contains the consumer's ids.
+  - ✗ a wrapper div → it describes nothing; `wrapperProps` only.
 - **Field label context** — shared form styling + required/disabled semantics.
   `src/lib/hooks/useFieldComponent.tsx:38`
   - ✓ a composed label needs the control relationship + styling.

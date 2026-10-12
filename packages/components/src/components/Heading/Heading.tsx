@@ -7,6 +7,9 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
+import { Children } from "react";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface HeadingProps
@@ -47,12 +50,17 @@ export const Heading = flowComponent("Heading", (props) => {
     ...rest
   } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.heading,
     size && styles[`size-${size}`],
     color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
-    elementType && styleClassname(styles, `h${level}`),
+    // The level class carries the font size. Emitted for every heading — not
+    // just the `elementType` ones — so the stylesheet can select on the class
+    // instead of the h1–h6 element react-aria renders without one.
+    styleClassname(styles, `h${level}`),
     className,
   );
 
@@ -111,10 +119,33 @@ export const Heading = flowComponent("Heading", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Element className={rootClassName} {...rest} ref={ref} level={level}>
-        <span className={styles.headingText}>{children}</span>
+      <Element
+        className={rootClassName}
+        {...rest}
+        ref={ref}
+        level={level}
+        inert={isSkeleton || undefined}
+      >
+        <span className={styles.headingText}>
+          <SkeletonTextContent defaultWidth="12em">
+            {children}
+          </SkeletonTextContent>
+          <UiComponentTunnelExit id="headingContent" component="Heading">
+            {(items) =>
+              Children.count(items) > 0 && (
+                <span className={styles.headingTextSpacer} />
+              )
+            }
+          </UiComponentTunnelExit>
+        </span>
         <span className={styles.headingContent}>
-          <UiComponentTunnelExit id="headingContent" component="Heading" />
+          <UiComponentTunnelExit id="headingContent" component="Heading">
+            {(items) =>
+              Children.map(items, (item) => (
+                <span className={styles.headingContentItem}>{item}</span>
+              ))
+            }
+          </UiComponentTunnelExit>
         </span>
       </Element>
     </PropsContextProvider>

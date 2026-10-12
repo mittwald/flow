@@ -23,7 +23,6 @@ allowBuilds:
   msw: true
   nx: true
   sharp: true
-  simple-git-hooks: true
   style-dictionary: true
 
 packages:

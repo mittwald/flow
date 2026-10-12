@@ -57,7 +57,9 @@ export interface ModalProps
   showCloseButton?: boolean;
   /**
    * Whether closing the modal must be confirmed – use it to protect unsaved
-   * changes.
+   * changes. `false` does not switch off the confirmation of a dirty `Form`
+   * inside the modal; set `confirmModalCloseOnUnsavedChanges={false}` on the
+   * `Form` for that.
    */
   confirmOnClose?: boolean;
 }

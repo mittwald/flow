@@ -4,11 +4,14 @@ import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
+import gopher from "@/tests/assets/gopher.webp";
 
 // List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
 // A Combine inside a Text only stays in the line from 1.2.2.
 const combinedSubTitleFrom = "1.2.2";
+// The "Select all" option of multiple-choice filters exists from 1.4.0-next.6.
+const filterSelectAllFrom = "1.4.0-next.6";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
@@ -168,6 +171,7 @@ test
       ContextualHelpTrigger,
       ContextMenu,
       MenuItem,
+      Link,
     },
   }) => {
     function Wrapper() {
@@ -200,7 +204,12 @@ test
                     </ContextualHelpTrigger>
                   </Combine>
                 </Text>
-                <Text>Last deploy 2 days ago</Text>
+                <Text>
+                  Last deploy 2 days ago,{" "}
+                  <Link href="#" target="_blank">
+                    see logs
+                  </Link>
+                </Text>
                 <ContextMenu>
                   <MenuItem>Show details</MenuItem>
                 </ContextMenu>
@@ -234,6 +243,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       Text,
       Content,
       Checkbox,
+      Image,
     },
   }) => {
     function Wrapper() {
@@ -244,6 +254,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
         active: boolean;
         content: string;
         bottomContent: string;
+        image?: string;
       }>();
 
       return (
@@ -274,13 +285,26 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
                 bottomContent:
                   " A long time ago in a galaxy far, far away, a rebellion rose",
               },
+              {
+                id: "3",
+                name: "Han Solo",
+                role: "Smuggler",
+                active: false,
+                content: "Content",
+                bottomContent: "Bottom Content",
+                image: gopher,
+              },
             ]}
           />
           <List.Item showTiles textValue={(i) => i.name}>
             {(i) => (
               <ListItemView>
                 <Avatar>
-                  <Initials>{i.name}</Initials>
+                  {i.image ? (
+                    <Image alt={i.name} src={i.image} />
+                  ) : (
+                    <Initials>{i.name}</Initials>
+                  )}
                 </Avatar>
                 <Checkbox aria-label="select item" defaultSelected={i.active} />
                 <Heading>
@@ -781,5 +805,68 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List item heading button");
+  },
+);
+
+test
+  .skipIf(crossVersion({ below: filterSelectAllFrom }))
+  .each(testEnvironments)(
+  "List filter with select all option (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { typedList, ListItemView, Heading },
+  }) => {
+    const planets = [
+      "Alderaan",
+      "Bespin",
+      "Coruscant",
+      "Dagobah",
+      "Endor",
+      "Hoth",
+      "Jakku",
+      "Kashyyyk",
+      "Naboo",
+      "Tatooine",
+    ];
+
+    function Wrapper() {
+      const List = typedList<{ id: string; planet: string }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={planets.map((planet) => ({ id: planet, planet }))}
+          />
+          <List.Filter property="planet" name="Planet" />
+          <List.Filter property="id" name="Planet ID" priority="secondary" />
+          <List.Item textValue={(i) => i.planet}>
+            {(i) => (
+              <ListItemView>
+                <Heading>{i.planet}</Heading>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await page.getByRole("button", { name: "Planet", exact: true }).click();
+    await page.getByRole("menuitemcheckbox", { name: "Hoth" }).click();
+    await testScreenshot("List filter select all - partially selected");
+
+    await page.getByRole("menuitem", { name: "Select all" }).click();
+    await testScreenshot("List filter select all - all selected");
+
+    await userEvent.keyboard("{Escape}");
+    await page.getByRole("button", { name: "All filters" }).first().click();
+    await page
+      .getByRole("dialog")
+      .getByText("Hoth", { exact: true })
+      .last()
+      .click();
+    await testScreenshot("List filter select all - all filters modal");
   },
 );

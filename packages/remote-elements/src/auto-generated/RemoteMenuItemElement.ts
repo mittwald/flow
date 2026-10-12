@@ -24,6 +24,7 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
       inert: {},
       isDisabled: {},
       isFailed: {},
+      isIndeterminate: {},
       isPending: {},
       isSucceeded: {},
       lang: {},

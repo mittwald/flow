@@ -7,7 +7,7 @@
   align-items: stretch;
   background-color: var(--tab-navigation--background-color--default);
 
-  ul {
+  .list {
     display: flex;
     flex-direction: row;
     flex: 1 1 auto;
@@ -15,7 +15,7 @@
     overflow-x: clip;
   }
 
-  li {
+  .item {
     display: flex;
     list-style: none;
   }

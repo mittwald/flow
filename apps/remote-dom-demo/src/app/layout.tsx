@@ -102,6 +102,9 @@ export default function Layout(props: PropsWithChildren) {
                       </NavigationItem>
                       <NavigationItem page="popover">Popover</NavigationItem>
                       <NavigationItem page="rating">Rating</NavigationItem>
+                      <NavigationItem page="skeleton-mode">
+                        SkeletonMode
+                      </NavigationItem>
                     </NavigationGroup>
                     <TunnelExit id="remote-demo" />
                   </Navigation>

@@ -14,12 +14,22 @@ import { containsTextChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
 import { filterDOMProps } from "@react-aria/utils";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface ButtonProps
   extends
     PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<HTMLButtonElement> {
-  /** Slot for button placement in action groups. */
+  /**
+   * Slot for button placement in action groups: `primary` (at the end),
+   * `secondary` (before the primary action) or `abort` (at the start). Without
+   * a slot, an action group places the colors primary, success and danger in
+   * `primary` and every other color in `abort`. A secondary-colored button that
+   * does not abort therefore needs `slot="secondary"`.
+   */
   slot?: string;
   /**
    * The color of the button.
@@ -51,14 +61,17 @@ export interface ButtonProps
   elementType?: "button" | "span";
 }
 
-const disablePendingProps = (props: ButtonProps) => {
-  if (
+const isMuted = (props: ButtonProps) =>
+  !!(
     props.isPending ||
     props.isSucceeded ||
     props.isFailed ||
     props["aria-disabled"] ||
     props.isReadOnly
-  ) {
+  );
+
+const disablePendingProps = (props: ButtonProps) => {
+  if (isMuted(props)) {
     props = { ...props };
 
     const mutedActionHandler = (e: unknown) => {
@@ -98,9 +111,11 @@ const disablePendingProps = (props: ButtonProps) => {
 
 /** @flr-generate all */
 export const Button = flowComponent("Button", (props) => {
+  const muted = isMuted(props);
   props = disablePendingProps(props);
 
   const warnDeprecation = useWarnDeprecation();
+  const isSkeleton = useSkeletonMode();
 
   const {
     color: colorFromProps = "primary",
@@ -145,12 +160,9 @@ export const Button = flowComponent("Button", (props) => {
         size === "s" && styles["size-s"],
         styles[color],
         styles[variant],
-        /**
-         * Workaround warning: The Aria.Button does not support "aria-disabled"
-         * by now, so this Button will be visually disabled via CSS.
-         */
         ariaDisabled && styles.ariaDisabled,
         hasText && styles.hasText,
+        isSkeleton && styles.skeleton,
         className,
       );
 
@@ -192,7 +204,7 @@ export const Button = flowComponent("Button", (props) => {
     <LoadingSpinner size={size} className={styles.stateIcon} />
   ) : undefined;
 
-  const content = (
+  const buttonContent = (
     <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
@@ -203,12 +215,21 @@ export const Button = flowComponent("Button", (props) => {
     </>
   );
 
+  /* A styled button is one skeleton surface, so its content draws no skeleton
+     of its own. An unstyled button draws no surface, so its content does. */
+  const content = (
+    <Wrap if={!unstyled}>
+      <SkeletonModeReset>{buttonContent}</SkeletonModeReset>
+    </Wrap>
+  );
+
   if (elementType === "span") {
     const spanProps = filterDOMProps(restProps, { global: true });
 
     return (
       <span
         {...spanProps}
+        inert={isSkeleton || undefined}
         data-disabled={restProps.isDisabled || undefined}
         className={
           typeof rootClassName === "string" ? rootClassName : undefined
@@ -226,6 +247,8 @@ export const Button = flowComponent("Button", (props) => {
       slot={slot}
       {...(isReadOnly === true ? { "data-readonly": true } : {})}
       {...restProps}
+      aria-disabled={muted || undefined}
+      inert={isSkeleton || undefined}
     >
       {content}
     </Aria.Button>

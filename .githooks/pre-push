@@ -1,0 +1,10 @@
+#!/bin/sh
+# Blocks the push, not the commit — so unformatted files surface once the
+# commits already exist. `pnpm format` fixes the formatting half.
+#
+# `git push --no-verify` skips it. .github/scripts/push-release.mjs always
+# passes that: a hook aborting there would strand a release npm has already
+# accepted (#2932).
+[ "$SKIP_GIT_HOOKS" = "1" ] && exit 0
+
+pnpm lint

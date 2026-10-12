@@ -2,6 +2,8 @@ import {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
+  useCallback,
+  useId,
   useMemo,
   useRef,
 } from "react";
@@ -37,11 +39,15 @@ import {
   Policy,
 } from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
-import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { joinIds, useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import {
+  useAriaAnnouncePasswordVisibility,
+  useAriaAnnounceValidationState,
+} from "@/components/PasswordCreationField/lib/ariaAnnounce";
 
 export interface PasswordCreationFieldProps
   extends
@@ -93,13 +99,6 @@ export const PasswordCreationField = flowComponent(
       ...rest
     } = useControlledHostValueProps(props, "");
 
-    const {
-      FieldErrorView,
-      FieldErrorCaptureContext,
-      fieldProps,
-      fieldPropsContext,
-    } = useFieldComponent(props, "PasswordCreationField");
-
     const translate = useLocalizedStringFormatter(
       locales,
       "PasswordCreationField",
@@ -126,7 +125,7 @@ export const PasswordCreationField = flowComponent(
     );
 
     const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
-    usePolicyValidationResult(
+    const { rememberValidationResult } = usePolicyValidationResult(
       validationPolicy,
       value ?? "",
       () => {
@@ -182,6 +181,42 @@ export const PasswordCreationField = flowComponent(
       !isEmptyValue && stateFromValidationResult?.isValid === false;
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
+    const {
+      FieldErrorView,
+      FieldErrorCaptureContext,
+      wrapperProps,
+      controlProps,
+      fieldPropsContext,
+      renderedFieldErrorId,
+    } = useFieldComponent(props, "PasswordCreationField");
+
+    /**
+     * The result for a valid password appears after the asynchronous policy
+     * validation. react-aria resolves its description slot only when the
+     * field's validity changes, so a result that appears while the field stays
+     * valid (a generated password) was never linked. It gets its own id
+     * instead, referenced only while it is rendered.
+     *
+     * A shown error replaces it: the FormField styles hide descriptions next to
+     * an error, and a hidden description would still be announced.
+     */
+    const resultDescriptionId = useId();
+    const [isResultDescriptionRendered, setIsResultDescriptionRendered] =
+      useState(false);
+    const resultDescriptionRef = useCallback((element: Element | null) => {
+      setIsResultDescriptionRendered(!!element);
+    }, []);
+    const describedBy = joinIds(
+      isResultDescriptionRendered && resultDescriptionId,
+      controlProps["aria-describedby"],
+    );
+
+    useAriaAnnounceValidationState(
+      latestValidationErrorText,
+      !isEmptyValue && policyValidationResult.isValid !== "indeterminate",
+    );
+    useAriaAnnouncePasswordVisibility(isPasswordRevealed);
+
     const setOptimisticPolicyValidationResult = (
       state: Partial<ResolvedPolicyValidationResult> = {},
     ) => {
@@ -194,14 +229,17 @@ export const PasswordCreationField = flowComponent(
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
-      setOptimisticPolicyValidationResult({
-        ...initialPolicyValidationState,
-        isValid: true,
-        ruleResults: policyValidationResult.ruleResults.map((r) => ({
-          ...r,
-          isValid: true,
-        })),
-      });
+      /**
+       * The generator returns only passwords the policy accepts, so the rating
+       * is set with the password instead of after the typing debounce. It is
+       * the policy's own result: a guessed one (full strength) was overturned
+       * by the real rating, e.g. to "meets the minimum requirements". Cached,
+       * so the debounced validation of this password does not rate it again.
+       */
+      const generatedPasswordResult =
+        await validationPolicy.validate(generatedPassword);
+      rememberValidationResult(generatedPassword, generatedPasswordResult);
+      setPolicyValidationResult(generatedPasswordResult);
       setIsPasswordRevealed(true);
       onChange(generatedPassword);
     };
@@ -268,11 +306,12 @@ export const PasswordCreationField = flowComponent(
     return (
       <Aria.TextField
         {...rest}
+        aria-describedby={describedBy}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}
         onChange={onChange}
         onPaste={onPasswordPasteHandler}
-        className={clsx(className, fieldProps.className)}
+        className={clsx(className, wrapperProps.className)}
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         isRequired={isRequired}
@@ -315,10 +354,20 @@ export const PasswordCreationField = flowComponent(
                 isLoading={policyValidationResult.isValid === "indeterminate"}
                 policyValidationResult={policyValidationResult}
                 validationResultState={stateFromValidationResult}
+                isInvalid={invalidFromProps}
               />
             </Aria.Group>
-            {isValidFromValidationResult && (
-              <FieldDescription>{latestValidationErrorText}</FieldDescription>
+            {isValidFromValidationResult && !renderedFieldErrorId && (
+              // Out of react-aria's description slot, which would set its own
+              // id – see `resultDescriptionId`.
+              <Aria.TextContext.Provider value={null}>
+                <FieldDescription
+                  id={resultDescriptionId}
+                  ref={resultDescriptionRef}
+                >
+                  {latestValidationErrorText}
+                </FieldDescription>
+              </Aria.TextContext.Provider>
             )}
           </PropsContextProvider>
         </FieldErrorCaptureContext>

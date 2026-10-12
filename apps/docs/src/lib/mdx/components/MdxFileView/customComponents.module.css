@@ -54,7 +54,7 @@
   margin-bottom: calc(var(--size-px--m) * -1);
   border-style: var(--border-style--default);
   border-width: var(--border-width--100);
-  border-color: var(--neutral-outline-border-color);
+  border-color: var(--code-block--border-color);
   border-bottom: none;
   border-start-start-radius: var(--corner-radius--m);
   border-start-end-radius: var(--corner-radius--m);
@@ -68,7 +68,7 @@
   border-radius: var(--corner-radius--m);
   border-style: var(--border-style--default);
   border-width: var(--border-width--100);
-  border-color: var(--neutral-outline-border-color);
+  border-color: var(--code-block--border-color);
   border-top-width: var(--size-px--s);
   padding: var(--size-px--l);
   border-top-color: var(--info-solid-background-color--default);

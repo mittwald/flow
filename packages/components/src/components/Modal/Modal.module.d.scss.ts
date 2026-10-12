@@ -1,12 +1,19 @@
 declare const classNames: {
   readonly modal: "modal";
   readonly offCanvas: "offCanvas";
+  readonly "flow--overlay--viewport": "flow--overlay--viewport";
+  readonly "react-aria-Modal": "react-aria-Modal";
   readonly actionGroup: "actionGroup";
   readonly closeButton: "closeButton";
   readonly alwaysVisible: "alwaysVisible";
   readonly alwaysHidden: "alwaysHidden";
   readonly header: "header";
+  readonly "flow--heading--heading-text-spacer": "flow--heading--heading-text-spacer";
+  readonly "flow--heading--heading-content": "flow--heading--heading-content";
+  readonly "flow--heading--heading-content-item": "flow--heading--heading-content-item";
   readonly headerTitle: "headerTitle";
+  readonly "flow--button--size-s": "flow--button--size-s";
+  readonly "flow--icon": "flow--icon";
   readonly content: "content";
   readonly columnLayout: "columnLayout";
   readonly accentBox: "accentBox";
