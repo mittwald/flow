@@ -10,6 +10,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { AlertText } from "@/components/AlertText";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Content } from "@/components/Content";
+import { Alert } from "@/components/Alert";
 import barStyles from "./components/SkeletonTextContent/SkeletonTextContent.module.scss";
 import skeletonTextStyles from "@/components/SkeletonText/SkeletonText.module.scss";
 
@@ -198,4 +199,28 @@ test("raw text in a container becomes a bar, elements are left alone", async () 
     "20 GB",
     "Inside Text",
   ]);
+});
+
+test("text in a flex container keeps one bar per line", async () => {
+  await render(
+    <div style={{ width: 240 }}>
+      <SkeletonMode>
+        <Alert status="danger">
+          <Heading>Zertifikat abgelaufen</Heading>
+          {/* Alert lays out its Content as a flex column */}
+          <Content>
+            Die Domain webshop.example-domain.de ist nicht mehr per HTTPS
+            erreichbar.
+          </Content>
+        </Alert>
+      </SkeletonMode>
+    </div>,
+  );
+
+  await expect.element(status()).toBeInTheDocument();
+  const bar = bars()[1];
+  if (!bar) {
+    throw new Error("No bar rendered");
+  }
+  expect(bar.getClientRects().length).toBeGreaterThan(1);
 });

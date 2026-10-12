@@ -30,9 +30,13 @@ export const SkeletonTextContent: FC<SkeletonTextContentProps> = (props) => {
     return <SkeletonText width={defaultWidth} />;
   }
 
+  /* The outer span takes the item role in a flex or grid parent, so the bar
+     stays inline and draws one box per line. */
   return (
-    <span className={styles.skeletonTextContent} aria-hidden>
-      <SkeletonModeReset>{children}</SkeletonModeReset>
+    <span aria-hidden>
+      <span className={styles.skeletonTextContent}>
+        <SkeletonModeReset>{children}</SkeletonModeReset>
+      </span>
     </span>
   );
 };

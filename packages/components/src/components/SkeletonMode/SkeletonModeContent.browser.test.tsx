@@ -725,6 +725,9 @@ test("a controlled open Modal renders its content as skeleton", async () => {
     title.getBoundingClientRect().bottom,
   );
   expect(close.closest("[inert]")).not.toBeNull();
+  /* The close button keeps its place at the header's end, as when loaded. */
+  const dialogRight = dialog.getBoundingClientRect().right;
+  expect(dialogRight - close.getBoundingClientRect().right).toBeLessThan(48);
 
   /* A loading modal still closes with Escape. */
   await userEvent.keyboard("{Escape}");
