@@ -1,5 +1,6 @@
 @use "@/styles/mixins/formControl";
 @use "@/styles/mixins/scrollbar";
+@use "@/styles/mixins/skeleton";
 
 .codeEditor {
   outline: none;
@@ -49,8 +50,26 @@
       inset-inline-end: var(--form-control--padding-x);
       z-index: 1;
     }
+
+    /* SkeletonMode — after the states, so the surface wins over their colors */
+
+    &.skeleton {
+      @include skeleton.shape;
+
+      --skeleton-radius: var(--form-control--corner-radius);
+    }
+
+    /* Stands in for CodeMirror's lines, so the surface is as high as the code. */
+    .skeletonLines {
+      font-family: var(--code-editor--font-family);
+      font-size: var(--code-editor--font-size);
+      line-height: 1.4;
+      white-space: pre;
+    }
   }
 }
+
+@include skeleton.keyframes;
 
 /*
  * CodeMirror ships its theme as unlayered `<style>` elements that it injects

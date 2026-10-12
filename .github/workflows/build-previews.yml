@@ -49,14 +49,18 @@ jobs:
       # Next keeps its compiler and render caches here. Restoring them is only
       # possible now that the build runs on the runner rather than inside the
       # image, where the directory started empty every time.
-      - name: Cache the Next.js build cache
+      #
+      # Restore only: deploy-main.yml writes the entry. A PR-scoped save is
+      # ~200–360 MB, one per push, readable by no other PR — and restoring
+      # main's entry compiles as fast as restoring the PR's own.
+      - name: Restore the Next.js build cache
         if: matrix.image_suffix == 'docs'
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: apps/docs/.next/cache
-          key:
-            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
-            github.sha }}
+          # No entry carries this exact key; it only has to be set. The
+          # restore-keys pick main's newest entry, same lockfile first.
+          key: nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
             nextjs-${{ runner.os }}-
