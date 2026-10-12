@@ -8,5 +8,6 @@ declare const classNames: {
   readonly "flow--text-area--input": "flow--text-area--input";
   readonly "mode-editor": "mode-editor";
   readonly "mode-preview": "mode-preview";
+  readonly dropTarget: "dropTarget";
 };
 export default classNames;

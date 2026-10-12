@@ -30,3 +30,7 @@
 .popover {
   max-width: fit-content;
 }
+
+.selectAll {
+  margin-block-end: var(--menu--select-all-to-item-spacing);
+}

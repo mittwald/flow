@@ -1,0 +1,10 @@
+#!/bin/sh
+# Keeps node_modules in sync with the branch you just moved to.
+#
+# $3 is 1 for a branch checkout and 0 for a file checkout, and only the former
+# can change what the lockfile asks for. Without the guard every
+# `git checkout -- <file>` pays for a full install.
+[ "$SKIP_GIT_HOOKS" = "1" ] && exit 0
+[ "$3" = "1" ] || exit 0
+
+pnpm install

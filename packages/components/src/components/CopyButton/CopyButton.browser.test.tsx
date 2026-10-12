@@ -49,3 +49,32 @@ test("a disabled button does not copy", async () => {
 
   expect(copy).not.toHaveBeenCalled();
 });
+
+test("onCopy is called with the copied text once the copy succeeded", async () => {
+  vi.mocked(copy).mockClear().mockResolvedValueOnce(true);
+  const onCopy = vi.fn();
+
+  render(<CopyButton text="ssh://rebelbase.org" onCopy={onCopy} />);
+
+  await button().click();
+
+  await expect
+    .poll(() => onCopy)
+    .toHaveBeenCalledExactlyOnceWith("ssh://rebelbase.org");
+});
+
+// onCopy counts copies, not clicks.
+test("onCopy is not called when the copy failed", async () => {
+  const copyResult = Promise.resolve(false);
+  vi.mocked(copy).mockClear().mockReturnValueOnce(copyResult);
+  const onCopy = vi.fn();
+
+  render(<CopyButton text="ssh://rebelbase.org" onCopy={onCopy} />);
+
+  await button().click();
+  await expect.poll(() => copy).toHaveBeenCalled();
+  await copyResult;
+  await new Promise((resolve) => setTimeout(resolve));
+
+  expect(onCopy).not.toHaveBeenCalled();
+});

@@ -18,6 +18,7 @@ import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
 import type { ParsedCommand } from "./args.js";
 import { displaySourcePath, resolveSourcePath } from "./codemod.js";
 import { renderList } from "./list.js";
+import { renderPeers } from "./peers.js";
 
 export interface UpgradeDeps {
   cwd: string;
@@ -126,8 +127,15 @@ export const runUpgrade = async (
     log(range.reason);
     return 1;
   }
-  const { manifestPath, manifestRaw, manifest, dependencies, current, target } =
-    range;
+  const {
+    manifestPath,
+    manifestRaw,
+    manifest,
+    dependencies,
+    current,
+    target,
+    peers,
+  } = range;
 
   // A stale dist-tag or an exact version at or below `current` resolves
   // without complaint — `resolveRange` deliberately does not judge that
@@ -150,6 +158,26 @@ export const runUpgrade = async (
     }
   };
 
+  // Printed before the install in every branch, never after it: the install
+  // can fail (and returns early below), yet a peer range the new version needs
+  // is exactly what the reader wants in hand when it does. It is also the one
+  // part of this output that stays true when nothing is bumped at all — a
+  // project sitting on `target` can still be missing a peer.
+  const reportPeers = (): void => {
+    const rendered = renderPeers({
+      summary: peers,
+      target,
+      color: deps.color,
+      width: deps.width,
+    });
+    if (rendered !== "") {
+      // Blank line on both sides: this sits between the dependency list and
+      // whatever the install prints next, and without the trailing one the
+      // package manager's first line reads as part of the summary.
+      log(`\n${rendered.trimEnd()}\n`);
+    }
+  };
+
   const bump = gt(target, current);
 
   if (!bump) {
@@ -157,10 +185,12 @@ export const runUpgrade = async (
     log(
       `Already on ${current}; "${revision}" resolves to ${target}. No dependency bump needed — checking for codemods to catch up on, since nothing records whether this project already ran them.`,
     );
+    reportPeers();
   } else if (dry) {
     log(`Upgrading Flow from ${current} to ${target} (--dry)`);
     log(`--dry: would write the following to ${manifestPath}:`);
     reportDependencies();
+    reportPeers();
     log("--dry: skipping the install.");
   } else {
     log(`Upgrading Flow from ${current} to ${target}`);
@@ -175,6 +205,7 @@ export const runUpgrade = async (
       "utf8",
     );
     reportDependencies();
+    reportPeers();
 
     const manager = await detectPackageManagerIn(cwd);
     try {

@@ -8,11 +8,10 @@ Next.js documentation site for the flow Styleguide, deployed to
   the section and page structures, heading conventions, tone of voice, and
   language rules (German content, English Design System terminology).
 - Content lives in `src/content` as MDX, one directory per section
-  (`get-started`, `foundations`, `patterns`, `components`). A component page is
-  a single `index.mdx` — the former `overview`, `develop` and `guidelines` tabs
-  are consolidated onto it. Their routes under
-  `src/app/(docs)/components/[group]/[component]/` are `redirect()`-only, kept
-  so existing links (and their fragments) keep working.
+  (`get-started`, `foundations`, `templates`, `components`, `releases`). A
+  component page is a single `index.mdx`. The `overview`, `develop` and
+  `guidelines` routes under `src/app/(docs)/components/[group]/[component]/`
+  only `redirect()` to it; they keep old links (and their fragments) working.
 - **Directory names are the public URL**, and they carry no order. The authored
   order lives in `src/lib/content/contentOrder.ts` — a flat list of pathnames
   that the navigation, the header, `llms.txt` and the sitemap all sort by.
@@ -28,6 +27,11 @@ Next.js documentation site for the flow Styleguide, deployed to
   appear in the URL, so a page belongs in one of the two — a `page.tsx` directly
   under `src/app` has no layout at all. `buildPageInventory` strips the group
   from the pathname; keep that in mind when adding a group.
+- **`page.dev.tsx` is a page under `next dev` only.** `next.config.js` adds
+  `dev.tsx` to `pageExtensions` in the development phase alone, so the static
+  export ships none of these routes. `/example-preview/<path>` is one: it
+  renders a single example, framed as on its page, for `pnpm release:figure` to
+  capture release-note figures from.
 - Code examples are `.tsx` files in the `examples/` directory next to the MDX
   file, referenced via `example="<name>"` (see "Page Building Blocks" in the
   README). Every example keeps its imports — they are what the editor builds its

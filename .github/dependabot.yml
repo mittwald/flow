@@ -67,10 +67,6 @@ updates:
       # is its own PR, not a routine bump.
       - dependency-name: "recharts"
         versions: [">=3.8.0"]
-      # playwright 1.62 ships WebKit 2336, which stretches the LightBox image.
-      # Lift the hold only once that sizing is fixed.
-      - dependency-name: "playwright"
-        versions: [">=1.62.0"]
   - package-ecosystem: github-actions
     directory: "/"
     schedule:

@@ -1,6 +1,10 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
+// Older versions have no `Bar`, so the host renders `undefined` as an
+// element type and fails with "Element type is invalid".
+const barSince = "1.2.0-next.6";
+
 test.each(testEnvironments)(
   "CartesianChart (%s)",
   async ({
@@ -118,8 +122,7 @@ const barChartData = [
   },
 ];
 
-// Bar is undefined in bundles before 1.2.0.
-test.skipIf(crossVersion({ below: "1.2.0" })).each(testEnvironments)(
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
   "CartesianChart with Bars (%s)",
   async ({
     testScreenshot,
@@ -150,8 +153,7 @@ test.skipIf(crossVersion({ below: "1.2.0" })).each(testEnvironments)(
   },
 );
 
-// Bar is undefined in bundles before 1.2.0.
-test.skipIf(crossVersion({ below: "1.2.0" })).each(testEnvironments)(
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
   "CartesianChart with stacked Bars (%s)",
   async ({
     testScreenshot,
@@ -173,8 +175,7 @@ test.skipIf(crossVersion({ below: "1.2.0" })).each(testEnvironments)(
   },
 );
 
-// Bar is undefined in bundles before 1.2.0.
-test.skipIf(crossVersion({ below: "1.2.0" })).each(testEnvironments)(
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
   "CartesianChart with horizontal Bars (%s)",
   async ({
     testScreenshot,

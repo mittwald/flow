@@ -4,6 +4,7 @@ declare const classNames: {
   readonly "react-aria-Heading": "react-aria-Heading";
   readonly container: "container";
   readonly presetMenu: "presetMenu";
+  readonly presetSeparator: "presetSeparator";
   readonly "react-aria-CalendarHeaderCell": "react-aria-CalendarHeaderCell";
   readonly "react-aria-CalendarGrid": "react-aria-CalendarGrid";
   readonly "react-aria-CalendarCell": "react-aria-CalendarCell";

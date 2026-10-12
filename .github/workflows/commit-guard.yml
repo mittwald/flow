@@ -3,13 +3,15 @@ name: Commit guard
 # Enforces the two commit-level gates of the 1.0.0 release model (RFC #2711):
 #
 # 1. Conventional PR title — the whole model derives versioning and the
-#    changelog from the merged commit's type. Because this repo squash-merges
-#    (the PR title becomes the commit subject), the PR *title* is what must be a
-#    valid Conventional Commit, so that is what we lint.
+#    changelog from the merged commit's type. A squash merge makes the PR title
+#    the commit subject, so the PR *title* must be a valid Conventional Commit.
 # 2. Routing — where a change is allowed to land:
 #      - a feature (`feat:`) belongs on `next`, not on `main`;
 #      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
 #        line, not on any standing line (`main` *or* `next`).
+#    Checked on the title and on every commit of the PR: `main` also allows
+#    merge commits (the promotion needs them) and `next` allows only those, and
+#    a merge commit hands every branch commit to lerna.
 #    This makes the dangerous directions mechanically hard.
 
 on:
@@ -53,65 +55,37 @@ jobs:
 
   routing:
     name: Routing (feature -> next, breaking -> major line)
-    # PRs targeting a standing release line are subject to routing.
+    # PRs targeting a standing release line are subject to routing. The title
+    # AND every commit of the PR are checked: a merge commit hands each branch
+    # commit to lerna, which is how a `feat` under a `fix:` title released
+    # `main` as 1.3.0 (#3290). See `.github/scripts/routing-lib.mjs`.
     if: >-
       github.event.pull_request.base.ref == 'main' ||
       github.event.pull_request.base.ref == 'next'
     runs-on: ubuntu-latest
     env:
+      REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
       PR_TITLE: ${{ github.event.pull_request.title }}
       PR_BODY: ${{ github.event.pull_request.body }}
+      PR_COMMITS: ${{ github.event.pull_request.commits }}
       HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
       BASE_REF: ${{ github.event.pull_request.base.ref }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      # The two scripts are all this job needs, not the ~55 MB tree.
+      - name: Checkout the guard scripts
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          sparse-checkout: .github/scripts
+          sparse-checkout-cone-mode: false
+
+      - name: Self-test the classifier
+        run: node --test .github/scripts/routing-lib.test.mjs
+
       - name: Enforce release-line routing
-        run: |
-          set -euo pipefail
-
-          # --- Promotion / forward-merge exemption (ADR 0004 §8) ---------------
-          # A promotion PR (`release/x.y.0 -> main`, which is what
-          # `/prepare-release` opens, or a major line -> main) and a sync PR are
-          # *supposed* to carry feat:/breaking commits. Exempt those heads, or
-          # they would block the release itself. `release/*` was missing here
-          # until the #2769 rehearsal: the first real promotion PR passed routing
-          # only because its title happened to carry no `feat` marker, which is
-          # luck rather than intent.
-          if [ "$HEAD_REF" = "next" ] \
-             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
-             || printf '%s' "$HEAD_REF" | grep -qE '^(sync|release)/'; then
-            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — routing guard exempt."
-            exit 0
-          fi
-
-          # --- Classify the PR title / body ------------------------------------
-          is_feat=0
-          is_breaking=0
-          if printf '%s' "$PR_TITLE" | grep -qiE '^feat(\([^)]+\))?!?:'; then is_feat=1; fi
-          if printf '%s' "$PR_TITLE" | grep -qE '^[a-z]+(\([^)]+\))?!:'; then is_breaking=1; fi
-          if printf '%s\n' "$PR_BODY" | grep -qE '^[[:space:]]*BREAKING(-| )CHANGE:'; then is_breaking=1; fi
-
-          # --- The rules -------------------------------------------------------
-          fail=0
-
-          # A breaking change belongs on the major line — never on a standing
-          # line (neither `main` nor `next`).
-          if [ "$is_breaking" -eq 1 ]; then
-            echo "::error::PR marks a breaking change — breaking changes target the major line, not '${BASE_REF}'."
-            fail=1
-          fi
-
-          # A feature belongs on `next`, not directly on `main`.
-          if [ "$BASE_REF" = "main" ] && [ "$is_feat" -eq 1 ]; then
-            echo "::error::PR title is a 'feat' — features target 'next', not 'main'."
-            fail=1
-          fi
-
-          if [ "$fail" -ne 0 ]; then
-            echo "::error::Routing: 'main' takes fix:/docs:/chore:/…; 'next' additionally takes feat:; breaking changes go to the major line."
-            exit 1
-          fi
-
-          echo "Routing OK for base '${BASE_REF}'."
+        run: node .github/scripts/routing-guard.mjs
 
   version-contract:
     name: Version contract (engines.node + peer ranges)
@@ -124,30 +98,31 @@ jobs:
       PR_TITLE: ${{ github.event.pull_request.title }}
       PR_BODY: ${{ github.event.pull_request.body }}
       HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+      REPO: ${{ github.repository }}
       BASE_SHA: ${{ github.event.pull_request.base.sha }}
     steps:
-      - name: Gate (promotion/sync exemptions)
-        id: gate
-        run: |
-          set -euo pipefail
-
-          # Promotion / forward-merge / sync sources legitimately carry breaking
-          # changes (ADR 0004 §8) — exempt, same as routing.
-          if [ "$HEAD_REF" = "next" ] \
-             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
-             || printf '%s' "$HEAD_REF" | grep -qE '^(sync|release)/'; then
-            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — version-contract guard exempt."
-            echo "active=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "active=true" >> "$GITHUB_OUTPUT"
-
+      # Before the gate, which reads the shared exemption rule from the checkout.
+      # Exempt PRs are rare, so checking out for them too costs little.
       - name: Checkout (full history so the base commit is reachable)
-        if: steps.gate.outputs.active == 'true'
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
+
+      - name: Gate (promotion/sync exemptions)
+        id: gate
+        # Promotion / forward-merge / sync sources legitimately carry breaking
+        # changes (ADR 0004 §8) — exempt by the same rule as routing, so the
+        # two required checks cannot drift apart.
+        run: |
+          node --input-type=module -e '
+            import { appendFileSync } from "node:fs";
+            import { isExemptPr } from "./.github/scripts/routing-lib.mjs";
+            const { HEAD_REF, HEAD_REPO, REPO, GITHUB_OUTPUT } = process.env;
+            const exempt = isExemptPr({ headRef: HEAD_REF, headRepo: HEAD_REPO, repo: REPO });
+            if (exempt) console.log(`::notice::head=${HEAD_REF} is a promotion/sync source — version-contract guard exempt.`);
+            appendFileSync(GITHUB_OUTPUT, `active=${!exempt}\n`);
+          '
 
       - name: Self-test the classifier
         if: steps.gate.outputs.active == 'true'

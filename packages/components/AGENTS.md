@@ -1,10 +1,10 @@
 # @mittwald/flow-react-components — Agent Guide
 
-> **Building an application _with_ Flow?** Read [USAGE.md](./USAGE.md) instead —
-> component selection, layout and spacing, what is safe to depend on, and where
-> the documentation lives in machine-readable form. This guide is about changing
-> Flow itself, and its patterns (`flowComponent`, `PropsContext`, views, CSS
-> modules) do not belong in an application.
+**Building an app or mStudio extension in your own project?** Read
+[USAGE.md](./USAGE.md) first — component selection, templates, layout and
+spacing, what is safe to depend on. Everything below is for changing Flow, and
+its patterns (`flowComponent`, `PropsContext`, views, CSS modules) do not belong
+in an application.
 
 Component patterns for the core package. Read the
 [root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md) first for
@@ -263,7 +263,13 @@ if ("action" in props) {
   the committed `*.module.d.scss.ts` stubs declare, run through the build's own
   `cssModuleClassNameGenerator`. The reference has to name a class some
   component actually generates — otherwise the selector matches nothing, which
-  used to fail without a single signal anywhere.
+  used to fail without a single signal anywhere. Its ESLint twin
+  `flow/no-unknown-flow-class` (`dev/eslint/`) checks hardcoded `flow--…` names
+  in `src/**` TS/TSX strings — `className`s, `querySelector`s, test assertions —
+  against the same set (`dev/flowClassNames/`). A runtime-built prefix
+  (`` `flow--button--${color}` ``) passes if a known class starts with it; a
+  test asserting a removed class stays absent needs an
+  `eslint-disable-next-line` with the reason.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
@@ -313,8 +319,10 @@ if ("action" in props) {
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
 
 Run: `pnpm nx test:unit components`,
-`pnpm nx test:browser components --browser.name=webkit`. Browser tests need
-`pnpm test:browser:prepare` once.
+`pnpm nx test:browser components --browser.name=webkit`. The browser targets
+install the Playwright browsers for you **locally**; `pnpm test:browser:prepare`
+adds the system libraries Linux needs. On CI they do nothing — the workflows
+provision browsers themselves, per job and under their own cache keys.
 
 **Iterate through nx too**, not with a bare `vitest`. Everything after the `--`
 goes to vitest, so a single file and watch mode have nx targets as well:
@@ -330,7 +338,7 @@ compiles against. A bare `vitest run` skips it and renders against whatever
 is simply absent, and CSS drops every declaration referencing it without a
 warning (#3194).
 
-Three traps cost time in every new browser test:
+Four traps cost time in every new browser test:
 
 - **Click the label, not the control.** `Checkbox`, `Radio`, `Switch` and
   `Rating` stack their icons on top of a visually hidden input, so playwright
@@ -347,6 +355,15 @@ Three traps cost time in every new browser test:
   `render()` runs before React has committed and reads `null`. That turns an
   assertion that something is _absent_ into a silent pass, so give any helper
   that queries the DOM directly a guard that throws when its element is missing.
+- **A pointer left behind hovers the next render.** The pointer stays where the
+  last test left it, and that can be the previous file: each browser page runs
+  file after file, in parallel runs too. Firefox hovers what a test renders
+  underneath. The symptom is an `expect.poll` that keeps reading a hover state
+  (a Rating preview, an open tooltip) until "Matcher did not succeed in time".
+  Call `parkPointer()` from `@/lib/dev/parkPointer` in the file's `beforeEach`
+  (`Rating`, `PasswordCreationField`); an `afterEach` leaves the file's first
+  test exposed. It is opt-in on purpose: moving the pointer before every test
+  breaks `Tooltip`'s keyboard-focus test.
 
 ## i18n & a11y
 
@@ -367,8 +384,11 @@ Three traps cost time in every new browser test:
   initially: every `locales/` directory in the package gets the new file.
 - Icon-only buttons get a localized `aria-label`; decorative icons are
   `aria-hidden` (the `Icon` component handles this when no label is given).
-- Form fields wire label/description/error via `useFieldComponent` (generates
-  ids, sets `aria-describedby`).
+- Form fields wire label/description/error via `useFieldComponent`.
+  `wrapperProps` go on the outer element, `controlProps` on what assistive
+  technology lands on (the input or the group), spread after `rest`: its
+  `aria-describedby` references the error only while one is rendered and already
+  contains the consumer's own ids.
 
 ## Public API surfaces
 

@@ -81,91 +81,100 @@ const mailboxes: Mailbox[] = [
 const MailboxList = typedList<Mailbox>();
 
 export default () => (
-  <Flex direction="column" gap="l" className={styles.app}>
+  <Flex direction="column" className={styles.app}>
     <Topbar />
-    <Flex gap="l" align="stretch" className={styles.body}>
-      <ProjectSidebar />
-      <Flex
-        elementType="main"
-        direction="column"
-        gap="m"
-        className={styles.main}
-      >
-        <Breadcrumb>
-          <Link href="#">Projekt</Link>
-          <Link href="#">E-Mails</Link>
-        </Breadcrumb>
-        <Heading level={1}>E-Mails</Heading>
-        <LayoutCard>
-          <MailboxList.List
-            batchSize={4}
-            aria-label="E-Mail-Adressen"
-            getItemId={(m) => m.id}
-          >
-            <MailboxList.StaticData data={mailboxes} />
-            <ActionGroup>
-              <Button>Anlegen</Button>
-            </ActionGroup>
-            <MailboxList.Search />
-            <MailboxList.Filter
-              property="type"
-              name="Typ"
-              mode="some"
-            />
-            <MailboxList.Sorting
-              property="address"
-              name="Alphabetisch"
-              direction="asc"
-              directionName="aufsteigend"
-              defaultEnabled
-            />
-            <MailboxList.Sorting
-              property="address"
-              name="Alphabetisch"
-              direction="desc"
-              directionName="absteigend"
-            />
-            <MailboxList.Item textValue={(m) => m.address}>
-              {(m) => (
-                <MailboxList.ItemView
-                  l={[3, 1]}
-                  m={[2, 1]}
-                  s={[1]}
-                >
-                  <Avatar color={m.color}>
-                    <IconEmail />
-                  </Avatar>
-                  <Heading>{m.address}</Heading>
-                  <Text>{m.type}</Text>
-                  {m.storage && (
-                    <Content>
-                      <ProgressBar
-                        size="s"
-                        showMaxValue
-                        value={m.storage.used}
-                        maxValue={m.storage.max}
-                        formatOptions={{
-                          style: "unit",
-                          unit: "gigabyte",
-                        }}
-                      >
-                        <Label>Speicher</Label>
-                      </ProgressBar>
-                    </Content>
-                  )}
-                  <ContextMenu>
-                    <MenuItem>Details anzeigen</MenuItem>
-                    <MenuItem>Bearbeiten</MenuItem>
-                    <MenuItem>Löschen</MenuItem>
-                  </ContextMenu>
-                </MailboxList.ItemView>
-              )}
-            </MailboxList.Item>
-          </MailboxList.List>
-        </LayoutCard>
+    <Flex
+      direction="column"
+      gap="l"
+      grow
+      className={styles.content}
+    >
+      <Flex gap="l" align="stretch" className={styles.body}>
+        <ProjectSidebar />
+        <Flex
+          elementType="main"
+          direction="column"
+          gap="m"
+          className={styles.main}
+        >
+          <Breadcrumb>
+            <Link href="#">Projekt</Link>
+            <Link href="#">E-Mails</Link>
+          </Breadcrumb>
+          <Heading level={1}>E-Mails</Heading>
+          <LayoutCard>
+            <MailboxList.List
+              batchSize={4}
+              aria-label="E-Mail-Adressen"
+              getItemId={(m) => m.id}
+            >
+              <MailboxList.StaticData data={mailboxes} />
+              <ActionGroup>
+                <Button>Anlegen</Button>
+              </ActionGroup>
+              <MailboxList.Search />
+              <MailboxList.Filter
+                property="type"
+                name="Typ"
+                mode="some"
+              />
+              <MailboxList.Sorting
+                property="address"
+                name="Alphabetisch"
+                direction="asc"
+                directionName="aufsteigend"
+                defaultEnabled
+              />
+              <MailboxList.Sorting
+                property="address"
+                name="Alphabetisch"
+                direction="desc"
+                directionName="absteigend"
+              />
+              <MailboxList.Item
+                textValue={(m) => m.address}
+              >
+                {(m) => (
+                  <MailboxList.ItemView
+                    l={[3, 1]}
+                    m={[2, 1]}
+                    s={[1]}
+                  >
+                    <Avatar color={m.color}>
+                      <IconEmail />
+                    </Avatar>
+                    <Heading>{m.address}</Heading>
+                    <Text>{m.type}</Text>
+                    {m.storage && (
+                      <Content>
+                        <ProgressBar
+                          size="s"
+                          showMaxValue
+                          value={m.storage.used}
+                          maxValue={m.storage.max}
+                          formatOptions={{
+                            style: "unit",
+                            unit: "gigabyte",
+                          }}
+                        >
+                          <Label>Speicher</Label>
+                        </ProgressBar>
+                      </Content>
+                    )}
+                    <ContextMenu>
+                      <MenuItem>Details anzeigen</MenuItem>
+                      <MenuItem>Bearbeiten</MenuItem>
+                      <MenuItem>Löschen</MenuItem>
+                    </ContextMenu>
+                  </MailboxList.ItemView>
+                )}
+              </MailboxList.Item>
+            </MailboxList.List>
+          </LayoutCard>
+        </Flex>
       </Flex>
+      <Footer />
     </Flex>
-    <Footer />
   </Flex>
 );
 
@@ -186,48 +195,50 @@ const GlobalNavigationLinks = () => (
 );
 
 const Topbar = () => (
-  <Flex
-    elementType="header"
-    align="center"
-    wrap="wrap"
-    gap="m"
-  >
-    <span
-      className={styles.logo}
-      role="img"
-      aria-label="mittwald"
-    />
-    <HeaderNavigation
-      aria-label="Hauptnavigation"
-      className={styles.topnav}
+  <header className={styles.header}>
+    <Flex
+      align="center"
+      wrap="wrap"
+      gap="m"
+      className={styles.headerContent}
     >
-      <GlobalNavigationLinks />
-      <SearchButton />
-      <NotificationButton />
-      <ContextMenuTrigger>
-        <Button aria-label="Konto">
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <ContextMenu>
-          <MenuItem>
-            <IconSettings />
-            <Text>Profil</Text>
-          </MenuItem>
-          <MenuItem>
-            <IconLogout />
-            <Text>Abmelden</Text>
-          </MenuItem>
-        </ContextMenu>
-      </ContextMenuTrigger>
-    </HeaderNavigation>
-    <HeaderNavigation className={styles.mobileActions}>
-      <SearchButton />
-      <NotificationButton />
-      <MobileMenu />
-    </HeaderNavigation>
-  </Flex>
+      <span
+        className={styles.logo}
+        role="img"
+        aria-label="mittwald"
+      />
+      <HeaderNavigation
+        aria-label="Hauptnavigation"
+        className={styles.topnav}
+      >
+        <GlobalNavigationLinks />
+        <SearchButton />
+        <NotificationButton />
+        <ContextMenuTrigger>
+          <Button aria-label="Konto">
+            <Avatar>
+              <Initials>Max Mustermann</Initials>
+            </Avatar>
+          </Button>
+          <ContextMenu>
+            <MenuItem>
+              <IconSettings />
+              <Text>Profil</Text>
+            </MenuItem>
+            <MenuItem>
+              <IconLogout />
+              <Text>Abmelden</Text>
+            </MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
+      </HeaderNavigation>
+      <HeaderNavigation className={styles.mobileActions}>
+        <SearchButton />
+        <NotificationButton />
+        <MobileMenu />
+      </HeaderNavigation>
+    </Flex>
+  </header>
 );
 
 /*

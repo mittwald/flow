@@ -1,4 +1,10 @@
-import { type FC, useLayoutEffect, useRef, useSyncExternalStore } from "react";
+import {
+  type FC,
+  useLayoutEffect,
+  useReducer,
+  useRef,
+  useSyncExternalStore,
+} from "react";
 import { useTunnelState } from "@/context";
 import { observer } from "mobx-react-lite";
 import type { TunnelChildren } from "@/TunnelState";
@@ -47,6 +53,23 @@ export const TunnelExit: FC<TunnelExitProps> = observer((props) => {
     id,
     isSsr || isBeforeFirstCommit.current,
   );
+
+  /**
+   * Entries rendered after the exit commit their children in their own layout
+   * effects. The observer only picks that up once it subscribes, in a passive
+   * effect — and React runs the passive effects of a Suspense reveal or a
+   * transition after paint, so the browser shows one frame with an empty exit.
+   * A re-render dispatched from a layout effect runs synchronously, after every
+   * layout effect of the commit and before paint. Only needed while the exit
+   * has not rendered committed entries yet.
+   */
+  const [, rerender] = useReducer((count: number) => count + 1, 0);
+  const hasRenderedCommittedEntries = tunnelChildren?.committed === true;
+  useLayoutEffect(() => {
+    if (!hasRenderedCommittedEntries) {
+      rerender();
+    }
+  }, [hasRenderedCommittedEntries]);
 
   const renderedTunnelChildren = tunnelChildren?.entries.map((entry) => (
     <ChildrenRenderer key={entry.id}>{entry.children}</ChildrenRenderer>

@@ -26,6 +26,38 @@ test.each(testEnvironments)(
   },
 );
 
+test.each(testEnvironments)(
+  "LayoutCard with alerts (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { LayoutCard, Alert, Heading, Section, Text },
+  }) => {
+    await render(
+      <LayoutCard>
+        <Alert status="danger">
+          <Heading>Danger</Heading>
+        </Alert>
+        <Alert status="warning">
+          <Heading>Warning</Heading>
+        </Alert>
+        <Section>
+          <Heading>Section</Heading>
+          <Alert>
+            <Heading>Info</Heading>
+          </Alert>
+          <Alert status="success">
+            <Heading>Success</Heading>
+          </Alert>
+          <Text>Text</Text>
+        </Section>
+      </LayoutCard>,
+    );
+
+    await testScreenshot("LayoutCard with alerts");
+  },
+);
+
 // TabNavigation was introduced in alpha.977.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.977" })).each(testEnvironments)(
   "LayoutCard with TabNavigation (%s)",

@@ -4,6 +4,7 @@ declare const classNames: {
   readonly "flow--tab-navigation--item": "flow--tab-navigation--item";
   readonly "flow--tab-navigation--link": "flow--tab-navigation--link";
   readonly "flow--tab-navigation--more-button": "flow--tab-navigation--more-button";
+  readonly alert: "alert";
   readonly accentBox: "accentBox";
 };
 export default classNames;

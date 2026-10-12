@@ -1,9 +1,16 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { expect, test } from "vitest";
+import { useContext, useState } from "react";
+import { FieldErrorContext } from "react-aria-components";
 import { FieldError } from "@/components/FieldError";
+import styles from "@/components/FieldError/FieldError.module.scss";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
+import { Slider } from "@/components/Slider";
+import { Autocomplete } from "@/components/Autocomplete";
+import { SearchField } from "@/components/SearchField";
+import { Option } from "@/components/Option";
 
 const message = () => page.getByText("The name is already taken");
 
@@ -41,7 +48,7 @@ test("inside a field the error describes the input", async () => {
     .toHaveAccessibleDescription(/The name is already taken/);
 });
 
-test("a valid field shows no error even when one is written down", async () => {
+test("a valid field without a message shows no error", async () => {
   await render(
     <TextField>
       <Label>Project name</Label>
@@ -49,7 +56,179 @@ test("a valid field shows no error even when one is written down", async () => {
     </TextField>,
   );
 
+  await expect.element(page.getByRole("textbox")).toBeVisible();
+  expect(document.querySelector(`.${styles.fieldError}`)).toBeNull();
+});
+
+/*
+ * A field with a validation state decides whether its error shows; children
+ * only give the message. The message can stay in the tree while `isInvalid`
+ * switches it.
+ */
+test("isInvalid of the field shows and hides a written-down message", async () => {
+  const Field = ({ isInvalid }: { isInvalid: boolean }) => (
+    <TextField isInvalid={isInvalid}>
+      <Label>Project name</Label>
+      <FieldError>The name is already taken</FieldError>
+    </TextField>
+  );
+  const screen = await render(<Field isInvalid={false} />);
+
+  await expect.element(page.getByRole("textbox")).toBeVisible();
   await expect.element(message()).not.toBeInTheDocument();
+  // A hidden error is referenced nowhere – a dangling id fails validators.
+  await expect
+    .element(page.getByRole("textbox"))
+    .not.toHaveAttribute("aria-describedby");
+
+  await screen.rerender(<Field isInvalid />);
+
+  await expect
+    .element(page.getByRole("textbox"))
+    .toHaveAccessibleDescription(/The name is already taken/);
+
+  await screen.rerender(<Field isInvalid={false} />);
+
+  await expect.element(message()).not.toBeInTheDocument();
+  await expect
+    .element(page.getByRole("textbox"))
+    .not.toHaveAttribute("aria-describedby");
+});
+
+test("an error from validate describes the input", async () => {
+  await render(
+    <TextField
+      validate={() => "The name is too short"}
+      validationBehavior="aria"
+    >
+      <Label>Project name</Label>
+      <FieldError />
+    </TextField>,
+  );
+
+  await expect
+    .element(page.getByRole("textbox"))
+    .toHaveAccessibleDescription(/The name is too short/);
+});
+
+test("the error keeps a description passed by the consumer", async () => {
+  await render(
+    <>
+      <span id="hint">Visible to everyone</span>
+      <TextField isInvalid aria-describedby="hint">
+        <Label>Project name</Label>
+        <FieldError>The name is already taken</FieldError>
+      </TextField>
+    </>,
+  );
+
+  const input = page.getByRole("textbox");
+  await expect
+    .element(input)
+    .toHaveAccessibleDescription(/The name is already taken/);
+  await expect
+    .element(input)
+    .toHaveAccessibleDescription(/Visible to everyone/);
+});
+
+/*
+ * For a valid field react-aria hands out one module-level `validationErrors`
+ * array shared by every field. A message written into it would surface in
+ * every other field of the page.
+ */
+test("children do not leak into other fields", async () => {
+  const OtherFieldErrors = () => (
+    <span data-testid="errors">
+      {useContext(FieldErrorContext)?.validationErrors.length}
+    </span>
+  );
+  const fields = (
+    <>
+      <TextField>
+        <Label>Project name</Label>
+        <FieldError>The name is already taken</FieldError>
+      </TextField>
+      <TextField>
+        <Label>Description</Label>
+        <OtherFieldErrors />
+      </TextField>
+    </>
+  );
+
+  const screen = await render(fields);
+  await screen.rerender(fields);
+
+  await expect.element(page.getByTestId("errors")).toHaveTextContent("0");
+});
+
+/*
+ * Re-rendering the field updates the error in place. A remount would swap its
+ * DOM nodes on every keystroke of a controlled field.
+ */
+test("the error is not remounted when the field re-renders", async () => {
+  const ControlledField = () => {
+    const [value, setValue] = useState("");
+    return (
+      <TextField isInvalid value={value} onChange={setValue}>
+        <Label>Project name</Label>
+        <FieldError>The name is already taken</FieldError>
+      </TextField>
+    );
+  };
+
+  await render(<ControlledField />);
+  await expect.element(message()).toBeVisible();
+  const before = message().element();
+
+  await userEvent.type(page.getByRole("textbox"), "ab");
+
+  await expect.element(page.getByRole("textbox")).toHaveValue("ab");
+  expect(message().element()).toBe(before);
+});
+
+/*
+ * react-aria joins the slider's `aria-describedby` with the thumb's own, so a
+ * consumer id passed to both would be announced twice.
+ */
+test("a Slider describes its thumb with a consumer id only once", async () => {
+  await render(
+    <>
+      <span id="hint">Visible to everyone</span>
+      <Slider isInvalid aria-describedby="hint">
+        <Label>Volume</Label>
+        <FieldError>Too loud</FieldError>
+      </Slider>
+    </>,
+  );
+
+  const slider = page.getByRole("slider");
+  await expect.element(slider).toHaveAccessibleDescription(/Too loud/);
+  const ids = (slider.element().getAttribute("aria-describedby") ?? "").split(
+    " ",
+  );
+  expect(ids.filter((id) => id === "hint")).toHaveLength(1);
+});
+
+// The Autocomplete's error and the field's own description both stay linked.
+test("an Autocomplete error survives a SearchField's own description", async () => {
+  await render(
+    <>
+      <span id="hint">Visible to everyone</span>
+      <Autocomplete>
+        <SearchField aria-describedby="hint">
+          <Label>Address</Label>
+        </SearchField>
+        <Option value="a">A</Option>
+        <FieldError>Blocked domain</FieldError>
+      </Autocomplete>
+    </>,
+  );
+
+  const input = page.getByRole("searchbox");
+  await expect.element(input).toHaveAccessibleDescription(/Blocked domain/);
+  await expect
+    .element(input)
+    .toHaveAccessibleDescription(/Visible to everyone/);
 });
 
 // `renderAlert` swaps the inline text for a full alert with a heading.

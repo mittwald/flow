@@ -1,0 +1,132 @@
+---
+title: States
+---
+
+States beschreiben den Zustand einer Komponente und ihre Reaktion auf
+Interaktionen. Flow stellt die States für alle Komponenten bereit.
+
+---
+
+# Interaktions-States
+
+Interaktions-States entstehen, wenn Nutzer mit einer Komponente interagieren.
+Die Komponenten zeigen sie automatisch an.
+
+## Default
+
+Default ist der Ruhezustand einer Komponente, in dem keine Interaktion
+stattfindet. Alle anderen States bauen visuell auf ihm auf.
+
+<LiveCodeEditor example="default" editorDisabled />
+
+## Hover
+
+Hover zeigt an, dass sich der Mauszeiger über einem interaktiven Element
+befindet. Der State signalisiert, dass das Element bedienbar ist. Auf
+Touch-Geräten gibt es keinen Hover, wichtige Informationen dürfen deshalb nie
+nur im Hover sichtbar sein.
+
+<LiveCodeEditor example="hover" editorDisabled />
+
+## Pressed
+
+Pressed zeigt an, dass ein Element gerade gedrückt wird. Das direkte Feedback
+bestätigt dem Nutzer, dass seine Eingabe angekommen ist.
+
+<LiveCodeEditor example="pressed" editorDisabled />
+
+## Focus
+
+Focus zeigt an, welches Element gerade per Tastatur angesteuert ist. Der
+Focus-Ring erscheint nur bei der Bedienung mit der Tastatur und ist für Nutzer,
+die ohne Maus navigieren, die wichtigste Orientierung. Der Focus darf deshalb
+nie verloren gehen. Mehr dazu findest du unter
+[Accessibility](/foundations/design/accessibility).
+
+<LiveCodeEditor example="focus" editorDisabled />
+
+## Selected
+
+Selected zeigt an, dass eine Option ausgewählt oder aktiv ist. Typische
+Komponenten sind [Checkbox](/components/form-controls/checkbox),
+[RadioGroup](/components/form-controls/radio-group) und
+[Tabs](/components/structure/tabs).
+
+<LiveCodeEditor example="selected" editorDisabled />
+
+---
+
+# Component-States
+
+Diese States werden über Properties gesetzt. Sie beschreiben, ob und wie eine
+Komponente bedient werden kann.
+
+## Disabled
+
+Disabled zeigt an, dass ein Element aktuell nicht bedient werden kann. Der Wert
+eines deaktivierten Felds wird beim Absenden eines Formulars nicht übermittelt.
+Mache aus dem Kontext klar, warum das Element nicht zur Verfügung steht, damit
+Nutzer wissen, was sie tun müssen. Neben dem
+[Button](/components/actions/button) lassen sich auch Eingabefelder wie
+[TextField](/components/form-controls/text-field) oder
+[Checkbox](/components/form-controls/checkbox) deaktivieren.
+
+<LiveCodeEditor example="disabled" editorDisabled />
+
+## Read-only
+
+<Alert status="warning">
+  <Heading>Nur mit erkennbarem Kontext verwenden</Heading>
+  <Content>
+    Ein Read-only-Feld unterscheidet sich optisch nicht von einem bedienbaren
+    Feld. Aus dem Kontext muss deshalb klar hervorgehen, dass nichts bearbeitet
+    werden kann, zum Beispiel durch eine als Vorschau gekennzeichnete Ansicht.
+  </Content>
+</Alert>
+
+Read-only zeigt einen Wert an, der relevant ist, aber nicht geändert werden
+kann. Anders als bei Disabled bleibt der Wert gut lesbar, lässt sich markieren
+und kopieren und wird mit dem Formular übermittelt. Typische Komponenten sind
+[TextField](/components/form-controls/text-field),
+[Select](/components/form-controls/select) und
+[Rating](/components/form-controls/rating).
+
+<LiveCodeEditor example="readOnly" editorDisabled />
+
+## Invalid
+
+Invalid zeigt an, dass eine Eingabe fehlerhaft ist. Kombiniere den State immer
+mit einem `FieldError`, der erklärt, wie Nutzer den Fehler beheben. Wie du gute
+Fehlermeldungen formulierst, erfährst du unter
+[Fehlermeldungen](/foundations/content-guidelines/fehlermeldungen).
+
+<LiveCodeEditor example="invalid" editorDisabled />
+
+## Required
+
+Required kennzeichnet ein Pflichtfeld, das ausgefüllt werden muss, bevor ein
+[Form](/components/react-hook-form/form) abgeschickt werden kann. Flow
+kennzeichnet dabei nicht die Pflichtfelder, sondern die optionalen: Ihr Label
+erhält automatisch den Zusatz „(optional)“.
+
+<LiveCodeEditor example="required" editorDisabled />
+
+## Indeterminate
+
+Indeterminate zeigt an, dass nur ein Teil der untergeordneten Optionen
+ausgewählt ist. Der State kommt vor allem bei einer
+[Checkbox](/components/form-controls/checkbox) zum Einsatz, die eine
+[CheckboxGroup](/components/form-controls/checkbox-group) oder die Auswahl in
+einer Liste zusammenfasst.
+
+<LiveCodeEditor example="indeterminate" editorDisabled />
+
+## Pending, Succeeded und Failed
+
+Diese States geben dem Nutzer Feedback zu einer Aktion, die im Hintergrund
+läuft: Pending zeigt an, dass die Aktion läuft, Succeeded, dass sie erfolgreich
+abgeschlossen wurde, und Failed, dass sie fehlgeschlagen ist. Steuere die States
+über die [Action](/components/actions/action)-Komponente. Sie setzt den
+passenden State automatisch anhand des Verlaufs der Aktion.
+
+<LiveCodeEditor example="feedback" editorDisabled row />
