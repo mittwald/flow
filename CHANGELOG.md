@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.44](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.5.0-next.44) (2026-10-12)
+
+### Bug Fixes
+
+* **Field:** disable fields of a disabled form ([#3379](https://github.com/mittwald/flow/issues/3379)) ([45fb9ae](https://github.com/mittwald/flow/commit/45fb9ae7fd8f5f304780640407593671defb356c))
+
+## [1.4.34](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.4.34) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.34 ([d17d841](https://github.com/mittwald/flow/commit/d17d84121422181fa8e543209c0d86816b9b7938))
+
 ## [1.5.0-next.43](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.5.0-next.43) (2026-10-12)
 
 ### Tests
