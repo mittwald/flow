@@ -14,7 +14,8 @@ pipeline is React-specific below the element layer, which is what makes this
 package possible.
 
 ```shell
-pnpm add @mittwald/flow-remote-vue-components @mittwald/flow-react-components @mittwald/ext-bridge vue react react-dom
+FLOW=$(npm view @mittwald/flow-remote-vue-components version)
+pnpm add @mittwald/flow-remote-vue-components@$FLOW @mittwald/flow-react-components@$FLOW @mittwald/ext-bridge@$FLOW vue react react-dom
 ```
 
 `@mittwald/flow-react-components` is a peer dependency at **runtime and for the
@@ -30,7 +31,10 @@ types**:
 `@mittwald/ext-bridge` is a peer because `RemoteRoot` imports it. `react` and
 `react-dom` are peers of `@mittwald/flow-react-components`, not of this package.
 npm and pnpm install peers on their own; `yarn` and `npm --legacy-peer-deps` do
-not, so name all of them.
+not, so name all of them. Pin the Flow packages to this package's version: its
+peers require exactly that version, and named without one, pnpm and yarn take
+the `latest` dist-tag of `@mittwald/flow-react-components` and
+`@mittwald/ext-bridge`, which is a different release line.
 
 ```vue
 <script setup lang="ts">
