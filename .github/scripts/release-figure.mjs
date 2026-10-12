@@ -445,15 +445,15 @@ const captureSettled = async (figure) => {
 };
 
 /**
- * Capture one theme of the figure into `out`.
+ * Capture one theme of the figure.
  *
  * @param {import("playwright").Browser} browser
  * @param {string} docsUrl
  * @param {import("./release-figure-lib.mjs").NormalizedFigureSpec} spec
  * @param {import("./release-figure-lib.mjs").FigureTheme} theme
- * @param {string} out
+ * @returns {Promise<Buffer>} The PNG
  */
-const captureTheme = async (browser, docsUrl, spec, theme, out) => {
+const captureTheme = async (browser, docsUrl, spec, theme) => {
   const context = await browser.newContext({
     viewport: { width: spec.width, height: 800 },
     deviceScaleFactor: spec.scale,
@@ -527,9 +527,7 @@ const captureTheme = async (browser, docsUrl, spec, theme, out) => {
       );
     }
 
-    await mkdir(dirname(resolve(repoRoot, out)), { recursive: true });
-    const png = await captureSettled(page.locator("#figure"));
-    await writeFile(resolve(repoRoot, out), png);
+    return await captureSettled(page.locator("#figure"));
   } finally {
     await context.close();
   }
@@ -581,11 +579,18 @@ const main = async () => {
     const launched = await launchBrowser(playwright, args.browser);
     browser = launched.browser;
 
-    const written = [];
+    // Both themes pass before either file is touched: a failing dark pass
+    // must not leave a fresh light capture next to a stale dark one.
+    const captures = [];
     for (const theme of FIGURE_THEMES) {
-      const out = themedOutputPath(spec.out, theme);
-      await captureTheme(browser, docs.url, spec, theme, out);
-      written.push(out);
+      captures.push({
+        out: themedOutputPath(spec.out, theme),
+        png: await captureTheme(browser, docs.url, spec, theme),
+      });
+    }
+    for (const { out, png } of captures) {
+      await mkdir(dirname(resolve(repoRoot, out)), { recursive: true });
+      await writeFile(resolve(repoRoot, out), png);
     }
 
     const pixelWidth = spec.width * spec.scale;
@@ -597,7 +602,7 @@ const main = async () => {
     }).replaceAll(placeholderSha, "<commit-sha>");
     process.stdout.write(
       [
-        ...written.map((out) => `Wrote ${out}`),
+        ...captures.map(({ out }) => `Wrote ${out}`),
         `  panels:  ${spec.panels.length} (${spec.panels.map((p) => p.example).join(", ")})`,
         `  browser: ${launched.name}`,
         `  layout:  ${spec.width} CSS px wide, captured at ${spec.scale}×`,
