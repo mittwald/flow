@@ -21,6 +21,8 @@ import { Fragment, h, type Component, type VNode } from "vue";
  * What this deliberately does not support: a render prop, a function as
  * children, or a component a scenario defines itself. None appear in the
  * corpus, and each would describe something a remote tree cannot carry anyway.
+ * The corpus's own pure helpers (`expandedHelpers`) are the exception: they
+ * only arrange components from the bag, so their output is converted instead.
  */
 
 type VueChild = VNode | string;
@@ -31,6 +33,18 @@ const nameOfReactComponent = new Map<unknown, string>(
 );
 
 const vueComponents = VueComponents as unknown as Record<string, Component>;
+
+/**
+ * Hook-free helpers of the corpus's test library, called with the scenario's
+ * props and converted by their output. Matched by name: importing them would
+ * pull the React package's `@/` alias into this package's type check.
+ */
+const expandedHelpers = new Set(["SkeletonComparison"]);
+
+const isExpandedHelper = (
+  type: unknown,
+): type is (props: Record<string, unknown>) => ReactElement =>
+  typeof type === "function" && expandedHelpers.has(type.name);
 
 export class UnsupportedScenarioError extends Error {
   public constructor(what: string) {
@@ -190,6 +204,10 @@ export const toVNode = (element: ReactElement): VNode => {
       intrinsicProps(props, key),
       toVNodeChildren(props.children as ReactNode),
     );
+  }
+
+  if (isExpandedHelper(type)) {
+    return toVNode(type(props));
   }
 
   const name = nameOfReactComponent.get(type);
