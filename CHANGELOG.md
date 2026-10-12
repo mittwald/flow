@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.48](https://github.com/mittwald/flow/compare/1.5.0-next.47...1.5.0-next.48) (2026-10-12)
+
+### Bug Fixes
+
+* **Field:** pass isDisabled to CodeEditor ([8b0e154](https://github.com/mittwald/flow/commit/8b0e154fdd477baee64022da78f23d459151f659)), closes [#3369](https://github.com/mittwald/flow/issues/3369)
+
 ## [1.5.0-next.47](https://github.com/mittwald/flow/compare/1.5.0-next.46...1.5.0-next.47) (2026-10-12)
 
 ### Features
