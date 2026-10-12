@@ -32,6 +32,8 @@ export const unsupportedScenarios: Record<string, string> = {
   Section: "The scenario defines a React component with useState.",
   "Section growing inside a LayoutCard":
     "The scenario defines a React component with useState.",
+  "SkeletonMode lists and tables":
+    "The scenario builds its list with typedList<T>(), which is a factory rather than a component the converter can map. The Vue List is compared by e2e/list-parity.",
   IntlProvider:
     "There is no Vue IntlProvider: React's sets the locale for what renders locally, and a Vue app renders nothing locally. useLanguage() reports the host's.",
 };
