@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.46](https://github.com/mittwald/flow/compare/1.5.0-next.45...1.5.0-next.46) (2026-10-12)
+
+## [1.4.36](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.4.36) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-minor group with 2 updates ([747795b](https://github.com/mittwald/flow/commit/747795badf33fce3e4fdb47e17e0fd9087255447))
+* **release:** bump version to 1.4.36 ([d9f430b](https://github.com/mittwald/flow/commit/d9f430b666a94fee205232a88a55f7d86dcf3948))
+
 ## [1.5.0-next.45](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.5.0-next.45) (2026-10-12)
 
 ## [1.4.35](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.4.35) (2026-10-12)
