@@ -153,8 +153,9 @@ requires `--from`/`--to` overrides before doing anything else.
    ```
 
    `version` + `name` give the output path
-   (`apps/docs/public/assets/releases/1.1.0/rating.png`); `width` is the CSS px
-   the examples render at and `scale` the `deviceScaleFactor`; `caption` is the
+   (`apps/docs/public/assets/releases/1.1.0/rating.png`, plus `rating-dark.png`
+   — every figure is captured once per theme); `width` is the CSS px the
+   examples render at and `scale` the `deviceScaleFactor`; `caption` is the
    monospace line above a panel, naming the prop it demonstrates; `expect`
    asserts what the panel rendered — the whole frame is searched, so an overlay
    in a portal counts.
@@ -186,12 +187,12 @@ requires `--from`/`--to` overrides before doing anything else.
    expectations hold, so content that appears after mount — a chart's bars, an
    open overlay — is captured drawn, not half-way.
 
-   **Then open every PNG and look at it.** A capture that is clipped, cropped
-   wrong or showing the wrong state renders fine and reads as plausible; the
-   first #3029 capture lost the bottom of its icons and survived a first pass.
-   Re-capture rather than ship a bad crop. An example whose overlay extends past
-   its frame is clipped — the docs examples keep overlays inside
-   (`paddingBlockEnd`), which is what the CoachMark example does.
+   **Then open every PNG and look at it** — both themes. A capture that is
+   clipped, cropped wrong or showing the wrong state renders fine and reads as
+   plausible; the first #3029 capture lost the bottom of its icons and survived
+   a first pass. Re-capture rather than ship a bad crop. An example whose
+   overlay extends past its frame is clipped — the docs examples keep overlays
+   inside (`paddingBlockEnd`), which is what the CoachMark example does.
 
    **Commit the figures on the release branch and reference them by the commit's
    SHA.** Not a `user-attachments` upload: GitHub has no API for those — they
@@ -214,13 +215,16 @@ requires `--from`/`--to` overrides before doing anything else.
    carries ~950 PNG/GIF files.
 
    Two constraints the `/releases` rendering imposes, both verified:
-   - **Markdown image syntax, never an HTML `<img>`.** GitHub renders raw HTML
-     in a release body; the docs site's `<Markdown>` does not enable
-     `rehype-raw` and drops it. An HTML tag therefore works on one surface and
-     silently vanishes on the other — and with it any `width` attribute.
-   - **Nothing can resize the figure afterwards**, since that `width` attribute
-     is unavailable. Both surfaces cap it with `max-width: 100%`, so an
-     oversized figure is scaled down and an undersized one is simply small.
+   - **The `<picture>` block the script prints, and no other HTML.** GitHub
+     renders raw HTML in a release body and shows the block's dark `<source>` to
+     dark mode. The docs site's `<Markdown>` does not enable `rehype-raw` and
+     drops raw HTML, so `themedFigures` (`apps/docs/src/lib/releases`) rewrites
+     exactly this shape into one markdown image per theme. Any other tag — a
+     bare `<img>`, a `width` attribute — works on GitHub and silently vanishes
+     on `/releases`.
+   - **Nothing can resize the figure afterwards**, since a `width` attribute is
+     unavailable. Both surfaces cap it with `max-width: 100%`, so an oversized
+     figure is scaled down and an undersized one is simply small.
      `width × scale` is the pixel width, and the script prints it.
 
 9. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
@@ -253,11 +257,15 @@ requires `--from`/`--to` overrides before doing anything else.
    </details>
    ```
 
-   Every figure from Step 8 goes into `{{CURATED_NOTES}}` as a markdown image at
-   the SHA that step recorded:
+   Every figure from Step 8 goes into `{{CURATED_NOTES}}` as the `<picture>`
+   block the script printed, with `<commit-sha>` replaced by the SHA that step
+   recorded and the alt text filled in:
 
    ```markdown
-   ![Rating figure](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/rating.png)
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/rating-dark.png">
+     <img src="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/rating.png" alt="Rating figure">
+   </picture>
    ```
 
    The curated notes MUST sit **verbatim** between

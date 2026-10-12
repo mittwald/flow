@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.35](https://github.com/mittwald/flow/compare/1.4.34...1.4.35) (2026-10-12)
+
+### Bug Fixes
+
+* **Field:** disable fields of a disabled form ([#3379](https://github.com/mittwald/flow/issues/3379)) ([45fb9ae](https://github.com/mittwald/flow/commit/45fb9ae7fd8f5f304780640407593671defb356c))
+
+## [1.4.34](https://github.com/mittwald/flow/compare/1.4.33...1.4.34) (2026-10-12)
+
+### Tests
+
+* **components:** add form field contract test and guidance ([#3370](https://github.com/mittwald/flow/issues/3370)) ([e4d3245](https://github.com/mittwald/flow/commit/e4d32456c2543ba0d46bfd63e060f7b4ac11eb52))
+
+## [1.4.33](https://github.com/mittwald/flow/compare/1.4.32...1.4.33) (2026-10-12)
+
+### Documentation
+
+* **components:** one const per UI variant, the JSX picks ([2aa5ff1](https://github.com/mittwald/flow/commit/2aa5ff1a963bfb9e0bd0a2dc98395eabfb125506))
+
+## [1.4.32](https://github.com/mittwald/flow/compare/1.4.31...1.4.32) (2026-10-12)
+
+### Bug Fixes
+
+* **Modal:** drop &quot;modal&quot; from the unsaved changes confirmation text ([f270eea](https://github.com/mittwald/flow/commit/f270eea4935fcfa1407318ca4bffb6f1e1b93880))
+
+## [1.4.31](https://github.com/mittwald/flow/compare/1.4.30...1.4.31) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 ## [1.4.30](https://github.com/mittwald/flow/compare/1.4.29...1.4.30) (2026-10-09)
 
 ### Bug Fixes

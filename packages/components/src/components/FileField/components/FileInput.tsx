@@ -53,6 +53,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
         {...restInputProps}
         {...visuallyHiddenProps}
         type="file"
+        disabled={isDisabled}
         ref={inputRef}
         onChange={handleChange}
         onClick={(event) => event.stopPropagation()}
