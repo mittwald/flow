@@ -29,6 +29,15 @@ declare global {
   }
 }
 
+// Custom properties are how components hand values to their stylesheets.
+declare module "react" {
+  // An interface merge cannot take a Record.
+  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+  interface CSSProperties {
+    [customProperty: `--${string}`]: string | number | undefined;
+  }
+}
+
 declare module "vitest/browser" {
   interface BrowserCommands {
     setReducedMotion: (value: string) => Promise<void>;

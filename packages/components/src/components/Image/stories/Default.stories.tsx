@@ -5,7 +5,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 const meta: Meta<typeof Image> = {
   title: "Content/Image",
   component: Image,
-  args: { withBorder: false },
+  args: { withBorder: false, withRoundedCorners: true },
   render: (props) => <Image {...props} alt="Gopher" src={dummyText.imageSrc} />,
 };
 export default meta;

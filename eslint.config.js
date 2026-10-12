@@ -231,6 +231,20 @@ export default tseslint.config(
     },
   },
   {
+    // An unknown `flow--…` name fails silently: a `className` styles nothing,
+    // a `querySelector` finds nothing.
+    files: ["**/src/**/*.{js,jsx,mjs,ts,tsx}"],
+    ignores: [
+      // Codemods name removed classes on purpose.
+      "packages/codemods/**",
+      // Stubs echo their `:global()` targets; stylelint checks those.
+      "**/*.module.d.*.ts",
+    ],
+    rules: {
+      "flow/no-unknown-flow-class": "error",
+    },
+  },
+  {
     // Node ES-module CLI scripts (run by GitHub Actions, not bundled).
     files: [".github/scripts/**/*.mjs"],
     languageOptions: {

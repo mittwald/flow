@@ -44,7 +44,8 @@ const resolveModule = (from: string, specifier: string): string | undefined => {
 };
 
 /**
- * Every name a file exports, following `export * from` into the repository.
+ * Every name a file exports — listed or declared — following `export * from`
+ * into the repository.
  *
  * A rough parse is enough here: these are hand-maintained barrel files with
  * plain export lists, and the check only ever asks whether a name is
@@ -67,6 +68,12 @@ const namedExports = (file: string, seen = new Set<string>()): string[] => {
         names.push(match[2] ?? (match[1] as string));
       }
     }
+  }
+
+  for (const declaration of source.matchAll(
+    /^export\s+(?:declare\s+)?(?:const|let|function|class|type|interface|enum)\s+(\w+)/gm,
+  )) {
+    names.push(declaration[1] as string);
   }
 
   for (const star of source.matchAll(/export \* from "([^"]+)";/g)) {

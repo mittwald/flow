@@ -52,9 +52,20 @@ export const useTabIndicator = (isCollapsed: boolean) => {
 
       const rootRect = root.getBoundingClientRect();
       const selectedTabRect = selectedTab.getBoundingClientRect();
+
+      /*
+       * `getBoundingClientRect` reports rendered pixels, but the custom
+       * properties below are read as lengths inside the same subtree. Where an
+       * ancestor scales it — a `transform`, a CSS `zoom` — the two differ, and
+       * writing the rendered value back scales it a second time. The root's own
+       * rendered and layout width give the factor between them.
+       */
+      const scale =
+        root.offsetWidth > 0 ? rootRect.width / root.offsetWidth : 1;
+
       const nextIndicator: TabIndicatorState = {
-        x: selectedTabRect.left - rootRect.left,
-        width: selectedTabRect.width,
+        x: (selectedTabRect.left - rootRect.left) / scale,
+        width: selectedTabRect.width / scale,
         isAnimated: hasMeasuredRef.current,
       };
 

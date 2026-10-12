@@ -16,7 +16,7 @@ export const DateRangeInput: FC<DateInputProps> = (props) => {
 
   return (
     <Aria.Group className={styles.dateRangeInput}>
-      <div>
+      <div className={styles.inputs}>
         <DateInput slot="start" ref={ref} />
         <span aria-hidden="true">–</span>
         <DateInput slot="end" />

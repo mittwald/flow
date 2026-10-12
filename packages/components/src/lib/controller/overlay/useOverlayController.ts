@@ -15,7 +15,7 @@ export const useOverlayController = (
     options;
 
   const newController = OverlayController.useNew(restControllerOptions);
-  const controllerFromContext = useOverlayContext()[overlayType];
+  const controllerFromContext = useOverlayContext().byType[overlayType];
 
   const controller =
     reuseControllerFromContext && controllerFromContext

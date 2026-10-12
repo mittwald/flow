@@ -1,19 +1,18 @@
 import styles from "@/components/ProgressBar/ProgressBar.module.scss";
-import { type FC } from "react";
+import type { FC } from "react";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
 interface Props extends Pick<ProgressBarProps, "segments"> {
   percentage?: number;
-  segmentsTotalValue?: number;
 }
 
 export const ProgressBarBar: FC<Props> = (props) => {
-  const { segments, segmentsTotalValue, percentage } = props;
+  const { segments, percentage } = props;
 
   const segmentFill =
-    segmentsTotalValue && segments && segments?.length > 0
+    segments && segments.length > 0
       ? segments.map((s, i) => {
           const backgroundColor = !s.color
             ? `var(--color--categorical--${getCategoricalColorByIndex(i)})`
@@ -25,10 +24,10 @@ export const ProgressBarBar: FC<Props> = (props) => {
             <div
               key={s.title}
               aria-hidden
+              className={styles.segment}
               style={{
                 backgroundColor,
-                width: (100 / segmentsTotalValue) * s.value + "%",
-                height: "100%",
+                "--progress-bar--segment-value": s.value,
               }}
             />
           );
@@ -37,7 +36,10 @@ export const ProgressBarBar: FC<Props> = (props) => {
 
   return (
     <div className={styles.bar}>
-      <div className={styles.fill} style={{ width: percentage + "%" }}>
+      <div
+        className={styles.fill}
+        style={{ "--progress-bar--percentage": percentage }}
+      >
         {segmentFill}
       </div>
     </div>

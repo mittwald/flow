@@ -3,13 +3,15 @@
 .calendar {
   width: fit-content;
 
-  header {
+  .calendarHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--calendar--spacing);
 
-    h2 {
+    /* react-aria's Heading — CalendarHeader passes no className, so its
+       default class is the handle. */
+    :global(.react-aria-Heading) {
       font-size: var(--calendar--heading-font-size);
     }
   }
@@ -21,12 +23,32 @@
 
     .presetMenu {
       max-width: 200px;
+
+      /*
+       * With an auto width, WebKit resolved the menu one item padding wider on
+       * every layout. Each reposition of the popover then resized it again,
+       * inside react-aria's resize observer on the popover: a
+       * "ResizeObserver loop" error per step.
+       */
+      width: max-content;
     }
   }
 
   @media (max-width: 530px) {
     .container {
       flex-direction: column-reverse;
+
+      .presetMenu {
+        width: auto;
+      }
+
+      /* The presets move below the grid, so the separator turns horizontal. */
+      .presetSeparator {
+        border-inline-end: 0;
+        border-top: var(--separator--height) var(--separator--border-style)
+          var(--separator--color);
+        width: 100%;
+      }
     }
   }
 
@@ -35,7 +57,7 @@
     height: var(--calendar--cell-size);
   }
 
-  table {
+  :global(.react-aria-CalendarGrid) {
     border-spacing: var(--calendar--spacing);
   }
 

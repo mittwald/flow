@@ -457,6 +457,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components/flr-universal#ComponentDefaultsProvider": {
+    "level": "stable",
+    "isNew": true
+  },
   "@mittwald/flow-react-components/flr-universal#CountryOptions": {
     "level": "stable",
     "isNew": false

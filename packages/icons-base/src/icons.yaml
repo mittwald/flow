@@ -225,6 +225,10 @@ AI:
   category: decorative
   tb: Sparkles
   fa: sparkles
+AIHosting:
+  category: decorative
+  tb: Cpu
+  fa: microchipAi
 Analytics:
   category: decorative
   tb: BrandSpeedtest

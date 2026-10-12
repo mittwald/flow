@@ -213,7 +213,10 @@ describe("submission", () => {
     await render(<TestForm />);
     const textArea = page.getByPlaceholder("textarea");
     await userEvent.click(textArea);
-    await userEvent.keyboard("{Meta>}{Enter}");
+    // react-hotkeys-hook reads `mod` from the user agent, and Playwright's
+    // WebKit reports a Mac one on every platform.
+    const mod = /mac/i.test(navigator.userAgent) ? "Meta" : "Control";
+    await userEvent.keyboard(`{${mod}>}{Enter}`);
     await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
     expect(onAfterSubmitAction).not.toHaveBeenCalled();
     await vitest.advanceTimersByTimeAsync(100);

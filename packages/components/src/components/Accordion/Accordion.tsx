@@ -1,5 +1,5 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
-import { useId, useState } from "react";
+import type { ComponentProps, FC, PropsWithChildren, ReactNode } from "react";
+import { useCallback, useId, useState } from "react";
 import clsx from "clsx";
 import styles from "./Accordion.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
@@ -18,6 +18,37 @@ export interface AccordionProps extends PropsWithChildren<
   /** The visual variant of the accordion. @default "default" */
   variant?: "default" | "outline";
 }
+
+interface HeaderButtonProps extends PropsWithChildren {
+  id: string;
+  contentId: string;
+  isExpanded: boolean;
+  onToggle: () => void;
+}
+
+/*
+ * Declared here and not inside the accordion: a component defined in a render
+ * body gets a new identity on every render, so React unmounts and remounts it —
+ * and the toggle loses the focus it just received on its own press.
+ */
+const HeaderButton: FC<HeaderButtonProps> = (props) => {
+  const { children, id, contentId, isExpanded, onToggle } = props;
+
+  return (
+    <Button
+      tunnel={null}
+      unstyled
+      id={id}
+      aria-expanded={isExpanded}
+      className={styles.headerButton}
+      onPress={onToggle}
+      aria-controls={contentId}
+    >
+      {children}
+      <IconChevronDown className={styles.chevron} />
+    </Button>
+  );
+};
 
 /**
  * @flr-generate all
@@ -46,22 +77,18 @@ export const Accordion: FC<AccordionProps> = flowComponent(
 
     const contentId = useId();
 
-    const HeaderButton: FC<PropsWithChildren> = (props) => {
-      const { children } = props;
-      return (
-        <Button
-          tunnel={null}
-          unstyled
-          aria-expanded={expanded}
-          className={styles.headerButton}
-          onPress={() => setExpanded((expanded) => !expanded)}
-          aria-controls={contentId}
-        >
-          {children}
-          <IconChevronDown className={styles.chevron} />
-        </Button>
-      );
-    };
+    const toggle = useCallback(() => setExpanded((expanded) => !expanded), []);
+
+    const renderHeaderButton = (children: ReactNode) => (
+      <HeaderButton
+        id={headerId}
+        contentId={contentId}
+        isExpanded={expanded}
+        onToggle={toggle}
+      >
+        {children}
+      </HeaderButton>
+    );
 
     const propsContext: PropsContext = {
       Content: {
@@ -75,22 +102,31 @@ export const Accordion: FC<AccordionProps> = flowComponent(
         className: styles.header,
         level: 4,
         size: "xs",
-        children: dynamic((props) => (
-          <HeaderButton>{props.children}</HeaderButton>
-        )),
+        children: dynamic((props) => renderHeaderButton(props.children)),
         Button: { size: "m" },
       },
       Label: {
         className: styles.header,
-        children: dynamic((props) => (
-          <HeaderButton>{props.children}</HeaderButton>
-        )),
+        /*
+         * A <label> names the first labelable element below it — here the
+         * toggle, whose own text is the label's only content. The name
+         * computation walks into the label, meets the button it started from
+         * and stops, so the toggle ends up with an empty name. A <span> names
+         * nothing and the name comes from the toggle's content again.
+         */
+        elementType: "span",
+        children: dynamic((props) => renderHeaderButton(props.children)),
       },
     };
 
     return (
       <div {...rest} className={rootClassName}>
-        <PropsContextProvider props={propsContext}>
+        {/*
+         * The props context is memoized, and the header button takes `expanded`
+         * from it – without the dependency the toggle keeps announcing the
+         * state it was first rendered with.
+         */}
+        <PropsContextProvider dependencies={[expanded]} props={propsContext}>
           {children}
           <div
             aria-labelledby={headerId}

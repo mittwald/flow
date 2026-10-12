@@ -8,7 +8,7 @@ import styles from "../../ContextMenu.module.scss";
 import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
 import {
   getAriaSelectionMode,
-  getCloseOverlayType,
+  closesOnSelect,
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
 import { Action } from "@/components/Action";
@@ -50,7 +50,7 @@ export const ContextMenuSection = flowComponent(
       >
         <PropsContextProvider props={propsContext}>
           <Action skip>
-            <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+            <Action closeOverlay={closesOnSelect(selectionMode)}>
               {children}
             </Action>
           </Action>

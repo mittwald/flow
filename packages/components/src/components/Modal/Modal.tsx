@@ -57,7 +57,9 @@ export interface ModalProps
   showCloseButton?: boolean;
   /**
    * Whether closing the modal must be confirmed – use it to protect unsaved
-   * changes.
+   * changes. `false` does not switch off the confirmation of a dirty `Form`
+   * inside the modal; set `confirmModalCloseOnUnsavedChanges={false}` on the
+   * `Form` for that.
    */
   confirmOnClose?: boolean;
 }
@@ -167,21 +169,27 @@ export const Modal = flowComponent("Modal", (props) => {
           };
         }),
         closeOverlay: dynamic((props) => {
-          if (props.closeOverlay === undefined) {
-            return;
+          const { closeOverlay } = props;
+          if (closeOverlay === undefined || closeOverlay === false) {
+            return closeOverlay;
+          }
+          // `true` keeps its "the nearest overlay" meaning by leaving `overlay`
+          // unset – the options object means the same thing.
+          if (closeOverlay === true) {
+            return { bypassConfirmation: true };
           }
           if (
-            props.closeOverlay instanceof OverlayController ||
-            typeof props.closeOverlay === "string"
+            closeOverlay instanceof OverlayController ||
+            typeof closeOverlay === "string"
           ) {
             return {
               bypassConfirmation: true,
-              overlay: props.closeOverlay,
+              overlay: closeOverlay,
             };
           }
           return {
             bypassConfirmation: true,
-            ...props.closeOverlay,
+            ...closeOverlay,
           };
         }),
       },

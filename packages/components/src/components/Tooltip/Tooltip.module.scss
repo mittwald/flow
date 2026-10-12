@@ -36,7 +36,7 @@
 
     --translate-origin: translateY(var(--translate-origin-length) * -1);
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(180deg);
     }
   }
@@ -46,7 +46,7 @@
 
     --translate-origin: translateX(var(--translate-origin-length) * -1);
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(90deg);
     }
   }
@@ -56,7 +56,7 @@
 
     --translate-origin: translateX(var(--translate-origin-length));
 
-    .tip svg {
+    .tip .tipIcon {
       transform: rotate(-90deg);
     }
   }
@@ -75,7 +75,7 @@
     width: var(--tooltip--tip-size);
     height: var(--tooltip--tip-size);
 
-    svg {
+    .tipIcon {
       display: block;
       fill: var(--tooltip--background-color);
     }

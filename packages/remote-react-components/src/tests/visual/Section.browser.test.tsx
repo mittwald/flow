@@ -103,3 +103,72 @@ test.each(testEnvironments)(
     await testScreenshot("Section with secondary button");
   },
 );
+
+/*
+ * Guards the height path of the reporter's structure from #2655 (LayoutCard >
+ * Section > Section > Switch revealing taller content). The bug itself is
+ * Blink-specific and cannot reproduce here — this suite runs WebKit and Firefox.
+ */
+test.each(testEnvironments)(
+  "Section growing inside a LayoutCard (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      LayoutCard,
+      Section,
+      Heading,
+      Text,
+      Switch,
+      Label,
+      Alert,
+      TextField,
+      ColumnLayout,
+    },
+  }) => {
+    const TestComponent: FC = () => {
+      const [showDetails, setShowDetails] = useState(false);
+
+      return (
+        <LayoutCard>
+          <Section>
+            <Heading>Image compression</Heading>
+            <Section>
+              <Switch
+                data-testid="details-switch"
+                onChange={(isSelected) => setShowDetails(isSelected)}
+              >
+                <Label>Compress uploaded images</Label>
+              </Switch>
+              {showDetails && (
+                <>
+                  <Alert>
+                    <Heading>Recompression is not reversible</Heading>
+                    <Text>
+                      Images already stored keep their current quality. Only
+                      uploads from now on are compressed.
+                    </Text>
+                  </Alert>
+                  <ColumnLayout>
+                    <TextField>
+                      <Label>Quality</Label>
+                    </TextField>
+                    <TextField>
+                      <Label>Max. width</Label>
+                    </TextField>
+                  </ColumnLayout>
+                </>
+              )}
+            </Section>
+          </Section>
+        </LayoutCard>
+      );
+    };
+
+    await render(<TestComponent />);
+    await testScreenshot("Section growing inside a LayoutCard - collapsed");
+
+    await page.getByTestId("details-switch").click();
+    await testScreenshot("Section growing inside a LayoutCard - expanded");
+  },
+);

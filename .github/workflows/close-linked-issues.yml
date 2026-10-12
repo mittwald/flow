@@ -1,0 +1,102 @@
+name: Close linked issues
+
+# Closes the issues a merged pull request says it closes — on the standing
+# lines that are NOT the default branch.
+#
+# GitHub resolves `Closes #123` only against the default branch: from the PR
+# body when the PR merges into it, and from a commit message when that commit is
+# pushed to it. `main` is the default branch here, `next` is where every feature
+# lands (ADR 0004), so on `next` the keyword is read, the link is even rendered
+# in the sidebar, and then nothing happens.
+#
+# Until now that was carried by whoever remembered. #3214, #3134, #3165, #2777
+# and #2867 were closed by hand a day or two after their merge; #3189 ("fixes
+# #3189" in the body) and #3059 ("Closes #3059") were not, and sat open for
+# weeks behind work that had already shipped.
+#
+# The contract: a PR merged into `next` closes exactly what the same PR merged
+# into `main` would have closed. Both of GitHub's sources are parsed — the body
+# and the PR's own commits — because `next` takes true merges, so the branch
+# commits really do enter its history.
+#
+# Anything this cannot decide, it leaves open: a reference to another
+# repository, a number that is a pull request, a keyword inside a code fence.
+# See `.github/scripts/close-linked-issues-lib.mjs`.
+
+on:
+  # `pull_request_target`, not `pull_request`: a `pull_request` run for a PR
+  # from a FORK gets a read-only token whatever the `permissions` block says, so
+  # it could not close anything — and it would fail red on exactly the
+  # contributor PRs where nobody on the team is watching for a stale issue.
+  #
+  # The usual danger of `pull_request_target` — base-repo write token plus
+  # attacker-controlled code — is closed off here, and both halves have to stay
+  # that way:
+  #
+  #   1. The checkout below pins `ref:` to the BASE branch. The head is never
+  #      checked out, so no code from the pull request runs. Do not add a
+  #      checkout of `github.event.pull_request.head.*`.
+  #   2. The PR body reaches the script through `env:`, never through a `${{ }}`
+  #      interpolation inside a `run:` block, so its content cannot become
+  #      shell.
+  pull_request_target:
+    types: [closed]
+    # Base branches. `main` is absent on purpose — GitHub already does this
+    # there, and running both would produce two closing comments.
+    #
+    # A major line is the other case that needs it. `next-major` is listed
+    # already; a numbered line (`2.x`) has to be spelled out when it opens,
+    # because GitHub's branch filter globs cannot express the pattern
+    # `commit-guard.yml` matches with a regex.
+    branches:
+      - next
+      - next-major
+
+permissions:
+  contents: read # the base branch's scripts
+  issues: write # close the linked issues
+  pull-requests: read # read the merged PR's commits
+
+concurrency:
+  group: close-linked-issues-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  close:
+    name: Close what the pull request closes
+    # A sync PR (`sync/main-to-next`) carries `main`'s commits a second time.
+    # GitHub closed those issues when they reached `main`, so there is nothing
+    # left to do — and an issue that was deliberately REOPENED since would be
+    # closed again by the replay. The promotion and release heads never reach
+    # this workflow: they target `main`.
+    if: >-
+      github.event.pull_request.merged == true &&
+      !startsWith(github.event.pull_request.head.ref, 'sync/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_BODY: ${{ github.event.pull_request.body }}
+      BASE_REF: ${{ github.event.pull_request.base.ref }}
+    steps:
+      - name: Checkout the base branch ⬇️
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          # `repository` defaults to the BASE repo under `pull_request_target`,
+          # and `branches:` above constrains this ref to `next` / `next-major` —
+          # so this is a trusted branch of this repository, never a fork's.
+          ref: ${{ github.event.pull_request.base.ref }}
+          # Nothing here uses git after the checkout: `gh` authenticates through
+          # `GH_TOKEN`. Not writing the token into `.git/config` keeps it out of
+          # reach of any step a later edit might add.
+          persist-credentials: false
+
+      # This run closes issues with no human in the loop, so the parser proves
+      # itself first — same reason `publish.yml` self-tests its classifier.
+      - name: Self-test the parser
+        run: node --test .github/scripts/close-linked-issues-lib.test.mjs
+
+      - name: Close the linked issues 🧹
+        run: node .github/scripts/close-linked-issues.mjs

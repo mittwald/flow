@@ -8,8 +8,14 @@ export interface ImageProps
   extends
     Omit<ComponentProps<"img">, "ref">,
     FlowComponentProps<HTMLImageElement> {
-  /** Display the image with border and rounded edges. */
+  /** Display the image with a border. */
   withBorder?: boolean;
+  /**
+   * Display the image with rounded corners.
+   *
+   * @default true
+   */
+  withRoundedCorners?: boolean;
   /**
    * The aspect ratio of the images container. Larger images will be centered
    * and their overflow will be hidden.
@@ -22,6 +28,7 @@ export const Image = flowComponent("Image", (props) => {
   const {
     className,
     withBorder,
+    withRoundedCorners = true,
     style,
     aspectRatio,
     width,
@@ -33,6 +40,7 @@ export const Image = flowComponent("Image", (props) => {
   const rootClassName = clsx(
     styles.image,
     withBorder && styles.border,
+    withRoundedCorners && styles.roundedCorners,
     aspectRatio && styles.aspectRatio,
     className,
   );

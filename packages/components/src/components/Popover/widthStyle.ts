@@ -18,9 +18,4 @@ import type { CSSProperties } from "react";
 export const popoverWidthStyle = (
   width: string | number | undefined,
 ): CSSProperties =>
-  width === undefined
-    ? {}
-    : ({
-        width,
-        "--popover-content-max-width": "none",
-      } as CSSProperties);
+  width === undefined ? {} : { width, "--popover-content-max-width": "none" };

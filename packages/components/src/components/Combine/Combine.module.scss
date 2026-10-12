@@ -32,6 +32,9 @@
       flex-grow: 1;
     }
 
+    // `<label>` is also the root element react-aria renders for Checkbox and
+    // Switch, so `Label`'s class would not match the same set of children.
+    // stylelint-disable-next-line selector-max-type -- see above
     &:has(label) {
       .button {
         margin-top: calc(var(--line-height-s) + var(--form-control--spacing-y));
@@ -63,6 +66,7 @@
       width: 100%;
     }
 
+    // stylelint-disable-next-line selector-max-type -- see the `:has(label)` above
     &:has(label) {
       .button {
         margin-top: 0;

@@ -20,7 +20,11 @@ type AnyOverlayOpenStateHandler =
 type DisposerFn = () => void;
 
 export interface CloseOverlayOptions {
-  overlay: FlowComponentName | OverlayController;
+  /**
+   * The overlay to close. Omitted, the nearest enclosing overlay is closed –
+   * the same thing `closeOverlay={true}` means.
+   */
+  overlay?: FlowComponentName | OverlayController;
   bypassConfirmation?: boolean;
 }
 
@@ -29,6 +33,14 @@ export interface OnOverlayClosedOptions {
 }
 
 export type CloseModalOptions = Omit<CloseOverlayOptions, "overlay">;
+
+/**
+ * Every way an action can point at an overlay: by the Flow component name it
+ * registers under, by controller, by options, or with `true` – the nearest
+ * enclosing overlay, whatever its name.
+ */
+export type OverlayReference =
+  FlowComponentName | OverlayController | CloseOverlayOptions | true;
 
 type CloseOptions = CloseOverlayOptions | CloseModalOptions;
 
