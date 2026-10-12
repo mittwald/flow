@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.32](https://github.com/mittwald/flow/compare/1.4.31...1.4.32) (2026-10-12)
+
+### Bug Fixes
+
+* **ci:** bound the .deb download when the cache misses ([3ea2f2b](https://github.com/mittwald/flow/commit/3ea2f2bb33e4385036fabd9011997c3c7658272a))
+* **ci:** cache the .debs Playwright installs for WebKit ([9c87434](https://github.com/mittwald/flow/commit/9c8743483d15d9081bb9ecacafd36e9c3a3666b2))
+* **ci:** key the Playwright caches on the Ubuntu release ([7a80a75](https://github.com/mittwald/flow/commit/7a80a750d6a19b29d0eccd3f6908f47a4a850489))
+* **Modal:** drop &quot;modal&quot; from the unsaved changes confirmation text ([f270eea](https://github.com/mittwald/flow/commit/f270eea4935fcfa1407318ca4bffb6f1e1b93880))
+
+### Documentation
+
+* **release-figure:** offer every figure in dark mode too ([#3384](https://github.com/mittwald/flow/issues/3384)) ([6430d81](https://github.com/mittwald/flow/commit/6430d81a8237fffbd7fbfb929b7d5b0a4045e277))
+
+### Miscellaneous Chores
+
+* drop the TEMP trigger again ([e53b747](https://github.com/mittwald/flow/commit/e53b74799a9ae50f1dad8b5375253292b018769a))
+* drop the TEMP trigger and benchmark again ([3b03864](https://github.com/mittwald/flow/commit/3b03864504e11f8575c5e1e78dd9827c36f92583))
+* TEMP — benchmark apt alone vs. parallel .deb fetch (drop before merge) ([768cb66](https://github.com/mittwald/flow/commit/768cb66e9feb8acce15618e848201aac3008d27c))
+* TEMP — benchmark: don&#x27;t stop on the dry-run&#x27;s exit code (drop before merge) ([4693783](https://github.com/mittwald/flow/commit/4693783e66390429b84324ab8f66e94c2583a187))
+* TEMP — make the browser suites affected (drop before merge) ([b2cbe44](https://github.com/mittwald/flow/commit/b2cbe444889bee824ccdaea05f0303e7c810b04d))
+* TEMP — make the browser suites affected (drop before merge) ([169ae96](https://github.com/mittwald/flow/commit/169ae968b77212f7cc95849d643dda5d7475966b))
+
+### Tests
+
+* update visual regression screenshots ([33c5e5b](https://github.com/mittwald/flow/commit/33c5e5b32e3fbd98e14fdc3c3e768967fdb9f5a5))
+
 ## [1.4.31](https://github.com/mittwald/flow/compare/1.4.30...1.4.31) (2026-10-09)
 
 ### Documentation
