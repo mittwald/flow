@@ -21,13 +21,16 @@ export interface SearchFieldProps
 
 /** @flr-generate all */
 export const SearchField = flowComponent("SearchField", (props) => {
-  const { children, className, ref, ...rest } =
-    useControlledHostValueProps(props);
+  const { children, className, ref, ...rest } = useControlledHostValueProps(
+    props,
+    "",
+  );
 
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "SearchField");
 
@@ -55,9 +58,9 @@ export const SearchField = flowComponent("SearchField", (props) => {
   return (
     <Aria.SearchField
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       aria-label={searchText}
-      className={clsx(rootClassName, fieldProps.className)}
+      className={clsx(rootClassName, wrapperProps.className)}
     >
       <PropsContextProvider props={propsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>

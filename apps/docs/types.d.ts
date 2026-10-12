@@ -1,3 +1,6 @@
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
 import type { ComponentType, PropsWithChildren } from "react";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
@@ -19,5 +22,6 @@ declare global {
   declare const Info: ComponentType<DoAndDontProps>;
   declare const Row: ComponentType<PropsWithChildren>;
   declare const PropertiesTables: ComponentType;
+  declare const ComponentTokenTable: ComponentType<{ tokens?: string }>;
   declare const Column: ComponentType<PropsWithChildren>;
 }

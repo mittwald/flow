@@ -532,10 +532,12 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/LayoutCard/LayoutCard.module.scss:16`
   - ✓ a layout must style standalone Flow classes unreachable via props/context.
   - ✗ normal composition → PropsContext classes.
-- **Container-query ownership** `[undocumented]` — inline-size container at the
-  semantic boundary. `src/components/Section/Section.module.scss:5`
+- **Container-query ownership** `[undocumented]` — the component that queries a
+  container declares it itself.
+  `src/components/ColumnLayout/ColumnLayout.module.scss:2`
   - ✓ descendants adapt to this component's available space.
   - ✗ viewport-wide adaptation → responsive primitives/media.
+  - ✗ a container nothing queries → no `container-type` at all.
 - **Logical CSS properties** `[undocumented]` — `padding-inline`,
   `margin-inline-start`. `src/components/Button/Button.module.scss:13`
   - ✓ direction-safe spacing/border/size.
@@ -610,14 +612,16 @@ and consistency enforced by tooling, not maintained by hand.
 
 ## 8. Forms / accessibility
 
-- **Shared field wiring (`useFieldComponent`)** — field context, wrapper props,
-  error infra. `src/components/Checkbox/Checkbox.tsx:34`
+- **Shared field wiring (`useFieldComponent`)** — field context, `wrapperProps`
+  / `controlProps`, error infra. `src/components/Checkbox/Checkbox.tsx:34`
   - ✓ a form control joins label/description/validation/error composition.
   - ✗ a non-field interactive control → Aria primitive directly.
-- **Generated error description id** — replaces `aria-describedby` while
-  invalid. `src/lib/hooks/useFieldComponent.tsx:54`
-  - ✓ an error message joins the control relationship.
-  - ✗ no error description rendered → omit.
+- **Rendered error description** — `controlProps` references the error's id
+  while a `FieldError` is rendered, joined with the consumer's
+  `aria-describedby`. `src/lib/hooks/useFieldComponent.tsx:73`
+  - ✓ spread `controlProps` on what assistive technology lands on (the input or
+    the group), after `rest` — it already contains the consumer's ids.
+  - ✗ a wrapper div → it describes nothing; `wrapperProps` only.
 - **Field label context** — shared form styling + required/disabled semantics.
   `src/lib/hooks/useFieldComponent.tsx:38`
   - ✓ a composed label needs the control relationship + styling.
@@ -819,10 +823,16 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/CartesianChart/typedCartesianChart.test-types.tsx:27`
   - ✓ specific invalid usages must fail compilation.
   - ✗ runtime validation → runtime test.
-- **Visual snapshots beside browser tests** `[undocumented]` —
-  `__screenshots__/`.
-  - ✓ visual regressions materially matter and it renders in browser tests.
-  - ✗ pure logic / intentionally unstable visuals → behavioral assertions.
+- **Visual regression tests live in the visual suite** — `testScreenshot`,
+  baselines committed beside it.
+  `../remote-react-components/src/tests/visual/Alert.browser.test.tsx:24`
+  - ✓ rendered output materially matters — a new prop, variant or layout.
+  - ✗ pure logic, or a CSS state a screenshot cannot hold (`:hover`) → assert
+    behavior or the computed style in a colocated browser test. This package
+    commits no screenshots at all — a failing browser test writes its capture to
+    the gitignored `.vitest-screenshots` (`browser.screenshotDirectory` in
+    `../core/src/vitestBrowserTestConfig.ts`), so a `__screenshots__/` directory
+    appearing here is a stray artifact, not a baseline.
 
 ## 12. Imports and file conventions
 

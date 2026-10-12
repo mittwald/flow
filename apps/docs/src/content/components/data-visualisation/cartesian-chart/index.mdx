@@ -1,11 +1,11 @@
 ---
 component: CartesianChart
 description:
-  Das CartesianChart stellt Metriken über Zeit als Liniendiagramm oder
-  Flächendiagramm dar.
+  Das CartesianChart stellt Metriken als Linien-, Flächen- oder Balkendiagramm
+  dar.
 ---
 
-<LiveCodeEditor editorCollapsed />
+<LiveCodeEditor />
 
 ---
 
@@ -16,27 +16,68 @@ description:
   [Categorical Colors](/foundations/design/colors#categorical-color) dar.
 - Sortiere die Areas bei der Area-Darstellung nach Größe, die größte unten.
 - Halte die Zahl der Dimensionen übersichtlich. Das sichert die Lesbarkeit.
+- Bei der Bar-Darstellung darf die x-Achse auch kategorisch sein. Balken
+  vergleichen Kategorien, nicht nur Zeitpunkte.
+- Stapele Balken nur dort, wo die Summe eine Bedeutung hat.
 
 ---
 
 # Darstellungstypen
 
 Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`,
-`<Line />` oder eine Kombination aus beiden verwendet werden.
+`<Line />`, `<Bar />` oder eine Kombination daraus verwendet werden.
+
+Unter der Haube arbeitet [Recharts](https://recharts.github.io). Flow hat
+einiges daran angepasst: Farben, Linienstärke und Punkte folgen dem Flow-Design,
+Tooltip und Legende sind eigene Flow-Komponenten, und die Properties sind auf
+das Wesentliche reduziert. Die vorhandenen Properties verhalten sich wie in
+Recharts. Details dazu findest du in der Recharts-Dokumentation, die bei jedem
+Darstellungstyp verlinkt ist.
 
 ## Line
 
 Zeigt die Entwicklung einzelner Objekte über einen Zeitraum und ermöglicht den
-Vergleich zwischen ihnen.
+Vergleich zwischen ihnen. Properties wie `type` und `unit` entsprechen denen von
+Recharts, siehe [Line in Recharts](https://recharts.github.io/en-US/api/Line/).
 
 <LiveCodeEditor example="line" editorCollapsed />
 
 ## Area
 
 Zeigt die Entwicklung des Gesamtwerts über einen Zeitraum und den jeweiligen
-Anteil einzelner Objekte daran.
+Anteil einzelner Objekte daran. Properties wie `type`, `stackId` und
+`fillOpacity` entsprechen denen von Recharts, siehe
+[Area in Recharts](https://recharts.github.io/en-US/api/Area/).
 
 <LiveCodeEditor example="area" editorCollapsed />
+
+## Bar
+
+Vergleicht Werte einzelner Kategorien miteinander. Ohne `stackId` stehen die
+Balken einer Kategorie nebeneinander. Properties wie `barSize`, `maxBarSize` und
+`minPointSize` entsprechen denen von Recharts, siehe
+[Bar in Recharts](https://recharts.github.io/en-US/api/Bar/).
+
+<LiveCodeEditor example="bar" editorCollapsed />
+
+Mehrere `<Bar />` mit derselben `stackId` werden gestapelt. Das zeigt den Anteil
+einzelner Objekte am Gesamtwert einer Kategorie.
+
+<LiveCodeEditor example="barStacked" editorCollapsed />
+
+### Ausrichtung
+
+Die Property `layout` bestimmt, wo die Kategorie-Achse liegt. Mit dem Default
+`horizontal` liegt sie auf der x-Achse, die Balken wachsen nach oben. Mit
+`vertical` liegt sie auf der y-Achse und die Balken wachsen zur Seite. Der
+`dataKey` wandert dabei auf die `<YAxis />`, die Achsentypen ergeben sich von
+selbst.
+
+Nutze die vertikale Ausrichtung für lange Kategorie-Namen oder für viele
+Kategorien. Nur Balken lassen sich sinnvoll drehen. `<Line />` und `<Area />`
+zeigen einen Verlauf und bleiben horizontal.
+
+<LiveCodeEditor example="barHorizontal" editorCollapsed />
 
 ---
 
@@ -75,3 +116,9 @@ fehlgeschlagenen Datenabfragen oder nicht vorhandenen Ergebnissen.
 # Properties
 
 <PropertiesTables />
+
+---
+
+# Design Tokens
+
+<ComponentTokenTable tokens="cartesian-chart, cartesian-grid, axis, area, bar, line, legend, legend-item, chart-tooltip" />

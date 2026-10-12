@@ -1,8 +1,9 @@
-import { expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
 import {
   type AnyThread,
   markAsTransferable,
+  ThreadMessagePort,
   TRANSFERABLE,
 } from "@quilted/threads";
 import { CalendarDate } from "@internationalized/date";
@@ -323,4 +324,159 @@ test("will not let React values break the whole payload", async () => {
   expect(consoleError.mock.calls[0]?.[0]).toContain("<Icon />");
 
   consoleError.mockRestore();
+});
+
+/*
+ * A real round trip: two `FlowThreadSerialization` instances on the two ends of
+ * a `MessageChannel`, so the value is serialized, handed to `postMessage`,
+ * structurally cloned and deserialized — the same path a remote prop takes.
+ *
+ * Calling `serialize` alone would not catch these: a value the custom hook
+ * declines is returned as-is, so the difference between "structured clone
+ * carries it" and "structured clone refuses it" only shows at the port.
+ */
+interface EchoExports {
+  echo: (value: unknown) => Promise<void>;
+}
+
+const sendThroughThread = async (value: unknown): Promise<unknown> => {
+  const { port1, port2 } = new MessageChannel();
+
+  let received: unknown;
+  let resolveReceived!: () => void;
+  const receivedOnce = new Promise<void>((resolve) => {
+    resolveReceived = resolve;
+  });
+
+  new ThreadMessagePort<Record<string, never>, EchoExports>(port1, {
+    serialization: new FlowThreadSerialization(),
+    exports: {
+      echo: async (payload) => {
+        received = payload;
+        resolveReceived();
+      },
+    },
+  });
+
+  const remote = new ThreadMessagePort<EchoExports>(port2, {
+    serialization: new FlowThreadSerialization(),
+  });
+
+  port1.start();
+  port2.start();
+
+  try {
+    await remote.imports.echo(value);
+    await receivedOnce;
+    return received;
+  } finally {
+    port1.close();
+    port2.close();
+  }
+};
+
+/*
+ * Built-ins whose state lives in internal slots, not in own enumerable
+ * properties. Anything `isSerializableByBase` does not claim reaches the
+ * `serialize({ ...val })` fallback, which keeps only those properties — so a
+ * `Date` crossed as `{}`, a `RegExp` and an `Error` the same, and a
+ * `Uint8Array` as `{"0":1,"1":2,"2":3}`. No error, no warning.
+ *
+ * Structured clone carries all of them, so the fix is to let the base
+ * serializer through rather than to add a named serializer — which an older
+ * peer would not understand (the protocol is versioned).
+ *
+ * `Blob` is in `isSerializableByBase` for the same reason but is not asserted
+ * here: happy-dom's `structuredClone` does not implement it and degrades it to
+ * a plain object either way, so the case would assert the environment, not the
+ * code. `File` stays with `fileSerializer` — the big round trip above is what
+ * guards that the `Blob` branch does not swallow it.
+ */
+describe("values structured clone handles itself", () => {
+  test("a Date", async () => {
+    const date = new Date("2026-02-03T04:05:06.000Z");
+
+    const received = await sendThroughThread(date);
+
+    expect(received).toBeInstanceOf(Date);
+    expect(received).toStrictEqual(date);
+    // not the same object — it really crossed the port
+    expect(received).not.toBe(date);
+  });
+
+  test("a Date nested in an object and an array", async () => {
+    const date = new Date("2026-02-03T04:05:06.000Z");
+
+    const received = (await sendThroughThread({
+      when: date,
+      history: [date],
+    })) as { when: Date; history: Date[] };
+
+    expect(received.when).toBeInstanceOf(Date);
+    expect(received.when.toISOString()).toBe("2026-02-03T04:05:06.000Z");
+    expect(received.history[0]).toBeInstanceOf(Date);
+    expect(received.history[0]?.toISOString()).toBe("2026-02-03T04:05:06.000Z");
+  });
+
+  test("a RegExp", async () => {
+    const received = await sendThroughThread(/ab+c/gi);
+
+    expect(received).toBeInstanceOf(RegExp);
+    expect((received as RegExp).source).toBe("ab+c");
+    expect((received as RegExp).flags).toBe("gi");
+  });
+
+  test("an Error", async () => {
+    const received = await sendThroughThread(new TypeError("kaputt"));
+
+    expect(received).toBeInstanceOf(Error);
+    expect((received as Error).name).toBe("TypeError");
+    expect((received as Error).message).toBe("kaputt");
+  });
+
+  test("an ArrayBuffer", async () => {
+    const received = await sendThroughThread(new Uint8Array([4, 5]).buffer);
+
+    expect(received).toBeInstanceOf(ArrayBuffer);
+    expect([...new Uint8Array(received as ArrayBuffer)]).toStrictEqual([4, 5]);
+  });
+
+  test("a TypedArray", async () => {
+    const received = await sendThroughThread(new Uint8Array([1, 2, 3]));
+
+    expect(received).toBeInstanceOf(Uint8Array);
+    expect([...(received as Uint8Array)]).toStrictEqual([1, 2, 3]);
+  });
+
+  test("a DataView", async () => {
+    const received = await sendThroughThread(
+      new DataView(new Uint8Array([9, 8]).buffer),
+    );
+
+    expect(received).toBeInstanceOf(DataView);
+    expect((received as DataView).getUint8(0)).toBe(9);
+  });
+});
+
+/*
+ * The counterpart to the list above, and the reason it is a list and not
+ * "everything that is not a basic object": a `URL` is not structured-cloneable.
+ * Adding it to `isSerializableByBase` would turn a silently emptied object into
+ * a `DataCloneError` — and the send takes the whole mutation batch with it, so
+ * the cure is worse than the disease. A named serializer would break older
+ * peers. It stays flattened on purpose; if a prop ever needs one, send the
+ * string.
+ *
+ * Asserting the flattened result is what makes this a guard rather than a note:
+ * claim `URL` in `isSerializableByBase` and this send throws instead.
+ */
+test("a URL stays flattened, because structured clone refuses it", async () => {
+  const received = await sendThroughThread({
+    href: new URL("https://example.com/a?b=c"),
+  });
+
+  expect(received).toStrictEqual({ href: {} });
+
+  // the reason it cannot simply join the list above
+  expect(() => structuredClone(new URL("https://example.com"))).toThrow();
 });

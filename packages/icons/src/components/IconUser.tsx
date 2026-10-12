@@ -1,4 +1,9 @@
 /* auto-generated file */
-import { IconUser as Icon } from "@tabler/icons-react";
+/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+import { createTablerIcon } from "../lib/createTablerIcon.ts";
 import type { FC } from "react";
-export const IconUser = Icon as FC;
+
+export const IconUser = createTablerIcon("outline", "user", "User", [
+  ["path", { d: "M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" }],
+  ["path", { d: "M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" }],
+]) as FC;

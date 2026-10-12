@@ -215,3 +215,45 @@ export const WithCustomToolbarTool: Story = {
     );
   },
 };
+
+export const WithFileUpload: Story = {
+  args: {
+    accept: "image/*",
+    placeholder: "Drop an image anywhere on the editor, or paste one...",
+  },
+  render: (props) => (
+    <MarkdownEditor
+      {...props}
+      uploadFile={async (file) => {
+        // A real upload goes to a backend; this one just takes its time and
+        // hands back a fixed URL. `URL.createObjectURL` would not do: the
+        // preview renders through react-markdown, whose sanitizer drops every
+        // protocol but http(s) — a `blob:` URL arrives as `src=""`.
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        return {
+          url: "https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg",
+          name: file.name,
+        };
+      }}
+    >
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
+};
+
+export const WithFailingFileUpload: Story = {
+  args: {
+    placeholder: "Drop a file to watch the placeholder disappear again...",
+  },
+  render: (props) => (
+    <MarkdownEditor
+      {...props}
+      uploadFile={async () => {
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        throw new Error("The upload service is not reachable");
+      }}
+    >
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
+};

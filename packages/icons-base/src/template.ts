@@ -4,6 +4,7 @@ import {
   type IconDefinitions,
   type IconVendor,
 } from "./definitions";
+import { getTablerIcon } from "./tabler";
 
 const upperCaseFirst = (str: string): string =>
   str.charAt(0).toUpperCase() + str.slice(1);
@@ -12,11 +13,22 @@ const vendorIconTemplates: Record<
   IconVendor,
   (iconName: string, vendorIconName: string) => string
 > = {
-  tb: (iconName, vendorIconName) => `\
-  import { Icon${vendorIconName} as Icon } from "@tabler/icons-react";
+  tb: (iconName, vendorIconName) => {
+    const { type, name, node } = getTablerIcon(vendorIconName);
+
+    return `\
+  /* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+  import { createTablerIcon } from "../lib/createTablerIcon.ts";
   import type { FC } from "react";
-  export const Icon${iconName} = Icon as FC;
-  `,
+
+  export const Icon${iconName} = createTablerIcon(
+    "${type}",
+    "${name}",
+    "${vendorIconName}",
+    ${JSON.stringify(node)},
+  ) as FC;
+  `;
+  },
   fa: (iconName, vendorIconName) => `\
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-nocheck

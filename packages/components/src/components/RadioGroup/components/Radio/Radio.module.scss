@@ -15,6 +15,10 @@
   &[data-selected] {
     .icon {
       color: var(--choice--icon-color--selected);
+
+      /* Subtle pop when the filled dot mounts on selection. */
+      animation: radio-pop var(--transition--duration--fast)
+        cubic-bezier(0.2, 0, 0, 1);
     }
   }
 
@@ -24,5 +28,17 @@
     .icon {
       color: var(--choice--icon-color--disabled);
     }
+  }
+}
+
+@keyframes radio-pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

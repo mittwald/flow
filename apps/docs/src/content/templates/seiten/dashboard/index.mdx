@@ -1,0 +1,62 @@
+---
+title: Dashboard
+description:
+  Die Überblicksseite eines Bereichs, die Kennzahlen, Status und Einstiege in
+  Kacheln bündelt und die Lage auf einen Blick erfassbar macht.
+---
+
+<LiveCodeEditor example="dashboard" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Verwendung
+
+Verwende ein Dashboard, wenn Nutzer **mehrere Themen gleichzeitig** im Blick
+behalten und die wichtigsten davon direkt erreichen sollen. Zeige nur, was einen
+Mehrwert bietet, und ordne die Kacheln nach Relevanz. Geht es um viele
+gleichartige Objekte in einer durchsuchbaren Liste, führt die
+[Übersichtsseite](/templates/seiten/uebersichtsseite) dorthin.
+
+---
+
+# Aufbau
+
+- **Content Header** – Eine [Heading](/components/content/heading) als H1
+  benennt den Bereich, dessen Lage das Dashboard zusammenfasst.
+- **Kachel-Anordnung** – Ein [ColumnLayout](/components/structure/column-layout)
+  verteilt die Kacheln über die verfügbaren Spalten und passt sich an
+  unterschiedliche Breakpoints an.
+- **Kacheln** – Jede Kachel ist eine
+  [LayoutCard](/components/structure/layout-card), in der
+  [Sections](/components/structure/section) den Inhalt in Header, Content und
+  Footer gliedern. Jede Kachel bildet genau ein Thema ab.
+- **Visuelle Aufbereitung** – Kennzahlen und Trends werden mit Komponenten wie
+  [ProgressBar](/components/status/progress-bar),
+  [DonutChart](/components/data-visualisation/donut-chart) oder einem
+  [Image](/components/content/image) sofort ablesbar; eine
+  [AccentBox](/components/structure/accent-box) hebt einzelne Kacheln gezielt
+  hervor.
+
+---
+
+# Varianten und Abwandlung
+
+## Detail-Dashboard
+
+Ein Detail-Dashboard gibt einen schnellen Einblick in **ein einzelnes Objekt**:
+Status, relevante Kennzahlen und Zusammenhänge, oft durch Diagramme
+visualisiert. Dafür eignen sich [ProgressBar](/components/status/progress-bar),
+[DonutChart](/components/data-visualisation/donut-chart),
+[BigNumber](/components/data-visualisation/big-number) und
+[CartesianChart](/components/data-visualisation/cartesian-chart).
+
+<LiveCodeEditor example="detail-dashboard" editorCollapsed bgColor="mstudio" />
+
+## Kachel mit AccentBox
+
+Eine [AccentBox](/components/structure/accent-box) setzt gezielt einen
+farblichen Akzent, etwa für einen Hinweis oder eine Werbemaßnahme. Setze sie
+sparsam ein – in der Regel genügt eine farbige Kachel, damit das Gesamtbild
+ruhig bleibt.
+
+<LiveCodeEditor example="accent-box" editorCollapsed bgColor="mstudio" />

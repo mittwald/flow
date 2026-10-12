@@ -31,6 +31,7 @@ export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
 
 /** @flr-generate all */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
+  // `null` is what react-aria's date range picker state uses for "no range"
   const {
     children,
     className,
@@ -38,17 +39,20 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     ref,
     withDatePickerPresets = false,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, null);
 
-  const popoverController = useOverlayController("Popover");
+  const popoverController = useOverlayController("Popover", {
+    reuseControllerFromContext: false,
+  });
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "DateRangePicker");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   const onDatePickerChange = (value: RangeValue<DateValue> | null) => {
     if (onChange) {
@@ -60,6 +64,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   return (
     <Aria.DateRangePicker
       {...rest}
+      aria-describedby={controlProps["aria-describedby"]}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}

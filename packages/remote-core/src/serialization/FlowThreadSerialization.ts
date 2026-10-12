@@ -113,12 +113,35 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
     super(options);
   }
 
+  /**
+   * Values the base serializer hands to `postMessage` untouched, because
+   * structured clone carries them itself.
+   *
+   * Everything not listed here reaches the object fallback below and is spread
+   * into a plain object — which keeps only own enumerable properties. For a
+   * built-in that holds its state internally that is total loss and completely
+   * silent: a `Date` arrived as `{}`, a `RegExp` and an `Error` the same, a
+   * `Uint8Array` as `{"0":1,"1":2}`.
+   *
+   * Extending this list is backwards compatible: the value crosses in its
+   * native structured-clone form, and an older peer's base deserializer returns
+   * a non-basic object unchanged. A named serializer would not be — an older
+   * peer does not know the name and hands the wrapper object through as-is.
+   */
   private isSerializableByBase(val: unknown) {
     return (
       val instanceof Map ||
       val instanceof Set ||
       Array.isArray(val) ||
       typeof val === "function" ||
+      val instanceof Date ||
+      val instanceof RegExp ||
+      val instanceof Error ||
+      val instanceof ArrayBuffer ||
+      ArrayBuffer.isView(val) ||
+      // `File` is a `Blob`, and `fileSerializer` owns it: it sends the content
+      // as a transferable and its wire format is part of the protocol.
+      (val instanceof Blob && !(val instanceof File)) ||
       (isObjectType(val) && TRANSFERABLE in val)
     );
   }

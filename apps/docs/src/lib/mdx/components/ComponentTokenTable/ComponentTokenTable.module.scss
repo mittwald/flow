@@ -1,0 +1,59 @@
+.tables {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--l);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--s);
+}
+
+.scrollContainer {
+  overflow-x: auto;
+}
+
+.nameCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-px--xxs);
+  vertical-align: top;
+}
+
+.name {
+  white-space: nowrap;
+}
+
+.chain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--size-px--xs);
+  padding-inline-start: calc(var(--depth) * var(--size-px--s));
+  overflow-wrap: anywhere;
+}
+
+.value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-px--xs);
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.swatch {
+  flex-shrink: 0;
+  width: var(--size-rem--m);
+  height: var(--size-rem--m);
+  border: 1px solid var(--form-control--border-color--default);
+  border-radius: var(--corner-radius--s);
+}

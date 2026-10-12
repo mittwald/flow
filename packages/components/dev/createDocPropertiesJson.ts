@@ -1,10 +1,14 @@
-import * as fsSync from "fs";
 import * as fs from "fs/promises";
 import { glob } from "glob";
 import path from "path";
 import * as docgen from "react-docgen-typescript";
 
 import type { ComponentDoc } from "react-docgen-typescript";
+import { isConsumerProp, isInternalProp } from "./component-index/filterProps";
+import {
+  docPropertiesInternalFile,
+  docPropertiesPublishedFile,
+} from "./docProperties";
 
 /*
  * `shouldExtractLiteralValuesFromEnum` resolves the members behind a literal
@@ -58,18 +62,37 @@ const relativeFilePaths = (components: ComponentDoc[]): ComponentDoc[] => {
   }));
 };
 
+/*
+ * Extending a DOM element's props drags in the whole HTML/SVG attribute flood —
+ * `Icon` alone inherits 486 of them. They are what the remote generator reads
+ * and what no consumer can act on, which is why only the published file drops
+ * them (see `docProperties.ts`).
+ */
+const forPublishing = (components: ComponentDoc[]): ComponentDoc[] =>
+  components.map((component) => ({
+    ...component,
+    props: Object.fromEntries(
+      Object.entries(component.props).filter(
+        ([name, prop]) =>
+          name && prop && !isInternalProp(prop) && isConsumerProp(name, prop),
+      ),
+    ),
+  }));
+
+async function write(
+  targetFile: string,
+  components: ComponentDoc[],
+): Promise<void> {
+  console.log("📝 Writing output file " + path.resolve(targetFile));
+  await fs.mkdir(path.dirname(targetFile), { recursive: true });
+  await fs.writeFile(targetFile, JSON.stringify(components));
+}
+
 async function createDocPropertiesJson() {
   const components = relativeFilePaths(await parse());
-  const targetFile = "./dist/assets/doc-properties.json";
 
-  console.log("📝 Writing output file " + path.resolve(targetFile));
-  if (!fsSync.existsSync("./dist/")) {
-    await fs.mkdir("./dist/");
-  }
-  if (!fsSync.existsSync("./dist/assets")) {
-    await fs.mkdir("./dist/assets");
-  }
-  await fs.writeFile(targetFile, JSON.stringify(components));
+  await write(docPropertiesInternalFile, components);
+  await write(docPropertiesPublishedFile, forPublishing(components));
 
   console.log("✅  Done");
 }

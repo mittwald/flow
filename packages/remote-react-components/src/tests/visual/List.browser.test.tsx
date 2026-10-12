@@ -4,9 +4,14 @@ import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
+import gopher from "@/tests/assets/gopher.webp";
 
 // List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
+// A Combine inside a Text only stays in the line from 1.2.2.
+const combinedSubTitleFrom = "1.2.2";
+// The "Select all" option of multiple-choice filters exists from 1.4.0-next.6.
+const filterSelectAllFrom = "1.4.0-next.6";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
@@ -146,6 +151,81 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   },
 );
 
+test
+  .skipIf(crossVersion({ below: combinedSubTitleFrom }))
+  .each(testEnvironments)(
+  "List item with a combined subtitle (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      Text,
+      Combine,
+      Button,
+      ContextualHelp,
+      ContextualHelpTrigger,
+      ContextMenu,
+      MenuItem,
+      Link,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{ id: string; name: string; runtime: string }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              { id: "1", name: "Millennium Falcon", runtime: "PHP 8.2" },
+              { id: "2", name: "X-Wing", runtime: "PHP 8.4" },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.runtime}</Text>
+                <Text>
+                  <Combine>
+                    <Text>Deprecated</Text>
+                    <ContextualHelpTrigger subject={i.runtime}>
+                      <Button />
+                      <ContextualHelp>
+                        <Text>Update the runtime to keep getting patches.</Text>
+                      </ContextualHelp>
+                    </ContextualHelpTrigger>
+                  </Combine>
+                </Text>
+                <Text>
+                  Last deploy 2 days ago,{" "}
+                  <Link href="#" target="_blank">
+                    see logs
+                  </Link>
+                </Text>
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                </ContextMenu>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List item with a combined subtitle");
+  },
+);
+
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List tiles (%s)",
   async ({
@@ -163,6 +243,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       Text,
       Content,
       Checkbox,
+      Image,
     },
   }) => {
     function Wrapper() {
@@ -173,6 +254,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
         active: boolean;
         content: string;
         bottomContent: string;
+        image?: string;
       }>();
 
       return (
@@ -203,13 +285,26 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
                 bottomContent:
                   " A long time ago in a galaxy far, far away, a rebellion rose",
               },
+              {
+                id: "3",
+                name: "Han Solo",
+                role: "Smuggler",
+                active: false,
+                content: "Content",
+                bottomContent: "Bottom Content",
+                image: gopher,
+              },
             ]}
           />
           <List.Item showTiles textValue={(i) => i.name}>
             {(i) => (
               <ListItemView>
                 <Avatar>
-                  <Initials>{i.name}</Initials>
+                  {i.image ? (
+                    <Image alt={i.name} src={i.image} />
+                  ) : (
+                    <Initials>{i.name}</Initials>
+                  )}
                 </Avatar>
                 <Checkbox aria-label="select item" defaultSelected={i.active} />
                 <Heading>
@@ -645,5 +740,133 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     await userEvent.type(search, "test");
     await sleep(1000);
     await testScreenshot("List empty search view - custom");
+  },
+);
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
+  "List item heading button (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      Button,
+      ContextMenu,
+      MenuItem,
+      Text,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              { id: "1", name: "Luke Skywalker", role: "Jedi Master" },
+              {
+                id: "2",
+                name: "LeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrganaLeiaOrgana",
+                role: "Rebel Pilot",
+              },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>
+                  {i.name}
+                  <Button variant="soft" color="secondary">
+                    Verify
+                  </Button>
+                </Heading>
+                <Text>{i.role}</Text>
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                </ContextMenu>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List item heading button");
+  },
+);
+
+test
+  .skipIf(crossVersion({ below: filterSelectAllFrom }))
+  .each(testEnvironments)(
+  "List filter with select all option (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { typedList, ListItemView, Heading },
+  }) => {
+    const planets = [
+      "Alderaan",
+      "Bespin",
+      "Coruscant",
+      "Dagobah",
+      "Endor",
+      "Hoth",
+      "Jakku",
+      "Kashyyyk",
+      "Naboo",
+      "Tatooine",
+    ];
+
+    function Wrapper() {
+      const List = typedList<{ id: string; planet: string }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={planets.map((planet) => ({ id: planet, planet }))}
+          />
+          <List.Filter property="planet" name="Planet" />
+          <List.Filter property="id" name="Planet ID" priority="secondary" />
+          <List.Item textValue={(i) => i.planet}>
+            {(i) => (
+              <ListItemView>
+                <Heading>{i.planet}</Heading>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await page.getByRole("button", { name: "Planet", exact: true }).click();
+    await page.getByRole("menuitemcheckbox", { name: "Hoth" }).click();
+    await testScreenshot("List filter select all - partially selected");
+
+    await page.getByRole("menuitem", { name: "Select all" }).click();
+    await testScreenshot("List filter select all - all selected");
+
+    await userEvent.keyboard("{Escape}");
+    await page.getByRole("button", { name: "All filters" }).first().click();
+    await page
+      .getByRole("dialog")
+      .getByText("Hoth", { exact: true })
+      .last()
+      .click();
+    await testScreenshot("List filter select all - all filters modal");
   },
 );

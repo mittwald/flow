@@ -82,7 +82,6 @@ const Footer: FC = () => {
             Feedback? Dann teile es uns gerne auf GitHub mit.
           </Text>
           <Link
-            className={styles.feedbackLink}
             color="dark"
             href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
             target="_blank"

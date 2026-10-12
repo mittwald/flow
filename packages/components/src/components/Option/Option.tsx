@@ -26,16 +26,31 @@ export interface OptionProps
   value?: string | number;
 }
 
+/**
+ * The key an option contributes to its collection: an explicit `value`, else
+ * the `textValue`, else the text among the children. Shared with the props
+ * context that routes options through a field's tunnel, so both derive the same
+ * identity for one option.
+ */
+export const getOptionValue = (
+  props: Pick<OptionProps, "value" | "textValue" | "children">,
+): string | number | undefined =>
+  props.value ?? props.textValue ?? extractTextFromChildren(props.children);
+
 /** @flr-generate all */
 export const Option = flowComponent("Option", (props) => {
   const {
     className,
     children,
     textValue = extractTextFromChildren(children),
-    value = textValue,
+    // Derived through `getOptionValue` below; destructured only to keep it out
+    // of the props spread onto the react-aria item.
+    value: valueIgnored,
     ref,
     ...rest
   } = props;
+
+  const value = getOptionValue(props);
 
   useWarnMissingValue(value === undefined);
 

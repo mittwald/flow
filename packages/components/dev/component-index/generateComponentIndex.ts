@@ -5,30 +5,15 @@ import path from "path";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { buildComponentIndex, type StatusEntry } from "./buildComponentIndex";
 import { parseFlrUniversalComponentNames } from "../status-registry/parseFlrUniversalComponentNames";
+import { docPropertiesInternalFile } from "../docProperties";
+import { docsMeta } from "./docsMeta";
 
-const DOC_PROPERTIES_FILE = "./dist/assets/doc-properties.json";
+const DOC_PROPERTIES_FILE = docPropertiesInternalFile;
 const STATUS_FILE = "./src/status/component-status.json";
 const FLR_UNIVERSAL_FILE = "./src/index/flr-universal.ts";
 const PACKAGE_JSON_FILE = "./package.json";
 const ASSETS_DIR = "./dist/assets";
 const TARGET_FILE = path.join(ASSETS_DIR, "component-index.json");
-
-const DOCS_SITE = "https://flow.mittwald.de";
-
-const docsMeta = (packageName: string, version: string) => ({
-  package: packageName,
-  version,
-  docs: {
-    site: DOCS_SITE,
-    llmsTxt: `${DOCS_SITE}/llms.txt`,
-    llmsJson: `${DOCS_SITE}/llms.json`,
-    llmsFullTxt: `${DOCS_SITE}/llms-full.txt`,
-    note:
-      "The documentation is written in German; component names and design-system " +
-      "terms are not translated. llms.json lists every page with a Markdown URL " +
-      "under /raw/<path>.md — use it to resolve a component name to its page.",
-  },
-});
 
 async function generateComponentIndex() {
   console.log("📚 Reading " + path.resolve(DOC_PROPERTIES_FILE));

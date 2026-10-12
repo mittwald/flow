@@ -6,6 +6,7 @@ import { action } from "storybook/actions";
 import { Button } from "@/components/Button";
 import { IconDanger } from "@/components/Icon/components/icons";
 import { CopyButton } from "@/components/CopyButton";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
@@ -64,6 +65,31 @@ export const WithCopyButton: Story = {
       <PasswordCreationField onChange={(v) => setPassword(v)} {...props}>
         <Label>Password</Label>
         <CopyButton text={password} />
+      </PasswordCreationField>
+    );
+  },
+};
+
+// A server error for the submitted password, shown until the password changes.
+export const WithFieldError: Story = {
+  render: (props) => {
+    const [value, setValue] = useState("Imperial-March-1977!");
+    const [error, setError] = useState<string>(
+      "This password was already used on the Death Star",
+    );
+
+    return (
+      <PasswordCreationField
+        {...props}
+        value={value}
+        onChange={(password) => {
+          setValue(password);
+          setError("");
+        }}
+        isInvalid={!!error}
+      >
+        <Label>Password</Label>
+        <FieldError>{error}</FieldError>
       </PasswordCreationField>
     );
   },

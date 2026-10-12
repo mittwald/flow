@@ -12,9 +12,17 @@ import { config } from "./config";
 import { checkTagIsSet, checkTagListIncludes } from "./lib/docTags";
 import {
   checkSerializableProps,
+  formatObsoleteBaselineReport,
   formatUnserializablePropReport,
+  obsoleteBaselineEntries,
+  rejectedProps,
 } from "./lib/checkSerializableProps";
 import type { ComponentDoc } from "react-docgen-typescript";
+import {
+  findUniversalExportOverlap,
+  formatUniversalExportOverlapReport,
+  readUniversalExportNames,
+} from "./lib/checkUniversalExportOverlap";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
 import { remoteComponentBaseNameOf } from "./lib/remoteComponentBaseNameOf";
@@ -24,16 +32,21 @@ import {
   generateViewComponentDeclaration,
 } from "./generation/generateViewComponent";
 import path from "path";
+import { docPropertiesInternalFileFromRoot } from "../docProperties";
 
 const jetpack = jp.dir("../..");
+
+/**
+ * The curated remote-safe surface, read as text — see
+ * checkUniversalExportOverlap.
+ */
+const universalExportSurfaceFile =
+  "packages/components/src/index/flr-universal.ts";
 
 async function generate() {
   console.log("🤓 Read component specification file");
   let components: ComponentDoc[] =
-    (await jetpack.readAsync(
-      "packages/components/dist/assets/doc-properties.json",
-      "json",
-    )) ?? [];
+    (await jetpack.readAsync(docPropertiesInternalFileFromRoot, "json")) ?? [];
 
   console.log("✅  Done");
   console.log("");
@@ -69,14 +82,46 @@ async function generate() {
   console.log("");
 
   /*
-   * Thrown, not reported: the list is empty, so the only way it grows is a new
-   * prop that would drop whole mutation batches at runtime. Failing generation is
-   * the cheapest place to learn that — the alternative is an extension developer
-   * whose page renders nothing.
+   * Thrown, not reported: apart from the acknowledged value-returning baseline
+   * the list is empty, so the only way it grows is a new prop that would drop
+   * whole mutation batches — or silently hand the host a Promise — at runtime.
+   * Failing generation is the cheapest place to learn that; the alternative is
+   * an extension developer whose page renders nothing, or `[object Promise]`.
    */
   const unserializableProps = checkSerializableProps(components);
-  if (unserializableProps.length > 0) {
-    throw new Error(formatUnserializablePropReport(unserializableProps));
+
+  const rejected = rejectedProps(unserializableProps);
+  if (rejected.length > 0) {
+    throw new Error(formatUnserializablePropReport(rejected));
+  }
+
+  const obsolete = obsoleteBaselineEntries(unserializableProps);
+  if (obsolete.length > 0) {
+    throw new Error(formatObsoleteBaselineReport(obsolete));
+  }
+
+  /*
+   * Thrown for the same reason: a component that is both generated and
+   * universal reaches the extension developer as `undefined`, with every
+   * generated file present and correct. This is the only place that sees both
+   * lists.
+   */
+  const overlap = findUniversalExportOverlap(
+    components.map((c) => remoteComponentBaseNameOf(c)),
+    readUniversalExportNames(
+      (await jetpack.readAsync(universalExportSurfaceFile)) ?? "",
+    ),
+  );
+  if (overlap.length > 0) {
+    throw new Error(formatUniversalExportOverlapReport(overlap));
+  }
+
+  const acknowledged = unserializableProps.length - rejected.length;
+  if (acknowledged > 0) {
+    console.log(
+      `ℹ️  ${acknowledged} remote propert${acknowledged === 1 ? "y" : "ies"} return a value the host receives as a Promise (acknowledgedValueReturningProps in checkSerializableProps.ts)`,
+    );
+    console.log("");
   }
 
   {

@@ -3,6 +3,426 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.31](https://github.com/mittwald/flow/compare/1.4.30...1.4.31) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.30](https://github.com/mittwald/flow/compare/1.4.29...1.4.30) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.29](https://github.com/mittwald/flow/compare/1.4.28...1.4.29) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.28](https://github.com/mittwald/flow/compare/1.4.27...1.4.28) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.27](https://github.com/mittwald/flow/compare/1.4.26...1.4.27) (2026-10-08)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.26](https://github.com/mittwald/flow/compare/1.4.25...1.4.26) (2026-10-08)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.25](https://github.com/mittwald/flow/compare/1.4.24...1.4.25) (2026-10-08)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.24](https://github.com/mittwald/flow/compare/1.4.23...1.4.24) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.23](https://github.com/mittwald/flow/compare/1.4.22...1.4.23) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.22](https://github.com/mittwald/flow/compare/1.4.21...1.4.22) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.21](https://github.com/mittwald/flow/compare/1.4.20...1.4.21) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.20](https://github.com/mittwald/flow/compare/1.4.19...1.4.20) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.19](https://github.com/mittwald/flow/compare/1.4.18...1.4.19) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.18](https://github.com/mittwald/flow/compare/1.4.17...1.4.18) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.17](https://github.com/mittwald/flow/compare/1.4.16...1.4.17) (2026-10-07)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.16](https://github.com/mittwald/flow/compare/1.4.15...1.4.16) (2026-10-06)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.15](https://github.com/mittwald/flow/compare/1.4.14...1.4.15) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.14](https://github.com/mittwald/flow/compare/1.4.13...1.4.14) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.13](https://github.com/mittwald/flow/compare/1.4.12...1.4.13) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.12](https://github.com/mittwald/flow/compare/1.4.11...1.4.12) (2026-10-05)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.11](https://github.com/mittwald/flow/compare/1.4.10...1.4.11) (2026-10-02)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.10](https://github.com/mittwald/flow/compare/1.4.9...1.4.10) (2026-10-02)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.9](https://github.com/mittwald/flow/compare/1.4.8...1.4.9) (2026-10-01)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.8](https://github.com/mittwald/flow/compare/1.4.7...1.4.8) (2026-10-01)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.7](https://github.com/mittwald/flow/compare/1.4.6...1.4.7) (2026-10-01)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.6](https://github.com/mittwald/flow/compare/1.4.5...1.4.6) (2026-10-01)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.5](https://github.com/mittwald/flow/compare/1.4.4...1.4.5) (2026-10-01)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.4](https://github.com/mittwald/flow/compare/1.4.3...1.4.4) (2026-09-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.3](https://github.com/mittwald/flow/compare/1.4.2...1.4.3) (2026-09-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.2](https://github.com/mittwald/flow/compare/1.4.1...1.4.2) (2026-09-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.1](https://github.com/mittwald/flow/compare/1.4.0...1.4.1) (2026-09-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.4.0](https://github.com/mittwald/flow/compare/1.4.0-next.14...1.4.0) (2026-09-30)
+
+### Miscellaneous Chores
+
+* **sync:** take the stable changelogs from main ([6805373](https://github.com/mittwald/flow/commit/68053736e184c042b7540e63393f72f909675ebb))
+
+## [1.3.13](https://github.com/mittwald/flow/compare/1.3.12...1.3.13) (2026-09-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.12](https://github.com/mittwald/flow/compare/1.3.11...1.3.12) (2026-09-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.11](https://github.com/mittwald/flow/compare/1.3.10...1.3.11) (2026-09-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.10](https://github.com/mittwald/flow/compare/1.3.9...1.3.10) (2026-09-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.9](https://github.com/mittwald/flow/compare/1.3.8...1.3.9) (2026-09-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.8](https://github.com/mittwald/flow/compare/1.3.7...1.3.8) (2026-09-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.7](https://github.com/mittwald/flow/compare/1.3.6...1.3.7) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.6](https://github.com/mittwald/flow/compare/1.3.5...1.3.6) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.5](https://github.com/mittwald/flow/compare/1.3.4...1.3.5) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.4](https://github.com/mittwald/flow/compare/1.3.3...1.3.4) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.3](https://github.com/mittwald/flow/compare/1.3.2...1.3.3) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.2](https://github.com/mittwald/flow/compare/1.3.1...1.3.2) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.1](https://github.com/mittwald/flow/compare/1.3.0...1.3.1) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.3.0](https://github.com/mittwald/flow/compare/1.2.28...1.3.0) (2026-09-28)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.28](https://github.com/mittwald/flow/compare/1.2.27...1.2.28) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.27](https://github.com/mittwald/flow/compare/1.2.26...1.2.27) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.26](https://github.com/mittwald/flow/compare/1.2.25...1.2.26) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.25](https://github.com/mittwald/flow/compare/1.2.24...1.2.25) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.24](https://github.com/mittwald/flow/compare/1.2.23...1.2.24) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.23](https://github.com/mittwald/flow/compare/1.2.22...1.2.23) (2026-09-25)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.22](https://github.com/mittwald/flow/compare/1.2.21...1.2.22) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.21](https://github.com/mittwald/flow/compare/1.2.20...1.2.21) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.20](https://github.com/mittwald/flow/compare/1.2.19...1.2.20) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.19](https://github.com/mittwald/flow/compare/1.2.18...1.2.19) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.18](https://github.com/mittwald/flow/compare/1.2.17...1.2.18) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.17](https://github.com/mittwald/flow/compare/1.2.16...1.2.17) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.16](https://github.com/mittwald/flow/compare/1.2.15...1.2.16) (2026-09-24)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.15](https://github.com/mittwald/flow/compare/1.2.14...1.2.15) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.14](https://github.com/mittwald/flow/compare/1.2.13...1.2.14) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.13](https://github.com/mittwald/flow/compare/1.2.12...1.2.13) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.12](https://github.com/mittwald/flow/compare/1.2.11...1.2.12) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.11](https://github.com/mittwald/flow/compare/1.2.10...1.2.11) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.10](https://github.com/mittwald/flow/compare/1.2.9...1.2.10) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.9](https://github.com/mittwald/flow/compare/1.2.8...1.2.9) (2026-09-23)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.8](https://github.com/mittwald/flow/compare/1.2.7...1.2.8) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.7](https://github.com/mittwald/flow/compare/1.2.6...1.2.7) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.6](https://github.com/mittwald/flow/compare/1.2.5...1.2.6) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.5](https://github.com/mittwald/flow/compare/1.2.4...1.2.5) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.4](https://github.com/mittwald/flow/compare/1.2.3...1.2.4) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.3](https://github.com/mittwald/flow/compare/1.2.2...1.2.3) (2026-09-22)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.2](https://github.com/mittwald/flow/compare/1.2.1...1.2.2) (2026-09-21)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.1](https://github.com/mittwald/flow/compare/1.2.0...1.2.1) (2026-09-21)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.2.0](https://github.com/mittwald/flow/compare/1.2.0-next.67...1.2.0) (2026-09-21)
+
+### Miscellaneous Chores
+
+* **release:** restore the stable changelogs before graduating ([94edc1d](https://github.com/mittwald/flow/commit/94edc1d4dfa5e83dadbad1fa84142f8ff7e37815))
+
+## [1.1.53](https://github.com/mittwald/flow/compare/1.1.52...1.1.53) (2026-09-21)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.52](https://github.com/mittwald/flow/compare/1.1.51...1.1.52) (2026-09-21)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.51](https://github.com/mittwald/flow/compare/1.1.50...1.1.51) (2026-09-18)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.50](https://github.com/mittwald/flow/compare/1.1.49...1.1.50) (2026-09-18)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.49](https://github.com/mittwald/flow/compare/1.1.48...1.1.49) (2026-09-18)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.48](https://github.com/mittwald/flow/compare/1.1.47...1.1.48) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.47](https://github.com/mittwald/flow/compare/1.1.46...1.1.47) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.46](https://github.com/mittwald/flow/compare/1.1.45...1.1.46) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.45](https://github.com/mittwald/flow/compare/1.1.44...1.1.45) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.44](https://github.com/mittwald/flow/compare/1.1.43...1.1.44) (2026-09-17)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.43](https://github.com/mittwald/flow/compare/1.1.42...1.1.43) (2026-09-16)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.42](https://github.com/mittwald/flow/compare/1.1.41...1.1.42) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.41](https://github.com/mittwald/flow/compare/1.1.40...1.1.41) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.40](https://github.com/mittwald/flow/compare/1.1.39...1.1.40) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.39](https://github.com/mittwald/flow/compare/1.1.38...1.1.39) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.38](https://github.com/mittwald/flow/compare/1.1.37...1.1.38) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.37](https://github.com/mittwald/flow/compare/1.1.36...1.1.37) (2026-09-15)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.36](https://github.com/mittwald/flow/compare/1.1.35...1.1.36) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.35](https://github.com/mittwald/flow/compare/1.1.34...1.1.35) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.34](https://github.com/mittwald/flow/compare/1.1.33...1.1.34) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.33](https://github.com/mittwald/flow/compare/1.1.32...1.1.33) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.32](https://github.com/mittwald/flow/compare/1.1.31...1.1.32) (2026-09-14)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.31](https://github.com/mittwald/flow/compare/1.1.30...1.1.31) (2026-09-10)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.30](https://github.com/mittwald/flow/compare/1.1.29...1.1.30) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.29](https://github.com/mittwald/flow/compare/1.1.28...1.1.29) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.28](https://github.com/mittwald/flow/compare/1.1.27...1.1.28) (2026-09-09)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.27](https://github.com/mittwald/flow/compare/1.1.26...1.1.27) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.26](https://github.com/mittwald/flow/compare/1.1.25...1.1.26) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+## [1.1.25](https://github.com/mittwald/flow/compare/1.1.24...1.1.25) (2026-09-08)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
 ## [1.1.24](https://github.com/mittwald/flow/compare/1.1.23...1.1.24) (2026-09-08)
 
 **Note:** Version bump only for package @mittwald/typescript-config

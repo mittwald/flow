@@ -44,7 +44,8 @@ const resolveModule = (from: string, specifier: string): string | undefined => {
 };
 
 /**
- * Every name a file exports, following `export * from` into the repository.
+ * Every name a file exports — listed or declared — following `export * from`
+ * into the repository.
  *
  * A rough parse is enough here: these are hand-maintained barrel files with
  * plain export lists, and the check only ever asks whether a name is
@@ -69,6 +70,12 @@ const namedExports = (file: string, seen = new Set<string>()): string[] => {
     }
   }
 
+  for (const declaration of source.matchAll(
+    /^export\s+(?:declare\s+)?(?:const|let|function|class|type|interface|enum)\s+(\w+)/gm,
+  )) {
+    names.push(declaration[1] as string);
+  }
+
   for (const star of source.matchAll(/export \* from "([^"]+)";/g)) {
     const target = resolveModule(file, star[1] as string);
     if (target) {
@@ -90,13 +97,11 @@ const namedExports = (file: string, seen = new Set<string>()): string[] => {
  * What is not in there: prop types other than the universal ones, error
  * classes, and six of the main package's nine entries.
  *
- * Read on demand rather than at import time, and deliberately so:
- * `auto-generated/index.ts` is generated, `components:build` deletes the whole
- * directory and writes `index.ts` back only after generating every component
- * file, and nx can run this package's `test:unit` concurrently with that build.
- * Reading at import time put that ENOENT window in front of every test file
- * that imports this module; on demand it can only reach the tests that actually
- * need the surface.
+ * Read on demand rather than at import time: `auto-generated/index.ts` is
+ * generated, and `components:build:remote-components` deletes the whole
+ * directory before writing `index.ts` back last. `test:unit` depends on that
+ * generator, so the window is closed — reading on demand keeps a future
+ * ordering gap off the test files that never touch the surface.
  */
 let cachedRemoteExports: Set<string> | undefined;
 

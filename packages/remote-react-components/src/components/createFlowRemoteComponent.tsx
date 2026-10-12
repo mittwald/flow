@@ -2,6 +2,7 @@ import type {
   RemoteComponentOptions,
   RemoteComponentTypeFromElementConstructor,
 } from "@mittwald/remote-dom-react";
+import type { FlowComponentProvisionType } from "@mittwald/flow-react-components/internal";
 import {
   flowComponent,
   isFlowComponentName,
@@ -41,7 +42,19 @@ export function createFlowRemoteComponent<
   {
     slotProps = true,
     eventProps = {} as never,
-  }: RemoteComponentOptions<ElementConstructor, Props> = {},
+    type,
+  }: RemoteComponentOptions<ElementConstructor, Props> & {
+    /*
+     * The provision type of the component this stands in for. It has to travel
+     * with the generated component, because `flowComponent` defaults to `"ui"`
+     * — which wraps the element in a `ClearPropsContext` and cuts every props
+     * context that a surrounding provider set. A trigger whose local
+     * counterpart is not `@flr-generate` renders inside the remote tree
+     * (`ModalTrigger` → `OverlayTrigger` → this element), so clearing there
+     * drops the `onPress` its own trigger just supplied.
+     */
+    type?: FlowComponentProvisionType;
+  } = {},
 ): RemoteComponentTypeFromElementConstructor<ElementConstructor> {
   const element = createRemoteComponent(tag, Element, {
     slotProps,
@@ -56,6 +69,7 @@ export function createFlowRemoteComponent<
       },
       {
         isRemoteComponent: true,
+        type,
       },
     ) as never;
   }

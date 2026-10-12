@@ -1,0 +1,73 @@
+---
+title: Anlegen & Bearbeiten
+description:
+  Ein Modal mit Formular über der auslösenden Seite, mit dem ein Objekt angelegt
+  oder bearbeitet wird.
+---
+
+<LiveCodeEditor example="formular-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende dieses Overlay für Eingaben, die zu einem Objekt gehören: anlegen,
+bearbeiten oder konfigurieren. Wird nichts eingegeben, sondern nur eine
+Entscheidung getroffen, nimm ein Overlay zum
+[Bestätigen](/templates/overlays/bestaetigen); hängt die Eingabe von einer
+vorgelagerten Auswahl ab, eines mit
+[mehreren Schritten](/templates/overlays/mehrere-schritte).
+
+---
+
+# Aufbau
+
+- **Overlay-Container** – Ein [Modal](/components/overlays/modal) legt sich über
+  die auslösende Seite; nach dem Speichern kehrt der Nutzer an dieselbe Stelle
+  zurück. Je nach Umfang des Formulars wird das mittige Modal gewählt oder – für
+  lange, ausführliche Inhalte, die sonst im Modal scrollen müssten – die
+  `offCanvas`-Variante.
+- **Überschrift** – Eine [Heading](/components/content/heading) benennt Aktion
+  und Objekt, etwa „E-Mail-Adresse anlegen". Sie ist meist der einzige Hinweis
+  auf den Bezug des Formulars, da die auslösende Seite verdeckt ist.
+- **Formular** – Ein [Form](/components/react-hook-form/form) fasst die Felder
+  zusammen. Umfangreiche Formulare lassen sich mit
+  [Sections](/components/structure/section) in Abschnitte unterteilen.
+- **Aktionen** – Das Formular wird über den
+  [SubmitButton](/components/react-hook-form/submit-button) in der
+  [ActionGroup](/components/actions/action-group) abgesendet. Sie enthält
+  außerdem immer einen „Abbrechen"-Button, der das Overlay wieder schließt.
+
+---
+
+# Varianten und Abwandlung
+
+## Bearbeiten
+
+Anlegen und Bearbeiten teilen sich ein Template. Sie unterscheiden sich in
+Überschrift, Button-Beschriftung und der Vorbelegung der Felder.
+
+<LiveCodeEditor example="formular-overlay-bearbeiten" editorCollapsed />
+
+## Kurzes Formular
+
+Bei wenigen Feldern ist das Formular im mittigen
+[Modal](/components/overlays/modal) gut aufgehoben. Hier kann der Fokus beim
+Öffnen direkt in das erste [TextField](/components/form-controls/text-field)
+springen (`autoFocus`), sodass die Eingabe ohne weiteren Klick beginnt. Setze
+`autoFocus` nur, wenn das Overlay ausschließlich diesem Eingabezweck dient –
+sonst überspringen Screenreader-Nutzer den einleitenden Kontext aus Überschrift
+und Beschreibung.
+
+<LiveCodeEditor example="formular-overlay-klein" editorCollapsed />
+
+## Fehlende Voraussetzung
+
+Manchmal hängt das Anlegen an einer Voraussetzung, die noch fehlt – etwa ein
+Vertragspartner, ohne den eine Extension nicht installiert werden kann. Ein
+[Alert](/components/status/alert) im Overlay erklärt die fehlende Voraussetzung
+und bietet an, den nötigen Teilprozess direkt hier zu starten. So bleibt der
+Nutzer im Kontext und kehrt nach dem Anlegen an dieselbe Stelle zurück. Die
+abschließende Aktion bleibt deaktiviert, bis die Voraussetzung erfüllt ist.
+
+<LiveCodeEditor example="formular-overlay-voraussetzung" editorCollapsed />

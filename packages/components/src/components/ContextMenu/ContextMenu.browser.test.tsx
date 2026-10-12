@@ -6,6 +6,8 @@ import { usePromise } from "@mittwald/react-use-promise";
 import { sleep } from "@/lib/promises/sleep";
 import { Button, ContextMenuTrigger } from "@/components/public";
 import { duration } from "@/components/Action/models/ActionState";
+import { useOverlayController } from "@/lib/controller";
+import { useRef } from "react";
 
 const expectIconInDom = (iconName: string) => {
   expect(
@@ -65,4 +67,50 @@ test("Loading spinner is shown in trigger if content suspends", async () => {
   await vitest.advanceTimersByTimeAsync(2000);
   await rerender(testUi);
   expect(menuItem).toBeInTheDocument();
+});
+
+describe("labeling", () => {
+  test("labels a menu opened without trigger with aria-label", async () => {
+    const Menu = () => {
+      const controller = useOverlayController("ContextMenu", {
+        isDefaultOpen: true,
+      });
+      const anchorRef = useRef<HTMLDivElement>(null);
+      return (
+        <>
+          <div ref={anchorRef}>Anchor</div>
+          <ContextMenu
+            controller={controller}
+            triggerRef={anchorRef}
+            aria-label="Actions"
+          >
+            <MenuItem>Menu Item</MenuItem>
+          </ContextMenu>
+        </>
+      );
+    };
+
+    await render(<Menu />);
+
+    await expect
+      .element(page.getByRole("menu", { name: "Actions" }))
+      .toBeInTheDocument();
+  });
+
+  test("keeps the trigger as label when no label is given", async () => {
+    await render(
+      <ContextMenuTrigger>
+        <Button>Open menu</Button>
+        <ContextMenu>
+          <MenuItem>Menu Item</MenuItem>
+        </ContextMenu>
+      </ContextMenuTrigger>,
+    );
+
+    await userEvent.click(page.getByText("Open menu"));
+
+    await expect
+      .element(page.getByRole("menu", { name: "Open menu" }))
+      .toBeInTheDocument();
+  });
 });

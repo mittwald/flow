@@ -3,6 +3,8 @@ menu:
     value: "{size-px.xs}"
   group-to-group-spacing:
     value: "{size-px.m}"
+  select-all-to-item-spacing:
+    value: "{size-px.s}"
 
 menu-item:
   font-weight:

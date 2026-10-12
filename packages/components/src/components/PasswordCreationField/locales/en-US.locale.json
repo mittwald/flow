@@ -1,8 +1,13 @@
 {
   "button.generate": "Generate",
+  "button.generate.label": "Generate password",
   "button.generate.tooltip.hide": "Hide password",
   "button.generate.tooltip.show": "Show password",
+  "password.announce.hidden": "Password is hidden",
+  "password.announce.revealed": "Password is shown",
   "password.requirements.heading": "Requirements for your password",
+  "password.requirements.rule.fulfilled": "Fulfilled",
+  "password.requirements.rule.unfulfilled": "Not fulfilled",
   "password.requirements.subject": "your password requirements",
   "validation.allowedSpecialCharacters": "Allowed special characters: #!~%^*_+-=?()<>|.,;$:/",
   "validation.atLeastOneCapitalLetter": "At least one capital letter",

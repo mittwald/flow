@@ -7,13 +7,14 @@
 # packages/remote-react-components/vitest.config.ts).
 #
 # Every suite is driven in WebKit. Should be changed to Chromium when flakiness
-# is resolved, because of Chromium wider usage. BTW: Using Webkit for now,
-# because Firefox has issues with parallel visual tests.
+# is resolved, because of Chromium wider usage. The browser tests run in Firefox
+# as well — without a vote on `main` for now, see `browser-firefox`.
 #
 # `main` at the bottom is the aggregate. Keep that job id: it is the required
 # status check in the branch ruleset, and the check Dependabot waits for before
 # it merges its own PRs (see dependabot-auto-merge.yml). Renaming it, or adding a
 # job below without adding it to `needs`, silently drops that gate.
+# `browser-firefox` is the one job left out on purpose.
 name: Run tests
 on:
   push:
@@ -45,9 +46,12 @@ jobs:
 
       # The CI guard scripts are plain node:test files outside the nx graph, so
       # `pnpm affected:test` never sees them. Run them here so a broken
-      # classifier fails the PR rather than the next release.
+      # classifier fails the PR rather than the next release. `dev/` holds the
+      # same kind of code in TypeScript, so it needs the tsx loader.
       - name: Test the CI guard scripts
-        run: node --test .github/scripts/*.test.mjs
+        run: |
+          node --test .github/scripts/*.test.mjs
+          node --test --import tsx dev/*.test.ts
 
       # Fixed versioning means every Lerna-managed package carries `lerna.json`'s
       # version. A merge can break that silently — no conflict markers, and the
@@ -112,6 +116,40 @@ jobs:
           pnpm nx affected --targets=test:browser --parallel=1
           --browser.name=webkit
 
+  # Deliberately not in `main`'s `needs`: Firefox still flakes on tests that need
+  # keyboard focus, so this job reports without a vote. `continue-on-error` alone
+  # would not do — a job that hits `timeout-minutes` ends `cancelled`, and `main`
+  # fails on that. It is still needed here: without it a red Firefox makes the
+  # whole run fail, and on `main` nx-set-shas then bases `nx affected` on the
+  # last fully green run. Add the job to `needs` once it stays green, and drop
+  # `continue-on-error` then: kept, a red Firefox still reads `success` there.
+  browser-firefox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:browser
+          browser: firefox
+
+      - name: Run browser tests in Firefox
+        run:
+          pnpm nx affected --targets=test:browser --parallel=1
+          --browser.name=firefox
+
   # Its own job rather than a second target on `browser`: run behind it, the two
   # of them together would take longer than the visual shards below and become
   # the critical path.
@@ -170,9 +208,13 @@ jobs:
       # already finds — so a hit costs nothing to be stale, and a miss installs
       # only what is missing. Keyed on lerna.json because the version it holds is
       # what the target set is resolved relative to.
+      #
+      # Restore only: `cross-version-resolve` in test-visual-scheduled.yml
+      # writes this cache. Saving the ~1 GB blob here can outlast the job
+      # timeout after the tests passed.
       - name: Restore the installed old versions
         if: steps.suite.outputs.run == 'true'
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: packages/remote-react-components/node_modules/.cross-version
           key: cross-version-${{ runner.os }}-${{ hashFiles('lerna.json') }}

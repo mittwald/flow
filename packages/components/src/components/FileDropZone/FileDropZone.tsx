@@ -13,6 +13,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import type { DropEvent, FocusableElement } from "@react-types/shared";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { getAcceptedFiles } from "@/lib/files/acceptedFiles";
 
 export interface FileDropZoneProps
   extends
@@ -45,7 +46,8 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     const {
       FieldErrorView,
       FieldErrorCaptureContext,
-      fieldProps,
+      wrapperProps,
+      controlProps,
       fieldPropsContext,
     } = useFieldComponent(props, "FileDropZone");
 
@@ -68,6 +70,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
           Button: { variant: "outline", color: "dark" },
           isDisabled,
           isReadOnly,
+          "aria-describedby": controlProps["aria-describedby"],
         },
         Heading: {
           className: styles.heading,
@@ -82,15 +85,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         return;
       }
 
-      const fileDropItems = event.items.filter(
-        (file) => file.kind === "file",
-      ) as Aria.FileDropItem[];
-
-      const files = await Promise.all(
-        fileDropItems
-          .filter((f) => !accept || accept?.includes(f.type))
-          .map(async (f) => await f.getFile()),
-      );
+      const files = await getAcceptedFiles(event.items, accept);
 
       if (files.length > 0) {
         const fileTransfer = new DataTransfer();
@@ -108,19 +103,23 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <div {...fieldProps}>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            <Aria.DropZone
-              className={rootClassName}
-              onDrop={onDropHandler}
-              isDisabled={isDisabled}
-              data-readonly={isReadOnly}
-            >
-              <IllustratedMessage color="dark">{children}</IllustratedMessage>
-            </Aria.DropZone>
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
+      <div className={wrapperProps.className}>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[controlProps["aria-describedby"]]}
+        >
+          <Aria.DropZone
+            className={rootClassName}
+            onDrop={onDropHandler}
+            isDisabled={isDisabled}
+            data-readonly={isReadOnly}
+          >
+            <IllustratedMessage color="dark">
+              {/* Inside: IllustratedMessage clears the props context it gets. */}
+              <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+            </IllustratedMessage>
+          </Aria.DropZone>
+        </PropsContextProvider>
         <FieldErrorView />
       </div>
     );

@@ -4,20 +4,6 @@
   display: block;
 }
 
-.preContainer {
-  background-color: var(--code-block--background-color);
-  border-radius: var(--corner-radius--m);
-  position: relative;
-  min-width: 0;
-  padding-inline-end: var(--size-px--xl);
-}
-
-.preCopyButton {
-  position: absolute !important;
-  top: var(--size-px--s);
-  inset-inline-end: var(--size-px--s);
-}
-
 .text,
 .ul {
   max-width: var(--max-text-width);
@@ -35,12 +21,6 @@
 .anchorLinkHeading {
   width: fit-content;
   scroll-margin-top: 6rem;
-
-  > :global(.flow--heading--heading-text) {
-    display: flex;
-    align-items: center;
-    column-gap: var(--size-rem--s);
-  }
 
   .anchorButton {
     opacity: 0;
@@ -74,7 +54,7 @@
   margin-bottom: calc(var(--size-px--m) * -1);
   border-style: var(--border-style--default);
   border-width: var(--border-width--100);
-  border-color: var(--neutral-outline-border-color);
+  border-color: var(--code-block--border-color);
   border-bottom: none;
   border-start-start-radius: var(--corner-radius--m);
   border-start-end-radius: var(--corner-radius--m);
@@ -88,7 +68,7 @@
   border-radius: var(--corner-radius--m);
   border-style: var(--border-style--default);
   border-width: var(--border-width--100);
-  border-color: var(--neutral-outline-border-color);
+  border-color: var(--code-block--border-color);
   border-top-width: var(--size-px--s);
   padding: var(--size-px--l);
   border-top-color: var(--info-solid-background-color--default);

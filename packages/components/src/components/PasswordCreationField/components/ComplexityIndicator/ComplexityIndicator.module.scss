@@ -24,6 +24,7 @@
     position: relative;
     display: block;
     height: 100%;
+    width: calc(var(--complexity-indicator--percentage) * 1%);
     border-radius: calc(var(--form-control--corner-radius) - 1px);
     border-start-start-radius: 0;
     border-start-end-radius: 0;

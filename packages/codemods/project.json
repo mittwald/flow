@@ -23,7 +23,12 @@
     },
     "test:unit": {
       "cache": true,
-      "dependsOn": ["^build", "build"],
+      "dependsOn": [
+        "^build",
+        "build",
+        { "projects": ["components"], "target": "build:icons" },
+        { "projects": ["components"], "target": "build:remote-components" }
+      ],
       "inputs": [
         "codemods-src",
         {

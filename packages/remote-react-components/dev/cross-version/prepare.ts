@@ -8,6 +8,7 @@ import {
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pruneStaleVersions } from "./pruneStaleVersions";
 import {
   type SelectedTargetVersion,
   selectCrossVersionTargetVersions,
@@ -109,6 +110,21 @@ const main = (): void => {
   if (targets.length === 0) {
     console.warn(
       "[cross-version] no target versions resolved — nothing to test",
+    );
+  }
+
+  // Against the full resolved set, never a subset: every job resolves all
+  // targets here, and `FLOW_CROSS_VERSION_TARGETS` only narrows what the
+  // runner later tests. A version pruned here is reinstalled by the next job
+  // that targets it.
+  const pruned = pruneStaleVersions(
+    installRoot,
+    targets.map((t) => t.version),
+  );
+  if (pruned.length > 0) {
+    console.log(
+      `[cross-version] removed ${pruned.length} stale install(s): ` +
+        pruned.join(", "),
     );
   }
 

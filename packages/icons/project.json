@@ -9,10 +9,14 @@
     },
     "build:icons": {
       "cache": true,
-      "inputs": ["{workspaceRoot}/packages/icons-base/src/**/*"],
+      "inputs": [
+        "{workspaceRoot}/packages/icons-base/src/**/*",
+        "{workspaceRoot}/pnpm-lock.yaml"
+      ],
       "outputs": [
         "{projectRoot}/src/components/**/*",
-        "{projectRoot}/src/iconSet.ts"
+        "{projectRoot}/src/iconSet.ts",
+        "{projectRoot}/src/iconCategories.ts"
       ]
     }
   }

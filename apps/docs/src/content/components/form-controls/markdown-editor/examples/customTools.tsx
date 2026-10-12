@@ -28,6 +28,7 @@ export default () => {
 
   return (
     <MarkdownEditor
+      aria-label="Nachricht"
       value={value}
       onChange={setValue}
       rows={5}
