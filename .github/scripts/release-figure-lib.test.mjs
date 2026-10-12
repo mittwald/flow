@@ -57,13 +57,6 @@ describe("figureOutputPath", () => {
     assert.throws(() => figureOutputPath("1.2.0-next.3", "x"), /x\.y\.z/);
     assert.throws(() => figureOutputPath("1.2.0", "CoachMark"), /kebab-case/);
   });
-
-  it("rejects a name that would collide with another figure's dark capture", () => {
-    assert.throws(
-      () => figureOutputPath("1.2.0", "coach-mark-dark"),
-      /must not end in -dark/,
-    );
-  });
 });
 
 describe("themedOutputPath", () => {
@@ -253,6 +246,29 @@ describe("resolveOutputPath", () => {
         () => resolveOutputPath(bad),
         /spec\.out/,
         `accepted ${bad}`,
+      );
+    }
+  });
+
+  it("rejects a path that would collide with a dark capture", () => {
+    assert.throws(
+      () =>
+        resolveOutputPath(
+          "apps/docs/public/assets/releases/1.2.0/coach-mark-dark.png",
+        ),
+      /must not end in -dark\.png/,
+    );
+  });
+
+  it("rejects it whether it comes from `out` or from `name`", () => {
+    for (const fields of [
+      { name: "coach-mark-dark" },
+      { out: "apps/docs/public/assets/releases/1.2.0/coach-mark-dark.png" },
+    ]) {
+      assert.throws(
+        () => normalizeFigureSpec(spec(fields)),
+        /must not end in -dark\.png/,
+        `accepted ${JSON.stringify(fields)}`,
       );
     }
   });

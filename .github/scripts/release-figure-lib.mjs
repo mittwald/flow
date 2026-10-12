@@ -106,10 +106,6 @@ export const figureOutputPath = (version, name) => {
     FIGURE_NAME.test(name),
     `figure name must be kebab-case, got ${JSON.stringify(name)}`,
   );
-  check(
-    !name.endsWith("-dark"),
-    `figure name must not end in -dark — that suffix marks the dark capture, got ${JSON.stringify(name)}`,
-  );
   return `${FIGURE_ROOT}/${version}/${name}.png`;
 };
 
@@ -185,6 +181,12 @@ export const resolveOutputPath = (out) => {
   check(
     normalized.endsWith(".png"),
     `spec.out must end in .png — the capture writes PNG bytes, got ${JSON.stringify(out)}`,
+  );
+  // Checked on the final path, so it covers a given `out` as well as one
+  // derived from `name`.
+  check(
+    !normalized.endsWith("-dark.png"),
+    `spec.out must not end in -dark.png — that suffix marks the dark capture, got ${JSON.stringify(out)}`,
   );
   return normalized;
 };
