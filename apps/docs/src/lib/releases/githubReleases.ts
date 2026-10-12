@@ -179,7 +179,13 @@ export const getReleases = async (): Promise<Release[]> => {
         b.version.localeCompare(a.version, undefined, { numeric: true }),
       );
 
-    const { headline, body } = splitHeadline(themedFigures(head.body ?? ""));
+    const { headline, body } = splitHeadline(
+      themedFigures(head.body ?? "", (reason) =>
+        console.warn(
+          `[releases] ${version}: unreadable release figure, shown as code (${reason})`,
+        ),
+      ),
+    );
     // A hand-titled Release is the only case where `name` carries a headline —
     // the publish workflow always sets it to the bare version.
     const name = head.name?.trim();

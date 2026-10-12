@@ -1,5 +1,10 @@
-import { expect, test } from "vitest";
-import { themedFigures } from "./themedFigures";
+import { expect, test, vi } from "vitest";
+import { themedFigures as themedFiguresWith } from "./themedFigures";
+
+const themedFigures = (body: string) =>
+  themedFiguresWith(body, (reason) => {
+    throw new Error(`unexpected warning: ${reason}`);
+  });
 
 const base =
   "https://raw.githubusercontent.com/mittwald/flow/c2b3f6d/apps/docs/public/assets/releases/1.1.0";
@@ -54,10 +59,17 @@ test("reads a media query without a space and single-quoted attributes", () => {
   );
 });
 
+test("ignores a light <source> next to the dark one", () => {
+  const block = `<picture><source media="(prefers-color-scheme: light)" srcset="${base}/rating.png"><source media="(prefers-color-scheme: dark)" srcset="${base}/rating-dark.png"><img src="${base}/rating.png" alt="Rating"></picture>`;
+  expect(themedFigures(block)).toBe(
+    `![Rating](${base}/rating.png#light-only)\n![Rating](${base}/rating-dark.png#dark-only)`,
+  );
+});
+
 test.each([
   ["no <img src>", `<picture><img alt="x"></picture>`],
   [
-    "not (prefers-color-scheme:dark)",
+    "media other than",
     `<picture><source media="(min-width: 600px)" srcset="${base}/a.png"><img src="${base}/rating.png"></picture>`,
   ],
   [
@@ -65,11 +77,39 @@ test.each([
     `<picture><source media="(prefers-color-scheme: dark)"><img src="${base}/rating.png"></picture>`,
   ],
   [
-    "more than one <source>",
+    "more than one",
     `<picture><source media="(prefers-color-scheme: dark)" srcset="${base}/a.png"><source media="(prefers-color-scheme: dark)" srcset="${base}/b.png"><img src="${base}/rating.png"></picture>`,
   ],
-])("throws on a block it cannot read: %s", (reason, block) => {
-  expect(() => themedFigures(block)).toThrow(reason);
+])(
+  "reports a block it cannot read and shows it as code: %s",
+  (reason, block) => {
+    const onUnreadable = vi.fn();
+    expect(themedFiguresWith(`before\n\n${block}\n\nafter`, onUnreadable)).toBe(
+      `before\n\n\`\`\`html\n${block}\n\`\`\`\n\nafter`,
+    );
+    expect(onUnreadable).toHaveBeenCalledOnce();
+    expect(onUnreadable.mock.calls[0]?.[0]).toContain(reason);
+  },
+);
+
+test("leaves a <picture> inside a fenced code block alone", () => {
+  const body = [
+    "```html",
+    `<picture><img alt="no src"></picture>`,
+    "```",
+    "",
+    "~~~~",
+    `<picture><img src="${base}/rating.png" alt="x"></picture>`,
+    "~~~~",
+    "",
+    `<picture><img src="${base}/rating.png" alt="x"></picture>`,
+  ].join("\n");
+  expect(themedFigures(body)).toBe(
+    body.replace(
+      /<picture><img src="[^"]*" alt="x"><\/picture>$/,
+      `![x](${base}/rating.png)`,
+    ),
+  );
 });
 
 test("keeps a figure without a dark capture visible in both themes", () => {
