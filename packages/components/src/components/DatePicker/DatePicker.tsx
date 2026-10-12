@@ -12,6 +12,7 @@ import {
 import { Calendar } from "@/components/Calendar";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "./DatePicker.module.scss";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
@@ -20,7 +21,9 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
 
 /** @flr-generate all */
 export const DatePicker = flowComponent("DatePicker", (props) => {
-  const { children, className, onChange, ref, ...rest } = props;
+  // `null` is what react-aria's date picker state uses for "no date"
+  const { children, className, onChange, ref, ...rest } =
+    useControlledHostValueProps(props, null);
 
   const popoverController = useOverlayController("Popover", {
     reuseControllerFromContext: false,

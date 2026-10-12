@@ -30,7 +30,12 @@
 
     .abort {
       order: 1;
-      margin-inline-end: auto;
+
+      // Only the last abort action pushes the others away, so several abort
+      // actions stay together at the start.
+      &:not(:has(~ .abort)) {
+        margin-inline-end: auto;
+      }
     }
   }
 }

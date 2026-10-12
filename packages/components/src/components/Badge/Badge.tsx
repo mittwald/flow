@@ -16,6 +16,10 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { ContextualHelpButton } from "@/components/Badge/components/ContextualHelpButton";
 import locales from "./locales/*.locale.json";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export const badgeColors = [
   "neutral",
@@ -62,11 +66,13 @@ export const Badge = flowComponent("Badge", (props) => {
   } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Badge");
+  const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(
     styles.badge,
     styles[color],
     isDisabled && styles.disabled,
+    isSkeleton && styles.skeleton,
     className,
   );
 
@@ -119,35 +125,46 @@ export const Badge = flowComponent("Badge", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <div className={rootClassName} {...rest} ref={ref}>
-        {!onPress && <div className={styles.content}>{children}</div>}
-        {onPress && (
-          <Button
-            isDisabled={isDisabled}
-            unstyled
-            className={styles.button}
-            onPress={onPress}
-          >
-            {children}
-          </Button>
-        )}
+      {/* The badge is one skeleton surface, its content draws none. */}
+      <SkeletonModeReset>
+        <div
+          className={rootClassName}
+          {...rest}
+          ref={ref}
+          inert={isSkeleton || undefined}
+        >
+          {!onPress && <div className={styles.content}>{children}</div>}
+          {onPress && (
+            <Button
+              isDisabled={isDisabled}
+              unstyled
+              className={styles.button}
+              onPress={onPress}
+            >
+              {children}
+            </Button>
+          )}
 
-        <UiComponentTunnelExit id={contextualHelpTunnel.id} component="Badge" />
+          <UiComponentTunnelExit
+            id={contextualHelpTunnel.id}
+            component="Badge"
+          />
 
-        {onClose && (
-          <Button
-            className={styles.close}
-            size="s"
-            color={buttonColor}
-            variant="plain"
-            onPress={onClose}
-            isDisabled={isDisabled}
-            aria-label={stringFormatter.format("remove")}
-          >
-            <IconClose />
-          </Button>
-        )}
-      </div>
+          {onClose && (
+            <Button
+              className={styles.close}
+              size="s"
+              color={buttonColor}
+              variant="plain"
+              onPress={onClose}
+              isDisabled={isDisabled}
+              aria-label={stringFormatter.format("remove")}
+            >
+              <IconClose />
+            </Button>
+          )}
+        </div>
+      </SkeletonModeReset>
     </PropsContextProvider>
   );
 });

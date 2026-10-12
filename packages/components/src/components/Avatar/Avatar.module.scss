@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .avatar {
   border-radius: var(--corner-radius--round);
   width: var(--avatar-size);
@@ -77,4 +79,14 @@
   @include status("warning");
   @include status("danger");
   @include status("unavailable");
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--corner-radius--round);
+  }
 }
+
+@include skeleton.keyframes;

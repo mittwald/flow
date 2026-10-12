@@ -22,6 +22,10 @@ import { linkContext } from "@/components/Link/context";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 import { handleLinkClick, useRouter } from "@react-aria/utils";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { hasContent } from "@/components/SkeletonMode/lib/hasContent";
+import { containsTextChild } from "@/lib/react/remote";
 
 export interface LinkProps
   extends
@@ -36,7 +40,11 @@ export interface LinkProps
   color?: "default" | AlphaColor;
   /** Marks the link as the currently active one, e.g. in a navigation. */
   "aria-current"?: string;
-  /** The name of the slot the link is placed in. */
+  /**
+   * The name of the slot the link is placed in. In action groups: `primary` (at
+   * the end), `secondary` (before the primary action) or `abort` (at the
+   * start).
+   */
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];
@@ -68,6 +76,7 @@ export const Link = flowComponent("Link", (props) => {
   } = props;
 
   const { linkComponent: linkComponentFromContext } = useContext(linkContext);
+  const isSkeleton = useSkeletonMode();
   const Link = linkComponentFromProps
     ? (linkComponentFromProps as typeof Aria.Link)
     : props.href && linkComponentFromContext
@@ -138,6 +147,38 @@ export const Link = flowComponent("Link", (props) => {
       } as Record<string, unknown>)
     : {};
 
+  /* Without text of its own — a Link styled as a Button, a Link around a
+     LayoutCard — the content follows its own skeleton rules instead of
+     becoming a text bar. */
+  const hasOnlyElements = hasContent(children) && !containsTextChild(children);
+
+  const textBars = (
+    <SkeletonTextContent defaultWidth="6em">{children}</SkeletonTextContent>
+  );
+
+  const content = (
+    <PropsContextProvider props={propsContext}>
+      {hasOnlyElements ? children : textBars}
+      <LinkIcon
+        withZeroWidthJoiner
+        unstyled={unstyled}
+        target={target}
+        download={download}
+      >
+        <UiComponentTunnelExit id={"icon"} component={"Link"} />
+      </LinkIcon>
+    </PropsContextProvider>
+  );
+
+  /* react-aria's Link drops `inert`, and a skeleton needs no anchor. */
+  if (isSkeleton) {
+    return (
+      <span className={rootClassName} style={{ ...style, whiteSpace }} inert>
+        {content}
+      </span>
+    );
+  }
+
   return (
     <Link
       {...unsupportedTypingsLinkProps}
@@ -149,17 +190,7 @@ export const Link = flowComponent("Link", (props) => {
       ref={ref}
       style={{ ...style, whiteSpace }}
     >
-      <PropsContextProvider props={propsContext}>
-        {children}
-        <LinkIcon
-          withZeroWidthJoiner
-          unstyled={unstyled}
-          target={target}
-          download={download}
-        >
-          <UiComponentTunnelExit id={"icon"} component={"Link"} />
-        </LinkIcon>
-      </PropsContextProvider>
+      {content}
     </Link>
   );
 });

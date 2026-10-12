@@ -4,11 +4,11 @@ import {
   Button,
   Content,
   FieldDescription,
-  Flex,
   Heading,
   Label,
   Modal,
   ModalTrigger,
+  Section,
   Text,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -26,7 +26,7 @@ export default () => {
       <Modal>
         <Heading>Profil löschen</Heading>
         <Content>
-          <Flex direction="column" gap="m">
+          <Section>
             <Text>
               Das Profil <b>{profileName}</b> wird mit allen
               zugehörigen Daten und Zugriffsrechten
@@ -44,7 +44,7 @@ export default () => {
                 Löschen zu bestätigen.
               </FieldDescription>
             </TextField>
-          </Flex>
+          </Section>
         </Content>
         <ActionGroup>
           <Action closeModal>

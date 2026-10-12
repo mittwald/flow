@@ -7,6 +7,8 @@ import type {
 import clsx from "clsx";
 import styles from "./InlineCode.module.scss";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface InlineCodeProps extends PropsWithChildren<
   ComponentProps<"code">
@@ -28,6 +30,8 @@ export const InlineCode: FC<InlineCodeProps> = (props) => {
     ...rest
   } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.inlineCode,
     isAlphaColor(color) && styles[color],
@@ -40,8 +44,13 @@ export const InlineCode: FC<InlineCodeProps> = (props) => {
   };
 
   return (
-    <code {...rest} style={style} className={rootClassName}>
-      {children}
+    <code
+      {...rest}
+      style={style}
+      className={rootClassName}
+      inert={isSkeleton || undefined}
+    >
+      <SkeletonTextContent defaultWidth="6em">{children}</SkeletonTextContent>
     </code>
   );
 };

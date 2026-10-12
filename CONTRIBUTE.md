@@ -571,10 +571,10 @@ pnpm nx test:browser:dev components
 
 The nx browser targets install the Playwright browsers for you, locally. (On CI
 they skip it: each workflow installs exactly the browsers its job needs, with
-system dependencies, under its own cache key — `browser` takes webkit only, the
-visual workflows add Firefox, and the keys are kept apart on purpose.) On a
-fresh machine, or on Linux where the browsers also need system libraries, do it
-once with system dependencies:
+system dependencies, under its own cache key — `browser` takes WebKit,
+`browser-firefox` Firefox, the visual workflows install both, and the keys are
+kept apart on purpose.) On a fresh machine, or on Linux where the browsers also
+need system libraries, do it once with system dependencies:
 
 ```shell
 pnpm test:browser:prepare
