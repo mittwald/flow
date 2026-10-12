@@ -4,7 +4,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, ReactNode, Ref } from "react";
+import type { CSSProperties, FC, Ref } from "react";
 import { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
@@ -138,14 +138,14 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         />
       );
     },
-    ul: (props) => (
+    ul: ({ node: ignoredNode, ...props }) => (
       <Text color={color}>
-        <ul>{props.children as ReactNode}</ul>
+        <ul {...props} />
       </Text>
     ),
-    ol: (props) => (
+    ol: ({ node: ignoredNode, ...props }) => (
       <Text color={color}>
-        <ol>{props.children as ReactNode}</ol>
+        <ol {...props} />
       </Text>
     ),
     blockquote: (props) => (
