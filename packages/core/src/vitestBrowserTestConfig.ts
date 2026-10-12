@@ -12,7 +12,17 @@ const setReducedMotion: BrowserCommand<
   });
 };
 
-export const vitestBrowserTestConfig: ProjectConfig = {
+/*
+ * A factory, not a shared object: vitest names a browser project's nested
+ * per-browser projects by writing onto the `browser.instances` objects. Two
+ * projects built from one shared config would share those objects, the second
+ * name would overwrite the first, and the run dies at startup with "Cannot
+ * define a nested project for a <browser> browser. The project name … was
+ * already defined". Every call hands out its own instances, so a consumer
+ * cannot get that wrong — and neither can one that reshapes them with `filter`
+ * or `map`, which copy the array but not its objects.
+ */
+export const createVitestBrowserTestConfig = (): ProjectConfig => ({
   css: {
     include: /.+/,
   },
@@ -20,6 +30,34 @@ export const vitestBrowserTestConfig: ProjectConfig = {
     enabled: true,
     commands: {
       setReducedMotion,
+    },
+    /*
+     * A failure screenshot defaults to `<test dir>/__screenshots__`, which is
+     * where the committed visual baselines live and is gitignored nowhere, so
+     * the stray PNG lands in the next commit. Redirect it. The path resolves
+     * against the process cwd, so `.gitignore` carries a bare
+     * `.vitest-screenshots` that matches at any depth.
+     */
+    screenshotDirectory: ".vitest-screenshots",
+    expect: {
+      toMatchScreenshot: {
+        /*
+         * `screenshotDirectory` also feeds the baseline path, but there it is a
+         * segment inside the test directory. Without this pin to vitest's
+         * default shape the committed baselines move into the gitignored
+         * directory and the visual suite silently re-baselines itself.
+         */
+        resolveScreenshotPath: ({
+          root,
+          testFileDirectory,
+          testFileName,
+          arg,
+          browserName,
+          platform,
+          ext,
+        }) =>
+          `${root}/${testFileDirectory}/__screenshots__/${testFileName}/${arg}-${browserName}-${platform}${ext}`,
+      },
     },
     provider: playwright({
       /*
@@ -38,11 +76,16 @@ export const vitestBrowserTestConfig: ProjectConfig = {
     instances: [
       {
         browser: "firefox",
-        viewport,
+        viewport: { ...viewport },
+        /*
+         * Firefox hands the document focus to one page at a time, so tests
+         * that need keyboard focus flake when files run in parallel.
+         */
+        fileParallelism: false,
       },
       {
         browser: "webkit",
-        viewport,
+        viewport: { ...viewport },
       },
       /**
        * Exclude Chromium for visual tests for now due to flakiness in CI
@@ -61,4 +104,4 @@ export const vitestBrowserTestConfig: ProjectConfig = {
        */
     ],
   },
-};
+});

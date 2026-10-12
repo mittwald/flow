@@ -9,7 +9,7 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { use, useState, type ReactNode } from "react";
+import { use, useState, useSyncExternalStore, type ReactNode } from "react";
 import { test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { RouterProvider } from "react-aria-components";
@@ -22,6 +22,12 @@ import { FilterValue } from "./model/filter/FilterValue";
 import Content from "../Content";
 import { Heading } from "../Heading";
 import { ContextMenu, MenuItem } from "../ContextMenu";
+import { Table } from "./setupComponents/Table";
+import { TableBody } from "./setupComponents/TableBody";
+import { TableCell } from "./setupComponents/TableCell";
+import { TableColumn } from "./setupComponents/TableColumn";
+import { TableHeader } from "./setupComponents/TableHeader";
+import { TableRow } from "./setupComponents/TableRow";
 
 interface Data {
   num: number;
@@ -133,6 +139,149 @@ describe("Filter", () => {
     await userEvent.click(resetFilterButton);
     expect(listItem42).toBeInTheDocument();
     expect(listItem43).not.toBeInTheDocument();
+  });
+});
+
+describe("Select all", () => {
+  const sixItems = Array.from({ length: 6 }, (_, i) => i + 1);
+  const selectAllLabel = /^(Select|Deselect) all$/;
+  const selectAllMenuItem = page.getByRole("menuitem", {
+    name: selectAllLabel,
+  });
+  const menuItemCheckbox = (num: number) =>
+    page.getByRole("menuitemcheckbox", { name: String(num), exact: true });
+  const isIndeterminateIcon = (element: Element) =>
+    element.querySelector(".tabler-icon-square-minus-filled") !== null;
+  const isCheckedIcon = (element: Element) =>
+    element.querySelector(".tabler-icon-square-check-filled") !== null;
+
+  test("is offered in 'some' mode from six values on", async () => {
+    await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
+    await userEvent.click(filterButton);
+    await expect.element(selectAllMenuItem).toBeInTheDocument();
+  });
+
+  test("is not offered with fewer than six values", async () => {
+    await render(
+      getTestElement(sixItems.slice(1), <ListFilter<Data> property="num" />),
+    );
+    await userEvent.click(filterButton);
+    await expect.element(menuItemCheckbox(2)).toBeInTheDocument();
+    expect(selectAllMenuItem.query()).toBeNull();
+  });
+
+  test("is not offered in 'all' mode", async () => {
+    await render(
+      getTestElement(sixItems, <ListFilter<Data> property="num" mode="all" />),
+    );
+    await userEvent.click(filterButton);
+    await expect.element(menuItemCheckbox(1)).toBeInTheDocument();
+    expect(selectAllMenuItem.query()).toBeNull();
+  });
+
+  test("selects and deselects all values with one onChange call each", async () => {
+    const onChange = vitest.fn();
+    await render(
+      getTestElement(
+        sixItems,
+        <ListFilter<Data> property="num" onChange={onChange} />,
+      ),
+    );
+    await userEvent.click(filterButton);
+
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
+    await userEvent.click(selectAllMenuItem);
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(sixItems);
+    await expect.element(selectAllMenuItem).toHaveTextContent("Deselect all");
+    expect(isCheckedIcon(selectAllMenuItem.element())).toBe(true);
+    await expect
+      .element(menuItemCheckbox(5))
+      .toHaveAttribute("aria-checked", "true");
+
+    onChange.mockClear();
+    await userEvent.click(selectAllMenuItem);
+    expect(onChange).toHaveBeenCalledExactlyOnceWith([]);
+    await expect
+      .element(menuItemCheckbox(5))
+      .toHaveAttribute("aria-checked", "false");
+  });
+
+  test("a single value still toggles with one onChange call", async () => {
+    const onChange = vitest.fn();
+    await render(
+      getTestElement(
+        sixItems,
+        <ListFilter<Data> property="num" onChange={onChange} />,
+      ),
+    );
+    await userEvent.click(filterButton);
+
+    await userEvent.click(menuItemCheckbox(2));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith([2]);
+    await expect
+      .element(menuItemCheckbox(2))
+      .toHaveAttribute("aria-checked", "true");
+
+    onChange.mockClear();
+    await userEvent.click(menuItemCheckbox(2));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith([]);
+  });
+
+  test("shows a partial selection and completes it on click", async () => {
+    await render(getTestElement(sixItems, <ListFilter<Data> property="num" />));
+    await userEvent.click(filterButton);
+
+    expect(isIndeterminateIcon(selectAllMenuItem.element())).toBe(false);
+    await userEvent.click(menuItemCheckbox(3));
+    await expect
+      .poll(() => isIndeterminateIcon(selectAllMenuItem.element()))
+      .toBe(true);
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
+
+    await userEvent.click(selectAllMenuItem);
+    await expect.element(selectAllMenuItem).toHaveTextContent("Deselect all");
+    expect(isIndeterminateIcon(selectAllMenuItem.element())).toBe(false);
+
+    await userEvent.click(menuItemCheckbox(3));
+    await expect.element(selectAllMenuItem).toHaveTextContent("Select all");
+    await expect.element(listItem42).not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Item: 3", { exact: true }))
+      .not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Item: 4", { exact: true }))
+      .toBeInTheDocument();
+  });
+
+  test("is offered as a tri-state checkbox in the all filters modal", async () => {
+    await render(
+      getTestElement(
+        sixItems,
+        <ListFilter<Data> property="num" priority="secondary" />,
+      ),
+    );
+    await userEvent.click(
+      page.getByRole("button", { name: "All filters" }).first(),
+    );
+
+    const selectAllCheckbox = page.getByRole("checkbox", {
+      name: selectAllLabel,
+    });
+    await userEvent.click(page.getByText("3", { exact: true }));
+    await expect.element(selectAllCheckbox).toBePartiallyChecked();
+
+    await userEvent.click(page.getByText("Select all", { exact: true }));
+    await expect.element(selectAllCheckbox).toBeChecked();
+    await expect
+      .element(selectAllCheckbox)
+      .toHaveAccessibleName("Deselect all");
+    await expect
+      .element(page.getByRole("checkbox", { name: "5", exact: true }))
+      .toBeChecked();
+
+    await userEvent.click(page.getByText("Deselect all", { exact: true }));
+    await expect.element(selectAllCheckbox).not.toBeChecked();
+    await expect.element(selectAllCheckbox).not.toBePartiallyChecked();
   });
 });
 
@@ -405,34 +554,101 @@ describe("Storage", async () => {
 describe("Infinite scroll", () => {
   const manyItems = Array.from({ length: 9 }, (_, i) => i);
 
-  test("Loads the next batch only once the trigger row scrolls into view", async () => {
-    const data = Array.from({ length: 15 }, (_, i) => ({ num: i }));
+  const tallItem = (num: number) => (
+    <span style={{ display: "block", height: "100vh" }}>Item: {num}</span>
+  );
 
-    await render(
-      <List aria-label="Test" batchSize={10} infiniteScroll>
-        <ListStaticData<Data> data={data} />
-        <ListItem<Data> textValue={(num) => String(num)}>
-          {({ num }) => (
-            <span style={{ display: "block", height: "100vh" }}>
-              Item: {num}
-            </span>
-          )}
-        </ListItem>
-      </List>,
-    );
+  test.each(["list", "tiles", "table"] as const)(
+    "Loads the next batch only once the trigger row scrolls into view (%s view)",
+    async (viewMode) => {
+      const data = Array.from({ length: 15 }, (_, i) => ({ num: i }));
 
-    // With batchSize 10 the trigger row sits ~2 rows before the end (item 8),
-    // far below the fold, so no further batch is loaded on mount.
-    await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
-    expect(page.getByText("Item: 10").query()).not.toBeInTheDocument();
+      await render(
+        <List
+          aria-label="Test"
+          batchSize={10}
+          infiniteScroll
+          defaultViewMode={viewMode}
+        >
+          <ListStaticData<Data> data={data} />
+          <ListItem<Data> showTiles textValue={({ num }) => String(num)}>
+            {({ num }) => tallItem(num)}
+          </ListItem>
+          <Table>
+            <TableHeader>
+              <TableColumn>Num</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>{({ num }: Data) => tallItem(num)}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </List>,
+      );
 
-    await (await page.getByText("Item: 8").element()).scrollIntoView();
-    await expect.element(page.getByText("Item: 10")).toBeInTheDocument();
+      // With batchSize 10 the trigger row sits ~2 rows before the end (item 8),
+      // far below the fold, so no further batch is loaded on mount.
+      await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
+      expect(page.getByText("Item: 10").query()).not.toBeInTheDocument();
 
-    expect(
-      page.getByRole("button", { name: "Show more" }).query(),
-    ).not.toBeInTheDocument();
-  });
+      await (await page.getByText("Item: 8").element()).scrollIntoView();
+      await expect.element(page.getByText("Item: 10")).toBeInTheDocument();
+
+      expect(
+        page.getByRole("button", { name: "Show more" }).query(),
+      ).not.toBeInTheDocument();
+    },
+  );
+
+  test.each(["list", "table"] as const)(
+    "The trigger follows the end of the list across batches (%s view)",
+    async (viewMode) => {
+      const data = Array.from({ length: 40 }, (_, i) => ({ num: i }));
+
+      await render(
+        <List
+          aria-label="Test"
+          batchSize={10}
+          infiniteScroll
+          defaultViewMode={viewMode}
+        >
+          <ListStaticData<Data> data={data} />
+          <ListItem<Data> textValue={({ num }) => String(num)}>
+            {({ num }) => tallItem(num)}
+          </ListItem>
+          <Table>
+            <TableHeader>
+              <TableColumn>Num</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>{({ num }: Data) => tallItem(num)}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </List>,
+      );
+
+      await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
+
+      // Every batch moves the trigger onto a new element, so the observer has
+      // to follow it there. Watching a stale element stops the list after the
+      // second batch.
+      for (const [scrollTo, expected] of [
+        [8, 10],
+        [18, 20],
+        [28, 30],
+      ]) {
+        await (
+          await page.getByText(`Item: ${scrollTo}`).element()
+        ).scrollIntoView();
+        await expect
+          .element(page.getByText(`Item: ${expected}`, { exact: true }))
+          .toBeInTheDocument();
+      }
+    },
+  );
 
   test("Shows a loading indicator while the next batch is loading", async () => {
     let resolveSecondBatch: (() => void) | undefined;
@@ -653,6 +869,113 @@ describe("Item rendering", () => {
     await expect
       .element(page.getByText("Item: 42 unselected"))
       .toBeInTheDocument();
+  });
+
+  // A render function whose identity never changes leaves the memoized item no
+  // signal to follow — `dependencies` is the consumer's way to give it one.
+  const store = {
+    selected: [] as number[],
+    version: 0,
+    listeners: new Set<() => void>(),
+    toggle(num: number) {
+      store.selected = store.selected.includes(num)
+        ? store.selected.filter((n) => n !== num)
+        : [...store.selected, num];
+      store.version++;
+      store.listeners.forEach((listener) => listener());
+    },
+  };
+
+  const subscribeToStore = (listener: () => void) => {
+    store.listeners.add(listener);
+    return () => {
+      store.listeners.delete(listener);
+    };
+  };
+
+  const renderStoreItem = ({ num }: Data) => (
+    <span>
+      Item: {num} {store.selected.includes(num) ? "selected" : "unselected"}
+    </span>
+  );
+
+  const storeItemTextValue = ({ num }: Data) => String(num);
+
+  const toggleStoreItem = ({ num }: Data) => {
+    store.toggle(num);
+  };
+
+  const StoreList = () => {
+    const version = useSyncExternalStore(subscribeToStore, () => store.version);
+
+    return (
+      <List aria-label="Test" onAction={toggleStoreItem}>
+        <ListStaticData<Data> data={selectableData} />
+        <ListItem<Data> textValue={storeItemTextValue} dependencies={[version]}>
+          {renderStoreItem}
+        </ListItem>
+      </List>
+    );
+  };
+
+  test("items follow the dependencies a stable render function declares", async () => {
+    store.selected = [];
+    store.version = 0;
+
+    await render(<StoreList />);
+
+    await userEvent.click(page.getByText("Item: 42 unselected"));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByText("Item: 42 selected"));
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+  });
+});
+
+describe("Item hover", () => {
+  // The item's hover background is carved out for the bottom content, which
+  // carries its own interactive elements. The carve-out is a `:has()` rule in
+  // Item.module.scss matching a class ListItemViewContent applies — a coupling
+  // across two files that no other test would notice going stale.
+  const HoverableList = () => (
+    <List aria-label="Test" onAction={() => undefined}>
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
+      <ListItem<Data> textValue={({ num }) => String(num)}>
+        {({ num }) => (
+          <ListItemView>
+            <Content>Top {num}</Content>
+            <Content slot="bottom">Bottom {num}</Content>
+          </ListItemView>
+        )}
+      </ListItem>
+    </List>
+  );
+
+  const topContent = page.getByText("Top 42");
+  const bottomContent = page.getByText("Bottom 42");
+  const hoveredRow = page.getByRole("row").nth(0);
+  // Never hovered, so it shows the default background whatever the pointer did
+  // before this test — reading the hovered item's own "before" state would not,
+  // since the pointer may already rest on it at render time.
+  const restingRow = page.getByRole("row").nth(1);
+
+  test("bottom content does not trigger the item hover background", async () => {
+    await render(<HoverableList />);
+
+    const backgrounds = () => [
+      getComputedStyle(hoveredRow.element()).backgroundColor,
+      getComputedStyle(restingRow.element()).backgroundColor,
+    ];
+
+    await userEvent.hover(topContent);
+    await expect.poll(() => backgrounds()[0]).not.toBe(backgrounds()[1]);
+
+    await userEvent.hover(bottomContent);
+    await expect.poll(() => backgrounds()[0]).toBe(backgrounds()[1]);
   });
 });
 

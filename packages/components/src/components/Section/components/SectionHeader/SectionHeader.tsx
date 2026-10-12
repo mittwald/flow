@@ -47,6 +47,7 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
           tunnel: null,
         },
         Link: {
+          size: "m",
           tunnel: null,
         },
       },
@@ -64,7 +65,6 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
         level: 2,
       },
       Link: {
-        size: "s",
         tunnel: actionsTunnel,
       },
     };

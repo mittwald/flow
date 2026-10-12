@@ -1,36 +1,23 @@
 import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../core/src/index.ts";
 import { serveFontsLocally } from "./dev/vitest/serveFontsLocally.ts";
 
-/*
- * Vitest names a browser project's nested per-browser projects by writing onto
- * the instance objects. Two projects that spread the shared browser config would
- * share those objects, and the second name would overwrite the first – so every
- * browser project gets its own copies. Without them a run filtered to one
- * project reports itself under the other project's name.
- *
- * screenshotFailures is off for both browser projects. A failure would drop a
- * PNG next to the test, and neither __screenshots__ directory is gitignored, so
- * `git add` picks the stray file up. It adds nothing either: a visual mismatch
- * already writes reference, actual and diff to the gitignored
- * .vitest-attachments, and the DOM assertions have no pixels worth capturing.
- */
-const browserTestConfig = () => ({
-  ...vitestBrowserTestConfig,
-  browser: {
-    ...vitestBrowserTestConfig.browser,
-    commands: {
-      ...vitestBrowserTestConfig.browser?.commands,
-      serveFontsLocally,
+/** The shared browser config plus this package's own browser command. */
+const browserTestConfig = () => {
+  const config = createVitestBrowserTestConfig();
+  return {
+    ...config,
+    browser: {
+      ...config.browser,
+      commands: {
+        ...config.browser?.commands,
+        serveFontsLocally,
+      },
     },
-    instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
-      (instance) => ({ ...instance }),
-    ),
-    screenshotFailures: false,
-  },
-});
+  };
+};
 
 /** Held in one place so the `browser` override below reuses its instance copies. */
 const visualTestConfig = browserTestConfig();
@@ -98,7 +85,10 @@ export default mergeConfig(
              * both browsers. The price is shared module state across files.
              * Mounted trees are not part of it — `render` calls `cleanup()`
              * first — and the setup files only set the theme and load fonts,
-             * which are meant to persist anyway.
+             * which are meant to persist anyway. Global mocks are part of it: a
+             * `vi.setSystemTime` clock froze `Date.now()` for every later file
+             * until `setupBrowser.ts` started handing each test the real clock
+             * back.
              */
             isolate: false,
             /*

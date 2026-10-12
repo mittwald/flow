@@ -5,6 +5,10 @@
   Authoring rules:
   - Audience: extension developers & Flow consumers. Write user-facing prose,
     not commit subjects.
+  - Inline code only for what the reader types or matches: prop names, values,
+    commands, symbols, package names. Version numbers and component names in
+    running prose stay plain — a paragraph of code chips stops the eye at every
+    token.
   - Minor/major only — patches release separately, so there is NO Fixes section.
     Fold a user-relevant fix into the related feature's text if it matters.
   - Drop noise entirely: chore/deps/release bumps, internal refactors, CI.
@@ -16,8 +20,14 @@
     `ExtBridgeConfigInput`).
   - Group by feature/area, never by commit. One "## " section per notable
     feature; link its PR(s), e.g. (#1234).
-  - Screenshots/GIFs: leave the placeholder for the maintainer — do NOT
-    fabricate images. Code examples are fine when grounded in the real API.
+  - Screenshots: capture them, never fabricate them. A capture of a real
+    Styleguide example rendered from the release branch is not a fabrication —
+    a mocked, drawn or generated image is, and stays forbidden. Storybook
+    stories are no source: their Star Wars fixtures do not belong on the docs
+    site. `/prepare-release` step 8 produces the figures with
+    `pnpm release:figure`; a feature with no example (a CLI, a build change)
+    simply gets none. Code examples are fine when grounded in the
+    real API.
   - Delete these comments and every unused/empty section in the final text.
 -->
 
@@ -51,7 +61,15 @@
 // optional usage example, grounded in the real component API
 ```
 
-<!-- ![caption](url) — maintainer adds a screenshot/GIF if useful -->
+<!-- DELETE this line when the feature has no example to capture (a CLI, a
+     build change) — an unfilled image link is worse than no figure.
+
+     Otherwise: one captured figure per notable feature, never one per prop
+     variant — compose the variants into a single image. Markdown image syntax,
+     NOT an HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw
+     tag renders on GitHub and silently vanishes on /releases. -->
+
+![{{ caption }}](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png)
 
 ## Migrations
 

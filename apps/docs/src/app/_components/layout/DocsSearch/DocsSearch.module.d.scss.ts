@@ -8,5 +8,6 @@ declare const classNames: {
   readonly meta: "meta";
   readonly snippet: "snippet";
   readonly mark: "mark";
+  readonly visuallyHidden: "visuallyHidden";
 };
 export default classNames;

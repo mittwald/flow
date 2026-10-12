@@ -13,9 +13,11 @@ const newPath = "@mittwald/flow-react-components/all.css";
  * always the side-effect form (`import "…/styles"`), which is why that case is
  * the one the fixtures lead with.
  *
- * Exact match, not a prefix: `./styles` was a single export with nothing
- * underneath it, so there is no deeper path to rewrite and no risk of touching
- * an unrelated `styles` of someone else's.
+ * Exact match on the path, not a prefix: `./styles` was a single export with
+ * nothing underneath it, so there is no deeper path to rewrite and no risk of
+ * touching an unrelated `styles` of someone else's. A bundler query or fragment
+ * (`?url`, `?inline`) is split off before that comparison and carried over — it
+ * addresses the export, it does not name a different one.
  *
  * What this cannot reach is an `@import` in a `.css` or `.scss` file —
  * jscodeshift only walks the JavaScript and TypeScript extensions. `apply` says
@@ -25,11 +27,27 @@ const renamedCssExportTransform: Transform = (fileInfo, { j }) => {
   const root = j(fileInfo.source, { parser: "tsx" });
   let changed = false;
 
+  // A bundler addresses an asset through a query or fragment on the specifier,
+  // so `…/styles?url` is the old export requested as a URL. The rename applies
+  // to it just the same: match the path, carry the suffix over. Comparing the
+  // whole string leaves it pointing at an export the package no longer has.
   const rewrite = (node: { value?: unknown }): void => {
-    if (node.value === oldPath) {
-      node.value = newPath;
-      changed = true;
+    if (typeof node.value !== "string") {
+      return;
     }
+
+    const suffixAt = node.value.search(/[?#]/);
+    const [path, suffix] =
+      suffixAt === -1
+        ? [node.value, ""]
+        : [node.value.slice(0, suffixAt), node.value.slice(suffixAt)];
+
+    if (path !== oldPath) {
+      return;
+    }
+
+    node.value = `${newPath}${suffix}`;
+    changed = true;
   };
 
   // import … from "…", import "…"

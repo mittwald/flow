@@ -24,10 +24,8 @@ const targets: Record<string, string[]> = {
   "button-color-accent-to-success": ["Button", "SubmitButton"],
   "tooltip-trigger-delay-type": ["TooltipTrigger"],
   "modal-unsaved-changes-confirmation": ["Modal"],
-  "flags-to-component-defaults-provider": [
-    "flags",
-    "ComponentDefaultsProvider",
-  ],
+  // `flags` never reached the remote package; the provider replacing it does.
+  "flags-to-component-defaults-provider": ["flags"],
   "table-column-width-props": ["TableColumn"],
   "table-render-prop-removed": ["Table"],
   "table-cell-render-prop-removed": ["TableCell"],
@@ -51,10 +49,15 @@ const targets: Record<string, string[]> = {
     "AbortActionError",
   ],
   "form-resets-after-modal-close": ["Form"],
+  "image-rounded-corners-default": ["Image"],
   "overlay-controller-add-on-close-return-type": ["OverlayController"],
   "cartesian-chart-empty-view": ["CartesianChart"],
   "option-value-inferred-from-mixed-children": ["Option"],
   "action-prop-to-on-action": ["Action", "ActionProps"],
+  // `Popover` itself is not `@flr-generate` and not in `flr-universal`,
+  // so only the two components that inherit its props reach the remote
+  // package.
+  "popover-open-state-props": ["ContextualHelp", "ContextMenu"],
   "button-props-interfaces": [
     "ResetButtonProps",
     "SubmitButtonProps",

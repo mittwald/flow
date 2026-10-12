@@ -38,13 +38,11 @@ browser (`--browser.name=webkit`) only verifies one of them.
 
 ### Running the Tests
 
-First, install the required test browsers:
+The nx targets install the required test browsers for you, locally (on CI the
+workflows do it per job). On Linux they also need system libraries, which
+`pnpm test:browser:prepare` adds once.
 
-```sh
-pnpm test:browser:prepare
-```
-
-You can then run the tests using the following command:
+Run the tests using the following command:
 
 ```sh
 pnpm nx run remote-react-components:test:visual --browser.name=webkit
@@ -359,14 +357,19 @@ its ephemeral current refs, then loops over the same installed versions;
 ### Which versions are tested
 
 `dev/cross-version/prepare.ts` resolves the target versions from the published
-version list (`selectTargetVersions.ts`):
+version list (`selectTargetVersions.ts`). Only **stable** releases are eligible
+— a prerelease (`X.Y.0-next.N`) is a moving artifact of a line that has not
+shipped, nobody pins one, and its pre-release breakage would read as a
+backwards-compatibility finding. So `firstOfLine` on line 1.2 is `1.2.0`, never
+`1.2.0-next.0`.
 
-- **semver categories** when a stable line exists: `previous` (nearest below
-  current), `firstOfLine` (earliest on the current line),
-  `latestOfPreviousLine`.
-- **alpha-offset fallback** for prerelease-only histories (the current state):
-  `previous` plus fixed offsets back through the candidate list (`offset-10`,
-  `offset-100`, `offset-200`), skipping excluded versions.
+- **semver categories** (the current state): `previous` (nearest below current),
+  `firstOfLine` (earliest on the current line), `latestOfPreviousLine`.
+  Categories that cannot resolve are dropped — on the `next` line the current
+  line has no stable release yet, so only `previous` survives.
+- **alpha-offset fallback** when no stable release exists at all (the pre-1.0.0
+  history): `previous` plus fixed offsets back through the candidate list
+  (`offset-10`, `offset-100`, `offset-200`), skipping excluded versions.
 
 The resolved set is written to `cross-version.manifest.json` (generated, not
 committed).
@@ -417,3 +420,8 @@ structural divergence, so the version gates may need adjusting — a
 `minVersion`/`skipVersions` entry in `scenarioVersionSupport.ts` (see
 [Missing components and legitimate divergences](#missing-components-and-legitimate-divergences)).
 The label lets you find and fix that on the PR instead of after merge.
+
+**Dependabot PRs run both harnesses unconditionally** — no label, and a red run
+blocks the auto-merge (`dependabot-auto-merge.yml`). A `react-aria` or
+`react-dom` bump changes rendered structure without touching a component, which
+is precisely the divergence class the PR job's single harness does not see.

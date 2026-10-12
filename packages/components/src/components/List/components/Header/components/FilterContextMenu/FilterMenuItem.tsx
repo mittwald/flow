@@ -15,7 +15,7 @@ export const FilterMenuItem: FC<Props> = (props) => {
     <MenuItemView
       id={filterValue.id}
       onAction={() => {
-        if (selectionMode === "multiple" || !filterValue.isActive) {
+        if (selectionMode === "single" && !filterValue.isActive) {
           filterValue.toggle();
         }
       }}

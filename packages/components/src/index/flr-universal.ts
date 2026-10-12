@@ -7,6 +7,8 @@ export {
   type ActionProps,
   BrowserOnly,
   type BrowserOnlyProps,
+  ComponentDefaultsProvider,
+  type ComponentDefaultsProviderProps,
   CountryOptions,
   type CountryOptionsProps,
   DeprecationWarningProvider,

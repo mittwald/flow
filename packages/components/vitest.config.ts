@@ -1,24 +1,9 @@
 import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { createVitestBrowserTestConfig } from "../core/src/index.ts";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin.ts";
-
-/*
- * Vitest names a browser project's nested per-browser projects by writing onto
- * the instance objects. Two projects that spread the shared browser config would
- * share those objects, and the second name would overwrite the first – so every
- * browser project gets its own copies.
- */
-const browserTestConfig = () => ({
-  ...vitestBrowserTestConfig,
-  browser: {
-    ...vitestBrowserTestConfig.browser,
-    instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
-      (instance) => ({ ...instance }),
-    ),
-  },
-});
+import { unlayeredStylesPlugin } from "./dev/vite/unlayeredStylesPlugin.ts";
 
 export default mergeConfig(
   defaultConfig,
@@ -33,9 +18,18 @@ export default mergeConfig(
 
       projects: [
         {
+          /*
+           * The default, unlayered stylesheet variant. Both variants are
+           * compiled from `src/styles/index.scss`, which declares Flow's
+           * layers; this project flattens them, the way the release build
+           * derives `all.css` from `all-layered.css`.
+           */
           extends: true,
+          css: {
+            postcss: { plugins: [unlayeredStylesPlugin()] },
+          },
           test: {
-            ...browserTestConfig(),
+            ...createVitestBrowserTestConfig(),
             name: "browser",
             setupFiles: "./dev/vitest/setupBrowser.ts",
             include: ["src/**/*.browser.test.{ts,tsx}"],
@@ -56,7 +50,7 @@ export default mergeConfig(
             postcss: { plugins: [flowComponentsLayerPlugin()] },
           },
           test: {
-            ...browserTestConfig(),
+            ...createVitestBrowserTestConfig(),
             name: "browser-layered",
             setupFiles: "./dev/vitest/setupBrowserLayered.ts",
             include: ["src/tests/layered/**/*.browser.test.{ts,tsx}"],

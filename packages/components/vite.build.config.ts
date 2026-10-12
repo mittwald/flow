@@ -26,6 +26,7 @@ export default mergeConfig(
           default: "./src/index/default.ts",
           internal: "./src/index/internal.ts",
           "flr-universal": "./src/index/flr-universal.ts",
+          tunnel: "./src/index/tunnel.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
           "@mittwald/password-tools-js":

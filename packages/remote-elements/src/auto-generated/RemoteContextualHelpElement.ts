@@ -27,6 +27,7 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       getTargetRect: {},
       hidden: {},
       inert: {},
+      isDefaultOpen: {},
       isDialogContent: {},
       isEntering: {},
       isExiting: {},

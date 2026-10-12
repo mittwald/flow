@@ -21,6 +21,42 @@ const lineOf = (version: string): string => {
   return `${parsed.major}.${parsed.minor}`;
 };
 
+const push = (
+  targets: SelectedTargetVersion[],
+  category: string,
+  version: string | undefined,
+): void => {
+  if (version && !targets.some((t) => t.version === version)) {
+    targets.push({ category, version });
+  }
+};
+
+/**
+ * Offset fallback for a prerelease-only history: no stable release exists yet,
+ * so the semver categories have nothing to resolve against. Walks fixed
+ * distances back through the candidate list instead.
+ */
+const selectFromPrereleaseOnlyHistory = (
+  candidates: string[],
+  offsets: number[],
+): SelectedTargetVersion[] => {
+  const targets: SelectedTargetVersion[] = [];
+  if (candidates.length === 0) {
+    return targets;
+  }
+
+  push(targets, "previous", candidates[candidates.length - 1]);
+
+  for (const offset of offsets) {
+    const index = candidates.length - offset;
+    if (index >= 0) {
+      push(targets, `offset-${offset}`, candidates[index]);
+    }
+  }
+
+  return targets;
+};
+
 /**
  * Selects the set of previously-published versions to run cross-version smoke
  * tests against. Pure: no I/O. The caller supplies the published version list
@@ -35,38 +71,37 @@ export function selectCrossVersionTargetVersions(
   const excluded = new Set(excludedVersions);
 
   // Valid, non-excluded, strictly-older versions, ascending.
-  const candidates = publishedVersions
+  const allCandidates = publishedVersions
     .filter((v) => semver.valid(v) !== null)
     .filter((v) => !excluded.has(v))
     .filter((v) => semver.lt(v, currentVersion))
     .sort(semver.compare);
 
+  // Targets are STABLE releases only. A prerelease (`-next.*`) is a moving
+  // artifact of a line that has not shipped: consumers never pin one, and it
+  // carries pre-release breakage that reads as a backwards-compatibility
+  // finding. `firstOfLine` in particular would otherwise resolve to
+  // `X.Y.0-next.0` instead of the line's first real release `X.Y.0`.
+  const candidates = allCandidates.filter((v) => semver.prerelease(v) === null);
+
   if (candidates.length === 0) {
-    return [];
+    return selectFromPrereleaseOnlyHistory(
+      allCandidates,
+      options.offsets ?? DEFAULT_OFFSETS,
+    );
   }
 
-  const push = (
-    targets: SelectedTargetVersion[],
-    category: string,
-    version: string | undefined,
-  ): void => {
-    if (version && !targets.some((t) => t.version === version)) {
-      targets.push({ category, version });
-    }
-  };
-
-  // --- semver categories ---
-  const semverTargets: SelectedTargetVersion[] = [];
+  const targets: SelectedTargetVersion[] = [];
   const currentLine = lineOf(currentVersion);
 
   // previous: nearest below current
-  push(semverTargets, "previous", candidates[candidates.length - 1]);
+  push(targets, "previous", candidates[candidates.length - 1]);
 
   // firstOfLine: earliest candidate on the current line
   const currentLineVersions = candidates.filter(
     (v) => lineOf(v) === currentLine,
   );
-  push(semverTargets, "firstOfLine", currentLineVersions[0]);
+  push(targets, "firstOfLine", currentLineVersions[0]);
 
   // latestOfPreviousLine: latest candidate on the highest line strictly below currentLine
   const previousLine = candidates
@@ -79,36 +114,11 @@ export function selectCrossVersionTargetVersions(
       (v) => lineOf(v) === previousLine,
     );
     push(
-      semverTargets,
+      targets,
       "latestOfPreviousLine",
       previousLineVersions[previousLineVersions.length - 1],
     );
   }
 
-  // --- alpha/prerelease fallback ---
-  if (!semver.prerelease(currentVersion)) {
-    return semverTargets;
-  }
-
-  const hasLatestOfPreviousLine = semverTargets.some(
-    (t) => t.category === "latestOfPreviousLine",
-  );
-  if (hasLatestOfPreviousLine) {
-    return semverTargets;
-  }
-
-  const offsets = options.offsets ?? DEFAULT_OFFSETS;
-  const offsetTargets: SelectedTargetVersion[] = [];
-
-  // previous still makes sense in prerelease mode
-  push(offsetTargets, "previous", candidates[candidates.length - 1]);
-
-  for (const offset of offsets) {
-    const index = candidates.length - offset;
-    if (index >= 0) {
-      push(offsetTargets, `offset-${offset}`, candidates[index]);
-    }
-  }
-
-  return offsetTargets;
+  return targets;
 }

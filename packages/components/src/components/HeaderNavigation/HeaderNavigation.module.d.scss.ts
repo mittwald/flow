@@ -1,5 +1,7 @@
 declare const classNames: {
   readonly headerNavigation: "headerNavigation";
+  readonly list: "list";
+  readonly item: "item";
   readonly link: "link";
   readonly button: "button";
   readonly dark: "dark";

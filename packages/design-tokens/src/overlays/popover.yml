@@ -12,6 +12,8 @@ popover:
     value: "{neutral.color.100}"
   min-width:
     value: 200px
+  viewport-padding:
+    value: "{size-px.m}"
   border-width:
     value: "{border-width.100}"
   border-style:

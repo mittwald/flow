@@ -13,7 +13,7 @@ import type { ErrorComponent } from "next/dist/client/components/error-boundary"
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.scss";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { TunnelExit } from "@mittwald/flow-react-components/tunnel";
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { NavigationItem } from "@/app/_components/NavigationItem";
 
@@ -75,6 +75,9 @@ export default function Layout(props: PropsWithChildren) {
                       <Heading>Components</Heading>
                       <NavigationItem page="activity">Activity</NavigationItem>
                       <NavigationItem page="chart">Chart</NavigationItem>
+                      <NavigationItem page="coach-mark">
+                        CoachMark
+                      </NavigationItem>
                       <NavigationItem page="code-editor">
                         CodeEditor
                       </NavigationItem>

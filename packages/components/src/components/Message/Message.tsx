@@ -46,8 +46,8 @@ export const Message = flowComponent("Message", (props) => {
 
   const rootClassName = clsx(styles.message, styles[type], className);
 
-  const style = color
-    ? ({ "--message-background": color } as CSSProperties)
+  const style: CSSProperties | undefined = color
+    ? { "--message-background": color }
     : undefined;
 
   const formatter = useLocalizedStringFormatter(locales, "Message");

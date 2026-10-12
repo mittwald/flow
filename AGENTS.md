@@ -1,5 +1,9 @@
 # mittwald Flow — Agent Guide
 
+**Building an app or mStudio extension in your own project?** Read
+[packages/components/USAGE.md](packages/components/USAGE.md) first. Everything
+below is for changing Flow.
+
 Canonical guidance for AI coding agents (and a good primer for humans) working
 in this repository. Package-specific deep dives live next to the code — see
 [Where to look next](#where-to-look-next).
@@ -121,8 +125,9 @@ pnpm affected:test                         # only affected vs. main (what CI run
 pnpm nx test:unit components               # unit tests for one package
 pnpm nx test:compile components            # tsc --noEmit for one package
 
-pnpm test:browser:prepare                  # install Playwright browsers (once)
+pnpm test:browser:prepare                  # install Playwright browsers + system deps
 pnpm nx test:browser components --browser.name=webkit
+pnpm nx test:browser components -- --browser.name=webkit src/components/Button  # filtered: flags after --
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 pnpm nx test:visual:update remote-react-components              # update visual snapshots
 
@@ -167,6 +172,10 @@ commit the results.
   and a `scripts`-only manifest diff. The rule lives in
   `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
+- **`Closes #…` in a PR body works on `next` too.** GitHub only resolves it on
+  the default branch (`main`); `.github/workflows/close-linked-issues.yml`
+  closes the referenced issues when a PR merges into `next`. Write the keyword
+  when the PR finishes an issue, and keep `Part of #…` for a plain link.
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
@@ -185,17 +194,19 @@ commit the results.
   list can survive from one run while `dist` is restored from another — after
   which `tsc` finds it current, emits nothing, and the build reports success
   over an incomplete `dist`.
-- **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
-  `pnpm install` — expect installs after switching branches. `pre-push` runs
-  `pnpm lint` — which includes `format:check`, so a stray unformatted
-  `.md`/`.json`/`.yml` blocks the push, not the commit; `pnpm format` fixes it.
-  The hooks are written by simple-git-hooks' `postinstall` (allowlisted in
-  `allowBuilds`), so a **runner** gets them too — CI workflows that write git
-  set `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to opt out (#2932).
+- **Git hooks** live in `.githooks/`: `post-checkout` (branch checkouts only)
+  and `post-merge` run `pnpm install` — expect installs after switching
+  branches. `pre-push` runs `pnpm lint` — which includes `format:check`, so a
+  stray unformatted `.md`/`.json`/`.yml` blocks the push, not the commit;
+  `pnpm format` fixes it. `SKIP_GIT_HOOKS=1` skips any of them. The root
+  `prepare` points git at them (`core.hooksPath`, via
+  `.github/scripts/init-git-hooks.cjs`) and skips CI: on a runner a `pre-push`
+  lint aborted pushes after a publish had already happened (#2932).
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
-  week and merges them itself once CI and the visual suite are green — see
+  week and merges them itself once CI and the full visual and cross-version
+  suites are green — see
   [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
   deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
   closed PR only makes it come back next week.
@@ -205,8 +216,9 @@ commit the results.
   field is the instruction an agent executes; fill it even when there is no
   codemod, because for those entries it is the whole migration.
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
-- **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
-  WebKit only is a pragmatic choice, not a support statement.
+- **Browser support:** all three engines (Chromium, Firefox, WebKit). CI driving
+  WebKit, plus a non-blocking Firefox job for the browser tests, is a pragmatic
+  choice, not a support statement.
 
 ## Definition of Done — component work
 
@@ -336,22 +348,35 @@ where the error points.
   builds and regenerates every dependency first. Reach for a direct
   single-package script only when the dependencies are already current
 
-- **Symptom:** An `nx` graph target dies with **"configured to use 10.28.2 of
+- **Symptom:** An `nx` graph target dies with **"configured to use 11.19.0 of
   pnpm … your current pnpm is v…"**
 
   **Cause:** You prefixed a dependency-graph target with `corepack`; nested
-  per-task pnpm spawns resolve to a pnpm other than the pinned `10.28.2`
+  per-task pnpm spawns resolve to a pnpm other than the pinned `11.19.0`
 
   **Fix:** Use **bare `pnpm nx …`** for graph targets (`build`, `dev`, anything
   with `dependsOn`/`^build`). `corepack pnpm --filter <pkg> <script>` stays fine
-  for single-package scripts
+  for single-package scripts. The version in the message is whatever
+  `packageManager` pins, so read it there rather than from this entry
 
-- **Symptom:** Browser tests fail instantly with a missing-executable / "no
-  browser" error
+- **Symptom:** On macOS 27, every Firefox run dies before a single test with
+  **`Failed to connect to the browser session … [browser (firefox)]`** /
+  `browserType.launch: Timeout 180000ms exceeded`, while WebKit runs fine
 
-  **Cause:** Playwright browsers not installed in this environment
+  **Cause:** Firefox.app is installed, and macOS 27 then protects
+  `~/Library/Application Support/Firefox` — which Playwright's bundled Firefox
+  reads at startup
+  ([microsoft/playwright#42768](https://github.com/microsoft/playwright/issues/42768),
+  fixed in Gecko, not yet in a Playwright release). The
+  `sandbox_extension_issue_file_to_process` and `RenderCompositorSWGL` lines in
+  the log are red herrings
 
-  **Fix:** `pnpm test:browser:prepare` once
+  **Fix:** It is no test result — report Firefox as unchecked, never as red. To
+  get one, run the suite in the Playwright Linux image matching the repo's
+  `playwright` version (`mcr.microsoft.com/playwright:v<version>-noble`, the
+  platform CI gates on) with its own `pnpm install` — the host's `node_modules`
+  are darwin builds. Pin cores with `--cpuset-cpus`, not `--cpus`: vitest sizes
+  its parallelism from `nproc`, which `--cpus` leaves at the host's count
 
 - **Symptom:** A visual test stays red in CI after you regenerated screenshots
   locally on macOS
@@ -405,7 +430,10 @@ where the error points.
   **Fix:** Add the **`run-cross-version-tests`** PR label
   (`test-cross-version-label.yml`) to run both harnesses on the branch. Fix real
   divergences by gating per-version — `test.skipIf(crossVersion({ below }))` or
-  a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. See
+  a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. A
+  normalizer may only drop notation that carries no meaning at all (`class` is
+  compared as a token set, because separators and token order are not part of
+  it); anything a browser could render differently stays compared. See
   [remote-react-components/CONTRIBUTE.md](packages/remote-react-components/CONTRIBUTE.md#running-them-on-a-pull-request)
 
 - **Symptom:** A vite/vitest config you added floods every build and test run
@@ -438,34 +466,16 @@ where the error points.
   artifact, not just the plugin in isolation — a unit test and a test project
   with their own config both stay green while the release build is wrong
 
-- **Symptom:** A second **browser** vitest project makes the run die at startup
-  with **"Cannot define a nested project for a &lt;browser&gt; browser. The
-  project name '&lt;name&gt; (&lt;browser&gt;)' was already defined"**
+- **Symptom:** A **browser** vitest project you added never runs, and the suite
+  reports success
 
-  **Cause:** Vitest names the per-browser child projects by writing onto the
-  `browser.instances` objects. Spreading the shared `vitestBrowserTestConfig`
-  into two projects shares those objects by reference, so the second project's
-  name overwrites the first
+  **Cause:** The package's `test:browser` script selects projects by name. A
+  bare `--project=browser` matches only that one and silently skips the new one
 
-  **Fix:** Give each browser project its own copies:
-  `instances: vitestBrowserTestConfig.browser.instances.map((instance) => ({ ...instance }))`.
-  Also check the package's `test:browser` script actually selects the new
-  project — a bare `--project=browser` silently skips it, a glob like
-  `--project=browser*` (as `test:unit` already does with `unit*`) picks both up
-
-- **Symptom:** A CI workflow that runs `pnpm install` and then pushes, merges or
-  checks out spends minutes in `eslint`/`stylelint`/`prettier`, or reinstalls in
-  the middle of a merge
-
-  **Cause:** simple-git-hooks is allowlisted in `allowBuilds`, so its
-  `postinstall` writes `.git/hooks` on **every** `pnpm install` — runners
-  included. `pre-push` is `pnpm lint`, `post-merge`/`post-checkout` are
-  `pnpm install`
-
-  **Fix:** Add `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to the workflow's `env` (see
-  `publish.yml`). Where a failed push would strand something already published,
-  also pass `git push --no-verify` — that guard sits at the push and does not
-  depend on the env var staying put (#2932)
+  **Fix:** Use a glob — `--project=browser*`, as `test:unit` already does with
+  `unit*`. (Each project's browser instances come from
+  `createVitestBrowserTestConfig()`, which hands out fresh objects per call, so
+  the projects cannot collide over their generated names.)
 
 - **Symptom:** A visual test that hovers before `testScreenshot` captures the
   **non-hovered** state — the diff looks as if the CSS never applied
@@ -529,19 +539,6 @@ where the error points.
   to `null` with a `console.error` before `postMessage` ever sees them — so the
   suite renders a component missing the prop, not the `DataCloneError`. Read the
   console, or verify in `apps/remote-dom-demo` over the iframe connection
-
-- **Symptom:** `vitest run --update <file>` rewrites **every** baseline instead
-  of the one file's, and `git status` shows snapshots you never touched
-
-  **Cause:** `--update` takes an optional value, so it swallows the positional
-  test filter that follows it. The run then matches all files, updates all of
-  them, and reports the full test count (354, not 2) — the only signal that
-  anything went wrong
-
-  **Fix:** Put the filter **before** the flag (`vitest run <file> --update`) or
-  pin the flag's value (`--update=true <file>`). Check `git status` after any
-  `--update` and revert baselines outside your change; a stray one is
-  indistinguishable from an intentional update once committed
 
 - **Symptom:** One environment of a visual scenario fails while the other
   passes, and the **`update-screenshots`** label reports _"No Screenshot Updates
@@ -608,13 +605,56 @@ where the error points.
   regenerate. `checkSerializableProps` now fails generation on new ones; the
   pre-existing set is listed in `acknowledgedValueReturningProps`
 
-- **Symptom:** Hand-edited `MIGRATION.md` reverts on the next build, or CI fails
-  "Check all generated code is committed"
+- **Symptom:** A `components` browser test keeps **passing** after you change
+  `packages/icons` — including a test written to fail on exactly that change.
+  The build is not the problem: `pnpm nx build icons` runs `tsc` and `dist`
+  holds the new code
 
-  **Cause:** `MIGRATION.md` is generated from
-  `packages/codemods/src/migrations/<id>/entry.md`
+  **Cause:** `packages/components/vite.config.ts` lists `@mittwald/flow-icons`
+  in `optimizeDeps.include`, so vite pre-bundles it. The prebundle is keyed on
+  the lockfile and the config, not on the contents of a linked workspace
+  package's `dist` — so a rebuilt `dist` does not invalidate it and the test
+  keeps loading the old bundle
 
-  **Fix:** Edit the catalogue entry, run `pnpm nx build codemods`, commit both
+  **Fix:** Delete `packages/components/node_modules/.vite*` after rebuilding.
+  And confirm a new regression test actually fails without its fix: this one
+  passed in both directions, which is the only symptom you get
+
+- **Symptom:** `stylelint` fails with **`flow/no-unknown-global-flow-class`** —
+  a `:global(.flow--…)` name resolves to nothing
+
+  **Cause:** The class-name generator
+  (`packages/components/dev/vite/cssModuleClassNameGenerator.ts`) **drops the
+  suffix when it equals the component name**, so `ColumnLayout`'s
+  `.columnLayout` compiles to `flow--column-layout`, not
+  `flow--column-layout--column-layout`. The names cannot be derived by hand, and
+  a component that moves leaves every reference to it dead
+
+  **Fix:** Copy the name from the component's committed `*.module.d.scss.ts` —
+  that is what the rule checks against — or take the rule's "Did you mean"
+  suggestion. Just added the class? Regenerate the stubs first:
+  `pnpm nx build:scss-types components`. The same applies to ESLint's
+  `flow/no-unknown-flow-class`, which checks hardcoded `flow--…` strings in
+  TS/TSX (#3095). Before the rule (#3091) this class of bug failed completely
+  silently: no build error, no console warning, and the docs site and Storybook
+  kept rendering
+
+- **Symptom:** The **Routing** check fails on a `fix:` PR with
+  **`Commit <sha> is a 'feat' (…) — a merge commit brings it onto 'main'`**, or
+  on a `feat:` PR into `next` with **`Commit <sha> marks a breaking change`** —
+  although the PR title is valid
+
+  **Cause:** The check reads every commit of the PR, not just the title. `main`
+  allows merge commits and `next` allows only those, and a merge commit brings
+  each branch commit onto the line. #3290 carried a `feat` commit under a `fix:`
+  title and released `main` as 1.3.0 (#3333); #3166 carried a `!` commit and
+  opened `2.0.0-next.0` (#3199). The check counts `feature` as `feat` and
+  matches breaking markers the way lerna's parser does (`Fix!:`, `fix()!:`,
+  `* BREAKING CHANGE:`)
+
+  **Fix:** Reword the commit (`git rebase -i`, then force-push your branch),
+  squash the branch locally into one commit, or move the feature to `next`. A PR
+  with more than 250 commits fails too — GitHub lists no more, so split it
 
 ## Where to look next
 

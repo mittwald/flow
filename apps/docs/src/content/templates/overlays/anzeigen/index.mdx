@@ -1,0 +1,63 @@
+---
+title: Anzeigen
+description:
+  Ein Overlay, das Inhalte zu einem Objekt zeigt, ohne dass daraus eine Aktion
+  folgt.
+---
+
+<LiveCodeEditor example="anzeige-overlay" editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende dieses Overlay für Inhalte, die zu einem Objekt gehören, die Seite aber
+sprengen würden und aus denen keine weitere Aktion folgt: Details, Protokolle,
+Vorschauen oder Belege. Wird etwas eingegeben, nimm ein Overlay zum
+[Anlegen & Bearbeiten](/templates/overlays/anlegen-bearbeiten); ist eine
+Entscheidung zu treffen, eines zum
+[Bestätigen](/templates/overlays/bestaetigen). Was jeder Besucher dauerhaft
+sehen soll, gehört fest auf die [Detailseite](/templates/seiten/detailseite).
+
+---
+
+# Aufbau
+
+- **Overlay-Container** – Bei wenig Inhalt eignet sich ein
+  [Modal](/components/overlays/modal), das mittig erscheint; bei viel Inhalt mit
+  erwartetem Scrollen – etwa ein Log oder eine lange Liste – bietet sich die
+  `offCanvas`-Variante an, die für sich scrollt.
+- **Überschrift** – Eine [Heading](/components/content/heading) benennt kurz das
+  gezeigte Objekt.
+- **Content** – Der Inhalt lässt sich mit
+  [Sections](/components/structure/section) und einem
+  [ColumnLayout](/components/structure/column-layout) übersichtlich
+  strukturieren. Werte, die weiterverwendet werden, erhalten einen
+  [CopyButton](/components/actions/copy-button); das Overlay ist oft der einzige
+  Ort, an dem ein Wert vollständig steht.
+- **Aktion** – Eine [ActionGroup](/components/actions/action-group) trägt als
+  einzige Aktion „Schließen".
+
+---
+
+# Varianten und Abwandlung
+
+## Einmal-Anzeige eines Geheimnisses
+
+Ein Sonderfall, in dem das Overlay nach dem Anlegen erscheint: Das Ergebnis
+enthält einen Wert, der später nicht erneut abrufbar ist – ein API-Token,
+Recovery-Codes oder ein Auth-Code. Der Warnhinweis steht vor dem Wert, damit vor
+dem Schließen klar ist, dass es keine zweite Gelegenheit gibt.
+
+<LiveCodeEditor example="anzeige-overlay-einmalig" editorCollapsed />
+
+## IllustratedMessage
+
+Eine [IllustratedMessage](/components/content/illustrated-message) wird
+verwendet, wenn eine Botschaft im Modal besonders hervorgehoben werden soll. Sie
+eignet sich vor allem für wichtige Zustände wie
+[Fehler](/foundations/content-guidelines/error-handling#fehler-beim-durchfuhren-von-aktionen-fehler-bei-serverseitigen-aktionen),
+leere Inhalte oder abgeschlossene Aktionen und macht diese visuell schnell
+erfassbar.
+
+<LiveCodeEditor example="anzeige-overlay-fehler" editorCollapsed />

@@ -15,6 +15,7 @@ export class RemoteCartesianChartElement extends FlowRemoteElement<RemoteCartesi
       data: {},
       flexGrow: {},
       height: {},
+      layout: {},
       syncId: {},
       syncMethod: {},
     };

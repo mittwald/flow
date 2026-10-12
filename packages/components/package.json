@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "1.1.43",
+  "version": "1.4.31",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
@@ -23,6 +23,10 @@
     "./flr-universal": {
       "types": "./dist/types/index/flr-universal.d.ts",
       "import": "./dist/js/flr-universal.mjs"
+    },
+    "./tunnel": {
+      "types": "./dist/types/index/tunnel.d.ts",
+      "import": "./dist/js/tunnel.mjs"
     },
     "./nextjs": {
       "types": "./dist/types/integrations/nextjs/index.d.ts",
@@ -64,6 +68,7 @@
     "dev": "storybook dev --port 6006",
     "test:browser": "vitest run --project=browser* --browser.headless",
     "test:browser:dev": "vitest dev --project=browser*",
+    "test:browser:prepare": "if [ -z \"$CI\" ]; then playwright install firefox webkit; fi",
     "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
     "test:unit": "vitest run --project=unit*",
     "test:unit:dev": "vitest dev --project=unit*"
@@ -79,9 +84,9 @@
     "@internationalized/string-compiler": "^3.4.1",
     "@lezer/common": "^1.5.2",
     "@lezer/highlight": "^1.2.3",
-    "@mittwald/flow-icons": "workspace:*",
+    "@mittwald/flow-icons": "workspace:^",
     "@mittwald/password-tools-js": "^3.0.0",
-    "@mittwald/react-tunnel": "workspace:*",
+    "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^4.2.2",
     "@react-aria/form": "^3.2.1",
     "@react-aria/i18n": "^3.13.1",
@@ -149,7 +154,7 @@
     "@storybook/react-vite": "^10.5.10",
     "@tabler/icons-react": "^3.46.0",
     "@teispace/next-themes": "^2.0.4",
-    "@types/node": "25.9.5",
+    "@types/node": "25.9.8",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitejs/plugin-react": "5.2.0",
     "@vitest/browser": "^4.1.11",
@@ -158,6 +163,7 @@
     "autoprefixer": "^10.5.4",
     "camelcase": "^9.0.0",
     "decamelize": "^6.0.1",
+    "eslint": "^10.9.0",
     "fs-jetpack": "^5.1.0",
     "glob": "^13.0.6",
     "happy-dom": "^20.11.6",
@@ -181,6 +187,7 @@
     "stylelint": "^17.14.1",
     "tsx": "^4.23.12",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.67.0",
     "unplugin-dts": "^1.0.3",
     "vite": "^8.2.2",
     "vite-plugin-externalize-deps": "^0.10.0",

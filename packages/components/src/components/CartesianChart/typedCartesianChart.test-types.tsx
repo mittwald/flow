@@ -6,6 +6,7 @@ import { ChartLegend } from "@/components/CartesianChart/components/ChartLegend"
 import { XAxis } from "@/components/CartesianChart/components/XAxis";
 import type { ChartDataValue } from "@/components/CartesianChart/types";
 import { Area } from "@/components/CartesianChart/components/Area";
+import { Bar } from "@/components/CartesianChart/components/Bar";
 
 interface ChartData {
   time: Date;
@@ -32,6 +33,17 @@ function filters() {
   function testDataKeyFnForbidden() {
     // @ts-expect-error Is unknown
     <ExampleChartWithoutXAxisType.Area dataKey={() => 3} />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testKnownBarProperty() {
+    <ExampleChartWithoutXAxisType.Bar dataKey="count" />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testUnknownBarProperty() {
+    // @ts-expect-error Is unknown
+    <ExampleChartWithoutXAxisType.Bar dataKey="shouldError" />;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -183,6 +195,29 @@ function filters() {
   function testUntypedAreaWithDataKeyMissingLabel() {
     // @ts-expect-error Is unknown
     <Area
+      dataKey={(data) => {
+        expectTypeOf(data).toMatchTypeOf<ChartDataValue>();
+        return 1337;
+      }}
+    />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testUntypedBarWithDataKeyAndLabel() {
+    <Bar dataKey="foo" />;
+    <Bar
+      dataKey={(data) => {
+        expectTypeOf(data).toMatchTypeOf<ChartDataValue>();
+        return 1337;
+      }}
+      dataKeyLabel={"foo"}
+    />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testUntypedBarWithDataKeyMissingLabel() {
+    // @ts-expect-error Is unknown
+    <Bar
       dataKey={(data) => {
         expectTypeOf(data).toMatchTypeOf<ChartDataValue>();
         return 1337;

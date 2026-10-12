@@ -25,8 +25,31 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Badge, Flex, Label, Text, Wrap, AccentBox },
+    components: {
+      AccentBox,
+      Badge,
+      Button,
+      ContextualHelp,
+      ContextualHelpTrigger,
+      Flex,
+      Label,
+      Text,
+      Wrap,
+    },
   }) => {
+    const contextualHelp = (
+      <ContextualHelp>
+        <Text>Every value has a story to tell.</Text>
+      </ContextualHelp>
+    );
+
+    const contextualHelpTrigger = (
+      <ContextualHelpTrigger subject="the value">
+        <Button />
+        {contextualHelp}
+      </ContextualHelpTrigger>
+    );
+
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
@@ -51,6 +74,18 @@ test.each(testEnvironments)(
                 <Badge isDisabled color={color}>
                   <Label>Scope</Label>
                   <Text>Value</Text>
+                </Badge>
+                <Badge color={color}>
+                  Value
+                  {contextualHelp}
+                </Badge>
+                <Badge color={color}>
+                  Value
+                  {contextualHelpTrigger}
+                </Badge>
+                <Badge color={color} onClose={() => console.log("onClose")}>
+                  Value
+                  {contextualHelp}
                 </Badge>
               </Flex>
             </AccentBox>

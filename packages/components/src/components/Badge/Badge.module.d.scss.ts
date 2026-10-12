@@ -2,6 +2,7 @@ declare const classNames: {
   readonly badge: "badge";
   readonly content: "content";
   readonly button: "button";
+  readonly action: "action";
   readonly close: "close";
   readonly scope: "scope";
   readonly value: "value";
