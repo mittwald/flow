@@ -8,6 +8,8 @@ import { Button, ContextMenuTrigger } from "@/components/public";
 import { duration } from "@/components/Action/models/ActionState";
 import { useOverlayController } from "@/lib/controller";
 import { useRef } from "react";
+import styles from "./ContextMenu.module.scss";
+import popoverStyles from "@/components/Popover/Popover.module.scss";
 
 const expectIconInDom = (iconName: string) => {
   expect(
@@ -113,4 +115,34 @@ describe("labeling", () => {
       .element(page.getByRole("menu", { name: "Open menu" }))
       .toBeInTheDocument();
   });
+});
+
+test("keeps its popover classes next to a consumer className", async () => {
+  const Menu = () => {
+    const controller = useOverlayController("ContextMenu", {
+      isDefaultOpen: true,
+    });
+    const anchorRef = useRef<HTMLDivElement>(null);
+    return (
+      <>
+        <div ref={anchorRef}>Anchor</div>
+        <ContextMenu
+          controller={controller}
+          triggerRef={anchorRef}
+          className="consumer-class"
+          aria-label="Actions"
+        >
+          <MenuItem>Menu Item</MenuItem>
+        </ContextMenu>
+      </>
+    );
+  };
+
+  await render(<Menu />);
+  await expect.element(page.getByRole("menu")).toBeInTheDocument();
+
+  expect(document.querySelector(".consumer-class")).toHaveClass(
+    styles.popover,
+    popoverStyles.popover,
+  );
 });
