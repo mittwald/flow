@@ -13,6 +13,8 @@ import {
   Content,
   Flex,
   Heading,
+  IconSearch,
+  IllustratedMessage,
   LoadingSpinner,
   Modal,
   type OverlayController,
@@ -240,12 +242,13 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
     <Modal
       controller={controller}
       size="m"
+      showCloseButton={false}
       onOpen={() => {
         setQuery("");
         loadIndex();
       }}
     >
-      <Heading>Suche</Heading>
+      <Heading className={styles.visuallyHidden}>Suche</Heading>
       <Content>
         <Flex direction="column" gap="m" onKeyDownCapture={onKeyDownCapture}>
           <SearchField
@@ -265,7 +268,14 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
               Die Suche konnte nicht geladen werden. Bitte versuche es erneut.
             </Text>
           ) : hasQuery && index && items.length === 0 ? (
-            <Text>Keine Ergebnisse für „{query.trim()}“.</Text>
+            <IllustratedMessage>
+              <IconSearch />
+              <Heading>Nichts gefunden</Heading>
+              <Text>
+                Zu deinem Suchbegriff konnten keine passenden Einträge gefunden
+                werden.
+              </Text>
+            </IllustratedMessage>
           ) : (
             <Flex
               elementType="ul"

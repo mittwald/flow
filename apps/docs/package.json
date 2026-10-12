@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "build:component-tokens": "tsx dev/generateComponentTokens.ts",
     "build:deps": "",
     "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
     "build:scss-types": "tsx dev/generateScssTypes.ts",

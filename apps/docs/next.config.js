@@ -1,4 +1,5 @@
 import { createMDX } from "fumadocs-mdx/next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
@@ -13,7 +14,6 @@ const nextConfig = {
   agentRules: false,
   output: "export",
   basePath: process.env.NEXT_BASE_PATH ?? "",
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   transpilePackages: ["next-mdx-remote"],
   experimental: {
     useTypeScriptCli: true,
@@ -23,6 +23,19 @@ const nextConfig = {
   },
 };
 
+const pageExtensions = ["js", "jsx", "mdx", "ts", "tsx"];
+
 const withMDX = createMDX();
 
-export default withMDX(nextConfig);
+/*
+ * `page.dev.tsx` is a page under `next dev` only, so the static export ships
+ * none of the development tooling — the release-figure example stages.
+ */
+export default (/** @type {string} */ phase) =>
+  withMDX({
+    ...nextConfig,
+    pageExtensions:
+      phase === PHASE_DEVELOPMENT_SERVER
+        ? ["dev.tsx", ...pageExtensions]
+        : pageExtensions,
+  });

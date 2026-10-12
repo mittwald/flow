@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { beforeEach, expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { Label } from "@/components/Label";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { RatingSegment } from "@/components/Rating/components/RatingSegment";
 import { IconStarFilled } from "@/components/Icon/components/icons";
+import { parkPointer } from "@/lib/dev/parkPointer";
 import styles from "./Rating.module.scss";
 
 const segments = (): HTMLElement[] =>
@@ -19,6 +20,9 @@ const fillStates = (): boolean[] =>
     const filled = segment.querySelector(`.${styles.filled}`);
     return !!filled && getComputedStyle(filled).opacity === "1";
   });
+
+// A pointer left over the next Rating previews a segment in Firefox.
+beforeEach(parkPointer);
 
 test("segment children set the number of segments and their labels", async () => {
   await render(

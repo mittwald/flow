@@ -6,6 +6,7 @@ import {
   Heading,
   Label,
   Modal,
+  Section,
   TextField,
   useModalController,
 } from "@mittwald/flow-react-components";
@@ -41,16 +42,19 @@ export default () => {
         <Form form={form} onSubmit={handleSubmit}>
           <Heading>Beschreibung ändern</Heading>
           <Content>
-            <Field
-              name="description"
-              rules={{
-                required: "Bitte gib eine Beschreibung ein",
-              }}
-            >
-              <TextField autoFocus>
-                <Label>Beschreibung</Label>
-              </TextField>
-            </Field>
+            <Section>
+              <Field
+                name="description"
+                rules={{
+                  required:
+                    "Bitte gib eine Beschreibung ein",
+                }}
+              >
+                <TextField autoFocus>
+                  <Label>Beschreibung</Label>
+                </TextField>
+              </Field>
+            </Section>
           </Content>
           <ActionGroup>
             <SubmitButton>Speichern</SubmitButton>

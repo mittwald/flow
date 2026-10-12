@@ -2,6 +2,7 @@
 .shell {
   container-type: inline-size;
   height: 100%;
+  background: var(--color--background-gradient);
 }
 
 .app {
@@ -9,10 +10,11 @@
      full-page app) so the cards below can fill it and scroll their own content
      instead of growing the page. */
   height: 100%;
+  max-width: 1800px;
+  margin-inline: auto;
   overflow: hidden;
   padding-block: var(--size-px--l);
   padding-inline: var(--size-px--xl);
-  background: var(--color--background-gradient);
 }
 
 /*

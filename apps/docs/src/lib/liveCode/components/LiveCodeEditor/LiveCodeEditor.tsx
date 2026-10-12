@@ -432,7 +432,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
           </div>
         )}
 
-        <LiveError />
+        <LiveError data-live-error />
       </div>
     </LiveProvider>
   );

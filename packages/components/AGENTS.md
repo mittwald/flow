@@ -1,10 +1,10 @@
 # @mittwald/flow-react-components — Agent Guide
 
-> **Building an application _with_ Flow?** Read [USAGE.md](./USAGE.md) instead —
-> component selection, layout and spacing, what is safe to depend on, and where
-> the documentation lives in machine-readable form. This guide is about changing
-> Flow itself, and its patterns (`flowComponent`, `PropsContext`, views, CSS
-> modules) do not belong in an application.
+**Building an app or mStudio extension in your own project?** Read
+[USAGE.md](./USAGE.md) first — component selection, templates, layout and
+spacing, what is safe to depend on. Everything below is for changing Flow, and
+its patterns (`flowComponent`, `PropsContext`, views, CSS modules) do not belong
+in an application.
 
 Component patterns for the core package. Read the
 [root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md) first for
@@ -91,9 +91,21 @@ Conventions:
 - Most components wrap `react-aria-components` primitives; expose ARIA props
   directly only where React Aria lacks the behavior.
 - **Keep the returned JSX readable.** Lift computed nodes (icon, label, tooltip
-  text) and non-trivial conditionals into named consts above the `return`; the
-  returned tree should stay scannable — no large inline ternaries or deep logic
-  in the markup. Split a growing tree into subcomponents.
+  text) into named consts above the `return`; the returned tree should stay
+  scannable — no large inline ternaries or deep logic in the markup. Split a
+  growing tree into subcomponents.
+- **Alternative UI parts get one const each; the JSX picks.** When the output
+  switches between variants, give every variant its own const and decide in the
+  returned JSX with a one-line ternary or `&&`. Never assign a multi-line
+  ternary to a const — it hides the decision inside the variable and forces the
+  reader through both branches at once.
+
+  ```tsx
+  const skeletonDonut = <span className={styles.skeleton} inert />;
+  const donut = <Aria.ProgressBar …>…</Aria.ProgressBar>;
+
+  return <div>{isSkeleton ? skeletonDonut : donut}</div>;
+  ```
 
 ## PropsContext — contextual composability
 
@@ -263,7 +275,13 @@ if ("action" in props) {
   the committed `*.module.d.scss.ts` stubs declare, run through the build's own
   `cssModuleClassNameGenerator`. The reference has to name a class some
   component actually generates — otherwise the selector matches nothing, which
-  used to fail without a single signal anywhere.
+  used to fail without a single signal anywhere. Its ESLint twin
+  `flow/no-unknown-flow-class` (`dev/eslint/`) checks hardcoded `flow--…` names
+  in `src/**` TS/TSX strings — `className`s, `querySelector`s, test assertions —
+  against the same set (`dev/flowClassNames/`). A runtime-built prefix
+  (`` `flow--button--${color}` ``) passes if a known class starts with it; a
+  test asserting a removed class stays absent needs an
+  `eslint-disable-next-line` with the reason.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
@@ -313,8 +331,10 @@ if ("action" in props) {
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
 
 Run: `pnpm nx test:unit components`,
-`pnpm nx test:browser components --browser.name=webkit`. Browser tests need
-`pnpm test:browser:prepare` once.
+`pnpm nx test:browser components --browser.name=webkit`. The browser targets
+install the Playwright browsers for you **locally**; `pnpm test:browser:prepare`
+adds the system libraries Linux needs. On CI they do nothing — the workflows
+provision browsers themselves, per job and under their own cache keys.
 
 **Iterate through nx too**, not with a bare `vitest`. Everything after the `--`
 goes to vitest, so a single file and watch mode have nx targets as well:
@@ -330,7 +350,7 @@ compiles against. A bare `vitest run` skips it and renders against whatever
 is simply absent, and CSS drops every declaration referencing it without a
 warning (#3194).
 
-Three traps cost time in every new browser test:
+Four traps cost time in every new browser test:
 
 - **Click the label, not the control.** `Checkbox`, `Radio`, `Switch` and
   `Rating` stack their icons on top of a visually hidden input, so playwright
@@ -347,6 +367,15 @@ Three traps cost time in every new browser test:
   `render()` runs before React has committed and reads `null`. That turns an
   assertion that something is _absent_ into a silent pass, so give any helper
   that queries the DOM directly a guard that throws when its element is missing.
+- **A pointer left behind hovers the next render.** The pointer stays where the
+  last test left it, and that can be the previous file: each browser page runs
+  file after file, in parallel runs too. Firefox hovers what a test renders
+  underneath. The symptom is an `expect.poll` that keeps reading a hover state
+  (a Rating preview, an open tooltip) until "Matcher did not succeed in time".
+  Call `parkPointer()` from `@/lib/dev/parkPointer` in the file's `beforeEach`
+  (`Rating`, `PasswordCreationField`); an `afterEach` leaves the file's first
+  test exposed. It is opt-in on purpose: moving the pointer before every test
+  breaks `Tooltip`'s keyboard-focus test.
 
 ## i18n & a11y
 
@@ -367,8 +396,80 @@ Three traps cost time in every new browser test:
   initially: every `locales/` directory in the package gets the new file.
 - Icon-only buttons get a localized `aria-label`; decorative icons are
   `aria-hidden` (the `Icon` component handles this when no label is given).
-- Form fields wire label/description/error via `useFieldComponent` (generates
-  ids, sets `aria-describedby`).
+- Form fields wire label/description/error via `useFieldComponent`.
+  `wrapperProps` go on the outer element, `controlProps` on what assistive
+  technology lands on (the input or the group), spread after `rest`: its
+  `aria-describedby` references the error only while one is rendered and already
+  contains the consumer's own ids. See
+  [Building a form field](#building-a-form-field).
+
+## Building a form field
+
+A form field is any component a user enters a value with — anything that calls
+`useFieldComponent`. It supports the whole contract below, end to end: prop →
+behavior → styling → `Label` state → test. Gaps in existing fields are tracked
+in #3368.
+
+| Aspect                          | Requirement                                                                                                                                                                                                                     |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isDisabled`                    | Control is not operable (`disabled` or `aria-disabled`), disabled styling via the `formControl` mixin, `Label` disabled. Every inner button too.                                                                                |
+| `isReadOnly`                    | Value cannot change, control still focusable and submitted. Native `readonly` / react-aria's `isReadOnly` where it exists, otherwise `aria-readonly` — never by disabling the control. Inner buttons that change the value off. |
+| `isRequired`                    | `required` or `aria-required` on the control; `Label` drops its "optional" marker (`useFieldComponent` does that).                                                                                                              |
+| `isInvalid`                     | `aria-invalid` on the control, invalid styling, `FieldError` rendered and linked.                                                                                                                                               |
+| `validationBehavior`            | `"native"` blocks form submission on a constraint violation, `"aria"` does not. react-hook-form's `Field` passes `"aria"`.                                                                                                      |
+| `Label` / `FieldDescription`    | Children slots via `useFieldComponent`; `Label` names the control. `controlProps` (with `aria-describedby`) land on the **focusable control** (or the group of a grouped control), not on a wrapper `div`.                      |
+| `name` / `form`                 | The value is in the `FormData` of the surrounding (or `form`-referenced) form. A custom control renders a hidden input.                                                                                                         |
+| `defaultValue` / `value`        | Both work; `onChange` reports user changes with the field's own value type (a `number` field reports a `number`).                                                                                                               |
+| `ref`                           | Points at the focusable control — react-hook-form focuses it on a validation error.                                                                                                                                             |
+| `autoFocus`, `onFocus`/`onBlur` | Reach the focusable control. react-hook-form marks a field touched via `onBlur`.                                                                                                                                                |
+
+An exception needs a reason that holds for the field's nature (a `Slider` always
+has a value, so it has no required state) — not "not implemented yet".
+
+Checklist beyond the component itself:
+
+- **Contract test.** Call `testFormFieldContract`
+  (`src/tests/formFieldContract/`) in the field's `*.browser.test.tsx`. The
+  adapter renders the field, names its control, two values (the first one
+  submits an entry, the two submit different entries), their `FormData` entries
+  and a user interaction that changes the value. The interaction passes `force`
+  on, so the test can also try it on a disabled or read-only field.
+  `getValueButtons` narrows the inner buttons a read-only field turns off; it
+  defaults to all. Justified exceptions go in `exceptions` with their reason. An
+  excepted aspect must fail on one of its own expectations — once it passes, or
+  fails on a lookup or a timeout instead, the run fails:
+
+  ```tsx
+  testFormFieldContract("TextField", {
+    render: (props) => <TextField {...props} />,
+    getControl: (screen) => screen.getByRole("textbox"),
+    values: ["foo", "bar"],
+    toFormValue: (value) => value,
+    changeValue: async (screen, { force }) => {
+      await userEvent.fill(screen.getByRole("textbox"), "bar", { force });
+    },
+  });
+  ```
+
+  It checks behavior and ARIA, not looks — the disabled, read-only and invalid
+  states also get scenarios in the field's visual test
+  (`packages/remote-react-components/src/tests/visual`).
+
+- **react-hook-form.** Register the field in the props context of
+  `src/integrations/react-hook-form/components/Field/Field.tsx`. `Field` passes
+  `name`, `value` and `defaultValue` together, `onChange`, `onBlur`, `ref`,
+  `form`, `isRequired`, `isReadOnly`, `isInvalid` and `validationBehavior` —
+  spread the rest props through instead of destructuring a fixed list, or they
+  are dropped silently. A field whose value prop is not `value` gets it mapped
+  there (`selectedKey` for `ComboBox`, `isSelected` for `Checkbox`). `Field`
+  does not pass `isDisabled` yet (#3368).
+- **Remote.** A field that mirrors its value with `useControlledHostValueProps`
+  passes the type's empty value (see the controlled-from-the-first-render
+  convention below). A text input among them also needs its `flr-*` tag in
+  `controlledComponentNames`
+  (`packages/remote-react-components/src/lib/createRemoteComponent.ts`), or it
+  drops characters under fast typing
+  ([docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md)).
 
 ## Public API surfaces
 

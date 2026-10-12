@@ -1,6 +1,5 @@
 import { type LanguageName } from "@uiw/codemirror-extensions-langs";
 
-/* @internal */
 export const ALL_LANGUAGES = [
   "apl",
   "asc",

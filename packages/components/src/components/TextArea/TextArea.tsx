@@ -72,7 +72,8 @@ export const TextArea = flowComponent("TextArea", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
   } = useFieldComponent(props, "TextArea");
 
   let { allowResize } = props;
@@ -82,7 +83,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     allowResize = "horizontal";
   }
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   const inputClassName = clsx(
     styles.input,
@@ -178,7 +179,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
   return (
     <Aria.TextField
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       value={value}
       className={rootClassName}
       onChange={handleChange}

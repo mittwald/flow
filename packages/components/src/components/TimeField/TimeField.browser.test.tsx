@@ -1,10 +1,12 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
-import { createRef } from "react";
+import { createRef, useState } from "react";
 import { Time } from "@internationalized/date";
+import type { TimeValue } from "react-aria-components";
 import { TimeField } from "@/components/TimeField";
 import { Label } from "@/components/Label";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 
@@ -100,4 +102,49 @@ test("a read-only field keeps its value", async () => {
 
   await expect.element(segment("hour")).toHaveTextContent("07");
   expect(onChange).not.toHaveBeenCalled();
+});
+
+/*
+ * Over a remote connection the controlled value comes back only after a round
+ * trip, while the user keeps typing into the minutes.
+ */
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+test("keeps typing while a controlled value arrives late", async () => {
+  const LateValue = () => {
+    const [value, setValue] = useState<TimeValue | null>(null);
+    return (
+      <TimeField
+        value={value}
+        onChange={(v) => setTimeout(() => setValue(v), 50)}
+      >
+        <Label>Departure</Label>
+      </TimeField>
+    );
+  };
+  await render(<LateValue />);
+
+  await segment("hour").click();
+  await userEvent.keyboard("13");
+  for (const digit of "45") {
+    await userEvent.keyboard(digit);
+    await sleep(30);
+  }
+
+  await expect.element(segment("minute")).toHaveTextContent("45");
+});
+
+testFormFieldContract("TimeField", {
+  render: (props) => <TimeField {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new Time(9, 30), new Time(10, 45)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen, { force }) => {
+    await screen.getByRole("spinbutton").first().click({ force });
+    await userEvent.keyboard("1045");
+  },
+  exceptions: {
+    controlledHold:
+      "useControlledHostValueProps applies a user change locally, so typing does not wait for the remote round trip",
+  },
 });

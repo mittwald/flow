@@ -121,8 +121,11 @@ case "$BASE_REF" in
 esac
 ```
 
-Routing itself needs no new rule: a breaking change is rejected on `main` and
-`next` and allowed everywhere else, which is exactly right for `2.x`.
+Routing itself needs no new rule: `routingErrors` rejects a breaking change only
+on the standing lines (`isStandingLine` in `.github/scripts/routing-lib.mjs`:
+`main` and `next`) and allows it everywhere else, which is exactly right for
+`2.x`. Before that check existed it rejected one on any base the job ran for, so
+following this step would have blocked every breaking PR into the line.
 
 ## 3. `publish.yml` — six places, not one
 

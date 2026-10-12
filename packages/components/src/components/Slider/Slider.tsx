@@ -42,6 +42,9 @@ export const Slider = flowComponent("Slider", (props) => {
     ref,
     step,
     sliderOnly,
+    // Reaches the thumb through `controlProps` – react-aria would add it a
+    // second time from the slider.
+    "aria-describedby": ignoredAriaDescribedBy,
     ...rest
   } = props;
 
@@ -55,7 +58,8 @@ export const Slider = flowComponent("Slider", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
   } = useFieldComponent(props, "Slider");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Slider");
@@ -75,7 +79,7 @@ export const Slider = flowComponent("Slider", (props) => {
   };
 
   return (
-    <div {...fieldProps}>
+    <div className={wrapperProps.className}>
       <Aria.Slider
         {...rest}
         className={rootClassName}
@@ -149,6 +153,7 @@ export const Slider = flowComponent("Slider", (props) => {
                   )}
                 <Aria.SliderThumb
                   inputRef={objectRef}
+                  aria-describedby={controlProps["aria-describedby"]}
                   name={name}
                   className={styles.handle}
                   isDisabled={isReadOnly}

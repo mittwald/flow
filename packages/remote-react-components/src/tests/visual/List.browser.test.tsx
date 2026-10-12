@@ -4,6 +4,7 @@ import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
+import gopher from "@/tests/assets/gopher.webp";
 
 // List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
@@ -242,6 +243,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       Text,
       Content,
       Checkbox,
+      Image,
     },
   }) => {
     function Wrapper() {
@@ -252,6 +254,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
         active: boolean;
         content: string;
         bottomContent: string;
+        image?: string;
       }>();
 
       return (
@@ -282,13 +285,26 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
                 bottomContent:
                   " A long time ago in a galaxy far, far away, a rebellion rose",
               },
+              {
+                id: "3",
+                name: "Han Solo",
+                role: "Smuggler",
+                active: false,
+                content: "Content",
+                bottomContent: "Bottom Content",
+                image: gopher,
+              },
             ]}
           />
           <List.Item showTiles textValue={(i) => i.name}>
             {(i) => (
               <ListItemView>
                 <Avatar>
-                  <Initials>{i.name}</Initials>
+                  {i.image ? (
+                    <Image alt={i.name} src={i.image} />
+                  ) : (
+                    <Initials>{i.name}</Initials>
+                  )}
                 </Avatar>
                 <Checkbox aria-label="select item" defaultSelected={i.active} />
                 <Heading>
