@@ -51,6 +51,11 @@
   font-weight: var(--tabs--font-weight--selected);
 }
 
+/* SkeletonMode: no tab shows as selected */
+.tabTitle.skeleton[data-selected] {
+  font-weight: inherit;
+}
+
 .menuItem {
   // The tab's children are the consumer's; a `Text` child renders this span.
   // stylelint-disable-next-line selector-max-type -- consumer children
