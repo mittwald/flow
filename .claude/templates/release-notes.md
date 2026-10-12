@@ -65,11 +65,15 @@
      build change) — an unfilled image link is worse than no figure.
 
      Otherwise: one captured figure per notable feature, never one per prop
-     variant — compose the variants into a single image. Markdown image syntax,
-     NOT an HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw
-     tag renders on GitHub and silently vanishes on /releases. -->
+     variant — compose the variants into a single image. Paste the <picture>
+     block `pnpm release:figure` prints, unchanged: GitHub shows its <source> in
+     dark mode, and /releases rewrites exactly this shape into one image per
+     theme (its <Markdown> drops any other raw HTML, an <img> included). -->
 
-![{{ caption }}](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}-dark.png">
+  <img src="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png" alt="{{ caption }}">
+</picture>
 
 ## Migrations
 
