@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.35](https://github.com/mittwald/flow/compare/1.4.34...1.4.35) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.4.34](https://github.com/mittwald/flow/compare/1.4.33...1.4.34) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.4.33](https://github.com/mittwald/flow/compare/1.4.32...1.4.33) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.4.32](https://github.com/mittwald/flow/compare/1.4.31...1.4.32) (2026-10-12)
+
+### Tests
+
+* update visual regression screenshots ([33c5e5b](https://github.com/mittwald/flow/commit/33c5e5b32e3fbd98e14fdc3c3e768967fdb9f5a5))
+
+## [1.4.31](https://github.com/mittwald/flow/compare/1.4.30...1.4.31) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.4.30](https://github.com/mittwald/flow/compare/1.4.29...1.4.30) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.4.29](https://github.com/mittwald/flow/compare/1.4.28...1.4.29) (2026-10-09)
+
+### Bug Fixes
+
+* **LightBox:** keep the gallery image&#x27;s aspect ratio ([#3402](https://github.com/mittwald/flow/issues/3402)) ([ab32089](https://github.com/mittwald/flow/commit/ab320890d32920b8bd7036b18e423a2adda0f2ae))
+
 ## [1.4.28](https://github.com/mittwald/flow/compare/1.4.27...1.4.28) (2026-10-09)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
