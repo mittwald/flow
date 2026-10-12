@@ -8,10 +8,12 @@ import TextField from "@/components/TextField";
 import Autocomplete from "@/components/Autocomplete";
 import CheckboxButton from "@/components/CheckboxButton";
 import CheckboxGroup from "@/components/CheckboxGroup";
+import CodeEditor from "@/components/CodeEditor";
 import ComboBox from "@/components/ComboBox";
 import DatePicker from "@/components/DatePicker";
 import DateRangePicker from "@/components/DateRangePicker";
 import FileDropZone from "@/components/FileDropZone";
+import fileDropZoneStyles from "@/components/FileDropZone/FileDropZone.module.scss";
 import FileField from "@/components/FileField";
 import MarkdownEditor from "@/components/MarkdownEditor";
 import NumberField from "@/components/NumberField";
@@ -23,7 +25,7 @@ import SegmentedControl, { Segment } from "@/components/SegmentedControl";
 import Slider from "@/components/Slider";
 import TextArea from "@/components/TextArea";
 import TimeField from "@/components/TimeField";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import {
   Form,
   typedField,
@@ -431,12 +433,97 @@ describe("disabled", () => {
       );
     };
 
-    const { container } = await render(<TestForm />);
-    const fileInput = container.querySelector("input[type=file]");
-    if (!fileInput) {
-      throw new Error("File input not rendered");
-    }
-    await expect.element(page.elementLocator(fileInput)).toBeDisabled();
+    await render(<TestForm />);
+    await expect
+      .element(page.getByLocator('input[type="file"]'))
+      .toBeDisabled();
+  });
+
+  test("disabled Field ignores files dropped onto FileDropZone", async () => {
+    const onValueChange = vitest.fn();
+
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      const [disabled, setDisabled] = useState(true);
+
+      useEffect(() => {
+        const { unsubscribe } = form.watch((values) =>
+          onValueChange(values.test?.[0]?.name),
+        );
+        return unsubscribe;
+      }, [form]);
+
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Button onPress={() => setDisabled(false)}>Enable</Button>
+          <Field name="test" disabled={disabled}>
+            <FileDropZone>
+              <FileField>
+                <Button>Select</Button>
+              </FileField>
+            </FileDropZone>
+          </Field>
+        </Form>
+      );
+    };
+
+    const dropFile = (name: string) => {
+      const zone = document.querySelector(
+        `.${fileDropZoneStyles.fileDropZone}`,
+      );
+      // A missing zone would turn the "nothing happened" assertion into a pass
+      if (!zone) {
+        throw new Error("The drop zone is not rendered.");
+      }
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(new File(["content"], name));
+      for (const type of ["dragenter", "dragover", "drop"]) {
+        zone.dispatchEvent(
+          new DragEvent(type, {
+            dataTransfer,
+            bubbles: true,
+            cancelable: true,
+          }),
+        );
+      }
+    };
+
+    await render(<TestForm />);
+    dropFile("ignored.txt");
+    await page.getByRole("button", { name: "Enable" }).click();
+    // The accepted drop is the control: the drop handler is async, so only
+    // once its file arrived has the ignored one had the chance to arrive, too
+    dropFile("accepted.txt");
+
+    await expect
+      .poll(() => onValueChange.mock.calls.flat())
+      .toContain("accepted.txt");
+    expect(onValueChange.mock.calls.flat()).not.toContain("ignored.txt");
+  });
+
+  test("disabled Field does not pass isDisabled to CodeEditor", async () => {
+    const consoleError = vitest.spyOn(console, "error");
+
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Field name="test" disabled>
+            <CodeEditor aria-label="field" />
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    await expect.element(page.getByRole("textbox")).toBeInTheDocument();
+    const loggedIsDisabled = consoleError.mock.calls.some((args) =>
+      args.some((arg) => String(arg).includes("isDisabled")),
+    );
+    consoleError.mockRestore();
+    expect(loggedIsDisabled).toBe(false);
   });
 
   test("Field is enabled again when disabled is reset", async () => {

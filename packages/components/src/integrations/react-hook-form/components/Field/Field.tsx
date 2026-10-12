@@ -145,6 +145,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     }),
   };
 
+  // CodeEditor on main has no `isDisabled` yet and spreads unknown props into
+  // CodeMirror (#3369)
+  const { isDisabled: ignoredIsDisabled, ...codeEditorFieldProps } = fieldProps;
+
   const propsContext: PropsContext = {
     Autocomplete: {
       SearchField: fieldProps,
@@ -154,7 +158,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     TextField: fieldProps,
     TextArea: fieldProps,
     MarkdownEditor: fieldProps,
-    CodeEditor: fieldProps,
+    CodeEditor: codeEditorFieldProps,
     Checkbox: {
       ...fieldProps,
       isSelected: value,
