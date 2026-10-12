@@ -7,6 +7,6 @@
   // `search.render`, so this has to match whatever input that renders.
   // stylelint-disable-next-line selector-max-type -- replaceable field
   input {
-    width: var(--list--search-field-input-width);
+    width: 200px;
   }
 }
