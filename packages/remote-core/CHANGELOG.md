@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.47](https://github.com/mittwald/flow/compare/1.5.0-next.46...1.5.0-next.47) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+## [1.5.0-next.46](https://github.com/mittwald/flow/compare/1.5.0-next.45...1.5.0-next.46) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+## [1.5.0-next.45](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.5.0-next.45) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+## [1.5.0-next.44](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.5.0-next.44) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+## [1.5.0-next.43](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.5.0-next.43) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+## [1.5.0-next.42](https://github.com/mittwald/flow/compare/1.5.0-next.41...1.5.0-next.42) (2026-10-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 ## [1.5.0-next.41](https://github.com/mittwald/flow/compare/1.5.0-next.40...1.5.0-next.41) (2026-10-12)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

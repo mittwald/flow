@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.47](https://github.com/mittwald/flow/compare/1.5.0-next.46...1.5.0-next.47) (2026-10-12)
+
+### Features
+
+* **SkeletonMode:** support content, charts, editors and overlays ([3db959e](https://github.com/mittwald/flow/commit/3db959e03cf4e797521890ee5e0fe3d4992172bd))
+
+### Bug Fixes
+
+* **Field:** pass isDisabled to CodeEditor ([4f1c7fe](https://github.com/mittwald/flow/commit/4f1c7fe5e360243bdd36d39cf9a153e11fe9d35d)), closes [#3369](https://github.com/mittwald/flow/issues/3369)
+* **SkeletonMode:** show no ellipsis over a truncated text bar ([35ffd50](https://github.com/mittwald/flow/commit/35ffd50bebe99a774d7859907a4fc4ebfc38a988)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Documentation
+
+* **SkeletonMode:** toggle the mode in the content example ([6a6e31d](https://github.com/mittwald/flow/commit/6a6e31dfc2ad80f69c9fde8530e233c21506e044))
+
+### Styles
+
+* **FileDropZone:** format the merge resolution ([2e16379](https://github.com/mittwald/flow/commit/2e163794246f216fa252f650213cc0a5295424de))
+
+### Code Refactoring
+
+* **SkeletonMode:** name both variants and pick them in the JSX ([ebf0d45](https://github.com/mittwald/flow/commit/ebf0d4569b552d2e973b504cd30e7cf463b15631))
+
+### Tests
+
+* **SkeletonMode:** skip the visual scenarios for versions without it ([8ae0409](https://github.com/mittwald/flow/commit/8ae0409b6a3ef4892371bb61218686d281cde483))
+* **SkeletonMode:** use the shared skeletonModeSince gate ([32ab25e](https://github.com/mittwald/flow/commit/32ab25ebb40469a20e4bfb8b029438b53c9cc118))
+* update visual regression screenshots ([773c2eb](https://github.com/mittwald/flow/commit/773c2eb7fb8df0f84a8f33957a86c042f9e40608))
+* update visual regression screenshots ([4180c7b](https://github.com/mittwald/flow/commit/4180c7b2931396e06f2bdc72a0d86118f8a66e93))
+* update visual regression screenshots ([2007b50](https://github.com/mittwald/flow/commit/2007b5095532b1f6bab53c822ec32a4443f3e760))
+* update visual regression screenshots ([a6cd900](https://github.com/mittwald/flow/commit/a6cd90088d71bf9788737903fa84625aed458532))
+
+## [1.5.0-next.46](https://github.com/mittwald/flow/compare/1.5.0-next.45...1.5.0-next.46) (2026-10-12)
+
+## [1.4.36](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.4.36) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the dev-minor group with 2 updates ([747795b](https://github.com/mittwald/flow/commit/747795badf33fce3e4fdb47e17e0fd9087255447))
+* **release:** bump version to 1.4.36 ([d9f430b](https://github.com/mittwald/flow/commit/d9f430b666a94fee205232a88a55f7d86dcf3948))
+
+## [1.5.0-next.45](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.5.0-next.45) (2026-10-12)
+
+## [1.4.35](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.4.35) (2026-10-12)
+
+### Bug Fixes
+
+* **HeaderNavigation:** render a link combined with a button like the icon buttons ([f1f0748](https://github.com/mittwald/flow/commit/f1f074863473ef51c571daa598d96f486b160a7d))
+
+### Documentation
+
+* drop the link-with-button example from HeaderNavigation ([0e6bba4](https://github.com/mittwald/flow/commit/0e6bba4fb4da4d70c2c2478061c66f8dd403a3cd))
+* remove the link-with-button section from HeaderNavigation ([fc823ea](https://github.com/mittwald/flow/commit/fc823ea872b8f548217276b2e65ced999595da20))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.35 ([55a8067](https://github.com/mittwald/flow/commit/55a8067c4c3a9e1ec8feaf42b3a2e14d249b641b))
+
+### Tests
+
+* **HeaderNavigation:** drop the link-with-button story and browser test ([070be80](https://github.com/mittwald/flow/commit/070be8026014c2cb5e25b52de84dbba2b7fe27e6))
+* **Modal:** hold the close animation instead of racing a fixed sleep ([bd433db](https://github.com/mittwald/flow/commit/bd433db74a1d57df7256a7f956cc4b88aaa071e0))
+* update visual regression screenshots ([e6538e2](https://github.com/mittwald/flow/commit/e6538e2063c428c2e26f8dce498d0f421298004b))
+* update visual regression screenshots ([945a87f](https://github.com/mittwald/flow/commit/945a87fb63a3cbe0c829ed5c74709b91a56657db))
+
+## [1.5.0-next.44](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.5.0-next.44) (2026-10-12)
+
+### Bug Fixes
+
+* **Field:** disable fields of a disabled form ([#3379](https://github.com/mittwald/flow/issues/3379)) ([45fb9ae](https://github.com/mittwald/flow/commit/45fb9ae7fd8f5f304780640407593671defb356c))
+
+## [1.4.34](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.4.34) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.34 ([d17d841](https://github.com/mittwald/flow/commit/d17d84121422181fa8e543209c0d86816b9b7938))
+
+## [1.5.0-next.43](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.5.0-next.43) (2026-10-12)
+
+### Tests
+
+* **components:** add form field contract test and guidance ([#3370](https://github.com/mittwald/flow/issues/3370)) ([e4d3245](https://github.com/mittwald/flow/commit/e4d32456c2543ba0d46bfd63e060f7b4ac11eb52))
+
+## [1.4.33](https://github.com/mittwald/flow/compare/1.5.0-next.41...1.4.33) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.33 ([1d2fd90](https://github.com/mittwald/flow/commit/1d2fd90e2dcedb34c870384efe10f313f30d610e))
+
+## [1.5.0-next.42](https://github.com/mittwald/flow/compare/1.5.0-next.41...1.5.0-next.42) (2026-10-12)
+
+### Continuous Integration
+
+* stop saving per-PR Next.js build caches ([#3442](https://github.com/mittwald/flow/issues/3442)) ([9a5a9ec](https://github.com/mittwald/flow/commit/9a5a9ec798dc21613216a16e9eb5e04b8108f1d1))
+
+## [1.4.32](https://github.com/mittwald/flow/compare/1.5.0-next.39...1.4.32) (2026-10-12)
+
+### Documentation
+
+* **components:** one const per UI variant, the JSX picks ([2aa5ff1](https://github.com/mittwald/flow/commit/2aa5ff1a963bfb9e0bd0a2dc98395eabfb125506))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.32 ([d166ab4](https://github.com/mittwald/flow/commit/d166ab4bc3ee5da99de916175f4881659b41d77e))
+
 ## [1.5.0-next.41](https://github.com/mittwald/flow/compare/1.5.0-next.40...1.5.0-next.41) (2026-10-12)
 
 ### Features
