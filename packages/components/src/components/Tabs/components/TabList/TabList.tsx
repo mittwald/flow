@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
 import { useTabIndicator } from "../../lib/useTabIndicator";
@@ -29,7 +28,6 @@ export const TabList: FC<Props> = (props) => {
     "aria-labelledby": ariaLabelledby,
   } = props;
 
-  const titleCollapsedElementId = useId();
   const overflowObserver = useObserveOverflow();
   const isCollapsed = overflowObserver.isOverflowing;
   const rootClassName = clsx(styles.tabList, isCollapsed && styles.collapsed);
@@ -61,7 +59,6 @@ export const TabList: FC<Props> = (props) => {
         variant="solid"
         className={styles.contextMenuButton}
         color="light"
-        aria-labelledby={titleCollapsedElementId}
       >
         <UiComponentTunnelExit id="ActiveTitle" component="Tabs" />
         <IconChevronDown />
