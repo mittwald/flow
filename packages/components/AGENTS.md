@@ -410,12 +410,13 @@ Checklist beyond the component itself:
 - **Contract test.** Call `testFormFieldContract`
   (`src/tests/formFieldContract/`) in the field's `*.browser.test.tsx`. The
   adapter renders the field, names its control, two values (the first one
-  submits an entry), their `FormData` entries and a user interaction that
-  changes the value. The interaction passes `force` on, so the test can also try
-  it on a disabled or read-only field. `getValueButtons` narrows the inner
-  buttons a read-only field turns off; it defaults to all. Justified exceptions
-  go in `exceptions` with their reason. An excepted aspect must fail — once it
-  passes, the run fails until the entry is removed:
+  submits an entry, the two submit different entries), their `FormData` entries
+  and a user interaction that changes the value. The interaction passes `force`
+  on, so the test can also try it on a disabled or read-only field.
+  `getValueButtons` narrows the inner buttons a read-only field turns off; it
+  defaults to all. Justified exceptions go in `exceptions` with their reason. An
+  excepted aspect must fail on one of its own expectations — once it passes, or
+  fails on a lookup or a timeout instead, the run fails:
 
   ```tsx
   testFormFieldContract("TextField", {

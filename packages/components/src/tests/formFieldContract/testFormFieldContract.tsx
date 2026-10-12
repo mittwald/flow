@@ -5,7 +5,7 @@ import labelStyles from "@/components/Label/Label.module.scss";
 import { useState, type ReactElement, type ReactNode } from "react";
 import { describe, expect, test, vi } from "vitest";
 import { render, type RenderResult } from "vitest-browser-react";
-import type { Locator } from "vitest/browser";
+import { userEvent, type Locator } from "vitest/browser";
 
 /**
  * The props every form field supports. A field's own props type has to accept
@@ -41,6 +41,7 @@ export type FormFieldContractAspect =
   | "uncontrolled"
   | "controlled"
   | "controlledChange"
+  | "controlledHold"
   | "ref"
   | "autoFocus"
   | "focusEvents";
@@ -50,7 +51,10 @@ export interface FormFieldContractOptions<V> {
   render: (props: FormFieldContractProps<V>) => ReactElement;
   /** The focusable element that carries the field's ARIA state. */
   getControl: (screen: RenderResult) => Locator;
-  /** Two distinct values the field can hold. `values[0]` submits an entry. */
+  /**
+   * Two values the field can hold that submit different entries. `values[0]`
+   * submits an entry.
+   */
   values: [V, V];
   /**
    * What the field submits with a form for one of `values`: an entry, several
@@ -77,6 +81,7 @@ export interface FormFieldContractOptions<V> {
 
 const formId = "form-field-contract";
 const fieldName = "field";
+const afterId = "form-field-contract-after";
 
 // An Enter in a field submits the form implicitly, which reloads the test page.
 const ContractForm = (props: { children?: ReactNode }) => (
@@ -94,6 +99,21 @@ const getForm = () => {
 };
 
 const getFormEntries = () => new FormData(getForm()).getAll(fieldName);
+
+const haveSameEntries = (a: FormDataEntryValue[], b: FormDataEntryValue[]) =>
+  a.length === b.length && a.every((entry, index) => entry === b[index]);
+
+// Lets a value that is applied after an effect or a frame arrive before a
+// negative assertion reads the state.
+const settle = () =>
+  new Promise<void>((resolve) =>
+    requestAnimationFrame(() => setTimeout(resolve)),
+  );
+
+// Only a failing expectation of the aspect counts for an excepted aspect. A
+// lookup or interaction error (a stale adapter, a timeout) is a plain `Error`.
+const isAspectFailure = (error: unknown) =>
+  error instanceof Error && error.name === "AssertionError";
 
 const isDisabledElement = (element: Element) =>
   element.matches(":disabled") ||
@@ -129,9 +149,12 @@ export const testFormFieldContract = <V,>(
     return formValue === null ? [] : [formValue].flat();
   };
 
-  // Otherwise the submission checks compare empty lists and always pass.
+  // Otherwise the submission checks compare equal lists and always pass.
   if (toFormEntries(values[0]).length === 0) {
     throw new Error(`${name}: values[0] has to submit an entry`);
+  }
+  if (haveSameEntries(toFormEntries(values[0]), toFormEntries(values[1]))) {
+    throw new Error(`${name}: values[0] and values[1] submit the same entries`);
   }
 
   const field = (
@@ -168,7 +191,11 @@ export const testFormFieldContract = <V,>(
 
   const getControlElement = async (screen: RenderResult) => {
     const control = getControl(screen);
-    await expect.element(control).toBeInTheDocument();
+    try {
+      await expect.element(control).toBeInTheDocument();
+    } catch (error) {
+      throw new Error("Control is not rendered", { cause: error });
+    }
     return control.element();
   };
 
@@ -193,8 +220,17 @@ export const testFormFieldContract = <V,>(
       throw new Error(`${name}: the "${aspect}" exception needs a reason`);
     }
     if (reason !== undefined) {
-      // Fails the run once the aspect passes, so a fixed gap drops its entry.
-      test.fails(`${title} (not supported: ${reason})`, fn);
+      test(`${title} (not supported: ${reason})`, async () => {
+        try {
+          await fn();
+        } catch (error) {
+          if (isAspectFailure(error)) {
+            return;
+          }
+          throw error;
+        }
+        throw new Error(`${name}: "${aspect}" passes, remove its exception`);
+      });
     } else {
       test(title, fn);
     }
@@ -226,6 +262,7 @@ export const testFormFieldContract = <V,>(
         expect(getLabel(screen)).toHaveClass(labelStyles.disabled);
 
         await changeValue(screen, { force: true });
+        await settle();
         expect(onChange).not.toHaveBeenCalled();
       },
     );
@@ -254,6 +291,7 @@ export const testFormFieldContract = <V,>(
         await expect.element(getControl(screen)).toHaveFocus();
 
         await changeValue(screen, { force: true });
+        await settle();
         expect(onChange).not.toHaveBeenCalled();
         expect(getFormEntries()).toEqual(toFormEntries(values[0]));
       },
@@ -337,7 +375,7 @@ export const testFormFieldContract = <V,>(
           </>,
         );
 
-        await expect.element(getControl(screen)).toBeInTheDocument();
+        await getControlElement(screen);
         expect(getFormEntries()).toEqual(toFormEntries(values[0]));
       },
     );
@@ -370,8 +408,27 @@ export const testFormFieldContract = <V,>(
       );
 
       await expect.poll(getFormEntries).toEqual(toFormEntries(values[1]));
+      await settle();
       expect(onChange).not.toHaveBeenCalled();
     });
+
+    // A field that takes `value` as an initial value and syncs it in an effect
+    // passes the test above, but keeps the user's change.
+    contractTest(
+      "controlledHold",
+      "value holds until the parent takes over a user change",
+      async () => {
+        const onChange = vi.fn();
+        const screen = await renderField({ value: values[0], onChange });
+        expect(getFormEntries()).toEqual(toFormEntries(values[0]));
+
+        await changeValue(screen, { force: false });
+        await settle();
+
+        expect(onChange).toHaveBeenLastCalledWith(values[1]);
+        expect(getFormEntries()).toEqual(toFormEntries(values[0]));
+      },
+    );
 
     contractTest(
       "controlledChange",
@@ -409,20 +466,45 @@ export const testFormFieldContract = <V,>(
       await expect.element(getControl(screen)).toHaveFocus();
     });
 
-    contractTest("focusEvents", "onFocus and onBlur are called", async () => {
-      const onFocus = vi.fn();
-      const onBlur = vi.fn();
-      const screen = await renderField({ onFocus, onBlur });
-      const control = await getControlElement(screen);
-      if (!(control instanceof HTMLElement)) {
-        throw new Error("Control is not an HTMLElement");
-      }
+    contractTest(
+      "focusEvents",
+      "onFocus and onBlur are called for the field as a whole",
+      async () => {
+        const onFocus = vi.fn();
+        const onBlur = vi.fn();
+        const screen = await render(
+          <ContractForm>
+            {field({ onFocus, onBlur })}
+            {/* No form control: WebKit on macOS skips buttons when tabbing, and
+                another input would collide with the adapter's `getControl`. */}
+            <span id={afterId} tabIndex={0} />
+          </ContractForm>,
+        );
+        const control = await getControlElement(screen);
+        const after = document.getElementById(afterId);
+        if (!(control instanceof HTMLElement)) {
+          throw new Error("Control is not an HTMLElement");
+        }
 
-      control.focus();
-      await expect.poll(() => onFocus.mock.calls.length).toBe(1);
+        control.focus();
+        await expect.poll(() => onFocus.mock.calls.length).toBe(1);
 
-      control.blur();
-      await expect.poll(() => onBlur.mock.calls.length).toBe(1);
-    });
+        // Tabbing through a grouped field (the segments of a date) stays in
+        // the field; react-hook-form would mark it touched mid-input.
+        for (let tabs = 0; document.activeElement !== after; tabs++) {
+          if (tabs === 10) {
+            throw new Error("Tabbing does not reach the next element");
+          }
+          await userEvent.tab();
+          await settle();
+          if (document.activeElement !== after) {
+            expect(onBlur).not.toHaveBeenCalled();
+          }
+        }
+
+        await expect.poll(() => onBlur.mock.calls.length).toBe(1);
+        expect(onFocus).toHaveBeenCalledOnce();
+      },
+    );
   });
 };

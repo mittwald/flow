@@ -43,4 +43,8 @@ testFormFieldContract("TextField", {
   changeValue: async (screen, { force }) => {
     await userEvent.fill(screen.getByRole("textbox"), "bar", { force });
   },
+  exceptions: {
+    controlledHold:
+      "useControlledHostValueProps applies a user change locally, so typing does not wait for the remote round trip",
+  },
 });

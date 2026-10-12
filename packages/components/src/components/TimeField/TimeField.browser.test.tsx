@@ -143,4 +143,8 @@ testFormFieldContract("TimeField", {
     await screen.getByRole("spinbutton").first().click({ force });
     await userEvent.keyboard("1045");
   },
+  exceptions: {
+    controlledHold:
+      "useControlledHostValueProps applies a user change locally, so typing does not wait for the remote round trip",
+  },
 });

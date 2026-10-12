@@ -137,4 +137,8 @@ testFormFieldContract("DatePicker", {
     await screen.getByRole("spinbutton").first().click({ force });
     await userEvent.keyboard("04112025");
   },
+  exceptions: {
+    controlledHold:
+      "useControlledHostValueProps applies a user change locally, so typing does not wait for the remote round trip",
+  },
 });
