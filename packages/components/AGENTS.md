@@ -91,9 +91,21 @@ Conventions:
 - Most components wrap `react-aria-components` primitives; expose ARIA props
   directly only where React Aria lacks the behavior.
 - **Keep the returned JSX readable.** Lift computed nodes (icon, label, tooltip
-  text) and non-trivial conditionals into named consts above the `return`; the
-  returned tree should stay scannable — no large inline ternaries or deep logic
-  in the markup. Split a growing tree into subcomponents.
+  text) into named consts above the `return`; the returned tree should stay
+  scannable — no large inline ternaries or deep logic in the markup. Split a
+  growing tree into subcomponents.
+- **Alternative UI parts get one const each; the JSX picks.** When the output
+  switches between variants, give every variant its own const and decide in the
+  returned JSX with a one-line ternary or `&&`. Never assign a multi-line
+  ternary to a const — it hides the decision inside the variable and forces the
+  reader through both branches at once.
+
+  ```tsx
+  const skeletonDonut = <span className={styles.skeleton} inert />;
+  const donut = <Aria.ProgressBar …>…</Aria.ProgressBar>;
+
+  return <div>{isSkeleton ? skeletonDonut : donut}</div>;
+  ```
 
 ## PropsContext — contextual composability
 
