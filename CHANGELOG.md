@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.40](https://github.com/mittwald/flow/compare/1.5.0-next.39...1.5.0-next.40) (2026-10-12)
+
+### Bug Fixes
+
+* **Modal:** drop &quot;modal&quot; from the unsaved changes confirmation text ([f270eea](https://github.com/mittwald/flow/commit/f270eea4935fcfa1407318ca4bffb6f1e1b93880))
+
+### Documentation
+
+* **release-figure:** offer every figure in dark mode too ([#3384](https://github.com/mittwald/flow/issues/3384)) ([6430d81](https://github.com/mittwald/flow/commit/6430d81a8237fffbd7fbfb929b7d5b0a4045e277))
+
+### Tests
+
+* update visual regression screenshots ([33c5e5b](https://github.com/mittwald/flow/commit/33c5e5b32e3fbd98e14fdc3c3e768967fdb9f5a5))
+
 ## [1.5.0-next.39](https://github.com/mittwald/flow/compare/1.5.0-next.38...1.5.0-next.39) (2026-10-12)
 
 ## [1.4.31](https://github.com/mittwald/flow/compare/1.5.0-next.37...1.4.31) (2026-10-09)
