@@ -2,7 +2,7 @@ code-block:
   font-size:
     value: "{font-size-text.s}"
   font-family:
-    value: "FiraCode, monospace"
+    value: "{font-family.code}"
   padding:
     value: "{size-px.m}"
   corner-radius:

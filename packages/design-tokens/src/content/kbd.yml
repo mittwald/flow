@@ -1,6 +1,4 @@
 kbd:
-  font-family:
-    value: "Inter, sans-serif"
   corner-radius:
     value: "{corner-radius.s}"
   padding:

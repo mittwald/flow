@@ -583,5 +583,3 @@ button:
       value: "{light-static-outline-border-color}"
     disabled:
       value: "{disabled-outline-light-static-border-color}"
-  font-family:
-    value: "Inter, sans-serif"

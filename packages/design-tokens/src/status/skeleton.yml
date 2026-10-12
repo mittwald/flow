@@ -1,6 +1,6 @@
 skeleton:
   background-color:
-    value: "color-mix(in srgb, {neutral.color.500} 50%, transparent)"
+    value: "{dark.color.100}"
   shimmer-color:
     value: "{light-static.color.300}"
   shimmer-duration:

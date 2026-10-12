@@ -114,7 +114,8 @@
           border-block: var(--calendar--range-border-width)
             var(--calendar--range-border-style)
             var(--calendar--range-border-color);
-          width: calc(100% + var(--calendar--range-background-overhang));
+          // Reaches across the border spacing into the next cell
+          width: calc(100% + var(--calendar--spacing) * 1.5);
           height: 100%;
           position: absolute;
           z-index: -1;
@@ -181,7 +182,7 @@
 
 @media (max-width: 360px) {
   .calendar {
-    --calendar--cell-size: var(--calendar--cell-size-s);
-    --calendar--cell-font-size: var(--calendar--cell-font-size-s);
+    --calendar--cell-size: 2.1rem;
+    --calendar--cell-font-size: 0.8rem;
   }
 }
