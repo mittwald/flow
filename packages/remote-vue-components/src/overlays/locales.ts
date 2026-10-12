@@ -16,13 +16,13 @@
 export const confirmCloseTexts = {
   "en-US": {
     heading: "Unsaved changes",
-    text: "You have unsaved changes. Are you sure you want to close the modal? All changes will be lost.",
+    text: "You have unsaved changes. Are you sure you want to close? All changes will be lost.",
     close: "Close",
     keepOpen: "Keep editing",
   },
   "de-DE": {
     heading: "Ungespeicherte Änderungen",
-    text: "Du hast ungespeicherte Änderungen. Möchtest du das Modal wirklich schließen? Alle Änderungen gehen dabei verloren.",
+    text: "Du hast ungespeicherte Änderungen. Möchtest du wirklich schließen? Alle Änderungen gehen dabei verloren.",
     close: "Schließen",
     keepOpen: "Weiter bearbeiten",
   },
