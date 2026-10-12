@@ -145,8 +145,9 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     }),
   };
 
-  // CodeEditor on main has no `isDisabled` yet and spreads unknown props into
-  // CodeMirror (#3369)
+  // TODO: remove once CodeEditor supports `isDisabled` (#3369). Until then it
+  // spreads unknown props into CodeMirror. Field.browser.test.tsx fails
+  // test:compile as soon as it does
   const { isDisabled: ignoredIsDisabled, ...codeEditorFieldProps } = fieldProps;
 
   const propsContext: PropsContext = {

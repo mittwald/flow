@@ -8,7 +8,7 @@ import TextField from "@/components/TextField";
 import Autocomplete from "@/components/Autocomplete";
 import CheckboxButton from "@/components/CheckboxButton";
 import CheckboxGroup from "@/components/CheckboxGroup";
-import CodeEditor from "@/components/CodeEditor";
+import CodeEditor, { type CodeEditorProps } from "@/components/CodeEditor";
 import ComboBox from "@/components/ComboBox";
 import DatePicker from "@/components/DatePicker";
 import DateRangePicker from "@/components/DateRangePicker";
@@ -32,7 +32,7 @@ import {
   debounceValidate,
 } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
-import { beforeEach, expect, vitest } from "vitest";
+import { afterEach, beforeEach, expect, vitest } from "vitest";
 import { render } from "vitest-browser-react";
 import { type Locator, page, userEvent } from "vitest/browser";
 
@@ -245,6 +245,10 @@ describe("Text field", () => {
 });
 
 describe("disabled", () => {
+  afterEach(() => {
+    vitest.restoreAllMocks();
+  });
+
   const isMarkedDisabled = (control: Element) =>
     control.hasAttribute("disabled") ||
     control.hasAttribute("data-disabled") ||
@@ -522,8 +526,16 @@ describe("disabled", () => {
     const loggedIsDisabled = consoleError.mock.calls.some((args) =>
       args.some((arg) => String(arg).includes("isDisabled")),
     );
-    consoleError.mockRestore();
     expect(loggedIsDisabled).toBe(false);
+  });
+
+  test("CodeEditor workaround is removed once CodeEditor supports isDisabled", () => {
+    // Fails test:compile once CodeEditor has `isDisabled` (#3369): then pass
+    // CodeEditor the full fieldProps in Field.tsx, drop the test above and add
+    // CodeEditor to disabledFields
+    // @ts-expect-error CodeEditor has no isDisabled yet
+    const props: CodeEditorProps = { isDisabled: true };
+    expect(props).toBeDefined();
   });
 
   test("Field is enabled again when disabled is reset", async () => {
