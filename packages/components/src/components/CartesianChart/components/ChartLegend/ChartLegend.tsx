@@ -2,7 +2,10 @@ import type { ComponentType, FC } from "react";
 import * as Recharts from "recharts";
 import LegendContent from "./LegendContent";
 
-export type ChartLegendFormatter = (text: string, index: number) => string;
+export type ChartLegendFormatter = (
+  text: string,
+  index: number,
+) => Promise<string> | string;
 
 export interface WithChartLegendFormatters {
   /**
