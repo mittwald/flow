@@ -16,6 +16,16 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
+import type {
+  FlowComponentName,
+  FlowComponentPropName,
+} from "@/components/propTypes";
+
+type DisableableComponentName = {
+  [C in FlowComponentName]: "isDisabled" extends FlowComponentPropName<C>
+    ? C
+    : never;
+}[FlowComponentName];
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
@@ -106,8 +116,15 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const isFieldInvalid = controller.fieldState.invalid;
 
+  const { disabled, ...controllerFieldProps } = controller.field;
+
   const fieldProps = {
-    ...controller.field,
+    ...controllerFieldProps,
+    // Dynamic, so a local `isDisabled={false}` cannot enable a field whose
+    // value React Hook Form drops on submit
+    ...(disabled && {
+      isDisabled: dynamic<DisableableComponentName, "isDisabled">(() => true),
+    }),
     value,
     name,
     form: formContext.id,

@@ -19,6 +19,7 @@ import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import * as Aria from "react-aria-components";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface MessageProps
   extends
@@ -66,7 +67,8 @@ export const Message = flowComponent("Message", (props) => {
           <>
             <div className={styles.tipBorder} aria-hidden />
             <div className={styles.tip} aria-hidden />
-            {props.children}
+            {/* The fragment hides raw text from `Content`'s own text rule. */}
+            <SkeletonRawText>{props.children}</SkeletonRawText>
           </>
         );
       }),

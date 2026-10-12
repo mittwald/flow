@@ -1,0 +1,11 @@
+{
+  "name": "components-base",
+  "projectType": "library",
+  "sourceRoot": "packages/components-base/src",
+  "targets": {
+    "build": {
+      "inputs": ["default"],
+      "outputs": ["{projectRoot}/dist"]
+    }
+  }
+}

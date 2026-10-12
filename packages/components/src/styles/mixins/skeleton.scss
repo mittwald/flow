@@ -74,6 +74,14 @@ $shimmer-gradient: linear-gradient(
   background-size: 200% 100%;
   animation: skeleton-text-shimmer 3s infinite;
 
+  /* A block-level child (a flex label wrapper like TabTitle's) would split the
+     inline bar and leave its background on empty fragments only. Inline, its
+     text runs through the bar line by line. `!important`: the wrapper's own
+     `display` comes from the component, with any specificity. */
+  > * {
+    display: inline !important;
+  }
+
   /* Icons, images and other elements inside the text */
   * {
     visibility: hidden;
