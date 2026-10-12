@@ -176,7 +176,7 @@ That single tag drives a chain of generated artifacts:
 The whole pipeline runs with `pnpm nx build:remote-components components` (or
 simply `pnpm build`, which runs every generator). It depends on prop
 documentation extracted from JSDoc: `pnpm nx build:docs-properties components`
-writes `packages/components/dist/assets/doc-properties.json`, which the
+writes `packages/components/.cache/doc-properties.json`, which the
 remote-components generator reads to decide which props become which kind of
 contract (see [How props cross the boundary](#implementing-a-component)).
 Because of this dependency, changing prop JSDoc without rebuilding leaves the
@@ -248,7 +248,22 @@ territory:
   work within a single runtime.
 - **Props typed `ReactNode` become slots**, not serialized data — they cross as
   rendered child content rather than as values that get cloned across the
-  connection.
+  connection. An unset slot prop arrives as `undefined`.
+- **`children` cannot tell "nothing" apart.** The host receives the rendered
+  child nodes, so `undefined`, `null` and `false` all arrive as no children. Our
+  `remote-dom-react` patch passes `undefined` then, not `[]`. Locally, a
+  component still sees the `false` of `{cond && …}`, or `[[], false]` next to an
+  empty list, and `Children.count(false)` is `1`. Check for content and count
+  with `Children.toArray(children).length`, which drops all of them.
+- **A function property's return value comes back as a Promise.**
+  `isSerializableByBase` accepts any function, so `@quilted/threads` sends it as
+  a proxy, and calling a proxy is a round trip. A host that awaits it is fine —
+  `ChartTooltip`'s formatters are typed `Promise<string> | string` for exactly
+  that reason. A host that reads the result synchronously gets the Promise
+  object: `XAxis.tickFormatter` rendered every tick as `[object Promise]` until
+  it was excluded with `@flr-ignore-props`. `checkSerializableProps` fails
+  generation on a new one; the props that predate the check are listed in
+  `acknowledgedValueReturningProps`.
 - **There are no HTML attributes.** `isAttribute` in the generator is hard-coded
   to `false`
   ([`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`](../packages/components/dev/remote-components-generator/lib/propClassifiers.ts)),

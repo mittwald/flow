@@ -1,4 +1,16 @@
 /* auto-generated file */
-import { IconMailOpened as Icon } from "@tabler/icons-react";
+/* Tabler Icons — MIT License, Copyright (c) 2020-2026 Paweł Kuna. See LICENSE. */
+import { createTablerIcon } from "../lib/createTablerIcon.ts";
 import type { FC } from "react";
-export const IconInvite = Icon as FC;
+
+export const IconInvite = createTablerIcon(
+  "outline",
+  "mail-opened",
+  "MailOpened",
+  [
+    ["path", { d: "M3 9l9 6l9 -6l-9 -6l-9 6" }],
+    ["path", { d: "M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" }],
+    ["path", { d: "M3 19l6 -6" }],
+    ["path", { d: "M15 13l6 6" }],
+  ],
+) as FC;

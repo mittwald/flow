@@ -16,8 +16,9 @@ The Styleguide is available at:
 https://flow.mittwald.de/
 
 All content lives in `src/content`, organized in one directory per section
-(`get-started`, `foundations`, `patterns`, `components`). Pages are written in
-MDX. Directory names are the URL — a page's path is its directory path.
+(`get-started`, `foundations`, `templates`, `components`, `releases`). Pages are
+written in MDX. Directory names are the URL — a page's path is its directory
+path.
 
 The order sections and their groups appear in is authored explicitly in
 `src/lib/content/contentOrder.ts`; anything not listed there sorts
@@ -74,29 +75,31 @@ Typical topics include:
   messages)
 - Accessibility
 
-The internal structure of this section may evolve over time. Note that complex
-user flows — such as how error handling behaves across a page — are documented
-in **Patterns**, not here.
+The internal structure of this section may evolve over time. Note that recurring
+structures built from several Components — such as a detail page or a form — are
+documented in **Templates**, not here.
 
-### Patterns
+### Templates
 
-**Patterns** document common user flows and interactions involving multiple
-Components. Examples are Forms, Errorhandling, or the structure of a detail
-page.
+**Templates** are ready-made starting points that combine several Components
+into a recurring structure. They are grouped by scope:
 
-They demonstrate recurring solutions through concise code examples that can
-easily be reused. Code examples should remain compact to avoid excessive
+- **App Shells** — the frame of an application (`simple-app`, `complex-app`,
+  `focus-task`)
+- **Seiten** — page types such as Dashboard, Übersichtsseite, Detailseite
+- **Overlays** — Modal flows such as creating, confirming, or multi-step tasks
+- **Bausteine** — smaller building blocks inside a page, such as a Formular or
+  Multi Upload
+
+Each Template page opens with a `LiveCodeEditor` example that can be copied as a
+whole, followed by `# Verwendung`, `# Aufbau`, and optionally
+`# Varianten und Abwandlung`. Keep the example code compact to avoid excessive
 scrolling.
-
-Smaller implementation examples belong in **Code Snippets**, a subsection of
-Patterns.
 
 ### Components
 
 Each Component has its own documentation page. A page is a **single**
-`index.mdx` file — one continuous page, read top to bottom. (Earlier the content
-was split across three tabs, `overview.mdx`, `develop.mdx`, and
-`guidelines.mdx`; these are consolidated into `index.mdx`.)
+`index.mdx` file — one continuous page, read top to bottom.
 
 The frontmatter defines the Component name and its introduction:
 
@@ -136,12 +139,14 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 # <dev edge case>     rare dev-only note (e.g. Suspense ordering); just above Properties
 ---
 # Properties          <PropertiesTables />
+---
+# Design Tokens       <ComponentTokenTable /> — only when the Component has tokens
 ```
 
 Separators: no rule between the frontmatter and the opening example; a `---`
 between every top-level `#` section (the first one right before
 `# Best Practices`), and **none** between a `#` and its own `##`. `# Properties`
-is always last.
+comes last, followed only by `# Design Tokens`.
 
 ### Opening example
 
@@ -149,6 +154,10 @@ The page opens directly with the default live example — no heading and no
 opening sentence. The Component name, its one-sentence description, and the
 GitHub / Markdown links render above it from the frontmatter, so the body starts
 with the `<LiveCodeEditor />` that renders the implicit `examples/default.tsx`.
+
+Only this opening example shows its code by default. Every later
+`<LiveCodeEditor />` on the page gets `editorCollapsed`. A long opening example
+stays open too — it is truncated with „Mehr anzeigen“ automatically.
 
 A single `<Alert>` may sit above the editor when it flags an
 integration-critical caveat — an accessibility warning (Truncate) or a usage
@@ -159,8 +168,8 @@ first element on the page.
 
 The single entry point to a Component's guidance: a flat checklist a developer
 scans once to know **what to watch out for when using this Component** — across
-accessibility, interplay with other Components, higher-level patterns (for
-example Forms), and Component-specific rules.
+accessibility, interplay with other Components, Templates (for example the
+Formular), and Component-specific rules.
 
 - **Flat bullet list, most important first.** No sub-headings, no shared opening
   sentence.
@@ -186,10 +195,10 @@ example Forms), and Component-specific rules.
   rule (example, Do/Dont, rationale); they never introduce a rule the checklist
   omits. A bullet may link inline to a section or page that goes deeper, but the
   link is optional — no arrow prefix, no forced cross-reference.
-- **Higher-level patterns are normal bullets with an inline link,** shown only
-  when they matter (often as the first bullet): „Folge in einem Formular dem
-  [Form-Pattern](…). Dort sind Aufbau, Validierung und Fehlerbehandlung
-  geregelt."
+- **Templates are normal bullets with an inline link,** shown only when they
+  matter (often as the first bullet): „Folge in einem Formular dem
+  [Formular-Template](/templates/bausteine/formular). Dort sind Aufbau,
+  Validierung und Fehlerbehandlung geregelt."
 - **Soft cap of roughly 5–8 bullets.** If a rule needs more than a directive
   sentence plus one reason sentence, move the depth into a feature section and
   let the bullet summarise. A longer list signals that something belongs in its
@@ -271,6 +280,19 @@ not invent one — only lift a genuine edge case out of the feature sections.
 Always the last section: a `# Properties` heading containing
 `<PropertiesTables />`, which renders the props documentation generated from the
 prop JSDoc.
+
+### Design Tokens
+
+After `# Properties`, for every Component that has component tokens: a
+`# Design Tokens` heading containing `<ComponentTokenTable />`. It lists the
+tokens of the namespace named after the Component (`TextField` → `text-field`)
+with their resolved value, in two tables: `Größen & Stile`, and `Farben` with a
+Light and a Dark column (plus any other token that differs between the themes).
+An info icon behind a token name shows the tokens it references on the way to
+its value. A Component styled by another namespace names it explicitly:
+`<ComponentTokenTable tokens="form-control" />`, several separated by commas. A
+string, not an array: next-mdx-remote strips JS expressions from MDX. A
+namespace that does not exist fails `pnpm nx test:unit docs`.
 
 ---
 
@@ -425,7 +447,7 @@ Use inline links generously to connect related documentation.
 - Component names in prose link to the Component's page:
   `[Section](/components/structure/section)`.
 - Links are root-relative (starting with `/get-started`, `/foundations`,
-  `/patterns`, or `/components`).
+  `/templates`, `/components`, or `/releases`).
 - Verify a link target exists before adding it, and avoid linking to the same
   page multiple times within a short section unless it improves readability.
 
@@ -462,10 +484,15 @@ The most important MDX Components for writing content:
 - `<LiveCodeEditor />` — renders an interactive code example, and the primary
   building block of a Component page. Without an `example` prop it uses
   `examples/default.tsx`; with `example="name"` it renders `examples/name.tsx`
-  from the `examples` directory next to the MDX file. Common props:
+  from the `examples` directory next to the MDX file. The example's imports are
+  not shown — write them anyway, they provide the editor's scope. Common props:
   `editorCollapsed` (code initially hidden), `editorDisabled` (no editor), `row`
   (side-by-side grid), `resizable` (handle to drag the container width, for
-  examples whose behaviour depends on it), `bgColor`, `zoom`.
+  examples whose behaviour depends on it), `bgColor`, `zoom`. An example that
+  starts open and runs longer than 20 lines is shown truncated with a „Mehr
+  anzeigen“ control; an `editorCollapsed` one keeps its show/hide toggle
+  instead. Every visible example carries a copy button. None of this takes a
+  prop.
 - `<PropertiesTables />` — renders the generated props documentation in the
   `# Properties` section.
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.

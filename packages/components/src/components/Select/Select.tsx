@@ -10,6 +10,7 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Options";
+import { getOptionsTunnelProps } from "@/components/Option/optionsTunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
@@ -56,7 +57,8 @@ export const Select = flowComponent("Select", (props) => {
   const {
     FieldErrorView,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     FieldErrorCaptureContext,
   } = useFieldComponent(props, "Select");
 
@@ -68,10 +70,7 @@ export const Select = flowComponent("Select", (props) => {
 
   const propsContext: PropsContext = {
     Option: {
-      tunnel: {
-        id: "options",
-        component: "Select",
-      },
+      tunnel: getOptionsTunnelProps("Select"),
     },
     ...fieldPropsContext,
   };
@@ -84,8 +83,8 @@ export const Select = flowComponent("Select", (props) => {
   return (
     <Aria.Select
       {...rest}
-      {...fieldProps}
-      className={clsx(rootClassName, fieldProps.className)}
+      {...controlProps}
+      className={clsx(rootClassName, wrapperProps.className)}
       onChange={(value) => {
         if (!isReadOnly) {
           onChange?.(value);

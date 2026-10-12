@@ -62,6 +62,15 @@ export const MultipleSelection: Story = {
   },
 };
 
+export const MultipleSelectionWithSelectAll: Story = {
+  args: {
+    defaultOpen: true,
+    selectionMode: "multiple",
+    showSelectAll: true,
+    defaultSelectedKeys: ["item2"],
+  },
+};
+
 export const WithLinks: Story = {
   render: (props) => (
     <ContextMenuTrigger>

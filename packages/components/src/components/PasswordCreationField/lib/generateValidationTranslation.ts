@@ -39,6 +39,7 @@ const generateTranslationString = (
     : finalTranslationString;
 };
 
+/** @internal */
 export const generateValidationTranslation = (
   r: Partial<RuleValidationResult>,
   shotVersion = false,

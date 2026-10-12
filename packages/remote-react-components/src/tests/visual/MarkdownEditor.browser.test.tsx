@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
@@ -42,6 +42,24 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("MarkdownEditor states - custom button");
+  },
+);
+
+// accept and uploadFile exist from 1.4.0 (and 1.3.0-next.24), not on the 1.3 line.
+test.skipIf(crossVersion({ below: "1.4.0-next.0" })).each(testEnvironments)(
+  "MarkdownEditor attachment button (%s)",
+  async ({ testScreenshot, render, components: { MarkdownEditor, Label } }) => {
+    await render(
+      <MarkdownEditor
+        rows={1}
+        accept="image/*"
+        uploadFile={async () => ({ url: "https://example.com/a.png" })}
+      >
+        <Label>With attachment button</Label>
+      </MarkdownEditor>,
+    );
+
+    await testScreenshot("MarkdownEditor states - attachment button");
   },
 );
 

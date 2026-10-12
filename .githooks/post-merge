@@ -1,0 +1,6 @@
+#!/bin/sh
+# Keeps node_modules in sync with what the merge brought in — without it a dev
+# server 500s on a dependency the merge added but the install never saw.
+[ "$SKIP_GIT_HOOKS" = "1" ] && exit 0
+
+pnpm install

@@ -1,0 +1,129 @@
+.app {
+  /* Header and content share one maximum width, so their edges line up. */
+  --page-width: 1800px;
+
+  /* The header's tint is mixed from the gradient's first stop. */
+  --header-ground: var(--neutral--color--200);
+
+  /* The header's rendered height; the sticky sidebar starts just below it. */
+  --header-height: 72px;
+
+  /* Container-relative here; use 100dvh in a real full-page app. */
+  min-height: 100%;
+  background: var(--color--background-gradient);
+}
+
+/*
+ * The header stays at the top while the page scrolls beneath it. Its tint is
+ * translucent and blurred, so the navigation stays legible above the content.
+ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-block: var(--size-px--m);
+  background-color: color-mix(in srgb, var(--header-ground) 40%, transparent);
+  backdrop-filter: blur(var(--blur));
+}
+
+.headerContent {
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--size-px--xl);
+}
+
+.content {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-block: var(--size-px--s) var(--size-px--l);
+  padding-inline: var(--size-px--xl);
+}
+
+/*
+ * The wordmark rides on `currentColor` through a CSS mask, so it follows the
+ * theme. Swap the masked SVG for your own logo.
+ */
+.logo {
+  width: 8rem;
+  max-width: 100%;
+  aspect-ratio: 300 / 57;
+  background: currentcolor;
+  mask: url("./mittwald.svg") no-repeat center / contain;
+  -webkit-mask: url("./mittwald.svg") no-repeat center / contain;
+}
+
+/* The global navigation is pushed to the far end of the top bar. */
+.topnav {
+  margin-inline-start: auto;
+}
+
+/* Search and the burger take that place once the navigation gives it up. */
+.mobileActions {
+  margin-inline-start: auto;
+}
+
+/* Navigation, content and table of contents sit in three columns. */
+.body {
+  flex: 1;
+  min-height: 0;
+}
+
+/*
+ * Both cards keep a fixed width; only the content column flexes. They stay below
+ * the header while the page scrolls, and scroll their own links once they
+ * outgrow the viewport.
+ */
+.sidebar,
+.toc {
+  flex: 0 0 17rem;
+  position: sticky;
+  top: calc(var(--header-height) + var(--size-px--s));
+  align-self: flex-start;
+  max-height: calc(
+    100dvh - var(--header-height) - var(--size-px--s) - var(--size-px--l)
+  );
+  overflow: auto;
+}
+
+.main {
+  flex: 1 1 20rem;
+}
+
+.footer {
+  margin-block-start: auto;
+}
+
+/*
+ * Below this width neither the section links nor the component navigation
+ * fits, so both hand their links to the off-canvas behind the burger.
+ */
+@media (max-width: 768px) {
+  .topnav,
+  .sidebar {
+    display: none;
+  }
+
+  .headerContent,
+  .content {
+    padding-inline: var(--size-px--m);
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileActions {
+    display: none;
+  }
+}
+
+@media (prefers-contrast: more), (prefers-reduced-transparency) {
+  .header {
+    background-color: var(--header-ground);
+    backdrop-filter: none;
+  }
+}
+
+/* The dark gradient starts darker than the neutral token. */
+[data-theme="dark"] .app {
+  --header-ground: #121518;
+}

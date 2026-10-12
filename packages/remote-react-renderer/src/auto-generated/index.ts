@@ -28,6 +28,7 @@ import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
 import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
+import { CoachMark as CoachMark } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
@@ -110,6 +111,7 @@ import { SegmentedControl as SegmentedControl } from "@mittwald/flow-react-compo
 import { Select as Select } from "@mittwald/flow-react-components";
 import { Separator as Separator } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
+import { SkeletonMode as SkeletonMode } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
@@ -197,6 +199,7 @@ export const flowComponents = {
     "ClearPropsContext",
     ClearPropsContext,
   ),
+  "flr-coach-mark": createFlowRemoteComponentRenderer("CoachMark", CoachMark),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
   "flr-code-editor": createFlowRemoteComponentRenderer(
     "CodeEditor",
@@ -432,6 +435,10 @@ export const flowComponents = {
   "flr-select": createFlowRemoteComponentRenderer("Select", Select),
   "flr-separator": createFlowRemoteComponentRenderer("Separator", Separator),
   "flr-skeleton": createFlowRemoteComponentRenderer("Skeleton", Skeleton),
+  "flr-skeleton-mode": createFlowRemoteComponentRenderer(
+    "SkeletonMode",
+    SkeletonMode,
+  ),
   "flr-skeleton-text": createFlowRemoteComponentRenderer(
     "SkeletonText",
     SkeletonText,

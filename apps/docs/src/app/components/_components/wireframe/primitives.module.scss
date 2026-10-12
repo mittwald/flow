@@ -27,12 +27,17 @@
   flex-shrink: 0;
 }
 
+// Tabler icon svgs passed to `WIcon` as children — the wrapper cannot class
+// them, and both rules below deliberately outrank the icon's own single-class
+// width/height, which a class selector would upset.
+// stylelint-disable-next-line selector-max-type -- see above
 .frame .iconTone svg {
   color: inherit;
 }
 
 /* WIcon with a size: the icon fills the wrapper instead of using its own size
    token. Outranks the icon's single-class width/height. */
+// stylelint-disable-next-line selector-max-type -- see the `iconTone` rule above
 .iconSized svg {
   width: 100%;
   height: 100%;

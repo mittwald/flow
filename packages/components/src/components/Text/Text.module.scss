@@ -14,6 +14,10 @@
   @include color(dark-static);
   @include color(light-static);
 
+  /* `Text` styles raw HTML that its children bring along — `Markdown` nests
+     bare `<ul>`/`<ol>`/`<blockquote>` inside a `Text`, and consumers write the
+     same markup by hand. None of it is authored here, so none of it is classed. */
+  // stylelint-disable selector-max-type -- children's raw HTML, see above
   ul,
   ol {
     padding-inline-start: var(--text--list-padding);
@@ -45,6 +49,7 @@
       height: var(--line-height-s);
     }
   }
+  // stylelint-enable selector-max-type
 
   &:where(.align-start) {
     text-align: start;

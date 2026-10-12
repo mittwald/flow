@@ -5,6 +5,7 @@ declare const classNames: {
   readonly value: "value";
   readonly bar: "bar";
   readonly fill: "fill";
+  readonly segment: "segment";
   readonly "size-s": "size-s";
   readonly "size-m": "size-m";
   readonly "size-l": "size-l";
@@ -12,5 +13,6 @@ declare const classNames: {
   readonly success: "success";
   readonly danger: "danger";
   readonly warning: "warning";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

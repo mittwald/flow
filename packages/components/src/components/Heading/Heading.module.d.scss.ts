@@ -9,6 +9,8 @@ declare const classNames: {
   readonly headingText: "headingText";
   readonly icon: "icon";
   readonly headingContent: "headingContent";
+  readonly headingTextSpacer: "headingTextSpacer";
+  readonly headingContentItem: "headingContentItem";
   readonly h1: "h1";
   readonly h2: "h2";
   readonly h3: "h3";

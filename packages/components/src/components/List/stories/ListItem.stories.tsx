@@ -15,6 +15,12 @@ import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Checkbox } from "@/components/Checkbox";
+import { CopyButton } from "@/components/CopyButton";
+import { Combine } from "@/components/Combine";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -218,6 +224,80 @@ export const WithColumnLayout: Story = {
                 </ProgressBar>
               </Content>
 
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithHeadingButton: Story = {
+  render: () => {
+    const List = typedList<{ mail: string }>();
+
+    return (
+      <List.List aria-label="Mail addresses">
+        <List.StaticData
+          data={[
+            { mail: "han.solo@rebellion.org" },
+            { mail: "chewbacca.the.wookiee.copilot@rebellion.org" },
+          ]}
+        />
+        <List.Item showTiles textValue={(mail) => mail.mail}>
+          {(mail) => (
+            <List.ItemView>
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>
+                {mail.mail}
+                <CopyButton text={mail.mail} />
+              </Heading>
+              <Text>Rebel Alliance</Text>
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithCombinedText: Story = {
+  render: () => {
+    const List = typedList<{ name: string; runtime: string }>();
+
+    return (
+      <List.List aria-label="Projects">
+        <List.StaticData
+          data={[{ name: "Millennium Falcon", runtime: "PHP 8.2" }]}
+        />
+        <List.Item showTiles textValue={(project) => project.name}>
+          {(project) => (
+            <List.ItemView>
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>{project.name}</Heading>
+              <Text>{project.runtime}</Text>
+              <Text>
+                <Combine>
+                  <Text>Deprecated</Text>
+                  <ContextualHelpTrigger subject={project.runtime}>
+                    <Button />
+                    <ContextualHelp>
+                      <Text>{dummyText.medium}</Text>
+                    </ContextualHelp>
+                  </ContextualHelpTrigger>
+                </Combine>
+              </Text>
+              <Text>Last deploy 2 days ago</Text>
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>

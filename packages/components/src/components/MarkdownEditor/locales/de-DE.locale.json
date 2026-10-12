@@ -1,6 +1,7 @@
 {
   "mode.editor": "Vorschau beenden",
   "mode.preview": "Vorschau",
+  "toolbar.attachment": "Datei anhängen",
   "toolbar.bold": "Fett",
   "toolbar.code": "Code",
   "toolbar.italic": "Kursiv",
@@ -8,5 +9,8 @@
   "toolbar.orderedList": "Sortierte Liste",
   "toolbar.quote": "Zitat",
   "toolbar.strikeThrough": "Durchgestrichen",
-  "toolbar.unorderedList": "Liste"
+  "toolbar.unorderedList": "Liste",
+  "upload.failed": "{name} konnte nicht hochgeladen werden",
+  "upload.pending": "{name} wird hochgeladen",
+  "upload.succeeded": "{name} wurde hochgeladen"
 }

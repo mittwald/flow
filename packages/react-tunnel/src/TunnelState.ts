@@ -14,6 +14,15 @@ interface TunnelEntryState {
   index: number;
   id: string;
   children: TunnelChildren;
+  /**
+   * The `TunnelEntry` instances currently registered under this entry id.
+   * Usually exactly one, but a `staticEntryId` is shared on purpose: react-aria
+   * renders collection children twice (once into its hidden collection
+   * document, once for real), and both renders register the same entry. The
+   * entry is only removed once the last of them unmounts — deleting it when the
+   * first one goes would drop content that is still being rendered.
+   */
+  owners: Set<string>;
 }
 
 interface TunnelEntries {
@@ -76,64 +85,120 @@ export class TunnelState {
     return thisIndex.current;
   }
 
-  public setChildren(
-    tunnelId: string = defaultId,
+  private buildEntryState(
+    previous: TunnelEntryState | undefined,
     entryId: string,
+    ownerId: string,
     index: number,
     children: TunnelChildren,
-  ): void {
-    const entryState: TunnelEntryState = {
+  ): TunnelEntryState {
+    const owners = new Set(previous?.owners);
+    owners.add(ownerId);
+
+    return {
       id: entryId,
       index,
       children,
+      owners,
     };
+  }
 
+  public setChildren(
+    tunnelId: string = defaultId,
+    entryId: string,
+    ownerId: string,
+    index: number,
+    children: TunnelChildren,
+  ): void {
     const tunnelEntries =
       this.committedChildren.get(tunnelId) ??
       observable.map<string, TunnelEntryState>({}, { deep: false });
 
-    tunnelEntries.set(entryId, entryState);
+    tunnelEntries.set(
+      entryId,
+      this.buildEntryState(
+        tunnelEntries.get(entryId),
+        entryId,
+        ownerId,
+        index,
+        children,
+      ),
+    );
 
-    this.renderPhaseChildren.get(tunnelId)?.delete(entryId);
+    this.deleteOwnerFromMap(
+      this.renderPhaseChildren,
+      tunnelId,
+      entryId,
+      ownerId,
+    );
     this.committedChildren.set(tunnelId, tunnelEntries);
   }
 
   public setRenderPhaseChildren(
     tunnelId: string = defaultId,
     entryId: string,
+    ownerId: string,
     index: number,
     children: TunnelChildren,
   ): void {
-    const entryState: TunnelEntryState = {
-      id: entryId,
-      index,
-      children,
-    };
-
     const tunnelEntries =
       this.renderPhaseChildren.get(tunnelId) ??
       new Map<string, TunnelEntryState>();
 
-    tunnelEntries.set(entryId, entryState);
+    tunnelEntries.set(
+      entryId,
+      this.buildEntryState(
+        tunnelEntries.get(entryId),
+        entryId,
+        ownerId,
+        index,
+        children,
+      ),
+    );
 
     this.renderPhaseChildren.set(tunnelId, tunnelEntries);
   }
 
-  private deleteChildrenFromMap(
+  private deleteOwnerFromMap(
     map: Map<string, Map<string, TunnelEntryState>>,
     tunnelId: string,
     entryId: string,
+    ownerId: string,
   ): void {
     const mapEntries = map.get(tunnelId);
-    mapEntries?.delete(entryId);
-    if (mapEntries?.size === 0) {
+    const entry = mapEntries?.get(entryId);
+
+    if (!mapEntries || !entry) {
+      return;
+    }
+
+    const owners = new Set(entry.owners);
+    owners.delete(ownerId);
+
+    if (owners.size > 0) {
+      mapEntries.set(entryId, { ...entry, owners });
+      return;
+    }
+
+    mapEntries.delete(entryId);
+
+    if (mapEntries.size === 0) {
       map.delete(tunnelId);
     }
   }
 
-  public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
-    this.deleteChildrenFromMap(this.committedChildren, tunnelId, entryId);
-    this.deleteChildrenFromMap(this.renderPhaseChildren, tunnelId, entryId);
+  public deleteChildren(
+    tunnelId: string = defaultId,
+    entryId: string,
+    ownerId: string,
+  ): void {
+    this.deleteOwnerFromMap(this.committedChildren, tunnelId, entryId, ownerId);
+    this.deleteOwnerFromMap(
+      this.renderPhaseChildren,
+      tunnelId,
+      entryId,
+      ownerId,
+    );
   }
 
   // Pure read — never mutate during render. `getEntries` runs inside the

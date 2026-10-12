@@ -85,6 +85,54 @@ test("Content from entry is in the DOM in the first commit", async () => {
   expect(seenInLayoutEffect).toEqual(["Hello!"]);
 });
 
+// Regression guard for an exit that mounts in a Suspense reveal and precedes its
+// entry in tree order — `ListItemView` renders its exits ahead of the tunnelled
+// `Avatar`, `Heading` and `Text`. The exit subscribes to the tunnel state in a
+// passive effect, and React runs the passive effects of a reveal after paint.
+// Without a re-render in the layout phase, the browser paints one frame with an
+// empty exit.
+test("Content from entry is in the DOM when the exit mounts in a Suspense reveal", async () => {
+  let resolveData!: () => void;
+  const data = new Promise<void>((resolve) => {
+    resolveData = resolve;
+  });
+
+  const Suspending: FC<PropsWithChildren> = (props) => {
+    React.use(data);
+    return props.children;
+  };
+
+  const dom = await render(
+    <TunnelProvider>
+      <Suspense fallback="Loading">
+        <Suspending>
+          <div data-testid="exit">
+            <TunnelExit />
+          </div>
+          <TunnelEntry>Hello!</TunnelEntry>
+        </Suspending>
+      </Suspense>
+    </TunnelProvider>,
+  );
+
+  // A MutationObserver callback runs right after the task that committed the
+  // reveal — before any later task that could fill the exit.
+  const exitContentOnReveal = new Promise<string>((resolve) => {
+    const observer = new MutationObserver(() => {
+      const exit = dom.container.querySelector('[data-testid="exit"]');
+      if (exit) {
+        observer.disconnect();
+        resolve(exit.textContent ?? "");
+      }
+    });
+    observer.observe(dom.container, { childList: true, subtree: true });
+  });
+
+  resolveData();
+
+  expect(await exitContentOnReveal).toBe("Hello!");
+});
+
 test("Content from entry is rendered in exit when using same tunnel ids", async () => {
   const dom = await render(
     <TunnelProvider>
@@ -383,6 +431,70 @@ test("Order of multiple children is changed when entries are changing", async ()
   expect(dom.getByTestId("exit")).toHaveTextContent("ACB");
 });
 
+describe("Static entry id", () => {
+  /*
+   * A `staticEntryId` is shared on purpose: react-aria renders collection
+   * children twice — once into its hidden collection document, once for real —
+   * and both renders register the same entry. With a generated id each render
+   * became its own entry and the exit rendered every element twice.
+   */
+  test("Entries sharing a static entry id are rendered once", async () => {
+    const dom = await render(
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit />
+        </div>
+        <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+        <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+      </TunnelProvider>,
+    );
+
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+  });
+
+  test("Content stays while one of the entries sharing a static entry id unmounts", async () => {
+    const Test: FC<{ renderSecondEntry: boolean }> = (props) => (
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit />
+        </div>
+        <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+        {props.renderSecondEntry && (
+          <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+        )}
+      </TunnelProvider>
+    );
+
+    const dom = await render(<Test renderSecondEntry />);
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+
+    await dom.rerender(<Test renderSecondEntry={false} />);
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+  });
+
+  test("Content is removed once the last entry sharing a static entry id unmounts", async () => {
+    const Test: FC<{ renderEntries: boolean }> = (props) => (
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit />
+        </div>
+        {props.renderEntries && (
+          <>
+            <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+            <TunnelEntry staticEntryId="shared">A</TunnelEntry>
+          </>
+        )}
+      </TunnelProvider>
+    );
+
+    const dom = await render(<Test renderEntries />);
+    expect(dom.getByTestId("exit")).toHaveTextContent(/^A$/);
+
+    await dom.rerender(<Test renderEntries={false} />);
+    expect(dom.getByTestId("exit")).toHaveTextContent("");
+  });
+});
+
 vitest.useFakeTimers();
 
 test("Content is not rendered if removing previously suspended tunnel entry", async () => {
@@ -425,9 +537,13 @@ test("Content is not rendered if removing previously suspended tunnel entry", as
   const dom = await render(<TestComponent renderEntries />);
   expect(dom.getByTestId("exit")).toHaveTextContent("");
 
-  vitest.advanceTimersByTime(1000);
-  await dom.rerender(<TestComponent renderEntries />);
-  expect(dom.getByTestId("exit")).toHaveTextContent("AB");
+  // React pre-renders the suspended siblings in a later task, so `Lazy500` may
+  // only start its timer after the first advance.
+  await vitest.waitFor(async () => {
+    vitest.advanceTimersByTime(1000);
+    await dom.rerender(<TestComponent renderEntries />);
+    expect(dom.getByTestId("exit")).toHaveTextContent("AB");
+  });
 
   await dom.rerender(<TestComponent renderEntries={false} />);
   expect(dom.getByTestId("exit")).toHaveTextContent("");
@@ -512,7 +628,7 @@ describe("Nested tunnel provider", () => {
 describe("SSR hydration", () => {
   test("getEntries is a pure read, idempotent across repeated render invocations", () => {
     const state = new TunnelState();
-    state.setRenderPhaseChildren("default", "entry-1", 0, "Hello!");
+    state.setRenderPhaseChildren("default", "entry-1", "owner-1", 0, "Hello!");
 
     // Read render-phase children (as the exit does during SSR / first render).
     const first = state.getEntries("default", true);

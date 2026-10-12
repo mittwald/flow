@@ -30,7 +30,7 @@ import {
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
   Policy,
-  generatePasswordCreationFieldValidation,
+  usePasswordCreationFieldValidation,
   RuleType,
 } from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { useForm } from "react-hook-form";
@@ -163,7 +163,7 @@ export default function Page() {
           name="password"
           rules={{
             required: true,
-            validate: generatePasswordCreationFieldValidation(customPolicy),
+            validate: usePasswordCreationFieldValidation(customPolicy),
           }}
         >
           <PasswordCreationField validationPolicy={customPolicy}>

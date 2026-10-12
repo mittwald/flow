@@ -8,6 +8,12 @@ import {
   tokenName,
 } from "@/lib/designTokens/collectTokens";
 import { absoluteUrl } from "@/lib/llms/siteUrls";
+import {
+  loadComponentTokens,
+  parseTokensAttribute,
+  resolveNamespaces,
+  splitByTheme,
+} from "@/lib/componentTokens/loadComponentTokens";
 
 interface Options {
   componentName?: string;
@@ -45,6 +51,37 @@ const readExample = (dir: string, name: string): string | null => {
 const attr = (tag: string, name: string): string | undefined =>
   new RegExp(`${name}=["']([^"']*)["']`).exec(tag)?.[1];
 
+// Same file list the rendered `<AppShell>` shows as tabs.
+const appShellFiles = (tag: string, example: string): string[] => {
+  const files = /files=\{\[([^\]]*)\]\}/.exec(tag)?.[1];
+  if (files === undefined) {
+    return [`${example}.tsx`, `${example}.module.css`];
+  }
+  return Array.from(
+    files.matchAll(/["']([^"']+)["']/g),
+    (match) => match[1] ?? "",
+  );
+};
+
+const appShellToMarkdown = (dir: string, tag: string): string => {
+  const example = attr(tag, "example");
+  if (!example) {
+    return "";
+  }
+  return appShellFiles(tag, example)
+    .flatMap((fileName) => {
+      const code = fileName.endsWith(".tsx")
+        ? readExample(dir, fileName.slice(0, -".tsx".length))
+        : jetpack.read(path.join(dir, "examples", fileName))?.trim();
+      if (!code) {
+        return [];
+      }
+      const language = fileName.endsWith(".css") ? "css" : "tsx";
+      return [`**${fileName}**\n\n\`\`\`${language}\n${code}\n\`\`\``];
+    })
+    .join("\n\n");
+};
+
 const designTokenTableToMarkdown = (tokenPath: string): string => {
   const tokens = collectTokensInPath(tokenPath, lightDesignTokens);
   if (tokens.length === 0) {
@@ -58,6 +95,38 @@ const designTokenTableToMarkdown = (tokenPath: string): string => {
       (token) => `| \`--${tokenName(token)}\` | \`${token.value}\` |`,
     ),
   ].join("\n");
+};
+
+const componentTokenTableToMarkdown = (namespaces: string[]): string => {
+  const { single, perTheme } = splitByTheme(loadComponentTokens(namespaces));
+  const tables = [];
+
+  if (single.length > 0) {
+    tables.push(
+      [
+        "## Größen & Stile",
+        "",
+        "| Token | Wert |",
+        "| --- | --- |",
+        ...single.map((token) => `| \`${token.name}\` | \`${token.light}\` |`),
+      ].join("\n"),
+    );
+  }
+  if (perTheme.length > 0) {
+    tables.push(
+      [
+        "## Farben",
+        "",
+        "| Token | Light | Dark |",
+        "| --- | --- | --- |",
+        ...perTheme.map(
+          (token) =>
+            `| \`${token.name}\` | \`${token.light}\` | \`${token.dark ?? token.light}\` |`,
+        ),
+      ].join("\n"),
+    );
+  }
+  return tables.join("\n\n");
 };
 
 const dedent = (content: string): string => {
@@ -111,6 +180,12 @@ export const mdxToMarkdown = (
     return code ? `\n\n${stash(`\`\`\`tsx\n${code}\n\`\`\``)}\n\n` : "";
   });
 
+  // AppShell -> one fenced code block per file of the multi-file example.
+  body = body.replaceAll(/<AppShell\b[\s\S]*?\/>/g, (tag) => {
+    const code = appShellToMarkdown(dir, tag);
+    return code ? `\n\n${stash(code)}\n\n` : "";
+  });
+
   // PropertiesTables -> Markdown tables from the generated doc-properties.
   body = body.replaceAll(/<PropertiesTables\s*\/>/g, () => {
     if (!options.componentName) {
@@ -132,6 +207,17 @@ export const mdxToMarkdown = (
       return "";
     }
     const table = designTokenTableToMarkdown(tokenPath);
+    return table ? `\n\n${stash(table)}\n\n` : "";
+  });
+
+  // ComponentTokenTable -> the same rows the rendered table shows.
+  body = body.replaceAll(/<ComponentTokenTable\b[^>]*\/>/g, (tag) => {
+    if (!options.componentName) {
+      return "";
+    }
+    const table = componentTokenTableToMarkdown(
+      resolveNamespaces(options.componentName, parseTokensAttribute(tag)),
+    );
     return table ? `\n\n${stash(table)}\n\n` : "";
   });
 

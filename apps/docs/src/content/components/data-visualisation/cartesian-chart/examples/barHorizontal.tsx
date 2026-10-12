@@ -6,9 +6,9 @@ import {
 
 export default () => {
   const data = [
-    { Projekt: "Projekt A", Speicherplatz: 68 },
-    { Projekt: "Projekt B", Speicherplatz: 42 },
-    { Projekt: "Projekt C", Speicherplatz: 21 },
+    { Projekt: "Webshop Produktion", Speicherplatz: 68 },
+    { Projekt: "Webshop Staging", Speicherplatz: 42 },
+    { Projekt: "Firmenblog", Speicherplatz: 21 },
   ];
 
   const CartesianChart = typedCartesianChart<{

@@ -26,8 +26,16 @@ describe("the catalogue reads and validates", () => {
     });
   });
 
-  test("an entry without a codemod is marked manual", () => {
-    expect(byId.get("renamed-css-export")).toMatchObject({ action: "manual" });
+  test("an entry without a codemod is marked manual or none", () => {
+    // Deliberately id-independent. This used to name `renamed-css-export`, and
+    // adding a codemod for it broke a test that was only ever checking that the
+    // parser reads a non-codemod `action` — the correspondence itself is
+    // enforced below, over every entry.
+    const withoutTransform = catalog.filter((entry) => !hasTransform(entry.id));
+    expect(withoutTransform.length).toBeGreaterThan(0);
+    for (const entry of withoutTransform) {
+      expect(["manual", "none"]).toContain(entry.action);
+    }
   });
 
   test("the body is Markdown, not frontmatter", () => {

@@ -6,19 +6,26 @@
  * Reads the changed-file list on stdin (one repository-relative path per line)
  * and writes `publish=true|false` to $GITHUB_OUTPUT.
  *
- * `ROOT_MANIFEST_BEFORE_FILE` / `ROOT_MANIFEST_AFTER_FILE` optionally point at
- * the two versions of the root `package.json`. They let the classifier judge
- * that manifest by its key diff instead of its path (#2970); without them the
- * root manifest stays relevant, as before.
+ * `MANIFEST_SNAPSHOT_DIR` optionally points at a directory holding both
+ * versions of every changed `package.json` the workflow fetched, as
+ * `<dir>/before/<slug>.json` and `<dir>/after/<slug>.json` with the path's `/`
+ * replaced by `__`. They let the classifier judge a manifest by its key diff
+ * instead of its path (#2970, #3023); a missing snapshot leaves that manifest
+ * relevant, as before.
  *
  * It never fails the run. The decision is a routing choice, not a policy
  * violation: an empty or unreadable input yields `publish=true`, which is the
  * behaviour before #2931.
  */
 import { appendFileSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import {
   classifyChangedFiles,
-  classifyRootManifestChange,
+  classifyManifestChange,
+  packageRootMarkdown,
+  shipsRootMarkdown,
+  classifyPath,
+  isPublishRelevant,
 } from "./release-relevance-lib.mjs";
 
 /** Read all of stdin; an unreadable stdin is an empty list (fail-safe). */
@@ -36,34 +43,77 @@ const files = readStdin()
   .filter((line) => line !== "");
 
 /**
- * The root manifest's two versions, if the workflow fetched them.
+ * One fetched side of one manifest, or `undefined` when it is not there.
  *
- * A missing or unreadable file is `undefined`, which
- * `classifyRootManifestChange` reports as relevant — the behaviour before this
- * refinement.
+ * A missing or unreadable file makes `classifyManifestChange` report the
+ * manifest as relevant — the behaviour before this refinement. A manifest that
+ * was ADDED or DELETED has only one side, and that is exactly the case where
+ * the fail-safe default is what we want.
  *
- * @param {string} variable
+ * @param {string} dir
+ * @param {"before" | "after"} side
+ * @param {string} path
  */
-function readManifest(variable) {
-  const path = process.env[variable];
-  if (!path) return undefined;
+function readManifestSide(dir, side, path) {
+  const file = join(dir, side, `${path.replaceAll("/", "__")}.json`);
   try {
-    return readFileSync(path, "utf8");
+    return readFileSync(file, "utf8");
   } catch {
-    console.log(`::warning::Could not read ${variable} (${path}).`);
     return undefined;
   }
 }
 
-/** @type {{ rootManifestRelevant?: boolean }} */
-const options = {};
-if (files.includes("package.json")) {
-  const manifest = classifyRootManifestChange(
-    readManifest("ROOT_MANIFEST_BEFORE_FILE"),
-    readManifest("ROOT_MANIFEST_AFTER_FILE"),
+/**
+ * Judge every changed `package.json` by its key diff, not by its path.
+ *
+ * The root manifest and each `packages/*` manifest go through the same
+ * function; only the reason names which one.
+ *
+ * @type {{ manifestRelevance: Record<string, boolean> }}
+ */
+const options = { manifestRelevance: {} };
+const snapshotDir = process.env.MANIFEST_SNAPSHOT_DIR;
+const manifests = files.filter(
+  (path) =>
+    (path === "package.json" || path.endsWith("/package.json")) &&
+    // An `apps/*` manifest is already irrelevant by path — refining it would
+    // only log a fail-safe line about a snapshot the workflow never fetches.
+    isPublishRelevant(path),
+);
+
+for (const path of manifests) {
+  const manifest = classifyManifestChange(
+    snapshotDir ? readManifestSide(snapshotDir, "before", path) : undefined,
+    snapshotDir ? readManifestSide(snapshotDir, "after", path) : undefined,
+    path,
   );
-  options.rootManifestRelevant = manifest.relevant;
-  console.log(`Root manifest: ${manifest.reason}.`);
+  options.manifestRelevance[path] = manifest.relevant;
+  console.log(`Manifest: ${manifest.reason}.`);
+}
+
+/**
+ * The `files` of every package whose ROOT Markdown changed.
+ *
+ * Read from the checkout, not fetched: only the CURRENT `files` matters, and
+ * the job already has the tree. An unreadable manifest leaves the entry
+ * undefined, which the classifier reads as "shipped" — fail safe.
+ */
+for (const path of files) {
+  const markdown = packageRootMarkdown(path);
+  if (!markdown || markdown.dir in (options.packageFiles ?? {})) continue;
+  options.packageFiles ??= {};
+  try {
+    const manifest = JSON.parse(
+      readFileSync(join(markdown.dir, "package.json"), "utf8"),
+    );
+    options.packageFiles[markdown.dir] = manifest.files;
+    console.log(
+      `Package files: ${markdown.dir} publishes ${JSON.stringify(manifest.files)}.`,
+    );
+  } catch {
+    console.log(`::warning::Could not read ${markdown.dir}/package.json.`);
+    options.packageFiles[markdown.dir] = undefined;
+  }
 }
 
 const { publish, reason, relevant, total } = classifyChangedFiles(
@@ -93,8 +143,21 @@ if (publish) {
       "This push produces no npm publish, no version bump commit, no tag and " +
       "no GitHub Release. Dispatch this workflow manually to publish anyway.",
   );
-  console.log(`Changed files (${total}):`);
-  for (const path of files.slice(0, SAMPLE)) console.log(`  ${path}`);
+  console.log(`Changed files (${total}), with the rule that cleared each:`);
+  for (const path of files.slice(0, SAMPLE)) {
+    const markdown = packageRootMarkdown(path);
+    const rule =
+      options.manifestRelevance[path] === false
+        ? `manifest key diff "${path}"`
+        : markdown &&
+            !shipsRootMarkdown(
+              markdown.file,
+              options.packageFiles?.[markdown.dir],
+            )
+          ? `package Markdown outside "files"`
+          : classifyPath(path).rule;
+    console.log(`  ${path} — ${rule}`);
+  }
   if (files.length > SAMPLE) {
     console.log(`  … and ${files.length - SAMPLE} more`);
   }

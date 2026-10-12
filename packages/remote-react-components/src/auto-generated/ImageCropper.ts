@@ -15,6 +15,7 @@ export const ImageCropper = createFlowRemoteComponent(
     },
     eventProps: {
       onCropComplete: { event: "cropComplete" } as never,
+      onError: { event: "error" } as never,
     },
   },
 );

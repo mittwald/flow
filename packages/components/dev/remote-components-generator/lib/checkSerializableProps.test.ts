@@ -1,6 +1,11 @@
 import type { ComponentDoc } from "react-docgen-typescript";
 import { describe, expect, test } from "vitest";
-import { checkSerializableProps } from "./checkSerializableProps";
+import {
+  acknowledgedValueReturningProps,
+  checkSerializableProps,
+  obsoleteBaselineEntries,
+  rejectedProps,
+} from "./checkSerializableProps";
 import { isProp, isSlot } from "./propClassifiers";
 
 /*
@@ -114,5 +119,87 @@ describe("checkSerializableProps", () => {
     const reports = checkSerializableProps([componentDoc("Example", {})]);
 
     expect(reports).toStrictEqual([]);
+  });
+
+  /*
+   * The `XAxis.tickFormatter` shape: a function property the host calls and
+   * reads the result of. It crosses as a thread proxy, so the host gets a
+   * Promise and recharts rendered `[object Promise]` into every tick.
+   */
+  test("reports a function whose return value the host reads", () => {
+    const type = "((value: unknown, index: number) => string)";
+    const reports = checkSerializableProps([
+      componentDoc("XAxis", { tickFormatter: type }),
+    ]);
+
+    expect(reports).toStrictEqual([
+      {
+        component: "XAxis",
+        prop: "tickFormatter",
+        type,
+        reason: "returns-a-value",
+      },
+    ]);
+  });
+
+  test("finds the value-returning arm inside a union", () => {
+    const reports = checkSerializableProps([
+      componentDoc("DatePicker", {
+        shouldCloseOnSelect: "boolean | (() => boolean)",
+      }),
+    ]);
+
+    expect(reports.map((r) => r.reason)).toStrictEqual(["returns-a-value"]);
+  });
+
+  /*
+   * A return the host cannot read is fine — that is what every `on*` event is,
+   * and `formAction` is the same shape under a name the event rule misses. A
+   * `Promise` return says the host already awaits, which is how `ChartTooltip`'s
+   * formatters are typed.
+   */
+  test("stays quiet about functions whose return value nobody reads", () => {
+    const reports = checkSerializableProps([
+      componentDoc("Example", {
+        formAction: "string | ((formData: FormData) => void | Promise<void>)",
+        formatter: "((value: string) => string | Promise<string>)",
+        never: "(() => never)",
+      }),
+    ]);
+
+    expect(reports.map((r) => `${r.prop}: ${r.reason}`)).toStrictEqual([
+      // only the one that returns `string` before the union's Promise arm
+      "formatter: returns-a-value",
+    ]);
+  });
+});
+
+describe("the acknowledged value-returning baseline", () => {
+  const report = (component: string, prop: string) => ({
+    component,
+    prop,
+    type: "((value: unknown) => boolean)",
+    reason: "returns-a-value" as const,
+  });
+
+  test("excuses a listed prop and rejects an unlisted one", () => {
+    const listed = acknowledgedValueReturningProps[0] ?? "";
+    const [component = "", prop = ""] = listed.split(".");
+
+    const reports = [report(component, prop), report("New", "shouldDoThing")];
+
+    expect(rejectedProps(reports)).toStrictEqual([
+      report("New", "shouldDoThing"),
+    ]);
+  });
+
+  test("reports an entry that no longer matches a generated prop", () => {
+    const stale = acknowledgedValueReturningProps.filter(
+      (entry) => entry !== "TextField.validate",
+    );
+
+    expect(
+      obsoleteBaselineEntries([report("TextField", "validate")]),
+    ).toStrictEqual(stale);
   });
 });

@@ -22,6 +22,10 @@ description:
 - Wähle für die Custom Buttons ein aussagekräftiges
   [Icon](/components/content/icon) und formuliere das
   [Label](/components/content/label) prägnant und leicht verständlich.
+- Schränke die erlaubten Dateitypen über `accept` ein. Das verhindert Anhänge,
+  die die Anwendung ohnehin ablehnt.
+- Gib aus `uploadFile` eine `http`- oder `https`-URL zurück. Nur solche Bilder
+  stellt die Vorschau dar.
 
 ---
 
@@ -74,6 +78,25 @@ wie `<ContextMenuTrigger />` oder `<ModalTrigger />`.
 
 ---
 
+# Datei-Upload
+
+Ist die Property `uploadFile` gesetzt, nimmt der MarkdownEditor Dateien
+entgegen: per Drag & Drop auf das Eingabefeld, aus der Zwischenablage oder über
+den Anhang-Button in der Toolbar. `accept` schränkt die erlaubten Dateitypen
+ein, genau wie beim [FileField](/components/form-controls/file-field).
+
+An der Cursorposition erscheint sofort ein Platzhalter-Kommentar. Sobald das
+zurückgegebene Promise erfüllt ist, ersetzt ihn der MarkdownEditor durch die
+Markdown-Syntax der Datei: ein Bild wird eingebettet, jede andere Datei
+verlinkt. Wird es abgelehnt, verschwindet der Platzhalter wieder.
+
+Der Upload selbst bleibt Aufgabe der Anwendung, die Endpunkt, Authentifizierung
+und Fehlerbehandlung kennt.
+
+<LiveCodeEditor example="fileUpload" editorCollapsed stretch />
+
+---
+
 # Disabled
 
 Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
@@ -104,3 +127,9 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 # Properties
 
 <PropertiesTables />
+
+---
+
+# Design Tokens
+
+<ComponentTokenTable tokens="form-control" />

@@ -8,6 +8,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertIcon } from "@/components/AlertIcon";
 import type { avatarColors } from "@/components/Avatar/avatarColors";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export type AvatarColors = (typeof avatarColors)[number];
 
@@ -35,11 +36,14 @@ export interface AvatarProps
 export const Avatar = flowComponent("Avatar", (props) => {
   const { children, className, color, size = "m", status, label, ref } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.avatar,
     styles[`size-${size}`],
     !status && styles[color ?? "blue"],
     status && styles[status],
+    isSkeleton && styles.skeleton,
     className,
   );
 
@@ -61,6 +65,12 @@ export const Avatar = flowComponent("Avatar", (props) => {
 
   const isMeaningful = label !== undefined;
   const isDecorative = !isMeaningful && !status;
+
+  /* The size does not depend on the content, and an `Image` inside would
+     issue its request. */
+  if (isSkeleton) {
+    return <div className={rootClassName} ref={ref} aria-hidden inert />;
+  }
 
   return (
     <div

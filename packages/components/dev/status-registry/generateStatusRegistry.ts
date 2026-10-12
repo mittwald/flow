@@ -12,8 +12,9 @@ import { STATUS_EXPORT_ENTRIES, specifierOf } from "./exportEntries";
 import { parsePublicComponentNames } from "./parsePublicComponentNames";
 import { parseFlrUniversalComponentNames } from "./parseFlrUniversalComponentNames";
 import { parseIntegrationIndexComponentNames } from "./parseIntegrationIndexComponentNames";
+import { docPropertiesInternalFile } from "../docProperties";
 
-const DOC_PROPERTIES_FILE = "./dist/assets/doc-properties.json";
+const DOC_PROPERTIES_FILE = docPropertiesInternalFile;
 const PACKAGE_JSON_FILE = "./package.json";
 const STATUS_DIR = "./src/status";
 const JSON_FILE = path.join(STATUS_DIR, "component-status.json");
@@ -168,7 +169,7 @@ void generateStatusRegistry().catch((error) => {
   console.error(error instanceof Error ? error.message : error);
   console.error(
     "   Did you run `pnpm nx build:docs-properties components` first? " +
-      "(dist/assets/doc-properties.json must exist)",
+      `(${DOC_PROPERTIES_FILE} must exist)`,
   );
   process.exitCode = 1;
 });

@@ -28,6 +28,7 @@ export const LayoutCard = flowComponent(
         className: styles.tabNavigation,
       },
       AccentBox: { className: styles.accentBox },
+      Alert: { className: styles.alert },
     };
 
     return (

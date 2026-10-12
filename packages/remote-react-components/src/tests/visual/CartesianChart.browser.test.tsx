@@ -1,5 +1,9 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+
+// Older versions have no `Bar`, so the host renders `undefined` as an
+// element type and fails with "Element type is invalid".
+const barSince = "1.2.0-next.6";
 
 test.each(testEnvironments)(
   "CartesianChart (%s)",
@@ -99,26 +103,26 @@ test.each(testEnvironments)(
 
 const barChartData = [
   {
-    name: "Stat 1",
+    name: "Production Webshop",
     first: 40,
     second: 24,
     third: 75,
   },
   {
-    name: "Stat 2",
+    name: "Staging Webshop",
     first: 30,
     second: 13,
     third: 50,
   },
   {
-    name: "Stat 3",
+    name: "Company Blog",
     first: 20,
     second: 68,
     third: 100,
   },
 ];
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
   "CartesianChart with Bars (%s)",
   async ({
     testScreenshot,
@@ -149,7 +153,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
   "CartesianChart with stacked Bars (%s)",
   async ({
     testScreenshot,
@@ -171,7 +175,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
   "CartesianChart with horizontal Bars (%s)",
   async ({
     testScreenshot,

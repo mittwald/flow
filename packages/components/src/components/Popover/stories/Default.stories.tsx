@@ -28,6 +28,26 @@ export const Default: Story = {};
 
 export const CustomWidth: Story = { args: { width: 800 } };
 
+export const Controlled: Story = {
+  render: (props) => {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    return (
+      <PopoverTrigger>
+        <Button>Trigger popover</Button>
+        <Popover
+          {...props}
+          placement="bottom right"
+          isOpen={isOpen}
+          onOpenChange={setIsOpen}
+        >
+          These aren't the droids you're looking for.
+        </Popover>
+      </PopoverTrigger>
+    );
+  },
+};
+
 export const WithController: Story = {
   render: (props) => {
     const controller = useOverlayController("Popover");

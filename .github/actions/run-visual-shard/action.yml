@@ -26,7 +26,7 @@ runs:
   steps:
     # Both browsers, because the suite renders one theme in each (WebKit light,
     # Firefox dark) and a full run needs both. Keyed apart from test.yml's
-    # WebKit-only cache, which would otherwise decide what this one finds.
+    # per-browser caches, which would otherwise decide what this one finds.
     - name: Cache the Playwright browsers
       uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:

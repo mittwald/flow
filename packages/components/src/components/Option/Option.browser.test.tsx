@@ -5,7 +5,7 @@ import { Select } from "@/components/Select";
 import { Text } from "@/components/Text";
 import type { ReactNode } from "react";
 import { expect, test, vi } from "vitest";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
 /*
@@ -120,4 +120,41 @@ test("an explicit value silences the warning and wins over the children", async 
   expect(error.mock.calls.flat().join("\n")).not.toMatch(/Option.*no 'value'/s);
 
   error.mockRestore();
+});
+
+/*
+ * Flow routes options through a tunnel, and react-aria renders collection
+ * children twice — once into its hidden collection document, once for real.
+ * With a generated tunnel entry id both renders registered their own entry, so
+ * the exit rendered every option twice and the collection held two element
+ * nodes per key. The keys stayed unique, but the `prevKey`/`nextKey` links
+ * derived from that doubled sibling chain formed a ring: the first option's
+ * `prevKey` pointed at the last one.
+ *
+ * Visible as a wrapping `ArrowUp`; the expensive half is that react-stately's
+ * focus restoration walks `getKeyBefore` until it returns null, which in a ring
+ * never happens and blocks the main thread for good (#3028 is about the keys
+ * themselves, this is about the options being in the collection twice).
+ */
+const focusedOptionText = () =>
+  document
+    .querySelector("[role='option'][data-focused='true']")
+    ?.textContent?.trim();
+
+test("the option collection is a list, not a ring", async () => {
+  renderSelect();
+  await openOptions();
+
+  await userEvent.keyboard("{Home}");
+  await expect.poll(focusedOptionText).toMatch(/^Millennium Falcon/);
+
+  // In a ring this lands on the last option instead of staying put.
+  await userEvent.keyboard("{ArrowUp}");
+  await expect.poll(focusedOptionText).toMatch(/^Millennium Falcon/);
+
+  await userEvent.keyboard("{End}");
+  await expect.poll(focusedOptionText).toBe("TIE Fighter");
+
+  await userEvent.keyboard("{ArrowDown}");
+  await expect.poll(focusedOptionText).toBe("TIE Fighter");
 });

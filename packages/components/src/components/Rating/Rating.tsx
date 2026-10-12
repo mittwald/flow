@@ -13,15 +13,25 @@ import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { RatingSegmentContextProvider } from "@/components/Rating/context";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface RatingProps
   extends
     FlowComponentProps,
     PropsWithChildren,
     Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
-  /** The value sets the amount of filled stars. @default: 0 */
+  /**
+   * The value sets the amount of filled stars. Decimals are rounded to the
+   * nearest whole star. @default: 0
+   */
   value?: number;
-  /** The defaultValue sets the amount of default filled stars. @default: 0 */
+  /**
+   * The defaultValue sets the amount of default filled stars. Decimals are
+   * rounded to the nearest whole star. @default: 0
+   */
   defaultValue?: number;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
@@ -47,6 +57,10 @@ export interface RatingProps
 
 const segmentsTunnelId = "segments";
 
+// Segment values are whole numbers, so a decimal would match no segment.
+const toSegmentValue = (value?: number) =>
+  value === undefined ? undefined : Math.round(value).toString();
+
 /**
  * @flr-generate all
  * @flr-slot-props iconEmpty, iconFilled
@@ -69,15 +83,19 @@ export const Rating = flowComponent("Rating", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "Rating");
+
+  const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(
     styles.rating,
     styles[`size-${size}`],
     styles[`fill-${fill}`],
-    fieldProps.className,
+    isSkeleton && styles.skeleton,
+    wrapperProps.className,
     className,
   );
 
@@ -102,10 +120,12 @@ export const Rating = flowComponent("Rating", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      aria-describedby={controlProps["aria-describedby"]}
       className={rootClassName}
-      value={value?.toString()}
-      defaultValue={defaultValue?.toString()}
+      value={toSegmentValue(value)}
+      defaultValue={toSegmentValue(defaultValue)}
       ref={localRef}
+      inert={isSkeleton || undefined}
     >
       <FieldErrorCaptureContext>
         <PropsContextProvider
@@ -115,24 +135,26 @@ export const Rating = flowComponent("Rating", (props) => {
           {children}
         </PropsContextProvider>
         <div className={styles.ratingSegments}>
-          <UiComponentTunnelExit id={segmentsTunnelId} component="Rating">
-            {(tunnelChildren) => {
-              const tunneledSegments = Children.toArray(tunnelChildren);
-              const segments =
-                tunneledSegments.length > 0
-                  ? tunneledSegments
-                  : defaultSegments;
+          <SkeletonModeReset>
+            <UiComponentTunnelExit id={segmentsTunnelId} component="Rating">
+              {(tunnelChildren) => {
+                const tunneledSegments = Children.toArray(tunnelChildren);
+                const segments =
+                  tunneledSegments.length > 0
+                    ? tunneledSegments
+                    : defaultSegments;
 
-              return segments.map((segment, index) => (
-                <RatingSegmentContextProvider
-                  key={index}
-                  value={{ value: index + 1, count: segments.length }}
-                >
-                  {segment}
-                </RatingSegmentContextProvider>
-              ));
-            }}
-          </UiComponentTunnelExit>
+                return segments.map((segment, index) => (
+                  <RatingSegmentContextProvider
+                    key={index}
+                    value={{ value: index + 1, count: segments.length }}
+                  >
+                    {segment}
+                  </RatingSegmentContextProvider>
+                ));
+              }}
+            </UiComponentTunnelExit>
+          </SkeletonModeReset>
         </div>
       </FieldErrorCaptureContext>
       <FieldErrorView />

@@ -1,11 +1,16 @@
+@use "@/styles/mixins/skeleton";
+
 .image {
   max-width: 100%;
 
   &.border {
     border-width: var(--image--border-width);
     border-style: var(--image--border-style);
-    border-radius: var(--image--corner-radius);
     border-color: var(--image--border-color);
+  }
+
+  &.roundedCorners {
+    border-radius: var(--image--corner-radius);
     overflow: hidden;
   }
 
@@ -15,4 +20,21 @@
     width: fit-content;
     overflow: hidden;
   }
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: 0;
+
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.skeleton.roundedCorners {
+    --skeleton-radius: var(--image--corner-radius);
+  }
 }
+
+@include skeleton.keyframes;

@@ -80,3 +80,20 @@ test.each(testEnvironments)(
     await testScreenshot("TextArea - text entered");
   },
 );
+
+test.each(testEnvironments)(
+  "TextArea auto resize with an initial value (%s)",
+  async ({ testScreenshot, render, components: { TextArea, Label } }) => {
+    await render(
+      <TextArea
+        autoResizeMaxRows={5}
+        rows={1}
+        defaultValue={"Alderaan\nis\npeaceful\nwe\nhave no weapons"}
+      >
+        <Label>Label</Label>
+      </TextArea>,
+    );
+
+    await testScreenshot("TextArea - initial value");
+  },
+);
