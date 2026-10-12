@@ -220,6 +220,8 @@ export { default as Separator } from "./Separator.svelte";
 export type { RemoteSeparatorElementProps as SeparatorProps } from "@mittwald/flow-remote-elements";
 export { default as Skeleton } from "./Skeleton.svelte";
 export type { RemoteSkeletonElementProps as SkeletonProps } from "@mittwald/flow-remote-elements";
+export { default as SkeletonMode } from "./SkeletonMode.svelte";
+export type { RemoteSkeletonModeElementProps as SkeletonModeProps } from "@mittwald/flow-remote-elements";
 export { default as SkeletonText } from "./SkeletonText.svelte";
 export type { RemoteSkeletonTextElementProps as SkeletonTextProps } from "@mittwald/flow-remote-elements";
 export { default as Slider } from "./Slider.svelte";
