@@ -12,6 +12,9 @@ interface GhRelease {
 const REPO = "mittwald/flow";
 const API = `https://api.github.com/repos/${REPO}/releases`;
 
+/** GitHub's Atom feed: the 10 newest releases, prereleases included. */
+export const releasesFeedUrl = `https://github.com/${REPO}/releases.atom`;
+
 const isPrerelease = (r: GhRelease): boolean =>
   r.prerelease || /-(next|alpha|beta|rc)\./.test(r.tag_name);
 

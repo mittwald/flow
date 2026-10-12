@@ -5,7 +5,7 @@
  * `migration-unreleased-lib.mjs`.
  *
  * Two modes, both run by `/prepare-release` (see
- * `.claude/commands/prepare-release.md`, step 10):
+ * `.claude/commands/prepare-release.md`, step 11):
  *
  * ```shell
  * pnpm release:resolve-unreleased --current 1.1.10 --target 1.2.0

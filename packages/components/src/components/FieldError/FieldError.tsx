@@ -1,8 +1,7 @@
 import React, {
   type PropsWithChildren,
-  type ReactNode,
   useContext,
-  useMemo,
+  useLayoutEffect,
 } from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
@@ -13,6 +12,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertText } from "@/components/AlertText";
 import { Alert } from "@/components/Alert";
 import { Heading } from "@/components/Heading";
+import { FieldErrorRenderedContext } from "@/lib/hooks/fieldErrorRenderedContext";
+import { useObjectRef } from "react-aria";
 
 export interface FieldErrorProps
   extends
@@ -27,52 +28,59 @@ export const FieldError = flowComponent("FieldError", (props) => {
   const { children, className, ref, renderAlert, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
-  const fieldErrorFromAriaContext = useContext(FieldErrorContext);
-  const isInvalidFromChildren = React.Children.count(children) >= 1;
+  const fieldValidation = useContext(FieldErrorContext);
+  const reportRendered = useContext(FieldErrorRenderedContext);
+  const hasChildren = React.Children.count(children) >= 1;
 
-  const mergedErrorState = useMemo(() => {
-    const errors: (string | ReactNode)[] =
-      fieldErrorFromAriaContext?.validationErrors ?? [];
+  // Inside a field the field decides whether there is an error – children only
+  // provide its message. Without a field, children are the error.
+  const isInvalid = fieldValidation ? fieldValidation.isInvalid : hasChildren;
 
-    if (isInvalidFromChildren) {
-      errors.push(children);
+  // Never mutate the context's errors: for a valid field react-aria hands out
+  // one module-level array shared by every field of the page.
+  const message = hasChildren
+    ? children
+    : fieldValidation?.validationErrors.at(-1);
+
+  const errorState = {
+    isInvalid,
+    validationDetails: fieldValidation?.validationDetails ?? {
+      badInput: false,
+      customError: isInvalid,
+      patternMismatch: false,
+      rangeOverflow: false,
+      rangeUnderflow: false,
+      stepMismatch: false,
+      tooLong: false,
+      tooShort: false,
+      typeMismatch: false,
+      valid: !isInvalid,
+      valueMissing: false,
+    },
+    validationErrors: message ? [message] : [],
+  };
+
+  // Report what is actually in the document: inside a collection (`Select`,
+  // `ComboBox`) react-aria renders the children a second time into a hidden
+  // collection document, where no field context exists and no id resolves.
+  const localRef = useObjectRef(ref);
+  useLayoutEffect(() => {
+    const element = localRef.current;
+    if (!reportRendered || !isInvalid || !element?.isConnected || !element.id) {
+      return;
     }
+    reportRendered(element.id);
+    return () => reportRendered(undefined);
+  }, [reportRendered, isInvalid, rest.id, localRef]);
 
-    const isInvalid = !!(
-      isInvalidFromChildren || fieldErrorFromAriaContext?.isInvalid
-    );
-    const lastError =
-      errors.length >= 1 ? errors[errors.length - 1] : undefined;
-
-    return {
-      isInvalid: isInvalid,
-      validationDetails: {
-        valid: !isInvalid,
-        badInput: false,
-        customError: isInvalid,
-        patternMismatch: false,
-        rangeOverflow: false,
-        rangeUnderflow: false,
-        stepMismatch: false,
-        tooLong: false,
-        tooShort: false,
-        valueMissing: false,
-        typeMismatch: false,
-        ...fieldErrorFromAriaContext?.validationDetails,
-      },
-      ...fieldErrorFromAriaContext,
-      validationErrors: lastError ? [lastError] : [],
-    };
-  }, [fieldErrorFromAriaContext, children]);
-
-  if (!mergedErrorState.isInvalid) {
+  if (!isInvalid) {
     return undefined;
   }
 
   return (
     <Aria.Provider values={[[TextContext, { slot: undefined }]]}>
-      <FieldErrorContext value={mergedErrorState as never}>
-        <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
+      <FieldErrorContext value={errorState as never}>
+        <Aria.FieldError ref={localRef} {...rest} className={rootClassName}>
           {({ validationErrors }) => {
             return renderAlert ? (
               <Alert status="danger">

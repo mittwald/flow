@@ -23,18 +23,20 @@ export interface NumberFieldProps
 
 /** @flr-generate all */
 export const NumberField = flowComponent("NumberField", (props) => {
+  // `NaN` is what react-aria's number field state uses for "no number"
   const {
     children,
     className,
     isWheelDisabled = true,
     ref,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, NaN);
 
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "NumberField");
 
@@ -44,7 +46,8 @@ export const NumberField = flowComponent("NumberField", (props) => {
     <Aria.NumberField
       {...rest}
       isWheelDisabled={isWheelDisabled}
-      className={clsx(rootClassName, fieldProps.className)}
+      aria-describedby={controlProps["aria-describedby"]}
+      className={clsx(rootClassName, wrapperProps.className)}
     >
       <PropsContextProvider props={fieldPropsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>

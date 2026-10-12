@@ -117,6 +117,11 @@ deaktiviert werden können.
   mehreren Kriterien filtern können; die Optionen erscheinen dann als
   [Checkbox](/components/form-controls/checkbox). Bei **Einzelauswahl** werden
   sie als [RadioGroup](/components/form-controls/radio-group) dargestellt.
+- Hat ein Filter mit `mode="some"` **mindestens 6 Optionen**, erscheint oben
+  automatisch die Option „Alle auswählen“. Damit wählen User alle Optionen auf
+  einmal aus und können danach gezielt einzelne abwählen. Sind alle Optionen
+  gewählt, wird daraus „Alle abwählen“; sind nur einige gewählt, zeigt die
+  Checkbox einen Zwischenzustand.
 - Jeder **aktive Filter** wird durch eine [Badge](/components/status/badge)
   visualisiert, die per Klick entfernt werden kann. Sind mindestens zwei Filter
   aktiv, erscheint zusätzlich ein „Filter zurücksetzen“-Button.
@@ -205,6 +210,7 @@ Bereich scrollt.
   bessere Wahl.
 - Der Mechanismus funktioniert unabhängig davon, ob die Daten statisch,
   asynchron oder über Hooks geladen werden, und respektiert `manualPagination`.
+- Er gilt für alle View Modes — Liste, Raster und Tabelle.
 - Während des Nachladens wird ein Ladeindikator am Ende der Liste angezeigt.
 
 ---
@@ -256,6 +262,27 @@ Seite eingebettet ist, die bereits einen eigenen Ladezustand anzeigt – so wird
 die List atomar dargestellt und der Layout-Shift zwischen Loading und Empty View
 vermieden. Zeigt deine Anwendung durchgängig eigene Ladezustände, kannst du
 `true` über den `<ComponentDefaultsProvider />` als Standard festlegen.
+
+---
+
+# Item-Inhalte und externer State
+
+Ein Item wird neu gerendert, wenn sich seine Daten ändern oder wenn eine der
+Render-Funktionen an seinem `<List.Item />` ihre Identität wechselt. Eine inline
+im JSX geschriebene Funktion tut das bei jedem Render ihrer Elternkomponente –
+State aus der umgebenden Komponente erreicht das Item damit von allein.
+
+Hat die Render-Funktion eine stabile Identität – aus der Komponente
+herausgezogen, in `useCallback` gewrappt, oder sie liest aus einem externen
+Store –, fehlt dem Item dieses Signal und es behält die Werte, mit denen es
+zuerst gerendert wurde. Liste dann über `dependencies` auf, was die Funktion
+liest:
+
+```tsx
+<List.Item textValue={itemTextValue} dependencies={[selected]}>
+  {renderItem}
+</List.Item>
+```
 
 ---
 
@@ -350,3 +377,9 @@ du fest, ob die Summary oberhalb oder unterhalb der List erscheint.
 # Properties
 
 <PropertiesTables />
+
+---
+
+# Design Tokens
+
+<ComponentTokenTable tokens="list, list-item" />

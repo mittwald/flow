@@ -14,6 +14,7 @@ import {
   Text,
   Action,
   useModalController,
+  Section,
 } from "@mittwald/flow-react-components";
 
 export default () => {
@@ -39,9 +40,11 @@ export default () => {
       <Modal controller={modalController}>
         <Heading>Bearbeiten</Heading>
         <Content>
-          <TextField>
-            <Label>Name</Label>
-          </TextField>
+          <Section>
+            <TextField>
+              <Label>Name</Label>
+            </TextField>
+          </Section>
         </Content>
         <ActionGroup>
           <Action closeModal>

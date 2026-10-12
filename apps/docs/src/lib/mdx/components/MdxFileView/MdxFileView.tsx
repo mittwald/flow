@@ -4,12 +4,19 @@ import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
+import { ComponentTokenTable } from "@/lib/mdx/components/ComponentTokenTable/ComponentTokenTable";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import styles from "./customComponents.module.css";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
+import {
+  AppShellPreview,
+  appShellPreviewPath,
+  appShellTitles,
+  isAppShellName,
+} from "@/lib/mdx/components/AppShellPreview";
+import { appShellComponents } from "@/lib/mdx/components/AppShellPreview/appShellComponents";
 import { usePathname } from "next/navigation";
 import { getWireframe } from "@/app/components/_components/wireframe/registry";
 
@@ -78,12 +85,32 @@ export const MdxFileView: FC<Props> = (props) => {
       example?: string;
     } & Omit<LiveCodeEditorProps, "code" | "className">
   > = ({ example = "default", ...rest }) => (
-    <LiveCodeEditor
-      className={styles.liveCodeEditor}
-      code={mdxFile.getExample(example)}
-      {...rest}
-    />
+    <LiveCodeEditor code={mdxFile.getExample(example)} {...rest} />
   );
+
+  const ExampleAppShell: FC<{ example: string; files?: string[] }> = ({
+    example,
+    files,
+  }) => {
+    if (!isAppShellName(example)) {
+      throw new Error(`Unknown App Shell example: ${example}`);
+    }
+    const fileNames = files ?? [`${example}.tsx`, `${example}.module.css`];
+    return (
+      <AppShellPreview
+        component={appShellComponents[example]}
+        title={appShellTitles[example]}
+        previewHref={appShellPreviewPath(example)}
+        files={fileNames.map((name) => ({
+          name,
+          code: mdxFile.getExample(
+            name.endsWith(".tsx") ? name.slice(0, -".tsx".length) : name,
+          ),
+          language: name.endsWith(".css") ? "css" : "tsx",
+        }))}
+      />
+    );
+  };
 
   const ExampleDo: FC<ExampleProps> = (props) => {
     const { exampleText, example, children, ...rest } = props;
@@ -156,12 +183,15 @@ export const MdxFileView: FC<Props> = (props) => {
     );
   };
 
+  const componentName =
+    props.indexFile?.mdxSource.frontmatter?.component || mdxFile.getTitle();
+
   const ExamplePropertiesTables = () => (
-    <PropertiesTables
-      name={
-        props.indexFile?.mdxSource.frontmatter?.component || mdxFile.getTitle()
-      }
-    />
+    <PropertiesTables name={componentName} />
+  );
+
+  const ExampleComponentTokenTable: FC<{ tokens?: string }> = ({ tokens }) => (
+    <ComponentTokenTable componentName={componentName} tokens={tokens} />
   );
 
   const WireframePreview: FC = () => {
@@ -187,8 +217,10 @@ export const MdxFileView: FC<Props> = (props) => {
 
   const mdxComponents = {
     LiveCodeEditor: ExampleLiveCodeEditor,
+    AppShell: ExampleAppShell,
     Wireframe: WireframePreview,
     PropertiesTables: ExamplePropertiesTables,
+    ComponentTokenTable: ExampleComponentTokenTable,
     Do: ExampleDo,
     Dont: ExampleDont,
     Info: ExampleInfo,

@@ -47,11 +47,45 @@ export const OverlayTrigger: FC<Props> = (props) => {
       onPress: overlayController.open,
       isPending,
       isDisabled: Boolean(buttonPropsContext?.isDisabled) || isContentSuspended,
+      /*
+       * The button is the react-aria trigger. react-aria hands the press
+       * handling, the trigger ref and `aria-haspopup`/`aria-expanded`/
+       * `aria-controls` down through a `PressResponder`, which only reaches its
+       * own subtree — so a surrounding props context must not tunnel the button
+       * out of the trigger. Such a context has to tunnel the trigger as a whole
+       * instead (`overlayTriggersTunneledTo`).
+       */
+      tunnel: null,
+    },
+    /*
+     * The aria trigger this renders is the host-side identity of every trigger
+     * that is not `@flr-generate` (see `overlayTriggersTunneledTo`), so a
+     * tunneling props context targets it as well. Here it is already inside the
+     * trigger the author wrote — tunneling it again would send the same subtree
+     * into the exit twice.
+     */
+    DialogTrigger: {
+      tunnel: null,
+    },
+    /*
+     * The overlay is already placed — this trigger owns it. A surrounding
+     * props context that moves or wraps the bare overlay, so that it can be
+     * written without a trigger (`Badge`), must not reach this one: it would
+     * pull the overlay out of its trigger and add a second trigger button
+     * around it.
+     */
+    [overlayType]: {
+      tunnel: null,
+      wrapWith: null,
     },
   };
 
   return (
-    <OverlayContextProvider type={overlayType} controller={overlayController}>
+    <OverlayContextProvider
+      type={overlayType}
+      controller={overlayController}
+      isOverlayContent={false}
+    >
       <PropsContextProvider
         props={propsContext}
         dependencies={[isPending, overlayController]}

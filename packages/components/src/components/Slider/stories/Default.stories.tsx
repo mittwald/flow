@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Slider } from "@/components/Slider";
 import { Label } from "@/components/Label";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof Slider> = {
   title: "Form Controls/Slider",
@@ -43,6 +44,15 @@ export const WithInitialMarker: Story = {
   render: (props) => (
     <Slider {...props} showInitialMarker defaultValue={20}>
       <Label>Bounty (credits)</Label>
+    </Slider>
+  ),
+};
+
+export const WithFieldError: Story = {
+  render: (props) => (
+    <Slider {...props} isInvalid defaultValue={90}>
+      <Label>Shield strength</Label>
+      <FieldError>Shields cannot exceed 80 percent</FieldError>
     </Slider>
   ),
 };

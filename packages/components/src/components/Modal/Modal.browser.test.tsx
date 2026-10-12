@@ -19,6 +19,10 @@ import { page, userEvent } from "vitest/browser";
 import { Render } from "../public";
 import { commands } from "vitest/browser";
 import { sleep } from "@/lib/promises/sleep";
+import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import Div from "@/components/Div";
+import { IconClose } from "@/components/Icon/components/icons";
+import styles from "./Modal.module.scss";
 
 test("Modal is open when using props", async () => {
   const dom = await render(
@@ -71,6 +75,60 @@ test("Modal can be controlled with modal controller", async () => {
 
   await userEvent.click(openModalButton);
   expect(modalText).toBeInTheDocument();
+});
+
+/*
+ * Nothing inside a mounted modal may cross React's controlled/uncontrolled
+ * line. #3026 read the nine warnings this file used to emit as a flip of the
+ * modal's own open state; they came from the `TextField` in the tests below,
+ * whose value only became controlled once the first keystroke landed.
+ */
+test("Modal and its fields stay on one side of the controlled line", async () => {
+  const warn = vitest.spyOn(console, "warn");
+
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ModalTrigger>
+        <Button>Open Modal</Button>
+        <Modal>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form form={form} onSubmit={vitest.fn()}>
+              <Field name="testField">
+                <TextField aria-label="Test field" />
+              </Field>
+            </Form>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button>Close modal</Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  };
+
+  try {
+    const dom = await render(<Test />);
+
+    await userEvent.click(
+      dom.getByRole("button", { name: "Open Modal", exact: true }),
+    );
+    await userEvent.type(dom.getByRole("textbox"), "Some changes");
+    await userEvent.click(
+      dom.getByRole("button", { name: "Close modal", exact: true }),
+    );
+    expect(dom.getByTestId("modal-text")).not.toBeInTheDocument();
+
+    expect(warn.mock.calls.flat().join("\n")).not.toContain(
+      "uncontrolled to controlled",
+    );
+  } finally {
+    warn.mockRestore();
+  }
 });
 
 test("Modal with dirty form requires confirmation", async () => {
@@ -376,6 +434,91 @@ test("Modal with dirty form does not require confirmation when the default is sw
   await userEvent.type(input, "Some changes");
   await userEvent.click(tryCloseModalButton);
   expect(modalText).not.toBeInTheDocument();
+});
+
+test("Modal with dirty form does not require confirmation when the form switches it off", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <Modal isDefaultOpen>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+          <Form
+            form={form}
+            onSubmit={vitest.fn()}
+            confirmModalCloseOnUnsavedChanges={false}
+          >
+            <Field name="testField">
+              <TextField />
+            </Field>
+            <Action closeModal>
+              <Button>Try close</Button>
+            </Action>
+          </Form>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const tryCloseModalButton = dom.getByRole("button", {
+    name: "Try close",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+  await userEvent.click(tryCloseModalButton);
+  expect(modalText).not.toBeInTheDocument();
+});
+
+test("Modal with dirty form requires confirmation when the form switches it on against the default", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ComponentDefaultsProvider
+        defaults={{ Form: { confirmModalCloseOnUnsavedChanges: false } }}
+      >
+        <Modal isDefaultOpen>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form
+              form={form}
+              onSubmit={vitest.fn()}
+              confirmModalCloseOnUnsavedChanges
+            >
+              <Field name="testField">
+                <TextField />
+              </Field>
+              <Action closeModal>
+                <Button>Try close</Button>
+              </Action>
+            </Form>
+          </Content>
+        </Modal>
+      </ComponentDefaultsProvider>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const tryCloseModalButton = dom.getByRole("button", {
+    name: "Try close",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+  await userEvent.click(tryCloseModalButton);
+  expect(modalText).toBeInTheDocument();
+  await expect
+    .element(dom.getByRole("button", { name: "Keep editing", exact: true }))
+    .toBeInTheDocument();
 });
 
 test("Modal with confirmOnClose requires confirmation", async () => {
@@ -825,4 +968,57 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
   } finally {
     await page.viewport(1280, 720);
   }
+});
+
+/*
+ * An extension built against Flow < 1.2.0 sends the close button without the
+ * ClearPropsContext around it, so the host's Heading tunnels it into its
+ * content items like a consumer's heading button. This renders that host
+ * output.
+ */
+test("close button of an older remote Modal matches the current one", async () => {
+  const closeButtonRect = () =>
+    (
+      document.querySelector(`.${styles.closeButton}`) as HTMLElement
+    ).getBoundingClientRect();
+
+  const dom = await render(
+    <Modal isOpen>
+      <Heading>Changelog</Heading>
+      <Content>Content</Content>
+    </Modal>,
+  );
+  const current = closeButtonRect();
+
+  await dom.rerender(
+    <Modal isOpen>
+      <ClearPropsContext>
+        <Heading className={styles.header}>
+          <Div className={styles.headerTitle}>Changelog</Div>
+          <Action closeModal>
+            <Button
+              variant="plain"
+              color="secondary"
+              aria-label="close"
+              className={styles.closeButton}
+            >
+              <IconClose />
+            </Button>
+          </Action>
+        </Heading>
+      </ClearPropsContext>
+      <Content>Content</Content>
+    </Modal>,
+  );
+
+  const closeButton = page.getByRole("button", { name: "close" }).element();
+  // the Heading took it over: tunnelled and shrunk to its button size
+  expect(closeButton.closest('[class*="heading-content-item"]')).not.toBe(null);
+  expect(closeButton.className).toContain("flow--button--size-s");
+
+  const legacy = closeButtonRect();
+  expect(legacy.right).toBeCloseTo(current.right, 0);
+  expect(legacy.top).toBeCloseTo(current.top, 0);
+  expect(legacy.width).toBeCloseTo(current.width, 0);
+  expect(legacy.height).toBeCloseTo(current.height, 0);
 });

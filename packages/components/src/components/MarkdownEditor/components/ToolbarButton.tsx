@@ -4,12 +4,19 @@ import { Button, type ButtonProps } from "@/components/Button";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 
+/**
+ * What a toolbar button is: every markdown syntax it inserts, plus the one tool
+ * that does something else. The name is also the `toolbar.<type>` locale key of
+ * the button's label.
+ */
+export type ToolbarButtonType = InsertType | "attachment";
+
 export interface ToolBarButtonProps extends Pick<
   ButtonProps,
   "isDisabled" | "children"
 > {
-  type: InsertType;
-  onPress?: (type: InsertType) => void;
+  type: ToolbarButtonType;
+  onPress?: () => void;
 }
 
 export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
@@ -29,7 +36,7 @@ export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
       size="s"
       variant="plain"
       color="dark"
-      onPress={() => onPress?.(type)}
+      onPress={onPress}
     >
       {children}
     </Button>

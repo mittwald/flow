@@ -1,4 +1,9 @@
-import type { HTMLAttributeAnchorTarget, ReactElement, ReactNode } from "react";
+import type {
+  DependencyList,
+  HTMLAttributeAnchorTarget,
+  ReactElement,
+  ReactNode,
+} from "react";
 import { createElement } from "react";
 import type { RenderItemFn } from "@/components/List/model/item/types";
 import type List from "@/components/List/model/List";
@@ -15,7 +20,25 @@ export interface ItemViewShape<T> {
   showList?: boolean;
   showTiles?: boolean;
   tileMaxWidth?: number;
+  /**
+   * Values this item's content depends on besides its own data.
+   *
+   * An item re-renders when its data changes, or when one of the render
+   * functions on its `List.Item` changes identity — which a function written
+   * inline in JSX does on every render of its parent. A render function with a
+   * stable identity (hoisted out of the component, wrapped in `useCallback`, or
+   * reading from an external store) has to list what it reads here, or the item
+   * keeps the values it first saw.
+   */
+  dependencies?: DependencyList;
 }
+
+const dependenciesAreEqual = (a?: DependencyList, b?: DependencyList) =>
+  a === b ||
+  (!!a &&
+    !!b &&
+    a.length === b.length &&
+    a.every((dependency, index) => Object.is(dependency, b[index])));
 
 export class ItemView<T> {
   public readonly list: List<T>;
@@ -27,6 +50,7 @@ export class ItemView<T> {
   public readonly showTiles?: boolean;
   public readonly showList?: boolean;
   public readonly tileMaxWidth: number;
+  public readonly dependencies?: DependencyList;
   private readonly renderFn?: RenderItemFn<T>;
 
   public constructor(list: List<T>, shape: ItemViewShape<T> = {}) {
@@ -41,6 +65,7 @@ export class ItemView<T> {
       showTiles,
       showList = true,
       tileMaxWidth = 230,
+      dependencies,
     } = shape;
     this.list = list;
     this.textValue = textValue;
@@ -52,6 +77,7 @@ export class ItemView<T> {
     this.showTiles = showTiles;
     this.showList = showList;
     this.tileMaxWidth = tileMaxWidth;
+    this.dependencies = dependencies;
   }
 
   private static fallbackRenderItemFn: RenderItemFn<never> = (item) =>
@@ -59,11 +85,13 @@ export class ItemView<T> {
 
   /**
    * Whether `other` would render this item identically — i.e. all render
-   * functions taken from the consumer's `ListItem` element are still the same.
+   * functions taken from the consumer's `ListItem` element are still the same,
+   * and the dependencies it declared have not changed.
    */
   public rendersSameAs(other?: ItemView<T>): boolean {
     return (
       !!other &&
+      dependenciesAreEqual(this.dependencies, other.dependencies) &&
       this.renderFn === other.renderFn &&
       this.textValue === other.textValue &&
       this.href === other.href &&

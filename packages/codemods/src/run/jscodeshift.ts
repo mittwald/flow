@@ -1,4 +1,5 @@
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
+import { extname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { unknownCodemodMessage } from "../catalog/entries.js";
 // jscodeshift ships no types for its Runner — `allowJs` in this repo's shared
@@ -63,6 +64,69 @@ const transformPath = (id: string): string =>
 export const transformExists = (id: string): boolean =>
   existsSync(transformPath(id));
 
+/**
+ * The extensions the walk takes, and the directories it stays out of.
+ *
+ * Both are handed to jscodeshift below — without them its walk takes every file
+ * under the path, and since `upgrade` runs codemods after the install,
+ * `node_modules` is freshly populated underneath; non-JS files then fail to
+ * parse, which shows up as `errors > 0` and hides the real change count.
+ *
+ * `emptySourceFiles` reads the same two constants so that its walk and
+ * jscodeshift's agree by construction.
+ */
+const extensions = ["js", "jsx", "ts", "tsx", "cjs", "mjs", "cts", "mts"];
+const ignoredDirectories = ["node_modules", "dist", ".git"];
+
+const sourceExtensions = new Set(
+  extensions.map((extension) => `.${extension}`),
+);
+const ignoredDirectorySet = new Set(ignoredDirectories);
+
+/**
+ * How many source files under `path` hold nothing at all.
+ *
+ * Jscodeshift's worker tests a transform's result for truthiness
+ * (`updateStatus(out ? 'nochange' : 'skip', file)`), and on an empty file both
+ * `root.toSource()` and `fileInfo.source` are `""` — so an empty file lands in
+ * `skip`, indistinguishable there from a transform that declined it.
+ *
+ * Counted with a walk of our own rather than filtered out of jscodeshift's
+ * input: this number only ever explains a count. If the two walks disagree, the
+ * worst outcome is a slightly wrong explanation, never a file that should have
+ * been transformed and was not.
+ */
+const emptySourceFiles = (path: string): number => {
+  let found = 0;
+
+  const visit = (candidate: string): void => {
+    let stats;
+    try {
+      stats = statSync(candidate);
+    } catch {
+      // A broken symlink or a file removed mid-walk. jscodeshift skips these
+      // too ("Skipping path … which does not exist").
+      return;
+    }
+
+    if (stats.isDirectory()) {
+      for (const child of readdirSync(candidate)) {
+        if (!ignoredDirectorySet.has(child)) {
+          visit(join(candidate, child));
+        }
+      }
+      return;
+    }
+
+    if (stats.size === 0 && sourceExtensions.has(extname(candidate))) {
+      found += 1;
+    }
+  };
+
+  visit(path);
+  return found;
+};
+
 export interface CodemodOptions {
   /** A catalogue id — the transform file name without its extension. */
   id: string;
@@ -75,8 +139,15 @@ export interface CodemodOptions {
 export interface CodemodResult {
   changed: number;
   unmodified: number;
-  /** Files the transform declined by returning nothing. */
+  /**
+   * Files the transform declined by returning nothing — empty ones excluded.
+   *
+   * Both come back from jscodeshift as `skip`. A caller may report this field
+   * as "the transform bailed on these"; it must not report `empty` that way.
+   */
   skipped: number;
+  /** Files with no content, which no transform can do anything with. */
+  empty: number;
   errors: number;
   /** True when jscodeshift accounted for no file at all — see below. */
   processedNothing: boolean;
@@ -153,12 +224,8 @@ export const runCodemod = async ({
       silent: true,
       dry,
       print,
-      // Without these the walk takes every file under the path. `upgrade` runs
-      // codemods after the install, so `node_modules` is freshly populated
-      // underneath — and non-JS files fail to parse, which shows up as
-      // `errors > 0` and hides the real change count.
-      extensions: "js,jsx,ts,tsx,cjs,mjs,cts,mts",
-      ignorePattern: ["**/node_modules/**", "**/dist/**", "**/.git/**"],
+      extensions: extensions.join(","),
+      ignorePattern: ignoredDirectories.map((name) => `**/${name}/**`),
     })) as RunnerStats;
   } catch (error) {
     throw new Error(
@@ -167,10 +234,16 @@ export const runCodemod = async ({
     );
   }
 
+  // Clamped rather than subtracted outright: the two walks are independent, so
+  // a file that appeared or emptied between them must not push `skipped` below
+  // zero.
+  const empty = Math.min(emptySourceFiles(path), stats.skip);
+
   return {
     changed: stats.ok,
     unmodified: stats.nochange,
-    skipped: stats.skip,
+    skipped: stats.skip - empty,
+    empty,
     errors: stats.error,
     processedNothing:
       stats.ok + stats.nochange + stats.skip + stats.error === 0,

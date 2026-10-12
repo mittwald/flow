@@ -5,6 +5,10 @@ are changing Flow itself, read [AGENTS.md](./AGENTS.md) instead — the two
 audiences need opposite advice, and applying the contributor patterns in an
 application is the most common mistake made here.
 
+Building an **mStudio extension**? Read the `USAGE.md` of
+`@mittwald/flow-remote-react-components` as well — it covers what differs across
+the remote boundary, starting with the import address.
+
 ## The documentation is machine-readable
 
 The prose that decides most questions — which component covers a use case, how
@@ -13,8 +17,8 @@ published for machine consumption:
 
 | URL                                      | What it is                                                     |
 | ---------------------------------------- | -------------------------------------------------------------- |
-| `https://flow.mittwald.de/llms.txt`      | Index of every page, grouped by section                        |
-| `https://flow.mittwald.de/llms.json`     | Manifest: title, description, page URL, Markdown URL per page  |
+| `https://flow.mittwald.de/llms.txt`      | Index of every page as Markdown links, grouped by section      |
+| `https://flow.mittwald.de/llms.json`     | Manifest: page URL, Markdown URL, remote availability per page |
 | `https://flow.mittwald.de/raw/<path>.md` | One page as Markdown, e.g. `/raw/components/actions/button.md` |
 | `https://flow.mittwald.de/llms-full.txt` | Every page in one file (~1.7 MB)                               |
 
@@ -24,12 +28,42 @@ States, Props) are not translated.
 
 Start with these:
 
-- `/raw/foundations/structure/layout.md` and `spacing.md` — how layout and
-  spacing are meant to be composed
-- `/raw/patterns/patterns/forms.md`, `detail-page.md`, `errorhandling.md`,
-  `list-tile-table.md` — the recurring flows
+- `/raw/foundations/structure/layout.md` and
+  `/raw/foundations/structure/spacing.md` — how layout and spacing are meant to
+  be composed
+- the templates — see [Start from a template](#start-from-a-template)
+- `/raw/foundations/content-guidelines/error-handling.md` — preventing and
+  presenting errors
 - `/raw/foundations/content-guidelines/sprach-guide.md` — UI wording
 - `/raw/get-started/versioning.md` — what you may depend on
+
+## Start from a template
+
+**Building a new app, page or flow: pick the matching template before you lay
+out anything.** Pick the app shell first, then the page template, then the
+overlays and building blocks inside it. Fetch the template's page and start from
+its example code. Deviate only when the user explicitly asks for a different
+layout. This applies to quick prototypes too — a prototype that invents its own
+frame shows nothing about how the real thing will look.
+
+| You are building…                                           | Start from                                      |
+| ----------------------------------------------------------- | ----------------------------------------------- |
+| An app with a few equal areas on one navigation level       | `/raw/templates/app-shells/simple-app.md`       |
+| An app with several navigation levels (typical for mStudio) | `/raw/templates/app-shells/complex-app.md`      |
+| A single task without navigation (sign-up, order, setup)    | `/raw/templates/app-shells/focus-task.md`       |
+| A list of many similar objects to pick from                 | `/raw/templates/seiten/uebersichtsseite.md`     |
+| One object to inspect and edit                              | `/raw/templates/seiten/detailseite.md`          |
+| Several topics at a glance                                  | `/raw/templates/seiten/dashboard.md`            |
+| Creating, editing or configuring an object in an overlay    | `/raw/templates/overlays/anlegen-bearbeiten.md` |
+| Showing details, logs or previews in an overlay             | `/raw/templates/overlays/anzeigen.md`           |
+| Confirming a destructive or costly action                   | `/raw/templates/overlays/bestaetigen.md`        |
+| An overlay whose inputs depend on a preceding choice        | `/raw/templates/overlays/mehrere-schritte.md`   |
+| A form                                                      | `/raw/templates/bausteine/formular.md`          |
+| Uploading several files at once                             | `/raw/templates/bausteine/multi-upload.md`      |
+| Choosing a repeat interval (e.g. a cronjob)                 | `/raw/templates/bausteine/zeitintervalle.md`    |
+
+Nothing fits? Say so and compose from the closest template, rather than
+designing a layout from scratch.
 
 ## Setup
 
@@ -70,12 +104,41 @@ overrides), `RouterProvider` (so `Link` and navigation use your router),
 | `@mittwald/flow-react-components/nextjs`                     | Next.js integration                             |
 | `@mittwald/flow-react-components/react-hook-form`            | react-hook-form integration                     |
 | `@mittwald/flow-react-components/mittwald-password-tools-js` | password-strength integration                   |
+| `@mittwald/flow-react-components/tunnel`                     | Tunnels — see below                             |
 | `@mittwald/flow-react-components/all.css`                    | Stylesheet                                      |
 | `@mittwald/flow-react-components/component-index`            | Machine-readable component + prop index (below) |
 
 **Do not import from `/internal`.** It exposes Flow's own infrastructure
 (`flowComponent`, prop helper types, the status registry) and is not a consumer
 API.
+
+### Tunnels
+
+`@mittwald/flow-react-components/tunnel` re-exports `TunnelProvider`,
+`TunnelEntry` and `TunnelExit`. Import them from there — **never add
+`@mittwald/react-tunnel` to your own dependencies.** Its React context lives in
+a module-level `createContext`, so a second copy of the package is a second,
+unrelated context: your `TunnelEntry` stops finding any provider and
+`useTunnelState` throws at runtime. Nothing in `tsc` or ESLint warns first.
+
+The same entry point exports `getTunnelProviderId`, which names the tunnel Flow
+opens around every ui/layout component. That is how you render into a Flow
+component's own exits — a `Heading`'s `headingContent`, for example, the slot
+`Badge` and `AlertBadge` use:
+
+```tsx
+import {
+  TunnelEntry,
+  getTunnelProviderId,
+} from "@mittwald/flow-react-components/tunnel";
+
+<Heading>
+  <ModelTitle model={model} />
+  <TunnelEntry id="headingContent" providerId={getTunnelProviderId("Heading")}>
+    {titleSuffix}
+  </TunnelEntry>
+</Heading>;
+```
 
 ## Finding the right component
 
@@ -119,6 +182,13 @@ against Flow components.**
 - `LayoutCard` — the page-content container; brings its own padding.
 - `Section` — vertical structure inside a card. Spacing between sections is
   automatic, driven by sibling selectors, so `Section`s must be actual siblings.
+  A `Modal`'s `Content` brings only padding, like a `LayoutCard`: put its
+  components in a `Section`, or they stick together.
+- `Alert` — placement follows what it is about. A page-wide alert goes
+  **inside** the `LayoutCard`: before the first `Section`, below a
+  `TabNavigation` if there is one — never above the card. With several cards, it
+  goes into the card it concerns. An alert about one section goes into that
+  section. Pages without a `LayoutCard` place it freely.
 - `ColumnLayout` — the column grid, with `gap` / `rowGap` / `columnGap`
   (`s | m | l | xl`).
 - `Flex` — the general-purpose flex container. It is the one component with a

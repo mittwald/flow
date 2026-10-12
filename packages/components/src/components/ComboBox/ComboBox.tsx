@@ -12,6 +12,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { getOptionsTunnelProps } from "@/components/Option/optionsTunnel";
 import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
@@ -45,20 +46,22 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
     fieldPropsContext,
   } = useFieldComponent(props, "ComboBox");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
 
-  const rootClassName = clsx(fieldProps.className, styles.comboBox, className);
+  const rootClassName = clsx(
+    wrapperProps.className,
+    styles.comboBox,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Option: {
-      tunnel: {
-        id: "options",
-        component: "ComboBox",
-      },
+      tunnel: getOptionsTunnelProps("ComboBox"),
     },
     ...fieldPropsContext,
   };
@@ -77,10 +80,10 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   return (
     <Aria.ComboBox
-      {...fieldProps}
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
+      {...controlProps}
       onSelectionChange={handleSelectionChange}
       onOpenChange={(isOpen) => {
         controller.setOpen(isOpen);

@@ -2,7 +2,10 @@ import type { FC, PropsWithChildren, RefAttributes } from "react";
 import styles from "./SectionHeader.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  overlayTriggersTunneledTo,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
@@ -18,28 +21,25 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
 
     const rootClassName = clsx(styles.sectionHeader, className);
 
+    const actionsTunnel = {
+      id: "actions",
+      component: "SectionHeader",
+    } as const;
+
     const propsContext: PropsContext = {
+      ...overlayTriggersTunneledTo(actionsTunnel),
       Switch: {
         labelPosition: "leading",
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
+        tunnel: actionsTunnel,
       },
       Button: {
         size: "s",
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
+        tunnel: actionsTunnel,
       },
       ActionGroup: {
         preserveOrder: true,
         size: "s",
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
+        tunnel: actionsTunnel,
         Button: {
           tunnel: null,
         },
@@ -47,48 +47,16 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
           tunnel: null,
         },
         Link: {
+          size: "m",
           tunnel: null,
         },
       },
       FileField: {
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
+        tunnel: actionsTunnel,
         Button: { size: "s" },
       },
-      ContextMenuTrigger: {
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
-        Button: {
-          tunnel: null,
-        },
-      },
-      PopoverTrigger: {
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
-        Button: {
-          tunnel: null,
-        },
-      },
-      ContextualHelpTrigger: {
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
-        Button: {
-          tunnel: null,
-        },
-      },
       Action: {
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
+        tunnel: actionsTunnel,
         Button: {
           tunnel: null,
         },
@@ -97,11 +65,7 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
         level: 2,
       },
       Link: {
-        size: "s",
-        tunnel: {
-          id: "actions",
-          component: "SectionHeader",
-        },
+        tunnel: actionsTunnel,
       },
     };
 

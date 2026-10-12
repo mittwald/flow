@@ -41,6 +41,10 @@ export interface FlexProps
   wrap?: CSSProperties["flexWrap"];
   /** The padding of the element. */
   padding?: "xs" | "s" | "m" | "l" | "xl";
+  /** The padding top and bottom of the element. Takes precedence over `padding`. */
+  paddingBlock?: "xs" | "s" | "m" | "l" | "xl";
+  /** The padding left and right of the element. Takes precedence over `padding`. */
+  paddingInline?: "xs" | "s" | "m" | "l" | "xl";
   /** The padding top of the element. */
   paddingTop?: "xs" | "s" | "m" | "l" | "xl";
   /** The padding bottom of the element. */
@@ -50,6 +54,11 @@ export interface FlexProps
   /** The padding right of the element. */
   paddingRight?: "xs" | "s" | "m" | "l" | "xl";
 }
+
+type FlexSize = "xs" | "s" | "m" | "l" | "xl";
+
+const sizeVariable = (size: FlexSize | undefined) =>
+  size && `var(--size-px--${size})`;
 
 /** @flr-generate all */
 export const Flex: FC<FlexProps> = (props) => {
@@ -65,6 +74,8 @@ export const Flex: FC<FlexProps> = (props) => {
     grow,
     wrap = "nowrap",
     padding,
+    paddingBlock,
+    paddingInline,
     paddingTop,
     paddingBottom,
     paddingLeft,
@@ -73,57 +84,45 @@ export const Flex: FC<FlexProps> = (props) => {
     ...restProps
   } = props;
 
-  const rootClassName = clsx(styles.flex, className);
+  const columnGapSize = columnGap ?? gap;
+  const rowGapSize = rowGap ?? gap;
+  const paddingTopSize = paddingTop ?? paddingBlock ?? padding;
+  const paddingBottomSize = paddingBottom ?? paddingBlock ?? padding;
+  const paddingLeftSize = paddingLeft ?? paddingInline ?? padding;
+  const paddingRightSize = paddingRight ?? paddingInline ?? padding;
+
+  const rootClassName = clsx(
+    styles.flex,
+    align && styles.align,
+    justify && styles.justify,
+    grow && styles.grow,
+    columnGapSize && styles["column-gap"],
+    rowGapSize && styles["row-gap"],
+    paddingTopSize && styles["padding-top"],
+    paddingBottomSize && styles["padding-bottom"],
+    paddingLeftSize && styles["padding-left"],
+    paddingRightSize && styles["padding-right"],
+    className,
+  );
+
+  const style: CSSProperties = {
+    "--flex--direction": direction,
+    "--flex--wrap": wrap,
+    "--flex--align":
+      align === "end" ? "flex-end" : align === "start" ? "flex-start" : align,
+    "--flex--justify": justify,
+    "--flex--column-gap": sizeVariable(columnGapSize),
+    "--flex--row-gap": sizeVariable(rowGapSize),
+    "--flex--padding-top": sizeVariable(paddingTopSize),
+    "--flex--padding-bottom": sizeVariable(paddingBottomSize),
+    "--flex--padding-left": sizeVariable(paddingLeftSize),
+    "--flex--padding-right": sizeVariable(paddingRightSize),
+  };
 
   const Element = elementType;
 
   return (
-    <Element
-      {...restProps}
-      className={rootClassName}
-      style={{
-        flexDirection: direction,
-        alignItems:
-          align === "end"
-            ? "flex-end"
-            : align === "start"
-              ? "flex-start"
-              : align,
-        justifyContent: justify,
-        columnGap: columnGap
-          ? `var(--size-px--${columnGap})`
-          : gap
-            ? `var(--size-px--${gap})`
-            : undefined,
-        rowGap: rowGap
-          ? `var(--size-px--${rowGap})`
-          : gap
-            ? `var(--size-px--${gap})`
-            : undefined,
-        flexGrow: grow ? 1 : undefined,
-        flexWrap: wrap,
-        paddingTop: paddingTop
-          ? `var(--size-px--${paddingTop})`
-          : padding
-            ? `var(--size-px--${padding})`
-            : undefined,
-        paddingBottom: paddingBottom
-          ? `var(--size-px--${paddingBottom})`
-          : padding
-            ? `var(--size-px--${padding})`
-            : undefined,
-        paddingLeft: paddingLeft
-          ? `var(--size-px--${paddingLeft})`
-          : padding
-            ? `var(--size-px--${padding})`
-            : undefined,
-        paddingRight: paddingRight
-          ? `var(--size-px--${paddingRight})`
-          : padding
-            ? `var(--size-px--${padding})`
-            : undefined,
-      }}
-    >
+    <Element {...restProps} className={rootClassName} style={style}>
       {children}
     </Element>
   );

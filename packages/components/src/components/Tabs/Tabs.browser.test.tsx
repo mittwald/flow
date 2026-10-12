@@ -6,6 +6,8 @@ import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import type { ReactNode } from "react";
+import { Button } from "@/components/Button";
+import { Popover, PopoverTrigger } from "@/components/Popover";
 
 const testElement = (
   <Tabs>
@@ -108,4 +110,130 @@ test("names the tab list with `aria-labelledby`", async () => {
   await expect
     .element(page.getByRole("tablist", { name: "Server settings" }))
     .toBeInTheDocument();
+});
+
+const tabsWithPopover = (selectedKey: string) => (
+  <Tabs selectedKey={selectedKey}>
+    <Tab id="comms">
+      <TabTitle>Comms</TabTitle>
+      <Section>
+        <Text>Comms panel</Text>
+      </Section>
+    </Tab>
+    <Tab id="cargo">
+      <TabTitle>Cargo hold</TabTitle>
+      <Section>
+        <PopoverTrigger>
+          <Button>Open manifest</Button>
+          <Popover>
+            <Text>Manifest entries</Text>
+          </Popover>
+        </PopoverTrigger>
+      </Section>
+    </Tab>
+  </Tabs>
+);
+
+test("Leaving a tab removes an open popover of that tab", async () => {
+  const { rerender } = await render(tabsWithPopover("cargo"));
+
+  await page.getByRole("button", { name: "Open manifest" }).click();
+  await expect.element(page.getByText("Manifest entries")).toBeVisible();
+
+  await rerender(tabsWithPopover("comms"));
+
+  await expect
+    .element(page.getByText("Manifest entries"))
+    .not.toBeInTheDocument();
+});
+
+const collapsibleTabs = (containerWidth: number) => (
+  <div
+    data-testid="container"
+    style={{ width: containerWidth, overflow: "hidden" }}
+  >
+    <Tabs>
+      <Tab id="comms">
+        <TabTitle>Communications array</TabTitle>
+        <Text>Comms</Text>
+      </Tab>
+      <Tab id="cargo">
+        <TabTitle>Cargo hold manifest</TabTitle>
+        <Text>Cargo</Text>
+      </Tab>
+      <Tab id="nav">
+        <TabTitle>Navigation console</TabTitle>
+        <Text>Nav</Text>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+test("Collapsed tabs do not widen their container", async () => {
+  render(collapsibleTabs(240));
+
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .toBeVisible();
+
+  const container = page.getByTestId("container").element();
+
+  expect(container.scrollWidth).toBe(container.clientWidth);
+});
+
+test("Collapsed tabs expand again once they fit", async () => {
+  const { rerender } = await render(collapsibleTabs(240));
+
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .toBeVisible();
+
+  await rerender(collapsibleTabs(900));
+
+  await expect
+    .element(page.getByRole("tab", { name: "Communications array" }))
+    .toBeVisible();
+  await expect
+    .element(page.getByRole("button", { name: "Communications array" }))
+    .not.toBeInTheDocument();
+});
+
+const scaledTabs = (scale: number) => (
+  <div style={{ zoom: scale, width: 600 }}>
+    <Tabs aria-label="Ship systems">
+      <Tab id="comms">
+        <TabTitle>Comms</TabTitle>
+        <Text>Comms panel</Text>
+      </Tab>
+      <Tab id="cargo">
+        <TabTitle>Cargo hold</TabTitle>
+        <Text>Cargo panel</Text>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+/*
+ * The indicator is measured with `getBoundingClientRect` but written back as a
+ * CSS length read inside the same subtree. In a scaled container those are not
+ * the same unit, so without compensation the indicator is scaled twice.
+ */
+test("Active tab indicator matches the tab in a scaled container", async () => {
+  await render(scaledTabs(0.5));
+
+  const selectedTab = page.getByRole("tab", { name: "Comms" });
+  await expect.element(selectedTab).toBeVisible();
+
+  const tab = selectedTab.element() as HTMLElement;
+
+  const indicatorWidth = await vitest.waitFor(() => {
+    const indicator = document.querySelector<HTMLElement>(
+      "[style*='--tab-indicator-width']",
+    );
+    const width = indicator?.style.getPropertyValue("--tab-indicator-width");
+    expect(width).toBeTruthy();
+    return parseFloat(width as string);
+  });
+
+  expect(indicatorWidth).toBeCloseTo(tab.offsetWidth, 0);
 });

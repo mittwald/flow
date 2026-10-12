@@ -2,5 +2,23 @@
   "implicitDependencies": ["stylesheet"],
   "name": "remote-dom-demo",
   "projectType": "application",
-  "sourceRoot": "apps/remote-dom-demo/src"
+  "sourceRoot": "apps/remote-dom-demo/src",
+  "targets": {
+    "build:scss-types": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/src/**/*.scss",
+        "{projectRoot}/src/**/*.css",
+        "{projectRoot}/dev/generateScssTypes.ts",
+        "{workspaceRoot}/packages/core/src/scssTypes/**/*"
+      ],
+      "outputs": [
+        "{projectRoot}/src/**/*.module.d.scss.ts",
+        "{projectRoot}/src/**/*.module.d.css.ts"
+      ]
+    },
+    "dev": {
+      "dependsOn": ["^build", "build:icons", "build:scss-types"]
+    }
+  }
 }

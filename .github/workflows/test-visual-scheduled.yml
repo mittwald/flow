@@ -80,8 +80,9 @@ jobs:
       # Published tarballs never change and `prepare` skips a version it already
       # finds, so this both saves the install and keeps the jobs below off the
       # registry. Written here, restored there.
-      - name: Cache the installed old versions
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      - name: Restore the installed old versions
+        id: old-versions
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: packages/remote-react-components/node_modules/.cross-version
           key: cross-version-${{ runner.os }}-${{ hashFiles('lerna.json') }}
@@ -90,6 +91,18 @@ jobs:
 
       - name: Build the host packages and install the old published versions
         run: pnpm nx run remote-react-components:test:cross-version:prepare
+
+      # An explicit step instead of the post-job save, so it can time out
+      # without failing the job — the jobs below need it green. A missed save
+      # costs the next run a few registry installs.
+      - name: Save the installed old versions
+        if: steps.old-versions.outputs.cache-hit != 'true'
+        timeout-minutes: 10
+        continue-on-error: true
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: packages/remote-react-components/node_modules/.cross-version
+          key: ${{ steps.old-versions.outputs.cache-primary-key }}
 
       - name: Read the resolved targets
         id: manifest

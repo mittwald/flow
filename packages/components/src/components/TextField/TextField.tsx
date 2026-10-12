@@ -37,7 +37,7 @@ export const TextField = flowComponent("TextField", (props) => {
     children,
     onChange,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, "");
 
   const [charactersCount, setCharactersCount] = useState(
     props.defaultValue?.length ?? props.value?.length ?? 0,
@@ -49,10 +49,11 @@ export const TextField = flowComponent("TextField", (props) => {
     FieldErrorView,
     FieldErrorCaptureContext,
     fieldPropsContext,
-    fieldProps,
+    wrapperProps,
+    controlProps,
   } = useFieldComponent(props, "TextField");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   const propsContext: PropsContext = {
     Button: {
@@ -93,7 +94,7 @@ export const TextField = flowComponent("TextField", (props) => {
   return (
     <Aria.TextField
       {...rest}
-      {...fieldProps}
+      {...controlProps}
       className={rootClassName}
       onChange={handleChange}
       type={type}
