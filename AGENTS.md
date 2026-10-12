@@ -53,8 +53,9 @@ RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteRecei
   `packages/components/src/views/`, and files under `src/auto-generated/` in
   `remote-elements`, `remote-react-components` and `remote-react-renderer`.
 - **Props of `@flr-generate` components are a contract with extension
-  developers.** Avoid breaking changes. When an API must change, keep the old
-  path working and log usage with `useWarnDeprecation` (from
+  developers.** Avoid breaking changes on `stable` components (`beta` is exempt
+  — see [Hard rules](#hard-rules)). When an API must change, keep the old path
+  working and log usage with `useWarnDeprecation` (from
   `DeprecationWarningProvider`) so extension developers can be informed about
   deprecation paths they still use. `useWarnDeprecation` is the standard way to
   flag any deprecated runtime path — see
@@ -257,7 +258,15 @@ A new or substantially changed component comes with:
   fine (model them on existing components); when extending tokens, ask instead
   of inventing.
 - **No breaking changes to `@flr-generate` component props** — deprecate with
-  `useWarnDeprecation` instead.
+  `useWarnDeprecation` instead. Check the status before calling a change
+  breaking — the promise binds `stable` components only
+  ([ADR 0005 §4–5](docs/adr/0005-semver-contract.md),
+  [ADR 0003](docs/adr/0003-component-lifecycle-status.md)):
+  - A `beta` component (`@flowStatus beta`, generated registry
+    `packages/components/src/status/component-status.json`) may change its API
+    in a non-major release.
+  - Visual appearance, DOM structure, CSS class names and design-token names and
+    values are never under it, whatever the status.
 - **Use views (`@/views/*`) for internal composition** in `flr-universal`
   components.
 - **Only remote-capable components in a `PropsContext`** (see the PropsContext
