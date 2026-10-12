@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.33](https://github.com/mittwald/flow/compare/1.4.32...1.4.33) (2026-10-12)
+
+### Documentation
+
+* **components:** one const per UI variant, the JSX picks ([2aa5ff1](https://github.com/mittwald/flow/commit/2aa5ff1a963bfb9e0bd0a2dc98395eabfb125506))
+
+### Continuous Integration
+
+* stop saving per-PR Next.js build caches ([#3442](https://github.com/mittwald/flow/issues/3442)) ([9a5a9ec](https://github.com/mittwald/flow/commit/9a5a9ec798dc21613216a16e9eb5e04b8108f1d1))
+
 ## [1.4.32](https://github.com/mittwald/flow/compare/1.4.31...1.4.32) (2026-10-12)
 
 ### Bug Fixes
