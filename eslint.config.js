@@ -4,6 +4,7 @@ import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import noUnknownFlowClass from "./packages/components/dev/eslint/noUnknownFlowClass.mjs";
 
 export default tseslint.config(
   {
@@ -117,6 +118,23 @@ export default tseslint.config(
           ],
         },
       ],
+    },
+  },
+  {
+    // An unknown `flow--…` name fails silently: a `className` styles nothing,
+    // a `querySelector` finds nothing.
+    files: ["**/src/**/*.{js,jsx,mjs,ts,tsx}"],
+    ignores: [
+      // Codemods name removed classes on purpose.
+      "packages/codemods/**",
+      // Stubs echo their `:global()` targets; stylelint checks those.
+      "**/*.module.d.*.ts",
+    ],
+    plugins: {
+      flow: { rules: { "no-unknown-flow-class": noUnknownFlowClass } },
+    },
+    rules: {
+      "flow/no-unknown-flow-class": "error",
     },
   },
   {

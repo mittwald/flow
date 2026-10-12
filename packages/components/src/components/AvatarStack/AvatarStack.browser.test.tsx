@@ -32,6 +32,24 @@ test("the overflow counts the members the stack does not show", async () => {
   await expect.element(overflow("5")).toBeVisible();
 });
 
+test("a conditional avatar that renders nothing is not counted", async () => {
+  const showLuke = false as boolean;
+  await render(
+    <AvatarStack totalCount={3}>
+      <Avatar>
+        <Initials>Leia Organa</Initials>
+      </Avatar>
+      {showLuke && (
+        <Avatar>
+          <Initials>Luke Skywalker</Initials>
+        </Avatar>
+      )}
+    </AvatarStack>,
+  );
+
+  await expect.element(overflow("2")).toBeVisible();
+});
+
 test("a total that the avatars already cover adds no overflow", async () => {
   await renderStack({ totalCount: 2 });
 

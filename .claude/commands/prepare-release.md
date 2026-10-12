@@ -7,10 +7,10 @@ argument-hint: "optional free-text, e.g. --from next --to main --version 0.3.0"
 
 Prepare the **promotion / release PR** for mittwald Flow, following the release
 model in RFC #2711. You draft a curated, user-facing changelog, **capture its
-figures from the real stories**, freeze the release state on a branch,
-**graduate the version to the stable `x.y.0` in the PR itself**, and open a
-**Draft** PR. You do **not** build, tag, publish, or create the GitHub release —
-CI does all of that on merge.
+figures from the real Styleguide examples**, freeze the release state on a
+branch, **graduate the version to the stable `x.y.0` in the PR itself**, and
+open a **Draft** PR. You do **not** build, tag, publish, or create the GitHub
+release — CI does all of that on merge.
 
 Graduating in the PR (rather than leaving CI to bump on merge) is deliberate:
 the PR diff then reads honestly as `x.(y-1).z → x.y.0` instead of promoting a
@@ -102,46 +102,49 @@ requires `--from`/`--to` overrides before doing anything else.
    migrate** (breaking changes with concrete migration steps); otherwise omit
    the whole section.
 
-   For each feature section, note whether it maps to a component with stories.
-   Those get a figure in the next step; a feature with no story — the
+   For each feature section, note whether it maps to a component with an example
+   on its Styleguide page (`apps/docs/src/content/**/examples/`). Those get a
+   figure in the next step; a feature with nothing to show — the
    `@mittwald/flow-codemods` CLI, a build change — gets none, and you say so
-   rather than leaving an empty placeholder behind.
+   rather than leaving an empty placeholder behind. A component feature whose
+   page lacks an example gets none either: say so, and name the missing example
+   in the summary so it lands on the page — never capture a Storybook story
+   instead.
 
-8. **Capture the figures.** One per notable feature that has stories, never one
-   per prop variant: compose the variants into a single image.
+8. **Capture the figures.** One per notable feature that has an example, never
+   one per prop variant: compose the variants into a single image.
 
-   Storybook renders the **working tree**, so freeze the release content first.
-   This is local; nothing reaches the remote before the gate in Step 10:
+   Figures come from the Styleguide examples, never from Storybook: they are
+   served from the docs site, where the stories' Star Wars fixtures are out of
+   place. The docs dev server renders each example on its own under
+   `/example-preview/<path>` — `next dev` only, the static export does not ship
+   it.
+
+   The dev server renders the **working tree**, so freeze the release content
+   first. This is local; nothing reaches the remote before the gate in Step 10:
 
    ```shell
    git checkout -B release/x.y.0 origin/<from>
    ```
 
-   Start one Storybook and reuse it for both halves of the step. Port 6006 is
-   routinely held by another worktree's Storybook, so name a free one:
-
-   ```shell
-   pnpm nx dev components -- --port 6007 --no-open
-
-   # Resolve a component's story ids — `componentPath` is the mapping.
-   curl -s http://localhost:6007/index.json \
-     | jq -r '.entries[] | select(.componentPath == "@/components/Rating") | .id'
-   ```
-
-   Write a spec per figure — strict JSON, no comments and no trailing commas —
-   and capture it:
+   An example is addressed by its page's content path plus its name:
+   `apps/docs/src/content/components/form-controls/rating/examples/max-value.tsx`
+   is `components/form-controls/rating/max-value`. Write a spec per figure —
+   strict JSON, no comments and no trailing commas — and capture it:
 
    ```json
    {
      "name": "rating",
      "panels": [
        {
-         "story": "form-controls-rating--default",
+         "example": "components/form-controls/rating/max-value",
          "caption": "maxValue={10}",
-         "args": { "maxValue": 10 },
          "expect": [{ "selector": "input[type=radio]", "count": 10 }]
        },
-       { "story": "form-controls-rating--with-segments" }
+       {
+         "example": "components/form-controls/rating/segments",
+         "caption": "fill=\"single\" with <RatingSegment> children"
+       }
      ],
      "scale": 2,
      "version": "1.1.0",
@@ -151,18 +154,26 @@ requires `--from`/`--to` overrides before doing anything else.
 
    `version` + `name` give the output path
    (`apps/docs/public/assets/releases/1.1.0/rating.png`); `width` is the CSS px
-   the stories render at and `scale` the `deviceScaleFactor`; `caption` is the
-   monospace line above a panel, naming the prop it demonstrates; `args` and
-   `globals` (e.g. `{ "theme": "dark" }`) drive the variant; `expect` asserts
-   what the panel actually rendered.
+   the examples render at and `scale` the `deviceScaleFactor`; `caption` is the
+   monospace line above a panel, naming the prop it demonstrates; `expect`
+   asserts what the panel rendered — the whole frame is searched, so an overlay
+   in a portal counts.
 
    ```shell
-   pnpm release:figure --spec <spec.json> --storybook-url http://localhost:6007
+   pnpm release:figure --spec <spec.json>
    ```
 
-   Omit `--storybook-url` and the script starts its own Storybook on a free port
-   via `pnpm nx dev components` and stops it again. That is slower, and it gives
-   you no server to resolve story ids against.
+   The script starts its own docs dev server on a free port via
+   `pnpm nx dev docs` and stops it again. For several figures, start one and
+   reuse it — port 3000 is routinely held by another worktree's docs server:
+
+   ```shell
+   pnpm nx dev docs -- --port 3417
+   pnpm release:figure --spec <spec.json> --docs-url http://localhost:3417
+   ```
+
+   A typo in an example path fails before any server starts and lists the page's
+   examples. An example that throws aborts the capture.
 
    The renderer is whichever Playwright browser is installed — Chromium first,
    then WebKit, then Firefox, and the run names the one it used. Pin it with
@@ -171,20 +182,16 @@ requires `--from`/`--to` overrides before doing anything else.
    There is no `--out`: the spec is the only source of the output path, which
    keeps every figure inside the release-assets tree.
 
-   **`expect` is not optional decoration.** Storybook filters `args=` down to
-   the story's declared `argTypes` and drops everything else **silently** — the
-   story still renders, just not in the state that was asked for. `defaultValue`
-   went that way while #3029 was being prepared. The URL is therefore evidence
-   of nothing, and the script rejects a spec whose args-driving panel asserts no
-   DOM.
+   **Use `expect` for what the figure is about.** A panel waits until its
+   expectations hold, so content that appears after mount — a chart's bars, an
+   open overlay — is captured drawn, not half-way.
 
    **Then open every PNG and look at it.** A capture that is clipped, cropped
    wrong or showing the wrong state renders fine and reads as plausible; the
    first #3029 capture lost the bottom of its icons and survived a first pass.
-   Re-capture rather than ship a bad crop. Check the content too: these figures
-   are served from the docs site, where the Star Wars fixtures that are fine in
-   a story are out of place — prefer a story with neutral content, or pass
-   realistic content through an arg where the story declares one.
+   Re-capture rather than ship a bad crop. An example whose overlay extends past
+   its frame is clipped — the docs examples keep overlays inside
+   (`paddingBlockEnd`), which is what the CoachMark example does.
 
    **Commit the figures on the release branch and reference them by the commit's
    SHA.** Not a `user-attachments` upload: GitHub has no API for those — they
@@ -390,7 +397,7 @@ requires `--from`/`--to` overrides before doing anything else.
 
 Build, create/push git tags, publish to npm, or create the GitHub release — all
 of that happens in CI on merge. You also do **not** fabricate an image: a figure
-is a capture of a real story or it does not exist.
+is a capture of a real Styleguide example or it does not exist.
 
 You **do** graduate the version: the local
 `chore(release): bump version to x.y.0` commit on the release branch (Step 11),

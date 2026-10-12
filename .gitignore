@@ -12,6 +12,7 @@ nx-cloud.env
 *.log
 *.tsbuildinfo
 apps/docs/src/lib/liveCode/dynamicImports.ts
+apps/docs/src/lib/componentTokens/componentTokens.generated.json
 .idea/material_theme_project_new.xml
 coverage
 .vitest-attachments

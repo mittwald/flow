@@ -1,11 +1,15 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
-import { CalendarDate } from "@internationalized/date";
+import { CalendarDate, type DateValue } from "@internationalized/date";
+import { useState } from "react";
 import { DatePicker } from "@/components/DatePicker";
 import { Label } from "@/components/Label";
 import { Popover, PopoverTrigger } from "@/components/Popover";
 import { Button } from "@/components/Button";
+import Modal from "@/components/Modal/Modal";
+import Heading from "@/components/Heading";
+import Content from "@/components/Content";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -43,6 +47,28 @@ test("typing into the segments reports the date", async () => {
     month: 3,
     day: 10,
   });
+});
+
+test("inside a modal, a controlled date picker keeps the typed year", async () => {
+  const ControlledInModal = () => {
+    const [value, setValue] = useState<DateValue | null>(null);
+    return (
+      <Modal isDefaultOpen>
+        <Heading>Booking</Heading>
+        <Content>
+          <DatePicker value={value} onChange={setValue}>
+            <Label>Departure</Label>
+          </DatePicker>
+        </Content>
+      </Modal>
+    );
+  };
+  render(<ControlledInModal />);
+
+  await segment("month").click();
+  await userEvent.keyboard("03102025");
+
+  await expect.element(segment("year")).toHaveTextContent("2025");
 });
 
 /*

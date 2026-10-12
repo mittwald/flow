@@ -25,5 +25,6 @@ declare const classNames: {
   readonly soft: "soft";
   readonly avatar: "avatar";
   readonly image: "image";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

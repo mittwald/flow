@@ -34,6 +34,16 @@ es die visuelle Abgrenzung verbessert und die Bildwahrnehmung unterstützt.
 
 ---
 
+# Abgerundete Ecken
+
+Die Image-Component hat standardmäßig abgerundete Ecken, unabhängig von
+`withBorder`. Mit `withRoundedCorners={false}` erhält sie eckige Kanten, etwa
+wenn das Bild bündig an einen Container anschließt.
+
+<LiveCodeEditor example="roundedCorners" editorCollapsed />
+
+---
+
 # Fixes Seitenverhältnis
 
 Die Property `aspectRatio` definiert das Seitenverhältnis der Image-Component.
@@ -48,3 +58,9 @@ außerhalb des festgelegten Verhältnisses werden ausgeblendet.
 # Properties
 
 <PropertiesTables />
+
+---
+
+# Design Tokens
+
+<ComponentTokenTable />

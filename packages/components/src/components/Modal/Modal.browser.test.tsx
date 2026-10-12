@@ -19,6 +19,10 @@ import { page, userEvent } from "vitest/browser";
 import { Render } from "../public";
 import { commands } from "vitest/browser";
 import { sleep } from "@/lib/promises/sleep";
+import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import Div from "@/components/Div";
+import { IconClose } from "@/components/Icon/components/icons";
+import styles from "./Modal.module.scss";
 
 test("Modal is open when using props", async () => {
   const dom = await render(
@@ -964,4 +968,57 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
   } finally {
     await page.viewport(1280, 720);
   }
+});
+
+/*
+ * An extension built against Flow < 1.2.0 sends the close button without the
+ * ClearPropsContext around it, so the host's Heading tunnels it into its
+ * content items like a consumer's heading button. This renders that host
+ * output.
+ */
+test("close button of an older remote Modal matches the current one", async () => {
+  const closeButtonRect = () =>
+    (
+      document.querySelector(`.${styles.closeButton}`) as HTMLElement
+    ).getBoundingClientRect();
+
+  const dom = await render(
+    <Modal isOpen>
+      <Heading>Changelog</Heading>
+      <Content>Content</Content>
+    </Modal>,
+  );
+  const current = closeButtonRect();
+
+  await dom.rerender(
+    <Modal isOpen>
+      <ClearPropsContext>
+        <Heading className={styles.header}>
+          <Div className={styles.headerTitle}>Changelog</Div>
+          <Action closeModal>
+            <Button
+              variant="plain"
+              color="secondary"
+              aria-label="close"
+              className={styles.closeButton}
+            >
+              <IconClose />
+            </Button>
+          </Action>
+        </Heading>
+      </ClearPropsContext>
+      <Content>Content</Content>
+    </Modal>,
+  );
+
+  const closeButton = page.getByRole("button", { name: "close" }).element();
+  // the Heading took it over: tunnelled and shrunk to its button size
+  expect(closeButton.closest('[class*="heading-content-item"]')).not.toBe(null);
+  expect(closeButton.className).toContain("flow--button--size-s");
+
+  const legacy = closeButtonRect();
+  expect(legacy.right).toBeCloseTo(current.right, 0);
+  expect(legacy.top).toBeCloseTo(current.top, 0);
+  expect(legacy.width).toBeCloseTo(current.width, 0);
+  expect(legacy.height).toBeCloseTo(current.height, 0);
 });

@@ -9,6 +9,27 @@
       "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"],
       "outputs": ["{projectRoot}/src/lib/liveCode/dynamicImports.ts"]
     },
+    "build:component-tokens": {
+      "cache": true,
+      "dependsOn": [
+        {
+          "projects": ["tokens"],
+          "target": "build"
+        }
+      ],
+      "inputs": [
+        "{projectRoot}/dev/generateComponentTokens.ts",
+        "{projectRoot}/src/lib/componentTokens/buildComponentTokens.ts",
+        "{projectRoot}/src/lib/componentTokens/types.ts",
+        {
+          "dependentTasksOutputFiles": "**/json/*.json",
+          "transitive": false
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/src/lib/componentTokens/componentTokens.generated.json"
+      ]
+    },
     "build:scss-types": {
       "cache": true,
       "inputs": [
@@ -24,7 +45,12 @@
     },
     "test:compile": {
       "cache": true,
-      "dependsOn": ["^build", "build:imports", "build:scss-types"]
+      "dependsOn": [
+        "^build",
+        "build:imports",
+        "build:scss-types",
+        "build:component-tokens"
+      ]
     },
     "test:links": {
       "cache": true,
@@ -32,12 +58,13 @@
     },
     "test:unit": {
       "cache": true,
-      "dependsOn": ["^build", "build:scss-types"]
+      "dependsOn": ["^build", "build:scss-types", "build:component-tokens"]
     },
     "build": {
       "dependsOn": [
         "build:imports",
         "build:scss-types",
+        "build:component-tokens",
         {
           "projects": ["components"],
           "target": "build:docs-properties"
@@ -49,6 +76,7 @@
       "dependsOn": [
         "build:imports",
         "build:scss-types",
+        "build:component-tokens",
         {
           "projects": ["components"],
           "target": "build:docs-properties"
