@@ -6,6 +6,7 @@ import supportedCodeEditorLanguages, {
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
 import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
+import { useMemo } from "react";
 
 /*
  * Every slot gets the same color: the library picks between its light and dark
@@ -53,57 +54,76 @@ export interface CodeEditorSetup {
   showLinterMarkers?: boolean;
 }
 
+const noExtensions: Extension[] = [];
+
 /** @internal */
 export const useCodeEditorExtensions = (
   language?: string,
-  extensions: Extension[] = [],
+  extensions: Extension[] = noExtensions,
   options: CodeEditorSetup = {
     showCodeFolding: true,
     showCodeIndentationMakers: true,
     showLineNumbers: true,
     showLinterMarkers: true,
   },
-) => {
-  if (options.showLineNumbers) {
-    extensions.push(lineNumbers());
-  }
+): Extension[] => {
+  const {
+    showCodeFolding,
+    showCodeIndentationMakers,
+    showLineNumbers,
+    showLinterMarkers,
+  } = options;
 
-  if (options.showCodeFolding) {
-    extensions.push(
-      foldGutter({
-        markerDOM: (open) => {
-          const element = document.createElement("span");
-          element.classList.add("cm-foldGutter");
-          element.classList.add(
-            open ? "cm-foldGutter-open" : "cm-foldGutter-closed",
-          );
-          element.innerText = open ? "⌄" : "›";
-          return element;
-        },
-      }),
-    );
-  }
+  return useMemo(() => {
+    const enabledExtensions = [...extensions];
 
-  if (options.showLinterMarkers) {
-    extensions.push(lintGutter());
-  }
+    if (showLineNumbers) {
+      enabledExtensions.push(lineNumbers());
+    }
 
-  if (
-    options.showLineNumbers &&
-    (!options.showCodeFolding || !options.showLinterMarkers)
-  ) {
-    extensions.push(gutterSpacer());
-  }
+    if (showCodeFolding) {
+      enabledExtensions.push(
+        foldGutter({
+          markerDOM: (open) => {
+            const element = document.createElement("span");
+            element.classList.add("cm-foldGutter");
+            element.classList.add(
+              open ? "cm-foldGutter-open" : "cm-foldGutter-closed",
+            );
+            element.innerText = open ? "⌄" : "›";
+            return element;
+          },
+        }),
+      );
+    }
 
-  if (options.showCodeIndentationMakers) {
-    extensions.push(indentationMarkers({ colors: indentationMarkerColors }));
-  }
+    if (showLinterMarkers) {
+      enabledExtensions.push(lintGutter());
+    }
 
-  if (language && isCodeEditorLanguage(language)) {
-    supportedCodeEditorLanguages[language]?.map((loader) =>
-      extensions.push(loader()),
-    );
-  }
+    if (showLineNumbers && (!showCodeFolding || !showLinterMarkers)) {
+      enabledExtensions.push(gutterSpacer());
+    }
 
-  return extensions;
+    if (showCodeIndentationMakers) {
+      enabledExtensions.push(
+        indentationMarkers({ colors: indentationMarkerColors }),
+      );
+    }
+
+    if (language && isCodeEditorLanguage(language)) {
+      for (const loader of supportedCodeEditorLanguages[language] ?? []) {
+        enabledExtensions.push(loader());
+      }
+    }
+
+    return enabledExtensions;
+  }, [
+    language,
+    extensions,
+    showCodeFolding,
+    showCodeIndentationMakers,
+    showLineNumbers,
+    showLinterMarkers,
+  ]);
 };
