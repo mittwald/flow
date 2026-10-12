@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.45](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.5.0-next.45) (2026-10-12)
+
+## [1.4.35](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.4.35) (2026-10-12)
+
+### Bug Fixes
+
+* **HeaderNavigation:** render a link combined with a button like the icon buttons ([f1f0748](https://github.com/mittwald/flow/commit/f1f074863473ef51c571daa598d96f486b160a7d))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.35 ([55a8067](https://github.com/mittwald/flow/commit/55a8067c4c3a9e1ec8feaf42b3a2e14d249b641b))
+
+### Tests
+
+* update visual regression screenshots ([e6538e2](https://github.com/mittwald/flow/commit/e6538e2063c428c2e26f8dce498d0f421298004b))
+* update visual regression screenshots ([945a87f](https://github.com/mittwald/flow/commit/945a87fb63a3cbe0c829ed5c74709b91a56657db))
+
 ## [1.5.0-next.44](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.5.0-next.44) (2026-10-12)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

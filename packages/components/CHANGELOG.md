@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.45](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.5.0-next.45) (2026-10-12)
+
+## [1.4.35](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.4.35) (2026-10-12)
+
+### Bug Fixes
+
+* **HeaderNavigation:** render a link combined with a button like the icon buttons ([f1f0748](https://github.com/mittwald/flow/commit/f1f074863473ef51c571daa598d96f486b160a7d))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.35 ([55a8067](https://github.com/mittwald/flow/commit/55a8067c4c3a9e1ec8feaf42b3a2e14d249b641b))
+
+### Tests
+
+* **HeaderNavigation:** drop the link-with-button story and browser test ([070be80](https://github.com/mittwald/flow/commit/070be8026014c2cb5e25b52de84dbba2b7fe27e6))
+* **Modal:** hold the close animation instead of racing a fixed sleep ([bd433db](https://github.com/mittwald/flow/commit/bd433db74a1d57df7256a7f956cc4b88aaa071e0))
+
 ## [1.5.0-next.44](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.5.0-next.44) (2026-10-12)
 
 ### Bug Fixes
