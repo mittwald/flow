@@ -1,7 +1,8 @@
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { CountryOptions, sortByDachFirst } from "@/components/CountryOptions";
+import type { CountrySortFn } from "@/components/CountryOptions/CountryOptions";
 import { Select } from "@/components/Select";
 import { Label } from "@/components/Label";
 
@@ -12,16 +13,20 @@ const optionNames = () =>
     (option) => option.textContent,
   );
 
+const select = (children: React.ReactNode) => (
+  <Select>
+    <Label>Country</Label>
+    {children}
+  </Select>
+);
+
 const renderOptions = async (children: React.ReactNode) => {
-  render(
-    <Select>
-      <Label>Country</Label>
-      {children}
-    </Select>,
-  );
+  const screen = await render(select(children));
 
   await toggle().click();
   await expect.element(page.getByRole("listbox")).toBeVisible();
+
+  return screen;
 };
 
 test("the countries are listed under their localized name, sorted", async () => {
@@ -67,4 +72,35 @@ test("the option value is the country code, not the name", async () => {
   expect(
     document.querySelector("[role='option']")?.getAttribute("data-key"),
   ).toBe("DE");
+});
+
+test("changing filterBy after mount updates the list", async () => {
+  const { rerender } = await renderOptions(
+    <CountryOptions filterBy={(country) => country.code === "DE"} />,
+  );
+  expect(optionNames()).toEqual(["Germany"]);
+
+  await rerender(
+    select(<CountryOptions filterBy={(country) => country.code === "AT"} />),
+  );
+
+  await expect.poll(optionNames).toEqual(["Austria"]);
+});
+
+/*
+ * Asserts that the new comparator runs, not the rendered order: the options
+ * tunnel of `Select` keeps its entries in mount order, so a reorder of the same
+ * options does not reach the listbox.
+ */
+test("changing sortBy after mount sorts with the new comparator", async () => {
+  const { rerender } = await renderOptions(
+    <CountryOptions sortBy={sortByDachFirst} />,
+  );
+  const byNameDescending = vi.fn<CountrySortFn>((left, right) =>
+    right.name.localeCompare(left.name),
+  );
+
+  await rerender(select(<CountryOptions sortBy={byNameDescending} />));
+
+  expect(byNameDescending).toHaveBeenCalled();
 });
