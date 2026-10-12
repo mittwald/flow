@@ -1,0 +1,529 @@
+# Semantic tier (ADR 0007), dark theme: colors with a meaning. The only
+# tier that distinguishes light and dark; references Brand or, where Flow
+# owns the color, holds a literal. Keep the keys in sync with
+# color-semantic.light.yml.
+#
+# Ramps take the mirrored Brand step. Gray is the exception: 100–1000 take
+# gray.1000–100, and 1100/1200 stay white as well (#3462).
+primary:
+  color:
+    100:
+      value: "{color.hosting-blue.1100}"
+    200:
+      value: "{color.hosting-blue.1000}"
+    300:
+      value: "{color.hosting-blue.900}"
+    400:
+      value: "{color.hosting-blue.800}"
+    500:
+      value: "{color.hosting-blue.700}"
+    600:
+      value: "{color.hosting-blue.600}"
+    700:
+      value: "{color.hosting-blue.500}"
+    800:
+      value: "{color.hosting-blue.400}"
+    900:
+      value: "{color.hosting-blue.300}"
+    1000:
+      value: "{color.hosting-blue.200}"
+    1100:
+      value: "{color.hosting-blue.100}"
+
+info:
+  color:
+    100:
+      value: "{color.hosting-blue.1100}"
+    200:
+      value: "{color.hosting-blue.1000}"
+    300:
+      value: "{color.hosting-blue.900}"
+    400:
+      value: "{color.hosting-blue.800}"
+    500:
+      value: "{color.hosting-blue.700}"
+    600:
+      value: "{color.hosting-blue.600}"
+    700:
+      value: "{color.hosting-blue.500}"
+    800:
+      value: "{color.hosting-blue.400}"
+    900:
+      value: "{color.hosting-blue.300}"
+    1000:
+      value: "{color.hosting-blue.200}"
+    1100:
+      value: "{color.hosting-blue.100}"
+
+success:
+  color:
+    100:
+      value: "{color.espelkamp-green.1100}"
+    200:
+      value: "{color.espelkamp-green.1000}"
+    300:
+      value: "{color.espelkamp-green.900}"
+    400:
+      value: "{color.espelkamp-green.800}"
+    500:
+      value: "{color.espelkamp-green.700}"
+    600:
+      value: "{color.espelkamp-green.600}"
+    700:
+      value: "{color.espelkamp-green.500}"
+    800:
+      value: "{color.espelkamp-green.400}"
+    900:
+      value: "{color.espelkamp-green.300}"
+    1000:
+      value: "{color.espelkamp-green.200}"
+    1100:
+      value: "{color.espelkamp-green.100}"
+
+neutral:
+  color:
+    100:
+      value: "{color.gray.1000}"
+    200:
+      value: "{color.gray.900}"
+    300:
+      value: "{color.gray.800}"
+    400:
+      value: "{color.gray.700}"
+    500:
+      value: "{color.gray.600}"
+    600:
+      value: "{color.gray.500}"
+    700:
+      value: "{color.gray.400}"
+    800:
+      value: "{color.gray.300}"
+    900:
+      value: "{color.gray.200}"
+    1000:
+      value: "{color.gray.100}"
+    1100:
+      value: "{color.gray.100}"
+    1200:
+      value: "{color.gray.100}"
+
+unavailable:
+  color:
+    100:
+      value: "{color.gray.1000}"
+    200:
+      value: "{color.gray.900}"
+    300:
+      value: "{color.gray.800}"
+    400:
+      value: "{color.gray.700}"
+    500:
+      value: "{color.gray.600}"
+    600:
+      value: "{color.gray.500}"
+    700:
+      value: "{color.gray.400}"
+    800:
+      value: "{color.gray.300}"
+    900:
+      value: "{color.gray.200}"
+    1000:
+      value: "{color.gray.100}"
+    1100:
+      value: "{color.gray.100}"
+    1200:
+      value: "{color.gray.100}"
+
+danger:
+  color:
+    100:
+      value: "{color.amaranth-red.1100}"
+    200:
+      value: "{color.amaranth-red.1000}"
+    300:
+      value: "{color.amaranth-red.900}"
+    400:
+      value: "{color.amaranth-red.800}"
+    500:
+      value: "{color.amaranth-red.700}"
+    600:
+      value: "{color.amaranth-red.600}"
+    700:
+      value: "{color.amaranth-red.500}"
+    800:
+      value: "{color.amaranth-red.400}"
+    900:
+      value: "{color.amaranth-red.300}"
+    1000:
+      value: "{color.amaranth-red.200}"
+    1100:
+      value: "{color.amaranth-red.100}"
+
+warning:
+  color:
+    100:
+      value: "{color.royal-orange.1100}"
+    200:
+      value: "{color.royal-orange.1000}"
+    300:
+      value: "{color.royal-orange.900}"
+    400:
+      value: "{color.royal-orange.800}"
+    500:
+      value: "{color.royal-orange.700}"
+    600:
+      value: "{color.royal-orange.600}"
+    700:
+      value: "{color.royal-orange.500}"
+    800:
+      value: "{color.royal-orange.400}"
+    900:
+      value: "{color.royal-orange.300}"
+    1000:
+      value: "{color.royal-orange.200}"
+    1100:
+      value: "{color.royal-orange.100}"
+
+decorative-blue:
+  color:
+    100:
+      value: "{color.hosting-blue.1100}"
+    200:
+      value: "{color.hosting-blue.1000}"
+    300:
+      value: "{color.hosting-blue.900}"
+    400:
+      value: "{color.hosting-blue.800}"
+    500:
+      value: "{color.hosting-blue.700}"
+    600:
+      value: "{color.hosting-blue.600}"
+    700:
+      value: "{color.hosting-blue.500}"
+    800:
+      value: "{color.hosting-blue.400}"
+    900:
+      value: "{color.hosting-blue.300}"
+    1000:
+      value: "{color.hosting-blue.200}"
+    1100:
+      value: "{color.hosting-blue.100}"
+
+decorative-navy:
+  color:
+    100:
+      value: "{color.mittwald-navy.1100}"
+    200:
+      value: "{color.mittwald-navy.1000}"
+    300:
+      value: "{color.mittwald-navy.900}"
+    400:
+      value: "{color.mittwald-navy.800}"
+    500:
+      value: "{color.mittwald-navy.700}"
+    600:
+      value: "{color.mittwald-navy.600}"
+    700:
+      value: "{color.mittwald-navy.500}"
+    800:
+      value: "{color.mittwald-navy.400}"
+    900:
+      value: "{color.mittwald-navy.300}"
+    1000:
+      value: "{color.mittwald-navy.200}"
+    1100:
+      value: "{color.mittwald-navy.100}"
+
+decorative-violet:
+  color:
+    100:
+      value: "{color.soft-contrast-violet.1100}"
+    200:
+      value: "{color.soft-contrast-violet.1000}"
+    300:
+      value: "{color.soft-contrast-violet.900}"
+    400:
+      value: "{color.soft-contrast-violet.800}"
+    500:
+      value: "{color.soft-contrast-violet.700}"
+    600:
+      value: "{color.soft-contrast-violet.600}"
+    700:
+      value: "{color.soft-contrast-violet.500}"
+    800:
+      value: "{color.soft-contrast-violet.400}"
+    900:
+      value: "{color.soft-contrast-violet.300}"
+    1000:
+      value: "{color.soft-contrast-violet.200}"
+    1100:
+      value: "{color.soft-contrast-violet.100}"
+
+decorative-teal:
+  color:
+    100:
+      value: "{color.super-teal.1100}"
+    200:
+      value: "{color.super-teal.1000}"
+    300:
+      value: "{color.super-teal.900}"
+    400:
+      value: "{color.super-teal.800}"
+    500:
+      value: "{color.super-teal.700}"
+    600:
+      value: "{color.super-teal.600}"
+    700:
+      value: "{color.super-teal.500}"
+    800:
+      value: "{color.super-teal.400}"
+    900:
+      value: "{color.super-teal.300}"
+    1000:
+      value: "{color.super-teal.200}"
+    1100:
+      value: "{color.super-teal.100}"
+
+decorative-lilac:
+  color:
+    100:
+      value: "{color.bright-lilac.1100}"
+    200:
+      value: "{color.bright-lilac.1000}"
+    300:
+      value: "{color.bright-lilac.900}"
+    400:
+      value: "{color.bright-lilac.800}"
+    500:
+      value: "{color.bright-lilac.700}"
+    600:
+      value: "{color.bright-lilac.600}"
+    700:
+      value: "{color.bright-lilac.500}"
+    800:
+      value: "{color.bright-lilac.400}"
+    900:
+      value: "{color.bright-lilac.300}"
+    1000:
+      value: "{color.bright-lilac.200}"
+    1100:
+      value: "{color.bright-lilac.100}"
+
+decorative-red:
+  color:
+    100:
+      value: "{color.amaranth-red.1100}"
+    200:
+      value: "{color.amaranth-red.1000}"
+    300:
+      value: "{color.amaranth-red.900}"
+    400:
+      value: "{color.amaranth-red.800}"
+    500:
+      value: "{color.amaranth-red.700}"
+    600:
+      value: "{color.amaranth-red.600}"
+    700:
+      value: "{color.amaranth-red.500}"
+    800:
+      value: "{color.amaranth-red.400}"
+    900:
+      value: "{color.amaranth-red.300}"
+    1000:
+      value: "{color.amaranth-red.200}"
+    1100:
+      value: "{color.amaranth-red.100}"
+
+decorative-green:
+  color:
+    100:
+      value: "{color.espelkamp-green.1100}"
+    200:
+      value: "{color.espelkamp-green.1000}"
+    300:
+      value: "{color.espelkamp-green.900}"
+    400:
+      value: "{color.espelkamp-green.800}"
+    500:
+      value: "{color.espelkamp-green.700}"
+    600:
+      value: "{color.espelkamp-green.600}"
+    700:
+      value: "{color.espelkamp-green.500}"
+    800:
+      value: "{color.espelkamp-green.400}"
+    900:
+      value: "{color.espelkamp-green.300}"
+    1000:
+      value: "{color.espelkamp-green.200}"
+    1100:
+      value: "{color.espelkamp-green.100}"
+
+decorative-orange:
+  color:
+    100:
+      value: "{color.royal-orange.1100}"
+    200:
+      value: "{color.royal-orange.1000}"
+    300:
+      value: "{color.royal-orange.900}"
+    400:
+      value: "{color.royal-orange.800}"
+    500:
+      value: "{color.royal-orange.700}"
+    600:
+      value: "{color.royal-orange.600}"
+    700:
+      value: "{color.royal-orange.500}"
+    800:
+      value: "{color.royal-orange.400}"
+    900:
+      value: "{color.royal-orange.300}"
+    1000:
+      value: "{color.royal-orange.200}"
+    1100:
+      value: "{color.royal-orange.100}"
+
+dark:
+  color:
+    100:
+      value: "{color.white-alpha.100}"
+    200:
+      value: "{color.white-alpha.200}"
+    300:
+      value: "{color.white-alpha.300}"
+    400:
+      value: "{color.white-alpha.400}"
+    500:
+      value: "{color.white-alpha.500}"
+    600:
+      value: "{color.white-alpha.600}"
+    700:
+      value: "{color.white-alpha.700}"
+    800:
+      value: "{color.white-alpha.800}"
+
+light:
+  color:
+    100:
+      value: "{color.black-alpha.100}"
+    200:
+      value: "{color.black-alpha.200}"
+    300:
+      value: "{color.black-alpha.300}"
+    400:
+      value: "{color.black-alpha.400}"
+    500:
+      value: "{color.black-alpha.500}"
+    600:
+      value: "{color.black-alpha.600}"
+    700:
+      value: "{color.black-alpha.700}"
+    800:
+      value: "{color.black-alpha.800}"
+
+dark-static:
+  color:
+    100:
+      value: "{color.black-alpha.100}"
+    200:
+      value: "{color.black-alpha.200}"
+    300:
+      value: "{color.black-alpha.300}"
+    400:
+      value: "{color.black-alpha.400}"
+    500:
+      value: "{color.black-alpha.500}"
+    600:
+      value: "{color.black-alpha.600}"
+    700:
+      value: "{color.black-alpha.700}"
+    800:
+      value: "{color.black-alpha.800}"
+
+light-static:
+  color:
+    100:
+      value: "{color.white-alpha.100}"
+    200:
+      value: "{color.white-alpha.200}"
+    300:
+      value: "{color.white-alpha.300}"
+    400:
+      value: "{color.white-alpha.400}"
+    500:
+      value: "{color.white-alpha.500}"
+    600:
+      value: "{color.white-alpha.600}"
+    700:
+      value: "{color.white-alpha.700}"
+    800:
+      value: "{color.white-alpha.800}"
+
+# Literal values: Flow owns these colors outright (ADR 0007).
+transparent:
+  color:
+    value: transparent
+
+categorical:
+  color:
+    sea-green:
+      value: "#0fb5ae"
+    palatinate-blue:
+      value: "#4046ca"
+    tangerine:
+      value: "#f68511"
+    magenta:
+      value: "#de3d82"
+    tropical-indigo:
+      value: "#7e84fa"
+    malachite:
+      value: "#72e06a"
+    azure:
+      value: "#147af3"
+    violet:
+      value: "#7326d3"
+    yellow:
+      value: "#e8c600"
+    alloy-orange:
+      value: "#cb5d00"
+    green:
+      value: "#008f5d"
+    lime:
+      value: "#bce931"
+
+code-syntax:
+  color:
+    keyword:
+      value: "#ff7b72"
+    type:
+      value: "#d2a8ff"
+    variable:
+      value: "#79c0ff"
+    property:
+      value: "#d2a8ff"
+    string:
+      value: "#a5d6ff"
+    number:
+      value: "#79c0ff"
+    comment:
+      value: "#a0a7b0"
+    function:
+      value: "#d2a8ff"
+    operator:
+      value: "#ff7b72"
+    invalid:
+      value: "#f97583"
+
+gradient:
+  color:
+    value:
+      "radial-gradient(circle at 18% 20%, #3D55C159, transparent 22%),
+      radial-gradient(circle at 82% 18%, #00A1B54D, transparent 18%),
+      radial-gradient(circle at 70% 82%, #715DEE47, transparent 24%),
+      linear-gradient(180deg, #06070A 0%, #0A0E18 45%, #0F1424 100%)"
+
+background-gradient:
+  color:
+    value:
+      "linear-gradient(180deg,rgba(18, 21, 24, 1) 0%, rgba(35, 41, 64, 1) 80%)"

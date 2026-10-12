@@ -8,6 +8,14 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
   **component tokens** for a new component (category files like
   `src/actions/button.yml`) is fine — model them on existing components and ask
   when unsure.
+- **Color tiers** follow [ADR 0007](../../docs/adr/0007-color-token-tiers.md):
+  `color-brand.yml` (palette, theme-neutral, literals only) →
+  `color-semantic.{light,dark}.yml` (the only light/dark switch, references
+  Brand) → `color-variant.yml` (references Semantic) → component files (never
+  Brand). The build emits Semantic per theme (`colors-*.css`) and everything
+  else once (`base.css`). `build-tokens.js` fails on a forbidden reference, a
+  literal outside the Semantic literal groups, or a Semantic key missing in one
+  theme.
 - **`rem` vs `px` for size tokens.** Use `{size-rem.*}` for anything that should
   scale with the user's font size — spacing that must stay proportional to text
   (heading-to-text, icon-to-text, label gaps) and controls sized relative to

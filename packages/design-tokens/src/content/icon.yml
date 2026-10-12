@@ -21,11 +21,11 @@ icon:
   blue-color:
     value: "{primary.color.1000}"
   violet-color:
-    value: "{color.soft-contrast-violet.800}"
+    value: "{decorative-violet.color.800}"
   teal-color:
-    value: "{color.super-teal.800}"
+    value: "{decorative-teal.color.800}"
   lilac-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.800}"
   dark-color:
     value: "{dark-plain-content-color}"
   light-color:

@@ -7,6 +7,16 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "color-tokens-brand-theme-neutral",
+    since: "1.5.0",
+    title: "Color tokens: Brand variables no longer switch with the theme",
+    kind: "migration",
+    action: "manual",
+    remotePackage: false,
+    apply:
+      "Search your own CSS, SCSS and TS for `var(--color--`. Replace the moved variables by name — `--color--categorical--X` → `--categorical--color--X`, `--color--code-syntax--X` → `--code-syntax--color--X`, `--color--transparent` → `--transparent--color`, `--color--gradient` → `--gradient--color`, `--color--background-gradient` → `--background-gradient--color`, `--color--static-black-alpha--N` → `--dark-static--color--N`, `--color--static-white-alpha--N` → `--light-static--color--N`; JavaScript reading `color.categorical` from the token JSON reads `categorical.color`. Every other `--color--<ramp>--N` (e.g. `--color--gray--100`, `--color--hosting-blue--800`) still exists but keeps its light value in dark — replace it with the Semantic variable that carries its meaning, e.g. `--neutral--color--N` for gray, `--primary--color--N` for hosting-blue, `--danger--`, `--warning--` or `--success--color--N` for the status hues, or a Variant variable such as `--primary-solid-background-color--default`. Which one fits is not decidable mechanically — decide whether the color is a surface, content or status.",
+  },
+  {
     id: "image-rounded-corners-default",
     since: "1.4.0",
     title:

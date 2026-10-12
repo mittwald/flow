@@ -2,7 +2,7 @@
 .shell {
   container-type: inline-size;
   height: 100%;
-  background: var(--color--background-gradient);
+  background: var(--background-gradient--color);
 }
 
 .app {

@@ -29,7 +29,7 @@ menu-item:
 
   background-color:
     default:
-      value: "{color.transparent}"
+      value: "{transparent.color}"
     hover:
       value: "{neutral-plain-background-color.hover}"
     current:

@@ -1,7 +1,7 @@
 .page {
   /* Container-relative here; use 100dvh in a real full-page app. */
   height: 100%;
-  background: var(--color--background-gradient);
+  background: var(--background-gradient--color);
 }
 
 .center {

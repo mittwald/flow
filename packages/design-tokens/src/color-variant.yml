@@ -1,257 +1,5 @@
-primary:
-  color:
-    100:
-      value: "{color.hosting-blue.100}"
-    200:
-      value: "{color.hosting-blue.200}"
-    300:
-      value: "{color.hosting-blue.300}"
-    400:
-      value: "{color.hosting-blue.400}"
-    500:
-      value: "{color.hosting-blue.500}"
-    600:
-      value: "{color.hosting-blue.600}"
-    700:
-      value: "{color.hosting-blue.700}"
-    800:
-      value: "{color.hosting-blue.800}"
-    900:
-      value: "{color.hosting-blue.900}"
-    1000:
-      value: "{color.hosting-blue.1000}"
-    1100:
-      value: "{color.hosting-blue.1100}"
-
-info:
-  color:
-    100:
-      value: "{color.hosting-blue.100}"
-    200:
-      value: "{color.hosting-blue.200}"
-    300:
-      value: "{color.hosting-blue.300}"
-    400:
-      value: "{color.hosting-blue.400}"
-    500:
-      value: "{color.hosting-blue.500}"
-    600:
-      value: "{color.hosting-blue.600}"
-    700:
-      value: "{color.hosting-blue.700}"
-    800:
-      value: "{color.hosting-blue.800}"
-    900:
-      value: "{color.hosting-blue.900}"
-    1000:
-      value: "{color.hosting-blue.1000}"
-    1100:
-      value: "{color.hosting-blue.1100}"
-
-success:
-  color:
-    100:
-      value: "{color.espelkamp-green.100}"
-    200:
-      value: "{color.espelkamp-green.200}"
-    300:
-      value: "{color.espelkamp-green.300}"
-    400:
-      value: "{color.espelkamp-green.400}"
-    500:
-      value: "{color.espelkamp-green.500}"
-    600:
-      value: "{color.espelkamp-green.600}"
-    700:
-      value: "{color.espelkamp-green.700}"
-    800:
-      value: "{color.espelkamp-green.800}"
-    900:
-      value: "{color.espelkamp-green.900}"
-    1000:
-      value: "{color.espelkamp-green.1000}"
-    1100:
-      value: "{color.espelkamp-green.1100}"
-
-neutral:
-  color:
-    100:
-      value: "{color.gray.100}"
-    200:
-      value: "{color.gray.200}"
-    300:
-      value: "{color.gray.300}"
-    400:
-      value: "{color.gray.400}"
-    500:
-      value: "{color.gray.500}"
-    600:
-      value: "{color.gray.600}"
-    700:
-      value: "{color.gray.700}"
-    800:
-      value: "{color.gray.800}"
-    900:
-      value: "{color.gray.900}"
-    1000:
-      value: "{color.gray.1000}"
-    1100:
-      value: "{color.gray.1100}"
-    1200:
-      value: "{color.gray.1200}"
-
-unavailable:
-  color:
-    100:
-      value: "{color.gray.100}"
-    200:
-      value: "{color.gray.200}"
-    300:
-      value: "{color.gray.300}"
-    400:
-      value: "{color.gray.400}"
-    500:
-      value: "{color.gray.500}"
-    600:
-      value: "{color.gray.600}"
-    700:
-      value: "{color.gray.700}"
-    800:
-      value: "{color.gray.800}"
-    900:
-      value: "{color.gray.900}"
-    1000:
-      value: "{color.gray.1000}"
-    1100:
-      value: "{color.gray.1100}"
-    1200:
-      value: "{color.gray.1200}"
-
-danger:
-  color:
-    100:
-      value: "{color.amaranth-red.100}"
-    200:
-      value: "{color.amaranth-red.200}"
-    300:
-      value: "{color.amaranth-red.300}"
-    400:
-      value: "{color.amaranth-red.400}"
-    500:
-      value: "{color.amaranth-red.500}"
-    600:
-      value: "{color.amaranth-red.600}"
-    700:
-      value: "{color.amaranth-red.700}"
-    800:
-      value: "{color.amaranth-red.800}"
-    900:
-      value: "{color.amaranth-red.900}"
-    1000:
-      value: "{color.amaranth-red.1000}"
-    1100:
-      value: "{color.amaranth-red.1100}"
-
-warning:
-  color:
-    100:
-      value: "{color.royal-orange.100}"
-    200:
-      value: "{color.royal-orange.200}"
-    300:
-      value: "{color.royal-orange.300}"
-    400:
-      value: "{color.royal-orange.400}"
-    500:
-      value: "{color.royal-orange.500}"
-    600:
-      value: "{color.royal-orange.600}"
-    700:
-      value: "{color.royal-orange.700}"
-    800:
-      value: "{color.royal-orange.800}"
-    900:
-      value: "{color.royal-orange.900}"
-    1000:
-      value: "{color.royal-orange.1000}"
-    1100:
-      value: "{color.royal-orange.1100}"
-
-dark:
-  color:
-    100:
-      value: "{color.black-alpha.100}"
-    200:
-      value: "{color.black-alpha.200}"
-    300:
-      value: "{color.black-alpha.300}"
-    400:
-      value: "{color.black-alpha.400}"
-    500:
-      value: "{color.black-alpha.500}"
-    600:
-      value: "{color.black-alpha.600}"
-    700:
-      value: "{color.black-alpha.700}"
-    800:
-      value: "{color.black-alpha.800}"
-
-light:
-  color:
-    100:
-      value: "{color.white-alpha.100}"
-    200:
-      value: "{color.white-alpha.200}"
-    300:
-      value: "{color.white-alpha.300}"
-    400:
-      value: "{color.white-alpha.400}"
-    500:
-      value: "{color.white-alpha.500}"
-    600:
-      value: "{color.white-alpha.600}"
-    700:
-      value: "{color.white-alpha.700}"
-    800:
-      value: "{color.white-alpha.800}"
-
-dark-static:
-  color:
-    100:
-      value: "{color.static-black-alpha.100}"
-    200:
-      value: "{color.static-black-alpha.200}"
-    300:
-      value: "{color.static-black-alpha.300}"
-    400:
-      value: "{color.static-black-alpha.400}"
-    500:
-      value: "{color.static-black-alpha.500}"
-    600:
-      value: "{color.static-black-alpha.600}"
-    700:
-      value: "{color.static-black-alpha.700}"
-    800:
-      value: "{color.static-black-alpha.800}"
-
-light-static:
-  color:
-    100:
-      value: "{color.static-white-alpha.100}"
-    200:
-      value: "{color.static-white-alpha.200}"
-    300:
-      value: "{color.static-white-alpha.300}"
-    400:
-      value: "{color.static-white-alpha.400}"
-    500:
-      value: "{color.static-white-alpha.500}"
-    600:
-      value: "{color.static-white-alpha.600}"
-    700:
-      value: "{color.static-white-alpha.700}"
-    800:
-      value: "{color.static-white-alpha.800}"
+# Variant tier (ADR 0007): pairs of Semantic colors per variant. References
+# Semantic only.
 
 # Primary Solid
 primary-solid-background-color:
@@ -267,7 +15,7 @@ primary-solid-content-color:
 # Primary Plain
 primary-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{primary.color.100}"
   pressed:
@@ -289,7 +37,7 @@ primary-soft-content-color:
 # Primary Outline
 primary-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{primary.color.100}"
   pressed:
@@ -313,7 +61,7 @@ danger-solid-content-color:
 # Danger Plain
 danger-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{danger.color.100}"
   pressed:
@@ -324,7 +72,7 @@ danger-plain-content-color:
 # Danger Outline
 danger-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{danger.color.100}"
   pressed:
@@ -359,7 +107,7 @@ info-solid-content-color:
 # Info Outline
 info-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{info.color.100}"
   pressed:
@@ -383,7 +131,7 @@ info-soft-content-color:
 # Info Plain
 info-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{info.color.100}"
   pressed:
@@ -405,7 +153,7 @@ success-solid-content-color:
 # Success Plain
 success-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{success.color.100}"
   pressed:
@@ -416,7 +164,7 @@ success-plain-content-color:
 # Success Outline
 success-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{success.color.100}"
   pressed:
@@ -451,7 +199,7 @@ warning-solid-content-color:
 # Warning Outline
 warning-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{warning.color.100}"
   pressed:
@@ -475,7 +223,7 @@ warning-soft-content-color:
 # Warning Plain
 warning-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{warning.color.100}"
   pressed:
@@ -497,7 +245,7 @@ unavailable-solid-content-color:
 # Unavailable Plain
 unavailable-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{unavailable.color.300}"
   pressed:
@@ -508,7 +256,7 @@ unavailable-plain-content-color:
 # Unavailable Outline
 unavailable-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{unavailable.color.300}"
   pressed:
@@ -543,7 +291,7 @@ neutral-solid-content-color:
 # Neutral Plain
 neutral-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{neutral.color.300}"
   pressed:
@@ -554,7 +302,7 @@ neutral-plain-content-color:
 # Neutral Outline
 neutral-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{neutral.color.300}"
   selected:
@@ -601,7 +349,7 @@ disabled-solid-light-static-content-color:
 
 # Disabled Plain
 disabled-plain-background-color:
-  value: "{color.transparent}"
+  value: "{transparent.color}"
 disabled-plain-content-color:
   value: "{neutral.color.400}"
 disabled-plain-dark-content-color:
@@ -621,25 +369,25 @@ disabled-outline-content-color:
 disabled-outline-border-color:
   value: "{neutral.color.400}"
 disabled-outline-dark-background-color:
-  value: "{color.transparent}"
+  value: "{transparent.color}"
 disabled-outline-dark-border-color:
   value: "{dark.color.200}"
 disabled-outline-dark-content-color:
   value: "{dark.color.200}"
 disabled-outline-light-background-color:
-  value: "{color.transparent}"
+  value: "{transparent.color}"
 disabled-outline-light-border-color:
   value: "{light.color.200}"
 disabled-outline-light-content-color:
   value: "{light.color.200}"
 disabled-outline-dark-static-background-color:
-  value: "{color.transparent}"
+  value: "{transparent.color}"
 disabled-outline-dark-static-border-color:
   value: "{dark-static.color.200}"
 disabled-outline-dark-static-content-color:
   value: "{dark-static.color.200}"
 disabled-outline-light-static-background-color:
-  value: "{color.transparent}"
+  value: "{transparent.color}"
 disabled-outline-light-static-border-color:
   value: "{light-static.color.200}"
 disabled-outline-light-static-content-color:
@@ -692,7 +440,7 @@ dark-soft-content-color:
 # Dark Plain
 dark-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{dark.color.100}"
   pressed:
@@ -703,7 +451,7 @@ dark-plain-content-color:
 # Dark Outline
 dark-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{dark.color.100}"
   pressed:
@@ -738,7 +486,7 @@ light-soft-content-color:
 # Light Plain
 light-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{light.color.100}"
   pressed:
@@ -749,7 +497,7 @@ light-plain-content-color:
 # Light Outline
 light-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{light.color.100}"
   pressed:
@@ -784,7 +532,7 @@ dark-static-soft-content-color:
 # Dark Static Plain
 dark-static-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{dark-static.color.100}"
   pressed:
@@ -795,7 +543,7 @@ dark-static-plain-content-color:
 # Dark Static Outline
 dark-static-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{dark-static.color.100}"
   pressed:
@@ -830,7 +578,7 @@ light-static-soft-content-color:
 # Light Static Plain
 light-static-plain-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{light-static.color.100}"
   pressed:
@@ -841,7 +589,7 @@ light-static-plain-content-color:
 # Light Static Outline
 light-static-outline-background-color:
   default:
-    value: "{color.transparent}"
+    value: "{transparent.color}"
   hover:
     value: "{light-static.color.100}"
   pressed:

@@ -20,154 +20,154 @@ badge:
 
   # Neutral
   neutral-border-color:
-    value: "{color.gray.800}"
+    value: "{neutral.color.800}"
   neutral-background-color:
     default:
-      value: "{color.gray.300}"
+      value: "{neutral.color.300}"
     hover:
-      value: "{color.gray.400}"
+      value: "{neutral.color.400}"
     pressed:
-      value: "{color.gray.500}"
+      value: "{neutral.color.500}"
   neutral-content-color:
-    value: "{color.gray.900}"
+    value: "{neutral.color.900}"
   neutral-scope-background-color:
-    value: "{color.gray.800}"
+    value: "{neutral.color.800}"
   neutral-scope-content-color:
     value: "{text.color.light}"
 
   # Blue
   blue-border-color:
-    value: "{color.hosting-blue.800}"
+    value: "{decorative-blue.color.800}"
   blue-background-color:
     default:
-      value: "{color.hosting-blue.100}"
+      value: "{decorative-blue.color.100}"
     hover:
-      value: "{color.hosting-blue.200}"
+      value: "{decorative-blue.color.200}"
     pressed:
-      value: "{color.hosting-blue.300}"
+      value: "{decorative-blue.color.300}"
   blue-content-color:
-    value: "{color.hosting-blue.900}"
+    value: "{decorative-blue.color.900}"
   blue-scope-background-color:
-    value: "{color.hosting-blue.800}"
+    value: "{decorative-blue.color.800}"
   blue-scope-content-color:
     value: "{text.color.light}"
 
   # Navy
   navy-border-color:
-    value: "{color.mittwald-navy.800}"
+    value: "{decorative-navy.color.800}"
   navy-background-color:
     default:
-      value: "{color.mittwald-navy.100}"
+      value: "{decorative-navy.color.100}"
     hover:
-      value: "{color.mittwald-navy.200}"
+      value: "{decorative-navy.color.200}"
     pressed:
-      value: "{color.mittwald-navy.300}"
+      value: "{decorative-navy.color.300}"
   navy-content-color:
-    value: "{color.mittwald-navy.900}"
+    value: "{decorative-navy.color.900}"
   navy-scope-background-color:
-    value: "{color.mittwald-navy.800}"
+    value: "{decorative-navy.color.800}"
   navy-scope-content-color:
     value: "{text.color.light}"
 
   # Violet
   violet-border-color:
-    value: "{color.soft-contrast-violet.800}"
+    value: "{decorative-violet.color.800}"
   violet-background-color:
     default:
-      value: "{color.soft-contrast-violet.100}"
+      value: "{decorative-violet.color.100}"
     hover:
-      value: "{color.soft-contrast-violet.200}"
+      value: "{decorative-violet.color.200}"
     pressed:
-      value: "{color.soft-contrast-violet.300}"
+      value: "{decorative-violet.color.300}"
   violet-content-color:
-    value: "{color.soft-contrast-violet.900}"
+    value: "{decorative-violet.color.900}"
   violet-scope-background-color:
-    value: "{color.soft-contrast-violet.800}"
+    value: "{decorative-violet.color.800}"
   violet-scope-content-color:
     value: "{text.color.light}"
 
   # Teal
   teal-border-color:
-    value: "{color.super-teal.800}"
+    value: "{decorative-teal.color.800}"
   teal-background-color:
     default:
-      value: "{color.super-teal.100}"
+      value: "{decorative-teal.color.100}"
     hover:
-      value: "{color.super-teal.200}"
+      value: "{decorative-teal.color.200}"
     pressed:
-      value: "{color.super-teal.300}"
+      value: "{decorative-teal.color.300}"
   teal-content-color:
-    value: "{color.super-teal.900}"
+    value: "{decorative-teal.color.900}"
   teal-scope-background-color:
-    value: "{color.super-teal.800}"
+    value: "{decorative-teal.color.800}"
   teal-scope-content-color:
     value: "{text.color.light}"
 
   # Lilac
   lilac-border-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.800}"
   lilac-background-color:
     default:
-      value: "{color.bright-lilac.100}"
+      value: "{decorative-lilac.color.100}"
     hover:
-      value: "{color.bright-lilac.200}"
+      value: "{decorative-lilac.color.200}"
     pressed:
-      value: "{color.bright-lilac.300}"
+      value: "{decorative-lilac.color.300}"
   lilac-content-color:
-    value: "{color.bright-lilac.900}"
+    value: "{decorative-lilac.color.900}"
   lilac-scope-background-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.800}"
   lilac-scope-content-color:
     value: "{text.color.light}"
 
   # Red
   red-border-color:
-    value: "{color.amaranth-red.800}"
+    value: "{decorative-red.color.800}"
   red-background-color:
     default:
-      value: "{color.amaranth-red.100}"
+      value: "{decorative-red.color.100}"
     hover:
-      value: "{color.amaranth-red.200}"
+      value: "{decorative-red.color.200}"
     pressed:
-      value: "{color.amaranth-red.300}"
+      value: "{decorative-red.color.300}"
   red-content-color:
-    value: "{color.amaranth-red.900}"
+    value: "{decorative-red.color.900}"
   red-scope-background-color:
-    value: "{color.amaranth-red.800}"
+    value: "{decorative-red.color.800}"
   red-scope-content-color:
     value: "{text.color.light}"
 
   # Green
   green-border-color:
-    value: "{color.espelkamp-green.800}"
+    value: "{decorative-green.color.800}"
   green-background-color:
     default:
-      value: "{color.espelkamp-green.100}"
+      value: "{decorative-green.color.100}"
     hover:
-      value: "{color.espelkamp-green.200}"
+      value: "{decorative-green.color.200}"
     pressed:
-      value: "{color.espelkamp-green.300}"
+      value: "{decorative-green.color.300}"
   green-content-color:
-    value: "{color.espelkamp-green.900}"
+    value: "{decorative-green.color.900}"
   green-scope-background-color:
-    value: "{color.espelkamp-green.800}"
+    value: "{decorative-green.color.800}"
   green-scope-content-color:
     value: "{text.color.light}"
 
   # Orange
   orange-border-color:
-    value: "{color.royal-orange.900}"
+    value: "{decorative-orange.color.900}"
   orange-background-color:
     default:
-      value: "{color.royal-orange.100}"
+      value: "{decorative-orange.color.100}"
     hover:
-      value: "{color.royal-orange.200}"
+      value: "{decorative-orange.color.200}"
     pressed:
-      value: "{color.royal-orange.300}"
+      value: "{decorative-orange.color.300}"
   orange-content-color:
-    value: "{color.royal-orange.900}"
+    value: "{decorative-orange.color.900}"
   orange-scope-background-color:
-    value: "{color.royal-orange.900}"
+    value: "{decorative-orange.color.900}"
   orange-scope-content-color:
     value: "{text.color.light}"
 

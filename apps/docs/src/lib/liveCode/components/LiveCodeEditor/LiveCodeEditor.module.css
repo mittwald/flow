@@ -67,7 +67,7 @@
   }
 
   &.mstudioBackground {
-    background: var(--color--background-gradient);
+    background: var(--background-gradient--color);
   }
 
   /* prism-react-renderer renders this `<pre>` inside react-live; no prop

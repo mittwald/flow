@@ -12,7 +12,7 @@ message:
   background-color-responder:
     value: "{neutral.color.200}"
   background-color-sender:
-    value: "{color.hosting-blue.200}"
+    value: "{decorative-blue.color.200}"
   tip-size-x:
     value: "{size-px.s}"
   tip-size-y:

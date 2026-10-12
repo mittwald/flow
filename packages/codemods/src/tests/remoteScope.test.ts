@@ -65,6 +65,7 @@ const targets: Record<string, string[]> = {
     "RemoteButtonElementProps",
   ],
   "use-design-tokens-build-metadata-removed": ["useDesignTokens"],
+  "color-tokens-brand-theme-neutral": ["useDesignTokens"],
   "tabs-navigation-usage-to-tab-navigation": ["Tabs", "TabNavigation"],
   "imports-to-package-root": [],
   "renamed-css-export": [],

@@ -1,3 +1,5 @@
+# Brand tier (ADR 0007): the palette from the brand handover. Theme-neutral,
+# literal values only. Components never reference it — Semantic does.
 color:
   gray:
     100:
@@ -217,57 +219,6 @@ color:
     1100:
       value: "#00424a"
 
-  categorical:
-    sea-green:
-      value: "#0fb5ae"
-    palatinate-blue:
-      value: "#4046ca"
-    tangerine:
-      value: "#f68511"
-    magenta:
-      value: "#de3d82"
-    tropical-indigo:
-      value: "#7e84fa"
-    malachite:
-      value: "#72e06a"
-    azure:
-      value: "#147af3"
-    violet:
-      value: "#7326d3"
-    yellow:
-      value: "#e8c600"
-    alloy-orange:
-      value: "#cb5d00"
-    green:
-      value: "#008f5d"
-    lime:
-      value: "#bce931"
-
-  transparent:
-    value: transparent
-
-  code-syntax:
-    keyword:
-      value: "#cf222e"
-    type:
-      value: "#6f42c1"
-    variable:
-      value: "#005cc5"
-    property:
-      value: "#6f42c1"
-    string:
-      value: "#032f62"
-    number:
-      value: "#005cc5"
-    comment:
-      value: "#6a737d"
-    function:
-      value: "#8250df"
-    operator:
-      value: "#c12f3f"
-    invalid:
-      value: "#cb2431"
-
   black-alpha:
     100:
       value: "rgb(0 0 0 / 12.5%)"
@@ -303,56 +254,3 @@ color:
       value: "rgb(255 255 255 / 87.5%)"
     800:
       value: "rgb(255 255 255 / 100%)"
-
-  static-black-alpha:
-    100:
-      value: "rgb(0 0 0 / 12.5%)"
-    200:
-      value: "rgb(0 0 0 / 25%)"
-    300:
-      value: "rgb(0 0 0 / 37.5%)"
-    400:
-      value: "rgb(0 0 0 / 50%)"
-    500:
-      value: "rgb(0 0 0 / 62.5%)"
-    600:
-      value: "rgb(0 0 0 / 75%)"
-    700:
-      value: "rgb(0 0 0 / 87.5%)"
-    800:
-      value: "rgb(0 0 0 / 100%)"
-
-  static-white-alpha:
-    100:
-      value: "rgb(255 255 255 / 12.5%)"
-    200:
-      value: "rgb(255 255 255 / 25%)"
-    300:
-      value: "rgb(255 255 255 / 37.5%)"
-    400:
-      value: "rgb(255 255 255 / 50%)"
-    500:
-      value: "rgb(255 255 255 / 62.5%)"
-    600:
-      value: "rgb(255 255 255 / 75%)"
-    700:
-      value: "rgb(255 255 255 / 87.5%)"
-    800:
-      value: "rgb(255 255 255 / 100%)"
-
-  gradient:
-    value:
-      "radial-gradient(circle at 27.74% 38.09%,#d8e9f8,transparent
-      60%),radial-gradient(circle at 63.98% 99.4%,#e4b8ff,transparent
-      37%),radial-gradient(circle at 79.7% 64.93%,#d8e9f8,transparent
-      52%),radial-gradient(circle at 10.9% 91.41%,#d8e9f8,transparent
-      56%),radial-gradient(circle at 3.68% 3.26%,#0056ff,transparent
-      31%),radial-gradient(circle at 99.62% 17.78%,#48c7d8,transparent
-      26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
-      55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
-      100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
-
-  background-gradient:
-    value:
-      "linear-gradient( 180deg, rgba(244, 248, 252, 1) 20%, rgba(208, 214, 243,
-      1) 100% )"
