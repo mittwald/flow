@@ -729,6 +729,13 @@ test("useOnClosed is called when the closing animation has finished", async () =
   expect(modalText).toBeInTheDocument();
   expect(onClosed).not.toHaveBeenCalled();
 
+  // Enter and exit animation share their name, so closing while entering only
+  // retimes the running animation: past the exit duration it ends at once and
+  // there is nothing to hold. A fast click (Firefox) lands there.
+  await vitest.waitFor(() =>
+    expect(document.querySelector("[data-entering]")).toBeNull(),
+  );
+
   // Hold the close animation as soon as it starts. The observer runs before the
   // next frame, so the assertions below do not race the animation's duration.
   const heldAnimations: Animation[] = [];
