@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.39](https://github.com/mittwald/flow/compare/1.5.0-next.38...1.5.0-next.39) (2026-10-12)
+
+### Features
+
+* **SkeletonMode:** support navigation and status components ([c8c5820](https://github.com/mittwald/flow/commit/c8c58203dbe64b54f603e703c7201e25deacafc4))
+
+### Bug Fixes
+
+* **SkeletonMode:** keep one bar per line in flex containers ([c736e12](https://github.com/mittwald/flow/commit/c736e12b0ae381a551d8076a54c472a0fe592b58)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Code Refactoring
+
+* **Notification:** pick the skeleton body with a plain ternary ([7172990](https://github.com/mittwald/flow/commit/71729902a6b717d51d53e6c8dc89818f0718c75d))
+
+## [1.5.0-next.38](https://github.com/mittwald/flow/compare/1.5.0-next.37...1.5.0-next.38) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 ## [1.5.0-next.37](https://github.com/mittwald/flow/compare/1.5.0-next.36...1.5.0-next.37) (2026-10-09)
 
 ## [1.4.30](https://github.com/mittwald/flow/compare/1.5.0-next.35...1.4.30) (2026-10-09)

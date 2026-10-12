@@ -11,5 +11,6 @@ declare const classNames: {
   readonly danger: "danger";
   readonly success: "success";
   readonly unavailable: "unavailable";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

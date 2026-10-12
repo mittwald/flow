@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.39](https://github.com/mittwald/flow/compare/1.5.0-next.38...1.5.0-next.39) (2026-10-12)
+
+## [1.4.31](https://github.com/mittwald/flow/compare/1.5.0-next.37...1.4.31) (2026-10-09)
+
+### Features
+
+* **SkeletonMode:** support navigation and status components ([c8c5820](https://github.com/mittwald/flow/commit/c8c58203dbe64b54f603e703c7201e25deacafc4))
+
+### Bug Fixes
+
+* **ci:** bound the .deb download when the cache misses ([3ea2f2b](https://github.com/mittwald/flow/commit/3ea2f2bb33e4385036fabd9011997c3c7658272a))
+* **ci:** cache the .debs Playwright installs for WebKit ([9c87434](https://github.com/mittwald/flow/commit/9c8743483d15d9081bb9ecacafd36e9c3a3666b2))
+* **ci:** key the Playwright caches on the Ubuntu release ([7a80a75](https://github.com/mittwald/flow/commit/7a80a750d6a19b29d0eccd3f6908f47a4a850489))
+* **SkeletonMode:** keep one bar per line in flex containers ([c736e12](https://github.com/mittwald/flow/commit/c736e12b0ae381a551d8076a54c472a0fe592b58)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Documentation
+
+* **SkeletonMode:** toggle the mode in the navigation-status example ([b78b455](https://github.com/mittwald/flow/commit/b78b4555a14989abde19564cf89ed1c61c4a74e3))
+
+### Miscellaneous Chores
+
+* drop the TEMP trigger again ([e53b747](https://github.com/mittwald/flow/commit/e53b74799a9ae50f1dad8b5375253292b018769a))
+* drop the TEMP trigger and benchmark again ([3b03864](https://github.com/mittwald/flow/commit/3b03864504e11f8575c5e1e78dd9827c36f92583))
+* **release:** bump version to 1.4.31 ([05fb999](https://github.com/mittwald/flow/commit/05fb999f33e20604a962d490e317bdec5ebb37dd))
+* TEMP — benchmark apt alone vs. parallel .deb fetch (drop before merge) ([768cb66](https://github.com/mittwald/flow/commit/768cb66e9feb8acce15618e848201aac3008d27c))
+* TEMP — benchmark: don&#x27;t stop on the dry-run&#x27;s exit code (drop before merge) ([4693783](https://github.com/mittwald/flow/commit/4693783e66390429b84324ab8f66e94c2583a187))
+* TEMP — make the browser suites affected (drop before merge) ([b2cbe44](https://github.com/mittwald/flow/commit/b2cbe444889bee824ccdaea05f0303e7c810b04d))
+* TEMP — make the browser suites affected (drop before merge) ([169ae96](https://github.com/mittwald/flow/commit/169ae968b77212f7cc95849d643dda5d7475966b))
+
+### Code Refactoring
+
+* **Notification:** pick the skeleton body with a plain ternary ([7172990](https://github.com/mittwald/flow/commit/71729902a6b717d51d53e6c8dc89818f0718c75d))
+
+### Tests
+
+* **SkeletonMode:** skip the visual scenarios for versions without it ([de2ad25](https://github.com/mittwald/flow/commit/de2ad252b5ce7606b4f490b40aa8323d7f87cf86))
+* **SkeletonMode:** update the text baseline for the round AlertIcon surface ([453996a](https://github.com/mittwald/flow/commit/453996abfce8102495a8f370b7eb251fbb79c008))
+* **SkeletonMode:** use the shared skeletonModeSince gate ([77252a9](https://github.com/mittwald/flow/commit/77252a943be619d62a90257cdf91489c6064a770))
+* update visual regression screenshots ([6c2fcf4](https://github.com/mittwald/flow/commit/6c2fcf4eb56bdc325a24be9cdd784a15a54964c6))
+* update visual regression screenshots ([65dd926](https://github.com/mittwald/flow/commit/65dd926d2d3d8f09b843fc5b023b882cdc53f77d))
+* update visual regression screenshots ([d932f04](https://github.com/mittwald/flow/commit/d932f047b771e358a60ea9e6cae3908b9bd3f231))
+
+## [1.5.0-next.38](https://github.com/mittwald/flow/compare/1.5.0-next.37...1.5.0-next.38) (2026-10-09)
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group with 3 updates ([91bab44](https://github.com/mittwald/flow/commit/91bab44ca8d7b58c85104f387fa2fcfd3bf35e97))
+
 ## [1.5.0-next.37](https://github.com/mittwald/flow/compare/1.5.0-next.36...1.5.0-next.37) (2026-10-09)
 
 ### Documentation

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.39](https://github.com/mittwald/flow/compare/1.5.0-next.38...1.5.0-next.39) (2026-10-12)
+
+### Features
+
+* **SkeletonMode:** support navigation and status components ([c8c5820](https://github.com/mittwald/flow/commit/c8c58203dbe64b54f603e703c7201e25deacafc4))
+
+### Bug Fixes
+
+* **SkeletonMode:** keep one bar per line in flex containers ([c736e12](https://github.com/mittwald/flow/commit/c736e12b0ae381a551d8076a54c472a0fe592b58)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Tests
+
+* **SkeletonMode:** skip the visual scenarios for versions without it ([de2ad25](https://github.com/mittwald/flow/commit/de2ad252b5ce7606b4f490b40aa8323d7f87cf86))
+* **SkeletonMode:** update the text baseline for the round AlertIcon surface ([453996a](https://github.com/mittwald/flow/commit/453996abfce8102495a8f370b7eb251fbb79c008))
+* **SkeletonMode:** use the shared skeletonModeSince gate ([77252a9](https://github.com/mittwald/flow/commit/77252a943be619d62a90257cdf91489c6064a770))
+* update visual regression screenshots ([6c2fcf4](https://github.com/mittwald/flow/commit/6c2fcf4eb56bdc325a24be9cdd784a15a54964c6))
+* update visual regression screenshots ([65dd926](https://github.com/mittwald/flow/commit/65dd926d2d3d8f09b843fc5b023b882cdc53f77d))
+* update visual regression screenshots ([d932f04](https://github.com/mittwald/flow/commit/d932f047b771e358a60ea9e6cae3908b9bd3f231))
+
+## [1.5.0-next.38](https://github.com/mittwald/flow/compare/1.5.0-next.37...1.5.0-next.38) (2026-10-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.5.0-next.37](https://github.com/mittwald/flow/compare/1.5.0-next.36...1.5.0-next.37) (2026-10-09)
 
 ### Tests
