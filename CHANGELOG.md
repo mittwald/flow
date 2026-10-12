@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.47](https://github.com/mittwald/flow/compare/1.5.0-next.46...1.5.0-next.47) (2026-10-12)
+
+### Features
+
+* **SkeletonMode:** support content, charts, editors and overlays ([3db959e](https://github.com/mittwald/flow/commit/3db959e03cf4e797521890ee5e0fe3d4992172bd))
+
+### Bug Fixes
+
+* **Field:** pass isDisabled to CodeEditor ([4f1c7fe](https://github.com/mittwald/flow/commit/4f1c7fe5e360243bdd36d39cf9a153e11fe9d35d)), closes [#3369](https://github.com/mittwald/flow/issues/3369)
+* **SkeletonMode:** show no ellipsis over a truncated text bar ([35ffd50](https://github.com/mittwald/flow/commit/35ffd50bebe99a774d7859907a4fc4ebfc38a988)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Documentation
+
+* **SkeletonMode:** toggle the mode in the content example ([6a6e31d](https://github.com/mittwald/flow/commit/6a6e31dfc2ad80f69c9fde8530e233c21506e044))
+
+### Styles
+
+* **FileDropZone:** format the merge resolution ([2e16379](https://github.com/mittwald/flow/commit/2e163794246f216fa252f650213cc0a5295424de))
+
+### Code Refactoring
+
+* **SkeletonMode:** name both variants and pick them in the JSX ([ebf0d45](https://github.com/mittwald/flow/commit/ebf0d4569b552d2e973b504cd30e7cf463b15631))
+
+### Tests
+
+* **SkeletonMode:** skip the visual scenarios for versions without it ([8ae0409](https://github.com/mittwald/flow/commit/8ae0409b6a3ef4892371bb61218686d281cde483))
+* **SkeletonMode:** use the shared skeletonModeSince gate ([32ab25e](https://github.com/mittwald/flow/commit/32ab25ebb40469a20e4bfb8b029438b53c9cc118))
+* update visual regression screenshots ([773c2eb](https://github.com/mittwald/flow/commit/773c2eb7fb8df0f84a8f33957a86c042f9e40608))
+* update visual regression screenshots ([4180c7b](https://github.com/mittwald/flow/commit/4180c7b2931396e06f2bdc72a0d86118f8a66e93))
+* update visual regression screenshots ([2007b50](https://github.com/mittwald/flow/commit/2007b5095532b1f6bab53c822ec32a4443f3e760))
+* update visual regression screenshots ([a6cd900](https://github.com/mittwald/flow/commit/a6cd90088d71bf9788737903fa84625aed458532))
+
 ## [1.5.0-next.46](https://github.com/mittwald/flow/compare/1.5.0-next.45...1.5.0-next.46) (2026-10-12)
 
 ## [1.4.36](https://github.com/mittwald/flow/compare/1.5.0-next.44...1.4.36) (2026-10-12)

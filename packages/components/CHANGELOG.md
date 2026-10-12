@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.47](https://github.com/mittwald/flow/compare/1.5.0-next.46...1.5.0-next.47) (2026-10-12)
+
+### Features
+
+* **SkeletonMode:** support content, charts, editors and overlays ([3db959e](https://github.com/mittwald/flow/commit/3db959e03cf4e797521890ee5e0fe3d4992172bd))
+
+### Bug Fixes
+
+* **Field:** pass isDisabled to CodeEditor ([4f1c7fe](https://github.com/mittwald/flow/commit/4f1c7fe5e360243bdd36d39cf9a153e11fe9d35d)), closes [#3369](https://github.com/mittwald/flow/issues/3369)
+* **SkeletonMode:** show no ellipsis over a truncated text bar ([35ffd50](https://github.com/mittwald/flow/commit/35ffd50bebe99a774d7859907a4fc4ebfc38a988)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Styles
+
+* **FileDropZone:** format the merge resolution ([2e16379](https://github.com/mittwald/flow/commit/2e163794246f216fa252f650213cc0a5295424de))
+
+### Code Refactoring
+
+* **SkeletonMode:** name both variants and pick them in the JSX ([ebf0d45](https://github.com/mittwald/flow/commit/ebf0d4569b552d2e973b504cd30e7cf463b15631))
+
 ## [1.5.0-next.46](https://github.com/mittwald/flow/compare/1.5.0-next.45...1.5.0-next.46) (2026-10-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
