@@ -50,7 +50,10 @@ export interface LinkProps
   unstyled?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props linkComponent
+ */
 export const Link = flowComponent("Link", (props) => {
   const {
     children,

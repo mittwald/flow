@@ -32,7 +32,8 @@ export interface MarkdownProps
 
 /**
  * @flr-generate all
- * @flr-ignore-props components
+ * @flr-ignore-props components, allowElement, rehypePlugins, remarkPlugins,
+ *   urlTransform
  */
 export const Markdown: FC<MarkdownProps> = (props) => {
   const {
