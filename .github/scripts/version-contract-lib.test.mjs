@@ -7,6 +7,7 @@ import {
   classifyEngineChange,
   isBreakingMarker,
   collectFindings,
+  isBetaPackage,
 } from "./version-contract-lib.mjs";
 
 test("parseRange: supported shapes parse to a non-null IntervalSet", () => {
@@ -234,4 +235,59 @@ test("collectFindings: a published package gaining engines.node still flags", ()
   assert.equal(findings.length, 1);
   assert.equal(findings[0].surface, "engines.node");
   assert.equal(findings[0].kind, "raised");
+});
+
+test("isBetaPackage: only flowStatus beta", () => {
+  assert.equal(isBetaPackage({ name: "x", flowStatus: "beta" }), true);
+  assert.equal(isBetaPackage({ name: "x", flowStatus: "stable" }), false);
+  assert.equal(isBetaPackage({ name: "x" }), false);
+  assert.equal(isBetaPackage(null), false);
+});
+
+const vuePackage = "@mittwald/flow-remote-vue-components";
+
+/** The Vue binding at the base and the head, with a `vue` peer range each. */
+const vueBinding = (base, head) => ({
+  name: vuePackage,
+  base: { name: vuePackage, ...base },
+  head: { name: vuePackage, ...head },
+});
+
+test("collectFindings: a beta package narrows a peer without a finding", () => {
+  const packages = [
+    vueBinding(
+      { flowStatus: "beta", peerDependencies: { vue: "^3.5.0" } },
+      { flowStatus: "beta", peerDependencies: { vue: "^3.6.0" } },
+    ),
+  ];
+  assert.deepEqual(collectFindings(packages), []);
+});
+
+test("collectFindings: a beta package still flags a raised Node floor", () => {
+  const packages = [
+    vueBinding(
+      { flowStatus: "beta", engines: { node: ">=24.0.0" } },
+      { flowStatus: "beta", engines: { node: ">=26.0.0" } },
+    ),
+  ];
+  const findings = collectFindings(packages);
+  assert.equal(findings.length, 1);
+  assert.equal(findings[0].surface, "engines.node");
+});
+
+test("collectFindings: entering or leaving the beta is checked", () => {
+  const packages = [
+    vueBinding(
+      { peerDependencies: { vue: "^3.5.0" } },
+      { flowStatus: "beta", peerDependencies: { vue: "^3.6.0" } },
+    ),
+    vueBinding(
+      { flowStatus: "beta", peerDependencies: { vue: "^3.5.0" } },
+      { peerDependencies: { vue: "^3.6.0" } },
+    ),
+  ];
+  assert.deepEqual(
+    collectFindings(packages).map((f) => f.kind),
+    ["narrowed", "narrowed"],
+  );
 });

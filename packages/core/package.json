@@ -7,6 +7,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "test:unit": "vitest run"
+  },
   "dependencies": {
     "@types/invariant": "^2.2.37",
     "invariant": "^2.2.4",
