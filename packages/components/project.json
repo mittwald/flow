@@ -57,6 +57,8 @@
       "inputs": [
         "components-src",
         "{projectRoot}/dev/createDocPropertiesJson.ts",
+        "{projectRoot}/dev/parseComponentDocs.ts",
+        "{projectRoot}/dev/remote-components-generator/lib/callableReturn.ts",
         "{projectRoot}/dev/docProperties.ts",
         "{projectRoot}/dev/component-index/filterProps.ts"
       ],
@@ -78,7 +80,8 @@
       "inputs": [
         "{projectRoot}/dev/remote-components-generator/**/*",
         "components-src",
-        "{projectRoot}/dev/docProperties.ts"
+        "{projectRoot}/dev/docProperties.ts",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
       ],
       "dependsOn": ["build:docs-properties"],
       "outputs": [

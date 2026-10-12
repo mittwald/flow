@@ -262,8 +262,11 @@ territory:
   that reason. A host that reads the result synchronously gets the Promise
   object: `XAxis.tickFormatter` rendered every tick as `[object Promise]` until
   it was excluded with `@flr-ignore-props`. `checkSerializableProps` fails
-  generation on a new one; the props that predate the check are listed in
-  `acknowledgedValueReturningProps`.
+  generation on a new one, read from the TypeScript type, so an alias
+  (`UrlTransform`), a component type (`ComponentType<…>`) or a list of functions
+  counts too. The props that predate the check are listed in
+  `acknowledgedValueReturningProps`, and props whose data form is the remote
+  contract (`className` as a string) in `acknowledgedFunctionAlternativeProps`.
 - **There are no HTML attributes.** `isAttribute` in the generator is hard-coded
   to `false`
   ([`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`](../packages/components/dev/remote-components-generator/lib/propClassifiers.ts)),
@@ -288,9 +291,9 @@ and deprecating the old ones with `useWarnDeprecation` (see
 Some props are excluded from generation outright, either globally or per
 component. The global ignore list lives in
 [`packages/components/dev/remote-components-generator/config.ts`](../packages/components/dev/remote-components-generator/config.ts):
-`style`, `dangerouslySetInnerHTML`, `ref`, `controller`, `tunnel`, `key`,
-`children`, and `wrapWith`. A component can additionally exclude one of its own
-props with a `@flr-ignore-props` JSDoc tag.
+`style`, `dangerouslySetInnerHTML`, `ref`, `inputRef`, `controller`, `tunnel`,
+`key`, `children`, `wrapWith`, `renderEmptyState` and `render`. A component can
+additionally exclude one of its own props with a `@flr-ignore-props` JSDoc tag.
 
 Three of these deserve a specific explanation, because they look like they
 should cross the boundary and deliberately don't:
