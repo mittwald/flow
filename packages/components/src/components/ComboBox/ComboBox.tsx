@@ -36,6 +36,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     className,
     menuTrigger = "focus",
     onChange,
+    onOpenChange,
     onSelectionChange,
     placeholder,
     ref,
@@ -85,8 +86,9 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       {...rest}
       {...controlProps}
       onSelectionChange={handleSelectionChange}
-      onOpenChange={(isOpen) => {
+      onOpenChange={(isOpen, menuTrigger) => {
         controller.setOpen(isOpen);
+        onOpenChange?.(isOpen, menuTrigger);
       }}
     >
       <PropsContextProvider props={propsContext}>
