@@ -2,8 +2,8 @@ declare const classNames: {
   readonly codeEditor: "codeEditor";
   readonly codeMirror: "codeMirror";
   readonly readonly: "readonly";
-  readonly copyButton: "copyButton";
   readonly skeleton: "skeleton";
+  readonly copyButton: "copyButton";
   readonly skeletonLines: "skeletonLines";
   readonly unlayered: "unlayered";
   readonly "cm-editor": "cm-editor";
