@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.31](https://github.com/mittwald/flow/compare/1.4.30...1.4.31) (2026-10-09)
+
+### Documentation
+
+* show component design tokens on component pages ([#3287](https://github.com/mittwald/flow/issues/3287)) ([0b69238](https://github.com/mittwald/flow/commit/0b69238e5b53bc3e8249e032129e204fa90e6d2a))
+
+### Miscellaneous Chores
+
+* **deps:** bump the production group with 3 updates ([91bab44](https://github.com/mittwald/flow/commit/91bab44ca8d7b58c85104f387fa2fcfd3bf35e97))
+
 ## [1.4.30](https://github.com/mittwald/flow/compare/1.4.29...1.4.30) (2026-10-09)
 
 ### Bug Fixes
