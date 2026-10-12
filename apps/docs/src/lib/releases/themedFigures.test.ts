@@ -42,6 +42,36 @@ test("reads a block a formatter wrapped across lines", () => {
   );
 });
 
+test("reads a media query without a space and single-quoted attributes", () => {
+  const variant = [
+    "<picture>",
+    `  <source media='(prefers-color-scheme:dark)' srcset='${base}/rating-dark.png'>`,
+    `  <img src='${base}/rating.png' alt='Rating'>`,
+    "</picture>",
+  ].join("\n");
+  expect(themedFigures(variant)).toBe(
+    `![Rating](${base}/rating.png#light-only)\n![Rating](${base}/rating-dark.png#dark-only)`,
+  );
+});
+
+test.each([
+  ["no <img src>", `<picture><img alt="x"></picture>`],
+  [
+    "not (prefers-color-scheme:dark)",
+    `<picture><source media="(min-width: 600px)" srcset="${base}/a.png"><img src="${base}/rating.png"></picture>`,
+  ],
+  [
+    "no <source srcset>",
+    `<picture><source media="(prefers-color-scheme: dark)"><img src="${base}/rating.png"></picture>`,
+  ],
+  [
+    "more than one <source>",
+    `<picture><source media="(prefers-color-scheme: dark)" srcset="${base}/a.png"><source media="(prefers-color-scheme: dark)" srcset="${base}/b.png"><img src="${base}/rating.png"></picture>`,
+  ],
+])("throws on a block it cannot read: %s", (reason, block) => {
+  expect(() => themedFigures(block)).toThrow(reason);
+});
+
 test("keeps a figure without a dark capture visible in both themes", () => {
   expect(
     themedFigures(`<picture><img src="${base}/rating.png" alt="x"></picture>`),
