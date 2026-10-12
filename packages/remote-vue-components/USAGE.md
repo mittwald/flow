@@ -27,7 +27,7 @@ What follows is only what is different because you write Vue.
 ## Installation
 
 ```shell
-FLOW=$(npm view @mittwald/flow-remote-vue-components version)
+FLOW=$(npm view @mittwald/flow-remote-vue-components@next version)
 pnpm add @mittwald/flow-remote-vue-components@$FLOW @mittwald/flow-react-components@$FLOW @mittwald/ext-bridge@$FLOW vue react react-dom
 ```
 
