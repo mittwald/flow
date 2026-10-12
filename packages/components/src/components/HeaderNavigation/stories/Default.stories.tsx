@@ -21,8 +21,6 @@ import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { alphaColors } from "@/lib/types/props";
-import { Icon } from "@/components/Icon";
-import { IconBrandGithub } from "@tabler/icons-react";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -83,30 +81,3 @@ export default meta;
 type Story = StoryObj<typeof HeaderNavigation>;
 
 export const Default: Story = {};
-
-export const WithIconLink: Story = {
-  render: (props, context) => (
-    <StoryBackground color={props.color} theme={context.globals.theme}>
-      <HeaderNavigation aria-label="Header navigation" {...props}>
-        <Link href="#">Star systems</Link>
-        <Link href="#" aria-current="page">
-          Starships
-        </Link>
-        <Link
-          href="https://github.com/mittwald/flow"
-          target="_blank"
-          aria-label="GitHub"
-        >
-          <Button>
-            <Icon>
-              <IconBrandGithub />
-            </Icon>
-          </Button>
-        </Link>
-        <Button aria-label="Search">
-          <IconSearch />
-        </Button>
-      </HeaderNavigation>
-    </StoryBackground>
-  ),
-};
