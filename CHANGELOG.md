@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.38](https://github.com/mittwald/flow/compare/1.4.37...1.4.38) (2026-10-12)
+
+### Bug Fixes
+
+* **ci:** keep non-matching label events out of the visual run&#x27;s concurrency group ([#3445](https://github.com/mittwald/flow/issues/3445)) ([b85e30f](https://github.com/mittwald/flow/commit/b85e30fe34c7bd546dc599e17dada17432723b7e))
+* **PasswordCreationField:** keep the result while a slow validation runs ([#3461](https://github.com/mittwald/flow/issues/3461)) ([75b9e99](https://github.com/mittwald/flow/commit/75b9e996c9e3d2266fb380f0000665394fbfff0c))
+
+### Miscellaneous Chores
+
+* **deps:** bump the actions group across 1 directory with 2 updates ([4dd92d4](https://github.com/mittwald/flow/commit/4dd92d4ebab2f43f0821e6701cebbd9990a66ead))
+
 ## [1.4.37](https://github.com/mittwald/flow/compare/1.4.36...1.4.37) (2026-10-12)
 
 ### Miscellaneous Chores
