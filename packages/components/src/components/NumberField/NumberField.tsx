@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from "react";
+import { type PropsWithChildren, useId } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
@@ -15,11 +15,18 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { NumberFieldUnit } from "./components/NumberFieldUnit";
 
 export interface NumberFieldProps
   extends
     PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
-    FlowComponentProps<HTMLInputElement> {}
+    FlowComponentProps<HTMLInputElement> {
+  /**
+   * A unit displayed after the number, for units `Intl.NumberFormat` does not
+   * support (e.g. "MiB"). For supported units, use `formatOptions` instead.
+   */
+  unit?: string;
+}
 
 /** @flr-generate all */
 export const NumberField = flowComponent("NumberField", (props) => {
@@ -29,8 +36,12 @@ export const NumberField = flowComponent("NumberField", (props) => {
     className,
     isWheelDisabled = true,
     ref,
+    unit,
+    "aria-labelledby": ariaLabelledBy,
     ...rest
   } = useControlledHostValueProps(props, NaN);
+
+  const unitId = useId();
 
   const {
     FieldErrorView,
@@ -46,6 +57,11 @@ export const NumberField = flowComponent("NumberField", (props) => {
     <Aria.NumberField
       {...rest}
       isWheelDisabled={isWheelDisabled}
+      aria-labelledby={
+        unit
+          ? [ariaLabelledBy, unitId].filter(Boolean).join(" ")
+          : ariaLabelledBy
+      }
       aria-describedby={controlProps["aria-describedby"]}
       className={clsx(rootClassName, wrapperProps.className)}
     >
@@ -64,7 +80,10 @@ export const NumberField = flowComponent("NumberField", (props) => {
           <IconChevronDown />
           <IconMinus className={styles.coarsePointerIcon} />
         </Button>
-        <Aria.Input className={styles.input} ref={ref} />
+        <div className={styles.inputContainer}>
+          <Aria.Input className={styles.input} ref={ref} />
+          {unit && <NumberFieldUnit id={unitId} unit={unit} />}
+        </div>
         <Button
           ariaSlot="increment"
           className={styles.incrementButton}

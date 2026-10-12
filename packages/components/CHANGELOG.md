@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-next.44](https://github.com/mittwald/flow/compare/1.5.0-next.43...1.5.0-next.44) (2026-10-12)
+
+### Bug Fixes
+
+* **Field:** disable fields of a disabled form ([#3379](https://github.com/mittwald/flow/issues/3379)) ([45fb9ae](https://github.com/mittwald/flow/commit/45fb9ae7fd8f5f304780640407593671defb356c))
+
+## [1.4.34](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.4.34) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.34 ([d17d841](https://github.com/mittwald/flow/commit/d17d84121422181fa8e543209c0d86816b9b7938))
+
+## [1.5.0-next.43](https://github.com/mittwald/flow/compare/1.5.0-next.42...1.5.0-next.43) (2026-10-12)
+
+### Tests
+
+* **components:** add form field contract test and guidance ([#3370](https://github.com/mittwald/flow/issues/3370)) ([e4d3245](https://github.com/mittwald/flow/commit/e4d32456c2543ba0d46bfd63e060f7b4ac11eb52))
+
+## [1.4.33](https://github.com/mittwald/flow/compare/1.5.0-next.41...1.4.33) (2026-10-12)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.33 ([1d2fd90](https://github.com/mittwald/flow/commit/1d2fd90e2dcedb34c870384efe10f313f30d610e))
+
+## [1.5.0-next.42](https://github.com/mittwald/flow/compare/1.5.0-next.41...1.5.0-next.42) (2026-10-12)
+
+## [1.4.32](https://github.com/mittwald/flow/compare/1.5.0-next.39...1.4.32) (2026-10-12)
+
+### Documentation
+
+* **components:** one const per UI variant, the JSX picks ([2aa5ff1](https://github.com/mittwald/flow/commit/2aa5ff1a963bfb9e0bd0a2dc98395eabfb125506))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.4.32 ([d166ab4](https://github.com/mittwald/flow/commit/d166ab4bc3ee5da99de916175f4881659b41d77e))
+
+## [1.5.0-next.41](https://github.com/mittwald/flow/compare/1.5.0-next.40...1.5.0-next.41) (2026-10-12)
+
+### Features
+
+* **NumberField:** support custom units ([3a3949e](https://github.com/mittwald/flow/commit/3a3949e2526c2bfaf795001691bf6b52087b9dce)), closes [#2579](https://github.com/mittwald/flow/issues/2579)
+
+## [1.5.0-next.40](https://github.com/mittwald/flow/compare/1.5.0-next.39...1.5.0-next.40) (2026-10-12)
+
+### Bug Fixes
+
+* **Modal:** drop &quot;modal&quot; from the unsaved changes confirmation text ([f270eea](https://github.com/mittwald/flow/commit/f270eea4935fcfa1407318ca4bffb6f1e1b93880))
+
+## [1.5.0-next.39](https://github.com/mittwald/flow/compare/1.5.0-next.38...1.5.0-next.39) (2026-10-12)
+
+### Features
+
+* **SkeletonMode:** support navigation and status components ([c8c5820](https://github.com/mittwald/flow/commit/c8c58203dbe64b54f603e703c7201e25deacafc4))
+
+### Bug Fixes
+
+* **SkeletonMode:** keep one bar per line in flex containers ([c736e12](https://github.com/mittwald/flow/commit/c736e12b0ae381a551d8076a54c472a0fe592b58)), closes [#3321](https://github.com/mittwald/flow/issues/3321)
+
+### Code Refactoring
+
+* **Notification:** pick the skeleton body with a plain ternary ([7172990](https://github.com/mittwald/flow/commit/71729902a6b717d51d53e6c8dc89818f0718c75d))
+
 ## [1.5.0-next.38](https://github.com/mittwald/flow/compare/1.5.0-next.37...1.5.0-next.38) (2026-10-09)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
