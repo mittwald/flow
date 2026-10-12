@@ -30,5 +30,13 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
   enforces this for every `src/`, so build-time code that genuinely needs
   `original` (the unresolved reference, which most tokens have) has to live
   outside `src/`.
+- **Contrast audit.** `pnpm nx audit:contrast tokens` builds the tokens and
+  reports the WCAG 2.2 AA ratio of every content/background pair in light and
+  dark (`--all`, `--json`, `--strict` after `--`). Pairs come from token names:
+  a `…content-color`, `…icon-color` or `color` token pairs with the sibling
+  named `…background-color`, per state. Name a new pair that way and the audit
+  picks it up. Translucent backgrounds are composited on the theme surface
+  (`neutral.color.100`); `light`/`*-static` pairs on an ideal backdrop — see
+  `dev/contrast-audit-lib.js`. Report only, not a CI gate yet.
 - Consumers: `components` SCSS uses the CSS variables; some runtime helpers
   (e.g. `useDesignTokens`, categorical chart colors) read `json-runtime`.

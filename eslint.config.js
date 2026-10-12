@@ -138,8 +138,8 @@ export default tseslint.config(
     },
   },
   {
-    // Node ES-module CLI scripts (run by GitHub Actions, not bundled).
-    files: [".github/scripts/**/*.mjs"],
+    // Node ES-module CLI scripts (not bundled).
+    files: [".github/scripts/**/*.mjs", "packages/design-tokens/dev/**/*.js"],
     languageOptions: {
       globals: {
         process: "readonly",

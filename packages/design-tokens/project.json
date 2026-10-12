@@ -7,6 +7,24 @@
       "cache": true,
       "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/build-tokens.js"],
       "outputs": ["{projectRoot}/dist/**/*"]
+    },
+    "audit:contrast": {
+      "cache": true,
+      "dependsOn": ["build"],
+      "inputs": [
+        "{projectRoot}/dev/contrast-audit*.js",
+        "!{projectRoot}/dev/*.test.js",
+        {
+          "dependentTasksOutputFiles": "**/*.json",
+          "transitive": false
+        }
+      ],
+      "outputs": []
+    },
+    "test:unit": {
+      "cache": true,
+      "inputs": ["{projectRoot}/dev/**/*"],
+      "outputs": []
     }
   }
 }
