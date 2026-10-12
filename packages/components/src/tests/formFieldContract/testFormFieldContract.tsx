@@ -93,7 +93,7 @@ const ContractForm = (props: { children?: ReactNode }) => (
 const getForm = () => {
   const form = document.getElementById(formId);
   if (!(form instanceof HTMLFormElement)) {
-    throw new Error("Contract form is not rendered");
+    throw new ContractHarnessError("Contract form is not rendered");
   }
   return form;
 };
@@ -110,10 +110,27 @@ const settle = () =>
     requestAnimationFrame(() => setTimeout(resolve)),
   );
 
-// Only a failing expectation of the aspect counts for an excepted aspect. A
-// lookup or interaction error (a stale adapter, a timeout) is a plain `Error`.
-const isAspectFailure = (error: unknown) =>
-  error instanceof Error && error.name === "AssertionError";
+/** A failure of the test setup, not of the aspect under test. */
+class ContractHarnessError extends Error {
+  override name = "ContractHarnessError";
+}
+
+// Errors a lookup, an interaction or a bug in the adapter throws. Every other
+// error counts as the aspect failing — matchers registered via `expect.extend`
+// (all browser matchers) throw a plain `Error`, not an `AssertionError`.
+const harnessErrorNames = new Set([
+  "ContractHarnessError",
+  "VitestBrowserElementError",
+  "TimeoutError",
+  "TypeError",
+  "ReferenceError",
+]);
+
+const isHarnessError = (error: unknown): boolean =>
+  error instanceof Error &&
+  (harnessErrorNames.has(error.name) ||
+    error.message.startsWith("strict mode violation") ||
+    isHarnessError(error.cause));
 
 const isDisabledElement = (element: Element) =>
   element.matches(":disabled") ||
@@ -194,7 +211,9 @@ export const testFormFieldContract = <V,>(
     try {
       await expect.element(control).toBeInTheDocument();
     } catch (error) {
-      throw new Error("Control is not rendered", { cause: error });
+      throw new ContractHarnessError("Control is not rendered", {
+        cause: error,
+      });
     }
     return control.element();
   };
@@ -205,7 +224,7 @@ export const testFormFieldContract = <V,>(
   const getLabel = (screen: RenderResult) => {
     const label = screen.container.querySelector(`.${labelStyles.label}`);
     if (!label) {
-      throw new Error("Label is not rendered");
+      throw new ContractHarnessError("Label is not rendered");
     }
     return label;
   };
@@ -224,10 +243,10 @@ export const testFormFieldContract = <V,>(
         try {
           await fn();
         } catch (error) {
-          if (isAspectFailure(error)) {
-            return;
+          if (isHarnessError(error)) {
+            throw error;
           }
-          throw error;
+          return;
         }
         throw new Error(`${name}: "${aspect}" passes, remove its exception`);
       });
@@ -285,7 +304,7 @@ export const testFormFieldContract = <V,>(
           expect(isDisabledElement(button)).toBe(true);
         }
         if (!(control instanceof HTMLElement)) {
-          throw new Error("Control is not an HTMLElement");
+          throw new ContractHarnessError("Control is not an HTMLElement");
         }
         control.focus();
         await expect.element(getControl(screen)).toHaveFocus();
@@ -483,7 +502,7 @@ export const testFormFieldContract = <V,>(
         const control = await getControlElement(screen);
         const after = document.getElementById(afterId);
         if (!(control instanceof HTMLElement)) {
-          throw new Error("Control is not an HTMLElement");
+          throw new ContractHarnessError("Control is not an HTMLElement");
         }
 
         control.focus();
@@ -493,7 +512,9 @@ export const testFormFieldContract = <V,>(
         // the field; react-hook-form would mark it touched mid-input.
         for (let tabs = 0; document.activeElement !== after; tabs++) {
           if (tabs === 10) {
-            throw new Error("Tabbing does not reach the next element");
+            throw new ContractHarnessError(
+              "Tabbing does not reach the next element",
+            );
           }
           await userEvent.tab();
           await settle();
