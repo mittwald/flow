@@ -16,6 +16,16 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
+import type {
+  FlowComponentName,
+  FlowComponentPropName,
+} from "@/components/propTypes";
+
+type DisableableComponentName = {
+  [C in FlowComponentName]: "isDisabled" extends FlowComponentPropName<C>
+    ? C
+    : never;
+}[FlowComponentName];
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
@@ -106,8 +116,15 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const isFieldInvalid = controller.fieldState.invalid;
 
+  const { disabled, ...controllerFieldProps } = controller.field;
+
   const fieldProps = {
-    ...controller.field,
+    ...controllerFieldProps,
+    // Dynamic, so a local `isDisabled={false}` cannot enable a field whose
+    // value React Hook Form drops on submit
+    ...(disabled && {
+      isDisabled: dynamic<DisableableComponentName, "isDisabled">(() => true),
+    }),
     value,
     name,
     form: formContext.id,
@@ -128,6 +145,11 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     }),
   };
 
+  // TODO: remove once CodeEditor supports `isDisabled` (#3369). Until then it
+  // spreads unknown props into CodeMirror. Field.browser.test.tsx fails
+  // test:compile as soon as it does
+  const { isDisabled: ignoredIsDisabled, ...codeEditorFieldProps } = fieldProps;
+
   const propsContext: PropsContext = {
     Autocomplete: {
       SearchField: fieldProps,
@@ -137,7 +159,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     TextField: fieldProps,
     TextArea: fieldProps,
     MarkdownEditor: fieldProps,
-    CodeEditor: fieldProps,
+    CodeEditor: codeEditorFieldProps,
     Checkbox: {
       ...fieldProps,
       isSelected: value,
