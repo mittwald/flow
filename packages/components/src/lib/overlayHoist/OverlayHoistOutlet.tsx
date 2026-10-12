@@ -13,17 +13,11 @@ interface Props {
  */
 export const OverlayHoistOutlet = observer<Props>((props) => {
   const { registry } = props;
-  const overlays = Array.from(registry.overlays.entries());
-
-  if (overlays.length === 0) {
-    return null;
-  }
 
   return (
-    /* Overlays rendered here are outside the hoisting subtree already – reset
-       the context so a nested overlay is not hoisted a second time. */
+    /* Already outside the hoisting subtree – a nested overlay stays in place */
     <overlayHoistContext.Provider value={undefined}>
-      {overlays.map(([key, overlay]) => (
+      {Array.from(registry.overlays, ([key, overlay]) => (
         <Fragment key={key}>{overlay}</Fragment>
       ))}
     </overlayHoistContext.Provider>

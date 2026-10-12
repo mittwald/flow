@@ -183,6 +183,11 @@ Remote generation details:
   provider actually runs inside the remote tree, i.e. where the component that
   renders it is not itself `@flr-generate` (`ModalTrigger` → `OverlayTrigger` →
   `DialogTriggerView`).
+- `@flr-hoist-overlays` wraps the generated remote component in an
+  `OverlayHoistProvider`, for a component whose host renders its children in a
+  popover that unmounts on activation (`ContextMenu`). The overlays inside run
+  in the extension, so the host-side provider never reaches them — the extension
+  renders them as a sibling of the remote element instead.
 - **A prop that carries rendered output has to be a slot, not a property.** A
   remote property is transported as data, and a React element carries
   `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the

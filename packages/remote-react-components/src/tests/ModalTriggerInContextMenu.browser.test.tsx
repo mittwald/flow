@@ -3,16 +3,9 @@ import { expect, test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 /*
- * A `ModalTrigger` with a `MenuItem` trigger inside a `ContextMenu`: the menu
- * closes when the item is activated, so the modal must be rendered outside the
- * menu popover to survive that (#1074).
- *
- * The two environments hoist it in different trees. Locally the host-side
- * `ContextMenu` renders the outlet next to its popover. Remotely `ContextMenu`
- * runs on the host while `ModalTrigger`/`Modal` run in the extension, so the
- * extension-side remote `ContextMenu` renders the outlet as a sibling of
- * `flr-context-menu` — which puts the overlay outside the popover on the host
- * as well.
+ * #1074. Locally the host `ContextMenu` hoists the modal; remotely the
+ * extension-side `ContextMenu` does (`@flr-hoist-overlays`), because
+ * `ModalTrigger`/`Modal` run in the extension.
  */
 test.each(testEnvironments)(
   "Modal opened from a MenuItem survives the ContextMenu closing (%s)",

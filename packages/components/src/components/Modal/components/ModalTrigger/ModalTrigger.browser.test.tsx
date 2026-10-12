@@ -74,9 +74,7 @@ test("Modal opened from a MenuItem is not dropped when the menu is reopened", as
     await expect.element(modalText).toBeInTheDocument();
 
     // Exactly one modal – the hoisted overlay is replaced, not accumulated
-    expect(
-      document.querySelectorAll('[data-testid="modal-text"]'),
-    ).toHaveLength(1);
+    expect(modalText.elements()).toHaveLength(1);
 
     await userEvent.click(abortButton);
     await vitest.waitFor(() => expect(modalText).not.toBeInTheDocument());
@@ -96,22 +94,15 @@ test("MenuItem in ModalTrigger opens the modal via keyboard and restores focus",
   await expect.element(modal).toBeInTheDocument();
 
   // Focus moved into the modal
-  await vitest.waitFor(() => {
-    const modalElement = document
-      .querySelector('[data-testid="modal-text"]')
-      ?.closest('[role="dialog"]');
-    expect(modalElement?.contains(document.activeElement)).toBe(true);
-  });
+  await vitest.waitFor(() =>
+    expect(modal.element().contains(document.activeElement)).toBe(true),
+  );
 
   await userEvent.keyboard("{Escape}");
   await vitest.waitFor(() => expect(modalText).not.toBeInTheDocument());
 
   // Focus returns to the element that opened the menu
-  await vitest.waitFor(() =>
-    expect(document.activeElement).toBe(
-      document.querySelector("button[aria-haspopup]"),
-    ),
-  );
+  await expect.element(menuTrigger).toHaveFocus();
 });
 
 test("Modal controlled by a controller from a MenuItem still behaves the same", async () => {

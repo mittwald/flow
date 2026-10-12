@@ -195,12 +195,11 @@ test.each(testEnvironments)(
 );
 
 /*
- * A `MenuItem` as the trigger of a `ModalTrigger`: the modal is hoisted out of
- * the menu popover, which closes when the item is activated (#1074). Before
- * 1.2.0 the modal was closed together with the menu, so the second screenshot
- * has no counterpart in older versions.
+ * A `MenuItem` as the trigger of a `ModalTrigger` (#1074). Older versions close
+ * the modal together with the menu. It ships on the next line, and which
+ * 1.5.0-next.N carries it first is not known yet, so the gate starts at 1.5.0.
  */
-test.skipIf(crossVersion({ below: "1.2.0" })).each(testEnvironments)(
+test.skipIf(crossVersion({ below: "1.5.0" })).each(testEnvironments)(
   "Modal in ContextMenu via ModalTrigger (%s)",
   async ({
     testScreenshot,

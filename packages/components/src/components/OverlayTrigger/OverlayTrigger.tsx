@@ -9,7 +9,6 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { useIsPendingWithWait } from "@/components/Action/hooks/useIsPendingWithWait";
 import { Action } from "@/components/Action";
 import { useOverlayHoistRegistry } from "@/lib/overlayHoist/context";
-import { isHoistableOverlayType } from "@/lib/overlayHoist/lib";
 
 type AriaComponentType = ComponentType<{
   isOpen?: boolean;
@@ -27,6 +26,11 @@ export interface OverlayTriggerProps
 interface Props extends OverlayTriggerProps {
   overlayType: FlowComponentName;
   component: AriaComponentType;
+  /**
+   * The overlay is built on `Overlay`, which hoists itself out of a
+   * `ContextMenu` (see `OverlayHoistProvider`).
+   */
+  isOverlayHoistable?: boolean;
 }
 
 export const OverlayTrigger: FC<Props> = (props) => {
@@ -36,6 +40,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
     component: AriaOverlayTrigger,
     children,
     controller: controllerFromProps,
+    isOverlayHoistable,
   } = props;
   const buttonPropsContext = useComponentPropsContext("Button");
 
@@ -46,7 +51,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
   const isPending = useIsPendingWithWait(isContentSuspended);
 
   const hoistRegistry = useOverlayHoistRegistry();
-  const isHoisted = !!hoistRegistry && isHoistableOverlayType(overlayType);
+  const isHoisted = !!hoistRegistry && isOverlayHoistable;
 
   const propsContext: PropsContext = {
     Button: {
@@ -86,27 +91,15 @@ export const OverlayTrigger: FC<Props> = (props) => {
     },
   };
 
-  /**
-   * Inside a menu the trigger is a `MenuItem`, and the overlay is hoisted out
-   * of the menu (see `OverlayHoistProvider`).
-   *
-   * `Action` – not a props context – wires the trigger to the controller there.
-   * A menu item is already driven by the `Action` the `ContextMenu` wraps its
-   * items in, which closes the menu; a props context entry for `onAction` would
-   * replace that one instead of adding to it, and the menu would stay open.
-   * Nesting an `Action` composes: activating the item runs both, so the overlay
-   * opens and the menu closes.
-   *
-   * The `Action` sits inside the props context, so its own dynamic entries win
-   * over the ones above – they derive the trigger's state from the action.
-   *
-   * React Aria's trigger component is skipped: its `PressResponder` would latch
-   * the menu item into a pressed state, because nothing ever resets the React
-   * Aria trigger state that Flow does not use.
+  /*
+   * Inside a menu the trigger is a `MenuItem`. A nested `Action` composes with
+   * the menu's own `Action`, so activating the item opens the overlay and
+   * closes the menu – a props context `onAction` would replace the menu's. The
+   * aria trigger is skipped: its `PressResponder` would latch the item pressed.
    */
-  const trigger = isHoisted ? (
-    <Action openOverlay={overlayType}>{children}</Action>
-  ) : (
+  const menuItemTrigger = <Action openOverlay={overlayType}>{children}</Action>;
+
+  const ariaTrigger = (
     <AriaOverlayTrigger isOpen={isOpen}>{children}</AriaOverlayTrigger>
   );
 
@@ -120,7 +113,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
         props={propsContext}
         dependencies={[isPending, overlayController]}
       >
-        {trigger}
+        {isHoisted ? menuItemTrigger : ariaTrigger}
       </PropsContextProvider>
     </OverlayContextProvider>
   );

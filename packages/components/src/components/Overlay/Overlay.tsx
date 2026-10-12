@@ -50,11 +50,8 @@ interface OverlayContentProps extends OverlayProps {
 }
 
 /**
- * The overlay itself. Split out of `Overlay` so it can be rendered either in
- * place or – hoisted out of a context menu – in an `OverlayHoistOutlet`. Every
- * hook that has to stay alive together with the overlay lives here: rendered
- * from the outlet, the overlay keeps reacting to its controller even after the
- * subtree that declared it has unmounted.
+ * Rendered in place or, hoisted, by an `OverlayHoistOutlet`. Every hook that
+ * has to outlive the declaring subtree lives here.
  */
 const OverlayContent: FC<OverlayContentProps> = (props) => {
   const {

@@ -44,7 +44,10 @@ export interface ContextMenuProps
   showSelectAll?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-hoist-overlays
+ */
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const {
     children,
@@ -105,11 +108,6 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   return (
-    /**
-     * Overlays declared inside the menu are hoisted out of the popover – it
-     * unmounts as soon as the menu closes, which is exactly what activating a
-     * menu item does. See `OverlayHoistProvider`.
-     */
     <OverlayHoistProvider>
       <OverlayContentSuspendWatcher overlayController={overlayController}>
         <Popover

@@ -4,20 +4,14 @@ import type { OverlayHoistRegistry } from "@/lib/overlayHoist/OverlayHoistRegist
 
 interface Props {
   registry: OverlayHoistRegistry;
-  /** The controller of the hoisted overlay – decides when it may be dropped. */
   controller: OverlayController;
-  /** The overlay to render in the registry's outlet. */
   overlay: ReactNode;
 }
 
 /**
- * Registers `overlay` with the `OverlayHoistRegistry` of the surrounding
- * `OverlayHoistProvider` and renders nothing in its own place.
- *
- * The entry keeps the registration alive when it unmounts while the overlay is
- * open – that unmount is exactly what happens when a context menu closes
- * because one of its items opened the overlay. The registration is dropped
- * again as soon as the overlay closes.
+ * Registers `overlay` with the surrounding `OverlayHoistProvider` and renders
+ * nothing in place. Unmounting while the overlay is open – the menu closing –
+ * keeps the registration until the overlay closes.
  */
 export const OverlayHoistEntry: FC<Props> = (props) => {
   const { registry, controller, overlay } = props;

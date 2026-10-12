@@ -20,16 +20,6 @@ import { createRemoteComponent } from "@/lib/createRemoteComponent";
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type AnyRecord = Record<string, any>;
 
-/**
- * Components whose children the host renders inside an overlay that unmounts –
- * the `ContextMenu` popover, which closes as soon as a menu item is activated.
- * An overlay declared inside them is rendered as a **sibling** of the remote
- * element instead, so the host places it outside that popover and it survives
- * the menu closing. Same mechanism as on the host side, see
- * `OverlayHoistProvider`.
- */
-const overlayHoistingComponents = new Set<string>(["ContextMenu"]);
-
 export function createFlowRemoteComponent<
   Tag extends keyof HTMLElementTagNameMap,
   ElementConstructor extends RemoteElementConstructor<
@@ -54,6 +44,7 @@ export function createFlowRemoteComponent<
     slotProps = true,
     eventProps = {} as never,
     type,
+    hoistOverlays,
   }: RemoteComponentOptions<ElementConstructor, Props> & {
     /*
      * The provision type of the component this stands in for. It has to travel
@@ -65,6 +56,12 @@ export function createFlowRemoteComponent<
      * drops the `onPress` its own trigger just supplied.
      */
     type?: FlowComponentProvisionType;
+    /*
+     * `@flr-hoist-overlays`: overlays declared inside render as a sibling of the
+     * remote element, so the host places them outside its popover. See
+     * `OverlayHoistProvider`.
+     */
+    hoistOverlays?: boolean;
   } = {},
 ): RemoteComponentTypeFromElementConstructor<ElementConstructor> {
   const element = createRemoteComponent(tag, Element, {
@@ -72,14 +69,12 @@ export function createFlowRemoteComponent<
     eventProps,
   });
 
-  const hoistsOverlays = overlayHoistingComponents.has(flowComponentTag);
-
   if (isFlowComponentName(flowComponentTag)) {
     return flowComponent(
       flowComponentTag,
       (p) => {
         const remoteElement = createElement(element, p as never, p.children);
-        return hoistsOverlays ? (
+        return hoistOverlays ? (
           <OverlayHoistProvider>{remoteElement}</OverlayHoistProvider>
         ) : (
           remoteElement
