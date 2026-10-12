@@ -8,6 +8,8 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface AlertTextProps
   extends
@@ -20,15 +22,17 @@ export interface AlertTextProps
 export const AlertText = flowComponent("AlertText", (props) => {
   const { className, children, status = "info" } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(styles.alertText, styles[status], className);
 
   return (
-    <span className={rootClassName}>
+    <span className={rootClassName} inert={isSkeleton || undefined}>
       <PropsContextProvider props={{ Icon: { size: "s" } }}>
         <AlertIcon status={status} className={styles.icon} />
       </PropsContextProvider>
 
-      <>{children}</>
+      <SkeletonTextContent defaultWidth="8em">{children}</SkeletonTextContent>
     </span>
   );
 });

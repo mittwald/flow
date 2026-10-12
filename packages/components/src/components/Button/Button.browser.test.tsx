@@ -15,6 +15,7 @@ test("the deprecated color 'accent' still renders as 'success' and warns", async
 
   const button = page.getByRole("button", { name: "Save" });
   await expect.element(button).toHaveClass("flow--button--success");
+  // eslint-disable-next-line flow/no-unknown-flow-class -- asserts the removed class stays gone
   await expect.element(button).not.toHaveClass("flow--button--accent");
   expect(onWarning).toHaveBeenCalledWith(
     "The color 'accent' is deprecated and will be removed in a future release. Use 'success' instead.",

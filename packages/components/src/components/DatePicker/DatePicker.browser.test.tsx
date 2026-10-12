@@ -1,11 +1,16 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
-import { CalendarDate } from "@internationalized/date";
+import { CalendarDate, type DateValue } from "@internationalized/date";
+import { useState } from "react";
 import { DatePicker } from "@/components/DatePicker";
 import { Label } from "@/components/Label";
 import { Popover, PopoverTrigger } from "@/components/Popover";
 import { Button } from "@/components/Button";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
+import Modal from "@/components/Modal/Modal";
+import Heading from "@/components/Heading";
+import Content from "@/components/Content";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -43,6 +48,28 @@ test("typing into the segments reports the date", async () => {
     month: 3,
     day: 10,
   });
+});
+
+test("inside a modal, a controlled date picker keeps the typed year", async () => {
+  const ControlledInModal = () => {
+    const [value, setValue] = useState<DateValue | null>(null);
+    return (
+      <Modal isDefaultOpen>
+        <Heading>Booking</Heading>
+        <Content>
+          <DatePicker value={value} onChange={setValue}>
+            <Label>Departure</Label>
+          </DatePicker>
+        </Content>
+      </Modal>
+    );
+  };
+  render(<ControlledInModal />);
+
+  await segment("month").click();
+  await userEvent.keyboard("03102025");
+
+  await expect.element(segment("year")).toHaveTextContent("2025");
 });
 
 /*
@@ -99,4 +126,19 @@ test("inside a popover, it keeps its own calendar state", async () => {
 
   await expect.element(calendar()).not.toBeInTheDocument();
   await expect.element(calendarButton()).toBeVisible();
+});
+
+testFormFieldContract("DatePicker", {
+  render: (props) => <DatePicker {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new CalendarDate(2025, 3, 10), new CalendarDate(2025, 4, 11)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen, { force }) => {
+    await screen.getByRole("spinbutton").first().click({ force });
+    await userEvent.keyboard("04112025");
+  },
+  exceptions: {
+    controlledHold:
+      "useControlledHostValueProps applies a user change locally, so typing does not wait for the remote round trip",
+  },
 });

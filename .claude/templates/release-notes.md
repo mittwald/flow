@@ -20,11 +20,13 @@
     `ExtBridgeConfigInput`).
   - Group by feature/area, never by commit. One "## " section per notable
     feature; link its PR(s), e.g. (#1234).
-  - Screenshots: capture them, never fabricate them. A capture of a real story
-    rendered from the release branch is not a fabrication — a mocked, drawn or
-    generated image is, and stays forbidden. `/prepare-release` step 8 produces
-    the figures with `pnpm release:figure`; a feature with no story (a CLI, a
-    build change) simply gets none. Code examples are fine when grounded in the
+  - Screenshots: capture them, never fabricate them. A capture of a real
+    Styleguide example rendered from the release branch is not a fabrication —
+    a mocked, drawn or generated image is, and stays forbidden. Storybook
+    stories are no source: their Star Wars fixtures do not belong on the docs
+    site. `/prepare-release` step 8 produces the figures with
+    `pnpm release:figure`; a feature with no example (a CLI, a build change)
+    simply gets none. Code examples are fine when grounded in the
     real API.
   - Delete these comments and every unused/empty section in the final text.
 -->
@@ -59,15 +61,19 @@
 // optional usage example, grounded in the real component API
 ```
 
-<!-- DELETE this line when the feature has no story to capture (a CLI, a build
-     change) — an unfilled image link is worse than no figure.
+<!-- DELETE this line when the feature has no example to capture (a CLI, a
+     build change) — an unfilled image link is worse than no figure.
 
      Otherwise: one captured figure per notable feature, never one per prop
-     variant — compose the variants into a single image. Markdown image syntax,
-     NOT an HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw
-     tag renders on GitHub and silently vanishes on /releases. -->
+     variant — compose the variants into a single image. Paste the <picture>
+     block `pnpm release:figure` prints, unchanged: GitHub shows its <source> in
+     dark mode, and /releases rewrites exactly this shape into one image per
+     theme (its <Markdown> drops any other raw HTML, an <img> included). -->
 
-![{{ caption }}](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}-dark.png">
+  <img src="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png" alt="{{ caption }}">
+</picture>
 
 ## Migrations
 

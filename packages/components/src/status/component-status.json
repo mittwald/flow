@@ -381,6 +381,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#SkeletonMode": {
+    "level": "beta",
+    "isNew": true
+  },
   "@mittwald/flow-react-components#SkeletonText": {
     "level": "stable",
     "isNew": false

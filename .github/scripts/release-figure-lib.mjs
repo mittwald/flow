@@ -2,8 +2,8 @@
 /**
  * Release-figure capture — pure helpers (no IO, no browser, no network).
  *
- * A release figure is a PNG of one or more real Storybook stories, stacked into
- * a single image and committed under
+ * A release figure is a PNG of one or more real Styleguide examples, stacked
+ * into a single image and committed under
  * `apps/docs/public/assets/releases/<version>/`. `/prepare-release` references
  * it from the curated notes by its commit-SHA raw URL (#3030).
  *
@@ -14,7 +14,6 @@
  */
 
 import { posix } from "node:path";
-import { URLSearchParams } from "node:url";
 
 /**
  * Where committed figures live. Inside `public/assets/`, which is the
@@ -23,25 +22,42 @@ import { URLSearchParams } from "node:url";
  */
 export const FIGURE_ROOT = "apps/docs/public/assets/releases";
 
-/**
- * Storybook's own `VALIDATION_REGEXP` for arg keys and string values
- * (`storybook/dist/router`). A key or value outside it is dropped from the URL
- * silently — one half of the reason every panel must also assert its DOM.
- */
-const STORYBOOK_TOKEN = /^[a-zA-Z0-9 _-]*$/;
-const STORYBOOK_NUMBER = /^-?[0-9]+(\.[0-9]+)?$/;
-
 const VERSION = /^[0-9]+\.[0-9]+\.[0-9]+$/;
 const FIGURE_NAME = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const SHA = /^[0-9a-f]{7,40}$/;
 
 /**
- * The CSS colors a background may use. Narrow on purpose: the value is
- * interpolated into the composition page's `<style>`, where anything
- * unconstrained could close the block.
+ * An example path: the page's content path plus the example's name, e.g.
+ * `components/content/heading/badge` for
+ * `src/content/components/content/heading/examples/badge.tsx`.
  */
-const CSS_COLOR =
-  /^(transparent|#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9a-zA-Z .,%/-]+\)|[a-zA-Z]+)$/;
+const EXAMPLE_PATH = /^[a-z0-9-]+(\/[a-z0-9-]+)*\/[a-zA-Z0-9_-]+$/;
+
+/** Where the docs dev server serves one example on its own. */
+const EXAMPLE_ROUTE = "/example-preview";
+
+/** The source files `/example-preview/` serves, relative to the repo root. */
+export const EXAMPLE_GLOB = "apps/docs/src/content/**/examples/*.tsx";
+
+/** Every figure is captured once per theme. Light comes first. */
+export const FIGURE_THEMES = /** @type {const} */ (["light", "dark"]);
+
+/** @typedef {(typeof FIGURE_THEMES)[number]} FigureTheme */
+
+/**
+ * The composition page's own colors around the examples. The ground matches the
+ * stage's `--neutral--color--100`, so the caption rows join the frames
+ * seamlessly. Dark takes the gray-palette steps that mirror the light ones.
+ *
+ * @type {Record<
+ *   FigureTheme,
+ *   { ground: string; separator: string; caption: string }
+ * >}
+ */
+const FIGURE_COLORS = {
+  light: { ground: "#ffffff", separator: "#e4e6eb", caption: "#6b7280" },
+  dark: { ground: "#1b1f24", separator: "#3a434e", caption: "#8fa1b4" },
+};
 
 export class FigureSpecError extends Error {}
 
@@ -55,66 +71,26 @@ const check = (condition, message) => {
 };
 
 /**
- * Encode one `args=` / `globals=` record the way Storybook parses it back.
+ * The example path for one example source file, relative to the repo root.
  *
- * Throws on anything Storybook would drop, rather than emitting a URL that
- * renders the default state and looks like a successful capture.
- *
- * @param {Record<string, string | number | boolean>} record
- * @returns {string}
+ * @param {string} file E.g.
+ *   `apps/docs/src/content/components/x/y/examples/z.tsx`
+ * @returns {string} E.g. `components/x/y/z`
  */
-export const encodeStorybookParam = (record) =>
-  Object.entries(record)
-    .map(([key, value]) => {
-      check(
-        STORYBOOK_TOKEN.test(key),
-        `arg key ${JSON.stringify(key)} is not [a-zA-Z0-9 _-]* — Storybook drops it from the URL`,
-      );
-      if (typeof value === "boolean") return `${key}:!${value}`;
-      if (typeof value === "number") {
-        check(
-          Number.isFinite(value),
-          `arg ${key} must be a finite number, got ${value}`,
-        );
-        return `${key}:${value}`;
-      }
-      check(
-        typeof value === "string",
-        `arg ${key} must be a string, number or boolean — objects and arrays are not supported here`,
-      );
-      check(
-        STORYBOOK_TOKEN.test(value) || STORYBOOK_NUMBER.test(value),
-        `arg ${key}=${JSON.stringify(value)} is not [a-zA-Z0-9 _-]* — Storybook drops it from the URL`,
-      );
-      return `${key}:${value}`;
-    })
-    .join(";");
+export const examplePathOf = (file) =>
+  file
+    .replace(/^apps\/docs\/src\/content\//, "")
+    .replace(/\/examples\/([^/]+)\.tsx$/, "/$1");
 
 /**
- * The `iframe.html` URL that renders one panel.
+ * The URL that renders one panel: the example alone, framed as on its page.
  *
- * @param {string} baseUrl Running Storybook, e.g. `http://localhost:6007`
- * @param {{
- *   story: string;
- *   args?: Record<string, string | number | boolean>;
- *   globals?: Record<string, string | number | boolean>;
- * }} panel
+ * @param {string} baseUrl Running docs dev server, e.g. `http://localhost:3001`
+ * @param {string} example
  * @returns {string}
  */
-export const buildStoryUrl = (baseUrl, panel) => {
-  const params = new URLSearchParams({ id: panel.story, viewMode: "story" });
-  // Storybook parses `args` / `globals` itself; URLSearchParams would
-  // percent-encode the `:` and `;` separators it expects, so append them raw.
-  const extra = /** @type {string[]} */ ([]);
-  if (panel.args && Object.keys(panel.args).length > 0) {
-    extra.push(`args=${encodeStorybookParam(panel.args)}`);
-  }
-  if (panel.globals && Object.keys(panel.globals).length > 0) {
-    extra.push(`globals=${encodeStorybookParam(panel.globals)}`);
-  }
-  const query = [params.toString(), ...extra].join("&");
-  return `${baseUrl.replace(/\/$/, "")}/iframe.html?${query}`;
-};
+export const buildExampleUrl = (baseUrl, example) =>
+  `${baseUrl.replace(/\/$/, "")}${EXAMPLE_ROUTE}/${example}`;
 
 /**
  * @param {string} version
@@ -132,6 +108,33 @@ export const figureOutputPath = (version, name) => {
   );
   return `${FIGURE_ROOT}/${version}/${name}.png`;
 };
+
+/**
+ * The file one theme's capture is written to: the spec's path for light, the
+ * same path with `-dark` before the extension for dark.
+ *
+ * @param {string} out A normalized `.png` path from the spec
+ * @param {FigureTheme} theme
+ * @returns {string}
+ */
+export const themedOutputPath = (out, theme) =>
+  theme === "light" ? out : out.replace(/\.png$/, "-dark.png");
+
+/**
+ * The release-notes snippet for one figure. GitHub picks the `<source>` in dark
+ * mode; the docs site rewrites the block (`themedFigures` in
+ * `apps/docs/src/lib/releases`), because its markdown drops raw HTML.
+ *
+ * @param {{ sha: string; out: string; alt: string }} args
+ * @returns {string}
+ */
+export const figureMarkdown = ({ sha, out, alt }) =>
+  [
+    "<picture>",
+    `  <source media="(prefers-color-scheme: dark)" srcset="${rawFigureUrl(sha, themedOutputPath(out, "dark"))}">`,
+    `  <img src="${rawFigureUrl(sha, out)}" alt="${escapeHtml(alt)}">`,
+    "</picture>",
+  ].join("\n");
 
 /**
  * The URL the release notes reference. A commit SHA, never a branch: it
@@ -179,15 +182,19 @@ export const resolveOutputPath = (out) => {
     normalized.endsWith(".png"),
     `spec.out must end in .png — the capture writes PNG bytes, got ${JSON.stringify(out)}`,
   );
+  // Checked on the final path, so it covers a given `out` as well as one
+  // derived from `name`.
+  check(
+    !normalized.endsWith("-dark.png"),
+    `spec.out must not end in -dark.png — that suffix marks the dark capture, got ${JSON.stringify(out)}`,
+  );
   return normalized;
 };
 
 /**
  * @typedef {object} NormalizedPanel
- * @property {string} story
+ * @property {string} example
  * @property {string | null} caption
- * @property {Record<string, string | number | boolean>} args
- * @property {Record<string, string | number | boolean>} globals
  * @property {{ selector: string; count?: number; text?: string }[]} expect
  */
 
@@ -198,7 +205,6 @@ export const resolveOutputPath = (out) => {
  * @property {string} out
  * @property {number} width
  * @property {number} scale
- * @property {string} background
  * @property {NormalizedPanel[]} panels
  */
 
@@ -237,10 +243,9 @@ export const normalizeFigureSpec = (raw) => {
     `spec.scale (deviceScaleFactor) must be 1, 2 or 3, got ${scale}`,
   );
 
-  const background = spec.background ?? "#ffffff";
   check(
-    typeof background === "string" && CSS_COLOR.test(background),
-    `spec.background must be a plain CSS color, got ${JSON.stringify(background)}`,
+    spec.background === undefined,
+    "spec.background is gone — each theme brings its own ground",
   );
 
   check(
@@ -256,8 +261,14 @@ export const normalizeFigureSpec = (raw) => {
         `${at} must be an object`,
       );
       check(
-        typeof panel.story === "string" && panel.story.length > 0,
-        `${at}.story is required (a Storybook story id, e.g. form-controls-rating--default)`,
+        panel.story === undefined &&
+          panel.args === undefined &&
+          panel.globals === undefined,
+        `${at} uses story/args/globals — figures are captured from Styleguide examples now: name one with ${at}.example`,
+      );
+      check(
+        typeof panel.example === "string" && EXAMPLE_PATH.test(panel.example),
+        `${at}.example is required — the page's content path plus the example name, e.g. components/form-controls/rating/max-value for src/content/components/form-controls/rating/examples/max-value.tsx`,
       );
       check(
         panel.caption === undefined || typeof panel.caption === "string",
@@ -266,13 +277,6 @@ export const normalizeFigureSpec = (raw) => {
 
       const expect = panel.expect ?? [];
       check(Array.isArray(expect), `${at}.expect must be an array`);
-      // A panel that drives args MUST assert what it rendered: Storybook
-      // filters `args=` down to the story's declared `argTypes` and drops the
-      // rest without a word, so the URL is evidence of nothing (#3030).
-      check(
-        Object.keys(panel.args ?? {}).length === 0 || expect.length > 0,
-        `${at} sets args but asserts nothing — add ${at}.expect, or Storybook may drop the args and the capture shows the default state`,
-      );
       expect.forEach((/** @type {any} */ item, /** @type {number} */ j) => {
         check(
           item !== null &&
@@ -294,16 +298,9 @@ export const normalizeFigureSpec = (raw) => {
         );
       });
 
-      // Encode eagerly: an unusable arg is a spec bug and should surface before
-      // a browser starts, not as a capture that merely looks default.
-      if (panel.args) encodeStorybookParam(panel.args);
-      if (panel.globals) encodeStorybookParam(panel.globals);
-
       return {
-        story: panel.story,
+        example: panel.example,
         caption: panel.caption ?? null,
-        args: panel.args ?? {},
-        globals: panel.globals ?? {},
         expect,
       };
     },
@@ -315,37 +312,33 @@ export const normalizeFigureSpec = (raw) => {
     out,
     width,
     scale,
-    background,
     panels,
   };
 };
 
 /**
- * Story ids the running Storybook does not know, each with the closest ids it
- * does — a typo in a story id otherwise ends as a blank panel.
+ * Example paths that name no example, each with the closest ones that do — a
+ * typo otherwise ends as a 404 page in the figure.
  *
- * @param {{ entries?: Record<string, { id: string; type?: string }> }} index
- *   Storybook's `/index.json`
- * @param {string[]} ids
- * @returns {{ id: string; suggestions: string[] }[]}
+ * @param {string[]} known Every example path
+ * @param {string[]} paths
+ * @returns {{ path: string; suggestions: string[] }[]}
  */
-export const findUnknownStories = (index, ids) => {
-  const known = Object.values(index.entries ?? {})
-    .filter((entry) => (entry.type ?? "story") === "story")
-    .map((entry) => entry.id);
+export const findUnknownExamples = (known, paths) => {
   const knownSet = new Set(known);
-  return ids
-    .filter((id) => !knownSet.has(id))
-    .map((id) => {
-      const [component, story] = id.split("--");
+  return paths
+    .filter((path) => !knownSet.has(path))
+    .map((path) => {
+      const page = posix.dirname(path);
+      const name = posix.basename(path);
       const suggestions = known
         .filter(
           (candidate) =>
-            candidate.startsWith(`${component}--`) ||
-            (story !== undefined && candidate.endsWith(`--${story}`)),
+            posix.dirname(candidate) === page ||
+            posix.basename(candidate) === name,
         )
         .slice(0, 8);
-      return { id, suggestions };
+      return { path, suggestions };
     });
 };
 
@@ -371,18 +364,23 @@ const escapeHtml = (value) =>
  * optional monospace caption naming the prop it demonstrates.
  *
  * Same-origin is the point — the runner reads every iframe's document to
- * measure and to assert it. The page is therefore served on the Storybook
- * origin (the runner fulfils a route there), never from `file://`.
+ * measure and to assert it. The page is therefore served on the docs origin
+ * (the runner fulfils a route there), never from `file://`.
+ *
+ * An iframe starts tall and is shrunk to its content once measured: an overlay
+ * positions itself against the frame's viewport, and the default 150px would
+ * squeeze or flip it.
  *
  * @param {{
  *   width: number;
- *   background: string;
+ *   theme: FigureTheme;
  *   panels: { caption: string | null }[];
  *   urls: string[];
  * }} args
  * @returns {string}
  */
-export const composeFigureHtml = ({ width, background, panels, urls }) => {
+export const composeFigureHtml = ({ width, theme, panels, urls }) => {
+  const colors = FIGURE_COLORS[theme];
   const body = panels
     .map((panel, index) => {
       const caption =
@@ -397,16 +395,16 @@ export const composeFigureHtml = ({ width, background, panels, urls }) => {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>release figure</title><style>
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: ${background}; }
+  html, body { margin: 0; padding: 0; background: ${colors.ground}; }
   #figure { width: ${width}px; overflow: hidden; }
-  .panel + .panel { border-top: 1px solid #e4e6eb; }
+  .panel + .panel { border-top: 1px solid ${colors.separator}; }
   .caption {
     margin: 0;
     padding: 12px var(--caption-inset, 16px) 0;
     font: 12px/1.5 ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    color: #6b7280;
+    color: ${colors.caption};
   }
-  iframe { display: block; width: 100%; border: 0; }
+  iframe { display: block; width: 100%; height: 2000px; border: 0; }
 </style></head>
 <body><div id="figure">${body}</div></body></html>`;
 };

@@ -213,7 +213,10 @@ describe("submission", () => {
     await render(<TestForm />);
     const textArea = page.getByPlaceholder("textarea");
     await userEvent.click(textArea);
-    await userEvent.keyboard("{Meta>}{Enter}");
+    // react-hotkeys-hook reads `mod` from the user agent, and Playwright's
+    // WebKit reports a Mac one on every platform.
+    const mod = /mac/i.test(navigator.userAgent) ? "Meta" : "Control";
+    await userEvent.keyboard(`{${mod}>}{Enter}`);
     await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
     expect(onAfterSubmitAction).not.toHaveBeenCalled();
     await vitest.advanceTimersByTimeAsync(100);
@@ -266,6 +269,29 @@ describe("readonly", () => {
     expect(textfield).not.toHaveAttribute("readonly");
     await userEvent.click(toggleButton);
     expect(textfield).toHaveAttribute("readonly");
+  });
+});
+
+describe("disabled", () => {
+  const TestForm = () => {
+    const form = useForm<object>({ disabled: true });
+    return (
+      <Form
+        form={form}
+        onSubmit={() => {
+          // void
+        }}
+      >
+        <Field name="test">
+          <TextField aria-label="test" />
+        </Field>
+      </Form>
+    );
+  };
+
+  test("disabled form disables its fields", async () => {
+    await render(<TestForm />);
+    await expect.element(page.getByLabelText("test")).toBeDisabled();
   });
 });
 

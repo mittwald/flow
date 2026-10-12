@@ -2,8 +2,10 @@
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { getHostPath } from "@/app/_lib/navigation";
 import {
+  Accordion,
   Badge,
   ColumnLayout,
+  Content,
   Flex,
   Label,
   LabeledValue,
@@ -19,31 +21,40 @@ import type {
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState, type FC } from "react";
 
+/**
+ * Folded away by default: the list grows with the demo — the `list` page alone
+ * reports thirty-odd components — and pushed the demo itself below the fold.
+ */
 const UsageList: FC<{ usage: ComponentUsageEvent[] }> = ({ usage }) => (
-  <LabeledValue>
+  <Accordion>
     <Label>Used components ({usage.length})</Label>
-    <Flex gap="s" wrap="wrap">
-      {usage.map(({ component, status }) => (
-        <Badge
-          key={component}
-          color={
-            status?.level === "deprecated"
-              ? "red"
-              : status?.level === "beta"
-                ? "orange"
-                : "neutral"
-          }
-        >
-          <Label>{component}</Label>
-          <Text>{status?.level ?? "untracked"}</Text>
-        </Badge>
-      ))}
-    </Flex>
-  </LabeledValue>
+    <Content>
+      <Flex gap="s" wrap="wrap">
+        {usage.map(({ component, status }) => (
+          <Badge
+            key={component}
+            color={
+              status?.level === "deprecated"
+                ? "red"
+                : status?.level === "beta"
+                  ? "orange"
+                  : "neutral"
+            }
+          >
+            <Label>{component}</Label>
+            <Text>{status?.level ?? "untracked"}</Text>
+          </Badge>
+        ))}
+      </Flex>
+    </Content>
+  </Accordion>
 );
 
 interface Props {
-  /** The remote app to load — a `/remote/…` or `/remote-svelte/…` route. */
+  /**
+   * The remote app to load — a `/remote/…`, `/remote-vue/…` or
+   * `/remote-svelte/…` route.
+   */
   src: string;
   hostPathname: string;
 }

@@ -7,6 +7,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
 import { alphaColors, type Status, statusTypes } from "@/lib/types/props";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
@@ -50,6 +51,7 @@ export interface IconProps
 /** @flr-generate all */
 export const Icon = flowComponent("Icon", (props) => {
   const warnDeprecation = useWarnDeprecation();
+  const isSkeleton = useSkeletonMode();
   const {
     className,
     "aria-label": ariaLabel,
@@ -95,6 +97,18 @@ export const Icon = flowComponent("Icon", (props) => {
       `Expected children of Icon component to be a valid React element (got ${String(
         children,
       )})`,
+    );
+  }
+
+  /* An svg draws no `::after`, so the shimmer needs an element of its own. */
+  if (isSkeleton) {
+    return (
+      <span
+        className={clsx(iconProps.className, styles.skeleton)}
+        style={svgAttributes.style}
+        aria-hidden
+        inert
+      />
     );
   }
 

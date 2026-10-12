@@ -1,10 +1,12 @@
 # Supporting another framework in a remote app
 
 What it takes to let an mStudio extension be written in something other than
-React, and what bites on the way. Written from two prototypes —
-[packages/remote-vue-components](../packages/remote-vue-components) and
-[packages/remote-svelte-components](../packages/remote-svelte-components) — and
-the findings are not specific to either.
+React, and what bites on the way. Written from the Vue binding
+([packages/remote-vue-components](../packages/remote-vue-components), published
+as beta — [ADR 0007](./adr/0007-beta-packages.md) says what that exempts and
+what ends it) and the Svelte prototype
+([packages/remote-svelte-components](../packages/remote-svelte-components),
+experimental and unpublished); the findings are specific to neither.
 
 Read [remote-ui.md](./remote-ui.md) first — this assumes the end-to-end picture.
 
@@ -12,8 +14,12 @@ Read [remote-ui.md](./remote-ui.md) first — this assumes the end-to-end pictur
 
 **The boundary is framework-agnostic; the layer above it is not.** A binding is
 small where it wraps `flr-*` elements and large where it has to rebuild Flow's
-React compositions. In both prototypes the element wrapper and the root are a
-few hundred lines — the rest is `flr-universal`.
+React compositions. In the Vue binding, tests left out, the hand-written code is
+about two and a half times the generated wrappers (one file per `@flr-generate`
+component). The element wrapper, its `v-model` mapping and the root are about a
+tenth of it; the rest is `flr-universal`, and the `List` alone is nearly half of
+the hand-written code. The Svelte prototype has the same shape: its element
+wrapper and root are a few hundred lines, and the rest is `flr-universal`.
 
 ## What already works for any framework
 
@@ -36,16 +42,30 @@ can drive it.
    the target framework. Everything it needs is on the element class at runtime
    — `remotePropertyDefinitions`, `remoteEventDefinitions`,
    `remoteSlotDefinitions`, `remoteAttributeDefinitions`. Read them there and
-   the generated per-component files stay one line each; the React package
-   predates that and has the generator write an event map into every file.
+   the generated per-component files name only what the class cannot tell at
+   runtime — for Vue, the slot names and the boolean props; the React package
+   predates that and has the generator write an event map into every file. Map
+   the framework's two-way binding too (`v-model` in Vue): it compiles to keys
+   no element knows, and a field bound that way shows nothing and never writes
+   back.
 2. **A remote root.** Connects to the host (`connectHostRenderRootRef` from
    `remote-core`), initializes ext-bridge, reports the app's pathname, forwards
    render errors, deprecation warnings and component usage, and exposes the host
    config.
 3. **`Form`.** `flr-form` has no Flow component behind it, so the generator
    never emits it.
-4. **A rebuild of `flr-universal`.** See below.
-5. **An emitter in the generator**
+4. **The icon set.** `@mittwald/flow-icons` ships React components, so a binding
+   generates its own from `getIconSources()` in `packages/icons-base` — the
+   default set as data, with no framework in it (Tabler path data, custom SVG
+   parsed into a node tree). What it emits is not a remote element: a Flow icon
+   is `Icon` with an `<svg>` inside, and the host merges its classes, its `role`
+   and its ARIA onto that same `<svg>`. So the binding only has to produce the
+   `<svg>` React produces. Inline the path data rather than depending on
+   `@tabler/icons-react` (74 MB, ~24,000 files), and carry Tabler's MIT notice
+   in the package's LICENSE. (The Svelte prototype predates `getIconSources()`
+   and generates its set from `icons.yaml` through `generateSvelte`.)
+5. **A rebuild of `flr-universal`.** See below.
+6. **An emitter in the generator**
    (`packages/components/dev/remote-components-generator`) plus the new output
    path in `packages/components/project.json`, so the generated surface stays in
    lockstep with the components.
@@ -122,11 +142,18 @@ wrong.
   `undefined`** (#2894). Fixed in `remote-core`, but a binding's test suite
   should cover the shape, because the symptom is a component that renders empty
   with no error anywhere.
+- **A slot's result is not normalized until the component reads it.** A binding
+  that inspects or rewrites what a child renders — the props-context stand-in
+  reaching a second level — calls the slot function the vnode carries, and that
+  hands back whatever the author wrote: one node for `() => h(X)`, a list for
+  `() => [h(X)]`. Vue normalizes it only on the way into the component, so the
+  helper has to. It fails as an empty render rather than an error.
 - **Test through the real serializer.** A harness that hands the host the
   receiver's live connection passes values as the very objects the test created,
   and a serializer that drops half of them still goes green. Route through
-  `FlowThreadSerialization` over a `MessageChannel`
-  (`src/tests/lib/serializedConnection.ts` — copy it).
+  `FlowThreadSerialization` over a `MessageChannel` (import
+  `packages/remote-react-components/src/tests/lib/serializedConnection.ts` by
+  relative path — do not copy it).
 - **The props type the generator re-exports is the React component's, not the
   element's.** `FlowRemoteElement` declares `data-testid` for every component;
   the React props type does not. A binding that types its component props
@@ -137,29 +164,42 @@ wrong.
 
 `Modal`, `ModalTrigger`, `Popover`, `PopoverTrigger`, `LightBox`,
 `LightBoxTrigger`, `Action`, `ActionBatch`, `List`, `ListItemView`,
-`NotificationProvider`, `SettingsProvider`, `CountryOptions`, `Wrap`,
-`BrowserOnly`, `IntlProvider`, `DeprecationWarningProvider` — React components
-that _emit_ remote elements rather than being one. A binding cannot import them,
-so it rebuilds them, and two things make that harder than it looks:
+`NotificationProvider`, `SettingsProvider`, `ComponentDefaultsProvider`,
+`CountryOptions`, `Wrap`, `BrowserOnly`, `IntlProvider`,
+`DeprecationWarningProvider` — React components that _emit_ remote elements
+rather than being one. A binding cannot import them, so it rebuilds them, and
+two things make that harder than it looks:
 
 - **`PropsContext` may or may not have an equivalent.** Flow configures the
   components inside a composite — the `Heading` of a `Modal`, the `Button` of an
   `Action` — through a React context that every `flowComponent` reads. How close
-  a binding gets depends entirely on what the framework lets it do with the
-  children it was handed:
-  - **Vue** reaches them directly (`cloneVNode`), which covers one level rather
-    than the whole subtree.
+  a binding gets depends on what the framework lets it do with the children it
+  was handed:
+  - **Vue** has to reach them directly (`cloneVNode`), which covers one level
+    rather than the whole subtree. Every rule Flow writes for a _grandchild_
+    then costs its own code: `Modal` alone has three (`ActionGroup > Action`,
+    `Content > Heading`, `ColumnLayout > AccentBox`), and each of them is a
+    behaviour an extension developer will notice missing rather than a detail.
   - **Svelte** cannot look inside a snippet at all, so it rebuilds the context
     itself (`setContext`/`getContext`) — which turns out to be the _same_
     mechanism React uses, and reaches the whole subtree. The generated wrapper
     clears it for its own children, the way every `flowComponent` of type `ui`
-    wraps them in a `ClearPropsContext`. Nothing else in the binding gets closer
-    to Flow's own behavior.
+    wraps them in a `ClearPropsContext`.
+- **The composites need Flow's UI text, and it is not published.** A `Modal`
+  with `confirmOnClose` asks "You have unsaved changes…" in the backoffice's
+  language. Those strings live in the component's `locales/*.locale.json`, are
+  compiled into the React bundle by a locale plugin, and no published entry
+  point exposes them — so every binding carries its own copy. Nothing else
+  notices when Flow rewords one, so the binding needs a test that compares its
+  copies with Flow's locale files (Vue: `src/tests/CopiedTexts.test.ts`). A
+  framework-agnostic export of the locale files would remove the copies for all
+  of them, the way `getIconSources()` did for the icons.
 - **The composites pass Flow's internal class names.** `Modal` asks for
   `flow--overlay flow--modal flow--modal--size-s` on an `OverlayContent`,
   because that is what makes the host render a modal rather than a bare dialog.
-  Every binding repeats them, and a rename in `packages/components` breaks all
-  of them silently.
+  Every binding repeats them. `flow/no-unknown-flow-class` lints every `flow--…`
+  string under a package's `src/` against the classes Flow generates, so a
+  rename in `packages/components` fails lint rather than the host.
 
 **The fix is on the Flow side, not in the bindings.** Marking the overlay family
 `@flr-generate` would let the host materialize the whole composition from one
@@ -171,15 +211,47 @@ skip the re-export for names `flr-universal` already carries; the list is
 already parsed for the status registry
 (`dev/status-registry/parseFlrUniversalComponentNames.ts`).
 
-Two things stay out of reach regardless:
+One thing was a project of its own, and it is the worked example for every
+other:
 
-- **`List` / `ListItemView` / `typedList`** — 5,500 lines of data sources,
-  filters, sorting, pagination and persisted view settings. Its own project.
-- **Icons.** `@mittwald/flow-icons` ships React components. A binding can put a
-  raw `<svg>` inside `Icon` — plain elements travel as remote DOM — but there is
-  no icon set to import. The path data is generated from
-  `packages/icons-base/src/icons.yaml`, so a framework-agnostic export (paths,
-  not components) would serve every binding.
+- **`List` / `ListItemView`** — it runs **entirely in the extension**, since
+  only the leaves (`ListEmptyView`, `ListItemViewContent`, `ListSummary`,
+  `ItemsGridList`) are remote elements, so there is no host-side `List` a
+  binding could delegate to.
+
+  What coupled it to React was not TanStack: `@tanstack/react-table` is a thin
+  wrapper over `@tanstack/table-core`, and `useReactTable` is `createTable` plus
+  a `useState`. It was that the model is a graph of classes whose **constructors
+  call hooks** — the "class-method custom hooks" pattern this repository already
+  keeps `rules-of-hooks` switched off for.
+
+  The way through is `packages/components-base`: MobX with no framework in it,
+  holding everything the list decides — the loader state, sorting, search,
+  filters, batching, the item collection, the view mode and the table, whose
+  `useState` is an observable. Each binding brings the subscription (~15 lines:
+  `useSelector`, `watchMobxValue`) and the one job the shared model leaves open,
+  which is fetching a batch. React was rewired onto each piece as it moved, so
+  both bindings run the same rules rather than two copies of them.
+
+  Two things stay per binding, and both are shapes of the same problem.
+  Fetching, because Suspense has no Vue counterpart: Vue's list drives the async
+  loader from a watcher, and a loader written as a **composable** needs a
+  component per batch, since a composable runs in `setup()` and nowhere else —
+  which is what React's `DataLoader` does with its hooks loader. And
+  `typedList`, which has no Vue counterpart at all: the item type comes from the
+  `ListItem` slot.
+
+  The Svelte prototype does not rebuild the `List` at all; it would start from
+  `packages/components-base` the same way.
+
+- **The pro icon set.** `packages/icons-pro` renders FontAwesome Pro, which each
+  consumer licenses itself — so unlike Tabler's, its path data cannot be
+  inlined, and a binding would need that package as a peer dependency. Rebuild
+  `IconSetProvider` instead and the gap becomes an app's to fill: it is a React
+  context, a dozen lines in any framework, and the only way a binding's users
+  get a second icon set at all. Note that the React **remote** package does not
+  export it — it lives in `@mittwald/flow-react-components` — so this is a place
+  where a binding can reasonably go beyond its counterpart.
 
 And one component cannot be rebuilt with the same signature everywhere: **`Wrap`
 takes its wrapper as a child and renders that child's children when the
@@ -187,61 +259,16 @@ condition fails.** That needs a framework that can reach inside the child. The
 Svelte binding takes the wrapper as a snippet receiving the content instead —
 different API, same purpose, and arguably the clearer one.
 
-## Testing a binding against the React one
+## What the Svelte corpus run reported
 
-**The visual suite's scenarios cannot be rendered by a non-React binding.** They
-are `(components) => ReactNode`
-(`remote-react-components/src/tests/lib/visualScenario.ts`), which is exactly
-what lets one scenario run both `Local` and `Remote`. Rewriting 84 files per
-binding is not a shared suite, it is a second one that drifts.
+The Svelte prototype runs the same visual corpus through its own harness
+(`pnpm nx test:corpus remote-svelte-components`): a React pass writes a host-DOM
+reference per scenario, the Svelte pass compares against it, and nothing is
+committed. Flow's icons, which are React components, cross over by rendering
+them with `renderToStaticMarkup` and rebuilding the `<svg>`.
 
-**But the corpus does not have to be copied.** Every file imports its
-environment from `@/tests/lib/environments`, and a Vite alias can point exactly
-that import at a binding's own harness — the technique the cross-version harness
-already uses to run the same corpus against old published versions. The corpus
-stays the contract.
-
-**And a React element is inert data** — `{ type, props, key }`. The scenario is
-handed the components bag, so its element types _are_ the React components: map
-them back to their export names and the tree can be rebuilt with any framework's
-components under the same names. `children` becomes the framework's children, a
-prop whose value is an element becomes a slot (which is what it is on the other
-side too), functions pass through.
-
-**Icons need a bridge.** Flow's icons are React components and there is no icon
-set for anything else. What there is, is their output: render the React icon
-with `renderToStaticMarkup`, parse the `<svg>` and rebuild it — an `<svg>`
-travels as remote DOM like any other node, and handing it to `Icon` is exactly
-what a non-React app does by hand. Without it a quarter of the corpus fails on
-an icon rather than on anything about the binding.
-
-**Compare host DOM, not pixels.** Two runs: the React binding writes a reference
-per scenario, the other binding compares against it. The references are
-regenerated every run and never committed — the claim is "this binding renders
-what React renders _today_", not "what React rendered when someone last updated
-a baseline", and there is no second set of platform-specific screenshots to
-maintain. Two runs rather than two trees side by side, because the corpus
-interacts through `page.getByRole(…)`, which has to find exactly one of them.
-
-Normalize only what cannot be equal between two mounts: react-aria's generated
-ids (in `id`/`for`/`aria-*` **and** wherever else they appear, such as a
-`RadioGroup`'s `name`), measured lengths and clock-derived values in `style`,
-and how text happened to be split into nodes. Element tree, classes, ARIA state
-and text stay strict.
-
-**No skip list.** A scenario the binding cannot express fails with an error
-naming the component. A silent skip would hide the gap the harness exists to
-measure.
-
-The per-binding regression tests stay next to it — `RemoteEventListenerRemoval`,
-`RemoteControlledValue`, `RemoteSerialization` — because those are about the
-binding's own machinery rather than about agreeing with React.
-
-### What the runs reported
-
-The Svelte binding renders **160 of the corpus's 187 scenarios** identically to
-React. Getting there was mostly the harness learning what is and is not a
-difference; two findings were about the binding itself, and both generalize:
+It renders **160 of the corpus's 187 scenarios** identically to React. Two
+findings were about the binding itself, and both generalize:
 
 - **A dynamic tag costs you a child.** `<svelte:element this={tag}>` always
   inserts an anchor into the element, and remote-dom carries every node across
@@ -264,13 +291,6 @@ The rest is honest surface: 15 scenarios define their own React component (a
 `Wrapper` holding `useState`, ten of them in `List`), and one uses a `Modal`
 feature the rebuild does not have.
 
-**What the harness had to learn**, because a binding is not the only source of a
-diff: react-aria's and React's generated ids wherever they appear (including a
-`RadioGroup`'s `name` and recharts' `clipPath` references), measured and
-clock-derived values in `style`, how text happened to be split into nodes, and
-parking the pointer before the capture — otherwise `data-hovered` and
-`data-pressed` differ because one run clicked a moment earlier.
-
 ## Packaging
 
 A binding ships the way its ecosystem expects, and that decides more than it
@@ -288,7 +308,13 @@ looks like:
 
 ## Checklist for a new binding package
 
-- `packages/remote-<framework>-components`, `private: true` until it ships.
+- `packages/remote-<framework>-components`. It ships as soon as `private` is
+  absent — and a brand-new package name needs two one-time steps on npm before
+  the merge, or `publish.yml` fails with `E404 Not found` in the middle of a
+  release. npm binds a **Trusted Publisher** only to a package that exists, so a
+  maintainer first **publishes it by hand** (`@mittwald/flow-codemods` did:
+  `1.1.0-next.10` by hand, provenance from `1.1.0-next.11` on), then binds the
+  Trusted Publisher to `publish.yml` — one workflow filename per package.
 - `project.json` with `implicitDependencies: ["components"]` and a `build` that
   depends on `components:build:remote-components`.
 - An emitter in the generator + the output path in `components/project.json`.
@@ -297,6 +323,47 @@ looks like:
 - Unit tests for the controllers and the tree helpers; browser tests that render
   the binding's tree through the real serializer against
   `@mittwald/flow-remote-react-renderer`.
+- **A parity harness against the React package's visual corpus.** This is the
+  cheapest strong test a binding can have, and the Vue one
+  (`packages/remote-vue-components/e2e/react-parity`) is the worked example:
+  render every scenario twice — once from React, once from the new binding — and
+  assert the host builds the same DOM. Three things make it work:
+  - The corpus is reused **unmodified**, by aliasing `@/tests/lib/environments`
+    to the harness's own environment. Copying the scenarios instead guarantees
+    the copy drifts.
+  - A scenario's React element tree is rebuilt as the binding's vnodes. A React
+    element is plain data, and both packages export the same names, so the
+    mapping is a name lookup. Scenarios that define a React component of their
+    own cannot be converted — they describe React state, not a remote tree.
+  - The references are **written from React on every run and never committed**.
+    The claim is "the binding renders what React renders today", and a committed
+    baseline would quietly become a second source of truth.
+
+  Normalize only what two renders of the _same_ tree differ in, or the
+  comparison reports noise:
+
+  - rewrite generated ids and collection keys to numbered placeholders, so which
+    label points at which control is still compared;
+  - compare `style` per declaration and rewrite only what depends on the clock
+    or the font (a spinner's `--animation-delay`, CodeMirror's caret);
+  - read the overlays the host portals to `document.body`, minus per-document
+    leftovers (the live announcer, recharts' measuring span, an empty overlay
+    container, description nodes nothing references);
+  - run both passes in the same file order, since a scenario sees what earlier
+    files left in the document;
+  - fail a full run on a known-gap entry that names no scenario.
+
+  Attribute and class order are normalized too; they carry no meaning. **Reading
+  "until the output stops changing" is not enough**: it also stops changing
+  while the host waits on an async job of its own (a policy validation, a
+  fetch), so each pass gets its own coin flip on a class that no remote tree
+  decides. Wait those states out by their marker rather than normalizing the
+  marker away — one that never clears then still reaches the comparison.
+  Everything else stays, and that is where a dropped prop or a mis-named event
+  surfaces. Keep the gaps in a list with reasons rather than skipping silently,
+  and make the entries self-cleaning: one that starts matching should fail, so a
+  closed gap cannot keep its exemption.
+
 - Port the React package's component tests — they encode the bugs that are worth
   never having again: `RemoteEventListenerRemoval`, `RemoteControlledValue`,
   `RemoteSerialization`, `OptionKeys`, `AxisTickFormatter`,
@@ -309,10 +376,6 @@ looks like:
 - **Does every binding own its `flr-universal` rebuild, or does Flow move the
   compositions behind generated elements?** Every binding added before that
   decision pays for it twice.
-- **What is the support promise?** The React package's props are a contract with
-  extension developers (no breaking changes, deprecate instead). A second
-  binding either inherits that promise — and the release process with it — or is
-  explicitly experimental.
 - **One demo app or one per framework?** The switcher in `remote-dom-demo`
   works, but each framework needs its own route tree, and only one remote may be
   connected at a time.

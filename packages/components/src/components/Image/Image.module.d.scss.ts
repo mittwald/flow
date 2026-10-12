@@ -3,5 +3,6 @@ declare const classNames: {
   readonly border: "border";
   readonly roundedCorners: "roundedCorners";
   readonly aspectRatio: "aspectRatio";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

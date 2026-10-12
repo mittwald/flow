@@ -7,13 +7,14 @@
 # packages/remote-react-components/vitest.config.ts).
 #
 # Every suite is driven in WebKit. Should be changed to Chromium when flakiness
-# is resolved, because of Chromium wider usage. BTW: Using Webkit for now,
-# because Firefox has issues with parallel visual tests.
+# is resolved, because of Chromium wider usage. The browser tests run in Firefox
+# as well — without a vote on `main` for now, see `browser-firefox`.
 #
 # `main` at the bottom is the aggregate. Keep that job id: it is the required
 # status check in the branch ruleset, and the check Dependabot waits for before
 # it merges its own PRs (see dependabot-auto-merge.yml). Renaming it, or adding a
 # job below without adding it to `needs`, silently drops that gate.
+# `browser-firefox` is the one job left out on purpose.
 name: Run tests
 on:
   push:
@@ -115,6 +116,40 @@ jobs:
           pnpm nx affected --targets=test:browser --parallel=1
           --browser.name=webkit
 
+  # Deliberately not in `main`'s `needs`: Firefox still flakes on tests that need
+  # keyboard focus, so this job reports without a vote. `continue-on-error` alone
+  # would not do — a job that hits `timeout-minutes` ends `cancelled`, and `main`
+  # fails on that. It is still needed here: without it a red Firefox makes the
+  # whole run fail, and on `main` nx-set-shas then bases `nx affected` on the
+  # last fully green run. Add the job to `needs` once it stays green, and drop
+  # `continue-on-error` then: kept, a red Firefox still reads `success` there.
+  browser-firefox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:browser
+          browser: firefox
+
+      - name: Run browser tests in Firefox
+        run:
+          pnpm nx affected --targets=test:browser --parallel=1
+          --browser.name=firefox
+
   # Its own job rather than a second target on `browser`: run behind it, the two
   # of them together would take longer than the visual shards below and become
   # the critical path.
@@ -141,6 +176,36 @@ jobs:
       - name: Run e2e tests in Webkit
         run:
           pnpm nx affected --targets=test:e2e --parallel=1 --browser.name=webkit
+
+  # The Vue binding against the React one: the visual corpus is rendered twice —
+  # once from `remote-react-components`, once from `remote-vue-components` — and
+  # the host's DOM has to come out identical. Its own job because it runs that
+  # corpus twice and would otherwise become the browser job's critical path.
+  #
+  # `nx affected` decides whether it runs at all, so a PR touching neither
+  # package skips it in a second.
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:parity
+
+      - name: Compare the Vue and React remote output
+        run: pnpm nx affected --targets=test:parity --parallel=1
 
   # 74 seconds of the ~24 minutes the scheduled cross-version job spends — and
   # the half that checks the attribute-level contract with published extensions,
@@ -173,9 +238,13 @@ jobs:
       # already finds — so a hit costs nothing to be stale, and a miss installs
       # only what is missing. Keyed on lerna.json because the version it holds is
       # what the target set is resolved relative to.
+      #
+      # Restore only: `cross-version-resolve` in test-visual-scheduled.yml
+      # writes this cache. Saving the ~1 GB blob here can outlast the job
+      # timeout after the tests passed.
       - name: Restore the installed old versions
         if: steps.suite.outputs.run == 'true'
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: packages/remote-react-components/node_modules/.cross-version
           key: cross-version-${{ runner.os }}-${{ hashFiles('lerna.json') }}
@@ -257,6 +326,7 @@ jobs:
       - unit
       - browser
       - e2e
+      - parity
       - visual
       - cross-version
     steps:

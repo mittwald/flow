@@ -111,6 +111,7 @@ import { SegmentedControl as SegmentedControl } from "@mittwald/flow-react-compo
 import { Select as Select } from "@mittwald/flow-react-components";
 import { Separator as Separator } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
+import { SkeletonMode as SkeletonMode } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
@@ -434,6 +435,10 @@ export const flowComponents = {
   "flr-select": createFlowRemoteComponentRenderer("Select", Select),
   "flr-separator": createFlowRemoteComponentRenderer("Separator", Separator),
   "flr-skeleton": createFlowRemoteComponentRenderer("Skeleton", Skeleton),
+  "flr-skeleton-mode": createFlowRemoteComponentRenderer(
+    "SkeletonMode",
+    SkeletonMode,
+  ),
   "flr-skeleton-text": createFlowRemoteComponentRenderer(
     "SkeletonText",
     SkeletonText,
