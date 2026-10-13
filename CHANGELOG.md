@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.6](https://github.com/mittwald/flow/compare/1.6.0-next.5...1.6.0-next.6) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** apply the reduced-motion reset to ::before and ::after ([#3484](https://github.com/mittwald/flow/issues/3484)) ([f439552](https://github.com/mittwald/flow/commit/f439552a86c662e426bf070103d3e34ce82e0f06))
+
+## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.5 ([a69092b](https://github.com/mittwald/flow/commit/a69092be4bfa9b0a94ec475fc621c12bf78f0f8b))
+
 ## [1.6.0-next.5](https://github.com/mittwald/flow/compare/1.5.4...1.6.0-next.5) (2026-10-13)
 
 ### Bug Fixes
