@@ -5,10 +5,12 @@
  */
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    &:where(:not([class*="flow--loading-spinner"])) {
+  /* The pseudo-elements come last: a pseudo-class after `::before` or
+     `::after` never matches. */
+  :where(:not([class*="flow--loading-spinner"])) {
+    &,
+    &::before,
+    &::after {
       animation-duration: 0s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0s !important;
