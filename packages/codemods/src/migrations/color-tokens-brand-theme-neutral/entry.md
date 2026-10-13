@@ -15,18 +15,19 @@ apply:
   `--color--static-white-alpha--N` → `--light-static--color--N`; JavaScript
   reading `color.categorical` from the token JSON reads `categorical.color`. The
   old palettes are gone — `--color--gray--N`, `--color--hosting-blue--N`,
-  `--color--soft-contrast-violet--N`, `--color--bright-lilac--N` and
-  `--color--super-teal--N` resolve to nothing, and `--color--mittwald-navy--N`
-  holds the new brand values. Replace each with the Semantic variable that
-  carries its meaning, e.g. `--neutral--color--N` for gray,
-  `--primary--color--N` for hosting-blue, `--decorative-<hue>--color--N` for
-  navy, violet, lilac and teal, `--danger--`, `--warning--` or
-  `--success--color--N` for the status hues, `--dark--color--N` or
-  `--light--color--N` for `--color--black-alpha--N` or
-  `--color--white-alpha--N`, or a Variant variable such as
-  `--primary-solid-background-color--default`. Do the same for every remaining
-  Brand variable (`--color--mittwald-*`, `--color--system-*`, the alpha and
-  status ramps), because Brand keeps its light value in dark. Which one fits is
+  `--color--soft-contrast-violet--N`, `--color--bright-lilac--N`,
+  `--color--super-teal--N`, `--color--amaranth-red--N`,
+  `--color--royal-orange--N` and `--color--espelkamp-green--N` resolve to
+  nothing, and `--color--mittwald-navy--N` holds the new brand values. Replace
+  each with the Semantic variable that carries its meaning, e.g.
+  `--neutral--color--N` for gray, `--primary--color--N` for hosting-blue,
+  `--decorative-<hue>--color--N` for navy, violet, lilac and teal, `--danger--`,
+  `--warning--` or `--success--color--N` for the status hues (amaranth-red,
+  royal-orange, espelkamp-green), `--dark--color--N` or `--light--color--N` for
+  `--color--black-alpha--N` or `--color--white-alpha--N`, or a Variant variable
+  such as `--primary-solid-background-color--default`. Do the same for every
+  remaining Brand variable (`--color--mittwald-*`, `--color--system-*`, the
+  alpha ramps), because Brand keeps its light value in dark. Which one fits is
   not decidable mechanically — decide whether the color is a surface, content or
   status.
 ---
@@ -45,9 +46,11 @@ variables (`--color--…`) directly:
 
 - **The old palettes are removed.** `--color--gray--N`,
   `--color--hosting-blue--N`, `--color--soft-contrast-violet--N`,
-  `--color--bright-lilac--N` and `--color--super-teal--N` no longer exist;
-  `--color--mittwald-navy--N` and the alpha ramps carry new values and steps.
-  Nothing fails — the declaration is just dropped or the color is different.
+  `--color--bright-lilac--N`, `--color--super-teal--N` and the status ramps
+  `--color--amaranth-red--N`, `--color--royal-orange--N` and
+  `--color--espelkamp-green--N` no longer exist; `--color--mittwald-navy--N` and
+  the alpha ramps carry new values and steps. Nothing fails — the declaration is
+  just dropped or the color is different.
 - **Brand no longer inverts in dark.** A remaining `--color--<ramp>--N` keeps
   its light value in both themes.
 - **Some variables moved to Semantic** and their old names are gone:
