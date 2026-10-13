@@ -36,6 +36,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     children,
     className,
     onChange,
+    onOpenChange,
     ref,
     withDatePickerPresets = false,
     ...rest
@@ -81,6 +82,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
           placement="bottom end"
           isDialogContent
           controller={popoverController}
+          onOpenChange={onOpenChange}
         >
           <RangeCalendar
             withDatePickerPresets={withDatePickerPresets}

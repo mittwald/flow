@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
 import { CalendarDate, today, getLocalTimeZone } from "@internationalized/date";
 import { DateRangePicker } from "@/components/DateRangePicker";
@@ -21,6 +21,7 @@ const renderPicker = (props?: {
   minValue?: CalendarDate;
   isDisabled?: boolean;
   onChange?: (value: unknown) => void;
+  onOpenChange?: (isOpen: boolean) => void;
 }) =>
   render(
     <DateRangePicker {...props}>
@@ -151,6 +152,34 @@ test("a preset outside minValue is disabled", async () => {
   await expect
     .element(preset("Too early"))
     .toHaveAttribute("aria-disabled", "true");
+});
+
+test("onOpenChange reports opening and an Escape close without suppressing it", async () => {
+  const onOpenChange = vi.fn();
+  renderPicker({ onOpenChange });
+
+  await calendarButton().click();
+  await expect.element(calendar()).toBeVisible();
+  expect(onOpenChange).toHaveBeenLastCalledWith(true);
+
+  await userEvent.keyboard("{Escape}");
+  await expect.element(calendar()).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenLastCalledWith(false);
+});
+
+test("onOpenChange reports the close after picking a range", async () => {
+  const onOpenChange = vi.fn();
+  renderPicker({
+    defaultValue: { start: march(10), end: march(12) },
+    onOpenChange,
+  });
+
+  await calendarButton().click();
+  await day(/March 3, 2025/).click();
+  await day(/March 6, 2025/).click();
+
+  await expect.element(calendar()).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenLastCalledWith(false);
 });
 
 test("a disabled range picker does not open its calendar", async () => {

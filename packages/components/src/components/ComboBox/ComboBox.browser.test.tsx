@@ -1,5 +1,6 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
+import { expect, test, vi } from "vitest";
 import { ComboBox } from "@/components/ComboBox";
 import { Label } from "@/components/Label";
 import { Option } from "@/components/Option";
@@ -27,6 +28,42 @@ test("The options of a combo box do not lock the page", async () => {
   await expect.element(page.getByRole("listbox")).toBeVisible();
   // Assert the delta: a modal popover would set it to "hidden".
   expect(document.documentElement.style.overflow).toBe(overflowBefore);
+});
+
+test("onOpenChange reports opening with its trigger and an Escape close without suppressing it", async () => {
+  const onOpenChange = vi.fn();
+  render(
+    <ComboBox onOpenChange={onOpenChange}>
+      <Label>Domain</Label>
+      <Option>rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+    </ComboBox>,
+  );
+
+  await page.getByRole("combobox").click();
+  await expect.element(page.getByRole("listbox")).toBeVisible();
+  expect(onOpenChange).toHaveBeenLastCalledWith(true, "focus");
+
+  await userEvent.keyboard("{Escape}");
+  await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+  expect(onOpenChange.mock.lastCall?.[0]).toBe(false);
+});
+
+test("onOpenChange reports the close after picking an option", async () => {
+  const onOpenChange = vi.fn();
+  render(
+    <ComboBox onOpenChange={onOpenChange}>
+      <Label>Domain</Label>
+      <Option>rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+    </ComboBox>,
+  );
+
+  await page.getByRole("combobox").click();
+  await page.getByRole("option", { name: "tatooine.com" }).click();
+
+  await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+  expect(onOpenChange.mock.lastCall?.[0]).toBe(false);
 });
 
 testFormFieldContract("ComboBox", {
