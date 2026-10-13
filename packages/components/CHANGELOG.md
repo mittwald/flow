@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.6](https://github.com/mittwald/flow/compare/1.5.5...1.5.6) (2026-10-13)
+
+### Bug Fixes
+
+* **Section:** call useId before the early returns ([#3470](https://github.com/mittwald/flow/issues/3470)) ([e7d81e0](https://github.com/mittwald/flow/commit/e7d81e0650053cd876bdb30a89fc1507c7d5ec01))
+
 ## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
 
 ### Bug Fixes
