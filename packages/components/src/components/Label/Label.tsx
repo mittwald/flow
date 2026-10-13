@@ -13,6 +13,8 @@ import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface LabelProps
   extends
@@ -46,6 +48,7 @@ export const Label = flowComponent("Label", (props) => {
   const { id, ...rootProps } = labelProps;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Label");
+  const isSkeleton = useSkeletonMode();
 
   const rootClassName = unstyled
     ? className
@@ -87,15 +90,22 @@ export const Label = flowComponent("Label", (props) => {
     <PropsContextProvider props={propsContext}>
       {/* The context is already merged into `labelProps` above. */}
       <Aria.LabelContext.Provider value={null}>
-        <Aria.Label {...rootProps} className={rootClassName} ref={labelRef}>
+        <Aria.Label
+          {...rootProps}
+          className={rootClassName}
+          ref={labelRef}
+          inert={isSkeleton || undefined}
+        >
           {/*
            * Fields point `aria-labelledby` at the label's id, and the name
            * computation takes every descendant's name, buttons included. The
            * id sits on this span so the tunnelled buttons stay out of it.
            */}
           <span id={id} className={styles.text}>
-            {children}
-            {optional && optionalMarker}
+            <SkeletonTextContent defaultWidth="6em">
+              {children}
+              {optional && optionalMarker}
+            </SkeletonTextContent>
           </span>
           <UiComponentTunnelExit id="contextualHelp" component="Label">
             {(children) => {

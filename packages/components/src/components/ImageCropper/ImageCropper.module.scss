@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .imageCropper {
   display: flex;
   flex-direction: column;
@@ -20,7 +22,17 @@
     justify-content: center;
     overflow: hidden;
   }
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: var(--image-cropper--corner-radius);
+  }
 }
+
+@include skeleton.keyframes;
 
 /*
  * react-easy-crop injects its stylesheet as an unlayered `<style>` element at

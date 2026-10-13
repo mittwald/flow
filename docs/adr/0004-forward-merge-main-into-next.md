@@ -267,11 +267,14 @@ Two mitigations, both implemented:
   terminates: the catch-up merge is idempotent (§2), normally finds no code
   delta, does not push, and so triggers no further `publish-next`.
 - **Drift check.** `forward-merge-drift.yml` compares `main` against `next` on a
-  schedule and escalates when the gap outlives a threshold, ignoring drift that
-  an open sync issue or sync PR already accounts for — and ageing those too, so
-  a forgotten escalation cannot block the cascade indefinitely without saying
-  so. Its escalation goes to Slack as well, mirroring the issue and therefore
-  its idempotence: the schedule runs hourly, the alert does not.
+  schedule and escalates when the gap outlives a threshold. The gap's age is
+  that of the oldest `main` tip whose merge changes `next`, not of the oldest
+  commit `next` lacks — that is usually the release bump §6/§7 leaves behind,
+  which made the check escalate seconds after a push (#3477). It ignores drift
+  that an open sync issue or sync PR already accounts for — and ageing those
+  too, so a forgotten escalation cannot block the cascade indefinitely without
+  saying so. Its escalation goes to Slack as well, mirroring the issue and
+  therefore its idempotence: the schedule runs hourly, the alert does not.
 
 Giving `forward-merge.yml` its own group was considered and rejected:
 forward-merge runs evicting each other is harmless (they always merge `main`'s

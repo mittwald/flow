@@ -10,6 +10,7 @@ import {
 import { Fragment, type PropsWithChildren } from "react";
 import { isAppleDevice } from "@react-aria/utils";
 import { useIsSSR } from "react-aria";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface KbdProps
   extends PropsWithClassName, FlowComponentProps, PropsWithChildren {
@@ -36,11 +37,13 @@ export const Kbd = flowComponent("Kbd", (props) => {
   } = props;
 
   const isSsr = useIsSSR();
+  const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(
     styles.kbd,
     isDisabled && styles.disabled,
     styles[variant],
+    isSkeleton && styles.skeleton,
     className,
   );
 
@@ -75,7 +78,7 @@ export const Kbd = flowComponent("Kbd", (props) => {
   });
 
   return (
-    <kbd className={rootClassName} {...rest}>
+    <kbd className={rootClassName} {...rest} inert={isSkeleton || undefined}>
       {joinedKeys ?? children}
     </kbd>
   );
