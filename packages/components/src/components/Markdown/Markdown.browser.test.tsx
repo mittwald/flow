@@ -85,6 +85,26 @@ test("a footnote's back link returns to its reference", async () => {
   expect(document.getElementById(description)?.textContent).toBe("Footnotes");
 });
 
+test("each footnote's back link stays in its own block", async () => {
+  await render(
+    <>
+      <Markdown data-testid="first">{"Scarif.[^1]\n\n[^1]: Jyn."}</Markdown>
+      <Markdown data-testid="second">{"Yavin.[^1]\n\n[^1]: Luke."}</Markdown>
+    </>,
+  );
+
+  for (const block of ["first", "second"]) {
+    const backLink = page
+      .getByTestId(block)
+      .getByRole("link", { name: "Back to reference 1" });
+    await expect.element(backLink).toBeInTheDocument();
+
+    const href = backLink.element().getAttribute("href") ?? "";
+    const reference = document.getElementById(href.slice(1));
+    expect(page.getByTestId(block).element().contains(reference)).toBe(true);
+  }
+});
+
 test("a fenced block becomes a code block", async () => {
   await renderMarkdown('```json\n{ "force": true }\n```');
 

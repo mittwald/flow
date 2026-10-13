@@ -5,7 +5,7 @@ import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
 import type { CSSProperties, FC, ReactNode, Ref } from "react";
-import { Children, isValidElement } from "react";
+import { Children, isValidElement, useId } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
@@ -61,6 +61,9 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   } = props;
 
   const isSkeleton = useSkeletonMode();
+  /* Footnote ids are per document, so two instances on one page would share
+     them and a back link would jump into the other one. */
+  const clobberPrefix = `user-content-${useId().replace(/[^\w-]/g, "")}-`;
 
   const defaultComponents: Components = {
     /* GFM footnotes link through `id` (the back link's target), `aria-label`
@@ -211,7 +214,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         disallowedElements={disallowedElements}
         rehypePlugins={rehypePlugins}
         remarkPlugins={remarkPlugins ?? [remarkGfm]}
-        remarkRehypeOptions={remarkRehypeOptions}
+        remarkRehypeOptions={{ clobberPrefix, ...remarkRehypeOptions }}
         skipHtml={skipHtml}
         unwrapDisallowed={unwrapDisallowed}
         urlTransform={urlTransform}
