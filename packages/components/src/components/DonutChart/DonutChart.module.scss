@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .donutChart {
   position: relative;
   width: fit-content;
@@ -60,7 +62,19 @@
   @include status(success);
   @include status(danger);
   @include status(warning);
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.surface;
+
+    --skeleton-radius: var(--corner-radius--round);
+
+    display: block;
+  }
 }
+
+@include skeleton.keyframes;
 
 .donutChartContainer {
   display: flex;

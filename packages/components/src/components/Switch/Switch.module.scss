@@ -78,4 +78,9 @@
       color: var(--switch--handle-content-color--disabled);
     }
   }
+
+  /* Skeleton: the track is the surface, the handle in it disappears */
+  .track {
+    @include formControl.formSkeleton(var(--switch--track-corner-radius));
+  }
 }

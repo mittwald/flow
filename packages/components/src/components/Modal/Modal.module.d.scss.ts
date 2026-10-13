@@ -14,6 +14,7 @@ declare const classNames: {
   readonly headerTitle: "headerTitle";
   readonly "flow--button--size-s": "flow--button--size-s";
   readonly "flow--icon": "flow--icon";
+  readonly "flow--skeleton-mode--skeleton-text-content": "flow--skeleton-mode--skeleton-text-content";
   readonly content: "content";
   readonly columnLayout: "columnLayout";
   readonly accentBox: "accentBox";

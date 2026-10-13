@@ -73,6 +73,7 @@ import { SectionWireframe } from "@/app/components/_components/wireframe/wirefra
 import { SegmentedControlWireframe } from "@/app/components/_components/wireframe/wireframes/SegmentedControl";
 import { SelectWireframe } from "@/app/components/_components/wireframe/wireframes/Select";
 import { SeparatorWireframe } from "@/app/components/_components/wireframe/wireframes/Separator";
+import { SkeletonModeWireframe } from "@/app/components/_components/wireframe/wireframes/SkeletonMode";
 import { SkeletonTextWireframe } from "@/app/components/_components/wireframe/wireframes/SkeletonText";
 import { SkeletonWireframe } from "@/app/components/_components/wireframe/wireframes/Skeleton";
 import { SliderWireframe } from "@/app/components/_components/wireframe/wireframes/Slider";
@@ -165,6 +166,7 @@ const wireframes: Record<string, FC> = {
   "segmented-control": SegmentedControlWireframe,
   select: SelectWireframe,
   separator: SeparatorWireframe,
+  "skeleton-mode": SkeletonModeWireframe,
   "skeleton-text": SkeletonTextWireframe,
   skeleton: SkeletonWireframe,
   slider: SliderWireframe,

@@ -1,4 +1,5 @@
 @use "@/styles/mixins/focus";
+@use "@/styles/mixins/formControl";
 
 .radio {
   display: grid;
@@ -28,6 +29,14 @@
     .icon {
       color: var(--choice--icon-color--disabled);
     }
+  }
+
+  /* Skeleton: a circle around the icon is the surface */
+  .skeletonIcon {
+    display: flex;
+    align-self: start;
+
+    @include formControl.formSkeletonShape(var(--corner-radius--round));
   }
 }
 
