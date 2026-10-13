@@ -329,7 +329,10 @@ const MEASURE_EXAMPLE = `(async ({ expectations }) => {
   const height = stage.getBoundingClientRect().bottom;
   if (!(height > 0)) return null;
   return {
-    height: Math.ceil(height),
+    // Rounded down: rounding up shows the fraction's worth of the preview
+    // layout's gray ground below the stage, a 1-2 px line along the bottom.
+    // Rounding down loses less than a pixel of the stage's own padding.
+    height: Math.floor(height),
     // The whole document, not the stage: an overlay renders into a portal.
     results: expectations.map((expectation) => {
       const matches = [...doc.querySelectorAll(expectation.selector)];
