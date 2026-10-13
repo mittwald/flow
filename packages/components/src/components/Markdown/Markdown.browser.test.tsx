@@ -69,6 +69,22 @@ test.each(["/docs/archive", "#objective", "mailto:rebels@example.com"])(
   },
 );
 
+test("a footnote's back link returns to its reference", async () => {
+  await renderMarkdown("The plans are on Scarif.[^1]\n\n[^1]: Says Bodhi.");
+
+  const backLink = page.getByRole("link", { name: "Back to reference 1" });
+  await expect.element(backLink).toBeInTheDocument();
+
+  const getTarget = (link: Element | null) =>
+    document.getElementById(link?.getAttribute("href")?.slice(1) ?? "");
+
+  const reference = getTarget(backLink.element());
+  expect(getTarget(reference)?.contains(backLink.element())).toBe(true);
+
+  const description = reference?.getAttribute("aria-describedby") ?? "";
+  expect(document.getElementById(description)?.textContent).toBe("Footnotes");
+});
+
 test("a fenced block becomes a code block", async () => {
   await renderMarkdown('```json\n{ "force": true }\n```');
 

@@ -63,8 +63,13 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   const isSkeleton = useSkeletonMode();
 
   const defaultComponents: Components = {
+    /* GFM footnotes link through `id` (the back link's target), `aria-label`
+       and `aria-describedby`. */
     a: (props) => (
       <Link
+        id={props.id}
+        aria-label={props["aria-label"]}
+        aria-describedby={props["aria-describedby"]}
         target={isExternalHref(props.href) ? "_blank" : undefined}
         color={color}
         href={props.href}
@@ -80,6 +85,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
     h1: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(1, headingOffset)}
         color={color}
       >
@@ -88,6 +94,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h2: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(2, headingOffset)}
         color={color}
       >
@@ -96,6 +103,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h3: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(3, headingOffset)}
         color={color}
       >
@@ -104,6 +112,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h4: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(4, headingOffset)}
         color={color}
       >
@@ -112,6 +121,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h5: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(5, headingOffset)}
         color={color}
       >
@@ -120,6 +130,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h6: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(6, headingOffset)}
         color={color}
       >
