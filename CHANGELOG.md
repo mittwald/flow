@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.16](https://github.com/mittwald/flow/compare/1.5.15...1.5.16) (2026-10-13)
+
+### Bug Fixes
+
+* **MenuItem:** expose muted items as aria-disabled ([3ecf5f0](https://github.com/mittwald/flow/commit/3ecf5f087fcb77cc39d6550702f9c11c1711efbb))
+* **MenuItem:** mute mouse releases and stop muted events ([d220005](https://github.com/mittwald/flow/commit/d22000569774ad2a1ad0cc5844daf04375249640))
+
+### Documentation
+
+* note that muted menu items are aria-disabled too ([9fab518](https://github.com/mittwald/flow/commit/9fab5185c83aa7ad68f86678038ee20d6407ffb0))
+
+### Code Refactoring
+
+* **MenuItem:** drop the unused ariaDisabled selector ([50797c3](https://github.com/mittwald/flow/commit/50797c308eab3ba6b2018d0903312ec94e092277))
+
 ## [1.5.15](https://github.com/mittwald/flow/compare/1.5.14...1.5.15) (2026-10-13)
 
 ### Bug Fixes
