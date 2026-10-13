@@ -5,12 +5,17 @@ import {
   useRef,
   useState,
 } from "react";
+import {
+  createFrameResizeObserver,
+  type FrameResizeObserver,
+} from "@/lib/dom/createFrameResizeObserver";
 
 const measureLabel = (label: SVGTextElement): number => {
   try {
     return label.getBBox().width;
   } catch {
-    // Firefox throws for an element that is not rendered.
+    // Firefox throws for an element that is not rendered, and jsdom has no
+    // `getBBox` at all.
     return 0;
   }
 };
@@ -24,7 +29,9 @@ const measureLabel = (label: SVGTextElement): number => {
  * `zoom` or `transform` on an ancestor scales — and uses the result as SVG user
  * units. And it measures once, so a web font that replaces its fallback after
  * mount widens the labels past the axis. `getBBox()` measures in user units,
- * and a finished font load measures again.
+ * and a `ResizeObserver` — which tracks an SVG element's bbox — measures again
+ * whenever a label changes size: a font swap, a new text, a hidden chart that
+ * is shown.
  *
  * Attach the returned ref to every tick label. The width is `undefined` until a
  * label has been measured.
@@ -33,6 +40,7 @@ const measureLabel = (label: SVGTextElement): number => {
  */
 export const useTickLabelWidth = () => {
   const labels = useRef(new Set<SVGTextElement>());
+  const observer = useRef<FrameResizeObserver>(null);
   const [width, setWidth] = useState<number>();
 
   const measure = useCallback(() => {
@@ -41,9 +49,17 @@ export const useTickLabelWidth = () => {
   }, []);
 
   useEffect(() => {
-    const fonts = document.fonts;
-    fonts.addEventListener("loadingdone", measure);
-    return () => fonts.removeEventListener("loadingdone", measure);
+    // jsdom has no `ResizeObserver`.
+    if (typeof ResizeObserver === "undefined") {
+      return;
+    }
+    const frameObserver = createFrameResizeObserver(measure);
+    frameObserver.observe(labels.current);
+    observer.current = frameObserver;
+    return () => {
+      frameObserver.disconnect();
+      observer.current = null;
+    };
   }, [measure]);
 
   const labelRef: RefCallback<SVGTextElement> = useCallback(
@@ -52,9 +68,11 @@ export const useTickLabelWidth = () => {
         return;
       }
       labels.current.add(label);
+      observer.current?.observe(labels.current);
       measure();
       return () => {
         labels.current.delete(label);
+        observer.current?.observe(labels.current);
         measure();
       };
     },

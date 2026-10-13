@@ -86,7 +86,7 @@ test("sizes a category y-axis to its longest label under CSS zoom", async () => 
     .toBeGreaterThanOrEqual(0);
 });
 
-test("resizes a category y-axis when web fonts finish loading", async () => {
+test("resizes a category y-axis when its labels widen after mount", async () => {
   const screen = await render(categoryChart);
   await expect
     .poll(() => leftmostTickLabelEdge(screen.container))
@@ -97,7 +97,6 @@ test("resizes a category y-axis when web fonts finish loading", async () => {
   widerFont.textContent =
     ".recharts-cartesian-axis-tick-value { letter-spacing: 4px; }";
   document.head.append(widerFont);
-  document.fonts.dispatchEvent(new Event("loadingdone"));
 
   try {
     await expect
@@ -171,4 +170,19 @@ test("the deprecated component emptyView still renders with the data and warns",
 
   await expect.element(page.getByText("No data available (0)")).toBeVisible();
   expect(onWarning).toHaveBeenCalledWith(emptyViewDeprecation);
+});
+
+test("sizes a category y-axis that mounts hidden once it is shown", async () => {
+  const screen = await render(
+    <div data-testid="hidden-chart" style={{ display: "none" }}>
+      {categoryChart}
+    </div>,
+  );
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  screen.getByTestId("hidden-chart").element().style.display = "";
+
+  await expect
+    .poll(() => leftmostTickLabelEdge(screen.container))
+    .toBeGreaterThanOrEqual(0);
 });

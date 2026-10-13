@@ -75,15 +75,13 @@ export const YAxis: FC<YAxisProps> = (props) => {
   /*
    * Recharts' default tick label, plus the measuring ref. Recharts passes a
    * numeric axis width on to the label, which wraps once the text is wider —
-   * so the label drops it, as it does with `"auto"`. Keyed by its text, the
-   * label remounts and is measured again when the text changes.
+   * so the label drops it, as it does with `"auto"`.
    */
   const measuredTick = (tickProps: Recharts.YAxisTickContentProps) => {
     const { payload, index, tickFormatter } = tickProps;
     const value = `${tickFormatter ? tickFormatter(payload.value, index) : payload.value}${rest.unit ?? ""}`;
     return (
       <Recharts.Text
-        key={value}
         {...tickProps}
         ref={tickLabels.labelRef}
         className="recharts-cartesian-axis-tick-value"
