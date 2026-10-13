@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/mittwald/flow/compare/1.5.3...1.5.4) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** add missing accessible names in Tabs, List filters and AvatarStack ([#3468](https://github.com/mittwald/flow/issues/3468)) ([e92fdd7](https://github.com/mittwald/flow/commit/e92fdd7d17baf24b65dd0b6f5d2d5d44ef288807))
+
+### Tests
+
+* **remote-react-components:** regenerate firefox-darwin baselines ([3ef6bd6](https://github.com/mittwald/flow/commit/3ef6bd64052eb24ce2bc3736f145458f6c8a6d54)), closes [#3303](https://github.com/mittwald/flow/issues/3303)
+
 ## [1.5.3](https://github.com/mittwald/flow/compare/1.5.2...1.5.3) (2026-10-13)
 
 ### Documentation
