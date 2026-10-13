@@ -31,6 +31,8 @@ export const Section = flowComponent(
       ...rest
     } = props;
 
+    const headingId = useId();
+
     if (!children) {
       return null;
     }
@@ -48,8 +50,6 @@ export const Section = flowComponent(
       hideSeparator && styles.hideSeparator,
       className,
     );
-
-    const headingId = useId();
 
     const propsContext: PropsContext = {
       Heading: {

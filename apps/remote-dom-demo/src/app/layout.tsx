@@ -73,6 +73,9 @@ export default function Layout(props: PropsWithChildren) {
 
                     <NavigationGroup collapsable>
                       <Heading>Components</Heading>
+                      <NavigationItem page="accordion">
+                        Accordion
+                      </NavigationItem>
                       <NavigationItem page="activity">Activity</NavigationItem>
                       <NavigationItem page="chart">Chart</NavigationItem>
                       <NavigationItem page="coach-mark">

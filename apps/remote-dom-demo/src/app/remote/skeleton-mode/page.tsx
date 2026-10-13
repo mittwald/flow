@@ -12,6 +12,7 @@ import {
   Text,
 } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
+import FormFieldsDemo from "./FormFieldsDemo";
 import { NavigationStatusDemo } from "./NavigationStatusDemo";
 import { VisualDemo } from "./VisualDemo";
 import { ContentDemo } from "./ContentDemo";
@@ -45,6 +46,7 @@ export default function Page() {
           <VisualDemo />
           <ContentDemo />
         </Section>
+        <FormFieldsDemo />
         <NavigationStatusDemo />
       </SkeletonMode>
     </Section>

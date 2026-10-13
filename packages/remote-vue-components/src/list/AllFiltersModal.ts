@@ -1,5 +1,6 @@
 import {
   Accordion,
+  AccordionGroup,
   ActionGroup,
   Button,
   Checkbox,
@@ -380,7 +381,9 @@ export const AllFiltersModal = defineComponent({
 
         h(Modal, { offCanvas: true, controller }, () => [
           h(Heading, null, () => format("filters.all")),
-          h(Content, null, () => h(Section, null, () => accordions)),
+          h(Content, null, () =>
+            h(Section, null, () => h(AccordionGroup, null, () => accordions)),
+          ),
           h(ActionGroup, null, () => [
             h(Button, { onPress: () => controller.close() }, () =>
               h(Text, null, () =>

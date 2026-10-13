@@ -34,7 +34,10 @@ Determine the diff to review:
      enforces `git diff --exit-code`.
    - **Backwards compatibility:** are props of `@flr-generate` / `flr-universal`
      components changed in a breaking way? Renames/removals need a
-     `useWarnDeprecation` path instead.
+     `useWarnDeprecation` path instead. Check the component's `@flowStatus`
+     first: the promise binds `stable` components only, and visuals, DOM, CSS
+     class names and design-token names/values are never breaking (root
+     `AGENTS.md`, hard rules).
    - **Definition of Done** for component work: story, docs page, tests along
      the testing bar, locales (both `de-DE` and `en-US`), `public.ts` export,
      remote demo page — list what is missing.

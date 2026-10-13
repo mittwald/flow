@@ -124,6 +124,12 @@ export const PasswordCreationField = flowComponent(
       initialPolicyValidationState,
     );
 
+    /**
+     * A validation that outlasts the delay shows the loading bar, but keeps the
+     * previous result until the new one arrives – dropping it flickered the
+     * error and the bar color after every typing pause.
+     */
+    const [isValidationPending, setIsValidationPending] = useState(false);
     const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
     const { rememberValidationResult } = usePolicyValidationResult(
       validationPolicy,
@@ -133,17 +139,18 @@ export const PasswordCreationField = flowComponent(
           return;
         }
 
+        if (loadingRef.current) {
+          clearTimeout(loadingRef.current);
+        }
         loadingRef.current = setTimeout(() => {
-          setPolicyValidationResult((r) => ({
-            ...r,
-            isValid: "indeterminate",
-          }));
+          setIsValidationPending(true);
         }, 150);
       },
       ({ password, isValid, results }) => {
         if (loadingRef.current) {
           clearTimeout(loadingRef.current);
         }
+        setIsValidationPending(false);
 
         if (isEmptyValue) {
           setPolicyValidationResult(() => ({
@@ -188,6 +195,7 @@ export const PasswordCreationField = flowComponent(
       controlProps,
       fieldPropsContext,
       renderedFieldErrorId,
+      skeletonProps,
     } = useFieldComponent(props, "PasswordCreationField");
 
     /**
@@ -306,6 +314,7 @@ export const PasswordCreationField = flowComponent(
     return (
       <Aria.TextField
         {...rest}
+        {...skeletonProps}
         aria-describedby={describedBy}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}
@@ -351,7 +360,10 @@ export const PasswordCreationField = flowComponent(
               <ComplexityIndicator
                 key={value}
                 isEmptyValue={isEmptyValue}
-                isLoading={policyValidationResult.isValid === "indeterminate"}
+                isLoading={
+                  isValidationPending ||
+                  policyValidationResult.isValid === "indeterminate"
+                }
                 policyValidationResult={policyValidationResult}
                 validationResultState={stateFromValidationResult}
                 isInvalid={invalidFromProps}

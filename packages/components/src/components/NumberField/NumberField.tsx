@@ -49,6 +49,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "NumberField");
 
   const rootClassName = clsx(formFieldStyles.formField, className);
@@ -56,6 +57,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
   return (
     <Aria.NumberField
       {...rest}
+      {...skeletonProps}
       isWheelDisabled={isWheelDisabled}
       aria-labelledby={
         unit
