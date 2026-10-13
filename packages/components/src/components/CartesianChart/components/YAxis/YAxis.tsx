@@ -5,6 +5,7 @@ import type {
   DataKey,
   DataKeyValue,
 } from "@/components/CartesianChart/types";
+import { useCartesianChartContext } from "@/components/CartesianChart/context";
 import { useDesignTokens } from "@/lib/theming";
 
 export type YAxisProps<
@@ -26,6 +27,13 @@ export type YAxisProps<
 > & {
   dataKey?: TDataKey;
   tickFormatter?: (value: TDataMatch, index: number) => string;
+  /**
+   * The width of the axis in pixels. `"auto"` sizes the axis to its widest tick
+   * label. Defaults to `"auto"` for a category axis (e.g. with `layout` set to
+   * `"vertical"`) and to `60` otherwise. Pin a number to align the plot areas
+   * of synchronized charts.
+   */
+  width?: number | "auto";
 };
 
 /**
@@ -39,9 +47,13 @@ export type YAxisProps<
  * @flr-ignore-props tickFormatter
  */
 export const YAxis: FC<YAxisProps> = (props) => {
-  const { domain, type = "auto", ...rest } = props;
+  const { domain, type = "auto", width, ...rest } = props;
 
   const tokens = useDesignTokens();
+  const { layout } = useCartesianChartContext();
+
+  const isCategoryAxis =
+    type === "category" || (type === "auto" && layout === "vertical");
 
   return (
     <Recharts.YAxis
@@ -49,6 +61,7 @@ export const YAxis: FC<YAxisProps> = (props) => {
       allowDataOverflow
       domain={domain}
       type={type}
+      width={width ?? (isCategoryAxis ? "auto" : undefined)}
       fontSize={tokens.axis["font-size"].value}
       tick={{
         fill: tokens.axis["color"].value,

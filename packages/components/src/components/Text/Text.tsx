@@ -15,6 +15,8 @@ import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
 import styles from "./Text.module.scss";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface TextProps
   extends
@@ -62,6 +64,8 @@ export const Text = flowComponent("Text", (props) => {
     ...rest
   } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.text,
     isAlphaColor(color) && styles[color],
@@ -71,7 +75,11 @@ export const Text = flowComponent("Text", (props) => {
     className,
   );
 
-  const textProps = { ...rest, className: rootClassName };
+  const textProps = {
+    ...rest,
+    className: rootClassName,
+    inert: isSkeleton || undefined,
+  };
 
   const propsContext: PropsContext = {
     Link: {
@@ -91,7 +99,11 @@ export const Text = flowComponent("Text", (props) => {
   const childrenElement = (
     <PropsContextProvider props={propsContext}>
       <Wrap if={emulateBoldWidth}>
-        <EmulatedBoldText>{children}</EmulatedBoldText>
+        <EmulatedBoldText>
+          <SkeletonTextContent defaultWidth="8em">
+            {children}
+          </SkeletonTextContent>
+        </EmulatedBoldText>
       </Wrap>
     </PropsContextProvider>
   );

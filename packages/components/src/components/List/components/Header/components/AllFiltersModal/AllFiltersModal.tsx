@@ -7,6 +7,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "../../../../locales/*.locale.json";
 import ContentView from "@/views/ContentView";
 import SectionView from "@/views/SectionView";
+import AccordionGroupView from "@/views/AccordionGroupView";
 import { FilterAccordion } from "@/components/List/components/Header/components/AllFiltersModal/FilterAccordion";
 import { ViewModeAccordion } from "@/components/List/components/Header/components/AllFiltersModal/ViewModeAccordion";
 import TextView from "@/views/TextView";
@@ -98,7 +99,9 @@ export const AllFiltersModal: FC<Props> = (props) => {
       <Modal offCanvas controller={controller}>
         <HeadingView>{stringFormatter.format("filters.all")}</HeadingView>
         <ContentView>
-          <SectionView>{...accordions}</SectionView>
+          <SectionView>
+            <AccordionGroupView>{...accordions}</AccordionGroupView>
+          </SectionView>
         </ContentView>
 
         <ActionGroupView>
