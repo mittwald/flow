@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.10](https://github.com/mittwald/flow/compare/1.5.9...1.5.10) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** label a remote list by its section heading ([#3475](https://github.com/mittwald/flow/issues/3475)) ([5035577](https://github.com/mittwald/flow/commit/5035577b175b8783119f34e0fe3075964f9d4d1d))
+
 ## [1.5.9](https://github.com/mittwald/flow/compare/1.5.8...1.5.9) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
