@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@fortawesome/sharp-regular-svg-icons": [
+        "./src/app/_lib/withoutProIcons/sharpRegular.ts"
+      ]
     },
     "allowArbitraryExtensions": true
   },

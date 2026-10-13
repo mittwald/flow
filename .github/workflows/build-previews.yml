@@ -65,11 +65,32 @@ jobs:
             nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
             nextjs-${{ runner.os }}-
 
+      # As in deploy-main.yml, but optional. A fork's PR gets no secrets, and a
+      # Dependabot run reads `secrets.*` from the Dependabot store, which must
+      # not hold this token: this job runs the bumped packages' code. Without
+      # it the script skips, and the preview shows the default icons.
+      - name: Install the FontAwesome Pro icons
+        if: matrix.image_suffix == 'docs'
+        run: pnpm --filter @mittwald/flow-documentation install:pro-icons
+        env:
+          FONT_AWESOME_PACKAGE_TOKEN: ${{ secrets.FONT_AWESOME_PACKAGE_TOKEN }}
+
       - name: Build the docs
         if: matrix.image_suffix == 'docs'
         run: pnpm nx build docs
         env:
           NEXT_BASE_PATH: ""
+
+      - name: Check the docs carry no FontAwesome token
+        if: matrix.image_suffix == 'docs'
+        run: |
+          if [ -n "$FONT_AWESOME_PACKAGE_TOKEN" ] &&
+            grep -rqF "$FONT_AWESOME_PACKAGE_TOKEN" apps/docs/out; then
+            echo "::error::apps/docs/out contains the FontAwesome package token"
+            exit 1
+          fi
+        env:
+          FONT_AWESOME_PACKAGE_TOKEN: ${{ secrets.FONT_AWESOME_PACKAGE_TOKEN }}
 
       # Two commands because `build:storybook` declares no nx dependency on the
       # components build — the same pair the Dockerfile ran.

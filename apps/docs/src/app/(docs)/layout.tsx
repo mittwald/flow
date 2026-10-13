@@ -7,6 +7,7 @@ import styles from "../layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import { Matomo } from "@/app/_components/Matomo";
+import { ProIconSetProvider } from "@/app/_components/ProIconSetProvider";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import Header from "@/app/_components/layout/Header";
 import Footer from "@/app/_components/layout/Footer";
@@ -51,19 +52,25 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <ThemeProvider {...themeProps} disableTransitionOnChange noScript>
           <RouterProvider>
             <Matomo />
-            <NotificationProvider>
-              <div className={styles.wrapper}>
-                <Header docs={docs.map((mdx) => mdx.serialize())} />
-                <div className={styles.mainWrapper}>
-                  <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
+            <ProIconSetProvider>
+              <NotificationProvider>
+                <div className={styles.wrapper}>
+                  <Header docs={docs.map((mdx) => mdx.serialize())} />
+                  <div className={styles.mainWrapper}>
+                    <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
 
-                  <main className={styles.main} id="main-content" tabIndex={-1}>
-                    {props.children}
-                  </main>
+                    <main
+                      className={styles.main}
+                      id="main-content"
+                      tabIndex={-1}
+                    >
+                      {props.children}
+                    </main>
+                  </div>
+                  <Footer />
                 </div>
-                <Footer />
-              </div>
-            </NotificationProvider>
+              </NotificationProvider>
+            </ProIconSetProvider>
           </RouterProvider>
         </ThemeProvider>
       </body>

@@ -61,7 +61,15 @@
       "dependsOn": ["^build", "build:scss-types", "build:component-tokens"]
     },
     "build": {
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "runtime": "cat apps/docs/.pro-icons/node_modules/@fortawesome/sharp-regular-svg-icons/package.json 2>/dev/null || true"
+        }
+      ],
       "dependsOn": [
+        "install:pro-icons",
         "build:imports",
         "build:scss-types",
         "build:component-tokens",
@@ -74,6 +82,7 @@
     },
     "dev": {
       "dependsOn": [
+        "install:pro-icons",
         "build:imports",
         "build:scss-types",
         "build:component-tokens",
@@ -83,6 +92,9 @@
         },
         "^build"
       ]
+    },
+    "install:pro-icons": {
+      "cache": false
     }
   }
 }

@@ -8,6 +8,7 @@ import type { ThemeProviderProps } from "@teispace/next-themes";
 import { ThemeProvider } from "@teispace/next-themes";
 import { getTheme, getThemeScript } from "@teispace/next-themes/server";
 import Script from "next/script";
+import { ProIconSetProvider } from "@/app/_components/ProIconSetProvider";
 
 /**
  * Second root layout, for the pages that show an App Shell on its own.
@@ -38,7 +39,9 @@ const PreviewLayout: FC<PropsWithChildren> = async (props) => {
       </head>
       <body className={clsx("flow", styles.body)}>
         <ThemeProvider {...themeProps} disableTransitionOnChange noScript>
-          <RouterProvider>{props.children}</RouterProvider>
+          <RouterProvider>
+            <ProIconSetProvider>{props.children}</ProIconSetProvider>
+          </RouterProvider>
         </ThemeProvider>
       </body>
     </html>

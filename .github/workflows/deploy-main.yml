@@ -45,6 +45,17 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
+      # The Styleguide renders FontAwesome Pro icons, fetched with the license
+      # token outside the lockfile (apps/docs/dev/installProIcons.ts). Its own
+      # step keeps the token out of the build's environment. No fallback here:
+      # production fails rather than ship the default icons.
+      - name: Install the FontAwesome Pro icons
+        if: matrix.image_suffix == 'docs'
+        run: pnpm --filter @mittwald/flow-documentation install:pro-icons
+        env:
+          FONT_AWESOME_PACKAGE_TOKEN: ${{ secrets.FONT_AWESOME_PACKAGE_TOKEN }}
+          FLOW_DOCS_REQUIRE_PRO_ICONS: "1"
+
       # The image used to build this itself, which meant a second toolchain
       # install and the whole dependency chain rebuilt inside the image — 80 of
       # the 449 seconds a docs preview took. Here the runner builds that chain
@@ -57,6 +68,16 @@ jobs:
         run: pnpm nx build docs
         env:
           NEXT_BASE_PATH: ""
+
+      - name: Check the docs carry no FontAwesome token
+        if: matrix.image_suffix == 'docs'
+        run: |
+          if grep -rqF "$FONT_AWESOME_PACKAGE_TOKEN" apps/docs/out; then
+            echo "::error::apps/docs/out contains the FontAwesome package token"
+            exit 1
+          fi
+        env:
+          FONT_AWESOME_PACKAGE_TOKEN: ${{ secrets.FONT_AWESOME_PACKAGE_TOKEN }}
 
       # `main` is the writer that seeds this cache for everyone else. A PR reads
       # caches from its own branch and from the default branch, never from

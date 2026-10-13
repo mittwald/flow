@@ -1,7 +1,12 @@
 "use client";
 
 import { Button, Icon, Text } from "@mittwald/flow-react-components";
-import { IconContrastFilled, IconMoon, IconSun } from "@tabler/icons-react";
+import {
+  faCircleHalfStroke,
+  faMoon,
+  faSun,
+} from "@fortawesome/sharp-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState, type FC } from "react";
 
@@ -26,11 +31,11 @@ export const ThemeSwitcherButton: FC<Props> = (props) => {
 
   const icon =
     currentTheme === "light" ? (
-      <IconSun />
+      <FontAwesomeIcon icon={faSun} />
     ) : currentTheme === "dark" ? (
-      <IconMoon />
+      <FontAwesomeIcon icon={faMoon} />
     ) : (
-      <IconContrastFilled />
+      <FontAwesomeIcon icon={faCircleHalfStroke} />
     );
 
   const ariaLabel =
