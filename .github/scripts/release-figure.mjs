@@ -57,6 +57,11 @@
  * - **Charts draw in after they mounted**, and an overlay fades in. A single
  *   screenshot catches them half-way, so the figure is shot until two
  *   consecutive captures are identical.
+ * - **An infinite CSS animation never settles** — a skeleton's shimmer differs in
+ *   every capture. Each screenshot passes `animations: "disabled"`, which
+ *   resets infinite CSS animations to their start and fast-forwards finite ones
+ *   and transitions. It leaves JavaScript-driven animation alone (recharts
+ *   draws in that way), so the settle loop still matters.
  * - **`pnpm test:browser:prepare` installs only Firefox and WebKit**, so a clean
  *   checkout has no Chromium. The browser is chosen from what is actually
  *   installed, and the capture names the one it used.
@@ -432,10 +437,12 @@ const measurePanel = async (page, index, panel, url) => {
  * @returns {Promise<Buffer>}
  */
 const captureSettled = async (figure) => {
-  let previous = await figure.screenshot();
+  /** @type {import("playwright").LocatorScreenshotOptions} */
+  const options = { animations: "disabled" };
+  let previous = await figure.screenshot(options);
   for (let attempt = 0; attempt < 40; attempt++) {
     await sleep(250);
-    const current = await figure.screenshot();
+    const current = await figure.screenshot(options);
     if (current.equals(previous)) return current;
     previous = current;
   }
