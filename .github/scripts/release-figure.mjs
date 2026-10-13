@@ -7,10 +7,10 @@
  * pnpm release:figure --spec <spec.json> [--docs-url http://localhost:3001]
  * ```
  *
- * The spec names the examples and what each panel must render. The script
- * stacks the panels into one PNG per theme (`<name>.png`, `<name>-dark.png`)
- * under `apps/docs/public/assets/releases/<version>/` and prints the
- * `<picture>` block the notes reference them by.
+ * The spec names one example and what it must render. The script captures it
+ * into one PNG per theme (`<name>.png`, `<name>-dark.png`) under
+ * `apps/docs/public/assets/releases/<version>/` and prints the `<picture>`
+ * block the notes reference them by.
  *
  * It captures; it never invents. Every pixel comes from an example rendered out
  * of the working tree, and the script has no path that produces an image
@@ -45,23 +45,26 @@
  * - **A hanging webfont never settles `document.fonts.ready`**, which Playwright
  *   waits on before every screenshot (#3106). The three faces `fonts.scss`
  *   declares are served from the local copies the visual suite already keeps.
- *   Playwright settles the composition page's fonts, never the example frames'
+ *   Playwright settles the composition page's fonts, never the example frame's
  *   own — and the composition page has no webfonts, so nothing else waits for
- *   these at all. Each panel therefore checks its iframe's own font status and
- *   is not measured until it is `loaded`; a face that never arrives aborts the
- *   run rather than producing a figure in the fallback face.
+ *   these at all. The frame's own font status is therefore checked, and nothing
+ *   is measured until it is `loaded`; a face that never arrives aborts the run
+ *   rather than producing a figure in the fallback face.
  * - **Nothing waits for an example's `<img>` either.** Measured before it loads,
- *   an image has no intrinsic size: the panel comes out ~80px tall and the
- *   figure shows a thin strip of the picture. Each panel waits until every
- *   image in its iframe has loaded; a broken one aborts the run.
+ *   an image has no intrinsic size: the frame comes out ~80px tall and the
+ *   figure shows a thin strip of the picture. Nothing is measured until every
+ *   image in the frame has loaded; a broken one aborts the run.
  * - **Charts draw in after they mounted**, and an overlay fades in. A single
  *   screenshot catches them half-way, so the figure is shot until two
- *   consecutive captures are identical.
- * - **An infinite CSS animation never settles** — a skeleton's shimmer differs in
- *   every capture. Each screenshot passes `animations: "disabled"`, which
- *   resets infinite CSS animations to their start and fast-forwards finite ones
- *   and transitions. It leaves JavaScript-driven animation alone (recharts
- *   draws in that way), so the settle loop still matters.
+ *   consecutive captures are identical. CSS animations are disabled for each
+ *   shot: Playwright then finishes a finite one and resets an infinite one to
+ *   its start. Without that a Skeleton's shimmer never settles.
+ * - **The examples are German; the figures are English.** The spec's `replace`
+ *   map rewrites the example's source for the run and restores it afterwards.
+ *   It edits the file in place rather than writing a copy beside it: the dev
+ *   server indexes the example paths at startup (`output: "export"`), so a new
+ *   file 404s until it restarts, while an existing one is read per request. The
+ *   browser runs in `en-US`, so Flow's own strings are English too.
  * - **`pnpm test:browser:prepare` installs only Firefox and WebKit**, so a clean
  *   checkout has no Chromium. The browser is chosen from what is actually
  *   installed, and the capture names the one it used.
@@ -70,16 +73,18 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { glob, mkdir, readFile, writeFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 import { URL, fileURLToPath } from "node:url";
 import {
   EXAMPLE_GLOB,
   FIGURE_THEMES,
+  applyReplacements,
   buildExampleUrl,
   composeFigureHtml,
   examplePathOf,
+  exampleSourcePath,
   figureMarkdown,
   findUnknownExamples,
   normalizeFigureSpec,
@@ -280,16 +285,14 @@ const HIDE_DEV_INDICATOR = `(() => {
 })()`;
 
 /**
- * Wait for one panel's example to be rendered, then report the height its
- * content needs and what it rendered.
+ * Wait for the example to be rendered, then report the height its content needs
+ * and what it rendered.
  *
  * Runs inside the composition page, which is same-origin with the example
- * iframes — that is the only reason it can reach into `contentDocument` at
- * all.
+ * iframe — that is the only reason it can reach into `contentDocument` at all.
  */
-const MEASURE_PANEL = `(async ({ index, expectations }) => {
-  const frame = document.querySelector('iframe[data-panel="' + index + '"]');
-  const doc = frame.contentDocument;
+const MEASURE_EXAMPLE = `(async ({ expectations }) => {
+  const doc = document.getElementById('example').contentDocument;
   const error = doc.querySelector('[data-live-error]');
   if (error) return { error: error.textContent };
   const stage = doc.querySelector('[data-example-stage][data-ready]');
@@ -301,15 +304,15 @@ const MEASURE_PANEL = `(async ({ index, expectations }) => {
   // the #3106 failure mode.
   //
   // The race only bounds how long ONE evaluate may block. The status check
-  // after it is what decides: still loading means this panel is not ready, so
-  // report nothing and let measurePanel's 30s deadline abort loudly rather than
-  // return a figure rendered in the wrong face.
+  // after it is what decides: still loading means the example is not ready, so
+  // report nothing and let measureExample's 30s deadline abort loudly rather
+  // than return a figure rendered in the wrong face.
   await Promise.race([
     doc.fonts.ready,
     new Promise((resolve) => setTimeout(resolve, 5000)),
   ]);
   if (doc.fonts.status !== 'loaded') return null;
-  // An unloaded <img> has no intrinsic size yet, so the panel measures a few
+  // An unloaded <img> has no intrinsic size yet, so the frame measures a few
   // pixels tall and the capture shows a thin strip of it. Same pattern as the
   // fonts: the race bounds one evaluate, the check after it decides. A broken
   // image counts as not ready too — it must abort, not land in the figure.
@@ -327,7 +330,6 @@ const MEASURE_PANEL = `(async ({ index, expectations }) => {
   if (!(height > 0)) return null;
   return {
     height: Math.ceil(height),
-    insetLeft: getComputedStyle(stage).paddingLeft,
     // The whole document, not the stage: an overlay renders into a portal.
     results: expectations.map((expectation) => {
       const matches = [...doc.querySelectorAll(expectation.selector)];
@@ -340,36 +342,23 @@ const MEASURE_PANEL = `(async ({ index, expectations }) => {
   };
 })`;
 
-/** Give one panel's iframe the height its content measured. */
-const SIZE_PANEL = `(({ index, height }) => {
-  document.querySelector('iframe[data-panel="' + index + '"]').style.height =
-    height + 'px';
+/** Give the iframe the height its content measured. */
+const SIZE_EXAMPLE = `((height) => {
+  document.getElementById('example').style.height = height + 'px';
 })`;
 
 /**
- * Align the captions with the stage's own inset, so the figure reads as one
- * page. Set once, from the first panel — every stage shares the inset.
- */
-const SET_CAPTION_INSET = `((inset) => {
-  document.documentElement.style.setProperty('--caption-inset', inset);
-})`;
-
-/**
- * @param {{
- *   example: string;
- *   expect: { selector: string; count?: number; text?: string }[];
- * }} panel
- * @param {number} index
+ * @param {import("./release-figure-lib.mjs").NormalizedFigureSpec} spec
  * @param {{ selector: string; count: number; text: string }[]} results
  * @returns {string[]} One message per failed assertion
  */
-const checkExpectations = (panel, index, results) =>
-  panel.expect.flatMap((expectation, i) => {
+const checkExpectations = (spec, results) =>
+  spec.expect.flatMap((expectation, i) => {
     const actual = results[i];
     const failures = [];
     if (expectation.count !== undefined && actual.count !== expectation.count) {
       failures.push(
-        `panel ${index} (${panel.example}): expected ${expectation.count} × \`${expectation.selector}\`, rendered ${actual.count}`,
+        `${spec.example}: expected ${expectation.count} × \`${expectation.selector}\`, rendered ${actual.count}`,
       );
     }
     if (
@@ -377,53 +366,43 @@ const checkExpectations = (panel, index, results) =>
       !actual.text.includes(expectation.text)
     ) {
       failures.push(
-        `panel ${index} (${panel.example}): \`${expectation.selector}\` does not contain ${JSON.stringify(expectation.text)} — rendered ${JSON.stringify(actual.text.slice(0, 120))}`,
+        `${spec.example}: \`${expectation.selector}\` does not contain ${JSON.stringify(expectation.text)} — rendered ${JSON.stringify(actual.text.slice(0, 120))}`,
       );
     }
     return failures;
   });
 
 /**
- * Measure one panel once it is ready and its expectations hold. Content that
+ * Measure the example once it is ready and its expectations hold. Content that
  * appears after mount — a chart's bars, an overlay — gets until the deadline;
- * past it, whatever the panel rendered then is what the expectations are
+ * past it, whatever the example rendered then is what the expectations are
  * reported against.
  *
  * @param {import("playwright").Page} page
- * @param {number} index
- * @param {{
- *   example: string;
- *   expect: { selector: string; count?: number; text?: string }[];
- * }} panel
- * @param {string} url The panel's example page, for the error message
- * @returns {Promise<{
- *   height: number;
- *   insetLeft: string;
- *   failures: string[];
- * }>}
+ * @param {import("./release-figure-lib.mjs").NormalizedFigureSpec} spec
+ * @param {string} url The example page, for the error message
+ * @returns {Promise<{ height: number; failures: string[] }>}
  */
-const measurePanel = async (page, index, panel, url) => {
+const measureExample = async (page, spec, url) => {
   const deadline = Date.now() + 30_000;
   for (;;) {
     const measured = /** @type {any} */ (
       await page.evaluate(
-        `${MEASURE_PANEL}(${JSON.stringify({ index, expectations: panel.expect })})`,
+        `${MEASURE_EXAMPLE}(${JSON.stringify({ expectations: spec.expect })})`,
       )
     );
     if (measured?.error !== undefined) {
       throw new Error(
-        `panel ${index} (${panel.example}) threw instead of rendering:\n  ${measured.error}`,
+        `${spec.example} threw instead of rendering:\n  ${measured.error}`,
       );
     }
-    const failures = measured
-      ? checkExpectations(panel, index, measured.results)
-      : [];
+    const failures = measured ? checkExpectations(spec, measured.results) : [];
     if (measured && (failures.length === 0 || Date.now() > deadline)) {
       return { ...measured, failures };
     }
     if (Date.now() > deadline) {
       throw new Error(
-        `panel ${index} (${panel.example}) never became ready within 30s — either it never mounted, or its fonts or images never finished loading. Open ${url} and check its console and network tab`,
+        `${spec.example} never became ready within 30s — either it never mounted, or its fonts or images never finished loading. Open ${url} and check its console and network tab`,
       );
     }
     await sleep(250);
@@ -432,6 +411,11 @@ const measurePanel = async (page, index, panel, url) => {
 
 /**
  * Screenshot the figure until two consecutive captures are identical.
+ *
+ * `animations: "disabled"` finishes finite CSS animations and resets infinite
+ * ones to their start, so a shimmer or a spinner cannot keep the figure from
+ * settling. It does not reach JavaScript-driven motion, such as a chart drawing
+ * in — that is what the comparison loop waits out.
  *
  * @param {import("playwright").Locator} figure
  * @returns {Promise<Buffer>}
@@ -447,7 +431,7 @@ const captureSettled = async (figure) => {
     previous = current;
   }
   throw new Error(
-    "the figure never settled — two consecutive screenshots differed for 10s. Something in it keeps animating",
+    "the figure never settled — two consecutive screenshots differed for 10s. Something in it keeps moving that is not a CSS animation",
   );
 };
 
@@ -467,6 +451,9 @@ const captureTheme = async (browser, docsUrl, spec, theme) => {
     // The preview layout follows the system theme, so this alone themes the
     // examples.
     colorScheme: theme,
+    // Flow takes its own strings (and number and date formats) from the
+    // browser locale. Pinned, so the host's language never reaches a figure.
+    locale: "en-US",
   });
   try {
     await context.addInitScript(HIDE_DEV_INDICATOR);
@@ -497,42 +484,24 @@ const captureTheme = async (browser, docsUrl, spec, theme) => {
     }
 
     const page = await context.newPage();
-    const urls = spec.panels.map((panel) =>
-      buildExampleUrl(docsUrl, panel.example),
-    );
-    const html = composeFigureHtml({
-      width: spec.width,
-      theme,
-      panels: spec.panels,
-      urls,
-    });
+    const url = buildExampleUrl(docsUrl, spec.example);
+    const html = composeFigureHtml({ width: spec.width, theme, url });
 
     // The composition page is served ON the docs origin, so it is same-origin
-    // with the example iframes and can measure and assert them.
+    // with the example iframe and can measure and assert it.
     const figureUrl = `${docsUrl}/__release-figure__.html`;
     await page.route(figureUrl, (route) =>
       route.fulfill({ contentType: "text/html; charset=utf-8", body: html }),
     );
     await page.goto(figureUrl, { waitUntil: "load" });
 
-    const failures = [];
-    for (const [index, panel] of spec.panels.entries()) {
-      const measured = await measurePanel(page, index, panel, urls[index]);
-      failures.push(...measured.failures);
-      await page.evaluate(
-        `${SIZE_PANEL}(${JSON.stringify({ index, height: measured.height })})`,
-      );
-      if (index === 0) {
-        await page.evaluate(
-          `${SET_CAPTION_INSET}(${JSON.stringify(measured.insetLeft)})`,
-        );
-      }
-    }
+    const { height, failures } = await measureExample(page, spec, url);
     if (failures.length > 0) {
       throw new Error(
         `the ${theme} capture would not show what the spec asks for:\n  ${failures.join("\n  ")}`,
       );
     }
+    await page.evaluate(`${SIZE_EXAMPLE}(${height})`);
 
     return await captureSettled(page.locator("#figure"));
   } finally {
@@ -551,10 +520,7 @@ const main = async () => {
   for await (const file of glob(EXAMPLE_GLOB, { cwd: repoRoot })) {
     known.push(examplePathOf(file.split("\\").join("/")));
   }
-  const unknown = findUnknownExamples(
-    known.sort(),
-    spec.panels.map((panel) => panel.example),
-  );
+  const unknown = findUnknownExamples(known.sort(), [spec.example]);
   if (unknown.length > 0) {
     throw new Error(
       unknown
@@ -570,16 +536,46 @@ const main = async () => {
     );
   }
 
-  const readyPath = new URL(buildExampleUrl("http://x", spec.panels[0].example))
-    .pathname;
-  const docs = args.docsUrl
-    ? { url: args.docsUrl.replace(/\/$/, ""), stop: () => undefined }
-    : await startDocs(readyPath);
+  // Also checked before any server starts, and before the file is touched.
+  const sourceFile = resolve(repoRoot, exampleSourcePath(spec.example));
+  const original = await readFile(sourceFile, "utf8");
+  const replaced = applyReplacements(original, spec.replace);
+  if (replaced.unmatched.length > 0) {
+    throw new Error(
+      `spec.replace keys that match nothing in ${exampleSourcePath(spec.example)}:\n  ${replaced.unmatched.map((key) => JSON.stringify(key)).join("\n  ")}\n` +
+        "  If a previous run was killed, the file may still hold its replacements: `git diff` it",
+    );
+  }
 
+  const readyPath = new URL(buildExampleUrl("http://x", spec.example)).pathname;
+  /** @type {{ url: string; stop: () => void } | null} */
+  let docs = null;
   /** @type {import("playwright").Browser | null} */
   let browser = null;
+
+  // The example is rewritten in place for the run (see the header for why not
+  // a copy), so every way out has to put it back — Ctrl-C included, which
+  // skips `finally`. Synchronous, because a signal handler cannot await.
+  const restore = () => {
+    if (replaced.source !== original) writeFileSync(sourceFile, original);
+    docs?.stop();
+  };
+  const onSignal = () => {
+    restore();
+    process.exit(130);
+  };
+  process.once("SIGINT", onSignal);
+  process.once("SIGTERM", onSignal);
+
   try {
-    // Also compiles the route once, before the frames all request it at once.
+    if (replaced.source !== original) {
+      await writeFile(sourceFile, replaced.source);
+    }
+    docs = args.docsUrl
+      ? { url: args.docsUrl.replace(/\/$/, ""), stop: () => undefined }
+      : await startDocs(readyPath);
+
+    // Also compiles the route once, before both themes request it.
     await waitForPage(`${docs.url}${readyPath}`, 120_000);
 
     const playwright = await import("playwright");
@@ -605,15 +601,16 @@ const main = async () => {
     const snippet = figureMarkdown({
       sha: placeholderSha,
       out: spec.out,
-      alt: "<caption>",
+      alt: "<alt text>",
+      width: spec.width,
     }).replaceAll(placeholderSha, "<commit-sha>");
     process.stdout.write(
       [
         ...captures.map(({ out }) => `Wrote ${out}`),
-        `  panels:  ${spec.panels.length} (${spec.panels.map((p) => p.example).join(", ")})`,
+        `  example: ${spec.example}${Object.keys(spec.replace).length > 0 ? ` (${Object.keys(spec.replace).length} replacements)` : ""}`,
         `  browser: ${launched.name}`,
         `  layout:  ${spec.width} CSS px wide, captured at ${spec.scale}×`,
-        `  image:   ${pixelWidth} px wide — the size it is shown at where nothing constrains it`,
+        `  image:   ${pixelWidth} px wide, shown at ${spec.width} px (the <img> width)`,
         "",
         "Reference it from the notes as:",
         "",
@@ -624,16 +621,18 @@ const main = async () => {
         "",
       ].join("\n"),
     );
-    if (pixelWidth > COMFORTABLE_DISPLAY_WIDTH) {
+    if (spec.width > COMFORTABLE_DISPLAY_WIDTH) {
       process.stdout.write(
-        `Note: ${pixelWidth} px is wider than a release body (~${COMFORTABLE_DISPLAY_WIDTH} px), so\n` +
-          `both surfaces will scale it down. Lower \`width\` or \`scale\` if the\n` +
-          `figure should be read at its natural size.\n`,
+        `Note: ${spec.width} px is wider than a release body (~${COMFORTABLE_DISPLAY_WIDTH} px), so\n` +
+          `GitHub will scale it down. Lower \`width\` if the figure should be\n` +
+          `read at its natural size.\n`,
       );
     }
   } finally {
     if (browser) await browser.close();
-    docs.stop();
+    restore();
+    process.off("SIGINT", onSignal);
+    process.off("SIGTERM", onSignal);
   }
 };
 
