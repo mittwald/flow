@@ -128,7 +128,7 @@ Package `@mittwald/flow-remote-vue-components` ist das Vue-Gegenstück zu
 Flow Components im mStudio.
 
 ```shell
-FLOW=$(npm view @mittwald/flow-remote-vue-components@next version)
+FLOW=$(npm view @mittwald/flow-remote-vue-components@latest version)
 yarn add @mittwald/flow-remote-vue-components@$FLOW @mittwald/flow-react-components@$FLOW @mittwald/ext-bridge@$FLOW vue react react-dom
 ```
 
@@ -140,9 +140,8 @@ schlägt der Build der Extension fehl, ebenso ohne `@mittwald/ext-bridge`, das
 `RemoteRoot` importiert. `react-dom` ist eine Peer-Dependency von
 `@mittwald/flow-react-components`. `yarn` installiert Peer-Dependencies nicht
 selbst, deshalb stehen alle in der Zeile. Alle Flow-Packages brauchen genau die
-Version von `@mittwald/flow-remote-vue-components`. Ohne Versionsangabe nehmen
-pnpm und yarn das `latest`-Tag der beiden anderen, und das ist eine andere
-Release-Linie.
+Version von `@mittwald/flow-remote-vue-components`, denn seine Peer-Dependencies
+verlangen exakt diese Version.
 
 Das Package ist **Beta**. Es ist von der Breaking-Change-Zusage ausgenommen,
 seine API kann sich auch außerhalb einer Major-Version ändern (siehe
