@@ -96,11 +96,15 @@ StyleDictionary.registerFormat({
 
 const htmlAttribute = "data-theme";
 
+// Categories with a light and a dark value; they go to the `colors-*` files.
+const themedCategories = ["color", "texture"];
+const isThemed = (token) => themedCategories.includes(token.path[0]);
+
 const configVariants = [
   {
     source: "src/**/!(*.dark).yml",
     destination: "base",
-    filter: (token) => token.path[0] !== "color",
+    filter: (token) => !isThemed(token),
     options: { warnings: "disabled" },
   },
   {
@@ -114,25 +118,25 @@ const configVariants = [
   {
     source: "src/**/!(*.light).yml",
     destination: "colors-dark-system",
-    filter: (token) => token.path[0] === "color",
+    filter: isThemed,
     cssSelector: `:root:not([${htmlAttribute}]), :root[${htmlAttribute}='system']`,
   },
   {
     source: "src/**/!(*.dark).yml",
     destination: "colors-light-system",
-    filter: (token) => token.path[0] === "color",
+    filter: isThemed,
     cssSelector: `:root:not([${htmlAttribute}]), :root[${htmlAttribute}='system']`,
   },
   {
     source: "src/**/!(*.light).yml",
     destination: "colors-dark",
-    filter: (token) => token.path[0] === "color",
+    filter: isThemed,
     cssSelector: `:root[${htmlAttribute}='dark']`,
   },
   {
     source: "src/**/!(*.dark).yml",
     destination: "colors-light",
-    filter: (token) => token.path[0] === "color",
+    filter: isThemed,
     cssSelector: `:root[${htmlAttribute}='light']`,
   },
 ];
