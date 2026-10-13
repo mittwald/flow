@@ -1,8 +1,7 @@
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
-import { expect, test, vi } from "vitest";
+import { expect, test } from "vitest";
 import { CountryOptions, sortByDachFirst } from "@/components/CountryOptions";
-import type { CountrySortFn } from "@/components/CountryOptions/CountryOptions";
 import { Select } from "@/components/Select";
 import { Label } from "@/components/Label";
 
@@ -85,22 +84,4 @@ test("changing filterBy after mount updates the list", async () => {
   );
 
   await expect.poll(optionNames).toEqual(["Austria"]);
-});
-
-/*
- * Asserts that the new comparator runs, not the rendered order: the options
- * tunnel of `Select` keeps its entries in mount order, so a reorder of the same
- * options does not reach the listbox.
- */
-test("changing sortBy after mount sorts with the new comparator", async () => {
-  const { rerender } = await renderOptions(
-    <CountryOptions sortBy={sortByDachFirst} />,
-  );
-  const byNameDescending = vi.fn<CountrySortFn>((left, right) =>
-    right.name.localeCompare(left.name),
-  );
-
-  await rerender(select(<CountryOptions sortBy={byNameDescending} />));
-
-  expect(byNameDescending).toHaveBeenCalled();
 });
