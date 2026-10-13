@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/mittwald/flow/compare/1.5.1...1.5.2) (2026-10-13)
+
+### Documentation
+
+* **releases:** re-capture the 1.1.0–1.4.0 figures, one English example each ([#3486](https://github.com/mittwald/flow/issues/3486)) ([19aec5e](https://github.com/mittwald/flow/commit/19aec5ec79dfd42fcd0caacab81f3da2a836f303))
+
+### Miscellaneous Chores
+
+* **core:** let Playwright&#x27;s Firefox launch on macOS 27 ([afceedf](https://github.com/mittwald/flow/commit/afceedfad61c2c0999e7a737e98a5ddf4b405a65)), closes [microsoft/playwright#42768](https://github.com/microsoft/playwright/issues/42768) [#3303](https://github.com/mittwald/flow/issues/3303)
+* **release-figure:** one example per figure, English content via replace ([#3482](https://github.com/mittwald/flow/issues/3482)) ([7145e97](https://github.com/mittwald/flow/commit/7145e9783384a9c637b41e8d56bc279f5d5d5b1e))
+
 ## [1.5.1](https://github.com/mittwald/flow/compare/1.5.0...1.5.1) (2026-10-13)
 
 ### Documentation

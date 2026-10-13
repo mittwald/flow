@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/mittwald/flow/compare/1.5.1...1.5.2) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **core:** let Playwright&#x27;s Firefox launch on macOS 27 ([afceedf](https://github.com/mittwald/flow/commit/afceedfad61c2c0999e7a737e98a5ddf4b405a65)), closes [microsoft/playwright#42768](https://github.com/microsoft/playwright/issues/42768) [#3303](https://github.com/mittwald/flow/issues/3303)
+
 ## [1.5.1](https://github.com/mittwald/flow/compare/1.5.0...1.5.1) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-core
