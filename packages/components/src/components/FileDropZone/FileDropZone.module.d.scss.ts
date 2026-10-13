@@ -5,5 +5,6 @@ declare const classNames: {
   readonly icon: "icon";
   readonly heading: "heading";
   readonly text: "text";
+  readonly skeleton: "skeleton";
 };
 export default classNames;

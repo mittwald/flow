@@ -3,6 +3,7 @@ declare const classNames: {
   readonly "flow--truncate": "flow--truncate";
   readonly "flow--heading": "flow--heading";
   readonly "flow--accordion": "flow--accordion";
+  readonly "flow--accordion-group": "flow--accordion-group";
   readonly "flow--action-group": "flow--action-group";
   readonly "flow--breadcrumb": "flow--breadcrumb";
   readonly "flow--code-block": "flow--code-block";

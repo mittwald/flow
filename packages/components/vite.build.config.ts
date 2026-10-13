@@ -9,6 +9,7 @@ import {
   libraryBuildChecks,
   preserveUseClientBanner,
   publishedDtsOptions,
+  withBundledDeclarations,
 } from "../core/src/index.ts";
 
 export default mergeConfig(
@@ -69,9 +70,29 @@ export default mergeConfig(
       layerOrderPlugin(),
       stylesheetVariantsPlugin(),
       externalizeDeps({
-        except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
+        /*
+         * Bundled, not externalized. `flow-core` and `flow-components-base`
+         * are private workspace packages that never reach npm, so an import of
+         * one would not resolve for a consumer; the design tokens are a
+         * devDependency whose JSON the styles and themes compile in.
+         */
+        except: [
+          "@mittwald/flow-design-tokens/**/*",
+          "@mittwald/flow-core",
+          "@mittwald/flow-components-base",
+        ],
       }),
-      dts(publishedDtsOptions),
+      /*
+       * The JavaScript of `flow-components-base` is inlined above; its
+       * declarations have to travel as well, or every public type built on the
+       * list's model names a package the consumer cannot install.
+       */
+      dts(
+        withBundledDeclarations(publishedDtsOptions, {
+          root: import.meta.dirname,
+          packages: ["@mittwald/flow-components-base"],
+        }),
+      ),
     ],
   }),
 );

@@ -4,6 +4,7 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
 import { type ClassValue } from "clsx";
 import type { FlowComponentName } from "@/components/propTypes";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 interface FieldComponentProps {
   className?: ClassValue;
@@ -32,6 +33,15 @@ export interface UseFieldComponent {
   };
   /** The id of the error while one is rendered, without the consumer's ids. */
   renderedFieldErrorId?: string;
+  /**
+   * Belongs on the field's root element. In an enabled `SkeletonMode` it makes
+   * the field `inert`, and `data-skeleton` turns its control into a surface
+   * (`formSkeleton` in `@/styles/mixins/formControl`).
+   */
+  skeletonProps: {
+    inert?: true;
+    "data-skeleton"?: true;
+  };
 }
 
 /** Joins id references, dropping empty ones. @internal */
@@ -48,6 +58,7 @@ export const useFieldComponent = (
       fieldErrorId,
       component,
     });
+  const isSkeleton = useSkeletonMode();
 
   // setting up the props context for all components that
   // are part of a form control
@@ -78,5 +89,6 @@ export const useFieldComponent = (
       ),
     },
     renderedFieldErrorId,
+    skeletonProps: isSkeleton ? { inert: true, "data-skeleton": true } : {},
   } as const;
 };

@@ -53,7 +53,9 @@ export default function Page() {
           <PopoverTrigger>
             <Button>Hangar notes</Button>
             <Popover>
-              <>Leave the tab while this is open — it must not survive.</>
+              <Text>
+                Leave the tab while this is open — it must not survive.
+              </Text>
             </Popover>
           </PopoverTrigger>
         </Section>

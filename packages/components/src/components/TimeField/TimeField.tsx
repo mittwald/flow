@@ -30,6 +30,7 @@ export const TimeField = flowComponent("TimeField", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "TimeField");
 
   const rootClassName = clsx(wrapperProps.className, className);
@@ -39,6 +40,7 @@ export const TimeField = flowComponent("TimeField", (props) => {
       hourCycle={24}
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       className={rootClassName}
     >
       <FieldErrorCaptureContext>
