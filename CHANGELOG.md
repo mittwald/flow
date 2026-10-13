@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.11](https://github.com/mittwald/flow/compare/1.6.0-next.10...1.6.0-next.11) (2026-10-13)
+
+### Bug Fixes
+
+* **Icon:** keep the token size of FontAwesome icons in the layered stylesheet ([#3494](https://github.com/mittwald/flow/issues/3494)) ([60cb019](https://github.com/mittwald/flow/commit/60cb0194fcd41e85981795c24812b10189147980))
+
+## [1.5.12](https://github.com/mittwald/flow/compare/1.6.0-next.9...1.5.12) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.12 ([51db540](https://github.com/mittwald/flow/commit/51db540dfe71c4ccf5a495961edf6280ab68e4db))
+
 ## [1.6.0-next.10](https://github.com/mittwald/flow/compare/1.6.0-next.9...1.6.0-next.10) (2026-10-13)
 
 ### Documentation
