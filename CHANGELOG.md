@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://github.com/mittwald/flow/compare/1.5.6...1.5.7) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** apply the reduced-motion reset to ::before and ::after ([#3484](https://github.com/mittwald/flow/issues/3484)) ([f439552](https://github.com/mittwald/flow/commit/f439552a86c662e426bf070103d3e34ce82e0f06))
+
+## [1.5.6](https://github.com/mittwald/flow/compare/1.5.5...1.5.6) (2026-10-13)
+
+### Bug Fixes
+
+* **Section:** call useId before the early returns ([#3470](https://github.com/mittwald/flow/issues/3470)) ([e7d81e0](https://github.com/mittwald/flow/commit/e7d81e0650053cd876bdb30a89fc1507c7d5ec01))
+
+## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** keep the consumer className on TimeField, SkeletonText and ContextMenu ([#3469](https://github.com/mittwald/flow/issues/3469)) ([3fee1b4](https://github.com/mittwald/flow/commit/3fee1b41b255c82068e8caebf262d833d94e2d6c))
+* **Markdown:** continue ordered list numbering across split lists ([#3474](https://github.com/mittwald/flow/issues/3474)) ([97737bc](https://github.com/mittwald/flow/commit/97737bc03b9aec121414a7615faee3499a8a000c))
+
+## [1.5.4](https://github.com/mittwald/flow/compare/1.5.3...1.5.4) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** add missing accessible names in Tabs, List filters and AvatarStack ([#3468](https://github.com/mittwald/flow/issues/3468)) ([e92fdd7](https://github.com/mittwald/flow/commit/e92fdd7d17baf24b65dd0b6f5d2d5d44ef288807))
+
+### Tests
+
+* **remote-react-components:** regenerate firefox-darwin baselines ([3ef6bd6](https://github.com/mittwald/flow/commit/3ef6bd64052eb24ce2bc3736f145458f6c8a6d54)), closes [#3303](https://github.com/mittwald/flow/issues/3303)
+
+## [1.5.3](https://github.com/mittwald/flow/compare/1.5.2...1.5.3) (2026-10-13)
+
+### Documentation
+
+* use grain on template backgrounds instead of documenting it ([f4cb420](https://github.com/mittwald/flow/commit/f4cb42032382ccfa359fe001c7e96cca16d5fa76))
+
+### Styles
+
+* **design-tokens:** add grain texture token ([2492fa6](https://github.com/mittwald/flow/commit/2492fa6087bdf6fd1cf3df42b846f4f088fbf13e)), closes [#0d101a](https://github.com/mittwald/flow/issues/0d101a) [#354176](https://github.com/mittwald/flow/issues/354176)
+
+## [1.5.2](https://github.com/mittwald/flow/compare/1.5.1...1.5.2) (2026-10-13)
+
+### Documentation
+
+* **releases:** re-capture the 1.1.0–1.4.0 figures, one English example each ([#3486](https://github.com/mittwald/flow/issues/3486)) ([19aec5e](https://github.com/mittwald/flow/commit/19aec5ec79dfd42fcd0caacab81f3da2a836f303))
+
+### Miscellaneous Chores
+
+* **core:** let Playwright&#x27;s Firefox launch on macOS 27 ([afceedf](https://github.com/mittwald/flow/commit/afceedfad61c2c0999e7a737e98a5ddf4b405a65)), closes [microsoft/playwright#42768](https://github.com/microsoft/playwright/issues/42768) [#3303](https://github.com/mittwald/flow/issues/3303)
+* **release-figure:** one example per figure, English content via replace ([#3482](https://github.com/mittwald/flow/issues/3482)) ([7145e97](https://github.com/mittwald/flow/commit/7145e9783384a9c637b41e8d56bc279f5d5d5b1e))
+
+## [1.5.1](https://github.com/mittwald/flow/compare/1.5.0...1.5.1) (2026-10-13)
+
+### Documentation
+
+* **agents:** scope the breaking-change rule to stable components ([d967f9f](https://github.com/mittwald/flow/commit/d967f9fd51ba7fff4fb125d8aa838361ec703a25)), closes [#3409](https://github.com/mittwald/flow/issues/3409)
+
 ## [1.5.0](https://github.com/mittwald/flow/compare/1.4.39...1.5.0) (2026-10-13)
 
 ### Features

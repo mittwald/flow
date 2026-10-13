@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://github.com/mittwald/flow/compare/1.5.6...1.5.7) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.6](https://github.com/mittwald/flow/compare/1.5.5...1.5.6) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
+
+### Bug Fixes
+
+* **Markdown:** continue ordered list numbering across split lists ([#3474](https://github.com/mittwald/flow/issues/3474)) ([97737bc](https://github.com/mittwald/flow/commit/97737bc03b9aec121414a7615faee3499a8a000c))
+
+## [1.5.4](https://github.com/mittwald/flow/compare/1.5.3...1.5.4) (2026-10-13)
+
+### Tests
+
+* **remote-react-components:** regenerate firefox-darwin baselines ([3ef6bd6](https://github.com/mittwald/flow/commit/3ef6bd64052eb24ce2bc3736f145458f6c8a6d54)), closes [#3303](https://github.com/mittwald/flow/issues/3303)
+
+## [1.5.3](https://github.com/mittwald/flow/compare/1.5.2...1.5.3) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.2](https://github.com/mittwald/flow/compare/1.5.1...1.5.2) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.1](https://github.com/mittwald/flow/compare/1.5.0...1.5.1) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.5.0](https://github.com/mittwald/flow/compare/1.4.39...1.5.0) (2026-10-13)
 
 ### Features

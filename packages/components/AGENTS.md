@@ -217,16 +217,19 @@ Remote generation details:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
 - Props of these components are consumed by mStudio extension developers — no
-  breaking changes; deprecate instead (see
+  breaking changes on a `stable` component; deprecate instead (see
   [Deprecating an API](#deprecating-an-api)). Why this matters:
   [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 ## Deprecating an API
 
-Never break a shipped API — keep the old path working and warn at runtime with
-`useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
-of deprecated entry point: a prop, a whole component, a hook, or an integration
-export (`nextjs`, `mittwald-password-tools-js`).
+Never break a shipped API of a `stable` component — a `beta` one is exempt (see
+the root
+[Hard rules](https://github.com/mittwald/flow/blob/main/AGENTS.md#hard-rules)).
+Keep the old path working and warn at runtime with `useWarnDeprecation` (from
+`DeprecationWarningProvider`). This covers every kind of deprecated entry point:
+a prop, a whole component, a hook, or an integration export (`nextjs`,
+`mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
