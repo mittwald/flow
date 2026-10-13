@@ -1,0 +1,64 @@
+name: Run an apt install with cached .debs
+description:
+  Runs a command that installs system packages through apt, with the .debs apt
+  downloads restored from and saved to the Actions cache.
+
+inputs:
+  key:
+    description:
+      Cache key prefix. One per package set, so different sets never restore
+      each other's. The action appends the OS release (e.g. `-ubuntu24.04-`) and
+      a hash of the .deb names.
+    required: true
+  prefetch:
+    description:
+      Optional command that downloads missing .debs into apt's archive before
+      `run`, e.g. faster or bounded where apt is neither.
+    default: ""
+  run:
+    description: The command that installs the packages.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Read the OS release
+      id: os
+      uses: ./.github/actions/os-release
+
+    # A slow Ubuntu mirror can stretch the download past the job timeout.
+    # Restored, apt finds the .debs in its archive and downloads nothing.
+    #
+    # The key never matches outright: its prefix restores the newest entry.
+    - name: Restore the system packages
+      id: restore
+      uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: ~/.cache/apt-debs
+        key: ${{ inputs.key }}-${{ steps.os.outputs.release }}-
+
+    # apt reuses a .deb in its archive when name, version and checksum match,
+    # and downloads only the rest, unless `prefetch` fetched them first.
+    # `autoclean` drops versions the mirror no longer offers, so updated
+    # packages replace their old .debs in the cache.
+    - name: Install
+      id: install
+      shell: bash
+      run: |
+        debs=~/.cache/apt-debs
+        mkdir -p "$debs"
+        sudo find "$debs" -name '*.deb' -exec cp -t /var/cache/apt/archives {} +
+        ${{ inputs.prefetch }}
+        ${{ inputs.run }}
+        sudo apt-get autoclean -qq
+        rm -f "$debs"/*.deb
+        find /var/cache/apt/archives -maxdepth 1 -name '*.deb' -exec cp -t "$debs" {} +
+        echo "key=${{ inputs.key }}-${{ steps.os.outputs.release }}-$(ls "$debs" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
+    # Saves only a package set the cache does not hold yet.
+    - name: Save the system packages
+      if: steps.install.outputs.key != steps.restore.outputs.cache-matched-key
+      uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: ~/.cache/apt-debs
+        key: ${{ steps.install.outputs.key }}

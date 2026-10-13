@@ -50,6 +50,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "DateRangePicker");
 
   const rootClassName = clsx(wrapperProps.className, className);
@@ -64,6 +65,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   return (
     <Aria.DateRangePicker
       {...rest}
+      {...skeletonProps}
       aria-describedby={controlProps["aria-describedby"]}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
