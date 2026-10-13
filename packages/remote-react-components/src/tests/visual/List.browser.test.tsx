@@ -2,6 +2,7 @@ import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
+import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
 import gopher from "@/tests/assets/gopher.webp";
@@ -12,6 +13,9 @@ const listComparableFrom = "0.2.0-alpha.883";
 const combinedSubTitleFrom = "1.2.2";
 // The "Select all" option of multiple-choice filters exists from 1.4.0-next.6.
 const filterSelectAllFrom = "1.4.0-next.6";
+// The date range chip follows the Flow locale, and the filter takes a time,
+// from 1.5.0.
+const dateRangeFilterTimeFrom = "1.5.0";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
@@ -663,13 +667,166 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     await userEvent.keyboard("{enter}");
 
     await testScreenshot("List date range filter - filter opened");
+  },
+);
 
+test
+  .skipIf(crossVersion({ below: dateRangeFilterTimeFrom }))
+  .each(testEnvironments)(
+  "List date range filter chip (%s)",
+  async ({ testScreenshot, render, components: { typedList } }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="table"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "RG100000",
+                date: "2025-09-01T11:00:00Z",
+              },
+              {
+                id: "RG100001",
+                date: "2025-09-02T11:00:00Z",
+              },
+              {
+                id: "RG100002",
+                date: "2025-09-03T11:00:00Z",
+              },
+            ]}
+          />
+          <List.Filter
+            property="date"
+            mode="dateRange"
+            name="Date"
+            dateRangeOptions={{
+              maxValue: today(getLocalTimeZone()),
+            }}
+          />
+          <List.Table>
+            <List.TableHeader>
+              <List.TableColumn>Rechnung</List.TableColumn>
+              <List.TableColumn>Datum</List.TableColumn>
+            </List.TableHeader>
+
+            <List.TableBody>
+              <List.TableRow>
+                <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
+                <List.TableCell>
+                  {(invoice) =>
+                    new Date(invoice.date).toLocaleDateString("de-DE")
+                  }
+                </List.TableCell>
+              </List.TableRow>
+            </List.TableBody>
+          </List.Table>
+        </List.List>
+      );
+    }
+
+    vi.setSystemTime(new Date("2025-09-03T11:00:00Z"));
+
+    await render(<Wrapper />);
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{enter}");
 
     await testScreenshot("List date range filter - filtered");
+  },
+);
+
+test
+  .skipIf(crossVersion({ below: dateRangeFilterTimeFrom }))
+  .each(testEnvironments)(
+  "List date time range filter (%s)",
+  async ({ testScreenshot, render, components: { typedList } }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="table"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              { id: "Backup", date: "2025-09-03T07:30:00" },
+              { id: "Deployment", date: "2025-09-03T09:15:00" },
+              { id: "Cronjob", date: "2025-09-03T13:45:00" },
+            ]}
+          />
+          <List.Filter
+            property="date"
+            mode="dateRange"
+            name="Date"
+            dateRangeOptions={{ granularity: "minute" }}
+          />
+          <List.Table>
+            <List.TableHeader>
+              <List.TableColumn>Event</List.TableColumn>
+              <List.TableColumn>Time</List.TableColumn>
+            </List.TableHeader>
+
+            <List.TableBody>
+              <List.TableRow>
+                <List.TableCell>{(event) => event.id}</List.TableCell>
+                <List.TableCell>
+                  {(event) => new Date(event.date).toLocaleString("de-DE")}
+                </List.TableCell>
+              </List.TableRow>
+            </List.TableBody>
+          </List.Table>
+        </List.List>
+      );
+    }
+
+    vi.setSystemTime(new Date("2025-09-03T11:00:00Z"));
+
+    await render(<Wrapper />);
+
+    const field = (name: string) =>
+      page.getByRole("group", { name }).getByRole("spinbutton").first();
+    const enter = async (name: string, keys: string) => {
+      await userEvent.click(field(name));
+      await userEvent.keyboard(keys);
+    };
+
+    await userEvent.click(page.getByRole("button", { name: "Date" }));
+
+    await testScreenshot("List date time range filter - opened");
+
+    await enter("Start date", "09032025");
+    await enter("Start time", "0800");
+    await enter("End date", "09032025");
+    await enter("End time", "1200");
+
+    await testScreenshot("List date time range filter - filled");
+
+    await enter("End time", "0700");
+
+    await testScreenshot("List date time range filter - invalid");
+
+    await enter("End time", "1200");
+    await userEvent.keyboard("{Escape}");
+    await waitForFocusInTheScenario();
+
+    await testScreenshot("List date time range filter - filtered");
   },
 );
 
