@@ -9,10 +9,12 @@ accordion:
     value: "{border-style.default}"
   border-color:
     value: "{neutral-outline-border-color}"
-  padding-x:
+  padding:
     value: "{size-px.s}"
-  padding-y:
+  padding-s-y:
     value: "{size-px.xs}"
+  content-padding-bottom:
+    value: "{size-px.l}"
   background-color:
     hover:
       value: "{neutral-outline-background-color.hover}"
