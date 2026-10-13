@@ -11,6 +11,7 @@ import { Children } from "react";
 import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useRegisterSectionHeading } from "@/components/Section/context";
 
 export interface HeadingProps
   extends
@@ -49,6 +50,8 @@ export const Heading = flowComponent("Heading", (props) => {
     elementType,
     ...rest
   } = props;
+
+  useRegisterSectionHeading(rest.id);
 
   const isSkeleton = useSkeletonMode();
 
