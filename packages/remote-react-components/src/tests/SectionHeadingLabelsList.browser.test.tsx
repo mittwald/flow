@@ -137,3 +137,92 @@ test.each(testEnvironments)(
     expect(grid.element().getAttribute("aria-labelledby")).toBeNull();
   },
 );
+
+test.each(testEnvironments)(
+  "a list in a section without a heading references no missing id (%s)",
+  async ({ render, components: { Section, Heading, typedList, Text } }) => {
+    const JediList = typedList<Jedi>();
+
+    await render(
+      <Section>
+        <Text>Briefing</Text>
+        <JediList.List batchSize={5}>
+          <JediList.StaticData data={jedis} />
+          <JediList.Item textValue={(jedi) => jedi.name}>
+            {(jedi) => (
+              <JediList.ItemView>
+                <Heading>{jedi.name}</Heading>
+              </JediList.ItemView>
+            )}
+          </JediList.Item>
+        </JediList.List>
+      </Section>,
+    );
+
+    const grid = page.getByRole("grid");
+    await expect.element(grid).toBeVisible();
+    expect(grid.element().getAttribute("aria-labelledby")).toBeNull();
+  },
+);
+
+test.each(testEnvironments)(
+  "a section heading with its own id does not label the list (%s)",
+  async ({ render, components: { Section, Heading, typedList } }) => {
+    const JediList = typedList<Jedi>();
+
+    await render(
+      <Section>
+        <Heading id="council">Jedi Council</Heading>
+        <JediList.List batchSize={5}>
+          <JediList.StaticData data={jedis} />
+          <JediList.Item textValue={(jedi) => jedi.name}>
+            {(jedi) => (
+              <JediList.ItemView>
+                <Heading>{jedi.name}</Heading>
+              </JediList.ItemView>
+            )}
+          </JediList.Item>
+        </JediList.List>
+      </Section>,
+    );
+
+    const grid = page.getByRole("grid");
+    await expect.element(grid).toBeVisible();
+    expect(grid.element().getAttribute("aria-labelledby")).toBeNull();
+  },
+);
+
+test.each(testEnvironments)(
+  "a list in an accordion is not labelled by the section around it (%s)",
+  async ({
+    render,
+    components: { Section, Heading, typedList, Accordion, Content },
+  }) => {
+    const JediList = typedList<Jedi>();
+
+    await render(
+      <Section>
+        <Heading>Jedi Council</Heading>
+        <Accordion defaultExpanded>
+          <Heading>Padawans</Heading>
+          <Content>
+            <JediList.List batchSize={5}>
+              <JediList.StaticData data={jedis} />
+              <JediList.Item textValue={(jedi) => jedi.name}>
+                {(jedi) => (
+                  <JediList.ItemView>
+                    <Heading>{jedi.name}</Heading>
+                  </JediList.ItemView>
+                )}
+              </JediList.Item>
+            </JediList.List>
+          </Content>
+        </Accordion>
+      </Section>,
+    );
+
+    const grid = page.getByRole("grid");
+    await expect.element(grid).toBeVisible();
+    expect(grid.element().getAttribute("aria-labelledby")).toBeNull();
+  },
+);

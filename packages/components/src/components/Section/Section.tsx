@@ -7,7 +7,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import ContextMenuSectionView from "@/views/ContextMenuSectionView";
-import { SectionHeadingIdProvider } from "./context";
+import { SectionHeadingProvider, useSectionHeading } from "./context";
 
 export interface SectionProps
   extends
@@ -32,6 +32,9 @@ export const Section = flowComponent(
       ...rest
     } = props;
 
+    const headingId = useId();
+    const sectionHeading = useSectionHeading(headingId);
+
     if (!children) {
       return null;
     }
@@ -50,8 +53,6 @@ export const Section = flowComponent(
       className,
     );
 
-    const headingId = useId();
-
     const propsContext: PropsContext = {
       Heading: {
         level: 2,
@@ -65,11 +66,11 @@ export const Section = flowComponent(
 
     return (
       <section {...rest} className={rootClassName} ref={ref}>
-        <SectionHeadingIdProvider value={headingId}>
+        <SectionHeadingProvider value={sectionHeading}>
           <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
-        </SectionHeadingIdProvider>
+        </SectionHeadingProvider>
       </section>
     );
   },

@@ -8,6 +8,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
+import { SectionHeadingReset } from "@/components/Section/context";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">>, FlowComponentProps {
@@ -54,9 +55,11 @@ export const IllustratedMessage = flowComponent(
 
     return (
       <div {...rest} className={rootClassName}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
+        <SectionHeadingReset>
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+        </SectionHeadingReset>
       </div>
     );
   },
