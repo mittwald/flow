@@ -91,7 +91,9 @@ Next.js documentation site for the flow Styleguide, deployed to
   Flow icon where one fits, so it follows the icon set. Otherwise it is
   `<Icon><FontAwesomeIcon icon={…} /></Icon>`, with the definition imported from
   `@fortawesome/sharp-regular-svg-icons` (brands from
-  `@fortawesome/free-brands-svg-icons`). TypeScript checks that import against
+  `@fortawesome/free-brands-svg-icons`; a shape only the solid style draws, like
+  the half-filled system-theme circle, from
+  `@fortawesome/free-solid-svg-icons`). TypeScript checks that import against
   `withoutProIcons/sharpRegular.ts` (`paths` in `tsconfig.json`), which serves
   the free solid set: a Pro-only icon (`faCommand`) needs a free substitute
   there, or the type check fails. Code examples in `src/content` keep their

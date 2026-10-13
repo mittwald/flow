@@ -1,11 +1,10 @@
 "use client";
 
 import { Button, Icon, Text } from "@mittwald/flow-react-components";
-import {
-  faCircleHalfStroke,
-  faMoon,
-  faSun,
-} from "@fortawesome/sharp-regular-svg-icons";
+import { faMoon, faSun } from "@fortawesome/sharp-regular-svg-icons";
+// The Pro sharp-regular variant outlines both halves; the system theme shows
+// one half filled, which only the solid style draws.
+import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTheme } from "@teispace/next-themes";
 import { useEffect, useState, type FC } from "react";
@@ -35,7 +34,7 @@ export const ThemeSwitcherButton: FC<Props> = (props) => {
     ) : currentTheme === "dark" ? (
       <FontAwesomeIcon icon={faMoon} />
     ) : (
-      <FontAwesomeIcon icon={faCircleHalfStroke} />
+      <FontAwesomeIcon icon={faCircleHalfStroke} flip="horizontal" />
     );
 
   const ariaLabel =
