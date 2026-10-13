@@ -29,6 +29,8 @@ interface Props {
   title: string;
   markdownUrl: string;
   gitHubUrl?: string;
+  /** `light-static` for the actions on a dark page stage. */
+  color?: "secondary" | "light-static";
 }
 
 const copyMarkdown = async (markdownUrl: string): Promise<void> => {
@@ -54,14 +56,14 @@ const copyMarkdown = async (markdownUrl: string): Promise<void> => {
 };
 
 export const PageActions: FC<Props> = (props) => {
-  const { title, markdownUrl, gitHubUrl } = props;
+  const { title, markdownUrl, gitHubUrl, color = "secondary" } = props;
 
   const prompt = `Lies ${absoluteUrl(markdownUrl)} und beantworte mir anschließend Fragen zu „${title}“ aus der Dokumentation des mittwald Design Systems Flow.`;
 
   return (
     <ActionGroup>
       <Action onAction={() => copyMarkdown(markdownUrl)}>
-        <Button size="s" variant="outline" color="secondary">
+        <Button size="s" variant="outline" color={color}>
           <Text>Seite kopieren</Text>
           <IconCopy />
         </Button>
@@ -70,7 +72,7 @@ export const PageActions: FC<Props> = (props) => {
         <Button
           size="s"
           variant="outline"
-          color="secondary"
+          color={color}
           aria-label="Weitere Aktionen"
         >
           <IconContextMenuVertical />
