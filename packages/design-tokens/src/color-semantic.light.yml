@@ -6,6 +6,15 @@
 # Provisional until the Semantic roles (#3455): each step references the
 # Brand step closest in luminance to its value before the brand palette
 # (#3453).
+#
+# Status colors (info, success, danger, warning) pick Brand steps by role
+# (#3454), not by luminance:
+#   soft 100–300  → 100–300             (dark: 1800–1600)
+#   solid 800     → 1300, success 1600  (dark: 700, success 1000)
+#   text 900      → 1500, success 1700  (dark: 500, success 600)
+#   pressed 1000  → 1600, success 1800  (dark: 400, success 500)
+# 400–700 and 1100 are unused and fill the ramp in order. decorative-red,
+# -orange and -green mirror danger, warning and success.
 primary:
   color:
     100:
@@ -36,50 +45,50 @@ info:
     100:
       value: "{color.mittwald-navy.100}"
     200:
-      value: "{color.mittwald-navy.100}"
+      value: "{color.mittwald-navy.200}"
     300:
-      value: "{color.mittwald-navy.400}"
+      value: "{color.mittwald-navy.300}"
     400:
-      value: "{color.mittwald-navy.600}"
+      value: "{color.mittwald-navy.500}"
     500:
-      value: "{color.mittwald-navy.800}"
+      value: "{color.mittwald-navy.700}"
     600:
-      value: "{color.mittwald-navy.1000}"
+      value: "{color.mittwald-navy.900}"
     700:
-      value: "{color.mittwald-navy.1200}"
+      value: "{color.mittwald-navy.1100}"
     800:
       value: "{color.mittwald-navy.1300}"
     900:
       value: "{color.mittwald-navy.1500}"
     1000:
-      value: "{color.mittwald-navy.1700}"
+      value: "{color.mittwald-navy.1600}"
     1100:
-      value: "{color.mittwald-navy.1900}"
+      value: "{color.mittwald-navy.1800}"
 
 success:
   color:
     100:
-      value: "{color.espelkamp-green.100}"
+      value: "{color.system-success.100}"
     200:
-      value: "{color.espelkamp-green.200}"
+      value: "{color.system-success.200}"
     300:
-      value: "{color.espelkamp-green.300}"
+      value: "{color.system-success.300}"
     400:
-      value: "{color.espelkamp-green.400}"
+      value: "{color.system-success.700}"
     500:
-      value: "{color.espelkamp-green.500}"
+      value: "{color.system-success.1000}"
     600:
-      value: "{color.espelkamp-green.600}"
+      value: "{color.system-success.1300}"
     700:
-      value: "{color.espelkamp-green.700}"
+      value: "{color.system-success.1500}"
     800:
-      value: "{color.espelkamp-green.800}"
+      value: "{color.system-success.1600}"
     900:
-      value: "{color.espelkamp-green.900}"
+      value: "{color.system-success.1700}"
     1000:
-      value: "{color.espelkamp-green.1000}"
+      value: "{color.system-success.1800}"
     1100:
-      value: "{color.espelkamp-green.1100}"
+      value: "{color.system-success.1900}"
 
 neutral:
   color:
@@ -138,52 +147,52 @@ unavailable:
 danger:
   color:
     100:
-      value: "{color.amaranth-red.100}"
+      value: "{color.system-danger.100}"
     200:
-      value: "{color.amaranth-red.200}"
+      value: "{color.system-danger.200}"
     300:
-      value: "{color.amaranth-red.300}"
+      value: "{color.system-danger.300}"
     400:
-      value: "{color.amaranth-red.400}"
+      value: "{color.system-danger.500}"
     500:
-      value: "{color.amaranth-red.500}"
+      value: "{color.system-danger.700}"
     600:
-      value: "{color.amaranth-red.600}"
+      value: "{color.system-danger.900}"
     700:
-      value: "{color.amaranth-red.700}"
+      value: "{color.system-danger.1100}"
     800:
-      value: "{color.amaranth-red.800}"
+      value: "{color.system-danger.1300}"
     900:
-      value: "{color.amaranth-red.900}"
+      value: "{color.system-danger.1500}"
     1000:
-      value: "{color.amaranth-red.1000}"
+      value: "{color.system-danger.1600}"
     1100:
-      value: "{color.amaranth-red.1100}"
+      value: "{color.system-danger.1800}"
 
 warning:
   color:
     100:
-      value: "{color.royal-orange.100}"
+      value: "{color.system-warning.100}"
     200:
-      value: "{color.royal-orange.200}"
+      value: "{color.system-warning.200}"
     300:
-      value: "{color.royal-orange.300}"
+      value: "{color.system-warning.300}"
     400:
-      value: "{color.royal-orange.400}"
+      value: "{color.system-warning.500}"
     500:
-      value: "{color.royal-orange.500}"
+      value: "{color.system-warning.700}"
     600:
-      value: "{color.royal-orange.600}"
+      value: "{color.system-warning.900}"
     700:
-      value: "{color.royal-orange.700}"
+      value: "{color.system-warning.1100}"
     800:
-      value: "{color.royal-orange.800}"
+      value: "{color.system-warning.1300}"
     900:
-      value: "{color.royal-orange.900}"
+      value: "{color.system-warning.1500}"
     1000:
-      value: "{color.royal-orange.1000}"
+      value: "{color.system-warning.1600}"
     1100:
-      value: "{color.royal-orange.1100}"
+      value: "{color.system-warning.1800}"
 
 decorative-blue:
   color:
@@ -313,77 +322,77 @@ decorative-lilac:
 decorative-red:
   color:
     100:
-      value: "{color.amaranth-red.100}"
+      value: "{color.system-danger.100}"
     200:
-      value: "{color.amaranth-red.200}"
+      value: "{color.system-danger.200}"
     300:
-      value: "{color.amaranth-red.300}"
+      value: "{color.system-danger.300}"
     400:
-      value: "{color.amaranth-red.400}"
+      value: "{color.system-danger.500}"
     500:
-      value: "{color.amaranth-red.500}"
+      value: "{color.system-danger.700}"
     600:
-      value: "{color.amaranth-red.600}"
+      value: "{color.system-danger.900}"
     700:
-      value: "{color.amaranth-red.700}"
+      value: "{color.system-danger.1100}"
     800:
-      value: "{color.amaranth-red.800}"
+      value: "{color.system-danger.1300}"
     900:
-      value: "{color.amaranth-red.900}"
+      value: "{color.system-danger.1500}"
     1000:
-      value: "{color.amaranth-red.1000}"
+      value: "{color.system-danger.1600}"
     1100:
-      value: "{color.amaranth-red.1100}"
+      value: "{color.system-danger.1800}"
 
 decorative-green:
   color:
     100:
-      value: "{color.espelkamp-green.100}"
+      value: "{color.system-success.100}"
     200:
-      value: "{color.espelkamp-green.200}"
+      value: "{color.system-success.200}"
     300:
-      value: "{color.espelkamp-green.300}"
+      value: "{color.system-success.300}"
     400:
-      value: "{color.espelkamp-green.400}"
+      value: "{color.system-success.700}"
     500:
-      value: "{color.espelkamp-green.500}"
+      value: "{color.system-success.1000}"
     600:
-      value: "{color.espelkamp-green.600}"
+      value: "{color.system-success.1300}"
     700:
-      value: "{color.espelkamp-green.700}"
+      value: "{color.system-success.1500}"
     800:
-      value: "{color.espelkamp-green.800}"
+      value: "{color.system-success.1600}"
     900:
-      value: "{color.espelkamp-green.900}"
+      value: "{color.system-success.1700}"
     1000:
-      value: "{color.espelkamp-green.1000}"
+      value: "{color.system-success.1800}"
     1100:
-      value: "{color.espelkamp-green.1100}"
+      value: "{color.system-success.1900}"
 
 decorative-orange:
   color:
     100:
-      value: "{color.royal-orange.100}"
+      value: "{color.system-warning.100}"
     200:
-      value: "{color.royal-orange.200}"
+      value: "{color.system-warning.200}"
     300:
-      value: "{color.royal-orange.300}"
+      value: "{color.system-warning.300}"
     400:
-      value: "{color.royal-orange.400}"
+      value: "{color.system-warning.500}"
     500:
-      value: "{color.royal-orange.500}"
+      value: "{color.system-warning.700}"
     600:
-      value: "{color.royal-orange.600}"
+      value: "{color.system-warning.900}"
     700:
-      value: "{color.royal-orange.700}"
+      value: "{color.system-warning.1100}"
     800:
-      value: "{color.royal-orange.800}"
+      value: "{color.system-warning.1300}"
     900:
-      value: "{color.royal-orange.900}"
+      value: "{color.system-warning.1500}"
     1000:
-      value: "{color.royal-orange.1000}"
+      value: "{color.system-warning.1600}"
     1100:
-      value: "{color.royal-orange.1100}"
+      value: "{color.system-warning.1800}"
 
 dark:
   color:
