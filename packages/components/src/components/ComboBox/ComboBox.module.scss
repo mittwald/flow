@@ -33,6 +33,10 @@
         background-color: transparent;
       }
     }
+
+    /* Skeleton: the toggle is a sibling of the input, so the container is the
+       surface that hides it */
+    @include formControl.formSkeleton;
   }
 
   &:not([data-disabled="true"]):hover {

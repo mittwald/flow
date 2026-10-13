@@ -94,6 +94,7 @@ export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorE
       inlist: {},
       inputMode: {},
       is: {},
+      isDisabled: {},
       isInvalid: {},
       isReadOnly: {},
       isRequired: {},

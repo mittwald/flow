@@ -12,7 +12,11 @@
           "target": "build:remote-components"
         }
       ],
-      "inputs": ["default", "{projectRoot}/src/**/*"]
+      "inputs": [
+        "default",
+        "{projectRoot}/src/**/*",
+        "{workspaceRoot}/packages/core/src/**/*"
+      ]
     }
   }
 }

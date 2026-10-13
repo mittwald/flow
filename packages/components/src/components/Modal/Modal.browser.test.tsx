@@ -729,18 +729,47 @@ test("useOnClosed is called when the closing animation has finished", async () =
   expect(modalText).toBeInTheDocument();
   expect(onClosed).not.toHaveBeenCalled();
 
-  await userEvent.click(closeButton);
-  await sleep(50);
+  // Enter and exit animation share their name, so closing while entering only
+  // retimes the running animation: past the exit duration it ends at once and
+  // there is nothing to hold. Finish it instead of waiting: a loaded runner
+  // can take seconds to play it out.
+  for (const entering of document.querySelectorAll("[data-entering]")) {
+    entering.getAnimations().forEach((animation) => animation.finish());
+  }
+  await vitest.waitFor(() =>
+    expect(document.querySelector("[data-entering]")).toBeNull(),
+  );
 
-  expect(modalText).toBeInTheDocument();
-  expect(onClosed).not.toHaveBeenCalledOnce();
-
-  // Wait for the close animation to finish and the Modal to unmount instead of
-  // relying on a fixed delay: the animation duration varies and a hard-coded
-  // sleep races against it under CI load, which made this test flaky.
-  await vitest.waitFor(() => expect(modalText).not.toBeInTheDocument(), {
-    timeout: 2000,
+  // Hold the close animation as soon as it starts. The observer runs before the
+  // next frame, so the assertions below do not race the animation's duration.
+  const heldAnimations: Animation[] = [];
+  const exitObserver = new MutationObserver((mutations) => {
+    for (const { target } of mutations) {
+      if (target instanceof Element && target.hasAttribute("data-exiting")) {
+        for (const animation of target.getAnimations()) {
+          if (animation.playState === "running") {
+            animation.pause();
+            heldAnimations.push(animation);
+          }
+        }
+      }
+    }
   });
+  exitObserver.observe(document.body, {
+    subtree: true,
+    attributeFilter: ["data-exiting"],
+  });
+  onTestFinished(() => exitObserver.disconnect());
+
+  await userEvent.click(closeButton);
+
+  expect(heldAnimations).not.toHaveLength(0);
+  expect(modalText).toBeInTheDocument();
+  expect(onClosed).not.toHaveBeenCalled();
+
+  heldAnimations.forEach((animation) => animation.finish());
+
+  await vitest.waitFor(() => expect(modalText).not.toBeInTheDocument());
 
   // onClosed is just called, when the Modal has unmounted (after close animation)
   expect(onClosed).toHaveBeenCalledOnce();

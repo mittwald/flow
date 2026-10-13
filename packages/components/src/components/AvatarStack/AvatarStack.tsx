@@ -8,6 +8,8 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { Avatar } from "@/components/Avatar";
 import { Wrap } from "@/components/Wrap";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
 export interface AvatarStackProps
   extends PropsWithClassName, PropsWithChildren {
@@ -31,6 +33,8 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
     size = "m",
     onCountPress,
   } = props;
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "AvatarStack");
 
   const avatarCount = Children.toArray(children).length;
 
@@ -56,7 +60,14 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
         {additionalItemsCount > 0 && (
           <Wrap if={onCountPress}>
             <Button onPress={onCountPress}>
-              <Avatar size={size}>+{additionalItemsCount}</Avatar>
+              <Avatar
+                size={size}
+                label={stringFormatter.format("additionalItems", {
+                  count: additionalItemsCount,
+                })}
+              >
+                +{additionalItemsCount}
+              </Avatar>
             </Button>
           </Wrap>
         )}

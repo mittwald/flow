@@ -1,0 +1,40 @@
+---
+component: AccordionGroup
+description:
+  Die AccordionGroup fasst mehrere Accordions zu einem kompakten Block zusammen.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Nutze die AccordionGroup, sobald mehrere Accordions direkt untereinander
+  stehen. Der Abstand des umgebenden Layouts liegt dann nur um den Block herum.
+- Erlaube in der Regel, mehrere Accordions gleichzeitig zu öffnen. So lassen
+  sich Inhalte vergleichen, und der angeklickte Titel springt nicht.
+
+---
+
+# Nur ein Accordion geöffnet
+
+Mit `allowsMultipleExpanded={false}` schließt das Öffnen eines Accordions alle
+anderen. Das eignet sich für Inhalte, die nacheinander gelesen werden, wie die
+Schritte einer Anleitung.
+
+<LiveCodeEditor example="single-expanded" editorCollapsed />
+
+---
+
+# Ohne Trennlinien
+
+Mit `separators={false}` entfallen die Trennlinien zwischen den Accordions.
+
+<LiveCodeEditor example="without-separators" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -1,5 +1,6 @@
 @use "@/styles/mixins/formControl";
 @use "@/styles/mixins/scrollbar";
+@use "@/styles/mixins/skeleton";
 
 .markdownEditor {
   display: grid;
@@ -116,4 +117,25 @@
       border-color: var(--form-control--border-color--focused);
     }
   }
+
+  /* SkeletonMode: toolbar and text area keep their size under one surface */
+
+  &.skeleton {
+    .toolbar,
+    .markdown,
+    :global(.flow--text-area--input) {
+      visibility: hidden;
+    }
+  }
+
+  .skeletonSurface {
+    @include skeleton.surface;
+
+    --skeleton-radius: var(--form-control--corner-radius);
+
+    grid-row: toolbar-start / content-end;
+    grid-column: toolbar;
+  }
 }
+
+@include skeleton.keyframes;
