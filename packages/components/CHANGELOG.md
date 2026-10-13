@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.12](https://github.com/mittwald/flow/compare/1.5.11...1.5.12) (2026-10-13)
+
+### Documentation
+
+* **agents:** say which regression tests a bug fix leaves out ([#3497](https://github.com/mittwald/flow/issues/3497)) ([fb31f91](https://github.com/mittwald/flow/commit/fb31f91c8ec56b5efd874415a60c386de8746883))
+
 ## [1.5.11](https://github.com/mittwald/flow/compare/1.5.10...1.5.11) (2026-10-13)
 
 ### Bug Fixes
