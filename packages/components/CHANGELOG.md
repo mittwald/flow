@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.10](https://github.com/mittwald/flow/compare/1.6.0-next.9...1.6.0-next.10) (2026-10-13)
+
+### Documentation
+
+* **agents:** say which regression tests a bug fix leaves out ([#3497](https://github.com/mittwald/flow/issues/3497)) ([fb31f91](https://github.com/mittwald/flow/commit/fb31f91c8ec56b5efd874415a60c386de8746883))
+
+## [1.5.11](https://github.com/mittwald/flow/compare/1.5.10...1.5.11) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.11 ([8377d31](https://github.com/mittwald/flow/commit/8377d31f39f4fc9a243e500055bf47b9628a22e9))
+
 ## [1.6.0-next.9](https://github.com/mittwald/flow/compare/1.5.10...1.6.0-next.9) (2026-10-13)
 
 ### Bug Fixes

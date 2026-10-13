@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.10](https://github.com/mittwald/flow/compare/1.6.0-next.9...1.6.0-next.10) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
 ## [1.6.0-next.9](https://github.com/mittwald/flow/compare/1.5.10...1.6.0-next.9) (2026-10-13)
 
 ## [1.6.0-next.8](https://github.com/mittwald/flow/compare/1.5.9...1.6.0-next.8) (2026-10-13)
