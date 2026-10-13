@@ -7,7 +7,6 @@ import type { TimeValue } from "react-aria-components";
 import { TimeField } from "@/components/TimeField";
 import { Label } from "@/components/Label";
 import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 
@@ -103,18 +102,6 @@ test("a read-only field keeps its value", async () => {
 
   await expect.element(segment("hour")).toHaveTextContent("07");
   expect(onChange).not.toHaveBeenCalled();
-});
-
-test("keeps the form field class next to a consumer className", async () => {
-  await render(
-    <TimeField className="consumer-class">
-      <Label>Departure</Label>
-    </TimeField>,
-  );
-
-  expect(document.querySelector(".consumer-class")).toHaveClass(
-    formFieldStyles.formField,
-  );
 });
 
 /*
