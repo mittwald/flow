@@ -8,6 +8,10 @@
  * `background-color` (`primary-solid-content-color` →
  * `primary-solid-background-color`, `tooltip.color` →
  * `tooltip.background-color`). A name without such a sibling yields no pair.
+ *
+ * Content colors without a background sibling (`text`, `heading`, `link`,
+ * `icon`, borders, focus ring, …) are listed in `SURFACE_CONTENT` and rated
+ * against every background they render on (`CONTENT_SURFACES`).
  */
 
 /** @typedef {{ r: number; g: number; b: number; a: number }} Rgba */
@@ -21,6 +25,8 @@
  * @property {"text" | "ui"} kind Text needs 4.5:1, icons and handles 3:1
  * @property {Backdrop} backdrop What a translucent background sits on
  * @property {boolean} exempt Disabled controls are exempt (WCAG 1.4.3)
+ * @property {"pair" | "surface"} source Found by name (`findPairs`) or listed
+ *   in `SURFACE_CONTENT` (`findSurfaceChecks`)
  */
 
 /** @typedef {"surface" | "inverse-surface" | "white" | "black"} Backdrop */
@@ -277,10 +283,193 @@ export function findPairs(keys) {
         kind: /icon|checkbox|handle/.test(name) ? "ui" : "text",
         backdrop: backdropFor(name),
         exempt: state === "disabled" || /disabled/.test(name),
+        source: "pair",
       });
     }
   }
   return pairs;
+}
+
+/**
+ * Backgrounds that take arbitrary content — Text, Heading, Link, Icon,
+ * AlertText, Alert, form fields. Each is set by the named component's
+ * `.module.scss`. The page background belongs to the app: Storybook paints it
+ * white (`neutral.color.100`), the docs and their previews `neutral.color.200`
+ * (`apps/docs/src/app/layout.module.scss`). `*` matches within one segment, a
+ * leading `!` excludes.
+ */
+export const CONTENT_SURFACES = [
+  "neutral.color.100", // page (Storybook), Section without a card
+  "neutral.color.200", // page (docs)
+  "layout-card.background-color", // LayoutCard
+  "modal.background-color", // Modal
+  "modal.footer-background-color", // Modal footer
+  "popover.background-color", // Popover, ContextualHelp, CoachMark
+  "table.background-color", // Table
+  "table.background-color-accent", // Table, striped rows
+  "accent-box.background-color-*", // AccentBox
+  "!accent-box.background-color-gradient", // gradient values pending (#3448)
+  "message.background-color-*", // Message, responder and sender
+  "list-item.background-color.default", // ListItem
+  "file-card.background-color.default", // FileCard
+  "file-card.background-color.error",
+  "notification.*-background-color.default", // Notification
+];
+
+/**
+ * Hover and pressed backgrounds of clickable containers. Their own content
+ * (text, headings, icons) sits on them; form fields and the focus ring do not —
+ * a focused child draws its ring while the container is at rest.
+ */
+export const STATE_SURFACES = [
+  "list-item.background-color.hover", // ListItem
+  "list-item.background-color.pressed",
+  "file-card.background-color.hover", // FileCard
+  "file-card.background-color.pressed",
+  "accordion.background-color.hover", // Accordion header
+  "accordion.background-color.pressed",
+  "notification.*-background-color.hover", // Notification
+  "notification.*-background-color.pressed",
+];
+
+/**
+ * Content colors without a background sibling. `on` lists the backgrounds; `$1`
+ * there repeats the first `*` of the matched content token. Names with a
+ * `dark`/`light`(`-static`) context are rated on their ideal backdrop only (see
+ * `backdropFor`) — authors place them on images or colored boxes Flow does not
+ * know.
+ *
+ * Borders count only where WCAG 1.4.11 asks for 3:1: where the border alone
+ * shows the extent or state of a control (form fields, checkbox and radio,
+ * slider track, focus ring). Borders that group content (LayoutCard, Modal,
+ * Popover, Table, Separator, ListItem, Accordion) or repeat what an icon or
+ * label says (Alert, Notification, Badge, outline Button, FileDropZone) are not
+ * rated.
+ *
+ * @type {{ tokens: string[]; kind: "text" | "ui"; on: string[] }[]}
+ */
+export const SURFACE_CONTENT = [
+  {
+    // Inline content, also inside ListItem, FileCard, Accordion, Notification
+    kind: "text",
+    tokens: [
+      "text.color.*",
+      "heading.color*",
+      "link.color*.*",
+      "alert-text.*-color",
+      "kbd.content-color-plain.*",
+    ],
+    on: [...CONTENT_SURFACES, ...STATE_SURFACES],
+  },
+  {
+    kind: "ui",
+    tokens: ["icon.*color", "loading-spinner.color*"],
+    on: [...CONTENT_SURFACES, ...STATE_SURFACES],
+  },
+  {
+    // Blocks and form parts that clickable containers do not hold
+    kind: "text",
+    tokens: [
+      "alert.*-heading-color",
+      "label.color.*",
+      "breadcrumb.color*.*",
+      "illustrated-message.*content-color",
+    ],
+    on: CONTENT_SURFACES,
+  },
+  {
+    kind: "ui",
+    tokens: [
+      "focus.outline-color",
+      "form-control.border-color.*",
+      "choice.icon-color.*",
+      "slider.track-border-color.*",
+    ],
+    on: CONTENT_SURFACES,
+  },
+  {
+    kind: "text",
+    tokens: ["notification.*-heading-color"],
+    on: ["notification.$1-background-color.*"],
+  },
+  {
+    kind: "text",
+    tokens: ["form-control.placeholder-color.*"],
+    // `selected` marks a chosen value, so no placeholder shows
+    on: [
+      "form-control.background-color.*",
+      "!form-control.background-color.selected",
+    ],
+  },
+];
+
+/**
+ * @param {string} glob `*` matches within one segment
+ * @returns {RegExp} One capture group per `*`
+ */
+function globToRegExp(glob) {
+  const escaped = glob.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`^${escaped.replaceAll("*", "([^.]*)")}$`);
+}
+
+/**
+ * @param {string[]} keys
+ * @param {string[]} globs Leading `!` excludes
+ */
+function expandGlobs(keys, globs) {
+  const include = globs.filter((g) => !g.startsWith("!")).map(globToRegExp);
+  const exclude = globs
+    .filter((g) => g.startsWith("!"))
+    .map((g) => globToRegExp(g.slice(1)));
+  return keys.filter(
+    (key) =>
+      include.some((r) => r.test(key)) && !exclude.some((r) => r.test(key)),
+  );
+}
+
+/**
+ * Every content color from `SURFACE_CONTENT` on every background it renders on.
+ *
+ * @param {Iterable<string>} keys
+ * @returns {Pair[]}
+ */
+export function findSurfaceChecks(keys) {
+  const all = [...keys];
+
+  /** @type {Pair[]} */
+  const checks = [];
+  for (const { tokens, kind, on } of SURFACE_CONTENT) {
+    for (const glob of tokens) {
+      const regExp = globToRegExp(glob);
+      for (const content of all.filter((key) => regExp.test(key))) {
+        const { name, state } = splitState(content);
+        const backdrop = backdropFor(name);
+        const contextual = /(?:^|[-.])(dark|light)(?:-static)?(?=[-.]|$)/.test(
+          name,
+        );
+        const captured = regExp.exec(content)?.[1] ?? "";
+        const backgrounds = contextual
+          ? [null]
+          : expandGlobs(
+              all,
+              on.map((g) => g.replaceAll("$1", captured)),
+            );
+        for (const background of backgrounds) {
+          checks.push({
+            name,
+            state: state ?? "-",
+            content,
+            background: background ?? `(${backdrop})`,
+            kind,
+            backdrop,
+            exempt: /disabled/.test(`${content} ${background ?? ""}`),
+            source: "surface",
+          });
+        }
+      }
+    }
+  }
+  return checks;
 }
 
 /** @type {Record<Exclude<Backdrop, "surface" | "inverse-surface">, Rgba>} */
@@ -315,34 +504,102 @@ export function auditTheme(tokens, theme) {
     ...FIXED_BACKDROPS,
   };
 
-  return findPairs(tokens.keys()).map((pair) => {
-    const required = pair.kind === "ui" ? AA_LARGE_AND_UI : AA_TEXT;
-    const content = parseColor(tokens.get(pair.content) ?? "");
-    const background = parseColor(tokens.get(pair.background) ?? "");
-    if (!content || !background) {
-      return { ...pair, theme, ratio: null, required, status: "unresolvable" };
+  return [...findPairs(tokens.keys()), ...findSurfaceChecks(tokens.keys())].map(
+    (pair) => {
+      const required = pair.kind === "ui" ? AA_LARGE_AND_UI : AA_TEXT;
+      const content = parseColor(tokens.get(pair.content) ?? "");
+      // A backdrop-only check names its backdrop in parentheses.
+      const background = pair.background.startsWith("(")
+        ? { r: 0, g: 0, b: 0, a: 0 }
+        : parseColor(tokens.get(pair.background) ?? "");
+      if (!content || !background) {
+        return {
+          ...pair,
+          theme,
+          ratio: null,
+          required,
+          status: "unresolvable",
+        };
+      }
+      const flatBackground = composite(background, backdrops[pair.backdrop]);
+      const flatContent = composite(content, flatBackground);
+      const ratio = contrastRatio(flatContent, flatBackground);
+      /** @type {Status} */
+      const status = pair.exempt
+        ? "exempt"
+        : ratio >= required
+          ? "pass"
+          : pair.kind === "text" && ratio >= AA_LARGE_AND_UI
+            ? "large-only"
+            : "fail";
+      return {
+        ...pair,
+        theme,
+        ratio,
+        required,
+        status,
+        colors: {
+          content: toHex(flatContent),
+          background: toHex(flatBackground),
+        },
+      };
+    },
+  );
+}
+
+/**
+ * Known failures the gate tolerates. Keys: `<theme> <content> on <background>`
+ * (a backdrop-only check names its backdrop in parentheses). Values: the ratio
+ * the pair may not drop below.
+ *
+ * @typedef {{ reason: string; pairs: Record<string, number> }[]} Allowlist
+ */
+
+/** @param {Pick<Result, "theme" | "content" | "background">} r */
+export function allowlistKey({ theme, content, background }) {
+  return `${theme} ${content} on ${background}`;
+}
+
+/** Floors a ratio to the two decimals the allowlist records. */
+export function floorRatio(/** @type {number} */ ratio) {
+  return Math.floor(ratio * 100) / 100;
+}
+
+/**
+ * Checks results against the allowlist for `--strict`.
+ *
+ * - `unlisted`: fails or is `large-only` and is not allowlisted — a regression
+ * - `worse`: allowlisted, but below its recorded ratio
+ * - `stale`: allowlisted, but no longer failing (fixed or renamed) — remove it
+ *
+ * @param {Result[]} results
+ * @param {Allowlist} allowlist
+ */
+export function checkAllowlist(results, allowlist) {
+  /** @type {Map<string, { floor: number; reason: string }>} */
+  const allowed = new Map();
+  for (const { reason, pairs } of allowlist) {
+    for (const [key, floor] of Object.entries(pairs)) {
+      if (allowed.has(key)) throw new Error(`Allowlisted twice: ${key}`);
+      allowed.set(key, { floor, reason });
     }
-    const flatBackground = composite(background, backdrops[pair.backdrop]);
-    const flatContent = composite(content, flatBackground);
-    const ratio = contrastRatio(flatContent, flatBackground);
-    /** @type {Status} */
-    const status = pair.exempt
-      ? "exempt"
-      : ratio >= required
-        ? "pass"
-        : pair.kind === "text" && ratio >= AA_LARGE_AND_UI
-          ? "large-only"
-          : "fail";
-    return {
-      ...pair,
-      theme,
-      ratio,
-      required,
-      status,
-      colors: {
-        content: toHex(flatContent),
-        background: toHex(flatBackground),
-      },
-    };
-  });
+  }
+
+  const failing = results.filter(
+    (r) => r.status === "fail" || r.status === "large-only",
+  );
+  const failingKeys = new Set(failing.map(allowlistKey));
+  /** @type {Result[]} */
+  const unlisted = [];
+  /** @type {(Result & { floor: number })[]} */
+  const worse = [];
+  for (const r of failing) {
+    const entry = allowed.get(allowlistKey(r));
+    if (!entry) unlisted.push(r);
+    else if (r.ratio !== null && floorRatio(r.ratio) < entry.floor) {
+      worse.push({ ...r, floor: entry.floor });
+    }
+  }
+  const stale = [...allowed.keys()].filter((key) => !failingKeys.has(key));
+  return { allowed, unlisted, worse, stale };
 }

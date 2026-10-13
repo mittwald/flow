@@ -5,9 +5,11 @@ import {
   auditTheme,
   backdropFor,
   backgroundNameFor,
+  checkAllowlist,
   composite,
   contrastRatio,
   findPairs,
+  findSurfaceChecks,
   parseColor,
 } from "./contrast-audit-lib.js";
 
@@ -154,4 +156,127 @@ test("auditTheme composites alpha on the surface and rates the pair", () => {
   assert.equal(byName["b-soft-content-color"].colors?.background, "#808080");
   assert.equal(byName["menu-item.icon-color"].kind, "ui");
   assert.equal(byName["menu-item.icon-color"].status, "pass");
+});
+
+test("findSurfaceChecks rates single colors on the surfaces they render on", () => {
+  const checks = findSurfaceChecks([
+    "neutral.color.100",
+    "layout-card.background-color",
+    "list-item.background-color.default",
+    "list-item.background-color.pressed",
+    "accent-box.background-color-blue",
+    "accent-box.background-color-gradient",
+    "text.color.default",
+    "text.color.light-static",
+    "text.color.disabled",
+    "focus.outline-color",
+    "notification.info-heading-color",
+    "notification.info-background-color.default",
+    "notification.danger-background-color.default",
+  ]);
+  const on = (/** @type {string} */ content) =>
+    checks.filter((c) => c.content === content).map((c) => c.background);
+
+  assert.deepEqual(on("text.color.default"), [
+    "neutral.color.100",
+    "layout-card.background-color",
+    "list-item.background-color.default",
+    "list-item.background-color.pressed",
+    "accent-box.background-color-blue",
+    "notification.info-background-color.default",
+    "notification.danger-background-color.default",
+  ]);
+  // Fields and the focus ring sit on containers at rest only
+  assert.ok(
+    !on("focus.outline-color").includes("list-item.background-color.pressed"),
+  );
+  assert.equal(
+    checks.find((c) => c.content === "focus.outline-color")?.kind,
+    "ui",
+  );
+  // A notification heading sits on its own status background
+  assert.deepEqual(on("notification.info-heading-color"), [
+    "notification.info-background-color.default",
+  ]);
+  // Contextual colors on their ideal backdrop only
+  assert.deepEqual(on("text.color.light-static"), ["(black)"]);
+  assert.ok(
+    checks
+      .filter((c) => c.content === "text.color.disabled")
+      .every((c) => c.exempt),
+  );
+});
+
+test("auditTheme rates a surface check, a backdrop-only one included", () => {
+  const tokens = new Map([
+    ["neutral.color.100", "#FFFFFF"],
+    ["neutral.color.1200", "#000000"],
+    ["layout-card.background-color", "#FFFFFF"],
+    ["icon.color", "#949494"],
+    ["text.color.light-static", "rgb(255 255 255 / 50%)"],
+  ]);
+  const results = auditTheme(tokens, "light");
+  const icon = results.find(
+    (r) =>
+      r.content === "icon.color" &&
+      r.background === "layout-card.background-color",
+  );
+  assert.equal(icon?.status, "pass");
+  const light = results.find((r) => r.content === "text.color.light-static");
+  assert.equal(light?.background, "(black)");
+  assert.equal(light?.colors?.background, "#000000");
+  assert.equal(light?.colors?.content, "#808080");
+});
+
+test("checkAllowlist reports unlisted, worse and stale entries", () => {
+  /** @type {any[]} */
+  const results = [
+    {
+      theme: "light",
+      content: "a",
+      background: "x",
+      ratio: 4.2,
+      status: "large-only",
+    },
+    {
+      theme: "light",
+      content: "b",
+      background: "x",
+      ratio: 2.5,
+      status: "fail",
+    },
+    {
+      theme: "light",
+      content: "c",
+      background: "x",
+      ratio: 3.9,
+      status: "large-only",
+    },
+    { theme: "light", content: "d", background: "x", ratio: 5, status: "pass" },
+  ];
+  const { unlisted, worse, stale } = checkAllowlist(results, [
+    {
+      reason: "known",
+      pairs: {
+        "light a on x": 4.2,
+        "light b on x": 2.6,
+        "light d on x": 4.4,
+      },
+    },
+  ]);
+  assert.deepEqual(
+    unlisted.map((r) => r.content),
+    ["c"],
+  );
+  assert.deepEqual(
+    worse.map((r) => r.content),
+    ["b"],
+  );
+  assert.deepEqual(stale, ["light d on x"]);
+  assert.throws(() =>
+    checkAllowlist(results, [
+      { reason: "one", pairs: { "light a on x": 4.2 } },
+      { reason: "two", pairs: { "light a on x": 4.2 } },
+    ]),
+  );
 });

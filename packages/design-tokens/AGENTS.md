@@ -39,12 +39,24 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
   `original` (the unresolved reference, which most tokens have) has to live
   outside `src/`.
 - **Contrast audit.** `pnpm nx audit:contrast tokens` builds the tokens and
-  reports the WCAG 2.2 AA ratio of every content/background pair in light and
-  dark (`--all`, `--json`, `--strict` after `--`). Pairs come from token names:
-  a `…content-color`, `…icon-color` or `color` token pairs with the sibling
-  named `…background-color`, per state. Name a new pair that way and the audit
-  picks it up. Translucent backgrounds are composited on the theme surface
-  (`neutral.color.100`); `light`/`*-static` pairs on an ideal backdrop — see
-  `dev/contrast-audit-lib.js`. Report only, not a CI gate yet.
+  reports WCAG 2.2 AA ratios in light and dark (`--all`, `--json`, `--strict`
+  after `--`). Two sources, both in `dev/contrast-audit-lib.js`:
+  - **Pairs from token names.** A `…content-color`, `…icon-color` or `color`
+    token pairs with the sibling named `…background-color`, per state. Name a
+    new pair that way and the audit picks it up.
+  - **Single colors on surfaces.** Content without a background sibling (`text`,
+    `heading`, `link`, `icon`, `alert-text`, form-field borders, focus ring, …)
+    is listed in `SURFACE_CONTENT` and rated on the backgrounds it renders on
+    (`CONTENT_SURFACES`, `STATE_SURFACES`). A new container with its own
+    background, or a new content-only color, belongs in those lists.
+  - **Backdrops.** Translucent backgrounds are composited on the theme surface
+    (`neutral.color.100`); `light`/`*-static` colors on an ideal backdrop.
+- **Contrast gate.** `pnpm nx test:contrast tokens` (part of `pnpm test` and
+  CI's `affected:test`) fails on any failure not in
+  `dev/contrast-audit-allowlist.js`, on an allowlisted pair that drops below its
+  recorded ratio, and on an allowlisted pair that passes now. Fix colors rather
+  than extend the list; when a failure is known and accepted, add the line the
+  gate prints to the group with its cause, or a new group with a reason and the
+  ticket that fixes it. Delete entries as they pass.
 - Consumers: `components` SCSS uses the CSS variables; some runtime helpers
   (e.g. `useDesignTokens`, categorical chart colors) read `json-runtime`.
