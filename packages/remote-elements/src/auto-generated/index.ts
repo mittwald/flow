@@ -2,6 +2,7 @@
 /* This file is auto-generated with the remote-components-generator */
 export * from "./RemoteAccentBoxElement";
 export * from "./RemoteAccordionElement";
+export * from "./RemoteAccordionGroupElement";
 export * from "./RemoteActionGroupElement";
 export * from "./RemoteAlertElement";
 export * from "./RemoteAlertBadgeElement";
