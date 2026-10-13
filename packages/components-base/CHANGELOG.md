@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.7](https://github.com/mittwald/flow/compare/1.5.7...1.6.0-next.7) (2026-10-13)
+
+## [1.6.0-next.6](https://github.com/mittwald/flow/compare/1.5.6...1.6.0-next.6) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.6 ([57e6b5f](https://github.com/mittwald/flow/commit/57e6b5f819583776a48636c85b2a83992b4c6427))
+
+## [1.6.0-next.5](https://github.com/mittwald/flow/compare/1.5.5...1.6.0-next.5) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.5 ([7401505](https://github.com/mittwald/flow/commit/740150500bab2cd36aa92f13894892e4629f8f7c))
+
+## [1.6.0-next.4](https://github.com/mittwald/flow/compare/1.6.0-next.3...1.6.0-next.4) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.4 ([1ad9506](https://github.com/mittwald/flow/commit/1ad95068b7a0c3bed3bee7409698063c0699c101))
+
+## [1.6.0-next.3](https://github.com/mittwald/flow/compare/1.5.3...1.6.0-next.3) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.3 ([d899451](https://github.com/mittwald/flow/commit/d89945117ece0dc0a3ba3aca063be43231b9138a))
+
+## [1.6.0-next.2](https://github.com/mittwald/flow/compare/1.5.2...1.6.0-next.2) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.2 ([7176262](https://github.com/mittwald/flow/commit/7176262a022447c9bdee94a504c96eb7bfdad930))
+
+## [1.6.0-next.1](https://github.com/mittwald/flow/compare/1.5.1...1.6.0-next.1) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.1 ([67830b8](https://github.com/mittwald/flow/commit/67830b8196b5ad65282a921e055005a984cafb24))
+
+## [1.6.0-next.0](https://github.com/mittwald/flow/compare/1.5.0...1.6.0-next.0) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.0 ([4d4ae35](https://github.com/mittwald/flow/commit/4d4ae3528f61e94bce048c1a0ad4701092838e5b))
+
 ## [1.6.0-next.6](https://github.com/mittwald/flow/compare/1.6.0-next.5...1.6.0-next.6) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-components-base
