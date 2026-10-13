@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.14](https://github.com/mittwald/flow/compare/1.5.13...1.5.14) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 ## [1.5.13](https://github.com/mittwald/flow/compare/1.5.12...1.5.13) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
