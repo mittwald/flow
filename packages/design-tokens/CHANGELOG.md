@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.3](https://github.com/mittwald/flow/compare/1.6.0-next.2...1.6.0-next.3) (2026-10-13)
+
+### Styles
+
+* **design-tokens:** add grain texture token ([2492fa6](https://github.com/mittwald/flow/commit/2492fa6087bdf6fd1cf3df42b846f4f088fbf13e)), closes [#0d101a](https://github.com/mittwald/flow/issues/0d101a) [#354176](https://github.com/mittwald/flow/issues/354176)
+
+## [1.5.2](https://github.com/mittwald/flow/compare/1.6.0-next.1...1.5.2) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.2 ([f1c6fa2](https://github.com/mittwald/flow/commit/f1c6fa228ea0a7da7c97ac593e6edcb09b8f151f))
+
 ## [1.6.0-next.2](https://github.com/mittwald/flow/compare/1.6.0-next.1...1.6.0-next.2) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
