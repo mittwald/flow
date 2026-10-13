@@ -56,7 +56,7 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
           {country.name}
         </OptionView>
       ));
-  }, [stringFormatter]);
+  }, [stringFormatter, filterBy, sortBy]);
 };
 
 export default CountryOptions;
