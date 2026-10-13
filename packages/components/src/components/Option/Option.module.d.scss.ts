@@ -4,7 +4,6 @@ declare const classNames: {
   readonly icon: "icon";
   readonly checkMark: "checkMark";
   readonly controlIcon: "controlIcon";
-  readonly ariaDisabled: "ariaDisabled";
   readonly avatar: "avatar";
   readonly content: "content";
 };
