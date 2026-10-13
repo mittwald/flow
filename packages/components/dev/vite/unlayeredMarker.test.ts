@@ -33,6 +33,15 @@ describe("unlayered marker plugin", () => {
     );
   });
 
+  test("drops revert-layer declarations, which would discard every author style unlayered", async () => {
+    const result = await process(
+      "@layer flow.unlayered { :global(.fa) { width: revert-layer; padding: 2px; } }",
+    );
+
+    expect(result.css).not.toContain("revert-layer");
+    expect(result.css).toContain("padding: 2px");
+  });
+
   test("keeps other layers untouched", async () => {
     const css = "@layer flow.components { .codeEditor { color: red; } }";
     const result = await process(css);

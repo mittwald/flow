@@ -344,6 +344,28 @@ if ("action" in props) {
 | `*.test.ts(x)` (unit)                      | Pure logic in `src/lib/` or component utility functions.                                                                                                                                 |
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
 
+A bug fix gets a regression test when it changes behavior this table covers, or
+rendered output the visual suite covers
+(`packages/remote-react-components/src/tests/visual`, see Definition of Done
+item 4 in the
+[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md#definition-of-done--component-work))
+— not by default. Leave out:
+
+- **Wiring of a single prop** — "the consumer `className` reaches the root",
+  "`aria-label` is forwarded". A test for one prop is arbitrary: every other
+  prop would need the same. A whole class of wiring bugs (`className` merge
+  order, a props spread) belongs in a lint rule or a shared contract helper like
+  `testFormFieldContract`.
+- **A spy on a function prop the component consumes** — `sortBy`, `filterBy`, a
+  formatter. Assert the result it produces, not that it ran. `on*` event props
+  are the exception: the call is what the consumer observes, so a spy is the
+  assertion.
+- **Tests that pass without the fix.** Revert the fix and watch the test fail
+  before committing it. If it cannot fail, it guards nothing; say in the PR how
+  you verified the fix instead. The `optimizeDeps` entry under
+  [Common failures](https://github.com/mittwald/flow/blob/main/AGENTS.md#common-failures)
+  in the root AGENTS.md shows one way a test passes in both directions.
+
 Run: `pnpm nx test:unit components`,
 `pnpm nx test:browser components --browser.name=webkit`. The browser targets
 install the Playwright browsers for you **locally**; `pnpm test:browser:prepare`

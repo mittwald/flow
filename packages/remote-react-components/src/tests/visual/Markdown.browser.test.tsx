@@ -22,7 +22,7 @@ test.each(testEnvironments)(
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Markdown color={color}>
                 {"## Heading 2\n" +
-                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](#)."}
+                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](https://example.com)."}
               </Markdown>
             </AccentBox>
           </Wrap>
@@ -61,5 +61,23 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Markdown content");
+  },
+);
+
+test.each(testEnvironments)(
+  "Markdown split ordered list (%s)",
+  async ({ testScreenshot, render, components: { Markdown } }) => {
+    await render(
+      <Markdown>
+        {"1. Destroy the shield generator\n\n" +
+          "Endor hosts the generator.\n\n" +
+          "2. Lure the fleet into a trap\n\n" +
+          "The Emperor expects the attack.\n\n" +
+          "3. Fly into the Death Star\n" +
+          "4. Hit the main reactor"}
+      </Markdown>,
+    );
+
+    await testScreenshot("Markdown split ordered list");
   },
 );

@@ -232,15 +232,17 @@ StyleDictionary.registerFormat({
 
 const htmlAttribute = "data-theme";
 
-// Semantic is the only tier that switches with the theme (ADR 0007), so it is
-// all the per-theme files carry; every other tier is emitted once in `base`.
-const isSemantic = (token) => colorTier(token.filePath) === "semantic";
+// Semantic is the only color tier that switches with the theme (ADR 0007);
+// with the `texture` tokens it is all the per-theme files carry. Every other
+// token is emitted once in `base`.
+const isThemed = (token) =>
+  colorTier(token.filePath) === "semantic" || token.path[0] === "texture";
 
 const configVariants = [
   {
     source: "src/**/!(*.dark).yml",
     destination: "base",
-    filter: (token) => !isSemantic(token),
+    filter: (token) => !isThemed(token),
     options: { warnings: "disabled" },
   },
   {
@@ -254,28 +256,28 @@ const configVariants = [
   {
     source: "src/**/!(*.light).yml",
     destination: "colors-dark-system",
-    filter: isSemantic,
+    filter: isThemed,
     options: { warnings: "disabled" },
     cssSelector: `:root:not([${htmlAttribute}]), :root[${htmlAttribute}='system']`,
   },
   {
     source: "src/**/!(*.dark).yml",
     destination: "colors-light-system",
-    filter: isSemantic,
+    filter: isThemed,
     options: { warnings: "disabled" },
     cssSelector: `:root:not([${htmlAttribute}]), :root[${htmlAttribute}='system']`,
   },
   {
     source: "src/**/!(*.light).yml",
     destination: "colors-dark",
-    filter: isSemantic,
+    filter: isThemed,
     options: { warnings: "disabled" },
     cssSelector: `:root[${htmlAttribute}='dark']`,
   },
   {
     source: "src/**/!(*.dark).yml",
     destination: "colors-light",
-    filter: isSemantic,
+    filter: isThemed,
     options: { warnings: "disabled" },
     cssSelector: `:root[${htmlAttribute}='light']`,
   },

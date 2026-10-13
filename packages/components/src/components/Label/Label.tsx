@@ -78,12 +78,6 @@ export const Label = flowComponent("Label", (props) => {
       tunnel: rightTunnel,
       size: "s",
     },
-    Action: {
-      tunnel: rightTunnel,
-      Button: {
-        tunnel: null,
-      },
-    },
   };
 
   return (
