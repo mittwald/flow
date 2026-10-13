@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** keep the consumer className on TimeField, SkeletonText and ContextMenu ([#3469](https://github.com/mittwald/flow/issues/3469)) ([3fee1b4](https://github.com/mittwald/flow/commit/3fee1b41b255c82068e8caebf262d833d94e2d6c))
+* **Markdown:** continue ordered list numbering across split lists ([#3474](https://github.com/mittwald/flow/issues/3474)) ([97737bc](https://github.com/mittwald/flow/commit/97737bc03b9aec121414a7615faee3499a8a000c))
+
 ## [1.5.4](https://github.com/mittwald/flow/compare/1.5.3...1.5.4) (2026-10-13)
 
 ### Bug Fixes
