@@ -9,5 +9,7 @@ declare const classNames: {
   readonly "mode-editor": "mode-editor";
   readonly "mode-preview": "mode-preview";
   readonly dropTarget: "dropTarget";
+  readonly skeleton: "skeleton";
+  readonly skeletonSurface: "skeletonSurface";
 };
 export default classNames;

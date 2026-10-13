@@ -2,6 +2,7 @@
 /* This file is auto-generated with the remote-components-generator */
 export * from "./RemoteAccentBoxElement";
 export * from "./RemoteAccordionElement";
+export * from "./RemoteAccordionGroupElement";
 export * from "./RemoteActionGroupElement";
 export * from "./RemoteAlertElement";
 export * from "./RemoteAlertBadgeElement";
@@ -110,6 +111,7 @@ export * from "./RemoteSegmentedControlElement";
 export * from "./RemoteSelectElement";
 export * from "./RemoteSeparatorElement";
 export * from "./RemoteSkeletonElement";
+export * from "./RemoteSkeletonModeElement";
 export * from "./RemoteSkeletonTextElement";
 export * from "./RemoteSliderElement";
 export * from "./RemoteSwitchElement";

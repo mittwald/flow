@@ -1,43 +1,26 @@
-import type { PropertyRecord } from "@/components/List/model/types";
-import type { FilterMode } from "@/components/List/model/filter/types";
+import type {
+  ListAsyncDataLoader,
+  ListData,
+  ListDataLoaderOptions,
+  ListDataLoaderResult,
+} from "@mittwald/flow-components-base";
 import type { AsyncResource } from "@mittwald/react-use-promise";
-import type { SearchValue } from "@/components/List/model/search/types";
 import type { DependencyList } from "react";
 
-type DataLoaderSortOptions<T> = PropertyRecord<T, "asc" | "desc">;
-
-type DataLoaderFilterOptions<T> = PropertyRecord<
-  T,
-  { mode: FilterMode; values: unknown[] }
->;
-
-interface DataLoaderPaginationOptions {
-  offset: number;
-  limit: number;
-}
-
-export interface DataLoaderOptions<T> {
-  sorting?: DataLoaderSortOptions<T>;
-  filtering?: DataLoaderFilterOptions<T>;
-  searchString?: SearchValue;
-  pagination?: DataLoaderPaginationOptions;
-}
-
-export type ListData<T> = readonly T[];
-
-export interface DataLoaderResult<T> {
-  data: ListData<T>;
-  itemTotalCount?: number;
-  metadata?: unknown;
-}
+/*
+ * The loader contract is a consumer-facing API and identical in every binding,
+ * so it lives in the shared model — aliased, not re-exported, because a
+ * re-export does not bring the names into this file's scope.
+ */
+export type DataLoaderOptions<T> = ListDataLoaderOptions<T>;
+export type DataLoaderResult<T> = ListDataLoaderResult<T>;
+export type { ListData };
 
 export type HooksDataLoader<T> = (
   options: DataLoaderOptions<T>,
 ) => DataLoaderResult<T>;
 
-export type AsyncDataLoader<T> = (
-  options: DataLoaderOptions<T>,
-) => Promise<DataLoaderResult<T>>;
+export type AsyncDataLoader<T> = ListAsyncDataLoader<T>;
 
 export type AsyncResourceFactory<T> = (
   options?: DataLoaderOptions<T>,

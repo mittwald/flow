@@ -9,6 +9,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import labelStyles from "@/components/Label/Label.module.scss";
 import { useObjectRef } from "react-aria";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface SwitchProps
   extends
@@ -45,6 +46,7 @@ export const Switch = flowComponent("Switch", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "Switch");
 
   const propsContext: PropsContext = {
@@ -57,7 +59,7 @@ export const Switch = flowComponent("Switch", (props) => {
   };
 
   return (
-    <div className={wrapperProps.className}>
+    <div {...skeletonProps} className={wrapperProps.className}>
       <FieldErrorCaptureContext>
         <Aria.Switch
           {...rest}
@@ -72,7 +74,9 @@ export const Switch = flowComponent("Switch", (props) => {
                   {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
                 </div>
               </div>
-              <div className={labelStyles.label}>{children}</div>
+              <div className={labelStyles.label}>
+                <SkeletonRawText>{children}</SkeletonRawText>
+              </div>
             </PropsContextProvider>
           )}
         </Aria.Switch>

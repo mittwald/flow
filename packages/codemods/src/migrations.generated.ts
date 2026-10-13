@@ -7,6 +7,16 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "accordion-variant-deprecated",
+    since: "1.5.0",
+    title: "Accordion: `variant` deprecated",
+    kind: "deprecation",
+    action: "codemod",
+    remotePackage: true,
+    apply:
+      'Remove the `variant` prop from every `Accordion` — a codemod does it. Then check where `variant="outline"` was used: where several accordions stand directly below each other, wrap them in an `AccordionGroup`, which draws separators between them; where a single accordion needs to stand apart from the surrounding content, place it in a `LayoutCard`. That part is not mechanically decidable.',
+  },
+  {
     id: "image-rounded-corners-default",
     since: "1.4.0",
     title:

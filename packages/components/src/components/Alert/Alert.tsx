@@ -7,6 +7,7 @@ import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Alert.module.scss";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface AlertProps
   extends
@@ -18,7 +19,14 @@ export interface AlertProps
 export const Alert = flowComponent("Alert", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.alert, styles[status], className);
+  const isSkeleton = useSkeletonMode();
+
+  const rootClassName = clsx(
+    styles.alert,
+    styles[status],
+    isSkeleton && styles.skeleton,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Heading: {

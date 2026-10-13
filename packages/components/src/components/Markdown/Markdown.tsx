@@ -4,7 +4,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, ReactNode, Ref } from "react";
+import type { CSSProperties, FC, Ref } from "react";
 import { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
@@ -15,6 +15,11 @@ import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
 import type { CodeEditorLanguage } from "@/components/CodeEditor/languages";
+import {
+  SkeletonBlockText,
+  SkeletonInlineContent,
+} from "@/components/Markdown/components/SkeletonBlocks";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
@@ -53,6 +58,8 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     urlTransform,
     ...rest
   } = props;
+
+  const isSkeleton = useSkeletonMode();
 
   const defaultComponents: Components = {
     a: (props) => (
@@ -138,20 +145,39 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         />
       );
     },
-    ul: (props) => (
-      <Text color={color}>
-        <ul>{props.children as ReactNode}</ul>
-      </Text>
+    ul: ({ node: ignoredNode, ...props }) => (
+      <SkeletonBlockText color={color}>
+        <ul {...props} />
+      </SkeletonBlockText>
     ),
-    ol: (props) => (
-      <Text color={color}>
-        <ol>{props.children as ReactNode}</ol>
-      </Text>
+    ol: ({ node: ignoredNode, ...props }) => (
+      <SkeletonBlockText color={color}>
+        <ol {...props} />
+      </SkeletonBlockText>
     ),
+    li: ({ node: ignoredNode, children, ...props }) => (
+      <li {...props}>
+        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+      </li>
+    ),
+    th: ({ node: ignoredNode, children, ...props }) => (
+      <th {...props}>
+        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+      </th>
+    ),
+    td: ({ node: ignoredNode, children, ...props }) => (
+      <td {...props}>
+        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+      </td>
+    ),
+    /* A text bar resets the mode for its content, so the image reads it
+       from here. A skeleton issues no request. */
+    img: ({ node: ignoredNode, ...props }) =>
+      isSkeleton ? null : <img {...props} />,
     blockquote: (props) => (
-      <Text color={color}>
+      <SkeletonBlockText color={color}>
         <blockquote>{props.children}</blockquote>
-      </Text>
+      </SkeletonBlockText>
     ),
   };
 

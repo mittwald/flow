@@ -76,3 +76,17 @@ test("pressing the overflow reports it", async () => {
 
   expect(onCountPress).toHaveBeenCalledTimes(1);
 });
+
+test("the overflow names the count without a press handler", async () => {
+  await renderStack({ totalCount: 7 });
+
+  await expect.element(page.getByRole("img", { name: "5 more" })).toBeVisible();
+});
+
+test("the overflow button is named by the count", async () => {
+  await renderStack({ totalCount: 7, onCountPress: vi.fn() });
+
+  await expect
+    .element(page.getByRole("button", { name: "5 more" }))
+    .toBeVisible();
+});
