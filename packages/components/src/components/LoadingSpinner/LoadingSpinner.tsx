@@ -6,6 +6,8 @@ import clsx from "clsx";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
 import { useReducedMotion } from "framer-motion";
 import { useDesignTokens } from "@/lib/theming";
+import { SkeletonIconSurface } from "@/components/SkeletonMode/components/SkeletonIconSurface";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface LoadingSpinnerProps extends IconProps {
   /** The color of the loading spinner. @default "default" */
@@ -19,6 +21,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
   const { className, color = "default", ...rest } = props;
 
   const preferReducedMotion = useReducedMotion();
+  const isSkeleton = useSkeletonMode();
 
   const designTokens = useDesignTokens();
   const loadingSpinnerTokens = designTokens["loading-spinner"];
@@ -32,6 +35,15 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     isAlphaColor(color) && styles[color],
     className,
   );
+
+  /* A round surface in the spinner's size, without the spinning. */
+  if (isSkeleton) {
+    return (
+      <SkeletonIconSurface className={className}>
+        <IconPending {...rest} />
+      </SkeletonIconSurface>
+    );
+  }
 
   return (
     <IconPending

@@ -41,6 +41,10 @@ export interface FlexProps
   wrap?: CSSProperties["flexWrap"];
   /** The padding of the element. */
   padding?: "xs" | "s" | "m" | "l" | "xl";
+  /** The padding top and bottom of the element. Takes precedence over `padding`. */
+  paddingBlock?: "xs" | "s" | "m" | "l" | "xl";
+  /** The padding left and right of the element. Takes precedence over `padding`. */
+  paddingInline?: "xs" | "s" | "m" | "l" | "xl";
   /** The padding top of the element. */
   paddingTop?: "xs" | "s" | "m" | "l" | "xl";
   /** The padding bottom of the element. */
@@ -70,6 +74,8 @@ export const Flex: FC<FlexProps> = (props) => {
     grow,
     wrap = "nowrap",
     padding,
+    paddingBlock,
+    paddingInline,
     paddingTop,
     paddingBottom,
     paddingLeft,
@@ -80,10 +86,10 @@ export const Flex: FC<FlexProps> = (props) => {
 
   const columnGapSize = columnGap ?? gap;
   const rowGapSize = rowGap ?? gap;
-  const paddingTopSize = paddingTop ?? padding;
-  const paddingBottomSize = paddingBottom ?? padding;
-  const paddingLeftSize = paddingLeft ?? padding;
-  const paddingRightSize = paddingRight ?? padding;
+  const paddingTopSize = paddingTop ?? paddingBlock ?? padding;
+  const paddingBottomSize = paddingBottom ?? paddingBlock ?? padding;
+  const paddingLeftSize = paddingLeft ?? paddingInline ?? padding;
+  const paddingRightSize = paddingRight ?? paddingInline ?? padding;
 
   const rootClassName = clsx(
     styles.flex,

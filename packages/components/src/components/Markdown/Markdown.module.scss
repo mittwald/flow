@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .markdown {
   display: flex;
   flex-direction: column;
@@ -53,4 +55,10 @@
     }
   }
   // stylelint-enable selector-max-type
+}
+
+/* SkeletonMode: a list or quote whose items became bars. The bullets take the
+   bar color, so no real glyph shows. */
+.skeletonBlock ::marker {
+  color: skeleton.$background-color;
 }

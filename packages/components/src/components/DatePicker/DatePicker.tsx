@@ -22,7 +22,7 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
 /** @flr-generate all */
 export const DatePicker = flowComponent("DatePicker", (props) => {
   // `null` is what react-aria's date picker state uses for "no date"
-  const { children, className, onChange, ref, ...rest } =
+  const { children, className, onChange, onOpenChange, ref, ...rest } =
     useControlledHostValueProps(props, null);
 
   const popoverController = useOverlayController("Popover", {
@@ -34,6 +34,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "DatePicker");
 
   const rootClassName = clsx(wrapperProps.className, className);
@@ -42,6 +43,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
     <Aria.DatePicker
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
@@ -61,6 +63,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
           placement="bottom end"
           isDialogContent
           controller={popoverController}
+          onOpenChange={onOpenChange}
         >
           <Calendar className={styles.calendar} />
         </Popover>

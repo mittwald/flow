@@ -28,4 +28,8 @@
     padding-block: initial;
     outline-offset: calc(var(--size-px--xxxs) * -1);
   }
+
+  /* Skeleton: the buttons are siblings of the input, so the container is the
+     surface that hides them */
+  @include formControl.formSkeleton;
 }

@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .initials {
   display: flex;
   font-weight: var(--initials--font-weight);
@@ -13,4 +15,12 @@
   *:only-child {
     color: var(--content-color);
   }
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+  }
 }
+
+@include skeleton.keyframes;

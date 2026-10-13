@@ -7,5 +7,6 @@ declare const classNames: {
   readonly contextualHelpTriggerButton: "contextualHelpTriggerButton";
   readonly copyButton: "copyButton";
   readonly icon: "icon";
+  readonly kbd: "kbd";
 };
 export default classNames;

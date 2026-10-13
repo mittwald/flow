@@ -73,6 +73,14 @@ export const WithUnit: Story = {
   ),
 };
 
+export const WithCustomUnit: Story = {
+  render: (props) => (
+    <NumberField {...props} unit="MiB" defaultValue={512}>
+      <Label>Storage</Label>
+    </NumberField>
+  ),
+};
+
 export const WithContextualHelp: Story = {
   render: (props) => (
     <NumberField {...props} minValue={5} maxValue={10}>

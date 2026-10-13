@@ -3,5 +3,6 @@ declare const classNames: {
   readonly soft: "soft";
   readonly plain: "plain";
   readonly disabled: "disabled";
+  readonly skeleton: "skeleton";
 };
 export default classNames;
