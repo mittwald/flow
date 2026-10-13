@@ -10,6 +10,7 @@ import {
   useKeepBrowserExtensionsInteractive,
 } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
 import { useIsActivityActive } from "@/components/Activity/context";
+import { SectionHeadingReset } from "@/components/Section/context";
 
 const overlayContainerAttribute = "data-flow-overlays";
 
@@ -164,7 +165,7 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
           <Aria.Modal>
             <Suspense fallback={<Fallback />}>
               <Aria.Dialog aria-labelledby={ariaLabelledBy}>
-                {children}
+                <SectionHeadingReset>{children}</SectionHeadingReset>
               </Aria.Dialog>
             </Suspense>
           </Aria.Modal>

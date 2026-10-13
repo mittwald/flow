@@ -4,7 +4,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, ReactNode, Ref } from "react";
+import type { CSSProperties, FC, Ref } from "react";
 import { Children, isValidElement, useId } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
@@ -164,14 +164,14 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         />
       );
     },
-    ul: (props) => (
+    ul: ({ node: ignoredNode, ...props }) => (
       <SkeletonBlockText color={color}>
-        <ul>{props.children as ReactNode}</ul>
+        <ul {...props} />
       </SkeletonBlockText>
     ),
-    ol: (props) => (
+    ol: ({ node: ignoredNode, ...props }) => (
       <SkeletonBlockText color={color}>
-        <ol>{props.children as ReactNode}</ol>
+        <ol {...props} />
       </SkeletonBlockText>
     ),
     li: ({ node: ignoredNode, children, ...props }) => (

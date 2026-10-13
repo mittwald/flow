@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.11](https://github.com/mittwald/flow/compare/1.5.10...1.5.11) (2026-10-13)
+
+### Bug Fixes
+
+* **CartesianChart:** fit a category y-axis to its longest label ([#3483](https://github.com/mittwald/flow/issues/3483)) ([804b5b7](https://github.com/mittwald/flow/commit/804b5b7c38c77fd84c6c59c99ed5665c58810e6f))
+
+## [1.5.10](https://github.com/mittwald/flow/compare/1.5.9...1.5.10) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** label a remote list by its section heading ([#3475](https://github.com/mittwald/flow/issues/3475)) ([5035577](https://github.com/mittwald/flow/commit/5035577b175b8783119f34e0fe3075964f9d4d1d))
+
+## [1.5.9](https://github.com/mittwald/flow/compare/1.5.8...1.5.9) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** call the consumer&#x27;s onOpenChange on ComboBox, DatePicker and DateRangePicker ([#3472](https://github.com/mittwald/flow/issues/3472)) ([4da0c23](https://github.com/mittwald/flow/commit/4da0c233cf1b91a404f3736ff1bd408ed0a191da))
+
+## [1.5.8](https://github.com/mittwald/flow/compare/1.5.7...1.5.8) (2026-10-13)
+
+### Bug Fixes
+
+* **CartesianChart:** keep rendering a non-element emptyView ([#3473](https://github.com/mittwald/flow/issues/3473)) ([49ac4f4](https://github.com/mittwald/flow/commit/49ac4f4ccfd187c97d70e6613c0463bd266f5cd1))
+
+## [1.5.7](https://github.com/mittwald/flow/compare/1.5.6...1.5.7) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** apply the reduced-motion reset to ::before and ::after ([#3484](https://github.com/mittwald/flow/issues/3484)) ([f439552](https://github.com/mittwald/flow/commit/f439552a86c662e426bf070103d3e34ce82e0f06))
+
+## [1.5.6](https://github.com/mittwald/flow/compare/1.5.5...1.5.6) (2026-10-13)
+
+### Bug Fixes
+
+* **Section:** call useId before the early returns ([#3470](https://github.com/mittwald/flow/issues/3470)) ([e7d81e0](https://github.com/mittwald/flow/commit/e7d81e0650053cd876bdb30a89fc1507c7d5ec01))
+
+## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** keep the consumer className on TimeField, SkeletonText and ContextMenu ([#3469](https://github.com/mittwald/flow/issues/3469)) ([3fee1b4](https://github.com/mittwald/flow/commit/3fee1b41b255c82068e8caebf262d833d94e2d6c))
+* **Markdown:** continue ordered list numbering across split lists ([#3474](https://github.com/mittwald/flow/issues/3474)) ([97737bc](https://github.com/mittwald/flow/commit/97737bc03b9aec121414a7615faee3499a8a000c))
+
+## [1.5.4](https://github.com/mittwald/flow/compare/1.5.3...1.5.4) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** add missing accessible names in Tabs, List filters and AvatarStack ([#3468](https://github.com/mittwald/flow/issues/3468)) ([e92fdd7](https://github.com/mittwald/flow/commit/e92fdd7d17baf24b65dd0b6f5d2d5d44ef288807))
+
 ## [1.5.3](https://github.com/mittwald/flow/compare/1.5.2...1.5.3) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

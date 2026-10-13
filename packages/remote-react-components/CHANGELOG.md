@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.11](https://github.com/mittwald/flow/compare/1.5.10...1.5.11) (2026-10-13)
+
+### Bug Fixes
+
+* **CartesianChart:** fit a category y-axis to its longest label ([#3483](https://github.com/mittwald/flow/issues/3483)) ([804b5b7](https://github.com/mittwald/flow/commit/804b5b7c38c77fd84c6c59c99ed5665c58810e6f))
+
+## [1.5.10](https://github.com/mittwald/flow/compare/1.5.9...1.5.10) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** label a remote list by its section heading ([#3475](https://github.com/mittwald/flow/issues/3475)) ([5035577](https://github.com/mittwald/flow/commit/5035577b175b8783119f34e0fe3075964f9d4d1d))
+
+## [1.5.9](https://github.com/mittwald/flow/compare/1.5.8...1.5.9) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.8](https://github.com/mittwald/flow/compare/1.5.7...1.5.8) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.7](https://github.com/mittwald/flow/compare/1.5.6...1.5.7) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.6](https://github.com/mittwald/flow/compare/1.5.5...1.5.6) (2026-10-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.5](https://github.com/mittwald/flow/compare/1.5.4...1.5.5) (2026-10-13)
+
+### Bug Fixes
+
+* **Markdown:** continue ordered list numbering across split lists ([#3474](https://github.com/mittwald/flow/issues/3474)) ([97737bc](https://github.com/mittwald/flow/commit/97737bc03b9aec121414a7615faee3499a8a000c))
+
+## [1.5.4](https://github.com/mittwald/flow/compare/1.5.3...1.5.4) (2026-10-13)
+
+### Tests
+
+* **remote-react-components:** regenerate firefox-darwin baselines ([3ef6bd6](https://github.com/mittwald/flow/commit/3ef6bd64052eb24ce2bc3736f145458f6c8a6d54)), closes [#3303](https://github.com/mittwald/flow/issues/3303)
+
 ## [1.5.3](https://github.com/mittwald/flow/compare/1.5.2...1.5.3) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

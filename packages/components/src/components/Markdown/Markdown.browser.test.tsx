@@ -124,3 +124,34 @@ test("a table is rendered", async () => {
   await expect.element(page.getByRole("table")).toBeInTheDocument();
   await expect.element(page.getByText("X-Wing")).toBeVisible();
 });
+
+/*
+ * A paragraph that is not indented under its item ends the list, so the parser
+ * emits one <ol> per part and carries the numbering over through `start`.
+ */
+test("a list split by a paragraph continues its numbering", async () => {
+  await renderMarkdown(
+    "1. First item\n\n" +
+      "Explanation for the first item.\n\n" +
+      "2. Second item\n\n" +
+      "Explanation for the second item.\n\n" +
+      "3. Third item\n" +
+      "4. Fourth item",
+  );
+
+  await expect.element(page.getByText("Fourth item")).toBeVisible();
+  const lists = Array.from(document.querySelectorAll("ol"));
+
+  expect(lists.map((list) => list.start)).toEqual([1, 2, 3]);
+  expect(lists.some((list) => list.hasAttribute("node"))).toBe(false);
+});
+
+test("a task list keeps the class remark-gfm gives it", async () => {
+  await renderMarkdown("- [x] Steal the plans\n- [ ] Destroy the Death Star");
+
+  await expect.element(page.getByText("Steal the plans")).toBeVisible();
+  const list = document.querySelector("ul");
+
+  expect(list?.classList.contains("contains-task-list")).toBe(true);
+  expect(list?.hasAttribute("node")).toBe(false);
+});

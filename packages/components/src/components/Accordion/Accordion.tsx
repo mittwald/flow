@@ -15,6 +15,7 @@ import {
   AccordionGroupContext,
   useAccordionGroupContext,
 } from "@/components/AccordionGroup/context";
+import { SectionHeadingReset } from "@/components/Section/context";
 
 export interface AccordionProps extends PropsWithChildren<
   ComponentProps<"div">
@@ -176,17 +177,19 @@ export const Accordion: FC<AccordionProps> = flowComponent(
 
     return (
       <div {...rest} id={id} className={rootClassName}>
-        <TriggerContext value={triggerProps}>
-          <PropsContextProvider props={propsContext}>
-            {children}
-            <div {...panelProps} ref={panelRef} className={styles.content}>
-              {/* An accordion inside the content is not part of this group. */}
-              <AccordionGroupContext value={null}>
-                <UiComponentTunnelExit id="content" component="Accordion" />
-              </AccordionGroupContext>
-            </div>
-          </PropsContextProvider>
-        </TriggerContext>
+        <SectionHeadingReset>
+          <TriggerContext value={triggerProps}>
+            <PropsContextProvider props={propsContext}>
+              {children}
+              <div {...panelProps} ref={panelRef} className={styles.content}>
+                {/* An accordion inside the content is not part of this group. */}
+                <AccordionGroupContext value={null}>
+                  <UiComponentTunnelExit id="content" component="Accordion" />
+                </AccordionGroupContext>
+              </div>
+            </PropsContextProvider>
+          </TriggerContext>
+        </SectionHeadingReset>
       </div>
     );
   },

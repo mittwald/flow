@@ -8,6 +8,7 @@ import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Alert.module.scss";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { SectionHeadingReset } from "@/components/Section/context";
 
 export interface AlertProps
   extends
@@ -54,9 +55,11 @@ export const Alert = flowComponent("Alert", (props) => {
 
   return (
     <aside {...rest} className={rootClassName} ref={ref}>
-      <PropsContextProvider props={propsContext} dependencies={[status]}>
-        {children}
-      </PropsContextProvider>
+      <SectionHeadingReset>
+        <PropsContextProvider props={propsContext} dependencies={[status]}>
+          {children}
+        </PropsContextProvider>
+      </SectionHeadingReset>
     </aside>
   );
 });
