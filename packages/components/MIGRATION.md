@@ -30,7 +30,7 @@ The CLI's own output does detect it and prints the right form.
 
 <a id="color-tokens-brand-theme-neutral"></a>
 
-## Color tokens: Brand variables no longer switch with the theme
+## Color tokens: a new Brand palette that no longer switches with the theme
 
 **Since `1.5.0`** · migration · manual change
 
@@ -40,12 +40,19 @@ The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
 Only Semantic switches between light and dark. Brand is theme-neutral: one value
 per token, the light one.
 
-Flow's own components render exactly as before. What changes is code outside
-Flow that reads Brand variables (`--color--…`) directly:
+Brand now holds the new mittwald brand palette (`mittwald-blue`, `-navy`,
+`-green`, `-lilac`, `-orange`, `-neutral`, `system-danger`, `-warning`,
+`-success`; hue ramps with 19 steps, alpha ramps with 10). Flow's own components
+pick it up through Semantic. What breaks is code outside Flow that reads Brand
+variables (`--color--…`) directly:
 
-- **`--color--<ramp>--N` no longer inverts in dark.** `var(--color--gray--100)`
-  is white in both themes now, where it used to be near-black in dark. Nothing
-  fails — the color is just wrong in dark.
+- **The old palettes are removed.** `--color--gray--N`,
+  `--color--hosting-blue--N`, `--color--soft-contrast-violet--N`,
+  `--color--bright-lilac--N` and `--color--super-teal--N` no longer exist;
+  `--color--mittwald-navy--N` and the alpha ramps carry new values and steps.
+  Nothing fails — the declaration is just dropped or the color is different.
+- **Brand no longer inverts in dark.** A remaining `--color--<ramp>--N` keeps
+  its light value in both themes.
 - **Some variables moved to Semantic** and their old names are gone:
 
 | Before                           | After                          |
@@ -78,15 +85,21 @@ moved variables by name — `--color--categorical--X` → `--categorical--color-
 `--color--background-gradient` → `--background-gradient--color`,
 `--color--static-black-alpha--N` → `--dark-static--color--N`,
 `--color--static-white-alpha--N` → `--light-static--color--N`; JavaScript
-reading `color.categorical` from the token JSON reads `categorical.color`. Every
-other `--color--<ramp>--N` (e.g. `--color--gray--100`,
-`--color--hosting-blue--800`) still exists but keeps its light value in dark —
-replace it with the Semantic variable that carries its meaning, e.g.
-`--neutral--color--N` for gray, `--primary--color--N` for hosting-blue,
-`--danger--`, `--warning--` or `--success--color--N` for the status hues, or a
-Variant variable such as `--primary-solid-background-color--default`. Which one
-fits is not decidable mechanically — decide whether the color is a surface,
-content or status.
+reading `color.categorical` from the token JSON reads `categorical.color`. The
+old palettes are gone — `--color--gray--N`, `--color--hosting-blue--N`,
+`--color--soft-contrast-violet--N`, `--color--bright-lilac--N` and
+`--color--super-teal--N` resolve to nothing, and `--color--mittwald-navy--N`
+holds the new brand values. Replace each with the Semantic variable that carries
+its meaning, e.g. `--neutral--color--N` for gray, `--primary--color--N` for
+hosting-blue, `--decorative-<hue>--color--N` for navy, violet, lilac and teal,
+`--danger--`, `--warning--` or `--success--color--N` for the status hues,
+`--dark--color--N` or `--light--color--N` for `--color--black-alpha--N` or
+`--color--white-alpha--N`, or a Variant variable such as
+`--primary-solid-background-color--default`. Do the same for every remaining
+Brand variable (`--color--mittwald-*`, `--color--system-*`, the alpha and status
+ramps), because Brand keeps its light value in dark. Which one fits is not
+decidable mechanically — decide whether the color is a surface, content or
+status.
 
 ---
 
