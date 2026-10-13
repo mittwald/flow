@@ -51,7 +51,8 @@ const renderElement: RenderFunction = (domProps) =>
  * `onAction`, follows the link and toggles the selection. A mouse release that
  * started outside the item toggles it on pointer up, Enter and Space toggle it
  * on key down. All three handlers are replaced, and like React Aria they stop
- * the event.
+ * the event. A muted submenu trigger still opens its submenu on hover and
+ * ArrowRight, only Enter and Space are swallowed.
  */
 const renderMuted =
   (render: RenderFunction = renderElement): RenderFunction =>
