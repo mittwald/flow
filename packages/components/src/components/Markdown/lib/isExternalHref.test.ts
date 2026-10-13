@@ -18,6 +18,7 @@ describe("isExternalHref()", () => {
     "archive",
     "#objective",
     "?page=2",
+    "https:archive",
     "mailto:rebels@example.com",
     "tel:+49123456",
     "",

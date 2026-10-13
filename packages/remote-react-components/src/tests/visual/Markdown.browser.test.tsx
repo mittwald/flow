@@ -22,7 +22,7 @@ test.each(testEnvironments)(
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Markdown color={color}>
                 {"## Heading 2\n" +
-                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](#)."}
+                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](https://example.com)."}
               </Markdown>
             </AccentBox>
           </Wrap>
