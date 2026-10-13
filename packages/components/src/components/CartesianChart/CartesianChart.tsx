@@ -3,7 +3,6 @@ import {
   type ComponentProps,
   type ComponentType,
   type FC,
-  isValidElement,
   type PropsWithChildren,
   type ReactNode,
   useId,
@@ -29,6 +28,7 @@ import { TypedChartLegend } from "@/components/CartesianChart/components/ChartLe
 import { TypedChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";
 import { TypedLine } from "@/components/CartesianChart/components/Line";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 /** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
@@ -69,6 +69,20 @@ export interface CartesianChartProps<TData = ChartDataValue>
   flexGrow?: boolean;
 }
 
+const reactComponentTypes = [
+  Symbol.for("react.memo"),
+  Symbol.for("react.forward_ref"),
+];
+
+const isEmptyViewComponent = (
+  value: unknown,
+): value is ComponentType<CartesianChartEmptyViewProps> =>
+  typeof value === "function" ||
+  (typeof value === "object" &&
+    value !== null &&
+    "$$typeof" in value &&
+    reactComponentTypes.includes(value.$$typeof as symbol));
+
 /** @flr-generate all */
 export const CartesianChart: FC<CartesianChartProps> = (props) => {
   const {
@@ -91,31 +105,39 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     showEmptyView && styles.emptyView,
     className,
   );
-  const usesDeprecatedEmptyView = !!emptyView && !isValidElement(emptyView);
+  const EmptyViewComponent = isEmptyViewComponent(emptyView)
+    ? emptyView
+    : undefined;
 
-  if (usesDeprecatedEmptyView) {
+  if (EmptyViewComponent) {
     warnDeprecation(
-      "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
+      "Passing a component to the 'emptyView' prop is deprecated and will be removed in a future release. Use 'emptyView={<Element />}' instead.",
     );
   }
-
-  const emptyElement = useMemo(() => {
-    if (isValidElement(emptyView)) {
-      return emptyView;
-    }
-
-    if (!emptyView) {
-      return;
-    }
-
-    return null;
-  }, [emptyView]);
 
   const chartId = useId().replaceAll(/[^\w-]/g, "");
   const contextValue = useMemo(
     () => ({ layout, stackIdPrefix: `${chartId}-` }),
     [layout, chartId],
   );
+
+  const isSkeleton = useSkeletonMode();
+
+  /* No recharts and no svg: one surface in the size the chart would take. */
+  if (isSkeleton) {
+    return (
+      <div
+        className={styles.skeleton}
+        style={{
+          height,
+          aspectRatio: height ? undefined : 3,
+          flex: flexGrow ? 1 : undefined,
+        }}
+        aria-hidden
+        inert
+      />
+    );
+  }
 
   return (
     <CartesianChartContextProvider value={contextValue}>
@@ -141,7 +163,11 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
               {showEmptyView && viewDimensions && (
                 <foreignObject {...viewDimensions}>
                   <DivView className={styles.emptyViewContainer}>
-                    {emptyElement}
+                    {EmptyViewComponent ? (
+                      <EmptyViewComponent data={data} />
+                    ) : (
+                      emptyView
+                    )}
                   </DivView>
                 </foreignObject>
               )}

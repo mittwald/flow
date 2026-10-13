@@ -90,25 +90,50 @@ jobs:
           git config user.email "forward-merge-drift@users.noreply.github.com"
           git checkout -q --detach origin/next
 
-          # stdout is one "Auto-merging" line per file; stderr stays visible.
-          if git merge --no-ff --no-commit origin/main >/dev/null; then
-            if git diff --cached --quiet origin/next; then
-              echo "Merging main into next produces no code delta — no drift."
-              exit 0
+          # Sets PROBE to `none`, `delta` or `conflict` for merging $1 into
+          # `next`. Called outside any conditional so `set -e` stays in force.
+          probe() {
+            # stdout is one "Auto-merging" line per file; stderr stays visible.
+            if git merge --no-ff --no-commit "$1" >/dev/null; then
+              if git diff --cached --quiet origin/next; then
+                PROBE=none
+              else
+                PROBE=delta
+              fi
+            elif [ -n "$(git ls-files --unmerged)" ]; then
+              PROBE=conflict
+            else
+              # Not a conflict: the probe itself broke. Fail the run instead of
+              # reporting drift that nobody measured.
+              echo "::error::git merge failed without a conflict."
+              exit 1
             fi
-            echo "The merge is clean but carries a code delta — next is behind."
-          elif [ -n "$(git ls-files --unmerged)" ]; then
-            echo "The merge conflicts — next is behind, and a human is needed."
-          else
-            # Not a conflict: the probe itself broke. Fail the run instead of
-            # reporting drift that nobody measured.
-            echo "::error::git merge failed without a conflict."
-            exit 1
-          fi
-          git merge --abort >/dev/null 2>&1 || git reset -q --hard origin/next
+            git merge --abort >/dev/null 2>&1 || git reset -q --hard origin/next
+          }
 
-          behind="$(git rev-list --count origin/next..origin/main)"
-          oldest="$(git rev-list origin/next..origin/main | tail -1)"
+          probe origin/main
+          case "$PROBE" in
+            none)
+              echo "Merging main into next produces no code delta — no drift."
+              exit 0 ;;
+            delta) echo "The merge is clean but carries a code delta — next is behind." ;;
+            conflict) echo "The merge conflicts — next is behind, and a human is needed." ;;
+          esac
+
+          # Age the drift from the oldest `main` tip whose merge already changes
+          # `next`, not from the oldest commit `next` lacks. That one is usually
+          # the `chore(release):` bump §6/§7 leaves behind, so it can be a day
+          # old while the drift is seconds old: #3477 escalated 13 s after a
+          # push, on the age of the previous release.
+          tips=()
+          while read -r tip; do tips+=("$tip"); done \
+            < <(git rev-list --reverse --first-parent origin/next..origin/main)
+          for i in "${!tips[@]}"; do
+            probe "${tips[$i]}"
+            [ "$PROBE" = none ] || break
+          done
+          oldest="${tips[$i]}"
+          behind=$(( ${#tips[@]} - i ))
           age_min=$(( ( $(date +%s) - $(git show -s --format=%ct "$oldest") ) / 60 ))
           echo "::warning::next is behind main by ${behind} commit(s); the oldest un-merged commit is ${age_min} minutes old."
 

@@ -2,10 +2,9 @@
 /**
  * Release-figure capture — pure helpers (no IO, no browser, no network).
  *
- * A release figure is a PNG of one or more real Styleguide examples, stacked
- * into a single image and committed under
- * `apps/docs/public/assets/releases/<version>/`. `/prepare-release` references
- * it from the curated notes by its commit-SHA raw URL (#3030).
+ * A release figure is a PNG of exactly one real Styleguide example, committed
+ * under `apps/docs/public/assets/releases/<version>/`. `/prepare-release`
+ * references it from the curated notes by its commit-SHA raw URL (#3030).
  *
  * Everything here exists to make a capture FAIL rather than come out plausible
  * but wrong. That is the whole problem with screenshots: a figure that renders
@@ -39,13 +38,18 @@ const EXAMPLE_ROUTE = "/example-preview";
 /** The source files `/example-preview/` serves, relative to the repo root. */
 export const EXAMPLE_GLOB = "apps/docs/src/content/**/examples/*.tsx";
 
+/** Every figure is captured once per theme. Light comes first. */
+export const FIGURE_THEMES = /** @type {const} */ (["light", "dark"]);
+
+/** @typedef {(typeof FIGURE_THEMES)[number]} FigureTheme */
+
 /**
- * The CSS colors a background may use. Narrow on purpose: the value is
- * interpolated into the composition page's `<style>`, where anything
- * unconstrained could close the block.
+ * The composition page's ground behind the example frame, matching the stage's
+ * `--neutral--color--100`.
+ *
+ * @type {Record<FigureTheme, string>}
  */
-const CSS_COLOR =
-  /^(transparent|#[0-9a-fA-F]{3,8}|(rgb|hsl)a?\([0-9a-zA-Z .,%/-]+\)|[a-zA-Z]+)$/;
+const FIGURE_GROUND = { light: "#ffffff", dark: "#1b1f24" };
 
 export class FigureSpecError extends Error {}
 
@@ -71,7 +75,18 @@ export const examplePathOf = (file) =>
     .replace(/\/examples\/([^/]+)\.tsx$/, "/$1");
 
 /**
- * The URL that renders one panel: the example alone, framed as on its page.
+ * The source file of one example, relative to the repo root — the inverse of
+ * {@link examplePathOf}.
+ *
+ * @param {string} example E.g. `components/x/y/z`
+ * @returns {string} E.g. `apps/docs/src/content/components/x/y/examples/z.tsx`
+ */
+export const exampleSourcePath = (example) =>
+  `apps/docs/src/content/${posix.dirname(example)}/examples/${posix.basename(example)}.tsx`;
+
+/**
+ * The URL that renders the figure's example: the example alone, framed as on
+ * its page.
  *
  * @param {string} baseUrl Running docs dev server, e.g. `http://localhost:3001`
  * @param {string} example
@@ -96,6 +111,37 @@ export const figureOutputPath = (version, name) => {
   );
   return `${FIGURE_ROOT}/${version}/${name}.png`;
 };
+
+/**
+ * The file one theme's capture is written to: the spec's path for light, the
+ * same path with `-dark` before the extension for dark.
+ *
+ * @param {string} out A normalized `.png` path from the spec
+ * @param {FigureTheme} theme
+ * @returns {string}
+ */
+export const themedOutputPath = (out, theme) =>
+  theme === "light" ? out : out.replace(/\.png$/, "-dark.png");
+
+/**
+ * The release-notes snippet for one figure. GitHub picks the `<source>` in dark
+ * mode; the docs site rewrites the block (`themedFigures` in
+ * `apps/docs/src/lib/releases`), because its markdown drops raw HTML.
+ *
+ * `width` is the spec's CSS width, i.e. the capture's scale undone. Without it
+ * GitHub stretches the figure to the full body width. `themedFigures` reads
+ * only `src` and `alt`, so `/releases` ignores it and keeps the figure.
+ *
+ * @param {{ sha: string; out: string; alt: string; width: number }} args
+ * @returns {string}
+ */
+export const figureMarkdown = ({ sha, out, alt, width }) =>
+  [
+    "<picture>",
+    `  <source media="(prefers-color-scheme: dark)" srcset="${rawFigureUrl(sha, themedOutputPath(out, "dark"))}">`,
+    `  <img src="${rawFigureUrl(sha, out)}" alt="${escapeHtml(alt)}" width="${width}">`,
+    "</picture>",
+  ].join("\n");
 
 /**
  * The URL the release notes reference. A commit SHA, never a branch: it
@@ -143,15 +189,14 @@ export const resolveOutputPath = (out) => {
     normalized.endsWith(".png"),
     `spec.out must end in .png — the capture writes PNG bytes, got ${JSON.stringify(out)}`,
   );
+  // Checked on the final path, so it covers a given `out` as well as one
+  // derived from `name`.
+  check(
+    !normalized.endsWith("-dark.png"),
+    `spec.out must not end in -dark.png — that suffix marks the dark capture, got ${JSON.stringify(out)}`,
+  );
   return normalized;
 };
-
-/**
- * @typedef {object} NormalizedPanel
- * @property {string} example
- * @property {string | null} caption
- * @property {{ selector: string; count?: number; text?: string }[]} expect
- */
 
 /**
  * @typedef {object} NormalizedFigureSpec
@@ -160,8 +205,9 @@ export const resolveOutputPath = (out) => {
  * @property {string} out
  * @property {number} width
  * @property {number} scale
- * @property {string} background
- * @property {NormalizedPanel[]} panels
+ * @property {string} example
+ * @property {{ selector: string; count?: number; text?: string }[]} expect
+ * @property {Record<string, string>} replace
  */
 
 /**
@@ -189,79 +235,80 @@ export const normalizeFigureSpec = (raw) => {
     `spec.width must be 200..2000 CSS px, got ${width}`,
   );
 
-  // `scale` is the pixel density, not a display size. Markdown image syntax
-  // carries no `width`, and the docs site's `<Markdown>` drops raw HTML, so
-  // nothing can shrink the figure afterwards on both surfaces — `width` is
-  // therefore the size it will be shown at (#3030).
+  // `scale` is the pixel density, not a display size. `width` is the size the
+  // figure is shown at: GitHub takes it from the `<img width>` the snippet
+  // carries, `/releases` zooms every figure back by the default scale of 2.
   const scale = spec.scale ?? 2;
   check(
     scale === 1 || scale === 2 || scale === 3,
     `spec.scale (deviceScaleFactor) must be 1, 2 or 3, got ${scale}`,
   );
 
-  const background = spec.background ?? "#ffffff";
   check(
-    typeof background === "string" && CSS_COLOR.test(background),
-    `spec.background must be a plain CSS color, got ${JSON.stringify(background)}`,
+    spec.background === undefined,
+    "spec.background is gone — each theme brings its own ground",
   );
 
+  // One example per figure, and no caption baked into the PNG: the notes give
+  // every figure its own heading and text instead (#3481). A comparison is two
+  // figures.
   check(
-    Array.isArray(spec.panels) && spec.panels.length > 0,
-    "spec.panels must be a non-empty array",
+    spec.panels === undefined,
+    "spec.panels is gone — a figure shows exactly one example: name it with spec.example, and capture a comparison as two figures",
+  );
+  check(
+    spec.caption === undefined,
+    "spec.caption is gone — the notes carry the figure's heading and text",
+  );
+  check(
+    spec.story === undefined &&
+      spec.args === undefined &&
+      spec.globals === undefined,
+    "spec uses story/args/globals — figures are captured from Styleguide examples: name one with spec.example",
+  );
+  check(
+    typeof spec.example === "string" && EXAMPLE_PATH.test(spec.example),
+    "spec.example is required — the page's content path plus the example name, e.g. components/form-controls/rating/max-value for src/content/components/form-controls/rating/examples/max-value.tsx",
   );
 
-  const panels = spec.panels.map(
-    (/** @type {any} */ panel, /** @type {number} */ index) => {
-      const at = `panels[${index}]`;
-      check(
-        panel !== null && typeof panel === "object",
-        `${at} must be an object`,
-      );
-      check(
-        panel.story === undefined &&
-          panel.args === undefined &&
-          panel.globals === undefined,
-        `${at} uses story/args/globals — figures are captured from Styleguide examples now: name one with ${at}.example`,
-      );
-      check(
-        typeof panel.example === "string" && EXAMPLE_PATH.test(panel.example),
-        `${at}.example is required — the page's content path plus the example name, e.g. components/form-controls/rating/max-value for src/content/components/form-controls/rating/examples/max-value.tsx`,
-      );
-      check(
-        panel.caption === undefined || typeof panel.caption === "string",
-        `${at}.caption must be a string when given`,
-      );
+  const expect = spec.expect ?? [];
+  check(Array.isArray(expect), "spec.expect must be an array");
+  expect.forEach((/** @type {any} */ item, /** @type {number} */ j) => {
+    check(
+      item !== null &&
+        typeof item === "object" &&
+        typeof item.selector === "string",
+      `spec.expect[${j}].selector is required`,
+    );
+    check(
+      item.count === undefined || Number.isInteger(item.count),
+      `spec.expect[${j}].count must be an integer when given`,
+    );
+    check(
+      item.text === undefined || typeof item.text === "string",
+      `spec.expect[${j}].text must be a string when given`,
+    );
+    check(
+      item.count !== undefined || item.text !== undefined,
+      `spec.expect[${j}] must assert a count or a text`,
+    );
+  });
 
-      const expect = panel.expect ?? [];
-      check(Array.isArray(expect), `${at}.expect must be an array`);
-      expect.forEach((/** @type {any} */ item, /** @type {number} */ j) => {
-        check(
-          item !== null &&
-            typeof item === "object" &&
-            typeof item.selector === "string",
-          `${at}.expect[${j}].selector is required`,
-        );
-        check(
-          item.count === undefined || Number.isInteger(item.count),
-          `${at}.expect[${j}].count must be an integer when given`,
-        );
-        check(
-          item.text === undefined || typeof item.text === "string",
-          `${at}.expect[${j}].text must be a string when given`,
-        );
-        check(
-          item.count !== undefined || item.text !== undefined,
-          `${at}.expect[${j}] must assert a count or a text`,
-        );
-      });
-
-      return {
-        example: panel.example,
-        caption: panel.caption ?? null,
-        expect,
-      };
-    },
+  const replace = spec.replace ?? {};
+  check(
+    replace !== null && typeof replace === "object" && !Array.isArray(replace),
+    "spec.replace must be an object mapping source text to its replacement",
   );
+  for (const [from, to] of Object.entries(replace)) {
+    check(
+      from.trim() !== "",
+      "spec.replace keys must not be empty or whitespace",
+    );
+    check(
+      typeof to === "string",
+      `spec.replace[${JSON.stringify(from)}] must be a string ("" removes the text)`,
+    );
+  }
 
   return {
     version: spec.version,
@@ -269,8 +316,83 @@ export const normalizeFigureSpec = (raw) => {
     out,
     width,
     scale,
-    background,
-    panels,
+    example: spec.example,
+    expect,
+    replace,
+  };
+};
+
+/**
+ * @param {string} value
+ * @returns {string}
+ */
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * The pattern one `replace` key matches.
+ *
+ * A space in the key matches any whitespace run: prettier wraps long strings
+ * and JSX across lines, so the key can be written as the text reads. Between
+ * two words it needs at least one whitespace character; next to punctuation it
+ * may be none, because prettier moves a `>` onto its own line. A key that
+ * begins or ends with a letter or digit does not match inside a longer word, so
+ * `Projekt` leaves `Projekte` alone instead of mangling it.
+ *
+ * @param {string} key
+ * @returns {string}
+ */
+const replacePattern = (key) => {
+  const word = /[\p{L}\p{N}]/u;
+  const parts = key.trim().split(/\s+/);
+  const body = parts
+    .map((part, i) => {
+      if (i === 0) return escapeRegExp(part);
+      const between =
+        word.test(parts[i - 1].at(-1) ?? "") && word.test(part[0]);
+      return `${between ? "\\s+" : "\\s*"}${escapeRegExp(part)}`;
+    })
+    .join("");
+  const before = word.test(parts[0][0]) ? "(?<![\\p{L}\\p{N}])" : "";
+  const after = word.test(parts.at(-1)?.at(-1) ?? "")
+    ? "(?![\\p{L}\\p{N}])"
+    : "";
+  return `${before}${body}${after}`;
+};
+
+/**
+ * Apply a spec's `replace` map to an example's source: translate its visible
+ * strings to English, change its initial state, strip a demo-only control.
+ *
+ * One pass over the source, longest key first, so a phrase wins over a word it
+ * contains and no replacement is replaced again. Every key has to match: one
+ * that matches nothing is a typo or a stale map, and the figure would silently
+ * keep the original text.
+ *
+ * @param {string} source
+ * @param {Record<string, string>} replace
+ * @returns {{ source: string; unmatched: string[] }}
+ */
+export const applyReplacements = (source, replace) => {
+  const keys = Object.keys(replace).sort(
+    (a, b) => b.trim().length - a.trim().length,
+  );
+  if (keys.length === 0) return { source, unmatched: [] };
+
+  const pattern = new RegExp(
+    keys.map((key) => `(${replacePattern(key)})`).join("|"),
+    "gu",
+  );
+  const matched = new Set();
+  const replaced = source.replace(pattern, (...groups) => {
+    const index = groups
+      .slice(1, keys.length + 1)
+      .findIndex((group) => group !== undefined);
+    matched.add(keys[index]);
+    return replace[keys[index]];
+  });
+  return {
+    source: replaced,
+    unmatched: keys.filter((key) => !matched.has(key)),
   };
 };
 
@@ -318,50 +440,24 @@ const escapeHtml = (value) =>
   );
 
 /**
- * The composition page: one same-origin iframe per panel, stacked, each with an
- * optional monospace caption naming the prop it demonstrates.
+ * The composition page: the example in one same-origin iframe.
  *
- * Same-origin is the point — the runner reads every iframe's document to
- * measure and to assert it. The page is therefore served on the docs origin
- * (the runner fulfils a route there), never from `file://`.
+ * Same-origin is the point — the runner reads the iframe's document to measure
+ * and to assert it. The page is therefore served on the docs origin (the runner
+ * fulfils a route there), never from `file://`.
  *
- * An iframe starts tall and is shrunk to its content once measured: an overlay
+ * The iframe starts tall and is shrunk to its content once measured: an overlay
  * positions itself against the frame's viewport, and the default 150px would
  * squeeze or flip it.
  *
- * @param {{
- *   width: number;
- *   background: string;
- *   panels: { caption: string | null }[];
- *   urls: string[];
- * }} args
+ * @param {{ width: number; theme: FigureTheme; url: string }} args
  * @returns {string}
  */
-export const composeFigureHtml = ({ width, background, panels, urls }) => {
-  const body = panels
-    .map((panel, index) => {
-      const caption =
-        panel.caption === null
-          ? ""
-          : `<p class="caption">${escapeHtml(panel.caption)}</p>`;
-      const source = escapeHtml(urls[index]);
-      return `<div class="panel">${caption}<iframe data-panel="${index}" src="${source}" scrolling="no" title="panel ${index}"></iframe></div>`;
-    })
-    .join("");
-
-  return `<!doctype html>
+export const composeFigureHtml = ({ width, theme, url }) => `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>release figure</title><style>
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: ${background}; }
+  html, body { margin: 0; padding: 0; background: ${FIGURE_GROUND[theme]}; }
   #figure { width: ${width}px; overflow: hidden; }
-  .panel + .panel { border-top: 1px solid #e4e6eb; }
-  .caption {
-    margin: 0;
-    padding: 12px var(--caption-inset, 16px) 0;
-    font: 12px/1.5 ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    color: #6b7280;
-  }
   iframe { display: block; width: 100%; height: 2000px; border: 0; }
 </style></head>
-<body><div id="figure">${body}</div></body></html>`;
-};
+<body><div id="figure"><iframe id="example" src="${escapeHtml(url)}" scrolling="no" title="example"></iframe></div></body></html>`;

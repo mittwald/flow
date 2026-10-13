@@ -89,10 +89,12 @@ const runChain = (source: string): ChainRun => {
  * | `Button color="accent"`                  | `button-color-accent-to-success`           |
  * | `Align`                                  | `align-to-combine`                         |
  * | `ContextualHelp defaultOpen`             | `popover-open-state-props`                 |
+ * | `Accordion variant="outline"`            | `accordion-variant-deprecated`             |
  */
 const legacyApp = `import "@mittwald/flow-react-components/styles";
 import flowStyles from "@mittwald/flow-react-components/styles?url";
 import { AccentBox } from "@mittwald/flow-react-components/components/AccentBox";
+import { Accordion } from "@mittwald/flow-react-components/components/Accordion";
 import { Action } from "@mittwald/flow-react-components/components/Action";
 import { Align } from "@mittwald/flow-react-components/components/Align";
 import { Button } from "@mittwald/flow-react-components/components/Button";
@@ -117,6 +119,7 @@ export const Toolbar = (props: {
     <Heading color="primary">Danger zone</Heading>
     <ContextualHelp defaultOpen>Rights and roles</ContextualHelp>
     <CodeBlock code="rm -rf /" language="shell" wrapLongLines showInlineLineNumbers />
+    <Accordion variant="outline" />
     <AccentBox color="violet">
       <TableColumn maxWidth={200} minWidth={null} width={120} />
     </AccentBox>
@@ -139,6 +142,7 @@ export const aborted = (error: unknown) => error instanceof MutedActionError;
 const migratedApp = `import "@mittwald/flow-react-components/all.css";
 import flowStyles from "@mittwald/flow-react-components/all.css?url";
 import { AccentBox } from "@mittwald/flow-react-components";
+import { Accordion } from "@mittwald/flow-react-components";
 import { Action } from "@mittwald/flow-react-components";
 import { Combine } from "@mittwald/flow-react-components";
 import { Button } from "@mittwald/flow-react-components";
@@ -162,6 +166,7 @@ export const Toolbar = (props: {
     <Heading color="default">Danger zone</Heading>
     <ContextualHelp isDefaultOpen>Rights and roles</ContextualHelp>
     <CodeBlock code="rm -rf /" language="shell" />
+    <Accordion />
     <AccentBox backgroundColor="violet">
       <TableColumn width={120} />
     </AccentBox>

@@ -1,0 +1,23 @@
+name: Read the OS release
+description:
+  Outputs the runner's OS release, e.g. `ubuntu24.04`, for cache keys.
+
+outputs:
+  release:
+    description: "`$ID$VERSION_ID` from /etc/os-release."
+    value: ${{ steps.os.outputs.release }}
+
+runs:
+  using: composite
+  steps:
+    # Browser builds and .debs differ per Ubuntu release, so caches holding
+    # them are keyed on it, not on `runner.os`: `ubuntu-latest` moves from 24.04
+    # to 26.04, and during the rollout the two would restore each other's
+    # entries. Playwright skips a browser download when its directory exists,
+    # so a restored 24.04 build would run on 26.04.
+    - name: Read the OS release
+      id: os
+      shell: bash
+      run: |
+        . /etc/os-release
+        echo "release=$ID$VERSION_ID" >> "$GITHUB_OUTPUT"

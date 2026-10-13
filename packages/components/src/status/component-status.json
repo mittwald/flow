@@ -7,6 +7,10 @@
     "level": "beta",
     "isNew": false
   },
+  "@mittwald/flow-react-components#AccordionGroup": {
+    "level": "beta",
+    "isNew": true
+  },
   "@mittwald/flow-react-components#Action": {
     "level": "stable",
     "isNew": false

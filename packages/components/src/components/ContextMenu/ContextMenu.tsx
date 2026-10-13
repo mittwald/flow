@@ -15,6 +15,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import ContextMenuContentView from "@/views/ContextMenuContentView";
 import type * as Aria from "react-aria-components";
+import clsx from "clsx";
 import styles from "./ContextMenu.module.scss";
 import { OverlayContentSuspendWatcher } from "@/lib/controller/overlay/OverlayContentSuspendWatcher";
 import { ContextMenuSelectAll } from "@/components/ContextMenu/components/ContextMenuSelectAll/ContextMenuSelectAll";
@@ -56,6 +57,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     renderEmptyState,
     showSelectAll,
     ref,
+    className,
     controller: overlayControllerFromProps,
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
@@ -107,7 +109,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     <OverlayContentSuspendWatcher overlayController={overlayController}>
       <Popover
         {...rest}
-        className={styles.popover}
+        className={clsx(styles.popover, className)}
         controller={overlayController}
         isDialogContent={false}
       >

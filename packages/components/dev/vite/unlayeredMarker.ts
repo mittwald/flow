@@ -1,4 +1,5 @@
 import type postcss from "postcss";
+import type { Container } from "postcss";
 
 /**
  * Not a real layer, but a build instruction: take this block out of every
@@ -37,6 +38,20 @@ export const assertMarkersAreTopLevel = (root: postcss.Root): void => {
           `it cannot be lifted out of an enclosing at rule without duplicating that at rule. ` +
           `Move the enclosing at rule inside the '@layer ${unlayeredMarker}' block instead.`,
       );
+    }
+  });
+};
+
+/**
+ * `revert-layer` means "fall back to the layered value". Without layers it
+ * falls back to the browser's defaults instead, discarding every author style
+ * on the property – so wherever Flow's rules end up unlayered, such a
+ * declaration goes. Flow's own rules win there without it.
+ */
+export const dropRevertLayerDeclarations = (container: Container): void => {
+  container.walkDecls((declaration) => {
+    if (declaration.value.trim() === "revert-layer") {
+      declaration.remove();
     }
   });
 };
@@ -82,6 +97,8 @@ export const unlayeredMarkerPlugin = () => ({
     }
 
     assertMarkersAreTopLevel(root);
+    // Component styles are served unlayered here.
+    dropRevertLayerDeclarations(root);
     liftUnlayeredMarkers(root);
   },
 });

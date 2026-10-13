@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from "react";
+import clsx from "clsx";
 import * as Aria from "react-aria-components";
 import {
   flowComponent,
@@ -18,7 +19,10 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
 /** @flr-generate all */
 export const TimeField = flowComponent("TimeField", (props) => {
   // `null` is what react-aria's time field state uses for "no time"
-  const { children, ref, ...rest } = useControlledHostValueProps(props, null);
+  const { children, className, ref, ...rest } = useControlledHostValueProps(
+    props,
+    null,
+  );
 
   const {
     FieldErrorView,
@@ -26,14 +30,18 @@ export const TimeField = flowComponent("TimeField", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "TimeField");
+
+  const rootClassName = clsx(wrapperProps.className, className);
 
   return (
     <Aria.TimeField
       hourCycle={24}
       {...rest}
-      {...wrapperProps}
       {...controlProps}
+      {...skeletonProps}
+      className={rootClassName}
     >
       <FieldErrorCaptureContext>
         <DateInput className={styles.dateInput} ref={ref} />

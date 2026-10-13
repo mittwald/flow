@@ -348,5 +348,4 @@ color:
       linear-gradient(180deg, #06070A 0%, #0A0E18 45%, #0F1424 100%)"
 
   background-gradient:
-    value:
-      "linear-gradient(180deg,rgba(18, 21, 24, 1) 0%, rgba(35, 41, 64, 1) 80%)"
+    value: "linear-gradient(180deg, #0d101a 0%, #354176 100%)"

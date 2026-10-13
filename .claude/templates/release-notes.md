@@ -9,6 +9,13 @@
     commands, symbols, package names. Version numbers and component names in
     running prose stay plain — a paragraph of code chips stops the eye at every
     token.
+  - Bold the key statement of every bullet and every feature paragraph, so the
+    notes can be skimmed: one or two phrases each — what the feature does, its beta status, or the action a deprecation
+    needs. Never a whole paragraph, never every prop name. E.g.: "Wrap a view in
+    `<SkeletonMode isEnabled={isLoading}>` and **its real components render as
+    skeleton while it loads.**"
+  - English throughout, code examples included: their strings are English even
+    where the Styleguide example they come from is German.
   - Minor/major only — patches release separately, so there is NO Fixes section.
     Fold a user-relevant fix into the related feature's text if it matters.
   - Drop noise entirely: chore/deps/release bumps, internal refactors, CI.
@@ -28,6 +35,9 @@
     `pnpm release:figure`; a feature with no example (a CLI, a build change)
     simply gets none. Code examples are fine when grounded in the
     real API.
+  - One example per image, each under its own `###` heading with one or two
+    short sentences. Never a composite, never a caption baked into the PNG. A
+    comparison is two images under two headings.
   - Delete these comments and every unused/empty section in the final text.
 -->
 
@@ -61,15 +71,24 @@
 // optional usage example, grounded in the real component API
 ```
 
-<!-- DELETE this line when the feature has no example to capture (a CLI, a
-     build change) — an unfilled image link is worse than no figure.
+<!-- DELETE the figure subsections when the feature has no example to capture
+     (a CLI, a build change) — an unfilled image link is worse than no figure.
 
-     Otherwise: one captured figure per notable feature, never one per prop
-     variant — compose the variants into a single image. Markdown image syntax,
-     NOT an HTML <img>: the docs site's <Markdown> has no rehype-raw, so a raw
-     tag renders on GitHub and silently vanishes on /releases. -->
+     Otherwise: one subsection per image, each showing exactly one example. A
+     comparison (on vs. off, before vs. after) is two subsections. Paste the
+     <picture> block `pnpm release:figure` prints, unchanged: GitHub shows its
+     <source> in dark mode and sizes it by the <img width>, and /releases
+     rewrites exactly this shape into one image per theme (its <Markdown> drops
+     any other raw HTML, a bare <img> included). -->
 
-![{{ caption }}](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png)
+### {{ What the image shows }}
+
+{{ One or two short sentences. }}
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}-dark.png">
+  <img src="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/{{name}}.png" alt="{{ alt text }}" width="{{ spec width }}">
+</picture>
 
 ## Migrations
 

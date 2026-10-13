@@ -1,4 +1,6 @@
 import { playwright } from "@vitest/browser-playwright";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import type { ProjectConfig } from "vitest/node";
 import type { BrowserCommand } from "vitest/node";
 
@@ -22,7 +24,24 @@ const setReducedMotion: BrowserCommand<
  * cannot get that wrong — and neither can one that reshapes them with `filter`
  * or `map`, which copy the array but not its objects.
  */
-export const createVitestBrowserTestConfig = (): ProjectConfig => ({
+export const createVitestBrowserTestConfig = (): ProjectConfig => {
+  isolateFirefoxAppData();
+  return browserTestConfig();
+};
+
+/*
+ * Playwright's Firefox shares `~/Library/Application Support/Firefox` with an
+ * installed Firefox, and macOS 27 denies the terminal access to it, so every
+ * launch fails (microsoft/playwright#42768, fixed in Firefox 158). Its own
+ * app-data directory sidesteps that. Remove once Playwright ships Firefox 158.
+ */
+const isolateFirefoxAppData = () => {
+  if (process.platform === "darwin" && !process.env.MOZ_APP_DATA) {
+    process.env.MOZ_APP_DATA = join(tmpdir(), "flow-playwright-firefox");
+  }
+};
+
+const browserTestConfig = (): ProjectConfig => ({
   css: {
     include: /.+/,
   },
