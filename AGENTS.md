@@ -415,23 +415,30 @@ where the error points.
   `packageManager` pins, so read it there rather than from this entry
 
 - **Symptom:** On macOS 27, every Firefox run dies before a single test with
-  **`Failed to connect to the browser session … [browser (firefox)]`** /
-  `browserType.launch: Timeout 180000ms exceeded`, while WebKit runs fine
+  **`Failed to connect to the browser session … [browser (firefox)]`**,
+  `browserType.launch: Failed to launch the browser process`
+  (`Could not find profile folder.`) or `Timeout 180000ms exceeded`, while
+  WebKit runs fine
 
   **Cause:** Firefox.app is installed, and macOS 27 then protects
   `~/Library/Application Support/Firefox` — which Playwright's bundled Firefox
   reads at startup
   ([microsoft/playwright#42768](https://github.com/microsoft/playwright/issues/42768),
-  fixed in Gecko, not yet in a Playwright release). The
+  fixed in Firefox 158, which no Playwright release ships yet).
+  `createVitestBrowserTestConfig()` works around it by pointing `MOZ_APP_DATA`
+  at a temp directory, so you only hit this in a vitest config that does not
+  call it, or with `MOZ_APP_DATA` already set in your shell. The
   `sandbox_extension_issue_file_to_process` and `RenderCompositorSWGL` lines in
   the log are red herrings
 
-  **Fix:** It is no test result — report Firefox as unchecked, never as red. To
-  get one, run the suite in the Playwright Linux image matching the repo's
-  `playwright` version (`mcr.microsoft.com/playwright:v<version>-noble`, the
-  platform CI gates on) with its own `pnpm install` — the host's `node_modules`
-  are darwin builds. Pin cores with `--cpuset-cpus`, not `--cpus`: vitest sizes
-  its parallelism from `nproc`, which `--cpus` leaves at the host's count
+  **Fix:** Build the config on `createVitestBrowserTestConfig()`, or unset
+  `MOZ_APP_DATA`. Until Firefox launches, it is no test result — report Firefox
+  as unchecked, never as red. To get one regardless, run the suite in the
+  Playwright Linux image matching the repo's `playwright` version
+  (`mcr.microsoft.com/playwright:v<version>-noble`, the platform CI gates on)
+  with its own `pnpm install` — the host's `node_modules` are darwin builds. Pin
+  cores with `--cpuset-cpus`, not `--cpus`: vitest sizes its parallelism from
+  `nproc`, which `--cpus` leaves at the host's count
 
 - **Symptom:** A visual test stays red in CI after you regenerated screenshots
   locally on macOS
