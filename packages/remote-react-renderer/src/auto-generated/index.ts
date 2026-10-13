@@ -3,6 +3,7 @@
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 import { AccentBox as AccentBox } from "@mittwald/flow-react-components";
 import { Accordion as Accordion } from "@mittwald/flow-react-components";
+import { AccordionGroup as AccordionGroup } from "@mittwald/flow-react-components";
 import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components";
 import { Alert as Alert } from "@mittwald/flow-react-components";
 import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
@@ -141,6 +142,10 @@ import { YAxis as YAxis } from "@mittwald/flow-react-components";
 export const flowComponents = {
   "flr-accent-box": createFlowRemoteComponentRenderer("AccentBox", AccentBox),
   "flr-accordion": createFlowRemoteComponentRenderer("Accordion", Accordion),
+  "flr-accordion-group": createFlowRemoteComponentRenderer(
+    "AccordionGroup",
+    AccordionGroup,
+  ),
   "flr-action-group": createFlowRemoteComponentRenderer(
     "ActionGroup",
     ActionGroup,
