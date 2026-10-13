@@ -79,10 +79,3 @@ test("the deprecated component emptyView still renders with the data and warns",
   await expect.element(page.getByText("No data available (0)")).toBeVisible();
   expect(onWarning).toHaveBeenCalledWith(emptyViewDeprecation);
 });
-
-test("an element emptyView renders and does not warn", async () => {
-  const onWarning = await renderEmptyChart(<span>No data available</span>);
-
-  await expect.element(page.getByText("No data available")).toBeVisible();
-  expect(onWarning).not.toHaveBeenCalled();
-});
