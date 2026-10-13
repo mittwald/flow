@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.4](https://github.com/mittwald/flow/compare/1.6.0-next.3...1.6.0-next.4) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** add missing accessible names in Tabs, List filters and AvatarStack ([#3468](https://github.com/mittwald/flow/issues/3468)) ([e92fdd7](https://github.com/mittwald/flow/commit/e92fdd7d17baf24b65dd0b6f5d2d5d44ef288807))
+* **Markdown:** continue ordered list numbering across split lists ([#3474](https://github.com/mittwald/flow/issues/3474)) ([97737bc](https://github.com/mittwald/flow/commit/97737bc03b9aec121414a7615faee3499a8a000c))
+
+## [1.5.3](https://github.com/mittwald/flow/compare/1.6.0-next.2...1.5.3) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.3 ([bb90ea0](https://github.com/mittwald/flow/commit/bb90ea0df83be0d1dc46c8e41e1fc106af2828d2))
+
 ## [1.6.0-next.3](https://github.com/mittwald/flow/compare/1.6.0-next.2...1.6.0-next.3) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
