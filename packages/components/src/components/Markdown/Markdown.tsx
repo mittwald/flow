@@ -5,7 +5,7 @@ import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
 import type { CSSProperties, FC, Ref } from "react";
-import { Children, isValidElement } from "react";
+import { Children, isValidElement, useId } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
@@ -14,6 +14,7 @@ import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
+import { isExternalHref } from "@/components/Markdown/lib/isExternalHref";
 import type { CodeEditorLanguage } from "@/components/CodeEditor/languages";
 import {
   SkeletonBlockText,
@@ -60,10 +61,22 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   } = props;
 
   const isSkeleton = useSkeletonMode();
+  /* Footnote ids are per document, so two instances on one page would share
+     them and a back link would jump into the other one. */
+  const clobberPrefix = `user-content-${useId().replace(/[^\w-]/g, "")}-`;
 
   const defaultComponents: Components = {
+    /* GFM footnotes link through `id` (the back link's target), `aria-label`
+       and `aria-describedby`. */
     a: (props) => (
-      <Link target="_blank" color={color} href={props.href}>
+      <Link
+        id={props.id}
+        aria-label={props["aria-label"]}
+        aria-describedby={props["aria-describedby"]}
+        target={isExternalHref(props.href) ? "_blank" : undefined}
+        color={color}
+        href={props.href}
+      >
         {props.children}
       </Link>
     ),
@@ -75,6 +88,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
     h1: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(1, headingOffset)}
         color={color}
       >
@@ -83,6 +97,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h2: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(2, headingOffset)}
         color={color}
       >
@@ -91,6 +106,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h3: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(3, headingOffset)}
         color={color}
       >
@@ -99,6 +115,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h4: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(4, headingOffset)}
         color={color}
       >
@@ -107,6 +124,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h5: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(5, headingOffset)}
         color={color}
       >
@@ -115,6 +133,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h6: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(6, headingOffset)}
         color={color}
       >
@@ -195,7 +214,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         disallowedElements={disallowedElements}
         rehypePlugins={rehypePlugins}
         remarkPlugins={remarkPlugins ?? [remarkGfm]}
-        remarkRehypeOptions={remarkRehypeOptions}
+        remarkRehypeOptions={{ clobberPrefix, ...remarkRehypeOptions }}
         skipHtml={skipHtml}
         unwrapDisallowed={unwrapDisallowed}
         urlTransform={urlTransform}
