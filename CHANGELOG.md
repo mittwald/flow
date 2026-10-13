@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.9](https://github.com/mittwald/flow/compare/1.5.8...1.5.9) (2026-10-13)
+
+### Bug Fixes
+
+* **components:** call the consumer&#x27;s onOpenChange on ComboBox, DatePicker and DateRangePicker ([#3472](https://github.com/mittwald/flow/issues/3472)) ([4da0c23](https://github.com/mittwald/flow/commit/4da0c233cf1b91a404f3736ff1bd408ed0a191da))
+
 ## [1.5.8](https://github.com/mittwald/flow/compare/1.5.7...1.5.8) (2026-10-13)
 
 ### Bug Fixes
