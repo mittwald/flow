@@ -63,4 +63,4 @@ export const findBrandColorVariables = (
 };
 
 export const hint =
-  "Brand is the palette from the brand handover: theme-neutral, so it never switches to dark (ADR 0007, docs/adr/0007-color-token-tiers.md). Use a Semantic (`--primary--color--…`, `--neutral--color--…`) or Variant (`--primary-solid-background-color`) variable instead, preferably through a component token. Only docs pages that display the palette itself may name Brand variables.";
+  "Brand is the palette from the brand handover: theme-neutral, so it never switches to dark (ADR 0007, docs/adr/0007-color-token-tiers.md). Use a Semantic (`--primary--color--…`, `--content--color--…`) or Variant (`--primary-solid-background-color`) variable instead, preferably through a component token. Only docs pages that display the palette itself may name Brand variables.";

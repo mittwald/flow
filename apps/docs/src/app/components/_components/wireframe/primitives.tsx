@@ -4,6 +4,18 @@ import styles from "./primitives.module.scss";
 
 type Tone = "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800";
 
+/** The gray of each tone, the same as the `.tone*` classes. */
+const toneColor: Record<Tone, string> = {
+  "100": "var(--elevation--color--100)",
+  "200": "var(--elevation--color--200)",
+  "300": "var(--elevation--color--300)",
+  "400": "var(--neutral--color--quiet--100)",
+  "500": "var(--border--color--200)",
+  "600": "var(--neutral--color--quiet--300)",
+  "700": "var(--content--color--100)",
+  "800": "var(--content--color--200)",
+};
+
 interface LayoutProps extends PropsWithChildren {
   className?: string;
   width?: CSSProperties["width"];
@@ -46,7 +58,7 @@ export const WIcon: FC<
         className,
       )}
       style={{
-        color: tone ? `var(--neutral--color--${tone})` : undefined,
+        color: tone ? toneColor[tone] : undefined,
         width: size,
         height: size,
       }}
