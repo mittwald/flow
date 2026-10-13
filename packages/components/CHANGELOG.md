@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.8](https://github.com/mittwald/flow/compare/1.5.7...1.5.8) (2026-10-13)
+
+### Bug Fixes
+
+* **CartesianChart:** keep rendering a non-element emptyView ([#3473](https://github.com/mittwald/flow/issues/3473)) ([49ac4f4](https://github.com/mittwald/flow/commit/49ac4f4ccfd187c97d70e6613c0463bd266f5cd1))
+
 ## [1.5.7](https://github.com/mittwald/flow/compare/1.5.6...1.5.7) (2026-10-13)
 
 ### Bug Fixes
