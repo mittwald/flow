@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.12](https://github.com/mittwald/flow/compare/1.6.0-next.11...1.6.0-next.12) (2026-10-13)
+
+### Bug Fixes
+
+* **CountryOptions:** recompute the options when filterBy or sortBy change ([#3471](https://github.com/mittwald/flow/issues/3471)) ([8a93db7](https://github.com/mittwald/flow/commit/8a93db7ae381ce043f0eac0e33cf460059fe2997))
+
+## [1.5.13](https://github.com/mittwald/flow/compare/1.6.0-next.10...1.5.13) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.13 ([daa3a8d](https://github.com/mittwald/flow/commit/daa3a8db1e434e887feca67a89a34e3cd299ab5d))
+
 ## [1.6.0-next.11](https://github.com/mittwald/flow/compare/1.6.0-next.10...1.6.0-next.11) (2026-10-13)
 
 ### Bug Fixes
