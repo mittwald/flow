@@ -121,6 +121,7 @@ test("expands a DesignTokenTable to token names and values", () => {
 
   expect(markdown).toContain("| Token | Wert |");
   expect(markdown).toContain(
+    // eslint-disable-next-line flow/no-brand-color-variable -- the palette table lists Brand variables as its content
     "| `--color--mittwald-neutral--100` | `#ffffff` |",
   );
 });

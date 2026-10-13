@@ -295,6 +295,17 @@ if ("action" in props) {
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
+- **Colors come from Semantic or Variant, never Brand**
+  ([ADR 0007](https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md)).
+  Brand variables (`--color--mittwald-blue--1000`) are theme-neutral, so they
+  stay light in dark. `flow/no-brand-color-variable` rejects them — stylelint in
+  stylesheets, ESLint in TS/TSX strings, both in `packages/components` and
+  `apps/docs`. The groups come from `design-tokens/src/color-brand.yml`
+  (`dev/brandColors/`), so a new group is covered without touching the rules. A
+  name completed at runtime (`--color--#{$hue}`, `` `--color--${hue}` ``) is
+  rejected too: only Brand defines tokens under `color`. Exempt: the docs pages
+  that display the palette itself (`foundations/design/colors`,
+  `design-tokens`).
 - Shared mixins via `@use "@/styles/mixins/…"`: `focus` (focus ring),
   `formControl` (border/color/interaction states of form fields), `ellipsis`.
   Group repeated variants in local mixins.
