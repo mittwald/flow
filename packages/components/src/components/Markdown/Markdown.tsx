@@ -14,6 +14,7 @@ import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
+import { isExternalHref } from "@/components/Markdown/lib/isExternalHref";
 import type { CodeEditorLanguage } from "@/components/CodeEditor/languages";
 import {
   SkeletonBlockText,
@@ -63,7 +64,11 @@ export const Markdown: FC<MarkdownProps> = (props) => {
 
   const defaultComponents: Components = {
     a: (props) => (
-      <Link target="_blank" color={color} href={props.href}>
+      <Link
+        target={isExternalHref(props.href) ? "_blank" : undefined}
+        color={color}
+        href={props.href}
+      >
         {props.children}
       </Link>
     ),

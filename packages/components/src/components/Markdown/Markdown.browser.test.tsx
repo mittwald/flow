@@ -40,8 +40,7 @@ test("the offset stops at the last heading level", async () => {
   expect(document.querySelector("h6")?.textContent).toContain("Footnote");
 });
 
-// Markdown can come from anywhere, so its links leave the current page.
-test("a link opens in a new tab", async () => {
+test("an external link opens in a new tab", async () => {
   await renderMarkdown("[The archive](https://example.com/archive)");
 
   const link = page.getByRole("link", { name: "The archive" });
@@ -50,7 +49,25 @@ test("a link opens in a new tab", async () => {
     .element(link)
     .toHaveAttribute("href", "https://example.com/archive");
   await expect.element(link).toHaveAttribute("target", "_blank");
+  await expect
+    .element(link.getByRole("img", { name: "External link" }))
+    .toBeInTheDocument();
 });
+
+test.each(["/docs/archive", "#objective", "mailto:rebels@example.com"])(
+  "a link to %s stays in the current tab",
+  async (href) => {
+    await renderMarkdown(`[The archive](${href})`);
+
+    const link = page.getByRole("link", { name: "The archive" });
+
+    await expect.element(link).toHaveAttribute("href", href);
+    await expect.element(link).not.toHaveAttribute("target");
+    await expect
+      .element(link.getByRole("img", { name: "External link" }))
+      .not.toBeInTheDocument();
+  },
+);
 
 test("a fenced block becomes a code block", async () => {
   await renderMarkdown('```json\n{ "force": true }\n```');
