@@ -21,13 +21,18 @@
        * override only applies in the layered stylesheet variant if it leaves
        * the cascade layer as well.
        *
+       * The size goes back to Flow's layered rules (`revert-layer`) instead of
+       * the token, so a context's size (`Avatar`'s 70 %) still applies. The
+       * variants without layers drop these declarations — there Flow's rules
+       * already win, and `revert-layer` would discard them all.
+       *
        * Marked at the leaf rather than in a separate block, because these rules
        * live in a size mixin – a block would have to duplicate it.
        */
       &:global(.svg-inline--fa) {
         @layer flow.unlayered {
-          width: var(--icon--size--#{$size});
-          height: var(--icon--size--#{$size});
+          width: revert-layer;
+          height: revert-layer;
           box-sizing: border-box;
           padding: $faPadding;
         }
