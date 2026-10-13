@@ -12,8 +12,10 @@ type TestEnvironment = (typeof testEnvironments)[number];
 const listComparableFrom = "0.2.0-alpha.883";
 // A Combine inside a Text only stays in the line from 1.2.2.
 const combinedSubTitleFrom = "1.2.2";
-// The "clear filters" button carries its label from 1.4.32.
-const clearFiltersLabelledFrom = "1.4.32";
+// The "clear filters" button carries its label from 1.5.4 (#3468); on the
+// next line it only arrived with 1.6.0-next.4.
+const clearFiltersLabelledFrom = "1.5.4";
+const clearFiltersUnlabelledOnNext = ">=1.6.0-next.0 <1.6.0-next.4";
 // The "Select all" option of multiple-choice filters exists from 1.4.0-next.6.
 const filterSelectAllFrom = "1.4.0-next.6";
 
@@ -172,7 +174,12 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
 );
 
 test
-  .skipIf(crossVersion({ below: clearFiltersLabelledFrom }))
+  .skipIf(
+    crossVersion({
+      below: clearFiltersLabelledFrom,
+      excludeRange: clearFiltersUnlabelledOnNext,
+    }),
+  )
   .each(testEnvironments)(
   "List items with two filter values (%s)",
   listItems("two values"),
