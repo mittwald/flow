@@ -140,6 +140,20 @@ describe("Filter", () => {
     expect(listItem42).toBeInTheDocument();
     expect(listItem43).not.toBeInTheDocument();
   });
+
+  test("Clear filters button is named and removes all active filters", async () => {
+    await render(
+      getTestElement(
+        [42, 43, 44],
+        <ListFilter<Data> property="num" defaultSelected={[42, 43]} />,
+      ),
+    );
+    await expect.element(page.getByText("Item: 44")).not.toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Clear filters" }));
+
+    await expect.element(page.getByText("Item: 44")).toBeInTheDocument();
+  });
 });
 
 describe("Select all", () => {
