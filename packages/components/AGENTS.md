@@ -333,6 +333,20 @@ if ("action" in props) {
 | `*.test.ts(x)` (unit)                      | Pure logic in `src/lib/` or component utility functions.                                                                                                                                 |
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
 
+A bug fix gets a regression test when it changes behavior this table covers —
+not by default. Leave out:
+
+- **Wiring of a single prop** — "the consumer `className` reaches the root",
+  "`aria-label` is forwarded". A test for one prop is arbitrary: every other
+  prop would need the same. A whole class of wiring bugs (`className` merge
+  order, a props spread) belongs in a lint rule or a shared contract helper like
+  `testFormFieldContract`.
+- **Implementation details** — a spy asserting that a callback ran, with no
+  rendered result that follows from it.
+- **Tests that pass without the fix.** Revert the fix and watch the test fail
+  before committing it. If it cannot fail, it guards nothing; say in the PR how
+  you verified the fix instead.
+
 Run: `pnpm nx test:unit components`,
 `pnpm nx test:browser components --browser.name=webkit`. The browser targets
 install the Playwright browsers for you **locally**; `pnpm test:browser:prepare`
