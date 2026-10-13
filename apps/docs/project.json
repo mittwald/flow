@@ -65,7 +65,8 @@
         "default",
         "^default",
         {
-          "runtime": "cat apps/docs/.pro-icons/node_modules/@fortawesome/sharp-regular-svg-icons/package.json 2>/dev/null || true"
+          "dependentTasksOutputFiles": "**/package.json",
+          "transitive": false
         }
       ],
       "dependsOn": [
@@ -94,7 +95,10 @@
       ]
     },
     "install:pro-icons": {
-      "cache": false
+      "cache": false,
+      "outputs": [
+        "{projectRoot}/.pro-icons/node_modules/@fortawesome/sharp-regular-svg-icons/package.json"
+      ]
     }
   }
 }
