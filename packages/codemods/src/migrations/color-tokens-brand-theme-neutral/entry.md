@@ -20,16 +20,34 @@ apply:
   `--color--royal-orange--N` and `--color--espelkamp-green--N` resolve to
   nothing, and `--color--mittwald-navy--N` holds the new brand values. Replace
   each with the Semantic variable that carries its meaning, e.g.
-  `--neutral--color--N` for gray, `--primary--color--N` for hosting-blue,
-  `--decorative-<hue>--color--N` for navy, violet, lilac and teal, `--danger--`,
-  `--warning--` or `--success--color--N` for the status hues (amaranth-red,
-  royal-orange, espelkamp-green), `--dark--color--N` or `--light--color--N` for
-  `--color--black-alpha--N` or `--color--white-alpha--N`, or a Variant variable
-  such as `--primary-solid-background-color--default`. Do the same for every
-  remaining Brand variable (`--color--mittwald-*`, `--color--system-*`, the
-  alpha ramps), because Brand keeps its light value in dark. Which one fits is
-  not decidable mechanically — decide whether the color is a surface, content or
-  status.
+  `--elevation--color--N` for a gray surface, `--content--color--N` for gray
+  text, `--border--color--N` for a gray border, `--primary--color--quiet--N` or
+  `--primary--color--strong--N` for hosting-blue, `--decorative-<hue>--color--…`
+  for navy, lilac and teal, `--danger--`, `--warning--` or `--success--color--…`
+  for the status hues (amaranth-red, royal-orange, espelkamp-green),
+  `--dark--color--…` or `--light--color--…` for `--color--black-alpha--N` or
+  `--color--white-alpha--N`, or a Variant variable such as
+  `--primary-solid-background-color--default`. Do the same for every remaining
+  Brand variable (`--color--mittwald-*`, `--color--system-*`, the alpha ramps),
+  because Brand keeps its light value in dark. Then rename the Semantic
+  variables you use. Colored and alpha groups (`primary`, `info`, `success`,
+  `danger`, `warning`, `neutral`, `unavailable`, `decorative-*`, `dark`,
+  `light`, `dark-static`, `light-static`) keep six tones —
+  `--<group>--color--100/200/300` → `--<group>--color--quiet--100/200/300`,
+  `--<group>--color--800/900/1000` → `--<group>--color--strong--100/200/300`
+  (alpha groups map `800/700/600` → `strong--100/200/300`); the other steps are
+  gone, use the nearest tone. Gray from `--neutral--color--N` moves by role —
+  surfaces 100–300 → `--elevation--color--100/200/300`, text and icons →
+  `--content--color--100` (secondary), `--200` (label) or `--300` (text), on a
+  solid surface `--content--color--inverse`, borders → `--border--color--100`
+  (grouping), `--200` (separator) or `--300` (control), disabled →
+  `--disabled--color--100/200/300` (surface, border, content).
+  `--decorative-violet--color--…` → `--decorative-lilac--color--…`,
+  `--decorative-teal--color--…` → `--decorative-green--color--…`,
+  `--decorative-red--`, `--decorative-green--` and
+  `--decorative-orange--color--…` → `--danger--`, `--success--` and
+  `--warning--color--…`. Which one fits is not decidable mechanically — decide
+  whether the color is a surface, content or status.
 ---
 
 The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
@@ -68,9 +86,32 @@ variables (`--color--…`) directly:
 The same applies to `@mittwald/flow-design-tokens/json*/all-*.json` and
 `useDesignTokens()`: `color.categorical` is `categorical.color` now.
 
+**Semantic has named roles.** Semantic no longer mirrors a ramp with 11 or 12
+steps; it selects few tones per role and theme
+([#3455](https://github.com/mittwald/flow/issues/3455)):
+
+| Group                                                                                           | Keys                                                                         |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `primary`, `info`, `success`, `danger`, `warning`, `neutral`, `unavailable`, `decorative-<hue>` | `quiet--100/200/300` (was 100–300), `strong--100/200/300` (was 800/900/1000) |
+| `dark`, `light`, `dark-static`, `light-static`                                                  | `quiet--100/200/300`, `strong--100/200/300` (was 800/700/600)                |
+| `elevation` (new: raised, ground, inset surface)                                                | `100/200/300`                                                                |
+| `content` (new: secondary, label, text; content on strong)                                      | `100/200/300`, `inverse`                                                     |
+| `border` (new: grouping, separator, control)                                                    | `100/200/300`                                                                |
+| `disabled` (new: surface, border, content)                                                      | `100/200/300`                                                                |
+
+The decorative groups follow the brand colors: `decorative-blue`, `-navy`,
+`-green` (`mittwald-green`), `-lilac` and `-orange` (`mittwald-orange`).
+`decorative-violet` and `decorative-teal` are gone (use `-lilac` and `-green`),
+and so are `decorative-red`, `-green` and `-orange` as status mirrors (use
+`danger`, `success` and `warning`).
+
 ```diff
 - .card { background: var(--color--gray--100); }
-+ .card { background: var(--neutral--color--100); }
++ .card { background: var(--elevation--color--100); }
+- .hint { color: var(--neutral--color--700); }
++ .hint { color: var(--content--color--100); }
+- .badge { background: var(--primary--color--100); color: var(--primary--color--900); }
++ .badge { background: var(--primary--color--quiet--100); color: var(--primary--color--strong--200); }
 ```
 
 No codemod: whether `--color--gray--100` meant a surface or content is not
