@@ -30,3 +30,28 @@ test("a FontAwesome icon keeps the border box sizing", async () => {
 
   expect(getComputedStyle(icon).boxSizing).toBe("border-box");
 });
+
+/*
+ * The same stylesheet sizes `.svg-inline--fa` at `1.25em` × `1em`, which
+ * replaced the token size of every icons-pro icon in the layered variant.
+ */
+test.each([
+  ["s", 16],
+  ["m", 24],
+  ["l", 64],
+] as const)(
+  "a FontAwesome icon of size %s keeps the token size",
+  async (size, pixels) => {
+    const rendered = await render(
+      <Icon className="svg-inline--fa" size={size}>
+        <svg />
+      </Icon>,
+    );
+    const { width, height } = rendered
+      .getByLocator(".svg-inline--fa")
+      .element()
+      .getBoundingClientRect();
+
+    expect({ width, height }).toEqual({ width: pixels, height: pixels });
+  },
+);
