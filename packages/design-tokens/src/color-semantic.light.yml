@@ -2,55 +2,59 @@
 # tier that distinguishes light and dark; references Brand or, where Flow
 # owns the color, holds a literal. Keep the keys in sync with
 # color-semantic.dark.yml.
+#
+# Provisional until the Semantic roles (#3455): each step references the
+# Brand step closest in luminance to its value before the brand palette
+# (#3453).
 primary:
   color:
     100:
-      value: "{color.hosting-blue.100}"
+      value: "{color.mittwald-blue.100}"
     200:
-      value: "{color.hosting-blue.200}"
+      value: "{color.mittwald-blue.100}"
     300:
-      value: "{color.hosting-blue.300}"
+      value: "{color.mittwald-blue.200}"
     400:
-      value: "{color.hosting-blue.400}"
+      value: "{color.mittwald-blue.400}"
     500:
-      value: "{color.hosting-blue.500}"
+      value: "{color.mittwald-blue.500}"
     600:
-      value: "{color.hosting-blue.600}"
+      value: "{color.mittwald-blue.600}"
     700:
-      value: "{color.hosting-blue.700}"
+      value: "{color.mittwald-blue.700}"
     800:
-      value: "{color.hosting-blue.800}"
+      value: "{color.mittwald-blue.800}"
     900:
-      value: "{color.hosting-blue.900}"
+      value: "{color.mittwald-blue.1000}"
     1000:
-      value: "{color.hosting-blue.1000}"
+      value: "{color.mittwald-blue.1300}"
     1100:
-      value: "{color.hosting-blue.1100}"
+      value: "{color.mittwald-blue.1600}"
 
 info:
   color:
     100:
-      value: "{color.hosting-blue.100}"
+      value: "{color.mittwald-navy.100}"
     200:
-      value: "{color.hosting-blue.200}"
+      value: "{color.mittwald-navy.100}"
     300:
-      value: "{color.hosting-blue.300}"
+      value: "{color.mittwald-navy.400}"
     400:
-      value: "{color.hosting-blue.400}"
+      value: "{color.mittwald-navy.600}"
     500:
-      value: "{color.hosting-blue.500}"
+      value: "{color.mittwald-navy.800}"
     600:
-      value: "{color.hosting-blue.600}"
+      value: "{color.mittwald-navy.1000}"
     700:
-      value: "{color.hosting-blue.700}"
+      value: "{color.mittwald-navy.1200}"
     800:
-      value: "{color.hosting-blue.800}"
+      value: "{color.mittwald-navy.1300}"
     900:
-      value: "{color.hosting-blue.900}"
+      value: "{color.mittwald-navy.1500}"
     1000:
-      value: "{color.hosting-blue.1000}"
+      value: "{color.mittwald-navy.1700}"
     1100:
-      value: "{color.hosting-blue.1100}"
+      value: "{color.mittwald-navy.1900}"
 
 success:
   color:
@@ -80,56 +84,56 @@ success:
 neutral:
   color:
     100:
-      value: "{color.gray.100}"
+      value: "{color.mittwald-neutral.100}"
     200:
-      value: "{color.gray.200}"
+      value: "{color.mittwald-neutral.200}"
     300:
-      value: "{color.gray.300}"
+      value: "{color.mittwald-neutral.300}"
     400:
-      value: "{color.gray.400}"
+      value: "{color.mittwald-neutral.400}"
     500:
-      value: "{color.gray.500}"
+      value: "{color.mittwald-neutral.500}"
     600:
-      value: "{color.gray.600}"
+      value: "{color.mittwald-neutral.600}"
     700:
-      value: "{color.gray.700}"
+      value: "{color.mittwald-neutral.700}"
     800:
-      value: "{color.gray.800}"
+      value: "{color.mittwald-neutral.800}"
     900:
-      value: "{color.gray.900}"
+      value: "{color.mittwald-neutral.900}"
     1000:
-      value: "{color.gray.1000}"
+      value: "{color.mittwald-neutral.1000}"
     1100:
-      value: "{color.gray.1100}"
+      value: "{color.mittwald-neutral.1100}"
     1200:
-      value: "{color.gray.1200}"
+      value: "{color.mittwald-neutral.1200}"
 
 unavailable:
   color:
     100:
-      value: "{color.gray.100}"
+      value: "{color.mittwald-neutral.100}"
     200:
-      value: "{color.gray.200}"
+      value: "{color.mittwald-neutral.200}"
     300:
-      value: "{color.gray.300}"
+      value: "{color.mittwald-neutral.300}"
     400:
-      value: "{color.gray.400}"
+      value: "{color.mittwald-neutral.400}"
     500:
-      value: "{color.gray.500}"
+      value: "{color.mittwald-neutral.500}"
     600:
-      value: "{color.gray.600}"
+      value: "{color.mittwald-neutral.600}"
     700:
-      value: "{color.gray.700}"
+      value: "{color.mittwald-neutral.700}"
     800:
-      value: "{color.gray.800}"
+      value: "{color.mittwald-neutral.800}"
     900:
-      value: "{color.gray.900}"
+      value: "{color.mittwald-neutral.900}"
     1000:
-      value: "{color.gray.1000}"
+      value: "{color.mittwald-neutral.1000}"
     1100:
-      value: "{color.gray.1100}"
+      value: "{color.mittwald-neutral.1100}"
     1200:
-      value: "{color.gray.1200}"
+      value: "{color.mittwald-neutral.1200}"
 
 danger:
   color:
@@ -184,127 +188,127 @@ warning:
 decorative-blue:
   color:
     100:
-      value: "{color.hosting-blue.100}"
+      value: "{color.mittwald-blue.100}"
     200:
-      value: "{color.hosting-blue.200}"
+      value: "{color.mittwald-blue.100}"
     300:
-      value: "{color.hosting-blue.300}"
+      value: "{color.mittwald-blue.200}"
     400:
-      value: "{color.hosting-blue.400}"
+      value: "{color.mittwald-blue.400}"
     500:
-      value: "{color.hosting-blue.500}"
+      value: "{color.mittwald-blue.500}"
     600:
-      value: "{color.hosting-blue.600}"
+      value: "{color.mittwald-blue.600}"
     700:
-      value: "{color.hosting-blue.700}"
+      value: "{color.mittwald-blue.700}"
     800:
-      value: "{color.hosting-blue.800}"
+      value: "{color.mittwald-blue.800}"
     900:
-      value: "{color.hosting-blue.900}"
+      value: "{color.mittwald-blue.1000}"
     1000:
-      value: "{color.hosting-blue.1000}"
+      value: "{color.mittwald-blue.1300}"
     1100:
-      value: "{color.hosting-blue.1100}"
+      value: "{color.mittwald-blue.1600}"
 
 decorative-navy:
   color:
     100:
       value: "{color.mittwald-navy.100}"
     200:
-      value: "{color.mittwald-navy.200}"
-    300:
       value: "{color.mittwald-navy.300}"
-    400:
-      value: "{color.mittwald-navy.400}"
-    500:
-      value: "{color.mittwald-navy.500}"
-    600:
+    300:
       value: "{color.mittwald-navy.600}"
-    700:
-      value: "{color.mittwald-navy.700}"
-    800:
-      value: "{color.mittwald-navy.800}"
-    900:
+    400:
       value: "{color.mittwald-navy.900}"
-    1000:
-      value: "{color.mittwald-navy.1000}"
-    1100:
+    500:
       value: "{color.mittwald-navy.1100}"
+    600:
+      value: "{color.mittwald-navy.1400}"
+    700:
+      value: "{color.mittwald-navy.1500}"
+    800:
+      value: "{color.mittwald-navy.1700}"
+    900:
+      value: "{color.mittwald-navy.1800}"
+    1000:
+      value: "{color.mittwald-navy.1900}"
+    1100:
+      value: "{color.mittwald-navy.1900}"
 
 decorative-violet:
   color:
     100:
-      value: "{color.soft-contrast-violet.100}"
+      value: "{color.mittwald-lilac.100}"
     200:
-      value: "{color.soft-contrast-violet.200}"
+      value: "{color.mittwald-lilac.100}"
     300:
-      value: "{color.soft-contrast-violet.300}"
+      value: "{color.mittwald-lilac.300}"
     400:
-      value: "{color.soft-contrast-violet.400}"
+      value: "{color.mittwald-lilac.700}"
     500:
-      value: "{color.soft-contrast-violet.500}"
+      value: "{color.mittwald-lilac.1000}"
     600:
-      value: "{color.soft-contrast-violet.600}"
+      value: "{color.mittwald-lilac.1100}"
     700:
-      value: "{color.soft-contrast-violet.700}"
+      value: "{color.mittwald-lilac.1200}"
     800:
-      value: "{color.soft-contrast-violet.800}"
+      value: "{color.mittwald-lilac.1400}"
     900:
-      value: "{color.soft-contrast-violet.900}"
+      value: "{color.mittwald-lilac.1500}"
     1000:
-      value: "{color.soft-contrast-violet.1000}"
+      value: "{color.mittwald-lilac.1600}"
     1100:
-      value: "{color.soft-contrast-violet.1100}"
+      value: "{color.mittwald-lilac.1800}"
 
 decorative-teal:
   color:
     100:
-      value: "{color.super-teal.100}"
+      value: "{color.mittwald-green.100}"
     200:
-      value: "{color.super-teal.200}"
+      value: "{color.mittwald-green.100}"
     300:
-      value: "{color.super-teal.300}"
+      value: "{color.mittwald-green.200}"
     400:
-      value: "{color.super-teal.400}"
+      value: "{color.mittwald-green.300}"
     500:
-      value: "{color.super-teal.500}"
+      value: "{color.mittwald-green.400}"
     600:
-      value: "{color.super-teal.600}"
+      value: "{color.mittwald-green.700}"
     700:
-      value: "{color.super-teal.700}"
+      value: "{color.mittwald-green.1100}"
     800:
-      value: "{color.super-teal.800}"
+      value: "{color.mittwald-green.1300}"
     900:
-      value: "{color.super-teal.900}"
+      value: "{color.mittwald-green.1500}"
     1000:
-      value: "{color.super-teal.1000}"
+      value: "{color.mittwald-green.1700}"
     1100:
-      value: "{color.super-teal.1100}"
+      value: "{color.mittwald-green.1700}"
 
 decorative-lilac:
   color:
     100:
-      value: "{color.bright-lilac.100}"
+      value: "{color.mittwald-lilac.100}"
     200:
-      value: "{color.bright-lilac.200}"
+      value: "{color.mittwald-lilac.100}"
     300:
-      value: "{color.bright-lilac.300}"
+      value: "{color.mittwald-lilac.300}"
     400:
-      value: "{color.bright-lilac.400}"
+      value: "{color.mittwald-lilac.400}"
     500:
-      value: "{color.bright-lilac.500}"
+      value: "{color.mittwald-lilac.700}"
     600:
-      value: "{color.bright-lilac.600}"
+      value: "{color.mittwald-lilac.900}"
     700:
-      value: "{color.bright-lilac.700}"
+      value: "{color.mittwald-lilac.1200}"
     800:
-      value: "{color.bright-lilac.800}"
+      value: "{color.mittwald-lilac.1300}"
     900:
-      value: "{color.bright-lilac.900}"
+      value: "{color.mittwald-lilac.1500}"
     1000:
-      value: "{color.bright-lilac.1000}"
+      value: "{color.mittwald-lilac.1800}"
     1100:
-      value: "{color.bright-lilac.1100}"
+      value: "{color.mittwald-lilac.1900}"
 
 decorative-red:
   color:
@@ -384,78 +388,78 @@ decorative-orange:
 dark:
   color:
     100:
-      value: "{color.black-alpha.100}"
-    200:
       value: "{color.black-alpha.200}"
-    300:
+    200:
       value: "{color.black-alpha.300}"
-    400:
+    300:
       value: "{color.black-alpha.400}"
-    500:
+    400:
       value: "{color.black-alpha.500}"
-    600:
-      value: "{color.black-alpha.600}"
-    700:
+    500:
       value: "{color.black-alpha.700}"
-    800:
+    600:
       value: "{color.black-alpha.800}"
+    700:
+      value: "{color.black-alpha.900}"
+    800:
+      value: "{color.black-alpha.1000}"
 
 light:
   color:
     100:
-      value: "{color.white-alpha.100}"
-    200:
       value: "{color.white-alpha.200}"
-    300:
+    200:
       value: "{color.white-alpha.300}"
-    400:
+    300:
       value: "{color.white-alpha.400}"
-    500:
+    400:
       value: "{color.white-alpha.500}"
-    600:
-      value: "{color.white-alpha.600}"
-    700:
+    500:
       value: "{color.white-alpha.700}"
-    800:
+    600:
       value: "{color.white-alpha.800}"
+    700:
+      value: "{color.white-alpha.900}"
+    800:
+      value: "{color.white-alpha.1000}"
 
 dark-static:
   color:
     100:
-      value: "{color.black-alpha.100}"
-    200:
       value: "{color.black-alpha.200}"
-    300:
+    200:
       value: "{color.black-alpha.300}"
-    400:
+    300:
       value: "{color.black-alpha.400}"
-    500:
+    400:
       value: "{color.black-alpha.500}"
-    600:
-      value: "{color.black-alpha.600}"
-    700:
+    500:
       value: "{color.black-alpha.700}"
-    800:
+    600:
       value: "{color.black-alpha.800}"
+    700:
+      value: "{color.black-alpha.900}"
+    800:
+      value: "{color.black-alpha.1000}"
 
 light-static:
   color:
     100:
-      value: "{color.white-alpha.100}"
-    200:
       value: "{color.white-alpha.200}"
-    300:
+    200:
       value: "{color.white-alpha.300}"
-    400:
+    300:
       value: "{color.white-alpha.400}"
-    500:
+    400:
       value: "{color.white-alpha.500}"
-    600:
-      value: "{color.white-alpha.600}"
-    700:
+    500:
       value: "{color.white-alpha.700}"
-    800:
+    600:
       value: "{color.white-alpha.800}"
+    700:
+      value: "{color.white-alpha.900}"
+    800:
+      value: "{color.white-alpha.1000}"
 
 # Literal values: Flow owns these colors outright (ADR 0007).
 transparent:
