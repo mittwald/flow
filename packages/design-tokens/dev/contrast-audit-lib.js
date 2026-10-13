@@ -47,11 +47,12 @@ export const AA_TEXT = 4.5;
 export const AA_LARGE_AND_UI = 3;
 
 /**
- * The theme's page surface and its inverse. Translucent backgrounds are
- * composited on these. Renamed by the Semantic roles (#3455)? Update here.
+ * The theme's raised surface and its inverse, the strongest content tone
+ * (near-black in light, white in dark). Translucent backgrounds are composited
+ * on these.
  */
-export const SURFACE_TOKEN = "neutral.color.100";
-export const INVERSE_SURFACE_TOKEN = "neutral.color.1200";
+export const SURFACE_TOKEN = "elevation.color.100";
+export const INVERSE_SURFACE_TOKEN = "content.color.300";
 
 const STATES = new Set([
   "default",
@@ -294,13 +295,13 @@ export function findPairs(keys) {
  * Backgrounds that take arbitrary content — Text, Heading, Link, Icon,
  * AlertText, Alert, form fields. Each is set by the named component's
  * `.module.scss`. The page background belongs to the app: Storybook paints it
- * white (`neutral.color.100`), the docs and their previews `neutral.color.200`
- * (`apps/docs/src/app/layout.module.scss`). `*` matches within one segment, a
- * leading `!` excludes.
+ * white (`elevation.color.100`), the docs and their previews
+ * `elevation.color.200` (`apps/docs/src/app/layout.module.scss`). `*` matches
+ * within one segment, a leading `!` excludes.
  */
 export const CONTENT_SURFACES = [
-  "neutral.color.100", // page (Storybook), Section without a card
-  "neutral.color.200", // page (docs)
+  "elevation.color.100", // page (Storybook), Section without a card
+  "elevation.color.200", // page (docs)
   "layout-card.background-color", // LayoutCard
   "modal.background-color", // Modal
   "modal.footer-background-color", // Modal footer

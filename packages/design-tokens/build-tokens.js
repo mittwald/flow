@@ -34,6 +34,18 @@ const semanticLiteralGroups = [
   "background-gradient",
 ];
 
+/** The keys each Semantic group holds under `color` (#3455). */
+const steps = ["100", "200", "300"];
+const semanticShapes = {
+  default: ["quiet", "strong"].flatMap((tone) =>
+    steps.map((step) => `${tone}.${step}`),
+  ),
+  elevation: steps,
+  content: [...steps, "inverse"],
+  border: steps,
+  disabled: steps,
+};
+
 const collectTokens = (node, file, tokenPath = [], collector = []) => {
   if (node && typeof node === "object" && "value" in node) {
     collector.push({ file, path: tokenPath, value: node.value });
@@ -94,6 +106,28 @@ const checkColorTiers = () => {
   const dark = new Set(semanticKeys("dark"));
   for (const key of light.symmetricDifference(dark)) {
     errors.push(`${key}: defined for only one theme in color-semantic.*.yml`);
+  }
+
+  // Semantic roles (#3455): the neutral roles count 100–300, every other
+  // group holds quiet and strong 100–300. A step outside the shape is a new
+  // role and needs a decision, not a key.
+  const keysByGroup = Map.groupBy(
+    [...light].filter(
+      (key) => !semanticLiteralGroups.includes(key.split(".")[0]),
+    ),
+    (key) => key.split(".")[0],
+  );
+  for (const [group, keys] of keysByGroup) {
+    const expected = semanticShapes[group] ?? semanticShapes.default;
+    const actual = keys.map((key) => key.split(".").slice(2).join("."));
+    if (
+      actual.length !== expected.length ||
+      !expected.every((key) => actual.includes(key))
+    ) {
+      errors.push(
+        `${group}: Semantic shape must be ${expected.join(", ")} (got ${actual.join(", ")})`,
+      );
+    }
   }
 
   if (errors.length > 0) {

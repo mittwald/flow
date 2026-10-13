@@ -26,6 +26,6 @@ switch:
     disabled:
       value: "{disabled-plain-content-color}"
   handle-background-color:
-    value: "{neutral.color.100}"
+    value: "{elevation.color.100}"
   handle-size:
     value: 1.25rem

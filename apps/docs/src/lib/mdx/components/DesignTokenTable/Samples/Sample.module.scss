@@ -5,7 +5,7 @@
   border-radius: 2px;
 
   &:where(.filled) {
-    background-color: var(--decorative-lilac--color--700);
+    background-color: var(--decorative-lilac--color--strong--100);
     border: none;
   }
 }
@@ -16,7 +16,7 @@
   width: 32px;
   border-bottom: 1px solid;
   border-top: 1px solid;
-  border-color: var(--decorative-lilac--color--700);
+  border-color: var(--decorative-lilac--color--strong--100);
 }
 
 .wrapper {
@@ -29,10 +29,10 @@
       45deg,
       white,
       white 10px,
-      var(--decorative-violet--color--700) 5px,
-      var(--decorative-violet--color--700) 15px
+      var(--decorative-lilac--color--strong--100) 5px,
+      var(--decorative-lilac--color--strong--100) 15px
     );
-    border-color: var(--decorative-violet--color--700);
+    border-color: var(--decorative-lilac--color--strong--100);
   }
 
   &:where(.margin) {
@@ -40,10 +40,10 @@
       45deg,
       white,
       white 10px,
-      var(--decorative-teal--color--700) 5px,
-      var(--decorative-teal--color--700) 15px
+      var(--decorative-green--color--strong--100) 5px,
+      var(--decorative-green--color--strong--100) 15px
     );
-    border-color: var(--decorative-teal--color--700);
+    border-color: var(--decorative-green--color--strong--100);
   }
 }
 
@@ -54,12 +54,12 @@
   border-radius: 4px;
 
   &:where(.padding) {
-    color: var(--decorative-violet--color--800);
-    border-color: var(--decorative-violet--color--800);
+    color: var(--decorative-lilac--color--strong--100);
+    border-color: var(--decorative-lilac--color--strong--100);
   }
 
   &:where(.margin) {
-    color: var(--decorative-teal--color--800);
-    border-color: var(--decorative-teal--color--800);
+    color: var(--decorative-green--color--strong--100);
+    border-color: var(--decorative-green--color--strong--100);
   }
 }

@@ -12,8 +12,8 @@ image-cropper:
   grid-width:
     value: "0.5px"
   grid-color:
-    value: "{light-static.color.400}"
+    value: "{light-static.color.quiet.300}"
   mask-border-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   mask-color:
-    value: "{dark-static.color.600}"
+    value: "{dark-static.color.strong.300}"

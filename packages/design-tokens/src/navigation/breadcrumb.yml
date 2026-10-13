@@ -11,9 +11,9 @@ breadcrumb:
     default:
       value: "{text.color.default}"
     hover:
-      value: "{neutral.color.900}"
+      value: "{content.color.300}"
     pressed:
-      value: "{neutral.color.800}"
+      value: "{content.color.200}"
 
   # Dark
   color-dark:

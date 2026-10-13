@@ -3,472 +3,341 @@
 # owns the color, holds a literal. Keep the keys in sync with
 # color-semantic.dark.yml.
 #
-# Provisional until the Semantic roles (#3455): each step references the
-# Brand step closest in luminance to its value before the brand palette
-# (#3453).
+# Roles (#3455). Every key counts by emphasis, not lightness: 100 is the
+# quietest in both themes.
 #
-# Status colors (info, success, danger, warning) pick Brand steps by role
-# (#3454), not by luminance:
-#   soft 100–300  → 100–300             (dark: 1800–1600)
-#   solid 800     → 1300, success 1600  (dark: 700, success 1000)
-#   text 900      → 1500, success 1700  (dark: 500, success 600)
-#   pressed 1000  → 1600, success 1800  (dark: 400, success 500)
-# 400–700 and 1100 are unused and fill the ramp in order. decorative-red,
-# -orange and -green mirror danger, warning and success.
+# Colored and alpha groups have six tones:
+#   quiet.100–300   soft surface, hover, pressed; plain/outline hover, pressed
+#   strong.100–300  solid surface, hover, pressed; strong.100 is also plain
+#                   text, link and border, strong.200 text on soft/outline
+# Hover and pressed take the next Brand step. strong.100 is the step closest
+# to the Brand base that keeps AA (primary and decorative-blue: the base).
+# Status groups pick their steps by role (#3454).
+#
+# The neutral ramp is split by role (keys 100–300, quiet to strong):
+#   elevation  100 raised (card, modal), 200 ground (page), 300 inset
+#   content    100 secondary (icon, placeholder), 200 label, 300 text;
+#              inverse is content on strong surfaces
+#   border     100 groups, 200 separates, 300 controls (≥ 3:1)
+#   disabled   100 surface, 200 border, 300 content
+# neutral and unavailable keep quiet/strong for their variants; unavailable
+# sits as low as AA allows (strong.100 = content.100).
+#
+# Decorative groups: one per mittwald brand color. Status colors are not
+# duplicated; components map their color props onto these groups.
+#
+# Dark takes the contrast steps of light (content, border, disabled) or the
+# role (elevation: the page sits below the card), not the mirrored step.
+
 primary:
   color:
-    100:
-      value: "{color.mittwald-blue.100}"
-    200:
-      value: "{color.mittwald-blue.100}"
-    300:
-      value: "{color.mittwald-blue.200}"
-    400:
-      value: "{color.mittwald-blue.400}"
-    500:
-      value: "{color.mittwald-blue.500}"
-    600:
-      value: "{color.mittwald-blue.600}"
-    700:
-      value: "{color.mittwald-blue.700}"
-    800:
-      value: "{color.mittwald-blue.800}"
-    900:
-      value: "{color.mittwald-blue.1000}"
-    1000:
-      value: "{color.mittwald-blue.1300}"
-    1100:
-      value: "{color.mittwald-blue.1600}"
+    quiet:
+      100:
+        value: "{color.mittwald-blue.100}"
+      200:
+        value: "{color.mittwald-blue.200}"
+      300:
+        value: "{color.mittwald-blue.300}"
+    strong:
+      100:
+        value: "{color.mittwald-blue.1000}"
+      200:
+        value: "{color.mittwald-blue.1100}"
+      300:
+        value: "{color.mittwald-blue.1200}"
 
 info:
   color:
-    100:
-      value: "{color.mittwald-navy.100}"
-    200:
-      value: "{color.mittwald-navy.200}"
-    300:
-      value: "{color.mittwald-navy.300}"
-    400:
-      value: "{color.mittwald-navy.500}"
-    500:
-      value: "{color.mittwald-navy.700}"
-    600:
-      value: "{color.mittwald-navy.900}"
-    700:
-      value: "{color.mittwald-navy.1100}"
-    800:
-      value: "{color.mittwald-navy.1300}"
-    900:
-      value: "{color.mittwald-navy.1500}"
-    1000:
-      value: "{color.mittwald-navy.1600}"
-    1100:
-      value: "{color.mittwald-navy.1800}"
+    quiet:
+      100:
+        value: "{color.mittwald-navy.100}"
+      200:
+        value: "{color.mittwald-navy.200}"
+      300:
+        value: "{color.mittwald-navy.300}"
+    strong:
+      100:
+        value: "{color.mittwald-navy.1300}"
+      200:
+        value: "{color.mittwald-navy.1500}"
+      300:
+        value: "{color.mittwald-navy.1600}"
 
 success:
   color:
-    100:
-      value: "{color.system-success.100}"
-    200:
-      value: "{color.system-success.200}"
-    300:
-      value: "{color.system-success.300}"
-    400:
-      value: "{color.system-success.700}"
-    500:
-      value: "{color.system-success.1000}"
-    600:
-      value: "{color.system-success.1300}"
-    700:
-      value: "{color.system-success.1500}"
-    800:
-      value: "{color.system-success.1600}"
-    900:
-      value: "{color.system-success.1700}"
-    1000:
-      value: "{color.system-success.1800}"
-    1100:
-      value: "{color.system-success.1900}"
-
-neutral:
-  color:
-    100:
-      value: "{color.mittwald-neutral.100}"
-    200:
-      value: "{color.mittwald-neutral.200}"
-    300:
-      value: "{color.mittwald-neutral.300}"
-    400:
-      value: "{color.mittwald-neutral.400}"
-    500:
-      value: "{color.mittwald-neutral.500}"
-    600:
-      value: "{color.mittwald-neutral.600}"
-    700:
-      value: "{color.mittwald-neutral.700}"
-    800:
-      value: "{color.mittwald-neutral.800}"
-    900:
-      value: "{color.mittwald-neutral.900}"
-    1000:
-      value: "{color.mittwald-neutral.1000}"
-    1100:
-      value: "{color.mittwald-neutral.1100}"
-    1200:
-      value: "{color.mittwald-neutral.1200}"
-
-unavailable:
-  color:
-    100:
-      value: "{color.mittwald-neutral.100}"
-    200:
-      value: "{color.mittwald-neutral.200}"
-    300:
-      value: "{color.mittwald-neutral.300}"
-    400:
-      value: "{color.mittwald-neutral.400}"
-    500:
-      value: "{color.mittwald-neutral.500}"
-    600:
-      value: "{color.mittwald-neutral.600}"
-    700:
-      value: "{color.mittwald-neutral.700}"
-    800:
-      value: "{color.mittwald-neutral.800}"
-    900:
-      value: "{color.mittwald-neutral.900}"
-    1000:
-      value: "{color.mittwald-neutral.1000}"
-    1100:
-      value: "{color.mittwald-neutral.1100}"
-    1200:
-      value: "{color.mittwald-neutral.1200}"
+    quiet:
+      100:
+        value: "{color.system-success.100}"
+      200:
+        value: "{color.system-success.200}"
+      300:
+        value: "{color.system-success.300}"
+    strong:
+      100:
+        value: "{color.system-success.1600}"
+      200:
+        value: "{color.system-success.1700}"
+      300:
+        value: "{color.system-success.1800}"
 
 danger:
   color:
-    100:
-      value: "{color.system-danger.100}"
-    200:
-      value: "{color.system-danger.200}"
-    300:
-      value: "{color.system-danger.300}"
-    400:
-      value: "{color.system-danger.500}"
-    500:
-      value: "{color.system-danger.700}"
-    600:
-      value: "{color.system-danger.900}"
-    700:
-      value: "{color.system-danger.1100}"
-    800:
-      value: "{color.system-danger.1300}"
-    900:
-      value: "{color.system-danger.1500}"
-    1000:
-      value: "{color.system-danger.1600}"
-    1100:
-      value: "{color.system-danger.1800}"
+    quiet:
+      100:
+        value: "{color.system-danger.100}"
+      200:
+        value: "{color.system-danger.200}"
+      300:
+        value: "{color.system-danger.300}"
+    strong:
+      100:
+        value: "{color.system-danger.1300}"
+      200:
+        value: "{color.system-danger.1500}"
+      300:
+        value: "{color.system-danger.1600}"
 
 warning:
   color:
-    100:
-      value: "{color.system-warning.100}"
-    200:
-      value: "{color.system-warning.200}"
-    300:
-      value: "{color.system-warning.300}"
-    400:
-      value: "{color.system-warning.500}"
-    500:
-      value: "{color.system-warning.700}"
-    600:
-      value: "{color.system-warning.900}"
-    700:
-      value: "{color.system-warning.1100}"
-    800:
-      value: "{color.system-warning.1300}"
-    900:
-      value: "{color.system-warning.1500}"
-    1000:
-      value: "{color.system-warning.1600}"
-    1100:
-      value: "{color.system-warning.1800}"
+    quiet:
+      100:
+        value: "{color.system-warning.100}"
+      200:
+        value: "{color.system-warning.200}"
+      300:
+        value: "{color.system-warning.300}"
+    strong:
+      100:
+        value: "{color.system-warning.1300}"
+      200:
+        value: "{color.system-warning.1500}"
+      300:
+        value: "{color.system-warning.1600}"
+
+neutral:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-neutral.400}"
+      200:
+        value: "{color.mittwald-neutral.500}"
+      300:
+        value: "{color.mittwald-neutral.600}"
+    strong:
+      100:
+        value: "{color.mittwald-neutral.800}"
+      200:
+        value: "{color.mittwald-neutral.900}"
+      300:
+        value: "{color.mittwald-neutral.1000}"
+
+unavailable:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-neutral.300}"
+      200:
+        value: "{color.mittwald-neutral.400}"
+      300:
+        value: "{color.mittwald-neutral.500}"
+    strong:
+      100:
+        value: "{color.mittwald-neutral.700}"
+      200:
+        value: "{color.mittwald-neutral.800}"
+      300:
+        value: "{color.mittwald-neutral.900}"
 
 decorative-blue:
   color:
-    100:
-      value: "{color.mittwald-blue.100}"
-    200:
-      value: "{color.mittwald-blue.100}"
-    300:
-      value: "{color.mittwald-blue.200}"
-    400:
-      value: "{color.mittwald-blue.400}"
-    500:
-      value: "{color.mittwald-blue.500}"
-    600:
-      value: "{color.mittwald-blue.600}"
-    700:
-      value: "{color.mittwald-blue.700}"
-    800:
-      value: "{color.mittwald-blue.800}"
-    900:
-      value: "{color.mittwald-blue.1000}"
-    1000:
-      value: "{color.mittwald-blue.1300}"
-    1100:
-      value: "{color.mittwald-blue.1600}"
+    quiet:
+      100:
+        value: "{color.mittwald-blue.100}"
+      200:
+        value: "{color.mittwald-blue.200}"
+      300:
+        value: "{color.mittwald-blue.300}"
+    strong:
+      100:
+        value: "{color.mittwald-blue.1000}"
+      200:
+        value: "{color.mittwald-blue.1100}"
+      300:
+        value: "{color.mittwald-blue.1200}"
 
 decorative-navy:
   color:
-    100:
-      value: "{color.mittwald-navy.100}"
-    200:
-      value: "{color.mittwald-navy.300}"
-    300:
-      value: "{color.mittwald-navy.600}"
-    400:
-      value: "{color.mittwald-navy.900}"
-    500:
-      value: "{color.mittwald-navy.1100}"
-    600:
-      value: "{color.mittwald-navy.1400}"
-    700:
-      value: "{color.mittwald-navy.1500}"
-    800:
-      value: "{color.mittwald-navy.1700}"
-    900:
-      value: "{color.mittwald-navy.1800}"
-    1000:
-      value: "{color.mittwald-navy.1900}"
-    1100:
-      value: "{color.mittwald-navy.1900}"
-
-decorative-violet:
-  color:
-    100:
-      value: "{color.mittwald-lilac.100}"
-    200:
-      value: "{color.mittwald-lilac.100}"
-    300:
-      value: "{color.mittwald-lilac.300}"
-    400:
-      value: "{color.mittwald-lilac.700}"
-    500:
-      value: "{color.mittwald-lilac.1000}"
-    600:
-      value: "{color.mittwald-lilac.1100}"
-    700:
-      value: "{color.mittwald-lilac.1200}"
-    800:
-      value: "{color.mittwald-lilac.1400}"
-    900:
-      value: "{color.mittwald-lilac.1500}"
-    1000:
-      value: "{color.mittwald-lilac.1600}"
-    1100:
-      value: "{color.mittwald-lilac.1800}"
-
-decorative-teal:
-  color:
-    100:
-      value: "{color.mittwald-green.100}"
-    200:
-      value: "{color.mittwald-green.100}"
-    300:
-      value: "{color.mittwald-green.200}"
-    400:
-      value: "{color.mittwald-green.300}"
-    500:
-      value: "{color.mittwald-green.400}"
-    600:
-      value: "{color.mittwald-green.700}"
-    700:
-      value: "{color.mittwald-green.1100}"
-    800:
-      value: "{color.mittwald-green.1300}"
-    900:
-      value: "{color.mittwald-green.1500}"
-    1000:
-      value: "{color.mittwald-green.1700}"
-    1100:
-      value: "{color.mittwald-green.1700}"
-
-decorative-lilac:
-  color:
-    100:
-      value: "{color.mittwald-lilac.100}"
-    200:
-      value: "{color.mittwald-lilac.100}"
-    300:
-      value: "{color.mittwald-lilac.300}"
-    400:
-      value: "{color.mittwald-lilac.400}"
-    500:
-      value: "{color.mittwald-lilac.700}"
-    600:
-      value: "{color.mittwald-lilac.900}"
-    700:
-      value: "{color.mittwald-lilac.1200}"
-    800:
-      value: "{color.mittwald-lilac.1300}"
-    900:
-      value: "{color.mittwald-lilac.1500}"
-    1000:
-      value: "{color.mittwald-lilac.1800}"
-    1100:
-      value: "{color.mittwald-lilac.1900}"
-
-decorative-red:
-  color:
-    100:
-      value: "{color.system-danger.100}"
-    200:
-      value: "{color.system-danger.200}"
-    300:
-      value: "{color.system-danger.300}"
-    400:
-      value: "{color.system-danger.500}"
-    500:
-      value: "{color.system-danger.700}"
-    600:
-      value: "{color.system-danger.900}"
-    700:
-      value: "{color.system-danger.1100}"
-    800:
-      value: "{color.system-danger.1300}"
-    900:
-      value: "{color.system-danger.1500}"
-    1000:
-      value: "{color.system-danger.1600}"
-    1100:
-      value: "{color.system-danger.1800}"
+    quiet:
+      100:
+        value: "{color.mittwald-navy.100}"
+      200:
+        value: "{color.mittwald-navy.200}"
+      300:
+        value: "{color.mittwald-navy.300}"
+    strong:
+      100:
+        value: "{color.mittwald-navy.1400}"
+      200:
+        value: "{color.mittwald-navy.1500}"
+      300:
+        value: "{color.mittwald-navy.1600}"
 
 decorative-green:
   color:
-    100:
-      value: "{color.system-success.100}"
-    200:
-      value: "{color.system-success.200}"
-    300:
-      value: "{color.system-success.300}"
-    400:
-      value: "{color.system-success.700}"
-    500:
-      value: "{color.system-success.1000}"
-    600:
-      value: "{color.system-success.1300}"
-    700:
-      value: "{color.system-success.1500}"
-    800:
-      value: "{color.system-success.1600}"
-    900:
-      value: "{color.system-success.1700}"
-    1000:
-      value: "{color.system-success.1800}"
-    1100:
-      value: "{color.system-success.1900}"
+    quiet:
+      100:
+        value: "{color.mittwald-green.100}"
+      200:
+        value: "{color.mittwald-green.200}"
+      300:
+        value: "{color.mittwald-green.300}"
+    strong:
+      100:
+        value: "{color.mittwald-green.1500}"
+      200:
+        value: "{color.mittwald-green.1600}"
+      300:
+        value: "{color.mittwald-green.1700}"
+
+decorative-lilac:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-lilac.100}"
+      200:
+        value: "{color.mittwald-lilac.200}"
+      300:
+        value: "{color.mittwald-lilac.300}"
+    strong:
+      100:
+        value: "{color.mittwald-lilac.1500}"
+      200:
+        value: "{color.mittwald-lilac.1600}"
+      300:
+        value: "{color.mittwald-lilac.1700}"
 
 decorative-orange:
   color:
+    quiet:
+      100:
+        value: "{color.mittwald-orange.100}"
+      200:
+        value: "{color.mittwald-orange.200}"
+      300:
+        value: "{color.mittwald-orange.300}"
+    strong:
+      100:
+        value: "{color.mittwald-orange.1500}"
+      200:
+        value: "{color.mittwald-orange.1600}"
+      300:
+        value: "{color.mittwald-orange.1700}"
+
+elevation:
+  color:
     100:
-      value: "{color.system-warning.100}"
+      value: "{color.mittwald-neutral.100}"
     200:
-      value: "{color.system-warning.200}"
+      value: "{color.mittwald-neutral.200}"
     300:
-      value: "{color.system-warning.300}"
-    400:
-      value: "{color.system-warning.500}"
-    500:
-      value: "{color.system-warning.700}"
-    600:
-      value: "{color.system-warning.900}"
-    700:
-      value: "{color.system-warning.1100}"
-    800:
-      value: "{color.system-warning.1300}"
-    900:
-      value: "{color.system-warning.1500}"
-    1000:
-      value: "{color.system-warning.1600}"
-    1100:
-      value: "{color.system-warning.1800}"
+      value: "{color.mittwald-neutral.300}"
+
+content:
+  color:
+    100:
+      value: "{color.mittwald-neutral.700}"
+    200:
+      value: "{color.mittwald-neutral.800}"
+    300:
+      value: "{color.mittwald-neutral.1100}"
+    inverse:
+      value: "{color.mittwald-neutral.100}"
+
+border:
+  color:
+    100:
+      value: "{color.mittwald-neutral.300}"
+    200:
+      value: "{color.mittwald-neutral.500}"
+    300:
+      value: "{color.mittwald-neutral.700}"
+
+disabled:
+  color:
+    100:
+      value: "{color.mittwald-neutral.300}"
+    200:
+      value: "{color.mittwald-neutral.400}"
+    300:
+      value: "{color.mittwald-neutral.500}"
 
 dark:
   color:
-    100:
-      value: "{color.black-alpha.200}"
-    200:
-      value: "{color.black-alpha.300}"
-    300:
-      value: "{color.black-alpha.400}"
-    400:
-      value: "{color.black-alpha.500}"
-    500:
-      value: "{color.black-alpha.700}"
-    600:
-      value: "{color.black-alpha.800}"
-    700:
-      value: "{color.black-alpha.900}"
-    800:
-      value: "{color.black-alpha.1000}"
+    quiet:
+      100:
+        value: "{color.black-alpha.200}"
+      200:
+        value: "{color.black-alpha.300}"
+      300:
+        value: "{color.black-alpha.400}"
+    strong:
+      100:
+        value: "{color.black-alpha.1000}"
+      200:
+        value: "{color.black-alpha.900}"
+      300:
+        value: "{color.black-alpha.800}"
 
 light:
   color:
-    100:
-      value: "{color.white-alpha.200}"
-    200:
-      value: "{color.white-alpha.300}"
-    300:
-      value: "{color.white-alpha.400}"
-    400:
-      value: "{color.white-alpha.500}"
-    500:
-      value: "{color.white-alpha.700}"
-    600:
-      value: "{color.white-alpha.800}"
-    700:
-      value: "{color.white-alpha.900}"
-    800:
-      value: "{color.white-alpha.1000}"
+    quiet:
+      100:
+        value: "{color.white-alpha.200}"
+      200:
+        value: "{color.white-alpha.300}"
+      300:
+        value: "{color.white-alpha.400}"
+    strong:
+      100:
+        value: "{color.white-alpha.1000}"
+      200:
+        value: "{color.white-alpha.900}"
+      300:
+        value: "{color.white-alpha.800}"
 
 dark-static:
   color:
-    100:
-      value: "{color.black-alpha.200}"
-    200:
-      value: "{color.black-alpha.300}"
-    300:
-      value: "{color.black-alpha.400}"
-    400:
-      value: "{color.black-alpha.500}"
-    500:
-      value: "{color.black-alpha.700}"
-    600:
-      value: "{color.black-alpha.800}"
-    700:
-      value: "{color.black-alpha.900}"
-    800:
-      value: "{color.black-alpha.1000}"
+    quiet:
+      100:
+        value: "{color.black-alpha.200}"
+      200:
+        value: "{color.black-alpha.300}"
+      300:
+        value: "{color.black-alpha.400}"
+    strong:
+      100:
+        value: "{color.black-alpha.1000}"
+      200:
+        value: "{color.black-alpha.900}"
+      300:
+        value: "{color.black-alpha.800}"
 
 light-static:
   color:
-    100:
-      value: "{color.white-alpha.200}"
-    200:
-      value: "{color.white-alpha.300}"
-    300:
-      value: "{color.white-alpha.400}"
-    400:
-      value: "{color.white-alpha.500}"
-    500:
-      value: "{color.white-alpha.700}"
-    600:
-      value: "{color.white-alpha.800}"
-    700:
-      value: "{color.white-alpha.900}"
-    800:
-      value: "{color.white-alpha.1000}"
+    quiet:
+      100:
+        value: "{color.white-alpha.200}"
+      200:
+        value: "{color.white-alpha.300}"
+      300:
+        value: "{color.white-alpha.400}"
+    strong:
+      100:
+        value: "{color.white-alpha.1000}"
+      200:
+        value: "{color.white-alpha.900}"
+      300:
+        value: "{color.white-alpha.800}"
 
 # Literal values: Flow owns these colors outright (ADR 0007).
 transparent:

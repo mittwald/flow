@@ -3,7 +3,7 @@
   --page-width: 1800px;
 
   /* The header's tint is mixed from the gradient's first stop. */
-  --header-ground: var(--neutral--color--200);
+  --header-ground: var(--elevation--color--200);
 
   /* The header's rendered height; the sticky sidebar starts just below it. */
   --header-height: 72px;

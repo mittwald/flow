@@ -7,9 +7,9 @@ illustrated-message:
   content-color:
     value: "{heading.color}"
   danger-content-color:
-    value: "{danger.color.900}"
+    value: "{danger.color.strong.200}"
   unavailable-content-color:
-    value: "{unavailable.color.800}"
+    value: "{unavailable.color.strong.100}"
   dark-content-color:
     value: "{dark-plain-content-color}"
   light-content-color:

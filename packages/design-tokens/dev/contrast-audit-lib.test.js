@@ -84,7 +84,7 @@ test("backgroundNameFor swaps the content part of the last segment", () => {
   );
   assert.equal(backgroundNameFor("menu-item.background-color"), null);
   assert.equal(backgroundNameFor("badge.blue-border-color"), null);
-  assert.equal(backgroundNameFor("neutral.color.100"), null);
+  assert.equal(backgroundNameFor("elevation.color.100"), null);
 });
 
 test("backdropFor reads the dark/light context from the name", () => {
@@ -139,8 +139,8 @@ test("findPairs pairs states and falls back to default", () => {
 
 test("auditTheme composites alpha on the surface and rates the pair", () => {
   const tokens = new Map([
-    ["neutral.color.100", "#FFFFFF"],
-    ["neutral.color.1200", "#000000"],
+    ["elevation.color.100", "#FFFFFF"],
+    ["content.color.300", "#000000"],
     ["a-plain-background-color", "transparent"],
     ["a-plain-content-color", "#777777"],
     ["b-soft-background-color", "rgb(0 0 0 / 50%)"],
@@ -160,7 +160,7 @@ test("auditTheme composites alpha on the surface and rates the pair", () => {
 
 test("findSurfaceChecks rates single colors on the surfaces they render on", () => {
   const checks = findSurfaceChecks([
-    "neutral.color.100",
+    "elevation.color.100",
     "layout-card.background-color",
     "list-item.background-color.default",
     "list-item.background-color.pressed",
@@ -178,7 +178,7 @@ test("findSurfaceChecks rates single colors on the surfaces they render on", () 
     checks.filter((c) => c.content === content).map((c) => c.background);
 
   assert.deepEqual(on("text.color.default"), [
-    "neutral.color.100",
+    "elevation.color.100",
     "layout-card.background-color",
     "list-item.background-color.default",
     "list-item.background-color.pressed",
@@ -209,8 +209,8 @@ test("findSurfaceChecks rates single colors on the surfaces they render on", () 
 
 test("auditTheme rates a surface check, a backdrop-only one included", () => {
   const tokens = new Map([
-    ["neutral.color.100", "#FFFFFF"],
-    ["neutral.color.1200", "#000000"],
+    ["elevation.color.100", "#FFFFFF"],
+    ["content.color.300", "#000000"],
     ["layout-card.background-color", "#FFFFFF"],
     ["icon.color", "#949494"],
     ["text.color.light-static", "rgb(255 255 255 / 50%)"],

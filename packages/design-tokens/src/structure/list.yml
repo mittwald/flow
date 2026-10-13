@@ -31,8 +31,8 @@ list-item:
   subtitle-font-size:
     value: "{font-size-text.s}"
   checkbox-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   checkbox-background-color:
-    value: "{dark-static.color.400}"
+    value: "{dark-static.color.strong.300}"
   checkbox-corner-radius:
     value: "{corner-radius.s}"

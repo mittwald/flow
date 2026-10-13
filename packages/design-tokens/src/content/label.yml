@@ -7,6 +7,6 @@ label:
     value: "{size-rem.xs}"
   color:
     default:
-      value: "{neutral.color.800}"
+      value: "{content.color.200}"
     disabled:
       value: "{disabled-plain-content-color}"

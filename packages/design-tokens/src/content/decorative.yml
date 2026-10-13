@@ -1,40 +1,40 @@
 decorative:
   # Blue
   blue-background-color:
-    value: "{decorative-blue.color.200}"
+    value: "{decorative-blue.color.quiet.100}"
   blue-content-accent-color:
-    value: "{decorative-blue.color.800}"
+    value: "{decorative-blue.color.strong.100}"
   blue-content-color:
-    value: "{decorative-blue.color.1000}"
+    value: "{decorative-blue.color.strong.300}"
 
   # Teal
   teal-background-color:
-    value: "{decorative-teal.color.200}"
+    value: "{decorative-green.color.quiet.100}"
   teal-content-accent-color:
-    value: "{decorative-teal.color.800}"
+    value: "{decorative-green.color.strong.100}"
   teal-content-color:
-    value: "{decorative-teal.color.1000}"
+    value: "{decorative-green.color.strong.300}"
 
   # Green
   green-background-color:
-    value: "{decorative-green.color.200}"
+    value: "{success.color.quiet.100}"
   green-content-accent-color:
-    value: "{decorative-green.color.800}"
+    value: "{success.color.strong.100}"
   green-content-color:
-    value: "{decorative-green.color.1000}"
+    value: "{success.color.strong.300}"
 
   # Violet
   violet-background-color:
-    value: "{decorative-violet.color.200}"
+    value: "{decorative-lilac.color.quiet.100}"
   violet-content-accent-color:
-    value: "{decorative-violet.color.800}"
+    value: "{decorative-lilac.color.strong.100}"
   violet-content-color:
-    value: "{decorative-violet.color.1000}"
+    value: "{decorative-lilac.color.strong.300}"
 
   # Lilac
   lilac-background-color:
-    value: "{decorative-lilac.color.200}"
+    value: "{decorative-lilac.color.quiet.100}"
   lilac-content-accent-color:
-    value: "{decorative-lilac.color.800}"
+    value: "{decorative-lilac.color.strong.100}"
   lilac-content-color:
-    value: "{decorative-lilac.color.1000}"
+    value: "{decorative-lilac.color.strong.300}"

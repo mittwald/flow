@@ -50,7 +50,7 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
     (`CONTENT_SURFACES`, `STATE_SURFACES`). A new container with its own
     background, or a new content-only color, belongs in those lists.
   - **Backdrops.** Translucent backgrounds are composited on the theme surface
-    (`neutral.color.100`); `light`/`*-static` colors on an ideal backdrop.
+    (`elevation.color.100`); `light`/`*-static` colors on an ideal backdrop.
 - **Contrast gate.** `pnpm nx test:contrast tokens` (part of `pnpm test` and
   CI's `affected:test`) fails on any failure not in
   `dev/contrast-audit-allowlist.js`, on an allowlisted pair that drops below its

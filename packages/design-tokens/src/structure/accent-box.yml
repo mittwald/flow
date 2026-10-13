@@ -1,18 +1,18 @@
 accent-box:
   background-color-neutral:
-    value: "{neutral.color.300}"
+    value: "{elevation.color.300}"
   background-color-blue:
-    value: "{decorative-blue.color.200}"
+    value: "{decorative-blue.color.quiet.100}"
   background-color-teal:
-    value: "{decorative-teal.color.200}"
+    value: "{decorative-green.color.quiet.100}"
   background-color-lilac:
-    value: "{decorative-lilac.color.200}"
+    value: "{decorative-lilac.color.quiet.100}"
   background-color-violet:
-    value: "{decorative-violet.color.200}"
+    value: "{decorative-lilac.color.quiet.100}"
   background-color-green:
-    value: "{decorative-green.color.200}"
+    value: "{success.color.quiet.100}"
   background-color-navy:
-    value: "{decorative-navy.color.200}"
+    value: "{decorative-navy.color.quiet.100}"
   background-color-gradient:
     value: "{gradient.color}"
 

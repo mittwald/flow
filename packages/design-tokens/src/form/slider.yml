@@ -1,9 +1,9 @@
 slider:
   color:
     default:
-      value: "{neutral.color.1000}"
+      value: "{neutral.color.strong.300}"
     disabled:
-      value: "{neutral.color.600}"
+      value: "{disabled.color.300}"
   spacing-x:
     value: "{size-rem.s}"
   spacing-y:
@@ -37,7 +37,7 @@ slider:
   handle-size:
     value: "{size-rem.l}"
   handle-fill-color:
-    value: "{neutral.color.100}"
+    value: "{elevation.color.100}"
   handle-border-width:
     value: "{border-width.300}"
 

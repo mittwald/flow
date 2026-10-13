@@ -20,9 +20,9 @@ form-control:
 
   placeholder-color:
     default:
-      value: "{neutral.color.700}"
+      value: "{content.color.100}"
     disabled:
-      value: "{neutral.color.500}"
+      value: "{disabled.color.300}"
 
   border-color:
     default:
@@ -38,15 +38,15 @@ form-control:
 
   background-color:
     default:
-      value: "{neutral.color.200}"
+      value: "{elevation.color.200}"
     disabled:
       value: "{disabled-outline-background-color}"
     hover:
       value: "{neutral-outline-background-color.hover}"
     focused:
-      value: "{neutral.color.200}"
+      value: "{elevation.color.200}"
     invalid:
-      value: "{danger.color.100}"
+      value: "{danger.color.quiet.100}"
     selected:
       value: "{neutral-outline-background-color.pressed}"
 

@@ -7,25 +7,25 @@ icon:
     l:
       value: 4rem
   color:
-    value: "{neutral.color.700}"
+    value: "{content.color.100}"
   info-color:
-    value: "{info.color.900}"
+    value: "{info.color.strong.200}"
   warning-color:
-    value: "{warning.color.900}"
+    value: "{warning.color.strong.200}"
   danger-color:
-    value: "{danger.color.900}"
+    value: "{danger.color.strong.200}"
   success-color:
-    value: "{success.color.900}"
+    value: "{success.color.strong.200}"
   unavailable-color:
-    value: "{unavailable.color.800}"
+    value: "{unavailable.color.strong.100}"
   blue-color:
-    value: "{primary.color.1000}"
+    value: "{primary.color.strong.300}"
   violet-color:
-    value: "{decorative-violet.color.800}"
+    value: "{decorative-lilac.color.strong.100}"
   teal-color:
-    value: "{decorative-teal.color.800}"
+    value: "{decorative-green.color.strong.100}"
   lilac-color:
-    value: "{decorative-lilac.color.800}"
+    value: "{decorative-lilac.color.strong.100}"
   dark-color:
     value: "{dark-plain-content-color}"
   light-color:
