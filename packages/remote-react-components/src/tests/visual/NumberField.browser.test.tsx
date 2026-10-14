@@ -1,6 +1,9 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
+
+// The unit prop landed in 1.5.0-next.41 and shipped in 1.5.0.
+const customUnitFrom = "1.5.0-next.41";
 
 test.each(testEnvironments)(
   "NumberField states (%s)",
@@ -49,17 +52,33 @@ test.each(testEnvironments)(
         >
           <Label>Unit</Label>
         </NumberField>
-        <NumberField unit="MiB" defaultValue={512}>
-          <Label>Custom unit</Label>
-        </NumberField>
-        <NumberField unit="MiB" defaultValue={512} isDisabled>
-          <Label>Custom unit disabled</Label>
-        </NumberField>
         <NumberField minValue={5} defaultValue={5}>
           <Label>Disabled increment</Label>
         </NumberField>
         <NumberField maxValue={5} defaultValue={5}>
           <Label>Disabled decrement</Label>
+        </NumberField>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("NumberField states");
+  },
+);
+
+test.skipIf(crossVersion({ below: customUnitFrom })).each(testEnvironments)(
+  "NumberField custom unit (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ColumnLayout, NumberField, Label },
+  }) => {
+    await render(
+      <ColumnLayout m={[1, 1]} l={[1, 1]}>
+        <NumberField unit="MiB" defaultValue={512}>
+          <Label>Custom unit</Label>
+        </NumberField>
+        <NumberField unit="MiB" defaultValue={512} isDisabled>
+          <Label>Custom unit disabled</Label>
         </NumberField>
         {/* A custom unit is cut off where the input cuts off its text */}
         <ColumnLayout m={[1, 1]} l={[1, 1]}>
@@ -80,7 +99,7 @@ test.each(testEnvironments)(
       </ColumnLayout>,
     );
 
-    await testScreenshot("NumberField states");
+    await testScreenshot("NumberField custom unit");
   },
 );
 

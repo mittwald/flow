@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 export interface ListSummaryProps
   extends FlowComponentProps, PropsWithChildren {
-  /** Whether the summary is placed above or underneath the list @default: "top" */
+  /** Whether the summary is placed above or underneath the list @default "top" */
   position?: "top" | "bottom";
 }
 

@@ -31,7 +31,7 @@ export interface CodeBlockProps
    * Controls truncation of long code blocks. `false` disables it, `true`
    * truncates after 8 lines, and a number sets the maximum line count.
    *
-   * @default: false
+   * @default false
    */
   truncateLines?: boolean | number;
 }
@@ -57,18 +57,14 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
   const isSkeleton = useSkeletonMode();
 
-  const rootClassName = clsx(
-    styles.codeBlock,
-    isSkeleton && styles.skeleton,
-    className,
-  );
+  const baseClassName = clsx(styles.codeBlock, isSkeleton && styles.skeleton);
 
   const id = useId();
 
   if (!code) {
     return (
       <div
-        className={clsx(rootClassName, styles.withChildren)}
+        className={clsx(baseClassName, styles.withChildren, className)}
         inert={isSkeleton || undefined}
       >
         {/* Deliberately class-less: a `flow--` class would make the global
@@ -119,9 +115,10 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   return (
     <div
       className={clsx(
-        rootClassName,
+        baseClassName,
         maxHeight && styles.truncated,
         folded && styles.folded,
+        className,
       )}
       style={heightVariables}
       onTransitionEnd={(event) => {

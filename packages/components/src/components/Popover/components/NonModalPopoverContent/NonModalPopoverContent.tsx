@@ -261,7 +261,7 @@ const NonModalPopoverContentInner: FC<NonModalPopoverContentInnerProps> = (
       {...overlayProps}
       id={id}
       ref={overlayRef}
-      className={clsx(className, styles["non-modal"])}
+      className={clsx(styles["non-modal"], className)}
       data-placement={placement ?? undefined}
       data-entering={isEntering || undefined}
       data-exiting={isExiting || undefined}

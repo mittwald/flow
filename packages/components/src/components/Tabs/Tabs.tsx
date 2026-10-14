@@ -61,6 +61,11 @@ export const Tabs = flowComponent("Tabs", (props) => {
 
   const isSsr = useIsSSR();
 
+  const handleSelectionChange = (key: Aria.Key) => {
+    setSelectedKeyState(key);
+    onSelectionChange?.(key);
+  };
+
   return (
     <>
       {children}
@@ -69,12 +74,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
         className={rootClassName}
         {...rest}
         selectedKey={selectedKey as Aria.Key | undefined}
-        onSelectionChange={(key) => {
-          setSelectedKeyState(key);
-          if (onSelectionChange) {
-            onSelectionChange(key);
-          }
-        }}
+        onSelectionChange={handleSelectionChange}
         disabledKeys={disabledKeys}
         ref={ref}
       >
@@ -82,12 +82,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledby}
           selection={selectedKey}
-          onContextMenuSelectionChange={(key) => {
-            setSelectedKeyState(key);
-            if (onSelectionChange) {
-              onSelectionChange(key);
-            }
-          }}
+          onContextMenuSelectionChange={handleSelectionChange}
           disabledKeys={disabledKeys}
         />
         <UiComponentTunnelExit id="Panels" component="Tabs" />
