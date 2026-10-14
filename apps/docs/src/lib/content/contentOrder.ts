@@ -50,6 +50,7 @@ export const CONTENT_ORDER: readonly string[] = [
   "/templates/bausteine",
   "/templates/bausteine/formular",
   "/templates/bausteine/multi-upload",
+  "/templates/bausteine/suche",
   "/templates/bausteine/zeitintervalle",
   "/components",
 ];
