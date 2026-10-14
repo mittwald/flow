@@ -1,4 +1,5 @@
 import type { Fix, PatchGroup, Release } from "./types";
+import { themedFigures } from "./themedFigures";
 
 interface GhRelease {
   tag_name: string;
@@ -11,6 +12,9 @@ interface GhRelease {
 
 const REPO = "mittwald/flow";
 const API = `https://api.github.com/repos/${REPO}/releases`;
+
+/** GitHub's Atom feed: the 10 newest releases, prereleases included. */
+export const releasesFeedUrl = `https://github.com/${REPO}/releases.atom`;
 
 const isPrerelease = (r: GhRelease): boolean =>
   r.prerelease || /-(next|alpha|beta|rc)\./.test(r.tag_name);
@@ -178,7 +182,13 @@ export const getReleases = async (): Promise<Release[]> => {
         b.version.localeCompare(a.version, undefined, { numeric: true }),
       );
 
-    const { headline, body } = splitHeadline(head.body ?? "");
+    const { headline, body } = splitHeadline(
+      themedFigures(head.body ?? "", (reason) =>
+        console.warn(
+          `[releases] ${version}: unreadable release figure, shown as code (${reason})`,
+        ),
+      ),
+    );
     // A hand-titled Release is the only case where `name` carries a headline —
     // the publish workflow always sets it to the bare version.
     const name = head.name?.trim();

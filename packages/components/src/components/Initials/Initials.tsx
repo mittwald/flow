@@ -7,6 +7,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { getColorFromInitials } from "@/components/Initials/lib/getColorFromInitials";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface InitialsProps
   extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
@@ -25,6 +26,8 @@ export const Initials = flowComponent("Initials", (props) => {
     ref,
   } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const textContent = extractTextFromFirstChild(children) ?? "";
   const initials = getInitialsFromString(textContent);
   const dynamicColor = useMemo(
@@ -32,7 +35,11 @@ export const Initials = flowComponent("Initials", (props) => {
     [useDynamicColor, textContent],
   );
 
-  const rootClassName = clsx(styles.initials, className);
+  const rootClassName = clsx(
+    styles.initials,
+    isSkeleton && styles.skeleton,
+    className,
+  );
 
   const initialsElements = initials.map((initial, index) => (
     <span aria-hidden role="presentation" key={index}>
@@ -48,6 +55,7 @@ export const Initials = flowComponent("Initials", (props) => {
       className={rootClassName}
       ref={ref}
       role="img"
+      inert={isSkeleton || undefined}
     >
       {initialsElements}
     </div>

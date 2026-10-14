@@ -187,6 +187,31 @@ round trip late, so a green `Local` says nothing about `Remote`.
 A plain `click()` or `fill()` needs no wait: the locator action resolves after
 the browser has moved the focus.
 
+### Waiting for the code highlighting
+
+The preamble cannot wait for CodeMirror's syntax highlighting either. CodeMirror
+parses the code for at most 20ms when the editor is created. The rest stays
+plain and gets parsed in an idle callback 100 to 500ms later, after the
+preamble's 100ms quiet window. Two identical plain frames still pass the
+matcher's stability check, and `update-screenshots` committed one as a reference
+on #3504.
+
+So a scenario that renders highlighted code (a `CodeBlock` or `CodeEditor` with
+a `language`, a Markdown code fence with one) waits for it after rendering, with
+the number of highlighted editors it renders:
+
+```tsx
+await render(<CodeBlock language="json" code={code} />);
+
+await waitForHighlightedCode(1); // from src/tests/lib/codeHighlighting.ts
+
+await testScreenshot("CodeBlock");
+```
+
+It waits until the last token of each editor's code is highlighted, so the code
+has to end on a token the highlighter colors, as a JSON object does with its
+closing brace.
+
 ### Notes on Chromium
 
 Due to its wide adoption, Chromium would normally be a good choice as a test

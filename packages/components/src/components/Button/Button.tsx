@@ -14,12 +14,22 @@ import { containsTextChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
 import { filterDOMProps } from "@react-aria/utils";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import {
+  SkeletonModeReset,
+  useSkeletonMode,
+} from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface ButtonProps
   extends
     PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<HTMLButtonElement> {
-  /** Slot for button placement in action groups. */
+  /**
+   * Slot for button placement in action groups: `primary` (at the end),
+   * `secondary` (before the primary action) or `abort` (at the start). Without
+   * a slot, an action group places the colors primary, success and danger in
+   * `primary` and every other color in `abort`. A secondary-colored button that
+   * does not abort therefore needs `slot="secondary"`.
+   */
   slot?: string;
   /**
    * The color of the button.
@@ -105,6 +115,7 @@ export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
   const warnDeprecation = useWarnDeprecation();
+  const isSkeleton = useSkeletonMode();
 
   const {
     color: colorFromProps = "primary",
@@ -151,6 +162,7 @@ export const Button = flowComponent("Button", (props) => {
         styles[variant],
         ariaDisabled && styles.ariaDisabled,
         hasText && styles.hasText,
+        isSkeleton && styles.skeleton,
         className,
       );
 
@@ -192,7 +204,7 @@ export const Button = flowComponent("Button", (props) => {
     <LoadingSpinner size={size} className={styles.stateIcon} />
   ) : undefined;
 
-  const content = (
+  const buttonContent = (
     <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
@@ -203,12 +215,21 @@ export const Button = flowComponent("Button", (props) => {
     </>
   );
 
+  /* A styled button is one skeleton surface, so its content draws no skeleton
+     of its own. An unstyled button draws no surface, so its content does. */
+  const content = (
+    <Wrap if={!unstyled}>
+      <SkeletonModeReset>{buttonContent}</SkeletonModeReset>
+    </Wrap>
+  );
+
   if (elementType === "span") {
     const spanProps = filterDOMProps(restProps, { global: true });
 
     return (
       <span
         {...spanProps}
+        inert={isSkeleton || undefined}
         data-disabled={restProps.isDisabled || undefined}
         className={
           typeof rootClassName === "string" ? rootClassName : undefined
@@ -227,6 +248,7 @@ export const Button = flowComponent("Button", (props) => {
       {...(isReadOnly === true ? { "data-readonly": true } : {})}
       {...restProps}
       aria-disabled={muted || undefined}
+      inert={isSkeleton || undefined}
     >
       {content}
     </Aria.Button>

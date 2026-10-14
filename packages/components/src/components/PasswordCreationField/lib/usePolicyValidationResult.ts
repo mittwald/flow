@@ -18,6 +18,11 @@ export const usePolicyValidationResult = (
     password: string;
     results: ResolvedPolicyValidationResult;
   } | null>(null);
+  /**
+   * Validations resolve in any order. A result for a password that is no longer
+   * the field's value would overwrite the current one.
+   */
+  const latestPassword = useRef(password);
 
   const validatePassword = (pwd: string) => {
     onValidationStart?.();
@@ -33,6 +38,9 @@ export const usePolicyValidationResult = (
       }
 
       const validationResult = await validationPolicy.validate(pwd);
+      if (pwd !== latestPassword.current) {
+        return;
+      }
       cache.current = { password: pwd, results: validationResult };
       onValidationResult?.({
         password: pwd,
@@ -47,6 +55,7 @@ export const usePolicyValidationResult = (
   });
 
   useEffect(() => {
+    latestPassword.current = password;
     if (password) {
       validatePasswordDebounce(password);
     } else {

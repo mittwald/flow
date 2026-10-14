@@ -32,6 +32,24 @@ test("the overflow counts the members the stack does not show", async () => {
   await expect.element(overflow("5")).toBeVisible();
 });
 
+test("a conditional avatar that renders nothing is not counted", async () => {
+  const showLuke = false as boolean;
+  await render(
+    <AvatarStack totalCount={3}>
+      <Avatar>
+        <Initials>Leia Organa</Initials>
+      </Avatar>
+      {showLuke && (
+        <Avatar>
+          <Initials>Luke Skywalker</Initials>
+        </Avatar>
+      )}
+    </AvatarStack>,
+  );
+
+  await expect.element(overflow("2")).toBeVisible();
+});
+
 test("a total that the avatars already cover adds no overflow", async () => {
   await renderStack({ totalCount: 2 });
 
@@ -57,4 +75,18 @@ test("pressing the overflow reports it", async () => {
   await page.getByRole("button").click();
 
   expect(onCountPress).toHaveBeenCalledTimes(1);
+});
+
+test("the overflow names the count without a press handler", async () => {
+  await renderStack({ totalCount: 7 });
+
+  await expect.element(page.getByRole("img", { name: "5 more" })).toBeVisible();
+});
+
+test("the overflow button is named by the count", async () => {
+  await renderStack({ totalCount: 7, onCountPress: vi.fn() });
+
+  await expect
+    .element(page.getByRole("button", { name: "5 more" }))
+    .toBeVisible();
 });

@@ -7,10 +7,10 @@ argument-hint: "optional free-text, e.g. --from next --to main --version 0.3.0"
 
 Prepare the **promotion / release PR** for mittwald Flow, following the release
 model in RFC #2711. You draft a curated, user-facing changelog, **capture its
-figures from the real stories**, freeze the release state on a branch,
-**graduate the version to the stable `x.y.0` in the PR itself**, and open a
-**Draft** PR. You do **not** build, tag, publish, or create the GitHub release —
-CI does all of that on merge.
+figures from the real Styleguide examples**, freeze the release state on a
+branch, **graduate the version to the stable `x.y.0` in the PR itself**, and
+open a **Draft** PR. You do **not** build, tag, publish, or create the GitHub
+release — CI does all of that on merge.
 
 Graduating in the PR (rather than leaving CI to bump on merge) is deliberate:
 the PR diff then reads honestly as `x.(y-1).z → x.y.0` instead of promoting a
@@ -102,67 +102,105 @@ requires `--from`/`--to` overrides before doing anything else.
    migrate** (breaking changes with concrete migration steps); otherwise omit
    the whole section.
 
-   For each feature section, note whether it maps to a component with stories.
-   Those get a figure in the next step; a feature with no story — the
+   For each feature section, note whether it maps to a component with an example
+   on its Styleguide page (`apps/docs/src/content/**/examples/`). Those get a
+   figure in the next step; a feature with nothing to show — the
    `@mittwald/flow-codemods` CLI, a build change — gets none, and you say so
-   rather than leaving an empty placeholder behind.
+   rather than leaving an empty placeholder behind. A component feature whose
+   page lacks an example gets none either: say so, and name the missing example
+   in the summary so it lands on the page — never capture a Storybook story
+   instead.
 
-8. **Capture the figures.** One per notable feature that has stories, never one
-   per prop variant: compose the variants into a single image.
+8. **Capture the figures.** Three rules hold for every figure, always:
+   - **One example per image.** Never compose several examples into one figure,
+     and bake no caption into the PNG. In the notes, each image gets its own
+     `###` subsection: a real heading and one or two short sentences above its
+     `<picture>` block. A comparison (SkeletonMode on vs. off) is two images
+     under two headings (`### While loading`, `### When loaded`).
+   - **The simplest example on the page, without demo controls.** Prefer the
+     page's plainest example (often `default`). A control that exists only to
+     switch the docs example's state — a "Ladezustand anzeigen" Switch — does
+     not belong in the figure: strip it and set the state as a constant.
+   - **English content.** The examples are German and stay so (the docs site is
+     German). The figure shows English, and so do the code samples in the notes.
 
-   Storybook renders the **working tree**, so freeze the release content first.
-   This is local; nothing reaches the remote before the gate in Step 10:
+   The spec's `replace` map does the last two, see below.
+
+   Figures come from the Styleguide examples, never from Storybook: they are
+   served from the docs site, where the stories' Star Wars fixtures are out of
+   place. The docs dev server renders each example on its own under
+   `/example-preview/<path>` — `next dev` only, the static export does not ship
+   it.
+
+   The dev server renders the **working tree**, so freeze the release content
+   first. This is local; nothing reaches the remote before the gate in Step 10:
 
    ```shell
    git checkout -B release/x.y.0 origin/<from>
    ```
 
-   Start one Storybook and reuse it for both halves of the step. Port 6006 is
-   routinely held by another worktree's Storybook, so name a free one:
-
-   ```shell
-   pnpm nx dev components -- --port 6007 --no-open
-
-   # Resolve a component's story ids — `componentPath` is the mapping.
-   curl -s http://localhost:6007/index.json \
-     | jq -r '.entries[] | select(.componentPath == "@/components/Rating") | .id'
-   ```
-
-   Write a spec per figure — strict JSON, no comments and no trailing commas —
-   and capture it:
+   An example is addressed by its page's content path plus its name:
+   `apps/docs/src/content/components/form-controls/rating/examples/max-value.tsx`
+   is `components/form-controls/rating/max-value`. Write a spec per figure —
+   strict JSON, no comments and no trailing commas — and capture it:
 
    ```json
    {
-     "name": "rating",
-     "panels": [
-       {
-         "story": "form-controls-rating--default",
-         "caption": "maxValue={10}",
-         "args": { "maxValue": 10 },
-         "expect": [{ "selector": "input[type=radio]", "count": 10 }]
-       },
-       { "story": "form-controls-rating--with-segments" }
-     ],
+     "example": "components/content/skeleton-mode/default",
+     "expect": [{ "selector": "[data-example-stage]", "text": "Storage" }],
+     "name": "skeleton-mode-loaded",
+     "replace": {
+       "const [isLoading, setIsLoading] = useState(true);": "const isLoading = false;",
+       "<Switch isSelected={isLoading} onChange={setIsLoading} > Ladezustand anzeigen </Switch>": "",
+       "Das Projekt liegt auf dem Server p-4711 und wird jede Nacht gesichert.": "The project lives on server p-4711 and is backed up every night.",
+       "Speicherplatz": "Storage"
+     },
      "scale": 2,
-     "version": "1.1.0",
-     "width": 500
+     "version": "1.5.0",
+     "width": 360
    }
    ```
 
+   `skeleton-mode-loading` is the same spec with `const isLoading = true;` and
+   no `expect` — a skeleton shows no text to assert.
+
    `version` + `name` give the output path
-   (`apps/docs/public/assets/releases/1.1.0/rating.png`); `width` is the CSS px
-   the stories render at and `scale` the `deviceScaleFactor`; `caption` is the
-   monospace line above a panel, naming the prop it demonstrates; `args` and
-   `globals` (e.g. `{ "theme": "dark" }`) drive the variant; `expect` asserts
-   what the panel actually rendered.
+   (`apps/docs/public/assets/releases/1.5.0/skeleton-mode-loaded.png`, plus
+   `-dark.png` — every figure is captured once per theme); `width` is the CSS px
+   the example renders at and `scale` the `deviceScaleFactor`; `expect` asserts
+   what the example rendered — the whole frame is searched, so an overlay in a
+   portal counts. The script rejects `panels` and `caption`.
+
+   `replace` rewrites the example's **source** for the run: visible strings to
+   English, the initial state, a demo control to `""`. The script swaps the file
+   in place and restores it on exit, Ctrl-C included, so nothing reaches a
+   commit and a running docs server serves the change without a restart. Write
+   each key as the code reads, with single spaces: a space matches any
+   whitespace run, so a phrase prettier wrapped across lines matches, and next
+   to punctuation it also matches none (prettier puts a JSX tag's `>` on its own
+   line — write `} >`). Keys apply longest first and never inside a longer word.
+   A key that matches nothing fails the run before any server starts. Flow's own
+   strings are English already: the browser runs in `en-US`. Assert the English
+   text in `expect` — it checks the rendered result.
+
+   A state only reachable by clicking (a Switch toggled off) is a `replace` of
+   its initial value too.
 
    ```shell
-   pnpm release:figure --spec <spec.json> --storybook-url http://localhost:6007
+   pnpm release:figure --spec <spec.json>
    ```
 
-   Omit `--storybook-url` and the script starts its own Storybook on a free port
-   via `pnpm nx dev components` and stops it again. That is slower, and it gives
-   you no server to resolve story ids against.
+   The script starts its own docs dev server on a free port via
+   `pnpm nx dev docs` and stops it again. For several figures, start one and
+   reuse it — port 3000 is routinely held by another worktree's docs server:
+
+   ```shell
+   pnpm nx dev docs -- --port 3417
+   pnpm release:figure --spec <spec.json> --docs-url http://localhost:3417
+   ```
+
+   A typo in an example path fails before any server starts and lists the page's
+   examples. An example that throws aborts the capture.
 
    The renderer is whichever Playwright browser is installed — Chromium first,
    then WebKit, then Firefox, and the run names the one it used. Pin it with
@@ -171,20 +209,20 @@ requires `--from`/`--to` overrides before doing anything else.
    There is no `--out`: the spec is the only source of the output path, which
    keeps every figure inside the release-assets tree.
 
-   **`expect` is not optional decoration.** Storybook filters `args=` down to
-   the story's declared `argTypes` and drops everything else **silently** — the
-   story still renders, just not in the state that was asked for. `defaultValue`
-   went that way while #3029 was being prepared. The URL is therefore evidence
-   of nothing, and the script rejects a spec whose args-driving panel asserts no
-   DOM.
+   **Use `expect` for what the figure is about.** The capture waits until its
+   expectations hold, so content that appears after mount — a chart's bars, an
+   open overlay — is captured drawn, not half-way.
 
-   **Then open every PNG and look at it.** A capture that is clipped, cropped
-   wrong or showing the wrong state renders fine and reads as plausible; the
-   first #3029 capture lost the bottom of its icons and survived a first pass.
-   Re-capture rather than ship a bad crop. Check the content too: these figures
-   are served from the docs site, where the Star Wars fixtures that are fine in
-   a story are out of place — prefer a story with neutral content, or pass
-   realistic content through an arg where the story declares one.
+   CSS animations are disabled for each shot (Playwright finishes a finite one
+   and resets an infinite one to its start), so a Skeleton's shimmer settles.
+
+   **Then open every PNG and look at it** — both themes. Check the language too:
+   a German string a `replace` key missed renders fine. A capture that is
+   clipped, cropped wrong or showing the wrong state renders fine and reads as
+   plausible; the first #3029 capture lost the bottom of its icons and survived
+   a first pass. Re-capture rather than ship a bad crop. An example whose
+   overlay extends past its frame is clipped — the docs examples keep overlays
+   inside (`paddingBlockEnd`), which is what the CoachMark example does.
 
    **Commit the figures on the release branch and reference them by the commit's
    SHA.** Not a `user-attachments` upload: GitHub has no API for those — they
@@ -206,15 +244,19 @@ requires `--from`/`--to` overrides before doing anything else.
    covers both surfaces. Committed binaries are no new precedent: `main` already
    carries ~950 PNG/GIF files.
 
-   Two constraints the `/releases` rendering imposes, both verified:
-   - **Markdown image syntax, never an HTML `<img>`.** GitHub renders raw HTML
-     in a release body; the docs site's `<Markdown>` does not enable
-     `rehype-raw` and drops it. An HTML tag therefore works on one surface and
-     silently vanishes on the other — and with it any `width` attribute.
-   - **Nothing can resize the figure afterwards**, since that `width` attribute
-     is unavailable. Both surfaces cap it with `max-width: 100%`, so an
-     oversized figure is scaled down and an undersized one is simply small.
-     `width × scale` is the pixel width, and the script prints it.
+   Two constraints the two surfaces impose, both verified on 1.5.0 (#3481):
+   - **The `<picture>` block the script prints, and no other HTML.** GitHub
+     renders raw HTML in a release body and shows the block's dark `<source>` to
+     dark mode. The docs site's `<Markdown>` does not enable `rehype-raw` and
+     drops raw HTML, so `themedFigures` (`apps/docs/src/lib/releases`) rewrites
+     exactly this shape into one markdown image per theme. Any other tag — a
+     bare `<img>` outside `<picture>` — works on GitHub and silently vanishes on
+     `/releases`.
+   - **The `<img>` carries `width="<spec width>"`.** Without it GitHub stretches
+     the figure to the full body width (~900 px). `themedFigures` reads only
+     `src` and `alt`, so `/releases` ignores the attribute and keeps the figure;
+     `ReleaseEntry.module.scss` zooms it back from the 2× capture there. Keep
+     the attribute the script prints.
 
 9. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
 
@@ -246,11 +288,20 @@ requires `--from`/`--to` overrides before doing anything else.
    </details>
    ```
 
-   Every figure from Step 8 goes into `{{CURATED_NOTES}}` as a markdown image at
-   the SHA that step recorded:
+   Every figure from Step 8 goes into `{{CURATED_NOTES}}` under its own `###`
+   heading with one or two sentences, as the `<picture>` block the script
+   printed, with `<commit-sha>` replaced by the SHA that step recorded and the
+   alt text filled in:
 
    ```markdown
-   ![Rating figure](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/rating.png)
+   ### While loading
+
+   Every component inside the view renders as its skeleton.
+
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/skeleton-mode-loading-dark.png">
+     <img src="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/skeleton-mode-loading.png" alt="A heading, a text and a labeled value rendered as skeletons" width="360">
+   </picture>
    ```
 
    The curated notes MUST sit **verbatim** between
@@ -390,7 +441,7 @@ requires `--from`/`--to` overrides before doing anything else.
 
 Build, create/push git tags, publish to npm, or create the GitHub release — all
 of that happens in CI on merge. You also do **not** fabricate an image: a figure
-is a capture of a real story or it does not exist.
+is a capture of a real Styleguide example or it does not exist.
 
 You **do** graduate the version: the local
 `chore(release): bump version to x.y.0` commit on the release branch (Step 11),

@@ -213,7 +213,10 @@ describe("submission", () => {
     await render(<TestForm />);
     const textArea = page.getByPlaceholder("textarea");
     await userEvent.click(textArea);
-    await userEvent.keyboard("{Meta>}{Enter}");
+    // react-hotkeys-hook reads `mod` from the user agent, and Playwright's
+    // WebKit reports a Mac one on every platform.
+    const mod = /mac/i.test(navigator.userAgent) ? "Meta" : "Control";
+    await userEvent.keyboard(`{${mod}>}{Enter}`);
     await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
     expect(onAfterSubmitAction).not.toHaveBeenCalled();
     await vitest.advanceTimersByTimeAsync(100);
@@ -266,6 +269,29 @@ describe("readonly", () => {
     expect(textfield).not.toHaveAttribute("readonly");
     await userEvent.click(toggleButton);
     expect(textfield).toHaveAttribute("readonly");
+  });
+});
+
+describe("disabled", () => {
+  const TestForm = () => {
+    const form = useForm<object>({ disabled: true });
+    return (
+      <Form
+        form={form}
+        onSubmit={() => {
+          // void
+        }}
+      >
+        <Field name="test">
+          <TextField aria-label="test" />
+        </Field>
+      </Form>
+    );
+  };
+
+  test("disabled form disables its fields", async () => {
+    await render(<TestForm />);
+    await expect.element(page.getByLabelText("test")).toBeDisabled();
   });
 });
 
@@ -416,5 +442,48 @@ describe("error", () => {
     expect(errorText).toBeInTheDocument();
 
     window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("FormRootError renders custom content from a render function once a root error is set", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <RootErrorTestForm>
+        <FormRootError>
+          {(error) => <p data-testid="custom-error">Custom: {error.message}</p>}
+        </FormRootError>
+      </RootErrorTestForm>,
+    );
+
+    const customError = page.getByTestId("custom-error");
+    expect(customError).not.toBeInTheDocument();
+
+    await userEvent.click(page.getByTestId("submit-button"));
+
+    expect(errorHandler).not.toHaveBeenCalled();
+    expect(customError).toHaveTextContent("Custom: Test error");
+    expect(
+      page.getByText("Test error", { exact: true }),
+    ).not.toBeInTheDocument();
+
+    window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("FormRootError renders custom children only while a root error is set", async () => {
+    await render(
+      <RootErrorTestForm>
+        <FormRootError>
+          <p data-testid="custom-error">Custom error</p>
+        </FormRootError>
+      </RootErrorTestForm>,
+    );
+
+    const customError = page.getByTestId("custom-error");
+    expect(customError).not.toBeInTheDocument();
+
+    await userEvent.click(page.getByTestId("submit-button"));
+
+    expect(customError).toBeInTheDocument();
   });
 });

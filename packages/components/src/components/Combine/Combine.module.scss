@@ -54,6 +54,22 @@
     align-items: center;
     column-gap: var(--combine--icon-text--spacing);
   }
+
+  // Margins instead of a gap: keys sit closer to each other than to the text,
+  // e.g. "↑ ↓ Select" in one Combine.
+  &:has(> .kbd) {
+    display: inline-flex;
+    align-items: center;
+
+    > .kbd + .kbd {
+      margin-inline-start: var(--combine--kbd-kbd--spacing);
+    }
+
+    > .kbd + .text,
+    > .text + .kbd {
+      margin-inline-start: var(--combine--kbd-text--spacing);
+    }
+  }
 }
 
 @media (max-width: 550px) {

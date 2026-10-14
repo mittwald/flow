@@ -4,7 +4,7 @@ description:
   Der CodeEditor dient dem Bearbeiten von Code, mit Syntax-Highlighting.
 ---
 
-<LiveCodeEditor stretch />
+<LiveCodeEditor />
 
 ---
 
@@ -15,6 +15,17 @@ description:
 
 ---
 
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem CodeEditor interagieren kann. Muss der
+User den Code weiterhin lesen und per Tastatur scrollen können, nutze
+stattdessen `isReadOnly`.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
 # Kombiniere mit ...
 
 ## React Hook Form
@@ -22,10 +33,16 @@ description:
 Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/components/react-hook-form/form).
 
-<LiveCodeEditor example="form" editorCollapsed stretch />
+<LiveCodeEditor example="form" editorCollapsed />
 
 ---
 
 # Properties
 
 <PropertiesTables />
+
+---
+
+# Design Tokens
+
+<ComponentTokenTable />

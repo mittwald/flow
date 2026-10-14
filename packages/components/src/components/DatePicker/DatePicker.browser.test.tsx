@@ -1,9 +1,16 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { expect, test, vi } from "vitest";
-import { CalendarDate } from "@internationalized/date";
+import { CalendarDate, type DateValue } from "@internationalized/date";
+import { useState } from "react";
 import { DatePicker } from "@/components/DatePicker";
 import { Label } from "@/components/Label";
+import { Popover, PopoverTrigger } from "@/components/Popover";
+import { Button } from "@/components/Button";
+import { testFormFieldContract } from "@/tests/formFieldContract/testFormFieldContract";
+import Modal from "@/components/Modal/Modal";
+import Heading from "@/components/Heading";
+import Content from "@/components/Content";
 
 const segment = (name: string) => page.getByRole("spinbutton", { name });
 const calendarButton = () => page.getByRole("button", { name: "Calendar" });
@@ -14,6 +21,7 @@ const renderPicker = (props?: {
   defaultValue?: CalendarDate;
   isDisabled?: boolean;
   onChange?: (value: unknown) => void;
+  onOpenChange?: (isOpen: boolean) => void;
 }) =>
   render(
     <DatePicker {...props}>
@@ -43,6 +51,28 @@ test("typing into the segments reports the date", async () => {
   });
 });
 
+test("inside a modal, a controlled date picker keeps the typed year", async () => {
+  const ControlledInModal = () => {
+    const [value, setValue] = useState<DateValue | null>(null);
+    return (
+      <Modal isDefaultOpen>
+        <Heading>Booking</Heading>
+        <Content>
+          <DatePicker value={value} onChange={setValue}>
+            <Label>Departure</Label>
+          </DatePicker>
+        </Content>
+      </Modal>
+    );
+  };
+  render(<ControlledInModal />);
+
+  await segment("month").click();
+  await userEvent.keyboard("03102025");
+
+  await expect.element(segment("year")).toHaveTextContent("2025");
+});
+
 /*
  * Picking a day is the one place where Flow adds its own behaviour: the picker
  * routes the calendar through an overlay controller and closes it on change.
@@ -66,6 +96,30 @@ test("picking a day reports the date and closes the calendar", async () => {
   await expect.element(segment("day")).toHaveTextContent("12");
 });
 
+test("onOpenChange reports opening and an Escape close without suppressing it", async () => {
+  const onOpenChange = vi.fn();
+  renderPicker({ onOpenChange });
+
+  await calendarButton().click();
+  await expect.element(calendar()).toBeVisible();
+  expect(onOpenChange).toHaveBeenLastCalledWith(true);
+
+  await userEvent.keyboard("{Escape}");
+  await expect.element(calendar()).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenLastCalledWith(false);
+});
+
+test("onOpenChange reports the close after picking a day", async () => {
+  const onOpenChange = vi.fn();
+  renderPicker({ defaultValue: new CalendarDate(2025, 3, 10), onOpenChange });
+
+  await calendarButton().click();
+  await day(/March 12, 2025/).click();
+
+  await expect.element(calendar()).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenLastCalledWith(false);
+});
+
 test("a disabled date picker does not open its calendar", async () => {
   renderPicker({ isDisabled: true });
 
@@ -74,4 +128,42 @@ test("a disabled date picker does not open its calendar", async () => {
   await calendarButton().click({ force: true });
 
   await expect.element(calendar()).not.toBeInTheDocument();
+});
+
+test("inside a popover, it keeps its own calendar state", async () => {
+  render(
+    <PopoverTrigger>
+      <Button>Open</Button>
+      <Popover>
+        <DatePicker defaultValue={new CalendarDate(2025, 3, 10)}>
+          <Label>Departure</Label>
+        </DatePicker>
+      </Popover>
+    </PopoverTrigger>,
+  );
+
+  await page.getByRole("button", { name: "Open" }).click();
+  await expect.element(calendarButton()).toBeVisible();
+  await expect.element(calendar()).not.toBeInTheDocument();
+
+  await calendarButton().click();
+  await day(/March 12, 2025/).click();
+
+  await expect.element(calendar()).not.toBeInTheDocument();
+  await expect.element(calendarButton()).toBeVisible();
+});
+
+testFormFieldContract("DatePicker", {
+  render: (props) => <DatePicker {...props} />,
+  getControl: (screen) => screen.getByRole("spinbutton").first(),
+  values: [new CalendarDate(2025, 3, 10), new CalendarDate(2025, 4, 11)],
+  toFormValue: (value) => value.toString(),
+  changeValue: async (screen, { force }) => {
+    await screen.getByRole("spinbutton").first().click({ force });
+    await userEvent.keyboard("04112025");
+  },
+  exceptions: {
+    controlledHold:
+      "useControlledHostValueProps applies a user change locally, so typing does not wait for the remote round trip",
+  },
 });

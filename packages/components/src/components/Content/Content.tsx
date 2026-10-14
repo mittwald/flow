@@ -2,6 +2,7 @@ import type { PropsWithChildren } from "react";
 import type { PropsWithElementType } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface ContentProps
   extends
@@ -20,7 +21,7 @@ export const Content = flowComponent("Content", (props) => {
 
   return (
     <Element ref={ref} {...rest}>
-      {children}
+      <SkeletonRawText>{children}</SkeletonRawText>
     </Element>
   );
 });

@@ -14,8 +14,14 @@ import Button from "@/components/Button";
 import { page, userEvent } from "vitest/browser";
 import { destroyAnnouncer } from "@react-aria/live-announcer";
 import "@/lib/dev/vitest";
+import { parkPointer } from "@/lib/dev/parkPointer";
 import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
 import { FieldError } from "@/components/FieldError";
+import complexityStyles from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator.module.scss";
+
+// Every test renders the same layout. A pointer left on a button hovers the
+// next test's button, and its tooltip then swallows that test's Escape.
+beforeEach(parkPointer);
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -209,20 +215,114 @@ test("a generated password shows its final rating at once", async () => {
   expect(shownStatuses).toEqual(["warning"]);
 });
 
+/** A policy whose validation takes `delay(password)` milliseconds. */
+const slowPolicy = (
+  declaration: PolicyDeclaration,
+  delay: (password: string) => number,
+) => {
+  const policy = Policy.fromDeclaration(declaration);
+  const validate = policy.validate.bind(policy);
+  policy.validate = async (password) => {
+    await new Promise((resolve) => setTimeout(resolve, delay(password ?? "")));
+    return validate(password);
+  };
+  return policy;
+};
+
+const fieldErrorText = () =>
+  document.querySelector(`.${fieldErrorStyles.fieldError}`)?.textContent;
+
+const lengthErrorText = "Bitte wähle ein Passwort mit mindestens 8 Zeichen.";
+
+/*
+ * A validation that outlasts the loading delay (150 ms) – the HIBP request
+ * often does – shows the loading bar, but keeps the previous rating and error
+ * until the new result arrives. Dropping them made the field flicker after
+ * every typing pause.
+ */
+test("a slow validation keeps the previous result while it runs", async () => {
+  await render(
+    <I18nProvider locale="de">
+      <PasswordCreationFieldTestComponent
+        validationPolicy={slowPolicy(policyDecl, () => 600)}
+      />
+    </I18nProvider>,
+  );
+  const input = page.getByRole("textbox");
+
+  await userEvent.type(input, "abc");
+  await expect.poll(fieldErrorText, { timeout: 5_000 }).toBe(lengthErrorText);
+
+  const shown = new Set<string>();
+  let wasLoading = false;
+  const observer = new MutationObserver(() => {
+    shown.add(`${complexityStatus()} / ${fieldErrorText()}`);
+    wasLoading ||= !!document.querySelector(`.${complexityStyles.loading}`);
+  });
+  observer.observe(document.body, {
+    subtree: true,
+    attributes: true,
+    childList: true,
+    characterData: true,
+  });
+
+  await userEvent.type(input, "d");
+  // Debounce (350 ms) + validation (600 ms)
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  observer.disconnect();
+
+  expect([...shown]).toEqual([`danger / ${lengthErrorText}`]);
+  expect(wasLoading).toBe(true);
+});
+
+/*
+ * Validations resolve in any order – a first HIBP request pays for the
+ * connection setup. A late result for an earlier password must not replace
+ * the result of the current one.
+ */
+test("a late result for an earlier password is dropped", async () => {
+  const onValidationResult = vitest.fn();
+  await render(
+    <I18nProvider locale="de">
+      <PasswordCreationFieldTestComponent
+        onValidationResult={onValidationResult}
+        validationPolicy={slowPolicy(
+          {
+            minComplexity: 0,
+            rules: [{ ruleType: RuleType.length, min: 8 }],
+          },
+          (password) => (password === "abc" ? 1500 : 50),
+        )}
+      />
+    </I18nProvider>,
+  );
+  const input = page.getByRole("textbox");
+
+  await userEvent.type(input, "abc");
+  // Past the debounce, so the validation of "abc" runs.
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  await userEvent.type(input, "defgh");
+  await expect.poll(complexityStatus).toBe("warning");
+
+  // Past the late result for "abc"
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
+  expect(complexityStatus()).toBe("warning");
+  expect(fieldErrorText()).toBeUndefined();
+  expect(onValidationResult).not.toHaveBeenCalledWith(
+    expect.objectContaining({ password: "abc" }),
+  );
+});
+
 describe("PasswordCreationField Tests", () => {
   beforeEach(() => {
     vitest.resetAllMocks();
     vitest.useFakeTimers();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     vitest.useRealTimers();
     destroyAnnouncer();
-    // Every test renders the same layout. A pointer left on a button hovers the
-    // next test's button, and its tooltip then swallows that test's Escape.
-    await page
-      .elementLocator(document.body)
-      .hover({ position: { x: 0, y: 0 }, force: true });
   });
 
   test("renders empty list without errors", async () => {

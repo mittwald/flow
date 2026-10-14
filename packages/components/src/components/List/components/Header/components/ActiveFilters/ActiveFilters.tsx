@@ -70,7 +70,10 @@ export const ActiveFilters: FC<Props> = observer((props) => {
         variant="plain"
         color="secondary"
         onPress={() =>
-          Filter.storeFilters(list, { autosave: false, manualSave: true })
+          Filter.storeFilters(list, list.filters, {
+            autosave: false,
+            manualSave: true,
+          })
         }
         aria-label={formatter.format("filters.store")}
       >
@@ -103,6 +106,7 @@ export const ActiveFilters: FC<Props> = observer((props) => {
           variant="plain"
           color="secondary"
           onPress={() => list.clearFilters()}
+          aria-label={formatter.format("filters.clear")}
         >
           <IconClose />
         </ButtonView>

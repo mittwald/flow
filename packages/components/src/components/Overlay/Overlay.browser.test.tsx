@@ -241,6 +241,24 @@ test("an extension node appended after the overlay container leaves it in place"
   }
 });
 
+test("a hidden node appended after the overlay container leaves it in place", async () => {
+  const dom = await render(<LoginModal label="Email" />);
+  const container = document.querySelector("body > [data-flow-overlays]");
+
+  // What react-aria's `useDescription` appends when a DatePicker gets a value
+  const description = document.createElement("div");
+  description.style.display = "none";
+  document.body.append(description);
+
+  try {
+    await dom.rerender(<LoginModal label="E-Mail" />);
+    await sleep(50);
+    expect(container?.nextElementSibling).toBe(description);
+  } finally {
+    description.remove();
+  }
+});
+
 test("nodes appended after the overlay container are not moved", async () => {
   const dom = await render(<LoginModal label="Email" />);
 

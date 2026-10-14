@@ -36,18 +36,22 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     children,
     className,
     onChange,
+    onOpenChange,
     ref,
     withDatePickerPresets = false,
     ...rest
   } = useControlledHostValueProps(props, null);
 
-  const popoverController = useOverlayController("Popover");
+  const popoverController = useOverlayController("Popover", {
+    reuseControllerFromContext: false,
+  });
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "DateRangePicker");
 
   const rootClassName = clsx(wrapperProps.className, className);
@@ -62,6 +66,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   return (
     <Aria.DateRangePicker
       {...rest}
+      {...skeletonProps}
       aria-describedby={controlProps["aria-describedby"]}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
@@ -77,6 +82,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
           placement="bottom end"
           isDialogContent
           controller={popoverController}
+          onOpenChange={onOpenChange}
         >
           <RangeCalendar
             withDatePickerPresets={withDatePickerPresets}

@@ -21,8 +21,9 @@ export interface ActionGroupProps
   /** The size of the buttons and links inside the action group. @default "m" */
   size?: ButtonProps["size"];
   /**
-   * When set, the buttons are not sorted automatically but stay in source
-   * order. @default false
+   * When set, the buttons are not sorted into the slots `primary`, `secondary`
+   * and `abort` but stay in source order. Use it when the actions have no such
+   * hierarchy, e.g. a row of equal actions or icon buttons. @default false
    */
   preserveOrder?: boolean;
 }
@@ -62,15 +63,15 @@ export const ActionGroup = flowComponent(
             slot: dynamic((props) => getActionGroupSlot(props)),
             className: dynamic((props) => {
               const slot = getActionGroupSlot(props);
-              return clsx(props.className, styleClassname(styles, slot));
+              return clsx(styleClassname(styles, slot), props.className);
             }),
           },
           Switch: {
             labelPosition: "leading",
             className: dynamic((props) => {
               return clsx(
-                props.className,
                 props.slot && styleClassname(styles, props.slot),
+                props.className,
               );
             }),
           },
@@ -78,8 +79,8 @@ export const ActionGroup = flowComponent(
             size,
             className: dynamic((props) => {
               return clsx(
-                props.className,
                 props.slot && styleClassname(styles, props.slot),
+                props.className,
               );
             }),
           },

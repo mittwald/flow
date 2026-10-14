@@ -3,7 +3,6 @@ import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./Select.module.scss";
 import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
@@ -14,7 +13,7 @@ import { getOptionsTunnelProps } from "@/components/Option/optionsTunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SelectProps
@@ -60,13 +59,10 @@ export const Select = flowComponent("Select", (props) => {
     wrapperProps,
     controlProps,
     FieldErrorCaptureContext,
+    skeletonProps,
   } = useFieldComponent(props, "Select");
 
-  const rootClassName = clsx(
-    styles.select,
-    formFieldStyles.formField,
-    className,
-  );
+  const rootClassName = clsx(wrapperProps.className, styles.select, className);
 
   const propsContext: PropsContext = {
     Option: {
@@ -84,7 +80,8 @@ export const Select = flowComponent("Select", (props) => {
     <Aria.Select
       {...rest}
       {...controlProps}
-      className={clsx(rootClassName, wrapperProps.className)}
+      {...skeletonProps}
+      className={rootClassName}
       onChange={(value) => {
         if (!isReadOnly) {
           onChange?.(value);
