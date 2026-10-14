@@ -115,7 +115,6 @@ export const Slider = flowComponent("Slider", (props) => {
     );
 
     const initialMarker = showInitialMarker &&
-      defaultValue &&
       typeof defaultValue === "number" && (
         <div
           className={styles.initialMarker}
