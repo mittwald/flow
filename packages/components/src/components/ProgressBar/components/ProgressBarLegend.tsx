@@ -19,13 +19,18 @@ export const ProgressBarLegend: FC<Props> = (props) => {
     return null;
   }
 
+  const formatValue = (value: number) =>
+    formatOptions ? formatter.format(value) : `${value} %`;
+
   return (
     <Legend className={styles.legend}>
-      {segments.map((s, i) => (
+      {segments.map((segment, index) => (
         <LegendItem
-          key={s.title}
-          color={s.color ?? getCategoricalColorByIndex(i)}
-        >{`${s.title} (${s.valueText ?? (formatOptions ? formatter.format(s.value) : `${s.value} %`)})`}</LegendItem>
+          key={segment.title}
+          color={segment.color ?? getCategoricalColorByIndex(index)}
+        >
+          {`${segment.title} (${segment.valueText ?? formatValue(segment.value)})`}
+        </LegendItem>
       ))}
     </Legend>
   );

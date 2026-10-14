@@ -6,7 +6,6 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
@@ -33,7 +32,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     skeletonProps,
   } = useFieldComponent(props, "RadioGroup");
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const rootClassName = clsx(wrapperProps.className, className);
   const propsContext: PropsContext = {
     RadioButton: {
       tunnel: {
@@ -58,7 +57,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
       {...rest}
       {...skeletonProps}
       aria-describedby={controlProps["aria-describedby"]}
-      className={clsx(rootClassName, wrapperProps.className)}
+      className={rootClassName}
       ref={localRadioRef}
     >
       <FieldErrorCaptureContext>

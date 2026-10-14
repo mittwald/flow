@@ -26,9 +26,9 @@ export const MessageThread = flowComponent("MessageThread", (props) => {
     Message: {
       className: dynamic((props) => {
         return clsx(
-          props.className,
           styles.message,
           styles[props.type ?? "responder"],
+          props.className,
         );
       }),
       elementType: "li",
