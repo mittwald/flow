@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
 import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
@@ -59,6 +60,8 @@ test.each(testEnvironments)(
           "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
       </Markdown>,
     );
+
+    await waitForHighlightedCode(1);
 
     await testScreenshot("Markdown content");
   },

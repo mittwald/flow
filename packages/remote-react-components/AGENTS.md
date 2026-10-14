@@ -47,6 +47,13 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
   Skipping it costs a ~1% diff in whichever environment lost the race — a random
   per-run failure, not a reproducible one, because both environments share one
   reference. See `CONTRIBUTE.md` → _Waiting for the focus_.
+- **Nor for CodeMirror's syntax highlighting.** What CodeMirror does not parse
+  within 20ms of creating the editor gets highlighted in an idle callback 100 to
+  500ms later. A scenario that renders highlighted code (`CodeBlock` or
+  `CodeEditor` with a `language`, a Markdown code fence with one) calls
+  `waitForHighlightedCode(<editors>)` from `src/tests/lib/codeHighlighting.ts`
+  after rendering. Without it, `update-screenshots` can commit the code partly
+  plain, as on #3504. See `CONTRIBUTE.md`, _Waiting for the code highlighting_.
 - **The browser also selects the theme:** webkit renders light, firefox renders
   dark (`dev/vitest/setupVisualTheme.ts`), so one run covers both themes and the
   `*-firefox-*.png` baselines are dark by design. A run filtered with
