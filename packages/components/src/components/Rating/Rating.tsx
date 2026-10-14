@@ -1,4 +1,9 @@
-import { Children, type PropsWithChildren, type ReactElement } from "react";
+import {
+  Children,
+  type PropsWithChildren,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import styles from "./Rating.module.scss";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
@@ -25,28 +30,28 @@ export interface RatingProps
     Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
   /**
    * The value sets the amount of filled stars. Decimals are rounded to the
-   * nearest whole star. @default: 0
+   * nearest whole star. @default 0
    */
   value?: number;
   /**
    * The defaultValue sets the amount of default filled stars. Decimals are
-   * rounded to the nearest whole star. @default: 0
+   * rounded to the nearest whole star. @default 0
    */
   defaultValue?: number;
-  /** The size of the component. @default: "m" */
+  /** The size of the component. @default "m" */
   size?: "s" | "m";
   /**
    * The number of segments the rating consists of. Ignored when the rating has
    * `RatingSegment` children — those define the number of segments themselves.
    *
-   * @default: 5
+   * @default 5
    */
   maxValue?: number;
   /**
    * How the segments are filled. `cumulative` fills every segment up to the
    * value, `single` fills only the selected segment.
    *
-   * @default: cumulative
+   * @default "cumulative"
    */
   fill?: "cumulative" | "single";
   /** An alternative icon for the empty state */
@@ -117,6 +122,21 @@ export const Rating = flowComponent("Rating", (props) => {
     <RatingSegment key={index} {...segmentProps} />
   ));
 
+  const renderSegments = (tunnelChildren: ReactNode) => {
+    const tunneledSegments = Children.toArray(tunnelChildren);
+    const segments =
+      tunneledSegments.length > 0 ? tunneledSegments : defaultSegments;
+
+    return segments.map((segment, index) => (
+      <RatingSegmentContextProvider
+        key={index}
+        value={{ value: index + 1, count: segments.length }}
+      >
+        {segment}
+      </RatingSegmentContextProvider>
+    ));
+  };
+
   return (
     <Aria.RadioGroup
       {...rest}
@@ -137,22 +157,7 @@ export const Rating = flowComponent("Rating", (props) => {
         <div className={styles.ratingSegments}>
           <SkeletonModeReset>
             <UiComponentTunnelExit id={segmentsTunnelId} component="Rating">
-              {(tunnelChildren) => {
-                const tunneledSegments = Children.toArray(tunnelChildren);
-                const segments =
-                  tunneledSegments.length > 0
-                    ? tunneledSegments
-                    : defaultSegments;
-
-                return segments.map((segment, index) => (
-                  <RatingSegmentContextProvider
-                    key={index}
-                    value={{ value: index + 1, count: segments.length }}
-                  >
-                    {segment}
-                  </RatingSegmentContextProvider>
-                ));
-              }}
+              {renderSegments}
             </UiComponentTunnelExit>
           </SkeletonModeReset>
         </div>
