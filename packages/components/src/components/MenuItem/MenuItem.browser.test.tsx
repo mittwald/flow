@@ -1,24 +1,33 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
-import { expect, test, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { afterEach, expect, test, vi } from "vitest";
 import { MenuItem } from "@/components/MenuItem";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 
 const item = () => page.getByRole("menuitem", { name: "Delete project" });
 
-const openMenu = async (itemProps?: Record<string, unknown>) => {
+afterEach(() => {
+  location.hash = "";
+});
+
+const openMenu = async (
+  itemProps?: Record<string, unknown>,
+  menuProps?: Record<string, unknown>,
+) => {
   render(
     <ContextMenuTrigger>
       <Button>Open menu</Button>
-      <ContextMenu>
-        <MenuItem {...itemProps}>Delete project</MenuItem>
+      <ContextMenu {...menuProps}>
+        <MenuItem id="delete" {...itemProps}>
+          Delete project
+        </MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>,
   );
 
   await page.getByRole("button", { name: "Open menu" }).click();
-  await expect.element(item()).toBeVisible();
+  await expect.element(page.getByRole("menu")).toBeVisible();
 };
 
 test("pressing an item reports the press", async () => {
@@ -39,11 +48,14 @@ test.each(["isPending", "isSucceeded", "isFailed", "aria-disabled"])(
   "an item marked %s does not run its action",
   async (state) => {
     const onPress = vi.fn();
-    await openMenu({ onPress, [state]: true });
+    const onAction = vi.fn();
+    await openMenu({ onPress, onAction, [state]: true });
+    await expect.element(item()).toHaveAttribute("aria-disabled", "true");
 
     await item().click({ force: true });
 
     expect(onPress).not.toHaveBeenCalled();
+    expect(onAction).not.toHaveBeenCalled();
   },
 );
 
@@ -61,4 +73,130 @@ test("an explicit aria-current of false does not mark the item", async () => {
   await openMenu({ "aria-current": "false" });
 
   await expect.element(item()).not.toHaveAttribute("data-current");
+});
+
+test("a muted item does not run the action of its menu", async () => {
+  const onAction = vi.fn();
+  await openMenu({ isPending: true }, { onAction });
+
+  await item().click({ force: true });
+  item().element().focus();
+  await userEvent.keyboard("{Enter}");
+
+  expect(onAction).not.toHaveBeenCalled();
+});
+
+test("a muted link item stays a link but does not navigate", async () => {
+  await openMenu({ href: "#projects", isPending: true });
+
+  await expect.element(item()).toHaveAttribute("href", "#projects");
+  await expect.element(item()).toHaveAttribute("aria-disabled", "true");
+
+  await item().click({ force: true });
+  item().element().focus();
+  await userEvent.keyboard("{Enter}");
+
+  expect(location.hash).toBe("");
+});
+
+test("a muted item cannot be selected", async () => {
+  const onSelectionChange = vi.fn();
+  await openMenu(
+    { isPending: true },
+    { selectionMode: "multiple", onSelectionChange },
+  );
+  const checkbox = page.getByRole("menuitemcheckbox", {
+    name: "Delete project",
+  });
+  await expect.element(checkbox).toHaveAttribute("aria-disabled", "true");
+
+  await checkbox.click({ force: true });
+  checkbox.element().focus();
+  await userEvent.keyboard(" ");
+  await userEvent.keyboard("{Enter}");
+
+  expect(onSelectionChange).not.toHaveBeenCalled();
+  await expect.element(checkbox).toHaveAttribute("aria-checked", "false");
+});
+
+/*
+ * A mouse press that starts outside the item – on the trigger or another item –
+ * selects on pointer up, without a click on the item.
+ */
+test("a muted item is not selected by a mouse release", async () => {
+  const onSelectionChange = vi.fn();
+  await openMenu(
+    { isPending: true },
+    { selectionMode: "multiple", onSelectionChange },
+  );
+  const checkbox = page.getByRole("menuitemcheckbox", {
+    name: "Delete project",
+  });
+
+  checkbox.element().dispatchEvent(
+    new PointerEvent("pointerup", {
+      bubbles: true,
+      button: 0,
+      pointerId: 1,
+      pointerType: "mouse",
+    }),
+  );
+
+  await expect.element(checkbox).toHaveAttribute("aria-checked", "false");
+  expect(onSelectionChange).not.toHaveBeenCalled();
+});
+
+test("a muted item does not pass its press on to the surrounding tree", async () => {
+  const onClick = vi.fn();
+  const onKeyDown = vi.fn();
+  render(
+    <div onClick={onClick} onKeyDown={onKeyDown}>
+      <ContextMenuTrigger>
+        <Button>Open menu</Button>
+        <ContextMenu>
+          <MenuItem isPending>Delete project</MenuItem>
+        </ContextMenu>
+      </ContextMenuTrigger>
+    </div>,
+  );
+  await page.getByRole("button", { name: "Open menu" }).click();
+  onClick.mockClear();
+  onKeyDown.mockClear();
+
+  await item().click({ force: true });
+  item().element().focus();
+  await userEvent.keyboard("{Enter}");
+
+  expect(onClick).not.toHaveBeenCalled();
+  expect(onKeyDown).not.toHaveBeenCalled();
+});
+
+test("a muted item renders through a custom render function", async () => {
+  await openMenu({
+    isPending: true,
+    render: (props: object) => <div {...props} data-custom />,
+  });
+
+  await expect.element(item()).toHaveAttribute("data-custom", "true");
+  await expect.element(item()).toHaveAttribute("aria-disabled", "true");
+});
+
+test("a muted item still moves focus with the arrow keys", async () => {
+  render(
+    <ContextMenuTrigger>
+      <Button>Open menu</Button>
+      <ContextMenu>
+        <MenuItem isPending>Delete project</MenuItem>
+        <MenuItem>Rename project</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>,
+  );
+  await page.getByRole("button", { name: "Open menu" }).click();
+  item().element().focus();
+
+  await userEvent.keyboard("{ArrowDown}");
+
+  await expect
+    .element(page.getByRole("menuitem", { name: "Rename project" }))
+    .toHaveFocus();
 });

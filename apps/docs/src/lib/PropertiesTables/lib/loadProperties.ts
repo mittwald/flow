@@ -31,12 +31,11 @@ const parseDeprecatedValues = (description: string): string[] =>
     .map((value) => unquote(value.trim()))
     .filter(Boolean);
 
-/** An `@default: x` JSDoc tag keeps its colon in the generated metadata. */
 const normalizeDefaultValue = (value: unknown): string | null => {
   if (typeof value !== "string") {
     return null;
   }
-  return value.replace(/^\s*:/, "").replace(/\s+/g, " ").trim() || null;
+  return value.replace(/\s+/g, " ").trim() || null;
 };
 
 export default function loadProperties(name: string): Properties | null {

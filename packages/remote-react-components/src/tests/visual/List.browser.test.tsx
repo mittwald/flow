@@ -1,5 +1,5 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
@@ -853,11 +853,25 @@ test
 
     await render(<Wrapper />);
 
+    /*
+     * In Remote, a click reaches the filter only after a round trip, which can
+     * outlast the screenshot preamble. So every step waits for the host to show
+     * the new state. Queried by role: the hidden mirror of the remote tree
+     * carries the same texts and updates first.
+     */
+    const hoth = page.getByRole("menuitemcheckbox", { name: "Hoth" });
+
     await page.getByRole("button", { name: "Planet", exact: true }).click();
-    await page.getByRole("menuitemcheckbox", { name: "Hoth" }).click();
+    await hoth.click();
+    await expect.element(hoth, { timeout: 5000 }).toBeChecked();
     await testScreenshot("List filter select all - partially selected");
 
     await page.getByRole("menuitem", { name: "Select all" }).click();
+    await expect
+      .element(page.getByRole("menuitem", { name: "Deselect all" }), {
+        timeout: 5000,
+      })
+      .toBeInTheDocument();
     await testScreenshot("List filter select all - all selected");
 
     await userEvent.keyboard("{Escape}");
@@ -867,6 +881,11 @@ test
       .getByText("Hoth", { exact: true })
       .last()
       .click();
+    await expect
+      .element(page.getByRole("button", { name: "Show 1 result" }), {
+        timeout: 5000,
+      })
+      .toBeInTheDocument();
     await testScreenshot("List filter select all - all filters modal");
   },
 );

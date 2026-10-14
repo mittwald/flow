@@ -32,8 +32,8 @@ export const SkeletonBlockText: FC<TextProps> = (props) => {
       <Text
         {...rest}
         className={clsx(
-          className,
           outerState.isEnabled && styles.skeletonBlock,
+          className,
         )}
       >
         <skeletonModeContext.Provider value={outerState}>

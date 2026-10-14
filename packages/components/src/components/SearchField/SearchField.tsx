@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SearchField.module.scss";
 import clsx from "clsx";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -36,7 +35,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
   } = useFieldComponent(props, "SearchField");
 
   const rootClassName = clsx(
-    formFieldStyles.formField,
+    wrapperProps.className,
     styles.searchField,
     className,
   );
@@ -62,7 +61,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
       {...controlProps}
       {...skeletonProps}
       aria-label={searchText}
-      className={clsx(rootClassName, wrapperProps.className)}
+      className={rootClassName}
     >
       <PropsContextProvider props={propsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>

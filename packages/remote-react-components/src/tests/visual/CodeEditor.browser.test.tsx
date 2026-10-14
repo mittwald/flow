@@ -1,4 +1,5 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
 import { test } from "vitest";
 
 // CodeEditor is available from alpha.791.
@@ -47,6 +48,8 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
       </Flex>,
     );
 
+    await waitForHighlightedCode(4);
+
     await testScreenshot("CodeEditor");
   },
 );
@@ -72,6 +75,8 @@ test.skipIf(crossVersion({ below: "1.5.0" })).each(testEnvironments)(
         <FieldDescription>FieldDescription</FieldDescription>
       </CodeEditor>,
     );
+
+    await waitForHighlightedCode(1);
 
     await testScreenshot("CodeEditor disabled");
   },

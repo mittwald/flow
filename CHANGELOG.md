@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.18](https://github.com/mittwald/flow/compare/1.5.17...1.5.18) (2026-10-14)
+
+### Tests
+
+* **remote-react-components:** wait for the code highlighting before capturing ([#3505](https://github.com/mittwald/flow/issues/3505)) ([e759758](https://github.com/mittwald/flow/commit/e759758b3ca6e73c02d2e99df89feb7179031ca1))
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 6 updates ([#3501](https://github.com/mittwald/flow/issues/3501)) ([fb55360](https://github.com/mittwald/flow/commit/fb55360a5a978b7bc23720bc93e10cbb9fe86402))
+
+## [1.5.17](https://github.com/mittwald/flow/compare/1.5.16...1.5.17) (2026-10-14)
+
+### Bug Fixes
+
+* **Slider:** show the initial marker for a defaultValue of 0 ([697c64c](https://github.com/mittwald/flow/commit/697c64c5c3c5ddeb32ddbda82674670617e22923))
+
+### Documentation
+
+* drop the stretch prop from LiveCodeEditor usages ([#3502](https://github.com/mittwald/flow/issues/3502)) ([9ccc9a0](https://github.com/mittwald/flow/commit/9ccc9a058a21bb9aa0cae8e5622f17683c7689a3))
+* render the Styleguide with the FontAwesome Pro icons ([#3495](https://github.com/mittwald/flow/issues/3495)) ([926080b](https://github.com/mittwald/flow/commit/926080b2c9aa003a4a7e8c6a1e8eb82cdd8140d4))
+
+### Code Refactoring
+
+* **components:** follow the className, JSX and JSDoc conventions ([68d5b49](https://github.com/mittwald/flow/commit/68d5b4913c88e72e41a930517b4a6e76e500fefa)), closes [#3431](https://github.com/mittwald/flow/issues/3431)
+
+### Tests
+
+* **remote-react-components:** gate 1.5.0 scenarios for cross-version runs and fix the List select-all race ([#3504](https://github.com/mittwald/flow/issues/3504)) ([a159fb3](https://github.com/mittwald/flow/commit/a159fb31e4e63f9072b41c5fe86875bb79f12779))
+
+## [1.5.16](https://github.com/mittwald/flow/compare/1.5.15...1.5.16) (2026-10-13)
+
+### Bug Fixes
+
+* **MenuItem:** expose muted items as aria-disabled ([3ecf5f0](https://github.com/mittwald/flow/commit/3ecf5f087fcb77cc39d6550702f9c11c1711efbb))
+* **MenuItem:** mute mouse releases and stop muted events ([d220005](https://github.com/mittwald/flow/commit/d22000569774ad2a1ad0cc5844daf04375249640))
+
+### Documentation
+
+* note that muted menu items are aria-disabled too ([9fab518](https://github.com/mittwald/flow/commit/9fab5185c83aa7ad68f86678038ee20d6407ffb0))
+
+### Code Refactoring
+
+* **MenuItem:** drop the unused ariaDisabled selector ([50797c3](https://github.com/mittwald/flow/commit/50797c308eab3ba6b2018d0903312ec94e092277))
+
 ## [1.5.15](https://github.com/mittwald/flow/compare/1.5.14...1.5.15) (2026-10-13)
 
 ### Bug Fixes

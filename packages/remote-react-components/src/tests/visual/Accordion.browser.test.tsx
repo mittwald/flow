@@ -1,5 +1,5 @@
 import { test } from "vitest";
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
@@ -106,7 +106,8 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+// AccordionGroup shipped in 1.5.0, no 1.5.0-next.N carries it.
+test.skipIf(crossVersion({ below: "1.5.0" })).each(testEnvironments)(
   "AccordionGroup (%s)",
   async ({
     testScreenshot,
