@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.17](https://github.com/mittwald/flow/compare/1.5.16...1.5.17) (2026-10-14)
+
+### Tests
+
+* **remote-react-components:** gate 1.5.0 scenarios for cross-version runs and fix the List select-all race ([#3504](https://github.com/mittwald/flow/issues/3504)) ([a159fb3](https://github.com/mittwald/flow/commit/a159fb31e4e63f9072b41c5fe86875bb79f12779))
+
 ## [1.5.16](https://github.com/mittwald/flow/compare/1.5.15...1.5.16) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.17](https://github.com/mittwald/flow/compare/1.5.16...1.5.17) (2026-10-14)
+
+### Bug Fixes
+
+* **Slider:** show the initial marker for a defaultValue of 0 ([697c64c](https://github.com/mittwald/flow/commit/697c64c5c3c5ddeb32ddbda82674670617e22923))
+
+### Documentation
+
+* drop the stretch prop from LiveCodeEditor usages ([#3502](https://github.com/mittwald/flow/issues/3502)) ([9ccc9a0](https://github.com/mittwald/flow/commit/9ccc9a058a21bb9aa0cae8e5622f17683c7689a3))
+* render the Styleguide with the FontAwesome Pro icons ([#3495](https://github.com/mittwald/flow/issues/3495)) ([926080b](https://github.com/mittwald/flow/commit/926080b2c9aa003a4a7e8c6a1e8eb82cdd8140d4))
+
+### Code Refactoring
+
+* **components:** follow the className, JSX and JSDoc conventions ([68d5b49](https://github.com/mittwald/flow/commit/68d5b4913c88e72e41a930517b4a6e76e500fefa)), closes [#3431](https://github.com/mittwald/flow/issues/3431)
+
+### Tests
+
+* **remote-react-components:** gate 1.5.0 scenarios for cross-version runs and fix the List select-all race ([#3504](https://github.com/mittwald/flow/issues/3504)) ([a159fb3](https://github.com/mittwald/flow/commit/a159fb31e4e63f9072b41c5fe86875bb79f12779))
+
 ## [1.5.16](https://github.com/mittwald/flow/compare/1.5.15...1.5.16) (2026-10-13)
 
 ### Bug Fixes
