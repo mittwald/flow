@@ -1,4 +1,5 @@
 import type { ComponentProps, CSSProperties, FC } from "react";
+import clsx from "clsx";
 import styles from "./SkeletonText.module.scss";
 
 export interface SkeletonTextProps extends ComponentProps<"span"> {
@@ -8,13 +9,13 @@ export interface SkeletonTextProps extends ComponentProps<"span"> {
 
 /** @flr-generate all */
 export const SkeletonText: FC<SkeletonTextProps> = (props) => {
-  const { width, style = {}, ...rest } = props;
+  const { width, style = {}, className, ...rest } = props;
   return (
     <span
       aria-hidden
-      className={styles.skeletonText}
       style={{ width, ...style }}
       {...rest}
+      className={clsx(styles.skeletonText, className)}
     />
   );
 };

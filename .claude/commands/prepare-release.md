@@ -111,8 +111,20 @@ requires `--from`/`--to` overrides before doing anything else.
    in the summary so it lands on the page — never capture a Storybook story
    instead.
 
-8. **Capture the figures.** One per notable feature that has an example, never
-   one per prop variant: compose the variants into a single image.
+8. **Capture the figures.** Three rules hold for every figure, always:
+   - **One example per image.** Never compose several examples into one figure,
+     and bake no caption into the PNG. In the notes, each image gets its own
+     `###` subsection: a real heading and one or two short sentences above its
+     `<picture>` block. A comparison (SkeletonMode on vs. off) is two images
+     under two headings (`### While loading`, `### When loaded`).
+   - **The simplest example on the page, without demo controls.** Prefer the
+     page's plainest example (often `default`). A control that exists only to
+     switch the docs example's state — a "Ladezustand anzeigen" Switch — does
+     not belong in the figure: strip it and set the state as a constant.
+   - **English content.** The examples are German and stay so (the docs site is
+     German). The figure shows English, and so do the code samples in the notes.
+
+   The spec's `replace` map does the last two, see below.
 
    Figures come from the Styleguide examples, never from Storybook: they are
    served from the docs site, where the stories' Star Wars fixtures are out of
@@ -134,30 +146,45 @@ requires `--from`/`--to` overrides before doing anything else.
 
    ```json
    {
-     "name": "rating",
-     "panels": [
-       {
-         "example": "components/form-controls/rating/max-value",
-         "caption": "maxValue={10}",
-         "expect": [{ "selector": "input[type=radio]", "count": 10 }]
-       },
-       {
-         "example": "components/form-controls/rating/segments",
-         "caption": "fill=\"single\" with <RatingSegment> children"
-       }
-     ],
+     "example": "components/content/skeleton-mode/default",
+     "expect": [{ "selector": "[data-example-stage]", "text": "Storage" }],
+     "name": "skeleton-mode-loaded",
+     "replace": {
+       "const [isLoading, setIsLoading] = useState(true);": "const isLoading = false;",
+       "<Switch isSelected={isLoading} onChange={setIsLoading} > Ladezustand anzeigen </Switch>": "",
+       "Das Projekt liegt auf dem Server p-4711 und wird jede Nacht gesichert.": "The project lives on server p-4711 and is backed up every night.",
+       "Speicherplatz": "Storage"
+     },
      "scale": 2,
-     "version": "1.1.0",
-     "width": 500
+     "version": "1.5.0",
+     "width": 360
    }
    ```
 
+   `skeleton-mode-loading` is the same spec with `const isLoading = true;` and
+   no `expect` — a skeleton shows no text to assert.
+
    `version` + `name` give the output path
-   (`apps/docs/public/assets/releases/1.1.0/rating.png`); `width` is the CSS px
-   the examples render at and `scale` the `deviceScaleFactor`; `caption` is the
-   monospace line above a panel, naming the prop it demonstrates; `expect`
-   asserts what the panel rendered — the whole frame is searched, so an overlay
-   in a portal counts.
+   (`apps/docs/public/assets/releases/1.5.0/skeleton-mode-loaded.png`, plus
+   `-dark.png` — every figure is captured once per theme); `width` is the CSS px
+   the example renders at and `scale` the `deviceScaleFactor`; `expect` asserts
+   what the example rendered — the whole frame is searched, so an overlay in a
+   portal counts. The script rejects `panels` and `caption`.
+
+   `replace` rewrites the example's **source** for the run: visible strings to
+   English, the initial state, a demo control to `""`. The script swaps the file
+   in place and restores it on exit, Ctrl-C included, so nothing reaches a
+   commit and a running docs server serves the change without a restart. Write
+   each key as the code reads, with single spaces: a space matches any
+   whitespace run, so a phrase prettier wrapped across lines matches, and next
+   to punctuation it also matches none (prettier puts a JSX tag's `>` on its own
+   line — write `} >`). Keys apply longest first and never inside a longer word.
+   A key that matches nothing fails the run before any server starts. Flow's own
+   strings are English already: the browser runs in `en-US`. Assert the English
+   text in `expect` — it checks the rendered result.
+
+   A state only reachable by clicking (a Switch toggled off) is a `replace` of
+   its initial value too.
 
    ```shell
    pnpm release:figure --spec <spec.json>
@@ -182,16 +209,20 @@ requires `--from`/`--to` overrides before doing anything else.
    There is no `--out`: the spec is the only source of the output path, which
    keeps every figure inside the release-assets tree.
 
-   **Use `expect` for what the figure is about.** A panel waits until its
+   **Use `expect` for what the figure is about.** The capture waits until its
    expectations hold, so content that appears after mount — a chart's bars, an
    open overlay — is captured drawn, not half-way.
 
-   **Then open every PNG and look at it.** A capture that is clipped, cropped
-   wrong or showing the wrong state renders fine and reads as plausible; the
-   first #3029 capture lost the bottom of its icons and survived a first pass.
-   Re-capture rather than ship a bad crop. An example whose overlay extends past
-   its frame is clipped — the docs examples keep overlays inside
-   (`paddingBlockEnd`), which is what the CoachMark example does.
+   CSS animations are disabled for each shot (Playwright finishes a finite one
+   and resets an infinite one to its start), so a Skeleton's shimmer settles.
+
+   **Then open every PNG and look at it** — both themes. Check the language too:
+   a German string a `replace` key missed renders fine. A capture that is
+   clipped, cropped wrong or showing the wrong state renders fine and reads as
+   plausible; the first #3029 capture lost the bottom of its icons and survived
+   a first pass. Re-capture rather than ship a bad crop. An example whose
+   overlay extends past its frame is clipped — the docs examples keep overlays
+   inside (`paddingBlockEnd`), which is what the CoachMark example does.
 
    **Commit the figures on the release branch and reference them by the commit's
    SHA.** Not a `user-attachments` upload: GitHub has no API for those — they
@@ -213,15 +244,19 @@ requires `--from`/`--to` overrides before doing anything else.
    covers both surfaces. Committed binaries are no new precedent: `main` already
    carries ~950 PNG/GIF files.
 
-   Two constraints the `/releases` rendering imposes, both verified:
-   - **Markdown image syntax, never an HTML `<img>`.** GitHub renders raw HTML
-     in a release body; the docs site's `<Markdown>` does not enable
-     `rehype-raw` and drops it. An HTML tag therefore works on one surface and
-     silently vanishes on the other — and with it any `width` attribute.
-   - **Nothing can resize the figure afterwards**, since that `width` attribute
-     is unavailable. Both surfaces cap it with `max-width: 100%`, so an
-     oversized figure is scaled down and an undersized one is simply small.
-     `width × scale` is the pixel width, and the script prints it.
+   Two constraints the two surfaces impose, both verified on 1.5.0 (#3481):
+   - **The `<picture>` block the script prints, and no other HTML.** GitHub
+     renders raw HTML in a release body and shows the block's dark `<source>` to
+     dark mode. The docs site's `<Markdown>` does not enable `rehype-raw` and
+     drops raw HTML, so `themedFigures` (`apps/docs/src/lib/releases`) rewrites
+     exactly this shape into one markdown image per theme. Any other tag — a
+     bare `<img>` outside `<picture>` — works on GitHub and silently vanishes on
+     `/releases`.
+   - **The `<img>` carries `width="<spec width>"`.** Without it GitHub stretches
+     the figure to the full body width (~900 px). `themedFigures` reads only
+     `src` and `alt`, so `/releases` ignores the attribute and keeps the figure;
+     `ReleaseEntry.module.scss` zooms it back from the 2× capture there. Keep
+     the attribute the script prints.
 
 9. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
 
@@ -253,11 +288,20 @@ requires `--from`/`--to` overrides before doing anything else.
    </details>
    ```
 
-   Every figure from Step 8 goes into `{{CURATED_NOTES}}` as a markdown image at
-   the SHA that step recorded:
+   Every figure from Step 8 goes into `{{CURATED_NOTES}}` under its own `###`
+   heading with one or two sentences, as the `<picture>` block the script
+   printed, with `<commit-sha>` replaced by the SHA that step recorded and the
+   alt text filled in:
 
    ```markdown
-   ![Rating figure](https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/rating.png)
+   ### While loading
+
+   Every component inside the view renders as its skeleton.
+
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/skeleton-mode-loading-dark.png">
+     <img src="https://raw.githubusercontent.com/mittwald/flow/{{FIGURE_SHA}}/apps/docs/public/assets/releases/{{VERSION}}/skeleton-mode-loading.png" alt="A heading, a text and a labeled value rendered as skeletons" width="360">
+   </picture>
    ```
 
    The curated notes MUST sit **verbatim** between

@@ -7,6 +7,9 @@ import { FieldError } from "@/components/FieldError";
 const meta: Meta<typeof CodeEditor> = {
   title: "Form Controls/CodeEditor",
   component: CodeEditor,
+  args: {
+    isDisabled: false,
+  },
   render: (props) => (
     <CodeEditor
       value={

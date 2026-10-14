@@ -237,3 +237,16 @@ test("Active tab indicator matches the tab in a scaled container", async () => {
 
   expect(indicatorWidth).toBeCloseTo(tab.offsetWidth, 0);
 });
+
+test("Collapsed tabs name their menu button by the selected tab", async () => {
+  render(collapsibleTabs(240));
+
+  const button = page.getByRole("button", { name: "Communications array" });
+  await expect.element(button).toBeVisible();
+
+  const labelledBy = button.element().getAttribute("aria-labelledby");
+  const labelledByIds = labelledBy?.split(" ") ?? [];
+  for (const id of labelledByIds) {
+    expect(document.getElementById(id)).not.toBeNull();
+  }
+});

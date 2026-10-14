@@ -7,6 +7,7 @@ import { BreadcrumbItem } from "./components/BreadcrumbItem";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface BreadcrumbProps
   extends
@@ -22,10 +23,13 @@ export interface BreadcrumbProps
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
   const { children, className, color = "default", size = "m", ...rest } = props;
 
+  const isSkeleton = useSkeletonMode();
+
   const rootClassName = clsx(
     styles.breadcrumb,
     isAlphaColor(color) && styles[color],
     size === "s" && styles["size-s"],
+    isSkeleton && styles.skeleton,
     className,
   );
 

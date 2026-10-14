@@ -1,0 +1,38 @@
+name: Install a Playwright browser
+description:
+  Installs one Playwright browser and the system libraries it needs, both from
+  cache when possible.
+
+inputs:
+  browser:
+    description: The Playwright browser to install.
+    default: webkit
+
+runs:
+  using: composite
+  steps:
+    - name: Read the OS release
+      id: os
+      uses: ./.github/actions/os-release
+
+    # One key per browser, and apart from the visual workflows' cache, which
+    # holds both browsers: under one shared key whichever job saved first would
+    # decide what the others find.
+    - name: Cache the Playwright browser
+      uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: ~/.cache/ms-playwright
+        key:
+          playwright-${{ inputs.browser }}-${{ steps.os.outputs.release }}-${{
+          hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          playwright-${{ inputs.browser }}-${{ steps.os.outputs.release }}-
+
+    # `--with-deps` installs the browser's system packages through apt.
+    - name: Install the Playwright browser
+      uses: ./.github/actions/cache-debs
+      with:
+        key: playwright-${{ inputs.browser }}-debs
+        prefetch:
+          .github/actions/install-playwright/fetch-debs.sh ${{ inputs.browser }}
+        run: pnpm exec playwright install --with-deps ${{ inputs.browser }}

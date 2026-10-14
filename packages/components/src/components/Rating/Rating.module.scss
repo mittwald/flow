@@ -1,4 +1,5 @@
 @use "@/styles/mixins/focus";
+@use "@/styles/mixins/skeleton";
 
 /**
  * Segments render filled by default. The fill rules below empty out every
@@ -114,4 +115,11 @@
 
   @include size(s);
   @include size(m);
+
+  /* SkeletonMode: the segments become one surface in their size */
+  &.skeleton .ratingSegments {
+    @include skeleton.shape;
+  }
 }
+
+@include skeleton.keyframes;

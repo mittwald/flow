@@ -1,32 +1,14 @@
+@use "@/styles/mixins/skeleton";
+
 .skeleton {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--skeleton--background-color);
-  border-radius: var(--corner-radius--m);
+  @include skeleton.surface;
+
   width: 100%;
 
   &::before {
     content: "-";
     visibility: hidden;
   }
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background-image: linear-gradient(
-      90deg,
-      transparent 0,
-      var(--skeleton--shimmer-color) 60%,
-      transparent
-    );
-    animation: shimmer var(--skeleton--shimmer-duration) infinite;
-    content: "";
-  }
 }
 
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
-}
+@include skeleton.keyframes;
