@@ -19,7 +19,7 @@ modal:
   footer-background-color:
     value: "{elevation.color.200}"
   border-color:
-    value: "{border.color.100}"
+    value: "{neutral.color.quiet.100}"
   border-width:
     value: "{border-width.100}"
   border-style:

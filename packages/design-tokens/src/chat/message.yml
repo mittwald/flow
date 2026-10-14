@@ -22,4 +22,4 @@ message:
   border-width:
     value: "{border-width.100}"
   border-color:
-    value: "{border.color.100}"
+    value: "{neutral.color.quiet.100}"

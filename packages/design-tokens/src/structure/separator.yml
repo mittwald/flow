@@ -1,6 +1,6 @@
 separator:
   color:
-    value: "{border.color.200}"
+    value: "{neutral.color.quiet.200}"
   height:
     value: "{border-width.100}"
   border-style:

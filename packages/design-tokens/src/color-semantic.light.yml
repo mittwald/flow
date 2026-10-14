@@ -12,22 +12,26 @@
 #                   text, link and border, strong.200 text on soft/outline
 # Hover and pressed take the next Brand step. strong.100 is the step closest
 # to the Brand base that keeps AA (primary and decorative-blue: the base).
-# Status groups pick their steps by role (#3454).
+# Selected is a resting state: plain/outline selected takes the soft surface
+# (quiet.100), not pressed. Status groups pick their steps by role (#3454).
 #
-# The neutral ramp is split by role (keys 100–300, quiet to strong):
-#   elevation  100 raised (card, modal), 200 ground (page), 300 inset
+# The neutral ramp has two roles of its own (keys 100–300, quiet to strong):
+#   elevation  100 raised (card, modal), 200 ground (page, field, track),
+#              300 inset; also what has to match a surface (switch knob,
+#              slider handle, selected tab, knock-out rings)
 #   content    100 secondary (icon, placeholder), 200 label, 300 text;
 #              inverse is content on strong surfaces
-#   border     100 groups, 200 separates, 300 controls (≥ 3:1)
-#   disabled   100 surface, 200 border, 300 content
-# neutral and unavailable keep quiet/strong for their variants; unavailable
-# sits as low as AA allows (strong.100 = content.100).
+# Everything else takes neutral quiet/strong, borders included: quiet.100
+# groups (card border), quiet.200 separates (separator, chart grid),
+# strong.100 outlines controls (≥ 3:1). Disabled takes unavailable.quiet
+# (surface, border, content); unavailable sits as low as AA allows
+# (strong.100 = content.100).
 #
 # Decorative groups: one per mittwald brand color. Status colors are not
 # duplicated; components map their color props onto these groups.
 #
-# Dark takes the contrast steps of light (content, border, disabled) or the
-# role (elevation: the page sits below the card), not the mirrored step.
+# Dark takes the contrast steps of light (content) or the role (elevation:
+# the page sits below the card), not the mirrored step.
 
 primary:
   color:
@@ -252,24 +256,6 @@ content:
       value: "{color.mittwald-neutral.1100}"
     inverse:
       value: "{color.mittwald-neutral.100}"
-
-border:
-  color:
-    100:
-      value: "{color.mittwald-neutral.300}"
-    200:
-      value: "{color.mittwald-neutral.500}"
-    300:
-      value: "{color.mittwald-neutral.700}"
-
-disabled:
-  color:
-    100:
-      value: "{color.mittwald-neutral.300}"
-    200:
-      value: "{color.mittwald-neutral.400}"
-    300:
-      value: "{color.mittwald-neutral.500}"
 
 dark:
   color:

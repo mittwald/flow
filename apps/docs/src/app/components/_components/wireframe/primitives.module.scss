@@ -61,7 +61,7 @@
   align-items: center;
   padding-inline: 16px;
   padding-block: 8px;
-  border: 2px solid var(--border--color--200);
+  border: 2px solid var(--neutral--color--quiet--200);
   border-radius: var(--corner-radius--m);
   min-height: 48px;
 }
@@ -118,7 +118,7 @@
 }
 
 .tone500 {
-  background: var(--border--color--200);
+  background: var(--neutral--color--quiet--200);
 }
 
 .tone600 {

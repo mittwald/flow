@@ -14,13 +14,14 @@
 export const ALLOWLIST = [
   {
     reason:
-      "Light: plain status buttons on their own hover/pressed tint (#3454). `danger`/`warning`/`info.color.800` is Brand 1300, which carries white text on solid (4.76–6.14); on the 100/200 tints it reaches 4.24–4.84, warning 3.41–3.73. A darker 800 would separate danger and warning less (decided with UX in #3454).",
+      "Light: plain status buttons on their own hover/selected/pressed tint (#3454; selected takes the hover tint). `danger`/`warning`/`info.color.800` is Brand 1300, which carries white text on solid (4.76–6.14); on the 100/200 tints it reaches 4.24–4.84, warning 3.41–3.73. A darker 800 would separate danger and warning less (decided with UX in #3454).",
     pairs: {
       "light button.danger-plain-content-color.default on button.danger-plain-background-color.pressed": 4.26,
       "light danger-plain-content-color on danger-plain-background-color.pressed": 4.26,
       "light info-plain-content-color on info-plain-background-color.pressed": 4.24,
       "light warning-plain-content-color on warning-plain-background-color.hover": 3.72,
       "light warning-plain-content-color on warning-plain-background-color.pressed": 3.4,
+      "light warning-plain-content-color on warning-plain-background-color.selected": 3.72,
     },
   },
   {

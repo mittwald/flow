@@ -42,8 +42,6 @@ const semanticShapes = {
   ),
   elevation: steps,
   content: [...steps, "inverse"],
-  border: steps,
-  disabled: steps,
 };
 
 const collectTokens = (node, file, tokenPath = [], collector = []) => {

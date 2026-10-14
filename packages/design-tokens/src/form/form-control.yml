@@ -22,7 +22,7 @@ form-control:
     default:
       value: "{content.color.100}"
     disabled:
-      value: "{disabled.color.300}"
+      value: "{unavailable.color.quiet.300}"
 
   border-color:
     default:
@@ -48,7 +48,7 @@ form-control:
     invalid:
       value: "{danger.color.quiet.100}"
     selected:
-      value: "{neutral-outline-background-color.pressed}"
+      value: "{neutral-outline-background-color.selected}"
 
   content-color:
     default:

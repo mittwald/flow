@@ -10,7 +10,7 @@ const toneColor: Record<Tone, string> = {
   "200": "var(--elevation--color--200)",
   "300": "var(--elevation--color--300)",
   "400": "var(--neutral--color--quiet--100)",
-  "500": "var(--border--color--200)",
+  "500": "var(--neutral--color--quiet--200)",
   "600": "var(--neutral--color--quiet--300)",
   "700": "var(--content--color--100)",
   "800": "var(--content--color--200)",
@@ -175,7 +175,7 @@ export const WOverlay: FC<
       className={cx(styles.overlay, getToneClass(tone), className)}
       style={{
         ...rest,
-        borderColor: tipped ? "var(--border--color--200)" : undefined,
+        borderColor: tipped ? "var(--neutral--color--quiet--200)" : undefined,
       }}
     >
       {children}

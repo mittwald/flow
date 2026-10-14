@@ -3,7 +3,7 @@ slider:
     default:
       value: "{neutral.color.strong.300}"
     disabled:
-      value: "{disabled.color.300}"
+      value: "{unavailable.color.quiet.300}"
   spacing-x:
     value: "{size-rem.s}"
   spacing-y:
