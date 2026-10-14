@@ -4,11 +4,10 @@ import {
   Button,
   ContextMenu,
   ContextMenuTrigger,
-  Icon,
+  IconSettings,
   MenuItem,
   useOverlayController,
 } from "@mittwald/flow-react-components";
-import { IconAdjustments } from "@tabler/icons-react";
 import { useComponentGrouping } from "@/app/_lib/useComponentGrouping";
 
 const groupedKey = "grouped";
@@ -22,9 +21,7 @@ export const ComponentGroupingMenu: FC = () => {
   return (
     <ContextMenuTrigger controller={controller}>
       <Button variant="plain" color="secondary" aria-label="Einstellungen">
-        <Icon>
-          <IconAdjustments />
-        </Icon>
+        <IconSettings />
       </Button>
       <ContextMenu
         placement="bottom right"

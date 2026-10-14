@@ -4,15 +4,12 @@ import {
   WFrame,
   WIcon,
 } from "@/app/components/_components/wireframe/primitives";
-import { IconLoader2 } from "@tabler/icons-react";
-import { Icon } from "@mittwald/flow-react-components";
+import { IconPending } from "@mittwald/flow-react-components";
 
 export const LoadingSpinnerWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WIcon size={64}>
-      <Icon>
-        <IconLoader2 />
-      </Icon>
+      <IconPending />
     </WIcon>
   </WFrame>
 );

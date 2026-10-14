@@ -8,7 +8,8 @@ import {
   WText,
 } from "@/app/components/_components/wireframe/primitives";
 import { Icon } from "@mittwald/flow-react-components";
-import { IconAsterisk } from "@tabler/icons-react";
+import { faAsterisk } from "@fortawesome/sharp-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const PasswordCreationFieldWireframe: FC = () => (
   <WFrame>
@@ -17,17 +18,17 @@ export const PasswordCreationFieldWireframe: FC = () => (
       <WInput>
         <WIcon>
           <Icon>
-            <IconAsterisk />
+            <FontAwesomeIcon icon={faAsterisk} />
           </Icon>
         </WIcon>
         <WIcon>
           <Icon>
-            <IconAsterisk />
+            <FontAwesomeIcon icon={faAsterisk} />
           </Icon>
         </WIcon>
         <WIcon>
           <Icon>
-            <IconAsterisk />
+            <FontAwesomeIcon icon={faAsterisk} />
           </Icon>
         </WIcon>
       </WInput>
