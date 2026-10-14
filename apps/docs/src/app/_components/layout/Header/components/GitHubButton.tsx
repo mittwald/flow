@@ -1,7 +1,8 @@
 "use client";
 
 import { Button, Icon } from "@mittwald/flow-react-components";
-import { IconBrandGithub } from "@tabler/icons-react";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const GitHubButton = () => {
   return (
@@ -14,7 +15,7 @@ export const GitHubButton = () => {
         style={{ flexGrow: 0, width: "auto" }}
       >
         <Icon>
-          <IconBrandGithub />
+          <FontAwesomeIcon icon={faGithub} />
         </Icon>
       </Button>
     </a>

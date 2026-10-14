@@ -17,7 +17,8 @@ import {
   Icon,
   LayoutCard,
 } from "@mittwald/flow-react-components";
-import { IconArrowBarBoth } from "@tabler/icons-react";
+import { faArrowsLeftRightToLine } from "@fortawesome/sharp-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 import { stripImports } from "@/lib/liveCode/stripImports";
 
@@ -348,7 +349,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
               onKeyDown={onKeyDown}
             >
               <Icon>
-                <IconArrowBarBoth />
+                <FontAwesomeIcon icon={faArrowsLeftRightToLine} />
               </Icon>
             </Button>
           </div>
