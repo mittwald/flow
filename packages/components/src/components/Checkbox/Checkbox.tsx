@@ -69,14 +69,14 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
   return (
     <div
       {...skeletonProps}
-      className={clsx(styles.checkbox, className, wrapperProps.className)}
+      className={clsx(wrapperProps.className, styles.checkbox, className)}
     >
       <FieldErrorCaptureContext>
         <Aria.Checkbox
           {...rest}
           aria-describedby={controlProps["aria-describedby"]}
           inputRef={inputRef}
-          className={clsx(inputClassName, styles.input)}
+          className={clsx(styles.input, inputClassName)}
         >
           {({ isSelected, isIndeterminate }) => (
             <PropsContextProvider props={fieldPropsContext}>

@@ -32,10 +32,7 @@ export interface ProgressBarProps
     color?: CategoricalWithCustomColor;
     valueText?: string;
   }[];
-  /**
-   * Whether the legend component is shown when segments are used. @default:
-   * true
-   */
+  /** Whether the legend component is shown when segments are used. @default true */
   showLegend?: boolean;
 }
 

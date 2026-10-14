@@ -94,6 +94,12 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const generatedId = useId();
 
+  const closeButtonClassName = clsx(
+    styles.closeButton,
+    showCloseButton === true && styles.alwaysVisible,
+    showCloseButton === false && styles.alwaysHidden,
+  );
+
   const header = (children: ReactNode) => (
     <>
       <DivView className={styles.headerTitle}>{children}</DivView>
@@ -104,14 +110,7 @@ export const Modal = flowComponent("Modal", (props) => {
               variant="plain"
               color="secondary"
               aria-label={stringFormatter.format("close")}
-              className={clsx(
-                styles.closeButton,
-                showCloseButton === true
-                  ? styles.alwaysVisible
-                  : showCloseButton === false
-                    ? styles.alwaysHidden
-                    : undefined,
-              )}
+              className={closeButtonClassName}
             >
               <IconClose />
             </ButtonView>
