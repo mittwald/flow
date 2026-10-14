@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.15](https://github.com/mittwald/flow/compare/1.6.0-next.14...1.6.0-next.15) (2026-10-14)
+
+### Tests
+
+* **remote-react-components:** gate 1.5.0 scenarios for cross-version runs and fix the List select-all race ([#3504](https://github.com/mittwald/flow/issues/3504)) ([a159fb3](https://github.com/mittwald/flow/commit/a159fb31e4e63f9072b41c5fe86875bb79f12779))
+
+## [1.5.16](https://github.com/mittwald/flow/compare/1.6.0-next.13...1.5.16) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.16 ([d1bc9af](https://github.com/mittwald/flow/commit/d1bc9af39685c830d052fc726f36ad2d7d3e204a))
+
 ## [1.6.0-next.14](https://github.com/mittwald/flow/compare/1.6.0-next.13...1.6.0-next.14) (2026-10-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

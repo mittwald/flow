@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.15](https://github.com/mittwald/flow/compare/1.6.0-next.14...1.6.0-next.15) (2026-10-14)
+
+### Bug Fixes
+
+* **Slider:** show the initial marker for a defaultValue of 0 ([697c64c](https://github.com/mittwald/flow/commit/697c64c5c3c5ddeb32ddbda82674670617e22923))
+
+### Code Refactoring
+
+* **components:** follow the className, JSX and JSDoc conventions ([68d5b49](https://github.com/mittwald/flow/commit/68d5b4913c88e72e41a930517b4a6e76e500fefa)), closes [#3431](https://github.com/mittwald/flow/issues/3431)
+
+## [1.5.16](https://github.com/mittwald/flow/compare/1.6.0-next.13...1.5.16) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.16 ([d1bc9af](https://github.com/mittwald/flow/commit/d1bc9af39685c830d052fc726f36ad2d7d3e204a))
+
 ## [1.6.0-next.14](https://github.com/mittwald/flow/compare/1.6.0-next.13...1.6.0-next.14) (2026-10-13)
 
 ## [1.5.15](https://github.com/mittwald/flow/compare/1.6.0-next.12...1.5.15) (2026-10-13)
