@@ -28,6 +28,7 @@ import {
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { TaskListCheckbox } from "@/components/Markdown/components/TaskListCheckbox";
 import { removeNewlinesAfterBreaks } from "@/components/Markdown/lib/removeNewlinesAfterBreaks";
+import { removeSpaceAfterTaskListCheckbox } from "@/components/Markdown/lib/removeSpaceAfterTaskListCheckbox";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
@@ -89,7 +90,9 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     p: (props) => (
       <Text elementType="p" color={color}>
-        {removeNewlinesAfterBreaks(props.children)}
+        {removeSpaceAfterTaskListCheckbox(
+          removeNewlinesAfterBreaks(props.children),
+        )}
       </Text>
     ),
     code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
@@ -189,7 +192,9 @@ export const Markdown: FC<MarkdownProps> = (props) => {
           className?.includes("task-list-item") && styles.taskListItem,
         )}
       >
-        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+        <SkeletonInlineContent>
+          {removeSpaceAfterTaskListCheckbox(children)}
+        </SkeletonInlineContent>
       </li>
     ),
     input: ({ node: ignoredNode, ...props }) =>

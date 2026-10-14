@@ -5,6 +5,7 @@ declare const classNames: {
   readonly taskListCheckbox: "taskListCheckbox";
   readonly taskListIcon: "taskListIcon";
   readonly checked: "checked";
+  readonly taskListSkeletonIcon: "taskListSkeletonIcon";
   readonly dark: "dark";
   readonly light: "light";
   readonly "dark-static": "dark-static";

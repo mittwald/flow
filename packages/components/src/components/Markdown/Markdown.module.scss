@@ -1,3 +1,4 @@
+@use "@/styles/mixins/formControl";
 @use "@/styles/mixins/scrollbar";
 @use "@/styles/mixins/skeleton";
 
@@ -84,6 +85,12 @@
 
   .taskListIcon.checked {
     color: var(--choice--icon-color--selected);
+  }
+
+  .taskListSkeletonIcon {
+    display: flex;
+
+    @include formControl.formSkeletonShape(var(--corner-radius--s));
   }
 
   /* Alpha colors: the checkbox takes the item's text color. */
