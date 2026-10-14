@@ -74,6 +74,7 @@ import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
+import { LegendItem as LegendItem } from "@mittwald/flow-react-components";
 import { LightBoxGallery as LightBoxGallery } from "@mittwald/flow-react-components";
 import { LightBoxGalleryItem as LightBoxGalleryItem } from "@mittwald/flow-react-components";
 import { Line as Line } from "@mittwald/flow-react-components";
@@ -330,6 +331,10 @@ export const flowComponents = {
     LayoutCard,
   ),
   "flr-legend": createFlowRemoteComponentRenderer("Legend", Legend),
+  "flr-legend-item": createFlowRemoteComponentRenderer(
+    "LegendItem",
+    LegendItem,
+  ),
   "flr-light-box-gallery": createFlowRemoteComponentRenderer(
     "LightBoxGallery",
     LightBoxGallery,

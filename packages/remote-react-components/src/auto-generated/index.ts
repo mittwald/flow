@@ -73,6 +73,7 @@ export * from "./Label";
 export * from "./LabeledValue";
 export * from "./LayoutCard";
 export * from "./Legend";
+export * from "./LegendItem";
 export * from "./LightBoxGallery";
 export * from "./LightBoxGalleryItem";
 export * from "./Line";

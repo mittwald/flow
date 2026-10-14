@@ -8,6 +8,7 @@ import { EventHandlerDemo } from "@/app/remote-vue/_demos/eventHandler";
 import { ExtBridgeDemo } from "@/app/remote-vue/_demos/extBridge";
 import { FilesDemo } from "@/app/remote-vue/_demos/files";
 import { ImageCropperDemo } from "@/app/remote-vue/_demos/imageCropper";
+import { LegendDemo } from "@/app/remote-vue/_demos/legend";
 import { ListDemo } from "@/app/remote-vue/_demos/list";
 import { ListSelectionDemo } from "@/app/remote-vue/_demos/listSelection";
 import { MarkdownDemo } from "@/app/remote-vue/_demos/markdown";
@@ -46,6 +47,7 @@ export const vueDemos: Record<string, Component> = {
   "ext-bridge": ExtBridgeDemo,
   files: FilesDemo,
   "image-cropper": ImageCropperDemo,
+  legend: LegendDemo,
   list: ListDemo,
   "list-selection": ListSelectionDemo,
   markdown: MarkdownDemo,

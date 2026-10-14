@@ -73,6 +73,7 @@ export * from "./RemoteLabelElement";
 export * from "./RemoteLabeledValueElement";
 export * from "./RemoteLayoutCardElement";
 export * from "./RemoteLegendElement";
+export * from "./RemoteLegendItemElement";
 export * from "./RemoteLightBoxGalleryElement";
 export * from "./RemoteLightBoxGalleryItemElement";
 export * from "./RemoteLineElement";

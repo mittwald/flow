@@ -94,6 +94,7 @@ export default function Layout(props: PropsWithChildren) {
                       <NavigationItem page="image-cropper">
                         ImageCropper
                       </NavigationItem>
+                      <NavigationItem page="legend">Legend</NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
                       <NavigationItem page="list-selection">
                         List (selection)

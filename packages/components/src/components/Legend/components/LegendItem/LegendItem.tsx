@@ -10,6 +10,7 @@ export interface LegendItemProps extends PropsWithChildren {
   color?: CategoricalWithCustomColor;
 }
 
+/** @flr-generate all */
 export const LegendItem: FC<LegendItemProps> = (props) => {
   const { children, color: colorFromProps } = props;
 
