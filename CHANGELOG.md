@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.17](https://github.com/mittwald/flow/compare/1.6.0-next.16...1.6.0-next.17) (2026-10-15)
+
+### Documentation
+
+* **foundations:** merge Error Handling into Fehlermeldungen ([#3434](https://github.com/mittwald/flow/issues/3434)) ([e97d3b2](https://github.com/mittwald/flow/commit/e97d3b2008497101f3b2561e2943cb7781024767))
+* **sprach-guide:** reduce glossary to product terms and align guidelines ([#3396](https://github.com/mittwald/flow/issues/3396)) ([a2460d0](https://github.com/mittwald/flow/commit/a2460d0eb55f649039c19165e3568e1872c83b25))
+
+## [1.5.18](https://github.com/mittwald/flow/compare/1.6.0-next.15...1.5.18) (2026-10-14)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.18 ([24900c1](https://github.com/mittwald/flow/commit/24900c1a1c228fe7ee1c37ffe947f740bcb8e501))
+
 ## [1.6.0-next.16](https://github.com/mittwald/flow/compare/1.6.0-next.15...1.6.0-next.16) (2026-10-14)
 
 ### Tests
