@@ -40,3 +40,5 @@ calendar:
     value: "{border-style.default}"
   header-cell-font-weight:
     value: "{font-weight.bold}"
+  preset-menu-max-width:
+    value: 200px

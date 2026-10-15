@@ -1,5 +1,5 @@
 .searchField {
-  max-width: 500px;
+  max-width: var(--list--search-field-max-width);
   margin-inline-start: auto;
   flex-grow: 1;
 
