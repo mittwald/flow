@@ -1,17 +1,19 @@
 import { ActionFormDemo } from "@/app/remote-vue/_demos/actionForm";
-import { ActivityDemo } from "@/app/remote-vue/_demos/activity";
-import { ChartDemo } from "@/app/remote-vue/_demos/chart";
-import { CodeEditorDemo } from "@/app/remote-vue/_demos/codeEditor";
-import { ContextMenuDemo } from "@/app/remote-vue/_demos/contextMenu";
+import { ActionsDemo } from "@/app/remote-vue/_demos/components/actions";
+import { ChatDemo } from "@/app/remote-vue/_demos/components/chat";
+import { ContentDemo } from "@/app/remote-vue/_demos/components/content";
+import { DataVisualisationDemo } from "@/app/remote-vue/_demos/components/data-visualisation";
+import { FormControlsDemo } from "@/app/remote-vue/_demos/components/form-controls";
+import { ListComponentsDemo } from "@/app/remote-vue/_demos/components/list";
+import { NavigationComponentsDemo } from "@/app/remote-vue/_demos/components/navigation";
+import { OverlaysDemo } from "@/app/remote-vue/_demos/components/overlays";
+import { StatusDemo } from "@/app/remote-vue/_demos/components/status";
+import { StructureDemo } from "@/app/remote-vue/_demos/components/structure";
+import { UploadDemo } from "@/app/remote-vue/_demos/components/upload";
 import { ErrorDemo } from "@/app/remote-vue/_demos/error";
 import { EventHandlerDemo } from "@/app/remote-vue/_demos/eventHandler";
 import { ExtBridgeDemo } from "@/app/remote-vue/_demos/extBridge";
 import { FilesDemo } from "@/app/remote-vue/_demos/files";
-import { ImageCropperDemo } from "@/app/remote-vue/_demos/imageCropper";
-import { ListDemo } from "@/app/remote-vue/_demos/list";
-import { ListSelectionDemo } from "@/app/remote-vue/_demos/listSelection";
-import { MarkdownDemo } from "@/app/remote-vue/_demos/markdown";
-import { ModalDemo } from "@/app/remote-vue/_demos/modal";
 import { MStudioLoadingDemo } from "@/app/remote-vue/_demos/mstudioLoading";
 import {
   NavigationDemo,
@@ -19,14 +21,9 @@ import {
 } from "@/app/remote-vue/_demos/navigation";
 import { NoComponentDemo } from "@/app/remote-vue/_demos/noComponent";
 import { NonInteractiveDemo } from "@/app/remote-vue/_demos/nonInteractive";
-import { NotificationDemo } from "@/app/remote-vue/_demos/notification";
 import { PerformanceDemo } from "@/app/remote-vue/_demos/performance";
-import { PopoverDemo } from "@/app/remote-vue/_demos/popover";
-import { RatingDemo } from "@/app/remote-vue/_demos/rating";
 import { SimpleFormDemo } from "@/app/remote-vue/_demos/simpleForm";
 import { SuspenseDemo } from "@/app/remote-vue/_demos/suspense";
-import { SvgDemo } from "@/app/remote-vue/_demos/svg";
-import { TabNavigationDemo } from "@/app/remote-vue/_demos/tabNavigation";
 import { TunnelDemo } from "@/app/remote-vue/_demos/tunnel";
 import type { Component } from "vue";
 
@@ -37,31 +34,28 @@ import type { Component } from "vue";
  */
 export const vueDemos: Record<string, Component> = {
   "action-form": ActionFormDemo,
-  activity: ActivityDemo,
-  chart: ChartDemo,
-  "code-editor": CodeEditorDemo,
-  "context-menu": ContextMenuDemo,
+  "components/actions": ActionsDemo,
+  "components/chat": ChatDemo,
+  "components/content": ContentDemo,
+  "components/data-visualisation": DataVisualisationDemo,
+  "components/form-controls": FormControlsDemo,
+  "components/list": ListComponentsDemo,
+  "components/navigation": NavigationComponentsDemo,
+  "components/overlays": OverlaysDemo,
+  "components/status": StatusDemo,
+  "components/structure": StructureDemo,
+  "components/upload": UploadDemo,
   error: ErrorDemo,
   "event-handler": EventHandlerDemo,
   "ext-bridge": ExtBridgeDemo,
   files: FilesDemo,
-  "image-cropper": ImageCropperDemo,
-  list: ListDemo,
-  "list-selection": ListSelectionDemo,
-  markdown: MarkdownDemo,
-  modal: ModalDemo,
   "mstudio-loading": MStudioLoadingDemo,
   navigation: NavigationDemo,
   "navigation/subpage": NavigationSubpageDemo,
   "no-component": NoComponentDemo,
   "non-interactive": NonInteractiveDemo,
-  notification: NotificationDemo,
   performance: PerformanceDemo,
-  popover: PopoverDemo,
-  rating: RatingDemo,
   "simple-form": SimpleFormDemo,
   suspense: SuspenseDemo,
-  svg: SvgDemo,
-  "tab-navigation": TabNavigationDemo,
   tunnel: TunnelDemo,
 };
