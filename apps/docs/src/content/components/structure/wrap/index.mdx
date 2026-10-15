@@ -11,15 +11,10 @@ description:
 
 # Best Practices
 
-- Nutze Wrap für ein optionales Element um Content, etwa einen
-  [Link](/components/navigation/link), der nur mit Berechtigung erscheint. Der
-  Content steht so nur einmal im Code.
-- Übergib genau ein Element als Child und lege den Content in dessen `children`.
-  Ist die Bedingung nicht erfüllt, rendert Wrap nur diese `children`.
-- Setze Props wie `href` oder `className` nur auf das umschließende Element. Sie
-  entfallen, sobald die Bedingung nicht erfüllt ist.
-- Rechne nicht mit einem eigenen Element. Wrap rendert weder einen Container
-  noch ein Styling.
+- Nutze Wrap, wenn ein Element wie ein [Link](/components/navigation/link) nur
+  unter einer Bedingung erscheinen soll. Der Content steht so nur einmal im
+  Code.
+- Lege genau ein Element in Wrap und den Content in dieses Element.
 
 ---
 
