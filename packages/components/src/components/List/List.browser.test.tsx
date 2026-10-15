@@ -28,6 +28,7 @@ import { TableCell } from "./setupComponents/TableCell";
 import { TableColumn } from "./setupComponents/TableColumn";
 import { TableHeader } from "./setupComponents/TableHeader";
 import { TableRow } from "./setupComponents/TableRow";
+import { ListSearch } from "./setupComponents/ListSearch";
 
 interface Data {
   num: number;
@@ -829,6 +830,58 @@ describe("Sorting", () => {
     expect(page.getByRole("grid")).toHaveTextContent(
       listItem42TextContent + listItem43TextContent,
     );
+  });
+
+  test("Hidden sorting alone offers no all filters modal", async () => {
+    await render(
+      getTestElement(
+        [43, 42],
+        <>
+          {/* Without a search the header renders no options at all */}
+          <ListSearch />
+          <ListSorting<Data> defaultEnabled="hidden" property="num" />
+        </>,
+      ),
+    );
+    await expect.element(listItem42).toBeInTheDocument();
+    expect(
+      page
+        .getByRole("button", { name: "All filters", includeHidden: true })
+        .elements(),
+    ).toHaveLength(0);
+  });
+});
+
+describe("Search", () => {
+  test("autoFocus focuses the field once the initial loading enables it", async () => {
+    let resolveLoader: (() => void) | undefined;
+
+    const loader: AsyncDataLoader<Data> = async () => {
+      await new Promise<void>((resolve) => {
+        resolveLoader = resolve;
+      });
+      return { data: [{ num: 42 }] };
+    };
+
+    await render(
+      <List aria-label="Test">
+        <ListSearch autoFocus />
+        <ListLoaderAsync<Data>>{loader}</ListLoaderAsync>
+        <ListItem<Data> textValue={({ num }) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    const searchField = page.getByRole("searchbox");
+    await expect.element(searchField).toBeDisabled();
+    await expect.poll(() => resolveLoader).toBeDefined();
+
+    resolveLoader?.();
+
+    await expect.element(listItem42).toBeInTheDocument();
+    await expect.element(searchField).toBeEnabled();
+    await expect.element(searchField).toHaveFocus();
   });
 });
 

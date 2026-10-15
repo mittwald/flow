@@ -74,6 +74,9 @@ export const SearchField: FC<Props> = (props) => {
   const render = search.render ?? DefaultSearchFieldRender;
 
   return createElement(render, {
+    // autoFocus only acts on mount, and a disabled field cannot take focus –
+    // remount once the initial loading enables it.
+    key: isDisabled ? "disabled" : "enabled",
     value: search.value,
     onChange: search.setValue.bind(search),
     isDisabled,
