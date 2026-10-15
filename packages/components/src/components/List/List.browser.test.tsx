@@ -853,6 +853,15 @@ describe("Sorting", () => {
 });
 
 describe("Search", () => {
+  test("submits the typed term after a delay", async () => {
+    await render(getTestElement([42, 43], <ListSearch />));
+
+    await userEvent.fill(page.getByRole("searchbox"), "43");
+
+    await expect.element(listItem42).not.toBeInTheDocument();
+    await expect.element(listItem43).toBeInTheDocument();
+  });
+
   test("autoFocus focuses the field once the initial loading enables it", async () => {
     let resolveLoader: (() => void) | undefined;
 

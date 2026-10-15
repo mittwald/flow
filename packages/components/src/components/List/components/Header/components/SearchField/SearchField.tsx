@@ -1,5 +1,5 @@
 import type { FC, KeyboardEvent } from "react";
-import { createElement, useEffect, useState } from "react";
+import { createElement, useEffect, useEffectEvent, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
@@ -30,9 +30,11 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
     }
   };
 
+  const autoSubmitSearch = useEffectEvent(submitSearch);
+
   useEffect(() => {
     if (autoSubmit) {
-      const timeout = setTimeout(() => submitSearch(), autoSubmitTimeout);
+      const timeout = setTimeout(() => autoSubmitSearch(), autoSubmitTimeout);
       return () => clearTimeout(timeout);
     }
   }, [searchString, autoSubmit]);
