@@ -9,6 +9,7 @@ import { ExtBridgeDemo } from "@/app/remote-vue/_demos/extBridge";
 import { FilesDemo } from "@/app/remote-vue/_demos/files";
 import { ImageCropperDemo } from "@/app/remote-vue/_demos/imageCropper";
 import { ListDemo } from "@/app/remote-vue/_demos/list";
+import { ListDateRangeDemo } from "@/app/remote-vue/_demos/listDateRange";
 import { ListSelectionDemo } from "@/app/remote-vue/_demos/listSelection";
 import { MarkdownDemo } from "@/app/remote-vue/_demos/markdown";
 import { ModalDemo } from "@/app/remote-vue/_demos/modal";
@@ -47,6 +48,7 @@ export const vueDemos: Record<string, Component> = {
   files: FilesDemo,
   "image-cropper": ImageCropperDemo,
   list: ListDemo,
+  "list-date-range": ListDateRangeDemo,
   "list-selection": ListSelectionDemo,
   markdown: MarkdownDemo,
   modal: ModalDemo,

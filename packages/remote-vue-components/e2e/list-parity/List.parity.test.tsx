@@ -118,6 +118,44 @@ const openMenu = (name: string) => async () => {
   await userEvent.click(page.getByRole("button", { name }));
 };
 
+/* Types into a date or time field's first segment; the rest follow. */
+const enter = async (field: string, keys: string) => {
+  await userEvent.click(
+    page.getByRole("group", { name: field }).getByRole("spinbutton").first(),
+  );
+  await userEvent.keyboard(keys);
+};
+
+const byMinute = { granularity: "minute" } as const;
+
+const dateTimeRangeTrees = (priority: "primary" | "secondary") => ({
+  react: () => (
+    <L.List aria-label="Crew" getItemId={getItemId}>
+      <L.StaticData data={crew} />
+      {reactItem}
+      <L.Filter
+        property="joined"
+        mode="dateRange"
+        name="Joined"
+        priority={priority}
+        dateRangeOptions={byMinute}
+      />
+    </L.List>
+  ),
+  vue: () =>
+    h(List, { "aria-label": "Crew", getItemId }, () => [
+      h(ListStaticData, { data: crew }),
+      vueItem(),
+      h(ListFilter, {
+        property: "joined",
+        mode: "dateRange",
+        name: "Joined",
+        priority,
+        dateRangeOptions: byMinute,
+      }),
+    ]),
+});
+
 const scenarios: ParityScenario[] = [
   {
     name: "items in list view",
@@ -893,6 +931,45 @@ const scenarios: ParityScenario[] = [
   },
 
   {
+    /* With `granularity: "minute"`, date and time fields replace the calendar. */
+    name: "a date-time-range filter, opened",
+    interact: openMenu("Joined"),
+    trees: dateTimeRangeTrees("primary"),
+  },
+
+  {
+    /* Applied as typed: the rows narrow down and the chip shows the times. */
+    name: "a date-time-range filter, applied",
+    interact: async () => {
+      await openMenu("Joined")();
+      await enter("Start date", "03012024");
+      await enter("Start time", "0800");
+      await enter("End date", "06302024");
+      await enter("End time", "1200");
+    },
+    trees: dateTimeRangeTrees("primary"),
+  },
+
+  {
+    /* One error below all fields, and the last valid range stays applied. */
+    name: "a date-time-range filter, ending before it starts",
+    interact: async () => {
+      await openMenu("Joined")();
+      await enter("Start date", "03012024");
+      await enter("End date", "06302024");
+      await enter("End date", "02012024");
+    },
+    trees: dateTimeRangeTrees("primary"),
+  },
+
+  {
+    /* One filter, so its accordion is open from the start. */
+    name: "the all-filters modal with a date-time-range filter",
+    interact: openMenu("All filters"),
+    trees: dateTimeRangeTrees("secondary"),
+  },
+
+  {
     /* A secondary filter is what puts the modal on desktop, and keeps the
      * filter out of the header — both rules have to hold on both sides. */
     name: "the all-filters modal, opened",
@@ -1159,6 +1236,12 @@ const coverage = [
   "flow--context-menu",
   "flow--context-menu--select-all",
   "flow--list--header--all-filters-modal--select-all-checkbox",
+  "flow--list--header--date-time-range-fields",
+  "flow--list--header--date-time-range-fields--range-error",
+  "flow--list--header--filter-context-menu--date-time-range",
+  "flow--date-picker--date-input",
+  "flow--time-field--date-input",
+  "flow--field-error",
   "flow--heading",
   "flow--icon",
   "flow--illustrated-message",

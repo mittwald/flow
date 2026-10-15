@@ -331,7 +331,11 @@ export class ListFilter<
   private callOnChangedHandlers(
     newValue: ListFilterValue<TRendered>[] | ListFilterValue<TRendered> | null,
   ): void {
-    const values = toArray(newValue).map((v) => v?.value);
+    this.notifyFilterUpdated(toArray(newValue).map((v) => v?.value));
+  }
+
+  /** Tells the listeners — the list resetting its batches among them. */
+  protected notifyFilterUpdated(values: unknown[]): void {
     this.onFilterChangeCallbacks.forEach((cb) => cb(values));
   }
 
