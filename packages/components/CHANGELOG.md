@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.19](https://github.com/mittwald/flow/compare/1.5.18...1.5.19) (2026-10-15)
+
+### Documentation
+
+* **foundations:** merge Error Handling into Fehlermeldungen ([#3434](https://github.com/mittwald/flow/issues/3434)) ([e97d3b2](https://github.com/mittwald/flow/commit/e97d3b2008497101f3b2561e2943cb7781024767))
+
 ## [1.5.18](https://github.com/mittwald/flow/compare/1.5.17...1.5.18) (2026-10-14)
 
 ### Build System
