@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.18](https://github.com/mittwald/flow/compare/1.6.0-next.17...1.6.0-next.18) (2026-10-15)
+
+## [1.5.19](https://github.com/mittwald/flow/compare/1.6.0-next.16...1.5.19) (2026-10-15)
+
+### Bug Fixes
+
+* **Tabs:** stop the active panel from clipping its content ([a8db4f7](https://github.com/mittwald/flow/commit/a8db4f782a85a9900688025dc7e5113ff063a164))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.19 ([dd7ae7d](https://github.com/mittwald/flow/commit/dd7ae7dfa2c9c17b06c6d9b1ec210712733572f0))
+
+### Tests
+
+* update visual regression screenshots ([e808824](https://github.com/mittwald/flow/commit/e808824d5846c26b9a9bb619bdbf65dd3cb63546))
+
 ## [1.6.0-next.17](https://github.com/mittwald/flow/compare/1.6.0-next.16...1.6.0-next.17) (2026-10-15)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
