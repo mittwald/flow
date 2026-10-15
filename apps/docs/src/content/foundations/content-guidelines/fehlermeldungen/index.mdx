@@ -2,155 +2,146 @@
 title: Fehlermeldungen
 ---
 
-Fehler entstehen, wenn User auf unerwartete Ergebnisse stoßen – das führt oft zu
-Frustration, Verwirrung und zusätzlichem Aufwand. Daher ist der beste Fehler
-der, der gar nicht erst auftritt. Sollte dennoch ein Fehler auftreten, muss die
-Fehlermeldung klar, hilfreich und leicht verständlich formuliert sein, um den
-User bestmöglich zu unterstützen.
+Der beste Fehler ist der, der gar nicht erst auftritt. Klare Strukturen,
+verständliche Beschriftungen und sinnvolle Defaults helfen, Fehlbedienungen zu
+vermeiden. Lassen sich Fehler nicht verhindern, entscheiden zwei Dinge darüber,
+ob Nutzer weiterkommen: wo und mit welcher Komponente der Fehler erscheint und
+wie er formuliert ist.
 
 ---
 
 # Best Practices
 
-- Platziere Fehlermeldungen in unmittelbarer Nähe zur Ursache des Problems.
-- Stelle sicher, dass Fehlermeldungen kurz, verständlich, hilfreich und
-  handlungsorientiert sind.
-- Versuche bei jeder Fehlermeldung eine Lösung zu kommunizieren.
-- Unterscheide verschiedene Arten von Fehlermeldungen, basierend auf ihrem
-  Umfang und ihrer Dringlichkeit.
+- Vermeide Fehler schon im Design, zum Beispiel durch klare Beschriftungen und
+  sinnvolle Defaults.
+- Zeige Fehler dort, wo sie entstehen oder wo der erwartete Inhalt wäre.
+- Nenne eine Lösung oder biete einen Ausweg an, zum Beispiel "Erneut laden".
+- Wähle die Darstellung passend zum Umfang des Fehlers.
+- Bleibe sachlich: keine Schuldzuweisungen und keine Entschuldigungen.
+- Formuliere kurz und positiv. Das hilft Nutzern, schnell zu handeln.
 
 ---
 
-# Grundlagen
+# Fehlermeldungen anzeigen
 
-## Kurz und hilfreich
+## Beim Laden von Inhalten
 
-Fehlermeldungen sollten kurz, sinnvoll und hilfreich für den Nutzer sein. Es
-gilt: So kurz wie möglich, aber so lang wie nötig. Das bedeutet allerdings auch,
-dass es in manchen Fällen ausreichend sein kann, nur die Lösung zu nennen.
+Beim Laden können Fehler auftreten, zum Beispiel wenn ein Service nicht
+erreichbar ist oder ein Timeout entsteht. Beende in diesem Fall den Ladezustand,
+damit Nutzer sehen, dass sie nicht weiter warten müssen.
+
+Die Fehlermeldung erscheint dort, wo der erwartete Inhalt wäre. Für größere
+Bereiche wie [LayoutCards](/components/structure/layout-card) oder
+[Sections](/components/structure/section) eignet sich eine
+[IllustratedMessage](/components/content/illustrated-message) mit
+`status="danger"`. Sie zeigt deutlich, dass der Inhalt aktuell nicht verfügbar
+ist, und bietet idealerweise eine Handlung an, zum Beispiel einen
+[Button](/components/actions/button) mit der Beschriftung "Erneut laden".
+
+<LiveCodeEditor
+  example="illustrated-message"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+Für kleinere, abgegrenzte Elemente wie Tabellen- oder Listenzeilen eignet sich
+ein [AlertText](/components/status/alert-text). So bleibt der Kontext erhalten
+und der Fehler betrifft nicht die ganze [Table](/components/structure/table)
+oder [List](/components/list/list).
+
+<LiveCodeEditor example="alert-text" editorCollapsed bgColor="mstudio" />
+
+Um Fehler auf kleine Bereiche zu begrenzen, nutzen wir im mStudio Loading und
+Error Boundaries. Sie kapseln technische Fehler ab und sorgen für konsistentes
+Feedback.
+
+## Bei ungültigen Eingaben
+
+Zeige das Feedback direkt am Form Control, damit Nutzer sofort erkennen, was sie
+anpassen müssen. Details stehen unter
+[Formular (Mit Validierung)](/templates/bausteine/formular#varianten-und-abwandlung-mit-validierung).
+
+## Bei fehlgeschlagenen Aktionen
+
+Aktionen, die einen Request an das Backend senden, können aus technischen
+Gründen, wegen Kommunikationsproblemen oder fehlender Berechtigungen
+fehlschlagen. Dafür eignet sich ein [Modal](/components/overlays/modal) mit
+einer [IllustratedMessage](/components/content/illustrated-message) mit
+`status="danger"`. Sie erklärt kurz den Grund, sofern er für Nutzer relevant
+ist, und bietet einen Ausweg an, zum Beispiel die Aktion erneut auszuführen.
+
+<LiveCodeEditor example="modal" editorCollapsed bgColor="mstudio" />
+
+Schlägt eine Aktion erst später fehl, nachdem sie zunächst erfolgreich an das
+Backend übermittelt wurde, eignen sich
+[Notifications](/components/status/notification) besser. Ein typisches Beispiel
+ist das Registrieren einer Domain. Mehr dazu steht im
+[Informationskonzept](/foundations/content-guidelines/informationskonzept).
+
+---
+
+# Fehlermeldungen formulieren
+
+Die allgemeinen Regeln zu Anrede und Satzlänge stehen im
+[Sprach-Guide](/foundations/content-guidelines/sprach-guide). Dort steht auch,
+dass eine passive Schreibweise in Ordnung ist, wenn ein System handelt. Das
+trifft bei Fehlermeldungen oft zu. Für sie gilt zusätzlich:
+
+## Kurz formulieren und Lösung nennen
+
+Schreibe so kurz wie möglich, aber so lang wie nötig. Oft reicht es, nur die
+Lösung zu nennen. Gibt es mehrere mögliche Ursachen, beschreibe, wie sich die
+wahrscheinlichste beheben lässt.
 
 <DoAndDont>
-  <Do exampleText="Bitte gib eine E-Mail-Adresse im Format name@domain.de ein." />
+  <Do exampleText="Gib eine E-Mail-Adresse im Format name@domain.de ein." />
   <Dont
-    exampleText="Wir unterstützen die Formatierung nicht. Bitte gib eine E-Mail-Adresse im Format
+    exampleText="Wir unterstützen die Formatierung nicht. Gib eine E-Mail-Adresse im Format
 name@domain.de ein."
   />
 </DoAndDont>
 
-## Verständliche Sprache auf Augenhöhe
-
-Wähle eine Sprache, die dem Kontext der jeweiligen Benutzeroberfläche
-entspricht. Fehlermeldungen müssen klar und verständlich formuliert sein. In
-bestimmten Fällen kann dabei eine etwas technischere Sprache hilfreich sein.
-
-<DoAndDont>
-  <Do exampleText="Wir konnten keine Verbindung zum Server herstellen. Bitte versuche es erneut." />
-  <Dont exampleText="Fehlercode 503: Verbindung zum Server fehlgeschlagen." />
-</DoAndDont>
-
 ## Schuldzuweisungen vermeiden
 
-Ein Fehler an sich ist bereits unangenehm und frustrierend. Daher sollte die
-Fehlermeldung dem Nutzer das Gefühl von Unterstützung und Fürsorge vermitteln,
-anstatt ihm ein Schuldgefühl zu vermitteln oder seine Frustration zu verstärken.
+Beschreibe, was passiert ist, und nicht, was der Nutzer falsch gemacht hat. Ein
+Fehler ist an sich schon frustrierend.
 
 <DoAndDont>
-  <Do
-    exampleText="Wir konnten das Bild nicht hochladen. Bitte überprüfe die Dateigröße und
-versuche es erneut."
-  />
-  <Dont
-    exampleText="Du hast ein ungültiges Bild hochgeladen. Überprüfe die Dateigröße und versuche
-es erneut."
-  />
+  <Do exampleText="Das Bild konnte nicht hochgeladen werden. Wähle eine Datei bis 10 MB." />
+  <Dont exampleText="Du hast ein ungültiges Bild hochgeladen. Wähle eine Datei bis 10 MB." />
 </DoAndDont>
 
-## Fehler eingestehen, Verständnis erleichtern
+## Nicht entschuldigen
 
-Fehlermeldungen sind einfacher zu verstehen, wenn sie sich auf das System als
-„wir“ und den Nutzer als „du“ beziehen. So werden die Fragen „Wo ist etwas
-schiefgegangen?“ und „Wer muss handeln, um es zu beheben?“ einfach und
-verständlich beantwortet.
+Formuliere Fehlermeldungen sachlich und fachlich. Entschuldigungen lenken vom
+Wesentlichen ab und lassen Fehler größer wirken.
 
 <DoAndDont>
-  <Do
-    exampleText="Wir konnten dein Passwort nicht zurücksetzen. Bitte überprüfe die E-Mail-Adresse
-und versuche es erneut."
-  />
-  <Dont exampleText="Fehler beim Zurücksetzen des Passworts. Bitte versuche es erneut." />
-</DoAndDont>
-
-## Keine ungerechtfertigten Entschuldigungen
-
-Entschuldige dich nicht für kleine Fehler. Dies kann Fehler oft schlimmer
-erscheinen lassen und vom wichtigen Teil der Nachricht ablenken.
-Entschuldigungen sollten für ernsthafte Fehler aufgespart werden, wie den
-Verlust von Daten oder wenn der Nutzer eine größere Aktion zur Behebung des
-Problems ausführen muss.
-
-<DoAndDont>
-  <Do exampleText="Es tut uns Leid, durch einen Serverfehler konnten wir deine Eingabe nicht speichern. Bitte versuche es erneut.">
-
-    Entschuldige Dich bei ernsthaften Fehlern, z. B. einem systembedingten Verlust von Daten.
-
-  </Do>
-  <Dont exampleText="Es tut uns leid, wir unterstützen das Dateiformat nicht.">
-
-    Entschuldige dich nicht für Kleinigkeiten oder wenn das System keine Schuld
-    trägt.
-
-  </Dont>
-
-</DoAndDont>
-
-## Wahrscheinlichsten Fehler nennen
-
-Wenn ein Fehler genau eine Ursache hat, dann erkläre, wie der Fehler zu beheben
-ist. Gibt es mehrere mögliche Gründe, so sollte die Fehlermeldung beschreiben,
-wie der wahrscheinlichste Grund zu beheben ist.
-
-<DoAndDont>
-  <Do exampleText="Bitte wähle ein Passwort mit mindestens 8 Zeichen."></Do>
-  <Dont
-    exampleText="Das eingegebene Passwort entspricht nicht den Mindestanforderungen. Stelle
-sicher, dass es min. 8 Zeichen, einen Groß- und Kleinbuchstaben, eine Ziffer und
-ein Sonderzeichen enthält."
-  ></Dont>
-</DoAndDont>
-
-## Nicht zu spezifisch
-
-Formuliere Fehlermeldungen lieber etwas allgemeiner als zu spezifisch. Oft ist
-es nicht erforderlich, spezifische Details wie Dateinamen, Benutzernamen oder
-Ordner zu nennen, da der Nutzer diese Informationen an anderen Stellen in der
-Benutzeroberfläche finden kann.
-
-<DoAndDont>
-  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY."></Do>
-  <Dont
-    exampleText="Wir konnten die Datei „example_file-20.4.24.xy“ nicht hochladen. Bitte verwende
-eine Datei vom Typ XY."
-  ></Dont>
-</DoAndDont>
-
-## Aktiv schreiben
-
-Fehlermeldungen werden aktiv formuliert, um das Verständnis zu erleichtern.
-
-<DoAndDont>
-  <Do exampleText="Wir unterstützen nur Dateien vom Typ XY."></Do>
-  <Dont exampleText="Es werden nur Dateien vom Typ XY unterstützt."></Dont>
+  <Do exampleText="Die Eingabe konnte nicht gespeichert werden. Versuche es erneut." />
+  <Dont exampleText="Es tut uns leid, wir konnten deine Eingabe nicht speichern. Versuche es erneut." />
 </DoAndDont>
 
 ## Positiv formulieren
 
-Versuche, Fehlermeldungen positiv zu formulieren und auf negativ besetzte
-Begriffe (z. B. Fehler, Problem, fehlgeschlagen, falsch, ungültig, verboten,
-...) zu verzichten. Konzentriere dich stattdessen auf die Lösung und was als
-nächstes getan werden kann. Beachte jedoch, dass dies in Fällen von
-Systemfehlern, für die es keine direkte Lösung gibt, nicht immer möglich ist.
+Konzentriere dich auf die Lösung und darauf, was als Nächstes möglich ist.
+Verzichte nach Möglichkeit auf negativ besetzte Begriffe wie Fehler, Problem,
+fehlgeschlagen, falsch oder ungültig. Bei Systemfehlern ohne direkte Lösung
+gelingt das nicht immer.
 
 <DoAndDont>
-  <Do exampleText="Wir konnten keine Verbindung zum Server herstellen. Bitte versuche es erneut."></Do>
+  <Do exampleText="Die Verbindung zum Server konnte nicht hergestellt werden. Versuche es erneut."></Do>
   <Dont exampleText="Durch ein Problem mit dem Server ist die Verbindung fehlgeschlagen."></Dont>
+</DoAndDont>
+
+## Allgemein formulieren
+
+Formuliere eher allgemein als zu spezifisch. Details wie Dateinamen oder Ordner
+finden Nutzer meist an anderer Stelle in der Oberfläche.
+
+<DoAndDont>
+  <Do exampleText="Die Datei konnte nicht hochgeladen werden. Verwende eine Datei vom Typ XY."></Do>
+  <Dont
+    exampleText="Die Datei „example_file-20.4.24.xy“ konnte nicht hochgeladen werden. Verwende
+eine Datei vom Typ XY."
+  ></Dont>
 </DoAndDont>
