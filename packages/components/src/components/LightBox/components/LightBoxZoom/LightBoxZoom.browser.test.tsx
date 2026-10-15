@@ -256,3 +256,29 @@ test("a gallery does not page after a wheel zoom", async () => {
   await expect.element(page.getByText("Starship")).toBeVisible();
   expect(page.getByText("Freighter").query()).toBeNull();
 });
+
+test("paging from the zoom area leaves the focus in the gallery", async () => {
+  await openLightBox(
+    <LightBoxGallery>
+      <LightBoxGalleryItem>
+        <Text>Starship</Text>
+      </LightBoxGalleryItem>
+      <LightBoxGalleryItem>
+        <Text>Freighter</Text>
+      </LightBoxGalleryItem>
+      <LightBoxGalleryItem>
+        <Text>Shuttle</Text>
+      </LightBoxGalleryItem>
+    </LightBoxGallery>,
+  );
+  const gallery = page.getByRole("region", { name: "Image gallery" });
+
+  for (const next of ["Freighter", "Shuttle"]) {
+    zoomArea().element().focus();
+    await userEvent.keyboard("{ArrowRight}");
+    await expect.element(page.getByText(next)).toBeVisible();
+    /* Not polled: the light box's focus containment would catch a lost focus
+       a frame later. */
+    expect(document.activeElement).toBe(gallery.element());
+  }
+});
