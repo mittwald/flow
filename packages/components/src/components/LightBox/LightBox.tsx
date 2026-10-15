@@ -29,9 +29,8 @@ export interface LightBoxProps
    */
   fitScreen?: boolean;
   /**
-   * Whether the content can be zoomed: by click, mouse wheel, pinch, double tap
-   * or the `+` and `-` keys. Zoomed content can be moved by dragging or with
-   * the arrow keys. Applies to the items of a `LightBoxGallery` as well.
+   * Whether the content can be zoomed. Applies to the items of a
+   * `LightBoxGallery` as well.
    */
   withZoom?: boolean;
 }
