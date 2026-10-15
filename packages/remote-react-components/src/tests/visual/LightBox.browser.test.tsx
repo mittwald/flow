@@ -50,6 +50,68 @@ test.each(testEnvironments)(
   },
 );
 
+// LightBoxZoom exists from 1.6.0 on.
+test.skipIf(crossVersion({ below: "1.6.0-next.0" })).each(testEnvironments)(
+  "LightBox with zoom (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Button, LightBox, LightBoxTrigger, Image },
+  }) => {
+    await render(
+      <LightBoxTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <LightBox withZoom>
+          <Image src={gopher} />
+        </LightBox>
+      </LightBoxTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+    await page.getByRole("group").click();
+
+    await testScreenshot("LightBox with zoom - zoomed");
+  },
+);
+
+// LightBoxZoom exists from 1.6.0 on.
+test.skipIf(crossVersion({ below: "1.6.0-next.0" })).each(testEnvironments)(
+  "LightBox with Gallery and zoom (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Button,
+      LightBox,
+      LightBoxTrigger,
+      Image,
+      LightBoxGallery,
+      LightBoxGalleryItem,
+    },
+  }) => {
+    await render(
+      <LightBoxTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <LightBox withZoom>
+          <LightBoxGallery>
+            <LightBoxGalleryItem>
+              <Image src={logoLandscape} />
+            </LightBoxGalleryItem>
+            <LightBoxGalleryItem>
+              <Image src={gopher} />
+            </LightBoxGalleryItem>
+          </LightBoxGallery>
+        </LightBox>
+      </LightBoxTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+    await page.getByRole("group").click();
+
+    await testScreenshot("LightBox with Gallery and zoom - zoomed");
+  },
+);
+
 // LightBoxGallery element tree comparable from alpha.883.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "LightBox with Gallery (%s)",

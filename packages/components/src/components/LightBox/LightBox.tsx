@@ -14,6 +14,7 @@ import { IconClose } from "@/components/Icon/components/icons";
 import styles from "./LightBox.module.scss";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
+import LightBoxZoomView from "@/views/LightBoxZoomView";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
@@ -27,6 +28,12 @@ export interface LightBoxProps
    * screen. @default true
    */
   fitScreen?: boolean;
+  /**
+   * Whether the content can be zoomed: by click, mouse wheel, pinch, double tap
+   * or the `+` and `-` keys. Zoomed content can be moved by dragging or with
+   * the arrow keys. Applies to the items of a `LightBoxGallery` as well.
+   */
+  withZoom?: boolean;
 }
 
 export const LightBox = flowComponent("LightBox", (props) => {
@@ -36,6 +43,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
     ref: ignoredRef,
     className,
     fitScreen = true,
+    withZoom,
     ...rest
   } = props;
 
@@ -58,6 +66,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
     },
     LightBoxGallery: {
       className: styles.gallery,
+      LightBoxGalleryItem: { withZoom },
     },
   };
 
@@ -69,6 +78,10 @@ export const LightBox = flowComponent("LightBox", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
+  const zoomableContent = (
+    <LightBoxZoomView className={styles.zoom}>{children}</LightBoxZoomView>
+  );
+
   return (
     <Overlay
       overlayType="LightBox"
@@ -77,8 +90,11 @@ export const LightBox = flowComponent("LightBox", (props) => {
       {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        <DivView className={styles.content}>{children}</DivView>
+        <DivView className={styles.content}>
+          {withZoom ? zoomableContent : children}
+        </DivView>
         <DivView className={styles.actions}>
+          <UiComponentTunnelExit id="actionGroup" component="LightBox" />
           <ButtonView
             color="light-static"
             variant="solid"
@@ -87,7 +103,6 @@ export const LightBox = flowComponent("LightBox", (props) => {
           >
             <IconClose />
           </ButtonView>
-          <UiComponentTunnelExit id="actionGroup" component="LightBox" />
         </DivView>
       </PropsContextProvider>
     </Overlay>
