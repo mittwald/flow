@@ -203,10 +203,17 @@ commit the results.
   `*.stories.tsx`, `*.test.*`, `*.test-types.*` and a `scripts`-only manifest
   diff. The rule lives in `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
-- **`Closes #…` in a PR body works on `next` too.** GitHub only resolves it on
-  the default branch (`main`); `.github/workflows/close-linked-issues.yml`
-  closes the referenced issues when a PR merges into `next`. Write the keyword
-  when the PR finishes an issue, and keep `Part of #…` for a plain link.
+- **A PR that finishes an issue must say `Closes #<n>` in its body** — on
+  `main`, `next` and `next-major`. Without it the issue stays open after the
+  work ships.
+  - `Part of #<n>` only while work on the issue remains. The PR that finishes it
+    — often the last of a series — says `Closes`. #3491 finished #3303 with
+    `Part of #3303`, so someone had to close it by hand.
+  - Before opening a PR, search the open issues for one the change finishes,
+    even when nobody named one.
+  - GitHub resolves the keyword only on the default branch (`main`);
+    `.github/workflows/close-linked-issues.yml` closes the issues when a PR
+    merges into `next` or `next-major`.
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
