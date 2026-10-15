@@ -121,6 +121,47 @@ test("the mouse wheel zooms up to the maximum scale", async () => {
   await expect.poll(zoomOf).toEqual({ scale: 1, x: 0, y: 0 });
 });
 
+test("a Safari trackpad pinch zooms instead of the page", async () => {
+  await openLightBox();
+  const element = zoomArea().element();
+  const rect = element.getBoundingClientRect();
+
+  /* Safari's `GestureEvent` has no constructor elsewhere. */
+  const gesture = (type: string, scale: number) => {
+    const event = new Event(type, { bubbles: true, cancelable: true });
+    Object.assign(event, {
+      scale,
+      clientX: rect.left + rect.width / 2,
+      clientY: rect.top + rect.height / 2,
+    });
+    element.dispatchEvent(event);
+    return event;
+  };
+
+  expect(gesture("gesturestart", 1).defaultPrevented).toBe(true);
+  expect(gesture("gesturechange", 2).defaultPrevented).toBe(true);
+  await expect.poll(zoomOf).toEqual({ scale: 2, x: 0, y: 0 });
+
+  gesture("gesturechange", 3);
+  await expect.poll(scaleOf).toBe(3);
+});
+
+test("Ctrl and Cmd with plus or minus stay the browser's", async () => {
+  await openLightBox();
+  const element = zoomArea().element();
+
+  const zoomEvent = new KeyboardEvent("keydown", {
+    key: "=",
+    ctrlKey: true,
+    bubbles: true,
+    cancelable: true,
+  });
+  element.dispatchEvent(zoomEvent);
+
+  expect(zoomEvent.defaultPrevented).toBe(false);
+  expect(scaleOf()).toBe(1);
+});
+
 test("a pinch zooms around the midpoint of both fingers", async () => {
   await openLightBox();
 
@@ -181,4 +222,37 @@ test("a gallery zooms its current item only", async () => {
   await userEvent.keyboard("{ArrowRight}");
 
   await expect.element(page.getByText("Freighter")).toBeVisible();
+});
+
+test("a gallery does not page after a wheel zoom", async () => {
+  await openLightBox(
+    <LightBoxGallery>
+      <LightBoxGalleryItem>
+        {content}
+        <Text>Starship</Text>
+      </LightBoxGalleryItem>
+      <LightBoxGalleryItem>
+        <Text>Freighter</Text>
+      </LightBoxGalleryItem>
+    </LightBoxGallery>,
+  );
+  await expect
+    .element(page.getByRole("region", { name: "Image gallery" }))
+    .toHaveFocus();
+
+  zoomArea()
+    .element()
+    .dispatchEvent(
+      new WheelEvent("wheel", {
+        bubbles: true,
+        cancelable: true,
+        deltaY: -500,
+      }),
+    );
+  await expect.poll(scaleOf).toBeGreaterThan(1);
+
+  await userEvent.keyboard("{ArrowRight}");
+
+  await expect.element(page.getByText("Starship")).toBeVisible();
+  expect(page.getByText("Freighter").query()).toBeNull();
 });

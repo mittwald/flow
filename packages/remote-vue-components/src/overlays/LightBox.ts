@@ -86,7 +86,10 @@ export const LightBox = defineComponent({
   props: {
     /** Whether content may exceed the available screen space. @default true */
     fitScreen: { type: Boolean, default: true },
-    /** Whether the content, and a gallery's items, can be zoomed. */
+    /**
+     * Whether the content, and a gallery's items, can be zoomed. The content
+     * then always fits the screen, whatever `fitScreen` says.
+     */
     withZoom: { type: Boolean, default: false },
     /** A controller to open and close the light box from anywhere. */
     controller: {
@@ -131,7 +134,7 @@ export const LightBox = defineComponent({
       const className = [
         styles.overlay,
         styles.lightBox,
-        props.fitScreen ? styles.fitScreen : undefined,
+        props.fitScreen || props.withZoom ? styles.fitScreen : undefined,
         attrs.class,
       ]
         .filter(Boolean)

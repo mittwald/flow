@@ -40,6 +40,13 @@ interface Tap {
   point: Point;
 }
 
+/** Safari's `GestureEvent`, which the DOM typings do not know. */
+interface SafariGestureEvent extends UIEvent {
+  scale: number;
+  clientX: number;
+  clientY: number;
+}
+
 /** The zoom area is not scaled itself, only its content. */
 const frameOf = (element: HTMLElement | null): ZoomFrame => {
   const rect = element?.getBoundingClientRect();
@@ -141,12 +148,34 @@ export const useZoom = (
       true,
     );
 
-  /* React registers `wheel` as passive, which cannot prevent the scroll. */
+  /* React registers `wheel` as passive, which cannot prevent the scroll, and
+     knows no gesture events. */
   useEffect(() => {
     const element = ref.current;
     if (!element || !isEnabled) {
       return;
     }
+
+    const zoomByFactor = (factor: number, clientX: number, clientY: number) => {
+      /* Without focus, the arrows would still page a surrounding gallery. */
+      if (document.activeElement !== element) {
+        element.focus({ preventScroll: true });
+      }
+
+      const point = pointIn(element, clientX, clientY);
+
+      setIsAnimated(false);
+      setFrame(frameOf(element));
+      setTransform((current) =>
+        zoomTo(
+          current,
+          current.scale * factor,
+          maxScale,
+          frameOf(element),
+          point,
+        ),
+      );
+    };
 
     const handleWheel = (event: WheelEvent) => {
       /* A horizontal trackpad swipe has no zoom direction. */
@@ -162,23 +191,33 @@ export const useZoom = (
       /* A trackpad pinch arrives as a wheel event with `ctrlKey` and small
          deltas. */
       const factor = Math.exp(-deltaY * (event.ctrlKey ? 0.01 : 0.002));
-      const point = pointIn(element, event.clientX, event.clientY);
+      zoomByFactor(factor, event.clientX, event.clientY);
+    };
 
-      setIsAnimated(false);
-      setFrame(frameOf(element));
-      setTransform((current) =>
-        zoomTo(
-          current,
-          current.scale * factor,
-          maxScale,
-          frameOf(element),
-          point,
-        ),
-      );
+    /* Safari reports a trackpad pinch as gesture events, not as wheel
+       events, and zooms the page unless they are prevented. */
+    let gestureScale = 1;
+
+    const handleGestureStart = (event: Event) => {
+      event.preventDefault();
+      gestureScale = 1;
+    };
+
+    const handleGestureChange = (event: Event) => {
+      event.preventDefault();
+      const { scale, clientX, clientY } = event as SafariGestureEvent;
+      zoomByFactor(scale / gestureScale, clientX, clientY);
+      gestureScale = scale;
     };
 
     element.addEventListener("wheel", handleWheel, { passive: false });
-    return () => element.removeEventListener("wheel", handleWheel);
+    element.addEventListener("gesturestart", handleGestureStart);
+    element.addEventListener("gesturechange", handleGestureChange);
+    return () => {
+      element.removeEventListener("wheel", handleWheel);
+      element.removeEventListener("gesturestart", handleGestureStart);
+      element.removeEventListener("gesturechange", handleGestureChange);
+    };
   }, [ref, maxScale, isEnabled]);
 
   const startGesture = () => {
@@ -333,6 +372,11 @@ export const useZoom = (
     endPointer(event, false);
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    /* Ctrl/Cmd with `+`/`-` zooms the page, Alt with the arrows navigates. */
+    if (event.ctrlKey || event.metaKey || event.altKey) {
+      return;
+    }
+
     const pan = (x: number, y: number) => {
       if (!isZoomed(transform)) {
         /* Unzoomed, the arrows are a surrounding gallery's. */

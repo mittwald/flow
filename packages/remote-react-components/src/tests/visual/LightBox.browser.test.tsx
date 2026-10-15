@@ -7,7 +7,8 @@ import logoLandscape from "@/tests/assets/mittwald_logo_landscape.jpg";
 import logoPortrait from "@/tests/assets/mittwald_logo_portrait.jpg";
 import { userEvent } from "vitest/browser";
 
-test.each(testEnvironments)(
+// The close button moved behind the `ActionGroup` in 1.6.0.
+test.skipIf(crossVersion({ below: "1.6.0-next.0" })).each(testEnvironments)(
   "LightBox (%s)",
   async ({
     testScreenshot,

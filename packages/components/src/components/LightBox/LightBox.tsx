@@ -30,7 +30,8 @@ export interface LightBoxProps
   fitScreen?: boolean;
   /**
    * Whether the content can be zoomed. Applies to the items of a
-   * `LightBoxGallery` as well.
+   * `LightBoxGallery` as well. The content then always fits the screen,
+   * whatever `fitScreen` says.
    */
   withZoom?: boolean;
 }
@@ -48,7 +49,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
 
   const rootClassName = clsx(
     styles.lightBox,
-    fitScreen && styles.fitScreen,
+    (fitScreen || withZoom) && styles.fitScreen,
     className,
   );
 
