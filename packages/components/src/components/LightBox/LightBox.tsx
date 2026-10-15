@@ -31,7 +31,7 @@ export interface LightBoxProps
   /**
    * Whether the content can be zoomed. Applies to the items of a
    * `LightBoxGallery` as well. The content then always fits the screen,
-   * whatever `fitScreen` says.
+   * whatever `fitScreen` says. @default false
    */
   withZoom?: boolean;
 }

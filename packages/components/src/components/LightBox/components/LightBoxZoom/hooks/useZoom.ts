@@ -14,8 +14,9 @@ import {
   zoomTo,
   type ZoomFrame,
   type ZoomTransform,
-} from "./lib/zoomTransform";
+} from "../lib/zoomTransform";
 
+const maxScale = 3;
 /** The scale a click, a double tap or Enter zooms to. */
 const toggleScale = 2;
 const keyboardScaleStep = 0.5;
@@ -97,7 +98,6 @@ const midpoint = (a: Point, b: Point): Point => ({
 
 export const useZoom = (
   ref: RefObject<HTMLDivElement | null>,
-  maxScale: number,
   isEnabled: boolean,
 ) => {
   const [transform, setTransform] = useState(initialZoomTransform);
@@ -218,7 +218,7 @@ export const useZoom = (
       element.removeEventListener("gesturestart", handleGestureStart);
       element.removeEventListener("gesturechange", handleGestureChange);
     };
-  }, [ref, maxScale, isEnabled]);
+  }, [ref, isEnabled]);
 
   const startGesture = () => {
     const [first, second] = Array.from(pointers.current.values());

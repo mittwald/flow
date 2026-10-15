@@ -13,7 +13,7 @@ import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponen
 export interface LightBoxGalleryItemProps extends PropsWithChildren {
   /**
    * Whether the item's content can be zoomed. Set by the `withZoom` of the
-   * surrounding `LightBox`.
+   * surrounding `LightBox`. @default false
    */
   withZoom?: boolean;
 }

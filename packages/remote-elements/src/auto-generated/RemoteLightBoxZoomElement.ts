@@ -12,7 +12,6 @@ export class RemoteLightBoxZoomElement extends FlowRemoteElement<RemoteLightBoxZ
   static override get remoteProperties() {
     return {
       className: {},
-      maxScale: {},
     };
   }
 

@@ -14,14 +14,11 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import locales from "../../locales/*.locale.json";
 import styles from "./LightBoxZoom.module.scss";
-import { useZoom } from "./useZoom";
+import { useZoom } from "./hooks/useZoom";
 import { visibleArea } from "./lib/zoomTransform";
 
 export interface LightBoxZoomProps
-  extends PropsWithChildren, PropsWithClassName {
-  /** The maximum zoom scale. @default 3 */
-  maxScale?: number;
-}
+  extends PropsWithChildren, PropsWithClassName {}
 
 /**
  * Lets a nested zoom switch the surrounding one off: a `LightBox` with
@@ -39,7 +36,7 @@ const NestedZoomContext = createContext<(() => () => void) | undefined>(
  * @flr-generate all
  */
 export const LightBoxZoom: FC<LightBoxZoomProps> = (props) => {
-  const { children, className, maxScale = 3 } = props;
+  const { children, className } = props;
 
   const registerWithSurroundingZoom = useContext(NestedZoomContext);
   const [nestedZoomCount, setNestedZoomCount] = useState(0);
@@ -58,7 +55,7 @@ export const LightBoxZoom: FC<LightBoxZoomProps> = (props) => {
 
   const ref = useRef<HTMLDivElement>(null);
   const { transform, frame, isZoomed, isAnimated, isDragging, handlers } =
-    useZoom(ref, maxScale, isEnabled);
+    useZoom(ref, isEnabled);
   const descriptionId = useId();
 
   const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
