@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import {
+  clampTranslation,
   initialZoomTransform,
   isZoomed,
   panBy,
@@ -220,6 +221,25 @@ export const useZoom = (
     };
   }, [ref, isEnabled]);
 
+  const zoomed = isZoomed(transform);
+
+  /* The bounds depend on where the zoom area is on screen. */
+  useEffect(() => {
+    if (!zoomed) {
+      return;
+    }
+
+    const handleResize = () => {
+      const nextFrame = frameOf(ref.current);
+      setIsAnimated(false);
+      setFrame(nextFrame);
+      setTransform((current) => clampTranslation(current, nextFrame));
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [ref, zoomed]);
+
   const startGesture = () => {
     const [first, second] = Array.from(pointers.current.values());
 
@@ -420,7 +440,7 @@ export const useZoom = (
   return {
     transform,
     frame,
-    isZoomed: isZoomed(transform),
+    isZoomed: zoomed,
     isAnimated,
     isDragging,
     handlers: {

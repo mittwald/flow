@@ -282,3 +282,23 @@ test("paging from the zoom area leaves the focus in the gallery", async () => {
     expect(document.activeElement).toBe(gallery.element());
   }
 });
+
+test("a smaller window keeps the zoomed content covering the screen", async () => {
+  const { innerWidth, innerHeight } = window;
+  await openLightBox();
+
+  /* Twice the 400px content, moved 150px to the right. */
+  pointer("pointerdown", 1, -150, 0, "mouse");
+  pointer("pointerup", 1, -150, 0, "mouse");
+  await expect.poll(zoomOf).toEqual({ scale: 2, x: 150, y: 0 });
+
+  await page.viewport(600, innerHeight);
+  try {
+    const content = zoomArea().element().firstElementChild;
+    await expect
+      .poll(() => content?.getBoundingClientRect().left)
+      .toBeLessThanOrEqual(0);
+  } finally {
+    await page.viewport(innerWidth, innerHeight);
+  }
+});
