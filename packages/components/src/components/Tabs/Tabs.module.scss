@@ -29,5 +29,9 @@
     padding-top: var(--section--spacing);
     opacity: 1;
     height: auto;
+
+    /* Only inactive panels clip, so focus rings and hover backgrounds can
+       reach past the panel. */
+    overflow: visible;
   }
 }
