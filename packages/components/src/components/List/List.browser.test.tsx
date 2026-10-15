@@ -860,6 +860,7 @@ describe("Search", () => {
 
     await expect.element(listItem42).not.toBeInTheDocument();
     await expect.element(listItem43).toBeInTheDocument();
+    await expect.element(page.getByRole("searchbox")).toHaveFocus();
   });
 
   test("autoFocus focuses the field once the initial loading enables it", async () => {
