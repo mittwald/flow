@@ -252,6 +252,10 @@ Also:
 - Do not hand-roll feedback for async work — `Action` wraps a button and renders
   its pending, success and failure states; `List` covers loading and empty
   states; `Skeleton` and `SkeletonText` are the placeholders.
+- Keep `List` items cheap: render each item as its own `memo` component, and
+  keep modals and data loading at list level instead of per item — every item
+  pays for what it contains (`/raw/components/list/list.md`, section
+  "Performance").
 - Write UI text in German following the Sprach-Guide; component-internal text is
   already translated (de-DE, en-US) via `TranslationProvider`.
 

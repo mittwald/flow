@@ -29,6 +29,9 @@ description:
   zugeordnet.
 - Gib jedem Item über `textValue` seinen Text mit. Erst damit findet der User
   ein Item über die Tastatur, indem er dessen Anfang tippt.
+- Rendere den Inhalt eines Items als eigene `memo`-Komponente und lege Modals
+  und Datenabfragen auf Listenebene an. So bleibt die List auch mit vielen
+  Einträgen schnell, siehe [Performance](#performance).
 
 ---
 
@@ -371,6 +374,87 @@ beispielsweise die Gesamtsumme der Beträge. Über das `position`-Property legst
 du fest, ob die Summary oberhalb oder unterhalb der List erscheint.
 
 <LiveCodeEditor example="summary" editorCollapsed />
+
+---
+
+# Performance
+
+Jedes sichtbare Item rendert seinen Inhalt mit allen Komponenten und Hooks, die
+darin stecken – beim ersten Laden, bei jedem nachgeladenen Batch und bei jedem
+Re-Render. Was ein Item kostet, zahlt die List also einmal pro Item. Ab etwa 100
+Items mit Kontextmenü, Badges und Modals wird das spürbar.
+
+## Items als memo-Komponente
+
+Eine inline geschriebene Render-Funktion rendert bei jedem Render der umgebenden
+Komponente alle Items neu. Gib aus der Render-Funktion eine eigene, mit `memo`
+umschlossene Komponente zurück: Ein Item rendert dann nur noch neu, wenn sich
+seine Props ändern. Das spart beim Re-Render rund ein Drittel der Zeit.
+
+```tsx
+const DomainListItem = memo<{ domain: Domain }>(({ domain }) => (
+  <ListItemView>
+    <Heading>{domain.hostname}</Heading>
+  </ListItemView>
+));
+
+<DomainList.Item textValue={(domain) => domain.hostname}>
+  {(domain) => <DomainListItem domain={domain} />}
+</DomainList.Item>;
+```
+
+- Übergib dem Item nur die Daten und Werte, die es braucht. Inline erzeugte
+  Callbacks oder Objekte als Props heben `memo` auf; erzeuge sie mit
+  `useCallback` oder `useMemo`.
+- Achte auf stabile Daten. Ein `data.map(…)` im Render erzeugt bei jedem Render
+  neue Objekte und damit neue Props; berechne es mit `useMemo`.
+- Reiche Werte aus der umgebenden Komponente als Props durch. `memo` vergleicht
+  sie, das Item zeigt also nie veraltete Werte.
+
+## Modals und Kontextmenüs
+
+Ein geschlossenes Modal rendert seinen Inhalt erst beim Öffnen und kostet wenig.
+Was sich mit jedem Item vervielfacht, sind der Controller und alles, was die App
+um ein Modal legt. Hat ein Item mehrere Modals, öffne ein gemeinsames Modal auf
+Listenebene und übergib ihm das gewählte Item:
+
+```tsx
+const editModal = useModalController();
+const [selected, setSelected] = useState<Domain>();
+
+const edit = useCallback(
+  (domain: Domain) => {
+    setSelected(domain);
+    editModal.open();
+  },
+  [editModal],
+);
+
+<DomainList.Item textValue={(domain) => domain.hostname}>
+  {(domain) => <DomainListItem domain={domain} onEdit={edit} />}
+</DomainList.Item>;
+
+<Modal controller={editModal}>
+  {selected && <EditDomainForm domain={selected} />}
+</Modal>;
+```
+
+- Öffne das Modal aus dem Kontextmenü des Items:
+  `<MenuItem onAction={() => onEdit(domain)}>`.
+- Setze die Auswahl beim Schließen nicht zurück. Sonst verschwindet der Inhalt,
+  während das Modal noch ausblendet.
+- Kombiniere das gemeinsame Modal mit `memo`-Items. `setSelected` rendert die
+  umgebende Komponente neu, und ohne `memo` damit jedes Item.
+
+## Daten und Batches
+
+- Lade Daten auf Listenebene statt pro Item. Ein Request oder eine Subscription
+  in jedem Item vervielfacht sich mit jedem nachgeladenen Batch.
+- Behalte die Standard-Batchgröße von 20 bei. „Mehr anzeigen“ und Infinite
+  Scroll behalten alle geladenen Items im DOM, und Sortieren, Filtern und Suchen
+  rendern alle sichtbaren Items neu.
+- Registriere globale Listener (etwa für `resize` oder Media Queries) einmal für
+  die List, nicht in jedem Item.
 
 ---
 
