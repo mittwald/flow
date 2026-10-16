@@ -1,3 +1,5 @@
+@use "../_lib/brand" as *;
+
 // The shells size themselves against their container (`min-height: 100%`), so
 // the document has to pass the viewport height down to them.
 // The document root and body carry no class and cannot be given one.
@@ -9,20 +11,11 @@
 // stylelint-enable selector-max-type
 
 .body {
-  background-color: var(--neutral--color--200);
+  @include brand-palette;
+
+  background-color: $neutral-base;
 
   * {
     box-sizing: border-box;
-  }
-}
-
-/*
- * Not --neutral--color--200: in dark mode the background gradient starts at
- * #121518, and the page ground has to meet it seamlessly. In light mode the
- * token already is the gradient's first stop, so only dark needs saying.
- */
-[data-theme="dark"] {
-  .body {
-    background-color: #121518;
   }
 }
