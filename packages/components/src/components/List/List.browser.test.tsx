@@ -1026,6 +1026,54 @@ describe("Item rendering", () => {
       .element(page.getByText("Item: 42 unselected"))
       .toBeInTheDocument();
   });
+
+  // An inline render function that declares what it reads skips re-renders
+  // its parent causes for anything else.
+  const InlineList = () => {
+    const [selected, setSelected] = useState(false);
+    const [, setUnrelated] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setUnrelated((c) => c + 1)}>Bump</button>
+        <List aria-label="Test" onAction={() => setSelected((s) => !s)}>
+          <ListStaticData<Data> data={selectableData} />
+          <ListItem<Data>
+            textValue={({ num }) => String(num)}
+            dependencies={[selected]}
+          >
+            {({ num }) => {
+              inlineRenderCount++;
+              return (
+                <span>
+                  Item: {num} {selected ? "selected" : "unselected"}
+                </span>
+              );
+            }}
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+  let inlineRenderCount = 0;
+
+  test("an inline render function with dependencies skips unrelated parent re-renders", async () => {
+    inlineRenderCount = 0;
+    await render(<InlineList />);
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+    const before = inlineRenderCount;
+
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    expect(inlineRenderCount).toBe(before);
+
+    await userEvent.click(page.getByText("Item: 42 unselected"));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+  });
 });
 
 describe("Inline item callbacks", () => {

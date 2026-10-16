@@ -21,14 +21,16 @@ export interface ItemViewShape<T> {
   showTiles?: boolean;
   tileMaxWidth?: number;
   /**
-   * Values this item's content depends on besides its own data.
+   * Everything the render function reads besides the item's data.
    *
-   * An item re-renders when its data changes, or when one of the render
-   * functions on its `List.Item` changes identity — which a function written
-   * inline in JSX does on every render of its parent. A render function with a
-   * stable identity (hoisted out of the component, wrapped in `useCallback`, or
-   * reading from an external store) has to list what it reads here, or the item
-   * keeps the values it first saw.
+   * With `dependencies`, an item re-renders only when its data or one of these
+   * values changes. The render function's identity no longer counts, so a
+   * function written inline in JSX keeps the item from re-rendering on every
+   * render of its parent. List every value it reads from outside the item — one
+   * left out keeps the item on the value it last rendered.
+   *
+   * Without it, an item re-renders whenever its render function changes
+   * identity, which an inline function does on every render of its parent.
    */
   dependencies?: DependencyList;
 }
@@ -84,22 +86,27 @@ export class ItemView<T> {
     createElement("pre", undefined, JSON.stringify(item));
 
   /**
-   * Whether `other` would render the item holding `data` identically: the
-   * render function taken from the consumer's `ListItem` element is still the
-   * same, and the dependencies it declared have not changed. `textValue` and
-   * `href` count by what they return for `data`, so inline functions do not
-   * re-render the item. `defaultExpanded` is read on mount only, so it does not
-   * count at all.
+   * Whether `other` would render the item holding `data` identically. The
+   * render function counts by its `dependencies` where given, otherwise by its
+   * identity. `textValue` and `href` count by what they return for `data`, so
+   * inline functions do not re-render the item. `defaultExpanded` is read on
+   * mount only, so it does not count at all.
    */
   public rendersSameFor(other: ItemView<T> | undefined, data: T): boolean {
     return (
       !!other &&
-      dependenciesAreEqual(this.dependencies, other.dependencies) &&
-      this.renderFn === other.renderFn &&
+      this.rendersSameContentAs(other) &&
       this.textValue?.(data) === other.textValue?.(data) &&
       this.href?.(data) === other.href?.(data) &&
       this.target === other.target
     );
+  }
+
+  private rendersSameContentAs(other: ItemView<T>): boolean {
+    if (this.dependencies || other.dependencies) {
+      return dependenciesAreEqual(this.dependencies, other.dependencies);
+    }
+    return this.renderFn === other.renderFn;
   }
 
   public render(data: T): ReactNode {

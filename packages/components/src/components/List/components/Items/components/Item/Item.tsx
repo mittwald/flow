@@ -56,11 +56,11 @@ const ItemImpl = (props: Props) => {
 
 // The list model is rebuilt on every render, so it cannot be compared by
 // identity — but everything an item renders from it can. The render function
-// comes from the consumer's own JSX and only changes when the consumer
-// re-renders, so loading more still skips the re-render while parent state no
-// longer leaves an item frozen on the values it first saw (#3065). `onAction`
-// arrives as a stable invoker of the latest handler, and `textValue`/`href`
-// count by their result, so inline functions for those keep the bail-out.
+// counts by its `dependencies`, or else by its identity: an inline one
+// changes whenever the consumer re-renders, so parent state no longer leaves
+// an item frozen on the values it first saw (#3065), while loading more still
+// skips the re-render. `onAction` arrives as a stable invoker of the latest
+// handler, and `textValue`/`href` count by their result.
 export const Item = memo(
   ItemImpl,
   (prev, next) =>
