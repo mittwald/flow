@@ -39,10 +39,23 @@ Private icon source + shared generator tooling. See the
   resolves it from the generated file's and does. A multi-line `/** … */` in a
   template therefore passes generation and fails lint with `Delete ⏎·*` — after
   the file is already committed.
+- **The Svelte set is generated from here too** (`generateSvelte`,
+  `src/svelteTemplate.ts`), and shares only the source: markup instead of JSX,
+  no icon-set registry, no categories. It is shaped after what
+  `packages/components` exports rather than after `packages/icons` — an icon is
+  a wrapper around `Icon` whose child is the raw `<svg>`, so `size` means
+  `Icon`'s `"s" | "m" | "l"`. The paths are written out literally because a
+  `{#each}` would leave a comment anchor inside the `<svg>`, and remote-dom
+  carries a comment across as a child. Tabler and the custom SVGs only:
+  FontAwesome is imported at runtime from a Pro package and has no Svelte
+  binding here. It predates `getIconSources()` and still reads `icons.yaml`
+  itself.
 - Generated outputs (all committed, never hand-edited):
   - `packages/icons/src/components/*` — default set (Tabler)
   - `packages/icons-pro/src/components/*` — pro set (FontAwesome sharp-regular)
   - `packages/components/src/components/Icon/components/icons/*`
   - `packages/remote-vue-components/src/icons/components/*` — the Vue set
+  - `packages/remote-svelte-components/src/icons/*` — Svelte set (Tabler +
+    custom SVG)
 - Adding/updating an icon: edit `src/icons.yaml`, then regenerate and commit:
   `pnpm nx run-many -t build:icons` (or simply `pnpm build`).

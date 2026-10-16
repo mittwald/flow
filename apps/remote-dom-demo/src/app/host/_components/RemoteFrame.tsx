@@ -51,7 +51,10 @@ const UsageList: FC<{ usage: ComponentUsageEvent[] }> = ({ usage }) => (
 );
 
 interface Props {
-  /** The remote app to load — a `/remote/…` or `/remote-vue/…` route. */
+  /**
+   * The remote app to load — a `/remote/…`, `/remote-vue/…` or
+   * `/remote-svelte/…` route.
+   */
   src: string;
   hostPathname: string;
 }

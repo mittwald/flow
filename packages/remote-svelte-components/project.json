@@ -1,0 +1,36 @@
+{
+  "implicitDependencies": ["components", "icons-base"],
+  "name": "remote-svelte-components",
+  "projectType": "library",
+  "sourceRoot": "packages/remote-svelte-components/src",
+  "targets": {
+    "build": {
+      "inputs": ["default", "{projectRoot}/src/**/*"],
+      "dependsOn": [
+        "build:icons",
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
+    },
+    "test:corpus": {
+      "dependsOn": [
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
+    },
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/packages/icons-base/src/**/*",
+        "{workspaceRoot}/pnpm-lock.yaml"
+      ],
+      "outputs": ["{projectRoot}/src/icons/**/*"]
+    }
+  }
+}

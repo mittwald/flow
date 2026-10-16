@@ -1,6 +1,10 @@
 "use client";
 import { RemoteFrame } from "@/app/host/_components/RemoteFrame";
-import { getRemotePath, getVueRemotePath } from "@/app/_lib/navigation";
+import {
+  getRemotePath,
+  getSvelteRemotePath,
+  getVueRemotePath,
+} from "@/app/_lib/navigation";
 import {
   IntlProvider,
   Section,
@@ -11,17 +15,23 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type Framework = "react" | "vue";
+type Framework = "react" | "vue" | "svelte";
 
-/** `?framework=vue` selects the Vue remote; React is the default and unmarked. */
+/**
+ * `?framework=vue` or `?framework=svelte` selects that remote; React is the
+ * default and unmarked.
+ */
 const frameworkParameter = "framework";
+
+const frameworkFromParameter = (value: string | null): Framework =>
+  value === "vue" || value === "svelte" ? value : "react";
 
 export default function HostLayout() {
   const hostPath = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [framework, setFramework] = useState<Framework>(() =>
-    searchParams.get(frameworkParameter) === "vue" ? "vue" : "react",
+    frameworkFromParameter(searchParams.get(frameworkParameter)),
   );
 
   /*
@@ -31,7 +41,7 @@ export default function HostLayout() {
    * back.
    */
   useEffect(() => {
-    const expected = framework === "vue" ? "vue" : null;
+    const expected = framework === "react" ? null : framework;
     if (searchParams.get(frameworkParameter) !== expected) {
       router.replace(
         expected ? `${hostPath}?${frameworkParameter}=${expected}` : hostPath,
@@ -43,9 +53,9 @@ export default function HostLayout() {
     <IntlProvider locale="en-US">
       <Section>
         {/*
-         * The same demo, rendered from a React and from a Vue remote app.
+         * The same demo, rendered from a React, a Vue and a Svelte remote app.
          *
-         * Only the selected tab holds a frame. `Tabs` keeps both panels
+         * Only the selected tab holds a frame. `Tabs` keeps every panel
          * mounted, and two live remotes both follow the host's pathname and
          * both report their own back — so they overwrite each other's
          * navigation and the host bounces between them. One at a time costs a
@@ -53,8 +63,9 @@ export default function HostLayout() {
          * which only ever talks to one extension.
          *
          * All but three demos exist on the Vue side; for those three the Vue
-         * app says so itself (`NotPortedDemo`), which keeps the switch
-         * available everywhere.
+         * app says so itself (`NotPortedDemo`). Only a few demos exist on the
+         * Svelte side; the Svelte app says so itself for the rest
+         * (`NotPorted.svelte`). Both keep the switch available everywhere.
          */}
         <Tabs
           aria-label="Remote framework"
@@ -75,6 +86,15 @@ export default function HostLayout() {
             {framework === "vue" && (
               <RemoteFrame
                 src={getVueRemotePath(hostPath)}
+                hostPathname={hostPath}
+              />
+            )}
+          </Tab>
+          <Tab id="svelte">
+            <TabTitle>Svelte</TabTitle>
+            {framework === "svelte" && (
+              <RemoteFrame
+                src={getSvelteRemotePath(hostPath)}
                 hostPathname={hostPath}
               />
             )}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "composite": false,
+    "noEmit": true,
+    "rootDir": "${configDir}/../..",
+    "types": ["@vitest/browser-playwright", "node"]
+  },
+  "extends": "./tsconfig.json",
+  "include": ["${configDir}/svelte.config.js", "${configDir}/vite*.ts"]
+}

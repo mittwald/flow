@@ -4,7 +4,9 @@ What it takes to let an mStudio extension be written in something other than
 React, and what bites on the way. Written from the Vue binding
 ([packages/remote-vue-components](../packages/remote-vue-components), published
 as beta — [ADR 0007](./adr/0007-beta-packages.md) says what that exempts and
-what ends it); the findings are not Vue-specific.
+what ends it) and the Svelte prototype
+([packages/remote-svelte-components](../packages/remote-svelte-components),
+experimental and unpublished); the findings are specific to neither.
 
 Read [remote-ui.md](./remote-ui.md) first — this assumes the end-to-end picture.
 
@@ -16,7 +18,8 @@ React compositions. In the Vue binding, tests left out, the hand-written code is
 about two and a half times the generated wrappers (one file per `@flr-generate`
 component). The element wrapper, its `v-model` mapping and the root are about a
 tenth of it; the rest is `flr-universal`, and the `List` alone is nearly half of
-the hand-written code.
+the hand-written code. The Svelte prototype has the same shape: its element
+wrapper and root are a few hundred lines, and the rest is `flr-universal`.
 
 ## What already works for any framework
 
@@ -59,7 +62,8 @@ can drive it.
    and its ARIA onto that same `<svg>`. So the binding only has to produce the
    `<svg>` React produces. Inline the path data rather than depending on
    `@tabler/icons-react` (74 MB, ~24,000 files), and carry Tabler's MIT notice
-   in the package's LICENSE.
+   in the package's LICENSE. (The Svelte prototype predates `getIconSources()`
+   and generates its set from `icons.yaml` through `generateSvelte`.)
 5. **A rebuild of `flr-universal`.** See below.
 6. **An emitter in the generator**
    (`packages/components/dev/remote-components-generator`) plus the new output
@@ -74,7 +78,7 @@ wrong.
 - **Set properties imperatively, after the element is in the DOM.** Not through
   the framework's own attribute handling: a remote property is a JS value, not a
   string. The React binding does this in a layout effect, the Vue one in
-  `onMounted`/`onUpdated`.
+  `onMounted`/`onUpdated`, the Svelte one in an `$effect`.
 - **Every element needs `data-flr-initialized` and `data-flr-version`.** The
   host skips rendering a component that has not announced itself.
 - **Do not normalize a prop name the element declares.** Flow declares dashed
@@ -83,7 +87,10 @@ wrong.
   the bug: the DOM reflects `ariaLabel` back onto the attribute, so it limps
   along. `data-testid` has no reflection and simply never arrives. Check
   `remotePropertyDefinitions`/`remoteAttributeDefinitions` before rewriting a
-  key.
+  key. Vue's template compiler forces the question; Svelte hands a component its
+  props untouched, so the answer there is to leave them alone — and keep a test
+  on it, because the normalization is exactly the kind of thing a later change
+  adds back.
 - **An event's name is the React prop without `on`, first letter lowercased** —
   `onPress` → `press`. Take the set from `remoteEventDefinitions` rather than
   deriving it.
@@ -95,7 +102,29 @@ wrong.
   a child element `<flr-slot-root-wrapper slot="<name>">`, and `slot` reaches
   the remote tree through `attributeChangedCallback` — so it has to be set as an
   **attribute**, not a property. A framework that prefers properties for custom
-  elements needs an escape hatch here (Vue: `^slot`).
+  elements needs an escape hatch here (Vue: `^slot`; Svelte: an action calling
+  `setAttribute`).
+- **Whitespace in a template becomes a child of the component.** A compiler that
+  keeps the whitespace between two nodes puts a text node into the remote tree,
+  and the host renders it as a child of the Flow component. Inside a `Section`,
+  which lays out with `flex`, every one of them is an anonymous flex item and a
+  second gap — and nothing about it is visible in the source. Svelte does this
+  for every `flr-*` element, because it drops whitespace only between two
+  block-level **HTML** elements and a custom element counts as inline; the
+  binding normalizes it (`normalizeWhitespace.ts`) rather than making it a rule
+  extension developers have to know. Vue's `h()` never produces one, but a Vue
+  binding with SFC templates would hit the same thing.
+- **The wrapper's own props collide with the component's.** A wrapper needs to
+  know which element to render, which component it is, and which of its props
+  are slots — and a framework that passes props as a flat bag has no separate
+  channel for that. Every Flow form field takes a `name`, so
+  `<Wrapper name="TextField" {...props} />` lets `name="callsign"` win: the
+  component reports itself as "callsign" for usage, looks its props context up
+  under it, and the real `name` never reaches the host at all, because the
+  wrapper destructured its own away. The `FormData` the host collects is missing
+  the field and nothing anywhere says so. Put everything the wrapper needs under
+  one key the Flow surface does not use, and spread the app's props **before**
+  it (Svelte: `__flr`).
 - **A function property is a thread proxy.** Calling it is a round trip, so the
   host always receives a Promise. Flow types those props `Promise<T> | T` and
   awaits on the host; the ones that cannot be awaited are off the remote surface
@@ -125,6 +154,11 @@ wrong.
   `FlowThreadSerialization` over a `MessageChannel` (import
   `packages/remote-react-components/src/tests/lib/serializedConnection.ts` by
   relative path — do not copy it).
+- **The props type the generator re-exports is the React component's, not the
+  element's.** `FlowRemoteElement` declares `data-testid` for every component;
+  the React props type does not. A binding that types its component props
+  strictly has to add it back — and a binding that passes props untyped never
+  learns that it is missing.
 
 ## `flr-universal` is the expensive part
 
@@ -136,14 +170,21 @@ wrong.
 rather than being one. A binding cannot import them, so it rebuilds them, and
 two things make that harder than it looks:
 
-- **`PropsContext` has no equivalent.** Flow configures the components inside a
-  composite — the `Heading` of a `Modal`, the `Button` of an `Action` — through
-  a React context that every `flowComponent` reads. A binding has to reach its
-  children directly (Vue: `cloneVNode`), which covers one level rather than the
-  whole subtree. Every rule Flow writes for a _grandchild_ then costs its own
-  code: `Modal` alone has three (`ActionGroup > Action`, `Content > Heading`,
-  `ColumnLayout > AccentBox`), and each of them is a behaviour an extension
-  developer will notice missing rather than a detail.
+- **`PropsContext` may or may not have an equivalent.** Flow configures the
+  components inside a composite — the `Heading` of a `Modal`, the `Button` of an
+  `Action` — through a React context that every `flowComponent` reads. How close
+  a binding gets depends on what the framework lets it do with the children it
+  was handed:
+  - **Vue** has to reach them directly (`cloneVNode`), which covers one level
+    rather than the whole subtree. Every rule Flow writes for a _grandchild_
+    then costs its own code: `Modal` alone has three (`ActionGroup > Action`,
+    `Content > Heading`, `ColumnLayout > AccentBox`), and each of them is a
+    behaviour an extension developer will notice missing rather than a detail.
+  - **Svelte** cannot look inside a snippet at all, so it rebuilds the context
+    itself (`setContext`/`getContext`) — which turns out to be the _same_
+    mechanism React uses, and reaches the whole subtree. The generated wrapper
+    clears it for its own children, the way every `flowComponent` of type `ui`
+    wraps them in a `ClearPropsContext`.
 - **The composites need Flow's UI text, and it is not published.** A `Modal`
   with `confirmOnClose` asks "You have unsaved changes…" in the backoffice's
   language. Those strings live in the component's `locales/*.locale.json`, are
@@ -200,6 +241,9 @@ other:
   `typedList`, which has no Vue counterpart at all: the item type comes from the
   `ListItem` slot.
 
+  The Svelte prototype does not rebuild the `List` at all; it would start from
+  `packages/components-base` the same way.
+
 - **The pro icon set.** `packages/icons-pro` renders FontAwesome Pro, which each
   consumer licenses itself — so unlike Tabler's, its path data cannot be
   inlined, and a binding would need that package as a peer dependency. Rebuild
@@ -208,6 +252,59 @@ other:
   get a second icon set at all. Note that the React **remote** package does not
   export it — it lives in `@mittwald/flow-react-components` — so this is a place
   where a binding can reasonably go beyond its counterpart.
+
+And one component cannot be rebuilt with the same signature everywhere: **`Wrap`
+takes its wrapper as a child and renders that child's children when the
+condition fails.** That needs a framework that can reach inside the child. The
+Svelte binding takes the wrapper as a snippet receiving the content instead —
+different API, same purpose, and arguably the clearer one.
+
+## What the Svelte corpus run reported
+
+The Svelte prototype runs the same visual corpus through its own harness
+(`pnpm nx test:corpus remote-svelte-components`): a React pass writes a host-DOM
+reference per scenario, the Svelte pass compares against it, and nothing is
+committed. Flow's icons, which are React components, cross over by rendering
+them with `renderToStaticMarkup` and rebuilding the `<svg>`.
+
+It renders **160 of the corpus's 187 scenarios** identically to React. Two
+findings were about the binding itself, and both generalize:
+
+- **A dynamic tag costs you a child.** `<svelte:element this={tag}>` always
+  inserts an anchor into the element, and remote-dom carries every node across
+  as a child. A component that takes no children then still arrives at the host
+  with one — `Image` renders an `<img>`, React refuses children on a void
+  element, and nothing renders at all. Writing the tag literally in the
+  generated file removes it, which is an argument for generating markup rather
+  than a generic wrapper: the generator is the only place that knows the tag.
+  Worth 20 scenarios.
+- **What is left is the render tag.** A component whose children the app fills
+  still gets `{@render children()}`'s anchor next to them, and
+  `extractTextFromFirstChild` ("exactly one text child") gives up — `Initials`,
+  `Markdown`, `Truncate`. 11 scenarios. This one cannot be fixed inside a
+  binding: an anchor is where the framework inserts and removes. The decision
+  belongs where a comment is decided to be a child — remote-dom's serialization,
+  or Flow's own child inspection. Vue's `v-if` leaves comment placeholders too,
+  so it is not a Svelte question.
+
+The rest is honest surface: 15 scenarios define their own React component (a
+`Wrapper` holding `useState`, ten of them in `List`), and one uses a `Modal`
+feature the rebuild does not have.
+
+## Packaging
+
+A binding ships the way its ecosystem expects, and that decides more than it
+looks like:
+
+- **Vue** ships compiled JavaScript from a Vite library build, like every other
+  package here. Path aliases (`@/…`) work, because a bundler resolves them.
+- **Svelte** ships **source** via `svelte-package`: a compiled Svelte component
+  imports `svelte/internal`, which is private and changes between minors, so
+  compiled output would bind consumers to one exact runtime. The consequence is
+  that there is no bundler in the build — no path aliases, so every internal
+  import is relative and carries its `.js` extension, and `svelte-check`
+  replaces `tsc` in `test:compile`. The version `define` a Vite build injects
+  has no equivalent either.
 
 ## Checklist for a new binding package
 
@@ -282,3 +379,7 @@ other:
 - **One demo app or one per framework?** The switcher in `remote-dom-demo`
   works, but each framework needs its own route tree, and only one remote may be
   connected at a time.
+- **How many bindings is the generator willing to carry?** Each one adds an
+  emitter, an output path and a package that has to stay green. Three is fine;
+  the question is where the line is, and whether a binding without a user should
+  be in the repository at all.
