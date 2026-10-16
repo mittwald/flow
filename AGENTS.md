@@ -652,6 +652,24 @@ where the error points.
   not awaiting approval (`pending_deployments` is empty). `gh run rerun <id>`
   from a write-access account is what executes them
 
+- **Symptom:** A cached nx task serves output built with a **different** value
+  of an environment variable — a job's artifact contradicts the env it was
+  given, with nothing failing
+
+  **Cause:** nx folds an environment variable into a task's hash only when it is
+  declared as an `{ "env": … }` input, and CI restores the cache written on
+  `main` into every PR. A variable that actually varies then makes a cache hit
+  both legitimate and wrong — in either direction. `apps/docs`'
+  `NEXT_PUBLIC_SITE_URL` decides whether `robots.txt` says `Allow` or
+  `Disallow`, so an undeclared one could have put a preview's `Disallow: /` on
+  flow.mittwald.de
+
+  **Fix:** Declare it in the target's `inputs` (see the `build` target in
+  `apps/docs/project.json`). Prove it: run the task twice with the same value —
+  the second must log
+  `nx run <project>:<target> [existing outputs match the cache]` — then once
+  with a different value, which must rebuild for real (#3128)
+
 - **Symptom:** A function prop works locally but its result is garbage remotely
   — a formatter renders `[object Promise]`, a predicate is always truthy
 
