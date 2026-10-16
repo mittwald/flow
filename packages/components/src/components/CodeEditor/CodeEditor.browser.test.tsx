@@ -3,6 +3,7 @@ import { FieldDescription } from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 import { Label } from "@/components/Label";
 import { render } from "vitest-browser-react";
+import { EditorView } from "@uiw/react-codemirror";
 
 test("CodeEditor renders the label outside of the editor", async () => {
   const dom = await render(
@@ -125,4 +126,24 @@ test("CodeEditor references only the label and description it renders", async ()
 
   await expect.element(editor).not.toHaveAttribute("aria-labelledby");
   await expect.element(editor).not.toHaveAttribute("aria-describedby");
+});
+
+test("CodeEditor leaves the extensions passed to it untouched", async () => {
+  const extensions = [EditorView.lineWrapping];
+  const Editor = (props: { value: string }) => (
+    <CodeEditor
+      value={props.value}
+      language="ts"
+      extensions={extensions}
+      aria-label="Source code"
+    />
+  );
+  const dom = await render(<Editor value="const jedi = true;" />);
+  await dom.rerender(<Editor value="const sith = false;" />);
+
+  await expect
+    .element(dom.getByRole("textbox"))
+    .toHaveTextContent("const sith = false;");
+  expect(extensions.length).toBe(1);
+  expect(extensions[0]).toBe(EditorView.lineWrapping);
 });
