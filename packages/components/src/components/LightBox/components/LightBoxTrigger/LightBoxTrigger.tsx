@@ -10,6 +10,7 @@ export const LightBoxTrigger: FC<LightBoxTriggerProps> = (props) => {
   return (
     <OverlayTrigger
       overlayType="LightBox"
+      isOverlayHoistable
       {...triggerProps}
       component={DialogTriggerView}
     >
