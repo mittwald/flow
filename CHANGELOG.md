@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.21](https://github.com/mittwald/flow/compare/1.5.20...1.5.21) (2026-10-16)
+
+### Bug Fixes
+
+* **Activity:** use React&#x27;s Activity on every React that ships it ([#3519](https://github.com/mittwald/flow/issues/3519)) ([be33a2c](https://github.com/mittwald/flow/commit/be33a2c52aea322b68eeecd7fdd3b1dc2fe28b04))
+
 ## [1.5.20](https://github.com/mittwald/flow/compare/1.5.19...1.5.20) (2026-10-15)
 
 ### Bug Fixes
