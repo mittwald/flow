@@ -34,6 +34,7 @@ import { TableCell } from "./setupComponents/TableCell";
 import { TableColumn } from "./setupComponents/TableColumn";
 import { TableHeader } from "./setupComponents/TableHeader";
 import { TableRow } from "./setupComponents/TableRow";
+import rowStyles from "./components/Table/Table.module.scss";
 
 interface Data {
   num: number;
@@ -1177,8 +1178,16 @@ describe("Table rows", () => {
   const TableList: FC<{
     withDependencies?: boolean;
     cellClassFromCount?: boolean;
+    rowClassFromCount?: boolean;
+    rowClassName?: string;
     onAction?: (num: number, count: number) => void;
-  }> = ({ withDependencies, cellClassFromCount, onAction }) => {
+  }> = ({
+    withDependencies,
+    cellClassFromCount,
+    rowClassFromCount,
+    rowClassName,
+    onAction,
+  }) => {
     const [selected, setSelected] = useState(false);
     const [count, setCount] = useState(0);
 
@@ -1199,6 +1208,7 @@ describe("Table rows", () => {
             <TableBody>
               <TableRow
                 dependencies={withDependencies ? [selected] : undefined}
+                className={rowClassFromCount ? `at-${count}` : rowClassName}
               >
                 <TableCell
                   className={cellClassFromCount ? `at-${count}` : undefined}
@@ -1246,6 +1256,25 @@ describe("Table rows", () => {
     await userEvent.click(bump);
 
     await expect.poll(() => document.querySelector(".at-1")).not.toBeNull();
+  });
+
+  test("a row with dependencies re-renders when a row prop changes", async () => {
+    await render(<TableList withDependencies rowClassFromCount />);
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect.poll(() => document.querySelector("tr.at-1")).not.toBeNull();
+  });
+
+  test("a row's className adds to the row's own classes", async () => {
+    await render(<TableList rowClassName="custom" onAction={vitest.fn()} />);
+
+    await expect
+      .element(page.getByRole("row").nth(1))
+      .toHaveClass("custom", rowStyles.row, rowStyles.hasAction);
   });
 
   test("a row without dependencies follows parent state", async () => {
