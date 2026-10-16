@@ -1,5 +1,6 @@
 import { CodeBlock } from "@/components/CodeBlock";
 import { Heading } from "@/components/Heading";
+import { Image } from "@/components/Image";
 import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
@@ -10,7 +11,11 @@ import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
-import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
+import {
+  isAlphaColor,
+  type AlphaColor,
+  type PropsWithClassName,
+} from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
@@ -21,6 +26,9 @@ import {
   SkeletonInlineContent,
 } from "@/components/Markdown/components/SkeletonBlocks";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { TaskListCheckbox } from "@/components/Markdown/components/TaskListCheckbox";
+import { removeNewlinesAfterBreaks } from "@/components/Markdown/lib/removeNewlinesAfterBreaks";
+import { removeSpaceAfterTaskListCheckbox } from "@/components/Markdown/lib/removeSpaceAfterTaskListCheckbox";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
@@ -82,7 +90,9 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     p: (props) => (
       <Text elementType="p" color={color}>
-        {props.children}
+        {removeSpaceAfterTaskListCheckbox(
+          removeNewlinesAfterBreaks(props.children),
+        )}
       </Text>
     ),
     code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
@@ -174,10 +184,29 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         <ol {...props} />
       </SkeletonBlockText>
     ),
-    li: ({ node: ignoredNode, children, ...props }) => (
-      <li {...props}>
-        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+    li: ({ node: ignoredNode, children, className, ...props }) => (
+      <li
+        {...props}
+        className={clsx(
+          className,
+          className?.includes("task-list-item") && styles.taskListItem,
+        )}
+      >
+        <SkeletonInlineContent>
+          {removeSpaceAfterTaskListCheckbox(children)}
+        </SkeletonInlineContent>
       </li>
+    ),
+    input: ({ node: ignoredNode, ...props }) =>
+      props.type === "checkbox" ? (
+        <TaskListCheckbox checked={props.checked} />
+      ) : (
+        <input {...props} />
+      ),
+    table: ({ node: ignoredNode, ...props }) => (
+      <div className={styles.tableContainer}>
+        <table {...props} />
+      </div>
     ),
     th: ({ node: ignoredNode, children, ...props }) => (
       <th {...props}>
@@ -192,7 +221,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     /* A text bar resets the mode for its content, so the image reads it
        from here. A skeleton issues no request. */
     img: ({ node: ignoredNode, ...props }) =>
-      isSkeleton ? null : <img {...props} />,
+      isSkeleton ? null : <Image {...props} withBorder />,
     blockquote: (props) => (
       <SkeletonBlockText color={color}>
         <blockquote>{props.children}</blockquote>
@@ -207,7 +236,15 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   };
 
   return (
-    <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
+    <div
+      className={clsx(
+        styles.markdown,
+        isAlphaColor(color) && styles[color],
+        className,
+      )}
+      {...rest}
+      ref={ref}
+    >
       <ReactMarkdown
         allowElement={allowElement}
         allowedElements={allowedElements}
