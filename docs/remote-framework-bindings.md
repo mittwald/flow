@@ -214,10 +214,12 @@ other:
 - `packages/remote-<framework>-components`. It ships as soon as `private` is
   absent — and a brand-new package name needs two one-time steps on npm before
   the merge, or `publish.yml` fails with `E404 Not found` in the middle of a
-  release. npm binds a **Trusted Publisher** only to a package that exists, so a
-  maintainer first **publishes it by hand** (`@mittwald/flow-codemods` did:
+  release, after the other packages have already gone out. npm binds a **Trusted
+  Publisher** only to a package that exists, so a maintainer first **publishes
+  it by hand** under the `next` dist-tag (`@mittwald/flow-codemods` did:
   `1.1.0-next.10` by hand, provenance from `1.1.0-next.11` on), then binds the
   Trusted Publisher to `publish.yml` — one workflow filename per package.
+  Nothing in this repository can do either step.
 - `project.json` with `implicitDependencies: ["components"]` and a `build` that
   depends on `components:build:remote-components`.
 - An emitter in the generator + the output path in `components/project.json`.
