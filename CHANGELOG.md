@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.19](https://github.com/mittwald/flow/compare/1.6.0-next.18...1.6.0-next.19) (2026-10-16)
+
+### Bug Fixes
+
+* **Activity:** use React&#x27;s Activity on every React that ships it ([#3519](https://github.com/mittwald/flow/issues/3519)) ([be33a2c](https://github.com/mittwald/flow/commit/be33a2c52aea322b68eeecd7fdd3b1dc2fe28b04))
+
+## [1.5.20](https://github.com/mittwald/flow/compare/1.6.0-next.17...1.5.20) (2026-10-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.20 ([fbdcba3](https://github.com/mittwald/flow/commit/fbdcba33eb1962e8898f3931bc0b26ab123614c9))
+
 ## [1.6.0-next.18](https://github.com/mittwald/flow/compare/1.6.0-next.17...1.6.0-next.18) (2026-10-15)
 
 ## [1.5.19](https://github.com/mittwald/flow/compare/1.6.0-next.16...1.5.19) (2026-10-15)
