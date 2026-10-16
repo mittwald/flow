@@ -1051,3 +1051,48 @@ test("close button of an older remote Modal matches the current one", async () =
   expect(legacy.width).toBeCloseTo(current.width, 0);
   expect(legacy.height).toBeCloseTo(current.height, 0);
 });
+
+test("closed Modal neither reads nor watches the visual viewport", async () => {
+  const viewport = window.visualViewport;
+  if (!viewport) {
+    throw new Error("The test browser has no VisualViewport");
+  }
+  const addEventListener = vitest.spyOn(viewport, "addEventListener");
+  // Pretend the on-screen keyboard is open.
+  const readHeight = vitest
+    .spyOn(VisualViewport.prototype, "height", "get")
+    .mockImplementation(() => window.innerHeight - 300);
+
+  try {
+    const Test = () => {
+      const controller = useModalController();
+      return (
+        <>
+          <Modal controller={controller}>
+            <Heading>Keyboard</Heading>
+            <Content data-testid="modal-content">Content</Content>
+          </Modal>
+          <Button onPress={controller.open}>Open</Button>
+        </>
+      );
+    };
+
+    const dom = await render(<Test />);
+    expect(readHeight).not.toHaveBeenCalled();
+    expect(addEventListener).not.toHaveBeenCalled();
+
+    await dom.getByRole("button", { name: "Open" }).click();
+    await expect.element(dom.getByTestId("modal-content")).toBeVisible();
+    expect(addEventListener).toHaveBeenCalledWith(
+      "resize",
+      expect.any(Function),
+    );
+    await vitest.waitFor(() =>
+      expect(
+        document.querySelector(`.${styles.keyboardVisible}`),
+      ).not.toBeNull(),
+    );
+  } finally {
+    vitest.restoreAllMocks();
+  }
+});

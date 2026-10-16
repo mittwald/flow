@@ -6,7 +6,10 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import { OverlayController } from "@/lib/controller/overlay";
+import {
+  OverlayController,
+  useOverlayController,
+} from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -68,7 +71,7 @@ export const Modal = flowComponent("Modal", (props) => {
   const {
     size = "s",
     offCanvas,
-    controller,
+    controller: controllerFromProps,
     children,
     ref,
     className,
@@ -79,10 +82,20 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
 
+  // Resolved here rather than in `Overlay`, which then receives it: the open
+  // state gates the keyboard tracking below.
+  const controllerFromContext = useOverlayController("Modal", {
+    reuseControllerFromContext: true,
+    isDefaultOpen: overlayProps.isDefaultOpen,
+  });
+  const controller = controllerFromProps ?? controllerFromContext;
+  const isOpenFromController = controller.useIsOpen();
+  const isOpen = overlayProps.isOpen ?? isOpenFromController;
+
   // On mobile the header/footer are docked (sticky) while at rest, but flow
   // normally while the on-screen keyboard is open so the content gets the full
   // available space (see Modal.module.scss). #2423
-  const keyboardVisible = useVirtualKeyboardVisible();
+  const keyboardVisible = useVirtualKeyboardVisible(isOpen);
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
