@@ -291,6 +291,20 @@ das Item weiter den Wert, mit dem es zuletzt gerendert wurde. Das gilt auch für
 eine Render-Funktion mit stabiler Identität – aus der Komponente herausgezogen,
 in `useCallback` gewrappt, oder sie liest aus einem externen Store.
 
+In der Tabellenansicht gilt dasselbe für `<List.TableRow />`: Mit `dependencies`
+rendert eine Zeile nur noch neu, wenn sich ihre Daten, einer dieser Werte oder
+die Props einer Zelle ändern. Ohne `dependencies` rendern alle Zeilen bei jedem
+Render der List neu.
+
+```tsx
+<List.TableRow dependencies={[selected]}>
+  <List.TableCell>{(domain) => domain.hostname}</List.TableCell>
+  <List.TableCell>
+    {(domain) => (selected.includes(domain.id) ? "Ausgewählt" : "")}
+  </List.TableCell>
+</List.TableRow>
+```
+
 `onAction`, `textValue` und `href` brauchen keine Angabe: Inline-Funktionen
 dafür lösen kein Neurendern aus. Die List ruft immer das aktuelle `onAction` auf
 und vergleicht `textValue` und `href` über ihr Ergebnis.

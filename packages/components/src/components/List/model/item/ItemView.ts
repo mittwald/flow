@@ -7,6 +7,7 @@ import type {
 import { createElement } from "react";
 import type { RenderItemFn } from "@/components/List/model/item/types";
 import type List from "@/components/List/model/List";
+import { dependenciesAreEqual } from "@/components/List/model/equality";
 
 export interface ItemViewShape<T> {
   textValue?: (data: T) => string;
@@ -34,13 +35,6 @@ export interface ItemViewShape<T> {
    */
   dependencies?: DependencyList;
 }
-
-const dependenciesAreEqual = (a?: DependencyList, b?: DependencyList) =>
-  a === b ||
-  (!!a &&
-    !!b &&
-    a.length === b.length &&
-    a.every((dependency, index) => Object.is(dependency, b[index])));
 
 export class ItemView<T> {
   public readonly list: List<T>;

@@ -1157,6 +1157,91 @@ describe("Inline item callbacks", () => {
   });
 });
 
+describe("Table rows", () => {
+  const data: Data[] = [{ num: 42 }];
+  let cellRenderCount = 0;
+
+  const TableList: FC<{
+    withDependencies?: boolean;
+    onAction?: (num: number, count: number) => void;
+  }> = ({ withDependencies, onAction }) => {
+    const [selected, setSelected] = useState(false);
+    const [count, setCount] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setCount((c) => c + 1)}>Bump</button>
+        <button onClick={() => setSelected((s) => !s)}>Select</button>
+        <List
+          aria-label="Test"
+          defaultViewMode="table"
+          onAction={({ num }: Data) => onAction?.(num, count)}
+        >
+          <ListStaticData<Data> data={data} />
+          <Table>
+            <TableHeader>
+              <TableColumn>Num</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow
+                dependencies={withDependencies ? [selected] : undefined}
+              >
+                <TableCell>
+                  {({ num }: Data) => {
+                    cellRenderCount++;
+                    return `Row: ${num} ${selected ? "selected" : "unselected"}`;
+                  }}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </List>
+      </>
+    );
+  };
+
+  const bump = page.getByRole("button", { name: "Bump" });
+  const select = page.getByRole("button", { name: "Select" });
+
+  test("a row with dependencies skips unrelated parent re-renders", async () => {
+    cellRenderCount = 0;
+    await render(<TableList withDependencies />);
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+    const before = cellRenderCount;
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    expect(cellRenderCount).toBe(before);
+
+    await userEvent.click(select);
+    await expect
+      .element(page.getByText("Row: 42 selected"))
+      .toBeInTheDocument();
+  });
+
+  test("a row without dependencies follows parent state", async () => {
+    await render(<TableList />);
+
+    await userEvent.click(select);
+    await expect
+      .element(page.getByText("Row: 42 selected"))
+      .toBeInTheDocument();
+  });
+
+  test("the latest onAction is called after a parent re-render", async () => {
+    const onAction = vitest.fn();
+    await render(<TableList withDependencies onAction={onAction} />);
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    await userEvent.click(page.getByText("Row: 42 unselected"));
+
+    expect(onAction).toHaveBeenCalledExactlyOnceWith(42, 2);
+  });
+});
+
 describe("Item hover", () => {
   // The item's hover background is carved out for the bottom content, which
   // carries its own interactive elements. The carve-out is a `:has()` rule in

@@ -4,10 +4,10 @@ import DivView from "@/views/DivView";
 import ItemsGridListView from "@/views/ItemsGridListView";
 import clsx from "clsx";
 import type { FC } from "react";
-import { useCallback, useLayoutEffect, useRef } from "react";
 import styles from "./Items.module.scss";
 import { FallbackItems } from "./components/FallbackItems";
 import { useInfiniteScrollTrigger } from "@/components/List/hooks/useInfiniteScrollTrigger";
+import { useLatestOnAction } from "@/components/List/hooks/useLatestOnAction";
 
 export const Items: FC = () => {
   const list = useList();
@@ -18,17 +18,7 @@ export const Items: FC = () => {
 
   const { triggerRef, triggerIndex } = useInfiniteScrollTrigger();
 
-  // An event handler only ever needs to be the latest one, so items get a
-  // stable invoker and do not re-render for an inline `onAction`.
-  const onActionRef = useRef(list.onAction);
-  useLayoutEffect(() => {
-    onActionRef.current = list.onAction;
-  });
-  const invokeOnAction = useCallback(
-    (data: never) => onActionRef.current?.(data),
-    [],
-  );
-  const onAction = list.onAction ? invokeOnAction : undefined;
+  const onAction = useLatestOnAction(list);
 
   if (!list.itemView) {
     return null;
