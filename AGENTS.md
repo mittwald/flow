@@ -248,7 +248,10 @@ commit the results.
   codemod, because for those entries it is the whole migration. Exception: a
   break in a **beta package** (`"flowStatus": "beta"`) gets a migration note in
   the commit body and release notes instead
-  ([ADR 0007](docs/adr/0007-beta-packages.md)).
+  ([ADR 0007](docs/adr/0007-beta-packages.md)). On a `feat:` PR (base `next`)
+  the entry's `since` is the literal `UNRELEASED` — the shipping version is
+  unknown until the release is promoted, and `/prepare-release` resolves it then
+  (#2890).
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
 - **Browser support:** all three engines (Chromium, Firefox, WebKit). CI driving
   WebKit, plus a non-blocking Firefox job for the browser tests, is a pragmatic
