@@ -26,6 +26,7 @@ const RowImpl = (props: Props) => {
 
   return (
     <TableRowView
+      {...row.componentProps}
       className={clsx(
         styles.row,
         onAction && styles.hasAction,
@@ -33,7 +34,6 @@ const RowImpl = (props: Props) => {
       )}
       id={id}
       onAction={onAction ? () => onAction(data) : undefined}
-      {...row.componentProps}
       {...(triggerRef ? { ref: triggerRef } : {})}
     >
       {row.cells.map((cell, i) => (

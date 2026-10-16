@@ -7,10 +7,18 @@ import type {
 import { createElement } from "react";
 import type { RenderItemFn } from "@/components/List/model/item/types";
 import type List from "@/components/List/model/List";
-import { dependenciesAreEqual } from "@/components/List/model/equality";
+import { isShallowEqual } from "remeda";
 
 export interface ItemViewShape<T> {
+  /**
+   * Runs on every render of the list to tell whether the item changed, so it
+   * should be cheap and pure.
+   */
   textValue?: (data: T) => string;
+  /**
+   * Runs on every render of the list to tell whether the item changed, so it
+   * should be cheap and pure.
+   */
   href?: (data: T) => string;
   target?: HTMLAttributeAnchorTarget;
   defaultExpanded?: (data: T) => boolean;
@@ -27,8 +35,9 @@ export interface ItemViewShape<T> {
    * With `dependencies`, an item re-renders only when its data or one of these
    * values changes. The render function's identity no longer counts, so a
    * function written inline in JSX keeps the item from re-rendering on every
-   * render of its parent. List every value it reads from outside the item — one
-   * left out keeps the item on the value it last rendered.
+   * render of its parent. List every value it reads from outside the item,
+   * including state read through the `list` argument — one left out keeps the
+   * item on the value it last rendered.
    *
    * Without it, an item re-renders whenever its render function changes
    * identity, which an inline function does on every render of its parent.
@@ -48,6 +57,7 @@ export class ItemView<T> {
   public readonly tileMaxWidth: number;
   public readonly dependencies?: DependencyList;
   private readonly renderFn?: RenderItemFn<T>;
+  private lastComparison?: { other: ItemView<T>; result: boolean };
 
   public constructor(list: List<T>, shape: ItemViewShape<T> = {}) {
     const {
@@ -96,11 +106,19 @@ export class ItemView<T> {
     );
   }
 
+  // Every item of a render shares one item view, so the result is cached for
+  // the last `other`.
   private rendersSameContentAs(other: ItemView<T>): boolean {
-    if (this.dependencies || other.dependencies) {
-      return dependenciesAreEqual(this.dependencies, other.dependencies);
+    if (this.lastComparison?.other !== other) {
+      this.lastComparison = {
+        other,
+        result:
+          this.dependencies || other.dependencies
+            ? isShallowEqual(this.dependencies, other.dependencies)
+            : this.renderFn === other.renderFn,
+      };
     }
-    return this.renderFn === other.renderFn;
+    return this.lastComparison.result;
   }
 
   public render(data: T): ReactNode {

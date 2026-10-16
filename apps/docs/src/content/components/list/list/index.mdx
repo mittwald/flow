@@ -286,15 +286,18 @@ Das ist der schnelle Weg für große Listen:
 </List.Item>
 ```
 
-Liste jeden Wert auf, den die Funktion von außerhalb liest. Fehlt einer, zeigt
-das Item weiter den Wert, mit dem es zuletzt gerendert wurde. Das gilt auch für
-eine Render-Funktion mit stabiler Identität – aus der Komponente herausgezogen,
-in `useCallback` gewrappt, oder sie liest aus einem externen Store.
+Liste jeden Wert auf, den die Funktion von außerhalb liest – auch State, den sie
+über ihr zweites Argument `list` liest. Fehlt einer, zeigt das Item weiter den
+Wert, mit dem es zuletzt gerendert wurde. Das gilt auch für eine Render-Funktion
+mit stabiler Identität – aus der Komponente herausgezogen, in `useCallback`
+gewrappt, oder sie liest aus einem externen Store.
 
 In der Tabellenansicht gilt dasselbe für `<List.TableRow />`: Mit `dependencies`
 rendert eine Zeile nur noch neu, wenn sich ihre Daten, einer dieser Werte oder
 die Props einer Zelle ändern. Ohne `dependencies` rendern alle Zeilen bei jedem
-Render der List neu.
+Render der List neu. Die Props von Zeile und Zellen zählen über ihre Identität:
+Ein inline geschriebenes `style`-Objekt oder ein Callback an `<List.TableRow />`
+oder `<List.TableCell />` lässt jede Zeile neu rendern.
 
 ```tsx
 <List.TableRow dependencies={[selected]}>
@@ -307,7 +310,8 @@ Render der List neu.
 
 `onAction`, `textValue` und `href` brauchen keine Angabe: Inline-Funktionen
 dafür lösen kein Neurendern aus. Die List ruft immer das aktuelle `onAction` auf
-und vergleicht `textValue` und `href` über ihr Ergebnis.
+und vergleicht `textValue` und `href` über ihr Ergebnis. Beide laufen dafür bei
+jedem Render der List – halte sie günstig und frei von Seiteneffekten.
 
 ---
 

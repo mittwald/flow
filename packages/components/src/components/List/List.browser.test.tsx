@@ -1090,7 +1090,8 @@ describe("Inline item callbacks", () => {
     onAction?: (num: number, count: number) => void;
     labelWithCount?: boolean;
     withHref?: boolean;
-  }> = ({ onAction, labelWithCount, withHref }) => {
+    hrefWithCount?: boolean;
+  }> = ({ onAction, labelWithCount, withHref, hrefWithCount }) => {
     const [count, setCount] = useState(0);
 
     return (
@@ -1106,8 +1107,9 @@ describe("Inline item callbacks", () => {
               labelWithCount ? `${num} at ${count}` : String(num)
             }
             href={
-              withHref
-                ? ({ num }) => `${location.origin}/domains/${num}`
+              withHref || hrefWithCount
+                ? ({ num }) =>
+                    `${location.origin}/domains/${num}${hrefWithCount ? `?at=${count}` : ""}`
                 : undefined
             }
           >
@@ -1143,6 +1145,17 @@ describe("Inline item callbacks", () => {
     expect(onAction).toHaveBeenCalledExactlyOnceWith(42, 2);
   });
 
+  test("an inline href still updates the item", async () => {
+    await render(<ParentWithState hrefWithCount />);
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect
+      .poll(() => document.querySelector("[role=row] a")?.getAttribute("href"))
+      .toBe(`${location.origin}/domains/42?at=1`);
+  });
+
   test("an inline textValue still updates the item", async () => {
     await render(<ParentWithState labelWithCount />);
     await expect
@@ -1163,8 +1176,9 @@ describe("Table rows", () => {
 
   const TableList: FC<{
     withDependencies?: boolean;
+    cellClassFromCount?: boolean;
     onAction?: (num: number, count: number) => void;
-  }> = ({ withDependencies, onAction }) => {
+  }> = ({ withDependencies, cellClassFromCount, onAction }) => {
     const [selected, setSelected] = useState(false);
     const [count, setCount] = useState(0);
 
@@ -1186,7 +1200,9 @@ describe("Table rows", () => {
               <TableRow
                 dependencies={withDependencies ? [selected] : undefined}
               >
-                <TableCell>
+                <TableCell
+                  className={cellClassFromCount ? `at-${count}` : undefined}
+                >
                   {({ num }: Data) => {
                     cellRenderCount++;
                     return `Row: ${num} ${selected ? "selected" : "unselected"}`;
@@ -1219,6 +1235,17 @@ describe("Table rows", () => {
     await expect
       .element(page.getByText("Row: 42 selected"))
       .toBeInTheDocument();
+  });
+
+  test("a row with dependencies re-renders when a cell prop changes", async () => {
+    await render(<TableList withDependencies cellClassFromCount />);
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect.poll(() => document.querySelector(".at-1")).not.toBeNull();
   });
 
   test("a row without dependencies follows parent state", async () => {

@@ -4,17 +4,15 @@ import type {
 } from "@/components/List/model/table/types";
 import { TableCell } from "@/components/List/model/table/TableCell";
 import type { TableBody } from "@/components/List/model/table/TableBody";
-import {
-  dependenciesAreEqual,
-  shallowEqual,
-} from "@/components/List/model/equality";
 import type { DependencyList } from "react";
+import { isShallowEqual } from "remeda";
 
 export class TableRow<T> {
   public readonly tableBody: TableBody<T>;
   public readonly cells: TableCell<T>[];
   public readonly componentProps: TableRowSupportedComponentProps;
   public readonly dependencies?: DependencyList;
+  private lastComparison?: { other: TableRow<T>; result: boolean };
 
   public constructor(tableBody: TableBody<T>, shape: TableRowShape<T> = {}) {
     // `children` holds the cell elements, which arrive as `cells`.
@@ -33,20 +31,33 @@ export class TableRow<T> {
   /**
    * Whether `other` would render a row identically. Only rows that declare
    * `dependencies` can tell, since the cells' render functions count by those
-   * instead of their identity. Rows without them always re-render.
+   * instead of their identity. Rows without them always re-render. Row and cell
+   * props count by identity, one by one.
+   *
+   * Every row of a render shares one model, so the result is cached for the
+   * last `other`.
    */
   public rendersSameAs(other?: TableRow<T>): boolean {
+    if (!other) {
+      return false;
+    }
+    if (this.lastComparison?.other !== other) {
+      this.lastComparison = { other, result: this.compareWith(other) };
+    }
+    return this.lastComparison.result;
+  }
+
+  private compareWith(other: TableRow<T>): boolean {
     return (
-      !!other &&
       !!this.dependencies &&
-      dependenciesAreEqual(this.dependencies, other.dependencies) &&
-      shallowEqual(this.componentProps, other.componentProps) &&
+      isShallowEqual(this.dependencies, other.dependencies) &&
+      isShallowEqual(this.componentProps, other.componentProps) &&
       this.cells.length === other.cells.length &&
       this.cells.every((cell, index) => {
         const otherCell = other.cells[index];
         return (
           !!otherCell &&
-          shallowEqual(cell.componentProps, otherCell.componentProps)
+          isShallowEqual(cell.componentProps, otherCell.componentProps)
         );
       })
     );
