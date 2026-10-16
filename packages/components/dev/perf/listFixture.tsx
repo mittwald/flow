@@ -1,4 +1,4 @@
-import { useState, type FC, type ReactNode } from "react";
+import { memo, useState, type FC, type ReactNode } from "react";
 import { ListItemView, typedList, useList } from "@/components/List";
 import type List from "@/components/List/model/List";
 import { Avatar } from "@/components/Avatar";
@@ -134,11 +134,25 @@ const renderSimple = (domain: Domain): ReactNode => {
   );
 };
 
+/* What an app does when an item delegates to its own component. */
+const MemoRow = memo<{ domain: Domain; content: FixtureProps["content"] }>(
+  ({ domain, content }) =>
+    content === "rich"
+      ? renderDomain(domain)
+      : content === "simple"
+        ? renderSimple(domain)
+        : renderPlain(domain),
+);
+
 export interface FixtureProps {
   data: Domain[];
   batchSize?: number;
-  /** Inline: new render function on every parent render (common in apps) */
-  renderFn?: "inline" | "hoisted";
+  /**
+   * - Inline: new render function on every parent render (common in apps)
+   * - Hoisted: stable render function, `textValue` and `onAction`
+   * - MemoRow: inline functions, but the row is a `memo` component
+   */
+  renderFn?: "inline" | "hoisted" | "memoRow";
   content?: "rich" | "simple" | "plain";
   table?: boolean;
   infiniteScroll?: boolean;
@@ -174,7 +188,7 @@ export const Fixture: FC<FixtureProps> = (props) => {
         batchSize={batchSize}
         infiniteScroll={infiniteScroll}
         defaultViewMode={defaultViewMode}
-        onAction={renderFn === "inline" ? () => undefined : noop}
+        onAction={renderFn === "hoisted" ? noop : () => undefined}
       >
         <ListProbe />
         <DomainList.StaticData data={data} />
@@ -222,9 +236,13 @@ export const Fixture: FC<FixtureProps> = (props) => {
         )}
         <DomainList.Item
           showTiles
-          textValue={renderFn === "inline" ? (d) => d.hostname : textValue}
+          textValue={renderFn === "hoisted" ? textValue : (d) => d.hostname}
         >
-          {renderFn === "inline" ? (d) => hoisted(d) : hoisted}
+          {renderFn === "hoisted"
+            ? hoisted
+            : renderFn === "memoRow"
+              ? (d) => <MemoRow domain={d} content={content} />
+              : (d) => hoisted(d)}
         </DomainList.Item>
       </DomainList.List>
     </>

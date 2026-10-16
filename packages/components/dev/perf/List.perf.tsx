@@ -189,6 +189,17 @@ describe.each(["rich", "simple"] as const)("List (%s items)", (content) => {
       await unmount();
     });
 
+    test("re-render with inline functions and a memo row component", async () => {
+      await setup({ data, batchSize: n, content, renderFn: "memoRow" }, n);
+      const ms = await repeat(runs, () => measure(() => clickRerender()));
+      await record("rerender:parent(memo row)", { content, n }, ms);
+      const sorts = await repeat(runs, (i) =>
+        measure(() => sorting(i % 2 === 0 ? 1 : 0).enable()),
+      );
+      await record("sort(memo row)", { content, n }, sorts);
+      await unmount();
+    });
+
     test("scroll through the page", async () => {
       await setup({ data, batchSize: n, content }, n);
       const result = await scrollThrough();
