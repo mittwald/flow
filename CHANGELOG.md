@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.21](https://github.com/mittwald/flow/compare/1.6.0-next.20...1.6.0-next.21) (2026-10-16)
+
+### Features
+
+* **List:** let an item&#x27;s dependencies replace its render fn&#x27;s identity ([30e1474](https://github.com/mittwald/flow/commit/30e1474c05e2e76b84e2fc9832b3e4d303edf9ab)), closes [#3065](https://github.com/mittwald/flow/issues/3065)
+* **List:** let table rows skip re-renders with declared dependencies ([bb92d0e](https://github.com/mittwald/flow/commit/bb92d0e51fca94fca520e14e04a93b8f4e6f160b))
+* **List:** move the new item and row semantics to renderDependencies ([50ddae2](https://github.com/mittwald/flow/commit/50ddae2c49c0e9ffb35749d8b73ff6211d283cf1))
+
+### Bug Fixes
+
+* **List:** address review on item and row memoization ([d0f2959](https://github.com/mittwald/flow/commit/d0f2959b110061976a255830e56e540dea1d130e))
+
+### Performance Improvements
+
+* **List:** keep items memoized for inline onAction, textValue and href ([0de40dc](https://github.com/mittwald/flow/commit/0de40dcd2e1cc7a34f370961705d43f6614df895)), closes [#3065](https://github.com/mittwald/flow/issues/3065)
+
+### Tests
+
+* **List:** cover row prop re-renders and a row&#x27;s custom className ([d65628d](https://github.com/mittwald/flow/commit/d65628d56b8f360a1112188f8ade5f9ec267d023))
+
 ## [1.6.0-next.20](https://github.com/mittwald/flow/compare/1.6.0-next.19...1.6.0-next.20) (2026-10-16)
 
 ### Documentation
