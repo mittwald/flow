@@ -199,7 +199,7 @@ commit the results.
   publishes nothing at all (no npm release, no version bump commit, no tag, no
   GitHub Release). That covers docs, CI and repo tooling, and inside `packages/`
   also `.storybook/**`, `e2e/**`, `src/tests/**`,
-  `dev/{cross-version,react-parity,vitest}/**`, `CONTRIBUTE.md`,
+  `dev/{cross-version,perf,react-parity,vitest}/**`, `CONTRIBUTE.md`,
   `*.stories.tsx`, `*.test.*`, `*.test-types.*` and a `scripts`-only manifest
   diff. The rule lives in `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
