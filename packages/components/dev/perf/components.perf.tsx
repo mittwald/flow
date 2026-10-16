@@ -27,6 +27,7 @@ import {
   Link,
   MenuItem,
   Modal,
+  Action,
   ModalTrigger,
   NumberField,
   Option,
@@ -61,6 +62,7 @@ import {
   type Measurement,
 } from "./harness";
 import { countFibers } from "./fiberTree";
+import { useModalController } from "@/lib/controller/overlay";
 
 beforeAll(applyThrottle);
 
@@ -167,6 +169,7 @@ const catalog: Record<string, (i: number) => ReactNode> = {
     </ContextMenu>
   ),
   "ContextMenuTrigger (closed)": (i) => <ContextMenuTriggerFix i={i} />,
+  "ContextMenu + edit Modal (closed)": (i) => <ContextMenuWithModal i={i} />,
   "Tooltip (closed)": (i) => (
     <TooltipTrigger>
       <Button>Hover {i}</Button>
@@ -232,6 +235,39 @@ const catalog: Record<string, (i: number) => ReactNode> = {
 };
 
 /* ContextMenu attached to a trigger button, the usual pattern. */
+/* The documented pattern (docs: context-menu/examples/modal.tsx), per row. */
+const ContextMenuWithModal: FC<{ i: number }> = ({ i }) => {
+  const modalController = useModalController();
+  return (
+    <>
+      <ContextMenuTrigger>
+        <Button>Actions {i}</Button>
+        <ContextMenu>
+          <MenuItem onAction={() => modalController.open()}>Edit</MenuItem>
+        </ContextMenu>
+      </ContextMenuTrigger>
+      <Modal controller={modalController}>
+        <Heading>Edit</Heading>
+        <Content>
+          <Section>
+            <TextField>
+              <Label>Name</Label>
+            </TextField>
+          </Section>
+        </Content>
+        <ActionGroup>
+          <Action closeModal>
+            <Button color="success">Save</Button>
+            <Button color="secondary" variant="soft">
+              Cancel
+            </Button>
+          </Action>
+        </ActionGroup>
+      </Modal>
+    </>
+  );
+};
+
 const ContextMenuTriggerFix: FC<{ i: number }> = ({ i }) => (
   <ContextMenuTrigger>
     <Button>Actions {i}</Button>
