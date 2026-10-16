@@ -25,6 +25,7 @@ import {
   type SettingsJson,
 } from "../SettingsProvider";
 import { FilterValue } from "./model/filter/FilterValue";
+import { DeprecationWarningProvider } from "../DeprecationWarningProvider";
 import Content from "../Content";
 import { Heading } from "../Heading";
 import { ContextMenu, MenuItem } from "../ContextMenu";
@@ -965,7 +966,8 @@ describe("Item rendering", () => {
   });
 
   // A render function whose identity never changes leaves the memoized item no
-  // signal to follow — `dependencies` is the consumer's way to give it one.
+  // signal to follow — `renderDependencies` is the consumer's way to give it
+  // one, and the deprecated `dependencies` still does.
   const store = {
     selected: [] as number[],
     version: 0,
@@ -998,41 +1000,69 @@ describe("Item rendering", () => {
     store.toggle(num);
   };
 
-  const StoreList = () => {
+  const StoreList: FC<{ deprecatedProp?: boolean }> = ({ deprecatedProp }) => {
     const version = useSyncExternalStore(subscribeToStore, () => store.version);
 
     return (
       <List aria-label="Test" onAction={toggleStoreItem}>
         <ListStaticData<Data> data={selectableData} />
-        <ListItem<Data> textValue={storeItemTextValue} dependencies={[version]}>
+        <ListItem<Data>
+          textValue={storeItemTextValue}
+          {...(deprecatedProp
+            ? { dependencies: [version] }
+            : { renderDependencies: [version] })}
+        >
           {renderStoreItem}
         </ListItem>
       </List>
     );
   };
 
-  test("items follow the dependencies a stable render function declares", async () => {
-    store.selected = [];
-    store.version = 0;
+  test.each([
+    ["renderDependencies", false],
+    ["deprecated dependencies", true],
+  ])(
+    "items follow the %s a stable render function declares",
+    async (_, deprecatedProp) => {
+      store.selected = [];
+      store.version = 0;
 
-    await render(<StoreList />);
+      await render(<StoreList deprecatedProp={deprecatedProp} />);
 
-    await userEvent.click(page.getByText("Item: 42 unselected"));
+      await userEvent.click(page.getByText("Item: 42 unselected"));
+      await expect
+        .element(page.getByText("Item: 42 selected"))
+        .toBeInTheDocument();
+
+      await userEvent.click(page.getByText("Item: 42 selected"));
+      await expect
+        .element(page.getByText("Item: 42 unselected"))
+        .toBeInTheDocument();
+    },
+  );
+
+  test("the dependencies prop warns that it is deprecated", async () => {
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const onWarning = vi.fn();
+
+    await render(
+      <DeprecationWarningProvider onWarning={onWarning}>
+        <StoreList deprecatedProp />
+      </DeprecationWarningProvider>,
+    );
+
     await expect
-      .element(page.getByText("Item: 42 selected"))
-      .toBeInTheDocument();
-
-    await userEvent.click(page.getByText("Item: 42 selected"));
-    await expect
-      .element(page.getByText("Item: 42 unselected"))
-      .toBeInTheDocument();
+      .poll(() => onWarning.mock.calls.flat())
+      .toContain(
+        "The 'dependencies' prop of 'List.Item' is deprecated and will be removed in a future release. Use 'renderDependencies' instead.",
+      );
   });
 
   // An inline render function that declares what it reads skips re-renders
   // its parent causes for anything else.
-  const InlineList = () => {
+  const InlineList: FC<{ deprecatedProp?: boolean }> = ({ deprecatedProp }) => {
     const [selected, setSelected] = useState(false);
-    const [, setUnrelated] = useState(0);
+    const [unrelated, setUnrelated] = useState(0);
 
     return (
       <>
@@ -1041,13 +1071,16 @@ describe("Item rendering", () => {
           <ListStaticData<Data> data={selectableData} />
           <ListItem<Data>
             textValue={({ num }) => String(num)}
-            dependencies={[selected]}
+            {...(deprecatedProp
+              ? { dependencies: [selected] }
+              : { renderDependencies: [selected] })}
           >
             {({ num }) => {
               inlineRenderCount++;
               return (
                 <span>
-                  Item: {num} {selected ? "selected" : "unselected"}
+                  Item: {num} {selected ? "selected" : "unselected"} at{" "}
+                  {unrelated}
                 </span>
               );
             }}
@@ -1058,11 +1091,11 @@ describe("Item rendering", () => {
   };
   let inlineRenderCount = 0;
 
-  test("an inline render function with dependencies skips unrelated parent re-renders", async () => {
+  test("an inline render function with renderDependencies skips unrelated parent re-renders", async () => {
     inlineRenderCount = 0;
     await render(<InlineList />);
     await expect
-      .element(page.getByText("Item: 42 unselected"))
+      .element(page.getByText("Item: 42 unselected at 0"))
       .toBeInTheDocument();
     const before = inlineRenderCount;
 
@@ -1070,9 +1103,24 @@ describe("Item rendering", () => {
     await userEvent.click(page.getByRole("button", { name: "Bump" }));
     expect(inlineRenderCount).toBe(before);
 
-    await userEvent.click(page.getByText("Item: 42 unselected"));
+    await userEvent.click(page.getByText("Item: 42 unselected at 0"));
     await expect
-      .element(page.getByText("Item: 42 selected"))
+      .element(page.getByText("Item: 42 selected at 2"))
+      .toBeInTheDocument();
+  });
+
+  // The deprecated prop keeps its shipped meaning: it only adds to the render
+  // function's identity, so state it does not list still reaches the item.
+  test("an inline render function with deprecated dependencies follows state it does not list", async () => {
+    await render(<InlineList deprecatedProp />);
+    await expect
+      .element(page.getByText("Item: 42 unselected at 0"))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+
+    await expect
+      .element(page.getByText("Item: 42 unselected at 1"))
       .toBeInTheDocument();
   });
 });
@@ -1207,7 +1255,7 @@ describe("Table rows", () => {
             </TableHeader>
             <TableBody>
               <TableRow
-                dependencies={withDependencies ? [selected] : undefined}
+                renderDependencies={withDependencies ? [selected] : undefined}
                 className={rowClassFromCount ? `at-${count}` : rowClassName}
               >
                 <TableCell
@@ -1229,7 +1277,7 @@ describe("Table rows", () => {
   const bump = page.getByRole("button", { name: "Bump" });
   const select = page.getByRole("button", { name: "Select" });
 
-  test("a row with dependencies skips unrelated parent re-renders", async () => {
+  test("a row with renderDependencies skips unrelated parent re-renders", async () => {
     cellRenderCount = 0;
     await render(<TableList withDependencies />);
     await expect
@@ -1247,7 +1295,7 @@ describe("Table rows", () => {
       .toBeInTheDocument();
   });
 
-  test("a row with dependencies re-renders when a cell prop changes", async () => {
+  test("a row with renderDependencies re-renders when a cell prop changes", async () => {
     await render(<TableList withDependencies cellClassFromCount />);
     await expect
       .element(page.getByText("Row: 42 unselected"))
@@ -1258,7 +1306,7 @@ describe("Table rows", () => {
     await expect.poll(() => document.querySelector(".at-1")).not.toBeNull();
   });
 
-  test("a row with dependencies re-renders when a row prop changes", async () => {
+  test("a row with renderDependencies re-renders when a row prop changes", async () => {
     await render(<TableList withDependencies rowClassFromCount />);
     await expect
       .element(page.getByText("Row: 42 unselected"))
@@ -1277,7 +1325,7 @@ describe("Table rows", () => {
       .toHaveClass("custom", rowStyles.row, rowStyles.hasAction);
   });
 
-  test("a row without dependencies follows parent state", async () => {
+  test("a row without renderDependencies follows parent state", async () => {
     await render(<TableList />);
 
     await userEvent.click(select);

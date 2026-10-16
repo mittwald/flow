@@ -32,8 +32,8 @@ export interface ItemViewShape<T> {
   /**
    * Everything the render function reads besides the item's data.
    *
-   * With `dependencies`, an item re-renders only when its data or one of these
-   * values changes. The render function's identity no longer counts, so a
+   * With `renderDependencies`, an item re-renders only when its data or one of
+   * these values changes. The render function's identity no longer counts, so a
    * function written inline in JSX keeps the item from re-rendering on every
    * render of its parent. List every value it reads from outside the item,
    * including state read through the `list` argument — one left out keeps the
@@ -41,6 +41,12 @@ export interface ItemViewShape<T> {
    *
    * Without it, an item re-renders whenever its render function changes
    * identity, which an inline function does on every render of its parent.
+   */
+  renderDependencies?: DependencyList;
+  /**
+   * @deprecated Use `renderDependencies` instead. `dependencies` only adds to
+   *   the render function's identity, so an inline render function still
+   *   re-renders the item on every render of its parent.
    */
   dependencies?: DependencyList;
 }
@@ -55,6 +61,7 @@ export class ItemView<T> {
   public readonly showTiles?: boolean;
   public readonly showList?: boolean;
   public readonly tileMaxWidth: number;
+  public readonly renderDependencies?: DependencyList;
   public readonly dependencies?: DependencyList;
   private readonly renderFn?: RenderItemFn<T>;
   private lastComparison?: { other: ItemView<T>; result: boolean };
@@ -71,6 +78,7 @@ export class ItemView<T> {
       showTiles,
       showList = true,
       tileMaxWidth = 230,
+      renderDependencies,
       dependencies,
     } = shape;
     this.list = list;
@@ -83,6 +91,7 @@ export class ItemView<T> {
     this.showTiles = showTiles;
     this.showList = showList;
     this.tileMaxWidth = tileMaxWidth;
+    this.renderDependencies = renderDependencies;
     this.dependencies = dependencies;
   }
 
@@ -91,10 +100,11 @@ export class ItemView<T> {
 
   /**
    * Whether `other` would render the item holding `data` identically. The
-   * render function counts by its `dependencies` where given, otherwise by its
-   * identity. `textValue` and `href` count by what they return for `data`, so
-   * inline functions do not re-render the item. `defaultExpanded` is read on
-   * mount only, so it does not count at all.
+   * render function counts by its `renderDependencies` where given, otherwise
+   * by its identity and the deprecated `dependencies`. `textValue` and `href`
+   * count by what they return for `data`, so inline functions do not re-render
+   * the item. `defaultExpanded` is read on mount only, so it does not count at
+   * all.
    */
   public rendersSameFor(other: ItemView<T> | undefined, data: T): boolean {
     return (
@@ -113,9 +123,10 @@ export class ItemView<T> {
       this.lastComparison = {
         other,
         result:
-          this.dependencies || other.dependencies
-            ? isShallowEqual(this.dependencies, other.dependencies)
-            : this.renderFn === other.renderFn,
+          this.renderDependencies || other.renderDependencies
+            ? isShallowEqual(this.renderDependencies, other.renderDependencies)
+            : this.renderFn === other.renderFn &&
+              isShallowEqual(this.dependencies, other.dependencies),
       };
     }
     return this.lastComparison.result;

@@ -30,19 +30,19 @@ export interface TableRowShape<T>
   /**
    * Everything the cells' render functions read besides the row's data.
    *
-   * With `dependencies`, a row re-renders only when its data, one of these
-   * values, or a cell's props change. The render functions' identity does not
-   * count, so functions written inline in JSX keep the row from re-rendering on
-   * every render of its parent. List every value they read from outside the
-   * row, including state read through the `list` argument — one left out keeps
-   * the row on the value it last rendered.
+   * With `renderDependencies`, a row re-renders only when its data, one of
+   * these values, or a cell's props change. The render functions' identity does
+   * not count, so functions written inline in JSX keep the row from
+   * re-rendering on every render of its parent. List every value they read from
+   * outside the row, including state read through the `list` argument — one
+   * left out keeps the row on the value it last rendered.
    *
    * Row and cell props count by identity, so an inline `style` object or
    * callback on `List.TableRow` or `List.TableCell` re-renders every row.
    *
    * Without it, every row re-renders whenever the list does.
    */
-  dependencies?: DependencyList;
+  renderDependencies?: DependencyList;
 }
 
 /** Column */

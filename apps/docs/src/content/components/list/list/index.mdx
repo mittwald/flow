@@ -273,13 +273,16 @@ im JSX geschriebene Funktion tut das bei jedem Render ihrer Elternkomponente –
 State aus der umgebenden Komponente erreicht das Item damit von allein, aber
 jedes Item rendert auch dann neu, wenn sich an ihm nichts geändert hat.
 
-Mit `dependencies` listest du auf, was die Render-Funktion außer den Daten des
-Items liest. Das Item rendert dann nur noch neu, wenn sich seine Daten oder
+Mit `renderDependencies` listest du auf, was die Render-Funktion außer den Daten
+des Items liest. Das Item rendert dann nur noch neu, wenn sich seine Daten oder
 einer dieser Werte ändern – die Identität der Render-Funktion zählt nicht mehr.
 Das ist der schnelle Weg für große Listen:
 
 ```tsx
-<List.Item textValue={(domain) => domain.hostname} dependencies={[selected]}>
+<List.Item
+  textValue={(domain) => domain.hostname}
+  renderDependencies={[selected]}
+>
   {(domain) => (
     <DomainItem domain={domain} isSelected={selected.includes(domain.id)} />
   )}
@@ -292,15 +295,16 @@ Wert, mit dem es zuletzt gerendert wurde. Das gilt auch für eine Render-Funktio
 mit stabiler Identität – aus der Komponente herausgezogen, in `useCallback`
 gewrappt, oder sie liest aus einem externen Store.
 
-In der Tabellenansicht gilt dasselbe für `<List.TableRow />`: Mit `dependencies`
-rendert eine Zeile nur noch neu, wenn sich ihre Daten, einer dieser Werte oder
-die Props einer Zelle ändern. Ohne `dependencies` rendern alle Zeilen bei jedem
-Render der List neu. Die Props von Zeile und Zellen zählen über ihre Identität:
-Ein inline geschriebenes `style`-Objekt oder ein Callback an `<List.TableRow />`
-oder `<List.TableCell />` lässt jede Zeile neu rendern.
+In der Tabellenansicht gilt dasselbe für `<List.TableRow />`: Mit
+`renderDependencies` rendert eine Zeile nur noch neu, wenn sich ihre Daten,
+einer dieser Werte oder die Props einer Zelle ändern. Ohne `renderDependencies`
+rendern alle Zeilen bei jedem Render der List neu. Die Props von Zeile und
+Zellen zählen über ihre Identität: Ein inline geschriebenes `style`-Objekt oder
+ein Callback an `<List.TableRow />` oder `<List.TableCell />` lässt jede Zeile
+neu rendern.
 
 ```tsx
-<List.TableRow dependencies={[selected]}>
+<List.TableRow renderDependencies={[selected]}>
   <List.TableCell>{(domain) => domain.hostname}</List.TableCell>
   <List.TableCell>
     {(domain) => (selected.includes(domain.id) ? "Ausgewählt" : "")}
@@ -312,6 +316,10 @@ oder `<List.TableCell />` lässt jede Zeile neu rendern.
 dafür lösen kein Neurendern aus. Die List ruft immer das aktuelle `onAction` auf
 und vergleicht `textValue` und `href` über ihr Ergebnis. Beide laufen dafür bei
 jedem Render der List – halte sie günstig und frei von Seiteneffekten.
+
+`dependencies` an `<List.Item />` ist veraltet. Die Prop wirkt nur zusätzlich
+zur Identität der Render-Funktion – ersetze sie durch `renderDependencies` und
+liste dabei alles auf, was die Funktion liest.
 
 ---
 

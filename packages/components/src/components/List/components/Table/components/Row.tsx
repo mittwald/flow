@@ -46,7 +46,7 @@ const RowImpl = (props: Props) => {
 };
 
 // The list model is rebuilt on every render, so it cannot be compared by
-// identity. A row that declares `dependencies` re-renders only when its data,
+// identity. A row that declares `renderDependencies` re-renders only when its data,
 // those dependencies or a cell's props change — the cells' render functions
 // count by the dependencies. Without them, rows re-render with the list.
 export const Row = memo(

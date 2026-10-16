@@ -56,7 +56,7 @@ const ItemImpl = (props: Props) => {
 
 // The list model is rebuilt on every render, so it cannot be compared by
 // identity — but everything an item renders from it can. The render function
-// counts by its `dependencies`, or else by its identity: an inline one
+// counts by its `renderDependencies`, or else by its identity: an inline one
 // changes whenever the consumer re-renders, so parent state no longer leaves
 // an item frozen on the values it first saw (#3065), while loading more still
 // skips the re-render. `onAction` arrives as a stable invoker of the latest
