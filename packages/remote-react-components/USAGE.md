@@ -100,16 +100,21 @@ loses. Measured across all remote components:
 | `style`      | 38                  |
 | `controller` | 8                   |
 
-Plus a handful of one-offs (`components`, `componentProps`, `providerId`,
-`ref`).
+Plus a handful of one-offs (`components`, `componentProps`, `providerId`, `ref`,
+`inputRef`). Function props the host would have to call synchronously do not
+cross either: `Link`'s `linkComponent`, `MarkdownEditor`'s `markdownComponent`,
+`Markdown`'s `allowElement`, `urlTransform`, `rehypePlugins` and
+`remarkPlugins`, and `TranslationProvider`'s `translate` — pass `translations`
+instead.
 
 - **No `style`.** There is no inline-style escape hatch here. Layout comes from
   `Flex`, `Section` and `ColumnLayout` — the same rule as locally, but without a
   way around it.
 - **No `wrapWith`.** Compose instead.
-- **`className` does cross** (70 components keep it). It is the same escape
-  hatch as locally, and the same advice applies: reaching for it usually means a
-  Flow component already covers the case.
+- **`className` does cross** (70 components keep it), as a string — react-aria's
+  function form does not. It is the same escape hatch as locally, and the same
+  advice applies: reaching for it usually means a Flow component already covers
+  the case.
 - **`children` cross as element children**, not as a prop, so composition works
   exactly as usual.
 

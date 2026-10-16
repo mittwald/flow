@@ -664,8 +664,9 @@ where the error points.
   **Fix:** Either type the prop's return as `Promise<T> | T` and have the host
   `await` it (`ChartTooltip`'s formatters do), or drop it from the remote
   surface with `@flr-ignore-props` (`XAxis`/`YAxis` `tickFormatter` do) and
-  regenerate. `checkSerializableProps` now fails generation on new ones; the
-  pre-existing set is listed in `acknowledgedValueReturningProps`
+  regenerate. `checkSerializableProps` now fails generation on new ones, also
+  behind a type alias or a component type; the pre-existing set is listed in
+  `acknowledgedValueReturningProps`
 
 - **Symptom:** A `components` browser test keeps **passing** after you change
   `packages/icons` — including a test written to fail on exactly that change.

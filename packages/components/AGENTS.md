@@ -200,19 +200,24 @@ Remote generation details:
   keep the prop off the remote surface with `@flr-ignore-props` (`XAxis`/`YAxis`
   `tickFormatter`). A host that reads the result synchronously gets the Promise
   itself — recharts concatenated it into every tick as `[object Promise]`.
-  `checkSerializableProps` fails generation on a new one; the pre-existing set
-  is listed in `acknowledgedValueReturningProps`, which can neither grow nor go
-  stale.
+  `checkSerializableProps` fails generation on a new one. It reads the
+  TypeScript type, not the printed name, so a function behind an alias
+  (`UrlTransform`), a component type (`ComponentType<…>`) or a list of functions
+  (`PluggableList`) counts too. The pre-existing set is listed in
+  `acknowledgedValueReturningProps`; props whose plain-data form is the remote
+  contract and whose function form never crossed (`className`, `elementType`,
+  recharts' `scale`) in `acknowledgedFunctionAlternativeProps`. Neither list can
+  grow or go stale.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
-  `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
-  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
-  `renderEmptyState` plus react-aria's `render` because the host would call them
-  and get rendered output back — neither was ever a deliberate Flow API, and
-  both cost the whole mutation batch when they were tried. Use the per-component
-  tag for additional cases (see `TunnelEntry.tsx`).
+  `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `inputRef`,
+  `controller`, `tunnel`, `key`, `children`, `wrapWith` because they don't
+  serialize; and `renderEmptyState` plus react-aria's `render` because the host
+  would call them and get rendered output back — neither was ever a deliberate
+  Flow API, and both cost the whole mutation batch when they were tried. Use the
+  per-component tag for additional cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
