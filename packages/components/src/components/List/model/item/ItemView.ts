@@ -84,19 +84,21 @@ export class ItemView<T> {
     createElement("pre", undefined, JSON.stringify(item));
 
   /**
-   * Whether `other` would render this item identically — i.e. all render
-   * functions taken from the consumer's `ListItem` element are still the same,
-   * and the dependencies it declared have not changed.
+   * Whether `other` would render the item holding `data` identically: the
+   * render function taken from the consumer's `ListItem` element is still the
+   * same, and the dependencies it declared have not changed. `textValue` and
+   * `href` count by what they return for `data`, so inline functions do not
+   * re-render the item. `defaultExpanded` is read on mount only, so it does not
+   * count at all.
    */
-  public rendersSameAs(other?: ItemView<T>): boolean {
+  public rendersSameFor(other: ItemView<T> | undefined, data: T): boolean {
     return (
       !!other &&
       dependenciesAreEqual(this.dependencies, other.dependencies) &&
       this.renderFn === other.renderFn &&
-      this.textValue === other.textValue &&
-      this.href === other.href &&
-      this.target === other.target &&
-      this.defaultExpanded === other.defaultExpanded
+      this.textValue?.(data) === other.textValue?.(data) &&
+      this.href?.(data) === other.href?.(data) &&
+      this.target === other.target
     );
   }
 

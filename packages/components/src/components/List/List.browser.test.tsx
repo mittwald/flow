@@ -9,7 +9,13 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { use, useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  use,
+  useState,
+  useSyncExternalStore,
+  type FC,
+  type ReactNode,
+} from "react";
 import { test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { RouterProvider } from "react-aria-components";
@@ -1018,6 +1024,87 @@ describe("Item rendering", () => {
     await userEvent.click(page.getByText("Item: 42 selected"));
     await expect
       .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+  });
+});
+
+describe("Inline item callbacks", () => {
+  const data: Data[] = [{ num: 42 }];
+
+  // Hoisted, so only the inline callbacks below change on a parent re-render.
+  let renderCount = 0;
+  const renderItem = ({ num }: Data) => {
+    renderCount++;
+    return <span>Item: {num}</span>;
+  };
+
+  const ParentWithState: FC<{
+    onAction?: (num: number, count: number) => void;
+    labelWithCount?: boolean;
+    withHref?: boolean;
+  }> = ({ onAction, labelWithCount, withHref }) => {
+    const [count, setCount] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setCount((c) => c + 1)}>Bump</button>
+        <List
+          aria-label="Test"
+          onAction={({ num }: Data) => onAction?.(num, count)}
+        >
+          <ListStaticData<Data> data={data} />
+          <ListItem<Data>
+            textValue={({ num }) =>
+              labelWithCount ? `${num} at ${count}` : String(num)
+            }
+            href={
+              withHref
+                ? ({ num }) => `${location.origin}/domains/${num}`
+                : undefined
+            }
+          >
+            {renderItem}
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+
+  const bump = page.getByRole("button", { name: "Bump" });
+
+  test("a parent re-render does not re-render items for new inline callbacks", async () => {
+    renderCount = 0;
+    await render(<ParentWithState withHref />);
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+    const before = renderCount;
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+
+    expect(renderCount).toBe(before);
+  });
+
+  test("the latest onAction is called after a parent re-render", async () => {
+    const onAction = vitest.fn();
+    await render(<ParentWithState onAction={onAction} />);
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    await userEvent.click(page.getByText("Item: 42"));
+
+    expect(onAction).toHaveBeenCalledExactlyOnceWith(42, 2);
+  });
+
+  test("an inline textValue still updates the item", async () => {
+    await render(<ParentWithState labelWithCount />);
+    await expect
+      .element(page.getByRole("row", { name: "42 at 0" }))
+      .toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect
+      .element(page.getByRole("row", { name: "42 at 1" }))
       .toBeInTheDocument();
   });
 });
