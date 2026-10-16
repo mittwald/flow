@@ -7,6 +7,7 @@ import {
   resolveRange,
   type RangeDeps,
 } from "../resolve/range.js";
+import type { StayedWithin } from "../resolve/target.js";
 import type { ParsedCommand } from "./args.js";
 import { renderPeers } from "./peers.js";
 import { painter, wrap, type Painter, type Tone } from "./text.js";
@@ -17,8 +18,17 @@ export interface RenderListInput {
    * The version range to show migrations for. Both bounds always arrive
    * together — there is no partial range — so omitting it entirely is what
    * lists the whole catalogue.
+   *
+   * `revision` and `stayedWithin` are what produced the range rather than the
+   * range itself, and both are optional because `upgrade`'s by-hand section
+   * renders a range it has already described in its own words.
    */
-  range?: { from: string; to: string };
+  range?: {
+    from: string;
+    to: string;
+    revision?: string;
+    stayedWithin?: StayedWithin;
+  };
   json: boolean;
   /**
    * The peer ranges the Flow packages declare at `range.to`, from
@@ -141,6 +151,29 @@ const field = (
 const isCatchUp = (entry: CatalogEntry, current: string | undefined): boolean =>
   current !== undefined && lte(entry.since, current);
 
+/**
+ * "no newer major is published — `major` resolved inside 1.x", or "".
+ *
+ * A keyword that offers to cross a boundary and finds nothing above it resolves
+ * to the same version the narrower keyword does, and says nothing about it. A
+ * reader running `list minor` and `list major` then sees two identical reports
+ * and no way to tell that they are one target, not two — which is how three
+ * options get presented where there are two (#3117). See `StayedWithin`.
+ */
+export const describeStayedWithin = (
+  range: NonNullable<RenderListInput["range"]>,
+): string => {
+  if (range.stayedWithin === undefined) {
+    return "";
+  }
+  const parts = range.to.split(".");
+  const boundary = `${parts
+    .slice(0, range.stayedWithin === "major" ? 1 : 2)
+    .join(".")}.x`;
+  const revision = range.revision ?? range.stayedWithin;
+  return `no newer ${range.stayedWithin} is published — "${revision}" resolved inside ${boundary}, the same target the narrower revision reaches`;
+};
+
 const renderEntry = (
   entry: CatalogEntry,
   width: number,
@@ -212,12 +245,16 @@ const renderContext = (
     isCatchUp(entry, range.from),
   ).length;
 
-  const rangeText =
+  const rangeText = [
     range.from === range.to
       ? catchUpCount > 0
         ? `nothing newer than ${range.to}; entries below are catch-up`
         : `nothing newer than ${range.to}`
-      : `from ${range.from} to ${range.to}`;
+      : `from ${range.from} to ${range.to}`,
+    describeStayedWithin(range),
+  ]
+    .filter((line) => line !== "")
+    .join("\n");
 
   if (catchUpCount === 0) {
     return rangeText;
@@ -314,7 +351,15 @@ export const renderList = ({
         range:
           range === undefined
             ? null
-            : { current: range.from, target: range.to },
+            : {
+                current: range.from,
+                target: range.to,
+                revision: range.revision ?? null,
+                // The one thing two `list` runs cannot tell a reader apart by
+                // themselves: whether `major` actually crossed a major or
+                // landed on the same release `minor` did (#3117).
+                stayedWithin: range.stayedWithin ?? null,
+              },
         migrations: selected.map((entry) => ({
           ...entry,
           catchUp: isCatchUp(entry, range?.from),
@@ -434,7 +479,12 @@ export const runList = async (
   deps.write(
     renderList({
       entries: allEntries,
-      range: { from: resolved.current, to: resolved.target },
+      range: {
+        from: resolved.current,
+        to: resolved.target,
+        revision,
+        stayedWithin: resolved.stayedWithin,
+      },
       json: parsed.json,
       peers: resolved.peers,
       color: deps.color,

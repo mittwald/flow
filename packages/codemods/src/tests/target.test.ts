@@ -84,6 +84,55 @@ describe("resolveTarget", () => {
     expect(resolve("major", "0.2.0-alpha.646")).toBe("2.1.0");
   });
 
+  // #3117: the prompt in the upgrade docs claimed `major` fails when no next
+  // major exists. It does not — `keywordRange` gives it `*`, so it resolves to
+  // whatever `minor` resolves to and exits 0, saying nothing about it. A reader
+  // comparing `list minor` against `list major` then sees two identical reports
+  // and presents three targets where there are two.
+  describe("a keyword that did not cross the boundary it offered to", () => {
+    const stayedWithin = (
+      revision: string,
+      current = "1.0.1",
+    ): string | undefined => {
+      const outcome = result(revision, current);
+      return outcome.ok ? outcome.stayedWithin : undefined;
+    };
+
+    test("major reports it when nothing above the current major is published", () => {
+      // Only 1.x in this fixture, so `major` lands inside it.
+      const outcome = resolveTarget({
+        revision: "major",
+        current: "1.0.1",
+        versions: ["1.0.1", "1.1.12"],
+        distTags: {},
+      });
+      expect(outcome).toEqual({
+        ok: true,
+        target: "1.1.12",
+        stayedWithin: "major",
+      });
+    });
+
+    test("major says nothing when it really crossed", () => {
+      expect(stayedWithin("major")).toBeUndefined();
+      expect(resolve("major")).toBe("2.1.0");
+    });
+
+    test("minor reports it when the newest release is on the current minor", () => {
+      expect(stayedWithin("patch", "1.2.0")).toBeUndefined();
+      expect(stayedWithin("minor", "1.2.0")).toBe("minor");
+    });
+
+    test("patch never reports it — it never offered to cross anything", () => {
+      expect(stayedWithin("patch")).toBeUndefined();
+    });
+
+    test("an exact version and a dist-tag never report it", () => {
+      expect(stayedWithin("1.1.0")).toBeUndefined();
+      expect(stayedWithin("latest")).toBeUndefined();
+    });
+  });
+
   describe("the reason a revision does not resolve", () => {
     // versions/distTags above never leave `0.x` in prerelease-only shape, so
     // this suite uses its own fixture: a project on a `0.x` prerelease line
