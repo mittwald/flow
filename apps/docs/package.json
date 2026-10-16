@@ -65,7 +65,7 @@
   "devDependencies": {
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "~16.3.2",
+    "@next/eslint-plugin-next": "~16.4.0",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2",
     "@types/react-dom": "^19.2",
