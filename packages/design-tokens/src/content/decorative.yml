@@ -1,40 +1,40 @@
 decorative:
   # Blue
   blue-background-color:
-    value: "{color.hosting-blue.200}"
+    value: "{decorative-blue.color.quiet.100}"
   blue-content-accent-color:
-    value: "{color.hosting-blue.800}"
+    value: "{decorative-blue.color.strong.100}"
   blue-content-color:
-    value: "{color.hosting-blue.1000}"
+    value: "{decorative-blue.color.strong.300}"
 
   # Teal
   teal-background-color:
-    value: "{color.super-teal.200}"
+    value: "{decorative-green.color.quiet.100}"
   teal-content-accent-color:
-    value: "{color.super-teal.800}"
+    value: "{decorative-green.color.strong.100}"
   teal-content-color:
-    value: "{color.super-teal.1000}"
+    value: "{decorative-green.color.strong.300}"
 
   # Green
   green-background-color:
-    value: "{color.espelkamp-green.200}"
+    value: "{success.color.quiet.100}"
   green-content-accent-color:
-    value: "{color.espelkamp-green.800}"
+    value: "{success.color.strong.100}"
   green-content-color:
-    value: "{color.espelkamp-green.1000}"
+    value: "{success.color.strong.300}"
 
   # Violet
   violet-background-color:
-    value: "{color.soft-contrast-violet.200}"
+    value: "{decorative-lilac.color.quiet.100}"
   violet-content-accent-color:
-    value: "{color.soft-contrast-violet.800}"
+    value: "{decorative-lilac.color.strong.100}"
   violet-content-color:
-    value: "{color.soft-contrast-violet.1000}"
+    value: "{decorative-lilac.color.strong.300}"
 
   # Lilac
   lilac-background-color:
-    value: "{color.bright-lilac.200}"
+    value: "{decorative-lilac.color.quiet.100}"
   lilac-content-accent-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.strong.100}"
   lilac-content-color:
-    value: "{color.bright-lilac.1000}"
+    value: "{decorative-lilac.color.strong.300}"

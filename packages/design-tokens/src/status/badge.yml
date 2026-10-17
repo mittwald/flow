@@ -20,222 +20,222 @@ badge:
 
   # Neutral
   neutral-border-color:
-    value: "{color.gray.800}"
+    value: "{neutral.color.strong.100}"
   neutral-background-color:
     default:
-      value: "{color.gray.300}"
+      value: "{neutral.color.quiet.100}"
     hover:
-      value: "{color.gray.400}"
+      value: "{neutral.color.quiet.200}"
     pressed:
-      value: "{color.gray.500}"
+      value: "{neutral.color.quiet.300}"
   neutral-content-color:
-    value: "{color.gray.900}"
+    value: "{neutral.color.strong.200}"
   neutral-scope-background-color:
-    value: "{color.gray.800}"
+    value: "{neutral.color.strong.100}"
   neutral-scope-content-color:
     value: "{text.color.light}"
 
   # Blue
   blue-border-color:
-    value: "{color.hosting-blue.800}"
+    value: "{decorative-blue.color.strong.100}"
   blue-background-color:
     default:
-      value: "{color.hosting-blue.100}"
+      value: "{decorative-blue.color.quiet.100}"
     hover:
-      value: "{color.hosting-blue.200}"
+      value: "{decorative-blue.color.quiet.200}"
     pressed:
-      value: "{color.hosting-blue.300}"
+      value: "{decorative-blue.color.quiet.300}"
   blue-content-color:
-    value: "{color.hosting-blue.900}"
+    value: "{decorative-blue.color.strong.200}"
   blue-scope-background-color:
-    value: "{color.hosting-blue.800}"
+    value: "{decorative-blue.color.strong.100}"
   blue-scope-content-color:
     value: "{text.color.light}"
 
   # Navy
   navy-border-color:
-    value: "{color.mittwald-navy.800}"
+    value: "{decorative-navy.color.strong.100}"
   navy-background-color:
     default:
-      value: "{color.mittwald-navy.100}"
+      value: "{decorative-navy.color.quiet.100}"
     hover:
-      value: "{color.mittwald-navy.200}"
+      value: "{decorative-navy.color.quiet.200}"
     pressed:
-      value: "{color.mittwald-navy.300}"
+      value: "{decorative-navy.color.quiet.300}"
   navy-content-color:
-    value: "{color.mittwald-navy.900}"
+    value: "{decorative-navy.color.strong.200}"
   navy-scope-background-color:
-    value: "{color.mittwald-navy.800}"
+    value: "{decorative-navy.color.strong.100}"
   navy-scope-content-color:
     value: "{text.color.light}"
 
   # Violet
   violet-border-color:
-    value: "{color.soft-contrast-violet.800}"
+    value: "{decorative-lilac.color.strong.100}"
   violet-background-color:
     default:
-      value: "{color.soft-contrast-violet.100}"
+      value: "{decorative-lilac.color.quiet.100}"
     hover:
-      value: "{color.soft-contrast-violet.200}"
+      value: "{decorative-lilac.color.quiet.200}"
     pressed:
-      value: "{color.soft-contrast-violet.300}"
+      value: "{decorative-lilac.color.quiet.300}"
   violet-content-color:
-    value: "{color.soft-contrast-violet.900}"
+    value: "{decorative-lilac.color.strong.200}"
   violet-scope-background-color:
-    value: "{color.soft-contrast-violet.800}"
+    value: "{decorative-lilac.color.strong.100}"
   violet-scope-content-color:
     value: "{text.color.light}"
 
   # Teal
   teal-border-color:
-    value: "{color.super-teal.800}"
+    value: "{decorative-green.color.strong.100}"
   teal-background-color:
     default:
-      value: "{color.super-teal.100}"
+      value: "{decorative-green.color.quiet.100}"
     hover:
-      value: "{color.super-teal.200}"
+      value: "{decorative-green.color.quiet.200}"
     pressed:
-      value: "{color.super-teal.300}"
+      value: "{decorative-green.color.quiet.300}"
   teal-content-color:
-    value: "{color.super-teal.900}"
+    value: "{decorative-green.color.strong.200}"
   teal-scope-background-color:
-    value: "{color.super-teal.800}"
+    value: "{decorative-green.color.strong.100}"
   teal-scope-content-color:
     value: "{text.color.light}"
 
   # Lilac
   lilac-border-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.strong.100}"
   lilac-background-color:
     default:
-      value: "{color.bright-lilac.100}"
+      value: "{decorative-lilac.color.quiet.100}"
     hover:
-      value: "{color.bright-lilac.200}"
+      value: "{decorative-lilac.color.quiet.200}"
     pressed:
-      value: "{color.bright-lilac.300}"
+      value: "{decorative-lilac.color.quiet.300}"
   lilac-content-color:
-    value: "{color.bright-lilac.900}"
+    value: "{decorative-lilac.color.strong.200}"
   lilac-scope-background-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.strong.100}"
   lilac-scope-content-color:
     value: "{text.color.light}"
 
   # Red
   red-border-color:
-    value: "{color.amaranth-red.800}"
+    value: "{danger.color.strong.100}"
   red-background-color:
     default:
-      value: "{color.amaranth-red.100}"
+      value: "{danger.color.quiet.100}"
     hover:
-      value: "{color.amaranth-red.200}"
+      value: "{danger.color.quiet.200}"
     pressed:
-      value: "{color.amaranth-red.300}"
+      value: "{danger.color.quiet.300}"
   red-content-color:
-    value: "{color.amaranth-red.900}"
+    value: "{danger.color.strong.200}"
   red-scope-background-color:
-    value: "{color.amaranth-red.800}"
+    value: "{danger.color.strong.100}"
   red-scope-content-color:
     value: "{text.color.light}"
 
   # Green
   green-border-color:
-    value: "{color.espelkamp-green.800}"
+    value: "{success.color.strong.100}"
   green-background-color:
     default:
-      value: "{color.espelkamp-green.100}"
+      value: "{success.color.quiet.100}"
     hover:
-      value: "{color.espelkamp-green.200}"
+      value: "{success.color.quiet.200}"
     pressed:
-      value: "{color.espelkamp-green.300}"
+      value: "{success.color.quiet.300}"
   green-content-color:
-    value: "{color.espelkamp-green.900}"
+    value: "{success.color.strong.200}"
   green-scope-background-color:
-    value: "{color.espelkamp-green.800}"
+    value: "{success.color.strong.100}"
   green-scope-content-color:
     value: "{text.color.light}"
 
   # Orange
   orange-border-color:
-    value: "{color.royal-orange.900}"
+    value: "{warning.color.strong.200}"
   orange-background-color:
     default:
-      value: "{color.royal-orange.100}"
+      value: "{warning.color.quiet.100}"
     hover:
-      value: "{color.royal-orange.200}"
+      value: "{warning.color.quiet.200}"
     pressed:
-      value: "{color.royal-orange.300}"
+      value: "{warning.color.quiet.300}"
   orange-content-color:
-    value: "{color.royal-orange.900}"
+    value: "{warning.color.strong.200}"
   orange-scope-background-color:
-    value: "{color.royal-orange.900}"
+    value: "{warning.color.strong.200}"
   orange-scope-content-color:
     value: "{text.color.light}"
 
   # Dark
   dark-border-color:
-    value: "{dark.color.800}"
+    value: "{dark.color.strong.100}"
   dark-background-color:
     default:
-      value: "{dark.color.100}"
+      value: "{dark.color.quiet.100}"
     hover:
-      value: "{dark.color.200}"
+      value: "{dark.color.quiet.200}"
     pressed:
-      value: "{dark.color.300}"
+      value: "{dark.color.quiet.300}"
   dark-content-color:
-    value: "{dark.color.800}"
+    value: "{dark.color.strong.100}"
   dark-scope-background-color:
-    value: "{dark.color.800}"
+    value: "{dark.color.strong.100}"
   dark-scope-content-color:
     value: "{text.color.light}"
 
   # Light
   light-border-color:
-    value: "{light.color.800}"
+    value: "{light.color.strong.100}"
   light-background-color:
     default:
-      value: "{light.color.100}"
+      value: "{light.color.quiet.100}"
     hover:
-      value: "{light.color.200}"
+      value: "{light.color.quiet.200}"
     pressed:
-      value: "{light.color.300}"
+      value: "{light.color.quiet.300}"
   light-content-color:
-    value: "{light.color.800}"
+    value: "{light.color.strong.100}"
   light-scope-background-color:
-    value: "{light.color.800}"
+    value: "{light.color.strong.100}"
   light-scope-content-color:
     value: "{text.color.dark}"
 
   # Dark Static
   dark-static-border-color:
-    value: "{dark-static.color.800}"
+    value: "{dark-static.color.strong.100}"
   dark-static-background-color:
     default:
-      value: "{dark-static.color.100}"
+      value: "{dark-static.color.quiet.100}"
     hover:
-      value: "{dark-static.color.200}"
+      value: "{dark-static.color.quiet.200}"
     pressed:
-      value: "{dark-static.color.300}"
+      value: "{dark-static.color.quiet.300}"
   dark-static-content-color:
-    value: "{dark-static.color.800}"
+    value: "{dark-static.color.strong.100}"
   dark-static-scope-background-color:
-    value: "{dark-static.color.800}"
+    value: "{dark-static.color.strong.100}"
   dark-static-scope-content-color:
     value: "{text.color.light-static}"
 
   # Light Static
   light-static-border-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   light-static-background-color:
     default:
-      value: "{light-static.color.100}"
+      value: "{light-static.color.quiet.100}"
     hover:
-      value: "{light-static.color.200}"
+      value: "{light-static.color.quiet.200}"
     pressed:
-      value: "{light-static.color.300}"
+      value: "{light-static.color.quiet.300}"
   light-static-content-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   light-static-scope-background-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   light-static-scope-content-color:
     value: "{text.color.dark-static}"
 

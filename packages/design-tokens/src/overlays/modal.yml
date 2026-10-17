@@ -8,7 +8,7 @@ modal:
   tray-top-spacing:
     value: "{size-px.m}"
   background-color:
-    value: "{neutral.color.100}"
+    value: "{elevation.color.100}"
   size:
     s:
       value: 660px
@@ -17,9 +17,9 @@ modal:
     l:
       value: 1300px
   footer-background-color:
-    value: "{neutral.color.200}"
+    value: "{elevation.color.200}"
   border-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.quiet.100}"
   border-width:
     value: "{border-width.100}"
   border-style:

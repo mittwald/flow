@@ -10,54 +10,54 @@ link:
 
   color:
     default:
-      value: "{primary.color.800}"
+      value: "{primary.color.strong.100}"
     hover:
-      value: "{primary.color.900}"
+      value: "{primary.color.strong.200}"
     pressed:
-      value: "{primary.color.1000}"
+      value: "{primary.color.strong.300}"
     disabled:
       value: "{disabled-plain-content-color}"
 
   # Dark
   color-dark:
     default:
-      value: "{dark.color.800}"
+      value: "{dark.color.strong.100}"
     hover:
-      value: "{dark.color.700}"
+      value: "{dark.color.strong.200}"
     pressed:
-      value: "{dark.color.600}"
+      value: "{dark.color.strong.300}"
     disabled:
       value: "{disabled-plain-dark-content-color}"
 
   # Light
   color-light:
     default:
-      value: "{light.color.800}"
+      value: "{light.color.strong.100}"
     hover:
-      value: "{light.color.700}"
+      value: "{light.color.strong.200}"
     pressed:
-      value: "{light.color.600}"
+      value: "{light.color.strong.300}"
     disabled:
       value: "{disabled-plain-light-content-color}"
 
   # Dark Static
   color-dark-static:
     default:
-      value: "{dark-static.color.800}"
+      value: "{dark-static.color.strong.100}"
     hover:
-      value: "{dark-static.color.700}"
+      value: "{dark-static.color.strong.200}"
     pressed:
-      value: "{dark-static.color.600}"
+      value: "{dark-static.color.strong.300}"
     disabled:
       value: "{disabled-plain-dark-static-content-color}"
 
   # Light Static
   color-light-static:
     default:
-      value: "{light-static.color.800}"
+      value: "{light-static.color.strong.100}"
     hover:
-      value: "{light-static.color.700}"
+      value: "{light-static.color.strong.200}"
     pressed:
-      value: "{light-static.color.600}"
+      value: "{light-static.color.strong.300}"
     disabled:
       value: "{disabled-plain-light-static-content-color}"

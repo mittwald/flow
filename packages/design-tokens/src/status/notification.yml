@@ -10,7 +10,7 @@ notification:
   border-width:
     value: "{border-width.100}"
   border-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.quiet.100}"
   box-shadow:
     value: "{shadow.overlay}"
   width:
@@ -32,7 +32,7 @@ notification:
     value: "{info-outline-content-color}"
   info-background-color:
     default:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
     hover:
       value: "{info-outline-background-color.hover}"
     pressed:
@@ -45,7 +45,7 @@ notification:
     value: "{warning-outline-content-color}"
   warning-background-color:
     default:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
     hover:
       value: "{warning-outline-background-color.hover}"
     pressed:
@@ -58,7 +58,7 @@ notification:
     value: "{danger-outline-content-color}"
   danger-background-color:
     default:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
     hover:
       value: "{danger-outline-background-color.hover}"
     pressed:
@@ -71,7 +71,7 @@ notification:
     value: "{success-outline-content-color}"
   success-background-color:
     default:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
     hover:
       value: "{success-outline-background-color.hover}"
     pressed:
@@ -84,7 +84,7 @@ notification:
     value: "{unavailable-outline-content-color}"
   unavailable-background-color:
     default:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
     hover:
       value: "{unavailable-outline-background-color.hover}"
     pressed:

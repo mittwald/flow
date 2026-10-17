@@ -24,6 +24,6 @@ file-drop-zone:
     default:
       value: "{form-control.border-color.default}"
     target:
-      value: "{primary.color.800}"
+      value: "{primary.color.strong.100}"
     disabled:
       value: "{disabled-outline-border-color}"

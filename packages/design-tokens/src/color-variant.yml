@@ -1,0 +1,642 @@
+# Variant tier (ADR 0007): pairs of Semantic colors per variant. References
+# Semantic only.
+
+# Primary Solid
+primary-solid-background-color:
+  default:
+    value: "{primary.color.strong.100}"
+  hover:
+    value: "{primary.color.strong.200}"
+  pressed:
+    value: "{primary.color.strong.300}"
+primary-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Primary Plain
+primary-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{primary.color.quiet.100}"
+  pressed:
+    value: "{primary.color.quiet.200}"
+  selected:
+    value: "{primary.color.quiet.100}"
+primary-plain-content-color:
+  value: "{primary.color.strong.100}"
+
+# Primary Soft
+primary-soft-background-color:
+  default:
+    value: "{primary.color.quiet.100}"
+  hover:
+    value: "{primary.color.quiet.200}"
+  pressed:
+    value: "{primary.color.quiet.300}"
+primary-soft-content-color:
+  value: "{primary.color.strong.200}"
+
+# Primary Outline
+primary-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{primary.color.quiet.100}"
+  pressed:
+    value: "{primary.color.quiet.200}"
+  selected:
+    value: "{primary.color.quiet.100}"
+primary-outline-content-color:
+  value: "{primary.color.strong.200}"
+primary-outline-border-color:
+  value: "{primary.color.strong.100}"
+
+# Danger Solid
+danger-solid-background-color:
+  default:
+    value: "{danger.color.strong.100}"
+  hover:
+    value: "{danger.color.strong.200}"
+  pressed:
+    value: "{danger.color.strong.300}"
+danger-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Danger Plain
+danger-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{danger.color.quiet.100}"
+  pressed:
+    value: "{danger.color.quiet.200}"
+  selected:
+    value: "{danger.color.quiet.100}"
+danger-plain-content-color:
+  value: "{danger.color.strong.100}"
+
+# Danger Outline
+danger-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{danger.color.quiet.100}"
+  pressed:
+    value: "{danger.color.quiet.200}"
+  selected:
+    value: "{danger.color.quiet.100}"
+danger-outline-content-color:
+  value: "{danger.color.strong.200}"
+danger-outline-border-color:
+  value: "{danger.color.strong.100}"
+
+# Danger Soft
+danger-soft-background-color:
+  default:
+    value: "{danger.color.quiet.100}"
+  hover:
+    value: "{danger.color.quiet.200}"
+  pressed:
+    value: "{danger.color.quiet.300}"
+danger-soft-content-color:
+  value: "{danger.color.strong.200}"
+
+# Info Solid
+info-solid-background-color:
+  default:
+    value: "{info.color.strong.100}"
+  hover:
+    value: "{info.color.strong.200}"
+  pressed:
+    value: "{info.color.strong.300}"
+info-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Info Outline
+info-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{info.color.quiet.100}"
+  pressed:
+    value: "{info.color.quiet.200}"
+  selected:
+    value: "{info.color.quiet.100}"
+info-outline-content-color:
+  value: "{info.color.strong.200}"
+info-outline-border-color:
+  value: "{info.color.strong.100}"
+
+# Info Soft
+info-soft-background-color:
+  default:
+    value: "{info.color.quiet.100}"
+  hover:
+    value: "{info.color.quiet.200}"
+  pressed:
+    value: "{info.color.quiet.300}"
+info-soft-content-color:
+  value: "{info.color.strong.200}"
+
+# Info Plain
+info-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{info.color.quiet.100}"
+  pressed:
+    value: "{info.color.quiet.200}"
+  selected:
+    value: "{info.color.quiet.100}"
+info-plain-content-color:
+  value: "{info.color.strong.100}"
+
+# Success Solid
+success-solid-background-color:
+  default:
+    value: "{success.color.strong.100}"
+  hover:
+    value: "{success.color.strong.200}"
+  pressed:
+    value: "{success.color.strong.300}"
+success-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Success Plain
+success-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{success.color.quiet.100}"
+  pressed:
+    value: "{success.color.quiet.200}"
+  selected:
+    value: "{success.color.quiet.100}"
+success-plain-content-color:
+  value: "{success.color.strong.100}"
+
+# Success Outline
+success-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{success.color.quiet.100}"
+  pressed:
+    value: "{success.color.quiet.200}"
+  selected:
+    value: "{success.color.quiet.100}"
+success-outline-content-color:
+  value: "{success.color.strong.200}"
+success-outline-border-color:
+  value: "{success.color.strong.100}"
+
+# Success Soft
+success-soft-background-color:
+  default:
+    value: "{success.color.quiet.100}"
+  hover:
+    value: "{success.color.quiet.200}"
+  pressed:
+    value: "{success.color.quiet.300}"
+success-soft-content-color:
+  value: "{success.color.strong.200}"
+
+# Warning Solid
+warning-solid-background-color:
+  default:
+    value: "{warning.color.strong.100}"
+  hover:
+    value: "{warning.color.strong.200}"
+  pressed:
+    value: "{warning.color.strong.300}"
+warning-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Warning Outline
+warning-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{warning.color.quiet.100}"
+  pressed:
+    value: "{warning.color.quiet.200}"
+  selected:
+    value: "{warning.color.quiet.100}"
+warning-outline-content-color:
+  value: "{warning.color.strong.200}"
+warning-outline-border-color:
+  value: "{warning.color.strong.100}"
+
+# Warning Soft
+warning-soft-background-color:
+  default:
+    value: "{warning.color.quiet.100}"
+  hover:
+    value: "{warning.color.quiet.200}"
+  pressed:
+    value: "{warning.color.quiet.300}"
+warning-soft-content-color:
+  value: "{warning.color.strong.200}"
+
+# Warning Plain
+warning-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{warning.color.quiet.100}"
+  pressed:
+    value: "{warning.color.quiet.200}"
+  selected:
+    value: "{warning.color.quiet.100}"
+warning-plain-content-color:
+  value: "{warning.color.strong.100}"
+
+# Unavailable Solid
+unavailable-solid-background-color:
+  default:
+    value: "{unavailable.color.strong.100}"
+  hover:
+    value: "{unavailable.color.strong.200}"
+  pressed:
+    value: "{unavailable.color.strong.300}"
+unavailable-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Unavailable Plain
+unavailable-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{unavailable.color.quiet.100}"
+  pressed:
+    value: "{unavailable.color.quiet.200}"
+  selected:
+    value: "{unavailable.color.quiet.100}"
+unavailable-plain-content-color:
+  value: "{unavailable.color.strong.100}"
+
+# Unavailable Outline
+unavailable-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{unavailable.color.quiet.100}"
+  pressed:
+    value: "{unavailable.color.quiet.200}"
+  selected:
+    value: "{unavailable.color.quiet.100}"
+unavailable-outline-content-color:
+  value: "{unavailable.color.strong.200}"
+unavailable-outline-border-color:
+  value: "{unavailable.color.strong.100}"
+
+# Unavailable Soft
+unavailable-soft-background-color:
+  default:
+    value: "{unavailable.color.quiet.100}"
+  hover:
+    value: "{unavailable.color.quiet.200}"
+  pressed:
+    value: "{unavailable.color.quiet.300}"
+unavailable-soft-content-color:
+  value: "{unavailable.color.strong.200}"
+
+# Neutral Solid
+neutral-solid-background-color:
+  default:
+    value: "{neutral.color.strong.100}"
+  hover:
+    value: "{neutral.color.strong.200}"
+  pressed:
+    value: "{neutral.color.strong.300}"
+neutral-solid-content-color:
+  value: "{content.color.inverse}"
+
+# Neutral Plain
+neutral-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{neutral.color.quiet.100}"
+  pressed:
+    value: "{neutral.color.quiet.200}"
+  selected:
+    value: "{neutral.color.quiet.100}"
+neutral-plain-content-color:
+  value: "{neutral.color.strong.100}"
+
+# Neutral Outline
+neutral-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{neutral.color.quiet.100}"
+  selected:
+    value: "{neutral.color.quiet.100}"
+  pressed:
+    value: "{neutral.color.quiet.200}"
+neutral-outline-content-color:
+  value: "{neutral.color.strong.200}"
+neutral-outline-border-color:
+  value: "{neutral.color.strong.100}"
+
+# Neutral Soft
+neutral-soft-background-color:
+  default:
+    value: "{neutral.color.quiet.100}"
+  hover:
+    value: "{neutral.color.quiet.200}"
+  pressed:
+    value: "{neutral.color.quiet.300}"
+neutral-soft-content-color:
+  value: "{neutral.color.strong.200}"
+
+# Disabled Solid
+disabled-solid-background-color:
+  value: "{unavailable.color.quiet.100}"
+disabled-solid-content-color:
+  value: "{unavailable.color.quiet.300}"
+disabled-solid-dark-background-color:
+  value: "{dark.color.quiet.300}"
+disabled-solid-dark-content-color:
+  value: "{light.color.quiet.300}"
+disabled-solid-light-background-color:
+  value: "{light.color.quiet.300}"
+disabled-solid-light-content-color:
+  value: "{dark.color.quiet.300}"
+disabled-solid-dark-static-background-color:
+  value: "{dark-static.color.quiet.300}"
+disabled-solid-dark-static-content-color:
+  value: "{light-static.color.quiet.300}"
+disabled-solid-light-static-background-color:
+  value: "{light-static.color.quiet.300}"
+disabled-solid-light-static-content-color:
+  value: "{dark-static.color.quiet.300}"
+
+# Disabled Plain
+disabled-plain-background-color:
+  value: "{transparent.color}"
+disabled-plain-content-color:
+  value: "{unavailable.color.quiet.300}"
+disabled-plain-dark-content-color:
+  value: "{dark.color.quiet.200}"
+disabled-plain-light-content-color:
+  value: "{light.color.quiet.200}"
+disabled-plain-dark-static-content-color:
+  value: "{dark-static.color.quiet.200}"
+disabled-plain-light-static-content-color:
+  value: "{light-static.color.quiet.200}"
+
+# Disabled Outline
+disabled-outline-background-color:
+  value: "{unavailable.color.quiet.100}"
+disabled-outline-content-color:
+  value: "{unavailable.color.quiet.300}"
+disabled-outline-border-color:
+  value: "{unavailable.color.quiet.200}"
+disabled-outline-dark-background-color:
+  value: "{transparent.color}"
+disabled-outline-dark-border-color:
+  value: "{dark.color.quiet.200}"
+disabled-outline-dark-content-color:
+  value: "{dark.color.quiet.200}"
+disabled-outline-light-background-color:
+  value: "{transparent.color}"
+disabled-outline-light-border-color:
+  value: "{light.color.quiet.200}"
+disabled-outline-light-content-color:
+  value: "{light.color.quiet.200}"
+disabled-outline-dark-static-background-color:
+  value: "{transparent.color}"
+disabled-outline-dark-static-border-color:
+  value: "{dark-static.color.quiet.200}"
+disabled-outline-dark-static-content-color:
+  value: "{dark-static.color.quiet.200}"
+disabled-outline-light-static-background-color:
+  value: "{transparent.color}"
+disabled-outline-light-static-border-color:
+  value: "{light-static.color.quiet.200}"
+disabled-outline-light-static-content-color:
+  value: "{light-static.color.quiet.200}"
+
+# Disabled Soft
+disabled-soft-background-color:
+  value: "{unavailable.color.quiet.100}"
+disabled-soft-content-color:
+  value: "{unavailable.color.quiet.300}"
+disabled-soft-dark-background-color:
+  value: "{dark.color.quiet.100}"
+disabled-soft-dark-content-color:
+  value: "{dark.color.quiet.200}"
+disabled-soft-light-background-color:
+  value: "{light.color.quiet.100}"
+disabled-soft-light-content-color:
+  value: "{light.color.quiet.200}"
+disabled-soft-dark-static-background-color:
+  value: "{dark-static.color.quiet.100}"
+disabled-soft-dark-static-content-color:
+  value: "{dark-static.color.quiet.200}"
+disabled-soft-light-static-background-color:
+  value: "{light-static.color.quiet.100}"
+disabled-soft-light-static-content-color:
+  value: "{light-static.color.quiet.200}"
+
+# Dark Solid
+dark-solid-background-color:
+  default:
+    value: "{dark.color.strong.100}"
+  hover:
+    value: "{dark.color.strong.200}"
+  pressed:
+    value: "{dark.color.strong.300}"
+dark-solid-content-color:
+  value: "{light.color.strong.100}"
+
+# Dark Soft
+dark-soft-background-color:
+  default:
+    value: "{dark.color.quiet.100}"
+  hover:
+    value: "{dark.color.quiet.200}"
+  pressed:
+    value: "{dark.color.quiet.300}"
+dark-soft-content-color:
+  value: "{dark.color.strong.100}"
+
+# Dark Plain
+dark-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{dark.color.quiet.100}"
+  pressed:
+    value: "{dark.color.quiet.200}"
+  selected:
+    value: "{dark.color.quiet.100}"
+dark-plain-content-color:
+  value: "{dark.color.strong.100}"
+
+# Dark Outline
+dark-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{dark.color.quiet.100}"
+  pressed:
+    value: "{dark.color.quiet.200}"
+  selected:
+    value: "{dark.color.quiet.100}"
+dark-outline-border-color:
+  value: "{dark.color.strong.100}"
+dark-outline-content-color:
+  value: "{dark.color.strong.100}"
+
+# Light Solid
+light-solid-background-color:
+  default:
+    value: "{light.color.strong.100}"
+  hover:
+    value: "{light.color.strong.200}"
+  pressed:
+    value: "{light.color.strong.300}"
+light-solid-content-color:
+  value: "{dark.color.strong.100}"
+
+# Light Soft
+light-soft-background-color:
+  default:
+    value: "{light.color.quiet.100}"
+  hover:
+    value: "{light.color.quiet.200}"
+  pressed:
+    value: "{light.color.quiet.300}"
+light-soft-content-color:
+  value: "{light.color.strong.100}"
+
+# Light Plain
+light-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{light.color.quiet.100}"
+  pressed:
+    value: "{light.color.quiet.200}"
+  selected:
+    value: "{light.color.quiet.100}"
+light-plain-content-color:
+  value: "{light.color.strong.100}"
+
+# Light Outline
+light-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{light.color.quiet.100}"
+  pressed:
+    value: "{light.color.quiet.200}"
+  selected:
+    value: "{light.color.quiet.100}"
+light-outline-border-color:
+  value: "{light.color.strong.100}"
+light-outline-content-color:
+  value: "{light.color.strong.100}"
+
+# Dark Static Solid
+dark-static-solid-background-color:
+  default:
+    value: "{dark-static.color.strong.100}"
+  hover:
+    value: "{dark-static.color.strong.200}"
+  pressed:
+    value: "{dark-static.color.strong.300}"
+dark-static-solid-content-color:
+  value: "{light-static.color.strong.100}"
+
+# Dark Static Soft
+dark-static-soft-background-color:
+  default:
+    value: "{dark-static.color.quiet.100}"
+  hover:
+    value: "{dark-static.color.quiet.200}"
+  pressed:
+    value: "{dark-static.color.quiet.300}"
+dark-static-soft-content-color:
+  value: "{dark-static.color.strong.100}"
+
+# Dark Static Plain
+dark-static-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{dark-static.color.quiet.100}"
+  pressed:
+    value: "{dark-static.color.quiet.200}"
+  selected:
+    value: "{dark-static.color.quiet.100}"
+dark-static-plain-content-color:
+  value: "{dark-static.color.strong.100}"
+
+# Dark Static Outline
+dark-static-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{dark-static.color.quiet.100}"
+  pressed:
+    value: "{dark-static.color.quiet.200}"
+  selected:
+    value: "{dark-static.color.quiet.100}"
+dark-static-outline-border-color:
+  value: "{dark-static.color.strong.100}"
+dark-static-outline-content-color:
+  value: "{dark-static.color.strong.100}"
+
+# Light Static Solid
+light-static-solid-background-color:
+  default:
+    value: "{light-static.color.strong.100}"
+  hover:
+    value: "{light-static.color.strong.200}"
+  pressed:
+    value: "{light-static.color.strong.300}"
+light-static-solid-content-color:
+  value: "{dark-static.color.strong.100}"
+
+# Light Static Soft
+light-static-soft-background-color:
+  default:
+    value: "{light-static.color.quiet.100}"
+  hover:
+    value: "{light-static.color.quiet.200}"
+  pressed:
+    value: "{light-static.color.quiet.300}"
+light-static-soft-content-color:
+  value: "{light-static.color.strong.100}"
+
+# Light Static Plain
+light-static-plain-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{light-static.color.quiet.100}"
+  pressed:
+    value: "{light-static.color.quiet.200}"
+  selected:
+    value: "{light-static.color.quiet.100}"
+light-static-plain-content-color:
+  value: "{light-static.color.strong.100}"
+
+# Light Static Outline
+light-static-outline-background-color:
+  default:
+    value: "{transparent.color}"
+  hover:
+    value: "{light-static.color.quiet.100}"
+  pressed:
+    value: "{light-static.color.quiet.200}"
+  selected:
+    value: "{light-static.color.quiet.100}"
+light-static-outline-border-color:
+  value: "{light-static.color.strong.100}"
+light-static-outline-content-color:
+  value: "{light-static.color.strong.100}"

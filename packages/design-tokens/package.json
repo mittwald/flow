@@ -19,8 +19,11 @@
     "node": ">=24.0.0"
   },
   "scripts": {
+    "audit:contrast": "node dev/contrast-audit.js",
     "build": "node build-tokens.js",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test:contrast": "node dev/contrast-audit.js --strict",
+    "test:unit": "node --test dev/*.test.js"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",

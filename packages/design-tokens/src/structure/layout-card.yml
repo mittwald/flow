@@ -1,6 +1,6 @@
 layout-card:
   background-color:
-    value: "{neutral.color.100}"
+    value: "{elevation.color.100}"
   corner-radius:
     value: "{corner-radius.l}"
   padding:
@@ -14,4 +14,4 @@ layout-card:
   border-width:
     value: "{border-width.100}"
   border-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.quiet.100}"

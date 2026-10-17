@@ -2,7 +2,7 @@
   backdrop-filter: blur(5px);
   background-color: color-mix(
     in srgb,
-    var(--neutral--color--200) 40%,
+    var(--elevation--color--200) 40%,
     transparent
   );
   position: sticky;
@@ -63,7 +63,7 @@
 @media (prefers-contrast: more), (prefers-reduced-transparency) {
   .header {
     backdrop-filter: none;
-    background-color: var(--neutral--color--200);
+    background-color: var(--elevation--color--200);
   }
 }
 

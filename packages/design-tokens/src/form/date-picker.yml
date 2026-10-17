@@ -31,7 +31,7 @@ calendar:
     selected:
       value: "{primary-solid-content-color}"
   range-background-color:
-    value: "{primary.color.100}"
+    value: "{primary.color.quiet.100}"
   range-border-color:
     value: "{form-control.border-color.default}"
   range-border-width:

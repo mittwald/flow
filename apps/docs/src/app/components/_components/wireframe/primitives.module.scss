@@ -62,7 +62,7 @@
   align-items: center;
   padding-inline: 16px;
   padding-block: 8px;
-  border: 2px solid var(--neutral--color--500);
+  border: 2px solid var(--neutral--color--quiet--200);
   border-radius: var(--corner-radius--m);
   min-height: 48px;
 }
@@ -71,7 +71,7 @@
   flex-direction: column;
   min-height: 32px;
   padding: 16px;
-  border: 2px solid var(--neutral--color--300);
+  border: 2px solid var(--elevation--color--300);
   border-radius: var(--corner-radius--m);
   box-shadow: var(--shadow--content);
 }
@@ -103,33 +103,33 @@
 }
 
 .tone100 {
-  background: var(--neutral--color--100);
+  background: var(--elevation--color--100);
 }
 
 .tone200 {
-  background: var(--neutral--color--200);
+  background: var(--elevation--color--200);
 }
 
 .tone300 {
-  background: var(--neutral--color--300);
+  background: var(--elevation--color--300);
 }
 
 .tone400 {
-  background: var(--neutral--color--400);
+  background: var(--neutral--color--quiet--100);
 }
 
 .tone500 {
-  background: var(--neutral--color--500);
+  background: var(--neutral--color--quiet--200);
 }
 
 .tone600 {
-  background: var(--neutral--color--600);
+  background: var(--neutral--color--quiet--300);
 }
 
 .tone700 {
-  background: var(--neutral--color--700);
+  background: var(--content--color--100);
 }
 
 .tone800 {
-  background: var(--neutral--color--800);
+  background: var(--content--color--200);
 }

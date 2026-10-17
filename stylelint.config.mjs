@@ -41,6 +41,7 @@ export default {
     "stylelint-plugin-logical-css",
     "./packages/components/dev/stylelint/unlayeredThirdPartyOnly.mjs",
     "./packages/components/dev/stylelint/noUnknownGlobalFlowClass.mjs",
+    "./packages/components/dev/stylelint/noBrandColorVariable.mjs",
   ],
   extends: ["stylelint-config-standard", "stylelint-config-recommended-scss"],
   rules: {
@@ -96,6 +97,29 @@ export default {
       files: ["**/*.module.css", "**/*.module.scss"],
       rules: {
         "selector-max-type": 0,
+      },
+    },
+    {
+      // ADR 0007: code reads Semantic or Variant colors, never Brand. Brand
+      // is theme-neutral, so a Brand variable stays light in dark. The groups
+      // come from design-tokens/src/color-brand.yml, so a new one is covered.
+      files: [
+        "packages/components/**/*.{css,scss}",
+        "apps/docs/**/*.{css,scss}",
+      ],
+      rules: {
+        "flow/no-brand-color-variable": true,
+      },
+    },
+    {
+      // Docs pages that display the palette itself: the Brand value is the
+      // content. Keep in sync with eslint.config.js.
+      files: [
+        "apps/docs/src/content/foundations/design/colors/**",
+        "apps/docs/src/content/foundations/design/design-tokens/**",
+      ],
+      rules: {
+        "flow/no-brand-color-variable": null,
       },
     },
   ],
