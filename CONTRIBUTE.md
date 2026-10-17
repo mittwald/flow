@@ -824,11 +824,12 @@ commit hands each of them to the release. `.github/workflows/commit-guard.yml`
 checks the title, and that the title and every commit match the base branch (see
 [Choosing the base branch](#choosing-the-base-branch)).
 
-`Closes #123` in the PR body works on **both** lines. GitHub resolves it only on
-`main`, because that is the default branch; for a PR merged into `next`,
+A PR that finishes an issue says `Closes #123` in its body. Use `Part of #123`
+only while work on the issue remains; the PR that finishes it says `Closes`. The
+keyword works on **both** lines. GitHub resolves it only on `main`, because that
+is the default branch; for a PR merged into `next` or `next-major`,
 `.github/workflows/close-linked-issues.yml` does it instead and comments on the
-issue naming the PR. So write the keyword where you would anyway — and keep
-using `Part of #123` when you mean a link rather than a close.
+issue naming the PR.
 
 ## Releases
 
