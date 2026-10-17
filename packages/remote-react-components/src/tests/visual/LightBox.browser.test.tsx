@@ -7,7 +7,8 @@ import logoLandscape from "@/tests/assets/mittwald_logo_landscape.jpg";
 import logoPortrait from "@/tests/assets/mittwald_logo_portrait.jpg";
 import { userEvent } from "vitest/browser";
 
-test.each(testEnvironments)(
+// The close button moved behind the `ActionGroup` in 1.6.0.
+test.skipIf(crossVersion({ below: "1.6.0-next.0" })).each(testEnvironments)(
   "LightBox (%s)",
   async ({
     testScreenshot,
@@ -47,6 +48,68 @@ test.each(testEnvironments)(
     await userEvent.keyboard("{escape}");
 
     await testScreenshot("LightBox - closed");
+  },
+);
+
+// LightBoxZoom exists from 1.6.0 on.
+test.skipIf(crossVersion({ below: "1.6.0-next.0" })).each(testEnvironments)(
+  "LightBox with zoom (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Button, LightBox, LightBoxTrigger, Image },
+  }) => {
+    await render(
+      <LightBoxTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <LightBox withZoom>
+          <Image src={gopher} />
+        </LightBox>
+      </LightBoxTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+    await page.getByRole("group").click();
+
+    await testScreenshot("LightBox with zoom - zoomed");
+  },
+);
+
+// LightBoxZoom exists from 1.6.0 on.
+test.skipIf(crossVersion({ below: "1.6.0-next.0" })).each(testEnvironments)(
+  "LightBox with Gallery and zoom (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Button,
+      LightBox,
+      LightBoxTrigger,
+      Image,
+      LightBoxGallery,
+      LightBoxGalleryItem,
+    },
+  }) => {
+    await render(
+      <LightBoxTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <LightBox withZoom>
+          <LightBoxGallery>
+            <LightBoxGalleryItem>
+              <Image src={logoLandscape} />
+            </LightBoxGalleryItem>
+            <LightBoxGalleryItem>
+              <Image src={gopher} />
+            </LightBoxGalleryItem>
+          </LightBoxGallery>
+        </LightBox>
+      </LightBoxTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+    await page.getByRole("group").click();
+
+    await testScreenshot("LightBox with Gallery and zoom - zoomed");
   },
 );
 

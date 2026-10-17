@@ -148,6 +148,13 @@ export default function Page() {
           </LightBox>
         </LightBoxTrigger>
 
+        <LightBoxTrigger>
+          <Button>Lightbox with zoom</Button>
+          <LightBox withZoom>
+            <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
+          </LightBox>
+        </LightBoxTrigger>
+
         <Action onAction={() => console.log("Destroy the Death Star clicked")}>
           <Modal slot="actionConfirm">
             <Heading>Destroy the Death Star</Heading>

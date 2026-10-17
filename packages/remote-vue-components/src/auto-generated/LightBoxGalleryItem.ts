@@ -11,4 +11,5 @@ export const LightBoxGalleryItem: FlowRemoteVueComponent<RemoteLightBoxGalleryIt
     "flr-light-box-gallery-item",
     "LightBoxGalleryItem",
     RemoteLightBoxGalleryItemElement,
+    { booleans: ["withZoom"] },
   );
