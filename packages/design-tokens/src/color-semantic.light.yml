@@ -13,7 +13,7 @@
 # Hover and pressed take the next Brand step. strong.100 is the step closest
 # to the Brand base that keeps AA (primary and decorative-blue: the base).
 # Selected is a resting state: plain/outline selected takes the soft surface
-# (quiet.100), not pressed. Status groups pick their steps by role (#3454).
+# (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
 #
 # The neutral ramp has two roles of its own (keys 100–300, quiet to strong):
 #   elevation  100 raised (card, modal), 200 ground (page, field, track),
@@ -71,11 +71,11 @@ success:
   color:
     quiet:
       100:
-        value: "{color.system-success.100}"
-      200:
         value: "{color.system-success.200}"
-      300:
+      200:
         value: "{color.system-success.300}"
+      300:
+        value: "{color.system-success.400}"
     strong:
       100:
         value: "{color.system-success.1500}"
@@ -88,11 +88,11 @@ danger:
   color:
     quiet:
       100:
-        value: "{color.system-danger.100}"
-      200:
         value: "{color.system-danger.200}"
-      300:
+      200:
         value: "{color.system-danger.300}"
+      300:
+        value: "{color.system-danger.400}"
     strong:
       100:
         value: "{color.system-danger.1300}"
@@ -105,11 +105,11 @@ warning:
   color:
     quiet:
       100:
-        value: "{color.system-warning.100}"
-      200:
         value: "{color.system-warning.200}"
-      300:
+      200:
         value: "{color.system-warning.300}"
+      300:
+        value: "{color.system-warning.400}"
     strong:
       100:
         value: "{color.system-warning.1300}"
