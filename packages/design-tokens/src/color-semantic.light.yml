@@ -78,11 +78,11 @@ success:
         value: "{color.system-success.300}"
     strong:
       100:
-        value: "{color.system-success.1600}"
+        value: "{color.system-success.1500}"
       200:
-        value: "{color.system-success.1700}"
+        value: "{color.system-success.1600}"
       300:
-        value: "{color.system-success.1800}"
+        value: "{color.system-success.1700}"
 
 danger:
   color:

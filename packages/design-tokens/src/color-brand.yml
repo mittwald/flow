@@ -4,6 +4,9 @@
 # Source: Figma "mittwald. Global Tokens", collection Color Primitives (#3449),
 # taken 1:1 (#3453). Hue ramps have 19 steps with the base color at 1000:
 # 100–900 mix toward mittwald-neutral.300, 1100–1900 toward a dark background.
+# The status ramps follow the brand team's revision (#3532): 100–900 mix
+# toward white. system-success is the brand's "Positive"; its 1100–1900 mix
+# toward black, not toward the dark background.
 # Provisional until the brand team answers #3449: mittwald-lilac.600 equals
 # mittwald-lilac.400, mittwald-blue.1100–1900 break the dark mixing rule, and
 # the alpha steps skip 32 %. The brand's Info ramp duplicates mittwald-navy
@@ -237,23 +240,23 @@ color:
 
   system-danger:
     100:
-      value: "#ede1e9"
+      value: "#feecf0"
     200:
-      value: "#eecfda"
+      value: "#fcdae1"
     300:
-      value: "#eebecc"
+      value: "#fbc7d1"
     400:
-      value: "#eeadbd"
+      value: "#f9b4c2"
     500:
-      value: "#ef9baf"
+      value: "#f8a2b3"
     600:
-      value: "#ef8aa0"
+      value: "#f68fa4"
     700:
-      value: "#ef7892"
+      value: "#f57c94"
     800:
-      value: "#ef6784"
+      value: "#f36a85"
     900:
-      value: "#f05675"
+      value: "#f25776"
     1000:
       value: "#f04467"
     1100:
@@ -261,99 +264,99 @@ color:
     1200:
       value: "#c43b57"
     1300:
-      value: "#ad364f"
+      value: "#ae364e"
     1400:
-      value: "#973147"
+      value: "#983146"
     1500:
-      value: "#812d3f"
+      value: "#822d3e"
     1600:
-      value: "#6b2837"
+      value: "#6c2836"
     1700:
-      value: "#552330"
+      value: "#56232e"
     1800:
-      value: "#3e1e28"
+      value: "#401e26"
     1900:
-      value: "#281a20"
+      value: "#2a1a1e"
 
   system-warning:
     100:
-      value: "#e8e2e5"
+      value: "#fff1eb"
     200:
-      value: "#ead6d2"
+      value: "#ffe2d8"
     300:
-      value: "#edc9bf"
+      value: "#ffd4c4"
     400:
-      value: "#efbcac"
+      value: "#ffc6b0"
     500:
-      value: "#f2af99"
+      value: "#ffb79d"
     600:
-      value: "#f5a386"
+      value: "#ffa989"
     700:
-      value: "#f79673"
+      value: "#ff9b76"
     800:
-      value: "#fa8961"
+      value: "#ff8d62"
     900:
-      value: "#fc7d4e"
+      value: "#ff7e4e"
     1000:
       value: "#ff703b"
     1100:
-      value: "#e76738"
+      value: "#e76737"
     1200:
-      value: "#d05e34"
+      value: "#d05e33"
     1300:
-      value: "#b85631"
+      value: "#b85530"
     1400:
-      value: "#a14d2e"
+      value: "#a14c2c"
     1500:
-      value: "#89442b"
+      value: "#8a4228"
     1600:
-      value: "#723b28"
+      value: "#723925"
     1700:
-      value: "#5b3225"
+      value: "#5b3021"
     1800:
-      value: "#432a21"
+      value: "#43271d"
     1900:
-      value: "#2c211e"
+      value: "#2c1e1a"
 
   system-success:
     100:
-      value: "#e1f0f1"
+      value: "#effbf6"
     200:
-      value: "#d4eeeb"
+      value: "#dff6ec"
     300:
-      value: "#c8ece4"
+      value: "#cff2e3"
     400:
-      value: "#bceade"
+      value: "#bfedd9"
     500:
-      value: "#b0e8d8"
+      value: "#afe9d0"
     600:
-      value: "#a3e6d2"
+      value: "#9fe5c6"
     700:
-      value: "#97e4cb"
+      value: "#8fe0bd"
     800:
-      value: "#8be2c5"
+      value: "#7edcb3"
     900:
-      value: "#7fe0bf"
+      value: "#6ed7aa"
     1000:
-      value: "#72deb9"
+      value: "#5ed3a0"
     1100:
-      value: "#69caa8"
+      value: "#55be90"
     1200:
-      value: "#5fb698"
+      value: "#4ba980"
     1300:
-      value: "#55a288"
+      value: "#429470"
     1400:
-      value: "#4c8e78"
+      value: "#397f60"
     1500:
-      value: "#427a68"
+      value: "#2f6950"
     1600:
-      value: "#396658"
+      value: "#265440"
     1700:
-      value: "#2f5148"
+      value: "#1c3f30"
     1800:
-      value: "#253d38"
+      value: "#132a20"
     1900:
-      value: "#1c2928"
+      value: "#091510"
 
   black-alpha:
     100:
