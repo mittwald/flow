@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.23](https://github.com/mittwald/flow/compare/1.5.22...1.5.23) (2026-10-20)
+
+### Bug Fixes
+
+* **Markdown:** keep rendered elements across re-renders ([3808e79](https://github.com/mittwald/flow/commit/3808e796985fee611f126e6faaff5860313a1d5b))
+
 ## [1.5.22](https://github.com/mittwald/flow/compare/1.5.21...1.5.22) (2026-10-16)
 
 ### Documentation
