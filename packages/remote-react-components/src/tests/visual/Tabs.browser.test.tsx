@@ -7,27 +7,64 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { TabTitle, Tab, Tabs, AlertIcon },
+    components: {
+      TabTitle,
+      Tab,
+      Tabs,
+      AlertIcon,
+      Flex,
+      Text,
+      Badge,
+      AlertBadge,
+    },
   }) => {
+    const longTitle = "The Rebel Alliance versus the Empire";
+
     await render(
-      <Tabs disabledKeys={["3"]}>
-        <Tab id="1">
-          <TabTitle>
-            Tab 1
-            <AlertIcon />
-          </TabTitle>
-          Content
-        </Tab>
-        <Tab id="2">
-          <TabTitle>Tab 2</TabTitle>
-          Content
-        </Tab>
-        <Tab id="3">
-          <TabTitle>Tab 3</TabTitle>
-          Content
-        </Tab>
-      </Tabs>,
+      <Flex direction="column" gap="m">
+        <Tabs disabledKeys={["3"]}>
+          <Tab id="1">
+            <TabTitle>
+              Tab 1
+              <AlertIcon />
+            </TabTitle>
+            Content
+          </Tab>
+          <Tab id="2">
+            <TabTitle>Tab 2</TabTitle>
+            Content
+          </Tab>
+          <Tab id="3">
+            <TabTitle>Tab 3</TabTitle>
+            Content
+          </Tab>
+        </Tabs>
+        {/* Collapsed into a menu, whose items keep the badges at their size */}
+        <Tabs>
+          <Tab id="1">
+            <TabTitle>{longTitle}</TabTitle>
+            Content
+          </Tab>
+          <Tab id="2">
+            <TabTitle>
+              <Text>{longTitle}</Text>
+              <Badge>New</Badge>
+              <AlertBadge status="danger">Offline</AlertBadge>
+            </TabTitle>
+            Content
+          </Tab>
+          {[3, 4, 5].map((id) => (
+            <Tab key={id} id={String(id)}>
+              <TabTitle>{longTitle}</TabTitle>
+              Content
+            </Tab>
+          ))}
+        </Tabs>
+      </Flex>,
     );
+
+    await page.getByRole("button", { name: longTitle }).click();
+    await expect.element(page.getByRole("menu")).toBeVisible();
 
     await testScreenshot("Tabs states");
   },
