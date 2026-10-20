@@ -1,4 +1,4 @@
-import type { ReactCodeMirrorProps } from "@uiw/react-codemirror";
+import type { ReactCodeMirrorProps, Statistics } from "@uiw/react-codemirror";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import {
   useCallback,
@@ -100,6 +100,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     validationBehavior: _ignoredValidationBehavior,
     value,
     onChange,
+    onStatistics,
     showLineNumbers = true,
     showCodeFolding = true,
     showCodeIndentationMakers = true,
@@ -215,13 +216,21 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     ],
   );
 
-  /* A new `onChange` on every render would reconfigure the editor as well. */
-  const onChangeRef = useRef(onChange);
+  /*
+   * A new `onChange` on every render would reconfigure the editor as well.
+   * CodeMirror's update listener captures `onStatistics` along with it, so both
+   * call the latest handler through a ref.
+   */
+  const handlersRef = useRef({ onChange, onStatistics });
   useLayoutEffect(() => {
-    onChangeRef.current = onChange;
+    handlersRef.current = { onChange, onStatistics };
   });
   const stableOnChange = useCallback(
-    (value: string) => onChangeRef.current(value),
+    (value: string) => handlersRef.current.onChange(value),
+    [],
+  );
+  const stableOnStatistics = useCallback(
+    (statistics: Statistics) => handlersRef.current.onStatistics?.(statistics),
     [],
   );
 
@@ -272,6 +281,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
       {...rest}
       value={value}
       onChange={stableOnChange}
+      onStatistics={stableOnStatistics}
       basicSetup={basicSetup}
       theme={defaultLightTheme}
       data-invalid={isInvalid || undefined}

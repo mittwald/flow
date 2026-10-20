@@ -4,6 +4,7 @@ import { FieldError } from "@/components/FieldError";
 import { Label } from "@/components/Label";
 import { render } from "vitest-browser-react";
 import { EditorView } from "@uiw/react-codemirror";
+import { userEvent } from "vitest/browser";
 
 test("CodeEditor renders the label outside of the editor", async () => {
   const dom = await render(
@@ -209,4 +210,21 @@ test("CodeEditor adds no styles to the document when re-rendered", async () => {
   await dom.rerender(<Editor />);
 
   expect(countCssRules()).toBe(cssRules);
+});
+
+test("CodeEditor reports statistics to the latest onStatistics", async () => {
+  const first = vi.fn();
+  const latest = vi.fn();
+  const dom = await render(
+    <CodeEditor aria-label="Source code" onStatistics={first} />,
+  );
+  await dom.rerender(
+    <CodeEditor aria-label="Source code" onStatistics={latest} />,
+  );
+  first.mockClear();
+
+  await userEvent.type(dom.getByRole("textbox"), "x");
+
+  expect(latest).toHaveBeenCalled();
+  expect(first).not.toHaveBeenCalled();
 });
