@@ -3,6 +3,140 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.22](https://github.com/mittwald/flow/compare/1.5.23...1.6.0-next.22) (2026-10-20)
+
+## [1.6.0-next.21](https://github.com/mittwald/flow/compare/1.6.0-next.20...1.6.0-next.21) (2026-10-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.21 ([c75ca48](https://github.com/mittwald/flow/commit/c75ca489f4a68d285b3a7513fab391ef31978680))
+
+## [1.6.0-next.20](https://github.com/mittwald/flow/compare/1.5.22...1.6.0-next.20) (2026-10-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.20 ([151ddc1](https://github.com/mittwald/flow/commit/151ddc103234bdf6b7832702e594639431c27fbd))
+
+## [1.6.0-next.19](https://github.com/mittwald/flow/compare/1.5.21...1.6.0-next.19) (2026-10-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.19 ([877c5e7](https://github.com/mittwald/flow/commit/877c5e7c5a95ddfb1e134f096c5b78d9bb393b87))
+
+## [1.6.0-next.18](https://github.com/mittwald/flow/compare/1.5.20...1.6.0-next.18) (2026-10-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.18 ([a3daa16](https://github.com/mittwald/flow/commit/a3daa16e9ea0d3609de852ef9feaf56293359543))
+
+## [1.6.0-next.17](https://github.com/mittwald/flow/compare/1.5.19...1.6.0-next.17) (2026-10-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.17 ([df87cd3](https://github.com/mittwald/flow/commit/df87cd3dfe7840fa9d529d89b47d7de2153c5c3f))
+
+## [1.6.0-next.16](https://github.com/mittwald/flow/compare/1.5.18...1.6.0-next.16) (2026-10-14)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.16 ([efd1b81](https://github.com/mittwald/flow/commit/efd1b81a4ea210d1d6d6000298b8173c6892058b))
+
+## [1.6.0-next.15](https://github.com/mittwald/flow/compare/1.5.17...1.6.0-next.15) (2026-10-14)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.15 ([db5b635](https://github.com/mittwald/flow/commit/db5b635b7b983af4f92ed3b634b6b244094e95dd))
+
+## [1.6.0-next.14](https://github.com/mittwald/flow/compare/1.5.16...1.6.0-next.14) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.14 ([5eda220](https://github.com/mittwald/flow/commit/5eda220b8555a840a326c63645ddd60c0bc53614))
+
+## [1.6.0-next.13](https://github.com/mittwald/flow/compare/1.5.15...1.6.0-next.13) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.13 ([a5a7f9b](https://github.com/mittwald/flow/commit/a5a7f9bde0c09ead3786ad080f45cd37b9c5c58b))
+
+## [1.6.0-next.12](https://github.com/mittwald/flow/compare/1.5.14...1.6.0-next.12) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.12 ([ad3c7e4](https://github.com/mittwald/flow/commit/ad3c7e48d367df343daec04de9cd082cd4cc46ed))
+
+## [1.6.0-next.11](https://github.com/mittwald/flow/compare/1.5.13...1.6.0-next.11) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.11 ([b2a5882](https://github.com/mittwald/flow/commit/b2a58828e036016ab8e4985f4ff428ec5bba432e))
+
+## [1.6.0-next.10](https://github.com/mittwald/flow/compare/1.5.12...1.6.0-next.10) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.10 ([c6202f5](https://github.com/mittwald/flow/commit/c6202f5f3cd81d371b76ec66e622e071f7010b2d))
+
+## [1.6.0-next.9](https://github.com/mittwald/flow/compare/1.5.11...1.6.0-next.9) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.9 ([0655846](https://github.com/mittwald/flow/commit/0655846db24c4140226ba5ea46101d4f52866826))
+
+## [1.6.0-next.8](https://github.com/mittwald/flow/compare/1.5.9...1.6.0-next.8) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.8 ([5c64810](https://github.com/mittwald/flow/commit/5c648106c63fad5a8e3ebc21608b145ac49a899e))
+
+## [1.6.0-next.7](https://github.com/mittwald/flow/compare/1.5.8...1.6.0-next.7) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.7 ([6c53d07](https://github.com/mittwald/flow/commit/6c53d07849c13c8447e15ee7596986469f3137f3))
+
+## [1.6.0-next.6](https://github.com/mittwald/flow/compare/1.5.6...1.6.0-next.6) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.6 ([57e6b5f](https://github.com/mittwald/flow/commit/57e6b5f819583776a48636c85b2a83992b4c6427))
+
+## [1.6.0-next.5](https://github.com/mittwald/flow/compare/1.5.5...1.6.0-next.5) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.5 ([7401505](https://github.com/mittwald/flow/commit/740150500bab2cd36aa92f13894892e4629f8f7c))
+
+## [1.6.0-next.4](https://github.com/mittwald/flow/compare/1.6.0-next.3...1.6.0-next.4) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.4 ([1ad9506](https://github.com/mittwald/flow/commit/1ad95068b7a0c3bed3bee7409698063c0699c101))
+
+## [1.6.0-next.3](https://github.com/mittwald/flow/compare/1.5.3...1.6.0-next.3) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.3 ([d899451](https://github.com/mittwald/flow/commit/d89945117ece0dc0a3ba3aca063be43231b9138a))
+
+## [1.6.0-next.2](https://github.com/mittwald/flow/compare/1.5.2...1.6.0-next.2) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.2 ([7176262](https://github.com/mittwald/flow/commit/7176262a022447c9bdee94a504c96eb7bfdad930))
+
+## [1.6.0-next.1](https://github.com/mittwald/flow/compare/1.5.1...1.6.0-next.1) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.1 ([67830b8](https://github.com/mittwald/flow/commit/67830b8196b5ad65282a921e055005a984cafb24))
+
+## [1.6.0-next.0](https://github.com/mittwald/flow/compare/1.5.0...1.6.0-next.0) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.0 ([4d4ae35](https://github.com/mittwald/flow/commit/4d4ae3528f61e94bce048c1a0ad4701092838e5b))
+
 ## [1.6.0-next.21](https://github.com/mittwald/flow/compare/1.6.0-next.20...1.6.0-next.21) (2026-10-16)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
