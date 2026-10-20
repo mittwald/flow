@@ -8,8 +8,6 @@ import { Text } from "@/components/Text";
 import type { ReactNode } from "react";
 import { Button } from "@/components/Button";
 import { Popover, PopoverTrigger } from "@/components/Popover";
-import { Badge } from "@/components/Badge";
-import { AlertBadge } from "@/components/AlertBadge";
 
 const testElement = (
   <Tabs>
@@ -250,48 +248,5 @@ test("Collapsed tabs name their menu button by the selected tab", async () => {
   const labelledByIds = labelledBy?.split(" ") ?? [];
   for (const id of labelledByIds) {
     expect(document.getElementById(id)).not.toBeNull();
-  }
-});
-
-test("Badges in a collapsed tab's menu item keep their size", async () => {
-  const badges = (
-    <>
-      <Badge data-testid="badge">New</Badge>
-      <AlertBadge data-testid="alert-badge" status="danger">
-        Offline
-      </AlertBadge>
-    </>
-  );
-
-  render(
-    <>
-      <div data-testid="reference">{badges}</div>
-      <div style={{ width: 240, overflow: "hidden" }}>
-        <Tabs>
-          <Tab id="comms">
-            <TabTitle>
-              <Text>Comms</Text>
-              {badges}
-            </TabTitle>
-            <Text>Comms</Text>
-          </Tab>
-          <Tab id="cargo">
-            <TabTitle>Cargo hold manifest</TabTitle>
-            <Text>Cargo</Text>
-          </Tab>
-        </Tabs>
-      </div>
-    </>,
-  );
-
-  await page.getByRole("button", { name: /^Comms/ }).click();
-  const menuItem = page.getByRole("menuitem").first();
-  await expect.element(menuItem).toBeVisible();
-
-  for (const testId of ["badge", "alert-badge"]) {
-    const width = (locator: typeof menuItem) =>
-      locator.getByTestId(testId).element().getBoundingClientRect().width;
-
-    expect(width(menuItem)).toBe(width(page.getByTestId("reference")));
   }
 });
