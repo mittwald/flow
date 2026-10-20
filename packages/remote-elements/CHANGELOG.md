@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.26](https://github.com/mittwald/flow/compare/1.5.25...1.5.26) (2026-10-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 ## [1.5.25](https://github.com/mittwald/flow/compare/1.5.24...1.5.25) (2026-10-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

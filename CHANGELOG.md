@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.26](https://github.com/mittwald/flow/compare/1.5.25...1.5.26) (2026-10-20)
+
+### Bug Fixes
+
+* **TranslationProvider:** compile each localized message once ([#3525](https://github.com/mittwald/flow/issues/3525)) ([7e0fb85](https://github.com/mittwald/flow/commit/7e0fb859ad5be627bff2d2d17c9e3ca2cf582c5b))
+
 ## [1.5.25](https://github.com/mittwald/flow/compare/1.5.24...1.5.25) (2026-10-20)
 
 ### Bug Fixes
