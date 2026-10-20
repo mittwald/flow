@@ -6,10 +6,8 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import {
-  OverlayController,
-  useOverlayController,
-} from "@/lib/controller/overlay";
+import { OverlayController } from "@/lib/controller/overlay";
+import { useOverlayContext } from "@/lib/controller/overlay/context";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -25,6 +23,7 @@ import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsCont
 import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import { useVirtualKeyboardVisible } from "@/lib/hooks/dom/useVirtualKeyboardVisible";
+import useSelector from "@/lib/mobx/useSelector";
 import locales from "./locales/*.locale.json";
 
 type SupportedOverlayProps = Pick<
@@ -71,7 +70,7 @@ export const Modal = flowComponent("Modal", (props) => {
   const {
     size = "s",
     offCanvas,
-    controller: controllerFromProps,
+    controller,
     children,
     ref,
     className,
@@ -82,14 +81,15 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
 
-  // Resolved here rather than in `Overlay`, which then receives it: the open
-  // state gates the keyboard tracking below.
-  const controllerFromContext = useOverlayController("Modal", {
-    reuseControllerFromContext: true,
-    isDefaultOpen: overlayProps.isDefaultOpen,
-  });
-  const controller = controllerFromProps ?? controllerFromContext;
-  const isOpenFromController = controller.useIsOpen();
+  // The controller `Overlay` will use, if it exists yet: from props or from a
+  // trigger. Without one (a standalone Modal) `Overlay` creates its own, and
+  // the keyboard is tracked whether the modal is open or not.
+  const controllerFromContext = useOverlayContext().byType.Modal;
+  const knownController = controller ?? controllerFromContext;
+  const isOpenFromController = useSelector(
+    () => knownController?.isOpen ?? true,
+    [knownController],
+  );
   const isOpen = overlayProps.isOpen ?? isOpenFromController;
 
   // On mobile the header/footer are docked (sticky) while at rest, but flow
