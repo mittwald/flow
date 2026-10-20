@@ -10,14 +10,8 @@ recorded as permanent and the surface has settled
 [docs/remote-framework-bindings.md](../../docs/remote-framework-bindings.md) for
 what this binding establishes about supporting a framework at all.
 
-- **Before the first release, two one-time steps on npm, both before the
-  merge.** npm binds a Trusted Publisher only to a package that already exists,
-  so a maintainer first publishes this package **by hand**, under the `next`
-  dist-tag. `@mittwald/flow-codemods` started the same way: `1.1.0-next.10` by
-  hand, provenance from `1.1.0-next.11` on. Then its Trusted Publisher is bound
-  to `publish.yml`; npm allows one workflow filename per package. Miss either
-  and `publish.yml` fails with `E404 Not found` mid-release, after the other
-  packages have already gone out. Nothing in this repository can do either.
+## Dependencies
+
 - **`@mittwald/flow-react-components` is a runtime and type peer — never make it
   optional.** This package imports nothing of it directly, but `remote-core`'s
   password-policy serializer imports its `mittwald-password-tools-js` entry at
@@ -29,6 +23,9 @@ what this binding establishes about supporting a framework at all.
   `@mittwald/ext-bridge` is a required peer too: the root entry exports
   `RemoteRoot`, which imports it. React's binding marks it optional because only
   its `./RemoteRoot` entry imports it.
+
+## Generated code
+
 - `src/auto-generated/**` is **generated** from `packages/components`
   (`pnpm nx build:remote-components components`) — never edit by hand. The
   emitter is
@@ -66,11 +63,24 @@ what this binding establishes about supporting a framework at all.
     `typeof defaultIconSet` — React can demand every icon because `icons-pro` is
     a complete second set to hand it, and even its own test casts a two-entry
     set through `as unknown`. An icon a Vue set leaves out keeps Flow's.
+
+## Types
+
 - **The component type is annotated, not inferred.** Four chart components
   (`Area`, `CartesianChart`, `ChartTooltip`, `Line`) reference a type that is
   not reachable from this package's module graph, and inference fails with
   TS2883. The annotation names it through the props alias the file imports
   anyway.
+- **The element types are the authoring surface, so they carry a call
+  signature.** `Component` is a union that includes a plain options object,
+  which JSX rejects with "does not have any construct or call signatures" — so
+  the icons are `FlowIconComponent` and the list's setup elements are
+  `ListSetupComponent` (functional, over an open record, because their props are
+  the list's contract rather than the component's). A consumer writing JSX needs
+  both; `apps/remote-dom-demo/src/app/remote-vue` is the worked example.
+
+## The element wrapper
+
 - **Props arrive through `attrs`, not declared props.** Declaring them would
   mean shipping a second copy of the Flow prop contract. The cost is that Vue
   does not camelize the keys, so `createFlowRemoteComponent` does it — without
@@ -113,82 +123,15 @@ what this binding establishes about supporting a framework at all.
   `flr-slot-root-wrapper` with `slot="<name>"`, forced to an _attribute_
   (`^slot`) because that is how the remote tree learns about it
   (`attributeChangedCallback`).
-- **`src/tests/RemoteRendering.browser.test.ts` runs the real thing:** a Vue
-  tree, the production serializer over a MessageChannel, and React's
-  `RemoteRenderer` as the host. A value that would not survive `postMessage`
-  fails here the way it fails in an extension. Run it with
-  `pnpm nx test:browser remote-vue-components --browser.name=webkit`.
-- **The `List` has a parity harness of its own** (`e2e/list-parity`), because
-  the corpus cannot express it. It is written against a list of **bindings**
-  rather than against React and Vue: `harness/bindings/*` each mount a remote
-  app, the first is the reference, and every other is compared against it — so a
-  third framework is a new file and one key per scenario, not a new harness. Two
-  things it does that the corpus harness does not:
-  - **It asserts coverage.** A list of class names has to appear somewhere in
-    what was compared. Comparisons that all pass say nothing about a component
-    that stopped being rendered.
-  - **Both sides are hand-written**, so a scenario can use each binding's own
-    authoring style — `typedList<T>()` on the React side, slots on the Vue side.
+- **Slot wrappers are keyed by slot name** (`createFlowRemoteComponent`). Only
+  the slots that have content are in the list, so an appearing slot used to
+  shift every wrapper after it: Vue matched them by position, the host
+  re-materialised those components, and an element the user was on was replaced.
+  Expanding an accordion item did that to its own toggle and dropped the focus
+  to `<body>`.
 
-  What both harnesses share is how they read (`hostOutput`, `hostHtml`): the
-  root container plus whatever the host portalled to `document.body` — a menu, a
-  modal — minus the per-document singletons. react-aria keeps one live announcer
-  for the whole document, filled when something is announced and emptied on a
-  timer, so a search in one scenario was still announcing "0 matches" while the
-  next was read; it is left out by its `data-live-announcer` attribute. Both
-  also settle before they park the pointer, for the reason `testScreenshot`
-  gives. And a scenario that waits on something asynchronous of its own — the
-  search's submit delay — waits for its result in `interact`, because the output
-  stops changing while it waits and reads as stable.
+## The `flr-universal` rebuilds
 
-- **The React package's visual corpus is the parity gate** (`e2e/react-parity`,
-  `pnpm nx test:parity remote-vue-components`). It renders the whole corpus
-  twice — once from `remote-react-components`, once from here — and asserts the
-  host builds the same DOM. The corpus is reused **unmodified**: the harness
-  aliases `@/tests/lib/environments` to its own environment, the way the
-  cross-version harness does. Every scenario is compared except those listed in
-  `knownGaps.ts` with a reason — `List.browser.test.tsx` as a whole file (every
-  scenario in it needs Flow's `List`), the others by name.
-  - **A stale known gap fails the run.** A full run has the React pass write
-    vitest's JSON report, and every `knownGaps.ts` entry has to name a corpus
-    file or scenario in it (`dev/react-parity/staleKnownGaps.ts`); a
-    `divergingScenarios` entry whose scenario matches again fails as well. An
-    `unsupportedScenarios` entry claims the converter refuses the scenario, so a
-    full run converts exactly those once more and fails on one that no longer
-    throws `UnsupportedScenarioError`.
-  - **Both passes run the files in one order.** A scenario sees what earlier
-    files left in the document, so the order is part of the comparison.
-    CodeMirror's `cm-nonmatchingBracket` counts as pending: a truncated
-    CodeBlock's parse had not reached the closing brace in one pass under load.
-  - `test:parity:dev` writes the React references before it watches the Vue
-    pass, so a missing reference fails instead of being written from Vue, and
-    leaves out what a full run leaves out.
-  - **A password is masked only once one was generated.** The generate button
-    produces a value neither pass can predict; a value the scenario typed is
-    content and stays compared.
-  - `src/tests` is type-checked by `tsconfig.vite.json`, whose `rootDir` is the
-    repository root — it imports the React package's test tooling by relative
-    path.
-  - A scenario's React element tree is rebuilt as Vue vnodes by `reactToVue.ts`:
-    `type` → export name → Vue component, element-valued props → slots. A
-    scenario that defines a React component of its own cannot be converted, and
-    says so.
-  - **Nothing is committed.** The references are written from React on every
-    run, so they cannot drift into a second source of truth.
-  - **Stable is not settled.** Each pass reads the host's DOM until it stops
-    changing — but the output also stops changing _while_ the host waits on an
-    async job of its own, and the two passes then each get their own coin flip.
-    `PasswordCreationField` validates its empty value on mount and holds
-    `complexity-indicator--loading` until that resolves, which outlasts the
-    sampling window on a loaded runner and fails the run on a class no remote
-    tree decides. A chart is the other shape of this: recharts wraps an area in
-    an `animationClipPath` layer on the first render that has points and drops
-    it on the next, so one pass read whole `<g>` layers the other never had.
-    `pendingMarkers` in `environments.ts` waits both out; add to it rather than
-    normalizing the class away in `hostHtml.ts`, so a marker that never clears
-    still reaches the comparison.
-  - `knownGaps.divergingScenarios` entries are **self-cleaning**: one that
-    starts matching fails the run, naming the entry to delete.
 - **`flr-universal` is rebuilt by hand** in `src/components/**` and
   `src/overlays/**` — `Modal`, `Popover`, `LightBox` and their triggers,
   `Action`, `NotificationProvider`, `SettingsProvider`, `CountryOptions`,
@@ -223,6 +166,32 @@ what this binding establishes about supporting a framework at all.
   on by default). And an overlay's `controller` prop is followed rather than
   read once (`useOwnController`): the context it provides reads the controller
   when asked, so an `Action` inside resolves the current one.
+- **Logic shared with React lives in `@mittwald/flow-components-base`**, not
+  here — the whole list model and the `Action` state machine: pure MobX, no
+  framework, and this package brings only the subscription
+  (`src/lib/mobxSelector.ts`, ~15 lines). `src/lib/mobxSelector.test.ts` drives
+  that shared state through Vue's reactivity — which is also what keeps a React
+  import out of the core, since nothing else would notice one. The package is a
+  **devDependency** on purpose: it is private, and `externalizeDeps` leaves
+  devDependencies alone, so it is bundled instead of published as a bare import.
+  `mobx` has to be a real dependency here for the same reason.
+- **The rebuilds carry copies of Flow's UI text.** Flow's strings live in each
+  component's `locales/*.locale.json`, are compiled into the React bundle by a
+  locale plugin, and are not importable from a published package — so this
+  package repeats them for `de-DE` and `en-US`: the `List`'s texts
+  (`src/list/locales.ts`), the four `Modal confirmOnClose` strings and the
+  `LightBox` close label (`src/overlays/locales.ts`).
+  `src/tests/CopiedTexts.test.ts` compares every copy with Flow's locale files,
+  so a rewording on the Flow side fails here instead of drifting.
+- **A composite's class names are linted.** `flow/no-unknown-flow-class` checks
+  every hardcoded `flow--…` string against the classes Flow generates, so a
+  rename in `packages/components` fails `pnpm lint` here. A name completed at
+  runtime (`` `flow--modal--size-${size}` ``) is checked up to the
+  interpolation. The browser tests (`Overlays.browser.test.ts`) do not catch a
+  rename: they find the class this package passed itself.
+
+## The `List`
+
 - **The Vue `List` reads its configuration off its children**, the way Flow's
   React list does: `ListStaticData`, `ListItem`, `ListFilter`, `ListSorting`,
   `ListSearch`, `ListLoaderAsync` and `ListLoaderComposable` render nothing and
@@ -302,24 +271,11 @@ what this binding establishes about supporting a framework at all.
   menu into the `button` slot as written sends a `flr-context-menu` instead —
   and the host renders a menu with nothing to open it, which looks like an item
   that simply has no menu. `e2e/list-parity` has the scenario.
-- **The element types are the authoring surface, so they carry a call
-  signature.** `Component` is a union that includes a plain options object,
-  which JSX rejects with "does not have any construct or call signatures" — so
-  the icons are `FlowIconComponent` and the list's setup elements are
-  `ListSetupComponent` (functional, over an open record, because their props are
-  the list's contract rather than the component's). A consumer writing JSX needs
-  both; `apps/remote-dom-demo/src/app/remote-vue` is the worked example.
 - **An expandable item is a component, not a few lines in `Items`.** Each one
   holds whether it is open, and a render function has nowhere to keep that.
   `ListItemRow` provides that state and `ListItemView` injects it — Vue's
   stand-in for the props context Flow writes for the item's
   `Content slot="bottom"`.
-- **Slot wrappers are keyed by slot name** (`createFlowRemoteComponent`). Only
-  the slots that have content are in the list, so an appearing slot used to
-  shift every wrapper after it: Vue matched them by position, the host
-  re-materialised those components, and an element the user was on was replaced.
-  Expanding an accordion item did that to its own toggle and dropped the focus
-  to `<body>`.
 - **A date range is compared in the shared model** (`dateRangeFilterFn` in
   `components-base`), so the two bindings cannot disagree about which rows a
   range covers. A cell counts as a date by class — a luxon `DateTime`, a
@@ -335,26 +291,15 @@ what this binding establishes about supporting a framework at all.
   either, because `List` is not `@flr-generate`. So this binding leaves it out
   rather than shipping a flag that does nothing; closing it needs a host-side
   signal, which is a change in `packages/components`.
-- **Logic shared with React lives in `@mittwald/flow-components-base`**, not
-  here — the whole list model and the `Action` state machine: pure MobX, no
-  framework, and this package brings only the subscription
-  (`src/lib/mobxSelector.ts`, ~15 lines). `src/lib/mobxSelector.test.ts` drives
-  that shared state through Vue's reactivity — which is also what keeps a React
-  import out of the core, since nothing else would notice one. The package is a
-  **devDependency** on purpose: it is private, and `externalizeDeps` leaves
-  devDependencies alone, so it is bundled instead of published as a bare import.
-  `mobx` has to be a real dependency here for the same reason.
-- **The rebuilds carry copies of Flow's UI text.** Flow's strings live in each
-  component's `locales/*.locale.json`, are compiled into the React bundle by a
-  locale plugin, and are not importable from a published package — so this
-  package repeats them for `de-DE` and `en-US`: the `List`'s texts
-  (`src/list/locales.ts`), the four `Modal confirmOnClose` strings and the
-  `LightBox` close label (`src/overlays/locales.ts`).
-  `src/tests/CopiedTexts.test.ts` compares every copy with Flow's locale files,
-  so a rewording on the Flow side fails here instead of drifting.
-- **A composite's class names are linted.** `flow/no-unknown-flow-class` checks
-  every hardcoded `flow--…` string against the classes Flow generates, so a
-  rename in `packages/components` fails `pnpm lint` here. A name completed at
-  runtime (`` `flow--modal--size-${size}` ``) is checked up to the
-  interpolation. The browser tests (`Overlays.browser.test.ts`) do not catch a
-  rename: they find the class this package passed itself.
+
+## Tests
+
+Working on a parity harness, adding a `knownGaps.ts` entry, or debugging a red
+`parity` run → read [CONTRIBUTE.md](./CONTRIBUTE.md#parity-harnesses): how both
+harnesses compare, what they normalize, and what fails a full run.
+
+- **`src/tests/RemoteRendering.browser.test.ts` runs the real thing:** a Vue
+  tree, the production serializer over a MessageChannel, and React's
+  `RemoteRenderer` as the host. A value that would not survive `postMessage`
+  fails here the way it fails in an extension. Run it with
+  `pnpm nx test:browser remote-vue-components --browser.name=webkit`.
