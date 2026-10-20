@@ -5,6 +5,7 @@ import { Avatar } from "@/components/Avatar";
 import { Heading } from "@/components/Heading";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { Text } from "@/components/Text";
 
 /*
  * FontAwesome's `fontawesome-svg-core` inserts its stylesheet as an unlayered
@@ -89,6 +90,37 @@ export const testFontAwesomeIconSizing = () => {
       expect(sizeOf(rendered.getByTestId("fontawesome").element())).toEqual(
         sizeOf(rendered.getByTestId("plain").element()),
       );
+    },
+  );
+
+  // The library's stylesheet also sets `vertical-align: -0.125em`.
+  const aligningContexts: typeof contexts = [
+    ["Heading", (icon) => <Heading>{icon}Heading</Heading>],
+    ["Link", (icon) => <Link href="#">{icon}Link</Link>],
+    ["Text", (icon) => <Text>{icon}Text</Text>],
+  ];
+
+  test.each(aligningContexts)(
+    "a FontAwesome icon keeps the vertical alignment %s sets",
+    async (_, inContext) => {
+      const rendered = await render(
+        <>
+          {inContext(
+            <Icon data-testid="plain">
+              <svg />
+            </Icon>,
+          )}
+          {inContext(
+            <Icon data-testid="fontawesome" className="svg-inline--fa">
+              <svg />
+            </Icon>,
+          )}
+        </>,
+      );
+      const verticalAlignOf = (testId: string) =>
+        getComputedStyle(rendered.getByTestId(testId).element()).verticalAlign;
+
+      expect(verticalAlignOf("fontawesome")).toBe(verticalAlignOf("plain"));
     },
   );
 };
