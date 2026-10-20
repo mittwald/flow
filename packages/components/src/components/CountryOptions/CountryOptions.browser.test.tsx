@@ -12,16 +12,20 @@ const optionNames = () =>
     (option) => option.textContent,
   );
 
+const select = (children: React.ReactNode) => (
+  <Select>
+    <Label>Country</Label>
+    {children}
+  </Select>
+);
+
 const renderOptions = async (children: React.ReactNode) => {
-  render(
-    <Select>
-      <Label>Country</Label>
-      {children}
-    </Select>,
-  );
+  const screen = await render(select(children));
 
   await toggle().click();
   await expect.element(page.getByRole("listbox")).toBeVisible();
+
+  return screen;
 };
 
 test("the countries are listed under their localized name, sorted", async () => {
@@ -67,4 +71,17 @@ test("the option value is the country code, not the name", async () => {
   expect(
     document.querySelector("[role='option']")?.getAttribute("data-key"),
   ).toBe("DE");
+});
+
+test("changing filterBy after mount updates the list", async () => {
+  const { rerender } = await renderOptions(
+    <CountryOptions filterBy={(country) => country.code === "DE"} />,
+  );
+  expect(optionNames()).toEqual(["Germany"]);
+
+  await rerender(
+    select(<CountryOptions filterBy={(country) => country.code === "AT"} />),
+  );
+
+  await expect.poll(optionNames).toEqual(["Austria"]);
 });

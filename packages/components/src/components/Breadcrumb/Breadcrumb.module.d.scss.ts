@@ -3,6 +3,7 @@ declare const classNames: {
   readonly link: "link";
   readonly breadcrumbItem: "breadcrumbItem";
   readonly icon: "icon";
+  readonly skeleton: "skeleton";
   readonly "size-s": "size-s";
   readonly dark: "dark";
   readonly light: "light";

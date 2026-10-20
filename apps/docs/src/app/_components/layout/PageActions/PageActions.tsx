@@ -14,7 +14,8 @@ import {
   IconExternalLink,
   MenuItem,
 } from "@mittwald/flow-react-components";
-import { IconBrandGithub } from "@tabler/icons-react";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IconBrandChatGpt,
   IconBrandClaude,
@@ -95,7 +96,7 @@ export const PageActions: FC<Props> = (props) => {
           {gitHubUrl && (
             <MenuItem href={gitHubUrl} target="_blank">
               <Icon>
-                <IconBrandGithub />
+                <FontAwesomeIcon icon={faGithub} />
               </Icon>
               <Text>Quellcode anzeigen</Text>
             </MenuItem>

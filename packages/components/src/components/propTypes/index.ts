@@ -92,6 +92,7 @@ import type { RatingSegmentProps } from "@/components/Rating/components/RatingSe
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
 import type { AccordionProps } from "@/components/Accordion";
+import type { AccordionGroupProps } from "@/components/AccordionGroup";
 import type { ChatProps } from "@/components/Chat";
 import type { SectionHeaderProps } from "@/components/Section/components/SectionHeader/SectionHeader";
 import type {
@@ -106,6 +107,7 @@ export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
   Accordion: AccordionProps;
+  AccordionGroup: AccordionGroupProps;
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
@@ -204,6 +206,7 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Accordion: true,
+  AccordionGroup: true,
   Avatar: true,
   Autocomplete: true,
   Alert: true,

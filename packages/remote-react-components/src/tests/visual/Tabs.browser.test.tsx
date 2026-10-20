@@ -1,6 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
-import { page } from "vitest/browser";
+import { expect, test } from "vitest";
+import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "Tabs states (%s)",
@@ -68,7 +68,16 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { TabTitle, Tab, Tabs, Flex },
+    components: {
+      TabTitle,
+      Tab,
+      Tabs,
+      Flex,
+      AccordionGroup,
+      Accordion,
+      Heading,
+      Content,
+    },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -120,8 +129,34 @@ test.each(testEnvironments)(
             Content
           </Tab>
         </Tabs>
+        <Tabs>
+          <Tab id="1">
+            <TabTitle data-testid="accordion-tab">Accordions</TabTitle>
+            <AccordionGroup>
+              <Accordion>
+                <Heading>First</Heading>
+                <Content>Content</Content>
+              </Accordion>
+              <Accordion>
+                <Heading>Second</Heading>
+                <Content>Content</Content>
+              </Accordion>
+            </AccordionGroup>
+          </Tab>
+          <Tab id="2">
+            <TabTitle>Tab 2</TabTitle>
+            Content
+          </Tab>
+        </Tabs>
       </Flex>,
     );
+
+    // The accordion's focus ring reaches past the panel on both sides.
+    await page.getByTestId("accordion-tab").click();
+    await userEvent.keyboard("{tab}");
+    await expect
+      .element(page.getByRole("button", { name: "First" }))
+      .toHaveFocus();
 
     await testScreenshot("Tabs edge cases");
   },

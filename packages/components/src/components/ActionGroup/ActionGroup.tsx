@@ -63,15 +63,15 @@ export const ActionGroup = flowComponent(
             slot: dynamic((props) => getActionGroupSlot(props)),
             className: dynamic((props) => {
               const slot = getActionGroupSlot(props);
-              return clsx(props.className, styleClassname(styles, slot));
+              return clsx(styleClassname(styles, slot), props.className);
             }),
           },
           Switch: {
             labelPosition: "leading",
             className: dynamic((props) => {
               return clsx(
-                props.className,
                 props.slot && styleClassname(styles, props.slot),
+                props.className,
               );
             }),
           },
@@ -79,8 +79,8 @@ export const ActionGroup = flowComponent(
             size,
             className: dynamic((props) => {
               return clsx(
-                props.className,
                 props.slot && styleClassname(styles, props.slot),
+                props.className,
               );
             }),
           },

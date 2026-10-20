@@ -1,0 +1,14 @@
+.accordionGroup {
+  display: flex;
+  flex-direction: column;
+
+  /* Variants */
+
+  /* The accordion reaches past the content edge, the separator does not. */
+  &.separators .accordion + .accordion::before {
+    content: "";
+    margin-inline: var(--accordion--padding);
+    border-block-start: var(--separator--height) var(--separator--border-style)
+      var(--separator--color);
+  }
+}

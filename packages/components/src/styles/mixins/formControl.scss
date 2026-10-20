@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 @mixin formControl {
   @include formBorder;
   @include formOutline;
@@ -5,6 +7,29 @@
   @include formAnimation;
   @include formOrder;
   @include formInteractionStates;
+  @include formSkeleton;
+}
+
+/* The base rule of `SkeletonMode` for a control: below a field root marked
+   with `data-skeleton` (`useFieldComponent`'s `skeletonProps`), the control
+   becomes a surface in its real size and its content disappears. Include it
+   after the state rules of the control, so it wins over them. */
+@mixin formSkeleton($radius: var(--form-control--corner-radius)) {
+  &:is([data-skeleton] *) {
+    @include formSkeletonShape($radius);
+  }
+}
+
+/* The declarations of `formSkeleton`, for a selector of its own: an element
+   that only renders in skeleton mode, or `.root[data-skeleton] .control` after
+   state rules that are more specific than `formSkeleton`. */
+@mixin formSkeletonShape($radius: var(--form-control--corner-radius)) {
+  --skeleton-radius: #{$radius};
+
+  resize: none;
+
+  @include skeleton.shape;
+  @include skeleton.keyframes;
 }
 
 @mixin formHiddenInputScrollBehaviorFix {

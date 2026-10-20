@@ -1,3 +1,5 @@
+@use "@/styles/mixins/skeleton";
+
 .counterBadge {
   font-size: var(--counter-badge--font-size);
   font-weight: var(--counter-badge--font-weight);
@@ -24,4 +26,14 @@
     height: var(--counter-badge--height-empty);
     width: var(--counter-badge--height-empty);
   }
+
+  /* SkeletonMode */
+
+  &.skeleton {
+    @include skeleton.shape;
+
+    --skeleton-radius: calc(var(--counter-badge--height) / 2);
+  }
 }
+
+@include skeleton.keyframes;

@@ -2,6 +2,7 @@
 /* This file is auto-generated with the remote-components-generator */
 export * from "./AccentBox";
 export * from "./Accordion";
+export * from "./AccordionGroup";
 export * from "./ActionGroup";
 export * from "./Alert";
 export * from "./AlertBadge";
@@ -110,6 +111,7 @@ export * from "./SegmentedControl";
 export * from "./Select";
 export * from "./Separator";
 export * from "./Skeleton";
+export * from "./SkeletonMode";
 export * from "./SkeletonText";
 export * from "./Slider";
 export * from "./Switch";

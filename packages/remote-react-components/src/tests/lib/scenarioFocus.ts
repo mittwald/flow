@@ -2,8 +2,8 @@ import { rootContainerLocator } from "@/tests/lib/RootContainer";
 import { expect } from "vitest";
 
 /*
- * Synchronizing a visual scenario on the FOCUS — the one thing the screenshot
- * preamble cannot do for you.
+ * Synchronizing a visual scenario on the FOCUS, which the screenshot preamble
+ * cannot do for you.
  *
  * `prepareForScreenshot` (see `@/tests/lib/environments`) waits for the document
  * to stop MUTATING. A focus move is not a mutation: `:focus` and `:focus-within`

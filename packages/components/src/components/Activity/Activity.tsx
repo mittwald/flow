@@ -15,7 +15,7 @@ export interface ActivityProps extends PropsWithChildren {
   forceCustomActivity?: boolean;
 }
 
-const isActivitySupported = React.version.startsWith("19.2");
+const isActivitySupported = "Activity" in React;
 
 const CustomActivity: FC<ActivityProps> = (props) => {
   const { children, isActive: isActive = true } = props;

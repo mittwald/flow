@@ -36,6 +36,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     className,
     menuTrigger = "focus",
     onChange,
+    onOpenChange,
     onSelectionChange,
     placeholder,
     ref,
@@ -49,6 +50,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     wrapperProps,
     controlProps,
     fieldPropsContext,
+    skeletonProps,
   } = useFieldComponent(props, "ComboBox");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
@@ -84,9 +86,11 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       className={rootClassName}
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       onSelectionChange={handleSelectionChange}
-      onOpenChange={(isOpen) => {
+      onOpenChange={(isOpen, menuTrigger) => {
         controller.setOpen(isOpen);
+        onOpenChange?.(isOpen, menuTrigger);
       }}
     >
       <PropsContextProvider props={propsContext}>

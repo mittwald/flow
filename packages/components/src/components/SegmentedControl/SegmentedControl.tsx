@@ -5,7 +5,6 @@ import {
 import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
 import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
 import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 import { type PropsContext } from "@/lib/propsContext";
@@ -14,7 +13,7 @@ import clsx from "clsx";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SegmentedControlProps
@@ -47,10 +46,11 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     wrapperProps,
     controlProps,
     FieldErrorCaptureContext,
+    skeletonProps,
   } = useFieldComponent(props, "SegmentedControl");
 
   const rootClassName = clsx(
-    formFieldStyles.formField,
+    wrapperProps.className,
     styles.segmentedControlContainer,
     styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
     className,
@@ -73,8 +73,9 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   return (
     <Aria.RadioGroup
       {...rest}
+      {...skeletonProps}
       aria-describedby={controlProps["aria-describedby"]}
-      className={clsx(rootClassName, wrapperProps.className)}
+      className={rootClassName}
       ref={objectRef}
     >
       <FieldErrorCaptureContext>

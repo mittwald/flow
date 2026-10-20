@@ -6,14 +6,15 @@ import {
   WIcon,
 } from "@/app/components/_components/wireframe/primitives";
 import { Icon } from "@mittwald/flow-react-components";
-import { IconNumber3 } from "@tabler/icons-react";
+import { fa3 } from "@fortawesome/sharp-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const CounterBadgeWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WCircle size={48} tone="600">
       <WIcon tone="400">
         <Icon>
-          <IconNumber3 />
+          <FontAwesomeIcon icon={fa3} />
         </Icon>
       </WIcon>
     </WCircle>

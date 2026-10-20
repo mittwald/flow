@@ -32,8 +32,8 @@ Start with these:
   `/raw/foundations/structure/spacing.md` — how layout and spacing are meant to
   be composed
 - the templates — see [Start from a template](#start-from-a-template)
-- `/raw/foundations/content-guidelines/error-handling.md` — preventing and
-  presenting errors
+- `/raw/foundations/content-guidelines/fehlermeldungen.md` — where errors appear
+  and how to word them
 - `/raw/foundations/content-guidelines/sprach-guide.md` — UI wording
 - `/raw/get-started/versioning.md` — what you may depend on
 

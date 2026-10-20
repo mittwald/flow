@@ -73,6 +73,9 @@ export default function Layout(props: PropsWithChildren) {
 
                     <NavigationGroup collapsable>
                       <Heading>Components</Heading>
+                      <NavigationItem page="accordion">
+                        Accordion
+                      </NavigationItem>
                       <NavigationItem page="activity">Activity</NavigationItem>
                       <NavigationItem page="chart">Chart</NavigationItem>
                       <NavigationItem page="coach-mark">
@@ -102,6 +105,9 @@ export default function Layout(props: PropsWithChildren) {
                       </NavigationItem>
                       <NavigationItem page="popover">Popover</NavigationItem>
                       <NavigationItem page="rating">Rating</NavigationItem>
+                      <NavigationItem page="skeleton-mode">
+                        SkeletonMode
+                      </NavigationItem>
                     </NavigationGroup>
                     <TunnelExit id="remote-demo" />
                   </Navigation>
