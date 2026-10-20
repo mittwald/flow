@@ -14,12 +14,19 @@ import { useMemo } from "react";
  * active block needs no color of its own.
  */
 const markerColor = "var(--code-editor--indentation-marker-color)";
-const indentationMarkerColors = {
-  light: markerColor,
-  dark: markerColor,
-  activeLight: markerColor,
-  activeDark: markerColor,
-};
+
+/*
+ * Created once: every call brings a new style module along, and CodeMirror
+ * never unmounts a style module – one per render grows the document's styles.
+ */
+const codeIndentationMarkers = indentationMarkers({
+  colors: {
+    light: markerColor,
+    dark: markerColor,
+    activeLight: markerColor,
+    activeDark: markerColor,
+  },
+});
 
 export interface CodeEditorSetup {
   /**
@@ -106,9 +113,7 @@ export const useCodeEditorExtensions = (
     }
 
     if (showCodeIndentationMakers) {
-      enabledExtensions.push(
-        indentationMarkers({ colors: indentationMarkerColors }),
-      );
+      enabledExtensions.push(codeIndentationMarkers);
     }
 
     if (language && isCodeEditorLanguage(language)) {

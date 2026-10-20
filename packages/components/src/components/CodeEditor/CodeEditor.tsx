@@ -1,6 +1,13 @@
 import type { ReactCodeMirrorProps } from "@uiw/react-codemirror";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
-import { useCallback, useId, useState } from "react";
+import {
+  useCallback,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   flowComponent,
   type FlowComponentProps,
@@ -92,6 +99,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     isRequired,
     validationBehavior: _ignoredValidationBehavior,
     value,
+    onChange,
     showLineNumbers = true,
     showCodeFolding = true,
     showCodeIndentationMakers = true,
@@ -179,14 +187,56 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     controlProps["aria-describedby"],
   );
 
-  const contentAttributes = EditorView.contentAttributes.of({
-    ...(labelledBy ? { "aria-labelledby": labelledBy } : {}),
-    ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
-    ...(describedBy ? { "aria-describedby": describedBy } : {}),
-    ...(isRequired ? { "aria-required": "true" } : {}),
-    ...(isInvalid ? { "aria-invalid": "true" } : {}),
-    ...(isDisabled ? { "aria-disabled": "true" } : {}),
+  /**
+   * CodeMirror reconfigures the editor whenever `extensions`, `basicSetup` or
+   * `onChange` is a new object. All three are stable, so a render with
+   * unchanged props leaves the editor as it is.
+   */
+  const allExtensions = useMemo(
+    () => [
+      ...enabledExtensions,
+      EditorView.contentAttributes.of({
+        ...(labelledBy ? { "aria-labelledby": labelledBy } : {}),
+        ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
+        ...(describedBy ? { "aria-describedby": describedBy } : {}),
+        ...(isRequired ? { "aria-required": "true" } : {}),
+        ...(isInvalid ? { "aria-invalid": "true" } : {}),
+        ...(isDisabled ? { "aria-disabled": "true" } : {}),
+      }),
+    ],
+    [
+      enabledExtensions,
+      labelledBy,
+      ariaLabel,
+      describedBy,
+      isRequired,
+      isInvalid,
+      isDisabled,
+    ],
+  );
+
+  /* A new `onChange` on every render would reconfigure the editor as well. */
+  const onChangeRef = useRef(onChange);
+  useLayoutEffect(() => {
+    onChangeRef.current = onChange;
   });
+  const stableOnChange = useCallback(
+    (value: string) => onChangeRef.current(value),
+    [],
+  );
+
+  const highlightActiveLine = showActiveLineMarker && !isDisabled;
+  const basicSetup = useMemo(
+    () => ({
+      highlightActiveLine,
+      highlightActiveLineGutter: highlightActiveLine,
+      autocompletion: false,
+      lineNumbers: false,
+      foldGutter: false,
+      highlightSelectionMatches: false,
+    }),
+    [highlightActiveLine],
+  );
 
   const localRef = useObjectRef(ref);
 
@@ -221,14 +271,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     <CodeMirror
       {...rest}
       value={value}
-      basicSetup={{
-        highlightActiveLine: showActiveLineMarker && !isDisabled,
-        highlightActiveLineGutter: showActiveLineMarker && !isDisabled,
-        autocompletion: false,
-        lineNumbers: false,
-        foldGutter: false,
-        highlightSelectionMatches: false,
-      }}
+      onChange={stableOnChange}
+      basicSetup={basicSetup}
       theme={defaultLightTheme}
       data-invalid={isInvalid || undefined}
       data-disabled={isDisabled || undefined}
@@ -240,7 +284,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
           localRef.current = codeMirrorRef.editor;
         }
       }}
-      extensions={[...enabledExtensions, contentAttributes]}
+      extensions={allExtensions}
       height={height ?? minHeight}
     >
       {copyable && (

@@ -147,3 +147,66 @@ test("CodeEditor leaves the extensions passed to it untouched", async () => {
   expect(extensions.length).toBe(1);
   expect(extensions[0]).toBe(EditorView.lineWrapping);
 });
+
+test("CodeEditor does not reconfigure when re-rendered with unchanged props", async () => {
+  let reconfigurations = 0;
+  const extensions = [
+    EditorView.updateListener.of((update) => {
+      reconfigurations += update.transactions.filter(
+        (transaction) => transaction.reconfigured,
+      ).length;
+    }),
+  ];
+  const Editor = () => (
+    <CodeEditor
+      value="const jedi = true;"
+      language="ts"
+      extensions={extensions}
+      isRequired
+    >
+      <Label>Source code</Label>
+      <FieldDescription>Must be valid TypeScript</FieldDescription>
+    </CodeEditor>
+  );
+  const dom = await render(<Editor />);
+  const editor = dom.getByRole("textbox");
+  await expect
+    .element(editor)
+    .toHaveAccessibleDescription("Must be valid TypeScript");
+  reconfigurations = 0;
+
+  await dom.rerender(<Editor />);
+  await dom.rerender(<Editor />);
+
+  expect(reconfigurations).toBe(0);
+  await expect.element(editor).toHaveAttribute("aria-required", "true");
+  await expect.element(editor).toHaveAttribute("aria-labelledby");
+});
+
+/*
+ * Some extensions bring a style module along. CodeMirror never unmounts a
+ * style module, so one created per render grows the document's styles.
+ */
+test("CodeEditor adds no styles to the document when re-rendered", async () => {
+  const countCssRules = () =>
+    [...document.adoptedStyleSheets, ...document.styleSheets].reduce(
+      (count, sheet) => count + sheet.cssRules.length,
+      0,
+    );
+  const Editor = () => (
+    <CodeEditor
+      value={"if (jedi) {\n  return true;\n}"}
+      language="ts"
+      extensions={[EditorView.lineWrapping]}
+      aria-label="Source code"
+    />
+  );
+  const dom = await render(<Editor />);
+  await expect.element(dom.getByRole("textbox")).toBeVisible();
+  const cssRules = countCssRules();
+
+  await dom.rerender(<Editor />);
+  await dom.rerender(<Editor />);
+
+  expect(countCssRules()).toBe(cssRules);
+});
