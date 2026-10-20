@@ -1,16 +1,14 @@
 # Brand tier (ADR 0007): the palette from the brand handover. Theme-neutral,
 # literal values only. Components never reference it — Semantic does.
 #
-# Source: Figma "mittwald. Global Tokens", collection Color Primitives (#3449),
-# taken 1:1 (#3453). Hue ramps have 19 steps with the base color at 1000:
-# 100–900 mix toward mittwald-neutral.300, 1100–1900 toward a dark background.
-# The status ramps follow the brand team's revision (#3532): 100–900 mix
-# toward white. system-success is the brand's "Positive"; its 1100–1900 mix
-# toward black, not toward the dark background.
-# Provisional until the brand team answers #3449: mittwald-lilac.600 equals
-# mittwald-lilac.400, mittwald-blue.1100–1900 break the dark mixing rule, and
-# the alpha steps skip 32 %. The brand's Info ramp duplicates mittwald-navy
-# and is left out; Semantic info references mittwald-navy.
+# Source: Figma "mittwald. Global Tokens", collection Color Primitives, as
+# approved by the brand team (#3449), taken 1:1 (#3453, #3479). Hue ramps have
+# 19 steps with the base color at 1000: 100–900 mix toward
+# mittwald-neutral.300, 1100–1900 toward mittwald-neutral.1100.
+# Status ramps: danger, warning and success (the brand's "Positive") mix
+# 100–900 toward white (#3532); success mixes 1100–1900 toward black.
+# system-info is the brand's Info, still mixed like the hue ramps and close
+# to mittwald-navy, but its own ramp. Alpha ramps: 10–90 % and 100 %.
 color:
   mittwald-neutral:
     100:
@@ -40,103 +38,103 @@ color:
 
   mittwald-blue:
     100:
-      value: "#daddf6"
+      value: "#d8dbf2"
     200:
-      value: "#c7c9f4"
+      value: "#c5c6f1"
     300:
-      value: "#b3b4f3"
+      value: "#b2b2f0"
     400:
-      value: "#a09ff1"
+      value: "#9f9eef"
     500:
-      value: "#8d8bf0"
+      value: "#8c89ee"
     600:
-      value: "#7a76ee"
+      value: "#7975ed"
     700:
-      value: "#6761ed"
+      value: "#6660ec"
     800:
-      value: "#544deb"
+      value: "#534cea"
     900:
-      value: "#4038ea"
+      value: "#4038e9"
     1000:
       value: "#2d23e8"
     1100:
-      value: "#2b22d4"
+      value: "#2b22d3"
     1200:
-      value: "#251faa"
+      value: "#2820be"
     1300:
-      value: "#221e95"
+      value: "#261fa9"
     1400:
-      value: "#201c80"
+      value: "#231e94"
     1500:
-      value: "#1d1b6b"
+      value: "#211c7f"
     1600:
-      value: "#1a1957"
+      value: "#1e1b6a"
     1700:
-      value: "#171842"
+      value: "#1c1955"
     1800:
-      value: "#15162d"
+      value: "#191840"
     1900:
-      value: "#15172f"
+      value: "#17162b"
 
   mittwald-navy:
     100:
-      value: "#e0e7f4"
+      value: "#dfe4f1"
     200:
-      value: "#d4dbf1"
+      value: "#d2d9ee"
     300:
-      value: "#c7d0ef"
+      value: "#c6ceec"
     400:
-      value: "#bbc5ec"
+      value: "#bac3e9"
     500:
-      value: "#aebae9"
+      value: "#adb8e7"
     600:
-      value: "#a2aee6"
+      value: "#a1ade4"
     700:
-      value: "#95a3e3"
+      value: "#94a2e2"
     800:
-      value: "#8898e0"
+      value: "#8897e0"
     900:
-      value: "#7c8dde"
+      value: "#7c8cdd"
     1000:
       value: "#6f81db"
     1100:
       value: "#6676c7"
     1200:
-      value: "#5d6cb4"
+      value: "#5d6cb3"
     1300:
-      value: "#5361a0"
+      value: "#5461a0"
     1400:
-      value: "#4a568d"
+      value: "#4b568c"
     1500:
-      value: "#414b79"
+      value: "#424b78"
     1600:
-      value: "#374066"
+      value: "#394065"
     1700:
-      value: "#2e3552"
+      value: "#2f3551"
     1800:
-      value: "#252b3f"
+      value: "#262b3d"
     1900:
-      value: "#1b202b"
+      value: "#1d202a"
 
   mittwald-green:
     100:
-      value: "#e5ebef"
+      value: "#e3e8eb"
     200:
-      value: "#dde4e6"
+      value: "#dce1e3"
     300:
-      value: "#d6ddde"
+      value: "#d4dbdb"
     400:
-      value: "#ced6d6"
+      value: "#cdd4d3"
     500:
-      value: "#c6cfce"
+      value: "#c5cdcc"
     600:
-      value: "#bec8c5"
+      value: "#bdc6c4"
     700:
-      value: "#b6c1bd"
+      value: "#b6c0bc"
     800:
-      value: "#aebab5"
+      value: "#aeb9b4"
     900:
-      value: "#a7b2ac"
+      value: "#a6b2ac"
     1000:
       value: "#9faba4"
     1100:
@@ -144,99 +142,99 @@ color:
     1200:
       value: "#838d88"
     1300:
-      value: "#757e7a"
+      value: "#757e79"
     1400:
-      value: "#666f6c"
+      value: "#676f6b"
     1500:
-      value: "#58605e"
+      value: "#59605d"
     1600:
-      value: "#4a5150"
+      value: "#4c514f"
     1700:
-      value: "#3c4242"
+      value: "#3e4241"
     1800:
-      value: "#2e3334"
+      value: "#303332"
     1900:
-      value: "#202426"
+      value: "#222424"
 
   mittwald-lilac:
     100:
-      value: "#e9e9f8"
+      value: "#e7e6f4"
     200:
-      value: "#e4dff9"
+      value: "#e3ddf5"
     300:
-      value: "#dcccfa"
+      value: "#dfd4f7"
     400:
-      value: "#d8c3fb"
+      value: "#dbcbf8"
     500:
-      value: "#d3bafc"
+      value: "#d7c2f9"
     600:
-      value: "#d8c3fb"
+      value: "#d3b8fa"
     700:
-      value: "#cfb0fd"
+      value: "#cfaffb"
     800:
-      value: "#cba7fd"
+      value: "#cba6fd"
     900:
-      value: "#c79efe"
+      value: "#c69dfe"
     1000:
       value: "#c294ff"
     1100:
       value: "#b187e8"
     1200:
-      value: "#9f7bd1"
+      value: "#a07bd0"
     1300:
-      value: "#8e6eba"
+      value: "#8e6eb9"
     1400:
-      value: "#7c61a3"
+      value: "#7d61a2"
     1500:
-      value: "#6a558b"
+      value: "#6b558b"
     1600:
-      value: "#594874"
+      value: "#5a4873"
     1700:
-      value: "#473b5d"
+      value: "#483b5c"
     1800:
-      value: "#352e46"
+      value: "#372e45"
     1900:
-      value: "#24222f"
+      value: "#25222d"
 
   mittwald-orange:
     100:
-      value: "#e5e7ed"
+      value: "#ebe7e8"
     200:
-      value: "#e5dfe1"
+      value: "#eadfdd"
     300:
-      value: "#e6d8d6"
+      value: "#ead8d3"
     400:
-      value: "#e6d0cb"
+      value: "#e9d0c8"
     500:
-      value: "#e6c8bf"
+      value: "#e9c8bd"
     600:
-      value: "#e6c0b4"
+      value: "#e9c0b2"
     700:
-      value: "#e6b8a9"
+      value: "#e8b8a7"
     800:
-      value: "#e7b09d"
+      value: "#e8b09c"
     900:
       value: "#e7a992"
     1000:
       value: "#e7a187"
     1100:
-      value: "#d2937c"
+      value: "#d2937b"
     1200:
-      value: "#bc8571"
+      value: "#bd8570"
     1300:
-      value: "#a77766"
+      value: "#a87765"
     1400:
-      value: "#92695a"
+      value: "#93695a"
     1500:
-      value: "#7d5b4f"
+      value: "#7e5b4e"
     1600:
-      value: "#674d44"
+      value: "#684d43"
     1700:
-      value: "#523f39"
+      value: "#533f38"
     1800:
-      value: "#3d312e"
+      value: "#3e312d"
     1900:
-      value: "#272323"
+      value: "#292321"
 
   system-danger:
     100:
@@ -358,46 +356,86 @@ color:
     1900:
       value: "#091510"
 
+  system-info:
+    100:
+      value: "#e0e7f4"
+    200:
+      value: "#d4dbf1"
+    300:
+      value: "#c7d0ef"
+    400:
+      value: "#bbc5ec"
+    500:
+      value: "#aebae9"
+    600:
+      value: "#a2aee6"
+    700:
+      value: "#95a3e3"
+    800:
+      value: "#8898e0"
+    900:
+      value: "#7c8dde"
+    1000:
+      value: "#6f81db"
+    1100:
+      value: "#6676c7"
+    1200:
+      value: "#5d6cb4"
+    1300:
+      value: "#5361a0"
+    1400:
+      value: "#4a568d"
+    1500:
+      value: "#414b79"
+    1600:
+      value: "#374066"
+    1700:
+      value: "#2e3552"
+    1800:
+      value: "#252b3f"
+    1900:
+      value: "#1b202b"
+
   black-alpha:
     100:
-      value: "rgb(0 0 0 / 8%)"
+      value: "rgb(0 0 0 / 10%)"
     200:
-      value: "rgb(0 0 0 / 16%)"
+      value: "rgb(0 0 0 / 20%)"
     300:
-      value: "rgb(0 0 0 / 24%)"
+      value: "rgb(0 0 0 / 30%)"
     400:
       value: "rgb(0 0 0 / 40%)"
     500:
-      value: "rgb(0 0 0 / 48%)"
+      value: "rgb(0 0 0 / 50%)"
     600:
-      value: "rgb(0 0 0 / 56%)"
+      value: "rgb(0 0 0 / 60%)"
     700:
-      value: "rgb(0 0 0 / 64%)"
+      value: "rgb(0 0 0 / 70%)"
     800:
-      value: "rgb(0 0 0 / 72%)"
+      value: "rgb(0 0 0 / 80%)"
     900:
-      value: "rgb(0 0 0 / 88%)"
+      value: "rgb(0 0 0 / 90%)"
     1000:
       value: "rgb(0 0 0 / 100%)"
 
   white-alpha:
     100:
-      value: "rgb(255 255 255 / 8%)"
+      value: "rgb(255 255 255 / 10%)"
     200:
-      value: "rgb(255 255 255 / 16%)"
+      value: "rgb(255 255 255 / 20%)"
     300:
-      value: "rgb(255 255 255 / 24%)"
+      value: "rgb(255 255 255 / 30%)"
     400:
       value: "rgb(255 255 255 / 40%)"
     500:
-      value: "rgb(255 255 255 / 48%)"
+      value: "rgb(255 255 255 / 50%)"
     600:
-      value: "rgb(255 255 255 / 56%)"
+      value: "rgb(255 255 255 / 60%)"
     700:
-      value: "rgb(255 255 255 / 64%)"
+      value: "rgb(255 255 255 / 70%)"
     800:
-      value: "rgb(255 255 255 / 72%)"
+      value: "rgb(255 255 255 / 80%)"
     900:
-      value: "rgb(255 255 255 / 88%)"
+      value: "rgb(255 255 255 / 90%)"
     1000:
       value: "rgb(255 255 255 / 100%)"

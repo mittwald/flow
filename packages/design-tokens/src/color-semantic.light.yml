@@ -10,8 +10,10 @@
 #   quiet.100–300   soft surface, hover, pressed; plain/outline hover, pressed
 #   strong.100–300  solid surface, hover, pressed; strong.100 is also plain
 #                   text, link and border, strong.200 text on soft/outline
-# Hover and pressed take the next Brand step. strong.100 is the step closest
-# to the Brand base that keeps AA (primary and decorative-blue: the base).
+# Hover and pressed take the next Brand step; light mittwald-blue takes every
+# second step (1000/1200/1400), its dark half is too dense (ΔE 3.5, #3479).
+# strong.100 is the step closest to the Brand base that keeps AA (primary
+# and decorative-blue: the base).
 # Selected is a resting state: plain/outline selected takes the soft surface
 # (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
 #
@@ -46,26 +48,26 @@ primary:
       100:
         value: "{color.mittwald-blue.1000}"
       200:
-        value: "{color.mittwald-blue.1100}"
-      300:
         value: "{color.mittwald-blue.1200}"
+      300:
+        value: "{color.mittwald-blue.1400}"
 
 info:
   color:
     quiet:
       100:
-        value: "{color.mittwald-navy.100}"
+        value: "{color.system-info.100}"
       200:
-        value: "{color.mittwald-navy.200}"
+        value: "{color.system-info.200}"
       300:
-        value: "{color.mittwald-navy.300}"
+        value: "{color.system-info.300}"
     strong:
       100:
-        value: "{color.mittwald-navy.1300}"
+        value: "{color.system-info.1300}"
       200:
-        value: "{color.mittwald-navy.1500}"
+        value: "{color.system-info.1500}"
       300:
-        value: "{color.mittwald-navy.1600}"
+        value: "{color.system-info.1600}"
 
 success:
   color:
@@ -165,9 +167,9 @@ decorative-blue:
       100:
         value: "{color.mittwald-blue.1000}"
       200:
-        value: "{color.mittwald-blue.1100}"
-      300:
         value: "{color.mittwald-blue.1200}"
+      300:
+        value: "{color.mittwald-blue.1400}"
 
 decorative-navy:
   color:
@@ -261,69 +263,69 @@ dark:
   color:
     quiet:
       100:
-        value: "{color.black-alpha.200}"
+        value: "{color.black-alpha.100}"
       200:
-        value: "{color.black-alpha.300}"
+        value: "{color.black-alpha.200}"
       300:
-        value: "{color.black-alpha.400}"
+        value: "{color.black-alpha.300}"
     strong:
       100:
         value: "{color.black-alpha.1000}"
       200:
         value: "{color.black-alpha.900}"
       300:
-        value: "{color.black-alpha.800}"
+        value: "{color.black-alpha.700}"
 
 light:
   color:
     quiet:
       100:
-        value: "{color.white-alpha.200}"
+        value: "{color.white-alpha.100}"
       200:
-        value: "{color.white-alpha.300}"
+        value: "{color.white-alpha.200}"
       300:
-        value: "{color.white-alpha.400}"
+        value: "{color.white-alpha.300}"
     strong:
       100:
         value: "{color.white-alpha.1000}"
       200:
         value: "{color.white-alpha.900}"
       300:
-        value: "{color.white-alpha.800}"
+        value: "{color.white-alpha.700}"
 
 dark-static:
   color:
     quiet:
       100:
-        value: "{color.black-alpha.200}"
+        value: "{color.black-alpha.100}"
       200:
-        value: "{color.black-alpha.300}"
+        value: "{color.black-alpha.200}"
       300:
-        value: "{color.black-alpha.400}"
+        value: "{color.black-alpha.300}"
     strong:
       100:
         value: "{color.black-alpha.1000}"
       200:
         value: "{color.black-alpha.900}"
       300:
-        value: "{color.black-alpha.800}"
+        value: "{color.black-alpha.700}"
 
 light-static:
   color:
     quiet:
       100:
-        value: "{color.white-alpha.200}"
+        value: "{color.white-alpha.100}"
       200:
-        value: "{color.white-alpha.300}"
+        value: "{color.white-alpha.200}"
       300:
-        value: "{color.white-alpha.400}"
+        value: "{color.white-alpha.300}"
     strong:
       100:
         value: "{color.white-alpha.1000}"
       200:
         value: "{color.white-alpha.900}"
       300:
-        value: "{color.white-alpha.800}"
+        value: "{color.white-alpha.700}"
 
 # Literal values: Flow owns these colors outright (ADR 0007).
 transparent:
