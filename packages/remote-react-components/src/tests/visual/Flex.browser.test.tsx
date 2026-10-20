@@ -28,6 +28,14 @@ test.each(testEnvironments)(
         <Flex padding="xl">
           <AccentBox />
         </Flex>
+        <Label>paddingInline: xl</Label>
+        <Flex paddingInline="xl">
+          <AccentBox />
+        </Flex>
+        <Label>paddingBlock: xl</Label>
+        <Flex paddingBlock="xl">
+          <AccentBox />
+        </Flex>
       </Flex>,
     );
 

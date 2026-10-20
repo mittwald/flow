@@ -4,6 +4,7 @@ import { Activity } from "@/components/Activity/index";
 import { page } from "vitest/browser";
 import { createPortal } from "react-dom";
 import { useIsActivityActive } from "@/components/Activity/context";
+import { useEffect } from "react";
 
 const TestComponent = () => {
   return <span role="status">Active</span>;
@@ -164,3 +165,42 @@ test("A nested Activity stays inactive while its parent is inactive", async () =
   );
   expect(portalledText()).toBe("inactive");
 });
+
+let probeEffect: "connected" | "disconnected" | undefined;
+
+const EffectProbe = () => {
+  useEffect(() => {
+    probeEffect = "connected";
+    return () => {
+      probeEffect = "disconnected";
+    };
+  }, []);
+  return null;
+};
+
+/*
+ * React's own `Activity` disconnects the effects of a hidden subtree; the
+ * Suspense fallback keeps them running. Fails if a React that ships `Activity`
+ * gets the fallback, as every React after 19.2 did under a version check.
+ */
+test.each([
+  [false, "disconnected"],
+  [true, "connected"],
+])(
+  "Hiding disconnects the children's effects only with React's Activity (forceCustomActivity=%s)",
+  async (forceCustomActivity, expectedEffect) => {
+    const { rerender } = await render(
+      <Activity isActive forceCustomActivity={forceCustomActivity}>
+        <EffectProbe />
+      </Activity>,
+    );
+    expect(probeEffect).toBe("connected");
+
+    await rerender(
+      <Activity isActive={false} forceCustomActivity={forceCustomActivity}>
+        <EffectProbe />
+      </Activity>,
+    );
+    expect(probeEffect).toBe(expectedEffect);
+  },
+);

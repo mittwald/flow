@@ -13,6 +13,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
 
 export interface SliderProps
   extends
@@ -60,6 +61,7 @@ export const Slider = flowComponent("Slider", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "Slider");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Slider");
@@ -78,8 +80,75 @@ export const Slider = flowComponent("Slider", (props) => {
     },
   };
 
+  const trackPropsContext: PropsContext = {
+    Button: {
+      isPending: false,
+      isFailed: false,
+      isSucceeded: false,
+      isReadOnly: isReadOnly,
+      excludeFromTabOrder: true,
+      isDisabled,
+      variant: "plain",
+      color: "secondary",
+      size: "s",
+    },
+  };
+
+  const renderTrack = ({ state }: Aria.SliderTrackRenderProps) => {
+    const stepButtons = (
+      <>
+        <Button
+          onPress={() => state.decrementThumb(0, step)}
+          aria-label={stringFormatter.format("decrement")}
+          className={styles.decrement}
+        >
+          <IconMinus />
+        </Button>
+        <Button
+          onPress={() => state.incrementThumb(0, step)}
+          aria-label={stringFormatter.format("increment")}
+          className={styles.increment}
+        >
+          <IconPlus />
+        </Button>
+      </>
+    );
+
+    const initialMarker = showInitialMarker &&
+      typeof defaultValue === "number" && (
+        <div
+          className={styles.initialMarker}
+          style={{
+            "--slider--initial-value": state.getValuePercent(defaultValue),
+          }}
+        />
+      );
+
+    return (
+      <PropsContextProvider props={trackPropsContext}>
+        {!sliderOnly && stepButtons}
+
+        <div
+          className={styles.fill}
+          style={{
+            "--slider--value": state.getThumbPercent(0),
+          }}
+        />
+
+        {initialMarker}
+        <Aria.SliderThumb
+          inputRef={objectRef}
+          aria-describedby={controlProps["aria-describedby"]}
+          name={name}
+          className={styles.handle}
+          isDisabled={isReadOnly}
+        />
+      </PropsContextProvider>
+    );
+  };
+
   return (
-    <div className={wrapperProps.className}>
+    <div {...skeletonProps} className={wrapperProps.className}>
       <Aria.Slider
         {...rest}
         className={rootClassName}
@@ -92,74 +161,19 @@ export const Slider = flowComponent("Slider", (props) => {
 
           {!sliderOnly && (
             <div className={styles.text}>
-              <Aria.SliderOutput className={styles.value} />{" "}
+              <Aria.SliderOutput className={styles.value}>
+                {({ defaultChildren }) => (
+                  <SkeletonTextContent defaultWidth="2em">
+                    {defaultChildren}
+                  </SkeletonTextContent>
+                )}
+              </Aria.SliderOutput>{" "}
               <UiComponentTunnelExit id="label" component="Slider" />
             </div>
           )}
 
           <Aria.SliderTrack className={styles.track}>
-            {({ state }) => (
-              <PropsContextProvider
-                props={{
-                  Button: {
-                    isPending: false,
-                    isFailed: false,
-                    isSucceeded: false,
-                    isReadOnly: isReadOnly,
-                    excludeFromTabOrder: true,
-                    isDisabled,
-                    variant: "plain",
-                    color: "secondary",
-                    size: "s",
-                  },
-                }}
-              >
-                {!sliderOnly && (
-                  <>
-                    <Button
-                      onPress={() => state.decrementThumb(0, step)}
-                      aria-label={stringFormatter.format("decrement")}
-                      className={styles.decrement}
-                    >
-                      <IconMinus />
-                    </Button>
-                    <Button
-                      onPress={() => state.incrementThumb(0, step)}
-                      aria-label={stringFormatter.format("increment")}
-                      className={styles.increment}
-                    >
-                      <IconPlus />
-                    </Button>
-                  </>
-                )}
-
-                <div
-                  className={styles.fill}
-                  style={{
-                    "--slider--value": state.getThumbPercent(0),
-                  }}
-                />
-
-                {showInitialMarker &&
-                  defaultValue &&
-                  typeof defaultValue === "number" && (
-                    <div
-                      className={styles.initialMarker}
-                      style={{
-                        "--slider--initial-value":
-                          state.getValuePercent(defaultValue),
-                      }}
-                    />
-                  )}
-                <Aria.SliderThumb
-                  inputRef={objectRef}
-                  aria-describedby={controlProps["aria-describedby"]}
-                  name={name}
-                  className={styles.handle}
-                  isDisabled={isReadOnly}
-                />
-              </PropsContextProvider>
-            )}
+            {renderTrack}
           </Aria.SliderTrack>
           <FieldErrorView />
         </PropsContextProvider>

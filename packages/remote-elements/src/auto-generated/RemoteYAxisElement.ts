@@ -22,6 +22,7 @@ export class RemoteYAxisElement extends FlowRemoteElement<RemoteYAxisElementProp
       scale: {},
       type: {},
       unit: {},
+      width: {},
     };
   }
 

@@ -7,6 +7,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import ContextMenuSectionView from "@/views/ContextMenuSectionView";
+import { SectionHeadingProvider, useSectionHeading } from "./context";
 
 export interface SectionProps
   extends
@@ -31,6 +32,9 @@ export const Section = flowComponent(
       ...rest
     } = props;
 
+    const headingId = useId();
+    const sectionHeading = useSectionHeading(headingId);
+
     if (!children) {
       return null;
     }
@@ -49,8 +53,6 @@ export const Section = flowComponent(
       className,
     );
 
-    const headingId = useId();
-
     const propsContext: PropsContext = {
       Heading: {
         level: 2,
@@ -60,16 +62,15 @@ export const Section = flowComponent(
       Header: {
         renderSectionHeader: true,
       },
-      List: {
-        "aria-labelledby": headingId,
-      },
     };
 
     return (
       <section {...rest} className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
+        <SectionHeadingProvider value={sectionHeading}>
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+        </SectionHeadingProvider>
       </section>
     );
   },

@@ -8,7 +8,10 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 import { Children } from "react";
+import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useRegisterSectionHeading } from "@/components/Section/context";
 
 export interface HeadingProps
   extends
@@ -47,6 +50,10 @@ export const Heading = flowComponent("Heading", (props) => {
     elementType,
     ...rest
   } = props;
+
+  useRegisterSectionHeading(rest.id);
+
+  const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(
     styles.heading,
@@ -115,9 +122,17 @@ export const Heading = flowComponent("Heading", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Element className={rootClassName} {...rest} ref={ref} level={level}>
+      <Element
+        className={rootClassName}
+        {...rest}
+        ref={ref}
+        level={level}
+        inert={isSkeleton || undefined}
+      >
         <span className={styles.headingText}>
-          {children}
+          <SkeletonTextContent defaultWidth="12em">
+            {children}
+          </SkeletonTextContent>
           <UiComponentTunnelExit id="headingContent" component="Heading">
             {(items) =>
               Children.count(items) > 0 && (

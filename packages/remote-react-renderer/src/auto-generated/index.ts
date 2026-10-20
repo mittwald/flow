@@ -3,6 +3,7 @@
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 import { AccentBox as AccentBox } from "@mittwald/flow-react-components";
 import { Accordion as Accordion } from "@mittwald/flow-react-components";
+import { AccordionGroup as AccordionGroup } from "@mittwald/flow-react-components";
 import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components";
 import { Alert as Alert } from "@mittwald/flow-react-components";
 import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
@@ -111,6 +112,7 @@ import { SegmentedControl as SegmentedControl } from "@mittwald/flow-react-compo
 import { Select as Select } from "@mittwald/flow-react-components";
 import { Separator as Separator } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
+import { SkeletonMode as SkeletonMode } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
@@ -140,6 +142,10 @@ import { YAxis as YAxis } from "@mittwald/flow-react-components";
 export const flowComponents = {
   "flr-accent-box": createFlowRemoteComponentRenderer("AccentBox", AccentBox),
   "flr-accordion": createFlowRemoteComponentRenderer("Accordion", Accordion),
+  "flr-accordion-group": createFlowRemoteComponentRenderer(
+    "AccordionGroup",
+    AccordionGroup,
+  ),
   "flr-action-group": createFlowRemoteComponentRenderer(
     "ActionGroup",
     ActionGroup,
@@ -434,6 +440,10 @@ export const flowComponents = {
   "flr-select": createFlowRemoteComponentRenderer("Select", Select),
   "flr-separator": createFlowRemoteComponentRenderer("Separator", Separator),
   "flr-skeleton": createFlowRemoteComponentRenderer("Skeleton", Skeleton),
+  "flr-skeleton-mode": createFlowRemoteComponentRenderer(
+    "SkeletonMode",
+    SkeletonMode,
+  ),
   "flr-skeleton-text": createFlowRemoteComponentRenderer(
     "SkeletonText",
     SkeletonText,

@@ -166,3 +166,36 @@ test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
     await testScreenshot("Combine Text and CopyButton");
   },
 );
+
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
+  "Combine Kbd and Text (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, Kbd, Text, Combine },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <Combine>
+          <Kbd variant="soft">↑</Kbd>
+          <Kbd variant="soft">↓</Kbd>
+        </Combine>
+        <Combine>
+          <Kbd variant="soft">Esc</Kbd>
+          <Text>Text</Text>
+        </Combine>
+        <Combine>
+          <Kbd variant="soft">↑</Kbd>
+          <Kbd variant="soft">↓</Kbd>
+          <Text>Text</Text>
+        </Combine>
+        <Combine>
+          <Kbd keys={["mod", "k"]} />
+          <Text>Text</Text>
+        </Combine>
+      </Flex>,
+    );
+
+    await testScreenshot("Combine Kbd and Text");
+  },
+);

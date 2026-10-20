@@ -24,6 +24,10 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Read the OS release
+      id: os
+      uses: ./.github/actions/os-release
+
     # Both browsers, because the suite renders one theme in each (WebKit light,
     # Firefox dark) and a full run needs both. Keyed apart from test.yml's
     # per-browser caches, which would otherwise decide what this one finds.
@@ -31,13 +35,21 @@ runs:
       uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
         path: ~/.cache/ms-playwright
-        key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        key:
+          playwright-${{ steps.os.outputs.release }}-${{
+          hashFiles('pnpm-lock.yaml') }}
         restore-keys: |
-          playwright-${{ runner.os }}-
+          playwright-${{ steps.os.outputs.release }}-
 
     - name: Install the Playwright browsers
-      shell: bash
-      run: pnpm test:browser:prepare --only-shell
+      uses: ./.github/actions/cache-debs
+      with:
+        # Keyed apart from install-playwright's per-browser .debs: this set
+        # covers both browsers.
+        key: playwright-firefox-webkit-debs
+        prefetch:
+          .github/actions/install-playwright/fetch-debs.sh firefox webkit
+        run: pnpm test:browser:prepare --only-shell
 
     # `test:visual` only declares `^build`; building the package itself is a
     # superset of that. Outside the retry loop below: a hung browser leaves the

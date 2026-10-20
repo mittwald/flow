@@ -51,6 +51,7 @@ export const TextField = flowComponent("TextField", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "TextField");
 
   const rootClassName = clsx(wrapperProps.className, className);
@@ -91,10 +92,30 @@ export const TextField = flowComponent("TextField", (props) => {
     maxCount: props.maxLength ?? 0,
   });
 
+  const isPasswordHidden = type === "password";
+
+  const togglePasswordVisibility = () =>
+    setType(isPasswordHidden ? "text" : "password");
+
+  const passwordVisibilityButton = (
+    <Button
+      color="secondary"
+      variant="plain"
+      className={styles.button}
+      onPress={togglePasswordVisibility}
+      aria-label={translation.format(
+        isPasswordHidden ? "password.show" : "password.hide",
+      )}
+    >
+      {isPasswordHidden ? <IconShow /> : <IconHide />}
+    </Button>
+  );
+
   return (
     <Aria.TextField
       {...rest}
       {...controlProps}
+      {...skeletonProps}
       className={rootClassName}
       onChange={handleChange}
       type={type}
@@ -110,21 +131,7 @@ export const TextField = flowComponent("TextField", (props) => {
               ref={ref}
             />
             <UiComponentTunnelExit id="button" component="TextField" />
-            {typeFromProps === "password" && (
-              <Button
-                color="secondary"
-                variant="plain"
-                className={styles.button}
-                onPress={() =>
-                  setType(type === "password" ? "text" : "password")
-                }
-                aria-label={translation.format(
-                  `password.${type === "password" ? "show" : "hide"}`,
-                )}
-              >
-                {type === "password" ? <IconShow /> : <IconHide />}
-              </Button>
-            )}
+            {typeFromProps === "password" && passwordVisibilityButton}
           </div>
           {showCharacterCount && (
             <FieldDescription>{charactersCountDescription}</FieldDescription>

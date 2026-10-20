@@ -1,5 +1,5 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
+import { expect, onTestFinished, test } from "vitest";
 
 // Older versions have no `Bar`, so the host renders `undefined` as an
 // element type and fails with "Element type is invalid".
@@ -103,19 +103,19 @@ test.each(testEnvironments)(
 
 const barChartData = [
   {
-    name: "Stat 1",
+    name: "Production Webshop",
     first: 40,
     second: 24,
     third: 75,
   },
   {
-    name: "Stat 2",
+    name: "Staging Webshop",
     first: 30,
     second: 13,
     third: 50,
   },
   {
-    name: "Stat 3",
+    name: "Company Blog",
     first: 20,
     second: 68,
     third: 100,
@@ -194,5 +194,55 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
     );
 
     await testScreenshot("CartesianChart with horizontal Bars");
+  },
+);
+
+/**
+ * The left edge of the widest y-axis tick label in the SVG's user units —
+ * negative when the label sticks out of the chart. `NaN` until every label is
+ * rendered, so a poll cannot pass on an empty axis.
+ */
+const leftmostYAxisLabelEdge = (container: HTMLElement) => {
+  const labels = container.querySelectorAll<SVGTextElement>(
+    ".recharts-yAxis-tick-labels .recharts-cartesian-axis-tick-value",
+  );
+  return labels.length === barChartData.length
+    ? Math.min(...[...labels].map((label) => label.getBBox().x))
+    : Number.NaN;
+};
+
+/*
+ * A CSS `zoom` around the chart — the docs preview shrinks its examples this way
+ * on small screens. Recharts measured the labels in zoomed screen pixels and
+ * sized the category axis that much too narrow, so the longest label stuck out
+ * of the chart.
+ */
+test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
+  "CartesianChart with horizontal Bars under CSS zoom (%s)",
+  async ({
+    testScreenshot,
+    render,
+    container,
+    components: { CartesianChart, ChartGrid, Bar, XAxis, YAxis },
+  }) => {
+    document.body.style.zoom = "0.85";
+    onTestFinished(() => {
+      document.body.style.zoom = "";
+    });
+
+    await render(
+      <CartesianChart height="300px" layout="vertical" data={barChartData}>
+        <ChartGrid vertical horizontal={false} />
+        <Bar dataKey="first" />
+        <XAxis />
+        <YAxis dataKey="name" />
+      </CartesianChart>,
+    );
+
+    await expect
+      .poll(() => leftmostYAxisLabelEdge(container.element() as HTMLElement))
+      .toBeGreaterThanOrEqual(0);
+
+    await testScreenshot("CartesianChart with horizontal Bars under CSS zoom");
   },
 );

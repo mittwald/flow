@@ -86,6 +86,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     fieldPropsContext,
     wrapperProps,
     controlProps,
+    skeletonProps,
   } = useFieldComponent(props, "Autocomplete");
 
   const inputProps: SearchFieldProps & TextFieldProps = {
@@ -131,7 +132,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <div className={rootClassName}>
+    <div {...skeletonProps} className={rootClassName}>
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}

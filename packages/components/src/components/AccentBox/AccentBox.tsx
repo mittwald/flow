@@ -11,6 +11,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { SectionHeadingReset } from "@/components/Section/context";
 
 const accentBoxBackgroundColors = [
   "neutral",
@@ -126,9 +127,11 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   return (
     <Element className={rootClassName} style={style}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
+      <SectionHeadingReset>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </SectionHeadingReset>
     </Element>
   );
 });

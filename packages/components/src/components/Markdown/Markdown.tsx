@@ -4,8 +4,8 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, ReactNode, Ref } from "react";
-import { Children, isValidElement } from "react";
+import type { CSSProperties, FC, Ref } from "react";
+import { Children, isValidElement, useId } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
@@ -14,7 +14,13 @@ import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
+import { isExternalHref } from "@/components/Markdown/lib/isExternalHref";
 import type { CodeEditorLanguage } from "@/components/CodeEditor/languages";
+import {
+  SkeletonBlockText,
+  SkeletonInlineContent,
+} from "@/components/Markdown/components/SkeletonBlocks";
+import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
@@ -55,9 +61,23 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ...rest
   } = props;
 
+  const isSkeleton = useSkeletonMode();
+  /* Footnote ids are per document, so two instances on one page would share
+     them and a back link would jump into the other one. */
+  const clobberPrefix = `user-content-${useId().replace(/[^\w-]/g, "")}-`;
+
   const defaultComponents: Components = {
+    /* GFM footnotes link through `id` (the back link's target), `aria-label`
+       and `aria-describedby`. */
     a: (props) => (
-      <Link target="_blank" color={color} href={props.href}>
+      <Link
+        id={props.id}
+        aria-label={props["aria-label"]}
+        aria-describedby={props["aria-describedby"]}
+        target={isExternalHref(props.href) ? "_blank" : undefined}
+        color={color}
+        href={props.href}
+      >
         {props.children}
       </Link>
     ),
@@ -69,6 +89,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
     h1: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(1, headingOffset)}
         color={color}
       >
@@ -77,6 +98,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h2: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(2, headingOffset)}
         color={color}
       >
@@ -85,6 +107,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h3: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(3, headingOffset)}
         color={color}
       >
@@ -93,6 +116,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h4: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(4, headingOffset)}
         color={color}
       >
@@ -101,6 +125,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h5: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(5, headingOffset)}
         color={color}
       >
@@ -109,6 +134,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     h6: (props) => (
       <Heading
+        id={props.id}
         level={getHeadingLevelWithOffset(6, headingOffset)}
         color={color}
       >
@@ -139,20 +165,39 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         />
       );
     },
-    ul: (props) => (
-      <Text color={color}>
-        <ul>{props.children as ReactNode}</ul>
-      </Text>
+    ul: ({ node: ignoredNode, ...props }) => (
+      <SkeletonBlockText color={color}>
+        <ul {...props} />
+      </SkeletonBlockText>
     ),
-    ol: (props) => (
-      <Text color={color}>
-        <ol>{props.children as ReactNode}</ol>
-      </Text>
+    ol: ({ node: ignoredNode, ...props }) => (
+      <SkeletonBlockText color={color}>
+        <ol {...props} />
+      </SkeletonBlockText>
     ),
+    li: ({ node: ignoredNode, children, ...props }) => (
+      <li {...props}>
+        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+      </li>
+    ),
+    th: ({ node: ignoredNode, children, ...props }) => (
+      <th {...props}>
+        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+      </th>
+    ),
+    td: ({ node: ignoredNode, children, ...props }) => (
+      <td {...props}>
+        <SkeletonInlineContent>{children}</SkeletonInlineContent>
+      </td>
+    ),
+    /* A text bar resets the mode for its content, so the image reads it
+       from here. A skeleton issues no request. */
+    img: ({ node: ignoredNode, ...props }) =>
+      isSkeleton ? null : <img {...props} />,
     blockquote: (props) => (
-      <Text color={color}>
+      <SkeletonBlockText color={color}>
         <blockquote>{props.children}</blockquote>
-      </Text>
+      </SkeletonBlockText>
     ),
   };
 
@@ -170,7 +215,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         disallowedElements={disallowedElements}
         rehypePlugins={rehypePlugins}
         remarkPlugins={remarkPlugins ?? [remarkGfm]}
-        remarkRehypeOptions={remarkRehypeOptions}
+        remarkRehypeOptions={{ clobberPrefix, ...remarkRehypeOptions }}
         skipHtml={skipHtml}
         unwrapDisallowed={unwrapDisallowed}
         urlTransform={urlTransform}

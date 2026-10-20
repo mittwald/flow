@@ -55,12 +55,6 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
         tunnel: actionsTunnel,
         Button: { size: "s" },
       },
-      Action: {
-        tunnel: actionsTunnel,
-        Button: {
-          tunnel: null,
-        },
-      },
       Heading: {
         level: 2,
       },

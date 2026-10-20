@@ -222,16 +222,19 @@ Remote generation details:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
 - Props of these components are consumed by mStudio extension developers — no
-  breaking changes; deprecate instead (see
+  breaking changes on a `stable` component; deprecate instead (see
   [Deprecating an API](#deprecating-an-api)). Why this matters:
   [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 ## Deprecating an API
 
-Never break a shipped API — keep the old path working and warn at runtime with
-`useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
-of deprecated entry point: a prop, a whole component, a hook, or an integration
-export (`nextjs`, `mittwald-password-tools-js`).
+Never break a shipped API of a `stable` component — a `beta` one is exempt (see
+the root
+[Hard rules](https://github.com/mittwald/flow/blob/main/AGENTS.md#hard-rules)).
+Keep the old path working and warn at runtime with `useWarnDeprecation` (from
+`DeprecationWarningProvider`). This covers every kind of deprecated entry point:
+a prop, a whole component, a hook, or an integration export (`nextjs`,
+`mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
@@ -334,6 +337,28 @@ if ("action" in props) {
 | `*.browser.test.tsx` (vitest browser mode) | Component has real **behavior**: interaction, controlled state, async flows, form integration, controllers. Render with `vitest-browser-react`, interact via `userEvent`, query by role. |
 | `*.test.ts(x)` (unit)                      | Pure logic in `src/lib/` or component utility functions.                                                                                                                                 |
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
+
+A bug fix gets a regression test when it changes behavior this table covers, or
+rendered output the visual suite covers
+(`packages/remote-react-components/src/tests/visual`, see Definition of Done
+item 4 in the
+[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md#definition-of-done--component-work))
+— not by default. Leave out:
+
+- **Wiring of a single prop** — "the consumer `className` reaches the root",
+  "`aria-label` is forwarded". A test for one prop is arbitrary: every other
+  prop would need the same. A whole class of wiring bugs (`className` merge
+  order, a props spread) belongs in a lint rule or a shared contract helper like
+  `testFormFieldContract`.
+- **A spy on a function prop the component consumes** — `sortBy`, `filterBy`, a
+  formatter. Assert the result it produces, not that it ran. `on*` event props
+  are the exception: the call is what the consumer observes, so a spy is the
+  assertion.
+- **Tests that pass without the fix.** Revert the fix and watch the test fail
+  before committing it. If it cannot fail, it guards nothing; say in the PR how
+  you verified the fix instead. The `optimizeDeps` entry under
+  [Common failures](#common-failures) below shows one way a test passes in both
+  directions.
 
 Run: `pnpm nx test:unit components`,
 `pnpm nx test:browser components --browser.name=webkit`. The browser targets
@@ -476,6 +501,43 @@ Checklist beyond the component itself:
   drops characters under fast typing
   ([docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md)).
 
+## Every remote binding reads this package
+
+An extension can be written in React or in another framework, and each one has a
+binding of its own in this repository — `remote-react-components` as the
+reference, `remote-vue-components` as the second. Only part of what you change
+here reaches the others by itself.
+
+- **A `@flr-generate` component is free.** Props, events and slots are generated
+  for every binding — regenerate and commit, and each wrapper is current.
+- **A `flr-universal` composition is not.** `Modal`, `Popover`, `LightBox`,
+  `Action`, `List` and their triggers are React compositions over remote
+  elements, so every other binding rebuilds them by hand (Vue's are in
+  `packages/remote-vue-components/src/{components,overlays,list}`). While the
+  Vue binding is beta, bring its rebuild along where you can; where you cannot,
+  record the divergence with its reason in
+  `packages/remote-vue-components/e2e/react-parity/knownGaps.ts`. The `List` has
+  no such list: `e2e/list-parity` needs every scenario from every binding, so a
+  `List` change brings the Vue `List` along.
+- **Their class names and UI strings are a contract.** The rebuilds pass
+  `flow--modal`, `flow--list--…` to the host and carry their own copies of the
+  UI text they show (the `List`'s, `confirmOnClose`'s, the `LightBox` close
+  label), because neither is importable from a published entry point. A rename
+  fails lint (`flow/no-unknown-flow-class`), a rewording fails
+  `src/tests/CopiedTexts.test.ts` in the Vue package — update the binding's copy
+  in the same change.
+- **Behaviour that is not rendering belongs in
+  `@mittwald/flow-components-base`**, where every binding runs the same code —
+  that is where the `List`'s loader state, filters, sorting, search, view mode
+  and table live. Beware of writing React's lifecycle into it: a cache that a
+  per-render model refreshes for free is a permanent one for a binding that
+  keeps its model.
+
+The gate is `pnpm nx test:parity remote-vue-components`, which renders the
+visual corpus through React and Vue and compares the host's DOM, overlays
+included. It only sees what the corpus renders — a scenario is the cheapest way
+to make a rule stick.
+
 ## Public API surfaces
 
 | Export                                                          | Contents                                                                                                                                                                                                                                            |
@@ -603,3 +665,103 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.
+
+## Common failures
+
+Symptom → cause → fix for authoring components. Repo-wide ones are in the
+[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md#common-failures).
+
+- **Symptom:** `test:compile` fails on a new component — the
+  `flowComponent("X", …)` name/props type isn't assignable
+
+  **Cause:** `flowComponent` names are typed as `keyof` a hand-maintained props
+  registry
+
+  **Fix:** Register the props type in
+  `packages/components/src/components/propTypes/index.ts` (see
+  [The flowComponent factory](#the-flowcomponent-factory))
+
+- **Symptom:** `test:compile` fails in unrelated shared code with
+  **`Property 'children' does not exist on type 'Partial<XProps>'`** right after
+  you registered a new component
+
+  **Cause:** `dynamic()` and other shared helpers are typed over the **union of
+  every** registered props type, so code reading `p.children` breaks as soon as
+  one registered component has no `children` (`Field.tsx`,
+  `flowComponent.browser.test.tsx`)
+
+  **Fix:** Declare `children?: never` on the new props type. It keeps the union
+  accessible and documents that the component takes no children — do **not** add
+  a real `children` slot you then ignore
+
+- **Symptom:** A `ReactElement`-valued prop renders fine in the visual suite's
+  **Remote** environment but kills a real remote connection with
+  **`DataCloneError: Symbol(react.transitional.element) could not be cloned`**
+  (the host then shows `Remote rendering failed: Timeout reached`)
+
+  **Cause:** The prop was generated as a **remote property**, and properties
+  travel through `postMessage`/structured clone, which cannot carry a React
+  element. `remote-dom-react` turns an element-valued prop into a slotted child
+  _only_ when the element declares it as a slot
+  (`Element.remoteSlotDefinitions.has(prop)`), and the generator declares a slot
+  only for props typed exactly `ReactNode` or listed in `@flr-slot-props`
+  (`dev/remote-components-generator/lib/propClassifiers.ts`)
+
+  **Fix:** Add `@flr-slot-props <propA>, <propB>` to the component's JSDoc and
+  regenerate — the prop then arrives as a slotted child and any React subtree
+  works, including a raw `<svg>` or a Tabler icon. The visual suite's **Remote**
+  environment does serialize (a MessageChannel through
+  `FlowThreadSerialization`), but `FlowThreadSerialization` drops React values
+  to `null` with a `console.error` before `postMessage` ever sees them — so the
+  suite renders a component missing the prop, not the `DataCloneError`. Read the
+  console, or verify in `apps/remote-dom-demo` over the iframe connection
+
+- **Symptom:** A function prop works locally but its result is garbage remotely
+  — a formatter renders `[object Promise]`, a predicate is always truthy
+
+  **Cause:** The prop is a **remote property**, and
+  `FlowThreadSerialization.isSerializableByBase` accepts any function, so
+  `@quilted/threads` sends it as a proxy. Calling a proxy is a round trip, so
+  the host gets a **Promise**, never the value. Only `on*` events are safe by
+  construction — they are fire-and-forget
+
+  **Fix:** Either type the prop's return as `Promise<T> | T` and have the host
+  `await` it (`ChartTooltip`'s formatters do), or drop it from the remote
+  surface with `@flr-ignore-props` (`XAxis`/`YAxis` `tickFormatter` do) and
+  regenerate. `checkSerializableProps` now fails generation on new ones, also
+  behind a type alias or a component type; the pre-existing set is listed in
+  `acknowledgedValueReturningProps`
+
+- **Symptom:** A `components` browser test keeps **passing** after you change
+  `packages/icons` — including a test written to fail on exactly that change.
+  The build is not the problem: `pnpm nx build icons` runs `tsc` and `dist`
+  holds the new code
+
+  **Cause:** `packages/components/vite.config.ts` lists `@mittwald/flow-icons`
+  in `optimizeDeps.include`, so vite pre-bundles it. The prebundle is keyed on
+  the lockfile and the config, not on the contents of a linked workspace
+  package's `dist` — so a rebuilt `dist` does not invalidate it and the test
+  keeps loading the old bundle
+
+  **Fix:** Delete `packages/components/node_modules/.vite*` after rebuilding.
+  And confirm a new regression test actually fails without its fix: this one
+  passed in both directions, which is the only symptom you get
+
+- **Symptom:** `stylelint` fails with **`flow/no-unknown-global-flow-class`** —
+  a `:global(.flow--…)` name resolves to nothing
+
+  **Cause:** The class-name generator
+  (`packages/components/dev/vite/cssModuleClassNameGenerator.ts`) **drops the
+  suffix when it equals the component name**, so `ColumnLayout`'s
+  `.columnLayout` compiles to `flow--column-layout`, not
+  `flow--column-layout--column-layout`. The names cannot be derived by hand, and
+  a component that moves leaves every reference to it dead
+
+  **Fix:** Copy the name from the component's committed `*.module.d.scss.ts` —
+  that is what the rule checks against — or take the rule's "Did you mean"
+  suggestion. Just added the class? Regenerate the stubs first:
+  `pnpm nx build:scss-types components`. The same applies to ESLint's
+  `flow/no-unknown-flow-class`, which checks hardcoded `flow--…` strings in
+  TS/TSX (#3095). Before the rule (#3091) this class of bug failed completely
+  silently: no build error, no console warning, and the docs site and Storybook
+  kept rendering

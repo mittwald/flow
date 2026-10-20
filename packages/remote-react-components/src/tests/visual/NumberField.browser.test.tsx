@@ -1,6 +1,9 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
+
+// The unit prop landed in 1.5.0-next.41 and shipped in 1.5.0.
+const customUnitFrom = "1.5.0-next.41";
 
 test.each(testEnvironments)(
   "NumberField states (%s)",
@@ -8,7 +11,7 @@ test.each(testEnvironments)(
     testScreenshot,
     render,
     components: {
-      Flex,
+      ColumnLayout,
       NumberField,
       Label,
       FieldError,
@@ -19,7 +22,7 @@ test.each(testEnvironments)(
     },
   }) => {
     await render(
-      <Flex direction="column" gap="m">
+      <ColumnLayout m={[1, 1]} l={[1, 1]}>
         <NumberField isRequired>
           <Label>
             Default
@@ -55,10 +58,48 @@ test.each(testEnvironments)(
         <NumberField maxValue={5} defaultValue={5}>
           <Label>Disabled decrement</Label>
         </NumberField>
-      </Flex>,
+      </ColumnLayout>,
     );
 
     await testScreenshot("NumberField states");
+  },
+);
+
+test.skipIf(crossVersion({ below: customUnitFrom })).each(testEnvironments)(
+  "NumberField custom unit (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ColumnLayout, NumberField, Label },
+  }) => {
+    await render(
+      <ColumnLayout m={[1, 1]} l={[1, 1]}>
+        <NumberField unit="MiB" defaultValue={512}>
+          <Label>Custom unit</Label>
+        </NumberField>
+        <NumberField unit="MiB" defaultValue={512} isDisabled>
+          <Label>Custom unit disabled</Label>
+        </NumberField>
+        {/* A custom unit is cut off where the input cuts off its text */}
+        <ColumnLayout m={[1, 1]} l={[1, 1]}>
+          <NumberField
+            formatOptions={{
+              style: "unit",
+              unit: "gigabyte",
+              unitDisplay: "long",
+            }}
+            defaultValue={123456789012345}
+          >
+            <Label>Unit overflow</Label>
+          </NumberField>
+          <NumberField unit="gigabytes" defaultValue={123456789012345}>
+            <Label>Custom unit overflow</Label>
+          </NumberField>
+        </ColumnLayout>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("NumberField custom unit");
   },
 );
 

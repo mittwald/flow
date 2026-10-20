@@ -1,5 +1,6 @@
 @use "@/styles/mixins/formControl";
 @use "@/styles/mixins/scrollbar";
+@use "@/styles/mixins/skeleton";
 
 .codeEditor {
   outline: none;
@@ -32,14 +33,43 @@
       border-color: var(--form-control--border-color--default);
     }
 
+    &[data-disabled] {
+      --code-editor--gutter-separator-color: var(
+        --form-control--border-color--disabled
+      );
+      --code-editor--indentation-marker-color: var(
+        --form-control--border-color--disabled
+      );
+
+      background-color: var(--form-control--background-color--disabled);
+    }
+
     .copyButton {
       position: absolute;
       inset-block-start: var(--editor-padding);
       inset-inline-end: var(--form-control--padding-x);
       z-index: 1;
     }
+
+    /* SkeletonMode — after the states, so the surface wins over their colors */
+
+    &.skeleton {
+      @include skeleton.shape;
+
+      --skeleton-radius: var(--form-control--corner-radius);
+    }
+
+    /* Stands in for CodeMirror's lines, so the surface is as high as the code. */
+    .skeletonLines {
+      font-family: var(--code-editor--font-family);
+      font-size: var(--code-editor--font-size);
+      line-height: 1.4;
+      white-space: pre;
+    }
   }
 }
+
+@include skeleton.keyframes;
 
 /*
  * CodeMirror ships its theme as unlayered `<style>` elements that it injects
@@ -60,6 +90,17 @@
     & :global(.cm-scroller),
     & :global(.cm-gutters) {
       background-color: inherit;
+    }
+
+    /* The same goes for the text color of the code and the line numbers. */
+    & :global(.cm-editor),
+    & :global(.cm-gutters) {
+      color: inherit;
+    }
+
+    /* Syntax highlighting would make disabled code look editable. */
+    &[data-disabled] :global(.cm-content *) {
+      color: inherit;
     }
 
     & :global(.cm-editor) {

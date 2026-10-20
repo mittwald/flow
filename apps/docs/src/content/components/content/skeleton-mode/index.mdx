@@ -1,0 +1,117 @@
+---
+component: SkeletonMode
+description:
+  Der SkeletonMode stellt die echte Oberfläche als Skeleton dar, bis der Content
+  geladen ist.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Umschließe die finale Oberfläche mit dem SkeletonMode, statt eine eigene
+  Ladeansicht aus [Skeleton](/components/content/skeleton) und
+  [SkeletonText](/components/content/skeleton-text) nachzubauen. So entspricht
+  die Vorschau dem finalen Layout, und es entsteht kein Layout-Sprung.
+- Gib Platzhalter-Inhalt mit, wenn ein Balken eine bestimmte Breite haben soll.
+  Components mit Inhalt übernehmen dessen Breite, Components ohne Inhalt nutzen
+  eine Standardbreite.
+- Gib einem Image ohne feste Größe ein `aspectRatio`. Das Skeleton lädt das Bild
+  nicht, kennt sein Seitenverhältnis also nicht und nimmt sonst 16:9 an.
+- Nimm bereits geladene Bereiche mit `isEnabled={false}` aus dem Skeleton
+  heraus.
+- Setze den SkeletonMode nur für das initiale, kurzzeitige Laden ein. Für andere
+  Lade- oder Feedbackprozesse eignet sich etwa der
+  [LoadingSpinner](/components/status/loading-spinner).
+- Verlass dich auf die eingebaute Ansage. Der SkeletonMode meldet Screenreadern
+  einmal „Inhalt wird geladen“ und nimmt die Platzhalter selbst aus dem
+  Accessibility Tree.
+- Schalte den SkeletonMode nicht ein, während der Fokus in seinem Inhalt liegt.
+  Der Fokus geht dabei verloren.
+
+---
+
+# Inhalt und Breite
+
+Components mit Inhalt werden zu einem Balken pro Zeile, in der Breite dieser
+Zeile. Components ohne Inhalt zeigen einen Balken in einer Standardbreite.
+
+<LiveCodeEditor example="width" editorCollapsed />
+
+---
+
+# Teilweise geladen
+
+Ein verschachtelter SkeletonMode mit `isEnabled={false}` stellt seinen Inhalt
+als echte Oberfläche dar – etwa eine Überschrift, die schon vor den Daten
+feststeht.
+
+<LiveCodeEditor example="partially-loaded" editorCollapsed />
+
+---
+
+# Bilder, Badges und Buttons
+
+Avatare, Icons, Images, Badges und Buttons behalten Form und Größe und werden zu
+einer Fläche. Ihr Inhalt ist ausgeblendet, ein Text in einem Button oder Badge
+zeigt keinen eigenen Balken. Ein Image lädt im SkeletonMode nichts. Es nimmt die
+Größe aus `width` und `height`. Eine fehlende Angabe ergibt sich aus
+`aspectRatio`, sonst aus dem Seitenverhältnis 16:9. Ohne beide Angaben füllt es
+die verfügbare Breite. Buttons, als Button gestaltete Links und
+ContextMenu-Trigger lassen sich nicht bedienen.
+
+<LiveCodeEditor example="visual" editorCollapsed />
+
+---
+
+# Formularfelder
+
+Formularfelder behalten ihre Größe. Label und FieldDescription werden zu Balken,
+das Eingabefeld oder Steuerelement – etwa die Box einer
+[Checkbox](/components/form-controls/checkbox) oder der Track eines
+[Switch](/components/form-controls/switch) – wird zu einer Fläche. Ein
+FieldError wird nicht angezeigt, auch wenn das Feld ungültig ist.
+
+- Die Felder sind nicht fokussierbar und nehmen keine Eingaben an. Auch Popover
+  wie das Kalender-Popover des
+  [DatePicker](/components/form-controls/date-picker) oder die Optionen eines
+  [Select](/components/form-controls/select) öffnen sich nicht.
+- Die Felder behalten ihr echtes `input`. Wird ein Formular während des Ladens
+  abgeschickt, sendet es die leeren Werte der Felder. Verhindere das Absenden,
+  solange der SkeletonMode aktiv ist.
+
+<LiveCodeEditor example="form-fields" editorCollapsed />
+
+---
+
+# Navigation und Status
+
+Navigationen, Breadcrumbs und Tabs behalten ihre Struktur. Ihre Einträge werden
+zu Balken und lassen sich weder fokussieren noch auswählen. Ein aktiver Eintrag
+ist nicht hervorgehoben. Status-Components wie Alert oder ProgressBar zeigen
+keine Statusfarbe: Die ProgressBar zeigt ihre Leiste ohne Füllung und ohne Wert,
+LoadingSpinner und AlertIcon werden zu runden Flächen.
+
+<LiveCodeEditor example="navigation-status" editorCollapsed />
+
+---
+
+# Inhalte, Diagramme und Editoren
+
+Kbd, CodeBlock, FileDropZone, Kalender und ImageCropper werden zu einer Fläche
+in ihrer Größe. Markdown, Tabellen und Listen folgen den Regeln ihres Inhalts.
+Diagramme und Editoren zeigen eine Fläche und laden weder Diagramm noch Editor.
+Die Höhe stammt aus `height`, beim CodeEditor aus der Zahl der Code-Zeilen. Ein
+Bild in Markdown oder im ImageCropper wird nicht geladen. Overlays lassen sich
+über einen Trigger im SkeletonMode nicht öffnen. Ein bereits geöffnetes Modal
+zeigt seinen Inhalt als Skeleton und schließt mit Escape.
+
+<LiveCodeEditor example="content" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

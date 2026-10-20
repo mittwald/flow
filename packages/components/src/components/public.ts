@@ -1,5 +1,6 @@
 export * from "@/components/AccentBox";
 export * from "@/components/Accordion";
+export * from "@/components/AccordionGroup";
 export * from "@/components/Action";
 export * from "@/components/ActionGroup";
 export * from "@/components/Activity";
@@ -97,6 +98,7 @@ export * from "@/components/Separator";
 export * from "@/components/SettingsProvider";
 export * from "@/components/Kbd";
 export * from "@/components/Skeleton";
+export * from "@/components/SkeletonMode";
 export * from "@/components/SkeletonText";
 export * from "@/components/Slider";
 export * from "@/components/SuspenseTrigger";

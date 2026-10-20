@@ -13,7 +13,8 @@
 .background {
   position: fixed;
   inset: 0;
-  background: var(--color--background-gradient);
+  background: var(--texture--grain), var(--color--background-gradient);
+  background-blend-mode: overlay, normal;
 }
 
 .wrapper {

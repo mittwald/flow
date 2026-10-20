@@ -4,6 +4,7 @@ import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useIsActivityActive } from "@/components/Activity/context";
+import { SectionHeadingReset } from "@/components/Section/context";
 import { NonModalPopoverContent } from "../NonModalPopoverContent";
 import { PopoverTip } from "../PopoverTip";
 import { popoverViewportPadding } from "../../viewportPadding";
@@ -58,6 +59,8 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
 
   const ContentComponent = isDialogContent ? Aria.Dialog : "div";
 
+  const content = <SectionHeadingReset>{children}</SectionHeadingReset>;
+
   if (!isActivityActive) {
     return null;
   }
@@ -83,7 +86,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
         triggerRef={anchor}
         onOpenChange={onOpenChange}
       >
-        {children}
+        {content}
       </NonModalPopoverContent>
     );
   }
@@ -103,7 +106,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
           <PopoverTip />
         </Aria.OverlayArrow>
       )}
-      <ContentComponent className={styles.content}>{children}</ContentComponent>
+      <ContentComponent className={styles.content}>{content}</ContentComponent>
     </Aria.Popover>
   );
 };

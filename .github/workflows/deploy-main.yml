@@ -24,7 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
-      actions: write # prune superseded Next.js cache entries
       contents: read
       packages: write
 
@@ -45,6 +44,17 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
+      # The Styleguide renders FontAwesome Pro icons, fetched with the license
+      # token outside the lockfile (apps/docs/dev/installProIcons.ts). Its own
+      # step keeps the token out of the build's environment. No fallback here:
+      # production fails rather than ship the default icons.
+      - name: Install the FontAwesome Pro icons
+        if: matrix.image_suffix == 'docs'
+        run: pnpm --filter @mittwald/flow-documentation install:pro-icons
+        env:
+          FONT_AWESOME_PACKAGE_TOKEN: ${{ secrets.FONT_AWESOME_PACKAGE_TOKEN }}
+          FLOW_DOCS_REQUIRE_PRO_ICONS: "1"
+
       # The image used to build this itself, which meant a second toolchain
       # install and the whole dependency chain rebuilt inside the image — 80 of
       # the 449 seconds a docs preview took. Here the runner builds that chain
@@ -58,52 +68,20 @@ jobs:
         env:
           NEXT_BASE_PATH: ""
 
-      # `main` is the writer that seeds this cache for everyone else. A PR reads
-      # caches from its own branch and from the default branch, never from
-      # another PR's. Without an entry written here the broadest restore-key in
-      # build-previews.yml finds nothing, so every PR's first docs build
-      # compiles cold. Turbopack's persistent build cache lives in this
-      # directory (~200MB) and is on by default in Next 16.
-      #
-      # Save only — the same split as the nx cache (test.yml writes, everyone
-      # else restores). What this job builds goes straight to production, so it
-      # depends on the source and the lockfile alone, never on a blob an earlier
-      # run left behind. Restoring here would also let the broadest restore-key
-      # carry a cache across a Next version bump into the deployed image. After
-      # the build rather than in a post-step, so a build that failed seeds
-      # nothing.
-      - name: Save the Next.js build cache
+      - name: Check the docs carry no FontAwesome token
         if: matrix.image_suffix == 'docs'
-        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: apps/docs/.next/cache
-          key:
-            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
-            github.sha }}
-
-      # Every push to main saves a new ~200 MB entry, and only the newest is
-      # ever restored. Leaving the rest to expire keeps the repo's Actions
-      # cache over its 10 GB limit, so LRU evicts caches that are still in use.
-      # Deletes nothing unless the entry above exists — a key that drifted from
-      # the save step must not take the only seed with it. The job's
-      # concurrency group serializes runs, so no newer entry can exist yet.
-      - name: Prune superseded Next.js build caches
-        if: matrix.image_suffix == 'docs'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          KEY:
-            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{
-            github.sha }}
         run: |
-          entries=$(gh cache list --ref "$GITHUB_REF" --key nextjs- --limit 100 --json id,key)
-          if ! jq -e --arg key "$KEY" 'any(.key == $key)' <<<"$entries" >/dev/null; then
-            echo "::warning::$KEY not found, pruning nothing"
-            exit 0
+          if grep -rqF "$FONT_AWESOME_PACKAGE_TOKEN" apps/docs/out; then
+            echo "::error::apps/docs/out contains the FontAwesome package token"
+            exit 1
           fi
-          jq -r --arg key "$KEY" '.[] | select(.key != $key) | .id' <<<"$entries" |
-            xargs -r -n1 gh cache delete
+        env:
+          FONT_AWESOME_PACKAGE_TOKEN: ${{ secrets.FONT_AWESOME_PACKAGE_TOKEN }}
+
+      # No Next.js build cache is saved here, although it would seed the
+      # previews: Turbopack's persistent cache holds the FontAwesome Pro modules,
+      # and every PR — a fork's included — can restore a cache from `main`,
+      # under any key it likes, and upload it.
 
       # Two commands because `build:storybook` declares no nx dependency on the
       # components build — the same pair the Dockerfile ran.

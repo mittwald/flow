@@ -1,12 +1,15 @@
 {
   "name": "@mittwald/flow-core",
   "private": "true",
-  "version": "1.4.38",
+  "version": "1.5.22",
   "type": "module",
   "main": "src/index.ts",
   "files": [
     "src"
   ],
+  "scripts": {
+    "test:unit": "vitest run"
+  },
   "dependencies": {
     "@types/invariant": "^2.2.37",
     "invariant": "^2.2.4",
