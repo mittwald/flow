@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.23](https://github.com/mittwald/flow/compare/1.6.0-next.22...1.6.0-next.23) (2026-10-20)
+
+### Bug Fixes
+
+* **DeprecationWarningProvider:** deduplicate warnings across instances ([#3523](https://github.com/mittwald/flow/issues/3523)) ([9e3bad8](https://github.com/mittwald/flow/commit/9e3bad8fdc245146c2a7dc0dc5a9b2e44b81bb2c))
+
+## [1.5.24](https://github.com/mittwald/flow/compare/1.5.23...1.5.24) (2026-10-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.24 ([1f3b833](https://github.com/mittwald/flow/commit/1f3b833c37c1f151fc011f56ff6859f21f23413f))
+
 ## [1.6.0-next.22](https://github.com/mittwald/flow/compare/1.5.23...1.6.0-next.22) (2026-10-20)
 
 ### Bug Fixes
