@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.24](https://github.com/mittwald/flow/compare/1.6.0-next.23...1.6.0-next.24) (2026-10-20)
+
+### Bug Fixes
+
+* **TranslationProvider:** compile each localized message once ([#3525](https://github.com/mittwald/flow/issues/3525)) ([7e0fb85](https://github.com/mittwald/flow/commit/7e0fb859ad5be627bff2d2d17c9e3ca2cf582c5b))
+
+### Documentation
+
+* **agents:** split narrow sections out of the package agent guides ([#3522](https://github.com/mittwald/flow/issues/3522)) ([09d5d84](https://github.com/mittwald/flow/commit/09d5d8448c78df24ffe712088a2bed6b4cee4c16))
+
+## [1.5.25](https://github.com/mittwald/flow/compare/1.6.0-next.22...1.5.25) (2026-10-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.25 ([c4901ee](https://github.com/mittwald/flow/commit/c4901ee1f837656e2afe9f320ac7b7e62a99e412))
+
 ## [1.6.0-next.23](https://github.com/mittwald/flow/compare/1.6.0-next.22...1.6.0-next.23) (2026-10-20)
 
 ### Bug Fixes
