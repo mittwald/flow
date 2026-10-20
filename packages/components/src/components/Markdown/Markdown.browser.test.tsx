@@ -155,3 +155,24 @@ test("a task list keeps the class remark-gfm gives it", async () => {
   expect(list?.classList.contains("contains-task-list")).toBe(true);
   expect(list?.hasAttribute("node")).toBe(false);
 });
+
+/*
+ * react-markdown uses the renderers as element types. New renderers on every
+ * render would remount the whole tree, so a re-render must keep the nodes.
+ */
+test("a re-render keeps the rendered elements", async () => {
+  const markdown = "Read [the plans](/plans).\n\n# Briefing";
+  const screen = await renderMarkdown(markdown);
+
+  const paragraph = page.getByText("Read").element();
+  const link = page.getByRole("link", { name: "the plans" }).element();
+  const heading = page.getByRole("heading", { name: "Briefing" }).element();
+
+  await screen.rerender(<Markdown>{markdown}</Markdown>);
+
+  expect(page.getByText("Read").element()).toBe(paragraph);
+  expect(page.getByRole("link", { name: "the plans" }).element()).toBe(link);
+  expect(page.getByRole("heading", { name: "Briefing" }).element()).toBe(
+    heading,
+  );
+});
