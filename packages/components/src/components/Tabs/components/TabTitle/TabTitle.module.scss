@@ -57,9 +57,8 @@
 }
 
 .menuItem {
-  // The tab's children are the consumer's; a `Text` child renders this span.
-  // stylelint-disable-next-line selector-max-type -- consumer children
-  > span {
+  // The tab's children are the consumer's. Badges render a span, too.
+  > :global(.flow--text) {
     display: flex;
     align-items: center;
     justify-content: space-between;
