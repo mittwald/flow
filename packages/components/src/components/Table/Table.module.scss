@@ -23,10 +23,6 @@
 
   .column {
     font-weight: var(--table--header-font-weight);
-
-    &:empty {
-      display: none;
-    }
   }
 
   .cell,
@@ -59,7 +55,8 @@
       border-block-end-width: var(--table--header-border-width);
     }
 
-    &:empty {
+    // Hide only an all-empty header: a hidden `<th>` shifts the next headings.
+    &:not(:has(.column:not(:empty))) {
       display: none;
     }
   }
