@@ -3,6 +3,7 @@ declare const classNames: {
   readonly "flow--overlay--viewport": "flow--overlay--viewport";
   readonly "react-aria-Modal": "react-aria-Modal";
   readonly content: "content";
+  readonly zoom: "zoom";
   readonly fitScreen: "fitScreen";
   readonly actions: "actions";
   readonly actionGroup: "actionGroup";

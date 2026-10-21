@@ -32,20 +32,21 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
   const swipeThreshold = 50;
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const itemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     containerRef.current?.focus();
   }, [containerRef.current]);
 
   const paginate = (direction: number) => {
-    setIndex((prev) => {
-      const next = prev + direction;
+    const next = Math.min(Math.max(currentIndex + direction, 0), count - 1);
+    if (next === currentIndex) return;
 
-      if (next < 0) return 0;
-      if (next >= count) return count - 1;
-
-      return next;
-    });
+    /* The item remounts, which would drop a focus inside it. */
+    if (itemRef.current?.contains(document.activeElement)) {
+      containerRef.current?.focus();
+    }
+    setIndex(next);
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -96,7 +97,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
         aria-roledescription="carousel"
         aria-label={stringFormatter.format("gallery")}
       >
-        <div className={styles.galleryItem} key={currentIndex}>
+        <div className={styles.galleryItem} key={currentIndex} ref={itemRef}>
           {children[currentIndex]}
         </div>
 
