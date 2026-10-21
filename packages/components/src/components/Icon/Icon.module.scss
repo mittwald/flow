@@ -21,6 +21,10 @@
        * override only applies in the layered stylesheet variant if it leaves
        * the cascade layer as well.
        *
+       * `display` and `vertical-align` are set the same way: a context hides
+       * its icon (`display: none` on `Breadcrumb`'s last separator, an
+       * unselected `Segment`'s checkmark) or aligns it (`Alert`, `Link`).
+       *
        * The size goes back to Flow's layered rules (`revert-layer`) instead of
        * the token, so a context's size (`Avatar`'s 70 %) still applies. The
        * variants without layers drop these declarations — there Flow's rules
@@ -33,6 +37,8 @@
         @layer flow.unlayered {
           width: revert-layer;
           height: revert-layer;
+          display: revert-layer;
+          vertical-align: revert-layer;
           box-sizing: border-box;
           padding: $faPadding;
         }
