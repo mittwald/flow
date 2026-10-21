@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.25](https://github.com/mittwald/flow/compare/1.6.0-next.24...1.6.0-next.25) (2026-10-21)
+
+### Documentation
+
+* **List:** add performance guidance for items, modals and batches ([c90c78f](https://github.com/mittwald/flow/commit/c90c78f6b42805654b0435e486524144ff3c5ab3))
+
 ## [1.6.0-next.24](https://github.com/mittwald/flow/compare/1.6.0-next.23...1.6.0-next.24) (2026-10-20)
 
 ### Bug Fixes
