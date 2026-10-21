@@ -204,7 +204,7 @@ commit the results.
   diff. The rule lives in `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
 - **A PR that finishes an issue must say `Closes #<n>` in its body** — on
-  `main`, `next` and `next-major`. Without it the issue stays open after the
+  `main`, `next` and the major line. Without it the issue stays open after the
   work ships.
   - `Part of #<n>` only while work on the issue remains. The PR that finishes it
     — often the last of a series — says `Closes`. #3491 finished #3303 with
@@ -213,7 +213,9 @@ commit the results.
     even when nobody named one.
   - GitHub resolves the keyword only on the default branch (`main`);
     `.github/workflows/close-linked-issues.yml` closes the issues when a PR
-    merges into `next` or `next-major`.
+    merges into `next`. A major line (`2.x`) has to be added to its `branches:`
+    when it opens
+    ([runbook step 6](docs/major-line-runbook.md#6-close-linked-issuesyml--the-branch-filter)).
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
