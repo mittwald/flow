@@ -105,6 +105,10 @@ export class MdxFile {
     return ["", ...slugs].join("/");
   }
 
+  public hasExample(name: string): boolean {
+    return this.examples[name] !== undefined;
+  }
+
   public getExample(name: string): string {
     const example = this.examples[name];
     if (example === undefined) {
