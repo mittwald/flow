@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
+
+### Bug Fixes
+
+* **Table:** keep empty column headers in the grid ([385d863](https://github.com/mittwald/flow/commit/385d86391ac235dd03979daf5d7622fac93360c3))
+
 ## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
 
 ### Documentation

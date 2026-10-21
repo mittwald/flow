@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
+
+### Bug Fixes
+
+* **Table:** keep empty column headers in the grid ([385d863](https://github.com/mittwald/flow/commit/385d86391ac235dd03979daf5d7622fac93360c3))
+
+### Tests
+
+* **Tabs:** gate the AccordionGroup scenario at 1.5.0 ([#3529](https://github.com/mittwald/flow/issues/3529)) ([2cf2bfc](https://github.com/mittwald/flow/commit/2cf2bfc9157012ce051f55fc06a5a1de9e9cd2cf))
+* update visual regression screenshots ([1071cb2](https://github.com/mittwald/flow/commit/1071cb26187d0564d1bbb3bb1d8d1129f4cbaceb))
+
 ## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
