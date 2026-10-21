@@ -821,7 +821,8 @@ test("Form in Modal is auto-resetted on close", async () => {
   await expect.element(isDirtyText).toBeInTheDocument();
   await userEvent.click(closeButton);
   await userEvent.click(openModalButton);
-  await expect.element(isDirtyText).not.toBeInTheDocument();
+  await expect.element(input).toBeVisible();
+  expect(isDirtyText).not.toBeInTheDocument();
 });
 
 test("Form in Modal is not auto-resetted on close when opted-out", async () => {
