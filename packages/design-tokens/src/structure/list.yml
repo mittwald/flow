@@ -7,6 +7,8 @@ list:
     value: "{size-px.xl}"
   search-field-max-width:
     value: 500px
+  search-field-input-width:
+    value: 200px
 
 list-item:
   corner-radius:
