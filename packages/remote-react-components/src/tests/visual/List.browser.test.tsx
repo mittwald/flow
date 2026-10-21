@@ -14,8 +14,8 @@ const combinedSubTitleFrom = "1.2.2";
 // The "Select all" option of multiple-choice filters exists from 1.4.0-next.6.
 const filterSelectAllFrom = "1.4.0-next.6";
 // The date range chip follows the Flow locale, and the filter takes a time,
-// from 1.5.0.
-const dateRangeFilterTimeFrom = "1.5.0";
+// from 1.6.0-next.25.
+const dateRangeFilterTimeFrom = "1.6.0-next.25";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
