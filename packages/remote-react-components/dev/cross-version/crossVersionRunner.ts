@@ -116,6 +116,18 @@ const readManifest = (logPrefix: string): Manifest => {
 const shard = process.env.FLOW_CROSS_VERSION_SHARD;
 
 /**
+ * The test files this process runs, as whitespace-separated paths relative to
+ * the package root in `FLOW_CROSS_VERSION_FILES`, or all of the config's when
+ * unset. A PR runs the in-process harness over the visual tests it changed only
+ * — see the `cross-version` job in `.github/workflows/test.yml`.
+ */
+export const selectRequestedFiles = (
+  request = process.env.FLOW_CROSS_VERSION_FILES,
+): string[] => (request ?? "").split(/\s+/).filter((path) => path.length > 0);
+
+const files = selectRequestedFiles();
+
+/**
  * The targets this process was asked for: a comma-separated list of categories
  * (`previous`) or versions (`1.0.10`) in `FLOW_CROSS_VERSION_TARGETS`, or all
  * of the manifest's when unset.
@@ -202,6 +214,7 @@ const runSuite = (
   const args = [
     vitestBin,
     "run",
+    ...files,
     `--config=${vitestConfig}`,
     "--browser.headless",
     "--reporter=default",

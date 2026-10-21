@@ -22,13 +22,8 @@ const tablerIcon = (...paths: string[]): VNode =>
     paths.map((d) => h("path", { d })),
   );
 
-export const iconApp = () =>
-  tablerIcon(
-    "M4 4h6v6h-6z",
-    "M14 4h6v6h-6z",
-    "M4 14h6v6h-6z",
-    "M14 14h6v6h-6z",
-  );
+export const iconCircleCheck = () =>
+  tablerIcon("M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0", "M9 12l2 2l4 -4");
 
 export const iconMoodSad = () =>
   tablerIcon(
@@ -86,12 +81,8 @@ export const iconMoodHappyFilled = () =>
     "M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 9.66h-6a1 1 0 0 0 -1 1v.05a3.975 3.975 0 0 0 3.777 3.97l.227 .005a4.026 4.026 0 0 0 3.99 -3.79l.006 -.206a1 1 0 0 0 -1 -1.029zm-5.99 -5l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993zm6 0l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993z",
   );
 
-/** A plain SVG that is not an icon set's — the `svg` demo renders it as-is. */
+/** A plain SVG that is not an icon set's — the content page renders it as-is. */
 export const plainSvg = () =>
-  h(
-    "svg",
-    { viewBox: "0 0 200 200", xmlns: "http://www.w3.org/2000/svg" },
-    h("g", null, [
-      h("circle", { cx: "100", cy: "100", r: "100", fill: "currentColor" }),
-    ]),
-  );
+  h("svg", { viewBox: "0 0 100 100", xmlns: "http://www.w3.org/2000/svg" }, [
+    h("circle", { cx: "50", cy: "50", r: "50" }),
+  ]);
