@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.30](https://github.com/mittwald/flow/compare/1.6.0-next.29...1.6.0-next.30) (2026-10-21)
+
+### Bug Fixes
+
+* **Icon:** keep the vertical alignment of FontAwesome icons in the layered stylesheet ([#3538](https://github.com/mittwald/flow/issues/3538)) ([fd496fb](https://github.com/mittwald/flow/commit/fd496fb4acfcafa32bb89a687790264de54a3b6a))
+
+## [1.5.30](https://github.com/mittwald/flow/compare/1.6.0-next.28...1.5.30) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.30 ([c04f7f3](https://github.com/mittwald/flow/commit/c04f7f3e6c761fdf5d21d804c58f6c3c6db2e424))
+
 ## [1.6.0-next.29](https://github.com/mittwald/flow/compare/1.6.0-next.28...1.6.0-next.29) (2026-10-21)
 
 ### Bug Fixes
