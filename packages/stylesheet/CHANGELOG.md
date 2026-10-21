@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
 ## [1.5.30](https://github.com/mittwald/flow/compare/1.5.29...1.5.30) (2026-10-21)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet

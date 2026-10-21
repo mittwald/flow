@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
+
+### Bug Fixes
+
+* **Icon:** keep the vertical alignment of FontAwesome icons in the layered stylesheet ([#3538](https://github.com/mittwald/flow/issues/3538)) ([fd496fb](https://github.com/mittwald/flow/commit/fd496fb4acfcafa32bb89a687790264de54a3b6a))
+
 ## [1.5.30](https://github.com/mittwald/flow/compare/1.5.29...1.5.30) (2026-10-21)
 
 ### Bug Fixes
