@@ -24,7 +24,7 @@ import {
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
-  title: "Structure/List/ListItem",
+  title: "List/List/ListItem",
 };
 
 export default meta;
