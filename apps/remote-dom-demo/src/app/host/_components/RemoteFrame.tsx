@@ -2,6 +2,7 @@
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { getHostPath } from "@/app/_lib/navigation";
 import {
+  AccentBox,
   Accordion,
   Badge,
   ColumnLayout,
@@ -10,7 +11,6 @@ import {
   Label,
   LabeledValue,
   Section,
-  Separator,
   Text,
 } from "@mittwald/flow-react-components";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
@@ -92,25 +92,21 @@ export const RemoteFrame: FC<Props> = ({ src, hostPathname }) => {
     <Section>
       {isNavigating && <LoadingMessage />}
       {remoteReadyEvent && (
-        <>
-          <ColumnLayout>
-            <LabeledValue>
-              <Label>Communication version</Label>
-              <Text>{remoteReadyEvent.version}</Text>
-            </LabeledValue>
-            <LabeledValue>
-              <Label>Remote package</Label>
-              <Text>{remoteReadyEvent.packageVersion ?? "unknown"}</Text>
-            </LabeledValue>
-          </ColumnLayout>
-          <Separator />
-        </>
-      )}
-      {componentUsage.length > 0 && (
-        <>
-          <UsageList usage={componentUsage} />
-          <Separator />
-        </>
+        <AccentBox>
+          <Section>
+            <ColumnLayout>
+              <LabeledValue>
+                <Label>Communication version</Label>
+                <Text>{remoteReadyEvent.version}</Text>
+              </LabeledValue>
+              <LabeledValue>
+                <Label>Remote package</Label>
+                <Text>{remoteReadyEvent.packageVersion ?? "unknown"}</Text>
+              </LabeledValue>
+            </ColumnLayout>
+            {componentUsage.length > 0 && <UsageList usage={componentUsage} />}
+          </Section>
+        </AccentBox>
       )}
       <RemoteRenderer
         onComponentUsage={addComponentUsage}
