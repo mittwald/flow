@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.27](https://github.com/mittwald/flow/compare/1.6.0-next.26...1.6.0-next.27) (2026-10-21)
+
+### Tests
+
+* **Tabs:** gate the AccordionGroup scenario at 1.5.0 ([#3529](https://github.com/mittwald/flow/issues/3529)) ([2cf2bfc](https://github.com/mittwald/flow/commit/2cf2bfc9157012ce051f55fc06a5a1de9e9cd2cf))
+
+## [1.5.27](https://github.com/mittwald/flow/compare/1.6.0-next.24...1.5.27) (2026-10-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.27 ([e787105](https://github.com/mittwald/flow/commit/e78710541ca53f321705b11b5d5eb7f40323e398))
+
+## [1.5.26](https://github.com/mittwald/flow/compare/1.6.0-next.23...1.5.26) (2026-10-20)
+
+### Bug Fixes
+
+* **Table:** keep empty column headers in the grid ([385d863](https://github.com/mittwald/flow/commit/385d86391ac235dd03979daf5d7622fac93360c3))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.26 ([7cbb91a](https://github.com/mittwald/flow/commit/7cbb91a329a7c11d7902da26ebd01b918b9f9818))
+
+### Tests
+
+* update visual regression screenshots ([1071cb2](https://github.com/mittwald/flow/commit/1071cb26187d0564d1bbb3bb1d8d1129f4cbaceb))
+
 ## [1.6.0-next.26](https://github.com/mittwald/flow/compare/1.6.0-next.25...1.6.0-next.26) (2026-10-21)
 
 ### Features
