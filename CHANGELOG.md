@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **remote-dom-demo:** one demo page per component group ([#3516](https://github.com/mittwald/flow/issues/3516)) ([9a7cf9e](https://github.com/mittwald/flow/commit/9a7cf9e9e24e86d669a533fbf894110d594e74a8))
+
 ## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
 
 ### Bug Fixes
