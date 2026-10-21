@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+### Continuous Integration
+
+* run changed visual tests through the in-process cross-version harness on PRs ([#3530](https://github.com/mittwald/flow/issues/3530)) ([1618a5a](https://github.com/mittwald/flow/commit/1618a5ab41bd935db37c3cd38e2a2823b2097aec))
+
 ## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

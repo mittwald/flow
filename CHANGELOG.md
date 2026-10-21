@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+### Bug Fixes
+
+* **List:** focus the search once enabled and skip the empty filter modal ([#3517](https://github.com/mittwald/flow/issues/3517)) ([7a7bfe6](https://github.com/mittwald/flow/commit/7a7bfe6fbd19948bd3547637a42a0fd7e1d44c08))
+
+### Documentation
+
+* require Closes #&lt;n&gt; on the PR that finishes an issue ([#3514](https://github.com/mittwald/flow/issues/3514)) ([caf4627](https://github.com/mittwald/flow/commit/caf46271950fc50b89e72fcb5fc1e20784ebfc21))
+
+### Continuous Integration
+
+* run changed visual tests through the in-process cross-version harness on PRs ([#3530](https://github.com/mittwald/flow/issues/3530)) ([1618a5a](https://github.com/mittwald/flow/commit/1618a5ab41bd935db37c3cd38e2a2823b2097aec))
+
 ## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
 
 ### Miscellaneous Chores
