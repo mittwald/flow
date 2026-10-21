@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.28](https://github.com/mittwald/flow/compare/1.6.0-next.27...1.6.0-next.28) (2026-10-21)
+
+### Documentation
+
+* add a Wrap page and fill the story gaps from [#3429](https://github.com/mittwald/flow/issues/3429) ([#3520](https://github.com/mittwald/flow/issues/3520)) ([e69dd04](https://github.com/mittwald/flow/commit/e69dd040e50a61c2266e5ddd56894f00e8024c70))
+
+## [1.5.28](https://github.com/mittwald/flow/compare/1.6.0-next.26...1.5.28) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.28 ([2e1b564](https://github.com/mittwald/flow/commit/2e1b5643d28e3552018f534bcc9657de5368d234))
+
 ## [1.6.0-next.27](https://github.com/mittwald/flow/compare/1.6.0-next.26...1.6.0-next.27) (2026-10-21)
 
 ## [1.5.27](https://github.com/mittwald/flow/compare/1.6.0-next.24...1.5.27) (2026-10-20)
