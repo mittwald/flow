@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.26](https://github.com/mittwald/flow/compare/1.5.25...1.5.26) (2026-10-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.25](https://github.com/mittwald/flow/compare/1.5.24...1.5.25) (2026-10-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.24](https://github.com/mittwald/flow/compare/1.5.23...1.5.24) (2026-10-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.23](https://github.com/mittwald/flow/compare/1.5.22...1.5.23) (2026-10-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.22](https://github.com/mittwald/flow/compare/1.5.21...1.5.22) (2026-10-16)
+
+### Documentation
+
+* **agents:** move package-specific footguns out of the root AGENTS.md ([#3521](https://github.com/mittwald/flow/issues/3521)) ([3f1e815](https://github.com/mittwald/flow/commit/3f1e8154f33c4d2c2d8204715f4f54ff4102d276))
+
+## [1.5.21](https://github.com/mittwald/flow/compare/1.5.20...1.5.21) (2026-10-16)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.20](https://github.com/mittwald/flow/compare/1.5.19...1.5.20) (2026-10-15)
+
+### Bug Fixes
+
+* **Tabs:** stop the active panel from clipping its content ([a8db4f7](https://github.com/mittwald/flow/commit/a8db4f782a85a9900688025dc7e5113ff063a164))
+
+### Tests
+
+* update visual regression screenshots ([e808824](https://github.com/mittwald/flow/commit/e808824d5846c26b9a9bb619bdbf65dd3cb63546))
+
+## [1.5.19](https://github.com/mittwald/flow/compare/1.5.18...1.5.19) (2026-10-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.5.18](https://github.com/mittwald/flow/compare/1.5.17...1.5.18) (2026-10-14)
 
 ### Tests

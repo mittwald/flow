@@ -30,30 +30,36 @@ export const DeprecationWarningProvider = defineComponent({
   },
 
   setup(props, { slots }) {
-    provide(deprecationWarningKey, (message: string) =>
-      props.onWarning?.(message),
-    );
+    const reported = new Set<string>();
+
+    provide(deprecationWarningKey, (message: string) => {
+      const onWarning = props.onWarning;
+      if (!onWarning || reported.has(message)) {
+        return;
+      }
+      reported.add(message);
+      onWarning(message);
+    });
 
     return () => slots.default?.();
   },
 });
 
+/** Messages already written to `console.warn`, across all providers. */
+const consoleReported = new Set<string>();
+
 /**
- * Warns once per message, in the console and to the provider.
- *
- * Deduplicated per call site, like Flow's hook: a component that warns on every
- * render must not fill the console.
+ * Warns once per message, like Flow's hook: in the console once for the whole
+ * app, and once to each provider.
  */
 export const useWarnDeprecation = (): DeprecationWarningHandler => {
   const onWarning = inject(deprecationWarningKey, undefined);
-  const reported = new Set<string>();
 
   return (message: string) => {
-    if (reported.has(message)) {
-      return;
+    if (!consoleReported.has(message)) {
+      consoleReported.add(message);
+      console.warn(message);
     }
-    reported.add(message);
-    console.warn(message);
     onWarning?.(message);
   };
 };

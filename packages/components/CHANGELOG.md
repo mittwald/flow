@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
+
+### Documentation
+
+* **agents:** split narrow sections out of the package agent guides ([#3522](https://github.com/mittwald/flow/issues/3522)) ([09d5d84](https://github.com/mittwald/flow/commit/09d5d8448c78df24ffe712088a2bed6b4cee4c16))
+
+## [1.5.26](https://github.com/mittwald/flow/compare/1.5.25...1.5.26) (2026-10-20)
+
+### Bug Fixes
+
+* **TranslationProvider:** compile each localized message once ([#3525](https://github.com/mittwald/flow/issues/3525)) ([7e0fb85](https://github.com/mittwald/flow/commit/7e0fb859ad5be627bff2d2d17c9e3ca2cf582c5b))
+
+## [1.5.25](https://github.com/mittwald/flow/compare/1.5.24...1.5.25) (2026-10-20)
+
+### Bug Fixes
+
+* **DeprecationWarningProvider:** deduplicate warnings across instances ([#3523](https://github.com/mittwald/flow/issues/3523)) ([9e3bad8](https://github.com/mittwald/flow/commit/9e3bad8fdc245146c2a7dc0dc5a9b2e44b81bb2c))
+
+## [1.5.24](https://github.com/mittwald/flow/compare/1.5.23...1.5.24) (2026-10-20)
+
+### Bug Fixes
+
+* **CodeEditor:** stop reconfiguring the editor and leaking styles on every render ([#3467](https://github.com/mittwald/flow/issues/3467)) ([288f4a1](https://github.com/mittwald/flow/commit/288f4a14162ff883601fac3a733fb0ac19228e80))
+
+## [1.5.23](https://github.com/mittwald/flow/compare/1.5.22...1.5.23) (2026-10-20)
+
+### Bug Fixes
+
+* **Markdown:** keep rendered elements across re-renders ([3808e79](https://github.com/mittwald/flow/commit/3808e796985fee611f126e6faaff5860313a1d5b))
+
+## [1.5.22](https://github.com/mittwald/flow/compare/1.5.21...1.5.22) (2026-10-16)
+
+### Documentation
+
+* **agents:** move package-specific footguns out of the root AGENTS.md ([#3521](https://github.com/mittwald/flow/issues/3521)) ([3f1e815](https://github.com/mittwald/flow/commit/3f1e8154f33c4d2c2d8204715f4f54ff4102d276))
+
+## [1.5.21](https://github.com/mittwald/flow/compare/1.5.20...1.5.21) (2026-10-16)
+
+### Bug Fixes
+
+* **Activity:** use React&#x27;s Activity on every React that ships it ([#3519](https://github.com/mittwald/flow/issues/3519)) ([be33a2c](https://github.com/mittwald/flow/commit/be33a2c52aea322b68eeecd7fdd3b1dc2fe28b04))
+
+## [1.5.20](https://github.com/mittwald/flow/compare/1.5.19...1.5.20) (2026-10-15)
+
+### Bug Fixes
+
+* **Tabs:** stop the active panel from clipping its content ([a8db4f7](https://github.com/mittwald/flow/commit/a8db4f782a85a9900688025dc7e5113ff063a164))
+
+## [1.5.19](https://github.com/mittwald/flow/compare/1.5.18...1.5.19) (2026-10-15)
+
+### Documentation
+
+* **foundations:** merge Error Handling into Fehlermeldungen ([#3434](https://github.com/mittwald/flow/issues/3434)) ([e97d3b2](https://github.com/mittwald/flow/commit/e97d3b2008497101f3b2561e2943cb7781024767))
+
 ## [1.5.18](https://github.com/mittwald/flow/compare/1.5.17...1.5.18) (2026-10-14)
 
 ### Build System
