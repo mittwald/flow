@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.26](https://github.com/mittwald/flow/compare/1.6.0-next.25...1.6.0-next.26) (2026-10-21)
+
+### Features
+
+* **List:** filter date ranges by time ([e556116](https://github.com/mittwald/flow/commit/e556116c5f8daadf10407ccb06ce54450b12b9c3)), closes [#3375](https://github.com/mittwald/flow/issues/3375)
+
+### Tests
+
+* **List:** gate date range time scenarios on 1.6.0-next.25 ([0c492cf](https://github.com/mittwald/flow/commit/0c492cf74cc3e92f2b8b637ba4761cc394a7da77))
+
 ## [1.6.0-next.25](https://github.com/mittwald/flow/compare/1.6.0-next.24...1.6.0-next.25) (2026-10-21)
 
 ### Documentation
