@@ -44,6 +44,17 @@
   @include size(s, var(--size-rem--xxs));
   @include size(l, var(--size-rem--xs));
 
+  /*
+   * FontAwesome also sets `vertical-align: -0.125em`, which would shift the
+   * icon a context aligns (`Heading`, `Alert`, `Link`). Same mechanism as the
+   * size above.
+   */
+  &:global(.svg-inline--fa) {
+    @layer flow.unlayered {
+      vertical-align: revert-layer;
+    }
+  }
+
   /* Colors */
   @mixin color($color) {
     &.#{$color} {
