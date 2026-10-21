@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.29](https://github.com/mittwald/flow/compare/1.5.28...1.5.29) (2026-10-21)
+
+### Documentation
+
+* add a Wrap page and fill the story gaps from [#3429](https://github.com/mittwald/flow/issues/3429) ([#3520](https://github.com/mittwald/flow/issues/3520)) ([e69dd04](https://github.com/mittwald/flow/commit/e69dd040e50a61c2266e5ddd56894f00e8024c70))
+
 ## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
 
 ### Bug Fixes
