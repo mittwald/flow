@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.29](https://github.com/mittwald/flow/compare/1.6.0-next.28...1.6.0-next.29) (2026-10-21)
+
+### Bug Fixes
+
+* **ListSummary:** keep the root classes when a className is passed ([#3518](https://github.com/mittwald/flow/issues/3518)) ([a6764d9](https://github.com/mittwald/flow/commit/a6764d9e08d0e48162d5723c7b450322d47304ab))
+
+## [1.5.29](https://github.com/mittwald/flow/compare/1.6.0-next.27...1.5.29) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.29 ([dd7ce5e](https://github.com/mittwald/flow/commit/dd7ce5eb7f14cb5f55f069d85d49a63ae41d5c9c))
+
 ## [1.6.0-next.28](https://github.com/mittwald/flow/compare/1.6.0-next.27...1.6.0-next.28) (2026-10-21)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
