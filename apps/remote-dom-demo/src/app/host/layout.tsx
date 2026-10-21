@@ -52,9 +52,8 @@ export default function HostLayout() {
          * reconnect per switch and keeps the demo behaving like a real host,
          * which only ever talks to one extension.
          *
-         * All but three demos exist on the Vue side; for those three the Vue
-         * app says so itself (`NotPortedDemo`), which keeps the switch
-         * available everywhere.
+         * A demo that does not exist on the Vue side says so itself
+         * (`NotPortedDemo`), which keeps the switch available everywhere.
          */}
         <Tabs
           aria-label="Remote framework"
