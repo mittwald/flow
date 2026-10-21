@@ -37,7 +37,7 @@ export const AllFiltersModal: FC<Props> = (props) => {
 
   const accordionCount =
     (availableViewModes.length > 1 ? 1 : 0) +
-    (list.sorting.length > 0 ? 1 : 0) +
+    (list.visibleSorting.length > 0 ? 1 : 0) +
     list.filters.length;
 
   const expandAccordions = accordionCount <= 2;
@@ -54,7 +54,7 @@ export const AllFiltersModal: FC<Props> = (props) => {
     availableViewModes.length > 1 && (
       <ViewModeAccordion key="viewMode" expandAccordions={expandAccordions} />
     ),
-    list.sorting.length > 0 && (
+    list.visibleSorting.length > 0 && (
       <SortingAccordion key="sorting" expandAccordions={expandAccordions} />
     ),
     ...filterAccordions,
