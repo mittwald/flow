@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.36](https://github.com/mittwald/flow/compare/1.6.0-next.35...1.6.0-next.36) (2026-10-22)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 15 updates ([c7acd00](https://github.com/mittwald/flow/commit/c7acd00024c484fead7ccbf83d7317b224fcf002))
+
+## [1.5.36](https://github.com/mittwald/flow/compare/1.6.0-next.34...1.5.36) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.36 ([735be23](https://github.com/mittwald/flow/commit/735be23f7542c3286cc38bf17fb138a9e5eabe8e))
+
 ## [1.6.0-next.35](https://github.com/mittwald/flow/compare/1.6.0-next.34...1.6.0-next.35) (2026-10-22)
 
 ### Bug Fixes
