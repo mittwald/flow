@@ -175,7 +175,7 @@ export const WOverlay: FC<
       className={cx(styles.overlay, getToneClass(tone), className)}
       style={{
         ...rest,
-        borderColor: tipped ? "var(--neutral--color--quiet--200)" : undefined,
+        borderColor: tipped ? "var(--border--color--200)" : undefined,
       }}
     >
       {children}

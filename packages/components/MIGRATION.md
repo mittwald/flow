@@ -196,6 +196,7 @@ steps; it selects few tones per role and theme
 | `dark`, `light`, `dark-static`, `light-static`                                                  | `quiet--100/200/300`, `strong--100/200/300` (was 800/700/600)                |
 | `elevation` (new: raised, ground, inset surface)                                                | `100/200/300`                                                                |
 | `content` (new: secondary, label, text; content on strong)                                      | `100/200/300`, `inverse`                                                     |
+| `border` (new: grouping, separator, control border)                                             | `100/200/300`                                                                |
 
 The decorative groups follow the brand colors and are named like the color
 props: `decorative-blue`, `-navy`, `-lilac`, `-sage` (`mittwald-green`) and
@@ -233,27 +234,26 @@ old palettes are gone — `--color--gray--N`, `--color--hosting-blue--N`,
 and `--color--espelkamp-green--N` resolve to nothing, and
 `--color--mittwald-navy--N` holds the new brand values. Replace each with the
 Semantic variable that carries its meaning, e.g. `--elevation--color--N` for a
-gray surface, `--content--color--N` for gray text, `--neutral--color--quiet--N`
-or `--neutral--color--strong--100` for a gray border,
-`--primary--color--quiet--N` or `--primary--color--strong--N` for hosting-blue,
-`--decorative-<hue>--color--…` for navy, lilac and teal, `--danger--`,
-`--warning--` or `--success--color--…` for the status hues (amaranth-red,
-royal-orange, espelkamp-green), `--dark--color--…` or `--light--color--…` for
-`--color--black-alpha--N` or `--color--white-alpha--N`, or a Variant variable
-such as `--primary-solid-background-color--default`. Do the same for every
-remaining Brand variable (`--color--mittwald-*`, `--color--system-*`, the alpha
-ramps), because Brand keeps its light value in dark. Then rename the Semantic
-variables you use. Colored and alpha groups (`primary`, `info`, `success`,
-`danger`, `warning`, `neutral`, `unavailable`, `decorative-*`, `dark`, `light`,
-`dark-static`, `light-static`) keep six tones — `--<group>--color--100/200/300`
-→ `--<group>--color--quiet--100/200/300`, `--<group>--color--800/900/1000` →
-`--<group>--color--strong--100/200/300` (alpha groups map `800/700/600` →
-`strong--100/200/300`); the other steps are gone, use the nearest tone. Gray
-from `--neutral--color--N` moves by role — surfaces 100–300 →
-`--elevation--color--100/200/300`, text and icons → `--content--color--100`
-(secondary), `--200` (label) or `--300` (text), on a solid surface
-`--content--color--inverse`, borders → `--neutral--color--quiet--100`
-(grouping), `--quiet--200` (separator) or `--strong--100` (control), disabled →
+gray surface, `--content--color--N` for gray text, `--border--color--N` for a
+gray border, `--primary--color--quiet--N` or `--primary--color--strong--N` for
+hosting-blue, `--decorative-<hue>--color--…` for navy, lilac and teal,
+`--danger--`, `--warning--` or `--success--color--…` for the status hues
+(amaranth-red, royal-orange, espelkamp-green), `--dark--color--…` or
+`--light--color--…` for `--color--black-alpha--N` or `--color--white-alpha--N`,
+or a Variant variable such as `--primary-solid-background-color--default`. Do
+the same for every remaining Brand variable (`--color--mittwald-*`,
+`--color--system-*`, the alpha ramps), because Brand keeps its light value in
+dark. Then rename the Semantic variables you use. Colored and alpha groups
+(`primary`, `info`, `success`, `danger`, `warning`, `neutral`, `unavailable`,
+`decorative-*`, `dark`, `light`, `dark-static`, `light-static`) keep six tones —
+`--<group>--color--100/200/300` → `--<group>--color--quiet--100/200/300`,
+`--<group>--color--800/900/1000` → `--<group>--color--strong--100/200/300`
+(alpha groups map `800/700/600` → `strong--100/200/300`); the other steps are
+gone, use the nearest tone. Gray from `--neutral--color--N` moves by role —
+surfaces 100–300 → `--elevation--color--100/200/300`, text and icons →
+`--content--color--100` (secondary), `--200` (label) or `--300` (text), on a
+solid surface `--content--color--inverse`, borders → `--border--color--100`
+(grouping), `--200` (separator) or `--300` (control), disabled →
 `--unavailable--color--quiet--100/200/300` (surface, border, content).
 `--decorative-violet--color--…` → `--decorative-lilac--color--…`,
 `--decorative-teal--color--…` → `--decorative-sage--color--…`,

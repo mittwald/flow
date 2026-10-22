@@ -338,7 +338,7 @@ neutral-outline-background-color:
 neutral-outline-content-color:
   value: "{neutral.color.strong.200}"
 neutral-outline-border-color:
-  value: "{neutral.color.strong.100}"
+  value: "{border.color.300}"
 
 # Neutral Soft
 neutral-soft-background-color:

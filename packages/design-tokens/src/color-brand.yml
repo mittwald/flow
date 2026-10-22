@@ -4,7 +4,11 @@
 # Source: Figma "mittwald. Global Tokens", collection Color Primitives, as
 # approved by the brand team (#3449), taken 1:1 (#3453, #3479). Hue ramps have
 # 19 steps with the base color at 1000: 100–900 mix toward
-# mittwald-neutral.300, 1100–1900 toward mittwald-neutral.1100.
+# mittwald-neutral.300, 1100–1900 toward mittwald-neutral.1800.
+# mittwald-neutral has 19 steps too (#3539, proposed to the brand team,
+# approval pending): the 12 approved values on new numbers (100–400 stay,
+# 500 → 600, 600 → 800, 700 → 1100, 800 → 1400, 900–1200 → 1600–1900) and
+# seven OKLab in-between steps (500, 700, 900, 1000, 1200, 1300, 1500).
 # Status ramps: danger, warning and success (the brand's "Positive") mix
 # 100–900 toward white (#3532); success mixes 1100–1900 toward black.
 # system-info is the brand's Info, still mixed like the hue ramps and close
@@ -20,20 +24,34 @@ color:
     400:
       value: "#e3e8ef"
     500:
-      value: "#c1c7d0"
+      value: "#d2d7df"
     600:
-      value: "#999fa8"
+      value: "#c1c7d0"
     700:
-      value: "#666b72"
+      value: "#adb3bc"
     800:
-      value: "#404448"
+      value: "#999fa8"
     900:
-      value: "#2c2f33"
+      value: "#888d96"
     1000:
-      value: "#1d1e1f"
+      value: "#777c84"
     1100:
-      value: "#141516"
+      value: "#666b72"
     1200:
+      value: "#595e64"
+    1300:
+      value: "#4c5156"
+    1400:
+      value: "#404448"
+    1500:
+      value: "#36393d"
+    1600:
+      value: "#2c2f33"
+    1700:
+      value: "#1d1e1f"
+    1800:
+      value: "#141516"
+    1900:
       value: "#000000"
 
   mittwald-blue:

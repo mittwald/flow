@@ -41,6 +41,7 @@ const semanticShapes = {
     steps.map((step) => `${tone}.${step}`),
   ),
   elevation: steps,
+  border: steps,
   content: [...steps, "inverse"],
   // Decorative groups add one content tone for Icon and Color (#3508).
   decorative: [

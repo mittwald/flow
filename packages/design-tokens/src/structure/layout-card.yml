@@ -14,4 +14,4 @@ layout-card:
   border-width:
     value: "{border-width.100}"
   border-color:
-    value: "{neutral.color.quiet.100}"
+    value: "{border.color.100}"
