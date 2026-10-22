@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.34](https://github.com/mittwald/flow/compare/1.6.0-next.33...1.6.0-next.34) (2026-10-22)
+
+### Bug Fixes
+
+* **Icon:** let components hide and align FontAwesome icons ([#3540](https://github.com/mittwald/flow/issues/3540)) ([b372cd2](https://github.com/mittwald/flow/commit/b372cd22df073d1449352699279782d1dcb3fdad))
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.6.0-next.32...1.5.34) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.34 ([5ba3075](https://github.com/mittwald/flow/commit/5ba30750997084efbc1230ca06ad8a68bfefe947))
+
 ## [1.6.0-next.33](https://github.com/mittwald/flow/compare/1.6.0-next.32...1.6.0-next.33) (2026-10-22)
 
 ### Bug Fixes
