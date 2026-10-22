@@ -254,7 +254,7 @@ decorative-salmon:
       300:
         value: "{color.mittwald-orange.1800}"
     content:
-      value: "{color.mittwald-orange.1500}"
+      value: "{color.mittwald-orange.1000}"
 
 elevation:
   color:
