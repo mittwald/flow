@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.37](https://github.com/mittwald/flow/compare/1.6.0-next.36...1.6.0-next.37) (2026-10-22)
+
+## [1.5.37](https://github.com/mittwald/flow/compare/1.6.0-next.35...1.5.37) (2026-10-22)
+
+### Bug Fixes
+
+* **Modal:** read the open state without creating a controller ([7c48cef](https://github.com/mittwald/flow/commit/7c48cefe6c2c4cb760cbe008c2f5f712112b99e3)), closes [#3528](https://github.com/mittwald/flow/issues/3528)
+* **Modal:** track the virtual keyboard only while the Modal is open ([20f33c7](https://github.com/mittwald/flow/commit/20f33c70730d2d16501ac715b0c6ba2c7e1cb1f2)), closes [#3528](https://github.com/mittwald/flow/issues/3528)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.37 ([c2f3291](https://github.com/mittwald/flow/commit/c2f32919b742a705abdecff9e8010f5daee60ea5))
+
+### Build System
+
+* **deps:** bump the actions group across 1 directory with 5 updates ([1f74586](https://github.com/mittwald/flow/commit/1f74586ecfd1dba24efafb8542dc3f9ec19cdd14))
+
 ## [1.6.0-next.36](https://github.com/mittwald/flow/compare/1.6.0-next.35...1.6.0-next.36) (2026-10-22)
 
 ### Build System
