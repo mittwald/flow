@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.37](https://github.com/mittwald/flow/compare/1.5.36...1.5.37) (2026-10-22)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 15 updates ([c7acd00](https://github.com/mittwald/flow/commit/c7acd00024c484fead7ccbf83d7317b224fcf002))
+
 ## [1.5.36](https://github.com/mittwald/flow/compare/1.5.35...1.5.36) (2026-10-22)
 
 ### Bug Fixes
