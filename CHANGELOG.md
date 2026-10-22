@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+### Bug Fixes
+
+* **Icon:** let components hide and align FontAwesome icons ([#3540](https://github.com/mittwald/flow/issues/3540)) ([b372cd2](https://github.com/mittwald/flow/commit/b372cd22df073d1449352699279782d1dcb3fdad))
+
 ## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
 
 ### Bug Fixes
