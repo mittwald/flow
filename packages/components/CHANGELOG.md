@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.35](https://github.com/mittwald/flow/compare/1.6.0-next.34...1.6.0-next.35) (2026-10-22)
+
+### Bug Fixes
+
+* **Form:** pass the submit event to the submitInterceptor ([15c7a34](https://github.com/mittwald/flow/commit/15c7a3480ca974703488797cfa3fa4bde54a4e5d))
+
+## [1.5.35](https://github.com/mittwald/flow/compare/1.6.0-next.33...1.5.35) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.35 ([ca3ee0d](https://github.com/mittwald/flow/commit/ca3ee0dd197827952c76254d47089cf82d0fb7b5))
+
 ## [1.6.0-next.34](https://github.com/mittwald/flow/compare/1.6.0-next.33...1.6.0-next.34) (2026-10-22)
 
 ### Bug Fixes
