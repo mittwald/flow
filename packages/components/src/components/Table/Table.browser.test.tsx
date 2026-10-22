@@ -43,3 +43,51 @@ test("arrow keys move between a row header and the cells of its row", async () =
   await userEvent.keyboard("{ArrowRight}{ArrowRight}");
   await expect.element(button).toHaveFocus();
 });
+
+test("only the first column holds row headers by default", async () => {
+  await render(
+    <Table aria-label="Domains">
+      <TableHeader>
+        <TableColumn>Domain</TableColumn>
+        <TableColumn>Status</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>example.com</TableCell>
+          <TableCell>active</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>,
+  );
+
+  await expect
+    .element(page.getByRole("rowheader", { name: "example.com" }))
+    .toBeInTheDocument();
+  await expect
+    .element(page.getByRole("gridcell", { name: "active" }))
+    .toBeInTheDocument();
+});
+
+test("isRowHeader moves the row headers to another column", async () => {
+  await render(
+    <Table aria-label="Domains">
+      <TableHeader>
+        <TableColumn isRowHeader={false}>Status</TableColumn>
+        <TableColumn isRowHeader>Domain</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>active</TableCell>
+          <TableCell>example.com</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>,
+  );
+
+  await expect
+    .element(page.getByRole("rowheader", { name: "example.com" }))
+    .toBeInTheDocument();
+  await expect
+    .element(page.getByRole("gridcell", { name: "active" }))
+    .toBeInTheDocument();
+});
