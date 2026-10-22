@@ -12,7 +12,7 @@ message:
   background-color-responder:
     value: "{elevation.color.200}"
   background-color-sender:
-    value: "{decorative-blue.color.quiet.100}"
+    value: "{decorative-navy.color.quiet.100}"
   tip-size-x:
     value: "{size-px.s}"
   tip-size-y:
