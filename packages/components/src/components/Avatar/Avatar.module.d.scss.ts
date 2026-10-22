@@ -7,10 +7,11 @@ declare const classNames: {
   readonly "size-s": "size-s";
   readonly "size-l": "size-l";
   readonly blue: "blue";
-  readonly teal: "teal";
-  readonly green: "green";
-  readonly violet: "violet";
+  readonly navy: "navy";
   readonly lilac: "lilac";
+  readonly sage: "sage";
+  readonly salmon: "salmon";
+  readonly green: "green";
   readonly info: "info";
   readonly success: "success";
   readonly warning: "warning";

@@ -5,6 +5,16 @@ import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import noUnknownFlowClass from "./packages/components/dev/eslint/noUnknownFlowClass.mjs";
+import noBrandColorVariable from "./packages/components/dev/eslint/noBrandColorVariable.mjs";
+
+// One object for every block: ESLint refuses to redefine a plugin name with a
+// different object for a file that two blocks match.
+const flowPlugin = {
+  rules: {
+    "no-unknown-flow-class": noUnknownFlowClass,
+    "no-brand-color-variable": noBrandColorVariable,
+  },
+};
 
 const designTokensJsonImport = {
   group: ["@mittwald/flow-design-tokens/json/*"],
@@ -169,10 +179,33 @@ export default tseslint.config(
       "**/*.module.d.*.ts",
     ],
     plugins: {
-      flow: { rules: { "no-unknown-flow-class": noUnknownFlowClass } },
+      flow: flowPlugin,
     },
     rules: {
       "flow/no-unknown-flow-class": "error",
+    },
+  },
+  {
+    // ADR 0007: code reads Semantic or Variant colors, never Brand. Brand is
+    // theme-neutral, so a Brand variable stays light in dark. The groups come
+    // from design-tokens/src/color-brand.yml, so a new one is covered.
+    files: [
+      "packages/components/**/*.{js,jsx,mjs,ts,tsx}",
+      "apps/docs/**/*.{js,jsx,mjs,ts,tsx}",
+    ],
+    ignores: [
+      // Lint tooling, which names Brand variables to reject them.
+      "packages/components/dev/**",
+      // Docs pages that display the palette itself: the Brand value is the
+      // content. Keep in sync with stylelint.config.mjs.
+      "apps/docs/src/content/foundations/design/colors/**",
+      "apps/docs/src/content/foundations/design/design-tokens/**",
+    ],
+    plugins: {
+      flow: flowPlugin,
+    },
+    rules: {
+      "flow/no-brand-color-variable": "error",
     },
   },
   {
@@ -206,8 +239,8 @@ export default tseslint.config(
     },
   },
   {
-    // Node ES-module CLI scripts (run by GitHub Actions, not bundled).
-    files: [".github/scripts/**/*.mjs"],
+    // Node ES-module CLI scripts (not bundled).
+    files: [".github/scripts/**/*.mjs", "packages/design-tokens/dev/**/*.js"],
     languageOptions: {
       globals: {
         process: "readonly",

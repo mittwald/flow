@@ -11,13 +11,13 @@ import {
   <Flex align="center" wrap="wrap" gap="m">
     <Flex direction="column" grow>
       <Heading size="l">
-        <Color color="violet">mStudio Extension</Color>{" "}
+        <Color color="lilac">mStudio Extension</Color>{" "}
         selber entwickeln
       </Heading>
       <Text>
         <strong>
           Veröffentliche{" "}
-          <Color color="violet">eigene Features</Color> im
+          <Color color="lilac">eigene Features</Color> im
           mStudio
         </strong>
       </Text>

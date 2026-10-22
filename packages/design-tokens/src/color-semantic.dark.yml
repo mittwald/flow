@@ -1,0 +1,426 @@
+# Semantic tier (ADR 0007), dark theme: colors with a meaning. The only
+# tier that distinguishes light and dark; references Brand or, where Flow
+# owns the color, holds a literal. Keep the keys in sync with
+# color-semantic.light.yml.
+#
+# Roles (#3455). Every key counts by emphasis, not lightness: 100 is the
+# quietest in both themes.
+#
+# Colored and alpha groups have six tones:
+#   quiet.100–300   soft surface, hover, pressed; plain/outline hover, pressed
+#   strong.100–300  solid surface, hover, pressed; strong.100 is also plain
+#                   text and link, strong.200 text on soft/outline
+# Hover and pressed take the next Brand step; light mittwald-blue takes every
+# second step (1000/1200/1400), its dark half is too dense (ΔE 3.5, #3479).
+# strong.100 is the step closest to the Brand base that keeps AA (primary:
+# the base). Dark primary takes one step lighter (400/300/200), so the link
+# keeps AA on neutral hover surfaces (#3479). Decorative groups take their
+# soft surface (quiet.100) from the brand's Background/Brand-100 (Figma
+# "mittwald. Website Library", #3550): navy and salmon 1700; blue 1500, one
+# step lighter, so it stands out from the card; sage and lilac 1700, one
+# step darker, so the link keeps 4.18 instead of 3.30. Decorative pressed
+# (quiet.300) is not held to AA for badge text. content is decorative
+# content on any surface (Icon, Color): the step closest to the Brand base
+# that still reads as the hue, AA not required (#3508).
+# Selected is a resting state: plain/outline selected takes the soft surface
+# (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
+#
+# The neutral ramp has three roles of its own (keys 100–300, quiet to strong):
+#   elevation  100 raised (card, modal), 200 ground (page, field, track),
+#              300 inset; also what has to match a surface (switch knob,
+#              slider handle, selected tab, knock-out rings)
+#   content    100 secondary (icon, placeholder), 200 label, 300 text;
+#              inverse is content on strong surfaces
+#   border     100 groups (card, overlay), 200 separates (separator, chart
+#              grid), 300 outlines controls: as light as 3:1 on neutral
+#              surfaces and field hover allows (#3539); light misses 3:1
+#              on the colored tints (AccentBox, sender Message)
+# Everything else takes neutral quiet/strong. Disabled takes
+# unavailable.quiet (surface, border, content); unavailable sits as low as
+# AA allows (strong.100 = content.100).
+#
+# Decorative groups: one per mittwald brand color, named like the color
+# props (sage = mittwald-green, salmon = mittwald-orange, #3508). Status
+# colors are not duplicated; components map their color props onto these
+# groups.
+#
+# Dark takes the contrast steps of light (content) or the role (elevation:
+# the page sits below the card), not the mirrored step.
+
+primary:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-blue.1800}"
+      200:
+        value: "{color.mittwald-blue.1700}"
+      300:
+        value: "{color.mittwald-blue.1600}"
+    strong:
+      100:
+        value: "{color.mittwald-blue.400}"
+      200:
+        value: "{color.mittwald-blue.300}"
+      300:
+        value: "{color.mittwald-blue.200}"
+
+info:
+  color:
+    quiet:
+      100:
+        value: "{color.system-info.1800}"
+      200:
+        value: "{color.system-info.1700}"
+      300:
+        value: "{color.system-info.1600}"
+    strong:
+      100:
+        value: "{color.system-info.700}"
+      200:
+        value: "{color.system-info.500}"
+      300:
+        value: "{color.system-info.400}"
+
+success:
+  color:
+    quiet:
+      100:
+        value: "{color.system-success.1700}"
+      200:
+        value: "{color.system-success.1600}"
+      300:
+        value: "{color.system-success.1500}"
+    strong:
+      100:
+        value: "{color.system-success.1000}"
+      200:
+        value: "{color.system-success.600}"
+      300:
+        value: "{color.system-success.500}"
+
+danger:
+  color:
+    quiet:
+      100:
+        value: "{color.system-danger.1800}"
+      200:
+        value: "{color.system-danger.1700}"
+      300:
+        value: "{color.system-danger.1600}"
+    strong:
+      100:
+        value: "{color.system-danger.700}"
+      200:
+        value: "{color.system-danger.500}"
+      300:
+        value: "{color.system-danger.400}"
+
+warning:
+  color:
+    quiet:
+      100:
+        value: "{color.system-warning.1800}"
+      200:
+        value: "{color.system-warning.1700}"
+      300:
+        value: "{color.system-warning.1600}"
+    strong:
+      100:
+        value: "{color.system-warning.700}"
+      200:
+        value: "{color.system-warning.500}"
+      300:
+        value: "{color.system-warning.400}"
+
+neutral:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-neutral.1600}"
+      200:
+        value: "{color.mittwald-neutral.1500}"
+      300:
+        value: "{color.mittwald-neutral.1400}"
+    strong:
+      100:
+        value: "{color.mittwald-neutral.300}"
+      200:
+        value: "{color.mittwald-neutral.200}"
+      300:
+        value: "{color.mittwald-neutral.100}"
+
+unavailable:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-neutral.1600}"
+      200:
+        value: "{color.mittwald-neutral.1500}"
+      300:
+        value: "{color.mittwald-neutral.1100}"
+    strong:
+      100:
+        value: "{color.mittwald-neutral.700}"
+      200:
+        value: "{color.mittwald-neutral.600}"
+      300:
+        value: "{color.mittwald-neutral.400}"
+
+decorative-blue:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-blue.1500}"
+      200:
+        value: "{color.mittwald-blue.1400}"
+      300:
+        value: "{color.mittwald-blue.1300}"
+    strong:
+      100:
+        value: "{color.mittwald-blue.400}"
+      200:
+        value: "{color.mittwald-blue.300}"
+      300:
+        value: "{color.mittwald-blue.200}"
+    content:
+      value: "{color.mittwald-blue.400}"
+
+decorative-navy:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-navy.1700}"
+      200:
+        value: "{color.mittwald-navy.1600}"
+      300:
+        value: "{color.mittwald-navy.1500}"
+    strong:
+      100:
+        value: "{color.mittwald-navy.600}"
+      200:
+        value: "{color.mittwald-navy.500}"
+      300:
+        value: "{color.mittwald-navy.400}"
+    content:
+      value: "{color.mittwald-navy.1100}"
+
+decorative-sage:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-green.1700}"
+      200:
+        value: "{color.mittwald-green.1600}"
+      300:
+        value: "{color.mittwald-green.1500}"
+    strong:
+      100:
+        value: "{color.mittwald-green.400}"
+      200:
+        value: "{color.mittwald-green.300}"
+      300:
+        value: "{color.mittwald-green.200}"
+    content:
+      value: "{color.mittwald-green.1000}"
+
+decorative-lilac:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-lilac.1700}"
+      200:
+        value: "{color.mittwald-lilac.1600}"
+      300:
+        value: "{color.mittwald-lilac.1500}"
+    strong:
+      100:
+        value: "{color.mittwald-lilac.400}"
+      200:
+        value: "{color.mittwald-lilac.300}"
+      300:
+        value: "{color.mittwald-lilac.200}"
+    content:
+      value: "{color.mittwald-lilac.1000}"
+
+decorative-salmon:
+  color:
+    quiet:
+      100:
+        value: "{color.mittwald-orange.1700}"
+      200:
+        value: "{color.mittwald-orange.1600}"
+      300:
+        value: "{color.mittwald-orange.1500}"
+    strong:
+      100:
+        value: "{color.mittwald-orange.600}"
+      200:
+        value: "{color.mittwald-orange.500}"
+      300:
+        value: "{color.mittwald-orange.400}"
+    content:
+      value: "{color.mittwald-orange.1000}"
+
+border:
+  color:
+    100:
+      value: "{color.mittwald-neutral.1600}"
+    200:
+      value: "{color.mittwald-neutral.1500}"
+    300:
+      value: "{color.mittwald-neutral.900}"
+
+elevation:
+  color:
+    100:
+      value: "{color.mittwald-neutral.1700}"
+    200:
+      value: "{color.mittwald-neutral.1800}"
+    300:
+      value: "{color.mittwald-neutral.1600}"
+
+content:
+  color:
+    100:
+      value: "{color.mittwald-neutral.700}"
+    200:
+      value: "{color.mittwald-neutral.600}"
+    300:
+      value: "{color.mittwald-neutral.100}"
+    inverse:
+      value: "{color.mittwald-neutral.1700}"
+
+dark:
+  color:
+    quiet:
+      100:
+        value: "{color.white-alpha.100}"
+      200:
+        value: "{color.white-alpha.200}"
+      300:
+        value: "{color.white-alpha.300}"
+    strong:
+      100:
+        value: "{color.white-alpha.1000}"
+      200:
+        value: "{color.white-alpha.900}"
+      300:
+        value: "{color.white-alpha.700}"
+
+light:
+  color:
+    quiet:
+      100:
+        value: "{color.black-alpha.100}"
+      200:
+        value: "{color.black-alpha.200}"
+      300:
+        value: "{color.black-alpha.300}"
+    strong:
+      100:
+        value: "{color.black-alpha.1000}"
+      200:
+        value: "{color.black-alpha.900}"
+      300:
+        value: "{color.black-alpha.700}"
+
+dark-static:
+  color:
+    quiet:
+      100:
+        value: "{color.black-alpha.100}"
+      200:
+        value: "{color.black-alpha.200}"
+      300:
+        value: "{color.black-alpha.300}"
+    strong:
+      100:
+        value: "{color.black-alpha.1000}"
+      200:
+        value: "{color.black-alpha.900}"
+      300:
+        value: "{color.black-alpha.700}"
+
+light-static:
+  color:
+    quiet:
+      100:
+        value: "{color.white-alpha.100}"
+      200:
+        value: "{color.white-alpha.200}"
+      300:
+        value: "{color.white-alpha.300}"
+    strong:
+      100:
+        value: "{color.white-alpha.1000}"
+      200:
+        value: "{color.white-alpha.900}"
+      300:
+        value: "{color.white-alpha.700}"
+
+# Literal values: Flow owns these colors outright (ADR 0007).
+transparent:
+  color:
+    value: transparent
+
+categorical:
+  color:
+    sea-green:
+      value: "#0fb5ae"
+    palatinate-blue:
+      value: "#4046ca"
+    tangerine:
+      value: "#f68511"
+    magenta:
+      value: "#de3d82"
+    tropical-indigo:
+      value: "#7e84fa"
+    malachite:
+      value: "#72e06a"
+    azure:
+      value: "#147af3"
+    violet:
+      value: "#7326d3"
+    yellow:
+      value: "#e8c600"
+    alloy-orange:
+      value: "#cb5d00"
+    green:
+      value: "#008f5d"
+    lime:
+      value: "#bce931"
+
+code-syntax:
+  color:
+    keyword:
+      value: "#ff7b72"
+    type:
+      value: "#d2a8ff"
+    variable:
+      value: "#79c0ff"
+    property:
+      value: "#d2a8ff"
+    string:
+      value: "#a5d6ff"
+    number:
+      value: "#79c0ff"
+    comment:
+      value: "#a0a7b0"
+    function:
+      value: "#d2a8ff"
+    operator:
+      value: "#ff7b72"
+    invalid:
+      value: "#f97583"
+
+gradient:
+  color:
+    value:
+      "radial-gradient(circle at 18% 20%, #3D55C159, transparent 22%),
+      radial-gradient(circle at 82% 18%, #00A1B54D, transparent 18%),
+      radial-gradient(circle at 70% 82%, #715DEE47, transparent 24%),
+      linear-gradient(180deg, #06070A 0%, #0A0E18 45%, #0F1424 100%)"
+
+background-gradient:
+  color:
+    value: "linear-gradient(180deg, #0d101a 0%, #354176 100%)"

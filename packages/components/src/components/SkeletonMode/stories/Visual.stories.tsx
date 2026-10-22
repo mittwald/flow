@@ -37,7 +37,7 @@ const meta: Meta<typeof SkeletonMode> = {
       <Section>
         <Heading>
           Webshop Relaunch
-          <Badge color="green">Neu</Badge>
+          <Badge color="success">Neu</Badge>
           <ContextMenuTrigger>
             <Button variant="plain" color="secondary">
               Aktionen

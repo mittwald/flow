@@ -7,8 +7,10 @@ badge:
     value: "{single-line-height}"
   corner-radius:
     value: "{corner-radius.l}"
+  # No border: the soft surface alone carries the badge (#3550). AlertBadge
+  # shares the width.
   border-width:
-    value: "{border-width.100}"
+    value: 0px
   border-style:
     value: "{border-style.default}"
   padding-y:
@@ -19,229 +21,201 @@ badge:
     value: "{size-rem.xs}"
 
   # Neutral
-  neutral-border-color:
-    value: "{color.gray.800}"
   neutral-background-color:
     default:
-      value: "{color.gray.300}"
+      value: "{neutral.color.quiet.100}"
     hover:
-      value: "{color.gray.400}"
+      value: "{neutral.color.quiet.200}"
     pressed:
-      value: "{color.gray.500}"
+      value: "{neutral.color.quiet.300}"
   neutral-content-color:
-    value: "{color.gray.900}"
+    value: "{neutral.color.strong.200}"
   neutral-scope-background-color:
-    value: "{color.gray.800}"
+    value: "{neutral.color.strong.100}"
   neutral-scope-content-color:
     value: "{text.color.light}"
 
   # Blue
-  blue-border-color:
-    value: "{color.hosting-blue.800}"
   blue-background-color:
     default:
-      value: "{color.hosting-blue.100}"
+      value: "{decorative-blue.color.quiet.100}"
     hover:
-      value: "{color.hosting-blue.200}"
+      value: "{decorative-blue.color.quiet.200}"
     pressed:
-      value: "{color.hosting-blue.300}"
+      value: "{decorative-blue.color.quiet.300}"
   blue-content-color:
-    value: "{color.hosting-blue.900}"
+    value: "{decorative-blue.color.strong.200}"
   blue-scope-background-color:
-    value: "{color.hosting-blue.800}"
+    value: "{decorative-blue.color.strong.100}"
   blue-scope-content-color:
     value: "{text.color.light}"
 
   # Navy
-  navy-border-color:
-    value: "{color.mittwald-navy.800}"
   navy-background-color:
     default:
-      value: "{color.mittwald-navy.100}"
+      value: "{decorative-navy.color.quiet.100}"
     hover:
-      value: "{color.mittwald-navy.200}"
+      value: "{decorative-navy.color.quiet.200}"
     pressed:
-      value: "{color.mittwald-navy.300}"
+      value: "{decorative-navy.color.quiet.300}"
   navy-content-color:
-    value: "{color.mittwald-navy.900}"
+    value: "{decorative-navy.color.strong.200}"
   navy-scope-background-color:
-    value: "{color.mittwald-navy.800}"
+    value: "{decorative-navy.color.strong.100}"
   navy-scope-content-color:
     value: "{text.color.light}"
 
-  # Violet
-  violet-border-color:
-    value: "{color.soft-contrast-violet.800}"
-  violet-background-color:
-    default:
-      value: "{color.soft-contrast-violet.100}"
-    hover:
-      value: "{color.soft-contrast-violet.200}"
-    pressed:
-      value: "{color.soft-contrast-violet.300}"
-  violet-content-color:
-    value: "{color.soft-contrast-violet.900}"
-  violet-scope-background-color:
-    value: "{color.soft-contrast-violet.800}"
-  violet-scope-content-color:
-    value: "{text.color.light}"
-
-  # Teal
-  teal-border-color:
-    value: "{color.super-teal.800}"
-  teal-background-color:
-    default:
-      value: "{color.super-teal.100}"
-    hover:
-      value: "{color.super-teal.200}"
-    pressed:
-      value: "{color.super-teal.300}"
-  teal-content-color:
-    value: "{color.super-teal.900}"
-  teal-scope-background-color:
-    value: "{color.super-teal.800}"
-  teal-scope-content-color:
-    value: "{text.color.light}"
-
   # Lilac
-  lilac-border-color:
-    value: "{color.bright-lilac.800}"
   lilac-background-color:
     default:
-      value: "{color.bright-lilac.100}"
+      value: "{decorative-lilac.color.quiet.100}"
     hover:
-      value: "{color.bright-lilac.200}"
+      value: "{decorative-lilac.color.quiet.200}"
     pressed:
-      value: "{color.bright-lilac.300}"
+      value: "{decorative-lilac.color.quiet.300}"
   lilac-content-color:
-    value: "{color.bright-lilac.900}"
+    value: "{decorative-lilac.color.strong.200}"
   lilac-scope-background-color:
-    value: "{color.bright-lilac.800}"
+    value: "{decorative-lilac.color.strong.100}"
   lilac-scope-content-color:
     value: "{text.color.light}"
 
-  # Red
-  red-border-color:
-    value: "{color.amaranth-red.800}"
-  red-background-color:
+  # Sage
+  sage-background-color:
     default:
-      value: "{color.amaranth-red.100}"
+      value: "{decorative-sage.color.quiet.100}"
     hover:
-      value: "{color.amaranth-red.200}"
+      value: "{decorative-sage.color.quiet.200}"
     pressed:
-      value: "{color.amaranth-red.300}"
-  red-content-color:
-    value: "{color.amaranth-red.900}"
-  red-scope-background-color:
-    value: "{color.amaranth-red.800}"
-  red-scope-content-color:
+      value: "{decorative-sage.color.quiet.300}"
+  sage-content-color:
+    value: "{decorative-sage.color.strong.200}"
+  sage-scope-background-color:
+    value: "{decorative-sage.color.strong.100}"
+  sage-scope-content-color:
     value: "{text.color.light}"
 
-  # Green
-  green-border-color:
-    value: "{color.espelkamp-green.800}"
-  green-background-color:
+  # Salmon
+  salmon-background-color:
     default:
-      value: "{color.espelkamp-green.100}"
+      value: "{decorative-salmon.color.quiet.100}"
     hover:
-      value: "{color.espelkamp-green.200}"
+      value: "{decorative-salmon.color.quiet.200}"
     pressed:
-      value: "{color.espelkamp-green.300}"
-  green-content-color:
-    value: "{color.espelkamp-green.900}"
-  green-scope-background-color:
-    value: "{color.espelkamp-green.800}"
-  green-scope-content-color:
+      value: "{decorative-salmon.color.quiet.300}"
+  salmon-content-color:
+    value: "{decorative-salmon.color.strong.200}"
+  salmon-scope-background-color:
+    value: "{decorative-salmon.color.strong.100}"
+  salmon-scope-content-color:
     value: "{text.color.light}"
 
-  # Orange
-  orange-border-color:
-    value: "{color.royal-orange.900}"
-  orange-background-color:
+  # Danger
+  danger-background-color:
     default:
-      value: "{color.royal-orange.100}"
+      value: "{danger.color.quiet.100}"
     hover:
-      value: "{color.royal-orange.200}"
+      value: "{danger.color.quiet.200}"
     pressed:
-      value: "{color.royal-orange.300}"
-  orange-content-color:
-    value: "{color.royal-orange.900}"
-  orange-scope-background-color:
-    value: "{color.royal-orange.900}"
-  orange-scope-content-color:
+      value: "{danger.color.quiet.300}"
+  danger-content-color:
+    value: "{danger.color.strong.200}"
+  danger-scope-background-color:
+    value: "{danger.color.strong.100}"
+  danger-scope-content-color:
+    value: "{text.color.light}"
+
+  # Success
+  success-background-color:
+    default:
+      value: "{success.color.quiet.100}"
+    hover:
+      value: "{success.color.quiet.200}"
+    pressed:
+      value: "{success.color.quiet.300}"
+  success-content-color:
+    value: "{success.color.strong.200}"
+  success-scope-background-color:
+    value: "{success.color.strong.100}"
+  success-scope-content-color:
+    value: "{text.color.light}"
+
+  # Warning
+  warning-background-color:
+    default:
+      value: "{warning.color.quiet.100}"
+    hover:
+      value: "{warning.color.quiet.200}"
+    pressed:
+      value: "{warning.color.quiet.300}"
+  warning-content-color:
+    value: "{warning.color.strong.200}"
+  warning-scope-background-color:
+    value: "{warning.color.strong.200}"
+  warning-scope-content-color:
     value: "{text.color.light}"
 
   # Dark
-  dark-border-color:
-    value: "{dark.color.800}"
   dark-background-color:
     default:
-      value: "{dark.color.100}"
+      value: "{dark.color.quiet.100}"
     hover:
-      value: "{dark.color.200}"
+      value: "{dark.color.quiet.200}"
     pressed:
-      value: "{dark.color.300}"
+      value: "{dark.color.quiet.300}"
   dark-content-color:
-    value: "{dark.color.800}"
+    value: "{dark.color.strong.100}"
   dark-scope-background-color:
-    value: "{dark.color.800}"
+    value: "{dark.color.strong.100}"
   dark-scope-content-color:
     value: "{text.color.light}"
 
   # Light
-  light-border-color:
-    value: "{light.color.800}"
   light-background-color:
     default:
-      value: "{light.color.100}"
+      value: "{light.color.quiet.100}"
     hover:
-      value: "{light.color.200}"
+      value: "{light.color.quiet.200}"
     pressed:
-      value: "{light.color.300}"
+      value: "{light.color.quiet.300}"
   light-content-color:
-    value: "{light.color.800}"
+    value: "{light.color.strong.100}"
   light-scope-background-color:
-    value: "{light.color.800}"
+    value: "{light.color.strong.100}"
   light-scope-content-color:
     value: "{text.color.dark}"
 
   # Dark Static
-  dark-static-border-color:
-    value: "{dark-static.color.800}"
   dark-static-background-color:
     default:
-      value: "{dark-static.color.100}"
+      value: "{dark-static.color.quiet.100}"
     hover:
-      value: "{dark-static.color.200}"
+      value: "{dark-static.color.quiet.200}"
     pressed:
-      value: "{dark-static.color.300}"
+      value: "{dark-static.color.quiet.300}"
   dark-static-content-color:
-    value: "{dark-static.color.800}"
+    value: "{dark-static.color.strong.100}"
   dark-static-scope-background-color:
-    value: "{dark-static.color.800}"
+    value: "{dark-static.color.strong.100}"
   dark-static-scope-content-color:
     value: "{text.color.light-static}"
 
   # Light Static
-  light-static-border-color:
-    value: "{light-static.color.800}"
   light-static-background-color:
     default:
-      value: "{light-static.color.100}"
+      value: "{light-static.color.quiet.100}"
     hover:
-      value: "{light-static.color.200}"
+      value: "{light-static.color.quiet.200}"
     pressed:
-      value: "{light-static.color.300}"
+      value: "{light-static.color.quiet.300}"
   light-static-content-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   light-static-scope-background-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"
   light-static-scope-content-color:
     value: "{text.color.dark-static}"
 
   # Disabled
-  disabled-border-color:
-    value: "{disabled-outline-border-color}"
   disabled-background-color:
     value: "{disabled-outline-background-color}"
   disabled-content-color:
@@ -252,8 +226,6 @@ badge:
     value: "{disabled-solid-content-color}"
 
   # Disabled Dark
-  disabled-dark-border-color:
-    value: "{disabled-outline-dark-border-color}"
   disabled-dark-background-color:
     value: "{disabled-soft-dark-background-color}"
   disabled-dark-content-color:
@@ -264,8 +236,6 @@ badge:
     value: "{disabled-solid-dark-content-color}"
 
   # Disabled Light
-  disabled-light-border-color:
-    value: "{disabled-outline-light-border-color}"
   disabled-light-background-color:
     value: "{disabled-soft-light-background-color}"
   disabled-light-content-color:
@@ -276,8 +246,6 @@ badge:
     value: "{disabled-solid-light-content-color}"
 
   # Disabled Dark Static
-  disabled-dark-static-border-color:
-    value: "{disabled-outline-dark-static-border-color}"
   disabled-dark-static-background-color:
     value: "{disabled-soft-dark-static-background-color}"
   disabled-dark-static-content-color:
@@ -288,8 +256,6 @@ badge:
     value: "{disabled-solid-dark-static-content-color}"
 
   # Disabled Light Static
-  disabled-light-static-border-color:
-    value: "{disabled-outline-light-static-border-color}"
   disabled-light-static-background-color:
     value: "{disabled-soft-light-static-background-color}"
   disabled-light-static-content-color:

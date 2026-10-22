@@ -20,10 +20,10 @@ file-card:
     value: "{font-size-text.s}"
   background-color:
     default:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
     hover:
       value: "{neutral-outline-background-color.hover}"
     pressed:
       value: "{neutral-outline-background-color.pressed}"
     error:
-      value: "{danger.color.100}"
+      value: "{danger.color.quiet.100}"

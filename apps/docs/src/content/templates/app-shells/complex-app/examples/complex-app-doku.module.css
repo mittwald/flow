@@ -3,14 +3,14 @@
   --page-width: 1800px;
 
   /* The header's tint is mixed from the gradient's first stop. */
-  --header-ground: var(--neutral--color--200);
+  --header-ground: var(--elevation--color--200);
 
   /* The header's rendered height; the sticky sidebar starts just below it. */
   --header-height: 72px;
 
   /* Container-relative here; use 100dvh in a real full-page app. */
   min-height: 100%;
-  background: var(--texture--grain), var(--color--background-gradient);
+  background: var(--texture--grain), var(--background-gradient--color);
   background-blend-mode: overlay, normal;
 }
 

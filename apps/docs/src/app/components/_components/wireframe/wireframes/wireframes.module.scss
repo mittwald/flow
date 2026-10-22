@@ -13,15 +13,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
-  border: 2px solid var(--neutral--color--500);
+  border: 2px solid var(--border--color--200);
   border-radius: var(--corner-radius--m);
   position: relative;
 }
 
 .cropperCell {
   min-height: 40px;
-  border-inline-end: 2px solid var(--neutral--color--500);
-  border-block-end: 2px solid var(--neutral--color--500);
+  border-inline-end: 2px solid var(--border--color--200);
+  border-block-end: 2px solid var(--border--color--200);
 }
 
 .cropperCell:nth-child(3n) {
@@ -37,16 +37,16 @@
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
   overflow: hidden;
-  background: var(--neutral--color--100);
-  border: 2px solid var(--neutral--color--500);
+  background: var(--elevation--color--100);
+  border: 2px solid var(--border--color--200);
   border-radius: var(--corner-radius--m);
 }
 
 .tableHeaderCell,
 .tableCell {
   min-height: 32px;
-  border-inline-end: 2px solid var(--neutral--color--500);
-  border-block-end: 2px solid var(--neutral--color--500);
+  border-inline-end: 2px solid var(--border--color--200);
+  border-block-end: 2px solid var(--border--color--200);
 }
 
 .tableHeaderCell:nth-child(3n),
@@ -59,14 +59,14 @@
 }
 
 .tableHeaderCell {
-  background: var(--neutral--color--300);
+  background: var(--elevation--color--300);
 }
 
 .progressTrack {
   width: 78%;
   height: 24px;
   overflow: hidden;
-  background: var(--neutral--color--400);
+  background: var(--neutral--color--quiet--100);
   border-radius: var(--corner-radius--l);
 }
 
@@ -74,7 +74,7 @@
   display: block;
   width: 58%;
   height: 100%;
-  background: var(--neutral--color--700);
+  background: var(--content--color--100);
   border-radius: var(--corner-radius--l);
 }
 
@@ -83,9 +83,9 @@
   width: 42%;
   aspect-ratio: 1;
   background: conic-gradient(
-    var(--neutral--color--700) 0 38%,
-    var(--neutral--color--600) 38% 68%,
-    var(--neutral--color--500) 68% 100%
+    var(--content--color--100) 0 38%,
+    var(--neutral--color--quiet--300) 38% 68%,
+    var(--neutral--color--quiet--200) 68% 100%
   );
   border-radius: 50%;
 }
@@ -94,7 +94,7 @@
   position: absolute;
   inset: 28%;
   content: "";
-  background: var(--neutral--color--200);
+  background: var(--elevation--color--200);
   border-radius: 50%;
 }
 
@@ -105,7 +105,7 @@
 
 .avatarOverlap {
   margin-inline-start: -24px;
-  border: 2px solid var(--neutral--color--200);
+  border: 2px solid var(--elevation--color--200);
 }
 
 .switchTrack {
@@ -115,7 +115,7 @@
   width: 80px;
   height: 40px;
   padding: 4px;
-  background: var(--neutral--color--700);
+  background: var(--content--color--100);
   border-radius: 20px;
 }
 
@@ -124,7 +124,7 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 0;
   overflow: hidden;
-  border: 2px solid var(--neutral--color--500);
+  border: 2px solid var(--border--color--200);
   border-radius: var(--corner-radius--m);
   gap: 0;
 }
@@ -134,7 +134,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  border-inline-end: 2px solid var(--neutral--color--500);
+  border-inline-end: 2px solid var(--border--color--200);
 }
 
 .segment:last-child {
@@ -142,7 +142,7 @@
 }
 
 .segmentActive {
-  background: var(--neutral--color--300);
+  background: var(--elevation--color--300);
 }
 
 /* Popover tip pointing at the element that triggered the overlay. Filled in the
@@ -159,12 +159,12 @@
 
 .tipDown {
   border-inline: 8px solid transparent;
-  border-block-start: 8px solid var(--neutral--color--500);
+  border-block-start: 8px solid var(--border--color--200);
 }
 
 .tipInlineStart {
   border-block: 8px solid transparent;
-  border-inline-end: 8px solid var(--neutral--color--500);
+  border-inline-end: 8px solid var(--border--color--200);
 }
 
 /* Modal footer — bleeds to the overlay edges, like the real footer. */
@@ -173,7 +173,7 @@
   margin-block: 8px -16px;
   margin-inline: -16px;
   padding: 16px;
-  background: var(--neutral--color--200);
+  background: var(--elevation--color--200);
   border-radius: 0 0 var(--corner-radius--m) var(--corner-radius--m);
 }
 
@@ -187,7 +187,7 @@
 
 .tabBar {
   overflow: hidden;
-  background: var(--neutral--color--100);
+  background: var(--elevation--color--100);
   border-radius: var(--corner-radius--m) var(--corner-radius--m) 0 0;
 }
 
@@ -209,14 +209,14 @@
 }
 
 .tabCurrent {
-  background: var(--neutral--color--300);
+  background: var(--elevation--color--300);
 }
 
 .sliderTrack {
   width: 100%;
   position: relative;
   height: 12px;
-  background: var(--neutral--color--400);
+  background: var(--neutral--color--quiet--100);
   border-radius: var(--corner-radius--l);
 }
 
@@ -225,7 +225,7 @@
   width: 48%;
   height: 100%;
   content: "";
-  background: var(--neutral--color--700);
+  background: var(--content--color--100);
   border-radius: inherit;
 }
 
@@ -235,7 +235,7 @@
   inset-inline-start: 48%;
   width: 32px;
   aspect-ratio: 1;
-  background: var(--neutral--color--700);
+  background: var(--content--color--100);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
@@ -243,8 +243,8 @@
 .chart {
   width: 78%;
   height: 64%;
-  border-inline-start: 4px solid var(--neutral--color--600);
-  border-block-end: 4px solid var(--neutral--color--600);
+  border-inline-start: 4px solid var(--neutral--color--quiet--300);
+  border-block-end: 4px solid var(--neutral--color--quiet--300);
 }
 
 .chartBars {
@@ -259,10 +259,10 @@
 
 .chartBars .chartBar {
   display: block;
-  background: var(--neutral--color--500);
+  background: var(--neutral--color--quiet--200);
   border-radius: var(--corner-radius--m) var(--corner-radius--m) 0 0;
 }
 
 .dropZone {
-  border: 2px dashed var(--neutral--color--600);
+  border: 2px dashed var(--neutral--color--quiet--300);
 }

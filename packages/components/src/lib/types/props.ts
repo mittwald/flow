@@ -70,3 +70,25 @@ export type AlphaColor = (typeof alphaColors)[number];
 export function isAlphaColor(color: string): color is AlphaColor {
   return alphaColors.includes(color as AlphaColor);
 }
+
+/** The decorative colors, one per mittwald brand color (#3508). */
+export const decorativeColors = [
+  "blue",
+  "navy",
+  "lilac",
+  "sage",
+  "salmon",
+] as const;
+
+export type DecorativeColor = (typeof decorativeColors)[number];
+
+/**
+ * Deprecated decorative color values and the color each renders as (#3508).
+ * `violet` duplicated `lilac`; `teal` already rendered the sage tone.
+ */
+export const deprecatedDecorativeColors = {
+  violet: "lilac",
+  teal: "sage",
+} as const satisfies Record<string, DecorativeColor>;
+
+export type DeprecatedDecorativeColor = keyof typeof deprecatedDecorativeColors;

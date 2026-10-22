@@ -44,7 +44,7 @@ interface Mailbox {
   id: string;
   address: string;
   type: string;
-  color: "blue" | "teal" | "violet";
+  color: "blue" | "sage" | "lilac";
   storage?: { used: number; max: number };
 }
 
@@ -67,13 +67,13 @@ const mailboxes: Mailbox[] = [
     id: "3",
     address: "info@mittwald.de",
     type: "Weiterleitungsadresse",
-    color: "teal",
+    color: "sage",
   },
   {
     id: "4",
     address: "hallo@mittwald.de",
     type: "Catch-All-Adresse",
-    color: "violet",
+    color: "lilac",
     storage: { used: 0, max: 2 },
   },
 ];
