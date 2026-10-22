@@ -34,7 +34,7 @@ export default () => {
           <DomainList.ItemView>
             <Avatar
               color={
-                domain.type === "Domain" ? "blue" : "teal"
+                domain.type === "Domain" ? "blue" : "sage"
               }
             >
               {domain.type === "Domain" ? (

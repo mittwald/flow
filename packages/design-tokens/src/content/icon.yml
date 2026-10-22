@@ -18,14 +18,17 @@ icon:
     value: "{success.color.strong.200}"
   unavailable-color:
     value: "{unavailable.color.strong.100}"
+  # Decorative content tone (#3508)
   blue-color:
-    value: "{primary.color.strong.300}"
-  violet-color:
-    value: "{decorative-lilac.color.strong.100}"
-  teal-color:
-    value: "{decorative-green.color.strong.100}"
+    value: "{decorative-blue.color.content}"
+  navy-color:
+    value: "{decorative-navy.color.content}"
   lilac-color:
-    value: "{decorative-lilac.color.strong.100}"
+    value: "{decorative-lilac.color.content}"
+  sage-color:
+    value: "{decorative-sage.color.content}"
+  salmon-color:
+    value: "{decorative-salmon.color.content}"
   dark-color:
     value: "{dark-plain-content-color}"
   light-color:

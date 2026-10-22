@@ -24,7 +24,7 @@ export const VisualDemo = () => (
   <>
     <Heading level={3}>
       Projektinhaber
-      <Badge color="green">Neu</Badge>
+      <Badge color="success">Neu</Badge>
       <ContextMenuTrigger>
         <Button variant="plain" color="secondary">
           Aktionen

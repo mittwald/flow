@@ -3,20 +3,32 @@ import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithClassName, Status } from "@/lib/types/props";
+import {
+  deprecatedDecorativeColors,
+  type DeprecatedDecorativeColor,
+  type PropsWithClassName,
+  type Status,
+} from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertIcon } from "@/components/AlertIcon";
 import type { avatarColors } from "@/components/Avatar/avatarColors";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
+import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
 
-export type AvatarColors = (typeof avatarColors)[number];
+export type AvatarColors =
+  (typeof avatarColors)[number] | DeprecatedDecorativeColor | "green";
 
 export interface AvatarProps
   extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
   /** The size of the avatar. @default "m" */
   size?: "xs" | "s" | "m" | "l";
-  /** The color of icons and initials inside the avatar. */
+  /**
+   * The color of icons and initials inside the avatar.
+   *
+   * @deprecatedValues violet, teal, green
+   */
   color?: AvatarColors;
   /**
    * Adds status icon and color to the avatar. May only be used if the status is
@@ -34,9 +46,27 @@ export interface AvatarProps
 
 /** @flr-generate all */
 export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, color, size = "m", status, label, ref } = props;
+  const {
+    children,
+    className,
+    color: colorFromProps,
+    size = "m",
+    status,
+    label,
+    ref,
+  } = props;
 
+  const warnDeprecation = useWarnDeprecation();
+  const color = useDeprecatedColor(colorFromProps, deprecatedDecorativeColors);
   const isSkeleton = useSkeletonMode();
+
+  // `green` keeps the success look it always had until it is removed; its
+  // replacement `sage` is the brand's muted green (#3508).
+  if (color === "green") {
+    warnDeprecation(
+      "The color 'green' is deprecated and will be removed in a future release. Use 'sage' instead.",
+    );
+  }
 
   const rootClassName = clsx(
     styles.avatar,

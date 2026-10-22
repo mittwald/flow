@@ -42,6 +42,13 @@ const semanticShapes = {
   ),
   elevation: steps,
   content: [...steps, "inverse"],
+  // Decorative groups add one content tone for Icon and Color (#3508).
+  decorative: [
+    ...["quiet", "strong"].flatMap((tone) =>
+      steps.map((step) => `${tone}.${step}`),
+    ),
+    "content",
+  ],
 };
 
 const collectTokens = (node, file, tokenPath = [], collector = []) => {
@@ -116,7 +123,11 @@ const checkColorTiers = () => {
     (key) => key.split(".")[0],
   );
   for (const [group, keys] of keysByGroup) {
-    const expected = semanticShapes[group] ?? semanticShapes.default;
+    const expected =
+      semanticShapes[group] ??
+      (group.startsWith("decorative-")
+        ? semanticShapes.decorative
+        : semanticShapes.default);
     const actual = keys.map((key) => key.split(".").slice(2).join("."));
     if (
       actual.length !== expected.length ||

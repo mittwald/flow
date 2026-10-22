@@ -86,6 +86,7 @@ const runChain = (source: string): ChainRun => {
  * | `TableColumn maxWidth`/`minWidth={null}` | `table-column-width-props`                 |
  * | `/password-tools`                        | `password-tools-subpath-renamed`           |
  * | `Button color="accent"`                  | `button-color-accent-to-success`           |
+ * | `Badge color="red"`                      | `color-props-brand-palette`                |
  * | `Align`                                  | `align-to-combine`                         |
  * | `ContextualHelp defaultOpen`             | `popover-open-state-props`                 |
  * | `Accordion variant="outline"`            | `accordion-variant-deprecated`             |
@@ -96,6 +97,7 @@ import { AccentBox } from "@mittwald/flow-react-components/components/AccentBox"
 import { Accordion } from "@mittwald/flow-react-components/components/Accordion";
 import { Action } from "@mittwald/flow-react-components/components/Action";
 import { Align } from "@mittwald/flow-react-components/components/Align";
+import { Badge } from "@mittwald/flow-react-components/components/Badge";
 import { Button } from "@mittwald/flow-react-components/components/Button";
 import { ContextualHelp } from "@mittwald/flow-react-components/components/ContextualHelp";
 import { Heading } from "@mittwald/flow-react-components/components/Heading";
@@ -115,6 +117,7 @@ export const Toolbar = (props: {
 }) => (
   <Align>
     <Heading color="primary">Danger zone</Heading>
+    <Badge color="red">Locked</Badge>
     <ContextualHelp defaultOpen>Rights and roles</ContextualHelp>
     <Accordion variant="outline" />
     <AccentBox color="violet">
@@ -142,6 +145,7 @@ import { AccentBox } from "@mittwald/flow-react-components";
 import { Accordion } from "@mittwald/flow-react-components";
 import { Action } from "@mittwald/flow-react-components";
 import { Combine } from "@mittwald/flow-react-components";
+import { Badge } from "@mittwald/flow-react-components";
 import { Button } from "@mittwald/flow-react-components";
 import { ContextualHelp } from "@mittwald/flow-react-components";
 import { Heading } from "@mittwald/flow-react-components";
@@ -160,6 +164,7 @@ export const Toolbar = (props: {
 }) => (
   <Combine>
     <Heading color="default">Danger zone</Heading>
+    <Badge color="danger">Locked</Badge>
     <ContextualHelp isDefaultOpen>Rights and roles</ContextualHelp>
     <Accordion />
     <AccentBox backgroundColor="violet">

@@ -4,7 +4,7 @@ accent-box:
   background-color-blue:
     value: "{decorative-blue.color.quiet.100}"
   background-color-teal:
-    value: "{decorative-green.color.quiet.100}"
+    value: "{decorative-sage.color.quiet.100}"
   background-color-lilac:
     value: "{decorative-lilac.color.quiet.100}"
   background-color-violet:

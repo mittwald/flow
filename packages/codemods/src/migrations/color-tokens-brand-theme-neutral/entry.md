@@ -45,11 +45,12 @@ apply:
   `--strong--100` (control), disabled →
   `--unavailable--color--quiet--100/200/300` (surface, border, content).
   `--decorative-violet--color--…` → `--decorative-lilac--color--…`,
-  `--decorative-teal--color--…` → `--decorative-green--color--…`,
+  `--decorative-teal--color--…` → `--decorative-sage--color--…`,
   `--decorative-red--`, `--decorative-green--` and
   `--decorative-orange--color--…` → `--danger--`, `--success--` and
-  `--warning--color--…`. Which one fits is not decidable mechanically — decide
-  whether the color is a surface, content or status.
+  `--warning--color--…`; the brand's green and orange are `--decorative-sage--`
+  and `--decorative-salmon--color--…`. Which one fits is not decidable
+  mechanically — decide whether the color is a surface, content or status.
 ---
 
 The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
@@ -99,11 +100,13 @@ steps; it selects few tones per role and theme
 | `elevation` (new: raised, ground, inset surface)                                                | `100/200/300`                                                                |
 | `content` (new: secondary, label, text; content on strong)                                      | `100/200/300`, `inverse`                                                     |
 
-The decorative groups follow the brand colors: `decorative-blue`, `-navy`,
-`-green` (`mittwald-green`), `-lilac` and `-orange` (`mittwald-orange`).
-`decorative-violet` and `decorative-teal` are gone (use `-lilac` and `-green`),
-and so are `decorative-red`, `-green` and `-orange` as status mirrors (use
-`danger`, `success` and `warning`).
+The decorative groups follow the brand colors and are named like the color
+props: `decorative-blue`, `-navy`, `-lilac`, `-sage` (`mittwald-green`) and
+`-salmon` (`mittwald-orange`). Besides `quiet` and `strong` each has a `content`
+tone for decorative content such as icons. `decorative-violet` and
+`decorative-teal` are gone (use `-lilac` and `-sage`), and so are
+`decorative-red`, `-green` and `-orange` as status mirrors (use `danger`,
+`success` and `warning`).
 
 ```diff
 - .card { background: var(--color--gray--100); }

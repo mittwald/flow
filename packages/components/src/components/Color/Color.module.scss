@@ -1,17 +1,21 @@
 .blue {
-  color: var(--primary--color--strong--300);
+  color: var(--decorative-blue--color--content);
 }
 
-.violet {
-  color: var(--decorative-lilac--color--strong--100);
-}
-
-.teal {
-  color: var(--decorative-green--color--strong--100);
+.navy {
+  color: var(--decorative-navy--color--content);
 }
 
 .lilac {
-  color: var(--decorative-lilac--color--strong--100);
+  color: var(--decorative-lilac--color--content);
+}
+
+.sage {
+  color: var(--decorative-sage--color--content);
+}
+
+.salmon {
+  color: var(--decorative-salmon--color--content);
 }
 
 .danger {

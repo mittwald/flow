@@ -16,10 +16,12 @@
 # the base). Dark primary takes one step lighter (400/300/200), so the link
 # keeps AA on neutral hover surfaces (#3479). Decorative groups take their
 # soft surface (quiet.100) from the brand's Background/Brand-100 (Figma
-# "mittwald. Website Library", #3550): navy and orange 1700; blue 1500, one
-# step lighter, so it stands out from the card; green and lilac 1700, one
+# "mittwald. Website Library", #3550): navy and salmon 1700; blue 1500, one
+# step lighter, so it stands out from the card; sage and lilac 1700, one
 # step darker, so the link keeps 4.18 instead of 3.30. Decorative pressed
-# (quiet.300) is not held to AA for badge text.
+# (quiet.300) is not held to AA for badge text. content is decorative
+# content on any surface (Icon, Color): the step closest to the Brand base
+# that still reads as the hue, AA not required (#3508).
 # Selected is a resting state: plain/outline selected takes the soft surface
 # (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
 #
@@ -35,8 +37,10 @@
 # (surface, border, content); unavailable sits as low as AA allows
 # (strong.100 = content.100).
 #
-# Decorative groups: one per mittwald brand color. Status colors are not
-# duplicated; components map their color props onto these groups.
+# Decorative groups: one per mittwald brand color, named like the color
+# props (sage = mittwald-green, salmon = mittwald-orange, #3508). Status
+# colors are not duplicated; components map their color props onto these
+# groups.
 #
 # Dark takes the contrast steps of light (content) or the role (elevation:
 # the page sits below the card), not the mirrored step.
@@ -176,6 +180,8 @@ decorative-blue:
         value: "{color.mittwald-blue.300}"
       300:
         value: "{color.mittwald-blue.200}"
+    content:
+      value: "{color.mittwald-blue.400}"
 
 decorative-navy:
   color:
@@ -193,8 +199,10 @@ decorative-navy:
         value: "{color.mittwald-navy.500}"
       300:
         value: "{color.mittwald-navy.400}"
+    content:
+      value: "{color.mittwald-navy.1100}"
 
-decorative-green:
+decorative-sage:
   color:
     quiet:
       100:
@@ -210,6 +218,8 @@ decorative-green:
         value: "{color.mittwald-green.300}"
       300:
         value: "{color.mittwald-green.200}"
+    content:
+      value: "{color.mittwald-green.1000}"
 
 decorative-lilac:
   color:
@@ -227,8 +237,10 @@ decorative-lilac:
         value: "{color.mittwald-lilac.300}"
       300:
         value: "{color.mittwald-lilac.200}"
+    content:
+      value: "{color.mittwald-lilac.1000}"
 
-decorative-orange:
+decorative-salmon:
   color:
     quiet:
       100:
@@ -244,6 +256,8 @@ decorative-orange:
         value: "{color.mittwald-orange.500}"
       300:
         value: "{color.mittwald-orange.400}"
+    content:
+      value: "{color.mittwald-orange.1000}"
 
 elevation:
   color:

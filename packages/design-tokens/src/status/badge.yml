@@ -21,8 +21,6 @@ badge:
     value: "{size-rem.xs}"
 
   # Neutral
-  neutral-border-color:
-    value: "{neutral.color.strong.100}"
   neutral-background-color:
     default:
       value: "{neutral.color.quiet.100}"
@@ -38,8 +36,6 @@ badge:
     value: "{text.color.light}"
 
   # Blue
-  blue-border-color:
-    value: "{decorative-blue.color.strong.100}"
   blue-background-color:
     default:
       value: "{decorative-blue.color.quiet.100}"
@@ -55,8 +51,6 @@ badge:
     value: "{text.color.light}"
 
   # Navy
-  navy-border-color:
-    value: "{decorative-navy.color.strong.100}"
   navy-background-color:
     default:
       value: "{decorative-navy.color.quiet.100}"
@@ -71,43 +65,7 @@ badge:
   navy-scope-content-color:
     value: "{text.color.light}"
 
-  # Violet
-  violet-border-color:
-    value: "{decorative-lilac.color.strong.100}"
-  violet-background-color:
-    default:
-      value: "{decorative-lilac.color.quiet.100}"
-    hover:
-      value: "{decorative-lilac.color.quiet.200}"
-    pressed:
-      value: "{decorative-lilac.color.quiet.300}"
-  violet-content-color:
-    value: "{decorative-lilac.color.strong.200}"
-  violet-scope-background-color:
-    value: "{decorative-lilac.color.strong.100}"
-  violet-scope-content-color:
-    value: "{text.color.light}"
-
-  # Teal
-  teal-border-color:
-    value: "{decorative-green.color.strong.100}"
-  teal-background-color:
-    default:
-      value: "{decorative-green.color.quiet.100}"
-    hover:
-      value: "{decorative-green.color.quiet.200}"
-    pressed:
-      value: "{decorative-green.color.quiet.300}"
-  teal-content-color:
-    value: "{decorative-green.color.strong.200}"
-  teal-scope-background-color:
-    value: "{decorative-green.color.strong.100}"
-  teal-scope-content-color:
-    value: "{text.color.light}"
-
   # Lilac
-  lilac-border-color:
-    value: "{decorative-lilac.color.strong.100}"
   lilac-background-color:
     default:
       value: "{decorative-lilac.color.quiet.100}"
@@ -122,60 +80,82 @@ badge:
   lilac-scope-content-color:
     value: "{text.color.light}"
 
-  # Red
-  red-border-color:
-    value: "{danger.color.strong.100}"
-  red-background-color:
+  # Sage
+  sage-background-color:
+    default:
+      value: "{decorative-sage.color.quiet.100}"
+    hover:
+      value: "{decorative-sage.color.quiet.200}"
+    pressed:
+      value: "{decorative-sage.color.quiet.300}"
+  sage-content-color:
+    value: "{decorative-sage.color.strong.200}"
+  sage-scope-background-color:
+    value: "{decorative-sage.color.strong.100}"
+  sage-scope-content-color:
+    value: "{text.color.light}"
+
+  # Salmon
+  salmon-background-color:
+    default:
+      value: "{decorative-salmon.color.quiet.100}"
+    hover:
+      value: "{decorative-salmon.color.quiet.200}"
+    pressed:
+      value: "{decorative-salmon.color.quiet.300}"
+  salmon-content-color:
+    value: "{decorative-salmon.color.strong.200}"
+  salmon-scope-background-color:
+    value: "{decorative-salmon.color.strong.100}"
+  salmon-scope-content-color:
+    value: "{text.color.light}"
+
+  # Danger
+  danger-background-color:
     default:
       value: "{danger.color.quiet.100}"
     hover:
       value: "{danger.color.quiet.200}"
     pressed:
       value: "{danger.color.quiet.300}"
-  red-content-color:
+  danger-content-color:
     value: "{danger.color.strong.200}"
-  red-scope-background-color:
+  danger-scope-background-color:
     value: "{danger.color.strong.100}"
-  red-scope-content-color:
+  danger-scope-content-color:
     value: "{text.color.light}"
 
-  # Green
-  green-border-color:
-    value: "{success.color.strong.100}"
-  green-background-color:
+  # Success
+  success-background-color:
     default:
       value: "{success.color.quiet.100}"
     hover:
       value: "{success.color.quiet.200}"
     pressed:
       value: "{success.color.quiet.300}"
-  green-content-color:
+  success-content-color:
     value: "{success.color.strong.200}"
-  green-scope-background-color:
+  success-scope-background-color:
     value: "{success.color.strong.100}"
-  green-scope-content-color:
+  success-scope-content-color:
     value: "{text.color.light}"
 
-  # Orange
-  orange-border-color:
-    value: "{warning.color.strong.200}"
-  orange-background-color:
+  # Warning
+  warning-background-color:
     default:
       value: "{warning.color.quiet.100}"
     hover:
       value: "{warning.color.quiet.200}"
     pressed:
       value: "{warning.color.quiet.300}"
-  orange-content-color:
+  warning-content-color:
     value: "{warning.color.strong.200}"
-  orange-scope-background-color:
+  warning-scope-background-color:
     value: "{warning.color.strong.200}"
-  orange-scope-content-color:
+  warning-scope-content-color:
     value: "{text.color.light}"
 
   # Dark
-  dark-border-color:
-    value: "{dark.color.strong.100}"
   dark-background-color:
     default:
       value: "{dark.color.quiet.100}"
@@ -191,8 +171,6 @@ badge:
     value: "{text.color.light}"
 
   # Light
-  light-border-color:
-    value: "{light.color.strong.100}"
   light-background-color:
     default:
       value: "{light.color.quiet.100}"
@@ -208,8 +186,6 @@ badge:
     value: "{text.color.dark}"
 
   # Dark Static
-  dark-static-border-color:
-    value: "{dark-static.color.strong.100}"
   dark-static-background-color:
     default:
       value: "{dark-static.color.quiet.100}"
@@ -225,8 +201,6 @@ badge:
     value: "{text.color.light-static}"
 
   # Light Static
-  light-static-border-color:
-    value: "{light-static.color.strong.100}"
   light-static-background-color:
     default:
       value: "{light-static.color.quiet.100}"
@@ -242,8 +216,6 @@ badge:
     value: "{text.color.dark-static}"
 
   # Disabled
-  disabled-border-color:
-    value: "{disabled-outline-border-color}"
   disabled-background-color:
     value: "{disabled-outline-background-color}"
   disabled-content-color:
@@ -254,8 +226,6 @@ badge:
     value: "{disabled-solid-content-color}"
 
   # Disabled Dark
-  disabled-dark-border-color:
-    value: "{disabled-outline-dark-border-color}"
   disabled-dark-background-color:
     value: "{disabled-soft-dark-background-color}"
   disabled-dark-content-color:
@@ -266,8 +236,6 @@ badge:
     value: "{disabled-solid-dark-content-color}"
 
   # Disabled Light
-  disabled-light-border-color:
-    value: "{disabled-outline-light-border-color}"
   disabled-light-background-color:
     value: "{disabled-soft-light-background-color}"
   disabled-light-content-color:
@@ -278,8 +246,6 @@ badge:
     value: "{disabled-solid-light-content-color}"
 
   # Disabled Dark Static
-  disabled-dark-static-border-color:
-    value: "{disabled-outline-dark-static-border-color}"
   disabled-dark-static-background-color:
     value: "{disabled-soft-dark-static-background-color}"
   disabled-dark-static-content-color:
@@ -290,8 +256,6 @@ badge:
     value: "{disabled-solid-dark-static-content-color}"
 
   # Disabled Light Static
-  disabled-light-static-border-color:
-    value: "{disabled-outline-light-static-border-color}"
   disabled-light-static-background-color:
     value: "{disabled-soft-light-static-background-color}"
   disabled-light-static-content-color:

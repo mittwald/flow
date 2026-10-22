@@ -7,29 +7,13 @@ decorative:
   blue-content-color:
     value: "{decorative-blue.color.strong.300}"
 
-  # Teal
-  teal-background-color:
-    value: "{decorative-green.color.quiet.100}"
-  teal-content-accent-color:
-    value: "{decorative-green.color.strong.100}"
-  teal-content-color:
-    value: "{decorative-green.color.strong.300}"
-
-  # Green
-  green-background-color:
-    value: "{success.color.quiet.100}"
-  green-content-accent-color:
-    value: "{success.color.strong.100}"
-  green-content-color:
-    value: "{success.color.strong.300}"
-
-  # Violet
-  violet-background-color:
-    value: "{decorative-lilac.color.quiet.100}"
-  violet-content-accent-color:
-    value: "{decorative-lilac.color.strong.100}"
-  violet-content-color:
-    value: "{decorative-lilac.color.strong.300}"
+  # Navy
+  navy-background-color:
+    value: "{decorative-navy.color.quiet.100}"
+  navy-content-accent-color:
+    value: "{decorative-navy.color.strong.100}"
+  navy-content-color:
+    value: "{decorative-navy.color.strong.300}"
 
   # Lilac
   lilac-background-color:
@@ -38,3 +22,27 @@ decorative:
     value: "{decorative-lilac.color.strong.100}"
   lilac-content-color:
     value: "{decorative-lilac.color.strong.300}"
+
+  # Sage
+  sage-background-color:
+    value: "{decorative-sage.color.quiet.100}"
+  sage-content-accent-color:
+    value: "{decorative-sage.color.strong.100}"
+  sage-content-color:
+    value: "{decorative-sage.color.strong.300}"
+
+  # Salmon
+  salmon-background-color:
+    value: "{decorative-salmon.color.quiet.100}"
+  salmon-content-accent-color:
+    value: "{decorative-salmon.color.strong.100}"
+  salmon-content-color:
+    value: "{decorative-salmon.color.strong.300}"
+
+  # Green: deprecated Avatar color (#3508), keeps the success look until it is removed
+  green-background-color:
+    value: "{success.color.quiet.100}"
+  green-content-accent-color:
+    value: "{success.color.strong.100}"
+  green-content-color:
+    value: "{success.color.strong.300}"

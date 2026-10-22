@@ -1,8 +1,9 @@
 declare const classNames: {
   readonly blue: "blue";
-  readonly violet: "violet";
-  readonly teal: "teal";
+  readonly navy: "navy";
   readonly lilac: "lilac";
+  readonly sage: "sage";
+  readonly salmon: "salmon";
   readonly danger: "danger";
   readonly warning: "warning";
   readonly success: "success";

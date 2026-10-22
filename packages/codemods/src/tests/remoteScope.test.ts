@@ -22,6 +22,7 @@ const targets: Record<string, string[]> = {
   "segmented-control-deprecated": ["SegmentedControl", "Segment"],
   "align-to-combine": ["Align", "AlignProps"],
   "button-color-accent-to-success": ["Button", "SubmitButton"],
+  "color-props-brand-palette": ["Badge", "Avatar", "Icon", "Color"],
   "tooltip-trigger-delay-type": ["TooltipTrigger"],
   "modal-unsaved-changes-confirmation": ["Modal"],
   // `flags` never reached the remote package; the provider replacing it does.

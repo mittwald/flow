@@ -114,7 +114,7 @@ const DemoMentionMarkdownPreview = ({
       components={{
         a: ({ children, href }) => {
           if (href?.includes("mention:")) {
-            return <Color color="teal">@{children}</Color>;
+            return <Color color="sage">@{children}</Color>;
           }
 
           return <a href={href}>{children}</a>;

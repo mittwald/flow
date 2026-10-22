@@ -81,6 +81,69 @@ npx @mittwald/flow-codemods@latest accordion-variant-deprecated src
 
 ---
 
+<a id="color-props-brand-palette"></a>
+
+## Badge, Avatar, Icon, Color: color values follow the brand palette
+
+**Since `1.5.0`** · migration · codemod available · also applies to
+`@mittwald/flow-remote-react-components`
+
+The decorative color values now follow the brand palette: one value per mittwald
+brand color, named after how it looks — `blue`, `navy`, `lilac`, `sage` and
+`salmon`, the same list on `Badge`, `Avatar`, `Icon` and `Color`. `Badge` names
+its status hues by their meaning: `success`, `warning` and `danger`.
+
+```diff
+- <Badge color="red">Gesperrt</Badge>
+- <Badge color="teal">Projekt</Badge>
++ <Badge color="danger">Gesperrt</Badge>
++ <Badge color="sage">Projekt</Badge>
+```
+
+| Deprecated          | Use instead | Looks the same |
+| ------------------- | ----------- | -------------- |
+| `violet` (all four) | `lilac`     | yes            |
+| `teal` (all four)   | `sage`      | yes            |
+| `green` on `Badge`  | `success`   | yes            |
+| `orange` on `Badge` | `warning`   | yes            |
+| `red` on `Badge`    | `danger`    | yes            |
+| `green` on `Avatar` | `sage`      | no             |
+
+The deprecated values keep working and log a deprecation warning, but will be
+removed in a future release. A codemod rewrites every row that looks the same.
+`Avatar`'s `green` stays for you to decide.
+
+`navy`, `sage` and `salmon` are new on `Avatar`, `Icon` and `Color`; `sage` and
+`salmon` are new on `Badge`. Dynamic initials in `Avatar` now pick from all five
+decorative colors, so a person may get a different color than before.
+
+The CSS classes and the design tokens of the deprecated values are renamed or
+removed **without** a fallback — update them by hand if you use
+`@mittwald/flow-stylesheet` or the token CSS variables directly.
+
+**Apply:** On `Badge`, `Avatar`, `Icon` and `Color`, rename `color="violet"` to
+`color="lilac"` and `color="teal"` to `color="sage"`. On `Badge`, also rename
+`color="green"` to `color="success"`, `color="orange"` to `color="warning"` and
+`color="red"` to `color="danger"`. Each replacement renders exactly like the old
+value. `Avatar`'s `color="green"` is deprecated too, but its replacement `sage`
+is the brand's muted gray-green instead of the success mint. Switch to `sage`
+where the avatar's color carries no meaning, and keep `green` (it still renders)
+only until you have decided. If you use `@mittwald/flow-stylesheet` or the token
+CSS variables directly, rename `flow--badge--{violet,teal,green,orange,red}` to
+`flow--badge--{lilac,sage,success,warning,danger}`,
+`--badge--{teal,green,orange,red}-*` to
+`--badge--{sage,success,warning,danger}-*`, `--icon--teal-color` to
+`--icon--sage-color`, `--decorative--teal-*` to `--decorative--sage-*`, drop the
+`--badge--*-border-color` variables (the badge has no border), and replace
+`--badge--violet-*`, `--icon--violet-color` and `--decorative--violet-*` by
+their `lilac` counterparts.
+
+```shell
+npx @mittwald/flow-codemods@latest color-props-brand-palette src
+```
+
+---
+
 <a id="color-tokens-brand-theme-neutral"></a>
 
 ## Color tokens: a new Brand palette that no longer switches with the theme
@@ -134,11 +197,13 @@ steps; it selects few tones per role and theme
 | `elevation` (new: raised, ground, inset surface)                                                | `100/200/300`                                                                |
 | `content` (new: secondary, label, text; content on strong)                                      | `100/200/300`, `inverse`                                                     |
 
-The decorative groups follow the brand colors: `decorative-blue`, `-navy`,
-`-green` (`mittwald-green`), `-lilac` and `-orange` (`mittwald-orange`).
-`decorative-violet` and `decorative-teal` are gone (use `-lilac` and `-green`),
-and so are `decorative-red`, `-green` and `-orange` as status mirrors (use
-`danger`, `success` and `warning`).
+The decorative groups follow the brand colors and are named like the color
+props: `decorative-blue`, `-navy`, `-lilac`, `-sage` (`mittwald-green`) and
+`-salmon` (`mittwald-orange`). Besides `quiet` and `strong` each has a `content`
+tone for decorative content such as icons. `decorative-violet` and
+`decorative-teal` are gone (use `-lilac` and `-sage`), and so are
+`decorative-red`, `-green` and `-orange` as status mirrors (use `danger`,
+`success` and `warning`).
 
 ```diff
 - .card { background: var(--color--gray--100); }
@@ -191,11 +256,12 @@ from `--neutral--color--N` moves by role — surfaces 100–300 →
 (grouping), `--quiet--200` (separator) or `--strong--100` (control), disabled →
 `--unavailable--color--quiet--100/200/300` (surface, border, content).
 `--decorative-violet--color--…` → `--decorative-lilac--color--…`,
-`--decorative-teal--color--…` → `--decorative-green--color--…`,
+`--decorative-teal--color--…` → `--decorative-sage--color--…`,
 `--decorative-red--`, `--decorative-green--` and `--decorative-orange--color--…`
-→ `--danger--`, `--success--` and `--warning--color--…`. Which one fits is not
-decidable mechanically — decide whether the color is a surface, content or
-status.
+→ `--danger--`, `--success--` and `--warning--color--…`; the brand's green and
+orange are `--decorative-sage--` and `--decorative-salmon--color--…`. Which one
+fits is not decidable mechanically — decide whether the color is a surface,
+content or status.
 
 ---
 
