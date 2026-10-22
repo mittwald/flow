@@ -12,9 +12,14 @@
 #                   text, link and border, strong.200 text on soft/outline
 # Hover and pressed take the next Brand step; light mittwald-blue takes every
 # second step (1000/1200/1400), its dark half is too dense (ΔE 3.5, #3479).
-# strong.100 is the step closest to the Brand base that keeps AA (primary
-# and decorative-blue: the base). Dark primary takes one step lighter
-# (400/300/200), so the link keeps AA on neutral hover surfaces (#3479).
+# strong.100 is the step closest to the Brand base that keeps AA (primary:
+# the base). Dark primary takes one step lighter (400/300/200), so the link
+# keeps AA on neutral hover surfaces (#3479). Decorative groups take their
+# soft surface (quiet.100) from the brand's Background/Brand-100 (Figma
+# "mittwald. Website Library", #3550): navy and orange 1700; blue 1500, one
+# step lighter, so it stands out from the card; green and lilac 1700, one
+# step darker, so the link keeps 4.18 instead of 3.30. Decorative pressed
+# (quiet.300) is not held to AA for badge text.
 # Selected is a resting state: plain/outline selected takes the soft surface
 # (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
 #
@@ -159,86 +164,86 @@ decorative-blue:
   color:
     quiet:
       100:
-        value: "{color.mittwald-blue.1800}"
+        value: "{color.mittwald-blue.1500}"
       200:
-        value: "{color.mittwald-blue.1700}"
+        value: "{color.mittwald-blue.1400}"
       300:
-        value: "{color.mittwald-blue.1600}"
+        value: "{color.mittwald-blue.1300}"
     strong:
       100:
-        value: "{color.mittwald-blue.500}"
-      200:
         value: "{color.mittwald-blue.400}"
-      300:
+      200:
         value: "{color.mittwald-blue.300}"
+      300:
+        value: "{color.mittwald-blue.200}"
 
 decorative-navy:
   color:
     quiet:
       100:
-        value: "{color.mittwald-navy.1800}"
-      200:
         value: "{color.mittwald-navy.1700}"
-      300:
+      200:
         value: "{color.mittwald-navy.1600}"
+      300:
+        value: "{color.mittwald-navy.1500}"
     strong:
       100:
-        value: "{color.mittwald-navy.700}"
-      200:
         value: "{color.mittwald-navy.600}"
-      300:
+      200:
         value: "{color.mittwald-navy.500}"
+      300:
+        value: "{color.mittwald-navy.400}"
 
 decorative-green:
   color:
     quiet:
       100:
-        value: "{color.mittwald-green.1800}"
-      200:
         value: "{color.mittwald-green.1700}"
-      300:
+      200:
         value: "{color.mittwald-green.1600}"
+      300:
+        value: "{color.mittwald-green.1500}"
     strong:
       100:
-        value: "{color.mittwald-green.700}"
+        value: "{color.mittwald-green.400}"
       200:
-        value: "{color.mittwald-green.600}"
+        value: "{color.mittwald-green.300}"
       300:
-        value: "{color.mittwald-green.500}"
+        value: "{color.mittwald-green.200}"
 
 decorative-lilac:
   color:
     quiet:
       100:
-        value: "{color.mittwald-lilac.1800}"
-      200:
         value: "{color.mittwald-lilac.1700}"
-      300:
+      200:
         value: "{color.mittwald-lilac.1600}"
+      300:
+        value: "{color.mittwald-lilac.1500}"
     strong:
       100:
-        value: "{color.mittwald-lilac.700}"
+        value: "{color.mittwald-lilac.400}"
       200:
-        value: "{color.mittwald-lilac.600}"
+        value: "{color.mittwald-lilac.300}"
       300:
-        value: "{color.mittwald-lilac.500}"
+        value: "{color.mittwald-lilac.200}"
 
 decorative-orange:
   color:
     quiet:
       100:
-        value: "{color.mittwald-orange.1800}"
-      200:
         value: "{color.mittwald-orange.1700}"
-      300:
+      200:
         value: "{color.mittwald-orange.1600}"
+      300:
+        value: "{color.mittwald-orange.1500}"
     strong:
       100:
-        value: "{color.mittwald-orange.700}"
-      200:
         value: "{color.mittwald-orange.600}"
-      300:
+      200:
         value: "{color.mittwald-orange.500}"
+      300:
+        value: "{color.mittwald-orange.400}"
 
 elevation:
   color:

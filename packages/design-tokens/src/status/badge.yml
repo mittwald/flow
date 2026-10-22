@@ -7,8 +7,10 @@ badge:
     value: "{single-line-height}"
   corner-radius:
     value: "{corner-radius.l}"
+  # No border: the soft surface alone carries the badge (#3550). AlertBadge
+  # shares the width.
   border-width:
-    value: "{border-width.100}"
+    value: 0px
   border-style:
     value: "{border-style.default}"
   padding-y:
