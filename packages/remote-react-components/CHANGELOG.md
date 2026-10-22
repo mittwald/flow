@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+### Bug Fixes
+
+* **Badge:** render spans so a badge can sit in running text ([#3533](https://github.com/mittwald/flow/issues/3533)) ([07741d7](https://github.com/mittwald/flow/commit/07741d772d74f40a36886872e5c1d7b50c6ec47e))
+
+### Tests
+
+* update visual regression screenshots ([de6b78a](https://github.com/mittwald/flow/commit/de6b78a742f98539ac89796a13a7a1c260cc4ac9))
+
 ## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
 
 ### Continuous Integration
