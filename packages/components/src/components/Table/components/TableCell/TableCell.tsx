@@ -4,7 +4,6 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 import { SkeletonText } from "@/components/SkeletonText";
-import { TableColumn } from "@/components/Table/components/TableColumn/TableColumn";
 import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface TableCellProps
@@ -29,28 +28,17 @@ export const TableCell: FC<TableCellProps> = (props) => {
 
   const rootClassName = clsx(
     styles.cell,
+    rowHeader && styles.column,
     horizontalAlign !== "start" &&
       styles[`horizontal-align-${horizontalAlign}`],
     className,
   );
 
-  const content = (
-    <Suspense fallback={<SkeletonText width="100px" />}>
-      <SkeletonRawText>{children}</SkeletonRawText>
-    </Suspense>
-  );
-
-  if (rowHeader) {
-    return (
-      <TableColumn className={rootClassName} {...rest}>
-        {content}
-      </TableColumn>
-    );
-  }
-
   return (
     <Aria.Cell className={rootClassName} {...rest}>
-      {content}
+      <Suspense fallback={<SkeletonText width="100px" />}>
+        <SkeletonRawText>{children}</SkeletonRawText>
+      </Suspense>
     </Aria.Cell>
   );
 };
