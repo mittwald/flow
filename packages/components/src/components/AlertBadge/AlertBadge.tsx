@@ -15,7 +15,7 @@ export interface AlertBadgeProps
   extends
     PropsWithChildren,
     PropsWithStatus,
-    FlowComponentProps,
+    FlowComponentProps<HTMLSpanElement>,
     PropsWithClassName {}
 
 /** @flr-generate all */
@@ -32,7 +32,7 @@ export const AlertBadge = flowComponent("AlertBadge", (props) => {
   );
 
   return (
-    <div
+    <span
       className={rootClassName}
       {...rest}
       ref={ref}
@@ -42,7 +42,7 @@ export const AlertBadge = flowComponent("AlertBadge", (props) => {
         <AlertIcon size="s" status={status} />
         <Text className={styles.text}>{children}</Text>
       </SkeletonModeReset>
-    </div>
+    </span>
   );
 });
 

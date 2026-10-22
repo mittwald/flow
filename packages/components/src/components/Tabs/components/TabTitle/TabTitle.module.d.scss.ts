@@ -3,5 +3,6 @@ declare const classNames: {
   readonly text: "text";
   readonly skeleton: "skeleton";
   readonly menuItem: "menuItem";
+  readonly "flow--text": "flow--text";
 };
 export default classNames;
