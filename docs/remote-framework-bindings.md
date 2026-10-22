@@ -30,6 +30,7 @@ of them — or does not:
 | a `flr-universal` composition (`Modal`, `List`) | **not at all** — every binding rebuilds it by hand                |
 | a class name or UI string one of those uses     | **not at all** — copied by hand; lint and a unit test catch drift |
 | the `List`'s behaviour                          | through `packages/components-base`, if the change is in the model |
+| the overlay controller's state                  | through `packages/components-base` (`OverlayState`)               |
 
 The gate is the **`parity` CI job**: it renders the React package's whole visual
 corpus through the Vue binding and asserts the host builds the same DOM —
@@ -195,6 +196,21 @@ skip the re-export for names `flr-universal` already carries; the list is
 already parsed for the status registry
 (`dev/status-registry/parseFlrUniversalComponentNames.ts`).
 
+**Flow moves the compositions behind generated elements.** The order, agreed
+2026-10-22:
+
+1. The overlay controller's state moves to `packages/components-base`
+   (`OverlayState`). Done.
+2. The overlay family — `Modal`, `Popover`, `LightBox` and their triggers —
+   becomes `@flr-generate`, so the host materializes the composition and no
+   binding rebuilds it.
+3. A framework-free core runtime (`connect()`, `applyProps()`, `slot()`,
+   `createIcon()`) as a new beta package. Vue and Svelte delegate to it;
+   Angular, Lit and plain DOM use it directly.
+
+Step 1 goes first: it touches no protocol, and every binding still needs a
+controller to open and close an overlay from code after step 2.
+
 One thing was a project of its own, and it is the worked example for every
 other:
 
@@ -215,7 +231,10 @@ other:
   `useState` is an observable. Each binding brings the subscription (~15 lines:
   `useSelector`, `watchMobxValue`) and the one job the shared model leaves open,
   which is fetching a batch. React was rewired onto each piece as it moved, so
-  both bindings run the same rules rather than two copies of them.
+  both bindings run the same rules rather than two copies of them. The overlay
+  controller took the same way: `OverlayState` holds the open state, the
+  handlers and the close confirmation, React's `OverlayController` subclasses
+  it, and Vue's controller wraps it in refs.
 
   Two things stay per binding, and both are shapes of the same problem.
   Fetching, because Suspense has no Vue counterpart: Vue's list drives the async
@@ -303,9 +322,6 @@ other:
 
 ## Open questions
 
-- **Does every binding own its `flr-universal` rebuild, or does Flow move the
-  compositions behind generated elements?** Every binding added before that
-  decision pays for it twice.
 - **One demo app or one per framework?** The switcher in `remote-dom-demo`
   works, but each framework needs its own route tree, and only one remote may be
   connected at a time.
