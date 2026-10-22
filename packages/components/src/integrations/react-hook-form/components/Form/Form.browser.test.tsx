@@ -12,7 +12,7 @@ import {
   type FormProps,
 } from "@/integrations/react-hook-form";
 import { Render } from "@/lib/react/components/Render";
-import type { FC, PropsWithChildren } from "react";
+import type { BaseSyntheticEvent, FC, PropsWithChildren } from "react";
 import { TextArea } from "react-aria-components";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
@@ -340,6 +340,49 @@ describe("FormSettingsProvider", () => {
 
     expect(errorHandler).not.toHaveBeenCalled();
     window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("interceptor receives the submit event and can pass it on", async () => {
+    const getSubmitterName = (event?: BaseSyntheticEvent) =>
+      (event?.nativeEvent as SubmitEvent | undefined)?.submitter?.getAttribute(
+        "name",
+      );
+
+    const interceptedSubmitter = vitest.fn();
+    const submittedSubmitter = vitest.fn();
+
+    const TwoButtonsForm: FC = () => {
+      const form = useForm<object>();
+      return (
+        <Form
+          form={form}
+          onSubmit={(_, event) => submittedSubmitter(getSubmitterName(event))}
+        >
+          <SubmitButton name="submit">Submit</SubmitButton>
+          <SubmitButton name="submitKeepOpen">
+            Submit and keep open
+          </SubmitButton>
+        </Form>
+      );
+    };
+
+    await render(
+      <FormSettingsProvider
+        submitInterceptor={(submit, values, { event }) => {
+          interceptedSubmitter(getSubmitterName(event));
+          return submit(values, event);
+        }}
+      >
+        <TwoButtonsForm />
+      </FormSettingsProvider>,
+    );
+
+    await userEvent.click(page.getByText("Submit and keep open"));
+
+    await vitest.waitFor(() => {
+      expect(submittedSubmitter).toHaveBeenCalledWith("submitKeepOpen");
+    });
+    expect(interceptedSubmitter).toHaveBeenCalledWith("submitKeepOpen");
   });
 });
 
