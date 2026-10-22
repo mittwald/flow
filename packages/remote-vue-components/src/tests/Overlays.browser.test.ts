@@ -18,7 +18,10 @@ import {
   useModalController,
   useOverlayController,
 } from "@/index";
-import { createOverlayController } from "@/overlays/overlayController";
+import {
+  createOverlayController,
+  type OverlayController,
+} from "@/overlays/overlayController";
 import {
   cleanupRemote,
   hostOverlay,
@@ -863,6 +866,51 @@ describe("Modal confirmOnClose", () => {
     /* Answered, not stuck: the next close asks again. */
     await page.getByRole("button", { name: "Discard" }).click();
     await expect.element(confirmation()).toBeVisible();
+  });
+
+  test.each([
+    {
+      closedBy: "a close that bypasses it",
+      close: (controller: OverlayController) =>
+        controller.close({ bypassConfirmation: true }),
+    },
+    {
+      closedBy: "a close a grant allows",
+      close: (controller: OverlayController) => {
+        const release = controller.grantCloseWithoutConfirmation();
+        controller.close();
+        release();
+      },
+    },
+  ])("does not ask again on reopen after $closedBy", async ({ close }) => {
+    const controller = createOverlayController();
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(Modal, { controller, confirmOnClose: true }, () =>
+            h(Heading, null, () => "Unsaved squadron"),
+          ),
+      ),
+    );
+
+    controller.open();
+    await expect.element(dialog()).toBeVisible();
+    controller.close();
+    await expect.element(confirmation()).toBeVisible();
+
+    close(controller);
+    await vi.waitFor(() =>
+      expect(document.querySelector("[role=dialog]")).toBeNull(),
+    );
+
+    controller.open();
+    await expect
+      .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+      .toBeVisible();
+    expect(controller.isConfirmingClose.value).toBe(false);
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    await isClosed("Unsaved changes");
   });
 
   /*

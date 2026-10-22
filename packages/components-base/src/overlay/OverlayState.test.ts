@@ -105,11 +105,33 @@ describe("confirmation sources", () => {
 
     state.removeConfirmOnCloseSource(source);
     expect(state.confirmOnCloseEnabled).toBe(false);
-    // Current behaviour, not a fix: nothing withdraws the pending confirmation.
-    expect(state.showConfirmationModal).toBe(true);
+    expect(state.showConfirmationModal).toBe(false);
 
     state.close();
     expect(state.isOpen).toBe(false);
+  });
+
+  test("a source turning its requirement off withdraws a pending confirmation", () => {
+    const state = new OverlayState({ isDefaultOpen: true });
+    const source = {};
+    state.setConfirmOnCloseSource(source, true);
+    state.close();
+
+    state.setConfirmOnCloseSource(source, false);
+
+    expect(state.showConfirmationModal).toBe(false);
+  });
+
+  test("a source that still asks keeps a pending confirmation", () => {
+    const state = new OverlayState({ isDefaultOpen: true });
+    const source = {};
+    state.setConfirmOnCloseSource(source, true);
+    state.setConfirmOnCloseSource({}, true);
+    state.close();
+
+    state.removeConfirmOnCloseSource(source);
+
+    expect(state.showConfirmationModal).toBe(true);
   });
 
   test("a grant suppresses the confirmation, and a released grant re-arms it", () => {
@@ -126,6 +148,72 @@ describe("confirmation sources", () => {
     release();
     state.open();
     state.close();
+    expect(state.showConfirmationModal).toBe(true);
+    expect(state.isOpen).toBe(true);
+  });
+});
+
+describe("a pending confirmation", () => {
+  const pendingConfirmation = () => {
+    const state = new OverlayState({
+      isDefaultOpen: true,
+      confirmOnClose: true,
+    });
+    state.close();
+    expect(state.showConfirmationModal).toBe(true);
+    return state;
+  };
+
+  test("is dropped by a close that bypasses it", () => {
+    const state = pendingConfirmation();
+
+    state.close({ bypassConfirmation: true });
+    expect(state.isOpen).toBe(false);
+    expect(state.showConfirmationModal).toBe(false);
+
+    state.open();
+    expect(state.showConfirmationModal).toBe(false);
+  });
+
+  test("is dropped by a close a grant allows", () => {
+    const state = pendingConfirmation();
+
+    const release = state.grantCloseWithoutConfirmation();
+    state.close();
+    release();
+    expect(state.isOpen).toBe(false);
+    expect(state.showConfirmationModal).toBe(false);
+
+    state.open();
+    expect(state.showConfirmationModal).toBe(false);
+  });
+
+  test("is dropped by a close that syncs the open state", () => {
+    const state = pendingConfirmation();
+
+    state.syncOpen(false);
+
+    expect(state.showConfirmationModal).toBe(false);
+  });
+
+  test("stays while a handler aborts the close", () => {
+    const state = pendingConfirmation();
+    state.addOnClose(() => false);
+
+    state.close({ bypassConfirmation: true });
+
+    expect(state.isOpen).toBe(true);
+    expect(state.showConfirmationModal).toBe(true);
+  });
+
+  test("leaves no confirmed close behind once the overlay is closed", () => {
+    const state = pendingConfirmation();
+    state.confirmClose();
+    state.syncOpen(false);
+
+    state.syncOpen(true);
+    state.close();
+
     expect(state.showConfirmationModal).toBe(true);
     expect(state.isOpen).toBe(true);
   });
