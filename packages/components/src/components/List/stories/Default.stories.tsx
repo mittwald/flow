@@ -64,7 +64,7 @@ const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
 };
 
 const meta: Meta<typeof List> = {
-  title: "Structure/List",
+  title: "List/List",
   component: List,
   parameters: {
     controls: { disable: true },
@@ -434,6 +434,66 @@ export const WithDateRangeFilter: Story = {
               <Heading>{invoice.id}</Heading>
               <Text>
                 {DateTime.fromISO(invoice.date).toFormat("dd.MM.yyyy")}
+              </Text>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithDateTimeRangeFilter: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      message: string;
+      createdAt: string;
+    }>();
+
+    const now = DateTime.now().startOf("minute");
+
+    return (
+      <List.List batchSize={5} aria-label="Logs">
+        <List.StaticData
+          data={[
+            {
+              id: "1",
+              message: "Backup completed",
+              createdAt: now.minus({ minutes: 20 }).toISO(),
+            },
+            {
+              id: "2",
+              message: "Cronjob failed",
+              createdAt: now.minus({ hours: 3 }).toISO(),
+            },
+            {
+              id: "3",
+              message: "Deployment started",
+              createdAt: now.minus({ hours: 9 }).toISO(),
+            },
+            {
+              id: "4",
+              message: "Certificate renewed",
+              createdAt: now.minus({ days: 1, hours: 2 }).toISO(),
+            },
+          ]}
+        />
+        <List.Filter
+          property="createdAt"
+          name="Time"
+          mode="dateRange"
+          dateRangeOptions={{
+            granularity: "minute",
+            maxValue: today(getLocalTimeZone()),
+          }}
+        />
+        <List.Item textValue={(log) => log.message}>
+          {(log) => (
+            <ListItemView>
+              <Heading>{log.message}</Heading>
+              <Text>
+                {DateTime.fromISO(log.createdAt).toFormat("dd.MM.yyyy HH:mm")}
               </Text>
             </ListItemView>
           )}

@@ -5,7 +5,16 @@
 
 ## What & why
 
-<!-- What does this change do, and why? Link related issues (e.g. Closes #123). -->
+<!-- What does this change do, and why? -->
+
+## Issue
+
+<!--
+  `Closes #123` if this PR finishes the issue — on `next` too, a workflow closes
+  it there. `Part of #123` only while work remains. No issue? Delete the line.
+-->
+
+Closes #
 
 ## Base branch & title
 
@@ -27,6 +36,7 @@ branch. Pick the base by change type
 ## Checklist
 
 - [ ] PR title is a Conventional Commit and matches the base branch above
+- [ ] The issue this PR finishes (if any) is linked with `Closes #…`
 - [ ] `pnpm lint` is clean and `pnpm affected:test` passes (browser tests if
       behavior changed)
 - [ ] **Generated code is committed** (`git diff` is empty after the relevant

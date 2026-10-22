@@ -71,7 +71,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
@@ -97,7 +97,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
@@ -134,7 +134,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
@@ -163,7 +163,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
@@ -194,7 +194,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
@@ -212,10 +212,11 @@ jobs:
   # which is what removing a component or changing its rendered structure
   # breaks. Running it here means the PR that breaks it says so, instead of the
   # next scheduled run saying so after the merge. The broad in-process harness
-  # stays on the schedule: it renders the whole visual corpus per version.
+  # stays on the schedule: it renders the whole visual corpus per version. Only
+  # the visual tests a PR changed run it here.
   cross-version:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -223,7 +224,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
@@ -264,6 +265,38 @@ jobs:
           pnpm --filter @mittwald/flow-remote-react-components
           test:cross-version
 
+      # The in-process harness, over the visual tests this PR changed only. A
+      # test that starts using a component or prop an old version lacks fails
+      # there and nowhere else — #3529 fixed one the schedule caught after the
+      # merge. The base is the PR's base branch, or NX_BASE on a push. vitest
+      # matches the filters against paths relative to the package.
+      - name: List the visual tests this PR changed
+        id: changed
+        if: steps.suite.outputs.run == 'true'
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          files="$(git diff --name-only --diff-filter=d \
+            --relative=packages/remote-react-components \
+            "${PR_BASE:-$NX_BASE}" HEAD \
+            -- 'packages/remote-react-components/src/tests/visual/*.browser.test.tsx')"
+          echo "changed visual tests: ${files:-none}"
+          if [ -n "$files" ]; then
+            {
+              echo "files<<CHANGED_VISUAL_TESTS_EOF"
+              echo "$files"
+              echo "CHANGED_VISUAL_TESTS_EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run in-process cross-version tests for the changed visual tests
+        if: steps.changed.outputs.files != ''
+        env:
+          FLOW_CROSS_VERSION_FILES: ${{ steps.changed.outputs.files }}
+        run:
+          pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version-inprocess
+
   visual:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -281,7 +314,7 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'

@@ -40,6 +40,25 @@ const pickComponentTranslations = (
   });
 };
 
+// Compiling parses the message — do it once per locale and message.
+const compiledMessages = new Map<string, Map<string, IntlMessageFormat>>();
+
+const getCompiledMessage = (message: string, locale: string) => {
+  let messagesOfLocale = compiledMessages.get(locale);
+  if (!messagesOfLocale) {
+    messagesOfLocale = new Map();
+    compiledMessages.set(locale, messagesOfLocale);
+  }
+
+  let compiled = messagesOfLocale.get(message);
+  if (!compiled) {
+    compiled = new IntlMessageFormat(message, locale);
+    messagesOfLocale.set(message, compiled);
+  }
+
+  return compiled;
+};
+
 export const useLocalizedStringFormatter = (
   strings: LocalizedStrings,
   componentName: LocalizedComponentName,
@@ -71,12 +90,9 @@ export const useLocalizedStringFormatter = (
       }
 
       const translationString = dictionary.getStringForLocale(key, locale);
-      const translationMessage = new IntlMessageFormat(
-        translationString,
-        locale,
+      return String(
+        getCompiledMessage(translationString, locale).format(variables),
       );
-
-      return String(translationMessage.format(variables));
     },
     [translate, locale, componentName, dictionary],
   );

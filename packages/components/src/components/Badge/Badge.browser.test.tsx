@@ -9,6 +9,8 @@ import {
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
 import { DeprecationWarningProvider } from "@/components/DeprecationWarningProvider";
+import { Label } from "@/components/Label";
+import { hydrateServerMarkup } from "@/lib/dev/hydrateServerMarkup";
 
 test("A contextual help in the content opens from a button of its own", async () => {
   await render(
@@ -114,3 +116,40 @@ test("the color 'sage' does not warn", async () => {
     .toHaveClass("flow--badge--sage");
   expect(onWarning).not.toHaveBeenCalled();
 });
+
+test.each([
+  { variant: "with a value", badge: <Badge>Value</Badge> },
+  {
+    variant: "with a scope",
+    badge: (
+      <Badge>
+        <Label>Scope</Label>
+        <Text>Value</Text>
+      </Badge>
+    ),
+  },
+  {
+    variant: "that can be pressed",
+    badge: <Badge onPress={() => undefined}>Value</Badge>,
+  },
+  {
+    variant: "that can be closed",
+    badge: <Badge onClose={() => undefined}>Value</Badge>,
+  },
+  {
+    variant: "with a contextual help",
+    badge: (
+      <Badge>
+        Value
+        <ContextualHelp>
+          <Text>Every value has a story to tell.</Text>
+        </ContextualHelp>
+      </Badge>
+    ),
+  },
+])(
+  "A server-rendered badge $variant hydrates in a paragraph",
+  async ({ badge }) => {
+    expect(await hydrateServerMarkup(<p>{badge}</p>)).toEqual([]);
+  },
+);

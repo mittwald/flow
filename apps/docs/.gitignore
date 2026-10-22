@@ -38,3 +38,5 @@ next-env.d.ts
 
 # fumadocs-mdx
 .source
+# FontAwesome Pro, see dev/installProIcons.ts
+/.pro-icons/

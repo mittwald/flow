@@ -18,6 +18,31 @@ component). The element wrapper, its `v-model` mapping and the root are about a
 tenth of it; the rest is `flr-universal`, and the `List` alone is nearly half of
 the hand-written code.
 
+## What a change costs per binding
+
+Every binding is maintained in this repository, so a change to Flow reaches each
+of them — or does not:
+
+| A change to…                                    | Reaches the other bindings                                        |
+| ----------------------------------------------- | ----------------------------------------------------------------- |
+| a `@flr-generate` component's props             | by generator — regenerate and commit, nothing hand-written        |
+| an icon                                         | by generator                                                      |
+| a `flr-universal` composition (`Modal`, `List`) | **not at all** — every binding rebuilds it by hand                |
+| a class name or UI string one of those uses     | **not at all** — copied by hand; lint and a unit test catch drift |
+| the `List`'s behaviour                          | through `packages/components-base`, if the change is in the model |
+
+The gate is the **`parity` CI job**: it renders the React package's whole visual
+corpus through the Vue binding and asserts the host builds the same DOM —
+overlays included — plus a `List` harness written once per binding. The `List`
+harness takes a **list of bindings** (`e2e/list-parity/harness/bindings/*`), so
+a third framework joins it as a file. The corpus harness does not: React is the
+reference and Vue the compared pass, and a third binding needs a converter next
+to `reactToVue.ts` and a pass of its own. Both suites live in the Vue package:
+`pnpm nx test:parity remote-vue-components`. Neither can see what the corpus
+does not render, so a `flr-universal` change still needs a look at each
+binding's rebuild — for Vue that is
+`packages/remote-vue-components/src/{components,overlays,list}`.
+
 ## What already works for any framework
 
 | Layer                                                   | Framework-specific? |
@@ -214,10 +239,12 @@ other:
 - `packages/remote-<framework>-components`. It ships as soon as `private` is
   absent — and a brand-new package name needs two one-time steps on npm before
   the merge, or `publish.yml` fails with `E404 Not found` in the middle of a
-  release. npm binds a **Trusted Publisher** only to a package that exists, so a
-  maintainer first **publishes it by hand** (`@mittwald/flow-codemods` did:
+  release, after the other packages have already gone out. npm binds a **Trusted
+  Publisher** only to a package that exists, so a maintainer first **publishes
+  it by hand** under the `next` dist-tag (`@mittwald/flow-codemods` did:
   `1.1.0-next.10` by hand, provenance from `1.1.0-next.11` on), then binds the
   Trusted Publisher to `publish.yml` — one workflow filename per package.
+  Nothing in this repository can do either step.
 - `project.json` with `implicitDependencies: ["components"]` and a `build` that
   depends on `components:build:remote-components`.
 - An emitter in the generator + the output path in `components/project.json`.

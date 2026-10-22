@@ -49,7 +49,10 @@ export type BadgeColors =
   (typeof badgeColors)[number] | keyof typeof deprecatedBadgeColors;
 
 export interface BadgeProps
-  extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
+  extends
+    PropsWithChildren,
+    FlowComponentProps<HTMLSpanElement>,
+    PropsWithClassName {
   /** Handler that is called when the badge is pressed. */
   onPress?: (e: PressEvent) => void;
   /** Handler that is called when the badges close icon is pressed. */
@@ -146,13 +149,13 @@ export const Badge = flowComponent("Badge", (props) => {
     <PropsContextProvider props={propsContext}>
       {/* The badge is one skeleton surface, its content draws none. */}
       <SkeletonModeReset>
-        <div
+        <span
           className={rootClassName}
           {...rest}
           ref={ref}
           inert={isSkeleton || undefined}
         >
-          {!onPress && <div className={styles.content}>{children}</div>}
+          {!onPress && <span className={styles.content}>{children}</span>}
           {onPress && (
             <Button
               isDisabled={isDisabled}
@@ -182,7 +185,7 @@ export const Badge = flowComponent("Badge", (props) => {
               <IconClose />
             </Button>
           )}
-        </div>
+        </span>
       </SkeletonModeReset>
     </PropsContextProvider>
   );

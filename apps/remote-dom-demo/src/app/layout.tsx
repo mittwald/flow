@@ -2,6 +2,7 @@
 import {
   Flex,
   Heading,
+  Label,
   LayoutCard,
   Navigation,
   NavigationGroup,
@@ -36,77 +37,86 @@ export default function Layout(props: PropsWithChildren) {
               <Flex gap="m">
                 <LayoutCard className={styles.navigation}>
                   <Navigation>
-                    <NavigationItem page="non-interactive">
-                      Non-interactive
-                    </NavigationItem>
-                    <NavigationItem page="event-handler">
-                      Event handler
-                    </NavigationItem>
-                    <NavigationItem page="simple-form">
-                      Simple Form
-                    </NavigationItem>
-                    <NavigationItem page="action-form">
-                      Action Form
-                    </NavigationItem>
-                    <NavigationItem page="react-hook-form">
-                      React Hook Form
-                    </NavigationItem>
-                    <NavigationItem page="files">Files</NavigationItem>
-                    <NavigationItem page="suspense">Suspense</NavigationItem>
-                    <NavigationItem page="mstudio-loading">
-                      mStudio loading
-                    </NavigationItem>
-                    <NavigationItem page="tunnel">Tunnel</NavigationItem>
-                    <NavigationItem page="ext-bridge">
-                      Ext Bridge
-                    </NavigationItem>
-                    <NavigationItem page="error">Error</NavigationItem>
-                    <NavigationItem page="no-component">
-                      No component
-                    </NavigationItem>
-                    <NavigationItem page="navigation">
-                      Navigation
-                    </NavigationItem>
-                    <NavigationItem page="performance">
-                      Performance
-                    </NavigationItem>
-
                     <NavigationGroup collapsable>
-                      <Heading>Components</Heading>
-                      <NavigationItem page="accordion">
-                        Accordion
+                      <Label>Rendering</Label>
+                      <NavigationItem page="non-interactive">
+                        Non-interactive
                       </NavigationItem>
-                      <NavigationItem page="activity">Activity</NavigationItem>
-                      <NavigationItem page="chart">Chart</NavigationItem>
-                      <NavigationItem page="coach-mark">
-                        CoachMark
+                      <NavigationItem page="event-handler">
+                        Event handler
                       </NavigationItem>
-                      <NavigationItem page="code-editor">
-                        CodeEditor
+                      <NavigationItem page="suspense">Suspense</NavigationItem>
+                      <NavigationItem page="tunnel">Tunnel</NavigationItem>
+                      <NavigationItem page="performance">
+                        Performance
                       </NavigationItem>
-                      <NavigationItem page="context-menu">
-                        Context Menu
+                    </NavigationGroup>
+                    <NavigationGroup collapsable>
+                      <Label>Forms</Label>
+                      <NavigationItem page="simple-form">
+                        Simple form
                       </NavigationItem>
-                      <NavigationItem page="tab-navigation">
-                        Tab Navigation
+                      <NavigationItem page="action-form">
+                        Action form
                       </NavigationItem>
-                      <NavigationItem page="svg">Icon/SVG</NavigationItem>
-                      <NavigationItem page="image-cropper">
-                        ImageCropper
+                      <NavigationItem page="react-hook-form">
+                        React Hook Form
                       </NavigationItem>
-                      <NavigationItem page="list">List</NavigationItem>
-                      <NavigationItem page="list-selection">
-                        List (selection)
+                      <NavigationItem page="files">Files</NavigationItem>
+                    </NavigationGroup>
+                    <NavigationGroup collapsable>
+                      <Label>Errors</Label>
+                      <NavigationItem page="error">Error</NavigationItem>
+                      <NavigationItem page="no-component">
+                        No component
                       </NavigationItem>
-                      <NavigationItem page="markdown">Markdown</NavigationItem>
-                      <NavigationItem page="modal">Modal</NavigationItem>
-                      <NavigationItem page="notification">
-                        Notifications
+                    </NavigationGroup>
+                    <NavigationGroup collapsable>
+                      <Label>Host integration</Label>
+                      <NavigationItem page="navigation">
+                        Navigation
                       </NavigationItem>
-                      <NavigationItem page="popover">Popover</NavigationItem>
-                      <NavigationItem page="rating">Rating</NavigationItem>
-                      <NavigationItem page="skeleton-mode">
-                        SkeletonMode
+                      <NavigationItem page="ext-bridge">
+                        Ext Bridge
+                      </NavigationItem>
+                      <NavigationItem page="mstudio-loading">
+                        mStudio loading
+                      </NavigationItem>
+                    </NavigationGroup>
+                    <NavigationGroup collapsable>
+                      <Label>Components</Label>
+                      <NavigationItem page="components/actions">
+                        Actions
+                      </NavigationItem>
+                      <NavigationItem page="components/chat">
+                        Chat
+                      </NavigationItem>
+                      <NavigationItem page="components/content">
+                        Content
+                      </NavigationItem>
+                      <NavigationItem page="components/data-visualisation">
+                        Data Visualisation
+                      </NavigationItem>
+                      <NavigationItem page="components/form-controls">
+                        Form Controls
+                      </NavigationItem>
+                      <NavigationItem page="components/list">
+                        List
+                      </NavigationItem>
+                      <NavigationItem page="components/navigation">
+                        Navigation
+                      </NavigationItem>
+                      <NavigationItem page="components/overlays">
+                        Overlays
+                      </NavigationItem>
+                      <NavigationItem page="components/status">
+                        Status
+                      </NavigationItem>
+                      <NavigationItem page="components/structure">
+                        Structure
+                      </NavigationItem>
+                      <NavigationItem page="components/upload">
+                        Upload
                       </NavigationItem>
                     </NavigationGroup>
                     <TunnelExit id="remote-demo" />

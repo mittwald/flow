@@ -16,7 +16,7 @@ import { Checkbox } from "@/components/Checkbox";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
-  title: "Structure/List/Edge Cases",
+  title: "List/List/Edge Cases",
 };
 
 export default meta;

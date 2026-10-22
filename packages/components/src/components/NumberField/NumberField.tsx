@@ -1,6 +1,5 @@
 import { type PropsWithChildren, useId } from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -52,7 +51,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     skeletonProps,
   } = useFieldComponent(props, "NumberField");
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const rootClassName = clsx(wrapperProps.className, className);
 
   return (
     <Aria.NumberField
@@ -65,7 +64,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
           : ariaLabelledBy
       }
       aria-describedby={controlProps["aria-describedby"]}
-      className={clsx(rootClassName, wrapperProps.className)}
+      className={rootClassName}
     >
       <PropsContextProvider props={fieldPropsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>

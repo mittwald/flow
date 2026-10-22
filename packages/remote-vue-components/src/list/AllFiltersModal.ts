@@ -22,11 +22,16 @@ import { createOverlayController } from "@/overlays/overlayController";
 import { ModalTrigger } from "@/overlays/triggers";
 import { defineComponent, h, type VNodeChild } from "vue";
 import { isDateRangeFilter } from "./dateRangeFilter";
+import {
+  DateTimeRangeFields,
+  type DateTimeRangeFilter,
+} from "./DateTimeRangeFields";
 import { injectListModel, type AnyListModel } from "./listContext";
 import { useListTexts, type ListTextFormatter } from "./locales";
 import { listStyles } from "./styles";
 import type { ListRendered } from "./types";
 import { composition } from "@/lib/composition";
+import type { ListDateRange } from "@mittwald/flow-components-base";
 
 /*
  * What this modal needs of a filter and a sorting. Not the classes: a list of
@@ -74,13 +79,11 @@ const accordion = (
     h(Content, null, content),
   ]);
 
-interface ModalDateRangeFilter {
+interface ModalDateRangeFilter extends DateTimeRangeFilter {
   readonly name?: string;
   readonly property: unknown;
-  readonly dateRangeOptions?: Record<string, unknown>;
-  getValue(): unknown;
-  setValue(range: unknown): void;
-  clear(): void;
+  readonly granularity: "day" | "minute";
+  readonly rangeCalendarProps: Record<string, unknown>;
 }
 
 const renderDateRangeAccordion = (
@@ -93,11 +96,13 @@ const renderDateRangeAccordion = (
 
   return accordion(`filter-${name}`, name, expanded, () =>
     h(Flex, { direction: "column", gap: "m" }, () => [
-      h(RangeCalendar, {
-        ...filter.dateRangeOptions,
-        value,
-        onChange: (range: unknown) => filter.setValue(range),
-      } as never),
+      filter.granularity === "minute"
+        ? h(DateTimeRangeFields, { filter })
+        : h(RangeCalendar, {
+            ...filter.rangeCalendarProps,
+            value,
+            onChange: (range: ListDateRange) => filter.setValue(range),
+          } as never),
       value
         ? h(
             Button,
