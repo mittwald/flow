@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.33](https://github.com/mittwald/flow/compare/1.6.0-next.32...1.6.0-next.33) (2026-10-22)
+
+### Bug Fixes
+
+* **Badge:** render spans so a badge can sit in running text ([#3533](https://github.com/mittwald/flow/issues/3533)) ([07741d7](https://github.com/mittwald/flow/commit/07741d772d74f40a36886872e5c1d7b50c6ec47e))
+
+### Tests
+
+* **Modal:** poll assertions that wait for a modal to open or close ([#3534](https://github.com/mittwald/flow/issues/3534)) ([2dbaa06](https://github.com/mittwald/flow/commit/2dbaa06e0c2409bb69e41e7dc5a1139e0b147139))
+
 ## [1.6.0-next.32](https://github.com/mittwald/flow/compare/1.5.33...1.6.0-next.32) (2026-10-22)
 
 ## [1.6.0-next.31](https://github.com/mittwald/flow/compare/1.5.32...1.6.0-next.31) (2026-10-21)
