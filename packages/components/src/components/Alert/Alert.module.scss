@@ -35,6 +35,7 @@
   @mixin status($status) {
     &.#{$status} {
       border-color: var(--alert--#{$status}-border-color);
+      background-color: var(--alert--#{$status}-background-color);
 
       .heading {
         color: var(--alert--#{$status}-heading-color);
@@ -51,6 +52,7 @@
   /* SkeletonMode: no status color while the content loads */
   &.skeleton {
     border-color: skeleton.$background-color;
+    background-color: transparent;
   }
 
   /* Layout */

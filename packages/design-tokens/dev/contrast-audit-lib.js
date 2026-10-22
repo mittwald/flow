@@ -315,6 +315,7 @@ export const CONTENT_SURFACES = [
   "file-card.background-color.default", // FileCard
   "file-card.background-color.error",
   "notification.*-background-color.default", // Notification
+  "alert.*-background-color", // Alert
 ];
 
 /**
@@ -371,7 +372,6 @@ export const SURFACE_CONTENT = [
     // Blocks and form parts that clickable containers do not hold
     kind: "text",
     tokens: [
-      "alert.*-heading-color",
       "label.color.*",
       "breadcrumb.color*.*",
       "illustrated-message.*content-color",
@@ -392,6 +392,11 @@ export const SURFACE_CONTENT = [
     kind: "text",
     tokens: ["notification.*-heading-color"],
     on: ["notification.$1-background-color.*"],
+  },
+  {
+    kind: "text",
+    tokens: ["alert.*-heading-color"],
+    on: ["alert.$1-background-color"],
   },
   {
     kind: "text",
