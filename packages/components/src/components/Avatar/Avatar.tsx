@@ -71,7 +71,7 @@ export const Avatar = flowComponent("Avatar", (props) => {
   const rootClassName = clsx(
     styles.avatar,
     styles[`size-${size}`],
-    !status && styles[color ?? "blue"],
+    !status && styles[color ?? "navy"],
     status && styles[status],
     isSkeleton && styles.skeleton,
     className,
