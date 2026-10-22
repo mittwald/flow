@@ -35,7 +35,7 @@ jobs:
   # a skip here skips them too. The workflow's `concurrency.group` repeats this
   # condition; keep the two in sync.
   prepare:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     if: >
       github.event_name == 'workflow_dispatch' ||
@@ -83,7 +83,7 @@ jobs:
   # files one at a time, in its own browser process.
   run-visual-tests:
     needs: prepare
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       # A failing shard must not cancel the others — the diffs of the shards
@@ -165,7 +165,7 @@ jobs:
       !cancelled() &&
       needs.run-visual-tests.result != 'skipped' &&
       needs.run-visual-tests.result != 'cancelled'
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
 
     permissions:
