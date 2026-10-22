@@ -44,6 +44,17 @@ export const testFontAwesomeIconSizing = () => {
     expect(getComputedStyle(icon).boxSizing).toBe("border-box");
   });
 
+  test("a FontAwesome icon sits on the baseline like any other icon", async () => {
+    const rendered = await render(
+      <Icon className="svg-inline--fa">
+        <svg />
+      </Icon>,
+    );
+    const icon = rendered.getByLocator(".svg-inline--fa").element();
+
+    expect(getComputedStyle(icon).verticalAlign).toBe("baseline");
+  });
+
   test.each([
     ["s", 16],
     ["m", 24],

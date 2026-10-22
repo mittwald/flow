@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
 ## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
 
 **Note:** Version bump only for package @mittwald/flow-core

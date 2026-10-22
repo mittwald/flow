@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+### Bug Fixes
+
+* **List:** focus the search once enabled and skip the empty filter modal ([#3517](https://github.com/mittwald/flow/issues/3517)) ([7a7bfe6](https://github.com/mittwald/flow/commit/7a7bfe6fbd19948bd3547637a42a0fd7e1d44c08))
+
 ## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
 
 **Note:** Version bump only for package @mittwald/flow-remote-vue-components

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+### Bug Fixes
+
+* **Icon:** let components hide and align FontAwesome icons ([#3540](https://github.com/mittwald/flow/issues/3540)) ([b372cd2](https://github.com/mittwald/flow/commit/b372cd22df073d1449352699279782d1dcb3fdad))
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+### Bug Fixes
+
+* **Badge:** render spans so a badge can sit in running text ([#3533](https://github.com/mittwald/flow/issues/3533)) ([07741d7](https://github.com/mittwald/flow/commit/07741d772d74f40a36886872e5c1d7b50c6ec47e))
+
+### Tests
+
+* **Modal:** poll assertions that wait for a modal to open or close ([#3534](https://github.com/mittwald/flow/issues/3534)) ([2dbaa06](https://github.com/mittwald/flow/commit/2dbaa06e0c2409bb69e41e7dc5a1139e0b147139))
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+### Bug Fixes
+
+* **List:** focus the search once enabled and skip the empty filter modal ([#3517](https://github.com/mittwald/flow/issues/3517)) ([7a7bfe6](https://github.com/mittwald/flow/commit/7a7bfe6fbd19948bd3547637a42a0fd7e1d44c08))
+
 ## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

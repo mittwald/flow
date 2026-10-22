@@ -8,6 +8,8 @@ import {
 } from "@/components/ContextualHelp";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
+import { Label } from "@/components/Label";
+import { hydrateServerMarkup } from "@/lib/dev/hydrateServerMarkup";
 
 test("A contextual help in the content opens from a button of its own", async () => {
   await render(
@@ -68,3 +70,40 @@ test("A contextual help trigger in the content places a single button", async ()
     .element(page.getByText("Every value has a story to tell."))
     .toBeInTheDocument();
 });
+
+test.each([
+  { variant: "with a value", badge: <Badge>Value</Badge> },
+  {
+    variant: "with a scope",
+    badge: (
+      <Badge>
+        <Label>Scope</Label>
+        <Text>Value</Text>
+      </Badge>
+    ),
+  },
+  {
+    variant: "that can be pressed",
+    badge: <Badge onPress={() => undefined}>Value</Badge>,
+  },
+  {
+    variant: "that can be closed",
+    badge: <Badge onClose={() => undefined}>Value</Badge>,
+  },
+  {
+    variant: "with a contextual help",
+    badge: (
+      <Badge>
+        Value
+        <ContextualHelp>
+          <Text>Every value has a story to tell.</Text>
+        </ContextualHelp>
+      </Badge>
+    ),
+  },
+])(
+  "A server-rendered badge $variant hydrates in a paragraph",
+  async ({ badge }) => {
+    expect(await hydrateServerMarkup(<p>{badge}</p>)).toEqual([]);
+  },
+);
