@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.38](https://github.com/mittwald/flow/compare/1.6.0-next.37...1.6.0-next.38) (2026-10-23)
+
+### Bug Fixes
+
+* **ci:** always resolve the latest Node 24 patch release ([ef88a48](https://github.com/mittwald/flow/commit/ef88a48ae602e634428b1f03f21e8362c828afe7))
+* **remote-react-renderer:** detect the Suspense style next to an inline style ([dc5b3b1](https://github.com/mittwald/flow/commit/dc5b3b1c7137659f320ce620a69f288f815aff30))
+
+### Documentation
+
+* **Table:** note TableHeader&#x27;s first-child assumption ([5fefeca](https://github.com/mittwald/flow/commit/5fefeca1f54421faa762fb0cfd2309b7bc97cb1b))
+
+## [1.5.38](https://github.com/mittwald/flow/compare/1.6.0-next.36...1.5.38) (2026-10-22)
+
+### Bug Fixes
+
+* **remote-react-renderer:** drop style strings on native remote elements ([07fa3d3](https://github.com/mittwald/flow/commit/07fa3d36713f563db279cedda5df7ec22058470d)), closes [#62](https://github.com/mittwald/flow/issues/62)
+* **Table:** mark only the first column as row header ([55f4233](https://github.com/mittwald/flow/commit/55f4233de62080149fac7bd3b95c38bcb582e2b8))
+* **Table:** render row header cells as cells instead of columns ([a728cf3](https://github.com/mittwald/flow/commit/a728cf35affc8ef2094433df1c5831ddc4635a56))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.38 ([ca702e2](https://github.com/mittwald/flow/commit/ca702e2b1d97488ce04b11c0ecf80bf50bd70da7))
+
 ## [1.6.0-next.37](https://github.com/mittwald/flow/compare/1.6.0-next.36...1.6.0-next.37) (2026-10-22)
 
 ## [1.5.37](https://github.com/mittwald/flow/compare/1.6.0-next.35...1.5.37) (2026-10-22)

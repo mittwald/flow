@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.38](https://github.com/mittwald/flow/compare/1.6.0-next.37...1.6.0-next.38) (2026-10-23)
+
+### Bug Fixes
+
+* **remote-react-renderer:** detect the Suspense style next to an inline style ([dc5b3b1](https://github.com/mittwald/flow/commit/dc5b3b1c7137659f320ce620a69f288f815aff30))
+
+## [1.5.38](https://github.com/mittwald/flow/compare/1.6.0-next.36...1.5.38) (2026-10-22)
+
+### Bug Fixes
+
+* **remote-react-renderer:** drop style strings on native remote elements ([07fa3d3](https://github.com/mittwald/flow/commit/07fa3d36713f563db279cedda5df7ec22058470d)), closes [#62](https://github.com/mittwald/flow/issues/62)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.38 ([ca702e2](https://github.com/mittwald/flow/commit/ca702e2b1d97488ce04b11c0ecf80bf50bd70da7))
+
 ## [1.6.0-next.37](https://github.com/mittwald/flow/compare/1.6.0-next.36...1.6.0-next.37) (2026-10-22)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
