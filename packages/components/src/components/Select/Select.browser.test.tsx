@@ -97,3 +97,26 @@ test("escape closes the options without changing the value", async () => {
   await expect.element(toggle()).toHaveTextContent("X-Wing");
   expect(onChange).not.toHaveBeenCalled();
 });
+
+/*
+ * A closed Select is often repeated per table row, so a parent re-render must
+ * keep its DOM instead of rebuilding it.
+ */
+test("a re-render keeps the closed select's elements", async () => {
+  const screen = await renderSelect({ defaultValue: "X-Wing" });
+  await expect.element(toggle()).toHaveTextContent("X-Wing");
+  const button = toggle().element();
+  const field = button.parentElement;
+
+  await screen.rerender(
+    <Select defaultValue="X-Wing">
+      <Label>Starship</Label>
+      <Option>Millennium Falcon</Option>
+      <Option>X-Wing</Option>
+      <Option>TIE Fighter</Option>
+    </Select>,
+  );
+
+  expect(toggle().element()).toBe(button);
+  expect(toggle().element().parentElement).toBe(field);
+});
