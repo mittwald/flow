@@ -5,7 +5,8 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 results="$PWD/dev/perf/results"
 mkdir -p "$results"
-rm -f "$results"/list-*.jsonl "$results"/components-*.jsonl "$results"/fibers.jsonl
+rm -f "$results"/list-*.jsonl "$results"/components-*.jsonl \
+  "$results"/heavy-*.jsonl "$results"/fibers.jsonl
 
 run() {
   local name=$1 file=$2
@@ -18,9 +19,13 @@ run() {
 run fibers dev/perf/fibers.perf.tsx
 run list-chromium dev/perf/List.perf.tsx VITE_PERF_RUNS=5
 run components-chromium dev/perf/components.perf.tsx VITE_PERF_RUNS=5
+run heavy-chromium dev/perf/heavy.perf.tsx VITE_PERF_RUNS=5
 run list-chromium-4x dev/perf/List.perf.tsx VITE_PERF_RUNS=3 \
   VITE_PERF_SIZES=100,200,500 VITE_PERF_CPU_THROTTLE=4
 run components-chromium-4x dev/perf/components.perf.tsx VITE_PERF_RUNS=3 \
   VITE_PERF_CPU_THROTTLE=4
+run heavy-chromium-4x dev/perf/heavy.perf.tsx VITE_PERF_RUNS=3 \
+  VITE_PERF_CPU_THROTTLE=4
 run list-webkit dev/perf/List.perf.tsx PERF_BROWSER=webkit VITE_PERF_RUNS=3 \
   VITE_PERF_SIZES=100,200,1000
+run heavy-webkit dev/perf/heavy.perf.tsx PERF_BROWSER=webkit VITE_PERF_RUNS=3

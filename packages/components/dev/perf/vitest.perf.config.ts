@@ -44,6 +44,13 @@ const setCpuThrottling: BrowserCommand<[rate: number]> = async (ctx, rate) => {
   await cdp.send("Emulation.setCPUThrottlingRate", { rate });
 };
 
+/* Same command as the browser tests' (packages/core vitestBrowserTestConfig). */
+const setReducedMotion: BrowserCommand<
+  [value: "reduce" | "no-preference"]
+> = async ({ page }, value) => {
+  await page.emulateMedia({ reducedMotion: value });
+};
+
 const stopCpuProfile: BrowserCommand<[name: string]> = async (ctx, name) => {
   const cdp = await getCdp(ctx);
   const { profile } = await cdp.send("Profiler.stop");
@@ -100,6 +107,7 @@ export default mergeConfig(
           startCpuProfile,
           stopCpuProfile,
           setCpuThrottling,
+          setReducedMotion,
         },
         provider: playwright({
           launchOptions: {

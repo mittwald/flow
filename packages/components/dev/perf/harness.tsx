@@ -8,6 +8,7 @@ declare module "vitest/browser" {
     recordPerfResult: (result: unknown) => Promise<void>;
     startCpuProfile: () => Promise<void>;
     setCpuThrottling: (rate: number) => Promise<void>;
+    setReducedMotion: (value: string) => Promise<void>;
     stopCpuProfile: (name: string) => Promise<void>;
   }
 }

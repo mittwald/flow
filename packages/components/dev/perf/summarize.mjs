@@ -69,6 +69,29 @@ const componentsTable = (rows) => {
   return lines.join("\n");
 };
 
+const heavyTable = (rows) => {
+  const byCase = new Map();
+  for (const r of rows) {
+    const key = `${r.component}\u0000${r.size}`;
+    if (!byCase.has(key)) byCase.set(key, {});
+    byCase.get(key)[r.scenario.replace("heavy:", "")] = r;
+  }
+  const lines = [
+    "| component | size | mount | re-render | update | interaction | fibers | DOM nodes |",
+    "|---|---|---|---|---|---|---|---|",
+  ];
+  for (const s of byCase.values()) {
+    const { mount, rerender, update, ...rest } = s;
+    const interaction = Object.entries(rest)
+      .map(([name, r]) => `${name} ${ms(r.total)}`)
+      .join(", ");
+    lines.push(
+      `| ${mount.component} | ${mount.size} ${mount.unit} | ${ms(mount.total)} | ${ms(rerender?.total)} | ${ms(update?.total)} | ${interaction || "–"} | ${mount.fibers} | ${mount.dom} |`,
+    );
+  }
+  return lines.join("\n");
+};
+
 const names = process.argv.slice(2);
 const files = names.length
   ? names
@@ -83,8 +106,12 @@ for (const name of files) {
   const rows = load(name);
   const componentRows = rows.filter((r) => r.scenario.startsWith("component:"));
   const fiberRows = rows.filter((r) => r.scenario === "fibersPerItem");
+  const heavyRows = rows.filter((r) => r.scenario.startsWith("heavy:"));
   const listRows = rows.filter(
-    (r) => !componentRows.includes(r) && !fiberRows.includes(r),
+    (r) =>
+      !componentRows.includes(r) &&
+      !fiberRows.includes(r) &&
+      !heavyRows.includes(r),
   );
 
   const groups = new Map();
@@ -103,6 +130,11 @@ for (const name of files) {
       .join(", ");
     console.log(
       `\n### ${name} — ${r.content} item: ${r.fibersPerItem} fibers, ${r.domNodesPerItem} DOM nodes\n\n${top}`,
+    );
+  }
+  if (heavyRows.length) {
+    console.log(
+      `\n### ${name} — heavy components (ms)\n\n${heavyTable(heavyRows)}`,
     );
   }
   if (componentRows.length) {
