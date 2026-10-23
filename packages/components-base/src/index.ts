@@ -76,3 +76,13 @@ export {
   type PropertyValue,
   type PropertyValueRenderMethod,
 } from "./list/types";
+export {
+  OverlayState,
+  type AnyOverlayOpenStateHandler,
+  type DisposerFn,
+  type OverlayCloseHandler,
+  type OverlayCloseOptions,
+  type OverlayOpenHandler,
+  type OverlayOpenStateHandler,
+  type OverlayStateOptions,
+} from "./overlay/OverlayState";
