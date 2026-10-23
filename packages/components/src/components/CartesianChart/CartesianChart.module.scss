@@ -1,7 +1,7 @@
 @use "@/styles/mixins/skeleton";
 
 .cartesianChart {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-family--default);
   isolation: isolate;
 
   *:focus:not(:focus-visible) {

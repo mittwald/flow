@@ -1,7 +1,7 @@
 @use "@/styles/mixins/skeleton";
 
 .kbd {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-family--default);
   font-size: var(--font-size-text--s);
 }
 

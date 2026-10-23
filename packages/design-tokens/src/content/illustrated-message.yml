@@ -3,6 +3,8 @@ illustrated-message:
     value: "{size-px.m}"
   spacing:
     value: "{size-rem.m}"
+  progress-bar-max-width:
+    value: 400px
 
   content-color:
     value: "{heading.color}"

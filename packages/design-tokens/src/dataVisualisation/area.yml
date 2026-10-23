@@ -3,3 +3,5 @@ area:
     value: "{border-width.200}"
   border-color:
     value: "{neutral.color.100}"
+  dot-background-color:
+    value: "{light-static.color.800}"

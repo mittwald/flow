@@ -1,3 +1,5 @@
 chart-tooltip:
   spacing:
     value: "{size-px.s}"
+  progress-bar-min-width:
+    value: 250px
