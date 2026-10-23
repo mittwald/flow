@@ -14,17 +14,17 @@ import {
   </Notification>
 
   <Notification status="warning">
-    <Heading>Speicher fast voll</Heading>
+    <Heading>Speicherplatz fast voll</Heading>
     <Text>
       Der Speicherplatz im Projekt <b>My Project</b> ist zu
-      80% voll.
+      80 % voll.
     </Text>
   </Notification>
 
   <Notification status="danger">
-    <Heading>Kein SSL-Zertifikat</Heading>
+    <Heading>SSL-Zertifikat nicht ausgestellt</Heading>
     <Text>
-      Für <b>exmaple.de</b> konnte kein SSL-Zertifikat
+      Für <b>example.de</b> konnte kein SSL-Zertifikat
       ausgestellt werden.
     </Text>
   </Notification>

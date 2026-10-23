@@ -50,15 +50,19 @@ werden.
 
 ---
 
-# Mit Inhalt
+# Aufbau
 
-Über den Content beschreibst du zuerst die Ursache – was ist passiert und welche
-Folge ergibt sich – und anschließend, was der User tun kann. Wenn möglich, biete
-ihm eine Möglichkeit, sein Problem zu lösen, über einen
-[Link](/components/navigation/link) oder einen
-[Button](/components/actions/button). Eingefügte Buttons werden automatisch in
-der Größe **Small** dargestellt, um ein ausgewogenes Gesamtbild zu
-gewährleisten.
+Ein Alert folgt einem festen Aufbau:
+
+- **Heading** – benennt das Problem bzw. Ereignis prägnant. Sie darf
+  ausführlicher sein als bei Notification und AlertBadge, z. B. „Fehler beim
+  Anlegen des Containers“ statt „Container nicht angelegt“.
+- **Content** – nennt zuerst die Ursache: Was ist passiert und welche Folgen hat
+  es? Danach folgt, was der User tun kann. Optional ergänzen Kontext oder
+  technischer Hintergrund den Text.
+- **Action** (optional) – ein [Button](/components/actions/button) zur Lösung
+  oder ein [Link](/components/navigation/link) zu weiteren Informationen bzw.
+  zur relevanten Stelle.
 
 <LiveCodeEditor example="with-content" editorCollapsed />
 
