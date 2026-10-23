@@ -1,8 +1,8 @@
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { format, resolveConfig } from "prettier";
-import { rcompare } from "semver";
 import { readCatalog } from "../../src/catalog/read";
+import { compareSince } from "../../src/catalog/unreleased";
 
 const target = fileURLToPath(
   new URL("../../src/migrations.generated.ts", import.meta.url),
@@ -25,7 +25,12 @@ export const generateMigrationsModule = async (): Promise<void> => {
   // across platforms. The generated file would then differ between machines and
   // fail CI's `git diff --exit-code`.
   const entries = readCatalog()
-    .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id))
+    // `compareSince` reversed, rather than `semver.rcompare`: an entry still on
+    // the `UNRELEASED` placeholder has no comparable version, and rcompare
+    // throws on it (#2890).
+    .toSorted(
+      (a, b) => compareSince(b.since, a.since) || a.id.localeCompare(b.id),
+    )
     .map(({ body: ignoredBody, ...rest }) => rest);
 
   const source = [
