@@ -1,3 +1,5 @@
+@use "@/styles/mixins/formControl";
+@use "@/styles/mixins/scrollbar";
 @use "@/styles/mixins/skeleton";
 
 .markdown {
@@ -14,10 +16,19 @@
     white-space: break-spaces;
   }
 
-  // remark-gfm renders the table markup itself — Markdown overrides no table
-  // renderer, so none of these elements carries a class.
+  /* A table wider than the text scrolls on its own instead of widening the
+     page. */
+  .tableContainer {
+    @include scrollbar.scrollbar;
+
+    overflow-x: auto;
+  }
+
+  // The table renderer only adds the container — rows and cells are
+  // remark-gfm's markup, and a consumer's `table` renderer carries no class.
   // stylelint-disable selector-max-type -- react-markdown table output
   table {
+    min-width: 100%;
     border-radius: var(--table--corner-radius);
     overflow: hidden;
     border-width: var(--table--border-width);
@@ -55,6 +66,44 @@
     }
   }
   // stylelint-enable selector-max-type
+
+  /* Task lists: the checkbox takes the bullet's place. */
+  .taskListItem {
+    list-style: none;
+  }
+
+  .taskListCheckbox {
+    display: inline-flex;
+    vertical-align: text-bottom;
+    width: var(--text--list-padding);
+    margin-inline-start: calc(-1 * var(--text--list-padding));
+  }
+
+  .taskListIcon {
+    color: var(--choice--icon-color--default);
+  }
+
+  .taskListIcon.checked {
+    color: var(--choice--icon-color--selected);
+  }
+
+  .taskListSkeletonIcon {
+    display: flex;
+
+    @include formControl.formSkeletonShape(var(--corner-radius--s));
+  }
+
+  /* Alpha colors: the checkbox takes the item's text color. */
+  @mixin color($color) {
+    &.#{$color} .taskListIcon {
+      color: inherit;
+    }
+  }
+
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }
 
 /* SkeletonMode: a list or quote whose items became bars. The bullets take the
