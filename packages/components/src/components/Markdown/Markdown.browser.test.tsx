@@ -15,6 +15,36 @@ test("a paragraph becomes a paragraph element", async () => {
   expect(document.querySelector("p")).not.toBeNull();
 });
 
+/*
+ * Authors wrap long lines in the raw text. As in CommonMark, a single newline
+ * joins the lines; only a hard break (two trailing spaces or `\`) breaks.
+ */
+const paragraphHeight = async (
+  markdown: string,
+  preserveLineBreaks?: boolean,
+) => {
+  const { container } = await render(
+    <Markdown preserveLineBreaks={preserveLineBreaks}>{markdown}</Markdown>,
+  );
+  const paragraph = container.querySelector("p");
+  if (!paragraph) {
+    throw new Error("No paragraph rendered");
+  }
+  return paragraph.getBoundingClientRect().height;
+};
+
+test("a single newline does not break the line", async () => {
+  expect(await paragraphHeight("Rebels\nwin")).toBe(
+    await paragraphHeight("Rebels win"),
+  );
+});
+
+test("preserveLineBreaks breaks the line at a single newline", async () => {
+  expect(await paragraphHeight("Rebels\nwin", true)).toBeGreaterThan(
+    await paragraphHeight("Rebels win", true),
+  );
+});
+
 test("a heading becomes a heading of the matching level", async () => {
   await renderMarkdown("# Briefing\n\n## Objective");
 

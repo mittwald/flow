@@ -26,6 +26,7 @@ export const MarkdownEditor: FlowRemoteVueComponent<RemoteMarkdownEditorElementP
         "isInvalid",
         "isReadOnly",
         "isRequired",
+        "preserveLineBreaks",
         "showCharacterCount",
       ],
     },
