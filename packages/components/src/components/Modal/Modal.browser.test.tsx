@@ -612,6 +612,50 @@ test.each([
   expect(keepEditingButton).not.toBeInTheDocument();
 });
 
+test("Modal does not ask when its withdrawn confirmation is required again", async () => {
+  let controller: OverlayController | undefined;
+  let setConfirmOnClose: ((confirmOnClose: boolean) => void) | undefined;
+  const Test = () => {
+    const [confirmOnClose, setConfirmOnCloseState] = useState(true);
+    setConfirmOnClose = setConfirmOnCloseState;
+    controller = useModalController({ isDefaultOpen: true });
+    return (
+      <Modal controller={controller} confirmOnClose={confirmOnClose}>
+        <Content>
+          <Text data-testid="modal-text">
+            {confirmOnClose ? "Armed" : "Disarmed"}
+          </Text>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+  const modalText = dom.getByTestId("modal-text");
+  const keepEditingButton = dom.getByRole("button", {
+    name: "Keep editing",
+    exact: true,
+  });
+  if (!controller || !setConfirmOnClose) {
+    throw new Error("The test component was not rendered");
+  }
+
+  await expect.element(modalText).toHaveTextContent("Armed");
+  await userEvent.keyboard("{Escape}");
+  await expect.element(keepEditingButton).toBeInTheDocument();
+
+  setConfirmOnClose(false);
+  await expect.element(modalText).toHaveTextContent("Disarmed");
+  await expect.element(keepEditingButton).not.toBeInTheDocument();
+
+  setConfirmOnClose(true);
+  await expect.element(modalText).toHaveTextContent("Armed");
+  expect(controller.showConfirmationModal).toBe(false);
+  await sleep(200);
+  expect(keepEditingButton).not.toBeInTheDocument();
+  expect(modalText).toBeInTheDocument();
+});
+
 test("Modal only requires confirmation while confirmOnClose is enabled", async () => {
   const Test = () => {
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
