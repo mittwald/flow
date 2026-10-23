@@ -86,8 +86,8 @@ async function generate() {
   console.log("");
 
   /*
-   * Thrown, not reported: apart from the acknowledged value-returning baseline
-   * the list is empty, so the only way it grows is a new prop that would drop
+   * Thrown, not reported: apart from the acknowledged baselines the list is
+   * empty, so the only way it grows is a new prop that would drop
    * whole mutation batches — or silently hand the host a Promise — at runtime.
    * Failing generation is the cheapest place to learn that; the alternative is
    * an extension developer whose page renders nothing, or `[object Promise]`.
@@ -123,7 +123,7 @@ async function generate() {
   const acknowledged = unserializableProps.length - rejected.length;
   if (acknowledged > 0) {
     console.log(
-      `ℹ️  ${acknowledged} remote propert${acknowledged === 1 ? "y" : "ies"} return a value the host receives as a Promise (acknowledgedValueReturningProps in checkSerializableProps.ts)`,
+      `ℹ️  ${acknowledged} remote propert${acknowledged === 1 ? "y" : "ies"} take a function the host cannot use (acknowledged in checkSerializableProps.ts)`,
     );
     console.log("");
   }

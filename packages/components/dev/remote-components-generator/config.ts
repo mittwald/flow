@@ -3,6 +3,12 @@ export const config = {
     "controller",
     "tunnel",
     "ref",
+    /*
+     * A ref like `ref`, inherited from react-aria's `RadioProps`. A ref object is
+     * cloned across, so the host fills in a copy the remote side never sees, and
+     * a callback ref crosses as a proxy.
+     */
+    "inputRef",
     "key",
     "children",
     "dangerouslySetInnerHTML",

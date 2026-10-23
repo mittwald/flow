@@ -11,18 +11,14 @@ export class RemoteMarkdownElement extends FlowRemoteElement<RemoteMarkdownEleme
 
   static override get remoteProperties() {
     return {
-      allowElement: {},
       allowedElements: {},
       className: {},
       color: {},
       disallowedElements: {},
       headingOffset: {},
-      rehypePlugins: {},
-      remarkPlugins: {},
       remarkRehypeOptions: {},
       skipHtml: {},
       unwrapDisallowed: {},
-      urlTransform: {},
     };
   }
 

@@ -21,7 +21,6 @@ export class RemoteRadioElement extends FlowRemoteElement<RemoteRadioElementProp
       hidden: {},
       id: {},
       inert: {},
-      inputRef: {},
       isDisabled: {},
       lang: {},
       slot: {},
