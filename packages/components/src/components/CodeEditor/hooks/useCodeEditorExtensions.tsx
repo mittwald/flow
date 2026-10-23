@@ -6,6 +6,7 @@ import supportedCodeEditorLanguages, {
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
 import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
+import { useMemo } from "react";
 
 /*
  * Every slot gets the same color: the library picks between its light and dark
@@ -13,12 +14,19 @@ import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
  * active block needs no color of its own.
  */
 const markerColor = "var(--code-editor--indentation-marker-color)";
-const indentationMarkerColors = {
-  light: markerColor,
-  dark: markerColor,
-  activeLight: markerColor,
-  activeDark: markerColor,
-};
+
+/*
+ * Created once: every call brings a new style module along, and CodeMirror
+ * never unmounts a style module – one per render grows the document's styles.
+ */
+const codeIndentationMarkers = indentationMarkers({
+  colors: {
+    light: markerColor,
+    dark: markerColor,
+    activeLight: markerColor,
+    activeDark: markerColor,
+  },
+});
 
 export interface CodeEditorSetup {
   /**
@@ -53,57 +61,74 @@ export interface CodeEditorSetup {
   showLinterMarkers?: boolean;
 }
 
+const noExtensions: Extension[] = [];
+
 /** @internal */
 export const useCodeEditorExtensions = (
   language?: string,
-  extensions: Extension[] = [],
+  extensions: Extension[] = noExtensions,
   options: CodeEditorSetup = {
     showCodeFolding: true,
     showCodeIndentationMakers: true,
     showLineNumbers: true,
     showLinterMarkers: true,
   },
-) => {
-  if (options.showLineNumbers) {
-    extensions.push(lineNumbers());
-  }
+): Extension[] => {
+  const {
+    showCodeFolding,
+    showCodeIndentationMakers,
+    showLineNumbers,
+    showLinterMarkers,
+  } = options;
 
-  if (options.showCodeFolding) {
-    extensions.push(
-      foldGutter({
-        markerDOM: (open) => {
-          const element = document.createElement("span");
-          element.classList.add("cm-foldGutter");
-          element.classList.add(
-            open ? "cm-foldGutter-open" : "cm-foldGutter-closed",
-          );
-          element.innerText = open ? "⌄" : "›";
-          return element;
-        },
-      }),
-    );
-  }
+  return useMemo(() => {
+    const enabledExtensions = [...extensions];
 
-  if (options.showLinterMarkers) {
-    extensions.push(lintGutter());
-  }
+    if (showLineNumbers) {
+      enabledExtensions.push(lineNumbers());
+    }
 
-  if (
-    options.showLineNumbers &&
-    (!options.showCodeFolding || !options.showLinterMarkers)
-  ) {
-    extensions.push(gutterSpacer());
-  }
+    if (showCodeFolding) {
+      enabledExtensions.push(
+        foldGutter({
+          markerDOM: (open) => {
+            const element = document.createElement("span");
+            element.classList.add("cm-foldGutter");
+            element.classList.add(
+              open ? "cm-foldGutter-open" : "cm-foldGutter-closed",
+            );
+            element.innerText = open ? "⌄" : "›";
+            return element;
+          },
+        }),
+      );
+    }
 
-  if (options.showCodeIndentationMakers) {
-    extensions.push(indentationMarkers({ colors: indentationMarkerColors }));
-  }
+    if (showLinterMarkers) {
+      enabledExtensions.push(lintGutter());
+    }
 
-  if (language && isCodeEditorLanguage(language)) {
-    supportedCodeEditorLanguages[language]?.map((loader) =>
-      extensions.push(loader()),
-    );
-  }
+    if (showLineNumbers && (!showCodeFolding || !showLinterMarkers)) {
+      enabledExtensions.push(gutterSpacer());
+    }
 
-  return extensions;
+    if (showCodeIndentationMakers) {
+      enabledExtensions.push(codeIndentationMarkers);
+    }
+
+    if (language && isCodeEditorLanguage(language)) {
+      for (const loader of supportedCodeEditorLanguages[language] ?? []) {
+        enabledExtensions.push(loader());
+      }
+    }
+
+    return enabledExtensions;
+  }, [
+    language,
+    extensions,
+    showCodeFolding,
+    showCodeIndentationMakers,
+    showLineNumbers,
+    showLinterMarkers,
+  ]);
 };

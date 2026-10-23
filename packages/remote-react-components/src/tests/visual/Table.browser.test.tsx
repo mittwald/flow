@@ -86,6 +86,20 @@ test.each(testEnvironments)(
             </TableRow>
           </TableBody>
         </Table>
+        <Table aria-label="Table">
+          <TableHeader>
+            <TableColumn />
+            <TableColumn>Column</TableColumn>
+            <TableColumn>Column</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell rowHeader>RowHeader</TableCell>
+              <TableCell>TableCell</TableCell>
+              <TableCell>TableCell</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </Flex>,
     );
 

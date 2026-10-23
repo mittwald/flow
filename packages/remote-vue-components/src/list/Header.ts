@@ -462,6 +462,8 @@ export const Header = defineComponent({
         h(AllFiltersModal, { isDisabled, viewModes: modes }),
         list.search
           ? h(SearchField, {
+              /* autoFocus acts on mount only — remount once enabled. */
+              key: isDisabled ? "disabled" : "enabled",
               class: listStyles.searchField,
               isDisabled,
               autoFocus: searchShape?.autoFocus,

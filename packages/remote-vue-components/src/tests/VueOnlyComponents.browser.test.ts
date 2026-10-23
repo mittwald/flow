@@ -224,4 +224,42 @@ describe("DeprecationWarningProvider", () => {
     expect(onWarning).toHaveBeenCalledTimes(1);
     expect(onWarning).toHaveBeenCalledWith(message);
   });
+
+  test("reports each message once across component instances", async () => {
+    const consoleWarn = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => undefined);
+    const onWarning = vi.fn();
+    const message = "The 'y' prop is deprecated.";
+
+    const Deprecated = defineComponent(() => {
+      const warnDeprecation = useWarnDeprecation();
+      return () => {
+        warnDeprecation(message);
+        return h(Heading, null, () => "Instance");
+      };
+    });
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(DeprecationWarningProvider, { onWarning }, () => [
+            h(Deprecated),
+            h(Deprecated),
+          ]),
+      ),
+    );
+
+    await expect
+      .element(page.getByRole("heading", { name: "Instance" }).nth(1))
+      .toBeVisible();
+
+    expect(
+      consoleWarn.mock.calls.filter(([warning]) => warning === message),
+    ).toHaveLength(1);
+    expect(onWarning).toHaveBeenCalledTimes(1);
+    expect(onWarning).toHaveBeenCalledWith(message);
+
+    consoleWarn.mockRestore();
+  });
 });

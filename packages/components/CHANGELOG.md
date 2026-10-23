@@ -3,6 +3,120 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.39](https://github.com/mittwald/flow/compare/1.5.38...1.5.39) (2026-10-23)
+
+### Bug Fixes
+
+* **Table:** mark only the first column as row header ([55f4233](https://github.com/mittwald/flow/commit/55f4233de62080149fac7bd3b95c38bcb582e2b8))
+* **Table:** render row header cells as cells instead of columns ([a728cf3](https://github.com/mittwald/flow/commit/a728cf35affc8ef2094433df1c5831ddc4635a56))
+
+### Documentation
+
+* **Table:** note TableHeader&#x27;s first-child assumption ([5fefeca](https://github.com/mittwald/flow/commit/5fefeca1f54421faa762fb0cfd2309b7bc97cb1b))
+
+## [1.5.38](https://github.com/mittwald/flow/compare/1.5.37...1.5.38) (2026-10-22)
+
+### Bug Fixes
+
+* **Modal:** read the open state without creating a controller ([7c48cef](https://github.com/mittwald/flow/commit/7c48cefe6c2c4cb760cbe008c2f5f712112b99e3)), closes [#3528](https://github.com/mittwald/flow/issues/3528)
+* **Modal:** track the virtual keyboard only while the Modal is open ([20f33c7](https://github.com/mittwald/flow/commit/20f33c70730d2d16501ac715b0c6ba2c7e1cb1f2)), closes [#3528](https://github.com/mittwald/flow/issues/3528)
+
+## [1.5.37](https://github.com/mittwald/flow/compare/1.5.36...1.5.37) (2026-10-22)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 15 updates ([c7acd00](https://github.com/mittwald/flow/commit/c7acd00024c484fead7ccbf83d7317b224fcf002))
+
+## [1.5.36](https://github.com/mittwald/flow/compare/1.5.35...1.5.36) (2026-10-22)
+
+### Bug Fixes
+
+* **Form:** pass the submit event to the submitInterceptor ([15c7a34](https://github.com/mittwald/flow/commit/15c7a3480ca974703488797cfa3fa4bde54a4e5d))
+
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+### Bug Fixes
+
+* **Icon:** let components hide and align FontAwesome icons ([#3540](https://github.com/mittwald/flow/issues/3540)) ([b372cd2](https://github.com/mittwald/flow/commit/b372cd22df073d1449352699279782d1dcb3fdad))
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+### Bug Fixes
+
+* **Badge:** render spans so a badge can sit in running text ([#3533](https://github.com/mittwald/flow/issues/3533)) ([07741d7](https://github.com/mittwald/flow/commit/07741d772d74f40a36886872e5c1d7b50c6ec47e))
+
+### Tests
+
+* **Modal:** poll assertions that wait for a modal to open or close ([#3534](https://github.com/mittwald/flow/issues/3534)) ([2dbaa06](https://github.com/mittwald/flow/commit/2dbaa06e0c2409bb69e41e7dc5a1139e0b147139))
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+### Bug Fixes
+
+* **List:** focus the search once enabled and skip the empty filter modal ([#3517](https://github.com/mittwald/flow/issues/3517)) ([7a7bfe6](https://github.com/mittwald/flow/commit/7a7bfe6fbd19948bd3547637a42a0fd7e1d44c08))
+
+## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
+
+### Bug Fixes
+
+* **Icon:** keep the vertical alignment of FontAwesome icons in the layered stylesheet ([#3538](https://github.com/mittwald/flow/issues/3538)) ([fd496fb](https://github.com/mittwald/flow/commit/fd496fb4acfcafa32bb89a687790264de54a3b6a))
+
+## [1.5.30](https://github.com/mittwald/flow/compare/1.5.29...1.5.30) (2026-10-21)
+
+### Bug Fixes
+
+* **ListSummary:** keep the root classes when a className is passed ([#3518](https://github.com/mittwald/flow/issues/3518)) ([a6764d9](https://github.com/mittwald/flow/commit/a6764d9e08d0e48162d5723c7b450322d47304ab))
+
+## [1.5.29](https://github.com/mittwald/flow/compare/1.5.28...1.5.29) (2026-10-21)
+
+### Documentation
+
+* add a Wrap page and fill the story gaps from [#3429](https://github.com/mittwald/flow/issues/3429) ([#3520](https://github.com/mittwald/flow/issues/3520)) ([e69dd04](https://github.com/mittwald/flow/commit/e69dd040e50a61c2266e5ddd56894f00e8024c70))
+
+## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
+
+### Bug Fixes
+
+* **Table:** keep empty column headers in the grid ([385d863](https://github.com/mittwald/flow/commit/385d86391ac235dd03979daf5d7622fac93360c3))
+
+## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
+
+### Documentation
+
+* **agents:** split narrow sections out of the package agent guides ([#3522](https://github.com/mittwald/flow/issues/3522)) ([09d5d84](https://github.com/mittwald/flow/commit/09d5d8448c78df24ffe712088a2bed6b4cee4c16))
+
+## [1.5.26](https://github.com/mittwald/flow/compare/1.5.25...1.5.26) (2026-10-20)
+
+### Bug Fixes
+
+* **TranslationProvider:** compile each localized message once ([#3525](https://github.com/mittwald/flow/issues/3525)) ([7e0fb85](https://github.com/mittwald/flow/commit/7e0fb859ad5be627bff2d2d17c9e3ca2cf582c5b))
+
+## [1.5.25](https://github.com/mittwald/flow/compare/1.5.24...1.5.25) (2026-10-20)
+
+### Bug Fixes
+
+* **DeprecationWarningProvider:** deduplicate warnings across instances ([#3523](https://github.com/mittwald/flow/issues/3523)) ([9e3bad8](https://github.com/mittwald/flow/commit/9e3bad8fdc245146c2a7dc0dc5a9b2e44b81bb2c))
+
+## [1.5.24](https://github.com/mittwald/flow/compare/1.5.23...1.5.24) (2026-10-20)
+
+### Bug Fixes
+
+* **CodeEditor:** stop reconfiguring the editor and leaking styles on every render ([#3467](https://github.com/mittwald/flow/issues/3467)) ([288f4a1](https://github.com/mittwald/flow/commit/288f4a14162ff883601fac3a733fb0ac19228e80))
+
+## [1.5.23](https://github.com/mittwald/flow/compare/1.5.22...1.5.23) (2026-10-20)
+
+### Bug Fixes
+
+* **Markdown:** keep rendered elements across re-renders ([3808e79](https://github.com/mittwald/flow/commit/3808e796985fee611f126e6faaff5860313a1d5b))
+
 ## [1.5.22](https://github.com/mittwald/flow/compare/1.5.21...1.5.22) (2026-10-16)
 
 ### Documentation

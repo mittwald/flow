@@ -103,10 +103,14 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Badge, Label, Text, Flex },
+    components: { Badge, AlertBadge, Label, Text, Flex },
   }) => {
     await render(
       <Flex direction="column" gap="m">
+        <Text elementType="p">
+          Running text with a <Badge color="blue">Badge</Badge> and an{" "}
+          <AlertBadge status="warning">AlertBadge</AlertBadge> on its line.
+        </Text>
         <Badge>
           <Label>Scope</Label>
           <Text>
