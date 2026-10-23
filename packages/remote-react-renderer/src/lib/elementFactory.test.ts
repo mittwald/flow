@@ -16,6 +16,12 @@ describe("elementFactory", () => {
     );
   });
 
+  test("hides a suspended element with an inline style", () => {
+    expect(render({ style: "width: 16px; display: none !important;" })).toBe(
+      '<svg class="icon" style="display:none"></svg>',
+    );
+  });
+
   test("keeps a style object", () => {
     expect(render({ style: { width: 16 } })).toBe(
       '<svg class="icon" style="width:16px"></svg>',
