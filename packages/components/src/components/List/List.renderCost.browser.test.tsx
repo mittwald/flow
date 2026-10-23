@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { describe, expect, test } from "vitest";
-import { useState, type FC, type ReactNode } from "react";
+import { Profiler, useState, type FC, type ReactNode } from "react";
 import {
   List,
   ListItem,
@@ -67,6 +67,22 @@ const renderSimpleItem = (domain: Domain): ReactNode => {
   );
 };
 
+/* Items whose subtree committed an update, render function called or not. */
+const updatedItems = new Set<number>();
+
+const renderProfiledItem = (domain: Domain): ReactNode => (
+  <Profiler
+    id={domain.hostname}
+    onRender={(_, phase) => {
+      if (phase !== "mount") {
+        updatedItems.add(domain.id);
+      }
+    }}
+  >
+    {renderRichItem(domain)}
+  </Profiler>
+);
+
 const textValue = (domain: Domain) => domain.hostname;
 const onAction = () => undefined;
 
@@ -90,14 +106,27 @@ interface DomainListProps {
   renderItem: (domain: Domain) => ReactNode;
 }
 
+/*
+ * State updates are triggered from outside, not by clicking: a click changes
+ * react-aria's global interaction modality, and every item follows that.
+ */
+let rerenderParent: () => void = () => undefined;
+let updateOutside: () => void = () => undefined;
+
+/* State next to the list: an update here does not render the list. */
+const Outside: FC = () => {
+  const [updates, setUpdates] = useState(0);
+  updateOutside = () => setUpdates((u) => u + 1);
+  return <span>Outside updates: {updates}</span>;
+};
+
 /* Everything the list receives is stable, so a re-render changes nothing. */
 const DomainList: FC<DomainListProps> = ({ data, renderItem }) => {
   const [renders, setRenders] = useState(0);
+  rerenderParent = () => setRenders((r) => r + 1);
   return (
     <>
-      <button onClick={() => setRenders((r) => r + 1)}>
-        Re-render {renders}
-      </button>
+      <span>Parent re-renders: {renders}</span>
       <List aria-label="Domains" batchSize={data.length} onAction={onAction}>
         <ListModelProbe />
         <ListStaticData<Domain> data={data} />
@@ -109,15 +138,38 @@ const DomainList: FC<DomainListProps> = ({ data, renderItem }) => {
   );
 };
 
+const nextFrame = () =>
+  new Promise((resolve) => requestAnimationFrame(resolve));
+
 const renderList = async (
   count: number,
   renderItem: (domain: Domain) => ReactNode = renderRichItem,
 ) => {
   const screen = await render(
-    <DomainList data={domains(count)} renderItem={renderItem} />,
+    <>
+      <Outside />
+      <DomainList data={domains(count)} renderItem={renderItem} />
+    </>,
   );
   await expect.element(page.getByText(hostname(count - 1))).toBeInTheDocument();
+  /* Let updates that follow the mount land before a test starts counting. */
+  await nextFrame();
+  await nextFrame();
   return screen;
+};
+
+const rerenderTheParent = async () => {
+  rerenderParent();
+  await expect
+    .element(page.getByText("Parent re-renders: 1"))
+    .toBeInTheDocument();
+};
+
+const sortTheList = async () => {
+  sortDescending();
+  await expect
+    .element(page.getByRole("row").first())
+    .toHaveTextContent(hostname(19));
 };
 
 describe("Weight of an item", () => {
@@ -182,10 +234,7 @@ describe("Item render functions", () => {
     await renderList(20);
     itemRenders = 0;
 
-    await page.getByRole("button", { name: "Re-render 0" }).click();
-    await expect
-      .element(page.getByRole("button", { name: "Re-render 1" }))
-      .toBeInTheDocument();
+    await rerenderTheParent();
 
     expect(itemRenders).toBe(0);
   });
@@ -194,11 +243,53 @@ describe("Item render functions", () => {
     await renderList(20);
     itemRenders = 0;
 
-    sortDescending();
-    await expect
-      .element(page.getByRole("row").first())
-      .toHaveTextContent(hostname(19));
+    await sortTheList();
 
     expect(itemRenders).toBe(0);
+  });
+});
+
+/*
+ * An item's subtree can update without its render function: through a context
+ * it consumes. The Profiler around each item sees both.
+ */
+describe("Item subtrees", () => {
+  test("an update outside the list updates none of them", async () => {
+    await renderList(20, renderProfiledItem);
+    updatedItems.clear();
+
+    updateOutside();
+    await expect
+      .element(page.getByText("Outside updates: 1"))
+      .toBeInTheDocument();
+    await nextFrame();
+
+    expect(updatedItems.size).toBe(0);
+  });
+
+  /*
+   * Known issue (#3528): every list state change rebuilds react-aria's
+   * collection, so each GridListItem gets a new ListState context, and its
+   * consumers inside the item re-render, the ContextMenu trigger among them.
+   * Today all 20 items update. Drop `.fails` once the cascade is gone.
+   */
+  test.fails("a parent re-render updates none of them", async () => {
+    await renderList(20, renderProfiledItem);
+    updatedItems.clear();
+
+    await rerenderTheParent();
+    await nextFrame();
+
+    expect(updatedItems.size).toBe(0);
+  });
+
+  test.fails("sorting updates none of them", async () => {
+    await renderList(20, renderProfiledItem);
+    updatedItems.clear();
+
+    await sortTheList();
+    await nextFrame();
+
+    expect(updatedItems.size).toBe(0);
   });
 });
