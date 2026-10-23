@@ -42,6 +42,56 @@ describe("resolveTarget", () => {
     expect(resolve("major")).toBe("2.1.0");
   });
 
+  // #3117: the field report ran `list patch|minor|major` from 1.0.6 with no
+  // stable 2.x published. `major` exited 0 on the same version `minor` found,
+  // and nothing in any of the three outputs said the boundary was never
+  // crossed — so the reader was told to weigh three targets that were two.
+  describe("a keyword that resolved inside its own boundary says so", () => {
+    /** No 2.x, so `major` has nothing above 1.x to reach. */
+    const oneLine = ["1.0.0", "1.0.6", "1.1.0", "1.1.12"];
+
+    const note = (revision: string, current: string, pool = oneLine) => {
+      const outcome = resolveTarget({
+        revision,
+        current,
+        versions: pool,
+        distTags: {},
+      });
+      return outcome.ok ? outcome.note : undefined;
+    };
+
+    test("major that found no newer major names minor as its equal", () => {
+      expect(note("major", "1.0.6")).toContain('"minor"');
+      expect(note("major", "1.0.6")).toContain("1.x");
+    });
+
+    test("minor that found no newer minor names patch as its equal", () => {
+      expect(note("minor", "1.1.0")).toContain('"patch"');
+    });
+
+    test("a keyword that did cross its boundary adds nothing", () => {
+      expect(note("major", "1.0.1", versions)).toBeUndefined();
+      expect(note("minor", "1.0.1", versions)).toBeUndefined();
+    });
+
+    // `patch` is the narrowest keyword — there is nothing below it to compare
+    // against, so staying inside the patch line is the whole of its promise.
+    test("patch never carries a note", () => {
+      expect(note("patch", "1.0.6")).toBeUndefined();
+      expect(note("patch", "1.0.1", versions)).toBeUndefined();
+    });
+
+    test("an exact version and a dist-tag carry no note", () => {
+      const exact = resolveTarget({
+        revision: "1.1.12",
+        current: "1.0.6",
+        versions: oneLine,
+        distTags: {},
+      });
+      expect(exact.ok && exact.note).toBeUndefined();
+    });
+  });
+
   test("keyword resolution never lands on a prerelease", () => {
     expect(resolve("minor")).not.toContain("-");
     expect(resolve("major")).not.toContain("-");
