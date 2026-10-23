@@ -11,7 +11,7 @@ import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { ComponentDefaultsProvider } from "@/components/ComponentDefaultsProvider";
-import { useModalController } from "@/lib/controller";
+import { type OverlayController, useModalController } from "@/lib/controller";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
@@ -558,6 +558,102 @@ test("Modal with confirmOnClose requires confirmation", async () => {
 
   await userEvent.click(confirmCloseModalButton);
   await expect.element(modalText).not.toBeInTheDocument();
+});
+
+test.each([
+  {
+    closedBy: "a close that bypasses it",
+    close: (controller: OverlayController) =>
+      controller.close({ bypassConfirmation: true }),
+  },
+  {
+    closedBy: "a close a grant allows",
+    close: (controller: OverlayController) => {
+      const release = controller.grantCloseWithoutConfirmation();
+      controller.close();
+      release();
+    },
+  },
+])("Modal does not ask again on reopen after $closedBy", async ({ close }) => {
+  let controller: OverlayController | undefined;
+  const Test = () => {
+    controller = useModalController();
+    return (
+      <Modal controller={controller} confirmOnClose>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+  const modalText = dom.getByTestId("modal-text");
+  const keepEditingButton = dom.getByRole("button", {
+    name: "Keep editing",
+    exact: true,
+  });
+  if (!controller) {
+    throw new Error("The modal controller was not created");
+  }
+
+  controller.open();
+  await expect.element(modalText).toBeInTheDocument();
+  await userEvent.keyboard("{Escape}");
+  await expect.element(keepEditingButton).toBeInTheDocument();
+
+  close(controller);
+  await expect.element(modalText).not.toBeInTheDocument();
+
+  controller.open();
+  await expect.element(modalText).toBeInTheDocument();
+  expect(controller.showConfirmationModal).toBe(false);
+  await sleep(200);
+  expect(keepEditingButton).not.toBeInTheDocument();
+});
+
+test("Modal does not ask when its withdrawn confirmation is required again", async () => {
+  let controller: OverlayController | undefined;
+  let setConfirmOnClose: ((confirmOnClose: boolean) => void) | undefined;
+  const Test = () => {
+    const [confirmOnClose, setConfirmOnCloseState] = useState(true);
+    setConfirmOnClose = setConfirmOnCloseState;
+    controller = useModalController({ isDefaultOpen: true });
+    return (
+      <Modal controller={controller} confirmOnClose={confirmOnClose}>
+        <Content>
+          <Text data-testid="modal-text">
+            {confirmOnClose ? "Armed" : "Disarmed"}
+          </Text>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+  const modalText = dom.getByTestId("modal-text");
+  const keepEditingButton = dom.getByRole("button", {
+    name: "Keep editing",
+    exact: true,
+  });
+  if (!controller || !setConfirmOnClose) {
+    throw new Error("The test component was not rendered");
+  }
+
+  await expect.element(modalText).toHaveTextContent("Armed");
+  await userEvent.keyboard("{Escape}");
+  await expect.element(keepEditingButton).toBeInTheDocument();
+
+  setConfirmOnClose(false);
+  await expect.element(modalText).toHaveTextContent("Disarmed");
+  await expect.element(keepEditingButton).not.toBeInTheDocument();
+
+  setConfirmOnClose(true);
+  await expect.element(modalText).toHaveTextContent("Armed");
+  expect(controller.showConfirmationModal).toBe(false);
+  await sleep(200);
+  expect(keepEditingButton).not.toBeInTheDocument();
+  expect(modalText).toBeInTheDocument();
 });
 
 test("Modal only requires confirmation while confirmOnClose is enabled", async () => {
