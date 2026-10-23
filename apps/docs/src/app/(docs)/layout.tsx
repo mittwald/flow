@@ -48,7 +48,6 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         />
       </head>
       <body className={bodyClassName}>
-        <div className={styles.background} />
         <ThemeProvider {...themeProps} disableTransitionOnChange noScript>
           <RouterProvider>
             <Matomo />

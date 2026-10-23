@@ -43,6 +43,20 @@
   }
 }
 
+/* Brand headline scale (branding.mittwald.de, Typografie): line-height 100 %
+   for the big steps, tracking untouched. Only the page's own headings — the
+   Heading inside an example keeps its token size. */
+.sectionHeading {
+  font-size: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.subSectionHeading {
+  font-size: clamp(1.375rem, 1.2rem + 0.5vw, 1.625rem);
+  line-height: 1.1;
+}
+
 .doAndDontCode {
   margin-bottom: calc(var(--size-px--m) * -1);
   border-bottom: none;
