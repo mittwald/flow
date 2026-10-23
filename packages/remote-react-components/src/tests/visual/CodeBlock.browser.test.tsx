@@ -1,4 +1,5 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
@@ -32,6 +33,8 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
+    await waitForHighlightedCode(1);
+
     await testScreenshot("CodeBlock");
   },
 );
@@ -62,6 +65,8 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
         />
       </Flex>,
     );
+
+    await waitForHighlightedCode(2);
 
     /* A mouse click leaves no focus ring in the captures. */
     const toggles = page.getByRole("button", { name: /show (more|less)/i });

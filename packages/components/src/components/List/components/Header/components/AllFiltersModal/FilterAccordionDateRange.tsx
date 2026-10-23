@@ -5,6 +5,8 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "../../../../locales/*.locale.json";
 import RangeCalendarView from "@/views/RangeCalendarView";
 import type { AnyDateRangeFilter } from "@/components/List/model/filter/types";
+import { isDateRangeValue } from "@/components/Calendar";
+import { DateTimeRangeFields } from "@/components/List/components/Header/components/DateTimeRangeFields/DateTimeRangeFields";
 
 interface Props {
   filter: AnyDateRangeFilter;
@@ -19,13 +21,17 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
 
   return (
     <FlexView direction="column" gap="m">
-      <RangeCalendarView
-        {...filter.dateRangeOptions}
-        value={currentValue}
-        onChange={(range) => {
-          filter.setValue(range);
-        }}
-      />
+      {filter.granularity === "minute" ? (
+        <DateTimeRangeFields filter={filter} />
+      ) : (
+        <RangeCalendarView
+          {...filter.rangeCalendarProps}
+          value={isDateRangeValue(currentValue) ? currentValue : null}
+          onChange={(range) => {
+            filter.setValue(range);
+          }}
+        />
+      )}
       {currentValue && (
         <ButtonView
           size="s"

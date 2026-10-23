@@ -15,6 +15,8 @@ interface Props extends PropsWithChildren {
   triggerRef?: Ref<HTMLDivElement>;
   list: ListModel<never>;
   isTile: boolean;
+  /** Stable invoker of the list's latest `onAction` */
+  onAction?: (data: never) => void;
 }
 
 const ItemImpl = (props: Props) => {
@@ -53,10 +55,12 @@ const ItemImpl = (props: Props) => {
 };
 
 // The list model is rebuilt on every render, so it cannot be compared by
-// identity — but everything an item renders from it can. Those closures come
-// from the consumer's own JSX and only change when the consumer re-renders,
-// so loading more still skips the re-render while parent state no longer
-// leaves an item frozen on the values it first saw.
+// identity — but everything an item renders from it can. The render function
+// counts by its `renderDependencies`, or else by its identity: an inline one
+// changes whenever the consumer re-renders, so parent state no longer leaves
+// an item frozen on the values it first saw (#3065), while loading more still
+// skips the re-render. `onAction` arrives as a stable invoker of the latest
+// handler, and `textValue`/`href` count by their result.
 export const Item = memo(
   ItemImpl,
   (prev, next) =>
@@ -64,9 +68,9 @@ export const Item = memo(
     prev.data === next.data &&
     prev.triggerRef === next.triggerRef &&
     prev.isTile === next.isTile &&
-    prev.list.onAction === next.list.onAction &&
+    !!prev.onAction === !!next.onAction &&
     prev.list.accordion === next.list.accordion &&
-    !!prev.list.itemView?.rendersSameAs(next.list.itemView),
+    !!prev.list.itemView?.rendersSameFor(next.list.itemView, next.data),
 );
 Item.displayName = "Item";
 

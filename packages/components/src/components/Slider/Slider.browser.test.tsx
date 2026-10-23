@@ -2,6 +2,7 @@ import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-react";
 import { Slider } from "@/components/Slider";
 import { Label } from "@/components/Label";
+import styles from "./Slider.module.scss";
 
 /**
  * The `<Label>` is tunnelled into the slider's value row, so it reaches
@@ -29,4 +30,17 @@ test("takes its accessible name from the Label child", async () => {
       .map((argument) => String(argument))
       .filter((message) => message.includes("you must specify an aria-label")),
   ).toEqual([]);
+});
+
+test("shows the initial marker for a defaultValue of 0", async () => {
+  const screen = await render(
+    <Slider defaultValue={0} showInitialMarker>
+      <Label>Bounty</Label>
+    </Slider>,
+  );
+
+  const track = screen.container.querySelector(`.${styles.track}`);
+
+  expect(track?.querySelector(`.${styles.initialMarker}`)).not.toBeNull();
+  expect(track?.textContent).toBe("");
 });

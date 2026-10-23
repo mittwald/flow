@@ -20,6 +20,14 @@ describe("stylesheet variants plugin", () => {
     expect(result).toBe(".foo { color: red }");
   });
 
+  test("drops revert-layer declarations along with the layers", () => {
+    const result = stripCascadeLayers(
+      ".flow--icon.fa { width: revert-layer; padding: 2px }",
+    );
+
+    expect(result).toBe(".flow--icon.fa { padding: 2px }");
+  });
+
   test("preserves nested layer contents inside media queries", () => {
     const result = stripCascadeLayers(
       "@media (min-width: 40rem) { @layer flow.tokens { :root { --x: 1 } } }",

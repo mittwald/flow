@@ -4,14 +4,16 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 import { SkeletonText } from "@/components/SkeletonText";
-import { TableColumn } from "@/components/Table/components/TableColumn/TableColumn";
 import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
 
 export interface TableCellProps
   extends
     Omit<Aria.CellProps, "children" | "style" | "render">,
     PropsWithChildren {
-  /** Use cell as row header */
+  /**
+   * Styles the cell as a row header. Its semantics come from the column: the
+   * first column, or the one with `isRowHeader`.
+   */
   rowHeader?: boolean;
   /** Horizontal alignment of the cell content @default "start" */
   horizontalAlign?: "start" | "center" | "end";
@@ -29,28 +31,17 @@ export const TableCell: FC<TableCellProps> = (props) => {
 
   const rootClassName = clsx(
     styles.cell,
+    rowHeader && styles.column,
     horizontalAlign !== "start" &&
       styles[`horizontal-align-${horizontalAlign}`],
     className,
   );
 
-  const content = (
-    <Suspense fallback={<SkeletonText width="100px" />}>
-      <SkeletonRawText>{children}</SkeletonRawText>
-    </Suspense>
-  );
-
-  if (rowHeader) {
-    return (
-      <TableColumn className={rootClassName} {...rest}>
-        {content}
-      </TableColumn>
-    );
-  }
-
   return (
     <Aria.Cell className={rootClassName} {...rest}>
-      {content}
+      <Suspense fallback={<SkeletonText width="100px" />}>
+        <SkeletonRawText>{children}</SkeletonRawText>
+      </Suspense>
     </Aria.Cell>
   );
 };

@@ -127,10 +127,9 @@ themselves. They cannot be generated, so this package rebuilds them in Vue:
 | Component                                           | The rebuild                                                                                           |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `Modal`, `Popover`, `LightBox`                      | render `OverlayContent` / `PopoverContent` with Flow's own classes, and configure their children      |
-| `Modal confirmOnClose`                              | a confirmation modal bound to the parent's `isConfirmingClose`, with its own copy of the four strings |
+| `Modal confirmOnClose`                              | a confirmation modal with its own controller, opened while the parent asks; its own copy of the texts |
 | `IconSetProvider`                                   | provide/inject; its `IconSet` is partial, because there is no complete second set to hand it          |
 | `ModalTrigger`, `PopoverTrigger`, `LightBoxTrigger` | a `DialogTrigger` whose `Button` (also inside an `Action`) gets the `onPress` that opens it           |
-| `useOverlayController`, `useModalController`        | a `ref` plus `provide`/`inject`; given a type, the surrounding overlay's controller, as in Flow       |
 | `Action`, `ActionBatch`                             | run, report pending/succeeded/failed on the button, close the overlay                                 |
 | `NotificationProvider`, `useNotificationController` | a reactive list, with the auto-close timer that pauses on hover and focus                             |
 | `DeprecationWarningProvider`, `useWarnDeprecation`  | provide/inject; `RemoteRoot` forwards to the host                                                     |
@@ -138,6 +137,7 @@ themselves. They cannot be generated, so this package rebuilds them in Vue:
 | `CountryOptions`                                    | `Option`s from `country-codes-list`, named by `Intl.DisplayNames`                                     |
 | `Wrap`, `BrowserOnly`                               | the same two-line components                                                                          |
 | `List`, `ListItemView`                              | the arrangement around `@mittwald/flow-components-base`, plus the batch loading                       |
+| `useOverlayController`, `useModalController`        | refs over the shared `OverlayState`; given a type, the surrounding overlay's controller, as in Flow   |
 | `useIsMounted`, `useOnChange`, `useLanguage`        | composables                                                                                           |
 | `useListMetadata`                                   | what the list's loader sent beside its data                                                           |
 | `Form`                                              | `flr-form` has no Flow component behind it, so the generator never sees it                            |

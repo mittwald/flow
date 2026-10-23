@@ -13,7 +13,13 @@ export class TableCell<T> {
   loadingView?: ReactElement;
 
   public constructor(row: TableRow<T>, shape: TableCellShape<T> = {}) {
-    const { renderFn, loadingView, ...rest } = shape;
+    // `children` is the render function, which arrives as `renderFn`.
+    const {
+      renderFn,
+      loadingView,
+      children: ignoredChildren,
+      ...rest
+    } = shape as TableCellShape<T> & { children?: unknown };
     this.row = row;
     this.renderFn = renderFn;
     this.componentProps = rest;

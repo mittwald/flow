@@ -3,7 +3,10 @@ import { join } from "node:path";
 import postcss from "postcss";
 import type { AtRule } from "postcss";
 import type { Plugin } from "vite";
-import { unlayeredMarker } from "./unlayeredMarker.ts";
+import {
+  dropRevertLayerDeclarations,
+  unlayeredMarker,
+} from "./unlayeredMarker.ts";
 
 /**
  * The unlayered marker is a build instruction, not a layer, so it must never
@@ -42,6 +45,8 @@ export const assertNoUnlayeredMarkers = (
 
 export const stripCascadeLayersFromRoot = (root: postcss.Root): void => {
   const layerAtRules: AtRule[] = [];
+
+  dropRevertLayerDeclarations(root);
 
   root.walkAtRules("layer", (atRule) => {
     layerAtRules.push(atRule);

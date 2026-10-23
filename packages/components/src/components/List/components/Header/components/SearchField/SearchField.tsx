@@ -1,5 +1,5 @@
 import type { FC, KeyboardEvent } from "react";
-import { createElement, useEffect, useState } from "react";
+import { createElement, useEffect, useEffectEvent, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
@@ -30,9 +30,11 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
     }
   };
 
+  const autoSubmitSearch = useEffectEvent(submitSearch);
+
   useEffect(() => {
     if (autoSubmit) {
-      const timeout = setTimeout(() => submitSearch(), autoSubmitTimeout);
+      const timeout = setTimeout(() => autoSubmitSearch(), autoSubmitTimeout);
       return () => clearTimeout(timeout);
     }
   }, [searchString, autoSubmit]);
@@ -74,6 +76,9 @@ export const SearchField: FC<Props> = (props) => {
   const render = search.render ?? DefaultSearchFieldRender;
 
   return createElement(render, {
+    // autoFocus only acts on mount, and a disabled field cannot take focus –
+    // remount once the initial loading enables it.
+    key: isDisabled ? "disabled" : "enabled",
     value: search.value,
     onChange: search.setValue.bind(search),
     isDisabled,

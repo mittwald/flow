@@ -27,10 +27,7 @@ export interface DonutChartProps
   size?: "m" | "l";
   /** Divides the fill of the donut chart into segments */
   segments?: DonutChartSegment[];
-  /**
-   * Whether the legend component is shown when segments are used. @default:
-   * true
-   */
+  /** Whether the legend component is shown when segments are used. @default true */
   showLegend?: boolean;
   /** The position of the legend. @default "right" */
   legendPosition?: "top" | "left" | "bottom" | "right";

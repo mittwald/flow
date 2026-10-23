@@ -21,6 +21,7 @@ const renderPicker = (props?: {
   defaultValue?: CalendarDate;
   isDisabled?: boolean;
   onChange?: (value: unknown) => void;
+  onOpenChange?: (isOpen: boolean) => void;
 }) =>
   render(
     <DatePicker {...props}>
@@ -93,6 +94,30 @@ test("picking a day reports the date and closes the calendar", async () => {
   });
   await expect.element(calendar()).not.toBeInTheDocument();
   await expect.element(segment("day")).toHaveTextContent("12");
+});
+
+test("onOpenChange reports opening and an Escape close without suppressing it", async () => {
+  const onOpenChange = vi.fn();
+  renderPicker({ onOpenChange });
+
+  await calendarButton().click();
+  await expect.element(calendar()).toBeVisible();
+  expect(onOpenChange).toHaveBeenLastCalledWith(true);
+
+  await userEvent.keyboard("{Escape}");
+  await expect.element(calendar()).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenLastCalledWith(false);
+});
+
+test("onOpenChange reports the close after picking a day", async () => {
+  const onOpenChange = vi.fn();
+  renderPicker({ defaultValue: new CalendarDate(2025, 3, 10), onOpenChange });
+
+  await calendarButton().click();
+  await day(/March 12, 2025/).click();
+
+  await expect.element(calendar()).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenLastCalledWith(false);
 });
 
 test("a disabled date picker does not open its calendar", async () => {

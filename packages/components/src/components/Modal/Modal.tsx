@@ -7,6 +7,7 @@ import {
   PropsContextProvider,
 } from "@/lib/propsContext";
 import { OverlayController } from "@/lib/controller/overlay";
+import { useOverlayContext } from "@/lib/controller/overlay/context";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -22,6 +23,7 @@ import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsCont
 import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import { useVirtualKeyboardVisible } from "@/lib/hooks/dom/useVirtualKeyboardVisible";
+import useSelector from "@/lib/mobx/useSelector";
 import locales from "./locales/*.locale.json";
 
 type SupportedOverlayProps = Pick<
@@ -79,10 +81,21 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
 
+  // The controller `Overlay` will use, if it exists yet: from props or from a
+  // trigger. Without one (a standalone Modal) `Overlay` creates its own, and
+  // the keyboard is tracked whether the modal is open or not.
+  const controllerFromContext = useOverlayContext().byType.Modal;
+  const knownController = controller ?? controllerFromContext;
+  const isOpenFromController = useSelector(
+    () => knownController?.isOpen ?? true,
+    [knownController],
+  );
+  const isOpen = overlayProps.isOpen ?? isOpenFromController;
+
   // On mobile the header/footer are docked (sticky) while at rest, but flow
   // normally while the on-screen keyboard is open so the content gets the full
   // available space (see Modal.module.scss). #2423
-  const keyboardVisible = useVirtualKeyboardVisible();
+  const keyboardVisible = useVirtualKeyboardVisible(isOpen);
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
@@ -94,6 +107,12 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const generatedId = useId();
 
+  const closeButtonClassName = clsx(
+    styles.closeButton,
+    showCloseButton === true && styles.alwaysVisible,
+    showCloseButton === false && styles.alwaysHidden,
+  );
+
   const header = (children: ReactNode) => (
     <>
       <DivView className={styles.headerTitle}>{children}</DivView>
@@ -104,14 +123,7 @@ export const Modal = flowComponent("Modal", (props) => {
               variant="plain"
               color="secondary"
               aria-label={stringFormatter.format("close")}
-              className={clsx(
-                styles.closeButton,
-                showCloseButton === true
-                  ? styles.alwaysVisible
-                  : showCloseButton === false
-                    ? styles.alwaysHidden
-                    : undefined,
-              )}
+              className={closeButtonClassName}
             >
               <IconClose />
             </ButtonView>

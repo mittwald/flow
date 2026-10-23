@@ -3,7 +3,7 @@
 @use "@/styles/mixins/skeleton";
 
 .badge {
-  display: flex;
+  display: inline-flex;
   width: fit-content;
   max-width: 100%;
 

@@ -9,7 +9,13 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { use, useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  use,
+  useState,
+  useSyncExternalStore,
+  type FC,
+  type ReactNode,
+} from "react";
 import { test, type Mock } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { RouterProvider } from "react-aria-components";
@@ -19,6 +25,7 @@ import {
   type SettingsJson,
 } from "../SettingsProvider";
 import { FilterValue } from "./model/filter/FilterValue";
+import { DeprecationWarningProvider } from "../DeprecationWarningProvider";
 import Content from "../Content";
 import { Heading } from "../Heading";
 import { ContextMenu, MenuItem } from "../ContextMenu";
@@ -28,6 +35,8 @@ import { TableCell } from "./setupComponents/TableCell";
 import { TableColumn } from "./setupComponents/TableColumn";
 import { TableHeader } from "./setupComponents/TableHeader";
 import { TableRow } from "./setupComponents/TableRow";
+import rowStyles from "./components/Table/Table.module.scss";
+import { ListSearch } from "./setupComponents/ListSearch";
 
 interface Data {
   num: number;
@@ -830,6 +839,68 @@ describe("Sorting", () => {
       listItem42TextContent + listItem43TextContent,
     );
   });
+
+  test("Hidden sorting alone offers no all filters modal", async () => {
+    await render(
+      getTestElement(
+        [43, 42],
+        <>
+          {/* Without a search the header renders no options at all */}
+          <ListSearch />
+          <ListSorting<Data> defaultEnabled="hidden" property="num" />
+        </>,
+      ),
+    );
+    await expect.element(listItem42).toBeInTheDocument();
+    expect(
+      page
+        .getByRole("button", { name: "All filters", includeHidden: true })
+        .elements(),
+    ).toHaveLength(0);
+  });
+});
+
+describe("Search", () => {
+  test("submits the typed term after a delay", async () => {
+    await render(getTestElement([42, 43], <ListSearch />));
+
+    await userEvent.fill(page.getByRole("searchbox"), "43");
+
+    await expect.element(listItem42).not.toBeInTheDocument();
+    await expect.element(listItem43).toBeInTheDocument();
+    await expect.element(page.getByRole("searchbox")).toHaveFocus();
+  });
+
+  test("autoFocus focuses the field once the initial loading enables it", async () => {
+    let resolveLoader: (() => void) | undefined;
+
+    const loader: AsyncDataLoader<Data> = async () => {
+      await new Promise<void>((resolve) => {
+        resolveLoader = resolve;
+      });
+      return { data: [{ num: 42 }] };
+    };
+
+    await render(
+      <List aria-label="Test">
+        <ListSearch autoFocus />
+        <ListLoaderAsync<Data>>{loader}</ListLoaderAsync>
+        <ListItem<Data> textValue={({ num }) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    const searchField = page.getByRole("searchbox");
+    await expect.element(searchField).toBeDisabled();
+    await expect.poll(() => resolveLoader).toBeDefined();
+
+    resolveLoader?.();
+
+    await expect.element(listItem42).toBeInTheDocument();
+    await expect.element(searchField).toBeEnabled();
+    await expect.element(searchField).toHaveFocus();
+  });
 });
 
 describe("View mode", () => {
@@ -958,7 +1029,8 @@ describe("Item rendering", () => {
   });
 
   // A render function whose identity never changes leaves the memoized item no
-  // signal to follow — `dependencies` is the consumer's way to give it one.
+  // signal to follow — `renderDependencies` is the consumer's way to give it
+  // one, and the deprecated `dependencies` still does.
   const store = {
     selected: [] as number[],
     version: 0,
@@ -991,34 +1063,349 @@ describe("Item rendering", () => {
     store.toggle(num);
   };
 
-  const StoreList = () => {
+  const StoreList: FC<{ deprecatedProp?: boolean }> = ({ deprecatedProp }) => {
     const version = useSyncExternalStore(subscribeToStore, () => store.version);
 
     return (
       <List aria-label="Test" onAction={toggleStoreItem}>
         <ListStaticData<Data> data={selectableData} />
-        <ListItem<Data> textValue={storeItemTextValue} dependencies={[version]}>
+        <ListItem<Data>
+          textValue={storeItemTextValue}
+          {...(deprecatedProp
+            ? { dependencies: [version] }
+            : { renderDependencies: [version] })}
+        >
           {renderStoreItem}
         </ListItem>
       </List>
     );
   };
 
-  test("items follow the dependencies a stable render function declares", async () => {
-    store.selected = [];
-    store.version = 0;
+  test.each([
+    ["renderDependencies", false],
+    ["deprecated dependencies", true],
+  ])(
+    "items follow the %s a stable render function declares",
+    async (_, deprecatedProp) => {
+      store.selected = [];
+      store.version = 0;
 
-    await render(<StoreList />);
+      await render(<StoreList deprecatedProp={deprecatedProp} />);
 
-    await userEvent.click(page.getByText("Item: 42 unselected"));
+      await userEvent.click(page.getByText("Item: 42 unselected"));
+      await expect
+        .element(page.getByText("Item: 42 selected"))
+        .toBeInTheDocument();
+
+      await userEvent.click(page.getByText("Item: 42 selected"));
+      await expect
+        .element(page.getByText("Item: 42 unselected"))
+        .toBeInTheDocument();
+    },
+  );
+
+  test("the dependencies prop warns that it is deprecated", async () => {
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const onWarning = vi.fn();
+
+    await render(
+      <DeprecationWarningProvider onWarning={onWarning}>
+        <StoreList deprecatedProp />
+      </DeprecationWarningProvider>,
+    );
+
     await expect
-      .element(page.getByText("Item: 42 selected"))
+      .poll(() => onWarning.mock.calls.flat())
+      .toContain(
+        "The 'dependencies' prop of 'List.Item' is deprecated and will be removed in a future release. Use 'renderDependencies' instead.",
+      );
+  });
+
+  // An inline render function that declares what it reads skips re-renders
+  // its parent causes for anything else.
+  const InlineList: FC<{ deprecatedProp?: boolean }> = ({ deprecatedProp }) => {
+    const [selected, setSelected] = useState(false);
+    const [unrelated, setUnrelated] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setUnrelated((c) => c + 1)}>Bump</button>
+        <List aria-label="Test" onAction={() => setSelected((s) => !s)}>
+          <ListStaticData<Data> data={selectableData} />
+          <ListItem<Data>
+            textValue={({ num }) => String(num)}
+            {...(deprecatedProp
+              ? { dependencies: [selected] }
+              : { renderDependencies: [selected] })}
+          >
+            {({ num }) => {
+              inlineRenderCount++;
+              return (
+                <span>
+                  Item: {num} {selected ? "selected" : "unselected"} at{" "}
+                  {unrelated}
+                </span>
+              );
+            }}
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+  let inlineRenderCount = 0;
+
+  test("an inline render function with renderDependencies skips unrelated parent re-renders", async () => {
+    inlineRenderCount = 0;
+    await render(<InlineList />);
+    await expect
+      .element(page.getByText("Item: 42 unselected at 0"))
+      .toBeInTheDocument();
+    const before = inlineRenderCount;
+
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    expect(inlineRenderCount).toBe(before);
+
+    await userEvent.click(page.getByText("Item: 42 unselected at 0"));
+    await expect
+      .element(page.getByText("Item: 42 selected at 2"))
+      .toBeInTheDocument();
+  });
+
+  // The deprecated prop keeps its shipped meaning: it only adds to the render
+  // function's identity, so state it does not list still reaches the item.
+  test("an inline render function with deprecated dependencies follows state it does not list", async () => {
+    await render(<InlineList deprecatedProp />);
+    await expect
+      .element(page.getByText("Item: 42 unselected at 0"))
       .toBeInTheDocument();
 
-    await userEvent.click(page.getByText("Item: 42 selected"));
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+
     await expect
-      .element(page.getByText("Item: 42 unselected"))
+      .element(page.getByText("Item: 42 unselected at 1"))
       .toBeInTheDocument();
+  });
+});
+
+describe("Inline item callbacks", () => {
+  const data: Data[] = [{ num: 42 }];
+
+  // Hoisted, so only the inline callbacks below change on a parent re-render.
+  let renderCount = 0;
+  const renderItem = ({ num }: Data) => {
+    renderCount++;
+    return <span>Item: {num}</span>;
+  };
+
+  const ParentWithState: FC<{
+    onAction?: (num: number, count: number) => void;
+    labelWithCount?: boolean;
+    withHref?: boolean;
+    hrefWithCount?: boolean;
+  }> = ({ onAction, labelWithCount, withHref, hrefWithCount }) => {
+    const [count, setCount] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setCount((c) => c + 1)}>Bump</button>
+        <List
+          aria-label="Test"
+          onAction={({ num }: Data) => onAction?.(num, count)}
+        >
+          <ListStaticData<Data> data={data} />
+          <ListItem<Data>
+            textValue={({ num }) =>
+              labelWithCount ? `${num} at ${count}` : String(num)
+            }
+            href={
+              withHref || hrefWithCount
+                ? ({ num }) =>
+                    `${location.origin}/domains/${num}${hrefWithCount ? `?at=${count}` : ""}`
+                : undefined
+            }
+          >
+            {renderItem}
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+
+  const bump = page.getByRole("button", { name: "Bump" });
+
+  test("a parent re-render does not re-render items for new inline callbacks", async () => {
+    renderCount = 0;
+    await render(<ParentWithState withHref />);
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+    const before = renderCount;
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+
+    expect(renderCount).toBe(before);
+  });
+
+  test("the latest onAction is called after a parent re-render", async () => {
+    const onAction = vitest.fn();
+    await render(<ParentWithState onAction={onAction} />);
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    await userEvent.click(page.getByText("Item: 42"));
+
+    expect(onAction).toHaveBeenCalledExactlyOnceWith(42, 2);
+  });
+
+  test("an inline href still updates the item", async () => {
+    await render(<ParentWithState hrefWithCount />);
+    await expect.element(page.getByText("Item: 42")).toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect
+      .poll(() => document.querySelector("[role=row] a")?.getAttribute("href"))
+      .toBe(`${location.origin}/domains/42?at=1`);
+  });
+
+  test("an inline textValue still updates the item", async () => {
+    await render(<ParentWithState labelWithCount />);
+    await expect
+      .element(page.getByRole("row", { name: "42 at 0" }))
+      .toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect
+      .element(page.getByRole("row", { name: "42 at 1" }))
+      .toBeInTheDocument();
+  });
+});
+
+describe("Table rows", () => {
+  const data: Data[] = [{ num: 42 }];
+  let cellRenderCount = 0;
+
+  const TableList: FC<{
+    withDependencies?: boolean;
+    cellClassFromCount?: boolean;
+    rowClassFromCount?: boolean;
+    rowClassName?: string;
+    onAction?: (num: number, count: number) => void;
+  }> = ({
+    withDependencies,
+    cellClassFromCount,
+    rowClassFromCount,
+    rowClassName,
+    onAction,
+  }) => {
+    const [selected, setSelected] = useState(false);
+    const [count, setCount] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setCount((c) => c + 1)}>Bump</button>
+        <button onClick={() => setSelected((s) => !s)}>Select</button>
+        <List
+          aria-label="Test"
+          defaultViewMode="table"
+          onAction={({ num }: Data) => onAction?.(num, count)}
+        >
+          <ListStaticData<Data> data={data} />
+          <Table>
+            <TableHeader>
+              <TableColumn>Num</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow
+                renderDependencies={withDependencies ? [selected] : undefined}
+                className={rowClassFromCount ? `at-${count}` : rowClassName}
+              >
+                <TableCell
+                  className={cellClassFromCount ? `at-${count}` : undefined}
+                >
+                  {({ num }: Data) => {
+                    cellRenderCount++;
+                    return `Row: ${num} ${selected ? "selected" : "unselected"}`;
+                  }}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </List>
+      </>
+    );
+  };
+
+  const bump = page.getByRole("button", { name: "Bump" });
+  const select = page.getByRole("button", { name: "Select" });
+
+  test("a row with renderDependencies skips unrelated parent re-renders", async () => {
+    cellRenderCount = 0;
+    await render(<TableList withDependencies />);
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+    const before = cellRenderCount;
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    expect(cellRenderCount).toBe(before);
+
+    await userEvent.click(select);
+    await expect
+      .element(page.getByText("Row: 42 selected"))
+      .toBeInTheDocument();
+  });
+
+  test("a row with renderDependencies re-renders when a cell prop changes", async () => {
+    await render(<TableList withDependencies cellClassFromCount />);
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect.poll(() => document.querySelector(".at-1")).not.toBeNull();
+  });
+
+  test("a row with renderDependencies re-renders when a row prop changes", async () => {
+    await render(<TableList withDependencies rowClassFromCount />);
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(bump);
+
+    await expect.poll(() => document.querySelector("tr.at-1")).not.toBeNull();
+  });
+
+  test("a row's className adds to the row's own classes", async () => {
+    await render(<TableList rowClassName="custom" onAction={vitest.fn()} />);
+
+    await expect
+      .element(page.getByRole("row").nth(1))
+      .toHaveClass("custom", rowStyles.row, rowStyles.hasAction);
+  });
+
+  test("a row without renderDependencies follows parent state", async () => {
+    await render(<TableList />);
+
+    await userEvent.click(select);
+    await expect
+      .element(page.getByText("Row: 42 selected"))
+      .toBeInTheDocument();
+  });
+
+  test("the latest onAction is called after a parent re-render", async () => {
+    const onAction = vitest.fn();
+    await render(<TableList withDependencies onAction={onAction} />);
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    await userEvent.click(page.getByText("Row: 42 unselected"));
+
+    expect(onAction).toHaveBeenCalledExactlyOnceWith(42, 2);
   });
 });
 

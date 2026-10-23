@@ -187,6 +187,31 @@ round trip late, so a green `Local` says nothing about `Remote`.
 A plain `click()` or `fill()` needs no wait: the locator action resolves after
 the browser has moved the focus.
 
+### Waiting for the code highlighting
+
+The preamble cannot wait for CodeMirror's syntax highlighting either. CodeMirror
+parses the code for at most 20ms when the editor is created. The rest stays
+plain and gets parsed in an idle callback 100 to 500ms later, after the
+preamble's 100ms quiet window. Two identical plain frames still pass the
+matcher's stability check, and `update-screenshots` committed one as a reference
+on #3504.
+
+So a scenario that renders highlighted code (a `CodeBlock` or `CodeEditor` with
+a `language`, a Markdown code fence with one) waits for it after rendering, with
+the number of highlighted editors it renders:
+
+```tsx
+await render(<CodeBlock language="json" code={code} />);
+
+await waitForHighlightedCode(1); // from src/tests/lib/codeHighlighting.ts
+
+await testScreenshot("CodeBlock");
+```
+
+It waits until the last token of each editor's code is highlighted, so the code
+has to end on a token the highlighter colors, as a JSON object does with its
+closing brace.
+
 ### Notes on Chromium
 
 Due to its wide adoption, Chromium would normally be a good choice as a test
@@ -398,16 +423,27 @@ The **iframe harness** runs on every pull request and push, as the
 when nothing it covers changed, and the published versions it installs are
 cached on `lerna.json`.
 
-The **in-process harness** does not, and neither does the full per-version
-matrix. Both harnesses run in the **scheduled** visual workflow
+The same job runs the **in-process harness** over the visual tests the PR
+changed (`FLOW_CROSS_VERSION_FILES`), against every target version. A test that
+starts using a component or prop an old version lacks fails there, before the
+merge, and needs a `test.skipIf(crossVersion({ below }))` gate. Locally:
+
+```sh
+FLOW_CROSS_VERSION_FILES="src/tests/visual/Tabs.browser.test.tsx" \
+  pnpm --filter @mittwald/flow-remote-react-components test:cross-version-inprocess
+```
+
+The whole in-process corpus does not run on a PR, and neither does the full
+per-version matrix. Both harnesses run in the **scheduled** visual workflow
 (`test-visual-scheduled.yml`) twice a day, sharded per target version. Failures
 alert Slack.
 
 #### Running them on a pull request
 
-The PR job covers one harness against one version set. A divergence that only
-the in-process harness or an older target sees is caught by the next scheduled
-run — after the PR has merged. **Run everything on-demand by adding the
+The PR job covers the iframe harness and the changed visual tests. A divergence
+that only the rest of the in-process corpus sees — a component change that shows
+up in a test the PR did not touch — is caught by the next scheduled run, after
+the PR has merged. **Run everything on-demand by adding the
 `run-cross-version-tests` label to the PR** (`test-cross-version-label.yml`): it
 runs both harnesses against the PR branch and comments a per-version PASS/FAIL
 summary. The label removes itself, so re-adding it re-runs.

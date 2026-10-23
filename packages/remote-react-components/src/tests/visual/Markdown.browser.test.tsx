@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
 import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
@@ -22,7 +23,7 @@ test.each(testEnvironments)(
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Markdown color={color}>
                 {"## Heading 2\n" +
-                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](#)."}
+                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](https://example.com)."}
               </Markdown>
             </AccentBox>
           </Wrap>
@@ -59,6 +60,8 @@ test.each(testEnvironments)(
           "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
       </Markdown>,
     );
+
+    await waitForHighlightedCode(1);
 
     await testScreenshot("Markdown content");
   },

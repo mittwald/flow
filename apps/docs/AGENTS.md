@@ -75,6 +75,29 @@ Next.js documentation site for the flow Styleguide, deployed to
   directives to `next-env.d.ts`, but that file is generated and gitignored, so
   it is absent in a fresh CI checkout — without the committed stand-in every
   `.png`/`.webp` import in `src/app/page.tsx` fails as TS2307.
+- **The Styleguide renders FontAwesome Pro icons** (`@mittwald/flow-icons-pro`).
+  The real `@fortawesome/sharp-regular-svg-icons` stays out of the lockfile, so
+  `pnpm install` needs no license: `build` and `dev` first run
+  `install:pro-icons`, which fetches it into the gitignored `.pro-icons/` —
+  locally from npm.mittwald.it (mittwald network only), in CI from FontAwesome's
+  registry with the `FONT_AWESOME_PACKAGE_TOKEN` secret. The token is never
+  written anywhere; the deploy workflows also check `out/` for it.
+  `next.config.js` bundles the package whenever it is installed. Where it cannot
+  be — a fork's PR, Dependabot — the script skips, both package names are
+  aliased to the stand-ins in `src/app/_lib/withoutProIcons/`, and the site
+  shows the default icons. Production refuses that
+  (`FLOW_DOCS_REQUIRE_PRO_ICONS=1`).
+- **An icon the Styleguide itself needs** (header, navigation, wireframes) is a
+  Flow icon where one fits, so it follows the icon set. Otherwise it is
+  `<Icon><FontAwesomeIcon icon={…} /></Icon>`, with the definition imported from
+  `@fortawesome/sharp-regular-svg-icons` (brands from
+  `@fortawesome/free-brands-svg-icons`; a shape only the solid style draws, like
+  the half-filled system-theme circle, from
+  `@fortawesome/free-solid-svg-icons`). TypeScript checks that import against
+  `withoutProIcons/sharpRegular.ts` (`paths` in `tsconfig.json`), which serves
+  the free solid set: a Pro-only icon (`faCommand`) needs a free substitute
+  there, or the type check fails. Code examples in `src/content` keep their
+  Tabler icons — they show consumers how to place an icon from outside the set.
 - **Next 16 differs from what a model was trained on** — APIs, conventions and
   file structure moved. Read the relevant guide in
   `node_modules/next/dist/docs/` (resolved from this directory; in this monorepo

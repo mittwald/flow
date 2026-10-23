@@ -4,6 +4,7 @@
   flex-shrink: 0;
   max-width: none;
   display: inline-block;
+  vertical-align: baseline;
 
   @extend .size-m;
 
@@ -16,15 +17,29 @@
       /*
        * FontAwesome inserts its stylesheet as an unlayered `<style>` element at
        * runtime (`autoAddCss` defaults to true), outside of Flow's build, and
-       * sets `box-sizing: content-box` on `.svg-inline--fa`. Unlayered CSS beats
-       * layered CSS regardless of specificity, so this override only applies in
-       * the layered stylesheet variant if it leaves the cascade layer as well.
+       * sizes `.svg-inline--fa` itself (`content-box`, `1.25em` × `1em`).
+       * Unlayered CSS beats layered CSS regardless of specificity, so this
+       * override only applies in the layered stylesheet variant if it leaves
+       * the cascade layer as well.
+       *
+       * `display` and `vertical-align` are set the same way: a context hides
+       * its icon (`display: none` on `Breadcrumb`'s last separator, an
+       * unselected `Segment`'s checkmark) or aligns it (`Alert`, `Link`).
+       *
+       * The size goes back to Flow's layered rules (`revert-layer`) instead of
+       * the token, so a context's size (`Avatar`'s 70 %) still applies. The
+       * variants without layers drop these declarations — there Flow's rules
+       * already win, and `revert-layer` would discard them all.
        *
        * Marked at the leaf rather than in a separate block, because these rules
        * live in a size mixin – a block would have to duplicate it.
        */
       &:global(.svg-inline--fa) {
         @layer flow.unlayered {
+          width: revert-layer;
+          height: revert-layer;
+          display: revert-layer;
+          vertical-align: revert-layer;
           box-sizing: border-box;
           padding: $faPadding;
         }
@@ -35,6 +50,17 @@
   @include size(m, var(--size-rem--xxs));
   @include size(s, var(--size-rem--xxs));
   @include size(l, var(--size-rem--xs));
+
+  /*
+   * FontAwesome also sets `vertical-align: -0.125em`, which would shift the
+   * icon a context aligns (`Heading`, `Alert`, `Link`). Same mechanism as the
+   * size above.
+   */
+  &:global(.svg-inline--fa) {
+    @layer flow.unlayered {
+      vertical-align: revert-layer;
+    }
+  }
 
   /* Colors */
   @mixin color($color) {

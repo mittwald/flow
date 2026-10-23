@@ -18,6 +18,32 @@ component). The element wrapper, its `v-model` mapping and the root are about a
 tenth of it; the rest is `flr-universal`, and the `List` alone is nearly half of
 the hand-written code.
 
+## What a change costs per binding
+
+Every binding is maintained in this repository, so a change to Flow reaches each
+of them — or does not:
+
+| A change to…                                    | Reaches the other bindings                                        |
+| ----------------------------------------------- | ----------------------------------------------------------------- |
+| a `@flr-generate` component's props             | by generator — regenerate and commit, nothing hand-written        |
+| an icon                                         | by generator                                                      |
+| a `flr-universal` composition (`Modal`, `List`) | **not at all** — every binding rebuilds it by hand                |
+| a class name or UI string one of those uses     | **not at all** — copied by hand; lint and a unit test catch drift |
+| the `List`'s behaviour                          | through `packages/components-base`, if the change is in the model |
+| the overlay controller's state                  | through `packages/components-base` (`OverlayState`)               |
+
+The gate is the **`parity` CI job**: it renders the React package's whole visual
+corpus through the Vue binding and asserts the host builds the same DOM —
+overlays included — plus a `List` harness written once per binding. The `List`
+harness takes a **list of bindings** (`e2e/list-parity/harness/bindings/*`), so
+a third framework joins it as a file. The corpus harness does not: React is the
+reference and Vue the compared pass, and a third binding needs a converter next
+to `reactToVue.ts` and a pass of its own. Both suites live in the Vue package:
+`pnpm nx test:parity remote-vue-components`. Neither can see what the corpus
+does not render, so a `flr-universal` change still needs a look at each
+binding's rebuild — for Vue that is
+`packages/remote-vue-components/src/{components,overlays,list}`.
+
 ## What already works for any framework
 
 | Layer                                                   | Framework-specific? |
@@ -170,6 +196,21 @@ skip the re-export for names `flr-universal` already carries; the list is
 already parsed for the status registry
 (`dev/status-registry/parseFlrUniversalComponentNames.ts`).
 
+**Flow moves the compositions behind generated elements.** The order, agreed
+2026-10-22:
+
+1. The overlay controller's state moves to `packages/components-base`
+   (`OverlayState`). Done.
+2. The overlay family — `Modal`, `Popover`, `LightBox` and their triggers —
+   becomes `@flr-generate`, so the host materializes the composition and no
+   binding rebuilds it.
+3. A framework-free core runtime (`connect()`, `applyProps()`, `slot()`,
+   `createIcon()`) as a new beta package. Vue and Svelte delegate to it;
+   Angular, Lit and plain DOM use it directly.
+
+Step 1 goes first: it touches no protocol, and every binding still needs a
+controller to open and close an overlay from code after step 2.
+
 One thing was a project of its own, and it is the worked example for every
 other:
 
@@ -190,7 +231,10 @@ other:
   `useState` is an observable. Each binding brings the subscription (~15 lines:
   `useSelector`, `watchMobxValue`) and the one job the shared model leaves open,
   which is fetching a batch. React was rewired onto each piece as it moved, so
-  both bindings run the same rules rather than two copies of them.
+  both bindings run the same rules rather than two copies of them. The overlay
+  controller took the same way: `OverlayState` holds the open state, the
+  handlers and the close confirmation, React's `OverlayController` subclasses
+  it, and Vue's controller wraps it in refs.
 
   Two things stay per binding, and both are shapes of the same problem.
   Fetching, because Suspense has no Vue counterpart: Vue's list drives the async
@@ -214,10 +258,12 @@ other:
 - `packages/remote-<framework>-components`. It ships as soon as `private` is
   absent — and a brand-new package name needs two one-time steps on npm before
   the merge, or `publish.yml` fails with `E404 Not found` in the middle of a
-  release. npm binds a **Trusted Publisher** only to a package that exists, so a
-  maintainer first **publishes it by hand** (`@mittwald/flow-codemods` did:
+  release, after the other packages have already gone out. npm binds a **Trusted
+  Publisher** only to a package that exists, so a maintainer first **publishes
+  it by hand** under the `next` dist-tag (`@mittwald/flow-codemods` did:
   `1.1.0-next.10` by hand, provenance from `1.1.0-next.11` on), then binds the
   Trusted Publisher to `publish.yml` — one workflow filename per package.
+  Nothing in this repository can do either step.
 - `project.json` with `implicitDependencies: ["components"]` and a `build` that
   depends on `components:build:remote-components`.
 - An emitter in the generator + the output path in `components/project.json`.
@@ -276,9 +322,6 @@ other:
 
 ## Open questions
 
-- **Does every binding own its `flr-universal` rebuild, or does Flow move the
-  compositions behind generated elements?** Every binding added before that
-  decision pays for it twice.
 - **One demo app or one per framework?** The switcher in `remote-dom-demo`
   works, but each framework needs its own route tree, and only one remote may be
   connected at a time.

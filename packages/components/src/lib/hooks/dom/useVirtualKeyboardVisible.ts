@@ -22,13 +22,16 @@ export const isVirtualKeyboardVisible = (
  * VisualViewport API. On iOS and Android the layout viewport stays while the
  * visual viewport shrinks by the keyboard height. Returns `false` where
  * VisualViewport is unavailable (SSR, very old browsers).
+ *
+ * Reading the viewport height forces a synchronous layout, so the hook neither
+ * reads nor listens while `isEnabled` is `false`, and returns `false` then.
  */
-export const useVirtualKeyboardVisible = (): boolean => {
+export const useVirtualKeyboardVisible = (isEnabled = true): boolean => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const viewport = window.visualViewport;
-    if (!viewport) {
+    if (!isEnabled || !viewport) {
       return;
     }
     const update = (): void => {
@@ -40,8 +43,9 @@ export const useVirtualKeyboardVisible = (): boolean => {
     return () => {
       viewport.removeEventListener("resize", update);
       viewport.removeEventListener("scroll", update);
+      setVisible(false);
     };
-  }, []);
+  }, [isEnabled]);
 
-  return visible;
+  return isEnabled && visible;
 };

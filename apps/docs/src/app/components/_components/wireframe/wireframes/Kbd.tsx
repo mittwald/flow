@@ -6,14 +6,15 @@ import {
   WIcon,
 } from "@/app/components/_components/wireframe/primitives";
 import { Icon } from "@mittwald/flow-react-components";
-import { IconCommand } from "@tabler/icons-react";
+import { faCommand } from "@fortawesome/sharp-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const KbdWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WBox width="fit-content">
       <WIcon>
         <Icon>
-          <IconCommand />
+          <FontAwesomeIcon icon={faCommand} />
         </Icon>
       </WIcon>
     </WBox>

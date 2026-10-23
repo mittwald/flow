@@ -27,6 +27,10 @@ packages/remote-react-components/e2e/cross-version/__html__
 # .gitignore, so a local run would otherwise fail `pnpm lint` — and the push.
 packages/remote-vue-components/e2e/*/.refs
 packages/remote-vue-components/e2e/*/.vitest
+
+# `test:cross-version:prepare` writes its version manifest here on every run
+# (gitignored in the package), with the same consequence as above.
+packages/remote-react-components/cross-version.manifest.json
 .nx
 .yarn
 .next

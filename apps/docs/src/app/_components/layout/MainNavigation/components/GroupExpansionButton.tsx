@@ -1,7 +1,8 @@
 "use client";
 import type { FC } from "react";
 import { Button, Icon } from "@mittwald/flow-react-components";
-import { IconChevronsDown, IconChevronsUp } from "@tabler/icons-react";
+import { faAnglesDown, faAnglesUp } from "@fortawesome/sharp-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGroupExpansion } from "@/app/_components/layout/MainNavigation/components/GroupExpansion";
 import { useComponentGrouping } from "@/app/_lib/useComponentGrouping";
 
@@ -16,6 +17,8 @@ export const GroupExpansionButton: FC = () => {
   }
 
   const allExpanded = groupExpansion.expandAll === true;
+  const collapseIcon = <FontAwesomeIcon icon={faAnglesUp} />;
+  const expandIcon = <FontAwesomeIcon icon={faAnglesDown} />;
 
   return (
     <Button
@@ -26,7 +29,7 @@ export const GroupExpansionButton: FC = () => {
       }
       onPress={groupExpansion.toggle}
     >
-      <Icon>{allExpanded ? <IconChevronsUp /> : <IconChevronsDown />}</Icon>
+      <Icon>{allExpanded ? collapseIcon : expandIcon}</Icon>
     </Button>
   );
 };

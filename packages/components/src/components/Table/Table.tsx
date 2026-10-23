@@ -2,6 +2,7 @@ import type { FC } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Table.module.scss";
+import { useLabelledBySectionHeading } from "@/components/Section/context";
 
 export type TableProps = Omit<
   Aria.TableProps,
@@ -34,6 +35,8 @@ export const Table: FC<TableProps> = (props) => {
     ...rest
   } = props;
 
+  const ariaLabelledBy = useLabelledBySectionHeading(rest);
+
   const rootClassName = clsx(
     styles.table,
     verticalAlign !== "top" && styles[`vertical-align-${verticalAlign}`],
@@ -44,7 +47,11 @@ export const Table: FC<TableProps> = (props) => {
   return (
     <div className={styles.tableContainer}>
       <div className={styles.tableScrollArea} style={{ minWidth }}>
-        <Aria.Table className={rootClassName} {...rest}>
+        <Aria.Table
+          className={rootClassName}
+          {...rest}
+          aria-labelledby={ariaLabelledBy}
+        >
           {children}
         </Aria.Table>
       </div>

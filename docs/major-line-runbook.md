@@ -225,7 +225,15 @@ Give it `--from` / `--to` (defaulting to `main` / `next`, like
 after. Its `--continue` guard — refuse to commit while conflict markers are
 left, keep the merge a true merge commit — is line-agnostic and stays.
 
-## 6. Verify before the first real PR
+## 6. `close-linked-issues.yml` — the branch filter
+
+GitHub resolves `Closes #123` only on the default branch, so the workflow closes
+the issues for the other lines. Its `pull_request_target` trigger lists `next`
+and `next-major` under `branches:` — not `2.x`. Add the line's branch there, or
+a PR merged into `2.x` with `Closes #123` leaves the issue open. The glob filter
+cannot express the regex the commit guard uses, so every line is spelled out.
+
+## 7. Verify before the first real PR
 
 Open a throwaway PR against `2.x` and confirm, in this order:
 
@@ -243,7 +251,7 @@ Open a throwaway PR against `2.x` and confirm, in this order:
    that the `main → next` cascade does not close it, and that
    `pnpm sync:resolve --from next --to 2.x` resolves it.
 
-## 7. Promotion and retirement
+## 8. Promotion and retirement
 
 The promotion is `/prepare-release --from 2.x --to main`. The command is already
 parameterised, and the pieces it depends on carry over:
@@ -268,8 +276,8 @@ Then retire the line, in this order:
    `2.1.0-next.0` on its own — that path is already implemented and needs no
    help.
 2. Remove `2.x` from `publish.yml` (trigger, concurrency, `LINE`, the two
-   line-specific steps), and remove or disable the `next → major` cascade and
-   its drift instance.
+   line-specific steps) and from `close-linked-issues.yml`, and remove or
+   disable the `next → major` cascade and its drift instance.
 3. Delete the ruleset, then the branch. A major line is not kept warm: the next
    one starts from this document again.
 

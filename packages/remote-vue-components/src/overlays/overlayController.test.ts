@@ -1,10 +1,18 @@
 import {
   createOverlayController,
-  createOverlayControllerFor,
   isOverlayController,
+  useConfirmOnCloseSource,
 } from "@/overlays/overlayController";
-import { describe, expect, test } from "vitest";
-import { isRef, reactive, ref } from "vue";
+import { describe, expect, test, vi } from "vitest";
+import {
+  computed,
+  effectScope,
+  isRef,
+  nextTick,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 
 describe("createOverlayController", () => {
   /* Where an app keeps state: `reactive()`, `ref()`, a Pinia store. */
@@ -146,19 +154,123 @@ describe("confirmOnClose", () => {
 });
 
 /*
- * How the confirmation modal is bound to its parent: it is an overlay whose
- * `isOpen` *is* the parent's `isConfirmingClose`, so dismissing it and
- * answering "keep editing" are the same event.
+ * The refs are views of `OverlayState` from `@mittwald/flow-components-base`:
+ * a read subscribes through MobX, a write goes to the state.
  */
-describe("createOverlayControllerFor", () => {
-  test("drives the state it was given", () => {
-    const isConfirming = ref(false);
-    const controller = createOverlayControllerFor(isConfirming);
+describe("refs over the shared state", () => {
+  test("a computed follows a change made through a method", () => {
+    const controller = createOverlayController();
+    const label = computed(() => (controller.isOpen.value ? "open" : "closed"));
+
+    expect(label.value).toBe("closed");
+    controller.open();
+    expect(label.value).toBe("open");
+  });
+
+  /* What a component's render does: an effect that reruns after a change. */
+  test("a watcher sees every change", async () => {
+    const controller = createOverlayController({ isDefaultOpen: true });
+    const seen: unknown[] = [];
+    const scope = effectScope();
+    scope.run(() =>
+      watch(
+        () => [
+          controller.isOpen.value,
+          controller.confirmOnClose.value,
+          controller.isConfirmingClose.value,
+        ],
+        (values) => seen.push(values),
+      ),
+    );
+
+    controller.confirmOnClose.value = true;
+    await nextTick();
+    controller.close();
+    await nextTick();
+    controller.confirmClose();
+    await nextTick();
+    scope.stop();
+
+    expect(seen).toEqual([
+      [true, true, false],
+      [true, true, true],
+      [false, true, false],
+    ]);
+  });
+
+  test("writing isOpen sets the state without running a handler", () => {
+    const controller = createOverlayController();
+    const onOpen = vi.fn();
+    controller.addOnOpen(onOpen);
+
+    controller.isOpen.value = true;
+
+    expect(controller.isOpen.value).toBe(true);
+    expect(onOpen).not.toHaveBeenCalled();
+  });
+
+  test("writing isConfirmingClose false dismisses the confirmation", () => {
+    const controller = createOverlayController({ isDefaultOpen: true });
+    controller.confirmOnClose.value = true;
+    controller.close();
+
+    controller.isConfirmingClose.value = false;
+
+    expect(controller.isConfirmingClose.value).toBe(false);
+    expect(controller.isOpen.value).toBe(true);
+  });
+});
+
+/*
+ * A `<Modal confirm-on-close>` and the app each contribute a source, so
+ * neither overwrites the other.
+ */
+describe("confirmation sources", () => {
+  const withSource = (
+    controller: ReturnType<typeof createOverlayController>,
+    confirmOnClose: () => boolean | undefined,
+  ) => {
+    const scope = effectScope();
+    scope.run(() => useConfirmOnCloseSource(() => controller, confirmOnClose));
+    return () => scope.stop();
+  };
+
+  test("an app's source and a modal's do not overwrite each other", () => {
+    const controller = createOverlayController();
+    const stop = withSource(controller, () => true);
+
+    controller.confirmOnClose.value = false;
+    expect(controller.confirmOnClose.value).toBe(true);
+
+    stop();
+    expect(controller.confirmOnClose.value).toBe(false);
+
+    controller.confirmOnClose.value = true;
+    withSource(controller, () => false);
+    expect(controller.confirmOnClose.value).toBe(true);
+  });
+
+  test("a source follows its value and contributes nothing as undefined", async () => {
+    const controller = createOverlayController();
+    const value = ref<boolean | undefined>(true);
+    const stop = withSource(controller, () => value.value);
+    expect(controller.confirmOnClose.value).toBe(true);
+
+    value.value = undefined;
+    await nextTick();
+    expect(controller.confirmOnClose.value).toBe(false);
+
+    stop();
+  });
+
+  /* As in Flow: opening again does not answer the confirmation. */
+  test("open() leaves a pending confirmation on screen", () => {
+    const controller = createOverlayController({ isDefaultOpen: true });
+    controller.confirmOnClose.value = true;
+    controller.close();
 
     controller.open();
-    expect(isConfirming.value).toBe(true);
 
-    isConfirming.value = false;
-    expect(controller.isOpen.value).toBe(false);
+    expect(controller.isConfirmingClose.value).toBe(true);
   });
 });
