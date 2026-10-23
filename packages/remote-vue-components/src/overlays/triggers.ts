@@ -3,7 +3,10 @@ import { createOverlayTrigger } from "@/overlays/createOverlayTrigger";
 
 /** Opens a `Modal`. */
 export const ModalTrigger = composition(
-  createOverlayTrigger("ModalTrigger", "Modal", { reportsUsage: true }),
+  createOverlayTrigger("ModalTrigger", "Modal", {
+    reportsUsage: true,
+    isOverlayHoistable: true,
+  }),
 );
 
 /** Opens a `Popover`. */
@@ -13,5 +16,8 @@ export const PopoverTrigger = composition(
 
 /** Opens a `LightBox`. */
 export const LightBoxTrigger = composition(
-  createOverlayTrigger("LightBoxTrigger", "LightBox", { reportsUsage: false }),
+  createOverlayTrigger("LightBoxTrigger", "LightBox", {
+    reportsUsage: false,
+    isOverlayHoistable: true,
+  }),
 );

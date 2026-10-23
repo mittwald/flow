@@ -6,6 +6,7 @@ import type { FlowComponentProvisionType } from "@mittwald/flow-react-components
 import {
   flowComponent,
   isFlowComponentName,
+  OverlayHoistProvider,
   useReportComponentUsage,
   ViewCompositionReset,
 } from "@mittwald/flow-react-components/internal";
@@ -43,6 +44,7 @@ export function createFlowRemoteComponent<
     slotProps = true,
     eventProps = {} as never,
     type,
+    hoistOverlays,
   }: RemoteComponentOptions<ElementConstructor, Props> & {
     /*
      * The provision type of the component this stands in for. It has to travel
@@ -54,6 +56,12 @@ export function createFlowRemoteComponent<
      * drops the `onPress` its own trigger just supplied.
      */
     type?: FlowComponentProvisionType;
+    /*
+     * `@flr-hoist-overlays`: overlays declared inside render as a sibling of the
+     * remote element, so the host places them outside its popover. See
+     * `OverlayHoistProvider`.
+     */
+    hoistOverlays?: boolean;
   } = {},
 ): RemoteComponentTypeFromElementConstructor<ElementConstructor> {
   const element = createRemoteComponent(tag, Element, {
@@ -65,7 +73,12 @@ export function createFlowRemoteComponent<
     return flowComponent(
       flowComponentTag,
       (p) => {
-        return createElement(element, p as never, p.children);
+        const remoteElement = createElement(element, p as never, p.children);
+        return hoistOverlays ? (
+          <OverlayHoistProvider>{remoteElement}</OverlayHoistProvider>
+        ) : (
+          remoteElement
+        );
       },
       {
         isRemoteComponent: true,

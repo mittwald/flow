@@ -91,5 +91,7 @@ export const ContextMenu = createFlowRemoteComponent(
       onWheel: { event: "wheel" } as never,
       onWheelCapture: { event: "wheelCapture" } as never,
     },
+
+    hoistOverlays: true,
   },
 );
