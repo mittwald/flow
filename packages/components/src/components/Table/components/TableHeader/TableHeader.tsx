@@ -12,6 +12,8 @@ export const TableHeader: FC<TableHeaderProps> = (props) => {
 
   const rootClassName = clsx(styles.header, className);
 
+  // Assumes the first child renders a column; a wrapper that renders nothing
+  // leaves the table without row header column, and react-aria throws.
   const columns =
     typeof children === "function"
       ? children
