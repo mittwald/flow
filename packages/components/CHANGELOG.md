@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+### Bug Fixes
+
+* **Link:** keep aria-current compatible with react-aria-components 1.22 ([6be7623](https://github.com/mittwald/flow/commit/6be76232088bbd5150859b115e204bbd0e1df286)), closes [#3558](https://github.com/mittwald/flow/issues/3558)
+
 ## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
 
 ### Code Refactoring
