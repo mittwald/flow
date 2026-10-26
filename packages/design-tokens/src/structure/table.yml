@@ -5,8 +5,10 @@ table:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
+  # Groups content like ListItem and FileCard: the separator tone, not the
+  # control border (#3564). The header keeps its 2px line.
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{border.color.200}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
