@@ -26,8 +26,10 @@ list-item:
       value: "{neutral-outline-background-color.hover}"
     pressed:
       value: "{neutral-outline-background-color.pressed}"
+  # Groups content, so the lighter separator tone instead of the control
+  # border (#3564)
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{border.color.200}"
   subtitle-font-size:
     value: "{font-size-text.s}"
   checkbox-color:
