@@ -76,6 +76,33 @@ test("re-rendering a UI component does not re-render Flow components below it", 
   expect(innerRenderCount).toBe(1);
 });
 
+test("a props context of plain objects does not re-render Flow components below it", async () => {
+  const innerName = getComponentName("InnerWithPlainObjectProp");
+  const Outer = flowComponent(getComponentName("OuterWithPlainObject"), (p) => {
+    const props = p as TestComponentProps;
+    return (
+      <PropsContextProvider
+        props={{ [innerName]: { otherProp: { value: "static" } } }}
+      >
+        <div data-prop={props.prop}>{props.children}</div>
+      </PropsContextProvider>
+    );
+  }) as TestComponent;
+
+  let innerRenderCount = 0;
+  const Inner = flowComponent(innerName, () => {
+    usePropsContext();
+    innerRenderCount++;
+    return <span />;
+  }) as TestComponent;
+
+  const children = <Inner />;
+  const { rerender } = await render(<Outer prop="first">{children}</Outer>);
+  await rerender(<Outer prop="second">{children}</Outer>);
+
+  expect(innerRenderCount).toBe(1);
+});
+
 describe("propsContext", () => {
   test("prop is taken from context", async () => {
     const actual = await render(

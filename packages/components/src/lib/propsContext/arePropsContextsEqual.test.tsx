@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { arePropsContextsEqual } from "@/lib/propsContext/arePropsContextsEqual";
+import { dynamic } from "@/lib/propsContext/dynamicProps/dynamic";
 
 describe("arePropsContextsEqual", () => {
   const onPress = () => undefined;
@@ -41,7 +42,22 @@ describe("arePropsContextsEqual", () => {
     expect(arePropsContextsEqual({ Button: {} }, {})).toBe(false);
   });
 
-  test("compares prop values by identity", () => {
+  test("compares plain object values recursively", () => {
+    expect(
+      arePropsContextsEqual(
+        { Button: { tunnel: { id: "button", component: "ListItemView" } } },
+        { Button: { tunnel: { id: "button", component: "ListItemView" } } },
+      ),
+    ).toBe(true);
+    expect(
+      arePropsContextsEqual(
+        { Button: { tunnel: { id: "button", component: "ListItemView" } } },
+        { Button: { tunnel: { id: "avatar", component: "ListItemView" } } },
+      ),
+    ).toBe(false);
+  });
+
+  test("compares functions, elements and refs by identity", () => {
     expect(
       arePropsContextsEqual(
         { Button: { onPress: () => undefined } },
@@ -50,8 +66,30 @@ describe("arePropsContextsEqual", () => {
     ).toBe(false);
     expect(
       arePropsContextsEqual(
-        { Button: { style: { color: "red" } } },
-        { Button: { style: { color: "red" } } },
+        { Button: { wrapWith: <span /> } },
+        { Button: { wrapWith: <span /> } },
+      ),
+    ).toBe(false);
+    expect(
+      arePropsContextsEqual(
+        { Button: { ref: { current: null } } },
+        { Button: { ref: { current: null } } },
+      ),
+    ).toBe(false);
+  });
+
+  test("compares the function of a dynamic prop by identity", () => {
+    const getSize = () => "s" as const;
+    expect(
+      arePropsContextsEqual(
+        { Button: { size: dynamic(getSize) } },
+        { Button: { size: dynamic(getSize) } },
+      ),
+    ).toBe(true);
+    expect(
+      arePropsContextsEqual(
+        { Button: { size: dynamic(() => "s") } },
+        { Button: { size: dynamic(() => "s") } },
       ),
     ).toBe(false);
   });
