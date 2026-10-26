@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.41](https://github.com/mittwald/flow/compare/1.6.0-next.40...1.6.0-next.41) (2026-10-26)
+
+### Bug Fixes
+
+* **Text:** drop the default pretty text wrapping ([#3573](https://github.com/mittwald/flow/issues/3573)) ([1334401](https://github.com/mittwald/flow/commit/133440137e729c6e1631223b037fe0371f4672c9))
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.43 ([1674f81](https://github.com/mittwald/flow/commit/1674f81f415a6800a14dd2e535a76c1442c1347b))
+
 ## [1.6.0-next.40](https://github.com/mittwald/flow/compare/1.5.42...1.6.0-next.40) (2026-10-26)
 
 ### Bug Fixes
