@@ -8,10 +8,74 @@ import {
   PropsContextProvider,
 } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
-import { useList } from "@/components/List";
+import { useListSelector } from "@/components/List/hooks/useListSelector";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+
+/*
+ * Built once: a new object on every render would hand every item a new props
+ * context and re-render its content.
+ */
+const buttonTunnel = {
+  id: "button",
+  component: "ListItemView",
+} as const;
+
+const propsContext: PropsContext = {
+  ...overlayTriggersTunneledTo(buttonTunnel),
+  ContextMenu: {
+    tunnel: buttonTunnel,
+    placement: "bottom right",
+    wrapWith: <OptionsButton className={styles.action} />,
+  },
+  Button: {
+    tunnel: buttonTunnel,
+    size: dynamic(() =>
+      useListSelector((list) => list.viewMode.isTiles) ? "s" : "m",
+    ),
+  },
+  ActionGroup: {
+    tunnel: buttonTunnel,
+    Button: {
+      tunnel: null,
+    },
+  },
+  Avatar: {
+    tunnel: {
+      id: "avatar",
+      component: "ListItemView",
+    },
+  },
+  Heading: {
+    tunnel: {
+      id: "title",
+      component: "ListItemView",
+    },
+  },
+  Text: {
+    tunnel: {
+      id: "text",
+      component: "ListItemView",
+    },
+  },
+  Content: {
+    tunnel: dynamic((p) =>
+      p.slot === "bottom"
+        ? {
+            id: "bottom",
+            component: "ListItemView",
+          }
+        : undefined,
+    ),
+  },
+  Checkbox: {
+    tunnel: {
+      id: "checkbox",
+      component: "ListItemView",
+    },
+  },
+};
 
 export type ListItemViewProps = PropsWithChildren &
   Pick<ColumnLayoutProps, "s" | "m" | "l">;
@@ -20,69 +84,11 @@ export const ListItemView = flowComponent(
   "ListItemView",
   (props: ListItemViewProps) => {
     const { children, s, m, l } = props;
-    const list = useList();
-
-    const buttonTunnel = {
-      id: "button",
-      component: "ListItemView",
-    } as const;
-
-    const propsContext: PropsContext = {
-      ...overlayTriggersTunneledTo(buttonTunnel),
-      ContextMenu: {
-        tunnel: buttonTunnel,
-        placement: "bottom right",
-        wrapWith: <OptionsButton className={styles.action} />,
-      },
-      Button: {
-        tunnel: buttonTunnel,
-        size: dynamic(() => (useList().viewMode.isTiles ? "s" : "m")),
-      },
-      ActionGroup: {
-        tunnel: buttonTunnel,
-        Button: {
-          tunnel: null,
-        },
-      },
-      Avatar: {
-        tunnel: {
-          id: "avatar",
-          component: "ListItemView",
-        },
-      },
-      Heading: {
-        tunnel: {
-          id: "title",
-          component: "ListItemView",
-        },
-      },
-      Text: {
-        tunnel: {
-          id: "text",
-          component: "ListItemView",
-        },
-      },
-      Content: {
-        tunnel: dynamic((p) =>
-          p.slot === "bottom"
-            ? {
-                id: "bottom",
-                component: "ListItemView",
-              }
-            : undefined,
-        ),
-      },
-      Checkbox: {
-        tunnel: {
-          id: "checkbox",
-          component: "ListItemView",
-        },
-      },
-    };
+    const viewMode = useListSelector((list) => list.viewMode.value);
 
     return (
       <ListItemViewContentView
-        viewMode={list.viewMode.value}
+        viewMode={viewMode}
         title={<UiComponentTunnelExit id="title" component="ListItemView" />}
         avatar={<UiComponentTunnelExit id="avatar" component="ListItemView" />}
         button={<UiComponentTunnelExit id="button" component="ListItemView" />}
