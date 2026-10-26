@@ -36,7 +36,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
 
   useEffect(() => {
     containerRef.current?.focus();
-  }, [containerRef.current]);
+  }, []);
 
   const paginate = (direction: number) => {
     const next = Math.min(Math.max(currentIndex + direction, 0), count - 1);
