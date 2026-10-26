@@ -37,6 +37,12 @@ import { TableHeader } from "./setupComponents/TableHeader";
 import { TableRow } from "./setupComponents/TableRow";
 import rowStyles from "./components/Table/Table.module.scss";
 import { ListSearch } from "./setupComponents/ListSearch";
+import { ViewComponentContextProvider } from "@/lib/viewComponentContext";
+import {
+  GridListItem,
+  type GridListItemProps,
+} from "@/components/List/components/Items/views/GridListItem/GridListItem";
+import { usePropsContext } from "@/lib/propsContext/propsContext";
 
 interface Data {
   num: number;
@@ -1185,6 +1191,88 @@ describe("Item rendering", () => {
     await expect
       .element(page.getByText("Item: 42 unselected at 1"))
       .toBeInTheDocument();
+  });
+});
+
+describe("Item re-renders", () => {
+  const data: Data[] = [{ num: 42 }];
+  let itemRenderCount = 0;
+  let contentRenderCount = 0;
+
+  /*
+   * react-aria calls an item's children function on each of its own renders,
+   * so a view that passes one counts them.
+   */
+  const CountingGridListItem: FC<GridListItemProps> = (props) => (
+    <GridListItem {...props}>
+      {(renderProps) => {
+        itemRenderCount++;
+        return typeof props.children === "function"
+          ? props.children(renderProps)
+          : props.children;
+      }}
+    </GridListItem>
+  );
+
+  // Reads the props context like every Flow component in an item does.
+  const ContentProbe: FC = () => {
+    usePropsContext();
+    contentRenderCount++;
+    return null;
+  };
+
+  const ItemList: FC = () => {
+    const [selected, setSelected] = useState(false);
+    const [, setUnrelated] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setUnrelated((c) => c + 1)}>Bump</button>
+        <button onClick={() => setSelected((s) => !s)}>Select</button>
+        <List aria-label="Test">
+          <ListStaticData<Data> data={data} />
+          <ListItem<Data>
+            textValue={({ num }) => String(num)}
+            renderDependencies={[selected]}
+          >
+            {({ num }) => (
+              <ListItemView>
+                <Heading>
+                  Item: {num} {selected ? "selected" : "unselected"}
+                </Heading>
+                <ContentProbe />
+              </ListItemView>
+            )}
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+
+  test("a parent re-render does not re-render the items or their content", async () => {
+    await render(
+      <ViewComponentContextProvider
+        components={{ ItemsGridListItem: CountingGridListItem }}
+      >
+        <ItemList />
+      </ViewComponentContextProvider>,
+    );
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+    itemRenderCount = 0;
+    contentRenderCount = 0;
+
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    expect(itemRenderCount).toBe(0);
+    expect(contentRenderCount).toBe(0);
+
+    await userEvent.click(page.getByRole("button", { name: "Select" }));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+    expect(itemRenderCount).toBeGreaterThan(0);
   });
 });
 
