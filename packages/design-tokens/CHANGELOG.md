@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.42](https://github.com/mittwald/flow/compare/1.6.0-next.41...1.6.0-next.42) (2026-10-26)
+
+### Features
+
+* **design-tokens:** finer, neutral grain texture ([0cff3f2](https://github.com/mittwald/flow/commit/0cff3f231d6b97f789faaeccb83146be678efa34))
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.6.0-next.40...1.5.44) (2026-10-26)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.44 ([17e3ed3](https://github.com/mittwald/flow/commit/17e3ed3956c94308f66c04d0504e4316d5b7802e))
+
+## [1.6.0-next.41](https://github.com/mittwald/flow/compare/1.6.0-next.40...1.6.0-next.41) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
 ## [1.6.0-next.40](https://github.com/mittwald/flow/compare/1.5.42...1.6.0-next.40) (2026-10-26)
 
 ## [1.6.0-next.39](https://github.com/mittwald/flow/compare/1.5.41...1.6.0-next.39) (2026-10-23)
