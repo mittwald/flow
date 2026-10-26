@@ -105,12 +105,24 @@ export class OverlayState<
    * @internal Bindings call it from their lifecycle.
    */
   public setConfirmOnCloseSource(source: object, confirmOnClose: boolean) {
-    runInAction(() => this.confirmOnCloseSources.set(source, confirmOnClose));
+    runInAction(() => {
+      this.confirmOnCloseSources.set(source, confirmOnClose);
+      this.withdrawUnneededConfirmation();
+    });
   }
 
   /** @internal Bindings call it from their lifecycle. */
   public removeConfirmOnCloseSource(source: object) {
-    runInAction(() => this.confirmOnCloseSources.delete(source));
+    runInAction(() => {
+      this.confirmOnCloseSources.delete(source);
+      this.withdrawUnneededConfirmation();
+    });
+  }
+
+  private withdrawUnneededConfirmation() {
+    if (!this.confirmOnCloseEnabled) {
+      this.showConfirmationModal = false;
+    }
   }
 
   private addOpenStateHandler<T extends AnyOverlayOpenStateHandler>(
@@ -187,10 +199,20 @@ export class OverlayState<
   /**
    * Sets the open state without running any handler. Use it to mirror a
    * controlled `isOpen` prop, whose change comes from the consumer – notifying
-   * them of their own state would echo it back.
+   * them of their own state would echo it back. Closing this way drops a
+   * pending close confirmation as well.
    */
   public syncOpen(toOpen: boolean): void {
+    this.assignOpenState(toOpen);
+  }
+
+  /** A closed overlay has no close left to confirm. */
+  private assignOpenState(toOpen: boolean): void {
     this.isOpen = toOpen;
+    if (!toOpen) {
+      this.showConfirmationModal = false;
+      this.closeIsConfirmed = false;
+    }
   }
 
   private applyOpenState(toOpen: boolean, options?: TCloseOptions): void {
@@ -225,7 +247,7 @@ export class OverlayState<
     }
 
     if (!aborted) {
-      this.isOpen = toOpen;
+      this.assignOpenState(toOpen);
     }
   }
 
