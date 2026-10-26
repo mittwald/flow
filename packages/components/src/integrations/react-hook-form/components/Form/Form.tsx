@@ -172,7 +172,8 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const { submitInterceptor } = useFormSettings();
   const onSubmit = submitInterceptor
-    ? (values: F) => submitInterceptor<F>(onSubmitProp, values, { form })
+    ? (values: F, event?: BaseSyntheticEvent) =>
+        submitInterceptor<F>(onSubmitProp, values, { form, event })
     : onSubmitProp;
 
   const handleSubmitResult = (result: unknown) => {

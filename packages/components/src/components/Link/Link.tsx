@@ -29,7 +29,9 @@ import { containsTextChild } from "@/lib/react/remote";
 
 export interface LinkProps
   extends
-    PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot" | "className">>,
+    PropsWithChildren<
+      Omit<Aria.LinkProps, "children" | "slot" | "className" | "aria-current">
+    >,
     FlowComponentProps<HTMLAnchorElement>,
     PropsWithClassName {
   /** Whether the link should be styled for being displayed inside a text. */

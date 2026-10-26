@@ -234,6 +234,7 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
+          check-latest: true
           registry-url: "https://registry.npmjs.org"
           cache: pnpm
 
@@ -246,7 +247,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Setup NX 1/2 🎛️
-        uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+        uses: nrwl/nx-set-shas@e602fada7ad5987b0f7b1905e7a99ea1c661514c # v5.1.0
 
       # A local `main` branch, for nx and — on the `next` line — for the version
       # derivation below, which reads `origin/main:lerna.json`. Skipped when the

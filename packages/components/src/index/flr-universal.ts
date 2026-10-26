@@ -31,6 +31,8 @@ export {
   type PopoverProps,
   PopoverTrigger,
   type PopoverTriggerProps,
+  resolveDateRangeFilterValue,
+  type DateRangeFilterValue,
   SettingsProvider,
   typedList,
   NotificationProvider,

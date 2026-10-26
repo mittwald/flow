@@ -24,6 +24,15 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   `ListSearch`: the term, its initial value and its persistence are shared, how
   the field renders is not. `ListSorting` needed no cut at all — it only
   translates between the table and the settings store.
+- **The overlay's state is here, its component tree is not.** `OverlayState` is
+  React's `OverlayController` without the hooks: open state, handlers, close
+  confirmation and its grants. React subclasses it and adds the hooks; Vue wraps
+  it in refs. The overlay context, the triggers and the confirmation modal stay
+  per binding. `setConfirmOnCloseSource` and `removeConfirmOnCloseSource` are
+  public because each binding registers a source from its own lifecycle — a
+  React effect, a Vue watcher. The close options are a type parameter: which
+  overlay a close targets (React's `overlay`) is resolved by `Action` before the
+  state is called.
 - **The model classes reach their list through `ListModelContext`, not a
   `List`.** React's `List` is a React object — its constructor calls hooks. What
   the classes need is the TanStack table and the persistence, so that is all the
@@ -40,15 +49,20 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   `FilterValue` in React and have the core construct it through a factory hook.
 - **The date-range comparison is here, not in a binding.** Which rows a range
   covers is not a rendering question, and two implementations of it would
-  disagree the moment a timezone is involved. It is React's comparison as it
-  shipped, moved without change, which is why it needs `luxon` and
+  disagree the moment a timezone is involved. It needs `luxon` and
   `@internationalized/date`: a cell counts as a date only as a luxon `DateTime`
-  (compared as the instant it is), a `CalendarDate` (as its day) or a string
-  luxon reads as ISO 8601. Anything else — a plain `{ year, month, day }`, a
-  `CalendarDateTime`, a `ZonedDateTime` — keeps its row. The range's ends are
-  read field by field, since they arrive serialized from the host.
-  `dateRange.test.ts` pins every one of those cases; changing one is a
-  `fix(List)`, not a refactor.
+  or a `ZonedDateTime` (compared as the instant it is), a `CalendarDate` (as the
+  start of its day), a `CalendarDateTime` (as its local time) or a string luxon
+  reads as ISO 8601. Anything else — a plain `{ year, month, day }` included —
+  keeps its row. The range's ends are read field by field, since they arrive
+  serialized from the host; an end with an `hour` covers its whole minute, one
+  without its whole day. `resolveListDateRange` turns a range into those bounds,
+  so a server-side loader filters on the same instants. `dateRange.test.ts` pins
+  every one of those cases; changing one is a `fix(List)`, not a refactor. The
+  date and time fields of `granularity: "minute"` follow
+  `getListDateTimeRangeUpdate` (which input is valid, when it applies), and the
+  active filter chip reads `formatListDateRange` — so both bindings apply and
+  show the same ranges, and only hold the typed input themselves.
 - **Beware `Table<never>` where `Table<any>` is expected.** A list of concrete
   filters is not assignable to `ListFilter<any, …>[]`: a row model sits in a
   contravariant position deep inside `Column`, so `never` and `any` do not meet.

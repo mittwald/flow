@@ -1,4 +1,7 @@
-import { selectRequestedTargets } from "./crossVersionRunner";
+import {
+  selectRequestedFiles,
+  selectRequestedTargets,
+} from "./crossVersionRunner";
 import { describe, expect, it } from "vitest";
 
 const targets = [
@@ -48,5 +51,23 @@ describe("selectRequestedTargets", () => {
     expect(() => selectRequestedTargets(targets, "previous,2.0.0")).toThrow(
       /no target "2\.0\.0"/,
     );
+  });
+});
+
+describe("selectRequestedFiles", () => {
+  it("runs every file when nothing is requested", () => {
+    expect(selectRequestedFiles(undefined)).toEqual([]);
+    expect(selectRequestedFiles(" \n ")).toEqual([]);
+  });
+
+  it("splits the lines git diff prints", () => {
+    expect(
+      selectRequestedFiles(
+        "src/tests/visual/Tabs.browser.test.tsx\nsrc/tests/visual/Accordion.browser.test.tsx\n",
+      ),
+    ).toEqual([
+      "src/tests/visual/Tabs.browser.test.tsx",
+      "src/tests/visual/Accordion.browser.test.tsx",
+    ]);
   });
 });

@@ -82,6 +82,11 @@ export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
         "The 'fallback' prop is deprecated and will be removed in a future release. Use 'loadingView' instead.",
       );
     }
+    if (itemView?.dependencies !== undefined) {
+      warnDeprecation(
+        "The 'dependencies' prop of 'List.Item' is deprecated and will be removed in a future release. Use 'renderDependencies' instead.",
+      );
+    }
 
     this.settingsStorageDefaults = settingsStorageDefaults;
     const generalSettingsStore = useSettings();

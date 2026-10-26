@@ -198,11 +198,6 @@ export default tseslint.config(
      * and every other Vue demo keeps the check on `.map()` and `Array.from`.
      */
     files: [
-      "apps/remote-dom-demo/src/app/remote-vue/_demos/chart.tsx",
-      "apps/remote-dom-demo/src/app/remote-vue/_demos/imageCropper.tsx",
-      "apps/remote-dom-demo/src/app/remote-vue/_demos/list.tsx",
-      "apps/remote-dom-demo/src/app/remote-vue/_demos/listSelection.tsx",
-      "apps/remote-dom-demo/src/app/remote-vue/_demos/modal.tsx",
       "apps/remote-dom-demo/src/app/remote-vue/_demos/navigation.tsx",
       "apps/remote-dom-demo/src/app/remote-vue/_demos/tunnel.tsx",
     ],

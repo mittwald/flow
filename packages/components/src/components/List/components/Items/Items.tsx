@@ -7,6 +7,7 @@ import type { FC } from "react";
 import styles from "./Items.module.scss";
 import { FallbackItems } from "./components/FallbackItems";
 import { useInfiniteScrollTrigger } from "@/components/List/hooks/useInfiniteScrollTrigger";
+import { useLatestOnAction } from "@/components/List/hooks/useLatestOnAction";
 
 export const Items: FC = () => {
   const list = useList();
@@ -16,6 +17,8 @@ export const Items: FC = () => {
   const isLoadingMore = list.loader.useIsLoadingMore();
 
   const { triggerRef, triggerIndex } = useInfiniteScrollTrigger();
+
+  const onAction = useLatestOnAction(list);
 
   if (!list.itemView) {
     return null;
@@ -27,6 +30,7 @@ export const Items: FC = () => {
       data={item.data}
       id={item.id}
       list={list}
+      onAction={onAction}
       isTile={tiles}
       triggerRef={index === triggerIndex ? triggerRef : undefined}
     />
