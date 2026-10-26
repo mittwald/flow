@@ -19,6 +19,8 @@ export const useCloseOverlayConfirmationController = (
   useEffect(() => {
     if (showConfirmationModal) {
       confirmationModalController.open();
+    } else {
+      confirmationModalController.close();
     }
   }, [confirmationModalController, showConfirmationModal]);
 
