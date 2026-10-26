@@ -11,9 +11,11 @@ file-card:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
+  # Groups content like the ListItem: the separator tone, not the control
+  # border (#3564). The error border keeps its status color.
   border-color:
     default:
-      value: "{neutral-outline-border-color}"
+      value: "{border.color.200}"
     error:
       value: "{danger-outline-border-color}"
   sub-title-font-size:
