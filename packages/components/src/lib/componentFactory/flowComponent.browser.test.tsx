@@ -9,6 +9,7 @@ import { render } from "vitest-browser-react";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
 import { PropsContextProvider } from "@/lib/propsContext/components/PropsContextProvider";
+import { usePropsContext } from "@/lib/propsContext/propsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
   propsContextSupportingComponents.push(name as FlowComponentName);
@@ -53,6 +54,26 @@ test("ref is forwarded to component", async () => {
   await render(<TestComponent1 ref={ref} />);
   const refArg = ref.mock.calls[0]?.[0];
   expectTypeOf(refArg).toMatchTypeOf(HTMLDivElement);
+});
+
+test("re-rendering a UI component does not re-render Flow components below it", async () => {
+  const Outer = flowComponent(getComponentName("Outer"), (p) => {
+    const props = p as TestComponentProps;
+    return <div data-prop={props.prop}>{props.children}</div>;
+  }) as TestComponent;
+
+  let innerRenderCount = 0;
+  const Inner = flowComponent(getComponentName("Inner"), () => {
+    usePropsContext();
+    innerRenderCount++;
+    return <span />;
+  }) as TestComponent;
+
+  const children = <Inner />;
+  const { rerender } = await render(<Outer prop="first">{children}</Outer>);
+  await rerender(<Outer prop="second">{children}</Outer>);
+
+  expect(innerRenderCount).toBe(1);
 });
 
 describe("propsContext", () => {
