@@ -84,7 +84,7 @@ export const WithFieldError: Story = {
         type: "required",
         message: "ErrorFromForm",
       });
-    }, []);
+    }, [form]);
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>

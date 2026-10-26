@@ -31,5 +31,6 @@ export const useAriaAnnounceSearchState = (): void => {
     );
 
     debouncedAnnounce(text, "polite");
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- announce on search changes only, not when the formatter changes
   }, [searchTerm, resultCount, isLoading]);
 };

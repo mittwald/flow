@@ -61,6 +61,7 @@ export const usePolicyValidationResult = (
     } else {
       validatePassword(password);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- validate on input changes only; the validators are new each render
   }, [password, validationPolicy]);
 
   /**

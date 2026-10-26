@@ -41,6 +41,7 @@ export const useFormSubmitAction = (
     submitPromise.current?.reject(
       new AbortActionError("Form submission failed"),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the action model is new each render; react to form state changes only
   }, [isSubmitting, isSubmitSuccessful, submitPromise]);
 
   return formSubmitAction;

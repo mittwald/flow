@@ -21,6 +21,7 @@ export const PropsContextProvider: FC<Props> = memo((props) => {
   const propsWithParentPropsContext = useMemo(() => {
     const propsWithNestingLevel = addNestingLevel(providedProps);
     return mergePropsContext(parentPropsContext, propsWithNestingLevel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the caller passes the props' dependencies
   }, [parentPropsContext, ...dependencies]);
 
   return <Provider value={propsWithParentPropsContext}>{children}</Provider>;

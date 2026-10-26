@@ -25,5 +25,6 @@ export const useWatchPathname = (callback: Callback) => {
     return () => {
       clearInterval(checker);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- poll from mount on; callers pass an inline callback
   }, [storedHref]);
 };

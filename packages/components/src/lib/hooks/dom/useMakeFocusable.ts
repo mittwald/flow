@@ -31,5 +31,6 @@ export const useMakeFocusable = (
         element.removeAttribute("tabIndex");
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-attach when the ref points to a new element
   }, [ref.current, onFocus]);
 };

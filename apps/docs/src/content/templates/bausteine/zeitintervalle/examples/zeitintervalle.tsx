@@ -220,6 +220,7 @@ export default () => {
   // which is a requirement in the demo page
   const MemorizedCronTimeSelector = useMemo(
     () => CronTimeSelector,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
