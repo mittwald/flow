@@ -7,9 +7,18 @@ import type {
 import { createElement } from "react";
 import type { RenderItemFn } from "@/components/List/model/item/types";
 import type List from "@/components/List/model/List";
+import { isShallowEqual } from "remeda";
 
 export interface ItemViewShape<T> {
+  /**
+   * Runs on every render of the list to tell whether the item changed, so it
+   * should be cheap and pure.
+   */
   textValue?: (data: T) => string;
+  /**
+   * Runs on every render of the list to tell whether the item changed, so it
+   * should be cheap and pure.
+   */
   href?: (data: T) => string;
   target?: HTMLAttributeAnchorTarget;
   defaultExpanded?: (data: T) => boolean;
@@ -21,24 +30,26 @@ export interface ItemViewShape<T> {
   showTiles?: boolean;
   tileMaxWidth?: number;
   /**
-   * Values this item's content depends on besides its own data.
+   * Everything the render function reads besides the item's data.
    *
-   * An item re-renders when its data changes, or when one of the render
-   * functions on its `List.Item` changes identity — which a function written
-   * inline in JSX does on every render of its parent. A render function with a
-   * stable identity (hoisted out of the component, wrapped in `useCallback`, or
-   * reading from an external store) has to list what it reads here, or the item
-   * keeps the values it first saw.
+   * With `renderDependencies`, an item re-renders only when its data or one of
+   * these values changes. The render function's identity no longer counts, so a
+   * function written inline in JSX keeps the item from re-rendering on every
+   * render of its parent. List every value it reads from outside the item,
+   * including state read through the `list` argument — one left out keeps the
+   * item on the value it last rendered.
+   *
+   * Without it, an item re-renders whenever its render function changes
+   * identity, which an inline function does on every render of its parent.
+   */
+  renderDependencies?: DependencyList;
+  /**
+   * @deprecated Use `renderDependencies` instead. `dependencies` only adds to
+   *   the render function's identity, so an inline render function still
+   *   re-renders the item on every render of its parent.
    */
   dependencies?: DependencyList;
 }
-
-const dependenciesAreEqual = (a?: DependencyList, b?: DependencyList) =>
-  a === b ||
-  (!!a &&
-    !!b &&
-    a.length === b.length &&
-    a.every((dependency, index) => Object.is(dependency, b[index])));
 
 export class ItemView<T> {
   public readonly list: List<T>;
@@ -50,8 +61,10 @@ export class ItemView<T> {
   public readonly showTiles?: boolean;
   public readonly showList?: boolean;
   public readonly tileMaxWidth: number;
+  public readonly renderDependencies?: DependencyList;
   public readonly dependencies?: DependencyList;
   private readonly renderFn?: RenderItemFn<T>;
+  private lastComparison?: { other: ItemView<T>; result: boolean };
 
   public constructor(list: List<T>, shape: ItemViewShape<T> = {}) {
     const {
@@ -65,6 +78,7 @@ export class ItemView<T> {
       showTiles,
       showList = true,
       tileMaxWidth = 230,
+      renderDependencies,
       dependencies,
     } = shape;
     this.list = list;
@@ -77,6 +91,7 @@ export class ItemView<T> {
     this.showTiles = showTiles;
     this.showList = showList;
     this.tileMaxWidth = tileMaxWidth;
+    this.renderDependencies = renderDependencies;
     this.dependencies = dependencies;
   }
 
@@ -84,20 +99,37 @@ export class ItemView<T> {
     createElement("pre", undefined, JSON.stringify(item));
 
   /**
-   * Whether `other` would render this item identically — i.e. all render
-   * functions taken from the consumer's `ListItem` element are still the same,
-   * and the dependencies it declared have not changed.
+   * Whether `other` would render the item holding `data` identically. The
+   * render function counts by its `renderDependencies` where given, otherwise
+   * by its identity and the deprecated `dependencies`. `textValue` and `href`
+   * count by what they return for `data`, so inline functions do not re-render
+   * the item. `defaultExpanded` is read on mount only, so it does not count at
+   * all.
    */
-  public rendersSameAs(other?: ItemView<T>): boolean {
+  public rendersSameFor(other: ItemView<T> | undefined, data: T): boolean {
     return (
       !!other &&
-      dependenciesAreEqual(this.dependencies, other.dependencies) &&
-      this.renderFn === other.renderFn &&
-      this.textValue === other.textValue &&
-      this.href === other.href &&
-      this.target === other.target &&
-      this.defaultExpanded === other.defaultExpanded
+      this.rendersSameContentAs(other) &&
+      this.textValue?.(data) === other.textValue?.(data) &&
+      this.href?.(data) === other.href?.(data) &&
+      this.target === other.target
     );
+  }
+
+  // Every item of a render shares one item view, so the result is cached for
+  // the last `other`.
+  private rendersSameContentAs(other: ItemView<T>): boolean {
+    if (this.lastComparison?.other !== other) {
+      this.lastComparison = {
+        other,
+        result:
+          this.renderDependencies || other.renderDependencies
+            ? isShallowEqual(this.renderDependencies, other.renderDependencies)
+            : this.renderFn === other.renderFn &&
+              isShallowEqual(this.dependencies, other.dependencies),
+      };
+    }
+    return this.lastComparison.result;
   }
 
   public render(data: T): ReactNode {

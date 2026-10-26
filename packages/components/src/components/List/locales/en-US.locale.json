@@ -1,5 +1,12 @@
 {
   "dateRange": "Date range",
+  "dateRange.endBeforeStart": "The end must not be before the start.",
+  "dateRange.endDate": "End date",
+  "dateRange.endTime": "End time",
+  "dateRange.from": "from {date}",
+  "dateRange.startDate": "Start date",
+  "dateRange.startTime": "Start time",
+  "dateRange.until": "until {date}",
   "filters": "Filters",
   "filters.all": "All filters",
   "filters.clear": "Clear filters",

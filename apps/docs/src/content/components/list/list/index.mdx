@@ -29,6 +29,9 @@ description:
   zugeordnet.
 - Gib jedem Item über `textValue` seinen Text mit. Erst damit findet der User
   ein Item über die Tastatur, indem er dessen Anfang tippt.
+- Gib jedem `<List.Item />` `renderDependencies` mit und lege Modals und
+  Datenabfragen auf Listenebene an. So bleibt die List auch mit vielen Einträgen
+  schnell, siehe [Performance](#performance).
 
 ---
 
@@ -160,16 +163,32 @@ Enddatum eingrenzen.
 
 <LiveCodeEditor example="filterDateRange" editorCollapsed />
 
+## Date Range Filter mit Uhrzeit
+
+Mit `granularity: "minute"` in `dateRangeOptions` grenzt der User zusätzlich
+nach Uhrzeit ein, etwa bei Logs, Backups oder Cronjob-Ausführungen. Statt des
+Kalenders zeigt der Filter dann je ein Feld für Startdatum, Startzeit, Enddatum
+und Endzeit.
+
+- Ohne Uhrzeit gilt der ganze Tag: Der Start beginnt um 00:00, das Ende schließt
+  den ganzen Tag ein.
+- Eine Endzeit schließt die ganze Minute ein.
+- Bleibt Start- oder Enddatum leer, ist der Zeitraum nach dieser Seite offen.
+- Die Uhrzeit gilt in der lokalen Zeitzone des Users.
+
+<LiveCodeEditor example="filterDateTimeRange" editorCollapsed stretch />
+
 ## Filter Properties
 
-| Property          | Typ                               | Beschreibung                                                                |
-| ----------------- | --------------------------------- | --------------------------------------------------------------------------- |
-| `defaultSelected` | `string[]`                        | Array der als Default gesetzten Filter                                      |
-| `matcher`         | `FilterMatcher<T, TProp, string>` | Definiert eine eigene Filterlogik für die Listenelemente                    |
-| `mode`            | `"all" \| "some" \| "one"`        | Bestimmt, wie mehrere ausgewählte Filterwerte miteinander kombiniert werden |
-| `name`            | `string`                          | Der Anzeigename des Filters                                                 |
-| `property`        | `string`                          | Das für die Filterung verwendete Property                                   |
-| `values`          | `string[]`                        | Die Optionen für den Filter                                                 |
+| Property           | Typ                                       | Beschreibung                                                                                                                  |
+| ------------------ | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `defaultSelected`  | `string[]`                                | Array der als Default gesetzten Filter                                                                                        |
+| `dateRangeOptions` | `DateRangeFilterOptions`                  | Optionen des Date Range Filters: `granularity` (`"day"` oder `"minute"`) sowie `minValue`, `maxValue` und `isDateUnavailable` |
+| `matcher`          | `FilterMatcher<T, TProp, string>`         | Definiert eine eigene Filterlogik für die Listenelemente                                                                      |
+| `mode`             | `"all" \| "some" \| "one" \| "dateRange"` | Bestimmt, wie mehrere ausgewählte Filterwerte miteinander kombiniert werden                                                   |
+| `name`             | `string`                                  | Der Anzeigename des Filters                                                                                                   |
+| `property`         | `string`                                  | Das für die Filterung verwendete Property                                                                                     |
+| `values`           | `string[]`                                | Die Optionen für den Filter                                                                                                   |
 
 ---
 
@@ -267,22 +286,59 @@ vermieden. Zeigt deine Anwendung durchgängig eigene Ladezustände, kannst du
 
 # Item-Inhalte und externer State
 
-Ein Item wird neu gerendert, wenn sich seine Daten ändern oder wenn eine der
-Render-Funktionen an seinem `<List.Item />` ihre Identität wechselt. Eine inline
+Ein Item wird neu gerendert, wenn sich seine Daten ändern oder wenn die
+Render-Funktion an seinem `<List.Item />` ihre Identität wechselt. Eine inline
 im JSX geschriebene Funktion tut das bei jedem Render ihrer Elternkomponente –
-State aus der umgebenden Komponente erreicht das Item damit von allein.
+State aus der umgebenden Komponente erreicht das Item damit von allein, aber
+jedes Item rendert auch dann neu, wenn sich an ihm nichts geändert hat.
 
-Hat die Render-Funktion eine stabile Identität – aus der Komponente
-herausgezogen, in `useCallback` gewrappt, oder sie liest aus einem externen
-Store –, fehlt dem Item dieses Signal und es behält die Werte, mit denen es
-zuerst gerendert wurde. Liste dann über `dependencies` auf, was die Funktion
-liest:
+Mit `renderDependencies` listest du auf, was die Render-Funktion außer den Daten
+des Items liest. Das Item rendert dann nur noch neu, wenn sich seine Daten oder
+einer dieser Werte ändern – die Identität der Render-Funktion zählt nicht mehr.
+Das ist der schnelle Weg für große Listen:
 
 ```tsx
-<List.Item textValue={itemTextValue} dependencies={[selected]}>
-  {renderItem}
+<List.Item
+  textValue={(domain) => domain.hostname}
+  renderDependencies={[selected]}
+>
+  {(domain) => (
+    <DomainItem domain={domain} isSelected={selected.includes(domain.id)} />
+  )}
 </List.Item>
 ```
+
+Liste jeden Wert auf, den die Funktion von außerhalb liest – auch State, den sie
+über ihr zweites Argument `list` liest. Fehlt einer, zeigt das Item weiter den
+Wert, mit dem es zuletzt gerendert wurde. Das gilt auch für eine Render-Funktion
+mit stabiler Identität – aus der Komponente herausgezogen, in `useCallback`
+gewrappt, oder sie liest aus einem externen Store.
+
+In der Tabellenansicht gilt dasselbe für `<List.TableRow />`: Mit
+`renderDependencies` rendert eine Zeile nur noch neu, wenn sich ihre Daten,
+einer dieser Werte oder die Props einer Zelle ändern. Ohne `renderDependencies`
+rendern alle Zeilen bei jedem Render der List neu. Die Props von Zeile und
+Zellen zählen über ihre Identität: Ein inline geschriebenes `style`-Objekt oder
+ein Callback an `<List.TableRow />` oder `<List.TableCell />` lässt jede Zeile
+neu rendern.
+
+```tsx
+<List.TableRow renderDependencies={[selected]}>
+  <List.TableCell>{(domain) => domain.hostname}</List.TableCell>
+  <List.TableCell>
+    {(domain) => (selected.includes(domain.id) ? "Ausgewählt" : "")}
+  </List.TableCell>
+</List.TableRow>
+```
+
+`onAction`, `textValue` und `href` brauchen keine Angabe: Inline-Funktionen
+dafür lösen kein Neurendern aus. Die List ruft immer das aktuelle `onAction` auf
+und vergleicht `textValue` und `href` über ihr Ergebnis. Beide laufen dafür bei
+jedem Render der List – halte sie günstig und frei von Seiteneffekten.
+
+`dependencies` an `<List.Item />` ist veraltet. Die Prop wirkt nur zusätzlich
+zur Identität der Render-Funktion – ersetze sie durch `renderDependencies` und
+liste dabei alles auf, was die Funktion liest.
 
 ---
 
@@ -352,6 +408,27 @@ Beim asynchronen Laden lassen sich Pagination (`manualPagination`), Sortierung
 (`manualSorting`), Filterung (`manualFiltering`) und Suche serverseitig
 verarbeiten.
 
+Filterst du einen Date Range Filter serverseitig, übersetzt
+`resolveDateRangeFilterValue` seinen Wert in die Zeitpunkte, die er umfasst. So
+gelten auf dem Server dieselben Grenzen wie in der List: Ein Datum umfasst den
+ganzen Tag, eine Uhrzeit die ganze Minute.
+
+```tsx
+import { resolveDateRangeFilterValue } from "@mittwald/flow-react-components";
+
+<List.LoaderAsync manualFiltering>
+  {async (options) => {
+    const [range] = options.filtering?.createdAt?.values ?? [];
+    const { start, end } = range ? resolveDateRangeFilterValue(range) : {};
+    const response = await fetchLogs({
+      from: start?.toISOString(),
+      to: end?.toISOString(),
+    });
+    return { data: response.items, itemTotalCount: response.totalCount };
+  }}
+</List.LoaderAsync>;
+```
+
 ---
 
 # Kombiniere mit ...
@@ -371,6 +448,92 @@ beispielsweise die Gesamtsumme der Beträge. Über das `position`-Property legst
 du fest, ob die Summary oberhalb oder unterhalb der List erscheint.
 
 <LiveCodeEditor example="summary" editorCollapsed />
+
+---
+
+# Performance
+
+Jedes sichtbare Item rendert seinen Inhalt mit allen Komponenten und Hooks, die
+darin stecken – beim ersten Laden, bei jedem nachgeladenen Batch und bei jedem
+Re-Render. Was ein Item kostet, zahlt die List also einmal pro Item. Ab etwa 100
+Items mit Kontextmenü, Badges und Modals wird das spürbar.
+
+## Items mit renderDependencies
+
+Eine inline geschriebene Render-Funktion rendert bei jedem Render der umgebenden
+Komponente alle Items neu. Gib `<List.Item />` und `<List.TableRow />`
+`renderDependencies` mit: Ein Item rendert dann nur noch neu, wenn sich seine
+Daten oder einer der aufgelisteten Werte ändern. Das spart beim Re-Render rund
+40 % der Zeit. Liest die Render-Funktion nur die Daten des Items, genügt ein
+leeres Array:
+
+```tsx
+<DomainList.Item
+  textValue={(domain) => domain.hostname}
+  renderDependencies={[]}
+>
+  {(domain) => <DomainListItem domain={domain} />}
+</DomainList.Item>
+```
+
+- Liste jeden Wert auf, den die Render-Funktion von außerhalb liest. Fehlt
+  einer, zeigt das Item weiter den Wert, mit dem es zuletzt gerendert wurde. Die
+  Regeln dazu stehen unter
+  [Item-Inhalte und externer State](#item-inhalte-und-externer-state).
+- Halte die aufgelisteten Werte stabil. Ein inline erzeugter Callback oder ein
+  inline erzeugtes Objekt ist bei jedem Render neu und rendert damit jedes Item
+  neu; erzeuge sie mit `useCallback` oder `useMemo`.
+- Achte auf stabile Daten. Ein `data.map(…)` im Render erzeugt bei jedem Render
+  neue Objekte und damit neue Item-Daten; berechne es mit `useMemo`.
+
+## Modals und Kontextmenüs
+
+Ein geschlossenes Modal rendert seinen Inhalt erst beim Öffnen und kostet wenig.
+Was sich mit jedem Item vervielfacht, sind der Controller und alles, was die App
+um ein Modal legt. Hat ein Item mehrere Modals, öffne ein gemeinsames Modal auf
+Listenebene und übergib ihm das gewählte Item:
+
+```tsx
+const editModal = useModalController();
+const [selected, setSelected] = useState<Domain>();
+
+const edit = useCallback(
+  (domain: Domain) => {
+    setSelected(domain);
+    editModal.open();
+  },
+  [editModal],
+);
+
+<DomainList.Item
+  textValue={(domain) => domain.hostname}
+  renderDependencies={[edit]}
+>
+  {(domain) => <DomainListItem domain={domain} onEdit={edit} />}
+</DomainList.Item>;
+
+<Modal controller={editModal}>
+  {selected && <EditDomainForm domain={selected} />}
+</Modal>;
+```
+
+- Öffne das Modal aus dem Kontextmenü des Items:
+  `<MenuItem onAction={() => onEdit(domain)}>`.
+- Setze die Auswahl beim Schließen nicht zurück. Sonst verschwindet der Inhalt,
+  während das Modal noch ausblendet.
+- Kombiniere das gemeinsame Modal mit `renderDependencies`. `setSelected`
+  rendert die umgebende Komponente neu, und ohne `renderDependencies` damit
+  jedes Item. `edit` ist über `useCallback` stabil und löst kein Neurendern aus.
+
+## Daten und Batches
+
+- Lade Daten auf Listenebene statt pro Item. Ein Request oder eine Subscription
+  in jedem Item vervielfacht sich mit jedem nachgeladenen Batch.
+- Behalte die Standard-Batchgröße von 20 bei. „Mehr anzeigen“ und Infinite
+  Scroll behalten alle geladenen Items im DOM, und Sortieren, Filtern und Suchen
+  rendern alle sichtbaren Items neu.
+- Registriere globale Listener (etwa für `resize` oder Media Queries) einmal für
+  die List, nicht in jedem Item.
 
 ---
 

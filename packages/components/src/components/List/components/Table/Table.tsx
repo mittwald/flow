@@ -5,11 +5,11 @@ import clsx from "clsx";
 import TableView from "@/views/TableView";
 import TableHeaderView from "@/views/TableHeaderView";
 import TableBodyView from "@/views/TableBodyView";
-import TableRowView from "@/views/TableRowView";
-import TableCellView from "@/views/TableCellView";
 import TableColumnView from "@/views/TableColumnView";
 import { TableBodyLoadingView } from "@/components/List/components/Table/components/TableBodyLoadingView";
 import { useInfiniteScrollTrigger } from "@/components/List/hooks/useInfiniteScrollTrigger";
+import { useLatestOnAction } from "@/components/List/hooks/useLatestOnAction";
+import { Row } from "@/components/List/components/Table/components/Row";
 
 export const Table: FC = () => {
   const list = useList();
@@ -21,12 +21,11 @@ export const Table: FC = () => {
   const isLoadingMore = list.loader.useIsLoadingMore();
 
   const { triggerRef, triggerIndex } = useInfiniteScrollTrigger();
+  const onAction = useLatestOnAction(list);
 
   if (!table || listIsEmpty) {
     return null;
   }
-
-  const rowAction = table.list.onAction;
 
   const tableClassName = clsx(
     styles.table,
@@ -35,24 +34,14 @@ export const Table: FC = () => {
   );
 
   const rows = list.items.entries.map((item, index) => (
-    <TableRowView
-      className={clsx(
-        styles.row,
-        rowAction && styles.hasAction,
-        table.body.row.componentProps.className,
-      )}
+    <Row
       key={item.id}
       id={item.id}
-      onAction={rowAction ? () => rowAction(item.data) : undefined}
-      {...table.body.row.componentProps}
-      {...(index === triggerIndex ? { ref: triggerRef } : {})}
-    >
-      {table.body.row?.cells.map((cell, i) => (
-        <TableCellView key={i} {...cell.componentProps}>
-          {cell.renderFn ? cell.renderFn(item.data, list) : undefined}
-        </TableCellView>
-      ))}
-    </TableRowView>
+      data={item.data}
+      list={list}
+      onAction={onAction}
+      triggerRef={index === triggerIndex ? triggerRef : undefined}
+    />
   ));
 
   return (
