@@ -27,9 +27,10 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
 import type { PropsWithChildren, ReactNode } from "react";
+import { useMemo } from "react";
 import Footer from "./components/Footer";
 import styles from "./List.module.scss";
-import { listContext } from "./listContext";
+import { listContext, ListContextStore } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
@@ -209,6 +210,12 @@ export const List = flowComponent("List", (props) => {
     },
   };
 
+  const listContextStore = ListContextStore.useNew(listModel);
+  const listContextValue = useMemo(
+    () => ({ store: listContextStore }),
+    [listContextStore],
+  );
+
   const isEmpty = listModel.useIsEmpty();
 
   // IMPORTANT: we always render the emptyView to the dom.
@@ -228,11 +235,7 @@ export const List = flowComponent("List", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <listContext.Provider
-        value={{
-          list: listModel,
-        }}
-      >
+      <listContext.Provider value={listContextValue}>
         <DataLoader />
         <DivView className={styles.list} ref={ref}>
           {children}

@@ -1,6 +1,13 @@
-import { useContext } from "react";
+import { useContext, useSyncExternalStore } from "react";
 import { listContext } from "@/components/List/listContext";
 import type List from "@/components/List/model/List";
 
-export const useList = <T = never>() =>
-  useContext(listContext).list as unknown as List<T>;
+/** The list model, re-rendering on every render of the list. */
+export const useList = <T = never>() => {
+  const { store } = useContext(listContext);
+  return useSyncExternalStore(
+    store.subscribe,
+    store.getList,
+    store.getList,
+  ) as unknown as List<T>;
+};
