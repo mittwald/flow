@@ -1,5 +1,6 @@
 import MenuItemView from "@/views/MenuItemView";
-import { type FC } from "react";
+import SkeletonTextView from "@/views/SkeletonTextView";
+import { Suspense, type FC } from "react";
 import type { FilterValue } from "@/components/List/model/filter/FilterValue";
 import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
 
@@ -20,7 +21,10 @@ export const FilterMenuItem: FC<Props> = (props) => {
         }
       }}
     >
-      {filterValue.render()}
+      {/* A suspension that reaches the boundary around the menu loops ("Maximum update depth exceeded"). */}
+      <Suspense fallback={<SkeletonTextView width="8em" />}>
+        {filterValue.render()}
+      </Suspense>
     </MenuItemView>
   );
 };

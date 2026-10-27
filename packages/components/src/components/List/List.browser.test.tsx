@@ -29,6 +29,8 @@ import { TableColumn } from "./setupComponents/TableColumn";
 import { TableHeader } from "./setupComponents/TableHeader";
 import { TableRow } from "./setupComponents/TableRow";
 import { ListSearch } from "./setupComponents/ListSearch";
+import { usePromise } from "@mittwald/react-use-promise";
+import { sleep } from "@/lib/promises/sleep";
 
 interface Data {
   num: number;
@@ -155,6 +157,30 @@ describe("Filter", () => {
 
     await expect.element(page.getByText("Item: 44")).toBeInTheDocument();
   });
+});
+
+test("Filter values whose content suspends render in the filter menu", async () => {
+  const items = Array.from({ length: 8 }, (_, i) => i + 1);
+  const SuspendingValue = (props: { num: number }) => {
+    usePromise(sleep, [props.num * 50], { loaderId: "suspendingFilterValue" });
+    return <>Value {props.num}</>;
+  };
+
+  await render(
+    getTestElement(
+      items,
+      <ListFilter<Data, "num"> property="num">
+        {(num) => <SuspendingValue num={num} />}
+      </ListFilter>,
+    ),
+  );
+  await userEvent.click(filterButton);
+
+  for (const num of items) {
+    await expect
+      .element(page.getByRole("menuitemcheckbox", { name: `Value ${num}` }))
+      .toBeVisible();
+  }
 });
 
 describe("Select all", () => {
