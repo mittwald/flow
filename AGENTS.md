@@ -425,6 +425,24 @@ where the error points.
   any `--write` and revert what you did not mean to touch; nothing downstream
   will flag it
 
+- **Symptom:** A cached nx task serves output built with a **different** value
+  of an environment variable — a job's artifact contradicts the env it was
+  given, with nothing failing
+
+  **Cause:** nx folds an environment variable into a task's hash only when it is
+  declared as an `{ "env": … }` input, and CI restores the cache written on
+  `main` into every PR. A variable that actually varies then makes a cache hit
+  both legitimate and wrong — in either direction. `apps/docs`'
+  `NEXT_PUBLIC_SITE_URL` decides whether `robots.txt` says `Allow` or
+  `Disallow`, so an undeclared one could have put a preview's `Disallow: /` on
+  flow.mittwald.de
+
+  **Fix:** Declare it in the target's `inputs` (see the `build` target in
+  `apps/docs/project.json`). Prove it: run the task twice with the same value —
+  the second must log
+  `nx run <project>:<target> [existing outputs match the cache]` — then once
+  with a different value, which must rebuild for real (#3128)
+
 - **Symptom:** The **Routing** check fails on a `fix:` PR with
   **`Commit <sha> is a 'feat' (…) — a merge commit brings it onto 'main'`**, or
   on a `feat:` PR into `next` with **`Commit <sha> marks a breaking change`** —
