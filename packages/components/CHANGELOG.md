@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+### Bug Fixes
+
+* **Heading:** truncate the title so tunnelled content stays on its line ([#3582](https://github.com/mittwald/flow/issues/3582)) ([96248ea](https://github.com/mittwald/flow/commit/96248ea535865a785bd26e2d38b52dbf8679f521))
+
 ## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
 
 ### Bug Fixes
