@@ -1,13 +1,12 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
+import { SkeletonComparison } from "@/tests/lib/SkeletonComparison";
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode text (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
+  async ({ testScreenshot, render, components }) => {
+    const {
       SkeletonMode,
       Section,
       Heading,
@@ -22,10 +21,10 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       ColumnLayout,
       Truncate,
       AlertBadge,
-    },
-  }) => {
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <Heading>Projekt „Webshop Relaunch“</Heading>
           <Heading level={3} />
@@ -63,7 +62,7 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <Text>Dieser Text ist bereits geladen.</Text>
           </SkeletonMode>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode text");

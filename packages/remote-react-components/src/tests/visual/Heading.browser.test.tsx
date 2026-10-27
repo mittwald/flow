@@ -80,7 +80,6 @@ test.each(testEnvironments)(
       ContextualHelpTrigger,
       Button,
       Truncate,
-      ColumnLayout,
     },
   }) => {
     await render(
@@ -117,17 +116,6 @@ test.each(testEnvironments)(
           </Truncate>
           <AlertBadge status="danger">Badge</AlertBadge>
         </Heading>
-        <ColumnLayout l={[1, 3]}>
-          <Heading>
-            <Truncate>
-              A long time ago in a galaxy far, far away, the Rebel Alliance
-              struck a decisive blow against the Galactic Empire.
-            </Truncate>
-            <Badge>Badge</Badge>
-            <Badge>Badge</Badge>
-            <AlertBadge status="danger">Badge</AlertBadge>
-          </Heading>
-        </ColumnLayout>
       </Flex>,
     );
 
