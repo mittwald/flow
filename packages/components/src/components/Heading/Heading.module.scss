@@ -27,6 +27,12 @@
       display: inline-block;
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
+
+    > :global(.flow--truncate) {
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: bottom;
+    }
   }
 
   .headingContent {

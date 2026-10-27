@@ -4,6 +4,7 @@ import { expect, test } from "vitest";
 import { Heading } from "@/components/Heading";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { Truncate } from "@/components/Truncate";
 import styles from "./Heading.module.scss";
 
 const heading = () => page.getByRole("heading");
@@ -80,4 +81,21 @@ test("a button in the heading lands beside the title as well", async () => {
       .querySelector(`.${styles.headingContent}`)
       ?.querySelector("button"),
   ).not.toBeNull();
+});
+
+test("a badge stays beside a short truncated title", async () => {
+  await render(
+    <div style={{ width: 600 }}>
+      <Heading>
+        <Truncate>Shop</Truncate>
+        <Badge>Beta</Badge>
+      </Heading>
+    </div>,
+  );
+
+  const title = page.getByText("Shop").element().getBoundingClientRect();
+  const badge = page.getByText("Beta").element().getBoundingClientRect();
+
+  expect(badge.left).toBeGreaterThan(title.right);
+  expect(Math.abs(badge.top - title.top)).toBeLessThan(title.height);
 });
