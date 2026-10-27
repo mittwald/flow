@@ -27,7 +27,6 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       <SkeletonComparison components={components}>
         <Section>
           <Heading>Projekt „Webshop Relaunch“</Heading>
-          <Heading level={3} />
           <Heading level={3}>
             <Truncate>
               Alle Domains des Projekts „Webshop Relaunch“ werden auf den neuen
@@ -42,14 +41,13 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             erreichbar. Die Daten werden jede Nacht gesichert und 30 Tage lang
             aufbewahrt.
           </Text>
-          <Text />
           <ColumnLayout m={[1, 1, 1]}>
             <LabeledValue>
               <Label>Speicherplatz</Label>
               <Content>20 GB</Content>
             </LabeledValue>
             <LabeledValue>
-              <Label />
+              <Label>PHP-Version</Label>
               <Content>8.4</Content>
             </LabeledValue>
             <BigNumber>
@@ -61,6 +59,12 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
           <SkeletonMode isEnabled={false}>
             <Text>Dieser Text ist bereits geladen.</Text>
           </SkeletonMode>
+          <Heading level={3} />
+          <Text />
+          <LabeledValue>
+            <Label />
+            <Content>8.4</Content>
+          </LabeledValue>
         </Section>
       </SkeletonComparison>,
     );
