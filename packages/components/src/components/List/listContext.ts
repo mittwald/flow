@@ -1,12 +1,18 @@
 import { createContext, useLayoutEffect, useState } from "react";
 import type List from "@/components/List/model/List";
 
+interface ListContext {
+  list: List<never>;
+}
+
+export const listContext = createContext<ListContext>({} as ListContext);
+
 /**
- * Hands the list model to its components without changing the context value.
- * The model is rebuilt on every render of `List`; as a context value it would
- * re-render every consumer, including the ones inside items that skip their own
- * render. `useList` subscribes instead, and `useListSelector` only re-renders
- * when the value it reads changes.
+ * Hands the committed list model to `useListSelector` without changing the
+ * context value. The model is rebuilt on every render of `List`; read from
+ * `listContext`, it re-renders every consumer, including the ones inside items
+ * that skip their own render. A selector re-renders only when the value it
+ * reads changes.
  */
 export class ListContextStore {
   private list: List<never>;
@@ -18,10 +24,8 @@ export class ListContextStore {
 
   public static useNew(list: List<never>): ListContextStore {
     const store = useState(() => new ListContextStore(list))[0];
-    // Components rendering in the same pass read the new model right away …
-    store.list = list;
-    // … the others get it once the list has committed.
     useLayoutEffect(() => {
+      store.list = list;
       store.listeners.forEach((listener) => listener());
     });
     return store;
@@ -37,10 +41,6 @@ export class ListContextStore {
   };
 }
 
-interface ListContext {
-  store: ListContextStore;
-}
-
-export const listContext = createContext<ListContext>({
-  store: new ListContextStore(undefined as unknown as List<never>),
-});
+export const listStoreContext = createContext(
+  new ListContextStore(undefined as unknown as List<never>),
+);

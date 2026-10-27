@@ -14,15 +14,15 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 /*
- * Built once: a new object on every render would hand every item a new props
- * context and re-render its content.
+ * Built once per view mode: a new object on every render would hand every item
+ * a new props context and re-render its content.
  */
 const buttonTunnel = {
   id: "button",
   component: "ListItemView",
 } as const;
 
-const propsContext: PropsContext = {
+const buildPropsContext = (buttonSize: "s" | "m"): PropsContext => ({
   ...overlayTriggersTunneledTo(buttonTunnel),
   ContextMenu: {
     tunnel: buttonTunnel,
@@ -31,9 +31,7 @@ const propsContext: PropsContext = {
   },
   Button: {
     tunnel: buttonTunnel,
-    size: dynamic(() =>
-      useListSelector((list) => list.viewMode.isTiles) ? "s" : "m",
-    ),
+    size: buttonSize,
   },
   ActionGroup: {
     tunnel: buttonTunnel,
@@ -75,7 +73,10 @@ const propsContext: PropsContext = {
       component: "ListItemView",
     },
   },
-};
+});
+
+const listPropsContext = buildPropsContext("m");
+const tilesPropsContext = buildPropsContext("s");
 
 export type ListItemViewProps = PropsWithChildren &
   Pick<ColumnLayoutProps, "s" | "m" | "l">;
@@ -85,6 +86,8 @@ export const ListItemView = flowComponent(
   (props: ListItemViewProps) => {
     const { children, s, m, l } = props;
     const viewMode = useListSelector((list) => list.viewMode.value);
+    const propsContext =
+      viewMode === "tiles" ? tilesPropsContext : listPropsContext;
 
     return (
       <ListItemViewContentView

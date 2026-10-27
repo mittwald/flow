@@ -1,5 +1,5 @@
 import { useContext, useSyncExternalStore } from "react";
-import { listContext } from "@/components/List/listContext";
+import { listStoreContext } from "@/components/List/listContext";
 import type List from "@/components/List/model/List";
 
 /**
@@ -9,7 +9,7 @@ import type List from "@/components/List/model/List";
 export const useListSelector = <R, T = never>(
   selector: (list: List<T>) => R,
 ): R => {
-  const { store } = useContext(listContext);
+  const store = useContext(listStoreContext);
   const getValue = () => selector(store.getList() as unknown as List<T>);
   return useSyncExternalStore(store.subscribe, getValue, getValue);
 };

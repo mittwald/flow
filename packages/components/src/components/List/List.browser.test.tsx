@@ -30,6 +30,7 @@ import { FilterValue } from "./model/filter/FilterValue";
 import { DeprecationWarningProvider } from "../DeprecationWarningProvider";
 import Content from "../Content";
 import { Heading } from "../Heading";
+import { Button } from "../Button";
 import { ContextMenu, MenuItem } from "../ContextMenu";
 import { Table } from "./setupComponents/Table";
 import { TableBody } from "./setupComponents/TableBody";
@@ -45,6 +46,7 @@ import {
   type GridListItemProps,
 } from "@/components/List/components/Items/views/GridListItem/GridListItem";
 import { usePropsContext } from "@/lib/propsContext/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 interface Data {
   num: number;
@@ -1285,6 +1287,53 @@ describe("Item re-renders", () => {
       .element(page.getByText("Item: 42 selected"))
       .toBeInTheDocument();
     expect(itemRenderCount).toBeGreaterThan(0);
+  });
+});
+
+describe("ListItemView", () => {
+  test("a button whose props context changes its size keeps rendering", async () => {
+    const SizeToggleList: FC = () => {
+      const [fixedSize, setFixedSize] = useState(false);
+
+      return (
+        <>
+          <button onClick={() => setFixedSize((f) => !f)}>Toggle size</button>
+          <List aria-label="Test">
+            <ListStaticData<Data> data={[{ num: 42 }]} />
+            <ListItem<Data>
+              textValue={({ num }) => String(num)}
+              renderDependencies={[fixedSize]}
+            >
+              {({ num }) => (
+                <ListItemView>
+                  <Heading>Item: {num}</Heading>
+                  <PropsContextProvider
+                    props={{ Button: fixedSize ? { size: "m" } : {} }}
+                  >
+                    <Button>Action {fixedSize ? "fixed" : "default"}</Button>
+                  </PropsContextProvider>
+                </ListItemView>
+              )}
+            </ListItem>
+          </List>
+        </>
+      );
+    };
+
+    await render(<SizeToggleList />);
+    await expect
+      .element(page.getByRole("button", { name: "Action default" }))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Toggle size" }));
+    await expect
+      .element(page.getByRole("button", { name: "Action fixed" }))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Toggle size" }));
+    await expect
+      .element(page.getByRole("button", { name: "Action default" }))
+      .toBeInTheDocument();
   });
 });
 

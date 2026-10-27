@@ -27,10 +27,9 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
 import type { PropsWithChildren, ReactNode } from "react";
-import { useMemo } from "react";
 import Footer from "./components/Footer";
 import styles from "./List.module.scss";
-import { listContext, ListContextStore } from "./listContext";
+import { listContext, ListContextStore, listStoreContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
@@ -210,11 +209,7 @@ export const List = flowComponent("List", (props) => {
     },
   };
 
-  const listContextStore = ListContextStore.useNew(listModel);
-  const listContextValue = useMemo(
-    () => ({ store: listContextStore }),
-    [listContextStore],
-  );
+  const listStore = ListContextStore.useNew(listModel);
 
   const isEmpty = listModel.useIsEmpty();
 
@@ -235,24 +230,30 @@ export const List = flowComponent("List", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <listContext.Provider value={listContextValue}>
-        <DataLoader />
-        <DivView className={styles.list} ref={ref}>
-          {children}
-          <Header />
+      <listContext.Provider
+        value={{
+          list: listModel,
+        }}
+      >
+        <listStoreContext.Provider value={listStore}>
+          <DataLoader />
+          <DivView className={styles.list} ref={ref}>
+            {children}
+            <Header />
 
-          <DivView className={styles.listWrapper}>
-            {emptyView}
-            {listModel.items.entries.length > 0 && (
-              <UiComponentTunnelExit id="listSummary" component="List" />
-            )}
-            {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
-              <Items />
-            )}
-            {listModel.viewMode.isTable && <Table />}
+            <DivView className={styles.listWrapper}>
+              {emptyView}
+              {listModel.items.entries.length > 0 && (
+                <UiComponentTunnelExit id="listSummary" component="List" />
+              )}
+              {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
+                <Items />
+              )}
+              {listModel.viewMode.isTable && <Table />}
+            </DivView>
+            {!hidePagination && <Footer />}
           </DivView>
-          {!hidePagination && <Footer />}
-        </DivView>
+        </listStoreContext.Provider>
       </listContext.Provider>
     </PropsContextProvider>
   );
