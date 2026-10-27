@@ -13,8 +13,8 @@ type ValueNode = ConditionalExpression["consequent"];
  * `Color`, and the deprecated `backgroundColor` values of `AccentBox`, to the
  * values that render the same: `violet` → `lilac` and `teal` → `sage`
  * everywhere, on `Badge` also `green` → `success`, `orange` → `warning` and
- * `red` → `danger`, and on `AccentBox` also `gradient` → `gradient-navy`.
- * `Avatar`'s and `AccentBox`'s `green` is left alone: its replacement `sage`
+ * `red` → `danger`, and on `AccentBox` also `gradient` → `gradient-navy` and
+ * `green` → `sage`. `Avatar`'s `green` is left alone: its replacement `sage`
  * looks different, so that is a decision, not a rename.
  *
  * The scope is deliberately narrow. Only JSX elements that resolve to one of
@@ -44,7 +44,7 @@ const colorPropsBrandPaletteTransform: Transform = (fileInfo, { j }) => {
     Avatar: decorative,
     Icon: decorative,
     Color: decorative,
-    AccentBox: { ...decorative, gradient: "gradient-navy" },
+    AccentBox: { ...decorative, gradient: "gradient-navy", green: "sage" },
   };
   /** The prop holding the color, where it is not `color`. */
   const propByComponent: Record<string, string> = {

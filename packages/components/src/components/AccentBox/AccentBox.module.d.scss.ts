@@ -10,7 +10,6 @@ declare const classNames: {
   readonly lilac: "lilac";
   readonly sage: "sage";
   readonly salmon: "salmon";
-  readonly green: "green";
   readonly icon: "icon";
 };
 export default classNames;

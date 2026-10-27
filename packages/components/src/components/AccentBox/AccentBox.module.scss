@@ -41,8 +41,6 @@
   @include color("lilac");
   @include color("sage");
   @include color("salmon");
-  // deprecated, keeps the success look (#3456)
-  @include color("green");
 
   /* backwards compatibility */
   > .icon {

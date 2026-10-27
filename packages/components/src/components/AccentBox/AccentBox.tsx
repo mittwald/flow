@@ -15,7 +15,6 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { SectionHeadingReset } from "@/components/Section/context";
-import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
 import { styleClassname } from "@/lib/scss/selectors";
 
@@ -29,11 +28,14 @@ const accentBoxGradients = [
 
 /**
  * Deprecated background colors and the value each renders as (#3456).
- * `gradient` was the only gradient; navy is the standard one now.
+ * `gradient` was the only gradient; navy is the standard one now. `green`
+ * rendered the success mint; AccentBox is decorative, so it takes the brand's
+ * green.
  */
 const deprecatedBackgroundColors = {
   ...deprecatedDecorativeColors,
   gradient: "gradient-navy",
+  green: "sage",
 } as const;
 
 const accentBoxBackgroundColors = [
@@ -49,7 +51,6 @@ const accentBoxBackgroundColors = [
 /** Colored surfaces, where content defaults to `dark` (#3456). */
 const decorativeBackgroundColors: readonly string[] = [
   ...decorativeColors,
-  "green",
   ...accentBoxGradients,
 ];
 
@@ -109,8 +110,6 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
     aspectRatio,
   } = props;
 
-  const warnDeprecation = useWarnDeprecation();
-
   // backwards compatibility
   const backgroundColorFromColor =
     (colorFromProps as unknown as string) === "neutral" ||
@@ -124,14 +123,6 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
       backgroundColorFromColor ?? backgroundColorFromProps,
       deprecatedBackgroundColors,
     ) ?? "neutral";
-
-  // `green` keeps the success look it always had until it is removed; its
-  // replacement `sage` is the brand's muted green (#3456).
-  if (backgroundColor === "green") {
-    warnDeprecation(
-      "The background color 'green' is deprecated and will be removed in a future release. Use 'sage' instead.",
-    );
-  }
 
   const isAFlowColor = isFlowColor(backgroundColor);
 

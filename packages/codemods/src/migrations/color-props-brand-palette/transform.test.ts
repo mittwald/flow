@@ -12,6 +12,7 @@ export const A = () => (
     <AccentBox backgroundColor="violet" color="dark" />
     <AccentBox backgroundColor={"teal"} />
     <AccentBox backgroundColor="gradient" />
+    <AccentBox backgroundColor="green" />
     <Badge color="red" />
     <Badge color="green" />
     <Badge color="orange" />
@@ -32,6 +33,7 @@ export const A = () => (
     <AccentBox backgroundColor="lilac" color="dark" />
     <AccentBox backgroundColor={"sage"} />
     <AccentBox backgroundColor="gradient-navy" />
+    <AccentBox backgroundColor="sage" />
     <Badge color="danger" />
     <Badge color="success" />
     <Badge color="warning" />
@@ -46,16 +48,15 @@ export const A = () => (
   });
 
   /**
-   * `Avatar`'s and `AccentBox`'s `green` renders the success mint, its
-   * replacement `sage` the brand's gray-green: a different look, so it is the
-   * consumer's decision. The status renames belong to `Badge` only.
+   * `Avatar`'s `green` renders the success mint, its replacement `sage` the
+   * brand's gray-green: a different look, so it is the consumer's decision. The
+   * status renames belong to `Badge` only.
    */
   test("leaves the values whose replacement looks different", () => {
-    const source = `import { AccentBox, Avatar, Icon } from "@mittwald/flow-react-components";
+    const source = `import { Avatar, Icon } from "@mittwald/flow-react-components";
 
 export const A = () => (
   <>
-    <AccentBox backgroundColor="green" />
     <Avatar color="green" />
     <Icon color="red" />
   </>
