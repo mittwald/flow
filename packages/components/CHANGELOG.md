@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.46](https://github.com/mittwald/flow/compare/1.6.0-next.45...1.6.0-next.46) (2026-10-27)
+
+### Bug Fixes
+
+* **List:** keep useList and useListMetadata working outside a list ([3fff790](https://github.com/mittwald/flow/commit/3fff79070b1f67eed784271e2897864877dcb8fb))
+* **List:** update the list store only on commit and size item buttons statically ([3bd11c3](https://github.com/mittwald/flow/commit/3bd11c36787aebb211ffd3cb8a95abf33d8df48c))
+
+### Performance Improvements
+
+* **ListItemView:** build the item props contexts once ([c7eaaa7](https://github.com/mittwald/flow/commit/c7eaaa79a96e1f8fb3140a91af58acc113e2af38))
+* **List:** keep the list context value stable across renders ([c9929d1](https://github.com/mittwald/flow/commit/c9929d1f89510d426e4dab0970f7dd6ecbe81943))
+* **List:** skip rendering unchanged list items ([c32379a](https://github.com/mittwald/flow/commit/c32379afd910715badf31f119e284975c9026b58))
+
 ## [1.6.0-next.45](https://github.com/mittwald/flow/compare/1.6.0-next.44...1.6.0-next.45) (2026-10-27)
 
 ### Bug Fixes
