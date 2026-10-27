@@ -16,7 +16,7 @@ test("the name is shown", async () => {
  * the only place that conversion happens.
  */
 test.for([
-  [512, "512 bytes"],
+  [512, "512 byte"],
   [1_500, "1.5 kB"],
   [5_400_000, "5.4 MB"],
   [4_800_000_000, "4.8 GB"],

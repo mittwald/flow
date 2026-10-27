@@ -32,7 +32,7 @@ export const FileSizeText: FC<Props> = (props) => {
   const formatter = useNumberFormatter({
     style: "unit",
     unit,
-    unitDisplay: unit === "byte" ? "long" : "short",
+    unitDisplay: "short",
     maximumFractionDigits: 1,
   });
 
