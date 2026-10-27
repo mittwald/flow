@@ -61,6 +61,7 @@ const pointer = (
   x: number,
   y: number,
   pointerType = "touch",
+  isPrimary = pointerId === 1,
 ) => {
   const element = zoomArea().element();
   const rect = element.getBoundingClientRect();
@@ -70,7 +71,7 @@ const pointer = (
       cancelable: true,
       pointerId,
       pointerType,
-      isPrimary: pointerId === 1,
+      isPrimary,
       clientX: rect.left + rect.width / 2 + x,
       clientY: rect.top + rect.height / 2 + y,
     }),
@@ -255,6 +256,49 @@ test("a gallery does not page after a wheel zoom", async () => {
 
   await expect.element(page.getByText("Starship")).toBeVisible();
   expect(page.getByText("Freighter").query()).toBeNull();
+});
+
+test("a gallery button pages once after a pinch", async () => {
+  await openLightBox(
+    <LightBoxGallery>
+      <LightBoxGalleryItem>
+        <Text>Starship</Text>
+      </LightBoxGalleryItem>
+      <LightBoxGalleryItem>
+        {content}
+        <Text>Freighter</Text>
+      </LightBoxGalleryItem>
+      <LightBoxGalleryItem>
+        <Text>Shuttle</Text>
+      </LightBoxGalleryItem>
+    </LightBoxGallery>,
+  );
+  zoomArea().element().focus();
+  await userEvent.keyboard("{ArrowRight}");
+  await expect.element(page.getByText("Freighter")).toBeVisible();
+
+  const next = page.getByRole("button", { name: "Next" });
+  const nextRect = next.element().getBoundingClientRect();
+  const zoomRect = zoomArea().element().getBoundingClientRect();
+  /* Read as a swipe from the first finger to the button, the press would
+     page back. */
+  const start =
+    nextRect.left +
+    nextRect.width / 2 -
+    200 -
+    (zoomRect.left + zoomRect.width / 2);
+
+  /* Touch pointer ids differ from the mouse's, as on a real device. */
+  pointer("pointerdown", 11, start, 0, "touch", true);
+  pointer("pointerdown", 12, start + 100, 0, "touch", false);
+  pointer("pointermove", 12, start + 200, 0, "touch", false);
+  pointer("pointerup", 12, start + 200, 0, "touch", false);
+  pointer("pointerup", 11, start, 0, "touch", true);
+  await expect.poll(scaleOf).toBeGreaterThan(1);
+
+  await next.click();
+
+  await expect.element(page.getByText("Shuttle")).toBeVisible();
 });
 
 test("paging from the zoom area leaves the focus in the gallery", async () => {
