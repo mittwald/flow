@@ -309,7 +309,7 @@ export const CONTENT_SURFACES = [
   "table.background-color", // Table
   "table.background-color-accent", // Table, striped rows
   "accent-box.background-color-*", // AccentBox
-  "!accent-box.background-color-gradient", // gradient values pending (#3448)
+  "!accent-box.background-color-gradient*", // no plain color (#3456)
   "message.background-color-*", // Message, responder and sender
   "list-item.background-color.default", // ListItem
   "file-card.background-color.default", // FileCard

@@ -3,18 +3,25 @@ accent-box:
     value: "{elevation.color.300}"
   background-color-blue:
     value: "{decorative-blue.color.quiet.100}"
-  background-color-teal:
-    value: "{decorative-sage.color.quiet.100}"
-  background-color-lilac:
-    value: "{decorative-lilac.color.quiet.100}"
-  background-color-violet:
-    value: "{decorative-lilac.color.quiet.100}"
-  background-color-green:
-    value: "{success.color.quiet.100}"
   background-color-navy:
     value: "{decorative-navy.color.quiet.100}"
-  background-color-gradient:
-    value: "{gradient.color}"
+  background-color-lilac:
+    value: "{decorative-lilac.color.quiet.100}"
+  background-color-sage:
+    value: "{decorative-sage.color.quiet.100}"
+  background-color-salmon:
+    value: "{decorative-salmon.color.quiet.100}"
+  # deprecated, keeps the success look (#3456)
+  background-color-green:
+    value: "{success.color.quiet.100}"
+  background-color-gradient-navy:
+    value: "{gradient-navy.color}"
+  background-color-gradient-sage:
+    value: "{gradient-sage.color}"
+  background-color-gradient-lilac:
+    value: "{gradient-lilac.color}"
+  background-color-gradient-salmon:
+    value: "{gradient-salmon.color}"
 
   padding:
     value: "{size-px.m}"

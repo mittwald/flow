@@ -167,7 +167,7 @@ export const Toolbar = (props: {
     <Badge color="danger">Locked</Badge>
     <ContextualHelp isDefaultOpen>Rights and roles</ContextualHelp>
     <Accordion />
-    <AccentBox backgroundColor="violet">
+    <AccentBox backgroundColor="lilac">
       <TableColumn width={120} />
     </AccentBox>
     <Action onAction={() => props.controller.close()}>

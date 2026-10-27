@@ -13,6 +13,13 @@
 # 100–900 toward white (#3532); success mixes 1100–1900 toward black.
 # system-info is the brand's Info, still mixed like the hue ramps and close
 # to mittwald-navy, but its own ramp. Alpha ramps: 10–90 % and 100 %.
+# Gradients: one light and one dark value per brand gradient (#3456), named
+# after the decorative colors. Diagonal from the bottom left to the top right,
+# measured from the brand team's assets and adjusted with UX (navy as handed
+# over; sage dark, lilac and salmon mixed with Flow's own drafts; dark text
+# AA against every stop). Provisional until the brand team reviews them in
+# Flow. The grain is not part of the value: components lay `texture.grain`
+# over every gradient.
 color:
   mittwald-neutral:
     100:
@@ -457,3 +464,37 @@ color:
       value: "rgb(255 255 255 / 90%)"
     1000:
       value: "rgb(255 255 255 / 100%)"
+
+  mittwald-gradient:
+    navy-light:
+      value:
+        "linear-gradient(to top right, #a6b2e7 0%, #b7c1ea 35%, #bbc4ea 50%,
+        #d5dbef 75%, #e2e7f1 100%)"
+    navy-dark:
+      value:
+        "linear-gradient(to top right, #25293a 0%, #2e3550 35%, #303653 50%,
+        #414b7a 75%, #49558b 100%)"
+    sage-light:
+      value:
+        "linear-gradient(to top right, #a7b2ac 0%, #b7c0bc 35%, #bac4c0 50%,
+        #d5dcdc 75%, #e3e8ea 100%)"
+    sage-dark:
+      value:
+        "linear-gradient(to top right, #272c2c 0%, #2c3232 25%, #323939 50%,
+        #383f3f 75%, #383f3f 100%)"
+    lilac-light:
+      value:
+        "linear-gradient(to top right, #dcb1c2 0%, #d6b0d6 25%, #cdaef0 50%,
+        #d2b9fb 75%, #ddcbfa 100%)"
+    lilac-dark:
+      value:
+        "linear-gradient(to top right, #553a57 0%, #4f3f73 30%, #604f90 65%,
+        #7c61b1 100%)"
+    salmon-light:
+      value:
+        "linear-gradient(to top right, #e7a48b 0%, #e8b5a3 35%, #e3b8b5 50%,
+        #dbbccf 75%, #d4c0e8 100%)"
+    salmon-dark:
+      value:
+        "linear-gradient(to top right, #392d2a 0%, #6f5249 35%, #8a655f 50%,
+        #8d6c84 75%, #806a9c 100%)"

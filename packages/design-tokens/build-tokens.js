@@ -30,9 +30,14 @@ const semanticLiteralGroups = [
   "transparent",
   "categorical",
   "code-syntax",
-  "gradient",
   "background-gradient",
 ];
+
+/**
+ * Brand gradients: `gradient-<name>`, one `color` per theme pointing to Brand
+ * (#3456). They have no quiet/strong shape.
+ */
+const isGradientGroup = (group) => group.startsWith("gradient-");
 
 /** The keys each Semantic group holds under `color` (#3455). */
 const steps = ["100", "200", "300"];
@@ -118,9 +123,10 @@ const checkColorTiers = () => {
   // group holds quiet and strong 100–300. A step outside the shape is a new
   // role and needs a decision, not a key.
   const keysByGroup = Map.groupBy(
-    [...light].filter(
-      (key) => !semanticLiteralGroups.includes(key.split(".")[0]),
-    ),
+    [...light].filter((key) => {
+      const group = key.split(".")[0];
+      return !semanticLiteralGroups.includes(group) && !isGradientGroup(group);
+    }),
     (key) => key.split(".")[0],
   );
   for (const [group, keys] of keysByGroup) {

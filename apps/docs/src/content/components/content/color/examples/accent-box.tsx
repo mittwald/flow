@@ -7,7 +7,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<AccentBox backgroundColor="gradient">
+<AccentBox backgroundColor="gradient-navy">
   <Flex align="center" wrap="wrap" gap="m">
     <Flex direction="column" grow>
       <Heading size="l">

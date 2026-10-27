@@ -415,13 +415,20 @@ code-syntax:
     invalid:
       value: "#f97583"
 
-gradient:
+# The brand gradients (#3456), one per decorative color, each pointing to its
+# Brand value per theme.
+gradient-navy:
   color:
-    value:
-      "radial-gradient(circle at 18% 20%, #3D55C159, transparent 22%),
-      radial-gradient(circle at 82% 18%, #00A1B54D, transparent 18%),
-      radial-gradient(circle at 70% 82%, #715DEE47, transparent 24%),
-      linear-gradient(180deg, #06070A 0%, #0A0E18 45%, #0F1424 100%)"
+    value: "{color.mittwald-gradient.navy-dark}"
+gradient-sage:
+  color:
+    value: "{color.mittwald-gradient.sage-dark}"
+gradient-lilac:
+  color:
+    value: "{color.mittwald-gradient.lilac-dark}"
+gradient-salmon:
+  color:
+    value: "{color.mittwald-gradient.salmon-dark}"
 
 background-gradient:
   color:
