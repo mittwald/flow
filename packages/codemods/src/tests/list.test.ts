@@ -126,7 +126,12 @@ describe("renderList as JSON", () => {
       }),
     );
 
-    expect(parsed.range).toEqual({ current: "1.0.0", target: "2.0.0" });
+    expect(parsed.range).toEqual({
+      current: "1.0.0",
+      target: "2.0.0",
+      revision: null,
+      stayedWithin: null,
+    });
     expect(parsed.migrations.map((selected) => selected.id)).toEqual([
       "with-codemod",
       "by-hand",
@@ -154,8 +159,78 @@ describe("renderList as JSON", () => {
     // The range is still reported: "nothing to do in 3.0.0 → 3.1.0" is a
     // different answer from "no range was resolved", and only the JSON form's
     // consumer can act on the difference.
-    expect(parsed.range).toEqual({ current: "3.0.0", target: "3.1.0" });
+    expect(parsed.range).toEqual({
+      current: "3.0.0",
+      target: "3.1.0",
+      revision: null,
+      stayedWithin: null,
+    });
     expect(parsed.migrations).toEqual([]);
+  });
+});
+
+// #3117: `major` from 1.0.6 with no 2.x published resolves to the same version
+// `minor` does and exits 0. Without this line, `list minor` and `list major`
+// differ in nothing a reader can see, and two targets read as three.
+describe("a keyword that resolved inside the current line says so", () => {
+  test("major names the major it stayed in and the revision that produced it", () => {
+    const text = renderList({
+      entries,
+      range: {
+        from: "1.0.6",
+        to: "1.1.12",
+        revision: "major",
+        stayedWithin: "major",
+      },
+      json: false,
+    });
+
+    expect(text).toContain("no newer major is published");
+    expect(text).toContain('"major" resolved inside 1.x');
+  });
+
+  test("minor names the minor it stayed in", () => {
+    const text = renderList({
+      entries,
+      range: {
+        from: "1.2.0",
+        to: "1.2.4",
+        revision: "minor",
+        stayedWithin: "minor",
+      },
+      json: false,
+    });
+
+    expect(text).toContain("no newer minor is published");
+    expect(text).toContain('"minor" resolved inside 1.2.x');
+  });
+
+  test("a revision that crossed says nothing", () => {
+    const text = renderList({
+      entries,
+      range: { from: "1.0.0", to: "2.0.0", revision: "major" },
+      json: false,
+    });
+
+    expect(text).not.toContain("no newer");
+  });
+
+  test("JSON carries it as structure, not prose", () => {
+    const parsed = JSON.parse(
+      renderList({
+        entries,
+        range: {
+          from: "1.0.6",
+          to: "1.1.12",
+          revision: "major",
+          stayedWithin: "major",
+        },
+        json: true,
+      }),
+    ) as { range: { revision: string; stayedWithin: string } };
+
+    expect(parsed.range.revision).toBe("major");
+    expect(parsed.range.stayedWithin).toBe("major");
   });
 });
 

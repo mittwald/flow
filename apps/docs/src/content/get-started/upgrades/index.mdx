@@ -32,9 +32,10 @@ npx @mittwald/flow-codemods@latest upgrade
 ```
 
 Ohne Argument geht es auf die nächste Minor innerhalb deiner Major.
-`upgrade patch` bleibt auf deiner Minor, `upgrade major` überquert eine
-Major-Grenze, und eine exakte Version oder ein Dist-Tag (`next`) gehen genau
-dorthin.
+`upgrade patch` bleibt auf deiner Minor, `upgrade major` sucht auch über die
+Major-Grenze hinaus – ist dort nichts veröffentlicht, landet es in deiner
+aktuellen Major und sagt das –, und eine exakte Version oder ein Dist-Tag
+(`next`) gehen genau dorthin.
 
 Der Befehl ändert Dateien direkt und bricht auf einem unsauberen Git-Stand ab.
 
@@ -121,15 +122,28 @@ read the JSON:
 - `npx @mittwald/flow-codemods@latest list major --json`
 
 Each run reports the version it would resolve to (`range.target`) and every
-migration in that range. A relative revision only resolves if such a release
-exists: from a prerelease, or from the newest version on a line, `patch` and
-`minor` exit non-zero with no JSON and a message saying so. That is not an
-error to work around — it means the choice is narrower than three options.
+migration in that range. Three runs are often fewer than three options, in two
+different ways:
+
+- A keyword **fails**. From a prerelease, or from the newest version on a line,
+  `patch` and `minor` have no release to point at and exit non-zero with no JSON
+  and a message saying so.
+- A keyword **succeeds and lands where a narrower one already does**. `major` is
+  unbounded rather than "the next major": with no newer major published it
+  resolves inside the current one, which is the same version `minor` reaches.
+  `range.stayedWithin` in the JSON says so — `"major"` or `"minor"`. Without
+  reading it, the two reports differ in nothing but the revision that produced
+  them.
+
+Neither is an error to work around.
 
 So show me what actually resolved, side by side: target version, how many
-migrations carry a codemod, how many need a hand. If fewer than three resolved,
-say which and why, and put a dist-tag (`next`) or an exact version (`1.4.0`) on
-the table as an equal option rather than a fallback — those always resolve.
+migrations carry a codemod, how many need a hand, and how many are new rather
+than catch-up — `catchUp: false` in the JSON; the rest shipped before the
+version this project is already on. Collapse targets that are the same version
+into one row. If fewer than three distinct targets remain, say which and why,
+and put a dist-tag (`next`) or an exact version (`1.4.0`) on the table as an
+equal option rather than a fallback — those always resolve.
 
 Then ask me which target to take, and wait for my answer.
 
@@ -144,7 +158,11 @@ Then, on the target I chose:
 - It bumps every package published from the Flow monorepo, not only the
   `@mittwald/flow-*` ones: `@mittwald/ext-bridge`,
   `@mittwald/mstudio-ext-react-components` and `@mittwald/react-tunnel` are on
-  the same release train and move too. Tell me which ones it actually rewrote.
+  the same release train and move too. Tell me which ones it actually rewrote —
+  that is exactly the lines it printed, the Flow dependencies declared in that
+  one `package.json`. Flow packages that arrive only as transitive dependencies
+  move with the install; they are in no manifest and in no report, so do not go
+  mining the lockfile to pad the list.
 - Only if more than one package declares Flow: run it once per package, from
   that package's own directory, passing the resolved exact version rather than
   `patch`/`minor`/`major` — a relative revision resolves from the version that
@@ -152,6 +170,8 @@ Then, on the target I chose:
   commit after each one: the dirty-tree guard reads `git status` for the whole
   repository, so the second run would otherwise refuse. Do not reach for
   `--allow-dirty` instead; committing keeps each package a revertible step.
+  Those commits are the migration's commits, not a workaround for the guard —
+  the closing round at the end only covers what comes after them.
 - `peerDependencies` are reported and deliberately left untouched. Note what it
   named as an open decision for the closing round below — do not hand it to me
   now and do not narrow a range on your own. That report comes after the
@@ -170,6 +190,18 @@ Then, on the target I chose:
   and a `packageManager` field before trusting what it chose. Confirm the
   versions it wrote are published, then install; revert the bump only if they
   are not.
+- If the install **succeeds**, read the line about files it also changed. The
+  install belongs to the package manager, not to this tool, and it may rewrite
+  more than the manifest and the lockfile; anything else it touched is named
+  there. On pnpm 11 that is usually `pnpm-workspace.yaml`: an explicit bump makes
+  pnpm add a `minimumReleaseAgeExclude` entry, so its own `minimumReleaseAge`
+  does not refuse a version published minutes ago. pnpm 11.5 appends a **second**
+  entry for a package that already has one, and pnpm's `verifyDepsBeforeRun` then
+  matches the first and ignores the second — after which every script in that
+  package dies with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` before running
+  anything. Merge the duplicate entries into one line. This is not an install
+  failure, retrying does not help, and the symptom only surfaces later, in the
+  checks below.
 
 Then check every migration against the code — every entry in the JSON, including
 the ones with `action: "codemod"`. A codemod is deliberately scoped
@@ -177,19 +209,33 @@ narrowly and skips anything it cannot decide from the source: a spread prop, a
 component re-exported through a local wrapper, a dynamic access, a file outside
 the path it ran on. It reports no error for those. A codemod that ran clean is
 therefore not proof the old pattern is gone — treat its run as a head start, not
-as a result. Read the `upgrade` report for what it admits: an entry that changed
-no file, declined every file it looked at, or found nothing to process is the
-strongest hint that its pattern is still there in a shape it could not handle.
+as a result. Read the `upgrade` report for what it admits. Each codemod prints
+its counts — `N file(s) changed, M unchanged`, plus `K declined` and `E empty`
+when those are not zero — and each number says something different:
 
-One caveat on that report. "No files were processed. Is the path right?" is also
-what a codemod that crashed before touching a file looks like — the counters are
-identical, and the summary line guesses at the path. Check stderr for a stack
-trace before you believe the path is wrong, and tell me if a codemod died: its
-migration then had no run at all, and everything below is the only thing that
-covers it.
+- **`M unchanged` is how much of the tree the codemod actually read.** `0 file(s)
+  changed, 0 unchanged` and `0 file(s) changed, 240 unchanged` are opposite
+  results: the first looked at nothing, the second looked at everything and
+  found nothing. Never read a bare "0 changed" as either.
+- **`declined` is a file the transform read and bailed on** — a shape it could
+  not decide from the source. That is exactly where the old pattern hides, so
+  weight those entries first in the pass below.
+- **`empty` is a 0-byte source file.** It has nothing to do with the migration.
+
+Three lines are verdicts rather than counts, and all three mean that migration
+got no usable run: `failed to run — …` (the codemod threw), `no files under
+<path> were processed` (nothing matched, or `--path` is wrong) and `declined all
+N file(s) it looked at` (it bailed on every file it saw). Tell me if any of them
+appears — the by-hand pass below is then the only thing covering that entry.
 
 Include the entries flagged `catchUp: true`. They shipped before the version
 this project was on and may never have been done here.
+
+`action` has three values, not two. `codemod` means a transform exists and has
+already run; `manual` means there is an edit to make by hand; `none` means the
+behaviour changed with nothing to rewrite — read `apply` and judge whether the
+new behaviour is a problem here, then say so. The version an entry shipped in is
+`since`.
 
 For each entry:
 
@@ -260,12 +306,15 @@ nothing, what we decided together — and whether anything is still open, with t
 reason from the list above. If nothing is open, say so plainly rather than
 padding the summary with caveats.
 
-Finally, do not leave the whole migration sitting uncommitted. Walk me through
-the diff at the level of what changed and why — not file by file — then propose
-how to commit it: one commit, or one per package in a monorepo, with the
-messages written out. Commit once I say so. If I would rather review first,
-leave the tree as it is and say so in one line; do not commit without an answer,
-and do not push in any case.
+Finally, do not leave the migration sitting uncommitted. In a monorepo you
+already committed once per package above; those commits stand, and what is left
+is everything that came after them — the by-hand edits, the fixes to what the
+upgrade broke, the decisions we just settled. Walk me through the diff at the
+level of what changed and why — not file by file — then propose how to commit
+the remainder, with the messages written out. If the tree is already clean, say
+that instead and list the commits you made. Commit once I say so. If I would
+rather review first, leave the tree as it is and say so in one line; do not
+commit without an answer, and do not push in any case.
 
 ```
 
