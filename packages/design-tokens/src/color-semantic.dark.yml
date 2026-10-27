@@ -24,6 +24,8 @@
 # that still reads as the hue, AA not required (#3508).
 # Selected is a resting state: plain/outline selected takes the soft surface
 # (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
+# Their soft surfaces (quiet.100–300) take 1700/1600/1500: on 1800 Badges
+# and Alerts blended into the card (#3532, mStudio check of #3459).
 #
 # The neutral ramp has three roles of its own (keys 100–300, quiet to strong):
 #   elevation  100 raised (card, modal), 200 ground (page, field, track),
@@ -68,11 +70,11 @@ info:
   color:
     quiet:
       100:
-        value: "{color.system-info.1800}"
-      200:
         value: "{color.system-info.1700}"
-      300:
+      200:
         value: "{color.system-info.1600}"
+      300:
+        value: "{color.system-info.1500}"
     strong:
       100:
         value: "{color.system-info.700}"
@@ -102,11 +104,11 @@ danger:
   color:
     quiet:
       100:
-        value: "{color.system-danger.1800}"
-      200:
         value: "{color.system-danger.1700}"
-      300:
+      200:
         value: "{color.system-danger.1600}"
+      300:
+        value: "{color.system-danger.1500}"
     strong:
       100:
         value: "{color.system-danger.700}"
@@ -119,11 +121,11 @@ warning:
   color:
     quiet:
       100:
-        value: "{color.system-warning.1800}"
-      200:
         value: "{color.system-warning.1700}"
-      300:
+      200:
         value: "{color.system-warning.1600}"
+      300:
+        value: "{color.system-warning.1500}"
     strong:
       100:
         value: "{color.system-warning.700}"
