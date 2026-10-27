@@ -79,6 +79,7 @@ test.each(testEnvironments)(
       ContextualHelp,
       ContextualHelpTrigger,
       Button,
+      Truncate,
     },
   }) => {
     await render(
@@ -102,6 +103,18 @@ test.each(testEnvironments)(
           </ContextualHelpTrigger>
           <Badge>Badge</Badge>
           <AlertBadge>Badge</AlertBadge>
+        </Heading>
+        <Heading>
+          <Truncate>Short truncated title</Truncate>
+          <AlertBadge status="danger">Badge</AlertBadge>
+        </Heading>
+        <Heading>
+          <Truncate>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star.
+          </Truncate>
+          <AlertBadge status="danger">Badge</AlertBadge>
         </Heading>
       </Flex>,
     );

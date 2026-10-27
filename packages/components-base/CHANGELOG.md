@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+**Note:** Version bump only for package @mittwald/flow-components-base
+
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+**Note:** Version bump only for package @mittwald/flow-components-base
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/flow-components-base
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+### Bug Fixes
+
+* **OverlayController:** reset a pending close confirmation when the overlay closes without it ([bd5a579](https://github.com/mittwald/flow/commit/bd5a579cbfc4a557f7d38c5fc4800680a60b1b8e))
+
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-components-base
+
+## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
+
+### Code Refactoring
+
+* **OverlayController:** move the overlay state to components-base ([f8ed797](https://github.com/mittwald/flow/commit/f8ed7977978879e362214f9eaacbc89d0e9951b9))
+
 ## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
 
 **Note:** Version bump only for package @mittwald/flow-components-base

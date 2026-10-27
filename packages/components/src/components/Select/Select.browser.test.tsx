@@ -120,3 +120,30 @@ test("a re-render keeps the closed select's elements", async () => {
   expect(toggle().element()).toBe(button);
   expect(toggle().element().parentElement).toBe(field);
 });
+
+test("reordered options are listed in their new order", async () => {
+  const renderOptions = (starships: string[]) => (
+    <Select>
+      <Label>Starship</Label>
+      {starships.map((starship) => (
+        <Option key={starship} value={starship}>
+          {starship}
+        </Option>
+      ))}
+    </Select>
+  );
+  const starships = ["Millennium Falcon", "X-Wing", "TIE Fighter"];
+
+  const { rerender } = await render(renderOptions(starships));
+  await rerender(renderOptions(starships.toReversed()));
+  await toggle().click();
+
+  await expect
+    .poll(() =>
+      page
+        .getByRole("option")
+        .elements()
+        .map((element) => element.textContent),
+    )
+    .toEqual(starships.toReversed());
+});

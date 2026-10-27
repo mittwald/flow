@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+### Bug Fixes
+
+* **PasswordCreationField:** render the policy error after the consumer&#x27;s ([c0d019d](https://github.com/mittwald/flow/commit/c0d019d64269b1f2cad164face3f09934d10b650))
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+### Bug Fixes
+
+* **Heading:** truncate the title so tunnelled content stays on its line ([#3582](https://github.com/mittwald/flow/issues/3582)) ([96248ea](https://github.com/mittwald/flow/commit/96248ea535865a785bd26e2d38b52dbf8679f521))
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
+
+### Bug Fixes
+
+* **Text:** drop the default pretty text wrapping ([#3573](https://github.com/mittwald/flow/issues/3573)) ([1334401](https://github.com/mittwald/flow/commit/133440137e729c6e1631223b037fe0371f4672c9))
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+### Bug Fixes
+
+* **OverlayController:** close the confirmation modal when its confirmation is withdrawn ([847e2e2](https://github.com/mittwald/flow/commit/847e2e29309aa8de45d711916be4b0a4c4cd5b27))
+* **OverlayController:** reset a pending close confirmation when the overlay closes without it ([bd5a579](https://github.com/mittwald/flow/commit/bd5a579cbfc4a557f7d38c5fc4800680a60b1b8e))
+
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+### Bug Fixes
+
+* **Link:** keep aria-current compatible with react-aria-components 1.22 ([6be7623](https://github.com/mittwald/flow/commit/6be76232088bbd5150859b115e204bbd0e1df286)), closes [#3558](https://github.com/mittwald/flow/issues/3558)
+
+## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
+
+### Code Refactoring
+
+* **OverlayController:** move the overlay state to components-base ([f8ed797](https://github.com/mittwald/flow/commit/f8ed7977978879e362214f9eaacbc89d0e9951b9))
+
 ## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+### Bug Fixes
+
+* **PasswordCreationField:** render the policy error after the consumer&#x27;s ([c0d019d](https://github.com/mittwald/flow/commit/c0d019d64269b1f2cad164face3f09934d10b650))
+* **react-tunnel:** check the entry order in the commit, not the render ([2f631ca](https://github.com/mittwald/flow/commit/2f631caaccf450152d346286522027fcd61cc1cd))
+* **react-tunnel:** keep the reorder request through a StrictMode replay ([354d739](https://github.com/mittwald/flow/commit/354d73944be5138753b9a68f910b898d022d36e3))
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
+### Documentation
+
+* align component card tokens with the list tile ([6f23ee8](https://github.com/mittwald/flow/commit/6f23ee82c7949a6648e5f94a9b8948b8239df5cb))
+
+### Tests
+
+* update visual regression screenshots ([4c1f5e2](https://github.com/mittwald/flow/commit/4c1f5e20036916b377959ba085f88b96212d5784))
+
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+### Bug Fixes
+
+* **Heading:** truncate the title so tunnelled content stays on its line ([#3582](https://github.com/mittwald/flow/issues/3582)) ([96248ea](https://github.com/mittwald/flow/commit/96248ea535865a785bd26e2d38b52dbf8679f521))
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
+
+### Bug Fixes
+
+* **Text:** drop the default pretty text wrapping ([#3573](https://github.com/mittwald/flow/issues/3573)) ([1334401](https://github.com/mittwald/flow/commit/133440137e729c6e1631223b037fe0371f4672c9))
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+### Bug Fixes
+
+* **OverlayController:** close the confirmation modal when its confirmation is withdrawn ([847e2e2](https://github.com/mittwald/flow/commit/847e2e29309aa8de45d711916be4b0a4c4cd5b27))
+* **OverlayController:** reset a pending close confirmation when the overlay closes without it ([bd5a579](https://github.com/mittwald/flow/commit/bd5a579cbfc4a557f7d38c5fc4800680a60b1b8e))
+
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+### Bug Fixes
+
+* **Link:** keep aria-current compatible with react-aria-components 1.22 ([6be7623](https://github.com/mittwald/flow/commit/6be76232088bbd5150859b115e204bbd0e1df286)), closes [#3558](https://github.com/mittwald/flow/issues/3558)
+
+## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
+
+### Bug Fixes
+
+* **remote-vue-components:** run the overlay controller on the shared state ([5a7c216](https://github.com/mittwald/flow/commit/5a7c2163a1893f9ccfdb44536ebd70d8da1d8f19))
+
+### Code Refactoring
+
+* **OverlayController:** move the overlay state to components-base ([f8ed797](https://github.com/mittwald/flow/commit/f8ed7977978879e362214f9eaacbc89d0e9951b9))
+
 ## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
 
 ### Bug Fixes

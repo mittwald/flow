@@ -18,7 +18,10 @@ import {
   useModalController,
   useOverlayController,
 } from "@/index";
-import { createOverlayController } from "@/overlays/overlayController";
+import {
+  createOverlayController,
+  type OverlayController,
+} from "@/overlays/overlayController";
 import {
   cleanupRemote,
   hostOverlay,
@@ -837,6 +840,138 @@ describe("Modal confirmOnClose", () => {
 
     await expect.element(confirmation()).toBeVisible();
   });
+
+  /*
+   * The confirmation modal has a controller of its own, and closing it by
+   * any way other than its buttons is the answer "keep editing".
+   */
+  test("keeps the modal open when the confirmation is dismissed", async () => {
+    await openUnsavedSquadron();
+
+    await page.getByRole("button", { name: "Discard" }).click();
+    await expect.element(confirmation()).toBeVisible();
+
+    await page
+      .getByRole("dialog", { name: "Unsaved changes" })
+      .element()
+      .dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      );
+
+    await isClosed("Unsaved changes");
+    await expect
+      .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+      .toBeVisible();
+
+    /* Answered, not stuck: the next close asks again. */
+    await page.getByRole("button", { name: "Discard" }).click();
+    await expect.element(confirmation()).toBeVisible();
+  });
+
+  test.each([
+    {
+      closedBy: "a close that bypasses it",
+      close: (controller: OverlayController) =>
+        controller.close({ bypassConfirmation: true }),
+    },
+    {
+      closedBy: "a close a grant allows",
+      close: (controller: OverlayController) => {
+        const release = controller.grantCloseWithoutConfirmation();
+        controller.close();
+        release();
+      },
+    },
+  ])("does not ask again on reopen after $closedBy", async ({ close }) => {
+    const controller = createOverlayController();
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(Modal, { controller, confirmOnClose: true }, () =>
+            h(Heading, null, () => "Unsaved squadron"),
+          ),
+      ),
+    );
+
+    controller.open();
+    await expect.element(dialog()).toBeVisible();
+    controller.close();
+    await expect.element(confirmation()).toBeVisible();
+
+    close(controller);
+    await vi.waitFor(() =>
+      expect(document.querySelector("[role=dialog]")).toBeNull(),
+    );
+
+    controller.open();
+    await expect
+      .element(page.getByRole("heading", { name: "Unsaved squadron" }))
+      .toBeVisible();
+    expect(controller.isConfirmingClose.value).toBe(false);
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    await isClosed("Unsaved changes");
+  });
+
+  /*
+   * The requirement is one source on a controller that usually outlives the
+   * modal, so it goes when the modal does — or when the modal moves on to
+   * another controller.
+   */
+  test("withdraws its requirement when it unmounts", async () => {
+    const controller = createOverlayController({ isDefaultOpen: true });
+    const isShown = ref(true);
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          isShown.value
+            ? h(Modal, { controller, confirmOnClose: true }, () =>
+                h(Heading, null, () => "Unsaved squadron"),
+              )
+            : null,
+      ),
+    );
+
+    await expect.element(dialog()).toBeVisible();
+    expect(controller.confirmOnClose.value).toBe(true);
+
+    isShown.value = false;
+    await vi.waitFor(() => expect(controller.confirmOnClose.value).toBe(false));
+
+    controller.close();
+    expect(controller.isConfirmingClose.value).toBe(false);
+    expect(controller.isOpen.value).toBe(false);
+  });
+
+  test("withdraws its requirement from a controller it no longer uses", async () => {
+    const first = createOverlayController({ isDefaultOpen: true });
+    const second = createOverlayController({ isDefaultOpen: true });
+    const useSecond = ref(false);
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(
+            Modal,
+            {
+              controller: useSecond.value ? second : first,
+              confirmOnClose: true,
+            },
+            () => h(Heading, null, () => "Unsaved squadron"),
+          ),
+      ),
+    );
+
+    await expect.element(dialog()).toBeVisible();
+    useSecond.value = true;
+    await vi.waitFor(() => expect(second.confirmOnClose.value).toBe(true));
+    expect(first.confirmOnClose.value).toBe(false);
+
+    first.close();
+    expect(first.isConfirmingClose.value).toBe(false);
+    expect(first.isOpen.value).toBe(false);
+  });
 });
 
 describe("useModalController", () => {
@@ -890,5 +1025,41 @@ describe("useModalController", () => {
 
     await vi.waitFor(() => expect(fromTrigger).toBeDefined());
     expect(fromInside).not.toBe(fromTrigger);
+  });
+});
+
+/*
+ * The controller's refs read the shared MobX state, so a component that reads
+ * them re-renders when the state changes — whoever changed it.
+ */
+describe("OverlayController refs", () => {
+  test("re-render a component when the shared state changes", async () => {
+    const controller = createOverlayController({ isDefaultOpen: true });
+    controller.confirmOnClose.value = true;
+
+    renderRemote(
+      defineComponent(
+        () => () =>
+          h(
+            Heading,
+            null,
+            () =>
+              `${controller.isOpen.value ? "open" : "closed"}, ${
+                controller.isConfirmingClose.value ? "asking" : "not asking"
+              }`,
+          ),
+      ),
+    );
+
+    const shows = (text: string) =>
+      expect
+        .element(page.getByRole("heading", { name: text, exact: true }))
+        .toBeVisible();
+
+    await shows("open, not asking");
+    controller.close();
+    await shows("open, asking");
+    controller.confirmClose();
+    await shows("closed, not asking");
   });
 });
