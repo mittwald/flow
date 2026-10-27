@@ -23,4 +23,4 @@ accent-box:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.l}"

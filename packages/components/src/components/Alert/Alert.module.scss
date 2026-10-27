@@ -1,11 +1,17 @@
 @use "@/styles/mixins/skeleton";
 
 .alert {
+  position: relative;
+  isolation: isolate;
   border-radius: var(--alert--corner-radius);
   border-width: var(--alert--border-width);
   border-style: var(--alert--border-style);
-  border-inline-start-width: var(--alert--border-x-start-width);
   padding: var(--alert--padding);
+
+  /* The start edge overlays the padding: keep the content clear of it */
+  padding-inline-start: calc(
+    var(--alert--padding) + var(--alert--border-x-start-width)
+  );
   display: flex;
   flex-direction: column;
   row-gap: var(--alert--heading-to-content-spacing);
@@ -17,6 +23,30 @@
     vertical-align: bottom;
     display: inline-block;
     margin-inline-end: var(--heading--icon-to-text-spacing);
+  }
+
+  /* The start edge is masked out of a layer in the alert's shape: as a
+     border-inline-start it bent into the corner radius. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    mask-image: linear-gradient(
+      to right,
+      #000 var(--alert--border-x-start-width),
+      transparent 0
+    );
+  }
+
+  &:dir(rtl)::before {
+    mask-image: linear-gradient(
+      to left,
+      #000 var(--alert--border-x-start-width),
+      transparent 0
+    );
   }
 
   @extend .info;
@@ -37,6 +67,10 @@
       border-color: var(--alert--#{$status}-border-color);
       background-color: var(--alert--#{$status}-background-color);
 
+      &::before {
+        background-color: var(--alert--#{$status}-border-color);
+      }
+
       .heading {
         color: var(--alert--#{$status}-heading-color);
       }
@@ -53,6 +87,10 @@
   &.skeleton {
     border-color: skeleton.$background-color;
     background-color: transparent;
+
+    &::before {
+      background-color: skeleton.$background-color;
+    }
   }
 
   /* Layout */

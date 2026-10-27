@@ -2,7 +2,7 @@ notification:
   padding:
     value: "{size-px.s}"
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.l}"
   border-x-start-width:
     value: "{border-width.300}"
   border-style:

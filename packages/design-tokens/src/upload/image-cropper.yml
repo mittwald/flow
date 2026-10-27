@@ -8,7 +8,7 @@ image-cropper:
   border-width:
     value: "{border-width.100}"
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.l}"
   grid-width:
     value: "0.5px"
   grid-color:

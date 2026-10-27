@@ -6,7 +6,7 @@ badge:
   line-height:
     value: "{single-line-height}"
   corner-radius:
-    value: "{corner-radius.l}"
+    value: "{corner-radius.xl}"
   # No border: the soft surface alone carries the badge (#3550). AlertBadge
   # shares the width.
   border-width:
