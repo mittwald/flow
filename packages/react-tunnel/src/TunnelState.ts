@@ -59,8 +59,8 @@ export class TunnelState {
   private indexGeneration = 0;
   private orderGeneration = 0;
   private readonly orderListeners = new Set<() => void>();
-  private readonly renderedIndices = new Map<string, number>();
-  private isRenderedIndicesResetScheduled = false;
+  private readonly committedIndices = new Map<string, number>();
+  private isCommittedIndicesResetScheduled = false;
 
   public constructor(
     id = defaultTunnelProviderId,
@@ -97,15 +97,27 @@ export class TunnelState {
     return this.nextIndex++;
   }
 
-  /** Whether `index` renders after a higher index in the same render pass. */
-  private isRenderedOutOfOrder(tunnelId: string, index: number) {
-    const previousIndex = this.renderedIndices.get(tunnelId);
-    this.renderedIndices.set(tunnelId, index);
-    if (!this.isRenderedIndicesResetScheduled) {
-      this.isRenderedIndicesResetScheduled = true;
+  /**
+   * Whether `index` commits after a higher index in the same commit. Called
+   * from a layout effect: unlike a concurrent render, a commit does not yield,
+   * so the microtask clears the indices only between commits.
+   */
+  public isCommittedOutOfOrder(
+    tunnelId: string = defaultId,
+    index: number,
+    generation: number,
+  ) {
+    if (generation !== this.orderGeneration) {
+      // A reorder is pending, and its pass commits fresh indices.
+      return false;
+    }
+    const previousIndex = this.committedIndices.get(tunnelId);
+    this.committedIndices.set(tunnelId, index);
+    if (!this.isCommittedIndicesResetScheduled) {
+      this.isCommittedIndicesResetScheduled = true;
       queueMicrotask(() => {
-        this.renderedIndices.clear();
-        this.isRenderedIndicesResetScheduled = false;
+        this.committedIndices.clear();
+        this.isCommittedIndicesResetScheduled = false;
       });
     }
     return previousIndex !== undefined && index < previousIndex;
@@ -114,10 +126,11 @@ export class TunnelState {
   /**
    * An entry takes its index from a counter while it renders, so entries that
    * render together are ordered like the tree. An entry that mounts next to
-   * committed ones only knows the count so far, and a keyed reorder keeps the
-   * indices of the moved entries. Both return `needsReorder`, and the entry
-   * then calls `reorderEntries` in a layout effect: every entry of this state
-   * renders again in one pass, in tree order, and takes its index anew.
+   * committed ones only knows the count so far (it returns `needsReorder`), and
+   * a keyed reorder keeps the indices of the moved entries
+   * (`isCommittedOutOfOrder`). Either way the entry calls `reorderEntries` in a
+   * layout effect: every entry of this state renders again in one pass, in tree
+   * order, and takes its index anew.
    */
   public useEntryIndex(tunnelId: string = defaultId) {
     const generation = useSyncExternalStore(
@@ -143,20 +156,17 @@ export class TunnelState {
       };
     }
 
-    const { index } = taken.current;
-    const isOutOfOrder = this.isRenderedOutOfOrder(tunnelId, index);
-    const mountsNextToCommittedEntries =
-      isMount && (this.committedChildren.get(tunnelId)?.size ?? 0) > 0;
-
     return {
-      index,
-      needsReorder: isOutOfOrder || mountsNextToCommittedEntries,
+      index: taken.current.index,
+      generation,
+      needsReorder:
+        isMount && (this.committedChildren.get(tunnelId)?.size ?? 0) > 0,
     };
   }
 
   public reorderEntries(): void {
     this.orderGeneration++;
-    this.renderedIndices.clear();
+    this.committedIndices.clear();
     for (const listener of this.orderListeners) {
       listener();
     }
