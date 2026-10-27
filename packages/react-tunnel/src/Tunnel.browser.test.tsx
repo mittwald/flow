@@ -4,6 +4,7 @@ import TunnelProvider from "./components/TunnelProvider";
 import { expect, test, describe, vitest } from "vitest";
 import { render } from "vitest-browser-react";
 import React, {
+  Fragment,
   StrictMode,
   Suspense,
   useState,
@@ -346,34 +347,42 @@ test("Order of multiple children is preserved when entry is added dynamically", 
   expect(dom.getByTestId("exit")).toHaveTextContent("02");
 });
 
-test("Order follows the tree when an entry mounts later without the provider re-rendering", async () => {
-  const LateEntry: FC = () => {
-    const [isShown, setIsShown] = useState(false);
-    return (
-      <>
-        <button onClick={() => setIsShown(true)} data-testid="show">
-          Show
-        </button>
-        {isShown && <TunnelEntry>B</TunnelEntry>}
-      </>
+test.each([
+  ["", Fragment],
+  [" in StrictMode", StrictMode],
+])(
+  "Order follows the tree when an entry mounts later without the provider re-rendering%s",
+  async (_, Wrapper) => {
+    const LateEntry: FC = () => {
+      const [isShown, setIsShown] = useState(false);
+      return (
+        <>
+          <button onClick={() => setIsShown(true)} data-testid="show">
+            Show
+          </button>
+          {isShown && <TunnelEntry>B</TunnelEntry>}
+        </>
+      );
+    };
+
+    const dom = await render(
+      <Wrapper>
+        <TunnelProvider>
+          <div data-testid="exit">
+            <TunnelExit />
+          </div>
+          <TunnelEntry>A</TunnelEntry>
+          <LateEntry />
+          <TunnelEntry>C</TunnelEntry>
+        </TunnelProvider>
+      </Wrapper>,
     );
-  };
+    expect(dom.getByTestId("exit")).toHaveTextContent("AC");
 
-  const dom = await render(
-    <TunnelProvider>
-      <div data-testid="exit">
-        <TunnelExit />
-      </div>
-      <TunnelEntry>A</TunnelEntry>
-      <LateEntry />
-      <TunnelEntry>C</TunnelEntry>
-    </TunnelProvider>,
-  );
-  expect(dom.getByTestId("exit")).toHaveTextContent("AC");
-
-  await userEvent.click(dom.getByTestId("show"));
-  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
-});
+    await userEvent.click(dom.getByTestId("show"));
+    expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+  },
+);
 
 test("Order follows the tree when the provider's parent appends an entry", async () => {
   const Test: FC<PropsWithChildren> = (props) => (

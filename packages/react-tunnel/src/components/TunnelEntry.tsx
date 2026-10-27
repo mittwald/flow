@@ -52,7 +52,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   useLayoutEffect(() => {
     const isOutOfOrder = tunnel.isCommittedOutOfOrder(id, index, generation);
     if (needsReorder || isOutOfOrder) {
-      tunnel.reorderEntries();
+      tunnel.reorderEntries(generation);
     }
   });
 

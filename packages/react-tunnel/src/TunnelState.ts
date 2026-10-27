@@ -142,9 +142,11 @@ export class TunnelState {
       instanceId: string;
       generation: number;
       index: number;
+      // Kept with the index: StrictMode replays the mount render with this
+      // ref already set.
+      mountsNextToCommittedEntries: boolean;
     }>(null);
 
-    const isMount = taken.current === null;
     if (
       taken.current?.instanceId !== this.instanceId ||
       taken.current.generation !== generation
@@ -153,18 +155,28 @@ export class TunnelState {
         instanceId: this.instanceId,
         generation,
         index: this.takeIndex(generation),
+        mountsNextToCommittedEntries:
+          taken.current === null &&
+          (this.committedChildren.get(tunnelId)?.size ?? 0) > 0,
       };
     }
 
     return {
       index: taken.current.index,
       generation,
-      needsReorder:
-        isMount && (this.committedChildren.get(tunnelId)?.size ?? 0) > 0,
+      needsReorder: taken.current.mountsNextToCommittedEntries,
     };
   }
 
-  public reorderEntries(): void {
+  /**
+   * Re-renders every entry so it takes its index anew. `generation` is the one
+   * the calling entry rendered with: when a reorder is already pending, the
+   * call does nothing, so entries mounting in one commit reorder once.
+   */
+  public reorderEntries(generation: number): void {
+    if (generation !== this.orderGeneration) {
+      return;
+    }
     this.orderGeneration++;
     this.committedIndices.clear();
     for (const listener of this.orderListeners) {
