@@ -1,4 +1,10 @@
-import { type ReactNode, useId, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
 
@@ -50,6 +56,11 @@ export class TunnelState {
   >();
 
   private nextIndex = 0;
+  private indexGeneration = 0;
+  private orderGeneration = 0;
+  private readonly orderListeners = new Set<() => void>();
+  private readonly renderedIndices = new Map<string, number>();
+  private isRenderedIndicesResetScheduled = false;
 
   public constructor(
     id = defaultTunnelProviderId,
@@ -66,23 +77,89 @@ export class TunnelState {
 
   public static useNew(id?: string): TunnelState {
     const instanceId = useId();
-    const tunnelState = useState(() => new TunnelState(id, instanceId))[0];
-    tunnelState.resetIndex();
-    return tunnelState;
+    return useState(() => new TunnelState(id, instanceId))[0];
   }
 
-  public resetIndex() {
-    this.nextIndex = 0;
-  }
+  private readonly subscribeToOrder = (listener: () => void) => {
+    this.orderListeners.add(listener);
+    return () => {
+      this.orderListeners.delete(listener);
+    };
+  };
 
-  public useEntryIndex() {
-    const thisIdRef = useRef(this.instanceId);
-    const thisIndex = useRef<number | null>(null);
-    if (thisIndex.current === null || thisIdRef.current !== this.instanceId) {
-      thisIdRef.current = this.instanceId;
-      thisIndex.current = this.nextIndex++;
+  private readonly getOrderGeneration = () => this.orderGeneration;
+
+  private takeIndex(generation: number) {
+    if (this.indexGeneration !== generation) {
+      this.indexGeneration = generation;
+      this.nextIndex = 0;
     }
-    return thisIndex.current;
+    return this.nextIndex++;
+  }
+
+  /** Whether `index` renders after a higher index in the same render pass. */
+  private isRenderedOutOfOrder(tunnelId: string, index: number) {
+    const previousIndex = this.renderedIndices.get(tunnelId);
+    this.renderedIndices.set(tunnelId, index);
+    if (!this.isRenderedIndicesResetScheduled) {
+      this.isRenderedIndicesResetScheduled = true;
+      queueMicrotask(() => {
+        this.renderedIndices.clear();
+        this.isRenderedIndicesResetScheduled = false;
+      });
+    }
+    return previousIndex !== undefined && index < previousIndex;
+  }
+
+  /**
+   * An entry takes its index from a counter while it renders, so entries that
+   * render together are ordered like the tree. An entry that mounts next to
+   * committed ones only knows the count so far, and a keyed reorder keeps the
+   * indices of the moved entries. Both return `needsReorder`, and the entry
+   * then calls `reorderEntries` in a layout effect: every entry of this state
+   * renders again in one pass, in tree order, and takes its index anew.
+   */
+  public useEntryIndex(tunnelId: string = defaultId) {
+    const generation = useSyncExternalStore(
+      this.subscribeToOrder,
+      this.getOrderGeneration,
+      this.getOrderGeneration,
+    );
+    const taken = useRef<{
+      instanceId: string;
+      generation: number;
+      index: number;
+    }>(null);
+
+    const isMount = taken.current === null;
+    if (
+      taken.current?.instanceId !== this.instanceId ||
+      taken.current.generation !== generation
+    ) {
+      taken.current = {
+        instanceId: this.instanceId,
+        generation,
+        index: this.takeIndex(generation),
+      };
+    }
+
+    const { index } = taken.current;
+    const isOutOfOrder = this.isRenderedOutOfOrder(tunnelId, index);
+    const mountsNextToCommittedEntries =
+      isMount && (this.committedChildren.get(tunnelId)?.size ?? 0) > 0;
+
+    return {
+      index,
+      needsReorder: isOutOfOrder || mountsNextToCommittedEntries,
+    };
+  }
+
+  public reorderEntries(): void {
+    this.orderGeneration++;
+    this.renderedIndices.clear();
+    for (const listener of this.orderListeners) {
+      listener();
+    }
   }
 
   private buildEntryState(
