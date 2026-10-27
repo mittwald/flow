@@ -7,8 +7,10 @@ alert:
   # apart from the AccentBox (#3564).
   border-width:
     value: 0
+  # As wide as the corner radius: the stripe ends where the corner curve
+  # ends instead of breaking off inside it.
   border-x-start-width:
-    value: "{border-width.400}"
+    value: "{alert.corner-radius}"
   border-style:
     value: "{border-style.default}"
   heading-to-content-spacing:

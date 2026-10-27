@@ -3,8 +3,10 @@ notification:
     value: "{size-px.s}"
   corner-radius:
     value: "{corner-radius.l}"
+  # As wide as the corner radius: the stripe ends where the corner curve
+  # ends instead of breaking off inside it.
   border-x-start-width:
-    value: "{border-width.300}"
+    value: "{notification.corner-radius}"
   border-style:
     value: "{border-style.default}"
   border-width:
