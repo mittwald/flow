@@ -47,6 +47,10 @@ import {
 } from "@/components/List/components/Items/views/GridListItem/GridListItem";
 import { usePropsContext } from "@/lib/propsContext/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  TableRow as TableRowComponent,
+  type TableRowProps,
+} from "@/components/Table/components/TableRow/TableRow";
 
 interface Data {
   num: number;
@@ -1505,6 +1509,48 @@ describe("Table rows", () => {
     await expect
       .element(page.getByText("Row: 42 selected"))
       .toBeInTheDocument();
+  });
+
+  /*
+   * react-aria re-renders every row whenever its table renders, Flow's row
+   * memo or not. Its rows call a `className` function on each of those
+   * renders, so a view that passes one counts them.
+   */
+  test("a parent re-render does not re-render the table's rows", async () => {
+    let rowRenderCount = 0;
+    const CountingTableRow: FC<TableRowProps> = (props) => (
+      <TableRowComponent
+        {...props}
+        className={(renderProps) => {
+          rowRenderCount++;
+          return (
+            (typeof props.className === "function"
+              ? props.className(renderProps)
+              : props.className) ?? ""
+          );
+        }}
+      />
+    );
+
+    await render(
+      <ViewComponentContextProvider components={{ TableRow: CountingTableRow }}>
+        <TableList withDependencies />
+      </ViewComponentContextProvider>,
+    );
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+    rowRenderCount = 0;
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    expect(rowRenderCount).toBe(0);
+
+    await userEvent.click(select);
+    await expect
+      .element(page.getByText("Row: 42 selected"))
+      .toBeInTheDocument();
+    expect(rowRenderCount).toBeGreaterThan(0);
   });
 
   test("a row with renderDependencies re-renders when a cell prop changes", async () => {

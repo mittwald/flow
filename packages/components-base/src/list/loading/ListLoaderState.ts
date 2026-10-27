@@ -1,6 +1,6 @@
 import type { BatchLoadingState, ListData } from "./types";
 import { action, computed, makeObservable, observable } from "mobx";
-import { uniqueBy } from "remeda";
+import { isShallowEqual, uniqueBy } from "remeda";
 
 export interface ListLoaderStateOptions<T> {
   /**
@@ -62,15 +62,23 @@ export class ListLoaderState<T> {
     this.dataBatches = [];
   }
 
+  /**
+   * Keeps the current batch when `data` holds the same items in the same order.
+   * A loader that builds a new array on every fetch — a refetch whose items its
+   * data layer reuses — would otherwise re-render the whole list for nothing.
+   */
   public setDataBatch(index: number, data: ListData<T>): void {
     if (this.dataBatches.length === 0) {
       this.prevDataBatches = [];
     }
 
-    if (this.dataBatches[index] !== data) {
-      this.dataBatches[index] = data;
-      this.prevDataBatches[index] = data;
+    const current = this.dataBatches[index];
+    if (current !== undefined && isShallowEqual(current, data)) {
+      return;
     }
+
+    this.dataBatches[index] = data;
+    this.prevDataBatches[index] = data;
   }
 
   public setBatchLoadingState(index: number, state: BatchLoadingState): void {
