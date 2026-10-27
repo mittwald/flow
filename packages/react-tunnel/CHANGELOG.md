@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.44](https://github.com/mittwald/flow/compare/1.6.0-next.43...1.6.0-next.44) (2026-10-27)
+
+### Performance Improvements
+
+* **react-tunnel:** memoize the TunnelProvider context value ([a147290](https://github.com/mittwald/flow/commit/a147290c952a6a323c03d49450d0b8dde9615a1d))
+
 ## [1.6.0-next.43](https://github.com/mittwald/flow/compare/1.6.0-next.42...1.6.0-next.43) (2026-10-27)
 
 **Note:** Version bump only for package @mittwald/react-tunnel

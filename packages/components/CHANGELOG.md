@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.44](https://github.com/mittwald/flow/compare/1.6.0-next.43...1.6.0-next.44) (2026-10-27)
+
+### Bug Fixes
+
+* **PropsContextProvider:** update the context when its props change ([9ae9265](https://github.com/mittwald/flow/commit/9ae9265f3b01cebba8d9baf3003afb864d1bec2c))
+
+### Performance Improvements
+
+* **components:** keep the props context stable when a UI component re-renders ([b8ba3ac](https://github.com/mittwald/flow/commit/b8ba3ac81d826eb21681db0c0cfc2a4225ff2b20))
+* **PropsContextProvider:** compare plain objects in props by content ([44b08a1](https://github.com/mittwald/flow/commit/44b08a14fbcd8dc2736bbf38aee25b498bea012a))
+
+### Code Refactoring
+
+* **components:** extract the props comparison into isPlainObjectDeepEqual ([3ade70a](https://github.com/mittwald/flow/commit/3ade70aa2ce3afdadcbe4eb2e3f0db895c3c4519))
+
 ## [1.6.0-next.43](https://github.com/mittwald/flow/compare/1.6.0-next.42...1.6.0-next.43) (2026-10-27)
 
 ### Performance Improvements
