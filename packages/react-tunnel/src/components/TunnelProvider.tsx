@@ -1,4 +1,4 @@
-import { useContext, type FC, type PropsWithChildren } from "react";
+import { useContext, useMemo, type FC, type PropsWithChildren } from "react";
 import tunnelContext from "@/context";
 import { TunnelState } from "@/TunnelState";
 
@@ -16,15 +16,13 @@ export const TunnelProvider: FC<TunnelProviderProps> = (props) => {
   const parentContext = useContext(tunnelContext);
   const state = TunnelState.useNew(id);
 
+  const value = useMemo(
+    () => ({ state, parentContext }),
+    [state, parentContext],
+  );
+
   return (
-    <tunnelContext.Provider
-      value={{
-        state,
-        parentContext,
-      }}
-    >
-      {children}
-    </tunnelContext.Provider>
+    <tunnelContext.Provider value={value}>{children}</tunnelContext.Provider>
   );
 };
 
