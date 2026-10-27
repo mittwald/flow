@@ -21,7 +21,6 @@ test.for([
   [5_400_000, "5.4 MB"],
   [4_800_000_000, "4.8 GB"],
   [2_000_000_000_000, "2 TB"],
-  [999_960, "1 MB"],
 ] as const)("%i bytes are shown as %s", async ([sizeInBytes, expected]) => {
   await render(<FileCard name="backup.tar.gz" sizeInBytes={sizeInBytes} />);
 

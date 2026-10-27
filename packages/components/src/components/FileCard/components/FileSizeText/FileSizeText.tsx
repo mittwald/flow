@@ -16,21 +16,11 @@ const units = [
   "petabyte",
 ] as const;
 
-const maximumFractionDigits = 1;
-
 const getUnit = (sizeInBytes: number) => {
-  let index = Math.min(
+  const index = Math.min(
     Math.max(Math.floor(Math.log10(sizeInBytes) / 3), 0),
     units.length - 1,
   );
-
-  // 999,960 bytes would otherwise round to "1,000 kB"
-  const roundingFactor = 10 ** maximumFractionDigits;
-  const rounded =
-    Math.round((sizeInBytes / 1000 ** index) * roundingFactor) / roundingFactor;
-  if (rounded >= 1000 && index < units.length - 1) {
-    index++;
-  }
 
   return { unit: units[index] ?? "byte", value: sizeInBytes / 1000 ** index };
 };
@@ -43,7 +33,7 @@ export const FileSizeText: FC<Props> = (props) => {
     style: "unit",
     unit,
     unitDisplay: unit === "byte" ? "long" : "short",
-    maximumFractionDigits,
+    maximumFractionDigits: 1,
   });
 
   return <Text className={styles.subTitle}>{formatter.format(value)}</Text>;
