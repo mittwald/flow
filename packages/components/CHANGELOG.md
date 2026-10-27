@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.43](https://github.com/mittwald/flow/compare/1.6.0-next.42...1.6.0-next.43) (2026-10-27)
+
+### Performance Improvements
+
+* **List:** skip rendering an unchanged table ([a6ea94a](https://github.com/mittwald/flow/commit/a6ea94a40721125132d60a2156bdf38c6567ce66)), closes [adobe/react-spectrum#10759](https://github.com/adobe/react-spectrum/issues/10759)
+
 ## [1.6.0-next.42](https://github.com/mittwald/flow/compare/1.6.0-next.41...1.6.0-next.42) (2026-10-26)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
