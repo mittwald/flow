@@ -36,7 +36,8 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
 
   useEffect(() => {
     containerRef.current?.focus();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- rerunning once the ref is set takes the focus back from the dialog's autofocus
+  }, [containerRef.current]);
 
   const paginate = (direction: number) => {
     const next = Math.min(Math.max(currentIndex + direction, 0), count - 1);
