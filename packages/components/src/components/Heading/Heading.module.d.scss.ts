@@ -8,6 +8,7 @@ declare const classNames: {
   readonly "light-static": "light-static";
   readonly headingText: "headingText";
   readonly icon: "icon";
+  readonly "flow--truncate": "flow--truncate";
   readonly headingContent: "headingContent";
   readonly headingTextSpacer: "headingTextSpacer";
   readonly headingContentItem: "headingContentItem";

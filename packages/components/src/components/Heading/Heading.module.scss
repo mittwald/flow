@@ -27,17 +27,30 @@
       display: inline-block;
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
-
-    > :global(.flow--truncate) {
-      display: inline-block;
-      max-width: 100%;
-      vertical-align: bottom;
-    }
   }
 
   .headingContent {
     &:empty {
       display: none;
+    }
+  }
+
+  &:has(> .headingText > :global(.flow--truncate)) {
+    display: flex;
+    align-items: flex-start;
+
+    .headingText {
+      display: flex;
+      min-width: 0;
+    }
+
+    .icon {
+      flex-shrink: 0;
+    }
+
+    .headingContent {
+      flex-shrink: 0;
+      max-width: 100%;
     }
   }
 
