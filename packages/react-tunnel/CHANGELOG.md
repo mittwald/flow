@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+### Bug Fixes
+
+* **react-tunnel:** check the entry order in the commit, not the render ([2f631ca](https://github.com/mittwald/flow/commit/2f631caaccf450152d346286522027fcd61cc1cd))
+* **react-tunnel:** keep the reorder request through a StrictMode replay ([354d739](https://github.com/mittwald/flow/commit/354d73944be5138753b9a68f910b898d022d36e3))
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
 ## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
 
 **Note:** Version bump only for package @mittwald/react-tunnel

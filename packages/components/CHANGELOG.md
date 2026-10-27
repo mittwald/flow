@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+### Bug Fixes
+
+* **PasswordCreationField:** render the policy error after the consumer&#x27;s ([c0d019d](https://github.com/mittwald/flow/commit/c0d019d64269b1f2cad164face3f09934d10b650))
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
 ## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
 
 ### Bug Fixes
