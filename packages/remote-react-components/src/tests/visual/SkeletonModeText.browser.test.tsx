@@ -20,6 +20,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       BigNumber,
       AlertText,
       ColumnLayout,
+      Truncate,
+      AlertBadge,
     },
   }) => {
     await render(
@@ -27,6 +29,14 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
         <Section>
           <Heading>Projekt „Webshop Relaunch“</Heading>
           <Heading level={3} />
+          <Heading level={3}>
+            <Truncate>
+              Alle Domains des Projekts „Webshop Relaunch“ werden auf den neuen
+              Server umgezogen, sobald die Zertifikate ausgestellt sind und die
+              DNS-Einträge aktualisiert wurden.
+            </Truncate>
+            <AlertBadge status="warning">Umzug läuft</AlertBadge>
+          </Heading>
           <Text>
             Das Projekt liegt auf dem Server <InlineCode>p-4711</InlineCode> und
             ist unter <Link href="#">webshop.example-domain.de</Link>{" "}

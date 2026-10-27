@@ -10,6 +10,7 @@ declare const classNames: {
   readonly icon: "icon";
   readonly headingContent: "headingContent";
   readonly "flow--truncate": "flow--truncate";
+  readonly "flow--skeleton-mode--skeleton-text-content": "flow--skeleton-mode--skeleton-text-content";
   readonly headingTextSpacer: "headingTextSpacer";
   readonly headingContentItem: "headingContentItem";
   readonly h1: "h1";
