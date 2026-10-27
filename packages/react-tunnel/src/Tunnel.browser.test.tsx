@@ -684,3 +684,18 @@ describe("SSR hydration", () => {
     container.remove();
   });
 });
+
+test("Re-rendering the provider does not re-render its exits", async () => {
+  let exitRenderCount = 0;
+  const countExitRenders = () => {
+    exitRenderCount++;
+    return null;
+  };
+  const exit = <TunnelExit>{countExitRenders}</TunnelExit>;
+
+  const { rerender } = await render(<TunnelProvider>{exit}</TunnelProvider>);
+  const exitRenderCountAfterMount = exitRenderCount;
+  await rerender(<TunnelProvider>{exit}</TunnelProvider>);
+
+  expect(exitRenderCount).toBe(exitRenderCountAfterMount);
+});
