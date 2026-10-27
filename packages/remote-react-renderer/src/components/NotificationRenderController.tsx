@@ -21,6 +21,7 @@ export const NotificationRenderController: FC<NotificationProps> = (props) => {
       notifications.remove(id);
       isAdded.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the remote side never changes a notification after adding it; props is new each render, and re-adding would reset auto-close
   }, [notifications]);
 
   return null;
