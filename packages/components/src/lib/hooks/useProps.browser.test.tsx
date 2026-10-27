@@ -137,11 +137,20 @@ describe("Dynamic Props", () => {
 describe("Context memoization", () => {
   interface TestSetup {
     getDependencies?: () => DependencyList | undefined;
+    getContextProps?: (state: number) => PropsContext;
     getTestComponentProps?: () => Partial<ComponentProps<typeof TestComponent>>;
   }
 
+  const unchangedContextProps = () => ({
+    TestComponent: { testProp: "unchanged" },
+  });
+
   const runTest = async (setup: TestSetup) => {
-    const { getDependencies = () => [], getTestComponentProps } = setup;
+    const {
+      getDependencies = () => [],
+      getContextProps = unchangedContextProps,
+      getTestComponentProps,
+    } = setup;
     const renderCount = {
       current: 0,
     };
@@ -152,16 +161,9 @@ describe("Context memoization", () => {
         setState(1);
       }, []);
 
-      // This context should be memoized
-      const contextProps: PropsContext = {
-        TestComponent: {
-          testProp: `state-${state}`,
-        },
-      };
-
       return (
         <PropsContextProvider
-          props={contextProps}
+          props={getContextProps(state)}
           dependencies={getDependencies()}
         >
           {props.children}
@@ -195,25 +197,26 @@ describe("Context memoization", () => {
     }
   };
 
-  test("Renders only once if dependencies is empty array", async () => {
-    await runTest({
-      getDependencies: () => [],
-    });
+  test("Renders only once if context props are equal", async () => {
+    await runTest({});
     expectRenderCount(1);
   });
 
-  test("Renders only once if dependencies is not defined", async () => {
+  test("Renders only once if context props are equal and dependencies is not defined", async () => {
     await runTest({
       getDependencies: () => undefined,
     });
     expectRenderCount(1);
   });
 
-  test("Renders again if dependency changes", async () => {
+  test("Renders again if context props change", async () => {
     await runTest({
-      getDependencies: () => [Math.random()],
+      getContextProps: (state) => ({
+        TestComponent: { testProp: `state-${state}` },
+      }),
     });
     expectRenderCount(2);
+    expect(renderedPropHistory).toEqual(["state-0", "state-1"]);
   });
 
   test("Renders again if local children props changing", async () => {
@@ -221,27 +224,6 @@ describe("Context memoization", () => {
       getTestComponentProps: () => ({ testProp: Math.random().toString() }),
     });
     expectRenderCount(2);
-  });
-
-  test("Renders not again if local children props are not changing", async () => {
-    await runTest({
-      //getTestComponentProps: () => ({ testProp: "foo" }),
-    });
-    expectRenderCount(1);
-  });
-
-  test("Context property is memoized if dependency does not change", async () => {
-    await runTest({
-      getDependencies: () => [],
-    });
-    expect(renderedPropHistory).toEqual(["state-0"]);
-  });
-
-  test("Context property changes if dependency changes", async () => {
-    await runTest({
-      getDependencies: () => [Math.random()],
-    });
-    expect(renderedPropHistory).toEqual(["state-0", "state-1"]);
   });
 });
 

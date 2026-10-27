@@ -24,6 +24,15 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
   `ListSearch`: the term, its initial value and its persistence are shared, how
   the field renders is not. `ListSorting` needed no cut at all — it only
   translates between the table and the settings store.
+- **The overlay's state is here, its component tree is not.** `OverlayState` is
+  React's `OverlayController` without the hooks: open state, handlers, close
+  confirmation and its grants. React subclasses it and adds the hooks; Vue wraps
+  it in refs. The overlay context, the triggers and the confirmation modal stay
+  per binding. `setConfirmOnCloseSource` and `removeConfirmOnCloseSource` are
+  public because each binding registers a source from its own lifecycle — a
+  React effect, a Vue watcher. The close options are a type parameter: which
+  overlay a close targets (React's `overlay`) is resolved by `Action` before the
+  state is called.
 - **The model classes reach their list through `ListModelContext`, not a
   `List`.** React's `List` is a React object — its constructor calls hooks. What
   the classes need is the TanStack table and the persistence, so that is all the

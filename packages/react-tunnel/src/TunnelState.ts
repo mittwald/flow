@@ -1,4 +1,10 @@
-import { type ReactNode, useId, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
 
@@ -50,6 +56,11 @@ export class TunnelState {
   >();
 
   private nextIndex = 0;
+  private indexGeneration = 0;
+  private orderGeneration = 0;
+  private readonly orderListeners = new Set<() => void>();
+  private readonly committedIndices = new Map<string, number>();
+  private isCommittedIndicesResetScheduled = false;
 
   public constructor(
     id = defaultTunnelProviderId,
@@ -66,23 +77,111 @@ export class TunnelState {
 
   public static useNew(id?: string): TunnelState {
     const instanceId = useId();
-    const tunnelState = useState(() => new TunnelState(id, instanceId))[0];
-    tunnelState.resetIndex();
-    return tunnelState;
+    return useState(() => new TunnelState(id, instanceId))[0];
   }
 
-  public resetIndex() {
-    this.nextIndex = 0;
-  }
+  private readonly subscribeToOrder = (listener: () => void) => {
+    this.orderListeners.add(listener);
+    return () => {
+      this.orderListeners.delete(listener);
+    };
+  };
 
-  public useEntryIndex() {
-    const thisIdRef = useRef(this.instanceId);
-    const thisIndex = useRef<number | null>(null);
-    if (thisIndex.current === null || thisIdRef.current !== this.instanceId) {
-      thisIdRef.current = this.instanceId;
-      thisIndex.current = this.nextIndex++;
+  private readonly getOrderGeneration = () => this.orderGeneration;
+
+  private takeIndex(generation: number) {
+    if (this.indexGeneration !== generation) {
+      this.indexGeneration = generation;
+      this.nextIndex = 0;
     }
-    return thisIndex.current;
+    return this.nextIndex++;
+  }
+
+  /**
+   * Whether `index` commits after a higher index in the same commit. Called
+   * from a layout effect: unlike a concurrent render, a commit does not yield,
+   * so the microtask clears the indices only between commits.
+   */
+  public isCommittedOutOfOrder(
+    tunnelId: string = defaultId,
+    index: number,
+    generation: number,
+  ) {
+    if (generation !== this.orderGeneration) {
+      // A reorder is pending, and its pass commits fresh indices.
+      return false;
+    }
+    const previousIndex = this.committedIndices.get(tunnelId);
+    this.committedIndices.set(tunnelId, index);
+    if (!this.isCommittedIndicesResetScheduled) {
+      this.isCommittedIndicesResetScheduled = true;
+      queueMicrotask(() => {
+        this.committedIndices.clear();
+        this.isCommittedIndicesResetScheduled = false;
+      });
+    }
+    return previousIndex !== undefined && index < previousIndex;
+  }
+
+  /**
+   * An entry takes its index from a counter while it renders, so entries that
+   * render together are ordered like the tree. An entry that mounts next to
+   * committed ones only knows the count so far (it returns `needsReorder`), and
+   * a keyed reorder keeps the indices of the moved entries
+   * (`isCommittedOutOfOrder`). Either way the entry calls `reorderEntries` in a
+   * layout effect: every entry of this state renders again in one pass, in tree
+   * order, and takes its index anew.
+   */
+  public useEntryIndex(tunnelId: string = defaultId) {
+    const generation = useSyncExternalStore(
+      this.subscribeToOrder,
+      this.getOrderGeneration,
+      this.getOrderGeneration,
+    );
+    const taken = useRef<{
+      instanceId: string;
+      generation: number;
+      index: number;
+      // Kept with the index: StrictMode replays the mount render with this
+      // ref already set.
+      mountsNextToCommittedEntries: boolean;
+    }>(null);
+
+    if (
+      taken.current?.instanceId !== this.instanceId ||
+      taken.current.generation !== generation
+    ) {
+      taken.current = {
+        instanceId: this.instanceId,
+        generation,
+        index: this.takeIndex(generation),
+        mountsNextToCommittedEntries:
+          taken.current === null &&
+          (this.committedChildren.get(tunnelId)?.size ?? 0) > 0,
+      };
+    }
+
+    return {
+      index: taken.current.index,
+      generation,
+      needsReorder: taken.current.mountsNextToCommittedEntries,
+    };
+  }
+
+  /**
+   * Re-renders every entry so it takes its index anew. `generation` is the one
+   * the calling entry rendered with: when a reorder is already pending, the
+   * call does nothing, so entries mounting in one commit reorder once.
+   */
+  public reorderEntries(generation: number): void {
+    if (generation !== this.orderGeneration) {
+      return;
+    }
+    this.orderGeneration++;
+    this.committedIndices.clear();
+    for (const listener of this.orderListeners) {
+      listener();
+    }
   }
 
   private buildEntryState(

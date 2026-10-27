@@ -165,11 +165,15 @@ what this binding establishes about supporting a framework at all.
   surrounding overlay's controller of that type (`reuseControllerFromContext`,
   on by default). And an overlay's `controller` prop is followed rather than
   read once (`useOwnController`): the context it provides reads the controller
-  when asked, so an `Action` inside resolves the current one.
+  when asked, so an `Action` inside resolves the current one. Close confirmation
+  combines sources, as in Flow: a `Modal` registers its `confirmOnClose` prop
+  (`useConfirmOnCloseSource`), and an app writing `controller.confirmOnClose`
+  sets a source of the controller's own.
 - **Logic shared with React lives in `@mittwald/flow-components-base`**, not
-  here — the whole list model and the `Action` state machine: pure MobX, no
-  framework, and this package brings only the subscription
-  (`src/lib/mobxSelector.ts`, ~15 lines). `src/lib/mobxSelector.test.ts` drives
+  here — the whole list model, the `Action` state machine and the overlay
+  controller's `OverlayState`: pure MobX, no framework, and this package brings
+  only the subscription (`src/lib/mobxSelector.ts`, ~15 lines; the controller's
+  refs are `customRef`s over the state). `src/lib/mobxSelector.test.ts` drives
   that shared state through Vue's reactivity — which is also what keeps a React
   import out of the core, since nothing else would notice one. The package is a
   **devDependency** on purpose: it is private, and `externalizeDeps` leaves

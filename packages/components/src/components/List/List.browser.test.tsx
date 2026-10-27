@@ -7,6 +7,8 @@ import {
   ListLoaderAsync,
   ListSorting,
   ListStaticData,
+  useList,
+  useListMetadata,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import {
@@ -28,6 +30,7 @@ import { FilterValue } from "./model/filter/FilterValue";
 import { DeprecationWarningProvider } from "../DeprecationWarningProvider";
 import Content from "../Content";
 import { Heading } from "../Heading";
+import { Button } from "../Button";
 import { ContextMenu, MenuItem } from "../ContextMenu";
 import { Table } from "./setupComponents/Table";
 import { TableBody } from "./setupComponents/TableBody";
@@ -37,6 +40,17 @@ import { TableHeader } from "./setupComponents/TableHeader";
 import { TableRow } from "./setupComponents/TableRow";
 import rowStyles from "./components/Table/Table.module.scss";
 import { ListSearch } from "./setupComponents/ListSearch";
+import { ViewComponentContextProvider } from "@/lib/viewComponentContext";
+import {
+  GridListItem,
+  type GridListItemProps,
+} from "@/components/List/components/Items/views/GridListItem/GridListItem";
+import { usePropsContext } from "@/lib/propsContext/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  TableRow as TableRowComponent,
+  type TableRowProps,
+} from "@/components/Table/components/TableRow/TableRow";
 
 interface Data {
   num: number;
@@ -91,6 +105,16 @@ beforeEach(() => {
 
 test("renders empty list without errors", async () => {
   await render(<List />);
+});
+
+test("list hooks return undefined outside a list", async () => {
+  const Probe: FC = () => {
+    const list = useList();
+    const metadata = useListMetadata();
+    return `${list === undefined}/${metadata === undefined}`;
+  };
+  const dom = await render(<Probe />);
+  await expect.element(dom.getByText("true/true")).toBeInTheDocument();
 });
 
 test("renders accordion list without errors", async () => {
@@ -1188,6 +1212,135 @@ describe("Item rendering", () => {
   });
 });
 
+describe("Item re-renders", () => {
+  const data: Data[] = [{ num: 42 }];
+  let itemRenderCount = 0;
+  let contentRenderCount = 0;
+
+  /*
+   * react-aria calls an item's children function on each of its own renders,
+   * so a view that passes one counts them.
+   */
+  const CountingGridListItem: FC<GridListItemProps> = (props) => (
+    <GridListItem {...props}>
+      {(renderProps) => {
+        itemRenderCount++;
+        return typeof props.children === "function"
+          ? props.children(renderProps)
+          : props.children;
+      }}
+    </GridListItem>
+  );
+
+  // Reads the props context like every Flow component in an item does.
+  const ContentProbe: FC = () => {
+    usePropsContext();
+    contentRenderCount++;
+    return null;
+  };
+
+  const ItemList: FC = () => {
+    const [selected, setSelected] = useState(false);
+    const [, setUnrelated] = useState(0);
+
+    return (
+      <>
+        <button onClick={() => setUnrelated((c) => c + 1)}>Bump</button>
+        <button onClick={() => setSelected((s) => !s)}>Select</button>
+        <List aria-label="Test">
+          <ListStaticData<Data> data={data} />
+          <ListItem<Data>
+            textValue={({ num }) => String(num)}
+            renderDependencies={[selected]}
+          >
+            {({ num }) => (
+              <ListItemView>
+                <Heading>
+                  Item: {num} {selected ? "selected" : "unselected"}
+                </Heading>
+                <ContentProbe />
+              </ListItemView>
+            )}
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+
+  test("a parent re-render does not re-render the items or their content", async () => {
+    await render(
+      <ViewComponentContextProvider
+        components={{ ItemsGridListItem: CountingGridListItem }}
+      >
+        <ItemList />
+      </ViewComponentContextProvider>,
+    );
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
+    itemRenderCount = 0;
+    contentRenderCount = 0;
+
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    await userEvent.click(page.getByRole("button", { name: "Bump" }));
+    expect(itemRenderCount).toBe(0);
+    expect(contentRenderCount).toBe(0);
+
+    await userEvent.click(page.getByRole("button", { name: "Select" }));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+    expect(itemRenderCount).toBeGreaterThan(0);
+  });
+});
+
+describe("ListItemView", () => {
+  test("a button whose props context changes its size keeps rendering", async () => {
+    const SizeToggleList: FC = () => {
+      const [fixedSize, setFixedSize] = useState(false);
+
+      return (
+        <>
+          <button onClick={() => setFixedSize((f) => !f)}>Toggle size</button>
+          <List aria-label="Test">
+            <ListStaticData<Data> data={[{ num: 42 }]} />
+            <ListItem<Data>
+              textValue={({ num }) => String(num)}
+              renderDependencies={[fixedSize]}
+            >
+              {({ num }) => (
+                <ListItemView>
+                  <Heading>Item: {num}</Heading>
+                  <PropsContextProvider
+                    props={{ Button: fixedSize ? { size: "m" } : {} }}
+                  >
+                    <Button>Action {fixedSize ? "fixed" : "default"}</Button>
+                  </PropsContextProvider>
+                </ListItemView>
+              )}
+            </ListItem>
+          </List>
+        </>
+      );
+    };
+
+    await render(<SizeToggleList />);
+    await expect
+      .element(page.getByRole("button", { name: "Action default" }))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Toggle size" }));
+    await expect
+      .element(page.getByRole("button", { name: "Action fixed" }))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByRole("button", { name: "Toggle size" }));
+    await expect
+      .element(page.getByRole("button", { name: "Action default" }))
+      .toBeInTheDocument();
+  });
+});
+
 describe("Inline item callbacks", () => {
   const data: Data[] = [{ num: 42 }];
 
@@ -1356,6 +1509,48 @@ describe("Table rows", () => {
     await expect
       .element(page.getByText("Row: 42 selected"))
       .toBeInTheDocument();
+  });
+
+  /*
+   * react-aria re-renders every row whenever its table renders, Flow's row
+   * memo or not. Its rows call a `className` function on each of those
+   * renders, so a view that passes one counts them.
+   */
+  test("a parent re-render does not re-render the table's rows", async () => {
+    let rowRenderCount = 0;
+    const CountingTableRow: FC<TableRowProps> = (props) => (
+      <TableRowComponent
+        {...props}
+        className={(renderProps) => {
+          rowRenderCount++;
+          return (
+            (typeof props.className === "function"
+              ? props.className(renderProps)
+              : props.className) ?? ""
+          );
+        }}
+      />
+    );
+
+    await render(
+      <ViewComponentContextProvider components={{ TableRow: CountingTableRow }}>
+        <TableList withDependencies />
+      </ViewComponentContextProvider>,
+    );
+    await expect
+      .element(page.getByText("Row: 42 unselected"))
+      .toBeInTheDocument();
+    rowRenderCount = 0;
+
+    await userEvent.click(bump);
+    await userEvent.click(bump);
+    expect(rowRenderCount).toBe(0);
+
+    await userEvent.click(select);
+    await expect
+      .element(page.getByText("Row: 42 selected"))
+      .toBeInTheDocument();
+    expect(rowRenderCount).toBeGreaterThan(0);
   });
 
   test("a row with renderDependencies re-renders when a cell prop changes", async () => {

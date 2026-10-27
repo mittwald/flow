@@ -24,9 +24,10 @@ import {
 } from "@/overlays/childProps";
 import { readProp } from "@/lib/propKeys";
 import {
-  createOverlayControllerFor,
+  createOverlayController,
   isOverlayController,
   provideOverlayContext,
+  useConfirmOnCloseSource,
   useOwnController,
   useOverlayHandlers,
   type OverlayCloseHandler,
@@ -38,11 +39,9 @@ import type { AnyRecord } from "@/lib/types";
 import {
   defineComponent,
   h,
-  onBeforeUnmount,
   onMounted,
   useId,
   watch,
-  watchEffect,
   type Component,
   type PropType,
   type VNode,
@@ -184,11 +183,11 @@ const nestedHeadingRules: ChildRules = (child) =>
         : undefined;
 
 /**
- * Asks before a `<Modal confirm-on-close>` closes.
+ * Asks before a modal that requires confirmation closes.
  *
- * Bound to the parent's `isConfirmingClose` rather than holding state of its
- * own: a dismiss of this modal is then the same event as answering "keep
- * editing", and there is one place that decides whether the parent closes.
+ * Flow's `useCloseOverlayConfirmationController`: a controller of its own,
+ * opened while the parent asks. A dismiss of this modal answers "keep editing",
+ * and an answer from anywhere closes it again.
  *
  * Annotated rather than inferred — it renders a `Modal` and the `Modal` renders
  * it, and without an annotation TypeScript cannot break that cycle (TS7022).
@@ -205,9 +204,19 @@ const ConfirmCloseModal: Component = defineComponent({
 
   setup(props) {
     const language = useLanguage();
-    const controller = createOverlayControllerFor(
-      props.parent.isConfirmingClose,
+    const controller = createOverlayController();
+
+    watch(
+      () => props.parent.isConfirmingClose.value,
+      (isConfirming) => (isConfirming ? controller.open() : controller.close()),
+      { immediate: true },
     );
+
+    controller.addOnClose(() => {
+      if (props.parent.isConfirmingClose.value) {
+        props.parent.cancelConfirmation();
+      }
+    });
 
     return () => {
       const texts = language.value?.startsWith("de")
@@ -261,7 +270,7 @@ export const Modal = defineComponent({
      * Whether closing the modal has to be confirmed — use it to protect unsaved
      * changes.
      */
-    confirmOnClose: { type: Boolean, default: false },
+    confirmOnClose: { type: Boolean, default: undefined },
     /** A controller to open and close the modal from anywhere. */
     controller: {
       type: Object as PropType<OverlayController>,
@@ -330,24 +339,14 @@ export const Modal = defineComponent({
      * The requirement lives on the controller, not on this component: what
      * asks for the confirmation is a close, and a close arrives at the
      * controller — from an `Action` inside, from the host's dismiss, or from
-     * an app holding the controller itself.
+     * an app holding the controller itself. It is one source among others,
+     * withdrawn when the modal unmounts or its controller changes, because
+     * the controller usually outlives the modal.
      */
-    watchEffect(() => {
-      controller.value.confirmOnClose.value = props.confirmOnClose;
-    });
-
-    /*
-     * Taken back, because the controller usually outlives the modal: a
-     * trigger keeps it, and the next modal it opens would inherit a
-     * requirement it never asked for. The same goes for a controller the
-     * app swapped for another.
-     */
-    const release = (released: OverlayController) => {
-      released.confirmOnClose.value = false;
-      released.isConfirmingClose.value = false;
-    };
-    watch(controller, (next, previous) => release(previous));
-    onBeforeUnmount(() => release(controller.value));
+    useConfirmOnCloseSource(
+      () => controller.value,
+      () => props.confirmOnClose,
+    );
 
     /* Flow's props context for the modal's children, rule for rule. */
     const childRules: ChildRules = (child) => {
@@ -418,7 +417,7 @@ export const Modal = defineComponent({
           : child,
       );
 
-      if (props.confirmOnClose) {
+      if (controller.value.confirmOnClose.value) {
         children.push(h(ConfirmCloseModal, { parent: controller.value }));
       }
 

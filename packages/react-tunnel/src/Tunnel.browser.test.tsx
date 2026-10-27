@@ -4,6 +4,7 @@ import TunnelProvider from "./components/TunnelProvider";
 import { expect, test, describe, vitest } from "vitest";
 import { render } from "vitest-browser-react";
 import React, {
+  Fragment,
   StrictMode,
   Suspense,
   useState,
@@ -346,6 +347,93 @@ test("Order of multiple children is preserved when entry is added dynamically", 
   expect(dom.getByTestId("exit")).toHaveTextContent("02");
 });
 
+test.each([
+  ["", Fragment],
+  [" in StrictMode", StrictMode],
+])(
+  "Order follows the tree when an entry mounts later without the provider re-rendering%s",
+  async (_, Wrapper) => {
+    const LateEntry: FC = () => {
+      const [isShown, setIsShown] = useState(false);
+      return (
+        <>
+          <button onClick={() => setIsShown(true)} data-testid="show">
+            Show
+          </button>
+          {isShown && <TunnelEntry>B</TunnelEntry>}
+        </>
+      );
+    };
+
+    const dom = await render(
+      <Wrapper>
+        <TunnelProvider>
+          <div data-testid="exit">
+            <TunnelExit />
+          </div>
+          <TunnelEntry>A</TunnelEntry>
+          <LateEntry />
+          <TunnelEntry>C</TunnelEntry>
+        </TunnelProvider>
+      </Wrapper>,
+    );
+    expect(dom.getByTestId("exit")).toHaveTextContent("AC");
+
+    await userEvent.click(dom.getByTestId("show"));
+    expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+  },
+);
+
+test("Order follows the tree when the provider's parent appends an entry", async () => {
+  const Test: FC<PropsWithChildren> = (props) => (
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit />
+      </div>
+      {props.children}
+    </TunnelProvider>
+  );
+
+  const dom = await render(
+    <Test>
+      <TunnelEntry>A</TunnelEntry>
+      <TunnelEntry>B</TunnelEntry>
+    </Test>,
+  );
+  expect(dom.getByTestId("exit")).toHaveTextContent("AB");
+
+  await dom.rerender(
+    <Test>
+      <TunnelEntry>A</TunnelEntry>
+      <TunnelEntry>B</TunnelEntry>
+      <TunnelEntry>C</TunnelEntry>
+    </Test>,
+  );
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+});
+
+test("Order follows the tree when keyed entries are reordered", async () => {
+  const Test: FC<{ names: string[] }> = (props) => (
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit />
+      </div>
+      {props.names.map((name) => (
+        <TunnelEntry key={name}>{name}</TunnelEntry>
+      ))}
+    </TunnelProvider>
+  );
+
+  const dom = await render(<Test names={["A", "B", "C"]} />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+
+  await dom.rerender(<Test names={["C", "B", "A"]} />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("CBA");
+
+  await dom.rerender(<Test names={["B", "D", "C", "A"]} />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("BDCA");
+});
+
 test("Order of multiple children is preserved when entry is rerendered", async () => {
   const ComponentWithEntry: FC<TunnelEntryProps & { name: string }> = (
     props,
@@ -683,4 +771,19 @@ describe("SSR hydration", () => {
     root.unmount();
     container.remove();
   });
+});
+
+test("Re-rendering the provider does not re-render its exits", async () => {
+  let exitRenderCount = 0;
+  const countExitRenders = () => {
+    exitRenderCount++;
+    return null;
+  };
+  const exit = <TunnelExit>{countExitRenders}</TunnelExit>;
+
+  const { rerender } = await render(<TunnelProvider>{exit}</TunnelProvider>);
+  const exitRenderCountAfterMount = exitRenderCount;
+  await rerender(<TunnelProvider>{exit}</TunnelProvider>);
+
+  expect(exitRenderCount).toBe(exitRenderCountAfterMount);
 });
