@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.47](https://github.com/mittwald/flow/compare/1.6.0-next.46...1.6.0-next.47) (2026-10-27)
+
+### Bug Fixes
+
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
+### Tests
+
+* update visual regression screenshots ([4c1f5e2](https://github.com/mittwald/flow/commit/4c1f5e20036916b377959ba085f88b96212d5784))
+
 ## [1.6.0-next.46](https://github.com/mittwald/flow/compare/1.6.0-next.45...1.6.0-next.46) (2026-10-27)
 
 ### Tests
