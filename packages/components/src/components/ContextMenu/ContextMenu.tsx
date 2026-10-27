@@ -19,6 +19,7 @@ import clsx from "clsx";
 import styles from "./ContextMenu.module.scss";
 import { OverlayContentSuspendWatcher } from "@/lib/controller/overlay/OverlayContentSuspendWatcher";
 import { ContextMenuSelectAll } from "@/components/ContextMenu/components/ContextMenuSelectAll/ContextMenuSelectAll";
+import { OverlayHoistProvider } from "@/lib/overlayHoist/OverlayHoistProvider";
 
 export interface ContextMenuProps
   extends
@@ -44,7 +45,10 @@ export interface ContextMenuProps
   showSelectAll?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-hoist-overlays
+ */
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const {
     children,
@@ -106,42 +110,44 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   return (
-    <OverlayContentSuspendWatcher overlayController={overlayController}>
-      <Popover
-        {...rest}
-        className={clsx(styles.popover, className)}
-        controller={overlayController}
-        isDialogContent={false}
-      >
-        <OverlayContextProvider
-          type="ContextMenu"
+    <OverlayHoistProvider>
+      <OverlayContentSuspendWatcher overlayController={overlayController}>
+        <Popover
+          {...rest}
+          className={clsx(styles.popover, className)}
           controller={overlayController}
+          isDialogContent={false}
         >
-          <ContextMenuContentView
-            className={styles.contextMenu}
-            onAction={onAction}
-            selectionMode={getAriaSelectionMode(selectionMode)}
-            selectedKeys={selectedKeys}
-            defaultSelectedKeys={defaultSelectedKeys}
-            disabledKeys={disabledKeys}
-            onSelectionChange={onSelectionChange}
-            renderEmptyState={renderEmptyState}
-            aria-label={ariaLabel}
-            aria-labelledby={ariaLabelledBy}
-            aria-describedby={ariaDescribedBy}
-            aria-details={ariaDetails}
-            ref={ref}
+          <OverlayContextProvider
+            type="ContextMenu"
+            controller={overlayController}
           >
-            {selectAll}
-            <PropsContextProvider props={propsContext}>
-              <Action closeOverlay={closesOnSelect(selectionMode)}>
-                {children}
-              </Action>
-            </PropsContextProvider>
-          </ContextMenuContentView>
-        </OverlayContextProvider>
-      </Popover>
-    </OverlayContentSuspendWatcher>
+            <ContextMenuContentView
+              className={styles.contextMenu}
+              onAction={onAction}
+              selectionMode={getAriaSelectionMode(selectionMode)}
+              selectedKeys={selectedKeys}
+              defaultSelectedKeys={defaultSelectedKeys}
+              disabledKeys={disabledKeys}
+              onSelectionChange={onSelectionChange}
+              renderEmptyState={renderEmptyState}
+              aria-label={ariaLabel}
+              aria-labelledby={ariaLabelledBy}
+              aria-describedby={ariaDescribedBy}
+              aria-details={ariaDetails}
+              ref={ref}
+            >
+              {selectAll}
+              <PropsContextProvider props={propsContext}>
+                <Action closeOverlay={closesOnSelect(selectionMode)}>
+                  {children}
+                </Action>
+              </PropsContextProvider>
+            </ContextMenuContentView>
+          </OverlayContextProvider>
+        </Popover>
+      </OverlayContentSuspendWatcher>
+    </OverlayHoistProvider>
   );
 });
 

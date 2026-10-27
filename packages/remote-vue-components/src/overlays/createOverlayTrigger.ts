@@ -1,4 +1,4 @@
-import { Button, DialogTrigger } from "@/auto-generated";
+import { Button, DialogTrigger, MenuItem } from "@/auto-generated";
 import { Action } from "@/components/Action";
 import { applyChildRules, type ChildRules } from "@/overlays/childProps";
 import {
@@ -20,11 +20,20 @@ import { defineComponent, h, onMounted, type PropType } from "vue";
  *
  * `reportsUsage`: whether Flow's React trigger is a `flowComponent`, which
  * reports itself.
+ *
+ * `isOverlayHoistable`: whether a `MenuItem` may be the trigger, as in Flow's
+ * `ModalTrigger`/`LightBoxTrigger` inside a `ContextMenu`. Flow emits no
+ * `DialogTrigger` then — the host menu renders no item inside one — and opens
+ * the overlay from the item's `onAction`. The overlay itself is not hoisted out
+ * of the menu here (see the known gaps in the README).
  */
 export const createOverlayTrigger = (
   name: string,
   overlayType: OverlayType,
-  { reportsUsage }: { reportsUsage: boolean },
+  {
+    reportsUsage,
+    isOverlayHoistable = false,
+  }: { reportsUsage: boolean; isOverlayHoistable?: boolean },
 ) =>
   defineComponent({
     name,
@@ -64,10 +73,19 @@ export const createOverlayTrigger = (
           ? { props: { onPress: controller.value.open } }
           : child.type === Action
             ? { children: triggerRules }
-            : undefined;
+            : isOverlayHoistable && child.type === MenuItem
+              ? { props: { onAction: controller.value.open } }
+              : undefined;
 
       return () => {
         const children = applyChildRules(slots.default?.(), triggerRules);
+
+        if (
+          isOverlayHoistable &&
+          children.some((child) => child.type === MenuItem)
+        ) {
+          return children;
+        }
 
         return h(
           DialogTrigger,

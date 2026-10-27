@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
@@ -191,6 +191,58 @@ test.each(testEnvironments)(
     await modalTrigger.click();
 
     await testScreenshot("Modal in ContextMenu - Modal opened");
+  },
+);
+
+/*
+ * A `MenuItem` as the trigger of a `ModalTrigger` (#1074). Older versions close
+ * the modal together with the menu. It ships on the next line, and which
+ * 1.5.0-next.N carries it first is not known yet, so the gate starts at 1.5.0.
+ */
+test.skipIf(crossVersion({ below: "1.5.0" })).each(testEnvironments)(
+  "Modal in ContextMenu via ModalTrigger (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      MenuItem,
+      Button,
+      ContextMenu,
+      ContextMenuTrigger,
+      Modal,
+      ModalTrigger,
+      Heading,
+      Content,
+    },
+  }) => {
+    await render(
+      <ContextMenuTrigger>
+        <Button data-testid="contextMenuTrigger">ContextMenu trigger</Button>
+        <ContextMenu>
+          <MenuItem>Menu item</MenuItem>
+          <ModalTrigger>
+            <Modal>
+              <Heading>Modal</Heading>
+              <Content>Content</Content>
+            </Modal>
+            <MenuItem data-testid="modalTrigger">Modal trigger</MenuItem>
+          </ModalTrigger>
+        </ContextMenu>
+      </ContextMenuTrigger>,
+    );
+
+    const contextMenuTrigger = page.getByTestId("contextMenuTrigger");
+    const modalTrigger = page.getByTestId("modalTrigger");
+
+    await contextMenuTrigger.click();
+
+    await testScreenshot("Modal in ContextMenu via ModalTrigger - menu opened");
+
+    await modalTrigger.click();
+
+    await testScreenshot(
+      "Modal in ContextMenu via ModalTrigger - modal opened",
+    );
   },
 );
 
