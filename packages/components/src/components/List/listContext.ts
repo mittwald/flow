@@ -41,4 +41,6 @@ interface ListContext {
   store: ListContextStore;
 }
 
-export const listContext = createContext<ListContext>({} as ListContext);
+export const listContext = createContext<ListContext>({
+  store: new ListContextStore(undefined as unknown as List<never>),
+});

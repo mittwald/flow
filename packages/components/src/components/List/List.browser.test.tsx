@@ -7,6 +7,8 @@ import {
   ListLoaderAsync,
   ListSorting,
   ListStaticData,
+  useList,
+  useListMetadata,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import {
@@ -97,6 +99,16 @@ beforeEach(() => {
 
 test("renders empty list without errors", async () => {
   await render(<List />);
+});
+
+test("list hooks return undefined outside a list", async () => {
+  const Probe: FC = () => {
+    const list = useList();
+    const metadata = useListMetadata();
+    return `${list === undefined}/${metadata === undefined}`;
+  };
+  const dom = await render(<Probe />);
+  await expect.element(dom.getByText("true/true")).toBeInTheDocument();
 });
 
 test("renders accordion list without errors", async () => {
