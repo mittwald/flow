@@ -21,7 +21,6 @@ export const NotificationRenderController: FC<NotificationProps> = (props) => {
       notifications.remove(id);
       isAdded.current = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- add the notification once; later props do not update it
   }, [notifications]);
 
   return null;
