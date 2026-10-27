@@ -15,10 +15,12 @@
 # strong.100 is the step closest to the Brand base that keeps AA (primary:
 # the base). Decorative groups take their soft surface (quiet.100) from the
 # brand's Background/Brand-100 (Figma "mittwald. Website Library", #3550):
-# blue 300, navy and lilac 400, sage and salmon 500; strong follows the AA
-# rule for text on these surfaces. content is decorative content on any
-# surface (Icon, Color): the step closest to the Brand base that still reads
-# as the hue, AA not required (#3508).
+# blue 300, lilac 400, sage and salmon 500; strong follows the AA rule for
+# text on these surfaces. Navy takes 300, one step lighter than Brand-100:
+# on 400 it outweighed the other decorative surfaces (1.74:1 against the
+# card, the rest 1.51–1.62) in Avatar and the sender Message (UX). content
+# is decorative content on any surface (Icon, Color): the step closest to
+# the Brand base that still reads as the hue, AA not required (#3508).
 # Selected is a resting state: plain/outline selected takes the soft surface
 # (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
 # Their strong tones sit one step lighter than AA allows on hover and
@@ -190,11 +192,11 @@ decorative-navy:
   color:
     quiet:
       100:
-        value: "{color.mittwald-navy.400}"
+        value: "{color.mittwald-navy.300}"
       200:
-        value: "{color.mittwald-navy.500}"
+        value: "{color.mittwald-navy.400}"
       300:
-        value: "{color.mittwald-navy.600}"
+        value: "{color.mittwald-navy.500}"
     strong:
       100:
         value: "{color.mittwald-navy.1600}"
