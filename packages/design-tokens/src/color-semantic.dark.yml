@@ -14,7 +14,9 @@
 # second step (1000/1200/1400), its dark half is too dense (ΔE 3.5, #3479).
 # strong.100 is the step closest to the Brand base that keeps AA (primary:
 # the base). Dark primary takes one step lighter (400/300/200), so the link
-# keeps AA on neutral hover surfaces (#3479). Decorative groups take their
+# keeps AA on neutral hover surfaces (#3479). Its soft surface takes
+# 1600/1500/1400: 1800 vanished into the card (1.01:1); 1500 read too
+# loud next to secondary soft (UX). Decorative groups take their
 # soft surface (quiet.100) from the brand's Background/Brand-100 (Figma
 # "mittwald. Website Library", #3550): navy and salmon 1700; blue 1500, one
 # step lighter, so it stands out from the card; sage and lilac 1700, one
@@ -53,11 +55,11 @@ primary:
   color:
     quiet:
       100:
-        value: "{color.mittwald-blue.1800}"
-      200:
-        value: "{color.mittwald-blue.1700}"
-      300:
         value: "{color.mittwald-blue.1600}"
+      200:
+        value: "{color.mittwald-blue.1500}"
+      300:
+        value: "{color.mittwald-blue.1400}"
     strong:
       100:
         value: "{color.mittwald-blue.400}"
