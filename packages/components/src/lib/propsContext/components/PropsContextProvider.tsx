@@ -1,7 +1,7 @@
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { addNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
 import { propsContext, usePropsContext } from "@/lib/propsContext/propsContext";
-import { arePropsContextsEqual } from "@/lib/propsContext/arePropsContextsEqual";
+import { isPlainObjectDeepEqual } from "@/lib/object/isPlainObjectDeepEqual";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import type { DependencyList, FC, PropsWithChildren } from "react";
 import { memo, useMemo, useRef } from "react";
@@ -16,7 +16,7 @@ Provider.displayName = "PropsContextProviderInner";
 
 const useStablePropsContext = (props: PropsContextShape) => {
   const stableProps = useRef(props);
-  if (!arePropsContextsEqual(stableProps.current, props)) {
+  if (!isPlainObjectDeepEqual(stableProps.current, props)) {
     stableProps.current = props;
   }
   return stableProps.current;
