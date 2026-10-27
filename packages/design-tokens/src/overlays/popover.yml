@@ -2,7 +2,7 @@ popover:
   box-shadow:
     value: "{shadow.overlay}"
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.l}"
   padding:
     m:
       value: "{size-px.m}"

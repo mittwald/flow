@@ -2,7 +2,8 @@
 # step below its container (card 24 > table 16 > button 8 > kbd 4).
 #   xl     surfaces: LayoutCard, Modal
 #   l      content containers that group content: Table, List, AccentBox,
-#          Alert, Message, Notification, FileCard, Accordion, CodeBlock, …
+#          Alert, Message, Notification, FileCard, Accordion, CodeBlock,
+#          Popover, …
 #   m      controls: Button, form fields, MenuItem, Tooltip
 #   s      details inside an element: Kbd, InlineCode, list checkbox
 #   round  highlighted elements: Avatar, Switch, Slider handle
