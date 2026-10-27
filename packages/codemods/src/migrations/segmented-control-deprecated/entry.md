@@ -6,7 +6,10 @@ action: manual
 remotePackage: true
 apply: >-
   Replace `SegmentedControl` with `Tabs` when the selection switches displayed
-  content, or with `RadioGroup` when it sets a value. Pick per usage. The two
+  content, or with `RadioGroup` when it sets a value. Pick per usage — but one
+  shape decides itself: if the switched branches contain form fields, use
+  `RadioGroup`. Tabs keep every panel mounted, so all branches register at once,
+  and two branches binding the same field name would both claim it. The two
   directions cost very different amounts of work. Towards `RadioGroup` it is a
   prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` →
   `RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s
@@ -109,6 +112,24 @@ required a field label.
 — an inactive tab is hidden, not unmounted. React Hook Form fields inside a tab
 stay registered across a tab switch, exactly as they did as siblings below a
 `SegmentedControl`.
+
+That is a feature for a wizard and a trap for a mode switch. Where the branches
+were mutually exclusive **inputs** — the selection picks how a value is entered,
+and each branch binds the same field name — moving them into tabs registers both
+at once on one name:
+
+```tsx
+<SegmentedControl value={mode} onChange={setMode}>
+  <Segment value="a">…</Segment>
+  <Segment value="b">…</Segment>
+</SegmentedControl>
+{mode === "a" && <Field name="x"><Select … /></Field>}
+{mode === "b" && <Field name="x"><TextField … /></Field>}
+```
+
+This looks like a content switcher — the selection does swap what is shown — but
+it is a value-setting usage with the value's own input attached. Take the
+`RadioGroup` direction and leave the conditional branches as siblings below it.
 
 There is no codemod, and the reason is the choice rather than the edit. Which
 replacement is right cannot be decided from the source: a value-setting usage
