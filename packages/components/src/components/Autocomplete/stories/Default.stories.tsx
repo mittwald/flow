@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import type { Chat } from "@/components/Chat";
 import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
 import { SearchField } from "@/components/SearchField";
 import Option from "@/components/Option";
 import { FieldError } from "@/components/FieldError";
 
-const meta: Meta<typeof Chat> = {
+const meta: Meta<typeof Autocomplete> = {
   title: "Form Controls/Autocomplete",
   component: Autocomplete,
   parameters: {

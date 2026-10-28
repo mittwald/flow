@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, RefAttributes } from "react";
+import type { PropsWithChildren } from "react";
 import styles from "./SectionHeader.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -7,14 +7,17 @@ import {
   PropsContextProvider,
 } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export type SectionHeaderProps = PropsWithChildren &
   PropsWithClassName &
-  RefAttributes<HTMLHeadingElement>;
+  FlowComponentProps<HTMLElement>;
 
-export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
+export const SectionHeader = flowComponent(
   "SectionHeader",
   (props) => {
     const { children, className, ref } = props;

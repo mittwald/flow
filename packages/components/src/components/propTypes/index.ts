@@ -50,7 +50,7 @@ import type {
 import type { CoachMarkProps } from "@/components/CoachMark";
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
-import type { ListItemViewContentProps, ListProps } from "@/components/List";
+import type { ListItemViewProps, ListProps } from "@/components/List";
 import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
@@ -58,7 +58,6 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
-import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 import type { SegmentedControlProps } from "@/components/SegmentedControl";
 import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
@@ -110,7 +109,6 @@ export interface FlowComponentPropsTypes {
   AccordionGroup: AccordionGroupProps;
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
-  AlertIcon: AlertIconProps;
   AlertText: AlertTextProps;
   Align: AlignProps;
   Combine: CombineProps;
@@ -158,7 +156,7 @@ export interface FlowComponentPropsTypes {
   LightBoxGalleryItem: LightBoxGalleryItemProps;
   Link: LinkProps;
   List: ListProps<never>;
-  ListItemView: ListItemViewContentProps;
+  ListItemView: ListItemViewProps;
   ListSummary: ListSummaryProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
@@ -211,7 +209,6 @@ const propsContextSupportingComponentsMap: Record<
   Autocomplete: true,
   Alert: true,
   AlertBadge: true,
-  AlertIcon: true,
   AlertText: true,
   Align: true,
   Combine: true,

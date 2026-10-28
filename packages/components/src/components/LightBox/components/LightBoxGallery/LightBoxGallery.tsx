@@ -1,4 +1,7 @@
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import React, { type ReactNode, useEffect, useRef, useState } from "react";
 import {
   IconChevronLeft,
@@ -12,14 +15,15 @@ import locales from "../../locales/*.locale.json";
 import Button from "@/components/Button";
 import { Controls } from "@/components/LightBox/components/LightBoxGallery/Controls";
 
-export interface LightBoxGalleryProps extends PropsWithClassName {
+export interface LightBoxGalleryProps
+  extends PropsWithClassName, FlowComponentProps {
   children: ReactNode[];
   defaultIndex?: number;
 }
 
 /** @flr-generate all */
 export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
-  const { children, className, defaultIndex = 0 } = props;
+  const { children, className, defaultIndex = 0, ref } = props;
 
   const [currentIndex, setIndex] = useState(defaultIndex);
 
@@ -83,7 +87,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   return (
-    <div className={clsx(styles.lightBoxGallery, className)}>
+    <div ref={ref} className={clsx(styles.lightBoxGallery, className)}>
       <div
         ref={containerRef}
         className={styles.content}
