@@ -18,6 +18,7 @@ const context = createContext<SettingsStore | undefined>(undefined);
 
 export const useSettings = () => useContext(context);
 
+/* Plain FC: app-level setup without own UI. */
 export const SettingsProvider: FC<Props> = (props) => {
   const { children, middleware, id = "static", ...storeShape } = props;
   const backend = settingsBackendFactory(storeShape);
