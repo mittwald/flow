@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.49](https://github.com/mittwald/flow/compare/1.6.0-next.48...1.6.0-next.49) (2026-10-28)
+
+### Bug Fixes
+
+* **Icon:** show descending bars in the pro Descending icon ([#3595](https://github.com/mittwald/flow/issues/3595)) ([43c5cb8](https://github.com/mittwald/flow/commit/43c5cb88b922f1cd24e6cd72b1b63e440302d398))
+
+## [1.5.46](https://github.com/mittwald/flow/compare/1.6.0-next.46...1.5.46) (2026-10-27)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.46 ([4c6d9e4](https://github.com/mittwald/flow/commit/4c6d9e48b1ccd4b7851396ce3ed3dde098dde8ec))
+
 ## [1.6.0-next.48](https://github.com/mittwald/flow/compare/1.6.0-next.47...1.6.0-next.48) (2026-10-27)
 
 **Note:** Version bump only for package @mittwald/flow-icons-pro
