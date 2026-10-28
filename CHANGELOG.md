@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+### Bug Fixes
+
+* **Icon:** show descending bars in the pro Descending icon ([#3595](https://github.com/mittwald/flow/issues/3595)) ([43c5cb8](https://github.com/mittwald/flow/commit/43c5cb88b922f1cd24e6cd72b1b63e440302d398))
+
 ## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
 
 ### Bug Fixes
