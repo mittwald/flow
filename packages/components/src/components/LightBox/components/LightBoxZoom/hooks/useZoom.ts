@@ -17,7 +17,8 @@ import {
   type ZoomTransform,
 } from "../lib/zoomTransform";
 
-const maxScale = 3;
+/** Raised for an image whose natural size needs more. */
+const minMaxScale = 3;
 /** The scale a click, a double tap or Enter zooms to. */
 const toggleScale = 2;
 const keyboardScaleStep = 0.5;
@@ -74,6 +75,18 @@ const frameOf = (element: HTMLElement | null): ZoomFrame => {
   };
 };
 
+/**
+ * Far enough to show an image at its natural size. `offsetWidth` is the width
+ * before the zoom's transform.
+ */
+const maxScaleOf = (element: HTMLElement | null) => {
+  const image = element?.querySelector("img");
+  if (!image?.naturalWidth || !image.offsetWidth) {
+    return minMaxScale;
+  }
+  return Math.max(minMaxScale, image.naturalWidth / image.offsetWidth);
+};
+
 /** Client coordinates as an offset from the center of the zoom area. */
 const pointIn = (
   element: HTMLElement | null,
@@ -118,6 +131,7 @@ export const useZoom = (
   const lastTap = useRef<Tap | null>(null);
 
   const getFrame = () => frameOf(ref.current);
+  const getMaxScale = () => maxScaleOf(ref.current);
   const toPoint = (clientX: number, clientY: number) =>
     pointIn(ref.current, clientX, clientY);
 
@@ -135,14 +149,14 @@ export const useZoom = (
       (current) =>
         isZoomed(current)
           ? initialZoomTransform
-          : zoomTo(current, toggleScale, maxScale, getFrame(), point),
+          : zoomTo(current, toggleScale, getMaxScale(), getFrame(), point),
       true,
     );
 
   const zoomBy = (step: number) =>
     update(
       (current) =>
-        zoomTo(current, current.scale + step, maxScale, getFrame(), {
+        zoomTo(current, current.scale + step, getMaxScale(), getFrame(), {
           x: 0,
           y: 0,
         }),
@@ -171,7 +185,7 @@ export const useZoom = (
         zoomTo(
           current,
           current.scale * factor,
-          maxScale,
+          maxScaleOf(element),
           frameOf(element),
           point,
         ),
@@ -331,7 +345,7 @@ export const useZoom = (
         zoomTo(
           current.startTransform,
           scale,
-          maxScale,
+          getMaxScale(),
           getFrame(),
           current.startMidpoint,
           midpoint(first, second),

@@ -122,6 +122,33 @@ test("the mouse wheel zooms up to the maximum scale", async () => {
   await expect.poll(zoomOf).toEqual({ scale: 1, x: 0, y: 0 });
 });
 
+test("the maximum scale reaches an image's natural size", async () => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 2000;
+  canvas.height = 100;
+  await openLightBox(
+    <img alt="Screenshot" src={canvas.toDataURL()} style={{ width: 200 }} />,
+  );
+  const image = page.getByAltText("Screenshot").element();
+  if (!(image instanceof HTMLImageElement)) {
+    throw new Error("The image is missing");
+  }
+  await expect.poll(() => image.naturalWidth).toBe(2000);
+
+  zoomArea()
+    .element()
+    .dispatchEvent(
+      new WheelEvent("wheel", {
+        bubbles: true,
+        cancelable: true,
+        deltaY: -5000,
+      }),
+    );
+
+  await expect.poll(scaleOf).toBeCloseTo(2000 / image.offsetWidth);
+  expect(scaleOf()).toBeGreaterThan(3);
+});
+
 test("a Safari trackpad pinch zooms instead of the page", async () => {
   await openLightBox();
   const element = zoomArea().element();
