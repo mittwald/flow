@@ -14,11 +14,11 @@ import {
 
 export type MessageThreadProps = PropsWithChildren &
   PropsWithClassName &
-  FlowComponentProps;
+  FlowComponentProps<HTMLUListElement>;
 
 /** @flr-generate all */
 export const MessageThread = flowComponent("MessageThread", (props) => {
-  const { children, className } = props;
+  const { children, className, ref } = props;
 
   const rootClassName = clsx(styles.messageThread, className);
 
@@ -37,7 +37,9 @@ export const MessageThread = flowComponent("MessageThread", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <ul className={rootClassName}>{children}</ul>
+      <ul ref={ref} className={rootClassName}>
+        {children}
+      </ul>
     </PropsContextProvider>
   );
 });
