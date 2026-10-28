@@ -7,15 +7,22 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../locales/*.locale.json";
 import { Button } from "@/components/Button";
 import type { PropsWithChildren } from "react";
+import { LightBoxZoom } from "@/components/LightBox/components/LightBoxZoom";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
-export type LightBoxGalleryItemProps = PropsWithChildren;
+export interface LightBoxGalleryItemProps extends PropsWithChildren {
+  /**
+   * @internal Set by the `withZoom` of the surrounding `LightBox`: whether the
+   * item's content can be zoomed.
+   */
+  withZoom?: boolean;
+}
 
 /** @flr-generate all */
 export const LightBoxGalleryItem = flowComponent(
   "LightBoxGalleryItem",
   (props) => {
-    const { children } = props;
+    const { children, withZoom } = props;
 
     const controller = useOverlayController("Modal");
 
@@ -31,10 +38,16 @@ export const LightBoxGalleryItem = flowComponent(
 
     const stringFormatter = useLocalizedStringFormatter(locales);
 
+    const zoomableContent = <LightBoxZoom>{children}</LightBoxZoom>;
+
     return (
       <PropsContextProvider props={propsContext}>
-        {children}
+        {withZoom ? zoomableContent : children}
         <div className={styles.actions}>
+          <UiComponentTunnelExit
+            id="actionGroup"
+            component="LightBoxGalleryItem"
+          />
           <Button
             aria-label={stringFormatter.format("close")}
             color="light-static"
@@ -42,10 +55,6 @@ export const LightBoxGalleryItem = flowComponent(
           >
             <IconClose />
           </Button>
-          <UiComponentTunnelExit
-            id="actionGroup"
-            component="LightBoxGalleryItem"
-          />
         </div>
       </PropsContextProvider>
     );

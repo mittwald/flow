@@ -30,17 +30,17 @@
     max-height: var(--gallery-item-max-height);
   }
 
+  /* In the screen's top right corner, as the light box places its own. */
   .actions {
-    position: absolute;
-    top: 0;
-    inset-inline-end: calc(var(--button-size-plus-spacing) * -1);
+    position: fixed;
+    top: var(--light-box--spacing);
+    inset-inline-end: var(--light-box--spacing);
     display: flex;
-    flex-direction: column;
-    row-gap: var(--light-box--spacing);
+    column-gap: var(--light-box--spacing);
   }
 
   .actionGroup {
-    flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   /* The item's height is indefinite, so a percentage size here is cyclic and
@@ -98,24 +98,25 @@
     );
   }
 
+  /* At the screen's edges, as far in as the light box's actions. */
   .indicators {
-    position: absolute;
-    bottom: calc(var(--light-box--spacing) / 2);
+    position: fixed;
+    bottom: var(--light-box--spacing);
     inset-inline: 0;
   }
 
   .previousButton,
   .nextButton {
-    position: absolute;
+    position: fixed;
     top: calc(50% - var(--button-size) / 2);
   }
 
   .previousButton {
-    inset-inline-start: 0;
+    inset-inline-start: var(--light-box--spacing);
   }
 
   .nextButton {
-    inset-inline-end: 0;
+    inset-inline-end: var(--light-box--spacing);
   }
 }
 
@@ -132,11 +133,12 @@
     );
   }
 
+  /* At the screen's bottom edge, as far in as the light box's actions. */
   .controls {
     display: flex;
-    position: absolute;
-    bottom: 0;
-    inset-inline: 0;
+    position: fixed;
+    bottom: var(--light-box--spacing);
+    inset-inline: var(--light-box--spacing);
     justify-content: space-between;
     align-items: center;
   }

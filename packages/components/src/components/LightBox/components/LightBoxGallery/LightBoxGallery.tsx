@@ -28,45 +28,49 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === count - 1;
 
-  const pointerStartX = useRef<number | null>(null);
+  const swipeStart = useRef<{ pointerId: number; x: number } | null>(null);
   const swipeThreshold = 50;
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const itemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     containerRef.current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- rerunning once the ref is set takes the focus back from the dialog's autofocus
   }, [containerRef.current]);
 
   const paginate = (direction: number) => {
-    setIndex((prev) => {
-      const next = prev + direction;
+    const next = Math.min(Math.max(currentIndex + direction, 0), count - 1);
+    if (next === currentIndex) return;
 
-      if (next < 0) return 0;
-      if (next >= count) return count - 1;
-
-      return next;
-    });
+    /* The item remounts, which would drop a focus inside it. */
+    if (itemRef.current?.contains(document.activeElement)) {
+      containerRef.current?.focus();
+    }
+    setIndex(next);
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
     if (!e.isPrimary) return;
-    pointerStartX.current = e.clientX;
+    swipeStart.current = { pointerId: e.pointerId, x: e.clientX };
   };
 
+  /* A pinch in the zoom keeps the release of its first finger, so a later
+     press of another pointer must not read as a swipe. */
   const handlePointerUp = (e: React.PointerEvent) => {
-    if (pointerStartX.current === null) return;
+    if (swipeStart.current?.pointerId !== e.pointerId) return;
 
-    const distance = pointerStartX.current - e.clientX;
+    const distance = swipeStart.current.x - e.clientX;
 
     if (Math.abs(distance) > swipeThreshold) {
       paginate(distance > 0 ? 1 : -1);
     }
 
-    pointerStartX.current = null;
+    swipeStart.current = null;
   };
 
   const handlePointerCancel = () => {
-    pointerStartX.current = null;
+    swipeStart.current = null;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -96,7 +100,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
         aria-roledescription="carousel"
         aria-label={stringFormatter.format("gallery")}
       >
-        <div className={styles.galleryItem} key={currentIndex}>
+        <div className={styles.galleryItem} key={currentIndex} ref={itemRef}>
           {children[currentIndex]}
         </div>
 
