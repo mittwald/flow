@@ -17,10 +17,18 @@ const units = [
 ] as const;
 
 const getUnit = (sizeInBytes: number) => {
-  const index = Math.min(
+  let index = Math.min(
     Math.max(Math.floor(Math.log10(sizeInBytes) / 3), 0),
     units.length - 1,
   );
+
+  // 999,960 bytes would otherwise round to "1,000 kB"
+  if (
+    index < units.length - 1 &&
+    Math.round((sizeInBytes / 1000 ** index) * 10) / 10 >= 1000
+  ) {
+    index++;
+  }
 
   return { unit: units[index] ?? "byte", value: sizeInBytes / 1000 ** index };
 };
@@ -32,7 +40,7 @@ export const FileSizeText: FC<Props> = (props) => {
   const formatter = useNumberFormatter({
     style: "unit",
     unit,
-    unitDisplay: "short",
+    unitDisplay: unit === "byte" ? "long" : "short",
     maximumFractionDigits: 1,
   });
 
