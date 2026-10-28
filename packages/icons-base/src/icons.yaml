@@ -70,7 +70,7 @@ Copy:
 Descending:
   category: functional
   tb: SortDescending
-  fa: arrowDownShortWide
+  fa: arrowDownWideShort
 Delete:
   category: functional
   tb: Trash
