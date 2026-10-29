@@ -14,7 +14,7 @@ import {
   <Section>
     <Heading>Speicherplatz</Heading>
     <Alert status="danger">
-      <Heading>Speicherplatz ist voll</Heading>
+      <Heading>Speicherplatz voll</Heading>
       <Text>
         Der Speicherplatz deines Postfachs ist voll. Um
         wieder E-Mails erhalten zu können, kannst du der
