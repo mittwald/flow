@@ -31,6 +31,7 @@ export class RemoteTooltipElement extends FlowRemoteElement<RemoteTooltipElement
       offset: {},
       placement: {},
       shouldFlip: {},
+      suppressHydrationWarning: {},
       translate: {},
       triggerRef: {},
     };

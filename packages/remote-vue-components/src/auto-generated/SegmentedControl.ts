@@ -19,6 +19,7 @@ export const SegmentedControl: FlowRemoteVueComponent<RemoteSegmentedControlElem
         "isInvalid",
         "isReadOnly",
         "isRequired",
+        "suppressHydrationWarning",
       ],
     },
   );

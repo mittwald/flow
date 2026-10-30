@@ -27,6 +27,7 @@ export const TextArea: FlowRemoteVueComponent<RemoteTextAreaElementProps> =
         "isReadOnly",
         "isRequired",
         "showCharacterCount",
+        "suppressHydrationWarning",
       ],
     },
   );

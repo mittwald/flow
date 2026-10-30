@@ -38,6 +38,7 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFiel
       name: {},
       slot: {},
       step: {},
+      suppressHydrationWarning: {},
       translate: {},
       unit: {},
       validate: {},

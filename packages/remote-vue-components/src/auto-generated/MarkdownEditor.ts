@@ -27,6 +27,7 @@ export const MarkdownEditor: FlowRemoteVueComponent<RemoteMarkdownEditorElementP
         "isReadOnly",
         "isRequired",
         "showCharacterCount",
+        "suppressHydrationWarning",
       ],
     },
   );

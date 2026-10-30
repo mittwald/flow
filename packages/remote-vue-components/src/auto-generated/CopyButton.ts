@@ -29,6 +29,7 @@ export const CopyButton: FlowRemoteVueComponent<RemoteCopyButtonElementProps> =
         "isReadOnly",
         "isSucceeded",
         "preventFocusOnPress",
+        "suppressHydrationWarning",
         "unstyled",
       ],
     },

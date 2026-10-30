@@ -8,5 +8,11 @@ export { type RemoteRadioElementProps as RadioProps } from "@mittwald/flow-remot
 
 export const Radio: FlowRemoteVueComponent<RemoteRadioElementProps> =
   createFlowRemoteComponent("flr-radio", "Radio", RemoteRadioElement, {
-    booleans: ["autoFocus", "hidden", "inert", "isDisabled"],
+    booleans: [
+      "autoFocus",
+      "hidden",
+      "inert",
+      "isDisabled",
+      "suppressHydrationWarning",
+    ],
   });

@@ -32,6 +32,7 @@ export class RemoteSegmentedControlElement extends FlowRemoteElement<RemoteSegme
       name: {},
       orientation: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

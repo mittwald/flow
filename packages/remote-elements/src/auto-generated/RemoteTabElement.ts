@@ -22,6 +22,7 @@ export class RemoteTabElement extends FlowRemoteElement<RemoteTabElementProps> {
       inert: {},
       lang: {},
       shouldForceMount: {},
+      suppressHydrationWarning: {},
       translate: {},
     };
   }

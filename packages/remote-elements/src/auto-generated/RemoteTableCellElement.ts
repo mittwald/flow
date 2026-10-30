@@ -22,6 +22,7 @@ export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellEle
       inert: {},
       lang: {},
       rowHeader: {},
+      suppressHydrationWarning: {},
       textValue: {},
       translate: {},
     };
