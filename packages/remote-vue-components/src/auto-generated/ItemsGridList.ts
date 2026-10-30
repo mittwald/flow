@@ -22,6 +22,7 @@ export const ItemsGridList: FlowRemoteVueComponent<
       "hidden",
       "inert",
       "shouldSelectOnPressUp",
+      "suppressHydrationWarning",
     ],
   },
 );

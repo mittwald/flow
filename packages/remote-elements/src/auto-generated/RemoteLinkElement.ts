@@ -36,6 +36,7 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       routerOptions: {},
       size: {},
       slot: {},
+      suppressHydrationWarning: {},
       target: {},
       translate: {},
       unstyled: {},

@@ -11,5 +11,5 @@ export const Separator: FlowRemoteVueComponent<RemoteSeparatorElementProps> =
     "flr-separator",
     "Separator",
     RemoteSeparatorElement,
-    { booleans: ["hidden", "inert"] },
+    { booleans: ["hidden", "inert", "suppressHydrationWarning"] },
   );

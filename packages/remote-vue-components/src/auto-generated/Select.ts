@@ -21,5 +21,6 @@ export const Select: FlowRemoteVueComponent<RemoteSelectElementProps> =
       "isReadOnly",
       "isRequired",
       "shouldCloseOnSelect",
+      "suppressHydrationWarning",
     ],
   });

@@ -13,5 +13,6 @@ export const Table: FlowRemoteVueComponent<RemoteTableElementProps> =
       "hidden",
       "inert",
       "shouldSelectOnPressUp",
+      "suppressHydrationWarning",
     ],
   });

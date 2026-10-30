@@ -41,6 +41,7 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       selectionMode: {},
       shouldCloseOnSelect: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

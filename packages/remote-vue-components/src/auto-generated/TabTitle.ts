@@ -11,5 +11,5 @@ export const TabTitle: FlowRemoteVueComponent<RemoteTabTitleElementProps> =
     "flr-tab-title",
     "TabTitle",
     RemoteTabTitleElement,
-    { booleans: ["download", "hidden", "inert"] },
+    { booleans: ["download", "hidden", "inert", "suppressHydrationWarning"] },
   );

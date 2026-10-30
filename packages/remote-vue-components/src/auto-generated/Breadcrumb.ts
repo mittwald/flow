@@ -11,5 +11,5 @@ export const Breadcrumb: FlowRemoteVueComponent<RemoteBreadcrumbElementProps> =
     "flr-breadcrumb",
     "Breadcrumb",
     RemoteBreadcrumbElement,
-    { booleans: ["hidden", "inert", "isDisabled"] },
+    { booleans: ["hidden", "inert", "isDisabled", "suppressHydrationWarning"] },
   );

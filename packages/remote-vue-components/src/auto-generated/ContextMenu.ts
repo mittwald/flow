@@ -27,6 +27,7 @@ export const ContextMenu: FlowRemoteVueComponent<RemoteContextMenuElementProps> 
         "shouldSkipAnimation",
         "shouldUpdatePosition",
         "showSelectAll",
+        "suppressHydrationWarning",
       ],
     },
   );

@@ -11,5 +11,5 @@ export const TableHeader: FlowRemoteVueComponent<RemoteTableHeaderElementProps> 
     "flr-table-header",
     "TableHeader",
     RemoteTableHeaderElement,
-    { booleans: ["hidden", "inert"] },
+    { booleans: ["hidden", "inert", "suppressHydrationWarning"] },
   );

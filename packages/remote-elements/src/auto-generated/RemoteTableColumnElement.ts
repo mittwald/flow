@@ -24,6 +24,7 @@ export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColum
       isRowHeader: {},
       lang: {},
       minWidth: {},
+      suppressHydrationWarning: {},
       textValue: {},
       translate: {},
       width: {},

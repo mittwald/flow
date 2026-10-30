@@ -33,6 +33,7 @@ export class RemoteContextMenuContentElement extends FlowRemoteElement<RemoteCon
       shouldCloseOnSelect: {},
       shouldFocusWrap: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
     };
   }
