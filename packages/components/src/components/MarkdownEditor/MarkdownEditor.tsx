@@ -66,7 +66,10 @@ export interface MarkdownEditorProps
   accept?: string;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props markdownComponent
+ */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   const {
     isDisabled,

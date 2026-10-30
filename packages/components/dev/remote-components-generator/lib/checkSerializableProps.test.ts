@@ -1,10 +1,12 @@
-import type { ComponentDoc } from "react-docgen-typescript";
+import type { ComponentDoc, PropItemType } from "react-docgen-typescript";
 import { describe, expect, test } from "vitest";
 import {
+  acknowledgedFunctionAlternativeProps,
   acknowledgedValueReturningProps,
   checkSerializableProps,
   obsoleteBaselineEntries,
   rejectedProps,
+  type UnserializablePropReport,
 } from "./checkSerializableProps";
 import { isProp, isSlot } from "./propClassifiers";
 
@@ -20,7 +22,7 @@ const eventHandler = `AdaptChildReactEventHandler<any, ${reactElement}>`;
 
 const componentDoc = (
   displayName: string,
-  props: Record<string, string>,
+  props: Record<string, string | PropItemType>,
   tags: Record<string, string> = {},
 ): ComponentDoc =>
   ({
@@ -34,7 +36,7 @@ const componentDoc = (
           name,
           required: false,
           description: "",
-          type: { name: type },
+          type: typeof type === "string" ? { name: type } : type,
         },
       ]),
     ),
@@ -77,18 +79,24 @@ describe("isSlot", () => {
 });
 
 describe("checkSerializableProps", () => {
+  /*
+   * Whether a prop is a function is not read from its name — see
+   * `callableReturn.test.ts` for the types behind `callableReturn`.
+   */
   test("reports a function that hands rendered output back to the host", () => {
+    const type = {
+      name: "((props: TableBodyRenderProps) => ReactNode)",
+      callableReturn: "rendered-output" as const,
+    };
     const reports = checkSerializableProps([
-      componentDoc("TableBody", {
-        renderEmptyState: "((props: TableBodyRenderProps) => ReactNode)",
-      }),
+      componentDoc("TableBody", { renderEmptyState: type }),
     ]);
 
     expect(reports).toStrictEqual([
       {
         component: "TableBody",
         prop: "renderEmptyState",
-        type: "((props: TableBodyRenderProps) => ReactNode)",
+        type: type.name,
         reason: "returns-rendered-output",
       },
     ]);
@@ -127,7 +135,10 @@ describe("checkSerializableProps", () => {
    * Promise and recharts rendered `[object Promise]` into every tick.
    */
   test("reports a function whose return value the host reads", () => {
-    const type = "((value: unknown, index: number) => string)";
+    const type = {
+      name: "((value: unknown, index: number) => string)",
+      callableReturn: "value" as const,
+    };
     const reports = checkSerializableProps([
       componentDoc("XAxis", { tickFormatter: type }),
     ]);
@@ -136,50 +147,36 @@ describe("checkSerializableProps", () => {
       {
         component: "XAxis",
         prop: "tickFormatter",
-        type,
+        type: type.name,
         reason: "returns-a-value",
       },
     ]);
   });
 
-  test("finds the value-returning arm inside a union", () => {
-    const reports = checkSerializableProps([
-      componentDoc("DatePicker", {
-        shouldCloseOnSelect: "boolean | (() => boolean)",
-      }),
-    ]);
-
-    expect(reports.map((r) => r.reason)).toStrictEqual(["returns-a-value"]);
-  });
-
-  /*
-   * A return the host cannot read is fine — that is what every `on*` event is,
-   * and `formAction` is the same shape under a name the event rule misses. A
-   * `Promise` return says the host already awaits, which is how `ChartTooltip`'s
-   * formatters are typed.
-   */
   test("stays quiet about functions whose return value nobody reads", () => {
     const reports = checkSerializableProps([
       componentDoc("Example", {
-        formAction: "string | ((formData: FormData) => void | Promise<void>)",
-        formatter: "((value: string) => string | Promise<string>)",
-        never: "(() => never)",
+        formAction: {
+          name: "string | ((formData: FormData) => void | Promise<void>)",
+          callableReturn: "unread",
+        },
       }),
     ]);
 
-    expect(reports.map((r) => `${r.prop}: ${r.reason}`)).toStrictEqual([
-      // only the one that returns `string` before the union's Promise arm
-      "formatter: returns-a-value",
-    ]);
+    expect(reports).toStrictEqual([]);
   });
 });
 
-describe("the acknowledged value-returning baseline", () => {
-  const report = (component: string, prop: string) => ({
+describe("the acknowledged baselines", () => {
+  const report = (
+    component: string,
+    prop: string,
+    reason: UnserializablePropReport["reason"] = "returns-a-value",
+  ) => ({
     component,
     prop,
     type: "((value: unknown) => boolean)",
-    reason: "returns-a-value" as const,
+    reason,
   });
 
   test("excuses a listed prop and rejects an unlisted one", () => {
@@ -193,13 +190,42 @@ describe("the acknowledged value-returning baseline", () => {
     ]);
   });
 
-  test("reports an entry that no longer matches a generated prop", () => {
-    const stale = acknowledgedValueReturningProps.filter(
-      (entry) => entry !== "TextField.validate",
-    );
+  /*
+   * A value-returning entry excuses exactly that: the same prop handing
+   * rendered output back is a different defect.
+   */
+  test("does not excuse a value-returning entry for rendered output", () => {
+    const reports = [
+      report("TextField", "validate", "returns-rendered-output"),
+    ];
 
-    expect(
-      obsoleteBaselineEntries([report("TextField", "validate")]),
-    ).toStrictEqual(stale);
+    expect(rejectedProps(reports)).toStrictEqual(reports);
+  });
+
+  test("excuses a function alternative on every component via `*.`", () => {
+    expect(acknowledgedFunctionAlternativeProps).toContain("*.elementType");
+
+    const reports = [
+      report("Text", "elementType", "returns-rendered-output"),
+      report("NewComponent", "elementType", "returns-rendered-output"),
+    ];
+
+    expect(rejectedProps(reports)).toStrictEqual([]);
+  });
+
+  test("reports an entry that no longer matches a generated prop", () => {
+    const reports = [
+      ...acknowledgedValueReturningProps,
+      ...acknowledgedFunctionAlternativeProps,
+    ]
+      .filter((entry) => entry !== "TextField.validate")
+      .map((entry) => {
+        const [component = "", prop = ""] = entry.split(".");
+        return report(component === "*" ? "Example" : component, prop);
+      });
+
+    expect(obsoleteBaselineEntries(reports)).toStrictEqual([
+      "TextField.validate",
+    ]);
   });
 });
