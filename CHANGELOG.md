@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
+
+### Build System
+
+* **deps-dev:** bump happy-dom from 20.14.6 to 21.0.4 ([#3572](https://github.com/mittwald/flow/issues/3572)) ([9fe46b4](https://github.com/mittwald/flow/commit/9fe46b40982bd982610de1d59da330ec0b56ecec))
+
 ## [1.5.49](https://github.com/mittwald/flow/compare/1.5.48...1.5.49) (2026-10-30)
 
 ### Build System
