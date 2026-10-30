@@ -67,6 +67,11 @@ updates:
       # is its own PR, not a routine bump.
       - dependency-name: "recharts"
         versions: [">=3.8.0"]
+      # playwright 1.64 bundles a Firefox that cannot move focus from an iframe
+      # to its parent (microsoft/playwright#43280), and vitest runs every test in
+      # an iframe. Fixed in 1.65; drop this entry with #3607.
+      - dependency-name: "playwright"
+        versions: ["1.64.x"]
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
