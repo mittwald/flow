@@ -15,10 +15,17 @@ test("the name is shown", async () => {
  * The size arrives in bytes and is shown in the unit it deserves – the card is
  * the only place that conversion happens.
  */
-test("the size is shown in a compact unit", async () => {
-  await render(<FileCard name="backup.tar.gz" sizeInBytes={5_400_000} />);
+test.for([
+  [512, "512 bytes"],
+  [1_500, "1.5 kB"],
+  [5_400_000, "5.4 MB"],
+  [4_800_000_000, "4.8 GB"],
+  [2_000_000_000_000, "2 TB"],
+  [999_960, "1 MB"],
+] as const)("%i bytes are shown as %s", async ([sizeInBytes, expected]) => {
+  await render(<FileCard name="backup.tar.gz" sizeInBytes={sizeInBytes} />);
 
-  await expect.element(page.getByText("5.4MB")).toBeVisible();
+  await expect.element(page.getByText(expected, { exact: true })).toBeVisible();
 });
 
 test("a size of zero is left out", async () => {
