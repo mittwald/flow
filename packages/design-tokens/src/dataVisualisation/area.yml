@@ -4,4 +4,4 @@ area:
   border-color:
     value: "{neutral.color.100}"
   dot-background-color:
-    value: "{light-static.color.800}"
+    value: "{neutral.color.100}"
