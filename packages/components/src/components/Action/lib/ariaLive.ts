@@ -30,6 +30,7 @@ export const useAriaAnnounceActionState = (
     } else if (actionState === "isFailed") {
       announce(isFailedText, "polite");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- announce on state changes only, not when the texts change
   }, [actionState]);
 };
 
@@ -45,5 +46,6 @@ export const useAriaAnnounceSuspense = () => {
     return () => {
       clearTimeout(timeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- announce once per mount
   }, []);
 };

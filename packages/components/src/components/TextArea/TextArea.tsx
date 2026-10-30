@@ -158,6 +158,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the ref object follows the forwarded ref, which callers may pass inline
   }, [resized]);
 
   /*
@@ -175,6 +176,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     textArea.style.height = "0px";
     // + 2 to add border height
     textArea.style.height = `${textArea.scrollHeight + 2}px`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the ref object follows the forwarded ref, which callers may pass inline
   }, [value, autoResizable, verticallyResizable]);
 
   return (

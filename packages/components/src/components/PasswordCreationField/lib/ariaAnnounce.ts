@@ -65,5 +65,6 @@ export const useAriaAnnouncePasswordVisibility = (
       ),
       "polite",
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- announce on toggles only, not when the formatter changes
   }, [isRevealed]);
 };

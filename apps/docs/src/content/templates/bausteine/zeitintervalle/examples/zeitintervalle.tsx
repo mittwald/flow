@@ -218,9 +218,8 @@ export default () => {
 
   // only necessary because CronTimeSelector is an inline component
   // which is a requirement in the demo page
-  const MemorizedCronTimeSelector = useMemo(
+  const [MemorizedCronTimeSelector] = useState(
     () => CronTimeSelector,
-    [],
   );
 
   const [currentCronString, setCronString] =

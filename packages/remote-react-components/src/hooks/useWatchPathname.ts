@@ -25,5 +25,6 @@ export const useWatchPathname = (callback: Callback) => {
     return () => {
       clearInterval(checker);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- polls with the first callback; RemoteRoot's only reads connectionRef, and its isPending is always false once location.href has changed
   }, [storedHref]);
 };

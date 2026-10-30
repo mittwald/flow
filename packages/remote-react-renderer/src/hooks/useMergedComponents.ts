@@ -21,5 +21,6 @@ export const useMergedComponents = (
           ),
         ),
       ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- compare the integrations by content, not by array identity
     [...integrations],
   );

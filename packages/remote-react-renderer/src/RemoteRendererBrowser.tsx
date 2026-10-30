@@ -119,9 +119,11 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
   const language = useLanguage();
   const theme = useTheme();
 
+  /* eslint-disable react-hooks/exhaustive-deps -- a new promise per src */
   const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const loadingPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
+  /* eslint-enable react-hooks/exhaustive-deps */
   const suspenseTrigger = useControllableSuspenseTrigger();
 
   const [connectionSrc, setConnectionSrc] = useState<string | null>(null);
@@ -137,7 +139,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
       { signal: controller.signal },
     );
     return [remoteReceiver, controller];
-  }, [src]);
+  }, [renderPromise]);
 
   useUpdateHostPathnameOnRemote(hostPathname, connection.current);
 
@@ -208,7 +210,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
         tag: loaderResourceTag,
       });
     },
-    [src],
+    [loaderResourceTag],
   );
 
   usePromise(
