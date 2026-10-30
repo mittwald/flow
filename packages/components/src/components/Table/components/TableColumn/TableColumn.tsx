@@ -4,6 +4,7 @@ import clsx from "clsx";
 import styles from "../../Table.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { SkeletonRawText } from "@/components/SkeletonMode/components/SkeletonRawText";
+import { useIsFirstColumn } from "@/components/Table/components/TableHeader/context";
 
 export interface TableColumnProps
   extends
@@ -28,8 +29,11 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
     horizontalAlign = "start",
     width,
     minWidth,
+    isRowHeader,
     ...rest
   } = props;
+  const isFirstColumn = useIsFirstColumn();
+
   const rootClassName = clsx(
     styles.column,
     horizontalAlign !== "start" &&
@@ -41,7 +45,7 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
 
   return (
     <Aria.Column
-      isRowHeader
+      isRowHeader={isRowHeader ?? isFirstColumn ?? true}
       className={rootClassName}
       {...rest}
       style={{ width, minWidth }}

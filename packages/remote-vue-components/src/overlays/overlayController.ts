@@ -1,9 +1,17 @@
 import {
+  OverlayState,
+  type OverlayCloseHandler,
+  type OverlayCloseOptions,
+  type OverlayOpenHandler,
+  type OverlayOpenStateHandler,
+} from "@mittwald/flow-components-base";
+import { reaction, runInAction } from "mobx";
+import {
   computed,
+  customRef,
   inject,
   markRaw,
   provide,
-  ref,
   watchEffect,
   type ComputedRef,
   type InjectionKey,
@@ -11,35 +19,39 @@ import {
   type Ref,
 } from "vue";
 
+export type {
+  OverlayCloseHandler,
+  OverlayCloseOptions,
+  OverlayOpenHandler,
+  OverlayOpenStateHandler,
+} from "@mittwald/flow-components-base";
+
 /**
  * The Vue counterpart of Flow's `OverlayController`.
  *
- * Flow's version is a MobX model shared through React context; here the state
- * is a `ref` and the sharing is `provide`/`inject`. Same contract: a trigger
- * opens it, the overlay reads it, and anything inside can close it.
- */
-export type OverlayOpenHandler = () => unknown;
-export type OverlayCloseHandler = () => unknown;
-export type OverlayOpenStateHandler = (isOpen: boolean) => unknown;
-
-export interface OverlayCloseOptions {
-  /** Close without asking, even when the overlay requires confirmation. */
-  bypassConfirmation?: boolean;
-}
-
-/*
+ * The state is `OverlayState` from `@mittwald/flow-components-base`, the one
+ * React's controller runs on; this wraps it in refs and shares it through
+ * `provide`/`inject`. Same contract: a trigger opens it, the overlay reads it,
+ * and anything inside can close it.
+ *
  * `Raw`, as `markRaw` makes it: reactive state keeps the controller as it is,
  * and its type says so too.
  */
 export interface OverlayController extends Raw<Record<never, never>> {
+  /** Writing it sets the state without running a handler, like `syncOpen`. */
   isOpen: Ref<boolean>;
   /**
-   * Whether closing has to be confirmed first. Set by a `<Modal
-   * confirm-on-close>`, not by the app.
+   * Whether closing has to be confirmed first — combined from every source: a
+   * `<Modal confirm-on-close>` and what the app writes here.
    */
   confirmOnClose: Ref<boolean>;
-  /** Whether the confirmation is on screen right now. */
+  /**
+   * Whether the confirmation is on screen right now. Writing `false` dismisses
+   * it; only a close shows it.
+   */
   isConfirmingClose: Ref<boolean>;
+  /** Whether the overlay's content is suspended. Not used by this binding yet. */
+  isContentSuspended: Ref<boolean>;
   open: () => void;
   /**
    * Closes — or asks first, when the overlay requires confirmation and
@@ -61,6 +73,11 @@ export interface OverlayController extends Raw<Record<never, never>> {
   cancelClose: () => void;
   /** Flow's name for `cancelClose`. */
   cancelConfirmation: () => void;
+  /**
+   * Closes without a confirmation until the returned disposer is called — as in
+   * Flow, around an operation that closes the overlay deliberately.
+   */
+  grantCloseWithoutConfirmation: () => () => void;
   /*
    * As in Flow: a handler returning `false` aborts the change. Each returns
    * its disposer.
@@ -83,107 +100,111 @@ export interface UseOverlayControllerOptions extends CreateOverlayControllerOpti
   reuseControllerFromContext?: boolean;
 }
 
-const controllers = new WeakSet<object>();
+/* Each controller's state, which is also how a controller is recognized. */
+const states = new WeakMap<object, OverlayState>();
 
 /** Whether a value is a controller, rather than options naming one. */
 export const isOverlayController = (
   value: unknown,
 ): value is OverlayController =>
-  typeof value === "object" && value !== null && controllers.has(value);
+  typeof value === "object" && value !== null && states.has(value);
 
-const addTo =
-  <T>(handlers: Set<T>) =>
-  (handler: T): (() => void) => {
-    handlers.add(handler);
-    return () => handlers.delete(handler);
-  };
-
-/**
- * Builds a controller around an existing `isOpen`, so a second controller can
- * drive the same state — which is how the confirmation modal is bound to its
- * parent's `isConfirmingClose`.
+/*
+ * A ref over one value of the state: a read subscribes through MobX, a write
+ * goes to the state. The reaction lives as long as the controller does — it
+ * is held by nothing but the state it observes.
  */
-export const createOverlayControllerFor = (
-  isOpen: Ref<boolean>,
+const stateRef = <T>(read: () => T, write: (value: T) => void): Ref<T> =>
+  customRef((track, trigger) => {
+    reaction(read, trigger);
+    return {
+      get: () => {
+        track();
+        return read();
+      },
+      set: write,
+    };
+  });
+
+export const createOverlayController = (
+  options: CreateOverlayControllerOptions = {},
 ): OverlayController => {
-  const confirmOnClose = ref(false);
-  const isConfirmingClose = ref(false);
-  const onOpenHandlers = new Set<OverlayOpenHandler>();
-  const onCloseHandlers = new Set<OverlayCloseHandler>();
-  const onOpenChangeHandlers = new Set<OverlayOpenStateHandler>();
-  /* Flow's `openStateInFlight`: a handler setting the state again is a no-op. */
-  let inFlight: boolean | undefined;
-
-  /* Flow's `applyOpenState`, after the confirmation. */
-  const apply = (toOpen: boolean): void => {
-    if (isOpen.value === toOpen || inFlight === toOpen) {
-      return;
-    }
-    inFlight = toOpen;
-    try {
-      const run = (handlers: Set<(isOpen: boolean) => unknown>) =>
-        [...handlers].map((handler) => handler(toOpen)).includes(false);
-      const aborted =
-        run(toOpen ? onOpenHandlers : onCloseHandlers) ||
-        run(onOpenChangeHandlers);
-      if (!aborted) {
-        isOpen.value = toOpen;
-      }
-    } finally {
-      inFlight = undefined;
-    }
-  };
-
-  const open = () => {
-    isConfirmingClose.value = false;
-    apply(true);
-  };
-
-  const closeNow = () => {
-    isConfirmingClose.value = false;
-    apply(false);
-  };
-
-  /*
-   * Every close an app or the host can ask for goes through here, so a dismiss
-   * — Escape, a click outside — is confirmed just like a button. The host
-   * reports that dismiss as `openChange(false)`, and leaving `isOpen` alone is
-   * what puts the overlay back: it is a controlled prop on the host's side.
-   */
-  const close = (options: OverlayCloseOptions = {}) => {
-    if (!options.bypassConfirmation && confirmOnClose.value && isOpen.value) {
-      isConfirmingClose.value = true;
-      return;
-    }
-    closeNow();
-  };
+  const state = new OverlayState({ isDefaultOpen: options.isDefaultOpen });
+  /* The source an app sets through `confirmOnClose.value`. */
+  const ownSource = {};
 
   const controller: OverlayController = {
-    isOpen,
-    confirmOnClose,
-    isConfirmingClose,
-    open,
-    close,
-    toggle: () => (isOpen.value ? close() : open()),
-    setOpen: (nextIsOpen: boolean, options?: OverlayCloseOptions) =>
-      nextIsOpen ? open() : close(options),
-    syncOpen: (nextIsOpen: boolean) => {
-      isOpen.value = nextIsOpen;
-    },
-    requestClose: () => close(),
-    confirmClose: closeNow,
-    cancelClose: () => (isConfirmingClose.value = false),
-    cancelConfirmation: () => (isConfirmingClose.value = false),
-    addOnOpen: addTo(onOpenHandlers),
-    addOnClose: addTo(onCloseHandlers),
-    addOnOpenChange: addTo(onOpenChangeHandlers),
+    isOpen: stateRef(() => state.isOpen, state.syncOpen),
+    confirmOnClose: stateRef(
+      () => state.confirmOnCloseEnabled,
+      (confirmOnClose) =>
+        confirmOnClose
+          ? state.setConfirmOnCloseSource(ownSource, true)
+          : state.removeConfirmOnCloseSource(ownSource),
+    ),
+    isConfirmingClose: stateRef(
+      () => state.showConfirmationModal,
+      (isConfirming) => {
+        if (!isConfirming) {
+          state.cancelConfirmation();
+        }
+      },
+    ),
+    isContentSuspended: stateRef(
+      () => state.isContentSuspended,
+      state.setIsContentSuspended,
+    ),
+    open: state.open,
+    close: state.close,
+    toggle: state.toggle,
+    setOpen: state.setOpen,
+    syncOpen: state.syncOpen,
+    requestClose: () => state.close(),
+    /*
+     * React's `useCloseOverlayConfirmationController` confirms the same way.
+     * One action, so no observer sees the confirmation gone and the overlay
+     * still open.
+     */
+    confirmClose: () =>
+      runInAction(() => {
+        state.confirmClose();
+        state.close();
+      }),
+    cancelClose: state.cancelConfirmation,
+    cancelConfirmation: state.cancelConfirmation,
+    grantCloseWithoutConfirmation: () => state.grantCloseWithoutConfirmation(),
+    addOnOpen: (handler) => state.addOnOpen(handler),
+    addOnClose: (handler) => state.addOnClose(handler),
+    addOnOpenChange: (handler) => state.addOnOpenChange(handler),
   };
   /*
    * Raw, so `reactive()`, `ref()` or a store hold the controller itself: a
-   * proxy would unwrap its refs and miss the `controllers` set.
+   * proxy would unwrap its refs and miss the `states` map.
    */
-  controllers.add(markRaw(controller));
+  states.set(markRaw(controller), state);
   return controller;
+};
+
+/**
+ * Registers a component's opinion on close confirmation for as long as it is
+ * mounted — Flow's `useConfirmOnCloseSource`. `undefined` contributes nothing,
+ * so the other sources decide.
+ */
+export const useConfirmOnCloseSource = (
+  controller: () => OverlayController,
+  confirmOnClose: () => boolean | undefined,
+): void => {
+  const source = {};
+
+  watchEffect((onCleanup) => {
+    const state = states.get(controller());
+    const value = confirmOnClose();
+    if (!state || value === undefined) {
+      return;
+    }
+    state.setConfirmOnCloseSource(source, value);
+    onCleanup(() => state.removeConfirmOnCloseSource(source));
+  });
 };
 
 /**
@@ -211,11 +232,6 @@ export const useOverlayHandlers = (
     onCleanup(() => disposers.forEach((dispose) => dispose?.()));
   });
 };
-
-export const createOverlayController = (
-  options: CreateOverlayControllerOptions = {},
-): OverlayController =>
-  createOverlayControllerFor(ref(options.isDefaultOpen ?? false));
 
 /**
  * A controller an app can hold itself, to open an overlay from anywhere —

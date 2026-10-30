@@ -1,4 +1,5 @@
 import { mapAttributeToReactProperty } from "@/lib/mapAttributeToReactProperty";
+import { isReactSuspendedStyle } from "@/lib/propClassifiers";
 import clsx from "clsx";
 import { createElement } from "react";
 import { mapKeys } from "remeda";
@@ -30,6 +31,13 @@ export const elementFactory =
     );
 
     delete result["class"];
+
+    // React rejects a style string, as set by remote-dom for the style attribute
+    if (typeof result["style"] === "string") {
+      result["style"] = isReactSuspendedStyle(result["style"])
+        ? { display: "none" }
+        : undefined;
+    }
 
     return createElement(element, mapKeys(result, mapAttributeToReactProperty));
   };

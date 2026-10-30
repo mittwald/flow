@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
@@ -68,16 +68,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: {
-      TabTitle,
-      Tab,
-      Tabs,
-      Flex,
-      AccordionGroup,
-      Accordion,
-      Heading,
-      Content,
-    },
+    components: { TabTitle, Tab, Tabs, Flex },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -129,26 +120,49 @@ test.each(testEnvironments)(
             Content
           </Tab>
         </Tabs>
-        <Tabs>
-          <Tab id="1">
-            <TabTitle data-testid="accordion-tab">Accordions</TabTitle>
-            <AccordionGroup>
-              <Accordion>
-                <Heading>First</Heading>
-                <Content>Content</Content>
-              </Accordion>
-              <Accordion>
-                <Heading>Second</Heading>
-                <Content>Content</Content>
-              </Accordion>
-            </AccordionGroup>
-          </Tab>
-          <Tab id="2">
-            <TabTitle>Tab 2</TabTitle>
-            Content
-          </Tab>
-        </Tabs>
       </Flex>,
+    );
+
+    await testScreenshot("Tabs edge cases");
+  },
+);
+
+// AccordionGroup shipped in 1.5.0.
+test.skipIf(crossVersion({ below: "1.5.0" })).each(testEnvironments)(
+  "Tabs panel overflow (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      TabTitle,
+      Tab,
+      Tabs,
+      AccordionGroup,
+      Accordion,
+      Heading,
+      Content,
+    },
+  }) => {
+    await render(
+      <Tabs>
+        <Tab id="1">
+          <TabTitle data-testid="accordion-tab">Accordions</TabTitle>
+          <AccordionGroup>
+            <Accordion>
+              <Heading>First</Heading>
+              <Content>Content</Content>
+            </Accordion>
+            <Accordion>
+              <Heading>Second</Heading>
+              <Content>Content</Content>
+            </Accordion>
+          </AccordionGroup>
+        </Tab>
+        <Tab id="2">
+          <TabTitle>Tab 2</TabTitle>
+          Content
+        </Tab>
+      </Tabs>,
     );
 
     // The accordion's focus ring reaches past the panel on both sides.
@@ -158,6 +172,6 @@ test.each(testEnvironments)(
       .element(page.getByRole("button", { name: "First" }))
       .toHaveFocus();
 
-    await testScreenshot("Tabs edge cases");
+    await testScreenshot("Tabs panel overflow");
   },
 );

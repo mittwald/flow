@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+### Bug Fixes
+
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
+### Tests
+
+* update visual regression screenshots ([4c1f5e2](https://github.com/mittwald/flow/commit/4c1f5e20036916b377959ba085f88b96212d5784))
+
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+### Bug Fixes
+
+* **Heading:** truncate the title so tunnelled content stays on its line ([#3582](https://github.com/mittwald/flow/issues/3582)) ([96248ea](https://github.com/mittwald/flow/commit/96248ea535865a785bd26e2d38b52dbf8679f521))
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
+
+### Bug Fixes
+
+* **Text:** drop the default pretty text wrapping ([#3573](https://github.com/mittwald/flow/issues/3573)) ([1334401](https://github.com/mittwald/flow/commit/133440137e729c6e1631223b037fe0371f4672c9))
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.39](https://github.com/mittwald/flow/compare/1.5.38...1.5.39) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.38](https://github.com/mittwald/flow/compare/1.5.37...1.5.38) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.37](https://github.com/mittwald/flow/compare/1.5.36...1.5.37) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.36](https://github.com/mittwald/flow/compare/1.5.35...1.5.36) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+### Bug Fixes
+
+* **Badge:** render spans so a badge can sit in running text ([#3533](https://github.com/mittwald/flow/issues/3533)) ([07741d7](https://github.com/mittwald/flow/commit/07741d772d74f40a36886872e5c1d7b50c6ec47e))
+
+### Tests
+
+* update visual regression screenshots ([de6b78a](https://github.com/mittwald/flow/commit/de6b78a742f98539ac89796a13a7a1c260cc4ac9))
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+### Continuous Integration
+
+* run changed visual tests through the in-process cross-version harness on PRs ([#3530](https://github.com/mittwald/flow/issues/3530)) ([1618a5a](https://github.com/mittwald/flow/commit/1618a5ab41bd935db37c3cd38e2a2823b2097aec))
+
+## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.30](https://github.com/mittwald/flow/compare/1.5.29...1.5.30) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.29](https://github.com/mittwald/flow/compare/1.5.28...1.5.29) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
+
+### Bug Fixes
+
+* **Table:** keep empty column headers in the grid ([385d863](https://github.com/mittwald/flow/commit/385d86391ac235dd03979daf5d7622fac93360c3))
+
+### Tests
+
+* **Tabs:** gate the AccordionGroup scenario at 1.5.0 ([#3529](https://github.com/mittwald/flow/issues/3529)) ([2cf2bfc](https://github.com/mittwald/flow/commit/2cf2bfc9157012ce051f55fc06a5a1de9e9cd2cf))
+* update visual regression screenshots ([1071cb2](https://github.com/mittwald/flow/commit/1071cb26187d0564d1bbb3bb1d8d1129f4cbaceb))
+
 ## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

@@ -11,7 +11,7 @@ import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { ComponentDefaultsProvider } from "@/components/ComponentDefaultsProvider";
-import { useModalController } from "@/lib/controller";
+import { type OverlayController, useModalController } from "@/lib/controller";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
@@ -44,7 +44,7 @@ test("Modal is open when using props", async () => {
     </Modal>,
   );
 
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal can be controlled with modal controller", async () => {
@@ -74,7 +74,7 @@ test("Modal can be controlled with modal controller", async () => {
   expect(modalText).not.toBeInTheDocument();
 
   await userEvent.click(openModalButton);
-  expect(modalText).toBeInTheDocument();
+  await expect.element(modalText).toBeInTheDocument();
 });
 
 /*
@@ -121,7 +121,7 @@ test("Modal and its fields stay on one side of the controlled line", async () =>
     await userEvent.click(
       dom.getByRole("button", { name: "Close modal", exact: true }),
     );
-    expect(dom.getByTestId("modal-text")).not.toBeInTheDocument();
+    await expect.element(dom.getByTestId("modal-text")).not.toBeInTheDocument();
 
     expect(warn.mock.calls.flat().join("\n")).not.toContain(
       "uncontrolled to controlled",
@@ -188,11 +188,11 @@ test("Modal with dirty form requires confirmation", async () => {
 
   await userEvent.click(tryCloseModalButton);
   await userEvent.click(confirmCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 
   await userEvent.click(openModalButton);
   await userEvent.click(submitButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal keeps requiring confirmation after a submit that does not close it", async () => {
@@ -352,7 +352,7 @@ test("Modal with resetted form does not require confirmation", async () => {
   await userEvent.type(input, "Some changes");
   await userEvent.click(resetFormButton);
   await userEvent.click(tryCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal with dirty form does not require confirmation when using abort button", async () => {
@@ -393,7 +393,7 @@ test("Modal with dirty form does not require confirmation when using abort butto
 
     await userEvent.type(input, "Some changes");
     await userEvent.click(abortButton);
-    expect(modalText).not.toBeInTheDocument();
+    await expect.element(modalText).not.toBeInTheDocument();
   }
 });
 
@@ -433,7 +433,7 @@ test("Modal with dirty form does not require confirmation when the default is sw
 
   await userEvent.type(input, "Some changes");
   await userEvent.click(tryCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal with dirty form does not require confirmation when the form switches it off", async () => {
@@ -472,7 +472,7 @@ test("Modal with dirty form does not require confirmation when the form switches
 
   await userEvent.type(input, "Some changes");
   await userEvent.click(tryCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal with dirty form requires confirmation when the form switches it on against the default", async () => {
@@ -557,7 +557,103 @@ test("Modal with confirmOnClose requires confirmation", async () => {
   expect(modalText).toBeInTheDocument();
 
   await userEvent.click(confirmCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
+});
+
+test.each([
+  {
+    closedBy: "a close that bypasses it",
+    close: (controller: OverlayController) =>
+      controller.close({ bypassConfirmation: true }),
+  },
+  {
+    closedBy: "a close a grant allows",
+    close: (controller: OverlayController) => {
+      const release = controller.grantCloseWithoutConfirmation();
+      controller.close();
+      release();
+    },
+  },
+])("Modal does not ask again on reopen after $closedBy", async ({ close }) => {
+  let controller: OverlayController | undefined;
+  const Test = () => {
+    controller = useModalController();
+    return (
+      <Modal controller={controller} confirmOnClose>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+  const modalText = dom.getByTestId("modal-text");
+  const keepEditingButton = dom.getByRole("button", {
+    name: "Keep editing",
+    exact: true,
+  });
+  if (!controller) {
+    throw new Error("The modal controller was not created");
+  }
+
+  controller.open();
+  await expect.element(modalText).toBeInTheDocument();
+  await userEvent.keyboard("{Escape}");
+  await expect.element(keepEditingButton).toBeInTheDocument();
+
+  close(controller);
+  await expect.element(modalText).not.toBeInTheDocument();
+
+  controller.open();
+  await expect.element(modalText).toBeInTheDocument();
+  expect(controller.showConfirmationModal).toBe(false);
+  await sleep(200);
+  expect(keepEditingButton).not.toBeInTheDocument();
+});
+
+test("Modal does not ask when its withdrawn confirmation is required again", async () => {
+  let controller: OverlayController | undefined;
+  let setConfirmOnClose: ((confirmOnClose: boolean) => void) | undefined;
+  const Test = () => {
+    const [confirmOnClose, setConfirmOnCloseState] = useState(true);
+    setConfirmOnClose = setConfirmOnCloseState;
+    controller = useModalController({ isDefaultOpen: true });
+    return (
+      <Modal controller={controller} confirmOnClose={confirmOnClose}>
+        <Content>
+          <Text data-testid="modal-text">
+            {confirmOnClose ? "Armed" : "Disarmed"}
+          </Text>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+  const modalText = dom.getByTestId("modal-text");
+  const keepEditingButton = dom.getByRole("button", {
+    name: "Keep editing",
+    exact: true,
+  });
+  if (!controller || !setConfirmOnClose) {
+    throw new Error("The test component was not rendered");
+  }
+
+  await expect.element(modalText).toHaveTextContent("Armed");
+  await userEvent.keyboard("{Escape}");
+  await expect.element(keepEditingButton).toBeInTheDocument();
+
+  setConfirmOnClose(false);
+  await expect.element(modalText).toHaveTextContent("Disarmed");
+  await expect.element(keepEditingButton).not.toBeInTheDocument();
+
+  setConfirmOnClose(true);
+  await expect.element(modalText).toHaveTextContent("Armed");
+  expect(controller.showConfirmationModal).toBe(false);
+  await sleep(200);
+  expect(keepEditingButton).not.toBeInTheDocument();
+  expect(modalText).toBeInTheDocument();
 });
 
 test("Modal only requires confirmation while confirmOnClose is enabled", async () => {
@@ -605,7 +701,7 @@ test("Modal only requires confirmation while confirmOnClose is enabled", async (
   // Nothing to lose yet: the modal closes right away
   await userEvent.click(openModalButton);
   await userEvent.click(tryCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 
   await userEvent.click(openModalButton);
   await userEvent.click(changeButton);
@@ -613,7 +709,7 @@ test("Modal only requires confirmation while confirmOnClose is enabled", async (
   expect(modalText).toBeInTheDocument();
 
   await userEvent.click(confirmCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal with confirmOnClose is not overruled by a contained Form", async () => {
@@ -655,7 +751,7 @@ test("Modal with confirmOnClose is not overruled by a contained Form", async () 
   expect(modalText).toBeInTheDocument();
 
   await userEvent.click(confirmCloseModalButton);
-  expect(modalText).not.toBeInTheDocument();
+  await expect.element(modalText).not.toBeInTheDocument();
 });
 
 test("Modal with confirmOnClose still closes immediately via ActionGroup and close button", async () => {
@@ -676,7 +772,7 @@ test("Modal with confirmOnClose still closes immediately via ActionGroup and clo
   await userEvent.click(
     withActionGroup.getByRole("button", { name: "Abort", exact: true }),
   );
-  expect(modalTextWithActionGroup).not.toBeInTheDocument();
+  await expect.element(modalTextWithActionGroup).not.toBeInTheDocument();
 
   const withCloseButton = await render(
     <Modal isDefaultOpen confirmOnClose>
@@ -691,7 +787,7 @@ test("Modal with confirmOnClose still closes immediately via ActionGroup and clo
   await userEvent.click(
     withCloseButton.getByRole("button", { name: "Close", exact: true }),
   );
-  expect(modalTextWithCloseButton).not.toBeInTheDocument();
+  await expect.element(modalTextWithCloseButton).not.toBeInTheDocument();
 });
 
 test("useOnClosed is called when the closing animation has finished", async () => {
@@ -818,9 +914,10 @@ test("Form in Modal is auto-resetted on close", async () => {
 
   await userEvent.click(openModalButton);
   await userEvent.fill(input, "Some changes");
-  expect(isDirtyText).toBeInTheDocument();
+  await expect.element(isDirtyText).toBeInTheDocument();
   await userEvent.click(closeButton);
   await userEvent.click(openModalButton);
+  await expect.element(input).toBeVisible();
   expect(isDirtyText).not.toBeInTheDocument();
 });
 
@@ -870,7 +967,7 @@ test("Form in Modal is not auto-resetted on close when opted-out", async () => {
   expect(isDirtyText).toBeInTheDocument();
   await userEvent.click(closeButton);
   await userEvent.click(openModalButton);
-  expect(isDirtyText).toBeInTheDocument();
+  await expect.element(isDirtyText).toBeInTheDocument();
 });
 
 test("browser extension UI stays interactive while a modal is open", async () => {
@@ -1051,3 +1148,65 @@ test("close button of an older remote Modal matches the current one", async () =
   expect(legacy.width).toBeCloseTo(current.width, 0);
   expect(legacy.height).toBeCloseTo(current.height, 0);
 });
+
+const keyboardModalContent = (
+  <>
+    <Heading>Keyboard</Heading>
+    <Content data-testid="modal-content">Content</Content>
+  </>
+);
+
+const WithController = () => {
+  const controller = useModalController();
+  return (
+    <>
+      <Modal controller={controller}>{keyboardModalContent}</Modal>
+      <Button onPress={controller.open}>Open</Button>
+    </>
+  );
+};
+
+const InModalTrigger = () => (
+  <ModalTrigger>
+    <Button>Open</Button>
+    <Modal>{keyboardModalContent}</Modal>
+  </ModalTrigger>
+);
+
+test.each([
+  ["with a controller", WithController],
+  ["in a ModalTrigger", InModalTrigger],
+])(
+  "closed Modal %s neither reads nor watches the visual viewport",
+  async (_, Test) => {
+    const viewport = window.visualViewport;
+    if (!viewport) {
+      throw new Error("The test browser has no VisualViewport");
+    }
+    const addEventListener = vitest.spyOn(viewport, "addEventListener");
+    // Pretend the on-screen keyboard is open.
+    const readHeight = vitest
+      .spyOn(VisualViewport.prototype, "height", "get")
+      .mockImplementation(() => window.innerHeight - 300);
+
+    try {
+      const dom = await render(<Test />);
+      expect(readHeight).not.toHaveBeenCalled();
+      expect(addEventListener).not.toHaveBeenCalled();
+
+      await dom.getByRole("button", { name: "Open" }).click();
+      await expect.element(dom.getByTestId("modal-content")).toBeVisible();
+      expect(addEventListener).toHaveBeenCalledWith(
+        "resize",
+        expect.any(Function),
+      );
+      await vitest.waitFor(() =>
+        expect(
+          document.querySelector(`.${styles.keyboardVisible}`),
+        ).not.toBeNull(),
+      );
+    } finally {
+      vitest.restoreAllMocks();
+    }
+  },
+);

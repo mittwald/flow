@@ -3,6 +3,90 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+### Bug Fixes
+
+* **react-tunnel:** check the entry order in the commit, not the render ([2f631ca](https://github.com/mittwald/flow/commit/2f631caaccf450152d346286522027fcd61cc1cd))
+* **react-tunnel:** keep the reorder request through a StrictMode replay ([354d739](https://github.com/mittwald/flow/commit/354d73944be5138753b9a68f910b898d022d36e3))
+* **react-tunnel:** order tunnel entries by their position in the tree ([e18c8de](https://github.com/mittwald/flow/commit/e18c8de08bee87870d46d7dd47daebead1dbc9cd)), closes [#3487](https://github.com/mittwald/flow/issues/3487)
+
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.39](https://github.com/mittwald/flow/compare/1.5.38...1.5.39) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.38](https://github.com/mittwald/flow/compare/1.5.37...1.5.38) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.37](https://github.com/mittwald/flow/compare/1.5.36...1.5.37) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.36](https://github.com/mittwald/flow/compare/1.5.35...1.5.36) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.30](https://github.com/mittwald/flow/compare/1.5.29...1.5.30) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.29](https://github.com/mittwald/flow/compare/1.5.28...1.5.29) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
 ## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
 
 **Note:** Version bump only for package @mittwald/react-tunnel

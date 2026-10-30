@@ -106,12 +106,12 @@ labels. Repo-wide ones are in the
 - **Symptom:** **Scheduled cross-version tests go red _after_ your PR merged** —
   you removed a component or changed its rendered structure
 
-  **Cause:** Only the **iframe** harness runs on PRs (the `cross-version` job in
-  `test.yml`, gated on `nx affected`). The in-process harness and the
-  per-version matrix run only in the scheduled workflow, because they
-  network-install every old published version. Removing a component or
-  adding/removing/reordering host-output elements produces an old-vs-current
-  structural divergence, and the version gates weren't adjusted before merge
+  **Cause:** The `cross-version` job in `test.yml` runs the **iframe** harness
+  and, for the visual tests the PR changed, the in-process harness. The rest of
+  the in-process corpus runs only in the scheduled workflow. Removing a
+  component or adding/removing/reordering host-output elements produces an
+  old-vs-current structural divergence in tests the PR never touched, and the
+  version gates weren't adjusted before merge
 
   **Fix:** Add the **`run-cross-version-tests`** PR label
   (`test-cross-version-label.yml`) to run both harnesses on the branch. Fix real

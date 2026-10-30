@@ -3,6 +3,88 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.45](https://github.com/mittwald/flow/compare/1.5.44...1.5.45) (2026-10-27)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.44](https://github.com/mittwald/flow/compare/1.5.43...1.5.44) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.43](https://github.com/mittwald/flow/compare/1.5.42...1.5.43) (2026-10-26)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.42](https://github.com/mittwald/flow/compare/1.5.41...1.5.42) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.41](https://github.com/mittwald/flow/compare/1.5.40...1.5.41) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.40](https://github.com/mittwald/flow/compare/1.5.39...1.5.40) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.39](https://github.com/mittwald/flow/compare/1.5.38...1.5.39) (2026-10-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.38](https://github.com/mittwald/flow/compare/1.5.37...1.5.38) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.37](https://github.com/mittwald/flow/compare/1.5.36...1.5.37) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.36](https://github.com/mittwald/flow/compare/1.5.35...1.5.36) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.35](https://github.com/mittwald/flow/compare/1.5.34...1.5.35) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.34](https://github.com/mittwald/flow/compare/1.5.33...1.5.34) (2026-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.33](https://github.com/mittwald/flow/compare/1.5.32...1.5.33) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.32](https://github.com/mittwald/flow/compare/1.5.31...1.5.32) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.31](https://github.com/mittwald/flow/compare/1.5.30...1.5.31) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.30](https://github.com/mittwald/flow/compare/1.5.29...1.5.30) (2026-10-21)
+
+### Bug Fixes
+
+* **ListSummary:** keep the root classes when a className is passed ([#3518](https://github.com/mittwald/flow/issues/3518)) ([a6764d9](https://github.com/mittwald/flow/commit/a6764d9e08d0e48162d5723c7b450322d47304ab))
+
+## [1.5.29](https://github.com/mittwald/flow/compare/1.5.28...1.5.29) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.5.28](https://github.com/mittwald/flow/compare/1.5.27...1.5.28) (2026-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 ## [1.5.27](https://github.com/mittwald/flow/compare/1.5.26...1.5.27) (2026-10-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
