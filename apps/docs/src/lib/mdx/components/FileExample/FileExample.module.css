@@ -1,0 +1,22 @@
+.fileExample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--m);
+}
+
+/* The frame the LiveCodeEditor draws around its preview. */
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--layout-card--padding);
+  border: var(--code-block--border-width) var(--code-block--border-style)
+    var(--code-block--border-color);
+  border-radius: var(--code-block--corner-radius);
+  background-color: var(--neutral--color--100);
+
+  > :global(.flow--header-navigation) {
+    align-self: stretch;
+  }
+}
