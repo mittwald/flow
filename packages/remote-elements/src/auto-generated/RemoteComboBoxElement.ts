@@ -45,6 +45,7 @@ export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxEleme
       selectionMode: {},
       shouldFocusWrap: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

@@ -25,6 +25,7 @@ export class RemoteSegmentElement extends FlowRemoteElement<RemoteSegmentElement
       isDisabled: {},
       lang: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       value: {},
     };

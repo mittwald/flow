@@ -19,6 +19,7 @@ export const ContextMenuContent: FlowRemoteVueComponent<RemoteContextMenuContent
         "inert",
         "shouldCloseOnSelect",
         "shouldFocusWrap",
+        "suppressHydrationWarning",
       ],
     },
   );

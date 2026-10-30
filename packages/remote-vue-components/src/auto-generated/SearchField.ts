@@ -22,6 +22,7 @@ export const SearchField: FlowRemoteVueComponent<RemoteSearchFieldElementProps> 
         "isInvalid",
         "isReadOnly",
         "isRequired",
+        "suppressHydrationWarning",
       ],
     },
   );

@@ -37,6 +37,7 @@ export class RemoteCoachMarkElement extends FlowRemoteElement<RemoteCoachMarkEle
       shouldSkipAnimation: {},
       shouldUpdatePosition: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       trigger: {},
       width: {},

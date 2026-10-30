@@ -11,5 +11,13 @@ export const DonutChart: FlowRemoteVueComponent<RemoteDonutChartElementProps> =
     "flr-donut-chart",
     "DonutChart",
     RemoteDonutChartElement,
-    { booleans: ["hidden", "inert", "isIndeterminate", "showLegend"] },
+    {
+      booleans: [
+        "hidden",
+        "inert",
+        "isIndeterminate",
+        "showLegend",
+        "suppressHydrationWarning",
+      ],
+    },
   );

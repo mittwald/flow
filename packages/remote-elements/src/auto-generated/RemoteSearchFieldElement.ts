@@ -44,6 +44,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
       pattern: {},
       slot: {},
       spellCheck: {},
+      suppressHydrationWarning: {},
       translate: {},
       type: {},
       validate: {},

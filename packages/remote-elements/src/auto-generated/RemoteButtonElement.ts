@@ -47,6 +47,7 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
       preventFocusOnPress: {},
       size: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       type: {},
       unstyled: {},

@@ -44,6 +44,7 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       shouldSkipAnimation: {},
       shouldUpdatePosition: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       trigger: {},
       triggerRef: {},

@@ -19,6 +19,7 @@ export const TableRow: FlowRemoteVueComponent<RemoteTableRowElementProps> =
         "hidden",
         "inert",
         "isDisabled",
+        "suppressHydrationWarning",
       ],
     },
   );

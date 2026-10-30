@@ -21,6 +21,7 @@ export const NumberField: FlowRemoteVueComponent<RemoteNumberFieldElementProps> 
         "isReadOnly",
         "isRequired",
         "isWheelDisabled",
+        "suppressHydrationWarning",
       ],
     },
   );

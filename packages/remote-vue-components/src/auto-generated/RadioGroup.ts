@@ -19,6 +19,7 @@ export const RadioGroup: FlowRemoteVueComponent<RemoteRadioGroupElementProps> =
         "isInvalid",
         "isReadOnly",
         "isRequired",
+        "suppressHydrationWarning",
       ],
     },
   );

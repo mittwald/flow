@@ -25,6 +25,7 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
       referrerPolicy: {},
       rel: {},
       routerOptions: {},
+      suppressHydrationWarning: {},
       target: {},
       textValue: {},
       translate: {},
