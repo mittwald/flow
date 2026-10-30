@@ -1,12 +1,14 @@
 table:
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.l}"
   border-width:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
+  # Groups content like ListItem and FileCard: the separator tone, not the
+  # control border (#3564). The header keeps its 2px line.
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{border.color.200}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
@@ -20,6 +22,6 @@ table:
   footer-border-width:
     value: "{border-width.200}"
   background-color:
-    value: "{neutral.color.100}"
+    value: "{elevation.color.100}"
   background-color-accent:
-    value: "{neutral.color.200}"
+    value: "{elevation.color.200}"

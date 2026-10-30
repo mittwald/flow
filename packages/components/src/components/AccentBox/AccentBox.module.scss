@@ -10,9 +10,22 @@
   background-repeat: no-repeat;
   min-width: 0;
 
-  &.gradient {
-    background: var(--accent-box--background-color-gradient);
+  /* Gradient */
+
+  // The same grain over every gradient, tiled at its own size (#3456).
+  @mixin gradient($name) {
+    &.#{$name} {
+      background:
+        var(--texture--grain),
+        var(--accent-box--background-color-#{$name});
+      background-blend-mode: overlay, normal;
+    }
   }
+
+  @include gradient("gradient-navy");
+  @include gradient("gradient-sage");
+  @include gradient("gradient-lilac");
+  @include gradient("gradient-salmon");
 
   /* Color */
 
@@ -24,11 +37,10 @@
 
   @include color("neutral");
   @include color("blue");
-  @include color("teal");
-  @include color("lilac");
-  @include color("violet");
-  @include color("green");
   @include color("navy");
+  @include color("lilac");
+  @include color("sage");
+  @include color("salmon");
 
   /* backwards compatibility */
   > .icon {

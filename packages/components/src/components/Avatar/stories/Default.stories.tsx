@@ -6,12 +6,13 @@ import { dummyText } from "@/lib/dev/dummyText";
 import IconApp from "@/components/Icon/components/icons/IconApp";
 import { avatarColors } from "@/components/Avatar/avatarColors";
 import { statusTypes } from "@/lib/types/props";
+import { Flex } from "@/components/Flex";
 
 const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
   component: Avatar,
   render: (props) => (
-    <Avatar {...props} color="teal">
+    <Avatar {...props} color="sage">
       <Image alt="Han Solo" src={dummyText.imageSrc} />
     </Avatar>
   ),
@@ -79,6 +80,21 @@ export const WithIcon: Story = {
     </Avatar>
   ),
   args: { color: "blue" },
+};
+
+export const Colors: Story = {
+  parameters: {
+    controls: { exclude: ["color", "status"] },
+  },
+  render: (props) => (
+    <Flex gap="s">
+      {avatarColors.map((color) => (
+        <Avatar key={color} {...props} color={color}>
+          <Initials>{color}</Initials>
+        </Avatar>
+      ))}
+    </Flex>
+  ),
 };
 
 export const WithStatus: Story = {

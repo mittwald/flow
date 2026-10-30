@@ -2,11 +2,15 @@ alert:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.m}"
+    value: "{corner-radius.l}"
+  # No border: the soft surface carries the Alert, the start edge keeps it
+  # apart from the AccentBox (#3564).
   border-width:
-    value: "{border-width.100}"
+    value: 0
+  # As wide as the corner radius: the stripe ends where the corner curve
+  # ends instead of breaking off inside it.
   border-x-start-width:
-    value: "{border-width.400}"
+    value: "{alert.corner-radius}"
   border-style:
     value: "{border-style.default}"
   heading-to-content-spacing:
@@ -21,27 +25,37 @@ alert:
     value: "{info-outline-border-color}"
   info-heading-color:
     value: "{info-outline-content-color}"
+  info-background-color:
+    value: "{info-soft-background-color.default}"
 
   # Warning
   warning-border-color:
     value: "{warning-outline-border-color}"
   warning-heading-color:
     value: "{warning-outline-content-color}"
+  warning-background-color:
+    value: "{warning-soft-background-color.default}"
 
   # Danger
   danger-border-color:
     value: "{danger-outline-border-color}"
   danger-heading-color:
     value: "{danger-outline-content-color}"
+  danger-background-color:
+    value: "{danger-soft-background-color.default}"
 
   # Success
   success-border-color:
     value: "{success-outline-border-color}"
   success-heading-color:
     value: "{success-outline-content-color}"
+  success-background-color:
+    value: "{success-soft-background-color.default}"
 
   # Unavailable
   unavailable-border-color:
     value: "{unavailable-outline-border-color}"
   unavailable-heading-color:
     value: "{unavailable-outline-content-color}"
+  unavailable-background-color:
+    value: "{unavailable-soft-background-color.default}"

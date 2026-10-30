@@ -8,6 +8,8 @@ import MenuItem from "@/components/MenuItem";
 import { useOverlayController } from "@/lib/controller";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { Button } from "@/components/Button";
+import { Flex } from "@/components/Flex";
+import { isAlphaColor } from "@/lib/types/props";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
@@ -40,6 +42,24 @@ export default meta;
 type Story = StoryObj<typeof Badge>;
 
 export const Default: Story = {};
+
+export const Colors: Story = {
+  parameters: {
+    controls: { exclude: ["color"] },
+  },
+  render: (props) => (
+    <Flex gap="s" wrap="wrap">
+      {badgeColors
+        .filter((color) => !isAlphaColor(color))
+        .map((color) => (
+          <Badge key={color} {...props} color={color}>
+            <Label>{color}</Label>
+            <Text>Value</Text>
+          </Badge>
+        ))}
+    </Flex>
+  ),
+};
 
 export const WithScope: Story = {
   render: (props, context) => (

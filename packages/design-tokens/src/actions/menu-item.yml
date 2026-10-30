@@ -29,11 +29,11 @@ menu-item:
 
   background-color:
     default:
-      value: "{color.transparent}"
+      value: "{transparent.color}"
     hover:
       value: "{neutral-plain-background-color.hover}"
     current:
-      value: "{neutral-plain-background-color.pressed}"
+      value: "{neutral-plain-background-color.selected}"
 
   # Disabled
   disabled-background-color:

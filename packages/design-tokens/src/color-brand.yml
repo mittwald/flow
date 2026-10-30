@@ -1,0 +1,500 @@
+# Brand tier (ADR 0007): the palette from the brand handover. Theme-neutral,
+# literal values only. Components never reference it — Semantic does.
+#
+# Source: Figma "mittwald. Global Tokens", collection Color Primitives, as
+# approved by the brand team (#3449), taken 1:1 (#3453, #3479). Hue ramps have
+# 19 steps with the base color at 1000: 100–900 mix toward
+# mittwald-neutral.300, 1100–1900 toward mittwald-neutral.1800.
+# mittwald-neutral has 19 steps too (#3539, proposed to the brand team,
+# approval pending): the 12 approved values on new numbers (100–400 stay,
+# 500 → 600, 600 → 800, 700 → 1100, 800 → 1400, 900–1200 → 1600–1900) and
+# seven OKLab in-between steps (500, 700, 900, 1000, 1200, 1300, 1500).
+# Status ramps: danger, warning and success (the brand's "Positive") mix
+# 100–900 toward white (#3532); success mixes 1100–1900 toward black.
+# system-info is the brand's Info, still mixed like the hue ramps and close
+# to mittwald-navy, but its own ramp. Alpha ramps: 10–90 % and 100 %.
+# Gradients: one light and one dark value per brand gradient (#3456), named
+# after the decorative colors. Diagonal from the bottom left to the top right,
+# measured from the brand team's assets and adjusted with UX (navy as handed
+# over; sage dark, lilac and salmon mixed with Flow's own drafts; dark text
+# AA against every stop). Provisional until the brand team reviews them in
+# Flow. The grain is not part of the value: components lay `texture.grain`
+# over every gradient.
+color:
+  mittwald-neutral:
+    100:
+      value: "#ffffff"
+    200:
+      value: "#f6f8fa"
+    300:
+      value: "#ebeff3"
+    400:
+      value: "#e3e8ef"
+    500:
+      value: "#d2d7df"
+    600:
+      value: "#c1c7d0"
+    700:
+      value: "#adb3bc"
+    800:
+      value: "#999fa8"
+    900:
+      value: "#888d96"
+    1000:
+      value: "#777c84"
+    1100:
+      value: "#666b72"
+    1200:
+      value: "#595e64"
+    1300:
+      value: "#4c5156"
+    1400:
+      value: "#404448"
+    1500:
+      value: "#36393d"
+    1600:
+      value: "#2c2f33"
+    1700:
+      value: "#1d1e1f"
+    1800:
+      value: "#141516"
+    1900:
+      value: "#000000"
+
+  mittwald-blue:
+    100:
+      value: "#d8dbf2"
+    200:
+      value: "#c5c6f1"
+    300:
+      value: "#b2b2f0"
+    400:
+      value: "#9f9eef"
+    500:
+      value: "#8c89ee"
+    600:
+      value: "#7975ed"
+    700:
+      value: "#6660ec"
+    800:
+      value: "#534cea"
+    900:
+      value: "#4038e9"
+    1000:
+      value: "#2d23e8"
+    1100:
+      value: "#2b22d3"
+    1200:
+      value: "#2820be"
+    1300:
+      value: "#261fa9"
+    1400:
+      value: "#231e94"
+    1500:
+      value: "#211c7f"
+    1600:
+      value: "#1e1b6a"
+    1700:
+      value: "#1c1955"
+    1800:
+      value: "#191840"
+    1900:
+      value: "#17162b"
+
+  mittwald-navy:
+    100:
+      value: "#dfe4f1"
+    200:
+      value: "#d2d9ee"
+    300:
+      value: "#c6ceec"
+    400:
+      value: "#bac3e9"
+    500:
+      value: "#adb8e7"
+    600:
+      value: "#a1ade4"
+    700:
+      value: "#94a2e2"
+    800:
+      value: "#8897e0"
+    900:
+      value: "#7c8cdd"
+    1000:
+      value: "#6f81db"
+    1100:
+      value: "#6676c7"
+    1200:
+      value: "#5d6cb3"
+    1300:
+      value: "#5461a0"
+    1400:
+      value: "#4b568c"
+    1500:
+      value: "#424b78"
+    1600:
+      value: "#394065"
+    1700:
+      value: "#2f3551"
+    1800:
+      value: "#262b3d"
+    1900:
+      value: "#1d202a"
+
+  mittwald-green:
+    100:
+      value: "#e3e8eb"
+    200:
+      value: "#dce1e3"
+    300:
+      value: "#d4dbdb"
+    400:
+      value: "#cdd4d3"
+    500:
+      value: "#c5cdcc"
+    600:
+      value: "#bdc6c4"
+    700:
+      value: "#b6c0bc"
+    800:
+      value: "#aeb9b4"
+    900:
+      value: "#a6b2ac"
+    1000:
+      value: "#9faba4"
+    1100:
+      value: "#919c96"
+    1200:
+      value: "#838d88"
+    1300:
+      value: "#757e79"
+    1400:
+      value: "#676f6b"
+    1500:
+      value: "#59605d"
+    1600:
+      value: "#4c514f"
+    1700:
+      value: "#3e4241"
+    1800:
+      value: "#303332"
+    1900:
+      value: "#222424"
+
+  mittwald-lilac:
+    100:
+      value: "#e7e6f4"
+    200:
+      value: "#e3ddf5"
+    300:
+      value: "#dfd4f7"
+    400:
+      value: "#dbcbf8"
+    500:
+      value: "#d7c2f9"
+    600:
+      value: "#d3b8fa"
+    700:
+      value: "#cfaffb"
+    800:
+      value: "#cba6fd"
+    900:
+      value: "#c69dfe"
+    1000:
+      value: "#c294ff"
+    1100:
+      value: "#b187e8"
+    1200:
+      value: "#a07bd0"
+    1300:
+      value: "#8e6eb9"
+    1400:
+      value: "#7d61a2"
+    1500:
+      value: "#6b558b"
+    1600:
+      value: "#5a4873"
+    1700:
+      value: "#483b5c"
+    1800:
+      value: "#372e45"
+    1900:
+      value: "#25222d"
+
+  mittwald-orange:
+    100:
+      value: "#ebe7e8"
+    200:
+      value: "#eadfdd"
+    300:
+      value: "#ead8d3"
+    400:
+      value: "#e9d0c8"
+    500:
+      value: "#e9c8bd"
+    600:
+      value: "#e9c0b2"
+    700:
+      value: "#e8b8a7"
+    800:
+      value: "#e8b09c"
+    900:
+      value: "#e7a992"
+    1000:
+      value: "#e7a187"
+    1100:
+      value: "#d2937b"
+    1200:
+      value: "#bd8570"
+    1300:
+      value: "#a87765"
+    1400:
+      value: "#93695a"
+    1500:
+      value: "#7e5b4e"
+    1600:
+      value: "#684d43"
+    1700:
+      value: "#533f38"
+    1800:
+      value: "#3e312d"
+    1900:
+      value: "#292321"
+
+  system-danger:
+    100:
+      value: "#feecf0"
+    200:
+      value: "#fcdae1"
+    300:
+      value: "#fbc7d1"
+    400:
+      value: "#f9b4c2"
+    500:
+      value: "#f8a2b3"
+    600:
+      value: "#f68fa4"
+    700:
+      value: "#f57c94"
+    800:
+      value: "#f36a85"
+    900:
+      value: "#f25776"
+    1000:
+      value: "#f04467"
+    1100:
+      value: "#da405f"
+    1200:
+      value: "#c43b57"
+    1300:
+      value: "#ae364e"
+    1400:
+      value: "#983146"
+    1500:
+      value: "#822d3e"
+    1600:
+      value: "#6c2836"
+    1700:
+      value: "#56232e"
+    1800:
+      value: "#401e26"
+    1900:
+      value: "#2a1a1e"
+
+  system-warning:
+    100:
+      value: "#fff1eb"
+    200:
+      value: "#ffe2d8"
+    300:
+      value: "#ffd4c4"
+    400:
+      value: "#ffc6b0"
+    500:
+      value: "#ffb79d"
+    600:
+      value: "#ffa989"
+    700:
+      value: "#ff9b76"
+    800:
+      value: "#ff8d62"
+    900:
+      value: "#ff7e4e"
+    1000:
+      value: "#ff703b"
+    1100:
+      value: "#e76737"
+    1200:
+      value: "#d05e33"
+    1300:
+      value: "#b85530"
+    1400:
+      value: "#a14c2c"
+    1500:
+      value: "#8a4228"
+    1600:
+      value: "#723925"
+    1700:
+      value: "#5b3021"
+    1800:
+      value: "#43271d"
+    1900:
+      value: "#2c1e1a"
+
+  system-success:
+    100:
+      value: "#effbf6"
+    200:
+      value: "#dff6ec"
+    300:
+      value: "#cff2e3"
+    400:
+      value: "#bfedd9"
+    500:
+      value: "#afe9d0"
+    600:
+      value: "#9fe5c6"
+    700:
+      value: "#8fe0bd"
+    800:
+      value: "#7edcb3"
+    900:
+      value: "#6ed7aa"
+    1000:
+      value: "#5ed3a0"
+    1100:
+      value: "#55be90"
+    1200:
+      value: "#4ba980"
+    1300:
+      value: "#429470"
+    1400:
+      value: "#397f60"
+    1500:
+      value: "#2f6950"
+    1600:
+      value: "#265440"
+    1700:
+      value: "#1c3f30"
+    1800:
+      value: "#132a20"
+    1900:
+      value: "#091510"
+
+  system-info:
+    100:
+      value: "#e0e7f4"
+    200:
+      value: "#d4dbf1"
+    300:
+      value: "#c7d0ef"
+    400:
+      value: "#bbc5ec"
+    500:
+      value: "#aebae9"
+    600:
+      value: "#a2aee6"
+    700:
+      value: "#95a3e3"
+    800:
+      value: "#8898e0"
+    900:
+      value: "#7c8dde"
+    1000:
+      value: "#6f81db"
+    1100:
+      value: "#6676c7"
+    1200:
+      value: "#5d6cb4"
+    1300:
+      value: "#5361a0"
+    1400:
+      value: "#4a568d"
+    1500:
+      value: "#414b79"
+    1600:
+      value: "#374066"
+    1700:
+      value: "#2e3552"
+    1800:
+      value: "#252b3f"
+    1900:
+      value: "#1b202b"
+
+  black-alpha:
+    100:
+      value: "rgb(0 0 0 / 10%)"
+    200:
+      value: "rgb(0 0 0 / 20%)"
+    300:
+      value: "rgb(0 0 0 / 30%)"
+    400:
+      value: "rgb(0 0 0 / 40%)"
+    500:
+      value: "rgb(0 0 0 / 50%)"
+    600:
+      value: "rgb(0 0 0 / 60%)"
+    700:
+      value: "rgb(0 0 0 / 70%)"
+    800:
+      value: "rgb(0 0 0 / 80%)"
+    900:
+      value: "rgb(0 0 0 / 90%)"
+    1000:
+      value: "rgb(0 0 0 / 100%)"
+
+  white-alpha:
+    100:
+      value: "rgb(255 255 255 / 10%)"
+    200:
+      value: "rgb(255 255 255 / 20%)"
+    300:
+      value: "rgb(255 255 255 / 30%)"
+    400:
+      value: "rgb(255 255 255 / 40%)"
+    500:
+      value: "rgb(255 255 255 / 50%)"
+    600:
+      value: "rgb(255 255 255 / 60%)"
+    700:
+      value: "rgb(255 255 255 / 70%)"
+    800:
+      value: "rgb(255 255 255 / 80%)"
+    900:
+      value: "rgb(255 255 255 / 90%)"
+    1000:
+      value: "rgb(255 255 255 / 100%)"
+
+  mittwald-gradient:
+    navy-light:
+      value:
+        "linear-gradient(to top right, #a6b2e7 0%, #b7c1ea 35%, #bbc4ea 50%,
+        #d5dbef 75%, #e2e7f1 100%)"
+    navy-dark:
+      value:
+        "linear-gradient(to top right, #25293a 0%, #2e3550 35%, #303653 50%,
+        #414b7a 75%, #49558b 100%)"
+    sage-light:
+      value:
+        "linear-gradient(to top right, #a7b2ac 0%, #b7c0bc 35%, #bac4c0 50%,
+        #d5dcdc 75%, #e3e8ea 100%)"
+    sage-dark:
+      value:
+        "linear-gradient(to top right, #272c2c 0%, #2c3232 25%, #323939 50%,
+        #383f3f 75%, #383f3f 100%)"
+    lilac-light:
+      value:
+        "linear-gradient(to top right, #dcb1c2 0%, #d6b0d6 25%, #cdaef0 50%,
+        #d2b9fb 75%, #ddcbfa 100%)"
+    lilac-dark:
+      value:
+        "linear-gradient(to top right, #553a57 0%, #4f3f73 30%, #604f90 65%,
+        #7c61b1 100%)"
+    salmon-light:
+      value:
+        "linear-gradient(to top right, #e7a48b 0%, #e8b5a3 35%, #e3b8b5 50%,
+        #dbbccf 75%, #d4c0e8 100%)"
+    salmon-dark:
+      value:
+        "linear-gradient(to top right, #392d2a 0%, #6f5249 35%, #8a655f 50%,
+        #8d6c84 75%, #806a9c 100%)"

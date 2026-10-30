@@ -6,7 +6,7 @@ const lightBackdrop = "#E5EFF8";
 /**
  * Backdrop that keeps an `AlphaColor` legible in both themes.
  *
- * `dark`/`light` invert with the theme themselves (`color-palette.*.yml`), so
+ * `dark`/`light` invert with the theme themselves (`color-semantic.*.yml`), so
  * `dark` gets its contrast from the theme-adaptive `neutral` background, while
  * `light` needs the opposite of `neutral` in the current theme.
  * `dark-static`/`light-static` never invert, so they always need the fixed

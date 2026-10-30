@@ -115,10 +115,15 @@ test("never rewrites links inside code", () => {
 });
 
 test("expands a DesignTokenTable to token names and values", () => {
-  const markdown = convert('<DesignTokenTable path="color.gray" />\n');
+  const markdown = convert(
+    '<DesignTokenTable path="color.mittwald-neutral" />\n',
+  );
 
   expect(markdown).toContain("| Token | Wert |");
-  expect(markdown).toContain("| `--color--gray--100` | `#FFFFFF` |");
+  expect(markdown).toContain(
+    // eslint-disable-next-line flow/no-brand-color-variable -- the palette table lists Brand variables as its content
+    "| `--color--mittwald-neutral--100` | `#ffffff` |",
+  );
 });
 
 test("drops a DesignTokenTable with an unknown path", () => {

@@ -19,7 +19,7 @@ tabs:
     pressed:
       value: "{neutral-soft-background-color.pressed}"
     selected:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
   color:
     default:
       value: "{neutral-soft-content-color}"

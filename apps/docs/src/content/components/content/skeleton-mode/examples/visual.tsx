@@ -33,7 +33,7 @@ export default () => {
         <Section>
           <Heading>
             Webshop Relaunch
-            <Badge color="green">Neu</Badge>
+            <Badge color="success">Neu</Badge>
           </Heading>
           <Flex gap="m" align="center">
             <Avatar>
