@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.50](https://github.com/mittwald/flow/compare/1.6.0-next.49...1.6.0-next.50) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the actions group with 2 updates ([#3590](https://github.com/mittwald/flow/issues/3590)) ([116d517](https://github.com/mittwald/flow/commit/116d517a4e030e43b9ee23a71c1bec7156aefdd4))
+* **deps:** bump zod from 4.6.5 to 4.6.6 ([#3571](https://github.com/mittwald/flow/issues/3571)) ([b911dd5](https://github.com/mittwald/flow/commit/b911dd5f244db73aeca78da36afa17757d4dbe5d))
+
+## [1.5.47](https://github.com/mittwald/flow/compare/1.6.0-next.48...1.5.47) (2026-10-28)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.47 ([b4018d6](https://github.com/mittwald/flow/commit/b4018d60a4e645f0091f991493d636c77bb6417a))
+
 ## [1.6.0-next.49](https://github.com/mittwald/flow/compare/1.6.0-next.48...1.6.0-next.49) (2026-10-28)
 
 ### Bug Fixes
