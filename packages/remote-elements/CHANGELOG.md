@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.51](https://github.com/mittwald/flow/compare/1.6.0-next.50...1.6.0-next.51) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the production group across 1 directory with 29 updates ([#3605](https://github.com/mittwald/flow/issues/3605)) ([439e271](https://github.com/mittwald/flow/commit/439e27110485fd2427e3d7302e9516ed999b44a3))
+
+## [1.5.48](https://github.com/mittwald/flow/compare/1.6.0-next.49...1.5.48) (2026-10-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.48 ([759f7d2](https://github.com/mittwald/flow/commit/759f7d2c1c56747827da640671df6bb0acc4daab))
+
 ## [1.6.0-next.50](https://github.com/mittwald/flow/compare/1.6.0-next.49...1.6.0-next.50) (2026-10-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
