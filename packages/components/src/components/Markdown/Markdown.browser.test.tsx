@@ -176,3 +176,21 @@ test("a re-render keeps the rendered elements", async () => {
     heading,
   );
 });
+
+/*
+ * A code block is a CodeMirror editor; rebuilding it on every parent render is
+ * the most expensive remount Markdown can cause.
+ */
+test("a re-render keeps the code block's editor", async () => {
+  const markdown = "Deploy with:\n\n```shell\nmw app deploy\n```";
+  const screen = await renderMarkdown(markdown);
+  await expect.element(page.getByText("mw app deploy")).toBeVisible();
+  const editor = document.querySelector(".cm-editor");
+  const line = page.getByText("mw app deploy").element();
+  expect(editor).not.toBeNull();
+
+  await screen.rerender(<Markdown>{markdown}</Markdown>);
+
+  expect(document.querySelector(".cm-editor")).toBe(editor);
+  expect(page.getByText("mw app deploy").element()).toBe(line);
+});
