@@ -2,6 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
 import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
+import logo from "@/tests/assets/mittwald_logo_landscape.jpg";
 import {
   alphaColors,
   isAlphaColor,
@@ -14,22 +15,34 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Markdown, Flex, Wrap, AccentBox },
+    components: { Markdown, ColumnLayout, Wrap, AccentBox },
   }) => {
     await render(
-      <Flex gap="m" direction="column">
+      <ColumnLayout s={[1, 1, 1, 1, 1]} gap="s">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Markdown color={color}>
                 {"## Heading 2\n" +
-                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](https://example.com)."}
+                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck  \n`a decisive blow` against the [Galactic Empire](https://example.com).\n\n" +
+                  "- [x] Steal the plans\n" +
+                  "- [ ] Destroy the Death Star\n\n" +
+                  "```json\n" +
+                  '{ "name": "DS-1" }\n' +
+                  "```\n\n" +
+                  "| Pilot | Squadron |\n" +
+                  "|-------|----------|\n" +
+                  "| Luke  | Red Five |\n" +
+                  "| Wedge | Red Two  |\n\n" +
+                  `![mittwald](${logo})`}
               </Markdown>
             </AccentBox>
           </Wrap>
         ))}
-      </Flex>,
+      </ColumnLayout>,
     );
+
+    await waitForHighlightedCode(colors.length);
 
     await testScreenshot("Markdown colors");
   },
@@ -82,5 +95,23 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Markdown split ordered list");
+  },
+);
+
+test.each(testEnvironments)(
+  "Markdown wide table (%s)",
+  async ({ testScreenshot, render, components: { Markdown } }) => {
+    const columns = Array.from({ length: 12 }, (_, i) => `Column ${i + 1}`);
+    const cells = columns.map((_, i) => `p-${i}abc123.project.space`);
+
+    await render(
+      <Markdown>
+        {`| ${columns.join(" | ")} |\n` +
+          `|${columns.map(() => "---").join("|")}|\n` +
+          `| ${cells.join(" | ")} |\n`}
+      </Markdown>,
+    );
+
+    await testScreenshot("Markdown wide table");
   },
 );
