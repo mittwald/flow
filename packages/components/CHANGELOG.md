@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+### Documentation
+
+* skip browser tests for what a visual scenario shows ([#3618](https://github.com/mittwald/flow/issues/3618)) ([2427c69](https://github.com/mittwald/flow/commit/2427c69787e0ed1b373b0d4982ba2ab87d022e43))
+
 ## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
 
 ### Build System

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+### Documentation
+
+* skip browser tests for what a visual scenario shows ([#3618](https://github.com/mittwald/flow/issues/3618)) ([2427c69](https://github.com/mittwald/flow/commit/2427c69787e0ed1b373b0d4982ba2ab87d022e43))
+
+### Tests
+
+* **MessageThread:** add the missing webkit-darwin baseline for lists ([#3616](https://github.com/mittwald/flow/issues/3616)) ([f1adc7e](https://github.com/mittwald/flow/commit/f1adc7e3ec07cd374ccc12c684fe70daadcd84f7))
+
+### Build System
+
+* **deps-dev:** bump the dev-minor group across 1 directory with 6 updates ([#3617](https://github.com/mittwald/flow/issues/3617)) ([fd98a6e](https://github.com/mittwald/flow/commit/fd98a6e3b695acabe426f3b759a2eb6332b07c83))
+
 ## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
 
 ### Build System
