@@ -27,6 +27,7 @@ export class RemoteTabTitleElement extends FlowRemoteElement<RemoteTabTitleEleme
       referrerPolicy: {},
       rel: {},
       routerOptions: {},
+      suppressHydrationWarning: {},
       target: {},
       translate: {},
     };

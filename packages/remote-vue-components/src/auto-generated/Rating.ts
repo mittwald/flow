@@ -18,5 +18,6 @@ export const Rating: FlowRemoteVueComponent<
     "isInvalid",
     "isReadOnly",
     "isRequired",
+    "suppressHydrationWarning",
   ],
 });

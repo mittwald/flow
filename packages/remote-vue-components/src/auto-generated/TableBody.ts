@@ -11,5 +11,5 @@ export const TableBody: FlowRemoteVueComponent<RemoteTableBodyElementProps> =
     "flr-table-body",
     "TableBody",
     RemoteTableBodyElement,
-    { booleans: ["hidden", "inert"] },
+    { booleans: ["hidden", "inert", "suppressHydrationWarning"] },
   );

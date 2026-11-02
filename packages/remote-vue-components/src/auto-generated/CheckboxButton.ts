@@ -24,6 +24,7 @@ export const CheckboxButton: FlowRemoteVueComponent<RemoteCheckboxButtonElementP
         "isReadOnly",
         "isRequired",
         "isSelected",
+        "suppressHydrationWarning",
       ],
     },
   );

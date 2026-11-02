@@ -3,14 +3,15 @@
   every component rendered inside an enabled `SkeletonMode`.
  */
 
-$background-color: rgba(183, 201, 219, 0.5);
-$shimmer-color: rgba(255, 255, 255, 0.4);
+$background-color: var(--skeleton--background-color);
+$shimmer-color: var(--skeleton--shimmer-color);
+$shimmer-duration: var(--skeleton--shimmer-duration);
 
 $shimmer-gradient: linear-gradient(
   90deg,
-  rgba(255, 255, 255, 0) 0,
+  transparent 0,
   $shimmer-color 60%,
-  rgba(255, 255, 255, 0)
+  transparent
 );
 
 /* Block surface. The shimmer moves over it in an `::after`. Needs
@@ -26,7 +27,7 @@ $shimmer-gradient: linear-gradient(
     inset: 0;
     transform: translateX(-100%);
     background-image: $shimmer-gradient;
-    animation: skeleton-surface-shimmer 3s infinite;
+    animation: skeleton-surface-shimmer $shimmer-duration infinite;
     content: "";
   }
 
@@ -72,7 +73,7 @@ $shimmer-gradient: linear-gradient(
   background-image: $shimmer-gradient;
   background-repeat: no-repeat;
   background-size: 200% 100%;
-  animation: skeleton-text-shimmer 3s infinite;
+  animation: skeleton-text-shimmer $shimmer-duration infinite;
 
   /* A block-level child (a flex label wrapper like TabTitle's) would split the
      inline bar and leave its background on empty fragments only. Inline, its

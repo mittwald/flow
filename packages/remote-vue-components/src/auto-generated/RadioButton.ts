@@ -11,5 +11,13 @@ export const RadioButton: FlowRemoteVueComponent<RemoteRadioButtonElementProps> 
     "flr-radio-button",
     "RadioButton",
     RemoteRadioButtonElement,
-    { booleans: ["autoFocus", "hidden", "inert", "isDisabled"] },
+    {
+      booleans: [
+        "autoFocus",
+        "hidden",
+        "inert",
+        "isDisabled",
+        "suppressHydrationWarning",
+      ],
+    },
   );

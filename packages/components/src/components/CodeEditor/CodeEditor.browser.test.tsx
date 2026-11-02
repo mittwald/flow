@@ -92,6 +92,44 @@ test("CodeEditor can be disabled", async () => {
   await expect.element(dom.getByRole("button")).toBeDisabled();
 });
 
+test("CodeEditor can be made non-editable", async () => {
+  const dom = await render(
+    <CodeEditor
+      value="const jedi = true;"
+      aria-label="Source code"
+      editable={false}
+    />,
+  );
+
+  await expect
+    .element(dom.getByRole("textbox"))
+    .toHaveAttribute("contenteditable", "false");
+});
+
+test.each([
+  { name: "editable", props: {}, marksBrackets: true },
+  { name: "non-editable", props: { editable: false }, marksBrackets: false },
+  { name: "disabled", props: { isDisabled: true }, marksBrackets: false },
+])(
+  "CodeEditor marks the bracket at the cursor only when editable ($name)",
+  async ({ props, marksBrackets }) => {
+    const dom = await render(
+      <CodeEditor
+        language="json"
+        value={`{ "jedi": true }`}
+        aria-label="Source code"
+        {...props}
+      />,
+    );
+
+    await expect.element(dom.getByRole("textbox")).toBeInTheDocument();
+    const marks = dom.container.querySelectorAll(
+      ".cm-matchingBracket, .cm-nonmatchingBracket",
+    );
+    expect(marks.length > 0).toBe(marksBrackets);
+  },
+);
+
 /*
  * Label and description are optional and tunnelled out of the editor. It
  * references them only while they are rendered – a dangling id fails HTML

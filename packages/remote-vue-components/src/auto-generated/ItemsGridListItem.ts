@@ -20,6 +20,7 @@ export const ItemsGridListItem: FlowRemoteVueComponent<RemoteItemsGridListItemEl
         "inert",
         "isDisabled",
         "isTile",
+        "suppressHydrationWarning",
       ],
     },
   );

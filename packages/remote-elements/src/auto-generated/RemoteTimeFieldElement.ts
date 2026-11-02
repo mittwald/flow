@@ -37,6 +37,7 @@ export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldEle
       placeholderValue: {},
       shouldForceLeadingZeros: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

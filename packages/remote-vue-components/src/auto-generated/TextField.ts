@@ -23,6 +23,7 @@ export const TextField: FlowRemoteVueComponent<RemoteTextFieldElementProps> =
         "isReadOnly",
         "isRequired",
         "showCharacterCount",
+        "suppressHydrationWarning",
       ],
     },
   );

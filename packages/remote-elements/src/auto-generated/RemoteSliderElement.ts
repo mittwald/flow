@@ -34,6 +34,7 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       sliderOnly: {},
       slot: {},
       step: {},
+      suppressHydrationWarning: {},
       translate: {},
       value: {},
     };

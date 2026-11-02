@@ -11,5 +11,5 @@ export const Tabs: FlowRemoteVueComponent<
   "tabNotFoundView"
 > = createFlowRemoteComponent("flr-tabs", "Tabs", RemoteTabsElement, {
   slots: ["tabNotFoundView"],
-  booleans: ["hidden", "inert", "isDisabled"],
+  booleans: ["hidden", "inert", "isDisabled", "suppressHydrationWarning"],
 });

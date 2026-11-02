@@ -28,6 +28,7 @@ export class RemoteTabsElement extends FlowRemoteElement<RemoteTabsElementProps>
       orientation: {},
       selectedKey: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
     };
   }

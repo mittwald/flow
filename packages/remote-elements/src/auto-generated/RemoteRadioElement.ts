@@ -25,6 +25,7 @@ export class RemoteRadioElement extends FlowRemoteElement<RemoteRadioElementProp
       isDisabled: {},
       lang: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       value: {},
     };
