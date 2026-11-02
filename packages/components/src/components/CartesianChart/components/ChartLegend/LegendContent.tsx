@@ -1,11 +1,27 @@
 import type { Props } from "recharts/types/component/DefaultLegendContent";
 import type { WithChartLegendFormatters } from "./ChartLegend";
-import type { FC } from "react";
+import { type FC, Suspense } from "react";
+import { usePromise } from "@mittwald/react-use-promise";
 import Legend, { LegendItem } from "@/components/Legend";
+import SkeletonTextView from "@/views/SkeletonTextView";
 
 import { isDataKeyWithLabel } from "@/components/CartesianChart/types";
 
 type LegendContentType = Omit<Props, "formatter"> & WithChartLegendFormatters;
+
+interface LegendItemTextProps extends WithChartLegendFormatters {
+  name: string;
+  index: number;
+}
+
+const LegendItemText: FC<LegendItemTextProps> = (props) => {
+  const { formatter, name, index } = props;
+
+  return usePromise(
+    (name, index, formatter) => (formatter ? formatter(name, index) : name),
+    [name, index, formatter] as const,
+  );
+};
 
 const LegendContent: FC<LegendContentType> = (props) => {
   const { formatter, payload } = props;
@@ -35,7 +51,13 @@ const LegendContent: FC<LegendContentType> = (props) => {
 
           return (
             <LegendItem key={`legendItem-${index}`} color={fill}>
-              {formatter ? formatter(name, index) : name}
+              <Suspense fallback={<SkeletonTextView />}>
+                <LegendItemText
+                  formatter={formatter}
+                  name={name}
+                  index={index}
+                />
+              </Suspense>
             </LegendItem>
           );
         })}

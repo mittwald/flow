@@ -27,7 +27,10 @@ const context = createContext<TranslationContext>({});
 
 export const useTranslationProvider = () => useContext(context);
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props translate
+ */
 export const TranslationProvider: FC<TranslationProviderProps> = (props) => {
   const { children, translations, translate } = props;
 

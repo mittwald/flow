@@ -11,7 +11,6 @@ export class RemoteTranslationProviderElement extends FlowRemoteElement<RemoteTr
 
   static override get remoteProperties() {
     return {
-      translate: {},
       translations: {},
     };
   }

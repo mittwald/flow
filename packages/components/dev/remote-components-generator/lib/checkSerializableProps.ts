@@ -1,4 +1,5 @@
 import type { ComponentDoc } from "react-docgen-typescript";
+import type { CallableReturn } from "./callableReturn";
 import { isProp } from "./propClassifiers";
 
 /*
@@ -48,36 +49,18 @@ const isRenderedOutputType = (type: string) =>
   /^ReactElement(<|$)/.test(type);
 
 /*
- * A function type whose return position is rendered output, e.g.
- * `((props: TableBodyRenderProps) => ReactNode)`. Deliberately narrow: it only
- * matches when the type *starts* as a function, so the
- * `AdaptChild*EventHandler<any, ReactElement<…>>` types that every event prop
- * carries are not caught by the `ReactElement` inside their generics.
+ * Whether a prop is a function, and what the host gets from calling it, comes
+ * from the TypeScript type (`callableReturn.ts`): the printed name of an alias
+ * like `UrlTransform` or `ComponentType<…>` says neither.
  */
-const returnsRenderedOutput = (type: string) =>
-  /^\(?\(/.test(type) &&
-  /=>\s*(ReactNode|ReactElement|JSX\.Element)/.test(type);
-
-/*
- * Return positions the host cannot get the value of anyway, so a proxy's
- * Promise costs nothing: `void`/`undefined`/`never` mean fire-and-forget (the
- * shape every `on*` event has), and a declared `Promise` means the host already
- * has to await. `any`/`unknown` say nothing either way — not worth failing a
- * build over a type that was never narrowed.
- */
-const returnIsNotConsumed = /^(void|undefined|never|Promise<|any\b|unknown\b)/;
-
-/*
- * Any function arm in the type whose return value the caller can actually use.
- * The type name is a flat string, so this reads the text after each `=>`;
- * `boolean | (() => boolean)` and `string | ((f: FormData) => void)` both have
- * to be classified correctly, and only the first of them is a defect.
- */
-const returnsAValue = (type: string) =>
-  type
-    .split("=>")
-    .slice(1)
-    .some((returnPosition) => !returnIsNotConsumed.test(returnPosition.trim()));
+const reasonOf: Record<
+  CallableReturn,
+  UnserializablePropReport["reason"] | undefined
+> = {
+  "rendered-output": "returns-rendered-output",
+  value: "returns-a-value",
+  unread: undefined,
+};
 
 /*
  * Function properties that predate this check. Each has the same shape as
@@ -126,8 +109,46 @@ export const acknowledgedValueReturningProps: readonly string[] = [
   "TimeField.validate",
 ];
 
+/*
+ * Props whose plain-data form is the remote contract and whose function form
+ * never crossed. The function form comes with a type Flow inherits: react-aria's
+ * `className` takes a string or a render function, `elementType` a tag name or
+ * `Fragment`, and recharts' `type`, `minPointSize`, `syncMethod`, `scale`,
+ * `domain` and grid lines take a name, number or flag or a callback.
+ * `@flr-ignore-props` would take the data form with it.
+ *
+ * `*.<prop>` stands for the prop on every component. Like the list above, an
+ * entry nothing matches fails generation.
+ */
+export const acknowledgedFunctionAlternativeProps: readonly string[] = [
+  "*.className",
+  "*.elementType",
+  "Area.type",
+  "Bar.minPointSize",
+  "CartesianChart.syncMethod",
+  "CartesianGrid.horizontal",
+  "CartesianGrid.vertical",
+  "ChartGrid.horizontal",
+  "ChartGrid.vertical",
+  "Line.type",
+  "XAxis.domain",
+  "XAxis.scale",
+  "YAxis.domain",
+  "YAxis.scale",
+];
+
 const keyOf = ({ component, prop }: { component: string; prop: string }) =>
   `${component}.${prop}`;
+
+const matches = (entry: string, report: UnserializablePropReport) =>
+  entry === keyOf(report) || entry === `*.${report.prop}`;
+
+const isAcknowledged = (report: UnserializablePropReport) =>
+  acknowledgedFunctionAlternativeProps.some((entry) =>
+    matches(entry, report),
+  ) ||
+  (report.reason === "returns-a-value" &&
+    acknowledgedValueReturningProps.includes(keyOf(report)));
 
 /**
  * Reports every prop that the generator would ship as a remote property but
@@ -140,15 +161,14 @@ export const checkSerializableProps = (
     Object.keys(component.props)
       .filter((prop) => isProp(component, prop))
       .flatMap((prop) => {
-        const type = component.props[prop]?.type.name ?? "";
+        const { name: type = "", callableReturn } =
+          component.props[prop]?.type ?? {};
 
         const reason = isRenderedOutputType(type)
           ? ("is-rendered-output" as const)
-          : returnsRenderedOutput(type)
-            ? ("returns-rendered-output" as const)
-            : returnsAValue(type)
-              ? ("returns-a-value" as const)
-              : undefined;
+          : callableReturn
+            ? reasonOf[callableReturn]
+            : undefined;
 
         return reason
           ? [{ component: component.displayName, prop, type, reason }]
@@ -158,16 +178,12 @@ export const checkSerializableProps = (
 
 /**
  * The reports the generator must fail on: everything except the acknowledged
- * baseline above.
+ * baselines above.
  */
 export const rejectedProps = (
   reports: UnserializablePropReport[],
 ): UnserializablePropReport[] =>
-  reports.filter(
-    (report) =>
-      report.reason !== "returns-a-value" ||
-      !acknowledgedValueReturningProps.includes(keyOf(report)),
-  );
+  reports.filter((report) => !isAcknowledged(report));
 
 /**
  * Baseline entries that no longer describe a generated prop — the prop was
@@ -176,10 +192,11 @@ export const rejectedProps = (
  */
 export const obsoleteBaselineEntries = (
   reports: UnserializablePropReport[],
-): string[] => {
-  const found = new Set(reports.map(keyOf));
-  return acknowledgedValueReturningProps.filter((entry) => !found.has(entry));
-};
+): string[] =>
+  [
+    ...acknowledgedValueReturningProps,
+    ...acknowledgedFunctionAlternativeProps,
+  ].filter((entry) => !reports.some((report) => matches(entry, report)));
 
 const explain = (reason: UnserializablePropReport["reason"]) => {
   switch (reason) {
@@ -212,7 +229,7 @@ export const formatUnserializablePropReport = (
 
 export const formatObsoleteBaselineReport = (entries: string[]): string =>
   [
-    `⚠️  ${entries.length} entr${entries.length === 1 ? "y" : "ies"} in acknowledgedValueReturningProps no longer match a generated prop:`,
+    `⚠️  ${entries.length} baseline entr${entries.length === 1 ? "y" : "ies"} no longer match a generated prop:`,
     ...entries.map((entry) => `    ${entry}`),
     "    Remove them from checkSerializableProps.ts.",
   ].join("\n");

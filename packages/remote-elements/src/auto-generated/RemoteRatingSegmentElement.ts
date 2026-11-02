@@ -21,7 +21,6 @@ export class RemoteRatingSegmentElement extends FlowRemoteElement<RemoteRatingSe
       hidden: {},
       id: {},
       inert: {},
-      inputRef: {},
       isDisabled: {},
       lang: {},
       size: {},

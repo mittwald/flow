@@ -29,7 +29,6 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       inline: {},
       isDisabled: {},
       lang: {},
-      linkComponent: {},
       ping: {},
       referrerPolicy: {},
       rel: {},
