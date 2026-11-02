@@ -1,3 +1,4 @@
+@use "@/styles/mixins/scrollbar";
 @use "@/styles/mixins/skeleton";
 
 .markdown {
@@ -14,21 +15,24 @@
     white-space: break-spaces;
   }
 
-  /* Carries the border, so the rounded corners stay while the table scrolls
-     inside. */
-  .table {
+  /* Only scrolls, like `Table`: a replaced `table` renderer has no container
+     and keeps the table's own look. */
+  .tableContainer {
+    @include scrollbar.scrollbar;
+
     overflow-x: auto;
-    border-radius: var(--table--corner-radius);
-    border-width: var(--table--border-width);
-    border-style: var(--table--border-style);
-    border-color: var(--table--border-color);
-    background-color: var(--table--background-color);
   }
 
   // stylelint-disable selector-max-type -- react-markdown table output
   table {
     min-inline-size: 100%;
+    border-radius: var(--table--corner-radius);
+    overflow: hidden;
+    border-width: var(--table--border-width);
+    border-style: var(--table--border-style);
+    border-color: var(--table--border-color);
     border-spacing: 0;
+    background-color: var(--table--background-color);
 
     thead {
       font-weight: var(--table--header-font-weight);

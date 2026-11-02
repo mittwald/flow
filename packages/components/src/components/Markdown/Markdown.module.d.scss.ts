@@ -1,6 +1,6 @@
 declare const classNames: {
   readonly markdown: "markdown";
-  readonly table: "table";
+  readonly tableContainer: "tableContainer";
   readonly skeletonBlock: "skeletonBlock";
 };
 export default classNames;
