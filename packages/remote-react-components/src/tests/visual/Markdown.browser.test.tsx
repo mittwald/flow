@@ -84,3 +84,21 @@ test.each(testEnvironments)(
     await testScreenshot("Markdown split ordered list");
   },
 );
+
+test.each(testEnvironments)(
+  "Markdown line breaks (%s)",
+  async ({ testScreenshot, render, components: { Markdown, Flex } }) => {
+    const text =
+      "A long time ago in a galaxy far, far away\n" +
+      "the Rebel Alliance struck a decisive blow.";
+
+    await render(
+      <Flex gap="m" direction="column">
+        <Markdown>{text}</Markdown>
+        <Markdown preserveLineBreaks>{text}</Markdown>
+      </Flex>,
+    );
+
+    await testScreenshot("Markdown line breaks");
+  },
+);

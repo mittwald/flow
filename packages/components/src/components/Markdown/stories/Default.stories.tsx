@@ -9,8 +9,9 @@ const meta: Meta<typeof Markdown> = {
   argTypes: {
     color: { control: "inline-radio", options: ["default", ...alphaColors] },
     headingOffset: { control: "inline-radio", options: [0, 1, 2, 3] },
+    preserveLineBreaks: { control: "boolean" },
   },
-  args: { color: "default", headingOffset: 0 },
+  args: { color: "default", headingOffset: 0, preserveLineBreaks: false },
   parameters: {
     controls: { exclude: ["style", "ref", "components"] },
   },

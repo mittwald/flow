@@ -40,7 +40,9 @@ const toolbarActionsTunnel = {
 } as const;
 
 export interface MarkdownEditorProps
-  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {
+  extends
+    TextAreaProps,
+    Pick<MarkdownProps, "headingOffset" | "preserveLineBreaks"> {
   /**
    * Allows replacing the markdown preview renderer implementation. Defaults to
    * the internal `Markdown` component.
@@ -76,6 +78,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     rows = 5,
     autoResizeMaxRows,
     headingOffset,
+    preserveLineBreaks,
     markdownComponent: MarkdownComponent = DefaultMarkdown,
     value,
     onChange,
@@ -187,6 +190,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           {mode === "preview" && (
             <MarkdownComponent
               headingOffset={headingOffset}
+              preserveLineBreaks={preserveLineBreaks}
               className={styles.markdown}
             >
               {value}

@@ -28,6 +28,12 @@ export interface MarkdownProps
   color?: "default" | AlphaColor;
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
+  /**
+   * Keeps every newline of the raw text as a line break. By default a single
+   * newline joins the lines, as in CommonMark; only a hard break (two trailing
+   * spaces or `\`) or a blank line starts a new line. @default false
+   */
+  preserveLineBreaks?: boolean;
   /** Allows overriding markdown element renderers from outside. */
   components?: Components;
   /** @internal */
@@ -46,6 +52,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     color = "default",
     className,
     headingOffset = 0,
+    preserveLineBreaks = false,
     components: customComponents,
     ref,
     allowElement,
@@ -215,7 +222,15 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   );
 
   return (
-    <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
+    <div
+      className={clsx(
+        styles.markdown,
+        preserveLineBreaks && styles.preserveLineBreaks,
+        className,
+      )}
+      {...rest}
+      ref={ref}
+    >
       <ReactMarkdown
         allowElement={allowElement}
         allowedElements={allowedElements}
