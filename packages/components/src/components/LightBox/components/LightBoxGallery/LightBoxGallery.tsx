@@ -37,9 +37,18 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // A paging button that gets disabled keeps the focus but no longer receives
+  // keys, so Escape would stop closing the light box.
   useEffect(() => {
-    containerRef.current?.focus();
-  }, []);
+    const container = containerRef.current;
+    const focused = document.activeElement;
+    if (
+      container &&
+      (!container.contains(focused) || focused?.matches(":disabled"))
+    ) {
+      container.focus();
+    }
+  }, [currentIndex]);
 
   const paginate = (direction: number) => {
     setIndex((prev) => {
