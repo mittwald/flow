@@ -216,7 +216,6 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   async ({ testScreenshot, render, components }) => {
     const { Flex, ImageCropper, RangeCalendar } = components;
 
-    // The calendar shows the current month; pin it to the baselines' one.
     vi.setSystemTime(new Date("2026-10-09T11:00:00Z"));
 
     await render(
