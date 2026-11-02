@@ -1,0 +1,7 @@
+skeleton:
+  background-color:
+    value: "rgba(183, 201, 219, 0.5)"
+  shimmer-color:
+    value: "rgba(255, 255, 255, 0.4)"
+  shimmer-duration:
+    value: 3000ms
