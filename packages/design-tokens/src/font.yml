@@ -1,3 +1,8 @@
+font-family:
+  default:
+    value: "Inter, sans-serif"
+  code:
+    value: "FiraCode, monospace"
 font-weight:
   normal:
     value: normal
