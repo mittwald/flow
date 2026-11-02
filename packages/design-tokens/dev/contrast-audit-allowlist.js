@@ -71,7 +71,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light: the lowest AA tones on the AccentBox tints and the sender Message (#3456). `content.color.100` (placeholder, plain Kbd) and `unavailable.color.strong.100` (unavailable text) sit close to AA on the elevation surfaces, so they miss 4.5:1 on the decorative `quiet.100` tints. Since #3550 the tints take the brand's Background/Brand-100 (blue 300, lilac 400, green 500; navy 300, one step lighter), which UX wants more colorful: 3.28–4.33. Dark passes since #3539 (`content.color.100` = `mittwald-neutral.700`). On colored surfaces Flow recommends the light/dark color variants for content. #3456 decides the AccentBox colors.",
+      "Light: the lowest AA tones on the AccentBox tints and the sender Message (#3456). `content.color.100` (placeholder, plain Kbd) and `unavailable.color.strong.100` (unavailable text) sit close to AA on the elevation surfaces, so they miss 4.5:1 on the decorative `quiet.100` tints. Since #3550 the tints take the brand's Background/Brand-100 (blue 300, lilac 400, green 500; navy 300, one step lighter), which UX wants more colorful: 3.28–4.33. Dark passes since #3539 (`content.color.100` = `mittwald-neutral.700`). On colored surfaces Flow recommends the light/dark color variants for content. #3456 set the AccentBox colors.",
     pairs: {
       "light heading.color-unavailable on message.background-color-sender": 4.18,
       "light heading.color-unavailable on accent-box.background-color-blue": 3.27,
@@ -101,7 +101,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light and dark: functional content on the more colorful decorative tints (#3550). Since the mStudio check of #3459 the light status `strong` tones sit one Brand step lighter, so status text and the invalid field border lose more here (2.55–4.31). UX took the brand's Background/Brand-100 for the AccentBox and the sender Message (`decorative-*.color.quiet.100`; the sender Message is navy since #3564) over AA for content placed on them: light blue 300 (`#B2B2F0`) leaves the link at 4.18 and status text at 3.64–4.39 (icons, checkbox and spinner pass 3:1 since #3539); light green leaves warning text at 4.18–4.49, light navy 300 status text at 3.74–4.47; dark green and lilac 1700 leave the link at 4.17–4.18 (Brand 1600 would have left 3.30). On colored surfaces Flow recommends the light/dark color variants for content. #3456 decides the AccentBox colors.",
+      "Light and dark: functional content on the more colorful decorative tints (#3550). Since the mStudio check of #3459 the light status `strong` tones sit one Brand step lighter, so status text and the invalid field border lose more here (2.55–4.31). UX took the brand's Background/Brand-100 for the AccentBox and the sender Message (`decorative-*.color.quiet.100`; the sender Message is navy since #3564) over AA for content placed on them: light blue 300 (`#B2B2F0`) leaves the link at 4.18 and status text at 3.64–4.39 (icons, checkbox and spinner pass 3:1 since #3539); light green leaves warning text at 4.18–4.49, light navy 300 status text at 3.74–4.47; dark green and lilac 1700 leave the link at 4.17–4.18 (Brand 1600 would have left 3.30). On colored surfaces Flow recommends the light/dark color variants for content. #3456 set the AccentBox colors.",
     pairs: {
       "light heading.color-danger on accent-box.background-color-blue": 3.67,
       "light link.color.default on accent-box.background-color-blue": 4.17,
@@ -236,7 +236,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light: control borders on the colored tints (#3539). `border.color.300` (form fields, slider track; `mittwald-neutral.1000`, #777C84) is as light as UX wants it: 3:1 on every neutral surface (min 3.25) and on field hover (3.41), but 2.10–2.78 on the AccentBox tints and the sender Message, which are more colorful since #3550. UX chose the lighter border over 3:1 there; `mittwald-neutral.1200` would keep 3:1 everywhere. Dark `mittwald-neutral.900` keeps 3:1 on every surface. #3456 decides the AccentBox colors.",
+      "Light: control borders on the colored tints (#3539). `border.color.300` (form fields, slider track; `mittwald-neutral.1000`, #777C84) is as light as UX wants it: 3:1 on every neutral surface (min 3.25) and on field hover (3.41), but 2.10–2.78 on the AccentBox tints and the sender Message, which are more colorful since #3550. UX chose the lighter border over 3:1 there; `mittwald-neutral.1200` would keep 3:1 everywhere. Dark `mittwald-neutral.900` keeps 3:1 on every surface. #3456 set the AccentBox colors.",
     pairs: {
       "light form-control.border-color.default on message.background-color-sender": 2.68,
       "light form-control.border-color.default on accent-box.background-color-blue": 2.1,

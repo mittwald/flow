@@ -56,14 +56,14 @@ Four color tiers, renamed after their job:
 
 **Origin decides between Brand and Semantic.** Brand holds what marketing hands
 over, nothing else — including `black-alpha` and `white-alpha`, and the brand
-gradients once they are approved. Semantic holds what the design system decides.
-Dark-theme colors are a Semantic decision and usually reference a Brand color,
-often the mirrored step. Semantic holds literal values only where Flow owns the
-color outright:
+gradients ([#3456](https://github.com/mittwald/flow/issues/3456)). Semantic
+holds what the design system decides. Dark-theme colors are a Semantic decision
+and usually reference a Brand color, often the mirrored step. Semantic holds
+literal values only where Flow owns the color outright:
 
 - `code-syntax` and `categorical`
-- the current `gradient` and `background-gradient`, until brand gradients
-  replace them
+- `background-gradient` (the brand gradients replaced `gradient`,
+  [#3456](https://github.com/mittwald/flow/issues/3456))
 
 **Variant for variants, Semantic for single colors.** A component token whose
 color belongs to a variant (Button, Badge, Alert) references the Variant pair. A
@@ -130,6 +130,8 @@ value is the content.
 
 - **The Semantic roles themselves** — names, count, tones per theme. That is
   [#3455](https://github.com/mittwald/flow/issues/3455).
-- **Brand gradient values.** They enter Brand once marketing approves them.
+- **Brand gradient values.** The brand team sets them
+  ([#3456](https://github.com/mittwald/flow/issues/3456),
+  [#3542](https://github.com/mittwald/flow/issues/3542)).
 - **Non-color tiers.** Size tokens reference their Global tier directly and have
   no theme, so neither the reference rule nor the origin rule applies.
