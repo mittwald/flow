@@ -4,4 +4,4 @@ area:
   border-color:
     value: "{elevation.color.100}"
   dot-background-color:
-    value: "{light.color.strong.100}"
+    value: "{elevation.color.100}"
