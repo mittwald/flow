@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+### Tests
+
+* **SkeletonMode:** pin the date of the cropper and calendar scenario ([#3619](https://github.com/mittwald/flow/issues/3619)) ([4c5dbb7](https://github.com/mittwald/flow/commit/4c5dbb78517e65c09b033c52cd6f57a87455aa6b))
+
+### Build System
+
+* **deps:** bump docker/login-action from 4.6.0 to 4.7.0 in the actions group across 1 directory ([#3612](https://github.com/mittwald/flow/issues/3612)) ([1a79f10](https://github.com/mittwald/flow/commit/1a79f10387478c803d865ae35f74831202c6ad54))
+* **deps:** bump the production group across 1 directory with 5 updates ([#3613](https://github.com/mittwald/flow/issues/3613)) ([cdfa24b](https://github.com/mittwald/flow/commit/cdfa24b24bfa727f48eceafd91963316b54338ee))
+
+### Continuous Integration
+
+* **dependabot:** group react-stately with react-aria ([#3606](https://github.com/mittwald/flow/issues/3606)) ([9cfb45e](https://github.com/mittwald/flow/commit/9cfb45eff0b6e91356595d96baf1b6a513961905))
+* **dependabot:** hold back playwright 1.64 ([#3608](https://github.com/mittwald/flow/issues/3608)) ([d2152ea](https://github.com/mittwald/flow/commit/d2152eab1b2da37c2376fc3ae0944783419801e6))
+
 ## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
 
 ### Build System

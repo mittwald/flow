@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+### Tests
+
+* **SkeletonMode:** pin the date of the cropper and calendar scenario ([#3619](https://github.com/mittwald/flow/issues/3619)) ([4c5dbb7](https://github.com/mittwald/flow/commit/4c5dbb78517e65c09b033c52cd6f57a87455aa6b))
+
 ## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
