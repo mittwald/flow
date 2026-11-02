@@ -40,6 +40,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
       selectionMode: {},
       shouldSelectOnPressUp: {},
       slot: {},
+      suppressHydrationWarning: {},
       tileMaxWidth: {},
       translate: {},
     };

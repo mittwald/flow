@@ -333,12 +333,13 @@ if ("action" in props) {
 | `*.test.ts(x)` (unit)                      | Pure logic in `src/lib/` or component utility functions.                                                                                                                                 |
 | `*.test-types.tsx`                         | Generic/typed public APIs — `expectTypeOf` plus `@ts-expect-error` negative assertions.                                                                                                  |
 
-A bug fix gets a regression test when it changes behavior this table covers, or
-rendered output the visual suite covers
+A bug fix gets a regression test when it changes behavior this table covers —
+not by default. When it changes rendered output, the regression test is a
+scenario in the visual suite
 (`packages/remote-react-components/src/tests/visual`, see Definition of Done
 item 4 in the
-[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md#definition-of-done--component-work))
-— not by default. Leave out:
+[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md#definition-of-done--component-work)).
+Leave out:
 
 - **Wiring of a single prop** — "the consumer `className` reaches the root",
   "`aria-label` is forwarded". A test for one prop is arbitrary: every other
@@ -349,6 +350,9 @@ item 4 in the
   formatter. Assert the result it produces, not that it ran. `on*` event props
   are the exception: the call is what the consumer observes, so a spy is the
   assertion.
+- **A browser test for what a visual scenario already shows** — layout,
+  overflow, sizing, styling. The screenshot is the regression test; geometry
+  assertions (`scrollWidth`, `getBoundingClientRect`) beside it add nothing.
 - **Tests that pass without the fix.** Revert the fix and watch the test fail
   before committing it. If it cannot fail, it guards nothing; say in the PR how
   you verified the fix instead. The `optimizeDeps` entry under

@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+### Documentation
+
+* skip browser tests for what a visual scenario shows ([#3618](https://github.com/mittwald/flow/issues/3618)) ([2427c69](https://github.com/mittwald/flow/commit/2427c69787e0ed1b373b0d4982ba2ab87d022e43))
+
+### Tests
+
+* **MessageThread:** add the missing webkit-darwin baseline for lists ([#3616](https://github.com/mittwald/flow/issues/3616)) ([f1adc7e](https://github.com/mittwald/flow/commit/f1adc7e3ec07cd374ccc12c684fe70daadcd84f7))
+
+### Build System
+
+* **deps-dev:** bump the dev-minor group across 1 directory with 6 updates ([#3617](https://github.com/mittwald/flow/issues/3617)) ([fd98a6e](https://github.com/mittwald/flow/commit/fd98a6e3b695acabe426f3b759a2eb6332b07c83))
+
+## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 14 updates ([#3615](https://github.com/mittwald/flow/issues/3615)) ([8adafff](https://github.com/mittwald/flow/commit/8adafff88fec265ebd533493f824e705b011201c))
+
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+### Tests
+
+* **SkeletonMode:** pin the date of the cropper and calendar scenario ([#3619](https://github.com/mittwald/flow/issues/3619)) ([4c5dbb7](https://github.com/mittwald/flow/commit/4c5dbb78517e65c09b033c52cd6f57a87455aa6b))
+
+### Build System
+
+* **deps:** bump docker/login-action from 4.6.0 to 4.7.0 in the actions group across 1 directory ([#3612](https://github.com/mittwald/flow/issues/3612)) ([1a79f10](https://github.com/mittwald/flow/commit/1a79f10387478c803d865ae35f74831202c6ad54))
+* **deps:** bump the production group across 1 directory with 5 updates ([#3613](https://github.com/mittwald/flow/issues/3613)) ([cdfa24b](https://github.com/mittwald/flow/commit/cdfa24b24bfa727f48eceafd91963316b54338ee))
+
+### Continuous Integration
+
+* **dependabot:** group react-stately with react-aria ([#3606](https://github.com/mittwald/flow/issues/3606)) ([9cfb45e](https://github.com/mittwald/flow/commit/9cfb45eff0b6e91356595d96baf1b6a513961905))
+* **dependabot:** hold back playwright 1.64 ([#3608](https://github.com/mittwald/flow/issues/3608)) ([d2152ea](https://github.com/mittwald/flow/commit/d2152eab1b2da37c2376fc3ae0944783419801e6))
+
+## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
+
+### Build System
+
+* **deps-dev:** bump happy-dom from 20.14.6 to 21.0.4 ([#3572](https://github.com/mittwald/flow/issues/3572)) ([9fe46b4](https://github.com/mittwald/flow/commit/9fe46b40982bd982610de1d59da330ec0b56ecec))
+
+## [1.5.49](https://github.com/mittwald/flow/compare/1.5.48...1.5.49) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the production group across 1 directory with 29 updates ([#3605](https://github.com/mittwald/flow/issues/3605)) ([439e271](https://github.com/mittwald/flow/commit/439e27110485fd2427e3d7302e9516ed999b44a3))
+
+## [1.5.48](https://github.com/mittwald/flow/compare/1.5.47...1.5.48) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the actions group with 2 updates ([#3590](https://github.com/mittwald/flow/issues/3590)) ([116d517](https://github.com/mittwald/flow/commit/116d517a4e030e43b9ee23a71c1bec7156aefdd4))
+* **deps:** bump zod from 4.6.5 to 4.6.6 ([#3571](https://github.com/mittwald/flow/issues/3571)) ([b911dd5](https://github.com/mittwald/flow/commit/b911dd5f244db73aeca78da36afa17757d4dbe5d))
+
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+### Bug Fixes
+
+* **Icon:** show descending bars in the pro Descending icon ([#3595](https://github.com/mittwald/flow/issues/3595)) ([43c5cb8](https://github.com/mittwald/flow/commit/43c5cb88b922f1cd24e6cd72b1b63e440302d398))
+
 ## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
 
 ### Bug Fixes

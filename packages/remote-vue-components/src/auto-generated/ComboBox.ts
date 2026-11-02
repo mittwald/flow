@@ -23,6 +23,7 @@ export const ComboBox: FlowRemoteVueComponent<RemoteComboBoxElementProps> =
         "isReadOnly",
         "isRequired",
         "shouldFocusWrap",
+        "suppressHydrationWarning",
       ],
     },
   );

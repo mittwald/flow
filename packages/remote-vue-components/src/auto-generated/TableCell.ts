@@ -11,5 +11,13 @@ export const TableCell: FlowRemoteVueComponent<RemoteTableCellElementProps> =
     "flr-table-cell",
     "TableCell",
     RemoteTableCellElement,
-    { booleans: ["allowsArrowNavigation", "hidden", "inert", "rowHeader"] },
+    {
+      booleans: [
+        "allowsArrowNavigation",
+        "hidden",
+        "inert",
+        "rowHeader",
+        "suppressHydrationWarning",
+      ],
+    },
   );

@@ -25,6 +25,7 @@ export const Button: FlowRemoteVueComponent<RemoteButtonElementProps> =
       "isReadOnly",
       "isSucceeded",
       "preventFocusOnPress",
+      "suppressHydrationWarning",
       "unstyled",
     ],
   });

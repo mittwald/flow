@@ -26,6 +26,7 @@ export const ContextualHelp: FlowRemoteVueComponent<RemoteContextualHelpElementP
         "shouldFlip",
         "shouldSkipAnimation",
         "shouldUpdatePosition",
+        "suppressHydrationWarning",
       ],
     },
   );

@@ -107,6 +107,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     showLinterMarkers = true,
     showActiveLineMarker = true,
     copyable = true,
+    editable = true,
     height,
     minHeight,
     "aria-label": ariaLabel,
@@ -234,6 +235,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     [],
   );
 
+  const isEditable = editable && !isDisabled;
   const highlightActiveLine = showActiveLineMarker && !isDisabled;
   const basicSetup = useMemo(
     () => ({
@@ -243,8 +245,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
       lineNumbers: false,
       foldGutter: false,
       highlightSelectionMatches: false,
+      bracketMatching: isEditable,
     }),
-    [highlightActiveLine],
+    [highlightActiveLine, isEditable],
   );
 
   const localRef = useObjectRef(ref);
@@ -287,7 +290,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
       data-invalid={isInvalid || undefined}
       data-disabled={isDisabled || undefined}
       readOnly={isReadOnly || isDisabled}
-      editable={!isDisabled}
+      editable={isEditable}
       className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
       ref={(codeMirrorRef) => {
         if (codeMirrorRef?.editor) {

@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+### Documentation
+
+* skip browser tests for what a visual scenario shows ([#3618](https://github.com/mittwald/flow/issues/3618)) ([2427c69](https://github.com/mittwald/flow/commit/2427c69787e0ed1b373b0d4982ba2ab87d022e43))
+
+## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 14 updates ([#3615](https://github.com/mittwald/flow/issues/3615)) ([8adafff](https://github.com/mittwald/flow/commit/8adafff88fec265ebd533493f824e705b011201c))
+
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
+
+### Build System
+
+* **deps-dev:** bump happy-dom from 20.14.6 to 21.0.4 ([#3572](https://github.com/mittwald/flow/issues/3572)) ([9fe46b4](https://github.com/mittwald/flow/commit/9fe46b40982bd982610de1d59da330ec0b56ecec))
+
+## [1.5.49](https://github.com/mittwald/flow/compare/1.5.48...1.5.49) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the production group across 1 directory with 29 updates ([#3605](https://github.com/mittwald/flow/issues/3605)) ([439e271](https://github.com/mittwald/flow/commit/439e27110485fd2427e3d7302e9516ed999b44a3))
+
+## [1.5.48](https://github.com/mittwald/flow/compare/1.5.47...1.5.48) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 ## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
 
 ### Bug Fixes

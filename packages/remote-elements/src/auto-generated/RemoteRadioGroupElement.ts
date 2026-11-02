@@ -34,6 +34,7 @@ export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupE
       orientation: {},
       s: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

@@ -16,5 +16,6 @@ export const Tooltip: FlowRemoteVueComponent<RemoteTooltipElementProps> =
       "isExiting",
       "isOpen",
       "shouldFlip",
+      "suppressHydrationWarning",
     ],
   });

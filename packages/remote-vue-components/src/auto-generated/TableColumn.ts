@@ -18,6 +18,7 @@ export const TableColumn: FlowRemoteVueComponent<RemoteTableColumnElementProps> 
         "hidden",
         "inert",
         "isRowHeader",
+        "suppressHydrationWarning",
       ],
     },
   );
