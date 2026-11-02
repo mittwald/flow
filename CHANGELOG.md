@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.55](https://github.com/mittwald/flow/compare/1.6.0-next.54...1.6.0-next.55) (2026-11-02)
+
+### Bug Fixes
+
+* **CodeEditor:** honor editable&#x3D;{false} and drop bracket matching there ([#3620](https://github.com/mittwald/flow/issues/3620)) ([a618183](https://github.com/mittwald/flow/commit/a618183541200a028bc11d3d33afa091f7527fda))
+
+## [1.5.53](https://github.com/mittwald/flow/compare/1.6.0-next.53...1.5.53) (2026-11-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.53 ([0727f04](https://github.com/mittwald/flow/commit/0727f0495913e297a9083c4c49ec4a950792aca9))
+
 ## [1.6.0-next.54](https://github.com/mittwald/flow/compare/1.6.0-next.53...1.6.0-next.54) (2026-11-02)
 
 ### Documentation
