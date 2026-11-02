@@ -99,3 +99,11 @@ test("truncateLines false leaves the block unfolded", async () => {
 
   await expect.element(showMore()).not.toBeInTheDocument();
 });
+
+test("the code is not editable", async () => {
+  await render(<CodeBlock code={lines(3)} />);
+
+  await expect
+    .element(page.getByRole("textbox"))
+    .toHaveAttribute("contenteditable", "false");
+});
