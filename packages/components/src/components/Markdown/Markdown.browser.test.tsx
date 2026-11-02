@@ -125,6 +125,24 @@ test("a table is rendered", async () => {
   await expect.element(page.getByText("X-Wing")).toBeVisible();
 });
 
+test("a wide table scrolls inside the markdown instead of overflowing it", async () => {
+  await render(
+    <div style={{ inlineSize: 160 }}>
+      <Markdown>
+        {"| Ship | Crew | Role |\n| --- | --- | --- |\n" +
+          "| X-Wing, Y-Wing | Pilot, Astromech | Escort, Bomber |"}
+      </Markdown>
+    </div>,
+  );
+
+  const scrollBox = page.getByRole("table").element()
+    .parentElement as HTMLElement;
+  const markdown = scrollBox.parentElement as HTMLElement;
+
+  expect(markdown.scrollWidth).toBeLessThanOrEqual(markdown.clientWidth);
+  expect(scrollBox.scrollWidth).toBeGreaterThan(scrollBox.clientWidth);
+});
+
 /*
  * A paragraph that is not indented under its item ends the list, so the parser
  * emits one <ol> per part and carries the numbering over through `start`.

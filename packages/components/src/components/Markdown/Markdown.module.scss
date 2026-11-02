@@ -14,17 +14,21 @@
     white-space: break-spaces;
   }
 
-  // remark-gfm renders the table markup itself — Markdown overrides no table
-  // renderer, so none of these elements carries a class.
-  // stylelint-disable selector-max-type -- react-markdown table output
-  table {
+  /* Carries the border, so the rounded corners stay while the table scrolls
+     inside. */
+  .table {
+    overflow-x: auto;
     border-radius: var(--table--corner-radius);
-    overflow: hidden;
     border-width: var(--table--border-width);
     border-style: var(--table--border-style);
     border-color: var(--table--border-color);
-    border-spacing: 0;
     background-color: var(--table--background-color);
+  }
+
+  // stylelint-disable selector-max-type -- react-markdown table output
+  table {
+    min-inline-size: 100%;
+    border-spacing: 0;
 
     thead {
       font-weight: var(--table--header-font-weight);
