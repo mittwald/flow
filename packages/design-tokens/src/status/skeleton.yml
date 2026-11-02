@@ -2,6 +2,6 @@ skeleton:
   background-color:
     value: "{neutral.color.quiet.100}"
   shimmer-color:
-    value: "{light-static.color.quiet.300}"
+    value: "{light.color.quiet.300}"
   shimmer-duration:
     value: 3000ms
