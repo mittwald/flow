@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 14 updates ([#3615](https://github.com/mittwald/flow/issues/3615)) ([8adafff](https://github.com/mittwald/flow/commit/8adafff88fec265ebd533493f824e705b011201c))
+
 ## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
