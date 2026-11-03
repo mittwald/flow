@@ -117,11 +117,18 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
       ? (colorFromProps as unknown as AccentBoxBackgroundColor)
       : undefined;
 
+  // The legacy path warns with the prop its replacement belongs on
+  const legacyBackgroundColor = useDeprecatedColor(
+    backgroundColorFromColor,
+    deprecatedBackgroundColors,
+    { prop: "backgroundColor" },
+  );
+  const backgroundColorFromPropsResolved = useDeprecatedColor(
+    backgroundColorFromProps,
+    deprecatedBackgroundColors,
+  );
   const backgroundColor =
-    useDeprecatedColor(
-      backgroundColorFromColor ?? backgroundColorFromProps,
-      deprecatedBackgroundColors,
-    ) ?? "neutral";
+    legacyBackgroundColor ?? backgroundColorFromPropsResolved ?? "neutral";
 
   const isAFlowColor = isFlowColor(backgroundColor);
 
