@@ -29,7 +29,13 @@ export const Alert = flowComponent("Alert", (props) => {
     className,
   );
 
+  const inlineCodeProps = { color: "dark" } as const;
+
   const propsContext: PropsContext = {
+    InlineCode: inlineCodeProps,
+    Text: {
+      InlineCode: inlineCodeProps,
+    },
     Heading: {
       className: styles.heading,
       level: 3,
@@ -49,6 +55,10 @@ export const Alert = flowComponent("Alert", (props) => {
       ActionGroup: {
         preserveOrder: true,
         size: "s",
+      },
+      InlineCode: inlineCodeProps,
+      Text: {
+        InlineCode: inlineCodeProps,
       },
     },
   };
