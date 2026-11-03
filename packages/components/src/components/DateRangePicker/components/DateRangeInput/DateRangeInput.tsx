@@ -15,7 +15,9 @@ export const DateRangeInput: FC<DateInputProps> = (props) => {
   const { isDisabled, ref } = props;
 
   /* react-aria moves the focus between segments without scrolling, and typing
-     changes the segment widths without moving the focus */
+     changes the segment widths without moving the focus. On focus it has to
+     run before react-aria's own handler: a segment that moves in the meantime
+     makes react-aria center the field in the page. */
   const scrollFocusedSegmentIntoView = (event: SyntheticEvent) => {
     if (event.target instanceof Element) {
       event.target.scrollIntoView({ block: "nearest", inline: "nearest" });
@@ -26,7 +28,7 @@ export const DateRangeInput: FC<DateInputProps> = (props) => {
     <Aria.Group className={styles.dateRangeInput}>
       <div
         className={styles.inputs}
-        onFocus={scrollFocusedSegmentIntoView}
+        onFocusCapture={scrollFocusedSegmentIntoView}
         onKeyUp={scrollFocusedSegmentIntoView}
       >
         <DateInput slot="start" ref={ref} />
