@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
+
+### Bug Fixes
+
+* **ComboBox:** keep the field within its column ([#3622](https://github.com/mittwald/flow/issues/3622)) ([7503974](https://github.com/mittwald/flow/commit/75039740871149cd2bfb2af2b82364a8cae40594))
+
 ## [1.5.58](https://github.com/mittwald/flow/compare/1.5.57...1.5.58) (2026-11-03)
 
 ### Bug Fixes
