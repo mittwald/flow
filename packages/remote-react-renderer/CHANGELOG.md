@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.56](https://github.com/mittwald/flow/compare/1.5.55...1.5.56) (2026-11-03)
+
+### Code Refactoring
+
+* clear the react-hooks/exhaustive-deps lint warnings ([#3583](https://github.com/mittwald/flow/issues/3583)) ([1666843](https://github.com/mittwald/flow/commit/1666843d2ccb7d30ae79a093be8c8c5aa1b547f0))
+
 ## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
