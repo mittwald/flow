@@ -18,7 +18,7 @@ icon:
     value: "{success.color.strong.200}"
   unavailable-color:
     value: "{unavailable.color.strong.100}"
-  # Decorative content tone (#3508)
+  # Decorative content tone
   blue-color:
     value: "{decorative-blue.color.content}"
   navy-color:

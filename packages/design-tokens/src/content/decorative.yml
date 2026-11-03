@@ -39,7 +39,7 @@ decorative:
   salmon-content-color:
     value: "{decorative-salmon.color.strong.300}"
 
-  # Green: deprecated Avatar color (#3508), keeps the success look until it is removed
+  # Green: deprecated Avatar color, keeps the success look until it is removed
   green-background-color:
     value: "{success.color.quiet.100}"
   green-content-accent-color:

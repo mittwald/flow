@@ -18,7 +18,7 @@ import { SectionHeadingReset } from "@/components/Section/context";
 import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
 import { styleClassname } from "@/lib/scss/selectors";
 
-/** The brand gradients, one per decorative color (#3456). */
+/** The brand gradients, one per decorative color. */
 const accentBoxGradients = [
   "gradient-navy",
   "gradient-sage",
@@ -27,10 +27,9 @@ const accentBoxGradients = [
 ] as const;
 
 /**
- * Deprecated background colors and the value each renders as (#3456).
- * `gradient` was the only gradient; navy is the standard one now. `green`
- * rendered the success mint; AccentBox is decorative, so it takes the brand's
- * green.
+ * Deprecated background colors and the value each renders as. `gradient` was
+ * the only gradient; navy is the standard one now. `green` rendered the success
+ * mint; AccentBox is decorative, so it takes the brand's green.
  */
 const deprecatedBackgroundColors = {
   ...deprecatedDecorativeColors,
@@ -42,13 +41,13 @@ const accentBoxBackgroundColors = [
   "neutral",
   ...decorativeColors,
   ...accentBoxGradients,
-  // deprecated (#3456)
+  // deprecated
   ...(Object.keys(deprecatedDecorativeColors) as DeprecatedDecorativeColor[]),
   "gradient",
   "green",
 ] as const;
 
-/** Colored surfaces, where content defaults to `dark` (#3456). */
+/** Colored surfaces, where content defaults to `dark`. */
 const decorativeBackgroundColors: readonly string[] = [
   ...decorativeColors,
   ...accentBoxGradients,

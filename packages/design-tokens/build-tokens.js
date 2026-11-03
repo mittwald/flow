@@ -34,12 +34,12 @@ const semanticLiteralGroups = [
 ];
 
 /**
- * Brand gradients: `gradient-<name>`, one `color` per theme pointing to Brand
- * (#3456). They have no quiet/strong shape.
+ * Brand gradients: `gradient-<name>`, one `color` per theme pointing to Brand.
+ * They have no quiet/strong shape.
  */
 const isGradientGroup = (group) => group.startsWith("gradient-");
 
-/** The keys each Semantic group holds under `color` (#3455). */
+/** The keys each Semantic group holds under `color`. */
 const steps = ["100", "200", "300"];
 const semanticShapes = {
   default: ["quiet", "strong"].flatMap((tone) =>
@@ -48,7 +48,7 @@ const semanticShapes = {
   elevation: steps,
   border: steps,
   content: [...steps, "inverse"],
-  // Decorative groups add one content tone for Icon and Color (#3508).
+  // Decorative groups add one content tone for Icon and Color.
   decorative: [
     ...["quiet", "strong"].flatMap((tone) =>
       steps.map((step) => `${tone}.${step}`),
@@ -119,7 +119,7 @@ const checkColorTiers = () => {
     errors.push(`${key}: defined for only one theme in color-semantic.*.yml`);
   }
 
-  // Semantic roles (#3455): the neutral roles count 100–300, every other
+  // Semantic roles: the neutral roles count 100–300, every other
   // group holds quiet and strong 100–300. A step outside the shape is a new
   // role and needs a decision, not a key.
   const keysByGroup = Map.groupBy(

@@ -154,8 +154,7 @@ The same applies to `@mittwald/flow-design-tokens/json*/all-*.json` and
 `useDesignTokens()`: `color.categorical` is `categorical.color` now.
 
 **Semantic has named roles.** Semantic no longer mirrors a ramp with 11 or 12
-steps; it selects few tones per role and theme
-([#3455](https://github.com/mittwald/flow/issues/3455)):
+steps; it selects few tones per role and theme:
 
 | Group                                                                                           | Keys                                                                         |
 | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
