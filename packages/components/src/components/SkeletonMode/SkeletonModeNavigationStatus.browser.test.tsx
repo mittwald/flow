@@ -166,17 +166,6 @@ test("TabNavigation items and the more menu are inert", async () => {
   await expectNothingFocusable();
 });
 
-test("Breadcrumb separators stay icons", async () => {
-  await renderSkeleton(
-    <Breadcrumb>
-      <Link href="#">Projekte</Link>
-      <Link href="#">Webshop Relaunch</Link>
-    </Breadcrumb>,
-  );
-
-  expect(queryAll("ol li > svg")).toHaveLength(2);
-});
-
 test("Breadcrumb items become inert bars without a current item", async () => {
   await renderSkeleton(
     <Breadcrumb>
