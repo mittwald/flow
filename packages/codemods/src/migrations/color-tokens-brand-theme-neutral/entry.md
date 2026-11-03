@@ -1,5 +1,5 @@
 ---
-since: 1.5.0
+since: 1.6.0
 title:
   "Color tokens: a new Brand palette that no longer switches with the theme"
 kind: migration

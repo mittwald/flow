@@ -7,18 +7,8 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
-    id: "accordion-variant-deprecated",
-    since: "1.5.0",
-    title: "Accordion: `variant` deprecated",
-    kind: "deprecation",
-    action: "codemod",
-    remotePackage: true,
-    apply:
-      'Remove the `variant` prop from every `Accordion` — a codemod does it. Then check where `variant="outline"` was used: where several accordions stand directly below each other, wrap them in an `AccordionGroup`, which draws separators between them; where a single accordion needs to stand apart from the surrounding content, place it in a `LayoutCard`. That part is not mechanically decidable.',
-  },
-  {
     id: "color-props-brand-palette",
-    since: "1.5.0",
+    since: "1.6.0",
     title:
       "Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette",
     kind: "migration",
@@ -29,7 +19,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
   },
   {
     id: "color-tokens-brand-theme-neutral",
-    since: "1.5.0",
+    since: "1.6.0",
     title:
       "Color tokens: a new Brand palette that no longer switches with the theme",
     kind: "migration",
@@ -37,6 +27,16 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     remotePackage: false,
     apply:
       "Search your own CSS, SCSS and TS for `var(--color--`. Replace the moved variables by name — `--color--categorical--X` → `--categorical--color--X`, `--color--code-syntax--X` → `--code-syntax--color--X`, `--color--transparent` → `--transparent--color`, `--color--gradient` → `--gradient--color`, `--color--background-gradient` → `--background-gradient--color`, `--color--static-black-alpha--N` → `--dark-static--color--N`, `--color--static-white-alpha--N` → `--light-static--color--N`; JavaScript reading `color.categorical` from the token JSON reads `categorical.color`. The old palettes are gone — `--color--gray--N`, `--color--hosting-blue--N`, `--color--soft-contrast-violet--N`, `--color--bright-lilac--N`, `--color--super-teal--N`, `--color--amaranth-red--N`, `--color--royal-orange--N` and `--color--espelkamp-green--N` resolve to nothing, and `--color--mittwald-navy--N` holds the new brand values. Replace each with the Semantic variable that carries its meaning, e.g. `--elevation--color--N` for a gray surface, `--content--color--N` for gray text, `--border--color--N` for a gray border, `--primary--color--quiet--N` or `--primary--color--strong--N` for hosting-blue, `--decorative-<hue>--color--…` for navy, lilac and teal, `--danger--`, `--warning--` or `--success--color--…` for the status hues (amaranth-red, royal-orange, espelkamp-green), `--dark--color--…` or `--light--color--…` for `--color--black-alpha--N` or `--color--white-alpha--N`, or a Variant variable such as `--primary-solid-background-color--default`. Do the same for every remaining Brand variable (`--color--mittwald-*`, `--color--system-*`, the alpha ramps), because Brand keeps its light value in dark. Then rename the Semantic variables you use. Colored and alpha groups (`primary`, `info`, `success`, `danger`, `warning`, `neutral`, `unavailable`, `decorative-*`, `dark`, `light`, `dark-static`, `light-static`) keep six tones — `--<group>--color--100/200/300` → `--<group>--color--quiet--100/200/300`, `--<group>--color--800/900/1000` → `--<group>--color--strong--100/200/300` (alpha groups map `800/700/600` → `strong--100/200/300`); the other steps are gone, use the nearest tone. Gray from `--neutral--color--N` moves by role — surfaces 100–300 → `--elevation--color--100/200/300`, text and icons → `--content--color--100` (secondary), `--200` (label) or `--300` (text), on a solid surface `--content--color--inverse`, borders → `--border--color--100` (grouping), `--200` (separator) or `--300` (control), disabled → `--unavailable--color--quiet--100/200/300` (surface, border, content). `--decorative-violet--color--…` → `--decorative-lilac--color--…`, `--decorative-teal--color--…` → `--decorative-sage--color--…`, `--decorative-red--`, `--decorative-green--` and `--decorative-orange--color--…` → `--danger--`, `--success--` and `--warning--color--…`; the brand's green and orange are `--decorative-sage--` and `--decorative-salmon--color--…`. Which one fits is not decidable mechanically — decide whether the color is a surface, content or status.",
+  },
+  {
+    id: "accordion-variant-deprecated",
+    since: "1.5.0",
+    title: "Accordion: `variant` deprecated",
+    kind: "deprecation",
+    action: "codemod",
+    remotePackage: true,
+    apply:
+      'Remove the `variant` prop from every `Accordion` — a codemod does it. Then check where `variant="outline"` was used: where several accordions stand directly below each other, wrap them in an `AccordionGroup`, which draws separators between them; where a single accordion needs to stand apart from the surrounding content, place it in a `LayoutCard`. That part is not mechanically decidable.',
   },
   {
     id: "image-rounded-corners-default",
