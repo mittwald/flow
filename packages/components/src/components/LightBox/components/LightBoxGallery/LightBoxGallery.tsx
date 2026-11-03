@@ -1,4 +1,7 @@
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import React, { type ReactNode, useEffect, useRef, useState } from "react";
 import {
   IconChevronLeft,
@@ -12,14 +15,15 @@ import locales from "../../locales/*.locale.json";
 import Button from "@/components/Button";
 import { Controls } from "@/components/LightBox/components/LightBoxGallery/Controls";
 
-export interface LightBoxGalleryProps extends PropsWithClassName {
+export interface LightBoxGalleryProps
+  extends PropsWithClassName, FlowComponentProps {
   children: ReactNode[];
   defaultIndex?: number;
 }
 
 /** @flr-generate all */
 export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
-  const { children, className, defaultIndex = 0 } = props;
+  const { children, className, defaultIndex = 0, ref } = props;
 
   const [currentIndex, setIndex] = useState(defaultIndex);
 
@@ -33,10 +37,18 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // A paging button that gets disabled keeps the focus but no longer receives
+  // keys, so Escape would stop closing the light box.
   useEffect(() => {
-    containerRef.current?.focus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- rerunning once the ref is set takes the focus back from the dialog's autofocus
-  }, [containerRef.current]);
+    const container = containerRef.current;
+    const focused = document.activeElement;
+    if (
+      container &&
+      (!container.contains(focused) || focused?.matches(":disabled"))
+    ) {
+      container.focus();
+    }
+  }, [currentIndex]);
 
   const paginate = (direction: number) => {
     setIndex((prev) => {
@@ -84,7 +96,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   return (
-    <div className={clsx(styles.lightBoxGallery, className)}>
+    <div ref={ref} className={clsx(styles.lightBoxGallery, className)}>
       <div
         ref={containerRef}
         className={styles.content}

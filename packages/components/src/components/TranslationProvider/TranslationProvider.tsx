@@ -27,6 +27,7 @@ const context = createContext<TranslationContext>({});
 
 export const useTranslationProvider = () => useContext(context);
 
+/* Plain FC: app-level setup without own UI. */
 /** @flr-generate all */
 export const TranslationProvider: FC<TranslationProviderProps> = (props) => {
   const { children, translations, translate } = props;

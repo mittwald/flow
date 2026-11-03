@@ -1,4 +1,7 @@
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import styles from "@/components/LightBox/components/LightBoxGallery/LightBoxGallery.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { IconClose } from "@/components/Icon/components/icons";
@@ -9,7 +12,9 @@ import { Button } from "@/components/Button";
 import type { PropsWithChildren } from "react";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
-export type LightBoxGalleryItemProps = PropsWithChildren;
+/* Renders no element of its own, so there is no ref to expose. */
+export type LightBoxGalleryItemProps = PropsWithChildren &
+  Omit<FlowComponentProps, "ref">;
 
 /** @flr-generate all */
 export const LightBoxGalleryItem = flowComponent(

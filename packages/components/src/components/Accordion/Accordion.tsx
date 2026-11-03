@@ -8,7 +8,10 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { Button, type ButtonProps } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 import {
@@ -17,9 +20,10 @@ import {
 } from "@/components/AccordionGroup/context";
 import { SectionHeadingReset } from "@/components/Section/context";
 
-export interface AccordionProps extends PropsWithChildren<
-  ComponentProps<"div">
-> {
+export interface AccordionProps
+  extends
+    PropsWithChildren<ComponentProps<"div">>,
+    FlowComponentProps<HTMLDivElement> {
   /**
    * The key of the accordion inside an `AccordionGroup`, used by its
    * `expandedKeys`. Also set as the DOM id.
@@ -120,7 +124,7 @@ const propsContext: PropsContext = {
  * @flr-generate all
  * @flowStatus beta
  */
-export const Accordion: FC<AccordionProps> = flowComponent(
+export const Accordion = flowComponent(
   "Accordion",
   (props) => {
     const {

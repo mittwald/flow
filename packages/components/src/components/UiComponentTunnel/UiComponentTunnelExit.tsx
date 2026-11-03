@@ -7,6 +7,7 @@ export type UiComponentTunnelExitProps = Omit<TunnelExitProps, "providerId"> & {
   component: FlowComponentName;
 };
 
+/* Plain FC: factory infrastructure. */
 export const UiComponentTunnelExit: FC<UiComponentTunnelExitProps> = (
   props,
 ) => {
