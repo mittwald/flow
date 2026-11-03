@@ -36,6 +36,26 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
+  "DateRangePicker in a narrow container (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ColumnLayout, DateRangePicker, Label },
+  }) => {
+    /* Too narrow for both placeholders: the end date is clipped. */
+    await render(
+      <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
+        <DateRangePicker>
+          <Label>Label</Label>
+        </DateRangePicker>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("DateRangePicker - narrow container");
+  },
+);
+
+test.each(testEnvironments)(
   "DateRangePicker interaction (%s)",
   async ({
     testScreenshot,

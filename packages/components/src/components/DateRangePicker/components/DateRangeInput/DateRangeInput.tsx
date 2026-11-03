@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, SyntheticEvent } from "react";
 import type React from "react";
 import styles from "./DateRangeInput.module.scss";
 import * as Aria from "react-aria-components";
@@ -14,9 +14,21 @@ export interface DateInputProps {
 export const DateRangeInput: FC<DateInputProps> = (props) => {
   const { isDisabled, ref } = props;
 
+  /* react-aria moves the focus between segments without scrolling, and typing
+     changes the segment widths without moving the focus */
+  const scrollFocusedSegmentIntoView = (event: SyntheticEvent) => {
+    if (event.target instanceof Element) {
+      event.target.scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
+  };
+
   return (
     <Aria.Group className={styles.dateRangeInput}>
-      <div className={styles.inputs}>
+      <div
+        className={styles.inputs}
+        onFocus={scrollFocusedSegmentIntoView}
+        onKeyUp={scrollFocusedSegmentIntoView}
+      >
         <DateInput slot="start" ref={ref} />
         <span aria-hidden="true">–</span>
         <DateInput slot="end" />

@@ -9,6 +9,7 @@ import {
   today,
 } from "@internationalized/date";
 import { FieldError } from "@/components/FieldError";
+import { ColumnLayout } from "@/components/ColumnLayout";
 
 const meta: Meta<typeof DateRangePicker> = {
   title: "Form Controls/DateRangePicker",
@@ -88,5 +89,15 @@ export const WithCustomPresets: Story = {
     >
       <Label>DatePicker Presents</Label>
     </DateRangePicker>
+  ),
+};
+
+export const NarrowContainer: Story = {
+  render: (props) => (
+    <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
+      <DateRangePicker {...props}>
+        <Label>Date range</Label>
+      </DateRangePicker>
+    </ColumnLayout>
   ),
 };

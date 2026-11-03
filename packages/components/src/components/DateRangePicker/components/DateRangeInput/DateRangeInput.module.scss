@@ -9,6 +9,14 @@
   > .inputs {
     display: flex;
     align-items: center;
+    min-width: 0;
+    // Like a text field: clip what does not fit, scroll to the focused segment
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   :global(.react-aria-DateInput) {
