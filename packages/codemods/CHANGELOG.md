@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.61](https://github.com/mittwald/flow/compare/1.6.0-next.60...1.6.0-next.61) (2026-11-03)
+
+### Features
+
+* **AccentBox:** brand palette backgrounds and brand gradients ([77f975a](https://github.com/mittwald/flow/commit/77f975a22534a0b97a0e9ff3f3275d26d67d2b0c)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **AccentBox:** render the deprecated green like sage ([d19c7f6](https://github.com/mittwald/flow/commit/d19c7f66a1fd01368f5ad00061632a79d286868e)), closes [#3456](https://github.com/mittwald/flow/issues/3456)
+* **codemods:** rename the deprecated colors of the generated icons ([983b258](https://github.com/mittwald/flow/commit/983b2582db4a361fac47748f1b5563ffc2738568))
+* **components:** map the color props onto the brand&#x27;s decorative groups ([734db3b](https://github.com/mittwald/flow/commit/734db3b54eadeab5a14aee5947aa599f335a1c9a)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3550](https://github.com/mittwald/flow/issues/3550) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** fold the border and disabled roles into neutral ([af91319](https://github.com/mittwald/flow/commit/af91319d51bd412bb8e34f01f448220917dfb1f4)), closes [#3479](https://github.com/mittwald/flow/issues/3479) [#3455](https://github.com/mittwald/flow/issues/3455)
+* **design-tokens:** regenerate the neutral ramp and give borders a role ([a3b57ef](https://github.com/mittwald/flow/commit/a3b57ef34b37c3423aca41a726282474dfa68725)), closes [#3539](https://github.com/mittwald/flow/issues/3539) [#3542](https://github.com/mittwald/flow/issues/3542) [#595E64](https://github.com/mittwald/flow/issues/595E64) [#ADB3BC](https://github.com/mittwald/flow/issues/ADB3BC) [#777C84](https://github.com/mittwald/flow/issues/777C84) [#404448](https://github.com/mittwald/flow/issues/404448) [#888D96](https://github.com/mittwald/flow/issues/888D96) [#EBEFF3](https://github.com/mittwald/flow/issues/EBEFF3) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** restructure color tokens into the ADR 0007 tiers ([d516208](https://github.com/mittwald/flow/commit/d51620868528570234ce4f708b6be9820ec9bff3)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#3462](https://github.com/mittwald/flow/issues/3462)
+
+### Bug Fixes
+
+* **codemods:** ship the brand color migrations with 1.6.0 ([905deeb](https://github.com/mittwald/flow/commit/905deebc05e8ec25fd221fcf0d25ad23a400bcf0))
+
+### Documentation
+
+* **adr:** renumber the color token tiers ADR to 0008 ([91803e0](https://github.com/mittwald/flow/commit/91803e09fec71d7750c1ae1c5621bd2890e25137))
+* **codemods:** cover the removed Brand palettes in the color token migration ([cd6765e](https://github.com/mittwald/flow/commit/cd6765e0eab85f25c47bfd62f1b3227c72a6d34e)), closes [#3453](https://github.com/mittwald/flow/issues/3453)
+* **codemods:** cover the removed status ramps in the color token migration ([76bc68e](https://github.com/mittwald/flow/commit/76bc68e993cc3679e40cef2a24466e435094ed9c)), closes [#3454](https://github.com/mittwald/flow/issues/3454) [#3454](https://github.com/mittwald/flow/issues/3454)
+* **codemods:** cover the Semantic roles in the color token migration ([a7f51aa](https://github.com/mittwald/flow/commit/a7f51aa9fc182eed0875c34575bcde366db9fe2c)), closes [#3455](https://github.com/mittwald/flow/issues/3455)
+
+### Miscellaneous Chores
+
+* **design-tokens:** drop history and process notes from color comments ([1cb6a14](https://github.com/mittwald/flow/commit/1cb6a14e539d8f5d85ca3a2821dbce10a14dbedc))
+
 ## [1.6.0-next.60](https://github.com/mittwald/flow/compare/1.6.0-next.59...1.6.0-next.60) (2026-11-03)
 
 **Note:** Version bump only for package @mittwald/flow-codemods

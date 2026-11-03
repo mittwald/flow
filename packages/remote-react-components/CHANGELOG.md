@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.61](https://github.com/mittwald/flow/compare/1.6.0-next.60...1.6.0-next.61) (2026-11-03)
+
+### Features
+
+* **AccentBox:** brand palette backgrounds and brand gradients ([77f975a](https://github.com/mittwald/flow/commit/77f975a22534a0b97a0e9ff3f3275d26d67d2b0c)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **components:** map the color props onto the brand&#x27;s decorative groups ([734db3b](https://github.com/mittwald/flow/commit/734db3b54eadeab5a14aee5947aa599f335a1c9a)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3550](https://github.com/mittwald/flow/issues/3550) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** restructure color tokens into the ADR 0007 tiers ([d516208](https://github.com/mittwald/flow/commit/d51620868528570234ce4f708b6be9820ec9bff3)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#3462](https://github.com/mittwald/flow/issues/3462)
+
+### Tests
+
+* update visual regression screenshots ([1a85fbd](https://github.com/mittwald/flow/commit/1a85fbd75e8a588c7b3ebca8454a6c89da3a40f5))
+* update visual regression screenshots ([9e2d44c](https://github.com/mittwald/flow/commit/9e2d44cf1d6bd1694ba58a0af52c11f64d1d3f4a))
+* update visual regression screenshots ([b1c5697](https://github.com/mittwald/flow/commit/b1c5697afbd465e59c9363354473f10131171c5c))
+* update visual regression screenshots ([8a1cd7d](https://github.com/mittwald/flow/commit/8a1cd7d3ba8ad783f348e44b0331577c98287470))
+* **visual:** drop dark baselines that still show the old primary ([4e17539](https://github.com/mittwald/flow/commit/4e17539c719a50f5e93803298a2fc4815d371e83)), closes [#85afff](https://github.com/mittwald/flow/issues/85afff) [#9f9eef](https://github.com/mittwald/flow/issues/9f9eef) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **visual:** fit the AccentBox colors, put the backdrops on Semantic roles ([055e21f](https://github.com/mittwald/flow/commit/055e21f7028e23eeb34726631064622dd8bdea83)), closes [#3A434E](https://github.com/mittwald/flow/issues/3A434E) [#E5EFF8](https://github.com/mittwald/flow/issues/E5EFF8) [#3507](https://github.com/mittwald/flow/issues/3507)
+
 ## [1.6.0-next.60](https://github.com/mittwald/flow/compare/1.6.0-next.59...1.6.0-next.60) (2026-11-03)
 
 ### Bug Fixes

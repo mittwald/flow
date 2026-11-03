@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.61](https://github.com/mittwald/flow/compare/1.6.0-next.60...1.6.0-next.61) (2026-11-03)
+
+### Features
+
+* **AccentBox:** brand palette backgrounds and brand gradients ([77f975a](https://github.com/mittwald/flow/commit/77f975a22534a0b97a0e9ff3f3275d26d67d2b0c)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **AccentBox:** render the deprecated green like sage ([d19c7f6](https://github.com/mittwald/flow/commit/d19c7f66a1fd01368f5ad00061632a79d286868e)), closes [#3456](https://github.com/mittwald/flow/issues/3456)
+* **Alert:** soft surface instead of a border ([6306a83](https://github.com/mittwald/flow/commit/6306a8382e522776b09c2df21d799a6d266c8e80)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3564](https://github.com/mittwald/flow/issues/3564)
+* **components:** map the color props onto the brand&#x27;s decorative groups ([734db3b](https://github.com/mittwald/flow/commit/734db3b54eadeab5a14aee5947aa599f335a1c9a)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3550](https://github.com/mittwald/flow/issues/3550) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** 12px content radius, start stripe as wide as it ([7c0d5ed](https://github.com/mittwald/flow/commit/7c0d5ed85a0f307bb770eb77580b47fe905bc253))
+* **design-tokens:** 16px corner radius for content containers ([6c9c4e7](https://github.com/mittwald/flow/commit/6c9c4e7ce64eb50c385f5614f48fb4ed67385fd4))
+* **design-tokens:** add a WCAG contrast audit for color token pairs ([3cd4e91](https://github.com/mittwald/flow/commit/3cd4e918f45da252c60dce3a100fcd85e956a5e7)), closes [#3462](https://github.com/mittwald/flow/issues/3462) [#3452](https://github.com/mittwald/flow/issues/3452)
+* **design-tokens:** adopt the brand team&#x27;s revised status ramps ([3550d58](https://github.com/mittwald/flow/commit/3550d58fff5c236ad04ad9b8bd3a7c1314114e35)), closes [#3449](https://github.com/mittwald/flow/issues/3449) [#EBEFF3](https://github.com/mittwald/flow/issues/EBEFF3) [#5ED3A0](https://github.com/mittwald/flow/issues/5ED3A0) [#3532](https://github.com/mittwald/flow/issues/3532)
+* **design-tokens:** adopt the brand&#x27;s status colors by role ([86eab69](https://github.com/mittwald/flow/commit/86eab6917f421ce73e5e18dd56147f046ccb29c2)), closes [#3479](https://github.com/mittwald/flow/issues/3479) [#3455](https://github.com/mittwald/flow/issues/3455) [#3456](https://github.com/mittwald/flow/issues/3456) [#3454](https://github.com/mittwald/flow/issues/3454)
+* **design-tokens:** adopt the new brand palette in the Brand tier ([0d17781](https://github.com/mittwald/flow/commit/0d17781c3f4d4fab33054903d2d01c1b58b93ac8)), closes [#3453](https://github.com/mittwald/flow/issues/3453) [#3455](https://github.com/mittwald/flow/issues/3455) [#3454](https://github.com/mittwald/flow/issues/3454)
+* **design-tokens:** deepen the status soft tones for stronger soft buttons ([5cacc7c](https://github.com/mittwald/flow/commit/5cacc7ca34aa171aee0c3ae586151265c24e2b8e)), closes [#3532](https://github.com/mittwald/flow/issues/3532) [#3532](https://github.com/mittwald/flow/issues/3532)
+* **design-tokens:** define the Semantic color roles ([babbe17](https://github.com/mittwald/flow/commit/babbe177667c999c45c4acdf007ff1f0dfbfcd30)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#666B72](https://github.com/mittwald/flow/issues/666B72) [#3456](https://github.com/mittwald/flow/issues/3456) [#3479](https://github.com/mittwald/flow/issues/3479)
+* **design-tokens:** fold the border and disabled roles into neutral ([af91319](https://github.com/mittwald/flow/commit/af91319d51bd412bb8e34f01f448220917dfb1f4)), closes [#3479](https://github.com/mittwald/flow/issues/3479) [#3455](https://github.com/mittwald/flow/issues/3455)
+* **design-tokens:** lighter dark primary soft surface ([d246b82](https://github.com/mittwald/flow/commit/d246b82a217e7e6929c9acb0ba884edc50c32723))
+* **design-tokens:** lighter dark status surfaces and brighter light status tones ([0101779](https://github.com/mittwald/flow/commit/010177952ef54321ad4be74acf058ac5352ac317)), closes [#3532](https://github.com/mittwald/flow/issues/3532) [#3455](https://github.com/mittwald/flow/issues/3455) [#3550](https://github.com/mittwald/flow/issues/3550)
+* **design-tokens:** lighter light navy decorative surface ([1bd1b2e](https://github.com/mittwald/flow/commit/1bd1b2ea763cabf7df732ea598099141a50641d0)), closes [#3550](https://github.com/mittwald/flow/issues/3550)
+* **design-tokens:** make the decorative tones more colorful and drop the badge border ([4ffff55](https://github.com/mittwald/flow/commit/4ffff551f9b7c434c4abf6015bffe0c2495701d5)), closes [#3507](https://github.com/mittwald/flow/issues/3507) [#3550](https://github.com/mittwald/flow/issues/3550)
+* **design-tokens:** map [#3435](https://github.com/mittwald/flow/issues/3435) color literals onto Semantic roles ([a312c0e](https://github.com/mittwald/flow/commit/a312c0e50614feae9b2a91d9f37ce010105ff422))
+* **design-tokens:** raise corner-radius.l to 24px for the brand ([6a2d8dd](https://github.com/mittwald/flow/commit/6a2d8dd49a66d41826c3b3ee7f1c0a37a1c4d3ff)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+* **design-tokens:** rate single colors on their surfaces and gate contrast in CI ([b4d4e80](https://github.com/mittwald/flow/commit/b4d4e801ab61b7c93189b38979deeec7f6a53d16)), closes [#3454](https://github.com/mittwald/flow/issues/3454) [#3455](https://github.com/mittwald/flow/issues/3455) [#3480](https://github.com/mittwald/flow/issues/3480)
+* **design-tokens:** re-sync the Brand palette with the approved brand colors ([7162daf](https://github.com/mittwald/flow/commit/7162daf09642797328ed13b4d5c5f94ed56c00e2)), closes [#3449](https://github.com/mittwald/flow/issues/3449) [#3539](https://github.com/mittwald/flow/issues/3539) [#3479](https://github.com/mittwald/flow/issues/3479)
+* **design-tokens:** regenerate the neutral ramp and give borders a role ([a3b57ef](https://github.com/mittwald/flow/commit/a3b57ef34b37c3423aca41a726282474dfa68725)), closes [#3539](https://github.com/mittwald/flow/issues/3539) [#3542](https://github.com/mittwald/flow/issues/3542) [#595E64](https://github.com/mittwald/flow/issues/595E64) [#ADB3BC](https://github.com/mittwald/flow/issues/ADB3BC) [#777C84](https://github.com/mittwald/flow/issues/777C84) [#404448](https://github.com/mittwald/flow/issues/404448) [#888D96](https://github.com/mittwald/flow/issues/888D96) [#EBEFF3](https://github.com/mittwald/flow/issues/EBEFF3) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** restructure color tokens into the ADR 0007 tiers ([d516208](https://github.com/mittwald/flow/commit/d51620868528570234ce4f708b6be9820ec9bff3)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#3462](https://github.com/mittwald/flow/issues/3462)
+* **design-tokens:** sender Message on decorative-navy ([9877aef](https://github.com/mittwald/flow/commit/9877aef1fe8a7fa0a89556d8d0734259885509b7)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3564](https://github.com/mittwald/flow/issues/3564)
+* **design-tokens:** take the brand base for the light salmon content tone ([935453d](https://github.com/mittwald/flow/commit/935453d766ec09fe5a96b4b281ffea2553b83d27)), closes [#E7A187](https://github.com/mittwald/flow/issues/E7A187) [#3508](https://github.com/mittwald/flow/issues/3508)
+* **FileCard:** lighter border like the ListItem ([ae83e31](https://github.com/mittwald/flow/commit/ae83e31297de36ff5f8b6fe5c922a6b32488128b)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+* **List:** lighter ListItem border ([184055c](https://github.com/mittwald/flow/commit/184055c57ebc95c1f9dd3e2117b3b8e9b6780924)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+* **Popover:** 16px corner radius ([3262431](https://github.com/mittwald/flow/commit/32624310f96dce2db34e984735ad46a4bad49ca5))
+* **Table:** lighter borders like List and FileCard ([3335bc9](https://github.com/mittwald/flow/commit/3335bc902a387d305e924e21d9598d4aaeacc750)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+
+### Bug Fixes
+
+* **Alert:** keep a boundary in forced-colors mode, drop the border tokens ([956a86a](https://github.com/mittwald/flow/commit/956a86a4b5a26f0b5ac5132db95e084203326801))
+* **design-tokens:** let the skeleton shimmer follow the theme ([461e1e6](https://github.com/mittwald/flow/commit/461e1e6136087ffbcc216007116458ec055cc529))
+* **design-tokens:** lighter dark separators ([f0f383f](https://github.com/mittwald/flow/commit/f0f383f7e0de423329772dea18a3ca36c36e632f)), closes [#404448](https://github.com/mittwald/flow/issues/404448) [#3459](https://github.com/mittwald/flow/issues/3459)
+* **design-tokens:** sweep the skeleton shimmer toward the card surface ([db43130](https://github.com/mittwald/flow/commit/db4313050bcb46e586465d53e836ad2e13580a64)), closes [#1d1e1f](https://github.com/mittwald/flow/issues/1d1e1f)
+
+### Documentation
+
+* **adr:** renumber the color token tiers ADR to 0008 ([91803e0](https://github.com/mittwald/flow/commit/91803e09fec71d7750c1ae1c5621bd2890e25137))
+* **design-tokens:** mark the neutral ramp and brand gradients as approved ([e773c8b](https://github.com/mittwald/flow/commit/e773c8b37354794e3297032bee35c826e145e389)), closes [#3542](https://github.com/mittwald/flow/issues/3542) [#3456](https://github.com/mittwald/flow/issues/3456) [#3508](https://github.com/mittwald/flow/issues/3508) [#3456](https://github.com/mittwald/flow/issues/3456) [#3542](https://github.com/mittwald/flow/issues/3542)
+
+### Miscellaneous Chores
+
+* **design-tokens:** drop history and process notes from color comments ([1cb6a14](https://github.com/mittwald/flow/commit/1cb6a14e539d8f5d85ca3a2821dbce10a14dbedc))
+* **design-tokens:** hand the remaining contrast exceptions to [#3479](https://github.com/mittwald/flow/issues/3479) and [#3456](https://github.com/mittwald/flow/issues/3456) ([8438e22](https://github.com/mittwald/flow/commit/8438e223a4dbebb56e7cbfb38cc482d21ea27d11)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#3455](https://github.com/mittwald/flow/issues/3455)
+
 ## [1.6.0-next.60](https://github.com/mittwald/flow/compare/1.6.0-next.59...1.6.0-next.60) (2026-11-03)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

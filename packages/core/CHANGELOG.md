@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.61](https://github.com/mittwald/flow/compare/1.6.0-next.60...1.6.0-next.61) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
 ## [1.6.0-next.60](https://github.com/mittwald/flow/compare/1.6.0-next.59...1.6.0-next.60) (2026-11-03)
 
 **Note:** Version bump only for package @mittwald/flow-core
