@@ -111,21 +111,6 @@ nearest `AGENTS.md` before working in a package.**
 | `apps/docs`                             | private                                  | User documentation site (Next.js); content in `src/content`, deployed to flow.mittwald.de. |
 | `apps/remote-dom-demo`                  | private                                  | Demo app for remote rendering. Remote-capable components should have a demo here.          |
 
-## Technology stack
-
-- [nx](https://nx.dev/) — task orchestration (`affected`, caching, target deps)
-- [pnpm](https://pnpm.io/) — workspace package manager
-- [lerna-lite](https://github.com/lerna-lite/lerna-lite) — only used for
-  publishing (versioning + changelogs from conventional commits)
-- [Vite](https://vite.dev/) — component build; [vitest](https://vitest.dev/)
-  incl. [browser mode](https://vitest.dev/guide/browser/) (Playwright-backed)
-- [Storybook](https://storybook.js.org/) — component dev environment
-- [react-aria-components](https://react-spectrum.adobe.com/react-aria/components.html)
-  — accessibility foundation
-- [style-dictionary](https://styledictionary.com/) — design token compilation
-- [SCSS modules](https://github.com/css-modules/css-modules) — component styling
-- [jscodeshift](https://github.com/facebook/jscodeshift) — consumer codemods
-
 ## Commands
 
 ```shell
