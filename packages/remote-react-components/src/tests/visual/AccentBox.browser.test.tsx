@@ -21,10 +21,11 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, AccentBox, Section, Heading, Text, Link },
+    components: { ColumnLayout, AccentBox, Section, Heading, Text, Link },
   }) => {
+    // Three columns: ten boxes in one or two columns outgrow the screenshot
     await render(
-      <Flex direction="column" gap="m">
+      <ColumnLayout l={[1, 1, 1]}>
         {backgroundColors.map((backgroundColor) => (
           <AccentBox key={backgroundColor} backgroundColor={backgroundColor}>
             <Section>
@@ -34,7 +35,7 @@ test.each(testEnvironments)(
             </Section>
           </AccentBox>
         ))}
-      </Flex>,
+      </ColumnLayout>,
     );
 
     await testScreenshot("AccentBox colors");

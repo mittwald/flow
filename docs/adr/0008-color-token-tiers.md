@@ -1,4 +1,4 @@
-# ADR 0007 – Color token tiers
+# ADR 0008 – Color token tiers
 
 - **Status:** Accepted
 - **Date:** 2026-10-12

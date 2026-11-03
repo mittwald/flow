@@ -61,7 +61,7 @@ export const Avatar = flowComponent("Avatar", (props) => {
   const isSkeleton = useSkeletonMode();
 
   // `green` keeps the success look it always had until it is removed; its
-  // replacement `sage` is the brand's muted green (#3508).
+  // replacement `sage` is the brand's muted green.
   if (color === "green") {
     warnDeprecation(
       "The color 'green' is deprecated and will be removed in a future release. Use 'sage' instead.",

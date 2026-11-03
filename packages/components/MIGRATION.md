@@ -28,71 +28,18 @@ The CLI's own output does detect it and prints the right form.
 
 ---
 
-<a id="accordion-variant-deprecated"></a>
-
-## Accordion: `variant` deprecated
-
-**Since `1.5.0`** · deprecation · codemod available · also applies to
-`@mittwald/flow-remote-react-components`
-
-The `variant` prop of `Accordion` is deprecated. `variant="outline"` no longer
-draws a frame, and `"default"` was the only other value, so the prop has no
-effect anymore. It is still accepted and logs a deprecation warning; it will be
-removed in a future major version. A codemod removes it.
-
-Stacked accordions that used the outline to look separated get separators from
-the new `AccordionGroup` instead. The group also replaces the gap the
-surrounding layout put between them with a compact block.
-
-```diff
-- <Accordion variant="outline">
--   <Heading>Path parameters</Heading>
--   <Content>…</Content>
-- </Accordion>
-- <Accordion variant="outline">
--   <Heading>Query parameters</Heading>
--   <Content>…</Content>
-- </Accordion>
-+ <AccordionGroup>
-+   <Accordion>
-+     <Heading>Path parameters</Heading>
-+     <Content>…</Content>
-+   </Accordion>
-+   <Accordion>
-+     <Heading>Query parameters</Heading>
-+     <Content>…</Content>
-+   </Accordion>
-+ </AccordionGroup>
-```
-
-There is no codemod for the grouping: whether accordions belong together in one
-group depends on the layout around them, which the source does not tell.
-
-**Apply:** Remove the `variant` prop from every `Accordion` — a codemod does it.
-Then check where `variant="outline"` was used: where several accordions stand
-directly below each other, wrap them in an `AccordionGroup`, which draws
-separators between them; where a single accordion needs to stand apart from the
-surrounding content, place it in a `LayoutCard`. That part is not mechanically
-decidable.
-
-```shell
-npx @mittwald/flow-codemods@latest accordion-variant-deprecated src
-```
-
----
-
 <a id="color-props-brand-palette"></a>
 
 ## Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette
 
-**Since `1.5.0`** · migration · codemod available · also applies to
+**Since `1.6.0`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 The decorative color values now follow the brand palette: one value per mittwald
 brand color, named after how it looks — `blue`, `navy`, `lilac`, `sage` and
-`salmon`, the same list on `Badge`, `Avatar`, `Icon`, `Color` and `AccentBox`
-(`backgroundColor`). `Badge` names its status hues by their meaning: `success`,
-`warning` and `danger`.
+`salmon`, the same list on `Badge`, `Avatar`, `Icon` (and the generated icons,
+`IconCheck` & co.), `Color` and `AccentBox` (`backgroundColor`). `Badge` names
+its status hues by their meaning: `success`, `warning` and `danger`.
 
 ```diff
 - <Badge color="red">Gesperrt</Badge>
@@ -131,18 +78,20 @@ The CSS classes and the design tokens of the deprecated values are renamed or
 removed **without** a fallback — update them by hand if you use
 `@mittwald/flow-stylesheet` or the token CSS variables directly.
 
-**Apply:** On `Badge`, `Avatar`, `Icon` and `Color`, rename `color="violet"` to
-`color="lilac"` and `color="teal"` to `color="sage"`; on `AccentBox`, do the
-same for `backgroundColor`, and rename `backgroundColor="gradient"` to
-`backgroundColor="gradient-navy"` and `backgroundColor="green"` to
-`backgroundColor="sage"`. On `Badge`, also rename `color="green"` to
-`color="success"`, `color="orange"` to `color="warning"` and `color="red"` to
-`color="danger"`. Each replacement renders exactly like the old value.
-`Avatar`'s `color="green"` is deprecated too, but its replacement `sage` is the
-brand's muted gray-green instead of the success mint. Switch to `sage` where the
-avatar's color carries no meaning, and keep `green` (it still renders) only
-until you have decided. `AccentBox`'s `backgroundColor="green"` now renders like
-`sage` instead of the success mint. Content on a colored `AccentBox` now
+**Apply:** On `Badge`, `Avatar`, `Icon` (and the generated icons, `IconCheck` &
+co.) and `Color`, rename `color="violet"` to `color="lilac"` and `color="teal"`
+to `color="sage"`; on `AccentBox`, do the same for `backgroundColor`, and rename
+`backgroundColor="gradient"` to `backgroundColor="gradient-navy"` and
+`backgroundColor="green"` to `backgroundColor="sage"`. An `AccentBox` that still
+sets its background through `color` (`color="gradient"`, `"green"`) gets
+`backgroundColor="gradient-navy"` / `"sage"` instead. On `Badge`, also rename
+`color="green"` to `color="success"`, `color="orange"` to `color="warning"` and
+`color="red"` to `color="danger"`. Each replacement renders exactly like the old
+value. `Avatar`'s `color="green"` is deprecated too, but its replacement `sage`
+is the brand's muted gray-green instead of the success mint. Switch to `sage`
+where the avatar's color carries no meaning, and keep `green` (it still renders)
+only until you have decided. `AccentBox`'s `backgroundColor="green"` now renders
+like `sage` instead of the success mint. Content on a colored `AccentBox` now
 defaults to `color="dark"`; drop an explicit `color="dark"` there if you like.
 If you use `@mittwald/flow-stylesheet` or the token CSS variables directly,
 rename `flow--badge--{violet,teal,green,orange,red}` to
@@ -168,11 +117,11 @@ npx @mittwald/flow-codemods@latest color-props-brand-palette src
 
 ## Color tokens: a new Brand palette that no longer switches with the theme
 
-**Since `1.5.0`** · migration · manual change
+**Since `1.6.0`** · migration · manual change
 
 The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
 (colors with a meaning), **Variant** (pairs per variant) and component tokens
-([ADR 0007](https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md)).
+([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
 Only Semantic switches between light and dark. Brand is theme-neutral: one value
 per token, the light one.
 
@@ -207,8 +156,7 @@ The same applies to `@mittwald/flow-design-tokens/json*/all-*.json` and
 `useDesignTokens()`: `color.categorical` is `categorical.color` now.
 
 **Semantic has named roles.** Semantic no longer mirrors a ramp with 11 or 12
-steps; it selects few tones per role and theme
-([#3455](https://github.com/mittwald/flow/issues/3455)):
+steps; it selects few tones per role and theme:
 
 | Group                                                                                           | Keys                                                                         |
 | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -282,6 +230,59 @@ solid surface `--content--color--inverse`, borders → `--border--color--100`
 orange are `--decorative-sage--` and `--decorative-salmon--color--…`. Which one
 fits is not decidable mechanically — decide whether the color is a surface,
 content or status.
+
+---
+
+<a id="accordion-variant-deprecated"></a>
+
+## Accordion: `variant` deprecated
+
+**Since `1.5.0`** · deprecation · codemod available · also applies to
+`@mittwald/flow-remote-react-components`
+
+The `variant` prop of `Accordion` is deprecated. `variant="outline"` no longer
+draws a frame, and `"default"` was the only other value, so the prop has no
+effect anymore. It is still accepted and logs a deprecation warning; it will be
+removed in a future major version. A codemod removes it.
+
+Stacked accordions that used the outline to look separated get separators from
+the new `AccordionGroup` instead. The group also replaces the gap the
+surrounding layout put between them with a compact block.
+
+```diff
+- <Accordion variant="outline">
+-   <Heading>Path parameters</Heading>
+-   <Content>…</Content>
+- </Accordion>
+- <Accordion variant="outline">
+-   <Heading>Query parameters</Heading>
+-   <Content>…</Content>
+- </Accordion>
++ <AccordionGroup>
++   <Accordion>
++     <Heading>Path parameters</Heading>
++     <Content>…</Content>
++   </Accordion>
++   <Accordion>
++     <Heading>Query parameters</Heading>
++     <Content>…</Content>
++   </Accordion>
++ </AccordionGroup>
+```
+
+There is no codemod for the grouping: whether accordions belong together in one
+group depends on the layout around them, which the source does not tell.
+
+**Apply:** Remove the `variant` prop from every `Accordion` — a codemod does it.
+Then check where `variant="outline"` was used: where several accordions stand
+directly below each other, wrap them in an `AccordionGroup`, which draws
+separators between them; where a single accordion needs to stand apart from the
+surrounding content, place it in a `LayoutCard`. That part is not mechanically
+decidable.
+
+```shell
+npx @mittwald/flow-codemods@latest accordion-variant-deprecated src
+```
 
 ---
 

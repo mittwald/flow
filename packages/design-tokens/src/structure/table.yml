@@ -6,7 +6,7 @@ table:
   border-style:
     value: "{border-style.default}"
   # Groups content like ListItem and FileCard: the separator tone, not the
-  # control border (#3564). The header keeps its 2px line.
+  # control border. The header keeps its 2px line.
   border-color:
     value: "{border.color.200}"
   padding-x:

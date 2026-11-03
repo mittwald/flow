@@ -1,26 +1,29 @@
 ---
-since: 1.5.0
+since: 1.6.0
 title:
   "Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette"
 kind: migration
 action: codemod
 remotePackage: true
 apply:
-  On `Badge`, `Avatar`, `Icon` and `Color`, rename `color="violet"` to
-  `color="lilac"` and `color="teal"` to `color="sage"`; on `AccentBox`, do the
-  same for `backgroundColor`, and rename `backgroundColor="gradient"` to
-  `backgroundColor="gradient-navy"` and `backgroundColor="green"` to
-  `backgroundColor="sage"`. On `Badge`, also rename `color="green"` to
-  `color="success"`, `color="orange"` to `color="warning"` and `color="red"` to
-  `color="danger"`. Each replacement renders exactly like the old value.
-  `Avatar`'s `color="green"` is deprecated too, but its replacement `sage` is
-  the brand's muted gray-green instead of the success mint. Switch to `sage`
-  where the avatar's color carries no meaning, and keep `green` (it still
-  renders) only until you have decided. `AccentBox`'s `backgroundColor="green"`
-  now renders like `sage` instead of the success mint. Content on a colored
-  `AccentBox` now defaults to `color="dark"`; drop an explicit `color="dark"`
-  there if you like. If you use `@mittwald/flow-stylesheet` or the token CSS
-  variables directly, rename `flow--badge--{violet,teal,green,orange,red}` to
+  On `Badge`, `Avatar`, `Icon` (and the generated icons, `IconCheck` & co.) and
+  `Color`, rename `color="violet"` to `color="lilac"` and `color="teal"` to
+  `color="sage"`; on `AccentBox`, do the same for `backgroundColor`, and rename
+  `backgroundColor="gradient"` to `backgroundColor="gradient-navy"` and
+  `backgroundColor="green"` to `backgroundColor="sage"`. An `AccentBox` that
+  still sets its background through `color` (`color="gradient"`, `"green"`) gets
+  `backgroundColor="gradient-navy"` / `"sage"` instead. On `Badge`, also rename
+  `color="green"` to `color="success"`, `color="orange"` to `color="warning"`
+  and `color="red"` to `color="danger"`. Each replacement renders exactly like
+  the old value. `Avatar`'s `color="green"` is deprecated too, but its
+  replacement `sage` is the brand's muted gray-green instead of the success
+  mint. Switch to `sage` where the avatar's color carries no meaning, and keep
+  `green` (it still renders) only until you have decided. `AccentBox`'s
+  `backgroundColor="green"` now renders like `sage` instead of the success mint.
+  Content on a colored `AccentBox` now defaults to `color="dark"`; drop an
+  explicit `color="dark"` there if you like. If you use
+  `@mittwald/flow-stylesheet` or the token CSS variables directly, rename
+  `flow--badge--{violet,teal,green,orange,red}` to
   `flow--badge--{lilac,sage,success,warning,danger}`,
   `--badge--{teal,green,orange,red}-*` to
   `--badge--{sage,success,warning,danger}-*`, `--icon--teal-color` to
@@ -36,9 +39,9 @@ apply:
 
 The decorative color values now follow the brand palette: one value per mittwald
 brand color, named after how it looks — `blue`, `navy`, `lilac`, `sage` and
-`salmon`, the same list on `Badge`, `Avatar`, `Icon`, `Color` and `AccentBox`
-(`backgroundColor`). `Badge` names its status hues by their meaning: `success`,
-`warning` and `danger`.
+`salmon`, the same list on `Badge`, `Avatar`, `Icon` (and the generated icons,
+`IconCheck` & co.), `Color` and `AccentBox` (`backgroundColor`). `Badge` names
+its status hues by their meaning: `success`, `warning` and `danger`.
 
 ```diff
 - <Badge color="red">Gesperrt</Badge>

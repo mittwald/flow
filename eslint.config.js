@@ -186,7 +186,7 @@ export default tseslint.config(
     },
   },
   {
-    // ADR 0007: code reads Semantic or Variant colors, never Brand. Brand is
+    // ADR 0008: code reads Semantic or Variant colors, never Brand. Brand is
     // theme-neutral, so a Brand variable stays light in dark. The groups come
     // from design-tokens/src/color-brand.yml, so a new one is covered.
     files: [

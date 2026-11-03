@@ -31,7 +31,7 @@ list-item:
     pressed:
       value: "{neutral-outline-background-color.pressed}"
   # Groups content, so the lighter separator tone instead of the control
-  # border (#3564)
+  # border.
   border-color:
     value: "{border.color.200}"
   subtitle-font-size:

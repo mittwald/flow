@@ -34,9 +34,9 @@ export const badgeColors = [
 ] as const;
 
 /**
- * Deprecated badge colors and the color each renders as (#3508). The status
- * hues are named by their meaning now, and the brand's green and orange are
- * `sage` and `salmon`.
+ * Deprecated badge colors and the color each renders as. The status hues are
+ * named by their meaning now, and the brand's green and orange are `sage` and
+ * `salmon`.
  */
 const deprecatedBadgeColors = {
   ...deprecatedDecorativeColors,

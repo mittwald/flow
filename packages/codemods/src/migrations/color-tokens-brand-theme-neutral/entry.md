@@ -1,5 +1,5 @@
 ---
-since: 1.5.0
+since: 1.6.0
 title:
   "Color tokens: a new Brand palette that no longer switches with the theme"
 kind: migration
@@ -53,7 +53,7 @@ apply:
 
 The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
 (colors with a meaning), **Variant** (pairs per variant) and component tokens
-([ADR 0007](https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md)).
+([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
 Only Semantic switches between light and dark. Brand is theme-neutral: one value
 per token, the light one.
 
@@ -88,8 +88,7 @@ The same applies to `@mittwald/flow-design-tokens/json*/all-*.json` and
 `useDesignTokens()`: `color.categorical` is `categorical.color` now.
 
 **Semantic has named roles.** Semantic no longer mirrors a ramp with 11 or 12
-steps; it selects few tones per role and theme
-([#3455](https://github.com/mittwald/flow/issues/3455)):
+steps; it selects few tones per role and theme:
 
 | Group                                                                                           | Keys                                                                         |
 | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |

@@ -6,7 +6,7 @@ import { fileHeader, formattedVariables } from "style-dictionary/utils";
 import { propertyFormatNames } from "style-dictionary/enums";
 
 /*
- * Color token tiers (docs/adr/0007-color-token-tiers.md). Every file belongs to
+ * Color token tiers (docs/adr/0008-color-token-tiers.md). Every file belongs to
  * one tier; files outside the four color files count as component tokens.
  */
 const colorTier = (filePath) => {
@@ -34,12 +34,12 @@ const semanticLiteralGroups = [
 ];
 
 /**
- * Brand gradients: `gradient-<name>`, one `color` per theme pointing to Brand
- * (#3456). They have no quiet/strong shape.
+ * Brand gradients: `gradient-<name>`, one `color` per theme pointing to Brand.
+ * They have no quiet/strong shape.
  */
 const isGradientGroup = (group) => group.startsWith("gradient-");
 
-/** The keys each Semantic group holds under `color` (#3455). */
+/** The keys each Semantic group holds under `color`. */
 const steps = ["100", "200", "300"];
 const semanticShapes = {
   default: ["quiet", "strong"].flatMap((tone) =>
@@ -48,7 +48,7 @@ const semanticShapes = {
   elevation: steps,
   border: steps,
   content: [...steps, "inverse"],
-  // Decorative groups add one content tone for Icon and Color (#3508).
+  // Decorative groups add one content tone for Icon and Color.
   decorative: [
     ...["quiet", "strong"].flatMap((tone) =>
       steps.map((step) => `${tone}.${step}`),
@@ -68,7 +68,7 @@ const collectTokens = (node, file, tokenPath = [], collector = []) => {
   return collector;
 };
 
-/** Fails the build on any color reference ADR 0007 forbids. */
+/** Fails the build on any color reference ADR 0008 forbids. */
 const checkColorTiers = () => {
   const tokens = fs
     .globSync("src/**/*.yml")
@@ -119,7 +119,7 @@ const checkColorTiers = () => {
     errors.push(`${key}: defined for only one theme in color-semantic.*.yml`);
   }
 
-  // Semantic roles (#3455): the neutral roles count 100–300, every other
+  // Semantic roles: the neutral roles count 100–300, every other
   // group holds quiet and strong 100–300. A step outside the shape is a new
   // role and needs a decision, not a key.
   const keysByGroup = Map.groupBy(
@@ -148,7 +148,7 @@ const checkColorTiers = () => {
 
   if (errors.length > 0) {
     throw new Error(
-      `Color tier check failed (docs/adr/0007-color-token-tiers.md):\n${errors.join("\n")}`,
+      `Color tier check failed (docs/adr/0008-color-token-tiers.md):\n${errors.join("\n")}`,
     );
   }
 };
@@ -248,7 +248,7 @@ StyleDictionary.registerFormat({
 
 const htmlAttribute = "data-theme";
 
-// Semantic is the only color tier that switches with the theme (ADR 0007);
+// Semantic is the only color tier that switches with the theme (ADR 0008);
 // with the `texture` tokens it is all the per-theme files carry. Every other
 // token is emitted once in `base`.
 const isThemed = (token) =>

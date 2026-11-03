@@ -1,33 +1,31 @@
-# Semantic tier (ADR 0007), dark theme: colors with a meaning. The only
+# Semantic tier (ADR 0008), dark theme: colors with a meaning. The only
 # tier that distinguishes light and dark; references Brand or, where Flow
 # owns the color, holds a literal. Keep the keys in sync with
 # color-semantic.light.yml.
 #
-# Roles (#3455). Every key counts by emphasis, not lightness: 100 is the
-# quietest in both themes.
+# Every key counts by emphasis, not lightness: 100 is the quietest in both
+# themes.
 #
 # Colored and alpha groups have six tones:
 #   quiet.100–300   soft surface, hover, pressed; plain/outline hover, pressed
 #   strong.100–300  solid surface, hover, pressed; strong.100 is also plain
 #                   text and link, strong.200 text on soft/outline
 # Hover and pressed take the next Brand step; light mittwald-blue takes every
-# second step (1000/1200/1400), its dark half is too dense (ΔE 3.5, #3479).
+# second step (1000/1200/1400).
 # strong.100 is the step closest to the Brand base that keeps AA (primary:
-# the base). Dark primary takes one step lighter (400/300/200), so the link
-# keeps AA on neutral hover surfaces (#3479). Its soft surface takes
-# 1600/1500/1400: 1800 vanished into the card (1.01:1); 1500 read too
-# loud next to secondary soft (UX). Decorative groups take their
-# soft surface (quiet.100) from the brand's Background/Brand-100 (Figma
-# "mittwald. Website Library", #3550): navy and salmon 1700; blue 1500, one
-# step lighter, so it stands out from the card; sage and lilac 1700, one
-# step darker, so the link keeps 4.18 instead of 3.30. Decorative pressed
-# (quiet.300) is not held to AA for badge text. content is decorative
-# content on any surface (Icon, Color): the step closest to the Brand base
-# that still reads as the hue, AA not required (#3508).
+# the base).
+# Dark primary takes one step lighter (400/300/200), so the link keeps AA on
+# neutral hover surfaces. Its soft surface takes 1600/1500/1400, so it
+# stands apart from the card. Decorative groups take the brand's background
+# tone as soft surface (quiet.100): navy, salmon, sage and lilac 1700, blue
+# 1500 so it stands out from the card; on sage and lilac the link keeps
+# 4.18. Decorative pressed (quiet.300) is not held to AA for badge text.
+# content is decorative content on any surface (Icon, Color): the step
+# closest to the Brand base that still reads as the hue, AA not required.
 # Selected is a resting state: plain/outline selected takes the soft surface
-# (quiet.100), not pressed. Status groups pick their steps by role (#3454, #3532).
-# Their soft surfaces (quiet.100–300) take 1700/1600/1500: on 1800 Badges
-# and Alerts blended into the card (#3532, mStudio check of #3459).
+# (quiet.100), not pressed. Status groups pick their steps by role. Their
+# soft surfaces (quiet.100–300) take 1700/1600/1500, so Badges and Alerts
+# stand apart from the card.
 #
 # The neutral ramp has three roles of its own (keys 100–300, quiet to strong):
 #   elevation  100 raised (card, modal), 200 ground (page, field, track),
@@ -37,16 +35,15 @@
 #              inverse is content on strong surfaces
 #   border     100 groups (card, overlay), 200 separates (separator, chart
 #              grid), 300 outlines controls: as light as 3:1 on neutral
-#              surfaces and field hover allows (#3539); light misses 3:1
-#              on the colored tints (AccentBox, sender Message)
+#              surfaces and field hover allows; light misses 3:1 on the
+#              colored tints (AccentBox, sender Message)
 # Everything else takes neutral quiet/strong. Disabled takes
 # unavailable.quiet (surface, border, content); unavailable sits as low as
 # AA allows (strong.100 = content.100).
 #
 # Decorative groups: one per mittwald brand color, named like the color
-# props (sage = mittwald-green, salmon = mittwald-orange, #3508). Status
-# colors are not duplicated; components map their color props onto these
-# groups.
+# props (sage = mittwald-green, salmon = mittwald-orange). Status colors are
+# not duplicated; components map their color props onto these groups.
 #
 # Dark takes the contrast steps of light (content) or the role (elevation:
 # the page sits below the card), not the mirrored step.
@@ -364,7 +361,7 @@ light-static:
       300:
         value: "{color.white-alpha.700}"
 
-# Literal values: Flow owns these colors outright (ADR 0007).
+# Literal values: Flow owns these colors outright (ADR 0008).
 transparent:
   color:
     value: transparent
@@ -419,7 +416,7 @@ code-syntax:
     invalid:
       value: "#f97583"
 
-# The brand gradients (#3456), one per decorative color, each pointing to its
+# The brand gradients, one per decorative color, each pointing to its
 # Brand value per theme.
 gradient-navy:
   color:

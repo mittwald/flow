@@ -9,13 +9,14 @@ import type { ConditionalExpression, Transform } from "jscodeshift";
 type ValueNode = ConditionalExpression["consequent"];
 
 /**
- * Renames the deprecated `color` values of `Badge`, `Avatar`, `Icon` and
- * `Color`, and the deprecated `backgroundColor` values of `AccentBox`, to the
- * values that render the same: `violet` → `lilac` and `teal` → `sage`
- * everywhere, on `Badge` also `green` → `success`, `orange` → `warning` and
- * `red` → `danger`, and on `AccentBox` also `gradient` → `gradient-navy` and
- * `green` → `sage`. `Avatar`'s `green` is left alone: its replacement `sage`
- * looks different, so that is a decision, not a rename.
+ * Renames the deprecated `color` values of `Badge`, `Avatar`, `Icon` (and the
+ * generated icons, `IconCheck` & co., which take `Icon`'s props) and `Color`,
+ * and the deprecated `backgroundColor` values of `AccentBox`, to the values
+ * that render the same: `violet` → `lilac` and `teal` → `sage` everywhere, on
+ * `Badge` also `green` → `success`, `orange` → `warning` and `red` → `danger`,
+ * and on `AccentBox` also `gradient` → `gradient-navy` and `green` → `sage`.
+ * `Avatar`'s `green` is left alone: its replacement `sage` looks different, so
+ * that is a decision, not a rename.
  *
  * The scope is deliberately narrow. Only JSX elements that resolve to one of
  * those components — imported (named or as a namespace) from
@@ -27,6 +28,10 @@ type ValueNode = ConditionalExpression["consequent"];
  * `color={"red"}`) or in a value position inside a dynamic one (`color={cond ?
  * "neutral" : "red"}`, `color={override ?? "red"}`). A value the transform
  * cannot see into (`color={someVariable}`) is left alone.
+ *
+ * `AccentBox`'s legacy `color="gradient"`/`"green"` needs no case here:
+ * `accent-box-color-to-background-color` runs first in `upgrade` and moves it
+ * to `backgroundColor`, where this transform renames it.
  */
 const colorPropsBrandPaletteTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
@@ -51,6 +56,14 @@ const colorPropsBrandPaletteTransform: Transform = (fileInfo, { j }) => {
     AccentBox: "backgroundColor",
   };
   const affectedComponents = new Set(Object.keys(renamesByComponent));
+
+  /** The component whose renames apply to an export, if any. */
+  const componentOf = (exported: string): string | undefined =>
+    affectedComponents.has(exported)
+      ? exported
+      : /^Icon[A-Z]/.test(exported)
+        ? "Icon"
+        : undefined;
 
   const isFlowImport = (source: string): boolean =>
     flowPackages.some((pkg) => source === pkg || source.startsWith(`${pkg}/`));
@@ -119,14 +132,15 @@ const colorPropsBrandPaletteTransform: Transform = (fileInfo, { j }) => {
     .filter((path) => isFlowImport(String(path.node.source.value)))
     .forEach((path) => {
       for (const specifier of path.node.specifiers ?? []) {
-        if (
+        const component =
           specifier.type === "ImportSpecifier" &&
-          specifier.imported.type === "Identifier" &&
-          affectedComponents.has(specifier.imported.name)
-        ) {
+          specifier.imported.type === "Identifier"
+            ? componentOf(String(specifier.imported.name))
+            : undefined;
+        if (specifier.type === "ImportSpecifier" && component) {
           localToComponent.set(
             String(specifier.local?.name ?? specifier.imported.name),
-            String(specifier.imported.name),
+            component,
           );
         } else if (
           specifier.type === "ImportNamespaceSpecifier" &&
@@ -151,10 +165,9 @@ const colorPropsBrandPaletteTransform: Transform = (fileInfo, { j }) => {
       name.type === "JSXMemberExpression" &&
       name.object.type === "JSXIdentifier" &&
       name.property.type === "JSXIdentifier" &&
-      flowNamespaces.has(name.object.name) &&
-      affectedComponents.has(name.property.name)
+      flowNamespaces.has(name.object.name)
     ) {
-      component = name.property.name;
+      component = componentOf(name.property.name);
     }
 
     const renames = component && renamesByComponent[component];

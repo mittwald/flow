@@ -303,7 +303,7 @@ if ("action" in props) {
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
 - **Colors come from Semantic or Variant, never Brand**
-  ([ADR 0007](https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md)).
+  ([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
   Brand variables (`--color--mittwald-blue--1000`) are theme-neutral, so they
   stay light in dark. `flow/no-brand-color-variable` rejects them — stylelint in
   stylesheets, ESLint in TS/TSX strings, both in `packages/components` and

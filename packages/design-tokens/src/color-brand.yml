@@ -1,24 +1,18 @@
-# Brand tier (ADR 0007): the palette from the brand handover. Theme-neutral,
+# Brand tier (ADR 0008): the palette from the brand handover. Theme-neutral,
 # literal values only. Components never reference it — Semantic does.
 #
-# Source: Figma "mittwald. Global Tokens", collection Color Primitives, as
-# approved by the brand team (#3449), taken 1:1 (#3453, #3479). Hue ramps have
-# 19 steps with the base color at 1000: 100–900 mix toward
+# Hue ramps have 19 steps with the base color at 1000: 100–900 mix toward
 # mittwald-neutral.300, 1100–1900 toward mittwald-neutral.1800.
-# mittwald-neutral has 19 steps too (#3539, approved by the brand team,
-# #3542): the 12 handed-over values on new numbers (100–400 stay,
-# 500 → 600, 600 → 800, 700 → 1100, 800 → 1400, 900–1200 → 1600–1900) and
-# seven OKLab in-between steps (500, 700, 900, 1000, 1200, 1300, 1500).
-# Status ramps: danger, warning and success (the brand's "Positive") mix
-# 100–900 toward white (#3532); success mixes 1100–1900 toward black.
-# system-info is the brand's Info, still mixed like the hue ramps and close
-# to mittwald-navy, but its own ramp. Alpha ramps: 10–90 % and 100 %.
-# Gradients: one light and one dark value per brand gradient (#3456), named
-# after the decorative colors. Diagonal from the bottom left to the top right,
-# measured from the brand team's assets and adjusted with UX (navy as handed
-# over; sage dark, lilac and salmon mixed with Flow's own drafts; dark text
-# AA against every stop), approved by the brand team (#3542). The grain is not
-# part of the value: components lay `texture.grain` over every gradient.
+# mittwald-neutral has 19 steps too: the 12 handed-over values and seven
+# OKLab in-between steps (500, 700, 900, 1000, 1200, 1300, 1500).
+# Status ramps: danger, warning and success mix 100–900 toward white;
+# success mixes 1100–1900 toward black. system-info is mixed like the hue
+# ramps and close to mittwald-navy, but its own ramp. Alpha ramps: 10–90 %
+# and 100 %.
+# Gradients: one light and one dark value per brand gradient, named after
+# the decorative colors. Diagonal from the bottom left to the top right;
+# dark text keeps AA against every stop. The grain is not part of the
+# value: components lay `texture.grain` over every gradient.
 color:
   mittwald-neutral:
     100:

@@ -1,7 +1,7 @@
 // @ts-check
 /**
  * Known contrast failures the CI gate (`pnpm nx test:contrast tokens`)
- * tolerates. Each group names its cause and the ticket that fixes it. Keys:
+ * tolerates. Each group names its cause and the ratios it accepts. Keys:
  * `<theme> <content> on <background>`; values: the ratio the check may not drop
  * below. The gate fails on a failure missing here, on a listed one that got
  * worse, and on a listed one that passes now — delete those entries.
@@ -14,7 +14,7 @@
 export const ALLOWLIST = [
   {
     reason:
-      "Light: plain status buttons on their own hover/selected/pressed tint (#3454; selected takes the hover tint). `danger`/`warning`/`info.color.800` is Brand 1300, which carries white text on solid (warning 4.79, danger 6.11, info 5.86). Since #3532 the light status soft surfaces sit one Brand step deeper (`quiet.100–300` = 200/300/400) for stronger soft buttons, decided with UX over the AA of these states: danger reaches 4.12 on pressed, warning 3.53–3.91; info 4.24 on pressed (`system-info` still mixes its tints toward #EBEFF3; the brand team keeps it, #3449). A darker 800 would separate danger and warning less (#3454). Since the mStudio check of #3459 `strong.100–300` sit one Brand step lighter for more luminance (info, danger and warning 1200/1400/1500, success 1400/1500/1600), so these states drop to 2.90–3.56.",
+      "Light: plain status buttons on their own hover, selected and pressed tint (selected takes the hover tint). The status soft surfaces sit on Brand 200/300/400 and the `strong` tones one Brand step lighter than AA allows (info, danger and warning 1200/1400/1500, success 1400/1500/1600), so these states reach 2.90–3.56. UX chose stronger soft buttons and luminance over AA for these states.",
     pairs: {
       "light button.danger-plain-content-color.default on button.danger-plain-background-color.pressed": 3.45,
       "light danger-plain-content-color on danger-plain-background-color.pressed": 3.45,
@@ -26,14 +26,14 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Dark: unavailable soft pressed (#3539). The pressed surface is `unavailable.color.quiet.300`, which is also the disabled text tone (`mittwald-neutral.1100`, #666B72); unavailable soft content (`unavailable.color.strong.200`, #C1C7D0) reaches 3.16 on it. Unavailable content is never interactive.",
+      "Dark: unavailable soft pressed. The pressed surface `unavailable.color.quiet.300` is also the disabled text tone (`mittwald-neutral.1100`, #666B72); unavailable soft content (`unavailable.color.strong.200`, #C1C7D0) reaches 3.15 on it. Unavailable content is never interactive.",
     pairs: {
       "dark unavailable-soft-content-color on unavailable-soft-background-color.pressed": 3.15,
     },
   },
   {
     reason:
-      "Light and dark: content on the pressed status tints of Notification. Light: since #3532 the status `quiet.100–300` sit on Brand 200/300/400 (UX chose stronger soft buttons; the tints of all these states follow), so the lowest AA tones (`content.color.100`, `unavailable.color.strong.100`) reach 4.42 on danger pressed. Dark: the status soft surfaces sit on Brand 1700/1600/1500 (success since #3532, info/danger/warning since the mStudio check of #3459), so the link, danger and the lowest AA tones reach 3.55–4.46 on success pressed. UX accepts hover/pressed below AA (#3455).",
+      "Light and dark: content on the pressed status tints of Notification. Light: the status `quiet.100–300` sit on Brand 200/300/400, so the lowest AA tones (`content.color.100`, `unavailable.color.strong.100`) reach 4.42 on danger pressed. Dark: the status soft surfaces sit on Brand 1700/1600/1500, so the link, danger and the lowest AA tones reach 3.55–4.45 on the pressed tints. UX accepts hover/pressed below AA.",
     pairs: {
       "light heading.color-unavailable on notification.danger-background-color.pressed": 4.42,
       "light alert-text.unavailable-color on notification.danger-background-color.pressed": 4.42,
@@ -55,7 +55,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Dark: status soft and plain pressed. UX chose Brand 1700/1600/1500 for `success.color.quiet` so the soft surface separates from the card (#3532; 1800 sat ΔE 4.5 from it, because the brand's Positive ramp mixes its dark half toward black; the brand team keeps that, #3449), and in the mStudio check of #3459 the same for info, danger and warning: on 1800 their Badges and Alerts blended into the card (1.14–1.23:1, now 1.33–1.50:1). Soft text `*.color.strong.200` reaches 4.32–4.45 on pressed (1500), plain text `*.color.strong.100` 4.10–4.38. UX accepts hover/pressed below AA (#3455).",
+      "Dark: status soft and plain pressed. The status soft surfaces sit on Brand 1700/1600/1500, so Badges and Alerts stand apart from the card (1.33–1.50:1). Soft text `*.color.strong.200` reaches 4.32–4.45 on pressed (1500), plain text `*.color.strong.100` 4.10–4.38. UX accepts hover/pressed below AA.",
     pairs: {
       "dark button.success-soft-content-color.default on button.success-soft-background-color.pressed": 4.45,
       "dark success-soft-content-color on success-soft-background-color.pressed": 4.45,
@@ -71,7 +71,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light: the lowest AA tones on the AccentBox tints and the sender Message (#3456). `content.color.100` (placeholder, plain Kbd) and `unavailable.color.strong.100` (unavailable text) sit close to AA on the elevation surfaces, so they miss 4.5:1 on the decorative `quiet.100` tints. Since #3550 the tints take the brand's Background/Brand-100 (blue 300, lilac 400, green 500; navy 300, one step lighter), which UX wants more colorful: 3.28–4.33. Dark passes since #3539 (`content.color.100` = `mittwald-neutral.700`). On colored surfaces Flow recommends the light/dark color variants for content. #3456 set the AccentBox colors.",
+      "Light: the lowest AA tones on the AccentBox tints and the sender Message. `content.color.100` (placeholder, plain Kbd) and `unavailable.color.strong.100` (unavailable text) sit close to AA on the elevation surfaces, so they reach 3.27–4.33 on the decorative `quiet.100` tints (blue 300, lilac 400, sage 500, navy 300). UX wants these tints colorful over AA. Dark passes. On colored surfaces Flow recommends the light/dark color variants for content.",
     pairs: {
       "light heading.color-unavailable on message.background-color-sender": 4.18,
       "light heading.color-unavailable on accent-box.background-color-blue": 3.27,
@@ -101,7 +101,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light and dark: functional content on the more colorful decorative tints (#3550). Since the mStudio check of #3459 the light status `strong` tones sit one Brand step lighter, so status text and the invalid field border lose more here (2.55–4.31). UX took the brand's Background/Brand-100 for the AccentBox and the sender Message (`decorative-*.color.quiet.100`; the sender Message is navy since #3564) over AA for content placed on them: light blue 300 (`#B2B2F0`) leaves the link at 4.18 and status text at 3.64–4.39 (icons, checkbox and spinner pass 3:1 since #3539); light green leaves warning text at 4.18–4.49, light navy 300 status text at 3.74–4.47; dark green and lilac 1700 leave the link at 4.17–4.18 (Brand 1600 would have left 3.30). On colored surfaces Flow recommends the light/dark color variants for content. #3456 set the AccentBox colors.",
+      "Light and dark: functional content on the decorative tints (AccentBox, sender Message). The light status `strong` tones sit one Brand step lighter than AA allows. On light blue 300 (`#B2B2F0`) the link reaches 4.17, status text and the warning icon 2.93–3.67, the invalid field border 2.55; on the other light tints status text reaches 3.61–4.47. Dark sage, salmon and lilac (Brand 1700) leave the link at 4.03–4.18. UX chose the colorful tints over AA for content placed on them. On colored surfaces Flow recommends the light/dark color variants for content.",
     pairs: {
       "light heading.color-danger on accent-box.background-color-blue": 3.67,
       "light link.color.default on accent-box.background-color-blue": 4.17,
@@ -133,7 +133,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Dark: clickable navy and salmon Badge on pressed (#3550, #3508). Decorative navy and salmon keep the brand's Background/Brand-100 (Brand 1700) as soft surface; on pressed (1500) badge text `decorative-*.color.strong.200` (Brand 500) reaches 4.29 (navy) and 3.85 (salmon, new as a Badge color in #3508). UX accepts pressed below AA (#3455); 1600 as surface would have cost the AccentBox link (4.11).",
+      "Dark: clickable navy and salmon Badge on pressed. Navy and salmon keep Brand 1700 as soft surface; on pressed (1500) badge text `decorative-*.color.strong.200` (Brand 500) reaches 4.29 (navy) and 3.85 (salmon). UX accepts pressed below AA; 1600 as surface would cost the AccentBox link (4.11).",
     pairs: {
       "dark badge.navy-content-color on badge.navy-background-color.pressed": 4.29,
       "dark badge.salmon-content-color on badge.salmon-background-color.pressed": 3.85,
@@ -141,7 +141,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Decorative content tone on tints and pressed surfaces (#3508). Icon and Color take `decorative-*.color.content`, the Brand step closest to the base that still reads as the hue: light blue 1000, navy/lilac/sage 1300, salmon 1000 (the base); dark blue 400, navy 1100, lilac/sage/salmon 1000. UX chose the hue over contrast and does not require AA for these colors: they decorate, and on colored surfaces Flow recommends the light/dark color variants for content. Light navy, lilac and sage, and dark navy, miss 3:1 on the AccentBox tints, the sender Message, Notification, Alert and pressed rows (2.05–2.99); on the elevation surfaces they keep 3:1. Light salmon takes the brand base, because darker steps read as brown (UX, #3508): it misses 3:1 on every light surface (1.06–2.13).",
+      "Decorative content tone on tints and pressed surfaces. Icon and Color take `decorative-*.color.content`, the Brand step closest to the base that still reads as the hue: light blue 1000, navy/lilac/sage 1300, salmon 1000 (the base); dark blue 400, navy 1100, lilac/sage/salmon 1000. UX chose the hue over contrast and does not require AA for these colors: they decorate, and on colored surfaces Flow recommends the light/dark color variants for content. Light navy, lilac and sage, and dark navy, miss 3:1 on the AccentBox tints, the sender Message, Notification, Alert and pressed rows (2.05–2.99); on the elevation surfaces they keep 3:1. Light salmon takes the brand base, because darker steps read as brown (UX): it misses 3:1 on every light surface (1.06–2.13).",
     pairs: {
       "light icon.salmon-color on message.background-color-responder": 2,
       "light icon.salmon-color on message.background-color-sender": 1.36,
@@ -236,7 +236,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light: control borders on the colored tints (#3539). `border.color.300` (form fields, slider track; `mittwald-neutral.1000`, #777C84) is as light as UX wants it: 3:1 on every neutral surface (min 3.25) and on field hover (3.41), but 2.10–2.78 on the AccentBox tints and the sender Message, which are more colorful since #3550. UX chose the lighter border over 3:1 there; `mittwald-neutral.1200` would keep 3:1 everywhere. Dark `mittwald-neutral.900` keeps 3:1 on every surface. #3456 set the AccentBox colors.",
+      "Light: control borders on the colored tints. `border.color.300` (form fields, slider track; `mittwald-neutral.1000`, #777C84) keeps 3:1 on every neutral surface (min 3.25) and on field hover (3.41), but reaches 2.10–2.78 on the AccentBox tints and the sender Message. UX chose the lighter border over 3:1 there; `mittwald-neutral.1200` would keep 3:1 everywhere. Dark `mittwald-neutral.900` misses 3:1 only on salmon (next group).",
     pairs: {
       "light form-control.border-color.default on message.background-color-sender": 2.68,
       "light form-control.border-color.default on accent-box.background-color-blue": 2.1,
@@ -260,7 +260,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Dark: control borders on the salmon AccentBox (#3456). `border.color.300` (`mittwald-neutral.900`) reaches 2.94 on `decorative-salmon.color.quiet.100` (`mittwald-orange.1700`), the only dark tint below 3:1. Same UX choice as for the light tints: the lighter border over 3:1 on decorative surfaces.",
+      "Dark: control borders on the salmon AccentBox. `border.color.300` (`mittwald-neutral.900`) reaches 2.94 on `decorative-salmon.color.quiet.100` (`mittwald-orange.1700`), the only dark tint below 3:1. Same UX choice as for the light tints: the lighter border over 3:1 on decorative surfaces.",
     pairs: {
       "dark form-control.border-color.default on accent-box.background-color-salmon": 2.94,
       "dark form-control.border-color.selected on accent-box.background-color-salmon": 2.94,
@@ -269,7 +269,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light: status content on hover, selected and pressed surfaces after the mStudio check of #3459. UX lightened the light status `strong` tones one Brand step for more luminance (info, danger and warning `strong.100–300` = 1200/1400/1500, success 1400/1500/1600). Soft, plain, outline and Badge text and status text on pressed ListItem, Accordion, FileCard and Notification surfaces reach 3.89–4.45. UX accepts hover/pressed below AA (#3455).",
+      "Light: status content on hover, selected and pressed surfaces. The light status `strong` tones sit one Brand step lighter than AA allows, for luminance (info, danger and warning `strong.100–300` = 1200/1400/1500, success 1400/1500/1600). Soft, plain, outline and Badge text, and status text on pressed ListItem, Accordion, FileCard and Notification surfaces, reach 3.89–4.45. UX accepts hover/pressed below AA.",
     pairs: {
       "light button.success-plain-content-color.default on button.success-plain-background-color.hover": 4.23,
       "light button.success-plain-content-color.default on button.success-plain-background-color.pressed": 3.98,
@@ -304,7 +304,7 @@ export const ALLOWLIST = [
   },
   {
     reason:
-      "Light: warning at Brand 1200 in its resting state (mStudio check of #3459). UX chose luminance over AA for orange: `warning.color.strong.100` = Brand 1200 (#D05E33) gives white text on the solid button and warning plain text on white 3.93 (3:1 for large text and UI holds). Orange barely reaches 4.5:1 against white without turning brown, and still reads at lower contrast. Also the deprecated Avatar `green` (`decorative.green`, #3508): its accent text `success.color.strong.100` (Brand 1400) reaches 4.23 on its tint until the color is removed.",
+      "Light: warning at Brand 1200 in its resting state. UX chose luminance over AA for orange: `warning.color.strong.100` = Brand 1200 (#D05E33) gives white text on the solid button and warning plain text on white 3.93 (3:1 for large text and UI holds). Orange barely reaches 4.5:1 against white without turning brown. Also the deprecated Avatar `green` (`decorative.green`): its accent text `success.color.strong.100` (Brand 1400) reaches 4.23 on its tint until the color is removed.",
     pairs: {
       "light warning-solid-content-color on warning-solid-background-color.default": 3.93,
       "light warning-plain-content-color on warning-plain-background-color.default": 3.93,

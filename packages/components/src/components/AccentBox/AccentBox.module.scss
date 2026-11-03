@@ -12,7 +12,7 @@
 
   /* Gradient */
 
-  // The same grain over every gradient, tiled at its own size (#3456).
+  // The same grain over every gradient, tiled at its own size.
   @mixin gradient($name) {
     &.#{$name} {
       background:
