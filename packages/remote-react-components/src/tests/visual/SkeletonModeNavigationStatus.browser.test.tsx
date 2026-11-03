@@ -37,10 +37,6 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <Link href="#">Webshop Relaunch</Link>
             <Link href="#">Domains</Link>
           </Breadcrumb>
-          <Breadcrumb>
-            <Link />
-            <Link />
-          </Breadcrumb>
           <TabNavigation aria-label="Projekt">
             <Link href="#" aria-current="page">
               Übersicht
