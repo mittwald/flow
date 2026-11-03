@@ -13,27 +13,27 @@ export const defaultLightTheme = githubLightInit({
     gutterBorder: "var(--code-editor--gutter-separator-color)",
   },
   styles: [
-    { tag: t.keyword, color: "var(--color--code-syntax--keyword)" },
+    { tag: t.keyword, color: "var(--code-syntax--color--keyword)" },
     {
       tag: [t.typeName, t.className, t.tagName],
-      color: "var(--color--code-syntax--type)",
+      color: "var(--code-syntax--color--type)",
     },
-    { tag: t.variableName, color: "var(--color--code-syntax--variable)" },
+    { tag: t.variableName, color: "var(--code-syntax--color--variable)" },
     {
       tag: [t.propertyName, t.attributeName],
-      color: "var(--color--code-syntax--property)",
+      color: "var(--code-syntax--color--property)",
     },
-    { tag: [t.string, t.regexp], color: "var(--color--code-syntax--string)" },
-    { tag: t.number, color: "var(--color--code-syntax--number)" },
-    { tag: t.comment, color: "var(--color--code-syntax--comment)" },
+    { tag: [t.string, t.regexp], color: "var(--code-syntax--color--string)" },
+    { tag: t.number, color: "var(--code-syntax--color--number)" },
+    { tag: t.comment, color: "var(--code-syntax--color--comment)" },
     {
       tag: [t.function(t.variableName), t.function(t.propertyName)],
-      color: "var(--color--code-syntax--function)",
+      color: "var(--code-syntax--color--function)",
     },
     {
       tag: [t.operator, t.typeOperator],
-      color: "var(--color--code-syntax--operator)",
+      color: "var(--code-syntax--color--operator)",
     },
-    { tag: t.invalid, color: "var(--color--code-syntax--invalid)" },
+    { tag: t.invalid, color: "var(--code-syntax--color--invalid)" },
   ],
 });

@@ -50,7 +50,7 @@ export const DonutChartFill: FC<Props> = (props) => {
 
     const color =
       !s.color || isCategoricalColor(s.color)
-        ? `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`
+        ? `var(--categorical--color--${s.color ?? getCategoricalColorByIndex(i)})`
         : s.color;
 
     // Index keys: a segment added after mount animates alone out of 12 o'clock,

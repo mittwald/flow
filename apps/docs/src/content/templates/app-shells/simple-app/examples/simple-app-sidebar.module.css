@@ -2,7 +2,7 @@
 .shell {
   container-type: inline-size;
   height: 100%;
-  background: var(--texture--grain), var(--color--background-gradient);
+  background: var(--texture--grain), var(--background-gradient--color);
   background-blend-mode: overlay, normal;
 }
 

@@ -72,12 +72,12 @@ export default () => {
                 <Avatar
                   color={
                     domain.type === "Projekt-Domain"
-                      ? "violet"
+                      ? "lilac"
                       : domain.type === "Subdomain"
-                        ? "green"
+                        ? "sage"
                         : domain.type === "Domain"
                           ? "blue"
-                          : "teal"
+                          : "navy"
                   }
                 >
                   {domain.type === "Projekt-Domain" ? (

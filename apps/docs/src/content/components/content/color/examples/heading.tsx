@@ -4,6 +4,6 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Heading>
-  <Color color="violet">mStudio Extension</Color> selber
+  <Color color="lilac">mStudio Extension</Color> selber
   entwickeln
 </Heading>;

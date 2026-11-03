@@ -5,5 +5,5 @@ import { Color } from "@mittwald/flow-react-components";
   <Color color="warning">warning</Color>
   <Color color="info">info</Color>
   <Color color="success">success</Color>
-  <Color color="unavialable">unavialable</Color>
+  <Color color="unavailable">unavailable</Color>
 </>;

@@ -15,6 +15,6 @@ import {
   </Link>
   <Link href="#">
     Backups
-    <Badge color="violet">Neu</Badge>
+    <Badge color="lilac">Neu</Badge>
   </Link>
 </TabNavigation>;
