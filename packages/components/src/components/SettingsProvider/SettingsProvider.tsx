@@ -32,6 +32,7 @@ export const SettingsProvider: FC<Props> = (props) => {
 
   const settingsStore = useMemo(
     () => SettingsStore.fromJson(settings, { middleware, parentStore }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one store per settings id
     [id],
   );
 
@@ -43,6 +44,7 @@ export const SettingsProvider: FC<Props> = (props) => {
     });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- one autorun per settings id
   useEffect(() => autorun(watchAndStoreSettings), [id]);
 
   return <context.Provider value={settingsStore}>{children}</context.Provider>;

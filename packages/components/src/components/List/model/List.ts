@@ -134,9 +134,10 @@ export class List<T = unknown, TMeta = unknown> implements ListModelContext<T> {
     this.emptyView = emptyView;
     this.emptySearchResultView = emptySearchResultView;
 
+    const listFilters = this.filters;
     useEffect(() => {
-      this.filters.forEach((f) => f.deleteUnknownFilterValues());
-    }, [this.filters]);
+      listFilters.forEach((f) => f.deleteUnknownFilterValues());
+    }, [listFilters]);
   }
 
   /*
