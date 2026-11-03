@@ -47,7 +47,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   useLayoutEffect(() => {
     mounted.current = true;
     tunnel.setChildren(id, entryId, ownerId, index, children);
-  }, [children, id, entryId, ownerId, index, providerId]);
+  }, [children, id, entryId, ownerId, index, tunnel]);
 
   useEffect(() => {
     /**
@@ -59,7 +59,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
     return () => {
       tunnel.deleteChildren(id, entryId, ownerId);
     };
-  }, [id, entryId, ownerId, providerId]);
+  }, [id, entryId, ownerId, tunnel]);
 
   return null;
 };
