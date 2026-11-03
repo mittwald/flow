@@ -269,8 +269,10 @@ border:
   color:
     100:
       value: "{color.mittwald-neutral.1600}"
+    # One step above light's ratio (1.70 vs 1.45 on cards): at 1500 the
+    # separators were hard to see on dark surfaces
     200:
-      value: "{color.mittwald-neutral.1500}"
+      value: "{color.mittwald-neutral.1400}"
     300:
       value: "{color.mittwald-neutral.900}"
 
