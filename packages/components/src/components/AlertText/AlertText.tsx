@@ -15,19 +15,19 @@ export interface AlertTextProps
   extends
     PropsWithClassName,
     PropsWithChildren,
-    FlowComponentProps,
+    FlowComponentProps<HTMLSpanElement>,
     PropsWithStatus {}
 
 /** @flr-generate all */
 export const AlertText = flowComponent("AlertText", (props) => {
-  const { className, children, status = "info" } = props;
+  const { className, children, status = "info", ...rest } = props;
 
   const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(styles.alertText, styles[status], className);
 
   return (
-    <span className={rootClassName} inert={isSkeleton || undefined}>
+    <span {...rest} className={rootClassName} inert={isSkeleton || undefined}>
       <PropsContextProvider props={{ Icon: { size: "s" } }}>
         <AlertIcon status={status} className={styles.icon} />
       </PropsContextProvider>

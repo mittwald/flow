@@ -1,4 +1,4 @@
-import type { CSSProperties, FC, PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 import styles from "./Chat.module.scss";
@@ -7,19 +7,23 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
-export interface ChatProps extends PropsWithChildren, PropsWithClassName {
+export interface ChatProps
+  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
   /** The height of the chat. */
   height?: CSSProperties["height"];
 }
 
 /** @flr-generate all */
-export const Chat: FC<ChatProps> = flowComponent(
+export const Chat = flowComponent(
   "Chat",
   (props) => {
-    const { height, className, children } = props;
+    const { height, className, children, ref } = props;
 
     const rootClassName = clsx(styles.chat, className);
 
@@ -48,7 +52,7 @@ export const Chat: FC<ChatProps> = flowComponent(
 
     return (
       <PropsContextProvider props={propsContext}>
-        <div style={{ height }} className={rootClassName}>
+        <div ref={ref} style={{ height }} className={rootClassName}>
           <div className={styles.messageThreadContainer}>
             <UiComponentTunnelExit id="messageThread" component="Chat" />
           </div>

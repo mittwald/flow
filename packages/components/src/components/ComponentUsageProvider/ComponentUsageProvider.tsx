@@ -24,6 +24,7 @@ export interface ComponentUsageProviderProps extends PropsWithChildren {
   onUsage?: ComponentUsageHandler;
 }
 
+/* Plain FC: factory infrastructure. */
 export const ComponentUsageProvider: FC<ComponentUsageProviderProps> = (
   props,
 ) => {
