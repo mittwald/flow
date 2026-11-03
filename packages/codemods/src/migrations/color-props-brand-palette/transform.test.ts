@@ -82,6 +82,46 @@ export const A = ({ flag }: { flag: boolean }) => (
     expect(result).toContain(`color={override ?? "warning"}`);
   });
 
+  /** The generated icons take `Icon`'s props, deprecated colors included. */
+  test("renames the colors of the generated icons", () => {
+    const source = `import { IconCheck, IconStar as Star } from "@mittwald/flow-react-components";
+import * as Flow from "@mittwald/flow-remote-react-components";
+
+export const A = () => (
+  <>
+    <IconCheck color="violet" />
+    <Star color="teal" />
+    <Flow.IconApp color={"violet"} />
+    <IconCheck color="red" />
+  </>
+);
+`;
+
+    expect(runTransform(transform, source))
+      .toBe(`import { IconCheck, IconStar as Star } from "@mittwald/flow-react-components";
+import * as Flow from "@mittwald/flow-remote-react-components";
+
+export const A = () => (
+  <>
+    <IconCheck color="lilac" />
+    <Star color="sage" />
+    <Flow.IconApp color={"lilac"} />
+    <IconCheck color="red" />
+  </>
+);
+`);
+  });
+
+  /** `Iconography` is no icon: the name has to continue in upper case. */
+  test("leaves exports that only start with Icon", () => {
+    const source = `import { Iconography } from "@mittwald/flow-react-components";
+
+export const A = () => <Iconography color="violet" />;
+`;
+
+    expect(runTransform(transform, source)).toBe(source);
+  });
+
   test("leaves same-named components from other packages", () => {
     const source = `import { Badge } from "somewhere-else";
 
