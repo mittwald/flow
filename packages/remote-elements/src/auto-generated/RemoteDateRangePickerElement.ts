@@ -45,6 +45,7 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       shouldForceLeadingZeros: {},
       slot: {},
       startName: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

@@ -14,6 +14,7 @@ export const useSelector = <T>(
     return autorun(() => {
       setSelected(select());
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the caller passes the selector's dependencies
   }, deps);
 
   return selected;

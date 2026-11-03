@@ -16,5 +16,6 @@ export const Slider: FlowRemoteVueComponent<RemoteSliderElementProps> =
       "isReadOnly",
       "showInitialMarker",
       "sliderOnly",
+      "suppressHydrationWarning",
     ],
   });

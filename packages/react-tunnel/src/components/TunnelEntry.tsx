@@ -36,7 +36,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
    */
   const ownerId = useId();
   const entryId = staticEntryId ?? ownerId;
-  const index = tunnel.useEntryIndex();
+  const { index, generation, needsReorder } = tunnel.useEntryIndex(id);
 
   const mounted = useRef(false);
 
@@ -47,7 +47,14 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   useLayoutEffect(() => {
     mounted.current = true;
     tunnel.setChildren(id, entryId, ownerId, index, children);
-  }, [children, id, entryId, ownerId, index, providerId]);
+  }, [children, id, entryId, ownerId, index, tunnel]);
+
+  useLayoutEffect(() => {
+    const isOutOfOrder = tunnel.isCommittedOutOfOrder(id, index, generation);
+    if (needsReorder || isOutOfOrder) {
+      tunnel.reorderEntries(generation);
+    }
+  });
 
   useEffect(() => {
     /**
@@ -59,7 +66,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
     return () => {
       tunnel.deleteChildren(id, entryId, ownerId);
     };
-  }, [id, entryId, ownerId, providerId]);
+  }, [id, entryId, ownerId, tunnel]);
 
   return null;
 };

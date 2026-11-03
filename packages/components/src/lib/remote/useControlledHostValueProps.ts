@@ -46,7 +46,7 @@ export const useControlledHostValueProps = <T, P>(
     if (regularValue !== undefined) {
       setValue(regularValue);
     }
-  }, [valueFromProps]);
+  }, [regularValue]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChange = (v: any) => {

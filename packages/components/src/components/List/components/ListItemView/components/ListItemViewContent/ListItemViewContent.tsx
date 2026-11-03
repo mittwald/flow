@@ -34,6 +34,47 @@ const getStyleForContentSlot = (slot?: string) =>
     ? clsx(styles.bottomContent, itemStyles.bottomContent)
     : styles.topContent;
 
+const contentProps: Record<string, ComponentProps<"div">> = {
+  bottom: {
+    onMouseDown: (e) => e.stopPropagation(),
+    onPointerDown: (e) => e.stopPropagation(),
+  },
+};
+
+const propsContext: PropsContext = {
+  ContextMenu: {
+    placement: "bottom end",
+  },
+  Button: {
+    className: styles.action,
+  },
+  ActionGroup: {
+    className: styles.action,
+  },
+  Content: {
+    className: dynamic((p) => getStyleForContentSlot(p.slot)),
+    onMouseDown: dynamic((p) => contentProps[p.slot ?? "top"]?.onMouseDown),
+    onPointerDown: dynamic((p) => contentProps[p.slot ?? "top"]?.onPointerDown),
+  },
+  Avatar: {
+    className: styles.avatar,
+  },
+  Heading: {
+    className: styles.heading,
+    level: 5,
+    size: "xs",
+    elementType: "span",
+    Badge: { className: styles.badge },
+    AlertBadge: { className: styles.badge },
+  },
+  Text: {
+    className: styles.text,
+  },
+  Link: {
+    unstyled: true,
+  },
+};
+
 /** @flr-generate all */
 export const ListItemViewContent = (props: ListItemViewContentProps) => {
   const {
@@ -49,49 +90,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     m,
     l,
   } = props;
-
-  const contentProps: Record<string, ComponentProps<"div">> = {
-    bottom: {
-      onMouseDown: (e) => e.stopPropagation(),
-      onPointerDown: (e) => e.stopPropagation(),
-    },
-  };
-
-  const propsContext: PropsContext = {
-    ContextMenu: {
-      placement: "bottom end",
-    },
-    Button: {
-      className: styles.action,
-    },
-    ActionGroup: {
-      className: styles.action,
-    },
-    Content: {
-      className: dynamic((p) => getStyleForContentSlot(p.slot)),
-      onMouseDown: dynamic((p) => contentProps[p.slot ?? "top"]?.onMouseDown),
-      onPointerDown: dynamic(
-        (p) => contentProps[p.slot ?? "top"]?.onPointerDown,
-      ),
-    },
-    Avatar: {
-      className: styles.avatar,
-    },
-    Heading: {
-      className: styles.heading,
-      level: 5,
-      size: "xs",
-      elementType: "span",
-      Badge: { className: styles.badge },
-      AlertBadge: { className: styles.badge },
-    },
-    Text: {
-      className: styles.text,
-    },
-    Link: {
-      unstyled: true,
-    },
-  };
 
   const className = clsx(
     styles.view,

@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { expect, test } from "vitest";
 import { Markdown } from "@/components/Markdown";
 
@@ -123,6 +123,31 @@ test("a table is rendered", async () => {
 
   await expect.element(page.getByRole("table")).toBeInTheDocument();
   await expect.element(page.getByText("X-Wing")).toBeVisible();
+});
+
+/*
+ * The screenshot cannot tell scrolling from clipping: the scrollbar only
+ * shows while scrolling.
+ */
+test("a wide table scrolls inside the markdown instead of overflowing it", async () => {
+  await render(
+    <div style={{ inlineSize: 160 }}>
+      <Markdown>
+        {"| Ship | Crew | Role |\n| --- | --- | --- |\n" +
+          "| X-Wing, Y-Wing | Pilot, Astromech | Escort, Bomber |"}
+      </Markdown>
+    </div>,
+  );
+
+  const table = page.getByRole("table");
+  const scrollBox = table.element().parentElement as HTMLElement;
+  const markdown = scrollBox.parentElement as HTMLElement;
+
+  expect(markdown.scrollWidth).toBeLessThanOrEqual(markdown.clientWidth);
+
+  await userEvent.wheel(table, { delta: { x: 100 } });
+
+  await expect.poll(() => scrollBox.scrollLeft).toBeGreaterThan(0);
 });
 
 /*

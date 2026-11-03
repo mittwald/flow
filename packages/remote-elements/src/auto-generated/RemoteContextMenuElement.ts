@@ -49,6 +49,7 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       shouldUpdatePosition: {},
       showSelectAll: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       trigger: {},
       triggerRef: {},

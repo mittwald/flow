@@ -51,6 +51,7 @@ const meta: Meta<{ autoClose: boolean }> = {
           </Notification>,
         );
       }, 2000);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- send the demo notifications once on mount
     }, []);
 
     return <Text>Transmissions incoming...</Text>;

@@ -31,6 +31,7 @@ export class RemoteDonutChartElement extends FlowRemoteElement<RemoteDonutChartE
       size: {},
       slot: {},
       status: {},
+      suppressHydrationWarning: {},
       translate: {},
       value: {},
     };

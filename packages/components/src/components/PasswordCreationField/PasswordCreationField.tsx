@@ -326,9 +326,6 @@ export const PasswordCreationField = flowComponent(
         isRequired={isRequired}
       >
         <FieldErrorCaptureContext>
-          {latestValidationErrorText && (
-            <FieldError>{latestValidationErrorText}</FieldError>
-          )}
           <PropsContextProvider
             props={propsContext}
             dependencies={[
@@ -382,6 +379,11 @@ export const PasswordCreationField = flowComponent(
               </Aria.TextContext.Provider>
             )}
           </PropsContextProvider>
+          {/* After `children`: the field shows the first error in the tree, and
+              a consumer's error wins over the policy's. */}
+          {latestValidationErrorText && (
+            <FieldError>{latestValidationErrorText}</FieldError>
+          )}
         </FieldErrorCaptureContext>
         <FieldErrorView />
       </Aria.TextField>

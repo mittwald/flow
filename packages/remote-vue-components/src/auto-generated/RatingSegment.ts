@@ -15,6 +15,12 @@ export const RatingSegment: FlowRemoteVueComponent<
   RemoteRatingSegmentElement,
   {
     slots: ["iconEmpty", "iconFilled"],
-    booleans: ["autoFocus", "hidden", "inert", "isDisabled"],
+    booleans: [
+      "autoFocus",
+      "hidden",
+      "inert",
+      "isDisabled",
+      "suppressHydrationWarning",
+    ],
   },
 );

@@ -182,6 +182,13 @@ export const Markdown: FC<MarkdownProps> = (props) => {
           <SkeletonInlineContent>{children}</SkeletonInlineContent>
         </li>
       ),
+      /* A table cannot shrink below its content, so the box around it scrolls
+         instead of the table overflowing the markdown. */
+      table: ({ node: ignoredNode, ...props }) => (
+        <div className={styles.tableContainer}>
+          <table {...props} />
+        </div>
+      ),
       th: ({ node: ignoredNode, children, ...props }) => (
         <th {...props}>
           <SkeletonInlineContent>{children}</SkeletonInlineContent>

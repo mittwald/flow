@@ -108,6 +108,9 @@ test.each(environments)(
     );
 
     await page.getByTestId("open").click();
+    // Typed into before the remote Field is wired up, the value never reaches
+    // the remote form, and its required rule blocks the submit.
+    await expect.element(page.getByRole("dialog")).toBeVisible();
     await page.getByLabelText("Username").fill("someone");
     await page.getByTestId("save").click();
 

@@ -12,6 +12,7 @@ const nonResolvingPromise = new Promise<{ default: ComponentType<unknown> }>(
 
 const NonResolvingLazy = lazy(() => nonResolvingPromise);
 
+/* Plain FC: transparent render utility. */
 export const SuspenseTrigger: FC<SuspenseTriggerProps> = (props) => {
   const { show = true } = props;
   return show ? <NonResolvingLazy /> : null;

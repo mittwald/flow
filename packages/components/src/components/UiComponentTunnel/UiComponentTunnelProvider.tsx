@@ -7,6 +7,7 @@ export interface UiComponentTunnelProviderProps extends PropsWithChildren {
   component: FlowComponentName;
 }
 
+/* Plain FC: factory infrastructure. */
 export const UiComponentTunnelProvider: FC<UiComponentTunnelProviderProps> = (
   props,
 ) => {

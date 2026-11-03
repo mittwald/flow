@@ -1,13 +1,12 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
+import { SkeletonComparison } from "@/tests/lib/SkeletonComparison";
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode text (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
+  async ({ testScreenshot, render, components }) => {
+    const {
       SkeletonMode,
       Section,
       Heading,
@@ -20,27 +19,35 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       BigNumber,
       AlertText,
       ColumnLayout,
-    },
-  }) => {
+      Truncate,
+      AlertBadge,
+    } = components;
+
     await render(
-      <SkeletonMode>
+      <SkeletonComparison components={components}>
         <Section>
           <Heading>Projekt „Webshop Relaunch“</Heading>
-          <Heading level={3} />
+          <Heading level={3}>
+            <Truncate>
+              Alle Domains des Projekts „Webshop Relaunch“ werden auf den neuen
+              Server umgezogen, sobald die Zertifikate ausgestellt sind und die
+              DNS-Einträge aktualisiert wurden.
+            </Truncate>
+            <AlertBadge status="warning">Umzug läuft</AlertBadge>
+          </Heading>
           <Text>
             Das Projekt liegt auf dem Server <InlineCode>p-4711</InlineCode> und
             ist unter <Link href="#">webshop.example-domain.de</Link>{" "}
             erreichbar. Die Daten werden jede Nacht gesichert und 30 Tage lang
             aufbewahrt.
           </Text>
-          <Text />
           <ColumnLayout m={[1, 1, 1]}>
             <LabeledValue>
               <Label>Speicherplatz</Label>
               <Content>20 GB</Content>
             </LabeledValue>
             <LabeledValue>
-              <Label />
+              <Label>PHP-Version</Label>
               <Content>8.4</Content>
             </LabeledValue>
             <BigNumber>
@@ -52,8 +59,14 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
           <SkeletonMode isEnabled={false}>
             <Text>Dieser Text ist bereits geladen.</Text>
           </SkeletonMode>
+          <Heading level={3} />
+          <Text />
+          <LabeledValue>
+            <Label />
+            <Content>8.4</Content>
+          </LabeledValue>
         </Section>
-      </SkeletonMode>,
+      </SkeletonComparison>,
     );
 
     await testScreenshot("SkeletonMode text");

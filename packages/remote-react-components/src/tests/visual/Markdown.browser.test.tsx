@@ -84,3 +84,26 @@ test.each(testEnvironments)(
     await testScreenshot("Markdown split ordered list");
   },
 );
+
+test.each(testEnvironments)(
+  "Markdown wide table (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Markdown, ColumnLayout },
+  }) => {
+    /* A narrow column, like the AIssistant drawer. */
+    await render(
+      <ColumnLayout s={[1, 4]} m={[1, 4]} l={[1, 4]}>
+        <Markdown>
+          {"| Type | Version | Usage |\n" +
+            "| --- | --- | --- |\n" +
+            "| CMS | 6.4 | WordPress, Shopware, TYPO3 |\n" +
+            "| Shop | 6.5 | Shopware, Magento |\n"}
+        </Markdown>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("Markdown wide table");
+  },
+);

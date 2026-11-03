@@ -3,8 +3,10 @@
   isolation: isolate;
   display: flex;
   flex-direction: column;
+  gap: var(--list-item--padding);
   height: 100%;
-  border-radius: var(--corner-radius--l);
+  overflow: hidden;
+  border-radius: var(--list-item--corner-radius);
   border-color: var(--list-item--border-color);
   border-width: var(--list-item--border-width);
   border-style: var(--list-item--border-style);
@@ -19,20 +21,19 @@
   padding: var(--size-px--m);
   background: var(--neutral--color--200);
   border-bottom: var(--list-item--border-width) var(--list-item--border-style) var(--list-item--border-color);
-  border-start-start-radius: var(--corner-radius--l);
-  border-start-end-radius: var(--corner-radius--l);
 }
 
 .content {
   display: flex;
   flex-direction: column;
   gap: var(--size-px--xs);
-  padding: var(--size-px--m);
+  padding-inline: var(--list-item--padding);
+  padding-bottom: var(--list-item--padding);
 }
 
 .badge {
   position: absolute;
   z-index: 1;
-  top: var(--size-px--s);
-  inset-inline-end: var(--size-px--s);
+  top: var(--list-item--padding);
+  inset-inline-end: var(--list-item--padding);
 }

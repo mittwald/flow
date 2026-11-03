@@ -1,4 +1,7 @@
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import styles from "@/components/LightBox/components/LightBoxGallery/LightBoxGallery.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { IconClose } from "@/components/Icon/components/icons";
@@ -10,7 +13,9 @@ import type { PropsWithChildren } from "react";
 import { LightBoxZoom } from "@/components/LightBox/components/LightBoxZoom";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
-export interface LightBoxGalleryItemProps extends PropsWithChildren {
+/* Renders no element of its own, so there is no ref to expose. */
+export interface LightBoxGalleryItemProps
+  extends PropsWithChildren, Omit<FlowComponentProps, "ref"> {
   /**
    * @internal Set by the `withZoom` of the surrounding `LightBox`: whether the
    * item's content can be zoomed.

@@ -1,4 +1,6 @@
-import type { FC } from "react";
+import type { FC, ReactElement } from "react";
+import { useRef } from "react";
+import { isShallowEqual } from "remeda";
 import { useList } from "@/components/List";
 import styles from "./Table.module.scss";
 import clsx from "clsx";
@@ -10,9 +12,17 @@ import { TableBodyLoadingView } from "@/components/List/components/Table/compone
 import { useInfiniteScrollTrigger } from "@/components/List/hooks/useInfiniteScrollTrigger";
 import { useLatestOnAction } from "@/components/List/hooks/useLatestOnAction";
 import { Row } from "@/components/List/components/Table/components/Row";
+import type { Table as TableModel } from "@/components/List/model/table/Table";
+
+interface LastRender {
+  inputs: unknown[];
+  table: TableModel<never>;
+  element: ReactElement;
+}
 
 export const Table: FC = () => {
   const list = useList();
+  const lastRender = useRef<LastRender | null>(null);
   const table = list.table;
   const listIsEmpty = list.useIsEmpty();
 
@@ -33,6 +43,30 @@ export const Table: FC = () => {
     table.componentProps.className,
   );
 
+  /*
+   * react-aria re-renders every row and cell whenever its table renders, its
+   * row memo or not (adobe/react-spectrum#10759). While nothing the table
+   * shows has changed, it gets the element of the last render, so it does not
+   * render at all.
+   */
+  const inputs = [
+    tableClassName,
+    isInitiallyLoading,
+    isLoading,
+    onAction,
+    triggerIndex,
+    triggerRef,
+    ...list.items.entries.flatMap((item) => [item.id, item.data]),
+  ];
+  const last = lastRender.current;
+  if (
+    last &&
+    isShallowEqual(last.inputs, inputs) &&
+    table.rendersSameAs(last.table)
+  ) {
+    return last.element;
+  }
+
   const rows = list.items.entries.map((item, index) => (
     <Row
       key={item.id}
@@ -44,7 +78,7 @@ export const Table: FC = () => {
     />
   ));
 
-  return (
+  const element = (
     <TableView
       {...list.componentProps}
       {...table.componentProps}
@@ -62,4 +96,6 @@ export const Table: FC = () => {
       </TableBodyView>
     </TableView>
   );
+  lastRender.current = { inputs, table, element };
+  return element;
 };

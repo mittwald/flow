@@ -34,6 +34,7 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
       routerOptions: {},
       selectionVariant: {},
       shouldCloseOnSelect: {},
+      suppressHydrationWarning: {},
       target: {},
       textValue: {},
       translate: {},

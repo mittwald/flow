@@ -35,6 +35,41 @@
     }
   }
 
+  /* A truncated title keeps the tunnelled content on its line while both fit.
+     Otherwise the content wraps below and the title truncates on a line of its
+     own. In SkeletonMode the bar's outer span is the flex item and clips the
+     bar. */
+  &:has(> .headingText > :global(.flow--truncate)),
+  &:has(
+    > .headingText
+      > *
+      > :global(.flow--skeleton-mode--skeleton-text-content)
+      > :global(.flow--truncate)
+  ) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    .headingText {
+      display: flex;
+      min-width: 0;
+
+      > :has(> :global(.flow--skeleton-mode--skeleton-text-content)) {
+        min-width: 0;
+        overflow: hidden;
+      }
+    }
+
+    .icon {
+      flex-shrink: 0;
+    }
+
+    .headingContent {
+      flex-shrink: 0;
+      max-width: 100%;
+    }
+  }
+
   .headingTextSpacer {
     margin-inline-end: var(--heading--icon-to-text-spacing);
   }
