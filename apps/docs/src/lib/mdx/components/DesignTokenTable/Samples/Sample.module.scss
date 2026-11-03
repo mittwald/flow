@@ -27,8 +27,8 @@
   &:where(.padding) {
     background: repeating-linear-gradient(
       45deg,
-      white,
-      white 10px,
+      var(--elevation--color--100),
+      var(--elevation--color--100) 10px,
       var(--decorative-lilac--color--strong--100) 5px,
       var(--decorative-lilac--color--strong--100) 15px
     );
@@ -38,8 +38,8 @@
   &:where(.margin) {
     background: repeating-linear-gradient(
       45deg,
-      white,
-      white 10px,
+      var(--elevation--color--100),
+      var(--elevation--color--100) 10px,
       var(--decorative-sage--color--strong--100) 5px,
       var(--decorative-sage--color--strong--100) 15px
     );
@@ -48,7 +48,7 @@
 }
 
 .content {
-  background-color: white;
+  background-color: var(--elevation--color--100);
   padding: 25px 20px;
   border: 1px solid;
   border-radius: 4px;

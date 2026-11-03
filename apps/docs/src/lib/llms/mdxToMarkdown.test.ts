@@ -126,6 +126,15 @@ test("expands a DesignTokenTable to token names and values", () => {
   );
 });
 
+test("expands a theme-dependent DesignTokenTable to a column per theme", () => {
+  const markdown = convert('<DesignTokenTable path="elevation.color" />\n');
+
+  expect(markdown).toContain("| Token | Light | Dark |");
+  expect(markdown).toMatch(
+    /\| `--elevation--color--100` \| `#ffffff` \| `#\w+` \|/,
+  );
+});
+
 test("drops a DesignTokenTable with an unknown path", () => {
   expect(convert('<DesignTokenTable path="color.nope" />\n')).toBe("\n");
 });
