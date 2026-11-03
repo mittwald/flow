@@ -13,7 +13,11 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  contentColored,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { SectionHeadingReset } from "@/components/Section/context";
 import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
 import { styleClassname } from "@/lib/scss/selectors";
@@ -158,11 +162,15 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const contentColor = color === "default" ? undefined : color;
 
+  const contentColorProps = contentColor ? contentColored(contentColor) : {};
+
   const propsContext: PropsContext = {
+    ...contentColorProps,
     Link: {
       color: contentColor,
     },
     Text: {
+      ...contentColorProps.Text,
       color: contentColor,
     },
     Heading: {

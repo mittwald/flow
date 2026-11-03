@@ -43,6 +43,8 @@ test.each(testEnvironments)(
       Button,
       ActionGroup,
       InlineCode,
+      Badge,
+      CopyButton,
     },
   }) => {
     await render(
@@ -51,6 +53,8 @@ test.each(testEnvironments)(
         <Content>
           <Text>Text</Text>
           <InlineCode>InlineCode</InlineCode>
+          <Badge>Badge</Badge>
+          <CopyButton text="InlineCode" />
           <Link>Link</Link>
           <Button>Button</Button>
           <ActionGroup>

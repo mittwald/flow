@@ -3,3 +3,4 @@ export { propsContext } from "./propsContext";
 export { PropsContextProvider } from "./components/PropsContextProvider";
 export type { PropsContext } from "./types";
 export { overlayTriggersTunneledTo } from "./overlayTriggerTunnel";
+export { contentColored } from "./contentColor";

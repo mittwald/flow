@@ -2,7 +2,11 @@ import { AlertIcon } from "@/components/AlertIcon";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import {
+  contentColored,
+  dynamic,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
@@ -29,13 +33,10 @@ export const Alert = flowComponent("Alert", (props) => {
     className,
   );
 
-  const inlineCodeProps = { color: "dark" } as const;
+  const contentColorProps = contentColored("dark");
 
   const propsContext: PropsContext = {
-    InlineCode: inlineCodeProps,
-    Text: {
-      InlineCode: inlineCodeProps,
-    },
+    ...contentColorProps,
     Heading: {
       className: styles.heading,
       level: 3,
@@ -48,17 +49,15 @@ export const Alert = flowComponent("Alert", (props) => {
       )),
     },
     Content: {
+      ...contentColorProps,
       className: styles.content,
       Button: {
+        ...contentColorProps.Button,
         size: "s",
       },
       ActionGroup: {
         preserveOrder: true,
         size: "s",
-      },
-      InlineCode: inlineCodeProps,
-      Text: {
-        InlineCode: inlineCodeProps,
       },
     },
   };
