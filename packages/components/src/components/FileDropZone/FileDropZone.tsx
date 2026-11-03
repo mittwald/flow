@@ -114,7 +114,7 @@ export const FileDropZone = flowComponent("FileDropZone", (props) => {
     <div className={wrapperProps.className} inert={isSkeleton || undefined}>
       <PropsContextProvider
         props={propsContext}
-        dependencies={[controlProps["aria-describedby"]]}
+        dependencies={[controlProps["aria-describedby"], fileFieldRef]}
       >
         <Aria.DropZone
           className={rootClassName}
