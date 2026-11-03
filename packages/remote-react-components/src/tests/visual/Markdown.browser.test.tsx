@@ -10,6 +10,17 @@ import {
 
 const colors = ["default", ...alphaColors] as const;
 
+/* Only what the color changes: code blocks, tables and images keep their own
+   look and are in "Markdown elements". */
+const colorContent =
+  "## Heading 2\n" +
+  "**Bold**, `inline code` and a [link](https://example.com).\n\n" +
+  "> May the Force be with you.\n\n" +
+  "- [x] Steal the plans\n" +
+  "- [ ] Destroy the Death Star\n\n" +
+  "* X-Wing\n* Y-Wing\n\n" +
+  "1. Approach the trench\n2. Fire on the exhaust port";
+
 test.each(testEnvironments)(
   "Markdown colors (%s)",
   async ({
@@ -18,33 +29,50 @@ test.each(testEnvironments)(
     components: { Markdown, ColumnLayout, Wrap, AccentBox },
   }) => {
     await render(
-      <ColumnLayout s={[1, 1, 1, 1, 1]} gap="s">
+      <ColumnLayout s={[1, 1, 1]} gap="s">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
-              <Markdown color={color}>
-                {"## Heading 2\n" +
-                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck  \n`a decisive blow` against the [Galactic Empire](https://example.com).\n\n" +
-                  "- [x] Steal the plans\n" +
-                  "- [ ] Destroy the Death Star\n\n" +
-                  "```json\n" +
-                  '{ "name": "DS-1" }\n' +
-                  "```\n\n" +
-                  "| Pilot | Squadron |\n" +
-                  "|-------|----------|\n" +
-                  "| Luke  | Red Five |\n" +
-                  "| Wedge | Red Two  |\n\n" +
-                  `![mittwald](${logo})`}
-              </Markdown>
+              <Markdown color={color}>{colorContent}</Markdown>
             </AccentBox>
           </Wrap>
         ))}
       </ColumnLayout>,
     );
 
-    await waitForHighlightedCode(colors.length);
-
     await testScreenshot("Markdown colors");
+  },
+);
+
+test.each(testEnvironments)(
+  "Markdown elements (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Markdown, ColumnLayout },
+  }) => {
+    await render(
+      <ColumnLayout s={[1, 1]} gap="l">
+        <Markdown>
+          {"A long time ago in a galaxy far, far away the Rebel Alliance struck  \n" +
+            "a decisive blow against the Empire.\n\n" +
+            "- [x] Steal the plans\n" +
+            "- [ ] Destroy the Death Star\n\n" +
+            "```json\n" +
+            '{ "name": "DS-1" }\n' +
+            "```\n\n" +
+            "| Pilot | Squadron |\n" +
+            "|-------|----------|\n" +
+            "| Luke  | Red Five |\n" +
+            "| Wedge | Red Two  |\n"}
+        </Markdown>
+        <Markdown>{`![mittwald](${logo})`}</Markdown>
+      </ColumnLayout>,
+    );
+
+    await waitForHighlightedCode(1);
+
+    await testScreenshot("Markdown elements");
   },
 );
 
