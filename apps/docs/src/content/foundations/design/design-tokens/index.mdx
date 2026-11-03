@@ -101,12 +101,12 @@ Alerts in allen States gleich bleibt.
 Tokens bauen in Ebenen aufeinander auf. Jede Ebene hat eine Aufgabe und darf nur
 bestimmte Ebenen referenzieren. Für Farben gibt es vier Ebenen:
 
-| Ebene     | Aufgabe                         | Light und Dark     | Darf referenzieren                  |
-| --------- | ------------------------------- | ------------------ | ----------------------------------- |
-| Brand     | Palette der Marke mittwald      | ein Wert für beide | keine Tokens, nur feste Werte       |
-| Semantic  | Farben mit einer Bedeutung      | ein Wert je Theme  | Brand; feste Werte nur in Ausnahmen |
-| Variant   | Farbpaare je Variante           | folgt Semantic     | Semantic                            |
-| Component | Entscheidungen einer Komponente | folgt Semantic     | Variant oder Semantic, nie Brand    |
+| Ebene     | Aufgabe                         | Darf referenzieren                  |
+| --------- | ------------------------------- | ----------------------------------- |
+| Brand     | Palette der Marke mittwald      | keine Tokens, nur feste Werte       |
+| Semantic  | Farben mit einer Bedeutung      | Brand; feste Werte nur in Ausnahmen |
+| Variant   | Farbpaare je Variante           | Semantic                            |
+| Component | Entscheidungen einer Komponente | Variant oder Semantic, nie Brand    |
 
 Der Build der Design Tokens (`build-tokens.js`) setzt diese Regeln durch. Er
 bricht ab, sobald ein Token eine Ebene referenziert, die ihm nicht erlaubt ist.

@@ -20,10 +20,6 @@ die Seite [Design Tokens](/foundations/design/design-tokens#token-ebenen).
 - **Variant** kombiniert Semantic Colors zu Paaren für die Varianten Solid,
   Soft, Plain und Outline.
 
-Die Tabellen dieser Seite zeigen die Semantic Colors mit ihrem Wert in Light und
-Dark. Die [Brand Colors](#brand-color) am Ende der Seite zeigen die Palette, aus
-der sie gewählt sind.
-
 ## Quiet und Strong
 
 Farbige Gruppen haben sechs Töne. Jeder Ton zählt nach Betonung: `100` ist in
@@ -37,24 +33,6 @@ beiden Themes der ruhigste.
 
 ---
 
-# Best Practices
-
-- Nutze die Color Props der Komponenten, z. B. `color` am
-  [Badge](/components/status/badge) oder `backgroundColor` an der
-  [AccentBox](/components/structure/accent-box). Die Komponenten wählen dann die
-  passenden Farben für Light und Dark.
-- Greife für eigene Elemente auf Semantic oder Variant Tokens zurück, nicht auf
-  Brand Tokens. Nur sie passen ihren Wert an das Theme an.
-- Setze Status Colors für Zustände ein und Decorative Colors für Dekoration. So
-  bleibt die Bedeutung eines Status eindeutig.
-- Verwende auf farbigen Flächen die
-  [Light und Dark Colors](#light-und-dark-color) für Inhalte. Sie sind auf
-  wechselnde Hintergründe ausgelegt.
-- Prüfe den Kontrast, wenn du Farben selbst kombinierst. Flow prüft die
-  Kontraste innerhalb seiner Komponenten, nicht in eigenen Kombinationen.
-
----
-
 # Neutral Color
 
 Neutral Colors prägen den Großteil der Oberfläche. Flow teilt sie nach ihrem
@@ -65,15 +43,14 @@ gibt es die Gruppe Neutral.
 
 Elevation Colors sind Flächen, auf denen Inhalte liegen.
 
-- `100` für erhöhte Flächen wie [LayoutCard](/components/structure/layout-card)
-  und [Modal](/components/overlays/modal), außerdem für Elemente, die zu einer
-  Fläche passen müssen, z. B. der Knopf eines
-  [Switch](/components/form-controls/switch)
-- `200` für den Seitenhintergrund, Formularfelder und Tracks
+- `100` für Flächen, die über dem Seitenhintergrund liegen, und für Elemente,
+  die farblich zu einer solchen Fläche passen müssen
+- `200` für den Seitenhintergrund und für Flächen, die sich von einer erhöhten
+  Fläche abheben
 - `300` für eingelassene Flächen
 
-In beiden Themes liegt die Seite unter der Karte. Darum ist `100` auch in Dark
-heller als `200`.
+In beiden Themes liegt der Seitenhintergrund unter den erhöhten Flächen. Darum
+ist `100` auch in Dark heller als `200`.
 
 <DesignTokenTable path="elevation.color" />
 
@@ -81,30 +58,25 @@ heller als `200`.
 
 Content Colors sind für Text und Icons auf neutralen Flächen.
 
-- `100` für sekundäre Inhalte wie Icons und Platzhalter
+- `100` für unterstützende Inhalte mit geringer Betonung
 - `200` für Labels
 - `300` für Text
-- `inverse` für Inhalte auf Strong-Flächen, z. B. im Solid
-  [Button](/components/actions/button)
+- `inverse` für Inhalte auf Strong-Flächen
 
 <DesignTokenTable path="content.color" />
 
 ## Border
 
-- `100` rahmt Flächen wie [LayoutCard](/components/structure/layout-card),
-  [Modal](/components/overlays/modal) und Popover.
-- `200` gruppiert Inhalte, z. B. in
-  [Separator](/components/structure/separator), ListItem,
-  [FileCard](/components/upload/file-card) und
-  [Table](/components/structure/table).
-- `300` umrandet Steuerelemente wie Formularfelder. Sie erreicht auf neutralen
-  Flächen einen Kontrast von mindestens 3:1.
+- `100` rahmt erhöhte Flächen.
+- `200` trennt und gruppiert Inhalte innerhalb einer Fläche.
+- `300` umrandet Steuerelemente. Sie erreicht auf neutralen Flächen einen
+  Kontrast von mindestens 3:1.
 
 <DesignTokenTable path="border.color" />
 
 ## Neutral
 
-Neutral deckt neutrale Varianten ab, z. B. den Button mit `color="secondary"`.
+Neutral ist für Varianten ohne farbliche Bedeutung, etwa für sekundäre Aktionen.
 
 <DesignTokenTable path="neutral.color" />
 
@@ -186,9 +158,6 @@ darum die [Light und Dark Colors](#light-und-dark-color).
 
 ## Navy
 
-Navy ist außerdem die Farbe des [Avatar](/components/content/avatar) ohne Bild
-und der eigenen Nachricht in [Message](/components/chat/message).
-
 <DesignTokenTable path="decorative-navy.color" />
 
 ## Lilac
@@ -225,9 +194,8 @@ Light und Dark Colors wurden speziell für den Einsatz auf farbigen Hintergründ
 oder Bildern entwickelt. Sie basieren auf transparentem Weiß und Schwarz und
 haben wie die farbigen Gruppen je drei Quiet- und drei Strong-Töne. Da die
 Farben auf Transparenzen basieren, prüfe den Kontrast zur jeweiligen
-Hintergrundfarbe selbst. Aus diesem Grund stehen sie nur in definierten
-Komponenten zur Verfügung, beispielsweise im
-[Button](/components/actions/button).
+Hintergrundfarbe selbst. Aus diesem Grund stehen sie nur in ausgewählten
+Komponenten zur Verfügung.
 
 Die Verwendung orientiert sich am HSL-Farbmodell. HSL steht für Hue, Saturation
 und Lightness. Für die Auswahl von Light oder Dark ist ausschließlich der
@@ -285,82 +253,3 @@ ab. Setze sie darum nur für Datenvisualisierung ein, nicht für dekorative Zwec
 oder andere UI-Elemente.
 
 <DesignTokenTable path="categorical.color" />
-
----
-
-# Brand Color
-
-Brand Colors sind die Palette der Marke mittwald, wie sie das Brand-Team
-übergibt. Sie haben in Light und Dark denselben Wert und sind die Grundlage, aus
-der die Semantic Colors gewählt sind. Nutze im Code die Semantic Colors; die
-Palette zeigt, aus welchen Tönen sie stammen.
-
-Marken- und Systemfarben haben je 19 Abstufungen von hell (`100`) bis dunkel
-(`1900`). Bei den farbigen Paletten liegt die Grundfarbe bei `1000`.
-
-## Markenfarben
-
-### mittwald Neutral
-
-<DesignTokenTable path="color.mittwald-neutral" />
-
-### mittwald Blue
-
-<DesignTokenTable path="color.mittwald-blue" />
-
-### mittwald Navy
-
-<DesignTokenTable path="color.mittwald-navy" />
-
-### mittwald Green
-
-<DesignTokenTable path="color.mittwald-green" />
-
-### mittwald Lilac
-
-<DesignTokenTable path="color.mittwald-lilac" />
-
-### mittwald Orange
-
-<DesignTokenTable path="color.mittwald-orange" />
-
-## Systemfarben
-
-Die Systemfarben sind die Grundlage der [Status Colors](#status-color).
-
-### System Info
-
-<DesignTokenTable path="color.system-info" />
-
-### System Success
-
-<DesignTokenTable path="color.system-success" />
-
-### System Warning
-
-<DesignTokenTable path="color.system-warning" />
-
-### System Danger
-
-<DesignTokenTable path="color.system-danger" />
-
-## Transparenzen
-
-Transparentes Weiß und Schwarz in zehn Stufen von 10 bis 100 % Deckkraft. Sie
-sind die Grundlage der [Light und Dark Colors](#light-und-dark-color).
-
-### White Alpha
-
-<DesignTokenTable path="color.white-alpha" />
-
-### Black Alpha
-
-<DesignTokenTable path="color.black-alpha" />
-
-## Farbverläufe
-
-Jeder Farbverlauf hat einen Wert für helle und einen für dunkle Oberflächen. Die
-Semantic Colors der [Gradients](#decorative-color-gradient) wählen daraus je
-Theme.
-
-<DesignTokenTable path="color.mittwald-gradient" />
