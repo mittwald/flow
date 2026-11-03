@@ -60,7 +60,10 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
   `--browser.name=<one>` only verifies one theme.
 - Update visual snapshots: `pnpm nx test:visual:update remote-react-components`.
   Updating everything takes long — for a single component use
-  `pnpm nx test:visual:update remote-react-components MyNewComponent`.
+  `pnpm nx test:visual:update remote-react-components MyNewComponent`. **Don't
+  pass `--browser.name` when updating** — the webkit-only examples elsewhere are
+  for running tests, and a filtered update leaves the other theme's baseline
+  stale. Firefox runs locally on macOS too.
 - **The `Remote` environment resolves the built `dist` of the remote packages,
   not their source.** After changing a component's `@flr-generate` props (which
   regenerates `src/auto-generated/**`), rebuild the remote chain before running
