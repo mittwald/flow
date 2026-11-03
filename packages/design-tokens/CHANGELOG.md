@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+## [1.5.54](https://github.com/mittwald/flow/compare/1.5.53...1.5.54) (2026-11-02)
+
+### Bug Fixes
+
+* **components:** read hard-coded styling values from design tokens ([#3435](https://github.com/mittwald/flow/issues/3435)) ([1e0433d](https://github.com/mittwald/flow/commit/1e0433d6000f0f08ef2ef6d423409099c0da3430))
+
 ## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
