@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
+
+### Bug Fixes
+
+* **Markdown:** scroll wide tables instead of overflowing the container ([#3614](https://github.com/mittwald/flow/issues/3614)) ([6b9b617](https://github.com/mittwald/flow/commit/6b9b6173a1c8f4235dbb072dcb2ece1d363bea28))
+
 ## [1.5.54](https://github.com/mittwald/flow/compare/1.5.53...1.5.54) (2026-11-02)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
