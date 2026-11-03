@@ -9,6 +9,7 @@ import { SkeletonIconSurface } from "@/components/SkeletonMode/components/Skelet
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { mergeRefs } from "@react-aria/utils";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { useMemo } from "react";
 
 export interface LoadingSpinnerProps extends IconProps {
   /** The color of the loading spinner. @default "default" */
@@ -39,6 +40,19 @@ export const LoadingSpinner = flowComponent(
       className,
     );
 
+    const spinnerRef = useMemo(
+      () =>
+        mergeRefs(ref, (element) => {
+          if (element) {
+            const elapsedMs = performance.now() - globalSpinnerTime;
+            const phaseMs = elapsedMs % animationDurationMs;
+
+            element.style.setProperty("--animation-delay", `${-phaseMs}ms`);
+          }
+        }),
+      [ref, animationDurationMs],
+    );
+
     /* A round surface in the spinner's size, without the spinning. */
     if (isSkeleton) {
       return (
@@ -48,20 +62,7 @@ export const LoadingSpinner = flowComponent(
       );
     }
 
-    return (
-      <IconPending
-        className={rootClassName}
-        {...rest}
-        ref={mergeRefs(ref, (element) => {
-          if (element) {
-            const elapsedMs = performance.now() - globalSpinnerTime;
-            const phaseMs = elapsedMs % animationDurationMs;
-
-            element.style.setProperty("--animation-delay", `${-phaseMs}ms`);
-          }
-        })}
-      />
-    );
+    return <IconPending className={rootClassName} {...rest} ref={spinnerRef} />;
   },
   /* The spinner stands in for an icon: `Icon` props contexts (e.g. the size
      `IllustratedMessage` sets) keep reaching its inner icon. */
