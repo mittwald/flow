@@ -4,15 +4,10 @@ alert:
   corner-radius:
     value: "{corner-radius.l}"
   # No border: the soft surface carries the Alert, the start edge keeps it
-  # apart from the AccentBox (#3564).
-  border-width:
-    value: 0
-  # As wide as the corner radius: the stripe ends where the corner curve
-  # ends instead of breaking off inside it.
+  # apart from the AccentBox. The edge is as wide as the corner radius, so
+  # it ends where the corner curve ends instead of breaking off inside it.
   border-x-start-width:
     value: "{alert.corner-radius}"
-  border-style:
-    value: "{border-style.default}"
   heading-to-content-spacing:
     value: "{size-rem.s}"
   spacing:
