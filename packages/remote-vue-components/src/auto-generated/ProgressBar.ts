@@ -21,6 +21,7 @@ export const ProgressBar: FlowRemoteVueComponent<
       "isIndeterminate",
       "showLegend",
       "showMaxValue",
+      "suppressHydrationWarning",
     ],
   },
 );

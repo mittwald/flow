@@ -30,6 +30,7 @@ export class RemoteTableRowElement extends FlowRemoteElement<RemoteTableRowEleme
       referrerPolicy: {},
       rel: {},
       routerOptions: {},
+      suppressHydrationWarning: {},
       target: {},
       textValue: {},
       translate: {},

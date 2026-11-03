@@ -100,16 +100,21 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Markdown wide table (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
-    const columns = Array.from({ length: 12 }, (_, i) => `Column ${i + 1}`);
-    const cells = columns.map((_, i) => `p-${i}abc123.project.space`);
-
+  async ({
+    testScreenshot,
+    render,
+    components: { Markdown, ColumnLayout },
+  }) => {
+    /* A narrow column, like the AIssistant drawer. */
     await render(
-      <Markdown>
-        {`| ${columns.join(" | ")} |\n` +
-          `|${columns.map(() => "---").join("|")}|\n` +
-          `| ${cells.join(" | ")} |\n`}
-      </Markdown>,
+      <ColumnLayout s={[1, 4]} m={[1, 4]} l={[1, 4]}>
+        <Markdown>
+          {"| Type | Version | Usage |\n" +
+            "| --- | --- | --- |\n" +
+            "| CMS | 6.4 | WordPress, Shopware, TYPO3 |\n" +
+            "| Shop | 6.5 | Shopware, Magento |\n"}
+        </Markdown>
+      </ColumnLayout>,
     );
 
     await testScreenshot("Markdown wide table");

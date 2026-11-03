@@ -89,7 +89,7 @@ export const WithFieldError: Story = {
         type: "required",
         message: "ErrorFromForm",
       });
-    }, []);
+    }, [form]);
 
     const fieldValue = form.watch("field");
 

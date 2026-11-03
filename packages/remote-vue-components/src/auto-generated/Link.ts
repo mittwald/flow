@@ -15,6 +15,7 @@ export const Link: FlowRemoteVueComponent<RemoteLinkElementProps> =
       "inert",
       "inline",
       "isDisabled",
+      "suppressHydrationWarning",
       "unstyled",
     ],
   });

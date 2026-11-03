@@ -15,7 +15,7 @@ export interface CombineProps
  * names render the exact same output.
  */
 export const CombineImplementation: FC<CombineProps> = (props) => {
-  const { children, className } = props;
+  const { children, className, ref } = props;
 
   const rootClassName = clsx(styles.combine, className);
 
@@ -36,7 +36,9 @@ export const CombineImplementation: FC<CombineProps> = (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <div className={rootClassName}>{children}</div>
+      <div ref={ref} className={rootClassName}>
+        {children}
+      </div>
     </PropsContextProvider>
   );
 };

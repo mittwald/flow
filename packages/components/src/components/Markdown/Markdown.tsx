@@ -206,6 +206,8 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         ) : (
           <input {...props} />
         ),
+      /* A table cannot shrink below its content, so the box around it scrolls
+         instead of the table overflowing the markdown. */
       table: ({ node: ignoredNode, ...props }) => (
         <div className={styles.tableContainer}>
           <table {...props} />

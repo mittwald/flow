@@ -44,6 +44,7 @@ export class RemoteDatePickerElement extends FlowRemoteElement<RemoteDatePickerE
       shouldCloseOnSelect: {},
       shouldForceLeadingZeros: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

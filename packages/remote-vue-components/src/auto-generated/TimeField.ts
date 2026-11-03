@@ -22,6 +22,7 @@ export const TimeField: FlowRemoteVueComponent<RemoteTimeFieldElementProps> =
         "isReadOnly",
         "isRequired",
         "shouldForceLeadingZeros",
+        "suppressHydrationWarning",
       ],
     },
   );

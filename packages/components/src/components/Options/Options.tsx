@@ -6,6 +6,10 @@ import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";
 import type { OptionProps } from "@/components/Option";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import tokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
+
+/** `Popover`'s `maxHeight` is a number, so it cannot read the CSS variable. */
+const maxHeight = Number.parseFloat(tokens.options["max-height"].value);
 
 export interface OptionsProps
   extends
@@ -30,7 +34,7 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
     <Popover
       className={styles.popover}
       controller={controller}
-      maxHeight={324}
+      maxHeight={maxHeight}
       {...restPopoverProps}
     >
       <Aria.ListBox

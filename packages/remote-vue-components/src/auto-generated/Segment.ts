@@ -8,5 +8,11 @@ export { type RemoteSegmentElementProps as SegmentProps } from "@mittwald/flow-r
 
 export const Segment: FlowRemoteVueComponent<RemoteSegmentElementProps> =
   createFlowRemoteComponent("flr-segment", "Segment", RemoteSegmentElement, {
-    booleans: ["autoFocus", "hidden", "inert", "isDisabled"],
+    booleans: [
+      "autoFocus",
+      "hidden",
+      "inert",
+      "isDisabled",
+      "suppressHydrationWarning",
+    ],
   });

@@ -16,19 +16,17 @@
     white-space: break-spaces;
   }
 
-  /* A table wider than the text scrolls on its own instead of widening the
-     page. */
+  /* Only scrolls, like `Table`: a replaced `table` renderer has no container
+     and keeps the table's own look. */
   .tableContainer {
     @include scrollbar.scrollbar;
 
     overflow-x: auto;
   }
 
-  // The table renderer only adds the container — rows and cells are
-  // remark-gfm's markup, and a consumer's `table` renderer carries no class.
   // stylelint-disable selector-max-type -- react-markdown table output
   table {
-    min-width: 100%;
+    min-inline-size: 100%;
     border-radius: var(--table--corner-radius);
     overflow: hidden;
     border-width: var(--table--border-width);

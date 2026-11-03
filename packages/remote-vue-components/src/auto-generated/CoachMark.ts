@@ -22,6 +22,7 @@ export const CoachMark: FlowRemoteVueComponent<RemoteCoachMarkElementProps> =
         "shouldFlip",
         "shouldSkipAnimation",
         "shouldUpdatePosition",
+        "suppressHydrationWarning",
       ],
     },
   );

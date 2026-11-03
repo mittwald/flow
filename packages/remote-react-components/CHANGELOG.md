@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
+
+### Bug Fixes
+
+* **ComboBox:** keep the field within its column ([#3622](https://github.com/mittwald/flow/issues/3622)) ([7503974](https://github.com/mittwald/flow/commit/75039740871149cd2bfb2af2b82364a8cae40594))
+
+## [1.5.58](https://github.com/mittwald/flow/compare/1.5.57...1.5.58) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.57](https://github.com/mittwald/flow/compare/1.5.56...1.5.57) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.56](https://github.com/mittwald/flow/compare/1.5.55...1.5.56) (2026-11-03)
+
+### Code Refactoring
+
+* clear the react-hooks/exhaustive-deps lint warnings ([#3583](https://github.com/mittwald/flow/issues/3583)) ([1666843](https://github.com/mittwald/flow/commit/1666843d2ccb7d30ae79a093be8c8c5aa1b547f0))
+
+## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
+
+### Bug Fixes
+
+* **Markdown:** scroll wide tables instead of overflowing the container ([#3614](https://github.com/mittwald/flow/issues/3614)) ([6b9b617](https://github.com/mittwald/flow/commit/6b9b6173a1c8f4235dbb072dcb2ece1d363bea28))
+
+## [1.5.54](https://github.com/mittwald/flow/compare/1.5.53...1.5.54) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+### Tests
+
+* **MessageThread:** add the missing webkit-darwin baseline for lists ([#3616](https://github.com/mittwald/flow/issues/3616)) ([f1adc7e](https://github.com/mittwald/flow/commit/f1adc7e3ec07cd374ccc12c684fe70daadcd84f7))
+
+## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+### Tests
+
+* **SkeletonMode:** pin the date of the cropper and calendar scenario ([#3619](https://github.com/mittwald/flow/issues/3619)) ([4c5dbb7](https://github.com/mittwald/flow/commit/4c5dbb78517e65c09b033c52cd6f57a87455aa6b))
+
+## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.49](https://github.com/mittwald/flow/compare/1.5.48...1.5.49) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.48](https://github.com/mittwald/flow/compare/1.5.47...1.5.48) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

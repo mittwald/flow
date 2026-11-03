@@ -18,6 +18,7 @@ export class RemoteTableHeaderElement extends FlowRemoteElement<RemoteTableHeade
       hidden: {},
       inert: {},
       lang: {},
+      suppressHydrationWarning: {},
       translate: {},
     };
   }

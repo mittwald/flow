@@ -22,7 +22,7 @@ export const ChildPropsContextProvider: FC<ChildPropsContextProviderProps> = (
       ...parentContext,
       [store.scope]: store,
     }),
-    [store.scope, store, parentContext],
+    [store, parentContext],
   );
 
   return (

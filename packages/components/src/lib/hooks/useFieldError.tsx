@@ -45,6 +45,7 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
         </PropsContextProvider>
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the props context is new each render and only changes with tunnelId
     [tunnelId],
   );
 

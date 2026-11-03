@@ -13,5 +13,6 @@ export const useOnChange = (
       callback();
     }
     oldValue.current = value;
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the caller passes the callback's dependencies
   }, [value, callback, ...dependencies]);
 };

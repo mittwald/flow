@@ -34,6 +34,7 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       orientation: {},
       size: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       validate: {},
       validationBehavior: {},

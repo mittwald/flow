@@ -77,15 +77,17 @@ export class OverlayController extends OverlayState<CloseOptions> {
    */
   private useConfirmOnCloseSource(confirmOnClose: boolean | undefined): void {
     const source = useStatic((): object => ({}));
+    // eslint-disable-next-line @typescript-eslint/no-this-alias -- a dependency must be a plain variable
+    const controller = this;
 
     useEffect(() => {
       if (confirmOnClose === undefined) {
-        this.removeConfirmOnCloseSource(source);
+        controller.removeConfirmOnCloseSource(source);
         return;
       }
-      this.setConfirmOnCloseSource(source, confirmOnClose);
-      return () => this.removeConfirmOnCloseSource(source);
-    }, [this, source, confirmOnClose]);
+      controller.setConfirmOnCloseSource(source, confirmOnClose);
+      return () => controller.removeConfirmOnCloseSource(source);
+    }, [controller, source, confirmOnClose]);
   }
 
   /**
@@ -115,6 +117,7 @@ export class OverlayController extends OverlayState<CloseOptions> {
           callback();
         }
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- the caller passes the callback's dependencies
     }, [isOpen, ...dependencies]);
   }
 
@@ -130,9 +133,13 @@ export class OverlayController extends OverlayState<CloseOptions> {
     handler: T | undefined,
     addHandlerFn: (handler: T) => DisposerFn,
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias -- a dependency must be a plain variable
+    const controller = this;
+
     useEffect(
       () => (handler ? addHandlerFn(handler) : undefined),
-      [handler, this],
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- addHandlerFn is an inline arrow, new each render
+      [handler, controller],
     );
   }
 

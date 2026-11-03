@@ -136,6 +136,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const newFormId = useId();
   const formId = idProp ?? newFormId;
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- keep the component identity per form, or the form remounts
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
   const { isDirty } = form.formState;

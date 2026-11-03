@@ -55,6 +55,7 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
       showCharacterCount: {},
       slot: {},
       spellCheck: {},
+      suppressHydrationWarning: {},
       translate: {},
       type: {},
       uploadFile: {},
