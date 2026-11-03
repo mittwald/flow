@@ -18,6 +18,7 @@ import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
 import type { AlertBadgeProps } from "@/components/AlertBadge";
+import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
@@ -110,6 +111,7 @@ export interface FlowComponentPropsTypes {
   AccordionGroup: AccordionGroupProps;
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
+  AlertIcon: AlertIconProps;
   AlertText: AlertTextProps;
   Align: AlignProps;
   Combine: CombineProps;
@@ -211,6 +213,7 @@ const propsContextSupportingComponentsMap: Record<
   Autocomplete: true,
   Alert: true,
   AlertBadge: true,
+  AlertIcon: true,
   AlertText: true,
   Align: true,
   Combine: true,
