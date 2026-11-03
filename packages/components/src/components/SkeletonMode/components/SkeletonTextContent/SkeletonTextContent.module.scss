@@ -4,6 +4,16 @@
   @include skeleton.text;
 }
 
+/* The bar without content takes the box of a text line: as high as the font,
+   aligned with its descent. `text-bottom`, because the overflow of the shimmer
+   moves the baseline of an inline-block to its bottom edge. Doubled class: wins
+   over SkeletonText's own rules. */
+.defaultBar.defaultBar {
+  height: auto;
+  line-height: normal;
+  vertical-align: text-bottom;
+}
+
 /* An ancestor that truncates the text paints its ellipsis in its own color,
    outside the bar. The bar sits one level deeper when a flex parent needs an
    outer span. `!important`: the truncation comes from the component, with any
