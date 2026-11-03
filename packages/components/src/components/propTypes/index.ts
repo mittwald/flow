@@ -12,6 +12,7 @@ import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
 import type { TabNavigationProps } from "@/components/TabNavigation";
 import type { InitialsProps } from "@/components/Initials";
+import type { LoadingSpinnerProps } from "@/components/LoadingSpinner";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
@@ -160,6 +161,7 @@ export interface FlowComponentPropsTypes {
   List: ListProps<never>;
   ListItemView: ListItemViewContentProps;
   ListSummary: ListSummaryProps;
+  LoadingSpinner: LoadingSpinnerProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
@@ -260,6 +262,7 @@ const propsContextSupportingComponentsMap: Record<
   List: true,
   ListItemView: true,
   ListSummary: true,
+  LoadingSpinner: true,
   MarkdownEditor: true,
   MenuItem: true,
   MenuTrigger: true,

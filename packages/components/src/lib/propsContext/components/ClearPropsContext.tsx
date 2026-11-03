@@ -3,6 +3,7 @@ import { type FC, type PropsWithChildren } from "react";
 
 export type ClearPropsContextProps = PropsWithChildren;
 
+/* Plain FC: factory infrastructure. */
 /** @flr-generate all */
 export const ClearPropsContext: FC<PropsWithChildren> = (props) => {
   const { children } = props;

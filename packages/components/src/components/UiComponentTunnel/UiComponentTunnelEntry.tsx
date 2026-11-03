@@ -10,6 +10,7 @@ export type UiComponentTunnelEntryProps = Omit<
   component: FlowComponentName;
 };
 
+/* Plain FC: factory infrastructure. */
 export const UiComponentTunnelEntry: FC<UiComponentTunnelEntryProps> = (
   props,
 ) => {
