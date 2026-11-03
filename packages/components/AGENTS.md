@@ -81,6 +81,9 @@ Conventions:
 - Props type is exported as `<Name>Props`; it extends the wrapped React Aria
   props plus `FlowComponentProps<RefElement>`.
 - **Ref as prop** (React 19) — no `forwardRef`.
+- **Plain `FC` only by the rule** in PATTERNS.md § Plain FC exception (factory
+  infrastructure, app-level setup, transparent render utilities, a proven
+  constraint); a public component is a `flowComponent`.
 - `options.type`: `"ui"` (default — gets props-context isolation), `"layout"`,
   or `"provider"`. The factory applies `ClearPropsContext` isolation for UI
   components itself — don't add extra clearing casually.

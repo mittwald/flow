@@ -93,6 +93,8 @@ and consistency enforced by tooling, not maintained by hand.
   layout/composition primitives whose descendants stay context-aware.
   `src/components/LayoutCard/LayoutCard.tsx:41`
   - ✓ arranges or wraps descendant UI without isolating contextual props.
+  - ✓ a leaf that stands in for another component whose props contexts must keep
+    reaching it (`LoadingSpinner` → `Icon`).
   - ✗ leaf UI or context infrastructure → UI/provider.
 - **Provider classification** — `{ type: "provider" }` for trigger/provider
   components.
@@ -165,8 +167,8 @@ and consistency enforced by tooling, not maintained by hand.
   - ✓ factory infrastructure the factory itself depends on (`ClearPropsContext`,
     `ComponentPropsContextProvider`, `UiComponentTunnel*`,
     `ComponentUsageProvider`).
-  - ✓ app-level setup without own UI, mounted once at the root (`IntlProvider`,
-    `SettingsProvider`, `TranslationProvider`).
+  - ✓ app-level setup without own UI, mounted once at the root
+    (`SettingsProvider`, `TranslationProvider`).
   - ✓ transparent render utilities whose semantics a factory layer would change
     (`BrowserOnly`, `SuspenseTrigger`, `TunnelEntry`).
   - ✓ a technical constraint (e.g. a parent identifies the child by element

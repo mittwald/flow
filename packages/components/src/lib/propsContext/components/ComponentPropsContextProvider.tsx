@@ -6,6 +6,7 @@ export interface ComponentPropsContextProviderProps extends PropsWithChildren {
   componentProps?: PropsContext;
 }
 
+/* Plain FC: factory infrastructure. */
 /**
  * @flr-generate all
  * @flr-ignore-props componentProps
