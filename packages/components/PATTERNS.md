@@ -161,8 +161,10 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/Button/Button.tsx:200`
   - ✓ principal public components (support both conventions).
   - ✗ internal helpers → smallest local export surface.
-- **Plain FC exception** — a plain `FC` only in one of four cases, named in a
-  one-line comment at the export; everything else is a `flowComponent` (#3428).
+- **Plain FC exception** — a public component is a plain `FC` only in one of
+  four cases, named in a one-line comment at the export; every other public
+  component is a `flowComponent` (#3428). Internal implementation details stay
+  plain (§ Factory registration).
   `src/components/SettingsProvider/SettingsProvider.tsx:22`
   - ✓ factory infrastructure the factory itself depends on (`ClearPropsContext`,
     `ComponentPropsContextProvider`, `UiComponentTunnel*`,
