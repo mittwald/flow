@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.57](https://github.com/mittwald/flow/compare/1.5.56...1.5.57) (2026-11-03)
+
+### Bug Fixes
+
+* **LoadingSpinner:** keep the spin phase with a consumer ref, register as flowComponent ([#3621](https://github.com/mittwald/flow/issues/3621)) ([8061430](https://github.com/mittwald/flow/commit/8061430ebca81edf8c40dd711a33c450c3e232d5))
+
 ## [1.5.56](https://github.com/mittwald/flow/compare/1.5.55...1.5.56) (2026-11-03)
 
 ### Code Refactoring
