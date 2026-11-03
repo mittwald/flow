@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.57](https://github.com/mittwald/flow/compare/1.6.0-next.56...1.6.0-next.57) (2026-11-03)
+
+### Code Refactoring
+
+* clear the react-hooks/exhaustive-deps lint warnings ([#3583](https://github.com/mittwald/flow/issues/3583)) ([1666843](https://github.com/mittwald/flow/commit/1666843d2ccb7d30ae79a093be8c8c5aa1b547f0))
+
+## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.55 ([6c5ac75](https://github.com/mittwald/flow/commit/6c5ac75ffa0ae2d125968c7a8283546ad8c6de95))
+
 ## [1.6.0-next.56](https://github.com/mittwald/flow/compare/1.5.54...1.6.0-next.56) (2026-11-03)
 
 ### Bug Fixes
