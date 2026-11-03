@@ -65,16 +65,20 @@
   }
   // stylelint-enable selector-max-type
 
-  /* Task lists: the checkbox takes the bullet's place. */
+  /* Task lists: the checkbox takes the bullet's place and keeps `Checkbox`'s
+     gap and alignment. */
   .taskListItem {
     list-style: none;
+    padding-inline-start: var(--form-control--spacing-x);
   }
 
   .taskListCheckbox {
     display: inline-flex;
-    vertical-align: text-bottom;
-    width: var(--text--list-padding);
-    margin-inline-start: calc(-1 * var(--text--list-padding));
+    vertical-align: top;
+    margin-inline: calc(
+        -1 * (var(--text--list-padding) + var(--form-control--spacing-x))
+      )
+      var(--form-control--spacing-x);
   }
 
   .taskListIcon {
