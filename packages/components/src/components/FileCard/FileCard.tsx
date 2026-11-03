@@ -55,6 +55,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
     imageSrc,
     children,
     isFailed,
+    ...rest
   } = props;
 
   const rootClassName = clsx(
@@ -90,7 +91,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Element ref={ref as never} className={rootClassName}>
+      <Element {...rest} ref={ref as never} className={rootClassName}>
         <Wrap if={(href || onPress) && !isFailed}>
           <Link
             className={styles.link}
