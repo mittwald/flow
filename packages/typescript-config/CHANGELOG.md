@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.58](https://github.com/mittwald/flow/compare/1.5.57...1.5.58) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
 ## [1.5.57](https://github.com/mittwald/flow/compare/1.5.56...1.5.57) (2026-11-03)
 
 **Note:** Version bump only for package @mittwald/typescript-config
