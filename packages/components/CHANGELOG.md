@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.60](https://github.com/mittwald/flow/compare/1.6.0-next.59...1.6.0-next.60) (2026-11-03)
+
+### Bug Fixes
+
+* **DateRangePicker:** clip the dates instead of overflowing a narrow field ([#3625](https://github.com/mittwald/flow/issues/3625)) ([9053855](https://github.com/mittwald/flow/commit/90538555c42cce132480f5fa65edbc80321b0c0e))
+
+## [1.5.59](https://github.com/mittwald/flow/compare/1.6.0-next.58...1.5.59) (2026-11-03)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.59 ([d88cfda](https://github.com/mittwald/flow/commit/d88cfdac0315a7216f4d27090271f5f3a4aafa55))
+
 ## [1.6.0-next.59](https://github.com/mittwald/flow/compare/1.6.0-next.58...1.6.0-next.59) (2026-11-03)
 
 ### Bug Fixes
