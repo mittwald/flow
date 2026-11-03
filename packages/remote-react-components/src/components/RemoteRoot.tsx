@@ -18,6 +18,7 @@ import {
 } from "@mittwald/flow-remote-core";
 import {
   Suspense,
+  useCallback,
   useLayoutEffect,
   useRef,
   useState,
@@ -173,15 +174,15 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
       });
   };
 
-  const setIsLoadingFromProps = () => {
+  const setIsLoadingFromProps = useCallback(() => {
     if (isLoadingFromProps !== undefined) {
       connectionRef.current?.imports.setIsLoading(isLoadingFromProps);
     }
-  };
+  }, [isLoadingFromProps]);
 
   useLayoutEffect(() => {
     setIsLoadingFromProps();
-  }, [isLoadingFromProps]);
+  }, [setIsLoadingFromProps]);
 
   useWatchPathname((pathname) =>
     connectionRef.current?.imports.setNavigationState({
