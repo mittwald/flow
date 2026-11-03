@@ -16,10 +16,8 @@ const colorContent =
   "## Heading 2\n" +
   "**Bold**, `inline code` and a [link](https://example.com).\n\n" +
   "> May the Force be with you.\n\n" +
-  "- [x] Steal the plans\n" +
-  "- [ ] Destroy the Death Star\n\n" +
-  "* X-Wing\n* Y-Wing\n\n" +
-  "1. Approach the trench\n2. Fire on the exhaust port";
+  "- [x] Steal the plans\n\n" +
+  "* X-Wing";
 
 test.each(testEnvironments)(
   "Markdown colors (%s)",
@@ -52,59 +50,43 @@ test.each(testEnvironments)(
     components: { Markdown, ColumnLayout },
   }) => {
     await render(
-      <ColumnLayout s={[1, 1]} gap="l">
+      <ColumnLayout s={[1, 1, 1]} gap="l">
         <Markdown>
-          {"A long time ago in a galaxy far, far away the Rebel Alliance struck  \n" +
-            "a decisive blow against the Empire.\n\n" +
-            "- [x] Steal the plans\n" +
-            "- [ ] Destroy the Death Star\n\n" +
+          {"# Heading 1\n" +
+            "## Heading 2\n" +
+            "### Heading 3\n" +
+            "**Bold**, *italic*, ~~strikethrough~~, `inline code` and a [link](https://example.com).  \n" +
+            "A line break.\n\n" +
+            "> Block quote\n\n" +
+            "---\n\n" +
+            "Footnote[^1]\n\n" +
+            "[^1]: The note."}
+        </Markdown>
+        <Markdown>
+          {"* Unordered list item\n" +
+            "* Unordered list item\n" +
+            "  * Nested item\n\n" +
+            "1. Ordered list item\n" +
+            "2. Ordered list item\n\n" +
+            "- [x] Checked task\n" +
+            "- [ ] Open task\n\n" +
             "```json\n" +
-            '{ "name": "DS-1" }\n' +
-            "```\n\n" +
-            "| Pilot | Squadron |\n" +
+            '{ "name": "Death Star" }\n' +
+            "```"}
+        </Markdown>
+        <Markdown>
+          {"| Pilot | Squadron |\n" +
             "|-------|----------|\n" +
             "| Luke  | Red Five |\n" +
-            "| Wedge | Red Two  |\n"}
+            "| Wedge | Red Two  |\n\n" +
+            `![mittwald](${logo})`}
         </Markdown>
-        <Markdown>{`![mittwald](${logo})`}</Markdown>
       </ColumnLayout>,
     );
 
     await waitForHighlightedCode(1);
 
     await testScreenshot("Markdown elements");
-  },
-);
-
-test.each(testEnvironments)(
-  "Markdown content (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
-    await render(
-      <Markdown>
-        {"# Heading 1\n" +
-          "## Heading 2\n" +
-          "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
-          "```json\n" +
-          "{\n" +
-          '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-          '    "name": "Death Star"\n' +
-          "}\n" +
-          "```\n" +
-          "[link](#)\n" +
-          "> Block quote" +
-          "\n - Unordered list item 1 \n - Unordered list item 2 " +
-          "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
-          "| Column 1       | Column 2      |\n" +
-          "|---------------|---------------|\n" +
-          "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
-          "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
-          "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
-      </Markdown>,
-    );
-
-    await waitForHighlightedCode(1);
-
-    await testScreenshot("Markdown content");
   },
 );
 
