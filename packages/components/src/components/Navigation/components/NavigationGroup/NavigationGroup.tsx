@@ -1,4 +1,4 @@
-import { type ComponentProps, type PropsWithChildren } from "react";
+import { type ComponentProps, type PropsWithChildren, type Ref } from "react";
 import { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
@@ -32,6 +32,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     collapsable,
     defaultExpanded = true,
     "aria-label": ariaLabel,
+    ref,
     ...rest
   } = props;
 
@@ -57,7 +58,11 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   };
 
   const collapsableUi = (
-    <Accordion defaultExpanded={defaultExpanded} className={rootClassName}>
+    <Accordion
+      ref={ref as Ref<HTMLDivElement>}
+      defaultExpanded={defaultExpanded}
+      className={rootClassName}
+    >
       {children}
       <Content>
         <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
@@ -70,6 +75,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
       aria-labelledby={ariaLabel ? undefined : generatedId}
       aria-label={ariaLabel}
       className={rootClassName}
+      ref={ref}
       {...rest}
     >
       {children}
