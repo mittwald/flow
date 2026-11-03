@@ -28,6 +28,7 @@ export const useGridItemProps = (props: P, list: List<never>) => {
       itemRef.current?.setAttribute("aria-expanded", String(isExpanded));
       itemRef.current?.setAttribute("aria-controls", contentElementId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-run once the grid item element is attached
   }, [isExpanded, contentElementId, itemRef.current, accordion]);
 
   if (!accordion) {

@@ -10,5 +10,6 @@ export const useAbortablePromise = (
     return () => {
       controller.abort();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the caller passes the function's dependencies
   }, dependencies);
 };

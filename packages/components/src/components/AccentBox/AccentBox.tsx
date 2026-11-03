@@ -74,7 +74,7 @@ export interface AccentBoxProps
     PropsWithChildren,
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
-    FlowComponentProps {
+    FlowComponentProps<HTMLElement> {
   /**
    * The background color of the accent box. Besides the Flow colors, any custom
    * CSS color is supported.
@@ -108,6 +108,7 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
     className,
     style: styleFromProps,
     aspectRatio,
+    ref,
   } = props;
 
   // backwards compatibility
@@ -167,7 +168,7 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
   };
 
   return (
-    <Element className={rootClassName} style={style}>
+    <Element ref={ref as never} className={rootClassName} style={style}>
       <SectionHeadingReset>
         <PropsContextProvider props={propsContext}>
           {children}

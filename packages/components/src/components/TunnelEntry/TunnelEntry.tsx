@@ -4,6 +4,7 @@ import type { TunnelEntryProps } from "@mittwald/react-tunnel";
 
 export type { TunnelEntryProps } from "@mittwald/react-tunnel";
 
+/* Plain FC: transparent render utility. */
 /**
  * @flr-generate all
  * @flr-ignore-props providerId

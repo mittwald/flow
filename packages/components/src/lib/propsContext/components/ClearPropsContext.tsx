@@ -5,6 +5,7 @@ export type ClearPropsContextProps = PropsWithChildren;
 
 const emptyPropsContext = {};
 
+/* Plain FC: factory infrastructure. */
 /** @flr-generate all */
 export const ClearPropsContext: FC<PropsWithChildren> = (props) => {
   const { children } = props;
