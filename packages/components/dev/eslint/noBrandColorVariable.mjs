@@ -10,7 +10,7 @@ export default {
     docs: {
       description:
         "Disallow Brand CSS variables (`--color--<brand-group>--…`) in code",
-      url: "https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md",
+      url: "https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md",
     },
     schema: [],
     messages: {

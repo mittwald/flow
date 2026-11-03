@@ -6,7 +6,7 @@ import { fileHeader, formattedVariables } from "style-dictionary/utils";
 import { propertyFormatNames } from "style-dictionary/enums";
 
 /*
- * Color token tiers (docs/adr/0007-color-token-tiers.md). Every file belongs to
+ * Color token tiers (docs/adr/0008-color-token-tiers.md). Every file belongs to
  * one tier; files outside the four color files count as component tokens.
  */
 const colorTier = (filePath) => {
@@ -68,7 +68,7 @@ const collectTokens = (node, file, tokenPath = [], collector = []) => {
   return collector;
 };
 
-/** Fails the build on any color reference ADR 0007 forbids. */
+/** Fails the build on any color reference ADR 0008 forbids. */
 const checkColorTiers = () => {
   const tokens = fs
     .globSync("src/**/*.yml")
@@ -148,7 +148,7 @@ const checkColorTiers = () => {
 
   if (errors.length > 0) {
     throw new Error(
-      `Color tier check failed (docs/adr/0007-color-token-tiers.md):\n${errors.join("\n")}`,
+      `Color tier check failed (docs/adr/0008-color-token-tiers.md):\n${errors.join("\n")}`,
     );
   }
 };
@@ -248,7 +248,7 @@ StyleDictionary.registerFormat({
 
 const htmlAttribute = "data-theme";
 
-// Semantic is the only color tier that switches with the theme (ADR 0007);
+// Semantic is the only color tier that switches with the theme (ADR 0008);
 // with the `texture` tokens it is all the per-theme files carry. Every other
 // token is emitted once in `base`.
 const isThemed = (token) =>

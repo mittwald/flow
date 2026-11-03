@@ -1,4 +1,4 @@
-# Brand tier (ADR 0007): the palette from the brand handover. Theme-neutral,
+# Brand tier (ADR 0008): the palette from the brand handover. Theme-neutral,
 # literal values only. Components never reference it — Semantic does.
 #
 # Source: Figma "mittwald. Global Tokens", collection Color Primitives, as

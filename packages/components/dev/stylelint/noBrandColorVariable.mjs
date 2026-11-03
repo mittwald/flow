@@ -62,7 +62,7 @@ const ruleFunction = (primary) => (root, result) => {
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 ruleFunction.meta = {
-  url: "https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md",
+  url: "https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md",
 };
 
 export default stylelint.createPlugin(ruleName, ruleFunction);

@@ -1,4 +1,4 @@
-# Semantic tier (ADR 0007), light theme: colors with a meaning. The only
+# Semantic tier (ADR 0008), light theme: colors with a meaning. The only
 # tier that distinguishes light and dark; references Brand or, where Flow
 # owns the color, holds a literal. Keep the keys in sync with
 # color-semantic.dark.yml.
@@ -361,7 +361,7 @@ light-static:
       300:
         value: "{color.white-alpha.700}"
 
-# Literal values: Flow owns these colors outright (ADR 0007).
+# Literal values: Flow owns these colors outright (ADR 0008).
 transparent:
   color:
     value: transparent

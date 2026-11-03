@@ -8,7 +8,7 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
   **component tokens** for a new component (category files like
   `src/actions/button.yml`) is fine — model them on existing components and ask
   when unsure.
-- **Color tiers** follow [ADR 0007](../../docs/adr/0007-color-token-tiers.md):
+- **Color tiers** follow [ADR 0008](../../docs/adr/0008-color-token-tiers.md):
   `color-brand.yml` (palette, theme-neutral, literals only) →
   `color-semantic.{light,dark}.yml` (the only light/dark switch, references
   Brand) → `color-variant.yml` (references Semantic) → component files (never

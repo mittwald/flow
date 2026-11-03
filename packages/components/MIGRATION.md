@@ -172,7 +172,7 @@ npx @mittwald/flow-codemods@latest color-props-brand-palette src
 
 The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
 (colors with a meaning), **Variant** (pairs per variant) and component tokens
-([ADR 0007](https://github.com/mittwald/flow/blob/main/docs/adr/0007-color-token-tiers.md)).
+([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
 Only Semantic switches between light and dark. Brand is theme-neutral: one value
 per token, the light one.
 
