@@ -76,6 +76,12 @@ export default function Page() {
             <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
           </LightBox>
         </LightBoxTrigger>
+        <LightBoxTrigger>
+          <Button>Lightbox with zoom</Button>
+          <LightBox withZoom>
+            <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
+          </LightBox>
+        </LightBoxTrigger>
       </Section>
 
       <Section>

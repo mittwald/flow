@@ -75,6 +75,7 @@ export * from "./RemoteLayoutCardElement";
 export * from "./RemoteLegendElement";
 export * from "./RemoteLightBoxGalleryElement";
 export * from "./RemoteLightBoxGalleryItemElement";
+export * from "./RemoteLightBoxZoomElement";
 export * from "./RemoteLineElement";
 export * from "./RemoteLinkElement";
 export * from "./RemoteListEmptyViewElement";

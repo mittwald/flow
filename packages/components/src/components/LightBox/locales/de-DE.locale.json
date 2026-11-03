@@ -3,5 +3,7 @@
   "gallery": "Bildergalerie",
   "indicator": "{current} von {count}",
   "next": "Nächstes",
-  "previous": "Vorheriges"
+  "previous": "Vorheriges",
+  "zoom": "Zoombare Ansicht",
+  "zoomDescription": "Klick oder Eingabe vergrößert. Plus und Minus ändern die Vergrößerung, die Pfeiltasten verschieben das vergrößerte Bild."
 }

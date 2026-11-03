@@ -23,30 +23,41 @@
     overflow: auto;
 
     // The image is a consumer child — Flow `Image` or a bare `<img>`.
-    // stylelint-disable-next-line selector-max-type -- bare `<img>` has no class
-    > img {
+    // stylelint-disable selector-max-type -- bare `<img>` has no class
+    > img,
+    .zoom > * > img {
       width: 100%;
     }
+    // stylelint-enable selector-max-type
   }
 
+  /* The zoom wraps the content twice: the area it zooms and what it scales. */
   &.fitScreen {
     .content {
-      > * {
+      > *,
+      .zoom > *,
+      .zoom > * > * {
         max-height: var(--light-box--max-height);
+      }
+
+      /* Zoomed content may cover the whole screen. */
+      &:has(> .zoom) {
+        overflow: visible;
       }
     }
   }
 
-  .actions,
-  .actionGroup {
+  /* In the screen's top right corner, over the content. */
+  .actions {
+    position: fixed;
+    top: var(--light-box--spacing);
+    inset-inline-end: var(--light-box--spacing);
     display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
+    column-gap: var(--light-box--spacing);
   }
 
-  .actions {
-    row-gap: var(--light-box--spacing);
-    padding-inline-start: var(--light-box--spacing);
+  .actionGroup {
+    flex-wrap: nowrap;
   }
 
   .gallery {
@@ -69,7 +80,9 @@
 
     &.fitScreen {
       .content {
-        > * {
+        > *,
+        .zoom > *,
+        .zoom > * > * {
           max-height: var(--light-box--max-height-mobile);
         }
       }
