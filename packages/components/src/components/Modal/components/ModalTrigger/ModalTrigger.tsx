@@ -15,6 +15,7 @@ export const ModalTrigger = flowComponent(
     return (
       <OverlayTrigger
         overlayType="Modal"
+        isOverlayHoistable
         {...triggerProps}
         component={DialogTriggerView}
       >

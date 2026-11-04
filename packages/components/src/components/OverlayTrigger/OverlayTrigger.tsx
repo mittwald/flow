@@ -7,6 +7,8 @@ import type { FlowComponentName } from "@/components/propTypes";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { useIsPendingWithWait } from "@/components/Action/hooks/useIsPendingWithWait";
+import { Action } from "@/components/Action";
+import { useOverlayHoistRegistry } from "@/lib/overlayHoist/context";
 
 type AriaComponentType = ComponentType<{
   isOpen?: boolean;
@@ -24,6 +26,11 @@ export interface OverlayTriggerProps
 interface Props extends OverlayTriggerProps {
   overlayType: FlowComponentName;
   component: AriaComponentType;
+  /**
+   * The overlay is built on `Overlay`, which hoists itself out of a
+   * `ContextMenu` (see `OverlayHoistProvider`).
+   */
+  isOverlayHoistable?: boolean;
 }
 
 export const OverlayTrigger: FC<Props> = (props) => {
@@ -33,6 +40,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
     component: AriaOverlayTrigger,
     children,
     controller: controllerFromProps,
+    isOverlayHoistable,
   } = props;
   const buttonPropsContext = useComponentPropsContext("Button");
 
@@ -41,6 +49,9 @@ export const OverlayTrigger: FC<Props> = (props) => {
   const isOpen = overlayController.useIsOpen();
   const isContentSuspended = overlayController.useIsContentSuspended();
   const isPending = useIsPendingWithWait(isContentSuspended);
+
+  const hoistRegistry = useOverlayHoistRegistry();
+  const isHoisted = !!hoistRegistry && isOverlayHoistable;
 
   const propsContext: PropsContext = {
     Button: {
@@ -80,6 +91,18 @@ export const OverlayTrigger: FC<Props> = (props) => {
     },
   };
 
+  /*
+   * Inside a menu the trigger is a `MenuItem`. A nested `Action` composes with
+   * the menu's own `Action`, so activating the item opens the overlay and
+   * closes the menu – a props context `onAction` would replace the menu's. The
+   * aria trigger is skipped: its `PressResponder` would latch the item pressed.
+   */
+  const menuItemTrigger = <Action openOverlay={overlayType}>{children}</Action>;
+
+  const ariaTrigger = (
+    <AriaOverlayTrigger isOpen={isOpen}>{children}</AriaOverlayTrigger>
+  );
+
   return (
     <OverlayContextProvider
       type={overlayType}
@@ -90,7 +113,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
         props={propsContext}
         dependencies={[isPending, overlayController]}
       >
-        <AriaOverlayTrigger isOpen={isOpen}>{children}</AriaOverlayTrigger>
+        {isHoisted ? menuItemTrigger : ariaTrigger}
       </PropsContextProvider>
     </OverlayContextProvider>
   );

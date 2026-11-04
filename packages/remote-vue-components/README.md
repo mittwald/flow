@@ -187,6 +187,12 @@ is what tells the `Action`s in a modal's footer not to ask for confirmation.
   overlay the action sits in. What it has not got is the `actionConfirm` modal
   and a target named by component (`closeOverlay="CoachMark"`), which is why the
   `coach-mark` demo has no Vue counterpart.
+- **An overlay opened from a `MenuItem` closes with the menu.** A `MenuItem`
+  works as the trigger of a `ModalTrigger` or `LightBoxTrigger`, as in React.
+  But React's `ContextMenu` also hoists the overlay out of its popover
+  (`@flr-hoist-overlays`); this one does not, so the host unmounts the overlay
+  together with the menu. Open it through a controller from the item's
+  `onAction`, with the `Modal` outside the `ContextMenu`.
 - **No pro icon set.** `@mittwald/flow-icons-pro` renders FontAwesome Pro, which
   each consumer licenses itself and which therefore cannot be inlined the way
   Tabler's is. `IconSetProvider` is what fills the gap: hand it your own icons

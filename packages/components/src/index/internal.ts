@@ -4,6 +4,7 @@ export { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 export * from "@/lib/componentFactory/flowComponent";
 export * from "@/lib/propsContext";
 export * from "@/lib/viewComponentContext";
+export { OverlayHoistProvider } from "@/lib/overlayHoist/OverlayHoistProvider";
 export * from "@/lib/types/props";
 export * from "@/status/componentStatus";
 export type * from "@/status/types";

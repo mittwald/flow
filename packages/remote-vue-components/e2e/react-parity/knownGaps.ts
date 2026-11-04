@@ -45,7 +45,10 @@ export const unsupportedScenarios: Record<string, string> = {
  * its exemption. An entry exempts the whole scenario, so keep the reason
  * concrete enough to tell which screenshot it is about.
  */
-export const divergingScenarios: Record<string, string> = {};
+export const divergingScenarios: Record<string, string> = {
+  "Modal in ContextMenu via ModalTrigger":
+    "'modal opened' has no modal. The Vue ContextMenu does not hoist overlays (@flr-hoist-overlays is React-only), so the Modal stays inside flr-context-menu and the host unmounts it with the menu popover.",
+};
 
 /** The corpus appends the environment's label to every test name. */
 export const scenarioNameOf = (testName: string): string =>

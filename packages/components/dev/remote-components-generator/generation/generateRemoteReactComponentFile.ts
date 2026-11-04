@@ -27,6 +27,14 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
      * just set. `@flr-provider` carries the type over.
      */
     provisionType: checkTagIsSet(c.tags, "provider") ? `type: "provider",` : "",
+    /*
+     * The host renders this component's children in a popover that unmounts on
+     * activation, while the overlays inside run in the extension – so the
+     * extension has to hoist them as well. See `OverlayHoistProvider`.
+     */
+    hoistOverlays: checkTagIsSet(c.tags, "hoist-overlays")
+      ? `hoistOverlays: true,`
+      : "",
   };
 
   return `\
@@ -46,6 +54,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
           ${t.events}
       },
       ${t.provisionType}
+      ${t.hoistOverlays}
     });
   `;
 }

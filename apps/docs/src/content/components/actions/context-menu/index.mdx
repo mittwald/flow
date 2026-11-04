@@ -131,6 +131,18 @@ Aktionen im ContextMenu können [Modals](/components/overlays/modal) als Overlay
 öffnen, wenn zusätzliche Informationen erfasst, bestätigt oder bearbeitet werden
 müssen.
 
+Am kürzesten geht das mit einem `<ModalTrigger />` direkt im ContextMenu: das
+`<MenuItem />` ist der Trigger, das Modal wird beim Klick geöffnet. Das
+ContextMenu schließt sich dabei – das Modal bleibt trotzdem offen, weil es
+außerhalb des ContextMenus gerendert wird.
+
+<LiveCodeEditor example="modalTrigger" editorCollapsed />
+
+Alternativ steuerst du das Modal über einen
+[Modal Controller](/components/overlays/modal). Das brauchst du, wenn das Modal
+von mehreren Stellen aus geöffnet wird oder außerhalb des ContextMenus stehen
+soll.
+
 <LiveCodeEditor example="modal" editorCollapsed />
 
 ---
