@@ -1,7 +1,8 @@
-import { Heading, LayoutCard, Text } from "@mittwald/flow-react-components";
+import { LayoutCard } from "@mittwald/flow-react-components";
 import type { Metadata } from "next";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import styles from "@/app/layout.module.scss";
+import PageStage from "@/app/_components/layout/PageStage";
 import { ComponentsOverview } from "@/app/components/_components/ComponentsOverview";
 
 const contentFolder = "src/content/components";
@@ -25,10 +26,16 @@ export default async function Page() {
   }));
 
   return (
-    <LayoutCard className={styles.mainContent}>
-      <Heading level={1}>Components</Heading>
-      <Text>Eine Übersicht aller Components des Flow Design Systems.</Text>
-      <ComponentsOverview components={components} />
-    </LayoutCard>
+    <div className={styles.pageColumn}>
+      <PageStage
+        eyebrow="Styleguide"
+        title="Components"
+        section="components"
+        description="Eine Übersicht aller Components des Flow Design Systems."
+      />
+      <LayoutCard className={`${styles.pageCard} ${styles.mainContent}`}>
+        <ComponentsOverview components={components} />
+      </LayoutCard>
+    </div>
   );
 }
