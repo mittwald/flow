@@ -26,8 +26,10 @@ jobs:
       - name: Test components
         run: pnpm nx test:unit components --coverage.enabled true
 
+      # Not `always()`: that also runs in a run a newer push cancelled, and
+      # reports the coverage of a test step that never finished.
       - name: Report Coverage
-        if: always()
+        if: "!cancelled()"
         uses: davelosert/vitest-coverage-report-action@8f86cfb56ed6d5613ea8cdc5259f207fbfd51ece # v2
         with:
           working-directory: ./packages/components/
