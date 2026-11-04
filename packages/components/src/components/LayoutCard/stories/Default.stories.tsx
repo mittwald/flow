@@ -6,6 +6,9 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { TabNavigation } from "@/components/TabNavigation";
 import { Link } from "@/components/Link";
 import { AlertIcon } from "@/components/AlertIcon";
+import { Alert } from "@/components/Alert";
+import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof LayoutCard> = {
   title: "Structure/Layout Card",
@@ -45,6 +48,20 @@ export const WithTabNavigation: Story = {
         <Link href="#">Backups</Link>
       </TabNavigation>
       <Section>Content</Section>
+    </LayoutCard>
+  ),
+};
+
+export const WithAlert: Story = {
+  render: (props) => (
+    <LayoutCard {...props}>
+      <Alert status="danger">
+        <Heading>Rechnung konnte nicht versendet werden</Heading>
+        <Content>
+          Aktualisiere bitte die E-Mail-Adressen, die du als Rechnungsempfänger
+          eingetragen hast.
+        </Content>
+      </Alert>
     </LayoutCard>
   ),
 };
