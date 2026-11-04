@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { expect, test } from "vitest";
+import { I18nProvider } from "react-aria";
 import { LightBoxGallery } from "@/components/LightBox";
 import { Text } from "@/components/Text";
 import styles from "./LightBoxGallery.module.scss";
@@ -89,4 +90,19 @@ test("the indicator reports the position in the gallery", async () => {
   await next().click();
 
   await expect.poll(position).toBe("2 of 3");
+});
+
+test("the gallery is announced as a carousel in the active locale", async () => {
+  render(
+    <I18nProvider locale="de">
+      <LightBoxGallery>
+        <Text>Sternenschiff</Text>
+        <Text>Frachter</Text>
+      </LightBoxGallery>
+    </I18nProvider>,
+  );
+
+  await expect
+    .element(page.getByRole("region", { name: "Bildergalerie" }))
+    .toHaveAttribute("aria-roledescription", "Karussell");
 });

@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { commands, page } from "vitest/browser";
 import { afterEach, describe, expect, test } from "vitest";
+import { I18nProvider } from "react-aria";
 import { ProgressBar } from "@/components/ProgressBar";
 import styles from "@/components/ProgressBar/ProgressBar.module.scss";
 
@@ -10,7 +11,7 @@ test("the value is reported and shown as a percentage", async () => {
   render(<ProgressBar aria-label="Storage" value={40} />);
 
   await expect.element(bar()).toHaveAttribute("aria-valuenow", "40");
-  await expect.element(bar()).toHaveTextContent("40 %");
+  await expect.element(bar()).toHaveTextContent("40%");
 });
 
 test("showMaxValue puts the maximum next to the value", async () => {
@@ -19,7 +20,22 @@ test("showMaxValue puts the maximum next to the value", async () => {
   );
 
   await expect.element(bar()).toHaveAttribute("aria-valuemax", "80");
-  await expect.element(bar()).toHaveTextContent("40 % of 80 %");
+  await expect.element(bar()).toHaveTextContent("40% of 80%");
+});
+
+test("the percentage follows the active locale", async () => {
+  render(
+    <I18nProvider locale="de">
+      <ProgressBar
+        aria-label="Speicher"
+        value={40.5}
+        maxValue={80}
+        showMaxValue
+      />
+    </I18nProvider>,
+  );
+
+  await expect.element(bar()).toHaveTextContent("40,5 % von 80 %");
 });
 
 /*
@@ -36,7 +52,7 @@ test("formatOptions replace the percent formatting", async () => {
   );
 
   await expect.element(bar()).toHaveTextContent("40");
-  await expect.element(bar()).not.toHaveTextContent("40 %");
+  await expect.element(bar()).not.toHaveTextContent("%");
 });
 
 test("valueLabel replaces the computed text", async () => {
@@ -45,7 +61,7 @@ test("valueLabel replaces the computed text", async () => {
   );
 
   await expect.element(bar()).toHaveTextContent("Almost full");
-  await expect.element(bar()).not.toHaveTextContent("40 %");
+  await expect.element(bar()).not.toHaveTextContent("40");
 });
 
 /*
@@ -64,9 +80,9 @@ test("segments add up to the reported value and are listed in the legend", async
   );
 
   await expect.element(bar()).toHaveAttribute("aria-valuenow", "50");
-  await expect.element(bar()).toHaveTextContent("50 %");
-  await expect.element(bar()).toHaveTextContent("Documents (30 %)");
-  await expect.element(bar()).toHaveTextContent("Images (20 %)");
+  await expect.element(bar()).toHaveTextContent("50%");
+  await expect.element(bar()).toHaveTextContent("Documents (30%)");
+  await expect.element(bar()).toHaveTextContent("Images (20%)");
 });
 
 test("a segment's valueText wins over its value", async () => {

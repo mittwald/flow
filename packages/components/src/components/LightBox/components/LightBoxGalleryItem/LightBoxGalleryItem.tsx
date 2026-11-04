@@ -6,7 +6,7 @@ import styles from "@/components/LightBox/components/LightBoxGallery/LightBoxGal
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { IconClose } from "@/components/Icon/components/icons";
 import { useOverlayController } from "@/lib/hooks";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 import { Button } from "@/components/Button";
 import type { PropsWithChildren } from "react";
@@ -34,7 +34,7 @@ export const LightBoxGalleryItem = flowComponent(
       Image: { className: styles.image },
     };
 
-    const stringFormatter = useLocalizedStringFormatter(locales);
+    const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
     return (
       <PropsContextProvider props={propsContext}>

@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { commands, page } from "vitest/browser";
 import { afterEach, describe, expect, test } from "vitest";
+import { I18nProvider } from "react-aria";
 import { DonutChart } from "@/components/DonutChart";
 import styles from "@/components/DonutChart/DonutChart.module.scss";
 import { Text } from "@/components/Text";
@@ -11,7 +12,21 @@ test("the value is reported and shown as a percentage", async () => {
   render(<DonutChart aria-label="Storage" value={40} />);
 
   await expect.element(chart()).toHaveAttribute("aria-valuenow", "40");
-  await expect.element(chart()).toHaveTextContent("40 %");
+  await expect.element(chart()).toHaveTextContent("40%");
+});
+
+test("the percentage follows the active locale", async () => {
+  render(
+    <I18nProvider locale="de">
+      <DonutChart
+        aria-label="Speicher"
+        segments={[{ value: 30.5, title: "Dokumente" }]}
+      />
+    </I18nProvider>,
+  );
+
+  await expect.element(chart()).toHaveTextContent("30,5 %");
+  await expect.element(page.getByText("Dokumente (30,5 %)")).toBeVisible();
 });
 
 /*
@@ -30,8 +45,8 @@ test("segments add up to the reported value and are listed in the legend", async
   );
 
   await expect.element(chart()).toHaveAttribute("aria-valuenow", "50");
-  await expect.element(page.getByText("Documents (30 %)")).toBeVisible();
-  await expect.element(page.getByText("Images (20 %)")).toBeVisible();
+  await expect.element(page.getByText("Documents (30%)")).toBeVisible();
+  await expect.element(page.getByText("Images (20%)")).toBeVisible();
 });
 
 test("a segment's valueText wins over its value", async () => {
@@ -68,7 +83,7 @@ test("formatOptions replace the percent formatting", async () => {
   );
 
   await expect.element(chart()).toHaveTextContent("40");
-  await expect.element(chart()).not.toHaveTextContent("40 %");
+  await expect.element(chart()).not.toHaveTextContent("%");
 });
 
 // Children take the place of the computed value in the middle of the donut.
@@ -80,7 +95,7 @@ test("children replace the value in the middle", async () => {
   );
 
   await expect.element(chart()).toHaveTextContent("Almost full");
-  await expect.element(chart()).not.toHaveTextContent("40 %");
+  await expect.element(chart()).not.toHaveTextContent("40");
 });
 
 // `Children.count(false)` is 1, but a remote host cannot tell `false` from no
@@ -93,7 +108,7 @@ test("a conditional child that renders nothing keeps the value", async () => {
     </DonutChart>,
   );
 
-  await expect.element(chart()).toHaveTextContent("40 %");
+  await expect.element(chart()).toHaveTextContent("40%");
 });
 
 test("an empty list next to a conditional child keeps the value", async () => {
@@ -108,7 +123,7 @@ test("an empty list next to a conditional child keeps the value", async () => {
     </DonutChart>,
   );
 
-  await expect.element(chart()).toHaveTextContent("40 %");
+  await expect.element(chart()).toHaveTextContent("40%");
 });
 
 describe("with motion allowed", () => {
