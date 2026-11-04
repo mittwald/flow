@@ -126,10 +126,23 @@ exists: from a prerelease, or from the newest version on a line, `patch` and
 `minor` exit non-zero with no JSON and a message saying so. That is not an
 error to work around — it means the choice is narrower than three options.
 
+Two of the three can also resolve to the same version. A keyword bounds the
+target from above and nothing more, so `major` finds the highest published
+stable release whether or not that crosses a major boundary — with no `2.x`
+published it lands inside `1.x`, exits 0, and its JSON differs from `minor`'s in
+`range.target` alone. `range.note` says when that happened. Compare the three
+targets rather than assuming three choices.
+
 So show me what actually resolved, side by side: target version, how many
-migrations carry a codemod, how many need a hand. If fewer than three resolved,
-say which and why, and put a dist-tag (`next`) or an exact version (`1.4.0`) on
-the table as an equal option rather than a fallback — those always resolve.
+migrations carry a codemod, how many need a hand. Collapse the keywords that
+resolved to the same version into one row and say which they were. If fewer than
+three distinct targets remain, say which and why, and put a dist-tag (`next`) or
+an exact version (`1.4.0`) on the table as an equal option rather than a
+fallback — those always resolve.
+
+Each entry carries `catchUp`: true means it shipped at or before the version
+this project is on, so the range you are comparing is not the same as the work
+that is new. Count both.
 
 Then ask me which target to take, and wait for my answer.
 
@@ -170,6 +183,16 @@ Then, on the target I chose:
   and a `packageManager` field before trusting what it chose. Confirm the
   versions it wrote are published, then install; revert the bump only if they
   are not.
+- A successful install is not the end of it. pnpm 11 refuses a dependency
+  younger than its `minimumReleaseAge` and writes a `minimumReleaseAgeExclude`
+  entry into `pnpm-workspace.yaml` to let the explicit bump through — so the
+  install passes and every later `pnpm run` in that package fails with
+  `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` before running anything, if the
+  exclusion did not take. Check `git status` for a changed `pnpm-workspace.yaml`
+  after the install and tell me what went in; some pnpm versions append a second
+  entry for a package that already has one instead of merging it, and pnpm's own
+  pre-run check then reads only the first. Merging the two by hand is the fix.
+  Nothing in the tool's report mentions the file.
 
 Then check every migration against the code — every entry in the JSON, including
 the ones with `action: "codemod"`. A codemod is deliberately scoped
@@ -181,12 +204,23 @@ as a result. Read the `upgrade` report for what it admits: an entry that changed
 no file, declined every file it looked at, or found nothing to process is the
 strongest hint that its pattern is still there in a shape it could not handle.
 
-One caveat on that report. "No files were processed. Is the path right?" is also
-what a codemod that crashed before touching a file looks like — the counters are
-identical, and the summary line guesses at the path. Check stderr for a stack
-trace before you believe the path is wrong, and tell me if a codemod died: its
-migration then had no run at all, and everything below is the only thing that
-covers it.
+`action` has a third value besides `codemod` and `manual`: `none`. Behaviour
+changed and no code change is required. Check those against the code like any
+other entry — what they need is a decision that nothing broke, not an edit — and
+say so rather than hunting for something to rewrite.
+
+Two caveats on that report. "No files were processed. Is the path right?" is
+also what a codemod that crashed before touching a file looks like — the
+counters are identical, and the summary line guesses at the path. Check stderr
+for a stack trace before you believe the path is wrong, and tell me if a codemod
+died: its migration then had no run at all, and everything below is the only
+thing that covers it.
+
+And read the per-codemod line whole. `0 file(s) changed, 3 unchanged` means the
+codemod read three files and left them alone; `0 file(s) changed, 0 unchanged`
+means it read nothing that parsed. The `unchanged` count is how you tell a run
+that covered the tree from one that covered a corner of it — if it is far below
+the number of source files you expect, the path is wrong, not the codemod.
 
 Include the entries flagged `catchUp: true`. They shipped before the version
 this project was on and may never have been done here.
@@ -260,12 +294,17 @@ nothing, what we decided together — and whether anything is still open, with t
 reason from the list above. If nothing is open, say so plainly rather than
 padding the summary with caveats.
 
-Finally, do not leave the whole migration sitting uncommitted. Walk me through
-the diff at the level of what changed and why — not file by file — then propose
-how to commit it: one commit, or one per package in a monorepo, with the
-messages written out. Commit once I say so. If I would rather review first,
-leave the tree as it is and say so in one line; do not commit without an answer,
-and do not push in any case.
+Finally, do not leave the migration sitting uncommitted. Walk me through the
+diff at the level of what changed and why — not file by file — then propose how
+to commit it, with the messages written out. Commit once I say so. If I would
+rather review first, leave the tree as it is and say so in one line; do not
+commit without an answer, and do not push in any case.
+
+If running `upgrade` once per package already made you commit after each one,
+those are the commits — do not redo them. What is left here is everything since:
+the edits you made by hand, the fixes to what the checks found, and whatever the
+closing decisions changed. Walk me through the diff of the whole migration, but
+propose commits only for what is still uncommitted.
 
 ```
 

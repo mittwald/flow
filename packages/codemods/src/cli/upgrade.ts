@@ -134,8 +134,16 @@ export const runUpgrade = async (
     dependencies,
     current,
     target,
+    note,
     peers,
   } = range;
+
+  // Ahead of everything else, including the dependency lines: it qualifies what
+  // `target` means, and a reader who has already accepted the target has
+  // stopped reading for that (#3117).
+  if (note !== undefined) {
+    log(note);
+  }
 
   // A stale dist-tag or an exact version at or below `current` resolves
   // without complaint — `resolveRange` deliberately does not judge that
@@ -288,7 +296,15 @@ export const runUpgrade = async (
       hadFailure = true;
       log(`  ${entry.id}: declined all ${result.skipped} file(s) it looked at`);
     } else {
-      log(`  ${entry.id}: ${result.changed} file(s) changed`);
+      // The counts the single-codemod command prints, not just `changed`: "0
+      // file(s) changed" alone reads the same whether the codemod read one file
+      // or thirty, which is the only signal a reader has that a codemod ran
+      // against the wrong path or a smaller tree than they think (#3117).
+      const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
+      const empty = result.empty > 0 ? `, ${result.empty} empty` : "";
+      log(
+        `  ${entry.id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}${empty}`,
+      );
     }
   }
 

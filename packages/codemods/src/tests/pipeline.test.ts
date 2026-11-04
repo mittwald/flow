@@ -79,6 +79,7 @@ const runChain = (source: string): ChainRun => {
  * | `/components/*`, `/controller`           | `imports-to-package-root`                  |
  * | `action={…}`                             | `action-prop-to-on-action`                 |
  * | `SubmitButtonProps`                      | `button-props-interfaces`                  |
+ * | `CartesianChart emptyView={NoData}`      | `cartesian-chart-empty-view`               |
  * | `MutedActionError`                       | `muted-action-error-to-abort-action-error` |
  * | `AccentBox color="violet"`               | `accent-box-color-to-background-color`     |
  * | `AsyncRule`                              | `password-tools-rule`                      |
@@ -97,6 +98,7 @@ import { Accordion } from "@mittwald/flow-react-components/components/Accordion"
 import { Action } from "@mittwald/flow-react-components/components/Action";
 import { Align } from "@mittwald/flow-react-components/components/Align";
 import { Button } from "@mittwald/flow-react-components/components/Button";
+import { CartesianChart } from "@mittwald/flow-react-components/components/CartesianChart";
 import { ContextualHelp } from "@mittwald/flow-react-components/components/ContextualHelp";
 import { Heading } from "@mittwald/flow-react-components/components/Heading";
 import { MutedActionError } from "@mittwald/flow-react-components/components/Action";
@@ -109,6 +111,8 @@ export class PasswordRule extends AsyncRule {}
 
 export const stylesheet = flowStyles;
 
+const NoData = () => <p>No data</p>;
+
 export const Toolbar = (props: {
   controller: OverlayController;
   save: SubmitButtonProps;
@@ -120,6 +124,7 @@ export const Toolbar = (props: {
     <AccentBox color="violet">
       <TableColumn maxWidth={200} minWidth={null} width={120} />
     </AccentBox>
+    <CartesianChart data={[]} emptyView={NoData} />
     <Action action={props.controller.close}>
       <Button color="accent">Close</Button>
     </Action>
@@ -143,6 +148,7 @@ import { Accordion } from "@mittwald/flow-react-components";
 import { Action } from "@mittwald/flow-react-components";
 import { Combine } from "@mittwald/flow-react-components";
 import { Button } from "@mittwald/flow-react-components";
+import { CartesianChart } from "@mittwald/flow-react-components";
 import { ContextualHelp } from "@mittwald/flow-react-components";
 import { Heading } from "@mittwald/flow-react-components";
 import { AbortActionError } from "@mittwald/flow-react-components";
@@ -153,6 +159,8 @@ import { Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js
 export class PasswordRule extends Rule {}
 
 export const stylesheet = flowStyles;
+
+const NoData = () => <p>No data</p>;
 
 export const Toolbar = (props: {
   controller: OverlayController;
@@ -165,6 +173,7 @@ export const Toolbar = (props: {
     <AccentBox backgroundColor="violet">
       <TableColumn width={120} />
     </AccentBox>
+    <CartesianChart data={[]} emptyView={<NoData />} />
     <Action onAction={() => props.controller.close()}>
       <Button color="success">Close</Button>
     </Action>
