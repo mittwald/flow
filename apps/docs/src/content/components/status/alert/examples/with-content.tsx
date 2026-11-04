@@ -6,7 +6,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Alert>
-  <Heading>E-Mail-Empfang wurde deaktiviert</Heading>
+  <Heading>E-Mail-Empfang deaktiviert</Heading>
   <Content>
     Der Empfang der E-Mails für dieses Postfach ist aufgrund
     fehlerhafter MX-Records deaktiviert. Bitte setze die
