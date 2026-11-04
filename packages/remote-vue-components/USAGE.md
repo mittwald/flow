@@ -27,7 +27,7 @@ What follows is only what is different because you write Vue.
 ## Installation
 
 ```shell
-FLOW=$(npm view @mittwald/flow-remote-vue-components@next version)
+FLOW=$(npm view @mittwald/flow-remote-vue-components@latest version)
 pnpm add @mittwald/flow-remote-vue-components@$FLOW @mittwald/flow-react-components@$FLOW @mittwald/ext-bridge@$FLOW vue react react-dom
 ```
 
@@ -39,8 +39,7 @@ read from that package's declarations. `@mittwald/ext-bridge` is needed because
 `RemoteRoot` imports it; `react` and `react-dom` are peers of
 `@mittwald/flow-react-components`. Install all of them explicitly: `yarn` and
 `npm --legacy-peer-deps` do not install peers on their own. All Flow packages
-need this package's exact version — named without one, pnpm and yarn take the
-`latest` dist-tag of the other two, which is a different release line.
+need this package's exact version: its peers require it.
 
 ## The model
 
