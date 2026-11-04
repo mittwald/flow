@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
+
+### Bug Fixes
+
+* **Breadcrumb:** keep separators visible in SkeletonMode ([#3629](https://github.com/mittwald/flow/issues/3629)) ([80f8fad](https://github.com/mittwald/flow/commit/80f8fadee61f934b808968aeea54f92fd0955c09))
+
 ## [1.5.61](https://github.com/mittwald/flow/compare/1.5.60...1.5.61) (2026-11-04)
 
 ### Code Refactoring
