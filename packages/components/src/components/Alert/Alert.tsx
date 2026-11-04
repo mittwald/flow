@@ -32,8 +32,19 @@ export const Alert = flowComponent("Alert", (props) => {
 
   const contentColorProps = contentColored("dark");
 
+  const linkProps = { color: "dark" } as const;
+
+  const contentLinkProps: PropsContext = {
+    Link: linkProps,
+    Text: {
+      ...contentColorProps.Text,
+      Link: linkProps,
+    },
+  };
+
   const propsContext: PropsContext = {
     ...contentColorProps,
+    ...contentLinkProps,
     Heading: {
       ...contentColorProps,
       className: styles.heading,
@@ -48,6 +59,7 @@ export const Alert = flowComponent("Alert", (props) => {
     },
     Content: {
       ...contentColorProps,
+      ...contentLinkProps,
       className: styles.content,
       Button: {
         ...contentColorProps.Button,

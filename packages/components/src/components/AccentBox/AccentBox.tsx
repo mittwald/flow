@@ -161,13 +161,14 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const contentColorProps = contentColor ? contentColored(contentColor) : {};
 
+  const linkProps = { color: contentColor ?? "dark" } as const;
+
   const contentPropsContext: PropsContext = {
     ...contentColorProps,
-    Link: {
-      color: contentColor,
-    },
+    Link: linkProps,
     Text: {
       ...contentColorProps.Text,
+      Link: linkProps,
       color: contentColor,
     },
     Heading: {
