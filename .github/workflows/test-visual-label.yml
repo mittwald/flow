@@ -13,14 +13,17 @@ on:
       - reopened
       - synchronize
 
-# One at a time per branch; re-labeling supersedes an in-flight run. Every
-# `labeled` event starts a run, whatever the label, and so does every push.
-# Runs that `prepare` skips get a group of their own, so they cannot cancel a
-# visual run in flight. The condition mirrors `prepare.if`; keep them in sync.
+# One at a time per branch. A re-label supersedes the run in flight, and so
+# does a push: the run in flight then tests a commit that is no longer the PR
+# head. Every `labeled` event starts a run, whatever the label; one that
+# `prepare` skips gets a group of its own, so it cannot cancel a visual run in
+# flight. A push stays in the shared group even where `prepare` skips it. The
+# condition is `prepare.if` plus `synchronize`; keep the two in sync.
 concurrency:
   group: >-
     visual-regression-run@${{ github.head_ref || github.ref }}${{
     !(github.event_name == 'workflow_dispatch' ||
+    github.event.action == 'synchronize' ||
     (github.head_ref != github.event.repository.default_branch &&
     (github.event.label.name == 'run-visual-tests' ||
     github.event.pull_request.user.login == 'dependabot[bot]'))) &&
@@ -33,7 +36,7 @@ permissions:
 jobs:
   # The gate for the whole run: the shards and the summary hang off this job, so
   # a skip here skips them too. The workflow's `concurrency.group` repeats this
-  # condition; keep the two in sync.
+  # condition, plus `synchronize`; keep the two in sync.
   prepare:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -155,10 +158,11 @@ jobs:
 
   # Reports for the run as a whole: one comment, whatever the shards did — but
   # only for a run that was not superseded. `always()` runs on a cancelled run
-  # too, and `cancel-in-progress` cancels one whenever a second run on the same
-  # branch passes `prepare`; the comment is a single upserted one, so a
-  # cancelled run's ❌ stays on the PR. `!cancelled()` covers the cancelled run,
-  # the `cancelled` result a shard cancelled without the run itself being.
+  # too, and `cancel-in-progress` cancels one whenever a push lands on the same
+  # branch or a second run there passes `prepare`; the comment is a single
+  # upserted one, so a cancelled run's ❌ stays on the PR. `!cancelled()` covers
+  # the cancelled run, the `cancelled` result a shard cancelled without the run
+  # itself being.
   summary:
     needs: run-visual-tests
     if: >
