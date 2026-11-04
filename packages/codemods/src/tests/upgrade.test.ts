@@ -61,6 +61,7 @@ const deps = (
   },
   choose: async (entries) => entries,
   isDirty: () => false,
+  changedPaths: () => [],
   readInstalledVersion: () => undefined,
   log: (message) => recorded.output.push(message),
   ...overrides,
@@ -428,6 +429,86 @@ describe("runUpgrade", () => {
 
     expect(code).toBe(0);
     expect(recorded.output.join("\n")).not.toContain("declined all");
+  });
+
+  // The counts the single-codemod mode always printed. Without them "0 file(s)
+  // changed" reads the same whether the codemod looked at one file or thirty,
+  // so nothing in the report says how much of the tree it actually visited.
+  test("each codemod line carries the full counts, not just the change count", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        runCodemod: async ({ id }) => {
+          recorded.codemods.push(id);
+          return {
+            changed: 0,
+            unmodified: 30,
+            skipped: 0,
+            empty: 0,
+            errors: 0,
+            processedNothing: false,
+          };
+        },
+      }),
+    );
+
+    expect(recorded.output.join("\n")).toContain(
+      "0 file(s) changed, 30 unchanged",
+    );
+  });
+
+  // #3117: pnpm 11 rewrites `pnpm-workspace.yaml` during the install, adding a
+  // `minimumReleaseAgeExclude` entry — and on 11.5 a duplicate one, which makes
+  // every later script in that package fail. Nothing in the report said the
+  // file had been touched.
+  test("a file the install rewrote beyond the manifest and lockfile is named", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+    let installed = false;
+
+    await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        install: () => {
+          installed = true;
+          return "stubbed";
+        },
+        changedPaths: () =>
+          installed
+            ? ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml"]
+            : [],
+      }),
+    );
+
+    const output = recorded.output.join("\n");
+    expect(output).toContain("pnpm-workspace.yaml");
+    expect(output).not.toContain("pnpm-lock.yaml —");
+    expect(output).toContain("minimumReleaseAgeExclude");
+  });
+
+  test("what the consumer already had open is not blamed on the install", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    await runUpgrade(
+      parseArguments(["upgrade", "major", "-y", "--allow-dirty"]),
+      deps(cwd, recorded, {
+        changedPaths: () => ["src/theirs.tsx"],
+      }),
+    );
+
+    expect(recorded.output.join("\n")).not.toContain(
+      "The install also changed",
+    );
   });
 
   test("declining a subset in `choose` runs only that subset", async () => {

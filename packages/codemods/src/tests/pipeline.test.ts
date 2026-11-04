@@ -81,6 +81,7 @@ const runChain = (source: string): ChainRun => {
  * | `SubmitButtonProps`                      | `button-props-interfaces`                  |
  * | `MutedActionError`                       | `muted-action-error-to-abort-action-error` |
  * | `AccentBox color="violet"`               | `accent-box-color-to-background-color`     |
+ * | `CodeBlock wrapLongLines`                | `code-block-syntax-highlighter-removed`    |
  * | `AsyncRule`                              | `password-tools-rule`                      |
  * | `Heading color="primary"`                | `color-primary-to-default`                 |
  * | `TableColumn maxWidth`/`minWidth={null}` | `table-column-width-props`                 |
@@ -99,6 +100,7 @@ import { Action } from "@mittwald/flow-react-components/components/Action";
 import { Align } from "@mittwald/flow-react-components/components/Align";
 import { Badge } from "@mittwald/flow-react-components/components/Badge";
 import { Button } from "@mittwald/flow-react-components/components/Button";
+import { CodeBlock } from "@mittwald/flow-react-components/components/CodeBlock";
 import { ContextualHelp } from "@mittwald/flow-react-components/components/ContextualHelp";
 import { Heading } from "@mittwald/flow-react-components/components/Heading";
 import { MutedActionError } from "@mittwald/flow-react-components/components/Action";
@@ -119,6 +121,7 @@ export const Toolbar = (props: {
     <Heading color="primary">Danger zone</Heading>
     <Badge color="red">Locked</Badge>
     <ContextualHelp defaultOpen>Rights and roles</ContextualHelp>
+    <CodeBlock code="rm -rf /" language="shell" wrapLongLines showInlineLineNumbers />
     <Accordion variant="outline" />
     <AccentBox color="violet">
       <TableColumn maxWidth={200} minWidth={null} width={120} />
@@ -147,6 +150,7 @@ import { Action } from "@mittwald/flow-react-components";
 import { Combine } from "@mittwald/flow-react-components";
 import { Badge } from "@mittwald/flow-react-components";
 import { Button } from "@mittwald/flow-react-components";
+import { CodeBlock } from "@mittwald/flow-react-components";
 import { ContextualHelp } from "@mittwald/flow-react-components";
 import { Heading } from "@mittwald/flow-react-components";
 import { AbortActionError } from "@mittwald/flow-react-components";
@@ -166,6 +170,7 @@ export const Toolbar = (props: {
     <Heading color="default">Danger zone</Heading>
     <Badge color="danger">Locked</Badge>
     <ContextualHelp isDefaultOpen>Rights and roles</ContextualHelp>
+    <CodeBlock code="rm -rf /" language="shell" />
     <Accordion />
     <AccentBox backgroundColor="lilac">
       <TableColumn width={120} />

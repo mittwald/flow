@@ -14,7 +14,11 @@ import {
   fetchVersions,
   intersectVersions,
 } from "./registry.js";
-import { resolveTarget, type UnresolvedTarget } from "./target.js";
+import {
+  resolveTarget,
+  type StayedWithin,
+  type UnresolvedTarget,
+} from "./target.js";
 
 /**
  * The installed version of `name`, read from `cwd`'s `node_modules`.
@@ -68,6 +72,12 @@ export interface ResolvedRange {
    * before anything is written, which is where the answer is worth most.
    */
   peers: PeerSummary;
+  /**
+   * The boundary the revision keyword offered to cross and did not — see
+   * `StayedWithin`. `undefined` whenever there is nothing to say: it crossed,
+   * or the revision was `patch`, an exact version or a dist-tag.
+   */
+  stayedWithin?: StayedWithin;
 }
 
 export interface UnresolvedRange {
@@ -237,7 +247,7 @@ export const resolveRange = async (
     return { ok: false, reason: describeUnresolvedTarget(resolved.reason) };
   }
 
-  const { target } = resolved;
+  const { target, stayedWithin } = resolved;
 
   // Defence in depth: `target` is drawn from `versions` (the intersection) or
   // from a dist-tag already validated against it, so this should never find a
@@ -264,5 +274,6 @@ export const resolveRange = async (
     target,
     versions,
     peers: collectPeers(fetched, target, flowPackages),
+    stayedWithin,
   };
 };
