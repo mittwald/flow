@@ -49,7 +49,10 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Alert>
-        <Heading>Heading</Heading>
+        <Heading>
+          Heading
+          <Badge>Badge</Badge>
+        </Heading>
         <Content>
           <Text>Text</Text>
           <InlineCode>InlineCode</InlineCode>

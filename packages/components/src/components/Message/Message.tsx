@@ -6,11 +6,11 @@ import type {
   PropsWithElementType,
 } from "@/lib/types/props";
 import {
-  contentColored,
   dynamic,
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
+import { contentColored } from "@/lib/propsContext/contentColor";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import {
   flowComponent,
@@ -64,7 +64,6 @@ export const Message = flowComponent("Message", (props) => {
   const contentColorProps = type === "sender" ? contentColored("dark") : {};
 
   const propsContext: PropsContext = {
-    ...contentColorProps,
     Content: {
       ...contentColorProps,
       className: styles.content,
@@ -112,7 +111,6 @@ export const Message = flowComponent("Message", (props) => {
     },
 
     Button: {
-      ...contentColorProps.Button,
       size: "s",
       className: styles.action,
     },

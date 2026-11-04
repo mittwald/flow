@@ -74,7 +74,9 @@ test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
             </Text>
           </Content>
 
-          <Button>Button</Button>
+          <Button variant="soft" color="secondary">
+            Button
+          </Button>
         </Message>
         <Message color="#ffeedd">
           <Content>

@@ -52,6 +52,7 @@ test.each(testEnvironments)(
       AccentBox,
       Section,
       Heading,
+      Content,
       Text,
       InlineCode,
       Badge,
@@ -66,10 +67,15 @@ test.each(testEnvironments)(
           (backgroundColor) => (
             <AccentBox key={backgroundColor} backgroundColor={backgroundColor}>
               <Section>
-                <Heading>{firstLetterToUppercase(backgroundColor)}</Heading>
-                <Text>
-                  Text with <InlineCode>InlineCode</InlineCode>
-                </Text>
+                <Heading>
+                  {firstLetterToUppercase(backgroundColor)}
+                  <Badge>Badge</Badge>
+                </Heading>
+                <Content>
+                  <Text>
+                    Text with <InlineCode>InlineCode</InlineCode>
+                  </Text>
+                </Content>
                 <Badge>Badge</Badge>
                 <CopyButton text="InlineCode" />
                 <ActionGroup>
