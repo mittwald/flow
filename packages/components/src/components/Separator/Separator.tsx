@@ -1,12 +1,21 @@
-import type { FC } from "react";
 import clsx from "clsx";
 import styles from "./Separator.module.scss";
 import * as Aria from "react-aria-components";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export type SeparatorProps = Aria.SeparatorProps;
+export interface SeparatorProps
+  extends Aria.SeparatorProps, FlowComponentProps<HTMLElement> {
+  children?: never;
+}
 
-/** @flr-generate all */
-export const Separator: FC<SeparatorProps> = (props) => {
+/**
+ * Inside a collection (`ContextMenu`) a `tunnel` needs a `staticEntryId`, since
+ * react-aria renders collection children twice (#3146).
+ *
+ * @flr-generate all
+ */
+export const Separator = flowComponent("Separator", (props) => {
   const { className, orientation = "horizontal", ...rest } = props;
 
   const rootClassName = clsx(
@@ -18,6 +27,6 @@ export const Separator: FC<SeparatorProps> = (props) => {
   return (
     <Aria.Separator elementType="hr" className={rootClassName} {...rest} />
   );
-};
+});
 
 export default Separator;
