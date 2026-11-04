@@ -36,11 +36,13 @@
     margin-block-start: var(--section--spacing);
   }
 
-  &:has(> .accentBox:only-child) {
+  /* A lone AccentBox or Alert fills the card */
+  &:has(> .accentBox:only-child, > .alert:only-child) {
     padding: 0;
     border: none;
 
-    .accentBox {
+    > .accentBox,
+    > .alert {
       padding: var(--layout-card--padding);
       border-radius: calc(var(--layout-card--corner-radius) - 1px);
       flex-grow: 1;
@@ -58,10 +60,11 @@
       margin-bottom: var(--layout-card--padding-mobile);
     }
 
-    &:has(> .accentBox:only-child) {
+    &:has(> .accentBox:only-child, > .alert:only-child) {
       padding: 0;
 
-      .accentBox {
+      > .accentBox,
+      > .alert {
         padding: var(--layout-card--padding-mobile);
       }
     }
