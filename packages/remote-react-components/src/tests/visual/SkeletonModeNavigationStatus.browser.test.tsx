@@ -44,6 +44,11 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
             <Link href="#">Domains</Link>
             <Link href="#">Backups</Link>
           </TabNavigation>
+          <TabNavigation aria-label="Projekt lädt">
+            <Link />
+            <Link />
+          </TabNavigation>
+          <TabNavigation aria-label="Projekt ohne Links" />
           <ColumnLayout m={[1, 2]}>
             <Navigation aria-label="Projekt">
               <Link href="#" aria-current="page">

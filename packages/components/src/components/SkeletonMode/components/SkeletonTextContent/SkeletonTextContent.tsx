@@ -27,7 +27,7 @@ export const SkeletonTextContent: FC<SkeletonTextContentProps> = (props) => {
   }
 
   if (!hasContent(children)) {
-    return <SkeletonText width={defaultWidth} />;
+    return <SkeletonText width={defaultWidth} className={styles.defaultBar} />;
   }
 
   /* The outer span takes the item role in a flex or grid parent, so the bar
