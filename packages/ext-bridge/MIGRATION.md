@@ -6,11 +6,6 @@
 
 ### `verify` requires your `extensionId`
 
-`verify` checked the signature of a session token, but not which extension it
-was issued for. A session token issued for extension B passed `verify` in the
-backend of extension A, so the operator of extension B could authenticate as one
-of its users at extension A.
-
 Session tokens now carry the extension ID as audience (`aud`). `verify` takes
 your extension ID and rejects every session token issued for another extension.
 Without `extensionId` it throws an `ExtBridgeError`:
