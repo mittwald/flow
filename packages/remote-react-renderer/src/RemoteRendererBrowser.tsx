@@ -17,6 +17,7 @@ import {
   type NavigationState,
   type RemoteExtBridgeConnectionApi,
   type RemoteReadyEvent,
+  type Version,
 } from "@mittwald/flow-remote-core";
 import { refresh, usePromise } from "@mittwald/react-use-promise";
 import {
@@ -44,6 +45,10 @@ export interface RemoteRendererBrowserProps {
   onComponentUsage?: ComponentUsageHandler;
   hostPathname?: string;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
+  /** Expected remote iframe origin. Defaults to the `src` origin. */
+  remoteOrigin?: string;
+  /** Minimum communication version required before rendering. */
+  minRemoteVersion?: Version;
   /** Internal use only */
   __remoteReceiver?: RemoteReceiver;
 }
@@ -113,6 +118,8 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
     onDeprecation,
     onComponentUsage,
     hostPathname,
+    remoteOrigin,
+    minRemoteVersion,
     remoteComponents,
   } = props;
 
@@ -152,6 +159,8 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
     connection: receiver.connection,
     extBridgeImplementation,
     hostConfig,
+    remoteOrigin,
+    minRemoteVersion,
     onReady: ({ connection: establishedConnection, remoteReadyEvent }) => {
       establishedConnection.updateHostPathname(hostPathname);
       onConnected?.(remoteReadyEvent);

@@ -34,6 +34,7 @@ export const renderRemoteTest = async (
   const url = new URL("http://localhost");
   url.port = String(remoteTestServerPort);
   url.searchParams.set("test", testName ?? "");
+  url.searchParams.set("hostOrigin", window.location.origin);
   url.searchParams.set("file", testFilePath.replace(".test.", ".test.remote."));
 
   const renderResult = await render(
