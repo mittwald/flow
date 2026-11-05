@@ -33,9 +33,12 @@ if (!scenarioModule) {
   throw new Error(`Scenario module "${file}" not found`);
 }
 
-const scenario = scenarioModule.default[scenarioName];
+const scenarios = scenarioModule.default;
+const scenario = Object.hasOwn(scenarios, scenarioName)
+  ? scenarios[scenarioName]
+  : undefined;
 
-if (!scenario) {
+if (typeof scenario !== "function") {
   throw new Error(`Scenario "${scenarioName}" not found in "${file}"`);
 }
 
