@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
+
+### Bug Fixes
+
+* **components:** bundle fonts ([#3648](https://github.com/mittwald/flow/issues/3648)) ([7564c69](https://github.com/mittwald/flow/commit/7564c69f7edb9664a5d82c5e3af0b036d8cb68a3))
+
 ## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
 
 **Note:** Version bump only for package @mittwald/flow-remote-vue-components
