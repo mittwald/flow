@@ -16,6 +16,7 @@ export default mergeConfig(
   baseConfig,
   defineConfig({
     experimental: {},
+    base: "./",
     build: {
       minify: false,
       sourcemap: true,
@@ -50,6 +51,9 @@ export default mergeConfig(
             }
             if (assetInfo.names[0] === "globals.css") {
               return "css/globals.css";
+            }
+            if (assetInfo.names[0]?.endsWith(".woff2")) {
+              return `fonts/${assetInfo.names[0]}`;
             }
             return assetInfo.names[0] ?? `undefined`;
           },

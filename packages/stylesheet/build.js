@@ -19,8 +19,20 @@ if (!fs.existsSync(path.dirname(targetPathname))) {
   fs.mkdirSync(path.dirname(targetPathname));
 }
 
-fs.copyFileSync(stylesheetPathname, targetPathname);
-fs.copyFileSync(layeredStylesheetPathname, layeredTargetPathname);
+const copyStylesheet = (source, target) =>
+  fs.writeFileSync(
+    target,
+    fs.readFileSync(source, "utf8").replaceAll("url(../fonts/", "url(fonts/"),
+  );
+
+copyStylesheet(stylesheetPathname, targetPathname);
+copyStylesheet(layeredStylesheetPathname, layeredTargetPathname);
+
+fs.cpSync(
+  path.join(path.dirname(stylesheetPathname), "../fonts"),
+  path.join(thisDirname, "dist/fonts"),
+  { recursive: true },
+);
 
 const previousUnlayeredTargetPathname = path.join(
   thisDirname,
