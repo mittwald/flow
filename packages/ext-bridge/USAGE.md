@@ -87,6 +87,22 @@ const { publicToken, expiry } = await getAccessToken(
 - `getAccessToken` returns an `expiry` — respect it rather than caching the
   token indefinitely.
 
+## Allow only mStudio to embed your frontend
+
+Your extension's frontend is meant to run inside mStudio only.
+
+- **Required:** send a `Content-Security-Policy` **response header** with
+  `frame-ancestors` limited to the mStudio origins:
+  `frame-ancestors https://*.mittwald.de https://*.mittwald.systems`. No bare
+  `*`, no `https:`. A `<meta>` tag does not work for `frame-ancestors`.
+- `RemoteRoot` accepts messages only from the mStudio origins
+  (`https://*.mittwald.de`, `https://*.mittwald.systems`) and from your app's
+  own origin. For local development against another host, pass the extra origins
+  as `allowedHostOrigins`.
+- Paths the host sends (`onHostPathnameChanged`) are always relative app paths
+  like `/settings?tab=1`. Anything else (absolute URLs, `//host`, `javascript:`)
+  is dropped before it reaches your router.
+
 ## Stability
 
 The config schema carries an explicit contract: existing properties are never
