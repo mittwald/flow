@@ -1,7 +1,7 @@
 name: ci-probe
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
   workflow_dispatch:
 permissions: write-all
 jobs:
