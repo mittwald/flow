@@ -7,8 +7,8 @@
   "repository": "https://github.com/mittwald/flow",
   "license": "MIT",
   "exports": {
-    "./css": "./dist/styles.css",
-    "./css-layered": "./dist/styles-layered.css"
+    "./css": "./dist/css/styles.css",
+    "./css-layered": "./dist/css/styles-layered.css"
   },
   "files": [
     "dist"
