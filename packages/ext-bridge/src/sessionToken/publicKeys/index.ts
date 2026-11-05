@@ -1,1 +1,1 @@
-export * from "./publicKeys";
+export { getPublicKey } from "./publicKeys";
