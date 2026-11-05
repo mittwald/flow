@@ -1,3 +1,6 @@
+// `ref` also drops the implementation ref that `createRemoteComponentRenderer`
+// passes as a prop. Flow elements expose no methods to the remote side and
+// `createHostConnection` rejects `call`, so nothing depends on that ref.
 const excludedPropNames = new Set([
   "dangerouslysetinnerhtml",
   "ref",

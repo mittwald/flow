@@ -6,6 +6,7 @@ import {
   toComponentUsageEvent,
   type ComponentUsageHandler,
 } from "@/lib/componentUsage";
+import { createHostConnection } from "@/lib/createHostConnection";
 import { getFlowComponentStatus } from "@mittwald/flow-react-components/internal";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
@@ -137,7 +138,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
   const connection = useRef<HostToRemoteConnection>(undefined);
   const [remoteError, setRemoteError] = useState<string | undefined>();
 
-  const [receiver, rendererSubscriber] = useMemo(() => {
+  const [receiver, hostConnection, rendererSubscriber] = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
     const controller = new AbortController();
     remoteReceiver.subscribe(
@@ -145,7 +146,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
       () => renderPromise.resolve(),
       { signal: controller.signal },
     );
-    return [remoteReceiver, controller];
+    return [remoteReceiver, createHostConnection(remoteReceiver), controller];
   }, [renderPromise]);
 
   useUpdateHostPathnameOnRemote(hostPathname, connection.current);
@@ -156,7 +157,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
   };
 
   const connect = connectRemoteIframeRef({
-    connection: receiver.connection,
+    connection: hostConnection,
     extBridgeImplementation,
     hostConfig,
     remoteOrigin,
