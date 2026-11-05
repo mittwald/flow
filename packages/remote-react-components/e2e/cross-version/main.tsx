@@ -19,6 +19,7 @@ const root = createRoot(container);
 const url = new URL(window.location.href);
 const file = url.searchParams.get("file");
 const scenarioName = url.searchParams.get("scenario");
+const hostOrigin = url.searchParams.get("hostOrigin");
 
 if (!file || !scenarioName) {
   throw new Error('Missing required query parameters "file" and "scenario"');
@@ -38,4 +39,8 @@ if (!scenario) {
   throw new Error(`Scenario "${scenarioName}" not found in "${file}"`);
 }
 
-root.render(<RemoteRoot>{scenario(components)}</RemoteRoot>);
+root.render(
+  <RemoteRoot allowedHostOrigins={hostOrigin ? [hostOrigin] : undefined}>
+    {scenario(components)}
+  </RemoteRoot>,
+);

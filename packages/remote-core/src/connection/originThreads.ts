@@ -21,6 +21,7 @@ export const hostOriginMessageTarget = (
   parent: Window,
   { allowedHostOrigins: additionalOrigins = [] }: HostOriginTargetOptions = {},
 ): ThreadMessageTarget => {
+  const warnedOrigins = new Set<string>();
   const isAllowedHostOrigin = createAllowedHostOriginMatcher([
     ...DEFAULT_ALLOWED_HOST_ORIGINS,
     window.location.origin,
@@ -35,6 +36,10 @@ export const hostOriginMessageTarget = (
     ancestorOriginValue &&
     (!ancestorOrigin || !isAllowedHostOrigin(ancestorOrigin))
   ) {
+    warnedOrigins.add(ancestorOriginValue);
+    console.warn(
+      `Host origin ${ancestorOriginValue} is not an allowed host origin. Add it to allowedHostOrigins to connect.`,
+    );
     throw new RemoteError("Host origin is not allowed");
   }
 
@@ -61,11 +66,27 @@ export const hostOriginMessageTarget = (
   };
 
   const accept = (event: MessageEvent) => {
-    if (event.source !== parent || !isAllowedHostOrigin(event.origin)) {
+    if (event.source !== parent) {
+      return false;
+    }
+
+    if (!isAllowedHostOrigin(event.origin)) {
+      if (!warnedOrigins.has(event.origin)) {
+        warnedOrigins.add(event.origin);
+        console.warn(
+          `Ignored a message from host origin ${event.origin}: it is not an allowed host origin. Add it to allowedHostOrigins to connect.`,
+        );
+      }
       return false;
     }
 
     if (hostOrigin && event.origin !== hostOrigin) {
+      if (!warnedOrigins.has(event.origin)) {
+        warnedOrigins.add(event.origin);
+        console.warn(
+          `Ignored a message from host origin ${event.origin}: the connection uses ${hostOrigin}.`,
+        );
+      }
       return false;
     }
 
@@ -165,7 +186,9 @@ export const remoteOriginMessageTarget = (
     throw new RemoteError("Remote window could not be determined");
   }
 
+  const warnedOrigins = new Set<string>();
   let connected = false;
+  let shouldAnswerResponse = true;
   const pendingMessages: {
     message: unknown;
     transferables?: Transferable[];
@@ -174,20 +197,50 @@ export const remoteOriginMessageTarget = (
   const post = (message: unknown, transferables?: Transferable[]) =>
     remoteWindow.postMessage(message, expectedOrigin, transferables ?? []);
 
+  const accept = (event: MessageEvent) => {
+    if (event.source !== remoteWindow) {
+      return false;
+    }
+
+    if (event.origin !== expectedOrigin) {
+      if (!warnedOrigins.has(event.origin)) {
+        warnedOrigins.add(event.origin);
+        console.warn(
+          `Ignored a message from remote origin ${event.origin}: expected ${expectedOrigin}.`,
+        );
+      }
+      return false;
+    }
+
+    return true;
+  };
+
   const responseController = new AbortController();
+  if (typeof iframe.addEventListener === "function") {
+    iframe.addEventListener(
+      "load",
+      () => {
+        shouldAnswerResponse = true;
+      },
+      { signal: responseController.signal },
+    );
+  }
   window.addEventListener(
     "message",
     (event) => {
-      if (
-        event.source !== remoteWindow ||
-        event.origin !== expectedOrigin ||
-        event.data !== RESPONSE_MESSAGE
-      ) {
+      if (!accept(event) || event.data !== RESPONSE_MESSAGE) {
+        return;
+      }
+
+      if (shouldAnswerResponse) {
+        shouldAnswerResponse = false;
+        post(CHECK_MESSAGE);
+      }
+      if (connected) {
         return;
       }
 
       connected = true;
-      responseController.abort();
       for (const { message, transferables } of pendingMessages.splice(0)) {
         post(message, transferables);
       }
@@ -206,14 +259,18 @@ export const remoteOriginMessageTarget = (
       post(message, transferables);
     },
     listen(listener, { signal }) {
+      if (signal?.aborted) {
+        responseController.abort();
+      } else {
+        signal?.addEventListener("abort", () => responseController.abort(), {
+          once: true,
+        });
+      }
+
       window.addEventListener(
         "message",
         (event) => {
-          if (
-            event.source !== remoteWindow ||
-            event.origin !== expectedOrigin ||
-            event.data === RESPONSE_MESSAGE
-          ) {
+          if (!accept(event) || event.data === RESPONSE_MESSAGE) {
             return;
           }
 
