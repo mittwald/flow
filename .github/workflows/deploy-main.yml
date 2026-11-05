@@ -138,14 +138,16 @@ jobs:
             || steps.meta-storybook.outputs.labels }}
 
       - name: Trigger docs redeploy webhook
-        if: matrix.image_suffix == 'docs'
+        # TEMP(fix/ext-bridge-verify-audience): mittwald API calls disabled — revert before merge.
+        if: false && matrix.image_suffix == 'docs'
         run:
           curl --fail --silent --show-error --location "$FLOW_REDEPLOY_WEBHOOK"
         env:
           FLOW_REDEPLOY_WEBHOOK: ${{ secrets.FLOW_REDEPLOY_WEBHOOK }}
 
       - name: Trigger storybook redeploy webhook
-        if: matrix.image_suffix == 'storybook'
+        # TEMP(fix/ext-bridge-verify-audience): mittwald API calls disabled — revert before merge.
+        if: false && matrix.image_suffix == 'storybook'
         run:
           curl --fail --silent --show-error --location
           "$STORYBOOK_REDEPLOY_WEBHOOK"

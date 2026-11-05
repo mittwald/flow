@@ -27,6 +27,8 @@ concurrency:
 
 jobs:
   cleanup:
+    # TEMP(fix/ext-bridge-verify-audience): mittwald API calls disabled — revert before merge.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
