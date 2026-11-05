@@ -24,7 +24,10 @@ export const verify = async (sessionToken: string, options: VerifyOptions) => {
   const publicKey = await getPublicKey(decoded.publicKeySerial);
 
   try {
-    await jwtVerify(sessionToken, publicKey, { audience: extensionId });
+    await jwtVerify(sessionToken, publicKey, {
+      audience: extensionId,
+      algorithms: ["EdDSA"],
+    });
   } catch (error) {
     if (error instanceof JWTClaimValidationFailed && error.claim === "aud") {
       throw new ExtBridgeError(

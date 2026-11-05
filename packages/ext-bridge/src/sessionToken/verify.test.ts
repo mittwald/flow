@@ -1,20 +1,29 @@
 import { ExtBridgeError } from "@/error";
 import type { VerifyOptions } from "@/sessionToken/verify";
 import { generateKeyPair, SignJWT } from "jose";
-import { beforeAll, describe, expect, it, vi } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
-const keys = vi.hoisted(() => ({ publicKey: undefined as unknown }));
+const keys = vi.hoisted(() => ({
+  publicKey: undefined as unknown,
+  getPublicKey: vi.fn(() => Promise.resolve(undefined as unknown)),
+}));
 
 vi.mock("@/sessionToken/publicKeys", () => ({
-  getPublicKey: async () => keys.publicKey,
+  getPublicKey: keys.getPublicKey,
 }));
 
 const { verify } = await import("@/sessionToken/verify");
 
 const extensionId = "extension-a";
 let privateKey: CryptoKey;
+let publicKey: CryptoKey;
 
-const signSessionToken = (audience?: string) => {
+const signSessionToken = (
+  audience?: string,
+  publicKeySerial = "serial",
+  signingKey = privateKey,
+  algorithm = "EdDSA",
+) => {
   const jwt = new SignJWT({
     sessionId: "session-id",
     extensionId: audience ?? extensionId,
@@ -23,9 +32,9 @@ const signSessionToken = (audience?: string) => {
     context: "project",
     scopes: [],
     authenticatableWithoutSecret: false,
-    publicKeySerial: "serial",
+    publicKeySerial,
   })
-    .setProtectedHeader({ alg: "EdDSA" })
+    .setProtectedHeader({ alg: algorithm })
     .setSubject("user-id")
     .setIssuedAt()
     .setExpirationTime("1m");
@@ -33,13 +42,19 @@ const signSessionToken = (audience?: string) => {
   if (audience) {
     jwt.setAudience(audience);
   }
-  return jwt.sign(privateKey);
+  return jwt.sign(signingKey);
 };
 
 beforeAll(async () => {
   const pair = await generateKeyPair("EdDSA", { crv: "Ed25519" });
   privateKey = pair.privateKey;
-  keys.publicKey = pair.publicKey;
+  publicKey = pair.publicKey;
+});
+
+beforeEach(() => {
+  keys.publicKey = publicKey;
+  keys.getPublicKey.mockClear();
+  keys.getPublicKey.mockImplementation(async () => keys.publicKey);
 });
 
 describe("verify", () => {
@@ -62,6 +77,31 @@ describe("verify", () => {
     await expect(verify(token, { extensionId })).rejects.toBeInstanceOf(
       ExtBridgeError,
     );
+  });
+
+  it.each(["../other", "a?b=c", "a/b", "a".repeat(129)])(
+    "rejects the invalid public key serial %s before lookup",
+    async (serial) => {
+      const token = await signSessionToken(extensionId, serial);
+
+      await expect(verify(token, { extensionId })).rejects.toBeInstanceOf(
+        ExtBridgeError,
+      );
+      expect(keys.getPublicKey).not.toHaveBeenCalled();
+    },
+  );
+
+  it("rejects a token using an algorithm outside the allowlist", async () => {
+    const pair = await generateKeyPair("RS256");
+    keys.publicKey = pair.publicKey;
+    const token = await signSessionToken(
+      extensionId,
+      "serial",
+      pair.privateKey,
+      "RS256",
+    );
+
+    await expect(verify(token, { extensionId })).rejects.toThrow();
   });
 
   it.each([
