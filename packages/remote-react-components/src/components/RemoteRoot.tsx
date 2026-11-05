@@ -13,6 +13,7 @@ import {
 import {
   connectHostRenderRootRef,
   connectRemoteReceiver,
+  toRelativePathname,
   type RemoteReceiver,
   type RemoteToHostConnection,
 } from "@mittwald/flow-remote-core";
@@ -51,6 +52,11 @@ const { Div: LoadingFallbackDiv } = markViewComponents({
 export interface RemoteRootProps extends PropsWithChildren {
   onHostPathnameChanged?: (pathname: string) => void;
   isLoading?: boolean;
+  /**
+   * Additional host origins the remote app accepts, e.g. for local development.
+   * The mStudio origins and the app's own origin are always allowed.
+   */
+  allowedHostOrigins?: string[];
   /** Internal use only */
   __remoteReceiver?: RemoteReceiver;
 }
@@ -69,6 +75,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     children,
     onHostPathnameChanged,
     isLoading,
+    allowedHostOrigins,
     __remoteReceiver: remoteReceiver,
   } = props;
 
@@ -87,6 +94,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     <RemoteConnectionRoot
       onHostPathnameChanged={onHostPathnameChanged}
       isLoading={isLoading}
+      allowedHostOrigins={allowedHostOrigins}
     >
       {children}
     </RemoteConnectionRoot>
@@ -122,6 +130,7 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
     children,
     onHostPathnameChanged,
     isLoading: isLoadingFromProps,
+    allowedHostOrigins,
   } = props;
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
@@ -200,10 +209,17 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
   }
 
   const connect = connectHostRenderRootRef({
-    onPathnameChanged: (pathname) =>
-      startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+    onPathnameChanged: (pathname) => {
+      const relativePathname = toRelativePathname(pathname);
+      if (relativePathname !== undefined) {
+        startPathnameChangedTransition(() =>
+          onHostPathnameChanged?.(relativePathname),
+        );
+      }
+    },
     onHostError: (error) => setHostError(error),
     packageVersion,
+    allowedHostOrigins,
   });
 
   /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */

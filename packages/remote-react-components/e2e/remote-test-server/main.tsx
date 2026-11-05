@@ -18,6 +18,7 @@ const root = createRoot(container);
 const url = new URL(window.location.href);
 const file = url.searchParams.get("file");
 const test = url.searchParams.get("test");
+const hostOrigin = url.searchParams.get("hostOrigin");
 
 if (!file || !test) {
   throw new Error("Invalid params");
@@ -34,4 +35,8 @@ if (!foundFile) {
 const module = modules[foundFile];
 const TestComponent = module[test];
 
-root.render(<RemoteRoot>{createElement(TestComponent)}</RemoteRoot>);
+root.render(
+  <RemoteRoot allowedHostOrigins={hostOrigin ? [hostOrigin] : undefined}>
+    {createElement(TestComponent)}
+  </RemoteRoot>,
+);
