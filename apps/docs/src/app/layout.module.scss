@@ -17,6 +17,17 @@
   background-blend-mode: overlay, normal;
 }
 
+// The start page sets its own dark sections on a plain ground
+.body:has([data-page="home"]) {
+  // Its sections are as wide as the viewport, which includes a classic
+  // scrollbar
+  overflow-x: clip;
+
+  .background {
+    display: none;
+  }
+}
+
 .wrapper {
   isolation: isolate;
   min-height: 100dvh;
