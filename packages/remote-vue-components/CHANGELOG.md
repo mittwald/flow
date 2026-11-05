@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+### Bug Fixes
+
+* **remote-core:** restrict remote connections to allowed host origins ([#3647](https://github.com/mittwald/flow/issues/3647)) ([e452984](https://github.com/mittwald/flow/commit/e45298461bd56f2abdae710830da59eb015f6b8a))
+
 ## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
 
 ### Bug Fixes

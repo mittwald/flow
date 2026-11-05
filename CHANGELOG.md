@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+### Bug Fixes
+
+* **ext-bridge:** require extension id in verify and check session token audience ([#3646](https://github.com/mittwald/flow/issues/3646)) ([63d85cd](https://github.com/mittwald/flow/commit/63d85cdaca0de485532df991e5e9a711d5ca3a65))
+* **ext-bridge:** validate public key serial and cache failed key lookups ([#3650](https://github.com/mittwald/flow/issues/3650)) ([4e08252](https://github.com/mittwald/flow/commit/4e0825294ebf2b92bf1db995da4019e3032e0405))
+* **remote-core:** restrict remote connections to allowed host origins ([#3647](https://github.com/mittwald/flow/issues/3647)) ([e452984](https://github.com/mittwald/flow/commit/e45298461bd56f2abdae710830da59eb015f6b8a))
+* **remote-react-renderer:** drop non-component props from remote elements ([#3649](https://github.com/mittwald/flow/issues/3649)) ([67fbdbb](https://github.com/mittwald/flow/commit/67fbdbb498467b1e7ab5b5aa3ffe5119d3a0dd2e))
+
+### Documentation
+
+* **ext-bridge:** point migration note at the next release ([0db8fd7](https://github.com/mittwald/flow/commit/0db8fd7c074bc3bdf5c78ae734d8595b81c0898c))
+
 ## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
 
 ### Bug Fixes
