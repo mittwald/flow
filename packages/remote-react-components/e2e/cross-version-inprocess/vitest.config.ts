@@ -1,7 +1,6 @@
 import { mergeConfig } from "vitest/config";
 import { createVitestBrowserTestConfig } from "../../../core/src/index.ts";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
-import { serveFontsLocally } from "../../dev/vitest/serveFontsLocally.ts";
 import viteConfig from "./vite.config.ts";
 
 const sharedBrowserTestConfig = createVitestBrowserTestConfig();
@@ -50,12 +49,6 @@ export default mergeConfig(viteConfig, {
     fileParallelism: false,
     browser: {
       ...sharedBrowserTestConfig.browser,
-      // dev/vitest/setupBrowser.ts calls it, so it has to be registered here
-      // too — this config inherits the shared browser config, not the package's.
-      commands: {
-        ...sharedBrowserTestConfig.browser?.commands,
-        serveFontsLocally,
-      },
       headless: true,
       instances: sharedBrowserTestConfig.browser?.instances?.filter(
         (instance) => instance.browser === "webkit",
