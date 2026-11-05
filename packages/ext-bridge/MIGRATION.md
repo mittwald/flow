@@ -2,6 +2,30 @@
 
 ---
 
+## From version `1.5.62` to `>=1.5.63`
+
+### `verify` requires your `extensionId`
+
+`verify` checked the signature of a session token, but not which extension it
+was issued for. A session token issued for extension B passed `verify` in the
+backend of extension A, so the operator of extension B could authenticate as one
+of its users at extension A.
+
+Session tokens now carry the extension ID as audience (`aud`). `verify` takes
+your extension ID and rejects every session token issued for another extension.
+Without `extensionId` it throws an `ExtBridgeError`:
+
+```diff
+  import { verify } from "@mittwald/ext-bridge/node";
+
+- const decoded = await verify(sessionToken);
++ const decoded = await verify(sessionToken, {
++   extensionId: process.env.EXTENSION_ID!,
++ });
+```
+
+---
+
 ## From version `0.2.0-alpha.1050` to `>=0.2.0-alpha.1051`
 
 ### Context parameters are typed, and config values are never `null`
