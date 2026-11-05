@@ -2,7 +2,7 @@
 
 ---
 
-## From version `1.5.62` to `>=1.5.63`
+## From version `1.5.63` to `>=1.5.64`
 
 ### `verify` requires your `extensionId`
 
