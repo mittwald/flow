@@ -15,12 +15,13 @@ vi.mock("@/sessionToken/publicKeys", () => ({
 const { verify } = await import("@/sessionToken/verify");
 
 const extensionId = "extension-a";
+const defaultPublicKeySerial = "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d94e";
 let privateKey: CryptoKey;
 let publicKey: CryptoKey;
 
 const signSessionToken = (
   audience?: string,
-  publicKeySerial = "serial",
+  publicKeySerial = defaultPublicKeySerial,
   signingKey = privateKey,
   algorithm = "EdDSA",
 ) => {
@@ -79,7 +80,7 @@ describe("verify", () => {
     );
   });
 
-  it.each(["../other", "a?b=c", "a/b", "a".repeat(129)])(
+  it.each([".", "..", "../other", "a?b=c", "a/b", "latest", "a".repeat(129)])(
     "rejects the invalid public key serial %s before lookup",
     async (serial) => {
       const token = await signSessionToken(extensionId, serial);
@@ -91,12 +92,20 @@ describe("verify", () => {
     },
   );
 
+  it("accepts an uppercase public key serial", async () => {
+    const serial = "9A5AEB8D-0081-4ADB-88AD-BDFC6ED1D94F";
+    const token = await signSessionToken(extensionId, serial);
+
+    await expect(verify(token, { extensionId })).resolves.toBeDefined();
+    expect(keys.getPublicKey).toHaveBeenCalledWith(serial);
+  });
+
   it("rejects a token using an algorithm outside the allowlist", async () => {
     const pair = await generateKeyPair("RS256");
     keys.publicKey = pair.publicKey;
     const token = await signSessionToken(
       extensionId,
-      "serial",
+      "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d950",
       pair.privateKey,
       "RS256",
     );

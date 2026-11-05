@@ -1,12 +1,21 @@
 import { ExtBridgeError } from "@/error";
 import { fetchPublicKey } from "@/sessionToken/publicKeys/fetchPublicKey";
 import { isValidPublicKeySerial } from "@/sessionToken/publicKeys/serial";
+import axios from "axios";
 import { importSPKI } from "jose";
 
 const cache = new Map<string, CryptoKey>();
 const failedLookupCache = new Map<string, number>();
 const FAILED_LOOKUP_TTL_MS = 60_000;
 const FAILED_LOOKUP_MAX_ENTRIES = 1000;
+
+const isDefiniteFailure = (error: unknown): boolean => {
+  if (axios.isAxiosError(error)) {
+    return error.response?.status === 404;
+  }
+
+  return true;
+};
 
 const cacheFailedLookup = (serial: string) => {
   if (failedLookupCache.size >= FAILED_LOOKUP_MAX_ENTRIES) {
@@ -47,8 +56,15 @@ export const getPublicKey = async (serial: string): Promise<CryptoKey> => {
     failedLookupCache.delete(serial);
     return cryptoKey;
   } catch (error) {
-    cacheFailedLookup(serial);
-    throw error;
+    if (isDefiniteFailure(error)) {
+      cacheFailedLookup(serial);
+    }
+
+    if (error instanceof ExtBridgeError) {
+      throw error;
+    }
+
+    throw new ExtBridgeError("Public key lookup failed", { cause: error });
   }
 };
 

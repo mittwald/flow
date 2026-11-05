@@ -15,7 +15,14 @@ import {
   vi,
 } from "vitest";
 
-const axiosMock = vi.hoisted(() => vi.fn());
+const axiosMock = vi.hoisted(() =>
+  Object.assign(vi.fn(), {
+    isAxiosError: (error: unknown) =>
+      typeof error === "object" &&
+      error !== null &&
+      (error as { isAxiosError?: boolean }).isAxiosError === true,
+  }),
+);
 
 vi.mock("axios", () => ({
   default: axiosMock,
@@ -40,18 +47,16 @@ afterEach(() => {
 });
 
 describe("getPublicKey", () => {
-  it("rejects an invalid serial without requesting it", async () => {
-    await expect(getPublicKey("a/b")).rejects.toBeInstanceOf(ExtBridgeError);
-    expect(axiosMock).not.toHaveBeenCalled();
-  });
+  it.each([".", "..", "../other", "a?b=c", "a/b", "latest", "a".repeat(129)])(
+    "rejects the invalid serial %s without requesting it",
+    async (serial) => {
+      await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
+      expect(axiosMock).not.toHaveBeenCalled();
+    },
+  );
 
-  it("rejects spaces and requests an allowed serial using its encoded path", async () => {
-    await expect(getPublicKey("key one")).rejects.toBeInstanceOf(
-      ExtBridgeError,
-    );
-    expect(axiosMock).not.toHaveBeenCalled();
-
-    const serial = "abc-1.2_3";
+  it("accepts an uppercase UUID and uses it unchanged in the path", async () => {
+    const serial = "9A5AEB8D-0081-4ADB-88AD-BDFC6ED1D94E";
     axiosMock.mockResolvedValue({
       data: { key: publicKeyPem, algorithm: "EdDSA", serial },
     });
@@ -60,40 +65,90 @@ describe("getPublicKey", () => {
 
     expect(axiosMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: `${MW_EXT_API_URL}/v2/public-keys/${encodeURIComponent(serial)}`,
+        url: `${MW_EXT_API_URL}/v2/public-keys/${serial}`,
       }),
     );
   });
 
-  it("caches failed lookups for 60 seconds", async () => {
-    axiosMock.mockRejectedValue(new Error("lookup failed"));
+  it("caches 404 responses for 60 seconds", async () => {
+    const serial = "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d94f";
+    const lookupError = Object.assign(new Error("Not found"), {
+      isAxiosError: true,
+      response: { status: 404 },
+    });
+    axiosMock.mockRejectedValue(lookupError);
 
-    await expect(getPublicKey("missing-key")).rejects.toThrow("lookup failed");
-    await expect(getPublicKey("missing-key")).rejects.toBeInstanceOf(
-      ExtBridgeError,
+    const firstError = await getPublicKey(serial).catch(
+      (error: unknown) => error,
+    );
+    expect(firstError).toBeInstanceOf(ExtBridgeError);
+    expect((firstError as ExtBridgeError).cause).toBe(lookupError);
+
+    await expect(getPublicKey(serial)).rejects.toThrow(
+      "Public key lookup for this serial failed recently",
     );
     expect(axiosMock).toHaveBeenCalledTimes(1);
 
-    vi.advanceTimersByTime(60_001);
+    vi.advanceTimersByTime(60_000);
 
-    await expect(getPublicKey("missing-key")).rejects.toThrow("lookup failed");
+    await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
+    expect(axiosMock).toHaveBeenCalledTimes(2);
+  });
+
+  it.each([
+    {
+      name: "a network error",
+      serial: "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d950",
+      response: undefined,
+    },
+    {
+      name: "a 503 response",
+      serial: "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d951",
+      response: { status: 503 },
+    },
+  ])("does not cache $name", async ({ serial, response }) => {
+    const lookupError = Object.assign(new Error("Transient failure"), {
+      isAxiosError: true,
+      ...(response === undefined ? {} : { response }),
+    });
+    axiosMock.mockRejectedValue(lookupError);
+
+    const firstError = await getPublicKey(serial).catch(
+      (error: unknown) => error,
+    );
+    expect(firstError).toBeInstanceOf(ExtBridgeError);
+    expect((firstError as ExtBridgeError).cause).toBe(lookupError);
+
+    await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
     expect(axiosMock).toHaveBeenCalledTimes(2);
   });
 
   it("caches an invalid response as a failed lookup", async () => {
+    const serial = "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d952";
     axiosMock.mockResolvedValue({ data: {} });
 
-    await expect(getPublicKey("invalid-response")).rejects.toBeInstanceOf(
-      ExtBridgeError,
-    );
-    await expect(getPublicKey("invalid-response")).rejects.toBeInstanceOf(
-      ExtBridgeError,
-    );
+    await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
+    await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
+    expect(axiosMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("caches a public key import failure", async () => {
+    const serial = "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d953";
+    axiosMock.mockResolvedValue({
+      data: {
+        key: "-----BEGIN PUBLIC KEY-----\nnot a key\n-----END PUBLIC KEY-----",
+        algorithm: "EdDSA",
+        serial,
+      },
+    });
+
+    await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
+    await expect(getPublicKey(serial)).rejects.toBeInstanceOf(ExtBridgeError);
     expect(axiosMock).toHaveBeenCalledTimes(1);
   });
 
   it("returns and caches a valid public key", async () => {
-    const serial = "valid-key";
+    const serial = "9a5aeb8d-0081-4adb-88ad-bdfc6ed1d954";
     axiosMock.mockResolvedValue({
       data: { key: publicKeyPem, algorithm: "EdDSA", serial },
     });
