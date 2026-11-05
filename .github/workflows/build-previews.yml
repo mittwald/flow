@@ -143,7 +143,9 @@ jobs:
     # against in a Dependabot-triggered run. The project and certificate IDs are
     # repository variables — not sensitive, and `vars.*` is one store for every
     # run, Dependabot's included.
+    # TEMP(fix/ext-bridge-verify-audience): mittwald API calls disabled — revert before merge.
     if: >
+      false &&
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository
 
