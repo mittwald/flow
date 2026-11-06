@@ -4,6 +4,9 @@
   // and pushes the tile open — `min-width: 0` lets it shrink instead, so the
   // editor's own `overflow-x` scrolls the long lines.
   min-width: 0;
+  // The editor's square background would stick out of the rounded corners,
+  // stacked as well as side by side
+  overflow: hidden;
 
   // Same reason: the code block is a flex item of the example, and a flex item
   // does not shrink below its content either. Without this its `overflow-x`
@@ -34,8 +37,9 @@
   // panes side by side, which halves the height of the tile and gives the code
   // enough room to show its longest line.
   @container (min-width: 850px) {
-    flex-direction: row;
-    overflow: hidden;
+    // Code on the left, result on the right — read like source and output.
+    // Stacked, the result stays on top.
+    flex-direction: row-reverse;
 
     .preview {
       min-height: 19.5rem;
@@ -53,7 +57,7 @@
     // editor — the editor is only as tall as its lines, so both would stop
     // short of the bottom edge.
     .editorContainer {
-      border-inline-start: var(--code-block--border-width)
+      border-inline-end: var(--code-block--border-width)
         var(--code-block--border-style) var(--border-color);
       background-color: var(--code-block--background-color);
     }

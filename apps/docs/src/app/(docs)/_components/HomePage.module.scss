@@ -1,0 +1,123 @@
+.wrapper {
+  gap: 64px;
+  // The dark bands start right under the header and end at the footer
+  padding-block: 0;
+  width: 1500px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.band.top {
+  // Up to the header, over the layout's top padding
+  margin-block-start: calc(-1 * var(--size-px--m));
+  padding-block: 128px;
+  // Shifts the image up, so the light bands frame the logo
+  background-position: center 60%;
+}
+
+.band {
+  // Full width, out of the page's padded column
+  align-self: center;
+  width: 100vw;
+  border-radius: 0;
+  // Same inset as the page column (layout.module.scss), so the content lines up
+  padding: var(--size-px--xxl) var(--size-px--xl);
+  background-color: #05051a;
+
+  @media (max-width: 768px) {
+    padding-inline: var(--size-px--m);
+  }
+}
+
+.overviewBand {
+  // Same space above and below as the top band, so more of the image shows
+  padding-block: 128px;
+  // The image's shapes leave a black margin left and right. Scaled up, their
+  // edges fall outside the band; the height stays covered on narrow screens.
+  background-size: auto max(130vw, 100%);
+  // The colorful lower part of the image, not its dark top
+  background-position: center 70%;
+}
+
+.heroExample {
+  // The example lays its panes out by the width of its container
+  container-type: inline-size;
+}
+
+.bandContent {
+  width: 1100px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+// As wide as the page column, like the tiles above the band
+.wideBandContent {
+  width: 1500px;
+}
+
+.logo {
+  width: 300px;
+  height: 100px;
+  max-width: 100%;
+}
+
+// Four tiles get too narrow well above the column layout's l breakpoint
+.overviewTiles {
+  @container (min-width: 850px) and (max-width: 1200px) {
+    > :global(.flow--column-layout) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+.imageTile {
+  position: relative;
+
+  .imageContainer {
+    max-height: 400px;
+    width: 100%;
+  }
+
+  :global(.flow--column-layout--column-layout-container),
+  :global(.flow--column-layout),
+  :global(.flow--image) {
+    height: 100%;
+    width: 100%;
+  }
+
+  :global(.flow--column-layout--column-layout-container) {
+    @container (max-width: 550px) {
+      :global(.flow--column-layout) {
+        flex-direction: column-reverse;
+        display: flex;
+      }
+
+      :global(.flow--section) {
+        width: 100%;
+      }
+    }
+  }
+
+  :global(.flow--image) {
+    border-radius: var(--corner-radius--m);
+    object-fit: cover;
+    min-height: 400px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  :global(.flow--column-layout) {
+    align-items: center;
+
+    // The copy starts at the top of the tile, not centered next to the image.
+    :global(.flow--section) {
+      align-self: start;
+    }
+  }
+}
+
+.imageTileIcon {
+  position: absolute;
+  top: var(--size-px--xl);
+  inset-inline-end: var(--size-px--xl);
+}
