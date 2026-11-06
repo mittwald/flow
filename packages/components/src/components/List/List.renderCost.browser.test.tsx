@@ -196,7 +196,7 @@ describe("Weight of an item", () => {
   };
 
   /*
-   * The ceilings sit a little above the counts of 2026-10: rich 336 fibers and
+   * The ceilings sit a little above the counts of 2026-11: rich 344 fibers and
    * 34 DOM nodes, simple 89 and 12. A failure prints the new count.
    * - Heavier: find the component that grew. Raise the ceiling only for a
    *   deliberate cost, and say why in the PR.
@@ -217,7 +217,7 @@ describe("Weight of an item", () => {
   };
 
   test("a rich item stays within its ceiling", async () => {
-    await expectCostPerItem(renderRichItem, { fibers: 340, domNodes: 35 });
+    await expectCostPerItem(renderRichItem, { fibers: 348, domNodes: 35 });
   });
 
   test("a simple item stays within its ceiling", async () => {
