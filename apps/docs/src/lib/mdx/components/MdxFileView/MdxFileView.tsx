@@ -17,6 +17,8 @@ import {
   isAppShellName,
 } from "@/lib/mdx/components/AppShellPreview";
 import { appShellComponents } from "@/lib/mdx/components/AppShellPreview/appShellComponents";
+import { FileExample } from "@/lib/mdx/components/FileExample";
+import { fileExampleComponents } from "@/lib/mdx/components/FileExample/fileExampleComponents";
 import { usePathname } from "next/navigation";
 import { getWireframe } from "@/app/components/_components/wireframe/registry";
 
@@ -88,6 +90,24 @@ export const MdxFileView: FC<Props> = (props) => {
     <LiveCodeEditor code={mdxFile.getExample(example)} {...rest} />
   );
 
+  /**
+   * A multi-file example's sources; by default its `.tsx` and, when it has one,
+   * its CSS module.
+   */
+  const sourceFiles = (example: string, files?: string[]) =>
+    (
+      files ??
+      [`${example}.tsx`, `${example}.module.css`].filter(
+        (name) => name.endsWith(".tsx") || mdxFile.hasExample(name),
+      )
+    ).map((name) => ({
+      name,
+      code: mdxFile.getExample(
+        name.endsWith(".tsx") ? name.slice(0, -".tsx".length) : name,
+      ),
+      language: name.endsWith(".css") ? "css" : "tsx",
+    }));
+
   const ExampleAppShell: FC<{ example: string; files?: string[] }> = ({
     example,
     files,
@@ -95,20 +115,26 @@ export const MdxFileView: FC<Props> = (props) => {
     if (!isAppShellName(example)) {
       throw new Error(`Unknown App Shell example: ${example}`);
     }
-    const fileNames = files ?? [`${example}.tsx`, `${example}.module.css`];
     return (
       <AppShellPreview
         component={appShellComponents[example]}
         title={appShellTitles[example]}
         previewHref={appShellPreviewPath(example)}
-        files={fileNames.map((name) => ({
-          name,
-          code: mdxFile.getExample(
-            name.endsWith(".tsx") ? name.slice(0, -".tsx".length) : name,
-          ),
-          language: name.endsWith(".css") ? "css" : "tsx",
-        }))}
+        files={sourceFiles(example, files)}
       />
+    );
+  };
+
+  const ExampleFileExample: FC<{ example: string; files?: string[] }> = ({
+    example,
+    files,
+  }) => {
+    const component = fileExampleComponents[example];
+    if (!component) {
+      throw new Error(`Unknown file example: ${example}`);
+    }
+    return (
+      <FileExample component={component} files={sourceFiles(example, files)} />
     );
   };
 
@@ -218,6 +244,7 @@ export const MdxFileView: FC<Props> = (props) => {
   const mdxComponents = {
     LiveCodeEditor: ExampleLiveCodeEditor,
     AppShell: ExampleAppShell,
+    FileExample: ExampleFileExample,
     Wireframe: WireframePreview,
     PropertiesTables: ExamplePropertiesTables,
     ComponentTokenTable: ExampleComponentTokenTable,
