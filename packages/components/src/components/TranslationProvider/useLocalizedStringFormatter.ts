@@ -17,6 +17,11 @@ import { useLanguage } from "@/lib/hooks/useLanguage";
 export type LocalizedStrings = LocalizedStringsIntl<string, string>;
 export type LocalizedComponentName = FlowComponentName | string;
 
+/** @internal */
+export interface LocalizedStringFormatter {
+  format: (key: string, variables?: Variables) => string;
+}
+
 export type TranslationFunction = (
   key: string,
   variables: Variables,
@@ -62,7 +67,7 @@ const getCompiledMessage = (message: string, locale: string) => {
 export const useLocalizedStringFormatter = (
   strings: LocalizedStrings,
   componentName: LocalizedComponentName,
-) => {
+): LocalizedStringFormatter => {
   const locale = useLanguage();
   const { translations, translate } = useTranslationProvider();
 

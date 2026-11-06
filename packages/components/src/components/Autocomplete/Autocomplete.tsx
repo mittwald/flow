@@ -21,9 +21,9 @@ import styles from "./Autocomplete.module.scss";
 import {
   UNSAFE_PortalProvider,
   useFocusWithin,
-  useLocalizedStringFormatter,
   useObjectRef,
 } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { joinIds, useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
@@ -47,7 +47,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const inputRef = useObjectRef(ref);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Autocomplete");
   const container = useRef(null);
 
   const optionsOverlayController = useOverlayController("Popover", {

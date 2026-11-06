@@ -10,7 +10,7 @@ import {
 import styles from "./LightBoxGallery.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 import Button from "@/components/Button";
 import { Controls } from "@/components/LightBox/components/LightBoxGallery/Controls";
@@ -106,7 +106,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
         tabIndex={0}
         onKeyDown={handleKeyDown}
         role="region"
-        aria-roledescription="carousel"
+        aria-roledescription={stringFormatter.format("carousel")}
         aria-label={stringFormatter.format("gallery")}
       >
         <div className={styles.galleryItem} key={currentIndex}>

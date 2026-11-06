@@ -5,6 +5,8 @@ import { Label } from "@/components/Label";
 import { render } from "vitest-browser-react";
 import { EditorView } from "@uiw/react-codemirror";
 import { userEvent } from "vitest/browser";
+import { forEachDiagnostic } from "@codemirror/lint";
+import { I18nProvider } from "react-aria";
 
 test("CodeEditor renders the label outside of the editor", async () => {
   const dom = await render(
@@ -265,4 +267,37 @@ test("CodeEditor reports statistics to the latest onStatistics", async () => {
 
   expect(latest).toHaveBeenCalled();
   expect(first).not.toHaveBeenCalled();
+});
+
+test("CodeEditor reports dotEnv diagnostics in the active locale", async () => {
+  let messages: string[] = [];
+  const extensions = [
+    EditorView.updateListener.of((update) => {
+      const current: string[] = [];
+      forEachDiagnostic(update.state, (diagnostic) =>
+        current.push(diagnostic.message),
+      );
+      messages = current;
+    }),
+  ];
+
+  await render(
+    <I18nProvider locale="de">
+      <CodeEditor
+        value={"api_key=1\napi_key=2\n"}
+        language="dotEnv"
+        extensions={extensions}
+        aria-label="Umgebungsvariablen"
+      />
+    </I18nProvider>,
+  );
+
+  await expect
+    .poll(() => messages, { timeout: 5000 })
+    .toEqual(
+      expect.arrayContaining([
+        'Doppelter Schlüssel "api_key" gefunden.',
+        "Variablennamen werden üblicherweise großgeschrieben (z. B. DATABASE_URL)",
+      ]),
+    );
 });

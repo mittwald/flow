@@ -1,11 +1,6 @@
 import type { FC } from "react";
 import styles from "@/components/LightBox/components/LightBoxGallery/LightBoxGallery.module.scss";
 import clsx from "clsx";
-/*
- * Flow's own formatter, not react-aria's: the indicator's message takes
- * variables, and only this one runs them through IntlMessageFormat –
- * react-aria's hands back the raw "{current} of {count}".
- */
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 

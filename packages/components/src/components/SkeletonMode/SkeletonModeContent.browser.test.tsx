@@ -373,7 +373,7 @@ test("charts render no svg and keep their size", async () => {
   }
 
   /* The legend follows the text rule of its items. */
-  expect(barTexts()).toEqual(["Datenbanken (30 %)", "Dateien (10 %)"]);
+  expect(barTexts()).toEqual(["Datenbanken (30%)", "Dateien (10%)"]);
 });
 
 test("an ImageCropper loads no image", async () => {

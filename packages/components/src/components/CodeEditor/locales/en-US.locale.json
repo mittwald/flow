@@ -1,0 +1,6 @@
+{
+  "dotEnv.duplicateKey": "Duplicate key \"{key}\" found.",
+  "dotEnv.lowercaseKey": "Variable names are usually uppercase (e.g. DATABASE_URL)",
+  "dotEnv.missingFinalNewline": "Must end with a newline.",
+  "dotEnv.syntaxError": "Syntax error: Unexpected character or malformed assignment"
+}
