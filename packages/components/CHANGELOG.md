@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.66](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.6.0-next.66) (2026-11-06)
+
+### Bug Fixes
+
+* **Markdown:** add disableImages prop ([#3652](https://github.com/mittwald/flow/issues/3652)) ([2f63cc5](https://github.com/mittwald/flow/commit/2f63cc52a5f82c0dc0a5bef728391e83e4daf42a))
+
+## [1.5.64](https://github.com/mittwald/flow/compare/1.6.0-next.64...1.5.64) (2026-11-05)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.64 ([9e19864](https://github.com/mittwald/flow/commit/9e19864f48f57dd59f67084c5c51eb18e9e8137d))
+
 ## [1.6.0-next.65](https://github.com/mittwald/flow/compare/1.6.0-next.64...1.6.0-next.65) (2026-11-05)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
