@@ -558,6 +558,22 @@ describe("MarkdownEditor file upload", () => {
     expect(uploadFile).not.toHaveBeenCalled();
   });
 
+  test("links an image with disableImages", async () => {
+    await render(
+      <MarkdownEditor
+        aria-label="Message"
+        disableImages
+        uploadFile={async () => ({ url: "https://cdn.example/cat.png" })}
+      />,
+    );
+
+    selectFiles(imageFile());
+
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveValue("[cat.png](https://cdn.example/cat.png)\n");
+  });
+
   /*
    * Clicking the attachment button takes the focus out of the textarea, so the
    * caret cannot be read from `document.activeElement`. A textarea keeps its

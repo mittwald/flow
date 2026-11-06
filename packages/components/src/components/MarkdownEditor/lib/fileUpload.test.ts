@@ -46,6 +46,16 @@ describe("uploadedFileMarkdown", () => {
     ).toBe("![cat.png](https://cdn/cat.png)");
   });
 
+  test("links an image with disableImages", () => {
+    expect(
+      uploadedFileMarkdown(
+        file("cat.png"),
+        { url: "https://cdn/cat.png" },
+        true,
+      ),
+    ).toBe("[cat.png](https://cdn/cat.png)");
+  });
+
   test("links anything else", () => {
     expect(
       uploadedFileMarkdown(file("report.pdf", "application/pdf"), {

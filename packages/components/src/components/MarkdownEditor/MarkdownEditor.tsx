@@ -40,7 +40,9 @@ const toolbarActionsTunnel = {
 } as const;
 
 export interface MarkdownEditorProps
-  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {
+  extends
+    TextAreaProps,
+    Pick<MarkdownProps, "headingOffset" | "disableImages"> {
   /**
    * Allows replacing the markdown preview renderer implementation. Defaults to
    * the internal `Markdown` component.
@@ -76,6 +78,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     rows = 5,
     autoResizeMaxRows,
     headingOffset,
+    disableImages,
     markdownComponent: MarkdownComponent = DefaultMarkdown,
     value,
     onChange,
@@ -92,6 +95,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   const { dropProps, isDropTarget, uploadFiles } = useFileUpload({
     accept,
     uploadFile,
+    disableImages,
     isDisabled: isDisabled || isReadOnly || mode === "preview",
     value,
     onChange,
@@ -187,6 +191,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           {mode === "preview" && (
             <MarkdownComponent
               headingOffset={headingOffset}
+              disableImages={disableImages}
               className={styles.markdown}
             >
               {value}
