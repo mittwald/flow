@@ -19,6 +19,7 @@ export const MarkdownEditor: FlowRemoteVueComponent<RemoteMarkdownEditorElementP
         "aria-haspopup",
         "aria-hidden",
         "autoFocus",
+        "disableImages",
         "excludeFromTabOrder",
         "hidden",
         "inert",

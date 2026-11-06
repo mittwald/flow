@@ -32,6 +32,7 @@ export type MarkdownEditorFileUploadHandler = (
 interface Options {
   /** Which file types to take, as an `accept` attribute value. */
   accept?: string;
+  disableImages?: boolean;
   /** Uploads one file. Uploading is off entirely while this is undefined. */
   uploadFile?: MarkdownEditorFileUploadHandler;
   /** Turns dropping, pasting and the toolbar button off. */
@@ -68,8 +69,15 @@ interface FileUpload {
  * @internal
  */
 export const useFileUpload = (options: Options): FileUpload => {
-  const { accept, uploadFile, isDisabled, value, onChange, textAreaRef } =
-    options;
+  const {
+    accept,
+    uploadFile,
+    disableImages,
+    isDisabled,
+    value,
+    onChange,
+    textAreaRef,
+  } = options;
 
   const stringFormatter = useLocalizedStringFormatter(
     locales,
@@ -157,7 +165,7 @@ export const useFileUpload = (options: Options): FileUpload => {
       const edit = replacePlaceholder(
         readValue(),
         placeholder,
-        uploadedFileMarkdown(file, result),
+        uploadedFileMarkdown(file, result, disableImages),
         selection.start,
         selection.end,
       );

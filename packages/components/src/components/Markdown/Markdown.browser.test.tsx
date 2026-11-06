@@ -201,3 +201,14 @@ test("a re-render keeps the rendered elements", async () => {
     heading,
   );
 });
+
+test("disableImages leaves images out", async () => {
+  await render(
+    <Markdown disableImages>
+      {"Before ![Plans](https://example.com/plans.png) after"}
+    </Markdown>,
+  );
+
+  await expect.element(page.getByText("after")).toBeVisible();
+  expect(document.querySelector("img")).toBeNull();
+});
