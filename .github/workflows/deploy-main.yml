@@ -92,7 +92,7 @@ jobs:
           pnpm nx build:storybook components
 
       - name: Log in to the Container registry
-        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -138,14 +138,16 @@ jobs:
             || steps.meta-storybook.outputs.labels }}
 
       - name: Trigger docs redeploy webhook
-        if: matrix.image_suffix == 'docs'
+        # TEMP(fix/bundle-fonts): mittwald API calls disabled — revert before merge.
+        if: false && matrix.image_suffix == 'docs'
         run:
           curl --fail --silent --show-error --location "$FLOW_REDEPLOY_WEBHOOK"
         env:
           FLOW_REDEPLOY_WEBHOOK: ${{ secrets.FLOW_REDEPLOY_WEBHOOK }}
 
       - name: Trigger storybook redeploy webhook
-        if: matrix.image_suffix == 'storybook'
+        # TEMP(fix/bundle-fonts): mittwald API calls disabled — revert before merge.
+        if: false && matrix.image_suffix == 'storybook'
         run:
           curl --fail --silent --show-error --location
           "$STORYBOOK_REDEPLOY_WEBHOOK"

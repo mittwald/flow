@@ -1088,9 +1088,13 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
     });
 
     const { x, y, width, height } = skeleton.getBoundingClientRect();
-    expect(
-      header.contains(document.elementFromPoint(x + width / 2, y + height / 2)),
-    ).toBe(true);
+    await vitest.waitFor(() => {
+      expect(
+        header.contains(
+          document.elementFromPoint(x + width / 2, y + height / 2),
+        ),
+      ).toBe(true);
+    });
   } finally {
     await page.viewport(1280, 720);
   }

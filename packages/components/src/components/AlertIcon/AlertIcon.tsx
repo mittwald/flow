@@ -1,4 +1,4 @@
-import type { ComponentType, FC } from "react";
+import type { ComponentType } from "react";
 import {
   IconDanger,
   IconInfo,
@@ -12,6 +12,7 @@ import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 import { SkeletonIconSurface } from "@/components/SkeletonMode/components/SkeletonIconSurface";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export type AlertIconProps = Omit<IconProps, "status"> & PropsWithStatus;
 
@@ -24,30 +25,36 @@ const icons: Record<Status, ComponentType> = {
 };
 
 /** @flr-generate all */
-export const AlertIcon: FC<AlertIconProps> = (props) => {
-  const { status = "info", ...rest } = props;
+export const AlertIcon = flowComponent(
+  "AlertIcon",
+  (props) => {
+    const { status = "info", ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
-  const isSkeleton = useSkeletonMode();
+    const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
+    const isSkeleton = useSkeletonMode();
 
-  const Icon = icons[status];
+    const Icon = icons[status];
 
-  const iconProps: IconProps = {
-    color: status,
-    "aria-label": stringFormatter.format(`status.${status}`),
-    ...rest,
-  };
+    const iconProps: IconProps = {
+      color: status,
+      "aria-label": stringFormatter.format(`status.${status}`),
+      ...rest,
+    };
 
-  if (isSkeleton) {
-    const { className, ...iconPropsWithoutClassName } = iconProps;
-    return (
-      <SkeletonIconSurface className={className}>
-        <Icon {...iconPropsWithoutClassName} />
-      </SkeletonIconSurface>
-    );
-  }
+    if (isSkeleton) {
+      const { className, ...iconPropsWithoutClassName } = iconProps;
+      return (
+        <SkeletonIconSurface className={className}>
+          <Icon {...iconPropsWithoutClassName} />
+        </SkeletonIconSurface>
+      );
+    }
 
-  return <Icon {...iconProps} />;
-};
+    return <Icon {...iconProps} />;
+  },
+  /* `Icon` props contexts (e.g. the size `AlertText` sets) keep reaching the
+     inner icon. */
+  { type: "layout" },
+);
 
 export default AlertIcon;

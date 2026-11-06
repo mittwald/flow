@@ -124,12 +124,13 @@ export class IncrementalLoader<T> {
 
     return (options: DataLoaderOptions<T>) => {
       if ("staticData" in dataSource) {
+        const staticData = dataSource.staticData;
         return useMemo(
           () => ({
-            data: dataSource.staticData,
-            itemTotalCount: dataSource.staticData.length,
+            data: staticData,
+            itemTotalCount: staticData.length,
           }),
-          [dataSource.staticData],
+          [staticData],
         );
       }
 
@@ -171,9 +172,9 @@ export class IncrementalLoader<T> {
       useLoadBatch: () => {
         const loaderOptions = this.getDataLoaderOptions(batchIndex);
         const loaderResult = useData(loaderOptions);
-        const { data, itemTotalCount, metadata } = loaderResult;
 
         useEffect(() => {
+          const { data, itemTotalCount, metadata } = loaderResult;
           this.loaderState.setDataBatch(batchIndex, data);
 
           if (itemTotalCount !== undefined) {
@@ -189,7 +190,7 @@ export class IncrementalLoader<T> {
       useRenderSuspense: () => {
         useEffect(() => {
           this.loaderState.setBatchLoadingState(batchIndex, "loading");
-        }, [batchIndex]);
+        }, []);
       },
     }));
   }

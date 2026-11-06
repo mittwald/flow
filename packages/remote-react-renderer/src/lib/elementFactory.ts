@@ -1,3 +1,4 @@
+import { filterRemoteProps } from "@/lib/filterRemoteProps";
 import { mapAttributeToReactProperty } from "@/lib/mapAttributeToReactProperty";
 import { isReactSuspendedStyle } from "@/lib/propClassifiers";
 import clsx from "clsx";
@@ -39,5 +40,8 @@ export const elementFactory =
         : undefined;
     }
 
-    return createElement(element, mapKeys(result, mapAttributeToReactProperty));
+    return createElement(
+      element,
+      filterRemoteProps(mapKeys(result, mapAttributeToReactProperty)),
+    );
   };

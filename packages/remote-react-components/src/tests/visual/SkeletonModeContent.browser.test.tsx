@@ -1,5 +1,5 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { page } from "vitest/browser";
 import gopher from "@/tests/assets/gopher.webp";
 import { skeletonModeSince } from "@/tests/lib/skeletonModeSince";
@@ -215,6 +215,8 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode cropper and calendar (%s)",
   async ({ testScreenshot, render, components }) => {
     const { Flex, ImageCropper, RangeCalendar } = components;
+
+    vi.setSystemTime(new Date("2026-10-09T11:00:00Z"));
 
     await render(
       <SkeletonComparison components={components}>

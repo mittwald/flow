@@ -32,7 +32,8 @@ const resetState: SkeletonModeState = {
 /**
  * Renders its children as real UI below a component that already draws the
  * skeleton for them — the Text inside a text bar or a button surface must not
- * draw a second bar on top.
+ * draw a second bar on top — or for structure that does not load, such as a
+ * breadcrumb separator.
  */
 export const SkeletonModeReset: FC<PropsWithChildren> = (props) => (
   <skeletonModeContext.Provider value={resetState}>

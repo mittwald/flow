@@ -46,6 +46,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       showCharacterCount: {},
       slot: {},
       spellCheck: {},
+      suppressHydrationWarning: {},
       translate: {},
       type: {},
       validate: {},

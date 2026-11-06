@@ -17,5 +17,6 @@ export const Switch: FlowRemoteVueComponent<RemoteSwitchElementProps> =
       "isDisabled",
       "isReadOnly",
       "isSelected",
+      "suppressHydrationWarning",
     ],
   });

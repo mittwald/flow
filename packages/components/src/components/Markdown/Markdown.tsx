@@ -28,6 +28,8 @@ export interface MarkdownProps
   color?: "default" | AlphaColor;
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
+  /** Whether images are left out of the rendered markdown. @default false */
+  disableImages?: boolean;
   /** Allows overriding markdown element renderers from outside. */
   components?: Components;
   /** @internal */
@@ -46,6 +48,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     color = "default",
     className,
     headingOffset = 0,
+    disableImages = false,
     components: customComponents,
     ref,
     allowElement,
@@ -182,6 +185,13 @@ export const Markdown: FC<MarkdownProps> = (props) => {
           <SkeletonInlineContent>{children}</SkeletonInlineContent>
         </li>
       ),
+      /* A table cannot shrink below its content, so the box around it scrolls
+         instead of the table overflowing the markdown. */
+      table: ({ node: ignoredNode, ...props }) => (
+        <div className={styles.tableContainer}>
+          <table {...props} />
+        </div>
+      ),
       th: ({ node: ignoredNode, children, ...props }) => (
         <th {...props}>
           <SkeletonInlineContent>{children}</SkeletonInlineContent>
@@ -217,7 +227,10 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   return (
     <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
       <ReactMarkdown
-        allowElement={allowElement}
+        allowElement={(element, index, parent) =>
+          !(disableImages && element.tagName === "img") &&
+          (allowElement?.(element, index, parent) ?? true)
+        }
         allowedElements={allowedElements}
         disallowedElements={disallowedElements}
         rehypePlugins={rehypePlugins}

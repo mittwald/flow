@@ -8,5 +8,10 @@ export { type RemoteTabElementProps as TabProps } from "@mittwald/flow-remote-el
 
 export const Tab: FlowRemoteVueComponent<RemoteTabElementProps> =
   createFlowRemoteComponent("flr-tab", "Tab", RemoteTabElement, {
-    booleans: ["hidden", "inert", "shouldForceMount"],
+    booleans: [
+      "hidden",
+      "inert",
+      "shouldForceMount",
+      "suppressHydrationWarning",
+    ],
   });

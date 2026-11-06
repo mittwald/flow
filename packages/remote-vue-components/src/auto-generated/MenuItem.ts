@@ -23,6 +23,7 @@ export const MenuItem: FlowRemoteVueComponent<RemoteMenuItemElementProps> =
         "isPending",
         "isSucceeded",
         "shouldCloseOnSelect",
+        "suppressHydrationWarning",
       ],
     },
   );

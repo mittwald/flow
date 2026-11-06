@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { expect, test } from "vitest";
 import { Markdown } from "@/components/Markdown";
 
@@ -126,6 +126,31 @@ test("a table is rendered", async () => {
 });
 
 /*
+ * The screenshot cannot tell scrolling from clipping: the scrollbar only
+ * shows while scrolling.
+ */
+test("a wide table scrolls inside the markdown instead of overflowing it", async () => {
+  await render(
+    <div style={{ inlineSize: 160 }}>
+      <Markdown>
+        {"| Ship | Crew | Role |\n| --- | --- | --- |\n" +
+          "| X-Wing, Y-Wing | Pilot, Astromech | Escort, Bomber |"}
+      </Markdown>
+    </div>,
+  );
+
+  const table = page.getByRole("table");
+  const scrollBox = table.element().parentElement as HTMLElement;
+  const markdown = scrollBox.parentElement as HTMLElement;
+
+  expect(markdown.scrollWidth).toBeLessThanOrEqual(markdown.clientWidth);
+
+  await userEvent.wheel(table, { delta: { x: 100 } });
+
+  await expect.poll(() => scrollBox.scrollLeft).toBeGreaterThan(0);
+});
+
+/*
  * A paragraph that is not indented under its item ends the list, so the parser
  * emits one <ol> per part and carries the numbering over through `start`.
  */
@@ -193,4 +218,15 @@ test("a re-render keeps the code block's editor", async () => {
 
   expect(document.querySelector(".cm-editor")).toBe(editor);
   expect(page.getByText("mw app deploy").element()).toBe(line);
+});
+
+test("disableImages leaves images out", async () => {
+  await render(
+    <Markdown disableImages>
+      {"Before ![Plans](https://example.com/plans.png) after"}
+    </Markdown>,
+  );
+
+  await expect.element(page.getByText("after")).toBeVisible();
+  expect(document.querySelector("img")).toBeNull();
 });

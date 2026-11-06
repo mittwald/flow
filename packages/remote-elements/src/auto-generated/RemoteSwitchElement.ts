@@ -33,6 +33,7 @@ export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementPr
       lang: {},
       name: {},
       slot: {},
+      suppressHydrationWarning: {},
       translate: {},
       value: {},
     };

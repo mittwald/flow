@@ -12,11 +12,13 @@ import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
 import type { TabNavigationProps } from "@/components/TabNavigation";
 import type { InitialsProps } from "@/components/Initials";
+import type { LoadingSpinnerProps } from "@/components/LoadingSpinner";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
 import type { AlertBadgeProps } from "@/components/AlertBadge";
+import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
@@ -50,7 +52,7 @@ import type {
 import type { CoachMarkProps } from "@/components/CoachMark";
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
-import type { ListItemViewContentProps, ListProps } from "@/components/List";
+import type { ListItemViewProps, ListProps } from "@/components/List";
 import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
@@ -58,7 +60,6 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
-import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 import type { SegmentedControlProps } from "@/components/SegmentedControl";
 import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
@@ -158,8 +159,9 @@ export interface FlowComponentPropsTypes {
   LightBoxGalleryItem: LightBoxGalleryItemProps;
   Link: LinkProps;
   List: ListProps<never>;
-  ListItemView: ListItemViewContentProps;
+  ListItemView: ListItemViewProps;
   ListSummary: ListSummaryProps;
+  LoadingSpinner: LoadingSpinnerProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
@@ -260,6 +262,7 @@ const propsContextSupportingComponentsMap: Record<
   List: true,
   ListItemView: true,
   ListSummary: true,
+  LoadingSpinner: true,
   MarkdownEditor: true,
   MenuItem: true,
   MenuTrigger: true,

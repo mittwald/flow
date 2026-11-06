@@ -93,6 +93,8 @@ and consistency enforced by tooling, not maintained by hand.
   layout/composition primitives whose descendants stay context-aware.
   `src/components/LayoutCard/LayoutCard.tsx:41`
   - ✓ arranges or wraps descendant UI without isolating contextual props.
+  - ✓ a leaf that stands in for another component whose props contexts must keep
+    reaching it (`LoadingSpinner`, `AlertIcon` → `Icon`).
   - ✗ leaf UI or context infrastructure → UI/provider.
 - **Provider classification** — `{ type: "provider" }` for trigger/provider
   components.
@@ -159,11 +161,22 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/Button/Button.tsx:200`
   - ✓ principal public components (support both conventions).
   - ✗ internal helpers → smallest local export surface.
-- **Plain FC exception** `[undocumented]` — small infra/provider/SSR/structural
-  utilities may use `FC`/plain function.
-  `src/components/SettingsProvider/SettingsProvider.tsx:21`
-  - ✓ internal infra needing none of the factory services.
-  - ✗ normal public UI/layout/provider → `flowComponent`.
+- **Plain FC exception** — a public component is a plain `FC` only in one of
+  four cases, named in a one-line comment at the export; every other public
+  component is a `flowComponent` (#3428). Internal implementation details stay
+  plain (§ Factory registration).
+  `src/components/SettingsProvider/SettingsProvider.tsx:22`
+  - ✓ factory infrastructure the factory itself depends on (`ClearPropsContext`,
+    `ComponentPropsContextProvider`, `UiComponentTunnel*`,
+    `ComponentUsageProvider`).
+  - ✓ app-level setup without own UI, mounted once at the root
+    (`SettingsProvider`, `TranslationProvider`).
+  - ✓ transparent render utilities whose semantics a factory layer would change
+    (`BrowserOnly`, `SuspenseTrigger`, `TunnelEntry`).
+  - ✓ a technical constraint (e.g. a parent identifies the child by element
+    type), proven by a test that fails with the factory.
+  - ✗ a collection item (`MenuItem`, `Option`), a leaf, or performance without a
+    measurement → `flowComponent`.
 
 ## 2. Props typing
 
@@ -981,7 +994,9 @@ The highest-value conventions a newcomer would otherwise miss:
 
 Quick answers to the highest-frequency choices when authoring a component:
 
-- **Normal public leaf** → `flowComponent` + UI classification, not a plain FC.
+- **Normal public leaf** → `flowComponent`, not a plain FC; `ui` unless outer
+  props contexts must keep reaching what it renders (`LoadingSpinner` →
+  `layout`).
 - **Arranges descendants** → `layout`; **establishes infra/context** →
   `provider`.
 - **Props with owned fields** → `interface`; **props that transform/intersect**

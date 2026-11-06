@@ -19,6 +19,7 @@ export const CheckboxGroup: FlowRemoteVueComponent<RemoteCheckboxGroupElementPro
         "isInvalid",
         "isReadOnly",
         "isRequired",
+        "suppressHydrationWarning",
       ],
     },
   );

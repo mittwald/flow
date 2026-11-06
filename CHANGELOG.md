@@ -3,6 +3,145 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+### Bug Fixes
+
+* **ext-bridge:** require extension id in verify and check session token audience ([#3646](https://github.com/mittwald/flow/issues/3646)) ([63d85cd](https://github.com/mittwald/flow/commit/63d85cdaca0de485532df991e5e9a711d5ca3a65))
+* **ext-bridge:** validate public key serial and cache failed key lookups ([#3650](https://github.com/mittwald/flow/issues/3650)) ([4e08252](https://github.com/mittwald/flow/commit/4e0825294ebf2b92bf1db995da4019e3032e0405))
+* **remote-core:** restrict remote connections to allowed host origins ([#3647](https://github.com/mittwald/flow/issues/3647)) ([e452984](https://github.com/mittwald/flow/commit/e45298461bd56f2abdae710830da59eb015f6b8a))
+* **remote-react-renderer:** drop non-component props from remote elements ([#3649](https://github.com/mittwald/flow/issues/3649)) ([67fbdbb](https://github.com/mittwald/flow/commit/67fbdbb498467b1e7ab5b5aa3ffe5119d3a0dd2e))
+
+### Documentation
+
+* **ext-bridge:** point migration note at the next release ([0db8fd7](https://github.com/mittwald/flow/commit/0db8fd7c074bc3bdf5c78ae734d8595b81c0898c))
+
+## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
+
+### Bug Fixes
+
+* **components:** bundle fonts ([#3648](https://github.com/mittwald/flow/issues/3648)) ([7564c69](https://github.com/mittwald/flow/commit/7564c69f7edb9664a5d82c5e3af0b036d8cb68a3))
+
+### Continuous Integration
+
+* cancel superseded workflow runs ([#3639](https://github.com/mittwald/flow/issues/3639)) ([4b53411](https://github.com/mittwald/flow/commit/4b534111367096b764154fd80bc7054e9021a1f6))
+
+## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
+
+### Bug Fixes
+
+* **Breadcrumb:** keep separators visible in SkeletonMode ([#3629](https://github.com/mittwald/flow/issues/3629)) ([80f8fad](https://github.com/mittwald/flow/commit/80f8fadee61f934b808968aeea54f92fd0955c09))
+
+## [1.5.61](https://github.com/mittwald/flow/compare/1.5.60...1.5.61) (2026-11-04)
+
+### Code Refactoring
+
+* **AlertIcon:** register as flowComponent ([#3627](https://github.com/mittwald/flow/issues/3627)) ([0e0073e](https://github.com/mittwald/flow/commit/0e0073eaec6bd2fa05f198d667045e238acab4d5))
+
+## [1.5.60](https://github.com/mittwald/flow/compare/1.5.59...1.5.60) (2026-11-03)
+
+### Bug Fixes
+
+* **DateRangePicker:** clip the dates instead of overflowing a narrow field ([#3625](https://github.com/mittwald/flow/issues/3625)) ([9053855](https://github.com/mittwald/flow/commit/90538555c42cce132480f5fa65edbc80321b0c0e))
+
+## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
+
+### Bug Fixes
+
+* **ComboBox:** keep the field within its column ([#3622](https://github.com/mittwald/flow/issues/3622)) ([7503974](https://github.com/mittwald/flow/commit/75039740871149cd2bfb2af2b82364a8cae40594))
+
+## [1.5.58](https://github.com/mittwald/flow/compare/1.5.57...1.5.58) (2026-11-03)
+
+### Bug Fixes
+
+* **components:** follow the flowComponent conventions in props and refs ([#3593](https://github.com/mittwald/flow/issues/3593)) ([6bce0a9](https://github.com/mittwald/flow/commit/6bce0a9b447963713d91da8d95552b91797f6ec7))
+
+## [1.5.57](https://github.com/mittwald/flow/compare/1.5.56...1.5.57) (2026-11-03)
+
+### Bug Fixes
+
+* **LoadingSpinner:** keep the spin phase with a consumer ref, register as flowComponent ([#3621](https://github.com/mittwald/flow/issues/3621)) ([8061430](https://github.com/mittwald/flow/commit/8061430ebca81edf8c40dd711a33c450c3e232d5))
+
+## [1.5.56](https://github.com/mittwald/flow/compare/1.5.55...1.5.56) (2026-11-03)
+
+### Code Refactoring
+
+* clear the react-hooks/exhaustive-deps lint warnings ([#3583](https://github.com/mittwald/flow/issues/3583)) ([1666843](https://github.com/mittwald/flow/commit/1666843d2ccb7d30ae79a093be8c8c5aa1b547f0))
+
+## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
+
+### Bug Fixes
+
+* **Markdown:** scroll wide tables instead of overflowing the container ([#3614](https://github.com/mittwald/flow/issues/3614)) ([6b9b617](https://github.com/mittwald/flow/commit/6b9b6173a1c8f4235dbb072dcb2ece1d363bea28))
+
+## [1.5.54](https://github.com/mittwald/flow/compare/1.5.53...1.5.54) (2026-11-02)
+
+### Bug Fixes
+
+* **CodeEditor:** honor editable&#x3D;{false} and drop bracket matching there ([#3620](https://github.com/mittwald/flow/issues/3620)) ([a618183](https://github.com/mittwald/flow/commit/a618183541200a028bc11d3d33afa091f7527fda))
+* **components:** read hard-coded styling values from design tokens ([#3435](https://github.com/mittwald/flow/issues/3435)) ([1e0433d](https://github.com/mittwald/flow/commit/1e0433d6000f0f08ef2ef6d423409099c0da3430))
+
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+### Documentation
+
+* skip browser tests for what a visual scenario shows ([#3618](https://github.com/mittwald/flow/issues/3618)) ([2427c69](https://github.com/mittwald/flow/commit/2427c69787e0ed1b373b0d4982ba2ab87d022e43))
+
+### Tests
+
+* **MessageThread:** add the missing webkit-darwin baseline for lists ([#3616](https://github.com/mittwald/flow/issues/3616)) ([f1adc7e](https://github.com/mittwald/flow/commit/f1adc7e3ec07cd374ccc12c684fe70daadcd84f7))
+
+### Build System
+
+* **deps-dev:** bump the dev-minor group across 1 directory with 6 updates ([#3617](https://github.com/mittwald/flow/issues/3617)) ([fd98a6e](https://github.com/mittwald/flow/commit/fd98a6e3b695acabe426f3b759a2eb6332b07c83))
+
+## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
+
+### Build System
+
+* **deps-dev:** bump the dev-patch group across 1 directory with 14 updates ([#3615](https://github.com/mittwald/flow/issues/3615)) ([8adafff](https://github.com/mittwald/flow/commit/8adafff88fec265ebd533493f824e705b011201c))
+
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+### Tests
+
+* **SkeletonMode:** pin the date of the cropper and calendar scenario ([#3619](https://github.com/mittwald/flow/issues/3619)) ([4c5dbb7](https://github.com/mittwald/flow/commit/4c5dbb78517e65c09b033c52cd6f57a87455aa6b))
+
+### Build System
+
+* **deps:** bump docker/login-action from 4.6.0 to 4.7.0 in the actions group across 1 directory ([#3612](https://github.com/mittwald/flow/issues/3612)) ([1a79f10](https://github.com/mittwald/flow/commit/1a79f10387478c803d865ae35f74831202c6ad54))
+* **deps:** bump the production group across 1 directory with 5 updates ([#3613](https://github.com/mittwald/flow/issues/3613)) ([cdfa24b](https://github.com/mittwald/flow/commit/cdfa24b24bfa727f48eceafd91963316b54338ee))
+
+### Continuous Integration
+
+* **dependabot:** group react-stately with react-aria ([#3606](https://github.com/mittwald/flow/issues/3606)) ([9cfb45e](https://github.com/mittwald/flow/commit/9cfb45eff0b6e91356595d96baf1b6a513961905))
+* **dependabot:** hold back playwright 1.64 ([#3608](https://github.com/mittwald/flow/issues/3608)) ([d2152ea](https://github.com/mittwald/flow/commit/d2152eab1b2da37c2376fc3ae0944783419801e6))
+
+## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
+
+### Build System
+
+* **deps-dev:** bump happy-dom from 20.14.6 to 21.0.4 ([#3572](https://github.com/mittwald/flow/issues/3572)) ([9fe46b4](https://github.com/mittwald/flow/commit/9fe46b40982bd982610de1d59da330ec0b56ecec))
+
+## [1.5.49](https://github.com/mittwald/flow/compare/1.5.48...1.5.49) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the production group across 1 directory with 29 updates ([#3605](https://github.com/mittwald/flow/issues/3605)) ([439e271](https://github.com/mittwald/flow/commit/439e27110485fd2427e3d7302e9516ed999b44a3))
+
+## [1.5.48](https://github.com/mittwald/flow/compare/1.5.47...1.5.48) (2026-10-30)
+
+### Build System
+
+* **deps:** bump the actions group with 2 updates ([#3590](https://github.com/mittwald/flow/issues/3590)) ([116d517](https://github.com/mittwald/flow/commit/116d517a4e030e43b9ee23a71c1bec7156aefdd4))
+* **deps:** bump zod from 4.6.5 to 4.6.6 ([#3571](https://github.com/mittwald/flow/issues/3571)) ([b911dd5](https://github.com/mittwald/flow/commit/b911dd5f244db73aeca78da36afa17757d4dbe5d))
+
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+### Bug Fixes
+
+* **Icon:** show descending bars in the pro Descending icon ([#3595](https://github.com/mittwald/flow/issues/3595)) ([43c5cb8](https://github.com/mittwald/flow/commit/43c5cb88b922f1cd24e6cd72b1b63e440302d398))
+
 ## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
 
 ### Bug Fixes

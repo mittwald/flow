@@ -31,6 +31,7 @@ export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBa
       size: {},
       slot: {},
       status: {},
+      suppressHydrationWarning: {},
       translate: {},
       value: {},
     };

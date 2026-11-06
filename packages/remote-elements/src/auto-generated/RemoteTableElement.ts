@@ -37,6 +37,7 @@ export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProp
       shouldSelectOnPressUp: {},
       slot: {},
       sortDescriptor: {},
+      suppressHydrationWarning: {},
       translate: {},
       treeColumn: {},
       verticalAlign: {},

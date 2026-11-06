@@ -25,7 +25,7 @@ export interface MessageProps
   extends
     PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps,
+    FlowComponentProps<HTMLElement>,
     PropsWithElementType<"article" | "li"> {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
@@ -41,6 +41,7 @@ export const Message = flowComponent("Message", (props) => {
     className,
     color,
     elementType = "article",
+    ref,
   } = props;
 
   const Element = elementType;
@@ -121,7 +122,7 @@ export const Message = flowComponent("Message", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Element className={rootClassName} style={style}>
+      <Element ref={ref as never} className={rootClassName} style={style}>
         {children}
       </Element>
     </PropsContextProvider>

@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+### Bug Fixes
+
+* **ext-bridge:** require extension id in verify and check session token audience ([#3646](https://github.com/mittwald/flow/issues/3646)) ([63d85cd](https://github.com/mittwald/flow/commit/63d85cdaca0de485532df991e5e9a711d5ca3a65))
+* **ext-bridge:** validate public key serial and cache failed key lookups ([#3650](https://github.com/mittwald/flow/issues/3650)) ([4e08252](https://github.com/mittwald/flow/commit/4e0825294ebf2b92bf1db995da4019e3032e0405))
+* **remote-core:** restrict remote connections to allowed host origins ([#3647](https://github.com/mittwald/flow/issues/3647)) ([e452984](https://github.com/mittwald/flow/commit/e45298461bd56f2abdae710830da59eb015f6b8a))
+
+### Documentation
+
+* **ext-bridge:** point migration note at the next release ([0db8fd7](https://github.com/mittwald/flow/commit/0db8fd7c074bc3bdf5c78ae734d8595b81c0898c))
+
+## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.61](https://github.com/mittwald/flow/compare/1.5.60...1.5.61) (2026-11-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.60](https://github.com/mittwald/flow/compare/1.5.59...1.5.60) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.58](https://github.com/mittwald/flow/compare/1.5.57...1.5.58) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.57](https://github.com/mittwald/flow/compare/1.5.56...1.5.57) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.56](https://github.com/mittwald/flow/compare/1.5.55...1.5.56) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.55](https://github.com/mittwald/flow/compare/1.5.54...1.5.55) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.54](https://github.com/mittwald/flow/compare/1.5.53...1.5.54) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.53](https://github.com/mittwald/flow/compare/1.5.52...1.5.53) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.52](https://github.com/mittwald/flow/compare/1.5.51...1.5.52) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.51](https://github.com/mittwald/flow/compare/1.5.50...1.5.51) (2026-11-02)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.50](https://github.com/mittwald/flow/compare/1.5.49...1.5.50) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.49](https://github.com/mittwald/flow/compare/1.5.48...1.5.49) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.48](https://github.com/mittwald/flow/compare/1.5.47...1.5.48) (2026-10-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+## [1.5.47](https://github.com/mittwald/flow/compare/1.5.46...1.5.47) (2026-10-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
 ## [1.5.46](https://github.com/mittwald/flow/compare/1.5.45...1.5.46) (2026-10-27)
 
 **Note:** Version bump only for package @mittwald/ext-bridge

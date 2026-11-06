@@ -18,6 +18,7 @@ const context = createContext<SettingsStore | undefined>(undefined);
 
 export const useSettings = () => useContext(context);
 
+/* Plain FC: app-level setup without own UI. */
 export const SettingsProvider: FC<Props> = (props) => {
   const { children, middleware, id = "static", ...storeShape } = props;
   const backend = settingsBackendFactory(storeShape);
@@ -32,6 +33,7 @@ export const SettingsProvider: FC<Props> = (props) => {
 
   const settingsStore = useMemo(
     () => SettingsStore.fromJson(settings, { middleware, parentStore }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one store per settings id
     [id],
   );
 
@@ -43,6 +45,7 @@ export const SettingsProvider: FC<Props> = (props) => {
     });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- one autorun per settings id
   useEffect(() => autorun(watchAndStoreSettings), [id]);
 
   return <context.Provider value={settingsStore}>{children}</context.Provider>;
