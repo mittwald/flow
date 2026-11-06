@@ -15,6 +15,7 @@ import {
   useSkeletonMode,
 } from "@/components/SkeletonMode/skeletonModeContext";
 import styles from "../Markdown.module.scss";
+import { isTaskListCheckbox } from "@/components/Markdown/lib/isTaskListCheckbox";
 
 /**
  * A text bar is an inline element and cannot wrap blocks. Markdown puts lists
@@ -78,8 +79,9 @@ const isBlank = (child: ReactNode) =>
 /**
  * The content of a list item or a table cell: each run of inline content
  * becomes one text bar, blocks inside — a nested list, the paragraphs of a
- * loose list — keep their own skeleton rules. Outside an enabled `SkeletonMode`
- * it renders its children unchanged.
+ * loose list — keep their own skeleton rules, and a task's checkbox stays in
+ * the bullet's place. Outside an enabled `SkeletonMode` it renders its children
+ * unchanged.
  */
 export const SkeletonInlineContent: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -114,7 +116,7 @@ export const SkeletonInlineContent: FC<PropsWithChildren> = (props) => {
   };
 
   for (const child of Children.toArray(children)) {
-    if (isBlock(child)) {
+    if (isBlock(child) || isTaskListCheckbox(child)) {
       endRun();
       content.push(child);
     } else {
