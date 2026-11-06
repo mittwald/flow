@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.65](https://github.com/mittwald/flow/compare/1.5.64...1.5.65) (2026-11-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
 ## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
