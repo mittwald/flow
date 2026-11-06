@@ -173,10 +173,10 @@ importers:
         version: link:../../packages/components
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.3.0(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
+        version: 4.3.0(axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.49.0(react@19.3.1)
+        version: 3.50.0(react@19.3.1)
       '@teispace/next-themes':
         specifier: ^2.0.4
         version: 2.0.4(next@16.4.3(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@25.9.9)(babel-plugin-macros@3.1.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.106.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -342,10 +342,10 @@ importers:
         version: link:../../packages/mstudio-ext-react-components
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.3.0(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
+        version: 4.3.0(axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.49.0(react@19.3.1)
+        version: 3.50.0(react@19.3.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -503,7 +503,7 @@ importers:
         version: link:../react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.3.0(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
+        version: 4.3.0(axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
       '@react-aria/form':
         specifier: ^3.2.1
         version: 3.2.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -693,7 +693,7 @@ importers:
         version: 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@typescript/typescript6@6.0.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.65.0)(storybook@10.6.3(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.1))(supports-color@10.2.2)(vite@8.3.5(@types/node@25.9.9)(esbuild@0.28.2)(less@4.6.6)(sass-embedded@1.100.0)(sass@1.106.1)(stylus@0.62.0(supports-color@10.2.2))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.49.0(react@19.3.1)
+        version: 3.50.0(react@19.3.1)
       '@teispace/next-themes':
         specifier: ^2.0.4
         version: 2.0.4(next@16.4.3(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@25.9.9)(babel-plugin-macros@3.1.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.106.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -911,10 +911,10 @@ importers:
     dependencies:
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.3.0(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
+        version: 4.3.0(axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
       axios:
         specifier: ^1.19.0
-        version: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
+        version: 1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       i18next:
         specifier: ^26.0.0
         version: 26.3.1(@typescript/typescript6@6.0.2)
@@ -981,7 +981,7 @@ importers:
         version: link:../icons-base
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.49.0(react@19.3.1)
+        version: 3.50.0(react@19.3.1)
       '@types/react':
         specifier: ^19.2
         version: 19.3.0
@@ -999,7 +999,7 @@ importers:
     dependencies:
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.49.0(react@19.3.1)
+        version: 3.50.0(react@19.3.1)
       fs-jetpack:
         specifier: ^5.1.0
         version: 5.1.0
@@ -1306,7 +1306,7 @@ importers:
         version: 3.3.1(patch_hash=fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812)(@preact/signals-core@1.14.2)
       '@tabler/icons-react':
         specifier: ^3.44.0
-        version: 3.49.0(react@19.3.1)
+        version: 3.50.0(react@19.3.1)
       '@types/node':
         specifier: ^25.9.3
         version: 25.9.9
@@ -1381,7 +1381,7 @@ importers:
         version: link:../remote-elements
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.3.0(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
+        version: 4.3.0(axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)
       '@mittwald/remote-dom-react':
         specifier: 1.2.2-mittwald.10
         version: 1.2.2-mittwald.10(patch_hash=62bb2b92626b650b153b1449552015402f58b6a1956688c2ab90b415c4f6e94c)(@preact/signals-core@1.14.2)(react@19.3.1)
@@ -4619,13 +4619,13 @@ packages:
   '@swc/helpers@0.5.23':
     resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
 
-  '@tabler/icons-react@3.49.0':
-    resolution: {integrity: sha512-Um59pm5RVNUaQjFUtG0r4oYJbZuBS3tGugAA2tgBg0WufMk34Eio3nsO30RUkLuL2giYPQUNdY9HvqltLLYyNA==}
+  '@tabler/icons-react@3.50.0':
+    resolution: {integrity: sha512-X9XhFbxAmSNimQ71VAd7opfd4z84x1pLrEbBT33VCIEsFs8zWVqdhh5r/Jyi/3iJjQ861kE5Wm9ixiJfS2nwBA==}
     peerDependencies:
       react: '>= 16'
 
-  '@tabler/icons@3.49.0':
-    resolution: {integrity: sha512-l+GnSkFETx0U26icxv1VUFnxxiTqXfCcVRiRAnyMwibupM2S2L/hSaZ9gmSgz01rkrsH/93NvLsxykqdanc6lw==}
+  '@tabler/icons@3.50.0':
+    resolution: {integrity: sha512-HflLxyrH1cqC7s7jzQGSjpsTAVIoaf7+/yHjbdM59rJQBMjliibp+LYhDPFxOMcwa1M8DNpOk6ENzQiWn9a1Dg==}
 
   '@tanstack/table-core@8.21.3':
     resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
@@ -5554,6 +5554,9 @@ packages:
 
   axios@1.20.0:
     resolution: {integrity: sha512-r8aOh8j9cGKpgQAqpzrUHnSIc6a59Y3Xf/cv8sy1DrHCkZHzQGEuoq1tARk6qSyDdtQGSDgpb9kFlruzPvrgwg==}
+
+  axios@1.21.0:
+    resolution: {integrity: sha512-YCzXMB53Q9PZBsh7yN7wtapit4WepwcHS2fP8QhGsBxSz5YtgYobV7GGlWlAJi+RxfU77GQTQi2DSLUma42EYA==}
 
   babel-plugin-const-enum@1.2.0:
     resolution: {integrity: sha512-o1m/6iyyFnp9MRsK1dHF3bneqyf3AlM2q3A/YbgQr2pCat6B6XJVDv2TXqzfY2RYUi4mak6WAksSBPlyYGx9dg==}
@@ -12855,7 +12858,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@mittwald/react-use-promise@4.3.0(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)':
+  '@mittwald/react-use-promise@4.3.0(axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.3.1)':
     dependencies:
       '@types/luxon': 3.7.1
       browser-or-node: 3.0.0
@@ -12865,7 +12868,7 @@ snapshots:
       object-code: 1.3.4
       react: 19.3.1
     optionalDependencies:
-      axios: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
+      axios: 1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
 
   '@mittwald/remote-dom-core@1.7.0-mittwald.10(@preact/signals-core@1.14.2)':
     dependencies:
@@ -13980,12 +13983,12 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@tabler/icons-react@3.49.0(react@19.3.1)':
+  '@tabler/icons-react@3.50.0(react@19.3.1)':
     dependencies:
-      '@tabler/icons': 3.49.0
+      '@tabler/icons': 3.50.0
       react: 19.3.1
 
-  '@tabler/icons@3.49.0': {}
+  '@tabler/icons@3.50.0': {}
 
   '@tanstack/table-core@8.21.3': {}
 
@@ -15199,6 +15202,16 @@ snapshots:
       - supports-color
 
   axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2):
+    dependencies:
+      follow-redirects: 1.16.0(debug@4.4.3(supports-color@10.2.2))
+      form-data: 4.0.6
+      https-proxy-agent: 5.0.1(supports-color@10.2.2)
+      proxy-from-env: 2.1.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
+  axios@1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2):
     dependencies:
       follow-redirects: 1.16.0(debug@4.4.3(supports-color@10.2.2))
       form-data: 4.0.6
