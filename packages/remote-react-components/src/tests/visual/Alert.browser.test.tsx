@@ -8,14 +8,18 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Alert, Flex, Heading, Content },
+    components: { Alert, Flex, Heading, Content, Text, InlineCode },
   }) => {
     await render(
       <Flex direction="column" gap="m">
         {statusTypes.map((status) => (
           <Alert status={status} key={status}>
             <Heading>{firstLetterToUppercase(status)}</Heading>
-            <Content>Content</Content>
+            <Content>
+              <Text>
+                Content with <InlineCode>InlineCode</InlineCode>
+              </Text>
+            </Content>
           </Alert>
         ))}
       </Flex>,
@@ -30,13 +34,30 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Alert, Heading, Text, Content, Link, Button, ActionGroup },
+    components: {
+      Alert,
+      Heading,
+      Text,
+      Content,
+      Link,
+      Button,
+      ActionGroup,
+      InlineCode,
+      Badge,
+      CopyButton,
+    },
   }) => {
     await render(
       <Alert>
-        <Heading>Heading</Heading>
+        <Heading>
+          Heading
+          <Badge>Badge</Badge>
+        </Heading>
         <Content>
           <Text>Text</Text>
+          <InlineCode>InlineCode</InlineCode>
+          <Badge>Badge</Badge>
+          <CopyButton text="InlineCode" />
           <Link>Link</Link>
           <Button>Button</Button>
           <ActionGroup>

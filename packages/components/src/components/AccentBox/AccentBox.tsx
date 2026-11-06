@@ -14,6 +14,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { contentColored } from "@/lib/propsContext/contentColor";
 import { SectionHeadingReset } from "@/components/Section/context";
 import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
 import { styleClassname } from "@/lib/scss/selectors";
@@ -158,16 +159,27 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const contentColor = color === "default" ? undefined : color;
 
-  const propsContext: PropsContext = {
-    Link: {
-      color: contentColor,
-    },
+  const contentColorProps = contentColor ? contentColored(contentColor) : {};
+
+  const linkProps = { color: contentColor ?? "dark" } as const;
+
+  const contentPropsContext: PropsContext = {
+    ...contentColorProps,
+    Link: linkProps,
     Text: {
+      ...contentColorProps.Text,
+      Link: linkProps,
       color: contentColor,
     },
     Heading: {
+      ...contentColorProps,
       color: contentColor,
     },
+  };
+
+  const propsContext: PropsContext = {
+    ...contentPropsContext,
+    Content: contentPropsContext,
     Icon: {
       className: styles.icon,
     },

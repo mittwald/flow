@@ -43,6 +43,59 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
+  "AccentBox content (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      ColumnLayout,
+      AccentBox,
+      Section,
+      Heading,
+      Content,
+      Text,
+      InlineCode,
+      Badge,
+      CopyButton,
+      ActionGroup,
+      Button,
+    },
+  }) => {
+    await render(
+      <ColumnLayout l={[1, 1, 1]}>
+        {(["neutral", "navy", "gradient-sage"] as const).map(
+          (backgroundColor) => (
+            <AccentBox key={backgroundColor} backgroundColor={backgroundColor}>
+              <Section>
+                <Heading>
+                  {firstLetterToUppercase(backgroundColor)}
+                  <Badge>Badge</Badge>
+                </Heading>
+                <Content>
+                  <Text>
+                    Text with <InlineCode>InlineCode</InlineCode>
+                  </Text>
+                </Content>
+                <Badge>Badge</Badge>
+                <CopyButton text="InlineCode" />
+                <ActionGroup>
+                  <Button color="secondary" variant="soft">
+                    Secondary
+                  </Button>
+                  <Button>Primary</Button>
+                </ActionGroup>
+              </Section>
+            </AccentBox>
+          ),
+        )}
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("AccentBox content");
+  },
+);
+
+test.each(testEnvironments)(
   "AccentBox custom color (%s)",
   async ({
     testScreenshot,
