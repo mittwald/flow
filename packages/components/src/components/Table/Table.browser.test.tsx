@@ -91,3 +91,38 @@ test("isRowHeader moves the row headers to another column", async () => {
     .element(page.getByRole("gridcell", { name: "active" }))
     .toBeInTheDocument();
 });
+
+/*
+ * A parent re-render must not remount the rows: a long table pays for every
+ * row it rebuilds.
+ */
+test("a re-render keeps the rows and cells", async () => {
+  const domains = ["example.com", "example.org", "example.net"];
+  const DomainTable = () => (
+    <Table aria-label="Domains">
+      <TableHeader>
+        <TableColumn>Domain</TableColumn>
+        <TableColumn>Status</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {domains.map((domain) => (
+          <TableRow key={domain}>
+            <TableCell>{domain}</TableCell>
+            <TableCell>active</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+  const screen = await render(<DomainTable />);
+  const rows = () => page.getByRole("row").elements();
+  const cells = () => page.getByRole("gridcell").elements();
+  const rowsBefore = rows();
+  const cellsBefore = cells();
+  expect(rowsBefore).toHaveLength(4);
+
+  await screen.rerender(<DomainTable />);
+
+  rows().forEach((row, i) => expect(row).toBe(rowsBefore[i]));
+  cells().forEach((cell, i) => expect(cell).toBe(cellsBefore[i]));
+});
