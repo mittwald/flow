@@ -4,7 +4,7 @@ axis:
   font-size:
     value: "{font-size-text.s}"
   color:
-    value: "{neutral.color.800}"
+    value: "{content.color.200}"
   stroke-width:
     value: "{border-width.100}"
   tick-size:

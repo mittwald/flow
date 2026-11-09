@@ -6,12 +6,14 @@ import gopher from "@/tests/assets/gopher.webp";
 const backgroundColors = [
   "neutral",
   "blue",
-  "violet",
-  "teal",
-  "lilac",
-  "green",
   "navy",
-  "gradient",
+  "lilac",
+  "sage",
+  "salmon",
+  "gradient-navy",
+  "gradient-sage",
+  "gradient-lilac",
+  "gradient-salmon",
 ] as const;
 
 test.each(testEnvironments)(
@@ -19,16 +21,21 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, AccentBox, Heading },
+    components: { ColumnLayout, AccentBox, Section, Heading, Text, Link },
   }) => {
+    // Three columns: ten boxes in one or two columns outgrow the screenshot
     await render(
-      <Flex direction="column" gap="m">
+      <ColumnLayout l={[1, 1, 1]}>
         {backgroundColors.map((backgroundColor) => (
           <AccentBox key={backgroundColor} backgroundColor={backgroundColor}>
-            <Heading>{firstLetterToUppercase(backgroundColor)}</Heading>
+            <Section>
+              <Heading>{firstLetterToUppercase(backgroundColor)}</Heading>
+              <Text>Text</Text>
+              <Link>Link</Link>
+            </Section>
           </AccentBox>
         ))}
-      </Flex>,
+      </ColumnLayout>,
     );
 
     await testScreenshot("AccentBox colors");

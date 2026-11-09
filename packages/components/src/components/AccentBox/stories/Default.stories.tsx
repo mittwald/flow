@@ -6,7 +6,7 @@ import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Section } from "@/components/Section";
 import { LayoutCard } from "@/components/LayoutCard";
-import { alphaColors } from "@/lib/types/props";
+import { alphaColors, decorativeColors } from "@/lib/types/props";
 import { ColumnLayout } from "@/components/ColumnLayout";
 
 const meta: Meta<typeof AccentBox> = {
@@ -28,13 +28,11 @@ const meta: Meta<typeof AccentBox> = {
       control: "inline-radio",
       options: [
         "neutral",
-        "blue",
-        "violet",
-        "teal",
-        "lilac",
-        "green",
-        "navy",
-        "gradient",
+        ...decorativeColors,
+        "gradient-navy",
+        "gradient-sage",
+        "gradient-lilac",
+        "gradient-salmon",
       ],
     },
   },

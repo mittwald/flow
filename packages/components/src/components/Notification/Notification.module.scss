@@ -10,15 +10,27 @@
   border: var(--notification--border-width) var(--notification--border-style)
     var(--notification--border-color);
 
+  /* The status stripe is masked out of a layer in the notification's
+     shape, so it follows the corner radius instead of bending into it. */
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--notification--border-x-start-width);
-    inset-inline-start: calc(var(--size-px--xxxs) * -1);
-    border-start-start-radius: var(--notification--corner-radius);
-    border-end-start-radius: var(--notification--corner-radius);
+    inset: calc(var(--notification--border-width) * -1);
+    border-radius: inherit;
+    pointer-events: none;
+    mask-image: linear-gradient(
+      to right,
+      #000 var(--notification--border-x-start-width),
+      transparent 0
+    );
+  }
+
+  &:dir(rtl)::after {
+    mask-image: linear-gradient(
+      to left,
+      #000 var(--notification--border-x-start-width),
+      transparent 0
+    );
   }
 
   @extend .info;

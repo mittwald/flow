@@ -35,9 +35,9 @@ const UsageList: FC<{ usage: ComponentUsageEvent[] }> = ({ usage }) => (
             key={component}
             color={
               status?.level === "deprecated"
-                ? "red"
+                ? "danger"
                 : status?.level === "beta"
-                  ? "orange"
+                  ? "warning"
                   : "neutral"
             }
           >

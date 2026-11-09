@@ -2,110 +2,208 @@
 title: Color
 ---
 
-Ausgewählte Colors verkörpern die Marke und dienen gleichzeitig als wesentliches
-Kommunikationsmittel in der Benutzeroberfläche. Sie lenken die Aufmerksamkeit
-des Users und vermitteln gezielt wichtige Informationen wie z. B. den Status.
+Farben verkörpern die Marke mittwald und sind ein wesentliches
+Kommunikationsmittel der Benutzeroberfläche. Sie lenken die Aufmerksamkeit der
+Nutzer und vermitteln gezielt Informationen wie z. B. einen Status.
 
 ---
 
-# Base Color
+# Aufbau
 
-Base Colors bilden das Fundament des Flow Design Systems. Sie prägen die
-Oberflächen und schaffen die visuelle Grundlage für alle Components und Layouts.
+Flow ordnet Farben in drei Ebenen. Wie die Ebenen aufeinander aufbauen, zeigt
+die Seite [Design Tokens](/foundations/design/design-tokens#token-ebenen).
 
-## Neutral Color
+- **Brand** enthält die Palette der Marke mittwald. Ein Brand Token hat in Light
+  und Dark denselben Wert.
+- **Semantic** gibt einer Farbe eine Bedeutung, z. B. Fläche, Text oder Status.
+  Nur diese Ebene unterscheidet zwischen Light und Dark.
+- **Variant** kombiniert Semantic Colors zu Paaren für die Varianten Solid,
+  Soft, Plain und Outline.
 
-Neutral Colors sind zurückhaltend und vielseitig einsetzbar. Durch ihre
-Ausgewogenheit harmonieren sie mit allen weiteren Farben und kommen in nahezu
-allen UI-Elementen zum Einsatz.
+## Quiet und Strong
 
-<DesignTokenTable path="color.gray" />
+Farbige Gruppen haben sechs Töne. Jeder Ton zählt nach Betonung: `100` ist in
+beiden Themes der ruhigste.
 
-## Hosting Blue
-
-Hosting Blue ist unsere Primärfarbe. Sie verleiht dem mStudio ein prägnantes
-Erscheinungsbild und stärkt die Wiedererkennung der Marke mittwald. Aufgrund
-ihrer Leuchtkraft eignet sie sich besonders für gezielte Akzente, interaktive
-Elemente und visuelle Hervorhebungen.
-
-<DesignTokenTable path="color.hosting-blue" />
+- **Quiet** (`quiet.100` bis `quiet.300`) für die Fläche der Variante Soft, ihr
+  Hover und Pressed sowie Hover und Pressed der Varianten Plain und Outline.
+- **Strong** (`strong.100` bis `strong.300`) für die Fläche der Variante Solid,
+  ihr Hover und Pressed. `strong.100` ist auch die Farbe von Text und Links in
+  der Variante Plain, `strong.200` die Farbe von Text auf Soft und Outline.
 
 ---
 
-# Functional Color
+# Neutral Color
 
-Functional Colors kommunizieren Zustände und unterstützen die Nutzerführung. Sie
+Neutral Colors prägen den Großteil der Oberfläche. Flow teilt sie nach ihrem
+Zweck in eigene Rollen auf: Elevation, Content und Border. Für alles Weitere
+gibt es die Gruppe Neutral.
+
+## Elevation
+
+Elevation Colors sind Flächen, auf denen Inhalte liegen.
+
+- `100` für Flächen, die über dem Seitenhintergrund liegen, und für Elemente,
+  die farblich zu einer solchen Fläche passen müssen
+- `200` für den Seitenhintergrund und für Flächen, die sich von einer erhöhten
+  Fläche abheben
+- `300` für eingelassene Flächen
+
+In beiden Themes liegt der Seitenhintergrund unter den erhöhten Flächen. Darum
+ist `100` auch in Dark heller als `200`.
+
+<DesignTokenTable path="elevation.color" />
+
+## Content
+
+Content Colors sind für Text und Icons auf neutralen Flächen.
+
+- `100` für unterstützende Inhalte mit geringer Betonung
+- `200` für Labels
+- `300` für Text
+- `inverse` für Inhalte auf Strong-Flächen
+
+<DesignTokenTable path="content.color" />
+
+## Border
+
+- `100` rahmt erhöhte Flächen.
+- `200` trennt und gruppiert Inhalte innerhalb einer Fläche.
+- `300` umrandet Steuerelemente. Sie erreicht auf neutralen Flächen einen
+  Kontrast von mindestens 3:1.
+
+<DesignTokenTable path="border.color" />
+
+## Neutral
+
+Neutral ist für Varianten ohne farbliche Bedeutung, etwa für sekundäre Aktionen.
+
+<DesignTokenTable path="neutral.color" />
+
+---
+
+# Primary Color
+
+Primary basiert auf mittwald Blue, der Primärfarbe. Sie verleiht dem mStudio ein
+prägnantes Erscheinungsbild und stärkt die Wiedererkennung der Marke mittwald.
+Aufgrund ihrer Leuchtkraft eignet sie sich besonders für gezielte Akzente,
+interaktive Elemente und visuelle Hervorhebungen.
+
+<DesignTokenTable path="primary.color" />
+
+---
+
+# Status Color
+
+Status Colors kommunizieren Zustände und unterstützen die Nutzerführung. Sie
 helfen dabei, Informationen schnell einzuordnen und Handlungsbedarf zu erkennen.
 Weitere Details zur Anwendung finden sich im
 [Informationskonzept](/foundations/content-guidelines/informationskonzept).
 
-## Espelkamp Green
+## Info
 
-Espelkamp Green steht für positive Rückmeldungen und erfolgreiche Aktionen. Die
-Farbe signalisiert Bestätigung, Abschluss oder einen fehlerfreien Zustand.
+Info kennzeichnet neutrale Hinweise und ergänzende Informationen.
 
-<DesignTokenTable path="color.espelkamp-green" />
+<DesignTokenTable path="info.color" />
 
-## Royal Orange
+## Success
 
-Royal Orange kennzeichnet Warnungen und weist auf potenzielle Risiken oder
+Success steht für positive Rückmeldungen und erfolgreiche Aktionen. Die Farbe
+signalisiert Bestätigung, Abschluss oder einen fehlerfreien Zustand.
+
+<DesignTokenTable path="success.color" />
+
+## Warning
+
+Warning kennzeichnet Warnungen und weist auf potenzielle Risiken oder
 unerwünschte Zustände hin. Die Farbe signalisiert, dass Aufmerksamkeit
 erforderlich ist und eine Handlung zeitnah erfolgen sollte, auch wenn noch kein
 kritischer Fehler vorliegt.
 
-<DesignTokenTable path="color.royal-orange" />
+<DesignTokenTable path="warning.color" />
 
-## Amaranth Red
+## Danger
 
-Amaranth Red kennzeichnet kritische Zustände. Die Farbe signalisiert dringenden
+Danger kennzeichnet kritische Zustände. Die Farbe signalisiert dringenden
 Handlungsbedarf oder Fehler, die unmittelbare Aufmerksamkeit erfordern.
 
-<DesignTokenTable path="color.amaranth-red" />
+<DesignTokenTable path="danger.color" />
+
+## Unavailable
+
+Unavailable kennzeichnet, dass etwas nicht verfügbar ist. Deaktivierte Elemente
+nutzen die Quiet-Töne dieser Gruppe für Fläche, Rahmen und Inhalt.
+
+<DesignTokenTable path="unavailable.color" />
 
 ---
 
 # Decorative Color
 
-Decorative Colors erweitern die Farbpalette um zusätzliche Markenfarben. Sie
-werden ausschließlich für dekorative Elemente sowie für Marketing- und
-Kommunikationsmaßnahmen eingesetzt und haben keine funktionale Bedeutung
-innerhalb des Interfaces.
+Decorative Colors bringen die Markenfarben von mittwald in die Oberfläche. Sie
+haben keine funktionale Bedeutung. Die Color Props von
+[Badge](/components/status/badge), [Avatar](/components/content/avatar),
+[Icon](/components/content/icon), [Color](/components/content/color) und
+[AccentBox](/components/structure/accent-box) nutzen sie mit den Werten `blue`,
+`navy`, `lilac`, `sage` und `salmon`.
 
-## Soft Contrast Violet
+Neben Quiet und Strong hat jede Gruppe einen Ton `content` für Icons und
+farbigen Text auf beliebigen Flächen. Er gibt den Farbton wieder, ist aber nicht
+auf einen bestimmten Kontrast ausgelegt. Nutze für Text auf den Quiet-Flächen
+darum die [Light und Dark Colors](#light-und-dark-color).
 
-<DesignTokenTable path="color.soft-contrast-violet" />
+## Blue
 
-## Super Teal
+<DesignTokenTable path="decorative-blue.color" />
 
-<DesignTokenTable path="color.super-teal" />
+## Navy
 
-## Bright Lilac
+<DesignTokenTable path="decorative-navy.color" />
 
-<DesignTokenTable path="color.bright-lilac" />
+## Lilac
 
-## mittwald Navy
+<DesignTokenTable path="decorative-lilac.color" />
 
-<DesignTokenTable path="color.mittwald-navy" />
+## Sage
+
+Sage basiert auf mittwald Green.
+
+<DesignTokenTable path="decorative-sage.color" />
+
+## Salmon
+
+Salmon basiert auf mittwald Orange.
+
+<DesignTokenTable path="decorative-salmon.color" />
+
+## Gradient
+
+Zu jeder Decorative Color außer Blue gibt es einen Farbverlauf der Marke
+mittwald. Die [AccentBox](/components/structure/accent-box) nutzt ihn mit
+`backgroundColor="gradient-navy"`, `"gradient-sage"`, `"gradient-lilac"` und
+`"gradient-salmon"`. Die Komponenten legen eine Körnung über jeden Verlauf; sie
+ist nicht Teil des Tokens.
+
+<DesignTokenTable path="gradient-navy.color, gradient-sage.color, gradient-lilac.color, gradient-salmon.color" />
 
 ---
 
 # Light und Dark Color
 
 Light und Dark Colors wurden speziell für den Einsatz auf farbigen Hintergründen
-oder Bildern entwickelt. Sie bestehen aus jeweils 8 transparenten Abstufungen.
-Da die Farben auf Transparenzen basieren, muss der Kontrast zur jeweiligen
-Hintergrundfarbe eigenständig auf Barrierefreiheit geprüft werden. Aus diesem
-Grund stehen sie nur in definierten Components zur Verfügung, beispielsweise im
-[Button](/components/actions/button).
+oder Bildern entwickelt. Sie basieren auf transparentem Weiß und Schwarz und
+haben wie die farbigen Gruppen je drei Quiet- und drei Strong-Töne. Da die
+Farben auf Transparenzen basieren, prüfe den Kontrast zur jeweiligen
+Hintergrundfarbe selbst. Aus diesem Grund stehen sie nur in ausgewählten
+Komponenten zur Verfügung.
 
 Die Verwendung orientiert sich am HSL-Farbmodell. HSL steht für Hue, Saturation
 und Lightness. Für die Auswahl von Light oder Dark ist ausschließlich der
 Lightness-Wert relevant. Er beschreibt die wahrgenommene Helligkeit einer Farbe
 auf einer Skala von 0 bis 100.
 
-Als Schwellenwert gilt 50. Liegt der Lightness-Wert **unter 50**, sollte
-**Light** verwendet. Liegt der Lightness-Wert **über 50**, sollte **Dark**
-verwendet.
+Als Schwellenwert gilt 50. Nutze bei einem Lightness-Wert **unter 50** die
+**Light**-Color, bei einem Wert **über 50** die **Dark**-Color.
 
 Grundsätzlich gilt: Je weiter der Lightness-Wert vom Schwellenwert 50 entfernt
 ist, desto größer ist in der Regel der erreichbare Kontrast. Werte deutlich
@@ -115,26 +213,31 @@ den Kontrast mit Dark.
 <Alert>
   <Heading>Themes berücksichtigen</Heading>
   <Content>
-    Bei der Verwendung von Light und Dark auf individuellen Hintergründen sollte
-    das Verhalten beim Theme-Wechsel bewusst gesteuert werden. Nutze dafür die
-    Colors Light Static und Dark Static.
+    Light und Dark tauschen im Dark Theme ihre Werte, wie die übrigen Semantic
+    Colors. Bleibt ein Hintergrund in beiden Themes gleich, z. B. ein Bild,
+    nutze Light Static und Dark Static. Sie haben in beiden Themes denselben
+    Wert.
     <Link href="/foundations/design/themes">Mehr zu Themes</Link>
   </Content>
 </Alert>
 
 ## Light
 
-Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL Lightness-Wert
+Verwende die Light-Color bei dunklen Hintergründen mit einem HSL-Lightness-Wert
 von weniger als 50.
 
-<DesignTokenTable path="color.white-alpha" />
+<DesignTokenTable path="light.color" />
 
 ## Dark
 
-Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem HSL
-Lightness-Wert von größer als 50.
+Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem
+HSL-Lightness-Wert von mehr als 50.
 
-<DesignTokenTable path="color.black-alpha" />
+<DesignTokenTable path="dark.color" />
+
+## Light Static und Dark Static
+
+<DesignTokenTable path="light-static.color, dark-static.color" />
 
 ---
 
@@ -145,9 +248,8 @@ unterscheiden. Die Farben sind so optimiert, dass sie durch hohe Kontraste auch
 für Menschen mit einer Farbsehschwäche gut unterscheidbar sind. Am besten
 funktionieren sie in der hier gegebenen Reihenfolge.
 
-**Achtung:** Categorical Colors sind ausschließlich für Datenvisualisierung
-gedacht und heben sich bewusst von allen anderen Farben im Design System ab.
-Darum sollten sie nicht für dekorative Zwecke oder andere UI-Elemente verwendet
-werden.
+Categorical Colors heben sich bewusst von allen anderen Farben im Design System
+ab. Setze sie darum nur für Datenvisualisierung ein, nicht für dekorative Zwecke
+oder andere UI-Elemente.
 
-<DesignTokenTable path="color.categorical" />
+<DesignTokenTable path="categorical.color" />

@@ -34,11 +34,29 @@ const Value: FC<{ value: string }> = ({ value }) => (
   </span>
 );
 
-/** The tokens a token references on its way to the value, indented per step. */
+const Chain: FC<{ steps: string[] }> = ({ steps }) => (
+  <ol className={styles.chain}>
+    {steps.map((step, depth) => (
+      <li
+        key={step}
+        style={{ "--depth": depth } as CSSProperties}
+        className={styles.step}
+      >
+        {depth > 0 && <span aria-hidden>↳</span>}
+        <code className="flow--inline-code">{step}</code>
+      </li>
+    ))}
+  </ol>
+);
+
+/**
+ * The tokens a token references on its way to the value, indented per step.
+ * Where Semantic references another Brand step in dark, one chain per theme.
+ */
 const ReferenceChain: FC<{ token: ComponentToken }> = ({ token }) => {
-  const steps = [
+  const chain = (references?: string[]) => [
     token.name,
-    ...(token.references ?? []),
+    ...(references ?? []),
     ...(token.expression ? [token.expression] : []),
   ];
 
@@ -46,18 +64,16 @@ const ReferenceChain: FC<{ token: ComponentToken }> = ({ token }) => {
     <ContextualHelpTrigger subject={token.name}>
       <Button color="secondary" />
       <ContextualHelp>
-        <ol className={styles.chain}>
-          {steps.map((step, depth) => (
-            <li
-              key={step}
-              style={{ "--depth": depth } as CSSProperties}
-              className={styles.step}
-            >
-              {depth > 0 && <span aria-hidden>↳</span>}
-              <code className="flow--inline-code">{step}</code>
-            </li>
-          ))}
-        </ol>
+        {token.darkReferences ? (
+          <>
+            <Heading level={5}>Light</Heading>
+            <Chain steps={chain(token.references)} />
+            <Heading level={5}>Dark</Heading>
+            <Chain steps={chain(token.darkReferences)} />
+          </>
+        ) : (
+          <Chain steps={chain(token.references)} />
+        )}
       </ContextualHelp>
     </ContextualHelpTrigger>
   );

@@ -92,7 +92,7 @@ const Home: FC = () => {
       <ColumnLayout l={[1, 1]} gap="xl" s={[1]}>
         <LayoutCard>
           <AccentBox
-            backgroundColor="violet"
+            backgroundColor="lilac"
             color="dark"
             className={styles.imageTile}
           >

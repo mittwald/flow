@@ -1,6 +1,6 @@
 tooltip:
   background-color:
-    value: "{neutral.color.900}"
+    value: "{neutral.color.strong.200}"
   color:
     value: "{text.color.light}"
   padding-x:

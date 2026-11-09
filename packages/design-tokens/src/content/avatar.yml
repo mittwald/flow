@@ -9,12 +9,12 @@ avatar:
     l:
       value: "{size-rem.xxl}"
   info-status-background-color:
-    value: "{info.color.200}"
+    value: "{info.color.quiet.200}"
   warning-status-background-color:
-    value: "{warning.color.200}"
+    value: "{warning.color.quiet.200}"
   danger-status-background-color:
-    value: "{danger.color.200}"
+    value: "{danger.color.quiet.200}"
   success-status-background-color:
-    value: "{success.color.200}"
+    value: "{success.color.quiet.200}"
   unavailable-status-background-color:
-    value: "{unavailable.color.400}"
+    value: "{unavailable.color.quiet.200}"
