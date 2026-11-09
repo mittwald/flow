@@ -12,10 +12,9 @@ declare const classNames: {
   readonly info: "info";
   readonly unavailable: "unavailable";
   readonly blue: "blue";
-  readonly navy: "navy";
+  readonly violet: "violet";
+  readonly teal: "teal";
   readonly lilac: "lilac";
-  readonly sage: "sage";
-  readonly salmon: "salmon";
   readonly dark: "dark";
   readonly light: "light";
   readonly "dark-static": "dark-static";

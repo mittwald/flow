@@ -9,17 +9,17 @@ import {
 } from "@mittwald/flow-react-components";
 
 <LayoutCard>
-  <AccentBox backgroundColor="gradient-navy" color="dark">
+  <AccentBox backgroundColor="gradient" color="dark">
     <Flex align="center" wrap="wrap" gap="m">
       <Flex direction="column" grow>
         <Heading size="l">
-          <Color color="lilac">mStudio Extension</Color>{" "}
+          <Color color="violet">mStudio Extension</Color>{" "}
           selber entwickeln
         </Heading>
         <Text>
           <strong>
             Veröffentliche{" "}
-            <Color color="lilac">eigene Features</Color> im
+            <Color color="violet">eigene Features</Color> im
             mStudio
           </strong>
         </Text>

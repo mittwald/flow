@@ -125,6 +125,7 @@
     &:where(.#{$color}) {
       .content,
       .button {
+        border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
         color: var(--badge--#{$color}-content-color);
       }
@@ -151,12 +152,12 @@
   @include color("neutral");
   @include color("blue");
   @include color("navy");
+  @include color("violet");
+  @include color("teal");
   @include color("lilac");
-  @include color("sage");
-  @include color("salmon");
-  @include color("success");
-  @include color("warning");
-  @include color("danger");
+  @include color("green");
+  @include color("orange");
+  @include color("red");
   @include color("dark");
   @include color("light");
   @include color("dark-static");
@@ -165,6 +166,7 @@
   &.disabled {
     .content,
     .button {
+      border-color: var(--badge--disabled-border-color);
       background-color: var(--badge--disabled-background-color);
       color: var(--badge--disabled-content-color);
     }
@@ -186,6 +188,7 @@
     &.#{$color}.disabled {
       .content,
       .button {
+        border-color: var(--badge--disabled-#{$color}-border-color);
         background-color: var(--badge--disabled-#{$color}-background-color);
         color: var(--badge--disabled-#{$color}-content-color);
       }

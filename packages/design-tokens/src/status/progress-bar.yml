@@ -22,13 +22,13 @@ progress-bar:
     l:
       value: "{size-rem.l}"
   corner-radius:
-    value: "{corner-radius.xl}"
+    value: "{corner-radius.l}"
   border-width:
     value: "{border-width.100}"
   border-color:
     value: "{neutral-outline-border-color}"
   background-color:
-    value: "{elevation.color.200}"
+    value: "{neutral.color.200}"
 
   # Info
   info-fill-background-color:

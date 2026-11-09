@@ -6,6 +6,6 @@ import {
 <Text>
   <strong>
     Veröffentliche{" "}
-    <Color color="lilac">eigene Features</Color> im mStudio
+    <Color color="violet">eigene Features</Color> im mStudio
   </strong>
 </Text>;

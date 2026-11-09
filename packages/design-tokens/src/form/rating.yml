@@ -5,6 +5,6 @@ rating:
     m:
       value: "{size-rem.xs}"
   star-color:
-    value: "{content.color.100}"
+    value: "{neutral.color.700}"
   star-filled-color:
-    value: "{primary.color.strong.100}"
+    value: "{primary.color.800}"

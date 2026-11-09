@@ -1,6 +1,6 @@
 file-drop-zone:
   corner-radius:
-    value: "{corner-radius.l}"
+    value: "{corner-radius.m}"
   padding:
     value: "{size-px.m}"
   content-color:
@@ -24,6 +24,6 @@ file-drop-zone:
     default:
       value: "{form-control.border-color.default}"
     target:
-      value: "{primary.color.strong.100}"
+      value: "{primary.color.800}"
     disabled:
       value: "{disabled-outline-border-color}"

@@ -3,12 +3,9 @@ import styles from "./Badge.module.scss";
 import clsx from "clsx";
 import {
   alphaColors,
-  decorativeColors,
-  deprecatedDecorativeColors,
   isAlphaColor,
   type PropsWithClassName,
 } from "@/lib/types/props";
-import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -26,27 +23,17 @@ import {
 
 export const badgeColors = [
   "neutral",
-  ...decorativeColors,
-  "success",
-  "warning",
-  "danger",
+  "blue",
+  "navy",
+  "violet",
+  "teal",
+  "lilac",
+  "green",
+  "orange",
+  "red",
   ...alphaColors,
 ] as const;
-
-/**
- * Deprecated badge colors and the color each renders as. The status hues are
- * named by their meaning now, and the brand's green and orange are `sage` and
- * `salmon`.
- */
-const deprecatedBadgeColors = {
-  ...deprecatedDecorativeColors,
-  green: "success",
-  orange: "warning",
-  red: "danger",
-} as const;
-
-export type BadgeColors =
-  (typeof badgeColors)[number] | keyof typeof deprecatedBadgeColors;
+export type BadgeColors = (typeof badgeColors)[number];
 
 export interface BadgeProps
   extends
@@ -57,11 +44,7 @@ export interface BadgeProps
   onPress?: (e: PressEvent) => void;
   /** Handler that is called when the badges close icon is pressed. */
   onClose?: (e: PressEvent) => void;
-  /**
-   * The color of the badge. @default "neutral"
-   *
-   * @deprecatedValues violet, teal, green, orange, red
-   */
+  /** The color of the badge. @default "neutral" */
   color?: BadgeColors;
   /** Whether the badge is disabled. */
   isDisabled?: boolean;
@@ -77,7 +60,7 @@ export const Badge = flowComponent("Badge", (props) => {
   const {
     children,
     className,
-    color: colorFromProps = "neutral",
+    color = "neutral",
     ref,
     onPress,
     onClose,
@@ -85,8 +68,6 @@ export const Badge = flowComponent("Badge", (props) => {
     ...rest
   } = props;
 
-  const color =
-    useDeprecatedColor(colorFromProps, deprecatedBadgeColors) ?? "neutral";
   const stringFormatter = useLocalizedStringFormatter(locales, "Badge");
   const isSkeleton = useSkeletonMode();
 

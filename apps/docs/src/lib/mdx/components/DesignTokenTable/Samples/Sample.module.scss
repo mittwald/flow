@@ -5,7 +5,7 @@
   border-radius: 2px;
 
   &:where(.filled) {
-    background-color: var(--decorative-lilac--color--strong--100);
+    background-color: var(--color--bright-lilac--700);
     border: none;
   }
 }
@@ -16,7 +16,7 @@
   width: 32px;
   border-bottom: 1px solid;
   border-top: 1px solid;
-  border-color: var(--decorative-lilac--color--strong--100);
+  border-color: var(--color--bright-lilac--700);
 }
 
 .wrapper {
@@ -27,39 +27,39 @@
   &:where(.padding) {
     background: repeating-linear-gradient(
       45deg,
-      var(--elevation--color--100),
-      var(--elevation--color--100) 10px,
-      var(--decorative-lilac--color--strong--100) 5px,
-      var(--decorative-lilac--color--strong--100) 15px
+      white,
+      white 10px,
+      var(--color--soft-contrast-violet--700) 5px,
+      var(--color--soft-contrast-violet--700) 15px
     );
-    border-color: var(--decorative-lilac--color--strong--100);
+    border-color: var(--color--soft-contrast-violet--700);
   }
 
   &:where(.margin) {
     background: repeating-linear-gradient(
       45deg,
-      var(--elevation--color--100),
-      var(--elevation--color--100) 10px,
-      var(--decorative-sage--color--strong--100) 5px,
-      var(--decorative-sage--color--strong--100) 15px
+      white,
+      white 10px,
+      var(--color--super-teal--700) 5px,
+      var(--color--super-teal--700) 15px
     );
-    border-color: var(--decorative-sage--color--strong--100);
+    border-color: var(--color--super-teal--700);
   }
 }
 
 .content {
-  background-color: var(--elevation--color--100);
+  background-color: white;
   padding: 25px 20px;
   border: 1px solid;
   border-radius: 4px;
 
   &:where(.padding) {
-    color: var(--decorative-lilac--color--strong--100);
-    border-color: var(--decorative-lilac--color--strong--100);
+    color: var(--color--soft-contrast-violet--800);
+    border-color: var(--color--soft-contrast-violet--800);
   }
 
   &:where(.margin) {
-    color: var(--decorative-sage--color--strong--100);
-    border-color: var(--decorative-sage--color--strong--100);
+    color: var(--color--super-teal--800);
+    border-color: var(--color--super-teal--800);
   }
 }

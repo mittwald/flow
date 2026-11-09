@@ -12,7 +12,7 @@ list:
 
 list-item:
   corner-radius:
-    value: "{corner-radius.l}"
+    value: "{corner-radius.m}"
   padding:
     value: "{size-px.s}"
   border-width:
@@ -30,15 +30,13 @@ list-item:
       value: "{neutral-outline-background-color.hover}"
     pressed:
       value: "{neutral-outline-background-color.pressed}"
-  # Groups content, so the lighter separator tone instead of the control
-  # border.
   border-color:
-    value: "{border.color.200}"
+    value: "{neutral-outline-border-color}"
   subtitle-font-size:
     value: "{font-size-text.s}"
   checkbox-color:
-    value: "{light-static.color.strong.100}"
+    value: "{light-static.color.800}"
   checkbox-background-color:
-    value: "{dark-static.color.strong.300}"
+    value: "{dark-static.color.400}"
   checkbox-corner-radius:
     value: "{corner-radius.s}"

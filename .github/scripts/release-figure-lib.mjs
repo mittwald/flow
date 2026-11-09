@@ -45,7 +45,7 @@ export const FIGURE_THEMES = /** @type {const} */ (["light", "dark"]);
 
 /**
  * The composition page's ground behind the example frame, matching the stage's
- * `--elevation--color--100`.
+ * `--neutral--color--100`.
  *
  * @type {Record<FigureTheme, string>}
  */
