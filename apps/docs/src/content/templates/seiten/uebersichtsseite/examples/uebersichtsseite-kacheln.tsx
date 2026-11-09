@@ -67,7 +67,7 @@ export default () => {
           >
             {(app) => (
               <AppList.ItemView>
-                <Avatar color="lilac">
+                <Avatar color="violet">
                   <IconApp />
                 </Avatar>
                 <Heading>{app.name}</Heading>

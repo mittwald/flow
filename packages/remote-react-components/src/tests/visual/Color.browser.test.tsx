@@ -2,13 +2,19 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import {
   alphaColors,
-  decorativeColors,
   isAlphaColor,
   statusTypes,
 } from "@mittwald/flow-react-components/internal";
 import { test } from "vitest";
 
-const colors = [...decorativeColors, ...statusTypes, ...alphaColors] as const;
+const colors = [
+  "blue",
+  "violet",
+  "teal",
+  "lilac",
+  ...statusTypes,
+  ...alphaColors,
+] as const;
 
 test.each(testEnvironments)(
   "Color (%s)",

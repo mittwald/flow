@@ -53,7 +53,7 @@ export const Bar: FC<BarProps> = (props) => {
   const stackId = useScopedStackId(props.stackId);
 
   const color = isCategoricalColor(colorFromProps)
-    ? `var(--categorical--color--${colorFromProps})`
+    ? `var(--color--categorical--${colorFromProps})`
     : colorFromProps;
 
   const cornerRadius = parseInt(tokens.bar["corner-radius"].value);

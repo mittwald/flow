@@ -3,7 +3,7 @@ import { Text } from "@/components/Text";
 import { Color } from "@/components/Color";
 import Heading from "@/components/Heading";
 import { Section } from "@/components/Section";
-import { decorativeColors, statusTypes } from "@/lib/types/props";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof Color> = {
   title: "Content/Color",
@@ -12,7 +12,7 @@ const meta: Meta<typeof Color> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: [...decorativeColors, ...statusTypes],
+      options: ["blue", "violet", "teal", "lilac", ...statusTypes],
     },
   },
   render: (props) => (

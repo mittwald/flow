@@ -5,15 +5,7 @@ import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
-import {
-  alphaColors,
-  decorativeColors,
-  deprecatedDecorativeColors,
-  type DeprecatedDecorativeColor,
-  type Status,
-  statusTypes,
-} from "@/lib/types/props";
-import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
+import { alphaColors, type Status, statusTypes } from "@/lib/types/props";
 import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
@@ -21,14 +13,16 @@ type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 const iconColors = [
   "neutral",
-  ...decorativeColors,
+  "blue",
+  "violet",
+  "teal",
+  "lilac",
   ...statusTypes,
   ...alphaColors,
 ] as const;
 
 type IconColor = (typeof iconColors)[number];
-type IconWithCustomColor =
-  IconColor | DeprecatedDecorativeColor | (string & {});
+type IconWithCustomColor = IconColor | (string & {});
 
 function isIconColor(something: unknown): something is IconColor {
   const anyIconColors = iconColors as readonly string[];
@@ -44,8 +38,6 @@ export interface IconProps
   /**
    * The color of the icon. Besides the Flow colors, any custom CSS color is
    * supported. Inherits the surrounding text color when unset.
-   *
-   * @deprecatedValues violet, teal
    */
   color?: IconWithCustomColor;
   /**
@@ -76,8 +68,7 @@ export const Icon = flowComponent("Icon", (props) => {
     );
   }
 
-  const resolvedColor =
-    useDeprecatedColor(color, deprecatedDecorativeColors) ?? status;
+  const resolvedColor = color ?? status;
   const paletteColor = isIconColor(resolvedColor) ? resolvedColor : undefined;
   const customColor = paletteColor === undefined ? resolvedColor : undefined;
   const customColorStyle = customColor

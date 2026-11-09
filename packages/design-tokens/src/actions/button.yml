@@ -10,7 +10,7 @@ button:
   spacing:
     value: "{size-rem.s}"
   pending-icon-color:
-    value: "{content.color.300}"
+    value: "{neutral.color.1000}"
   border-width:
     value: "{border-width.100}"
   border-style:

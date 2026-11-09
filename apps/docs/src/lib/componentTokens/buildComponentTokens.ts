@@ -45,8 +45,7 @@ const formatExpression = (expression: string) =>
 /**
  * Follows `{a.b}` references down to the value: the CSS variable of every step,
  * and the expression a chain ends in when it is a `calc()` rather than a plain
- * value. Semantic tokens reference a different Brand step per theme, so the
- * chain is resolved once per theme.
+ * value. Themes share the chain — only the palette values differ.
  */
 const resolveChain = (
   token: SourceToken,
@@ -71,19 +70,17 @@ const resolveChain = (
   return { references };
 };
 
-const byPath = (tokens: SourceToken[]) =>
-  new Map(tokens.map((token) => [token.path.join("."), token]));
-
-const sameChain = (a: string[], b: string[]) =>
-  a.length === b.length && a.every((step, index) => step === b[index]);
-
 export const buildComponentTokens = (
   light: unknown,
   dark: unknown,
 ): ComponentTokens => {
   const lightTokens = collect(light);
-  const lightByPath = byPath(lightTokens);
-  const darkByPath = byPath(collect(dark));
+  const byPath = new Map(
+    lightTokens.map((token) => [token.path.join("."), token]),
+  );
+  const darkValues = new Map(
+    collect(dark).map((token) => [token.path.join("."), String(token.value)]),
+  );
   const result: ComponentTokens = {};
 
   for (const token of lightTokens.filter(isComponentToken)) {
@@ -91,21 +88,14 @@ export const buildComponentTokens = (
     if (!namespace) {
       continue;
     }
-    const darkToken = darkByPath.get(token.path.join("."));
     const lightValue = String(token.value);
-    const darkValue = darkToken ? String(darkToken.value) : undefined;
-    const { references, expression } = resolveChain(token, lightByPath);
-    const darkReferences = darkToken
-      ? resolveChain(darkToken, darkByPath).references
-      : references;
+    const darkValue = darkValues.get(token.path.join("."));
+    const { references, expression } = resolveChain(token, byPath);
     const entry: ComponentToken = {
       name: cssVariable(token.path),
       light: lightValue,
       dark: darkValue !== lightValue ? darkValue : undefined,
       references: references.length > 0 ? references : undefined,
-      darkReferences: sameChain(references, darkReferences)
-        ? undefined
-        : darkReferences,
       expression,
     };
     (result[namespace] ??= []).push(entry);

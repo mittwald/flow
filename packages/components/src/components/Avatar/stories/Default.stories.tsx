@@ -11,7 +11,7 @@ const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
   component: Avatar,
   render: (props) => (
-    <Avatar {...props} color="sage">
+    <Avatar {...props} color="teal">
       <Image alt="Han Solo" src={dummyText.imageSrc} />
     </Avatar>
   ),

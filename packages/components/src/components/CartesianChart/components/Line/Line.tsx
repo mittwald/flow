@@ -29,7 +29,7 @@ export const Line: FC<LineProps> = (props) => {
   const animation = useChartAnimation();
 
   const color = isCategoricalColor(colorFromProps)
-    ? `var(--categorical--color--${colorFromProps})`
+    ? `var(--color--categorical--${colorFromProps})`
     : colorFromProps;
 
   return (

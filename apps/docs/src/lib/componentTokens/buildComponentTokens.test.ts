@@ -39,7 +39,6 @@ describe("buildComponentTokens", () => {
         light: "16px",
         dark: undefined,
         references: ["--size--m", "--size--base"],
-        darkReferences: undefined,
         expression: undefined,
       },
       {
@@ -47,7 +46,6 @@ describe("buildComponentTokens", () => {
         light: "calc(16px * 2)",
         dark: undefined,
         references: undefined,
-        darkReferences: undefined,
         expression: "calc(var(--size--m) * 2)",
       },
       {
@@ -55,39 +53,6 @@ describe("buildComponentTokens", () => {
         light: "#FFFFFF",
         dark: "#000000",
         references: undefined,
-        darkReferences: undefined,
-        expression: undefined,
-      },
-    ]);
-  });
-
-  it("keeps a dark chain where a Semantic token references another Brand step", () => {
-    const semantic = (path: string, value: string, original: string) => ({
-      ...token(path, value, original),
-      filePath: "src/color-semantic.light.yml",
-    });
-    const brand = {
-      "blue-100": token("color.blue-100", "#EEF", "#EEF"),
-      "blue-900": token("color.blue-900", "#113", "#113"),
-    };
-    const themed = (step: string, value: string) => ({
-      color: { ...brand },
-      surface: semantic("surface", value, `{color.${step}}`),
-      card: { background: token("card.background", value, "{surface}") },
-    });
-
-    expect(
-      buildComponentTokens(
-        themed("blue-100", "#EEF"),
-        themed("blue-900", "#113"),
-      ).card,
-    ).toEqual([
-      {
-        name: "--card--background",
-        light: "#EEF",
-        dark: "#113",
-        references: ["--surface", "--color--blue-100"],
-        darkReferences: ["--surface", "--color--blue-900"],
         expression: undefined,
       },
     ]);

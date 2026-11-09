@@ -7,18 +7,18 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<AccentBox backgroundColor="gradient-navy">
+<AccentBox backgroundColor="gradient">
   <Flex align="center" wrap="wrap" gap="m">
     <Flex direction="column" grow>
       <Heading size="l">
-        <Color color="lilac">mStudio Extension</Color>{" "}
+        <Color color="violet">mStudio Extension</Color>{" "}
         selber entwickeln
       </Heading>
       <Text>
         <strong>
           <Color>
             Veröffentliche{" "}
-            <Color color="lilac">eigene Features</Color> im
+            <Color color="violet">eigene Features</Color> im
             mStudio
           </Color>
         </strong>

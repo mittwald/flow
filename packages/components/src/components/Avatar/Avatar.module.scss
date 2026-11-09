@@ -34,7 +34,7 @@
   }
 
   @extend .size-m;
-  @extend .navy;
+  @extend .blue;
 
   /* Sizes */
 
@@ -61,11 +61,10 @@
   }
 
   @include color("blue");
-  @include color("navy");
-  @include color("lilac");
-  @include color("sage");
-  @include color("salmon");
+  @include color("teal");
   @include color("green");
+  @include color("violet");
+  @include color("lilac");
 
   /* Status */
 

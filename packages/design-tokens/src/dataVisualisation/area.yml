@@ -2,6 +2,6 @@ area:
   border-width:
     value: "{border-width.200}"
   border-color:
-    value: "{elevation.color.100}"
+    value: "{neutral.color.100}"
   dot-background-color:
-    value: "{elevation.color.100}"
+    value: "{light.color.800}"

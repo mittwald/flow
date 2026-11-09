@@ -6,12 +6,12 @@ import {
 
 <ColumnLayout m={[1, 1, 1]}>
   <Text>
-    <Badge color="sage">Context</Badge>
+    <Badge color="teal">Context</Badge>
     Einordnung <br />
     <small>z. B. Farbe, Component</small>
   </Text>
   <Text>
-    <Badge color="salmon">Common Unit</Badge>
+    <Badge color="orange">Common Unit</Badge>
     Kategorie <br />
     <small>z. B. Variante, Sizing, Styling</small>
   </Text>

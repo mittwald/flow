@@ -4,16 +4,19 @@ import {
 } from "@mittwald/flow-react-components";
 
 <>
-  <AccentBox backgroundColor="navy">
-    <Heading>Navy</Heading>
+  <AccentBox backgroundColor="teal">
+    <Heading>Teal</Heading>
+  </AccentBox>
+  <AccentBox backgroundColor="violet">
+    <Heading>Violet</Heading>
   </AccentBox>
   <AccentBox backgroundColor="lilac">
     <Heading>Lilac</Heading>
   </AccentBox>
-  <AccentBox backgroundColor="sage">
-    <Heading>Sage</Heading>
+  <AccentBox backgroundColor="navy">
+    <Heading>Navy</Heading>
   </AccentBox>
-  <AccentBox backgroundColor="salmon">
-    <Heading>Salmon</Heading>
+  <AccentBox backgroundColor="green">
+    <Heading>Green</Heading>
   </AccentBox>
 </>;
