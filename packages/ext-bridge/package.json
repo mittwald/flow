@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "1.6.0-next.63",
+  "version": "1.6.0-next.66",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://flow.mittwald.de",
@@ -38,7 +38,8 @@
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
-    "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json"
+    "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
+    "test:unit": "vitest run"
   },
   "dependencies": {
     "@mittwald/react-use-promise": "^4.2.2",

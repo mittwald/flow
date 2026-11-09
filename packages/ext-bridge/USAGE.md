@@ -65,7 +65,9 @@ const sessionToken = await getSessionToken();
 
 // 2. in your backend — verify before trusting anything in it
 import { verify, getAccessToken } from "@mittwald/ext-bridge/node";
-const decoded = await verify(sessionToken); // JWT signature check
+const decoded = await verify(sessionToken, {
+  extensionId: process.env.EXTENSION_ID!, // JWT signature + audience check
+});
 
 // 3. exchange it for an mStudio API token
 const { publicToken, expiry } = await getAccessToken(
@@ -76,10 +78,30 @@ const { publicToken, expiry } = await getAccessToken(
 
 - **Always `verify` first.** A session token arrives from the browser; without
   the signature check its contents are attacker-controlled.
+- **`extensionId` is required.** A valid signature only proves mStudio issued
+  the token — not that it was issued for _your_ extension. `verify` rejects
+  session tokens issued for any other extension, and throws if `extensionId` is
+  missing.
 - The extension secret belongs in your backend's environment, never in the
   bundle.
 - `getAccessToken` returns an `expiry` — respect it rather than caching the
   token indefinitely.
+
+## Allow only mStudio to embed your frontend
+
+Your extension's frontend is meant to run inside mStudio only.
+
+- **Required:** send a `Content-Security-Policy` **response header** with
+  `frame-ancestors` limited to the mStudio origins:
+  `frame-ancestors https://*.mittwald.de https://*.mittwald.systems`. No bare
+  `*`, no `https:`. A `<meta>` tag does not work for `frame-ancestors`.
+- `RemoteRoot` accepts messages only from the mStudio origins
+  (`https://*.mittwald.de`, `https://*.mittwald.systems`) and from your app's
+  own origin. For local development against another host, pass the extra origins
+  as `allowedHostOrigins`.
+- Paths the host sends (`onHostPathnameChanged`) are always relative app paths
+  like `/settings?tab=1`. Anything else (absolute URLs, `//host`, `javascript:`)
+  is dropped before it reaches your router.
 
 ## Stability
 

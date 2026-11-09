@@ -88,8 +88,10 @@ Configuration: `packages/components/vite.build.config.ts` (+ base
 - `@mittwald/flow-react-components` exports it as `./all.css` (`exports` in
   `package.json`).
 - `@mittwald/flow-stylesheet` re-exports it unchanged: `build.js` copies
-  `@mittwald/flow-react-components/all.css` to `dist/styles.css` and exports it
-  as `./css`.
+  `@mittwald/flow-react-components/all.css` to `dist/css/styles.css` and exports
+  it as `./css`. It copies the bundled fonts to `dist/fonts/` alongside, so the
+  stylesheet's relative `../fonts/` URLs resolve as they do in the components
+  package.
 
 ### 6. Cascade model (current state)
 

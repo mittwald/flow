@@ -12,6 +12,16 @@ Connection + serialization layer between host (mStudio) and remote apps
 - The connection protocol is **versioned**: the host reacts to different remote
   versions at connection time. **Changes here must stay backwards compatible** —
   extensions in the wild connect with older versions.
+- **Both ends use their own message targets** (`connection/originThreads.ts`),
+  not `ThreadIframe` / `ThreadNestedIframe` from `@quilted/threads`. The remote
+  accepts messages only from `parent` on an allowed host origin
+  (`DEFAULT_ALLOWED_HOST_ORIGINS`, its own origin, `allowedHostOrigins`); the
+  host accepts only the iframe's window on the origin of its `src`. Neither
+  posts data to `'*'`; only the content-free ready ping goes to `'*'` while the
+  host origin is unknown, because a wildcard entry (`https://*.mittwald.de`)
+  cannot be a `targetOrigin`. `Version.v6` announces this. A test harness that
+  serves the remote from another port than the host page must pass that page's
+  origin as `allowedHostOrigins`.
 - `FlowThreadSerialization` controls which values cross the thread boundary
   (deliberately excludes `HTMLElement`/`window`).
 - **The patch makes serialization `async`** — Flow's serializers await File

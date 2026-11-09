@@ -3,6 +3,492 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.66](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.6.0-next.66) (2026-11-06)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+## [1.6.0-next.65](https://github.com/mittwald/flow/compare/1.6.0-next.64...1.6.0-next.65) (2026-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+## [1.6.0-next.64](https://github.com/mittwald/flow/compare/1.5.63...1.6.0-next.64) (2026-11-05)
+
+## [1.6.0-next.63](https://github.com/mittwald/flow/compare/1.5.62...1.6.0-next.63) (2026-11-04)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.63 ([a3abcfc](https://github.com/mittwald/flow/commit/a3abcfcdb7d2728225abdfbaae7933d9c53e6774))
+
+## [1.6.0-next.62](https://github.com/mittwald/flow/compare/1.5.61...1.6.0-next.62) (2026-11-04)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.62 ([add50bc](https://github.com/mittwald/flow/commit/add50bc451c0fd37c96441458a58eb1e5228bb21))
+
+## [1.6.0-next.61](https://github.com/mittwald/flow/compare/1.6.0-next.60...1.6.0-next.61) (2026-11-03)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.61 ([b1f0f85](https://github.com/mittwald/flow/commit/b1f0f85be435468902a4eba166351f81cf54eef5))
+
+## [1.6.0-next.60](https://github.com/mittwald/flow/compare/1.5.60...1.6.0-next.60) (2026-11-03)
+
+### Bug Fixes
+
+* **Alert:** keep a boundary in forced-colors mode, drop the border tokens ([956a86a](https://github.com/mittwald/flow/commit/956a86a4b5a26f0b5ac5132db95e084203326801))
+* **design-tokens:** lighter dark separators ([f0f383f](https://github.com/mittwald/flow/commit/f0f383f7e0de423329772dea18a3ca36c36e632f)), closes [#404448](https://github.com/mittwald/flow/issues/404448) [#3459](https://github.com/mittwald/flow/issues/3459)
+
+### Documentation
+
+* **adr:** renumber the color token tiers ADR to 0008 ([91803e0](https://github.com/mittwald/flow/commit/91803e09fec71d7750c1ae1c5621bd2890e25137))
+
+### Miscellaneous Chores
+
+* **design-tokens:** drop history and process notes from color comments ([1cb6a14](https://github.com/mittwald/flow/commit/1cb6a14e539d8f5d85ca3a2821dbce10a14dbedc))
+* **release:** bump version to 1.6.0-next.60 ([7ebcd54](https://github.com/mittwald/flow/commit/7ebcd54688b05705ffc6e83e2588c50425974392))
+
+## [1.6.0-next.59](https://github.com/mittwald/flow/compare/1.5.59...1.6.0-next.59) (2026-11-03)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.59 ([bb43b1b](https://github.com/mittwald/flow/commit/bb43b1b5906a6f8a42c2c0bdc91722138de943d4))
+
+## [1.6.0-next.58](https://github.com/mittwald/flow/compare/1.5.58...1.6.0-next.58) (2026-11-03)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.58 ([95bca01](https://github.com/mittwald/flow/commit/95bca01dd5526a24d15b838d9d077b11ecaa8d7e))
+
+## [1.6.0-next.57](https://github.com/mittwald/flow/compare/1.5.56...1.6.0-next.57) (2026-11-03)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.57 ([4bcb0f9](https://github.com/mittwald/flow/commit/4bcb0f90897754c3e4f20055a5200e6efdfcd50d))
+
+## [1.6.0-next.56](https://github.com/mittwald/flow/compare/1.5.55...1.6.0-next.56) (2026-11-03)
+
+### Features
+
+* **design-tokens:** map [#3435](https://github.com/mittwald/flow/issues/3435) color literals onto Semantic roles ([a312c0e](https://github.com/mittwald/flow/commit/a312c0e50614feae9b2a91d9f37ce010105ff422))
+
+### Bug Fixes
+
+* **design-tokens:** let the skeleton shimmer follow the theme ([461e1e6](https://github.com/mittwald/flow/commit/461e1e6136087ffbcc216007116458ec055cc529))
+* **design-tokens:** sweep the skeleton shimmer toward the card surface ([db43130](https://github.com/mittwald/flow/commit/db4313050bcb46e586465d53e836ad2e13580a64)), closes [#1d1e1f](https://github.com/mittwald/flow/issues/1d1e1f)
+
+### Documentation
+
+* **design-tokens:** mark the neutral ramp and brand gradients as approved ([e773c8b](https://github.com/mittwald/flow/commit/e773c8b37354794e3297032bee35c826e145e389)), closes [#3542](https://github.com/mittwald/flow/issues/3542) [#3456](https://github.com/mittwald/flow/issues/3456) [#3508](https://github.com/mittwald/flow/issues/3508) [#3456](https://github.com/mittwald/flow/issues/3456) [#3542](https://github.com/mittwald/flow/issues/3542)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.56 ([c3e84a4](https://github.com/mittwald/flow/commit/c3e84a42648118d2e2c950b3b6cf59d77607aebe))
+
+## [1.6.0-next.55](https://github.com/mittwald/flow/compare/1.6.0-next.54...1.6.0-next.55) (2026-11-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.55 ([7e70bf2](https://github.com/mittwald/flow/commit/7e70bf2d15f59f627ab74cdaedc1e7fecfb2c746))
+
+## [1.6.0-next.54](https://github.com/mittwald/flow/compare/1.5.53...1.6.0-next.54) (2026-11-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.54 ([ddcff2e](https://github.com/mittwald/flow/commit/ddcff2e85201642d56ad008236b98792f96d0625))
+
+## [1.6.0-next.53](https://github.com/mittwald/flow/compare/1.5.52...1.6.0-next.53) (2026-11-02)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.53 ([c787e5d](https://github.com/mittwald/flow/commit/c787e5d8d0174cfc1e63c6a65714e031bca5fc54))
+
+## [1.6.0-next.52](https://github.com/mittwald/flow/compare/1.5.50...1.6.0-next.52) (2026-10-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.52 ([bb7a82b](https://github.com/mittwald/flow/commit/bb7a82ba036c9c08c25ce038dc31a295a71a0c16))
+
+## [1.6.0-next.51](https://github.com/mittwald/flow/compare/1.5.49...1.6.0-next.51) (2026-10-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.51 ([f7aed25](https://github.com/mittwald/flow/commit/f7aed25ba5cc9cb26719e423b88735b95b2f840d))
+
+## [1.6.0-next.50](https://github.com/mittwald/flow/compare/1.5.48...1.6.0-next.50) (2026-10-30)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.50 ([a0fb537](https://github.com/mittwald/flow/commit/a0fb5378707e92fe9a240a3c453b549cd2499734))
+
+## [1.6.0-next.49](https://github.com/mittwald/flow/compare/1.5.47...1.6.0-next.49) (2026-10-28)
+
+### Features
+
+* **design-tokens:** 12px content radius, start stripe as wide as it ([7c0d5ed](https://github.com/mittwald/flow/commit/7c0d5ed85a0f307bb770eb77580b47fe905bc253))
+* **Popover:** 16px corner radius ([3262431](https://github.com/mittwald/flow/commit/32624310f96dce2db34e984735ad46a4bad49ca5))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.49 ([e9d8c17](https://github.com/mittwald/flow/commit/e9d8c1787c25c29b3fee5ff79fa68f4584f84c5c))
+
+## [1.6.0-next.48](https://github.com/mittwald/flow/compare/1.6.0-next.47...1.6.0-next.48) (2026-10-27)
+
+### Features
+
+* **design-tokens:** 16px corner radius for content containers ([6c9c4e7](https://github.com/mittwald/flow/commit/6c9c4e7ce64eb50c385f5614f48fb4ed67385fd4))
+* **design-tokens:** lighter dark primary soft surface ([d246b82](https://github.com/mittwald/flow/commit/d246b82a217e7e6929c9acb0ba884edc50c32723))
+* **design-tokens:** lighter light navy decorative surface ([1bd1b2e](https://github.com/mittwald/flow/commit/1bd1b2ea763cabf7df732ea598099141a50641d0)), closes [#3550](https://github.com/mittwald/flow/issues/3550)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.48 ([8b62cee](https://github.com/mittwald/flow/commit/8b62cee4fd049842ee3237d8e6ea8b3203d44dc3))
+
+## [1.6.0-next.47](https://github.com/mittwald/flow/compare/1.5.46...1.6.0-next.47) (2026-10-27)
+
+### Features
+
+* **AccentBox:** brand palette backgrounds and brand gradients ([77f975a](https://github.com/mittwald/flow/commit/77f975a22534a0b97a0e9ff3f3275d26d67d2b0c)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **AccentBox:** render the deprecated green like sage ([d19c7f6](https://github.com/mittwald/flow/commit/d19c7f66a1fd01368f5ad00061632a79d286868e)), closes [#3456](https://github.com/mittwald/flow/issues/3456)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.47 ([61251e5](https://github.com/mittwald/flow/commit/61251e5c592539ad100535d2cb53eece8c01dba5))
+
+## [1.6.0-next.46](https://github.com/mittwald/flow/compare/1.6.0-next.45...1.6.0-next.46) (2026-10-27)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.46 ([6d8f9d2](https://github.com/mittwald/flow/commit/6d8f9d2068ff8dbc2227243251ca056641cf098f))
+
+## [1.6.0-next.45](https://github.com/mittwald/flow/compare/1.5.45...1.6.0-next.45) (2026-10-27)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.45 ([04fb1fb](https://github.com/mittwald/flow/commit/04fb1fb7e904c810cb599e8773f9d6833a216999))
+
+## [1.6.0-next.44](https://github.com/mittwald/flow/compare/1.6.0-next.43...1.6.0-next.44) (2026-10-27)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.44 ([d78a045](https://github.com/mittwald/flow/commit/d78a04592e71e0174113920f2c2eacec46a373a1))
+
+## [1.6.0-next.43](https://github.com/mittwald/flow/compare/1.6.0-next.42...1.6.0-next.43) (2026-10-27)
+
+### Features
+
+* **design-tokens:** lighter dark status surfaces and brighter light status tones ([0101779](https://github.com/mittwald/flow/commit/010177952ef54321ad4be74acf058ac5352ac317)), closes [#3532](https://github.com/mittwald/flow/issues/3532) [#3455](https://github.com/mittwald/flow/issues/3455) [#3550](https://github.com/mittwald/flow/issues/3550)
+* **Table:** lighter borders like List and FileCard ([3335bc9](https://github.com/mittwald/flow/commit/3335bc902a387d305e924e21d9598d4aaeacc750)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.43 ([d8d651e](https://github.com/mittwald/flow/commit/d8d651eef0bb739de08ff8330db93ea9d399a7ad))
+
+## [1.6.0-next.42](https://github.com/mittwald/flow/compare/1.6.0-next.41...1.6.0-next.42) (2026-10-26)
+
+### Features
+
+* **design-tokens:** finer, neutral grain texture ([0cff3f2](https://github.com/mittwald/flow/commit/0cff3f231d6b97f789faaeccb83146be678efa34))
+* **FileCard:** lighter border like the ListItem ([ae83e31](https://github.com/mittwald/flow/commit/ae83e31297de36ff5f8b6fe5c922a6b32488128b)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+* **List:** lighter ListItem border ([184055c](https://github.com/mittwald/flow/commit/184055c57ebc95c1f9dd3e2117b3b8e9b6780924)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.42 ([69e1e2c](https://github.com/mittwald/flow/commit/69e1e2c039bdac7404e519d98bb508e21c16a8f3))
+
+## [1.6.0-next.41](https://github.com/mittwald/flow/compare/1.5.44...1.6.0-next.41) (2026-10-26)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.41 ([378543e](https://github.com/mittwald/flow/commit/378543eb9ed43c986c6cab0d629c490c0920700c))
+
+## [1.6.0-next.40](https://github.com/mittwald/flow/compare/1.5.43...1.6.0-next.40) (2026-10-26)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.40 ([6eadd79](https://github.com/mittwald/flow/commit/6eadd7989e4a3d12911acbe13e54cb8ef7165aca))
+
+## [1.6.0-next.39](https://github.com/mittwald/flow/compare/1.5.41...1.6.0-next.39) (2026-10-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.39 ([ff0590a](https://github.com/mittwald/flow/commit/ff0590a0a5c672cef5cf8e08817b5c17da235d7e))
+
+## [1.6.0-next.38](https://github.com/mittwald/flow/compare/1.5.39...1.6.0-next.38) (2026-10-23)
+
+### Features
+
+* **Alert:** soft surface instead of a border ([6306a83](https://github.com/mittwald/flow/commit/6306a8382e522776b09c2df21d799a6d266c8e80)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3564](https://github.com/mittwald/flow/issues/3564)
+* **components:** map the color props onto the brand&#x27;s decorative groups ([734db3b](https://github.com/mittwald/flow/commit/734db3b54eadeab5a14aee5947aa599f335a1c9a)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3550](https://github.com/mittwald/flow/issues/3550) [#3456](https://github.com/mittwald/flow/issues/3456) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** raise corner-radius.l to 24px for the brand ([6a2d8dd](https://github.com/mittwald/flow/commit/6a2d8dd49a66d41826c3b3ee7f1c0a37a1c4d3ff)), closes [#3564](https://github.com/mittwald/flow/issues/3564)
+* **design-tokens:** regenerate the neutral ramp and give borders a role ([a3b57ef](https://github.com/mittwald/flow/commit/a3b57ef34b37c3423aca41a726282474dfa68725)), closes [#3539](https://github.com/mittwald/flow/issues/3539) [#3542](https://github.com/mittwald/flow/issues/3542) [#595E64](https://github.com/mittwald/flow/issues/595E64) [#ADB3BC](https://github.com/mittwald/flow/issues/ADB3BC) [#777C84](https://github.com/mittwald/flow/issues/777C84) [#404448](https://github.com/mittwald/flow/issues/404448) [#888D96](https://github.com/mittwald/flow/issues/888D96) [#EBEFF3](https://github.com/mittwald/flow/issues/EBEFF3) [#3507](https://github.com/mittwald/flow/issues/3507)
+* **design-tokens:** sender Message on decorative-navy ([9877aef](https://github.com/mittwald/flow/commit/9877aef1fe8a7fa0a89556d8d0734259885509b7)), closes [#3508](https://github.com/mittwald/flow/issues/3508) [#3564](https://github.com/mittwald/flow/issues/3564)
+* **design-tokens:** take the brand base for the light salmon content tone ([935453d](https://github.com/mittwald/flow/commit/935453d766ec09fe5a96b4b281ffea2553b83d27)), closes [#E7A187](https://github.com/mittwald/flow/issues/E7A187) [#3508](https://github.com/mittwald/flow/issues/3508)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.38 ([6cdf611](https://github.com/mittwald/flow/commit/6cdf6117125d8cd2993df5ac2a61d4e5405643c6))
+
+## [1.6.0-next.37](https://github.com/mittwald/flow/compare/1.5.38...1.6.0-next.37) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.37 ([e4ab776](https://github.com/mittwald/flow/commit/e4ab7766ecff29bf82f1ea257438bb1f92b2b4ec))
+
+## [1.6.0-next.36](https://github.com/mittwald/flow/compare/1.5.37...1.6.0-next.36) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.36 ([f739479](https://github.com/mittwald/flow/commit/f7394797edfc8a79a0d2323d2dfeb60b4c759a31))
+
+## [1.6.0-next.35](https://github.com/mittwald/flow/compare/1.5.36...1.6.0-next.35) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.35 ([86c5cee](https://github.com/mittwald/flow/commit/86c5ceec96533f668c8dce9dcbee1c0d92596b3c))
+
+## [1.6.0-next.34](https://github.com/mittwald/flow/compare/1.5.35...1.6.0-next.34) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.34 ([8167fb1](https://github.com/mittwald/flow/commit/8167fb151dcf9862111473596d812b2b928f52c8))
+
+## [1.6.0-next.33](https://github.com/mittwald/flow/compare/1.5.34...1.6.0-next.33) (2026-10-22)
+
+### Features
+
+* **design-tokens:** make the decorative tones more colorful and drop the badge border ([4ffff55](https://github.com/mittwald/flow/commit/4ffff551f9b7c434c4abf6015bffe0c2495701d5)), closes [#3507](https://github.com/mittwald/flow/issues/3507) [#3550](https://github.com/mittwald/flow/issues/3550)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.33 ([87cc7b6](https://github.com/mittwald/flow/commit/87cc7b6d6943701dec73e4a62a92dca8030e9646))
+
+## [1.6.0-next.32](https://github.com/mittwald/flow/compare/1.5.33...1.6.0-next.32) (2026-10-22)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.32 ([3b3b3c4](https://github.com/mittwald/flow/commit/3b3b3c48b5a98197d740d107c30f6130732594c0))
+
+## [1.6.0-next.31](https://github.com/mittwald/flow/compare/1.5.32...1.6.0-next.31) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.31 ([4a7fb20](https://github.com/mittwald/flow/commit/4a7fb20b70d5efc0b2f4956b5426b96de3d302a7))
+
+## [1.6.0-next.30](https://github.com/mittwald/flow/compare/1.5.31...1.6.0-next.30) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.30 ([e508cff](https://github.com/mittwald/flow/commit/e508cff063cd3184b66a56fbd8ac92e611c9ac38))
+
+## [1.6.0-next.29](https://github.com/mittwald/flow/compare/1.5.30...1.6.0-next.29) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.29 ([214219e](https://github.com/mittwald/flow/commit/214219ee7d7d9f6b0f375c7db20e4e60299dcd11))
+
+## [1.6.0-next.28](https://github.com/mittwald/flow/compare/1.5.29...1.6.0-next.28) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.28 ([13e8c36](https://github.com/mittwald/flow/commit/13e8c363cefcd6ba936a52b837552f0c08dd5c02))
+
+## [1.6.0-next.27](https://github.com/mittwald/flow/compare/1.5.28...1.6.0-next.27) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.27 ([86e4348](https://github.com/mittwald/flow/commit/86e43487023acbf57c176a8b58886816ff9c3ece))
+
+## [1.6.0-next.26](https://github.com/mittwald/flow/compare/1.6.0-next.25...1.6.0-next.26) (2026-10-21)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.26 ([46ffc3b](https://github.com/mittwald/flow/commit/46ffc3b926a1e236d05cfdffea1196f5c8b749a5))
+
+## [1.6.0-next.25](https://github.com/mittwald/flow/compare/1.5.27...1.6.0-next.25) (2026-10-21)
+
+### Features
+
+* **design-tokens:** re-sync the Brand palette with the approved brand colors ([7162daf](https://github.com/mittwald/flow/commit/7162daf09642797328ed13b4d5c5f94ed56c00e2)), closes [#3449](https://github.com/mittwald/flow/issues/3449) [#3539](https://github.com/mittwald/flow/issues/3539) [#3479](https://github.com/mittwald/flow/issues/3479)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.25 ([ad19af8](https://github.com/mittwald/flow/commit/ad19af8b2c9317a8dd6ac68e02733240801a8335))
+
+## [1.6.0-next.24](https://github.com/mittwald/flow/compare/1.5.26...1.6.0-next.24) (2026-10-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.24 ([b1bd22a](https://github.com/mittwald/flow/commit/b1bd22a026e392422446e902bf92c8921b63c94d))
+
+## [1.6.0-next.23](https://github.com/mittwald/flow/compare/1.5.25...1.6.0-next.23) (2026-10-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.23 ([7826228](https://github.com/mittwald/flow/commit/782622840cbf82aa1170c6d0bab099f85e63312f))
+
+## [1.6.0-next.22](https://github.com/mittwald/flow/compare/1.5.24...1.6.0-next.22) (2026-10-20)
+
+### Features
+
+* **design-tokens:** adopt the brand team&#x27;s revised status ramps ([3550d58](https://github.com/mittwald/flow/commit/3550d58fff5c236ad04ad9b8bd3a7c1314114e35)), closes [#3449](https://github.com/mittwald/flow/issues/3449) [#EBEFF3](https://github.com/mittwald/flow/issues/EBEFF3) [#5ED3A0](https://github.com/mittwald/flow/issues/5ED3A0) [#3532](https://github.com/mittwald/flow/issues/3532)
+* **design-tokens:** deepen the status soft tones for stronger soft buttons ([5cacc7c](https://github.com/mittwald/flow/commit/5cacc7ca34aa171aee0c3ae586151265c24e2b8e)), closes [#3532](https://github.com/mittwald/flow/issues/3532) [#3532](https://github.com/mittwald/flow/issues/3532)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.22 ([e8730db](https://github.com/mittwald/flow/commit/e8730db3f173506049717df08b7094f8b1c27224))
+
+## [1.6.0-next.21](https://github.com/mittwald/flow/compare/1.6.0-next.20...1.6.0-next.21) (2026-10-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.21 ([c75ca48](https://github.com/mittwald/flow/commit/c75ca489f4a68d285b3a7513fab391ef31978680))
+
+## [1.6.0-next.20](https://github.com/mittwald/flow/compare/1.5.22...1.6.0-next.20) (2026-10-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.20 ([151ddc1](https://github.com/mittwald/flow/commit/151ddc103234bdf6b7832702e594639431c27fbd))
+
+## [1.6.0-next.19](https://github.com/mittwald/flow/compare/1.5.21...1.6.0-next.19) (2026-10-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.19 ([877c5e7](https://github.com/mittwald/flow/commit/877c5e7c5a95ddfb1e134f096c5b78d9bb393b87))
+
+## [1.6.0-next.18](https://github.com/mittwald/flow/compare/1.5.20...1.6.0-next.18) (2026-10-15)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.18 ([a3daa16](https://github.com/mittwald/flow/commit/a3daa16e9ea0d3609de852ef9feaf56293359543))
+
+## [1.6.0-next.17](https://github.com/mittwald/flow/compare/1.5.19...1.6.0-next.17) (2026-10-15)
+
+### Features
+
+* **design-tokens:** fold the border and disabled roles into neutral ([af91319](https://github.com/mittwald/flow/commit/af91319d51bd412bb8e34f01f448220917dfb1f4)), closes [#3479](https://github.com/mittwald/flow/issues/3479) [#3455](https://github.com/mittwald/flow/issues/3455)
+
+### Miscellaneous Chores
+
+* **design-tokens:** hand the remaining contrast exceptions to [#3479](https://github.com/mittwald/flow/issues/3479) and [#3456](https://github.com/mittwald/flow/issues/3456) ([8438e22](https://github.com/mittwald/flow/commit/8438e223a4dbebb56e7cbfb38cc482d21ea27d11)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#3455](https://github.com/mittwald/flow/issues/3455)
+* **release:** bump version to 1.6.0-next.17 ([df87cd3](https://github.com/mittwald/flow/commit/df87cd3dfe7840fa9d529d89b47d7de2153c5c3f))
+
+## [1.6.0-next.16](https://github.com/mittwald/flow/compare/1.5.18...1.6.0-next.16) (2026-10-14)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.16 ([efd1b81](https://github.com/mittwald/flow/commit/efd1b81a4ea210d1d6d6000298b8173c6892058b))
+
+## [1.6.0-next.15](https://github.com/mittwald/flow/compare/1.5.17...1.6.0-next.15) (2026-10-14)
+
+### Features
+
+* **design-tokens:** define the Semantic color roles ([babbe17](https://github.com/mittwald/flow/commit/babbe177667c999c45c4acdf007ff1f0dfbfcd30)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#666B72](https://github.com/mittwald/flow/issues/666B72) [#3456](https://github.com/mittwald/flow/issues/3456) [#3479](https://github.com/mittwald/flow/issues/3479)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.15 ([db5b635](https://github.com/mittwald/flow/commit/db5b635b7b983af4f92ed3b634b6b244094e95dd))
+
+## [1.6.0-next.14](https://github.com/mittwald/flow/compare/1.5.16...1.6.0-next.14) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.14 ([5eda220](https://github.com/mittwald/flow/commit/5eda220b8555a840a326c63645ddd60c0bc53614))
+
+## [1.6.0-next.13](https://github.com/mittwald/flow/compare/1.5.15...1.6.0-next.13) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.13 ([a5a7f9b](https://github.com/mittwald/flow/commit/a5a7f9bde0c09ead3786ad080f45cd37b9c5c58b))
+
+## [1.6.0-next.12](https://github.com/mittwald/flow/compare/1.5.14...1.6.0-next.12) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.12 ([ad3c7e4](https://github.com/mittwald/flow/commit/ad3c7e48d367df343daec04de9cd082cd4cc46ed))
+
+## [1.6.0-next.11](https://github.com/mittwald/flow/compare/1.5.13...1.6.0-next.11) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.11 ([b2a5882](https://github.com/mittwald/flow/commit/b2a58828e036016ab8e4985f4ff428ec5bba432e))
+
+## [1.6.0-next.10](https://github.com/mittwald/flow/compare/1.5.12...1.6.0-next.10) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.10 ([c6202f5](https://github.com/mittwald/flow/commit/c6202f5f3cd81d371b76ec66e622e071f7010b2d))
+
+## [1.6.0-next.9](https://github.com/mittwald/flow/compare/1.5.11...1.6.0-next.9) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.9 ([0655846](https://github.com/mittwald/flow/commit/0655846db24c4140226ba5ea46101d4f52866826))
+
+## [1.6.0-next.8](https://github.com/mittwald/flow/compare/1.5.9...1.6.0-next.8) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.8 ([5c64810](https://github.com/mittwald/flow/commit/5c648106c63fad5a8e3ebc21608b145ac49a899e))
+
+## [1.6.0-next.7](https://github.com/mittwald/flow/compare/1.5.8...1.6.0-next.7) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.7 ([6c53d07](https://github.com/mittwald/flow/commit/6c53d07849c13c8447e15ee7596986469f3137f3))
+
+## [1.6.0-next.6](https://github.com/mittwald/flow/compare/1.5.6...1.6.0-next.6) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.6 ([57e6b5f](https://github.com/mittwald/flow/commit/57e6b5f819583776a48636c85b2a83992b4c6427))
+
+## [1.6.0-next.5](https://github.com/mittwald/flow/compare/1.5.5...1.6.0-next.5) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.5 ([7401505](https://github.com/mittwald/flow/commit/740150500bab2cd36aa92f13894892e4629f8f7c))
+
+## [1.6.0-next.4](https://github.com/mittwald/flow/compare/1.6.0-next.3...1.6.0-next.4) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.4 ([1ad9506](https://github.com/mittwald/flow/commit/1ad95068b7a0c3bed3bee7409698063c0699c101))
+
+## [1.6.0-next.3](https://github.com/mittwald/flow/compare/1.5.3...1.6.0-next.3) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.3 ([d899451](https://github.com/mittwald/flow/commit/d89945117ece0dc0a3ba3aca063be43231b9138a))
+
+## [1.6.0-next.2](https://github.com/mittwald/flow/compare/1.5.2...1.6.0-next.2) (2026-10-13)
+
+### Features
+
+* **design-tokens:** adopt the brand&#x27;s status colors by role ([86eab69](https://github.com/mittwald/flow/commit/86eab6917f421ce73e5e18dd56147f046ccb29c2)), closes [#3479](https://github.com/mittwald/flow/issues/3479) [#3455](https://github.com/mittwald/flow/issues/3455) [#3456](https://github.com/mittwald/flow/issues/3456) [#3454](https://github.com/mittwald/flow/issues/3454)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.2 ([7176262](https://github.com/mittwald/flow/commit/7176262a022447c9bdee94a504c96eb7bfdad930))
+
+## [1.6.0-next.1](https://github.com/mittwald/flow/compare/1.5.1...1.6.0-next.1) (2026-10-13)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.1 ([67830b8](https://github.com/mittwald/flow/commit/67830b8196b5ad65282a921e055005a984cafb24))
+
+## [1.6.0-next.0](https://github.com/mittwald/flow/compare/1.5.0...1.6.0-next.0) (2026-10-13)
+
+### Features
+
+* **design-tokens:** add a WCAG contrast audit for color token pairs ([3cd4e91](https://github.com/mittwald/flow/commit/3cd4e918f45da252c60dce3a100fcd85e956a5e7)), closes [#3462](https://github.com/mittwald/flow/issues/3462) [#3452](https://github.com/mittwald/flow/issues/3452)
+* **design-tokens:** adopt the new brand palette in the Brand tier ([0d17781](https://github.com/mittwald/flow/commit/0d17781c3f4d4fab33054903d2d01c1b58b93ac8)), closes [#3453](https://github.com/mittwald/flow/issues/3453) [#3455](https://github.com/mittwald/flow/issues/3455) [#3454](https://github.com/mittwald/flow/issues/3454)
+* **design-tokens:** rate single colors on their surfaces and gate contrast in CI ([b4d4e80](https://github.com/mittwald/flow/commit/b4d4e801ab61b7c93189b38979deeec7f6a53d16)), closes [#3454](https://github.com/mittwald/flow/issues/3454) [#3455](https://github.com/mittwald/flow/issues/3455) [#3480](https://github.com/mittwald/flow/issues/3480)
+* **design-tokens:** restructure color tokens into the ADR 0007 tiers ([d516208](https://github.com/mittwald/flow/commit/d51620868528570234ce4f708b6be9820ec9bff3)), closes [#3455](https://github.com/mittwald/flow/issues/3455) [#3462](https://github.com/mittwald/flow/issues/3462)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.0-next.0 ([4d4ae35](https://github.com/mittwald/flow/commit/4d4ae3528f61e94bce048c1a0ad4701092838e5b))
+
 ## [1.6.0-next.63](https://github.com/mittwald/flow/compare/1.5.62...1.6.0-next.63) (2026-11-04)
 
 ## [1.6.0-next.62](https://github.com/mittwald/flow/compare/1.5.61...1.6.0-next.62) (2026-11-04)

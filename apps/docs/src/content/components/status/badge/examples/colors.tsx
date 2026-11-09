@@ -17,27 +17,27 @@ import {
     <Label>Scope</Label>
     <Text>Value</Text>
   </Badge>
+  <Badge color="violet">
+    <Label>Scope</Label>
+    <Text>Value</Text>
+  </Badge>
+  <Badge color="teal">
+    <Label>Scope</Label>
+    <Text>Value</Text>
+  </Badge>
   <Badge color="lilac">
     <Label>Scope</Label>
     <Text>Value</Text>
   </Badge>
-  <Badge color="sage">
+  <Badge color="green">
     <Label>Scope</Label>
     <Text>Value</Text>
   </Badge>
-  <Badge color="salmon">
+  <Badge color="orange">
     <Label>Scope</Label>
     <Text>Value</Text>
   </Badge>
-  <Badge color="success">
-    <Label>Scope</Label>
-    <Text>Value</Text>
-  </Badge>
-  <Badge color="warning">
-    <Label>Scope</Label>
-    <Text>Value</Text>
-  </Badge>
-  <Badge color="danger">
+  <Badge color="red">
     <Label>Scope</Label>
     <Text>Value</Text>
   </Badge>

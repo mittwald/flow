@@ -6,7 +6,7 @@ code-block:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.l}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-style:

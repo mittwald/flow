@@ -12,81 +12,81 @@ import { type PrismTheme } from "prism-react-renderer";
  */
 export const flowTheme: PrismTheme = {
   plain: {
-    color: "var(--code-syntax--color--variable)",
+    color: "var(--color--code-syntax--variable)",
     backgroundColor: "var(--code-block--background-color)",
   },
   styles: [
     {
       types: ["comment"],
       style: {
-        color: "var(--code-syntax--color--comment)",
+        color: "var(--color--code-syntax--comment)",
         fontStyle: "italic",
       },
     },
     {
       types: ["keyword"],
       style: {
-        color: "var(--code-syntax--color--keyword)",
+        color: "var(--color--code-syntax--keyword)",
       },
     },
     {
       types: ["string"],
       style: {
-        color: "var(--code-syntax--color--string)",
+        color: "var(--color--code-syntax--string)",
       },
     },
     {
       types: ["number", "boolean", "constant", "builtin"],
       style: {
-        color: "var(--code-syntax--color--number)",
+        color: "var(--color--code-syntax--number)",
       },
     },
     {
       types: ["function"],
       style: {
-        color: "var(--code-syntax--color--function)",
+        color: "var(--color--code-syntax--function)",
       },
     },
     {
       types: ["variable"],
       style: {
-        color: "var(--code-syntax--color--variable)",
+        color: "var(--color--code-syntax--variable)",
       },
     },
     {
       types: ["property"],
       style: {
-        color: "var(--code-syntax--color--property)",
+        color: "var(--color--code-syntax--property)",
       },
     },
     {
       types: ["class-name", "type"],
       style: {
-        color: "var(--code-syntax--color--type)",
+        color: "var(--color--code-syntax--type)",
       },
     },
     {
       types: ["operator"],
       style: {
-        color: "var(--code-syntax--color--operator)",
+        color: "var(--color--code-syntax--operator)",
       },
     },
     {
       types: ["punctuation"],
       style: {
-        color: "var(--code-syntax--color--comment)",
+        color: "var(--color--code-syntax--comment)",
       },
     },
     {
       types: ["tag"],
       style: {
-        color: "var(--code-syntax--color--type)",
+        color: "var(--color--code-syntax--type)",
       },
     },
     {
       types: ["script", "maybe-class-name"],
       style: {
-        color: "var(--code-syntax--color--variable)",
+        color: "var(--color--code-syntax--variable)",
       },
     },
     {
@@ -98,31 +98,31 @@ export const flowTheme: PrismTheme = {
     {
       types: ["property-access"],
       style: {
-        color: "var(--code-syntax--color--property)",
+        color: "var(--color--code-syntax--property)",
       },
     },
     {
       types: ["attr-name"],
       style: {
-        color: "var(--code-syntax--color--property)",
+        color: "var(--color--code-syntax--property)",
       },
     },
     {
       types: ["attr-value"],
       style: {
-        color: "var(--code-syntax--color--string)",
+        color: "var(--color--code-syntax--string)",
       },
     },
     {
       types: ["attr-equals"],
       style: {
-        color: "var(--code-syntax--color--operator)",
+        color: "var(--color--code-syntax--operator)",
       },
     },
     {
       types: ["invalid"],
       style: {
-        color: "var(--code-syntax--color--invalid)",
+        color: "var(--color--code-syntax--invalid)",
         textDecorationLine: "underline",
       },
     },

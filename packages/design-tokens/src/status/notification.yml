@@ -2,17 +2,15 @@ notification:
   padding:
     value: "{size-px.s}"
   corner-radius:
-    value: "{corner-radius.l}"
-  # As wide as the corner radius: the stripe ends where the corner curve
-  # ends instead of breaking off inside it.
+    value: "{corner-radius.m}"
   border-x-start-width:
-    value: "{notification.corner-radius}"
+    value: "{border-width.300}"
   border-style:
     value: "{border-style.default}"
   border-width:
     value: "{border-width.100}"
   border-color:
-    value: "{border.color.100}"
+    value: "{neutral.color.300}"
   box-shadow:
     value: "{shadow.overlay}"
   width:
@@ -34,7 +32,7 @@ notification:
     value: "{info-outline-content-color}"
   info-background-color:
     default:
-      value: "{elevation.color.100}"
+      value: "{neutral.color.100}"
     hover:
       value: "{info-outline-background-color.hover}"
     pressed:
@@ -47,7 +45,7 @@ notification:
     value: "{warning-outline-content-color}"
   warning-background-color:
     default:
-      value: "{elevation.color.100}"
+      value: "{neutral.color.100}"
     hover:
       value: "{warning-outline-background-color.hover}"
     pressed:
@@ -60,7 +58,7 @@ notification:
     value: "{danger-outline-content-color}"
   danger-background-color:
     default:
-      value: "{elevation.color.100}"
+      value: "{neutral.color.100}"
     hover:
       value: "{danger-outline-background-color.hover}"
     pressed:
@@ -73,7 +71,7 @@ notification:
     value: "{success-outline-content-color}"
   success-background-color:
     default:
-      value: "{elevation.color.100}"
+      value: "{neutral.color.100}"
     hover:
       value: "{success-outline-background-color.hover}"
     pressed:
@@ -86,7 +84,7 @@ notification:
     value: "{unavailable-outline-content-color}"
   unavailable-background-color:
     default:
-      value: "{elevation.color.100}"
+      value: "{neutral.color.100}"
     hover:
       value: "{unavailable-outline-background-color.hover}"
     pressed:

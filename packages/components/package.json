@@ -1,11 +1,11 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "1.6.0-next.63",
+  "version": "1.6.0-next.66",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
-  "license": "MIT",
+  "license": "(MIT AND OFL-1.1)",
   "sideEffects": [
     "**/*.css",
     "**/*.scss",

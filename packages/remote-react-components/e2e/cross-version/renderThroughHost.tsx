@@ -31,6 +31,7 @@ const buildSrc = (
   url.port = String(port);
   url.searchParams.set("file", scenarioFile);
   url.searchParams.set("scenario", scenarioName);
+  url.searchParams.set("hostOrigin", window.location.origin);
   return url.toString();
 };
 

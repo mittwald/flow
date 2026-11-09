@@ -23,9 +23,9 @@ export const ProgressBarBar: FC<Props> = (props) => {
     segments && segments.length > 0
       ? segments.map((s, i) => {
           const backgroundColor = !s.color
-            ? `var(--categorical--color--${getCategoricalColorByIndex(i)})`
+            ? `var(--color--categorical--${getCategoricalColorByIndex(i)})`
             : isCategoricalColor(s.color)
-              ? `var(--categorical--color--${s.color})`
+              ? `var(--color--categorical--${s.color})`
               : s.color;
 
           return (

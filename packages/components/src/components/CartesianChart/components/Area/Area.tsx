@@ -56,7 +56,7 @@ export const Area: FC<AreaProps> = (props) => {
   const animation = useChartAnimation();
 
   const color = isCategoricalColor(colorFromProps)
-    ? `var(--categorical--color--${colorFromProps})`
+    ? `var(--color--categorical--${colorFromProps})`
     : colorFromProps;
 
   return (

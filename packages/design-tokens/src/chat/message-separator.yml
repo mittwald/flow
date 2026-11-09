@@ -1,9 +1,9 @@
 message-separator:
   background-color:
-    value: "{elevation.color.100}"
+    value: "{neutral.color.100}"
   font-size:
     value: "{font-size-text.s}"
   padding:
     value: "{size-px.m}"
   color:
-    value: "{content.color.200}"
+    value: "{neutral.color.800}"

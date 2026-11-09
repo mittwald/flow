@@ -1,13 +1,10 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import gopher from "@/tests/assets/gopher.webp";
 import { test } from "vitest";
-import {
-  decorativeColors,
-  statusTypes,
-} from "@mittwald/flow-react-components/internal";
+import { statusTypes } from "@mittwald/flow-react-components/internal";
 
 const sizes = ["xs", "s", "m", "l"] as const;
-const colors = decorativeColors;
+const colors = ["blue", "teal", "green", "violet", "lilac"] as const;
 
 test.each(testEnvironments)(
   "Avatar (%s)",

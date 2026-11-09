@@ -37,7 +37,7 @@ export const ReleaseEntry: FC<{ release: Release }> = ({ release }) => {
         className={styles.heading}
       >
         {release.version}{" "}
-        <Badge color={release.kind === "major" ? "lilac" : "blue"}>
+        <Badge color={release.kind === "major" ? "violet" : "blue"}>
           {release.kind === "major" ? "Major" : "Minor"}
         </Badge>
         {release.title && <> – {release.title}</>}

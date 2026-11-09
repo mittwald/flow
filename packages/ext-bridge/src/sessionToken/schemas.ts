@@ -1,3 +1,4 @@
+import { publicKeySerialPattern } from "@/sessionToken/publicKeys/serial";
 import { z } from "zod";
 
 export const extensionScopes = z.string().array();
@@ -12,6 +13,6 @@ export const sessionTokenPayload = z.object({
   context: extensionContext,
   scopes: extensionScopes,
   authenticatableWithoutSecret: z.boolean(),
-  publicKeySerial: z.string(),
+  publicKeySerial: z.string().regex(publicKeySerialPattern),
   variantKey: z.string().optional().nullable(),
 });
