@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.67](https://github.com/mittwald/flow/compare/1.6.0-next.66...1.6.0-next.67) (2026-11-09)
+
+### Reverts
+
+* **design-tokens:** adopt the new mittwald brand colors ([#3459](https://github.com/mittwald/flow/issues/3459)) ([043c4fe](https://github.com/mittwald/flow/commit/043c4fe6cc87eedb43d1ffc1f946324fe67d3bf1))
+
+### Tests
+
+* update visual regression screenshots ([ae7044d](https://github.com/mittwald/flow/commit/ae7044d5f6ebcfa8bf7ef9cdab50f450d7ed1d56))
+
 ## [1.6.0-next.66](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.6.0-next.66) (2026-11-06)
 
 ### Bug Fixes
