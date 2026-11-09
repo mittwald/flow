@@ -1188,10 +1188,18 @@ test.each([
       throw new Error("The test browser has no VisualViewport");
     }
     const addEventListener = vitest.spyOn(viewport, "addEventListener");
-    // Pretend the on-screen keyboard is open.
-    const readHeight = vitest
+    // Pretend the on-screen keyboard is open. Count only the hook's reads:
+    // react-aria positions overlays left over from earlier tests with the
+    // same getter.
+    const readHeight = vitest.fn();
+    vitest
       .spyOn(VisualViewport.prototype, "height", "get")
-      .mockImplementation(() => window.innerHeight - 300);
+      .mockImplementation(() => {
+        if (new Error().stack?.includes("useVirtualKeyboardVisible")) {
+          readHeight();
+        }
+        return window.innerHeight - 300;
+      });
 
     try {
       const dom = await render(<Test />);
