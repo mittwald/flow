@@ -16,7 +16,7 @@ const addMeta = (attributes: Record<string, string>) => {
   document.head.append(meta);
 };
 
-addMeta({ property: "csp-nonce", content: nonce, nonce });
+addMeta({ property: "csp-nonce", nonce });
 addMeta({
   "http-equiv": "Content-Security-Policy",
   content: `style-src 'self' 'nonce-${nonce}'`,
