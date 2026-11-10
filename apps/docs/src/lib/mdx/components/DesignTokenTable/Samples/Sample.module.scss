@@ -1,6 +1,7 @@
 .box {
   height: 32px;
   width: 32px;
+  flex-shrink: 0;
   border: 1px var(--form-control--border-color--default) solid;
   border-radius: 2px;
 
