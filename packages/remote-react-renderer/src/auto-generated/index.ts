@@ -130,6 +130,7 @@ import { Tabs as Tabs } from "@mittwald/flow-react-components";
 import { Text as Text } from "@mittwald/flow-react-components";
 import { TextArea as TextArea } from "@mittwald/flow-react-components";
 import { TextField as TextField } from "@mittwald/flow-react-components";
+import { ThemeScope as ThemeScope } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
@@ -476,6 +477,10 @@ export const flowComponents = {
   "flr-text": createFlowRemoteComponentRenderer("Text", Text),
   "flr-text-area": createFlowRemoteComponentRenderer("TextArea", TextArea),
   "flr-text-field": createFlowRemoteComponentRenderer("TextField", TextField),
+  "flr-theme-scope": createFlowRemoteComponentRenderer(
+    "ThemeScope",
+    ThemeScope,
+  ),
   "flr-time-field": createFlowRemoteComponentRenderer("TimeField", TimeField),
   "flr-tooltip": createFlowRemoteComponentRenderer("Tooltip", Tooltip),
   "flr-tooltip-trigger": createFlowRemoteComponentRenderer(
