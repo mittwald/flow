@@ -108,6 +108,7 @@ export * from "@/components/Tabs";
 export * from "@/components/Text";
 export * from "@/components/TextArea";
 export * from "@/components/TextField";
+export * from "@/components/ThemeScope";
 export * from "@/components/TimeField";
 export * from "@/components/TranslationProvider";
 export * from "@/components/Tooltip";

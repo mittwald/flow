@@ -129,6 +129,7 @@ export * from "./RemoteTabsElement";
 export * from "./RemoteTextElement";
 export * from "./RemoteTextAreaElement";
 export * from "./RemoteTextFieldElement";
+export * from "./RemoteThemeScopeElement";
 export * from "./RemoteTimeFieldElement";
 export * from "./RemoteTooltipElement";
 export * from "./RemoteTooltipTriggerElement";

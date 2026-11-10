@@ -60,6 +60,7 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
+import type { ThemeScopeProps } from "@/components/ThemeScope";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 import type { SegmentedControlProps } from "@/components/SegmentedControl";
 import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
@@ -197,6 +198,7 @@ export interface FlowComponentPropsTypes {
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
+  ThemeScope: ThemeScopeProps;
   TimeField: TimeFieldProps;
 }
 
@@ -298,6 +300,7 @@ const propsContextSupportingComponentsMap: Record<
   Text: true,
   TextArea: true,
   TextField: true,
+  ThemeScope: true,
   TimeField: true,
 };
 

@@ -1,0 +1,78 @@
+---
+component: ThemeScope
+description:
+  Der ThemeScope stellt einen Bereich der Seite in einem festen Theme dar,
+  unabhängig vom Theme der Seite.
+---
+
+<LiveCodeEditor bgColor="darkStatic" />
+
+---
+
+# Best Practices
+
+- Setze den ThemeScope sparsam ein, etwa für einen dunklen Abschnitt auf einer
+  hellen Startseite. Die Seite bleibt sonst schwer zu lesen.
+- Gib dem Bereich eine eigene Fläche, zum Beispiel mit einer
+  [LayoutCard](/components/structure/layout-card). Der ThemeScope selbst
+  zeichnet keinen Hintergrund und keine Abstände.
+- Verwende für das Theme der ganzen Seite das Attribut `data-theme` auf `<html>`
+  (siehe [Themes](/foundations/design/themes#technische-implementierung)), nicht
+  einen ThemeScope um die Anwendung.
+
+---
+
+# Attribut `data-theme`
+
+Für reines CSS genügt das Attribut `data-theme` auf einem beliebigen Element:
+Design Tokens, `color-scheme` und die Textfarbe folgen dem Theme. Overlays und
+Charts erreicht das Attribut nicht. Verwende dafür den ThemeScope.
+
+```tsx
+<section data-theme="dark">…</section>
+```
+
+---
+
+# Eigene Design Tokens
+
+Jeder Bereich mit `data-theme` deklariert die Theme-Farben und die Design
+Tokens, die auf sie verweisen, neu. Überschreibst du ein solches Token nur auf
+`:root`, gilt der Wert im ThemeScope und in seinen Overlays nicht. Überschreibe
+es deshalb auf `:root, [data-theme]`.
+
+```css
+:root,
+[data-theme] {
+  --tooltip--background-color: var(--neutral--color--800);
+}
+```
+
+Ein Override für nur ein Theme nennt das Theme im Selektor, für die Seite und
+für den Bereich. `:root, [data-theme]` würde den Wert in jedem Theme setzen.
+
+```css
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --tooltip--background-color: var(--neutral--color--1000);
+}
+```
+
+Folgt das Theme dem Betriebssystem, also ohne `data-theme` auf `<html>` oder mit
+`system`, greift dieser Selektor nicht. Ergänze dafür dieselbe Deklaration in
+einer Media Query.
+
+```css
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  [data-theme="system"] {
+    --tooltip--background-color: var(--neutral--color--1000);
+  }
+}
+```
+
+---
+
+# Properties
+
+<PropertiesTables />

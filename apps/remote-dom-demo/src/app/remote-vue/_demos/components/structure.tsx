@@ -34,6 +34,7 @@ import {
   TabTitle,
   Text,
   TextField,
+  ThemeScope,
 } from "@mittwald/flow-remote-vue-components";
 import { defineComponent, h, ref } from "vue";
 
@@ -223,6 +224,28 @@ export const StructureDemo = defineComponent({
               </Section>
             </Tab>
           </Tabs>
+        </Section>
+
+        <Section>
+          <Heading level={3}>ThemeScope</Heading>
+          <ThemeScope theme="dark">
+            <LayoutCard>
+              <Section>
+                <Text>Dark scope</Text>
+                <PopoverTrigger>
+                  <Button>Popover in the dark scope</Button>
+                  <Popover>
+                    <Text>Follows the dark scope.</Text>
+                  </Popover>
+                </PopoverTrigger>
+                <ThemeScope theme="light">
+                  <LayoutCard>
+                    <Text>Light scope inside the dark one</Text>
+                  </LayoutCard>
+                </ThemeScope>
+              </Section>
+            </LayoutCard>
+          </ThemeScope>
         </Section>
       </ComponentGroupPage>
     );

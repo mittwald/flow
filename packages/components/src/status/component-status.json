@@ -429,6 +429,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#ThemeScope": {
+    "level": "beta",
+    "isNew": true
+  },
   "@mittwald/flow-react-components#TimeField": {
     "level": "stable",
     "isNew": false

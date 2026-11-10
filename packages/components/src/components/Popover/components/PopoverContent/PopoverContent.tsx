@@ -9,6 +9,7 @@ import { NonModalPopoverContent } from "../NonModalPopoverContent";
 import { PopoverTip } from "../PopoverTip";
 import { popoverViewportPadding } from "../../viewportPadding";
 import { popoverWidthStyle } from "../../widthStyle";
+import { useOverlayThemeProps } from "@/lib/theming/useOverlayThemeProps";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -42,6 +43,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
   } = props;
 
   const isActivityActive = useIsActivityActive();
+  const themeProps = useOverlayThemeProps();
 
   // A trigger hands its popover a ref through the context react-aria sets up,
   // and the non-modal popover has to anchor itself with it.
@@ -94,6 +96,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
   return (
     <Aria.Popover
       {...rest}
+      {...themeProps}
       className={className}
       containerPadding={popoverViewportPadding}
       ref={ref}
