@@ -3,5 +3,7 @@
   "gallery": "Image gallery",
   "indicator": "{current} of {count}",
   "next": "Next",
-  "previous": "Previous"
+  "previous": "Previous",
+  "zoom": "Zoomable view",
+  "zoomDescription": "Click or press Enter to zoom. Plus and minus change the zoom, the arrow keys move the zoomed image."
 }

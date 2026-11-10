@@ -53,6 +53,8 @@ export const Default: Story = {};
 
 export const WithoutFitScreen: Story = { args: { fitScreen: false } };
 
+export const WithZoom: Story = { args: { withZoom: true } };
+
 export const WithController: Story = {
   render: (props) => {
     const controller = useOverlayController("LightBox");
@@ -127,5 +129,27 @@ export const WithGallery: Story = {
         </LightBoxTrigger>
       ))}
     </Flex>
+  ),
+};
+
+export const WithZoomInGallery: Story = {
+  render: () => (
+    <LightBoxTrigger>
+      <Button>Open LightBox</Button>
+      <LightBox withZoom>
+        <LightBoxGallery>
+          {images.map((src) => (
+            <LightBoxGalleryItem key={src}>
+              <Image src={src} />
+              <ActionGroup>
+                <Button>
+                  <IconDownload />
+                </Button>
+              </ActionGroup>
+            </LightBoxGalleryItem>
+          ))}
+        </LightBoxGallery>
+      </LightBox>
+    </LightBoxTrigger>
   ),
 };

@@ -671,8 +671,8 @@ describe("LightBox", () => {
 
   /*
    * The host tree Flow's `LightBox` builds: the children in a content
-   * container, and after it an actions container with the close button and
-   * the tunnelled `ActionGroup`, every button solid and `light-static`.
+   * container, and after it an actions container with the tunnelled
+   * `ActionGroup` and the close button, every button solid and `light-static`.
    */
   test("builds the host tree Flow's light box builds", async () => {
     renderLightBox();
@@ -691,7 +691,7 @@ describe("LightBox", () => {
       buttons.map((button) =>
         (button.getAttribute("aria-label") ?? button.textContent)?.trim(),
       ),
-    ).toEqual(["Close", "Download"]);
+    ).toEqual(["Download", "Close"]);
     for (const button of buttons) {
       expect(button.classList).toContain("flow--button--light-static");
       expect(button.classList).toContain("flow--button--solid");
