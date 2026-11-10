@@ -25,3 +25,15 @@
     "@mittwald/flow-design-tokens/css-layered/colors-light-system.css"
   );
 }
+
+// Users who ask for more contrast get every border at the control-outline
+// step (border.300), in every theme. Comes last to win over the theme rules.
+@media (prefers-contrast: more) {
+  @layer flow.tokens {
+    :root:not([data-theme]),
+    :root[data-theme] {
+      --border--color--100: var(--border--color--300);
+      --border--color--200: var(--border--color--300);
+    }
+  }
+}
