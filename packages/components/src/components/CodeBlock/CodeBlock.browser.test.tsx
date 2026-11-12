@@ -2,6 +2,7 @@ import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { expect, test } from "vitest";
 import { CodeBlock } from "@/components/CodeBlock";
+import { EditorView } from "@uiw/react-codemirror";
 
 const showMore = () => page.getByRole("button", { name: "Show more" });
 const showLess = () => page.getByRole("button", { name: "Show less" });
@@ -106,4 +107,24 @@ test("the code is not editable", async () => {
   await expect
     .element(page.getByRole("textbox"))
     .toHaveAttribute("contenteditable", "false");
+});
+
+test("extensions reach the editor", async () => {
+  await render(
+    <CodeBlock
+      code={lines(3)}
+      extensions={[
+        EditorView.cspNonce.of("code-block-nonce"),
+        EditorView.editorAttributes.of({ "data-extension": "applied" }),
+      ]}
+    />,
+  );
+
+  const editor = document.querySelector<HTMLElement>(".cm-editor");
+  expect(editor?.dataset.extension).toBe("applied");
+  expect(
+    Array.from(document.querySelectorAll("style")).some(
+      (style) => style.nonce === "code-block-nonce",
+    ),
+  ).toBe(true);
 });

@@ -23,7 +23,10 @@ export interface CodeBlockProps
     PropsWithClassName,
     PropsWithChildren,
     Partial<
-      Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable">
+      Pick<
+        CodeEditorProps,
+        "language" | "showLineNumbers" | "copyable" | "extensions"
+      >
     > {
   /** The code displayed in the block. */
   code?: string;
@@ -36,7 +39,10 @@ export interface CodeBlockProps
   truncateLines?: boolean | number;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props extensions
+ */
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const {
     code,
