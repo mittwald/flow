@@ -293,6 +293,11 @@ content:
     inverse:
       value: "{color.mittwald-neutral.1700}"
 
+skeleton:
+  color:
+    shimmer:
+      value: "{color.white-alpha.100}"
+
 dark:
   color:
     quiet:

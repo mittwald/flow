@@ -1,7 +1,7 @@
 skeleton:
   background-color:
-    value: "{neutral.color.quiet.100}"
+    value: "{dark.color.quiet.100}"
   shimmer-color:
-    value: "{elevation.color.100}"
+    value: "{skeleton.color.shimmer}"
   shimmer-duration:
     value: 3000ms

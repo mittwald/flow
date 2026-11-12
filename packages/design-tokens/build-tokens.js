@@ -48,6 +48,7 @@ const semanticShapes = {
   elevation: steps,
   border: steps,
   content: [...steps, "inverse"],
+  skeleton: ["shimmer"],
   // Decorative groups add one content tone for Icon and Color.
   decorative: [
     ...["quiet", "strong"].flatMap((tone) =>
