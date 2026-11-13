@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.66](https://github.com/mittwald/flow/compare/1.5.65...1.5.66) (2026-11-13)
+
+### Bug Fixes
+
+* **CodeEditor:** apply the page&#x27;s CSP nonce to CodeMirror&#x27;s styles ([#3655](https://github.com/mittwald/flow/issues/3655)) ([c390830](https://github.com/mittwald/flow/commit/c390830041ac8526f30201fd4205b80076d3baaa))
+
+### Tests
+
+* **Modal:** count only the hook&#x27;s visual viewport reads ([#3656](https://github.com/mittwald/flow/issues/3656)) ([7f51ed3](https://github.com/mittwald/flow/commit/7f51ed387b49d22803628dcc3b465db13a389862))
+
 ## [1.5.65](https://github.com/mittwald/flow/compare/1.5.64...1.5.65) (2026-11-06)
 
 ### Bug Fixes
