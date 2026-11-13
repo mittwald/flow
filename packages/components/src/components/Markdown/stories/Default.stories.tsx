@@ -19,7 +19,8 @@ const meta: Meta<typeof Markdown> = {
       <Markdown {...props}>
         {"# Heading 1\n" +
           "## Heading 2\n" +
-          "The Death Star plans are hidden aboard the **Tantive IV** en route to `Tatooine`, guarded by the Rebel Alliance.\n" +
+          "The Death Star plans are hidden aboard the **Tantive IV** en route to `Tatooine`,  \n" +
+          "guarded by the Rebel Alliance.\n" +
           "```json\n" +
           "{\n" +
           '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
@@ -30,6 +31,8 @@ const meta: Meta<typeof Markdown> = {
           "> May the Force be with you." +
           "\n - X-Wing squadron \n - Y-Wing squadron " +
           "\n 1. Approach the trench \n 2. Fire on the exhaust port\n\n" +
+          "- [x] Steal the plans\n" +
+          "- [ ] Destroy the Death Star\n\n" +
           "| Pilot          | Squadron      |\n" +
           "|---------------|---------------|\n" +
           "| Luke Skywalker | Red Five      |\n" +
