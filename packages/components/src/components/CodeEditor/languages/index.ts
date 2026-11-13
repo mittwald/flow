@@ -7,12 +7,15 @@ import type { linter } from "@codemirror/lint";
 import type { Extension } from "@uiw/react-codemirror";
 import DotEnvLanguage from "@/components/CodeEditor/languages/dotEnv";
 import type { ALL_LANGUAGES } from "@/components/CodeEditor/languages/all";
+import type { LocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 export type CodeEditorLanguage = (typeof ALL_LANGUAGES)[number];
 
 export type LanguageFactory = Record<
   CodeEditorLanguage,
-  (() =>
+  ((
+    stringFormatter: LocalizedStringFormatter,
+  ) =>
     | StreamLanguage<unknown>
     | LanguageSupport
     | Extension
@@ -22,7 +25,7 @@ export type LanguageFactory = Record<
 export type LanguageContainer = [
   () => Extension,
   () => LanguageSupport,
-  () => ReturnType<typeof linter>,
+  (stringFormatter: LocalizedStringFormatter) => ReturnType<typeof linter>,
 ];
 
 const supportedCodeEditorLanguages: LanguageFactory = {} as never;

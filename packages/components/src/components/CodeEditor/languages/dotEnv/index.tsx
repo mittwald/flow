@@ -51,7 +51,7 @@ export const validator = (input: string) => {
 const language: LanguageContainer = [
   () => syntaxHighlighting(definedStyle),
   () => new LanguageSupport(lrLanguage),
-  () =>
+  (stringFormatter) =>
     linter((view) => {
       const diagnostics: Diagnostic[] = [];
       const doc = view.state.doc;
@@ -76,7 +76,9 @@ const language: LanguageContainer = [
                 from,
                 to: from + identifier.length,
                 severity: "error",
-                message: `Duplicate key "${identifier}" found.`,
+                message: stringFormatter.format("dotEnv.duplicateKey", {
+                  key: identifier,
+                }),
               });
             }
             seenIdentifiers.add(identifier);
@@ -86,8 +88,7 @@ const language: LanguageContainer = [
                 from,
                 to,
                 severity: "warning",
-                message:
-                  "Variable names are usually uppercase (e.g. DATABASE_URL)",
+                message: stringFormatter.format("dotEnv.lowercaseKey"),
               });
             }
           }
@@ -109,7 +110,7 @@ const language: LanguageContainer = [
             from: docEnd,
             to: docEnd,
             severity: "error",
-            message: "Must end with a newline.",
+            message: stringFormatter.format("dotEnv.missingFinalNewline"),
           });
         } else {
           errorNodes.forEach((node) =>
@@ -117,8 +118,7 @@ const language: LanguageContainer = [
               from: node.from,
               to: node.to,
               severity: "error",
-              message:
-                "Syntax error: Unexpected character or malformed assignment",
+              message: stringFormatter.format("dotEnv.syntaxError"),
             }),
           );
         }

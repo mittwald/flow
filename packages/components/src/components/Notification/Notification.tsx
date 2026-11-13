@@ -9,7 +9,7 @@ import clsx from "clsx";
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Notification.module.scss";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface NotificationProps
@@ -41,7 +41,7 @@ export const Notification: FC<NotificationProps> = (props) => {
     ...rest
   } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Notification");
   const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(

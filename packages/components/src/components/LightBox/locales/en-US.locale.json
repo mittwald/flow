@@ -1,4 +1,5 @@
 {
+  "carousel": "carousel",
   "close": "Close",
   "gallery": "Image gallery",
   "indicator": "{current} of {count}",

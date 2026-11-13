@@ -15,7 +15,7 @@ import styles from "./LightBox.module.scss";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 
 export interface LightBoxProps

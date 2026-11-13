@@ -1,0 +1,6 @@
+{
+  "dotEnv.duplicateKey": "Doppelter Schlüssel \"{key}\" gefunden.",
+  "dotEnv.lowercaseKey": "Variablennamen werden üblicherweise großgeschrieben (z. B. DATABASE_URL)",
+  "dotEnv.missingFinalNewline": "Muss mit einem Zeilenumbruch enden.",
+  "dotEnv.syntaxError": "Syntaxfehler: Unerwartetes Zeichen oder fehlerhafte Zuweisung"
+}

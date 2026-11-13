@@ -1,6 +1,8 @@
 import styles from "@/components/ProgressBar/ProgressBar.module.scss";
 import { type FC, type ReactNode } from "react";
-import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
+import { useNumberFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { percentFormatOptions } from "@/lib/numbers/percentFormatOptions";
 import locales from "../locales/*.locale.json";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 
@@ -21,18 +23,14 @@ export const ProgressBarValue: FC<Props> = (props) => {
     valueLabel,
   } = props;
 
-  const formatter = useNumberFormatter(formatOptions);
+  const formatter = useNumberFormatter(formatOptions ?? percentFormatOptions);
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "ProgressBar");
 
   const maxValueText =
-    !showMaxValue || !maxValue
-      ? undefined
-      : formatOptions
-        ? formatter.format(maxValue)
-        : `${maxValue} %`;
+    showMaxValue && maxValue ? formatter.format(maxValue) : undefined;
 
-  const valueText = formatOptions ? formatter.format(value) : `${value} %`;
+  const valueText = formatter.format(value);
 
   const textWithMaxValue = `${valueText} ${stringFormatter.format("progressBar.of")} ${maxValueText}`;
 

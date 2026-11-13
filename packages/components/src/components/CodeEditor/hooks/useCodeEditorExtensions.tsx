@@ -7,6 +7,8 @@ import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
 import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
 import { useMemo } from "react";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import locales from "../locales/*.locale.json";
 
 /*
  * Every slot gets the same color: the library picks between its light and dark
@@ -81,6 +83,8 @@ export const useCodeEditorExtensions = (
     showLinterMarkers,
   } = options;
 
+  const stringFormatter = useLocalizedStringFormatter(locales, "CodeEditor");
+
   return useMemo(() => {
     const enabledExtensions = [...extensions];
 
@@ -118,7 +122,7 @@ export const useCodeEditorExtensions = (
 
     if (language && isCodeEditorLanguage(language)) {
       for (const loader of supportedCodeEditorLanguages[language] ?? []) {
-        enabledExtensions.push(loader());
+        enabledExtensions.push(loader(stringFormatter));
       }
     }
 
@@ -130,5 +134,6 @@ export const useCodeEditorExtensions = (
     showCodeIndentationMakers,
     showLineNumbers,
     showLinterMarkers,
+    stringFormatter,
   ]);
 };
