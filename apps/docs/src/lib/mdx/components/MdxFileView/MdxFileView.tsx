@@ -204,8 +204,8 @@ export const MdxFileView: FC<Props> = (props) => {
           alignItems: "center",
           justifyContent: "center",
           padding: "var(--size-px--l)",
-          background: "var(--neutral--color--200)",
-          border: "1px solid var(--neutral--color--300)",
+          background: "var(--elevation--color--200)",
+          border: "1px solid var(--border--color--100)",
           borderRadius: "var(--corner-radius--l)",
           minHeight: "stretch",
         }}

@@ -69,7 +69,7 @@ const StatusPage = defineComponent({
 
         <Section>
           <Heading level={3}>Badge</Heading>
-          <Badge color="green">Rebel Alliance</Badge>
+          <Badge color="success">Rebel Alliance</Badge>
         </Section>
 
         <Section>

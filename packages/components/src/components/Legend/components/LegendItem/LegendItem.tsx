@@ -17,7 +17,7 @@ export const LegendItem: FC<LegendItemProps> = (props) => {
 
   const color = colorFromProps
     ? isCategoricalColor(colorFromProps)
-      ? `var(--color--categorical--${colorFromProps})`
+      ? `var(--categorical--color--${colorFromProps})`
       : colorFromProps
     : undefined;
 

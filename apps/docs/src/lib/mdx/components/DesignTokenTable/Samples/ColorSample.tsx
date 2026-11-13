@@ -13,7 +13,7 @@ export const ColorSample: FC<ColorSampleProps> = (props) => {
     <div
       className={clsx(styles.box)}
       style={{
-        backgroundColor: value,
+        background: value,
       }}
     />
   );

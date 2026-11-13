@@ -7,3 +7,4 @@
  */
 export * from "@fortawesome/free-solid-svg-icons";
 export { faKeyboard as faCommand } from "@fortawesome/free-solid-svg-icons";
+export { faTableCellsLarge as faObjectsColumn } from "@fortawesome/free-solid-svg-icons";

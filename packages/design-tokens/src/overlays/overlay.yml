@@ -1,3 +1,3 @@
 overlay:
   backdrop-color:
-    value: "{dark-static.color.300}"
+    value: "{dark-static.color.quiet.300}"

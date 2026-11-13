@@ -9,7 +9,7 @@
 // stylelint-enable selector-max-type
 
 .body {
-  background-color: var(--neutral--color--200);
+  background-color: var(--elevation--color--200);
 
   * {
     box-sizing: border-box;
@@ -17,7 +17,7 @@
 }
 
 /*
- * Not --neutral--color--200: in dark mode the background gradient starts at
+ * Not --elevation--color--200: in dark mode the background gradient starts at
  * #121518, and the page ground has to meet it seamlessly. In light mode the
  * token already is the gradient's first stop, so only dark needs saying.
  */

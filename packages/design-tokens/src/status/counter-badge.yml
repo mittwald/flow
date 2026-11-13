@@ -18,4 +18,4 @@ counter-badge:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral.color.100}"
+    value: "{elevation.color.100}"
