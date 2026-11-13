@@ -11,6 +11,7 @@ import {
 } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
 import { useIsActivityActive } from "@/components/Activity/context";
 import { SectionHeadingReset } from "@/components/Section/context";
+import { useOverlayThemeProps } from "@/lib/theming/useOverlayThemeProps";
 
 const overlayContainerAttribute = "data-flow-overlays";
 
@@ -140,6 +141,7 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
   } = props;
 
   const isActivityActive = useIsActivityActive();
+  const themeProps = useOverlayThemeProps();
 
   useKeepBrowserExtensionsInteractive(restProps.isOpen ?? false);
 
@@ -157,7 +159,7 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
 
   return (
     <UNSAFE_PortalProvider getContainer={getOverlayContainer}>
-      <Aria.ModalOverlay {...restProps} className={className}>
+      <Aria.ModalOverlay {...restProps} {...themeProps} className={className}>
         {/* The centering viewport between the backdrop and react-aria's modal
             wrapper. Classed so Modal/OffCanvas/LightBox can position it
             without selecting a bare `div`. */}
