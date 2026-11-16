@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.67](https://github.com/mittwald/flow/compare/1.5.66...1.5.67) (2026-11-16)
+
+### Bug Fixes
+
+* **FileCard:** show file sizes in real byte units ([#3585](https://github.com/mittwald/flow/issues/3585)) ([a06f36c](https://github.com/mittwald/flow/commit/a06f36c4d1b17f4ec512ab3125f8778a6070417c))
+
 ## [1.5.66](https://github.com/mittwald/flow/compare/1.5.65...1.5.66) (2026-11-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
