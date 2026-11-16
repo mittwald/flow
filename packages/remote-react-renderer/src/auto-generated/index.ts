@@ -76,6 +76,7 @@ import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
 import { LightBoxGallery as LightBoxGallery } from "@mittwald/flow-react-components";
 import { LightBoxGalleryItem as LightBoxGalleryItem } from "@mittwald/flow-react-components";
+import { LightBoxZoom as LightBoxZoom } from "@mittwald/flow-react-components";
 import { Line as Line } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
@@ -337,6 +338,10 @@ export const flowComponents = {
   "flr-light-box-gallery-item": createFlowRemoteComponentRenderer(
     "LightBoxGalleryItem",
     LightBoxGalleryItem,
+  ),
+  "flr-light-box-zoom": createFlowRemoteComponentRenderer(
+    "LightBoxZoom",
+    LightBoxZoom,
   ),
   "flr-line": createFlowRemoteComponentRenderer("Line", Line),
   "flr-link": createFlowRemoteComponentRenderer("Link", Link),

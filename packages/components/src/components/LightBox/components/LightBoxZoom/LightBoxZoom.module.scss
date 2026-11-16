@@ -1,0 +1,50 @@
+.lightBoxZoom {
+  /* Pinch and pan are the zoom's own; the browser's would zoom the page. */
+  touch-action: none;
+  user-select: none;
+  cursor: zoom-in;
+  position: relative;
+  isolation: isolate;
+  outline: none;
+
+  /* Elements */
+
+  /* Below the focus ring: the transform makes it a stacking context, which
+     would paint over the inset outline. */
+  .content {
+    position: relative;
+    z-index: -1;
+    transform-origin: center;
+
+    &.animated {
+      transition: transform var(--transition--duration--default) ease-out;
+    }
+  }
+
+  /* The focus mixin's visible state, on an element of its own: it follows
+     what is on screen while zoomed (positioned inline), and sits inside it,
+     as the screen's edge would cut off a ring outside. */
+  .focusRing {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    outline: var(--focus--outline-color) none var(--focus--outline-width);
+    outline-offset: calc(var(--size-px--xs) * -1);
+  }
+
+  &:focus-visible .focusRing {
+    outline-style: solid;
+    box-shadow: 0 0 0 var(--focus--outline-width)
+      var(--focus--secondary-outline-color);
+  }
+
+  /* States */
+
+  &.zoomed {
+    cursor: grab;
+  }
+
+  &.dragging {
+    cursor: grabbing;
+  }
+}
