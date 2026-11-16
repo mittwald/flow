@@ -7,6 +7,16 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "categorical-colors-own-palette",
+    since: "1.6.0",
+    title: "Charts: categorical colors follow Flow's own palette",
+    kind: "migration",
+    action: "codemod",
+    remotePackage: true,
+    apply:
+      "On `Area`, `Bar`, `Line` (imported, or as members of what `typedCartesianChart()` returns, e.g. `CartesianChart.Area`) and `LegendItem`, rename the `color` values by their slot in the old default order, `sea-green` to `indigo`, `palatinate-blue` to `amber`, `tangerine` to `teal`, `magenta` to `violet`, `tropical-indigo` to `berry`, `malachite` to `green`, `azure` to `blue`, `yellow` to `cyan`, `alloy-orange` to `plum` and `lime` to `red`. Do the same for the `color` of each segment in the `segments` of `DonutChart` and `ProgressBar`. The codemod rewrites segments in an array literal passed to `segments`, and in a `const` array literal in the same file that is used only as `segments` of those components; an array built elsewhere (imported, computed, or shared with other code) is yours to rename. Keep `violet` and `green`, which stay valid names but render new colors. If a chart used both `magenta` and `violet`, or both `malachite` and `green`, two series now share one color; pick another value for one of them (`rose` and `olive` are free). Where `color` held a CSS color name that is now a categorical value (`indigo`, `teal`, `blue`, `cyan`, `plum`, `olive`, `red`), it now renders the categorical color; use a hex value to keep the CSS color. If you use the token CSS variables or the token JSON directly, rename `--categorical--color--<old>` to `--categorical--color--<new>` and `categorical.color.<old>` to `categorical.color.<new>` with the same mapping; the old names are removed without a fallback.",
+  },
+  {
     id: "color-props-brand-palette",
     since: "1.6.0",
     title:

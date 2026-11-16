@@ -2,7 +2,7 @@ import type { CSSProperties, FC } from "react";
 import styles from "@/components/DonutChart/DonutChart.module.scss";
 import type { DonutChartProps } from "@/components/DonutChart";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 
 interface Props extends Pick<DonutChartProps, "segments"> {
   center: number;
@@ -21,8 +21,17 @@ const fillStyle = (percent: number, offsetPercent: number): CSSProperties => ({
   "--donut-chart--offset": offsetPercent,
 });
 
+/**
+ * The gap at the end of each segment, in percent of the circumference. It shows
+ * the track between neighbors, so each segment borders a surface instead of a
+ * color it may not contrast with.
+ */
+const segmentGapPercent = 0.35;
+
 export const DonutChartFill: FC<Props> = (props) => {
   const { center, value = 0, radius, segments, maxValue } = props;
+
+  const categoricalColorValue = useCategoricalColorValue();
 
   const percent = (100 / maxValue) * value;
 
@@ -48,10 +57,13 @@ export const DonutChartFill: FC<Props> = (props) => {
 
     offsetPercent = offsetPercent + segmentPercent;
 
-    const color =
-      !s.color || isCategoricalColor(s.color)
-        ? `var(--categorical--color--${s.color ?? getCategoricalColorByIndex(i)})`
-        : s.color;
+    const color = categoricalColorValue(
+      s.color ?? getCategoricalColorByIndex(i),
+    );
+    const drawnPercent =
+      segments.length > 1
+        ? Math.max(0, segmentPercent - segmentGapPercent)
+        : segmentPercent;
 
     // Index keys: a segment added after mount animates alone out of 12 o'clock,
     // over the segments already there.
@@ -64,7 +76,7 @@ export const DonutChartFill: FC<Props> = (props) => {
         r={radius}
         pathLength={100}
         stroke={color}
-        style={fillStyle(segmentPercent, currentOffsetPercent)}
+        style={fillStyle(drawnPercent, currentOffsetPercent)}
       />
     );
   });

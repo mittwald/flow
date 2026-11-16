@@ -47,7 +47,7 @@ test.each(testEnvironments)(
         <CartesianGrid />
         <Area dataKey="first" />
         <Area dataKey="second" color="#555" />
-        <Line dataKey="third" color="magenta" />
+        <Line dataKey="third" color="violet" />
         <XAxis dataKey="name" />
         <YAxis />
         <ChartLegend />
@@ -90,7 +90,7 @@ test.each(testEnvironments)(
         <CartesianGrid />
         <Area dataKey="first" />
         <Area dataKey="second" color="#555" />
-        <Line dataKey="third" color="magenta" />
+        <Line dataKey="third" color="violet" />
         <XAxis dataKey="name" />
         <YAxis />
         <ChartLegend />
@@ -141,8 +141,8 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
       <CartesianChart height="300px" data={barChartData}>
         <ChartGrid />
         <Bar dataKey="first" />
-        <Bar dataKey="second" color="palatinate-blue" />
-        <Line dataKey="third" color="magenta" />
+        <Bar dataKey="second" color="amber" />
+        <Line dataKey="third" color="violet" />
         <XAxis dataKey="name" />
         <YAxis />
         <ChartLegend />
@@ -164,7 +164,7 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
       <CartesianChart height="300px" data={barChartData}>
         <ChartGrid />
         <Bar dataKey="first" stackId="stack" />
-        <Bar dataKey="second" color="palatinate-blue" stackId="stack" />
+        <Bar dataKey="second" color="amber" stackId="stack" />
         <XAxis dataKey="name" />
         <YAxis />
         <ChartLegend />
@@ -186,7 +186,7 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
       <CartesianChart height="300px" layout="vertical" data={barChartData}>
         <ChartGrid vertical horizontal={false} />
         <Bar dataKey="first" />
-        <Bar dataKey="second" color="palatinate-blue" />
+        <Bar dataKey="second" color="amber" />
         <XAxis />
         <YAxis dataKey="name" />
         <ChartLegend />

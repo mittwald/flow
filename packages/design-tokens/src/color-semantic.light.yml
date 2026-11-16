@@ -367,32 +367,36 @@ transparent:
   color:
     value: transparent
 
+# Categorical colors for charts, in default order. Each one keeps
+# 3:1 against elevation 100 and 200 and ΔE00 ≥ 10 to the status fills; the
+# first six stay apart for color vision deficiencies. Light and dark share
+# the hue per name, each theme sets its own lightness.
 categorical:
   color:
-    sea-green:
-      value: "#0fb5ae"
-    palatinate-blue:
-      value: "#4046ca"
-    tangerine:
-      value: "#f68511"
-    magenta:
-      value: "#de3d82"
-    tropical-indigo:
-      value: "#7e84fa"
-    malachite:
-      value: "#72e06a"
-    azure:
-      value: "#147af3"
+    indigo:
+      value: "#4a4bd1"
+    amber:
+      value: "#c2740b"
+    teal:
+      value: "#07716b"
     violet:
-      value: "#7326d3"
-    yellow:
-      value: "#e8c600"
-    alloy-orange:
-      value: "#cb5d00"
+      value: "#a56ae4"
+    berry:
+      value: "#98064c"
     green:
-      value: "#008f5d"
-    lime:
-      value: "#bce931"
+      value: "#5c9c57"
+    blue:
+      value: "#034c93"
+    rose:
+      value: "#ce7093"
+    cyan:
+      value: "#0c8aba"
+    plum:
+      value: "#8f4d89"
+    olive:
+      value: "#586d06"
+    red:
+      value: "#d23e3c"
 
 code-syntax:
   color:

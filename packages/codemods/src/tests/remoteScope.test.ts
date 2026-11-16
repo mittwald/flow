@@ -50,6 +50,15 @@ const targets: Record<string, string[]> = {
     "typedCartesianChart",
   ],
   "accent-box-color-to-background-color": ["AccentBox"],
+  "categorical-colors-own-palette": [
+    "Area",
+    "Bar",
+    "Line",
+    "LegendItem",
+    "DonutChart",
+    "ProgressBar",
+    "typedCartesianChart",
+  ],
   "code-block-syntax-highlighter-removed": ["CodeBlock"],
   "muted-action-error-to-abort-action-error": [
     "MutedActionError",

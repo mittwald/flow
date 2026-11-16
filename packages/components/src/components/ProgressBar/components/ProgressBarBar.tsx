@@ -2,7 +2,7 @@ import styles from "@/components/ProgressBar/ProgressBar.module.scss";
 import type { FC } from "react";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 interface Props extends Pick<ProgressBarProps, "segments"> {
@@ -13,6 +13,7 @@ export const ProgressBarBar: FC<Props> = (props) => {
   const { segments, percentage } = props;
 
   const isSkeleton = useSkeletonMode();
+  const categoricalColorValue = useCategoricalColorValue();
 
   /* In the mode, the track stays and shows no value. */
   if (isSkeleton) {
@@ -22,11 +23,9 @@ export const ProgressBarBar: FC<Props> = (props) => {
   const segmentFill =
     segments && segments.length > 0
       ? segments.map((s, i) => {
-          const backgroundColor = !s.color
-            ? `var(--categorical--color--${getCategoricalColorByIndex(i)})`
-            : isCategoricalColor(s.color)
-              ? `var(--categorical--color--${s.color})`
-              : s.color;
+          const backgroundColor = categoricalColorValue(
+            s.color ?? getCategoricalColorByIndex(i),
+          );
 
           return (
             <div

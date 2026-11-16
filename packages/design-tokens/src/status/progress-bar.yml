@@ -29,6 +29,8 @@ progress-bar:
     value: "{neutral-outline-border-color}"
   background-color:
     value: "{elevation.color.200}"
+  segment-gap:
+    value: "{border-width.100}"
 
   # Info
   info-fill-background-color:

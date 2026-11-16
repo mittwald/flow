@@ -2,7 +2,7 @@ import { type ComponentType, type FC } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 import type {
   ChartDataValue,
   DataKey,
@@ -17,20 +17,24 @@ export interface LineProps<
   "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
 > {
   dataKey?: DataKey<TData>;
-  /** The color of the line. @default "sea-green" */
+  /**
+   * The color of the line. @default "indigo"
+   *
+   * @deprecatedValues sea-green, palatinate-blue, tangerine, magenta, tropical-indigo,
+   *   malachite, azure, yellow, alloy-orange, lime
+   */
   color?: CategoricalWithCustomColor;
 }
 
 /** @flr-generate all */
 export const Line: FC<LineProps> = (props) => {
-  const { color: colorFromProps = "sea-green", ...rest } = props;
+  const { color: colorFromProps = "indigo", ...rest } = props;
 
   const tokens = useDesignTokens();
   const animation = useChartAnimation();
 
-  const color = isCategoricalColor(colorFromProps)
-    ? `var(--categorical--color--${colorFromProps})`
-    : colorFromProps;
+  const categoricalColorValue = useCategoricalColorValue();
+  const color = categoricalColorValue(colorFromProps);
 
   return (
     <Recharts.Line
