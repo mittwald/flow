@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.69](https://github.com/mittwald/flow/compare/1.6.0-next.68...1.6.0-next.69) (2026-11-16)
+
+### Bug Fixes
+
+* **FileCard:** show file sizes in real byte units ([#3585](https://github.com/mittwald/flow/issues/3585)) ([a06f36c](https://github.com/mittwald/flow/commit/a06f36c4d1b17f4ec512ab3125f8778a6070417c))
+
+## [1.5.66](https://github.com/mittwald/flow/compare/1.6.0-next.67...1.5.66) (2026-11-13)
+
+### Features
+
+* **LightBox:** add zoom with withZoom ([253ace9](https://github.com/mittwald/flow/commit/253ace90f68e1b6aa339d3a4b3cd928d1cda65ed)), closes [#3447](https://github.com/mittwald/flow/issues/3447)
+
+### Bug Fixes
+
+* **LightBox:** address review findings on the zoom ([f4c1e68](https://github.com/mittwald/flow/commit/f4c1e684c2c85944822c6df84581a0bfb9198112))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.66 ([e4b70fc](https://github.com/mittwald/flow/commit/e4b70fceb525da82454c76d6588c0ffbcea3f580))
+
+### Tests
+
+* update visual regression screenshots ([cd15914](https://github.com/mittwald/flow/commit/cd15914e6f3d870e60e16c2451def46558b5ea00))
+
 ## [1.6.0-next.68](https://github.com/mittwald/flow/compare/1.6.0-next.67...1.6.0-next.68) (2026-11-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
