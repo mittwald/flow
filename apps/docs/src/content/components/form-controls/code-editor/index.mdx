@@ -37,6 +37,21 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 
 ---
 
+# Content Security Policy
+
+Der CodeEditor bringt seine Basis-Styles als `<style>`-Element mit. Erlaubt
+deine Content Security Policy Inline-Styles nur per Nonce, lege den Nonce in
+einem Meta-Tag ab. Der CodeEditor übernimmt ihn dann automatisch:
+
+```html
+<meta property="csp-nonce" nonce="NONCE" />
+```
+
+Ohne Nonce blockiert der Browser die Styles, und der Editor verliert sein
+Layout.
+
+---
+
 # Properties
 
 <PropertiesTables />

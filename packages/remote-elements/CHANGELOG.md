@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.69](https://github.com/mittwald/flow/compare/1.6.0-next.68...1.6.0-next.69) (2026-11-16)
+
+### Features
+
+* **LightBox:** add zoom with withZoom ([253ace9](https://github.com/mittwald/flow/commit/253ace90f68e1b6aa339d3a4b3cd928d1cda65ed)), closes [#3447](https://github.com/mittwald/flow/issues/3447)
+
+### Code Refactoring
+
+* **LightBox:** drop LightBoxZoom&#x27;s maxScale and move useZoom into hooks ([c654117](https://github.com/mittwald/flow/commit/c6541175817b4b4a22561386bcd7a8960dfaede6))
+
+## [1.6.0-next.68](https://github.com/mittwald/flow/compare/1.6.0-next.67...1.6.0-next.68) (2026-11-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.6.0-next.67](https://github.com/mittwald/flow/compare/1.6.0-next.66...1.6.0-next.67) (2026-11-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 ## [1.6.0-next.66](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.6.0-next.66) (2026-11-06)
 
 ### Bug Fixes

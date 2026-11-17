@@ -28,6 +28,18 @@ import {
 import { CopyButton } from "@/components/CopyButton";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import { getCspNonce } from "@/lib/dom/getCspNonce";
+
+/*
+ * CodeMirror injects its base styles as a `<style>` element. A CSP without
+ * `'unsafe-inline'` blocks it unless it carries the page's nonce – the editor
+ * then loses its layout, e.g. the selection layer grows it while text is
+ * selected.
+ */
+const cspNonceExtensions = () => {
+  const nonce = getCspNonce();
+  return nonce ? [EditorView.cspNonce.of(nonce)] : [];
+};
 
 export interface CodeEditorProps
   extends
@@ -197,6 +209,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   const allExtensions = useMemo(
     () => [
       ...enabledExtensions,
+      ...cspNonceExtensions(),
       EditorView.contentAttributes.of({
         ...(labelledBy ? { "aria-labelledby": labelledBy } : {}),
         ...(ariaLabel ? { "aria-label": ariaLabel } : {}),

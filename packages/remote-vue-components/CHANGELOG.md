@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.69](https://github.com/mittwald/flow/compare/1.6.0-next.68...1.6.0-next.69) (2026-11-16)
+
+### Features
+
+* **LightBox:** add zoom with withZoom ([253ace9](https://github.com/mittwald/flow/commit/253ace90f68e1b6aa339d3a4b3cd928d1cda65ed)), closes [#3447](https://github.com/mittwald/flow/issues/3447)
+
+### Bug Fixes
+
+* **LightBox:** address review findings on the zoom ([f4c1e68](https://github.com/mittwald/flow/commit/f4c1e684c2c85944822c6df84581a0bfb9198112))
+
+### Tests
+
+* **remote-vue-components:** expect the light box&#x27;s close button last ([5cb8274](https://github.com/mittwald/flow/commit/5cb8274e93719e45bb7c1a35e06cb2530e1a8010))
+
+## [1.6.0-next.68](https://github.com/mittwald/flow/compare/1.6.0-next.67...1.6.0-next.68) (2026-11-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.6.0-next.67](https://github.com/mittwald/flow/compare/1.6.0-next.66...1.6.0-next.67) (2026-11-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
 ## [1.6.0-next.66](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.6.0-next.66) (2026-11-06)
 
 ### Bug Fixes

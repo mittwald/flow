@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.69](https://github.com/mittwald/flow/compare/1.6.0-next.68...1.6.0-next.69) (2026-11-16)
+
+### Bug Fixes
+
+* **FileCard:** show file sizes in real byte units ([#3585](https://github.com/mittwald/flow/issues/3585)) ([a06f36c](https://github.com/mittwald/flow/commit/a06f36c4d1b17f4ec512ab3125f8778a6070417c))
+
+## [1.5.66](https://github.com/mittwald/flow/compare/1.6.0-next.67...1.5.66) (2026-11-13)
+
+### Features
+
+* **LightBox:** add zoom with withZoom ([253ace9](https://github.com/mittwald/flow/commit/253ace90f68e1b6aa339d3a4b3cd928d1cda65ed)), closes [#3447](https://github.com/mittwald/flow/issues/3447)
+
+### Bug Fixes
+
+* **LightBox:** address review comments on the zoom ([145d8aa](https://github.com/mittwald/flow/commit/145d8aa74ccbd8b4eaacad027b61d1316f429a01))
+* **LightBox:** address review findings on the gallery swipe ([27ec5a4](https://github.com/mittwald/flow/commit/27ec5a4968ae6eeca1ca478adb1d3f06dc9a014d))
+* **LightBox:** address review findings on the zoom ([f4c1e68](https://github.com/mittwald/flow/commit/f4c1e684c2c85944822c6df84581a0bfb9198112))
+* **LightBox:** keep the focus in the gallery when paging from the zoom area ([ba7e63f](https://github.com/mittwald/flow/commit/ba7e63fd6cc043aece752313de8e84115e86ae47))
+* **LightBox:** keep the zoomed content in bounds when the window resizes ([c3ad668](https://github.com/mittwald/flow/commit/c3ad6683121e534c0daa52148807ec0e2e675b96))
+* **LightBox:** restore the gallery focus effect&#x27;s ref dependency ([6db48cb](https://github.com/mittwald/flow/commit/6db48cb0a9ca39477a25d39d5a70005c41723656))
+
+### Documentation
+
+* shorten the LightBox zoom description ([1863132](https://github.com/mittwald/flow/commit/186313225f65699df227fff95755f4d917abd360))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.66 ([e4b70fc](https://github.com/mittwald/flow/commit/e4b70fceb525da82454c76d6588c0ffbcea3f580))
+
+### Code Refactoring
+
+* **LightBox:** drop LightBoxZoom&#x27;s maxScale and move useZoom into hooks ([c654117](https://github.com/mittwald/flow/commit/c6541175817b4b4a22561386bcd7a8960dfaede6))
+* **LightBox:** focus the gallery once on mount ([8db9fb8](https://github.com/mittwald/flow/commit/8db9fb820451144c959295b1c5e1c1fdf720faa8))
+
+## [1.6.0-next.68](https://github.com/mittwald/flow/compare/1.6.0-next.67...1.6.0-next.68) (2026-11-13)
+
+### Bug Fixes
+
+* **CodeEditor:** apply the page&#x27;s CSP nonce to CodeMirror&#x27;s styles ([#3655](https://github.com/mittwald/flow/issues/3655)) ([c390830](https://github.com/mittwald/flow/commit/c390830041ac8526f30201fd4205b80076d3baaa))
+
+### Tests
+
+* **Modal:** count only the hook&#x27;s visual viewport reads ([#3656](https://github.com/mittwald/flow/issues/3656)) ([7f51ed3](https://github.com/mittwald/flow/commit/7f51ed387b49d22803628dcc3b465db13a389862))
+
+## [1.5.65](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.5.65) (2026-11-06)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.65 ([6cdfe31](https://github.com/mittwald/flow/commit/6cdfe310f6aaa92f93b0f0492c576f88fd21f277))
+
+## [1.6.0-next.67](https://github.com/mittwald/flow/compare/1.6.0-next.66...1.6.0-next.67) (2026-11-09)
+
+### Reverts
+
+* **design-tokens:** adopt the new mittwald brand colors ([#3459](https://github.com/mittwald/flow/issues/3459)) ([043c4fe](https://github.com/mittwald/flow/commit/043c4fe6cc87eedb43d1ffc1f946324fe67d3bf1))
+
 ## [1.6.0-next.66](https://github.com/mittwald/flow/compare/1.6.0-next.65...1.6.0-next.66) (2026-11-06)
 
 ### Bug Fixes

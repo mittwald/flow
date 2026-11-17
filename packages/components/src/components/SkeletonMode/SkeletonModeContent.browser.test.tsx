@@ -422,7 +422,7 @@ test("AvatarStack, FileCard and FileCardList follow their parts", async () => {
   expect(all(avatarStyles.skeleton)).toHaveLength(3);
   /* the count button and the delete button */
   expect(all(buttonStyles.skeleton)).toHaveLength(2);
-  expect(barTexts()).toEqual(["rechnung-2026-09.pdf", "123KB"]);
+  expect(barTexts()).toEqual(["rechnung-2026-09.pdf", "123.5 kB"]);
   expect(document.querySelector("a")).toBeNull();
 
   await userEvent.tab();
