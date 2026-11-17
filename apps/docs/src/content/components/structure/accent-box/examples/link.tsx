@@ -1,20 +1,19 @@
 import {
   AccentBox,
-  LayoutCard,
+  Heading,
   Link,
+  Section,
+  Text,
 } from "@mittwald/flow-react-components";
 
-<>
-  <Link href="#" target="_blank">
-    <AccentBox backgroundColor="blue">
-      Verlinkte AccentBox
-    </AccentBox>
-  </Link>
-  <Link href="#" target="_blank">
-    <LayoutCard>
-      <AccentBox backgroundColor="blue">
-        Verlinkte AccentBox in LayoutCard
-      </AccentBox>
-    </LayoutCard>
-  </Link>
-</>;
+<AccentBox backgroundColor="blue">
+  <Section>
+    <Heading>Neu im mStudio</Heading>
+    <Text>
+      Alle Neuerungen der letzten Wochen auf einen Blick.
+    </Text>
+    <Link slot="action" href="#">
+      Zu den Release Notes
+    </Link>
+  </Section>
+</AccentBox>;

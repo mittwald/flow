@@ -14,6 +14,65 @@
     background: var(--accent-box--background-color-gradient);
   }
 
+  /* The hover layer: translucent, above the background and below the
+     content. An action or a Link around the box (Link.module.scss) fades it
+     in through --hover-overlay-opacity. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-color: var(--accent-box--hover-overlay-color);
+    opacity: var(--hover-overlay-opacity, 0);
+    transition: opacity var(--transition--duration--default) ease;
+    pointer-events: none;
+  }
+
+  /* An image looks the same in both themes, so its layer stays dark. */
+  &.backgroundImage::before {
+    background-color: var(--accent-box--hover-overlay-color-image);
+  }
+
+  /* Action */
+
+  &:has(.action) {
+    /* Other links and buttons stay clickable above the action. Selected by
+       their own classes, so a props context that sets their className
+       cannot drop them below it. */
+    :is(:global(.flow--button), :global(.flow--link)):not(.action) {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* The action itself is invisible and covers the whole box. It names
+       the box for assistive technology; the box shows hover and focus. */
+    .action {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: auto;
+      max-width: none;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      border-radius: var(--accent-box--corner-radius);
+      opacity: 0;
+      transform: none;
+    }
+  }
+
+  &:has(.action[data-hovered]) {
+    --hover-overlay-opacity: 1;
+  }
+
+  &:has(.action[data-focus-visible]) {
+    outline: var(--focus--outline-width) solid var(--focus--outline-color);
+    outline-offset: var(--focus--outline-offset);
+    box-shadow: 0 0 0 var(--focus--outline-width)
+      var(--focus--secondary-outline-color);
+  }
+
   /* Color */
 
   @mixin color($color) {

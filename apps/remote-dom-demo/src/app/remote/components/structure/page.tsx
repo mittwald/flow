@@ -44,13 +44,32 @@ export default function Page() {
     <ComponentGroupPage title="Structure">
       <Section>
         <Heading level={3}>AccentBox</Heading>
-        <AccentBox backgroundColor="blue">
-          <Section>
-            <Heading level={4}>Join the Rebel Alliance</Heading>
-            <Text>We need pilots, engineers and droids with spirit.</Text>
-            <Link href="#">Sign up</Link>
-          </Section>
-        </AccentBox>
+        <ColumnLayout>
+          <AccentBox backgroundColor="blue">
+            <Section>
+              <Heading level={4}>Join the Rebel Alliance</Heading>
+              <Text>We need pilots, engineers and droids with spirit.</Text>
+              <Link href="#">Sign up</Link>
+            </Section>
+          </AccentBox>
+          <AccentBox backgroundColor="teal">
+            <Section>
+              <Heading level={4}>Visit Hoth</Heading>
+              <Text>The whole box is a link to the briefing.</Text>
+              <Link slot="action" href="#">
+                Read the briefing
+              </Link>
+            </Section>
+          </AccentBox>
+          <AccentBox backgroundColor="gradient">
+            <Section>
+              <Heading level={4}>Pick a squadron</Heading>
+              <Text>The whole box selects, the link stays on its own.</Text>
+              <Button slot="action">Select Rogue Squadron</Button>
+              <Link href="#">Squadron history</Link>
+            </Section>
+          </AccentBox>
+        </ColumnLayout>
       </Section>
 
       <Section>
