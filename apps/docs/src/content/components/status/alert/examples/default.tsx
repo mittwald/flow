@@ -4,5 +4,5 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Alert>
-  <Heading>E-Mail-Adresse wurde archiviert</Heading>
+  <Heading>E-Mail-Adresse archiviert</Heading>
 </Alert>;

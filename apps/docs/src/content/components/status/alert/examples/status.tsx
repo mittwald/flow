@@ -6,7 +6,7 @@ import {
 
 <>
   <Alert status="info">
-    <Heading>E-Mail-Adresse wurde archiviert</Heading>
+    <Heading>E-Mail-Adresse archiviert</Heading>
     <Content>
       Da deine Domain gelöscht wurde, wurde diese
       E-Mail-Adresse archiviert. Um E-Mails empfangen und
@@ -16,18 +16,16 @@ import {
   </Alert>
 
   <Alert status="warning">
-    <Heading>Dein Speicher ist fast voll</Heading>
+    <Heading>Speicherplatz fast voll</Heading>
     <Content>
-      Dein Speicher ist zu über 80% belegt. Wir empfehlen
+      Dein Speicher ist zu über 80 % belegt. Wir empfehlen
       dir deinen Speicherplatz zu erweitern, um Problemen
       vorzubeugen.
     </Content>
   </Alert>
 
   <Alert status="danger">
-    <Heading>
-      Es konnte kein SSL-Zertifikat ausgestellt werden
-    </Heading>
+    <Heading>SSL-Zertifikat nicht ausgestellt</Heading>
     <Content>
       Für diese Domain konnte kein SSL-Zertifikat
       ausgestellt werden, da die Domain per IP nicht auf
@@ -36,7 +34,7 @@ import {
   </Alert>
 
   <Alert status="success">
-    <Heading>Deine App wurde aktualisiert</Heading>
+    <Heading>App aktualisiert</Heading>
     <Content>
       Deine App wurde erfolgreich auf die neueste Version
       aktualisiert.

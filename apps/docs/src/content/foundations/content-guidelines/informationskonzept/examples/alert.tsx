@@ -9,7 +9,7 @@ import {
 
 <>
   <Alert>
-    <Heading>E-Mail-Adresse wurde archiviert</Heading>
+    <Heading>E-Mail-Adresse archiviert</Heading>
     <Content>
       <Text>
         Da deine Domain gelöscht wurde, wurde diese
@@ -21,10 +21,10 @@ import {
   </Alert>
 
   <Alert status="warning">
-    <Heading>Dein Speicher ist fast voll</Heading>
+    <Heading>Speicherplatz fast voll</Heading>
     <Content>
       <Text>
-        Dein Speicher ist zu über 80% belegt. Wir empfehlen
+        Dein Speicher ist zu über 80 % belegt. Wir empfehlen
         dir deinen Speicherplatz zu erweitern, um Problemen
         vorzubeugen.
       </Text>
@@ -33,9 +33,7 @@ import {
   </Alert>
 
   <Alert status="danger">
-    <Heading>
-      Es konnte kein SSL-Zertifikat ausgestellt werden
-    </Heading>
+    <Heading>SSL-Zertifikat nicht ausgestellt</Heading>
     <Content>
       <Text>
         Für diese Domain konnte kein SSL-Zertifikat

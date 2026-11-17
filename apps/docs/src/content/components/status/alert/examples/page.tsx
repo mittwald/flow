@@ -8,7 +8,7 @@ import {
 
 <LayoutCard>
   <Alert status="danger">
-    <Heading>E-Mail-Adresse wurde archiviert</Heading>
+    <Heading>E-Mail-Adresse archiviert</Heading>
     <Text>
       Da deine Domain gelöscht wurde, wurde diese
       E-Mail-Adresse archiviert. Um E-Mails empfangen und
