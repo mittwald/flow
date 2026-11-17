@@ -5,7 +5,7 @@ import type {
 } from "@mittwald/ext-bridge";
 import type { ReportedEvent } from "@/events/remoteEvents";
 import type { RemoteConnection } from "@mittwald/remote-dom-core";
-import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
+import type { Thread } from "@quilted/threads";
 export type { RemoteConnection } from "@mittwald/remote-dom-core";
 
 export interface NavigationState {
@@ -51,14 +51,15 @@ export interface RemoteExports {
   setHostError: (error: string) => Promise<void>;
 }
 
-export type RemoteToHostConnection = ThreadNestedIframe<
-  HostExports,
-  RemoteExports
->;
+export type RemoteToHostConnection = Thread<HostExports, RemoteExports> & {
+  readonly parent: Window;
+};
 
 export interface HostToRemoteConnection {
   version: Version;
-  thread: ThreadIframe<RemoteExports, HostExports>;
+  thread: Thread<RemoteExports, HostExports> & {
+    readonly iframe: HTMLIFrameElement;
+  };
   updateHostPathname: (hostPathname?: string) => void;
   reportHostError: (error: string) => Promise<void>;
 }
@@ -75,4 +76,6 @@ export enum Version {
   v3 = 3,
   v4 = 4,
   v5 = 5,
+  /** The remote only accepts messages from allowed host origins. */
+  v6 = 6,
 }

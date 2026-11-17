@@ -2,25 +2,9 @@ import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
 import { createVitestBrowserTestConfig } from "../core/src/index.ts";
-import { serveFontsLocally } from "./dev/vitest/serveFontsLocally.ts";
-
-/** The shared browser config plus this package's own browser command. */
-const browserTestConfig = () => {
-  const config = createVitestBrowserTestConfig();
-  return {
-    ...config,
-    browser: {
-      ...config.browser,
-      commands: {
-        ...config.browser?.commands,
-        serveFontsLocally,
-      },
-    },
-  };
-};
 
 /** Held in one place so the `browser` override below reuses its instance copies. */
-const visualTestConfig = browserTestConfig();
+const visualTestConfig = createVitestBrowserTestConfig();
 
 export default mergeConfig(
   defaultConfig,
@@ -37,7 +21,7 @@ export default mergeConfig(
         {
           extends: true,
           test: {
-            ...browserTestConfig(),
+            ...createVitestBrowserTestConfig(),
             name: "browser",
             include: ["src/**/*.browser.test.{ts,tsx}"],
             exclude: ["src/tests/visual/**/*.browser.test.{ts,tsx}"],

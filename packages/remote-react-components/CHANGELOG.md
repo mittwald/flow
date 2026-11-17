@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.67](https://github.com/mittwald/flow/compare/1.5.66...1.5.67) (2026-11-16)
+
+### Bug Fixes
+
+* **FileCard:** show file sizes in real byte units ([#3585](https://github.com/mittwald/flow/issues/3585)) ([a06f36c](https://github.com/mittwald/flow/commit/a06f36c4d1b17f4ec512ab3125f8778a6070417c))
+
+## [1.5.66](https://github.com/mittwald/flow/compare/1.5.65...1.5.66) (2026-11-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.65](https://github.com/mittwald/flow/compare/1.5.64...1.5.65) (2026-11-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+### Bug Fixes
+
+* **remote-core:** restrict remote connections to allowed host origins ([#3647](https://github.com/mittwald/flow/issues/3647)) ([e452984](https://github.com/mittwald/flow/commit/e45298461bd56f2abdae710830da59eb015f6b8a))
+
+## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
+
+### Bug Fixes
+
+* **components:** bundle fonts ([#3648](https://github.com/mittwald/flow/issues/3648)) ([7564c69](https://github.com/mittwald/flow/commit/7564c69f7edb9664a5d82c5e3af0b036d8cb68a3))
+
+## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
+
+### Bug Fixes
+
+* **Breadcrumb:** keep separators visible in SkeletonMode ([#3629](https://github.com/mittwald/flow/issues/3629)) ([80f8fad](https://github.com/mittwald/flow/commit/80f8fadee61f934b808968aeea54f92fd0955c09))
+
+## [1.5.61](https://github.com/mittwald/flow/compare/1.5.60...1.5.61) (2026-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.5.60](https://github.com/mittwald/flow/compare/1.5.59...1.5.60) (2026-11-03)
+
+### Bug Fixes
+
+* **DateRangePicker:** clip the dates instead of overflowing a narrow field ([#3625](https://github.com/mittwald/flow/issues/3625)) ([9053855](https://github.com/mittwald/flow/commit/90538555c42cce132480f5fa65edbc80321b0c0e))
+
 ## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
 
 ### Bug Fixes

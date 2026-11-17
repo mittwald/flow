@@ -74,7 +74,7 @@ import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { glob, mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync, writeFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 import { URL, fileURLToPath } from "node:url";
 import {
@@ -92,13 +92,6 @@ import {
 } from "./release-figure-lib.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
-
-/** The fonts `packages/components/src/styles/fonts.scss` declares. */
-const CDN_FONTS = "https://cdn.mittwald.de/fonts/";
-const LOCAL_FONTS = join(
-  repoRoot,
-  "packages/remote-react-components/dev/vitest/fonts",
-);
 
 /** Wider than this and the figure is only ever shown scaled down. */
 const COMFORTABLE_DISPLAY_WIDTH = 900;
@@ -457,31 +450,6 @@ const captureTheme = async (browser, docsUrl, spec, theme) => {
   });
   try {
     await context.addInitScript(HIDE_DEV_INDICATOR);
-
-    // Serve the three declared faces locally. A font request that never
-    // settles keeps `document.fonts.ready` pending, and Playwright waits on it
-    // before every screenshot — the capture then times out or, worse, renders
-    // in the fallback face and still produces a file (#3106).
-    if (existsSync(LOCAL_FONTS)) {
-      await context.route(`${CDN_FONTS}*`, async (route) => {
-        const file = new URL(route.request().url()).pathname.split("/").pop();
-        const local = join(LOCAL_FONTS, String(file));
-        // A face added to fonts.scss has no local copy yet. Throwing here would
-        // leave the request unanswered, which is the one thing that must not
-        // happen to a font — let it go to the network instead.
-        if (!existsSync(local)) {
-          process.stderr.write(
-            `No local copy of ${file}; fetching it from the CDN.\n`,
-          );
-          await route.continue();
-          return;
-        }
-        await route.fulfill({
-          body: await readFile(local),
-          contentType: "font/woff2",
-        });
-      });
-    }
 
     const page = await context.newPage();
     const url = buildExampleUrl(docsUrl, spec.example);

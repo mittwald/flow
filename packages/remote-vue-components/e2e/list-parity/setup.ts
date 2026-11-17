@@ -5,6 +5,6 @@
  */
 import "@mittwald/flow-react-components/all.css";
 import { beforeAll } from "vitest";
-import { loadFontsLocally } from "../react-parity/fonts.ts";
+import { loadFonts } from "../react-parity/fonts.ts";
 
-beforeAll(loadFontsLocally);
+beforeAll(loadFonts);

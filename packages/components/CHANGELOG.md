@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.67](https://github.com/mittwald/flow/compare/1.5.66...1.5.67) (2026-11-16)
+
+### Bug Fixes
+
+* **FileCard:** show file sizes in real byte units ([#3585](https://github.com/mittwald/flow/issues/3585)) ([a06f36c](https://github.com/mittwald/flow/commit/a06f36c4d1b17f4ec512ab3125f8778a6070417c))
+
+## [1.5.66](https://github.com/mittwald/flow/compare/1.5.65...1.5.66) (2026-11-13)
+
+### Bug Fixes
+
+* **CodeEditor:** apply the page&#x27;s CSP nonce to CodeMirror&#x27;s styles ([#3655](https://github.com/mittwald/flow/issues/3655)) ([c390830](https://github.com/mittwald/flow/commit/c390830041ac8526f30201fd4205b80076d3baaa))
+
+### Tests
+
+* **Modal:** count only the hook&#x27;s visual viewport reads ([#3656](https://github.com/mittwald/flow/issues/3656)) ([7f51ed3](https://github.com/mittwald/flow/commit/7f51ed387b49d22803628dcc3b465db13a389862))
+
+## [1.5.65](https://github.com/mittwald/flow/compare/1.5.64...1.5.65) (2026-11-06)
+
+### Bug Fixes
+
+* **Markdown:** add disableImages prop ([#3652](https://github.com/mittwald/flow/issues/3652)) ([2f63cc5](https://github.com/mittwald/flow/commit/2f63cc52a5f82c0dc0a5bef728391e83e4daf42a))
+
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
+
+### Bug Fixes
+
+* **components:** bundle fonts ([#3648](https://github.com/mittwald/flow/issues/3648)) ([7564c69](https://github.com/mittwald/flow/commit/7564c69f7edb9664a5d82c5e3af0b036d8cb68a3))
+
+## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
+
+### Bug Fixes
+
+* **Breadcrumb:** keep separators visible in SkeletonMode ([#3629](https://github.com/mittwald/flow/issues/3629)) ([80f8fad](https://github.com/mittwald/flow/commit/80f8fadee61f934b808968aeea54f92fd0955c09))
+
+## [1.5.61](https://github.com/mittwald/flow/compare/1.5.60...1.5.61) (2026-11-04)
+
+### Code Refactoring
+
+* **AlertIcon:** register as flowComponent ([#3627](https://github.com/mittwald/flow/issues/3627)) ([0e0073e](https://github.com/mittwald/flow/commit/0e0073eaec6bd2fa05f198d667045e238acab4d5))
+
+## [1.5.60](https://github.com/mittwald/flow/compare/1.5.59...1.5.60) (2026-11-03)
+
+### Bug Fixes
+
+* **DateRangePicker:** clip the dates instead of overflowing a narrow field ([#3625](https://github.com/mittwald/flow/issues/3625)) ([9053855](https://github.com/mittwald/flow/commit/90538555c42cce132480f5fa65edbc80321b0c0e))
+
 ## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
 
 ### Bug Fixes

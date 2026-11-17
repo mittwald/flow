@@ -47,6 +47,13 @@ initializes the extension bridge:
 import { RemoteRoot } from "@mittwald/flow-remote-react-components/RemoteRoot";
 ```
 
+`RemoteRoot` talks only to a host on an mStudio origin or on your app's own
+origin. To develop against another host, add its origin with
+`allowedHostOrigins={["http://localhost:3000"]}`. `onHostPathnameChanged`
+receives relative app paths only. Your frontend must also send a
+`frame-ancestors` CSP header — see the
+[ext-bridge USAGE.md](https://github.com/mittwald/flow/blob/main/packages/ext-bridge/USAGE.md).
+
 The full explainer:
 <https://github.com/mittwald/flow/blob/main/docs/remote-ui.md>.
 

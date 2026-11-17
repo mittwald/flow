@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.67](https://github.com/mittwald/flow/compare/1.5.66...1.5.67) (2026-11-16)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.5.66](https://github.com/mittwald/flow/compare/1.5.65...1.5.66) (2026-11-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.5.65](https://github.com/mittwald/flow/compare/1.5.64...1.5.65) (2026-11-06)
+
+### Bug Fixes
+
+* **Markdown:** add disableImages prop ([#3652](https://github.com/mittwald/flow/issues/3652)) ([2f63cc5](https://github.com/mittwald/flow/commit/2f63cc52a5f82c0dc0a5bef728391e83e4daf42a))
+
+## [1.5.64](https://github.com/mittwald/flow/compare/1.5.63...1.5.64) (2026-11-05)
+
+### Bug Fixes
+
+* **remote-core:** restrict remote connections to allowed host origins ([#3647](https://github.com/mittwald/flow/issues/3647)) ([e452984](https://github.com/mittwald/flow/commit/e45298461bd56f2abdae710830da59eb015f6b8a))
+
+## [1.5.63](https://github.com/mittwald/flow/compare/1.5.62...1.5.63) (2026-11-05)
+
+### Bug Fixes
+
+* **components:** bundle fonts ([#3648](https://github.com/mittwald/flow/issues/3648)) ([7564c69](https://github.com/mittwald/flow/commit/7564c69f7edb9664a5d82c5e3af0b036d8cb68a3))
+
+## [1.5.62](https://github.com/mittwald/flow/compare/1.5.61...1.5.62) (2026-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.5.61](https://github.com/mittwald/flow/compare/1.5.60...1.5.61) (2026-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
+## [1.5.60](https://github.com/mittwald/flow/compare/1.5.59...1.5.60) (2026-11-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-vue-components
+
 ## [1.5.59](https://github.com/mittwald/flow/compare/1.5.58...1.5.59) (2026-11-03)
 
 **Note:** Version bump only for package @mittwald/flow-remote-vue-components

@@ -15,20 +15,36 @@ on:
       - reopened
       - synchronize
 
+# One at a time per branch. A re-label supersedes the run in flight, and so
+# does a push: the run in flight then tests a commit that is no longer the PR
+# head. Every `labeled` event starts a run, whatever the label; one that the job
+# skips gets a group of its own, so it cannot cancel a run in flight. A push
+# stays in the shared group even where the job skips it. Set on the workflow,
+# as in test-visual-label.yml, so the group does not depend on whether the job
+# runs. The condition is the job's `if` plus `synchronize`; keep the two in
+# sync.
+concurrency:
+  group: >-
+    cross-version-run@${{ github.head_ref || github.ref }}${{
+    !(github.event_name == 'workflow_dispatch' ||
+    github.event.action == 'synchronize' ||
+    (github.head_ref != github.event.repository.default_branch &&
+    (github.event.label.name == 'run-cross-version-tests' ||
+    github.event.pull_request.user.login == 'dependabot[bot]'))) &&
+    format('@skip-{0}', github.run_id) || '' }}
+  cancel-in-progress: true
+
 jobs:
   run-cross-version-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    # The workflow's `concurrency.group` repeats this condition, plus
+    # `synchronize`; keep the two in sync.
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.head_ref != github.event.repository.default_branch &&
        (github.event.label.name == 'run-cross-version-tests' ||
         github.event.pull_request.user.login == 'dependabot[bot]'))
-
-    # one at a time per branch; re-labeling supersedes an in-flight run
-    concurrency:
-      group: cross-version-run@${{ github.head_ref }}
-      cancel-in-progress: true
 
     permissions:
       contents: read # checkout only; this run never pushes

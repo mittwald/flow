@@ -9,7 +9,14 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, DateRangePicker, Label, FieldError, FieldDescription },
+    components: {
+      Flex,
+      ColumnLayout,
+      DateRangePicker,
+      Label,
+      FieldError,
+      FieldDescription,
+    },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -28,6 +35,12 @@ test.each(testEnvironments)(
           <Label>Disabled</Label>
           <FieldDescription>FieldDescription</FieldDescription>
         </DateRangePicker>
+        {/* Too narrow for both placeholders: the end date is clipped. */}
+        <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
+          <DateRangePicker>
+            <Label>Narrow</Label>
+          </DateRangePicker>
+        </ColumnLayout>
       </Flex>,
     );
 

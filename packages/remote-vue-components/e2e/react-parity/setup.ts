@@ -1,9 +1,9 @@
 import { afterEach, beforeAll, vi } from "vitest";
 import { locators } from "vitest/browser";
 import "@mittwald/flow-react-components/all.css";
-import { loadFontsLocally } from "./fonts.ts";
+import { loadFonts } from "./fonts.ts";
 
-beforeAll(loadFontsLocally);
+beforeAll(loadFonts);
 
 /*
  * What the React package's `setupBrowser.ts` does for its suites, and for the

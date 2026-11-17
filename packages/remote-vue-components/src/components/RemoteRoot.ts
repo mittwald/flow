@@ -7,6 +7,7 @@ import { packageVersion } from "@/version";
 import {
   connectHostRenderRootRef,
   connectRemoteReceiver,
+  toRelativePathname,
   type RemoteReceiver,
   type RemoteToHostConnection,
 } from "@mittwald/flow-remote-core";
@@ -50,6 +51,15 @@ export const RemoteRoot = defineComponent({
   props: {
     /** Forwarded to the host, which shows its own loading state. */
     isLoading: { type: Boolean, default: undefined },
+    /**
+     * Additional host origins the remote app accepts, e.g. for local
+     * development. The mStudio origins and the app's own origin are always
+     * allowed.
+     */
+    allowedHostOrigins: {
+      type: Array as PropType<string[]>,
+      default: undefined,
+    },
     /**
      * Internal use only: renders against a receiver in the same realm instead
      * of connecting to a parent frame.
@@ -132,11 +142,17 @@ export const RemoteRoot = defineComponent({
       initExtBridge();
 
       void connectHostRenderRootRef({
-        onPathnameChanged: (pathname) => emit("hostPathnameChanged", pathname),
+        onPathnameChanged: (pathname) => {
+          const relativePathname = toRelativePathname(pathname);
+          if (relativePathname !== undefined) {
+            emit("hostPathnameChanged", relativePathname);
+          }
+        },
         onHostError: (error) => {
           failure.value = new Error(error);
         },
         packageVersion,
+        allowedHostOrigins: props.allowedHostOrigins,
       })(root)
         ?.then(async (hostConnection) => {
           connection.value = hostConnection;

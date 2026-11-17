@@ -12,15 +12,22 @@ const layeredStylesheetPathname = createRequire(import.meta.url).resolve(
 
 const thisDirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-const targetPathname = path.join(thisDirname, "dist/styles.css");
-const layeredTargetPathname = path.join(thisDirname, "dist/styles-layered.css");
+const targetPathname = path.join(thisDirname, "dist/css/styles.css");
+const layeredTargetPathname = path.join(
+  thisDirname,
+  "dist/css/styles-layered.css",
+);
 
-if (!fs.existsSync(path.dirname(targetPathname))) {
-  fs.mkdirSync(path.dirname(targetPathname));
-}
+fs.mkdirSync(path.dirname(targetPathname), { recursive: true });
 
 fs.copyFileSync(stylesheetPathname, targetPathname);
 fs.copyFileSync(layeredStylesheetPathname, layeredTargetPathname);
+
+fs.cpSync(
+  path.join(path.dirname(stylesheetPathname), "../fonts"),
+  path.join(thisDirname, "dist/fonts"),
+  { recursive: true },
+);
 
 const previousUnlayeredTargetPathname = path.join(
   thisDirname,

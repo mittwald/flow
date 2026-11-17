@@ -394,14 +394,17 @@ A host is deployed once and then runs for a long time next to extensions that
 were built against many different remote releases — the protocol has to tolerate
 that spread, and it does so through two independent version mechanisms.
 
-The first is the connection handshake: a `Version` enum (`vUnknown`, `v1`…`v5`
+The first is the connection handshake: a `Version` enum (`vUnknown`, `v1`…`vN`
 in
 [`packages/remote-core/src/connection/types.ts`](../packages/remote-core/src/connection/types.ts))
 that the remote side reports when it connects. The host feature-gates behavior
 with `>=` checks against this version and always defaults to the most
-conservative path when in doubt. Critically, there is **no hard mismatch error**
+conservative path when in doubt. By default there is **no hard mismatch error**
 — a remote that reports nothing, or an old remote build, simply normalizes to
-`v1` and gets the oldest supported behavior rather than a broken connection.
+`v1` and gets the oldest supported behavior rather than a broken connection. A
+host that needs a minimum opts in with `minRemoteVersion`: it then renders
+nothing and answers no host export until the remote reports at least that
+version, and reports a lower one through `onError`.
 
 The second mechanism is per-element rather than per-connection: each `flr-*`
 element carries a `data-flr-version` and a `data-flr-initialized` attribute

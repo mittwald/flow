@@ -215,3 +215,44 @@ test("inside a popover, it keeps its own calendar state", async () => {
   await expect.element(calendar()).not.toBeInTheDocument();
   await expect.element(calendarButton()).toBeVisible();
 });
+
+/*
+ * A narrow field clips its dates and scrolls to the focused segment like a
+ * text field – without scrolling the page around it. The focus moves by
+ * keyboard: playwright scrolls a click target into view first, which would
+ * hide a page jump.
+ */
+test("moving the focus to a clipped segment scrolls the field, not the page", async () => {
+  await render(
+    <div data-testid="page" style={{ height: 300, overflow: "auto" }}>
+      <div style={{ height: 1000 }} />
+      <div style={{ width: 130 }}>
+        <DateRangePicker>
+          <Label>Booking</Label>
+        </DateRangePicker>
+      </div>
+      <div style={{ height: 1000 }} />
+    </div>,
+  );
+
+  const scrollPage = page.getByTestId("page").element();
+  const segments = page.getByRole("spinbutton").elements();
+  const lastSegment = segments[segments.length - 1];
+  const inputs = lastSegment?.parentElement?.parentElement;
+  if (!lastSegment || !inputs) {
+    throw new Error("Segments not rendered");
+  }
+
+  segments[0]?.scrollIntoView({ block: "start" });
+  segments[0]?.focus();
+  const scrollTop = scrollPage.scrollTop;
+
+  await userEvent.keyboard("{ArrowRight>5/}");
+  await expect.element(page.getByRole("spinbutton").last()).toHaveFocus();
+
+  const segmentRect = lastSegment.getBoundingClientRect();
+  const inputsRect = inputs.getBoundingClientRect();
+  expect(segmentRect.right).toBeLessThanOrEqual(inputsRect.right + 1);
+  expect(segmentRect.left).toBeGreaterThanOrEqual(inputsRect.left - 1);
+  expect(scrollPage.scrollTop).toBe(scrollTop);
+});

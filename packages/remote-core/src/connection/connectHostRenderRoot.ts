@@ -4,16 +4,19 @@ import {
   type RemoteExports,
   type RemoteToHostConnection,
 } from "@/connection/types";
+import { HostOriginThread } from "@/connection/originThreads";
+import { toRelativePathname } from "@/connection/toRelativePathname";
 import { RemoteError } from "@/error";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
 import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
-import { ThreadNestedIframe } from "@quilted/threads";
 
-interface Options {
+export interface ConnectHostRenderRootOptions {
   root: HTMLDivElement;
   onPathnameChanged?: (pathname: string) => void;
   onHostError?: (error: string) => void;
   packageVersion?: string;
+  /** Additional host origins accepted by the remote app. */
+  allowedHostOrigins?: string[];
 }
 
 const incompatibleParentFrameError = () =>
@@ -31,17 +34,27 @@ export const connectRemoteReceiver = (
   );
 
 export const connectHostRenderRoot = async (
-  options: Options,
+  options: ConnectHostRenderRootOptions,
 ): Promise<RemoteToHostConnection> => {
-  const { root, onPathnameChanged, onHostError, packageVersion } = options;
+  const {
+    root,
+    onPathnameChanged,
+    onHostError,
+    packageVersion,
+    allowedHostOrigins,
+  } = options;
 
-  const connection = new ThreadNestedIframe<HostExports, RemoteExports>({
+  const connection = new HostOriginThread<HostExports, RemoteExports>({
+    allowedHostOrigins,
     serialization: new FlowThreadSerialization(),
     exports: {
       render: (connection: RemoteConnection) =>
         connectRemoteReceiver(root, connection),
       setPathname: async (pathname) => {
-        onPathnameChanged?.(pathname);
+        const relativePathname = toRelativePathname(pathname);
+        if (relativePathname !== undefined) {
+          onPathnameChanged?.(relativePathname);
+        }
       },
       setHostError: async (error) => {
         onHostError?.(error);
@@ -55,7 +68,7 @@ export const connectHostRenderRoot = async (
 
   try {
     await connection.imports.setIsReady({
-      version: Version.v5,
+      version: Version.v6,
       packageVersion,
     });
 
@@ -77,7 +90,8 @@ export const connectHostRenderRoot = async (
 };
 
 export const connectHostRenderRootRef =
-  (opts: Omit<Options, "root">) => (ref: HTMLDivElement | null) => {
+  (opts: Omit<ConnectHostRenderRootOptions, "root">) =>
+  (ref: HTMLDivElement | null) => {
     if (ref === null) {
       return;
     }

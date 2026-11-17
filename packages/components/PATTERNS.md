@@ -94,7 +94,7 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/LayoutCard/LayoutCard.tsx:41`
   - ✓ arranges or wraps descendant UI without isolating contextual props.
   - ✓ a leaf that stands in for another component whose props contexts must keep
-    reaching it (`LoadingSpinner` → `Icon`).
+    reaching it (`LoadingSpinner`, `AlertIcon` → `Icon`).
   - ✗ leaf UI or context infrastructure → UI/provider.
 - **Provider classification** — `{ type: "provider" }` for trigger/provider
   components.

@@ -68,12 +68,13 @@ export const uploadPlaceholder = (fileName: string): string =>
 export const uploadedFileMarkdown = (
   file: Pick<File, "name" | "type">,
   upload: MarkdownEditorUpload,
+  disableImages = false,
 ): string => {
   const label = escapeLinkLabel(upload.name ?? file.name);
   const target = escapeLinkTarget(upload.url);
   const link = `[${label}](${target})`;
 
-  return file.type.startsWith("image/") ? `!${link}` : link;
+  return file.type.startsWith("image/") && !disableImages ? `!${link}` : link;
 };
 
 /**
