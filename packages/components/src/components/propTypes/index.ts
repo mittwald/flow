@@ -21,6 +21,7 @@ import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
+import type { BigNumberProps } from "@/components/BigNumber";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -118,6 +119,7 @@ export interface FlowComponentPropsTypes {
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
+  BigNumber: BigNumberProps;
   Button: ButtonProps;
   CodeEditor: CodeEditorProps;
   Chat: ChatProps;
@@ -218,6 +220,7 @@ const propsContextSupportingComponentsMap: Record<
   Align: true,
   Combine: true,
   Badge: true,
+  BigNumber: true,
   Button: true,
   CodeEditor: true,
   Chat: true,
