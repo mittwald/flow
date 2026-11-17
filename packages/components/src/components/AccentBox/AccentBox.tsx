@@ -159,7 +159,8 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const contentColor = color === "default" ? undefined : color;
 
-  const contentColorProps = contentColor ? contentColored(contentColor) : {};
+  // Neutral surfaces tint their soft content too, so it stands out in dark mode
+  const contentColorProps = contentColored(contentColor ?? "dark");
 
   const linkProps = { color: contentColor ?? "dark" } as const;
 
