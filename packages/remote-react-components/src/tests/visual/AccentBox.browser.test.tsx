@@ -1,4 +1,6 @@
 import { test } from "vitest";
+import { userEvent } from "vitest/browser";
+import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import gopher from "@/tests/assets/gopher.webp";
@@ -125,5 +127,49 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("AccentBox edge cases");
+  },
+);
+
+test.each(testEnvironments)(
+  "AccentBox action (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      AccentBox,
+      Section,
+      Heading,
+      Text,
+      Link,
+      Button,
+      ColumnLayout,
+    },
+  }) => {
+    await render(
+      <ColumnLayout columnGap="xl">
+        <AccentBox backgroundColor="blue">
+          <Section>
+            <Heading>Focused link action</Heading>
+            <Text>Text</Text>
+            <Link slot="action" href="#">
+              Link
+            </Link>
+          </Section>
+        </AccentBox>
+        <AccentBox backgroundColor="gradient">
+          <Section>
+            <Heading>Button action</Heading>
+            <Text>Text</Text>
+            <Button slot="action">Button</Button>
+            <Link>Nested link</Link>
+          </Section>
+        </AccentBox>
+      </ColumnLayout>,
+    );
+
+    await userEvent.keyboard("{tab}");
+    await waitForFocusInTheScenario();
+
+    await testScreenshot("AccentBox action");
   },
 );

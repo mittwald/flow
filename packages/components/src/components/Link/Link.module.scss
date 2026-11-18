@@ -114,6 +114,15 @@
     border-radius: var(--accent-box--corner-radius);
   }
 
+  /* The whole box is the link target, so the box shows the hover – also
+     inside a LayoutCard, which gives the box its own class. */
+  &:not([aria-disabled])[data-hovered] {
+    > .accentBox,
+    > .layoutCard > :global(.flow--accent-box) {
+      --hover-overlay-opacity: 1;
+    }
+  }
+
   &:has(> .layoutCard) {
     border-radius: var(--layout-card--corner-radius);
   }
