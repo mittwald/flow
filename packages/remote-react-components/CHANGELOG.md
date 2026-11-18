@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.70](https://github.com/mittwald/flow/compare/1.6.0-next.69...1.6.0-next.70) (2026-11-18)
+
+### Code Refactoring
+
+* **BigNumber:** register as flowComponent ([#3669](https://github.com/mittwald/flow/issues/3669)) ([38192c9](https://github.com/mittwald/flow/commit/38192c9eafc307e964795603ec529088aba0e467))
+
+## [1.5.67](https://github.com/mittwald/flow/compare/1.6.0-next.68...1.5.67) (2026-11-16)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.67 ([ea1aff7](https://github.com/mittwald/flow/commit/ea1aff785307cb4ce8c289324e2bde0f2fff2eb7))
+
 ## [1.6.0-next.69](https://github.com/mittwald/flow/compare/1.6.0-next.68...1.6.0-next.69) (2026-11-16)
 
 ### Bug Fixes
