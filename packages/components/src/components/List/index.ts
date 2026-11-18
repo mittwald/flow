@@ -7,6 +7,11 @@ export type {
 } from "@/components/List/model/loading/types";
 
 export type { SortingFn } from "@/components/List/model/sorting/types";
+export type {
+  DateRangeFilterOptions,
+  DateRangeFilterValue,
+} from "@/components/List/model/filter/types";
+export { resolveDateRangeFilterValue } from "@/components/List/model/filter/resolveDateRangeFilterValue";
 
 export { SortingFunctions } from "./model/sorting/SortingFunctions";
 

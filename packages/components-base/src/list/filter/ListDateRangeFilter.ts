@@ -31,6 +31,7 @@ export class ListDateRangeFilter<
 
   public setValue(range: ListDateRange | null): void {
     this.getTableColumn().setFilterValue(range);
+    this.notifyFilterUpdated(range ? [range] : []);
   }
 }
 

@@ -15,6 +15,10 @@ accent-box:
     value: "{color.mittwald-navy.200}"
   background-color-gradient:
     value: "{color.gradient}"
+  hover-overlay-color:
+    value: "{dark.color.100}"
+  hover-overlay-color-image:
+    value: "{dark-static.color.100}"
 
   padding:
     value: "{size-px.m}"

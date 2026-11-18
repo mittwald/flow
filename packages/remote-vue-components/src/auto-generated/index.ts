@@ -75,6 +75,7 @@ export * from "./LayoutCard";
 export * from "./Legend";
 export * from "./LightBoxGallery";
 export * from "./LightBoxGalleryItem";
+export * from "./LightBoxZoom";
 export * from "./Line";
 export * from "./Link";
 export * from "./ListEmptyView";

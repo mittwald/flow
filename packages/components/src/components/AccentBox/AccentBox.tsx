@@ -10,7 +10,11 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { SectionHeadingReset } from "@/components/Section/context";
 
 const accentBoxBackgroundColors = [
@@ -104,6 +108,7 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
       : isAFlowColor
         ? styles[backgroundColor]
         : undefined,
+    backgroundImage && styles.backgroundImage,
     className,
   );
 
@@ -111,9 +116,17 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const contentColor = color === "default" ? undefined : color;
 
+  /* A Link or Button in the "action" slot covers the whole box. */
+  const actionClassName = (slot: string | undefined) =>
+    slot === "action" ? styles.action : undefined;
+
   const propsContext: PropsContext = {
     Link: {
       color: contentColor,
+      className: dynamic((props) => actionClassName(props.slot)),
+    },
+    Button: {
+      className: dynamic((props) => actionClassName(props.slot)),
     },
     Text: {
       color: contentColor,

@@ -17,10 +17,12 @@ import {
   ListItemView,
   MenuItem,
   Modal,
+  resolveDateRangeFilterValue,
   Section,
   Text,
   typedList,
   useModalController,
+  type DateRangeFilterValue,
 } from "@mittwald/flow-remote-react-components";
 
 interface Crew {
@@ -36,6 +38,34 @@ const crew: Crew[] = [
   { id: "3", name: "Han Solo", role: "Smuggler", status: "active" },
 ];
 
+interface Run {
+  id: string;
+  cronjob: string;
+  startedAt: string;
+}
+
+const now = new Date();
+now.setSeconds(0, 0);
+
+const minutesAgo = (minutes: number) =>
+  new Date(now.getTime() - minutes * 60_000).toISOString();
+
+const runs: Run[] = [
+  { id: "1", cronjob: "Database backup", startedAt: minutesAgo(20) },
+  { id: "2", cronjob: "Clear cache", startedAt: minutesAgo(3 * 60) },
+  { id: "3", cronjob: "Generate sitemap", startedAt: minutesAgo(9 * 60) },
+  { id: "4", cronjob: "Database backup", startedAt: minutesAgo(26 * 60) },
+];
+
+const isInRange = (run: Run, range?: DateRangeFilterValue) => {
+  if (!range) {
+    return true;
+  }
+  const { start, end } = resolveDateRangeFilterValue(range);
+  const startedAt = new Date(run.startedAt);
+  return (!start || startedAt >= start) && (!end || startedAt <= end);
+};
+
 /**
  * The counterpart of `src/app/remote-vue/_demos/components/list.tsx`.
  *
@@ -43,11 +73,13 @@ const crew: Crew[] = [
  * two sortings, tiles, a table view, and a context menu per item that opens
  * that item's own modal. The second one shows selection, which turns every item
  * and table row into a checkbox and therefore cannot share a list with the
- * first one's item links. `ListItemView` is in both.
+ * first one's item links. `ListItemView` is in both. The last two filter by a
+ * date range, once on the client and once in the loader.
  */
 export default function Page() {
   const DemoList = typedList<(typeof demoData)[number]>();
   const CrewList = typedList<Crew>();
+  const RunList = typedList<Run>();
 
   return (
     <ComponentGroupPage title="List">
@@ -191,6 +223,56 @@ export default function Page() {
               </CrewList.TableBody>
             </CrewList.Table>
           </CrewList.List>
+        </Section>
+
+        <Section>
+          <Heading level={3}>List with date range filter</Heading>
+          <RunList.List batchSize={10} aria-label="Cronjob runs">
+            <RunList.Filter
+              property="startedAt"
+              mode="dateRange"
+              name="Started"
+              dateRangeOptions={{ granularity: "minute" }}
+            />
+            <RunList.StaticData data={runs} />
+            <RunList.Item textValue={(run) => run.cronjob}>
+              {(run) => (
+                <ListItemView>
+                  <Heading>{run.cronjob}</Heading>
+                  <Text>{new Date(run.startedAt).toLocaleString()}</Text>
+                </ListItemView>
+              )}
+            </RunList.Item>
+          </RunList.List>
+        </Section>
+
+        <Section>
+          <Heading level={3}>List with date range filter in the loader</Heading>
+          <RunList.List batchSize={10} aria-label="Cronjob runs (loader)">
+            <RunList.Filter
+              property="startedAt"
+              mode="dateRange"
+              name="Started"
+              priority="secondary"
+              dateRangeOptions={{ granularity: "minute" }}
+            />
+            <RunList.LoaderAsync manualFiltering>
+              {async (options) => {
+                const [range] = (options?.filtering?.startedAt?.values ??
+                  []) as DateRangeFilterValue[];
+                const data = runs.filter((run) => isInRange(run, range));
+                return { data, itemTotalCount: data.length };
+              }}
+            </RunList.LoaderAsync>
+            <RunList.Item textValue={(run) => run.cronjob}>
+              {(run) => (
+                <ListItemView>
+                  <Heading>{run.cronjob}</Heading>
+                  <Text>{new Date(run.startedAt).toLocaleString()}</Text>
+                </ListItemView>
+              )}
+            </RunList.Item>
+          </RunList.List>
         </Section>
       </BrowserOnly>
     </ComponentGroupPage>

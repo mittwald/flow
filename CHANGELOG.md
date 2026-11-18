@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0](https://github.com/mittwald/flow/compare/1.6.0-next.72...1.6.0) (2026-11-18)
+
+### Documentation
+
+* **releases:** add the 1.6.0 release-note figures ([3d07e55](https://github.com/mittwald/flow/commit/3d07e559930c6958a2a64844e8e5496e750dfd2c))
+
+### Miscellaneous Chores
+
+* **sync:** take the stable changelogs from main ([1bb5761](https://github.com/mittwald/flow/commit/1bb57612de7906b353e4eff96e37ff93e1145e96))
+
+## [1.5.69](https://github.com/mittwald/flow/compare/1.6.0-next.70...1.5.69) (2026-11-18)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.5.69 ([3be9e67](https://github.com/mittwald/flow/commit/3be9e6717f7eba66889cec65f58b81dd1a7ddf38))
+
 ## [1.5.69](https://github.com/mittwald/flow/compare/1.5.68...1.5.69) (2026-11-18)
 
 ### Code Refactoring

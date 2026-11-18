@@ -16,6 +16,11 @@ export {
   ListTableRow,
 } from "./setupComponents";
 export { injectListModel, type AnyListModel } from "./listContext";
+/* React's names, so a loader filtering on the server reads the same in both. */
+export {
+  resolveListDateRange as resolveDateRangeFilterValue,
+  type ListDateRange as DateRangeFilterValue,
+} from "@mittwald/flow-components-base";
 export { useListMetadata } from "./metadata";
 export { ListModel } from "./model";
 export { createListSettings, useListSettings } from "./settings";

@@ -13,6 +13,13 @@ import { computed, type ComputedRef } from "vue";
 export const texts = {
   "en-US": {
     dateRange: "Date range",
+    "dateRange.endBeforeStart": "The end must not be before the start.",
+    "dateRange.endDate": "End date",
+    "dateRange.endTime": "End time",
+    "dateRange.from": "from {date}",
+    "dateRange.startDate": "Start date",
+    "dateRange.startTime": "Start time",
+    "dateRange.until": "until {date}",
     filters: "Filters",
     "filters.all": "All filters",
     "filters.clear": "Clear filters",
@@ -50,6 +57,13 @@ export const texts = {
   },
   "de-DE": {
     dateRange: "Zeitraum",
+    "dateRange.endBeforeStart": "Das Ende darf nicht vor dem Start liegen.",
+    "dateRange.endDate": "Enddatum",
+    "dateRange.endTime": "Endzeit",
+    "dateRange.from": "ab {date}",
+    "dateRange.startDate": "Startdatum",
+    "dateRange.startTime": "Startzeit",
+    "dateRange.until": "bis {date}",
     filters: "Filter",
     "filters.all": "Alle Filter",
     "filters.clear": "Filter entfernen",

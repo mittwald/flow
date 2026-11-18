@@ -33,18 +33,19 @@ import {
 import { ActiveFilters } from "./ActiveFilters";
 import { AllFiltersModal } from "./AllFiltersModal";
 import { isDateRangeFilter } from "./dateRangeFilter";
+import {
+  DateTimeRangeFields,
+  type DateTimeRangeFilter,
+} from "./DateTimeRangeFields";
 import { injectListModel, type AnyListModel } from "./listContext";
 import { useListTexts, type ListTextFormatter } from "./locales";
 import type { ListRenderShape } from "./model";
-import { listStyles } from "./styles";
+import { dateTimeRangeStyles, listStyles } from "./styles";
 import type { ListRendered } from "./types";
 import { composition } from "@/lib/composition";
+import type { ListDateRange } from "@mittwald/flow-components-base";
 
 const autoSubmitTimeout = 500;
-
-/* `FilterContextMenus.module.scss`'s `.calendar`. */
-const dateRangeCalendarClass =
-  "flow--list--header--filter-context-menu--calendar";
 
 /*
  * What the header needs of a sorting and of a filter, and nothing more.
@@ -71,13 +72,12 @@ interface HeaderFilterValue {
   render(): ListRendered;
 }
 
-interface HeaderDateRangeFilter {
+interface HeaderDateRangeFilter extends DateTimeRangeFilter {
   readonly storageKey: string;
   readonly name?: string;
   readonly property: unknown;
-  readonly dateRangeOptions?: Record<string, unknown>;
-  getValue(): unknown;
-  setValue(range: unknown): void;
+  readonly granularity: "day" | "minute";
+  readonly rangeCalendarProps: Record<string, unknown>;
 }
 
 interface HeaderFilter {
@@ -198,11 +198,12 @@ const renderSortingMenu = (
 };
 
 /**
- * A date-range filter is a calendar in a popover, not a menu of values.
+ * A date-range filter is a calendar in a popover, not a menu of values — or,
+ * with `granularity: "minute"`, date and time fields.
  *
  * The same shape Flow's React list gives it — the calendar closes the popover
  * when a range is picked, because a range is complete the moment its second end
- * is.
+ * is. The fields leave it open: they apply as they are typed.
  */
 const renderDateRangeFilter = (
   filter: HeaderDateRangeFilter,
@@ -223,20 +224,26 @@ const renderDateRangeFilter = (
         "aria-label": calendarLabel,
       },
       () =>
-        /*
-         * Cast at the call, because the options are whatever the consumer
-         * handed the filter: an open record does not match a typed component's
-         * props, and TypeScript then resolves `h` to its instance overload.
-         */
-        h(RangeCalendar, {
-          ...filter.dateRangeOptions,
-          class: dateRangeCalendarClass,
-          value: filter.getValue(),
-          onChange: (range: unknown) => {
-            filter.setValue(range);
-            controller.close();
-          },
-        } as never),
+        filter.granularity === "minute"
+          ? h(DateTimeRangeFields, {
+              filter,
+              class: dateTimeRangeStyles.popover,
+            })
+          : /*
+             * Cast at the call, because the options are whatever the consumer
+             * handed the filter: an open record does not match a typed
+             * component's props, and TypeScript then resolves `h` to its
+             * instance overload.
+             */
+            h(RangeCalendar, {
+              ...filter.rangeCalendarProps,
+              class: dateTimeRangeStyles.calendar,
+              value: filter.getValue(),
+              onChange: (range: ListDateRange) => {
+                filter.setValue(range);
+                controller.close();
+              },
+            } as never),
     ),
   ]);
 

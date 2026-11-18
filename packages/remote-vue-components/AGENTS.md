@@ -283,10 +283,14 @@ what this binding establishes about supporting a framework at all.
 - **A date range is compared in the shared model** (`dateRangeFilterFn` in
   `components-base`), so the two bindings cannot disagree about which rows a
   range covers. A cell counts as a date by class — a luxon `DateTime`, a
-  `CalendarDate`, or an ISO 8601 string, a date-only one read as the day it
-  spells, which `new Date()` would not. Anything else, a plain
-  `{ year, month, day }` included, keeps its row. Only the range's own ends are
-  read by shape, because they arrive serialized from the host.
+  `CalendarDate`, `CalendarDateTime` or `ZonedDateTime`, or an ISO 8601 string,
+  a date-only one read as the day it spells, which `new Date()` would not.
+  Anything else, a plain `{ year, month, day }` included, keeps its row. Only
+  the range's own ends are read by shape, because they arrive serialized from
+  the host. With `granularity: "minute"` the filter shows date and time fields
+  (`DateTimeRangeFields.ts`); which input is valid and when it applies is
+  `getListDateTimeRangeUpdate` in `components-base`, and only the input itself
+  is held here.
 - **`infiniteScroll` is inert across the remote boundary — in React too.** The
   trigger is an `IntersectionObserver` on the Nth-from-last item
   (`useInfiniteScrollTrigger` in `packages/components`), and in a remote app

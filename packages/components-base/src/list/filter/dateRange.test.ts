@@ -4,9 +4,14 @@ import {
   CalendarDateTime,
   parseDate,
   parseZonedDateTime,
+  ZonedDateTime,
 } from "@internationalized/date";
 import { DateTime } from "luxon";
-import { dateRangeFilterFn, isListDateRange } from "./dateRange";
+import {
+  dateRangeFilterFn,
+  isListDateRange,
+  resolveListDateRange,
+} from "./dateRange";
 import type { Row } from "@tanstack/table-core";
 
 const row = (value: unknown) =>
@@ -50,6 +55,32 @@ describe("what counts as a date", () => {
     );
   });
 
+  test("a CalendarDateTime is its local time", () => {
+    expect(
+      dateRangeFilterFn(row(new CalendarDateTime(2024, 3, 31, 23)), "d", march),
+    ).toBe(true);
+    expect(
+      dateRangeFilterFn(row(new CalendarDateTime(2024, 4, 1)), "d", march),
+    ).toBe(false);
+  });
+
+  test("a ZonedDateTime is the instant it names", () => {
+    expect(
+      dateRangeFilterFn(
+        row(parseZonedDateTime("2024-03-15T12:00[Europe/Berlin]")),
+        "d",
+        march,
+      ),
+    ).toBe(true);
+    expect(
+      dateRangeFilterFn(
+        row(parseZonedDateTime("2024-04-15T12:00[Europe/Berlin]")),
+        "d",
+        march,
+      ),
+    ).toBe(false);
+  });
+
   test("an ISO string is the moment it names", () => {
     expect(dateRangeFilterFn(row("2024-03-01"), "d", march)).toBe(true);
     expect(dateRangeFilterFn(row("2024-02-29"), "d", march)).toBe(false);
@@ -67,16 +98,6 @@ describe("what counts as a date", () => {
 
   test("any other shape keeps its row", () => {
     expect(dateRangeFilterFn(row(day(2024, 4, 1)), "d", march)).toBe(true);
-    expect(
-      dateRangeFilterFn(row(new CalendarDateTime(2024, 4, 1)), "d", march),
-    ).toBe(true);
-    expect(
-      dateRangeFilterFn(
-        row(parseZonedDateTime("2024-04-01T00:00[Europe/Berlin]")),
-        "d",
-        march,
-      ),
-    ).toBe(true);
     expect(dateRangeFilterFn(row(new Date(2024, 3, 1)), "d", march)).toBe(true);
     expect(dateRangeFilterFn(row(42), "d", march)).toBe(true);
     expect(dateRangeFilterFn(row(null), "d", march)).toBe(true);
@@ -224,5 +245,93 @@ describe("the whole end day", () => {
 
     expect(matches(endDayAfternoon, endDayRange)).toBe(true);
     expect(matches(dayAfterEnd, endDayRange)).toBe(false);
+  });
+});
+
+describe("a range with time", () => {
+  const timeRange = {
+    start: new CalendarDateTime(2026, 3, 10, 8, 0),
+    end: new CalendarDateTime(2026, 3, 10, 12, 0),
+  };
+
+  /* The end time covers its whole minute. */
+  test.each([
+    ["07:59:59.999", false],
+    ["08:00:00.000", true],
+    ["12:00:59.999", true],
+    ["12:01:00.000", false],
+  ])("matches 2026-03-10 at %s: %s", (time, expected) => {
+    expect(dateRangeFilterFn(row(`2026-03-10T${time}`), "d", timeRange)).toBe(
+      expected,
+    );
+  });
+
+  test("combines a time with a whole day", () => {
+    const mixed = {
+      start: timeRange.start,
+      end: new CalendarDate(2026, 3, 11),
+    };
+    expect(dateRangeFilterFn(row("2026-03-10T07:00:00"), "d", mixed)).toBe(
+      false,
+    );
+    expect(dateRangeFilterFn(row("2026-03-11T23:30:00"), "d", mixed)).toBe(
+      true,
+    );
+  });
+
+  test("reads a time that crossed the boundary field by field", () => {
+    const plain = {
+      start: { year: 2026, month: 3, day: 10, hour: 8, minute: 0, second: 0 },
+      end: { year: 2026, month: 3, day: 10, hour: 12, minute: 0, second: 0 },
+    };
+    expect(dateRangeFilterFn(row("2026-03-10T07:59:00"), "d", plain)).toBe(
+      false,
+    );
+    expect(dateRangeFilterFn(row("2026-03-10T12:00:30"), "d", plain)).toBe(
+      true,
+    );
+  });
+});
+
+describe("resolveListDateRange", () => {
+  test("resolves dates to their whole days in local time", () => {
+    expect(
+      resolveListDateRange({
+        start: new CalendarDate(2026, 10, 1),
+        end: new CalendarDate(2026, 10, 2),
+      }),
+    ).toEqual({
+      start: new Date(2026, 9, 1, 0, 0, 0, 0),
+      end: new Date(2026, 9, 2, 23, 59, 59, 999),
+    });
+  });
+
+  test("resolves dates with time to their whole minutes", () => {
+    expect(
+      resolveListDateRange({
+        start: new CalendarDateTime(2026, 10, 1, 22, 0, 30),
+        end: new CalendarDateTime(2026, 10, 2, 6, 0),
+      }),
+    ).toEqual({
+      start: new Date(2026, 9, 1, 22, 0, 0, 0),
+      end: new Date(2026, 9, 2, 6, 0, 59, 999),
+    });
+  });
+
+  test("resolves a zoned date by its instant", () => {
+    const { start } = resolveListDateRange({
+      start: new ZonedDateTime(2026, 10, 1, "UTC", 0, 12, 0),
+    });
+    expect(start?.toISOString()).toBe("2026-10-01T12:00:00.000Z");
+  });
+
+  test("leaves a missing side without bound", () => {
+    expect(
+      resolveListDateRange({ start: new CalendarDate(2026, 10, 1) }),
+    ).toEqual({ start: new Date(2026, 9, 1), end: undefined });
+    expect(resolveListDateRange({})).toEqual({
+      start: undefined,
+      end: undefined,
+    });
   });
 });

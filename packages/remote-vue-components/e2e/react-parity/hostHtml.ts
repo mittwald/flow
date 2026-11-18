@@ -60,17 +60,24 @@ const createIdRewriter = () => {
     return placeholder;
   };
 
-  return (name: string, value: string): string => {
-    const tokens = idReferenceAttributes.has(name)
+  const rewriteFragments = (value: string) =>
+    value.replace(generatedFragment, placeholderFor);
+
+  /*
+   * Token by token, so a list like `aria-describedby` numbers its ids from left
+   * to right whichever kind each one is.
+   */
+  return (name: string, value: string): string =>
+    idReferenceAttributes.has(name)
       ? value
           .split(" ")
           .map((token) =>
-            vueGeneratedId.test(token) ? placeholderFor(token) : token,
+            vueGeneratedId.test(token)
+              ? placeholderFor(token)
+              : rewriteFragments(token),
           )
           .join(" ")
-      : value;
-    return tokens.replace(generatedFragment, placeholderFor);
-  };
+      : rewriteFragments(value);
 };
 
 /**
