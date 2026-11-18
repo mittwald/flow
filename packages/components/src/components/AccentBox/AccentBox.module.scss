@@ -41,7 +41,6 @@
        their own classes, so a props context that sets their className
        cannot drop them below it. */
     :is(:global(.flow--button), :global(.flow--link)):not(.action) {
-      position: relative;
       z-index: 2;
     }
 
@@ -93,4 +92,11 @@
   > .icon {
     display: none;
   }
+}
+
+/* Without specificity, so a component that positions its own button
+   (TextField, Slider) keeps it absolute and only gets the z-index. */
+:where(.accentBox:has(.action))
+  :where(:global(.flow--button), :global(.flow--link)) {
+  position: relative;
 }

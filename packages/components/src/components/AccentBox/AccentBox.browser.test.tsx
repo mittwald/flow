@@ -4,7 +4,10 @@ import { page, userEvent } from "vitest/browser";
 import { AccentBox } from "@/components/AccentBox";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
+import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
+import { Slider } from "@/components/Slider";
+import { TextField } from "@/components/TextField";
 import { Text } from "@/components/Text";
 import { LayoutCard } from "@/components/LayoutCard";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -66,6 +69,42 @@ test("A button styled through another props context stays clickable", async () =
 
   expect(onInstall).toHaveBeenCalledOnce();
   expect(onAction).not.toHaveBeenCalled();
+});
+
+/* Components that position their own buttons keep them in place. */
+const positionOf = (name: string | RegExp) =>
+  getComputedStyle(page.getByRole("button", { name }).element()).position;
+
+test("With an action the password toggle still sits inside the field", async () => {
+  await render(
+    <AccentBox>
+      <Heading>Access</Heading>
+      <TextField type="password">
+        <Label>Password</Label>
+      </TextField>
+      <Link slot="action" href="#">
+        Details
+      </Link>
+    </AccentBox>,
+  );
+
+  expect(positionOf(/password/i)).toBe("absolute");
+});
+
+test("With an action the slider steppers keep their place", async () => {
+  await render(
+    <AccentBox>
+      <Heading>Storage</Heading>
+      <Slider>
+        <Label>Storage</Label>
+      </Slider>
+      <Link slot="action" href="#">
+        Details
+      </Link>
+    </AccentBox>,
+  );
+
+  expect(positionOf("Increment value")).toBe("absolute");
 });
 
 /* The hover is a CSS custom property the hover layer reads, so the tests
