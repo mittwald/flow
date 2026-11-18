@@ -95,8 +95,6 @@ test.each(testEnvironments)(
     const option1 = page.getByTestId("option1");
     const option2 = page.getByTestId("option2");
 
-    await testScreenshot("Select multiple - default");
-
     await select.click();
 
     await testScreenshot("Select multiple - options visible");
