@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.69](https://github.com/mittwald/flow/compare/1.5.68...1.5.69) (2026-11-18)
+
+### Code Refactoring
+
+* **Separator:** register as flowComponent ([#3633](https://github.com/mittwald/flow/issues/3633)) ([2d5aed4](https://github.com/mittwald/flow/commit/2d5aed40d1167b71c1a1b176e7b131d3929384fe))
+
+## [1.5.68](https://github.com/mittwald/flow/compare/1.5.67...1.5.68) (2026-11-18)
+
+### Documentation
+
+* drop the technology stack list from AGENTS.md ([#3626](https://github.com/mittwald/flow/issues/3626)) ([f9353f0](https://github.com/mittwald/flow/commit/f9353f0f732138ae906bceb13d3b46081b253c11))
+
+### Miscellaneous Chores
+
+* **ci:** re-enable review apps and docs/storybook redeploys ([#3668](https://github.com/mittwald/flow/issues/3668)) ([2fc833a](https://github.com/mittwald/flow/commit/2fc833af8f7e8a35129a5b1f3f72ffdd928dc54e))
+
+### Code Refactoring
+
+* **BigNumber:** register as flowComponent ([#3669](https://github.com/mittwald/flow/issues/3669)) ([38192c9](https://github.com/mittwald/flow/commit/38192c9eafc307e964795603ec529088aba0e467))
+
 ## [1.5.67](https://github.com/mittwald/flow/compare/1.5.66...1.5.67) (2026-11-16)
 
 ### Bug Fixes

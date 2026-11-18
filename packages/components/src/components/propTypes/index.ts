@@ -22,6 +22,7 @@ import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
+import type { BigNumberProps } from "@/components/BigNumber";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -43,6 +44,7 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
+import type { SeparatorProps } from "@/components/Separator";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
@@ -119,6 +121,7 @@ export interface FlowComponentPropsTypes {
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
+  BigNumber: BigNumberProps;
   Button: ButtonProps;
   CodeEditor: CodeEditorProps;
   Chat: ChatProps;
@@ -187,6 +190,7 @@ export interface FlowComponentPropsTypes {
   RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
+  Separator: SeparatorProps;
   Segment: SegmentProps;
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
@@ -220,6 +224,7 @@ const propsContextSupportingComponentsMap: Record<
   Align: true,
   Combine: true,
   Badge: true,
+  BigNumber: true,
   Button: true,
   CodeEditor: true,
   Chat: true,
@@ -290,6 +295,7 @@ const propsContextSupportingComponentsMap: Record<
   SearchField: true,
   Section: true,
   SectionHeader: true,
+  Separator: true,
   Segment: true,
   SegmentedControl: true,
   Select: true,
