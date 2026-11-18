@@ -43,6 +43,7 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
+import type { SeparatorProps } from "@/components/Separator";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
@@ -187,6 +188,7 @@ export interface FlowComponentPropsTypes {
   RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
+  Separator: SeparatorProps;
   Segment: SegmentProps;
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
@@ -290,6 +292,7 @@ const propsContextSupportingComponentsMap: Record<
   SearchField: true,
   Section: true,
   SectionHeader: true,
+  Separator: true,
   Segment: true,
   SegmentedControl: true,
   Select: true,
