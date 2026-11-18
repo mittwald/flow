@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.72](https://github.com/mittwald/flow/compare/1.6.0-next.71...1.6.0-next.72) (2026-11-18)
+
+### Features
+
+* **AccentBox:** make the whole box pressable with an action slot ([a77f4ec](https://github.com/mittwald/flow/commit/a77f4ec526fe4e7bceb5ed37649149158862f373)), closes [#3589](https://github.com/mittwald/flow/issues/3589)
+
 ## [1.6.0-next.71](https://github.com/mittwald/flow/compare/1.6.0-next.70...1.6.0-next.71) (2026-11-18)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

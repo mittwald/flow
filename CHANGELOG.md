@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0-next.72](https://github.com/mittwald/flow/compare/1.6.0-next.71...1.6.0-next.72) (2026-11-18)
+
+### Features
+
+* **AccentBox:** make the whole box pressable with an action slot ([a77f4ec](https://github.com/mittwald/flow/commit/a77f4ec526fe4e7bceb5ed37649149158862f373)), closes [#3589](https://github.com/mittwald/flow/issues/3589)
+
+### Bug Fixes
+
+* **AccentBox:** keep self-positioned buttons in place above the action ([fcbac41](https://github.com/mittwald/flow/commit/fcbac41142b6e7b37a3bf631f39ad08a1ff96770))
+
+### Documentation
+
+* merge the AccentBox Link and Button sections, note what stays clickable ([80dace0](https://github.com/mittwald/flow/commit/80dace0ed2983fe54f5eeaf32cc4304a8bb04760))
+
 ## [1.6.0-next.71](https://github.com/mittwald/flow/compare/1.6.0-next.70...1.6.0-next.71) (2026-11-18)
 
 ### Code Refactoring
