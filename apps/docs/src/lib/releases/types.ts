@@ -1,11 +1,20 @@
 /** A single fix shipped in a patch release, linking its commit. */
 export interface Fix {
-  /** Fix description, e.g. "Combobox: fix focus loss on selection". */
+  /** Conventional-commit scope, e.g. "Combobox"; undefined when unscoped. */
+  scope?: string;
+  /** Fix description without the scope, e.g. "fix focus loss on selection". */
   text: string;
   /** Short commit sha, e.g. "a1b2c3d". */
   commitSha: string;
   /** Absolute GitHub commit URL. */
   commitUrl: string;
+}
+
+/** The fixes of one patch that share a scope, shown as one line. */
+export interface FixGroup {
+  scope?: string;
+  texts: string[];
+  commits: { sha: string; url: string }[];
 }
 
 /** All fixes shipped under one patch version of a minor line, e.g. 1.1.3. */
@@ -14,7 +23,8 @@ export interface PatchGroup {
   version: string;
   /** ISO date of the patch release. */
   date: string;
-  fixes: Fix[];
+  /** Consumer-relevant fixes, one group per scope. */
+  fixes: FixGroup[];
 }
 
 /** A published Minor or Major release — rendered as one card. */

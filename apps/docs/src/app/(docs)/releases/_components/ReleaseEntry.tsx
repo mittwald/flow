@@ -13,16 +13,20 @@ import { formatReleaseDate } from "../_lib/formatReleaseDate";
 import styles from "./ReleaseEntry.module.scss";
 
 /**
- * Flatten every patch fix into a single "version – text (#sha)" bullet list,
- * newest patch first (patchGroups are already sorted newest-first).
+ * Flatten the patch fixes into a "version – **scope:** texts (#sha, …)" bullet
+ * list, one bullet per scope, newest patch first (patchGroups are already
+ * sorted newest-first).
  */
 const fixesMarkdown = (release: Release): string =>
   release.patchGroups
     .flatMap((group) =>
-      group.fixes.map(
-        (fix) =>
-          `- ${group.version} – ${fix.text} ([#${fix.commitSha}](${fix.commitUrl}))`,
-      ),
+      group.fixes.map((fix) => {
+        const scope = fix.scope ? `**${fix.scope}:** ` : "";
+        const commits = fix.commits
+          .map((commit) => `[#${commit.sha}](${commit.url})`)
+          .join(", ");
+        return `- ${group.version} – ${scope}${fix.texts.join("; ")} (${commits})`;
+      }),
     )
     .join("\n");
 

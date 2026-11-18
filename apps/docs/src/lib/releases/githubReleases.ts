@@ -1,4 +1,4 @@
-import type { Fix, PatchGroup, Release } from "./types";
+import type { Fix, FixGroup, PatchGroup, Release } from "./types";
 import { themedFigures } from "./themedFigures";
 
 interface GhRelease {
@@ -28,21 +28,61 @@ const parseSemver = (tag: string): [number, number, number] | null => {
 const npmUrl = (version: string) =>
   `https://www.npmjs.com/package/@mittwald/flow-react-components/v/${version}`;
 
+/** Changelog sections that reach consumers; tests, CI, docs and chores don't. */
+const consumerSections = new Set([
+  "Bug Fixes",
+  "Features",
+  "Performance Improvements",
+  "Reverts",
+]);
+
+/** Scopes of repo tooling, which ship nothing to consumers in any section. */
+const internalScopes = new Set([
+  "agents",
+  "ci",
+  "commit-guard",
+  "core",
+  "dependabot",
+  "deps",
+  "deps-dev",
+  "docs",
+  "foundations",
+  "release-figure",
+  "releases",
+  "remote-dom-demo",
+  "repo",
+  "sprach-guide",
+]);
+
 /**
- * Parse fix lines out of a (lerna-lite / conventional-changelog) release body.
- * The changelog appends up to two markdown links per line — an issue/PR link
- * and the commit link. We take the sha from the trailing commit URL when
- * present (else the last hex token on the line) and strip all trailing link
- * groups from the description. Lines with no sha are skipped.
+ * Parse the consumer-relevant fix lines out of a (lerna-lite /
+ * conventional-changelog) release body. The changelog appends up to two
+ * markdown links per line — an issue/PR link and the commit link. We take the
+ * sha from the trailing commit URL when present (else the last hex token on the
+ * line) and strip all trailing link groups from the description. Lines with no
+ * sha are skipped, and so are lines under a non-consumer section or with an
+ * internal scope.
  */
-const parseFixes = (body: string | null): Fix[] => {
+export const parseFixes = (body: string | null): Fix[] => {
   if (!body) {
     return [];
   }
   const fixes: Fix[] = [];
+  // A body without section headings keeps every line.
+  let isConsumerSection = true;
   for (const rawLine of body.split("\n")) {
     const line = rawLine.trim();
-    if (!line.startsWith("-") && !line.startsWith("*")) {
+    const section = line.match(/^#{2,}\s+(.*\S)\s*$/)?.[1];
+    if (section !== undefined) {
+      if (!/^\[?\d/.test(section)) {
+        isConsumerSection = consumerSections.has(section);
+      }
+      continue;
+    }
+    if (
+      !isConsumerSection ||
+      (!line.startsWith("-") && !line.startsWith("*"))
+    ) {
       continue;
     }
 
@@ -60,15 +100,45 @@ const parseFixes = (body: string | null): Fix[] => {
       .replace(/(\s*\(\[[^\]]*\]\([^)]*\)\))+\s*\.?$/g, "")
       .replace(/\s*\([0-9a-f]{7,40}\)\s*\.?$/i, "")
       .trim();
-    if (text) {
+    const scoped = text.match(/^\*\*([^*]+):\*\*\s*(.*)$/);
+    const scope = scoped?.[1];
+    if (scope !== undefined && internalScopes.has(scope)) {
+      continue;
+    }
+    const description = scoped?.[2] ?? text;
+    if (description) {
       fixes.push({
-        text,
+        scope,
+        text: description,
         commitSha: sha,
         commitUrl: `https://github.com/${REPO}/commit/${sha}`,
       });
     }
   }
   return fixes;
+};
+
+/**
+ * Merge a patch's fixes into one entry per scope, in order of first appearance,
+ * so a version lists one line per affected area. Unscoped fixes share no topic
+ * and stay one entry each.
+ */
+export const groupFixes = (fixes: Fix[]): FixGroup[] => {
+  const groups: FixGroup[] = [];
+  for (const fix of fixes) {
+    const commit = { sha: fix.commitSha, url: fix.commitUrl };
+    const group =
+      fix.scope === undefined
+        ? undefined
+        : groups.find((g) => g.scope === fix.scope);
+    if (group) {
+      group.texts.push(fix.text);
+      group.commits.push(commit);
+    } else {
+      groups.push({ scope: fix.scope, texts: [fix.text], commits: [commit] });
+    }
+  }
+  return groups;
 };
 
 /**
@@ -176,8 +246,9 @@ export const getReleases = async (): Promise<Release[]> => {
       .map((p) => ({
         version: p.tag_name.replace(/^v/, ""),
         date: toDate(p),
-        fixes: parseFixes(p.body),
+        fixes: groupFixes(parseFixes(p.body)),
       }))
+      .filter((group) => group.fixes.length > 0)
       .sort((a, b) =>
         b.version.localeCompare(a.version, undefined, { numeric: true }),
       );
