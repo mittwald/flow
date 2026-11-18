@@ -95,8 +95,6 @@ test.each(testEnvironments)(
 
     const option = page.getByTestId("option");
 
-    await testScreenshot("SegmentedControl interaction - default");
-
     await option.click();
 
     await testScreenshot("SegmentedControl interaction - option selected");

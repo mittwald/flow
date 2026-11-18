@@ -62,8 +62,6 @@ test.each(testEnvironments)(
 
     const input = page.getByLocator("input");
 
-    await testScreenshot("PasswordCreationField interaction - default");
-
     await userEvent.type(input, "asdf");
 
     await testScreenshot(

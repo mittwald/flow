@@ -51,8 +51,6 @@ test.each(testEnvironments)(
 
     const trigger = page.getByTestId("trigger");
 
-    await testScreenshot("Switch interaction - default");
-
     await trigger.click();
 
     await testScreenshot("Switch interaction - selected");

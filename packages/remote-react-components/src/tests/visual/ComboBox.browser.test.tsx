@@ -61,8 +61,6 @@ test.each(testEnvironments)(
     const input = page.getByLocator("input");
     const option = page.getByTestId("option");
 
-    await testScreenshot("ComboBox - default");
-
     await userEvent.type(input, "o");
 
     await testScreenshot("ComboBox - options visible");

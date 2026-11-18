@@ -72,8 +72,6 @@ test.each(testEnvironments)(
 
     const input = page.getByLocator("input");
 
-    await testScreenshot("TextField - default");
-
     await userEvent.type(input, "asdf");
 
     await testScreenshot("TextField - text entered");

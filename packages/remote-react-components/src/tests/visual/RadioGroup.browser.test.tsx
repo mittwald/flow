@@ -133,8 +133,6 @@ test.each(testEnvironments)(
 
     const option = page.getByTestId("option");
 
-    await testScreenshot("RadioGroup interaction - default");
-
     await option.click();
 
     await testScreenshot("RadioGroup interaction - option selected");

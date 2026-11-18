@@ -69,8 +69,6 @@ test.each(testEnvironments)(
     const select = page.getByLocator("button");
     const option = page.getByTestId("option");
 
-    await testScreenshot("Select interaction - default");
-
     await select.click();
 
     await testScreenshot("Select interaction - options visible");

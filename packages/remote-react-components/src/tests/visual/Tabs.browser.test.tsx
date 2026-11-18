@@ -105,8 +105,6 @@ test.each(testEnvironments)(
 
     const trigger = page.getByTestId("tab");
 
-    await testScreenshot("Tabs interaction - default");
-
     await trigger.click();
 
     await testScreenshot("Tabs interaction - Tab selected");

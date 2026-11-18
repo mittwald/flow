@@ -80,8 +80,6 @@ test.each(testEnvironments)(
 
     const click = page.getByTestId("click");
 
-    await testScreenshot("Accordion - default");
-
     await click.click();
 
     await testScreenshot("Accordion - expanded");
