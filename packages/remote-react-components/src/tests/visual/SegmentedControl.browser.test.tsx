@@ -3,7 +3,7 @@ import { test } from "vitest";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "SegmentedControl states (%s)",
+  "SegmentedControl (%s)",
   async ({
     testScreenshot,
     render,
@@ -51,10 +51,28 @@ test.each(testEnvironments)(
           </Segment>
           <Segment value="2">Option 2</Segment>
         </SegmentedControl>
+        <SegmentedControl isRequired defaultValue="1">
+          <Label>Label</Label>
+          <Segment value="1">
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star.
+          </Segment>
+          <Segment value="2">
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star.
+          </Segment>
+          <Segment value="3">
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star.
+          </Segment>
+        </SegmentedControl>
       </Flex>,
     );
 
-    await testScreenshot("SegmentedControl states");
+    await testScreenshot("SegmentedControl");
   },
 );
 
@@ -82,37 +100,5 @@ test.each(testEnvironments)(
     await option.click();
 
     await testScreenshot("SegmentedControl interaction - option selected");
-  },
-);
-
-test.each(testEnvironments)(
-  "SegmentedControl edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { SegmentedControl, Segment, Label },
-  }) => {
-    await render(
-      <SegmentedControl isRequired defaultValue="1">
-        <Label>Label</Label>
-        <Segment value="1">
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star.
-        </Segment>
-        <Segment value="2">
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star.
-        </Segment>
-        <Segment value="3">
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star.
-        </Segment>
-      </SegmentedControl>,
-    );
-
-    await testScreenshot("SegmentedControl edge cases");
   },
 );

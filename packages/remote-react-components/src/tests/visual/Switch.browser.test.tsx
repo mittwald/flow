@@ -3,7 +3,7 @@ import { test } from "vitest";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "Switch states (%s)",
+  "Switch (%s)",
   async ({ testScreenshot, render, components: { Flex, Switch, Label } }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -25,10 +25,18 @@ test.each(testEnvironments)(
         <Switch labelPosition="leading">
           <Label>Label leading</Label>
         </Switch>
+        <Switch>
+          <Label>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            hidden on Scarif.
+          </Label>
+        </Switch>
       </Flex>,
     );
 
-    await testScreenshot("Switch states");
+    await testScreenshot("Switch");
   },
 );
 
@@ -48,23 +56,5 @@ test.each(testEnvironments)(
     await trigger.click();
 
     await testScreenshot("Switch interaction - selected");
-  },
-);
-
-test.each(testEnvironments)(
-  "Switch edge cases (%s)",
-  async ({ testScreenshot, render, components: { Switch, Label } }) => {
-    await render(
-      <Switch>
-        <Label>
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star,
-          hidden on Scarif.
-        </Label>
-      </Switch>,
-    );
-
-    await testScreenshot("Switch edge cases");
   },
 );

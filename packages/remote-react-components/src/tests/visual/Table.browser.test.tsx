@@ -108,18 +108,18 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "Table Column Widths (%s)",
+  "Table column widths (%s)",
   async ({
     testScreenshot,
     render,
     components: {
+      Flex,
       Table,
       TableHeader,
       TableColumn,
       TableBody,
       TableRow,
       TableCell,
-      Flex,
     },
   }) => {
     await render(
@@ -164,46 +164,25 @@ test.each(testEnvironments)(
             </TableRow>
           </TableBody>
         </Table>
+        <Table aria-label="Minimum table width" layout="fixed" minWidth={1400}>
+          <TableHeader>
+            <TableColumn>Column one</TableColumn>
+            <TableColumn>Column two</TableColumn>
+            <TableColumn>Column three</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                The table keeps its minimum width and overflows its container.
+              </TableCell>
+              <TableCell>The container scrolls horizontally.</TableCell>
+              <TableCell>Columns are not squeezed.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </Flex>,
     );
 
-    await testScreenshot("Table Column Widths");
-  },
-);
-
-test.each(testEnvironments)(
-  "Table Minimum Width (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      Table,
-      TableHeader,
-      TableColumn,
-      TableBody,
-      TableRow,
-      TableCell,
-    },
-  }) => {
-    await render(
-      <Table aria-label="Minimum table width" layout="fixed" minWidth={1400}>
-        <TableHeader>
-          <TableColumn>Column one</TableColumn>
-          <TableColumn>Column two</TableColumn>
-          <TableColumn>Column three</TableColumn>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell>
-              The table keeps its minimum width and overflows its container.
-            </TableCell>
-            <TableCell>The container scrolls horizontally.</TableCell>
-            <TableCell>Columns are not squeezed.</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>,
-    );
-
-    await testScreenshot("Table Minimum Width");
+    await testScreenshot("Table column widths");
   },
 );

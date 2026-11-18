@@ -3,7 +3,7 @@ import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "PasswordCreationField states (%s)",
+  "PasswordCreationField (%s)",
   async ({
     testScreenshot,
     render,
@@ -14,6 +14,7 @@ test.each(testEnvironments)(
       FieldError,
       IconStar,
       Button,
+      ColumnLayout,
     },
   }) => {
     await render(
@@ -34,10 +35,15 @@ test.each(testEnvironments)(
         <PasswordCreationField isDisabled>
           <Label>Disabled</Label>
         </PasswordCreationField>
+        <ColumnLayout l={[1, 1, 1, 1, 1]}>
+          <PasswordCreationField isRequired>
+            <Label>Default</Label>
+          </PasswordCreationField>
+        </ColumnLayout>
       </Flex>,
     );
 
-    await testScreenshot("PasswordCreationField states");
+    await testScreenshot("PasswordCreationField");
   },
 );
 
@@ -123,24 +129,5 @@ test.each(testEnvironments)(
       .toBe("100");
 
     await testScreenshot("PasswordCreationField invalid strong password");
-  },
-);
-
-test.each(testEnvironments)(
-  "PasswordCreationField edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { PasswordCreationField, Label, ColumnLayout },
-  }) => {
-    await render(
-      <ColumnLayout l={[1, 1, 1, 1, 1]}>
-        <PasswordCreationField isRequired>
-          <Label>Default</Label>
-        </PasswordCreationField>
-      </ColumnLayout>,
-    );
-
-    await testScreenshot("PasswordCreationField edge cases");
   },
 );

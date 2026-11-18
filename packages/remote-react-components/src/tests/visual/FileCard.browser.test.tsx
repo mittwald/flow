@@ -3,7 +3,7 @@ import { test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
 
 test.each(testEnvironments)(
-  "FileCard variants (%s)",
+  "FileCard (%s)",
   async ({
     testScreenshot,
     render,
@@ -19,7 +19,7 @@ test.each(testEnvironments)(
     },
   }) => {
     await render(
-      <Flex gap="m" direction="column">
+      <Flex direction="column" gap="m">
         <FileCard name="x-wing.png" />
         <FileCard
           name="millennium-falcon.png"
@@ -44,18 +44,6 @@ test.each(testEnvironments)(
             <IconChevronDown />
           </Button>
         </FileCard>
-      </Flex>,
-    );
-
-    await testScreenshot("FileCard variants");
-  },
-);
-
-test.each(testEnvironments)(
-  "FileCard edge cases (%s)",
-  async ({ testScreenshot, render, components: { FileCard, Flex } }) => {
-    await render(
-      <Flex gap="m" direction="column">
         <FileCard
           name="A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           decisive blow against the Galactic Empire. Rebel spies stole secret
@@ -72,6 +60,6 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("FileCard edge cases");
+    await testScreenshot("FileCard");
   },
 );

@@ -4,11 +4,23 @@ import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 const combineSince = "0.2.0-alpha.1050";
 
 test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
-  "Combine Avatar and Text (%s)",
+  "Combine (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Flex, Avatar, Initials, Text, Combine },
+    components: {
+      Flex,
+      Avatar,
+      Initials,
+      Text,
+      Combine,
+      IconInfo,
+      Button,
+      ContextualHelpTrigger,
+      ContextualHelp,
+      CopyButton,
+      Kbd,
+    },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -42,28 +54,42 @@ test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
             Text
           </Text>
         </Combine>
+        <Combine>
+          <IconInfo />
+          <Text>Text</Text>
+        </Combine>
+        <Combine>
+          <Text>Text</Text>
+          <ContextualHelpTrigger>
+            <Button color="secondary" />
+            <ContextualHelp />
+          </ContextualHelpTrigger>
+        </Combine>
+        <Combine>
+          <Text>Text</Text>
+          <CopyButton text="text" />
+        </Combine>
+        <Combine>
+          <Kbd variant="soft">↑</Kbd>
+          <Kbd variant="soft">↓</Kbd>
+        </Combine>
+        <Combine>
+          <Kbd variant="soft">Esc</Kbd>
+          <Text>Text</Text>
+        </Combine>
+        <Combine>
+          <Kbd variant="soft">↑</Kbd>
+          <Kbd variant="soft">↓</Kbd>
+          <Text>Text</Text>
+        </Combine>
+        <Combine>
+          <Kbd keys={["mod", "k"]} />
+          <Text>Text</Text>
+        </Combine>
       </Flex>,
     );
 
-    await testScreenshot("Combine Avatar and Text");
-  },
-);
-
-test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
-  "Combine Icon and Text (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Text, Combine, IconInfo },
-  }) => {
-    await render(
-      <Combine>
-        <IconInfo />
-        <Text>Text</Text>
-      </Combine>,
-    );
-
-    await testScreenshot("Combine Icon and Text");
+    await testScreenshot("Combine");
   },
 );
 
@@ -119,83 +145,5 @@ test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
     );
 
     await testScreenshot("Combine Input and Button");
-  },
-);
-
-test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
-  "Combine Text and ContextualHelpTrigger (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      Text,
-      Combine,
-      Button,
-      ContextualHelpTrigger,
-      ContextualHelp,
-    },
-  }) => {
-    await render(
-      <Combine>
-        <Text>Text</Text>
-        <ContextualHelpTrigger>
-          <Button color="secondary" />
-          <ContextualHelp />
-        </ContextualHelpTrigger>
-      </Combine>,
-    );
-
-    await testScreenshot("Combine Text and ContextualHelpTrigger");
-  },
-);
-
-test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
-  "Combine Text and CopyButton (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Text, Combine, CopyButton },
-  }) => {
-    await render(
-      <Combine>
-        <Text>Text</Text>
-        <CopyButton text="text" />
-      </Combine>,
-    );
-
-    await testScreenshot("Combine Text and CopyButton");
-  },
-);
-
-test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
-  "Combine Kbd and Text (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Flex, Kbd, Text, Combine },
-  }) => {
-    await render(
-      <Flex direction="column" gap="m">
-        <Combine>
-          <Kbd variant="soft">↑</Kbd>
-          <Kbd variant="soft">↓</Kbd>
-        </Combine>
-        <Combine>
-          <Kbd variant="soft">Esc</Kbd>
-          <Text>Text</Text>
-        </Combine>
-        <Combine>
-          <Kbd variant="soft">↑</Kbd>
-          <Kbd variant="soft">↓</Kbd>
-          <Text>Text</Text>
-        </Combine>
-        <Combine>
-          <Kbd keys={["mod", "k"]} />
-          <Text>Text</Text>
-        </Combine>
-      </Flex>,
-    );
-
-    await testScreenshot("Combine Kbd and Text");
   },
 );

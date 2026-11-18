@@ -3,7 +3,7 @@ import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "ComboBox states (%s)",
+  "ComboBox (%s)",
   async ({
     testScreenshot,
     render,
@@ -33,10 +33,13 @@ test.each(testEnvironments)(
           <Option>Option 1</Option>
           <Option>Option 2</Option>
         </ComboBox>
+        <ComboBox defaultInputValue=" A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole secret plans to the Empire's ultimate weapon, the Death Star, an armored station.">
+          <Label>Label</Label>
+        </ComboBox>
       </Flex>,
     );
 
-    await testScreenshot("ComboBox states");
+    await testScreenshot("ComboBox");
   },
 );
 
@@ -67,20 +70,5 @@ test.each(testEnvironments)(
     await option.click();
 
     await testScreenshot("ComboBox - option selected");
-  },
-);
-
-test.each(testEnvironments)(
-  "ComboBox edge cases (%s)",
-  async ({ testScreenshot, render, components: { Flex, ComboBox, Label } }) => {
-    await render(
-      <Flex direction="column" gap="m">
-        <ComboBox defaultInputValue=" A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole secret plans to the Empire's ultimate weapon, the Death Star, an armored station.">
-          <Label>Label</Label>
-        </ComboBox>
-      </Flex>,
-    );
-
-    await testScreenshot("ComboBox edge cases");
   },
 );

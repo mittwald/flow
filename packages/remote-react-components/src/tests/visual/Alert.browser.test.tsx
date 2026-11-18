@@ -4,7 +4,7 @@ import { statusTypes } from "@mittwald/flow-react-components/internal";
 import { test } from "vitest";
 
 test.each(testEnvironments)(
-  "Alert states (%s)",
+  "Alert (%s)",
   async ({
     testScreenshot,
     render,
@@ -25,7 +25,7 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("Alert states");
+    await testScreenshot("Alert");
   },
 );
 
@@ -35,6 +35,7 @@ test.each(testEnvironments)(
     testScreenshot,
     render,
     components: {
+      Flex,
       Alert,
       Heading,
       Text,
@@ -48,51 +49,40 @@ test.each(testEnvironments)(
     },
   }) => {
     await render(
-      <Alert>
-        <Heading>
-          Heading
-          <Badge>Badge</Badge>
-        </Heading>
-        <Content>
-          <Text>Text</Text>
-          <InlineCode>InlineCode</InlineCode>
-          <Badge>Badge</Badge>
-          <CopyButton text="InlineCode" />
-          <Link>Link</Link>
-          <Button>Button</Button>
-          <ActionGroup>
-            <Button color="secondary" variant="soft">
-              Secondary
-            </Button>
-            <Button>Primary</Button>
-          </ActionGroup>
-        </Content>
-      </Alert>,
+      <Flex direction="column" gap="m">
+        <Alert>
+          <Heading>
+            Heading
+            <Badge>Badge</Badge>
+          </Heading>
+          <Content>
+            <Text>Text</Text>
+            <InlineCode>InlineCode</InlineCode>
+            <Badge>Badge</Badge>
+            <CopyButton text="InlineCode" />
+            <Link>Link</Link>
+            <Button>Button</Button>
+            <ActionGroup>
+              <Button color="secondary" variant="soft">
+                Secondary
+              </Button>
+              <Button>Primary</Button>
+            </ActionGroup>
+          </Content>
+        </Alert>
+        <Alert>
+          <Heading>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            an armored space station with enough power to destroy an entire
+            planet.
+          </Heading>
+          <Content>Content</Content>
+        </Alert>
+      </Flex>,
     );
 
     await testScreenshot("Alert content");
-  },
-);
-
-test.each(testEnvironments)(
-  "Alert edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Alert, Heading, Content },
-  }) => {
-    await render(
-      <Alert>
-        <Heading>
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star, an
-          armored space station with enough power to destroy an entire planet.
-        </Heading>
-        <Content>Content</Content>
-      </Alert>,
-    );
-
-    await testScreenshot("Alert edge cases");
   },
 );
