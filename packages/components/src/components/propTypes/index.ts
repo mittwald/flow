@@ -21,6 +21,7 @@ import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
+import type { InlineCodeProps } from "@/components/InlineCode";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -152,6 +153,7 @@ export interface FlowComponentPropsTypes {
   IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
   Initials: InitialsProps;
+  InlineCode: InlineCodeProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
@@ -252,6 +254,7 @@ const propsContextSupportingComponentsMap: Record<
   IllustratedMessage: true,
   Image: true,
   Initials: true,
+  InlineCode: true,
   Kbd: true,
   Label: true,
   LayoutCard: true,
