@@ -14,5 +14,6 @@ export const Color = createFlowRemoteComponent(
       wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
+    type: "ui",
   },
 );
