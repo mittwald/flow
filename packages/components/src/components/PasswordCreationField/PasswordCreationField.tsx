@@ -22,7 +22,7 @@ import clsx from "clsx";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
-import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
+import { formatValidationResult } from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
@@ -130,6 +130,7 @@ export const PasswordCreationField = flowComponent(
      * error and the bar color after every typing pause.
      */
     const [isValidationPending, setIsValidationPending] = useState(false);
+    const [validatedPassword, setValidatedPassword] = useState<string>();
     const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
     const { rememberValidationResult } = usePolicyValidationResult(
       validationPolicy,
@@ -151,6 +152,7 @@ export const PasswordCreationField = flowComponent(
           clearTimeout(loadingRef.current);
         }
         setIsValidationPending(false);
+        setValidatedPassword(password);
 
         if (isEmptyValue) {
           setPolicyValidationResult(() => ({
@@ -170,19 +172,16 @@ export const PasswordCreationField = flowComponent(
       isEmptyValue,
       policyValidationResult,
     );
-    let latestValidationErrorText = undefined;
-    if (stateFromValidationResult) {
-      const [translationKey, translationValues] = generateValidationTranslation(
-        stateFromValidationResult,
-      );
-      latestValidationErrorText = translate.format(
-        translationKey,
-        translationValues,
-      );
-    }
+    const latestValidationErrorText = stateFromValidationResult
+      ? formatValidationResult(translate, stateFromValidationResult)
+      : undefined;
 
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
+
+    // A form validating the same policy fails before the debounced check of
+    // the field: its fallback error would flash until the policy message.
+    const isPolicyResultPending = !isEmptyValue && validatedPassword !== value;
 
     const isInvalidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid === false;
@@ -381,11 +380,11 @@ export const PasswordCreationField = flowComponent(
           </PropsContextProvider>
           {/* After `children`: the field shows the first error in the tree, and
               a consumer's error wins over the policy's. */}
-          {latestValidationErrorText && (
+          {isInvalidFromValidationResult && latestValidationErrorText && (
             <FieldError>{latestValidationErrorText}</FieldError>
           )}
         </FieldErrorCaptureContext>
-        <FieldErrorView />
+        <FieldErrorView withoutFallback={isPolicyResultPending} />
       </Aria.TextField>
     );
   },

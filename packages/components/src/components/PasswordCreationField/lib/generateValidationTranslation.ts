@@ -2,6 +2,7 @@ import {
   RuleType,
   type RuleValidationResult,
 } from "@/integrations/@mittwald/password-tools-js";
+import type { Variables } from "@internationalized/string";
 
 const generateTranslationString = (
   rule: Partial<RuleValidationResult> & { translationKey?: string },
@@ -57,6 +58,39 @@ export const generateValidationTranslation = (
     translationKey,
     r as unknown as Record<string, string | number | boolean> | undefined,
   ];
+};
+
+interface ValidationResultFormatter {
+  format: (key: string, variables?: Variables) => string;
+}
+
+/**
+ * Formats the message of a validation result. A rule without a translation
+ * (e.g. a custom rule or char pool) gets a generic message instead of throwing,
+ * so a rejected password always shows why it was rejected.
+ *
+ * @internal
+ */
+export const formatValidationResult = (
+  formatter: ValidationResultFormatter,
+  result: Partial<RuleValidationResult>,
+  shortVersion = false,
+): string => {
+  const [translationKey, translationValues] = generateValidationTranslation(
+    result,
+    shortVersion,
+  );
+
+  try {
+    return formatter.format(translationKey, translationValues);
+  } catch {
+    return formatter.format(
+      shortVersion
+        ? "validation.general.fallback.short"
+        : "validation.general.fallback",
+      { isValid: result.isValid === true },
+    );
+  }
 };
 
 export default generateValidationTranslation;

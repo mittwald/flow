@@ -115,6 +115,14 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     }) ?? controller.field.value;
 
   const isFieldInvalid = controller.fieldState.invalid;
+  const errorMessage = controller.fieldState.error?.message;
+  const fieldError = errorMessage ? (
+    <FieldErrorView>{errorMessage}</FieldErrorView>
+  ) : isFieldInvalid ? (
+    <FieldErrorView isFallback>
+      {stringFormatter.format("validation.invalid")}
+    </FieldErrorView>
+  ) : null;
 
   const { disabled, ...controllerFieldProps } = controller.field;
 
@@ -137,9 +145,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       return (
         <>
           {p.children}
-          <FieldErrorView>
-            {controller.fieldState.error?.message}
-          </FieldErrorView>
+          {fieldError}
         </>
       );
     }),

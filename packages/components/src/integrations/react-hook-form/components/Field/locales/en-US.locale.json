@@ -1,4 +1,5 @@
 {
+  "validation.invalid": "Please check your input",
   "validation.max": "Maximum number of {number} reached",
   "validation.maxLength": "Please enter at most {number} characters",
   "validation.min": "Minimum number of {number} has not yet been reached",

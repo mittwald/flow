@@ -1,7 +1,10 @@
 import { type FC, type PropsWithChildren, useId } from "react";
 import { type PropsContext } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { useFieldError } from "@/lib/hooks/useFieldError";
+import {
+  type FieldErrorViewProps,
+  useFieldError,
+} from "@/lib/hooks/useFieldError";
 import { type ClassValue } from "clsx";
 import type { FlowComponentName } from "@/components/propTypes";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
@@ -15,7 +18,7 @@ interface FieldComponentProps {
 
 export interface UseFieldComponent {
   FieldErrorCaptureContext: FC<PropsWithChildren>;
-  FieldErrorView: FC;
+  FieldErrorView: FC<FieldErrorViewProps>;
   fieldPropsContext: PropsContext;
   /** For the field's outer element. */
   wrapperProps: {
