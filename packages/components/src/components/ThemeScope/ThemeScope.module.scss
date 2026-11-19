@@ -1,0 +1,5 @@
+// The scope only sets the theme: no surface, no spacing. Its text color comes
+// from the `[data-theme]` rule in `globals.scss`.
+.themeScope {
+  display: block;
+}
