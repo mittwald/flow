@@ -34,7 +34,11 @@ import {
 import { useForm } from "react-hook-form";
 import { afterEach, beforeEach, expect, vitest } from "vitest";
 import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
-import { Policy, RuleType } from "@/integrations/@mittwald/password-tools-js";
+import {
+  Policy,
+  RuleType,
+  usePasswordCreationFieldValidation,
+} from "@/integrations/@mittwald/password-tools-js";
 import { render } from "vitest-browser-react";
 import { type Locator, page, userEvent } from "vitest/browser";
 
@@ -697,12 +701,17 @@ describe("debounceValidate integration", () => {
 });
 
 describe("PasswordCreationField", () => {
-  test("shows the policy error while the form has no error", async () => {
-    const policy = Policy.fromDeclaration({
-      minComplexity: 1,
-      rules: [{ ruleType: RuleType.length, min: 8 }],
-    });
+  const policy = Policy.fromDeclaration({
+    minComplexity: 1,
+    rules: [{ ruleType: RuleType.length, min: 8 }],
+  });
 
+  const errorTexts = () =>
+    Array.from(
+      document.querySelectorAll(`.${fieldErrorStyles.fieldError}`),
+    ).map((error) => error.textContent?.trim());
+
+  test("shows the policy error while the form has no error", async () => {
     const TestForm = () => {
       const form = useForm<{ password: string }>();
       const Field = typedField(form);
@@ -724,12 +733,31 @@ describe("PasswordCreationField", () => {
       "abc",
     );
 
-    await expect
-      .poll(() =>
-        Array.from(
-          document.querySelectorAll(`.${fieldErrorStyles.fieldError}`),
-        ).map((error) => error.textContent?.trim()),
-      )
-      .toEqual([expect.stringMatching(/\S/)]);
+    await expect.poll(errorTexts).toEqual([expect.stringMatching(/\S/)]);
+  });
+
+  test("shows the policy error when the policy validation fails the form", async () => {
+    const TestForm = () => {
+      const form = useForm<{ password: string }>({ mode: "onChange" });
+      const Field = typedField(form);
+      const validate = usePasswordCreationFieldValidation(policy);
+      return (
+        <Form form={form} onSubmit={handleSubmit}>
+          <Field name="password" rules={{ validate }}>
+            <PasswordCreationField
+              aria-label="Password"
+              validationPolicy={policy}
+            />
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    const input = page.getByRole("textbox", { name: "Password" });
+    await userEvent.type(input, "abc");
+
+    await expect.element(input).toHaveAttribute("aria-invalid", "true");
+    await expect.poll(errorTexts).toEqual([expect.stringMatching(/\S/)]);
   });
 });
