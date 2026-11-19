@@ -732,6 +732,10 @@ test("a rejecting rule without a translation shows a generic error", async () =>
   await userEvent.type(page.getByRole("textbox"), "ABC");
 
   await expect
-    .element(page.getByText("The password does not meet the requirements."))
+    .element(
+      page.getByText(
+        "The password does not meet all requirements. The help next to the field shows which ones are missing.",
+      ),
+    )
     .toBeVisible();
 });
