@@ -30,12 +30,35 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Alert, Heading, Text, Content, Link, Button, ActionGroup },
+    components: {
+      Alert,
+      ColumnLayout,
+      Heading,
+      Text,
+      Content,
+      Link,
+      Button,
+      ActionGroup,
+    },
   }) => {
     await render(
-      <Alert>
-        <Heading>Heading</Heading>
-        <Content>
+      <ColumnLayout columnGap="xl">
+        <Alert>
+          <Heading>With Content</Heading>
+          <Content>
+            <Text>Text</Text>
+            <Link>Link</Link>
+            <Button>Button</Button>
+            <ActionGroup>
+              <Button color="secondary" variant="soft">
+                Secondary
+              </Button>
+              <Button>Primary</Button>
+            </ActionGroup>
+          </Content>
+        </Alert>
+        <Alert>
+          <Heading>Without Content</Heading>
           <Text>Text</Text>
           <Link>Link</Link>
           <Button>Button</Button>
@@ -45,8 +68,8 @@ test.each(testEnvironments)(
             </Button>
             <Button>Primary</Button>
           </ActionGroup>
-        </Content>
-      </Alert>,
+        </Alert>
+      </ColumnLayout>,
     );
 
     await testScreenshot("Alert content");
