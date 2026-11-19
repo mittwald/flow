@@ -733,7 +733,9 @@ describe("PasswordCreationField", () => {
       "abc",
     );
 
-    await expect.poll(errorTexts).toEqual([expect.stringMatching(/\S/)]);
+    await expect
+      .poll(errorTexts)
+      .toEqual(["Please choose a password with at least 8 characters."]);
   });
 
   test("shows the policy error when the policy validation fails the form", async () => {
@@ -758,6 +760,8 @@ describe("PasswordCreationField", () => {
     await userEvent.type(input, "abc");
 
     await expect.element(input).toHaveAttribute("aria-invalid", "true");
-    await expect.poll(errorTexts).toEqual([expect.stringMatching(/\S/)]);
+    await expect
+      .poll(errorTexts)
+      .toEqual(["Please choose a password with at least 8 characters."]);
   });
 });
