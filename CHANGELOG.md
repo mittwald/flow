@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/mittwald/flow/compare/1.6.1...1.6.2) (2026-11-19)
+
+### Bug Fixes
+
+* **Remote:** keep event handlers stable across remote renders ([#3675](https://github.com/mittwald/flow/issues/3675)) ([04fb89d](https://github.com/mittwald/flow/commit/04fb89d8ef2e53af8ca65b702686d9d6f8121fab))
+
 ## [1.6.1](https://github.com/mittwald/flow/compare/1.6.0...1.6.1) (2026-11-19)
 
 ### Bug Fixes
