@@ -1,9 +1,5 @@
 import * as RemoteReactHookForm from "@/integrations/react-hook-form";
-import {
-  renderLocal,
-  renderRemote,
-  testEnvironments,
-} from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import * as LocalReactHookForm from "@mittwald/flow-react-components/react-hook-form";
 import {
   type PolicyGenericDeclaration,
@@ -15,24 +11,18 @@ import { useForm } from "react-hook-form";
 import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
-const reactHookFormTestEnvironments = [
-  {
-    ...testEnvironments[0],
-    render: renderLocal,
-    components: {
-      ...testEnvironments[0].components,
-      ...LocalReactHookForm,
-    },
+const reactHookFormTestEnvironments = testEnvironments.map((environment) => ({
+  ...environment,
+  components: {
+    ...environment.components,
+    ...(String(environment) === "Local"
+      ? LocalReactHookForm
+      : RemoteReactHookForm),
   },
-  {
-    ...testEnvironments[1],
-    render: renderRemote,
-    components: {
-      ...testEnvironments[1].components,
-      ...RemoteReactHookForm,
-    },
-  },
-] as const;
+}));
+
+// The fallback error is not in a published version yet.
+const skipsCrossVersion = crossVersion({ below: "1.6.1" });
 
 const validationPolicy: PolicyGenericDeclaration = {
   minComplexity: 1,
@@ -41,7 +31,7 @@ const validationPolicy: PolicyGenericDeclaration = {
 const policyError = "Please choose a password with at least 8 characters.";
 const genericError = "Please check your input";
 
-test.each(reactHookFormTestEnvironments)(
+test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
   "PasswordCreationField policy error without form validation (%s)",
   async ({
     testScreenshot,
@@ -79,7 +69,7 @@ test.each(reactHookFormTestEnvironments)(
   },
 );
 
-test.each(reactHookFormTestEnvironments)(
+test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
   "PasswordCreationField policy error with form validation (%s)",
   async ({
     testScreenshot,
@@ -119,7 +109,7 @@ test.each(reactHookFormTestEnvironments)(
   },
 );
 
-test.each(reactHookFormTestEnvironments)(
+test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
   "PasswordCreationField fallback form error with a valid password (%s)",
   async ({
     testScreenshot,
