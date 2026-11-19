@@ -110,6 +110,52 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 );
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
+  "SkeletonMode chat (%s)",
+  async ({ testScreenshot, render, components }) => {
+    const {
+      Text,
+      Avatar,
+      Initials,
+      Chat,
+      MessageThread,
+      Message,
+      Header,
+      Content,
+    } = components;
+
+    await render(
+      <SkeletonComparison components={components}>
+        <Chat height={220}>
+          <MessageThread>
+            <Message>
+              <Header>
+                <Avatar>
+                  <Initials>Max Mustermann</Initials>
+                </Avatar>
+                <Text>Max Mustermann</Text>
+              </Header>
+              <Content>
+                <Text>Das Zertifikat für den Webshop wurde verlängert.</Text>
+              </Content>
+            </Message>
+            <Message type="sender">
+              <Header>
+                <Text>Support</Text>
+              </Header>
+              <Content>
+                <Text>Danke, der Webshop ist wieder erreichbar.</Text>
+              </Content>
+            </Message>
+          </MessageThread>
+        </Chat>
+      </SkeletonComparison>,
+    );
+
+    await testScreenshot("SkeletonMode chat");
+  },
+);
+
+test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
   "SkeletonMode charts and editors (%s)",
   async ({ testScreenshot, render, components }) => {
     const {
@@ -186,10 +232,9 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
 );
 
 test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
-  "SkeletonMode lists, tables and chat (%s)",
+  "SkeletonMode lists and tables (%s)",
   async ({ testScreenshot, render, components }) => {
     const {
-      Flex,
       Section,
       Heading,
       Text,
@@ -203,90 +248,58 @@ test.skipIf(crossVersion({ below: skeletonModeSince })).each(testEnvironments)(
       TableRow,
       TableCell,
       typedList,
-      Chat,
-      MessageThread,
-      Message,
-      Header,
-      Content,
     } = components;
 
     const DomainList = typedList<{ hostname: string; type: string }>();
 
     await render(
-      <Flex direction="column" gap="m">
-        <SkeletonComparison components={components}>
-          <Section>
-            <DomainList.List aria-label="Domains">
-              <DomainList.StaticData
-                data={[
-                  { hostname: "webshop.example-domain.de", type: "Domain" },
-                  { hostname: "blog.example-domain.de", type: "Subdomain" },
-                ]}
-              />
-              <DomainList.Item textValue={(domain) => domain.hostname}>
-                {(domain) => (
-                  <DomainList.ItemView>
-                    <Avatar>
-                      <Initials>{domain.hostname}</Initials>
-                    </Avatar>
-                    <Heading>
-                      {domain.hostname}
-                      <AlertBadge status="warning">Unverifiziert</AlertBadge>
-                    </Heading>
-                    <Text>{domain.type}</Text>
-                  </DomainList.ItemView>
-                )}
-              </DomainList.Item>
-            </DomainList.List>
-            <Table aria-label="Zertifikate">
-              <TableHeader>
-                <TableColumn>Domain</TableColumn>
-                <TableColumn>Gültig bis</TableColumn>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell>webshop.example-domain.de</TableCell>
-                  <TableCell>12.01.2027</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>blog.example-domain.de</TableCell>
-                  <TableCell>
-                    <Text>03.03.2027</Text>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </Section>
-        </SkeletonComparison>
-        <SkeletonComparison components={components}>
-          <Chat height={220}>
-            <MessageThread>
-              <Message>
-                <Header>
+      <SkeletonComparison components={components}>
+        <Section>
+          <DomainList.List aria-label="Domains">
+            <DomainList.StaticData
+              data={[
+                { hostname: "webshop.example-domain.de", type: "Domain" },
+                { hostname: "blog.example-domain.de", type: "Subdomain" },
+              ]}
+            />
+            <DomainList.Item textValue={(domain) => domain.hostname}>
+              {(domain) => (
+                <DomainList.ItemView>
                   <Avatar>
-                    <Initials>Max Mustermann</Initials>
+                    <Initials>{domain.hostname}</Initials>
                   </Avatar>
-                  <Text>Max Mustermann</Text>
-                </Header>
-                <Content>
-                  <Text>Das Zertifikat für den Webshop wurde verlängert.</Text>
-                </Content>
-              </Message>
-              <Message type="sender">
-                <Header>
-                  <Text>Support</Text>
-                </Header>
-                <Content>
-                  <Text>Danke, der Webshop ist wieder erreichbar.</Text>
-                </Content>
-              </Message>
-            </MessageThread>
-          </Chat>
-        </SkeletonComparison>
-      </Flex>,
+                  <Heading>
+                    {domain.hostname}
+                    <AlertBadge status="warning">Unverifiziert</AlertBadge>
+                  </Heading>
+                  <Text>{domain.type}</Text>
+                </DomainList.ItemView>
+              )}
+            </DomainList.Item>
+          </DomainList.List>
+          <Table aria-label="Zertifikate">
+            <TableHeader>
+              <TableColumn>Domain</TableColumn>
+              <TableColumn>Gültig bis</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>webshop.example-domain.de</TableCell>
+                <TableCell>12.01.2027</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>blog.example-domain.de</TableCell>
+                <TableCell>
+                  <Text>03.03.2027</Text>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Section>
+      </SkeletonComparison>,
     );
 
-    await testScreenshot("SkeletonMode lists, tables and chat");
+    await testScreenshot("SkeletonMode lists and tables");
   },
 );
 
