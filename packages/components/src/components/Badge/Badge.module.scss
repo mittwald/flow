@@ -8,13 +8,11 @@
   max-width: 100%;
 
   --badge-size: calc(var(--badge--line-height) + var(--badge--padding-y) * 2);
-  --content-size: calc(var(--badge-size) - var(--badge--border-width) * 2);
+  --content-size: var(--badge-size);
 
   .content,
   .button {
     border-radius: var(--badge--corner-radius);
-    border-width: var(--badge--border-width);
-    border-style: var(--badge--border-style);
     font-size: var(--badge--font-size);
     font-weight: var(--badge--font-weight);
     padding: 0;
@@ -92,12 +90,9 @@
   .action,
   .close {
     height: var(--content-size);
-    padding: calc(var(--badge--padding-y) - var(--badge--border-width));
+    padding: var(--badge--padding-y);
     border-radius: 0;
-    margin-inline-start: calc(
-      (var(--content-size) + var(--badge--border-width)) * -1
-    );
-    margin-top: var(--badge--border-width);
+    margin-inline-start: calc(var(--content-size) * -1);
   }
 
   /* The trailing button rounds off the badge */
@@ -109,9 +104,7 @@
 
   &:has(.action):has(.close) {
     .action {
-      margin-inline-start: calc(
-        (var(--content-size) * 2 + var(--badge--border-width)) * -1
-      );
+      margin-inline-start: calc(var(--content-size) * -2);
     }
 
     .close {
