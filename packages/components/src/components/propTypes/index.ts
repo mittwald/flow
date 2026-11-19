@@ -45,6 +45,7 @@ import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SeparatorProps } from "@/components/Separator";
+import type { SkeletonProps } from "@/components/Skeleton";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
@@ -196,6 +197,7 @@ export interface FlowComponentPropsTypes {
   Select: SelectProps;
   Kbd: KbdProps;
   SectionHeader: SectionHeaderProps;
+  Skeleton: SkeletonProps;
   Slider: SliderProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -299,6 +301,7 @@ const propsContextSupportingComponentsMap: Record<
   Segment: true,
   SegmentedControl: true,
   Select: true,
+  Skeleton: true,
   Slider: true,
   Switch: true,
   Tabs: true,
