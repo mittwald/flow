@@ -33,6 +33,8 @@ import {
 } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { afterEach, beforeEach, expect, vitest } from "vitest";
+import fieldErrorStyles from "@/components/FieldError/FieldError.module.scss";
+import { Policy, RuleType } from "@/integrations/@mittwald/password-tools-js";
 import { render } from "vitest-browser-react";
 import { type Locator, page, userEvent } from "vitest/browser";
 
@@ -691,5 +693,43 @@ describe("debounceValidate integration", () => {
     expect(validate).toHaveBeenLastCalledWith("abc", expect.any(Object));
 
     await expect.element(page.getByText("Too short")).not.toBeInTheDocument();
+  });
+});
+
+describe("PasswordCreationField", () => {
+  test("shows the policy error while the form has no error", async () => {
+    const policy = Policy.fromDeclaration({
+      minComplexity: 1,
+      rules: [{ ruleType: RuleType.length, min: 8 }],
+    });
+
+    const TestForm = () => {
+      const form = useForm<{ password: string }>();
+      const Field = typedField(form);
+      return (
+        <Form form={form} onSubmit={handleSubmit}>
+          <Field name="password">
+            <PasswordCreationField
+              aria-label="Password"
+              validationPolicy={policy}
+            />
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    await userEvent.type(
+      page.getByRole("textbox", { name: "Password" }),
+      "abc",
+    );
+
+    await expect
+      .poll(() =>
+        Array.from(
+          document.querySelectorAll(`.${fieldErrorStyles.fieldError}`),
+        ).map((error) => error.textContent?.trim()),
+      )
+      .toEqual([expect.stringMatching(/\S/)]);
   });
 });

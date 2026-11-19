@@ -115,6 +115,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     }) ?? controller.field.value;
 
   const isFieldInvalid = controller.fieldState.invalid;
+  const errorMessage = controller.fieldState.error?.message;
 
   const { disabled, ...controllerFieldProps } = controller.field;
 
@@ -137,9 +138,9 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       return (
         <>
           {p.children}
-          <FieldErrorView>
-            {controller.fieldState.error?.message}
-          </FieldErrorView>
+          {/* Without a message the field's first error would be an empty one,
+              hiding the field's own (e.g. a password policy's) error. */}
+          {errorMessage && <FieldErrorView>{errorMessage}</FieldErrorView>}
         </>
       );
     }),
