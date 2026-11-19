@@ -130,6 +130,7 @@ export const PasswordCreationField = flowComponent(
      * error and the bar color after every typing pause.
      */
     const [isValidationPending, setIsValidationPending] = useState(false);
+    const [validatedPassword, setValidatedPassword] = useState<string>();
     const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
     const { rememberValidationResult } = usePolicyValidationResult(
       validationPolicy,
@@ -151,6 +152,7 @@ export const PasswordCreationField = flowComponent(
           clearTimeout(loadingRef.current);
         }
         setIsValidationPending(false);
+        setValidatedPassword(password);
 
         if (isEmptyValue) {
           setPolicyValidationResult(() => ({
@@ -176,6 +178,10 @@ export const PasswordCreationField = flowComponent(
 
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
+
+    // A form validating the same policy fails before the debounced check of
+    // the field: its fallback error would flash until the policy message.
+    const isPolicyResultPending = !isEmptyValue && validatedPassword !== value;
 
     const isInvalidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid === false;
@@ -378,7 +384,7 @@ export const PasswordCreationField = flowComponent(
             <FieldError>{latestValidationErrorText}</FieldError>
           )}
         </FieldErrorCaptureContext>
-        <FieldErrorView />
+        <FieldErrorView withoutFallback={isPolicyResultPending} />
       </Aria.TextField>
     );
   },

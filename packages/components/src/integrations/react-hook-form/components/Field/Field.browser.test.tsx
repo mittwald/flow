@@ -32,6 +32,12 @@ import {
   debounceValidate,
 } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
+import {
+  Policy,
+  type PolicyDeclaration,
+  RuleType,
+  usePasswordCreationFieldValidation,
+} from "@/integrations/@mittwald/password-tools-js";
 import { afterEach, beforeEach, expect, vitest } from "vitest";
 import { render } from "vitest-browser-react";
 import { type Locator, page, userEvent } from "vitest/browser";
@@ -690,5 +696,50 @@ describe("debounceValidate integration", () => {
     expect(validate).toHaveBeenLastCalledWith("abc", expect.any(Object));
 
     await expect.element(page.getByText("Too short")).not.toBeInTheDocument();
+  });
+});
+
+describe("PasswordCreationField", () => {
+  test("holds the fallback error back until its policy has a result", async () => {
+    const declaration: PolicyDeclaration = {
+      minComplexity: 1,
+      rules: [{ ruleType: RuleType.length, min: 8 }],
+    };
+    const fieldPolicy = Policy.fromDeclaration(declaration);
+    const validateField = fieldPolicy.validate.bind(fieldPolicy);
+    fieldPolicy.validate = async (password) => {
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      return validateField(password);
+    };
+
+    const TestForm = () => {
+      const form = useForm<{ password: string }>({ mode: "onChange" });
+      const Field = typedField(form);
+      const validate = usePasswordCreationFieldValidation(declaration);
+      return (
+        <Form form={form} onSubmit={handleSubmit}>
+          <Field name="password" rules={{ validate }}>
+            <PasswordCreationField
+              aria-label="Password"
+              validationPolicy={fieldPolicy}
+            />
+          </Field>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+    const input = page.getByRole("textbox", { name: "Password" });
+    await userEvent.type(input, "abc");
+
+    await expect.element(input).toHaveAttribute("aria-invalid", "true");
+    expect(page.getByText("Please check your input").query()).toBeNull();
+
+    await expect
+      .element(
+        page.getByText("Please choose a password with at least 8 characters."),
+      )
+      .toBeVisible();
+    expect(page.getByText("Please check your input").query()).toBeNull();
   });
 });

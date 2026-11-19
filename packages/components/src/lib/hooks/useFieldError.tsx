@@ -16,6 +16,11 @@ import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponen
 import type { FlowComponentName } from "@/components/propTypes";
 import { FieldErrorRenderedContext } from "@/lib/hooks/fieldErrorRenderedContext";
 
+export interface FieldErrorViewProps {
+  /** Holds a fallback error back, e.g. while the field validates on its own. */
+  withoutFallback?: boolean;
+}
+
 export interface UseFieldErrorOptions {
   fieldErrorId: string;
   tunnelId?: string;
@@ -59,38 +64,40 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
 
   // Keep the component identity stable: a new one per render makes React
   // remount the error on every render of the field (each keystroke).
-  const FieldErrorView: FC = useMemo(
-    () => () => {
-      if (currentTunnelId) {
-        return null;
-      }
+  const FieldErrorView: FC<FieldErrorViewProps> = useMemo(
+    () =>
+      ({ withoutFallback }) => {
+        if (currentTunnelId) {
+          return null;
+        }
 
-      return (
-        <FieldErrorRenderedContext value={setRenderedFieldErrorId}>
-          <UiComponentTunnelExit id={tunnelId} component={options.component}>
-            {(children) => {
-              const childrenArray = React.Children.toArray(children);
-              return (
-                <UiComponentTunnelExit
-                  id={fallbackTunnelId}
-                  component={options.component}
-                >
-                  {(fallbackChildren) => {
-                    const fallbackChildrenArray =
-                      React.Children.toArray(fallbackChildren);
-                    return (
-                      <ClearPropsContext>
-                        {childrenArray[0] ?? fallbackChildrenArray[0]}
-                      </ClearPropsContext>
-                    );
-                  }}
-                </UiComponentTunnelExit>
-              );
-            }}
-          </UiComponentTunnelExit>
-        </FieldErrorRenderedContext>
-      );
-    },
+        return (
+          <FieldErrorRenderedContext value={setRenderedFieldErrorId}>
+            <UiComponentTunnelExit id={tunnelId} component={options.component}>
+              {(children) => {
+                const childrenArray = React.Children.toArray(children);
+                return (
+                  <UiComponentTunnelExit
+                    id={fallbackTunnelId}
+                    component={options.component}
+                  >
+                    {(fallbackChildren) => {
+                      const fallbackChildrenArray =
+                        React.Children.toArray(fallbackChildren);
+                      return (
+                        <ClearPropsContext>
+                          {childrenArray[0] ??
+                            (withoutFallback ? null : fallbackChildrenArray[0])}
+                        </ClearPropsContext>
+                      );
+                    }}
+                  </UiComponentTunnelExit>
+                );
+              }}
+            </UiComponentTunnelExit>
+          </FieldErrorRenderedContext>
+        );
+      },
     [currentTunnelId, fallbackTunnelId, tunnelId, options.component],
   );
 
