@@ -1,12 +1,18 @@
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
 const states = ["info", "success", "warning", "danger"] as const;
 const legendPositions = ["top", "right", "bottom", "left"] as const;
+const staticColors = ["light-static", "dark-static"] as const;
 
 test.each(testEnvironments)(
   "DonutChart default (%s)",
-  async ({ testScreenshot, render, components: { Flex, DonutChart } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { AccentBox, Flex, DonutChart },
+  }) => {
     await render(
       <Flex direction="column" gap="m">
         <Flex gap="s">
@@ -29,6 +35,23 @@ test.each(testEnvironments)(
         <DonutChart aria-label="label" value={3}>
           Custom content
         </DonutChart>
+        {/* The content color of the AccentBox reaches the value. */}
+        <Flex gap="s">
+          {staticColors.map((color) => (
+            <AccentBox
+              key={color}
+              backgroundColor={alphaColorAccentBoxBackground(color)}
+              color={color}
+            >
+              <Flex gap="s">
+                <DonutChart aria-label="label" value={82} />
+                <DonutChart aria-label="label" value={3}>
+                  Custom content
+                </DonutChart>
+              </Flex>
+            </AccentBox>
+          ))}
+        </Flex>
       </Flex>,
     );
 
