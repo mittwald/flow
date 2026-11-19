@@ -4,14 +4,12 @@ import styles from "./InlineCode.module.scss";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
 import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface InlineCodeProps
   extends
-    PropsWithChildren<Omit<ComponentProps<"code">, "ref">>,
+    PropsWithChildren<ComponentProps<"code">>,
     FlowComponentProps<HTMLElement> {
   /** The color schema of the inline code component. @default "default" */
   color?: "default" | AlphaColor;

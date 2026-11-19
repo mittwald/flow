@@ -13,7 +13,11 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { contentColored } from "@/lib/propsContext/contentColor";
 import { SectionHeadingReset } from "@/components/Section/context";
 import { useDeprecatedColor } from "@/lib/hooks/useDeprecatedColor";
@@ -152,6 +156,7 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
   const rootClassName = clsx(
     styles.accentBox,
     isAFlowColor && styleClassname(styles, backgroundColor),
+    backgroundImage && styles.backgroundImage,
     className,
   );
 
@@ -164,9 +169,20 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const linkProps = { color: contentColor ?? "dark" } as const;
 
+  /* A Link or Button in the "action" slot covers the whole box. */
+  const actionClassName = (slot: string | undefined) =>
+    slot === "action" ? styles.action : undefined;
+
   const contentPropsContext: PropsContext = {
     ...contentColorProps,
-    Link: linkProps,
+    Link: {
+      ...linkProps,
+      className: dynamic((props) => actionClassName(props.slot)),
+    },
+    Button: {
+      ...contentColorProps.Button,
+      className: dynamic((props) => actionClassName(props.slot)),
+    },
     Text: {
       ...contentColorProps.Text,
       Link: linkProps,

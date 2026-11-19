@@ -4,6 +4,10 @@ declare const classNames: {
   readonly "gradient-sage": "gradient-sage";
   readonly "gradient-lilac": "gradient-lilac";
   readonly "gradient-salmon": "gradient-salmon";
+  readonly backgroundImage: "backgroundImage";
+  readonly action: "action";
+  readonly "flow--button": "flow--button";
+  readonly "flow--link": "flow--link";
   readonly neutral: "neutral";
   readonly blue: "blue";
   readonly navy: "navy";

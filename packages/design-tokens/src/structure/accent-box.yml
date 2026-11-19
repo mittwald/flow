@@ -19,6 +19,10 @@ accent-box:
     value: "{gradient-lilac.color}"
   background-color-gradient-salmon:
     value: "{gradient-salmon.color}"
+  hover-overlay-color:
+    value: "{dark.color.quiet.100}"
+  hover-overlay-color-image:
+    value: "{dark-static.color.quiet.100}"
 
   padding:
     value: "{size-px.m}"
