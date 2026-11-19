@@ -19,6 +19,8 @@
  * that describe what to render, not how React holds state while rendering it.
  */
 export const unsupportedFiles: Record<string, string> = {
+  "PasswordCreationFieldForm.browser.test.tsx":
+    "The scenarios define a React component that holds a react-hook-form form (useForm), and the react-hook-form integration is a React binding with no Vue counterpart.",
   "List.browser.test.tsx":
     "The scenarios define a React Wrapper component and build their list with typedList<T>(), which is a factory rather than a component the converter can map. A Vue List exists — src/tests/List.browser.test.ts drives it against the same host.",
 };
