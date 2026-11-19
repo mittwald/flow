@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0-next.0](https://github.com/mittwald/flow/compare/1.6.0...1.7.0-next.0) (2026-11-19)
+
+### Bug Fixes
+
+* **Alert:** support text and buttons without Content ([#3670](https://github.com/mittwald/flow/issues/3670)) ([e9b1c62](https://github.com/mittwald/flow/commit/e9b1c62ffd8c401ee9ff0ceb482eb562c7e2a171))
+
 ## [1.6.0](https://github.com/mittwald/flow/compare/1.6.0-next.72...1.6.0) (2026-11-18)
 
 ### Miscellaneous Chores

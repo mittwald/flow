@@ -37,6 +37,7 @@ test.each(testEnvironments)(
     components: {
       Flex,
       Alert,
+      ColumnLayout,
       Heading,
       Text,
       Content,
@@ -50,16 +51,30 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        <Alert>
-          <Heading>
-            Heading
-            <Badge>Badge</Badge>
-          </Heading>
-          <Content>
+        <ColumnLayout columnGap="xl">
+          <Alert>
+            <Heading>
+              With Content
+              <Badge>Badge</Badge>
+            </Heading>
+            <Content>
+              <Text>Text</Text>
+              <InlineCode>InlineCode</InlineCode>
+              <Badge>Badge</Badge>
+              <CopyButton text="InlineCode" />
+              <Link>Link</Link>
+              <Button>Button</Button>
+              <ActionGroup>
+                <Button color="secondary" variant="soft">
+                  Secondary
+                </Button>
+                <Button>Primary</Button>
+              </ActionGroup>
+            </Content>
+          </Alert>
+          <Alert>
+            <Heading>Without Content</Heading>
             <Text>Text</Text>
-            <InlineCode>InlineCode</InlineCode>
-            <Badge>Badge</Badge>
-            <CopyButton text="InlineCode" />
             <Link>Link</Link>
             <Button>Button</Button>
             <ActionGroup>
@@ -68,8 +83,8 @@ test.each(testEnvironments)(
               </Button>
               <Button>Primary</Button>
             </ActionGroup>
-          </Content>
-        </Alert>
+          </Alert>
+        </ColumnLayout>
         <Alert>
           <Heading>
             A long time ago in a galaxy far, far away, the Rebel Alliance struck

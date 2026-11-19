@@ -42,6 +42,17 @@ export const Alert = flowComponent("Alert", (props) => {
     },
   };
 
+  const actionsPropsContext = {
+    Button: {
+      ...contentColorProps.Button,
+      size: "s",
+    },
+    ActionGroup: {
+      preserveOrder: true,
+      size: "s",
+    },
+  } satisfies PropsContext;
+
   const propsContext: PropsContext = {
     ...contentColorProps,
     ...contentLinkProps,
@@ -61,15 +72,9 @@ export const Alert = flowComponent("Alert", (props) => {
       ...contentColorProps,
       ...contentLinkProps,
       className: styles.content,
-      Button: {
-        ...contentColorProps.Button,
-        size: "s",
-      },
-      ActionGroup: {
-        preserveOrder: true,
-        size: "s",
-      },
+      ...actionsPropsContext,
     },
+    ...actionsPropsContext,
   };
 
   return (

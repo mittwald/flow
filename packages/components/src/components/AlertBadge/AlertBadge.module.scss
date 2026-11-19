@@ -11,6 +11,7 @@
   display: inline-flex;
   align-items: center;
   column-gap: var(--badge--spacing);
+  width: fit-content;
   max-width: 100%;
 
   .text {

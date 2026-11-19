@@ -1,9 +1,9 @@
 declare const classNames: {
   readonly alert: "alert";
   readonly icon: "icon";
+  readonly heading: "heading";
   readonly content: "content";
   readonly info: "info";
-  readonly heading: "heading";
   readonly warning: "warning";
   readonly danger: "danger";
   readonly success: "success";
