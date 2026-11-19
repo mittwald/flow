@@ -22,6 +22,8 @@
   border-radius: 0;
   // Same inset as the page column (layout.module.scss), so the content lines up
   padding: var(--size-px--xxl) var(--size-px--xl);
+  // No token: the near-black navy of the band images; Flow's darkest
+  // semantic colors are neutral grey
   background-color: #05051a;
 
   @media (max-width: 768px) {
