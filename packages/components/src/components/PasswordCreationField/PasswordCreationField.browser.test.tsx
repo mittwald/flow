@@ -710,3 +710,28 @@ describe("PasswordCreationField Tests", () => {
     expect(inputElement).toHaveValue("d!iBCsc8(l~i");
   });
 });
+
+test("a rejecting rule without a translation shows a generic error", async () => {
+  const untranslatedPolicy = Policy.fromDeclaration({
+    minComplexity: 1,
+    rules: [
+      {
+        identifier: "lowercase",
+        ruleType: RuleType.charPool,
+        charPools: ["lowercase"],
+        min: 1,
+      },
+    ],
+  });
+
+  await render(
+    <PasswordCreationFieldTestComponent
+      validationPolicy={untranslatedPolicy}
+    />,
+  );
+  await userEvent.type(page.getByRole("textbox"), "ABC");
+
+  await expect
+    .element(page.getByText("The password does not meet the requirements."))
+    .toBeVisible();
+});

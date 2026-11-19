@@ -28,6 +28,8 @@
   "validation.charPool.special.min": "{min, plural, one {Please use at least one special character.} other {Please use at least {min} special characters.}}",
   "validation.charPool.special.min.short": "{min, plural, one {At least one special character} other {At least {min} special characters}}",
   "validation.general.failingComplexity": "Please increase the complexity of your password.",
+  "validation.general.fallback": "{isValid, select, true {The password meets the requirements.} other {The password does not meet the requirements.}}",
+  "validation.general.fallback.short": "{isValid, select, true {Requirement met} other {Requirement not met}}",
   "validation.general.optimizeComplexity": "Your password meets the minimum requirements.",
   "validation.general.securePassword": "Awesome! Your password is secure.",
   "validation.general.short.unspecified": "No specific requirements",

@@ -22,7 +22,7 @@ import clsx from "clsx";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
-import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
+import { formatValidationResult } from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
@@ -170,16 +170,9 @@ export const PasswordCreationField = flowComponent(
       isEmptyValue,
       policyValidationResult,
     );
-    let latestValidationErrorText = undefined;
-    if (stateFromValidationResult) {
-      const [translationKey, translationValues] = generateValidationTranslation(
-        stateFromValidationResult,
-      );
-      latestValidationErrorText = translate.format(
-        translationKey,
-        translationValues,
-      );
-    }
+    const latestValidationErrorText = stateFromValidationResult
+      ? formatValidationResult(translate, stateFromValidationResult)
+      : undefined;
 
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
