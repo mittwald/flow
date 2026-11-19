@@ -22,13 +22,16 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "AlertBadge edge cases (%s)",
-  async ({ testScreenshot, render, components: { AlertBadge } }) => {
+  async ({ testScreenshot, render, components: { AlertBadge, Flex } }) => {
     await render(
-      <AlertBadge>
-        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-        decisive blow against the Galactic Empire. Rebel spies managed to steal
-        secret plans to the Empire's ultimate weapon, the Death Star.
-      </AlertBadge>,
+      <Flex direction="column" gap="s">
+        <AlertBadge>
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star.
+        </AlertBadge>
+        <AlertBadge>Short</AlertBadge>
+      </Flex>,
     );
 
     await testScreenshot("AlertBadge edge cases");

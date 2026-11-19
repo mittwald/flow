@@ -45,14 +45,12 @@ export default () => {
               <Heading>
                 Kein Vertragspartner hinterlegt
               </Heading>
-              <Content>
-                <Text>
-                  Für diese Organisation ist noch kein
-                  Vertragspartner hinterlegt. Lege einen an,
-                  um mit der Installation fortzufahren.
-                </Text>
-                <Button>Vertragspartner anlegen</Button>
-              </Content>
+              <Text>
+                Für diese Organisation ist noch kein
+                Vertragspartner hinterlegt. Lege einen an,
+                um mit der Installation fortzufahren.
+              </Text>
+              <Button>Vertragspartner anlegen</Button>
             </Alert>
           </Section>
         </Content>
