@@ -1,12 +1,15 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
+
+const staticColors = ["light-static", "dark-static"] as const;
 
 test.each(testEnvironments)(
   "Truncate (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Text, Flex, Truncate, Heading },
+    components: { AccentBox, Text, Flex, Truncate, Heading },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -44,6 +47,18 @@ test.each(testEnvironments)(
             to destroy an entire planet.
           </Truncate>
         </Text>
+        {/* The content color of the AccentBox reaches the text inside. */}
+        {staticColors.map((color) => (
+          <AccentBox
+            key={color}
+            backgroundColor={alphaColorAccentBoxBackground(color)}
+            color={color}
+          >
+            <Truncate>
+              <Text>Rebel spies stole the Death Star plans.</Text>
+            </Truncate>
+          </AccentBox>
+        ))}
       </Flex>,
     );
 
