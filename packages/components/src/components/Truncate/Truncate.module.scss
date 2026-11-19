@@ -5,5 +5,15 @@
 
   &.ellipsis {
     text-overflow: ellipsis;
+
+    /* A nested element such as `Text` cuts its own text, so the ellipsis takes
+       its color instead of the color around `Truncate`. */
+    > * {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+    }
   }
 }

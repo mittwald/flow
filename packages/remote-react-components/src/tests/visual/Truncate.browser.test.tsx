@@ -55,7 +55,12 @@ test.each(testEnvironments)(
             color={color}
           >
             <Truncate>
-              <Text>Rebel spies stole the Death Star plans.</Text>
+              <Text>
+                A long time ago in a galaxy far, far away, the Rebel Alliance
+                struck a decisive blow against the Galactic Empire. During the
+                battle, rebel spies managed to steal secret plans to the
+                Empire's ultimate weapon, the Death Star.
+              </Text>
             </Truncate>
           </AccentBox>
         ))}
