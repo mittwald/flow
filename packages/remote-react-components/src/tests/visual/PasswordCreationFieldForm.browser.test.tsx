@@ -1,5 +1,4 @@
-import * as RemoteReactHookForm from "@/integrations/react-hook-form";
-import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { testEnvironments } from "@/tests/lib/environments";
 import * as LocalReactHookForm from "@mittwald/flow-react-components/react-hook-form";
 import {
   type PolicyGenericDeclaration,
@@ -11,18 +10,19 @@ import { useForm } from "react-hook-form";
 import { expect, test } from "vitest";
 import { userEvent } from "vitest/browser";
 
-const reactHookFormTestEnvironments = testEnvironments.map((environment) => ({
-  ...environment,
-  components: {
-    ...environment.components,
-    ...(String(environment) === "Local"
-      ? LocalReactHookForm
-      : RemoteReactHookForm),
-  },
-}));
+type TestEnvironment = (typeof testEnvironments)[number];
 
-// The fallback error is not in a published version yet.
-const skipsCrossVersion = crossVersion({ below: "1.6.1" });
+// Harnesses that swap the environments (cross-version, Vue parity) cannot
+// render a react-hook-form form. The remote integration is loaded per test, so
+// those harnesses never import it.
+const runsInHarness = testEnvironments.some(
+  (environment) => !["Local", "Remote"].includes(String(environment)),
+);
+
+const reactHookFormOf = async (environment: TestEnvironment) =>
+  String(environment) === "Local"
+    ? LocalReactHookForm
+    : await import("@/integrations/react-hook-form");
 
 const validationPolicy: PolicyGenericDeclaration = {
   minComplexity: 1,
@@ -31,14 +31,16 @@ const validationPolicy: PolicyGenericDeclaration = {
 const policyError = "Please choose a password with at least 8 characters.";
 const genericError = "Please check your input";
 
-test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
+test.skipIf(runsInHarness).each(testEnvironments)(
   "PasswordCreationField policy error without form validation (%s)",
-  async ({
-    testScreenshot,
-    render,
-    container,
-    components: { Field, Form, Label, PasswordCreationField },
-  }) => {
+  async (environment) => {
+    const {
+      testScreenshot,
+      render,
+      container,
+      components: { Label, PasswordCreationField },
+    } = environment;
+    const { Field, Form } = await reactHookFormOf(environment);
     const TestForm = () => {
       const form = useForm<{ password: string }>({ mode: "onChange" });
 
@@ -69,14 +71,16 @@ test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
   },
 );
 
-test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
+test.skipIf(runsInHarness).each(testEnvironments)(
   "PasswordCreationField policy error with form validation (%s)",
-  async ({
-    testScreenshot,
-    render,
-    container,
-    components: { Field, Form, Label, PasswordCreationField },
-  }) => {
+  async (environment) => {
+    const {
+      testScreenshot,
+      render,
+      container,
+      components: { Label, PasswordCreationField },
+    } = environment;
+    const { Field, Form } = await reactHookFormOf(environment);
     const TestForm = () => {
       const form = useForm<{ password: string }>({ mode: "onChange" });
       const validate = usePasswordCreationFieldValidation(validationPolicy);
@@ -109,14 +113,16 @@ test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
   },
 );
 
-test.skipIf(skipsCrossVersion).each(reactHookFormTestEnvironments)(
+test.skipIf(runsInHarness).each(testEnvironments)(
   "PasswordCreationField fallback form error with a valid password (%s)",
-  async ({
-    testScreenshot,
-    render,
-    container,
-    components: { Field, Form, Label, PasswordCreationField },
-  }) => {
+  async (environment) => {
+    const {
+      testScreenshot,
+      render,
+      container,
+      components: { Label, PasswordCreationField },
+    } = environment;
+    const { Field, Form } = await reactHookFormOf(environment);
     const TestForm = () => {
       const form = useForm<{ password: string }>({
         defaultValues: { password: "Imperial-March-1977!" },
