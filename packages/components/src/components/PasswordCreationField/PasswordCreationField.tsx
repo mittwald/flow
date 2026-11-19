@@ -374,7 +374,7 @@ export const PasswordCreationField = flowComponent(
           </PropsContextProvider>
           {/* After `children`: the field shows the first error in the tree, and
               a consumer's error wins over the policy's. */}
-          {latestValidationErrorText && (
+          {isInvalidFromValidationResult && latestValidationErrorText && (
             <FieldError>{latestValidationErrorText}</FieldError>
           )}
         </FieldErrorCaptureContext>

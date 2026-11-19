@@ -4,7 +4,11 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 import { useProps } from "@/lib/hooks/useProps";
@@ -23,11 +27,15 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
   const currentTunnelId = fieldErrorProps.tunnel?.id;
   const tunnelId =
     options.tunnelId ?? currentTunnelId ?? `${options.fieldErrorId}.fieldError`;
+  const fallbackTunnelId = `${tunnelId}.fallback`;
 
   const fieldErrorCapturePropsContext: PropsContext = {
     FieldError: {
       id: options.fieldErrorId,
-      tunnel: { id: tunnelId, component: options.component },
+      tunnel: dynamic((props) => ({
+        id: props.isFallback ? fallbackTunnelId : tunnelId,
+        component: options.component,
+      })),
       className: formFieldStyles.fieldError,
     },
   };
@@ -62,13 +70,28 @@ export const useFieldError = (options: UseFieldErrorOptions) => {
           <UiComponentTunnelExit id={tunnelId} component={options.component}>
             {(children) => {
               const childrenArray = React.Children.toArray(children);
-              return <ClearPropsContext>{childrenArray[0]}</ClearPropsContext>;
+              return (
+                <UiComponentTunnelExit
+                  id={fallbackTunnelId}
+                  component={options.component}
+                >
+                  {(fallbackChildren) => {
+                    const fallbackChildrenArray =
+                      React.Children.toArray(fallbackChildren);
+                    return (
+                      <ClearPropsContext>
+                        {childrenArray[0] ?? fallbackChildrenArray[0]}
+                      </ClearPropsContext>
+                    );
+                  }}
+                </UiComponentTunnelExit>
+              );
             }}
           </UiComponentTunnelExit>
         </FieldErrorRenderedContext>
       );
     },
-    [currentTunnelId, tunnelId, options.component],
+    [currentTunnelId, fallbackTunnelId, tunnelId, options.component],
   );
 
   return {

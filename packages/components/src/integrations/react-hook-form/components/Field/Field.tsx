@@ -116,6 +116,13 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const isFieldInvalid = controller.fieldState.invalid;
   const errorMessage = controller.fieldState.error?.message;
+  const fieldError = errorMessage ? (
+    <FieldErrorView>{errorMessage}</FieldErrorView>
+  ) : isFieldInvalid ? (
+    <FieldErrorView isFallback>
+      {stringFormatter.format("validation.invalid")}
+    </FieldErrorView>
+  ) : null;
 
   const { disabled, ...controllerFieldProps } = controller.field;
 
@@ -138,9 +145,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       return (
         <>
           {p.children}
-          {/* Without a message the field's first error would be an empty one,
-              hiding the field's own (e.g. a password policy's) error. */}
-          {errorMessage && <FieldErrorView>{errorMessage}</FieldErrorView>}
+          {fieldError}
         </>
       );
     }),
