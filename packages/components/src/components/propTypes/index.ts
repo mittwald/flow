@@ -5,6 +5,7 @@ import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
+import type { LegendProps } from "@/components/Legend";
 import type { LightBoxProps } from "@/components/LightBox";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
@@ -159,6 +160,7 @@ export interface FlowComponentPropsTypes {
   InlineCode: InlineCodeProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
+  Legend: LegendProps;
   LightBox: LightBoxProps;
   LightBoxGallery: LightBoxGalleryProps;
   LightBoxGalleryItem: LightBoxGalleryItemProps;
@@ -263,6 +265,7 @@ const propsContextSupportingComponentsMap: Record<
   Kbd: true,
   Label: true,
   LayoutCard: true,
+  Legend: true,
   LightBox: true,
   LightBoxGallery: true,
   LightBoxGalleryItem: true,

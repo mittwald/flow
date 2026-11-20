@@ -1,21 +1,33 @@
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import styles from "./Legend.module.scss";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export type LegendProps = PropsWithChildren & PropsWithClassName;
+export interface LegendProps
+  extends
+    PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps<HTMLUListElement> {}
 
 /** @flr-generate all */
-export const Legend: FC<LegendProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const Legend = flowComponent(
+  "Legend",
+  (props) => {
+    const { children, className, ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.legend, className);
+    const rootClassName = clsx(styles.legend, className);
 
-  return (
-    <ul className={rootClassName} {...rest}>
-      {children}
-    </ul>
-  );
-};
+    return (
+      <ul ref={ref} className={rootClassName} {...rest}>
+        {children}
+      </ul>
+    );
+  },
+  /* Outer `Text` props contexts (e.g. the content color of `AccentBox`) keep
+     reaching the item texts. */
+  { type: "layout" },
+);
 
 export default Legend;
