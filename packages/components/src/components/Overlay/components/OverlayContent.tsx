@@ -1,5 +1,5 @@
 import * as Aria from "react-aria-components";
-import { type FC, type PropsWithChildren, type Ref, Suspense } from "react";
+import { type PropsWithChildren, Suspense } from "react";
 import { UNSAFE_PortalProvider } from "react-aria";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { OverlaySuspenseFallback } from "@/components/Overlay/components/OverlaySuspenseFallback";
@@ -11,6 +11,10 @@ import {
 } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
 import { useIsActivityActive } from "@/components/Activity/context";
 import { SectionHeadingReset } from "@/components/Section/context";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 const overlayContainerAttribute = "data-flow-overlays";
 
@@ -123,56 +127,63 @@ export interface OverlayContentProps
   extends
     PropsWithChildren,
     PropsWithClassName,
+    FlowComponentProps,
     Pick<Aria.DialogProps, "aria-labelledby"> {
-  ref?: Ref<HTMLDivElement>;
   onOpenChange: (isOpen: boolean) => void;
   isDismissable?: boolean;
   isOpen?: boolean;
 }
 
 /** @flr-generate all */
-export const OverlayContent: FC<OverlayContentProps> = (props) => {
-  const {
-    children,
-    className,
-    "aria-labelledby": ariaLabelledBy,
-    ...restProps
-  } = props;
+export const OverlayContent = flowComponent(
+  "OverlayContent",
+  (props) => {
+    const {
+      children,
+      className,
+      "aria-labelledby": ariaLabelledBy,
+      ref,
+      ...restProps
+    } = props;
 
-  const isActivityActive = useIsActivityActive();
+    const isActivityActive = useIsActivityActive();
 
-  useKeepBrowserExtensionsInteractive(restProps.isOpen ?? false);
+    useKeepBrowserExtensionsInteractive(restProps.isOpen ?? false);
 
-  const Fallback = () => {
+    const Fallback = () => {
+      return (
+        <DivView className={styles.suspense}>
+          <OverlaySuspenseFallback {...restProps} />
+        </DivView>
+      );
+    };
+
+    if (!isActivityActive) {
+      return null;
+    }
+
     return (
-      <DivView className={styles.suspense}>
-        <OverlaySuspenseFallback {...restProps} />
-      </DivView>
-    );
-  };
-
-  if (!isActivityActive) {
-    return null;
-  }
-
-  return (
-    <UNSAFE_PortalProvider getContainer={getOverlayContainer}>
-      <Aria.ModalOverlay {...restProps} className={className}>
-        {/* The centering viewport between the backdrop and react-aria's modal
+      <UNSAFE_PortalProvider getContainer={getOverlayContainer}>
+        <Aria.ModalOverlay {...restProps} ref={ref} className={className}>
+          {/* The centering viewport between the backdrop and react-aria's modal
             wrapper. Classed so Modal/OffCanvas/LightBox can position it
             without selecting a bare `div`. */}
-        <DivView className={styles.viewport}>
-          <Aria.Modal>
-            <Suspense fallback={<Fallback />}>
-              <Aria.Dialog aria-labelledby={ariaLabelledBy}>
-                <SectionHeadingReset>{children}</SectionHeadingReset>
-              </Aria.Dialog>
-            </Suspense>
-          </Aria.Modal>
-        </DivView>
-      </Aria.ModalOverlay>
-    </UNSAFE_PortalProvider>
-  );
-};
+          <DivView className={styles.viewport}>
+            <Aria.Modal>
+              <Suspense fallback={<Fallback />}>
+                <Aria.Dialog aria-labelledby={ariaLabelledBy}>
+                  <SectionHeadingReset>{children}</SectionHeadingReset>
+                </Aria.Dialog>
+              </Suspense>
+            </Aria.Modal>
+          </DivView>
+        </Aria.ModalOverlay>
+      </UNSAFE_PortalProvider>
+    );
+  },
+  // Not "ui": the nested props contexts of `Modal`/`LightBox` (e.g. the
+  // `ActionGroup` buttons an `Action` configures) must pass through.
+  { type: "layout" },
+);
 
 export default OverlayContent;
