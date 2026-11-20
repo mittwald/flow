@@ -30,12 +30,35 @@ export const verify = async (sessionToken: string, options: VerifyOptions) => {
     });
   } catch (error) {
     if (error instanceof JWTClaimValidationFailed && error.claim === "aud") {
-      throw new ExtBridgeError(
-        "Session token was not issued for this extension",
-      );
+      throw audienceError(error, extensionId);
     }
     throw error;
   }
 
   return decoded;
+};
+
+const audienceError = (
+  error: JWTClaimValidationFailed,
+  extensionId: string,
+): ExtBridgeError => {
+  if (error.reason === "missing") {
+    return new ExtBridgeError(
+      "Session token has no audience (aud) claim. The issuing mStudio/API does not set it yet; @mittwald/ext-bridge >=1.5.64 requires it.",
+      { cause: error },
+    );
+  }
+
+  if (error.reason === "check_failed") {
+    const aud = error.payload.aud;
+    const issuedFor = Array.isArray(aud) ? aud.join(", ") : String(aud);
+    return new ExtBridgeError(
+      `Session token was issued for extension ${issuedFor}, but verify() was called with extensionId ${extensionId}.`,
+      { cause: error },
+    );
+  }
+
+  return new ExtBridgeError("Session token was not issued for this extension", {
+    cause: error,
+  });
 };
