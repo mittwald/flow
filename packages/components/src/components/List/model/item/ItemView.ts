@@ -12,15 +12,18 @@ import { isShallowEqual } from "remeda";
 export interface ItemViewShape<T> {
   /**
    * Runs on every render of the list to tell whether the item changed, so it
-   * should be cheap and pure.
+   * should be cheap and pure. It runs outside the item's render, so it must not
+   * call hooks — call them in the component rendering the list instead.
    */
   textValue?: (data: T) => string;
   /**
    * Runs on every render of the list to tell whether the item changed, so it
-   * should be cheap and pure.
+   * should be cheap and pure. It runs outside the item's render, so it must not
+   * call hooks — call them in the component rendering the list instead.
    */
   href?: (data: T) => string;
   target?: HTMLAttributeAnchorTarget;
+  /** Read when the item mounts. Must not call hooks. */
   defaultExpanded?: (data: T) => boolean;
   renderFn?: RenderItemFn<T>;
   /** @deprecated Use loadingView instead */
