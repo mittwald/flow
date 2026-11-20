@@ -23,6 +23,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { LabeledValueProps } from "@/components/LabeledValue";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -158,6 +159,7 @@ export interface FlowComponentPropsTypes {
   Initials: InitialsProps;
   InlineCode: InlineCodeProps;
   Label: LabelProps;
+  LabeledValue: LabeledValueProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
   LightBoxGallery: LightBoxGalleryProps;
@@ -262,6 +264,7 @@ const propsContextSupportingComponentsMap: Record<
   InlineCode: true,
   Kbd: true,
   Label: true,
+  LabeledValue: true,
   LayoutCard: true,
   LightBox: true,
   LightBoxGallery: true,
