@@ -23,6 +23,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { ColorProps } from "@/components/Color";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -128,6 +129,7 @@ export interface FlowComponentPropsTypes {
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
+  Color: ColorProps;
   ColumnLayout: ColumnLayoutProps;
   ComboBox: ComboBoxProps;
   Content: ContentProps;
@@ -231,6 +233,7 @@ const propsContextSupportingComponentsMap: Record<
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
+  Color: true,
   ColumnLayout: true,
   ComboBox: true,
   Content: true,
