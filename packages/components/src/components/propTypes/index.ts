@@ -29,6 +29,7 @@ import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BreadcrumbProps } from "@/components/Breadcrumb";
 import type { BigNumberProps } from "@/components/BigNumber";
 import type { DonutChartProps } from "@/components/DonutChart";
+import type { SkeletonModeProps } from "@/components/SkeletonMode";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -137,6 +138,7 @@ export interface FlowComponentPropsTypes {
   Badge: BadgeProps;
   BigNumber: BigNumberProps;
   Breadcrumb: BreadcrumbProps;
+  SkeletonMode: SkeletonModeProps;
   Button: ButtonProps;
   CodeBlock: CodeBlockProps;
   CodeEditor: CodeEditorProps;
@@ -251,6 +253,7 @@ const propsContextSupportingComponentsMap: Record<
   Badge: true,
   BigNumber: true,
   Breadcrumb: true,
+  SkeletonMode: true,
   Button: true,
   CodeBlock: true,
   CodeEditor: true,
