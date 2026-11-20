@@ -23,6 +23,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { NotificationProps } from "@/components/Notification";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -176,6 +177,7 @@ export interface FlowComponentPropsTypes {
   ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
+  Notification: NotificationProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Options: OptionsProps;
@@ -280,6 +282,7 @@ const propsContextSupportingComponentsMap: Record<
   ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
+  Notification: true,
   NumberField: true,
   Radio: true,
   Option: true,
