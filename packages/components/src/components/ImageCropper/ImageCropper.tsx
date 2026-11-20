@@ -1,6 +1,5 @@
 import {
   type CSSProperties,
-  type FC,
   type ReactNode,
   useEffect,
   useRef,
@@ -8,6 +7,8 @@ import {
 } from "react";
 import Cropper, { type Area, type CropperProps } from "react-easy-crop";
 import type { PropsWithClassName } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import clsx from "clsx";
 import styles from "./ImageCropper.module.scss";
 import { Slider } from "@/components/Slider";
@@ -37,7 +38,10 @@ export interface ImageCropperError {
 }
 
 export interface ImageCropperProps
-  extends PropsWithClassName, Partial<Pick<CropperProps, "cropShape">> {
+  extends
+    PropsWithClassName,
+    FlowComponentProps,
+    Partial<Pick<CropperProps, "cropShape">> {
   /** The image file to crop. */
   image?: File | string;
   /** Callback on crop complete. */
@@ -58,13 +62,14 @@ export interface ImageCropperProps
   height?: CSSProperties["height"];
   /** The aspect ratio of the crop shape. */
   aspectRatio?: number;
+  children?: never;
 }
 
 /**
  * @flr-generate all
  * @flowStatus new
  */
-export const ImageCropper: FC<ImageCropperProps> = (props) => {
+export const ImageCropper = flowComponent("ImageCropper", (props) => {
   const {
     image,
     className,
@@ -74,6 +79,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     width = 300,
     height = 300,
     aspectRatio,
+    ref,
     ...rest
   } = props;
 
@@ -188,6 +194,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   return (
     <div
+      ref={ref}
       className={rootClassName}
       style={{ width }}
       inert={isSkeleton || undefined}
@@ -195,7 +202,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
       <SkeletonModeReset>
         <div className={styles.cropperContainer} style={{ height }}>
           {/* The skeleton is one surface in the size of cropper and slider.
-              It mounts no cropper, so the image is not loaded. */}
+                It mounts no cropper, so the image is not loaded. */}
           {!isSkeleton && (errorElement ? errorContainer : cropper)}
         </div>
         {!errorElement && (
@@ -212,6 +219,6 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
       </SkeletonModeReset>
     </div>
   );
-};
+});
 
 export default ImageCropper;
