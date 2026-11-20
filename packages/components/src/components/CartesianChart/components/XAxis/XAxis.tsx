@@ -1,4 +1,7 @@
-import type { FC } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import * as Recharts from "recharts";
 import type {
   ChartDataValue,
@@ -11,23 +14,25 @@ export type XAxisProps<
   TData extends ChartDataValue = ChartDataValue,
   TDataKey extends DataKey<TData> = DataKey<TData>,
   TDataKeyValue = DataKeyValue<TData, TDataKey>,
-> = Pick<
-  Recharts.XAxisProps,
-  | "className"
-  | "orientation"
-  | "allowDecimals"
-  | "allowDataOverflow"
-  | "interval"
-  | "minTickGap"
-  | "scale"
-  | "type"
-  | "domain"
-  | "hide"
-  | "unit"
-> & {
-  dataKey?: TDataKey;
-  tickFormatter?: (value: TDataKeyValue, index: number) => string;
-};
+> = FlowComponentProps &
+  Pick<
+    Recharts.XAxisProps,
+    | "className"
+    | "orientation"
+    | "allowDecimals"
+    | "allowDataOverflow"
+    | "interval"
+    | "minTickGap"
+    | "scale"
+    | "type"
+    | "domain"
+    | "hide"
+    | "unit"
+  > & {
+    children?: never;
+    dataKey?: TDataKey;
+    tickFormatter?: (value: TDataKeyValue, index: number) => string;
+  };
 
 /**
  * `tickFormatter` is deliberately not part of the remote surface. A function
@@ -39,8 +44,8 @@ export type XAxisProps<
  * @flr-generate all
  * @flr-ignore-props tickFormatter
  */
-export const XAxis: FC<XAxisProps> = (props) => {
-  const { type = "auto", ...rest } = props;
+export const XAxis = flowComponent("XAxis", (props) => {
+  const { ref: ignoredRef, type = "auto", ...rest } = props;
 
   const tokens = useDesignTokens();
 
@@ -56,7 +61,7 @@ export const XAxis: FC<XAxisProps> = (props) => {
       tickSize={parseInt(tokens.axis["tick-size"].value)}
     />
   );
-};
+});
 
 export { TypedXAxis } from "./types";
 

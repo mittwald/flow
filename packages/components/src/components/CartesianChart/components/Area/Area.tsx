@@ -1,4 +1,8 @@
-import { type ComponentType, type FC } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { type ComponentType } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
@@ -13,20 +17,22 @@ import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedSta
 import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
 import { useDesignTokens } from "@/lib/theming";
 
-type AreaBaseProps = Pick<
-  Recharts.AreaProps,
-  | "className"
-  | "stackId"
-  | "fillOpacity"
-  | "key"
-  | "xAxisId"
-  | "yAxisId"
-  | "type"
-  | "unit"
-> & {
-  /** The color of the area. @default "sea-green" */
-  color?: CategoricalWithCustomColor;
-};
+type AreaBaseProps = FlowComponentProps &
+  Pick<
+    Recharts.AreaProps,
+    | "className"
+    | "stackId"
+    | "fillOpacity"
+    | "key"
+    | "xAxisId"
+    | "yAxisId"
+    | "type"
+    | "unit"
+  > & {
+    children?: never;
+    /** The color of the area. @default "sea-green" */
+    color?: CategoricalWithCustomColor;
+  };
 
 export interface AreaPropsByDataKeyProp<
   TData extends ChartDataValue = ChartDataValue,
@@ -43,8 +49,9 @@ export type AreaProps<TData extends ChartDataValue = ChartDataValue> =
   AreaPropsByDataKey<TData> | AreaPropsByDataKeyProp<TData>;
 
 /** @flr-generate all */
-export const Area: FC<AreaProps> = (props) => {
+export const Area = flowComponent("Area", (props) => {
   const {
+    ref: ignoredRef,
     color: colorFromProps = "sea-green",
     stackId: stackIdFromProps = 1,
     fillOpacity = 1,
@@ -61,7 +68,11 @@ export const Area: FC<AreaProps> = (props) => {
 
   return (
     <Recharts.Area
-      name={isDataKeyWithLabel(props) ? props.dataKeyLabel : props.dataKey}
+      name={
+        isDataKeyWithLabel(props)
+          ? props.dataKeyLabel
+          : (props as AreaPropsByDataKeyProp).dataKey
+      }
       stackId={stackId}
       fillOpacity={fillOpacity}
       {...rest}
@@ -72,7 +83,7 @@ export const Area: FC<AreaProps> = (props) => {
       {...animation}
     />
   );
-};
+});
 
 export const TypedArea = <TData extends ChartDataValue = ChartDataValue>() =>
   Area as ComponentType<AreaPropsByDataKeyProp<TData>>;
