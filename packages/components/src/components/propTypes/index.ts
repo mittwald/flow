@@ -74,7 +74,10 @@ import type { CountryOptionsProps } from "@/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";
-import type { MessageThreadProps } from "@/components/MessageThread";
+import type {
+  MessageSeparatorProps,
+  MessageThreadProps,
+} from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
@@ -171,6 +174,7 @@ export interface FlowComponentPropsTypes {
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
   Message: MessageProps;
+  MessageSeparator: MessageSeparatorProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
   ModalTrigger: ModalTriggerProps;
@@ -275,6 +279,7 @@ const propsContextSupportingComponentsMap: Record<
   MenuItem: true,
   MenuTrigger: true,
   Message: true,
+  MessageSeparator: true,
   MessageThread: true,
   Modal: true,
   ModalTrigger: true,
