@@ -60,6 +60,7 @@ import fileDropZoneStyles from "@/components/FileDropZone/FileDropZone.module.sc
 import codeBlockStyles from "@/components/CodeBlock/CodeBlock.module.scss";
 import codeEditorStyles from "@/components/CodeEditor/CodeEditor.module.scss";
 import markdownEditorStyles from "@/components/MarkdownEditor/MarkdownEditor.module.scss";
+import markdownStyles from "@/components/Markdown/Markdown.module.scss";
 import imageCropperStyles from "@/components/ImageCropper/ImageCropper.module.scss";
 import cartesianChartStyles from "@/components/CartesianChart/CartesianChart.module.scss";
 import donutChartStyles from "@/components/DonutChart/DonutChart.module.scss";
@@ -481,9 +482,26 @@ test("Markdown outside SkeletonMode renders its lists unchanged", async () => {
 
   const items = [...document.querySelectorAll("li")];
   expect(items).toHaveLength(2);
-  expect(at(items, 0).className).toBe("task-list-item");
+  expect(at(items, 0).classList).toContain("task-list-item");
+  expect(at(items, 0).textContent).toBe("Zone exportieren");
   expect(at(items, 1).innerHTML).toBe("Zone importieren");
   expect(bars()).toHaveLength(0);
+});
+
+test("the checkbox of a Markdown task stays outside its bar", async () => {
+  await render(
+    <SkeletonMode>
+      <Markdown>{"- [x] Zone exportieren\n- Zone importieren"}</Markdown>
+    </SkeletonMode>,
+  );
+
+  await expect.element(status()).toBeInTheDocument();
+
+  expect(barTexts()).toEqual(["Zone exportieren", "Zone importieren"]);
+  const checkbox = one(markdownStyles.taskListSkeletonIcon);
+  expect(checkbox.closest(`.${barStyles.skeletonTextContent}`)).toBeNull();
+  expect(size(checkbox).width).toBeGreaterThan(0);
+  expect(document.querySelector("input")).toBeNull();
 });
 
 test("an image in Markdown issues no request", async () => {
