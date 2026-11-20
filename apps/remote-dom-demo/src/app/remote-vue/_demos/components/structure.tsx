@@ -56,7 +56,7 @@ export const StructureDemo = defineComponent({
                 <Link href="#">Sign up</Link>
               </Section>
             </AccentBox>
-            <AccentBox backgroundColor="teal">
+            <AccentBox backgroundColor="sage">
               <Section>
                 <Heading level={4}>Visit Hoth</Heading>
                 <Text>The whole box is a link to the briefing.</Text>
@@ -65,7 +65,7 @@ export const StructureDemo = defineComponent({
                 </Link>
               </Section>
             </AccentBox>
-            <AccentBox backgroundColor="gradient">
+            <AccentBox backgroundColor="gradient-navy">
               <Section>
                 <Heading level={4}>Pick a squadron</Heading>
                 <Text>The whole box selects, the link stays on its own.</Text>

@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { Badge } from "@/components/Badge";
@@ -8,6 +8,7 @@ import {
 } from "@/components/ContextualHelp";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
+import { DeprecationWarningProvider } from "@/components/DeprecationWarningProvider";
 import { Label } from "@/components/Label";
 import { hydrateServerMarkup } from "@/lib/dev/hydrateServerMarkup";
 
@@ -69,6 +70,51 @@ test("A contextual help trigger in the content places a single button", async ()
   await expect
     .element(page.getByText("Every value has a story to tell."))
     .toBeInTheDocument();
+});
+
+test.each([
+  ["violet", "lilac"],
+  ["teal", "sage"],
+  ["green", "success"],
+  ["orange", "warning"],
+  ["red", "danger"],
+] as const)(
+  "the deprecated color '%s' renders as '%s' and warns",
+  async (color, replacement) => {
+    const onWarning = vi.fn();
+
+    await render(
+      <DeprecationWarningProvider onWarning={onWarning}>
+        <Badge color={color} data-testid="badge">
+          Value
+        </Badge>
+      </DeprecationWarningProvider>,
+    );
+
+    await expect
+      .element(page.getByTestId("badge"))
+      .toHaveClass(`flow--badge--${replacement}`);
+    expect(onWarning).toHaveBeenCalledWith(
+      `The color '${color}' is deprecated and will be removed in a future release. Use '${replacement}' instead.`,
+    );
+  },
+);
+
+test("the color 'sage' does not warn", async () => {
+  const onWarning = vi.fn();
+
+  await render(
+    <DeprecationWarningProvider onWarning={onWarning}>
+      <Badge color="sage" data-testid="badge">
+        Value
+      </Badge>
+    </DeprecationWarningProvider>,
+  );
+
+  await expect
+    .element(page.getByTestId("badge"))
+    .toHaveClass("flow--badge--sage");
+  expect(onWarning).not.toHaveBeenCalled();
 });
 
 test.each([

@@ -17,14 +17,20 @@ $shimmer-gradient: linear-gradient(
 /* Block surface. The shimmer moves over it in an `::after`. Needs
    `@include keyframes` at the top level of the same module. */
 @mixin surface {
+  $radius: var(--skeleton-radius, var(--corner-radius--m));
+
   position: relative;
-  overflow: hidden;
   background-color: $background-color;
-  border-radius: var(--skeleton-radius, var(--corner-radius--m));
+  border-radius: $radius;
+
+  /* Clips at the border edge, not at the padding edge like `overflow: hidden`,
+     so the shimmer, which reaches under the widest border, also passes over a
+     transparent border instead of leaving it as an unlit frame. */
+  clip-path: inset(0 round $radius);
 
   &::after {
     position: absolute;
-    inset: 0;
+    inset: calc(-1 * var(--border-width--300));
     transform: translateX(-100%);
     background-image: $shimmer-gradient;
     animation: skeleton-surface-shimmer $shimmer-duration infinite;

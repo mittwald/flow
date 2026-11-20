@@ -75,8 +75,6 @@ test.each(testEnvironments)(
     const input = page.getByLocator("textarea");
     const preview = page.getByText("Preview");
 
-    await testScreenshot("MarkdownEditor - default");
-
     await userEvent.type(input, "A{Enter}**B**{Enter}C{Enter}D");
     input.element().scroll({
       top: 1000,

@@ -34,7 +34,7 @@ export default () => {
     >
       <CartesianChart.Area
         dataKey="Datenbanken"
-        color="lime"
+        color="red"
         unit="%"
       />
       <CartesianChart.Area

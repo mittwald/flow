@@ -68,42 +68,34 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "Markdown split ordered list (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
-    await render(
-      <Markdown>
-        {"1. Destroy the shield generator\n\n" +
-          "Endor hosts the generator.\n\n" +
-          "2. Lure the fleet into a trap\n\n" +
-          "The Emperor expects the attack.\n\n" +
-          "3. Fly into the Death Star\n" +
-          "4. Hit the main reactor"}
-      </Markdown>,
-    );
-
-    await testScreenshot("Markdown split ordered list");
-  },
-);
-
-test.each(testEnvironments)(
-  "Markdown wide table (%s)",
+  "Markdown edge cases (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Markdown, ColumnLayout },
+    components: { Flex, Markdown, ColumnLayout },
   }) => {
-    /* A narrow column, like the AIssistant drawer. */
     await render(
-      <ColumnLayout s={[1, 4]} m={[1, 4]} l={[1, 4]}>
+      <Flex direction="column" gap="m">
         <Markdown>
-          {"| Type | Version | Usage |\n" +
-            "| --- | --- | --- |\n" +
-            "| CMS | 6.4 | WordPress, Shopware, TYPO3 |\n" +
-            "| Shop | 6.5 | Shopware, Magento |\n"}
+          {"1. Destroy the shield generator\n\n" +
+            "Endor hosts the generator.\n\n" +
+            "2. Lure the fleet into a trap\n\n" +
+            "The Emperor expects the attack.\n\n" +
+            "3. Fly into the Death Star\n" +
+            "4. Hit the main reactor"}
         </Markdown>
-      </ColumnLayout>,
+        {/* A narrow column, like the AIssistant drawer. */}
+        <ColumnLayout s={[1, 4]} m={[1, 4]} l={[1, 4]}>
+          <Markdown>
+            {"| Type | Version | Usage |\n" +
+              "| --- | --- | --- |\n" +
+              "| CMS | 6.4 | WordPress, Shopware, TYPO3 |\n" +
+              "| Shop | 6.5 | Shopware, Magento |\n"}
+          </Markdown>
+        </ColumnLayout>
+      </Flex>,
     );
 
-    await testScreenshot("Markdown wide table");
+    await testScreenshot("Markdown edge cases");
   },
 );

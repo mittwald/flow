@@ -1,6 +1,6 @@
 scrollbar:
   thumb-color:
-    value: "{dark.color.200}"
+    value: "{dark.color.quiet.200}"
   track-color:
     value: "transparent"
   size:

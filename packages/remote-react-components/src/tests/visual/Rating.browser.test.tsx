@@ -69,8 +69,6 @@ test.each(testEnvironments)(
 
     const option = page.getByLocator("label:has(input[value='3'])");
 
-    await testScreenshot("Rating interaction - default");
-
     await option.click();
 
     await testScreenshot("Rating interaction - option selected");

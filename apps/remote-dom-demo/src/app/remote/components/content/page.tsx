@@ -73,7 +73,7 @@ export default function Page() {
       <Section>
         <Heading level={3}>Color</Heading>
         <Text>
-          Join the <Color color="violet">Rebel Alliance</Color> today.
+          Join the <Color color="lilac">Rebel Alliance</Color> today.
         </Text>
       </Section>
 

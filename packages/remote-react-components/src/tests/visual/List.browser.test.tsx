@@ -410,11 +410,12 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
 );
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
-  "List edge cases - list view (%s)",
+  "List edge cases (%s)",
   async ({
     testScreenshot,
     render,
     components: {
+      Flex,
       typedList,
       ListItemView,
       Avatar,
@@ -425,7 +426,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       Content,
     },
   }) => {
-    function Wrapper() {
+    function ListViewCase() {
       const List = typedList<{
         id: string;
         name: string;
@@ -467,9 +468,49 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       );
     }
 
-    await render(<Wrapper />);
+    function ColumnLayoutCase() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        content: string;
+      }>();
 
-    await testScreenshot("List edge cases - list view");
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "LukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalker",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContent",
+              },
+            ]}
+          />
+          <List.Item showList={false} textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView m={[3, 1]}>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Content>{i.content}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(
+      <Flex direction="column" gap="m">
+        <ListViewCase />
+        <ColumnLayoutCase />
+      </Flex>,
+    );
+
+    await testScreenshot("List edge cases");
   },
 );
 
@@ -538,62 +579,6 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List edge cases - tile view");
-  },
-);
-
-test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
-  "List edge cases - column layout (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      typedList,
-      ListItemView,
-      Avatar,
-      Initials,
-      Heading,
-      ContextMenu,
-      Content,
-    },
-  }) => {
-    function Wrapper() {
-      const List = typedList<{
-        id: string;
-        name: string;
-        content: string;
-      }>();
-
-      return (
-        <List.List aria-label="list" getItemId={(i) => i.id}>
-          <List.StaticData
-            data={[
-              {
-                id: "1",
-                name: "LukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalker",
-                content:
-                  "ContentContentContentContentContentContentContentContentContentContent",
-              },
-            ]}
-          />
-          <List.Item showList={false} textValue={(i) => i.name}>
-            {(i) => (
-              <ListItemView m={[3, 1]}>
-                <Avatar>
-                  <Initials>{i.name}</Initials>
-                </Avatar>
-                <Heading>{i.name}</Heading>
-                <Content>{i.content}</Content>
-                <ContextMenu />
-              </ListItemView>
-            )}
-          </List.Item>
-        </List.List>
-      );
-    }
-
-    await render(<Wrapper />);
-
-    await testScreenshot("List edge cases - column layout");
   },
 );
 
