@@ -41,7 +41,7 @@ import type { TextAreaProps } from "@/components/TextArea";
 import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
-import type { TabsProps } from "@/components/Tabs";
+import type { TabProps, TabsProps, TabTitleProps } from "@/components/Tabs";
 import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SeparatorProps } from "@/components/Separator";
@@ -199,7 +199,8 @@ export interface FlowComponentPropsTypes {
   Slider: SliderProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
-  TabTitle: TabsProps;
+  Tab: TabProps;
+  TabTitle: TabTitleProps;
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
@@ -302,6 +303,7 @@ const propsContextSupportingComponentsMap: Record<
   Slider: true,
   Switch: true,
   Tabs: true,
+  Tab: true,
   TabTitle: true,
   TestComponent: true,
   Text: true,

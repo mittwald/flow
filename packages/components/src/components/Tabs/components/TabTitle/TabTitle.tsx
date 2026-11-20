@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./TabTitle.module.scss";
@@ -7,15 +7,18 @@ import { useTabContext } from "@/components/Tabs/components/Tab/context";
 import { MenuItem } from "@/components/MenuItem";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface TabTitleProps
   extends
     Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
-    PropsWithChildren {}
+    PropsWithChildren,
+    FlowComponentProps {}
 
 /** @flr-generate all */
-export const TabTitle: FC<TabTitleProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const TabTitle = flowComponent("TabTitle", (props) => {
+  const { children, className, ref, ...rest } = props;
 
   const { id } = useTabContext();
   const isSkeleton = useSkeletonMode();
@@ -29,7 +32,7 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
   return (
     <>
       <UiComponentTunnelEntry id="Titles" component="Tabs">
-        <Aria.Tab {...rest} id={id} className={titleClassName}>
+        <Aria.Tab {...rest} id={id} className={titleClassName} ref={ref}>
           {(p) => (
             <>
               <Text emulateBoldWidth>
@@ -50,6 +53,6 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
       </UiComponentTunnelEntry>
     </>
   );
-};
+});
 
 export default TabTitle;
