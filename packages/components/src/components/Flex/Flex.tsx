@@ -1,10 +1,14 @@
-import type { CSSProperties, FC, PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import type {
   PropsWithClassName,
   PropsWithElementType,
 } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./Flex.module.scss";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface FlexProps
   extends
@@ -22,7 +26,8 @@ export interface FlexProps
       | "p"
       | "footer"
       | "header"
-    > {
+    >,
+    FlowComponentProps<HTMLElement> {
   /** The flexDirection value of the element. @default "row" */
   direction?: CSSProperties["flexDirection"];
   /** The alignItems value of the element. @default "start" */
@@ -61,70 +66,82 @@ const sizeVariable = (size: FlexSize | undefined) =>
   size && `var(--size-px--${size})`;
 
 /** @flr-generate all */
-export const Flex: FC<FlexProps> = (props) => {
-  const {
-    children,
-    className,
-    direction = "row",
-    align,
-    justify,
-    gap,
-    columnGap,
-    rowGap,
-    grow,
-    wrap = "nowrap",
-    padding,
-    paddingBlock,
-    paddingInline,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    elementType = "div",
-    ...restProps
-  } = props;
+export const Flex = flowComponent(
+  "Flex",
+  (props) => {
+    const {
+      children,
+      className,
+      direction = "row",
+      align,
+      justify,
+      gap,
+      columnGap,
+      rowGap,
+      grow,
+      wrap = "nowrap",
+      padding,
+      paddingBlock,
+      paddingInline,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+      elementType = "div",
+      ref,
+      ...restProps
+    } = props;
 
-  const columnGapSize = columnGap ?? gap;
-  const rowGapSize = rowGap ?? gap;
-  const paddingTopSize = paddingTop ?? paddingBlock ?? padding;
-  const paddingBottomSize = paddingBottom ?? paddingBlock ?? padding;
-  const paddingLeftSize = paddingLeft ?? paddingInline ?? padding;
-  const paddingRightSize = paddingRight ?? paddingInline ?? padding;
+    const columnGapSize = columnGap ?? gap;
+    const rowGapSize = rowGap ?? gap;
+    const paddingTopSize = paddingTop ?? paddingBlock ?? padding;
+    const paddingBottomSize = paddingBottom ?? paddingBlock ?? padding;
+    const paddingLeftSize = paddingLeft ?? paddingInline ?? padding;
+    const paddingRightSize = paddingRight ?? paddingInline ?? padding;
 
-  const rootClassName = clsx(
-    styles.flex,
-    align && styles.align,
-    justify && styles.justify,
-    grow && styles.grow,
-    columnGapSize && styles["column-gap"],
-    rowGapSize && styles["row-gap"],
-    paddingTopSize && styles["padding-top"],
-    paddingBottomSize && styles["padding-bottom"],
-    paddingLeftSize && styles["padding-left"],
-    paddingRightSize && styles["padding-right"],
-    className,
-  );
+    const rootClassName = clsx(
+      styles.flex,
+      align && styles.align,
+      justify && styles.justify,
+      grow && styles.grow,
+      columnGapSize && styles["column-gap"],
+      rowGapSize && styles["row-gap"],
+      paddingTopSize && styles["padding-top"],
+      paddingBottomSize && styles["padding-bottom"],
+      paddingLeftSize && styles["padding-left"],
+      paddingRightSize && styles["padding-right"],
+      className,
+    );
 
-  const style: CSSProperties = {
-    "--flex--direction": direction,
-    "--flex--wrap": wrap,
-    "--flex--align":
-      align === "end" ? "flex-end" : align === "start" ? "flex-start" : align,
-    "--flex--justify": justify,
-    "--flex--column-gap": sizeVariable(columnGapSize),
-    "--flex--row-gap": sizeVariable(rowGapSize),
-    "--flex--padding-top": sizeVariable(paddingTopSize),
-    "--flex--padding-bottom": sizeVariable(paddingBottomSize),
-    "--flex--padding-left": sizeVariable(paddingLeftSize),
-    "--flex--padding-right": sizeVariable(paddingRightSize),
-  };
+    const style: CSSProperties = {
+      "--flex--direction": direction,
+      "--flex--wrap": wrap,
+      "--flex--align":
+        align === "end" ? "flex-end" : align === "start" ? "flex-start" : align,
+      "--flex--justify": justify,
+      "--flex--column-gap": sizeVariable(columnGapSize),
+      "--flex--row-gap": sizeVariable(rowGapSize),
+      "--flex--padding-top": sizeVariable(paddingTopSize),
+      "--flex--padding-bottom": sizeVariable(paddingBottomSize),
+      "--flex--padding-left": sizeVariable(paddingLeftSize),
+      "--flex--padding-right": sizeVariable(paddingRightSize),
+    };
 
-  const Element = elementType;
+    const Element = elementType;
 
-  return (
-    <Element {...restProps} className={rootClassName} style={style}>
-      {children}
-    </Element>
-  );
-};
+    return (
+      <Element
+        {...restProps}
+        ref={ref as never}
+        className={rootClassName}
+        style={style}
+      >
+        {children}
+      </Element>
+    );
+  },
+  /* Flex only arranges its children: outer props contexts (e.g. the content
+     color of `AccentBox`) keep reaching them. */
+  { type: "layout" },
+);
 export default Flex;
