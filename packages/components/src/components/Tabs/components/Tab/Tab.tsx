@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { useId } from "react";
 import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
@@ -9,55 +9,67 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { Activity } from "@/components/Activity";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface TabProps
-  extends Omit<Aria.TabPanelProps, "children">, PropsWithChildren {}
+  extends
+    Omit<Aria.TabPanelProps, "children">,
+    PropsWithChildren,
+    FlowComponentProps {}
 
 /** @flr-generate all */
-export const Tab: FC<TabProps> = (props) => {
-  const { children, className, id: idFromProps, ...rest } = props;
+export const Tab = flowComponent(
+  "Tab",
+  (props) => {
+    const { children, className, id: idFromProps, ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.tabPanel, className);
+    const rootClassName = clsx(styles.tabPanel, className);
 
-  const generatedId = useId();
-  const id = idFromProps ?? generatedId;
+    const generatedId = useId();
+    const id = idFromProps ?? generatedId;
 
-  const TabPanelRenderer = (props: TabPanelRenderProps): Awaited<ReactNode> => {
-    const isSelected = props.state.selectedKey === id;
+    const TabPanelRenderer = (
+      props: TabPanelRenderProps,
+    ): Awaited<ReactNode> => {
+      const isSelected = props.state.selectedKey === id;
 
-    const propsContext: PropsContext = {
-      Content: {
-        wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
-      },
-      Section: {
-        wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
-      },
+      const propsContext: PropsContext = {
+        Content: {
+          wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
+        },
+        Section: {
+          wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
+        },
+      };
+
+      return (
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[isSelected, children]}
+        >
+          {children}
+        </PropsContextProvider>
+      );
     };
 
     return (
-      <PropsContextProvider
-        props={propsContext}
-        dependencies={[isSelected, children]}
-      >
-        {children}
-      </PropsContextProvider>
+      <UiComponentTunnelEntry id="Panels" component="Tabs">
+        <TabContextProvider value={{ id }}>
+          <Aria.TabPanel
+            className={rootClassName}
+            shouldForceMount
+            id={id}
+            {...rest}
+            ref={ref}
+          >
+            {TabPanelRenderer}
+          </Aria.TabPanel>
+        </TabContextProvider>
+      </UiComponentTunnelEntry>
     );
-  };
-
-  return (
-    <UiComponentTunnelEntry id="Panels" component="Tabs">
-      <TabContextProvider value={{ id }}>
-        <Aria.TabPanel
-          className={rootClassName}
-          shouldForceMount
-          id={id}
-          {...rest}
-        >
-          {TabPanelRenderer}
-        </Aria.TabPanel>
-      </TabContextProvider>
-    </UiComponentTunnelEntry>
-  );
-};
+  },
+  { type: "layout" },
+);
 
 export default Tab;
