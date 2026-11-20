@@ -23,6 +23,17 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type {
+  AreaProps,
+  BarProps,
+  CartesianGridProps,
+  ChartGridProps,
+  ChartLegendProps,
+  ChartTooltipProps,
+  LineProps,
+  XAxisProps,
+  YAxisProps,
+} from "@/components/CartesianChart";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -122,6 +133,15 @@ export interface FlowComponentPropsTypes {
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   BigNumber: BigNumberProps;
+  Area: AreaProps;
+  Bar: BarProps;
+  CartesianGrid: CartesianGridProps;
+  ChartGrid: ChartGridProps;
+  ChartLegend: ChartLegendProps;
+  ChartTooltip: ChartTooltipProps;
+  Line: LineProps;
+  XAxis: XAxisProps;
+  YAxis: YAxisProps;
   Button: ButtonProps;
   CodeEditor: CodeEditorProps;
   Chat: ChatProps;
@@ -225,6 +245,15 @@ const propsContextSupportingComponentsMap: Record<
   Combine: true,
   Badge: true,
   BigNumber: true,
+  Area: true,
+  Bar: true,
+  CartesianGrid: true,
+  ChartGrid: true,
+  ChartLegend: true,
+  ChartTooltip: true,
+  Line: true,
+  XAxis: true,
+  YAxis: true,
   Button: true,
   CodeEditor: true,
   Chat: true,

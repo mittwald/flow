@@ -1,4 +1,8 @@
-import { type ComponentType, type FC } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { type ComponentType } from "react";
 import * as Recharts from "recharts";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
@@ -13,21 +17,23 @@ import { useScopedStackId } from "@/components/CartesianChart/hooks/useScopedSta
 import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
 import { useDesignTokens } from "@/lib/theming";
 
-type BarBaseProps = Pick<
-  Recharts.BarProps,
-  | "className"
-  | "stackId"
-  | "key"
-  | "xAxisId"
-  | "yAxisId"
-  | "unit"
-  | "barSize"
-  | "maxBarSize"
-  | "minPointSize"
-> & {
-  /** The color of the bar. @default "sea-green" */
-  color?: CategoricalWithCustomColor;
-};
+type BarBaseProps = Omit<FlowComponentProps, "ref"> &
+  Pick<
+    Recharts.BarProps,
+    | "className"
+    | "stackId"
+    | "key"
+    | "xAxisId"
+    | "yAxisId"
+    | "unit"
+    | "barSize"
+    | "maxBarSize"
+    | "minPointSize"
+  > & {
+    children?: never;
+    /** The color of the bar. @default "sea-green" */
+    color?: CategoricalWithCustomColor;
+  };
 
 export interface BarPropsByDataKeyProp<
   TData extends ChartDataValue = ChartDataValue,
@@ -44,7 +50,7 @@ export type BarProps<TData extends ChartDataValue = ChartDataValue> =
   BarPropsByDataKey<TData> | BarPropsByDataKeyProp<TData>;
 
 /** @flr-generate all */
-export const Bar: FC<BarProps> = (props) => {
+export const Bar = flowComponent("Bar", (props) => {
   const { color: colorFromProps = "sea-green", ...rest } = props;
 
   const tokens = useDesignTokens();
@@ -64,7 +70,11 @@ export const Bar: FC<BarProps> = (props) => {
 
   const bar = (
     <Recharts.Bar
-      name={isDataKeyWithLabel(props) ? props.dataKeyLabel : props.dataKey}
+      name={
+        isDataKeyWithLabel(props)
+          ? props.dataKeyLabel
+          : (props as BarPropsByDataKeyProp).dataKey
+      }
       {...rest}
       stackId={stackId}
       fill={color}
@@ -85,7 +95,7 @@ export const Bar: FC<BarProps> = (props) => {
       {bar}
     </Recharts.BarStack>
   );
-};
+});
 
 export const TypedBar = <TData extends ChartDataValue = ChartDataValue>() =>
   Bar as ComponentType<BarPropsByDataKeyProp<TData>>;

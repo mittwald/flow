@@ -1,4 +1,8 @@
-import { type FC, Suspense } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { Suspense } from "react";
 import { Tooltip, type TooltipProps } from "recharts";
 import type {
   NameType,
@@ -22,13 +26,15 @@ export interface ChartTooltipProps<
       TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
-    WithTooltipFormatters<TData, XAxisDataKey> {
+    WithTooltipFormatters<TData, XAxisDataKey>,
+    Omit<FlowComponentProps, "ref"> {
+  children?: never;
   /** Show progress bar for stacked areas @default "true" */
   showProgressBar?: boolean;
 }
 
 /** @flr-generate all */
-export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
+export const ChartTooltip = flowComponent("ChartTooltip", (props) => {
   const {
     headingFormatter,
     formatter,
@@ -61,6 +67,6 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
       }}
     />
   );
-};
+});
 
 export default ChartTooltip;

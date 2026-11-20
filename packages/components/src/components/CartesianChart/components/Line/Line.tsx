@@ -1,4 +1,8 @@
-import { type ComponentType, type FC } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { type ComponentType } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
@@ -10,19 +14,21 @@ import type {
 import { useChartAnimation } from "@/components/CartesianChart/hooks/useChartAnimation";
 import { useDesignTokens } from "@/lib/theming";
 
-export interface LineProps<
-  TData extends ChartDataValue = ChartDataValue,
-> extends Pick<
-  Recharts.LineProps,
-  "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
-> {
+export interface LineProps<TData extends ChartDataValue = ChartDataValue>
+  extends
+    Pick<
+      Recharts.LineProps,
+      "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
+    >,
+    Omit<FlowComponentProps, "ref"> {
   dataKey?: DataKey<TData>;
+  children?: never;
   /** The color of the line. @default "sea-green" */
   color?: CategoricalWithCustomColor;
 }
 
 /** @flr-generate all */
-export const Line: FC<LineProps> = (props) => {
+export const Line = flowComponent("Line", (props) => {
   const { color: colorFromProps = "sea-green", ...rest } = props;
 
   const tokens = useDesignTokens();
@@ -43,7 +49,7 @@ export const Line: FC<LineProps> = (props) => {
       {...animation}
     />
   );
-};
+});
 
 export const TypedLine = <T extends ChartDataValue = ChartDataValue>() =>
   Line as ComponentType<LineProps<T>>;

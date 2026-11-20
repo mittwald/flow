@@ -1,14 +1,19 @@
-import type { ComponentType, FC } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import type { ComponentType } from "react";
 import * as Recharts from "recharts";
 import { useDesignTokens } from "@/lib/theming";
 
-export type ChartGridProps = Pick<
-  Recharts.CartesianGridProps,
-  "className" | "vertical" | "horizontal" | "strokeDasharray"
->;
+export type ChartGridProps = Omit<FlowComponentProps, "ref"> &
+  Pick<
+    Recharts.CartesianGridProps,
+    "className" | "vertical" | "horizontal" | "strokeDasharray"
+  > & { children?: never };
 
 /** @flr-generate all */
-export const ChartGrid: FC<ChartGridProps> = (props) => {
+export const ChartGrid = flowComponent("ChartGrid", (props) => {
   const { vertical = false, ...rest } = props;
 
   const designTokens = useDesignTokens();
@@ -21,7 +26,7 @@ export const ChartGrid: FC<ChartGridProps> = (props) => {
       strokeWidth={designTokens["cartesian-grid"]["stroke-width"].value}
     />
   );
-};
+});
 
 export const TypedChartGrid = () => ChartGrid as ComponentType<ChartGridProps>;
 
