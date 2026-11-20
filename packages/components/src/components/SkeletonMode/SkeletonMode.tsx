@@ -1,5 +1,9 @@
-import { type FC, type PropsWithChildren, useContext } from "react";
+import { type PropsWithChildren, useContext } from "react";
 import * as Aria from "react-aria-components";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import locales from "./locales/*.locale.json";
 import {
@@ -7,7 +11,8 @@ import {
   type SkeletonModeState,
 } from "./skeletonModeContext";
 
-export interface SkeletonModeProps extends PropsWithChildren {
+export interface SkeletonModeProps
+  extends PropsWithChildren, FlowComponentProps {
   /**
    * Whether the components inside render as skeleton. A nested `SkeletonMode`
    * with `isEnabled={false}` renders its content as real UI.
@@ -21,31 +26,40 @@ export interface SkeletonModeProps extends PropsWithChildren {
  * @flr-generate all
  * @flowStatus beta, new
  */
-export const SkeletonMode: FC<SkeletonModeProps> = (props) => {
-  const { children, isEnabled = true } = props;
+export const SkeletonMode = flowComponent(
+  "SkeletonMode",
+  (props) => {
+    const { children, isEnabled = true } = props;
 
-  const parent = useContext(skeletonModeContext);
-  const stringFormatter = useLocalizedStringFormatter(locales, "SkeletonMode");
+    const parent = useContext(skeletonModeContext);
+    const stringFormatter = useLocalizedStringFormatter(
+      locales,
+      "SkeletonMode",
+    );
 
-  const announces = isEnabled && !parent.isAnnounced;
+    const announces = isEnabled && !parent.isAnnounced;
 
-  const state: SkeletonModeState = {
-    isEnabled,
-    isAnnounced: parent.isAnnounced || isEnabled,
-  };
+    const state: SkeletonModeState = {
+      isEnabled,
+      isAnnounced: parent.isAnnounced || isEnabled,
+    };
 
-  const announcement = announces && (
-    <Aria.VisuallyHidden role="status">
-      {stringFormatter.format("loading")}
-    </Aria.VisuallyHidden>
-  );
+    const announcement = announces && (
+      <Aria.VisuallyHidden role="status">
+        {stringFormatter.format("loading")}
+      </Aria.VisuallyHidden>
+    );
 
-  return (
-    <skeletonModeContext.Provider value={state}>
-      {announcement}
-      {children}
-    </skeletonModeContext.Provider>
-  );
-};
+    return (
+      <skeletonModeContext.Provider value={state}>
+        {announcement}
+        {children}
+      </skeletonModeContext.Provider>
+    );
+  },
+  /* SkeletonMode only switches how its content renders: outer props contexts
+     (e.g. the content color of `AccentBox`) keep reaching that content. */
+  { type: "layout" },
+);
 
 export default SkeletonMode;

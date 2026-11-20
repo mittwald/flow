@@ -23,6 +23,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { SkeletonModeProps } from "@/components/SkeletonMode";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -122,6 +123,7 @@ export interface FlowComponentPropsTypes {
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   BigNumber: BigNumberProps;
+  SkeletonMode: SkeletonModeProps;
   Button: ButtonProps;
   CodeEditor: CodeEditorProps;
   Chat: ChatProps;
@@ -225,6 +227,7 @@ const propsContextSupportingComponentsMap: Record<
   Combine: true,
   Badge: true,
   BigNumber: true,
+  SkeletonMode: true,
   Button: true,
   CodeEditor: true,
   Chat: true,
