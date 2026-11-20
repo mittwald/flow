@@ -318,11 +318,13 @@ const MEASURE_EXAMPLE = `(async ({ expectations }) => {
     return null;
   }
   // .bottom, not .height: the rect is relative to the iframe viewport, so
-  // .height alone omits whatever sits above the stage.
+  // .height alone omits whatever sits above the stage. Rounded down: rounding
+  // up shows a strip of page ground below a fractional stage, right inside
+  // the border /releases draws around the figure.
   const height = stage.getBoundingClientRect().bottom;
   if (!(height > 0)) return null;
   return {
-    height: Math.ceil(height),
+    height: Math.floor(height),
     // The whole document, not the stage: an overlay renders into a portal.
     results: expectations.map((expectation) => {
       const matches = [...doc.querySelectorAll(expectation.selector)];

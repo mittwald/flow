@@ -1,6 +1,11 @@
-// Opaque, so the capture never shows the layout's page ground — neither around
-// the frame nor behind its rounded corners.
+// Opaque, so the capture never shows the layout's page ground.
 .stage {
-  padding: var(--size-px--m);
   background-color: var(--neutral--color--100);
+}
+
+// A release figure brings no frame of its own: `/releases` draws the border
+// around the image, flush with the text.
+.stage .frame {
+  border: 0;
+  border-radius: 0;
 }
