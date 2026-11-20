@@ -16,5 +16,6 @@ export const MenuTrigger = createFlowRemoteComponent(
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },
+    type: "provider",
   },
 );
