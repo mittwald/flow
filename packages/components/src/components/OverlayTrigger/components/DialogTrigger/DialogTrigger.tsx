@@ -24,10 +24,7 @@ const propsContext: PropsContext = {
   },
 };
 
-/**
- * @flr-generate all
- * @flr-provider
- */
+/** @flr-generate all */
 export const DialogTrigger: FC<DialogTriggerProps> = flowComponent(
   "DialogTrigger",
   (props) => {
