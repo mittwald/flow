@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0-next.3](https://github.com/mittwald/flow/compare/1.7.0-next.2...1.7.0-next.3) (2026-11-20)
+
+### Code Refactoring
+
+* **MessageSeparator:** register as flowComponent ([#3691](https://github.com/mittwald/flow/issues/3691)) ([d903b50](https://github.com/mittwald/flow/commit/d903b508f8a473c22f6aaf9182d000bf029d91de))
+
+## [1.6.2](https://github.com/mittwald/flow/compare/1.7.0-next.1...1.6.2) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.2 ([b993541](https://github.com/mittwald/flow/commit/b99354188b0005eaacaf2044ed7ee85d37f3cb91))
+
 ## [1.7.0-next.2](https://github.com/mittwald/flow/compare/1.7.0-next.1...1.7.0-next.2) (2026-11-19)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
