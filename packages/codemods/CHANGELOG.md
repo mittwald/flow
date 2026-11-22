@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.4](https://github.com/mittwald/flow/compare/1.6.3...1.6.4) (2026-11-22)
+
+### Documentation
+
+* **List:** add a migration entry for hooks in ListItem callbacks ([#3711](https://github.com/mittwald/flow/issues/3711)) ([0c988e7](https://github.com/mittwald/flow/commit/0c988e729550092bb479ef7740702da448b95afc))
+
 ## [1.6.3](https://github.com/mittwald/flow/compare/1.6.2...1.6.3) (2026-11-20)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
