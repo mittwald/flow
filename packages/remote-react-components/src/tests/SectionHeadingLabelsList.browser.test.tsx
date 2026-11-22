@@ -1,5 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { expect, test } from "vitest";
+import { expect, test, vitest } from "vitest";
 import { page } from "vitest/browser";
 
 interface Jedi {
@@ -11,6 +11,19 @@ const jedis: Jedi[] = [
   { id: "1", name: "Luke Skywalker" },
   { id: "2", name: "Obi-Wan Kenobi" },
 ];
+
+const missingLabelWarning = "An aria-label or aria-labelledby prop is required";
+
+/** Collects the `console.warn` output while `run` renders and asserts. */
+const collectWarnings = async (run: () => Promise<void>) => {
+  const warn = vitest.spyOn(console, "warn");
+  try {
+    await run();
+    return warn.mock.calls.flat().join("\n");
+  } finally {
+    warn.mockRestore();
+  }
+};
 
 /*
  * `List` is not `@flr-generate`: in an extension it renders inside the iframe,
@@ -218,6 +231,123 @@ test.each(testEnvironments)(
             </JediList.List>
           </Content>
         </Accordion>
+      </Section>,
+    );
+
+    const grid = page.getByRole("grid");
+    await expect.element(grid).toBeVisible();
+    expect(grid.element().getAttribute("aria-labelledby")).toBeNull();
+  },
+);
+
+/*
+ * The heading registers in a layout effect. Without a label on the first render
+ * React Aria warns, although the settled DOM is labelled (#3662).
+ */
+test.each(testEnvironments)(
+  "a list mounting with its section heading logs no missing-label warning (%s)",
+  async ({ render, components: { Section, Heading, typedList } }) => {
+    const JediList = typedList<Jedi>();
+
+    const warnings = await collectWarnings(async () => {
+      await render(
+        <Section>
+          <Heading>Jedi Council</Heading>
+          <JediList.List batchSize={5}>
+            <JediList.StaticData data={jedis} />
+            <JediList.Item textValue={(jedi) => jedi.name}>
+              {(jedi) => (
+                <JediList.ItemView>
+                  <Heading>{jedi.name}</Heading>
+                </JediList.ItemView>
+              )}
+            </JediList.Item>
+          </JediList.List>
+        </Section>,
+      );
+
+      await expect
+        .element(page.getByRole("grid", { name: "Jedi Council" }))
+        .toBeVisible();
+    });
+
+    expect(warnings).not.toContain(missingLabelWarning);
+  },
+);
+
+test.each(testEnvironments)(
+  "a table mounting with its section heading logs no missing-label warning (%s)",
+  async ({
+    render,
+    components: {
+      Section,
+      Heading,
+      Table,
+      TableHeader,
+      TableColumn,
+      TableBody,
+      TableRow,
+      TableCell,
+    },
+  }) => {
+    const warnings = await collectWarnings(async () => {
+      await render(
+        <Section>
+          <Heading>Jedi Council</Heading>
+          <Table>
+            <TableHeader>
+              <TableColumn>Name</TableColumn>
+            </TableHeader>
+            <TableBody>
+              {jedis.map((jedi) => (
+                <TableRow key={jedi.id}>
+                  <TableCell>{jedi.name}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Section>,
+      );
+
+      await expect
+        .element(page.getByRole("grid", { name: "Jedi Council" }))
+        .toBeVisible();
+    });
+
+    expect(warnings).not.toContain(missingLabelWarning);
+  },
+);
+
+test.each(testEnvironments)(
+  "a table in a section without a heading references no missing id (%s)",
+  async ({
+    render,
+    components: {
+      Section,
+      Text,
+      Table,
+      TableHeader,
+      TableColumn,
+      TableBody,
+      TableRow,
+      TableCell,
+    },
+  }) => {
+    await render(
+      <Section>
+        <Text>Briefing</Text>
+        <Table>
+          <TableHeader>
+            <TableColumn>Name</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {jedis.map((jedi) => (
+              <TableRow key={jedi.id}>
+                <TableCell>{jedi.name}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Section>,
     );
 

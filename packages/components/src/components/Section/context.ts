@@ -60,16 +60,36 @@ export const useRegisterSectionHeading = (id: string | undefined) => {
 /**
  * The `aria-labelledby` of a grid or table: its own label, else the heading of
  * the surrounding `Section` once that heading renders.
+ *
+ * A heading mounting in the same commit registers only in its layout effect. So
+ * the first render assumes the heading and the layout effect below re-checks
+ * before paint — otherwise React Aria warns about a missing label.
  */
 export const useLabelledBySectionHeading = (props: {
   "aria-label"?: string;
   "aria-labelledby"?: string;
 }): string | undefined => {
   const sectionHeading = useContext(sectionHeadingContext);
+  const [isMounted, setIsMounted] = useState(false);
 
-  if (props["aria-labelledby"] || props["aria-label"]) {
+  const hasOwnLabel = !!(props["aria-labelledby"] || props["aria-label"]);
+  const needsMountCheck = !!sectionHeading && !hasOwnLabel;
+
+  useLayoutEffect(() => {
+    if (needsMountCheck) {
+      setIsMounted(true);
+    }
+  }, [needsMountCheck]);
+
+  if (hasOwnLabel) {
     return props["aria-labelledby"];
   }
 
-  return sectionHeading?.isRendered ? sectionHeading.id : undefined;
+  if (!sectionHeading) {
+    return undefined;
+  }
+
+  return sectionHeading.isRendered || !isMounted
+    ? sectionHeading.id
+    : undefined;
 };
