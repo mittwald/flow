@@ -16,6 +16,7 @@ const markdown = [
   "Stelle vor dem Umzug den **Nameserver** auf mittwald um.",
   "- Zone exportieren\n- Zone importieren\n  - Einträge prüfen",
   "> Die Umstellung dauert bis zu 24 Stunden.",
+  "- [x] Nameserver eingetragen\n- [ ] DNS-Cache geleert",
   "```\ndig webshop.example-domain.de\n```",
   "| Eintrag | Wert |\n| --- | --- |\n| A | 192.0.2.10 |",
 ].join("\n\n");

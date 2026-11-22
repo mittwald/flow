@@ -12,6 +12,7 @@ declare const classNames: {
   readonly "flow--form-field": "flow--form-field";
   readonly "flow--labeled-value": "flow--labeled-value";
   readonly "flow--list": "flow--list";
+  readonly "flow--markdown": "flow--markdown";
   readonly "flow--markdown-editor": "flow--markdown-editor";
   readonly "flow--navigation": "flow--navigation";
   readonly "flow--tabs": "flow--tabs";

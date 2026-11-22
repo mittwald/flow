@@ -24,6 +24,7 @@
   > :global(.flow--form-field),
   > :global(.flow--labeled-value),
   > :global(.flow--list),
+  > :global(.flow--markdown),
   > :global(.flow--markdown-editor),
   > :global(.flow--navigation),
   > :global(.flow--tabs),

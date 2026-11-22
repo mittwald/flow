@@ -2,6 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
 import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
+import logo from "@/tests/assets/mittwald_logo_landscape.jpg";
 import {
   alphaColors,
   isAlphaColor,
@@ -9,26 +10,32 @@ import {
 
 const colors = ["default", ...alphaColors] as const;
 
+/* Only what the color changes: code blocks, tables and images keep their own
+   look and are in "Markdown elements". */
+const colorContent =
+  "## Heading 2\n" +
+  "**Bold**, `inline code` and a [link](https://example.com).\n\n" +
+  "> May the Force be with you.\n\n" +
+  "- [x] Steal the plans\n\n" +
+  "* X-Wing";
+
 test.each(testEnvironments)(
   "Markdown colors (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Markdown, Flex, Wrap, AccentBox },
+    components: { Markdown, ColumnLayout, Wrap, AccentBox },
   }) => {
     await render(
-      <Flex gap="m" direction="column">
+      <ColumnLayout s={[1, 1, 1]} gap="s">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
-              <Markdown color={color}>
-                {"## Heading 2\n" +
-                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](https://example.com)."}
-              </Markdown>
+              <Markdown color={color}>{colorContent}</Markdown>
             </AccentBox>
           </Wrap>
         ))}
-      </Flex>,
+      </ColumnLayout>,
     );
 
     await testScreenshot("Markdown colors");
@@ -36,34 +43,50 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "Markdown content (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
+  "Markdown elements (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Markdown, ColumnLayout },
+  }) => {
     await render(
-      <Markdown>
-        {"# Heading 1\n" +
-          "## Heading 2\n" +
-          "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
-          "```json\n" +
-          "{\n" +
-          '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-          '    "name": "Death Star"\n' +
-          "}\n" +
-          "```\n" +
-          "[link](#)\n" +
-          "> Block quote" +
-          "\n - Unordered list item 1 \n - Unordered list item 2 " +
-          "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
-          "| Column 1       | Column 2      |\n" +
-          "|---------------|---------------|\n" +
-          "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
-          "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
-          "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
-      </Markdown>,
+      <ColumnLayout s={[1, 1, 1]} gap="l">
+        <Markdown>
+          {"# Heading 1\n" +
+            "## Heading 2\n" +
+            "### Heading 3\n" +
+            "**Bold**, *italic*, ~~strikethrough~~, `inline code` and a [link](https://example.com).  \n" +
+            "A line break.\n\n" +
+            "> Block quote\n\n" +
+            "---\n\n" +
+            "Footnote[^1]\n\n" +
+            "[^1]: The note."}
+        </Markdown>
+        <Markdown>
+          {"* Unordered list item\n" +
+            "* Unordered list item\n" +
+            "  * Nested item\n\n" +
+            "1. Ordered list item\n" +
+            "2. Ordered list item\n\n" +
+            "- [x] Checked task\n" +
+            "- [ ] Open task\n\n" +
+            "```json\n" +
+            '{ "name": "Death Star" }\n' +
+            "```"}
+        </Markdown>
+        <Markdown>
+          {"| Pilot | Squadron |\n" +
+            "|-------|----------|\n" +
+            "| Luke  | Red Five |\n" +
+            "| Wedge | Red Two  |\n\n" +
+            `![mittwald](${logo})`}
+        </Markdown>
+      </ColumnLayout>,
     );
 
     await waitForHighlightedCode(1);
 
-    await testScreenshot("Markdown content");
+    await testScreenshot("Markdown elements");
   },
 );
 
