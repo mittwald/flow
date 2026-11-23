@@ -8,7 +8,7 @@ implementation instead of two. See the [root AGENTS.md](../../AGENTS.md) and
 - **Nothing framework-specific may enter.** No `react`, no `vue`, no import from
   a package that pulls one in — `@mittwald/react-use-promise`'s
   `AsyncResourceState` is spelled out here rather than imported for exactly that
-  reason. `no-restricted-imports` in the root `eslint.config.js` enforces it for
+  reason. `no-restricted-imports` in the root `oxlint.config.ts` enforces it for
   `packages/components-base/**`, together with the `@/` ban below. A test could
   not: the root `package.json` depends on `react`, so an import of it resolves
   from here and only a hook _call_ would fail.

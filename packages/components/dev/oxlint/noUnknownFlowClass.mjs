@@ -33,7 +33,6 @@ const prefixesOf = (known) => {
 const hint =
   "Generated names come from the component's path and drop the suffix when it equals the component name (dev/vite/cssModuleClassNameGenerator.ts), so they cannot be derived by hand — copy the name from the component's *.module.d.scss.ts. If you just added the class, regenerate the stubs first: pnpm nx build:scss-types components.";
 
-/** @type {import("eslint").Rule.RuleModule} */
 export default {
   meta: {
     type: "problem",

@@ -14,14 +14,14 @@ interface DoAndDontProps extends Omit<
 }
 
 declare global {
-  declare const LiveCodeEditor: ComponentType<{
+  const LiveCodeEditor: ComponentType<{
     example?: LiveCodeEditorProps;
   }>;
-  declare const Do: ComponentType<DoAndDontProps>;
-  declare const Dont: ComponentType<DoAndDontProps>;
-  declare const Info: ComponentType<DoAndDontProps>;
-  declare const Row: ComponentType<PropsWithChildren>;
-  declare const PropertiesTables: ComponentType;
-  declare const ComponentTokenTable: ComponentType<{ tokens?: string }>;
-  declare const Column: ComponentType<PropsWithChildren>;
+  const Do: ComponentType<DoAndDontProps>;
+  const Dont: ComponentType<DoAndDontProps>;
+  const Info: ComponentType<DoAndDontProps>;
+  const Row: ComponentType<PropsWithChildren>;
+  const PropertiesTables: ComponentType;
+  const ComponentTokenTable: ComponentType<{ tokens?: string }>;
+  const Column: ComponentType<PropsWithChildren>;
 }

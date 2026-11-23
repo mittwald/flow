@@ -165,7 +165,7 @@ Common tasks:
 ```shell
 pnpm build            # build everything (runs all generators)
 pnpm test             # unit + compile tests
-pnpm lint             # eslint + stylelint + format:check
+pnpm lint             # oxlint + stylelint + format:check
 ```
 
 Working on Flow itself, as a human or an AI coding agent? Start with the root

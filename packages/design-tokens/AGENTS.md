@@ -26,7 +26,7 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
   roughly an order of magnitude larger. `json-runtime` keeps only `value` and
   `path`. **Anything that reaches a browser bundle imports `json-runtime`** —
   `json` is for build-time and tooling, where the metadata is the point. A
-  `no-restricted-imports` rule in [eslint.config.js](../../eslint.config.js)
+  `no-restricted-imports` rule in [oxlint.config.ts](../../oxlint.config.ts)
   enforces this for every `src/`, so build-time code that genuinely needs
   `original` (the unresolved reference, which most tokens have) has to live
   outside `src/`.

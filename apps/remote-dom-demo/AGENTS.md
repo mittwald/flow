@@ -32,7 +32,7 @@ events, forms, suspense, ext-bridge, navigation, performance).
   losing a popover. Named and scoped slots are the Vue JSX idiom,
   `<Comp>{{ name: () => … }}</Comp>`, and pass through untouched — their
   functions build fresh nodes per call already. `react/jsx-key` is off only in
-  the demos that hand a slot a static array of children (`eslint.config.js`
+  the demos that hand a slot a static array of children (`oxlint.config.ts`
   lists them); everywhere else it checks the keys Vue needs on `.map()` output.
 - **A Vue demo runs against the built package**, not its source: it imports
   `@mittwald/flow-remote-vue-components` through the package entry, which is
