@@ -46,6 +46,7 @@ import type { TextAreaProps } from "@/components/TextArea";
 import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
+import type { TableProps } from "@/components/Table";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
@@ -216,6 +217,7 @@ export interface FlowComponentPropsTypes {
   SkeletonText: SkeletonTextProps;
   Slider: SliderProps;
   Switch: SwitchProps;
+  Table: TableProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
   Text: TextProps;
@@ -327,6 +329,7 @@ const propsContextSupportingComponentsMap: Record<
   SkeletonText: true,
   Slider: true,
   Switch: true,
+  Table: true,
   Tabs: true,
   TabTitle: true,
   TestComponent: true,
