@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.8](https://github.com/mittwald/flow/compare/1.6.7...1.6.8) (2026-11-23)
+
+### Code Refactoring
+
+* **Legend:** register as flowComponent ([#3688](https://github.com/mittwald/flow/issues/3688)) ([e608ff3](https://github.com/mittwald/flow/commit/e608ff33e789cb13067adc75734b2bddd3dd26d0))
+
 ## [1.6.7](https://github.com/mittwald/flow/compare/1.6.6...1.6.7) (2026-11-23)
 
 ### Bug Fixes
