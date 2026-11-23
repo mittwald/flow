@@ -2,14 +2,28 @@ import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
 import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
 import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
-import { checkTagIsSet } from "../lib/docTags";
+import { provisionTypeOf } from "../lib/provisionTypeOf";
+import { readFileSync } from "fs";
 
 export function generateRemoteReactComponentFile(c: ComponentDoc) {
   const componentProps = c.props;
 
+  const name = remoteComponentBaseNameOf(c);
+  /*
+   * `flowComponent` defaults to `"ui"`, which wraps the remote element in a
+   * `ClearPropsContext`. A remote composition (`Modal`, `List`, …) sets its
+   * props contexts in the remote tree, so a `"layout"` or `"provider"`
+   * component created as `"ui"` there cuts them off for its children. The
+   * remote component takes the type of the local `flowComponent` call.
+   */
+  const provisionType = provisionTypeOf(
+    readFileSync(c.filePath, "utf-8"),
+    name,
+  );
+
   const t = {
     remoteComponentName: remoteComponentNameOf(c),
-    name: remoteComponentBaseNameOf(c),
+    name,
     events: Object.keys(componentProps)
       .sort()
       .filter((propName) => propName.startsWith("on"))
@@ -18,15 +32,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
         return `${propName}: { event: "${formattedName}" } as never`;
       })
       .join(",\n"),
-    /*
-     * `flowComponent` defaults to the `"ui"` provision type, which wraps the
-     * remote element in a `ClearPropsContext`. That is wrong for a provider:
-     * where the local counterpart is not `@flr-generate` — `ModalTrigger`
-     * renders `OverlayTrigger` around `DialogTriggerView` — the provider runs
-     * inside the remote tree, and clearing there drops the props context it
-     * just set. `@flr-provider` carries the type over.
-     */
-    provisionType: checkTagIsSet(c.tags, "provider") ? `type: "provider",` : "",
+    provisionType: provisionType ? `type: "${provisionType}",` : "",
   };
 
   return `\
