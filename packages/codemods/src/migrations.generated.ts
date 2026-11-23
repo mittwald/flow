@@ -7,6 +7,16 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "list-item-callbacks-without-hooks",
+    since: "1.6.0",
+    title: "ListItem: `href` and `textValue` must not call hooks",
+    kind: "migration",
+    action: "manual",
+    remotePackage: true,
+    apply:
+      "Find `ListItem` elements — including the `Item` of a `typedList()` — whose `href`, `textValue` or `defaultExpanded` callback calls a hook: a `use…()` function, `React.use()`, or a hook-like method such as a ghost's `.use()`. Call the hook once in the component that renders the list, store the result in a variable, and read that variable inside the callback. Where the value depends on the item, have the hook return a function (e.g. a tester or a URL builder) and call that function with the item. Hooks in the item's render function (its children) are fine and stay.",
+  },
+  {
     id: "accordion-variant-deprecated",
     since: "1.5.0",
     title: "Accordion: `variant` deprecated",
