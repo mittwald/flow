@@ -99,6 +99,7 @@ import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
+import type { ImageCropperProps } from "@/components/ImageCropper";
 import type { RatingProps } from "@/components/Rating";
 import type { RatingSegmentProps } from "@/components/Rating/components/RatingSegment";
 import type { CodeEditorProps } from "@/components/CodeEditor";
@@ -167,6 +168,7 @@ export interface FlowComponentPropsTypes {
   Icon: IconProps;
   IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
+  ImageCropper: ImageCropperProps;
   Initials: InitialsProps;
   InlineCode: InlineCodeProps;
   Label: LabelProps;
@@ -276,6 +278,7 @@ const propsContextSupportingComponentsMap: Record<
   Icon: true,
   IllustratedMessage: true,
   Image: true,
+  ImageCropper: true,
   Initials: true,
   InlineCode: true,
   Kbd: true,
