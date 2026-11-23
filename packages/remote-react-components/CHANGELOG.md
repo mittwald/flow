@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0-next.5](https://github.com/mittwald/flow/compare/1.6.7...1.7.0-next.5) (2026-11-23)
+
+### Bug Fixes
+
+* **Remote:** keep the flowComponent type on generated remote components ([#3705](https://github.com/mittwald/flow/issues/3705)) ([4364a3a](https://github.com/mittwald/flow/commit/4364a3af81aacc8f2d2976dd7f638bbecdb45008))
+
+## [1.7.0-next.4](https://github.com/mittwald/flow/compare/1.6.6...1.7.0-next.4) (2026-11-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.4 ([e539bbe](https://github.com/mittwald/flow/commit/e539bbeb8cb3e08f0a47cd2b1a2b2f7dad34cd72))
+
+## [1.7.0-next.3](https://github.com/mittwald/flow/compare/1.6.3...1.7.0-next.3) (2026-11-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.3 ([453e863](https://github.com/mittwald/flow/commit/453e86324e9235fd6c9178e1b3d3913bc7e04de2))
+
+## [1.7.0-next.2](https://github.com/mittwald/flow/compare/1.6.2...1.7.0-next.2) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.2 ([6cf22f0](https://github.com/mittwald/flow/commit/6cf22f094490b9fa8d4389141d3178b800e6701e))
+
+## [1.7.0-next.1](https://github.com/mittwald/flow/compare/1.6.1...1.7.0-next.1) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.1 ([89ab54d](https://github.com/mittwald/flow/commit/89ab54dc1c8e52bbae6b8c86f1d91504aef2bb1d))
+
+## [1.7.0-next.0](https://github.com/mittwald/flow/compare/1.6.0...1.7.0-next.0) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.0 ([921da76](https://github.com/mittwald/flow/commit/921da763a56708a67a53d0a5f745d5d642399df7))
+
 ## [1.7.0-next.4](https://github.com/mittwald/flow/compare/1.6.5...1.7.0-next.4) (2026-11-23)
 
 ### Code Refactoring
