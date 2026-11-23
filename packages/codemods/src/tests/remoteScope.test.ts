@@ -54,6 +54,7 @@ const targets: Record<string, string[]> = {
   "overlay-controller-add-on-close-return-type": ["OverlayController"],
   "cartesian-chart-empty-view": ["CartesianChart"],
   "option-value-inferred-from-mixed-children": ["Option"],
+  "list-item-callbacks-without-hooks": ["ListItem", "typedList"],
   "action-prop-to-on-action": ["Action", "ActionProps"],
   // `Popover` itself is not `@flr-generate` and not in `flr-universal`,
   // so only the two components that inherit its props reach the remote

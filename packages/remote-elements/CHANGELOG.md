@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.6](https://github.com/mittwald/flow/compare/1.6.5...1.6.6) (2026-11-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.6.5](https://github.com/mittwald/flow/compare/1.6.4...1.6.5) (2026-11-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.6.4](https://github.com/mittwald/flow/compare/1.6.3...1.6.4) (2026-11-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.6.3](https://github.com/mittwald/flow/compare/1.6.2...1.6.3) (2026-11-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.6.2](https://github.com/mittwald/flow/compare/1.6.1...1.6.2) (2026-11-19)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+## [1.6.1](https://github.com/mittwald/flow/compare/1.6.0...1.6.1) (2026-11-19)
+
+### Bug Fixes
+
+* always show why a password is rejected ([#3687](https://github.com/mittwald/flow/issues/3687)) ([0c9abb9](https://github.com/mittwald/flow/commit/0c9abb912f578ea4e5e63732b0b2031af8c29e20))
+
 ## [1.6.0](https://github.com/mittwald/flow/compare/1.6.0-next.72...1.6.0) (2026-11-18)
 
 ### Miscellaneous Chores

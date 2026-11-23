@@ -29,6 +29,16 @@ export const Alert = flowComponent("Alert", (props) => {
     className,
   );
 
+  const actionsPropsContext = {
+    Button: {
+      size: "s",
+    },
+    ActionGroup: {
+      preserveOrder: true,
+      size: "s",
+    },
+  } satisfies PropsContext;
+
   const propsContext: PropsContext = {
     Heading: {
       className: styles.heading,
@@ -43,14 +53,9 @@ export const Alert = flowComponent("Alert", (props) => {
     },
     Content: {
       className: styles.content,
-      Button: {
-        size: "s",
-      },
-      ActionGroup: {
-        preserveOrder: true,
-        size: "s",
-      },
+      ...actionsPropsContext,
     },
+    ...actionsPropsContext,
   };
 
   return (

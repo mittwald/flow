@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.6](https://github.com/mittwald/flow/compare/1.6.5...1.6.6) (2026-11-23)
+
+### Code Refactoring
+
+* **CodeBlock:** register as flowComponent ([#3681](https://github.com/mittwald/flow/issues/3681)) ([d429cdc](https://github.com/mittwald/flow/commit/d429cdcc5961f2033796bae2b57bb3fdc9abc7c0))
+
+## [1.6.5](https://github.com/mittwald/flow/compare/1.6.4...1.6.5) (2026-11-22)
+
+### Bug Fixes
+
+* **Section:** label a list or table by the section heading on its first render ([#3708](https://github.com/mittwald/flow/issues/3708)) ([f3c8257](https://github.com/mittwald/flow/commit/f3c82574a0e7f9b2989b58b6dca125f456747ba6))
+
+## [1.6.4](https://github.com/mittwald/flow/compare/1.6.3...1.6.4) (2026-11-22)
+
+### Documentation
+
+* **List:** add a migration entry for hooks in ListItem callbacks ([#3711](https://github.com/mittwald/flow/issues/3711)) ([0c988e7](https://github.com/mittwald/flow/commit/0c988e729550092bb479ef7740702da448b95afc))
+
+## [1.6.3](https://github.com/mittwald/flow/compare/1.6.2...1.6.3) (2026-11-20)
+
+### Code Refactoring
+
+* **MessageSeparator:** register as flowComponent ([#3691](https://github.com/mittwald/flow/issues/3691)) ([d903b50](https://github.com/mittwald/flow/commit/d903b508f8a473c22f6aaf9182d000bf029d91de))
+
+## [1.6.2](https://github.com/mittwald/flow/compare/1.6.1...1.6.2) (2026-11-19)
+
+### Bug Fixes
+
+* **Remote:** keep event handlers stable across remote renders ([#3675](https://github.com/mittwald/flow/issues/3675)) ([04fb89d](https://github.com/mittwald/flow/commit/04fb89d8ef2e53af8ca65b702686d9d6f8121fab))
+
+## [1.6.1](https://github.com/mittwald/flow/compare/1.6.0...1.6.1) (2026-11-19)
+
+### Bug Fixes
+
+* **Alert:** support text and buttons without Content ([#3670](https://github.com/mittwald/flow/issues/3670)) ([e9b1c62](https://github.com/mittwald/flow/commit/e9b1c62ffd8c401ee9ff0ceb482eb562c7e2a171))
+* always show why a password is rejected ([#3687](https://github.com/mittwald/flow/issues/3687)) ([0c9abb9](https://github.com/mittwald/flow/commit/0c9abb912f578ea4e5e63732b0b2031af8c29e20))
+
+### Code Refactoring
+
+* **InlineCode:** register as flowComponent ([#3676](https://github.com/mittwald/flow/issues/3676)) ([0f8eaff](https://github.com/mittwald/flow/commit/0f8eaff0b8c7ee306cefbecf38d99b7f8d6f4682))
+
 ## [1.6.0](https://github.com/mittwald/flow/compare/1.6.0-next.72...1.6.0) (2026-11-18)
 
 ### Documentation
