@@ -11,12 +11,17 @@ import {
   SkeletonModeReset,
   useSkeletonMode,
 } from "@/components/SkeletonMode/skeletonModeContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export type RangeCalendarProps = Omit<
   Aria.RangeCalendarProps<Aria.DateValue>,
-  "children"
+  "children" | "ref"
 > &
-  Pick<DateRangePickerProps, "withDatePickerPresets">;
+  Pick<DateRangePickerProps, "withDatePickerPresets"> &
+  FlowComponentProps<HTMLDivElement> & {
+    children?: never;
+  };
 
 /** @internal */
 const InnerRangeCalendar: FC<RangeCalendarProps> = ({
@@ -61,8 +66,8 @@ const InnerRangeCalendar: FC<RangeCalendarProps> = ({
 };
 
 /** @flr-generate all */
-export const RangeCalendar: FC<RangeCalendarProps> = (props) => {
-  const { className, withDatePickerPresets, ...rest } = props;
+export const RangeCalendar = flowComponent("RangeCalendar", (props) => {
+  const { className, withDatePickerPresets, ref, ...rest } = props;
   const isSkeleton = useSkeletonMode();
 
   const rootClassName = clsx(
@@ -75,6 +80,7 @@ export const RangeCalendar: FC<RangeCalendarProps> = (props) => {
   return (
     <Aria.RangeCalendar
       {...rest}
+      ref={ref}
       className={rootClassName}
       inert={isSkeleton || undefined}
     >
@@ -84,6 +90,6 @@ export const RangeCalendar: FC<RangeCalendarProps> = (props) => {
       </SkeletonModeReset>
     </Aria.RangeCalendar>
   );
-};
+});
 
 export default RangeCalendar;
