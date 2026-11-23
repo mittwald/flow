@@ -4,7 +4,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, Ref } from "react";
+import type { CSSProperties } from "react";
 import { Children, isValidElement, useId, useMemo } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
@@ -21,9 +21,11 @@ import {
   SkeletonInlineContent,
 } from "@/components/Markdown/components/SkeletonBlocks";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface MarkdownProps
-  extends PropsWithClassName, Omit<Options, "components"> {
+  extends PropsWithClassName, Omit<Options, "components">, FlowComponentProps {
   /** The color schema of the markdown component. @default "default" */
   color?: "default" | AlphaColor;
   /** Shifts all heading levels by the given offset. @default 0 */
@@ -34,15 +36,13 @@ export interface MarkdownProps
   components?: Components;
   /** @internal */
   style?: CSSProperties;
-  /** A ref to the elements root. */
-  ref?: Ref<HTMLDivElement>;
 }
 
 /**
  * @flr-generate all
  * @flr-ignore-props components
  */
-export const Markdown: FC<MarkdownProps> = (props) => {
+export const Markdown = flowComponent("Markdown", (props) => {
   const {
     children,
     color = "default",
@@ -245,6 +245,6 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       </ReactMarkdown>
     </div>
   );
-};
+});
 
 export default Markdown;

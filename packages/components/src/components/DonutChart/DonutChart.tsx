@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./DonutChart.module.scss";
@@ -9,6 +9,8 @@ import { Wrap } from "@/components/Wrap";
 import { DonutChartLegend } from "@/components/DonutChart/components/DonutChartLegend";
 import type { Status } from "@/lib/types/props";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface DonutChartSegment {
   value: number;
@@ -20,7 +22,8 @@ export interface DonutChartSegment {
 export interface DonutChartProps
   extends
     Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
-    PropsWithChildren {
+    PropsWithChildren,
+    FlowComponentProps {
   /** The status the donut chart is colored by. */
   status?: Exclude<Status, "unavailable">;
   /** The size variant of the donut chart. @default "m" */
@@ -34,7 +37,7 @@ export interface DonutChartProps
 }
 
 /** @flr-generate all */
-export const DonutChart: FC<DonutChartProps> = (props) => {
+export const DonutChart = flowComponent("DonutChart", (props) => {
   const {
     size = "m",
     status = "info",
@@ -46,6 +49,7 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
     showLegend = true,
     legendPosition = "right",
     children,
+    ref,
     ...rest
   } = props;
 
@@ -81,6 +85,7 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
       className={rootClassName}
       value={displayedValue}
       {...rest}
+      ref={ref}
     >
       <Donut
         value={displayedValue}
@@ -109,6 +114,6 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
       </div>
     </Wrap>
   );
-};
+});
 
 export default DonutChart;
