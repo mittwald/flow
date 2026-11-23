@@ -15,6 +15,7 @@ import type { InitialsProps } from "@/components/Initials";
 import type { LoadingSpinnerProps } from "@/components/LoadingSpinner";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
+import type { CodeBlockProps } from "@/components/CodeBlock";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
 import type { AlertBadgeProps } from "@/components/AlertBadge";
@@ -126,6 +127,7 @@ export interface FlowComponentPropsTypes {
   Badge: BadgeProps;
   BigNumber: BigNumberProps;
   Button: ButtonProps;
+  CodeBlock: CodeBlockProps;
   CodeEditor: CodeEditorProps;
   Chat: ChatProps;
   Checkbox: CheckboxProps;
@@ -230,6 +232,7 @@ const propsContextSupportingComponentsMap: Record<
   Badge: true,
   BigNumber: true,
   Button: true,
+  CodeBlock: true,
   CodeEditor: true,
   Chat: true,
   Checkbox: true,
