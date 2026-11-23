@@ -10,6 +10,7 @@ import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
 import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
+import type { HeaderNavigationProps } from "@/components/HeaderNavigation";
 import type { TabNavigationProps } from "@/components/TabNavigation";
 import type { InitialsProps } from "@/components/Initials";
 import type { LoadingSpinnerProps } from "@/components/LoadingSpinner";
@@ -22,8 +23,11 @@ import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
+import type { AvatarStackProps } from "@/components/AvatarStack";
 import type { InlineCodeProps } from "@/components/InlineCode";
+import type { BreadcrumbProps } from "@/components/Breadcrumb";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { DonutChartProps } from "@/components/DonutChart";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -42,10 +46,12 @@ import type { TextAreaProps } from "@/components/TextArea";
 import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
+import type { TableProps } from "@/components/Table";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SeparatorProps } from "@/components/Separator";
+import type { SkeletonTextProps } from "@/components/SkeletonText";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
@@ -92,9 +98,11 @@ import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
+import type { MarkdownProps } from "@/components/Markdown";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
+import type { ImageCropperProps } from "@/components/ImageCropper";
 import type { RatingProps } from "@/components/Rating";
 import type { RatingSegmentProps } from "@/components/Rating/components/RatingSegment";
 import type { CodeEditorProps } from "@/components/CodeEditor";
@@ -123,9 +131,11 @@ export interface FlowComponentPropsTypes {
   Align: AlignProps;
   Combine: CombineProps;
   Avatar: AvatarProps;
+  AvatarStack: AvatarStackProps;
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   BigNumber: BigNumberProps;
+  Breadcrumb: BreadcrumbProps;
   Button: ButtonProps;
   CodeBlock: CodeBlockProps;
   CodeEditor: CodeEditorProps;
@@ -148,6 +158,7 @@ export interface FlowComponentPropsTypes {
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   DialogTrigger: DialogTriggerProps;
+  DonutChart: DonutChartProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   FileCard: FileCardProps;
@@ -156,10 +167,12 @@ export interface FlowComponentPropsTypes {
   FileDropZone: FileDropZoneProps;
   Header: HeaderProps;
   Heading: HeadingProps;
+  HeaderNavigation: HeaderNavigationProps;
   TabNavigation: TabNavigationProps;
   Icon: IconProps;
   IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
+  ImageCropper: ImageCropperProps;
   Initials: InitialsProps;
   InlineCode: InlineCodeProps;
   Label: LabelProps;
@@ -172,6 +185,7 @@ export interface FlowComponentPropsTypes {
   ListItemView: ListItemViewProps;
   ListSummary: ListSummaryProps;
   LoadingSpinner: LoadingSpinnerProps;
+  Markdown: MarkdownProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
@@ -202,8 +216,10 @@ export interface FlowComponentPropsTypes {
   Select: SelectProps;
   Kbd: KbdProps;
   SectionHeader: SectionHeaderProps;
+  SkeletonText: SkeletonTextProps;
   Slider: SliderProps;
   Switch: SwitchProps;
+  Table: TableProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
   Text: TextProps;
@@ -222,6 +238,7 @@ const propsContextSupportingComponentsMap: Record<
   Accordion: true,
   AccordionGroup: true,
   Avatar: true,
+  AvatarStack: true,
   Autocomplete: true,
   Alert: true,
   AlertBadge: true,
@@ -231,6 +248,7 @@ const propsContextSupportingComponentsMap: Record<
   Combine: true,
   Badge: true,
   BigNumber: true,
+  Breadcrumb: true,
   Button: true,
   CodeBlock: true,
   CodeEditor: true,
@@ -253,6 +271,7 @@ const propsContextSupportingComponentsMap: Record<
   DatePicker: true,
   DateRangePicker: true,
   DialogTrigger: true,
+  DonutChart: true,
   FieldDescription: true,
   FieldError: true,
   FileCard: true,
@@ -261,10 +280,12 @@ const propsContextSupportingComponentsMap: Record<
   FileDropZone: true,
   Header: true,
   Heading: true,
+  HeaderNavigation: true,
   TabNavigation: true,
   Icon: true,
   IllustratedMessage: true,
   Image: true,
+  ImageCropper: true,
   Initials: true,
   InlineCode: true,
   Kbd: true,
@@ -278,6 +299,7 @@ const propsContextSupportingComponentsMap: Record<
   ListItemView: true,
   ListSummary: true,
   LoadingSpinner: true,
+  Markdown: true,
   MarkdownEditor: true,
   MenuItem: true,
   MenuTrigger: true,
@@ -307,8 +329,10 @@ const propsContextSupportingComponentsMap: Record<
   Segment: true,
   SegmentedControl: true,
   Select: true,
+  SkeletonText: true,
   Slider: true,
   Switch: true,
+  Table: true,
   Tabs: true,
   TabTitle: true,
   TestComponent: true,

@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { Children } from "react";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -10,9 +10,11 @@ import { Avatar } from "@/components/Avatar";
 import { Wrap } from "@/components/Wrap";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AvatarStackProps
-  extends PropsWithClassName, PropsWithChildren {
+  extends PropsWithClassName, PropsWithChildren, FlowComponentProps {
   /**
    * The total count of items, as avatars should only be displayed for the first
    * view
@@ -25,13 +27,14 @@ export interface AvatarStackProps
 }
 
 /** @flr-generate all */
-export const AvatarStack: FC<AvatarStackProps> = (props) => {
+export const AvatarStack = flowComponent("AvatarStack", (props) => {
   const {
     className,
     children,
     totalCount = 0,
     size = "m",
     onCountPress,
+    ref,
   } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "AvatarStack");
@@ -55,7 +58,7 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <div className={rootClassName}>
+      <div ref={ref} className={rootClassName}>
         {children}
         {additionalItemsCount > 0 && (
           <Wrap if={onCountPress}>
@@ -74,6 +77,6 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
       </div>
     </PropsContextProvider>
   );
-};
+});
 
 export default AvatarStack;
