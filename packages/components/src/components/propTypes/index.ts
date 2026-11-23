@@ -98,6 +98,7 @@ import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
+import type { MarkdownProps } from "@/components/Markdown";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
@@ -184,6 +185,7 @@ export interface FlowComponentPropsTypes {
   ListItemView: ListItemViewProps;
   ListSummary: ListSummaryProps;
   LoadingSpinner: LoadingSpinnerProps;
+  Markdown: MarkdownProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
@@ -297,6 +299,7 @@ const propsContextSupportingComponentsMap: Record<
   ListItemView: true,
   ListSummary: true,
   LoadingSpinner: true,
+  Markdown: true,
   MarkdownEditor: true,
   MenuItem: true,
   MenuTrigger: true,
