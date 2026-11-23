@@ -37,28 +37,40 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Markdown content (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Markdown, Section, Heading, ColumnLayout },
+  }) => {
     await render(
-      <Markdown>
-        {"# Heading 1\n" +
-          "## Heading 2\n" +
-          "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
-          "```json\n" +
-          "{\n" +
-          '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-          '    "name": "Death Star"\n' +
-          "}\n" +
-          "```\n" +
-          "[link](#)\n" +
-          "> Block quote" +
-          "\n - Unordered list item 1 \n - Unordered list item 2 " +
-          "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
-          "| Column 1       | Column 2      |\n" +
-          "|---------------|---------------|\n" +
-          "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
-          "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
-          "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
-      </Markdown>,
+      <ColumnLayout l={[1, 1]} m={[1, 1]} s={[1, 1]} columnGap="xl">
+        {/* The section's heading id and class must not reach the markdown headings. */}
+        <Section>
+          <Heading>Section</Heading>
+          <Markdown>
+            {"# Heading 1\n" +
+              "## Heading 2\n" +
+              "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
+              "```json\n" +
+              "{\n" +
+              '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
+              '    "name": "Death Star"\n' +
+              "}\n" +
+              "```\n" +
+              "[link](#)\n" +
+              "> Block quote"}
+          </Markdown>
+        </Section>
+        <Markdown>
+          {" - Unordered list item 1 \n - Unordered list item 2 " +
+            "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
+            "| Column 1       | Column 2      |\n" +
+            "|---------------|---------------|\n" +
+            "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
+            "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
+            "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
+        </Markdown>
+      </ColumnLayout>,
     );
 
     await waitForHighlightedCode(1);

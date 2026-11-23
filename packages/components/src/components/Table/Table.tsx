@@ -1,8 +1,9 @@
-import type { FC } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Table.module.scss";
 import { useLabelledBySectionHeading } from "@/components/Section/context";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export type TableProps = Omit<
   Aria.TableProps,
@@ -22,16 +23,17 @@ export type TableProps = Omit<
   minWidth?: number | string;
   /** The elements class name. */
   className?: string;
-};
+} & FlowComponentProps;
 
 /** @flr-generate all */
-export const Table: FC<TableProps> = (props) => {
+export const Table = flowComponent("Table", (props) => {
   const {
     children,
     className,
     verticalAlign = "top",
     layout = "auto",
     minWidth,
+    ref,
     ...rest
   } = props;
 
@@ -45,7 +47,7 @@ export const Table: FC<TableProps> = (props) => {
   );
 
   return (
-    <div className={styles.tableContainer}>
+    <div className={styles.tableContainer} ref={ref}>
       <div className={styles.tableScrollArea} style={{ minWidth }}>
         <Aria.Table
           className={rootClassName}
@@ -57,6 +59,6 @@ export const Table: FC<TableProps> = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default Table;

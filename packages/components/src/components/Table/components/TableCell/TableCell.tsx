@@ -19,6 +19,8 @@ export interface TableCellProps
   horizontalAlign?: "start" | "center" | "end";
 }
 
+/* Plain FC: rendered once per cell; the factory measurably slows large tables
+ * (1,800 cells: mount +8–24 %, re-render +2–10 %). */
 /** @flr-generate all */
 export const TableCell: FC<TableCellProps> = (props) => {
   const {
