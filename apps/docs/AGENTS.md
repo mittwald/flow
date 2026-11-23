@@ -7,6 +7,20 @@ Next.js documentation site for the flow Styleguide, deployed to
   [README.md](README.md)** — it is the canonical content guideline and defines
   the section and page structures, heading conventions, tone of voice, and
   language rules (German content, English Design System terminology).
+- **A Component page follows a fixed spine** — the rules most often broken
+  ([details](README.md#component-page-structure)):
+  - The page opens with the default `<LiveCodeEditor />` — no heading, no intro
+    sentence. Only an integration-critical `<Alert>` may sit above it.
+  - **Only this opening example shows its code.** Every later
+    `<LiveCodeEditor />` gets `editorCollapsed`
+    ([Opening example](README.md#opening-example)).
+  - Order: opening example → `# Best Practices` → feature sections (each with
+    its own example) → `# Kombiniere mit …` → rare dev edge case →
+    `# Properties` → `# Design Tokens` (only with component tokens). Every
+    example besides the opening one sits **below** `# Best Practices`.
+  - Separators: none between the frontmatter and the opening example; a `---`
+    before every `#` section, the first right before `# Best Practices`; none
+    between a `#` and its own `##`.
 - Content lives in `src/content` as MDX, one directory per section
   (`get-started`, `foundations`, `templates`, `components`, `releases`). A
   component page is a single `index.mdx`. The `overview`, `develop` and
