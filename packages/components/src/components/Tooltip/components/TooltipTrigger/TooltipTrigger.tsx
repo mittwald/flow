@@ -1,5 +1,9 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export type TooltipDelay = "default" | "long";
 
@@ -8,9 +12,12 @@ const delays: Record<TooltipDelay, number> = {
   long: 1500,
 };
 
-export interface TooltipTriggerProps extends PropsWithChildren<
-  Omit<Aria.TooltipTriggerComponentProps, "children" | "delay">
-> {
+export interface TooltipTriggerProps
+  extends
+    PropsWithChildren<
+      Omit<Aria.TooltipTriggerComponentProps, "children" | "delay">
+    >,
+    Omit<FlowComponentProps, "ref"> {
   /**
    * How long the tooltip waits before it is shown on hover. Use `"default"`
    * (400ms) for elements that cannot be understood without the tooltip – icon
@@ -22,15 +29,22 @@ export interface TooltipTriggerProps extends PropsWithChildren<
   delay?: TooltipDelay;
 }
 
-/** @flr-generate all */
-export const TooltipTrigger: FC<TooltipTriggerProps> = (props) => {
-  const { children, delay = "default", ...rest } = props;
+/**
+ * @flr-generate all
+ * @flr-provider
+ */
+export const TooltipTrigger = flowComponent(
+  "TooltipTrigger",
+  (props) => {
+    const { children, delay = "default", ...rest } = props;
 
-  return (
-    <Aria.TooltipTrigger {...rest} delay={delays[delay]}>
-      {children}
-    </Aria.TooltipTrigger>
-  );
-};
+    return (
+      <Aria.TooltipTrigger {...rest} delay={delays[delay]}>
+        {children}
+      </Aria.TooltipTrigger>
+    );
+  },
+  { type: "provider" },
+);
 
 export default TooltipTrigger;

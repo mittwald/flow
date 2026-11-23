@@ -63,6 +63,7 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
+import type { TooltipProps, TooltipTriggerProps } from "@/components/Tooltip";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 import type { SegmentedControlProps } from "@/components/SegmentedControl";
 import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
@@ -204,6 +205,8 @@ export interface FlowComponentPropsTypes {
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
   TimeField: TimeFieldProps;
+  Tooltip: TooltipProps;
+  TooltipTrigger: TooltipTriggerProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -308,6 +311,8 @@ const propsContextSupportingComponentsMap: Record<
   TextArea: true,
   TextField: true,
   TimeField: true,
+  Tooltip: true,
+  TooltipTrigger: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(
