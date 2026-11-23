@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.5](https://github.com/mittwald/flow/compare/1.6.4...1.6.5) (2026-11-22)
+
+### Bug Fixes
+
+* **Section:** label a list or table by the section heading on its first render ([#3708](https://github.com/mittwald/flow/issues/3708)) ([f3c8257](https://github.com/mittwald/flow/commit/f3c82574a0e7f9b2989b58b6dca125f456747ba6))
+
+## [1.6.4](https://github.com/mittwald/flow/compare/1.6.3...1.6.4) (2026-11-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+## [1.6.3](https://github.com/mittwald/flow/compare/1.6.2...1.6.3) (2026-11-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 ## [1.6.2](https://github.com/mittwald/flow/compare/1.6.1...1.6.2) (2026-11-19)
 
 ### Bug Fixes
