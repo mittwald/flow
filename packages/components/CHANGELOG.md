@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0-next.4](https://github.com/mittwald/flow/compare/1.6.5...1.7.0-next.4) (2026-11-23)
+
+### Bug Fixes
+
+* **DonutChart:** let the AccentBox content color reach the value, register as flowComponent ([#3689](https://github.com/mittwald/flow/issues/3689)) ([b94b27b](https://github.com/mittwald/flow/commit/b94b27b7e23acd53e60b9727c16523a5d4588090))
+
+### Code Refactoring
+
+* **AvatarStack:** register as flowComponent ([#3692](https://github.com/mittwald/flow/issues/3692)) ([4f10a2e](https://github.com/mittwald/flow/commit/4f10a2ef8bbc7c9795c00f76c7584696a5e46980))
+* **Breadcrumb:** register as flowComponent ([#3693](https://github.com/mittwald/flow/issues/3693)) ([54053c8](https://github.com/mittwald/flow/commit/54053c821a699d765a525a958dce53c4d396cb2f))
+* **CodeBlock:** register as flowComponent ([#3681](https://github.com/mittwald/flow/issues/3681)) ([d429cdc](https://github.com/mittwald/flow/commit/d429cdcc5961f2033796bae2b57bb3fdc9abc7c0))
+* **Flex:** register as flowComponent ([#3701](https://github.com/mittwald/flow/issues/3701)) ([20f92da](https://github.com/mittwald/flow/commit/20f92da345f32afc0808056277065662d335235e))
+* **HeaderNavigation:** register as flowComponent ([#3696](https://github.com/mittwald/flow/issues/3696)) ([a267d69](https://github.com/mittwald/flow/commit/a267d698de2133a9e1e31e7523b94ef560b18e30))
+* **ImageCropper:** register as flowComponent ([#3698](https://github.com/mittwald/flow/issues/3698)) ([8164cf7](https://github.com/mittwald/flow/commit/8164cf79ac7402727fe94e40491559683da677f0))
+* **Markdown:** register as flowComponent ([#3699](https://github.com/mittwald/flow/issues/3699)) ([5d17cea](https://github.com/mittwald/flow/commit/5d17cea70bd649332f1cc4ed0c87dc82665953fe))
+* **SkeletonText:** register as flowComponent ([#3685](https://github.com/mittwald/flow/issues/3685)) ([c9ea2b6](https://github.com/mittwald/flow/commit/c9ea2b616723f754ecf9ff4f59d6b0a954f692a1))
+* **Table:** register as flowComponent ([#3702](https://github.com/mittwald/flow/issues/3702)) ([923df79](https://github.com/mittwald/flow/commit/923df79b7e2ec5f39edd0df4afc9fad868bf2192))
+
+## [1.7.0-next.3](https://github.com/mittwald/flow/compare/1.6.3...1.7.0-next.3) (2026-11-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.3 ([453e863](https://github.com/mittwald/flow/commit/453e86324e9235fd6c9178e1b3d3913bc7e04de2))
+
+## [1.7.0-next.2](https://github.com/mittwald/flow/compare/1.6.2...1.7.0-next.2) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.2 ([6cf22f0](https://github.com/mittwald/flow/commit/6cf22f094490b9fa8d4389141d3178b800e6701e))
+
+## [1.7.0-next.1](https://github.com/mittwald/flow/compare/1.6.1...1.7.0-next.1) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.1 ([89ab54d](https://github.com/mittwald/flow/commit/89ab54dc1c8e52bbae6b8c86f1d91504aef2bb1d))
+
+## [1.7.0-next.0](https://github.com/mittwald/flow/compare/1.6.0...1.7.0-next.0) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.0 ([921da76](https://github.com/mittwald/flow/commit/921da763a56708a67a53d0a5f745d5d642399df7))
+
 ## [1.7.0-next.3](https://github.com/mittwald/flow/compare/1.7.0-next.2...1.7.0-next.3) (2026-11-20)
 
 ### Code Refactoring
