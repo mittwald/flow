@@ -24,6 +24,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { DonutChartProps } from "@/components/DonutChart";
 import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
@@ -149,6 +150,7 @@ export interface FlowComponentPropsTypes {
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   DialogTrigger: DialogTriggerProps;
+  DonutChart: DonutChartProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   FileCard: FileCardProps;
@@ -255,6 +257,7 @@ const propsContextSupportingComponentsMap: Record<
   DatePicker: true,
   DateRangePicker: true,
   DialogTrigger: true,
+  DonutChart: true,
   FieldDescription: true,
   FieldError: true,
   FileCard: true,
