@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0-next.0](https://github.com/mittwald/flow/compare/1.7.0-next.8...1.8.0-next.0) (2026-11-24)
+
+### Bug Fixes
+
+* **codemods:** date the brand-color migrations to 1.7.0 ([dae6475](https://github.com/mittwald/flow/commit/dae6475299cc486b4a213ecb185ba5750ea7804f)), closes [#3654](https://github.com/mittwald/flow/issues/3654)
+
+### Documentation
+
+* **releases:** add the 1.7.0 release-note figures ([2a66621](https://github.com/mittwald/flow/commit/2a66621f4a7c827200e9efd6e0129b2e2dde0f9e))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0 ([b9c42a0](https://github.com/mittwald/flow/commit/b9c42a0a9e3029303ca7dcb027f8819698584fc9))
+* **sync:** take the stable changelogs from main ([9313c8b](https://github.com/mittwald/flow/commit/9313c8bccda3c189540522c4d9788be617d54a0d))
+
+## [1.6.11](https://github.com/mittwald/flow/compare/1.6.10...1.6.11) (2026-11-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.6.11 ([8d5311d](https://github.com/mittwald/flow/commit/8d5311d7e5d1a8e99037953c85a714b0763f30a3))
+
 ## [1.7.0](https://github.com/mittwald/flow/compare/1.6.11...1.7.0) (2026-11-24)
 
 ### Features
