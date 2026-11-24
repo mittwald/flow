@@ -48,7 +48,14 @@
     animation: progress-bar-fill var(--progress-bar--transition-duration) ease;
   }
 
-  /* Segments share the fill in proportion to their values. */
+  /* Segments share the fill in proportion to their values. The gap shows the
+     track between neighbors, so each segment borders a surface instead of a
+     color it may not contrast with. */
+  .fill:has(.segment) {
+    background: none;
+    gap: var(--progress-bar--segment-gap);
+  }
+
   .segment {
     flex: var(--progress-bar--segment-value) 1 0;
   }

@@ -3,10 +3,16 @@ import type { FC, PropsWithChildren } from "react";
 import styles from "./LegendItem.module.scss";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import clsx from "clsx";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 
 export interface LegendItemProps extends PropsWithChildren {
+  /**
+   * The color of the item's square.
+   *
+   * @deprecatedValues sea-green, palatinate-blue, tangerine, magenta, tropical-indigo,
+   *   malachite, azure, yellow, alloy-orange, lime
+   */
   color?: CategoricalWithCustomColor;
 }
 
@@ -14,11 +20,10 @@ export const LegendItem: FC<LegendItemProps> = (props) => {
   const { children, color: colorFromProps } = props;
 
   const isSkeleton = useSkeletonMode();
+  const categoricalColorValue = useCategoricalColorValue();
 
   const color = colorFromProps
-    ? isCategoricalColor(colorFromProps)
-      ? `var(--color--categorical--${colorFromProps})`
-      : colorFromProps
+    ? categoricalColorValue(colorFromProps)
     : undefined;
 
   return (

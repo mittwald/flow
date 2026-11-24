@@ -1,11 +1,12 @@
 import jetpack from "fs-jetpack";
 import path from "path";
 import lightDesignTokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
+import darkDesignTokens from "@mittwald/flow-design-tokens/json-runtime/all-dark.json";
 import loadProperties from "@/lib/PropertiesTables/lib/loadProperties";
 import { propertiesToMarkdown } from "@/lib/llms/propertiesToMarkdown";
 import {
-  collectTokensInPath,
-  tokenName,
+  collectThemedTokens,
+  differsByTheme,
 } from "@/lib/designTokens/collectTokens";
 import { absoluteUrl } from "@/lib/llms/siteUrls";
 import {
@@ -83,17 +84,30 @@ const appShellToMarkdown = (dir: string, tag: string): string => {
 };
 
 const designTokenTableToMarkdown = (tokenPath: string): string => {
-  const tokens = collectTokensInPath(tokenPath, lightDesignTokens);
+  const tokens = collectThemedTokens(
+    tokenPath,
+    lightDesignTokens,
+    darkDesignTokens,
+  );
   if (tokens.length === 0) {
     return "";
+  }
+
+  if (differsByTheme(tokens)) {
+    return [
+      "| Token | Light | Dark |",
+      "| --- | --- | --- |",
+      ...tokens.map(
+        (token) =>
+          `| \`--${token.name}\` | \`${token.light}\` | \`${token.dark ?? token.light}\` |`,
+      ),
+    ].join("\n");
   }
 
   return [
     "| Token | Wert |",
     "| --- | --- |",
-    ...tokens.map(
-      (token) => `| \`--${tokenName(token)}\` | \`${token.value}\` |`,
-    ),
+    ...tokens.map((token) => `| \`--${token.name}\` | \`${token.light}\` |`),
   ].join("\n");
 };
 

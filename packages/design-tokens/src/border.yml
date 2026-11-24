@@ -1,10 +1,22 @@
+# Corner radius by role, not by size. A nested element sits at least one
+# step below its container (card 24 > table 12 > button 8 > kbd 4).
+#   xl     surfaces: LayoutCard, Modal
+#   l      content containers that group content: Table, List, AccentBox,
+#          Alert, Message, Notification, FileCard, Accordion, CodeBlock,
+#          Popover, …
+#   m      controls: Button, form fields, MenuItem, Tooltip
+#   s      details inside an element: Kbd, InlineCode, list checkbox
+#   round  highlighted elements: Avatar, Switch, Slider handle
 corner-radius:
   s:
     value: "{size-px.xs}"
   m:
     value: "{size-px.s}"
+  # 12px sits between the size-px steps s (8) and m (16), set by UX.
   l:
-    value: "{size-px.m}"
+    value: 12px
+  xl:
+    value: "{size-px.l}"
   round:
     value: 50%
 border-width:

@@ -86,9 +86,11 @@ const runChain = (source: string): ChainRun => {
  * | `TableColumn maxWidth`/`minWidth={null}` | `table-column-width-props`                 |
  * | `/password-tools`                        | `password-tools-subpath-renamed`           |
  * | `Button color="accent"`                  | `button-color-accent-to-success`           |
+ * | `Badge color="red"`                      | `color-props-brand-palette`                |
  * | `Align`                                  | `align-to-combine`                         |
  * | `ContextualHelp defaultOpen`             | `popover-open-state-props`                 |
  * | `Accordion variant="outline"`            | `accordion-variant-deprecated`             |
+ * | `DonutChart segments={[… "magenta" …]}`  | `categorical-colors-own-palette`           |
  */
 const legacyApp = `import "@mittwald/flow-react-components/styles";
 import flowStyles from "@mittwald/flow-react-components/styles?url";
@@ -96,8 +98,10 @@ import { AccentBox } from "@mittwald/flow-react-components/components/AccentBox"
 import { Accordion } from "@mittwald/flow-react-components/components/Accordion";
 import { Action } from "@mittwald/flow-react-components/components/Action";
 import { Align } from "@mittwald/flow-react-components/components/Align";
+import { Badge } from "@mittwald/flow-react-components/components/Badge";
 import { Button } from "@mittwald/flow-react-components/components/Button";
 import { ContextualHelp } from "@mittwald/flow-react-components/components/ContextualHelp";
+import { DonutChart } from "@mittwald/flow-react-components/components/DonutChart";
 import { Heading } from "@mittwald/flow-react-components/components/Heading";
 import { MutedActionError } from "@mittwald/flow-react-components/components/Action";
 import { TableColumn } from "@mittwald/flow-react-components/components/TableColumn";
@@ -115,8 +119,10 @@ export const Toolbar = (props: {
 }) => (
   <Align>
     <Heading color="primary">Danger zone</Heading>
+    <Badge color="red">Locked</Badge>
     <ContextualHelp defaultOpen>Rights and roles</ContextualHelp>
     <Accordion variant="outline" />
+    <DonutChart segments={[{ title: "Mail", value: 2, color: "magenta" }]} />
     <AccentBox color="violet">
       <TableColumn maxWidth={200} minWidth={null} width={120} />
     </AccentBox>
@@ -142,8 +148,10 @@ import { AccentBox } from "@mittwald/flow-react-components";
 import { Accordion } from "@mittwald/flow-react-components";
 import { Action } from "@mittwald/flow-react-components";
 import { Combine } from "@mittwald/flow-react-components";
+import { Badge } from "@mittwald/flow-react-components";
 import { Button } from "@mittwald/flow-react-components";
 import { ContextualHelp } from "@mittwald/flow-react-components";
+import { DonutChart } from "@mittwald/flow-react-components";
 import { Heading } from "@mittwald/flow-react-components";
 import { AbortActionError } from "@mittwald/flow-react-components";
 import { TableColumn } from "@mittwald/flow-react-components";
@@ -160,9 +168,11 @@ export const Toolbar = (props: {
 }) => (
   <Combine>
     <Heading color="default">Danger zone</Heading>
+    <Badge color="danger">Locked</Badge>
     <ContextualHelp isDefaultOpen>Rights and roles</ContextualHelp>
     <Accordion />
-    <AccentBox backgroundColor="violet">
+    <DonutChart segments={[{ title: "Mail", value: 2, color: "violet" }]} />
+    <AccentBox backgroundColor="lilac">
       <TableColumn width={120} />
     </AccentBox>
     <Action onAction={() => props.controller.close()}>
