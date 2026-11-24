@@ -1,10 +1,4 @@
-import {
-  type FC,
-  type PropsWithChildren,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { type PropsWithChildren, useId, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
@@ -17,11 +11,14 @@ import {
   SkeletonModeReset,
   useSkeletonMode,
 } from "@/components/SkeletonMode/skeletonModeContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CodeBlockProps
   extends
     PropsWithClassName,
     PropsWithChildren,
+    FlowComponentProps,
     Partial<
       Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable">
     > {
@@ -37,7 +34,7 @@ export interface CodeBlockProps
 }
 
 /** @flr-generate all */
-export const CodeBlock: FC<CodeBlockProps> = (props) => {
+export const CodeBlock = flowComponent("CodeBlock", (props) => {
   const {
     code,
     className,
@@ -45,6 +42,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     showLineNumbers = false,
     children,
     truncateLines = false,
+    ref,
     ...rest
   } = props;
 
@@ -64,6 +62,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   if (!code) {
     return (
       <div
+        ref={ref}
         className={clsx(baseClassName, styles.withChildren, className)}
         inert={isSkeleton || undefined}
       >
@@ -114,6 +113,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 
   return (
     <div
+      ref={ref}
       className={clsx(
         baseClassName,
         maxHeight && styles.truncated,
@@ -179,6 +179,6 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       </SkeletonModeReset>
     </div>
   );
-};
+});
 
 export default CodeBlock;

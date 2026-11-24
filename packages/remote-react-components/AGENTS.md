@@ -18,6 +18,12 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
   in [docs/remote-ui.md](../../docs/remote-ui.md).
 - Hand-written: `RemoteRoot` (connects to the host render root, initializes
   ext-bridge) and the `createFlowRemoteComponent` machinery.
+- **Event props reach remote-dom as one stable function per event**
+  (`useStableEventHandlers` in `src/lib/createRemoteComponent.ts`), calling the
+  latest render's handler. Remote-dom re-registers a listener whose identity
+  changed and releases the `dispatch` the host holds, so an inline handler lost
+  every host event fired during a remote render — the last digit of a date
+  field's year, for one (#3088). The Vue binding's wrapper does the same.
 - Richest test surface outside `components`: unit, browser, e2e and visual
   tests. **Visual tests must pass in both environments — `Local` and `Remote`**
   (see `CONTRIBUTE.md` and `src/tests/lib/environments.tsx`).

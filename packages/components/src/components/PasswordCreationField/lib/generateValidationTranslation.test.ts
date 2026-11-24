@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { generateValidationTranslation } from "./generateValidationTranslation";
+import {
+  formatValidationResult,
+  generateValidationTranslation,
+} from "./generateValidationTranslation";
 import {
   RuleType,
   type RuleValidationResult,
@@ -105,5 +108,46 @@ describe("translation values", () => {
   test("any other rule is passed through as the message values", () => {
     const rule: Rule = { ruleType: RuleType.length, min: 8 };
     expect(generateValidationTranslation(rule)[1]).toBe(rule);
+  });
+});
+
+describe("formatValidationResult", () => {
+  const formatter = {
+    format: (key: string, variables?: Record<string, unknown>) => {
+      if (key.startsWith("validation.general.fallback")) {
+        return `${key}:${String(variables?.isValid)}`;
+      }
+      if (key === "validation.hibp") {
+        return "translated";
+      }
+      throw new Error(`Could not find intl message ${key}`);
+    },
+  };
+
+  test("a translated rule keeps its message", () => {
+    expect(formatValidationResult(formatter, { ruleType: RuleType.hibp })).toBe(
+      "translated",
+    );
+  });
+
+  test("a rejecting rule without a translation gets the generic message", () => {
+    expect(
+      formatValidationResult(formatter, {
+        ruleType: RuleType.charPool,
+        identifier: "lowercase",
+        min: 1,
+        isValid: false,
+      }),
+    ).toBe("validation.general.fallback:false");
+  });
+
+  test("the short version falls back to the short generic message", () => {
+    expect(
+      formatValidationResult(
+        formatter,
+        { ruleType: RuleType.regex, identifier: "custom", isValid: true },
+        true,
+      ),
+    ).toBe("validation.general.fallback.short:true");
   });
 });

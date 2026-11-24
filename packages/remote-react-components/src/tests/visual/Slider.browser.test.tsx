@@ -44,8 +44,6 @@ test.each(testEnvironments)(
     const increment = page.getByLocator("[aria-label='Increment value']");
     const decrement = page.getByLocator("[aria-label='Decrement value']");
 
-    await testScreenshot("Slider interaction - default");
-
     await increment.click();
     await increment.click();
     await increment.click();

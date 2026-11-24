@@ -72,7 +72,7 @@ const meta: Meta<typeof MessageThread> = {
         type="responder"
       />
 
-      <MessageSeparator {...props}>Conversation closed</MessageSeparator>
+      <MessageSeparator>Conversation closed</MessageSeparator>
 
       <ExampleMessage
         name="Leia Organa"

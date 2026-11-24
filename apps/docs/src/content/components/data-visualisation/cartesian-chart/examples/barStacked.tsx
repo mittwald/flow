@@ -44,13 +44,13 @@ export default () => {
         />
         <CartesianChart.Bar
           dataKey="Webspace"
-          color="palatinate-blue"
+          color="amber"
           stackId="speicher"
           unit="GB"
         />
         <CartesianChart.Bar
           dataKey="Email"
-          color="tangerine"
+          color="teal"
           stackId="speicher"
           unit="GB"
         />

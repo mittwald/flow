@@ -17,6 +17,7 @@ export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorE
       hidden: {},
       id: {},
       inert: {},
+      isFallback: {},
       lang: {},
       renderAlert: {},
       suppressHydrationWarning: {},

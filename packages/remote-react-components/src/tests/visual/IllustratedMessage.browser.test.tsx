@@ -49,13 +49,13 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "IllustratedMessage colors (%s)",
+  "IllustratedMessage (%s)",
   async ({
     testScreenshot,
     render,
     components: {
-      Heading,
       Flex,
+      Heading,
       IconStar,
       IllustratedMessage,
       Text,
@@ -65,23 +65,39 @@ test.each(testEnvironments)(
     },
   }) => {
     await render(
-      <Flex gap="s" align="center">
-        {colors.map((color) => (
-          <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
-              <IllustratedMessage color={color}>
-                <IconStar />
-                <Heading>{firstLetterToUppercase(color)}</Heading>
-                <Text>Text</Text>
-                <Button>Button</Button>
-              </IllustratedMessage>
-            </AccentBox>
-          </Wrap>
-        ))}
+      <Flex direction="column" gap="m">
+        <Flex gap="s" align="center">
+          {colors.map((color) => (
+            <Wrap if={isAlphaColor(color)} key={color}>
+              <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
+                <IllustratedMessage color={color}>
+                  <IconStar />
+                  <Heading>{firstLetterToUppercase(color)}</Heading>
+                  <Text>Text</Text>
+                  <Button>Button</Button>
+                </IllustratedMessage>
+              </AccentBox>
+            </Wrap>
+          ))}
+        </Flex>
+        <IllustratedMessage>
+          <Heading>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire and stole the secret
+            plans to the ultimate weapon, the Death Star.
+          </Heading>
+          <Text>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            an armored station with power to destroy an entire planet. Pursued
+            by sinister agents, Leia races home.
+          </Text>
+        </IllustratedMessage>
       </Flex>,
     );
 
-    await testScreenshot("IllustratedMessage colors");
+    await testScreenshot("IllustratedMessage");
   },
 );
 
@@ -127,33 +143,5 @@ test.each(testEnvironments)(
     await trigger.click();
 
     await testScreenshot("IllustratedMessage in Section in Modal");
-  },
-);
-
-test.each(testEnvironments)(
-  "IllustratedMessage edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Heading, IllustratedMessage, Text },
-  }) => {
-    await render(
-      <IllustratedMessage>
-        <Heading>
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire and stole the secret plans
-          to the ultimate weapon, the Death Star.
-        </Heading>
-        <Text>
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star, an
-          armored station with power to destroy an entire planet. Pursued by
-          sinister agents, Leia races home.
-        </Text>
-      </IllustratedMessage>,
-    );
-
-    await testScreenshot("IllustratedMessage edge cases");
   },
 );

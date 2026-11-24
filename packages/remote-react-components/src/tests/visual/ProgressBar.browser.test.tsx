@@ -3,7 +3,7 @@ import { test } from "vitest";
 
 const states = ["info", "success", "warning", "danger"] as const;
 test.each(testEnvironments)(
-  "ProgressBar default (%s)",
+  "ProgressBar (%s)",
   async ({
     testScreenshot,
     render,
@@ -35,22 +35,6 @@ test.each(testEnvironments)(
         >
           <Label>Label</Label>
         </ProgressBar>
-      </Flex>,
-    );
-
-    await testScreenshot("ProgressBar default");
-  },
-);
-
-test.each(testEnvironments)(
-  "ProgressBar segmented (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { ProgressBar, Label, Flex },
-  }) => {
-    await render(
-      <Flex direction="column" gap="m">
         <ProgressBar
           segments={[
             { title: "Segment 1", value: 50 },
@@ -85,22 +69,6 @@ test.each(testEnvironments)(
         >
           <Label>Label</Label>
         </ProgressBar>
-      </Flex>,
-    );
-
-    await testScreenshot("ProgressBar segmented");
-  },
-);
-
-test.each(testEnvironments)(
-  "ProgressBar edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Flex, ProgressBar, Label },
-  }) => {
-    await render(
-      <Flex direction="column" gap="m">
         <ProgressBar value={20}>
           <Label>
             A long time ago in a galaxy far, far away, the Rebel Alliance struck
@@ -122,6 +90,6 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("ProgressBar edge cases");
+    await testScreenshot("ProgressBar");
   },
 );

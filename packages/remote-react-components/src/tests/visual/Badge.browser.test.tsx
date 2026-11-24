@@ -3,20 +3,17 @@ import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBa
 import { test } from "vitest";
 import {
   alphaColors,
+  decorativeColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 export const colors = [
   "neutral",
-  "blue",
-  "navy",
-  "violet",
-  "teal",
-  "lilac",
-  "green",
-  "orange",
-  "red",
+  ...decorativeColors,
+  "success",
+  "warning",
+  "danger",
   ...alphaColors,
 ] as const;
 

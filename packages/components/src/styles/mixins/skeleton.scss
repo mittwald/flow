@@ -14,31 +14,36 @@ $shimmer-gradient: linear-gradient(
   transparent
 );
 
-/* Block surface. The shimmer moves over it in an `::after`. Needs
-   `@include keyframes` at the top level of the same module. */
-@mixin surface {
-  position: relative;
-  overflow: hidden;
+/* The moving highlight, shared by blocks and text bars. At rest (and at the
+   end of a reduced-motion run, see `globals.scss`) it sits outside the box. */
+@mixin shimmer {
   background-color: $background-color;
-  border-radius: var(--skeleton-radius, var(--corner-radius--m));
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background-image: $shimmer-gradient;
-    animation: skeleton-surface-shimmer $shimmer-duration infinite;
-    content: "";
-  }
+  background-image: $shimmer-gradient;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  animation: skeleton-shimmer $shimmer-duration infinite;
 
   @media (forced-colors: active) {
     forced-color-adjust: none;
     background-color: GrayText;
-
-    &::after {
-      display: none;
-    }
+    background-image: none;
   }
+}
+
+/* Block surface. Needs `@include keyframes` at the top level of the same
+   module. */
+@mixin surface {
+  @include shimmer;
+
+  /* Contains what the box hides and keeps its minimum size at 0 in a flex
+     row, so placeholders with an aspect ratio shrink alike */
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--skeleton-radius, var(--corner-radius--m));
+
+  /* The highlight also passes over a transparent border */
+  background-origin: border-box;
 }
 
 /* The base rule of `SkeletonMode`: the component keeps its real markup, size,
@@ -55,6 +60,8 @@ $shimmer-gradient: linear-gradient(
   outline: none;
   user-select: none;
 
+  &::before,
+  &::after,
   * {
     visibility: hidden;
   }
@@ -64,16 +71,13 @@ $shimmer-gradient: linear-gradient(
    content keeps its layout and becomes invisible. Needs `@include keyframes`
    at the top level of the same module. */
 @mixin text {
+  @include shimmer;
+
   color: transparent;
   -webkit-text-fill-color: transparent;
   user-select: none;
   border-radius: var(--skeleton-radius, var(--corner-radius--m));
   box-decoration-break: clone;
-  background-color: $background-color;
-  background-image: $shimmer-gradient;
-  background-repeat: no-repeat;
-  background-size: 200% 100%;
-  animation: skeleton-text-shimmer $shimmer-duration infinite;
 
   /* A block-level child (a flex label wrapper like TabTitle's) would split the
      inline bar and leave its background on empty fragments only. Inline, its
@@ -87,30 +91,16 @@ $shimmer-gradient: linear-gradient(
   * {
     visibility: hidden;
   }
-
-  @media (forced-colors: active) {
-    forced-color-adjust: none;
-    background-color: GrayText;
-    background-image: none;
-  }
 }
 
 @mixin keyframes {
-  @keyframes skeleton-surface-shimmer {
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  /* Both ends keep the highlight outside the bar, so the end state of a
-     reduced-motion run (see `globals.scss`) shows no highlight. */
-  @keyframes skeleton-text-shimmer {
+  @keyframes skeleton-shimmer {
     0% {
-      background-position: 150% 0;
+      background-position: 200% 0;
     }
 
     100% {
-      background-position: -50% 0;
+      background-position: -100% 0;
     }
   }
 }

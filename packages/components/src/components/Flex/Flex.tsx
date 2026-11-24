@@ -60,6 +60,9 @@ type FlexSize = "xs" | "s" | "m" | "l" | "xl";
 const sizeVariable = (size: FlexSize | undefined) =>
   size && `var(--size-px--${size})`;
 
+/* Plain FC: rendered once per layout box, often once per table cell; the
+ * factory measurably slows large trees (1,800 cells with a Flex each: mount
+ * +2–45 %, re-render up to +9 %). */
 /** @flr-generate all */
 export const Flex: FC<FlexProps> = (props) => {
   const {

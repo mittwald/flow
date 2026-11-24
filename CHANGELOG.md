@@ -3,6 +3,155 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0](https://github.com/mittwald/flow/compare/1.6.11...1.7.0) (2026-11-24)
+
+### Features
+
+* **design-tokens:** adopt the new mittwald brand colors ([e7c77ec](https://github.com/mittwald/flow/commit/e7c77ec841872ec39627b6c4d9407bbf9adda7ae)), closes [#3654](https://github.com/mittwald/flow/issues/3654) [#3631](https://github.com/mittwald/flow/issues/3631) [#3428](https://github.com/mittwald/flow/issues/3428)
+
+### Bug Fixes
+
+* **codemods:** date the brand-color migrations to 1.7.0 ([dae6475](https://github.com/mittwald/flow/commit/dae6475299cc486b4a213ecb185ba5750ea7804f)), closes [#3654](https://github.com/mittwald/flow/issues/3654)
+
+### Documentation
+
+* **releases:** add the 1.7.0 release-note figures ([2a66621](https://github.com/mittwald/flow/commit/2a66621f4a7c827200e9efd6e0129b2e2dde0f9e))
+* rework the start page in the new brand look ([64ab6da](https://github.com/mittwald/flow/commit/64ab6da0f0d3050a3f3c587afeb52faac58ae284))
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.7 ([1818141](https://github.com/mittwald/flow/commit/1818141463542f1167580be313ea237deea34bad))
+* **release:** bump version to 1.7.0-next.8 ([4f7db0c](https://github.com/mittwald/flow/commit/4f7db0c412929ba71de0fb9c431680861e5e42e9))
+* **sync:** take the stable changelogs from main ([9313c8b](https://github.com/mittwald/flow/commit/9313c8bccda3c189540522c4d9788be617d54a0d))
+
+### Tests
+
+* merge visual screenshots per component and refresh the baselines ([688ba34](https://github.com/mittwald/flow/commit/688ba34035a362b4f0ca07149a2e87ccbc6e05f3))
+
+## [1.7.0-next.6](https://github.com/mittwald/flow/compare/1.6.9...1.7.0-next.6) (2026-11-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.6 ([078c8e6](https://github.com/mittwald/flow/commit/078c8e669d82502cc234183327c2ce31c381aed6))
+
+## [1.7.0-next.5](https://github.com/mittwald/flow/compare/1.6.8...1.7.0-next.5) (2026-11-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.5 ([b1b4e00](https://github.com/mittwald/flow/commit/b1b4e00603b13773528056335741f5abc3705978))
+
+## [1.7.0-next.4](https://github.com/mittwald/flow/compare/1.6.6...1.7.0-next.4) (2026-11-23)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.4 ([e539bbe](https://github.com/mittwald/flow/commit/e539bbeb8cb3e08f0a47cd2b1a2b2f7dad34cd72))
+
+## [1.7.0-next.3](https://github.com/mittwald/flow/compare/1.6.3...1.7.0-next.3) (2026-11-20)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.3 ([453e863](https://github.com/mittwald/flow/commit/453e86324e9235fd6c9178e1b3d3913bc7e04de2))
+
+## [1.7.0-next.2](https://github.com/mittwald/flow/compare/1.6.2...1.7.0-next.2) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.2 ([6cf22f0](https://github.com/mittwald/flow/commit/6cf22f094490b9fa8d4389141d3178b800e6701e))
+
+## [1.7.0-next.1](https://github.com/mittwald/flow/compare/1.6.1...1.7.0-next.1) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.1 ([89ab54d](https://github.com/mittwald/flow/commit/89ab54dc1c8e52bbae6b8c86f1d91504aef2bb1d))
+
+## [1.7.0-next.0](https://github.com/mittwald/flow/compare/1.6.0...1.7.0-next.0) (2026-11-19)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.0-next.0 ([921da76](https://github.com/mittwald/flow/commit/921da763a56708a67a53d0a5f745d5d642399df7))
+
+## [1.6.11](https://github.com/mittwald/flow/compare/1.6.10...1.6.11) (2026-11-24)
+
+### Bug Fixes
+
+* **Legend:** commit the regenerated remote component ([#3719](https://github.com/mittwald/flow/issues/3719)) ([e32dc80](https://github.com/mittwald/flow/commit/e32dc809501ef2276c9450d188f3003b165e5905))
+
+## [1.6.10](https://github.com/mittwald/flow/compare/1.6.9...1.6.10) (2026-11-23)
+
+### Code Refactoring
+
+* **RangeCalendar:** register as flowComponent ([#3700](https://github.com/mittwald/flow/issues/3700)) ([1d7864e](https://github.com/mittwald/flow/commit/1d7864ede89243f462c0edf18cfc51616f7cf95e))
+
+## [1.6.9](https://github.com/mittwald/flow/compare/1.6.8...1.6.9) (2026-11-23)
+
+### Bug Fixes
+
+* **Remote:** keep the flowComponent type on generated remote components ([#3705](https://github.com/mittwald/flow/issues/3705)) ([4364a3a](https://github.com/mittwald/flow/commit/4364a3af81aacc8f2d2976dd7f638bbecdb45008))
+
+## [1.6.8](https://github.com/mittwald/flow/compare/1.6.7...1.6.8) (2026-11-23)
+
+### Code Refactoring
+
+* **Legend:** register as flowComponent ([#3688](https://github.com/mittwald/flow/issues/3688)) ([e608ff3](https://github.com/mittwald/flow/commit/e608ff33e789cb13067adc75734b2bddd3dd26d0))
+
+## [1.6.7](https://github.com/mittwald/flow/compare/1.6.6...1.6.7) (2026-11-23)
+
+### Bug Fixes
+
+* **DonutChart:** let the AccentBox content color reach the value, register as flowComponent ([#3689](https://github.com/mittwald/flow/issues/3689)) ([b94b27b](https://github.com/mittwald/flow/commit/b94b27b7e23acd53e60b9727c16523a5d4588090))
+
+### Code Refactoring
+
+* **AvatarStack:** register as flowComponent ([#3692](https://github.com/mittwald/flow/issues/3692)) ([4f10a2e](https://github.com/mittwald/flow/commit/4f10a2ef8bbc7c9795c00f76c7584696a5e46980))
+* **Breadcrumb:** register as flowComponent ([#3693](https://github.com/mittwald/flow/issues/3693)) ([54053c8](https://github.com/mittwald/flow/commit/54053c821a699d765a525a958dce53c4d396cb2f))
+* **Flex:** register as flowComponent ([#3701](https://github.com/mittwald/flow/issues/3701)) ([20f92da](https://github.com/mittwald/flow/commit/20f92da345f32afc0808056277065662d335235e))
+* **HeaderNavigation:** register as flowComponent ([#3696](https://github.com/mittwald/flow/issues/3696)) ([a267d69](https://github.com/mittwald/flow/commit/a267d698de2133a9e1e31e7523b94ef560b18e30))
+* **ImageCropper:** register as flowComponent ([#3698](https://github.com/mittwald/flow/issues/3698)) ([8164cf7](https://github.com/mittwald/flow/commit/8164cf79ac7402727fe94e40491559683da677f0))
+* **Markdown:** register as flowComponent ([#3699](https://github.com/mittwald/flow/issues/3699)) ([5d17cea](https://github.com/mittwald/flow/commit/5d17cea70bd649332f1cc4ed0c87dc82665953fe))
+* **SkeletonText:** register as flowComponent ([#3685](https://github.com/mittwald/flow/issues/3685)) ([c9ea2b6](https://github.com/mittwald/flow/commit/c9ea2b616723f754ecf9ff4f59d6b0a954f692a1))
+* **Table:** register as flowComponent ([#3702](https://github.com/mittwald/flow/issues/3702)) ([923df79](https://github.com/mittwald/flow/commit/923df79b7e2ec5f39edd0df4afc9fad868bf2192))
+
+## [1.6.6](https://github.com/mittwald/flow/compare/1.6.5...1.6.6) (2026-11-23)
+
+### Code Refactoring
+
+* **CodeBlock:** register as flowComponent ([#3681](https://github.com/mittwald/flow/issues/3681)) ([d429cdc](https://github.com/mittwald/flow/commit/d429cdcc5961f2033796bae2b57bb3fdc9abc7c0))
+
+## [1.6.5](https://github.com/mittwald/flow/compare/1.6.4...1.6.5) (2026-11-22)
+
+### Bug Fixes
+
+* **Section:** label a list or table by the section heading on its first render ([#3708](https://github.com/mittwald/flow/issues/3708)) ([f3c8257](https://github.com/mittwald/flow/commit/f3c82574a0e7f9b2989b58b6dca125f456747ba6))
+
+## [1.6.4](https://github.com/mittwald/flow/compare/1.6.3...1.6.4) (2026-11-22)
+
+### Documentation
+
+* **List:** add a migration entry for hooks in ListItem callbacks ([#3711](https://github.com/mittwald/flow/issues/3711)) ([0c988e7](https://github.com/mittwald/flow/commit/0c988e729550092bb479ef7740702da448b95afc))
+
+## [1.6.3](https://github.com/mittwald/flow/compare/1.6.2...1.6.3) (2026-11-20)
+
+### Code Refactoring
+
+* **MessageSeparator:** register as flowComponent ([#3691](https://github.com/mittwald/flow/issues/3691)) ([d903b50](https://github.com/mittwald/flow/commit/d903b508f8a473c22f6aaf9182d000bf029d91de))
+
+## [1.6.2](https://github.com/mittwald/flow/compare/1.6.1...1.6.2) (2026-11-19)
+
+### Bug Fixes
+
+* **Remote:** keep event handlers stable across remote renders ([#3675](https://github.com/mittwald/flow/issues/3675)) ([04fb89d](https://github.com/mittwald/flow/commit/04fb89d8ef2e53af8ca65b702686d9d6f8121fab))
+
+## [1.6.1](https://github.com/mittwald/flow/compare/1.6.0...1.6.1) (2026-11-19)
+
+### Bug Fixes
+
+* **Alert:** support text and buttons without Content ([#3670](https://github.com/mittwald/flow/issues/3670)) ([e9b1c62](https://github.com/mittwald/flow/commit/e9b1c62ffd8c401ee9ff0ceb482eb562c7e2a171))
+* always show why a password is rejected ([#3687](https://github.com/mittwald/flow/issues/3687)) ([0c9abb9](https://github.com/mittwald/flow/commit/0c9abb912f578ea4e5e63732b0b2031af8c29e20))
+
+### Code Refactoring
+
+* **InlineCode:** register as flowComponent ([#3676](https://github.com/mittwald/flow/issues/3676)) ([0f8eaff](https://github.com/mittwald/flow/commit/0f8eaff0b8c7ee306cefbecf38d99b7f8d6f4682))
+
 ## [1.6.0](https://github.com/mittwald/flow/compare/1.6.0-next.72...1.6.0) (2026-11-18)
 
 ### Documentation

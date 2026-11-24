@@ -14,5 +14,6 @@ export const Truncate = createFlowRemoteComponent(
       wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
+    type: "layout",
   },
 );
