@@ -9,7 +9,7 @@ tab-navigation:
     pressed:
       value: "{neutral-soft-background-color.pressed}"
     current:
-      value: "{neutral.color.100}"
+      value: "{elevation.color.100}"
   color:
     value: "{neutral-soft-content-color}"
   font-weight:

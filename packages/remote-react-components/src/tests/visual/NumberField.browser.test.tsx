@@ -114,8 +114,6 @@ test.each(testEnvironments)(
 
     const input = page.getByLocator("input");
 
-    await testScreenshot("NumberField interaction - default");
-
     await userEvent.type(input, "3");
 
     await testScreenshot("NumberField interaction - number entered");

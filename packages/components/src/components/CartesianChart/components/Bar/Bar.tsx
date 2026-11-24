@@ -5,7 +5,7 @@ import {
 import { type ComponentType } from "react";
 import * as Recharts from "recharts";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 import {
   type ChartDataValue,
   type DataKeyProp,
@@ -31,7 +31,12 @@ type BarBaseProps = Omit<FlowComponentProps, "ref"> &
     | "minPointSize"
   > & {
     children?: never;
-    /** The color of the bar. @default "sea-green" */
+    /**
+     * The color of the bar. @default "indigo"
+     *
+     * @deprecatedValues sea-green, palatinate-blue, tangerine, magenta, tropical-indigo,
+     *   malachite, azure, yellow, alloy-orange, lime
+     */
     color?: CategoricalWithCustomColor;
   };
 
@@ -51,16 +56,15 @@ export type BarProps<TData extends ChartDataValue = ChartDataValue> =
 
 /** @flr-generate all */
 export const Bar = flowComponent("Bar", (props) => {
-  const { color: colorFromProps = "sea-green", ...rest } = props;
+  const { color: colorFromProps = "indigo", ...rest } = props;
 
   const tokens = useDesignTokens();
   const animation = useChartAnimation();
   const { layout } = useCartesianChartContext();
   const stackId = useScopedStackId(props.stackId);
 
-  const color = isCategoricalColor(colorFromProps)
-    ? `var(--color--categorical--${colorFromProps})`
-    : colorFromProps;
+  const categoricalColorValue = useCategoricalColorValue();
+  const color = categoricalColorValue(colorFromProps);
 
   const cornerRadius = parseInt(tokens.bar["corner-radius"].value);
   const radius: Recharts.BarProps["radius"] =

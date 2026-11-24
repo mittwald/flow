@@ -44,7 +44,7 @@ export const DataVisualisationDemo = defineComponent({
         <CartesianChart data={shieldData} height="300px">
           <ChartGrid />
           <Area dataKey="Shields" />
-          <Area dataKey="Hull" color="palatinate-blue" />
+          <Area dataKey="Hull" color="amber" />
           <XAxis dataKey="time" />
           <YAxis domain={[0, 100]} unit="%" />
           <ChartTooltip

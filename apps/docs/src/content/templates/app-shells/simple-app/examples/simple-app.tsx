@@ -191,15 +191,12 @@ export default () => (
                 >
                   <Line
                     dataKey="Webhosting"
-                    color="sea-green"
+                    color="indigo"
                   />
-                  <Line
-                    dataKey="vServer"
-                    color="palatinate-blue"
-                  />
+                  <Line dataKey="vServer" color="amber" />
                   <Line
                     dataKey="Dedicated Server"
-                    color="tangerine"
+                    color="teal"
                   />
                   <XAxis dataKey="month" />
                   <YAxis domain={[0, 200]} />
@@ -262,17 +259,17 @@ export default () => (
                     {
                       title: "Webhosting",
                       value: 700,
-                      color: "sea-green",
+                      color: "indigo",
                     },
                     {
                       title: "vServer",
                       value: 300,
-                      color: "palatinate-blue",
+                      color: "amber",
                     },
                     {
                       title: "Dedicated Server",
                       value: 200,
-                      color: "tangerine",
+                      color: "teal",
                     },
                   ]}
                 >

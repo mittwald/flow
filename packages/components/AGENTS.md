@@ -180,13 +180,12 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
-- `@flr-provider` carries a `flowComponent`'s `type: "provider"` over to the
-  generated remote component. Without it the remote element is created as a
-  `"ui"` component and wrapped in a `ClearPropsContext` — which drops every
-  props context a provider around it just set. It only matters where the
-  provider actually runs inside the remote tree, i.e. where the component that
-  renders it is not itself `@flr-generate` (`ModalTrigger` → `OverlayTrigger` →
-  `DialogTriggerView`).
+- The generated remote component takes the `type` of the local
+  `flowComponent(…, { type })` call (`provisionTypeOf`), so write it as a string
+  literal — the generator fails otherwise. Created as `"ui"`, a remote
+  `"layout"` or `"provider"` component would wrap itself in a
+  `ClearPropsContext` and cut every props context a remote composition (`Modal`,
+  `List`, …) or a provider around it set.
 - **A prop that carries rendered output has to be a slot, not a property.** A
   remote property is transported as data, and a React element carries
   `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
@@ -302,6 +301,17 @@ if ("action" in props) {
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
+- **Colors come from Semantic or Variant, never Brand**
+  ([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
+  Brand variables (`--color--mittwald-blue--1000`) are theme-neutral, so they
+  stay light in dark. `flow/no-brand-color-variable` rejects them — stylelint in
+  stylesheets, ESLint in TS/TSX strings, both in `packages/components` and
+  `apps/docs`. The groups come from `design-tokens/src/color-brand.yml`
+  (`dev/brandColors/`), so a new group is covered without touching the rules. A
+  name completed at runtime (`--color--#{$hue}`, `` `--color--${hue}` ``) is
+  rejected too: only Brand defines tokens under `color`. Exempt: the docs pages
+  that display the palette itself (`foundations/design/colors`,
+  `design-tokens`).
 - Shared mixins via `@use "@/styles/mixins/…"`: `focus` (focus ring),
   `formControl` (border/color/interaction states of form fields), `ellipsis`.
   Group repeated variants in local mixins.

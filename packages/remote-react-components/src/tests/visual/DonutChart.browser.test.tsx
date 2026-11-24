@@ -48,7 +48,7 @@ test.each(testEnvironments)(
             segments={[
               { title: "Segment 1", value: 30 },
               { title: "Segment 2", value: 15 },
-              { title: "Segment 3", value: 25, color: "lime" },
+              { title: "Segment 3", value: 25, color: "red" },
               { title: "Segment 4", value: 12, color: "#555" },
             ]}
             legendPosition={position}

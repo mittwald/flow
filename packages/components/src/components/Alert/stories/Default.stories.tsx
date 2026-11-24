@@ -7,6 +7,8 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Link } from "@/components/Link";
 import { statusTypes } from "@/lib/types/props";
+import { Text } from "@/components/Text";
+import { InlineCode } from "@/components/InlineCode";
 
 const meta: Meta<typeof Alert> = {
   title: "Status/Alert",
@@ -38,6 +40,9 @@ export const WithContent: Story = {
       <Heading>{dummyText.short}</Heading>
       <Content>
         {dummyText.medium}
+        <Text>
+          Text with <InlineCode>InlineCode</InlineCode>
+        </Text>
         <Link>Link</Link>
         <ActionGroup>
           <Button>Primary</Button>

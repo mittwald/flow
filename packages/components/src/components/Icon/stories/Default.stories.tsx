@@ -3,16 +3,9 @@ import Icon from "@/components/Icon/Icon";
 import { IconStar } from "@tabler/icons-react";
 import { IconProject } from "@/components/Icon/components/icons";
 import { Flex } from "@/components/Flex";
-import { alphaColors, statusTypes } from "@/lib/types/props";
+import { alphaColors, decorativeColors, statusTypes } from "@/lib/types/props";
 
-const colors = [
-  "neutral",
-  "blue",
-  "violet",
-  "teal",
-  "lilac",
-  ...statusTypes,
-] as const;
+const colors = ["neutral", ...decorativeColors, ...statusTypes] as const;
 
 const meta: Meta<typeof Icon> = {
   title: "Content/Icon",

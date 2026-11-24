@@ -34,7 +34,7 @@ export const ComponentStatusBadge: FC<Props> = (props) => {
   }
   if (status?.isNew) {
     return (
-      <Badge color="violet" className={className}>
+      <Badge color="lilac" className={className}>
         Neu
       </Badge>
     );

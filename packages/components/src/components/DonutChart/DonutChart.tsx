@@ -15,6 +15,13 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface DonutChartSegment {
   value: number;
   title: string;
+  /**
+   * The color of the segment. Default: the categorical color at the segment's
+   * position.
+   *
+   * @deprecatedValues sea-green, palatinate-blue, tangerine, magenta,
+   *   tropical-indigo, malachite, azure, yellow, alloy-orange, lime
+   */
   color?: CategoricalWithCustomColor;
   valueText?: string;
 }

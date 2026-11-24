@@ -6,7 +6,7 @@ import { type ComponentType } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 import type {
   ChartDataValue,
   DataKey,
@@ -21,22 +21,26 @@ export interface LineProps<TData extends ChartDataValue = ChartDataValue>
       "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
     >,
     Omit<FlowComponentProps, "ref"> {
-  dataKey?: DataKey<TData>;
   children?: never;
-  /** The color of the line. @default "sea-green" */
+  dataKey?: DataKey<TData>;
+  /**
+   * The color of the line. @default "indigo"
+   *
+   * @deprecatedValues sea-green, palatinate-blue, tangerine, magenta, tropical-indigo,
+   *   malachite, azure, yellow, alloy-orange, lime
+   */
   color?: CategoricalWithCustomColor;
 }
 
 /** @flr-generate all */
 export const Line = flowComponent("Line", (props) => {
-  const { color: colorFromProps = "sea-green", ...rest } = props;
+  const { color: colorFromProps = "indigo", ...rest } = props;
 
   const tokens = useDesignTokens();
   const animation = useChartAnimation();
 
-  const color = isCategoricalColor(colorFromProps)
-    ? `var(--color--categorical--${colorFromProps})`
-    : colorFromProps;
+  const categoricalColorValue = useCategoricalColorValue();
+  const color = categoricalColorValue(colorFromProps);
 
   return (
     <Recharts.Line
