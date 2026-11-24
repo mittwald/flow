@@ -46,6 +46,18 @@
       flex-grow: 1;
     }
   }
+
+  /* A sole Alert fills the card like an AccentBox. The card takes the
+     Alert's radius: the card's would widen the Alert's start edge. */
+  &:has(> .alert:only-child) {
+    padding: 0;
+    border: none;
+    border-radius: var(--alert--corner-radius);
+
+    > .alert {
+      flex-grow: 1;
+    }
+  }
 }
 
 @media (max-width: 768px) {
