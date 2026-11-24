@@ -10,11 +10,11 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
-  "Breadcrumb colors (%s)",
+  "Breadcrumb (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Link, Flex, Wrap, Breadcrumb, AccentBox },
+    components: { Flex, Link, Wrap, Breadcrumb, AccentBox },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -36,33 +36,23 @@ test.each(testEnvironments)(
             </AccentBox>
           </Wrap>
         ))}
+        <Breadcrumb>
+          <Link>
+            A long time ago in a galaxy far, far away the Rebel Alliance struck
+            a decisive blow against the Galactic Empire fleet.
+          </Link>
+          <Link>
+            A long time ago in a galaxy far, far away the Rebel Alliance struck
+            a decisive blow against the Galactic Empire fleet.
+          </Link>
+          <Link>
+            A long time ago in a galaxy far, far away the Rebel Alliance struck
+            a decisive blow against the Galactic Empire fleet.
+          </Link>
+        </Breadcrumb>
       </Flex>,
     );
 
-    await testScreenshot("Breadcrumb colors");
-  },
-);
-
-test.each(testEnvironments)(
-  "Breadcrumb edge cases (%s)",
-  async ({ testScreenshot, render, components: { Link, Breadcrumb } }) => {
-    await render(
-      <Breadcrumb>
-        <Link>
-          A long time ago in a galaxy far, far away the Rebel Alliance struck a
-          decisive blow against the Galactic Empire fleet.
-        </Link>
-        <Link>
-          A long time ago in a galaxy far, far away the Rebel Alliance struck a
-          decisive blow against the Galactic Empire fleet.
-        </Link>
-        <Link>
-          A long time ago in a galaxy far, far away the Rebel Alliance struck a
-          decisive blow against the Galactic Empire fleet.
-        </Link>
-      </Breadcrumb>,
-    );
-
-    await testScreenshot("Breadcrumb edge cases");
+    await testScreenshot("Breadcrumb");
   },
 );

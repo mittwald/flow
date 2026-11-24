@@ -4,24 +4,28 @@ import { statusTypes } from "@mittwald/flow-react-components/internal";
 import { test } from "vitest";
 
 test.each(testEnvironments)(
-  "Alert states (%s)",
+  "Alert (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Alert, Flex, Heading, Content },
+    components: { Alert, Flex, Heading, Content, Text, InlineCode },
   }) => {
     await render(
       <Flex direction="column" gap="m">
         {statusTypes.map((status) => (
           <Alert status={status} key={status}>
             <Heading>{firstLetterToUppercase(status)}</Heading>
-            <Content>Content</Content>
+            <Content>
+              <Text>
+                Content with <InlineCode>InlineCode</InlineCode>
+              </Text>
+            </Content>
           </Alert>
         ))}
       </Flex>,
     );
 
-    await testScreenshot("Alert states");
+    await testScreenshot("Alert");
   },
 );
 
@@ -31,6 +35,7 @@ test.each(testEnvironments)(
     testScreenshot,
     render,
     components: {
+      Flex,
       Alert,
       ColumnLayout,
       Heading,
@@ -39,13 +44,36 @@ test.each(testEnvironments)(
       Link,
       Button,
       ActionGroup,
+      InlineCode,
+      Badge,
+      CopyButton,
     },
   }) => {
     await render(
-      <ColumnLayout columnGap="xl">
-        <Alert>
-          <Heading>With Content</Heading>
-          <Content>
+      <Flex direction="column" gap="m">
+        <ColumnLayout columnGap="xl">
+          <Alert>
+            <Heading>
+              With Content
+              <Badge>Badge</Badge>
+            </Heading>
+            <Content>
+              <Text>Text</Text>
+              <InlineCode>InlineCode</InlineCode>
+              <Badge>Badge</Badge>
+              <CopyButton text="InlineCode" />
+              <Link>Link</Link>
+              <Button>Button</Button>
+              <ActionGroup>
+                <Button color="secondary" variant="soft">
+                  Secondary
+                </Button>
+                <Button>Primary</Button>
+              </ActionGroup>
+            </Content>
+          </Alert>
+          <Alert>
+            <Heading>Without Content</Heading>
             <Text>Text</Text>
             <Link>Link</Link>
             <Button>Button</Button>
@@ -55,46 +83,21 @@ test.each(testEnvironments)(
               </Button>
               <Button>Primary</Button>
             </ActionGroup>
-          </Content>
-        </Alert>
+          </Alert>
+        </ColumnLayout>
         <Alert>
-          <Heading>Without Content</Heading>
-          <Text>Text</Text>
-          <Link>Link</Link>
-          <Button>Button</Button>
-          <ActionGroup>
-            <Button color="secondary" variant="soft">
-              Secondary
-            </Button>
-            <Button>Primary</Button>
-          </ActionGroup>
+          <Heading>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            an armored space station with enough power to destroy an entire
+            planet.
+          </Heading>
+          <Content>Content</Content>
         </Alert>
-      </ColumnLayout>,
+      </Flex>,
     );
 
     await testScreenshot("Alert content");
-  },
-);
-
-test.each(testEnvironments)(
-  "Alert edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Alert, Heading, Content },
-  }) => {
-    await render(
-      <Alert>
-        <Heading>
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star, an
-          armored space station with enough power to destroy an entire planet.
-        </Heading>
-        <Content>Content</Content>
-      </Alert>,
-    );
-
-    await testScreenshot("Alert edge cases");
   },
 );
