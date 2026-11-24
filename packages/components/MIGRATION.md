@@ -32,7 +32,7 @@ The CLI's own output does detect it and prints the right form.
 
 ## Charts: categorical colors follow Flow's own palette
 
-**Since `1.6.0`** · migration · codemod available · also applies to
+**Since `1.7.0`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 Flow's charts use their own 12 categorical colors instead of React Spectrum's,
@@ -114,7 +114,7 @@ npx @mittwald/flow-codemods@latest categorical-colors-own-palette src
 
 ## Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette
 
-**Since `1.6.0`** · migration · codemod available · also applies to
+**Since `1.7.0`** · migration · codemod available · also applies to
 `@mittwald/flow-remote-react-components`
 
 The decorative color values now follow the brand palette: one value per mittwald
@@ -199,7 +199,7 @@ npx @mittwald/flow-codemods@latest color-props-brand-palette src
 
 ## Color tokens: a new Brand palette that no longer switches with the theme
 
-**Since `1.6.0`** · migration · manual change
+**Since `1.7.0`** · migration · manual change
 
 The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
 (colors with a meaning), **Variant** (pairs per variant) and component tokens

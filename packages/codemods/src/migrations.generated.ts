@@ -8,7 +8,7 @@ import type { MigrationEntry } from "./catalog/types.js";
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
     id: "categorical-colors-own-palette",
-    since: "1.6.0",
+    since: "1.7.0",
     title: "Charts: categorical colors follow Flow's own palette",
     kind: "migration",
     action: "codemod",
@@ -18,7 +18,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
   },
   {
     id: "color-props-brand-palette",
-    since: "1.6.0",
+    since: "1.7.0",
     title:
       "Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette",
     kind: "migration",
@@ -29,7 +29,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
   },
   {
     id: "color-tokens-brand-theme-neutral",
-    since: "1.6.0",
+    since: "1.7.0",
     title:
       "Color tokens: a new Brand palette that no longer switches with the theme",
     kind: "migration",

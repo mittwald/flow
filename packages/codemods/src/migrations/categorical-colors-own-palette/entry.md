@@ -1,5 +1,5 @@
 ---
-since: 1.6.0
+since: 1.7.0
 title: "Charts: categorical colors follow Flow's own palette"
 kind: migration
 action: codemod
