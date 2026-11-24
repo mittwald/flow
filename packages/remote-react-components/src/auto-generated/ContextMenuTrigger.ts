@@ -14,5 +14,6 @@ export const ContextMenuTrigger = createFlowRemoteComponent(
       wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
+    type: "provider",
   },
 );

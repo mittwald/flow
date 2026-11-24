@@ -1,5 +1,6 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
@@ -8,7 +9,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { CodeBlock, Flex, Color },
+    components: { AccentBox, CodeBlock, Flex, Color, Text },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -30,6 +31,19 @@ test.each(testEnvironments)(
           </Color>
           <br />A long time ago in a galaxy far, far away, the Rebels.
         </CodeBlock>
+
+        {/* The content color of the AccentBox stops at the code block. */}
+        {(["light-static", "dark-static"] as const).map((color) => (
+          <AccentBox
+            key={color}
+            backgroundColor={alphaColorAccentBoxBackground(color)}
+            color={color}
+          >
+            <CodeBlock>
+              <Text>A long time ago in a galaxy far, far away.</Text>
+            </CodeBlock>
+          </AccentBox>
+        ))}
       </Flex>,
     );
 
