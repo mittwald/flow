@@ -3,7 +3,6 @@ import {
   hint,
 } from "../brandColors/brandColorVariables.mjs";
 
-/** @type {import("eslint").Rule.RuleModule} */
 export default {
   meta: {
     type: "problem",

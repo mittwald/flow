@@ -50,7 +50,7 @@ const IRRELEVANT_PREFIXES = [
  * Root-level files that never reach a published tarball.
  *
  * Deliberately NOT here: `package.json`, `pnpm-lock.yaml`,
- * `pnpm-workspace.yaml`, `nx.json`, `lerna.json`, `eslint.config.js`,
+ * `pnpm-workspace.yaml`, `nx.json`, `lerna.json`, `oxlint.config.ts`,
  * `stylelint.config.mjs` and `patches/**` — a dependency, resolution or build
  * wiring change can move the built output, so those stay relevant.
  *

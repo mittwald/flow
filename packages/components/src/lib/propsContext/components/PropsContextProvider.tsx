@@ -31,6 +31,7 @@ export const PropsContextProvider: FC<Props> = memo((props) => {
   const propsWithParentPropsContext = useMemo(() => {
     const propsWithNestingLevel = addNestingLevel(stableProvidedProps);
     return mergePropsContext(parentPropsContext, propsWithNestingLevel);
+    // oxlint-disable-next-line react-hooks/exhaustive-deps -- caller-provided dependencies
   }, [parentPropsContext, stableProvidedProps, ...dependencies]);
 
   return <Provider value={propsWithParentPropsContext}>{children}</Provider>;

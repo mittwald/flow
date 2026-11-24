@@ -83,7 +83,7 @@ export const buildComponentIndex = (
   components: ComponentDoc[],
   statusRegistry: Record<string, StatusEntry>,
   packageName: string,
-  flrUniversalNames: Set<string> = new Set(),
+  flrUniversalNames = new Set<string>(),
 ): ComponentIndex => {
   const sourceRootBySpecifier = new Map(
     STATUS_EXPORT_ENTRIES.map((entry) => [
