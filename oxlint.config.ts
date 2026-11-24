@@ -82,6 +82,7 @@ export default defineConfig({
     "no-useless-backreference": "error",
     "no-useless-catch": "error",
     "no-useless-escape": "error",
+    "no-useless-assignment": "error",
     "no-with": "error",
     "preserve-caught-error": "error",
     "require-yield": "error",
@@ -146,6 +147,13 @@ export default defineConfig({
     ],
   },
   overrides: [
+    {
+      // TypeScript reports undefined names in TS files itself.
+      files: ["**/*.js", "**/*.mjs", "**/*.jsx"],
+      rules: {
+        "no-undef": "error",
+      },
+    },
     {
       // TypeScript itself reports what these rules check.
       files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
