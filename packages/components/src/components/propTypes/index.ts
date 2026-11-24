@@ -5,6 +5,7 @@ import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
+import type { LegendProps } from "@/components/Legend";
 import type { LightBoxProps } from "@/components/LightBox";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
@@ -94,6 +95,7 @@ import type {
   MenuTriggerProps,
 } from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
+import type { RangeCalendarProps } from "@/components/Calendar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
 import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
@@ -178,6 +180,7 @@ export interface FlowComponentPropsTypes {
   InlineCode: InlineCodeProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
+  Legend: LegendProps;
   LightBox: LightBoxProps;
   LightBoxGallery: LightBoxGalleryProps;
   LightBoxGalleryItem: LightBoxGalleryItemProps;
@@ -208,6 +211,7 @@ export interface FlowComponentPropsTypes {
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  RangeCalendar: RangeCalendarProps;
   Rating: RatingProps;
   RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
@@ -293,6 +297,7 @@ const propsContextSupportingComponentsMap: Record<
   Kbd: true,
   Label: true,
   LayoutCard: true,
+  Legend: true,
   LightBox: true,
   LightBoxGallery: true,
   LightBoxGalleryItem: true,
@@ -323,6 +328,7 @@ const propsContextSupportingComponentsMap: Record<
   ProgressBar: true,
   RadioButton: true,
   RadioGroup: true,
+  RangeCalendar: true,
   Rating: true,
   RatingSegment: true,
   SearchField: true,

@@ -191,5 +191,6 @@ export const Section = createFlowRemoteComponent(
       onWheel: { event: "wheel" } as never,
       onWheelCapture: { event: "wheelCapture" } as never,
     },
+    type: "layout",
   },
 );
