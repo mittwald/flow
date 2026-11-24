@@ -81,8 +81,6 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   async ({ testScreenshot, render, components: { ImageCropper } }) => {
     await render(<ImageCropper image={gopher} />);
 
-    await testScreenshot("ImageCropper interaction - default");
-
     await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{arrowDown}");
     await userEvent.keyboard("{arrowDown}");

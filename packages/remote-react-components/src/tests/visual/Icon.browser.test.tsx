@@ -3,19 +3,13 @@ import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBa
 import { test } from "vitest";
 import {
   alphaColors,
+  decorativeColors,
   statusTypes,
 } from "@mittwald/flow-react-components/internal";
 
 const sizes = ["s", "m", "l"] as const;
 
-const colors = [
-  "neutral",
-  "blue",
-  "violet",
-  "teal",
-  "lilac",
-  ...statusTypes,
-] as const;
+const colors = ["neutral", ...decorativeColors, ...statusTypes] as const;
 
 test.each(testEnvironments)(
   "Icon (%s)",

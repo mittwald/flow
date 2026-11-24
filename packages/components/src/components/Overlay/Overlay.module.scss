@@ -65,6 +65,6 @@
 @media (prefers-contrast: more), (prefers-reduced-transparency) {
   .overlay {
     backdrop-filter: none;
-    background-color: var(--dark--color--600);
+    background-color: var(--dark--color--strong--300);
   }
 }

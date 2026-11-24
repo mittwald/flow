@@ -10,14 +10,14 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
-  "Link colors (%s)",
+  "Link (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Link, Flex, Wrap, AccentBox },
+    components: { Flex, Link, Wrap, AccentBox, IconStar, AlertText, Text },
   }) => {
     await render(
-      <Flex gap="m" direction="column">
+      <Flex direction="column" gap="m">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
             <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
@@ -42,22 +42,6 @@ test.each(testEnvironments)(
             </AccentBox>
           </Wrap>
         ))}
-      </Flex>,
-    );
-
-    await testScreenshot("Link colors");
-  },
-);
-
-test.each(testEnvironments)(
-  "Link edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Link, IconStar, AlertText, Text, Flex },
-  }) => {
-    await render(
-      <Flex direction="column" gap="m">
         <Link>
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           decisive blow against the Galactic Empire. Rebel spies managed to
@@ -72,7 +56,7 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("Link edge cases");
+    await testScreenshot("Link");
   },
 );
 

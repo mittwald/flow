@@ -78,7 +78,7 @@ export const Default: Story = {
   render: (props) => (
     <CartesianChart {...props}>
       <Area dataKey="firstKey" />
-      <Area dataKey="secondKey" color="palatinate-blue" />
+      <Area dataKey="secondKey" color="amber" />
       <Area dataKey="thirdKey" color="#555" />
       <XAxis dataKey="name" />
       <YAxis interval="equidistantPreserveStart" />
@@ -94,8 +94,8 @@ export const MultipleSynced: Story = {
     <>
       <CartesianChart {...props} syncId="syncedCharts">
         <Area dataKey="firstKey" />
-        <Area dataKey="secondKey" color="palatinate-blue" />
-        <Area dataKey="thirdKey" color="tangerine" />
+        <Area dataKey="secondKey" color="amber" />
+        <Area dataKey="thirdKey" color="teal" />
         <XAxis dataKey="name" />
         <YAxis />
         <ChartGrid />
@@ -103,9 +103,9 @@ export const MultipleSynced: Story = {
         <ChartLegend />
       </CartesianChart>
       <CartesianChart {...props} syncId="syncedCharts">
-        <Area dataKey="firstKey" color="magenta" />
-        <Area dataKey="secondKey" color="tropical-indigo" />
-        <Area dataKey="thirdKey" color="malachite" />
+        <Area dataKey="firstKey" color="violet" />
+        <Area dataKey="secondKey" color="berry" />
+        <Area dataKey="thirdKey" color="green" />
         <XAxis dataKey="name" />
         <YAxis />
         <ChartGrid />
@@ -128,8 +128,8 @@ export const WithEmptyView: Story = {
     return (
       <CartesianChart emptyView={emptyView}>
         <Area dataKey="firstKey" />
-        <Area dataKey="secondKey" color="palatinate-blue" />
-        <Area dataKey="thirdKey" color="tangerine" />
+        <Area dataKey="secondKey" color="amber" />
+        <Area dataKey="thirdKey" color="teal" />
         <XAxis dataKey="name" />
         <YAxis interval="equidistantPreserveStart" />
         <ChartGrid />
@@ -211,13 +211,9 @@ export const WithLine: Story = {
           },
         ]}
       >
-        <CartesianChart.Line dataKey="Median" color="magenta" unit="ms" />
+        <CartesianChart.Line dataKey="Median" color="violet" unit="ms" />
         <CartesianChart.Area dataKey="Fleet" unit="%" />
-        <CartesianChart.Area
-          dataKey="Squadrons"
-          color="palatinate-blue"
-          unit="%"
-        />
+        <CartesianChart.Area dataKey="Squadrons" color="amber" unit="%" />
         <CartesianChart.XAxis
           dataKey="Time"
           tickFormatter={(d) => {
@@ -262,7 +258,7 @@ export const WithIntlNumberFormat: Story = {
         },
       ]}
     >
-      <Area dataKey="Squadrons" color="palatinate-blue" />
+      <Area dataKey="Squadrons" color="amber" />
       <Area dataKey="Droids" />
       <XAxis dataKey="Time" />
       <YAxis domain={[0, 100]} />
@@ -290,8 +286,8 @@ export const WithBars: Story = {
   render: (props) => (
     <CartesianChart {...props}>
       <Bar dataKey="firstKey" />
-      <Bar dataKey="secondKey" color="palatinate-blue" />
-      <Bar dataKey="thirdKey" color="tangerine" />
+      <Bar dataKey="secondKey" color="amber" />
+      <Bar dataKey="thirdKey" color="teal" />
       <XAxis dataKey="name" />
       <YAxis />
       <ChartGrid />
@@ -305,8 +301,8 @@ export const WithStackedBars: Story = {
   render: (props) => (
     <CartesianChart {...props}>
       <Bar dataKey="firstKey" stackId="storage" />
-      <Bar dataKey="secondKey" color="palatinate-blue" stackId="storage" />
-      <Bar dataKey="thirdKey" color="tangerine" stackId="storage" />
+      <Bar dataKey="secondKey" color="amber" stackId="storage" />
+      <Bar dataKey="thirdKey" color="teal" stackId="storage" />
       <XAxis dataKey="name" />
       <YAxis />
       <ChartGrid />
@@ -320,7 +316,7 @@ export const WithHorizontalBars: Story = {
   render: (props) => (
     <CartesianChart {...props} layout="vertical" height="300px">
       <Bar dataKey="firstKey" />
-      <Bar dataKey="secondKey" color="palatinate-blue" />
+      <Bar dataKey="secondKey" color="amber" />
       <XAxis />
       <YAxis dataKey="name" />
       <ChartGrid vertical horizontal={false} />
@@ -334,8 +330,8 @@ export const WithBarsAndLine: Story = {
   render: (props) => (
     <CartesianChart {...props}>
       <Bar dataKey="firstKey" />
-      <Bar dataKey="secondKey" color="palatinate-blue" />
-      <Line dataKey="thirdKey" color="magenta" />
+      <Bar dataKey="secondKey" color="amber" />
+      <Line dataKey="thirdKey" color="violet" />
       <XAxis dataKey="name" />
       <YAxis />
       <ChartGrid />

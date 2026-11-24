@@ -377,7 +377,7 @@ test("Rating becomes an inert surface", async () => {
 test("Legend markers become surfaces without their color", async () => {
   await renderSkeleton(
     <Legend>
-      <LegendItem color="sea-green">Webspace</LegendItem>
+      <LegendItem color="indigo">Webspace</LegendItem>
       <LegendItem color="#ff0000">Datenbanken</LegendItem>
     </Legend>,
   );

@@ -20,4 +20,4 @@ light-box:
   indicator-corner-radius:
     value: "{corner-radius.round}"
   content-color:
-    value: "{light-static.color.800}"
+    value: "{light-static.color.strong.100}"

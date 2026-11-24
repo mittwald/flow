@@ -43,12 +43,12 @@ export default () => {
         />
         <CartesianChart.Bar
           dataKey="Webspace"
-          color="palatinate-blue"
+          color="amber"
           unit="GB"
         />
         <CartesianChart.Bar
           dataKey="Email"
-          color="tangerine"
+          color="teal"
           unit="GB"
         />
         <CartesianChart.XAxis dataKey="Monat" />

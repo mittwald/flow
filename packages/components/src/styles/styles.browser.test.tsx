@@ -1,6 +1,4 @@
 import Button from "@/components/Button/Button";
-import Skeleton from "@/components/Skeleton/Skeleton";
-import SkeletonText from "@/components/SkeletonText/SkeletonText";
 import { render } from "vitest-browser-react";
 import { commands, page } from "vitest/browser";
 
@@ -23,14 +21,30 @@ const infinitePseudoElementAnimations = () =>
     )
     .map((animation) => (animation as CSSAnimation).animationName);
 
-const renderSkeletons = async () => {
+const pseudoElementAnimationStyles = `
+  @keyframes pseudo-element-pulse {
+    to {
+      opacity: 0;
+    }
+  }
+
+  .pseudo-element-animation::before,
+  .pseudo-element-animation::after {
+    content: "";
+    animation: pseudo-element-pulse 1s infinite;
+  }
+`;
+
+const renderPseudoElementAnimations = async () => {
   const screen = await render(
     <>
-      <Skeleton width={200} height={40} />
-      <SkeletonText width={200} />
+      <style>{pseudoElementAnimationStyles}</style>
+      <div className="pseudo-element-animation" />
     </>,
   );
-  expect(screen.container.querySelectorAll("[aria-hidden]")).toHaveLength(2);
+  expect(
+    screen.container.querySelector(".pseudo-element-animation"),
+  ).not.toBeNull();
 };
 
 describe("::before and ::after animations", () => {
@@ -38,13 +52,13 @@ describe("::before and ::after animations", () => {
 
   test("run when motion is allowed", async () => {
     await commands.setReducedMotion("no-preference");
-    await renderSkeletons();
+    await renderPseudoElementAnimations();
 
     await expect.poll(infinitePseudoElementAnimations).toHaveLength(2);
   });
 
   test("stop when prefers-reduced-motion is set", async () => {
-    await renderSkeletons();
+    await renderPseudoElementAnimations();
     await new Promise(requestAnimationFrame);
 
     expect(infinitePseudoElementAnimations()).toEqual([]);
