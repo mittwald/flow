@@ -113,7 +113,7 @@ export default {
     },
     {
       // Docs pages that display the palette itself: the Brand value is the
-      // content. Keep in sync with eslint.config.js.
+      // content. Keep in sync with oxlint.config.ts.
       files: [
         "apps/docs/src/content/foundations/design/colors/**",
         "apps/docs/src/content/foundations/design/design-tokens/**",

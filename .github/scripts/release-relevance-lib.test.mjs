@@ -72,7 +72,7 @@ test("isPublishRelevant: build wiring and dependencies stay relevant", () => {
     "pnpm-workspace.yaml",
     "nx.json",
     "lerna.json",
-    "eslint.config.js",
+    "oxlint.config.ts",
     "stylelint.config.mjs",
     "patches/@sigstore__sign@4.1.1.patch",
   ]) {

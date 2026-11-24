@@ -86,7 +86,7 @@ runner aborted pushes after a publish had already happened (#2932). The path is
 relative, so each worktree runs its own checked-out copy and the hooks version
 with the branch. `SKIP_GIT_HOOKS=1` skips a hook for one command.
 
-- **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
+- **pre-push** runs `pnpm lint` (oxlint + Stylelint + Prettier check) across the
   repo. It blocks the push, not the commit — unformatted files surface once the
   commits already exist; `pnpm format` fixes them.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
@@ -661,7 +661,7 @@ binding at all is
 To run everything the way CI does:
 
 ```shell
-pnpm lint                                                       # ESLint + Stylelint + Prettier check
+pnpm lint                                                       # oxlint + Stylelint + Prettier check
 pnpm affected:test                                              # unit + compile, changed projects
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 ```
@@ -682,20 +682,19 @@ turns it red.
 Formatting and linting are enforced; the pre-push hook runs `pnpm lint` for you.
 
 ```shell
-pnpm lint           # check with ESLint + Stylelint + Prettier
+pnpm lint           # check with oxlint + Stylelint + Prettier
 pnpm format         # auto-format everything with Prettier
 pnpm format:check   # just the Prettier check (also part of pnpm lint)
 ```
 
-Prettier covers more than ESLint does: ESLint only ever sees `js`/`ts`/`tsx`
-(where Prettier runs as an ESLint rule via `eslint-plugin-prettier`), while
-`format:check` additionally gates `md`, `mdx`, `json`, `yaml` and `css`. So an
+oxlint only sees `js`/`ts`/`tsx` and checks no formatting. `format:check` gates
+formatting for those and for `md`, `mdx`, `json`, `yaml` and `css`. So an
 unformatted Markdown or JSON file fails `pnpm lint` too — run `pnpm format`.
 
 Hand-wrapped GitHub YAML (`.github/workflows`, `.github/ISSUE_TEMPLATE`) is in
 `.prettierignore` on purpose; don't reformat it.
 
-Enforced conventions (see `eslint.config.js` / `.prettierrc.json`):
+Enforced conventions (see `oxlint.config.ts` / `.prettierrc.json`):
 
 - Double quotes, semicolons required, Unix (`\n`) line endings.
 - `import type { … }` for type-only imports (separated from value imports).

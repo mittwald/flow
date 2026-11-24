@@ -92,7 +92,7 @@ value is the content.
 
 - `build-tokens.js` assigns every color token file to a tier and fails the build
   on a reference the table above forbids. It lands in the color PR.
-- `flow/no-brand-color-variable` (stylelint and ESLint) rejects Brand CSS
+- `flow/no-brand-color-variable` (stylelint and oxlint) rejects Brand CSS
   variables (`var(--color--…)`) in `packages/components` and `apps/docs`, except
   on the docs pages that display the palette
   ([#3463](https://github.com/mittwald/flow/issues/3463)).
