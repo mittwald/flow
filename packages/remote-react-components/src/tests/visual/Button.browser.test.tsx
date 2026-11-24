@@ -17,11 +17,11 @@ const colors = [
 const variants = ["solid", "outline", "soft", "plain"] as const;
 
 test.each(testEnvironments)(
-  "Button states (%s)",
+  "Button (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Flex, Button, IconInfo, Text },
+    components: { Flex, Button, IconInfo, Text, Avatar, Initials },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -62,10 +62,36 @@ test.each(testEnvironments)(
             </Button>
           </Flex>
         ))}
+        <Flex gap="s">
+          {avatarSizes.map((size) => (
+            <Button key={size}>
+              <Avatar size={size}>
+                <Initials>Luke Skywalker</Initials>
+              </Avatar>
+            </Button>
+          ))}
+        </Flex>
+        <Button>
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star, an
+          armored space station with enough power to destroy an entire planet,
+          and fled to the fourth moon of Yavin.
+        </Button>
+        <Button>
+          <IconInfo />
+          <Text>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            an armored space station with enough power to destroy an entire
+            planet, and fled to the fourth moon of Yavin.
+          </Text>
+        </Button>
       </Flex>,
     );
 
-    await testScreenshot("Button states");
+    await testScreenshot("Button");
   },
 );
 
@@ -100,59 +126,3 @@ test.each(testEnvironments)(
 );
 
 const avatarSizes = ["xs", "s", "m", "l"] as const;
-
-test.each(testEnvironments)(
-  "Button with Avatar (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Avatar, Button, Initials, Flex },
-  }) => {
-    await render(
-      <Flex gap="s">
-        {avatarSizes.map((size) => (
-          <Button key={size}>
-            <Avatar size={size}>
-              <Initials>Luke Skywalker</Initials>
-            </Avatar>
-          </Button>
-        ))}
-      </Flex>,
-    );
-
-    await testScreenshot("Button with avatar");
-  },
-);
-
-test.each(testEnvironments)(
-  "Button edge cases (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Flex, Button, Text, IconInfo },
-  }) => {
-    await render(
-      <Flex direction="column" gap="m">
-        <Button>
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star, an
-          armored space station with enough power to destroy an entire planet,
-          and fled to the fourth moon of Yavin.
-        </Button>
-        <Button>
-          <IconInfo />
-          <Text>
-            A long time ago in a galaxy far, far away, the Rebel Alliance struck
-            a decisive blow against the Galactic Empire. Rebel spies managed to
-            steal secret plans to the Empire's ultimate weapon, the Death Star,
-            an armored space station with enough power to destroy an entire
-            planet, and fled to the fourth moon of Yavin.
-          </Text>
-        </Button>
-      </Flex>,
-    );
-
-    await testScreenshot("Button edge cases");
-  },
-);

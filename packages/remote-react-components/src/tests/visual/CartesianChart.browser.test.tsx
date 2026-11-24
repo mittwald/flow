@@ -11,6 +11,7 @@ test.each(testEnvironments)(
     testScreenshot,
     render,
     components: {
+      Flex,
       CartesianChart,
       CartesianGrid,
       Area,
@@ -18,86 +19,66 @@ test.each(testEnvironments)(
       YAxis,
       ChartLegend,
       Line,
-    },
-  }) => {
-    await render(
-      <CartesianChart
-        height="300px"
-        data={[
-          {
-            name: "Stat 1",
-            first: 40,
-            second: 24,
-            third: 75,
-          },
-          {
-            name: "Stat 2",
-            first: 30,
-            second: 13,
-            third: 50,
-          },
-          {
-            name: "Stat 3",
-            first: 20,
-            second: 68,
-            third: 100,
-          },
-        ]}
-      >
-        <CartesianGrid />
-        <Area dataKey="first" />
-        <Area dataKey="second" color="#555" />
-        <Line dataKey="third" color="magenta" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <ChartLegend />
-      </CartesianChart>,
-    );
-
-    await testScreenshot("CartesianChart");
-  },
-);
-
-test.each(testEnvironments)(
-  "CartesianChart EmptyView (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      CartesianChart,
-      CartesianGrid,
       IllustratedMessage,
       IconMonitoring,
       Heading,
-      Area,
-      XAxis,
-      YAxis,
-      ChartLegend,
-      Line,
     },
   }) => {
     await render(
-      <CartesianChart
-        height="300px"
-        data={[]}
-        emptyView={
-          <IllustratedMessage>
-            <IconMonitoring />
-            <Heading>Keine Daten verfügbar</Heading>
-          </IllustratedMessage>
-        }
-      >
-        <CartesianGrid />
-        <Area dataKey="first" />
-        <Area dataKey="second" color="#555" />
-        <Line dataKey="third" color="magenta" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <ChartLegend />
-      </CartesianChart>,
+      <Flex direction="column" gap="m">
+        <CartesianChart
+          height="300px"
+          data={[
+            {
+              name: "Stat 1",
+              first: 40,
+              second: 24,
+              third: 75,
+            },
+            {
+              name: "Stat 2",
+              first: 30,
+              second: 13,
+              third: 50,
+            },
+            {
+              name: "Stat 3",
+              first: 20,
+              second: 68,
+              third: 100,
+            },
+          ]}
+        >
+          <CartesianGrid />
+          <Area dataKey="first" />
+          <Area dataKey="second" color="#555" />
+          <Line dataKey="third" color="violet" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <ChartLegend />
+        </CartesianChart>
+        <CartesianChart
+          height="300px"
+          data={[]}
+          emptyView={
+            <IllustratedMessage>
+              <IconMonitoring />
+              <Heading>Keine Daten verfügbar</Heading>
+            </IllustratedMessage>
+          }
+        >
+          <CartesianGrid />
+          <Area dataKey="first" />
+          <Area dataKey="second" color="#555" />
+          <Line dataKey="third" color="violet" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <ChartLegend />
+        </CartesianChart>
+      </Flex>,
     );
 
-    await testScreenshot("CartesianChart EmptyView");
+    await testScreenshot("CartesianChart");
   },
 );
 
@@ -128,6 +109,7 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
     testScreenshot,
     render,
     components: {
+      Flex,
       CartesianChart,
       ChartGrid,
       Bar,
@@ -138,40 +120,28 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
     },
   }) => {
     await render(
-      <CartesianChart height="300px" data={barChartData}>
-        <ChartGrid />
-        <Bar dataKey="first" />
-        <Bar dataKey="second" color="palatinate-blue" />
-        <Line dataKey="third" color="magenta" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <ChartLegend />
-      </CartesianChart>,
+      <Flex direction="column" gap="m">
+        <CartesianChart height="300px" data={barChartData}>
+          <ChartGrid />
+          <Bar dataKey="first" />
+          <Bar dataKey="second" color="amber" />
+          <Line dataKey="third" color="violet" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <ChartLegend />
+        </CartesianChart>
+        <CartesianChart height="300px" data={barChartData}>
+          <ChartGrid />
+          <Bar dataKey="first" stackId="stack" />
+          <Bar dataKey="second" color="amber" stackId="stack" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <ChartLegend />
+        </CartesianChart>
+      </Flex>,
     );
 
     await testScreenshot("CartesianChart with Bars");
-  },
-);
-
-test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
-  "CartesianChart with stacked Bars (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { CartesianChart, ChartGrid, Bar, XAxis, YAxis, ChartLegend },
-  }) => {
-    await render(
-      <CartesianChart height="300px" data={barChartData}>
-        <ChartGrid />
-        <Bar dataKey="first" stackId="stack" />
-        <Bar dataKey="second" color="palatinate-blue" stackId="stack" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <ChartLegend />
-      </CartesianChart>,
-    );
-
-    await testScreenshot("CartesianChart with stacked Bars");
   },
 );
 
@@ -186,7 +156,7 @@ test.skipIf(crossVersion({ below: barSince })).each(testEnvironments)(
       <CartesianChart height="300px" layout="vertical" data={barChartData}>
         <ChartGrid vertical horizontal={false} />
         <Bar dataKey="first" />
-        <Bar dataKey="second" color="palatinate-blue" />
+        <Bar dataKey="second" color="amber" />
         <XAxis />
         <YAxis dataKey="name" />
         <ChartLegend />

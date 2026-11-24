@@ -40,11 +40,11 @@ export default () => {
         <CartesianChart.Line dataKey="Projekt A" />
         <CartesianChart.Line
           dataKey="Projekt B"
-          color="palatinate-blue"
+          color="amber"
         />
         <CartesianChart.Line
           dataKey="Projekt C"
-          color="tangerine"
+          color="teal"
         />
         <CartesianChart.XAxis dataKey="Datum" />
         <CartesianChart.YAxis />

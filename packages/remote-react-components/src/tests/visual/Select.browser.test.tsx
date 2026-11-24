@@ -3,7 +3,7 @@ import { test } from "vitest";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "Select states (%s)",
+  "Select (%s)",
   async ({
     testScreenshot,
     render,
@@ -33,10 +33,19 @@ test.each(testEnvironments)(
           <Option>Option 1</Option>
           <Option>Option 2</Option>
         </Select>
+        <Select value="1">
+          <Label>Label</Label>
+          <Option value="1">
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star,
+            hidden on Scarif.
+          </Option>
+        </Select>
       </Flex>,
     );
 
-    await testScreenshot("Select states");
+    await testScreenshot("Select");
   },
 );
 
@@ -59,8 +68,6 @@ test.each(testEnvironments)(
 
     const select = page.getByLocator("button");
     const option = page.getByTestId("option");
-
-    await testScreenshot("Select interaction - default");
 
     await select.click();
 
@@ -88,8 +95,6 @@ test.each(testEnvironments)(
     const option1 = page.getByTestId("option1");
     const option2 = page.getByTestId("option2");
 
-    await testScreenshot("Select multiple - default");
-
     await select.click();
 
     await testScreenshot("Select multiple - options visible");
@@ -98,24 +103,5 @@ test.each(testEnvironments)(
     await option2.click();
 
     await testScreenshot("Select multiple - option selected");
-  },
-);
-
-test.each(testEnvironments)(
-  "Select edge cases (%s)",
-  async ({ testScreenshot, render, components: { Select, Label, Option } }) => {
-    await render(
-      <Select value="1">
-        <Label>Label</Label>
-        <Option value="1">
-          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-          decisive blow against the Galactic Empire. Rebel spies managed to
-          steal secret plans to the Empire's ultimate weapon, the Death Star,
-          hidden on Scarif.
-        </Option>
-      </Select>,
-    );
-
-    await testScreenshot("Select edge cases");
   },
 );

@@ -24,7 +24,7 @@ describe("the generated migration guide", () => {
     const order = [...committed.matchAll(/<a id="([a-z0-9-]+)"><\/a>/g)].map(
       (match) => match[1],
     );
-    expect(order[0]).toBe("list-item-callbacks-without-hooks");
+    expect(order[0]).toBe("categorical-colors-own-palette");
     expect(order.at(-1)).toBe("renamed-css-export");
   });
 });

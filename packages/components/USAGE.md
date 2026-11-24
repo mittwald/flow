@@ -221,7 +221,7 @@ change in **any** release (see
 `https://flow.mittwald.de/raw/get-started/versioning.md`):
 
 - **CSS class names** (`.flow--button`, …) — never write selectors against them.
-- **Design-token names and values** (`--size-px--m`, `--color--gray--500`) —
+- **Design-token names and values** (`--size-px--m`, `--content--color--300`) —
   they are Flow's internal vocabulary, not a consumer API. Use the component
   props above instead.
 - **Internal DOM structure** — do not rely on the element tree a component

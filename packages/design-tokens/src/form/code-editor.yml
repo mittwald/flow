@@ -8,4 +8,4 @@ code-editor:
   gutter-separator-color:
     value: "{separator.color}"
   indentation-marker-color:
-    value: "{neutral.color.400}"
+    value: "{border.color.100}"

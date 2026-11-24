@@ -4,14 +4,14 @@ import { test } from "vitest";
 const sizes = ["xs", "s", "m", "l"] as const;
 
 test.each(testEnvironments)(
-  "AvatarStack sizes (%s)",
+  "AvatarStack (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Avatar, Flex, Initials, AvatarStack },
+    components: { Flex, Avatar, Initials, AvatarStack, Button, Label },
   }) => {
     await render(
-      <Flex gap="m" direction="column">
+      <Flex direction="column" gap="m">
         {sizes.map((size) => (
           <AvatarStack size={size} totalCount={10} key={size}>
             <Avatar>
@@ -25,40 +25,27 @@ test.each(testEnvironments)(
             </Avatar>
           </AvatarStack>
         ))}
+        <Label>With Buttons</Label>
+        <AvatarStack>
+          <Button>
+            <Avatar>
+              <Initials>A</Initials>
+            </Avatar>
+          </Button>
+          <Button>
+            <Avatar>
+              <Initials>B</Initials>
+            </Avatar>
+          </Button>
+          <Button>
+            <Avatar>
+              <Initials>C</Initials>
+            </Avatar>
+          </Button>
+        </AvatarStack>
       </Flex>,
     );
 
-    await testScreenshot("AvatarStack sizes");
-  },
-);
-
-test.each(testEnvironments)(
-  "AvatarStack with Buttons (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Avatar, Initials, AvatarStack, Button },
-  }) => {
-    await render(
-      <AvatarStack>
-        <Button>
-          <Avatar>
-            <Initials>A</Initials>
-          </Avatar>
-        </Button>
-        <Button>
-          <Avatar>
-            <Initials>B</Initials>
-          </Avatar>
-        </Button>
-        <Button>
-          <Avatar>
-            <Initials>C</Initials>
-          </Avatar>
-        </Button>
-      </AvatarStack>,
-    );
-
-    await testScreenshot("AvatarStack with Buttons");
+    await testScreenshot("AvatarStack");
   },
 );

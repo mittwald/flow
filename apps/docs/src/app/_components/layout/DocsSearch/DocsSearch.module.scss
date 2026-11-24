@@ -44,7 +44,7 @@
 
 .result:hover,
 .result.active {
-  background-color: var(--neutral--color--200);
+  background-color: var(--elevation--color--200);
 }
 
 .resultTitle {
@@ -53,12 +53,12 @@
 
 .meta {
   font-size: var(--font-size-text--s);
-  color: var(--neutral--color--800);
+  color: var(--content--color--200);
 }
 
 .snippet {
   font-size: var(--font-size-text--s);
-  color: var(--neutral--color--800);
+  color: var(--content--color--200);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
