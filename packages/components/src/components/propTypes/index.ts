@@ -95,6 +95,7 @@ import type {
   MenuTriggerProps,
 } from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
+import type { RangeCalendarProps } from "@/components/Calendar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
 import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
@@ -210,6 +211,7 @@ export interface FlowComponentPropsTypes {
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  RangeCalendar: RangeCalendarProps;
   Rating: RatingProps;
   RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
@@ -326,6 +328,7 @@ const propsContextSupportingComponentsMap: Record<
   ProgressBar: true,
   RadioButton: true,
   RadioGroup: true,
+  RangeCalendar: true,
   Rating: true,
   RatingSegment: true,
   SearchField: true,
