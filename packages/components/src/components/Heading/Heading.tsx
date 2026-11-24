@@ -1,4 +1,9 @@
-import type { AlphaColor, PropsWithElementType } from "@/lib/types/props";
+import {
+  type AlphaColor,
+  isAlphaColor,
+  type PropsWithElementType,
+} from "@/lib/types/props";
+import { contentColored } from "@/lib/propsContext/contentColor";
 import styles from "./Heading.module.scss";
 import { styleClassname } from "@/lib/scss/selectors";
 import clsx from "clsx";
@@ -73,6 +78,9 @@ export const Heading = flowComponent("Heading", (props) => {
   const buttonSize =
     effectiveSize === "xl" || effectiveSize === "xxl" ? "m" : "s";
 
+  // Content beside a colored heading takes its color, not the surface's
+  const contentColorProps = isAlphaColor(color) ? contentColored(color) : {};
+
   const propsContext: PropsContext = {
     Icon: {
       "aria-hidden": true,
@@ -85,12 +93,14 @@ export const Heading = flowComponent("Heading", (props) => {
       },
     },
     Badge: {
+      ...contentColorProps.Badge,
       tunnel: {
         id: "headingContent",
         component: "Heading",
       },
     },
     Button: {
+      ...contentColorProps.Button,
       tunnel: {
         id: "headingContent",
         component: "Heading",
@@ -98,6 +108,7 @@ export const Heading = flowComponent("Heading", (props) => {
       size: buttonSize,
     },
     CopyButton: {
+      ...contentColorProps.CopyButton,
       tunnel: {
         id: "headingContent",
         component: "Heading",

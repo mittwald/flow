@@ -35,7 +35,7 @@ export default () => {
       <CartesianChart.Area dataKey="Datenbanken" unit="%" />
       <CartesianChart.Area
         dataKey="Projekte"
-        color="palatinate-blue"
+        color="amber"
         unit="%"
       />
       <CartesianChart.XAxis dataKey="Zeit" />

@@ -2,7 +2,7 @@ import { type ComponentType, type FC } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
-import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import { useCategoricalColorValue } from "@/lib/tokens/useCategoricalColorValue";
 import {
   type ChartDataValue,
   type DataKeyProp,
@@ -24,7 +24,12 @@ type AreaBaseProps = Pick<
   | "type"
   | "unit"
 > & {
-  /** The color of the area. @default "sea-green" */
+  /**
+   * The color of the area. @default "indigo"
+   *
+   * @deprecatedValues sea-green, palatinate-blue, tangerine, magenta, tropical-indigo,
+   *   malachite, azure, yellow, alloy-orange, lime
+   */
   color?: CategoricalWithCustomColor;
 };
 
@@ -45,7 +50,7 @@ export type AreaProps<TData extends ChartDataValue = ChartDataValue> =
 /** @flr-generate all */
 export const Area: FC<AreaProps> = (props) => {
   const {
-    color: colorFromProps = "sea-green",
+    color: colorFromProps = "indigo",
     stackId: stackIdFromProps = 1,
     fillOpacity = 1,
     ...rest
@@ -55,9 +60,8 @@ export const Area: FC<AreaProps> = (props) => {
   const stackId = useScopedStackId(stackIdFromProps);
   const animation = useChartAnimation();
 
-  const color = isCategoricalColor(colorFromProps)
-    ? `var(--color--categorical--${colorFromProps})`
-    : colorFromProps;
+  const categoricalColorValue = useCategoricalColorValue();
+  const color = categoricalColorValue(colorFromProps);
 
   return (
     <Recharts.Area

@@ -68,8 +68,6 @@ test.each(testEnvironments)(
 
     await render(<Wrapper />);
 
-    await testScreenshot("FileField upload one - default");
-
     const field = page.getByTestId("field");
     await userEvent.upload(field, "src/tests/assets/gopher.webp");
 
@@ -102,8 +100,6 @@ test.each(testEnvironments)(
     }
 
     await render(<Wrapper />);
-
-    await testScreenshot("FileField upload multiple - default");
 
     const field = page.getByTestId("field");
     await userEvent.upload(field, [

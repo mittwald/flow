@@ -13,6 +13,7 @@ test.each(testEnvironments)(
       Text,
       MessageSeparator,
       MessageThread,
+      Markdown,
     },
   }) => {
     await render(
@@ -49,32 +50,7 @@ test.each(testEnvironments)(
           </Header>
           <Content>
             <Text>The Death Star plans were stolen by rebels.</Text>
-          </Content>
-        </Message>
-      </MessageThread>,
-    );
-
-    await testScreenshot("MessageThread");
-  },
-);
-
-/*
- * Regression test for #3160: MessageThread's `> li { list-style: none }`
- * (added for #2590's screen reader fix) used to be an unscoped `li`
- * selector, which also stripped markers from lists nested inside a
- * message's content instead of only the message wrapper itself.
- */
-test.each(testEnvironments)(
-  "MessageThread with lists (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { Message, Content, Markdown, MessageThread },
-  }) => {
-    await render(
-      <MessageThread>
-        <Message>
-          <Content>
+            {/* #3160: lists inside a message keep their markers. */}
             <Markdown>
               {"- Unordered list item 1\n" +
                 "- Unordered list item 2\n\n" +
@@ -86,6 +62,6 @@ test.each(testEnvironments)(
       </MessageThread>,
     );
 
-    await testScreenshot("MessageThread with lists");
+    await testScreenshot("MessageThread");
   },
 );

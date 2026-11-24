@@ -8,13 +8,11 @@
   max-width: 100%;
 
   --badge-size: calc(var(--badge--line-height) + var(--badge--padding-y) * 2);
-  --content-size: calc(var(--badge-size) - var(--badge--border-width) * 2);
+  --content-size: var(--badge-size);
 
   .content,
   .button {
     border-radius: var(--badge--corner-radius);
-    border-width: var(--badge--border-width);
-    border-style: var(--badge--border-style);
     font-size: var(--badge--font-size);
     font-weight: var(--badge--font-weight);
     padding: 0;
@@ -92,12 +90,9 @@
   .action,
   .close {
     height: var(--content-size);
-    padding: calc(var(--badge--padding-y) - var(--badge--border-width));
+    padding: var(--badge--padding-y);
     border-radius: 0;
-    margin-inline-start: calc(
-      (var(--content-size) + var(--badge--border-width)) * -1
-    );
-    margin-top: var(--badge--border-width);
+    margin-inline-start: calc(var(--content-size) * -1);
   }
 
   /* The trailing button rounds off the badge */
@@ -109,9 +104,7 @@
 
   &:has(.action):has(.close) {
     .action {
-      margin-inline-start: calc(
-        (var(--content-size) * 2 + var(--badge--border-width)) * -1
-      );
+      margin-inline-start: calc(var(--content-size) * -2);
     }
 
     .close {
@@ -125,7 +118,6 @@
     &:where(.#{$color}) {
       .content,
       .button {
-        border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
         color: var(--badge--#{$color}-content-color);
       }
@@ -152,12 +144,12 @@
   @include color("neutral");
   @include color("blue");
   @include color("navy");
-  @include color("violet");
-  @include color("teal");
   @include color("lilac");
-  @include color("green");
-  @include color("orange");
-  @include color("red");
+  @include color("sage");
+  @include color("salmon");
+  @include color("success");
+  @include color("warning");
+  @include color("danger");
   @include color("dark");
   @include color("light");
   @include color("dark-static");
@@ -166,7 +158,6 @@
   &.disabled {
     .content,
     .button {
-      border-color: var(--badge--disabled-border-color);
       background-color: var(--badge--disabled-background-color);
       color: var(--badge--disabled-content-color);
     }
@@ -188,7 +179,6 @@
     &.#{$color}.disabled {
       .content,
       .button {
-        border-color: var(--badge--disabled-#{$color}-border-color);
         background-color: var(--badge--disabled-#{$color}-background-color);
         color: var(--badge--disabled-#{$color}-content-color);
       }

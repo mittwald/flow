@@ -261,6 +261,31 @@ export default defineConfig({
       },
     },
     {
+      // ADR 0008: code reads Semantic or Variant colors, never Brand. Brand is
+      // theme-neutral, so a Brand variable stays light in dark. The groups come
+      // from design-tokens/src/color-brand.yml, so a new one is covered.
+      files: [
+        "packages/components/**/*.{js,jsx,mjs,ts,tsx}",
+        "apps/docs/**/*.{js,jsx,mjs,ts,tsx}",
+      ],
+      rules: {
+        "flow/no-brand-color-variable": "error",
+      },
+    },
+    {
+      files: [
+        // Lint tooling, which names Brand variables to reject them.
+        "packages/components/dev/**",
+        // Docs pages that display the palette itself: the Brand value is the
+        // content. Keep in sync with stylelint.config.mjs.
+        "apps/docs/src/content/foundations/design/colors/**",
+        "apps/docs/src/content/foundations/design/design-tokens/**",
+      ],
+      rules: {
+        "flow/no-brand-color-variable": "off",
+      },
+    },
+    {
       /*
        * The Vue demos' JSX namespace (`_lib/jsx-runtime.ts`) has to be a
        * namespace — the one shape TypeScript accepts for `@jsxImportSource` —
@@ -291,8 +316,8 @@ export default defineConfig({
       },
     },
     {
-      // Node ES-module CLI scripts (run by GitHub Actions, not bundled).
-      files: [".github/scripts/**/*.mjs"],
+      // Node ES-module CLI scripts (not bundled).
+      files: [".github/scripts/**/*.mjs", "packages/design-tokens/dev/**/*.js"],
       env: { node: true },
     },
   ],
