@@ -8,12 +8,14 @@ import gopher from "@/tests/assets/gopher.webp";
 const backgroundColors = [
   "neutral",
   "blue",
-  "violet",
-  "teal",
-  "lilac",
-  "green",
   "navy",
-  "gradient",
+  "lilac",
+  "sage",
+  "salmon",
+  "gradient-navy",
+  "gradient-sage",
+  "gradient-lilac",
+  "gradient-salmon",
 ] as const;
 
 test.each(testEnvironments)(
@@ -21,16 +23,21 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, AccentBox, Heading },
+    components: { ColumnLayout, AccentBox, Section, Heading, Text, Link },
   }) => {
+    // Three columns: ten boxes in one or two columns outgrow the screenshot
     await render(
-      <Flex direction="column" gap="m">
+      <ColumnLayout l={[1, 1, 1]}>
         {backgroundColors.map((backgroundColor) => (
           <AccentBox key={backgroundColor} backgroundColor={backgroundColor}>
-            <Heading>{firstLetterToUppercase(backgroundColor)}</Heading>
+            <Section>
+              <Heading>{firstLetterToUppercase(backgroundColor)}</Heading>
+              <Text>Text</Text>
+              <Link>Link</Link>
+            </Section>
           </AccentBox>
         ))}
-      </Flex>,
+      </ColumnLayout>,
     );
 
     await testScreenshot("AccentBox colors");
@@ -38,50 +45,51 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "AccentBox custom color (%s)",
+  "AccentBox content (%s)",
   async ({
     testScreenshot,
     render,
-    components: { AccentBox, Section, Heading, Text, Link },
+    components: {
+      ColumnLayout,
+      AccentBox,
+      Section,
+      Heading,
+      Content,
+      Text,
+      InlineCode,
+      Badge,
+      CopyButton,
+      ActionGroup,
+      Button,
+    },
   }) => {
     await render(
-      <AccentBox backgroundColor="#a5e86b" color="dark-static">
-        <Section>
-          <Heading>Heading</Heading>
-          <Text>Text</Text>
-          <Link>Link</Link>
-        </Section>
-      </AccentBox>,
-    );
-
-    await testScreenshot("AccentBox custom color");
-  },
-);
-
-test.each(testEnvironments)(
-  "AccentBox background image (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { AccentBox, Section, Heading, Text, Link, ColumnLayout },
-  }) => {
-    await render(
-      <ColumnLayout>
-        <AccentBox
-          backgroundImage={gopher}
-          color="light-static"
-          aspectRatio={1}
-        >
+      <ColumnLayout l={[1, 1, 1]}>
+        <AccentBox>
           <Section>
-            <Heading>Heading</Heading>
-            <Text>Text</Text>
-            <Link>Link</Link>
+            <Heading>
+              Heading
+              <Badge>Badge</Badge>
+            </Heading>
+            <Content>
+              <Text>
+                Text with <InlineCode>InlineCode</InlineCode>
+              </Text>
+            </Content>
+            <Badge>Badge</Badge>
+            <CopyButton text="InlineCode" />
+            <ActionGroup>
+              <Button color="secondary" variant="soft">
+                Secondary
+              </Button>
+              <Button>Primary</Button>
+            </ActionGroup>
           </Section>
         </AccentBox>
       </ColumnLayout>,
     );
 
-    await testScreenshot("AccentBox background image");
+    await testScreenshot("AccentBox content");
   },
 );
 
@@ -90,10 +98,18 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { AccentBox, Section, Heading, Text, Link, LayoutCard, Flex },
+    components: {
+      AccentBox,
+      Section,
+      Heading,
+      Text,
+      Link,
+      LayoutCard,
+      ColumnLayout,
+    },
   }) => {
     await render(
-      <Flex direction="column" gap="m">
+      <ColumnLayout l={[1, 1]}>
         <LayoutCard>
           <AccentBox>
             <Section>
@@ -123,7 +139,25 @@ test.each(testEnvironments)(
             </AccentBox>
           </LayoutCard>
         </Link>
-      </Flex>,
+        <AccentBox backgroundColor="#a5e86b" color="dark-static">
+          <Section>
+            <Heading>Custom color</Heading>
+            <Text>Text</Text>
+            <Link>Link</Link>
+          </Section>
+        </AccentBox>
+        <AccentBox
+          backgroundImage={gopher}
+          color="light-static"
+          aspectRatio={2}
+        >
+          <Section>
+            <Heading>Background image</Heading>
+            <Text>Text</Text>
+            <Link>Link</Link>
+          </Section>
+        </AccentBox>
+      </ColumnLayout>,
     );
 
     await testScreenshot("AccentBox edge cases");
@@ -156,7 +190,7 @@ test.each(testEnvironments)(
             </Link>
           </Section>
         </AccentBox>
-        <AccentBox backgroundColor="gradient">
+        <AccentBox backgroundColor="gradient-navy">
           <Section>
             <Heading>Button action</Heading>
             <Text>Text</Text>

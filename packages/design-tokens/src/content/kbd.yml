@@ -22,7 +22,7 @@ kbd:
       value: "{form-control.placeholder-color.disabled}"
   inner-shadow-color:
     default:
-      value: "{dark.color.200}"
+      value: "{dark.color.quiet.200}"
     disabled:
       value: "{disabled-soft-dark-background-color}"
   inner-shadow-size-x:

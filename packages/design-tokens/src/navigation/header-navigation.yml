@@ -13,7 +13,7 @@ header-navigation:
     value: "{border-width.200}"
 
   color:
-    value: "{neutral.color.1100}"
+    value: "{content.color.300}"
   background-color:
     hover:
       value: "{neutral-plain-background-color.hover}"

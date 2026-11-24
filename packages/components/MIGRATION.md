@@ -28,6 +28,349 @@ The CLI's own output does detect it and prints the right form.
 
 ---
 
+<a id="categorical-colors-own-palette"></a>
+
+## Charts: categorical colors follow Flow's own palette
+
+**Since `1.7.0`** · migration · codemod available · also applies to
+`@mittwald/flow-remote-react-components`
+
+Flow's charts use their own 12 categorical colors instead of React Spectrum's,
+with separate light and dark values. In default order: `indigo`, `amber`,
+`teal`, `violet`, `berry`, `green`, `blue`, `rose`, `cyan`, `plum`, `olive`,
+`red`. They apply to the `color` of `Area`, `Bar`, `Line` and `LegendItem`, and
+to the segment colors of `DonutChart` and `ProgressBar`.
+
+```diff
+- <CartesianChart.Area dataKey="Mail" color="palatinate-blue" />
++ <CartesianChart.Area dataKey="Mail" color="amber" />
+```
+
+Each deprecated value maps to the new value in its slot of the default order,
+not to the closest hue. A chart that leaves its first series on the default and
+sets the second to `palatinate-blue` keeps two different colors that way.
+
+| Deprecated        | Use instead |
+| ----------------- | ----------- |
+| `sea-green`       | `indigo`    |
+| `palatinate-blue` | `amber`     |
+| `tangerine`       | `teal`      |
+| `magenta`         | `violet`    |
+| `tropical-indigo` | `berry`     |
+| `malachite`       | `green`     |
+| `azure`           | `blue`      |
+| `yellow`          | `cyan`      |
+| `alloy-orange`    | `plum`      |
+| `lime`            | `red`       |
+
+The deprecated values keep working, render as their replacement and log a
+deprecation warning; they will be removed in a future release. A codemod
+rewrites them. `violet` and `green` keep their names. None of the values looks
+the same as before: every color, the kept ones included, changes in light and
+dark mode.
+
+The default color of `Area`, `Bar` and `Line` changes from `sea-green` to
+`indigo`, matching the mapping above. A chart that set `magenta` next to
+`violet`, or `malachite` next to `green`, now shows two series in one color:
+choose another value for one of them, for example `rose` or `olive`.
+
+`indigo`, `teal`, `blue`, `cyan`, `plum`, `olive` and `red` are also CSS color
+names. A `color` set to one of them used to render the CSS color and now renders
+the categorical one.
+
+The CSS variables `--categorical--color--<old>` and the token JSON keys
+`categorical.color.<old>` are renamed to their replacement **without** a
+fallback — update them by hand if you use the tokens directly.
+
+**Apply:** On `Area`, `Bar`, `Line` (imported, or as members of what
+`typedCartesianChart()` returns, e.g. `CartesianChart.Area`) and `LegendItem`,
+rename the `color` values by their slot in the old default order, `sea-green` to
+`indigo`, `palatinate-blue` to `amber`, `tangerine` to `teal`, `magenta` to
+`violet`, `tropical-indigo` to `berry`, `malachite` to `green`, `azure` to
+`blue`, `yellow` to `cyan`, `alloy-orange` to `plum` and `lime` to `red`. Do the
+same for the `color` of each segment in the `segments` of `DonutChart` and
+`ProgressBar`. The codemod rewrites segments in an array literal passed to
+`segments`, and in a `const` array literal in the same file that is used only as
+`segments` of those components; an array built elsewhere (imported, computed, or
+shared with other code) is yours to rename. Keep `violet` and `green`, which
+stay valid names but render new colors. If a chart used both `magenta` and
+`violet`, or both `malachite` and `green`, two series now share one color; pick
+another value for one of them (`rose` and `olive` are free). Where `color` held
+a CSS color name that is now a categorical value (`indigo`, `teal`, `blue`,
+`cyan`, `plum`, `olive`, `red`), it now renders the categorical color; use a hex
+value to keep the CSS color. If you use the token CSS variables or the token
+JSON directly, rename `--categorical--color--<old>` to
+`--categorical--color--<new>` and `categorical.color.<old>` to
+`categorical.color.<new>` with the same mapping; the old names are removed
+without a fallback.
+
+```shell
+npx @mittwald/flow-codemods@latest categorical-colors-own-palette src
+```
+
+---
+
+<a id="color-props-brand-palette"></a>
+
+## Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette
+
+**Since `1.7.0`** · migration · codemod available · also applies to
+`@mittwald/flow-remote-react-components`
+
+The decorative color values now follow the brand palette: one value per mittwald
+brand color, named after how it looks — `blue`, `navy`, `lilac`, `sage` and
+`salmon`, the same list on `Badge`, `Avatar`, `Icon` (and the generated icons,
+`IconCheck` & co.), `Color` and `AccentBox` (`backgroundColor`). `Badge` names
+its status hues by their meaning: `success`, `warning` and `danger`.
+
+```diff
+- <Badge color="red">Gesperrt</Badge>
+- <Badge color="teal">Projekt</Badge>
++ <Badge color="danger">Gesperrt</Badge>
++ <Badge color="sage">Projekt</Badge>
+```
+
+| Deprecated                | Use instead     | Looks the same |
+| ------------------------- | --------------- | -------------- |
+| `violet` (all four)       | `lilac`         | yes            |
+| `teal` (all four)         | `sage`          | yes            |
+| `green` on `Badge`        | `success`       | yes            |
+| `orange` on `Badge`       | `warning`       | yes            |
+| `red` on `Badge`          | `danger`        | yes            |
+| `green` on `Avatar`       | `sage`          | no             |
+| `green` on `AccentBox`    | `sage`          | yes            |
+| `gradient` on `AccentBox` | `gradient-navy` | yes            |
+
+The deprecated values keep working and log a deprecation warning, but will be
+removed in a future release. A codemod rewrites every row that looks the same.
+`Avatar`'s `green` stays for you to decide. `AccentBox`'s `green` already
+renders like `sage`: the success mint is gone from the AccentBox, which is
+decorative.
+
+`navy`, `sage` and `salmon` are new on `Avatar`, `Icon` and `Color`; `sage` and
+`salmon` are new on `Badge` and `AccentBox`. `AccentBox` has one brand gradient
+per decorative color: `gradient-navy`, `gradient-sage`, `gradient-lilac` and
+`gradient-salmon`. The old `gradient` renders as `gradient-navy`, which replaces
+its radial look. On every colored `AccentBox` background (the decorative colors
+and the gradients), content now defaults to `color="dark"`. Dynamic initials in
+`Avatar` now pick from all five decorative colors, so a person may get a
+different color than before.
+
+The CSS classes and the design tokens of the deprecated values are renamed or
+removed **without** a fallback — update them by hand if you use
+`@mittwald/flow-stylesheet` or the token CSS variables directly.
+
+**Apply:** On `Badge`, `Avatar`, `Icon` (and the generated icons, `IconCheck` &
+co.) and `Color`, rename `color="violet"` to `color="lilac"` and `color="teal"`
+to `color="sage"`; on `AccentBox`, do the same for `backgroundColor`, and rename
+`backgroundColor="gradient"` to `backgroundColor="gradient-navy"` and
+`backgroundColor="green"` to `backgroundColor="sage"`. An `AccentBox` that still
+sets its background through `color` (`color="gradient"`, `"green"`) gets
+`backgroundColor="gradient-navy"` / `"sage"` instead. On `Badge`, also rename
+`color="green"` to `color="success"`, `color="orange"` to `color="warning"` and
+`color="red"` to `color="danger"`. Each replacement renders exactly like the old
+value. `Avatar`'s `color="green"` is deprecated too, but its replacement `sage`
+is the brand's muted gray-green instead of the success mint. Switch to `sage`
+where the avatar's color carries no meaning, and keep `green` (it still renders)
+only until you have decided. `AccentBox`'s `backgroundColor="green"` now renders
+like `sage` instead of the success mint. Content on a colored `AccentBox` now
+defaults to `color="dark"`; drop an explicit `color="dark"` there if you like.
+If you use `@mittwald/flow-stylesheet` or the token CSS variables directly,
+rename `flow--badge--{violet,teal,green,orange,red}` to
+`flow--badge--{lilac,sage,success,warning,danger}`,
+`--badge--{teal,green,orange,red}-*` to
+`--badge--{sage,success,warning,danger}-*`, `--icon--teal-color` to
+`--icon--sage-color`, `--decorative--teal-*` to `--decorative--sage-*`,
+`flow--accent-box--{violet,teal,green}` and
+`--accent-box--background-color-{violet,teal,green}` to their
+`lilac`/`sage`/`sage` counterparts, `flow--accent-box--gradient` and
+`--accent-box--background-color-gradient` to `…-gradient-navy`, drop the
+`--badge--*-border-color` variables (the badge has no border), and replace
+`--badge--violet-*`, `--icon--violet-color` and `--decorative--violet-*` by
+their `lilac` counterparts.
+
+```shell
+npx @mittwald/flow-codemods@latest color-props-brand-palette src
+```
+
+---
+
+<a id="color-tokens-brand-theme-neutral"></a>
+
+## Color tokens: a new Brand palette that no longer switches with the theme
+
+**Since `1.7.0`** · migration · manual change
+
+The color tokens now follow four tiers: **Brand** (the palette), **Semantic**
+(colors with a meaning), **Variant** (pairs per variant) and component tokens
+([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
+Only Semantic switches between light and dark. Brand is theme-neutral: one value
+per token, the light one.
+
+Brand now holds the new mittwald brand palette (`mittwald-blue`, `-navy`,
+`-green`, `-lilac`, `-orange`, `-neutral`, `system-danger`, `-warning`,
+`-success`; hue ramps with 19 steps, alpha ramps with 10). Flow's own components
+pick it up through Semantic. What breaks is code outside Flow that reads Brand
+variables (`--color--…`) directly:
+
+- **The old palettes are removed.** `--color--gray--N`,
+  `--color--hosting-blue--N`, `--color--soft-contrast-violet--N`,
+  `--color--bright-lilac--N`, `--color--super-teal--N` and the status ramps
+  `--color--amaranth-red--N`, `--color--royal-orange--N` and
+  `--color--espelkamp-green--N` no longer exist; `--color--mittwald-navy--N` and
+  the alpha ramps carry new values and steps. Nothing fails — the declaration is
+  just dropped or the color is different.
+- **Brand no longer inverts in dark.** A remaining `--color--<ramp>--N` keeps
+  its light value in both themes.
+- **Some variables moved to Semantic** and their old names are gone:
+
+| Before                           | After                          |
+| -------------------------------- | ------------------------------ |
+| `--color--categorical--<name>`   | `--categorical--color--<name>` |
+| `--color--code-syntax--<name>`   | `--code-syntax--color--<name>` |
+| `--color--transparent`           | `--transparent--color`         |
+| `--color--gradient`              | `--gradient--color`            |
+| `--color--background-gradient`   | `--background-gradient--color` |
+| `--color--static-black-alpha--N` | `--dark-static--color--N`      |
+| `--color--static-white-alpha--N` | `--light-static--color--N`     |
+
+The same applies to `@mittwald/flow-design-tokens/json*/all-*.json` and
+`useDesignTokens()`: `color.categorical` is `categorical.color` now.
+
+**Semantic has named roles.** Semantic no longer mirrors a ramp with 11 or 12
+steps; it selects few tones per role and theme:
+
+| Group                                                                                           | Keys                                                                         |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `primary`, `info`, `success`, `danger`, `warning`, `neutral`, `unavailable`, `decorative-<hue>` | `quiet--100/200/300` (was 100–300), `strong--100/200/300` (was 800/900/1000) |
+| `dark`, `light`, `dark-static`, `light-static`                                                  | `quiet--100/200/300`, `strong--100/200/300` (was 800/700/600)                |
+| `elevation` (new: raised, ground, inset surface)                                                | `100/200/300`                                                                |
+| `content` (new: secondary, label, text; content on strong)                                      | `100/200/300`, `inverse`                                                     |
+| `border` (new: grouping, separator, control border)                                             | `100/200/300`                                                                |
+
+The decorative groups follow the brand colors and are named like the color
+props: `decorative-blue`, `-navy`, `-lilac`, `-sage` (`mittwald-green`) and
+`-salmon` (`mittwald-orange`). Besides `quiet` and `strong` each has a `content`
+tone for decorative content such as icons. `decorative-violet` and
+`decorative-teal` are gone (use `-lilac` and `-sage`), and so are
+`decorative-red`, `-green` and `-orange` as status mirrors (use `danger`,
+`success` and `warning`).
+
+```diff
+- .card { background: var(--color--gray--100); }
++ .card { background: var(--elevation--color--100); }
+- .hint { color: var(--neutral--color--700); }
++ .hint { color: var(--content--color--100); }
+- .badge { background: var(--primary--color--100); color: var(--primary--color--900); }
++ .badge { background: var(--primary--color--quiet--100); color: var(--primary--color--strong--200); }
+```
+
+No codemod: whether `--color--gray--100` meant a surface or content is not
+decidable mechanically. Prefer a component token or a Variant variable over a
+Semantic one where one fits. Token names and values are outside the semver
+contract (ADR 0005), so this ships as a Minor.
+
+**Apply:** Search your own CSS, SCSS and TS for `var(--color--`. Replace the
+moved variables by name — `--color--categorical--X` → `--categorical--color--X`,
+`--color--code-syntax--X` → `--code-syntax--color--X`, `--color--transparent` →
+`--transparent--color`, `--color--gradient` → `--gradient--color`,
+`--color--background-gradient` → `--background-gradient--color`,
+`--color--static-black-alpha--N` → `--dark-static--color--N`,
+`--color--static-white-alpha--N` → `--light-static--color--N`; JavaScript
+reading `color.categorical` from the token JSON reads `categorical.color`. The
+old palettes are gone — `--color--gray--N`, `--color--hosting-blue--N`,
+`--color--soft-contrast-violet--N`, `--color--bright-lilac--N`,
+`--color--super-teal--N`, `--color--amaranth-red--N`, `--color--royal-orange--N`
+and `--color--espelkamp-green--N` resolve to nothing, and
+`--color--mittwald-navy--N` holds the new brand values. Replace each with the
+Semantic variable that carries its meaning, e.g. `--elevation--color--N` for a
+gray surface, `--content--color--N` for gray text, `--border--color--N` for a
+gray border, `--primary--color--quiet--N` or `--primary--color--strong--N` for
+hosting-blue, `--decorative-<hue>--color--…` for navy, lilac and teal,
+`--danger--`, `--warning--` or `--success--color--…` for the status hues
+(amaranth-red, royal-orange, espelkamp-green), `--dark--color--…` or
+`--light--color--…` for `--color--black-alpha--N` or `--color--white-alpha--N`,
+or a Variant variable such as `--primary-solid-background-color--default`. Do
+the same for every remaining Brand variable (`--color--mittwald-*`,
+`--color--system-*`, the alpha ramps), because Brand keeps its light value in
+dark. Then rename the Semantic variables you use. Colored and alpha groups
+(`primary`, `info`, `success`, `danger`, `warning`, `neutral`, `unavailable`,
+`decorative-*`, `dark`, `light`, `dark-static`, `light-static`) keep six tones —
+`--<group>--color--100/200/300` → `--<group>--color--quiet--100/200/300`,
+`--<group>--color--800/900/1000` → `--<group>--color--strong--100/200/300`
+(alpha groups map `800/700/600` → `strong--100/200/300`); the other steps are
+gone, use the nearest tone. Gray from `--neutral--color--N` moves by role —
+surfaces 100–300 → `--elevation--color--100/200/300`, text and icons →
+`--content--color--100` (secondary), `--200` (label) or `--300` (text), on a
+solid surface `--content--color--inverse`, borders → `--border--color--100`
+(grouping), `--200` (separator) or `--300` (control), disabled →
+`--unavailable--color--quiet--100/200/300` (surface, border, content).
+`--decorative-violet--color--…` → `--decorative-lilac--color--…`,
+`--decorative-teal--color--…` → `--decorative-sage--color--…`,
+`--decorative-red--`, `--decorative-green--` and `--decorative-orange--color--…`
+→ `--danger--`, `--success--` and `--warning--color--…`; the brand's green and
+orange are `--decorative-sage--` and `--decorative-salmon--color--…`. Which one
+fits is not decidable mechanically — decide whether the color is a surface,
+content or status.
+
+---
+
+<a id="list-item-callbacks-without-hooks"></a>
+
+## ListItem: `href` and `textValue` must not call hooks
+
+**Since `1.6.0`** · migration · manual change · also applies to
+`@mittwald/flow-remote-react-components`
+
+Since 1.6.0 a list skips rendering items that have not changed. To decide that,
+it calls `href` and `textValue` for every item on each render of the list —
+outside the item's own render and as often as it needs. Hooks inside these
+callbacks used to run inside the item and happened to work; now they run in
+another component a varying number of times, and React fails with
+`Rendered more hooks than during the previous render`
+([React error 310](https://react.dev/errors/310)) as soon as the list
+re-renders.
+
+```diff
++ const projectId = projectGhost.id.use();
++
+  <List.Item
+-   href={(c) => buildHref(projectGhost.id.use(), c.id)}
++   href={(c) => buildHref(projectId, c.id)}
+  >
+```
+
+For a value that depends on the item, call the hook once and let it return a
+function:
+
+```diff
++ const isNew = useNewEntriesTester();
++
+  <List.Item
+-   defaultExpanded={(entry) => entry.useIsNew()}
++   defaultExpanded={(entry) => isNew(entry)}
+  >
+```
+
+`defaultExpanded` is still called inside the item, but it is read on mount only
+— keep it free of hooks as well. The item's render function (its children) is
+unaffected: it renders inside the item and may call hooks.
+
+ESLint's `react-hooks/rules-of-hooks` does not catch most of these cases: it
+does not treat a method call such as `ghost.id.use()` or `entry.useIsNew()` as a
+hook.
+
+**Apply:** Find `ListItem` elements — including the `Item` of a `typedList()` —
+whose `href`, `textValue` or `defaultExpanded` callback calls a hook: a `use…()`
+function, `React.use()`, or a hook-like method such as a ghost's `.use()`. Call
+the hook once in the component that renders the list, store the result in a
+variable, and read that variable inside the callback. Where the value depends on
+the item, have the hook return a function (e.g. a tester or a URL builder) and
+call that function with the item. Hooks in the item's render function (its
+children) are fine and stay.
+
+---
+
 <a id="accordion-variant-deprecated"></a>
 
 ## Accordion: `variant` deprecated

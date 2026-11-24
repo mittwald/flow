@@ -7,13 +7,12 @@
   line-height: var(--badge--line-height);
   border-radius: var(--badge--corner-radius);
   padding-inline: var(--badge--padding-x);
-  padding-block: calc(var(--badge--padding-y) - (var(--badge--border-width)));
+  padding-block: var(--badge--padding-y);
   display: inline-flex;
   align-items: center;
   column-gap: var(--badge--spacing);
+  width: fit-content;
   max-width: 100%;
-  border-style: var(--badge--border-style);
-  border-width: var(--badge--border-width);
 
   .text {
     @include ellipsis.ellipsis();

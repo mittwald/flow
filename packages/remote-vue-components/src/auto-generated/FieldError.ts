@@ -12,6 +12,12 @@ export const FieldError: FlowRemoteVueComponent<RemoteFieldErrorElementProps> =
     "FieldError",
     RemoteFieldErrorElement,
     {
-      booleans: ["hidden", "inert", "renderAlert", "suppressHydrationWarning"],
+      booleans: [
+        "hidden",
+        "inert",
+        "isFallback",
+        "renderAlert",
+        "suppressHydrationWarning",
+      ],
     },
   );

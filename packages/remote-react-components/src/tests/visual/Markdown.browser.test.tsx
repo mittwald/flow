@@ -37,28 +37,40 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Markdown content (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Markdown, Section, Heading, ColumnLayout },
+  }) => {
     await render(
-      <Markdown>
-        {"# Heading 1\n" +
-          "## Heading 2\n" +
-          "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
-          "```json\n" +
-          "{\n" +
-          '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-          '    "name": "Death Star"\n' +
-          "}\n" +
-          "```\n" +
-          "[link](#)\n" +
-          "> Block quote" +
-          "\n - Unordered list item 1 \n - Unordered list item 2 " +
-          "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
-          "| Column 1       | Column 2      |\n" +
-          "|---------------|---------------|\n" +
-          "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
-          "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
-          "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
-      </Markdown>,
+      <ColumnLayout l={[1, 1]} m={[1, 1]} s={[1, 1]} columnGap="xl">
+        {/* The section's heading id and class must not reach the markdown headings. */}
+        <Section>
+          <Heading>Section</Heading>
+          <Markdown>
+            {"# Heading 1\n" +
+              "## Heading 2\n" +
+              "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
+              "```json\n" +
+              "{\n" +
+              '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
+              '    "name": "Death Star"\n' +
+              "}\n" +
+              "```\n" +
+              "[link](#)\n" +
+              "> Block quote"}
+          </Markdown>
+        </Section>
+        <Markdown>
+          {" - Unordered list item 1 \n - Unordered list item 2 " +
+            "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
+            "| Column 1       | Column 2      |\n" +
+            "|---------------|---------------|\n" +
+            "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
+            "| Row 2 Cell 1  | Row 2 Cell 2  |\n" +
+            "| Row 3 Cell 1  | Row 3 Cell 2  |\n"}
+        </Markdown>
+      </ColumnLayout>,
     );
 
     await waitForHighlightedCode(1);
@@ -68,42 +80,34 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "Markdown split ordered list (%s)",
-  async ({ testScreenshot, render, components: { Markdown } }) => {
-    await render(
-      <Markdown>
-        {"1. Destroy the shield generator\n\n" +
-          "Endor hosts the generator.\n\n" +
-          "2. Lure the fleet into a trap\n\n" +
-          "The Emperor expects the attack.\n\n" +
-          "3. Fly into the Death Star\n" +
-          "4. Hit the main reactor"}
-      </Markdown>,
-    );
-
-    await testScreenshot("Markdown split ordered list");
-  },
-);
-
-test.each(testEnvironments)(
-  "Markdown wide table (%s)",
+  "Markdown edge cases (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Markdown, ColumnLayout },
+    components: { Flex, Markdown, ColumnLayout },
   }) => {
-    /* A narrow column, like the AIssistant drawer. */
     await render(
-      <ColumnLayout s={[1, 4]} m={[1, 4]} l={[1, 4]}>
+      <Flex direction="column" gap="m">
         <Markdown>
-          {"| Type | Version | Usage |\n" +
-            "| --- | --- | --- |\n" +
-            "| CMS | 6.4 | WordPress, Shopware, TYPO3 |\n" +
-            "| Shop | 6.5 | Shopware, Magento |\n"}
+          {"1. Destroy the shield generator\n\n" +
+            "Endor hosts the generator.\n\n" +
+            "2. Lure the fleet into a trap\n\n" +
+            "The Emperor expects the attack.\n\n" +
+            "3. Fly into the Death Star\n" +
+            "4. Hit the main reactor"}
         </Markdown>
-      </ColumnLayout>,
+        {/* A narrow column, like the AIssistant drawer. */}
+        <ColumnLayout s={[1, 4]} m={[1, 4]} l={[1, 4]}>
+          <Markdown>
+            {"| Type | Version | Usage |\n" +
+              "| --- | --- | --- |\n" +
+              "| CMS | 6.4 | WordPress, Shopware, TYPO3 |\n" +
+              "| Shop | 6.5 | Shopware, Magento |\n"}
+          </Markdown>
+        </ColumnLayout>
+      </Flex>,
     );
 
-    await testScreenshot("Markdown wide table");
+    await testScreenshot("Markdown edge cases");
   },
 );

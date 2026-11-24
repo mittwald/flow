@@ -23,6 +23,7 @@ test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
       FileCard,
       FileCardList,
       ActionGroup,
+      InlineCode,
     },
   }) => {
     await render(
@@ -68,12 +69,14 @@ test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
             <Text>
               A long time ago in a galaxy far, far away, the Rebel Alliance
               struck a decisive blow against the Galactic Empire. Rebel spies
-              managed to steal secret plans to the Empire's ultimate weapon, the
-              Death Star.
+              managed to steal secret plans to the{" "}
+              <InlineCode>DeathStar</InlineCode>.
             </Text>
           </Content>
 
-          <Button>Button</Button>
+          <Button variant="soft" color="secondary">
+            Button
+          </Button>
         </Message>
         <Message color="#ffeedd">
           <Content>
