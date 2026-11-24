@@ -1,5 +1,5 @@
 ---
-since: 1.6.0
+since: 1.7.0
 title:
   "Badge, Avatar, Icon, Color, AccentBox: color values follow the brand palette"
 kind: migration
