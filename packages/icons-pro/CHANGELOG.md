@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.11](https://github.com/mittwald/flow/compare/1.6.10...1.6.11) (2026-11-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.10](https://github.com/mittwald/flow/compare/1.6.9...1.6.10) (2026-11-23)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.9](https://github.com/mittwald/flow/compare/1.6.8...1.6.9) (2026-11-23)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.8](https://github.com/mittwald/flow/compare/1.6.7...1.6.8) (2026-11-23)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.7](https://github.com/mittwald/flow/compare/1.6.6...1.6.7) (2026-11-23)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.6](https://github.com/mittwald/flow/compare/1.6.5...1.6.6) (2026-11-23)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.5](https://github.com/mittwald/flow/compare/1.6.4...1.6.5) (2026-11-22)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.4](https://github.com/mittwald/flow/compare/1.6.3...1.6.4) (2026-11-22)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
+## [1.6.3](https://github.com/mittwald/flow/compare/1.6.2...1.6.3) (2026-11-20)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
 ## [1.6.2](https://github.com/mittwald/flow/compare/1.6.1...1.6.2) (2026-11-19)
 
 **Note:** Version bump only for package @mittwald/flow-icons-pro

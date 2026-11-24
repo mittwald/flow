@@ -1,4 +1,4 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import {
   dynamic,
   type PropsContext,
@@ -13,16 +13,21 @@ import {
 } from "@/lib/types/props";
 import { Text } from "@/components/Text";
 import { containsTextChild } from "@/lib/react/remote";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface HeaderNavigationProps
-  extends PropsWithChildren<ComponentProps<"nav">>, PropsWithClassName {
+  extends
+    PropsWithChildren<ComponentProps<"nav">>,
+    PropsWithClassName,
+    FlowComponentProps<HTMLElement> {
   /** The color of the header navigation. @default "default" */
   color?: "default" | AlphaColor;
 }
 
 /** @flr-generate all */
-export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
-  const { children, className, color = "default", ...rest } = props;
+export const HeaderNavigation = flowComponent("HeaderNavigation", (props) => {
+  const { children, className, color = "default", ref, ...rest } = props;
 
   const rootClassName = clsx(
     styles.headerNavigation,
@@ -61,7 +66,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
   };
 
   return (
-    <nav className={rootClassName} role="navigation" {...rest}>
+    <nav className={rootClassName} role="navigation" ref={ref} {...rest}>
       <ul className={styles.list}>
         <PropsContextProvider props={propsContext}>
           {children}
@@ -69,6 +74,6 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
       </ul>
     </nav>
   );
-};
+});
 
 export default HeaderNavigation;

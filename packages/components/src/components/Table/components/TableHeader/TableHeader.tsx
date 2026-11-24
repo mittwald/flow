@@ -6,6 +6,8 @@ import { IsFirstColumnContext } from "./context";
 
 export type TableHeaderProps = Aria.TableHeaderProps<never>;
 
+/* Plain FC: technical constraint — react-aria allows render-function children,
+ * which the props types of registered components cannot express. */
 /** @flr-generate all */
 export const TableHeader: FC<TableHeaderProps> = (props) => {
   const { children, className, ...rest } = props;
