@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/mittwald/flow/compare/1.7.0...1.7.1) (2026-11-24)
+
+### Build System
+
+* **lint:** migrate linting from ESLint to oxlint ([#3714](https://github.com/mittwald/flow/issues/3714)) ([aa09e0b](https://github.com/mittwald/flow/commit/aa09e0b61219a4a778a0128ad5e00a5a6fb25a4d))
+
 ## [1.7.0](https://github.com/mittwald/flow/compare/1.6.11...1.7.0) (2026-11-24)
 
 ### Miscellaneous Chores
