@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0-next.2](https://github.com/mittwald/flow/compare/1.8.0-next.1...1.8.0-next.2) (2026-11-25)
+
+### Bug Fixes
+
+* **Badge:** draw no border around a pressable badge ([#3726](https://github.com/mittwald/flow/issues/3726)) ([88bb1ea](https://github.com/mittwald/flow/commit/88bb1ea7e54a4e9a12c75d6a8e32b7c1e86b0afc))
+
+### Styles
+
+* **LayoutCard:** let a sole Alert fill the card ([#3727](https://github.com/mittwald/flow/issues/3727)) ([8fdfa76](https://github.com/mittwald/flow/commit/8fdfa7681dcc1014b0ea1a11ba772230df8b1239))
+
+## [1.7.1](https://github.com/mittwald/flow/compare/1.8.0-next.0...1.7.1) (2026-11-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.7.1 ([f2997af](https://github.com/mittwald/flow/commit/f2997af83bf2106f35f548cbba07c96c6cdb6d37))
+
 ## [1.8.0-next.1](https://github.com/mittwald/flow/compare/1.8.0-next.0...1.8.0-next.1) (2026-11-24)
 
 ### Build System
