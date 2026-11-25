@@ -1,12 +1,6 @@
 import type { FC } from "react";
-import { FlowDarkScopeStyle } from "@/app/_components/FlowDarkScope/FlowDarkScopeStyle";
 import { HomePage } from "./_components/HomePage";
 
-const Home: FC = () => (
-  <>
-    <FlowDarkScopeStyle />
-    <HomePage />
-  </>
-);
+const Home: FC = () => <HomePage />;
 
 export default Home;

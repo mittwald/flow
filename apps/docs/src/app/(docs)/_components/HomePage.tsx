@@ -14,6 +14,7 @@ import {
   Link,
   Section,
   Text,
+  ThemeScope,
 } from "@mittwald/flow-react-components";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,7 +32,6 @@ import overviewBand from "../../../../public/assets/overview-band.webp";
 import developerTile from "../../../../public/assets/developer-tile.webp";
 import extensionsTile from "../../../../public/assets/extensions-tile.webp";
 import { ComposingCodeExample } from "@/app/_components/ComposingCodeExample";
-import { flowDarkScopeClass } from "@/app/_components/FlowDarkScope/flowDarkScopeClass";
 import styles from "./HomePage.module.scss";
 
 interface OverviewTileProps {
@@ -68,45 +68,47 @@ export const HomePage: FC = () => {
       align="center"
       data-page="home"
     >
-      <AccentBox
-        backgroundImage={heroBand.src}
-        className={clsx(styles.band, styles.top, flowDarkScopeClass)}
-      >
-        <Flex direction="column" align="center" gap="xl">
-          <Flex direction="column" align="center" gap="l">
-            <FlowLogo aria-hidden className={styles.logo} />
-            <Heading level={1}>mStudio Design System</Heading>
+      <ThemeScope theme="dark" className={clsx(styles.bandScope, styles.top)}>
+        <AccentBox
+          backgroundImage={heroBand.src}
+          className={clsx(styles.band, styles.top)}
+        >
+          <Flex direction="column" align="center" gap="xl">
+            <Flex direction="column" align="center" gap="l">
+              <FlowLogo aria-hidden className={styles.logo} />
+              <Heading level={1}>mStudio Design System</Heading>
+            </Flex>
+            <div className={styles.bandContent}>
+              <LayoutCard>
+                <Flex direction="column" gap="xl">
+                  <div className={styles.heroExample}>
+                    <ComposingCodeExample />
+                  </div>
+                  <Section>
+                    <Heading>Fokus auf Developer Experience</Heading>
+                    <Text>
+                      Verschachtelte Components erleichtern das Einfügen.
+                      Automatisierungen ordnen Components automatisch mit
+                      passenden Abständen an und verhindern Abweichungen vom
+                      Design System. Alles Open Source auf{" "}
+                      <Link
+                        href="https://github.com/mittwald/flow"
+                        target="_blank"
+                      >
+                        GitHub
+                      </Link>{" "}
+                      verfügbar und hier im Styleguide dokumentiert.
+                    </Text>
+                    <Link href="/components/actions/action-group">
+                      Zu den Components
+                    </Link>
+                  </Section>
+                </Flex>
+              </LayoutCard>
+            </div>
           </Flex>
-          <div className={styles.bandContent}>
-            <LayoutCard>
-              <Flex direction="column" gap="xl">
-                <div className={styles.heroExample}>
-                  <ComposingCodeExample />
-                </div>
-                <Section>
-                  <Heading>Fokus auf Developer Experience</Heading>
-                  <Text>
-                    Verschachtelte Components erleichtern das Einfügen.
-                    Automatisierungen ordnen Components automatisch mit
-                    passenden Abständen an und verhindern Abweichungen vom
-                    Design System. Alles Open Source auf{" "}
-                    <Link
-                      href="https://github.com/mittwald/flow"
-                      target="_blank"
-                    >
-                      GitHub
-                    </Link>{" "}
-                    verfügbar und hier im Styleguide dokumentiert.
-                  </Text>
-                  <Link href="/components/actions/action-group">
-                    Zu den Components
-                  </Link>
-                </Section>
-              </Flex>
-            </LayoutCard>
-          </div>
-        </Flex>
-      </AccentBox>
+        </AccentBox>
+      </ThemeScope>
 
       <ColumnLayout l={[1, 1]} gap="xl" s={[1]}>
         <LayoutCard>
@@ -168,53 +170,55 @@ export const HomePage: FC = () => {
         </LayoutCard>
       </ColumnLayout>
 
-      <AccentBox
-        backgroundImage={overviewBand.src}
-        className={clsx(styles.band, styles.overviewBand, flowDarkScopeClass)}
-      >
-        <div className={clsx(styles.bandContent, styles.wideBandContent)}>
-          <ColumnLayout
-            l={[1, 1, 1, 1]}
-            m={[1, 1]}
-            gap="xl"
-            className={styles.overviewTiles}
-          >
-            <OverviewTile
-              icon={faRocket}
-              title="Get Started"
-              href="/get-started/installation"
-              linkText="Zu Get Started"
+      <ThemeScope theme="dark" className={styles.bandScope}>
+        <AccentBox
+          backgroundImage={overviewBand.src}
+          className={clsx(styles.band, styles.overviewBand)}
+        >
+          <div className={clsx(styles.bandContent, styles.wideBandContent)}>
+            <ColumnLayout
+              l={[1, 1, 1, 1]}
+              m={[1, 1]}
+              gap="xl"
+              className={styles.overviewTiles}
             >
-              Installiere Flow und starte direkt mit deinem Projekt.
-            </OverviewTile>
-            <OverviewTile
-              icon={faPalette}
-              title="Foundations"
-              href="/foundations/design/design-tokens"
-              linkText="Zu den Foundations"
-            >
-              Erfahre mehr über die Grundlagen unseres Design Systems.
-            </OverviewTile>
-            <OverviewTile
-              icon={faObjectsColumn}
-              title="Templates"
-              href="/templates/app-shells/focus-task"
-              linkText="Zu den Templates"
-            >
-              Finde passende Templates für häufige Design- und
-              Interaktionsaufgaben.
-            </OverviewTile>
-            <OverviewTile
-              icon={faCubes}
-              title="Components"
-              href="/components/actions/action-group"
-              linkText="Zu den Components"
-            >
-              Nutze unseren modularen Components-Baukasten für dein Projekt.
-            </OverviewTile>
-          </ColumnLayout>
-        </div>
-      </AccentBox>
+              <OverviewTile
+                icon={faRocket}
+                title="Get Started"
+                href="/get-started/installation"
+                linkText="Zu Get Started"
+              >
+                Installiere Flow und starte direkt mit deinem Projekt.
+              </OverviewTile>
+              <OverviewTile
+                icon={faPalette}
+                title="Foundations"
+                href="/foundations/design/design-tokens"
+                linkText="Zu den Foundations"
+              >
+                Erfahre mehr über die Grundlagen unseres Design Systems.
+              </OverviewTile>
+              <OverviewTile
+                icon={faObjectsColumn}
+                title="Templates"
+                href="/templates/app-shells/focus-task"
+                linkText="Zu den Templates"
+              >
+                Finde passende Templates für häufige Design- und
+                Interaktionsaufgaben.
+              </OverviewTile>
+              <OverviewTile
+                icon={faCubes}
+                title="Components"
+                href="/components/actions/action-group"
+                linkText="Zu den Components"
+              >
+                Nutze unseren modularen Components-Baukasten für dein Projekt.
+              </OverviewTile>
+            </ColumnLayout>
+          </div>
+        </AccentBox>
+      </ThemeScope>
     </Flex>
   );
 };

@@ -130,6 +130,7 @@ export * from "./Tabs";
 export * from "./Text";
 export * from "./TextArea";
 export * from "./TextField";
+export * from "./ThemeScope";
 export * from "./TimeField";
 export * from "./Tooltip";
 export * from "./TooltipTrigger";
