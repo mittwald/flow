@@ -60,6 +60,17 @@ test.each(testEnvironments)(
                 <Badge color={color} isDisabled>
                   Value
                 </Badge>
+                <Badge color={color} onPress={() => console.log("onPress")}>
+                  Value
+                </Badge>
+                <Badge
+                  color={color}
+                  onPress={() => console.log("onPress")}
+                  onClose={() => console.log("onClose")}
+                >
+                  <Label>Scope</Label>
+                  <Text>Value</Text>
+                </Badge>
                 <Badge color={color}>
                   <Label>Scope</Label>
                   <Text>Value</Text>
