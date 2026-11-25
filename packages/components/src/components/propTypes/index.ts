@@ -109,6 +109,7 @@ import type { RatingProps } from "@/components/Rating";
 import type { RatingSegmentProps } from "@/components/Rating/components/RatingSegment";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
+import type { ItemActionProps } from "@/components/ItemAction";
 import type { AccordionProps } from "@/components/Accordion";
 import type { AccordionGroupProps } from "@/components/AccordionGroup";
 import type { ChatProps } from "@/components/Chat";
@@ -176,6 +177,7 @@ export interface FlowComponentPropsTypes {
   Image: ImageProps;
   ImageCropper: ImageCropperProps;
   Initials: InitialsProps;
+  ItemAction: ItemActionProps;
   InlineCode: InlineCodeProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
@@ -291,6 +293,7 @@ const propsContextSupportingComponentsMap: Record<
   Image: true,
   ImageCropper: true,
   Initials: true,
+  ItemAction: true,
   InlineCode: true,
   Kbd: true,
   Label: true,

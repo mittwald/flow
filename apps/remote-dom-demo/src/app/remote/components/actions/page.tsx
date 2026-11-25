@@ -10,7 +10,9 @@ import {
   CopyButton,
   Heading,
   IconApp,
+  IconDelete,
   MenuItem,
+  ItemAction,
   Modal,
   Section,
   Text,
@@ -70,7 +72,15 @@ export default function Page() {
               <Text>Fire superlaser</Text>
             </MenuItem>
             <MenuItem id="rotate">Rotate station</MenuItem>
-            <MenuItem id="scan">Scan sector</MenuItem>
+            <MenuItem id="scan">
+              <Text>Scan sector</Text>
+              <ItemAction
+                aria-label="Clear scan results"
+                onPress={() => setStationAction("clear scan results")}
+              >
+                <IconDelete />
+              </ItemAction>
+            </MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
         <Text>Last action: {stationAction ?? "–"}</Text>

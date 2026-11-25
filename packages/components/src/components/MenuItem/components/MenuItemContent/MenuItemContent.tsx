@@ -12,6 +12,7 @@ import {
 } from "@/components/Icon/components/icons";
 import clsx from "clsx";
 import { Switch } from "@/components/Switch";
+import { MenuItemActionContainer } from "@/components/MenuItem/components/MenuItemActionContainer/MenuItemActionContainer";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
   selectionVariant?: "control" | "navigation" | "switch";
@@ -39,6 +40,10 @@ export const MenuItemContent: FC<Props> = (props) => {
     },
     Badge: {
       className: styles.badge,
+    },
+    ItemAction: {
+      wrapWith: <MenuItemActionContainer />,
+      excludeFromTabOrder: true,
     },
   };
 

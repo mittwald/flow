@@ -67,6 +67,7 @@ import { Image as Image } from "@mittwald/flow-react-components";
 import { ImageCropper as ImageCropper } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
+import { ItemAction as ItemAction } from "@mittwald/flow-react-components";
 import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
 import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
 import { Kbd as Kbd } from "@mittwald/flow-react-components";
@@ -311,6 +312,10 @@ export const flowComponents = {
   "flr-inline-code": createFlowRemoteComponentRenderer(
     "InlineCode",
     InlineCode,
+  ),
+  "flr-item-action": createFlowRemoteComponentRenderer(
+    "ItemAction",
+    ItemAction,
   ),
   "flr-items-grid-list": createFlowRemoteComponentRenderer(
     "ItemsGridList",

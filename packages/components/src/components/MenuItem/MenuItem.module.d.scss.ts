@@ -9,5 +9,6 @@ declare const classNames: {
   readonly controlIconActive: "controlIconActive";
   readonly kbd: "kbd";
   readonly badge: "badge";
+  readonly menuItemAction: "menuItemAction";
 };
 export default classNames;
