@@ -11,10 +11,11 @@ import { useEffect, useState, type FC } from "react";
 
 interface Props {
   iconOnly?: boolean;
+  color?: "secondary" | "dark";
 }
 
 export const ThemeSwitcherButton: FC<Props> = (props) => {
-  const { iconOnly } = props;
+  const { iconOnly, color = "secondary" } = props;
 
   const { theme, setTheme } = useTheme();
 
@@ -49,7 +50,7 @@ export const ThemeSwitcherButton: FC<Props> = (props) => {
       onPress={toggleTheme}
       aria-label={ariaLabel}
       variant={iconOnly ? "plain" : "soft"}
-      color="secondary"
+      color={color}
       slot="primary"
       style={{ flexGrow: 0, width: "auto" }}
     >
