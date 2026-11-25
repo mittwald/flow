@@ -40,14 +40,15 @@ const Header: FC<Props> = (props) => {
           <HeaderNavigation
             className={styles.headerNavigation}
             aria-label="Header Navigation"
+            color="dark"
           >
             <Groups docs={docs.map((mdx) => mdx.serialize())} />
           </HeaderNavigation>
         </Flex>
         <Flex gap="m" className={styles.desktopActions}>
           <SearchButton controller={searchController} />
-          <GitHubButton />
-          <ThemeSwitcherButton iconOnly />
+          <GitHubButton color="dark" />
+          <ThemeSwitcherButton iconOnly color="dark" />
         </Flex>
         <MobileNavigation
           docs={docs.map((mdx) => mdx.serialize())}

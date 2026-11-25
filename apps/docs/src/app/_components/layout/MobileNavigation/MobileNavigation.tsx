@@ -42,7 +42,7 @@ export const MobileNavigation: FC<Props> = (props) => {
   })?.[0];
 
   return (
-    <HeaderNavigation className={className}>
+    <HeaderNavigation className={className} color="dark">
       <MobileHeaderNavigation docs={props.docs} />
       <SearchButton controller={searchController} iconOnly />
       <ModalTrigger>
