@@ -8,7 +8,7 @@ badge:
   corner-radius:
     value: "{corner-radius.xl}"
   padding-y:
-    value: "{size-rem.xs}"
+    value: "calc({size-rem.xxs} + {size-rem.xxxs})"
   padding-x:
     value: "{size-rem.s}"
   spacing:
