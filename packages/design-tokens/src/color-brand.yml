@@ -7,8 +7,8 @@
 # OKLab in-between steps (500, 700, 900, 1000, 1200, 1300, 1500).
 # Status ramps: danger, warning and success mix 100–900 toward white;
 # success mixes 1100–1900 toward black. system-info is mixed like the hue
-# ramps and close to mittwald-navy, but its own ramp. Alpha ramps: 10–90 %
-# and 100 %.
+# ramps and close to mittwald-navy, but its own ramp. Alpha ramps have 14
+# steps: 4 %, 8–88 % in steps of 8, 96 % and 100 %.
 # Gradients: one light and one dark value per brand gradient, named after
 # the decorative colors. Diagonal from the bottom left to the top right;
 # dark text keeps AA against every stop. The grain is not part of the
@@ -416,46 +416,62 @@ color:
 
   black-alpha:
     100:
-      value: "rgb(0 0 0 / 10%)"
+      value: "rgb(0 0 0 / 4%)"
     200:
-      value: "rgb(0 0 0 / 20%)"
+      value: "rgb(0 0 0 / 8%)"
     300:
-      value: "rgb(0 0 0 / 30%)"
+      value: "rgb(0 0 0 / 16%)"
     400:
-      value: "rgb(0 0 0 / 40%)"
+      value: "rgb(0 0 0 / 24%)"
     500:
-      value: "rgb(0 0 0 / 50%)"
+      value: "rgb(0 0 0 / 32%)"
     600:
-      value: "rgb(0 0 0 / 60%)"
+      value: "rgb(0 0 0 / 40%)"
     700:
-      value: "rgb(0 0 0 / 70%)"
+      value: "rgb(0 0 0 / 48%)"
     800:
-      value: "rgb(0 0 0 / 80%)"
+      value: "rgb(0 0 0 / 56%)"
     900:
-      value: "rgb(0 0 0 / 90%)"
+      value: "rgb(0 0 0 / 64%)"
     1000:
+      value: "rgb(0 0 0 / 72%)"
+    1100:
+      value: "rgb(0 0 0 / 80%)"
+    1200:
+      value: "rgb(0 0 0 / 88%)"
+    1300:
+      value: "rgb(0 0 0 / 96%)"
+    1400:
       value: "rgb(0 0 0 / 100%)"
 
   white-alpha:
     100:
-      value: "rgb(255 255 255 / 10%)"
+      value: "rgb(255 255 255 / 4%)"
     200:
-      value: "rgb(255 255 255 / 20%)"
+      value: "rgb(255 255 255 / 8%)"
     300:
-      value: "rgb(255 255 255 / 30%)"
+      value: "rgb(255 255 255 / 16%)"
     400:
-      value: "rgb(255 255 255 / 40%)"
+      value: "rgb(255 255 255 / 24%)"
     500:
-      value: "rgb(255 255 255 / 50%)"
+      value: "rgb(255 255 255 / 32%)"
     600:
-      value: "rgb(255 255 255 / 60%)"
+      value: "rgb(255 255 255 / 40%)"
     700:
-      value: "rgb(255 255 255 / 70%)"
+      value: "rgb(255 255 255 / 48%)"
     800:
-      value: "rgb(255 255 255 / 80%)"
+      value: "rgb(255 255 255 / 56%)"
     900:
-      value: "rgb(255 255 255 / 90%)"
+      value: "rgb(255 255 255 / 64%)"
     1000:
+      value: "rgb(255 255 255 / 72%)"
+    1100:
+      value: "rgb(255 255 255 / 80%)"
+    1200:
+      value: "rgb(255 255 255 / 88%)"
+    1300:
+      value: "rgb(255 255 255 / 96%)"
+    1400:
       value: "rgb(255 255 255 / 100%)"
 
   mittwald-gradient:

@@ -293,78 +293,73 @@ content:
     inverse:
       value: "{color.mittwald-neutral.1700}"
 
-skeleton:
-  color:
-    shimmer:
-      value: "{color.white-alpha.100}"
-
 dark:
   color:
     quiet:
       100:
-        value: "{color.white-alpha.100}"
-      200:
-        value: "{color.white-alpha.200}"
-      300:
         value: "{color.white-alpha.300}"
+      200:
+        value: "{color.white-alpha.400}"
+      300:
+        value: "{color.white-alpha.500}"
     strong:
       100:
-        value: "{color.white-alpha.1000}"
+        value: "{color.white-alpha.1400}"
       200:
-        value: "{color.white-alpha.900}"
+        value: "{color.white-alpha.1200}"
       300:
-        value: "{color.white-alpha.700}"
+        value: "{color.white-alpha.1000}"
 
 light:
   color:
     quiet:
       100:
-        value: "{color.black-alpha.100}"
-      200:
         value: "{color.black-alpha.200}"
-      300:
+      200:
         value: "{color.black-alpha.300}"
+      300:
+        value: "{color.black-alpha.400}"
     strong:
       100:
-        value: "{color.black-alpha.1000}"
+        value: "{color.black-alpha.1400}"
       200:
-        value: "{color.black-alpha.900}"
+        value: "{color.black-alpha.1200}"
       300:
-        value: "{color.black-alpha.700}"
+        value: "{color.black-alpha.1000}"
 
 dark-static:
   color:
     quiet:
       100:
-        value: "{color.black-alpha.100}"
-      200:
         value: "{color.black-alpha.200}"
-      300:
+      200:
         value: "{color.black-alpha.300}"
+      300:
+        value: "{color.black-alpha.400}"
     strong:
       100:
-        value: "{color.black-alpha.1000}"
+        value: "{color.black-alpha.1400}"
       200:
-        value: "{color.black-alpha.900}"
+        value: "{color.black-alpha.1200}"
       300:
-        value: "{color.black-alpha.700}"
+        value: "{color.black-alpha.1000}"
 
 light-static:
   color:
     quiet:
       100:
-        value: "{color.white-alpha.100}"
-      200:
-        value: "{color.white-alpha.200}"
-      300:
         value: "{color.white-alpha.300}"
+      200:
+        value: "{color.white-alpha.400}"
+      300:
+        value: "{color.white-alpha.500}"
     strong:
       100:
-        value: "{color.white-alpha.1000}"
+        value: "{color.white-alpha.1400}"
       200:
-        value: "{color.white-alpha.900}"
+        value: "{color.white-alpha.1200}"
       300:
-        value: "{color.white-alpha.700}"
+        value: "{color.white-alpha.1000}"
 
 # Literal values: Flow owns these colors outright (ADR 0008).
 transparent:
