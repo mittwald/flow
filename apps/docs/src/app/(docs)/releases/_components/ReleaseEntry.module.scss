@@ -1,6 +1,7 @@
 // Figures arrive from the release body as plain markdown images, captured at
-// 2x. `zoom` halves them back to their capture scale — and halves the radius
-// with them, so that one is doubled.
+// 2x, without a frame. `zoom` halves them back to their capture scale — and
+// halves border and radius with them, so those are doubled. Border and radius
+// are those of `<Image withBorder>`.
 $figure-scale: 0.5;
 
 .entry {
@@ -8,9 +9,22 @@ $figure-scale: 0.5;
   // stylelint-disable-next-line selector-max-type -- markdown output
   img {
     zoom: $figure-scale;
+    display: block;
+    box-sizing: border-box;
     max-width: 100%;
     height: auto;
-    border-radius: calc(var(--corner-radius--m) / #{$figure-scale});
+    border: calc(var(--image--border-width) / #{$figure-scale})
+      var(--image--border-style) var(--image--border-color);
+    border-radius: calc(var(--image--corner-radius) / #{$figure-scale});
+  }
+
+  // The line break between the two images of a themed figure would otherwise
+  // add an empty line below it.
+  // stylelint-disable-next-line selector-max-type -- markdown output
+  p:has(> img) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   // A figure with a dark capture arrives as two images (`themedFigures`); the
