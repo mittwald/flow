@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/mittwald/flow/compare/1.7.1...1.7.2) (2026-11-25)
+
+### Bug Fixes
+
+* **docs:** make the header background less transparent ([#3734](https://github.com/mittwald/flow/issues/3734)) ([7ac0a4b](https://github.com/mittwald/flow/commit/7ac0a4be34bf5e5c7ec81a292dcf564be7d636d2))
+
+### Documentation
+
+* show the favicon in white and blue, add SVG and Apple touch icons ([#3735](https://github.com/mittwald/flow/issues/3735)) ([3b273e4](https://github.com/mittwald/flow/commit/3b273e4a5b7d496ed3452b59a2e7e9600f4253e4))
+* use the dark color for the header navigation and actions ([#3715](https://github.com/mittwald/flow/issues/3715)) ([f8785ea](https://github.com/mittwald/flow/commit/f8785ea2c4484903d79875e70ce629101483d93a))
+
+### Styles
+
+* **LayoutCard:** let a sole Alert fill the card ([#3727](https://github.com/mittwald/flow/issues/3727)) ([8fdfa76](https://github.com/mittwald/flow/commit/8fdfa7681dcc1014b0ea1a11ba772230df8b1239))
+
 ## [1.7.1](https://github.com/mittwald/flow/compare/1.7.0...1.7.1) (2026-11-24)
 
 ### Build System
