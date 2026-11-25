@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.3](https://github.com/mittwald/flow/compare/1.7.2...1.7.3) (2026-11-25)
+
+### Bug Fixes
+
+* **Badge:** draw no border around a pressable badge ([#3726](https://github.com/mittwald/flow/issues/3726)) ([88bb1ea](https://github.com/mittwald/flow/commit/88bb1ea7e54a4e9a12c75d6a8e32b7c1e86b0afc))
+
+### Documentation
+
+* **releases:** draw the figure frame around the image, not into it ([#3683](https://github.com/mittwald/flow/issues/3683)) ([b5838a3](https://github.com/mittwald/flow/commit/b5838a3450e82765a63866d3ff10176a5d9c7854))
+
 ## [1.7.2](https://github.com/mittwald/flow/compare/1.7.1...1.7.2) (2026-11-25)
 
 ### Bug Fixes
