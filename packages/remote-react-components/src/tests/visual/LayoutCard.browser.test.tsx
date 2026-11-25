@@ -6,7 +6,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { LayoutCard, Flex, Alert, Heading, Section },
+    components: { LayoutCard, Flex, Alert, Heading, Section, Text },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -18,6 +18,12 @@ test.each(testEnvironments)(
           <Section>
             <Heading>Section</Heading>
           </Section>
+        </LayoutCard>
+        <LayoutCard>
+          <Alert status="danger">
+            <Heading>Sole Alert fills the card</Heading>
+            <Text>Text</Text>
+          </Alert>
         </LayoutCard>
       </Flex>,
     );
