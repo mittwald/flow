@@ -18,7 +18,35 @@
   }
 
   .kbd,
-  .badge {
+  .badge,
+  .menuItemAction {
     margin-inline-start: auto;
+  }
+
+  .menuItemAction {
+    display: flex;
+    margin-block: calc(var(--menu-item--padding-y) * -1);
+  }
+
+  /* States */
+  &:has(.menuItemAction :focus-visible) {
+    outline-style: none;
+  }
+
+  /* Variants */
+
+  /* A touchscreen, even next to a mouse, cannot hover. */
+  @media (hover: hover) and (not (any-pointer: coarse)) {
+    .menuItemAction:has([data-visibility="hover"]) {
+      transition-property: opacity, visibility;
+      transition-duration: var(--transition--duration--fast);
+      transition-timing-function: ease;
+    }
+
+    &:not(:hover, [data-focused], :focus-within)
+      .menuItemAction:has([data-visibility="hover"]) {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 }

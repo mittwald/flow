@@ -10,7 +10,9 @@ import {
   CopyButton,
   Heading,
   IconApp,
+  IconDelete,
   MenuItem,
+  ItemAction,
   Modal,
   ModalTrigger,
   Section,
@@ -80,7 +82,15 @@ export const ActionsDemo = defineComponent({
                 <Text>Fire superlaser</Text>
               </MenuItem>
               <MenuItem id="rotate">Rotate station</MenuItem>
-              <MenuItem id="scan">Scan sector</MenuItem>
+              <MenuItem id="scan">
+                <Text>Scan sector</Text>
+                <ItemAction
+                  aria-label="Clear scan results"
+                  onPress={() => (stationAction.value = "clear scan results")}
+                >
+                  <IconDelete />
+                </ItemAction>
+              </MenuItem>
             </ContextMenu>
           </ContextMenuTrigger>
           <Text>Last action: {stationAction.value ?? "–"}</Text>

@@ -66,6 +66,7 @@ export * from "./Image";
 export * from "./ImageCropper";
 export * from "./Initials";
 export * from "./InlineCode";
+export * from "./ItemAction";
 export * from "./ItemsGridList";
 export * from "./ItemsGridListItem";
 export * from "./Kbd";
