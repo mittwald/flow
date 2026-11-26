@@ -188,6 +188,28 @@ describe("submission", () => {
     );
   });
 
+  test("native constraint validation does not block the submission", async () => {
+    const UrlForm: FC = () => {
+      const form = useForm<object>();
+      return (
+        <Form form={form} onSubmit={onSubmit}>
+          <Field name="url">
+            <TextField type="url" aria-label="url" />
+          </Field>
+          <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        </Form>
+      );
+    };
+
+    await render(<UrlForm />);
+    await userEvent.type(page.getByLabelText("url"), "asd");
+    await userEvent.click(page.getByTestId("submit-button"));
+    expect(onSubmit).toHaveBeenCalledWith(
+      { url: "asd" },
+      expect.objectContaining({ type: "submit" }),
+    );
+  });
+
   test("afterSubmit callback is called after successful submission", async () => {
     await render(<TestForm />);
     const submitButton = page.getByTestId("submit-button");

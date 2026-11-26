@@ -45,6 +45,7 @@ export interface FormAutoResetOptions {
 type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
+    noValidate?: boolean;
     onSubmit?: SubmitEventHandler | FormOnSubmitHandler<never>;
     ref?: Ref<HTMLFormElement>;
   }>
@@ -88,6 +89,14 @@ export interface FormProps<F extends FieldValues>
    * @default true
    */
   confirmModalCloseOnUnsavedChanges?: boolean;
+  /**
+   * Whether the browser's native constraint validation (e.g. of `type="url"`)
+   * is skipped on submit. Validation belongs in react-hook-form; a native check
+   * would block the submit event, so react-hook-form never runs.
+   *
+   * @default true
+   */
+  noValidate?: boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
@@ -131,6 +140,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     autoReset = true,
     confirmModalCloseOnUnsavedChanges: confirmModalCloseOnUnsavedChangesProp,
     submitController: submitControllerFromProps,
+    noValidate = true,
     ...formProps
   } = props;
 
@@ -233,6 +243,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       >
         <FormComponent
           {...formProps}
+          noValidate={noValidate}
           ref={refWithHotkeySubmit}
           id={formId}
           onSubmit={handleSubmit}
