@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, RefAttributes } from "react";
 import styles from "./ListItemView.module.scss";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
 import {
@@ -78,7 +78,10 @@ const buildPropsContext = (buttonSize: "s" | "m"): PropsContext => ({
 const listPropsContext = buildPropsContext("m");
 const tilesPropsContext = buildPropsContext("s");
 
+/* `ref` is a no-op: the factory used to add it, and dropping it would break
+   consumers' types. */
 export type ListItemViewProps = PropsWithChildren &
+  RefAttributes<unknown> &
   Pick<ColumnLayoutProps, "s" | "m" | "l">;
 
 export const ListItemView = flowComponent(

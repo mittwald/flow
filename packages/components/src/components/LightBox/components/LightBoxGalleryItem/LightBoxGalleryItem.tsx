@@ -9,13 +9,19 @@ import { useOverlayController } from "@/lib/hooks";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../locales/*.locale.json";
 import { Button } from "@/components/Button";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, RefAttributes } from "react";
 import { LightBoxZoom } from "@/components/LightBox/components/LightBoxZoom";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
-/* Renders no element of its own, so there is no ref to expose. */
+/*
+ * Renders no element of its own. `ref` stays accepted as a no-op: the factory
+ * used to add it, and dropping it would break consumers' types.
+ */
 export interface LightBoxGalleryItemProps
-  extends PropsWithChildren, Omit<FlowComponentProps, "ref"> {
+  extends
+    PropsWithChildren,
+    Omit<FlowComponentProps, "ref">,
+    RefAttributes<unknown> {
   /**
    * @internal Set by the `withZoom` of the surrounding `LightBox`: whether the
    * item's content can be zoomed.
