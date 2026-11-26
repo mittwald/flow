@@ -1,7 +1,8 @@
 declare const classNames: {
   readonly wrapper: "wrapper";
-  readonly band: "band";
+  readonly bandScope: "bandScope";
   readonly top: "top";
+  readonly band: "band";
   readonly overviewBand: "overviewBand";
   readonly heroExample: "heroExample";
   readonly bandContent: "bandContent";

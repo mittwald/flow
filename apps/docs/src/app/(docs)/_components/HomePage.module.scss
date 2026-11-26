@@ -7,18 +7,25 @@
   max-width: 100%;
 }
 
+// The dark sections render in Flow's dark theme, whatever the page's
+.bandScope {
+  // Full width, out of the page's padded column
+  align-self: center;
+  width: 100vw;
+
+  &.top {
+    // Up to the header, over the layout's top padding
+    margin-block-start: calc(-1 * var(--size-px--m));
+  }
+}
+
 .band.top {
-  // Up to the header, over the layout's top padding
-  margin-block-start: calc(-1 * var(--size-px--m));
   padding-block: 128px;
   // Shifts the image up, so the light bands frame the logo
   background-position: center 60%;
 }
 
 .band {
-  // Full width, out of the page's padded column
-  align-self: center;
-  width: 100vw;
   border-radius: 0;
   // Same inset as the page column (layout.module.scss), so the content lines up
   padding: var(--size-px--xxl) var(--size-px--xl);

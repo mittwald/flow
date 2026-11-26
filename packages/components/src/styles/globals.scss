@@ -123,32 +123,53 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   }
 }
 
+/*
+  The color scheme of the nearest `[data-theme]` element. A custom property, so
+  that `<html data-theme>` keeps applying to Flow elements only, and so that a
+  nested theme scope wins over the root.
+ */
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --theme--color-scheme: dark;
+}
+
+:root[data-theme="light"],
+[data-theme="light"] {
+  --theme--color-scheme: light;
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]),
-  :root[data-theme="system"] {
-    [class*="flow--"] {
-      color-scheme: dark;
-    }
+  [data-theme="system"] {
+    --theme--color-scheme: dark;
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]),
-  :root[data-theme="system"] {
-    [class*="flow--"] {
-      color-scheme: light;
-    }
+  [data-theme="system"] {
+    --theme--color-scheme: light;
   }
 }
 
-:root[data-theme="dark"] {
-  [class*="flow--"] {
-    color-scheme: dark;
-  }
+// `all: initial` above resets the inherited `color-scheme` on Flow elements.
+[class*="flow--"] {
+  color-scheme: var(--theme--color-scheme);
 }
 
-:root[data-theme="light"] {
-  [class*="flow--"] {
-    color-scheme: light;
-  }
+/*
+  A theme scope inside the page — Flow's values only, other libraries use
+  `data-theme` too. The text color is inherited as a resolved value, so a scope
+  nested in a Flow element would keep the outer theme's.
+  Specificity 0-0-2, as the reset above: it wins over the reset by coming after
+  it, and loses to a component's own color (the Tooltip carries `data-theme`
+  too) — also in the unlayered `all.css`, where this file comes last.
+ */
+html
+  body
+  :where(
+    :is([data-theme="light"], [data-theme="dark"], [data-theme="system"]):not(:root)
+  ) {
+  color-scheme: var(--theme--color-scheme);
+  color: var(--text--color--default);
 }
