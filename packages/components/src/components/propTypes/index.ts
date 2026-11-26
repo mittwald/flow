@@ -28,6 +28,7 @@ import type { AvatarStackProps } from "@/components/AvatarStack";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BreadcrumbProps } from "@/components/Breadcrumb";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { LabeledValueProps } from "@/components/LabeledValue";
 import type { DonutChartProps } from "@/components/DonutChart";
 import type { ActionProps } from "@/components/Action";
 import type {
@@ -178,6 +179,7 @@ export interface FlowComponentPropsTypes {
   Initials: InitialsProps;
   InlineCode: InlineCodeProps;
   Label: LabelProps;
+  LabeledValue: LabeledValueProps;
   LayoutCard: LayoutCardProps;
   Legend: LegendProps;
   LightBox: LightBoxProps;
@@ -294,6 +296,7 @@ const propsContextSupportingComponentsMap: Record<
   InlineCode: true,
   Kbd: true,
   Label: true,
+  LabeledValue: true,
   LayoutCard: true,
   Legend: true,
   LightBox: true,
