@@ -13,6 +13,9 @@
     flex: 1 1 auto;
     min-width: 0;
     overflow-x: clip;
+
+    /* The height of a tab, also without links or link content */
+    min-height: calc(2 * var(--tab-navigation--padding) + 1lh);
   }
 
   .item {
