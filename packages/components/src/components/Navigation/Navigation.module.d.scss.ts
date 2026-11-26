@@ -8,5 +8,7 @@ declare const classNames: {
   readonly controlIcon: "controlIcon";
   readonly avatar: "avatar";
   readonly badge: "badge";
+  readonly listItem: "listItem";
+  readonly itemAction: "itemAction";
 };
 export default classNames;

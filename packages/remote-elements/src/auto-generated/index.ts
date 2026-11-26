@@ -66,6 +66,7 @@ export * from "./RemoteImageElement";
 export * from "./RemoteImageCropperElement";
 export * from "./RemoteInitialsElement";
 export * from "./RemoteInlineCodeElement";
+export * from "./RemoteItemActionElement";
 export * from "./RemoteItemsGridListElement";
 export * from "./RemoteItemsGridListItemElement";
 export * from "./RemoteKbdElement";

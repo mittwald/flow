@@ -244,6 +244,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#ItemAction": {
+    "level": "beta",
+    "isNew": true
+  },
   "@mittwald/flow-react-components#Kbd": {
     "level": "stable",
     "isNew": true

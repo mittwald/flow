@@ -1,6 +1,6 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "Navigation (%s)",
@@ -100,5 +100,66 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Navigation - narrow container");
+  },
+);
+
+// Navigation renders an ItemAction from 1.8.0-next.2.
+test.skipIf(crossVersion({ below: "1.8.0-next.2" })).each(testEnvironments)(
+  "Navigation with item actions (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Navigation,
+      NavigationGroup,
+      ItemAction,
+      Link,
+      Label,
+      Text,
+      IconStar,
+      IconStarFilled,
+      CounterBadge,
+    },
+  }) => {
+    await render(
+      <Navigation>
+        <Link href="#">
+          <IconStar />
+          <Text>Shown on focus</Text>
+          <ItemAction aria-label="Pin">
+            <IconStar />
+          </ItemAction>
+        </Link>
+        <Link href="#">
+          <IconStar />
+          <Text>Hidden</Text>
+          <ItemAction aria-label="Pin">
+            <IconStar />
+          </ItemAction>
+        </Link>
+        <NavigationGroup>
+          <Label>NavigationGroup</Label>
+          <Link href="#" aria-current="page">
+            <Text>Current, always visible</Text>
+            <CounterBadge count={2} />
+            <ItemAction visibility="always" aria-label="Unpin">
+              <IconStarFilled />
+            </ItemAction>
+          </Link>
+          <Link href="#">
+            <Text>Galactic Empire of the Outer Rim</Text>
+            <ItemAction visibility="always" aria-label="Unpin">
+              <IconStarFilled />
+            </ItemAction>
+          </Link>
+        </NavigationGroup>
+      </Navigation>,
+    );
+
+    await userEvent.tab();
+    await testScreenshot("Navigation item actions - link focused");
+
+    await userEvent.tab();
+    await testScreenshot("Navigation item actions - action focused");
   },
 );

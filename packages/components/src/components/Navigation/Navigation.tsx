@@ -12,6 +12,7 @@ import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
 import { containsTextChild } from "@/lib/react/remote";
 import { SkeletonTextContent } from "@/components/SkeletonMode/components/SkeletonTextContent";
+import { NavigationItem } from "@/components/Navigation/components/NavigationItem/NavigationItem";
 
 export interface NavigationProps
   extends
@@ -41,7 +42,7 @@ export const Navigation = flowComponent("Navigation", (props) => {
   const rootClassName = clsx(styles.navigation, className);
 
   const linkPropsContext: ComponentPropsContext<"Link"> = {
-    wrapWith: <li />,
+    wrapWith: <NavigationItem />,
     className: styles.item,
     unstyled: true,
     children: dynamic((linkProps) => wrapTextInLabel(linkProps.children)),
@@ -52,6 +53,13 @@ export const Navigation = flowComponent("Navigation", (props) => {
     Badge: { className: styles.badge },
     AlertBadge: { className: styles.badge },
     CounterBadge: { className: styles.badge },
+    ItemAction: {
+      className: styles.itemAction,
+      tunnel: {
+        id: "itemAction",
+        component: "Navigation",
+      },
+    },
   };
 
   return (

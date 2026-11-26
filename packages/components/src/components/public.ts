@@ -63,6 +63,7 @@ export * from "@/components/ImageCropper";
 export * from "@/components/Initials";
 export * from "@/components/InlineCode";
 export * from "@/components/IntlProvider";
+export * from "@/components/ItemAction";
 export * from "@/components/Label";
 export * from "@/components/LabeledValue";
 export * from "@/components/LayoutCard";

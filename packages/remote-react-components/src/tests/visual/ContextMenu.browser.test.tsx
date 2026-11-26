@@ -3,7 +3,7 @@ import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 // showSelectAll exists from 1.4.0-next.6.
 const selectAllFrom = "1.4.0-next.6";
 import { test } from "vitest";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 // Basic context menu — only long-standing components, opened via interaction.
 // Cross-version safe (works on every published version).
@@ -149,5 +149,56 @@ test.skipIf(crossVersion({ below: selectAllFrom })).each(testEnvironments)(
 
     await page.getByRole("menuitem", { name: "Select all" }).click();
     await testScreenshot("ContextMenu select all - all selected");
+  },
+);
+
+// ItemAction exists from 1.8.0-next.2.
+test.skipIf(crossVersion({ below: "1.8.0-next.2" })).each(testEnvironments)(
+  "ContextMenu with item actions (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      ContextMenuTrigger,
+      Button,
+      ContextMenu,
+      MenuItem,
+      ItemAction,
+      Text,
+      IconDelete,
+    },
+  }) => {
+    await render(
+      <ContextMenuTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <ContextMenu>
+          <MenuItem>
+            <Text>Shown on hover and focus</Text>
+            <ItemAction aria-label="Delete">
+              <IconDelete />
+            </ItemAction>
+          </MenuItem>
+          <MenuItem>
+            <Text>Hidden</Text>
+            <ItemAction aria-label="Delete">
+              <IconDelete />
+            </ItemAction>
+          </MenuItem>
+          <MenuItem>
+            <Text>Always visible</Text>
+            <ItemAction visibility="always" aria-label="Delete">
+              <IconDelete />
+            </ItemAction>
+          </MenuItem>
+        </ContextMenu>
+      </ContextMenuTrigger>,
+    );
+
+    await page.getByTestId("trigger").click();
+    await userEvent.keyboard("{ArrowDown}");
+    await testScreenshot("ContextMenu item actions - item focused");
+
+    await userEvent.keyboard("{ArrowRight}");
+    await testScreenshot("ContextMenu item actions - action focused");
   },
 );

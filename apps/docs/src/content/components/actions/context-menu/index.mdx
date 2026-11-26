@@ -60,6 +60,21 @@ vermitteln.
 
 ---
 
+# Mit ItemAction
+
+Eine `ItemAction` ergänzt ein MenuItem um eine zweite Aktion am Ende des
+Eintrags, etwa zum Entfernen. Ein Klick darauf löst weder die Aktion des
+MenuItems aus noch schließt er das ContextMenu.
+
+- `visibility="hover"` (Default) zeigt die Aktion nur, solange das MenuItem
+  gehovert oder fokussiert ist. Auf Geräten mit Touchscreen ist sie immer
+  sichtbar.
+- `visibility="always"` zeigt die Aktion dauerhaft.
+
+<LiveCodeEditor example="item-action" editorCollapsed />
+
+---
+
 # Mit Separator
 
 Ein [Separator](/components/structure/separator) gruppiert logisch
