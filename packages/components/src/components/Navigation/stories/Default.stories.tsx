@@ -3,10 +3,13 @@ import {
   IconCustomer,
   IconProject,
   IconServer,
+  IconStar,
+  IconStarFilled,
 } from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Navigation, NavigationGroup } from "@/components/Navigation";
+import { ItemAction } from "@/components/ItemAction";
 import Label from "@/components/Label";
 import { Badge } from "@/components/Badge";
 import { CounterBadge } from "@/components/CounterBadge";
@@ -74,6 +77,48 @@ export const WithGroups: Story = {
         <Link>Squadrons</Link>
         <Link>Star Charts</Link>
         <Link>Outposts</Link>
+      </NavigationGroup>
+    </Navigation>
+  ),
+};
+
+export const WithItemActions: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main navigation" {...props}>
+      <NavigationGroup>
+        <Label>Favorites</Label>
+        <Link href="#">
+          <IconServer />
+          <Text>Death Star</Text>
+          <ItemAction
+            aria-label="Remove Death Star from favorites"
+            visibility="always"
+          >
+            <IconStarFilled />
+          </ItemAction>
+        </Link>
+      </NavigationGroup>
+      <NavigationGroup>
+        <Label>Projects</Label>
+        <Link href="#" aria-current="page">
+          <IconProject />
+          <Text>Fleet Status</Text>
+          <ItemAction aria-label="Add Fleet Status to favorites">
+            <IconStar />
+          </ItemAction>
+        </Link>
+        <Link href="#">
+          <IconProject />
+          <Text>Star Charts</Text>
+          <CounterBadge count={3} />
+          <ItemAction aria-label="Add Star Charts to favorites">
+            <IconStar />
+          </ItemAction>
+        </Link>
+        <Link href="#">
+          <IconProject />
+          <Text>Outposts</Text>
+        </Link>
       </NavigationGroup>
     </Navigation>
   ),

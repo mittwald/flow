@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { ComponentGroupPage } from "@/app/remote/components/_lib/ComponentGroupPage";
 import {
   AlertIcon,
@@ -7,6 +8,9 @@ import {
   HeaderNavigation,
   Heading,
   IconSearch,
+  IconStar,
+  IconStarFilled,
+  ItemAction,
   Label,
   Link,
   Navigation,
@@ -16,6 +20,8 @@ import {
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
+  const [isPinned, setIsPinned] = useState(false);
+
   return (
     <ComponentGroupPage title="Navigation">
       <Section>
@@ -53,7 +59,16 @@ export default function Page() {
           </Link>
           <NavigationGroup>
             <Label>Decks</Label>
-            <Link href="#">Hangar</Link>
+            <Link href="#">
+              Hangar
+              <ItemAction
+                aria-label={isPinned ? "Unpin Hangar" : "Pin Hangar"}
+                visibility={isPinned ? "always" : "hover"}
+                onPress={() => setIsPinned(!isPinned)}
+              >
+                {isPinned ? <IconStarFilled /> : <IconStar />}
+              </ItemAction>
+            </Link>
             <Link href="#">Detention block</Link>
           </NavigationGroup>
         </Navigation>

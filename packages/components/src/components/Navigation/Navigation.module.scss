@@ -44,6 +44,52 @@
     }
   }
 
+  /* An item with an action: the list item paints the item's backgrounds,
+     because the action sits next to the link, not inside it. */
+  .listItem:has(> .itemAction) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--menu-item--spacing);
+    padding-inline-end: var(--menu-item--padding-x);
+    border-radius: var(--menu-item--corner-radius);
+    background-color: var(--menu-item--background-color--default);
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
+
+    &:hover {
+      background-color: var(--menu-item--background-color--hover);
+    }
+
+    &:has(> .item[aria-current]) {
+      background-color: var(--menu-item--background-color--current);
+    }
+
+    > .item {
+      flex-grow: 1;
+      min-width: 0;
+      padding-inline-end: 0;
+      background-color: transparent;
+    }
+  }
+
+  .itemAction {
+    flex-shrink: 0;
+  }
+
+  /* A touchscreen, even next to a mouse, cannot hover. */
+  @media (hover: hover) and (not (any-pointer: coarse)) {
+    .itemAction[data-visibility="hover"] {
+      transition-property: opacity, visibility;
+      transition-duration: var(--transition--duration--fast);
+      transition-timing-function: ease;
+    }
+
+    .listItem:not(:hover, :focus-within) > .itemAction[data-visibility="hover"] {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
   // A consumer-placed `Separator`, which is a plain FC — Navigation's props
   // context cannot inject a class into it.
   // stylelint-disable-next-line selector-max-type -- consumer separator

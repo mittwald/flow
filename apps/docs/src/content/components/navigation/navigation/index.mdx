@@ -60,6 +60,23 @@ vielen Gruppen entsteht so eine Übersicht auf einen Blick.
 
 ---
 
+# Mit ItemAction
+
+Eine `ItemAction` ergänzt einen Menüeintrag um eine zweite Aktion am Ende des
+Eintrags, etwa zum Anpinnen. Sie steht innerhalb des Links, die Navigation
+rendert sie aber neben dem Link. Ein Klick darauf öffnet den Link nicht.
+
+- `visibility="hover"` (Default) zeigt die Aktion nur, solange der Menüeintrag
+  gehovert oder fokussiert ist. Auf Geräten mit Touchscreen ist sie immer
+  sichtbar.
+- `visibility="always"` zeigt die Aktion dauerhaft.
+
+Gib der Aktion immer ein `aria-label`, das den Menüeintrag nennt.
+
+<LiveCodeEditor example="item-action" editorCollapsed />
+
+---
+
 # Kombiniere mit …
 
 ## Separator
