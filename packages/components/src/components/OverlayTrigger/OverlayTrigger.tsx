@@ -26,6 +26,7 @@ interface Props extends OverlayTriggerProps {
   component: AriaComponentType;
 }
 
+/* Plain FC: internal building block of the overlay triggers; export to be deprecated (#3724). */
 export const OverlayTrigger: FC<Props> = (props) => {
   const {
     overlayType,

@@ -16,5 +16,6 @@ export const OverlayContent = createFlowRemoteComponent(
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },
+    type: "layout",
   },
 );

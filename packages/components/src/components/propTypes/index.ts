@@ -93,6 +93,7 @@ import type {
   DialogTriggerProps,
   MenuTriggerProps,
 } from "@/components/OverlayTrigger";
+import type { OverlayContentProps } from "@/components/Overlay";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import type { RangeCalendarProps } from "@/components/Calendar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
@@ -202,6 +203,7 @@ export interface FlowComponentPropsTypes {
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Options: OptionsProps;
+  OverlayContent: OverlayContentProps;
   Popover: PopoverProps;
   PopoverTrigger: PopoverTriggerProps;
   PasswordCreationField: PasswordCreationFieldProps;
@@ -319,6 +321,7 @@ const propsContextSupportingComponentsMap: Record<
   Radio: true,
   Option: true,
   Options: true,
+  OverlayContent: true,
   Popover: true,
   PopoverTrigger: true,
   PasswordCreationField: true,

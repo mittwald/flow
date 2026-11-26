@@ -43,6 +43,7 @@ export interface OverlayProps
   confirmOnClose?: boolean;
 }
 
+/* Plain FC: internal building block of `Modal`/`LightBox`; export to be deprecated (#3724). */
 export const Overlay: FC<OverlayProps> = (props) => {
   const {
     controller: controllerFromProps,
