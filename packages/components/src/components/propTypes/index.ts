@@ -1,4 +1,5 @@
 import type { TextProps } from "@/components/Text";
+import type { TruncateProps } from "@/components/Truncate";
 import type { ButtonProps } from "@/components/Button";
 import type { IconProps } from "@/components/Icon";
 import type { LabelProps } from "@/components/Label";
@@ -230,6 +231,7 @@ export interface FlowComponentPropsTypes {
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
   TimeField: TimeFieldProps;
+  Truncate: TruncateProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -346,6 +348,7 @@ const propsContextSupportingComponentsMap: Record<
   TextArea: true,
   TextField: true,
   TimeField: true,
+  Truncate: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(
