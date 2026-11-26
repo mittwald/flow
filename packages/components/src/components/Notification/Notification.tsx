@@ -6,14 +6,19 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Notification.module.scss";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface NotificationProps
-  extends PropsWithChildren<ComponentProps<"div">>, PropsWithStatus {
+  extends
+    PropsWithChildren<ComponentProps<"div">>,
+    PropsWithStatus,
+    FlowComponentProps {
   /** A link that is triggered when clicking the notification. */
   href?: string;
   /** Whether the notification should disappear automatically after some time. */
@@ -28,7 +33,7 @@ export interface NotificationProps
 }
 
 /** @flr-generate all */
-export const Notification: FC<NotificationProps> = (props) => {
+export const Notification = flowComponent("Notification", (props) => {
   const {
     children,
     className,
@@ -38,6 +43,7 @@ export const Notification: FC<NotificationProps> = (props) => {
     onClick,
     onClose,
     autoClose: ignoredAutoClose,
+    ref,
     ...rest
   } = props;
 
@@ -100,6 +106,7 @@ export const Notification: FC<NotificationProps> = (props) => {
   return (
     <div
       {...rest}
+      ref={ref}
       className={rootClassName}
       role={role}
       // See https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useInteractOutside.ts#L126C31-L126C58
@@ -109,6 +116,6 @@ export const Notification: FC<NotificationProps> = (props) => {
       {closeButton}
     </div>
   );
-};
+});
 
 export default Notification;

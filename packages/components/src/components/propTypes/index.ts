@@ -28,6 +28,7 @@ import type { AvatarStackProps } from "@/components/AvatarStack";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BreadcrumbProps } from "@/components/Breadcrumb";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type { NotificationProps } from "@/components/Notification";
 import type { DonutChartProps } from "@/components/DonutChart";
 import type { ActionProps } from "@/components/Action";
 import type {
@@ -199,6 +200,7 @@ export interface FlowComponentPropsTypes {
   ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
+  Notification: NotificationProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Options: OptionsProps;
@@ -315,6 +317,7 @@ const propsContextSupportingComponentsMap: Record<
   ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
+  Notification: true,
   NumberField: true,
   Radio: true,
   Option: true,
