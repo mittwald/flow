@@ -7,8 +7,9 @@ badge:
     value: "{single-line-height}"
   corner-radius:
     value: "{corner-radius.xl}"
+  # 3px: keeps a badge (22px) lower than an xs heading line (24px)
   padding-y:
-    value: "{size-rem.xs}"
+    value: 0.1875rem
   padding-x:
     value: "{size-rem.s}"
   spacing:

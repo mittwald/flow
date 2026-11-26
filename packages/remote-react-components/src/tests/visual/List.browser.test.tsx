@@ -424,6 +424,7 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       ContextMenu,
       Text,
       Content,
+      Badge,
     },
   }) => {
     function ListViewCase() {
@@ -503,10 +504,38 @@ test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
       );
     }
 
+    function WrappingBadgesCase() {
+      const List = typedList<{ id: string; name: string }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData data={[{ id: "1", name: "Luke Skywalker" }]} />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Heading>
+                  {i.name}
+                  <Badge>Jedi Knight of the Galactic Republic</Badge>
+                  <Badge>
+                    Member of the Rebel Alliance since the Battle of Yavin
+                  </Badge>
+                  <Badge>
+                    Pilot of Red Five in the attack on the first Death Star
+                  </Badge>
+                  <Badge>Son of Anakin Skywalker and Padmé Amidala</Badge>
+                </Heading>
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
     await render(
       <Flex direction="column" gap="m">
         <ListViewCase />
         <ColumnLayoutCase />
+        <WrappingBadgesCase />
       </Flex>,
     );
 
