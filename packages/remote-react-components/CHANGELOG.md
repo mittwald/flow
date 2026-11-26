@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.4](https://github.com/mittwald/flow/compare/1.7.3...1.7.4) (2026-11-26)
+
+### Bug Fixes
+
+* **Badge:** reduce the height to 22px ([#3736](https://github.com/mittwald/flow/issues/3736)) ([8d02056](https://github.com/mittwald/flow/commit/8d02056fa6adcdf3afd8acbad0e067a542d33413))
+
+### Tests
+
+* **Image:** update the darwin baselines of &quot;Image in a column&quot; ([#3737](https://github.com/mittwald/flow/issues/3737)) ([83cf2c6](https://github.com/mittwald/flow/commit/83cf2c604bc7a91fc64fe8b9458d3b00caa2f237))
+
 ## [1.7.3](https://github.com/mittwald/flow/compare/1.7.2...1.7.3) (2026-11-25)
 
 ### Bug Fixes
