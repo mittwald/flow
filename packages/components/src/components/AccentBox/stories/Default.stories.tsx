@@ -6,8 +6,10 @@ import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Section } from "@/components/Section";
 import { LayoutCard } from "@/components/LayoutCard";
-import { alphaColors } from "@/lib/types/props";
+import { alphaColors, decorativeColors } from "@/lib/types/props";
 import { ColumnLayout } from "@/components/ColumnLayout";
+import { Button } from "@/components/Button";
+import { action } from "storybook/actions";
 
 const meta: Meta<typeof AccentBox> = {
   title: "Structure/AccentBox",
@@ -28,13 +30,11 @@ const meta: Meta<typeof AccentBox> = {
       control: "inline-radio",
       options: [
         "neutral",
-        "blue",
-        "violet",
-        "teal",
-        "lilac",
-        "green",
-        "navy",
-        "gradient",
+        ...decorativeColors,
+        "gradient-navy",
+        "gradient-sage",
+        "gradient-lilac",
+        "gradient-salmon",
       ],
     },
   },
@@ -78,6 +78,53 @@ export const WithLink: Story = {
         </Section>
       </AccentBox>
     </Link>
+  ),
+};
+
+export const WithLinkAction: Story = {
+  render: (props) => (
+    <AccentBox {...props}>
+      <Section>
+        <Heading>WordPress</Heading>
+        <Text>{dummyText.medium}</Text>
+        <Link slot="action" href="#">
+          Show WordPress template
+        </Link>
+      </Section>
+    </AccentBox>
+  ),
+};
+
+export const WithButtonAction: Story = {
+  render: (props) => (
+    <AccentBox {...props}>
+      <Section>
+        <Heading>Demo persona</Heading>
+        <Text>{dummyText.medium}</Text>
+        <Button slot="action" onPress={action("select")}>
+          Select demo persona
+        </Button>
+        <Button onPress={action("select")}>Select</Button>
+        <Link onPress={action("details")}>Details</Link>
+      </Section>
+    </AccentBox>
+  ),
+};
+
+export const WithActionInLayoutCard: Story = {
+  render: (props) => (
+    <LayoutCard>
+      <AccentBox {...props}>
+        <Section>
+          <Heading>WordPress</Heading>
+          <Text>{dummyText.medium}</Text>
+          <Link slot="action" href="#">
+            Show WordPress template
+          </Link>
+          <Button onPress={action("install")}>Install</Button>
+        </Section>
+      </AccentBox>
+    </LayoutCard>
   ),
 };
 

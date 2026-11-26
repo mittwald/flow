@@ -10,6 +10,8 @@ import styles from "./FilterContextMenus.module.scss";
 import { useOverlayController } from "@/lib/controller";
 import RangeCalendarView from "@/views/RangeCalendarView";
 import type { AnyDateRangeFilter } from "@/components/List/model/filter/types";
+import { isDateRangeValue } from "@/components/Calendar";
+import { DateTimeRangeFields } from "@/components/List/components/Header/components/DateTimeRangeFields/DateTimeRangeFields";
 
 interface Props {
   filter: AnyDateRangeFilter;
@@ -24,6 +26,23 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const controller = useOverlayController("Popover");
+
+  const value = filter.getValue();
+
+  const fields =
+    filter.granularity === "minute" ? (
+      <DateTimeRangeFields filter={filter} className={styles.dateTimeRange} />
+    ) : (
+      <RangeCalendarView
+        {...filter.rangeCalendarProps}
+        value={isDateRangeValue(value) ? value : null}
+        onChange={(range) => {
+          filter.setValue(range);
+          controller.close();
+        }}
+        className={styles.calendar}
+      />
+    );
 
   return (
     <PopoverTrigger controller={controller}>
@@ -41,15 +60,7 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
         isDialogContent
         aria-label={stringFormatter.format("dateRange")}
       >
-        <RangeCalendarView
-          {...filter.dateRangeOptions}
-          value={filter.getValue()}
-          onChange={(range) => {
-            filter.setValue(range);
-            controller.close();
-          }}
-          className={styles.calendar}
-        />
+        {fields}
       </Popover>
     </PopoverTrigger>
   );

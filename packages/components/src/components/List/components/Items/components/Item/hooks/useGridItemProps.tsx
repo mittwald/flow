@@ -7,12 +7,12 @@ import { AccordionButton } from "@/components/List/components/Items/components/I
 
 interface P extends PropsWithChildren {
   data: never;
+  onAction?: (data: never) => void;
 }
 
 export const useGridItemProps = (props: P, list: List<never>) => {
-  const { data, children: childrenFromProps } = props;
+  const { data, onAction, children: childrenFromProps } = props;
   const itemView = list.itemView;
-  const onAction = list.onAction;
 
   const [isExpanded, setIsExpanded] = useState(
     itemView?.defaultExpanded?.(data) ?? false,

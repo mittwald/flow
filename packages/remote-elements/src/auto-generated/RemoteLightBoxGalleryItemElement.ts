@@ -10,7 +10,9 @@ export class RemoteLightBoxGalleryItemElement extends FlowRemoteElement<RemoteLi
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      withZoom: {},
+    };
   }
 
   static override get remoteEvents() {

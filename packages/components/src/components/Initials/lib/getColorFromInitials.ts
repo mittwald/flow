@@ -4,6 +4,6 @@ import { avatarColors } from "@/components/Avatar/avatarColors";
 
 export const getColorFromInitials = (initials: string): AvatarColors => {
   const code = objectHash(initials);
-  const number = Math.abs(code % (avatarColors.length - 1));
+  const number = Math.abs(code % avatarColors.length);
   return avatarColors[number] ?? "blue";
 };

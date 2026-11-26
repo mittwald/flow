@@ -1,17 +1,16 @@
 import { ListDateRangeFilter } from "@mittwald/flow-components-base";
 import type {
-  ListDateParts,
-  ListDateRange,
+  ListDateTimeRangeLimits,
   ListModelContext,
 } from "@mittwald/flow-components-base";
 import type { ListRendered, VueListFilterShape } from "./types";
 
 /**
- * A date-range filter, with the options its calendar takes.
+ * A date-range filter, with the options its fields take.
  *
  * The column, the comparison and the stored value are the shared
  * `ListDateRangeFilter`, so a Vue list and a React list filter the same dates
- * the same way. What a binding adds is only what its calendar accepts.
+ * the same way. What a binding adds is only what its fields accept.
  */
 export class DateRangeFilter<T = never> extends ListDateRangeFilter<
   T,
@@ -30,18 +29,28 @@ export class DateRangeFilter<T = never> extends ListDateRangeFilter<
       shape as { dateRangeOptions?: Record<string, unknown> }
     ).dateRangeOptions;
   }
+
+  public get granularity(): "day" | "minute" {
+    return this.dateRangeOptions?.granularity === "minute" ? "minute" : "day";
+  }
+
+  public get rangeCalendarProps(): Record<string, unknown> {
+    if (this.granularity === "minute") {
+      return {};
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { granularity, ...props } = this.dateRangeOptions ?? {};
+    return props;
+  }
+
+  public get dateTimeRangeLimits(): ListDateTimeRangeLimits | undefined {
+    return this.granularity === "minute"
+      ? (this.dateRangeOptions as ListDateTimeRangeLimits)
+      : undefined;
+  }
 }
 
 /** Whether a filter is one of these, without reaching for the class. */
 export const isDateRangeFilter = (filter: {
   readonly mode: string;
 }): filter is DateRangeFilter<never> => filter.mode === "dateRange";
-
-/** `01/03/2024`, the way `Intl` writes it for the host's locale. */
-export const formatDate = (date: ListDateParts): string =>
-  new Date(date.year, date.month - 1, date.day).toLocaleDateString();
-
-export const formatDateRange = (range: ListDateRange): string =>
-  [range.start, range.end]
-    .map((date) => (date ? formatDate(date) : ""))
-    .join(" - ");

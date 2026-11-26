@@ -9,9 +9,9 @@ interface Props {
 }
 
 /**
- * One example's preview, framed exactly as on its Styleguide page but without
- * the editor. `data-ready` flips once the example has mounted on the client:
- * the server-rendered markup lacks everything that appears only after
+ * One example's preview, laid out as on its Styleguide page but without the
+ * editor and the frame. `data-ready` flips once the example has mounted on the
+ * client: the server-rendered markup lacks everything that appears only after
  * hydration, such as an open overlay.
  */
 export const ExampleStage: FC<Props> = ({ code }) => {
@@ -25,7 +25,7 @@ export const ExampleStage: FC<Props> = ({ code }) => {
       data-example-stage
       data-ready={mounted || undefined}
     >
-      <LiveCodeEditor code={code} editorDisabled />
+      <LiveCodeEditor code={code} editorDisabled className={styles.frame} />
     </div>
   );
 };

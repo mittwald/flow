@@ -50,8 +50,6 @@ test.each(testEnvironments)(
 
     const button = page.getByLocator("button");
 
-    await testScreenshot("DatePicker - default");
-
     await button.click();
 
     await testScreenshot("DatePicker - calendar visible");

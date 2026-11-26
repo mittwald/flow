@@ -4,6 +4,8 @@ import {
   ClearPropsContext,
   Div,
   LightBoxGallery,
+  LightBoxGalleryItem,
+  LightBoxZoom,
   OverlayContent,
 } from "@/auto-generated";
 import Action from "@/components/Action";
@@ -38,6 +40,7 @@ const styles = {
   actions: "flow--light-box--actions",
   actionGroup: "flow--light-box--action-group",
   gallery: "flow--light-box--gallery",
+  zoom: "flow--light-box--zoom",
 };
 
 const lightStaticButton = { variant: "solid", color: "light-static" } as const;
@@ -50,19 +53,30 @@ const buttonRules: ChildRules = (child) =>
       ? { children: buttonRules }
       : undefined;
 
-const childRules: ChildRules = (child) =>
-  child.type === ActionGroup
-    ? {
-        props: {
-          class: styles.actionGroup,
-          spacing: "m",
-          preserveOrder: true,
-        },
-        children: buttonRules,
-      }
-    : child.type === LightBoxGallery
-      ? { props: { class: styles.gallery } }
-      : undefined;
+/* Flow's `LightBoxGallery: { LightBoxGalleryItem: { withZoom } }`. */
+const zoomRules: ChildRules = (child) =>
+  child.type === LightBoxGalleryItem
+    ? { props: { withZoom: true } }
+    : undefined;
+
+const childRules =
+  (withZoom: boolean): ChildRules =>
+  (child) =>
+    child.type === ActionGroup
+      ? {
+          props: {
+            class: styles.actionGroup,
+            spacing: "m",
+            preserveOrder: true,
+          },
+          children: buttonRules,
+        }
+      : child.type === LightBoxGallery
+        ? {
+            props: { class: styles.gallery },
+            children: withZoom ? zoomRules : undefined,
+          }
+        : undefined;
 
 export const LightBox = defineComponent({
   name: "LightBox",
@@ -72,6 +86,11 @@ export const LightBox = defineComponent({
   props: {
     /** Whether content may exceed the available screen space. @default true */
     fitScreen: { type: Boolean, default: true },
+    /**
+     * Whether the content, and a gallery's items, can be zoomed. The content
+     * then always fits the screen, whatever `fitScreen` says.
+     */
+    withZoom: { type: Boolean, default: false },
     /** A controller to open and close the light box from anywhere. */
     controller: {
       type: Object as PropType<OverlayController>,
@@ -115,7 +134,7 @@ export const LightBox = defineComponent({
       const className = [
         styles.overlay,
         styles.lightBox,
-        props.fitScreen ? styles.fitScreen : undefined,
+        props.fitScreen || props.withZoom ? styles.fitScreen : undefined,
         attrs.class,
       ]
         .filter(Boolean)
@@ -123,9 +142,12 @@ export const LightBox = defineComponent({
 
       /*
        * Flow tunnels the `ActionGroup` out of the content into the actions,
-       * behind the close button.
+       * in front of the close button.
        */
-      const children = applyChildRules(slots.default?.(), childRules);
+      const children = applyChildRules(
+        slots.default?.(),
+        childRules(props.withZoom),
+      );
       const isActionGroup = (child: VNode) => child.type === ActionGroup;
       const actionGroups = flattenChildren(children).filter(isActionGroup);
       const content = flattenChildren(children).filter(
@@ -155,10 +177,14 @@ export const LightBox = defineComponent({
             onOpenChange: controller.value.setOpen,
           },
           () => [
-            h(Div, { class: styles.content }, () => content),
+            h(Div, { class: styles.content }, () =>
+              props.withZoom
+                ? h(LightBoxZoom, { class: styles.zoom }, () => content)
+                : content,
+            ),
             h(Div, { class: styles.actions }, () => [
-              closeButton,
               ...actionGroups,
+              closeButton,
             ]),
           ],
         ),

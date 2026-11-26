@@ -21,8 +21,14 @@ export type VueListFilterShape<T> = ListFilterShape<
   never,
   ListRendered
 > & {
-  /** Only for `mode: "dateRange"` — handed to the calendar. */
-  dateRangeOptions?: Record<string, unknown>;
+  /**
+   * Only for `mode: "dateRange"`. Handed to the calendar, or with `granularity:
+   * "minute"` — date and time fields instead of the calendar — `minValue`,
+   * `maxValue` and `isDateUnavailable` to the date fields.
+   */
+  dateRangeOptions?: Record<string, unknown> & {
+    granularity?: "day" | "minute";
+  };
 };
 
 /**

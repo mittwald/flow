@@ -221,7 +221,7 @@ change in **any** release (see
 `https://flow.mittwald.de/raw/get-started/versioning.md`):
 
 - **CSS class names** (`.flow--button`, …) — never write selectors against them.
-- **Design-token names and values** (`--size-px--m`, `--color--gray--500`) —
+- **Design-token names and values** (`--size-px--m`, `--content--color--300`) —
   they are Flow's internal vocabulary, not a consumer API. Use the component
   props above instead.
 - **Internal DOM structure** — do not rely on the element tree a component
@@ -252,6 +252,11 @@ Also:
 - Do not hand-roll feedback for async work — `Action` wraps a button and renders
   its pending, success and failure states; `List` covers loading and empty
   states; `Skeleton` and `SkeletonText` are the placeholders.
+- Keep `List` items cheap: give `List.Item` and `List.TableRow`
+  `renderDependencies` (every value the render function reads besides the item),
+  and keep modals and data loading at list level instead of per item — every
+  item pays for what it contains (`/raw/components/list/list.md`, section
+  "Performance").
 - Write UI text in German following the Sprach-Guide; component-internal text is
   already translated (de-DE, en-US) via `TranslationProvider`.
 

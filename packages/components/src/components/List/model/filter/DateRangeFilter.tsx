@@ -1,11 +1,14 @@
 import { ListDateRangeFilter } from "@mittwald/flow-components-base";
 import type { ListModelContext } from "@mittwald/flow-components-base";
-import type { FilterShape } from "@/components/List/model/filter/types";
+import type {
+  DateRangeFilterOptions,
+  DateRangeFilterValue,
+  FilterShape,
+} from "@/components/List/model/filter/types";
 import type { PropertyName } from "@/components/List/model/types";
 import type { RangeCalendarProps } from "@/components/Calendar";
-import type { DateValue } from "@internationalized/date";
-import type { DateRange, RangeValue } from "react-aria-components";
 import type { ReactNode } from "react";
+import { omit } from "remeda";
 import type { List } from "@/components/List/model/List";
 import type { FilterValue } from "@/components/List/model/filter/FilterValue";
 
@@ -14,14 +17,15 @@ import type { FilterValue } from "@/components/List/model/filter/FilterValue";
  *
  * The column, the comparison and the stored value are `ListDateRangeFilter` in
  * `@mittwald/flow-components-base`, so the Vue binding filters the same dates
- * the same way. What is left here is the calendar's own options, which are
- * Flow's `RangeCalendar` props.
+ * the same way. What is left here are the options of the fields that pick the
+ * range: Flow's `RangeCalendar` props, or with `granularity: "minute"` those of
+ * the date and time fields.
  */
 export class DateRangeFilter<
   T = never,
   TProp extends PropertyName<T> = never,
 > extends ListDateRangeFilter<T, TProp, ReactNode> {
-  public readonly dateRangeOptions?: RangeCalendarProps;
+  public readonly dateRangeOptions?: DateRangeFilterOptions;
 
   public constructor(
     context: ListModelContext<T>,
@@ -31,18 +35,34 @@ export class DateRangeFilter<
     this.dateRangeOptions = shape.dateRangeOptions;
   }
 
-  /*
-   * Narrowed back to react-aria's own types, because that is what the calendar
-   * takes and what this filter's consumers already have. The shared class is
-   * typed on the three numbers a date is made of, which every date library
-   * agrees on and nothing else does.
-   */
-  public override getValue(): DateRange | null {
-    return super.getValue() as DateRange | null;
+  public get granularity(): "day" | "minute" {
+    return this.dateRangeOptions?.granularity ?? "day";
   }
 
-  public override setValue(range: RangeValue<DateValue> | null): void {
-    super.setValue(range as never);
+  public get rangeCalendarProps(): RangeCalendarProps {
+    const options = this.dateRangeOptions ?? {};
+    return options.granularity === "minute"
+      ? {}
+      : omit(options, ["granularity"]);
+  }
+
+  public get dateTimeRangeOptions() {
+    const options = this.dateRangeOptions;
+    return options?.granularity === "minute" ? options : undefined;
+  }
+
+  /*
+   * Narrowed back to `@internationalized/date`'s types, because that is what
+   * the calendar and the date fields take. The shared class is typed on the
+   * numbers a date is made of, which every date library agrees on and nothing
+   * else does.
+   */
+  public override getValue(): DateRangeFilterValue | null {
+    return super.getValue() as DateRangeFilterValue | null;
+  }
+
+  public override setValue(range: DateRangeFilterValue | null): void {
+    super.setValue(range);
   }
 
   /** The list this filter belongs to — `context`, typed as React's `List`. */

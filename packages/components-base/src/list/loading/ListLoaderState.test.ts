@@ -110,6 +110,29 @@ describe("ListLoaderState", () => {
       stop();
     });
 
+    /*
+     * A refetch hands the loader a new array, but a data layer that reuses
+     * unchanged items puts the same instances in it.
+     */
+    test("does not report a batch with the same items again", () => {
+      const state = new ListLoaderState<Pilot>();
+      const a = pilot("a");
+      const b = pilot("b");
+      state.setDataBatch(0, [a, b]);
+      const seen = vi.fn();
+
+      const stop = autorun(() => seen(state.mergedData));
+      state.setDataBatch(0, [a, b]);
+
+      expect(seen).toHaveBeenCalledTimes(1);
+
+      state.setDataBatch(0, [a, pilot("b")]);
+
+      expect(seen).toHaveBeenCalledTimes(2);
+
+      stop();
+    });
+
     test("reports the loading state to an observer", () => {
       const state = new ListLoaderState<Pilot>();
       const seen = vi.fn();

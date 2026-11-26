@@ -21,12 +21,21 @@ export interface FieldErrorProps
     PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
     FlowComponentProps {
   /** @internal */
+  isFallback?: boolean;
+  /** @internal */
   renderAlert?: boolean;
 }
 
 /** @flr-generate all */
 export const FieldError = flowComponent("FieldError", (props) => {
-  const { children, className, ref, renderAlert, ...rest } = props;
+  const {
+    children,
+    className,
+    ref,
+    isFallback: ignoredIsFallback,
+    renderAlert,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
   const isSkeleton = useSkeletonMode();

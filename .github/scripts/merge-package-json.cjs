@@ -50,7 +50,7 @@
 // The driver must exit 0 on a clean merge and non-zero to signal an unresolved
 // conflict (which escalates to the sync issue — ADR 0004 §4).
 //
-// This is a `.cjs` on purpose: the repo's eslint config treats `**/*.cjs` as
+// This is a `.cjs` on purpose: the repo's oxlint config treats `**/*.cjs` as
 // out-of-scope Node tooling, so no lint config is needed for it to pass the
 // gate; `prettier` still formats it. The pure helpers are exported so
 // `merge-package-json.test.mjs` can cover them.

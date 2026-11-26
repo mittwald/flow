@@ -109,15 +109,15 @@ test.each(testEnvironments)(
     await expect.element(inputLocator).toHaveDisplayValue(typedText);
 
     /*
-     * Every reported change carries the whole text, so an echo the host applied
-     * would show up as a value that is not a prefix of what was typed. The
-     * remote side does not necessarily see every keystroke — a host event that
-     * fires while a remote render is in flight is dropped, which is
-     * load-dependent and has nothing to do with the echo.
+     * Every reported change carries the whole text. An echo the host applied
+     * would show up as a value that is not a prefix of what was typed. A missing
+     * prefix is a keystroke the remote side never saw: the inline `onChange`
+     * is new on every render, and it was lost while remote-dom swapped the
+     * listener (#3088).
      */
-    for (const [reportedValue] of onChange.mock.calls) {
-      expect(typedText.startsWith(reportedValue)).toBe(true);
-    }
+    await expect
+      .poll(() => onChange.mock.calls.map(([value]) => value))
+      .toEqual(typedText.split("").map((_, i) => typedText.slice(0, i + 1)));
   },
 );
 

@@ -12,5 +12,6 @@ declare const classNames: {
   readonly alertText: "alertText";
   readonly accentBox: "accentBox";
   readonly layoutCard: "layoutCard";
+  readonly "flow--accent-box": "flow--accent-box";
 };
 export default classNames;

@@ -8,10 +8,14 @@ import {
 } from "@/auto-generated";
 import { IconClose, IconSave, IconUndo } from "@/icons";
 import { watchMobxValue } from "@/lib/mobxSelector";
-import { ListFilter } from "@mittwald/flow-components-base";
+import { useLanguage } from "@/composables/remoteContext";
+import {
+  formatListDateRange,
+  ListFilter,
+} from "@mittwald/flow-components-base";
 import type { ListDateRange } from "@mittwald/flow-components-base";
 import { defineComponent, h, type VNodeChild } from "vue";
-import { formatDateRange, isDateRangeFilter } from "./dateRangeFilter";
+import { isDateRangeFilter } from "./dateRangeFilter";
 import { injectListModel } from "./listContext";
 import { useListTexts, type ListTextKey } from "./locales";
 import { listStyles } from "./styles";
@@ -56,6 +60,8 @@ export const ActiveFilters = defineComponent({
   setup(props) {
     const list = injectListModel();
     const texts = useListTexts();
+    /* As in React's remote root: the host's language, else the browser's. */
+    const language = useLanguage();
 
     /* Every read here is of the table's filter state. */
     const tableRevision = watchMobxValue(() => list.listTable.revision);
@@ -100,7 +106,14 @@ export const ActiveFilters = defineComponent({
                     onClose: () =>
                       (filter as unknown as ChipDateRangeFilter).clear(),
                   },
-                  () => h(Text, null, () => formatDateRange(range)),
+                  () =>
+                    h(Text, null, () =>
+                      formatListDateRange(
+                        range,
+                        language.value ?? navigator.language,
+                        texts.value,
+                      ),
+                    ),
                 ),
               ]
             : [];

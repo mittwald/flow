@@ -180,13 +180,12 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
-- `@flr-provider` carries a `flowComponent`'s `type: "provider"` over to the
-  generated remote component. Without it the remote element is created as a
-  `"ui"` component and wrapped in a `ClearPropsContext` — which drops every
-  props context a provider around it just set. It only matters where the
-  provider actually runs inside the remote tree, i.e. where the component that
-  renders it is not itself `@flr-generate` (`ModalTrigger` → `OverlayTrigger` →
-  `DialogTriggerView`).
+- The generated remote component takes the `type` of the local
+  `flowComponent(…, { type })` call (`provisionTypeOf`), so write it as a string
+  literal — the generator fails otherwise. Created as `"ui"`, a remote
+  `"layout"` or `"provider"` component would wrap itself in a
+  `ClearPropsContext` and cut every props context a remote composition (`Modal`,
+  `List`, …) or a provider around it set.
 - **A prop that carries rendered output has to be a slot, not a property.** A
   remote property is transported as data, and a React element carries
   `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
@@ -282,13 +281,13 @@ if ("action" in props) {
   the committed `*.module.d.scss.ts` stubs declare, run through the build's own
   `cssModuleClassNameGenerator`. The reference has to name a class some
   component actually generates — otherwise the selector matches nothing, which
-  used to fail without a single signal anywhere. Its ESLint twin
-  `flow/no-unknown-flow-class` (`dev/eslint/`) checks hardcoded `flow--…` names
-  in `src/**` TS/TSX strings — `className`s, `querySelector`s, test assertions —
-  against the same set (`dev/flowClassNames/`). A runtime-built prefix
-  (`` `flow--button--${color}` ``) passes if a known class starts with it; a
-  test asserting a removed class stays absent needs an
-  `eslint-disable-next-line` with the reason.
+  used to fail without a single signal anywhere. Its oxlint twin
+  `flow/no-unknown-flow-class` (`dev/oxlint/`, a JS plugin) checks hardcoded
+  `flow--…` names in `src/**` TS/TSX strings — `className`s, `querySelector`s,
+  test assertions — against the same set (`dev/flowClassNames/`). A
+  runtime-built prefix (`` `flow--button--${color}` ``) passes if a known class
+  starts with it; a test asserting a removed class stays absent needs an
+  `oxlint-disable-next-line` with the reason.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
   [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
@@ -302,6 +301,17 @@ if ("action" in props) {
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
+- **Colors come from Semantic or Variant, never Brand**
+  ([ADR 0008](https://github.com/mittwald/flow/blob/main/docs/adr/0008-color-token-tiers.md)).
+  Brand variables (`--color--mittwald-blue--1000`) are theme-neutral, so they
+  stay light in dark. `flow/no-brand-color-variable` rejects them — stylelint in
+  stylesheets, oxlint in TS/TSX strings, both in `packages/components` and
+  `apps/docs`. The groups come from `design-tokens/src/color-brand.yml`
+  (`dev/brandColors/`), so a new group is covered without touching the rules. A
+  name completed at runtime (`--color--#{$hue}`, `` `--color--${hue}` ``) is
+  rejected too: only Brand defines tokens under `color`. Exempt: the docs pages
+  that display the palette itself (`foundations/design/colors`,
+  `design-tokens`).
 - Shared mixins via `@use "@/styles/mixins/…"`: `focus` (focus ring),
   `formControl` (border/color/interaction states of form fields), `ellipsis`.
   Group repeated variants in local mixins.
@@ -685,7 +695,7 @@ Symptom → cause → fix for authoring components. Repo-wide ones are in the
   **Fix:** Copy the name from the component's committed `*.module.d.scss.ts` —
   that is what the rule checks against — or take the rule's "Did you mean"
   suggestion. Just added the class? Regenerate the stubs first:
-  `pnpm nx build:scss-types components`. The same applies to ESLint's
+  `pnpm nx build:scss-types components`. The same applies to oxlint's
   `flow/no-unknown-flow-class`, which checks hardcoded `flow--…` strings in
   TS/TSX (#3095). Before the rule (#3091) this class of bug failed completely
   silently: no build error, no console warning, and the docs site and Storybook

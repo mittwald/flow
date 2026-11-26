@@ -28,6 +28,8 @@
   "validation.charPool.special.min": "{min, plural, one {Bitte verwende mindestens ein Sonderzeichen.} other {Bitte verwende mindestens {min} Sonderzeichen.}}",
   "validation.charPool.special.min.short": "{min, plural, one {Mindestens ein Sonderzeichen} other {Mindestens {min} Sonderzeichen}}",
   "validation.general.failingComplexity": "Bitte erhöhe die Komplexität deines Passwortes.",
+  "validation.general.fallback": "{isValid, select, true {Das Passwort erfüllt die Anforderungen.} other {Das Passwort erfüllt die Anforderungen nicht.}}",
+  "validation.general.fallback.short": "Weitere Anforderung",
   "validation.general.optimizeComplexity": "Dein Passwort erfüllt die Minimalanforderungen.",
   "validation.general.securePassword": "Sehr gut! Dein Passwort ist sicher.",
   "validation.general.short.unspecified": "Keine spezifischen Anforderungen",

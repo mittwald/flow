@@ -62,7 +62,7 @@ export const WithSegments: Story = {
       { title: "Star charts", value: 24 },
       { title: "Holograms", value: 8 },
       { title: "Comm logs", value: 10 },
-      { title: "Droid backups", value: 12, color: "yellow" },
+      { title: "Droid backups", value: 12, color: "cyan" },
       { title: "Archives", value: 6, color: "#555" },
     ],
     legendPosition: "right",

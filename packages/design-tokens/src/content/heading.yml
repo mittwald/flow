@@ -5,7 +5,7 @@ heading:
     value: "{font-weight.bold}"
 
   color:
-    value: "{neutral.color.1100}"
+    value: "{content.color.300}"
   color-dark:
     value: "{dark-plain-content-color}"
   color-light:
@@ -15,6 +15,6 @@ heading:
   color-light-static:
     value: "{light-static-plain-content-color}"
   color-danger:
-    value: "{danger.color.900}"
+    value: "{danger.color.strong.200}"
   color-unavailable:
-    value: "{unavailable.color.800}"
+    value: "{unavailable.color.strong.100}"

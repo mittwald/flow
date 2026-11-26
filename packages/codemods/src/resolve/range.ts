@@ -171,7 +171,7 @@ export const resolveRange = async (
   // Destructuring the emptiness check (rather than `dependencies.length ===
   // 0`) sidesteps a `no-non-null-assertion` lint error at every later read of
   // `dependencies[0]` — `no-non-null-assertion` is an error in this repo's
-  // eslint config.
+  // oxlint config.
   const [firstDependency] = dependencies;
   if (firstDependency === undefined) {
     return {

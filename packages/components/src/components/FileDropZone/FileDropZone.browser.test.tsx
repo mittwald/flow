@@ -38,21 +38,24 @@ const dropFiles = (files: File[]) => {
   }
 };
 
-const renderZone = (props?: {
+interface ZoneProps {
   accept?: string;
   multiple?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
   onChange?: (files: FileList | null) => void;
-}) =>
-  render(
-    <FileDropZone {...props}>
-      <Heading>Drop a file</Heading>
-      <FileField>
-        <Button>Select file</Button>
-      </FileField>
-    </FileDropZone>,
-  );
+}
+
+const zone = (props?: ZoneProps) => (
+  <FileDropZone {...props}>
+    <Heading>Drop a file</Heading>
+    <FileField>
+      <Button>Select file</Button>
+    </FileField>
+  </FileDropZone>
+);
+
+const renderZone = (props?: ZoneProps) => render(zone(props));
 
 test("picking a file through the inner field reports it", async () => {
   const onChange = vi.fn();
@@ -180,6 +183,15 @@ test("a read-only zone ignores a drop", async () => {
 
 test("a disabled zone disables its file field", async () => {
   await renderZone({ isDisabled: true });
+
+  await expect
+    .element(page.getByRole("button", { name: "Select file" }))
+    .toBeDisabled();
+});
+
+test("disabling a rendered zone disables its file field", async () => {
+  const { rerender } = await renderZone();
+  await rerender(zone({ isDisabled: true }));
 
   await expect
     .element(page.getByRole("button", { name: "Select file" }))

@@ -1,7 +1,9 @@
 import type { FC } from "react";
 import * as Aria from "react-aria-components";
 import { Text } from "@/components/Text";
-import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
+import generateValidationTranslation, {
+  formatValidationResult,
+} from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import locales from "./../../locales/*.locale.json";
 import styles from "./ValidationResultEntry.module.scss";
 import type { RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
@@ -37,15 +39,12 @@ export const ValidationResultEntry: FC<Props> = (props) => {
       : "password.requirements.rule.unfulfilled",
   );
 
-  let [translationKey, translationValues] = generateValidationTranslation(
-    result,
-    true,
-  );
-
-  if (unspecifiedRules) {
-    translationKey = `${translationKey}.unspecified`;
-    translationValues = {};
-  }
+  const text = unspecifiedRules
+    ? translate.format(
+        `${generateValidationTranslation(result, true)[0]}.unspecified`,
+        {},
+      )
+    : formatValidationResult(translate, result, true);
 
   return (
     <li
@@ -56,7 +55,7 @@ export const ValidationResultEntry: FC<Props> = (props) => {
       {icon}
       <Text>
         <Aria.VisuallyHidden elementType="span">{`${status}: `}</Aria.VisuallyHidden>
-        {translate.format(translationKey, translationValues)}
+        {text}
       </Text>
     </li>
   );

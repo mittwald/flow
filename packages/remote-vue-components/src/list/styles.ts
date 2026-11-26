@@ -30,6 +30,17 @@ export const listStyles = {
     "flow--list--header--all-filters-modal--select-all-checkbox",
 } as const;
 
+/*
+ * The date-range filter's classes, from `FilterContextMenus.module.scss` and
+ * `DateTimeRangeFields.module.scss`.
+ */
+export const dateTimeRangeStyles = {
+  calendar: "flow--list--header--filter-context-menu--calendar",
+  popover: "flow--list--header--filter-context-menu--date-time-range",
+  fields: "flow--list--header--date-time-range-fields",
+  rangeError: "flow--list--header--date-time-range-fields--range-error",
+} as const;
+
 /** The list item view's own classes, from `ListItemView.module.scss`. */
 export const itemViewStyles = {
   action: "flow--list--list-item-view--action",

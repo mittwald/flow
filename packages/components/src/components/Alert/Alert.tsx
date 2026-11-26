@@ -3,6 +3,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { contentColored } from "@/lib/propsContext/contentColor";
 import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
@@ -29,8 +30,34 @@ export const Alert = flowComponent("Alert", (props) => {
     className,
   );
 
+  const contentColorProps = contentColored("dark");
+
+  const linkProps = { color: "dark" } as const;
+
+  const contentLinkProps: PropsContext = {
+    Link: linkProps,
+    Text: {
+      ...contentColorProps.Text,
+      Link: linkProps,
+    },
+  };
+
+  const actionsPropsContext = {
+    Button: {
+      ...contentColorProps.Button,
+      size: "s",
+    },
+    ActionGroup: {
+      preserveOrder: true,
+      size: "s",
+    },
+  } satisfies PropsContext;
+
   const propsContext: PropsContext = {
+    ...contentColorProps,
+    ...contentLinkProps,
     Heading: {
+      ...contentColorProps,
       className: styles.heading,
       level: 3,
       size: "s",
@@ -42,15 +69,12 @@ export const Alert = flowComponent("Alert", (props) => {
       )),
     },
     Content: {
+      ...contentColorProps,
+      ...contentLinkProps,
       className: styles.content,
-      Button: {
-        size: "s",
-      },
-      ActionGroup: {
-        preserveOrder: true,
-        size: "s",
-      },
+      ...actionsPropsContext,
     },
+    ...actionsPropsContext,
   };
 
   return (

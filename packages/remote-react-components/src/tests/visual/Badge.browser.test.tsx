@@ -3,20 +3,17 @@ import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBa
 import { test } from "vitest";
 import {
   alphaColors,
+  decorativeColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 export const colors = [
   "neutral",
-  "blue",
-  "navy",
-  "violet",
-  "teal",
-  "lilac",
-  "green",
-  "orange",
-  "red",
+  ...decorativeColors,
+  "success",
+  "warning",
+  "danger",
   ...alphaColors,
 ] as const;
 
@@ -62,6 +59,17 @@ test.each(testEnvironments)(
                 </Badge>
                 <Badge color={color} isDisabled>
                   Value
+                </Badge>
+                <Badge color={color} onPress={() => console.log("onPress")}>
+                  Value
+                </Badge>
+                <Badge
+                  color={color}
+                  onPress={() => console.log("onPress")}
+                  onClose={() => console.log("onClose")}
+                >
+                  <Label>Scope</Label>
+                  <Text>Value</Text>
                 </Badge>
                 <Badge color={color}>
                   <Label>Scope</Label>

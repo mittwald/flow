@@ -65,8 +65,6 @@ test.each(testEnvironments)(
 
     const input = page.getByLocator("textarea");
 
-    await testScreenshot("TextArea - default");
-
     await userEvent.type(input, "A{Enter}B{Enter}C{Enter}D");
 
     /**

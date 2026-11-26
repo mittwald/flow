@@ -5,6 +5,8 @@ import styles from "../../Table.module.scss";
 
 export type TableBodyProps = Aria.TableBodyProps<never>;
 
+/* Plain FC: technical constraint — react-aria allows render-function children,
+ * which the props types of registered components cannot express. */
 /** @flr-generate all */
 export const TableBody: FC<TableBodyProps> = (props) => {
   const { children, className, ...rest } = props;

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-design-tokens",
-  "version": "1.5.67",
+  "version": "1.7.3",
   "type": "module",
   "description": "The design tokens used in Flow, mittwald’s design system",
   "homepage": "https://github.com/mittwald/flow/tree/main/packages/design-tokens",
@@ -19,8 +19,11 @@
     "node": ">=24.0.0"
   },
   "scripts": {
+    "audit:contrast": "node dev/contrast-audit.js",
     "build": "node build-tokens.js",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test:contrast": "node dev/contrast-audit.js --strict",
+    "test:unit": "node --test dev/*.test.js"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
