@@ -14,5 +14,6 @@ export const CartesianGrid = createFlowRemoteComponent(
       wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
+    type: "layout",
   },
 );

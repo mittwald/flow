@@ -28,6 +28,17 @@ import type { AvatarStackProps } from "@/components/AvatarStack";
 import type { InlineCodeProps } from "@/components/InlineCode";
 import type { BreadcrumbProps } from "@/components/Breadcrumb";
 import type { BigNumberProps } from "@/components/BigNumber";
+import type {
+  AreaProps,
+  BarProps,
+  CartesianGridProps,
+  ChartGridProps,
+  ChartLegendProps,
+  ChartTooltipProps,
+  LineProps,
+  XAxisProps,
+  YAxisProps,
+} from "@/components/CartesianChart";
 import type { DonutChartProps } from "@/components/DonutChart";
 import type { ActionProps } from "@/components/Action";
 import type {
@@ -137,6 +148,15 @@ export interface FlowComponentPropsTypes {
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   BigNumber: BigNumberProps;
+  Area: AreaProps;
+  Bar: BarProps;
+  CartesianGrid: CartesianGridProps;
+  ChartGrid: ChartGridProps;
+  ChartLegend: ChartLegendProps;
+  ChartTooltip: ChartTooltipProps;
+  Line: LineProps;
+  XAxis: XAxisProps;
+  YAxis: YAxisProps;
   Breadcrumb: BreadcrumbProps;
   Button: ButtonProps;
   CodeBlock: CodeBlockProps;
@@ -252,6 +272,15 @@ const propsContextSupportingComponentsMap: Record<
   Combine: true,
   Badge: true,
   BigNumber: true,
+  Area: true,
+  Bar: true,
+  CartesianGrid: true,
+  ChartGrid: true,
+  ChartLegend: true,
+  ChartTooltip: true,
+  Line: true,
+  XAxis: true,
+  YAxis: true,
   Breadcrumb: true,
   Button: true,
   CodeBlock: true,

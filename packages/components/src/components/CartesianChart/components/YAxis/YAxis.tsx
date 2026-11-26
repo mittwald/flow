@@ -1,4 +1,7 @@
-import type { FC } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import * as Recharts from "recharts";
 import type {
   ChartDataValue,
@@ -13,29 +16,31 @@ export type YAxisProps<
   TData extends ChartDataValue = ChartDataValue,
   TDataKey extends DataKey<TData> = DataKey<TData>,
   TDataMatch = DataKeyValue<TData, TDataKey>,
-> = Pick<
-  Recharts.YAxisProps,
-  | "className"
-  | "orientation"
-  | "allowDecimals"
-  | "interval"
-  | "minTickGap"
-  | "scale"
-  | "type"
-  | "domain"
-  | "hide"
-  | "unit"
-> & {
-  dataKey?: TDataKey;
-  tickFormatter?: (value: TDataMatch, index: number) => string;
-  /**
-   * The width of the axis in pixels. `"auto"` sizes the axis to its widest tick
-   * label. Defaults to `"auto"` for a category axis (e.g. with `layout` set to
-   * `"vertical"`) and to `60` otherwise. Pin a number to align the plot areas
-   * of synchronized charts.
-   */
-  width?: number | "auto";
-};
+> = Omit<FlowComponentProps, "ref"> &
+  Pick<
+    Recharts.YAxisProps,
+    | "className"
+    | "orientation"
+    | "allowDecimals"
+    | "interval"
+    | "minTickGap"
+    | "scale"
+    | "type"
+    | "domain"
+    | "hide"
+    | "unit"
+  > & {
+    children?: never;
+    dataKey?: TDataKey;
+    tickFormatter?: (value: TDataMatch, index: number) => string;
+    /**
+     * The width of the axis in pixels. `"auto"` sizes the axis to its widest
+     * tick label. Defaults to `"auto"` for a category axis (e.g. with `layout`
+     * set to `"vertical"`) and to `60` otherwise. Pin a number to align the
+     * plot areas of synchronized charts.
+     */
+    width?: number | "auto";
+  };
 
 /**
  * `tickFormatter` is deliberately not part of the remote surface. A function
@@ -47,7 +52,7 @@ export type YAxisProps<
  * @flr-generate all
  * @flr-ignore-props tickFormatter
  */
-export const YAxis: FC<YAxisProps> = (props) => {
+export const YAxis = flowComponent("YAxis", (props) => {
   const { domain, type = "auto", width, ...rest } = props;
 
   const tokens = useDesignTokens();
@@ -106,7 +111,7 @@ export const YAxis: FC<YAxisProps> = (props) => {
       tickSize={tickSize}
     />
   );
-};
+});
 
 export { TypedYAxis } from "./types";
 
