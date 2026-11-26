@@ -19,24 +19,37 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="s">
-        {colors.map((color) => (
-          <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
-              <Flex gap="s" key={color}>
-                <Text>
-                  <Color color={color}>Text</Color>
-                </Text>
-                <Heading>
-                  <Color color={color}>Heading</Color>
-                </Heading>
+        {colors.map((color) => {
+          const alphaColor = isAlphaColor(color) ? color : undefined;
+          return (
+            <Wrap if={alphaColor} key={color}>
+              <AccentBox
+                backgroundColor={alphaColorAccentBoxBackground(color)}
+                color={alphaColor}
+              >
+                <Flex gap="s" key={color}>
+                  <Text>
+                    <Color color={color}>Text</Color>
+                  </Text>
+                  <Heading>
+                    <Color color={color}>Heading</Color>
+                  </Heading>
 
-                <Color color={color}>
-                  <IconStar />
-                </Color>
-              </Flex>
-            </AccentBox>
-          </Wrap>
-        ))}
+                  <Color color={color}>
+                    <IconStar />
+                  </Color>
+
+                  {/* The content color of the AccentBox does not override the color. */}
+                  {alphaColor && (
+                    <Color color="lilac">
+                      <Text>Text</Text>
+                    </Color>
+                  )}
+                </Flex>
+              </AccentBox>
+            </Wrap>
+          );
+        })}
       </Flex>,
     );
 
