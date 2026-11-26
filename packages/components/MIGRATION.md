@@ -209,7 +209,7 @@ per token, the light one.
 
 Brand now holds the new mittwald brand palette (`mittwald-blue`, `-navy`,
 `-green`, `-lilac`, `-orange`, `-neutral`, `system-danger`, `-warning`,
-`-success`; hue ramps with 19 steps, alpha ramps with 10). Flow's own components
+`-success`; hue ramps with 19 steps, alpha ramps with 14). Flow's own components
 pick it up through Semantic. What breaks is code outside Flow that reads Brand
 variables (`--color--…`) directly:
 
