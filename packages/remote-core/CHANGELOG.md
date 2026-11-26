@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0-next.3](https://github.com/mittwald/flow/compare/1.7.3...1.8.0-next.3) (2026-11-26)
+
+## [1.8.0-next.2](https://github.com/mittwald/flow/compare/1.7.2...1.8.0-next.2) (2026-11-25)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.8.0-next.2 ([412672a](https://github.com/mittwald/flow/commit/412672a7061ce18f4941ea638eb6a40974066f27))
+
+## [1.8.0-next.1](https://github.com/mittwald/flow/compare/1.7.1...1.8.0-next.1) (2026-11-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.8.0-next.1 ([97c3f05](https://github.com/mittwald/flow/commit/97c3f05c3ca66db9e6bd903d69330da97c96d33b))
+
+## [1.8.0-next.0](https://github.com/mittwald/flow/compare/1.7.0...1.8.0-next.0) (2026-11-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.8.0-next.0 ([f40d784](https://github.com/mittwald/flow/commit/f40d784344aa2327360cefc0129e8131c24b0a48))
+
 ## [1.8.0-next.2](https://github.com/mittwald/flow/compare/1.8.0-next.1...1.8.0-next.2) (2026-11-25)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0-next.3](https://github.com/mittwald/flow/compare/1.7.3...1.8.0-next.3) (2026-11-26)
+
+### Features
+
+* **design-tokens:** take the brand team&#x27;s 14-step alpha ramps ([685b1c9](https://github.com/mittwald/flow/commit/685b1c93bb7ce3ec5502bcc70076e5e228a1a1d8)), closes [#3738](https://github.com/mittwald/flow/issues/3738)
+
+### Miscellaneous Chores
+
+* **design-tokens:** follow up on the 14-step alpha ramps ([1b58424](https://github.com/mittwald/flow/commit/1b58424bc6dafe83ab00223a1493c494bff358bd))
+
+### Tests
+
+* **Image:** update the darwin baselines of &quot;Image in a column&quot; ([#3737](https://github.com/mittwald/flow/issues/3737)) ([83cf2c6](https://github.com/mittwald/flow/commit/83cf2c604bc7a91fc64fe8b9458d3b00caa2f237))
+* update visual regression screenshots ([d7fdcae](https://github.com/mittwald/flow/commit/d7fdcae32a0054063d36f5b08109b21049cc1512))
+
+## [1.8.0-next.2](https://github.com/mittwald/flow/compare/1.7.2...1.8.0-next.2) (2026-11-25)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.8.0-next.2 ([412672a](https://github.com/mittwald/flow/commit/412672a7061ce18f4941ea638eb6a40974066f27))
+
+## [1.8.0-next.1](https://github.com/mittwald/flow/compare/1.7.1...1.8.0-next.1) (2026-11-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.8.0-next.1 ([97c3f05](https://github.com/mittwald/flow/commit/97c3f05c3ca66db9e6bd903d69330da97c96d33b))
+
+## [1.8.0-next.0](https://github.com/mittwald/flow/compare/1.7.0...1.8.0-next.0) (2026-11-24)
+
+### Miscellaneous Chores
+
+* **release:** bump version to 1.8.0-next.0 ([f40d784](https://github.com/mittwald/flow/commit/f40d784344aa2327360cefc0129e8131c24b0a48))
+
 ## [1.8.0-next.2](https://github.com/mittwald/flow/compare/1.8.0-next.1...1.8.0-next.2) (2026-11-25)
 
 ### Bug Fixes
