@@ -42,8 +42,14 @@ import { expect } from "vitest";
  * Popovers render in a portal outside the container, so an open one holding the
  * focus reads as `false`.
  */
-export const focusIsInTheScenario = (): boolean =>
-  rootContainerLocator.element().contains(document.activeElement);
+export const focusIsInTheScenario = (): boolean => {
+  const container = rootContainerLocator.element();
+  // The container itself takes the focus when a scenario starts.
+  return (
+    document.activeElement !== container &&
+    container.contains(document.activeElement)
+  );
+};
 
 /*
  * The move being waited for is a single tick in `Local`; `Remote` adds a

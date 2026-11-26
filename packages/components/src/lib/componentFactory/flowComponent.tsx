@@ -27,6 +27,11 @@ import {
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
+/* Props without `ref` (e.g. `Omit<FlowComponentProps, "ref">`) get none added. */
+type RefAttributesOf<P> = "ref" extends keyof P
+  ? RefAttributes<RefType<P>>
+  : unknown;
+
 export interface FlowComponentProps<R = HTMLDivElement>
   extends PropsWithTunnel, RefAttributes<R> {
   /**
@@ -41,14 +46,13 @@ export interface FlowComponentProps<R = HTMLDivElement>
 
 export type FlowComponentImplementationProps<C extends FlowComponentName> =
   Omit<FlowComponentPropsOfName<C>, keyof FlowComponentProps> &
-    RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
+    RefAttributesOf<FlowComponentPropsOfName<C>>;
 
 type FlowComponentImplementationType<C extends FlowComponentName> =
   ComponentType<FlowComponentImplementationProps<C>>;
 
 type FlowComponentType<C extends FlowComponentName> = FunctionComponent<
-  FlowComponentPropsOfName<C> &
-    RefAttributes<RefType<FlowComponentPropsOfName<C>>>
+  FlowComponentPropsOfName<C> & RefAttributesOf<FlowComponentPropsOfName<C>>
 >;
 
 export type FlowComponentProvisionType = "provider" | "ui" | "layout";
@@ -64,7 +68,7 @@ export function flowComponent<C extends FlowComponentName>(
   options: Options = {},
 ): FlowComponentType<C> {
   type Props = FlowComponentPropsOfName<C> &
-    RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
+    RefAttributesOf<FlowComponentPropsOfName<C>>;
 
   const { type = "ui", isRemoteComponent = false } = options;
 

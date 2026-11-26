@@ -34,7 +34,7 @@ const RemoteTestUi: FC<PropsWithChildren> = ({ children }) => {
   );
 
   return (
-    <RootContainer>
+    <RootContainer isFocusable>
       <RemoteRenderer __remoteReceiver={receiver} />
       <RemoteRoot __remoteReceiver={remoteReceiver}>
         <NotificationProvider>{children}</NotificationProvider>
@@ -47,13 +47,18 @@ export const renderRemote: typeof render = async (ui, options) => {
   await cleanup();
   const result = await render(<RemoteTestUi>{ui}</RemoteTestUi>, options);
   await setNeutralPointerPosition();
+  resetFocus();
   return result;
 };
 
 export const renderLocal: typeof render = async (ui, options) => {
   await cleanup();
-  const result = await render(<RootContainer>{ui}</RootContainer>, options);
+  const result = await render(
+    <RootContainer isFocusable>{ui}</RootContainer>,
+    options,
+  );
   await setNeutralPointerPosition();
+  resetFocus();
   return result;
 };
 
@@ -75,6 +80,18 @@ const setNeutralPointerPosition = async () => {
     position: { x: 4, y: 4 },
     force: true,
   });
+};
+
+/*
+ * Starts every scenario with the focus on the root container of a focused
+ * frame. Without the frame focus a key press goes to the parent page:
+ * `userEvent.tab()` then moves the focus into the frame without a `keydown`,
+ * react-aria keeps the pointer modality from the parked pointer, and a tooltip
+ * does not open on that focus. Without the container focus `Tab` starts where
+ * the previous scenario's focused element was removed and can leave the frame.
+ */
+const resetFocus = () => {
+  window.focus();
   rootContainerLocator.element().focus();
 };
 
