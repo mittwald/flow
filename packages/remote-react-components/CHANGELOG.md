@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0-next.4](https://github.com/mittwald/flow/compare/1.8.0-next.3...1.8.0-next.4) (2026-11-26)
+
+### Bug Fixes
+
+* **Badge:** reduce the height to 22px ([#3736](https://github.com/mittwald/flow/issues/3736)) ([8d02056](https://github.com/mittwald/flow/commit/8d02056fa6adcdf3afd8acbad0e067a542d33413))
+
 ## [1.8.0-next.3](https://github.com/mittwald/flow/compare/1.7.3...1.8.0-next.3) (2026-11-26)
 
 ### Tests
