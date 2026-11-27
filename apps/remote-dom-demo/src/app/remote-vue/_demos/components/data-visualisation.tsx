@@ -8,6 +8,7 @@ import {
   ChartTooltip,
   DonutChart,
   Heading,
+  IconPlus,
   Section,
   Text,
   XAxis,
@@ -34,6 +35,11 @@ export const DataVisualisationDemo = defineComponent({
         <BigNumber>
           <Text>98%</Text>
           <Text>Shield strength</Text>
+        </BigNumber>
+        <BigNumber>
+          <IconPlus />
+          <Text>12</Text>
+          <Text>Starships</Text>
         </BigNumber>
       </Section>
 
