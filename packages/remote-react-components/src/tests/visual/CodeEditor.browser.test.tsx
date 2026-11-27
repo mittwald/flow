@@ -1,6 +1,24 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { waitForHighlightedCode } from "@/tests/lib/codeHighlighting";
-import { test } from "vitest";
+import { rootContainerLocator } from "@/tests/lib/RootContainer";
+import { expect, test } from "vitest";
+
+/*
+ * The linter runs debounced after the editor is created, so its markers appear
+ * well after the code is highlighted.
+ */
+const waitForLintMarkers = async (markers: number) => {
+  await expect
+    .poll(
+      () =>
+        rootContainerLocator.element().querySelectorAll(".cm-lint-marker")
+          .length,
+      {
+        timeout: 20_000,
+      },
+    )
+    .toBe(markers);
+};
 
 // CodeEditor is available from alpha.791.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
@@ -20,10 +38,10 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
 }`}
         />
         <CodeEditor
-          minHeight="200px"
+          minHeight="100px"
           language="json"
           value={`{
-    "minHeight": "200px"
+    "minHeight": "100px"
 }`}
         />
         <CodeEditor
@@ -45,10 +63,20 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
           <Label>Invalid</Label>
           <FieldError>FieldError</FieldError>
         </CodeEditor>
+        <CodeEditor
+          language="dotEnv"
+          value={`DATABASE_URL=postgres://localhost:5432/app
+api_key=secret
+DATABASE_URL=postgres://localhost:5432/other`}
+        >
+          <Label>Linter</Label>
+        </CodeEditor>
       </Flex>,
     );
 
     await waitForHighlightedCode(4);
+    // dotEnv sets no `data-language`, so its editor waits for the markers.
+    await waitForLintMarkers(2);
 
     await testScreenshot("CodeEditor");
   },

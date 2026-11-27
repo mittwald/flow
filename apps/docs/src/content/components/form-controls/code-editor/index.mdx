@@ -10,8 +10,8 @@ description:
 
 # Best Practices
 
-- Setze im `language` Property die Sprache passend zum Code-Inhalt. So wird das
-  Syntax-Highlighting korrekt dargestellt.
+Setze im `language` Property die Sprache passend zum Code-Inhalt. So wird das
+Syntax-Highlighting korrekt dargestellt.
 
 ---
 
@@ -23,6 +23,19 @@ User den Code weiterhin lesen und per Tastatur scrollen können, nutze
 stattdessen `isReadOnly`.
 
 <LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Linter
+
+Einen Linter gibst du über `extensions` mit, z. B. mit `linter` aus
+`@codemirror/lint`. Der CodeEditor markiert Fehler und Warnungen direkt im Code.
+Ein Icon neben der Zeilennummer zeigt den Schweregrad, beim Hover erscheinen die
+Meldungen der Zeile, mit Quelle und Aktionen zum Beheben. Manche Sprachen wie
+`dotEnv` bringen ihren Linter selbst mit. Mit `showLinterMarkers={false}`
+blendest du die Icons aus.
+
+<LiveCodeEditor example="linter" editorCollapsed />
 
 ---
 

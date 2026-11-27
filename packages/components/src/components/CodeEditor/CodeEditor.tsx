@@ -29,6 +29,7 @@ import { CopyButton } from "@/components/CopyButton";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useSkeletonMode } from "@/components/SkeletonMode/skeletonModeContext";
 import { getCspNonce } from "@/lib/dom/getCspNonce";
+import { useLintIcons } from "@/components/CodeEditor/hooks/useLintIcons";
 
 /*
  * CodeMirror injects its base styles as a `<style>` element. A CSP without
@@ -268,6 +269,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   useMakeFocusable(localRef);
 
   const isSkeleton = useSkeletonMode();
+  const lintIcons = useLintIcons();
 
   /* No CodeMirror: one surface, as high as the code in the editor's line
      height. The children still render, so a label or a field description
@@ -332,6 +334,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
       data-disabled={isDisabled || undefined}
       inert={isSkeleton || undefined}
     >
+      {lintIcons}
       <PropsContextProvider props={propsContext}>
         <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>

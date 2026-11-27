@@ -9,3 +9,17 @@ code-editor:
     value: "{separator.color}"
   indentation-marker-color:
     value: "{border.color.100}"
+  # Marker, underline and tooltip icon of a linter diagnostic, per severity,
+  # in the color of AlertIcon.
+  # A hint looks like an info.
+  lint-color:
+    error:
+      value: "{icon.danger-color}"
+    warning:
+      value: "{icon.warning-color}"
+    info:
+      value: "{icon.info-color}"
+  lint-marker-size:
+    value: "{size-px.m}"
+  lint-tooltip-icon-size:
+    value: "{icon.size.m}"

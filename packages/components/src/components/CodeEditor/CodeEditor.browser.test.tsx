@@ -5,6 +5,10 @@ import { Label } from "@/components/Label";
 import { render } from "vitest-browser-react";
 import { EditorView } from "@uiw/react-codemirror";
 import { userEvent } from "vitest/browser";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { defaultIconSet } from "@mittwald/flow-icons";
+import { IconSetProvider } from "@/components/Icon";
 
 test("CodeEditor renders the label outside of the editor", async () => {
   const dom = await render(
@@ -265,4 +269,75 @@ test("CodeEditor reports statistics to the latest onStatistics", async () => {
 
   expect(latest).toHaveBeenCalled();
   expect(first).not.toHaveBeenCalled();
+});
+
+test("CodeEditor shows one lint tooltip when moving from the code to its marker", async () => {
+  const dom = await render(
+    <CodeEditor
+      language="dotEnv"
+      value={"API_KEY=secret\nAPI_KEY=other\n"}
+      aria-label="Environment"
+    />,
+  );
+
+  const marker = dom.getByLocator(".cm-lint-marker-error");
+  await expect.element(marker).toBeInTheDocument();
+
+  await userEvent.hover(dom.getByLocator(".cm-lintRange-error").first());
+  await expect
+    .element(dom.getByLocator(".cm-tooltip-hover .cm-tooltip-lint"))
+    .toBeInTheDocument();
+
+  await userEvent.hover(marker);
+  await expect
+    .element(dom.getByLocator(".cm-tooltip.cm-tooltip-lint"))
+    .toBeInTheDocument();
+
+  expect(document.querySelectorAll(".cm-tooltip")).toHaveLength(1);
+});
+
+test("CodeEditor lint markers show the danger icon of the icon set", async () => {
+  /* written out like a FontAwesome definition, see IconSetProvider's test */
+  const dangerPath = "M64 80l320 0z";
+  const danger: IconDefinition = {
+    prefix: "far",
+    iconName: "triangle-exclamation",
+    icon: [448, 512, [], "", dangerPath],
+  } as IconDefinition;
+  const iconSet = {
+    Danger: () => <FontAwesomeIcon icon={danger} />,
+  } as unknown as typeof defaultIconSet;
+
+  const dom = await render(
+    <IconSetProvider set={iconSet}>
+      <CodeEditor
+        language="dotEnv"
+        value={"API_KEY=secret\nAPI_KEY=other\n"}
+        aria-label="Environment"
+      />
+    </IconSetProvider>,
+  );
+
+  const marker = dom.getByLocator(".cm-lint-marker-error");
+  await expect.element(marker).toBeInTheDocument();
+
+  await expect
+    .poll(() =>
+      decodeURIComponent(getComputedStyle(marker.element()).maskImage),
+    )
+    .toContain(dangerPath);
+});
+
+test("CodeEditor shows the lint gutter only with a linter", async () => {
+  const dom = await render(
+    <>
+      <CodeEditor language="json" value="{}" aria-label="Without linter" />
+      <CodeEditor language="dotEnv" value="KEY=value" aria-label="dotEnv" />
+    </>,
+  );
+
+  const editors = dom.container.querySelectorAll(".cm-editor");
+  expect(editors).toHaveLength(2);
+  expect(editors[0]?.querySelector(".cm-gutter-lint")).toBeNull();
+  expect(editors[1]?.querySelector(".cm-gutter-lint")).not.toBeNull();
 });

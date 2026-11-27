@@ -117,6 +117,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@codemirror/lint':
+        specifier: ^6.9.7
+        version: 6.9.7
       '@fortawesome/fontawesome-svg-core':
         specifier: ^7.2.0
         version: 7.3.1

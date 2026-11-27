@@ -20,7 +20,6 @@ export type LanguageFactory = Record<
 >;
 
 export type LanguageContainer = [
-  () => Extension,
   () => LanguageSupport,
   () => ReturnType<typeof linter>,
 ];
