@@ -1,17 +1,20 @@
 .bigNumber {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  row-gap: var(--big-number--spacing);
+  column-gap: var(--big-number--spacing);
   font-size: var(--big-number--top-font-size);
   font-weight: var(--big-number--font-weight);
 
   .text {
     text-align: center;
+  }
 
-    &:not(:first-child) {
-      font-size: var(--big-number--bottom-font-size);
-    }
+  /* Icons sit in the row of the number; the label below takes its own row. */
+  .text ~ .text {
+    flex-basis: 100%;
+    font-size: var(--big-number--bottom-font-size);
   }
 }
