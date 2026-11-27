@@ -1,20 +1,9 @@
-import {
-  HighlightStyle,
-  LanguageSupport,
-  LRLanguage,
-  syntaxHighlighting,
-  syntaxTree,
-} from "@codemirror/language";
+import { LanguageSupport, LRLanguage, syntaxTree } from "@codemirror/language";
 import type { Diagnostic } from "@codemirror/lint";
 import { linter } from "@codemirror/lint";
 import { styleTags, tags as t } from "@lezer/highlight";
 import * as dotEnvGrammar from "./dotEnv.grammar";
 import type { LanguageContainer } from "@/components/CodeEditor/languages";
-
-const definedStyle = HighlightStyle.define([
-  { tag: t.variableName, fontWeight: "bold" },
-  { tag: t.lineComment, fontStyle: "italic" },
-]);
 
 const envHighlighting = styleTags({
   Identifier: t.variableName,
@@ -49,7 +38,6 @@ export const validator = (input: string) => {
 };
 
 const language: LanguageContainer = [
-  () => syntaxHighlighting(definedStyle),
   () => new LanguageSupport(lrLanguage),
   () =>
     linter((view) => {

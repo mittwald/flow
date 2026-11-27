@@ -1,4 +1,9 @@
-import { type Extension, lineNumbers } from "@uiw/react-codemirror";
+import {
+  closeHoverTooltips,
+  type Extension,
+  lineNumbers,
+  ViewPlugin,
+} from "@uiw/react-codemirror";
 import { lintGutter } from "@codemirror/lint";
 import supportedCodeEditorLanguages, {
   isCodeEditorLanguage,
@@ -6,6 +11,7 @@ import supportedCodeEditorLanguages, {
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
 import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
+import { hasLinter } from "@/components/CodeEditor/extensions/hasLinter";
 import { useMemo } from "react";
 
 /*
@@ -26,6 +32,28 @@ const codeIndentationMarkers = indentationMarkers({
     activeLight: markerColor,
     activeDark: markerColor,
   },
+});
+
+/*
+ * The gutter markers and the code each open their own diagnostics tooltip.
+ * Moving from the code to its marker would show both at once, so entering the
+ * gutter closes the one of the code.
+ */
+const closeCodeTooltipInLintGutter = ViewPlugin.define((view) => {
+  /* The gutter lies outside the content, which DOM event handlers of the
+     editor cover. The listener goes on the editor itself. */
+  const onMouseOver = (event: MouseEvent) => {
+    if (
+      event.target instanceof Element &&
+      event.target.closest(".cm-gutter-lint")
+    ) {
+      view.dispatch({ effects: closeHoverTooltips });
+    }
+  };
+  view.dom.addEventListener("mouseover", onMouseOver);
+  return {
+    destroy: () => view.dom.removeEventListener("mouseover", onMouseOver),
+  };
 });
 
 export interface CodeEditorSetup {
@@ -104,14 +132,6 @@ export const useCodeEditorExtensions = (
       );
     }
 
-    if (showLinterMarkers) {
-      enabledExtensions.push(lintGutter());
-    }
-
-    if (showLineNumbers && (!showCodeFolding || !showLinterMarkers)) {
-      enabledExtensions.push(gutterSpacer());
-    }
-
     if (showCodeIndentationMakers) {
       enabledExtensions.push(codeIndentationMarkers);
     }
@@ -120,6 +140,17 @@ export const useCodeEditorExtensions = (
       for (const loader of supportedCodeEditorLanguages[language] ?? []) {
         enabledExtensions.push(loader());
       }
+    }
+
+    /* Without a linter the gutter would stay empty. A linter is configured
+       from the start, so the code never moves once the first marker shows. */
+    const showLintGutter = showLinterMarkers && hasLinter(enabledExtensions);
+    if (showLintGutter) {
+      enabledExtensions.push(lintGutter(), closeCodeTooltipInLintGutter);
+    }
+
+    if (showLineNumbers && (!showCodeFolding || !showLintGutter)) {
+      enabledExtensions.push(gutterSpacer());
     }
 
     return enabledExtensions;

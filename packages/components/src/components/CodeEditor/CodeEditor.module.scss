@@ -1,3 +1,4 @@
+@use "@/styles/mixins/focus";
 @use "@/styles/mixins/formControl";
 @use "@/styles/mixins/scrollbar";
 @use "@/styles/mixins/skeleton";
@@ -5,6 +6,17 @@
 .codeEditor {
   outline: none;
   isolation: isolate;
+
+  /*
+   * The isolation keeps CodeMirror's tooltips in the editor's stacking context,
+   * so positioned content after the editor painted over them. While one is
+   * open, the editor claims the lowest level in front of the page – the one a
+   * non-modal Popover claims.
+   */
+  &:has(:global(.cm-tooltip)) {
+    position: relative;
+    z-index: 1;
+  }
 
   .codeMirror {
     @include formControl.formControl();
@@ -129,7 +141,25 @@
       }
 
       & :global(.cm-line) {
+        --line-padding-start: var(--form-control--padding-x);
+
         padding-inline: var(--form-control--padding-x);
+        padding-inline-start: var(--line-padding-start);
+      }
+
+      /* next to the gutters, the code moves closer to the line numbers */
+      & :global(.cm-gutters ~ .cm-content .cm-line) {
+        --line-padding-start: var(--size-px--s);
+      }
+
+      /*
+       * The indentation markers library expects CodeMirror's line padding and
+       * starts the markers 2px into the line. They follow the padding instead,
+       * so each marker sits at the start of its indentation level – the
+       * library draws it half a character further in.
+       */
+      & :global(.cm-indent-markers::before) {
+        inset-inline-start: calc(var(--line-padding-start) - 0.5ch);
       }
 
       /*
@@ -147,6 +177,213 @@
           var(--form-control--background-color--hover) 65%,
           transparent
         );
+      }
+
+      /* Linter */
+
+      & :global(.cm-gutter-lint) {
+        width: calc(var(--code-editor--lint-marker-size) + var(--size-px--xs));
+
+        /* centers the marker on the line, apart from the gutter border */
+        & :global(.cm-gutterElement) {
+          display: flex;
+          align-items: center;
+          padding: 0;
+          padding-inline-end: var(--size-px--xs);
+        }
+      }
+
+      & :global(.cm-lint-marker) {
+        content: none;
+        width: var(--code-editor--lint-marker-size);
+        height: var(--code-editor--lint-marker-size);
+        background-color: var(--lint-color);
+        mask: var(--lint-icon) center / contain no-repeat;
+      }
+
+      & :global(.cm-lintRange) {
+        background-image: none;
+        padding-bottom: 0;
+        text-decoration: wavy underline var(--lint-color);
+        text-decoration-thickness: 1px;
+        text-decoration-skip-ink: none;
+        text-underline-offset: 1px;
+      }
+
+      & :global(.cm-lintRange-active) {
+        background-color: transparent;
+      }
+
+      & :global(.cm-lintPoint::after) {
+        border-bottom-color: var(--lint-color);
+      }
+
+      /*
+       * The diagnostics look like a ContextualHelp. Hovering the code wraps
+       * them in a tooltip, hovering a gutter marker makes the diagnostics list
+       * the tooltip itself.
+       */
+      & :global(.cm-tooltip:has(> .cm-tooltip-lint)),
+      & :global(.cm-tooltip.cm-tooltip-lint) {
+        /*
+         * The spacing to the trigger is bridged, so the pointer does not leave
+         * trigger and tooltip on its way into it – CodeMirror would close it.
+         */
+        &::before {
+          content: "";
+          position: absolute;
+          inset-inline: 0;
+          height: var(--popover--spacing);
+        }
+
+        &:global(.cm-tooltip-below) {
+          translate: 0 var(--popover--spacing);
+
+          &::before {
+            bottom: 100%;
+          }
+        }
+
+        &:global(.cm-tooltip-above) {
+          translate: 0 calc(var(--popover--spacing) * -1);
+
+          &::before {
+            top: 100%;
+          }
+        }
+
+        border-width: var(--popover--border-width);
+        border-style: var(--popover--border-style);
+        border-color: var(--popover--border-color);
+        border-radius: var(--popover--corner-radius);
+        background-color: var(--popover--background-color);
+        box-shadow: var(--popover--box-shadow);
+        max-width: var(--contextual-help--max-width);
+      }
+
+      & :global(.cm-tooltip-lint) {
+        display: flex;
+        flex-direction: column;
+        row-gap: var(--popover--spacing);
+        list-style: none;
+        margin: 0;
+        padding: var(--popover--padding--m);
+        color: var(--text--color--default);
+        font-family: var(--font-family--default);
+        font-size: var(--font-size-text--m);
+        line-height: var(--line-height);
+      }
+
+      & :global(.cm-diagnostic) {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: var(--size-px--s);
+        align-items: flex-start;
+        margin: 0;
+        padding: 0;
+        border: none;
+
+        /* the icon of the severity, centered on the first line */
+        &::before {
+          content: "";
+          flex-shrink: 0;
+          width: var(--code-editor--lint-tooltip-icon-size);
+          height: var(--code-editor--lint-tooltip-icon-size);
+          margin-block-start: calc(
+            (1lh - var(--code-editor--lint-tooltip-icon-size)) / 2
+          );
+          background-color: var(--lint-color);
+          mask: var(--lint-icon) center / contain no-repeat;
+        }
+      }
+
+      /* wraps next to the icon instead of moving below it */
+      & :global(.cm-diagnosticText) {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      /* where the diagnostic comes from, e.g. the linter's name */
+      & :global(.cm-diagnosticSource) {
+        flex-basis: 100%;
+        padding-inline-start: calc(
+          var(--code-editor--lint-tooltip-icon-size) + var(--size-px--s)
+        );
+        color: var(--content--color--100);
+        font-size: var(--font-size-text--s);
+        opacity: 1;
+      }
+
+      /*
+       * Looks like a Button with size "s", color "secondary" and variant
+       * "soft". It is as high as a line of the message, so it sits on the
+       * first line without making it higher.
+       */
+      & :global(.cm-diagnosticAction) {
+        @include focus.focus;
+
+        margin: 0;
+        border: none;
+        border-radius: var(--button--corner-radius-s);
+        padding-block: var(--button--padding-s-y);
+        padding-inline: var(--button--padding-s-x);
+        background-color: var(
+          --button--secondary-soft-background-color--default
+        );
+        color: var(--button--secondary-soft-content-color--default);
+        font-family: var(--font-family--default);
+        font-size: var(--button--font-size-s);
+        font-weight: var(--font-weight--bold);
+        line-height: var(--button--line-height-s);
+        cursor: pointer;
+        transition-property: background-color;
+        transition-duration: var(--transition--duration--default);
+
+        &:hover {
+          background-color: var(
+            --button--secondary-soft-background-color--hover
+          );
+        }
+
+        &:active {
+          background-color: var(
+            --button--secondary-soft-background-color--pressed
+          );
+        }
+      }
+
+      /*
+       * Severity: color and icon follow AlertIcon (danger, warning, info), a
+       * hint looks like an info. The icons come from useLintIcons.
+       */
+
+      & :global(.cm-lint-marker-error),
+      & :global(.cm-lintRange-error),
+      & :global(.cm-lintPoint-error),
+      & :global(.cm-diagnostic-error),
+      & :global(.cm-lintPoint:not([class*="cm-lintPoint-"])) {
+        --lint-color: var(--code-editor--lint-color--error);
+        --lint-icon: var(--lint-icon-danger);
+      }
+
+      & :global(.cm-lint-marker-warning),
+      & :global(.cm-lintRange-warning),
+      & :global(.cm-lintPoint-warning),
+      & :global(.cm-diagnostic-warning) {
+        --lint-color: var(--code-editor--lint-color--warning);
+        --lint-icon: var(--lint-icon-warning);
+      }
+
+      & :global(.cm-lint-marker-info),
+      & :global(.cm-lintRange-info),
+      & :global(.cm-lintPoint-info),
+      & :global(.cm-diagnostic-info),
+      & :global(.cm-lint-marker-hint),
+      & :global(.cm-lintRange-hint),
+      & :global(.cm-lintPoint-hint),
+      & :global(.cm-diagnostic-hint) {
+        --lint-color: var(--code-editor--lint-color--info);
+        --lint-icon: var(--lint-icon-info);
       }
     }
   }
