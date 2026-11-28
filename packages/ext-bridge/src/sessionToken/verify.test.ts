@@ -20,14 +20,14 @@ let privateKey: CryptoKey;
 let publicKey: CryptoKey;
 
 const signSessionToken = (
-  audience?: string,
+  audience?: string | string[],
   publicKeySerial = defaultPublicKeySerial,
   signingKey = privateKey,
   algorithm = "EdDSA",
 ) => {
   const jwt = new SignJWT({
     sessionId: "session-id",
-    extensionId: audience ?? extensionId,
+    extensionId: [audience].flat()[0] ?? extensionId,
     extensionInstanceId: "extension-instance-id",
     contextId: "context-id",
     context: "project",
@@ -66,18 +66,27 @@ describe("verify", () => {
     expect(decoded.extensionId).toBe(extensionId);
   });
 
-  it("rejects a session token issued for another extension", async () => {
-    const token = await signSessionToken("extension-b");
-    await expect(verify(token, { extensionId })).rejects.toBeInstanceOf(
-      ExtBridgeError,
-    );
-  });
+  it.each([
+    ["extension-b", "extension-b"],
+    [["extension-b", "extension-c"], "extension-b, extension-c"],
+  ])(
+    "rejects a session token issued for %j and names both IDs",
+    async (audience, issuedFor) => {
+      const token = await signSessionToken(audience);
+      const error = await verify(token, { extensionId }).catch((e) => e);
 
-  it("rejects a session token without audience", async () => {
+      expect(error).toBeInstanceOf(ExtBridgeError);
+      expect(error.message).toContain(issuedFor);
+      expect(error.message).toContain(extensionId);
+    },
+  );
+
+  it("rejects a session token without audience as missing aud", async () => {
     const token = await signSessionToken();
-    await expect(verify(token, { extensionId })).rejects.toBeInstanceOf(
-      ExtBridgeError,
-    );
+    const error = await verify(token, { extensionId }).catch((e) => e);
+
+    expect(error).toBeInstanceOf(ExtBridgeError);
+    expect(error.message).toContain("no audience (aud) claim");
   });
 
   it.each([".", "..", "../other", "a?b=c", "a/b", "latest", "a".repeat(129)])(
