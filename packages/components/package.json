@@ -66,10 +66,11 @@
     "build:storybook": "storybook build",
     "clean": "rimraf dist .cache src/components/Icon/components/icons/*",
     "dev": "storybook dev --port 6006",
+    "perf": "playwright install chromium && vitest run --config dev/perf/vitest.perf.config.ts",
     "test:browser": "vitest run --project=browser* --browser.headless",
     "test:browser:dev": "vitest dev --project=browser*",
     "test:browser:prepare": "if [ -z \"$CI\" ]; then playwright install firefox webkit; fi",
-    "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
+    "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json && tsc --noEmit -p dev/perf/tsconfig.json",
     "test:unit": "vitest run --project=unit*",
     "test:unit:dev": "vitest dev --project=unit*"
   },

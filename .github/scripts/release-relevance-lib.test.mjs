@@ -409,6 +409,8 @@ test("isPublishRelevant: package-local non-shipping directories are irrelevant",
     "packages/components/dev/vitest/setupBrowser.ts",
     // The Vue binding's parity runner, invoked only by `test:parity`.
     "packages/remote-vue-components/dev/react-parity/run.ts",
+    // The performance measurements, run only by `perf`.
+    "packages/components/dev/perf/List.perf.tsx",
   ]) {
     assert.equal(isPublishRelevant(path), false, path);
   }

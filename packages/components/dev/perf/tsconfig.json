@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "composite": false,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["${configDir}/../../src/*"]
+    },
+    "rootDir": "${configDir}/../../..",
+    "types": ["node", "vite/client", "@vitest/browser-playwright"],
+    "incremental": false
+  },
+  "extends": "../../tsconfig.json",
+  "include": [
+    "${configDir}",
+    "${configDir}/../../src",
+    "${configDir}/../../src/**/*.json"
+  ]
+}
