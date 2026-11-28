@@ -159,7 +159,7 @@ describe("runSingleCodemod", () => {
     );
     expect(code).toBe(0);
     expect(output).not.toContain("declined all");
-    expect(output).toContain("0 file(s) changed, 29 unchanged, 1 skipped");
+    expect(output).toContain("0 file(s) changed, 29 unchanged, 1 declined");
   });
 
   test("empty files are counted apart from declines and do not fail the run", async () => {

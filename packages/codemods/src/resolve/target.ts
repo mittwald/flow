@@ -50,8 +50,22 @@ export type UnresolvedTarget =
       closest: string | undefined;
     };
 
+/**
+ * The boundary a keyword offered to cross but did not, because nothing is
+ * published above it.
+ *
+ * `major` is unbounded (`keywordRange` gives it `*`), so from `1.0.6` with no
+ * `2.x` published it resolves to the same `1.1.12` as `minor` and exits 0 — the
+ * two reports then differ in nothing but the revision that produced them, and a
+ * reader comparing them presents three targets where there are two (#3117).
+ * Same for `minor` when the newest release is on the current minor. Neither is
+ * an error; both are facts the caller has to be able to say out loud.
+ */
+export type StayedWithin = "major" | "minor";
+
 export type ResolveTargetResult =
-  { ok: true; target: string } | { ok: false; reason: UnresolvedTarget };
+  | { ok: true; target: string; stayedWithin?: StayedWithin }
+  | { ok: false; reason: UnresolvedTarget };
 
 /**
  * The range a revision keyword bounds the target to.
@@ -133,6 +147,33 @@ const broaderCandidate = (
 };
 
 /**
+ * Which boundary `target` did not cross, for a keyword that offered to.
+ *
+ * Only the two broadening keywords can: `patch` never promised to leave the
+ * current patch line, so there is nothing for it to fall short of. Compared
+ * against `current` rather than against what the other keywords resolve to —
+ * that is the same answer without a second registry pass, and it stays right
+ * when `minor` and `major` agree because both found the same release.
+ */
+const stayedWithin = (
+  revision: KeywordRevision,
+  current: string,
+  target: string,
+): StayedWithin | undefined => {
+  if (revision === "major" && major(target) === major(current)) {
+    return "major";
+  }
+  if (
+    revision === "minor" &&
+    major(target) === major(current) &&
+    minor(target) === minor(current)
+  ) {
+    return "minor";
+  }
+  return undefined;
+};
+
+/**
  * What a revision means, as a concrete published version — or a structured
  * reason it does not.
  *
@@ -179,7 +220,11 @@ export const resolveTarget = ({
 
   const target = highestStable(keywordRange(revision, current), versions);
   if (target !== undefined) {
-    return { ok: true, target };
+    return {
+      ok: true,
+      target,
+      stayedWithin: stayedWithin(revision, current, target),
+    };
   }
 
   return {

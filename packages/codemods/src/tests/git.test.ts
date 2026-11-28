@@ -3,7 +3,7 @@ import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
-import { hasUncommittedChanges } from "../git";
+import { changedPaths, hasUncommittedChanges } from "../git";
 
 const git = (cwd: string, args: string[]): void => {
   execFileSync("git", args, { cwd, stdio: "ignore" });
@@ -53,5 +53,38 @@ describe("hasUncommittedChanges", () => {
     const dir = mkdtempSync(join(tmpdir(), "flow-codemods-git-"));
 
     expect(hasUncommittedChanges(dir)).toBe(false);
+  });
+});
+
+describe("changedPaths", () => {
+  test("names each changed path, repository-relative", () => {
+    const dir = initRepoWithCommittedFile();
+    writeFileSync(join(dir, "committed.txt"), "changed\n");
+    writeFileSync(join(dir, "untracked.txt"), "untracked\n");
+
+    expect(changedPaths(dir).sort()).toEqual([
+      "committed.txt",
+      "untracked.txt",
+    ]);
+  });
+
+  test("a path with a space comes back without git's quoting", () => {
+    const dir = initRepoWithCommittedFile();
+    writeFileSync(join(dir, "two words.txt"), "x\n");
+
+    expect(changedPaths(dir)).toEqual(["two words.txt"]);
+  });
+
+  test("a rename reports the path that exists now", () => {
+    const dir = initRepoWithCommittedFile();
+    git(dir, ["mv", "committed.txt", "renamed.txt"]);
+
+    expect(changedPaths(dir)).toEqual(["renamed.txt"]);
+  });
+
+  test("a directory that is not a git repository reports nothing", () => {
+    const dir = mkdtempSync(join(tmpdir(), "flow-codemods-git-"));
+
+    expect(changedPaths(dir)).toEqual([]);
   });
 });

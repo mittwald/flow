@@ -2,7 +2,37 @@ import { existsSync } from "node:fs";
 import { isAbsolute, join } from "node:path";
 import { allEntries, unknownCodemodMessage } from "../catalog/entries.js";
 import type { ParsedCommand } from "./args.js";
-import { runCodemod, transformExists } from "../run/jscodeshift.js";
+import {
+  runCodemod,
+  transformExists,
+  type CodemodResult,
+} from "../run/jscodeshift.js";
+
+/**
+ * What a run did, as one clause: "3 file(s) changed, 27 unchanged".
+ *
+ * Shared with `upgrade`, which printed the change count alone. "0 file(s)
+ * changed" reads the same whether the codemod looked at one file or thirty, so
+ * nothing in an `upgrade` report said how much of the tree was visited — in
+ * exactly the mode that runs ten codemods (#3117).
+ *
+ * `declined` and `empty` are appended only when non-zero: on a healthy run both
+ * are zero, and two permanent ", 0 …" clauses would bury the counts that carry
+ * the answer.
+ */
+export const countsOf = (result: CodemodResult): string => {
+  const parts = [
+    `${result.changed} file(s) changed`,
+    `${result.unmodified} unchanged`,
+  ];
+  if (result.skipped > 0) {
+    parts.push(`${result.skipped} declined`);
+  }
+  if (result.empty > 0) {
+    parts.push(`${result.empty} empty`);
+  }
+  return parts.join(", ");
+};
 
 /**
  * Which sources to transform, resolved against `cwd`.
@@ -118,9 +148,7 @@ export const runSingleCodemod = async (
     return 1;
   }
 
-  const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
-  const empty = result.empty > 0 ? `, ${result.empty} empty` : "";
-  const summary = `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}${empty}.`;
+  const summary = `${id}: ${countsOf(result)}.`;
   // Only a catalogued id has a migration guide entry to point at — a transform
   // like `to-remote-package` with no catalogue entry has no anchor in
   // `MIGRATION.md` to link, so pointing there would be a dead link.
