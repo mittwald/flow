@@ -426,8 +426,39 @@ describe("runUpgrade", () => {
       }),
     );
 
+    const output = recorded.output.join("\n");
     expect(code).toBe(0);
-    expect(recorded.output.join("\n")).not.toContain("declined all");
+    expect(output).not.toContain("declined all");
+    // The counts the single-codemod command prints: "0 file(s) changed" alone
+    // reads the same whether the codemod saw one file or thirty.
+    expect(output).toContain("0 file(s) changed, 29 unchanged, 1 skipped");
+  });
+
+  test("a codemod that declines every file it read still fails the run", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        runCodemod: async ({ id }) => {
+          recorded.codemods.push(id);
+          return {
+            changed: 0,
+            unmodified: 0,
+            skipped: 3,
+            empty: 0,
+            errors: 0,
+            processedNothing: false,
+          };
+        },
+      }),
+    );
+
+    expect(code).toBe(1);
+    expect(recorded.output.join("\n")).toContain("declined all 3");
   });
 
   test("declining a subset in `choose` runs only that subset", async () => {

@@ -51,7 +51,16 @@ export type UnresolvedTarget =
     };
 
 export type ResolveTargetResult =
-  { ok: true; target: string } | { ok: false; reason: UnresolvedTarget };
+  | {
+      ok: true;
+      target: string;
+      /**
+       * What resolving `revision` does not say on its own — see
+       * `describeUncrossedBoundary`. Absent whenever there is nothing to add.
+       */
+      note?: string;
+    }
+  | { ok: false; reason: UnresolvedTarget };
 
 /**
  * The range a revision keyword bounds the target to.
@@ -102,6 +111,41 @@ const highestStable = (
     (version) => prerelease(version) === null && satisfies(version, range),
   );
   return rsort(candidates)[0];
+};
+
+/**
+ * Why a keyword that resolved still deserves a sentence.
+ *
+ * A keyword bounds the target from above, so resolving says nothing about
+ * whether the boundary the keyword names was actually crossed. `major` is
+ * unbounded: from 1.0.6 with no stable 2.x published it lands on the highest
+ * 1.x, exits 0, and looks exactly like `minor` — so an agent told to compare
+ * `patch`, `minor` and `major` presents three targets where there are two, with
+ * nothing in any of the three outputs saying so (#3117). `minor` has the same
+ * shape one step down.
+ *
+ * `patch` is the narrowest keyword and has nothing below it, so it never
+ * produces a note: resolving inside the current patch line is the whole of what
+ * it promises.
+ */
+const describeUncrossedBoundary = (
+  revision: KeywordRevision,
+  current: string,
+  target: string,
+): string | undefined => {
+  if (revision === "major" && major(target) === major(current)) {
+    return `No stable release beyond ${major(current)}.x is published, so "major" resolved inside ${major(current)}.x — the same range "minor" covers.`;
+  }
+
+  if (
+    revision === "minor" &&
+    major(target) === major(current) &&
+    minor(target) === minor(current)
+  ) {
+    return `No stable release beyond ${major(current)}.${minor(current)}.x is published, so "minor" resolved inside it — the same range "patch" covers.`;
+  }
+
+  return undefined;
 };
 
 /**
@@ -179,7 +223,11 @@ export const resolveTarget = ({
 
   const target = highestStable(keywordRange(revision, current), versions);
   if (target !== undefined) {
-    return { ok: true, target };
+    return {
+      ok: true,
+      target,
+      note: describeUncrossedBoundary(revision, current, target),
+    };
   }
 
   return {
